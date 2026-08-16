@@ -73,6 +73,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/avatar/label/font-size/24",
+              "fontWeightVar": "imported/avatar/label/font-weight",
               "textFill": "imported/avatar/label/color",
               "textAlignH": "CENTER",
               "absolute": {
@@ -144,6 +145,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/avatar/label/font-size/48",
+              "fontWeightVar": "imported/avatar/label/font-weight",
               "textFill": "imported/avatar/label/color",
               "textAlignH": "CENTER",
               "absolute": {
@@ -215,6 +217,7 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/avatar/label/font-size/96",
+              "fontWeightVar": "imported/avatar/label/font-weight",
               "textFill": "imported/avatar/label/color",
               "textAlignH": "CENTER",
               "absolute": {
@@ -286,6 +289,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/avatar/label/font-size/24",
+              "fontWeightVar": "imported/avatar/label/font-weight",
               "textFill": "imported/avatar/label/color",
               "textAlignH": "CENTER",
               "absolute": {
@@ -357,6 +361,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/avatar/label/font-size/48",
+              "fontWeightVar": "imported/avatar/label/font-weight",
               "textFill": "imported/avatar/label/color",
               "textAlignH": "CENTER",
               "absolute": {
@@ -428,6 +433,7 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/avatar/label/font-size/96",
+              "fontWeightVar": "imported/avatar/label/font-weight",
               "textFill": "imported/avatar/label/color",
               "textAlignH": "CENTER",
               "absolute": {
@@ -499,6 +505,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/avatar/label/font-size/24",
+              "fontWeightVar": "imported/avatar/label/font-weight",
               "textFill": "imported/avatar/label/color",
               "textAlignH": "CENTER",
               "absolute": {
@@ -570,6 +577,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/avatar/label/font-size/48",
+              "fontWeightVar": "imported/avatar/label/font-weight",
               "textFill": "imported/avatar/label/color",
               "textAlignH": "CENTER",
               "absolute": {
@@ -641,6 +649,7 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/avatar/label/font-size/96",
+              "fontWeightVar": "imported/avatar/label/font-weight",
               "textFill": "imported/avatar/label/color",
               "textAlignH": "CENTER",
               "absolute": {
@@ -712,6 +721,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/avatar/label/font-size/24",
+              "fontWeightVar": "imported/avatar/label/font-weight",
               "textFill": "imported/avatar/label/color",
               "textAlignH": "CENTER",
               "absolute": {
@@ -783,6 +793,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/avatar/label/font-size/48",
+              "fontWeightVar": "imported/avatar/label/font-weight",
               "textFill": "imported/avatar/label/color",
               "textAlignH": "CENTER",
               "absolute": {
@@ -854,6 +865,7 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/avatar/label/font-size/96",
+              "fontWeightVar": "imported/avatar/label/font-weight",
               "textFill": "imported/avatar/label/color",
               "textAlignH": "CENTER",
               "absolute": {
@@ -925,6 +937,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/avatar/label/font-size/24",
+              "fontWeightVar": "imported/avatar/label/font-weight",
               "textFill": "imported/avatar/label/color",
               "textAlignH": "CENTER",
               "absolute": {
@@ -996,6 +1009,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/avatar/label/font-size/48",
+              "fontWeightVar": "imported/avatar/label/font-weight",
               "textFill": "imported/avatar/label/color",
               "textAlignH": "CENTER",
               "absolute": {
@@ -1067,6 +1081,7 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/avatar/label/font-size/96",
+              "fontWeightVar": "imported/avatar/label/font-weight",
               "textFill": "imported/avatar/label/color",
               "textAlignH": "CENTER",
               "absolute": {
@@ -1138,6 +1153,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/avatar/label/font-size/24",
+              "fontWeightVar": "imported/avatar/label/font-weight",
               "textFill": "imported/avatar/label/color",
               "textAlignH": "CENTER",
               "absolute": {
@@ -1209,6 +1225,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/avatar/label/font-size/48",
+              "fontWeightVar": "imported/avatar/label/font-weight",
               "textFill": "imported/avatar/label/color",
               "textAlignH": "CENTER",
               "absolute": {
@@ -1280,6 +1297,7 @@ const COMPONENTS = [
               "fontSize": 20,
               "fontStyle": "Semi Bold",
               "fontSizeVar": "imported/avatar/label/font-size/96",
+              "fontWeightVar": "imported/avatar/label/font-weight",
               "textFill": "imported/avatar/label/color",
               "textAlignH": "CENTER",
               "absolute": {
@@ -1925,6 +1943,13 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

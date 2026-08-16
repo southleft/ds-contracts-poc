@@ -52,6 +52,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-primary",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -91,6 +92,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-red",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -130,6 +132,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-orange",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -169,6 +172,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-yellow",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -208,6 +212,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-green",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -247,6 +252,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-teal",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -286,6 +292,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-cyan",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -325,6 +332,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-blue",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -364,6 +372,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-purple",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -403,6 +412,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-pink",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -442,6 +452,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-gray",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -481,6 +492,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-primary",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -520,6 +532,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-red",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -559,6 +572,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-orange",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -598,6 +612,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-yellow",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -637,6 +652,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-green",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -676,6 +692,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-teal",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -715,6 +732,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-cyan",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -754,6 +772,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-blue",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -793,6 +812,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-purple",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -832,6 +852,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-pink",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -871,6 +892,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-gray",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -910,6 +932,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-primary",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -949,6 +972,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-red",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -988,6 +1012,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-orange",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -1027,6 +1052,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-yellow",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -1066,6 +1092,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-green",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -1105,6 +1132,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-teal",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -1144,6 +1172,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-cyan",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -1183,6 +1212,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-blue",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -1222,6 +1252,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-purple",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -1261,6 +1292,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-pink",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -1300,6 +1332,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-gray",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -1839,6 +1872,13 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

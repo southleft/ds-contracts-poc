@@ -894,6 +894,13 @@ async function dumpNode(node, nodePath, parent) {
     } else if (Array.isArray(fontSizeAlias) && fontSizeAlias.length > 1) {
       degrade('text-channel-unsupported', nodePath, 'fontSize is bound to ' + fontSizeAlias.length + ' variables across character ranges — dump v1 carries ONE size token per text node; omitted');
     }
+    // dump v1.22: the weight TOKEN, stamped by the emitter because Figma has
+    // no bindable font-weight field. The face name ("Medium") cannot say
+    // whether a weight was declared or defaulted, so without this the channel
+    // was dropped in silence (TJ-TEST.md §A7). Read like fontSizeVar; absent
+    // on any node this pipeline did not draw, which stays the old behaviour.
+    const weightVar = node.getSharedPluginData('ds_contracts', 'fontWeightVar');
+    if (weightVar) text.fontWeightVar = weightVar;
     const fill = await dumpPaint(node.fills, nodePath, 'fill', node);
     if (fill && fill.var) text.fillVar = fill.var;
     out.text = text;
@@ -1048,8 +1055,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.21) for design→contract proposal.',
-    dumpVersion: '1.21',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.22) for design→contract proposal.',
+    dumpVersion: '1.22',
   },
 };
 dumps._degradations = degradations;

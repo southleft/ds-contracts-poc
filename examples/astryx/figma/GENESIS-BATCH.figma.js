@@ -99,6 +99,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "color-text-primary",
               "lineHeight": {
                 "value": 20.0004,
@@ -141,6 +142,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color/info",
               "lineHeight": {
                 "value": 20.0004,
@@ -183,6 +185,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color/success",
               "lineHeight": {
                 "value": 20.0004,
@@ -225,6 +228,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color/warning",
               "lineHeight": {
                 "value": 20.0004,
@@ -267,6 +271,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color/error",
               "lineHeight": {
                 "value": 20.0004,
@@ -309,6 +314,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color/blue",
               "lineHeight": {
                 "value": 20.0004,
@@ -351,6 +357,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color/cyan",
               "lineHeight": {
                 "value": 20.0004,
@@ -393,6 +400,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color/green",
               "lineHeight": {
                 "value": 20.0004,
@@ -435,6 +443,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color/orange",
               "lineHeight": {
                 "value": 20.0004,
@@ -477,6 +486,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color/pink",
               "lineHeight": {
                 "value": 20.0004,
@@ -519,6 +529,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color/purple",
               "lineHeight": {
                 "value": 20.0004,
@@ -561,6 +572,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color/red",
               "lineHeight": {
                 "value": 20.0004,
@@ -603,6 +615,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color/teal",
               "lineHeight": {
                 "value": 20.0004,
@@ -645,6 +658,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color/yellow",
               "lineHeight": {
                 "value": 20.0004,
@@ -1143,6 +1157,13 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -2109,6 +2130,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
+                      "fontWeightVar": "font-weight-semibold",
                       "textFill": "color-text-blue",
                       "lineHeight": {
                         "value": 142.86,
@@ -2123,6 +2145,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
+                      "fontWeightVar": "text-supporting-weight",
                       "textFill": "color-text-blue",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -2208,6 +2231,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
+                      "fontWeightVar": "font-weight-semibold",
                       "textFill": "color-text-blue",
                       "lineHeight": {
                         "value": 142.86,
@@ -2222,6 +2246,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
+                      "fontWeightVar": "text-supporting-weight",
                       "textFill": "color-text-blue",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -2307,6 +2332,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
+                      "fontWeightVar": "font-weight-semibold",
                       "textFill": "color-text-yellow",
                       "lineHeight": {
                         "value": 142.86,
@@ -2321,6 +2347,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
+                      "fontWeightVar": "text-supporting-weight",
                       "textFill": "color-text-yellow",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -2406,6 +2433,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
+                      "fontWeightVar": "font-weight-semibold",
                       "textFill": "color-text-yellow",
                       "lineHeight": {
                         "value": 142.86,
@@ -2420,6 +2448,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
+                      "fontWeightVar": "text-supporting-weight",
                       "textFill": "color-text-yellow",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -2505,6 +2534,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
+                      "fontWeightVar": "font-weight-semibold",
                       "textFill": "color-text-red",
                       "lineHeight": {
                         "value": 142.86,
@@ -2519,6 +2549,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
+                      "fontWeightVar": "text-supporting-weight",
                       "textFill": "color-text-red",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -2604,6 +2635,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
+                      "fontWeightVar": "font-weight-semibold",
                       "textFill": "color-text-red",
                       "lineHeight": {
                         "value": 142.86,
@@ -2618,6 +2650,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
+                      "fontWeightVar": "text-supporting-weight",
                       "textFill": "color-text-red",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -2703,6 +2736,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
+                      "fontWeightVar": "font-weight-semibold",
                       "textFill": "color-text-green",
                       "lineHeight": {
                         "value": 142.86,
@@ -2717,6 +2751,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
+                      "fontWeightVar": "text-supporting-weight",
                       "textFill": "color-text-green",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -2802,6 +2837,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
+                      "fontWeightVar": "font-weight-semibold",
                       "textFill": "color-text-green",
                       "lineHeight": {
                         "value": 142.86,
@@ -2816,6 +2852,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
+                      "fontWeightVar": "text-supporting-weight",
                       "textFill": "color-text-green",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -3383,6 +3420,13 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -4329,6 +4373,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
+              "fontWeightVar": "imported/shared/num-500",
               "textFill": "imported/button/label/color/secondary",
               "lineHeight": {
                 "value": 20.0004,
@@ -4385,6 +4430,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
+              "fontWeightVar": "imported/shared/num-500",
               "textFill": "imported/button/label/color/secondary",
               "lineHeight": {
                 "value": 20.0004,
@@ -4441,6 +4487,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
+              "fontWeightVar": "imported/shared/num-500",
               "textFill": "imported/button/label/color/secondary",
               "lineHeight": {
                 "value": 20.0004,
@@ -4497,6 +4544,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
+              "fontWeightVar": "imported/shared/num-500",
               "textFill": "imported/button/label/color/primary",
               "lineHeight": {
                 "value": 20.0004,
@@ -4553,6 +4601,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
+              "fontWeightVar": "imported/shared/num-500",
               "textFill": "imported/button/label/color/primary",
               "lineHeight": {
                 "value": 20.0004,
@@ -4609,6 +4658,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
+              "fontWeightVar": "imported/shared/num-500",
               "textFill": "imported/button/label/color/primary",
               "lineHeight": {
                 "value": 20.0004,
@@ -4665,6 +4715,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
+              "fontWeightVar": "imported/shared/num-500",
               "textFill": "imported/button/label/color/ghost",
               "lineHeight": {
                 "value": 20.0004,
@@ -4721,6 +4772,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
+              "fontWeightVar": "imported/shared/num-500",
               "textFill": "imported/button/label/color/ghost",
               "lineHeight": {
                 "value": 20.0004,
@@ -4777,6 +4829,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
+              "fontWeightVar": "imported/shared/num-500",
               "textFill": "imported/button/label/color/ghost",
               "lineHeight": {
                 "value": 20.0004,
@@ -4833,6 +4886,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
+              "fontWeightVar": "imported/shared/num-500",
               "textFill": "imported/button/label/color/destructive",
               "lineHeight": {
                 "value": 20.0004,
@@ -4889,6 +4943,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
+              "fontWeightVar": "imported/shared/num-500",
               "textFill": "imported/button/label/color/destructive",
               "lineHeight": {
                 "value": 20.0004,
@@ -4945,6 +5000,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
+              "fontWeightVar": "imported/shared/num-500",
               "textFill": "imported/button/label/color/destructive",
               "lineHeight": {
                 "value": 20.0004,
@@ -5493,6 +5549,13 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -6430,6 +6493,7 @@ const COMPONENTS = [
               "characters": "Card content",
               "fontSize": 16,
               "fontStyle": "Regular",
+              "fontWeightVar": "imported/card/root/font-weight",
               "textFill": "color-on-light",
               "lineHeight": {
                 "value": 24,
@@ -6481,6 +6545,7 @@ const COMPONENTS = [
               "characters": "Card content",
               "fontSize": 16,
               "fontStyle": "Regular",
+              "fontWeightVar": "imported/card/root/font-weight",
               "textFill": "color-on-light",
               "lineHeight": {
                 "value": 24,
@@ -6532,6 +6597,7 @@ const COMPONENTS = [
               "characters": "Card content",
               "fontSize": 16,
               "fontStyle": "Regular",
+              "fontWeightVar": "imported/card/root/font-weight",
               "textFill": "color-on-light",
               "lineHeight": {
                 "value": 24,
@@ -6583,6 +6649,7 @@ const COMPONENTS = [
               "characters": "Card content",
               "fontSize": 16,
               "fontStyle": "Regular",
+              "fontWeightVar": "imported/card/root/font-weight",
               "textFill": "color-on-light",
               "lineHeight": {
                 "value": 24,
@@ -6634,6 +6701,7 @@ const COMPONENTS = [
               "characters": "Card content",
               "fontSize": 16,
               "fontStyle": "Regular",
+              "fontWeightVar": "imported/card/root/font-weight",
               "textFill": "color-on-light",
               "lineHeight": {
                 "value": 24,
@@ -6685,6 +6753,7 @@ const COMPONENTS = [
               "characters": "Card content",
               "fontSize": 16,
               "fontStyle": "Regular",
+              "fontWeightVar": "imported/card/root/font-weight",
               "textFill": "color-on-light",
               "lineHeight": {
                 "value": 24,
@@ -6736,6 +6805,7 @@ const COMPONENTS = [
               "characters": "Card content",
               "fontSize": 16,
               "fontStyle": "Regular",
+              "fontWeightVar": "imported/card/root/font-weight",
               "textFill": "color-on-light",
               "lineHeight": {
                 "value": 24,
@@ -6787,6 +6857,7 @@ const COMPONENTS = [
               "characters": "Card content",
               "fontSize": 16,
               "fontStyle": "Regular",
+              "fontWeightVar": "imported/card/root/font-weight",
               "textFill": "color-on-light",
               "lineHeight": {
                 "value": 24,
@@ -6838,6 +6909,7 @@ const COMPONENTS = [
               "characters": "Card content",
               "fontSize": 16,
               "fontStyle": "Regular",
+              "fontWeightVar": "imported/card/root/font-weight",
               "textFill": "color-on-light",
               "lineHeight": {
                 "value": 24,
@@ -6889,6 +6961,7 @@ const COMPONENTS = [
               "characters": "Card content",
               "fontSize": 16,
               "fontStyle": "Regular",
+              "fontWeightVar": "imported/card/root/font-weight",
               "textFill": "color-on-light",
               "lineHeight": {
                 "value": 24,
@@ -6940,6 +7013,7 @@ const COMPONENTS = [
               "characters": "Card content",
               "fontSize": 16,
               "fontStyle": "Regular",
+              "fontWeightVar": "imported/card/root/font-weight",
               "textFill": "color-on-light",
               "lineHeight": {
                 "value": 24,
@@ -6991,6 +7065,7 @@ const COMPONENTS = [
               "characters": "Card content",
               "fontSize": 16,
               "fontStyle": "Regular",
+              "fontWeightVar": "imported/card/root/font-weight",
               "textFill": "color-on-light",
               "lineHeight": {
                 "value": 24,
@@ -7042,6 +7117,7 @@ const COMPONENTS = [
               "characters": "Card content",
               "fontSize": 16,
               "fontStyle": "Regular",
+              "fontWeightVar": "imported/card/root/font-weight",
               "textFill": "color-on-light",
               "lineHeight": {
                 "value": 24,
@@ -7595,6 +7671,13 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -9163,6 +9246,13 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -11151,6 +11241,13 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -12149,6 +12246,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
+              "fontWeightVar": "imported/slider/label/font-weight",
               "textFill": "imported/slider/label/color",
               "lineHeight": {
                 "value": 20.0004,
@@ -12316,6 +12414,7 @@ const COMPONENTS = [
                               "fontSize": 14,
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-14",
+                              "fontWeightVar": "imported/slider/label-2/font-weight",
                               "textFill": "imported/slider/label-2/color",
                               "lineHeight": {
                                 "value": 20.0004,
@@ -12373,6 +12472,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
+              "fontWeightVar": "imported/slider/label/font-weight",
               "textFill": "imported/slider/label/color",
               "lineHeight": {
                 "value": 20.0004,
@@ -12503,6 +12603,7 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
+                  "fontWeightVar": "imported/slider/label-3/font-weight",
                   "textFill": "imported/slider/label-3/color",
                   "lineHeight": {
                     "value": 21,
@@ -12545,6 +12646,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
+              "fontWeightVar": "imported/slider/label/font-weight",
               "textFill": "imported/slider/label/color",
               "lineHeight": {
                 "value": 20.0004,
@@ -12704,6 +12806,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
+              "fontWeightVar": "imported/slider/label/font-weight",
               "textFill": "imported/slider/label/color",
               "lineHeight": {
                 "value": 20.0004,
@@ -12872,6 +12975,7 @@ const COMPONENTS = [
                               "fontSize": 14,
                               "fontStyle": "Regular",
                               "fontSizeVar": "imported/shared/size-14",
+                              "fontWeightVar": "imported/slider/label-2/font-weight",
                               "textFill": "imported/slider/label-2/color",
                               "lineHeight": {
                                 "value": 20.0004,
@@ -12929,6 +13033,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
+              "fontWeightVar": "imported/slider/label/font-weight",
               "textFill": "imported/slider/label/color",
               "lineHeight": {
                 "value": 20.0004,
@@ -13060,6 +13165,7 @@ const COMPONENTS = [
                   "fontSize": 14,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/shared/size-14",
+                  "fontWeightVar": "imported/slider/label-3/font-weight",
                   "textFill": "imported/slider/label-3/color",
                   "lineHeight": {
                     "value": 21,
@@ -13108,6 +13214,7 @@ const COMPONENTS = [
               "fontSize": 14,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/shared/size-14",
+              "fontWeightVar": "imported/slider/label/font-weight",
               "textFill": "imported/slider/label/color",
               "lineHeight": {
                 "value": 20.0004,
@@ -13937,6 +14044,13 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -15053,6 +15167,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/switch/label/font-size",
+                      "fontWeightVar": "imported/switch/label/font-weight",
                       "textFill": "imported/switch/label/color",
                       "lineHeight": {
                         "value": 20.0004,
@@ -15127,6 +15242,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/switch/label-2/font-size",
+                      "fontWeightVar": "imported/switch/label-2/font-weight",
                       "textFill": "imported/switch/label-2/color",
                       "lineHeight": {
                         "value": 20.0004,
@@ -15356,6 +15472,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/switch/label/font-size",
+                      "fontWeightVar": "imported/switch/label/font-weight",
                       "textFill": "imported/switch/label/color",
                       "lineHeight": {
                         "value": 20.0004,
@@ -15430,6 +15547,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Medium",
                       "fontSizeVar": "imported/switch/label-2/font-size",
+                      "fontWeightVar": "imported/switch/label-2/font-weight",
                       "textFill": "imported/switch/label-2/color",
                       "lineHeight": {
                         "value": 20.0004,
@@ -16183,6 +16301,13 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -18560,6 +18685,13 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -19486,6 +19618,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-primary",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -19525,6 +19658,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-red",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -19564,6 +19698,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-orange",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -19603,6 +19738,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-yellow",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -19642,6 +19778,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-green",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -19681,6 +19818,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-teal",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -19720,6 +19858,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-cyan",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -19759,6 +19898,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-blue",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -19798,6 +19938,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-purple",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -19837,6 +19978,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-pink",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -19876,6 +20018,7 @@ const COMPONENTS = [
               "fontSize": 10,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-gray",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -19915,6 +20058,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-primary",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -19954,6 +20098,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-red",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -19993,6 +20138,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-orange",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -20032,6 +20178,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-yellow",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -20071,6 +20218,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-green",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -20110,6 +20258,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-teal",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -20149,6 +20298,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-cyan",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -20188,6 +20338,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-blue",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -20227,6 +20378,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-purple",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -20266,6 +20418,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-pink",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -20305,6 +20458,7 @@ const COMPONENTS = [
               "fontSize": 8,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-2xs",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-gray",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -20344,6 +20498,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-primary",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -20383,6 +20538,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-red",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -20422,6 +20578,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-orange",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -20461,6 +20618,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-yellow",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -20500,6 +20658,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-green",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -20539,6 +20698,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-teal",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -20578,6 +20738,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-cyan",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -20617,6 +20778,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-blue",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -20656,6 +20818,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-purple",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -20695,6 +20858,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-pink",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -20734,6 +20898,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "font-size-sm",
+              "fontWeightVar": "font-weight-medium",
               "textFill": "color-text-gray",
               "fontFamily": "Figtree",
               "contentProp": "Label"
@@ -21273,6 +21438,13 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -22736,6 +22908,13 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -24466,6 +24645,13 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
@@ -26059,6 +26245,13 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

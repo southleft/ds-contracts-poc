@@ -14,13 +14,13 @@ Every committed `figma/*.figma.js` passed BOTH gates at generation time:
 |---|---|---|---|---|
 | `polaris.avatar` | 5 | 1 | 47 | yes |
 | `polaris.badge` | 56 | 2 | 47 | yes |
-| `polaris.banner` | 4 | 1 | 46 | yes |
+| `polaris.banner` | 4 | 1 | 47 | yes |
 | `polaris.button` | 300 | 4 | 58 | yes |
 | `polaris.checkbox` | 3 | 1 | 44 | yes |
 | `polaris.progress-bar` | 12 | 2 | 46 | yes |
 | `polaris.radio-button` | 2 | 1 | 45 | yes |
 | `polaris.spinner` | 2 | 1 | 44 | yes |
-| `polaris.tag` | 2 | 1 | 46 | yes |
+| `polaris.tag` | 2 | 1 | 47 | yes |
 | `polaris.text-field` | 4 | 5 | 52 | yes (canvas projection, see below) |
 | `polaris.text` | 55 | 5 | 55 | yes (canvas projection, see below) |
 | `polaris.thumbnail` | 4 | 1 | 47 | yes |

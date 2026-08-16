@@ -393,6 +393,15 @@ export interface NodeSpec {
    *  .size.md and font.control.size.sm both resolve to it). Binding the
    *  variable puts the identity back where a reader can see it. */
   fontSizeVar?: string;
+  /** FC-WEIGHT-IDENTITY, second half. Figma has NO variable binding for font
+   *  weight — the face name is the only thing on the node — so a contract's
+   *  weight token used to die at emit: this file resolved it to "Medium" and
+   *  threw the identity away, and "Medium" is the same face a node with no
+   *  weight token at all draws. The inverter then could not tell a DECLARED
+   *  500 from the runtime default, so it proposed nothing and said nothing
+   *  (TJ-TEST.md §A7, the silent row). Stamped as plugin data instead, the
+   *  same way the size token rides `fontSizeVar` when no style can carry it. */
+  fontWeightVar?: string;
   textFill?: string;
   contentProp?: string;
   // instance
@@ -1144,6 +1153,9 @@ interface TextCtx {
   /** The same token in Figma's slash spelling — bound to `fontSize` when the
    *  node cannot ride a style (see NodeSpec.fontSizeVar). */
   fontSizeVar?: string;
+  /** The weight token in Figma's slash spelling — stamped, never bound
+   *  (Figma cannot bind a variable to font weight). See NodeSpec.fontWeightVar. */
+  fontWeightVar?: string;
   /** Resolved line height — see NodeSpec.lineHeight. */
   lineHeight?: number | { value: number; unit: 'PIXELS' | 'PERCENT' };
   /** v15: PIXEL letter spacing — resolved literal (lineHeight discipline). */
@@ -1672,6 +1684,9 @@ function applyTokens(
         break;
       case 'font-weight':
         next.fontStyle = FONT_STYLE_BY_WEIGHT[px(resolveLiteral(tokenPath))] ?? 'Medium';
+        // The face name alone is lossy — 'Medium' is also what a node with no
+        // weight token draws. Keep the token so the canvas can say WHICH.
+        next.fontWeightVar = varName;
         break;
       case 'font-family': {
         // v15 (S4/matrix a.6): the first font-family stack entry rides the
@@ -2758,10 +2773,17 @@ function matchTextStyle(ctx: TextCtx): string | undefined {
  *  the size VARIABLE, which is a canvas fact the inverter can read back to
  *  the token it came from. The two carriers are mutually exclusive by
  *  construction, so nothing double-declares. */
-function textIdentity(ctx: TextCtx): { textStyle?: string; fontSizeVar?: string } {
+function textIdentity(
+  ctx: TextCtx,
+): { textStyle?: string; fontSizeVar?: string; fontWeightVar?: string } {
+  // The weight token is ORTHOGONAL to the size/style carrier: a node riding a
+  // text style still gets it, because the style holds the weight only until
+  // someone overrides it, and the reader must not have to infer which case
+  // it is looking at.
+  const weight = ctx.fontWeightVar !== undefined ? { fontWeightVar: ctx.fontWeightVar } : {};
   const textStyle = matchTextStyle(ctx);
-  if (textStyle !== undefined) return { textStyle };
-  return ctx.fontSizeVar !== undefined ? { fontSizeVar: ctx.fontSizeVar } : {};
+  if (textStyle !== undefined) return { textStyle, ...weight };
+  return ctx.fontSizeVar !== undefined ? { fontSizeVar: ctx.fontSizeVar, ...weight } : weight;
 }
 
 function applyTextIdentity(spec: NodeSpec, ctx: TextCtx): void {
@@ -6420,6 +6442,13 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

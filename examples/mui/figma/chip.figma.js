@@ -58,6 +58,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/filled/default",
                   "lineHeight": {
                     "value": 19.5,
@@ -118,6 +119,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/filled/default",
                   "lineHeight": {
                     "value": 19.5,
@@ -178,6 +180,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/filled/primary",
                   "lineHeight": {
                     "value": 19.5,
@@ -238,6 +241,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/filled/primary",
                   "lineHeight": {
                     "value": 19.5,
@@ -298,6 +302,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/filled/secondary",
                   "lineHeight": {
                     "value": 19.5,
@@ -358,6 +363,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/filled/secondary",
                   "lineHeight": {
                     "value": 19.5,
@@ -418,6 +424,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/filled/error",
                   "lineHeight": {
                     "value": 19.5,
@@ -478,6 +485,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/filled/error",
                   "lineHeight": {
                     "value": 19.5,
@@ -538,6 +546,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/filled/success",
                   "lineHeight": {
                     "value": 19.5,
@@ -598,6 +607,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/filled/success",
                   "lineHeight": {
                     "value": 19.5,
@@ -658,6 +668,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/filled/warning",
                   "lineHeight": {
                     "value": 19.5,
@@ -718,6 +729,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/filled/warning",
                   "lineHeight": {
                     "value": 19.5,
@@ -778,6 +790,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/filled/info",
                   "lineHeight": {
                     "value": 19.5,
@@ -838,6 +851,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/filled/info",
                   "lineHeight": {
                     "value": 19.5,
@@ -898,6 +912,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/outlined/default",
                   "lineHeight": {
                     "value": 19.5,
@@ -958,6 +973,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/outlined/default",
                   "lineHeight": {
                     "value": 19.5,
@@ -1018,6 +1034,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/outlined/primary",
                   "lineHeight": {
                     "value": 19.5,
@@ -1078,6 +1095,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/outlined/primary",
                   "lineHeight": {
                     "value": 19.5,
@@ -1138,6 +1156,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/outlined/secondary",
                   "lineHeight": {
                     "value": 19.5,
@@ -1198,6 +1217,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/outlined/secondary",
                   "lineHeight": {
                     "value": 19.5,
@@ -1258,6 +1278,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/outlined/error",
                   "lineHeight": {
                     "value": 19.5,
@@ -1318,6 +1339,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/outlined/error",
                   "lineHeight": {
                     "value": 19.5,
@@ -1378,6 +1400,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/outlined/success",
                   "lineHeight": {
                     "value": 19.5,
@@ -1438,6 +1461,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/outlined/success",
                   "lineHeight": {
                     "value": 19.5,
@@ -1498,6 +1522,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/outlined/warning",
                   "lineHeight": {
                     "value": 19.5,
@@ -1558,6 +1583,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/outlined/warning",
                   "lineHeight": {
                     "value": 19.5,
@@ -1618,6 +1644,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/outlined/info",
                   "lineHeight": {
                     "value": 19.5,
@@ -1678,6 +1705,7 @@ const COMPONENTS = [
                   "fontSize": 13,
                   "fontStyle": "Regular",
                   "fontSizeVar": "imported/chip/label/font-size",
+                  "fontWeightVar": "imported/chip/label/font-weight",
                   "textFill": "imported/chip/label/color/outlined/info",
                   "lineHeight": {
                     "value": 19.5,
@@ -2232,6 +2260,13 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

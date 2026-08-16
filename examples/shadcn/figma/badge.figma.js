@@ -58,6 +58,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color/default",
               "lineHeight": {
                 "value": 16,
@@ -106,6 +107,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color/secondary",
               "lineHeight": {
                 "value": 16,
@@ -154,6 +156,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color/destructive",
               "lineHeight": {
                 "value": 16,
@@ -202,6 +205,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color/outline",
               "lineHeight": {
                 "value": 16,
@@ -250,6 +254,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color/ghost",
               "lineHeight": {
                 "value": 16,
@@ -298,6 +303,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color/link",
               "lineHeight": {
                 "value": 16,
@@ -348,6 +354,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color-state-active/default",
               "lineHeight": {
                 "value": 16,
@@ -396,6 +403,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color-state-active/secondary",
               "lineHeight": {
                 "value": 16,
@@ -444,6 +452,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color-state-active/destructive",
               "lineHeight": {
                 "value": 16,
@@ -492,6 +501,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color-state-active/outline",
               "lineHeight": {
                 "value": 16,
@@ -540,6 +550,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color-state-active/ghost",
               "lineHeight": {
                 "value": 16,
@@ -588,6 +599,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color-state-active/link",
               "lineHeight": {
                 "value": 16,
@@ -636,6 +648,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color-state-hover/default",
               "lineHeight": {
                 "value": 16,
@@ -684,6 +697,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color-state-hover/secondary",
               "lineHeight": {
                 "value": 16,
@@ -732,6 +746,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color-state-hover/destructive",
               "lineHeight": {
                 "value": 16,
@@ -780,6 +795,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color-state-hover/outline",
               "lineHeight": {
                 "value": 16,
@@ -828,6 +844,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color-state-hover/ghost",
               "lineHeight": {
                 "value": 16,
@@ -876,6 +893,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Medium",
               "fontSizeVar": "imported/badge/root/font-size",
+              "fontWeightVar": "imported/badge/root/font-weight",
               "textFill": "imported/badge/root/color-state-hover/link",
               "lineHeight": {
                 "value": 16,
@@ -1446,6 +1464,13 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

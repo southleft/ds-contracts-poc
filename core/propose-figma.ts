@@ -3115,6 +3115,16 @@ export function fontStyleWeight(fontStyle: string): { weight?: number; italic: b
   return { weight: FONT_WEIGHT_BY_STYLE_NAME[key], italic };
 }
 
+/** The stamped weight tokens across a merged part's text occurrences. One
+ *  distinct value is the binding; none means nothing was stamped (a set this
+ *  pipeline did not draw, or a contract that declares no weight); more than
+ *  one is a contradiction a single binding cannot express. */
+function textOccWeightVars(m: Merged): Array<string | undefined> {
+  return m.occ
+    .filter((o) => o.node.text !== undefined)
+    .map((o) => o.node.text!.fontWeightVar);
+}
+
 /** The corpus token that SPELLS an observed font weight — when exactly one
  *  does. The weight-name table turns the canvas's Inter style name into a
  *  number; the corpus's value index turns that number into the token(s) that
@@ -3163,7 +3173,24 @@ function mintTextChannels(
       ...(key !== undefined ? { styleKey: key } : {}),
     };
   };
-  if (opts.weight) {
+  // The stamped weight token outranks every inference below, in EVERY branch
+  // that reaches here — a node riding a text style, a node riding a size
+  // variable, a node riding neither. Reading it here rather than at one call
+  // site is what stops the answer depending on which carrier the node happened
+  // to use: Badge and Button recovered the weight's VALUE through the mint
+  // path while Label recovered its IDENTITY, for no reason a reader could see.
+  const stamped = [...new Set(textOcc.map((o) => o.node.text!.fontWeightVar))];
+  if (stamped.length === 1 && stamped[0] !== undefined) {
+    tokens['font-weight'] = ref(stamped[0]);
+  } else if (stamped.length > 1) {
+    ctx.notes.push(
+      `${where}: the stamped weight token differs across variants (${stamped
+        .map((w) => (w === undefined ? '(none)' : `"${w}"`))
+        .join(', ')}) — one text node carries one font-weight binding, so it is NAMED, not proposed; review`,
+    );
+  }
+  const weightAlreadyBound = tokens['font-weight'] !== undefined;
+  if (opts.weight && !weightAlreadyBound) {
     const parsed = textOcc.map((o) => ({
       variant: o.variant,
       fontStyle: o.node.text!.fontStyle ?? 'Medium',
@@ -3372,6 +3399,24 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
     // corpus token that spells it, or mints when the corpus cannot name it.
     const observed = t.fontStyle ?? 'Medium';
     let weightRef: string | undefined;
+    // The STAMPED weight token (dump v1.22) is read before any inference, for
+    // the same reason the size variable is: it names WHICH token was drawn,
+    // where the face name only names a shape. It also settles the case this
+    // branch used to drop in silence — 'Medium' is drawn both by a contract
+    // declaring 500 and by one declaring nothing, and only the stamp tells
+    // them apart. Recovering the original ref (not a fresh mint) is the whole
+    // point: the value survived either way, the IDENTITY only survives here.
+    const stampedWeight = [...new Set(textOccWeightVars(m))];
+    if (stampedWeight.length === 1 && stampedWeight[0] !== undefined) {
+      tokens['font-weight'] = ref(stampedWeight[0]);
+      mintTextChannels(m, tokens, ctx, where, { weight: false });
+      return tokens;
+    }
+    if (stampedWeight.length > 1) {
+      ctx.notes.push(
+        `${where}: the weight token differs across variants (${stampedWeight.map((w) => `"${w}"`).join(', ')}) — one text node carries one font-weight binding, so it is NAMED, not proposed; review`,
+      );
+    }
     if (observed !== 'Medium') {
       weightRef = weightTokenRef(ctx, observed);
       if (weightRef) tokens['font-weight'] = weightRef;

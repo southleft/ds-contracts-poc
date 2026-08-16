@@ -133,6 +133,13 @@ export interface DumpText {
    *  the style group's weight keeps its size token here instead. Absence in
    *  older dumps means not captured, never "no size token". */
   fontSizeVar?: string;
+  /** The weight TOKEN in slash-form (dump v1.22, additive), stamped by the
+   *  emitter rather than bound: Figma exposes no bindable font-weight field,
+   *  so the face name is all the node itself carries — and "Medium" is drawn
+   *  both by a contract declaring 500 and by one declaring nothing. Absence
+   *  means the set was not drawn by this pipeline (or predates v1.22), which
+   *  is exactly when no weight should be proposed. */
+  fontWeightVar?: string;
   /** Variable behind the text fill (slash-form), when bound. */
   fillVar?: string;
   /** Non-ORIGINAL text case (dump v1.16, additive) — the canvas fact behind

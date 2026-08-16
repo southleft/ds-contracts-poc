@@ -92,6 +92,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
+                      "fontWeightVar": "font-weight-semibold",
                       "textFill": "color-text-blue",
                       "lineHeight": {
                         "value": 142.86,
@@ -106,6 +107,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
+                      "fontWeightVar": "text-supporting-weight",
                       "textFill": "color-text-blue",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -191,6 +193,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
+                      "fontWeightVar": "font-weight-semibold",
                       "textFill": "color-text-blue",
                       "lineHeight": {
                         "value": 142.86,
@@ -205,6 +208,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
+                      "fontWeightVar": "text-supporting-weight",
                       "textFill": "color-text-blue",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -290,6 +294,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
+                      "fontWeightVar": "font-weight-semibold",
                       "textFill": "color-text-yellow",
                       "lineHeight": {
                         "value": 142.86,
@@ -304,6 +309,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
+                      "fontWeightVar": "text-supporting-weight",
                       "textFill": "color-text-yellow",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -389,6 +395,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
+                      "fontWeightVar": "font-weight-semibold",
                       "textFill": "color-text-yellow",
                       "lineHeight": {
                         "value": 142.86,
@@ -403,6 +410,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
+                      "fontWeightVar": "text-supporting-weight",
                       "textFill": "color-text-yellow",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -488,6 +496,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
+                      "fontWeightVar": "font-weight-semibold",
                       "textFill": "color-text-red",
                       "lineHeight": {
                         "value": 142.86,
@@ -502,6 +511,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
+                      "fontWeightVar": "text-supporting-weight",
                       "textFill": "color-text-red",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -587,6 +597,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
+                      "fontWeightVar": "font-weight-semibold",
                       "textFill": "color-text-red",
                       "lineHeight": {
                         "value": 142.86,
@@ -601,6 +612,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
+                      "fontWeightVar": "text-supporting-weight",
                       "textFill": "color-text-red",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -686,6 +698,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
+                      "fontWeightVar": "font-weight-semibold",
                       "textFill": "color-text-green",
                       "lineHeight": {
                         "value": 142.86,
@@ -700,6 +713,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
+                      "fontWeightVar": "text-supporting-weight",
                       "textFill": "color-text-green",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -785,6 +799,7 @@ const COMPONENTS = [
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
                       "fontSizeVar": "text-label-size",
+                      "fontWeightVar": "font-weight-semibold",
                       "textFill": "color-text-green",
                       "lineHeight": {
                         "value": 142.86,
@@ -799,6 +814,7 @@ const COMPONENTS = [
                       "fontSize": 12,
                       "fontStyle": "Regular",
                       "fontSizeVar": "text-supporting-size",
+                      "fontWeightVar": "text-supporting-weight",
                       "textFill": "color-text-green",
                       "lineHeight": {
                         "value": 166.67000000000002,
@@ -1366,6 +1382,13 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

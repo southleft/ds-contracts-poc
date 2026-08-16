@@ -56,6 +56,7 @@ const COMPONENTS = [
               "fontSize": 24,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/icon-button/root/font-size/medium",
+              "fontWeightVar": "imported/icon-button/root/font-weight",
               "textFill": "imported/icon-button/root/color/default",
               "contentProp": "Icon"
             }
@@ -97,6 +98,7 @@ const COMPONENTS = [
               "fontSize": 24,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/icon-button/root/font-size/medium",
+              "fontWeightVar": "imported/icon-button/root/font-weight",
               "textFill": "imported/icon-button/root/color/primary",
               "contentProp": "Icon"
             }
@@ -138,6 +140,7 @@ const COMPONENTS = [
               "fontSize": 24,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/icon-button/root/font-size/medium",
+              "fontWeightVar": "imported/icon-button/root/font-weight",
               "textFill": "imported/icon-button/root/color/secondary",
               "contentProp": "Icon"
             }
@@ -179,6 +182,7 @@ const COMPONENTS = [
               "fontSize": 18,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/icon-button/root/font-size/small",
+              "fontWeightVar": "imported/icon-button/root/font-weight",
               "textFill": "imported/icon-button/root/color/default",
               "contentProp": "Icon"
             }
@@ -220,6 +224,7 @@ const COMPONENTS = [
               "fontSize": 18,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/icon-button/root/font-size/small",
+              "fontWeightVar": "imported/icon-button/root/font-weight",
               "textFill": "imported/icon-button/root/color/primary",
               "contentProp": "Icon"
             }
@@ -261,6 +266,7 @@ const COMPONENTS = [
               "fontSize": 18,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/icon-button/root/font-size/small",
+              "fontWeightVar": "imported/icon-button/root/font-weight",
               "textFill": "imported/icon-button/root/color/secondary",
               "contentProp": "Icon"
             }
@@ -302,6 +308,7 @@ const COMPONENTS = [
               "fontSize": 28,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/icon-button/root/font-size/large",
+              "fontWeightVar": "imported/icon-button/root/font-weight",
               "textFill": "imported/icon-button/root/color/default",
               "contentProp": "Icon"
             }
@@ -343,6 +350,7 @@ const COMPONENTS = [
               "fontSize": 28,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/icon-button/root/font-size/large",
+              "fontWeightVar": "imported/icon-button/root/font-weight",
               "textFill": "imported/icon-button/root/color/primary",
               "contentProp": "Icon"
             }
@@ -384,6 +392,7 @@ const COMPONENTS = [
               "fontSize": 28,
               "fontStyle": "Regular",
               "fontSizeVar": "imported/icon-button/root/font-size/large",
+              "fontWeightVar": "imported/icon-button/root/font-weight",
               "textFill": "imported/icon-button/root/color/secondary",
               "contentProp": "Icon"
             }
@@ -874,6 +883,13 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });

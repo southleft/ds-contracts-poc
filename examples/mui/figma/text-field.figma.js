@@ -180,6 +180,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
+              "fontWeightVar": "imported/shared/num-400",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -209,6 +210,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
+              "fontWeightVar": "imported/shared/num-400",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -386,6 +388,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
+              "fontWeightVar": "imported/shared/num-400",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -415,6 +418,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
+              "fontWeightVar": "imported/shared/num-400",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -592,6 +596,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
+              "fontWeightVar": "imported/shared/num-400",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -621,6 +626,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
+              "fontWeightVar": "imported/shared/num-400",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -798,6 +804,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
+              "fontWeightVar": "imported/shared/num-400",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -827,6 +834,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
+              "fontWeightVar": "imported/shared/num-400",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -1004,6 +1012,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
+              "fontWeightVar": "imported/shared/num-400",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -1033,6 +1042,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
+              "fontWeightVar": "imported/shared/num-400",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -1210,6 +1220,7 @@ const COMPONENTS = [
               "fontSize": 12,
               "fontStyle": "Regular",
               "textStyle": "MUI/Helper and Error/Regular",
+              "fontWeightVar": "imported/shared/num-400",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 19.92,
@@ -1239,6 +1250,7 @@ const COMPONENTS = [
               "fontSize": 16,
               "fontStyle": "Regular",
               "textStyle": "MUI/Input Label/Regular",
+              "fontWeightVar": "imported/shared/num-400",
               "textFill": "imported/shared/color-d32f2f",
               "lineHeight": {
                 "value": 23,
@@ -1949,6 +1961,13 @@ async function buildNode(spec, registry) {
       // Bound AFTER fontName/fontSize so the literal stays the fallback.
       node.setBoundVariable('fontSize', need(spec.fontSizeVar));
     }
+    // FC-WEIGHT-IDENTITY, second half. Figma exposes no bindable field for
+    // font weight, so the token cannot ride a variable the way the size does.
+    // Stamp it instead: without this the node draws "Medium" and a reader
+    // cannot tell a DECLARED weight from the runtime default. Written as ''
+    // (which deletes the key) when the contract binds no weight, so a node
+    // that stops declaring one cannot keep answering with a stale token.
+    node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
