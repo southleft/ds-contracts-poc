@@ -66,6 +66,8 @@
     "test:console-loop-capture-framing": "node --test scripts/console-loop-capture-framing-check.test.mjs",
     "trap-corpus:check": "node scripts/trap-corpus-check.mjs",
     "console-loop:developed-score": "tsx scripts/console-loop-developed-score.mjs",
+    "functional:flowbite": "tsx scripts/flowbite-authored-functional-check.ts",
+    "parity:flowbite": "tsx scripts/flowbite-contract-parity.ts",
     "visual-truth:run": "tsx scripts/visual-truth-run.mjs",
     "visual-truth:report": "node scripts/visual-truth-report.mjs",
     "visual-truth:check": "node scripts/visual-truth-check.mjs",

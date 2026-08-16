@@ -81,3 +81,5 @@ conformance/.sandbox/
 demo/flowbite.dump.json
 demo/proposed/
 demo/generated/
+demo/from-contracts/
+.playwright-cli/

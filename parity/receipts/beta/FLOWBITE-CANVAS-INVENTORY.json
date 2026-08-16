@@ -1,0 +1,113 @@
+{
+  "recordedAt": "2026-08-16T22:46:00.000Z",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "fileName": "MUI Test 1",
+  "source": "figma_execute Desktop Bridge — componentPropertyDefinitions + boundVariables walk",
+  "sets": [
+    {
+      "stem": "alert",
+      "page": "Alert (flowbite.alert)",
+      "name": "Alert (flowbite.alert)",
+      "id": "120:1979",
+      "type": "COMPONENT_SET",
+      "variants": 4,
+      "boundVarHits": 76,
+      "props": [
+        { "name": "Icon", "type": "BOOLEAN" },
+        { "name": "Dismissable", "type": "BOOLEAN" },
+        { "name": "Content", "type": "TEXT" },
+        { "name": "Color", "type": "VARIANT", "options": ["Info", "Failure", "Success", "Warning"] }
+      ]
+    },
+    {
+      "stem": "kbd",
+      "page": "Kbd",
+      "name": "Kbd",
+      "id": "120:1982",
+      "type": "COMPONENT",
+      "variants": 1,
+      "boundVarHits": 17,
+      "props": [{ "name": "Content", "type": "TEXT" }]
+    },
+    {
+      "stem": "label",
+      "page": "Label",
+      "name": "Label",
+      "id": "120:1996",
+      "type": "COMPONENT_SET",
+      "variants": 5,
+      "boundVarHits": 15,
+      "props": [
+        { "name": "Content", "type": "TEXT" },
+        { "name": "Color", "type": "VARIANT", "options": ["Default", "Info", "Failure", "Success", "Warning"] }
+      ]
+    },
+    {
+      "stem": "card",
+      "page": "Card (flowbite.card)",
+      "name": "Card (flowbite.card)",
+      "id": "120:1999",
+      "type": "COMPONENT",
+      "variants": 1,
+      "boundVarHits": 16,
+      "props": [{ "name": "Content", "type": "TEXT" }]
+    },
+    {
+      "stem": "helpertext",
+      "page": "HelperText",
+      "name": "HelperText",
+      "id": "120:2014",
+      "type": "COMPONENT_SET",
+      "variants": 5,
+      "boundVarHits": 15,
+      "props": [
+        { "name": "Content", "type": "TEXT" },
+        { "name": "Color", "type": "VARIANT", "options": ["Gray", "Info", "Failure", "Success", "Warning"] }
+      ]
+    },
+    {
+      "stem": "toggleswitch",
+      "page": "ToggleSwitch",
+      "name": "ToggleSwitch",
+      "id": "120:2047",
+      "type": "COMPONENT_SET",
+      "variants": 6,
+      "boundVarHits": 102,
+      "props": [
+        { "name": "Label", "type": "TEXT" },
+        { "name": "Sizing", "type": "VARIANT", "options": ["Md", "Sm", "Lg"] },
+        { "name": "Checked", "type": "VARIANT", "options": ["Unchecked", "Checked"] }
+      ]
+    },
+    {
+      "stem": "badge",
+      "page": "Badge (flowbite.badge)",
+      "name": "Badge (flowbite.badge)",
+      "id": "120:2098",
+      "type": "COMPONENT_SET",
+      "variants": 24,
+      "boundVarHits": 288,
+      "props": [
+        { "name": "Content", "type": "TEXT" },
+        { "name": "Color", "type": "VARIANT", "options": ["Info", "Failure", "Success", "Warning", "Indigo", "Pink"] },
+        { "name": "Size", "type": "VARIANT", "options": ["Xs", "Sm"] },
+        { "name": "State", "type": "VARIANT", "options": ["Default", "Active", "Hover"] }
+      ]
+    },
+    {
+      "stem": "button",
+      "page": "Button (flowbite.button)",
+      "name": "Button (flowbite.button)",
+      "id": "120:2203",
+      "type": "COMPONENT_SET",
+      "variants": 45,
+      "boundVarHits": 630,
+      "props": [
+        { "name": "Content", "type": "TEXT" },
+        { "name": "Color", "type": "VARIANT", "options": ["Default", "Alternative", "Dark", "Green", "Red"] },
+        { "name": "Size", "type": "VARIANT", "options": ["Md", "Xs", "Sm", "Lg", "Xl"] },
+        { "name": "State", "type": "VARIANT", "options": ["Default", "Disabled", "Active", "Focus Visible", "Hover"] }
+      ]
+    }
+  ]
+}

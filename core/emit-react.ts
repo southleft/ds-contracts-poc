@@ -3016,7 +3016,16 @@ export function generateTsx(
   }
   const rootEvent = events.find((e) => e.trigger === 'root');
   if (rootEvent) {
+    if (contract.semantics.element === 'button') {
+      elementAttrs.push('type="button"');
+    }
     elementAttrs.push(`onClick={handle${pascal(rootEvent.name)}}`);
+    if (rootEvent.toggles?.aria) {
+      const prop = contract.props.find((p) => p.name === rootEvent.toggles!.prop)!;
+      const code = prop.bindings.code.prop;
+      const [, on] = rootEvent.toggles.between;
+      elementAttrs.push(`aria-${rootEvent.toggles.aria}={${code} === '${on}'}`);
+    }
   }
   elementAttrs.push('{...rest}');
 

@@ -53,7 +53,7 @@
     },
     {
       "name": "dismissable",
-      "description": "Flowbite Alert renders the dismiss button only when onDismiss is provided; the developed default shows none.",
+      "description": "When true, the dismiss control is shown. The click handler is the onDismiss event — not this boolean.",
       "type": "boolean",
       "default": false,
       "bindings": {
@@ -62,7 +62,7 @@
           "property": "Dismissable"
         },
         "code": {
-          "prop": "onDismiss"
+          "prop": "dismissable"
         }
       }
     },
@@ -209,7 +209,11 @@
               ]
             },
             "dismiss": {
-              "description": "Flowbite dismiss control (onDismiss) — canvas-developed anatomy; close button with themed background per color.",
+              "description": "Flowbite dismiss control — canvas-developed anatomy; close button with themed background per color.",
+              "element": "button",
+              "attrs": {
+                "aria-label": "Dismiss"
+              },
               "layout": {
                 "display": "flex",
                 "align": "center",
@@ -341,6 +345,18 @@
       ]
     }
   },
+  "events": [
+    {
+      "name": "dismiss",
+      "description": "Fires when the dismiss control is activated. The parent unmounts or hides the alert — the canvas cannot run this, so Figma shows the control as a boolean.",
+      "bindings": {
+        "code": {
+          "prop": "onDismiss"
+        }
+      },
+      "trigger": "dismiss"
+    }
+  ],
   "anchors": {
     "figma": {
       "fileKey": null,

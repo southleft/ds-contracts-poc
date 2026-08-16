@@ -2,6 +2,17 @@
 
 *Read this first if you just cloned the repo and want to see it work.*
 
+## What this product guarantees (and what it does not)
+
+Hold us to these five. Everything below is how to run them, not a second product.
+The live climb list is [NORTH-STAR.md](../parity/receipts/beta/NORTH-STAR.md).
+
+1. **The contract is the source of truth.** Eight Flowbite contracts in this repo are the design-system fact. Figma and React are projections of those files.
+2. **Code → Figma is the supported hop.** The same contracts produce one JSON bundle; paste it in Figma desktop; you get eight token-bound component sets (not hex-painted copies). Re-applying amends in place. Two builds from the same inputs are byte-identical.
+3. **Code → React is the supported development output.** `generate` from those **authored** contracts emits typed React + CSS Modules. Where the contract declares events (ToggleSwitch, Alert dismiss), that React is interactive. A dump-generated preview is not.
+4. **Figma → contract is recovery, not an app generator.** A set *this pipeline drew* can be dumped and proposed back. Recovered props, stamped tokens, and host element are the bar. Generated Storybook from a dump is a preview of that recovery. It will not click, toggle, or replace the library.
+5. **Coverage is 8 of 46 Flowbite components (17.4%), chosen because they were tractable.** We do not guarantee a fifty-component kit or lossless geometry. Events exist only when the authored contract declares them. Those are named limits, not unfinished work.
+
 This project has three adoption paths ([00 — Choose Your Path](00-choose-your-path.md)).
 **For the beta, exactly ONE of them is supported end-to-end by a documented,
 receipted, clean-machine command list: path B, code-first, on the Flowbite
@@ -20,12 +31,10 @@ Two citations carry the honest numbers and neither is optional:
 > work; read 28 to go looking for its edges. If the two disagree about a
 > command, this page was run more recently and its commands carry a receipt.
 
-**Watching rather than running?**
-[parity/receipts/beta/LIVE-DEMO.md](../parity/receipts/beta/LIVE-DEMO.md) is
-the same two journeys as a 10–12 minute shot list — the golden path below,
-plus the return trip (Figma → typed React) it hands off to at the end. Same
-commands, ordered for a screen share, with the one thing the inversion refuses
-to guess called out on purpose.
+A rehearsed command list for both hops (including dump → React as a
+*recovery* preview) lives at
+[parity/receipts/beta/LIVE-DEMO.md](../parity/receipts/beta/LIVE-DEMO.md).
+That page is not a second product. The guarantees above still win.
 
 ---
 
@@ -69,8 +78,8 @@ Then, in the Figma **desktop** app:
 You get eight token-bound components (Alert, Badge, Button, Card, HelperText,
 Kbd, Label, ToggleSwitch) and a `Tokens` variable collection.
 
-**The other direction**, contract → typed React + CSS Modules, from the same
-contracts:
+**The code guarantee** — same authored contracts → typed React + CSS Modules
+(this is *not* generate-from-a-Figma-dump):
 
 ```bash
 npx tsx packages/cli/src/cli.ts generate examples/tailwind/contracts \
@@ -192,19 +201,16 @@ Forgetting is now caught by name (`FC-CELL-FRAMING` / `FC-CELL-INK-LOST`)
 rather than surfacing later as a blank score. This only matters if you are
 working on the internal loop; it does not affect the golden path.
 
-### Expected suite reds — three, and they are not regressions
+### The eval suite on this branch
 
-`npx tsx evals/run.ts` takes ~25 minutes and currently reports **222/225**.
-The three reds are known and named:
+`npx tsx evals/run.ts` takes ~25 minutes and currently reports **225/225**
+(`evals/results.json`). The two long-standing reds (`mui-figma-genesis`,
+`child-wider-ratchet-and-script-freshness`) were closed on 2026-08-16.
+`npm run visual-truth:check` still holds the astryx floor unclaimed on
+purpose — that is a visual-truth ratchet, not an eval-suite row.
 
-| eval | why it is red |
-|---|---|
-| `mui-figma-genesis` | Pre-existing. `switch.figma.js` headless execute: the `switch-track(medium)` pin expects 34x14 and finds 1x1. |
-| `child-wider-ratchet-and-script-freshness` | Pre-existing. The astryx/fluent text-wrapping overflow ratchet — the corpus-wide gap named in [22](22-generality.md). |
-| `astryx` floor in `npm run visual-truth:check` | **Deliberate.** The astryx lane has 0 headless passes against a ratchet floor of 1. Clearing it would mean claiming a stem that passes on one instrument and fails on the other — the exact discipline another stem was just *un*claimed under. It stays red on purpose. |
-| `npm run docs:check` | Pre-existing on a clean clone of `main`, and verified as such rather than assumed. Two generators disagree about the same numbers: `capability:report` writes `docs/24` (e.g. "10.4% coverage") while `docs-numbers-check` re-derives 9.2 from the artifacts. Neither is lying; they read different denominators. Not on the golden path, and not touched here. |
-
-A green suite is not the bar. A suite whose reds are all *named* is.
+A green suite is a guarantee that the *claims we make* still execute. It is
+not a guarantee that inverted Storybook is a shipping component library.
 
 ## Applying is additive — it never prunes
 
@@ -246,18 +252,13 @@ Badge refused (`create-only apply: "Badge" already exists …`) with its node id
 fingerprint, specHash and all 24 variants byte-identical afterwards, while
 Label created fresh on a new page — one run, one file, both halves.
 
-### Going the other way (canvas → code) needs a set this system drew
+### Figma → contract is recovery
 
-`extract/figma/dump.plugin.js` → `npm run extract:figma -- <dump.json>` →
-`generate --target react --stories` inverts a drawn set back to a contract and
-then to code. Until 2026-08-16 that refused two of the eight stems outright:
-Badge and Button draw a **sparse** State matrix (24 rows where a full Cartesian
-is 36; 45 where it is 125, because interaction states are drawn only at the
-default size), and the reader demanded a Cartesian. The emitter now stamps the
-matrix shape it drew (`ds_contracts/statePreviewAxis`) and the reader validates
-against that declaration — still exactly, so a missing or extra row is still
-refused. Both stems now invert and generate.
-
-A set drawn by other means carries no such marker, is still held to a full
-Cartesian, and will still be refused if it is ragged. That refusal is correct:
-nothing here can invert a matrix nobody declared.
+`extract/figma/dump.plugin.js` → `npm run extract:figma -- <dump.json>`
+proposes contracts back from a set **this system drew**. The bar is recovered
+props, stamped token identity, and host element — not a working app. Until
+2026-08-16 that refused Badge and Button (`EXACT_MATRIX_RAGGED`); the emitter
+now stamps the sparse State matrix it actually drew, and the reader holds the
+dump to that declaration. A set nobody declared is still held to a full
+Cartesian. Generating React from that proposal is a preview of the recovery.
+The development output remains `generate` from the authored contracts above.
