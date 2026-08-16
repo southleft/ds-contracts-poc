@@ -73,3 +73,11 @@ conformance/.sandbox/
 # function of the installed library's .d.ts, and the seeds a human actually
 # accepts are committed under examples/<lib>/contracts-seed/ instead.
 /examples/flowbite-react/
+
+# LIVE DEMO output (parity/receipts/beta/LIVE-DEMO.md). The RECIPE is committed
+# — the shot list, demo/.storybook — but everything the demo GENERATES is not:
+# it is rebuilt from committed contracts by the commands in the shot list, and
+# committing it would make a re-run look like a diff.
+demo/flowbite.dump.json
+demo/proposed/
+demo/generated/

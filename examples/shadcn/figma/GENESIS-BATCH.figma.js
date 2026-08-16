@@ -1082,7 +1082,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt14-declared-size-is-not-a-birth-box';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -1337,6 +1337,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -2644,7 +2657,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt14-declared-size-is-not-a-birth-box';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -2899,6 +2912,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -5024,7 +5050,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt14-declared-size-is-not-a-birth-box';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -5279,6 +5305,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -10585,7 +10624,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt14-declared-size-is-not-a-birth-box';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -10840,6 +10879,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -12199,7 +12251,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt14-declared-size-is-not-a-birth-box';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -12454,6 +12506,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -14561,7 +14626,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt14-declared-size-is-not-a-birth-box';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -14840,6 +14905,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -16457,7 +16535,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt14-declared-size-is-not-a-birth-box';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -16736,6 +16814,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -18086,7 +18177,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt14-declared-size-is-not-a-birth-box';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -18341,6 +18432,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -20509,7 +20613,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt14-declared-size-is-not-a-birth-box';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -20788,6 +20892,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -22258,7 +22375,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt14-declared-size-is-not-a-birth-box';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -22513,6 +22630,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -23954,7 +24084,7 @@ function dsStampFingerprints(node) {
 // Bump when the emitted RUNTIME template changes without a COMPONENTS JSON
 // delta (e.g. FC-FIGMA-CLIP-DEFAULT clipsContent default). Otherwise amend
 // skips as "unchanged" and canvas keeps the old runtime behavior.
-const RUNTIME_EMIT_REV = 'rt14-declared-size-is-not-a-birth-box';
+const RUNTIME_EMIT_REV = 'rt15-standalone-components-stamp-identity';
 function specHash(C) {
   let h = 5381; const s = JSON.stringify(C) + '|' + RUNTIME_EMIT_REV;
   for (let i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
@@ -24236,6 +24366,19 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // A STANDALONE component gets the identity stamps too. amendSet and the
+  // create path carried these from the start; this path did not, so Card and
+  // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
+  // sets — re-synced with no semantics and no propNames, and the inverter fell
+  // back to guessing their host element and prop names. Same '' -> delete rule
+  // as everywhere else. (No backticks in this region: it is inside the emitted
+  // runtime's template literal, and one would terminate it.)
+  comp.setSharedPluginData('ds_contracts', 'statePreviewAxis',
+    C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  comp.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
+  comp.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');

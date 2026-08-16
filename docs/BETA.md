@@ -20,6 +20,13 @@ Two citations carry the honest numbers and neither is optional:
 > work; read 28 to go looking for its edges. If the two disagree about a
 > command, this page was run more recently and its commands carry a receipt.
 
+**Watching rather than running?**
+[parity/receipts/beta/LIVE-DEMO.md](../parity/receipts/beta/LIVE-DEMO.md) is
+the same two journeys as a 10–12 minute shot list — the golden path below,
+plus the return trip (Figma → typed React) it hands off to at the end. Same
+commands, ordered for a screen share, with the one thing the inversion refuses
+to guess called out on purpose.
+
 ---
 
 ## THE GOLDEN PATH — contracts → one JSON → your Figma canvas
