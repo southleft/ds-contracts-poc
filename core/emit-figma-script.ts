@@ -475,6 +475,15 @@ export interface ComponentData {
    *  non-primary axis to its contract-declared first value while the reader
    *  sorts options alphabetically. Omitted when the contract does not opt in,
    *  so unchanged contracts keep a stable specHash. */
+  /** The contract's SEMANTICS, stamped so the inverter reads the host element
+   *  instead of guessing it. Figma draws no element, no role and no ARIA, so
+   *  the reader fell back to a name/axis table: Label came back a `div` and
+   *  Badge — a `span` whose only crime is carrying hover/active variants —
+   *  came back a `button`, because an interaction-state axis reads as
+   *  "interactive". A wrong element is worse than a missing one: it changes
+   *  what the generated component IS. Omitted when the contract declares no
+   *  semantics, so a set drawn elsewhere keeps the inference. */
+  semantics?: { element?: string; role?: string };
   statePreviewAxis?: {
     axis: string;
     default: string;
@@ -4687,6 +4696,14 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     textProps: textOnlyProps,
     fontStyles: [...fontStyles],
     variants,
+    ...(contract.semantics && (contract.semantics.element || contract.semantics.role)
+      ? {
+          semantics: {
+            ...(contract.semantics.element ? { element: contract.semantics.element } : {}),
+            ...(contract.semantics.role ? { role: contract.semantics.role } : {}),
+          },
+        }
+      : {}),
     ...(stateVariants.length > 0 ? { stateVariants } : {}),
     ...(stateVariants.length > 0 && statePreviewAxis ? { statePreviewAxis } : {}),
     ...(stateReactions.length > 0 ? { stateReactions } : {}),
@@ -6691,6 +6708,8 @@ async function amendSet(set, C) {
   // into previews — a stale descriptor would describe a matrix nobody drew.
   set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -7181,6 +7200,8 @@ async function syncOne(C) {
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);

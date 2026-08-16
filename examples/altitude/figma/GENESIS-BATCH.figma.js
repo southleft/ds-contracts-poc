@@ -192,6 +192,9 @@ const COMPONENTS = [
         }
       }
     ],
+    "semantics": {
+      "element": "div"
+    },
     "colW": 380
   }
 ];
@@ -1333,6 +1336,8 @@ async function amendSet(set, C) {
   // into previews — a stale descriptor would describe a matrix nobody drew.
   set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -1829,6 +1834,8 @@ async function syncOne(C) {
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -2162,6 +2169,9 @@ const COMPONENTS = [
         }
       }
     ],
+    "semantics": {
+      "element": "div"
+    },
     "colW": 380
   }
 ];
@@ -3115,6 +3125,8 @@ async function amendSet(set, C) {
   // into previews — a stale descriptor would describe a matrix nobody drew.
   set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -3649,6 +3661,8 @@ async function syncOne(C) {
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -3906,6 +3920,9 @@ const COMPONENTS = [
         }
       }
     ],
+    "semantics": {
+      "element": "button"
+    },
     "stateVariants": [
       {
         "name": "Variant=Secondary, State=Focus Visible",
@@ -5282,6 +5299,8 @@ async function amendSet(set, C) {
   // into previews — a stale descriptor would describe a matrix nobody drew.
   set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -5770,6 +5789,8 @@ async function syncOne(C) {
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -6335,6 +6356,9 @@ const COMPONENTS = [
         }
       }
     ],
+    "semantics": {
+      "element": "button"
+    },
     "colW": 380
   }
 ];
@@ -7245,6 +7269,8 @@ async function amendSet(set, C) {
   // into previews — a stale descriptor would describe a matrix nobody drew.
   set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -7733,6 +7759,8 @@ async function syncOne(C) {
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -7833,6 +7861,9 @@ const COMPONENTS = [
         }
       }
     ],
+    "semantics": {
+      "element": "hr"
+    },
     "colW": 380
   }
 ];
@@ -8789,6 +8820,8 @@ async function amendSet(set, C) {
   // into previews — a stale descriptor would describe a matrix nobody drew.
   set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -9323,6 +9356,8 @@ async function syncOne(C) {
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -9861,6 +9896,9 @@ const COMPONENTS = [
         }
       }
     ],
+    "semantics": {
+      "element": "h2"
+    },
     "colW": 388
   }
 ];
@@ -10771,6 +10809,8 @@ async function amendSet(set, C) {
   // into previews — a stale descriptor would describe a matrix nobody drew.
   set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -11259,6 +11299,8 @@ async function syncOne(C) {
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -11534,6 +11576,9 @@ const COMPONENTS = [
         }
       }
     ],
+    "semantics": {
+      "element": "span"
+    },
     "colW": 380
   }
 ];
@@ -12401,6 +12446,8 @@ async function amendSet(set, C) {
   // into previews — a stale descriptor would describe a matrix nobody drew.
   set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -12889,6 +12936,8 @@ async function syncOne(C) {
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -13051,6 +13100,9 @@ const COMPONENTS = [
         }
       }
     ],
+    "semantics": {
+      "element": "a"
+    },
     "stateVariants": [
       {
         "name": "Variant=Xs, State=Focus Visible",
@@ -14224,6 +14276,8 @@ async function amendSet(set, C) {
   // into previews — a stale descriptor would describe a matrix nobody drew.
   set.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  set.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -14712,6 +14766,8 @@ async function syncOne(C) {
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
+  target.setSharedPluginData('ds_contracts', 'semantics',
+    C.semantics ? JSON.stringify(C.semantics) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);

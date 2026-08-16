@@ -3047,8 +3047,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.23) for design→contract proposal.',
-    dumpVersion: '1.23',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.24) for design→contract proposal.',
+    dumpVersion: '1.24',
   },
 };
 dumps._degradations = degradations;
@@ -3073,6 +3073,15 @@ for (const page of figma.root.children) {
       // itself (Badge 24 vs 36, Button 45 vs 125). Carried verbatim; the
       // reader validates it against the axes and IGNORES a marker that does
       // not agree, so this can never widen what counts as exact.
+      // dump v1.24: the contract's declared semantics. Figma draws no element,
+      // role or ARIA, so without this the reader guesses from a name/axis
+      // table — and a guess can be WRONG, not merely absent (a hover/active
+      // axis made Badge's <span> read as a <button>).
+      ...(function () {
+        const raw = node.getSharedPluginData('ds_contracts', 'semantics');
+        if (!raw) return {};
+        try { return { semantics: JSON.parse(raw) }; } catch (e) { return {}; }
+      })(),
       ...(function () {
         const raw = node.getSharedPluginData('ds_contracts', 'statePreviewAxis');
         if (!raw) return {};

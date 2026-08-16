@@ -485,6 +485,12 @@ export interface DumpSet {
    *  full cartesian and refused sets this repo itself drew. Absence means the
    *  set was not drawn by this pipeline (or predates v1.21) and the full
    *  cartesian remains the expectation. */
+  /** The contract's declared semantics (dump v1.24, additive), read from
+   *  `ds_contracts/semantics` on the set. Figma draws no element/role/ARIA, so
+   *  without this the reader guesses from a name/axis table — and a guess can
+   *  be WRONG, not merely absent. Absence means the set was not drawn by this
+   *  pipeline (or predates v1.24), which is when the inference is correct. */
+  semantics?: { element?: string; role?: string };
   statePreviewAxis?: {
     axis: string;
     default: string;

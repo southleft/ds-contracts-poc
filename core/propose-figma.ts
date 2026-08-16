@@ -8294,6 +8294,24 @@ export function proposeFromDump(
     }
   }
 
+  /** The contract's own semantics, stamped on the set (dump v1.24). Shape-
+   *  checked here; anything malformed reads as absent, so a bad stamp can only
+   *  fall back to the inference, never assert a bogus element. */
+  const stampedSemantics = (() => {
+    const raw = (set as { semantics?: unknown }).semantics;
+    if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) return null;
+    const r = raw as Record<string, unknown>;
+    const element = typeof r.element === 'string' && r.element ? r.element : undefined;
+    const role = typeof r.role === 'string' && r.role ? r.role : undefined;
+    if (!element && !role) return null;
+    return { element, role };
+  })();
+  if (stampedSemantics) {
+    preNotes.push(
+      `semantics: read from the set's own \`ds_contracts/semantics\` stamp (element "${stampedSemantics.element ?? 'div'}"${stampedSemantics.role ? `, role "${stampedSemantics.role}"` : ''}) — the contract's declared host element, not the name/axis inference`,
+    );
+  }
+
   // Deterministic semantics inference (name/axis table — zero AI, see
   // inferSemantics). A detected interaction-state axis is the structural
   // corroboration that the component is interactive.
@@ -8329,13 +8347,28 @@ export function proposeFromDump(
     version: '0.1.0',
     status: 'draft',
     description: `PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.`,
-    semantics: inferred
+    // THE STAMP OUTRANKS THE INFERENCE. Everything below it is a guess from a
+    // name/axis table, and a guess about the host element is not a small
+    // thing: it decides what the generated component IS. Unstamped, Label
+    // came back a `div` and Badge — a `span` that merely carries hover and
+    // active variants — came back a `button`, because an interaction-state
+    // axis reads as "interactive". Wrong is worse than missing.
+    //
+    // Read only what the contract actually declared (element, role). No stamp
+    // → the table runs exactly as before, so a set this pipeline did not draw
+    // is unaffected and nothing is invented for it.
+    semantics: stampedSemantics
       ? {
-          element: inferred.element,
-          ...(inferred.role ? { role: inferred.role } : {}),
-          ...(inferred.elementByProp ? { elementByProp: inferred.elementByProp } : {}),
+          element: stampedSemantics.element ?? 'div',
+          ...(stampedSemantics.role ? { role: stampedSemantics.role } : {}),
         }
-      : { element: 'div' },
+      : inferred
+        ? {
+            element: inferred.element,
+            ...(inferred.role ? { role: inferred.role } : {}),
+            ...(inferred.elementByProp ? { elementByProp: inferred.elementByProp } : {}),
+          }
+        : { element: 'div' },
     props,
     states: [],
     // §3: receipt-grade metadata — the promoted mode axis's values as mode
