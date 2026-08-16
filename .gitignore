@@ -10,6 +10,7 @@ dashboard/dist/
 .runner-result.json
 private/
 .claude/
+.agents/
 .env.figma
 .env.local
 .playwright-mcp/
