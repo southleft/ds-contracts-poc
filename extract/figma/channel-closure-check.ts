@@ -91,6 +91,15 @@ const CHANNEL_TO_FIGMA: Record<string, ChannelMap> = {
   'text-decoration-line': { properties: ['textDecoration'], degradation: 'text-channel-unsupported' },
   'text-align': { properties: ['textAlignHorizontal', 'textAlignVertical'], degradation: 'text-channel-unsupported' },
   'font-family': { properties: ['fontName'] },
+  // FC-FONT-SLANT-NOT-CARRIED. Figma has no font-style FIELD — the slant is
+  // part of the face NAME, so it returns through the same property the family
+  // does. The two readers get there differently and BOTH had to be checked:
+  // dump.plugin.js takes `fontName.style` verbatim (italic survives), while
+  // REST reports a weight NUMBER plus a separate `italic` boolean, so mapText
+  // composes the two. Deriving the face from the weight table alone reported
+  // an italic node as upright, which is precisely the silent loss this gate
+  // exists to find.
+  'font-style': { properties: ['fontName', 'italic'] },
 };
 
 /**

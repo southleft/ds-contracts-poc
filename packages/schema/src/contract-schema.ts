@@ -1006,6 +1006,27 @@ export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
     canvas: "draw", // fontName.family = first stack entry (named limit: no fallback chain on canvas)
     note: "The first font-family stack entry renders on the canvas; fallback chains exist only in code.",
   },
+  // FC-FONT-SLANT-NOT-CARRIED (closed here). The slant was the one text
+  // identity channel with NO carried spelling at all: `styledChannels`
+  // admitted it, `prepareMint` found it uniform, and then the registry lookup
+  // missed and it fell into codeOnly as "no schema channel today" — for every
+  // library, not just the one that noticed. Flowbite's Blockquote is
+  // `text-xl font-semibold italic`, so what reached the canvas was upright
+  // text: not the component.
+  //
+  // It is a 'draw' verdict because Figma DOES spell the slant — not as a
+  // field, but inside `fontName.style` ("Semi Bold Italic"). Calling it
+  // 'annotate' would have been the same lie the overflow-x split exists to
+  // prevent: a channel the canvas can draw, recorded as one it cannot.
+  //
+  // The grammar is the two keywords a face can actually be selected by.
+  // `oblique <angle>` is a SYNTHESIZED slant with no face behind it and no
+  // Figma spelling, so it stays outside and refuses by name.
+  "font-style": {
+    value: kw("normal", "italic", "oblique"),
+    canvas: "draw", // fontName.style gains the " Italic" face suffix (Inter's spelling)
+    note: "The slant renders natively on the canvas by selecting the italic face (fontName.style); a family with no italic face falls back to upright and says so (FC-FONT-STYLE-UNRESOLVED).",
+  },
   // -- border styles --------------------------------------------------------
   "border-style": {
     value: kw("none", "solid", "dashed", "dotted"),

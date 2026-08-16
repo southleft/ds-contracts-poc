@@ -146,6 +146,7 @@
     "extract:computed:viewport:check": "tsx extract/computed/viewport-geometry-check.ts",
     "extract:computed:pseudo-decor-size:check": "tsx extract/computed/pseudo-decor-size-check.ts",
     "extract:computed:pseudo-decor-rotate:check": "tsx extract/computed/pseudo-decor-rotate-check.ts",
+    "extract:computed:font-slant:check": "tsx extract/computed/font-slant-check.ts",
     "extract:computed:scorecard": "tsx extract/computed/library-scorecard.ts",
     "test:onboarding": "npm run test:cli",
     "reconcile": "tsx extract/run.ts reconcile",

@@ -720,6 +720,15 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
     ctx.report.notes.push(
       `${nodePath}: fontWeight ${s.fontWeight ?? '(absent)'} is outside the generator's weight table — fontStyle "${fontStyle}" passed through`,
     );
+  } else if (s.italic === true && !/\bItalic\b/.test(fontStyle)) {
+    // FC-FONT-SLANT-NOT-CARRIED, the RETURN leg. The Plugin API reader takes
+    // `fontName.style` verbatim, so it recovers "Semi Bold Italic" as written.
+    // REST does NOT report the face name here — it reports the weight NUMBER
+    // and a separate `italic` boolean, so deriving the face from the weight
+    // table alone throws the slant away and reports an italic node as upright.
+    // Composed in the emitter's own spelling (figmaFaceStyle): weight 400's
+    // italic is plain "Italic", not "Regular Italic".
+    fontStyle = fontStyle === 'Regular' ? 'Italic' : `${fontStyle} Italic`;
   }
   const text: DumpText = {
     characters: node.characters ?? '',

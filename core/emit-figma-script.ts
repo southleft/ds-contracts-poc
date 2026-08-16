@@ -1136,7 +1136,25 @@ interface TextCtx {
   textAlignH?: NodeSpec['textAlignH'];
   fontFamily?: string;
   textTruncation?: boolean;
+  /** FC-FONT-SLANT-NOT-CARRIED: the declared `font-style` slant. It is kept
+   *  SEPARATE from `fontStyle` (which is Figma's WEIGHT name) rather than
+   *  baked into it, because the two arrive from different channels and in
+   *  either order — a child that binds its own `font-weight` token rewrites
+   *  `fontStyle` wholesale (applyTokens), which would silently erase a slant
+   *  inherited from its parent. Composed into the face name once, at the
+   *  spec boundary (figmaFaceStyle). */
+  fontItalic?: boolean;
 }
+
+/** TextCtx → the Figma face name. Inter spells the italic faces
+ *  "<Weight> Italic", except weight 400 whose italic is plain "Italic" (there
+ *  is no "Regular Italic"). Non-italic contexts return exactly what the
+ *  weight resolution produced, so slant-free corpora emit byte-identically. */
+const figmaFaceStyle = (ctx: TextCtx): string => {
+  const weight = ctx.fontStyle ?? 'Medium';
+  if (!ctx.fontItalic) return weight;
+  return weight === 'Regular' ? 'Italic' : `${weight} Italic`;
+};
 
 /** The dump v1.2 single-DROP_SHADOW box-shadow grammar
  *  ("0px 2px 4px [2px] #00000029") → the runtime effect struct. Anything
@@ -2542,6 +2560,15 @@ function applyDeclared(declared: Record<string, string> | undefined, ctx: TextCt
       case 'text-overflow':
         if (value === 'ellipsis') next.textTruncation = true;
         break;
+      // FC-FONT-SLANT-NOT-CARRIED: the slant selects a FACE, so it cannot be
+      // written here — the weight half of the same face name may not have
+      // been resolved yet, and a descendant may rebind it. The flag rides the
+      // context and figmaFaceStyle composes both halves at the spec boundary.
+      // `oblique` selects the same italic face Figma has (the synthesized
+      // angled form is outside the grammar and never reaches here).
+      case 'font-style':
+        next.fontItalic = value === 'italic' || value === 'oblique';
+        break;
       default:
         break; // annotate verdicts — description notes, not node fields
     }
@@ -2698,7 +2725,7 @@ function matchTextStyle(ctx: TextCtx): string | undefined {
   if (!ctx.fontSizePath) return undefined;
   const t = textStyleByTokenPath.get(ctx.fontSizePath);
   if (!t) return undefined;
-  if (t.fontSize !== ctx.fontSize || t.fontStyle !== (ctx.fontStyle ?? 'Medium')) return undefined;
+  if (t.fontSize !== ctx.fontSize || t.fontStyle !== figmaFaceStyle(ctx)) return undefined;
   return t.name;
 }
 
@@ -2865,7 +2892,7 @@ function formControlSpec(
       name: 'placeholder',
       characters: placeholderCharacters,
       fontSize: childCtx.fontSize ?? 16,
-      fontStyle: childCtx.fontStyle ?? 'Medium',
+      fontStyle: figmaFaceStyle(childCtx),
       ...(childCtx.lineHeight !== undefined ? { lineHeight: childCtx.lineHeight } : {}),
       ...textExtras(childCtx),
       ...textIdentity(childCtx),
@@ -3726,7 +3753,7 @@ function partToSpecInner(
     const textCtx = applyStyling(frame, part, subst, ctx);
     textSpec.name = `${name}-text`;
     textSpec.fontSize = textCtx.fontSize ?? 14;
-    textSpec.fontStyle = textCtx.fontStyle ?? 'Medium';
+    textSpec.fontStyle = figmaFaceStyle(textCtx);
     applyTextIdentity(textSpec, textCtx);
     textSpec.textFill = textCtx.textFill;
     if (textCtx.lineHeight !== undefined) textSpec.lineHeight = textCtx.lineHeight;
@@ -3771,7 +3798,7 @@ function partToSpecInner(
     const textCtx = applyStyling(spec, part, subst, ctx);
     spec.characters = partText;
     spec.fontSize = textCtx.fontSize ?? 14;
-    spec.fontStyle = textCtx.fontStyle ?? 'Medium';
+    spec.fontStyle = figmaFaceStyle(textCtx);
     applyTextIdentity(spec, textCtx);
     spec.textFill = textCtx.textFill;
     if (textCtx.lineHeight !== undefined) spec.lineHeight = textCtx.lineHeight;
@@ -3819,7 +3846,7 @@ function partToSpecInner(
     const textCtx = applyStyling(spec, part, subst, ctx);
     spec.characters = characters;
     spec.fontSize = textCtx.fontSize ?? 16;
-    spec.fontStyle = textCtx.fontStyle ?? 'Medium';
+    spec.fontStyle = figmaFaceStyle(textCtx);
     applyTextIdentity(spec, textCtx);
     spec.textFill = textCtx.textFill;
     if (textCtx.lineHeight !== undefined) spec.lineHeight = textCtx.lineHeight;
@@ -4270,7 +4297,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           name: 'label',
           characters: label,
           fontSize: ctx.fontSize ?? 16,
-          fontStyle: ctx.fontStyle ?? 'Medium',
+          fontStyle: figmaFaceStyle(ctx),
           ...textIdentity(ctx),
           textFill: ctx.textFill,
           ...(ctx.lineHeight !== undefined ? { lineHeight: ctx.lineHeight } : {}),
@@ -4374,7 +4401,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
               name: 'label',
               characters: label,
               fontSize: ctx.fontSize ?? 16,
-              fontStyle: ctx.fontStyle ?? 'Medium',
+              fontStyle: figmaFaceStyle(ctx),
               ...textIdentity(ctx),
               textFill: ctx.textFill,
               ...(ctx.lineHeight !== undefined ? { lineHeight: ctx.lineHeight } : {}),

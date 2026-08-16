@@ -580,6 +580,136 @@ deletion.
 would have shipped a stem whose italic came from me rather than from the
 capture, which is the exact failure this board exists to prevent.
 
+### CLOSED 2026-08-15 — `feat/font-slant-carry`
+
+The wall was ONE registry miss, and the wall entry above named it correctly.
+
+**Where it died.** `prepareMint` (`extract/computed/fuse.ts:1841`) classifies a
+channel whose value has no mintable KIND by looking it up in
+`DECLARED_CHANNELS`. Everything upstream had already done its job:
+`styledChannels` admitted `root.font-style` (it differs from the control
+baseline) and the mint loop found it UNIFORM across all combos at `italic`.
+Then the registry lookup missed, so the last `else` fired and the slant went to
+`codeOnly` with the receipt the ledger quotes —
+
+    root.font-style — value shape outside mintable kinds (color/px/number/
+    shadow/gradient) and outside the declared-channel registry — no schema
+    channel today
+
+— which is not a refusal on the merits. It is "there is no box for this."
+
+**The fix.** `font-style` is now a `DECLARED_CHANNELS` entry with the grammar
+`normal|italic|oblique`. `oblique <angle>` stays OUT: it is a synthesized slant
+with no face behind it and no Figma spelling, so it refuses by name rather than
+carrying a value nothing can draw.
+
+The verdict is **`draw`, not `annotate`** — and that distinction was the only
+real design decision in the slice. Figma does spell the slant, just not as a
+field: it lives inside `fontName.style` ("Semi Bold Italic"). Recording a
+drawable channel as `annotate` is the same lie the `overflow-x` `drawExcept`
+split exists to prevent, so the canvas lowering shipped with the carriage:
+
+  * `TextCtx.fontItalic` is a SEPARATE flag from `TextCtx.fontStyle` (which is
+    Figma's WEIGHT name). Baking the slant into the weight name would have been
+    erased silently by any descendant that binds its own `font-weight` token —
+    `applyTokens` rewrites `fontStyle` wholesale.
+  * `figmaFaceStyle(ctx)` composes the two halves once, at the spec boundary,
+    and encodes Inter's spelling (weight 400 + italic is `Italic`, not
+    `Regular Italic`). Non-italic contexts get back exactly the old value, so
+    every slant-free contract emits byte-identically.
+
+**Red → green, both halves independently:**
+
+    npm run extract:computed:font-slant:check
+      registry     font-style registered · canvas=draw; `oblique 40deg` refused
+      carriage     tailwind/Blockquote root.declared['font-style'] = italic
+                   (was: absent, and named in the code-only ledger)
+      no invention carbon/Button carries no slant
+      canvas       declared italic -> face "Semi Bold Italic", composed with
+                   the weight, loaded via C.fontStyles, and READ BACK off a
+                   built TEXT node through the plugin's own Figma mock —
+                   `fontName.style = "Semi Bold Italic"`, not just a payload
+                   string (was: "Semi Bold" — the contract carried the slant
+                   and the canvas still drew upright)
+      return leg   REST italic node -> "Semi Bold Italic"
+                   (was: "Semi Bold" — the slant died on the way back)
+
+    npm run prep:schema && npm run closure:check
+      font-style   UNMAPPED -> READ (fontName / italic)
+      still red    overflow-x, overflow-y — PRE-EXISTING, and reproduced on
+                   clean `main` once the stale schema `dist/` is rebuilt
+
+**The `draw` verdict pulled in a SECOND defect, and it was the interesting
+one.** `closure:check` enumerates every `DECLARED_CHANNELS` entry with
+`canvas: 'draw'` and refuses any that the readers cannot recover. Adding
+`font-style` turned it `UNMAPPED` — and mapping it exposed a real asymmetry
+between the two readers:
+
+    dump.plugin.js  reads `node.fontName.style` VERBATIM  -> "Semi Bold Italic"
+    rest/map.ts     derived the face from the weight NUMBER via
+                    FONT_STYLE_BY_WEIGHT                  -> "Semi Bold"
+
+REST does not report a face name for this at all: it reports `fontWeight: 600`
+plus a separate `italic: true` boolean, and `mapText` read only the first. So
+the REST leg would have read an italic node back as upright, with nothing
+naming the loss — the exact silent-loss shape the closure gate exists to find,
+found by the gate, on a channel added in the same commit. `RestTypeStyle.italic`
+was already TYPED and simply never read. `mapText` now composes the two halves
+in the emitter's own spelling, and check 4 pins both directions.
+
+Note that this gate could only see the defect after `npm run prep:schema` —
+it imports the BUILT `@ds-contracts/schema`, and a stale `dist/` reports on a
+registry that no longer exists. Running it against source-only edits reports
+green on channels it has never seen.
+
+**The gate moved, measured on the identical committed capture:**
+
+    npx tsx extract/computed/regate.ts --config .../tailwind.json \
+      --component Blockquote --out extract/computed/out/tailwind
+
+    committed (harness run) .... 94.118% computed-equal (64/68; 0/4 rows equal)
+    re-run (current code) ...... 100.000% computed-equal (68/68; 4/4 rows equal)
+
+**Byte-neutral where it should be.** `golden-generated-output` passes: the whole
+generated corpus (`src/` + the `figma-sync` scripts) is unchanged, which is also
+the proof that no COMMITTED contract carries a slant today. `npm run generate`
+re-emits all 56 components with a zero diff. `npm run conformance` reports no
+drift against `BASELINE.json`. Re-gating every other tailwind lane and both
+fluent lanes that have italic in their capture (Dialog, TabList) shows no
+regression — several improve slightly, and those deltas reproduce with this
+branch stashed, so they are committed-scorecard drift and not this change.
+
+**Scope of the lift, re-fused over the whole committed corpus:**
+
+    104 components re-fused offline
+    font-style CARRIED ......... 1   tailwind/Blockquote.root = italic
+    font-style still dropped ... 0
+
+One carry. The channel was systemically missing, but the corpus authors it
+exactly once — which is what makes it a clean close rather than a wave.
+
+### The residual, named and NOT fixed here
+
+`font-style` rides the same control baseline as every other channel, and that
+baseline is the pre-existing 4-tag one (`CONTROL_TAGS` = button/span/a/div,
+already documented in `extract/computed/ua-baseline-check.ts` and queued in
+`docs/HANDOFF.md`). `<blockquote>` has no control, so it was measured against
+`<span>`. For Flowbite that verdict is right — `blockquoteTheme.root` really
+does say `italic` — but the engine cannot yet DISTINGUISH an authored slant
+from the user agent's own on `<i>`/`<em>`/`<cite>`. The two conformance cases
+that hit this (`grid-subgrid`, `grid-in-flex-fill`) carry `<i className="cf-b" />`
+— empty layout probes with no glyph to slant — and `conformance` reports no
+drift, so nothing moves on it today. Widening `CONTROL_TAGS` is a CAPTURE
+change and stays where it already was: named, queued, and not started here.
+
+**Blockquote is unblocked on THIS wall, and is not promoted in this slice.**
+The computed instrument is closed and reads 100% / 4-of-4 rows. The pixel half
+is NOT re-measured: `regate` explicitly does not score pixel pairs (the
+original package screenshots are session artifacts, not committed), so
+`pixel AA 4/4` needs a harness run. That run is the next stem, and this slice
+stops at the wall it was opened for. Blockquote remains out of
+`ds-library.json`, out of the genesis ORDER, out of the bundle, and unapplied.
+
 ## LIVE-FILE FINDING — **FC-APPLY-TOKENS-NOT-PRUNED**
 
 The post-apply inventory of Y8Jhw6R49wTLuXZ0is2GmV did not match the bundle,
@@ -689,10 +819,14 @@ and it had been stale since `e7a851e1`.
                          +3 this round — HelperText, Label and Kbd, ALL
                          bar-passed on canvas by screenshot, not by scorecard
     held on the bar . TextInput (empty pills) · Spinner (dead colour axis)
-    held: NEW WALL . Blockquote — FC-FONT-SLANT-NOT-CARRIED. Captured clean,
-                     gate pixel AA 0/4, because `font-style: italic` never
-                     reaches the contract. Systemic: 0 contracts in the repo
-                     carry that channel. THIS STOPPED THE LOOP.
+    held, wall CLOSED . Blockquote — FC-FONT-SLANT-NOT-CARRIED is FIXED on
+                     `feat/font-slant-carry`: `font-style` is a declared
+                     channel, the canvas draws it as the italic FACE, and the
+                     Blockquote gate goes 94.118% -> 100.000% computed-equal
+                     (0/4 -> 4/4 rows) on the identical committed capture.
+                     STILL HELD, for a different and smaller reason: the pixel
+                     half is unmeasured (regate does not score pixels), so the
+                     promotion needs a harness run. Not promoted here.
     refused ......... Progress (capture: first hover times out on an unstyled
                       <div role="progressbar"> wrapper — a NEW wall, not root-caused)
     parked .......... FC-ICON-ROOT-PAINT-AXIS · Option B height/width
