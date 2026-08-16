@@ -2033,6 +2033,27 @@ function applyTokens(
         // it has NO canvas field at all. The second class is now named.
         const reg = TOKEN_CHANNELS[cssProp];
         if (reg && reg.canvas !== 'draw') miss(spec, cssProp, reg.note);
+        // SILENT-LOSS ROUND, the half that was left open. The comment above
+        // is right that top/right/bottom/left are lowered OUTSIDE this switch
+        // — but only for parts those paths actually claim (absolute,
+        // inset-overlay, full-bleed scrim). Bind an inset on an IN-FLOW box
+        // and no path claims it, `canvas: 'draw'` sends it down the silent
+        // branch, and the binding vanishes with no receipt anywhere. That is
+        // ToggleSwitch's `part-0`, which binds all four to size-0 under
+        // `position: relative` — TJ-TEST.md §A7 listed the `bottom` half of
+        // it as a silent loss and could not say where it went.
+        //
+        // Figma has no offset field for an in-flow child, so this cannot be
+        // drawn and must not be invented. Name it instead. Read from the
+        // part's DECLARED position (a contract fact) rather than from spec
+        // flags, which the placement passes have not set yet at this point.
+        else if (reg && INSET_CHANNELS.has(cssProp) && (declared?.position ?? 'static') !== 'absolute') {
+          miss(
+            spec,
+            cssProp,
+            `bound on an in-flow box (position: ${declared?.position ?? 'static'}) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back`,
+          );
+        }
         break;
       }
     }
@@ -2055,6 +2076,11 @@ function outlineRefusal(paints: boolean, borderWins: boolean, sibling: string): 
 
 /** SILENT-LOSS ROUND (task #33, fix 3): record a carried-but-undrawable
  *  channel on the spec. Deduplicated and sorted at collection time. */
+/** The CSS inset quartet. Lowered only by the absolute / inset-overlay /
+ *  full-bleed-scrim paths; on any other part there is no canvas field to
+ *  carry them, which is why the default branch names them. */
+const INSET_CHANNELS = new Set(['top', 'right', 'bottom', 'left']);
+
 function miss(spec: NodeSpec, cssProp: string, why: string): void {
   (spec.channelMiss ??= []).push(`${cssProp}: ${why}`);
 }

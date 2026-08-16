@@ -2032,6 +2032,18 @@ function invertNodeTokens(
     else ctx.notes.push(`${where}: stroke weight bindings are not uniform — ${strokeWidthProp} not representable, review`);
   }
   carry('gap', f('itemSpacing'));
+  // The root's bound width comes back as max-width (a component's outer
+  // dimension is fluid-up-to in code; the canvas can only draw the max). The
+  // TOKEN is unchanged, so nothing is lost — but the CHANNEL changed, and the
+  // run said so nowhere. A reader diffing the proposal against the contract
+  // then sees `width` missing and `max-width` invented, and counts a
+  // translation as two losses. It cost exactly that once (TJ-TEST.md §A7
+  // listed Label's width as a silent loss; it never was). Receipt it.
+  if (isRoot && f('width') !== undefined) {
+    ctx.notes.push(
+      `${where}: root width binding ${f('width')} carries as **max-width**, not width — a component's outer size is fluid-up-to in code and the canvas draws the max. Same token, translated channel; nothing dropped`,
+    );
+  }
   carry(isRoot ? 'max-width' : 'width', f('width'));
   carry('height', f('height'));
   carry('min-width', f('minWidth'));
@@ -2953,6 +2965,21 @@ function carryAbsPlacement(
     `${where}: absolute placement carried (dump v1.7 \`abs\`) — position: absolute with minted px channels [${channels.join(', ')}]${
       symmetricText ? ' + text-align: center (horizontally symmetric text box — the center-preserving spelling)' : ''
     }${centered && !symmetricText ? ' (CENTER constraint carried as the exact drawn offset — center-tracking under parent resize is not carried, a declared limit)' : ''}; per-variant values classify through the standard mint machinery`,
+  );
+  // WHAT THIS PLACEMENT COSTS, said out loud. The offsets above are read off
+  // the DRAWN BOX, so whatever CSS produced that box — `margin-*` on the
+  // child, or an inset quartet the contract bound to real tokens — arrives
+  // here already lowered to geometry and cannot be told apart from any other
+  // way of drawing the same rectangle. Those channels are NOT carried, and
+  // geometry is not read back (Option B, FC-GEOMETRY-EXCLUDED), so nothing
+  // below will recover them.
+  //
+  // The old note described only what WAS carried. A reader diffing the
+  // proposal against the contract then found `margin-left`, `margin-top` and
+  // `bottom` simply missing with no receipt anywhere — silent loss, and
+  // exactly the rows TJ-TEST.md §A7 had to list by hand.
+  ctx.notes.push(
+    `${where}: the CSS that PRODUCED this box is not recoverable from it — a child's \`margin-*\` (which the emitter lowers into a "(margin box)" wrapper) and a bound inset quartet (\`left\`/\`right\`/\`top\`/\`bottom\`) both draw as the same absolute rectangle. Those channels are NAMED here and NOT carried; the offsets above are the drawn geometry, not the authored spacing (Option B — geometry is not read back, \`FC-GEOMETRY-EXCLUDED\`); review`,
   );
   return true;
 }

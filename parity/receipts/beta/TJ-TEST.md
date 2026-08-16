@@ -305,3 +305,33 @@ trip, token identity is still destroyed where a value is re-minted, and
 `semantics.element` still collapses to `div`. Closing the two walls made the
 journey RUN on the stems it used to refuse; it did not make the inversion
 lossless.
+
+---
+
+## ADDENDUM 2026-08-16 (2) — the §A7 SILENT table is closed
+
+Each silent row above, re-measured on stems re-applied and re-dumped for the
+purpose. Full working in [PATH-A-SILENT.md](PATH-A-SILENT.md).
+
+| §A7 silent row | verdict | commit |
+|---|---|---|
+| `font-weight` — label, toggleswitch | **RECOVERED** with the original token, not a mint | `089ec010` |
+| `width` — label | **NOT A LOSS** — carried as `max-width` with the same token; the §A7 row was a measurement error, now receipted in the run | the S2/S3/S4 commit |
+| `margin-left`, `margin-top` — toggleswitch | **NAMED** — lowered into a `(margin box)` and read back as geometry; Option B, `FC-GEOMETRY-EXCLUDED` | the S2/S3/S4 commit |
+| `bottom` — toggleswitch | **NAMED**, and inert: all four insets are 0px under `position: relative`, so nothing renders differently either way | the S2/S3/S4 commit |
+
+Two corrections to what §A7 claimed:
+
+- **`width` was never lost.** The diff that produced §A7 compared channel
+  NAMES, so a deliberate `width` → `max-width` translation carrying the same
+  token read as one loss plus one invention.
+- **`bottom` is one of four, and inert.** §A7 said "only left/right/top
+  re-derived". In fact `part-0`'s whole inset quartet is absent, and correctly
+  so — 0px relative offsets draw nothing.
+
+What did NOT change: every DECLARED loss in §A7 stands untouched — token
+identity is still re-minted where a value is re-minted, `semantics.element`
+still collapses to `div`, `children` still returns as `content`, `checked` is
+still an ENUM, part names are still positional, and the thumb's per-size
+20/16/24 still collapses. Those were named then and are named now; they are the
+next round, not this one.
