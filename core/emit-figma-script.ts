@@ -484,6 +484,15 @@ export interface ComponentData {
    *  what the generated component IS. Omitted when the contract declares no
    *  semantics, so a set drawn elsewhere keeps the inference. */
   semantics?: { element?: string; role?: string };
+  /** Figma property name → the CONTRACT's prop name for it. Figma carries the
+   *  design-facing spelling ("Content"), the contract carries the code-facing
+   *  one ("children"), and nothing on the canvas relates the two — so the
+   *  reader canonicalised the design name and Alert's `children` came back as
+   *  `content`. The reader was right to refuse to guess (renaming by
+   *  convention would break design-property fidelity); this gives it the
+   *  answer instead of a convention. Omitted when no prop declares a Figma
+   *  binding. */
+  propNames?: Record<string, string>;
   statePreviewAxis?: {
     axis: string;
     default: string;
@@ -4696,6 +4705,14 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     textProps: textOnlyProps,
     fontStyles: [...fontStyles],
     variants,
+    ...(() => {
+      const map: Record<string, string> = {};
+      for (const p of contract.props ?? []) {
+        const prop = p.bindings?.figma?.property;
+        if (typeof prop === 'string' && prop && p.name) map[prop] = p.name;
+      }
+      return Object.keys(map).length > 0 ? { propNames: map } : {};
+    })(),
     ...(contract.semantics && (contract.semantics.element || contract.semantics.role)
       ? {
           semantics: {
@@ -6710,6 +6727,8 @@ async function amendSet(set, C) {
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   set.setSharedPluginData('ds_contracts', 'semantics',
     C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -7202,6 +7221,8 @@ async function syncOne(C) {
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
     C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);

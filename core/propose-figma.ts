@@ -1249,6 +1249,11 @@ interface Ctx {
    *  DIFFERENT parents — legal on the canvas, refused at emit. Seeded with
    *  'root' (the root is a walked part name too). */
   partNames: Set<string>;
+  /** Figma property name → the CONTRACT's prop name, from the set's own stamp
+   *  (dump v1.25). Read in preference to canonicalising the design spelling —
+   *  see registerTextProp. Empty for a set this pipeline did not draw, which
+   *  is exactly when canonicalising is the right answer. */
+  propNames?: Record<string, string>;
   mint?: MintCapture;
   /** Exact fails closed on text-style identity gaps; reviewable notes. */
   projectionMode: 'exact' | 'reviewable-inversion';
@@ -5148,7 +5153,21 @@ function attachTokens(ctx: Ctx, holder: Record<string, unknown>, tokens: Record<
   if (Object.keys(tokens).length > 0) holder.tokens = tokens;
 }
 
-function registerTextProp(ctx: Ctx, property: string, characters: string, name = canonicalPropName(property)) {
+/** The prop name for a drawn Figma property: the CONTRACT's own name when the
+ *  set stamped one (dump v1.25), else the canonicalised design spelling. ONE
+ *  owner, because the name is used twice — to declare the prop and to bind a
+ *  part's content to it — and the two drifting apart emits a contract whose
+ *  own anatomy references a prop that does not exist. */
+function textPropName(ctx: Ctx, property: string): string {
+  return ctx.propNames?.[property] ?? canonicalPropName(property);
+}
+
+function registerTextProp(
+  ctx: Ctx,
+  property: string,
+  characters: string,
+  name = textPropName(ctx, property),
+) {
   if (ctx.textProps.some((p) => p.property === property)) return;
   ctx.textProps.push({ name, property, default: characters });
 }
@@ -5598,10 +5617,13 @@ function buildPart(
     const promoted = property ? undefined : ctx.textPromote?.get(where.slice(`${ctx.setName}:root/`.length));
     if (property) {
       registerTextProp(ctx, property, characters);
-      // The SAME canonical spelling registerTextProp names the prop with —
-      // camel() alone would leak illegal characters ("✏️text") into the
-      // content binding and break the prop↔content pairing.
-      part.content = { prop: canonicalPropName(property) };
+      // THE SAME name registerTextProp used — via the same function, not a
+      // second copy of the rule. This line used to re-derive it with
+      // canonicalPropName, so the moment the stamp renamed the prop to
+      // `children` the binding still said `content` and the emitter refused
+      // the contract by name: part "label" binds content to unknown text prop
+      // "content". A naming rule with two implementations has two answers.
+      part.content = { prop: textPropName(ctx, property) };
     } else if (promoted) {
       // The synthetic `property` is the node path: unique within the set (so
       // registerTextProp's dedup holds) and never emitted — a figmaless prop
@@ -7898,6 +7920,18 @@ export function proposeFromDump(
     flattenedVariants: new Set(),
     stubs: new Map(),
     partNames: new Set(['root']),
+    // The set's declared prop names, shape-checked: only string→string pairs
+    // survive, so a malformed stamp reads as absent and the canonicaliser runs
+    // exactly as before.
+    ...(() => {
+      const raw = (set as { propNames?: unknown }).propNames;
+      if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) return {};
+      const map: Record<string, string> = {};
+      for (const [k, v] of Object.entries(raw as Record<string, unknown>)) {
+        if (typeof k === 'string' && typeof v === 'string' && k && v) map[k] = v;
+      }
+      return Object.keys(map).length > 0 ? { propNames: map } : {};
+    })(),
     projectionMode,
     mint: opts.mintUnbound
       ? {

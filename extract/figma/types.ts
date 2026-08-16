@@ -491,6 +491,12 @@ export interface DumpSet {
    *  be WRONG, not merely absent. Absence means the set was not drawn by this
    *  pipeline (or predates v1.24), which is when the inference is correct. */
   semantics?: { element?: string; role?: string };
+  /** Figma property name → the contract's prop name (dump v1.25, additive).
+   *  The canvas carries only the design-facing spelling ("Content"), so
+   *  without this the reader canonicalises it and a contract's `children`
+   *  returns as `content`. Absence means the set was not drawn by this
+   *  pipeline (or predates v1.25). */
+  propNames?: Record<string, string>;
   statePreviewAxis?: {
     axis: string;
     default: string;

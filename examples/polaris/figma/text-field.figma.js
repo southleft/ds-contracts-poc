@@ -1400,6 +1400,44 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Placeholder": "placeholder",
+      "Value": "value",
+      "Label Hidden": "labelHidden",
+      "Disabled": "disabled",
+      "Clear Button": "clearButton",
+      "Select Text On Focus": "selectTextOnFocus",
+      "Suggestion": "suggestion",
+      "Read Only": "readOnly",
+      "Auto Focus": "autoFocus",
+      "Focused": "focused",
+      "Type": "type",
+      "Name": "name",
+      "Role": "role",
+      "Step": "step",
+      "Large Step": "largeStep",
+      "Auto Complete": "autoComplete",
+      "Max Length": "maxLength",
+      "Min Length": "minLength",
+      "Pattern": "pattern",
+      "Input Mode": "inputMode",
+      "Spell Check": "spellCheck",
+      "Aria Owns": "ariaOwns",
+      "Aria Expanded": "ariaExpanded",
+      "Aria Controls": "ariaControls",
+      "Aria Active Descendant": "ariaActiveDescendant",
+      "Aria Autocomplete": "ariaAutocomplete",
+      "Show Character Count": "showCharacterCount",
+      "Align": "align",
+      "Required Indicator": "requiredIndicator",
+      "Monospaced": "monospaced",
+      "Variant": "variant",
+      "Size": "size",
+      "Auto Size": "autoSize",
+      "Loading": "loading",
+      "Show WithPrefix": "withPrefix",
+      "Show WithSuffix": "withSuffix"
+    },
     "semantics": {
       "element": "div"
     },
@@ -3840,6 +3878,8 @@ async function amendSet(set, C) {
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   set.setSharedPluginData('ds_contracts', 'semantics',
     C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -4383,6 +4423,8 @@ async function syncOne(C) {
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
     C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);

@@ -163,6 +163,9 @@ const COMPONENTS = [
         }
       }
     ],
+    "propNames": {
+      "Variant": "variant"
+    },
     "semantics": {
       "element": "span"
     },
@@ -1167,6 +1170,8 @@ async function amendSet(set, C) {
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   set.setSharedPluginData('ds_contracts', 'semantics',
     C.semantics ? JSON.stringify(C.semantics) : '');
+  set.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -1709,6 +1714,8 @@ async function syncOne(C) {
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
     C.semantics ? JSON.stringify(C.semantics) : '');
+  target.setSharedPluginData('ds_contracts', 'propNames',
+    C.propNames ? JSON.stringify(C.propNames) : '');
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);

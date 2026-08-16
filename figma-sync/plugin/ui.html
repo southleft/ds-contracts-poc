@@ -3047,8 +3047,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.24) for design→contract proposal.',
-    dumpVersion: '1.24',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.25) for design→contract proposal.',
+    dumpVersion: '1.25',
   },
 };
 dumps._degradations = degradations;
@@ -3077,6 +3077,14 @@ for (const page of figma.root.children) {
       // role or ARIA, so without this the reader guesses from a name/axis
       // table — and a guess can be WRONG, not merely absent (a hover/active
       // axis made Badge's <span> read as a <button>).
+      // dump v1.25: Figma property name -> the contract's prop name. The
+      // canvas carries only the design-facing spelling, so the reader had to
+      // canonicalise it and `children` came back as `content`.
+      ...(function () {
+        const raw = node.getSharedPluginData('ds_contracts', 'propNames');
+        if (!raw) return {};
+        try { return { propNames: JSON.parse(raw) }; } catch (e) { return {}; }
+      })(),
       ...(function () {
         const raw = node.getSharedPluginData('ds_contracts', 'semantics');
         if (!raw) return {};
