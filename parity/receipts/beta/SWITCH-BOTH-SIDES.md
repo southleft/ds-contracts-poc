@@ -43,10 +43,11 @@ first-party token corpus including `brand.default`.
    → React will. Do not invent the handler from the canvas.
 2. **Native control.** Authored mounts `input[type=checkbox][role=switch]`
    inside the track. Canvas never draws it. Proposed cannot invent it.
-3. **Identity drift.** Authored anchors `nodeId: 11:1286` / key `7936496…`.
-   Live set is `4:618` / `1a174ed…`. Same file, redrawn. Catalog / visual-
-   parity / `figma-sync` still pin the dead id — do not retarget those in
-   this close.
+3. **Catalog / script lag.** Authored anchors now point at the live set
+   (`4:618` / `1a174ed…`). `catalog/`, `figma-sync/41-switch.js`, and
+   visual-parity `subjects.ts` still pin the dead `11:1286` / `7936496…`.
+   That is snapshot lag, not a second live set. Do not retarget those
+   without a catalog regen.
 4. **Root extras the canvas does not carry as root tokens.** Authored root
    has `align: start`, `font-family`, and `color`. Propose omits MIN align
    (inversion rule) and puts color on `labelText`. Not a silent substitution.
