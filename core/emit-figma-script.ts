@@ -699,7 +699,7 @@ export function emitFigmaScript(contract: Contract, ctx: FigmaScriptCtx): string
 
 /**
  * The compiled engine over one token corpus: reuse it across contracts (the
- * CLI builds it once for all 51). All functions inside are the generator's
+ * CLI builds it once for the whole library). All functions inside are the generator's
  * own code, moved verbatim — evals/golden.json guards every emitted byte.
  */
 export function createFigmaEngine(input: FigmaEngineInput) {

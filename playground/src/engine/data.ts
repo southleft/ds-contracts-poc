@@ -48,7 +48,7 @@ export const tokenTreesForCode: unknown[] = [primitives, semantic, light, dark];
 export const tokenStylesheets = { base: tokensCss, dark: tokensDarkCss, brands: tokensBrandsCss };
 
 // ---------------------------------------------------------------------------
-// All 51 shipping contracts, schema-parsed at startup.
+// All shipping contracts, schema-parsed at startup.
 // ---------------------------------------------------------------------------
 
 const contractModules = import.meta.glob('../../../contracts/*.contract.json', {

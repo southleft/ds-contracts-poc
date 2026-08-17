@@ -15,7 +15,7 @@ browser. No backend, no analytics, no accounts.
 ## Principles
 
 1. **Same engine.** The playground imports the repo's `core/` modules — the
-   same code that generates the 51 shipping components. The golden manifest
+   same code that generates the shipping components. The golden manifest
    guards the refactor; if playground and CLI ever diverge, that's a bug.
 2. **Honest tiers.** Full token-aware contracts when variable names resolve;
    resolved literals + nearest-token reporting when they don't; inline-style
