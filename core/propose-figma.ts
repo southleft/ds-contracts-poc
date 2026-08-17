@@ -8363,11 +8363,9 @@ export function proposeFromDump(
     if (!element && !role) return null;
     return { element, role };
   })();
-  if (stampedSemantics) {
-    preNotes.push(
-      `semantics: read from the set's own \`ds_contracts/semantics\` stamp (element "${stampedSemantics.element ?? 'div'}"${stampedSemantics.role ? `, role "${stampedSemantics.role}"` : ''}) — the contract's declared host element, not the name/axis inference`,
-    );
-  }
+  const stampNote = stampedSemantics
+    ? `semantics: read from the set's own \`ds_contracts/semantics\` stamp (element "${stampedSemantics.element ?? 'div'}"${stampedSemantics.role ? `, role "${stampedSemantics.role}"` : ''}) — the contract's declared host element, not the name/axis inference`
+    : null;
 
   // Deterministic semantics inference (name/axis table — zero AI, see
   // inferSemantics). A detected interaction-state axis is the structural
@@ -8744,7 +8742,9 @@ export function proposeFromDump(
   // Refuse to emit an unusable proposal.
   ContractSchema.parse(contract);
   for (const stub of childStubs) ContractSchema.parse(stub);
-  if (inferred) {
+  if (stampNote) {
+    ctx.notes.unshift(stampNote);
+  } else if (inferred) {
     ctx.notes.unshift(inferred.note);
   } else {
     ctx.notes.unshift(`semantics.element defaulted to "div" — element/role/ARIA are not drawn on the canvas and the name/axis inference table matched nothing; set the real host element`);

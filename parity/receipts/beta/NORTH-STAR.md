@@ -49,7 +49,7 @@ this lane is the **eight Flowbite stems**, not a fifty-component kit.
 | Dump a set **this pipeline drew** → proposed contract | exists (`extract:figma`) |
 | Diff authored vs code-capture vs canvas properties | **done** — Flowbite `npm run parity:flowbite` |
 | First-party both-sides (Switch) | **done** — [SWITCH-BOTH-SIDES.md](./SWITCH-BOTH-SIDES.md) |
-| Name every standing gap | events never live on the canvas; dump cannot invent `onClick`; host guess without stamps; minted spacing; `UNSCORED-NO-ORIG-SHOT`; `FC-FONT-SUBSTRATE` |
+| Name every standing gap | events never live on the canvas; dump cannot invent `onClick`; native `input` not drawn; identity drift on Switch anchors; `UNSCORED-NO-ORIG-SHOT`; `FC-FONT-SUBSTRATE` |
 
 ### P2 — Scale (not this week)
 

@@ -21,6 +21,6 @@ not drift. The 13 that are present carry the expected Figma property kinds
   The canvas shows value/state as variants. Same rule as Flowbite.
 - Do not write `Y8Jhw6R49wTLuXZ0is2GmV`.
 - Switch both-sides dump → propose is done: [SWITCH-BOTH-SIDES.md](./SWITCH-BOTH-SIDES.md).
-  Props and token-bound paints align. Events, host, native input, and some
-  spacing/type tokens do not. Re-apply from the authored contract is the next
-  close (stamps), not inventing `onToggle` from the canvas.
+  Props, host (`<label>`), and token-bound paints/spacing align after
+  restamp. Events and the native `input` still do not come back from the
+  canvas. Do not invent `onToggle`.
