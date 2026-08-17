@@ -432,7 +432,9 @@ for (const dir of ['pristine', 'edited']) {
 // return `live: null` everywhere, and diff.ts treats a null `live` as "not
 // compared" — a silent, total downgrade of the surface this gate exists for.
 {
-  const canvas = await compileMockCanvas(path.join(ROOT, 'contracts'));
+  const canvas = await compileMockCanvas(path.join(ROOT, 'contracts'), [
+    path.join(FIXTURES, 'witness.contract.json'),
+  ]);
   const out = await runPlugin(canvas);
   const rows = out.sets.flatMap((s) => s.variants ?? []);
   assert(out.sets.length > 0 && rows.length > 0, `§0b the plugin returned sets with variant rows (${out.sets.length} sets, ${rows.length} rows)`);
@@ -490,8 +492,15 @@ for (const dir of ['pristine', 'edited']) {
   };
   const widened: string[] = [];
   for (const node of canvas.sets) {
-    const first = variantNodesOf(node)[0];
-    const defaultOnly = first ? ownersIn(first, new Set()) : new Set<string>();
+    // Recreate the OLD probe: defaultVariant (not children[0]). A set whose
+    // first child is a non-default that already hosts the extra instance
+    // would make children[0] look complete and hide the witness.
+    const defaultNode =
+      node.type === 'COMPONENT_SET'
+        ? ((node as FigmaNodeLike & { defaultVariant?: FigmaNodeLike }).defaultVariant ??
+          variantNodesOf(node)[0])
+        : node;
+    const defaultOnly = defaultNode ? ownersIn(defaultNode, new Set()) : new Set<string>();
     const everyVariant = new Set<string>();
     for (const v of variantNodesOf(node)) ownersIn(v, everyVariant);
     const extra = [...everyVariant].filter((o) => !defaultOnly.has(o));
@@ -675,8 +684,9 @@ mkdirSync(strippedDir, { recursive: true });
   writeFileSync(path.join(strippedDir, 'figma-components.json'), JSON.stringify(doc, null, 2));
 }
 const strippedRun = runDiffer(strippedDir, 'stripped');
+const strippedAbsent = strippedRun.unmeasured.filter((f) => f.driftKind === 'not-extracted');
 assert(
-  strippedRun.unmeasured.length === 1 && strippedRun.unmeasured[0].driftKind === 'not-extracted',
+  strippedAbsent.length === 1,
   `§3 a snapshot with NO \`variants\` lands exactly one not-extracted entry in the NOT-MEASURED bucket — got ${strippedRun.unmeasured.length}: ${strippedRun.unmeasured.map((f) => `${f.driftKind} ${f.subject}`).join(' , ')}`,
 );
 assert(
@@ -684,8 +694,8 @@ assert(
   '§3 the very same HAND-EDITED fixture, with the transport removed, reports NO canvas-edited finding — proving the verdict comes from the wire and not from somewhere else',
 );
 assert(
-  /NOT CHECKED|not checked/i.test(strippedRun.unmeasured[0].detail) && /3 of 3/.test(strippedRun.unmeasured[0].detail),
-  `§3 the gap says how many sets went unchecked and that they went UNCHECKED, not clean (got: ${strippedRun.unmeasured[0].detail})`,
+  /NOT CHECKED|not checked/i.test(strippedAbsent[0].detail) && /3 of 3/.test(strippedAbsent[0].detail),
+  `§3 the gap says how many sets went unchecked and that they went UNCHECKED, not clean (got: ${strippedAbsent[0].detail})`,
 );
 // THE BANNER IS THE FALSE RECEIPT. A reader who stops at line one must not
 // read the word "clean" over a surface nobody looked at. This is the pin that
@@ -698,14 +708,16 @@ assert(
   /NOT MEASURED/.test(strippedRun.stdout),
   `§3 the console names the NOT MEASURED section, not only report.json (a gap only a machine can see is a gap nobody reads). Got:\n${strippedRun.stdout.split('\n').slice(0, 6).join('\n')}`,
 );
-// …and the pristine fixture, which IS fully extracted, must carry an EMPTY
-// unmeasured bucket — otherwise §1's "clean" would be hiding behind the same
-// exemption.
+// …and the pristine fixture, which IS fully extracted on the canvas-variant
+// surface, must not carry a not-extracted gap — otherwise §1's "clean" would
+// be hiding behind the same exemption. Other named unmeasured surfaces
+// (slot-pre-native: the fixture predates native SLOT properties) are allowed;
+// they are not this section's subject.
 assert(
-  pristineRun.unmeasured.length === 0,
-  `§3 the fully-extracted fixture leaves the NOT-MEASURED bucket empty, so §1's clean verdict is not standing on an exemption (got ${pristineRun.unmeasured.length})`,
+  !pristineRun.unmeasured.some((f) => f.driftKind === 'not-extracted'),
+  `§3 the fully-extracted fixture has no not-extracted gap, so §1's clean verdict is not standing on an unread canvas (got ${pristineRun.unmeasured.map((f) => f.driftKind).join(', ')})`,
 );
-console.log(`  §3 absence named         ${strippedRun.unmeasured[0].detail.slice(0, 110)}… — and the "Parity clean" banner is refused`);
+console.log(`  §3 absence named         ${strippedAbsent[0].detail.slice(0, 110)}… — and the "Parity clean" banner is refused`);
 
 // ── §4 VERSION HONESTY (+ the unstamped branch) ────────────────────────────
 // Both are applied to the HAND-EDITED fixture on purpose: an incomparable
@@ -765,19 +777,16 @@ let compiledWant = '';
 const divergentRun = runDiffer(divergentDir, 'divergent');
 const divergent = divergentRun.canvas;
 const divergentInfo = divergentRun.unmeasured.filter((f) => f.driftKind === 'contract-divergent-informational');
+const sabotaged = divergentInfo.find((f) => f.subject === `${SUBJECT_SET} / ${SUBJECT_VARIANT}`);
 assert(
-  divergent.length === 0 && divergentInfo.length === 1,
-  `§5 mock-to-live contract divergence is visible but non-blocking pending a real-Figma compatibility receipt — blocking=${divergent.length}, informational=${divergentInfo.length}`,
+  divergent.length === 0 && sabotaged,
+  `§5 mock-to-live contract divergence is visible but non-blocking pending a real-Figma compatibility receipt — blocking=${divergent.length}, informational=${divergentInfo.length} (wanted subject ${SUBJECT_SET} / ${SUBJECT_VARIANT})`,
 );
 assert(
-  divergentInfo[0].subject === `${SUBJECT_SET} / ${SUBJECT_VARIANT}`,
-  `§5 the informational comparison names the variant (got "${divergentInfo[0].subject}")`,
+  sabotaged!.detail.includes(compiledWant),
+  `§5 the informational comparison quotes the fingerprint the OFFLINE COMPILE derived (${compiledWant}) — this pins that the compile actually ran. Got: ${sabotaged!.detail}`,
 );
-assert(
-  divergentInfo[0].detail.includes(compiledWant),
-  `§5 the informational comparison quotes the fingerprint the OFFLINE COMPILE derived (${compiledWant}) — this pins that the compile actually ran. Got: ${divergentInfo[0].detail}`,
-);
-console.log(`  §5 offline compile info  non-blocking contract divergence on ${divergentInfo[0].subject}, quoting ${compiledWant}`);
+console.log(`  §5 offline compile info  non-blocking contract divergence on ${sabotaged!.subject}, quoting ${compiledWant}`);
 
 // ── §6 THE PARTIAL-CHECKOUT CALLER ─────────────────────────────────────────
 // site/src/how-replays.ts:135 and evals/run.ts both run this differ from a

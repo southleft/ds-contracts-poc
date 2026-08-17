@@ -1,12 +1,12 @@
 {
  "platform": "linux",
  "architecture": "x64",
- "generatedAt": "2026-08-05T03:51:37.503Z",
- "headCommit": "6f09ba8ca79850a9b32523cda0ee0c1e744db3cc",
+ "generatedAt": "2026-08-17T00:36:54.236Z",
+ "headCommit": "46ccbfb0da17ac72e553833e893cb27b4e85238f",
  "epsilonPp": 0.1,
  "denominator": {
-  "contracts": 51,
-  "cells": 195,
+  "contracts": 56,
+  "cells": 200,
   "refusals": []
  },
  "rows": {
@@ -103,7 +103,7 @@
   "ds.banner :: Status=Error, Container=Card": {
    "status": "diffed",
    "masked": 0.25,
-   "unmasked": 5.54,
+   "unmasked": 5.7,
    "sizeCss": "1028x130",
    "sizeCanvas": "1280x128",
    "causeClass": "size-delta",
@@ -112,7 +112,7 @@
   "ds.banner :: Status=Error, Container=Section": {
    "status": "diffed",
    "masked": 0.25,
-   "unmasked": 5.54,
+   "unmasked": 5.7,
    "sizeCss": "1028x130",
    "sizeCanvas": "1280x128",
    "causeClass": "size-delta",
@@ -121,7 +121,7 @@
   "ds.banner :: Status=Info, Container=Card": {
    "status": "diffed",
    "masked": 0.2,
-   "unmasked": 5.62,
+   "unmasked": 5.84,
    "sizeCss": "1028x130",
    "sizeCanvas": "1280x128",
    "causeClass": "size-delta",
@@ -130,7 +130,7 @@
   "ds.banner :: Status=Info, Container=Section": {
    "status": "diffed",
    "masked": 0.2,
-   "unmasked": 5.62,
+   "unmasked": 5.84,
    "sizeCss": "1028x130",
    "sizeCanvas": "1280x128",
    "causeClass": "size-delta",
@@ -139,7 +139,7 @@
   "ds.banner :: Status=Success, Container=Card": {
    "status": "diffed",
    "masked": 0.21,
-   "unmasked": 5.58,
+   "unmasked": 5.75,
    "sizeCss": "1028x130",
    "sizeCanvas": "1280x128",
    "causeClass": "size-delta",
@@ -148,7 +148,7 @@
   "ds.banner :: Status=Success, Container=Section": {
    "status": "diffed",
    "masked": 0.21,
-   "unmasked": 5.58,
+   "unmasked": 5.75,
    "sizeCss": "1028x130",
    "sizeCanvas": "1280x128",
    "causeClass": "size-delta",
@@ -157,7 +157,7 @@
   "ds.banner :: Status=Warning, Container=Card": {
    "status": "diffed",
    "masked": 0.18,
-   "unmasked": 5.43,
+   "unmasked": 5.58,
    "sizeCss": "1028x130",
    "sizeCanvas": "1280x128",
    "causeClass": "size-delta",
@@ -166,11 +166,22 @@
   "ds.banner :: Status=Warning, Container=Section": {
    "status": "diffed",
    "masked": 0.18,
-   "unmasked": 5.43,
+   "unmasked": 5.58,
    "sizeCss": "1028x130",
    "sizeCanvas": "1280x128",
    "causeClass": "size-delta",
    "invariant": []
+  },
+  "ds.bento-grid :: BentoGrid": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "1376x1056",
+   "sizeCanvas": "1376x1056",
+   "causeClass": "empty-slot-geometry",
+   "invariant": [
+    "both-surfaces-blank: css ink 0%, canvas ink 0% of their own boxes — a 0-vs-0 comparison is VOID, not a pass"
+   ]
   },
   "ds.blockquote :: Blockquote": {
    "status": "diffed",
@@ -518,56 +529,56 @@
   },
   "ds.checkbox :: Value=Checked, Size=Medium": {
    "status": "diffed",
-   "masked": 2.89,
-   "unmasked": 12.43,
+   "masked": 0.86,
+   "unmasked": 3.1,
    "sizeCss": "480x70",
-   "sizeCanvas": "486x68",
-   "causeClass": "size-delta",
+   "sizeCanvas": "480x68",
+   "causeClass": null,
    "invariant": []
   },
   "ds.checkbox :: Value=Checked, Size=Small": {
    "status": "diffed",
-   "masked": 2.47,
-   "unmasked": 12.46,
+   "masked": 0.81,
+   "unmasked": 3.13,
    "sizeCss": "472x70",
-   "sizeCanvas": "478x68",
-   "causeClass": "size-delta",
+   "sizeCanvas": "472x68",
+   "causeClass": null,
    "invariant": []
   },
   "ds.checkbox :: Value=Indeterminate, Size=Medium": {
    "status": "diffed",
-   "masked": 2.63,
-   "unmasked": 12.36,
+   "masked": 0.88,
+   "unmasked": 3.12,
    "sizeCss": "480x70",
-   "sizeCanvas": "486x68",
-   "causeClass": "size-delta",
+   "sizeCanvas": "480x68",
+   "causeClass": null,
    "invariant": []
   },
   "ds.checkbox :: Value=Indeterminate, Size=Small": {
    "status": "diffed",
-   "masked": 2.25,
-   "unmasked": 12.4,
+   "masked": 0.85,
+   "unmasked": 3.14,
    "sizeCss": "472x70",
-   "sizeCanvas": "478x68",
-   "causeClass": "size-delta",
+   "sizeCanvas": "472x68",
+   "causeClass": null,
    "invariant": []
   },
   "ds.checkbox :: Value=Unchecked, Size=Medium": {
    "status": "diffed",
-   "masked": 3.52,
-   "unmasked": 12.62,
+   "masked": 1.18,
+   "unmasked": 3.2,
    "sizeCss": "480x70",
-   "sizeCanvas": "486x68",
-   "causeClass": "size-delta",
+   "sizeCanvas": "480x68",
+   "causeClass": null,
    "invariant": []
   },
   "ds.checkbox :: Value=Unchecked, Size=Small": {
    "status": "diffed",
-   "masked": 3.37,
-   "unmasked": 13.72,
+   "masked": 2.04,
+   "unmasked": 5.59,
    "sizeCss": "472x70",
-   "sizeCanvas": "478x66",
-   "causeClass": "size-delta",
+   "sizeCanvas": "472x66",
+   "causeClass": null,
    "invariant": []
   },
   "ds.citation :: Variant=Label": {
@@ -636,6 +647,17 @@
    "sizeCanvas": "476x70",
    "causeClass": "size-delta",
    "invariant": []
+  },
+  "ds.grid-gallery :: GridGallery": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "1376x128",
+   "sizeCanvas": "1376x96",
+   "causeClass": "size-delta",
+   "invariant": [
+    "both-surfaces-blank: css ink 0%, canvas ink 0% of their own boxes — a 0-vs-0 comparison is VOID, not a pass"
+   ]
   },
   "ds.heading :: Level=H1, Size=Large": {
    "status": "diffed",
@@ -1003,6 +1025,17 @@
    "causeClass": "size-delta",
    "invariant": []
   },
+  "ds.page-shell :: PageShell": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "1376x1056",
+   "sizeCanvas": "1376x1056",
+   "causeClass": "empty-slot-geometry",
+   "invariant": [
+    "both-surfaces-blank: css ink 0%, canvas ink 0% of their own boxes — a 0-vs-0 comparison is VOID, not a pass"
+   ]
+  },
   "ds.pagination :: Variant=Compact": {
    "status": "diffed",
    "masked": 0,
@@ -1110,6 +1143,17 @@
    "sizeCanvas": "640x66",
    "causeClass": "size-delta",
    "invariant": []
+  },
+  "ds.sidebar-layout :: SidebarLayout": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "1376x96",
+   "sizeCanvas": "1376x96",
+   "causeClass": "empty-slot-geometry",
+   "invariant": [
+    "both-surfaces-blank: css ink 0%, canvas ink 0% of their own boxes — a 0-vs-0 comparison is VOID, not a pass"
+   ]
   },
   "ds.skeleton :: Variant=Circle": {
    "status": "diffed",
@@ -1236,20 +1280,20 @@
   },
   "ds.switch :: Value=Off": {
    "status": "diffed",
-   "masked": 2.06,
-   "unmasked": 12.89,
+   "masked": 0.72,
+   "unmasked": 3.35,
    "sizeCss": "415x70",
-   "sizeCanvas": "420x68",
-   "causeClass": "size-delta",
+   "sizeCanvas": "415x68",
+   "causeClass": null,
    "invariant": []
   },
   "ds.switch :: Value=On": {
    "status": "diffed",
-   "masked": 3.69,
-   "unmasked": 15.03,
+   "masked": 2.28,
+   "unmasked": 5.79,
    "sizeCss": "415x70",
-   "sizeCanvas": "420x66",
-   "causeClass": "size-delta",
+   "sizeCanvas": "415x66",
+   "causeClass": null,
    "invariant": []
   },
   "ds.tab :: State=Default": {
@@ -1773,6 +1817,17 @@
    "sizeCanvas": "174x66",
    "causeClass": "text-raster",
    "invariant": []
+  },
+  "ds.two-column :: TwoColumn": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "1376x96",
+   "sizeCanvas": "1376x96",
+   "causeClass": "empty-slot-geometry",
+   "invariant": [
+    "both-surfaces-blank: css ink 0%, canvas ink 0% of their own boxes — a 0-vs-0 comparison is VOID, not a pass"
+   ]
   },
   "ds.typeahead-item :: TypeaheadItem": {
    "status": "diffed",

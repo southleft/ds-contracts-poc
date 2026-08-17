@@ -270,6 +270,13 @@ const INVARIANT_TRIAGE: Record<string, string> = {
   'ds.stack :: Gap=Large :: both-surfaces-blank': INLINE_STACK_CAUSE(),
   'ds.stack :: Gap=Medium :: both-surfaces-blank': INLINE_STACK_CAUSE(),
   'ds.stack :: Gap=Small :: both-surfaces-blank': INLINE_STACK_CAUSE(),
+  // A2 composition stems — same empty-fixture class as inline/stack. The
+  // catalog supplies no children, so both surfaces are ink-blank by construction.
+  'ds.bento-grid :: BentoGrid :: both-surfaces-blank': INLINE_STACK_CAUSE(),
+  'ds.grid-gallery :: GridGallery :: both-surfaces-blank': INLINE_STACK_CAUSE(),
+  'ds.page-shell :: PageShell :: both-surfaces-blank': INLINE_STACK_CAUSE(),
+  'ds.sidebar-layout :: SidebarLayout :: both-surfaces-blank': INLINE_STACK_CAUSE(),
+  'ds.two-column :: TwoColumn :: both-surfaces-blank': INLINE_STACK_CAUSE(),
 };
 
 function INLINE_STACK_CAUSE(): string {

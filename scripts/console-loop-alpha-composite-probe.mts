@@ -31,6 +31,7 @@
  */
 import { PNG } from 'pngjs';
 import { alignPair, scoreCell, compositeOverWhite } from '../extract/figma/canvas-gate/score.js';
+// @ts-expect-error TS7016 — score-policy is a frozen .mjs duplicate of developed-score; no types shipped
 import { scoreStemPair } from '../extract/figma/visual-truth/score-policy.mjs';
 
 const CELL_W = 61;

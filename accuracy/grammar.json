@@ -34,22 +34,22 @@
     {
       "id": "css-dom",
       "path": "conformance/MANIFEST.json",
-      "count": 53,
+      "count": 82,
       "expectations": {
-        "CARRIED": 22,
-        "LOWERED": 2,
-        "REFUSED": 11,
+        "CARRIED": 42,
+        "LOWERED": 4,
+        "REFUSED": 18,
         "UNSUPPORTED": 18
       }
     },
     {
       "id": "canvas",
       "path": "extract/figma/conformance/MANIFEST.json",
-      "count": 91,
+      "count": 116,
       "expectations": {
-        "CARRIED": 72,
-        "LEDGERED": 11,
-        "REFUSED": 8
+        "CARRIED": 93,
+        "LEDGERED": 14,
+        "REFUSED": 9
       }
     },
     {

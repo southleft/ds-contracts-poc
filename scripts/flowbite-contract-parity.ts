@@ -157,7 +157,9 @@ for (const stem of stems) {
   if (canvas) {
     const authoredFigma = (a.props ?? [])
       .map((p) => p.bindings?.figma)
-      .filter((f): f is NonNullable<typeof f> => Boolean(f?.property && f.kind && f.kind !== 'NONE'));
+      .filter((f): f is NonNullable<typeof f> & { property: string; kind: string } =>
+        Boolean(f?.property && f.kind && f.kind !== 'NONE'),
+      );
     if (a.figmaStatePreviews && (a.states?.length ?? 0) > 0) {
       authoredFigma.push({ kind: 'VARIANT', property: 'State' });
     }

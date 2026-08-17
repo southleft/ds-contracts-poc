@@ -25,8 +25,7 @@ const COMPONENTS = [
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "MIN",
-            "counter": "MIN",
-            "stretchChildren": true
+            "counter": "CENTER"
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-8",
@@ -140,8 +139,7 @@ const COMPONENTS = [
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "MIN",
-            "counter": "MIN",
-            "stretchChildren": true
+            "counter": "CENTER"
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-8",
@@ -255,8 +253,7 @@ const COMPONENTS = [
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "MIN",
-            "counter": "MIN",
-            "stretchChildren": true
+            "counter": "CENTER"
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-8",
@@ -370,8 +367,7 @@ const COMPONENTS = [
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "MIN",
-            "counter": "MIN",
-            "stretchChildren": true
+            "counter": "CENTER"
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-8",
@@ -485,8 +481,7 @@ const COMPONENTS = [
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "MIN",
-            "counter": "MIN",
-            "stretchChildren": true
+            "counter": "CENTER"
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-8",
@@ -600,8 +595,7 @@ const COMPONENTS = [
           "layout": {
             "mode": "HORIZONTAL",
             "primary": "MIN",
-            "counter": "MIN",
-            "stretchChildren": true
+            "counter": "CENTER"
           },
           "bindings": {
             "bottomLeftRadius": "imported/shared/size-8",
@@ -712,7 +706,8 @@ const COMPONENTS = [
       "Label": "label"
     },
     "semantics": {
-      "element": "button"
+      "element": "button",
+      "role": "switch"
     },
     "colW": 380
   }

@@ -33,6 +33,7 @@ import {
   ShapeSchema,
   VisibleWhenSchema,
   EventSchema,
+  GridPlacementSchema,
   STYLES_WHEN_ALLOWED,
   REF_OVERRIDE_CHANNELS,
 } from '../../../scripts/contract-schema.js';
@@ -464,17 +465,56 @@ function layoutPage(): { route: string; html: string } {
       'layout',
       'The layout block',
       ['generated', 'curated'],
-      `<p>One vocabulary, two projections: flexbox on the code side, auto-layout on the canvas. The properties are the intersection both surfaces can honor — that is the point.</p>` +
+      `<p>One vocabulary, two projections: flexbox on the code side, auto-layout on the canvas; <code>display: grid</code> is the third spelling (declared-track grids — see <a href="#grid">Grid</a>). The properties are the intersection both surfaces can honor — that is the point.</p>` +
         fieldList(LayoutSchema as AnySchema, {
-          display: '<code>flex</code> or <code>inline-flex</code> (code); auto-layout either way on the canvas.',
-          direction: 'Row or column. Reversed directions exist only as per-variant overrides (see below) — the canvas has no reverse, so they are compiled away.',
-          align: 'Cross-axis alignment.',
-          justify: 'Main-axis distribution.',
+          display: '<code>flex</code>, <code>inline-flex</code>, or <code>grid</code> (code). Flex spellings become auto-layout on the canvas; <code>grid</code> becomes a GRID frame with declared tracks.',
+          direction: 'Row or column. Reversed directions exist only as per-variant overrides (see below) — the canvas has no reverse, so they are compiled away. Flex-only — schema-invalid with <code>display: grid</code>.',
+          align: 'Cross-axis alignment. Flex-only — schema-invalid with <code>display: grid</code> (per-cell alignment lives on <code>placement</code>).',
+          justify: 'Main-axis distribution. Flex-only — schema-invalid with <code>display: grid</code>.',
           grow: 'The part takes remaining space — code: <code>flex: 1 1 auto</code>; canvas: fill container.',
-          overlap: 'Children overlap (AvatarGroup): the gap token is applied as a <em>negative</em> child margin in CSS and as negative item spacing on the canvas.',
-          wrap: 'v15: children wrap (tag groups, chip rows) — code: <code>flex-wrap: wrap</code>; canvas: native <code>layoutWrap: WRAP</code>.',
+          overlap: 'Children overlap (AvatarGroup): the gap token is applied as a <em>negative</em> child margin in CSS and as negative item spacing on the canvas. Flex-only.',
+          wrap: 'v15: children wrap (tag groups, chip rows) — code: <code>flex-wrap: wrap</code>; canvas: native <code>layoutWrap: WRAP</code>. Flex-only.',
+          rows: 'G1: declared row track list. Each track is exactly one of <code>{px}</code>, <code>{fr}</code>, or <code>{fit: true}</code> — the three spellings the Plugin API round-trips (FIXED / FLEX / HUG). Required on a grid unless <code>flow: "row"</code> lets the emitter derive them.',
+          columns: 'G1: declared column track list — required on every <code>display: grid</code>. Same track spellings as <code>rows</code>.',
+          gap: 'G1: independent <code>row</code> / <code>column</code> gaps (px or token refs). There is no single-value shorthand — proposers normalize CSS <code>gap</code> into the pair.',
+          areas: 'G4: named areas as slot anchors. The key is simultaneously a slot name and a placement rect (row/column/spans). A part with the same name takes the area; declaring both an area and an explicit <code>placement</code> for one name is schema-invalid.',
+          flow: 'G5: the one bounded auto-flow the canvas has — exactly <code>"row"</code>. Placement fact is child order. <code>column</code> and <code>dense</code> refuse by name.',
         }) +
         shippingExample('avatar-group.contract.json', { paths: ['anatomy.root.parts.stack.layout', 'anatomy.root.parts.stack.tokens'] }, 'overlap — the negative-spacing projection'),
+    ),
+    section(
+      'grid',
+      'Grid — declared tracks, areas, flow',
+      ['generated', 'curated'],
+      `<p>A2 grid is a first-class layout mode, not a flex fallback. <code>display: "grid"</code> requires a declared <code>columns</code> track list; <code>rows</code> are required unless <code>flow: "row"</code> lets the emitter derive them. Flex facts (<code>direction</code>, <code>align</code>, <code>justify</code>, <code>wrap</code>, <code>overlap</code>) are schema-invalid on a grid. Both surfaces carry the same tracks, gap pair, and cell rects — Figma has no native area names, so the contract owns them.</p>` +
+        refusals('Refusals:', [
+          '<code>display: grid</code> without <code>columns</code>',
+          'flex-only fields together with <code>display: grid</code>',
+          '<code>flow: "row"</code> together with <code>areas</code> — a grid declares areas or flow, never both',
+          'track spellings outside <code>{px}</code> / <code>{fr}</code> / <code>{fit: true}</code> (percent, minmax, repeat, zero, negative)',
+          '<code>flow</code> values other than <code>"row"</code> (<code>column</code>, <code>dense</code>)',
+        ]) +
+        shippingExample('bento-grid.contract.json', { paths: ['anatomy.root.layout'] }, 'declared tracks + named areas (G1/G4)'),
+    ),
+    section(
+      'placement',
+      'Grid cell placement',
+      ['generated', 'curated'],
+      `<p><code>part.placement</code> is legal only on a child whose parent declares <code>layout.display: "grid"</code>. Anchors are 0-based; spans default to 1. Alignment vocabulary is <code>auto | start | center | end</code> — <code>stretch</code> is spelled as fill sizing, <code>baseline</code> refuses by name. A part named by <code>layout.areas</code> must not also carry an explicit placement (the area name is the anchor).</p>` +
+        fieldList(GridPlacementSchema as AnySchema, {
+          row: '0-based row anchor. Negative indexes refuse by name.',
+          column: '0-based column anchor.',
+          rowSpan: 'Row span, default 1. Must stay inside the declared track list.',
+          columnSpan: 'Column span, default 1.',
+          alignX: 'In-cell horizontal alignment: auto / start / center / end.',
+          alignY: 'In-cell vertical alignment: auto / start / center / end.',
+        }) +
+        refusals('Refusals:', [
+          'placement on a part whose parent is not <code>display: grid</code>',
+          'placement together with a same-name area (one source of truth)',
+          'placement on an out-of-flow / overlay / slot-wrapper part',
+          'occupancy collision or a span that walks off the declared tracks',
+        ]),
     ),
     section(
       'hugs-below-max-width',
@@ -501,7 +541,7 @@ function layoutPage(): { route: string; html: string } {
   ].join('');
   return specPage(
     'layout',
-    'Flexbox and auto-layout are the same declaration here — plus per-variant overrides for the cases where a value legitimately deviates.',
+    'Flexbox and auto-layout are the same declaration here; display:grid is the third spelling — plus per-variant overrides for the cases where a value legitimately deviates.',
     body,
   );
 }

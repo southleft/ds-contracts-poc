@@ -192,6 +192,32 @@ reg('layout', 'layout', [
   // v15 (S4): flex-wrap — native on both surfaces.
   'layout.wrap',
 ]);
+// A2 grid (G1–G5): declared tracks, independent gap pair, named areas, row flow.
+reg('layout', 'grid', [
+  'layout.rows',
+  'layout.rows.px',
+  'layout.rows.fr',
+  'layout.rows.fit',
+  'layout.columns',
+  'layout.columns.px',
+  'layout.columns.fr',
+  'layout.columns.fit',
+  'layout.gap',
+  'layout.gap.row',
+  'layout.gap.column',
+  'layout.areas',
+  'layout.flow',
+]);
+// G2: explicit cell on a child whose parent is display:grid.
+reg('layout', 'placement', [
+  'part.placement',
+  'part.placement.row',
+  'part.placement.column',
+  'part.placement.rowSpan',
+  'part.placement.columnSpan',
+  'part.placement.alignX',
+  'part.placement.alignY',
+]);
 // v16: MEASURED sizing evidence — qualifies a part's `max-width` channel.
 reg('layout', 'hugs-below-max-width', ['part.hugsBelowMaxWidth']);
 reg('layout', 'layout-by-prop', [

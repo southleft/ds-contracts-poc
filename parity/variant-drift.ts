@@ -170,7 +170,10 @@ export interface MockCanvas {
  *  `contractsDir`. The path core/canvas-binding-check.ts already uses.
  *
  *  No Figma, no network. ~0.7s for the 51 committed contracts, measured. */
-export async function compileMockCanvas(contractsDir: string): Promise<MockCanvas> {
+export async function compileMockCanvas(
+  contractsDir: string,
+  extraContractFiles: string[] = [],
+): Promise<MockCanvas> {
   const bundle = await buildEngineBundle();
   const { figma, root } = createFigmaMock();
   const sandbox: Record<string, unknown> = {
@@ -191,14 +194,21 @@ export async function compileMockCanvas(contractsDir: string): Promise<MockCanva
     vm.runInContext(`(async () => {\n${code}\n})()`, scriptContext, { timeout: 300_000 });
 
   const parsedContracts: unknown[] = [];
-  for (const file of readdirSync(contractsDir).filter((f) => f.endsWith('.contract.json')).sort()) {
-    const parsed = DSC.parseIncomingText(readFileSync(path.join(contractsDir, file), 'utf8')) as {
+  const contractFiles = [
+    ...readdirSync(contractsDir)
+      .filter((f) => f.endsWith('.contract.json'))
+      .sort()
+      .map((f) => path.join(contractsDir, f)),
+    ...extraContractFiles,
+  ];
+  for (const file of contractFiles) {
+    const parsed = DSC.parseIncomingText(readFileSync(file, 'utf8')) as {
       ok: boolean;
       kind?: string;
       contracts?: unknown[];
     };
     if (!parsed.ok || parsed.kind !== 'contract' || !parsed.contracts) {
-      throw new Error(`variant-drift: ${file} does not parse as a contract document`);
+      throw new Error(`variant-drift: ${path.basename(file)} does not parse as a contract document`);
     }
     parsedContracts.push(...parsed.contracts);
   }

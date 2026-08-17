@@ -1,0 +1,69 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "ds.variant-drift-witness",
+  "name": "VariantDriftWitness",
+  "version": "1.0.0",
+  "status": "draft",
+  "description": "Gate fixture for variant-drift §0b only — not a shipping component. A Badge instance exists only on Show=On; the default Show=Off hosts none. The live first-party corpus no longer has this shape (icon glyphs are SVG nodes, and every shipping component-ref sits on every variant), so the every-variant nestedInstances walk would be untested without this file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "show",
+      "description": "Whether the nested Badge instance is present.",
+      "type": {
+        "enum": ["off", "on"]
+      },
+      "default": "off",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Show",
+          "values": {
+            "off": "Off",
+            "on": "On"
+          }
+        },
+        "code": {
+          "prop": "show"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "parts": {
+        "nested": {
+          "description": "Badge instance present only when Show=On.",
+          "visibleWhen": {
+            "prop": "show",
+            "equals": "on"
+          },
+          "component": {
+            "id": "ds.badge",
+            "props": {
+              "variant": "info"
+            }
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "parity/fixtures/variant-drift/VariantDriftWitness",
+      "export": "VariantDriftWitness"
+    }
+  }
+}

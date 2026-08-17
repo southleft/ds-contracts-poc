@@ -54,6 +54,7 @@ const OUT_FOR: Record<string, string> = {
   'mui.json': 'extract/computed/out/mui', 'carbon.json': 'extract/computed/out/carbon',
   'altitude.json': 'extract/computed/out/altitude', 'astryx.json': 'extract/computed/out/astryx',
   'tailwind.json': 'extract/computed/out/tailwind',
+  'fluent.json': 'extract/computed/out/fluent', 'shadcn.json': 'extract/computed/out/shadcn',
 };
 
 const failures: string[] = [];
