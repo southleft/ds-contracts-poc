@@ -227,6 +227,8 @@
           "description": "Promoted from the computed floor (round 4): rendered anatomy div|Collapse-root.Collapse-vertical — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "block",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
             "transition-duration": "0.3s",
             "transition-property": "height",
             "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"

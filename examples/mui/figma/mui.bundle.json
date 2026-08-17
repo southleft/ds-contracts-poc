@@ -7776,6 +7776,14 @@
             "line-height": {
               "$value": "20px",
               "$type": "dimension"
+            },
+            "width": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "height": {
+              "$value": "40px",
+              "$type": "dimension"
             }
           }
         },
@@ -7888,6 +7896,34 @@
             "min-height": {
               "$value": "36px",
               "$type": "dimension"
+            },
+            "width": {
+              "small": {
+                "$value": "40px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "48px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "56px",
+                "$type": "dimension"
+              }
+            },
+            "height": {
+              "small": {
+                "$value": "40px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "48px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "56px",
+                "$type": "dimension"
+              }
             },
             "z-index": {
               "$value": "1050",
@@ -10582,6 +10618,8 @@
               "description": "Promoted from the computed floor (round 4): rendered anatomy div|Collapse-root.Collapse-vertical — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
                 "transition-duration": "0.3s",
                 "transition-property": "height",
                 "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
@@ -11820,7 +11858,9 @@
             "left": "{imported.shared.size-0}",
             "line-height": "{imported.avatar.root.line-height}",
             "right": "{imported.shared.size-0}",
-            "top": "{imported.shared.size-0}"
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.avatar.root.width}",
+            "height": "{imported.avatar.root.height}"
           },
           "tokensByProp": [
             {
@@ -13970,19 +14010,25 @@
                   "border-bottom-left-radius": "{imported.fab.root.border-bottom-left-radius.large}",
                   "border-bottom-right-radius": "{imported.fab.root.border-bottom-right-radius.large}",
                   "border-top-left-radius": "{imported.fab.root.border-top-left-radius.large}",
-                  "border-top-right-radius": "{imported.fab.root.border-top-right-radius.large}"
+                  "border-top-right-radius": "{imported.fab.root.border-top-right-radius.large}",
+                  "width": "{imported.fab.root.width.large}",
+                  "height": "{imported.fab.root.height.large}"
                 },
                 "medium": {
                   "border-bottom-left-radius": "{imported.fab.root.border-bottom-left-radius.medium}",
                   "border-bottom-right-radius": "{imported.fab.root.border-bottom-right-radius.medium}",
                   "border-top-left-radius": "{imported.fab.root.border-top-left-radius.medium}",
-                  "border-top-right-radius": "{imported.fab.root.border-top-right-radius.medium}"
+                  "border-top-right-radius": "{imported.fab.root.border-top-right-radius.medium}",
+                  "width": "{imported.fab.root.width.medium}",
+                  "height": "{imported.fab.root.height.medium}"
                 },
                 "small": {
                   "border-bottom-left-radius": "{imported.fab.root.border-bottom-left-radius.small}",
                   "border-bottom-right-radius": "{imported.fab.root.border-bottom-right-radius.small}",
                   "border-top-left-radius": "{imported.fab.root.border-top-left-radius.small}",
-                  "border-top-right-radius": "{imported.fab.root.border-top-right-radius.small}"
+                  "border-top-right-radius": "{imported.fab.root.border-top-right-radius.small}",
+                  "width": "{imported.fab.root.width.small}",
+                  "height": "{imported.fab.root.height.small}"
                 }
               }
             }
@@ -14571,8 +14617,7 @@
           "tokens": {
             "font-size": "{imported.link.root.font-size}",
             "font-weight": "{imported.link.root.font-weight}",
-            "text-decoration-color": "{imported.link.root.text-decoration-color.{color}.{underline}}",
-            "width": "{imported.link.root.width}"
+            "text-decoration-color": "{imported.link.root.text-decoration-color.{color}.{underline}}"
           },
           "states": {
             "active": {

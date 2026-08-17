@@ -7838,7 +7838,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       }
       const batch = run(process.execPath, ['examples/mui/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`mui genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      if (!/mock-proven \(27 sets: Button\(75\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(28\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\), Checkbox\(3\), Table\(2\), InputAdornment\(2\), TextField\(6\), Avatar\(3\), Fab\(9\), IconButton\(9\), CircularProgress\(2\), LinearProgress\(2\), Alert\(12\), Badge\(14\), Divider\(3\), Link\(42\), Paper\(8\), Drawer\(2\), Radio\(14\), Select\(2\), Snackbar\(3\); standalone: TablePagination, Menu, Tooltip, Breadcrumbs; 2136 variables\)/.test(batch.out)) {
+      if (!/mock-proven \(27 sets: Button\(75\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(28\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\), Checkbox\(3\), Table\(2\), InputAdornment\(2\), TextField\(6\), Avatar\(3\), Fab\(9\), IconButton\(9\), CircularProgress\(2\), LinearProgress\(2\), Alert\(12\), Badge\(14\), Divider\(3\), Link\(42\), Paper\(8\), Drawer\(2\), Radio\(14\), Select\(2\), Snackbar\(3\); standalone: TablePagination, Menu, Tooltip, Breadcrumbs; 2144 variables\)/.test(batch.out)) {
         throw new Error(`mui genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // FOREIGN-TOKEN BUNDLE (the JSON-only payload): `figma bundle` is
@@ -7863,7 +7863,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (runA !== runB) throw new Error('figma bundle is NOT byte-deterministic — two builds from identical inputs differ');
       const committed = readFileSync(path.join(ROOT, 'examples/mui/figma/mui.bundle.json'), 'utf8');
       if (runA !== committed) throw new Error('committed examples/mui/figma/mui.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
-      console.log('mui-figma-genesis: 31/31 Emotion-runtime scripts referee+execute headless (273 variants — Wave 5 denominator; state-plane projection: Switch 14→28 on Checked, Button 63→75 on State preview); token sync 2136 variables incl. 134 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 22 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
+      console.log('mui-figma-genesis: 31/31 Emotion-runtime scripts referee+execute headless (273 variants — Wave 5 denominator; state-plane projection: Switch 14→28 on Checked, Button 63→75 on State preview); token sync 2144 variables incl. 134 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 22 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
     },
   },
   {

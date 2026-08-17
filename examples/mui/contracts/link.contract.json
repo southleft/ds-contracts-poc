@@ -103,8 +103,7 @@
       "tokens": {
         "font-size": "{imported.link.root.font-size}",
         "font-weight": "{imported.link.root.font-weight}",
-        "text-decoration-color": "{imported.link.root.text-decoration-color.{color}.{underline}}",
-        "width": "{imported.link.root.width}"
+        "text-decoration-color": "{imported.link.root.text-decoration-color.{color}.{underline}}"
       },
       "states": {
         "active": {

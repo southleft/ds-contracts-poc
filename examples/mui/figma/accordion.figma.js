@@ -176,6 +176,7 @@ const COMPONENTS = [
                 "px": 288,
                 "varName": "imported/accordion/collapse-root/width/elevation"
               },
+              "clipsContent": true,
               "children": [
                 {
                   "type": "frame",
@@ -432,6 +433,7 @@ const COMPONENTS = [
                 "px": 288,
                 "varName": "imported/accordion/collapse-root/width/elevation"
               },
+              "clipsContent": true,
               "children": [
                 {
                   "type": "frame",
@@ -653,6 +655,7 @@ const COMPONENTS = [
                 "px": 286,
                 "varName": "imported/accordion/collapse-root/width/outlined"
               },
+              "clipsContent": true,
               "children": [
                 {
                   "type": "frame",
@@ -874,6 +877,7 @@ const COMPONENTS = [
                 "px": 286,
                 "varName": "imported/accordion/collapse-root/width/outlined"
               },
+              "clipsContent": true,
               "children": [
                 {
                   "type": "frame",

@@ -77,7 +77,9 @@
         "left": "{imported.shared.size-0}",
         "line-height": "{imported.avatar.root.line-height}",
         "right": "{imported.shared.size-0}",
-        "top": "{imported.shared.size-0}"
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.avatar.root.width}",
+        "height": "{imported.avatar.root.height}"
       },
       "tokensByProp": [
         {

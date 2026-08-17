@@ -29,6 +29,14 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/avatar/root/background-color",
+          "fixedWidth": {
+            "px": 40,
+            "varName": "imported/avatar/root/width"
+          },
+          "fixedHeight": {
+            "px": 40,
+            "varName": "imported/avatar/root/height"
+          },
           "bindings": {
             "bottomLeftRadius": "imported/avatar/root/border-bottom-left-radius/circular",
             "bottomRightRadius": "imported/avatar/root/border-bottom-right-radius/circular",
@@ -70,6 +78,14 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/avatar/root/background-color",
+          "fixedWidth": {
+            "px": 40,
+            "varName": "imported/avatar/root/width"
+          },
+          "fixedHeight": {
+            "px": 40,
+            "varName": "imported/avatar/root/height"
+          },
           "bindings": {
             "bottomLeftRadius": "imported/avatar/root/border-bottom-left-radius/rounded",
             "bottomRightRadius": "imported/avatar/root/border-bottom-right-radius/rounded",
@@ -111,6 +127,14 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/avatar/root/background-color",
+          "fixedWidth": {
+            "px": 40,
+            "varName": "imported/avatar/root/width"
+          },
+          "fixedHeight": {
+            "px": 40,
+            "varName": "imported/avatar/root/height"
+          },
           "bindings": {
             "bottomLeftRadius": "imported/avatar/root/border-bottom-left-radius/square",
             "bottomRightRadius": "imported/avatar/root/border-bottom-right-radius/square",

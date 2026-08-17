@@ -29,10 +29,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -61,10 +58,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -93,10 +87,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -125,10 +116,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -157,10 +145,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -189,10 +174,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -221,10 +203,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -253,10 +232,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -285,10 +261,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -317,10 +290,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -349,10 +319,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -381,10 +348,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -413,10 +377,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -445,10 +406,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -477,10 +435,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -509,10 +464,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -541,10 +493,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -573,10 +522,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -605,10 +551,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -637,10 +580,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -669,10 +609,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -711,15 +648,12 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
           "stroke": "imported/link/root/outline-color-state-focus-visible",
           "strokeOutside": true,
           "bindings": {
             "strokeWeight": "imported/link/root/outline-width-state-focus-visible"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -748,15 +682,12 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
           "stroke": "imported/link/root/outline-color-state-focus-visible",
           "strokeOutside": true,
           "bindings": {
             "strokeWeight": "imported/link/root/outline-width-state-focus-visible"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -785,15 +716,12 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
           "stroke": "imported/link/root/outline-color-state-focus-visible",
           "strokeOutside": true,
           "bindings": {
             "strokeWeight": "imported/link/root/outline-width-state-focus-visible"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -822,15 +750,12 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
           "stroke": "imported/link/root/outline-color-state-focus-visible",
           "strokeOutside": true,
           "bindings": {
             "strokeWeight": "imported/link/root/outline-width-state-focus-visible"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -859,15 +784,12 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
           "stroke": "imported/link/root/outline-color-state-focus-visible",
           "strokeOutside": true,
           "bindings": {
             "strokeWeight": "imported/link/root/outline-width-state-focus-visible"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -896,15 +818,12 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
           "stroke": "imported/link/root/outline-color-state-focus-visible",
           "strokeOutside": true,
           "bindings": {
             "strokeWeight": "imported/link/root/outline-width-state-focus-visible"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -933,15 +852,12 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
           "stroke": "imported/link/root/outline-color-state-focus-visible",
           "strokeOutside": true,
           "bindings": {
             "strokeWeight": "imported/link/root/outline-width-state-focus-visible"
           },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -970,10 +886,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -1002,10 +915,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -1034,10 +944,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -1066,10 +973,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -1098,10 +1002,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -1130,10 +1031,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -1162,10 +1060,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -1194,10 +1089,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -1226,10 +1118,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -1258,10 +1147,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -1290,10 +1176,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -1322,10 +1205,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -1354,10 +1234,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -1386,10 +1263,7 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fixedWidth": {
-            "px": 30.2188,
-            "varName": "imported/link/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "text",

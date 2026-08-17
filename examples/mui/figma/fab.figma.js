@@ -37,7 +37,6 @@ const COMPONENTS = [
             "strokeLeftWeight": "imported/shared/size-0",
             "strokeRightWeight": "imported/shared/size-0",
             "strokeTopWeight": "imported/shared/size-0",
-            "minHeight": "imported/fab/root/min-height",
             "minWidth": "imported/shared/size-0",
             "paddingBottom": "imported/shared/size-0",
             "paddingLeft": "imported/shared/size-0",
@@ -85,6 +84,14 @@ const COMPONENTS = [
             }
           ],
           "fill": "imported/fab/root/background-color/default",
+          "fixedWidth": {
+            "px": 56,
+            "varName": "imported/fab/root/width/large"
+          },
+          "fixedHeight": {
+            "px": 56,
+            "varName": "imported/fab/root/height/large"
+          },
           "children": [
             {
               "type": "text",
@@ -125,7 +132,6 @@ const COMPONENTS = [
             "strokeLeftWeight": "imported/shared/size-0",
             "strokeRightWeight": "imported/shared/size-0",
             "strokeTopWeight": "imported/shared/size-0",
-            "minHeight": "imported/fab/root/min-height",
             "minWidth": "imported/shared/size-0",
             "paddingBottom": "imported/shared/size-0",
             "paddingLeft": "imported/shared/size-0",
@@ -173,6 +179,14 @@ const COMPONENTS = [
             }
           ],
           "fill": "imported/fab/root/background-color/primary",
+          "fixedWidth": {
+            "px": 56,
+            "varName": "imported/fab/root/width/large"
+          },
+          "fixedHeight": {
+            "px": 56,
+            "varName": "imported/fab/root/height/large"
+          },
           "children": [
             {
               "type": "text",
@@ -213,7 +227,6 @@ const COMPONENTS = [
             "strokeLeftWeight": "imported/shared/size-0",
             "strokeRightWeight": "imported/shared/size-0",
             "strokeTopWeight": "imported/shared/size-0",
-            "minHeight": "imported/fab/root/min-height",
             "minWidth": "imported/shared/size-0",
             "paddingBottom": "imported/shared/size-0",
             "paddingLeft": "imported/shared/size-0",
@@ -261,6 +274,14 @@ const COMPONENTS = [
             }
           ],
           "fill": "imported/fab/root/background-color/secondary",
+          "fixedWidth": {
+            "px": 56,
+            "varName": "imported/fab/root/width/large"
+          },
+          "fixedHeight": {
+            "px": 56,
+            "varName": "imported/fab/root/height/large"
+          },
           "children": [
             {
               "type": "text",
@@ -301,7 +322,6 @@ const COMPONENTS = [
             "strokeLeftWeight": "imported/shared/size-0",
             "strokeRightWeight": "imported/shared/size-0",
             "strokeTopWeight": "imported/shared/size-0",
-            "minHeight": "imported/fab/root/min-height",
             "minWidth": "imported/shared/size-0",
             "paddingBottom": "imported/shared/size-0",
             "paddingLeft": "imported/shared/size-0",
@@ -349,6 +369,14 @@ const COMPONENTS = [
             }
           ],
           "fill": "imported/fab/root/background-color/default",
+          "fixedWidth": {
+            "px": 40,
+            "varName": "imported/fab/root/width/small"
+          },
+          "fixedHeight": {
+            "px": 40,
+            "varName": "imported/fab/root/height/small"
+          },
           "children": [
             {
               "type": "text",
@@ -389,7 +417,6 @@ const COMPONENTS = [
             "strokeLeftWeight": "imported/shared/size-0",
             "strokeRightWeight": "imported/shared/size-0",
             "strokeTopWeight": "imported/shared/size-0",
-            "minHeight": "imported/fab/root/min-height",
             "minWidth": "imported/shared/size-0",
             "paddingBottom": "imported/shared/size-0",
             "paddingLeft": "imported/shared/size-0",
@@ -437,6 +464,14 @@ const COMPONENTS = [
             }
           ],
           "fill": "imported/fab/root/background-color/primary",
+          "fixedWidth": {
+            "px": 40,
+            "varName": "imported/fab/root/width/small"
+          },
+          "fixedHeight": {
+            "px": 40,
+            "varName": "imported/fab/root/height/small"
+          },
           "children": [
             {
               "type": "text",
@@ -477,7 +512,6 @@ const COMPONENTS = [
             "strokeLeftWeight": "imported/shared/size-0",
             "strokeRightWeight": "imported/shared/size-0",
             "strokeTopWeight": "imported/shared/size-0",
-            "minHeight": "imported/fab/root/min-height",
             "minWidth": "imported/shared/size-0",
             "paddingBottom": "imported/shared/size-0",
             "paddingLeft": "imported/shared/size-0",
@@ -525,6 +559,14 @@ const COMPONENTS = [
             }
           ],
           "fill": "imported/fab/root/background-color/secondary",
+          "fixedWidth": {
+            "px": 40,
+            "varName": "imported/fab/root/width/small"
+          },
+          "fixedHeight": {
+            "px": 40,
+            "varName": "imported/fab/root/height/small"
+          },
           "children": [
             {
               "type": "text",
@@ -565,7 +607,6 @@ const COMPONENTS = [
             "strokeLeftWeight": "imported/shared/size-0",
             "strokeRightWeight": "imported/shared/size-0",
             "strokeTopWeight": "imported/shared/size-0",
-            "minHeight": "imported/fab/root/min-height",
             "minWidth": "imported/shared/size-0",
             "paddingBottom": "imported/shared/size-0",
             "paddingLeft": "imported/shared/size-0",
@@ -613,6 +654,14 @@ const COMPONENTS = [
             }
           ],
           "fill": "imported/fab/root/background-color/default",
+          "fixedWidth": {
+            "px": 48,
+            "varName": "imported/fab/root/width/medium"
+          },
+          "fixedHeight": {
+            "px": 48,
+            "varName": "imported/fab/root/height/medium"
+          },
           "children": [
             {
               "type": "text",
@@ -653,7 +702,6 @@ const COMPONENTS = [
             "strokeLeftWeight": "imported/shared/size-0",
             "strokeRightWeight": "imported/shared/size-0",
             "strokeTopWeight": "imported/shared/size-0",
-            "minHeight": "imported/fab/root/min-height",
             "minWidth": "imported/shared/size-0",
             "paddingBottom": "imported/shared/size-0",
             "paddingLeft": "imported/shared/size-0",
@@ -701,6 +749,14 @@ const COMPONENTS = [
             }
           ],
           "fill": "imported/fab/root/background-color/primary",
+          "fixedWidth": {
+            "px": 48,
+            "varName": "imported/fab/root/width/medium"
+          },
+          "fixedHeight": {
+            "px": 48,
+            "varName": "imported/fab/root/height/medium"
+          },
           "children": [
             {
               "type": "text",
@@ -741,7 +797,6 @@ const COMPONENTS = [
             "strokeLeftWeight": "imported/shared/size-0",
             "strokeRightWeight": "imported/shared/size-0",
             "strokeTopWeight": "imported/shared/size-0",
-            "minHeight": "imported/fab/root/min-height",
             "minWidth": "imported/shared/size-0",
             "paddingBottom": "imported/shared/size-0",
             "paddingLeft": "imported/shared/size-0",
@@ -789,6 +844,14 @@ const COMPONENTS = [
             }
           ],
           "fill": "imported/fab/root/background-color/secondary",
+          "fixedWidth": {
+            "px": 48,
+            "varName": "imported/fab/root/width/medium"
+          },
+          "fixedHeight": {
+            "px": 48,
+            "varName": "imported/fab/root/height/medium"
+          },
           "children": [
             {
               "type": "text",

@@ -6953,6 +6953,14 @@
         "line-height": {
           "$value": "20px",
           "$type": "dimension"
+        },
+        "width": {
+          "$value": "40px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "40px",
+          "$type": "dimension"
         }
       }
     },
@@ -7065,6 +7073,34 @@
         "min-height": {
           "$value": "36px",
           "$type": "dimension"
+        },
+        "width": {
+          "small": {
+            "$value": "40px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "48px",
+            "$type": "dimension"
+          },
+          "large": {
+            "$value": "56px",
+            "$type": "dimension"
+          }
+        },
+        "height": {
+          "small": {
+            "$value": "40px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "48px",
+            "$type": "dimension"
+          },
+          "large": {
+            "$value": "56px",
+            "$type": "dimension"
+          }
         },
         "z-index": {
           "$value": "1050",

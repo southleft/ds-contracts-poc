@@ -188,19 +188,25 @@
               "border-bottom-left-radius": "{imported.fab.root.border-bottom-left-radius.large}",
               "border-bottom-right-radius": "{imported.fab.root.border-bottom-right-radius.large}",
               "border-top-left-radius": "{imported.fab.root.border-top-left-radius.large}",
-              "border-top-right-radius": "{imported.fab.root.border-top-right-radius.large}"
+              "border-top-right-radius": "{imported.fab.root.border-top-right-radius.large}",
+              "width": "{imported.fab.root.width.large}",
+              "height": "{imported.fab.root.height.large}"
             },
             "medium": {
               "border-bottom-left-radius": "{imported.fab.root.border-bottom-left-radius.medium}",
               "border-bottom-right-radius": "{imported.fab.root.border-bottom-right-radius.medium}",
               "border-top-left-radius": "{imported.fab.root.border-top-left-radius.medium}",
-              "border-top-right-radius": "{imported.fab.root.border-top-right-radius.medium}"
+              "border-top-right-radius": "{imported.fab.root.border-top-right-radius.medium}",
+              "width": "{imported.fab.root.width.medium}",
+              "height": "{imported.fab.root.height.medium}"
             },
             "small": {
               "border-bottom-left-radius": "{imported.fab.root.border-bottom-left-radius.small}",
               "border-bottom-right-radius": "{imported.fab.root.border-bottom-right-radius.small}",
               "border-top-left-radius": "{imported.fab.root.border-top-left-radius.small}",
-              "border-top-right-radius": "{imported.fab.root.border-top-right-radius.small}"
+              "border-top-right-radius": "{imported.fab.root.border-top-right-radius.small}",
+              "width": "{imported.fab.root.width.small}",
+              "height": "{imported.fab.root.height.small}"
             }
           }
         }
