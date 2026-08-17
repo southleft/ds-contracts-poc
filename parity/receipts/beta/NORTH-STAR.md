@@ -41,6 +41,7 @@ this lane is the **eight Flowbite stems**, not a fifty-component kit.
 | HelperText | **fail 16.96%** — named `FC-FONT-SUBSTRATE` (text-only). Code-vs-library AA 20/20. Do not climb the font wall |
 | Label | **fail 16.03%** — named `FC-FONT-SUBSTRATE` (text-only). Code-vs-library AA 20/20. Do not climb the font wall |
 | Kbd | **pass** 0.42% AA (bar 5%). Bridge instrument vs real library orig-shot |
+| Gate: those scorecards cannot go silent | **done** — `npm run parity:flowbite` pins Kbd pass + HelperText/Label `FC-FONT-SUBSTRATE` |
 
 ### P1 — Recovery and parity (the round trip)
 

@@ -10,6 +10,7 @@
  *   npx tsx scripts/flowbite-contract-parity.ts
  *   npm run parity:flowbite
  */
+import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
@@ -207,3 +208,71 @@ lines.push('');
 mkdirSync(path.dirname(OUT), { recursive: true });
 writeFileSync(OUT, lines.join('\n'));
 console.log(`wrote ${path.relative(ROOT, OUT)} (${gapCount} named gap(s))`);
+
+/** Path B scorecards for the three stems that used to be UNSCORED-NO-ORIG-SHOT.
+ *  Missing files or broken sha pins fail this gate — a silent return to
+ *  "unscored" is the defect. */
+const sha256File = (p: string) => createHash('sha256').update(readFileSync(p)).digest('hex');
+const pathBPins: Array<{
+  stem: string;
+  status: 'pass' | 'fail';
+  maxAA?: number;
+  minAA?: number;
+  fc?: string;
+}> = [
+  { stem: 'kbd', status: 'pass', maxAA: 5 },
+  { stem: 'helpertext', status: 'fail', minAA: 5, fc: 'FC-FONT-SUBSTRATE' },
+  { stem: 'label', status: 'fail', minAA: 5, fc: 'FC-FONT-SUBSTRATE' },
+];
+const pinErrors: string[] = [];
+for (const row of pathBPins) {
+  const scPath = path.join(ROOT, 'parity/receipts/console-loop/tailwind/scores', `${row.stem}.json`);
+  if (!existsSync(scPath)) {
+    pinErrors.push(`${row.stem}: missing Path B scorecard`);
+    continue;
+  }
+  const sc = JSON.parse(readFileSync(scPath, 'utf8')) as {
+    status?: string;
+    compositionOk?: boolean;
+    metrics?: { pctAAMasked?: number };
+    reference?: string;
+    referenceSha256?: string;
+    canvasShot?: string;
+    canvasShotSha256?: string;
+    fc?: string[];
+  };
+  if (sc.status !== row.status) pinErrors.push(`${row.stem}: status ${sc.status} ≠ ${row.status}`);
+  if (sc.compositionOk !== true) pinErrors.push(`${row.stem}: compositionOk is not true`);
+  const aa = sc.metrics?.pctAAMasked;
+  if (typeof aa !== 'number') pinErrors.push(`${row.stem}: pctAAMasked missing`);
+  else if (row.maxAA != null && aa > row.maxAA) pinErrors.push(`${row.stem}: pctAAMasked ${aa} > ${row.maxAA}`);
+  else if (row.minAA != null && aa <= row.minAA) pinErrors.push(`${row.stem}: pctAAMasked ${aa} no longer fails the 5% bar — re-open the named wall before flipping this pin`);
+  if (row.fc && !(sc.fc ?? []).includes(row.fc)) pinErrors.push(`${row.stem}: named cause ${row.fc} missing from scorecard.fc`);
+  for (const [fileField, hashField] of [
+    ['reference', 'referenceSha256'],
+    ['canvasShot', 'canvasShotSha256'],
+  ] as const) {
+    const rel = sc[fileField];
+    const recorded = sc[hashField];
+    if (typeof rel !== 'string' || !rel) {
+      pinErrors.push(`${row.stem}: ${fileField} missing`);
+      continue;
+    }
+    const abs = path.join(ROOT, rel);
+    if (!existsSync(abs)) {
+      pinErrors.push(`${row.stem}: ${fileField} file gone (${rel})`);
+      continue;
+    }
+    if (typeof recorded !== 'string' || !recorded) {
+      pinErrors.push(`${row.stem}: ${hashField} missing`);
+      continue;
+    }
+    const actual = sha256File(abs);
+    if (actual !== recorded) pinErrors.push(`${row.stem}: ${hashField} stale (${recorded.slice(0, 8)}… vs ${actual.slice(0, 8)}…)`);
+  }
+}
+if (pinErrors.length) {
+  console.error(`✖ Path B pins:\n${pinErrors.map((e) => `  - ${e}`).join('\n')}`);
+  process.exit(1);
+}
+console.log('✔ Path B pins: kbd pass, helpertext/label fail-closed on FC-FONT-SUBSTRATE');
