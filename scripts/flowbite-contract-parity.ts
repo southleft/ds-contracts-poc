@@ -193,8 +193,8 @@ lines.push('## Standing gaps (named, not unfinished)');
 lines.push('');
 lines.push('1. **Events are authored, never recovered.** Capture-from-code and dump-from-Figma do not invent `onToggle` / `onDismiss`. The functional React hop requires the authored `events[]` block.');
 lines.push('2. **Canvas cannot run behavior.** Figma shows ToggleSwitch `checked` and Alert `Dismissable` as variants/booleans. That is the correct projection, not a miss.');
-lines.push('3. **`FC-FONT-SUBSTRATE`** — ToggleSwitch Path B visual-truth 6.19% is label glyphs, not track/thumb geometry.');
-lines.push('4. **HelperText / Label / Kbd Path B visual-truth** is named `UNSCORED-NO-ORIG-SHOT`. Code-vs-library AA is already perfect (20/20, 20/20, 4/4). Canvas sets exist on `59mLQ…` and are property-aligned. We will not invent a score against the contract’s own gate-shot.');
+lines.push('3. **`FC-FONT-SUBSTRATE`** — ToggleSwitch 6.19%, HelperText 16.96%, Label 16.03%. Text/glyph stems; canvas is Inter, library is the platform system stack. Kbd (boxed) passes at 0.42%. Do not climb the font wall.');
+lines.push('4. **Path B orig-shots now exist** for HelperText / Label / Kbd (`extract/computed/out/tailwind/<stem>/orig-shots/*__default.png`). The previous `UNSCORED-NO-ORIG-SHOT` is closed. Code-vs-library AA stays 20/20, 20/20, 4/4.');
 lines.push('');
 if (standing.length) {
   lines.push('Authored events with no captured counterpart:');

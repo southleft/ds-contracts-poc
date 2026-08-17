@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "kind": "console-loop-tailwind-component",
+  "status": "completed",
+  "component": "kbd",
+  "contract": "examples/tailwind/contracts/kbd.contract.json",
+  "script": "examples/tailwind/figma/kbd.figma.js",
+  "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+  "recordedAt": "2026-08-17T04:05:00.000Z",
+  "transport": "figma-console-mcp figma_execute exportAsync scale-1 cell + extract/computed/run.ts --keep-originals",
+  "generate": {
+    "ok": true,
+    "nodeId": "120:1982",
+    "mode": "generated",
+    "page": "Kbd",
+    "contractId": "flowbite.kbd",
+    "cellNodeId": "120:1982",
+    "cellName": "Kbd"
+  },
+  "visual": {
+    "ok": false,
+    "matchDeveloped": false,
+    "reference": "extract/computed/out/tailwind/kbd/orig-shots/__default.png",
+    "referenceSource": "extract/computed/out/tailwind/kbd/orig-shots/__default.png — REAL LIBRARY RENDER: flowbite-react@0.12.17 screenshot committed by extract/computed/run.ts --keep-originals (2026-08-17 Path B orig-shot close).",
+    "scorecard": "parity/receipts/console-loop/tailwind/scores/kbd.json",
+    "status": "scored-pass",
+    "notes": [
+      "Bridge instrument only (no FIGMA_TOKEN tonight, so no headless REST card). pctAAMasked=0.42 compositionOk against the real library render. Not added to manifest.required — that list still pins GnQnjSNBXtgtd2Ht0Hs1C8; this stem lives on 59mLQ."
+    ]
+  }
+}

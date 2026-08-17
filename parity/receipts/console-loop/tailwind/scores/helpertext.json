@@ -1,0 +1,37 @@
+{
+  "version": 3,
+  "status": "fail",
+  "matchDeveloped": false,
+  "recommendMatchDeveloped": false,
+  "passBar": {
+    "pctAAMaskedMax": 5,
+    "compositionOk": true
+  },
+  "metrics": {
+    "pctExactUnmasked": 49.007936507936506,
+    "pctAAUnmasked": 16.964285714285715,
+    "pctAAMasked": 16.964285714285715,
+    "maskCoveragePct": 0,
+    "canvasPx": "72x14",
+    "realPx": "70x14",
+    "inkCanvasPct": 39.38492063492063,
+    "inkRealPct": 41.46825396825397
+  },
+  "reference": "extract/computed/out/tailwind/helpertext/orig-shots/gray__default.png",
+  "referenceSha256": "25fd1027b3e0959fdd850b39de20932b789422dd329ff31d59037dac7ae8ff89",
+  "canvasShot": "parity/receipts/console-loop/tailwind/shots/helpertext-cell.png",
+  "canvasShotSha256": "8f8a7a6efdf45194d8cb37c121a83627ede9a997bee88888b2866fb1b79f6703",
+  "diff": "parity/receipts/console-loop/tailwind/scores/helpertext.diff.png",
+  "fc": ["FC-FONT-SUBSTRATE"],
+  "receipt": "parity/receipts/console-loop/tailwind/components/helpertext.json",
+  "compositionOk": true,
+  "strictCompositionOk": true,
+  "framingTolerant": false,
+  "reliedOnFramingTolerant": false,
+  "scaleRatio": 1.0285714285714285,
+  "inkDelta": 2.0833333333333357,
+  "dprNormalized": false,
+  "sizeNormalized": false,
+  "note": "pixel bar missed (pctAAMasked=16.96 > 5)",
+  "recordedAt": "2026-08-17T04:02:57.126Z"
+}

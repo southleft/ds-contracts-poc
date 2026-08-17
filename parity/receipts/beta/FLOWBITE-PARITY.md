@@ -1,6 +1,6 @@
 # Flowbite contract parity — authored vs code-capture
 
-Recorded 2026-08-16. Authored contracts in
+Recorded 2026-08-17. Authored contracts in
 `examples/tailwind/contracts` vs `extract/computed/out/tailwind/<stem>/enriched.contract.json`.
 
 This is hop 5 of [NORTH-STAR.md](./NORTH-STAR.md): align the contracts we have
@@ -90,8 +90,8 @@ This is hop 5 of [NORTH-STAR.md](./NORTH-STAR.md): align the contracts we have
 
 1. **Events are authored, never recovered.** Capture-from-code and dump-from-Figma do not invent `onToggle` / `onDismiss`. The functional React hop requires the authored `events[]` block.
 2. **Canvas cannot run behavior.** Figma shows ToggleSwitch `checked` and Alert `Dismissable` as variants/booleans. That is the correct projection, not a miss.
-3. **`FC-FONT-SUBSTRATE`** — ToggleSwitch Path B visual-truth 6.19% is label glyphs, not track/thumb geometry.
-4. **HelperText / Label / Kbd Path B visual-truth** is named `UNSCORED-NO-ORIG-SHOT`. Code-vs-library AA is already perfect (20/20, 20/20, 4/4). Canvas sets exist on `59mLQ…` and are property-aligned. We will not invent a score against the contract’s own gate-shot.
+3. **`FC-FONT-SUBSTRATE`** — ToggleSwitch 6.19%, HelperText 16.96%, Label 16.03%. Text/glyph stems; canvas is Inter, library is the platform system stack. Kbd (boxed) passes at 0.42%. Do not climb the font wall.
+4. **Path B orig-shots now exist** for HelperText / Label / Kbd (`extract/computed/out/tailwind/<stem>/orig-shots/*__default.png`). The previous `UNSCORED-NO-ORIG-SHOT` is closed. Code-vs-library AA stays 20/20, 20/20, 4/4.
 
 Authored events with no captured counterpart:
 - Alert: onDismiss

@@ -4,7 +4,7 @@ The product is a **contract-mediated** hop between a design-system codebase
 and a Figma library — props, metadata, variables, structure, specs — and
 back. Neither canvas nor React is the source of truth. The contract is.
 
-This page is the checklist. Status is current as of 2026-08-16. "Done" for
+This page is the checklist. Status is current as of 2026-08-17. "Done" for
 this lane is the **eight Flowbite stems**, not a fifty-component kit.
 
 ## The hops that must work
@@ -38,9 +38,9 @@ this lane is the **eight Flowbite stems**, not a fifty-component kit.
 | Alert | **pass** |
 | Card | **pass** |
 | ToggleSwitch | **fail 6.19%** — named `FC-FONT-SUBSTRATE` (label glyphs). Track/thumb sizes are correct. Do not climb the font wall |
-| HelperText | canvas present + property-aligned. Path B scorecard: **`UNSCORED-NO-ORIG-SHOT`**. Code-vs-library AA 20/20 |
-| Label | canvas present + property-aligned. Path B scorecard: **`UNSCORED-NO-ORIG-SHOT`**. Code-vs-library AA 20/20 |
-| Kbd | canvas present + property-aligned. Path B scorecard: **`UNSCORED-NO-ORIG-SHOT`**. Code-vs-library AA 4/4 |
+| HelperText | **fail 16.96%** — named `FC-FONT-SUBSTRATE` (text-only). Code-vs-library AA 20/20. Do not climb the font wall |
+| Label | **fail 16.03%** — named `FC-FONT-SUBSTRATE` (text-only). Code-vs-library AA 20/20. Do not climb the font wall |
+| Kbd | **pass** 0.42% AA (bar 5%). Bridge instrument vs real library orig-shot |
 
 ### P1 — Recovery and parity (the round trip)
 
@@ -49,7 +49,7 @@ this lane is the **eight Flowbite stems**, not a fifty-component kit.
 | Dump a set **this pipeline drew** → proposed contract | exists (`extract:figma`) |
 | Diff authored vs code-capture vs canvas properties | **done** — Flowbite `npm run parity:flowbite` |
 | First-party both-sides (Switch) | **done** — [SWITCH-BOTH-SIDES.md](./SWITCH-BOTH-SIDES.md) |
-| Name every standing gap | events never live on the canvas; dump cannot invent `onClick`; native `input` not drawn; identity drift on Switch anchors; `UNSCORED-NO-ORIG-SHOT`; `FC-FONT-SUBSTRATE` |
+| Name every standing gap | events never live on the canvas; dump cannot invent `onClick`; native `input` not drawn; identity drift on Switch anchors; `FC-FONT-SUBSTRATE` |
 
 ### P2 — Scale (not this week)
 
