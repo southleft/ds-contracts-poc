@@ -1,0 +1,38 @@
+{
+  "imported": {
+    "switch": {
+      "root": {
+        "gap": {
+          "$value": "8px",
+          "$type": "dimension"
+        }
+      },
+      "text-col-label-text": {
+        "font-size": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "font-weight": {
+          "$value": "500",
+          "$type": "number"
+        }
+      },
+      "text-col-description-text": {
+        "font-size": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "font-weight": {
+          "$value": "400",
+          "$type": "number"
+        }
+      }
+    },
+    "shared": {
+      "size-2": {
+        "$value": "2px",
+        "$type": "dimension"
+      }
+    }
+  }
+}

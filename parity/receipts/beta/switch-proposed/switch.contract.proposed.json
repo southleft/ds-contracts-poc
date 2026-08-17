@@ -1,0 +1,149 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.switch",
+  "name": "Switch",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "value",
+      "type": {
+        "enum": [
+          "off",
+          "on"
+        ]
+      },
+      "default": "off",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Value",
+          "values": {
+            "off": "Off",
+            "on": "On"
+          }
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "type": "text",
+      "default": "Enable notifications",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "description",
+      "type": "text",
+      "default": "Takes effect immediately.",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Description"
+        },
+        "code": {
+          "prop": "description"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row"
+      },
+      "parts": {
+        "track": {
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "background-color": "{color.switch.{value}.track}",
+            "padding-inline": "{imported.shared.size-2}",
+            "padding-block": "{imported.shared.size-2}"
+          },
+          "parts": {
+            "spacerStart": {
+              "visibleWhen": {
+                "prop": "value",
+                "equals": "on"
+              }
+            },
+            "thumb": {
+              "tokens": {
+                "background-color": "{color.switch.thumb}"
+              }
+            },
+            "spacerEnd": {
+              "visibleWhen": {
+                "prop": "value",
+                "equals": "off"
+              }
+            }
+          }
+        },
+        "textCol": {
+          "layout": {
+            "direction": "column"
+          },
+          "parts": {
+            "labelText": {
+              "content": {
+                "prop": "label"
+              },
+              "tokens": {
+                "color": "{color.surface.foreground}",
+                "font-size": "{imported.switch.text-col-label-text.font-size}",
+                "font-weight": "{imported.switch.text-col-label-text.font-weight}"
+              }
+            },
+            "descriptionText": {
+              "content": {
+                "prop": "description"
+              },
+              "tokens": {
+                "color": "{color.text.secondary}",
+                "font-size": "{imported.switch.text-col-description-text.font-size}",
+                "font-weight": "{imported.switch.text-col-description-text.font-weight}"
+              }
+            }
+          },
+          "tokens": {
+            "gap": "{imported.shared.size-2}"
+          }
+        }
+      },
+      "tokens": {
+        "gap": "{imported.switch.root.gap}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+      "componentSetKey": "1a174ed109a4f98a2bdd48f6509cf18f06a6d75b",
+      "nodeId": "4:618"
+    },
+    "code": {
+      "importPath": "src/components/Switch",
+      "export": "Switch"
+    }
+  }
+}

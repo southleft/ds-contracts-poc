@@ -1,0 +1,161 @@
+{
+  "_provenance": {
+    "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+    "extractedAt": "2026-08-16",
+    "dumpVersion": "1.25",
+    "note": "Switch-only dump from Latest DS Contracts Tests via Figma Console. Compact walk of the live set 4:618."
+  },
+  "Switch": {
+    "setName": "Switch",
+    "type": "COMPONENT_SET",
+    "nodeId": "4:618",
+    "key": "1a174ed109a4f98a2bdd48f6509cf18f06a6d75b",
+    "propertyDefinitions": {
+      "Label": { "type": "TEXT", "defaultValue": "Enable notifications" },
+      "Description": { "type": "TEXT", "defaultValue": "Takes effect immediately." },
+      "Value": { "type": "VARIANT", "defaultValue": "Off", "variantOptions": ["Off", "On"] }
+    },
+    "variants": [
+      {
+        "name": "Value=Off",
+        "type": "COMPONENT",
+        "variantProperties": { "Value": "Off" },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 8,
+          "padding": [0, 0, 0, 0],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "itemSpacing": "space/gap/sm",
+        "children": [
+          {
+            "name": "track",
+            "type": "FRAME",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 0,
+              "padding": [2, 2, 2, 2],
+              "primarySizing": "FIXED",
+              "counterSizing": "FIXED"
+            },
+            "fill": { "var": "color/switch/off/track" },
+            "children": [
+              {
+                "name": "thumb",
+                "type": "FRAME",
+                "fill": { "var": "color/switch/thumb" },
+                "children": []
+              },
+              { "name": "spacerEnd", "type": "FRAME", "children": [] }
+            ]
+          },
+          {
+            "name": "textCol",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 2,
+              "padding": [0, 0, 0, 0],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "itemSpacing": "space/inset-y/xs",
+            "children": [
+              {
+                "name": "labelText",
+                "type": "TEXT",
+                "fill": { "var": "color/surface/foreground" },
+                "text": { "characters": "Enable notifications", "fontSize": 14, "fontStyle": "Medium" },
+                "propRefs": { "characters": "Label" }
+              },
+              {
+                "name": "descriptionText",
+                "type": "TEXT",
+                "fill": { "var": "color/text/secondary" },
+                "text": { "characters": "Takes effect immediately.", "fontSize": 14, "fontStyle": "Regular" },
+                "propRefs": { "characters": "Description" }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Value=On",
+        "type": "COMPONENT",
+        "variantProperties": { "Value": "On" },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 8,
+          "padding": [0, 0, 0, 0],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "itemSpacing": "space/gap/sm",
+        "children": [
+          {
+            "name": "track",
+            "type": "FRAME",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "MIN",
+              "counter": "CENTER",
+              "spacing": 0,
+              "padding": [2, 2, 2, 2],
+              "primarySizing": "FIXED",
+              "counterSizing": "FIXED"
+            },
+            "fill": { "var": "color/switch/on/track" },
+            "children": [
+              { "name": "spacerStart", "type": "FRAME", "children": [] },
+              {
+                "name": "thumb",
+                "type": "FRAME",
+                "fill": { "var": "color/switch/thumb" },
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "textCol",
+            "type": "FRAME",
+            "layout": {
+              "mode": "VERTICAL",
+              "primary": "MIN",
+              "counter": "MIN",
+              "spacing": 2,
+              "padding": [0, 0, 0, 0],
+              "primarySizing": "AUTO",
+              "counterSizing": "FIXED"
+            },
+            "itemSpacing": "space/inset-y/xs",
+            "children": [
+              {
+                "name": "labelText",
+                "type": "TEXT",
+                "fill": { "var": "color/surface/foreground" },
+                "text": { "characters": "Enable notifications", "fontSize": 14, "fontStyle": "Medium" },
+                "propRefs": { "characters": "Label" }
+              },
+              {
+                "name": "descriptionText",
+                "type": "TEXT",
+                "fill": { "var": "color/text/secondary" },
+                "text": { "characters": "Takes effect immediately.", "fontSize": 14, "fontStyle": "Regular" },
+                "propRefs": { "characters": "Description" }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
