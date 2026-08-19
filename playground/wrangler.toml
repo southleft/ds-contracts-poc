@@ -2,5 +2,6 @@
 #   npx vite build --config playground/vite.config.ts
 #   npx wrangler pages deploy playground/dist --project-name ds-contracts-playground
 name = "ds-contracts-playground"
+account_id = "4718d49e576512c578ff94c6b1ba7d3f"
 compatibility_date = "2026-07-08"
 pages_build_output_dir = "dist"

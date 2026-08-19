@@ -21,8 +21,16 @@
  *
  * Needs a wrangler login with access to both Pages projects (`npx wrangler
  * whoami` to check). The verify step needs nothing but the public URLs.
+ *
+ * The login can see more than one Cloudflare account. Both Pages projects
+ * live on Southleft, LLC (`4718d49e576512c578ff94c6b1ba7d3f`). Override with
+ * CLOUDFLARE_ACCOUNT_ID if you are deploying from a different account.
  */
 import { execSync, spawnSync } from 'node:child_process';
+
+if (!process.env.CLOUDFLARE_ACCOUNT_ID) {
+  process.env.CLOUDFLARE_ACCOUNT_ID = '4718d49e576512c578ff94c6b1ba7d3f';
+}
 
 const run = (cmd, label) => {
   console.log(`\n── ${label}\n   $ ${cmd}`);
