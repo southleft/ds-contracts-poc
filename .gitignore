@@ -79,6 +79,9 @@ conformance/.sandbox/
 # — the shot list, demo/.storybook — but everything the demo GENERATES is not:
 # it is rebuilt from committed contracts by the commands in the shot list, and
 # committing it would make a re-run look like a diff.
+# Eventz whole-file Path A — REST dumps and caches (SCORECARD.md is committed)
+parity/receipts/eventz-wholefile/out/
+
 demo/flowbite.dump.json
 demo/proposed/
 demo/generated/
