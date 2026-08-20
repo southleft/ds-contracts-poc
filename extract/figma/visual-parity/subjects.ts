@@ -114,6 +114,6 @@ export const PARITY_SUBJECTS: ParitySubject[] = [
   { id: 'badge', label: 'Badge (catalog)', kind: 'contract', contractId: 'ds.badge', fileKey: MAIN, setNodeId: '6:10' },
   { id: 'button', label: 'Button (catalog)', kind: 'contract', contractId: 'ds.button', fileKey: MAIN, setNodeId: '5:21' },
   { id: 'checkbox', label: 'Checkbox (catalog)', kind: 'contract', contractId: 'ds.checkbox', fileKey: MAIN, setNodeId: '11:315' },
-  { id: 'switch', label: 'Switch (catalog)', kind: 'contract', contractId: 'ds.switch', fileKey: MAIN, setNodeId: '11:1286' },
+  { id: 'switch', label: 'Switch (catalog)', kind: 'contract', contractId: 'ds.switch', fileKey: 'BMjUA2ue5CaZXU4kufxL0z', setNodeId: '4:618' },
   { id: 'heading', label: 'Heading (catalog)', kind: 'contract', contractId: 'ds.heading', fileKey: MAIN, setNodeId: '32:1862' },
 ];

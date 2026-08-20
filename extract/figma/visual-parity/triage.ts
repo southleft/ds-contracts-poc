@@ -44,13 +44,6 @@ export const TRIAGE: TriageRule[] = [
   // ---- button (catalog contract vs generated main-file set) ---------------
   {
     subject: 'button',
-    variant: /State=Disabled/,
-    class: 'design',
-    cause:
-      'Figma set predates the literal-opacity engine fix (5ebb58e): the synced Disabled preview still binds the 0–1 opacity token into Figma\'s percent-scaled field and washes to near-white — main file awaits re-sync; our render is the contract truth (opacity 0.5)',
-  },
-  {
-    subject: 'button',
     variant: /State=Focus Visible/,
     class: 'design',
     cause:
@@ -82,7 +75,7 @@ export const TRIAGE: TriageRule[] = [
     subject: 'switch',
     class: 'renderer',
     cause:
-      'label advance-width hug (ours Δ-6 device px) shifts the center-padded pair; residual masked ink is the thumb/track edge ring + Figma label pixels escaping the DOM-derived text mask',
+      'live set (BMjUA2ue5CaZXU4kufxL0z / 4:618): masked 0.00%, unmasked 0.76% — residual is Inter glyph fringe only after the restamp; the dead MAIN 11:1286 copy is no longer the scored node',
   },
 
   // ---- shoelace-button-group (kit redraw; child Button is a STUB) -----------

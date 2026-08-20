@@ -6339,6 +6339,14 @@ function canonicalizeInstanceProps(
         mapped++;
         continue;
       }
+      if (childProp.type === 'boolean') {
+        const spelled = value.trim().toLowerCase();
+        if (spelled === 'true' || spelled === 'false') {
+          out[childProp.name] = spelled === 'true';
+          mapped++;
+          continue;
+        }
+      }
     }
     if (childProp && typeof value === 'string' && !(childProp.bindings.figma as { values?: unknown }).values) {
       // TEXT props have no values map — the string passes through verbatim.
@@ -6978,15 +6986,28 @@ function buildChildStub(
       for (const v of values) {
         if (typeof v === 'string' && !byCanonical.has(camel(v))) byCanonical.set(camel(v), v);
       }
-      props.push({
-        name,
-        type: { enum: [...byCanonical.keys()] },
-        default: camel(String(v0)),
-        bindings: {
-          figma: { kind: 'VARIANT', property, values: Object.fromEntries(byCanonical) },
-          code: { prop: name },
-        },
-      });
+      const keys = [...byCanonical.keys()];
+      // A BOOLEAN Figma property often arrives as the strings "true"/"false"
+      // (REST). One observed spelling is still a boolean, not an enum of
+      // `["false"]` that then refuses a boolean applied value (CBDS Table-Data).
+      if (keys.length > 0 && keys.every((k) => k === 'true' || k === 'false')) {
+        props.push({
+          name,
+          type: 'boolean',
+          default: keys.includes('true') ? keys[0] === 'true' : false,
+          bindings: { figma: { kind: 'BOOLEAN', property }, code: { prop: name } },
+        });
+      } else {
+        props.push({
+          name,
+          type: { enum: keys },
+          default: camel(String(v0)),
+          bindings: {
+            figma: { kind: 'VARIANT', property, values: Object.fromEntries(byCanonical) },
+            code: { prop: name },
+          },
+        });
+      }
     }
   }
   const name = pascalComponentName(capture.instanceOf);
@@ -7187,6 +7208,24 @@ function invertRootFixedSize(merged: Merged, root: Record<string, unknown>, root
     if (fixedIn.length === 0) {
       const literals = (root.literals as Record<string, string> | undefined) ?? {};
       if (literals[dim] !== undefined) continue;
+      // G8.2: fit-content on an fr-bearing grid axis is schema-invalid
+      // (`grid-hug-flex-axis`). Silence is legal on that axis — the fraction
+      // resolves against a host-supplied size. Do not write the hug and lose
+      // the whole set (Figma DS Section Header / Footer).
+      const grid = root.layout as { display?: string; columns?: unknown; rows?: unknown; flow?: string } | undefined;
+      const hasFr = (tracks: unknown): boolean =>
+        Array.isArray(tracks) && tracks.some((t) => t !== null && typeof t === 'object' && 'fr' in (t as object));
+      const axisHasFr =
+        grid?.display === 'grid' &&
+        (dim === 'width'
+          ? hasFr(grid.columns)
+          : (grid.flow === 'row' && grid.rows === undefined) || hasFr(grid.rows));
+      if (axisHasFr) {
+        ctx.notes.push(
+          `${where}: root ${dim} HUGS on a grid whose ${dim === 'width' ? 'columns' : 'rows'} contain {fr} — hug NOT carried (grid-hug-flex-axis); the fraction stands and the host supplies the definite size`,
+        );
+        continue;
+      }
       literals[dim] = 'fit-content';
       root.literals = literals;
       ctx.notes.push(
@@ -8883,7 +8922,32 @@ export function proposeBatchFromDump(
   const capturedValues =
     opts.capturedValues ??
     new Map((capturedTokensFromDump(dump)?.entries ?? []).map((e) => [e.path, e.value] as const));
-  const setOpts = { ...opts, capturedValues };
+  // Session-link siblings in THIS dump: a later Card-Image sees Avatar
+  // proposed earlier. Without this, Path A batches mint string "true"/"false"
+  // against a child that is BOOLEAN and generateTsx refuses (Eventz/CBDS).
+  const contractIdByName = new Map(opts.contractIdByName);
+  const contractsById = new Map(opts.contractsById ?? []);
+  const contractIdByKey = new Map(opts.contractIdByKey ?? []);
+  const sessionClaimedIds = new Set(opts.sessionClaimedIds ?? []);
+  const registerSession = (c: Record<string, unknown>, dumpName?: string, isStub = false) => {
+    if (typeof c.id !== 'string') return;
+    if (isStub && contractsById.has(c.id)) return;
+    sessionClaimedIds.add(c.id);
+    contractsById.set(c.id, c as MinimalChildContract);
+    if (typeof c.name === 'string') contractIdByName.set(c.name, c.id);
+    if (dumpName) contractIdByName.set(dumpName, c.id);
+    const key = (c.anchors as { figma?: { componentSetKey?: string | null } } | undefined)?.figma
+      ?.componentSetKey;
+    if (typeof key === 'string' && key.length > 0) contractIdByKey.set(key, c.id);
+  };
+  const setOpts = {
+    ...opts,
+    capturedValues,
+    contractIdByName,
+    contractsById,
+    contractIdByKey,
+    sessionClaimedIds,
+  };
   // READ-LIMIT NOTE (dump `_provenance.captureGaps` — REST-route honesty):
   // the REST mapper (extract/figma/rest/map.ts) stamps one entry per dump
   // channel its surface cannot read (v1.6–v1.13). Surfaced here as ONE note
@@ -8902,6 +8966,8 @@ export function proposeBatchFromDump(
     if (name === '_provenance' || !isDumpSet(value)) continue;
     try {
       const proposal = { setName: name, ...proposeFromDump(value, setOpts) };
+      registerSession(proposal.contract as Record<string, unknown>, name);
+      for (const stub of proposal.childStubs ?? []) registerSession(stub as Record<string, unknown>, undefined, true);
       if (captureGapNote) proposal.notes.unshift(captureGapNote);
       const id = (proposal.contract as { id?: unknown }).id;
       if (typeof id === 'string') {

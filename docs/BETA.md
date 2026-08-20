@@ -91,6 +91,22 @@ npx tsx packages/cli/src/cli.ts generate examples/tailwind/contracts \
 `--icons` is **required**, not optional: without it the run exits 1 by name
 because `flowbite.alert` references a dismiss icon.
 
+### Keeping the two surfaces in line
+
+After a contract edit, a canvas amend, or a recovery dump, run:
+
+```bash
+npm run maintain
+```
+
+That is leftover string→boolean emit + catalog/live anchor agreement +
+`functional:flowbite` (clicks/dismiss still execute) +
+`parity:flowbite` (authored vs recovered, named walls stay named) +
+catalog visual-parity on Button / Badge / Checkbox / Switch / Heading
+(a closed pixel hole on those stems cannot silently reopen). Eventz / CBDS
+/ Shoelace rows stay on the full `--summary` map; they are not the ship set.
+A green maintain is the beta handoff bar. It is not v1.
+
 ### It is verified, and here is the proof
 
 [`parity/receipts/beta/GOLDEN-PATH-RECEIPT.md`](../parity/receipts/beta/GOLDEN-PATH-RECEIPT.md)

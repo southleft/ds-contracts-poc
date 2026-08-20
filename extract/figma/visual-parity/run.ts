@@ -29,7 +29,9 @@
  *                     with a warm cache the run is render-only (no images
  *                     API calls). Without the cache it refetches — offline
  *                     WITHOUT a cache fails loudly on the first fetch, never
- *                     silently passes.
+ *                     silently passes. A subject filter scopes the compare
+ *                     to those ids (the `maintain` catalog gate); omitted
+ *                     subjects are not treated as vanished.
  *   --write-baseline  after a reviewed full run: writes baseline.json
  *                     (per-row scores + per-subject pinned render boxes for
  *                     the offline eval pin). Explicit by design — an
@@ -171,9 +173,9 @@ async function main(): Promise<void> {
   const only = args.filter((a) => !a.startsWith('--'));
   const subjects = PARITY_SUBJECTS.filter((s) => only.length === 0 || only.includes(s.id));
   if (subjects.length === 0) throw new Error(`no subjects match: ${only.join(', ')}`);
-  if (summary && only.length > 0) {
-    throw new Error('--summary compares the FULL baseline — subject filters would hide regressions');
-  }
+  // A filtered --summary is the team maintain gate: it compares ONLY the
+  // named subjects. A full run with no filter still fails any vanished or
+  // new row across the whole map. Do not silently widen a scoped gate.
 
   mkdirSync(OUT, { recursive: true });
   mkdirSync(CACHE, { recursive: true });
@@ -289,7 +291,7 @@ async function main(): Promise<void> {
 
   await browser.close();
   if (summary) {
-    const failures = compareToBaseline(rows);
+    const failures = compareToBaseline(rows, only.length > 0 ? only : null);
     if (failures > 0) {
       console.error(`\nSUMMARY GATE: ${failures} named failure(s) vs baseline.json — see lines above`);
       process.exitCode = 1;
@@ -299,7 +301,7 @@ async function main(): Promise<void> {
     return;
   }
   writeReport(rows, subjectMeta, fontAvailability);
-  if (writeBaselineFlag) writeBaseline(rows, subjectMeta);
+  if (writeBaselineFlag) writeBaseline(rows, subjectMeta, only.length > 0 ? only : null);
   console.log(`\nREPORT: ${path.join(HERE, 'REPORT.md')}`);
 }
 
@@ -310,6 +312,7 @@ async function main(): Promise<void> {
 function writeBaseline(
   rows: Row[],
   subjectMeta: Array<{ subject: ParitySubject; composition: string; fonts: string; version: string }>,
+  mergeSubjects: string[] | null,
 ): void {
   let headCommit: string | null = null;
   try {
@@ -317,13 +320,40 @@ function writeBaseline(
   } catch {
     headCommit = null; // named in the file itself: null = git unavailable at write time
   }
-  const baseline: Baseline = {
-    generatedAt: new Date().toISOString(),
-    headCommit,
-    epsilonPp: EPSILON_PP,
-    subjects: {},
-    rows: {},
-  };
+  let baseline: Baseline;
+  if (mergeSubjects) {
+    // A filtered run must MERGE. A full replace here would drop every other
+    // subject's rows and --summary would then fail them as vanished — the
+    // Disabled restamp (one stem) would silently un-gate the rest of the map.
+    if (!existsSync(BASELINE)) {
+      throw new Error(
+        '--write-baseline with a subject filter needs an existing baseline.json — run a full pass first',
+      );
+    }
+    const prev = JSON.parse(readFileSync(BASELINE, 'utf8')) as Baseline;
+    const drop = new Set(mergeSubjects);
+    const rowsKept: Baseline['rows'] = {};
+    for (const [key, row] of Object.entries(prev.rows)) {
+      if (!drop.has(key.split(' :: ')[0]!)) rowsKept[key] = row;
+    }
+    const subjectsKept: Baseline['subjects'] = { ...prev.subjects };
+    for (const id of mergeSubjects) delete subjectsKept[id];
+    baseline = {
+      generatedAt: new Date().toISOString(),
+      headCommit,
+      epsilonPp: prev.epsilonPp ?? EPSILON_PP,
+      subjects: subjectsKept,
+      rows: rowsKept,
+    };
+  } else {
+    baseline = {
+      generatedAt: new Date().toISOString(),
+      headCommit,
+      epsilonPp: EPSILON_PP,
+      subjects: {},
+      rows: {},
+    };
+  }
   for (const m of subjectMeta) {
     const pinnedRow = rows.find(
       (r) => r.subject === m.subject.id && r.status === 'diffed' && (r.interaction ?? '') === '',
@@ -344,24 +374,34 @@ function writeBaseline(
     };
   }
   writeFileSync(BASELINE, JSON.stringify(baseline, null, 1) + '\n');
-  console.log(`baseline → ${path.relative(process.cwd(), BASELINE)} (${Object.keys(baseline.rows).length} rows)`);
+  console.log(
+    `baseline → ${path.relative(process.cwd(), BASELINE)} (${Object.keys(baseline.rows).length} rows${
+      mergeSubjects ? `; merged ${mergeSubjects.join(', ')}` : ''
+    })`,
+  );
 }
 
 /** Compare a fresh run against the committed baseline. Every failure prints
  *  a named line; the count is returned (0 = gate passes). Regressions beyond
  *  EPSILON_PP fail; improvements beyond it are NAMED (re-baseline to lock
  *  them in) but do not fail. */
-function compareToBaseline(rows: Row[]): number {
+function compareToBaseline(rows: Row[], scope: string[] | null): number {
   if (!existsSync(BASELINE)) {
     console.error(`✗ no baseline.json at ${BASELINE} — run a full pass with --write-baseline first`);
     return 1;
   }
   const baseline = JSON.parse(readFileSync(BASELINE, 'utf8')) as Baseline;
   const eps = baseline.epsilonPp ?? EPSILON_PP;
+  const inScope = (key: string): boolean => !scope || scope.includes(key.split(' :: ')[0]!);
   const current = new Map(rows.map((r) => [rowKey(r), r]));
   let failures = 0;
-  console.log(`\n── summary vs baseline ${baseline.generatedAt} (${baseline.headCommit?.slice(0, 7) ?? 'no commit recorded'}), ε ${eps}pp ──`);
+  console.log(
+    `\n── summary vs baseline ${baseline.generatedAt} (${baseline.headCommit?.slice(0, 7) ?? 'no commit recorded'}), ε ${eps}pp${
+      scope ? `; scoped to ${scope.join(', ')}` : ''
+    } ──`,
+  );
   for (const [key, base] of Object.entries(baseline.rows)) {
+    if (!inScope(key)) continue;
     const cur = current.get(key);
     if (!cur) {
       console.error(`✗ ${key}: in baseline, MISSING from this run (variant vanished / set edited?)`);
@@ -385,6 +425,7 @@ function compareToBaseline(rows: Row[]): number {
     }
   }
   for (const r of rows) {
+    if (!inScope(rowKey(r))) continue;
     if (!baseline.rows[rowKey(r)]) {
       console.error(`✗ ${rowKey(r)}: NEW row not in baseline — review the full report, then --write-baseline`);
       failures++;

@@ -1115,9 +1115,11 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   // SAME count and the same NAME inventory.
   // Wave 5 denominator (2026-08-05): 1543 → 2136 as carried Alert…TextField
   // contracts joined the mint surface.
+  // Wave 6 (2026-08-20): 2136 → 2144 — inventory moved with the token tree
+  // regen that shipped the node-opacity unbind; both paths still agree.
   assert(
-    mockA.variables.length === 2136 && mockB.variables.length === 2136,
-    `both paths land 2136 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
+    mockA.variables.length === 2144 && mockB.variables.length === 2144,
+    `both paths land 2144 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
   );
   assert(
     aliasCountOf(mockA) === 134 && aliasCountOf(mockB) === 134,
@@ -1217,7 +1219,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   );
 
   console.log(
-    `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} + standalone ${soloA} with 2136 variables (134 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
+    `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} + standalone ${soloA} with 2144 variables (134 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
   );
 
   // --- NESTED MODES ARE REFUSED, NOT SILENTLY FLATTENED TO BASE -----------

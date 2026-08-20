@@ -6,7 +6,7 @@ const COMPONENTS = [
   {
     "setName": "Switch",
     "contractId": "ds.switch",
-    "anchorKey": "7936496ebfb63f0f4908a29b7edd6dae340e4e23",
+    "anchorKey": "1a174ed109a4f98a2bdd48f6509cf18f06a6d75b",
     "description": "Switch — generated from contract ds.switch v2.0.1 †",
     "isSet": true,
     "boolProps": [],

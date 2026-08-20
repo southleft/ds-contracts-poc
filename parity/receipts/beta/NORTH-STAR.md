@@ -4,8 +4,13 @@ The product is a **contract-mediated** hop between a design-system codebase
 and a Figma library — props, metadata, variables, structure, specs — and
 back. Neither canvas nor React is the source of truth. The contract is.
 
-This page is the checklist. Status is current as of 2026-08-17. "Done" for
+This page is the checklist. Status is current as of 2026-08-20. "Done" for
 this lane is the **eight Flowbite stems**, not a fifty-component kit.
+
+**Unleash bar (not v1):** a design-system team can keep the eight Flowbite
+stems in line — edit the contract, generate React, bundle → amend Figma,
+dump → recover, and `npm run maintain` fails if a closed hole reopens.
+Do not claim v1. Do not open another kit to manufacture coverage.
 
 ## The hops that must work
 
@@ -43,6 +48,15 @@ this lane is the **eight Flowbite stems**, not a fifty-component kit.
 | Kbd | **pass** 0.42% AA (bar 5%). Bridge instrument vs real library orig-shot |
 | Gate: those scorecards cannot go silent | **done** — `npm run parity:flowbite` pins Kbd pass + HelperText/Label `FC-FONT-SUBSTRATE` |
 
+### P0 — Handoff (the loop a team actually runs)
+
+| Item | Status |
+|---|---|
+| Disabled opacity cannot wash to 0.5% on re-apply | **done** — emit unbinds stale OPACITY, then writes the 0–1 literal; `state-previews-bounded-canvas-only` pins the unbind line |
+| Catalog Button Disabled restamped on live canvas | **done** — `8nim1d0IPnehMxA7B7SYxC` set `5:21`; visual-parity Primary/Danger Disabled 93.91% → 5.48% (renderer class, same as Default) |
+| Standing visual gate locks that close | **done** — Button Disabled locked at 5.48%; Switch scores the live set at 0.00% masked; `npm run maintain` is the team command |
+| Focus Visible / Inter hug | **named walls** — `FC-GEOMETRY-EXCLUDED` / `FC-FONT-SUBSTRATE`. Do not climb |
+
 ### P1 — Recovery and parity (the round trip)
 
 | Item | Status |
@@ -50,7 +64,7 @@ this lane is the **eight Flowbite stems**, not a fifty-component kit.
 | Dump a set **this pipeline drew** → proposed contract | exists (`extract:figma`) |
 | Diff authored vs code-capture vs canvas properties | **done** — Flowbite `npm run parity:flowbite` |
 | First-party both-sides (Switch) | **done** — [SWITCH-BOTH-SIDES.md](./SWITCH-BOTH-SIDES.md) |
-| Name every standing gap | events never live on the canvas; dump cannot invent `onClick`; native `input` not drawn; catalog/script lag on Switch (`11:1286`); `FC-FONT-SUBSTRATE` |
+| Name every standing gap | events never live on the canvas; dump cannot invent `onClick`; native `input` not drawn; `FC-FONT-SUBSTRATE`. Switch visual-parity now scores the live set (`BMjUA2ue5CaZXU4kufxL0z` / `4:618`); node-lag vs the contract is pinned by `extract:figma:visual:anchors` |
 
 ### P2 — Scale (not this week)
 

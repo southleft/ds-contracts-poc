@@ -2705,7 +2705,13 @@ async function buildNode(spec, registry) {
   // slot.figmaProperty is spelled here and nowhere else.
   node.name = spec.type === 'slot' ? spec.slotProperty : spec.name;
   // Node opacity (dump v1.2 channel): applies to every node kind.
-  if (typeof spec.opacity === 'number') node.opacity = spec.opacity;
+  // Unbind first: a stale OPACITY variable (repo 0-1 token bound into
+  // Figma's percent-scaled field) wins over the literal and paints 0.5
+  // as 0.5% — the Disabled wash (visual-parity Button, 93.91% masked).
+  if (typeof spec.opacity === 'number') {
+    try { if (node.boundVariables && node.boundVariables.opacity) node.setBoundVariable('opacity', null); } catch (e) { /* not bindable */ }
+    node.opacity = spec.opacity;
+  }
   if (spec.visibleProp) {
     registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
   }

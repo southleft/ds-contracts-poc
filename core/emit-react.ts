@@ -2704,9 +2704,16 @@ function depAttrString(
     // A STRING against a boolean dep prop would emit supportingText="false" —
     // truthy at runtime, silently rendering a part the canvas hides (audit
     // class string-boolean-coercion). Composition owns the coercion; the
-    // emitter refuses the mismatch loudly. `{parentProp}` references are the
-    // one legal string spelling for any type.
+    // emitter applies it here as well so a leftover "true"/"false" from a
+    // sibling that was not in scope at propose still emits as a boolean.
+    // `{parentProp}` references are the one legal non-boolean string spelling.
     if (depProp?.type === 'boolean' && !(parentRef && parent)) {
+      const spelled = value.trim().toLowerCase();
+      if (spelled === 'true' || spelled === 'false') {
+        const coerced = spelled === 'true';
+        parts.push(coerced ? ` ${codeName}` : depProp.default === false ? '' : ` ${codeName}={false}`);
+        continue;
+      }
       throw new Error(
         `${dep.id}: applied value ${JSON.stringify(value)} for prop "${propName}" is a string but the dependency types it boolean — coerce at composition ('False' → false), never pass the spelling through`,
       );
@@ -2816,7 +2823,16 @@ export function generateTsx(
     ...new Set(
       walkAnatomy(contract)
         .filter((w) => w.part.component)
-        .map((w) => byId.get(w.part.component!.id)!.name),
+        .map((w) => {
+          const id = w.part.component!.id;
+          const dep = byId.get(id);
+          if (!dep) {
+            throw new Error(
+              `generateTsx: component ref "${id}" is not in byId — register the child contract or its stub`,
+            );
+          }
+          return dep.name;
+        }),
     ),
   ];
 

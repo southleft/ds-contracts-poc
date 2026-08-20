@@ -81,6 +81,10 @@ conformance/.sandbox/
 # committing it would make a re-run look like a diff.
 # Eventz whole-file Path A — REST dumps and caches (SCORECARD.md is committed)
 parity/receipts/eventz-wholefile/out/
+# CBDS whole-file Path A — generated contracts / caches (SCORECARD.md is committed)
+parity/receipts/cbds-wholefile/out/
+# Figma Design System whole-file Path A
+parity/receipts/figma-ds-wholefile/out/
 
 demo/flowbite.dump.json
 demo/proposed/
