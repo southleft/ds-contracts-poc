@@ -54,7 +54,7 @@ Do not claim v1. Do not open another kit to manufacture coverage.
 |---|---|
 | Disabled opacity cannot wash to 0.5% on re-apply | **done** — emit unbinds stale OPACITY, then writes the 0–1 literal; `state-previews-bounded-canvas-only` pins the unbind line |
 | Catalog Button Disabled restamped on live canvas | **done** — `8nim1d0IPnehMxA7B7SYxC` set `5:21`; visual-parity Primary/Danger Disabled 93.91% → 5.48% (renderer class, same as Default) |
-| Standing visual gate locks that close | **done** — Button Disabled locked at 5.48%; Switch scores the live set at 0.00% masked; `npm run maintain` is the team command |
+| Standing visual gate locks that close | **done** — Button Disabled locked at 5.48%; Badge/Button/Checkbox/Switch score the live sets the contracts claim; `npm run maintain` is the team command |
 | Focus Visible / Inter hug | **named walls** — `FC-GEOMETRY-EXCLUDED` / `FC-FONT-SUBSTRATE`. Do not climb |
 
 ### P1 — Recovery and parity (the round trip)

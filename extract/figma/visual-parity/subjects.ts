@@ -51,6 +51,7 @@ export type ParitySubject = DumpSubject | ContractSubject;
 
 const CBDS = 'WofZT8xaxXuc2Q6Je9S4XE';
 const MAIN = '8nim1d0IPnehMxA7B7SYxC';
+const LIVE = 'BMjUA2ue5CaZXU4kufxL0z';
 
 export const PARITY_SUBJECTS: ParitySubject[] = [
   // ---- CBDS fixtures (the owner's file) -----------------------------------
@@ -111,9 +112,9 @@ export const PARITY_SUBJECTS: ParitySubject[] = [
   },
 
   // ---- catalog contracts anchored in the main POC file ---------------------
-  { id: 'badge', label: 'Badge (catalog)', kind: 'contract', contractId: 'ds.badge', fileKey: MAIN, setNodeId: '6:10' },
-  { id: 'button', label: 'Button (catalog)', kind: 'contract', contractId: 'ds.button', fileKey: MAIN, setNodeId: '5:21' },
-  { id: 'checkbox', label: 'Checkbox (catalog)', kind: 'contract', contractId: 'ds.checkbox', fileKey: MAIN, setNodeId: '11:315' },
-  { id: 'switch', label: 'Switch (catalog)', kind: 'contract', contractId: 'ds.switch', fileKey: 'BMjUA2ue5CaZXU4kufxL0z', setNodeId: '4:618' },
+  { id: 'badge', label: 'Badge (catalog)', kind: 'contract', contractId: 'ds.badge', fileKey: LIVE, setNodeId: '4:313' },
+  { id: 'button', label: 'Button (catalog)', kind: 'contract', contractId: 'ds.button', fileKey: LIVE, setNodeId: '4:412' },
+  { id: 'checkbox', label: 'Checkbox (catalog)', kind: 'contract', contractId: 'ds.checkbox', fileKey: LIVE, setNodeId: '4:594' },
+  { id: 'switch', label: 'Switch (catalog)', kind: 'contract', contractId: 'ds.switch', fileKey: LIVE, setNodeId: '4:618' },
   { id: 'heading', label: 'Heading (catalog)', kind: 'contract', contractId: 'ds.heading', fileKey: MAIN, setNodeId: '32:1862' },
 ];
