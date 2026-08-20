@@ -1,0 +1,96 @@
+{
+  "imported": {
+    "avatar-polaris-avatar": {
+      "root": {
+        "background-color": {
+          "$value": "#c530c5",
+          "$type": "color"
+        },
+        "border-radius": {
+          "md": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "xs": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "sm": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "lg": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "xl": {
+            "$value": "8px",
+            "$type": "dimension"
+          }
+        },
+        "min-width": {
+          "$value": "20px",
+          "$type": "dimension"
+        },
+        "width": {
+          "md": {
+            "$value": "28px",
+            "$type": "dimension"
+          },
+          "xs": {
+            "$value": "20px",
+            "$type": "dimension"
+          },
+          "sm": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "lg": {
+            "$value": "32px",
+            "$type": "dimension"
+          },
+          "xl": {
+            "$value": "40px",
+            "$type": "dimension"
+          }
+        },
+        "height": {
+          "md": {
+            "$value": "28px",
+            "$type": "dimension"
+          },
+          "xs": {
+            "$value": "20px",
+            "$type": "dimension"
+          },
+          "sm": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "lg": {
+            "$value": "32px",
+            "$type": "dimension"
+          },
+          "xl": {
+            "$value": "40px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "initials-tp": {
+        "color": {
+          "$value": "#fdeffd",
+          "$type": "color"
+        },
+        "font-size": {
+          "$value": "13px",
+          "$type": "dimension"
+        },
+        "font-weight": {
+          "$value": "500",
+          "$type": "number"
+        }
+      }
+    }
+  }
+}
