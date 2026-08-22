@@ -951,7 +951,7 @@ console.log(
   `${OUT_NAME} — ${fmt(REAL_N)} measured components over ${fmt(LIBRARIES.length)} libraries ` +
     `(mean ${f1(REAL_MEAN)}%, cell-weighted ${f1(REAL_WEIGHTED)}%, coverage ${COV_TOTAL ? f1(pct(COVERED_N, COV_TOTAL.size)) : '?'}%), ` +
     `${fmt(fidScored.length)} scored canvas variants (${f2(FID_MEAN)}%), ` +
-    `${fmt(evals.passed)}/${fmt(evals.total)} evals, ${fmt(DAGGER_TOTAL)} dropped-fact receipts, ` +
+    `${fmt(evals.total)} evals (whether the committed run is green is docs:check's fact, not this file's), ${fmt(DAGGER_TOTAL)} dropped-fact receipts, ` +
     `${fmt(checks.length)} cross-checks (${CHECKS_FAILED.length} disagreeing), ` +
     `${fmt(notAnswered.length)} question(s) the sources cannot answer`,
 );

@@ -116,16 +116,6 @@ const EXCLUDED: Record<string, string> = {
     "Subsumed by console-loop:all:evidence:check (fast lane) — see console-loop:evidence:check.",
   "root:console-loop:tailwind:evidence:check":
     "Subsumed by console-loop:all:evidence:check (fast lane) — see console-loop:evidence:check.",
-  "root:extract:figma:visual:catalog":
-    "The Figma half of `npm run maintain:visual`: run.ts --summary fetches Figma's own PNG of every " +
-    "variant through the images API with FIGMA_TOKEN (figmaToken() in extract/fidelity-matrix/scripts/env.ts " +
-    "— env or .env.local) and keeps them in the gitignored extract/figma/visual-parity/out/_cache; on a " +
-    "clean clone with no cache it exits 1 with 'FIGMA_TOKEN not found'. `gh secret list` showed NO " +
-    "repository secret on 2026-08-22, so a lane step would be a guaranteed red wearing a contributor's " +
-    "name. It joins catalog-visual.yml the day a FIGMA_TOKEN secret exists (env: FIGMA_TOKEN: " +
-    "${{ secrets.FIGMA_TOKEN }} on the step). The token-free half — subject ≡ contract figma anchors " +
-    "(extract:figma:visual:anchors) — runs in the fast lane, and the committed baseline.json is what " +
-    "the local run compares against.",
   "root:fidelity:uui:fresh":
     "Byte-compares renders/fidelity.json against a re-derivation whose kernel runs canvas drawImage " +
     "resampling inside Chromium, so its byte-identity across OSes is UNVERIFIED (catalog-visual keeps " +
