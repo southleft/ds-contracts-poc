@@ -58,6 +58,7 @@ const COMPONENTS = [
   {
     "setName": "Badge",
     "contractId": "astryx.badge",
+    "version": "0.3.1",
     "anchorKey": null,
     "description": "Badge — generated from contract astryx.badge v0.3.1 †",
     "isSet": true,
@@ -1538,6 +1539,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -1775,6 +1777,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -2047,6 +2050,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
@@ -2087,6 +2091,7 @@ const COMPONENTS = [
   {
     "setName": "Banner",
     "contractId": "astryx.banner",
+    "version": "0.2.0",
     "anchorKey": null,
     "description": "Banner — generated from contract astryx.banner v0.2.0",
     "isSet": true,
@@ -3849,6 +3854,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -4086,6 +4092,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -4358,6 +4365,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
@@ -4398,6 +4406,7 @@ const COMPONENTS = [
   {
     "setName": "Button",
     "contractId": "astryx.button",
+    "version": "0.3.0",
     "anchorKey": null,
     "description": "Button — generated from contract astryx.button v0.3.0 †",
     "isSet": true,
@@ -6023,6 +6032,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -6260,6 +6270,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -6532,6 +6543,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
@@ -6572,6 +6584,7 @@ const COMPONENTS = [
   {
     "setName": "Card",
     "contractId": "astryx.card",
+    "version": "0.3.0",
     "anchorKey": null,
     "description": "Card — generated from contract astryx.card v0.3.0 †",
     "isSet": true,
@@ -8187,6 +8200,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -8424,6 +8438,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -8696,6 +8711,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
@@ -8736,6 +8752,7 @@ const COMPONENTS = [
   {
     "setName": "CheckboxInput",
     "contractId": "astryx.checkbox-input",
+    "version": "0.1.0",
     "anchorKey": null,
     "description": "CheckboxInput — generated from contract astryx.checkbox-input v0.1.0",
     "isSet": true,
@@ -9827,6 +9844,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -10088,6 +10106,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -10384,6 +10403,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
@@ -10424,6 +10444,7 @@ const COMPONENTS = [
   {
     "setName": "ProgressBar",
     "contractId": "astryx.progress-bar",
+    "version": "0.1.0",
     "anchorKey": null,
     "description": "ProgressBar — generated from contract astryx.progress-bar v0.1.0 †",
     "isSet": true,
@@ -11867,6 +11888,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -12128,6 +12150,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -12424,6 +12447,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
@@ -12464,6 +12488,7 @@ const COMPONENTS = [
   {
     "setName": "Slider",
     "contractId": "astryx.slider",
+    "version": "0.4.0",
     "anchorKey": null,
     "description": "Slider — generated from contract astryx.slider v0.4.0 †",
     "isSet": true,
@@ -14728,6 +14753,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -14993,6 +15019,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -15292,6 +15319,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
@@ -15332,6 +15360,7 @@ const COMPONENTS = [
   {
     "setName": "Switch",
     "contractId": "astryx.switch",
+    "version": "0.2.0",
     "anchorKey": null,
     "description": "Switch — generated from contract astryx.switch v0.2.0 †",
     "isSet": true,
@@ -17032,6 +17061,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -17296,6 +17326,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -17595,6 +17626,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
@@ -17635,6 +17667,7 @@ const COMPONENTS = [
   {
     "setName": "TextInput",
     "contractId": "astryx.text-input",
+    "version": "0.2.0",
     "anchorKey": null,
     "description": "TextInput — generated from contract astryx.text-input v0.2.0",
     "isSet": true,
@@ -19426,6 +19459,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -19663,6 +19697,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -19935,6 +19970,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
@@ -19975,6 +20011,7 @@ const COMPONENTS = [
   {
     "setName": "Token",
     "contractId": "astryx.token",
+    "version": "0.1.0",
     "anchorKey": null,
     "description": "Token — generated from contract astryx.token v0.1.0",
     "isSet": true,
@@ -22210,6 +22247,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -22447,6 +22485,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -22719,6 +22758,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
@@ -22759,6 +22799,7 @@ const COMPONENTS = [
   {
     "setName": "DropdownMenuItem",
     "contractId": "astryx.dropdown-menu-item",
+    "version": "0.2.0",
     "anchorKey": null,
     "description": "DropdownMenuItem — generated from contract astryx.dropdown-menu-item v0.2.0",
     "isSet": false,
@@ -23710,6 +23751,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -23947,6 +23989,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -24219,6 +24262,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
@@ -24259,6 +24303,7 @@ const COMPONENTS = [
   {
     "setName": "Toast",
     "contractId": "astryx.toast",
+    "version": "0.2.0",
     "anchorKey": null,
     "description": "Toast — generated from contract astryx.toast v0.2.0 †",
     "isSet": false,
@@ -25516,6 +25561,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -25778,6 +25824,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -26075,6 +26122,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
@@ -26118,6 +26166,7 @@ const COMPONENTS = [
   {
     "setName": "DropdownMenu",
     "contractId": "astryx.dropdown-menu",
+    "version": "0.2.0",
     "anchorKey": null,
     "description": "DropdownMenu — generated from contract astryx.dropdown-menu v0.2.0 †",
     "isSet": false,
@@ -27117,6 +27166,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -27354,6 +27404,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -27626,6 +27677,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',

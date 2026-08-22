@@ -101,6 +101,10 @@ export interface PromoteConfig {
    *  loss). Carbon ships these; turning it on elsewhere ADDS receipt lines to
    *  that library's MINTED.md, so it stays opt-in per library. */
   unjoinedFactReceipts?: boolean;
+  /** Repo-relative AUTHORED-FACTS ledger (see the authored-facts door below):
+   *  reviewed hand-authored facts the capture cannot carry, applied here so
+   *  the committed artifacts stay re-derivable. Optional; no field, no path. */
+  authored?: string;
 }
 
 const REQUIRED: Array<keyof PromoteConfig> = [
@@ -368,29 +372,8 @@ export function resolutionGuard(
   const leafSet = leafPaths(minted);
   const dangling: string[] = [];
   for (const { name, contract } of contracts) {
-    const enums: Record<string, string[]> = {};
-    for (const pr of (contract.props ?? []) as Array<{
-      name: string;
-      type?: { enum?: string[] };
-    }>) {
-      if (pr.type?.enum) enums[pr.name] = pr.type.enum;
-    }
-    const expand = (ref: string): string[] => {
-      let refs = [ref];
-      for (const [prop, vals] of Object.entries(enums)) {
-        if (!ref.includes(`{${prop}}`)) continue;
-        refs = refs.flatMap((r) =>
-          vals.map((v) => r.replaceAll(`{${prop}}`, v)),
-        );
-      }
-      return refs;
-    };
-    for (const m of JSON.stringify(contract).matchAll(
-      /"\{(imported\.[^"]+)\}"/g,
-    )) {
-      for (const r of expand(m[1])) {
-        if (!leafSet.has(r)) dangling.push(`${name}: {${r}} (from {${m[1]}})`);
-      }
+    for (const { ref, from } of expandedImportedRefs(contract)) {
+      if (!leafSet.has(ref)) dangling.push(`${name}: {${ref}} (from {${from}})`);
     }
   }
   const badAliases: string[] = [];
@@ -407,6 +390,324 @@ export function resolutionGuard(
 }
 
 // ---------------------------------------------------------------------------
+// AUTHORED FACTS — the reviewed hand-authoring door (2026-08-22)
+//
+// WHY. Commit 16889547 (2026-08-17) authored the Fab/Avatar boxes, clipped
+// Accordion's collapse-root and dropped Link's glyph-hugging width by editing
+// the PROMOTED contracts and the minted tree directly — facts the capture
+// cannot carry (the geometry exclusion refuses a flex root's width/height by
+// design; the 30.22px Link width is a capture-font fact, not the library's).
+// The canvas got better and the artifacts stopped being re-derivable: the
+// next promotion would have silently reverted all four, and one minted leaf
+// (`imported.link.root.width`) shipped as a Figma variable nothing bound.
+//
+// The door: a per-library ledger (`authored` in ds-library.json), applied by
+// THIS module after the computed contract is read and before the resolution
+// guard, so re-promotion reproduces the committed bytes and every authored
+// fact names its cause. Strict by construction — every row REFUSES BY NAME
+// when the capture already carries what it sets, when its target part/prop/
+// value/leaf does not exist, or when a pruned leaf is still referenced — so a
+// ledger row cannot outlive the capture gap it papers over: the day the
+// capture learns to carry the fact, the promotion refuses and the row is
+// deleted. Authored keys APPEND after the capture's keys, in ledger order
+// (the capture's own convention for plane groups); nothing is re-sorted.
+// Libraries without a ledger are byte-neutral (no field, no code path).
+// ---------------------------------------------------------------------------
+
+export interface AuthoredRow {
+  /** Capture out-dir name (`components` spelling, not the contract stem). */
+  component: string;
+  /** Anatomy part name — the target for `declared`/`tokens`/`tokensByProp`/
+   *  `unset`, and for `fields`/`edit` when the fact lives on a part. */
+  part?: string;
+  /** A `props[]` entry by name — the target for `fields`/`edit` on a prop
+   *  (tailwind Alert's `dismissable` rebinding). Exclusive with `part`. */
+  prop?: string;
+  /** Dotted descent INSIDE the target (root / part / prop) to the object
+   *  `fields`/`edit` act on (`semantics`, `layout`). Every segment must be an
+   *  existing plain object — a missing group is a named refusal. */
+  path?: string;
+  set?: {
+    declared?: Record<string, string>;
+    tokens?: Record<string, string>;
+    /** prop → enum value → channel → token ref. */
+    tokensByProp?: Record<string, Record<string, Record<string, string>>>;
+    /** New keys on the target object (any JSON value: `events`, `element`,
+     *  `attrs`, `role`…). A key the capture already carries refuses. */
+    fields?: Record<string, unknown>;
+    /** Place the new `fields` keys immediately after this existing key
+     *  instead of appending — committed byte order is a fact too (Alert's
+     *  `element`/`attrs` sit after `description`, `events` after `anatomy`).
+     *  Names a key the target lacks → refusal. */
+    after?: string;
+  };
+  unset?: { tokens?: string[] };
+  /** Existing scalar/JSON fields of the target (dotted inside it:
+   *  `bindings.code.prop`) rewritten from → to. The current value must equal
+   *  `from` exactly, so a capture that moves under the row refuses by name
+   *  instead of being overwritten. */
+  edit?: Record<string, { from: unknown; to: unknown }>;
+  /** Dotted `imported.<component>.<part>…` leaf → DTCG leaf. */
+  mint?: Record<string, Leaf>;
+  /** Dotted leaf paths to REMOVE from the merged minted tree. */
+  prune?: string[];
+  /** The reviewed reason; committed bytes, quoted in MINTED.md. */
+  cause: string;
+}
+
+/** PURE referee: unknown JSON → rows, refusing every malformed row BY NAME. */
+export function parseAuthoredLedger(raw: unknown, from: string): AuthoredRow[] {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) {
+    throw new Error(`${from}: authored ledger must be a JSON object with a "rows" array`);
+  }
+  const rows = (raw as { rows?: unknown }).rows;
+  if (!Array.isArray(rows)) throw new Error(`${from}: authored ledger is missing the "rows" array`);
+  rows.forEach((r, i) => {
+    const row = r as Record<string, unknown>;
+    const at = `${from} row ${i}`;
+    if (!row || typeof row !== "object") throw new Error(`${at}: must be an object`);
+    if (typeof row.component !== "string" || !row.component) throw new Error(`${at}: "component" must name a capture out-dir`);
+    if (typeof row.cause !== "string" || !row.cause.trim()) throw new Error(`${at}: "cause" must say why this fact is authored by hand`);
+    const ops = ["set", "unset", "edit", "mint", "prune"].filter((k) => row[k] !== undefined);
+    if (ops.length === 0) throw new Error(`${at}: names no operation (set / unset / edit / mint / prune)`);
+    if (row.part !== undefined && row.prop !== undefined) throw new Error(`${at}: "part" and "prop" are exclusive targets`);
+    const set = (row.set ?? {}) as Record<string, unknown>;
+    const partOnly = ["declared", "tokens", "tokensByProp"].filter((k) => set[k] !== undefined);
+    if ((partOnly.length > 0 || row.unset !== undefined) && typeof row.part !== "string") {
+      throw new Error(`${at}: ${[...partOnly, ...(row.unset !== undefined ? ["unset"] : [])].join("/")} need a "part" (anatomy part name)`);
+    }
+    if ((partOnly.length > 0 || row.unset !== undefined) && row.path !== undefined) {
+      throw new Error(`${at}: declared/tokens/tokensByProp/unset act on the part itself — "path" is for fields/edit`);
+    }
+    if (set.after !== undefined && (typeof set.after !== "string" || !set.fields)) {
+      throw new Error(`${at}: "after" must be a key name and needs "fields" to place`);
+    }
+    for (const [k, e] of Object.entries((row.edit as Record<string, unknown>) ?? {})) {
+      if (!e || typeof e !== "object" || !("from" in e) || !("to" in e)) {
+        throw new Error(`${at}: edit "${k}" must carry both "from" (the captured value) and "to"`);
+      }
+    }
+    for (const [leaf, v] of Object.entries((row.mint as Record<string, unknown>) ?? {})) {
+      if (!isLeaf(v) || typeof v.$value !== "string" || typeof v.$type !== "string") {
+        throw new Error(`${at}: mint "${leaf}" must be a DTCG leaf with string $value and $type`);
+      }
+      if (!leaf.startsWith(`imported.${row.component}.`)) {
+        throw new Error(`${at}: mint "${leaf}" must live under imported.${row.component}. — authored leaves mint in the component's own namespace`);
+      }
+    }
+  });
+  return rows as AuthoredRow[];
+}
+
+type AnatomyPart = Record<string, unknown> & { parts?: Record<string, AnatomyPart> };
+
+/** PURE: the ONE part of that name in the anatomy tree (0 or 2+ → null). */
+function findPart(contract: Record<string, unknown>, name: string): AnatomyPart | null {
+  const hits: AnatomyPart[] = [];
+  const visit = (parts: Record<string, AnatomyPart> | undefined): void => {
+    for (const [n, p] of Object.entries(parts ?? {})) {
+      if (n === name) hits.push(p);
+      visit(p.parts);
+    }
+  };
+  visit(contract.anatomy as Record<string, AnatomyPart> | undefined);
+  return hits.length === 1 ? hits[0] : null;
+}
+
+/** PURE (mutates the contract): apply one row's set/unset; returns the receipt
+ *  fragments. Every impossible or already-carried edit REFUSES BY NAME. */
+export function applyAuthoredContractRow(
+  contract: Record<string, unknown>,
+  row: AuthoredRow,
+): string[] {
+  const done: string[] = [];
+  if (!row.set && !row.unset && !row.edit) return done;
+  const label = `authored ${row.component}${row.part ? `.${row.part}` : row.prop ? ` prop ${row.prop}` : ""}${row.path ? ` @${row.path}` : ""}`;
+  const isObj = (v: unknown): v is Record<string, unknown> =>
+    !!v && typeof v === "object" && !Array.isArray(v);
+  // The target: the part, the prop, or the contract root — then `path`.
+  let part: AnatomyPart | null = null;
+  let target: Record<string, unknown> = contract;
+  if (row.part !== undefined) {
+    part = findPart(contract, row.part);
+    if (!part) {
+      throw new Error(`${label}: part "${row.part}" is not exactly one part of the promoted anatomy — NAMED refusal (the anatomy promotion no longer carries it, or the name is ambiguous)`);
+    }
+    target = part;
+  } else if (row.prop !== undefined) {
+    const hits = ((contract.props ?? []) as Array<Record<string, unknown>>).filter((p) => p.name === row.prop);
+    if (hits.length !== 1) throw new Error(`${label}: prop "${row.prop}" is not exactly one entry of props[] — NAMED refusal`);
+    target = hits[0];
+  }
+  for (const seg of row.path ? row.path.split(".") : []) {
+    const next = target[seg];
+    if (!isObj(next)) throw new Error(`${label}: path segment "${seg}" is not an existing object on the target — NAMED refusal (the capture does not carry that group)`);
+    target = next;
+  }
+  const descend = (root: Record<string, unknown>, dotted: string): [Record<string, unknown>, string] => {
+    const segs = dotted.split(".");
+    let node = root;
+    for (const seg of segs.slice(0, -1)) {
+      const next = node[seg];
+      if (!isObj(next)) throw new Error(`${label}: "${dotted}" — segment "${seg}" is not an existing object — NAMED refusal`);
+      node = next;
+    }
+    return [node, segs[segs.length - 1]];
+  };
+  if (row.set?.fields) {
+    const fields = row.set.fields;
+    for (const k of Object.keys(fields)) {
+      if (k in target) {
+        throw new Error(`${label}: field "${k}" is ALREADY carried by the capture (${JSON.stringify(target[k]).slice(0, 80)}) — the authored row is stale; delete it rather than let two sources disagree`);
+      }
+    }
+    const after = row.set.after;
+    if (after !== undefined && !(after in target)) {
+      throw new Error(`${label}: "after" names "${after}", which the target does not carry — NAMED refusal`);
+    }
+    // Placement is a byte fact: rebuild the key order in place (same object
+    // reference — the part/prop stays wired into the contract).
+    const entries = Object.entries(target);
+    const at = after === undefined ? entries.length : entries.findIndex(([k]) => k === after) + 1;
+    entries.splice(at, 0, ...Object.entries(fields));
+    for (const k of Object.keys(target)) delete target[k];
+    for (const [k, v] of entries) target[k] = v;
+    done.push(`set fields ${Object.keys(fields).join(", ")}${after !== undefined ? ` (after ${after})` : ""}`);
+  }
+  if (row.edit) {
+    for (const [dotted, { from, to }] of Object.entries(row.edit)) {
+      const [node, key] = descend(target, dotted);
+      if (!(key in node)) throw new Error(`${label}: edit "${dotted}" — the capture no longer carries it; the authored row is stale, delete it`);
+      if (JSON.stringify(node[key]) !== JSON.stringify(from)) {
+        throw new Error(`${label}: edit "${dotted}" — the captured value moved (now ${JSON.stringify(node[key]).slice(0, 80)}, row expected ${JSON.stringify(from).slice(0, 80)}); re-review the row`);
+      }
+      node[key] = to;
+    }
+    done.push(`edit ${Object.keys(row.edit).join(", ")}`);
+  }
+  if (!part) return done;
+  const setMap = (field: "declared" | "tokens", values: Record<string, string>): void => {
+    const target = ((part[field] as Record<string, string> | undefined) ??= {});
+    for (const [k, v] of Object.entries(values)) {
+      if (k in target) {
+        throw new Error(`${label}: ${field}.${k} is ALREADY carried by the capture (${JSON.stringify(target[k])}) — the authored row is stale; delete it rather than let two sources disagree`);
+      }
+      target[k] = v;
+    }
+    done.push(`set ${field} ${Object.keys(values).join(", ")}`);
+  };
+  if (row.set?.declared) setMap("declared", row.set.declared);
+  if (row.set?.tokens) setMap("tokens", row.set.tokens);
+  if (row.set?.tokensByProp) {
+    const props = (contract.props ?? []) as Array<{ name: string; type?: { enum?: string[] } }>;
+    const raw = part.tokensByProp as Array<{ prop: string; map: Record<string, Record<string, string>> }> | { prop: string; map: Record<string, Record<string, string>> } | undefined;
+    const entries = raw === undefined ? [] : Array.isArray(raw) ? raw : [raw];
+    for (const [prop, byValue] of Object.entries(row.set.tokensByProp)) {
+      const enumValues = props.find((p) => p.name === prop)?.type?.enum;
+      if (!enumValues) throw new Error(`${label}: tokensByProp prop "${prop}" is not an enum prop of this contract`);
+      const matching = entries.filter((e) => e.prop === prop);
+      if (matching.length > 1) throw new Error(`${label}: tokensByProp has ${matching.length} entries for prop "${prop}" — ambiguous target`);
+      let entry = matching[0];
+      if (!entry) {
+        entry = { prop, map: {} };
+        entries.push(entry);
+      }
+      for (const [value, channels] of Object.entries(byValue)) {
+        if (!enumValues.includes(value)) throw new Error(`${label}: "${value}" is not a value of enum prop "${prop}" (${enumValues.join(", ")})`);
+        const cell = (entry.map[value] ??= {});
+        for (const [k, v] of Object.entries(channels)) {
+          if (k in cell) throw new Error(`${label}: tokensByProp ${prop}=${value}.${k} is ALREADY carried by the capture (${JSON.stringify(cell[k])}) — stale authored row`);
+          cell[k] = v;
+        }
+      }
+      done.push(`set tokensByProp ${prop}=${Object.keys(byValue).join("|")} ${[...new Set(Object.values(byValue).flatMap((c) => Object.keys(c)))].join(", ")}`);
+    }
+    part.tokensByProp = Array.isArray(raw) || raw === undefined ? entries : entries[0];
+  }
+  if (row.unset?.tokens) {
+    const tokens = part.tokens as Record<string, string> | undefined;
+    for (const k of row.unset.tokens) {
+      if (!tokens || !(k in tokens)) throw new Error(`${label}: unset tokens.${k} — the capture no longer binds it; the authored row is stale, delete it`);
+      delete tokens[k];
+    }
+    if (tokens && Object.keys(tokens).length === 0) delete part.tokens;
+    done.push(`unset tokens ${row.unset.tokens.join(", ")}`);
+  }
+  return done;
+}
+
+/** PURE (mutates the tree): add authored leaves; an existing node at the path
+ *  (leaf OR group) is a NAMED refusal — the capture already mints it. */
+export function applyAuthoredMint(tree: Tree, row: AuthoredRow): string[] {
+  if (!row.mint) return [];
+  for (const [leaf, value] of Object.entries(row.mint)) {
+    const segs = leaf.split(".");
+    let node: Tree = tree;
+    for (const s of segs.slice(0, -1)) {
+      const next = node[s];
+      if (next === undefined) node[s] = {};
+      else if (!isTree(next)) throw new Error(`authored mint ${leaf}: "${s}" is a leaf in the capture's minted tree, not a group`);
+      node = node[s] as Tree;
+    }
+    const last = segs[segs.length - 1];
+    if (last in node) {
+      throw new Error(`authored mint ${leaf}: the capture ALREADY mints this path — the authored row is stale; delete it rather than let two sources disagree`);
+    }
+    node[last] = { $value: value.$value, $type: value.$type };
+  }
+  return [`mint ${Object.keys(row.mint).join(", ")}`];
+}
+
+/** PURE (mutates the tree): remove named leaves, then any group they emptied.
+ *  A leaf that does not exist, or that some contract still references
+ *  (axis-expanded), is a NAMED refusal. */
+export function applyAuthoredPrune(tree: Tree, row: AuthoredRow, referenced: Set<string>): string[] {
+  if (!row.prune) return [];
+  for (const leaf of row.prune) {
+    if (referenced.has(leaf)) {
+      throw new Error(`authored prune ${leaf}: a promoted contract still references this leaf — prune refused; unset the binding in the same row first`);
+    }
+    const segs = leaf.split(".");
+    const chain: Array<[Tree, string]> = [];
+    let node: Tree = tree;
+    for (const s of segs.slice(0, -1)) {
+      const next = node[s];
+      if (!isTree(next)) throw new Error(`authored prune ${leaf}: not in the minted tree (no group "${s}") — the capture no longer mints it; the authored row is stale, delete it`);
+      chain.push([node, s]);
+      node = next;
+    }
+    const last = segs[segs.length - 1];
+    if (!isLeaf(node[last])) throw new Error(`authored prune ${leaf}: not a leaf of the minted tree — the capture no longer mints it; the authored row is stale, delete it`);
+    delete node[last];
+    for (let i = chain.length - 1; i >= 0; i--) {
+      const [parent, key] = chain[i];
+      if (Object.keys(parent[key] as Tree).length === 0) delete parent[key];
+      else break;
+    }
+  }
+  return [`prune ${row.prune.join(", ")}`];
+}
+
+/** PURE: every `{imported.*}` ref a contract makes, with its enum axis
+ *  placeholders expanded over that contract's prop values. */
+export function expandedImportedRefs(contract: Record<string, unknown>): Array<{ ref: string; from: string }> {
+  const enums: Record<string, string[]> = {};
+  for (const pr of (contract.props ?? []) as Array<{ name: string; type?: { enum?: string[] } }>) {
+    if (pr.type?.enum) enums[pr.name] = pr.type.enum;
+  }
+  const out: Array<{ ref: string; from: string }> = [];
+  for (const m of JSON.stringify(contract).matchAll(/"\{(imported\.[^"]+)\}"/g)) {
+    let refs = [m[1]];
+    for (const [prop, vals] of Object.entries(enums)) {
+      if (!m[1].includes(`{${prop}}`)) continue;
+      refs = refs.flatMap((r) => vals.map((v) => r.replaceAll(`{${prop}}`, v)));
+    }
+    for (const r of refs) out.push({ ref: r, from: m[1] });
+  }
+  return out;
+}
+
+// ---------------------------------------------------------------------------
 // Shell — the promotion run
 // ---------------------------------------------------------------------------
 
@@ -418,6 +719,8 @@ export interface PromoteResult {
   receipts: string[];
   statePreviewsOn: string[];
   stateRefusals: string[];
+  /** One receipt per authored-facts row applied (empty without a ledger). */
+  authoredReceipts: string[];
 }
 
 export interface PromotionCommitOptions {
@@ -590,6 +893,34 @@ export function promote(
     }
   }
 
+  // AUTHORED FACTS (the reviewed hand-authoring door, above): loaded and
+  // refereed before any contract is read, so a malformed ledger refuses the
+  // whole promotion rather than half of it.
+  const authoredRows: AuthoredRow[] = [];
+  if (cfg.authored) {
+    const ledgerPath = path.resolve(repoRoot, cfg.authored);
+    if (!existsSync(ledgerPath)) {
+      throw new Error(
+        `promote REFUSED: the authored-facts ledger the manifest names does not exist (${cfg.authored}, resolved ${ledgerPath})`,
+      );
+    }
+    authoredRows.push(
+      ...parseAuthoredLedger(JSON.parse(readFileSync(ledgerPath, "utf8")), cfg.authored),
+    );
+    for (const row of authoredRows) {
+      if (!cfg.components.includes(row.component)) {
+        throw new Error(
+          `${cfg.authored}: row names component "${row.component}", which is not in this manifest's components — NAMED refusal`,
+        );
+      }
+    }
+  }
+  const authoredDone = new Map<AuthoredRow, string[]>();
+  const noteAuthored = (row: AuthoredRow, done: string[]): void => {
+    if (done.length === 0) return;
+    authoredDone.set(row, [...(authoredDone.get(row) ?? []), ...done]);
+  };
+
   const stateRefusals: string[] = [];
   const statePreviewsOn: string[] = [];
   /** The Polaris probe: opt into `figmaStatePreviews` wherever the REFEREE
@@ -661,6 +992,11 @@ export function promote(
       `${path.basename(src)} — computed-capture truth; minted leaves source-aliased to ${cfg.possessive} ` +
       `own CSS-variable references where verified (source-bindings.json); extension sidecar ` +
       `carries the named overflow.`;
+    // Authored set/unset rows land BEFORE the state-preview probe so the
+    // referee judges the contract that will actually be written.
+    for (const row of authoredRows) {
+      if (row.component === name) noteAuthored(row, applyAuthoredContractRow(contract, row));
+    }
     statePreviewProbe(contract);
     const destination = path.join(
       EX,
@@ -732,6 +1068,26 @@ export function promote(
       }
     }
     mergeInto(mintedMerged, minted);
+  }
+
+  // ---- authored mint + prune (after the capture's merge, before the guard) ----
+  const authoredReceipts: string[] = [];
+  if (authoredRows.length > 0) {
+    const referenced = new Set<string>();
+    for (const name of cfg.components) {
+      for (const { ref } of expandedImportedRefs(prepared.get(name)!.contract)) referenced.add(ref);
+    }
+    for (const row of authoredRows) noteAuthored(row, applyAuthoredMint(mintedMerged, row));
+    for (const row of authoredRows) noteAuthored(row, applyAuthoredPrune(mintedMerged, row, referenced));
+    for (const row of authoredRows) {
+      authoredReceipts.push(
+        `${row.component}${row.part ? `.${row.part}` : row.prop ? ` prop ${row.prop}` : ""}${row.path ? ` @${row.path}` : ""}: ${(authoredDone.get(row) ?? []).join("; ")} — ${row.cause}`,
+      );
+    }
+    log(
+      `✔ authored facts: ${authoredRows.length} reviewed row(s) applied from ${cfg.authored} (each names its cause; a row the capture has since learned to carry refuses by name)`,
+    );
+    for (const r of authoredReceipts) log(`  · ${r}`);
   }
 
   // ---- resolution guard ----
@@ -811,7 +1167,12 @@ export function promote(
       `- **${literalKept} leaves kept literal** (no verified source reference)\n` +
       `- **${aliasReceipts.length} named alias refusals**${aliasReceipts.length ? ":" : ""}\n` +
       aliasReceipts.map((r) => `  - ${r}`).join("\n") +
-      "\n",
+      "\n" +
+      (cfg.authored
+        ? `- **${authoredReceipts.length} authored fact(s) applied** from \`${cfg.authored}\` — reviewed hand-authoring the capture cannot carry; every row names its cause, and a row the capture has since learned to carry REFUSES the promotion by name${authoredReceipts.length ? ":" : ""}\n` +
+          authoredReceipts.map((r) => `  - ${r}`).join("\n") +
+          "\n"
+        : ""),
   );
 
   commitPlannedWrites(plannedWrites, commitOptions);
@@ -842,6 +1203,7 @@ export function promote(
     receipts: aliasReceipts,
     statePreviewsOn,
     stateRefusals,
+    authoredReceipts,
   };
 }
 

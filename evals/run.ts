@@ -41,7 +41,7 @@ import {
 import { buildPlan as proposePrBuildPlan, contentsPutBody, summarize as proposePrSummarize } from '../packages/cli/src/commands/propose-pr.js';
 // PROMOTE GENERALIZATION (task #39) — the ONE promotion pipeline the four
 // generalized libraries now share (was six copies under examples/*/scripts/).
-import { promote as promoteFloor, type PromoteConfig } from '../packages/cli/src/promote.js';
+import { promote as promoteFloor, applyAuthoredContractRow, applyAuthoredMint, applyAuthoredPrune, parseAuthoredLedger, type PromoteConfig } from '../packages/cli/src/promote.js';
 import { emitReact as coreEmitReact, generateCss as coreGenerateCss, isMultiRoot as coreIsMultiRoot, stripCanvasOnlyChannels as coreStripCanvasOnly, validateContract as coreValidateContract } from '../core/emit-react.js';
 import { createFigmaEngine, RUNTIME_EMIT_REV } from '../core/emit-figma-script.js';
 import { emitHtml as coreEmitHtml } from '../core/emit-html.js';
@@ -6128,7 +6128,45 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         }
       }
       rmSync(tmp, { recursive: true, force: true });
-      console.log(`promote-generalization: 4 libraries (carbon, mui, tailwind, altitude) re-promoted through the ONE shared module — ${compared} committed artifact(s) byte-identical; polaris + astryx keep their scripts BY NAME`);
+      // THE AUTHORED-FACTS DOOR (2026-08-22). mui (16889547) and tailwind
+      // (968958cd) hand-edited promoted contracts for facts the capture cannot
+      // carry; those facts now live in examples/<lib>/authored-facts.json and
+      // the reproduction above proves the door re-derives the committed bytes.
+      // The other half of the door is that it REFUSES BY NAME — a row the
+      // capture already carries, an unknown target, a moved `from` value, a
+      // prune of a referenced leaf — so a ledger row cannot outlive the gap it
+      // covers. Pinned here on the committed mui/tailwind contracts (pure
+      // functions; nothing written).
+      {
+        const load = (lib: string, stem: string): Record<string, unknown> =>
+          JSON.parse(readFileSync(path.join(ROOT, 'examples', lib, 'contracts', `${stem}.contract.json`), 'utf8')) as Record<string, unknown>;
+        const refuses = (name: string, fn: () => unknown, needle: string): void => {
+          try { fn(); } catch (e) {
+            if (String(e).includes(needle)) return;
+            throw new Error(`authored-facts door: "${name}" refused for the WRONG reason — ${String(e).slice(0, 200)}`);
+          }
+          throw new Error(`authored-facts door: "${name}" was NOT refused — a stale or mis-targeted ledger row would apply silently`);
+        };
+        const avatar = load('mui', 'avatar');
+        const alert = load('tailwind', 'alert');
+        refuses('stale set (capture carries tokens.color)', () => applyAuthoredContractRow(structuredClone(avatar), { component: 'avatar', part: 'root', set: { tokens: { color: '{x}' } }, cause: 't' }), 'ALREADY carried');
+        refuses('stale field (contract already has events)', () => applyAuthoredContractRow(structuredClone(alert), { component: 'alert', set: { fields: { events: [] } }, cause: 't' }), 'ALREADY carried');
+        refuses('unknown part', () => applyAuthoredContractRow(structuredClone(avatar), { component: 'avatar', part: 'ghost', set: { declared: { a: 'b' } }, cause: 't' }), 'not exactly one part');
+        refuses('unknown prop', () => applyAuthoredContractRow(structuredClone(alert), { component: 'alert', prop: 'ghost', edit: { description: { from: 'a', to: 'b' } }, cause: 't' }), 'not exactly one entry of props[]');
+        refuses('path into a missing group', () => applyAuthoredContractRow(structuredClone(alert), { component: 'alert', path: 'ghost', set: { fields: { a: 1 } }, cause: 't' }), 'not an existing object');
+        refuses('edit whose from value moved', () => applyAuthoredContractRow(structuredClone(alert), { component: 'alert', prop: 'dismissable', edit: { 'bindings.code.prop': { from: 'onDismiss', to: 'x' } }, cause: 't' }), 'captured value moved');
+        refuses('edit of a missing key', () => applyAuthoredContractRow(structuredClone(alert), { component: 'alert', prop: 'dismissable', edit: { ghost: { from: 'a', to: 'b' } }, cause: 't' }), 'no longer carries it');
+        refuses('after names a missing key', () => applyAuthoredContractRow(structuredClone(alert), { component: 'alert', set: { fields: { zz: 1 }, after: 'ghost' }, cause: 't' }), 'does not carry');
+        refuses('enum value outside the prop', () => applyAuthoredContractRow(structuredClone(load('mui', 'fab')), { component: 'fab', part: 'root', set: { tokensByProp: { size: { huge: { width: '{x}' } } } }, cause: 't' }), 'not a value of enum prop');
+        refuses('unset a binding the capture does not carry', () => applyAuthoredContractRow(structuredClone(avatar), { component: 'avatar', part: 'root', unset: { tokens: ['nope'] }, cause: 't' }), 'no longer binds it');
+        refuses('stale mint (capture mints the path)', () => applyAuthoredMint({ imported: { avatar: { root: { color: { $value: '#000', $type: 'color' } } } } }, { component: 'avatar', mint: { 'imported.avatar.root.color': { $value: '#fff', $type: 'color' } }, cause: 't' }), 'ALREADY mints');
+        refuses('prune a referenced leaf', () => applyAuthoredPrune({ imported: { avatar: { root: { color: { $value: '#000', $type: 'color' } } } } }, { component: 'avatar', prune: ['imported.avatar.root.color'], cause: 't' }, new Set(['imported.avatar.root.color'])), 'still references');
+        refuses('prune a leaf the capture no longer mints', () => applyAuthoredPrune({ imported: {} }, { component: 'avatar', prune: ['imported.avatar.root.color'], cause: 't' }, new Set()), 'not in the minted tree');
+        refuses('row without a cause', () => parseAuthoredLedger({ rows: [{ component: 'fab', part: 'root', set: { declared: { a: 'b' } } }] }, 'ledger'), '"cause"');
+        refuses('mint outside the component namespace', () => parseAuthoredLedger({ rows: [{ component: 'fab', mint: { 'imported.avatar.root.z': { $value: '1px', $type: 'dimension' } }, cause: 't' }] }, 'ledger'), "component's own namespace");
+        refuses('part and prop together', () => parseAuthoredLedger({ rows: [{ component: 'alert', part: 'root', prop: 'x', edit: { a: { from: 1, to: 2 } }, cause: 't' }] }, 'ledger'), 'exclusive targets');
+      }
+      console.log(`promote-generalization: 4 libraries (carbon, mui, tailwind, altitude) re-promoted through the ONE shared module — ${compared} committed artifact(s) byte-identical (mui + tailwind through their authored-facts ledgers); the door refuses 16 stale/mis-targeted rows BY NAME; polaris + astryx keep their scripts BY NAME`);
     },
   },
   {
@@ -6206,13 +6244,13 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         // FOREIGN TOKEN SET — the JSON-only Generate: the MUI bundle
         // (contracts + tokenSet + icons in ONE paste, Wave 5 denominator) through
         // the real engine bundle path is EQUIVALENT to the compiled-script
-        // path (same sets + standalone Menu/Tooltip/TablePagination, 2144 variables incl. 134
+        // path (same sets + standalone Menu/Tooltip/TablePagination, 2143 variables incl. 134
         // Figma-native aliases, contained-primary Button fill resolves
         // #1976d2), and a contract ref outside base+minted refuses BY NAME.
         // STATE-PLANE PROJECTION round: Switch 14→28 (checked is a VARIANT
         // AXIS now) and Button 63→75 (accepted State preview axis) — both
         // survive the JSON-only paste identically to the script path.
-        '✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds Accordion(4), Alert(12), Autocomplete(2), Avatar(3), Badge(14), Button(75), Card(4), Checkbox(3), Chip(28), CircularProgress(2), Dialog(5), Divider(3), Drawer(2), Fab(9), IconButton(9), InputAdornment(2), LinearProgress(2), Link(42), Paper(8), Radio(14), Select(2), Slider(12), Snackbar(3), Switch(28), Table(2), Tabs(6), TextField(6) + standalone Menu, TablePagination, Tooltip with 2144 variables (134 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME',
+        '✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds Accordion(4), Alert(12), Autocomplete(2), Avatar(3), Badge(14), Button(75), Card(4), Checkbox(3), Chip(28), CircularProgress(2), Dialog(5), Divider(3), Drawer(2), Fab(9), IconButton(9), InputAdornment(2), LinearProgress(2), Link(42), Paper(8), Radio(14), Select(2), Slider(12), Snackbar(3), Switch(28), Table(2), Tabs(6), TextField(6) + standalone Menu, TablePagination, Tooltip with 2143 variables (134 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME',
         'plugin-engine-check: all flows green',
       ]) {
         if (!check.out.includes(want)) throw new Error(`missing "${want}" in:\n${check.out}`);
@@ -7840,7 +7878,8 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       }
       const batch = run(process.execPath, ['examples/mui/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`mui genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      if (!/mock-proven \(27 sets: Button\(75\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(28\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\), Checkbox\(3\), Table\(2\), InputAdornment\(2\), TextField\(6\), Avatar\(3\), Fab\(9\), IconButton\(9\), CircularProgress\(2\), LinearProgress\(2\), Alert\(12\), Badge\(14\), Divider\(3\), Link\(42\), Paper\(8\), Drawer\(2\), Radio\(14\), Select\(2\), Snackbar\(3\); standalone: TablePagination, Menu, Tooltip, Breadcrumbs; 2144 variables\)/.test(batch.out)) {
+      // 2144 → 2143 (2026-08-22): the authored-facts door pruned `imported.link.root.width` — a capture-font glyph width nothing binds (examples/mui/authored-facts.json).
+      if (!/mock-proven \(27 sets: Button\(75\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(28\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\), Checkbox\(3\), Table\(2\), InputAdornment\(2\), TextField\(6\), Avatar\(3\), Fab\(9\), IconButton\(9\), CircularProgress\(2\), LinearProgress\(2\), Alert\(12\), Badge\(14\), Divider\(3\), Link\(42\), Paper\(8\), Drawer\(2\), Radio\(14\), Select\(2\), Snackbar\(3\); standalone: TablePagination, Menu, Tooltip, Breadcrumbs; 2143 variables\)/.test(batch.out)) {
         throw new Error(`mui genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // FOREIGN-TOKEN BUNDLE (the JSON-only payload): `figma bundle` is
@@ -7865,7 +7904,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (runA !== runB) throw new Error('figma bundle is NOT byte-deterministic — two builds from identical inputs differ');
       const committed = readFileSync(path.join(ROOT, 'examples/mui/figma/mui.bundle.json'), 'utf8');
       if (runA !== committed) throw new Error('committed examples/mui/figma/mui.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
-      console.log('mui-figma-genesis: 31/31 Emotion-runtime scripts referee+execute headless (273 variants — Wave 5 denominator; state-plane projection: Switch 14→28 on Checked, Button 63→75 on State preview); token sync 2144 variables incl. 134 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 22 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
+      console.log('mui-figma-genesis: 31/31 Emotion-runtime scripts referee+execute headless (273 variants — Wave 5 denominator; state-plane projection: Switch 14→28 on Checked, Button 63→75 on State preview); token sync 2143 variables incl. 134 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 22 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
     },
   },
   {

@@ -4,6 +4,7 @@ const COMPONENTS = [
   {
     "setName": "AccordionItem",
     "contractId": "ds.accordion-item",
+    "version": "1.1.0",
     "anchorKey": "ba5ec62aa3c19bf86b7bcff8eb61ef1e86daad35",
     "description": "AccordionItem — generated from contract ds.accordion-item v1.1.0 †",
     "isSet": true,
@@ -183,6 +184,7 @@ const COMPONENTS = [
   {
     "setName": "Avatar",
     "contractId": "ds.avatar",
+    "version": "1.0.0",
     "anchorKey": "b39059e770141b713f28ae1816be3ed756cd79da",
     "description": "Avatar — generated from contract ds.avatar v1.0.0",
     "isSet": true,
@@ -292,6 +294,7 @@ const COMPONENTS = [
   {
     "setName": "AvatarGroup",
     "contractId": "ds.avatar-group",
+    "version": "1.0.0",
     "anchorKey": "41e084d38457f2aebd4611e3ebd922a56c2c392d",
     "description": "AvatarGroup — generated from contract ds.avatar-group v1.0.0",
     "isSet": false,
@@ -409,6 +412,7 @@ const COMPONENTS = [
   {
     "setName": "Badge",
     "contractId": "ds.badge",
+    "version": "1.1.0",
     "anchorKey": "89f1fb2d4580116cea4be5d4ca340de216a27819",
     "description": "Badge — generated from contract ds.badge v1.1.0",
     "isSet": true,
@@ -627,6 +631,7 @@ const COMPONENTS = [
   {
     "setName": "Button",
     "contractId": "ds.button",
+    "version": "1.5.0",
     "anchorKey": "1b5d2a573f3f39404af396bdbe944a30ca0eaec3",
     "description": "Button — generated from contract ds.button v1.5.0",
     "isSet": true,
@@ -2996,6 +3001,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -3258,6 +3264,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -3555,6 +3562,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',

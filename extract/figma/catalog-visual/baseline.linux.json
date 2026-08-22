@@ -4,6 +4,7 @@
  "generatedAt": "2026-08-17T00:36:54.236Z",
  "headCommit": "46ccbfb0da17ac72e553833e893cb27b4e85238f",
  "epsilonPp": 0.1,
+ "notes": "text-field rows re-recorded 2026-08-22 from CI run 32255451344 (ubuntu x64, fonts-inter 4.0+ds-1) after bf82db06 pinned descriptionText font-weight regular; the 08-17 linux write carried the pre-bf82db06 values; 197/200 rows verified identical to that run.",
  "denominator": {
   "contracts": 56,
   "cells": 200,
@@ -1425,7 +1426,7 @@
   "ds.text-field :: Size=Large": {
    "status": "diffed",
    "masked": 0,
-   "unmasked": 5.61,
+   "unmasked": 6.32,
    "sizeCss": "628x173",
    "sizeCanvas": "640x175",
    "causeClass": "size-delta",
@@ -1434,7 +1435,7 @@
   "ds.text-field :: Size=Medium": {
    "status": "diffed",
    "masked": 0.02,
-   "unmasked": 6.58,
+   "unmasked": 6.77,
    "sizeCss": "588x155",
    "sizeCanvas": "640x155",
    "causeClass": "size-delta",
@@ -1443,7 +1444,7 @@
   "ds.text-field :: Size=Small": {
    "status": "diffed",
    "masked": 0.02,
-   "unmasked": 7.36,
+   "unmasked": 7.58,
    "sizeCss": "588x133",
    "sizeCanvas": "640x133",
    "causeClass": "size-delta",

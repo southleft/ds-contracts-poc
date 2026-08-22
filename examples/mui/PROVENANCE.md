@@ -786,3 +786,49 @@ MUI scorecard came back byte-identical, and `captured-truth.json` did not move f
 SIBLINGS — the scope-independence defect (task #45). Scoped, they show zero, and zero on that
 path means UNREAD, not "none found": `capturePortalRoots` never calls `readBoundaryReceipts`.
 Each of them now carries that statement by name.
+
+## AUTHORED FACTS (2026-08-22) — the hand-authoring door, and why four promoted artifacts stopped being re-derivable
+
+Commit `16889547` (2026-08-17, the one-cell-crop visual review —
+`parity/receipts/console-loop/mui/VISUAL-REVIEW-2026-08-17.md`) fixed four canvas defects by
+editing the PROMOTED artifacts directly: it wrote 40×40 / 56·48·40 boxes into
+`avatar.contract.json` and `fab.contract.json` (and the matching leaves into
+`mui-minted.dtcg.json`), declared `overflow: hidden` on Accordion's `collapse-root`, and dropped
+Link's `{imported.link.root.width}` binding. The canvas got better; the artifacts stopped being
+what `examples/mui/scripts/promote-floor.mjs` produces. The next promotion would have silently
+reverted all four (`promote-generalization` went red), and the Link leaf the commit unbound but
+did not remove shipped as a Figma variable nothing binds (`minted-leaves-bind-to-something`:
+373 → 374).
+
+None of these facts CAN come from the capture, each for a named reason:
+
+- **Avatar / Fab boxes** — the captured root boxes ARE 40×40 and 56×56 (`captured-truth.json`
+  base roots, `display: flex`), but the fusion geometry door admits `width`/`height` only for
+  absolute clusters, table cells and block roots (`FC-GEOMETRY-EXCLUDED`). A flex root mints no
+  box. Relaxing the door would admit every flex root's hugged measurement in every library.
+- **Accordion clip** — MUI's Collapse is `overflow: hidden` collapsed and `overflow: visible`
+  entered, so the value varies across the `expanded` axis and v15 declared facts (uniform values
+  only) carry nothing (`LEDGER.md`: `collapse-root.overflow-x — declared-channel value varies
+  across combos`).
+- **Link width** — `30.2188px` is the capture font's measure of the sample text "Link",
+  admitted through the block-root-width door as a shrink-to-fit block. A harness fact; bound, it
+  wrapped the Inter-rendered label on canvas (`FC-TEXT-WRAP`).
+
+**The door.** `examples/mui/authored-facts.json`, named by `authored` in `ds-library.json`, is
+applied by `packages/cli/src/promote.ts` after the computed contract is read and before the
+resolution guard. Each row names its component, part, operation (`set` declared / tokens /
+tokensByProp, `unset` tokens, `mint` leaves, `prune` leaves) and its cause; MINTED.md quotes
+every applied row. It is strict by construction: a row whose fact the capture already carries,
+whose part/prop/value/leaf does not exist, or whose pruned leaf is still referenced REFUSES the
+promotion by name — so the day the capture learns to carry one of these, the row cannot linger
+as a second source of truth. Authored keys append after the capture's keys (nothing is
+re-sorted), which is why the 2026-08-17 hand-inserted order of the Accordion `declared` map and
+the Fab minted leaves moved on re-promotion; the values did not.
+
+What changed on re-promotion, measured: the four contracts and the minted tree are byte-
+reproducible from `extract/computed/out/mui` + the ledger; the minted tree lost exactly one leaf
+(`imported.link.root.width`, pruned by the promoter, 374 → 373 unreferenced); Figma variables
+2144 → 2143; `00-tokens.figma.js`, `GENESIS-BATCH.figma.js`, `mui.bundle.json` and the compile
+receipt rebuilt from the new tree. The per-component sync scripts were not re-emitted by this
+round (the four authored contracts emit byte-identically; the engine-side staleness of
+alert/slider/switch/tabs predates it and is the engine lane's to close).

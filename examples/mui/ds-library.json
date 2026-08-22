@@ -58,6 +58,8 @@
     "harness": "examples/mui/.mui-sandbox"
   },
   "seeds": "examples/mui/contracts-seed",
+  "__note:authored": "AUTHORED FACTS LEDGER — reviewed hand-authored facts the capture cannot carry (Fab/Avatar boxes, Accordion collapse clip, Link width drop — commit 16889547 had edited the promoted artifacts directly). promote.ts applies it after the computed contract and before the resolution guard, so the committed contracts + minted tree stay re-derivable; every row names its cause and a stale row refuses by name.",
+  "authored": "examples/mui/authored-facts.json",
   "emit": {
     "out": "examples/mui/figma",
     "icons": "examples/mui/assets/icons"

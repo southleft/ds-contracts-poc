@@ -6,6 +6,7 @@ const COMPONENTS = [
   {
     "setName": "Button",
     "contractId": "polaris.button",
+    "version": "0.4.0",
     "anchorKey": null,
     "description": "Button — generated from contract polaris.button v0.4.0 †",
     "isSet": true,
@@ -183,12 +184,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/none",
           "effectStack": [],
@@ -476,12 +471,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/none",
           "effectStack": [],
           "children": [
@@ -682,12 +671,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
@@ -975,12 +958,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
           "children": [
@@ -1181,12 +1158,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
@@ -1474,12 +1445,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
           "children": [
@@ -1680,12 +1645,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/none",
           "effectStack": [],
@@ -1973,12 +1932,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/none",
           "effectStack": [],
           "children": [
@@ -2179,12 +2132,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
@@ -2472,12 +2419,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
           "children": [
@@ -2678,12 +2619,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
@@ -2971,12 +2906,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
           "children": [
@@ -3177,12 +3106,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/none",
           "effectStack": [],
@@ -3470,12 +3393,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/none",
           "effectStack": [],
           "children": [
@@ -3676,12 +3593,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
@@ -3969,12 +3880,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
           "children": [
@@ -4175,12 +4080,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
@@ -4468,12 +4367,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
           "children": [
@@ -4674,12 +4567,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/none",
           "effectStack": [],
@@ -4967,12 +4854,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/none",
           "effectStack": [],
           "children": [
@@ -5173,12 +5054,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
@@ -5466,12 +5341,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
           "children": [
@@ -5672,12 +5541,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
@@ -5965,12 +5828,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
           "children": [
@@ -6171,12 +6028,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/none",
           "effectStack": [],
@@ -6464,12 +6315,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/none",
           "effectStack": [],
           "children": [
@@ -6670,12 +6515,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
@@ -6963,12 +6802,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
           "children": [
@@ -7169,12 +7002,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
@@ -7462,12 +7289,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
           "children": [
@@ -7668,12 +7489,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-200",
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
           },
           "fill": "imported/button/root/background-color/plain/none",
           "effectStack": [],
@@ -7961,12 +7776,6 @@ const COMPONENTS = [
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
           },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
-          },
           "fill": "imported/button/root/background-color/monochromePlain/none",
           "effectStack": [],
           "children": [
@@ -8167,12 +7976,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-200",
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
@@ -8460,12 +8263,6 @@ const COMPONENTS = [
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
           },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
-          },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
           "children": [
@@ -8666,12 +8463,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-200",
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
@@ -8959,12 +8750,6 @@ const COMPONENTS = [
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
           },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
-          },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
           "children": [
@@ -9165,12 +8950,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-200",
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
           },
           "fill": "imported/button/root/background-color/plain/none",
           "effectStack": [],
@@ -9458,12 +9237,6 @@ const COMPONENTS = [
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
           },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
-          },
           "fill": "imported/button/root/background-color/monochromePlain/none",
           "effectStack": [],
           "children": [
@@ -9664,12 +9437,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-200",
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
@@ -9957,12 +9724,6 @@ const COMPONENTS = [
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
           },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
-          },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
           "children": [
@@ -10163,12 +9924,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-200",
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
@@ -10456,12 +10211,6 @@ const COMPONENTS = [
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
           },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
-          },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
           "children": [
@@ -10662,12 +10411,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-200",
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
           },
           "fill": "imported/button/root/background-color/plain/none",
           "effectStack": [],
@@ -10955,12 +10698,6 @@ const COMPONENTS = [
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
           },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
-          },
           "fill": "imported/button/root/background-color/monochromePlain/none",
           "effectStack": [],
           "children": [
@@ -11161,12 +10898,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-200",
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
@@ -11454,12 +11185,6 @@ const COMPONENTS = [
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
           },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
-          },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
           "children": [
@@ -11660,12 +11385,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-200",
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
@@ -11953,12 +11672,6 @@ const COMPONENTS = [
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
           },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
-          },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
           "children": [
@@ -12159,12 +11872,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-200",
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
           },
           "fill": "imported/button/root/background-color/plain/none",
           "effectStack": [],
@@ -12452,12 +12159,6 @@ const COMPONENTS = [
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
           },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
-          },
           "fill": "imported/button/root/background-color/monochromePlain/none",
           "effectStack": [],
           "children": [
@@ -12658,12 +12359,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-200",
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
@@ -12951,12 +12646,6 @@ const COMPONENTS = [
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
           },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
-          },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
           "children": [
@@ -13157,12 +12846,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-200",
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
@@ -13450,12 +13133,6 @@ const COMPONENTS = [
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
           },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
-          },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
           "children": [
@@ -13656,12 +13333,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-200",
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
           },
           "fill": "imported/button/root/background-color/plain/none",
           "effectStack": [],
@@ -13949,12 +13620,6 @@ const COMPONENTS = [
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
           },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
-          },
           "fill": "imported/button/root/background-color/monochromePlain/none",
           "effectStack": [],
           "children": [
@@ -14155,12 +13820,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-200",
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
@@ -14448,12 +14107,6 @@ const COMPONENTS = [
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
           },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
-          },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
           "children": [
@@ -14654,12 +14307,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-200",
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
-          },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
@@ -14947,12 +14594,6 @@ const COMPONENTS = [
             "minHeight": "p/height-700",
             "minWidth": "p/width-700"
           },
-          "margins": {
-            "bottom": -4,
-            "left": -8,
-            "right": -8,
-            "top": -4
-          },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
           "children": [
@@ -15153,12 +14794,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/none",
           "effectStack": [],
@@ -15446,12 +15081,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/none",
           "effectStack": [],
           "children": [
@@ -15652,12 +15281,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
@@ -15945,12 +15568,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
           "children": [
@@ -16151,12 +15768,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
@@ -16444,12 +16055,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
           "children": [
@@ -16650,12 +16255,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/none",
           "effectStack": [],
@@ -16943,12 +16542,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/none",
           "effectStack": [],
           "children": [
@@ -17149,12 +16742,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
@@ -17442,12 +17029,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
           "children": [
@@ -17648,12 +17229,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
@@ -17941,12 +17516,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
           "children": [
@@ -18147,12 +17716,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/none",
           "effectStack": [],
@@ -18440,12 +18003,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/none",
           "effectStack": [],
           "children": [
@@ -18646,12 +18203,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
@@ -18939,12 +18490,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
           "children": [
@@ -19145,12 +18690,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
@@ -19438,12 +18977,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
           "children": [
@@ -19644,12 +19177,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/none",
           "effectStack": [],
@@ -19937,12 +19464,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/none",
           "effectStack": [],
           "children": [
@@ -20143,12 +19664,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
@@ -20436,12 +19951,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
           "children": [
@@ -20642,12 +20151,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
@@ -20935,12 +20438,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
           "children": [
@@ -21141,12 +20638,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/none",
           "effectStack": [],
@@ -21434,12 +20925,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/none",
           "effectStack": [],
           "children": [
@@ -21640,12 +21125,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
@@ -21933,12 +21412,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
           "children": [
@@ -22139,12 +21612,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
@@ -22432,12 +21899,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
           "children": [
@@ -22638,12 +22099,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/none",
           "effectStack": [],
@@ -22931,12 +22386,6 @@ const COMPONENTS = [
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/none",
           "effectStack": [],
           "children": [
@@ -23137,12 +22586,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
@@ -23430,12 +22873,6 @@ const COMPONENTS = [
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
           "children": [
@@ -23636,12 +23073,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
@@ -23929,12 +23360,6 @@ const COMPONENTS = [
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
           "children": [
@@ -24135,12 +23560,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/none",
           "effectStack": [],
@@ -24428,12 +23847,6 @@ const COMPONENTS = [
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/none",
           "effectStack": [],
           "children": [
@@ -24634,12 +24047,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
@@ -24927,12 +24334,6 @@ const COMPONENTS = [
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
           "children": [
@@ -25133,12 +24534,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
@@ -25426,12 +24821,6 @@ const COMPONENTS = [
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
           "children": [
@@ -25632,12 +25021,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/none",
           "effectStack": [],
@@ -25925,12 +25308,6 @@ const COMPONENTS = [
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/none",
           "effectStack": [],
           "children": [
@@ -26131,12 +25508,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
@@ -26424,12 +25795,6 @@ const COMPONENTS = [
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
           "children": [
@@ -26630,12 +25995,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
@@ -26923,12 +26282,6 @@ const COMPONENTS = [
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
           "children": [
@@ -27129,12 +26482,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/none",
           "effectStack": [],
@@ -27422,12 +26769,6 @@ const COMPONENTS = [
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/none",
           "effectStack": [],
           "children": [
@@ -27628,12 +26969,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
@@ -27921,12 +27256,6 @@ const COMPONENTS = [
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
           "children": [
@@ -28127,12 +27456,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
@@ -28420,12 +27743,6 @@ const COMPONENTS = [
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
           "children": [
@@ -28626,12 +27943,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/none",
           "effectStack": [],
@@ -28919,12 +28230,6 @@ const COMPONENTS = [
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/none",
           "effectStack": [],
           "children": [
@@ -29125,12 +28430,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/critical",
           "effectStack": [],
@@ -29418,12 +28717,6 @@ const COMPONENTS = [
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/critical",
           "effectStack": [],
           "children": [
@@ -29624,12 +28917,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color/plain/success",
           "effectStack": [],
@@ -29917,12 +29204,6 @@ const COMPONENTS = [
             "minHeight": "p/height-900",
             "minWidth": "p/height-900"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color/monochromePlain/success",
           "effectStack": [],
           "children": [
@@ -30099,12 +29380,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color-state-disabled/plain",
           "effectStack": [],
@@ -30352,12 +29627,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color-state-disabled/monochromePlain",
           "effectStack": [],
           "children": [
@@ -30562,12 +29831,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800",
             "strokeWeight": "imported/button/root/outline-width-state-focus-visible"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color-state-focus-visible/plain/none",
           "effectStack": [],
@@ -30864,12 +30127,6 @@ const COMPONENTS = [
             "minWidth": "p/width-800",
             "strokeWeight": "imported/button/root/outline-width-state-focus-visible"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color-state-focus-visible/monochromePlain/none",
           "effectStack": [],
           "stroke": "imported/button/root/outline-color-state-focus-visible",
@@ -31070,12 +30327,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color-state-active/plain/none",
           "effectStack": [],
@@ -31336,12 +30587,6 @@ const COMPONENTS = [
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
           },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
-          },
           "fill": "imported/button/root/background-color-state-active/monochromePlain/none",
           "effectStack": [],
           "children": [
@@ -31542,12 +30787,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color-state-hover/plain/none",
           "effectStack": [],
@@ -31834,12 +31073,6 @@ const COMPONENTS = [
             "paddingRight": "p/space-300",
             "minHeight": "p/height-800",
             "minWidth": "p/width-800"
-          },
-          "margins": {
-            "bottom": -6,
-            "left": -12,
-            "right": -12,
-            "top": -6
           },
           "fill": "imported/button/root/background-color-state-hover/monochromePlain/none",
           "effectStack": [],
@@ -32964,6 +32197,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -33202,6 +32436,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -33474,6 +32709,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',

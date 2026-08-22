@@ -79,6 +79,9 @@
       "flowbite.badge": 1,
       "flowbite.button": 1,
       "flowbite.card": 1,
+      "flowbite.helpertext": 1,
+      "flowbite.kbd": 1,
+      "flowbite.label": 1,
       "flowbite.toggleswitch": 1
     },
     "astryx": {

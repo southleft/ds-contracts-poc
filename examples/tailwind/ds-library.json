@@ -27,6 +27,8 @@
     "harness": "examples/tailwind/.tw-sandbox"
   },
   "seeds": "examples/tailwind/contracts-seed",
+  "__note:authored": "AUTHORED FACTS LEDGER — reviewed hand-authored facts the capture cannot carry (Alert dismiss event + dismissable rebinding + dismiss <button aria-label>, ToggleSwitch toggle event + role=switch + root align — commit 968958cd had edited the promoted contracts directly). promote.ts applies it after the computed contract and before the resolution guard, so the committed contracts stay re-derivable; every row names its cause and a stale row refuses by name.",
+  "authored": "examples/tailwind/authored-facts.json",
   "emit": {
     "out": "examples/tailwind/figma",
     "icons": "examples/tailwind/assets/icons"

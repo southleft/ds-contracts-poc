@@ -1,6 +1,6 @@
 {
-  "_marker": "CHILD-WIDER-THAN-PARENT BASELINE \u2014 a committed per-library defect count that may only DECREASE. `overflows` counts in-flow children wider than their parent with a non-text cause; `textCaused` counts the exempted class (the corpus-wide text-wrapping gap, docs/22) separately so it can never flatter the first number. Both ratchet TWO-SIDED: an increase is a new defect, a decrease is a fix that must be re-recorded here with its cause named. Re-record deliberately with `node scripts/child-wider.mjs --write` and say what moved.",
-  "recordedAt": "2026-08-16",
+  "_marker": "CHILD-WIDER-THAN-PARENT BASELINE — a committed per-library defect count that may only DECREASE. `overflows` counts in-flow children wider than their parent with a non-text cause; `textCaused` counts the exempted class (the corpus-wide text-wrapping gap, docs/22) separately so it can never flatter the first number. Both ratchet TWO-SIDED: an increase is a new defect, a decrease is a fix that must be re-recorded here with its cause named. Re-record deliberately with `node scripts/child-wider.mjs --write` and say what moved.",
+  "recordedAt": "2026-08-22",
   "rows": [
     {
       "library": "altitude",
@@ -17,7 +17,7 @@
       "overflows": 0,
       "textCaused": 33,
       "marginBox": 0,
-      "cause": "textCaused(33): the corpus-wide text-wrapping gap (docs/22 \u00a7\"Text wrapping is not implemented\") \u2014 grew 6\u219233 at the exact-conversion wave (feat/exact-conversion-wave0): Banner's promoted title/description rows, TextInput's label/helper runs and the source-geometry Slider labels are real hugging text runs the earlier harness-floor geometry hid. The five ProgressBar percent-width overflows the previous baseline named are FIXED \u2014 the wave carries the fill as a source-derived literal inside the track \u2014 so the non-text class is ZERO.",
+      "cause": "textCaused(33): the corpus-wide text-wrapping gap (docs/22 §\"Text wrapping is not implemented\") — grew 6→33 at the exact-conversion wave (feat/exact-conversion-wave0): Banner's promoted title/description rows, TextInput's label/helper runs and the source-geometry Slider labels are real hugging text runs the earlier harness-floor geometry hid. The five ProgressBar percent-width overflows the previous baseline named are FIXED — the wave carries the fill as a source-derived literal inside the track — so the non-text class is ZERO.",
       "detail": []
     },
     {
@@ -26,7 +26,7 @@
       "overflows": 0,
       "textCaused": 8,
       "marginBox": 0,
-      "cause": "textCaused(8): all eight are the corpus-wide text-wrapping gap in Accordion (docs/22). Carbon's NON-text overflows were closed by the live-defect round (9c30204, D3) and its own compile receipt keeps a HARD zero on them \u2014 this row is the exempted class only.",
+      "cause": "textCaused(8): all eight are the corpus-wide text-wrapping gap in Accordion (docs/22). Carbon's NON-text overflows were closed by the live-defect round (9c30204, D3) and its own compile receipt keeps a HARD zero on them — this row is the exempted class only.",
       "detail": []
     },
     {
@@ -35,7 +35,7 @@
       "overflows": 2,
       "textCaused": 32,
       "marginBox": 43,
-      "cause": "overflows(2): 18 -> 2 on 2026-08-16, and the DEFECT DID NOT GET FIXED \u2014 it stopped MANIFESTING. 16 of the old 18 were one class: Checkbox's `indicator > icon` is an element:\"svg\" promoted from the computed floor with NO asset (examples/fluent/assets/icons ships only dialog-part-0-1-0.svg and switch-indicator.svg \u2014 there is still no checkbox glyph), so the mock handed it Figma's 100px birth box inside a 16px indicator, +84 per variant. c27e3fe0 (2026-08-10, AFTER the 2026-08-09 baseline) stopped the mock modelling the birth box on plain FRAMEs \u2014 the live canvas refutes it there \u2014 so an assetless svg part now measures its own box instead of 100. The missing glyph is unchanged and still named here; only the instrument stopped inflating it. The remaining 2 are Switch's `label` at 66px inside a 59px parent (+7) on the two `Label Position=Above` cells, where the stacked layout gives the label a narrower column than its own hug width \u2014 unchanged. textCaused(32) and marginBox(43) are the corpus-wide exempt classes (docs/22), counted separately and never folded in.",
+      "cause": "overflows(2): 18 -> 2 on 2026-08-16, and the DEFECT DID NOT GET FIXED — it stopped MANIFESTING. 16 of the old 18 were one class: Checkbox's `indicator > icon` is an element:\"svg\" promoted from the computed floor with NO asset (examples/fluent/assets/icons ships only dialog-part-0-1-0.svg and switch-indicator.svg — there is still no checkbox glyph), so the mock handed it Figma's 100px birth box inside a 16px indicator, +84 per variant. c27e3fe0 (2026-08-10, AFTER the 2026-08-09 baseline) stopped the mock modelling the birth box on plain FRAMEs — the live canvas refutes it there — so an assetless svg part now measures its own box instead of 100. The missing glyph is unchanged and still named here; only the instrument stopped inflating it. The remaining 2 are Switch's `label` at 66px inside a 59px parent (+7) on the two `Label Position=Above` cells, where the stacked layout gives the label a narrower column than its own hug width — unchanged. textCaused(32) and marginBox(43) are the corpus-wide exempt classes (docs/22), counted separately and never folded in.",
       "detail": [
         "\"label\" 66 > parent \"Checked=Unchecked, Label Position=Above, State=Default\" 59 (Checked=Unchecked, Label Position=Above, State=Default)",
         "\"label\" 66 > parent \"Checked=Checked, Label Position=Above, State=Default\" 59 (Checked=Checked, Label Position=Above, State=Default)"
@@ -45,9 +45,9 @@
       "library": "mui",
       "scripts": 31,
       "overflows": 2,
-      "textCaused": 56,
+      "textCaused": 14,
       "marginBox": 2,
-      "cause": "overflows(2): Wave 5 denominator \u2014 `label` paints 75px inside a 74px Size=Medium/Small hug cell (Size=Medium + Size=Small). textCaused(56): corpus-wide text-wrapping gap (docs/22) \u2014 grew 14\u219256 at the exact-conversion wave landing, when MUI's scripts were finally re-emitted against the wave engine (they had sat stale; the freshness gate is what caught it): the non-truncating-text HUG rule (Carbon Tabs fix, refined by FC-TEXT-FILL-ALIGNMENT so alignment-displaced text still FILLs) makes hugging label runs measurable where the old FILL lowering masked them. Attribution: link +42 (one hugging label run per variant of the 42-variant set), text-field +6, accordion +4 (AccordionDetails body remains the canonical case), autocomplete +2, select +2. marginBox(2): Autocomplete POPUP indicator margin-right -2 (unchanged from task-#38).",
+      "cause": "overflows(2): Wave 5 denominator — `label` paints 75px inside a 74px Size=Medium/Small hug cell (Size=Medium + Size=Small). textCaused(14): corpus-wide text-wrapping gap (docs/22). 56→14 on 2026-08-22 re-record, and it is a FIX already reviewed, not today’s re-emission: commit 16889547 (2026-08-17, VISUAL-REVIEW-2026-08-17.md “Lin/k wrap in every cell”) dropped `imported.link.root.width` — the 30.22px capture-font pin — from link.contract.json, so Link’s label hugs one line and all 42 link rows (one hugging label run per variant of the 42-variant set) closed at once; the baseline sat stale for five days because nothing re-ran the ratchet. Verified by bisect (2b0fceff 56 → 16889547 14) and a fresh emission with the 2026-08-22 emitter (`version` stamp + Disabled-opacity unbind) measures the SAME 2/14/2 — the emitter edits did not move geometry. History: grew 14→56 at the exact-conversion wave landing, when MUI's scripts were finally re-emitted against the wave engine (they had sat stale; the freshness gate is what caught it): the non-truncating-text HUG rule (Carbon Tabs fix, refined by FC-TEXT-FILL-ALIGNMENT so alignment-displaced text still FILLs) makes hugging label runs measurable where the old FILL lowering masked them. Attribution NOW: text-field 6, accordion 4 (AccordionDetails body remains the canonical case), autocomplete 2, select 2 (link’s 42 closed, above). marginBox(2): Autocomplete POPUP indicator margin-right -2 (unchanged from task-#38).",
       "detail": [
         "\"label\" 75 > parent \"Size=Medium\" 74 (Size=Medium)",
         "\"label\" 75 > parent \"Size=Small\" 74 (Size=Small)"
@@ -59,7 +59,7 @@
       "overflows": 0,
       "textCaused": 26,
       "marginBox": 58,
-      "cause": "marginBox(58): every one is a NEGATIVE-MARGIN paint-outside, not an overflow \u2014 the margin-box wrapper reserves less layout space than its child paints, which is what a negative margin is for. 42\u219258 at the exact-conversion wave: the checkbox/radio-button canvas-geometry rework (literal border+fill replacing the inset box-shadow tokens, per the console-loop visual fix) added 16 wrappers of the same class. Polaris keeps ZERO real child-wider overflows. textCaused(26): the corpus-wide text-wrapping gap (docs/22), 29\u219226 \u2014 three runs stopped overflowing under the wave's geometry edits; the wrapping fix remains its own corpus-wide round.",
+      "cause": "marginBox(58): every one is a NEGATIVE-MARGIN paint-outside, not an overflow — the margin-box wrapper reserves less layout space than its child paints, which is what a negative margin is for. 42→58 at the exact-conversion wave: the checkbox/radio-button canvas-geometry rework (literal border+fill replacing the inset box-shadow tokens, per the console-loop visual fix) added 16 wrappers of the same class. Polaris keeps ZERO real child-wider overflows. textCaused(26): the corpus-wide text-wrapping gap (docs/22), 29→26 — three runs stopped overflowing under the wave's geometry edits; the wrapping fix remains its own corpus-wide round.",
       "detail": []
     },
     {
@@ -68,7 +68,7 @@
       "overflows": 0,
       "textCaused": 0,
       "marginBox": 0,
-      "cause": "INSTRUMENT-GAP NAMED, NOT EXPLOITED: the per-component compile-receipt run (fresh mock per script) witnessed ONE real overflow this row does not carry \u2014 Tooltip's arrow \"part-0-0-0-0\" (a lucide <polygon>) at the mock's default 100px inside its 10px icon frame. Root cause is the svg-asset v1 grammar (path/g/circle; polygon refused by name \u2192 svg-child-outside-grammar), so the arrow ships as an unsized box part. countChildWider scans set-parented cells whenever ANY COMPONENT_SET exists in the mock, and shadcn's Tooltip builds as a STANDALONE component beside 8 sets \u2014 structurally outside this instrument's denominator. Widening the scan moves every library's committed number (standalone components exist corpus-wide) and is its own instrument round; until then this row's zero UNDERSTATES by exactly that one named overflow. See examples/shadcn/PROVENANCE.md.",
+      "cause": "INSTRUMENT-GAP NAMED, NOT EXPLOITED: the per-component compile-receipt run (fresh mock per script) witnessed ONE real overflow this row does not carry — Tooltip's arrow \"part-0-0-0-0\" (a lucide <polygon>) at the mock's default 100px inside its 10px icon frame. Root cause is the svg-asset v1 grammar (path/g/circle; polygon refused by name → svg-child-outside-grammar), so the arrow ships as an unsized box part. countChildWider scans set-parented cells whenever ANY COMPONENT_SET exists in the mock, and shadcn's Tooltip builds as a STANDALONE component beside 8 sets — structurally outside this instrument's denominator. Widening the scan moves every library's committed number (standalone components exist corpus-wide) and is its own instrument round; until then this row's zero UNDERSTATES by exactly that one named overflow. See examples/shadcn/PROVENANCE.md.",
       "detail": []
     },
     {
@@ -77,7 +77,7 @@
       "overflows": 0,
       "textCaused": 10,
       "marginBox": 0,
-      "cause": "textCaused(10): 0 -> 10, and it is NEW STEMS, not a regression. The 2026-08-09 baseline recorded FIVE scripts; the kit climb landed HelperText, Label and Kbd in 8afae937 (2026-08-15), so this row now measures EIGHT. Attribution, MEASURED per script rather than inferred: helper-text 5 + label 5 = 10, kbd 0, and all five original stems (alert, badge, button, card, toggle-switch) stay at 0. All ten are the corpus-wide text-wrapping gap (docs/22 \u00a7\"Text wrapping is not implemented\") \u2014 hugging text runs in the two text-shaped stems that joined. overflows stays a HARD ZERO: no non-text child of any Flowbite stem paints wider than its parent, and that number did not move when the set grew by three.",
+      "cause": "textCaused(10): 0 -> 10, and it is NEW STEMS, not a regression. The 2026-08-09 baseline recorded FIVE scripts; the kit climb landed HelperText, Label and Kbd in 8afae937 (2026-08-15), so this row now measures EIGHT. Attribution, MEASURED per script rather than inferred: helper-text 5 + label 5 = 10, kbd 0, and all five original stems (alert, badge, button, card, toggle-switch) stay at 0. All ten are the corpus-wide text-wrapping gap (docs/22 §\"Text wrapping is not implemented\") — hugging text runs in the two text-shaped stems that joined. overflows stays a HARD ZERO: no non-text child of any Flowbite stem paints wider than its parent, and that number did not move when the set grew by three.",
       "detail": []
     }
   ]

@@ -7074,34 +7074,6 @@
           "$value": "36px",
           "$type": "dimension"
         },
-        "width": {
-          "small": {
-            "$value": "40px",
-            "$type": "dimension"
-          },
-          "medium": {
-            "$value": "48px",
-            "$type": "dimension"
-          },
-          "large": {
-            "$value": "56px",
-            "$type": "dimension"
-          }
-        },
-        "height": {
-          "small": {
-            "$value": "40px",
-            "$type": "dimension"
-          },
-          "medium": {
-            "$value": "48px",
-            "$type": "dimension"
-          },
-          "large": {
-            "$value": "56px",
-            "$type": "dimension"
-          }
-        },
         "z-index": {
           "$value": "1050",
           "$type": "number"
@@ -7148,6 +7120,34 @@
           "secondary": {
             "$value": "#7b1fa2",
             "$type": "color"
+          }
+        },
+        "width": {
+          "small": {
+            "$value": "40px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "48px",
+            "$type": "dimension"
+          },
+          "large": {
+            "$value": "56px",
+            "$type": "dimension"
+          }
+        },
+        "height": {
+          "small": {
+            "$value": "40px",
+            "$type": "dimension"
+          },
+          "medium": {
+            "$value": "48px",
+            "$type": "dimension"
+          },
+          "large": {
+            "$value": "56px",
+            "$type": "dimension"
           }
         }
       }
@@ -8471,10 +8471,6 @@
               "$type": "color"
             }
           }
-        },
-        "width": {
-          "$value": "30.2188px",
-          "$type": "dimension"
         },
         "text-decoration-color-state-active": {
           "primary": {

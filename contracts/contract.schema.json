@@ -1059,8 +1059,7 @@
             "type": "string"
           },
           "additionalProperties": {
-            "type": "string",
-            "pattern": "^(-?\\d+(\\.\\d+)?(px|rem|em|%)?|transparent|inherit|currentColor|fit-content|#[0-9a-fA-F]{3,8}|rgba?\\([\\d ,./%]+\\))$"
+            "type": "string"
           }
         },
         "literalsByProp": {
@@ -1083,8 +1082,7 @@
                     "type": "string"
                   },
                   "additionalProperties": {
-                    "type": "string",
-                    "pattern": "^(-?\\d+(\\.\\d+)?(px|rem|em|%)?|transparent|inherit|currentColor|fit-content|#[0-9a-fA-F]{3,8}|rgba?\\([\\d ,./%]+\\))$"
+                    "type": "string"
                   }
                 }
               }
