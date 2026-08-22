@@ -21,21 +21,38 @@
  * report prints it UNTRIAGED — loud, never a silent residue.
  *
  * STANDING-GATE MODES:
- *   --summary         no artifacts; every row's masked score compares to the
- *                     committed baseline.json — a regression beyond
- *                     EPSILON_PP percentage points, a vanished row, or a row
- *                     the baseline has never seen FAILS the run (exit 1),
- *                     each with a named line. Reuses the disk PNG cache;
- *                     with a warm cache the run is render-only (no images
- *                     API calls). Without the cache it refetches — offline
+ *   --summary         no artifacts; every row compares to the committed
+ *                     baseline.<platform>.json — a masked-score regression
+ *                     beyond EPSILON_PP percentage points, a content box
+ *                     (ours OR Figma's) that moved more than SIZE_TOLERANCE_PX
+ *                     device px on either axis, a vanished row, or a row the
+ *                     baseline has never seen FAILS the run (exit 1), each
+ *                     with a named line. Reuses the disk PNG cache; with a
+ *                     warm cache the run is render-only (no images API
+ *                     calls). Without the cache it refetches — offline
  *                     WITHOUT a cache fails loudly on the first fetch, never
  *                     silently passes. A subject filter scopes the compare
  *                     to those ids (the `maintain` catalog gate); omitted
  *                     subjects are not treated as vanished.
- *   --write-baseline  after a reviewed full run: writes baseline.json
- *                     (per-row scores + per-subject pinned render boxes for
- *                     the offline eval pin). Explicit by design — an
- *                     ordinary re-run can never move the gate.
+ *   --write-baseline  after a reviewed full run: writes THIS platform's
+ *                     baseline file (per-row scores + sizes, per-subject
+ *                     pinned render boxes for the offline eval pin).
+ *                     Explicit by design — an ordinary re-run can never
+ *                     move the gate.
+ *   --self-test       no browser, no API: replays the committed baseline
+ *                     rows through the gate (must pass), then mutates them
+ *                     in memory — a 48 device-px width move on ours, the
+ *                     same on Figma's side, a move just past the tolerance,
+ *                     a masked-score regression, a vanished row — and
+ *                     asserts the gate REFUSES each by name. The gate's own
+ *                     red test; `--platform linux|darwin` picks the file.
+ *
+ * PLATFORM-KEYED BASELINES (same convention as catalog-visual/run.ts):
+ *   baseline.darwin.json (arm64) and baseline.linux.json (x64, the CI lane).
+ *   Pinned Chromium + Inter still rasterize differently per OS, so scores
+ *   are per platform; --write-baseline writes the current platform's file
+ *   only. The darwin file was baseline.json until 2026-08-22 (renamed, rows
+ *   untouched, Figma sizes added).
  */
 import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
@@ -52,7 +69,23 @@ const HERE = path.resolve(new URL('.', import.meta.url).pathname);
 const OUT = path.join(HERE, 'out');
 const CACHE = path.join(OUT, '_cache');
 const ASSETS = path.join(HERE, 'report-assets');
-const BASELINE = path.join(HERE, 'baseline.json');
+
+type Platform = 'darwin' | 'linux';
+/** The platform whose baseline a run reads and writes: the runtime's, or an
+ *  explicit `--platform` (self-test only — a rendered row compared against
+ *  another OS's baseline would measure the OS, not the engine). */
+function resolvePlatform(override: string | null): { platform: Platform; architecture: string } {
+  const platform = override ?? process.platform;
+  if (platform !== 'darwin' && platform !== 'linux') {
+    throw new Error(`visual-parity: no reviewed baseline platform for ${platform}`);
+  }
+  const architecture = override ? (platform === 'darwin' ? 'arm64' : 'x64') : process.arch;
+  if ((platform === 'darwin' && architecture !== 'arm64') || (platform === 'linux' && architecture !== 'x64')) {
+    throw new Error(`visual-parity: no reviewed baseline for ${platform}/${architecture}`);
+  }
+  return { platform, architecture };
+}
+const baselinePathFor = (platform: Platform): string => path.join(HERE, `baseline.${platform}.json`);
 
 /** Provisional gate line — printed next to every score, never applied silently. */
 const THRESHOLD_PCT = 2.0;
@@ -63,6 +96,23 @@ const TRIAGE_LINE_PCT = 3.0;
  *  same Chromium, scores reproduce byte-identically; this is NOT a fidelity
  *  tolerance (the scores themselves stay untouched). */
 const EPSILON_PP = 0.1;
+/** Summary mode: allowed per-row CONTENT-BOX drift vs the baseline, in
+ *  device px (2x render), per axis, for OUR box and for Figma's box
+ *  separately. Why the score alone cannot gate geometry: a Badge whose
+ *  padding-inline moved sm→lg renders 170×46 against Figma's 122×46 (Δ48,
+ *  +39%) and the masked score stays 0.00% — the extra pale fill (#dbeafe on
+ *  white) sits under pixelmatch's 0.1 colour threshold, and the wider box
+ *  DILUTES the unmasked denominator so that score even improves. Widening
+ *  the cached Figma PNG passes the same way. Sizes are the only receipt.
+ *  Why 4: a same-machine re-run of all 151 baseline rows reproduced
+ *  sizeOurs EXACTLY (Δ0) on 147 rows; the other four are real moves at
+ *  Δ8, Δ8, Δ32 and Δ151 — nothing legitimate sits between 0 and 8. The CI
+ *  lane (ubuntu x64, fonts-inter) printed sizes on 4 rows and all 4 match
+ *  darwin byte-for-byte. The documented cross-renderer text-hug jitter is
+ *  ±1–2 CSS px = ≤4 device px, and diagnose() has always named a size delta
+ *  at >4 device px — this is the same line, now enforced. The 48 px repro
+ *  fails it twelve times over. */
+const SIZE_TOLERANCE_PX = 4;
 
 interface Row {
   subject: string;
@@ -81,12 +131,19 @@ interface Row {
   cause: TriageRule | null;
 }
 
-/** Committed per-row score baseline (written by --write-baseline, read by
- *  --summary and the offline eval render pin). */
+/** Committed per-row score + size baseline (written by --write-baseline, read
+ *  by --summary / --self-test and the offline eval render pin). One file per
+ *  platform. */
 interface Baseline {
+  platform?: Platform;
+  architecture?: string;
   generatedAt: string;
   headCommit: string | null;
+  /** Provenance of rows not measured by --write-baseline on this platform
+   *  (the linux file is transcribed from CI's own printed rows). */
+  notes?: string;
   epsilonPp: number;
+  sizeTolerancePx?: number;
   subjects: Record<
     string,
     {
@@ -103,11 +160,21 @@ interface Baseline {
       status: Row['status'];
       masked: number | null;
       unmasked: number | null;
+      /** Our content box, device px ("W×H") — gated within SIZE_TOLERANCE_PX. */
       sizeOurs: string | null;
+      /** Figma's content box, device px — gated the same way (the canvas-side
+       *  form of the hole: a re-exported or widened node PNG). */
+      sizeFigma: string | null;
       causeClass: TriageRule['class'] | null;
     }
   >;
 }
+
+const parseSize = (s: string | null | undefined): [number, number] | null => {
+  if (!s) return null;
+  const m = /^(\d+)×(\d+)$/.exec(s);
+  return m ? [Number(m[1]), Number(m[2])] : null;
+};
 
 const rowKey = (r: { subject: string; variant: string }) => `${r.subject} :: ${r.variant}`;
 
@@ -170,7 +237,25 @@ async function main(): Promise<void> {
   const refresh = args.includes('--refresh');
   const summary = args.includes('--summary');
   const writeBaselineFlag = args.includes('--write-baseline');
-  const only = args.filter((a) => !a.startsWith('--'));
+  const selfTest = args.includes('--self-test');
+  let platformOverride: string | null = null;
+  const positional: string[] = [];
+  for (let i = 0; i < args.length; i++) {
+    const a = args[i]!;
+    if (a.startsWith('--platform=')) platformOverride = a.slice('--platform='.length);
+    else if (a === '--platform') platformOverride = args[++i] ?? null;
+    else if (!a.startsWith('--')) positional.push(a);
+  }
+  if (platformOverride && !selfTest) {
+    throw new Error('--platform is a --self-test option: a rendered row compared against another OS\'s baseline measures the OS, not the engine');
+  }
+  const { platform, architecture } = resolvePlatform(platformOverride);
+  const BASELINE = baselinePathFor(platform);
+  if (selfTest) {
+    process.exitCode = runSelfTest(BASELINE, platform) ? 0 : 1;
+    return;
+  }
+  const only = positional;
   const subjects = PARITY_SUBJECTS.filter((s) => only.length === 0 || only.includes(s.id));
   if (subjects.length === 0) throw new Error(`no subjects match: ${only.join(', ')}`);
   // A filtered --summary is the team maintain gate: it compares ONLY the
@@ -283,25 +368,29 @@ async function main(): Promise<void> {
             ? ` [cause: ${row.cause.class}]`
             : ' [UNTRIAGED]'
           : '';
+      // Sizes print on EVERY row (not only past diagnose()'s 4 px line) so a
+      // CI log is a complete transcript — the linux baseline was built from one.
       console.log(
-        `  ${verdict === 'within' ? '·' : '✗'} ${variant.name}: unmasked ${pct(diff.unmaskedPct)} | masked ${pct(diff.maskedPct)} (threshold ${THRESHOLD_PCT}% — ${verdict})${plan.interaction !== 'none' ? ` [${plan.interaction}]` : ''} — ${row.diagnosis}${causeTag}`,
+        `  ${verdict === 'within' ? '·' : '✗'} ${variant.name}: unmasked ${pct(diff.unmaskedPct)} | masked ${pct(diff.maskedPct)} (threshold ${THRESHOLD_PCT}% — ${verdict})${plan.interaction !== 'none' ? ` [${plan.interaction}]` : ''} [ours ${row.sizeOurs} | figma ${row.sizeFigma}] — ${row.diagnosis}${causeTag}`,
       );
     }
   }
 
   await browser.close();
   if (summary) {
-    const failures = compareToBaseline(rows, only.length > 0 ? only : null);
+    const failures = compareToBaseline(rows, only.length > 0 ? only : null, BASELINE);
     if (failures > 0) {
-      console.error(`\nSUMMARY GATE: ${failures} named failure(s) vs baseline.json — see lines above`);
+      console.error(`\nSUMMARY GATE: ${failures} named failure(s) vs ${path.basename(BASELINE)} — see lines above`);
       process.exitCode = 1;
     } else {
-      console.log(`\nSUMMARY GATE: all rows within ±${EPSILON_PP}pp of baseline.json (${new Date().toISOString()})`);
+      console.log(
+        `\nSUMMARY GATE: all rows within ±${EPSILON_PP}pp and ±${SIZE_TOLERANCE_PX} device px of ${path.basename(BASELINE)} (${platform}/${architecture}, ${new Date().toISOString()})`,
+      );
     }
     return;
   }
   writeReport(rows, subjectMeta, fontAvailability);
-  if (writeBaselineFlag) writeBaseline(rows, subjectMeta, only.length > 0 ? only : null);
+  if (writeBaselineFlag) writeBaseline(rows, subjectMeta, only.length > 0 ? only : null, BASELINE, platform, architecture);
   console.log(`\nREPORT: ${path.join(HERE, 'REPORT.md')}`);
 }
 
@@ -313,6 +402,9 @@ function writeBaseline(
   rows: Row[],
   subjectMeta: Array<{ subject: ParitySubject; composition: string; fonts: string; version: string }>,
   mergeSubjects: string[] | null,
+  BASELINE: string,
+  platform: Platform,
+  architecture: string,
 ): void {
   let headCommit: string | null = null;
   try {
@@ -327,7 +419,7 @@ function writeBaseline(
     // Disabled restamp (one stem) would silently un-gate the rest of the map.
     if (!existsSync(BASELINE)) {
       throw new Error(
-        '--write-baseline with a subject filter needs an existing baseline.json — run a full pass first',
+        `--write-baseline with a subject filter needs an existing ${path.basename(BASELINE)} — run a full pass on ${platform} first`,
       );
     }
     const prev = JSON.parse(readFileSync(BASELINE, 'utf8')) as Baseline;
@@ -339,17 +431,24 @@ function writeBaseline(
     const subjectsKept: Baseline['subjects'] = { ...prev.subjects };
     for (const id of mergeSubjects) delete subjectsKept[id];
     baseline = {
+      platform,
+      architecture,
       generatedAt: new Date().toISOString(),
       headCommit,
+      ...(prev.notes ? { notes: prev.notes } : {}),
       epsilonPp: prev.epsilonPp ?? EPSILON_PP,
+      sizeTolerancePx: prev.sizeTolerancePx ?? SIZE_TOLERANCE_PX,
       subjects: subjectsKept,
       rows: rowsKept,
     };
   } else {
     baseline = {
+      platform,
+      architecture,
       generatedAt: new Date().toISOString(),
       headCommit,
       epsilonPp: EPSILON_PP,
+      sizeTolerancePx: SIZE_TOLERANCE_PX,
       subjects: {},
       rows: {},
     };
@@ -370,6 +469,7 @@ function writeBaseline(
       masked: r.maskedPct ?? null,
       unmasked: r.unmaskedPct ?? null,
       sizeOurs: r.sizeOurs ?? null,
+      sizeFigma: r.sizeFigma ?? null,
       causeClass: r.cause?.class ?? null,
     };
   }
@@ -384,22 +484,48 @@ function writeBaseline(
 /** Compare a fresh run against the committed baseline. Every failure prints
  *  a named line; the count is returned (0 = gate passes). Regressions beyond
  *  EPSILON_PP fail; improvements beyond it are NAMED (re-baseline to lock
- *  them in) but do not fail. */
-function compareToBaseline(rows: Row[], scope: string[] | null): number {
+ *  them in) but do not fail. Content boxes — ours AND Figma's — that moved
+ *  more than SIZE_TOLERANCE_PX device px on either axis fail by name: the
+ *  pixel score provably cannot see a pale-fill size move (see the constant). */
+function compareToBaseline(rows: Row[], scope: string[] | null, BASELINE: string): number {
   if (!existsSync(BASELINE)) {
-    console.error(`✗ no baseline.json at ${BASELINE} — run a full pass with --write-baseline first`);
+    console.error(`✗ no ${path.basename(BASELINE)} at ${BASELINE} — run a full pass on this platform with --write-baseline first`);
     return 1;
   }
   const baseline = JSON.parse(readFileSync(BASELINE, 'utf8')) as Baseline;
   const eps = baseline.epsilonPp ?? EPSILON_PP;
+  const tol = baseline.sizeTolerancePx ?? SIZE_TOLERANCE_PX;
   const inScope = (key: string): boolean => !scope || scope.includes(key.split(' :: ')[0]!);
   const current = new Map(rows.map((r) => [rowKey(r), r]));
   let failures = 0;
   console.log(
-    `\n── summary vs baseline ${baseline.generatedAt} (${baseline.headCommit?.slice(0, 7) ?? 'no commit recorded'}), ε ${eps}pp${
+    `\n── summary vs ${path.basename(BASELINE)} ${baseline.generatedAt} (${baseline.headCommit?.slice(0, 7) ?? 'no commit recorded'}), ε ${eps}pp, size ±${tol} device px${
       scope ? `; scoped to ${scope.join(', ')}` : ''
     } ──`,
   );
+  /** One side's box vs its baseline — a named failure past the tolerance, or
+   *  when either side has no size to compare (never a silent skip). */
+  const gateSize = (key: string, side: 'ours' | 'figma', baseSize: string | null | undefined, curSize: string | undefined): void => {
+    const b = parseSize(baseSize);
+    const c = parseSize(curSize);
+    if (!b) {
+      console.error(`✗ ${key}: baseline row carries no ${side} size — geometry cannot be gated; --write-baseline on this platform to pin it`);
+      failures++;
+      return;
+    }
+    if (!c) {
+      console.error(`✗ ${key}: this run produced no ${side} size (${String(curSize)})`);
+      failures++;
+      return;
+    }
+    const dw = c[0] - b[0];
+    const dh = c[1] - b[1];
+    if (Math.abs(dw) > tol || Math.abs(dh) > tol) {
+      const sign = (n: number) => (n > 0 ? `+${n}` : `${n}`);
+      console.error(`✗ ${key}: size moved: ${side} ${baseSize} → ${curSize} (Δ${sign(dw)}, Δ${sign(dh)} device px > ±${tol})`);
+      failures++;
+    }
+  };
   for (const [key, base] of Object.entries(baseline.rows)) {
     if (!inScope(key)) continue;
     const cur = current.get(key);
@@ -414,6 +540,8 @@ function compareToBaseline(rows: Row[], scope: string[] | null): number {
       continue;
     }
     if (base.status !== 'diffed') continue;
+    gateSize(key, 'ours', base.sizeOurs, cur.sizeOurs);
+    gateSize(key, 'figma', base.sizeFigma, cur.sizeFigma);
     const baseScore = base.masked ?? base.unmasked ?? 0;
     const curScore = cur.maskedPct ?? cur.unmaskedPct ?? 0;
     const delta = curScore - baseScore;
@@ -432,6 +560,86 @@ function compareToBaseline(rows: Row[], scope: string[] | null): number {
     }
   }
   return failures;
+}
+
+/** THE GATE'S OWN RED TEST. Replays the committed rows through
+ *  compareToBaseline (must pass), then mutates them in memory and asserts a
+ *  named refusal for each hole the gate exists to close. No browser, no API:
+ *  it runs on any machine against any platform's file (`--platform`). */
+function runSelfTest(BASELINE: string, platform: Platform): boolean {
+  if (!existsSync(BASELINE)) {
+    console.error(`✗ self-test: no ${path.basename(BASELINE)} to replay`);
+    return false;
+  }
+  const baseline = JSON.parse(readFileSync(BASELINE, 'utf8')) as Baseline;
+  const tol = baseline.sizeTolerancePx ?? SIZE_TOLERANCE_PX;
+  const rowsFrom = (): Row[] =>
+    Object.entries(baseline.rows).map(([key, r]) => {
+      const [subject, variant] = key.split(' :: ') as [string, string];
+      return {
+        subject,
+        variant,
+        status: r.status,
+        ...(r.masked !== null ? { maskedPct: r.masked } : { maskedPct: null }),
+        ...(r.unmasked !== null ? { unmaskedPct: r.unmasked } : {}),
+        ...(r.sizeOurs ? { sizeOurs: r.sizeOurs } : {}),
+        ...(r.sizeFigma ? { sizeFigma: r.sizeFigma } : {}),
+        diagnosis: '',
+        notes: [],
+        cause: null,
+      };
+    });
+  const target = rowsFrom().find((r) => r.status === 'diffed' && parseSize(r.sizeOurs) && parseSize(r.sizeFigma));
+  if (!target) {
+    console.error(`✗ self-test: ${path.basename(BASELINE)} has no diffed row with both sizes — nothing to mutate`);
+    return false;
+  }
+  const key = rowKey(target);
+  const widen = (size: string | undefined, by: number): string => {
+    const p = parseSize(size)!;
+    return `${p[0] + by}×${p[1]}`;
+  };
+  console.log(`\n── self-test: ${path.basename(BASELINE)} (${platform}), ${Object.keys(baseline.rows).length} rows, mutating "${key}" ──`);
+  let allOk = true;
+  const probe = (label: string, mutate: (rows: Row[]) => Row[], expect: { fails: boolean; names?: string }): void => {
+    const rows = mutate(rowsFrom());
+    const lines: string[] = [];
+    const origError = console.error;
+    const origLog = console.log;
+    console.error = (...a: unknown[]) => lines.push(a.map(String).join(' '));
+    console.log = () => {};
+    let failures: number;
+    try {
+      failures = compareToBaseline(rows, null, BASELINE);
+    } finally {
+      console.error = origError;
+      console.log = origLog;
+    }
+    const named = expect.names ? lines.some((l) => l.includes(expect.names!)) : true;
+    const ok = expect.fails ? failures > 0 && named : failures === 0;
+    allOk &&= ok;
+    console.log(
+      `  ${ok ? '✔' : '✖'} ${label} → ${failures} failure(s)${expect.names ? `, ${named ? 'named' : 'NOT NAMED'} "${expect.names}"` : ''}${
+        lines.length > 0 && expect.fails ? `\n      ${lines.slice(0, 2).join('\n      ')}` : ''
+      }`,
+    );
+  };
+  const mutateRow = (fn: (r: Row) => void) => (rows: Row[]): Row[] => {
+    for (const r of rows) if (rowKey(r) === key) fn(r);
+    return rows;
+  };
+  probe('baseline rows replayed through the gate pass', (rows) => rows, { fails: false });
+  probe(`ours width +48 device px (the Badge padding-inline sm→lg repro: 122×46 → 170×46) is REFUSED`, mutateRow((r) => { r.sizeOurs = widen(r.sizeOurs, 48); }), { fails: true, names: 'size moved: ours' });
+  probe(`figma width +48 device px (the canvas-side form: a widened node PNG) is REFUSED`, mutateRow((r) => { r.sizeFigma = widen(r.sizeFigma, 48); }), { fails: true, names: 'size moved: figma' });
+  probe(`ours height −48 device px is REFUSED (both axes, both directions)`, mutateRow((r) => { const p = parseSize(r.sizeOurs)!; r.sizeOurs = `${p[0]}×${Math.max(1, p[1] - 48)}`; }), { fails: true, names: 'size moved: ours' });
+  probe(`ours width +${tol} device px (at the tolerance) passes`, mutateRow((r) => { r.sizeOurs = widen(r.sizeOurs, tol); }), { fails: false });
+  probe(`ours width +${tol + 1} device px (one past the tolerance) is REFUSED`, mutateRow((r) => { r.sizeOurs = widen(r.sizeOurs, tol + 1); }), { fails: true, names: 'size moved: ours' });
+  probe('ours size missing from the run is REFUSED', mutateRow((r) => { delete r.sizeOurs; }), { fails: true, names: 'produced no ours size' });
+  probe('masked score +1pp is REFUSED (the existing score gate still stands)', mutateRow((r) => { r.maskedPct = (r.maskedPct ?? 0) + 1; }), { fails: true, names: '> ε' });
+  probe('a vanished row is REFUSED', (rows) => rows.filter((r) => rowKey(r) !== key), { fails: true, names: 'MISSING from this run' });
+  probe('a row the baseline has never seen is REFUSED', (rows) => [...rows, { ...target, variant: `${target.variant} (new)` }], { fails: true, names: 'NEW row not in baseline' });
+  console.log(allOk ? `\nSELF-TEST: the gate refuses every mutation by name (${path.basename(BASELINE)})` : `\nSELF-TEST FAILED: see ✖ lines above`);
+  return allOk;
 }
 
 function writeReport(
@@ -488,9 +696,10 @@ printed per row, applied nowhere silently. Every row over **${TRIAGE_LINE_PCT}%*
 masked carries a NAMED cause from the committed triage table (triage.ts,
 classed engine / capture-gap / renderer / harness / design) or prints
 **UNTRIAGED**. Standing gate: \`-- --summary\` re-scores every row against the
-committed baseline.json and FAILS on any regression beyond ±${EPSILON_PP}pp
+committed baseline.<platform>.json and FAILS on any regression beyond ±${EPSILON_PP}pp
+or any content box (ours or Figma's) that moved more than ±${SIZE_TOLERANCE_PX} device px
 (cached Figma PNGs — render-only when the cache is warm); \`-- --write-baseline\`
-moves the gate, explicitly, after review.
+moves the gate, explicitly, after review; \`-- --self-test\` is the gate's own red test.
 
 ## Known cross-renderer deltas (named, not tolerated away)
 

@@ -51,7 +51,9 @@ extract/computed/out/**/.regate-probe.html
 figma-sync/plugin-dist/
 
 # Console MCP Testing-file scripts — regenerate with npm run console-loop:emit
-# (receipts under components/ are committed; scripts are retargeted rebuilds)
+# (receipts under components/ are committed; scripts are retargeted rebuilds).
+# NOTHING CI-GATED MAY READ THIS DIRECTORY: the canvas-drift probe reads the
+# committed canvas-drift/EMIT-SPECS.json distilled from it instead.
 parity/receipts/console-loop/emitted/*.js
 parity/receipts/console-loop/chunks/
 

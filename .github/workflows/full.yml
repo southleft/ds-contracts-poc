@@ -125,6 +125,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        # Full history: eval:record:check proves evals/results.json was
+        # measured on an ANCESTOR of the commit under test (git merge-base
+        # --is-ancestor). A depth-1 checkout of a PR merge commit has no
+        # ancestors at all, so the stamped record read as foreign
+        # (2026-08-22, run 32600919494). .git is ~280 MB; the cost is seconds.
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
