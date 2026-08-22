@@ -1,6 +1,6 @@
 # Flowbite contract parity — authored vs code-capture
 
-Recorded 2026-08-17. Authored contracts in
+Recorded 2026-08-22. Authored contracts in
 `examples/tailwind/contracts` vs `extract/computed/out/tailwind/<stem>/enriched.contract.json`.
 
 This is hop 5 of [NORTH-STAR.md](./NORTH-STAR.md): align the contracts we have

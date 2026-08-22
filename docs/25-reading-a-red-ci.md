@@ -21,6 +21,20 @@ machine.
 | [`security`](../.github/workflows/security.yml) | PRs, pushes to `main`, weekly, and on demand | dependency review, npm audits, and secret scanning |
 | [`deploy-check`](../.github/workflows/deploy-check.yml) | daily and on demand | live Cloudflare bytes versus a fresh build |
 
+`npm run maintain` — the team gate `docs/BETA.md` names — is a composite of
+named checks, and `npm run ci:lanes` expands every composite script to its
+members and prints a COMPOSITE COVERAGE table proving each member runs in a
+lane (or is excluded by name), so "maintain is green locally" and "the lanes
+are green" are the same set of commands. Its members split by what they need:
+`maintain` itself is token-free and cache-free (its quick checks run in `fast`;
+`functional:flowbite`, which needs Chromium, and `parity:flowbite` run in
+`full`, and `plugin:check` was already there), while `maintain:visual`
+(`extract:figma:visual:catalog`) needs **`FIGMA_TOKEN`** (env or `.env.local`)
+plus the gitignored Figma PNG cache under `extract/figma/visual-parity/out/`,
+so on a clean clone it refuses with `FIGMA_TOKEN not found`. This repository
+has no `FIGMA_TOKEN` Actions secret, so `maintain:visual` stays a local command
+and is excluded by name; `npm run maintain:all` runs both halves.
+
 Do not copy a gate count from this page. Run `npm run ci:lanes`; it derives the
 current coverage from package scripts and workflow files, names exclusions,
 and refuses a gate that belongs to no lane. Historical timings in workflow
@@ -90,6 +104,7 @@ lost its build step, not that the registry comparison found something.
 | `static:empty-content:check` | Static extraction invented visible content for a geometry-only root. | `npm run static:empty-content:check` |
 | `variant-drift:check` / `canvas:binding:check` | The offline fixture no longer detects a one-variant part/layout/binding edit, or the fingerprint stopped carrying binding names. | `npm run canvas:binding:check && npm run variant-drift:check` |
 | `tokens:snapshot:check` | The extracted Figma variable table no longer agrees with the committed token corpus. Snapshot age is printed separately from token parity. | `npm run tokens:snapshot:check` |
+| `visual-truth:check` | A committed headless scorecard no longer matches its pinned PNG, a card was scored against a reference its lane receipt has since replaced, or a lane's headless pass-count fell below its `parity/receipts/console-loop/RATCHET.json` floor. A lane listed under that file's `advisory` block (today: `astryx`, floor held at 1 by owner decision while the headless count is 0) prints as a **warning** with its recorded reason and does not fail the lane — it fails again only if the lane drops below the count measured when the entry was written, or if the lane meets its floor and the stale entry was not removed. | `npm run visual-truth:check` |
 
 ### Full lane
 
@@ -120,6 +135,7 @@ committed catalog. It requires the Playwright Chromium revision from the
 lockfile and the Inter font. A missing font is an environment refusal; a
 masked painted-box delta is a rendering change. Reproduce with
 `npm run ci:lane catalog-visual` after satisfying the printed prerequisites.
+If only the UNMASKED score moves on a text-bearing cell while its masked score and painted box stay put, the delta is glyph-only: read the run header's `Inter` line, then check whether a contract pinned a font-weight on purpose (bf82db06 did this to text-field) before calling it a regression — the fix is a reviewed `--write-baseline` on that platform, never a wider ε.
 
 ### Security workflow
 
@@ -156,12 +172,16 @@ that does not exist.
   every run, so it would dirty the checkout. The differ's detection logic is
   covered by the `C3-detection` eval family, which does run.
 - **`npm run build` followed by `git diff --exit-code`** (proving the generated
-  output committed to the tree is what the generators produce today) — measured
-  byte-inert on macOS/arm64 under Node 20.19.4, but not yet confirmed on Linux,
-  and a false red here would be a platform difference wearing a contributor's
-  name. Determinism itself is not unguarded: the `C1-determinism` eval family
-  regenerates in a scratch copy and byte-compares. Wire this in once someone
-  confirms it on `ubuntu-latest`.
+  output committed to the tree is what the generators produce today) — an
+  earlier version of this page called it "measured byte-inert"; it was not (on
+  2026-08-22 both committed `contract.schema.json` copies were eleven days
+  behind the Zod document). The schema half of that claim now has its own gate,
+  `schema:fresh`, in the fast lane; determinism itself is covered by the
+  `C1-determinism` eval family, which regenerates in a scratch copy and
+  byte-compares.
+- **`extract:figma:visual:catalog` / `npm run maintain:visual`** — needs
+  `FIGMA_TOKEN` and the gitignored PNG cache; see the `maintain` paragraph under
+  "The lanes" and its `EXCLUDED` entry in `lane-coverage.ts`.
 - **`conformance`, `extract:figma:gauntlet:live*`, `extract:figma:visual`,
   `extract:figma:rest`, `extract:figma:mcp`, `roundtrip:code`,
   `adherence:aggregate`** — capture and replay instruments, not invariants. Each

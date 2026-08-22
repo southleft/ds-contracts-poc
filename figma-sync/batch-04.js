@@ -4,6 +4,7 @@ const COMPONENTS = [
   {
     "setName": "Spinner",
     "contractId": "ds.spinner",
+    "version": "1.0.0",
     "anchorKey": "3cb0569208b199ceccb18b4c4439add4f5fea661",
     "description": "Spinner — generated from contract ds.spinner v1.0.0",
     "isSet": false,
@@ -53,6 +54,7 @@ const COMPONENTS = [
   {
     "setName": "StatusDot",
     "contractId": "ds.status-dot",
+    "version": "1.0.0",
     "anchorKey": "f66c5a1c366d1d37292459b9b9a56d80bf2a5034",
     "description": "StatusDot — generated from contract ds.status-dot v1.0.0",
     "isSet": true,
@@ -226,7 +228,8 @@ const COMPONENTS = [
   {
     "setName": "Switch",
     "contractId": "ds.switch",
-    "anchorKey": "7936496ebfb63f0f4908a29b7edd6dae340e4e23",
+    "version": "2.0.1",
+    "anchorKey": "1a174ed109a4f98a2bdd48f6509cf18f06a6d75b",
     "description": "Switch — generated from contract ds.switch v2.0.1 †",
     "isSet": true,
     "boolProps": [],
@@ -504,6 +507,7 @@ const COMPONENTS = [
   {
     "setName": "Tab",
     "contractId": "ds.tab",
+    "version": "1.0.0",
     "anchorKey": "5f7bce1453ff86d3147e96d9249f9313497f3d68",
     "description": "Tab — generated from contract ds.tab v1.0.0",
     "isSet": true,
@@ -680,6 +684,7 @@ const COMPONENTS = [
   {
     "setName": "TabList",
     "contractId": "ds.tab-list",
+    "version": "1.0.0",
     "anchorKey": "21786b6e7ff33e3d9ede5edb8ca07a56f3dbb8af",
     "description": "TabList — generated from contract ds.tab-list v1.0.0",
     "isSet": false,
@@ -770,6 +775,7 @@ const COMPONENTS = [
   {
     "setName": "TableCell",
     "contractId": "ds.table-cell",
+    "version": "1.1.0",
     "anchorKey": "b440cb0ab4bd83de2491b2302ab1ccb9c3e0f2d1",
     "description": "TableCell — generated from contract ds.table-cell v1.1.0",
     "isSet": true,
@@ -861,6 +867,7 @@ const COMPONENTS = [
   {
     "setName": "TableHeaderCell",
     "contractId": "ds.table-header-cell",
+    "version": "1.1.0",
     "anchorKey": "91bf99af47cb2e09190eed770012e9c99661294f",
     "description": "TableHeaderCell — generated from contract ds.table-header-cell v1.1.0",
     "isSet": true,
@@ -955,6 +962,7 @@ const COMPONENTS = [
   {
     "setName": "TableRow",
     "contractId": "ds.table-row",
+    "version": "1.1.0",
     "anchorKey": "2630a1f30455c0b4d906930e9b3815cc0437fe1f",
     "description": "TableRow — generated from contract ds.table-row v1.1.0",
     "isSet": true,
@@ -1109,6 +1117,7 @@ const COMPONENTS = [
   {
     "setName": "Table",
     "contractId": "ds.table",
+    "version": "1.1.0",
     "anchorKey": "d3e8c9c378ea2fd072c2eb08545a30565fa77614",
     "description": "Table — generated from contract ds.table v1.1.0",
     "isSet": true,
@@ -1367,6 +1376,7 @@ const COMPONENTS = [
   {
     "setName": "TextArea",
     "contractId": "ds.text-area",
+    "version": "1.0.0",
     "anchorKey": "2cb4581bfc1e7d9b0b5e32260d783accaea973ef",
     "description": "TextArea — generated from contract ds.text-area v1.0.0",
     "isSet": true,
@@ -1718,6 +1728,7 @@ const COMPONENTS = [
   {
     "setName": "TextField",
     "contractId": "ds.text-field",
+    "version": "1.1.1",
     "anchorKey": "83b5ead2b038477a13c0647de71ee55bf458e0b3",
     "description": "TextField — generated from contract ds.text-field v1.1.1",
     "isSet": true,
@@ -2078,6 +2089,7 @@ const COMPONENTS = [
   {
     "setName": "Toast",
     "contractId": "ds.toast",
+    "version": "1.0.0",
     "anchorKey": "0abc553b16f20807f50d984a41dc6cb936958a93",
     "description": "Toast — generated from contract ds.toast v1.0.0",
     "isSet": true,
@@ -3320,6 +3332,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -3582,6 +3595,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -3879,6 +3893,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',

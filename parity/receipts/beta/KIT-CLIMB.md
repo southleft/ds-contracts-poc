@@ -710,7 +710,510 @@ original package screenshots are session artifacts, not committed), so
 stops at the wall it was opened for. Blockquote remains out of
 `ds-library.json`, out of the genesis ORDER, out of the bundle, and unapplied.
 
-## LIVE-FILE FINDING — **FC-APPLY-TOKENS-NOT-PRUNED**
+## FINDING — **FC-HOP4-GEOMETRY-REMINTS-ONLY** (closed 2026-08-22)
+
+Hop-4's remaining MINTED set is only Button `root.height.{xs,sm,md,lg,xl}`
+— live HORIZONTAL AUTO×FIXED on `59mLQ`, named `FC-GEOMETRY-EXCLUDED`.
+A new dump-slug mint is a reopen of the remint class (shadow / padding /
+opacity / hug-height), not a geometry climb. Pin: hop-4 allows only
+those five names.
+
+## FINDING — **FC-HOP4-SIZING-AXES-SWAPPED** (closed 2026-08-22)
+
+`FC-HOP4-SIZING-HUG-INVENTED` replaced illegal `HUG` with `AUTO` but
+kept primary/counter mapped to `layoutSizingHorizontal` /
+`layoutSizingVertical`. dump.plugin writes `primaryAxisSizingMode`.
+On a VERTICAL hug-height + fixed-width stack (Kbd, Label, HelperText
+on `59mLQ`) live is AUTO×FIXED. The fixture was FIXED×AUTO, so hop-4
+minted `imported.*.root.height` for a height the canvas hugs. Button
+HORIZONTAL AUTO×FIXED (fixed height) is live and stays
+`FC-GEOMETRY-EXCLUDED`. Pin: fixture roots, hop-4 refuses those three
+height remints.
+
+## FINDING — **FC-DUMP-PROPOSE-SHADOW-MINTED** (closed 2026-08-22)
+
+Figma cannot bind effect stacks. Emit writes Card's 6-layer DROP_SHADOW
+and Button Active / Focus Visible stacks as literals. Propose minted
+dump-slugs (`imported.card-flowbite-card.root.box-shadow`,
+`imported.button-flowbite-button.state-*.box-shadow.{color}`).
+`FC-DUMP-PROPOSE-CARD-SHADOW` forbade inventing the authored name
+without a value match — dump hex and authored rgba are different
+spellings of the same layers (alpha 0.1 vs `#0000001a`). When the
+stamped authored ref resolves to those layers, recover that ref. An
+unstamped foreign stack still mints (Path A). Pin: hop-4 Card + Button,
+`exact-proposal-check.ts` §29.
+
+## FINDING — **FC-DUMP-PROPOSE-PADDING-LITERAL-MINTED** (closed 2026-08-22)
+
+Emit writes Alert icon `padding-right: 12px` and dismiss `6px` on all
+four sides as unbound layout literals — Figma has no padding variable
+on those frames. Propose's mintPadding minted dump-slugs
+(`imported.alert-flowbite-alert.part-0-alert-icon.padding-right`,
+`…part-0-dismiss.padding-inline/block`). The stamped authored contract
+already spells those px as literals. Recover the literals when they
+match the drawn values. An unstamped foreign dump still mints (Path A).
+Pin: hop-4 Alert, `exact-proposal-check.ts` §28.
+
+## FINDING — **FC-DUMP-PROPOSE-DISABLED-OPACITY-MINTED** (closed 2026-08-22)
+
+Emit writes Button `State=Disabled` `node.opacity` as an unbound 0–1
+literal (unbind the OPACITY variable, then write 0.5) so re-apply
+cannot wash the preview to 0.5%. Dump captures `opacity: 0.5` on the
+five pinned Disabled cells. Propose's state numberChannel minted
+`{imported.button-flowbite-button.state-disabled.opacity}` — a token
+the canvas refused to bind. Nearest-corpus match is also wrong (0.5
+hits `radius-lg`). When the set is stamped and the authored
+`states.disabled.opacity` resolves to the drawn 0.5, recover that
+ref. An unstamped foreign Disabled axis still mints (Path A). Pin:
+hop-4 Button, `exact-proposal-check.ts` §27.
+
+## FINDING — **FC-DUMP-PROPOSE-NAME-PARENTHETICAL** (closed 2026-08-22)
+
+Emit disambiguates a foreign same-name set as `Name (contractId)`
+(`Alert (flowbite.alert)` on `59mLQ`). Propose PascalCased the whole
+drawn name and reminted `Alert` → `AlertFlowbiteAlert` (same for
+Badge/Button/Card). The stamped `contractId` already names the suffix;
+strip only that match and recover the authored name. An unstamped or
+mismatched parenthetical stays sanitized as drawn. Pin: hop-4 (all
+eight names), `exact-proposal-check.ts` §21.
+
+## FINDING — **FC-DUMP-PROPOSE-DISABLED-INVENTED** (closed 2026-08-22)
+
+Emit with `figmaStatePreviews` draws `State=Disabled` as a preview
+VARIANT cell and stamps `statePreviewAxis`. Propose already refused to
+invent `State` as an API prop from that stamp, then still promoted
+`State=Disabled` to a `disabled` BOOLEAN bound to design property
+`Disabled`. Live Button on `59mLQ` has no such BOOLEAN (Color / Size /
+Content / State only). Authored `flowbite.button` has `disabled` as a
+CSS state, not a prop. The BOOLEAN reminted API the canvas never
+drew. When `statePreviewAxis` names Disabled as a preview cell, keep
+the disabled STATE block and do not invent the BOOLEAN. An unstamped
+foreign State=Disabled axis still promotes the BOOLEAN (Path A table).
+Pin: hop-4 (all eight refuse `disabled` / `Disabled`),
+`exact-proposal-check.ts` §6 + §26.
+
+## FINDING — **FC-PLUGIN-STANDALONE-DRIFT-SNAPSHOT** (closed 2026-08-22)
+
+Check Drift already fingerprints standalone Card/Kbd (`COMPONENT` roots)
+and reports `canvas-edited`. The WHAT drill-down walked SET children
+only, so a fill/layout/token edit came back with empty `editedVariants`
+and empty `setChanges` (the set snapshot is description + propdef). The
+node already carries `canvasSnapshot` — the same lines SET variants
+use. Drill it. Pin: `plugin:check` stamps a standalone Kbd-shaped
+COMPONENT, edits a fill, and asserts the handler calls
+`pushEditedSnapshot(node)` on `node.type === 'COMPONENT'`.
+
+## FINDING — **FC-HOP4-LAYOUT-TUPLE** (closed 2026-08-22)
+
+Live default-variant auto-layout on `59mLQ` is Button `row`×CENTER×CENTER
+(elides to the emit default), Badge/ToggleSwitch `row`×MIN×CENTER, and
+Alert/Card/HelperText/Kbd/Label `column`×MIN×MIN. Propose already
+recovers that: Button has no layout block; Badge/ToggleSwitch keep
+`align: center` (omitted justify is MIN); column stems omit MIN/MIN.
+An elision that swallowed Badge would re-apply as CENTER×CENTER and
+pack-start would become centered. Pin: `flowbite-dump-propose:check`
+asserts those eight root tuples.
+
+## FINDING — **FC-HOP4-LIVE-EXTRAS-SAME-AS-ABSENT** (closed 2026-08-22)
+
+A live `dump.plugin` pass on `59mLQ` writes fields the compact hop-4
+fixture omits: PIXELS `lineHeight` beside `lineHeightVar`,
+`strokeWeight: 0` beside bound side weights, `strokeAlign: INSIDE`,
+`minWidth` beside `bound.minWidth`, and `cornerRadius` beside bound
+radii. Injecting those extras does not grow the MINTED set and all
+eight stems still `verified-exact`. Stamps / side binds already win;
+the fixture omit is compact, not a remint hole. Do not inject VECTOR
+`abs` / icon `fixedSize` (FC-GEOMETRY-EXCLUDED). Pin:
+`flowbite-dump-propose:check` clones the fixture, injects the extras,
+and refuses new `MINTED {…}` names.
+
+## FINDING — **FC-VISUAL-SCREENSHOT-TIMEOUT** (closed 2026-08-21)
+
+`extract:figma:visual:catalog` flipped Heading `Level=H4, Size=Large` from
+baseline `diffed` to `refused` when `page.screenshot` hit Playwright's
+30s timeout under overlapping maintain ticks. That is not a pixel
+regression and not `FC-FONT-SUBSTRATE` (the H4 Large over-threshold
+score is already locked). Render retries the screenshot once on a
+Timeout so a starved Chromium cannot fail the team command. Pin: the
+retry in `extract/figma/visual-parity/render.ts`.
+
+## FINDING — **FC-HOP4-SIZING-HUG-INVENTED** (closed 2026-08-20)
+
+The hop-4 fixture spelled `layout.primarySizing` / `counterSizing` as
+`HUG` (the `layoutSizingHorizontal` word). dump.plugin and REST write
+`primaryAxisSizingMode`, which is `AUTO` | `FIXED`. Propose treats both
+non-FIXED spellings the same on stacks, so maintain stayed green while
+the pin fixture was not a legal dump v1 document. Replaced `HUG` →
+`AUTO` (83 primary + 49 counter). Pin: `flowbite-dump-propose:check`
+refuses a `HUG` sizing field.
+
+## FINDING — **FC-PLUGIN-SECTION-SELECTION** (closed 2026-08-20)
+
+`selectionSetNames()` walked ancestors for COMPONENT_SET / COMPONENT /
+INSTANCE only. Flowbite Card and Kbd are standalone COMPONENTs inside an
+identity-marked Section; selecting the Section (the thing the designer
+clicks) resolved nothing and the Send tab said "Nothing selected / type
+its name". A selected Section now names its hosted COMPONENT /
+COMPONENT_SET children. Pin: `plugin:check` lifts the real function and
+asserts Section → `Kbd`, COMPONENT still → `Kbd`, empty Section → `[]`.
+
+## FINDING — **FC-DUMP-MINMAX-ZERO-INVENTED** (closed 2026-08-20)
+
+Dump v1.4 wrote `minWidth`/`minHeight`/`maxWidth`/`maxHeight` whenever
+the field was a number. Figma's FrameNode default is `0`, so a live
+eight-stem dump would invent a tap-target fact on every frame and
+propose would mint `min-width: 0`. dump v1.30 omits 0 on both producers
+(plugin dump and REST `map.ts`); propose ignores a literal 0 so a
+pre-v1.30 dump cannot remint it. A drawn `minWidth 44` still carries.
+Pin: `exact-proposal-check.ts` §25, `plugin:check` Badge dump omits 0
+and keeps 44.
+
+## FINDING — **FC-DUMP-PROPOSE-VERSION-INVENTED** (closed 2026-08-20)
+
+Propose hardcoded `version: "0.1.0"`. Authored Flowbite contracts are
+`0.2.0` and the SET caption already says `v0.2.0`, but genesis never
+stamped `ds_contracts/version` (the plugin engine path did). Stamp it on
+create/amend; dump v1.29 carries it; propose uses a semver stamp and keeps
+inventing `0.1.0` for unstamped / malformed dumps. Adding `version` to
+compiled C moves every eight-stem specHash — amend restamps. Pin: hop-4
+(`0.2.0` on all eight), `exact-proposal-check.ts` §24, `plugin:check`
+Badge dump ≡ stored version.
+
+## FINDING — **FC-DUMP-SPECHASH-DROPPED** (closed 2026-08-20)
+
+Emit stamps `ds_contracts/specHash` on every set this pipeline drew.
+dump v1.27 already carried `contractId` / `semantics` / `propNames` /
+`statePreviewAxis` from that namespace and dropped `specHash`, so a live
+dump could not say whether the set matches the current engine. Carry the
+stamp (dump v1.28); propose notes it and does not write it onto the
+contract. Unstamped / malformed dumps stay silent. Pin: hop-4 +
+`exact-proposal-check.ts` §23 + `plugin:check` Badge dump ≡ stored hash.
+
+## FINDING — **FC-DUMP-REACTIONS-SILENT** (closed 2026-08-20)
+
+Live Flowbite Button (5 Default/Md cells) and Badge (6 Default/Xs cells)
+carry emit-written `ON_HOVER`/`ON_PRESS` → `CHANGE_TO` reactions. dump
+v1.26 walked those nodes and named nothing, so the wiring vanished with
+no receipt. dump v1.27 names `prototype-reactions-unsupported`. Propose
+already attaches `_degradations`; it does not invent `onClick`. The State
+axis + `statePreviewAxis` stamp recover the matrix. Pin: hop-4 (5 Button
++ 6 Badge notes), `exact-proposal-check.ts` §22, `plugin:check` dump of
+the MUI Button Default-plane sources.
+
+## FINDING — **FC-EMIT-ROOT-MARGIN-SILENT** (closed 2026-08-20)
+
+HelperText compiles `margin-top` onto the variant ROOT (`margins: { top: 8 }`).
+`applyMarginBox` only wraps children. A COMPONENT_SET cannot wrap its own
+COMPONENT, so the field was a runtime no-op and the Tokens variable stayed
+unbound. Name the drop (`channelMiss`) and strip root margins from the
+emitted spec — do not invent a geometry wrapper. Child residual margins
+(ToggleSwitch label) still wrap. Pin: hop-2 genesis has no HelperText
+`"margins"`; ToggleSwitch label still has them. Demo HelperText
+`120:2014` specHash `4248162942` → `148732658` (interiors unchanged —
+root margins never drew).
+
+## FINDING — **FC-DUMP-PROPOSE-CONTRACT-ID-DROPPED** (closed 2026-08-20)
+
+Emit stamps `ds_contracts/contractId` on every set this pipeline drew.
+dump v1.25 already carried `semantics` / `propNames` / `statePreviewAxis`
+from that namespace and dropped `contractId`, so a live dump of
+`Alert (flowbite.alert)` proposed `ds.alert-flowbite-alert`. Carry the
+stamp (dump v1.26); propose uses it when it matches the contract-id
+grammar. Unstamped / malformed dumps keep the name-derived slug. Pin:
+hop-4 + `exact-proposal-check.ts` §21.
+
+## FINDING — **FC-DUMP-PROPOSE-TEXT-PAINT** (closed 2026-08-20)
+
+Live Card `label-text` fill is unbound `#000000`. dump.plugin writes
+`fill.hex`; hop-4's compact fixture omitted it, so propose minted a
+dump-slug on a live dump and maintain stayed green. Lift unbound TEXT
+fills to `literals.color` (SHAPE-PAINT twin). Pin: hop-4 +
+`exact-proposal-check.ts` §20.
+
+## FINDING — **FC-DUMP-PROPOSE-DEGRADATIONS-DROPPED** (closed 2026-08-20)
+
+dump.plugin writes `_degradations` (Alert VECTOR paths are
+`vector-geometry-unsupported`). `proposeBatchFromDump` already surfaced
+REST `captureGaps` and dropped the plugin array, so a live Alert dump's
+eight vector receipts vanished on hop 4. Carry each receipt onto the set
+its `nodePath` names. Pin: hop-4 (8 Alert notes) +
+`exact-proposal-check.ts` §19.
+
+## FINDING — **FC-DUMP-PROPOSE-FIXTURE-CENSUS** (closed 2026-08-20)
+
+The stamp gate only sees names already in the hop-4 fixture. A live
+census of demo `59mLQlOMiD5w5za6SUcoO5` matched the fixture 186/186 —
+so the gate was not blind today — but deleting a fill from the fixture
+would shrink the gate without failing it. Pin the census
+(`extract/figma/fixtures/flowbite-eight.stamps.json`) and require
+fixture stamps equal the live names per stem.
+
+## FINDING — **FC-DUMP-PROPOSE-STAMP-GATE** (closed 2026-08-20)
+
+Hop 4 only required a hand-picked `stamped` sample per stem. Live canvas
+stamps that already recovered — Kbd `{imported.kbd.root.color}`, plugin-data
+weight/line-height, ToggleSwitch `min-width`, Badge/Button Active fills —
+could remint without failing maintain. The hole is the gate, not a new
+inverter miss: `flowbite-dump-propose:check` now walks every dump
+`bound` / `fill.var` / `stroke.var` / `fontSizeVar` / `fontWeightVar` /
+`lineHeightVar` (186 names on the eight-stem fixture) and fails if one
+drops. Pin: hop-4 + `exact-proposal-check.ts` §18.
+
+## FINDING — **FC-DUMP-PROPOSE-ALERT-NESTED-PAINT** (closed 2026-08-20)
+
+Live Alert Vectors bind `imported/alert/label/color/{color}`; dismiss
+binds radius `imported/shared/size-8` and fill
+`imported/alert/root/background-color/{color}`; both Icon and dismiss
+are `hidden` in every Color variant (BOOLEAN defaults false). The hop-4
+fixture omitted those nested stamps, so a Vector-fill drop would not
+fail maintain. Engine already recovers the canvas names (plus
+`visibleWhen` on icon/dismiss). Pin: hop-4 + `exact-proposal-check.ts`
+§17.
+
+## FINDING — **FC-DUMP-PROPOSE-CARD-SHADOW** (closed 2026-08-20)
+
+Live Card (`120:1999`) draws a 6-layer unbound DROP_SHADOW stack (4
+transparent + `0 4 6 -1` / `0 2 4 -2` at 10% black). Figma cannot bind
+effect stacks; emit writes `effectStack` as literals. The hop-4 fixture
+omitted `effects`, so a default-stack drop would not fail maintain.
+Propose already mints all-variant DROP_SHADOW as `tokens.box-shadow`.
+Do not invent `{imported.card.root.box-shadow}` — the canvas has no
+EFFECT bind. Pin: hop-4 + `exact-proposal-check.ts` §16.
+
+## FINDING — **FC-DUMP-PROPOSE-SHAPE-PAINT-AXIS** (closed 2026-08-20)
+
+Live ToggleSwitch checked thumbs draw an unbound transparent stroke
+(`hex 000000` + dump `alpha: 0`), unchecked `#d1d5db`. The first
+SHAPE-PAINT fixture flattened every thumb to gray, so hop-4 could not
+catch a first-variant freeze. Engine already lifts the axis onto
+`literalsByProp.checked`. Pin: hop-4 + `exact-proposal-check.ts` §15.
+
+## FINDING — **FC-DUMP-PROPOSE-SHAPE-PAINT** (closed 2026-08-20)
+
+Unbound hex fill/stroke on a dump v1.3 decor shape minted dump-slug
+tokens (`part-0-part-0-after.background-color`). Placement already rides
+the shape-part literals grammar; paint belongs there too. Bound paints
+stay tokens. Live thumb is `#ffffff` / `#d1d5db` / `1px`, no variable.
+Pin: hop-4 literals + `exact-proposal-check.ts` §14.
+
+## FINDING — **FC-DUMP-PROPOSE-STATE-SHADOW** (closed 2026-08-20)
+
+Live Button Active / Focus Visible draw a 5-layer DROP_SHADOW stack
+(default-bare). `invertNodeEffects` required the stack in every variant
+and named the split "not proposed". State diffs already own fill /
+stroke / opacity; they now mint `states.active.box-shadow` and
+`states.focus-visible.box-shadow` from the observed CSS stack. Canvas
+did not bind a variable — do not invent
+`{imported.button.root.box-shadow-state-*}`. Pin: hop-4 structural +
+`exact-proposal-check.ts` §13.
+
+## FINDING — **FC-DUMP-PROPOSE-SHAPE-SIZE-AXIS** (closed 2026-08-20)
+
+`invertNodeShape` froze the first variant's ellipse size and named the
+rest (`16×16, 20×20, 24×24`). Placement already classified onto Checked
+(`left:2` / `right:2`); size is a second observed function of Sizing and
+belongs in the existing `literalsByProp` vocabulary. Uncorrelated size
+still freezes + names. Not `FC-GEOMETRY-EXCLUDED` (Focus Visible bbox).
+Pin: hop-4 sm/md/lg widths + `exact-proposal-check.ts` §12.
+
+## FINDING — **FC-DUMP-PROPOSE-THUMB-SHAPE** (closed 2026-08-20)
+
+Hop 4 fixture named ToggleSwitch `part-0-after` as a bare `ELLIPSE` with
+no dump v1.3 `shape`. Propose then wrote an empty part `{}` — the live
+thumb is an ABSOLUTE ellipse (sm 16 / md 20 / lg 24; unchecked `left:2`,
+checked `right:2`). Dump plugin already writes `shape`; the compact
+fixture had dropped it. Engine recovers `shape.kind: ellipse` plus
+checked-axis `stylesWhen` when the dump has the field. Pin: hop-4
+structural + `exact-proposal-check.ts` §11. First-variant size freeze
+(20×20) is the existing shape grammar, not `FC-GEOMETRY-EXCLUDED`.
+
+## FINDING — **FC-DUMP-PROPOSE-TOGGLE-PART-BOUND** (closed 2026-08-20)
+
+Hop 4 fixture carried ToggleSwitch `part-0` fill only. Live `59mLQ`
+already binds track width/height/min-width/`size-9999` radius. Propose
+recovers those names when the dump has them; without nested `bound` they
+dropped. Same class as Card `FC-DUMP-PROPOSE-NESTED-BOUND-UNPINNED`.
+Pin: hop-4 `{imported.toggle-switch.part-0.width.{sizing}}` and
+`{imported.shared.size-9999}`. Height bind is the canvas token, not
+`FC-GEOMETRY-EXCLUDED`.
+
+## FINDING — **FC-DUMP-PROPOSE-FOCUS-OUTLINE** (closed 2026-08-20)
+
+Propose dropped Button Focus Visible outline width (bound number-channel
+state inversion was unimplemented, and literal strokeWeight stayed 0) and
+left the outline color on `states.focus-visible.border-color` because the
+base already has an INSIDE border. Live `59mLQ` stamps
+`outline-width-state-focus-visible` on all four sides with strokeAlign
+OUTSIDE. Bound uniform width now inverts; OUTSIDE focus remaps to
+`outline-color` / `outline-width`. Pin: `exact-proposal:check` §10 + hop-4
+`{imported.button.root.outline-width-state-focus-visible}`. Do not climb
+`FC-GEOMETRY-EXCLUDED` (Focus Visible 31% size delta).
+
+## FINDING — **FC-DUMP-PROPOSE-STROKE-WEIGHT-SIDES** (closed 2026-08-20)
+
+Propose treated four different side-weight variable names as "not
+uniform" and dropped them. Padding already carries longhand when
+left ≠ right. Live `59mLQ` Button Default binds
+`border-top|right|bottom|left-width.{color}`. Those now recover as
+per-side channels. Pin: `exact-proposal:check` §9 + hop-4
+`{imported.button.root.border-top-width.{color}}`. Outline vocabulary
+with mixed sides still names. Do not climb font/geometry.
+
+## FINDING — **FC-DUMP-PROPOSE-STATE-TEXT** (closed 2026-08-20)
+
+Propose hoisted the sole TEXT `label` to root tokens, then named-and-dropped
+hover/active label fills (`no anatomy part maps`). Live `59mLQ` Button
+already stamps `imported/button/root/color-state-hover|{color}` and
+`color-state-active`. Those now ride `states.hover|active.color`. Pin:
+`exact-proposal:check` §8 + hop-4 `{imported.button.root.color-state-hover.{color}}`.
+Badge label ink is constant across states — no drop. Do not climb
+font/geometry. Do not invent canvas-absent events.
+
+## FINDING — **FC-PLUGIN-ENGINE-STALE** (closed 2026-08-20)
+
+`plugin:check` failed: a fresh Apply bundle hashed `38dfc81f526c`
+(721015 B) against receipt `cb747a67d3b4` (720756 B). Core changed
+(propose type-stamps, token prune, emit) and the receipt was not
+re-recorded, so a designer Apply would ship a stale engine.
+Receipt re-recorded; `npm run plugin:check` is now on `maintain`.
+Do not climb font/geometry. Do not claim v1.
+
+## FINDING — **FC-DUMP-PROPOSE-NESTED-BOUND-UNPINNED** (closed 2026-08-20)
+
+Hop 4 fixture carried `bound` on variant roots only. Card's inner
+`label` frame on `59mLQ` already binds padding/gap to
+`imported/shared/size-24` and `size-16`; propose reminted
+`imported.card-flowbite-card.label.padding-*`. Nested binds now sit
+on the fixture part and hop 4 requires `{imported.shared.size-24}`.
+Alert icon/dismiss padding remints are literals (no canvas bind).
+Button `root.height.{size}` remint is `FC-GEOMETRY-EXCLUDED` — do
+not climb. Events stay canvas-absent.
+
+## FINDING — **FC-DUMP-PROPOSE-TYPE-UNPINNED** (closed 2026-08-20)
+
+Hop 4 fixture omitted dump `fontSizeVar` / `fontWeightVar` /
+`lineHeightVar`. Live `59mLQ` already stamps them (`imported/button/root/font-size/md`,
+`imported/label/root/font-size`, …). Propose then minted dump-slug
+names (`imported.button-flowbite-button.label.font-size.{size}`)
+because a Size axis with several numeric fontSizes short-circuited
+to the px mint before reading the stamps. Unify stamped slash names
+the same way bound layout paints unify. This is token identity, not
+`FC-FONT-SUBSTRATE` (Inter vs system raster). Pin: exact-proposal
+§7 + hop-4 type refs. Events stay canvas-absent.
+
+## FINDING — **FC-DUMP-PROPOSE-STATE-PAINT-UNPINNED** (closed 2026-08-20)
+
+Hop 4 pinned Default fills and strokes. Badge/Button State-preview
+paints (`background-color-state-hover`, Button
+`outline-color-state-focus-visible`) already recover and could remint
+without failing `maintain` — the sparse matrix would still verify.
+Those are the paints that keep Hover / Focus Visible from being
+name-only. Pin the surviving refs. Events stay canvas-absent. Do not
+add `State` to the authored contracts.
+
+## FINDING — **FC-DUMP-PROPOSE-STROKE-UNPINNED** (closed 2026-08-20)
+
+Hop 4 pinned layout + one fill per stem. Canvas stroke tokens
+(`imported/button/root/border-top-color/…`, Card/Kbd
+`imported/shared/color-e5e7eb`) already recover and could remint
+without failing `maintain`. Alert / Badge / HelperText / Label /
+ToggleSwitch have no stroke binds on `59mLQ`. Pin the surviving
+stroke refs. Events stay canvas-absent.
+
+## FINDING — **FC-DUMP-PROPOSE-PAINT-UNPINNED** (closed 2026-08-20)
+
+Hop 4 pinned layout `bound` names but the fixture had no `fill`/`stroke`
+maps, so canvas color tokens (`imported/button/root/background-color/…`,
+`imported/alert/root/background-color/…`) could remint away without
+failing `maintain`. Rebound paints from `59mLQ` and pin the surviving
+refs. Events stay canvas-absent.
+
+## FINDING — **FC-DUMP-PROPOSE-TOKENS-UNPINNED** (closed 2026-08-20)
+
+Hop 4's bar is props + stamped tokens + host. The eight-stem pin
+checked props/host only; the fixture had no `bound` maps, so propose
+reminted `imported.<set-slug>.*` and maintain could not see a drop of
+the canvas names (`imported/button/root/…`, `imported/shared/size-8`).
+Rebound the fixture from `59mLQ` and pin the surviving refs. Events
+stay canvas-absent. Do not write demo keys into authored contracts.
+
+## FINDING — **FC-DUMP-PROPOSE-BUTTON-ONLY** (closed 2026-08-20)
+
+Hop 4 was pinned on one pipeline-drawn Button dump. The other seven
+Flowbite stems on `59mLQ` already proposed (Alert recovers
+color/icon/dismissable/children and does not invent `onDismiss`;
+ToggleSwitch recovers sizing/checked/label, host `button` +
+`role=switch`, and does not invent `onToggle`). A refuse on those
+stems would not have failed `maintain`. Fixture
+`extract/figma/fixtures/flowbite-eight.dump.json`; pin now asserts
+all eight. Events stay canvas-absent. Do not write demo keys into
+authored contracts.
+
+## FINDING — **FC-PROPOSE-SPARSE-STATE** (closed 2026-08-20; re-closed strictly 2026-08-22)
+
+Hop 4 refused a pipeline-drawn Flowbite Button dump (`59mLQ` set
+`120:2203`, 45-row State-preview matrix). Propose correctly promoted
+`State` off the API (color / size / children recovered; host `button`;
+no `onClick`), then exact projection demanded `State` on the returned
+rows because the proposal had recovered only Disabled opacity — not
+Hover / Active / Focus Visible paints. The CAUSE was a propose defect
+(state paints / text / shadow / focus outline unpinned — closed the same
+day as FC-DUMP-PROPOSE-STATE-PAINT-UNPINNED and siblings). The 08-20
+close also relaxed the reader to reconstruct the set's DECLARED matrix
+from the stamp alone, which made a proposal that recovered none of the
+Hover cells report `verified-exact 45/45` while its re-emit drew 40 rows
+(25 for a fully flat set). Re-closed 2026-08-22: the reader models the
+rows the emitter WILL draw (`figmaStatePreviews` + `contract.states`);
+a declared state the proposal did not recover is an `EXACT_ROWS_MISSING`
+refusal naming those cells. The real fixture still reads 45/45. Pins:
+`npm run flowbite-dump-propose:check` (eight stems) and
+`exact-proposal-check.ts` (a Hover-flat sparse set is refused naming its
+2 Hover cells). Do not add `State` to the authored Button contract.
+Events stay canvas-absent.
+
+## FINDING — **FC-DEMO-TOGGLESWITCH-SPEC-LAG** (closed 2026-08-20)
+
+Demo file `59mLQlOMiD5w5za6SUcoO5` set `120:2047` stored specHash
+`3674674594` against current engine `2132716802`. The other seven
+Flowbite stems already matched. The compiled delta was root
+`layout.align: center` (canvas `counterAxisAlignItems` was MIN) and
+`semantics.role=switch` (canvas semantics was element-only). Amended
+in place; six variants now CENTER. Pin: `flowbite-bundle-fresh:check`
+requires the committed toggle script to carry `counter: CENTER` and
+`role: switch`. Font score 6.19% is still `FC-FONT-SUBSTRATE`.
+
+## FINDING — **FC-GENESIS-EMIT-STALE** (closed 2026-08-20)
+
+The Disabled-opacity unbind landed in the emitter and the paste bundle,
+but committed `examples/tailwind/figma/button.figma.js` still wrote
+`node.opacity = spec.opacity` without `setBoundVariable('opacity', null)`.
+A genesis paste would re-wash Disabled to 0.5%. Regenerated the button
+script and `GENESIS-BATCH.figma.js`. The hop-2 freshness pin now also
+requires the eight committed scripts to match a fresh emit.
+
+## FINDING — **FC-BUNDLE-PASTE-STALE** (closed 2026-08-20)
+
+The hop-2 paste artifact (`examples/tailwind/figma/tailwind.bundle.json`)
+lagged the authored contracts. A fresh double-build was byte-identical
+(109,841 bytes) and the committed file was not: Alert still named
+`onDismiss` as a code prop, and ToggleSwitch was missing `events` /
+`role=switch`. Those P0 functional closes lived only in source contracts
+and `functional:flowbite` — not in the JSON a team pastes. Regenerated
+the committed bundle. Pin: `npm run flowbite-bundle-fresh:check` (now in
+`maintain`). Do not treat this as canvas amend; events never live on the
+canvas.
+
+## LIVE-FILE FINDING — **FC-APPLY-TOKENS-NOT-PRUNED** (named 2026-08-20; prune made opt-in 2026-08-22)
+
+Named in `core/token-set.ts`: after the upsert, unreferenced leftovers in
+the owned collection are LISTED by name in the apply result and the plugin
+log; they are removed only when `DS_PRUNE_TOKENS = true` is set, and then
+node-bound, style-bound (paint/text/effect/grid), foreign-alias-target and
+other-collection variables stay. The 2026-08-20 version removed on every
+apply and never read style bindings, so a designer's style-only or
+library-consumed variable would have been deleted with no refusal
+(docs/23 §B.23). Pin: `npm run token-set-prune:check` (both doors).
+The measurement below is the receipt that named the hole.
 
 The post-apply inventory of Y8Jhw6R49wTLuXZ0is2GmV did not match the bundle,
 and the gap turned out to be exactly the held stems:

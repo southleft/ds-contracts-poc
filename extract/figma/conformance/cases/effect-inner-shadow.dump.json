@@ -44,7 +44,7 @@
      {
       "type": "INNER_SHADOW",
       "color": {
-       "hex": "#000000",
+       "hex": "000000",
        "alpha": 0.2
       },
       "offset": {

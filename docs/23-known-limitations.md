@@ -1010,6 +1010,30 @@ compiles it, but `core/propose-figma.ts` never reads `DumpNode.grid` — a drawn
 grid still proposes as the flex-era lowering. The conformance fixture cannot
 see this: its canvas half is DECLARED, not measured (`spec/conformance/README.md`).
 
+## B.23 Token prune does not see style-bound or cross-file consumers
+
+**OPT-IN, default OFF (2026-08-22).** Token apply upserts the owned
+collection(s) — the bundle `Tokens` collection, or first-party
+Primitives / Brand / Semantic — and then looks for *leftovers*: variables in
+those collections the bundle no longer names. What the Plugin API can see of
+a leftover's consumers is bounded: scene-node bindings in THIS file
+(`boundVariables`, fills, strokes), local variable aliases, and — with the
+readers present — local paint / text / effect / grid STYLE bindings. It
+cannot see instances in OTHER files consuming a published library's
+variable, and a runtime that lacks any of the four style readers cannot
+protect a style-bound variable at all. An earlier close of
+`FC-APPLY-TOKENS-NOT-PRUNED` deleted such variables with no refusal; the
+repo mock reproduced four style-only losses.
+
+So the prune is a door, not a default: without `globalThis.DS_PRUNE_TOKENS
+=== true` nothing is removed, and the leftovers are **named** in the step
+result (`leftovers`, with `pruned` staying 0) and in the plugin's Build log.
+With the flag on, node-bound, alias-target and style-bound leftovers stay; a
+runtime missing a style reader skips the prune entirely and says why
+(`pruneSkipped`). Cross-file consumers remain unprotected either way — turn
+the flag on only in a file whose published variables you know are not
+consumed elsewhere. Pin: `npm run token-set-prune:check` (three doors).
+
 ---
 
 # §C — THE MEASURED PRICE OF WHAT WORKS

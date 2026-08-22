@@ -103,6 +103,14 @@ bag, and clips to the composition ROOT's box).
 Regenerate scripts anytime with `npm run console-loop:emit` — `emitted/*.js` is
 gitignored (replay from emit + receipts).
 
+Because it is gitignored, nothing that gates CI may read it. The canvas-drift
+probe (`npm run console-loop:canvas-drift first-party`) compares the live cell
+against the distilled spec in `canvas-drift/EMIT-SPECS.json` — minted once from
+the receipts' own named scripts by `npm run console-loop:canvas-drift:mint`
+(sha256-stamped; `--check` diffs the local scripts against it). Re-mint after a
+re-emit that rebuilds cells; a stem with no entry reports SPEC-RECEIPT-PENDING
+by name instead of reading whatever is on disk.
+
 ## Limits
 
 - Desktop Bridge cannot `fetch` localhost; use clientStorage chunking for >~50KB scripts.

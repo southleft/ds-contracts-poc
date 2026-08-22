@@ -1634,7 +1634,7 @@
         },
         {
           "name": "dismissable",
-          "description": "Flowbite Alert renders the dismiss button only when onDismiss is provided; the developed default shows none.",
+          "description": "When true, the dismiss control is shown. The click handler is the onDismiss event — not this boolean.",
           "type": "boolean",
           "default": false,
           "bindings": {
@@ -1643,7 +1643,7 @@
               "property": "Dismissable"
             },
             "code": {
-              "prop": "onDismiss"
+              "prop": "dismissable"
             }
           }
         },
@@ -1790,7 +1790,11 @@
                   ]
                 },
                 "dismiss": {
-                  "description": "Flowbite dismiss control (onDismiss) — canvas-developed anatomy; close button with themed background per color.",
+                  "description": "Flowbite dismiss control — canvas-developed anatomy; close button with themed background per color.",
+                  "element": "button",
+                  "attrs": {
+                    "aria-label": "Dismiss"
+                  },
                   "layout": {
                     "display": "flex",
                     "align": "center",
@@ -1922,6 +1926,18 @@
           ]
         }
       },
+      "events": [
+        {
+          "name": "dismiss",
+          "description": "Fires when the dismiss control is activated. The parent unmounts or hides the alert — the canvas cannot run this, so Figma shows the control as a boolean.",
+          "bindings": {
+            "code": {
+              "prop": "onDismiss"
+            }
+          },
+          "trigger": "dismiss"
+        }
+      ],
       "anchors": {
         "figma": {
           "fileKey": null,
@@ -2831,7 +2847,9 @@
       "status": "draft",
       "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. STATE-PLANE PROJECTION round: `checked` is an ENUM VARIANT AXIS (unchecked|checked), not a boolean state. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/tailwind/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to the library's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
       "semantics": {
-        "element": "button"
+        "element": "button",
+        "role": "switch",
+        "roleException": "Flowbite ToggleSwitch is a <button role=\"switch\">; the library has no native checkbox in the DOM."
       },
       "props": [
         {
@@ -2905,7 +2923,8 @@
       "anatomy": {
         "root": {
           "layout": {
-            "display": "flex"
+            "display": "flex",
+            "align": "center"
           },
           "parts": {
             "part-0": {
@@ -3090,6 +3109,26 @@
           ]
         }
       },
+      "events": [
+        {
+          "name": "toggle",
+          "description": "Fires when the switch is activated. Uncontrolled instances flip checked themselves — the canvas cannot run this, so Figma shows both values as variants.",
+          "bindings": {
+            "code": {
+              "prop": "onToggle"
+            }
+          },
+          "trigger": "root",
+          "toggles": {
+            "prop": "checked",
+            "between": [
+              "unchecked",
+              "checked"
+            ],
+            "aria": "checked"
+          }
+        }
+      ],
       "anchors": {
         "figma": {
           "fileKey": null,

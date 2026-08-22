@@ -77,10 +77,18 @@ const loadEnriched = (stem: string): Contractish | null => {
 const stems = ['alert', 'badge', 'button', 'card', 'helpertext', 'kbd', 'label', 'toggleswitch'];
 const authored = loadAuthored();
 
+/** The "Recorded <date>" line moves ONLY when the rest of the receipt moves.
+ *  `npm run parity:flowbite` is a check that runs in CI and in `maintain`; a
+ *  check that rewrites a committed file on every run dirties every tree it
+ *  touches and teaches people to `git checkout --` the receipt without
+ *  reading it. */
+const RECORDED_PLACEHOLDER = '\u0000RECORDED\u0000';
+const RECORDED_RE = /^Recorded (\d{4}-\d{2}-\d{2})\./m;
+
 const lines: string[] = [
   '# Flowbite contract parity — authored vs code-capture',
   '',
-  `Recorded ${new Date().toISOString().slice(0, 10)}. Authored contracts in`,
+  `Recorded ${RECORDED_PLACEHOLDER}. Authored contracts in`,
   '`examples/tailwind/contracts` vs `extract/computed/out/tailwind/<stem>/enriched.contract.json`.',
   '',
   'This is hop 5 of [NORTH-STAR.md](./NORTH-STAR.md): align the contracts we have',
@@ -206,8 +214,16 @@ lines.push(`**${gapCount} named gap(s) in this report.** Gaps are the product. C
 lines.push('');
 
 mkdirSync(path.dirname(OUT), { recursive: true });
-writeFileSync(OUT, lines.join('\n'));
-console.log(`wrote ${path.relative(ROOT, OUT)} (${gapCount} named gap(s))`);
+const previous = existsSync(OUT) ? readFileSync(OUT, 'utf8') : null;
+const previousDate = previous?.match(RECORDED_RE)?.[1];
+const body = lines.join('\n');
+const unchanged = previousDate !== undefined && body.replace(RECORDED_PLACEHOLDER, previousDate) === previous;
+if (unchanged) {
+  console.log(`${path.relative(ROOT, OUT)} unchanged — Recorded ${previousDate} kept (${gapCount} named gap(s))`);
+} else {
+  writeFileSync(OUT, body.replace(RECORDED_PLACEHOLDER, new Date().toISOString().slice(0, 10)));
+  console.log(`wrote ${path.relative(ROOT, OUT)} (${gapCount} named gap(s))`);
+}
 
 /** Path B scorecards for the three stems that used to be UNSCORED-NO-ORIG-SHOT.
  *  Missing files or broken sha pins fail this gate — a silent return to

@@ -715,6 +715,17 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         continue;
       }
       const parentRef = value.match(/^\{([a-z][\w-]*)\}$/);
+      if (depProp?.type === 'boolean' && !parentRef) {
+        const spelled = value.trim().toLowerCase();
+        if (spelled === 'true' || spelled === 'false') {
+          const coerced = spelled === 'true';
+          parts.push(coerced ? ` ${codeName}` : depProp.default === false ? '' : ` ${codeName}={false}`);
+          continue;
+        }
+        throw new Error(
+          `${dep.id}: applied value ${JSON.stringify(value)} for prop "${propName}" is a string but the dependency types it boolean — coerce at composition ('False' → false), never pass the spelling through`,
+        );
+      }
       if (parentRef) {
         const parentProp = contract.props.find((p) => p.name === parentRef[1]);
         parts.push(` ${codeName}={${parentProp?.bindings.code.prop ?? parentRef[1]}}`);

@@ -41,6 +41,7 @@
 import { readdirSync, readFileSync, existsSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { recordFreshnessFailures } from './eval-record-check.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const IGNORE = '<!-- docs-check:ignore -->';
@@ -57,6 +58,10 @@ const EVALS = results.total;
 if (results.passed !== results.total) {
   fail('evals/results.json', `${results.passed}/${results.total} — the committed run is RED; docs quoting "N/N pass" would be a false claim`);
 }
+// The record must be a clean-tree measurement on this history, not a
+// self-attestation — see scripts/eval-record-check.mjs for the reason and
+// the CI half (row-by-row compare against a fresh full run).
+for (const f of recordFreshnessFailures(results)) fail('evals/results.json', f);
 if (results.results.length !== results.total) {
   fail('evals/results.json', `total=${results.total} but ${results.results.length} result rows`);
 }

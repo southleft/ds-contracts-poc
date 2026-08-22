@@ -1,0 +1,112 @@
+{
+  "_marker": "AUTHORED FACTS — reviewed hand-authored facts the computed capture cannot carry, applied by packages/cli/src/promote.ts (the authored-facts door) AFTER the computed contract is read and BEFORE the resolution guard. Sidecar INPUT to promotion, never contract vocabulary: the committed contracts stay re-derivable from extract/computed/out/tailwind + this file. Every row names its cause; a row the capture has since learned to carry (or whose `from` value moved) REFUSES the promotion by name and must be re-reviewed. Origin: commit 968958cd (2026-08-16, 'AUTHORED REACT NOW CLICKS') edited the promoted alert/toggleswitch contracts directly — see parity/receipts/beta/NORTH-STAR.md and examples/tailwind/PROVENANCE.md (AUTHORED FACTS).",
+  "rows": [
+    {
+      "component": "alert",
+      "prop": "dismissable",
+      "edit": {
+        "description": {
+          "from": "Flowbite Alert renders the dismiss button only when onDismiss is provided; the developed default shows none.",
+          "to": "When true, the dismiss control is shown. The click handler is the onDismiss event — not this boolean."
+        },
+        "bindings.code.prop": {
+          "from": "onDismiss",
+          "to": "dismissable"
+        }
+      },
+      "cause": "The seed bound the BOOLEAN `dismissable` to the `onDismiss` callback prop, so the authored React received a boolean where Flowbite expects a function and the dismiss control never clicked (NORTH-STAR functional gate, 968958cd). The boolean now binds to Flowbite's own `dismissable` prop; the callback moves to the declared `dismiss` event below. The capture reads DOM truth, not the React prop surface, so it cannot see this binding."
+    },
+    {
+      "component": "alert",
+      "part": "dismiss",
+      "edit": {
+        "description": {
+          "from": "Flowbite dismiss control (onDismiss) — canvas-developed anatomy; close button with themed background per color.",
+          "to": "Flowbite dismiss control — canvas-developed anatomy; close button with themed background per color."
+        }
+      },
+      "set": {
+        "fields": {
+          "element": "button",
+          "attrs": {
+            "aria-label": "Dismiss"
+          }
+        },
+        "after": "description"
+      },
+      "cause": "The dismiss control is a real <button aria-label=\"Dismiss\"> in Flowbite's DOM, and the declared `dismiss` event triggers on it — the authored React needs the element and the accessible name to be clickable and announced. The dismiss part is CANVAS-DEVELOPED anatomy (the captured default renders no dismiss button: Flowbite mounts it only when onDismiss is passed), so no capture plane carries the element or its attributes."
+    },
+    {
+      "component": "alert",
+      "set": {
+        "fields": {
+          "events": [
+            {
+              "name": "dismiss",
+              "description": "Fires when the dismiss control is activated. The parent unmounts or hides the alert — the canvas cannot run this, so Figma shows the control as a boolean.",
+              "bindings": {
+                "code": {
+                  "prop": "onDismiss"
+                }
+              },
+              "trigger": "dismiss"
+            }
+          ]
+        },
+        "after": "anatomy"
+      },
+      "cause": "Declared event (core/emit-react.ts execute gate, 968958cd): the `onDismiss` callback is a code-surface fact with no canvas expression and no computed-style footprint — the capture drives prop combos and pseudo-class states, never a click handler. Placed after `anatomy` to keep the committed byte order."
+    },
+    {
+      "component": "toggleswitch",
+      "path": "semantics",
+      "set": {
+        "fields": {
+          "role": "switch",
+          "roleException": "Flowbite ToggleSwitch is a <button role=\"switch\">; the library has no native checkbox in the DOM."
+        }
+      },
+      "cause": "Flowbite's ToggleSwitch renders <button role=\"switch\"> with no native checkbox; the authored React must carry the ARIA role (and the named exception to the checkbox expectation) for the `toggle` event's aria-checked flip to be correct. The capture's semantics read is element-only; roles are not a computed style."
+    },
+    {
+      "component": "toggleswitch",
+      "part": "root",
+      "path": "layout",
+      "set": {
+        "fields": {
+          "align": "center"
+        }
+      },
+      "cause": "The flex root's cross-axis alignment (`align-items: center`, Flowbite's `items-center`) — the track and the label sit on one centre line. The capture lowered the root to `display: flex` and carried no align fact for it; the authored React clipped the label against the track without it (968958cd)."
+    },
+    {
+      "component": "toggleswitch",
+      "set": {
+        "fields": {
+          "events": [
+            {
+              "name": "toggle",
+              "description": "Fires when the switch is activated. Uncontrolled instances flip checked themselves — the canvas cannot run this, so Figma shows both values as variants.",
+              "bindings": {
+                "code": {
+                  "prop": "onToggle"
+                }
+              },
+              "trigger": "root",
+              "toggles": {
+                "prop": "checked",
+                "between": [
+                  "unchecked",
+                  "checked"
+                ],
+                "aria": "checked"
+              }
+            }
+          ]
+        },
+        "after": "anatomy"
+      },
+      "cause": "Declared event (core/emit-react.ts execute gate, 968958cd): `onToggle` flips the `checked` variant axis and mirrors it to aria-checked — a code-surface fact the capture cannot see (it reads computed style per prop combo, never a click). Placed after `anatomy` to keep the committed byte order."
+    }
+  ]
+}

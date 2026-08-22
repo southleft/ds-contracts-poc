@@ -4,6 +4,7 @@ const COMPONENTS = [
   {
     "setName": "Banner",
     "contractId": "ds.banner",
+    "version": "1.0.1",
     "anchorKey": "6acb10544bd5dce1800d610744c0e346fc12bfb9",
     "description": "Banner — generated from contract ds.banner v1.0.1",
     "isSet": true,
@@ -996,6 +997,7 @@ const COMPONENTS = [
   {
     "setName": "BentoGrid",
     "contractId": "ds.bento-grid",
+    "version": "1.0.0",
     "anchorKey": null,
     "description": "BentoGrid — generated from contract ds.bento-grid v1.0.0",
     "isSet": false,
@@ -1150,6 +1152,7 @@ const COMPONENTS = [
   {
     "setName": "Blockquote",
     "contractId": "ds.blockquote",
+    "version": "1.0.0",
     "anchorKey": "b6dd9d18639b0b053e55d307b2a8dbf1d4af3cef",
     "description": "Blockquote — generated from contract ds.blockquote v1.0.0",
     "isSet": false,
@@ -1218,6 +1221,7 @@ const COMPONENTS = [
   {
     "setName": "BreadcrumbItem",
     "contractId": "ds.breadcrumb-item",
+    "version": "1.0.0",
     "anchorKey": "7b9283aad1ddc94a1a597804a79a330316b3aaa1",
     "description": "BreadcrumbItem — generated from contract ds.breadcrumb-item v1.0.0",
     "isSet": false,
@@ -1290,6 +1294,7 @@ const COMPONENTS = [
   {
     "setName": "Breadcrumbs",
     "contractId": "ds.breadcrumbs",
+    "version": "1.0.0",
     "anchorKey": "853821e9b58b03010cfeda157fd8ffcf2338bb15",
     "description": "Breadcrumbs — generated from contract ds.breadcrumbs v1.0.0",
     "isSet": false,
@@ -1383,6 +1388,7 @@ const COMPONENTS = [
   {
     "setName": "Card",
     "contractId": "ds.card",
+    "version": "1.1.0",
     "anchorKey": "7cd7011e4f2374161cd212f02992c7fd0f899430",
     "description": "Card — generated from contract ds.card v1.1.0",
     "isSet": false,
@@ -1529,6 +1535,7 @@ const COMPONENTS = [
   {
     "setName": "ChatMessageMetadata",
     "contractId": "ds.chat-message-metadata",
+    "version": "1.0.0",
     "anchorKey": "25f176c40364af596d09a7d897e371208934ff43",
     "description": "ChatMessageMetadata — generated from contract ds.chat-message-metadata v1.0.0",
     "isSet": true,
@@ -1811,6 +1818,7 @@ const COMPONENTS = [
   {
     "setName": "ChatMessage",
     "contractId": "ds.chat-message",
+    "version": "1.1.0",
     "anchorKey": "4af367f1f1c5044640cd31d2cbdd3e575b1bbb54",
     "description": "ChatMessage — generated from contract ds.chat-message v1.1.0",
     "isSet": true,
@@ -2179,6 +2187,7 @@ const COMPONENTS = [
   {
     "setName": "ChatSystemMessage",
     "contractId": "ds.chat-system-message",
+    "version": "1.0.0",
     "anchorKey": "2c5056fcf5f0b075ec7be6019f20eb8cdc9d5efb",
     "description": "ChatSystemMessage — generated from contract ds.chat-system-message v1.0.0",
     "isSet": true,
@@ -2329,6 +2338,7 @@ const COMPONENTS = [
   {
     "setName": "Checkbox",
     "contractId": "ds.checkbox",
+    "version": "2.0.1",
     "anchorKey": "9bc54e5a3f7c074b9ed016dfac8edff95ec45e23",
     "description": "Checkbox — generated from contract ds.checkbox v2.0.1 †",
     "isSet": true,
@@ -2908,6 +2918,7 @@ const COMPONENTS = [
   {
     "setName": "Citation",
     "contractId": "ds.citation",
+    "version": "1.0.0",
     "anchorKey": "84b0a3c9abb3122d60820f8047a8b6d200956067",
     "description": "Citation — generated from contract ds.citation v1.0.0",
     "isSet": true,
@@ -3015,6 +3026,7 @@ const COMPONENTS = [
   {
     "setName": "Code",
     "contractId": "ds.code",
+    "version": "1.0.0",
     "anchorKey": "d64c49cb8606d9f9275de6ab5c635708276cd047",
     "description": "Code — generated from contract ds.code v1.0.0",
     "isSet": false,
@@ -3073,6 +3085,7 @@ const COMPONENTS = [
   {
     "setName": "Divider",
     "contractId": "ds.divider",
+    "version": "1.0.0",
     "anchorKey": "1bd0e157dee768b650c50a752a164562fc606822",
     "description": "Divider — generated from contract ds.divider v1.0.0",
     "isSet": true,
@@ -4491,6 +4504,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -4754,6 +4768,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -5052,6 +5067,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',

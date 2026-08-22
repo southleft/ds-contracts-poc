@@ -2,6 +2,8 @@
 // Source of truth: tokens/*.tokens.json
 // Upserts variable collections: Primitives (mode "Value"), Brand (one mode
 // per brand), Semantic (modes "Light"/"Dark", aliasing primitives AND brand).
+// Leftovers in those three collections are NAMED; they are removed only when
+// globalThis.DS_PRUNE_TOKENS === true (opt-in, FC-APPLY-TOKENS-NOT-PRUNED).
 const PRIMITIVES = [{"name":"color/white","type":"COLOR","value":"#FFFFFF","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-white)"},{"name":"color/black","type":"COLOR","value":"#000000","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-black)"},{"name":"color/gray/50","type":"COLOR","value":"#F9FAFB","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-gray-50)"},{"name":"color/gray/100","type":"COLOR","value":"#F3F4F6","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-gray-100)"},{"name":"color/gray/200","type":"COLOR","value":"#E5E7EB","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-gray-200)"},{"name":"color/gray/300","type":"COLOR","value":"#D1D5DB","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-gray-300)"},{"name":"color/gray/400","type":"COLOR","value":"#9CA3AF","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-gray-400)"},{"name":"color/gray/500","type":"COLOR","value":"#6B7280","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-gray-500)"},{"name":"color/gray/600","type":"COLOR","value":"#4B5563","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-gray-600)"},{"name":"color/gray/700","type":"COLOR","value":"#374151","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-gray-700)"},{"name":"color/gray/800","type":"COLOR","value":"#1F2937","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-gray-800)"},{"name":"color/gray/900","type":"COLOR","value":"#111827","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-gray-900)"},{"name":"color/blue/100","type":"COLOR","value":"#DBEAFE","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-blue-100)"},{"name":"color/blue/300","type":"COLOR","value":"#93C5FD","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-blue-300)"},{"name":"color/blue/400","type":"COLOR","value":"#60A5FA","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-blue-400)"},{"name":"color/blue/500","type":"COLOR","value":"#3B82F6","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-blue-500)"},{"name":"color/blue/600","type":"COLOR","value":"#2563EB","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-blue-600)"},{"name":"color/blue/700","type":"COLOR","value":"#1D4ED8","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-blue-700)"},{"name":"color/blue/900","type":"COLOR","value":"#1E3A8A","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-blue-900)"},{"name":"color/red/100","type":"COLOR","value":"#FEE2E2","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-red-100)"},{"name":"color/red/300","type":"COLOR","value":"#FCA5A5","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-red-300)"},{"name":"color/red/400","type":"COLOR","value":"#F87171","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-red-400)"},{"name":"color/red/500","type":"COLOR","value":"#EF4444","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-red-500)"},{"name":"color/red/600","type":"COLOR","value":"#DC2626","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-red-600)"},{"name":"color/red/700","type":"COLOR","value":"#B91C1C","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-red-700)"},{"name":"color/red/900","type":"COLOR","value":"#7F1D1D","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-red-900)"},{"name":"color/green/100","type":"COLOR","value":"#DCFCE7","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-green-100)"},{"name":"color/green/500","type":"COLOR","value":"#22C55E","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-green-500)"},{"name":"color/green/600","type":"COLOR","value":"#16A34A","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-green-600)"},{"name":"color/green/700","type":"COLOR","value":"#15803D","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-green-700)"},{"name":"color/green/900","type":"COLOR","value":"#14532D","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-green-900)"},{"name":"color/amber/100","type":"COLOR","value":"#FEF3C7","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-amber-100)"},{"name":"color/amber/500","type":"COLOR","value":"#F59E0B","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-amber-500)"},{"name":"color/amber/600","type":"COLOR","value":"#D97706","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-amber-600)"},{"name":"color/amber/700","type":"COLOR","value":"#B45309","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-amber-700)"},{"name":"color/amber/900","type":"COLOR","value":"#78350F","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-amber-900)"},{"name":"color/orange/100","type":"COLOR","value":"#FFEDD5","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-orange-100)"},{"name":"color/orange/700","type":"COLOR","value":"#C2410C","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-orange-700)"},{"name":"color/orange/900","type":"COLOR","value":"#7C2D12","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-orange-900)"},{"name":"color/yellow/100","type":"COLOR","value":"#FEF9C3","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-yellow-100)"},{"name":"color/yellow/700","type":"COLOR","value":"#A16207","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-yellow-700)"},{"name":"color/yellow/900","type":"COLOR","value":"#713F12","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-yellow-900)"},{"name":"color/teal/100","type":"COLOR","value":"#CCFBF1","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-teal-100)"},{"name":"color/teal/300","type":"COLOR","value":"#5EEAD4","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-teal-300)"},{"name":"color/teal/400","type":"COLOR","value":"#2DD4BF","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-teal-400)"},{"name":"color/teal/500","type":"COLOR","value":"#14B8A6","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-teal-500)"},{"name":"color/teal/600","type":"COLOR","value":"#0D9488","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-teal-600)"},{"name":"color/teal/700","type":"COLOR","value":"#0F766E","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-teal-700)"},{"name":"color/teal/900","type":"COLOR","value":"#134E4A","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-teal-900)"},{"name":"color/cyan/100","type":"COLOR","value":"#CFFAFE","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-cyan-100)"},{"name":"color/cyan/700","type":"COLOR","value":"#0E7490","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-cyan-700)"},{"name":"color/cyan/900","type":"COLOR","value":"#164E63","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-cyan-900)"},{"name":"color/purple/100","type":"COLOR","value":"#F3E8FF","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-purple-100)"},{"name":"color/purple/300","type":"COLOR","value":"#D8B4FE","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-purple-300)"},{"name":"color/purple/400","type":"COLOR","value":"#C084FC","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-purple-400)"},{"name":"color/purple/500","type":"COLOR","value":"#A855F7","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-purple-500)"},{"name":"color/purple/600","type":"COLOR","value":"#9333EA","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-purple-600)"},{"name":"color/purple/700","type":"COLOR","value":"#7E22CE","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-purple-700)"},{"name":"color/purple/900","type":"COLOR","value":"#581C87","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-purple-900)"},{"name":"color/pink/100","type":"COLOR","value":"#FCE7F3","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-pink-100)"},{"name":"color/pink/700","type":"COLOR","value":"#BE185D","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-pink-700)"},{"name":"color/pink/900","type":"COLOR","value":"#831843","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-pink-900)"},{"name":"space/25","type":"FLOAT","value":2,"scopes":["GAP","WIDTH_HEIGHT"],"codeSyntax":"var(--space-25)"},{"name":"space/50","type":"FLOAT","value":4,"scopes":["GAP","WIDTH_HEIGHT"],"codeSyntax":"var(--space-50)"},{"name":"space/100","type":"FLOAT","value":8,"scopes":["GAP","WIDTH_HEIGHT"],"codeSyntax":"var(--space-100)"},{"name":"space/150","type":"FLOAT","value":12,"scopes":["GAP","WIDTH_HEIGHT"],"codeSyntax":"var(--space-150)"},{"name":"space/200","type":"FLOAT","value":16,"scopes":["GAP","WIDTH_HEIGHT"],"codeSyntax":"var(--space-200)"},{"name":"space/250","type":"FLOAT","value":20,"scopes":["GAP","WIDTH_HEIGHT"],"codeSyntax":"var(--space-250)"},{"name":"space/300","type":"FLOAT","value":24,"scopes":["GAP","WIDTH_HEIGHT"],"codeSyntax":"var(--space-300)"},{"name":"space/400","type":"FLOAT","value":32,"scopes":["GAP","WIDTH_HEIGHT"],"codeSyntax":"var(--space-400)"},{"name":"space/overlap","type":"FLOAT","value":-8,"scopes":["GAP","WIDTH_HEIGHT"],"codeSyntax":"var(--space-overlap)"},{"name":"radius/100","type":"FLOAT","value":4,"scopes":["CORNER_RADIUS"],"codeSyntax":"var(--radius-100)"},{"name":"radius/200","type":"FLOAT","value":8,"scopes":["CORNER_RADIUS"],"codeSyntax":"var(--radius-200)"},{"name":"radius/pill","type":"FLOAT","value":999,"scopes":["CORNER_RADIUS"],"codeSyntax":"var(--radius-pill)"},{"name":"radius/none","type":"FLOAT","value":0,"scopes":["CORNER_RADIUS"],"codeSyntax":"var(--radius-none)"},{"name":"border-width/100","type":"FLOAT","value":1,"scopes":["STROKE_FLOAT"],"codeSyntax":"var(--border-width-100)"},{"name":"border-width/200","type":"FLOAT","value":2,"scopes":["STROKE_FLOAT"],"codeSyntax":"var(--border-width-200)"},{"name":"container/sm","type":"FLOAT","value":320,"scopes":["WIDTH_HEIGHT"],"codeSyntax":"var(--container-sm)"},{"name":"container/xs","type":"FLOAT","value":120,"scopes":["WIDTH_HEIGHT"],"codeSyntax":"var(--container-xs)"},{"name":"container/md","type":"FLOAT","value":480,"scopes":["WIDTH_HEIGHT"],"codeSyntax":"var(--container-md)"},{"name":"container/lg","type":"FLOAT","value":640,"scopes":["WIDTH_HEIGHT"],"codeSyntax":"var(--container-lg)"},{"name":"font/family/sans","type":"STRING","value":"Inter, system-ui, -apple-system, sans-serif","scopes":["FONT_FAMILY"],"codeSyntax":"var(--font-family-sans)"},{"name":"font/family/mono","type":"STRING","value":"ui-monospace, SFMono-Regular, Menlo, Consolas, monospace","scopes":["FONT_FAMILY"],"codeSyntax":"var(--font-family-mono)"},{"name":"font/size/100","type":"FLOAT","value":12,"scopes":["FONT_SIZE"],"codeSyntax":"var(--font-size-100)"},{"name":"font/size/200","type":"FLOAT","value":14,"scopes":["FONT_SIZE"],"codeSyntax":"var(--font-size-200)"},{"name":"font/size/300","type":"FLOAT","value":16,"scopes":["FONT_SIZE"],"codeSyntax":"var(--font-size-300)"},{"name":"font/size/400","type":"FLOAT","value":18,"scopes":["FONT_SIZE"],"codeSyntax":"var(--font-size-400)"},{"name":"font/weight/regular","type":"FLOAT","value":400,"scopes":["FONT_WEIGHT"],"codeSyntax":"var(--font-weight-regular)"},{"name":"font/weight/medium","type":"FLOAT","value":500,"scopes":["FONT_WEIGHT"],"codeSyntax":"var(--font-weight-medium)"},{"name":"font/weight/semibold","type":"FLOAT","value":600,"scopes":["FONT_WEIGHT"],"codeSyntax":"var(--font-weight-semibold)"},{"name":"opacity/disabled","type":"FLOAT","value":0.5,"scopes":["OPACITY"],"codeSyntax":"var(--opacity-disabled)"},{"name":"control/sm","type":"FLOAT","value":28,"scopes":["ALL_SCOPES"],"codeSyntax":"var(--control-sm)"},{"name":"control/md","type":"FLOAT","value":36,"scopes":["ALL_SCOPES"],"codeSyntax":"var(--control-md)"},{"name":"control/lg","type":"FLOAT","value":44,"scopes":["ALL_SCOPES"],"codeSyntax":"var(--control-lg)"}];
 const BRAND = [{"name":"brand/accent/100","type":"COLOR","perBrand":{"Default":"color/blue/100","Aurora":"color/teal/100"},"scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--brand-accent-100)"},{"name":"brand/accent/300","type":"COLOR","perBrand":{"Default":"color/blue/300","Aurora":"color/teal/300"},"scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--brand-accent-300)"},{"name":"brand/accent/400","type":"COLOR","perBrand":{"Default":"color/blue/400","Aurora":"color/teal/400"},"scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--brand-accent-400)"},{"name":"brand/accent/500","type":"COLOR","perBrand":{"Default":"color/blue/500","Aurora":"color/teal/500"},"scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--brand-accent-500)"},{"name":"brand/accent/600","type":"COLOR","perBrand":{"Default":"color/blue/600","Aurora":"color/teal/600"},"scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--brand-accent-600)"},{"name":"brand/accent/700","type":"COLOR","perBrand":{"Default":"color/blue/700","Aurora":"color/teal/700"},"scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--brand-accent-700)"},{"name":"brand/accent/900","type":"COLOR","perBrand":{"Default":"color/blue/900","Aurora":"color/teal/900"},"scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--brand-accent-900)"},{"name":"brand/radius/control","type":"FLOAT","perBrand":{"Default":"radius/200","Aurora":"radius/none"},"scopes":["CORNER_RADIUS"],"codeSyntax":"var(--brand-radius-control)"},{"name":"brand/font/control-family","type":"STRING","perBrand":{"Default":"font/family/sans","Aurora":"font/family/mono"},"scopes":["FONT_FAMILY"],"codeSyntax":"var(--brand-font-control-family)"},{"name":"brand/font/control-weight","type":"FLOAT","perBrand":{"Default":"font/weight/medium","Aurora":"font/weight/semibold"},"scopes":["FONT_WEIGHT"],"codeSyntax":"var(--brand-font-control-weight)"}];
 const BRAND_MODES = ["Default","Aurora"];
@@ -116,6 +118,93 @@ for (const t of SEMANTIC) {
   v.setVariableCodeSyntax('WEB', t.codeSyntax);
 }
 
+const owned = new Map();
+owned.set(prim.id, new Set(PRIMITIVES.map((t) => t.name)));
+owned.set(brandCol.id, new Set(BRAND.map((t) => t.name)));
+owned.set(sem.id, new Set(SEMANTIC.map((t) => t.name)));
+// FC-APPLY-TOKENS-NOT-PRUNED — leftover variables in owned collections
+// only; other collections are untouched (FC-THEME-ISO).
+// OPT-IN. Set globalThis.DS_PRUNE_TOKENS = true before running this script
+// to DELETE leftovers. Without it nothing is removed: the leftovers are
+// counted and named in the result (leftovers; pruned stays 0) so the loss is visible,
+// not silent. With the flag on, a leftover a scene node still binds, a local
+// paint/text/effect/grid STYLE still binds, or any local variable still
+// aliases, stays. The Plugin API cannot see consumers in OTHER files (a
+// published library's instances), so those are NOT protected — which is why
+// the door is closed by default (docs/23-known-limitations.md §B.23).
+const DS_PRUNE_TOKENS = typeof globalThis !== 'undefined' && globalThis.DS_PRUNE_TOKENS === true;
+await figma.loadAllPagesAsync();
+const referenced = new Set();
+const collectAlias = (x) => {
+  if (!x) return;
+  if (Array.isArray(x)) { for (const y of x) collectAlias(y); return; }
+  if (typeof x === 'object') {
+    if (typeof x.id === 'string' && (x.type === 'VARIABLE_ALIAS' || x.type === 'VARIABLE')) referenced.add(x.id);
+    else for (const k in x) collectAlias(x[k]);
+  }
+};
+for (const page of figma.root.children) {
+  for (const n of page.findAll(() => true)) {
+    collectAlias(n.boundVariables);
+    if (Array.isArray(n.fills)) for (const p of n.fills) collectAlias(p && p.boundVariables);
+    if (Array.isArray(n.strokes)) for (const p of n.strokes) collectAlias(p && p.boundVariables);
+  }
+}
+// Style-bound variables: paints[].boundVariables, style.boundVariables,
+// effects[].boundVariables, layoutGrids[].boundVariables. Every reader the
+// runtime has is walked (so the named leftovers are accurate either way); a
+// runtime missing any of the four cannot protect them, so with the flag on
+// it does not prune at all and says why.
+const STYLE_READERS = ['getLocalPaintStylesAsync', 'getLocalTextStylesAsync', 'getLocalEffectStylesAsync', 'getLocalGridStylesAsync'];
+const missingStyleReaders = STYLE_READERS.filter((k) => typeof figma[k] !== 'function');
+for (const k of STYLE_READERS) {
+  if (missingStyleReaders.includes(k)) continue;
+  for (const s of await figma[k]()) {
+    collectAlias(s.boundVariables);
+    if (Array.isArray(s.paints)) for (const p of s.paints) collectAlias(p && p.boundVariables);
+    if (Array.isArray(s.effects)) for (const e of s.effects) collectAlias(e && e.boundVariables);
+    if (Array.isArray(s.layoutGrids)) for (const g of s.layoutGrids) collectAlias(g && g.boundVariables);
+  }
+}
+let pruneSkipped = null;
+if (DS_PRUNE_TOKENS && missingStyleReaders.length > 0) {
+  pruneSkipped = 'prune skipped: this runtime lacks figma.' + missingStyleReaders.join(', figma.') + ' so style-bound variables could not be protected';
+}
+const willPrune = DS_PRUNE_TOKENS && !pruneSkipped;
+const leftovers = [];
+const dropped = new Set(); // dry run: ids treated as gone so alias chains unwind the same way
+for (let pass = 0; pass < 8; pass++) {
+  const locals = (await figma.variables.getLocalVariablesAsync()).filter((v) => !dropped.has(v.id));
+  const aliasTargets = new Set();
+  for (const v of locals) {
+    const modes = v.valuesByMode || {};
+    for (const modeId in modes) {
+      const val = modes[modeId];
+      if (val && typeof val === 'object' && val.type === 'VARIABLE_ALIAS' && val.id) aliasTargets.add(val.id);
+    }
+  }
+  let droppedThisPass = 0;
+  for (const v of locals) {
+    const keep = owned.get(v.variableCollectionId);
+    if (!keep) continue;
+    if (keep.has(v.name)) continue;
+    if (referenced.has(v.id)) continue;
+    if (aliasTargets.has(v.id)) continue;
+    leftovers.push(v.name);
+    dropped.add(v.id);
+    droppedThisPass++;
+    if (willPrune) v.remove();
+  }
+  if (droppedThisPass === 0) break;
+}
+const pruned = willPrune ? leftovers.length : 0;
+if (!willPrune && leftovers.length > 0) {
+  const why = pruneSkipped || 'prune is opt-in: set globalThis.DS_PRUNE_TOKENS = true to remove them';
+  console.warn('[ds-contracts] ' + leftovers.length + ' leftover variable(s) kept in owned collection(s) — ' + why + ': ' + leftovers.join(', '));
+  figma.notify(leftovers.length + ' leftover variable(s) kept (' + why + '): ' + leftovers.slice(0, 5).join(', ') + (leftovers.length > 5 ? ', …' : ''), { timeout: 6000 });
+}
+
+
 // Text styles: upsert by IDENTITY MARKER (ds_contracts/textStyleToken =
 // the semantic size-token path), never by name — a rename on either side
 // must not fork identity, and a foreign style that happens to share a name
@@ -151,4 +240,7 @@ return {
   brand: { collectionId: brandCol.id, modes: BRAND_MODES, total: BRAND.length, created: createdBrand },
   semantic: { collectionId: sem.id, total: SEMANTIC.length, created: createdSem },
   textStyles: { total: TEXT_STYLES.length, created: createdStyles },
+  pruned,
+  leftovers,
+  pruneSkipped,
 };

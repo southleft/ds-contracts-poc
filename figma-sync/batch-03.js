@@ -4,6 +4,7 @@ const COMPONENTS = [
   {
     "setName": "EmptyState",
     "contractId": "ds.empty-state",
+    "version": "1.0.0",
     "anchorKey": "b0dd99f2822be1712c8984d1b59bd31bd8ab866d",
     "description": "EmptyState — generated from contract ds.empty-state v1.0.0",
     "isSet": false,
@@ -113,6 +114,7 @@ const COMPONENTS = [
   {
     "setName": "Field",
     "contractId": "ds.field",
+    "version": "1.0.0",
     "anchorKey": "e690d926c7f929fb354ba4aa0d3b355db929c444",
     "description": "Field — generated from contract ds.field v1.0.0",
     "isSet": false,
@@ -231,6 +233,7 @@ const COMPONENTS = [
   {
     "setName": "GridGallery",
     "contractId": "ds.grid-gallery",
+    "version": "1.0.0",
     "anchorKey": null,
     "description": "GridGallery — generated from contract ds.grid-gallery v1.0.0",
     "isSet": false,
@@ -364,6 +367,7 @@ const COMPONENTS = [
   {
     "setName": "Heading",
     "contractId": "ds.heading",
+    "version": "1.0.0",
     "anchorKey": "72c05e001310fd06ca059cede948454f54edc4f8",
     "description": "Heading — generated from contract ds.heading v1.0.0",
     "isSet": true,
@@ -892,6 +896,7 @@ const COMPONENTS = [
   {
     "setName": "IconButton",
     "contractId": "ds.icon-button",
+    "version": "1.0.0",
     "anchorKey": "ba2cfd0b9f6f47a728081edaf340c37cdeb53123",
     "description": "IconButton — generated from contract ds.icon-button v1.0.0",
     "isSet": true,
@@ -1430,6 +1435,7 @@ const COMPONENTS = [
   {
     "setName": "Kbd",
     "contractId": "ds.kbd",
+    "version": "1.0.0",
     "anchorKey": "798616e092adf3047e8e3586844c2bcb0530fe0a",
     "description": "Kbd — generated from contract ds.kbd v1.0.0",
     "isSet": false,
@@ -1490,6 +1496,7 @@ const COMPONENTS = [
   {
     "setName": "ListItem",
     "contractId": "ds.list-item",
+    "version": "1.0.0",
     "anchorKey": "470b0337773739a1521b294855bed053c8e7eb33",
     "description": "ListItem — generated from contract ds.list-item v1.0.0",
     "isSet": false,
@@ -1605,6 +1612,7 @@ const COMPONENTS = [
   {
     "setName": "List",
     "contractId": "ds.list",
+    "version": "1.0.0",
     "anchorKey": "e506f83390b9f1495394675f91c6aa03a9317162",
     "description": "List — generated from contract ds.list v1.0.0",
     "isSet": true,
@@ -1887,6 +1895,7 @@ const COMPONENTS = [
   {
     "setName": "MetadataListItem",
     "contractId": "ds.metadata-list-item",
+    "version": "1.0.0",
     "anchorKey": "84ae8763e0d2378b67b49878f355b264327d6c8a",
     "description": "MetadataListItem — generated from contract ds.metadata-list-item v1.0.0",
     "isSet": false,
@@ -1967,6 +1976,7 @@ const COMPONENTS = [
   {
     "setName": "MetadataList",
     "contractId": "ds.metadata-list",
+    "version": "1.0.0",
     "anchorKey": "f4c106dcd1de208ef1018b6d8ee4e30cdc030f0d",
     "description": "MetadataList — generated from contract ds.metadata-list v1.0.0",
     "isSet": false,
@@ -2077,6 +2087,7 @@ const COMPONENTS = [
   {
     "setName": "SidebarLayout",
     "contractId": "ds.sidebar-layout",
+    "version": "1.0.0",
     "anchorKey": null,
     "description": "SidebarLayout — generated from contract ds.sidebar-layout v1.0.0",
     "isSet": false,
@@ -2165,6 +2176,7 @@ const COMPONENTS = [
   {
     "setName": "TwoColumn",
     "contractId": "ds.two-column",
+    "version": "1.0.0",
     "anchorKey": null,
     "description": "TwoColumn — generated from contract ds.two-column v1.0.0",
     "isSet": false,
@@ -2253,6 +2265,7 @@ const COMPONENTS = [
   {
     "setName": "PageShell",
     "contractId": "ds.page-shell",
+    "version": "1.0.0",
     "anchorKey": null,
     "description": "PageShell — generated from contract ds.page-shell v1.0.0",
     "isSet": false,
@@ -2411,6 +2424,7 @@ const COMPONENTS = [
   {
     "setName": "Pagination",
     "contractId": "ds.pagination",
+    "version": "1.0.0",
     "anchorKey": "51d18c28f5ef424142d682db4ec7fd35b9091257",
     "description": "Pagination — generated from contract ds.pagination v1.0.0",
     "isSet": true,
@@ -2789,6 +2803,7 @@ const COMPONENTS = [
   {
     "setName": "ProgressBar",
     "contractId": "ds.progress-bar",
+    "version": "1.0.1",
     "anchorKey": "b18870547d3ca85fb933e46457fde0d02d782fb3",
     "description": "ProgressBar — generated from contract ds.progress-bar v1.0.1 †",
     "isSet": true,
@@ -3171,6 +3186,7 @@ const COMPONENTS = [
   {
     "setName": "Section",
     "contractId": "ds.section",
+    "version": "1.0.0",
     "anchorKey": "f47b739d72cc4bfc159e1b656f78e5dbceaf0200",
     "description": "Section — generated from contract ds.section v1.0.0",
     "isSet": true,
@@ -3294,6 +3310,7 @@ const COMPONENTS = [
   {
     "setName": "SideNavItem",
     "contractId": "ds.side-nav-item",
+    "version": "1.0.0",
     "anchorKey": "155b665997cadb6f418aa74bdd0ad9b00e348e97",
     "description": "SideNavItem — generated from contract ds.side-nav-item v1.0.0",
     "isSet": true,
@@ -3474,6 +3491,7 @@ const COMPONENTS = [
   {
     "setName": "Skeleton",
     "contractId": "ds.skeleton",
+    "version": "1.0.0",
     "anchorKey": "2da0d4e2438f9b37a9ce159eafb4477f622b10bb",
     "description": "Skeleton — generated from contract ds.skeleton v1.0.0",
     "isSet": true,
@@ -3612,6 +3630,7 @@ const COMPONENTS = [
   {
     "setName": "Slider",
     "contractId": "ds.slider",
+    "version": "1.0.0",
     "anchorKey": "8aac8c4b2be87b47b944650ec1a4c07bdfeb12f7",
     "description": "Slider — generated from contract ds.slider v1.0.0 †",
     "isSet": false,
@@ -5117,6 +5136,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -5380,6 +5400,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -5678,6 +5699,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',

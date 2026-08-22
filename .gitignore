@@ -51,7 +51,9 @@ extract/computed/out/**/.regate-probe.html
 figma-sync/plugin-dist/
 
 # Console MCP Testing-file scripts — regenerate with npm run console-loop:emit
-# (receipts under components/ are committed; scripts are retargeted rebuilds)
+# (receipts under components/ are committed; scripts are retargeted rebuilds).
+# NOTHING CI-GATED MAY READ THIS DIRECTORY: the canvas-drift probe reads the
+# committed canvas-drift/EMIT-SPECS.json distilled from it instead.
 parity/receipts/console-loop/emitted/*.js
 parity/receipts/console-loop/chunks/
 
@@ -81,9 +83,16 @@ conformance/.sandbox/
 # committing it would make a re-run look like a diff.
 # Eventz whole-file Path A — REST dumps and caches (SCORECARD.md is committed)
 parity/receipts/eventz-wholefile/out/
+# CBDS whole-file Path A — generated contracts / caches (SCORECARD.md is committed)
+parity/receipts/cbds-wholefile/out/
+# Figma Design System whole-file Path A
+parity/receipts/figma-ds-wholefile/out/
 
 demo/flowbite.dump.json
 demo/proposed/
 demo/generated/
 demo/from-contracts/
 .playwright-cli/
+
+# CI-measured eval record (compared against the committed evals/results.json by eval:record:check)
+evals/.ci/

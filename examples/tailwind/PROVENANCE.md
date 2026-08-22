@@ -263,3 +263,36 @@ component. It fails on the HEAD corpus (132 artifacts, all Carbon and MUI).
 `readBoundaryReceipts`, so for a `portalCapture` component ZERO read-boundary lines means
 NOT READ, not "none found". Before the scoping, such a component displayed its SIBLINGS'
 folds and looked read. Every portal component's receipts now carry that statement by name.
+
+## AUTHORED FACTS (2026-08-22) — Alert dismiss and ToggleSwitch toggle, re-derivable again
+
+Commit `968958cd` (2026-08-16, "AUTHORED REACT NOW CLICKS") made the authored React clickable
+by editing the PROMOTED contracts directly: `alert.contract.json` gained a declared `dismiss`
+event (`onDismiss`), the `dismissable` boolean was rebound from the `onDismiss` callback to
+Flowbite's own `dismissable` prop, and the canvas-developed dismiss part became a real
+`<button aria-label="Dismiss">`; `toggleswitch.contract.json` gained a declared `toggle` event
+(`onToggle`, flipping the `checked` axis and mirroring aria-checked), `semantics.role: switch`
+with its named exception, and `align: center` on the flex root. The React got better; the
+contracts stopped being what `examples/tailwind/scripts/promote-floor.mjs` produces, and
+`promote-generalization` has been red on tailwind since (masked until 2026-08-22 by mui failing
+first in the same loop).
+
+None of these facts can come from the capture: it reads computed style per prop combo and
+pseudo-class state — never a click handler, a React prop binding, an ARIA role, or an element
+that mounts only when a callback is passed (Flowbite renders the dismiss button only with
+`onDismiss`, so no captured plane carries the part's element or attributes).
+
+**The door.** `examples/tailwind/authored-facts.json`, named by `authored` in
+`ds-library.json`, is applied by `packages/cli/src/promote.ts` after the computed contract is
+read and before the resolution guard (the mui ledger is the precedent, same file, same day).
+These two contracts needed the door's second set of operations: `edit` (from → to on an
+existing field, refusing when the captured value moved), `fields` on a target — the contract
+root, a `part`, a `prop`, or a dotted `path` into one (`semantics`, `layout`) — and `after`,
+which places new keys after a named existing key because committed byte order is a fact too
+(`element`/`attrs` after `description`; `events` after `anatomy`). Every row names its cause;
+MINTED.md quotes each applied row; a row the capture already carries, an unknown target, a
+moved `from` value, or a missing `after` key refuses the promotion by name.
+
+Measured: with the ledger, `alert.contract.json` and `toggleswitch.contract.json` re-promote
+byte-identical to the committed files (no committed contract changed in this round); the other
+six tailwind contracts and the minted tree are untouched.

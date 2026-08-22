@@ -7897,34 +7897,6 @@
               "$value": "36px",
               "$type": "dimension"
             },
-            "width": {
-              "small": {
-                "$value": "40px",
-                "$type": "dimension"
-              },
-              "medium": {
-                "$value": "48px",
-                "$type": "dimension"
-              },
-              "large": {
-                "$value": "56px",
-                "$type": "dimension"
-              }
-            },
-            "height": {
-              "small": {
-                "$value": "40px",
-                "$type": "dimension"
-              },
-              "medium": {
-                "$value": "48px",
-                "$type": "dimension"
-              },
-              "large": {
-                "$value": "56px",
-                "$type": "dimension"
-              }
-            },
             "z-index": {
               "$value": "1050",
               "$type": "number"
@@ -7971,6 +7943,34 @@
               "secondary": {
                 "$value": "#7b1fa2",
                 "$type": "color"
+              }
+            },
+            "width": {
+              "small": {
+                "$value": "40px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "48px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "56px",
+                "$type": "dimension"
+              }
+            },
+            "height": {
+              "small": {
+                "$value": "40px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "48px",
+                "$type": "dimension"
+              },
+              "large": {
+                "$value": "56px",
+                "$type": "dimension"
               }
             }
           }
@@ -9295,10 +9295,6 @@
                 }
               }
             },
-            "width": {
-              "$value": "30.2188px",
-              "$type": "dimension"
-            },
             "text-decoration-color-state-active": {
               "primary": {
                 "$value": "#1976d2",
@@ -10618,11 +10614,11 @@
               "description": "Promoted from the computed floor (round 4): rendered anatomy div|Collapse-root.Collapse-vertical — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
-                "overflow-x": "hidden",
-                "overflow-y": "hidden",
                 "transition-duration": "0.3s",
                 "transition-property": "height",
-                "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+                "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden"
               },
               "parts": {
                 "collapse-vertical": {

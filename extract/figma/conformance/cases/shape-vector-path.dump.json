@@ -39,7 +39,7 @@
       "name": "a",
       "type": "VECTOR",
       "fill": {
-       "hex": "#101828"
+       "hex": "101828"
       },
       "fixedSize": {
        "width": 16,

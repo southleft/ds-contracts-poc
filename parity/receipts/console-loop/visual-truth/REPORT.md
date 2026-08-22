@@ -20,6 +20,10 @@ generatedFrom: sha256:34803ae5bf33df2e411c320153e7d3da4b931a49eabe4319aaf1bf4e7c
 | carbon | 10/10 | 2 | 2 | yes |
 | polaris | 12/12 | 4 | 3 | yes |
 
+### Advisory lanes (below floor by recorded decision)
+
+- **astryx** — floor held at 1 since 2026-08-22; headless passes measured 0 then, 0 now. `npm run visual-truth:check` reports this lane as a WARNING, not an error, so the required lane stays red-capable for every other lane; it fails again if the count drops below 0, and refuses the entry as stale once the lane meets its floor. Backed by: BRIDGE only: astryx/badge 4.88 pctAAMasked, compositionOk (parity/receipts/console-loop/astryx/scores/badge.json). The HEADLESS card for the same stem and the same reference (orig-shots/blue__default.png) reads 5.36 (visual-truth/astryx/badge.json, re-run and re-scored 2026-08-11 under composite-over-white; sha pins and receipt reference verified current). Both-instrument pass set: empty. Lifts when: Any astryx stem scores <= 5 with compositionOk on the headless instrument (astryx/badge at 5.36 is the nearest). visual-truth:check then refuses this entry as stale until it is deleted, at which point the lane is enforced again at floor 1.
+
 ## Worst-first
 
 | lane | stem | pctAAMasked | compositionOk | status |

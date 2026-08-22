@@ -133,6 +133,29 @@ for (const lane of laneList) {
 }
 lines.push("");
 
+// ADVISORY LANES — a floor the owner holds ABOVE the headless count by a
+// recorded decision (RATCHET.json `advisory.<lane>`). The table above still
+// prints **NO** for such a lane: it IS below its floor and the report must say
+// so. This note explains why `visual-truth:check` warns on it instead of
+// failing the required lane, and what lifts it. Rendered from the ratchet
+// file's own fields so the report cannot drift from the decision.
+const advisoryLanes = laneList.filter((l) => ratchet?.advisory && Object.prototype.hasOwnProperty.call(ratchet.advisory, l));
+if (advisoryLanes.length > 0) {
+  lines.push("### Advisory lanes (below floor by recorded decision)");
+  lines.push("");
+  for (const lane of advisoryLanes) {
+    const a = ratchet.advisory[lane] ?? {};
+    const passed = cards.filter((c) => c.lane === lane && statusOf(c) === "pass").length;
+    lines.push(
+      `- **${lane}** — floor held at ${a.floorHeldAt} since ${a.since}; headless passes measured ${a.headlessPassesMeasured} then, ${passed} now. ` +
+        `\`npm run visual-truth:check\` reports this lane as a WARNING, not an error, so the required lane stays red-capable for every other lane; ` +
+        `it fails again if the count drops below ${a.headlessPassesMeasured}, and refuses the entry as stale once the lane meets its floor. ` +
+        `Backed by: ${a.backedBy ?? "(not recorded)"} Lifts when: ${a.liftWhen ?? "(not recorded)"}`,
+    );
+  }
+  lines.push("");
+}
+
 // Worst-first table
 lines.push("## Worst-first");
 lines.push("");

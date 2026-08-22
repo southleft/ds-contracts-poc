@@ -13,7 +13,12 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { ContractSchema, tokenInventoryFromJson, type Contract } from '../../../core/index.js';
-import { proposeFromDump, type FigmaProposalResult } from '../../../core/propose-figma.js';
+import {
+  asMinimalChildContract,
+  proposeFromDump,
+  type FigmaProposalResult,
+  type MinimalChildContract,
+} from '../../../core/propose-figma.js';
 import { capturedTokensFromDump } from '../../../core/captured-tokens.js';
 import { tokenCorpusFromJson } from '../../../core/token-corpus.js';
 import { generateCss, generateTsx } from '../../../core/emit-react.js';
@@ -157,7 +162,7 @@ async function main(): Promise<void> {
   const token = figmaToken();
   const started = new Date().toISOString();
 
-  let variables: Awaited<ReturnType<typeof fetchVariables>> = null;
+  let variables: Awaited<ReturnType<typeof fetchVariables>> = undefined;
   try {
     variables = await fetchVariables(FILE_KEY, token);
   } catch (e) {
@@ -289,7 +294,7 @@ async function main(): Promise<void> {
   const contracts = new Map<string, Record<string, unknown>>();
   const contractIdByName = new Map<string, string>();
   const contractIdByKey = new Map<string, string>();
-  const contractsById = new Map<string, Record<string, unknown>>();
+  const contractsById = new Map<string, MinimalChildContract>();
   const sessionClaimedIds = new Set<string>();
   const mintedTree: Record<string, unknown> = {};
   const rows: Row[] = [];
@@ -305,7 +310,7 @@ async function main(): Promise<void> {
   const register = (c: Record<string, unknown>): void => {
     if (typeof c.id !== 'string' || typeof c.name !== 'string') return;
     contractIdByName.set(c.name, c.id);
-    contractsById.set(c.id, c);
+    contractsById.set(c.id, asMinimalChildContract(c));
     const key = (c.anchors as { figma?: { componentSetKey?: string } } | undefined)?.figma?.componentSetKey;
     if (typeof key === 'string' && key.length > 0) contractIdByKey.set(key, c.id);
     sessionClaimedIds.add(c.id);

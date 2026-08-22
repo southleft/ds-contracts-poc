@@ -370,7 +370,19 @@ const AL_INERT = (divTags.find(([t]) => t === 'auto-layout-inert') ?? [null, 0])
 const LAYOUT_MODE_DIVERGED = rt.results.reduce((a, r) => a + r.diverged.filter((f) => f.channel === 'layout.mode').length, 0);
 
 /* ---- the executable claim suite ----------------------------------------- */
-const evals = readJson('executable claim suite', path.join(ROOT, 'evals', 'results.json'));
+// The suite record is the ONE source this document must not fingerprint
+// whole: its pass column and commit/date provenance are written by the run
+// that executes capability-report-is-fresh, so hashing the file makes this
+// page stale on every record commit (the oscillation named at the footer
+// comment, in a second form). Track only the stable facts — the registry ids
+// and the suite size — and read everything else from the file as usual.
+const evals = (() => {
+  const abs = path.join(ROOT, 'evals', 'results.json');
+  const rec = JSON.parse(readFileSync(abs, 'utf8'));
+  const stable = JSON.stringify({ total: rec.total, ids: rec.results.map((r) => r.id).sort() });
+  track('executable claim suite (registry ids + size; the pass column is the suite\'s own output)', abs, stable);
+  return rec;
+})();
 const byClaim = [...evals.results.reduce((m, r) => {
   const k = r.claim ?? '(unclassified)';
   const e = m.get(k) ?? { total: 0, passed: 0 };
@@ -951,7 +963,7 @@ console.log(
   `${OUT_NAME} — ${fmt(REAL_N)} measured components over ${fmt(LIBRARIES.length)} libraries ` +
     `(mean ${f1(REAL_MEAN)}%, cell-weighted ${f1(REAL_WEIGHTED)}%, coverage ${COV_TOTAL ? f1(pct(COVERED_N, COV_TOTAL.size)) : '?'}%), ` +
     `${fmt(fidScored.length)} scored canvas variants (${f2(FID_MEAN)}%), ` +
-    `${fmt(evals.passed)}/${fmt(evals.total)} evals, ${fmt(DAGGER_TOTAL)} dropped-fact receipts, ` +
+    `${fmt(evals.total)} evals (whether the committed run is green is docs:check's fact, not this file's), ${fmt(DAGGER_TOTAL)} dropped-fact receipts, ` +
     `${fmt(checks.length)} cross-checks (${CHECKS_FAILED.length} disagreeing), ` +
     `${fmt(notAnswered.length)} question(s) the sources cannot answer`,
 );

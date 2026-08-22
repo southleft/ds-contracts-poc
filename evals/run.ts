@@ -19,7 +19,7 @@
  */
 import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, symlinkSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { spawnSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import path from 'node:path';
 // COVERAGE ROUND pins (pure modules — no side effects at import):
 import {
@@ -41,7 +41,7 @@ import {
 import { buildPlan as proposePrBuildPlan, contentsPutBody, summarize as proposePrSummarize } from '../packages/cli/src/commands/propose-pr.js';
 // PROMOTE GENERALIZATION (task #39) — the ONE promotion pipeline the four
 // generalized libraries now share (was six copies under examples/*/scripts/).
-import { promote as promoteFloor, type PromoteConfig } from '../packages/cli/src/promote.js';
+import { promote as promoteFloor, applyAuthoredContractRow, applyAuthoredMint, applyAuthoredPrune, parseAuthoredLedger, type PromoteConfig } from '../packages/cli/src/promote.js';
 import { emitReact as coreEmitReact, generateCss as coreGenerateCss, isMultiRoot as coreIsMultiRoot, stripCanvasOnlyChannels as coreStripCanvasOnly, validateContract as coreValidateContract } from '../core/emit-react.js';
 import { createFigmaEngine, RUNTIME_EMIT_REV } from '../core/emit-figma-script.js';
 import { emitHtml as coreEmitHtml } from '../core/emit-html.js';
@@ -1937,6 +1937,8 @@ const cases: Case[] = [
         throw new Error('Disabled preview must NOT bind a 0-1 opacity variable (Figma reads the field as percent — renders ~0%)');
       if (!script.includes('node.opacity = spec.opacity'))
         throw new Error('node-opacity runtime line missing — the literal never reaches the node');
+      if (!script.includes("node.setBoundVariable('opacity', null)"))
+        throw new Error('node-opacity runtime must unbind a stale OPACITY variable before writing the literal — otherwise amend leaves 0.5%');
       if (sv.some((v: any) => v.name.includes('Size=Small') || v.name.includes('Size=Large')))
         throw new Error('Explosion not bounded — a preview multiplied a non-primary axis');
       if (!script.includes('withStateAxis')) throw new Error('runtime merge helper missing');
@@ -6126,7 +6128,45 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         }
       }
       rmSync(tmp, { recursive: true, force: true });
-      console.log(`promote-generalization: 4 libraries (carbon, mui, tailwind, altitude) re-promoted through the ONE shared module — ${compared} committed artifact(s) byte-identical; polaris + astryx keep their scripts BY NAME`);
+      // THE AUTHORED-FACTS DOOR (2026-08-22). mui (16889547) and tailwind
+      // (968958cd) hand-edited promoted contracts for facts the capture cannot
+      // carry; those facts now live in examples/<lib>/authored-facts.json and
+      // the reproduction above proves the door re-derives the committed bytes.
+      // The other half of the door is that it REFUSES BY NAME — a row the
+      // capture already carries, an unknown target, a moved `from` value, a
+      // prune of a referenced leaf — so a ledger row cannot outlive the gap it
+      // covers. Pinned here on the committed mui/tailwind contracts (pure
+      // functions; nothing written).
+      {
+        const load = (lib: string, stem: string): Record<string, unknown> =>
+          JSON.parse(readFileSync(path.join(ROOT, 'examples', lib, 'contracts', `${stem}.contract.json`), 'utf8')) as Record<string, unknown>;
+        const refuses = (name: string, fn: () => unknown, needle: string): void => {
+          try { fn(); } catch (e) {
+            if (String(e).includes(needle)) return;
+            throw new Error(`authored-facts door: "${name}" refused for the WRONG reason — ${String(e).slice(0, 200)}`);
+          }
+          throw new Error(`authored-facts door: "${name}" was NOT refused — a stale or mis-targeted ledger row would apply silently`);
+        };
+        const avatar = load('mui', 'avatar');
+        const alert = load('tailwind', 'alert');
+        refuses('stale set (capture carries tokens.color)', () => applyAuthoredContractRow(structuredClone(avatar), { component: 'avatar', part: 'root', set: { tokens: { color: '{x}' } }, cause: 't' }), 'ALREADY carried');
+        refuses('stale field (contract already has events)', () => applyAuthoredContractRow(structuredClone(alert), { component: 'alert', set: { fields: { events: [] } }, cause: 't' }), 'ALREADY carried');
+        refuses('unknown part', () => applyAuthoredContractRow(structuredClone(avatar), { component: 'avatar', part: 'ghost', set: { declared: { a: 'b' } }, cause: 't' }), 'not exactly one part');
+        refuses('unknown prop', () => applyAuthoredContractRow(structuredClone(alert), { component: 'alert', prop: 'ghost', edit: { description: { from: 'a', to: 'b' } }, cause: 't' }), 'not exactly one entry of props[]');
+        refuses('path into a missing group', () => applyAuthoredContractRow(structuredClone(alert), { component: 'alert', path: 'ghost', set: { fields: { a: 1 } }, cause: 't' }), 'not an existing object');
+        refuses('edit whose from value moved', () => applyAuthoredContractRow(structuredClone(alert), { component: 'alert', prop: 'dismissable', edit: { 'bindings.code.prop': { from: 'onDismiss', to: 'x' } }, cause: 't' }), 'captured value moved');
+        refuses('edit of a missing key', () => applyAuthoredContractRow(structuredClone(alert), { component: 'alert', prop: 'dismissable', edit: { ghost: { from: 'a', to: 'b' } }, cause: 't' }), 'no longer carries it');
+        refuses('after names a missing key', () => applyAuthoredContractRow(structuredClone(alert), { component: 'alert', set: { fields: { zz: 1 }, after: 'ghost' }, cause: 't' }), 'does not carry');
+        refuses('enum value outside the prop', () => applyAuthoredContractRow(structuredClone(load('mui', 'fab')), { component: 'fab', part: 'root', set: { tokensByProp: { size: { huge: { width: '{x}' } } } }, cause: 't' }), 'not a value of enum prop');
+        refuses('unset a binding the capture does not carry', () => applyAuthoredContractRow(structuredClone(avatar), { component: 'avatar', part: 'root', unset: { tokens: ['nope'] }, cause: 't' }), 'no longer binds it');
+        refuses('stale mint (capture mints the path)', () => applyAuthoredMint({ imported: { avatar: { root: { color: { $value: '#000', $type: 'color' } } } } }, { component: 'avatar', mint: { 'imported.avatar.root.color': { $value: '#fff', $type: 'color' } }, cause: 't' }), 'ALREADY mints');
+        refuses('prune a referenced leaf', () => applyAuthoredPrune({ imported: { avatar: { root: { color: { $value: '#000', $type: 'color' } } } } }, { component: 'avatar', prune: ['imported.avatar.root.color'], cause: 't' }, new Set(['imported.avatar.root.color'])), 'still references');
+        refuses('prune a leaf the capture no longer mints', () => applyAuthoredPrune({ imported: {} }, { component: 'avatar', prune: ['imported.avatar.root.color'], cause: 't' }, new Set()), 'not in the minted tree');
+        refuses('row without a cause', () => parseAuthoredLedger({ rows: [{ component: 'fab', part: 'root', set: { declared: { a: 'b' } } }] }, 'ledger'), '"cause"');
+        refuses('mint outside the component namespace', () => parseAuthoredLedger({ rows: [{ component: 'fab', mint: { 'imported.avatar.root.z': { $value: '1px', $type: 'dimension' } }, cause: 't' }] }, 'ledger'), "component's own namespace");
+        refuses('part and prop together', () => parseAuthoredLedger({ rows: [{ component: 'alert', part: 'root', prop: 'x', edit: { a: { from: 1, to: 2 } }, cause: 't' }] }, 'ledger'), 'exclusive targets');
+      }
+      console.log(`promote-generalization: 4 libraries (carbon, mui, tailwind, altitude) re-promoted through the ONE shared module — ${compared} committed artifact(s) byte-identical (mui + tailwind through their authored-facts ledgers); the door refuses 16 stale/mis-targeted rows BY NAME; polaris + astryx keep their scripts BY NAME`);
     },
   },
   {
@@ -6204,13 +6244,13 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         // FOREIGN TOKEN SET — the JSON-only Generate: the MUI bundle
         // (contracts + tokenSet + icons in ONE paste, Wave 5 denominator) through
         // the real engine bundle path is EQUIVALENT to the compiled-script
-        // path (same sets + standalone Menu/Tooltip/TablePagination, 2136 variables incl. 134
+        // path (same sets + standalone Menu/Tooltip/TablePagination, 2143 variables incl. 134
         // Figma-native aliases, contained-primary Button fill resolves
         // #1976d2), and a contract ref outside base+minted refuses BY NAME.
         // STATE-PLANE PROJECTION round: Switch 14→28 (checked is a VARIANT
         // AXIS now) and Button 63→75 (accepted State preview axis) — both
         // survive the JSON-only paste identically to the script path.
-        '✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds Accordion(4), Alert(12), Autocomplete(2), Avatar(3), Badge(14), Button(75), Card(4), Checkbox(3), Chip(28), CircularProgress(2), Dialog(5), Divider(3), Drawer(2), Fab(9), IconButton(9), InputAdornment(2), LinearProgress(2), Link(42), Paper(8), Radio(14), Select(2), Slider(12), Snackbar(3), Switch(28), Table(2), Tabs(6), TextField(6) + standalone Menu, TablePagination, Tooltip with 2136 variables (134 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME',
+        '✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds Accordion(4), Alert(12), Autocomplete(2), Avatar(3), Badge(14), Button(75), Card(4), Checkbox(3), Chip(28), CircularProgress(2), Dialog(5), Divider(3), Drawer(2), Fab(9), IconButton(9), InputAdornment(2), LinearProgress(2), Link(42), Paper(8), Radio(14), Select(2), Slider(12), Snackbar(3), Switch(28), Table(2), Tabs(6), TextField(6) + standalone Menu, TablePagination, Tooltip with 2143 variables (134 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME',
         'plugin-engine-check: all flows green',
       ]) {
         if (!check.out.includes(want)) throw new Error(`missing "${want}" in:\n${check.out}`);
@@ -7838,7 +7878,8 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       }
       const batch = run(process.execPath, ['examples/mui/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`mui genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      if (!/mock-proven \(27 sets: Button\(75\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(28\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\), Checkbox\(3\), Table\(2\), InputAdornment\(2\), TextField\(6\), Avatar\(3\), Fab\(9\), IconButton\(9\), CircularProgress\(2\), LinearProgress\(2\), Alert\(12\), Badge\(14\), Divider\(3\), Link\(42\), Paper\(8\), Drawer\(2\), Radio\(14\), Select\(2\), Snackbar\(3\); standalone: TablePagination, Menu, Tooltip, Breadcrumbs; 2144 variables\)/.test(batch.out)) {
+      // 2144 → 2143 (2026-08-22): the authored-facts door pruned `imported.link.root.width` — a capture-font glyph width nothing binds (examples/mui/authored-facts.json).
+      if (!/mock-proven \(27 sets: Button\(75\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(28\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\), Checkbox\(3\), Table\(2\), InputAdornment\(2\), TextField\(6\), Avatar\(3\), Fab\(9\), IconButton\(9\), CircularProgress\(2\), LinearProgress\(2\), Alert\(12\), Badge\(14\), Divider\(3\), Link\(42\), Paper\(8\), Drawer\(2\), Radio\(14\), Select\(2\), Snackbar\(3\); standalone: TablePagination, Menu, Tooltip, Breadcrumbs; 2143 variables\)/.test(batch.out)) {
         throw new Error(`mui genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // FOREIGN-TOKEN BUNDLE (the JSON-only payload): `figma bundle` is
@@ -7863,7 +7904,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (runA !== runB) throw new Error('figma bundle is NOT byte-deterministic — two builds from identical inputs differ');
       const committed = readFileSync(path.join(ROOT, 'examples/mui/figma/mui.bundle.json'), 'utf8');
       if (runA !== committed) throw new Error('committed examples/mui/figma/mui.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
-      console.log('mui-figma-genesis: 31/31 Emotion-runtime scripts referee+execute headless (273 variants — Wave 5 denominator; state-plane projection: Switch 14→28 on Checked, Button 63→75 on State preview); token sync 2144 variables incl. 134 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 22 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
+      console.log('mui-figma-genesis: 31/31 Emotion-runtime scripts referee+execute headless (273 variants — Wave 5 denominator; state-plane projection: Switch 14→28 on Checked, Button 63→75 on State preview); token sync 2143 variables incl. 134 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 22 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
     },
   },
   {
@@ -9926,8 +9967,18 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     claim: 'C3-detection',
     run: () => {
       const CL = path.join(ROOT, 'parity/receipts/console-loop');
-      type DriftRow = { stem: string; status: string; findings?: string[] };
+      type DriftRow = { stem: string; status: string; findings?: string[]; script?: string; specSource?: string };
       const EXPECTED: Record<string, { sync: number; drift: string[]; cellPending: number }> = {
+        // FIRST-PARTY 18 IS A COMMITTED NUMBER ONLY SINCE 2026-08-22. Before
+        // that the probe read the 13 component stems' emit scripts from
+        // parity/receipts/console-loop/emitted/ — gitignored, and named by
+        // wave numbers that `npm run console-loop:emit` no longer produces —
+        // so the 18 existed on the one machine that kept the leftover files
+        // and a clean clone got 5 (CI red from 2026-08-13; run 32602730931).
+        // The 13 now come from canvas-drift/EMIT-SPECS.json, minted once from
+        // those scripts and sha256-stamped; the assertion below pins that
+        // every first-party row read a tracked path, so the number cannot
+        // depend on the machine again.
         'first-party': { sync: 18, drift: [], cellPending: 36 },
         altitude: { sync: 7, drift: ['avatar'], cellPending: 0 },
         // ASTRYX 3 → 5 → 12 IN-SYNC (2026-08-09). The 5 came from the
@@ -9987,6 +10038,21 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         const rows = probe(lane);
         byLane.set(lane, rows);
         const want = EXPECTED[lane];
+        // COMMITTED INPUTS ONLY. A row that read its EXPECTED side from the
+        // gitignored rebuild target is a machine-local answer, whatever it says.
+        const GITIGNORED = 'parity/receipts/console-loop/emitted/';
+        const offTree = rows.filter((r: DriftRow) => (r.specSource ?? '').startsWith(GITIGNORED));
+        if (offTree.length) {
+          throw new Error(
+            `${lane}: ${offTree.length} row(s) read their spec from the gitignored ${GITIGNORED}: ${offTree.map((r: DriftRow) => r.stem).join(', ')}`,
+          );
+        }
+        const specPending = rows.filter((r: DriftRow) => r.status === 'SPEC-RECEIPT-PENDING');
+        if (specPending.length) {
+          throw new Error(
+            `${lane}: ${specPending.length} stem(s) have no committed spec receipt (canvas-drift/EMIT-SPECS.json): ${specPending.map((r: DriftRow) => r.stem).join(', ')}`,
+          );
+        }
         const sync = rows.filter((r: DriftRow) => r.status === 'in-sync').length;
         const pending = rows.filter((r: DriftRow) => r.status === 'CELL-PENDING').length;
         const drift = rows.filter((r: DriftRow) => r.status === 'DRIFT').map((r: DriftRow) => r.stem).sort();
@@ -9997,6 +10063,31 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         }
         if (drift.join(',') !== want.drift.join(',')) {
           throw new Error(`${lane}: expected drift on [${want.drift.join(',')}], got [${drift.join(',')}]`);
+        }
+      }
+      {
+        // The 13 first-party component stems' scripts are gitignored, so their
+        // spec MUST have come from the committed receipt — and the 5 composition
+        // stems' scripts are tracked under figma-sync/, read directly.
+        const fp = byLane.get('first-party') ?? [];
+        const RECEIPT = 'parity/receipts/console-loop/canvas-drift/EMIT-SPECS.json';
+        const fromReceipt = fp.filter((r: DriftRow) => r.specSource === RECEIPT).map((r: DriftRow) => r.stem).sort();
+        const fromTracked = fp
+          .filter((r: DriftRow) => r.specSource && r.specSource !== RECEIPT)
+          .map((r: DriftRow) => r.specSource as string)
+          .sort();
+        const wantReceipt = [
+          'avatar', 'badge', 'banner', 'button', 'card', 'checkbox', 'divider',
+          'progress-bar', 'slider', 'spinner', 'switch', 'text-field', 'token',
+        ];
+        if (fromReceipt.join(',') !== wantReceipt.join(',')) {
+          throw new Error(
+            `first-party: expected [${wantReceipt.join(',')}] to read their spec from ${RECEIPT}, got [${fromReceipt.join(',')}]`,
+          );
+        }
+        const badTracked = fromTracked.filter((p: string) => !/^figma-sync\/\d+-[a-z]+\.js$/.test(p));
+        if (badTracked.length) {
+          throw new Error(`first-party: composition specs must be read from tracked figma-sync/NN-<stem>.js, got ${badTracked.join(', ')}`);
         }
       }
       const carbon = byLane.get('carbon') ?? [];
@@ -10105,6 +10196,23 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // so when an mui snapshot is minted it should read in-sync BY
       // CONSTRUCTION. A probe could still surface real drift, which throws
       // unconditionally above.
+      // 2026-08-22: tailwind/kbd JOINED this list — the first non-mui member,
+      // and it GREW the list, which needs a reviewed reason. Kbd landed in
+      // 8afae937 (2026-08-15) and earned its pass in a69ec633 (2026-08-16,
+      // 0.42% AA, compositionOk). It is un-probed because NOTHING pins its
+      // cell: tailwind/framing.json carries bridge-minted C1 pins for the five
+      // original stems only, and canvas-drift/LIVE-SNAPSHOT.json was minted
+      // 2026-08-09, six days before Kbd existed. Foreign lanes pin cells ONLY
+      // through framing.json (the probe returns it whole for any lane that is
+      // not first-party), and both that pin and the snapshot are LIVE facts
+      // read off the Desktop Bridge — the probe's own rule is that they are
+      // never back-derived from committed PNGs or receipts. CI has no bridge
+      // and no Figma token, so this cannot be closed offline: a maintainer
+      // with the bridge must pin kbd's cell in framing.json and re-mint the
+      // tailwind snapshot, at which point kbd reads in-sync (or surfaces real
+      // DRIFT, which throws above) and LEAVES this list. Pinning it here keeps
+      // the gap visible instead of letting a scored pass sit drift-unmeasured
+      // with nothing naming it.
       const wantUnmeasured = [
         'mui/autocomplete',
         'mui/checkbox',
@@ -10113,10 +10221,11 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         'mui/linear-progress',
         'mui/slider',
         'mui/switch',
+        'tailwind/kbd',
       ];
       if (unmeasuredPasses.sort().join(',') !== wantUnmeasured.join(',')) {
         throw new Error(
-          `expected exactly mui's ${wantUnmeasured.length} un-probed passes [${wantUnmeasured.join(', ')}], got [${unmeasuredPasses.join(', ')}]`,
+          `expected exactly the ${wantUnmeasured.length} named un-probed passes [${wantUnmeasured.join(', ')}], got [${unmeasuredPasses.join(', ')}]`,
         );
       }
       // DERIVED, NOT TYPED. This line used to be a hardcoded string and it went
@@ -11995,6 +12104,34 @@ const ONLY = (() => {
   return i > -1 && process.argv[i + 1] ? process.argv[i + 1].split(',') : null;
 })();
 
+// `--record <path>` writes the full-run record somewhere OTHER than
+// evals/results.json. CI uses it: the lane measures into a scratch path and
+// `scripts/eval-record-check.mjs <path>` compares that measurement row-by-row
+// against the committed record, so a committed "N/N" can no longer be a
+// self-attestation — it has to be what CI reproduced (2026-08-22: the
+// committed file said 225/225 while five consecutive CI runs said 222→214).
+const RECORD_PATH = (() => {
+  const i = process.argv.indexOf('--record');
+  return i > -1 && process.argv[i + 1] ? path.resolve(process.argv[i + 1]) : path.join(ROOT, 'evals', 'results.json');
+})();
+
+// Provenance stamped into every full-run record: which commit the suite ran
+// on and whether the tree was dirty. The readers (docs:check,
+// eval:registry:check, eval:record:check) refuse a dirty-tree record and a
+// record from a commit that is not an ancestor of HEAD.
+function recordProvenance(): { commit: string; dirty: boolean; recordedAt: string } {
+  const git = (args: string): string => {
+    try {
+      return execFileSync('git', args.split(' '), { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+    } catch {
+      return '';
+    }
+  };
+  const commit = git('rev-parse HEAD') || 'unknown';
+  const dirty = git('status --porcelain --untracked-files=no') !== '';
+  return { commit, dirty, recordedAt: new Date().toISOString().slice(0, 10) };
+}
+
 // `--list-ids` prints every REGISTERED case id and exits without running one.
 // It exists so a gate can assert that evals/results.json carries a row per
 // registered case. The runner writes one row per case it runs, so the record
@@ -12026,10 +12163,15 @@ const passed = results.filter((r) => r.pass).length;
 if (ONLY) {
   console.log(`\n${passed}/${results.length} evals passed — SUBSET run (--only ${ONLY.join(',')}); evals/results.json NOT written`);
 } else {
+  const provenance = recordProvenance();
+  mkdirSync(path.dirname(RECORD_PATH), { recursive: true });
   writeFileSync(
-    path.join(ROOT, 'evals', 'results.json'),
-    JSON.stringify({ passed, total: results.length, results }, null, 2) + '\n',
+    RECORD_PATH,
+    JSON.stringify({ passed, total: results.length, ...provenance, results }, null, 2) + '\n',
   );
-  console.log(`\n${passed}/${results.length} evals passed — evals/results.json`);
+  console.log(
+    `\n${passed}/${results.length} evals passed — ${path.relative(ROOT, RECORD_PATH)} ` +
+      `(commit ${provenance.commit.slice(0, 8)}${provenance.dirty ? ', DIRTY tree — this record cannot be committed as the suite result' : ''})`,
+  );
 }
 process.exit(passed === results.length ? 0 : 1);

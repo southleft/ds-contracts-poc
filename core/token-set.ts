@@ -572,14 +572,109 @@ export function compileTokenSetRows(tokenSet: TokenSetPayload): CompiledTokenSet
   return { rows, counts, aliasCount, unparsedColors, unparsedDimensions, orphanModes };
 }
 
+/** Plugin-API runtime shared by bundle tokenSet apply and first-party
+ *  Primitives/Brand/Semantic apply. Caller must bind `owned` to a
+ *  `Map<collectionId, Set<variableName>>` of collections this script owns.
+ *  Declares `pruned` (number), `leftovers` (string[] of names) and
+ *  `pruneSkipped` (string | null). OPT-IN: nothing is removed unless
+ *  `globalThis.DS_PRUNE_TOKENS === true` — by default the leftovers are
+ *  counted and NAMED, not deleted. `FC-APPLY-TOKENS-NOT-PRUNED`. */
+export function ownedCollectionPruneRuntime(): string {
+  return `// FC-APPLY-TOKENS-NOT-PRUNED — leftover variables in owned collections
+// only; other collections are untouched (FC-THEME-ISO).
+// OPT-IN. Set globalThis.DS_PRUNE_TOKENS = true before running this script
+// to DELETE leftovers. Without it nothing is removed: the leftovers are
+// counted and named in the result (leftovers; pruned stays 0) so the loss is visible,
+// not silent. With the flag on, a leftover a scene node still binds, a local
+// paint/text/effect/grid STYLE still binds, or any local variable still
+// aliases, stays. The Plugin API cannot see consumers in OTHER files (a
+// published library's instances), so those are NOT protected — which is why
+// the door is closed by default (docs/23-known-limitations.md §B.23).
+const DS_PRUNE_TOKENS = typeof globalThis !== 'undefined' && globalThis.DS_PRUNE_TOKENS === true;
+await figma.loadAllPagesAsync();
+const referenced = new Set();
+const collectAlias = (x) => {
+  if (!x) return;
+  if (Array.isArray(x)) { for (const y of x) collectAlias(y); return; }
+  if (typeof x === 'object') {
+    if (typeof x.id === 'string' && (x.type === 'VARIABLE_ALIAS' || x.type === 'VARIABLE')) referenced.add(x.id);
+    else for (const k in x) collectAlias(x[k]);
+  }
+};
+for (const page of figma.root.children) {
+  for (const n of page.findAll(() => true)) {
+    collectAlias(n.boundVariables);
+    if (Array.isArray(n.fills)) for (const p of n.fills) collectAlias(p && p.boundVariables);
+    if (Array.isArray(n.strokes)) for (const p of n.strokes) collectAlias(p && p.boundVariables);
+  }
+}
+// Style-bound variables: paints[].boundVariables, style.boundVariables,
+// effects[].boundVariables, layoutGrids[].boundVariables. Every reader the
+// runtime has is walked (so the named leftovers are accurate either way); a
+// runtime missing any of the four cannot protect them, so with the flag on
+// it does not prune at all and says why.
+const STYLE_READERS = ['getLocalPaintStylesAsync', 'getLocalTextStylesAsync', 'getLocalEffectStylesAsync', 'getLocalGridStylesAsync'];
+const missingStyleReaders = STYLE_READERS.filter((k) => typeof figma[k] !== 'function');
+for (const k of STYLE_READERS) {
+  if (missingStyleReaders.includes(k)) continue;
+  for (const s of await figma[k]()) {
+    collectAlias(s.boundVariables);
+    if (Array.isArray(s.paints)) for (const p of s.paints) collectAlias(p && p.boundVariables);
+    if (Array.isArray(s.effects)) for (const e of s.effects) collectAlias(e && e.boundVariables);
+    if (Array.isArray(s.layoutGrids)) for (const g of s.layoutGrids) collectAlias(g && g.boundVariables);
+  }
+}
+let pruneSkipped = null;
+if (DS_PRUNE_TOKENS && missingStyleReaders.length > 0) {
+  pruneSkipped = 'prune skipped: this runtime lacks figma.' + missingStyleReaders.join(', figma.') + ' so style-bound variables could not be protected';
+}
+const willPrune = DS_PRUNE_TOKENS && !pruneSkipped;
+const leftovers = [];
+const dropped = new Set(); // dry run: ids treated as gone so alias chains unwind the same way
+for (let pass = 0; pass < 8; pass++) {
+  const locals = (await figma.variables.getLocalVariablesAsync()).filter((v) => !dropped.has(v.id));
+  const aliasTargets = new Set();
+  for (const v of locals) {
+    const modes = v.valuesByMode || {};
+    for (const modeId in modes) {
+      const val = modes[modeId];
+      if (val && typeof val === 'object' && val.type === 'VARIABLE_ALIAS' && val.id) aliasTargets.add(val.id);
+    }
+  }
+  let droppedThisPass = 0;
+  for (const v of locals) {
+    const keep = owned.get(v.variableCollectionId);
+    if (!keep) continue;
+    if (keep.has(v.name)) continue;
+    if (referenced.has(v.id)) continue;
+    if (aliasTargets.has(v.id)) continue;
+    leftovers.push(v.name);
+    dropped.add(v.id);
+    droppedThisPass++;
+    if (willPrune) v.remove();
+  }
+  if (droppedThisPass === 0) break;
+}
+const pruned = willPrune ? leftovers.length : 0;
+if (!willPrune && leftovers.length > 0) {
+  const why = pruneSkipped || 'prune is opt-in: set globalThis.DS_PRUNE_TOKENS = true to remove them';
+  console.warn('[ds-contracts] ' + leftovers.length + ' leftover variable(s) kept in owned collection(s) — ' + why + ': ' + leftovers.join(', '));
+  figma.notify(leftovers.length + ' leftover variable(s) kept (' + why + '): ' + leftovers.slice(0, 5).join(', ') + (leftovers.length > 5 ? ', …' : ''), { timeout: 6000 });
+}
+`;
+}
+
 // ---------------------------------------------------------------------------
 // The sync script (the example scripts' runtime, parameterized)
 // ---------------------------------------------------------------------------
 
 /** tokenSet → deterministic Figma Plugin-API script text: one collection
  *  named tokenSet.name, Light/Dark modes, TWO-PASS upsert (concrete values,
- *  then Figma-NATIVE VARIABLE ALIASES for the minted {alias} leaves) —
- *  re-run safe. Run BEFORE the component scripts; they bind by name. */
+ *  then Figma-NATIVE VARIABLE ALIASES for the minted {alias} leaves), then
+ *  an OPT-IN prune (`globalThis.DS_PRUNE_TOKENS === true`) of unreferenced
+ *  leftovers in THAT collection only — by default leftovers are named in the
+ *  result, never removed (`FC-APPLY-TOKENS-NOT-PRUNED`). Re-run safe. Run
+ *  BEFORE the component scripts; they bind by name. */
 export function emitTokenSetScript(tokenSet: TokenSetPayload, fileKey: string | null): string {
   const { rows, aliasCount, unparsedColors, unparsedDimensions, orphanModes } = compileTokenSetRows(tokenSet);
   const textStyles = tokenSetTextStyles(tokenSet, rows);
@@ -602,7 +697,9 @@ export function emitTokenSetScript(tokenSet: TokenSetPayload, fileKey: string | 
       : '',
   ].filter(Boolean).join('\n');
   return `// GENERATED by the ds-contracts engine from a CONTRACTS-BUNDLE tokenSet — DO NOT EDIT.
-// Deterministic variable UPSERT (re-run safe): one ${JSON.stringify(col)} collection,
+// Deterministic variable UPSERT; leftovers in this collection are NAMED, and
+// removed only when globalThis.DS_PRUNE_TOKENS === true (opt-in,
+// FC-APPLY-TOKENS-NOT-PRUNED). One ${JSON.stringify(col)} collection,
 // Light/Dark modes, ${rows.length} variables (${aliasCount} Figma-native aliases from
 // the library's own token references). Runs BEFORE the component scripts.
 ${caveats ? `${caveats}\n` : ''}
@@ -651,6 +748,9 @@ for (const t of TOKENS) {
   v.setValueForMode(darkId, alias);
   aliased++;
 }
+const owned = new Map();
+owned.set(col.id, new Set(TOKENS.map((t) => t.name)));
+${ownedCollectionPruneRuntime()}
 const localTextStyles = await figma.getLocalTextStylesAsync();
 const styleByToken = {};
 for (const s of localTextStyles) {
@@ -674,7 +774,7 @@ for (const t of TEXT_STYLES) {
   s.fontName = { family: 'Inter', style: t.fontStyle };
   s.fontSize = t.fontSize;
 }
-figma.notify(${JSON.stringify(col)} + ' tokens: ' + created + ' created, ' + updated + ' updated (' + TOKENS.length + ' total, ' + aliased + ' aliases, Light/Dark; ' + createdStyles + ' text styles created)');
-return { created, updated, aliased, total: TOKENS.length, textStyles: TEXT_STYLES.length, createdStyles };
+figma.notify(${JSON.stringify(col)} + ' tokens: ' + created + ' created, ' + updated + ' updated, ' + pruned + ' pruned, ' + leftovers.length + ' leftover(s) (' + TOKENS.length + ' total, ' + aliased + ' aliases, Light/Dark; ' + createdStyles + ' text styles created)');
+return { created, updated, aliased, pruned, leftovers, pruneSkipped, total: TOKENS.length, textStyles: TEXT_STYLES.length, createdStyles };
 `;
 }

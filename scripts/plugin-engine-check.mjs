@@ -486,6 +486,92 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   assert(scoped !== source, 'the dump script TARGET_SETS seam scopes');
   const dump = await runScript(scoped);
   assert(dump && dump.Badge, 'the dump captures the mock-built Badge set');
+  const storedHash = markerOf(badge.id)?.getSharedPluginData('ds_contracts', 'specHash');
+  assert(
+    dump._provenance && dump._provenance.dumpVersion === '1.30',
+    `dump v1.30: provenance dumpVersion is 1.30 (got ${dump._provenance && dump._provenance.dumpVersion})`,
+  );
+  assert(
+    storedHash && dump.Badge.specHash === storedHash,
+    `dump v1.30 carries the stamped specHash (got ${dump.Badge.specHash} vs stored ${storedHash})`,
+  );
+  const storedVersion = markerOf(badge.id)?.getSharedPluginData('ds_contracts', 'version');
+  assert(
+    storedVersion && dump.Badge.version === storedVersion,
+    `dump v1.30 carries the stamped version (got ${dump.Badge.version} vs stored ${storedVersion})`,
+  );
+  {
+    const subject = markerOf(badge.id);
+    const v0 = subject && subject.children && subject.children[0];
+    assert(v0, 'dump v1.30: Badge has a variant to pin min/max defaults');
+    const prior = { minWidth: v0.minWidth, minHeight: v0.minHeight, maxWidth: v0.maxWidth, maxHeight: v0.maxHeight };
+    v0.minWidth = 0;
+    v0.minHeight = 0;
+    v0.maxWidth = 0;
+    v0.maxHeight = 0;
+    const dumpZero = await runScript(scoped);
+    const hasZero = (n) => {
+      if (!n || typeof n !== 'object') return false;
+      if (n.minWidth === 0 || n.minHeight === 0 || n.maxWidth === 0 || n.maxHeight === 0) return true;
+      return (n.children || []).some(hasZero) || (n.variants || []).some(hasZero);
+    };
+    assert(!hasZero(dumpZero.Badge), 'dump v1.30 omits Figma-default min/max 0 (FC-DUMP-MINMAX-ZERO-INVENTED)');
+    v0.minWidth = 44;
+    const dumpTap = await runScript(scoped);
+    assert(
+      dumpTap.Badge.variants[0].minWidth === 44,
+      `dump v1.30 still carries a drawn minWidth 44 (got ${dumpTap.Badge.variants[0] && dumpTap.Badge.variants[0].minWidth})`,
+    );
+    v0.minWidth = prior.minWidth;
+    v0.minHeight = prior.minHeight;
+    v0.maxWidth = prior.maxWidth;
+    v0.maxHeight = prior.maxHeight;
+  }
+  {
+    // FC-PLUGIN-SECTION-SELECTION: selecting the host Section around a
+    // standalone COMPONENT (live Flowbite Card / Kbd) used to resolve
+    // nothing. Lift the real function out of code.js and drive it.
+    const codeJs = read('figma-sync/plugin/code.js');
+    const startMark = '// --- SELECTION SET NAMES (start)';
+    const endMark = '// --- SELECTION SET NAMES (end)';
+    const s = codeJs.indexOf(startMark);
+    const e = codeJs.indexOf(endMark);
+    assert(s >= 0 && e > s, 'code.js carries the marked SELECTION SET NAMES block');
+    const fnCtx = vm.createContext({ figma });
+    vm.runInContext(`${codeJs.slice(s, e)}\nglobalThis.selectionSetNames = selectionSetNames;`, fnCtx);
+    const page = figma.currentPage;
+    const priorSel = page.selection;
+    const section = figma.createSection();
+    section.name = 'Kbd host';
+    page.appendChild(section);
+    const hosted = figma.createComponent();
+    hosted.name = 'Kbd';
+    section.appendChild(hosted);
+    page.selection = [section];
+    const fromSection = await fnCtx.selectionSetNames();
+    page.selection = [hosted];
+    const fromComp = await fnCtx.selectionSetNames();
+    const empty = figma.createSection();
+    empty.name = 'Empty host';
+    page.appendChild(empty);
+    page.selection = [empty];
+    const fromEmpty = await fnCtx.selectionSetNames();
+    page.selection = priorSel;
+    section.remove();
+    empty.remove();
+    assert(
+      JSON.stringify(fromSection) === JSON.stringify(['Kbd']),
+      `FC-PLUGIN-SECTION-SELECTION: selecting the host Section names the hosted COMPONENT (got ${JSON.stringify(fromSection)})`,
+    );
+    assert(
+      JSON.stringify(fromComp) === JSON.stringify(['Kbd']),
+      `FC-PLUGIN-SECTION-SELECTION: selecting the standalone COMPONENT still names it (got ${JSON.stringify(fromComp)})`,
+    );
+    assert(
+      JSON.stringify(fromEmpty) === JSON.stringify([]),
+      `FC-PLUGIN-SECTION-SELECTION: an empty Section still resolves nothing (got ${JSON.stringify(fromEmpty)})`,
+    );
+  }
   const structuredDefs = dump.Badge.propertyDefinitions ?? {};
   const structuredAxes = Object.keys(structuredDefs)
     .filter((key) => structuredDefs[key].type === 'VARIANT')
@@ -1011,7 +1097,41 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
     assert(d3.length === 1 && d3[0].what.endsWith('|fill') && d3[0].was.includes('"r":1') && d3[0].now.includes('"r":0'),
       'drift gate: handler diff pairs a FILL edit was→now while sibling facts on the same node stay quiet');
   }
-  console.log(`✔ drift round: canvasFingerprint stamped on ${sets.length} sets; untouched≡stamp, edited≠stamp, reverted≡stamp — Check Drift is mechanically grounded and LOCALIZES to the exact variant`);
+  // FC-PLUGIN-STANDALONE-DRIFT-SNAPSHOT: Flowbite Card/Kbd are COMPONENT
+  // roots. Check Drift used to report canvas-edited with empty
+  // editedVariants because the WHAT drill-down walked SET children only.
+  {
+    const snapFn = new Function(`${srcMatch[1]}; return dsCanvasSnapshot;`)();
+    const solo = figma.createComponent();
+    solo.name = 'Kbd';
+    solo.fills = [{ type: 'SOLID', color: { r: 0.9, g: 0.9, b: 0.9 }, opacity: 1 }];
+    root.children[0].appendChild(solo);
+    solo.setSharedPluginData('ds_contracts', 'contractId', 'flowbite.kbd');
+    const storedSoloSnap = snapFn(solo);
+    assert(storedSoloSnap.some((l) => l.includes('|fill|')), 'drift gate: standalone COMPONENT snapshot carries fill');
+    solo.setSharedPluginData('ds_contracts', 'canvasSnapshot', JSON.stringify(storedSoloSnap));
+    solo.setSharedPluginData('ds_contracts', 'canvasFingerprint', fp(solo));
+    const priorSoloFills = solo.fills;
+    solo.fills = [{ type: 'SOLID', color: { r: 1, g: 0, b: 1 }, opacity: 1 }];
+    assert(
+      fp(solo) !== solo.getSharedPluginData('ds_contracts', 'canvasFingerprint'),
+      'FC-PLUGIN-STANDALONE-DRIFT-SNAPSHOT: a standalone fill edit changes the fingerprint',
+    );
+    const freshSoloSnap = snapFn(solo);
+    const soloChanged = freshSoloSnap.filter((l) => !storedSoloSnap.includes(l));
+    assert(
+      soloChanged.some((l) => l.includes('|fill|') && l.includes('"r":1')),
+      'FC-PLUGIN-STANDALONE-DRIFT-SNAPSHOT: standalone snapshot names the edited fill',
+    );
+    const codeJsSolo = read('figma-sync/plugin/code.js');
+    assert(
+      /FC-PLUGIN-STANDALONE-DRIFT-SNAPSHOT[\s\S]{0,500}node\.type === 'COMPONENT'[\s\S]{0,200}pushEditedSnapshot\(node\)/.test(codeJsSolo),
+      'FC-PLUGIN-STANDALONE-DRIFT-SNAPSHOT: check-drift drills COMPONENT canvasSnapshot',
+    );
+    solo.fills = priorSoloFills;
+    solo.remove();
+  }
+  console.log(`✔ drift round: canvasFingerprint stamped on ${sets.length} sets; untouched≡stamp, edited≠stamp, reverted≡stamp — Check Drift is mechanically grounded and LOCALIZES to the exact variant (SET children + standalone COMPONENT)`);
 }
 
 // --- N+3. FOREIGN TOKEN SET — the JSON-only Generate for a foreign library -
@@ -1115,9 +1235,13 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   // SAME count and the same NAME inventory.
   // Wave 5 denominator (2026-08-05): 1543 → 2136 as carried Alert…TextField
   // contracts joined the mint surface.
+  // Wave 6 (2026-08-20): 2136 → 2144 — inventory moved with the token tree
+  // 2026-08-22: 2144 → 2143 — the promoter's authored-facts ledger pruned the
+  // orphan `imported.link.root.width` leaf (16889547 had unbound it by hand).
+  // regen that shipped the node-opacity unbind; both paths still agree.
   assert(
-    mockA.variables.length === 2136 && mockB.variables.length === 2136,
-    `both paths land 2136 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
+    mockA.variables.length === 2143 && mockB.variables.length === 2143,
+    `both paths land 2143 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
   );
   assert(
     aliasCountOf(mockA) === 134 && aliasCountOf(mockB) === 134,
@@ -1217,7 +1341,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   );
 
   console.log(
-    `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} + standalone ${soloA} with 2136 variables (134 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
+    `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} + standalone ${soloA} with 2143 variables (134 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
   );
 
   // --- NESTED MODES ARE REFUSED, NOT SILENTLY FLATTENED TO BASE -----------
@@ -1375,6 +1499,37 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
       src.reactions.length === 2,
       'prototype wiring: the refused write left the existing reactions intact (no partial application)',
     );
+
+    // dump v1.27: CHANGE_TO wiring is NAMED, not silent. The State axis
+    // recovers the matrix; dump does not invent onClick. Pin against the
+    // real #dump-source block (drift-guarded), on the MUI Button that
+    // this block already proved carries exactly 3 Default-plane sources.
+    {
+      const ui = read('figma-sync/plugin/ui.html');
+      const openTag = '<script type="text/plain" id="dump-source">';
+      const start = ui.indexOf(openTag);
+      assert(start >= 0, 'dump v1.27: ui.html carries the #dump-source block');
+      const source = ui.slice(start + openTag.length, ui.indexOf('</script>', start)).replace(/^\n/, '');
+      const scopedButton = source.replace(
+        /^const TARGET_SETS = \[[^\n]*\];$/m,
+        `const TARGET_SETS = ${JSON.stringify(['Button'])};`,
+      );
+      assert(scopedButton !== source, 'dump v1.27: TARGET_SETS scopes to Button');
+      const buttonDump = await runIn(mockA, scopedButton);
+      const rxNotes = (buttonDump._degradations || []).filter((d) => d.code === 'prototype-reactions-unsupported');
+      assert(
+        buttonDump._provenance && buttonDump._provenance.dumpVersion === '1.30',
+        `dump v1.30: provenance dumpVersion is 1.30 (got ${buttonDump._provenance && buttonDump._provenance.dumpVersion})`,
+      );
+      assert(
+        rxNotes.length === wiringA.length,
+        `dump v1.27 names every Button Default-plane reaction source (got ${rxNotes.length} vs ${wiringA.length} wired variants)`,
+      );
+      assert(
+        rxNotes.every((d) => d.message.includes('ON_HOVER→CHANGE_TO') && d.message.includes('ON_PRESS→CHANGE_TO') && d.message.includes('does not invent onClick')),
+        `dump v1.27 receipts name both CHANGE_TO wires and refuse onClick (got ${rxNotes.map((d) => d.message).join(' | ')})`,
+      );
+    }
 
     // 10. FINGERPRINT v5 sees reactions — the v4 blindness this round closes.
     const fpSrc = read('core/canvas-fingerprint.ts').match(/FINGERPRINT_SRC: string = `([\s\S]*?)`;/)[1];

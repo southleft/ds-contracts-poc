@@ -276,7 +276,9 @@ export interface DumpNode {
   /** Literal min/max sizing in px (dump v1.4, additive) — carried as
    *  min-width/min-height/max-width/max-height style facts (a drawn
    *  minHeight 44 is a tap-target fact). Bound min/max variables ride
-   *  `bound` instead. Absence in older dumps means not captured (their
+   *  `bound` instead. dump v1.30 omits 0 (Figma's FrameNode default);
+   *  propose also ignores a literal 0 so a pre-v1.30 dump cannot mint
+   *  `min-width: 0`. Absence in older dumps means not captured (their
    *  captures receipted the channel as min-max-size-unsupported). */
   minWidth?: number;
   minHeight?: number;
@@ -497,6 +499,22 @@ export interface DumpSet {
    *  returns as `content`. Absence means the set was not drawn by this
    *  pipeline (or predates v1.25). */
   propNames?: Record<string, string>;
+  /** The contract id this pipeline stamped (dump v1.26, additive), read from
+   *  `ds_contracts/contractId` on the set. Without it the reader slugs the
+   *  drawn set name and a pipeline-drawn Flowbite Alert returns as
+   *  `ds.alert-flowbite-alert`. Absence means the set was not drawn by this
+   *  pipeline (or predates v1.26). */
+  contractId?: string;
+  /** The emit specHash this pipeline stamped (dump v1.28, additive), read from
+   *  `ds_contracts/specHash` on the set. Without it a live dump cannot say
+   *  whether the set matches the current engine. Absence means the set was
+   *  not drawn by this pipeline (or predates v1.28). */
+  specHash?: string;
+  /** The authored contract version this pipeline stamped (dump v1.29,
+   *  additive), read from `ds_contracts/version`. Without it propose invents
+   *  `0.1.0`. Absence means the set was not drawn by this pipeline (or
+   *  predates v1.29). */
+  version?: string;
   statePreviewAxis?: {
     axis: string;
     default: string;
@@ -533,7 +551,9 @@ export interface DumpSet {
 
 /** One capture-side degradation receipt (dump v1.2) — the plugin dump's
  *  mirror of extract/figma/rest/map.ts MapDegradation: every channel the
- *  capture reads but cannot carry is NAMED, never dropped silently. */
+ *  capture reads but cannot carry is NAMED, never dropped silently.
+ *  dump v1.27 adds `prototype-reactions-unsupported` for CHANGE_TO /
+ *  ON_HOVER / ON_PRESS wiring (not inverted into `onClick`). */
 export interface DumpDegradation {
   code: string;
   /** setName:variant/child/… — same spelling as propose.ts note paths. */

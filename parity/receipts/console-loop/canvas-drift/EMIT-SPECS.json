@@ -1,0 +1,3503 @@
+{
+  "version": 1,
+  "kind": "console-loop-canvas-drift-emit-specs",
+  "lane": "first-party",
+  "mintedAt": "2026-08-22",
+  "mintedFrom": {
+    "generator": "scripts/console-loop-canvas-drift-mint-specs.mjs",
+    "source": "each components/<stem>.json receipt's own `script` path under the gitignored parity/receipts/console-loop/emitted/ — read once on the machine that has the files, distilled by scripts/console-loop-emit-spec.mjs",
+    "carries": "per stem: variant names, spec.bindings, spec.fixedWidth/fixedHeight, declared fontFamily set, collections the script creates; the lane's 01-tokens.js collections; sha256 + bytes of every script read"
+  },
+  "why": "parity/receipts/console-loop/emitted/*.js is a gitignored rebuild target, so the probe's EXPECTED side for the first-party stems was readable only on a machine that kept the leftover wave-numbered files (18 in-sync locally, 5 on a clean clone — CI red from 2026-08-13). This receipt is the committed input; the probe reads it and never the directory.",
+  "tokens": {
+    "script": "parity/receipts/console-loop/emitted/01-tokens.js",
+    "sha256": "9e392e4cdc9e8a64440257eb0b2c76ade96c35a664b14dceb2428ea6e5062bce",
+    "bytes": 52569,
+    "collections": [
+      "Primitives",
+      "Brand",
+      "Semantic"
+    ]
+  },
+  "stems": {
+    "accordion-item": {
+      "script": "parity/receipts/console-loop/emitted/02-accordionitem.js",
+      "sha256": "0eb27d8e6fc965213770a5dbc161ecd120472f4901423c0cd3ae116f32ebf0ef",
+      "bytes": 78807,
+      "collections": [],
+      "variants": [
+        {
+          "name": "State=Closed",
+          "bindings": {
+            "strokeWeight": "border-width/100",
+            "topLeftRadius": "radius/card",
+            "topRightRadius": "radius/card",
+            "bottomLeftRadius": "radius/card",
+            "bottomRightRadius": "radius/card"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "State=Open",
+          "bindings": {
+            "strokeWeight": "border-width/100",
+            "topLeftRadius": "radius/card",
+            "topRightRadius": "radius/card",
+            "bottomLeftRadius": "radius/card",
+            "bottomRightRadius": "radius/card"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "avatar-group": {
+      "script": "parity/receipts/console-loop/emitted/04-avatargroup.js",
+      "sha256": "813569efd0c166bce570823072b57d28ea05b38623e80eb516ade0d7f94b974f",
+      "bytes": 75782,
+      "collections": [],
+      "variants": [
+        {
+          "name": "AvatarGroup",
+          "bindings": {
+            "itemSpacing": "space/gap/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "avatar": {
+      "script": "parity/receipts/console-loop/emitted/02-avatar.js",
+      "sha256": "6c7116f14f7ca249744148d72373eae70016d469ad9c48cc66af861d75b34240",
+      "bytes": 64062,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Size=Small",
+          "bindings": {
+            "topLeftRadius": "radius/avatar",
+            "topRightRadius": "radius/avatar",
+            "bottomLeftRadius": "radius/avatar",
+            "bottomRightRadius": "radius/avatar"
+          },
+          "fixedWidth": {
+            "px": 24,
+            "varName": "size/avatar/sm"
+          },
+          "fixedHeight": {
+            "px": 24,
+            "varName": "size/avatar/sm"
+          },
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Size=Medium",
+          "bindings": {
+            "topLeftRadius": "radius/avatar",
+            "topRightRadius": "radius/avatar",
+            "bottomLeftRadius": "radius/avatar",
+            "bottomRightRadius": "radius/avatar"
+          },
+          "fixedWidth": {
+            "px": 32,
+            "varName": "size/avatar/md"
+          },
+          "fixedHeight": {
+            "px": 32,
+            "varName": "size/avatar/md"
+          },
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "badge": {
+      "script": "parity/receipts/console-loop/emitted/03-badge.js",
+      "sha256": "9e2b25d58926cc91859e88fe17355192661fa73306c23324ee60b0923bc8311e",
+      "bytes": 67592,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Variant=Info",
+          "bindings": {
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm",
+            "topLeftRadius": "radius/badge",
+            "topRightRadius": "radius/badge",
+            "bottomLeftRadius": "radius/badge",
+            "bottomRightRadius": "radius/badge"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Success",
+          "bindings": {
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm",
+            "topLeftRadius": "radius/badge",
+            "topRightRadius": "radius/badge",
+            "bottomLeftRadius": "radius/badge",
+            "bottomRightRadius": "radius/badge"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Warning",
+          "bindings": {
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm",
+            "topLeftRadius": "radius/badge",
+            "topRightRadius": "radius/badge",
+            "bottomLeftRadius": "radius/badge",
+            "bottomRightRadius": "radius/badge"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Danger",
+          "bindings": {
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm",
+            "topLeftRadius": "radius/badge",
+            "topRightRadius": "radius/badge",
+            "bottomLeftRadius": "radius/badge",
+            "bottomRightRadius": "radius/badge"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Error",
+          "bindings": {
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm",
+            "topLeftRadius": "radius/badge",
+            "topRightRadius": "radius/badge",
+            "bottomLeftRadius": "radius/badge",
+            "bottomRightRadius": "radius/badge"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "banner": {
+      "script": "parity/receipts/console-loop/emitted/05-banner.js",
+      "sha256": "1ee39fb15d0ac092dcea5d9a133705be04d30b47aaa7f477f75202ab05153231",
+      "bytes": 97080,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Status=Info, Container=Card",
+          "bindings": {
+            "topLeftRadius": "radius/banner/card",
+            "topRightRadius": "radius/banner/card",
+            "bottomLeftRadius": "radius/banner/card",
+            "bottomRightRadius": "radius/banner/card",
+            "itemSpacing": "space/gap/control",
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/lg",
+            "paddingBottom": "space/inset-y/lg"
+          },
+          "fixedWidth": {
+            "px": 640,
+            "varName": "size/banner/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Status=Info, Container=Section",
+          "bindings": {
+            "topLeftRadius": "radius/banner/section",
+            "topRightRadius": "radius/banner/section",
+            "bottomLeftRadius": "radius/banner/section",
+            "bottomRightRadius": "radius/banner/section",
+            "itemSpacing": "space/gap/control",
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/lg",
+            "paddingBottom": "space/inset-y/lg"
+          },
+          "fixedWidth": {
+            "px": 640,
+            "varName": "size/banner/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Status=Success, Container=Card",
+          "bindings": {
+            "topLeftRadius": "radius/banner/card",
+            "topRightRadius": "radius/banner/card",
+            "bottomLeftRadius": "radius/banner/card",
+            "bottomRightRadius": "radius/banner/card",
+            "itemSpacing": "space/gap/control",
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/lg",
+            "paddingBottom": "space/inset-y/lg"
+          },
+          "fixedWidth": {
+            "px": 640,
+            "varName": "size/banner/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Status=Success, Container=Section",
+          "bindings": {
+            "topLeftRadius": "radius/banner/section",
+            "topRightRadius": "radius/banner/section",
+            "bottomLeftRadius": "radius/banner/section",
+            "bottomRightRadius": "radius/banner/section",
+            "itemSpacing": "space/gap/control",
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/lg",
+            "paddingBottom": "space/inset-y/lg"
+          },
+          "fixedWidth": {
+            "px": 640,
+            "varName": "size/banner/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Status=Warning, Container=Card",
+          "bindings": {
+            "topLeftRadius": "radius/banner/card",
+            "topRightRadius": "radius/banner/card",
+            "bottomLeftRadius": "radius/banner/card",
+            "bottomRightRadius": "radius/banner/card",
+            "itemSpacing": "space/gap/control",
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/lg",
+            "paddingBottom": "space/inset-y/lg"
+          },
+          "fixedWidth": {
+            "px": 640,
+            "varName": "size/banner/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Status=Warning, Container=Section",
+          "bindings": {
+            "topLeftRadius": "radius/banner/section",
+            "topRightRadius": "radius/banner/section",
+            "bottomLeftRadius": "radius/banner/section",
+            "bottomRightRadius": "radius/banner/section",
+            "itemSpacing": "space/gap/control",
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/lg",
+            "paddingBottom": "space/inset-y/lg"
+          },
+          "fixedWidth": {
+            "px": 640,
+            "varName": "size/banner/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Status=Error, Container=Card",
+          "bindings": {
+            "topLeftRadius": "radius/banner/card",
+            "topRightRadius": "radius/banner/card",
+            "bottomLeftRadius": "radius/banner/card",
+            "bottomRightRadius": "radius/banner/card",
+            "itemSpacing": "space/gap/control",
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/lg",
+            "paddingBottom": "space/inset-y/lg"
+          },
+          "fixedWidth": {
+            "px": 640,
+            "varName": "size/banner/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Status=Error, Container=Section",
+          "bindings": {
+            "topLeftRadius": "radius/banner/section",
+            "topRightRadius": "radius/banner/section",
+            "bottomLeftRadius": "radius/banner/section",
+            "bottomRightRadius": "radius/banner/section",
+            "itemSpacing": "space/gap/control",
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/lg",
+            "paddingBottom": "space/inset-y/lg"
+          },
+          "fixedWidth": {
+            "px": 640,
+            "varName": "size/banner/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "blockquote": {
+      "script": "parity/receipts/console-loop/emitted/08-blockquote.js",
+      "sha256": "5c44c6f5d43b5a3dc3c7da2d375ef8c386ac84ffe76cace094b06145c8518799",
+      "bytes": 71635,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Blockquote",
+          "bindings": {
+            "strokeLeftWeight": "border/width/divider/strong",
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md",
+            "itemSpacing": "space/gap/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": []
+        }
+      ],
+      "stateVariants": []
+    },
+    "breadcrumb-item": {
+      "script": "parity/receipts/console-loop/emitted/09-breadcrumbitem.js",
+      "sha256": "0d4330ba3d3b922139c37bfb624f2eabf67798aba9164f3f9f96f7613a4d5950",
+      "bytes": 65306,
+      "collections": [],
+      "variants": [
+        {
+          "name": "BreadcrumbItem",
+          "bindings": {
+            "itemSpacing": "space/inset-y/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "breadcrumbs": {
+      "script": "parity/receipts/console-loop/emitted/10-breadcrumbs.js",
+      "sha256": "da6871e67d55df68e02584b4f5e6c3e88ac0c2a83fe7f01fc344f65290b65546",
+      "bytes": 72156,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Breadcrumbs",
+          "bindings": {
+            "itemSpacing": "space/inset-y/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": []
+        }
+      ],
+      "stateVariants": []
+    },
+    "button": {
+      "script": "parity/receipts/console-loop/emitted/04-button.js",
+      "sha256": "0b5e115997e46dc1190e734bf903c7e8f6e4460851a29adfbad05749c72ccd38",
+      "bytes": 106977,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Variant=Primary, Size=Medium",
+          "bindings": {
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Primary, Size=Small",
+          "bindings": {
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Primary, Size=Large",
+          "bindings": {
+            "paddingLeft": "space/inset-x/lg",
+            "paddingRight": "space/inset-x/lg",
+            "paddingTop": "space/inset-y/lg",
+            "paddingBottom": "space/inset-y/lg",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Secondary, Size=Medium",
+          "bindings": {
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Secondary, Size=Small",
+          "bindings": {
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Secondary, Size=Large",
+          "bindings": {
+            "paddingLeft": "space/inset-x/lg",
+            "paddingRight": "space/inset-x/lg",
+            "paddingTop": "space/inset-y/lg",
+            "paddingBottom": "space/inset-y/lg",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Danger, Size=Medium",
+          "bindings": {
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Danger, Size=Small",
+          "bindings": {
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Danger, Size=Large",
+          "bindings": {
+            "paddingLeft": "space/inset-x/lg",
+            "paddingRight": "space/inset-x/lg",
+            "paddingTop": "space/inset-y/lg",
+            "paddingBottom": "space/inset-y/lg",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Ghost, Size=Medium",
+          "bindings": {
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Ghost, Size=Small",
+          "bindings": {
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Ghost, Size=Large",
+          "bindings": {
+            "paddingLeft": "space/inset-x/lg",
+            "paddingRight": "space/inset-x/lg",
+            "paddingTop": "space/inset-y/lg",
+            "paddingBottom": "space/inset-y/lg",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": [
+        {
+          "name": "Variant=Primary, Size=Medium, State=Hover",
+          "bindings": {
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Secondary, Size=Medium, State=Hover",
+          "bindings": {
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Danger, Size=Medium, State=Hover",
+          "bindings": {
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Ghost, Size=Medium, State=Hover",
+          "bindings": {
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Primary, Size=Medium, State=Focus Visible",
+          "bindings": {
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control",
+            "strokeWeight": "border/width/focus"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Secondary, Size=Medium, State=Focus Visible",
+          "bindings": {
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control",
+            "strokeWeight": "border/width/focus"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Danger, Size=Medium, State=Focus Visible",
+          "bindings": {
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control",
+            "strokeWeight": "border/width/focus"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Ghost, Size=Medium, State=Focus Visible",
+          "bindings": {
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control",
+            "strokeWeight": "border/width/focus"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Primary, Size=Medium, State=Disabled",
+          "bindings": {
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Secondary, Size=Medium, State=Disabled",
+          "bindings": {
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Danger, Size=Medium, State=Disabled",
+          "bindings": {
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Ghost, Size=Medium, State=Disabled",
+          "bindings": {
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/control"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ]
+    },
+    "card": {
+      "script": "parity/receipts/console-loop/emitted/11-card.js",
+      "sha256": "bab3c967c258bdaa3f540aa339993892c67b0b6cca80fd19fb50840b5ccdda60",
+      "bytes": 76958,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Card",
+          "bindings": {
+            "strokeWeight": "border-width/100",
+            "topLeftRadius": "radius/card",
+            "topRightRadius": "radius/card",
+            "bottomLeftRadius": "radius/card",
+            "bottomRightRadius": "radius/card"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "chat-message-metadata": {
+      "script": "parity/receipts/console-loop/emitted/12-chatmessagemetadata.js",
+      "sha256": "4bd158eebe343d7c9dbdc1dc3a6b1e5c0c71ee3d5eb9883af32b9c3302cd59dd",
+      "bytes": 82244,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Status=Sent",
+          "bindings": {
+            "itemSpacing": "space/inset-y/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Status=Sending",
+          "bindings": {
+            "itemSpacing": "space/inset-y/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Status=Delivered",
+          "bindings": {
+            "itemSpacing": "space/inset-y/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Status=Read",
+          "bindings": {
+            "itemSpacing": "space/inset-y/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Status=Error",
+          "bindings": {
+            "itemSpacing": "space/inset-y/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "chat-message": {
+      "script": "parity/receipts/console-loop/emitted/13-chatmessage.js",
+      "sha256": "81cf139e2f95352d31f700852eafa6a7253af3f9687044da9c6b130cd35bd9cc",
+      "bytes": 84411,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Sender=Assistant",
+          "bindings": {
+            "itemSpacing": "space/gap/sm"
+          },
+          "fixedWidth": {
+            "px": 640,
+            "varName": "size/banner/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Sender=User",
+          "bindings": {
+            "itemSpacing": "space/gap/sm"
+          },
+          "fixedWidth": {
+            "px": 640,
+            "varName": "size/banner/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Sender=System",
+          "bindings": {
+            "itemSpacing": "space/gap/sm"
+          },
+          "fixedWidth": {
+            "px": 640,
+            "varName": "size/banner/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "chat-system-message": {
+      "script": "parity/receipts/console-loop/emitted/14-chatsystemmessage.js",
+      "sha256": "0e3731129c8c9dd3366cfbb9647f45f246006b33aac70cc97d5a1518b5d4ee14",
+      "bytes": 76626,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Variant=Default",
+          "bindings": {
+            "itemSpacing": "space/gap/sm"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Divider",
+          "bindings": {
+            "itemSpacing": "space/gap/sm"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "checkbox": {
+      "script": "parity/receipts/console-loop/emitted/07-checkbox.js",
+      "sha256": "8d3c2998f65f239dd5b9b25399690bf69d242e4e242b9fc48920920505ac6f1c",
+      "bytes": 80090,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Value=Unchecked, Size=Medium",
+          "bindings": {
+            "itemSpacing": "space/gap/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Value=Unchecked, Size=Small",
+          "bindings": {
+            "itemSpacing": "space/gap/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Value=Checked, Size=Medium",
+          "bindings": {
+            "itemSpacing": "space/gap/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Value=Checked, Size=Small",
+          "bindings": {
+            "itemSpacing": "space/gap/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Value=Indeterminate, Size=Medium",
+          "bindings": {
+            "itemSpacing": "space/gap/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Value=Indeterminate, Size=Small",
+          "bindings": {
+            "itemSpacing": "space/gap/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "citation": {
+      "script": "parity/receipts/console-loop/emitted/16-citation.js",
+      "sha256": "581118086f97e3d17c87b5cb3742f169e3e46f0e9fb92be6fcfec53897cf6db0",
+      "bytes": 65775,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Variant=Label",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "paddingLeft": "space/inset-x/xs",
+            "paddingRight": "space/inset-x/xs",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Number",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "paddingLeft": "space/inset-x/xs",
+            "paddingRight": "space/inset-x/xs",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "code": {
+      "script": "parity/receipts/console-loop/emitted/17-code.js",
+      "sha256": "1e1dddac4fbd5d8baae45484a005f38e93a2bf98250c9ea858e5ef3a8509ef5a",
+      "bytes": 61662,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Code",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "paddingLeft": "space/inset-x/xs",
+            "paddingRight": "space/inset-x/xs",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": []
+        }
+      ],
+      "stateVariants": []
+    },
+    "divider": {
+      "script": "parity/receipts/console-loop/emitted/08-divider.js",
+      "sha256": "37a991a44ab93730c8739d3eb1ead0f729d9bc58739c1f2bd9a7ffdf63892bc3",
+      "bytes": 61554,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Variant=Subtle",
+          "bindings": {},
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/divider/length"
+          },
+          "fixedHeight": {
+            "px": 1,
+            "varName": "border/width/divider/subtle"
+          },
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Strong",
+          "bindings": {},
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/divider/length"
+          },
+          "fixedHeight": {
+            "px": 2,
+            "varName": "border/width/divider/strong"
+          },
+          "fontFamilies": []
+        }
+      ],
+      "stateVariants": []
+    },
+    "empty-state": {
+      "script": "parity/receipts/console-loop/emitted/19-emptystate.js",
+      "sha256": "c940ee1534f5e60615f0f4b7a20eadcd81906415a2b44b4073c17086cb9b4529",
+      "bytes": 75702,
+      "collections": [],
+      "variants": [
+        {
+          "name": "EmptyState",
+          "bindings": {
+            "itemSpacing": "space/gap/sm",
+            "paddingLeft": "space/inset-x/lg",
+            "paddingRight": "space/inset-x/lg",
+            "paddingTop": "space/inset-x/lg",
+            "paddingBottom": "space/inset-x/lg"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "field": {
+      "script": "parity/receipts/console-loop/emitted/10-field.js",
+      "sha256": "bf0ea7bf15902838062b3e3df1087faa6d54788aeeaa4cefdb805a8a0a9e1d58",
+      "bytes": 60642,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Field",
+          "bindings": {
+            "itemSpacing": "space/inset-y/sm"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "heading": {
+      "script": "parity/receipts/console-loop/emitted/21-heading.js",
+      "sha256": "27697760b9d6e14b80edc2b6c13507efb8df5078f5901e47a35b9667b8e55111",
+      "bytes": 76621,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Level=H2, Size=Large",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Level=H2, Size=Small",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Level=H2, Size=Medium",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Level=H1, Size=Large",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Level=H1, Size=Small",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Level=H1, Size=Medium",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Level=H3, Size=Large",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Level=H3, Size=Small",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Level=H3, Size=Medium",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Level=H4, Size=Large",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Level=H4, Size=Small",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Level=H4, Size=Medium",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Level=H5, Size=Large",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Level=H5, Size=Small",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Level=H5, Size=Medium",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Level=H6, Size=Large",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Level=H6, Size=Small",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Level=H6, Size=Medium",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "icon-button": {
+      "script": "parity/receipts/console-loop/emitted/11-iconbutton.js",
+      "sha256": "4490c0835ffc7c53ba1bd1b9c59d5e2e34f408f0a07a5b0e63e01058c953b473",
+      "bytes": 70915,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Variant=Secondary, Size=Medium",
+          "bindings": {
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control"
+          },
+          "fixedWidth": {
+            "px": 36,
+            "varName": "size/icon-button/md"
+          },
+          "fixedHeight": {
+            "px": 36,
+            "varName": "size/icon-button/md"
+          },
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Secondary, Size=Small",
+          "bindings": {
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control"
+          },
+          "fixedWidth": {
+            "px": 28,
+            "varName": "size/icon-button/sm"
+          },
+          "fixedHeight": {
+            "px": 28,
+            "varName": "size/icon-button/sm"
+          },
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Secondary, Size=Large",
+          "bindings": {
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control"
+          },
+          "fixedWidth": {
+            "px": 44,
+            "varName": "size/icon-button/lg"
+          },
+          "fixedHeight": {
+            "px": 44,
+            "varName": "size/icon-button/lg"
+          },
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Primary, Size=Medium",
+          "bindings": {
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control"
+          },
+          "fixedWidth": {
+            "px": 36,
+            "varName": "size/icon-button/md"
+          },
+          "fixedHeight": {
+            "px": 36,
+            "varName": "size/icon-button/md"
+          },
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Primary, Size=Small",
+          "bindings": {
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control"
+          },
+          "fixedWidth": {
+            "px": 28,
+            "varName": "size/icon-button/sm"
+          },
+          "fixedHeight": {
+            "px": 28,
+            "varName": "size/icon-button/sm"
+          },
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Primary, Size=Large",
+          "bindings": {
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control"
+          },
+          "fixedWidth": {
+            "px": 44,
+            "varName": "size/icon-button/lg"
+          },
+          "fixedHeight": {
+            "px": 44,
+            "varName": "size/icon-button/lg"
+          },
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Ghost, Size=Medium",
+          "bindings": {
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control"
+          },
+          "fixedWidth": {
+            "px": 36,
+            "varName": "size/icon-button/md"
+          },
+          "fixedHeight": {
+            "px": 36,
+            "varName": "size/icon-button/md"
+          },
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Ghost, Size=Small",
+          "bindings": {
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control"
+          },
+          "fixedWidth": {
+            "px": 28,
+            "varName": "size/icon-button/sm"
+          },
+          "fixedHeight": {
+            "px": 28,
+            "varName": "size/icon-button/sm"
+          },
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Ghost, Size=Large",
+          "bindings": {
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control"
+          },
+          "fixedWidth": {
+            "px": 44,
+            "varName": "size/icon-button/lg"
+          },
+          "fixedHeight": {
+            "px": 44,
+            "varName": "size/icon-button/lg"
+          },
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Destructive, Size=Medium",
+          "bindings": {
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control"
+          },
+          "fixedWidth": {
+            "px": 36,
+            "varName": "size/icon-button/md"
+          },
+          "fixedHeight": {
+            "px": 36,
+            "varName": "size/icon-button/md"
+          },
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Destructive, Size=Small",
+          "bindings": {
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control"
+          },
+          "fixedWidth": {
+            "px": 28,
+            "varName": "size/icon-button/sm"
+          },
+          "fixedHeight": {
+            "px": 28,
+            "varName": "size/icon-button/sm"
+          },
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Destructive, Size=Large",
+          "bindings": {
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control"
+          },
+          "fixedWidth": {
+            "px": 44,
+            "varName": "size/icon-button/lg"
+          },
+          "fixedHeight": {
+            "px": 44,
+            "varName": "size/icon-button/lg"
+          },
+          "fontFamilies": []
+        }
+      ],
+      "stateVariants": []
+    },
+    "kbd": {
+      "script": "parity/receipts/console-loop/emitted/23-kbd.js",
+      "sha256": "1af1d2e04bfbe2c31e584cdb12920b3e13efa5e61a59e28b1c6052cb78a0928c",
+      "bytes": 61731,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Kbd",
+          "bindings": {
+            "strokeWeight": "border-width/100",
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "paddingLeft": "space/inset-x/xs",
+            "paddingRight": "space/inset-x/xs",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": []
+        }
+      ],
+      "stateVariants": []
+    },
+    "list-item": {
+      "script": "parity/receipts/console-loop/emitted/24-listitem.js",
+      "sha256": "5f66f7140e08c16ad69338b14144f79b9a64a41446c2d1baa6709d8d505f11a1",
+      "bytes": 75880,
+      "collections": [],
+      "variants": [
+        {
+          "name": "ListItem",
+          "bindings": {
+            "itemSpacing": "space/gap/sm",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "list": {
+      "script": "parity/receipts/console-loop/emitted/25-list.js",
+      "sha256": "9fd427b0fbe550e42567773ee065396c63f10ec30e3d680bfc72865042467128",
+      "bytes": 78259,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Density=Balanced",
+          "bindings": {
+            "strokeWeight": "border-width/100",
+            "topLeftRadius": "radius/card",
+            "topRightRadius": "radius/card",
+            "bottomLeftRadius": "radius/card",
+            "bottomRightRadius": "radius/card",
+            "itemSpacing": "space/list/balanced",
+            "paddingLeft": "space/inset-y/sm",
+            "paddingRight": "space/inset-y/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": []
+        },
+        {
+          "name": "Density=Compact",
+          "bindings": {
+            "strokeWeight": "border-width/100",
+            "topLeftRadius": "radius/card",
+            "topRightRadius": "radius/card",
+            "bottomLeftRadius": "radius/card",
+            "bottomRightRadius": "radius/card",
+            "itemSpacing": "space/list/compact",
+            "paddingLeft": "space/inset-y/sm",
+            "paddingRight": "space/inset-y/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": []
+        },
+        {
+          "name": "Density=Spacious",
+          "bindings": {
+            "strokeWeight": "border-width/100",
+            "topLeftRadius": "radius/card",
+            "topRightRadius": "radius/card",
+            "bottomLeftRadius": "radius/card",
+            "bottomRightRadius": "radius/card",
+            "itemSpacing": "space/list/spacious",
+            "paddingLeft": "space/inset-y/sm",
+            "paddingRight": "space/inset-y/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": []
+        }
+      ],
+      "stateVariants": []
+    },
+    "metadata-list-item": {
+      "script": "parity/receipts/console-loop/emitted/26-metadatalistitem.js",
+      "sha256": "5db807e75238bcae4257e2fb477074961f958d5234c9540a2cab2753a6872846",
+      "bytes": 74666,
+      "collections": [],
+      "variants": [
+        {
+          "name": "MetadataListItem",
+          "bindings": {
+            "itemSpacing": "space/gap/md"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "metadata-list": {
+      "script": "parity/receipts/console-loop/emitted/27-metadatalist.js",
+      "sha256": "99d355a02c3bc77c43fd8ce26a69b75631a1fe759c5fef8c76f886ceb6b7b0ad",
+      "bytes": 75603,
+      "collections": [],
+      "variants": [
+        {
+          "name": "MetadataList",
+          "bindings": {
+            "itemSpacing": "space/gap/sm"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "pagination": {
+      "script": "parity/receipts/console-loop/emitted/12-pagination.js",
+      "sha256": "d9c4222c7600940a616feefe89bdee216cb8acede2ead356baf24e77715c615e",
+      "bytes": 70888,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Variant=Pages",
+          "bindings": {
+            "itemSpacing": "space/gap/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Compact",
+          "bindings": {
+            "itemSpacing": "space/gap/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Variant=Dots",
+          "bindings": {
+            "itemSpacing": "space/gap/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "progress-bar": {
+      "script": "parity/receipts/console-loop/emitted/13-progressbar.js",
+      "sha256": "818a8de676aab46cc8ec7a235bf363a1a416f371dc745ea5e1148b15dfa9e225",
+      "bytes": 67156,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Variant=Accent",
+          "bindings": {},
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/progress/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Success",
+          "bindings": {},
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/progress/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Warning",
+          "bindings": {},
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/progress/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Error",
+          "bindings": {},
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/progress/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Neutral",
+          "bindings": {},
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/progress/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": []
+        }
+      ],
+      "stateVariants": []
+    },
+    "section": {
+      "script": "parity/receipts/console-loop/emitted/30-section.js",
+      "sha256": "0ab963d73b6548ea54118d1109cd3734f3e692e1d37e497243ec09147d5acb04",
+      "bytes": 73249,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Variant=Section",
+          "bindings": {
+            "strokeWeight": "border-width/100",
+            "topLeftRadius": "radius/card",
+            "topRightRadius": "radius/card",
+            "bottomLeftRadius": "radius/card",
+            "bottomRightRadius": "radius/card",
+            "itemSpacing": "space/gap/sm",
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-x/md",
+            "paddingBottom": "space/inset-x/md"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Muted",
+          "bindings": {
+            "strokeWeight": "border-width/100",
+            "topLeftRadius": "radius/card",
+            "topRightRadius": "radius/card",
+            "bottomLeftRadius": "radius/card",
+            "bottomRightRadius": "radius/card",
+            "itemSpacing": "space/gap/sm",
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-x/md",
+            "paddingBottom": "space/inset-x/md"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": []
+        }
+      ],
+      "stateVariants": []
+    },
+    "side-nav-item": {
+      "script": "parity/receipts/console-loop/emitted/31-sidenavitem.js",
+      "sha256": "c23b4fbc2ec4f9ab57d6d5ba85a4a0b3bc733174b4dc4e27ac13d893ef72fe47",
+      "bytes": 77760,
+      "collections": [],
+      "variants": [
+        {
+          "name": "State=Default",
+          "bindings": {
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/sm",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "State=Selected",
+          "bindings": {
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/sm",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "skeleton": {
+      "script": "parity/receipts/console-loop/emitted/14-skeleton.js",
+      "sha256": "bb1857df64badbfbedcd2c4d0680d42bf473efc13d99da83af0093e289d9f24c",
+      "bytes": 59884,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Variant=Text",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Rect",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Circle",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": []
+        }
+      ],
+      "stateVariants": []
+    },
+    "slider": {
+      "script": "parity/receipts/console-loop/emitted/15-slider.js",
+      "sha256": "9845f2e7b918b6d59ee1259deb9ddbf234d66bf0443bfbb58a5361b1f82f76fa",
+      "bytes": 61343,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Slider",
+          "bindings": {
+            "itemSpacing": "space/inset-y/sm"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/slider/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "spinner": {
+      "script": "parity/receipts/console-loop/emitted/16-spinner.js",
+      "sha256": "35872a9415390c6d004b21403a081f4dfccd09370af8744e2c80056dcbbb6f86",
+      "bytes": 57668,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Spinner",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": []
+        }
+      ],
+      "stateVariants": []
+    },
+    "status-dot": {
+      "script": "parity/receipts/console-loop/emitted/17-statusdot.js",
+      "sha256": "e755c53ac58cf5af8e4be82f558b14a18535437814b04ca8437135217a1762ee",
+      "bytes": 60349,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Variant=Neutral",
+          "bindings": {
+            "topLeftRadius": "radius/pill",
+            "topRightRadius": "radius/pill",
+            "bottomLeftRadius": "radius/pill",
+            "bottomRightRadius": "radius/pill"
+          },
+          "fixedWidth": {
+            "px": 8,
+            "varName": "size/dot"
+          },
+          "fixedHeight": {
+            "px": 8,
+            "varName": "size/dot"
+          },
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Success",
+          "bindings": {
+            "topLeftRadius": "radius/pill",
+            "topRightRadius": "radius/pill",
+            "bottomLeftRadius": "radius/pill",
+            "bottomRightRadius": "radius/pill"
+          },
+          "fixedWidth": {
+            "px": 8,
+            "varName": "size/dot"
+          },
+          "fixedHeight": {
+            "px": 8,
+            "varName": "size/dot"
+          },
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Warning",
+          "bindings": {
+            "topLeftRadius": "radius/pill",
+            "topRightRadius": "radius/pill",
+            "bottomLeftRadius": "radius/pill",
+            "bottomRightRadius": "radius/pill"
+          },
+          "fixedWidth": {
+            "px": 8,
+            "varName": "size/dot"
+          },
+          "fixedHeight": {
+            "px": 8,
+            "varName": "size/dot"
+          },
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Error",
+          "bindings": {
+            "topLeftRadius": "radius/pill",
+            "topRightRadius": "radius/pill",
+            "bottomLeftRadius": "radius/pill",
+            "bottomRightRadius": "radius/pill"
+          },
+          "fixedWidth": {
+            "px": 8,
+            "varName": "size/dot"
+          },
+          "fixedHeight": {
+            "px": 8,
+            "varName": "size/dot"
+          },
+          "fontFamilies": []
+        },
+        {
+          "name": "Variant=Accent",
+          "bindings": {
+            "topLeftRadius": "radius/pill",
+            "topRightRadius": "radius/pill",
+            "bottomLeftRadius": "radius/pill",
+            "bottomRightRadius": "radius/pill"
+          },
+          "fixedWidth": {
+            "px": 8,
+            "varName": "size/dot"
+          },
+          "fixedHeight": {
+            "px": 8,
+            "varName": "size/dot"
+          },
+          "fontFamilies": []
+        }
+      ],
+      "stateVariants": []
+    },
+    "switch": {
+      "script": "parity/receipts/console-loop/emitted/09-switch.js",
+      "sha256": "63f32f299a30e99160c212fcbf27c63e59067389844a2c581860987ea762ef03",
+      "bytes": 69834,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Value=Off",
+          "bindings": {
+            "itemSpacing": "space/gap/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Value=On",
+          "bindings": {
+            "itemSpacing": "space/gap/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "tab-list": {
+      "script": "parity/receipts/console-loop/emitted/20-tablist.js",
+      "sha256": "379bd8cbd1d065496c2b82b2f44a714e5157c37a03ff0050fd99ee0e100a6f8a",
+      "bytes": 58573,
+      "collections": [],
+      "variants": [
+        {
+          "name": "TabList",
+          "bindings": {
+            "itemSpacing": "space/inset-y/sm",
+            "strokeWeight": "border-width/100",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": []
+        }
+      ],
+      "stateVariants": []
+    },
+    "tab": {
+      "script": "parity/receipts/console-loop/emitted/19-tab.js",
+      "sha256": "ea6f9de98c5fa2eba41c2549884625392b539c06c9bde0aa71cde4773dd79b1d",
+      "bytes": 61769,
+      "collections": [],
+      "variants": [
+        {
+          "name": "State=Default",
+          "bindings": {
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md",
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "State=Selected",
+          "bindings": {
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md",
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "table-cell": {
+      "script": "parity/receipts/console-loop/emitted/39-tablecell.js",
+      "sha256": "0d86f5e081e4c6c0adfa7c4691433655e2a23b1f0b5ec28f6d1c563a22f722f8",
+      "bytes": 65418,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Density=Comfortable",
+          "bindings": {
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/table/cell-y/comfortable",
+            "paddingBottom": "space/table/cell-y/comfortable",
+            "minWidth": "size/table/cell-width"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Density=Compact",
+          "bindings": {
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/table/cell-y/compact",
+            "paddingBottom": "space/table/cell-y/compact",
+            "minWidth": "size/table/cell-width"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "table-header-cell": {
+      "script": "parity/receipts/console-loop/emitted/40-tableheadercell.js",
+      "sha256": "46efb22e14c207e4152b9b7ffcbe6d7121366bddcd19ef1cb0990a5cb8b2e45a",
+      "bytes": 65507,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Density=Comfortable",
+          "bindings": {
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/table/cell-y/comfortable",
+            "paddingBottom": "space/table/cell-y/comfortable",
+            "minWidth": "size/table/cell-width"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Density=Compact",
+          "bindings": {
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/table/cell-y/compact",
+            "paddingBottom": "space/table/cell-y/compact",
+            "minWidth": "size/table/cell-width"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "table-row": {
+      "script": "parity/receipts/console-loop/emitted/41-tablerow.js",
+      "sha256": "eb4d57f0e06d5597489b5a0335662794724f62cfa36237d0c1c25487acce01a1",
+      "bytes": 73982,
+      "collections": [],
+      "variants": [
+        {
+          "name": "State=Default",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": []
+        },
+        {
+          "name": "State=Selected",
+          "bindings": {},
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": []
+        }
+      ],
+      "stateVariants": []
+    },
+    "table": {
+      "script": "parity/receipts/console-loop/emitted/42-table.js",
+      "sha256": "6d9038c1670bbda404ec5b610ca04dfb7daf34aabc1f93e044161acf169fa5ea",
+      "bytes": 77225,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Density=Comfortable",
+          "bindings": {
+            "strokeWeight": "border-width/100",
+            "topLeftRadius": "radius/card",
+            "topRightRadius": "radius/card",
+            "bottomLeftRadius": "radius/card",
+            "bottomRightRadius": "radius/card"
+          },
+          "fixedWidth": {
+            "px": 480,
+            "varName": "size/table/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": []
+        },
+        {
+          "name": "Density=Compact",
+          "bindings": {
+            "strokeWeight": "border-width/100",
+            "topLeftRadius": "radius/card",
+            "topRightRadius": "radius/card",
+            "bottomLeftRadius": "radius/card",
+            "bottomRightRadius": "radius/card"
+          },
+          "fixedWidth": {
+            "px": 480,
+            "varName": "size/table/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": []
+        }
+      ],
+      "stateVariants": []
+    },
+    "text-area": {
+      "script": "parity/receipts/console-loop/emitted/43-textarea.js",
+      "sha256": "e71c1195a725a998c96197dde825d12afb3777337190c665bcfbf9354e5b0642",
+      "bytes": 75460,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Size=Medium",
+          "bindings": {
+            "itemSpacing": "space/inset-y/sm"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Size=Small",
+          "bindings": {
+            "itemSpacing": "space/inset-y/sm"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Size=Large",
+          "bindings": {
+            "itemSpacing": "space/inset-y/sm"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "text-field": {
+      "script": "parity/receipts/console-loop/emitted/10-textfield.js",
+      "sha256": "780344d571811d4ad18047dadd9bc81313ebe5dc6b499798584891e8c357dc96",
+      "bytes": 73755,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Size=Medium",
+          "bindings": {
+            "itemSpacing": "space/inset-y/sm"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Size=Small",
+          "bindings": {
+            "itemSpacing": "space/inset-y/sm"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Size=Large",
+          "bindings": {
+            "itemSpacing": "space/inset-y/sm"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "toast": {
+      "script": "parity/receipts/console-loop/emitted/22-toast.js",
+      "sha256": "63461f9c5fc8cde4b494a71f4f8aee9895ebdea15215f59177e4abaa41d59b08",
+      "bytes": 60094,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Type=Info",
+          "bindings": {
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/sm",
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": []
+        },
+        {
+          "name": "Type=Error",
+          "bindings": {
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/sm",
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": []
+        }
+      ],
+      "stateVariants": []
+    },
+    "token": {
+      "script": "parity/receipts/console-loop/emitted/11-token.js",
+      "sha256": "fb79616b978a50fda71c06fa299e4d64aee556581bff1bafd18d9842f75d0222",
+      "bytes": 130008,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Color=Default, Size=Medium",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/xs",
+            "paddingRight": "space/inset-x/xs",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Default, Size=Small",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-y/sm",
+            "paddingRight": "space/inset-y/sm",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Default, Size=Large",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Red, Size=Medium",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/xs",
+            "paddingRight": "space/inset-x/xs",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Red, Size=Small",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-y/sm",
+            "paddingRight": "space/inset-y/sm",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Red, Size=Large",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Orange, Size=Medium",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/xs",
+            "paddingRight": "space/inset-x/xs",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Orange, Size=Small",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-y/sm",
+            "paddingRight": "space/inset-y/sm",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Orange, Size=Large",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Yellow, Size=Medium",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/xs",
+            "paddingRight": "space/inset-x/xs",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Yellow, Size=Small",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-y/sm",
+            "paddingRight": "space/inset-y/sm",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Yellow, Size=Large",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Green, Size=Medium",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/xs",
+            "paddingRight": "space/inset-x/xs",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Green, Size=Small",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-y/sm",
+            "paddingRight": "space/inset-y/sm",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Green, Size=Large",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Teal, Size=Medium",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/xs",
+            "paddingRight": "space/inset-x/xs",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Teal, Size=Small",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-y/sm",
+            "paddingRight": "space/inset-y/sm",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Teal, Size=Large",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Cyan, Size=Medium",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/xs",
+            "paddingRight": "space/inset-x/xs",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Cyan, Size=Small",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-y/sm",
+            "paddingRight": "space/inset-y/sm",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Cyan, Size=Large",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Blue, Size=Medium",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/xs",
+            "paddingRight": "space/inset-x/xs",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Blue, Size=Small",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-y/sm",
+            "paddingRight": "space/inset-y/sm",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Blue, Size=Large",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Purple, Size=Medium",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/xs",
+            "paddingRight": "space/inset-x/xs",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Purple, Size=Small",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-y/sm",
+            "paddingRight": "space/inset-y/sm",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Purple, Size=Large",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Pink, Size=Medium",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/xs",
+            "paddingRight": "space/inset-x/xs",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Pink, Size=Small",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-y/sm",
+            "paddingRight": "space/inset-y/sm",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Pink, Size=Large",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Gray, Size=Medium",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/xs",
+            "paddingRight": "space/inset-x/xs",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Gray, Size=Small",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-y/sm",
+            "paddingRight": "space/inset-y/sm",
+            "paddingTop": "space/inset-y/xs",
+            "paddingBottom": "space/inset-y/xs"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "Color=Gray, Size=Large",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "toolbar": {
+      "script": "parity/receipts/console-loop/emitted/47-toolbar.js",
+      "sha256": "62e41eb2fe77697ffacda845ccfa356ec417c98d7bebdc08b04e7392d258f1ff",
+      "bytes": 77603,
+      "collections": [],
+      "variants": [
+        {
+          "name": "Size=Medium",
+          "bindings": {
+            "minHeight": "size/toolbar/md",
+            "strokeWeight": "border-width/100",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/md",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm"
+          },
+          "fixedWidth": {
+            "px": 640,
+            "varName": "size/banner/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": []
+        },
+        {
+          "name": "Size=Small",
+          "bindings": {
+            "minHeight": "size/toolbar/sm",
+            "strokeWeight": "border-width/100",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/md",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm"
+          },
+          "fixedWidth": {
+            "px": 640,
+            "varName": "size/banner/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": []
+        },
+        {
+          "name": "Size=Large",
+          "bindings": {
+            "minHeight": "size/toolbar/lg",
+            "strokeWeight": "border-width/100",
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/gap/md",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/sm",
+            "paddingBottom": "space/inset-y/sm"
+          },
+          "fixedWidth": {
+            "px": 640,
+            "varName": "size/banner/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": []
+        }
+      ],
+      "stateVariants": []
+    },
+    "top-nav-item": {
+      "script": "parity/receipts/console-loop/emitted/48-topnavitem.js",
+      "sha256": "e2e161588b19388f9f7970310efb99cdefdbe85e8736d740a6c110e5309391dd",
+      "bytes": 76254,
+      "collections": [],
+      "variants": [
+        {
+          "name": "State=Default",
+          "bindings": {
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        },
+        {
+          "name": "State=Selected",
+          "bindings": {
+            "topLeftRadius": "radius/control",
+            "topRightRadius": "radius/control",
+            "bottomLeftRadius": "radius/control",
+            "bottomRightRadius": "radius/control",
+            "itemSpacing": "space/inset-y/sm",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md"
+          },
+          "fixedWidth": null,
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    },
+    "top-nav": {
+      "script": "parity/receipts/console-loop/emitted/49-topnav.js",
+      "sha256": "0146085cd3e6f2ac911b8e3a7148138032027d5fa3e85c8190eb0632b5cbfded",
+      "bytes": 72720,
+      "collections": [],
+      "variants": [
+        {
+          "name": "TopNav",
+          "bindings": {
+            "strokeWeight": "border-width/100",
+            "itemSpacing": "space/gap/md",
+            "paddingLeft": "space/inset-x/md",
+            "paddingRight": "space/inset-x/md",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md"
+          },
+          "fixedWidth": {
+            "px": 640,
+            "varName": "size/banner/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": []
+        }
+      ],
+      "stateVariants": []
+    },
+    "typeahead-item": {
+      "script": "parity/receipts/console-loop/emitted/50-typeaheaditem.js",
+      "sha256": "f324b8662e02c862bbe1622d35f1612c8fcb4430c509695795519b528863359b",
+      "bytes": 75654,
+      "collections": [],
+      "variants": [
+        {
+          "name": "TypeaheadItem",
+          "bindings": {
+            "topLeftRadius": "radius/100",
+            "topRightRadius": "radius/100",
+            "bottomLeftRadius": "radius/100",
+            "bottomRightRadius": "radius/100",
+            "itemSpacing": "space/gap/sm",
+            "paddingLeft": "space/inset-x/sm",
+            "paddingRight": "space/inset-x/sm",
+            "paddingTop": "space/inset-y/md",
+            "paddingBottom": "space/inset-y/md"
+          },
+          "fixedWidth": {
+            "px": 320,
+            "varName": "size/card/width"
+          },
+          "fixedHeight": null,
+          "fontFamilies": [
+            "Inter"
+          ]
+        }
+      ],
+      "stateVariants": []
+    }
+  }
+}

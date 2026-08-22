@@ -37,7 +37,7 @@
        "counterSizing": "AUTO"
       },
       "fill": {
-       "hex": "#f04438"
+       "hex": "f04438"
       },
       "abs": {
        "x": 8,
@@ -71,7 +71,7 @@
        "counterSizing": "AUTO"
       },
       "fill": {
-       "hex": "#12b76a"
+       "hex": "12b76a"
       },
       "abs": {
        "x": 96,

@@ -6,6 +6,7 @@ const COMPONENTS = [
   {
     "setName": "Button",
     "contractId": "flowbite.button",
+    "version": "0.2.0",
     "anchorKey": null,
     "description": "Button — generated from contract flowbite.button v0.2.0 †",
     "isSet": true,
@@ -3547,7 +3548,13 @@ async function buildNode(spec, registry) {
   }
   node.name = spec.name;
   // Node opacity (dump v1.2 channel): applies to every node kind.
-  if (typeof spec.opacity === 'number') node.opacity = spec.opacity;
+  // Unbind first: a stale OPACITY variable (repo 0-1 token bound into
+  // Figma's percent-scaled field) wins over the literal and paints 0.5
+  // as 0.5% — the Disabled wash (visual-parity Button, 93.91% masked).
+  if (typeof spec.opacity === 'number') {
+    try { if (node.boundVariables && node.boundVariables.opacity) node.setBoundVariable('opacity', null); } catch (e) { /* not bindable */ }
+    node.opacity = spec.opacity;
+  }
   if (spec.visibleProp) {
     registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
   }
@@ -3808,6 +3815,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -4045,6 +4053,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -4317,6 +4326,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',

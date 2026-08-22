@@ -103,3 +103,14 @@ jobs:
       - name: catalog:visual:check
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run catalog:visual:check
+
+      # The Figma half of `npm run maintain` (extract:figma:visual:catalog):
+      # Figma's own PNG of every catalog variant through the images API,
+      # scored against our render. Needs the FIGMA_TOKEN secret (set
+      # 2026-08-22); on a clean runner there is no PNG cache, so every cell
+      # is fetched — that is the point of running it here.
+      - name: maintain:visual (Figma-rendered catalog cells vs ours; needs FIGMA_TOKEN)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env:
+          FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+        run: npm run maintain:visual
