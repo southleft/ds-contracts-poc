@@ -144,6 +144,24 @@ export const pascalComponentName = (setName: string): string => {
   return /^[A-Za-z]/.test(pascal) ? pascal : `C${pascal || 'omponent'}`;
 };
 
+/** Emit appends ` (${contractId})` when a foreign same-name set already
+ *  exists (core/emit-figma-script.ts displayName). Propose used to
+ *  PascalCase the whole drawn name, reminting Alert → AlertFlowbiteAlert
+ *  (FC-DUMP-PROPOSE-NAME-PARENTHETICAL). Strip only a suffix that matches
+ *  the stamped id; an unstamped or mismatched parenthetical stays as drawn. */
+export const drawnContractName = (
+  setName: string,
+  stampedContractId: string | null,
+): { name: string; strippedSuffix: boolean } => {
+  if (stampedContractId) {
+    const suffix = ` (${stampedContractId})`;
+    if (setName.endsWith(suffix) && setName.length > suffix.length) {
+      return { name: pascalComponentName(setName.slice(0, -suffix.length)), strippedSuffix: true };
+    }
+  }
+  return { name: pascalComponentName(setName), strippedSuffix: false };
+};
+
 /** True when a dump's PRODUCER captures node visibility (`hidden`, dump
  *  v1.1+) — the provenance names its dump revision (`dumpVersion` since
  *  v1.5; the note string names v1.1–v1.4). With a capturing producer,
@@ -167,6 +185,43 @@ export interface MinimalChildContract {
    *  props from enums — optional so pre-P9 callers keep passing slices. */
   props: Array<{ name: string; type?: unknown; bindings: { figma: { property?: string; values?: Record<string, string> } } }>;
   anchors?: { figma?: { componentSetKey?: string | null } };
+  /** Optional authored anatomy — hop-4 uses it to recover a stamped
+   *  Disabled opacity token instead of minting a dump-slug
+   *  (FC-DUMP-PROPOSE-DISABLED-OPACITY-MINTED), matching unbound
+   *  padding literals instead of dump-slug mints
+   *  (FC-DUMP-PROPOSE-PADDING-LITERAL-MINTED), and matching unbound
+   *  DROP_SHADOW stacks instead of dump-slug mints
+   *  (FC-DUMP-PROPOSE-SHADOW-MINTED). */
+  anatomy?: {
+    root?: MinimalAnatomyPart;
+  };
+}
+
+/** Narrow a JSON-loaded or freshly proposed contract record to the
+ *  MinimalChildContract slice the session registry keys on. Checks the two
+ *  load-bearing fields (`id` string, `props` array) and refuses by name
+ *  otherwise — a silent cast would let a malformed record reach the
+ *  sibling-link path and surface as a mystery downstream. */
+export function asMinimalChildContract(x: unknown): MinimalChildContract {
+  const rec = x as { id?: unknown; props?: unknown } | null;
+  if (!rec || typeof rec !== 'object') {
+    throw new Error('asMinimalChildContract: expected a contract object');
+  }
+  if (typeof rec.id !== 'string') {
+    throw new Error('asMinimalChildContract: contract is missing a string `id`');
+  }
+  if (!Array.isArray(rec.props)) {
+    throw new Error(`asMinimalChildContract: contract ${rec.id} is missing a \`props\` array`);
+  }
+  return rec as MinimalChildContract;
+}
+
+/** Nested authored part slice used by stamped recoveries. */
+export interface MinimalAnatomyPart {
+  states?: Record<string, Record<string, string>>;
+  tokens?: Record<string, string>;
+  literals?: Record<string, string>;
+  parts?: Record<string, MinimalAnatomyPart>;
 }
 
 // ---------------------------------------------------------------------------
@@ -905,6 +960,25 @@ function unifyRefs(
   };
 }
 
+/** Unify dump-stamped slash names (fontSizeVar / fontWeightVar / lineHeightVar)
+ *  the same way bound layout paints unify. One name → that ref; many names
+ *  that spell one enum axis → a substituted ref. Anything else stays
+ *  undefined so the numeric mint path can still run. */
+function unifyStampedTextVar(
+  occs: Array<{ variant: string; node: DumpNode }>,
+  pick: (text: NonNullable<DumpNode['text']>) => string | undefined,
+  axes: Axis[],
+): string | undefined {
+  const u = unifyRefs(
+    occs.map((o) => {
+      const raw = o.node.text ? pick(o.node.text) : undefined;
+      return { variant: o.variant, path: raw ? dotPath(raw) : undefined };
+    }),
+    axes,
+  );
+  return u.kind === 'ref' ? u.ref : undefined;
+}
+
 // ---------------------------------------------------------------------------
 // Proposal state
 // ---------------------------------------------------------------------------
@@ -1010,6 +1084,40 @@ export function assertExactProjection<T extends ExactVerifiedStatus>(
   );
 }
 
+/** The schema's contract-id grammar. A dump stamp that fails this is ignored
+ *  — same as a malformed semantics stamp — so a bad id can only fall back to
+ *  the name-derived slug, never assert a bogus identity. */
+const CONTRACT_ID_RE = /^[a-z][a-z0-9-]*\.[a-z][a-z0-9-]*$/;
+
+/** dump v1.26 — the contract id this pipeline stamped. Shape-checked here;
+ *  anything malformed reads as absent. */
+function readStampedContractId(set: { contractId?: unknown }): string | null {
+  const raw = (set as { contractId?: unknown }).contractId;
+  if (typeof raw !== 'string') return null;
+  const id = raw.trim();
+  return CONTRACT_ID_RE.test(id) ? id : null;
+}
+
+/** dump v1.28 — the emit specHash this pipeline stamped. Digits only; a
+ *  malformed stamp reads as absent so a bad marker cannot invent a hash. */
+function readStampedSpecHash(set: { specHash?: unknown }): string | null {
+  const raw = (set as { specHash?: unknown }).specHash;
+  if (typeof raw !== 'string') return null;
+  const hash = raw.trim();
+  return /^\d+$/.test(hash) ? hash : null;
+}
+
+/** dump v1.29 — the authored contract version this pipeline stamped.
+ *  Semver-shaped only; a malformed stamp reads as absent so propose keeps
+ *  inventing `0.1.0` rather than asserting junk. */
+const CONTRACT_VERSION_RE = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/;
+function readStampedVersion(set: { version?: unknown }): string | null {
+  const raw = (set as { version?: unknown }).version;
+  if (typeof raw !== 'string') return null;
+  const version = raw.trim();
+  return CONTRACT_VERSION_RE.test(version) ? version : null;
+}
+
 /** Read the set's declared sparse State-preview shape. Shape-checked here and
  *  re-validated against the real axes by core/exact-projection.ts; anything
  *  malformed reads as absent, so a bad marker can only make the pipeline
@@ -1094,33 +1202,46 @@ function exactRowsFromProposedContract(
   // alone made a faithful promotion look like a 12-row answer to a 24-row
   // set, which is the second half of the emitter/inverter disagreement.
   //
-  // The shape comes from the SET's own declaration, and this expansion only
-  // runs when the proposed contract actually opted back in AND its promoted
-  // states match the declared ones — a proposal that drops a state falls
-  // through to the bare cartesian and is refused, never silently accepted.
+  // The shape comes from the SET's own declaration. Reconstruct whenever the
+  // proposed API VARIANT axes can host that matrix, and model the rows the
+  // emitter WILL draw: figmaStatePreviews on, one preview row per PROMOTED
+  // state (contract.states through statePreviewLabel) per PRIMARY value, with
+  // every other axis pinned. Modelling the DECLARED states instead made a
+  // proposal that recovered none of the Hover / Active / Focus Visible cells
+  // read verified-exact 45/45 while its re-emit drew 40 (or 25) rows
+  // (FC-PROPOSE-SPARSE-STATE). A declared state the proposal did not recover
+  // is an EXACT_ROWS_MISSING tuple naming those cells; inventing the preview
+  // axis as a VARIANT prop, dropping a real API axis, or not opting back into
+  // previews falls through to the bare cartesian and is refused.
   const sparse = descriptor;
-  if (sparse && contract.figmaStatePreviews === true) {
-    const contractStates = Array.isArray(contract.states)
-      ? (contract.states as unknown[]).filter((s): s is string => typeof s === 'string')
-      : [];
-    const declared = [...sparse.states].sort();
-    const fromContract = contractStates.map((s) => statePreviewLabel(s)).sort();
-    const covers = declared.every((s) => fromContract.includes(s));
-    const primaryAxis = axes.find((a) => a.property === sparse.primary);
+  const contractStates = Array.isArray(contract.states)
+    ? (contract.states as unknown[]).filter((s): s is string => typeof s === 'string')
+    : [];
+  if (sparse && contract.figmaStatePreviews === true && contractStates.length > 0) {
+    const inventedPreviewAxis = axes.some((a) => a.property === sparse.axis);
+    const apiAxes = axes.filter((a) => a.property !== sparse.axis);
+    const primaryAxis = apiAxes.find((a) => a.property === sparse.primary);
     const pinnedOk = Object.entries(sparse.pinned).every(([property, value]) => {
-      const axis = axes.find((a) => a.property === property);
+      const axis = apiAxes.find((a) => a.property === property);
       return axis ? axis.values.includes(value) : false;
     });
-    if (covers && pinnedOk && (sparse.primary === null || primaryAxis)) {
-      const rows: Record<string, string>[] = tuples.map((t) => ({
+    if (!inventedPreviewAxis && pinnedOk && (sparse.primary === null || primaryAxis)) {
+      const drawnStates = [...new Set(contractStates.map((s) => statePreviewLabel(s)))];
+      let apiTuples: Record<string, string>[] = [{}];
+      for (const axis of apiAxes) {
+        apiTuples = apiTuples.flatMap((tuple) =>
+          axis.values.map((value) => ({ ...tuple, [axis.property]: value })),
+        );
+      }
+      const rows: Record<string, string>[] = apiTuples.map((t) => ({
         ...t,
         [sparse.axis]: sparse.default,
       }));
       const primaryValues = primaryAxis ? primaryAxis.values : [null];
-      for (const state of sparse.states) {
+      for (const state of drawnStates) {
         for (const value of primaryValues) {
           const row: Record<string, string> = { [sparse.axis]: state };
-          for (const axis of axes) {
+          for (const axis of apiAxes) {
             row[axis.property] =
               primaryAxis && axis.property === primaryAxis.property
                 ? (value as string)
@@ -2030,7 +2151,13 @@ function invertNodeTokens(
     if (rs[0] !== undefined && rs.every((r) => refKey(r) === refKey(rs[0]))) carry('border-radius', rs[0]);
     else ctx.notes.push(`${where}: corner radii bindings are not uniform — border-radius not representable, review`);
   }
-  const weights = ['strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight'];
+  const WEIGHT_SIDES = [
+    ['border-top-width', 'strokeTopWeight'],
+    ['border-right-width', 'strokeRightWeight'],
+    ['border-bottom-width', 'strokeBottomWeight'],
+    ['border-left-width', 'strokeLeftWeight'],
+  ] as const;
+  const weights = WEIGHT_SIDES.map(([, field]) => field);
   if (weights.some((w) => fields.has(w)) || fields.has('strokeWeight')) {
     const w = fields.has('strokeWeight')
       ? f('strokeWeight')
@@ -2039,7 +2166,17 @@ function invertNodeTokens(
           return ws[0] !== undefined && ws.every((x) => refKey(x) === refKey(ws[0])) ? ws[0] : undefined;
         })();
     if (w) carry(strokeWidthProp, w);
-    else ctx.notes.push(`${where}: stroke weight bindings are not uniform — ${strokeWidthProp} not representable, review`);
+    else if (strokeVocab === 'border' && weights.some((field) => fields.has(field))) {
+      // Twin of PAD_PAIRS: per-side names (border-top-width ≠ border-right-width)
+      // are not one border-width, but they are still facts. Naming-and-dropping
+      // them was FC-DUMP-PROPOSE-STROKE-WEIGHT-SIDES (Flowbite Button).
+      for (const [cssProp, field] of WEIGHT_SIDES) carry(cssProp, f(field));
+      ctx.notes.push(
+        `${where}: stroke weight bindings differ per side — ${strokeWidthProp} is not representable; carried as separate ${WEIGHT_SIDES.map(([p]) => p).join('/')} channels`,
+      );
+    } else {
+      ctx.notes.push(`${where}: stroke weight bindings are not uniform — ${strokeWidthProp} not representable, review`);
+    }
   }
   carry('gap', f('itemSpacing'));
   // The root's bound width comes back as max-width (a component's outer
@@ -2173,6 +2310,9 @@ function invertNodeTokens(
     const pick = (n: DumpNode) => n[field];
     const withVal = m.occ.filter((o) => typeof pick(o.node) === 'number');
     if (withVal.length === 0) continue;
+    // dump v1.30 / FC-DUMP-MINMAX-ZERO-INVENTED: Figma's default 0 is not a
+    // tap-target fact. A pre-v1.30 dump that wrote 0 must not mint it.
+    if (withVal.every((o) => pick(o.node) === 0)) continue;
     if (tokens[cssProp] !== undefined) {
       ctx.notes.push(
         `${where}: literal ${field} also present where "${cssProp}" already carries a binding — literal NAMED, not minted (review)`,
@@ -2267,6 +2407,139 @@ const shadowCss = (e: DumpEffect): string => {
   return `${px(e.offset?.x ?? 0)} ${px(e.offset?.y ?? 0)} ${px(e.radius ?? 0)}${spread} ${paintCssHex(e.color ?? { hex: '000000' })}`;
 };
 
+const splitShadowLayers = (value: string): string[] => {
+  const out: string[] = [];
+  let depth = 0;
+  let cur = '';
+  for (const ch of value) {
+    if (ch === '(') depth += 1;
+    else if (ch === ')') depth -= 1;
+    else if (ch === ',' && depth === 0) {
+      if (cur.trim()) out.push(cur.trim());
+      cur = '';
+      continue;
+    }
+    cur += ch;
+  }
+  if (cur.trim()) out.push(cur.trim());
+  return out;
+};
+
+const parseCssRgba = (
+  raw: string,
+): { r: number; g: number; b: number; a: number } | undefined => {
+  const hex = raw.match(/^#([0-9a-fA-F]{3,8})$/);
+  if (hex) {
+    let h = hex[1];
+    if (h.length === 3) h = `${h[0]}${h[0]}${h[1]}${h[1]}${h[2]}${h[2]}`;
+    if (h.length === 4) h = `${h[0]}${h[0]}${h[1]}${h[1]}${h[2]}${h[2]}${h[3]}${h[3]}`;
+    if (h.length !== 6 && h.length !== 8) return undefined;
+    const r = parseInt(h.slice(0, 2), 16);
+    const g = parseInt(h.slice(2, 4), 16);
+    const b = parseInt(h.slice(4, 6), 16);
+    const a = h.length === 8 ? parseInt(h.slice(6, 8), 16) / 255 : 1;
+    return { r, g, b, a };
+  }
+  const rgb = raw.match(/^rgba?\(([^)]*)\)$/i);
+  if (!rgb) return undefined;
+  const parts = rgb[1].split(',').map((s) => s.trim());
+  if (parts.length < 3) return undefined;
+  const [r, g, b] = parts.slice(0, 3).map((p) => parseFloat(p));
+  const a = parts[3] !== undefined ? parseFloat(parts[3]) : 1;
+  if ([r, g, b, a].some((n) => Number.isNaN(n))) return undefined;
+  return { r, g, b, a };
+};
+
+const parseShadowLayer = (
+  layer: string,
+): { x: number; y: number; radius: number; spread: number; r: number; g: number; b: number; a: number } | undefined => {
+  const colorMatch = layer.match(/(#[0-9a-fA-F]{3,8}|rgba?\([^)]*\))/);
+  if (!colorMatch) return undefined;
+  const color = parseCssRgba(colorMatch[1]);
+  if (!color) return undefined;
+  const lengths = layer
+    .replace(colorMatch[1], '')
+    .replace(/(^| )inset( |$)/, ' ')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+  if (lengths.length < 2 || lengths.length > 4) return undefined;
+  const px = lengths.map((l) => {
+    const m = l.match(/^(-?[\d.]+)(px)?$/);
+    return m ? parseFloat(m[1]) : NaN;
+  });
+  if (px.some(Number.isNaN)) return undefined;
+  return {
+    x: px[0],
+    y: px[1],
+    radius: px[2] ?? 0,
+    spread: px[3] ?? 0,
+    ...color,
+  };
+};
+
+/** Dump hex stacks and authored rgba stacks are the same DROP_SHADOW.
+ *  Alpha 0.1 vs #..1a (26/255) is Figma's byte rounding — not a different token. */
+const shadowStacksEqual = (a: string, b: string): boolean => {
+  const la = splitShadowLayers(a);
+  const lb = splitShadowLayers(b);
+  if (la.length === 0 || la.length !== lb.length) return false;
+  for (let i = 0; i < la.length; i++) {
+    const pa = parseShadowLayer(la[i]);
+    const pb = parseShadowLayer(lb[i]);
+    if (!pa || !pb) return false;
+    if (pa.x !== pb.x || pa.y !== pb.y || pa.radius !== pb.radius || pa.spread !== pb.spread) return false;
+    if (Math.abs(pa.r - pb.r) > 1 || Math.abs(pa.g - pb.g) > 1 || Math.abs(pa.b - pb.b) > 1) return false;
+    if (Math.abs(pa.a - pb.a) > 0.02) return false;
+  }
+  return true;
+};
+
+const expandAuthoredShadowPath = (ref: string, variant: string, ctx: Ctx): string | undefined => {
+  if (!ref.startsWith('{') || !ref.endsWith('}')) return undefined;
+  let path = ref.slice(1, -1);
+  const av = axisValuesOf(variant);
+  for (const match of path.matchAll(/\{([^}]+)\}/g)) {
+    const ph = match[1];
+    const axis = ctx.axes.find((a) => a.propName === ph);
+    const raw = axis ? av[axis.property] : av[ph];
+    if (!raw) return undefined;
+    path = path.replaceAll(`{${ph}}`, camel(raw));
+  }
+  return path.includes('{') ? undefined : path;
+};
+
+/** FC-DUMP-PROPOSE-SHADOW-MINTED: Figma cannot bind effect stacks; emit
+ *  writes literals. Minting a dump-slug remints a token the canvas refused.
+ *  When the stamped authored ref resolves (per variant, after axis
+ *  substitution) to the drawn stack, recover THAT ref. */
+const recoverAuthoredBoxShadow = (
+  ctx: Ctx,
+  target: Record<string, string>,
+  where: string,
+  authoredRef: string | undefined,
+  drawn: Array<{ variant: string; value: string }>,
+): boolean => {
+  if (!authoredRef || !authoredRef.startsWith('{') || !authoredRef.endsWith('}') || drawn.length === 0) {
+    return false;
+  }
+  for (const row of drawn) {
+    const path = expandAuthoredShadowPath(authoredRef, row.variant, ctx);
+    if (!path || !ctx.corpus.has(path)) return false;
+    try {
+      const resolved = ctx.corpus.resolveLiteral(path);
+      if (typeof resolved !== 'string' || !shadowStacksEqual(resolved, row.value)) return false;
+    } catch {
+      return false;
+    }
+  }
+  target['box-shadow'] = authoredRef;
+  ctx.notes.push(
+    `${where}: unbound DROP_SHADOW stack recovers the stamped contract's ${authoredRef} (same resolved layers), not a dump-slug mint (FC-DUMP-PROPOSE-SHADOW-MINTED)`,
+  );
+  return true;
+};
+
 /** VISIBLE effects (dump v1.2; MULTI-LAYER since gap round 4). DROP_SHADOW
  *  layers — one or many — present in EVERY variant become an unbound report +
  *  (with minting) a `box-shadow` shadow-kind mint whose value is the layers
@@ -2293,6 +2566,30 @@ function invertNodeEffects(m: Merged, tokens: Record<string, string>, ctx: Ctx, 
     return eff.length >= 1 && eff.every((e) => e.type === 'DROP_SHADOW');
   });
   if (!dropShadowStackEverywhere) {
+    // State-preview DROP_SHADOW (Button Active / Focus Visible) is a
+    // default-bare / state-drawn stack — the same split hover fill uses.
+    // invertNodeEffects used to NAME that as "not proposed" because
+    // "absent would have to be none". The state-diff door now owns it
+    // (FC-DUMP-PROPOSE-STATE-SHADOW). Uncorrelated partial presence still
+    // names.
+    const withFx = m.occ.filter((o) => (o.node.effects?.length ?? 0) > 0);
+    const withoutFx = m.occ.filter((o) => (o.node.effects?.length ?? 0) === 0);
+    const rawState = (variant: string): string | undefined => {
+      const av = axisValuesOf(variant);
+      return av.State ?? av.state ?? av.STATE;
+    };
+    const isDefaultState = (variant: string): boolean => {
+      const raw = rawState(variant);
+      return raw === undefined || INTERACTION_STATE_BY_VALUE[normStateValue(raw)] === 'default';
+    };
+    if (
+      withFx.length > 0 &&
+      withoutFx.length > 0 &&
+      withFx.every((o) => !isDefaultState(o.variant)) &&
+      withoutFx.every((o) => isDefaultState(o.variant))
+    ) {
+      return;
+    }
     ctx.notes.push(
       `${where}: visible effect(s) [${kinds.join(', ')}] — only DROP_SHADOW layers present in every variant map to box-shadow (dump v1.2; a multi-layer stack carries comma-separated); channel NAMED, not proposed`,
     );
@@ -2301,7 +2598,10 @@ function invertNodeEffects(m: Merged, tokens: Record<string, string>, ctx: Ctx, 
   const occ = m.occ.map((o) => ({ variant: o.variant, value: o.node.effects!.map(shadowCss).join(', ') }));
   const depth = Math.max(...m.occ.map((o) => (o.node.effects ?? []).length));
   reportUnbound(ctx, where, 'effects', occ[0].value);
-  mintObservation(ctx, tokens, where, 'box-shadow', 'shadow', occ, `${where}|effects`);
+  const authoredShadow = authoredPartAt(ctx, partPathOf(where))?.tokens?.['box-shadow'];
+  if (!recoverAuthoredBoxShadow(ctx, tokens, where, authoredShadow, occ)) {
+    mintObservation(ctx, tokens, where, 'box-shadow', 'shadow', occ, `${where}|effects`);
+  }
   ctx.notes.push(
     `${where}: ${depth > 1 ? `a DROP_SHADOW stack (up to ${depth} layers) proposed as a comma-separated box-shadow value` : 'DROP_SHADOW proposed as a box-shadow value'} (dump v1.2) — CSS surfaces render it; the canvas preview and the Figma sync script project it as a native DROP_SHADOW effect (dump v1.3)`,
   );
@@ -2320,6 +2620,137 @@ function invertNodeEffects(m: Merged, tokens: Record<string, string>, ctx: Ctx, 
 //                  is NAMED when the canvas pixel-grid rounded the center)
 // Anything the rules cannot carry is a NAMED note, never a guess.
 // ---------------------------------------------------------------------------
+
+/** Unbound hex/width on a dump v1.3 decor shape (ToggleSwitch thumb) belongs
+ *  in the shape-part literals grammar — same as placement offsets — not a
+ *  dump-slug mint. Bound paints stay tokens. Uncorrelated variance keeps
+ *  the mint. FC-DUMP-PROPOSE-SHAPE-PAINT. */
+function liftUnboundShapePaintsToLiterals(
+  m: Merged,
+  part: Record<string, unknown>,
+  tokens: Record<string, string>,
+  ctx: Ctx,
+  where: string,
+) {
+  const lift = (
+    cssProp: string,
+    pick: (n: DumpNode) => string | undefined,
+    bound: (n: DumpNode) => boolean,
+  ) => {
+    if (m.occ.some((o) => bound(o.node) || pick(o.node) === undefined)) return;
+    const queued = ctx.mint?.observations.some((o) => o.nodePath === where && o.cssProperty === cssProp);
+    if (tokens[cssProp] === undefined && !queued) return;
+    const values = m.occ.map((o) => ({ variant: o.variant, value: pick(o.node)! }));
+    const distinct = [...new Set(values.map((v) => v.value))];
+    const writeLiteral = (target: Record<string, string>) => {
+      target[cssProp] = distinct[0]!;
+    };
+    if (distinct.length === 1) {
+      const literals = (part.literals as Record<string, string> | undefined) ?? {};
+      writeLiteral(literals);
+      part.literals = literals;
+    } else {
+      let axisFit: { propName: string; map: Record<string, Record<string, string>> } | null = null;
+      for (const axis of ctx.axes) {
+        if (isBoolAxis(axis.values)) continue;
+        const byValue = new Map<string, string>();
+        let fits = true;
+        for (const row of values) {
+          const value = axisValuesOf(row.variant)[axis.property];
+          if (value === undefined) {
+            fits = false;
+            break;
+          }
+          const seen = byValue.get(value);
+          if (seen && seen !== row.value) {
+            fits = false;
+            break;
+          }
+          if (!seen) byValue.set(value, row.value);
+        }
+        if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
+        if (new Set(byValue.values()).size < 2) continue;
+        const map: Record<string, Record<string, string>> = {};
+        for (const value of axis.values) map[camel(value)] = { [cssProp]: byValue.get(value)! };
+        axisFit = { propName: axis.propName, map };
+        break;
+      }
+      if (!axisFit) return;
+      const lbp =
+        (part.literalsByProp as Array<{ prop: string; map: Record<string, Record<string, string>> }> | undefined) ?? [];
+      let entry = lbp.find((e) => e.prop === axisFit.propName);
+      if (!entry) {
+        entry = { prop: axisFit.propName, map: {} };
+        lbp.push(entry);
+      }
+      for (const [value, dims] of Object.entries(axisFit.map)) {
+        entry.map[value] = { ...(entry.map[value] ?? {}), ...dims };
+      }
+      part.literalsByProp = lbp;
+    }
+    delete tokens[cssProp];
+    if (ctx.mint) {
+      ctx.mint.observations = ctx.mint.observations.filter(
+        (o) => !(o.nodePath === where && o.cssProperty === cssProp),
+      );
+    }
+    ctx.notes.push(
+      `${where}: unbound ${cssProp} on a dump v1.3 shape part carried as ${distinct.length === 1 ? 'literal' : 'literalsByProp'}, not a dump-slug mint`,
+    );
+  };
+  lift(
+    'background-color',
+    (n) => (n.fill?.hex !== undefined && n.fill.var === undefined ? paintCssHex(n.fill) : undefined),
+    (n) => n.fill?.var !== undefined,
+  );
+  lift(
+    'border-color',
+    (n) => (n.stroke?.hex !== undefined && n.stroke.var === undefined ? paintCssHex(n.stroke) : undefined),
+    (n) => n.stroke?.var !== undefined,
+  );
+  lift(
+    'border-width',
+    (n) => (typeof n.strokeWeight === 'number' ? `${n.strokeWeight}px` : undefined),
+    (n) => n.bound?.strokeWeight !== undefined,
+  );
+}
+
+/** FC-DUMP-PROPOSE-TEXT-PAINT — unbound TEXT fill.hex (Card label-text
+ *  `#000000`) used to mint a dump-slug. Same class as
+ *  `liftUnboundShapePaintsToLiterals`: the canvas did not stamp a variable. */
+function liftUnboundTextPaintsToLiterals(
+  m: Merged,
+  part: Record<string, unknown>,
+  tokens: Record<string, string>,
+  ctx: Ctx,
+  where: string,
+) {
+  const pick = (n: DumpNode): string | undefined => {
+    const paint = n.text?.fillVar ? { var: n.text.fillVar } : n.fill;
+    if (paint?.hex !== undefined && paint.var === undefined) return paintCssHex(paint);
+    return undefined;
+  };
+  if (m.occ.some((o) => pick(o.node) === undefined || o.node.text?.fillVar !== undefined || o.node.fill?.var !== undefined)) {
+    return;
+  }
+  const queued = ctx.mint?.observations.some((o) => o.nodePath === where && o.cssProperty === 'color');
+  if (tokens.color === undefined && !queued) return;
+  const values = m.occ.map((o) => pick(o.node)!);
+  const distinct = [...new Set(values)];
+  if (distinct.length !== 1) return;
+  const literals = (part.literals as Record<string, string> | undefined) ?? {};
+  literals.color = distinct[0]!;
+  part.literals = literals;
+  delete tokens.color;
+  if (ctx.mint) {
+    ctx.mint.observations = ctx.mint.observations.filter(
+      (o) => !(o.nodePath === where && o.cssProperty === 'color'),
+    );
+  }
+  ctx.notes.push(
+    `${where}: unbound color on a TEXT node carried as literal, not a dump-slug mint`,
+  );
+}
 
 /** Hidden-pattern visibility (dump v1.1 `hidden`, inverted for shape parts):
  *  a node drawn in EVERY variant but hidden exactly where one boolean axis
@@ -2482,10 +2913,46 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     );
   }
   const sizes = [...new Set(shapes.map((s) => `${s.sh.width}×${s.sh.height}`))];
+  // Size-varying parametric decor (ToggleSwitch thumb: 16/20/24 on Sizing)
+  // used to freeze the first variant and NAME the rest. Placement already
+  // classifies onto one enum axis (Checked left/right); size is a second
+  // observed function of a different axis and belongs in the existing
+  // literalsByProp vocabulary — same as fill-width / refused-channel
+  // projection. Uncorrelated size still freezes + names.
+  let sizeByAxis: { propName: string; map: Record<string, { width: string; height: string }> } | null = null;
   if (sizes.length > 1) {
-    ctx.notes.push(
-      `${where}: shape size differs across variants (${sizes.join(', ')}) — the first variant's ${sizes[0]} carried; review`,
-    );
+    for (const axis of ctx.axes) {
+      if (isBoolAxis(axis.values)) continue;
+      const byValue = new Map<string, { width: number; height: number }>();
+      let fits = true;
+      for (const s of shapes) {
+        const value = axisValuesOf(s.variant)[axis.property];
+        if (value === undefined) {
+          fits = false;
+          break;
+        }
+        const seen = byValue.get(value);
+        if (seen && (seen.width !== s.sh.width || seen.height !== s.sh.height)) {
+          fits = false;
+          break;
+        }
+        if (!seen) byValue.set(value, { width: s.sh.width, height: s.sh.height });
+      }
+      if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
+      if (new Set([...byValue.values()].map((d) => `${d.width}×${d.height}`)).size < 2) continue;
+      const map: Record<string, { width: string; height: string }> = {};
+      for (const value of axis.values) {
+        const d = byValue.get(value)!;
+        map[camel(value)] = { width: `${d.width}px`, height: `${d.height}px` };
+      }
+      sizeByAxis = { propName: axis.propName, map };
+      break;
+    }
+    if (!sizeByAxis) {
+      ctx.notes.push(
+        `${where}: shape size differs across variants (${sizes.join(', ')}) — the first variant's ${sizes[0]} carried; review`,
+      );
+    }
   }
   if (first.kind === 'polygon') {
     const sides = [...new Set(shapes.map((s) => s.sh.sides).filter((v): v is number => v !== undefined))];
@@ -2509,6 +2976,22 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
   const rotationVaries = distinctRot.length > 1;
   if (!rotationVaries && distinctRot[0] !== 0) shape.rotation = distinctRot[0];
   part.shape = shape;
+  if (sizeByAxis) {
+    const lbp =
+      (part.literalsByProp as Array<{ prop: string; map: Record<string, Record<string, string>> }> | undefined) ?? [];
+    let entry = lbp.find((e) => e.prop === sizeByAxis.propName);
+    if (!entry) {
+      entry = { prop: sizeByAxis.propName, map: {} };
+      lbp.push(entry);
+    }
+    for (const [value, dims] of Object.entries(sizeByAxis.map)) {
+      entry.map[value] = { ...(entry.map[value] ?? {}), ...dims };
+    }
+    part.literalsByProp = lbp;
+    ctx.notes.push(
+      `${where}: shape size varies with \`${sizeByAxis.propName}\` (${sizes.join(', ')}) — carried as literalsByProp, not first-variant freeze`,
+    );
+  }
 
   // Placement (+ varying rotation, + varying arc sweep): must be a function
   // of ONE enum axis with per-value consistency — or uniform (then it rides
@@ -3065,6 +3548,112 @@ function declareRelativeIfPositionedChildren(
  *  base [2,8,2,6] used to refuse padding-inline here and the pill hugged its
  *  text). A side that is zero in every variant needs no token; an all-zero
  *  pair needs none at all. */
+function authoredPartAt(ctx: Ctx, partPath: string): MinimalAnatomyPart | undefined {
+  let cur: MinimalAnatomyPart | undefined = ctx.contractsById?.get(ctx.selfId)?.anatomy?.root;
+  if (!cur) return undefined;
+  if (!partPath) return cur;
+  for (const seg of partPath.split('/').filter(Boolean)) {
+    const next: MinimalAnatomyPart | undefined = cur.parts?.[seg];
+    if (!next) return undefined;
+    cur = next;
+  }
+  return cur;
+}
+
+const paddingLonghands: Record<string, readonly [string, string]> = {
+  'padding-inline': ['padding-left', 'padding-right'],
+  'padding-block': ['padding-top', 'padding-bottom'],
+};
+
+/** Stamped-contract recovery for unbound padding (FC-DUMP-PROPOSE-PADDING-LITERAL-MINTED).
+ *  Dump has no padding bind; emit wrote literals. Minting a dump-slug remints
+ *  a token the canvas never bound. When the authored part already spells the
+ *  drawn px as a literal (or a token that resolves to it), recover that. */
+function recoverAuthoredPadding(
+  ctx: Ctx,
+  part: Record<string, unknown> | undefined,
+  where: string,
+  cssProperty: string,
+  drawn: number,
+): boolean {
+  if (!part) return false;
+  const authored = authoredPartAt(ctx, partPathOf(where));
+  if (!authored) return false;
+  const want = `${drawn}px`;
+  const matches = (value: string | undefined): 'literal' | 'token' | null => {
+    if (typeof value !== 'string') return null;
+    if (value === want) return 'literal';
+    if (value.startsWith('{') && value.endsWith('}')) {
+      const path = value.slice(1, -1);
+      if (path.includes('{') || !ctx.corpus.has(path)) return null;
+      try {
+        const resolved = ctx.corpus.resolveLiteral(path);
+        if (Number(resolved) === drawn || String(resolved) === want || String(resolved) === String(drawn)) {
+          return 'token';
+        }
+      } catch {
+        return null;
+      }
+    }
+    return null;
+  };
+  const writeLiteral = (prop: string, value: string) => {
+    const literals = (part.literals as Record<string, string> | undefined) ?? {};
+    literals[prop] = value;
+    part.literals = literals;
+  };
+  if (matches(authored.literals?.[cssProperty]) === 'literal') {
+    writeLiteral(cssProperty, want);
+    ctx.notes.push(
+      `${where}: unbound ${cssProperty} ${want} recovers the stamped contract's literal, not a dump-slug mint (FC-DUMP-PROPOSE-PADDING-LITERAL-MINTED)`,
+    );
+    return true;
+  }
+  const pair = paddingLonghands[cssProperty];
+  if (pair) {
+    const a = authored.literals?.[pair[0]] ?? authored.tokens?.[pair[0]];
+    const b = authored.literals?.[pair[1]] ?? authored.tokens?.[pair[1]];
+    if (matches(a) === 'literal' && matches(b) === 'literal') {
+      writeLiteral(pair[0], want);
+      writeLiteral(pair[1], want);
+      ctx.notes.push(
+        `${where}: unbound ${cssProperty} ${want} recovers the stamped contract's ${pair[0]}/${pair[1]} literals, not a dump-slug mint (FC-DUMP-PROPOSE-PADDING-LITERAL-MINTED)`,
+      );
+      return true;
+    }
+  }
+  return false;
+}
+
+function recoverAuthoredPaddingToken(
+  ctx: Ctx,
+  target: Record<string, string>,
+  where: string,
+  cssProperty: string,
+  drawn: number,
+): boolean {
+  const authored = authoredPartAt(ctx, partPathOf(where));
+  if (!authored) return false;
+  const want = `${drawn}px`;
+  const ref = authored.tokens?.[cssProperty];
+  if (typeof ref !== 'string' || !ref.startsWith('{') || !ref.endsWith('}')) return false;
+  const path = ref.slice(1, -1);
+  if (path.includes('{') || !ctx.corpus.has(path)) return false;
+  try {
+    const resolved = ctx.corpus.resolveLiteral(path);
+    if (Number(resolved) === drawn || String(resolved) === want || String(resolved) === String(drawn)) {
+      target[cssProperty] = ref;
+      ctx.notes.push(
+        `${where}: unbound ${cssProperty} ${want} recovers the stamped contract's ${ref}, not a dump-slug mint (FC-DUMP-PROPOSE-PADDING-LITERAL-MINTED)`,
+      );
+      return true;
+    }
+  } catch {
+    return false;
+  }
+  return false;
+}
+
 function mintPadding(
   ctx: Ctx,
   target: Record<string, string>,
@@ -3085,13 +3674,28 @@ function mintPadding(
   const fallback = (chan: string, value: number) => {
     if (part && value !== 0) ctx.mint!.absFallbacks.push({ part, tokens: target, chan, value, where });
   };
+  const pad = (n: DumpNode): readonly number[] => n.layout?.padding ?? [0, 0, 0, 0];
+  const uniformDrawn = (idx: number): number | undefined => {
+    const values = m.occ.map((o) => pad(o.node)[idx]);
+    const distinct = [...new Set(values)];
+    return distinct.length === 1 ? distinct[0] : undefined;
+  };
+  const recoverOrMint = (cssProperty: string, idx: number, allowFallback: boolean) => {
+    const drawn = uniformDrawn(idx);
+    if (drawn !== undefined && drawn !== 0) {
+      if (recoverAuthoredPadding(ctx, part, where, cssProperty, drawn)) return 'recovered';
+      if (recoverAuthoredPaddingToken(ctx, target, where, cssProperty, drawn)) return 'recovered';
+    }
+    mintObservation(ctx, target, where, cssProperty, 'px', numOccurrences(m, (n) => pad(n)[idx]), source);
+    if (allowFallback && drawn !== undefined) fallback(cssProperty, drawn);
+    return 'minted';
+  };
   const pairs = [
     // padding: [top, right, bottom, left]
     { cssProperty: 'padding-inline', a: 3, b: 1, label: 'left/right', sides: [['padding-left', 3], ['padding-right', 1]] },
     { cssProperty: 'padding-block', a: 0, b: 2, label: 'top/bottom', sides: [['padding-top', 0], ['padding-bottom', 2]] },
   ] as const;
   for (const { cssProperty, a, b, label, sides } of pairs) {
-    const pad = (n: DumpNode): readonly number[] => n.layout?.padding ?? [0, 0, 0, 0];
     if (!m.occ.every((o) => pad(o.node)[a] === pad(o.node)[b])) {
       const minted: string[] = [];
       for (const [sideProp, idx] of sides) {
@@ -3100,8 +3704,7 @@ function mintPadding(
         // measured): baking the base side onto IFB's Dropdown regressed its
         // dropdown variants — asymmetric sides interact with stub-geometry
         // compensating errors; their refusals stay named-only.
-        mintObservation(ctx, target, where, sideProp, 'px', numOccurrences(m, (n) => pad(n)[idx]), source);
-        minted.push(sideProp);
+        if (recoverOrMint(sideProp, idx, false) === 'minted') minted.push(sideProp);
       }
       ctx.notes.push(
         `${where}: ${label} padding literals differ — ${cssProperty} is not representable; carried as per-side ${minted.join('/')} instead (asymmetric padding)`,
@@ -3109,8 +3712,7 @@ function mintPadding(
       continue;
     }
     if (m.occ.every((o) => pad(o.node)[a] === 0)) continue; // zero padding needs no token
-    mintObservation(ctx, target, where, cssProperty, 'px', numOccurrences(m, (n) => pad(n)[a]), source);
-    fallback(cssProperty, pad(m.occ[0].node)[a]);
+    recoverOrMint(cssProperty, a, true);
   }
 }
 
@@ -3216,9 +3818,9 @@ function mintTextChannels(
   // site is what stops the answer depending on which carrier the node happened
   // to use: Badge and Button recovered the weight's VALUE through the mint
   // path while Label recovered its IDENTITY, for no reason a reader could see.
-  const stamped = [...new Set(textOcc.map((o) => o.node.text!.fontWeightVar))];
-  if (stamped.length === 1 && stamped[0] !== undefined) {
-    tokens['font-weight'] = ref(stamped[0]);
+  const stamped = unifyStampedTextVar(textOcc, (tx) => tx.fontWeightVar, ctx.axes);
+  if (stamped !== undefined) {
+    tokens['font-weight'] = stamped;
   }
   // >1 distinct stamp is a size-varying weight, not a contradiction — the
   // contract binds a substituted ref and the canvas resolves it per variant.
@@ -3261,9 +3863,9 @@ function mintTextChannels(
   // (`imported.label.root.line-height`). Value was never the problem; identity
   // was. One distinct stamp binds; disagreeing stamps are NAMED, not picked
   // between; no stamp falls through to the mint below, unchanged.
-  const stampedLh = [...new Set(textOcc.map((o) => o.node.text!.lineHeightVar))];
-  if (stampedLh.length === 1 && stampedLh[0] !== undefined) {
-    tokens['line-height'] = ref(stampedLh[0]);
+  const stampedLh = unifyStampedTextVar(textOcc, (tx) => tx.lineHeightVar, ctx.axes);
+  if (stampedLh !== undefined) {
+    tokens['line-height'] = stampedLh;
     return;
   }
   // MORE THAN ONE distinct stamp is the NORMAL case for a size-varying
@@ -3351,6 +3953,19 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
   // Varying typography mints per variant instead (axis-correlated values take
   // the substituted-ref shape), and the variance is NAMED.
   const textOcc = m.occ.filter((o) => o.node.text !== undefined);
+  // Stamped size identity outranks the numeric uniformity guard. A Size
+  // axis with five fontSizeVar names (md/xs/sm/lg/xl) is the healthy
+  // substituted-ref case — minting from the px values remints a dump-slug
+  // path (`imported.<set-slug>.label.font-size.{size}`) over the canvas
+  // names (`imported/button/root/font-size/{size}`). FC-DUMP-PROPOSE-TYPE-UNPINNED.
+  const stampedSize = unifyStampedTextVar(textOcc, (tx) => tx.fontSizeVar, ctx.axes);
+  if (stampedSize !== undefined) {
+    tokens['font-size'] = stampedSize;
+    const stampedWeight = unifyStampedTextVar(textOcc, (tx) => tx.fontWeightVar, ctx.axes);
+    if (stampedWeight !== undefined) tokens['font-weight'] = stampedWeight;
+    mintTextChannels(m, tokens, ctx, where, { weight: tokens['font-weight'] === undefined });
+    return tokens;
+  }
   const distinctSizes = [...new Set(textOcc.map((o) => o.node.text!.fontSize))];
   const distinctWeights = [...new Set(textOcc.map((o) => o.node.text!.fontStyle ?? 'Medium'))];
   if (distinctSizes.length > 1 || distinctWeights.length > 1) {
@@ -5621,6 +6236,7 @@ function buildPart(
     attachByProp(part, byProp);
     carryTextCase(m, part, ctx, where); // dump v1.16 — declared text-transform
     invertNodeOpacity(m, part, tokens, ctx, where);
+    liftUnboundTextPaintsToLiterals(m, part, tokens, ctx, where);
     if (m.occ.some((o) => (o.node.effects?.length ?? 0) > 0)) {
       ctx.notes.push(
         `${where}: visible effect(s) on a TEXT node — a text shadow has no contract vocabulary (box-shadow is a box channel); channel NAMED, not proposed (dump v1.2)`,
@@ -6172,7 +6788,10 @@ function buildPart(
       // x/y/right/bottom) rides the shared carrier; width/height were minted
       // just above, so only the offsets join here.
       carryAbsPlacement(m, part, tokens, ctx, where, { size: false });
-    } else invertNodeShape(m, part, ctx, where);
+    } else {
+      invertNodeShape(m, part, ctx, where);
+      liftUnboundShapePaintsToLiterals(m, part, tokens, ctx, where);
+    }
     invertNodeOpacity(m, part, tokens, ctx, where);
     invertNodeEffects(m, tokens, ctx, where);
     attachTokens(ctx, part, tokens);
@@ -7295,7 +7914,7 @@ function mintStateObservation(
   target: Record<string, string>,
   state: string,
   cssProperty: string,
-  kind: 'color' | 'px' | 'number',
+  kind: 'color' | 'px' | 'number' | 'shadow',
   occ: Array<{ variant: string; value: string | number }>,
   source: string,
   /** v13: a PART-level override — the part's claimed key. Minted paths then
@@ -7366,8 +7985,8 @@ function proposeStateDiffs(
   baseRootTokens: Record<string, string>,
   target: Record<string, string>,
   /** The built root anatomy parts + the drawn-name → part-key map (depth-1)
-   *  and the cross-state collector. Absent parts (auto-label hoist) keep the
-   *  named-note path. */
+   *  and the cross-state collector. A hoisted auto-label (sole TEXT `label`)
+   *  has no part — its state ink rides root `states.<state>.color`. */
   rootParts?: Record<string, unknown>,
   keyByChildName?: Map<string, string>,
   partStates?: PartStateTarget[],
@@ -7466,6 +8085,36 @@ function proposeStateDiffs(
       );
       return;
     }
+    // FC-DUMP-PROPOSE-DISABLED-OPACITY-MINTED: emit writes node.opacity as an
+    // unbound 0–1 literal (unbind then write) so Disabled does not wash to
+    // 0.5%. Minting a dump-slug remints a token the canvas refused to bind;
+    // nearest-corpus match is also wrong (0.5 hits radius-lg). When this
+    // set is a stamped pipeline contract whose authored disabled opacity
+    // resolves to the drawn value, recover THAT ref.
+    if (cssProp === 'opacity') {
+      const values = occs.map((o) => value(o.node));
+      const distinct = [...new Set(values)];
+      if (distinct.length === 1) {
+        const authoredRef = ctx.contractsById?.get(ctx.selfId)?.anatomy?.root?.states?.[state]?.opacity;
+        if (typeof authoredRef === 'string' && authoredRef.startsWith('{') && authoredRef.endsWith('}')) {
+          const path = authoredRef.slice(1, -1);
+          if (!path.includes('{') && ctx.corpus.has(path)) {
+            try {
+              const resolved = Number(ctx.corpus.resolveLiteral(path));
+              if (resolved === distinct[0]) {
+                target[cssProp] = authoredRef;
+                ctx.notes.push(
+                  `${where} (state ${state}): unbound node opacity ${distinct[0]} recovers the stamped contract's ${authoredRef} (same resolved value), not a dump-slug mint (FC-DUMP-PROPOSE-DISABLED-OPACITY-MINTED)`,
+                );
+                return;
+              }
+            } catch {
+              /* corpus miss — fall through to mint */
+            }
+          }
+        }
+      }
+    }
     reportUnbound(ctx, `${where} (state ${state})`, fieldName, value(occs[0].node));
     mintStateObservation(
       ctx, target, state, cssProp, kind,
@@ -7485,10 +8134,103 @@ function proposeStateDiffs(
   numberChannel('border-radius', 'cornerRadius', 'px', (n) => n.cornerRadius, 0, ['topLeftRadius', 'topRightRadius', 'bottomLeftRadius', 'bottomRightRadius']);
   numberChannel('opacity', 'opacity', 'number', (n) => n.opacity, 1, ['opacity']);
 
+  // State-only DROP_SHADOW (FC-DUMP-PROPOSE-STATE-SHADOW). invertNodeEffects
+  // requires the stack in EVERY variant and named the default-bare /
+  // Active-drawn split. Default having no effects is the base plane; the
+  // stack is a state override, same as hover fill. Canvas did not bind a
+  // variable — mint the observed CSS stack, never invent a corpus name.
+  {
+    const stackOf = (n: DumpNode): string | undefined => {
+      const eff = n.effects ?? [];
+      if (eff.length === 0) return undefined;
+      if (!eff.every((e) => e.type === 'DROP_SHADOW')) return undefined;
+      return eff.map(shadowCss).join(', ');
+    };
+    if (occs.some((o) => stackOf(o.node) !== stackOf(o.base))) {
+      const stacks = occs.map((o) => ({ variant: o.variant, value: stackOf(o.node) }));
+      if (stacks.some((s) => s.value === undefined)) {
+        ctx.notes.push(
+          `${where}: effects differ in state "${state}" but are absent or mixed-kind in some of its variant(s) — a state override cannot unset a channel; NAMED, not proposed (review)`,
+        );
+      } else {
+        reportUnbound(ctx, `${where} (state ${state})`, 'effects', stacks[0].value!);
+        const authoredStateShadow =
+          ctx.contractsById?.get(ctx.selfId)?.anatomy?.root?.states?.[state]?.['box-shadow'];
+        if (
+          !recoverAuthoredBoxShadow(
+            ctx,
+            target,
+            `${where} (state ${state})`,
+            authoredStateShadow,
+            stacks.map((s) => ({ variant: s.variant, value: s.value! })),
+          )
+        ) {
+          mintStateObservation(
+            ctx, target, state, 'box-shadow', 'shadow',
+            stacks.map((s) => ({ variant: s.variant, value: s.value! })),
+            `${where} (state ${state})|effects`,
+          );
+        }
+        if (!ctx.mint) {
+          ctx.notes.push(
+            `${where}: DROP_SHADOW stack changes in state "${state}" — a literal state override needs minting (mintUnbound); NAMED, not proposed`,
+          );
+        }
+      }
+    }
+  }
+
+  // Bound stroke-weight state inversion (FC-DUMP-PROPOSE-FOCUS-OUTLINE).
+  // numberChannel bails when any bound field is present, and it also no-ops
+  // when the LITERAL strokeWeight is 0 on both sides — Flowbite Button Focus
+  // Visible stamps outline-width on all four sides while the default cell
+  // stamps border-*-width. Without this door the width token never lands.
+  {
+    const weightFields = ['strokeWeight', 'strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight'] as const;
+    const boundChanged = occs.some((o) =>
+      weightFields.some((f) => (o.node.bound?.[f] ?? '') !== (o.base.bound?.[f] ?? '')),
+    );
+    const uniformPath = (n: DumpNode): string | undefined => {
+      const b = n.bound ?? {};
+      if (b.strokeWeight) return dotPath(b.strokeWeight);
+      const sides = [b.strokeTopWeight, b.strokeRightWeight, b.strokeBottomWeight, b.strokeLeftWeight];
+      if (sides.every((s) => s && s === sides[0])) return dotPath(sides[0]!);
+      return undefined;
+    };
+    if (boundChanged) {
+      const paths = occs.map((o) => ({ variant: o.variant, path: uniformPath(o.node) }));
+      if (paths.some((p) => p.path === undefined)) {
+        ctx.notes.push(
+          `${where}: stroke weight bindings differ in state "${state}" but are not one uniform width per variant — NAMED, not proposed (review)`,
+        );
+      } else {
+        const u = unifyRefs(paths, ctx.axes);
+        if (u.kind === 'ref') {
+          if (u.ref !== baseRootTokens['border-width'] && u.ref !== baseRootTokens['outline-width']) {
+            target['border-width'] = u.ref;
+          }
+        } else if (u.kind === 'per-value' && rootByProp) {
+          for (const [value, ref] of Object.entries(u.perValue.byValue)) {
+            ((rootByProp[u.perValue.propName] ??= {})[value] ??= {})['border-width'] = ref;
+          }
+        } else if (u.kind === 'drift') {
+          ctx.notes.push(`${where} strokeWeight (state ${state}): ${u.detail}`);
+        }
+      }
+    }
+  }
+
   // A state-only border cannot render honestly outside focus-visible: the
   // base element draws `border: 0` (no border-style to inherit). The
   // focus-visible pair remaps to the outline vocabulary the generators
   // already ship (outline-style/offset ride the focus boilerplate).
+  //
+  // An OUTSIDE stroke on focus-visible is the same outline even when the
+  // base already has an INSIDE border (Flowbite Button). The old guard
+  // required "base has no border" and left outline-color on border-color
+  // and dropped outline-width (FC-DUMP-PROPOSE-FOCUS-OUTLINE).
+  const focusOutside =
+    state === 'focus-visible' && occs.every((o) => o.node.strokeAlign === 'OUTSIDE');
   if (baseRootTokens['border-color'] === undefined && baseRootTokens['border-width'] === undefined) {
     const hasBorder = target['border-color'] !== undefined || target['border-width'] !== undefined;
     if (hasBorder && state === 'focus-visible') {
@@ -7510,6 +8252,17 @@ function proposeStateDiffs(
         `${where}: state "${state}" adds a border the base does not draw — the base rule sets border: 0 and a state override cannot add border-style; NAMED, not proposed (review)`,
       );
     }
+  } else if (focusOutside) {
+    for (const [from, to] of [['border-color', 'outline-color'], ['border-width', 'outline-width']] as const) {
+      if (target[from] !== undefined) {
+        target[to] = target[from];
+        delete target[from];
+      }
+    }
+    remapStateMintTargets(ctx, target, state);
+    ctx.notes.push(
+      `${where}: state "${state}" draws an OUTSIDE stroke beside a resting border — proposed as the focus OUTLINE pair (outline-color/outline-width)`,
+    );
   }
 
   // Children drawn ONLY in this state's variants (kept with their variant).
@@ -7637,6 +8390,62 @@ function proposeStateDiffs(
         }
       }
       if (!partRec || !partStates) {
+        // Generator hoist: the sole root TEXT named `label` is not a part —
+        // its tokens already live on the root (`color`). State-varying ink
+        // must ride `states.<state>.color` the same way; naming-and-dropping
+        // it was FC-DUMP-PROPOSE-STATE-TEXT (Flowbite Button hover/active).
+        const hoistedInk =
+          childName === 'label' &&
+          ch.cssProp === 'color' &&
+          childOccs.every((x) => x.node.type === 'TEXT') &&
+          baseRootTokens['color'] !== undefined;
+        if (hoistedInk) {
+          const paints = childOccs.map((x) => ({ variant: x.variant, paint: ch.pick(x.node) }));
+          if (paints.some((p) => p.paint === undefined)) {
+            ctx.notes.push(
+              `${at}: ${ch.paintName} differs in state "${state}" on the hoisted children label but is absent in some variant(s) — a state override cannot unset a channel; NAMED, not proposed (review)`,
+            );
+            continue;
+          }
+          if (paints.every((p) => p.paint!.var !== undefined)) {
+            const u = unifyRefs(
+              paints.map((p) => ({ variant: p.variant, path: dotPath(p.paint!.var!) })),
+              ctx.axes,
+            );
+            if (u.kind === 'ref') {
+              if (u.ref !== baseRootTokens['color']) target[ch.cssProp] = u.ref;
+              ctx.notes.push(
+                `${at}: hoisted children label ${ch.paintName} in state "${state}" rides root states.${state}.color (${u.ref})`,
+              );
+            } else if (u.kind === 'per-value' && rootByProp) {
+              for (const [value, ref] of Object.entries(u.perValue.byValue)) {
+                ((rootByProp[u.perValue.propName] ??= {})[value] ??= {})[ch.cssProp] = ref;
+              }
+              ctx.notes.push(
+                `${at} ${ch.paintName} (state ${state}): hoisted children label bindings are a function of variant axis "${u.perValue.propName}" by VALUE — carried as root statesByProp (FC-DUMP-PROPOSE-STATE-TEXT)`,
+              );
+            } else if (u.kind === 'drift') {
+              ctx.notes.push(`${at} ${ch.paintName} (state ${state}): ${u.detail}`);
+            } else {
+              ctx.notes.push(
+                `${at}: ${ch.paintName} differs in state "${state}" on the hoisted children label — NAMED, not proposed (review)`,
+              );
+            }
+            continue;
+          }
+          if (paints.every((p) => p.paint!.hex !== undefined)) {
+            reportUnbound(ctx, `${at} (state ${state})`, ch.paintName, paintCssHex(paints[0].paint!));
+            mintStateObservation(
+              ctx, target, state, ch.cssProp, 'color',
+              paints.map((p) => ({ variant: p.variant, value: paintCssHex(p.paint!) })),
+              `${at} (state ${state})|${ch.paintName}`,
+            );
+            ctx.notes.push(
+              `${at}: hoisted children label ${ch.paintName} in state "${state}" rides root states.${state}.color (minted literal)`,
+            );
+            continue;
+          }
+        }
         ctx.notes.push(
           `${at}: ${ch.paintName} differs in state "${state}" but no anatomy part maps to this drawn child — NAMED, not proposed (review)`,
         );
@@ -7917,10 +8726,20 @@ export function proposeFromDump(
       if (promo.disabledValue !== undefined) {
         disabledGroup = sourceVariants.filter((v) => valueOf(v) === promo.disabledValue).map(strip);
       }
+      const previewDisabled =
+        declaredThisAxis &&
+        promo.disabledValue !== undefined &&
+        declaredSparseAxis!.states.some((s) => normStateValue(s) === 'disabled');
       preNotes.push(
         `variant axis "${promo.axis.property}" (${promo.axis.values.join('|')}) IS the platform's interaction states, not API — promoted: the axis is NOT a prop; anatomy and base facts come from the ${baseVariants.length} default-state variant(s); ${promo.promoted
           .map((p) => `${p.value}→${p.state}`)
-          .join(', ')} propose root state overrides${promo.disabledValue !== undefined ? `; ${promo.disabledValue}→ a \`disabled\` BOOLEAN prop + disabled state block` : ''}`,
+          .join(', ')} propose root state overrides${
+          promo.disabledValue !== undefined
+            ? previewDisabled
+              ? `; ${promo.disabledValue}→ disabled state block (State=Disabled is a preview cell this pipeline drew, not a Disabled BOOLEAN)`
+              : `; ${promo.disabledValue}→ a \`disabled\` BOOLEAN prop + disabled state block`
+            : ''
+        }`,
       );
     }
   }
@@ -7929,11 +8748,25 @@ export function proposeFromDump(
   const axes = parseAxes(variantNames);
   const enumAxes = axes.filter((a) => !isBoolAxis(a.values));
 
-  // Self contract id — the name-derived slug, suffixed past SESSION-claimed
-  // holders with contradicting key evidence (class ③; see the Ctx field and
-  // opts.sessionClaimedIds docs). Resolved BEFORE part construction so
+  // Self contract id — the STAMPED id outranks the name-derived slug
+  // (FC-DUMP-PROPOSE-CONTRACT-ID-DROPPED). A set this pipeline drew already
+  // carries `ds_contracts/contractId`; slugging "Alert (flowbite.alert)"
+  // invented `ds.alert-flowbite-alert`. Unstamped / malformed stamps keep
+  // the classic name-derived id, so a set this pipeline did not draw is
+  // unchanged. Suffixed past SESSION-claimed holders with contradicting
+  // key evidence (class ③). Resolved BEFORE part construction so
   // stubIdFor's self-guard protects the id actually claimed.
-  const baseSelfId = `${prefix}.${componentIdSlug(set.setName)}`;
+  const stampedContractId = readStampedContractId(set);
+  const rawStampedContractId =
+    typeof (set as { contractId?: unknown }).contractId === 'string'
+      ? ((set as { contractId: string }).contractId).trim()
+      : '';
+  if (rawStampedContractId && !stampedContractId) {
+    preNotes.push(
+      `contract id: the set's \`ds_contracts/contractId\` stamp "${rawStampedContractId}" is not a legal contract id — ignored, id proposed from the drawn set name`,
+    );
+  }
+  const baseSelfId = stampedContractId ?? `${prefix}.${componentIdSlug(set.setName)}`;
   let selfId = baseSelfId;
   const ownKey = set.key ?? null;
   if (opts.sessionClaimedIds && ownKey !== null) {
@@ -7983,7 +8816,8 @@ export function proposeFromDump(
     drawnByThisPipeline: Boolean(
       (set as { propNames?: unknown }).propNames ||
         (set as { semantics?: unknown }).semantics ||
-        (set as { statePreviewAxis?: unknown }).statePreviewAxis,
+        (set as { statePreviewAxis?: unknown }).statePreviewAxis ||
+        stampedContractId,
     ),
     ...(() => {
       const raw = (set as { propNames?: unknown }).propNames;
@@ -8127,6 +8961,7 @@ export function proposeFromDump(
     // the SAME root collector, so a hoisted function lands on root.tokensByProp.
     const textTokens = invertTextTokens(only, ctx, `${where}/label`, rootTokensByProp);
     Object.assign(rootTokens, textTokens);
+    liftUnboundTextPaintsToLiterals(only, root, rootTokens, ctx, `${where}/label`);
     carryTextCase(only, root, ctx, `${where}/label`); // dump v1.16 — hoists with the label
 
     // The label's tokens hoisted — retarget its captured mint observations
@@ -8221,9 +9056,21 @@ export function proposeFromDump(
       );
     }
     // The disabled axis value → a REAL boolean prop (native attribute on
-    // interactive elements), bound the forward generator's way.
+    // interactive elements), bound the forward generator's way — EXCEPT
+    // when this pipeline already declared Disabled as a State-preview cell
+    // (FC-DUMP-PROPOSE-DISABLED-INVENTED). Emit with figmaStatePreviews
+    // draws State=Disabled, not a Disabled BOOLEAN; inventing the BOOLEAN
+    // remints API the canvas never had.
     if (statePromo.disabledValue !== undefined) {
-      if (ctx.boolProps.some((b) => b.name === 'disabled')) {
+      const declaredPreviewDisabled =
+        declaredSparseAxis !== null &&
+        declaredSparseAxis.axis === statePromo.axis.property &&
+        declaredSparseAxis.states.some((s) => normStateValue(s) === 'disabled');
+      if (declaredPreviewDisabled) {
+        ctx.notes.push(
+          `prop \`disabled\`: not invented from axis value "${statePromo.axis.property}=${statePromo.disabledValue}" — the set's statePreviewAxis already declares Disabled as a preview cell; the disabled STATE block still carries (FC-DUMP-PROPOSE-DISABLED-INVENTED)`,
+        );
+      } else if (ctx.boolProps.some((b) => b.name === 'disabled')) {
         ctx.notes.push(
           `prop \`disabled\`: axis value "${statePromo.axis.property}=${statePromo.disabledValue}" maps to the disabled state but a \`disabled\` boolean already exists — not re-promoted, review`,
         );
@@ -8361,19 +9208,43 @@ export function proposeFromDump(
   // name must be PascalCase (it becomes the export and its file names) and
   // every prop/slot name a legal identifier. Original spellings survive in
   // the figma bindings; every sanitization is a named note.
-  const componentName = pascalComponentName(set.setName);
-  if (componentName !== set.setName) {
+  // FC-DUMP-PROPOSE-NAME-PARENTHETICAL: strip emit's collision suffix
+  // ` (${stampedId})` before PascalCase so "Alert (flowbite.alert)"
+  // recovers Alert, not AlertFlowbiteAlert.
+  const drawnName = drawnContractName(set.setName, stampedContractId);
+  const componentName = drawnName.name;
+  if (drawnName.strippedSuffix) {
+    ctx.notes.push(
+      `contract name: drawn set name "${set.setName}" carries the emit collision suffix " (${stampedContractId})" — proposed as "${componentName}" (FC-DUMP-PROPOSE-NAME-PARENTHETICAL)`,
+    );
+  } else if (componentName !== set.setName) {
     ctx.notes.push(
       `contract name: drawn set name "${set.setName}" is not a PascalCase component name — proposed as "${componentName}" (the canvas set keeps its own name; the componentSetKey/nodeId anchors carry identity)`,
     );
   }
-  if (idSlugSanitized(set.setName)) {
+  if (stampedContractId) {
+    ctx.notes.unshift(
+      `contract id: read from the set's own \`ds_contracts/contractId\` stamp ("${stampedContractId}") — the contract this pipeline drew, not a name-derived \`${prefix}.*\` slug`,
+    );
+  } else if (idSlugSanitized(set.setName)) {
     // Field case (CBDS kit, first live plugin send): "_variable-list-item",
     // "Button / Primary / Medium", "Type=Text, Variant=Error" all derive ids
     // the schema's ^[a-z][a-z0-9-]*\.[a-z][a-z0-9-]*$ refuses — sanitize AT
     // PROPOSAL (the prop-identifier discipline), never refuse at receive.
     ctx.notes.push(
       `contract id: drawn set name "${set.setName}" contains characters a contract id cannot carry — id proposed as "${selfId}" (rule: lowercase kebab, illegal characters → hyphens, runs collapsed, edge hyphens stripped, digit-led/empty gets "c"); the canvas set keeps its own name and the componentSetKey/nodeId anchors carry identity`,
+    );
+  }
+  const stampedSpecHash = readStampedSpecHash(set);
+  if (stampedSpecHash) {
+    ctx.notes.unshift(
+      `specHash: read from the set's own \`ds_contracts/specHash\` stamp (${stampedSpecHash}) — the emit fingerprint this pipeline drew; compare to the current engine before amend`,
+    );
+  }
+  const stampedVersion = readStampedVersion(set);
+  if (stampedVersion) {
+    ctx.notes.unshift(
+      `version: read from the set's own \`ds_contracts/version\` stamp (${stampedVersion}) — the authored contract version this pipeline drew, not the invented 0.1.0 default`,
     );
   }
   for (const p of props) {
@@ -8438,7 +9309,7 @@ export function proposeFromDump(
     $schema: './contract.schema.json',
     id: selfId,
     name: componentName,
-    version: '0.1.0',
+    version: readStampedVersion(set) ?? '0.1.0',
     status: 'draft',
     description: `PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.`,
     // THE STAMP OUTRANKS THE INFERENCE. Everything below it is a guess from a
@@ -8933,7 +9804,7 @@ export function proposeBatchFromDump(
     if (typeof c.id !== 'string') return;
     if (isStub && contractsById.has(c.id)) return;
     sessionClaimedIds.add(c.id);
-    contractsById.set(c.id, c as MinimalChildContract);
+    contractsById.set(c.id, asMinimalChildContract(c));
     if (typeof c.name === 'string') contractIdByName.set(c.name, c.id);
     if (dumpName) contractIdByName.set(dumpName, c.id);
     const key = (c.anchors as { figma?: { componentSetKey?: string | null } } | undefined)?.figma
@@ -8962,6 +9833,24 @@ export function proposeBatchFromDump(
     captureGaps.length > 0
       ? `this dump's reader could not see: ${captureGaps.join('; ')} — absence of these facts is a READ limit of the import route, not evidence about the design; re-import via the plugin dump (extract/figma/dump.plugin.js, dump v1.13) to capture them`
       : null;
+  // dump v1.2 `_degradations` — capture named a channel it could not carry
+  // (Alert VECTOR paths, letter-spacing, …). The batch used to drop the
+  // array, so a live plugin dump's receipts vanished on propose
+  // (FC-DUMP-PROPOSE-DEGRADATIONS-DROPPED). Attach each receipt to the set
+  // its nodePath names (`setName:variant/…`); unmatched rows stay on the
+  // batch notes, never silent.
+  const rawDegradations = (dump as { _degradations?: unknown })._degradations;
+  const degradations = Array.isArray(rawDegradations)
+    ? rawDegradations.filter((d): d is { code: string; nodePath: string; message: string } =>
+        typeof d === 'object' &&
+        d !== null &&
+        typeof (d as { code?: unknown }).code === 'string' &&
+        typeof (d as { nodePath?: unknown }).nodePath === 'string' &&
+        typeof (d as { message?: unknown }).message === 'string',
+      )
+    : [];
+  const degradationNote = (d: { code: string; nodePath: string; message: string }): string =>
+    `dump ${d.code}: ${d.nodePath} — ${d.message}`;
   for (const [name, value] of Object.entries(dump)) {
     if (name === '_provenance' || !isDumpSet(value)) continue;
     try {
@@ -8969,6 +9858,12 @@ export function proposeBatchFromDump(
       registerSession(proposal.contract as Record<string, unknown>, name);
       for (const stub of proposal.childStubs ?? []) registerSession(stub as Record<string, unknown>, undefined, true);
       if (captureGapNote) proposal.notes.unshift(captureGapNote);
+      const setDegradations = degradations.filter(
+        (d) => d.nodePath === name || d.nodePath.startsWith(`${name}:`),
+      );
+      if (setDegradations.length > 0) {
+        proposal.notes.unshift(...setDegradations.map(degradationNote));
+      }
       const id = (proposal.contract as { id?: unknown }).id;
       if (typeof id === 'string') {
         const holder = claimedIds.get(id);
@@ -8990,5 +9885,12 @@ export function proposeBatchFromDump(
       });
     }
   }
+  const unmatched = degradations.filter(
+    (d) =>
+      !proposals.some(
+        (p) => d.nodePath === p.setName || d.nodePath.startsWith(`${p.setName}:`),
+      ),
+  );
+  if (unmatched.length > 0) notes.push(...unmatched.map(degradationNote));
   return { proposals, skipped, notes };
 }

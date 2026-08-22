@@ -58,6 +58,7 @@ import {
   type Prop,
 } from '../scripts/contract-schema.js';
 import { flattenTokens, aliasTarget, px, pxOrNull, type TokenEntry, type TokenTreeInput } from './tokens.js';
+import { ownedCollectionPruneRuntime } from './token-set.js';
 import { FINGERPRINT_SRC, FINGERPRINT_VERSION } from './canvas-fingerprint.js';
 import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
 
@@ -283,11 +284,15 @@ export interface NodeSpec {
    *  margin box at runtime (a fixed wrapper frame, clipsContent false, child
    *  placed at (left, top) — negative margins shrink the flow box and let
    *  the glyph overhang, the exact CSS geometry). The canvas preview keeps
-   *  rendering residual margins as CSS margins. */
+   *  rendering residual margins as CSS margins.
+   *  A ROOT spec cannot wrap itself (SET children are the component). Those
+   *  margins are named and stripped (FC-EMIT-ROOT-MARGIN-SILENT). */
   margins?: { top?: number; right?: number; bottom?: number; left?: number };
   /** Round 5d: variable names for token-carried margin channels — consumed
    *  by the sibling-gap → itemSpacing lowering (the gap then BINDS the
-   *  margin's own variable), stripped before serialization. */
+   *  margin's own variable), stripped before serialization.
+   *  FC-EMIT-ROOT-MARGIN-SILENT: a ROOT spec's margins are refused (no
+   *  parent to wrap) — named and stripped, never left as a runtime no-op. */
   marginVars?: { top?: string; right?: string; bottom?: string; left?: string };
   /** Round 5: an `img` element part — raster content is runtime data with no
    *  canvas projection; the part draws the standard image-placeholder wash
@@ -447,6 +452,9 @@ export interface VariantSpec {
 export interface ComponentData {
   setName: string;
   contractId: string;
+  /** Authored contract version — stamped as `ds_contracts/version` so dump
+   *  can recover it. Propose used to invent `0.1.0` (FC-DUMP-PROPOSE-VERSION-INVENTED). */
+  version: string;
   anchorKey: string | null;
   description: string;
   isSet: boolean;
@@ -1013,6 +1021,8 @@ function buildTokensScript(fileKey: string | null): string {
 // Source of truth: tokens/*.tokens.json
 // Upserts variable collections: Primitives (mode "Value"), Brand (one mode
 // per brand), Semantic (modes "Light"/"Dark", aliasing primitives AND brand).
+// Leftovers in those three collections are NAMED; they are removed only when
+// globalThis.DS_PRUNE_TOKENS === true (opt-in, FC-APPLY-TOKENS-NOT-PRUNED).
 const PRIMITIVES = ${JSON.stringify(prim)};
 const BRAND = ${JSON.stringify(brand)};
 const BRAND_MODES = ${JSON.stringify(brandNames.map((n) => pascal(n)))};
@@ -1127,6 +1137,12 @@ for (const t of SEMANTIC) {
   v.setVariableCodeSyntax('WEB', t.codeSyntax);
 }
 
+const owned = new Map();
+owned.set(prim.id, new Set(PRIMITIVES.map((t) => t.name)));
+owned.set(brandCol.id, new Set(BRAND.map((t) => t.name)));
+owned.set(sem.id, new Set(SEMANTIC.map((t) => t.name)));
+${ownedCollectionPruneRuntime()}
+
 // Text styles: upsert by IDENTITY MARKER (ds_contracts/textStyleToken =
 // the semantic size-token path), never by name — a rename on either side
 // must not fork identity, and a foreign style that happens to share a name
@@ -1162,6 +1178,9 @@ return {
   brand: { collectionId: brandCol.id, modes: BRAND_MODES, total: BRAND.length, created: createdBrand },
   semantic: { collectionId: sem.id, total: SEMANTIC.length, created: createdSem },
   textStyles: { total: TEXT_STYLES.length, created: createdStyles },
+  pruned,
+  leftovers,
+  pruneSkipped,
 };
 `;
 }
@@ -4632,6 +4651,26 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       for (const [ch, v] of Object.entries(m)) note(ch, v, state);
     }
   }
+  // FC-EMIT-ROOT-MARGIN-SILENT: applyMarginBox wraps a CHILD inside a parent
+  // auto-layout. The variant ROOT is the COMPONENT itself — a SET cannot
+  // wrap it — so compiled root margins were a runtime no-op (HelperText
+  // margin-top 8px sat on every variant spec and nothing drew it). Name
+  // the drop and strip the field so the plugin never carries a silent miss.
+  const refuseRootMargins = (spec: NodeSpec) => {
+    const m = spec.margins;
+    if (!m) return;
+    const sides = (['top', 'right', 'bottom', 'left'] as const).filter((s) => m[s]);
+    if (sides.length === 0) return;
+    miss(
+      spec,
+      sides.map((s) => `margin-${s}`).join('/'),
+      'root margins have no parent auto-layout to wrap — a COMPONENT_SET child is the component itself, so residual root margin is not canvas-drawable (FC-EMIT-ROOT-MARGIN-SILENT)',
+    );
+    delete spec.margins;
+    delete spec.marginVars;
+  };
+  for (const v of variants) refuseRootMargins(v.spec);
+  for (const v of stateVariants) refuseRootMargins(v.spec);
   // Gradient / shadow misses: collected off the compiled specs (they feed
   // the code-only-fact footnote) and STRIPPED from the emitted JSON — never
   // a silent drop, never emitted noise.
@@ -4701,6 +4740,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   return {
     setName: contract.name,
     contractId: contract.id,
+    version: contract.version,
     anchorKey: contract.anchors.figma.componentSetKey ?? null,
     // Part D (owner directive, 2026-07-19): the component description is ONE
     // short caption line — a name and a provenance pointer, nothing else.
@@ -6735,6 +6775,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -6973,6 +7014,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -7246,6 +7288,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',

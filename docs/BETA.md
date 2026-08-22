@@ -62,10 +62,14 @@ npm run plugin:zip
 npx tsx packages/cli/src/cli.ts figma bundle examples/tailwind/contracts \
   --out flowbite.bundle.json \
   --tokens examples/tailwind/tokens/tailwind.dtcg.json,examples/tailwind/tokens/tailwind-minted.dtcg.json \
-  --icons examples/tailwind/assets/icons
+  --icons examples/tailwind/assets/icons \
+  --name Tailwind
 ```
 
-`flowbite.bundle.json` is a local build artifact — gitignored, and rebuilt
+`--name Tailwind` names the variable collection the paste creates; it is
+also what the committed `examples/tailwind/figma/tailwind.bundle.json` was
+built with, so the file you build and the file the tree checks are the same
+bytes. `flowbite.bundle.json` is a local build artifact — gitignored, and rebuilt
 byte-identically from the committed contracts whenever you need it.
 
 Then, in the Figma **desktop** app:
@@ -96,10 +100,25 @@ because `flowbite.alert` references a dismiss icon.
 After a contract edit, a canvas amend, or a recovery dump, run:
 
 ```bash
-npm run maintain
+npm run maintain          # token-free; every step also runs in CI (fast + full lanes)
+npm run maintain:visual   # catalog visual-parity; needs FIGMA_TOKEN and the Figma PNG cache
 ```
 
-That is leftover string→boolean emit + catalog/live anchor agreement +
+`maintain` is the adopter gate and needs nothing but the clone. The visual
+half reads rendered Figma cells through the REST images API, so it needs a
+`FIGMA_TOKEN` (env or `.env.local`) and is excluded from CI by name until
+the repository has that secret (`npm run ci:lanes` prints the exclusion).
+
+That is leftover string→boolean emit + token-apply prune + hop-2 bundle
+freshness (`examples/tailwind/figma/tailwind.bundle.json` matches a fresh
+build and still carries Alert `dismissable`/`onDismiss` and ToggleSwitch
+`role=switch`/`onToggle`) + hop-2 Apply plugin (`plugin:check` vs the
+engine receipt) + exact proposal (`exact-proposal:check`) + hop-4 dump→propose (`flowbite-dump-propose:check`
+— all eight pipeline-drawn Flowbite dumps recover their props/host and
+stamped `imported.*` layout, paint, stroke, type, dump `_degradations`
+(Alert VECTOR receipts), and Badge/Button
+State-preview paint names, and do not invent
+`onClick`/`onDismiss`/`onToggle`) + catalog/live anchor agreement +
 `functional:flowbite` (clicks/dismiss still execute) +
 `parity:flowbite` (authored vs recovered, named walls stay named) +
 catalog visual-parity on Button / Badge / Checkbox / Switch / Heading
@@ -117,7 +136,9 @@ with exit codes. The claim it exists to support:
 > development tree builds.
 
 The sha moves whenever the component set changes. At the eight stems on this
-page it is `af0a5dee245f036c…` (108,557 bytes), re-run 2026-08-16. What the
+page it is `2714be6104ae881e…` (109,841 bytes), re-run 2026-08-22 on
+`phase-0/one-truth` and byte-identical to the committed
+`examples/tailwind/figma/tailwind.bundle.json`. What the
 receipts pin is the REPRODUCIBILITY, not the constant: during the kit climb
 components were added and removed three times and the bundle returned
 byte-identical to `bb96f43e…` (the five-component set) every time.
@@ -219,28 +240,46 @@ working on the internal loop; it does not affect the golden path.
 
 ### The eval suite on this branch
 
-`npx tsx evals/run.ts` takes ~25 minutes and currently reports **225/225**
-(`evals/results.json`). The two long-standing reds (`mui-figma-genesis`,
-`child-wider-ratchet-and-script-freshness`) were closed on 2026-08-16.
-`npm run visual-truth:check` still holds the astryx floor unclaimed on
-purpose — that is a visual-truth ratchet, not an eval-suite row.
+`npx tsx evals/run.ts` takes ~25 minutes and writes `evals/results.json`
+stamped with the commit it measured and whether the tree was dirty. That
+file is not a claim: the full CI lane re-measures the suite on every push
+and `eval:record:check` fails the lane row-by-row if the committed record
+disagrees with what CI saw, and refuses a dirty-tree or foreign-branch
+record outright. Read the pass count from the record, not from this page.
+`npm run visual-truth:check` still holds the astryx floor (1) above its
+headless count (0) on purpose — that is a visual-truth ratchet, not an
+eval-suite row; since 2026-08-22 it is printed as a named advisory warning
+(`RATCHET.json` → `advisory.astryx`) rather than a standing red in the required
+fast lane, and it fails again the moment the lane regresses or meets the floor
+without the entry being removed.
 
 A green suite is a guarantee that the *claims we make* still execute. It is
 not a guarantee that inverted Storybook is a shipping component library.
 
-## Applying is additive — it never prunes
+## Applying upserts; pruning leftovers is opt-in and names what it keeps
 
-Generating into a file CREATES and UPDATES variables and components; it never
-deletes. If you apply a component and later remove it from your library, its
-tokens stay behind in the `Tokens` collection with nothing bound to them.
+Generating into a file CREATES and UPDATES variables and components. After
+the token upsert, leftovers in **the collections that apply owns** (the
+bundle `Tokens` collection, or first-party Primitives / Brand / Semantic)
+are **counted and named, not removed** — the step result carries
+`leftovers: [...]` with `pruned: 0`, and the plugin's Build log lists them
+(`FC-APPLY-TOKENS-NOT-PRUNED`). Deleting them is a door you open on purpose:
+set `globalThis.DS_PRUNE_TOKENS = true` in the plugin console before the
+run. With the flag on, a leftover a scene node still binds, a local
+paint/text/effect/grid style still binds, or any local variable still
+aliases, stays; other collections are untouched; a runtime missing one of
+the four style readers skips the prune and says so (`pruneSkipped`).
 
-Measured on the reference file: a 331-token bundle sat in a 444-variable
-collection, and the 113 extras were exactly the token subtrees of two
-components that had been applied earlier and then withdrawn. They were verified
-unreferenced — no node bound to them, no surviving variable aliased them — so
-nothing rendered wrong; the collection was just carrying history.
+Why the door is closed by default: the Plugin API cannot see consumers in
+OTHER files — an instance in a product file bound to a published library
+variable looks exactly like an unreferenced leftover from inside the library.
+The first close of this finding deleted such variables silently; see
+[23 §B.23](23-known-limitations.md#b23-token-prune-does-not-see-style-bound-or-cross-file-consumers).
 
-Removing them is a manual step today (`FC-APPLY-TOKENS-NOT-PRUNED`).
+Measured on the reference file before this close: a 331-token bundle sat in
+a 444-variable collection, and the 113 extras were exactly the token
+subtrees of two components that had been applied earlier and then withdrawn.
+Those 113 are now named on every run; they leave only when asked.
 
 ### Re-applying REWRITES a component you already have — unless you say otherwise
 

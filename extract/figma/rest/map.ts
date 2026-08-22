@@ -1038,10 +1038,13 @@ function mapNode(
   nameUnsupportedChannels(node, ctx, nodePath, stroke !== undefined, shape !== undefined);
   // dump v1.4: literal min/max sizing carries as style facts (a drawn
   // minHeight 44 is a tap-target fact) — previously a named degradation.
-  if (typeof node.minWidth === 'number') out.minWidth = node.minWidth;
-  if (typeof node.minHeight === 'number') out.minHeight = node.minHeight;
-  if (typeof node.maxWidth === 'number') out.maxWidth = node.maxWidth;
-  if (typeof node.maxHeight === 'number') out.maxHeight = node.maxHeight;
+  // dump v1.30 / FC-DUMP-MINMAX-ZERO-INVENTED: omit Figma's 0 default (same
+  // rule as extract/figma/dump.plugin.js). REST minWidth is also always a
+  // number when present.
+  if (typeof node.minWidth === 'number' && node.minWidth > 0) out.minWidth = node.minWidth;
+  if (typeof node.minHeight === 'number' && node.minHeight > 0) out.minHeight = node.minHeight;
+  if (typeof node.maxWidth === 'number' && node.maxWidth > 0) out.maxWidth = node.maxWidth;
+  if (typeof node.maxHeight === 'number' && node.maxHeight > 0) out.maxHeight = node.maxHeight;
   if (node.layoutSizingHorizontal === 'FILL') out.fillWidth = true;
   if (node.visible === false) out.hidden = true;
   // dump v1.2: NODE opacity (distinct from paint alpha) — the disabled-variant

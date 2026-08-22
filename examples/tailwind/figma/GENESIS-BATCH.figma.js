@@ -58,6 +58,7 @@ const COMPONENTS = [
   {
     "setName": "Alert",
     "contractId": "flowbite.alert",
+    "version": "0.2.0",
     "anchorKey": null,
     "description": "Alert — generated from contract flowbite.alert v0.2.0 †",
     "isSet": true,
@@ -1458,6 +1459,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -1695,6 +1697,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -1967,6 +1970,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
@@ -2007,6 +2011,7 @@ const COMPONENTS = [
   {
     "setName": "Badge",
     "contractId": "flowbite.badge",
+    "version": "0.2.0",
     "anchorKey": null,
     "description": "Badge — generated from contract flowbite.badge v0.2.0 †",
     "isSet": true,
@@ -4029,6 +4034,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -4266,6 +4272,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -4538,6 +4545,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
@@ -4578,6 +4586,7 @@ const COMPONENTS = [
   {
     "setName": "Button",
     "contractId": "flowbite.button",
+    "version": "0.2.0",
     "anchorKey": null,
     "description": "Button — generated from contract flowbite.button v0.2.0 †",
     "isSet": true,
@@ -8119,7 +8128,13 @@ async function buildNode(spec, registry) {
   }
   node.name = spec.name;
   // Node opacity (dump v1.2 channel): applies to every node kind.
-  if (typeof spec.opacity === 'number') node.opacity = spec.opacity;
+  // Unbind first: a stale OPACITY variable (repo 0-1 token bound into
+  // Figma's percent-scaled field) wins over the literal and paints 0.5
+  // as 0.5% — the Disabled wash (visual-parity Button, 93.91% masked).
+  if (typeof spec.opacity === 'number') {
+    try { if (node.boundVariables && node.boundVariables.opacity) node.setBoundVariable('opacity', null); } catch (e) { /* not bindable */ }
+    node.opacity = spec.opacity;
+  }
   if (spec.visibleProp) {
     registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
   }
@@ -8380,6 +8395,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -8617,6 +8633,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -8889,6 +8906,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
@@ -8929,6 +8947,7 @@ const COMPONENTS = [
   {
     "setName": "Card",
     "contractId": "flowbite.card",
+    "version": "0.2.0",
     "anchorKey": null,
     "description": "Card — generated from contract flowbite.card v0.2.0 †",
     "isSet": false,
@@ -9938,6 +9957,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -10175,6 +10195,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -10447,6 +10468,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
@@ -10487,6 +10509,7 @@ const COMPONENTS = [
   {
     "setName": "HelperText",
     "contractId": "flowbite.helpertext",
+    "version": "0.2.0",
     "anchorKey": null,
     "description": "HelperText — generated from contract flowbite.helpertext v0.2.0 †",
     "isSet": true,
@@ -10509,9 +10532,6 @@ const COMPONENTS = [
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
-          },
-          "margins": {
-            "top": 8
           },
           "fixedWidth": {
             "px": 71.2344,
@@ -10550,9 +10570,6 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "margins": {
-            "top": 8
-          },
           "fixedWidth": {
             "px": 71.2344,
             "varName": "imported/helper-text/root/width"
@@ -10589,9 +10606,6 @@ const COMPONENTS = [
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
-          },
-          "margins": {
-            "top": 8
           },
           "fixedWidth": {
             "px": 71.2344,
@@ -10630,9 +10644,6 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "margins": {
-            "top": 8
-          },
           "fixedWidth": {
             "px": 71.2344,
             "varName": "imported/helper-text/root/width"
@@ -10669,9 +10680,6 @@ const COMPONENTS = [
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
-          },
-          "margins": {
-            "top": 8
           },
           "fixedWidth": {
             "px": 71.2344,
@@ -11148,43 +11156,6 @@ function applyOverlay(parent, childNode, childSpec) {
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
 
-// Round 5d: auto-layout has no per-child margin — a child carrying residual
-// margins gets its CSS MARGIN BOX as a fixed wrapper frame (clipsContent
-// false), the child placed at (left, top). Negative margins shrink the flow
-// box and let the glyph overhang — the exact CSS geometry (the Badge pip's
-// -2/-2/-8 is what keeps the real pill 20px tall). Out-of-flow children
-// (overlay / inset / absolute) and FILL-sized children keep their own
-// lowering.
-function applyMarginBox(parent, childNode, childSpec, registry) {
-  const m = childSpec.margins;
-  if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
-  try {
-    if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;
-  } catch (e) { /* nodes without layout sizing */ }
-  const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
-  if (!t && !r && !b && !l) return;
-  const w = Math.max(childNode.width + l + r, 0.01);
-  const h = Math.max(childNode.height + t + b, 0.01);
-  const box = figma.createFrame();
-  box.name = childSpec.name + ' (margin box)';
-  box.fills = [];
-  box.clipsContent = false;
-  parent.insertChild(parent.children.indexOf(childNode), box);
-  box.resize(w, h);
-  box.appendChild(childNode);
-  childNode.x = l;
-  childNode.y = t;
-  // Wave B.4 / Polaris Button: a Show-bound child wrapped in a margin box
-  // must transfer the visible binding to the WRAPPER — hiding only the
-  // inner icon leaves the ~20px margin box in auto-layout (blank left gap).
-  if (childSpec.visibleProp && registry && registry.visibles) {
-    for (const vis of registry.visibles) {
-      if (vis.node === childNode) vis.node = box;
-    }
-    childNode.visible = true;
-  }
-}
-
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -11368,7 +11339,6 @@ async function buildNode(spec, registry) {
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }
-    applyMarginBox(node, childNode, child, registry);
   }
   return node;
 }
@@ -11590,6 +11560,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -11706,7 +11677,6 @@ async function amendSet(set, C) {
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
-    applyMarginBox(comp, childNode, childSpec, registry);
       }
       report.rebuiltVariants++;
     }
@@ -11828,6 +11798,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -12100,6 +12071,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
@@ -12140,6 +12112,7 @@ const COMPONENTS = [
   {
     "setName": "Kbd",
     "contractId": "flowbite.kbd",
+    "version": "0.2.0",
     "anchorKey": null,
     "description": "Kbd — generated from contract flowbite.kbd v0.2.0 †",
     "isSet": false,
@@ -13057,6 +13030,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -13294,6 +13268,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -13566,6 +13541,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
@@ -13606,6 +13582,7 @@ const COMPONENTS = [
   {
     "setName": "Label",
     "contractId": "flowbite.label",
+    "version": "0.2.0",
     "anchorKey": null,
     "description": "Label — generated from contract flowbite.label v0.2.0 †",
     "isSet": true,
@@ -14655,6 +14632,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -14892,6 +14870,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -15164,6 +15143,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',
@@ -15204,6 +15184,7 @@ const COMPONENTS = [
   {
     "setName": "ToggleSwitch",
     "contractId": "flowbite.toggleswitch",
+    "version": "0.2.0",
     "anchorKey": null,
     "description": "ToggleSwitch — generated from contract flowbite.toggleswitch v0.2.0 †",
     "isSet": true,
@@ -17015,6 +16996,7 @@ function specHash(C) {
 // figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  set.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // The DECLARED sparse-matrix shape, refreshed BEFORE the specHash early
   // return so a set that skips as unchanged still carries a current marker.
   // Written as '' (which deletes the key) when the contract no longer opts
@@ -17256,6 +17238,7 @@ async function amendSet(set, C) {
 // survive via defKey. Unchanged specs skip on the stored specHash.
 async function amendComponent(comp, C) {
   comp.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  comp.setSharedPluginData('ds_contracts', 'version', C.version || '');
   // A STANDALONE component gets the identity stamps too. amendSet and the
   // create path carried these from the start; this path did not, so Card and
   // Kbd — the two Flowbite stems that are plain COMPONENTs rather than variant
@@ -17531,6 +17514,7 @@ async function syncOne(C) {
   target.description = C.description;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  target.setSharedPluginData('ds_contracts', 'version', C.version || '');
   target.setSharedPluginData('ds_contracts', 'statePreviewAxis',
     C.statePreviewAxis ? JSON.stringify(C.statePreviewAxis) : '');
   target.setSharedPluginData('ds_contracts', 'semantics',

@@ -885,6 +885,13 @@
         }
         results.push({ step: step, ok: true, result: msg.result, focus: msg.focus });
         log('Done: ' + step.title, 'ok');
+        // Token prune is OPT-IN (globalThis.DS_PRUNE_TOKENS); the leftovers
+        // the tokens step KEPT are named here so the loss is never silent.
+        if (step.kind === 'tokens' && msg.result && msg.result.leftovers && msg.result.leftovers.length) {
+          log(msg.result.leftovers.length + ' leftover variable(s) kept' +
+            (msg.result.pruneSkipped ? ' (' + msg.result.pruneSkipped + ')' : ' (prune is opt-in: DS_PRUNE_TOKENS)') +
+            ': ' + msg.result.leftovers.join(', '), 'warn');
+        }
         next(i + 1);
       });
     };
@@ -2019,7 +2026,10 @@
 //   minWidth/minHeight/maxWidth/maxHeight
 //                      literal min/max sizing in px (dump v1.4) — carried as
 //                      style facts (a drawn minHeight 44 is a tap-target
-//                      fact); bound min/max variables ride `bound` instead
+//                      fact); bound min/max variables ride `bound` instead.
+//                      dump v1.30: OMITTED when 0 (Figma's FrameNode default
+//                      is always a number; writing 0 invented a tap-target
+//                      fact and propose minted `min-width: 0`).
 //   _variables         top-level channel (dump v1.4): every variable a
 //                      binding resolved through, keyed by slash-form name →
 //                      { type, value } — the RESOLVED value for the consuming
@@ -2776,10 +2786,12 @@ async function dumpNode(node, nodePath, parent) {
   // dump v1.4: literal min/max sizing is CARRIED as style facts (a drawn
   // minHeight 44 is a tap-target fact) — previously a named degradation.
   // Bound min/max variables ride `bound` instead.
-  if ('minWidth' in node && typeof node.minWidth === 'number') out.minWidth = node.minWidth;
-  if ('maxWidth' in node && typeof node.maxWidth === 'number') out.maxWidth = node.maxWidth;
-  if ('minHeight' in node && typeof node.minHeight === 'number') out.minHeight = node.minHeight;
-  if ('maxHeight' in node && typeof node.maxHeight === 'number') out.maxHeight = node.maxHeight;
+  // dump v1.30: skip 0. FrameNode.minWidth is ALWAYS a number (default 0).
+  // Writing 0 invented a tap-target fact nobody drew (FC-DUMP-MINMAX-ZERO-INVENTED).
+  if ('minWidth' in node && typeof node.minWidth === 'number' && node.minWidth > 0) out.minWidth = node.minWidth;
+  if ('maxWidth' in node && typeof node.maxWidth === 'number' && node.maxWidth > 0) out.maxWidth = node.maxWidth;
+  if ('minHeight' in node && typeof node.minHeight === 'number' && node.minHeight > 0) out.minHeight = node.minHeight;
+  if ('maxHeight' in node && typeof node.maxHeight === 'number' && node.maxHeight > 0) out.maxHeight = node.maxHeight;
   if ('layoutSizingHorizontal' in node && node.layoutSizingHorizontal === 'FILL') {
     out.fillWidth = true;
   }
@@ -2808,6 +2820,34 @@ async function dumpNode(node, nodePath, parent) {
       }
     }
     if (effects.length > 0) out.effects = effects;
+  }
+  // dump v1.27: prototype CHANGE_TO / ON_HOVER / ON_PRESS wiring is NAMED,
+  // not silent. Emit writes these on State-preview Default-plane variants.
+  // Dump does not invert them into contract events (`onClick` stays
+  // canvas-absent). The State axis + statePreviewAxis stamp recover the
+  // matrix. Field case: live Flowbite Button (5 Default/Md cells) and Badge
+  // (6 Default/Xs cells) on 59mLQ.
+  if ('reactions' in node && Array.isArray(node.reactions) && node.reactions.length > 0) {
+    try {
+      const bits = [];
+      for (const r of node.reactions) {
+        const trg = r && r.trigger && r.trigger.type ? r.trigger.type : 'UNKNOWN';
+        const acts = (r && r.actions) || (r && r.action ? [r.action] : []);
+        const kinds = acts.map((a) => (a && (a.navigation || a.type)) || 'UNKNOWN').join(',');
+        bits.push(trg + '→' + kinds);
+      }
+      degrade(
+        'prototype-reactions-unsupported',
+        nodePath,
+        'prototype reaction(s) ' + bits.join('; ') + ' — dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick',
+      );
+    } catch (e) {
+      degrade(
+        'prototype-reactions-unsupported',
+        nodePath,
+        'prototype reactions present (read failed) — dump names CHANGE_TO state-preview wiring; dump does not invent onClick',
+      );
+    }
   }
 
   if (node.type === 'TEXT') {
@@ -3047,8 +3087,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.25) for design→contract proposal.',
-    dumpVersion: '1.25',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.30) for design→contract proposal.',
+    dumpVersion: '1.30',
   },
 };
 dumps._degradations = degradations;
@@ -3080,6 +3120,31 @@ for (const page of figma.root.children) {
       // dump v1.25: Figma property name -> the contract's prop name. The
       // canvas carries only the design-facing spelling, so the reader had to
       // canonicalise it and `children` came back as `content`.
+      // dump v1.26: the contract id this pipeline stamped. Without it the
+      // reader slugs the drawn set name and a set named "Alert (flowbite.alert)"
+      // comes back as `ds.alert-flowbite-alert` instead of `flowbite.alert`.
+      // dump v1.27: prototype CHANGE_TO wiring is named as a degradation
+      // (see dumpNode); no extra set-level field.
+      // dump v1.28: the emit specHash this pipeline stamped. Without it a
+      // live dump cannot say whether the set matches the current engine, and
+      // the amend loop has to Console-inspect hashes by hand.
+      ...(function () {
+        const raw = node.getSharedPluginData('ds_contracts', 'contractId');
+        if (typeof raw === 'string' && raw) return { contractId: raw };
+        return {};
+      })(),
+      ...(function () {
+        const raw = node.getSharedPluginData('ds_contracts', 'specHash');
+        if (typeof raw === 'string' && raw) return { specHash: raw };
+        return {};
+      })(),
+      // dump v1.29: the authored contract version this pipeline stamped.
+      // Without it propose invents 0.1.0 even when the SET caption says v0.2.0.
+      ...(function () {
+        const raw = node.getSharedPluginData('ds_contracts', 'version');
+        if (typeof raw === 'string' && raw) return { version: raw };
+        return {};
+      })(),
       ...(function () {
         const raw = node.getSharedPluginData('ds_contracts', 'propNames');
         if (!raw) return {};

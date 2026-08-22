@@ -216,6 +216,11 @@ check(
   importedStyleTokens.includes('"name":"Text sm/Semibold"'),
 );
 check(
+  "first-party tokens script prunes leftovers in owned collections",
+  importedStyleTokens.includes("FC-APPLY-TOKENS-NOT-PRUNED") &&
+    importedStyleTokens.includes("owned.set(prim.id"),
+);
+check(
   "figma tokens: published source style key survives as identity metadata",
   importedStyleTokens.includes('"sourceStyleKey":"published-style-key"') &&
     importedStyleTokens.includes("sourceTextStyleKey"),
@@ -252,6 +257,11 @@ check(
   "bundle token sync recreates imported text styles before component scripts",
   importedStyleBundleTokens.includes('"name":"Text sm/Semibold"') &&
     importedStyleBundleTokens.includes("sourceTextStyleKey"),
+);
+check(
+  "bundle token sync prunes unreferenced leftovers in the owned collection",
+  importedStyleBundleTokens.includes("FC-APPLY-TOKENS-NOT-PRUNED") &&
+    importedStyleBundleTokens.includes("v.remove()"),
 );
 
 console.log("\nPer-variant component-path text-style identity");

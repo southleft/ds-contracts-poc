@@ -812,7 +812,7 @@ export function createPluginEngine(data: PluginEngineData) {
       if (tokenSet) {
         steps.push({
           kind: "tokens",
-          title: `Token variables — "${tokenSet.name}" collection from the bundle's token set (upserted — safe to re-run)`,
+          title: `Token variables — "${tokenSet.name}" collection from the bundle's token set (upserted; prune is opt-in via DS_PRUNE_TOKENS and leftovers are named)`,
           code: emitTokenSetScript(tokenSet, fileKey || null),
         });
       }
@@ -821,7 +821,7 @@ export function createPluginEngine(data: PluginEngineData) {
         // bundle only when baked dependencies ride along (they bind these).
         steps.push({
           kind: "tokens",
-          title: "Token variables (collections upserted — safe to re-run)",
+          title: "Token variables (collections upserted; prune is opt-in via DS_PRUNE_TOKENS and leftovers are named)",
           code: engine.buildTokensScript(fileKey || null),
         });
       }

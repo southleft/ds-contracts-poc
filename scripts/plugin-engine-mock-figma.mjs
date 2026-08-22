@@ -154,6 +154,9 @@ export function createFigmaMock() {
       this._reactions = [];
       this._shared = new Map();
       if (type !== 'TEXT') this.children = [];
+      // Real Figma: currentPage.selection is a writable SceneNode[].
+      // Needed to pin FC-PLUGIN-SECTION-SELECTION (Section → hosted COMPONENT).
+      if (type === 'PAGE') this.selection = [];
       if (type === 'TEXT') {
         this.characters = '';
         // REAL-FIGMA VALIDATION (live finding 2026-07-22, Astryx genesis run):
@@ -906,6 +909,10 @@ export function createFigmaMock() {
     }
 
     setBoundVariable(field, variable) {
+      if (variable == null) {
+        delete this.boundVariables[field];
+        return;
+      }
       this.boundVariables[field] = { type: 'VARIABLE_ALIAS', id: variable.id };
       // Real Figma REFLECTS the bound variable's value onto the property —
       // a FLOAT variable bound to topLeftRadius changes the rendered radius.
@@ -1232,6 +1239,10 @@ export function createFigmaMock() {
         type = target.resolvedType;
       }
       return { resolvedType: type, value };
+    }
+    remove() {
+      const i = variables.indexOf(this);
+      if (i >= 0) variables.splice(i, 1);
     }
   }
 

@@ -286,11 +286,21 @@ let busy = false; // one run at a time, across both modes
 // selection is almost always what the designer means). Each selected node
 // resolves to the nearest component identity: an ancestor COMPONENT_SET, an
 // ancestor COMPONENT (its owning set when it has one), or — for instances —
-// the main component's owning set. Read-only; unresolvable nodes are skipped.
+// the main component's owning set. A selected SECTION that HOSTS a standalone
+// COMPONENT / COMPONENT_SET (Flowbite Card / Kbd live in an identity-marked
+// Section) used to resolve nothing — "Nothing selected / type its name"
+// (FC-PLUGIN-SECTION-SELECTION). Read-only; unresolvable nodes are skipped.
+// --- SELECTION SET NAMES (start)
 async function selectionSetNames() {
   const names = [];
   const add = (name) => {
     if (name && name !== 'Slot' && names.indexOf(name) < 0) names.push(name);
+  };
+  const addHosted = (section) => {
+    for (const child of section.children || []) {
+      if (child.type === 'COMPONENT_SET') add(child.name);
+      else if (child.type === 'COMPONENT') add(child.name);
+    }
   };
   for (const node of figma.currentPage.selection) {
     let n = node;
@@ -307,11 +317,13 @@ async function selectionSetNames() {
         } catch (e) { /* detached/broken instance — no set to name */ }
         break;
       }
+      if (n.type === 'SECTION') { addHosted(n); break; }
       n = n.parent;
     }
   }
   return names;
 }
+// --- SELECTION SET NAMES (end)
 
 figma.ui.onmessage = async (msg) => {
   if (!msg || !msg.type) return;
@@ -559,18 +571,28 @@ figma.ui.onmessage = async (msg) => {
               setChanges = diffSnapshots(setSnap, dsCanvasSetSnapshot(node)).slice(0, 6);
             } catch (e) { /* pre-v4 — no set snapshot */ }
           }
+          const pushEditedSnapshot = function (target) {
+            let changes = [];
+            try {
+              const snap = JSON.parse(target.getSharedPluginData('ds_contracts', 'canvasSnapshot') || '[]');
+              changes = diffSnapshots(snap, dsCanvasSnapshot(target)).slice(0, 6);
+            } catch (e) { /* snapshot unreadable — variant still listed */ }
+            editedVariants.push({ nodeId: target.id, name: target.name, changes: changes });
+          };
           if (status === 'canvas-edited' && node.type === 'COMPONENT_SET') {
             for (const child of node.children) {
               const cs = child.getSharedPluginData('ds_contracts', 'canvasFingerprint');
               if (cs && cs.indexOf('v6:') === 0 && cs !== dsCanvasFingerprint(child)) {
-                let changes = [];
-                try {
-                  const snap = JSON.parse(child.getSharedPluginData('ds_contracts', 'canvasSnapshot') || '[]');
-                  changes = diffSnapshots(snap, dsCanvasSnapshot(child)).slice(0, 6);
-                } catch (e) { /* snapshot unreadable — variant still listed */ }
-                editedVariants.push({ nodeId: child.id, name: child.name, changes: changes });
+                pushEditedSnapshot(child);
               }
             }
+          }
+          // FC-PLUGIN-STANDALONE-DRIFT-SNAPSHOT: Card/Kbd are COMPONENT
+          // roots. The SET-children walk above never sees them, so a fill
+          // edit reported canvas-edited with an empty WHAT. The node already
+          // carries canvasSnapshot — drill it the same way.
+          if (status === 'canvas-edited' && node.type === 'COMPONENT') {
+            pushEditedSnapshot(node);
           }
           rows.push({
             nodeId: node.id,

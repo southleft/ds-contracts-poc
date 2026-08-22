@@ -1,0 +1,2469 @@
+{
+  "_provenance": {
+    "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+    "extractedAt": "2026-08-20",
+    "dumpVersion": "1.25",
+    "note": "Flowbite Button hop-4 fixture from 59mLQ 120:2203"
+  },
+  "_degradations": [],
+  "_variables": {},
+  "Button (flowbite.button)": {
+    "setName": "Button (flowbite.button)",
+    "propNames": {
+      "Color": "color",
+      "Size": "size",
+      "Content": "children"
+    },
+    "semantics": {
+      "element": "button"
+    },
+    "statePreviewAxis": {
+      "axis": "State",
+      "default": "Default",
+      "states": [
+        "Disabled",
+        "Active",
+        "Focus Visible",
+        "Hover"
+      ],
+      "primary": "Color",
+      "pinned": {
+        "Size": "Md"
+      }
+    },
+    "type": "COMPONENT_SET",
+    "nodeId": "120:2203",
+    "key": "8c1a78adb634d4277cd96bb53b275ca45885ff9a",
+    "variants": [
+      {
+        "name": "Color=Default, Size=Md, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Default",
+          "Size": "Md",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 85,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/default",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/default",
+          "strokeLeftWeight": "imported/button/root/border-left-width/default",
+          "strokeRightWeight": "imported/button/root/border-right-width/default"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Default, Size=Xs, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Default",
+          "Size": "Xs",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 63,
+          "height": 32
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            12,
+            0,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/xs",
+          "paddingRight": "imported/button/root/padding-right/xs",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/default",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/default",
+          "strokeLeftWeight": "imported/button/root/border-left-width/default",
+          "strokeRightWeight": "imported/button/root/border-right-width/default"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Default, Size=Sm, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Default",
+          "Size": "Sm",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 69,
+          "height": 36
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            12,
+            0,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/sm",
+          "paddingRight": "imported/button/root/padding-right/sm",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/default",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/default",
+          "strokeLeftWeight": "imported/button/root/border-left-width/default",
+          "strokeRightWeight": "imported/button/root/border-right-width/default"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Default, Size=Lg, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Default",
+          "Size": "Lg",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 91,
+          "height": 48
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/lg",
+          "paddingRight": "imported/button/root/padding-right/lg",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/default",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/default",
+          "strokeLeftWeight": "imported/button/root/border-left-width/default",
+          "strokeRightWeight": "imported/button/root/border-right-width/default"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Default, Size=Xl, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Default",
+          "Size": "Xl",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 99,
+          "height": 52
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            24,
+            0,
+            24
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/xl",
+          "paddingRight": "imported/button/root/padding-right/xl",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/default",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/default",
+          "strokeLeftWeight": "imported/button/root/border-left-width/default",
+          "strokeRightWeight": "imported/button/root/border-right-width/default"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Alternative, Size=Md, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Alternative",
+          "Size": "Md",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 87,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/alternative",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/alternative",
+          "strokeLeftWeight": "imported/button/root/border-left-width/alternative",
+          "strokeRightWeight": "imported/button/root/border-right-width/alternative"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Alternative, Size=Xs, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Alternative",
+          "Size": "Xs",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 65,
+          "height": 32
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            12,
+            0,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/xs",
+          "paddingRight": "imported/button/root/padding-right/xs",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/alternative",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/alternative",
+          "strokeLeftWeight": "imported/button/root/border-left-width/alternative",
+          "strokeRightWeight": "imported/button/root/border-right-width/alternative"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Alternative, Size=Sm, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Alternative",
+          "Size": "Sm",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 71,
+          "height": 36
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            12,
+            0,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/sm",
+          "paddingRight": "imported/button/root/padding-right/sm",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/alternative",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/alternative",
+          "strokeLeftWeight": "imported/button/root/border-left-width/alternative",
+          "strokeRightWeight": "imported/button/root/border-right-width/alternative"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Alternative, Size=Lg, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Alternative",
+          "Size": "Lg",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 93,
+          "height": 48
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/lg",
+          "paddingRight": "imported/button/root/padding-right/lg",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/alternative",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/alternative",
+          "strokeLeftWeight": "imported/button/root/border-left-width/alternative",
+          "strokeRightWeight": "imported/button/root/border-right-width/alternative"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Alternative, Size=Xl, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Alternative",
+          "Size": "Xl",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 101,
+          "height": 52
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            24,
+            0,
+            24
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/xl",
+          "paddingRight": "imported/button/root/padding-right/xl",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/alternative",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/alternative",
+          "strokeLeftWeight": "imported/button/root/border-left-width/alternative",
+          "strokeRightWeight": "imported/button/root/border-right-width/alternative"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Dark, Size=Md, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Dark",
+          "Size": "Md",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 85,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/dark",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/dark",
+          "strokeLeftWeight": "imported/button/root/border-left-width/dark",
+          "strokeRightWeight": "imported/button/root/border-right-width/dark"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Dark, Size=Xs, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Dark",
+          "Size": "Xs",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 63,
+          "height": 32
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            12,
+            0,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/xs",
+          "paddingRight": "imported/button/root/padding-right/xs",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/dark",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/dark",
+          "strokeLeftWeight": "imported/button/root/border-left-width/dark",
+          "strokeRightWeight": "imported/button/root/border-right-width/dark"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Dark, Size=Sm, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Dark",
+          "Size": "Sm",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 69,
+          "height": 36
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            12,
+            0,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/sm",
+          "paddingRight": "imported/button/root/padding-right/sm",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/dark",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/dark",
+          "strokeLeftWeight": "imported/button/root/border-left-width/dark",
+          "strokeRightWeight": "imported/button/root/border-right-width/dark"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Dark, Size=Lg, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Dark",
+          "Size": "Lg",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 91,
+          "height": 48
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/lg",
+          "paddingRight": "imported/button/root/padding-right/lg",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/dark",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/dark",
+          "strokeLeftWeight": "imported/button/root/border-left-width/dark",
+          "strokeRightWeight": "imported/button/root/border-right-width/dark"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Dark, Size=Xl, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Dark",
+          "Size": "Xl",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 99,
+          "height": 52
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            24,
+            0,
+            24
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/xl",
+          "paddingRight": "imported/button/root/padding-right/xl",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/dark",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/dark",
+          "strokeLeftWeight": "imported/button/root/border-left-width/dark",
+          "strokeRightWeight": "imported/button/root/border-right-width/dark"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Green, Size=Md, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Green",
+          "Size": "Md",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 85,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/green",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/green",
+          "strokeLeftWeight": "imported/button/root/border-left-width/green",
+          "strokeRightWeight": "imported/button/root/border-right-width/green"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Green, Size=Xs, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Green",
+          "Size": "Xs",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 63,
+          "height": 32
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            12,
+            0,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/xs",
+          "paddingRight": "imported/button/root/padding-right/xs",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/green",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/green",
+          "strokeLeftWeight": "imported/button/root/border-left-width/green",
+          "strokeRightWeight": "imported/button/root/border-right-width/green"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Green, Size=Sm, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Green",
+          "Size": "Sm",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 69,
+          "height": 36
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            12,
+            0,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/sm",
+          "paddingRight": "imported/button/root/padding-right/sm",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/green",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/green",
+          "strokeLeftWeight": "imported/button/root/border-left-width/green",
+          "strokeRightWeight": "imported/button/root/border-right-width/green"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Green, Size=Lg, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Green",
+          "Size": "Lg",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 91,
+          "height": 48
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/lg",
+          "paddingRight": "imported/button/root/padding-right/lg",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/green",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/green",
+          "strokeLeftWeight": "imported/button/root/border-left-width/green",
+          "strokeRightWeight": "imported/button/root/border-right-width/green"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Green, Size=Xl, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Green",
+          "Size": "Xl",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 99,
+          "height": 52
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            24,
+            0,
+            24
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/xl",
+          "paddingRight": "imported/button/root/padding-right/xl",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/green",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/green",
+          "strokeLeftWeight": "imported/button/root/border-left-width/green",
+          "strokeRightWeight": "imported/button/root/border-right-width/green"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Red, Size=Md, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Red",
+          "Size": "Md",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 85,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/red",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/red",
+          "strokeLeftWeight": "imported/button/root/border-left-width/red",
+          "strokeRightWeight": "imported/button/root/border-right-width/red"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Red, Size=Xs, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Red",
+          "Size": "Xs",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 63,
+          "height": 32
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            12,
+            0,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/xs",
+          "paddingRight": "imported/button/root/padding-right/xs",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/red",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/red",
+          "strokeLeftWeight": "imported/button/root/border-left-width/red",
+          "strokeRightWeight": "imported/button/root/border-right-width/red"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 12,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Red, Size=Sm, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Red",
+          "Size": "Sm",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 69,
+          "height": 36
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            12,
+            0,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/sm",
+          "paddingRight": "imported/button/root/padding-right/sm",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/red",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/red",
+          "strokeLeftWeight": "imported/button/root/border-left-width/red",
+          "strokeRightWeight": "imported/button/root/border-right-width/red"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Red, Size=Lg, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Red",
+          "Size": "Lg",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 91,
+          "height": 48
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/lg",
+          "paddingRight": "imported/button/root/padding-right/lg",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/red",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/red",
+          "strokeLeftWeight": "imported/button/root/border-left-width/red",
+          "strokeRightWeight": "imported/button/root/border-right-width/red"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Red, Size=Xl, State=Default",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Red",
+          "Size": "Xl",
+          "State": "Default"
+        },
+        "bbox": {
+          "width": 99,
+          "height": 52
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            24,
+            0,
+            24
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/xl",
+          "paddingRight": "imported/button/root/padding-right/xl",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/red",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/red",
+          "strokeLeftWeight": "imported/button/root/border-left-width/red",
+          "strokeRightWeight": "imported/button/root/border-right-width/red"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 16,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Default, Size=Md, State=Disabled",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Default",
+          "Size": "Md",
+          "State": "Disabled"
+        },
+        "bbox": {
+          "width": 85,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/default",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/default",
+          "strokeLeftWeight": "imported/button/root/border-left-width/default",
+          "strokeRightWeight": "imported/button/root/border-right-width/default"
+        },
+        "opacity": 0.5,
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Alternative, Size=Md, State=Disabled",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Alternative",
+          "Size": "Md",
+          "State": "Disabled"
+        },
+        "bbox": {
+          "width": 87,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/alternative",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/alternative",
+          "strokeLeftWeight": "imported/button/root/border-left-width/alternative",
+          "strokeRightWeight": "imported/button/root/border-right-width/alternative"
+        },
+        "opacity": 0.5,
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Dark, Size=Md, State=Disabled",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Dark",
+          "Size": "Md",
+          "State": "Disabled"
+        },
+        "bbox": {
+          "width": 85,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/dark",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/dark",
+          "strokeLeftWeight": "imported/button/root/border-left-width/dark",
+          "strokeRightWeight": "imported/button/root/border-right-width/dark"
+        },
+        "opacity": 0.5,
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Green, Size=Md, State=Disabled",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Green",
+          "Size": "Md",
+          "State": "Disabled"
+        },
+        "bbox": {
+          "width": 85,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/green",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/green",
+          "strokeLeftWeight": "imported/button/root/border-left-width/green",
+          "strokeRightWeight": "imported/button/root/border-right-width/green"
+        },
+        "opacity": 0.5,
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Red, Size=Md, State=Disabled",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Red",
+          "Size": "Md",
+          "State": "Disabled"
+        },
+        "bbox": {
+          "width": 85,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/red",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/red",
+          "strokeLeftWeight": "imported/button/root/border-left-width/red",
+          "strokeRightWeight": "imported/button/root/border-right-width/red"
+        },
+        "opacity": 0.5,
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Default, Size=Md, State=Active",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Default",
+          "Size": "Md",
+          "State": "Active"
+        },
+        "bbox": {
+          "width": 85,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/default",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/default",
+          "strokeLeftWeight": "imported/button/root/border-left-width/default",
+          "strokeRightWeight": "imported/button/root/border-right-width/default"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Alternative, Size=Md, State=Active",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Alternative",
+          "Size": "Md",
+          "State": "Active"
+        },
+        "bbox": {
+          "width": 87,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/alternative",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/alternative",
+          "strokeLeftWeight": "imported/button/root/border-left-width/alternative",
+          "strokeRightWeight": "imported/button/root/border-right-width/alternative"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Dark, Size=Md, State=Active",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Dark",
+          "Size": "Md",
+          "State": "Active"
+        },
+        "bbox": {
+          "width": 85,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/dark",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/dark",
+          "strokeLeftWeight": "imported/button/root/border-left-width/dark",
+          "strokeRightWeight": "imported/button/root/border-right-width/dark"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Green, Size=Md, State=Active",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Green",
+          "Size": "Md",
+          "State": "Active"
+        },
+        "bbox": {
+          "width": 85,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/green",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/green",
+          "strokeLeftWeight": "imported/button/root/border-left-width/green",
+          "strokeRightWeight": "imported/button/root/border-right-width/green"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Red, Size=Md, State=Active",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Red",
+          "Size": "Md",
+          "State": "Active"
+        },
+        "bbox": {
+          "width": 85,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/red",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/red",
+          "strokeLeftWeight": "imported/button/root/border-left-width/red",
+          "strokeRightWeight": "imported/button/root/border-right-width/red"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Default, Size=Md, State=Focus Visible",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Default",
+          "Size": "Md",
+          "State": "Focus Visible"
+        },
+        "bbox": {
+          "width": 85,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/outline-width-state-focus-visible",
+          "strokeBottomWeight": "imported/button/root/outline-width-state-focus-visible",
+          "strokeLeftWeight": "imported/button/root/outline-width-state-focus-visible",
+          "strokeRightWeight": "imported/button/root/outline-width-state-focus-visible"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Alternative, Size=Md, State=Focus Visible",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Alternative",
+          "Size": "Md",
+          "State": "Focus Visible"
+        },
+        "bbox": {
+          "width": 85,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/outline-width-state-focus-visible",
+          "strokeBottomWeight": "imported/button/root/outline-width-state-focus-visible",
+          "strokeLeftWeight": "imported/button/root/outline-width-state-focus-visible",
+          "strokeRightWeight": "imported/button/root/outline-width-state-focus-visible"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Dark, Size=Md, State=Focus Visible",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Dark",
+          "Size": "Md",
+          "State": "Focus Visible"
+        },
+        "bbox": {
+          "width": 85,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/outline-width-state-focus-visible",
+          "strokeBottomWeight": "imported/button/root/outline-width-state-focus-visible",
+          "strokeLeftWeight": "imported/button/root/outline-width-state-focus-visible",
+          "strokeRightWeight": "imported/button/root/outline-width-state-focus-visible"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Green, Size=Md, State=Focus Visible",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Green",
+          "Size": "Md",
+          "State": "Focus Visible"
+        },
+        "bbox": {
+          "width": 85,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/outline-width-state-focus-visible",
+          "strokeBottomWeight": "imported/button/root/outline-width-state-focus-visible",
+          "strokeLeftWeight": "imported/button/root/outline-width-state-focus-visible",
+          "strokeRightWeight": "imported/button/root/outline-width-state-focus-visible"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Red, Size=Md, State=Focus Visible",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Red",
+          "Size": "Md",
+          "State": "Focus Visible"
+        },
+        "bbox": {
+          "width": 85,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/outline-width-state-focus-visible",
+          "strokeBottomWeight": "imported/button/root/outline-width-state-focus-visible",
+          "strokeLeftWeight": "imported/button/root/outline-width-state-focus-visible",
+          "strokeRightWeight": "imported/button/root/outline-width-state-focus-visible"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Default, Size=Md, State=Hover",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Default",
+          "Size": "Md",
+          "State": "Hover"
+        },
+        "bbox": {
+          "width": 85,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/default",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/default",
+          "strokeLeftWeight": "imported/button/root/border-left-width/default",
+          "strokeRightWeight": "imported/button/root/border-right-width/default"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Alternative, Size=Md, State=Hover",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Alternative",
+          "Size": "Md",
+          "State": "Hover"
+        },
+        "bbox": {
+          "width": 87,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/alternative",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/alternative",
+          "strokeLeftWeight": "imported/button/root/border-left-width/alternative",
+          "strokeRightWeight": "imported/button/root/border-right-width/alternative"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Dark, Size=Md, State=Hover",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Dark",
+          "Size": "Md",
+          "State": "Hover"
+        },
+        "bbox": {
+          "width": 85,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/dark",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/dark",
+          "strokeLeftWeight": "imported/button/root/border-left-width/dark",
+          "strokeRightWeight": "imported/button/root/border-right-width/dark"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Green, Size=Md, State=Hover",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Green",
+          "Size": "Md",
+          "State": "Hover"
+        },
+        "bbox": {
+          "width": 85,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/green",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/green",
+          "strokeLeftWeight": "imported/button/root/border-left-width/green",
+          "strokeRightWeight": "imported/button/root/border-right-width/green"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Color=Red, Size=Md, State=Hover",
+        "type": "COMPONENT",
+        "variantProperties": {
+          "Color": "Red",
+          "Size": "Md",
+          "State": "Hover"
+        },
+        "bbox": {
+          "width": 85,
+          "height": 40
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "bound": {
+          "paddingLeft": "imported/button/root/padding-left/md",
+          "paddingRight": "imported/button/root/padding-right/md",
+          "topLeftRadius": "imported/shared/size-8",
+          "topRightRadius": "imported/shared/size-8",
+          "bottomLeftRadius": "imported/shared/size-8",
+          "bottomRightRadius": "imported/shared/size-8",
+          "strokeTopWeight": "imported/button/root/border-top-width/red",
+          "strokeBottomWeight": "imported/button/root/border-bottom-width/red",
+          "strokeLeftWeight": "imported/button/root/border-left-width/red",
+          "strokeRightWeight": "imported/button/root/border-right-width/red"
+        },
+        "children": [
+          {
+            "name": "label",
+            "type": "TEXT",
+            "text": {
+              "characters": "Button",
+              "fontSize": 14,
+              "fontStyle": "Medium"
+            },
+            "propRefs": {
+              "characters": "Content"
+            }
+          }
+        ]
+      }
+    ],
+    "propertyDefinitions": {
+      "Content#120:61": {
+        "type": "TEXT",
+        "defaultValue": "Button"
+      },
+      "Color": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "Alternative",
+          "Dark",
+          "Green",
+          "Red"
+        ]
+      },
+      "Size": {
+        "type": "VARIANT",
+        "defaultValue": "Md",
+        "variantOptions": [
+          "Md",
+          "Xs",
+          "Sm",
+          "Lg",
+          "Xl"
+        ]
+      },
+      "State": {
+        "type": "VARIANT",
+        "defaultValue": "Default",
+        "variantOptions": [
+          "Default",
+          "Disabled",
+          "Active",
+          "Focus Visible",
+          "Hover"
+        ]
+      }
+    }
+  }
+}

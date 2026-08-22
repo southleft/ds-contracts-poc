@@ -256,7 +256,17 @@ export async function renderVariant(
   const m = (await page.evaluate(MEASURE_JS)) as PageMeasurement;
   if (!m.found) return { ok: false, error: 'component root not found for measurement' };
 
-  const png = await page.screenshot({ clip: m.clip, omitBackground: true });
+  // FC-VISUAL-SCREENSHOT-TIMEOUT: Playwright's default 30s screenshot can
+  // flake when overlapping maintain ticks starve Chromium. One retry keeps
+  // a Timeout from flipping a baseline `diffed` row to `refused`.
+  let png: Buffer;
+  try {
+    png = await page.screenshot({ clip: m.clip, omitBackground: true });
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    if (!/Timeout \d+ms exceeded/.test(msg)) throw e;
+    png = await page.screenshot({ clip: m.clip, omitBackground: true });
+  }
   if (interaction === 'active') await page.mouse.up();
 
   const dpr = 2;
