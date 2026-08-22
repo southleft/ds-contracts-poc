@@ -36,16 +36,20 @@
  * Vocabulary coverage (the emitters-check discipline — every branch EMITS
  * or refuses by name; validateContract gates emission exactly like
  * emit-react/emit-html, so every schema-level refusal is shared):
- *   EMITTED: props (boolean/text/number/enum), tokens (plain + 1- and
- *   2-placeholder substituted refs, overlap gap), tokensByProp (plain +
+ *   EMITTED: props (boolean/text/number/enum), tokens (plain + N-placeholder
+ *   substituted refs, root and parts alike, overlap gap), tokensByProp (plain +
  *   S2 one-placeholder map refs, ordered v14 entries), literals,
  *   literalsByProp, declared, declaredStates, states (root full
- *   vocabulary + v13 part color channels), layout, layoutByProp,
+ *   vocabulary + v13 part color channels), statesByProp (v17 per-axis
+ *   state rules on the root and on nested parts), layout, layoutByProp,
  *   stylesWhen, overlay, shape, visibleWhen, slots (REAL <slot> elements
  *   with defaultContent as fallback), component refs (the child contract's
  *   own custom element — composition is native), repeat (live via the
  *   `items` property; the observed sample is the attribute-only default,
- *   the static-surface discipline), icon, attrs, content, text, meter
+ *   the static-surface discipline), icon, attrs (root AND nested parts —
+ *   `{prop}` values bind live, an unset defaultless prop applies no
+ *   attribute; attrs.role wins over semantics.role, a differing pair is
+ *   refused by validateContract), content, text, meter
  *   (live from number props), animation, semantics element/role/
  *   roleByProp/elementByProp, events + toggles (CustomEvent dispatch,
  *   uncontrolled flip, ARIA state / native checked+indeterminate),
@@ -180,11 +184,11 @@ const enumCond = (prop: string, value: string) => `[data-${attrOf(prop)}='${valu
 const boolCond = (prop: string) => `[data-${attrOf(prop)}]`;
 /** emit-html's `.k--prop-value` (one class) at the same 0,1,0 specificity. */
 const rootWithEnum = (prop: string, value: string) => `${ROOT_SEL}:where(${enumCond(prop, value)})`;
-/** emit-html's `.k--a-x.k--b-y` (two classes) at the same 0,2,0 specificity. */
-const rootWithPair = (a: [string, string], b: [string, string]) =>
-  `${ROOT_SEL}${ROOT_SEL}:where(${enumCond(a[0], a[1])}${enumCond(b[0], b[1])})`;
 /** emit-html's `.k[data-x]` (class + attribute, 0,2,0). */
 const rootWithBool = (prop: string) => `${ROOT_SEL}${ROOT_SEL}:where(${boolCond(prop)})`;
+/** emit-html's `.k--a-x.k--b-y…` (N classes) at the same 0,N,0 specificity —
+ *  for one condition this is rootWithEnum's exact string. */
+const rootWithConds = (conds: string[]) => `${ROOT_SEL.repeat(conds.length)}:where(${conds.join('')})`;
 
 function layoutOverrideDecls(o: {
   display?: string;
@@ -221,6 +225,61 @@ function layoutDecls(part: Part): string[] {
 export function shadowCss(contract: Contract): string {
   const k = kebab(contract.name);
   const enums = new Map(enumProps(contract).map((p) => [p.name, p.type.enum]));
+  const boolNames = new Set(boolProps(contract).map((p) => p.name));
+
+  // MULTI-PLACEHOLDER REFS (P0 2026-08-22). A substituted ref expands to one
+  // rule per value tuple — the cartesian of its placeholders in DECLARED
+  // placeholder order, then declared enum-value order — exactly emit-react's
+  // `enumCombos`, so both emitters resolve the same leaves in the same order
+  // (core/emitters-check.ts byte-compares the resolved var() names). Before
+  // this, parts only had the one-placeholder branch: a two-placeholder PART ref
+  // fell through to the plain path and shipped
+  // `color: var(--imported-social-button-text-color-{social}-{theme})` —
+  // invalid CSS the browser drops silently. generateCss (the validity
+  // referee) resolves per value and passes, so nothing refused. Enum
+  // placeholders select on the mirrored data-attribute; a boolean placeholder
+  // expands to true/false on attribute presence (emit-react's `substValues`
+  // + `boolFrag`, `:disabled` where the element carries the native attribute).
+  // A placeholder naming neither has NO host attribute to hang a selector on
+  // and is REFUSED BY NAME — braces inside var() are never written.
+  const placeholderValues = (ph: string): string[] | undefined =>
+    enums.get(ph) ?? (boolNames.has(ph) ? ['true', 'false'] : undefined);
+  const placeholderCond = (ph: string, value: string): string => {
+    if (enums.has(ph)) return enumCond(ph, value);
+    const sel =
+      ph === 'disabled' && SUPPORTS_DISABLED.includes(contract.semantics.element) ? ':disabled' : boolCond(ph);
+    return value === 'true' ? sel : `:not(${sel})`;
+  };
+  const rootWithCombo = (combo: Array<[string, string]>, lead: string[] = []) =>
+    rootWithConds([...lead, ...combo.map(([ph, value]) => placeholderCond(ph, value))]);
+  const expandRef = (
+    where: string,
+    refPath: string,
+  ): Array<{ combo: Array<[string, string]>; resolved: string }> => {
+    const phs = placeholdersIn(refPath);
+    const unknown = phs.filter((ph) => placeholderValues(ph) === undefined);
+    if (unknown.length > 0) {
+      throw new Error(
+        `${contract.id}: ${where} ref "{${refPath}}" substitutes ${unknown.map((ph) => `{${ph}}`).join(', ')} — ` +
+          `not an enum or boolean prop of this contract, so the web-components emitter has no host attribute to select on and cannot expand it. ` +
+          `Refusing rather than emitting var(--…{…}), which is invalid CSS the browser drops silently.`,
+      );
+    }
+    let out: Array<{ combo: Array<[string, string]>; resolved: string }> = [{ combo: [], resolved: refPath }];
+    for (const ph of phs) {
+      const next: typeof out = [];
+      for (const prefix of out) {
+        for (const value of placeholderValues(ph)!) {
+          next.push({
+            combo: [...prefix.combo, [ph, value]],
+            resolved: prefix.resolved.replaceAll(`{${ph}}`, value),
+          });
+        }
+      }
+      out = next;
+    }
+    return out;
+  };
   const lines: string[] = [
     `/* ${contract.name} — shadow stylesheet from ${contract.id} v${contract.version} (@ds-contracts/emitter-web-components) */`,
     '',
@@ -272,21 +331,19 @@ export function shadowCss(contract: Contract): string {
   for (const [cssProp, ref] of Object.entries(rootTokens)) {
     const refPath = stripBraces(ref);
     if (cssProp === 'gap' && root.layout?.overlap) {
-      const overlapPhs = placeholdersIn(refPath);
-      if (overlapPhs.length === 1) {
-        for (const value of enums.get(overlapPhs[0]) ?? []) {
-          const resolved = refPath.replaceAll(`{${overlapPhs[0]}}`, value);
-          rootSubRules.push([`${rootWithEnum(overlapPhs[0], value)} > * + *`, [`margin-left: ${cssVar(resolved)}`]]);
-        }
-      } else {
+      if (placeholdersIn(refPath).length === 0) {
         rootSubRules.push([`${ROOT_SEL} > * + *`, [`margin-left: ${cssVar(refPath)}`]]);
+      } else {
+        for (const { combo, resolved } of expandRef('root token "gap"', refPath)) {
+          rootSubRules.push([`${rootWithCombo(combo)} > * + *`, [`margin-left: ${cssVar(resolved)}`]]);
+        }
       }
       continue;
     }
     const phs = placeholdersIn(refPath);
     if (phs.length === 0) {
       rootDecls.push(`${cssProp}: ${cssVar(refPath)}`);
-    } else if (phs.length === 1) {
+    } else if (phs.length === 1 && enums.has(phs[0])) {
       for (const value of enums.get(phs[0]) ?? []) {
         const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
         const key = `${phs[0]} ${value}`;
@@ -294,16 +351,14 @@ export function shadowCss(contract: Contract): string {
         entry.decls.push(`${cssProp}: ${cssVar(resolved)}`);
         enumRules.set(key, entry);
       }
-    } else if (phs.length === 2) {
-      const [pa, pb] = phs;
-      for (const a of enums.get(pa) ?? []) {
-        for (const b of enums.get(pb) ?? []) {
-          const resolved = refPath.replaceAll(`{${pa}}`, a).replaceAll(`{${pb}}`, b);
-          pairRules.push({
-            selector: rootWithPair([pa, a], [pb, b]),
-            decls: [`${cssProp}: ${cssVar(resolved)}`],
-          });
-        }
+    } else {
+      // Two or three axes (generateCss refuses more) — one compound rule per
+      // value tuple; the compound outranks the single enum rules above, so a
+      // pair binding wins over a single-axis binding of the same property.
+      // Also the boolean-placeholder case (`gap.{supportingText}`), which the
+      // enum-only branch above used to drop without a word.
+      for (const { combo, resolved } of expandRef(`root token "${cssProp}"`, refPath)) {
+        pairRules.push({ selector: rootWithCombo(combo), decls: [`${cssProp}: ${cssVar(resolved)}`] });
       }
     }
   }
@@ -313,12 +368,10 @@ export function shadowCss(contract: Contract): string {
     for (const [value, overrides] of Object.entries(map)) {
       for (const [cssProp, ref] of Object.entries(overrides)) {
         const refPath = stripBraces(ref);
-        const phs = placeholdersIn(refPath);
-        if (phs.length === 1) {
-          for (const phValue of enums.get(phs[0]) ?? []) {
-            const resolved = refPath.replaceAll(`{${phs[0]}}`, phValue);
+        if (placeholdersIn(refPath).length > 0) {
+          for (const { combo, resolved } of expandRef(`root tokensByProp ${tbpProp}=${value} "${cssProp}"`, refPath)) {
             pairRules.push({
-              selector: rootWithPair([tbpProp, value], [phs[0], phValue]),
+              selector: rootWithCombo(combo, [enumCond(tbpProp, value)]),
               decls: [`${cssProp}: ${cssVar(resolved)}`],
             });
           }
@@ -410,6 +463,20 @@ export function shadowCss(contract: Contract): string {
       }
     }
   }
+  // v17 statesByProp on the root — per-enum-value state rules, emitted AFTER
+  // the plain `states` rules so where both bind a channel for the same state
+  // the per-value rule wins at equal specificity (emit-react's
+  // `.prop-value:state` ordering). Refs are plain by schema.
+  for (const entry of root.statesByProp ?? []) {
+    const sel = STATE_SELECTORS[entry.state];
+    if (!sel) continue; // refused by validateContract
+    for (const [value, overrides] of Object.entries(entry.map)) {
+      rule(
+        `${rootWithEnum(entry.prop, value)}${sel}`,
+        Object.entries(overrides).map(([cssProp, ref]) => `${cssProp}: ${cssVar(stripBraces(ref))}`),
+      );
+    }
+  }
   // v15 declaredStates on the root.
   for (const [state, overrides] of Object.entries(root.declaredStates ?? {})) {
     const sel = STATE_SELECTORS[state];
@@ -477,26 +544,24 @@ export function shadowCss(contract: Contract): string {
     for (const [cssProp, ref] of Object.entries(part.tokens ?? {})) {
       const refPath = stripBraces(ref);
       if (cssProp === 'gap' && part.layout?.overlap) {
-        const overlapPhs = placeholdersIn(refPath);
-        if (overlapPhs.length === 1) {
-          for (const value of enums.get(overlapPhs[0]) ?? []) {
-            const resolved = refPath.replaceAll(`{${overlapPhs[0]}}`, value);
-            subRules.push([`${rootWithEnum(overlapPhs[0], value)} ${partSel(name)} > * + *`, [`margin-left: ${cssVar(resolved)}`]]);
-          }
-        } else {
+        if (placeholdersIn(refPath).length === 0) {
           subRules.push([`${partSel(name)} > * + *`, [`margin-left: ${cssVar(refPath)}`]]);
+        } else {
+          for (const { combo, resolved } of expandRef(`part "${name}" token "gap"`, refPath)) {
+            subRules.push([`${rootWithCombo(combo)} ${partSel(name)} > * + *`, [`margin-left: ${cssVar(resolved)}`]]);
+          }
         }
         continue;
       }
-      const phs = placeholdersIn(refPath);
-      if (phs.length === 1) {
-        for (const value of enums.get(phs[0]) ?? []) {
-          const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
-          subRules.push([`${rootWithEnum(phs[0], value)} ${partSel(name)}`, [`${cssProp}: ${cssVar(resolved)}`]]);
-        }
+      if (placeholdersIn(refPath).length === 0) {
+        decls.push(`${cssProp}: ${cssVar(refPath)}`);
         continue;
       }
-      decls.push(`${cssProp}: ${cssVar(refPath)}`);
+      // N placeholders → the cartesian as a compound ancestor selector (every
+      // modifier attribute rides the root), the same expansion the root takes.
+      for (const { combo, resolved } of expandRef(`part "${name}" token "${cssProp}"`, refPath)) {
+        subRules.push([`${rootWithCombo(combo)} ${partSel(name)}`, [`${cssProp}: ${cssVar(resolved)}`]]);
+      }
     }
     if (
       (part.tokens && ('border-width' in part.tokens || 'border-color' in part.tokens)) ||
@@ -544,11 +609,12 @@ export function shadowCss(contract: Contract): string {
         const plain: string[] = [];
         for (const [cssProp, ref] of Object.entries(overrides)) {
           const refPath = stripBraces(ref);
-          const phs = placeholdersIn(refPath);
-          if (phs.length === 1) {
-            for (const phValue of enums.get(phs[0]) ?? []) {
-              const resolved = refPath.replaceAll(`{${phs[0]}}`, phValue);
-              rule(`${rootWithPair([entry.prop, value], [phs[0], phValue])} ${partSel(name)}`, [
+          if (placeholdersIn(refPath).length > 0) {
+            for (const { combo, resolved } of expandRef(
+              `part "${name}" tokensByProp ${entry.prop}=${value} "${cssProp}"`,
+              refPath,
+            )) {
+              rule(`${rootWithCombo(combo, [enumCond(entry.prop, value)])} ${partSel(name)}`, [
                 `${cssProp}: ${cssVar(resolved)}`,
               ]);
             }
@@ -574,6 +640,19 @@ export function shadowCss(contract: Contract): string {
             rule(`${rootWithEnum(phs[0], value)}${sel} ${partSel(name)}`, [`${cssProp}: ${cssVar(resolved)}`]);
           }
         }
+      }
+    }
+    // v17 statesByProp on a nested part — a descendant rule under the root's
+    // enum condition AND state selector, after the plain `states` loop so the
+    // per-value binding wins (emit-react's `.prop-value:state .part`).
+    for (const entry of part.statesByProp ?? []) {
+      const sel = STATE_SELECTORS[entry.state];
+      if (!sel) continue; // refused by validateContract
+      for (const [value, overrides] of Object.entries(entry.map)) {
+        rule(
+          `${rootWithEnum(entry.prop, value)}${sel} ${partSel(name)}`,
+          Object.entries(overrides).map(([cssProp, ref]) => `${cssProp}: ${cssVar(stripBraces(ref))}`),
+        );
       }
     }
     if (part.layoutByProp) {
@@ -786,12 +865,18 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
   // ---- markup codegen ----------------------------------------------------
   const extraConsts: string[] = [];
 
+  // `attrs` on a part (root included): a `{prop}` value binds to the LIVE
+  // prop; an unset defaultless prop applies no attribute at all (an empty
+  // href="" / aria-label="" would be an invented fact — the same rule the
+  // parent→child threading in childAttrFragment follows). Literals land
+  // verbatim.
   const attrFragment = (part: Part): string =>
     Object.entries(part.attrs ?? {})
       .map(([attr, value]) => {
         const ref = value.match(/^\{([a-z][\w-]*)\}$/);
         if (!ref) return ` ${attr}="${tpl(escapeHtml(value))}"`;
-        return ` ${attr}="\${__esc(String(${acc(ref[1])} ?? ''))}"`;
+        const e = acc(ref[1]);
+        return `\${${e} == null ? '' : \` ${attr}="\${__esc(String(${e}))}"\`}`;
       })
       .join('');
 
@@ -1013,13 +1098,23 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
       rootAttrs += `\${${e} ? ' data-${a}=""' : ''}`;
     }
   }
+  // anatomy.root.attrs — the internal root's own attributes, carried exactly
+  // like every nested part's (the P0 this closes: aria-label / type / role /
+  // aria-hidden / href on the root were never emitted while the header
+  // claimed "attrs" EMITTED). attrs.role wins over the semantics default;
+  // validateContract refuses a DIFFERING pair by name.
+  rootAttrs += attrFragment(rootPart);
   const roleByProp = contract.semantics.roleByProp;
   if (roleByProp) {
     extraConsts.push(
       `    const __role = (${JSON.stringify(roleByProp.map)} as Record<string, string>)[String(${acc(roleByProp.prop)} ?? '')];`,
     );
     rootAttrs += `\${__role ? \` role="\${__role}"\` : ''}`;
-  } else if (contract.semantics.role && contract.semantics.role !== contract.semantics.element) {
+  } else if (
+    rootPart.attrs?.role === undefined &&
+    contract.semantics.role &&
+    contract.semantics.role !== contract.semantics.element
+  ) {
     rootAttrs += ` role="${contract.semantics.role}"`;
   }
   if (ariaByTrigger.has('root')) {

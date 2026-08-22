@@ -278,5 +278,9 @@ try {
     process.exit(1);
   }
   console.error(`✘ ${String(err instanceof Error ? err.message : err)}`);
+  // An unexpected throw is a defect in this tool, not a refusal: the stack is
+  // the receipt. Opt in with DS_CONTRACTS_STACK=1 so the default output stays
+  // one line for adopters.
+  if (process.env.DS_CONTRACTS_STACK && err instanceof Error && err.stack) console.error(err.stack);
   process.exit(1);
 }

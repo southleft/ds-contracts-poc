@@ -4,6 +4,7 @@
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import '../tokens.css';
 import { Avatar } from '../Avatar';
 import { ChatMessageMetadata } from '../ChatMessageMetadata';
 import { ChatMessage } from './ChatMessage';

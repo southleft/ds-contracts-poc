@@ -9967,8 +9967,18 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     claim: 'C3-detection',
     run: () => {
       const CL = path.join(ROOT, 'parity/receipts/console-loop');
-      type DriftRow = { stem: string; status: string; findings?: string[] };
+      type DriftRow = { stem: string; status: string; findings?: string[]; script?: string; specSource?: string };
       const EXPECTED: Record<string, { sync: number; drift: string[]; cellPending: number }> = {
+        // FIRST-PARTY 18 IS A COMMITTED NUMBER ONLY SINCE 2026-08-22. Before
+        // that the probe read the 13 component stems' emit scripts from
+        // parity/receipts/console-loop/emitted/ — gitignored, and named by
+        // wave numbers that `npm run console-loop:emit` no longer produces —
+        // so the 18 existed on the one machine that kept the leftover files
+        // and a clean clone got 5 (CI red from 2026-08-13; run 32602730931).
+        // The 13 now come from canvas-drift/EMIT-SPECS.json, minted once from
+        // those scripts and sha256-stamped; the assertion below pins that
+        // every first-party row read a tracked path, so the number cannot
+        // depend on the machine again.
         'first-party': { sync: 18, drift: [], cellPending: 36 },
         altitude: { sync: 7, drift: ['avatar'], cellPending: 0 },
         // ASTRYX 3 → 5 → 12 IN-SYNC (2026-08-09). The 5 came from the
@@ -10028,6 +10038,21 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         const rows = probe(lane);
         byLane.set(lane, rows);
         const want = EXPECTED[lane];
+        // COMMITTED INPUTS ONLY. A row that read its EXPECTED side from the
+        // gitignored rebuild target is a machine-local answer, whatever it says.
+        const GITIGNORED = 'parity/receipts/console-loop/emitted/';
+        const offTree = rows.filter((r: DriftRow) => (r.specSource ?? '').startsWith(GITIGNORED));
+        if (offTree.length) {
+          throw new Error(
+            `${lane}: ${offTree.length} row(s) read their spec from the gitignored ${GITIGNORED}: ${offTree.map((r: DriftRow) => r.stem).join(', ')}`,
+          );
+        }
+        const specPending = rows.filter((r: DriftRow) => r.status === 'SPEC-RECEIPT-PENDING');
+        if (specPending.length) {
+          throw new Error(
+            `${lane}: ${specPending.length} stem(s) have no committed spec receipt (canvas-drift/EMIT-SPECS.json): ${specPending.map((r: DriftRow) => r.stem).join(', ')}`,
+          );
+        }
         const sync = rows.filter((r: DriftRow) => r.status === 'in-sync').length;
         const pending = rows.filter((r: DriftRow) => r.status === 'CELL-PENDING').length;
         const drift = rows.filter((r: DriftRow) => r.status === 'DRIFT').map((r: DriftRow) => r.stem).sort();
@@ -10038,6 +10063,31 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         }
         if (drift.join(',') !== want.drift.join(',')) {
           throw new Error(`${lane}: expected drift on [${want.drift.join(',')}], got [${drift.join(',')}]`);
+        }
+      }
+      {
+        // The 13 first-party component stems' scripts are gitignored, so their
+        // spec MUST have come from the committed receipt — and the 5 composition
+        // stems' scripts are tracked under figma-sync/, read directly.
+        const fp = byLane.get('first-party') ?? [];
+        const RECEIPT = 'parity/receipts/console-loop/canvas-drift/EMIT-SPECS.json';
+        const fromReceipt = fp.filter((r: DriftRow) => r.specSource === RECEIPT).map((r: DriftRow) => r.stem).sort();
+        const fromTracked = fp
+          .filter((r: DriftRow) => r.specSource && r.specSource !== RECEIPT)
+          .map((r: DriftRow) => r.specSource as string)
+          .sort();
+        const wantReceipt = [
+          'avatar', 'badge', 'banner', 'button', 'card', 'checkbox', 'divider',
+          'progress-bar', 'slider', 'spinner', 'switch', 'text-field', 'token',
+        ];
+        if (fromReceipt.join(',') !== wantReceipt.join(',')) {
+          throw new Error(
+            `first-party: expected [${wantReceipt.join(',')}] to read their spec from ${RECEIPT}, got [${fromReceipt.join(',')}]`,
+          );
+        }
+        const badTracked = fromTracked.filter((p: string) => !/^figma-sync\/\d+-[a-z]+\.js$/.test(p));
+        if (badTracked.length) {
+          throw new Error(`first-party: composition specs must be read from tracked figma-sync/NN-<stem>.js, got ${badTracked.join(', ')}`);
         }
       }
       const carbon = byLane.get('carbon') ?? [];

@@ -24,7 +24,7 @@ export const Spinner = forwardRef<HTMLSpanElement, SpinnerProps>(function Spinne
 ) {
   const classes = [styles.root, className].filter(Boolean).join(' ');
   return (
-    <span ref={ref} className={classes} role="status" {...rest}>
+    <span ref={ref} className={classes} aria-label={label} role="status" {...rest}>
       <span
         className={styles.arc}
         aria-hidden="true"

@@ -1997,6 +1997,182 @@ check(
     ),
 );
 
+console.log(
+  "\n30. Child-part state-only channels (FC-DUMP-PROPOSE-PART-STATE-CHANNELS)",
+);
+// A Badge-shaped set under State promotion. The merged `icon` part is built
+// from DEFAULT-state variants only, so invertNodeEffects never sees the
+// Hover-only DROP_SHADOW and the child state loop used to carry fill/stroke
+// and nothing else: the icon proposed with ZERO notes, status verified-exact.
+// Every child channel the loop drops must carry or NAME — never silent.
+const partStateRow = (color: string, state: string): DumpNode => {
+  const hover = state === "Hover";
+  return {
+    name: `Color=${color}, State=${state}`,
+    type: "COMPONENT",
+    variantProperties: { Color: color, State: state },
+    fill: {
+      var: `imported/badge/root/background-color/${hover ? "hover/" : ""}${color.toLowerCase()}`,
+    },
+    children: [
+      {
+        name: "icon",
+        type: "FRAME",
+        fill: { hex: "111111" },
+        ...(hover ? { effects: shadowStack("0e9f6e") } : {}),
+        children: [
+          {
+            name: "glyph",
+            type: "TEXT",
+            text: { characters: "i", fontSize: 10, fontStyle: "Regular" },
+            fill: { hex: hover ? "ffffff" : "222222" },
+          },
+        ],
+      },
+      {
+        name: "box",
+        type: "FRAME",
+        fill: { hex: "333333" },
+        stroke: { hex: "444444" },
+        strokeWeight: hover ? 2 : 1,
+        cornerRadius: hover ? 8 : 4,
+        opacity: hover ? 0.8 : 1,
+      },
+      {
+        name: "caption",
+        type: "TEXT",
+        text: {
+          characters: "Badge",
+          fontSize: hover ? 14 : 12,
+          fontStyle: "Medium",
+        },
+        fill: { hex: "555555" },
+        ...(hover ? { effects: shadowStack("000000") } : {}),
+      },
+    ],
+  };
+};
+const partStateSet: DumpSet = {
+  setName: "Badge (flowbite.badge)",
+  type: "COMPONENT_SET",
+  semantics: { element: "span" },
+  propNames: { Color: "color" },
+  statePreviewAxis: {
+    axis: "State",
+    default: "Default",
+    states: ["Hover"],
+    primary: "Color",
+    pinned: {},
+  },
+  propertyDefinitions: {
+    Color: {
+      type: "VARIANT",
+      defaultValue: "Default",
+      variantOptions: ["Default", "Red"],
+    },
+    State: {
+      type: "VARIANT",
+      defaultValue: "Default",
+      variantOptions: ["Default", "Hover"],
+    },
+  },
+  variants: [
+    partStateRow("Default", "Default"),
+    partStateRow("Red", "Default"),
+    partStateRow("Default", "Hover"),
+    partStateRow("Red", "Hover"),
+  ],
+};
+const partStateExact = proposeFromDump(partStateSet, {
+  ...baseOpts,
+  mintUnbound: true,
+});
+type StatePart = {
+  states?: Record<string, Record<string, string>>;
+  parts?: Record<string, StatePart>;
+};
+const partStateParts =
+  (partStateExact.contract as { anatomy?: { root?: StatePart } }).anatomy?.root
+    ?.parts ?? {};
+const partNamed = (
+  parts: Record<string, StatePart>,
+  key: string,
+): StatePart | undefined => {
+  for (const [k, v] of Object.entries(parts)) {
+    if (k === key) return v;
+    const deeper = partNamed(v.parts ?? {}, key);
+    if (deeper) return deeper;
+  }
+  return undefined;
+};
+const iconHover = partNamed(partStateParts, "icon")?.states?.hover;
+const boxHover = partNamed(partStateParts, "box")?.states?.hover;
+const glyphHover = partNamed(partStateParts, "glyph")?.states?.hover;
+const partStateNotes = partStateExact.notes;
+const namesChild = (child: string, channel: RegExp): boolean =>
+  partStateNotes.some(
+    (n) =>
+      n.includes(`/${child}`) && n.includes('state "hover"') && channel.test(n),
+  );
+check(
+  "child-part Hover-only DROP_SHADOW carries as the part's states.hover.box-shadow (was silent, verified-exact)",
+  partStateExact.projection.status === "verified-exact" &&
+    typeof iconHover?.["box-shadow"] === "string" &&
+    iconHover["box-shadow"].includes("box-shadow") &&
+    partStateNotes.some(
+      (n) =>
+        n.includes("/icon") &&
+        n.includes("box-shadow") &&
+        n.includes('"hover"'),
+    ),
+);
+check(
+  "child-part Hover stroke weight / corner radius / opacity carry as states.hover border-width / border-radius / opacity",
+  typeof boxHover?.["border-width"] === "string" &&
+    boxHover["border-width"].includes("border-width") &&
+    typeof boxHover?.["border-radius"] === "string" &&
+    boxHover["border-radius"].includes("border-radius") &&
+    typeof boxHover?.["opacity"] === "string" &&
+    boxHover["opacity"].includes("opacity"),
+);
+check(
+  "TEXT child Hover-only effects and font-size change are NAMED per part+state+channel (no text-shadow / text-state vocabulary)",
+  namesChild("caption", /effect/i) &&
+    namesChild("caption", /fontSize|font-size/),
+);
+check(
+  "depth-2 child (icon/glyph) Hover ink carries as the nested part's states.hover.color or is NAMED — never silent",
+  (typeof glyphHover?.["color"] === "string" &&
+    glyphHover["color"].includes("color")) ||
+    namesChild("glyph", /fill|color/),
+);
+
+console.log(
+  "\n31. Positioned-child holder (FC-DUMP-PROPOSE-THUMB-HOLDER-RELATIVE)",
+);
+// The ELLIPSE thumb's placement rides stylesWhen { position: absolute, left/
+// right } on part-0-after. declareRelativeIfPositionedChildren read only
+// declared.position, so the DIRECT holder (part-0, the 44px track) never
+// became the positioning context and emit-react's root fallback anchored
+// `right: 2px` to the 100px root: the recovered ToggleSwitch drew its thumb
+// OUTSIDE the track. The holder must own position: relative, not the root.
+const thumbHolder = (
+  thumbShapeExact.contract as {
+    anatomy?: {
+      root?: {
+        declared?: Record<string, string>;
+        parts?: { "part-0"?: { declared?: Record<string, string> } };
+      };
+    };
+  }
+).anatomy?.root;
+check(
+  "holder of a stylesWhen position:absolute child declares position: relative (the track, not the root)",
+  thumbHolder?.parts?.["part-0"]?.declared?.position === "relative" &&
+    thumbHolder?.declared?.position === undefined &&
+    thumbWhen.some((row) => row.styles?.position === "absolute"),
+);
+
 if (failures.length > 0) {
   console.error(`\n${failures.length}/${checks} exact proposal checks failed:`);
   for (const failure of failures) console.error(`  - ${failure}`);

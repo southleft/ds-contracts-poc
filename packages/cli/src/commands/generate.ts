@@ -15,12 +15,20 @@
  *
  * Positional args are *.contract.json files or directories; the union is
  * both the generation set and the composition-ref resolution scope.
+ *
+ * EVERY code target also gets `<out>/tokens.css` — the custom-property sheet
+ * the emitted CSS references (core/emit-tokens-css.ts): `:root` for the
+ * default/light slot, `[data-theme="dark"]` for dark, `[data-brand="<n>"]`
+ * per brand. The react shell writes it inside generateComponents(); the
+ * registry targets get it here, after the emit, behind the same gate:
+ * referenced ⊆ defined, or refuse by name.
  */
 import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { emitterByName, getEmitters, registerEmitter, type Emitter } from '../../../../core/emitter.js';
-import { generateComponents } from '../../../../scripts/generate-components.js';
+import { emitTokensCss, referencedCssVars, tokensCssLayers, undefinedCssVars } from '../../../../core/emit-tokens-css.js';
+import { describeTokensCss, generateComponents } from '../../../../scripts/generate-components.js';
 import {
   buildEmitterCtxWithRouting,
   CliUsageError,
@@ -29,7 +37,7 @@ import {
   flagString,
   loadContracts,
   parseFlags,
-  tokenPathsOf,
+  parseTokenEntry,
   withTokenDiagnostics,
 } from '../lib.js';
 
@@ -84,20 +92,34 @@ export async function generateCommand(argv: string[]): Promise<number> {
   const iconsDir = flagString(parsed, 'icons');
   const outDir = path.resolve(out);
 
+  // BYTE-STABLE across output dirs: the header names the verb and the token
+  // files, never `--out` or the contract paths (cli-smoke generates the same
+  // set into gen-a/ and gen-b/ and hashes the trees equal).
+  const regenerateHint = `ds-contracts generate <contracts..> --out <dir> --target ${target}${
+    tokenEntries.length > 0
+      ? ` --tokens ${tokenEntries
+          .map((e) => {
+            const { prefix, file } = parseTokenEntry(e);
+            return prefix ? `${prefix}=${path.basename(file)}` : path.basename(file);
+          })
+          .join(',')}`
+      : ''
+  }`;
   if (target === 'react') {
     // The shipping generator — same exported function `npm run generate`
-    // runs (prettier formatting, per-component index, root barrel).
-    // The repo generator builds its own FLAT inventory (paths only, no slots),
-    // so slot prefixes are stripped here rather than routed.
-    const tokenFiles = tokenPathsOf(tokenEntries);
-    const { generated } = await generateComponents({
+    // runs (prettier formatting, per-component index, root barrel,
+    // tokens.css). Slot prefixes travel WITH the entries: the generator
+    // routes them through the same lib.ts rule as every other target.
+    const { generated, tokensCss } = await generateComponents({
       contractFiles: files,
-      tokenFiles: tokenFiles.length > 0 ? tokenFiles : undefined,
+      tokenFiles: tokenEntries.length > 0 ? tokenEntries : undefined,
       iconsDir,
       outDir,
       stories: parsed.flags.get('stories') === true,
+      regenerateHint,
     });
     console.log(`✔ Generated ${generated.length} component(s) → ${outDir}: ${generated.sort().join(', ')}`);
+    for (const line of describeTokensCss(tokensCss)) console.log(line);
     return 0;
   }
 
@@ -114,16 +136,61 @@ export async function generateCommand(argv: string[]): Promise<number> {
     iconsDir,
     flagString(parsed, 'file-key'),
   );
-  mkdirSync(outDir, { recursive: true });
-  const written: string[] = [];
+  // Emit everything to memory first: a refusal below must leave the
+  // destination untouched (the react shell's atomic rule, kept here).
+  const planned: { path: string; contents: string }[] = [];
   for (const contract of contracts.values()) {
     for (const file of withTokenDiagnostics(routing, () => emitter.emit(contract, ctx))) {
-      const dest = path.join(outDir, file.path);
-      mkdirSync(path.dirname(dest), { recursive: true });
-      writeFileSync(dest, file.contents);
-      written.push(file.path);
+      planned.push({ path: file.path, contents: file.contents });
     }
   }
+  // tokens.css beside the emitted files, gated: every var(--x) the
+  // stylesheets reference (.css, .css.ts, .html — never a .js/.tsx comment)
+  // must be defined in :root.
+  let sheet;
+  try {
+    sheet = emitTokensCss(tokensCssLayers(ctx.tokens), {
+      sources: routing.decisions.map((d) => `${path.basename(d.file)} [${d.slot}]`),
+      regenerate: regenerateHint,
+    });
+  } catch (err) {
+    throw new CliUsageError(`tokens.css ${String(err instanceof Error ? err.message : err)}`);
+  }
+  const referencedBy = new Map<string, string[]>();
+  for (const file of planned) {
+    if (!/\.(css|css\.ts|html)$/.test(file.path)) continue;
+    for (const name of referencedCssVars(file.contents)) {
+      referencedBy.set(name, [...(referencedBy.get(name) ?? []), file.path]);
+    }
+  }
+  const missing = undefinedCssVars(referencedBy.keys(), sheet.defined);
+  if (missing.length > 0) {
+    throw new CliUsageError(
+      `Refused — ${missing.length} custom propert(ies) the emitted "${emitter.name}" stylesheets reference are not defined in tokens.css (they would render as nothing, silently):\n` +
+        missing.map((n) => `  - ${n} — referenced by ${referencedBy.get(n)!.join(', ')}`).join('\n'),
+    );
+  }
+  planned.push({ path: 'tokens.css', contents: sheet.css });
+
+  mkdirSync(outDir, { recursive: true });
+  const written: string[] = [];
+  for (const file of planned) {
+    const dest = path.join(outDir, file.path);
+    mkdirSync(path.dirname(dest), { recursive: true });
+    writeFileSync(dest, file.contents);
+    written.push(file.path);
+  }
   console.log(`✔ Emitted ${written.length} file(s) with "${emitter.name}" → ${outDir}: ${written.join(', ')}`);
+  for (const line of describeTokensCss({
+    path: path.join(outDir, 'tokens.css'),
+    defined: sheet.defined.length,
+    referenced: referencedBy.size,
+    unreferenced: sheet.defined.filter((n) => !referencedBy.has(n)).length,
+    modes: sheet.modes,
+    danglingAliases: sheet.danglingAliases,
+    skippedComposite: sheet.skippedComposite,
+  })) {
+    console.log(line);
+  }
   return 0;
 }

@@ -66,6 +66,7 @@ import {
 } from "node:fs";
 import path from "node:path";
 import { figmaScriptEmitter } from "../../../../core/emitter.js";
+import { unsupportedTokenValues } from "../../../../core/token-set.js";
 import {
   contractFileNameForId,
   flatIdStem,
@@ -77,6 +78,13 @@ import {
   revisionOf,
   type ProvenancedContract,
 } from "../../../../core/contract-provenance.js";
+import {
+  createFigmaEngine,
+  summarizeCodeOnlyFacts,
+  tokenSetTokenTrees,
+  type CodeOnlyFact,
+  type TokenSetPayload,
+} from "../../../../core/index.js";
 import {
   contractHashOf,
   recordCanvasToCodeSync,
@@ -155,6 +163,12 @@ export interface ContractsBundle {
   /** Bundle-carried icon assets ({name: svgMarkup}; figma bundle --icons
    *  writes it) — rides through push verbatim. */
   icons?: unknown;
+  /** THE NAMED RECEIPT (figma bundle writes it): one row per contract, in
+   *  contract order — `{ contractId, name, facts: CodeOnlyFact[] }`, or
+   *  `{ contractId, name, refused }` when the compile could not run. The
+   *  facts the canvas cannot carry, named where the paste goes; rides
+   *  through push/publish verbatim. */
+  codeOnlyFacts?: unknown;
 }
 
 /** True when an anatomy node (or any descendant part) carries drawable
@@ -264,6 +278,7 @@ export function toBundle(filePath: string): ContractsBundle {
     }
     const tokenSet = (raw as { tokenSet?: unknown }).tokenSet;
     const icons = (raw as { icons?: unknown }).icons;
+    const codeOnlyFacts = (raw as { codeOnlyFacts?: unknown }).codeOnlyFacts;
     for (const [i, contract] of contracts.entries()) {
       assertContractProvenance(
         contract as ProvenancedContract,
@@ -278,6 +293,7 @@ export function toBundle(filePath: string): ContractsBundle {
       contracts,
       ...(tokenSet !== undefined && tokenSet !== null ? { tokenSet } : {}),
       ...(icons !== undefined && icons !== null ? { icons } : {}),
+      ...(Array.isArray(codeOnlyFacts) ? { codeOnlyFacts } : {}),
     };
   }
   if (
@@ -344,7 +360,7 @@ async function bundleCommand(argv: string[]): Promise<number> {
   // embed the RAW documents — the bundle carries the files as written, not a
   // schema-normalized copy ($schema keys and field order survive verbatim).
   const files = expandContractArgs(parsed.positionals);
-  loadContracts(files);
+  const loaded = loadContracts(files);
   const contracts = files.map(
     (f) => JSON.parse(readFileSync(f, "utf8")) as Record<string, unknown>,
   );
@@ -473,20 +489,68 @@ async function bundleCommand(argv: string[]): Promise<number> {
     ? flattenDtcg(readJsonObject(path.resolve(modeFiles[1])))
     : undefined;
   const name = flagString(parsed, "name") ?? "Tokens";
+  const tokenSet: TokenSetPayload = {
+    name,
+    base,
+    ...(light || dark
+      ? { modes: { ...(light ? { light } : {}), ...(dark ? { dark } : {}) } }
+      : {}),
+    ...(minted ? { minted } : {}),
+  };
+
+  // THE NAMED RECEIPT. Compile every contract EXACTLY the way the plugin
+  // compiles a paste (createPluginEngine's foreignEngineFor: the bundle's
+  // own token set + its icon assets) and carry the facts the canvas cannot
+  // — as a sibling of `contracts` in the bundle bytes, and as one summary
+  // line per contract on stdout. Until 2026-08-22 these facts were computed
+  // by the compile and discarded; the only trace was a `†` in the set
+  // description that nothing a person reads ever explained. A contract whose
+  // compile refuses here (a composition ref outside the bundle, say) gets a
+  // `refused` row naming why — the bundle still ships, because the plugin
+  // resolves such refs against its baked scope; the refusal is a receipt,
+  // not a door.
+  const engine = createFigmaEngine({
+    tokens: tokenSetTokenTrees(tokenSet),
+    icons: new Map(Object.entries(icons ?? {})),
+  });
+  const codeOnlyFacts = contracts.map((raw, i) => {
+    const contract = loaded.get(String(raw.id))!;
+    const row = { contractId: contract.id, name: contract.name };
+    try {
+      const facts: CodeOnlyFact[] =
+        engine.compileComponentData(contract, loaded).codeOnlyFacts ?? [];
+      return { ...row, facts };
+    } catch (err) {
+      return {
+        ...row,
+        refused: `code-only facts not computed for ${files[i]} — ${err instanceof Error ? err.message : String(err)}`,
+      };
+    }
+  });
+
+  // (tokenSet is declared above, before the code-only-facts compile, so the
+  // facts and the referee below read the same payload.)
+  // BUNDLE-TIME SHAPE REFEREE. A DTCG object-form composite (shadow,
+  // typography, border) or an array of layers has no Figma variable shape;
+  // the plugin used to `String()` it and ship "[object Object]" as a STRING
+  // variable that draws nothing. The plugin now skips such tokens by name;
+  // the CLI refuses to WRITE a bundle that carries them, so the loss is
+  // caught where the author can fix it — flatten the composite into scalars.
+  const composite = unsupportedTokenValues(tokenSet);
+  if (composite.length > 0) {
+    throw new CliUsageError(
+      `${composite.length} token(s) carry a $value no Figma variable can hold — flatten each composite into scalar tokens ` +
+        `(shadow → color/offsetX/offsetY/blur/spread; typography → fontFamily/fontSize/…) and re-run: ${composite.join("; ")}`,
+    );
+  }
 
   const bundle = {
     type: CONTRACTS_BUNDLE_TYPE,
     version: 1 as const,
-    tokenSet: {
-      name,
-      base,
-      ...(light || dark
-        ? { modes: { ...(light ? { light } : {}), ...(dark ? { dark } : {}) } }
-        : {}),
-      ...(minted ? { minted } : {}),
-    },
+    tokenSet,
     ...(icons ? { icons } : {}),
     contracts,
+    codeOnlyFacts,
   };
   const text = JSON.stringify(bundle, null, 2) + "\n";
   const outPath = path.resolve(out);
@@ -496,6 +560,18 @@ async function bundleCommand(argv: string[]): Promise<number> {
   console.log(
     `✔ Bundle written: ${out} — ${contracts.length} contract(s) + tokenSet "${name}" (${baseCount} base tokens${minted ? ", minted tree" : ""}${light || dark ? `, modes: ${[light && "light", dark && "dark"].filter(Boolean).join("/")}` : ""}${icons ? `, ${Object.keys(icons).length} icon asset(s)` : ""}; ${text.length} bytes). Paste it into the plugin's Build tab — JSON is the only thing a user ever pastes.`,
   );
+  const named = codeOnlyFacts.reduce(
+    (n, row) => n + ("facts" in row ? row.facts.length : 0),
+    0,
+  );
+  console.log(
+    `  Code-only facts — what the contracts carry and the canvas cannot (${named} named across ${contracts.length} contract(s); the plugin stamps them as ds_contracts/codeOnlyFacts and lists them in its run report):`,
+  );
+  for (const row of codeOnlyFacts) {
+    console.log(
+      `    ${"facts" in row ? summarizeCodeOnlyFacts(row.name, row.facts) : `${row.name}: ${row.refused}`}`,
+    );
+  }
   return 0;
 }
 

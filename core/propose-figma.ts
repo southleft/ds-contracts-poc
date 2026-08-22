@@ -3560,9 +3560,23 @@ function declareRelativeIfPositionedChildren(
   parts: Record<string, unknown>,
   m: Merged | null,
 ): void {
-  const positioned = Object.values(parts).some(
-    (p) => ((p as { declared?: Record<string, string> }).declared?.position) === 'absolute',
-  );
+  // The positioned child's spelling is EITHER declared.position (the
+  // overlay/abs door) OR stylesWhen[].styles.position (the shape-placement
+  // door, #42: the ToggleSwitch thumb's per-checked left/right ride
+  // stylesWhen). Reading only `declared` left the track (part-0) unpositioned,
+  // emit-react's root fallback anchored `right: 2px` to the 100px root and the
+  // recovered thumb drew OUTSIDE the 44px track
+  // (FC-DUMP-PROPOSE-THUMB-HOLDER-RELATIVE).
+  const positioned = Object.values(parts).some((p) => {
+    const rec = p as {
+      declared?: Record<string, string>;
+      stylesWhen?: Array<{ styles?: Record<string, string> }>;
+    };
+    return (
+      rec.declared?.position === 'absolute' ||
+      (rec.stylesWhen ?? []).some((sw) => sw.styles?.['position'] === 'absolute')
+    );
+  });
   if (!positioned) return;
   if (m && m.occ.some((o) => (o.node as { __synthetic?: boolean }).__synthetic === true)) return;
   const declared = (holder.declared as Record<string, string> | undefined) ?? {};
@@ -8372,6 +8386,58 @@ function proposeStateDiffs(
       childOccByName.set(c.name, list);
     }
   }
+  /** Resolve a drawn child (by name) to its built anatomy part + path key.
+   *  Depth-1 children go through the drawn-name → key map; when that misses
+   *  (a wrapper-union fold nested it) and for deeper descendants, walk the
+   *  anatomy for a UNIQUELY named part. */
+  const resolveChildPart = (
+    childName: string,
+    depth: number,
+  ): { partRec?: Record<string, unknown>; resolvedKey?: string } => {
+    const key = depth === 1 ? keyByChildName?.get(childName) : undefined;
+    let partRec = key !== undefined && rootParts ? (rootParts[key] as Record<string, unknown> | undefined) : undefined;
+    // THE FLAT MAP CANNOT SPELL A NESTED PART, and that is the whole defect.
+    // `keyByChildName` is Map<drawnName, depth1Key>, built from the POST-FOLD
+    // anatomy; this loop reads the PRE-FOLD dump. When foldWrapperUnion
+    // synthesizes a wrapper — Untitled UI's dropdown-list-item draws `Text`
+    // flat in 16 of 24 variants and nested under a real `Content` frame in
+    // the other 8, so the union folds it to `Content.parts.Text` — the lookup
+    // misses and the state override is never proposed. The sibling
+    // `Shortcut` survives only because it is genuinely depth-1 on both sides.
+    //
+    // Measured: the disabled render was BYTE-IDENTICAL to default (same sha1)
+    // while the dump carried the fact exactly (fill 404040 → e5e5e5).
+    //
+    // Resolve by walking the anatomy for a UNIQUELY named part. Uniqueness is
+    // the safety condition: two parts sharing a name would make the match a
+    // guess, and a wrong state override is worse than a named refusal, so an
+    // ambiguous name falls through to the refusal below.
+    let resolvedKey = key;
+    if (!partRec && rootParts) {
+      const hits: Array<{ rec: Record<string, unknown>; path: string }> = [];
+      const findNamed = (parts: Record<string, unknown> | undefined, trail: string[]): void => {
+        for (const [k, v] of Object.entries(parts ?? {})) {
+          const rec = v as Record<string, unknown>;
+          if (k === childName) hits.push({ rec, path: [...trail, k].join('/') });
+          findNamed(rec?.parts as Record<string, unknown> | undefined, [...trail, k]);
+        }
+      };
+      findNamed(rootParts as Record<string, unknown>, []);
+      if (hits.length === 1) {
+        partRec = hits[0].rec;
+        // The PATH, not just the record — `mintStateObservation` names the
+        // minted token `<partKey>-state-<state>`, and an undefined partKey
+        // falls back to the ROOT spelling `state-<state>`. Passing the record
+        // without its path carried the fact and then minted it under a name
+        // that collides with the root's own state tokens: the first pass of
+        // this fix produced `imported.dropdown-list-item.state-disabled.color`
+        // beside the correctly-named `shortcut-state-disabled`. Depth has to
+        // travel with the record.
+        resolvedKey = hits[0].path;
+      }
+    }
+    return { partRec, resolvedKey };
+  };
   for (const [childName, childOccs] of childOccByName) {
     type Pick = (n: DumpNode) => { var?: string; hex?: string; alpha?: number } | undefined;
     const channels: Array<{ cssProp: string; paintName: string; pick: Pick }> =
@@ -8384,48 +8450,7 @@ function proposeStateDiffs(
     for (const ch of channels) {
       if (!childOccs.some((x) => paintKey(ch.pick(x.node)) !== paintKey(ch.pick(x.base)))) continue;
       const at = `${where}/${childName}`;
-      const key = keyByChildName?.get(childName);
-      let partRec = key !== undefined && rootParts ? (rootParts[key] as Record<string, unknown> | undefined) : undefined;
-      // THE FLAT MAP CANNOT SPELL A NESTED PART, and that is the whole defect.
-      // `keyByChildName` is Map<drawnName, depth1Key>, built from the POST-FOLD
-      // anatomy; this loop reads the PRE-FOLD dump. When foldWrapperUnion
-      // synthesizes a wrapper — Untitled UI's dropdown-list-item draws `Text`
-      // flat in 16 of 24 variants and nested under a real `Content` frame in
-      // the other 8, so the union folds it to `Content.parts.Text` — the lookup
-      // misses and the state override is never proposed. The sibling
-      // `Shortcut` survives only because it is genuinely depth-1 on both sides.
-      //
-      // Measured: the disabled render was BYTE-IDENTICAL to default (same sha1)
-      // while the dump carried the fact exactly (fill 404040 → e5e5e5).
-      //
-      // Resolve by walking the anatomy for a UNIQUELY named part. Uniqueness is
-      // the safety condition: two parts sharing a name would make the match a
-      // guess, and a wrong state override is worse than a named refusal, so an
-      // ambiguous name falls through to the refusal below.
-      let resolvedKey = key;
-      if (!partRec && rootParts) {
-        const hits: Array<{ rec: Record<string, unknown>; path: string }> = [];
-        const findNamed = (parts: Record<string, unknown> | undefined, trail: string[]): void => {
-          for (const [k, v] of Object.entries(parts ?? {})) {
-            const rec = v as Record<string, unknown>;
-            if (k === childName) hits.push({ rec, path: [...trail, k].join('/') });
-            findNamed(rec?.parts as Record<string, unknown> | undefined, [...trail, k]);
-          }
-        };
-        findNamed(rootParts as Record<string, unknown>, []);
-        if (hits.length === 1) {
-          partRec = hits[0].rec;
-          // The PATH, not just the record — `mintStateObservation` names the
-          // minted token `<partKey>-state-<state>`, and an undefined partKey
-          // falls back to the ROOT spelling `state-<state>`. Passing the record
-          // without its path carried the fact and then minted it under a name
-          // that collides with the root's own state tokens: the first pass of
-          // this fix produced `imported.dropdown-list-item.state-disabled.color`
-          // beside the correctly-named `shortcut-state-disabled`. Depth has to
-          // travel with the record.
-          resolvedKey = hits[0].path;
-        }
-      }
+      const { partRec, resolvedKey } = resolveChildPart(childName, 1);
       if (!partRec || !partStates) {
         // Generator hoist: the sole root TEXT named `label` is not a part —
         // its tokens already live on the root (`color`). State-varying ink
@@ -8547,6 +8572,230 @@ function proposeStateDiffs(
       ctx.notes.push(
         `${at}: ${ch.paintName} in state "${state}" mixes bound and raw paints across variants — not proposed, review`,
       );
+    }
+  }
+
+  // FC-DUMP-PROPOSE-PART-STATE-CHANNELS — everything ELSE a drawn descendant
+  // changes in this state. The color-kind loop above carried fill/stroke at
+  // depth 1 and nothing else: a Hover-only DROP_SHADOW on an icon FRAME (the
+  // merged part is built from DEFAULT-state variants, so invertNodeEffects
+  // returned at its first line) proposed with ZERO notes at verified-exact —
+  // a silent loss. Each channel below either CARRIES as a part-level state
+  // override (box-shadow / border-width / border-radius / opacity —
+  // PART_STATE_CHANNELS grew to match; bound refs unify, raw values mint) or
+  // is NAMED per part+state+channel where the vocabulary stops (TEXT
+  // effects/stroke/type facts, visibility, geometry, layout). Depth ≥ 2
+  // descendants resolve by unique part name, color-kind channels included.
+  {
+    type DescOcc = { variant: string; node: DumpNode; base: DumpNode };
+    const descByPath = new Map<string, { depth: number; occs: DescOcc[] }>();
+    const collect = (pairs: DescOcc[], prefix: string, depth: number): void => {
+      const byName = new Map<string, DescOcc[]>();
+      for (const o of pairs) {
+        for (const c of o.node.children ?? []) {
+          const bc = (o.base.children ?? []).find((x) => x.name === c.name);
+          if (!bc) continue;
+          const list = byName.get(c.name) ?? [];
+          list.push({ variant: o.variant, node: c, base: bc });
+          byName.set(c.name, list);
+        }
+      }
+      for (const [name, list] of byName) {
+        const p = prefix ? `${prefix}/${name}` : name;
+        descByPath.set(p, { depth, occs: list });
+        collect(list, p, depth + 1);
+      }
+    };
+    collect(occs.map((o) => ({ variant: o.variant, node: o.node, base: o.base })), '', 1);
+
+    type Obs = { variant: string; ref?: string; value?: string | number };
+    const stackOf = (n: DumpNode): string | undefined => {
+      const eff = n.effects ?? [];
+      if (eff.length === 0) return undefined;
+      if (!eff.every((e) => e.type === 'DROP_SHADOW')) return undefined;
+      return eff.map(shadowCss).join(', ');
+    };
+    const effectKinds = (n: DumpNode): string => (n.effects ?? []).map((e) => e.type).join('+') || 'none';
+    const uniformBound = (n: DumpNode, fields: string[]): string | undefined => {
+      const b = n.bound ?? {};
+      const vals = fields.map((f) => b[f]);
+      if (vals.every((v) => v === undefined)) return undefined;
+      if (vals.every((v) => v !== undefined && v === vals[0])) return dotPath(vals[0]!);
+      if (vals[0] !== undefined && vals.slice(1).every((v) => v === undefined)) return dotPath(vals[0]);
+      return 'mixed';
+    };
+
+    for (const [path, { depth, occs: d }] of descByPath) {
+      const childName = path.split('/').pop()!;
+      const at = `${where}/${path}`;
+      const isText = d.every((x) => x.node.type === 'TEXT');
+      const differs = (pick: (n: DumpNode) => unknown): boolean =>
+        d.some((x) => JSON.stringify(pick(x.node) ?? null) !== JSON.stringify(pick(x.base) ?? null));
+      const nameOnly = (channel: string, why: string): void => {
+        ctx.notes.push(`${at}: ${channel} differs in state "${state}" — ${why}; NAMED, not proposed (review)`);
+      };
+      let resolved: { partRec?: Record<string, unknown>; resolvedKey?: string } | undefined;
+      const holder = (): { rec: PartStateTarget; key?: string; part: Record<string, unknown> } | 'none' | 'ref' => {
+        resolved ??= resolveChildPart(childName, depth);
+        if (!resolved.partRec || !partStates) return 'none';
+        const pr = resolved.partRec;
+        if (pr.component !== undefined || pr.slot !== undefined || pr.repeat !== undefined) return 'ref';
+        let rec = partStates.find((r) => r.part === pr && r.state === state);
+        if (!rec) {
+          rec = { part: pr, state, target: {}, byProp: {} };
+          partStates.push(rec);
+        }
+        return { rec, key: resolved.resolvedKey, part: pr };
+      };
+      const carry = (
+        cssProp: string,
+        fieldName: string,
+        kind: 'color' | 'px' | 'number' | 'shadow',
+        obs: Obs[],
+      ): void => {
+        const h = holder();
+        if (h === 'none') {
+          nameOnly(fieldName, 'no anatomy part maps to this drawn child (or its name is not unique in the anatomy)');
+          return;
+        }
+        if (h === 'ref') {
+          nameOnly(fieldName, 'the child contract owns its styling on a component-ref/slot/repeat part');
+          return;
+        }
+        const baseTokens = (h.part.tokens ?? {}) as Record<string, string>;
+        // The base plane is read from the DUMP (unbound base paints mint
+        // AFTER this pass, so part.tokens is not yet the base truth).
+        if (
+          cssProp === 'border-width' &&
+          !d.every((x) => x.base.stroke !== undefined && (x.base.strokeWeight ?? 0) > 0)
+        ) {
+          nameOnly(fieldName, 'the part draws no border in the base plane (border: 0, no border-style for a state override to widen)');
+          return;
+        }
+        if (obs.every((o) => o.ref !== undefined)) {
+          const u = unifyRefs(obs.map((o) => ({ variant: o.variant, path: o.ref })), ctx.axes);
+          if (u.kind === 'ref') {
+            if (u.ref !== baseTokens[cssProp]) h.rec.target[cssProp] = u.ref;
+          } else if (u.kind === 'per-value') {
+            for (const [value, ref] of Object.entries(u.perValue.byValue)) {
+              ((h.rec.byProp[u.perValue.propName] ??= {})[value] ??= {})[cssProp] = ref;
+            }
+            ctx.notes.push(
+              `${at} ${fieldName} (state ${state}): bindings are a function of variant axis "${u.perValue.propName}" by VALUE — carried as part statesByProp (FC-DUMP-PROPOSE-PART-STATE-CHANNELS)`,
+            );
+          } else if (u.kind === 'drift') {
+            ctx.notes.push(`${at} ${fieldName} (state ${state}): ${u.detail}`);
+          }
+          return;
+        }
+        if (obs.every((o) => o.value !== undefined)) {
+          reportUnbound(ctx, `${at} (state ${state})`, fieldName, obs[0].value!);
+          const drawn = obs.map((o) => ({ variant: o.variant, value: o.value! }));
+          if (cssProp === 'box-shadow') {
+            const authored = authoredPartAt(ctx, h.key ?? '')?.states?.[state]?.['box-shadow'];
+            if (
+              recoverAuthoredBoxShadow(
+                ctx,
+                h.rec.target,
+                `${at} (state ${state})`,
+                authored,
+                drawn.map((r) => ({ variant: r.variant, value: String(r.value) })),
+              )
+            ) {
+              return;
+            }
+          }
+          mintStateObservation(ctx, h.rec.target, state, cssProp, kind, drawn, `${at} (state ${state})|${fieldName}`, h.key);
+          if (!ctx.mint) {
+            ctx.notes.push(
+              `${at}: ${fieldName} changes in state "${state}" — a literal part-state override needs minting (mintUnbound); NAMED, not proposed`,
+            );
+          }
+          return;
+        }
+        nameOnly(fieldName, 'mixes bound and raw values across variants');
+      };
+      const paintObs = (pick: (n: DumpNode) => { var?: string; hex?: string; alpha?: number } | undefined): Obs[] | null => {
+        const paints = d.map((x) => ({ variant: x.variant, paint: pick(x.node) }));
+        if (paints.some((p) => p.paint === undefined)) return null;
+        return paints.map((p) => ({
+          variant: p.variant,
+          ...(p.paint!.var !== undefined ? { ref: dotPath(p.paint!.var) } : {}),
+          ...(p.paint!.var === undefined && p.paint!.hex !== undefined ? { value: paintCssHex(p.paint!) } : {}),
+        }));
+      };
+      const numberObs = (
+        pick: (n: DumpNode) => number | undefined,
+        fallback: number,
+        boundFields: string[],
+      ): Obs[] | 'mixed' => {
+        const out: Obs[] = [];
+        for (const x of d) {
+          const ref = uniformBound(x.node, boundFields);
+          if (ref === 'mixed') return 'mixed';
+          out.push(ref !== undefined ? { variant: x.variant, ref } : { variant: x.variant, value: pick(x.node) ?? fallback });
+        }
+        return out;
+      };
+
+      // Color-kind channels at depth ≥ 2 (depth 1 is the loop above).
+      if (depth >= 2) {
+        const paintChannels = isText
+          ? [{ cssProp: 'color', fieldName: 'fill', pick: (n: DumpNode) => n.fill }]
+          : [
+              { cssProp: 'background-color', fieldName: 'fill', pick: (n: DumpNode) => n.fill },
+              { cssProp: 'border-color', fieldName: 'stroke', pick: (n: DumpNode) => n.stroke },
+            ];
+        for (const ch of paintChannels) {
+          if (!d.some((x) => paintKey(ch.pick(x.node)) !== paintKey(ch.pick(x.base)))) continue;
+          const obs = paintObs(ch.pick);
+          if (obs === null) nameOnly(ch.fieldName, 'absent in some of its variant(s) — a state override cannot unset a channel');
+          else carry(ch.cssProp, ch.fieldName, 'color', obs);
+        }
+      }
+      // Node opacity — any node type.
+      if (differs((n) => n.opacity ?? 1) || differs((n) => n.bound?.opacity)) {
+        const obs = numberObs((n) => n.opacity, 1, ['opacity']);
+        if (obs === 'mixed') nameOnly('opacity', 'mixed bound sides');
+        else carry('opacity', 'opacity', 'number', obs);
+      }
+      if (isText) {
+        // TEXT: no text-shadow / text-stroke / per-state type vocabulary.
+        if (differs((n) => n.effects ?? [])) nameOnly('effects', `TEXT effects (${[...new Set(d.map((x) => effectKinds(x.node)))].join(', ')}) have no text-shadow vocabulary`);
+        if (differs((n) => n.stroke) || differs((n) => n.strokeWeight)) nameOnly('stroke', 'a TEXT stroke has no contract vocabulary');
+        for (const field of ['characters', 'fontSize', 'fontStyle', 'lineHeight', 'textCase', 'style', 'fontSizeVar', 'fontWeightVar', 'lineHeightVar'] as const) {
+          if (differs((n) => n.text?.[field])) nameOnly(`text.${field}`, 'part-level states carry color-kind, shadow, border and opacity channels only (no per-state type vocabulary)');
+        }
+      } else {
+        // Effects → box-shadow (DROP_SHADOW-only stacks; the root's own rule).
+        if (d.some((x) => stackOf(x.node) !== stackOf(x.base) || effectKinds(x.node) !== effectKinds(x.base))) {
+          if (d.some((x) => stackOf(x.node) === undefined)) {
+            nameOnly('effects', `absent or not a pure DROP_SHADOW stack (${[...new Set(d.map((x) => effectKinds(x.node)))].join(', ')}) in some of its variant(s) — a state override cannot unset a channel and only DROP_SHADOW layers map to box-shadow`);
+          } else {
+            carry('box-shadow', 'effects', 'shadow', d.map((x) => ({ variant: x.variant, value: stackOf(x.node)! })));
+          }
+        }
+        const weightFields = ['strokeWeight', 'strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight'];
+        if (differs((n) => n.strokeWeight ?? 0) || differs((n) => weightFields.map((f) => n.bound?.[f]))) {
+          const obs = numberObs((n) => n.strokeWeight, 0, weightFields);
+          if (obs === 'mixed') nameOnly('strokeWeight', 'per-side stroke weight bindings are not one uniform width');
+          else carry('border-width', 'strokeWeight', 'px', obs);
+        }
+        const radiusFields = ['topLeftRadius', 'topRightRadius', 'bottomLeftRadius', 'bottomRightRadius'];
+        if (differs((n) => n.cornerRadius ?? 0) || differs((n) => radiusFields.map((f) => n.bound?.[f]))) {
+          const obs = numberObs((n) => n.cornerRadius, 0, radiusFields);
+          if (obs === 'mixed') nameOnly('cornerRadius', 'per-corner radius bindings are not one uniform radius');
+          else carry('border-radius', 'cornerRadius', 'px', obs);
+        }
+      }
+      // Facts with no per-state vocabulary at all — named so nothing is silent.
+      if (differs((n) => n.hidden === true)) nameOnly('visibility (hidden)', 'per-state visibility has no contract vocabulary');
+      const geo = (n: DumpNode) => {
+        const g = n as { width?: number; height?: number };
+        return [g.width, g.height, n.fixedSize, n.abs];
+      };
+      if (differs(geo)) nameOnly('geometry (width/height/abs)', 'per-state geometry has no contract vocabulary');
+      if (differs((n) => n.layout)) nameOnly('layout', 'per-state auto-layout has no contract vocabulary');
     }
   }
 }

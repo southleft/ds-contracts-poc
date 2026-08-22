@@ -4,6 +4,8 @@
 // per brand), Semantic (modes "Light"/"Dark", aliasing primitives AND brand).
 // Leftovers in those three collections are NAMED; they are removed only when
 // globalThis.DS_PRUNE_TOKENS === true (opt-in, FC-APPLY-TOKENS-NOT-PRUNED).
+// Designer-edited variable VALUES are NAMED (variableDrift) and kept unless
+// globalThis.DS_OVERWRITE_TOKENS === true (FC-APPLY-TOKENS-KEEP-EDITS).
 const PRIMITIVES = [{"name":"color/white","type":"COLOR","value":"#FFFFFF","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-white)"},{"name":"color/black","type":"COLOR","value":"#000000","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-black)"},{"name":"color/gray/50","type":"COLOR","value":"#F9FAFB","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-gray-50)"},{"name":"color/gray/100","type":"COLOR","value":"#F3F4F6","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-gray-100)"},{"name":"color/gray/200","type":"COLOR","value":"#E5E7EB","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-gray-200)"},{"name":"color/gray/300","type":"COLOR","value":"#D1D5DB","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-gray-300)"},{"name":"color/gray/400","type":"COLOR","value":"#9CA3AF","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-gray-400)"},{"name":"color/gray/500","type":"COLOR","value":"#6B7280","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-gray-500)"},{"name":"color/gray/600","type":"COLOR","value":"#4B5563","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-gray-600)"},{"name":"color/gray/700","type":"COLOR","value":"#374151","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-gray-700)"},{"name":"color/gray/800","type":"COLOR","value":"#1F2937","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-gray-800)"},{"name":"color/gray/900","type":"COLOR","value":"#111827","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-gray-900)"},{"name":"color/blue/100","type":"COLOR","value":"#DBEAFE","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-blue-100)"},{"name":"color/blue/300","type":"COLOR","value":"#93C5FD","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-blue-300)"},{"name":"color/blue/400","type":"COLOR","value":"#60A5FA","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-blue-400)"},{"name":"color/blue/500","type":"COLOR","value":"#3B82F6","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-blue-500)"},{"name":"color/blue/600","type":"COLOR","value":"#2563EB","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-blue-600)"},{"name":"color/blue/700","type":"COLOR","value":"#1D4ED8","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-blue-700)"},{"name":"color/blue/900","type":"COLOR","value":"#1E3A8A","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-blue-900)"},{"name":"color/red/100","type":"COLOR","value":"#FEE2E2","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-red-100)"},{"name":"color/red/300","type":"COLOR","value":"#FCA5A5","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-red-300)"},{"name":"color/red/400","type":"COLOR","value":"#F87171","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-red-400)"},{"name":"color/red/500","type":"COLOR","value":"#EF4444","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-red-500)"},{"name":"color/red/600","type":"COLOR","value":"#DC2626","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-red-600)"},{"name":"color/red/700","type":"COLOR","value":"#B91C1C","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-red-700)"},{"name":"color/red/900","type":"COLOR","value":"#7F1D1D","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-red-900)"},{"name":"color/green/100","type":"COLOR","value":"#DCFCE7","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-green-100)"},{"name":"color/green/500","type":"COLOR","value":"#22C55E","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-green-500)"},{"name":"color/green/600","type":"COLOR","value":"#16A34A","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-green-600)"},{"name":"color/green/700","type":"COLOR","value":"#15803D","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-green-700)"},{"name":"color/green/900","type":"COLOR","value":"#14532D","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-green-900)"},{"name":"color/amber/100","type":"COLOR","value":"#FEF3C7","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-amber-100)"},{"name":"color/amber/500","type":"COLOR","value":"#F59E0B","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-amber-500)"},{"name":"color/amber/600","type":"COLOR","value":"#D97706","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-amber-600)"},{"name":"color/amber/700","type":"COLOR","value":"#B45309","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-amber-700)"},{"name":"color/amber/900","type":"COLOR","value":"#78350F","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-amber-900)"},{"name":"color/orange/100","type":"COLOR","value":"#FFEDD5","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-orange-100)"},{"name":"color/orange/700","type":"COLOR","value":"#C2410C","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-orange-700)"},{"name":"color/orange/900","type":"COLOR","value":"#7C2D12","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-orange-900)"},{"name":"color/yellow/100","type":"COLOR","value":"#FEF9C3","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-yellow-100)"},{"name":"color/yellow/700","type":"COLOR","value":"#A16207","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-yellow-700)"},{"name":"color/yellow/900","type":"COLOR","value":"#713F12","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-yellow-900)"},{"name":"color/teal/100","type":"COLOR","value":"#CCFBF1","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-teal-100)"},{"name":"color/teal/300","type":"COLOR","value":"#5EEAD4","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-teal-300)"},{"name":"color/teal/400","type":"COLOR","value":"#2DD4BF","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-teal-400)"},{"name":"color/teal/500","type":"COLOR","value":"#14B8A6","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-teal-500)"},{"name":"color/teal/600","type":"COLOR","value":"#0D9488","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-teal-600)"},{"name":"color/teal/700","type":"COLOR","value":"#0F766E","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-teal-700)"},{"name":"color/teal/900","type":"COLOR","value":"#134E4A","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-teal-900)"},{"name":"color/cyan/100","type":"COLOR","value":"#CFFAFE","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-cyan-100)"},{"name":"color/cyan/700","type":"COLOR","value":"#0E7490","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-cyan-700)"},{"name":"color/cyan/900","type":"COLOR","value":"#164E63","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-cyan-900)"},{"name":"color/purple/100","type":"COLOR","value":"#F3E8FF","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-purple-100)"},{"name":"color/purple/300","type":"COLOR","value":"#D8B4FE","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-purple-300)"},{"name":"color/purple/400","type":"COLOR","value":"#C084FC","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-purple-400)"},{"name":"color/purple/500","type":"COLOR","value":"#A855F7","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-purple-500)"},{"name":"color/purple/600","type":"COLOR","value":"#9333EA","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-purple-600)"},{"name":"color/purple/700","type":"COLOR","value":"#7E22CE","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-purple-700)"},{"name":"color/purple/900","type":"COLOR","value":"#581C87","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-purple-900)"},{"name":"color/pink/100","type":"COLOR","value":"#FCE7F3","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-pink-100)"},{"name":"color/pink/700","type":"COLOR","value":"#BE185D","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-pink-700)"},{"name":"color/pink/900","type":"COLOR","value":"#831843","scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--color-pink-900)"},{"name":"space/25","type":"FLOAT","value":2,"scopes":["GAP","WIDTH_HEIGHT"],"codeSyntax":"var(--space-25)"},{"name":"space/50","type":"FLOAT","value":4,"scopes":["GAP","WIDTH_HEIGHT"],"codeSyntax":"var(--space-50)"},{"name":"space/100","type":"FLOAT","value":8,"scopes":["GAP","WIDTH_HEIGHT"],"codeSyntax":"var(--space-100)"},{"name":"space/150","type":"FLOAT","value":12,"scopes":["GAP","WIDTH_HEIGHT"],"codeSyntax":"var(--space-150)"},{"name":"space/200","type":"FLOAT","value":16,"scopes":["GAP","WIDTH_HEIGHT"],"codeSyntax":"var(--space-200)"},{"name":"space/250","type":"FLOAT","value":20,"scopes":["GAP","WIDTH_HEIGHT"],"codeSyntax":"var(--space-250)"},{"name":"space/300","type":"FLOAT","value":24,"scopes":["GAP","WIDTH_HEIGHT"],"codeSyntax":"var(--space-300)"},{"name":"space/400","type":"FLOAT","value":32,"scopes":["GAP","WIDTH_HEIGHT"],"codeSyntax":"var(--space-400)"},{"name":"space/overlap","type":"FLOAT","value":-8,"scopes":["GAP","WIDTH_HEIGHT"],"codeSyntax":"var(--space-overlap)"},{"name":"radius/100","type":"FLOAT","value":4,"scopes":["CORNER_RADIUS"],"codeSyntax":"var(--radius-100)"},{"name":"radius/200","type":"FLOAT","value":8,"scopes":["CORNER_RADIUS"],"codeSyntax":"var(--radius-200)"},{"name":"radius/pill","type":"FLOAT","value":999,"scopes":["CORNER_RADIUS"],"codeSyntax":"var(--radius-pill)"},{"name":"radius/none","type":"FLOAT","value":0,"scopes":["CORNER_RADIUS"],"codeSyntax":"var(--radius-none)"},{"name":"border-width/100","type":"FLOAT","value":1,"scopes":["STROKE_FLOAT"],"codeSyntax":"var(--border-width-100)"},{"name":"border-width/200","type":"FLOAT","value":2,"scopes":["STROKE_FLOAT"],"codeSyntax":"var(--border-width-200)"},{"name":"container/sm","type":"FLOAT","value":320,"scopes":["WIDTH_HEIGHT"],"codeSyntax":"var(--container-sm)"},{"name":"container/xs","type":"FLOAT","value":120,"scopes":["WIDTH_HEIGHT"],"codeSyntax":"var(--container-xs)"},{"name":"container/md","type":"FLOAT","value":480,"scopes":["WIDTH_HEIGHT"],"codeSyntax":"var(--container-md)"},{"name":"container/lg","type":"FLOAT","value":640,"scopes":["WIDTH_HEIGHT"],"codeSyntax":"var(--container-lg)"},{"name":"font/family/sans","type":"STRING","value":"Inter, system-ui, -apple-system, sans-serif","scopes":["FONT_FAMILY"],"codeSyntax":"var(--font-family-sans)"},{"name":"font/family/mono","type":"STRING","value":"ui-monospace, SFMono-Regular, Menlo, Consolas, monospace","scopes":["FONT_FAMILY"],"codeSyntax":"var(--font-family-mono)"},{"name":"font/size/100","type":"FLOAT","value":12,"scopes":["FONT_SIZE"],"codeSyntax":"var(--font-size-100)"},{"name":"font/size/200","type":"FLOAT","value":14,"scopes":["FONT_SIZE"],"codeSyntax":"var(--font-size-200)"},{"name":"font/size/300","type":"FLOAT","value":16,"scopes":["FONT_SIZE"],"codeSyntax":"var(--font-size-300)"},{"name":"font/size/400","type":"FLOAT","value":18,"scopes":["FONT_SIZE"],"codeSyntax":"var(--font-size-400)"},{"name":"font/weight/regular","type":"FLOAT","value":400,"scopes":["FONT_WEIGHT"],"codeSyntax":"var(--font-weight-regular)"},{"name":"font/weight/medium","type":"FLOAT","value":500,"scopes":["FONT_WEIGHT"],"codeSyntax":"var(--font-weight-medium)"},{"name":"font/weight/semibold","type":"FLOAT","value":600,"scopes":["FONT_WEIGHT"],"codeSyntax":"var(--font-weight-semibold)"},{"name":"opacity/disabled","type":"FLOAT","value":0.5,"scopes":["OPACITY"],"codeSyntax":"var(--opacity-disabled)"},{"name":"control/sm","type":"FLOAT","value":28,"scopes":["ALL_SCOPES"],"codeSyntax":"var(--control-sm)"},{"name":"control/md","type":"FLOAT","value":36,"scopes":["ALL_SCOPES"],"codeSyntax":"var(--control-md)"},{"name":"control/lg","type":"FLOAT","value":44,"scopes":["ALL_SCOPES"],"codeSyntax":"var(--control-lg)"}];
 const BRAND = [{"name":"brand/accent/100","type":"COLOR","perBrand":{"Default":"color/blue/100","Aurora":"color/teal/100"},"scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--brand-accent-100)"},{"name":"brand/accent/300","type":"COLOR","perBrand":{"Default":"color/blue/300","Aurora":"color/teal/300"},"scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--brand-accent-300)"},{"name":"brand/accent/400","type":"COLOR","perBrand":{"Default":"color/blue/400","Aurora":"color/teal/400"},"scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--brand-accent-400)"},{"name":"brand/accent/500","type":"COLOR","perBrand":{"Default":"color/blue/500","Aurora":"color/teal/500"},"scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--brand-accent-500)"},{"name":"brand/accent/600","type":"COLOR","perBrand":{"Default":"color/blue/600","Aurora":"color/teal/600"},"scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--brand-accent-600)"},{"name":"brand/accent/700","type":"COLOR","perBrand":{"Default":"color/blue/700","Aurora":"color/teal/700"},"scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--brand-accent-700)"},{"name":"brand/accent/900","type":"COLOR","perBrand":{"Default":"color/blue/900","Aurora":"color/teal/900"},"scopes":["ALL_FILLS","STROKE_COLOR"],"codeSyntax":"var(--brand-accent-900)"},{"name":"brand/radius/control","type":"FLOAT","perBrand":{"Default":"radius/200","Aurora":"radius/none"},"scopes":["CORNER_RADIUS"],"codeSyntax":"var(--brand-radius-control)"},{"name":"brand/font/control-family","type":"STRING","perBrand":{"Default":"font/family/sans","Aurora":"font/family/mono"},"scopes":["FONT_FAMILY"],"codeSyntax":"var(--brand-font-control-family)"},{"name":"brand/font/control-weight","type":"FLOAT","perBrand":{"Default":"font/weight/medium","Aurora":"font/weight/semibold"},"scopes":["FONT_WEIGHT"],"codeSyntax":"var(--brand-font-control-weight)"}];
 const BRAND_MODES = ["Default","Aurora"];
@@ -45,6 +47,64 @@ function hexToRgb(value) {
 const collections = await figma.variables.getLocalVariableCollectionsAsync();
 const allVars = await figma.variables.getLocalVariablesAsync();
 const varsIn = (col) => allVars.filter((v) => v.variableCollectionId === col.id);
+// FC-APPLY-TOKENS-KEEP-EDITS — a re-paste never silently reverts a designer's
+// edit to a variable VALUE. Each apply records what it wrote per mode
+// (shared plugin data ds_contracts/appliedValues); a canvas value that is
+// neither the bundle's nor the last applied one is a designer edit: it is
+// NAMED in variableDrift and KEPT. Set globalThis.DS_OVERWRITE_TOKENS = true
+// before running this script to let the bundle win (the drift is still named).
+const DS_OVERWRITE_TOKENS = typeof globalThis !== 'undefined' && globalThis.DS_OVERWRITE_TOKENS === true;
+const variableDrift = [];
+const nameById = new Map();
+for (const v of await figma.variables.getLocalVariablesAsync()) nameById.set(v.id, v.name);
+const round4 = (n) => Math.round(n * 10000) / 10000;
+// One comparable spelling per value shape — alias by TARGET NAME (ids differ
+// per file), colour by rounded channels (Figma stores floats), number
+// rounded, string verbatim. Two values compare equal iff their keys do.
+const valueKey = (x) => {
+  if (x === undefined || x === null) return 'unset';
+  if (typeof x === 'number') return 'n:' + round4(x);
+  if (typeof x === 'string') return 's:' + JSON.stringify(x);
+  if (typeof x === 'boolean') return 'b:' + x;
+  if (typeof x === 'object' && x.type === 'VARIABLE_ALIAS') return 'alias:' + (nameById.get(x.id) || x.id);
+  if (typeof x === 'object' && typeof x.r === 'number') return 'rgba(' + [x.r, x.g, x.b, x.a === undefined ? 1 : x.a].map(round4).join(',') + ')';
+  return 'unknown:' + String(x);
+};
+const APPLIED_NS = 'ds_contracts', APPLIED_KEY = 'appliedValues';
+const readApplied = (v) => {
+  try {
+    const raw = typeof v.getSharedPluginData === 'function' ? v.getSharedPluginData(APPLIED_NS, APPLIED_KEY) : '';
+    const rec = raw ? JSON.parse(raw) : null;
+    return rec && typeof rec === 'object' ? rec : null;
+  } catch (e) { return null; }
+};
+const writeApplied = (v, rec) => {
+  if (typeof v.setSharedPluginData === 'function') v.setSharedPluginData(APPLIED_NS, APPLIED_KEY, JSON.stringify(rec));
+};
+const applyValue = (v, modeId, modeName, value, created) => {
+  const bundleKey = valueKey(value);
+  const canvasKey = created ? null : valueKey(v.valuesByMode ? v.valuesByMode[modeId] : undefined);
+  const applied = created ? null : readApplied(v);
+  const prevKey = applied ? applied[modeName] : undefined;
+  const ours = created || canvasKey === bundleKey || (prevKey !== undefined && prevKey === canvasKey);
+  if (!ours) {
+    variableDrift.push({ name: v.name, mode: modeName, canvas: canvasKey, bundle: bundleKey, applied: prevKey === undefined ? null : prevKey });
+    if (!DS_OVERWRITE_TOKENS) return false;
+  }
+  if (created || canvasKey !== bundleKey) v.setValueForMode(modeId, value);
+  if (created) nameById.set(v.id, v.name);
+  const rec = applied || {};
+  rec[modeName] = bundleKey;
+  writeApplied(v, rec);
+  return true;
+};
+const reportVariableDrift = (collectionName) => {
+  if (variableDrift.length === 0) return;
+  const verb = DS_OVERWRITE_TOKENS ? 'OVERWRITTEN (DS_OVERWRITE_TOKENS)' : 'kept — set globalThis.DS_OVERWRITE_TOKENS = true to let the bundle win';
+  const lines = variableDrift.map((d) => d.name + ' [' + d.mode + '] canvas ' + d.canvas + ' vs bundle ' + d.bundle);
+  console.warn('[ds-contracts] ' + variableDrift.length + ' designer-edited variable value(s) in ' + collectionName + ' ' + verb + ': ' + lines.join('; '));
+  figma.notify(variableDrift.length + ' edited variable value(s) ' + (DS_OVERWRITE_TOKENS ? 'overwritten' : 'kept') + ': ' + variableDrift.slice(0, 4).map((d) => d.name).join(', ') + (variableDrift.length > 4 ? ', …' : ''), { timeout: 6000 });
+};
 
 let prim = collections.find((c) => c.name === 'Primitives');
 if (!prim) prim = figma.variables.createVariableCollection('Primitives');
@@ -55,12 +115,13 @@ for (const v of varsIn(prim)) primByName[v.name] = v;
 let createdPrim = 0;
 for (const t of PRIMITIVES) {
   let v = primByName[t.name];
+  const isNew = !v;
   if (!v) {
     v = figma.variables.createVariable(t.name, prim, t.type);
     primByName[t.name] = v;
     createdPrim++;
   }
-  v.setValueForMode(primModeId, t.type === 'COLOR' ? hexToRgb(t.value) : t.value);
+  applyValue(v, primModeId, 'Value', t.type === 'COLOR' ? hexToRgb(t.value) : t.value, isNew);
   v.scopes = t.scopes;
   v.setVariableCodeSyntax('WEB', t.codeSyntax);
 }
@@ -79,6 +140,7 @@ for (const v of varsIn(brandCol)) brandByName[v.name] = v;
 let createdBrand = 0;
 for (const t of BRAND) {
   let v = brandByName[t.name];
+  const isNew = !v;
   if (!v) {
     v = figma.variables.createVariable(t.name, brandCol, t.type);
     brandByName[t.name] = v;
@@ -87,7 +149,7 @@ for (const t of BRAND) {
   for (const modeName of BRAND_MODES) {
     const target = primByName[t.perBrand[modeName]];
     if (!target) throw new Error('Missing primitive ' + t.perBrand[modeName] + ' for ' + t.name);
-    v.setValueForMode(brandModeIds[modeName], { type: 'VARIABLE_ALIAS', id: target.id });
+    applyValue(v, brandModeIds[modeName], modeName, { type: 'VARIABLE_ALIAS', id: target.id }, isNew);
   }
   v.scopes = t.scopes;
   v.setVariableCodeSyntax('WEB', t.codeSyntax);
@@ -104,6 +166,7 @@ for (const v of varsIn(sem)) semByName[v.name] = v;
 let createdSem = 0;
 for (const t of SEMANTIC) {
   let v = semByName[t.name];
+  const isNew = !v;
   if (!v) {
     v = figma.variables.createVariable(t.name, sem, t.type);
     semByName[t.name] = v;
@@ -112,8 +175,8 @@ for (const t of SEMANTIC) {
   const lightVar = primByName[t.light] || brandByName[t.light];
   const darkVar = primByName[t.dark] || brandByName[t.dark];
   if (!lightVar || !darkVar) throw new Error('Missing primitive/brand for ' + t.name);
-  v.setValueForMode(lightModeId, { type: 'VARIABLE_ALIAS', id: lightVar.id });
-  v.setValueForMode(darkModeId, { type: 'VARIABLE_ALIAS', id: darkVar.id });
+  applyValue(v, lightModeId, 'Light', { type: 'VARIABLE_ALIAS', id: lightVar.id }, isNew);
+  applyValue(v, darkModeId, 'Dark', { type: 'VARIABLE_ALIAS', id: darkVar.id }, isNew);
   v.scopes = t.scopes;
   v.setVariableCodeSyntax('WEB', t.codeSyntax);
 }
@@ -235,6 +298,7 @@ for (const t of TEXT_STYLES) {
   s.description = 'ds_contracts: derived from tokens/' + t.tokenPath;
 }
 
+reportVariableDrift('Primitives/Brand/Semantic');
 return {
   primitives: { collectionId: prim.id, total: PRIMITIVES.length, created: createdPrim },
   brand: { collectionId: brandCol.id, modes: BRAND_MODES, total: BRAND.length, created: createdBrand },
@@ -243,4 +307,6 @@ return {
   pruned,
   leftovers,
   pruneSkipped,
+  variableDrift,
+  driftOverwritten: DS_OVERWRITE_TOKENS,
 };

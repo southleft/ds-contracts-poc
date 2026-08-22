@@ -395,13 +395,21 @@ const golden = readJson('generated-source golden manifest', path.join(ROOT, 'eva
 const GOLDEN_FILES = Object.keys(golden).length;
 
 /* ---- the honesty instruments -------------------------------------------- */
-const dagger = readJson('dropped-fact receipt census', path.join(ROOT, 'extract', 'figma', 'dagger-census.json')).census;
+const daggerCensus = readJson('dropped-fact receipt census', path.join(ROOT, 'extract', 'figma', 'dagger-census.json'));
+const dagger = daggerCensus.census;
+// 2026-08-22: the census also records the NAMED facts behind each dagger
+// (corpus → contract → count) — the dagger said THAT something was dropped,
+// `named` says how many, and every one is now spelled out in the script, the
+// bundle, the plugin data and the plugin report.
+const daggerNamed = daggerCensus.named ?? {};
 const daggerRows = Object.entries(dagger).map(([corpus, m]) => ({
   corpus,
   receipts: Object.values(m).reduce((a, b) => a + b, 0),
   contracts: Object.keys(m).length,
+  named: Object.values(daggerNamed[corpus] ?? {}).reduce((a, b) => a + b, 0),
 })).sort((a, b) => b.receipts - a.receipts || a.corpus.localeCompare(b.corpus));
 const DAGGER_TOTAL = daggerRows.reduce((a, r) => a + r.receipts, 0);
+const DAGGER_NAMED_TOTAL = daggerRows.reduce((a, r) => a + r.named, 0);
 
 const canvasMan = readJson('canvas construct vocabulary', path.join(ROOT, 'extract', 'figma', 'conformance', 'MANIFEST.json'));
 const canvasByExpect = [...canvasMan.cases.reduce((m, c) => m.set(c.expect, (m.get(c.expect) ?? 0) + 1), new Map())].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
@@ -776,14 +784,19 @@ P(
 P('### 6.1 Dropped-fact receipts (`†`)');
 P(
   `When the plugin engine compiles a contract and cannot carry a fact onto the`,
-  `canvas, it emits a receipt naming the fact. Across ${fmt(daggerRows.length)} committed corpora there are`,
-  `**${fmt(DAGGER_TOTAL)}** such receipts, and the count is pinned **exactly** — in both directions.`,
+  `canvas, it names the fact: the compiled component data carries a \`codeOnlyFacts\``,
+  `list (part, kind, channel, value, reason, variant coverage), \`figma bundle\` writes that list`,
+  `beside \`contracts\` and prints a per-contract summary, the built set is stamped`,
+  `\`ds_contracts/codeOnlyFacts\`, the plugin's run report lists the facts under the set,`,
+  `and the set description keeps one trailing \`†\` with the count. Across ${fmt(daggerRows.length)} committed`,
+  `corpora there are **${fmt(DAGGER_TOTAL)}** daggered contracts naming **${fmt(DAGGER_NAMED_TOTAL)}** facts, and both`,
+  `counts are pinned **exactly** — in both directions.`,
   `Fewer receipts is not automatically progress: it is either a real fix or a`,
   `refusal path that quietly stopped firing, and both require a human to look.`,
 );
-P(...table(['corpus', 'dropped-fact receipts', 'contracts carrying one', 'source'],
-  daggerRows.map((r) => [`\`${r.corpus}\``, fmt(r.receipts), fmt(r.contracts), '`extract/figma/dagger-census.json`'])
-    .concat([['**total**', `**${fmt(DAGGER_TOTAL)}**`, '', '']]),
+P(...table(['corpus', 'dropped-fact receipts', 'contracts carrying one', 'facts named', 'source'],
+  daggerRows.map((r) => [`\`${r.corpus}\``, fmt(r.receipts), fmt(r.contracts), fmt(r.named), '`extract/figma/dagger-census.json`'])
+    .concat([['**total**', `**${fmt(DAGGER_TOTAL)}**`, '', `**${fmt(DAGGER_NAMED_TOTAL)}**`, '']]),
 ));
 
 P('### 6.2 Named refusals — the construct vocabularies');

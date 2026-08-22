@@ -15,9 +15,9 @@
   align-items: center;
   justify-content: center;
   border: 0;
-  position: relative;
   border-radius: var(--imported-shared-size-8);
   width: var(--ds-slider-size, var(--imported-slider-root-width));
+  position: relative;
 }
 
 .label-bottom {

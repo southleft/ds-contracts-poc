@@ -13,6 +13,12 @@
  *   3. The inline emitter's output contains NO var(-- references (that is
  *      its whole claim).
  *   4. The html emitter's output contains NO React syntax.
+ *   5. The web-components emitter expands a MULTI-placeholder PART ref
+ *      (untitled-ui's `{imported.social-button.text.color.{social}.{theme}}`)
+ *      into one rule per enum tuple — ZERO `var(--…{…})` braces — and the
+ *      resolved var() names are byte-equal to the React emitter's for the
+ *      same contract (P0 2026-08-22: parts only had the one-placeholder
+ *      branch; two placeholders shipped invalid CSS, part colour lost).
  *
  * This is a node script (it writes samples) over pure functions — the same
  * split as every other shell in the repo.
@@ -23,7 +29,9 @@ import { ContractSchema, type Contract } from "../scripts/contract-schema.js";
 import { importFromUrl } from "../extract/figma/rest/fetch.js";
 import { createFigmaEngine, emitFigmaScript } from "./emit-figma-script.js";
 import { emitHtml } from "./emit-html.js";
+import { generateCss } from "./emit-react.js";
 import { emitReactInline } from "./emit-react-inline.js";
+import { emitWebComponent } from "../packages/emitter-web-components/src/emit-wc.js";
 import { emitters, type EmitterCtx } from "./emitter.js";
 import { proposeFromDump } from "./propose-figma.js";
 import { tokenCorpusFromJson } from "./token-corpus.js";
@@ -161,6 +169,140 @@ for (const id of SUBJECTS) {
     tsx.includes(`${contract.id} v${contract.version}`),
   );
   writeFileSync(path.join(SAMPLES, `${name}.inline.tsx`), tsx);
+}
+
+// ---- web-components emitter: multi-placeholder PART refs -------------------
+// The WC stylesheet's validity referee is React's generateCss, which resolves
+// every placeholder per enum value and passes — so a part ref the WC emitter
+// itself could not expand reached the stylesheet with its braces intact
+// (`color: var(--imported-social-button-text-color-{social}-{theme})`), invalid
+// CSS the browser drops silently. The untitled-ui capture is the real repro:
+// four contracts carry a PART ref with two placeholders. Each must emit, carry
+// zero braces inside var(--…), and resolve to the SAME var() names React does.
+console.log("\nweb-components (multi-placeholder part refs, untitled-ui capture)");
+const UUI = path.join("examples", "untitled-ui");
+const uuiContracts = new Map<string, Contract>(
+  readdirSync(path.join(ROOT, UUI, "storybook", "contracts"))
+    .filter((f) => f.endsWith(".contract.json"))
+    .map((f) =>
+      ContractSchema.parse(read(path.join(UUI, "storybook", "contracts", f))),
+    )
+    .map((c) => [c.id, c]),
+);
+const uuiIcons = new Map<string, string>(
+  readdirSync(path.join(ROOT, UUI, "assets", "icons"))
+    .filter((f) => f.endsWith(".svg"))
+    .map((f) => [
+      f.replace(/\.svg$/, ""),
+      readFileSync(path.join(ROOT, UUI, "assets", "icons", f), "utf8").trim(),
+    ]),
+);
+const uuiInventory = tokenInventoryFromJson([
+  read(path.join(UUI, "storybook", "tokens", "captured.dtcg.json")),
+  read(path.join(UUI, "storybook", "tokens", "minted.dtcg.json")),
+]);
+const WC_SUBJECTS = [
+  "ds.social-button",
+  "ds.progress-bar",
+  "ds.progress-circle",
+  "ds.slider",
+];
+/** A placeholder that survived INSIDE a var() — invalid CSS, dropped silently. */
+const BRACED_VAR = /var\(--[^)]*\{/;
+/** Every non-root part token ref carrying ≥2 placeholders: [part, cssProp, ref]. */
+const multiPlaceholderPartRefs = (
+  contract: Contract,
+): Array<[string, string, string]> => {
+  const out: Array<[string, string, string]> = [];
+  const walk = (parts: Record<string, unknown> | undefined) => {
+    for (const [name, part] of Object.entries(parts ?? {})) {
+      const p = part as {
+        tokens?: Record<string, string>;
+        parts?: Record<string, unknown>;
+      };
+      for (const [cssProp, ref] of Object.entries(p.tokens ?? {})) {
+        if ((ref.match(/\{[a-z][\w-]*\}/g) ?? []).length >= 2)
+          out.push([name, cssProp, ref]);
+      }
+      walk(p.parts);
+    }
+  };
+  walk((contract.anatomy.root as { parts?: Record<string, unknown> }).parts);
+  return out;
+};
+const varNames = (css: string, prefix: string) =>
+  new Set(
+    [...css.matchAll(/var\((--[a-z0-9-]+)\)/g)]
+      .map((m) => m[1])
+      .filter((v) => v.startsWith(prefix)),
+  );
+for (const id of WC_SUBJECTS) {
+  const contract = uuiContracts.get(id)!;
+  console.log(`\n${contract.name} (${id})`);
+  const refs = multiPlaceholderPartRefs(contract);
+  // The premise is measured, not assumed: a subject with no such ref would
+  // let every assertion below pass vacuously.
+  check(`wc: subject carries a ≥2-placeholder PART ref`, refs.length > 0);
+  let stylesheet: string;
+  try {
+    stylesheet = emitWebComponent(contract, {
+      icons: uuiIcons,
+      contracts: uuiContracts,
+      tokens: uuiInventory,
+    }).stylesheet;
+  } catch (e) {
+    check(`wc: emits (${(e as Error).message.split("\n")[0]})`, false);
+    continue;
+  }
+  check("wc: zero var(--…{…}) braces in the stylesheet", !BRACED_VAR.test(stylesheet));
+  check(
+    "wc: zero unresolved {token.path} braces",
+    !UNRESOLVED_TOKEN_PATH.test(stylesheet),
+  );
+  const reactErrors: string[] = [];
+  const reactCss = generateCss(contract, uuiInventory, reactErrors);
+  check("react: same contract resolves (the referee agrees it is valid)", reactErrors.length === 0);
+  for (const [part, cssProp, ref] of refs) {
+    const prefix = "--" + ref.slice(1).split("{")[0].split(".").join("-");
+    const fromReact = varNames(reactCss, prefix);
+    const fromWc = varNames(stylesheet, prefix);
+    const equal =
+      fromReact.size === fromWc.size && [...fromReact].every((v) => fromWc.has(v));
+    check(
+      `wc: part "${part}" ${cssProp} ${ref} → ${fromWc.size} resolved var() name(s), byte-equal to React's ${fromReact.size}`,
+      fromReact.size > 0 && equal,
+    );
+  }
+  if (id === "ds.social-button") {
+    writeFileSync(path.join(SAMPLES, "social-button.wc.css.ts"), stylesheet);
+  }
+}
+
+// A placeholder naming NO prop has no host attribute to select on. React's
+// part path writes nothing for it (enumCombos over an empty value set runs
+// zero checks), so this refusal is the WC emitter's own and must be proven
+// to fire BY NAME — the silent alternative was exactly the brace leak above.
+{
+  const poisoned = JSON.parse(
+    JSON.stringify(uuiContracts.get("ds.social-button")!),
+  ) as Contract;
+  (poisoned.anatomy.root as { parts: Record<string, { tokens: Record<string, string> }> })
+    .parts["Text"].tokens["color"] =
+    "{imported.social-button.text.color.{social}.{nonsense}}";
+  let message = "";
+  try {
+    emitWebComponent(poisoned, {
+      icons: uuiIcons,
+      contracts: uuiContracts,
+      tokens: uuiInventory,
+    });
+  } catch (e) {
+    message = (e as Error).message;
+  }
+  check(
+    'wc: a part ref substituting a non-prop placeholder is REFUSED naming the part and the placeholder',
+    message.includes('part "Text"') && message.includes("{nonsense}"),
+  );
 }
 
 // The registry itself is part of the spec story: four emitters, one contract.

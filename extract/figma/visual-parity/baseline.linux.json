@@ -1,0 +1,503 @@
+{
+ "platform": "linux",
+ "architecture": "x64",
+ "generatedAt": "2026-08-22T21:55:59.568Z",
+ "headCommit": "c87a0f09ce44b4d656549beb553d1a68e0e08e82",
+ "notes": "Transcribed 2026-08-22 from CI's own printed rows — catalog-visual run 32600919508 (ubuntu x64, fonts-inter, lockfile Chromium) on c87a0f0, the maintain:visual step, scoped to button/badge/checkbox/switch/heading — not measured by --write-baseline on a Linux machine (same precedent as the catalog-visual linux text-field rows). Scores: all 55 rows from the log. Sizes: 4 rows printed by that run (all 4 identical to darwin); 51 rows carry the darwin-measured sizes because that run printed sizes only past diagnose()'s 4 px line — every row prints its sizes now, so the next CI log is a complete transcript and the first Linux --write-baseline replaces these.",
+ "epsilonPp": 0.1,
+ "sizeTolerancePx": 4,
+ "subjects": {
+  "button": {
+   "version": "2388438498796415748",
+   "fontFamilies": [
+    "Inter"
+   ],
+   "pinned": {
+    "variant": "Variant=Primary, Size=Medium, State=Default",
+    "sizeOurs": "164×72"
+   }
+  },
+  "badge": {
+   "version": "2388438498796415748",
+   "fontFamilies": [
+    "Inter"
+   ],
+   "pinned": {
+    "variant": "Variant=Info",
+    "sizeOurs": "122×46"
+   }
+  },
+  "checkbox": {
+   "version": "2388438498796415748",
+   "fontFamilies": [
+    "Inter"
+   ],
+   "pinned": {
+    "variant": "Value=Unchecked, Size=Medium",
+    "sizeOurs": "480×72"
+   }
+  },
+  "switch": {
+   "version": "2388438498796415748",
+   "fontFamilies": [
+    "Inter"
+   ],
+   "pinned": {
+    "variant": "Value=Off",
+    "sizeOurs": "415×72"
+   }
+  },
+  "heading": {
+   "version": "2374040948613425901",
+   "fontFamilies": [
+    "Inter"
+   ],
+   "pinned": {
+    "variant": "Level=H2, Size=Large",
+    "sizeOurs": "140×36"
+   }
+  }
+ },
+ "rows": {
+  "badge :: Variant=Info": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1.16,
+   "sizeOurs": "122×46",
+   "sizeFigma": "122×46",
+   "causeClass": "renderer"
+  },
+  "badge :: Variant=Success": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1.6,
+   "sizeOurs": "122×46",
+   "sizeFigma": "122×46",
+   "causeClass": "renderer"
+  },
+  "badge :: Variant=Warning": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0.98,
+   "sizeOurs": "122×46",
+   "sizeFigma": "122×46",
+   "causeClass": "renderer"
+  },
+  "badge :: Variant=Danger": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1.02,
+   "sizeOurs": "122×46",
+   "sizeFigma": "122×46",
+   "causeClass": "renderer"
+  },
+  "badge :: Variant=Error": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1.02,
+   "sizeOurs": "122×46",
+   "sizeFigma": "122×46",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Primary, Size=Medium, State=Default": {
+   "status": "diffed",
+   "masked": 5.45,
+   "unmasked": 5.2,
+   "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Primary, Size=Small, State=Default": {
+   "status": "diffed",
+   "masked": 1.99,
+   "unmasked": 6.55,
+   "sizeOurs": "136×50",
+   "sizeFigma": "138×50",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Primary, Size=Large, State=Default": {
+   "status": "diffed",
+   "masked": 5.13,
+   "unmasked": 6.83,
+   "sizeOurs": "208×90",
+   "sizeFigma": "212×92",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Secondary, Size=Medium, State=Default": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 2.54,
+   "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Secondary, Size=Small, State=Default": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 5.81,
+   "sizeOurs": "136×50",
+   "sizeFigma": "138×50",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Secondary, Size=Large, State=Default": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.33,
+   "sizeOurs": "208×90",
+   "sizeFigma": "212×92",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Danger, Size=Medium, State=Default": {
+   "status": "diffed",
+   "masked": 5.45,
+   "unmasked": 5.25,
+   "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Danger, Size=Small, State=Default": {
+   "status": "diffed",
+   "masked": 1.99,
+   "unmasked": 6.58,
+   "sizeOurs": "136×50",
+   "sizeFigma": "138×50",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Danger, Size=Large, State=Default": {
+   "status": "diffed",
+   "masked": 5.13,
+   "unmasked": 6.84,
+   "sizeOurs": "208×90",
+   "sizeFigma": "212×92",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Ghost, Size=Medium, State=Default": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 2.15,
+   "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Ghost, Size=Small, State=Default": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 5.71,
+   "sizeOurs": "136×50",
+   "sizeFigma": "138×50",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Ghost, Size=Large, State=Default": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.21,
+   "sizeOurs": "208×90",
+   "sizeFigma": "212×92",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Primary, Size=Medium, State=Hover": {
+   "status": "diffed",
+   "masked": 5.45,
+   "unmasked": 5.22,
+   "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Secondary, Size=Medium, State=Hover": {
+   "status": "diffed",
+   "masked": 5.33,
+   "unmasked": 5.56,
+   "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Danger, Size=Medium, State=Hover": {
+   "status": "diffed",
+   "masked": 5.45,
+   "unmasked": 5.25,
+   "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Ghost, Size=Medium, State=Hover": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 2.12,
+   "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Primary, Size=Medium, State=Focus Visible": {
+   "status": "diffed",
+   "masked": 31,
+   "unmasked": 22.44,
+   "sizeOurs": "180×88",
+   "sizeFigma": "174×78",
+   "causeClass": "design"
+  },
+  "button :: Variant=Secondary, Size=Medium, State=Focus Visible": {
+   "status": "diffed",
+   "masked": 30.28,
+   "unmasked": 22.29,
+   "sizeOurs": "180×88",
+   "sizeFigma": "174×78",
+   "causeClass": "design"
+  },
+  "button :: Variant=Danger, Size=Medium, State=Focus Visible": {
+   "status": "diffed",
+   "masked": 31,
+   "unmasked": 22.48,
+   "sizeOurs": "180×88",
+   "sizeFigma": "174×78",
+   "causeClass": "design"
+  },
+  "button :: Variant=Ghost, Size=Medium, State=Focus Visible": {
+   "status": "diffed",
+   "masked": 30.38,
+   "unmasked": 22.06,
+   "sizeOurs": "180×88",
+   "sizeFigma": "174×78",
+   "causeClass": "design"
+  },
+  "button :: Variant=Primary, Size=Medium, State=Disabled": {
+   "status": "diffed",
+   "masked": 5.42,
+   "unmasked": 4.99,
+   "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Secondary, Size=Medium, State=Disabled": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 2.36,
+   "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Danger, Size=Medium, State=Disabled": {
+   "status": "diffed",
+   "masked": 5.45,
+   "unmasked": 5.1,
+   "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
+   "causeClass": "renderer"
+  },
+  "button :: Variant=Ghost, Size=Medium, State=Disabled": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1.96,
+   "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
+   "causeClass": "renderer"
+  },
+  "checkbox :: Value=Unchecked, Size=Medium": {
+   "status": "diffed",
+   "masked": 2.11,
+   "unmasked": 4.73,
+   "sizeOurs": "480×72",
+   "sizeFigma": "482×72",
+   "causeClass": "renderer"
+  },
+  "checkbox :: Value=Unchecked, Size=Small": {
+   "status": "diffed",
+   "masked": 1.63,
+   "unmasked": 4.63,
+   "sizeOurs": "472×72",
+   "sizeFigma": "474×72",
+   "causeClass": "renderer"
+  },
+  "checkbox :: Value=Checked, Size=Medium": {
+   "status": "diffed",
+   "masked": 1.36,
+   "unmasked": 4.49,
+   "sizeOurs": "480×72",
+   "sizeFigma": "482×72",
+   "causeClass": "renderer"
+  },
+  "checkbox :: Value=Checked, Size=Small": {
+   "status": "diffed",
+   "masked": 1.15,
+   "unmasked": 4.47,
+   "sizeOurs": "472×72",
+   "sizeFigma": "474×72",
+   "causeClass": "renderer"
+  },
+  "checkbox :: Value=Indeterminate, Size=Medium": {
+   "status": "diffed",
+   "masked": 1.19,
+   "unmasked": 4.43,
+   "sizeOurs": "480×72",
+   "sizeFigma": "482×72",
+   "causeClass": "renderer"
+  },
+  "checkbox :: Value=Indeterminate, Size=Small": {
+   "status": "diffed",
+   "masked": 0.96,
+   "unmasked": 4.42,
+   "sizeOurs": "472×72",
+   "sizeFigma": "474×72",
+   "causeClass": "renderer"
+  },
+  "switch :: Value=Off": {
+   "status": "diffed",
+   "masked": 0.76,
+   "unmasked": 2.99,
+   "sizeOurs": "415×72",
+   "sizeFigma": "416×72",
+   "causeClass": "renderer"
+  },
+  "switch :: Value=On": {
+   "status": "diffed",
+   "masked": 0.82,
+   "unmasked": 3.01,
+   "sizeOurs": "415×72",
+   "sizeFigma": "416×72",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H2, Size=Large": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0.02,
+   "sizeOurs": "140×36",
+   "sizeFigma": "141×36",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H2, Size=Small": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0.49,
+   "sizeOurs": "111×28",
+   "sizeFigma": "110×28",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H2, Size=Medium": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0.47,
+   "sizeOurs": "125×32",
+   "sizeFigma": "125×32",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H1, Size=Large": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0.02,
+   "sizeOurs": "140×36",
+   "sizeFigma": "141×36",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H1, Size=Small": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0.49,
+   "sizeOurs": "111×28",
+   "sizeFigma": "110×28",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H1, Size=Medium": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0.47,
+   "sizeOurs": "125×32",
+   "sizeFigma": "125×32",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H3, Size=Large": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0.02,
+   "sizeOurs": "140×36",
+   "sizeFigma": "141×36",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H3, Size=Small": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0.49,
+   "sizeOurs": "111×28",
+   "sizeFigma": "110×28",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H3, Size=Medium": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0.47,
+   "sizeOurs": "125×32",
+   "sizeFigma": "125×32",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H4, Size=Large": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0.02,
+   "sizeOurs": "140×36",
+   "sizeFigma": "141×36",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H4, Size=Small": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0.49,
+   "sizeOurs": "111×28",
+   "sizeFigma": "110×28",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H4, Size=Medium": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0.47,
+   "sizeOurs": "125×32",
+   "sizeFigma": "125×32",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H5, Size=Large": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0.02,
+   "sizeOurs": "140×36",
+   "sizeFigma": "141×36",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H5, Size=Small": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0.49,
+   "sizeOurs": "111×28",
+   "sizeFigma": "110×28",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H5, Size=Medium": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0.47,
+   "sizeOurs": "125×32",
+   "sizeFigma": "125×32",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H6, Size=Large": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0.02,
+   "sizeOurs": "140×36",
+   "sizeFigma": "141×36",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H6, Size=Small": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0.49,
+   "sizeOurs": "111×28",
+   "sizeFigma": "110×28",
+   "causeClass": "renderer"
+  },
+  "heading :: Level=H6, Size=Medium": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0.47,
+   "sizeOurs": "125×32",
+   "sizeFigma": "125×32",
+   "causeClass": "renderer"
+  }
+ }
+}

@@ -95,6 +95,14 @@ npx tsx packages/cli/src/cli.ts generate examples/tailwind/contracts \
 `--icons` is **required**, not optional: without it the run exits 1 by name
 because `flowbite.alert` references a dismiss icon.
 
+The output also carries `tokens.css` — every custom property the components
+reference, `:root` for the default slot and `[data-theme="dark"]` /
+`[data-brand=…]` for named slots — and the emitted `index.ts` and stories
+import it, so `npm run storybook` over `./out-react` is styled with no token
+build of your own. A reference the sheet cannot define is refused by name at
+generate time (`css-vars:check` pins it); a `var(--x, fallback)` override
+hook is allowed to stay undefined until a consumer sets it.
+
 ### Keeping the two surfaces in line
 
 After a contract edit, a canvas amend, or a recovery dump, run:
@@ -122,7 +130,11 @@ State-preview paint names, and do not invent
 `functional:flowbite` (clicks/dismiss still execute) +
 `parity:flowbite` (authored vs recovered, named walls stay named) +
 catalog visual-parity on Button / Badge / Checkbox / Switch / Heading
-(a closed pixel hole on those stems cannot silently reopen). Eventz / CBDS
+(every row's masked pixel score within ±0.1pp of the platform's committed
+baseline AND both content boxes — ours and Figma's — within ±4 device px of
+it; the pixel score alone provably misses a pale-fill size move, so a
+closed pixel hole cannot silently reopen and a geometry move fails by name;
+`-- --self-test` is the gate's own red test). Eventz / CBDS
 / Shoelace rows stay on the full `--summary` map; they are not the ship set.
 A green maintain is the beta handoff bar. It is not v1.
 

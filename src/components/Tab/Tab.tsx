@@ -24,7 +24,7 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(
 ) {
   const classes = [styles.root, styles[`state-${state}`], className].filter(Boolean).join(' ');
   return (
-    <button ref={ref} className={classes} role="tab" {...rest}>
+    <button ref={ref} className={classes} type="button" role="tab" {...rest}>
       {icon != null ? <div className={styles.iconSlot}>{icon}</div> : null}
       <span className={styles.labelText}>{label}</span>
       {endContent != null ? <div className={styles.endContent}>{endContent}</div> : null}

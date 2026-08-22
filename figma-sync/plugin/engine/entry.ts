@@ -55,6 +55,7 @@ import {
   tokenCorpusFromJson,
   tokenSetTokenTrees,
   type CanvasProvenance,
+  type CodeOnlyFact,
   type Contract,
   type TokenCorpus,
   type TokenSetPayload,
@@ -120,6 +121,12 @@ export interface GenerateStep {
   title: string;
   contractId?: string;
   code: string;
+  /** Component steps only: the facts this contract carries that the canvas
+   *  cannot — the same sorted list the script stamps as
+   *  `ds_contracts/codeOnlyFacts` and returns in its per-set result. The UI's
+   *  run report lists them under the set; the dagger census counts them. An
+   *  empty array is an explicit "nothing dropped", never an omission. */
+  codeOnlyFacts?: CodeOnlyFact[];
 }
 
 export type ParsedIncoming =
@@ -829,8 +836,13 @@ export function createPluginEngine(data: PluginEngineData) {
     for (const contract of ordered) {
       const eng = foreign && incomingIds.has(contract.id) ? foreign : engine;
       let code: string;
+      let codeOnlyFacts: CodeOnlyFact[];
       try {
         code = eng.buildComponentScript(contract, byId, fileKey);
+        // The named receipt, read from the SAME compile the script embeds
+        // (buildComponentScript refereed the contract one line up, so this
+        // compile cannot refuse what that one accepted).
+        codeOnlyFacts = eng.compileComponentData(contract, byId).codeOnlyFacts ?? [];
       } catch (e) {
         // The emitter's referee refusal (named violations) or an
         // unresolvable token — both are the engine's own words.
@@ -844,6 +856,7 @@ export function createPluginEngine(data: PluginEngineData) {
         title: `${contract.name} (${contract.id} v${contract.version})`,
         contractId: contract.id,
         code,
+        codeOnlyFacts,
       });
       steps.push({
         kind: "version-marker",

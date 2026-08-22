@@ -57,7 +57,11 @@
 let nextId = 1;
 const newId = () => `${nextId++}:${nextId}`;
 
-export function createFigmaMock() {
+/** @param {{ modeLimit?: number | null }} [options] — `modeLimit` makes
+ *  `VariableCollection.addMode` throw past N modes, the way a Figma Starter
+ *  file does ("Limited to 1 modes only"); omitted = unlimited (Pro). */
+export function createFigmaMock(options = {}) {
+  const modeLimit = typeof options.modeLimit === 'number' ? options.modeLimit : null;
   const allStyles = [];
   const collections = [];
   const variables = [];
@@ -1220,9 +1224,18 @@ export function createFigmaMock() {
       this.valuesByMode = {};
       this.scopes = [];
       this._codeSyntax = {};
+      this._shared = new Map();
     }
     setValueForMode(modeId, value) {
       this.valuesByMode[modeId] = value;
+    }
+    // Variables carry plugin data in the real API (PluginDataMixin) — the
+    // token apply records what it wrote per mode here (ds_contracts/appliedValues).
+    setSharedPluginData(ns, key, value) {
+      this._shared.set(`${ns}/${key}`, value);
+    }
+    getSharedPluginData(ns, key) {
+      return this._shared.get(`${ns}/${key}`) ?? '';
     }
     setVariableCodeSyntax(platform, value) {
       this._codeSyntax[platform] = value;
@@ -1252,6 +1265,13 @@ export function createFigmaMock() {
       this.name = name;
       this._modeSeq = 0;
       this.modes = [{ name: 'Mode 1', modeId: this._newModeId() }];
+      this._shared = new Map();
+    }
+    setSharedPluginData(ns, key, value) {
+      this._shared.set(`${ns}/${key}`, value);
+    }
+    getSharedPluginData(ns, key) {
+      return this._shared.get(`${ns}/${key}`) ?? '';
     }
     _newModeId() {
       return `${this.id}:m${this._modeSeq++}`;
@@ -1261,6 +1281,11 @@ export function createFigmaMock() {
       if (m) m.name = name;
     }
     addMode(name) {
+      // The real API's Starter-plan refusal, verbatim shape: the plugin sees
+      // an exception, not a silently missing mode.
+      if (modeLimit !== null && this.modes.length >= modeLimit) {
+        throw new Error(`in addMode: Limited to ${modeLimit} modes only`);
+      }
       const modeId = this._newModeId();
       this.modes.push({ name, modeId });
       return modeId;

@@ -60,7 +60,7 @@ const COMPONENTS = [
     "contractId": "fluent.avatar",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Avatar — generated from contract fluent.avatar v0.2.0 †",
+    "description": "Avatar — generated from contract fluent.avatar v0.2.0 † (13 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -1374,6 +1374,151 @@ const COMPONENTS = [
     "semantics": {
       "element": "span"
     },
+    "codeOnlyFacts": [
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "border-left-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "border-right-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "border-top-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "position",
+        "value": "absolute",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "user-select",
+        "value": "none",
+        "reason": "Text-selection behavior (user-select) exists only in the coded component.",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "flex-shrink",
+        "value": "{imported.avatar.root.flex-shrink}",
+        "reason": "Figma auto-layout children do not shrink below their content — there is no shrink factor.",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -2364,6 +2509,40 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -2386,6 +2565,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -2630,6 +2812,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -2899,6 +3082,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -2917,7 +3101,10 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  results.push(withCodeOnlyFacts(await syncOne(C), C));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 
@@ -2935,7 +3122,7 @@ const COMPONENTS = [
     "contractId": "fluent.badge",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Badge — generated from contract fluent.badge v0.2.0 †",
+    "description": "Badge — generated from contract fluent.badge v0.2.0 † (9 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -12362,6 +12549,107 @@ const COMPONENTS = [
     "semantics": {
       "element": "div"
     },
+    "codeOnlyFacts": [
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.badge.root.border-bottom-color.{appearance}.{color}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 192,
+          "of": 192
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.badge.root.border-left-color.{appearance}.{color}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 192,
+          "of": 192
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.badge.root.border-right-color.{appearance}.{color}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 192,
+          "of": 192
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.badge.root.border-top-color.{appearance}.{color}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 192,
+          "of": 192
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 192,
+          "of": 192
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 192,
+          "of": 192
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 192,
+          "of": 192
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 192,
+          "of": 192
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 192,
+          "of": 192
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -13198,6 +13486,40 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -13220,6 +13542,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -13461,6 +13786,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -13727,6 +14053,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -13745,7 +14072,10 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  results.push(withCodeOnlyFacts(await syncOne(C), C));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 
@@ -13763,7 +14093,7 @@ const COMPONENTS = [
     "contractId": "fluent.button",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Button — generated from contract fluent.button v0.2.0 †",
+    "description": "Button — generated from contract fluent.button v0.2.0 † (33 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -17287,6 +17617,565 @@ const COMPONENTS = [
         "to": "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active"
       }
     ],
+    "codeOnlyFacts": [
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.button.root.border-bottom-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.button.root.border-bottom-color-state-disabled.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.button.root.border-bottom-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.shared.color-000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.button.root.border-left-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.button.root.border-left-color-state-disabled.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.button.root.border-left-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.shared.color-000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.button.root.border-right-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.button.root.border-right-color-state-disabled.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.button.root.border-right-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.shared.color-000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.button.root.border-top-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.button.root.border-top-color-state-disabled.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.button.root.border-top-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.shared.color-000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.button.root.outline-color.outline}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 13,
+          "of": 65,
+          "names": [
+            "Appearance=Outline, Size=Medium, Shape=Rounded",
+            "Appearance=Outline, Size=Medium, Shape=Circular",
+            "Appearance=Outline, Size=Medium, Shape=Square",
+            "Appearance=Outline, Size=Small, Shape=Rounded",
+            "Appearance=Outline, Size=Small, Shape=Circular",
+            "Appearance=Outline, Size=Small, Shape=Square",
+            "Appearance=Outline, Size=Large, Shape=Rounded",
+            "Appearance=Outline, Size=Large, Shape=Circular",
+            "Appearance=Outline, Size=Large, Shape=Square",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.button.root.outline-color.primary}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 13,
+          "of": 65,
+          "names": [
+            "Appearance=Primary, Size=Medium, Shape=Rounded",
+            "Appearance=Primary, Size=Medium, Shape=Circular",
+            "Appearance=Primary, Size=Medium, Shape=Square",
+            "Appearance=Primary, Size=Small, Shape=Rounded",
+            "Appearance=Primary, Size=Small, Shape=Circular",
+            "Appearance=Primary, Size=Small, Shape=Square",
+            "Appearance=Primary, Size=Large, Shape=Rounded",
+            "Appearance=Primary, Size=Large, Shape=Circular",
+            "Appearance=Primary, Size=Large, Shape=Square",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.button.root.outline-color.secondary}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 13,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded",
+            "Appearance=Secondary, Size=Medium, Shape=Circular",
+            "Appearance=Secondary, Size=Medium, Shape=Square",
+            "Appearance=Secondary, Size=Small, Shape=Rounded",
+            "Appearance=Secondary, Size=Small, Shape=Circular",
+            "Appearance=Secondary, Size=Small, Shape=Square",
+            "Appearance=Secondary, Size=Large, Shape=Rounded",
+            "Appearance=Secondary, Size=Large, Shape=Circular",
+            "Appearance=Secondary, Size=Large, Shape=Square",
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.button.root.outline-color.subtle}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 13,
+          "of": 65,
+          "names": [
+            "Appearance=Subtle, Size=Medium, Shape=Rounded",
+            "Appearance=Subtle, Size=Medium, Shape=Circular",
+            "Appearance=Subtle, Size=Medium, Shape=Square",
+            "Appearance=Subtle, Size=Small, Shape=Rounded",
+            "Appearance=Subtle, Size=Small, Shape=Circular",
+            "Appearance=Subtle, Size=Small, Shape=Square",
+            "Appearance=Subtle, Size=Large, Shape=Rounded",
+            "Appearance=Subtle, Size=Large, Shape=Circular",
+            "Appearance=Subtle, Size=Large, Shape=Square",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.button.root.outline-color.transparent}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 13,
+          "of": 65,
+          "names": [
+            "Appearance=Transparent, Size=Medium, Shape=Rounded",
+            "Appearance=Transparent, Size=Medium, Shape=Circular",
+            "Appearance=Transparent, Size=Medium, Shape=Square",
+            "Appearance=Transparent, Size=Small, Shape=Rounded",
+            "Appearance=Transparent, Size=Small, Shape=Circular",
+            "Appearance=Transparent, Size=Small, Shape=Square",
+            "Appearance=Transparent, Size=Large, Shape=Rounded",
+            "Appearance=Transparent, Size=Large, Shape=Circular",
+            "Appearance=Transparent, Size=Large, Shape=Square",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "z-index",
+        "value": "{imported.button.root.z-index-state-focus-visible}",
+        "reason": "paint order on canvas is CHILD ORDER — a z-index a part carries independently of its DOM order has no field.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-left-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-right-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-top-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "declared for the active state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "declared for the hover state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "outline-style",
+        "value": "solid",
+        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "transition-duration",
+        "value": "0.1s",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "transition-property",
+        "value": "background, border, color",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.33, 0, 0.67, 1)",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -18183,6 +19072,40 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -18205,6 +19128,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -18446,6 +19372,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -18712,6 +19639,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -18730,7 +19658,10 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  results.push(withCodeOnlyFacts(await syncOne(C), C));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 
@@ -18748,7 +19679,7 @@ const COMPONENTS = [
     "contractId": "fluent.card",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Card — generated from contract fluent.card v0.2.0 †",
+    "description": "Card — generated from contract fluent.card v0.2.0 † (52 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -23600,6 +24531,745 @@ const COMPONENTS = [
         "to": "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Active"
       }
     ],
+    "codeOnlyFacts": [
+      {
+        "part": "cardheader",
+        "kind": "channel",
+        "channel": "flex-grow",
+        "value": "{imported.card.cardheader.flex-grow.horizontal}",
+        "reason": "the canvas approximates growth with layoutGrow/FILL, which is a boolean, not a ratio.",
+        "variants": {
+          "count": 12,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Horizontal",
+            "Appearance=Filled, Size=Small, Orientation=Horizontal",
+            "Appearance=Filled, Size=Large, Orientation=Horizontal",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Horizontal",
+            "Appearance=Filled Alternative, Size=Small, Orientation=Horizontal",
+            "Appearance=Filled Alternative, Size=Large, Orientation=Horizontal",
+            "Appearance=Outline, Size=Medium, Orientation=Horizontal",
+            "Appearance=Outline, Size=Small, Orientation=Horizontal",
+            "Appearance=Outline, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Large, Orientation=Horizontal"
+          ]
+        }
+      },
+      {
+        "part": "cardheader",
+        "kind": "channel",
+        "channel": "flex-grow",
+        "value": "{imported.card.cardheader.flex-grow.vertical}",
+        "reason": "the canvas approximates growth with layoutGrow/FILL, which is a boolean, not a ratio.",
+        "variants": {
+          "count": 28,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical",
+            "Appearance=Filled, Size=Small, Orientation=Vertical",
+            "Appearance=Filled, Size=Large, Orientation=Vertical",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical",
+            "Appearance=Filled Alternative, Size=Small, Orientation=Vertical",
+            "Appearance=Filled Alternative, Size=Large, Orientation=Vertical",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical",
+            "Appearance=Outline, Size=Small, Orientation=Vertical",
+            "Appearance=Outline, Size=Large, Orientation=Vertical",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle, Size=Large, Orientation=Vertical",
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Active",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Active",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Active",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Active"
+          ],
+          "more": 4
+        }
+      },
+      {
+        "part": "cardheader",
+        "kind": "channel",
+        "channel": "flex-shrink",
+        "value": "{imported.card.cardheader.flex-shrink}",
+        "reason": "Figma auto-layout children do not shrink below their content — there is no shrink factor.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "cardheader",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "cardheader",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "cardheader",
+        "kind": "declared",
+        "channel": "user-select",
+        "value": "none",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "checkbox",
+        "kind": "declared",
+        "channel": "appearance",
+        "value": "auto",
+        "reason": "Native form-control appearance is reset only in the coded component.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "checkbox",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "default",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "checkbox",
+        "kind": "declared",
+        "channel": "display",
+        "value": "none",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "checkbox",
+        "kind": "declared",
+        "channel": "outline-style",
+        "value": "auto",
+        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "checkbox",
+        "kind": "declared",
+        "channel": "position",
+        "value": "absolute",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "checkbox",
+        "kind": "declared",
+        "channel": "text-wrap-mode",
+        "value": "nowrap",
+        "reason": "Line-breaking rules differ: Figma wraps by box width only.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "checkbox",
+        "kind": "declared",
+        "channel": "user-select",
+        "value": "none",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "user-select",
+        "value": "none",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "declared",
+        "channel": "user-select",
+        "value": "none",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "declared",
+        "channel": "user-select",
+        "value": "none",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.shared.color-e0e0e0}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.shared.color-e0e0e0}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.shared.color-e0e0e0}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.shared.color-e0e0e0}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "caret-color",
+        "value": "{imported.shared.color-bdbdbd}",
+        "reason": "the text caret is runtime UI, not canvas ink.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "column-rule-color",
+        "value": "{imported.shared.color-bdbdbd}",
+        "reason": "a column-rule longhand the computed sweep enumerates; the canvas has no column rules.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.card.root.row-gap.large}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 8,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Large, Orientation=Vertical",
+            "Appearance=Filled, Size=Large, Orientation=Horizontal",
+            "Appearance=Filled Alternative, Size=Large, Orientation=Vertical",
+            "Appearance=Filled Alternative, Size=Large, Orientation=Horizontal",
+            "Appearance=Outline, Size=Large, Orientation=Vertical",
+            "Appearance=Outline, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Large, Orientation=Vertical",
+            "Appearance=Subtle, Size=Large, Orientation=Horizontal"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.card.root.row-gap.medium}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 24,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical",
+            "Appearance=Filled, Size=Medium, Orientation=Horizontal",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Horizontal",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical",
+            "Appearance=Outline, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle, Size=Medium, Orientation=Horizontal",
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Active",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Active",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Active",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Active",
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Hover",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Hover",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Hover",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.card.root.row-gap.small}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 8,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Small, Orientation=Vertical",
+            "Appearance=Filled, Size=Small, Orientation=Horizontal",
+            "Appearance=Filled Alternative, Size=Small, Orientation=Vertical",
+            "Appearance=Filled Alternative, Size=Small, Orientation=Horizontal",
+            "Appearance=Outline, Size=Small, Orientation=Vertical",
+            "Appearance=Outline, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle, Size=Small, Orientation=Horizontal"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "row-rule-color",
+        "value": "{imported.shared.color-bdbdbd}",
+        "reason": "a Chromium GAP-DECORATION longhand (CSS gap decorations) that the computed sweep enumerates for every element — nobody authored it, and neither surface paints it. Registered so it is CARRIED and NAMED rather than silently believed.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "text-decoration-color",
+        "value": "{imported.shared.color-bdbdbd}",
+        "reason": "Figma textDecoration is an enum with no independent colour.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "text-emphasis-color",
+        "value": "{imported.shared.color-bdbdbd}",
+        "reason": "Figma has no text-emphasis marks.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "user-select",
+        "value": "none",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      }
+    ],
     "colW": 488
   }
 ];
@@ -24486,6 +26156,40 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -24508,6 +26212,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -24750,6 +26457,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -25016,6 +26724,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -25034,7 +26743,10 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  results.push(withCodeOnlyFacts(await syncOne(C), C));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 
@@ -25052,7 +26764,7 @@ const COMPONENTS = [
     "contractId": "fluent.checkbox",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Checkbox — generated from contract fluent.checkbox v0.2.0 †",
+    "description": "Checkbox — generated from contract fluent.checkbox v0.2.0 † (59 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -27951,6 +29663,857 @@ const COMPONENTS = [
         "to": "Checked=Mixed, Size=Medium, Shape=Square, State=Active"
       }
     ],
+    "codeOnlyFacts": [
+      {
+        "part": "icon",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "icon",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "icon",
+        "kind": "declared",
+        "channel": "pointer-events",
+        "value": "none",
+        "reason": "Pointer-event gating exists only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "channel",
+        "channel": "flex-shrink",
+        "value": "{imported.checkbox.indicator.flex-shrink}",
+        "reason": "Figma auto-layout children do not shrink below their content — there is no shrink factor.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "border-left-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "border-right-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "border-top-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "default",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "pointer-events",
+        "value": "none",
+        "reason": "Pointer-event gating exists only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "appearance",
+        "value": "auto",
+        "reason": "Native form-control appearance is reset only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "default",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "display",
+        "value": "none",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "outline-style",
+        "value": "auto",
+        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "position",
+        "value": "absolute",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "default",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "part-1-0-0",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "part-1-0-0",
+        "kind": "declared",
+        "channel": "display",
+        "value": "inline",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "part-1-0-0",
+        "kind": "declared",
+        "channel": "pointer-events",
+        "value": "none",
+        "reason": "Pointer-event gating exists only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.checkbox.root.border-bottom-color-state-hover.{checked}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Hover",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Hover",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.checkbox.root.border-bottom-color.checked}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Checked, Size=Medium, Shape=Square",
+            "Checked=Checked, Size=Medium, Shape=Circular",
+            "Checked=Checked, Size=Large, Shape=Square",
+            "Checked=Checked, Size=Large, Shape=Circular",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.checkbox.root.border-bottom-color.mixed}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Mixed, Size=Medium, Shape=Square",
+            "Checked=Mixed, Size=Medium, Shape=Circular",
+            "Checked=Mixed, Size=Large, Shape=Square",
+            "Checked=Mixed, Size=Large, Shape=Circular",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Active",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.checkbox.root.border-bottom-color.unchecked}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square",
+            "Checked=Unchecked, Size=Medium, Shape=Circular",
+            "Checked=Unchecked, Size=Large, Shape=Square",
+            "Checked=Unchecked, Size=Large, Shape=Circular",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.shared.color-242424}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.shared.color-bdbdbd}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.checkbox.root.border-left-color-state-hover.{checked}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Hover",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Hover",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.checkbox.root.border-left-color.checked}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Checked, Size=Medium, Shape=Square",
+            "Checked=Checked, Size=Medium, Shape=Circular",
+            "Checked=Checked, Size=Large, Shape=Square",
+            "Checked=Checked, Size=Large, Shape=Circular",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.checkbox.root.border-left-color.mixed}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Mixed, Size=Medium, Shape=Square",
+            "Checked=Mixed, Size=Medium, Shape=Circular",
+            "Checked=Mixed, Size=Large, Shape=Square",
+            "Checked=Mixed, Size=Large, Shape=Circular",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Active",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.checkbox.root.border-left-color.unchecked}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square",
+            "Checked=Unchecked, Size=Medium, Shape=Circular",
+            "Checked=Unchecked, Size=Large, Shape=Square",
+            "Checked=Unchecked, Size=Large, Shape=Circular",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.shared.color-242424}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.shared.color-bdbdbd}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.checkbox.root.border-right-color-state-hover.{checked}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Hover",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Hover",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.checkbox.root.border-right-color.checked}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Checked, Size=Medium, Shape=Square",
+            "Checked=Checked, Size=Medium, Shape=Circular",
+            "Checked=Checked, Size=Large, Shape=Square",
+            "Checked=Checked, Size=Large, Shape=Circular",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.checkbox.root.border-right-color.mixed}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Mixed, Size=Medium, Shape=Square",
+            "Checked=Mixed, Size=Medium, Shape=Circular",
+            "Checked=Mixed, Size=Large, Shape=Square",
+            "Checked=Mixed, Size=Large, Shape=Circular",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Active",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.checkbox.root.border-right-color.unchecked}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square",
+            "Checked=Unchecked, Size=Medium, Shape=Circular",
+            "Checked=Unchecked, Size=Large, Shape=Square",
+            "Checked=Unchecked, Size=Large, Shape=Circular",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.shared.color-242424}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.shared.color-bdbdbd}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.checkbox.root.border-top-color-state-hover.{checked}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Hover",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Hover",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.checkbox.root.border-top-color.checked}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Checked, Size=Medium, Shape=Square",
+            "Checked=Checked, Size=Medium, Shape=Circular",
+            "Checked=Checked, Size=Large, Shape=Square",
+            "Checked=Checked, Size=Large, Shape=Circular",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.checkbox.root.border-top-color.mixed}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Mixed, Size=Medium, Shape=Square",
+            "Checked=Mixed, Size=Medium, Shape=Circular",
+            "Checked=Mixed, Size=Large, Shape=Square",
+            "Checked=Mixed, Size=Large, Shape=Circular",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Active",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.checkbox.root.border-top-color.unchecked}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square",
+            "Checked=Unchecked, Size=Medium, Shape=Circular",
+            "Checked=Unchecked, Size=Large, Shape=Square",
+            "Checked=Unchecked, Size=Large, Shape=Circular",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.shared.color-242424}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.shared.color-bdbdbd}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "default",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "max-width",
+        "value": "fit-content",
+        "reason": "Fluid max-width constraints live in code; the canvas draws the component at its real size (standing choice).",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -28878,6 +31441,40 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -28900,6 +31497,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -29166,6 +31766,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -29456,6 +32057,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -29474,7 +32076,10 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  results.push(withCodeOnlyFacts(await syncOne(C), C));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 
@@ -29492,7 +32097,7 @@ const COMPONENTS = [
     "contractId": "fluent.dialog",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Dialog — generated from contract fluent.dialog v0.2.0 †",
+    "description": "Dialog — generated from contract fluent.dialog v0.2.0 † (51 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -30234,6 +32839,613 @@ const COMPONENTS = [
     "semantics": {
       "element": "div"
     },
+    "codeOnlyFacts": [
+      {
+        "part": "dialogactions",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.shared.size-8}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 2,
+          "of": 3,
+          "names": [
+            "Modal Type=Modal",
+            "Modal Type=Alert"
+          ]
+        }
+      },
+      {
+        "part": "dialogactions-2",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.shared.size-8}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 1,
+          "of": 3,
+          "names": [
+            "Modal Type=Non Modal"
+          ]
+        }
+      },
+      {
+        "part": "dialogbody",
+        "kind": "channel",
+        "channel": "max-height",
+        "value": "{imported.dialog.dialogbody.max-height}",
+        "reason": "Figma has no maxHeight field (maxWidth exists; its height twin does not).",
+        "variants": {
+          "count": 2,
+          "of": 3,
+          "names": [
+            "Modal Type=Modal",
+            "Modal Type=Alert"
+          ]
+        }
+      },
+      {
+        "part": "dialogbody",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.shared.size-8}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 2,
+          "of": 3,
+          "names": [
+            "Modal Type=Modal",
+            "Modal Type=Alert"
+          ]
+        }
+      },
+      {
+        "part": "dialogbody-2",
+        "kind": "channel",
+        "channel": "max-height",
+        "value": "{imported.dialog.dialogbody-2.max-height}",
+        "reason": "Figma has no maxHeight field (maxWidth exists; its height twin does not).",
+        "variants": {
+          "count": 1,
+          "of": 3,
+          "names": [
+            "Modal Type=Non Modal"
+          ]
+        }
+      },
+      {
+        "part": "dialogbody-2",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.shared.size-8}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 1,
+          "of": 3,
+          "names": [
+            "Modal Type=Non Modal"
+          ]
+        }
+      },
+      {
+        "part": "dialogsurface",
+        "kind": "channel",
+        "channel": "max-height",
+        "value": "{imported.dialog.dialogsurface.max-height}",
+        "reason": "Figma has no maxHeight field (maxWidth exists; its height twin does not).",
+        "variants": {
+          "count": 2,
+          "of": 3,
+          "names": [
+            "Modal Type=Modal",
+            "Modal Type=Alert"
+          ]
+        }
+      },
+      {
+        "part": "dialogsurface",
+        "kind": "channel",
+        "channel": "scale",
+        "value": "{imported.dialog.dialogsurface.scale}",
+        "reason": "Figma has no scale transform — a node's size IS its box, so a scale factor cannot be lowered without silently rewriting the box; the third independent-transform longhand alongside translate (folded to absolute placement) and rotate (carried by the transform grammar).",
+        "variants": {
+          "count": 2,
+          "of": 3,
+          "names": [
+            "Modal Type=Modal",
+            "Modal Type=Alert"
+          ]
+        }
+      },
+      {
+        "part": "dialogsurface",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "dialogsurface",
+        "kind": "declared",
+        "channel": "border-left-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "dialogsurface",
+        "kind": "declared",
+        "channel": "border-right-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "dialogsurface",
+        "kind": "declared",
+        "channel": "border-top-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "dialogsurface",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "dialogsurface__backdrop",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "dialogtitle__action",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "declared",
+        "channel": "overflow-x",
+        "value": "auto",
+        "reason": "declared value outside the canvas grammar for this channel — hidden/clip clip natively (clipsContent). auto/scroll are scrolling, which exists only in code.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "declared",
+        "channel": "overflow-y",
+        "value": "auto",
+        "reason": "declared value outside the canvas grammar for this channel — hidden/clip clip natively (clipsContent). auto/scroll are scrolling, which exists only in code.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "declared",
+        "channel": "border-left-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "declared",
+        "channel": "border-right-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "declared",
+        "channel": "border-top-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "declared",
+        "channel": "transition-duration",
+        "value": "0.1s",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "declared",
+        "channel": "transition-property",
+        "value": "background, border, color",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "declared",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.33, 0, 0.67, 1)",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-4",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-5",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-5",
+        "kind": "declared",
+        "channel": "overflow-x",
+        "value": "auto",
+        "reason": "declared value outside the canvas grammar for this channel — hidden/clip clip natively (clipsContent). auto/scroll are scrolling, which exists only in code.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-5",
+        "kind": "declared",
+        "channel": "overflow-y",
+        "value": "auto",
+        "reason": "declared value outside the canvas grammar for this channel — hidden/clip clip natively (clipsContent). auto/scroll are scrolling, which exists only in code.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-6",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-6",
+        "kind": "declared",
+        "channel": "border-left-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-6",
+        "kind": "declared",
+        "channel": "border-right-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-6",
+        "kind": "declared",
+        "channel": "border-top-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-6",
+        "kind": "declared",
+        "channel": "transition-duration",
+        "value": "0.1s",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-6",
+        "kind": "declared",
+        "channel": "transition-property",
+        "value": "background, border, color",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-6",
+        "kind": "declared",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.33, 0, 0.67, 1)",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 1,
+          "of": 3,
+          "names": [
+            "Modal Type=Non Modal"
+          ]
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 1,
+          "of": 3,
+          "names": [
+            "Modal Type=Non Modal"
+          ]
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 1,
+          "of": 3,
+          "names": [
+            "Modal Type=Non Modal"
+          ]
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 1,
+          "of": 3,
+          "names": [
+            "Modal Type=Non Modal"
+          ]
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "none",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "declared",
+        "channel": "border-left-style",
+        "value": "none",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "declared",
+        "channel": "border-right-style",
+        "value": "none",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "declared",
+        "channel": "border-top-style",
+        "value": "none",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "declared",
+        "channel": "display",
+        "value": "inline-block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "margin-top/margin-right/margin-bottom/margin-left",
+        "value": "623px/250px/623px/250px",
+        "reason": "root margins have no parent auto-layout to wrap — a COMPONENT_SET child is the component itself, so residual root margin is not canvas-drawable (FC-EMIT-ROOT-MARGIN-SILENT)",
+        "variants": {
+          "count": 1,
+          "of": 3,
+          "names": [
+            "Modal Type=Non Modal"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "root",
+        "kind": "preview",
+        "channel": "display",
+        "value": "block",
+        "reason": "a block root has no intrinsic width — the canvas draws a preview width, the code surface fills its container",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -31230,6 +34442,40 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -31252,6 +34498,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -31518,6 +34767,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -31808,6 +35058,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -31826,7 +35077,10 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  results.push(withCodeOnlyFacts(await syncOne(C), C));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 
@@ -31844,7 +35098,7 @@ const COMPONENTS = [
     "contractId": "fluent.input",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Input — generated from contract fluent.input v0.2.0 †",
+    "description": "Input — generated from contract fluent.input v0.2.0 † (45 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -35514,6 +38768,746 @@ const COMPONENTS = [
         "to": "Appearance=Filled Lighter Shadow, Size=Medium, State=Active"
       }
     ],
+    "codeOnlyFacts": [
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.shared.color-767676}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.shared.color-767676}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.shared.color-767676}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.shared.color-767676}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "flex-grow",
+        "value": "{imported.input.input.flex-grow}",
+        "reason": "the canvas approximates growth with layoutGrow/FILL, which is a boolean, not a ratio.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "appearance",
+        "value": "auto",
+        "reason": "Native form-control appearance is reset only in the coded component.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "text",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.input.root.border-bottom-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Filled Darker, Size=Medium, State=Active",
+            "Appearance=Filled Lighter, Size=Medium, State=Active",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Active",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.input.root.border-bottom-color-state-focus-visible.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.input.root.border-bottom-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Hover",
+            "Appearance=Underline, Size=Medium, State=Hover",
+            "Appearance=Filled Darker, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter, Size=Medium, State=Hover",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.input.root.border-bottom-color.outline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium",
+            "Appearance=Outline, Size=Small",
+            "Appearance=Outline, Size=Large",
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.input.root.border-bottom-color.underline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Underline, Size=Medium",
+            "Appearance=Underline, Size=Small",
+            "Appearance=Underline, Size=Large",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.shared.color-e0e0e0}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.input.root.border-left-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Filled Darker, Size=Medium, State=Active",
+            "Appearance=Filled Lighter, Size=Medium, State=Active",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Active",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.input.root.border-left-color-state-focus-visible.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.input.root.border-left-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Hover",
+            "Appearance=Underline, Size=Medium, State=Hover",
+            "Appearance=Filled Darker, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter, Size=Medium, State=Hover",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.input.root.border-left-color.outline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium",
+            "Appearance=Outline, Size=Small",
+            "Appearance=Outline, Size=Large",
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.input.root.border-left-color.underline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Underline, Size=Medium",
+            "Appearance=Underline, Size=Small",
+            "Appearance=Underline, Size=Large",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.shared.color-e0e0e0}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.input.root.border-right-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Filled Darker, Size=Medium, State=Active",
+            "Appearance=Filled Lighter, Size=Medium, State=Active",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Active",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.input.root.border-right-color-state-focus-visible.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.input.root.border-right-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Hover",
+            "Appearance=Underline, Size=Medium, State=Hover",
+            "Appearance=Filled Darker, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter, Size=Medium, State=Hover",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.input.root.border-right-color.outline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium",
+            "Appearance=Outline, Size=Small",
+            "Appearance=Outline, Size=Large",
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.input.root.border-right-color.underline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Underline, Size=Medium",
+            "Appearance=Underline, Size=Small",
+            "Appearance=Underline, Size=Large",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.shared.color-e0e0e0}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.input.root.border-top-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Filled Darker, Size=Medium, State=Active",
+            "Appearance=Filled Lighter, Size=Medium, State=Active",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Active",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.input.root.border-top-color-state-focus-visible.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.input.root.border-top-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Hover",
+            "Appearance=Underline, Size=Medium, State=Hover",
+            "Appearance=Filled Darker, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter, Size=Medium, State=Hover",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.input.root.border-top-color.outline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium",
+            "Appearance=Outline, Size=Small",
+            "Appearance=Outline, Size=Large",
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.input.root.border-top-color.underline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Underline, Size=Medium",
+            "Appearance=Underline, Size=Small",
+            "Appearance=Underline, Size=Large",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.shared.color-e0e0e0}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.input.root.row-gap.large}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Large",
+            "Appearance=Underline, Size=Large",
+            "Appearance=Filled Darker, Size=Large",
+            "Appearance=Filled Lighter, Size=Large",
+            "Appearance=Filled Darker Shadow, Size=Large",
+            "Appearance=Filled Lighter Shadow, Size=Large"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.input.root.row-gap.medium}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 30,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium",
+            "Appearance=Underline, Size=Medium",
+            "Appearance=Filled Darker, Size=Medium",
+            "Appearance=Filled Lighter, Size=Medium",
+            "Appearance=Filled Darker Shadow, Size=Medium",
+            "Appearance=Filled Lighter Shadow, Size=Medium",
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Filled Darker, Size=Medium, State=Active",
+            "Appearance=Filled Lighter, Size=Medium, State=Active",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Active",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Active",
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Disabled",
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Focus Visible"
+          ],
+          "more": 6
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.input.root.row-gap.small}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Small",
+            "Appearance=Underline, Size=Small",
+            "Appearance=Filled Darker, Size=Small",
+            "Appearance=Filled Lighter, Size=Small",
+            "Appearance=Filled Darker Shadow, Size=Small",
+            "Appearance=Filled Lighter Shadow, Size=Small"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "outline-style",
+        "value": "solid",
+        "reason": "declared for the active state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "outline-style",
+        "value": "solid",
+        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -36410,6 +40404,40 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -36432,6 +40460,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -36673,6 +40704,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -36939,6 +40971,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -36957,7 +40990,10 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  results.push(withCodeOnlyFacts(await syncOne(C), C));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 
@@ -36975,7 +41011,7 @@ const COMPONENTS = [
     "contractId": "fluent.spinner",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Spinner — generated from contract fluent.spinner v0.2.0 †",
+    "description": "Spinner — generated from contract fluent.spinner v0.2.0 † (12 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -42434,6 +46470,140 @@ const COMPONENTS = [
     "semantics": {
       "element": "div"
     },
+    "codeOnlyFacts": [
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "default",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.spinner.root.row-gap}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "spinner",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "spinner",
+        "kind": "channel",
+        "channel": "flex-shrink",
+        "value": "{imported.spinner.spinner.flex-shrink}",
+        "reason": "Figma auto-layout children do not shrink below their content — there is no shrink factor.",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "spinner",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "spinner",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "spinner",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "spinner",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "spinner",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "spinnertail",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "spinnertail",
+        "kind": "declared",
+        "channel": "position",
+        "value": "absolute",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -43430,6 +47600,40 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -43452,6 +47656,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -43720,6 +47927,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -44013,6 +48221,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -44031,7 +48240,10 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  results.push(withCodeOnlyFacts(await syncOne(C), C));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 
@@ -44049,7 +48261,7 @@ const COMPONENTS = [
     "contractId": "fluent.switch",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Switch — generated from contract fluent.switch v0.2.0 †",
+    "description": "Switch — generated from contract fluent.switch v0.2.0 † (28 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -45052,6 +49264,332 @@ const COMPONENTS = [
         "Label Position": "After"
       }
     },
+    "codeOnlyFacts": [
+      {
+        "part": "indicator",
+        "kind": "channel",
+        "channel": "flex-shrink",
+        "value": "{imported.switch.indicator.flex-shrink}",
+        "reason": "Figma auto-layout children do not shrink below their content — there is no shrink factor.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "border-left-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "border-right-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "border-top-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "pointer-events",
+        "value": "none",
+        "reason": "Pointer-event gating exists only in the coded component.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "transition-duration",
+        "value": "0.2s",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "transition-property",
+        "value": "background, border, color",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.33, 0, 0.67, 1)",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "appearance",
+        "value": "auto",
+        "reason": "Native form-control appearance is reset only in the coded component.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "default",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "display",
+        "value": "none",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "outline-style",
+        "value": "auto",
+        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "position",
+        "value": "absolute",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "default",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 2,
+          "of": 10,
+          "names": [
+            "Checked=Unchecked, Label Position=After, State=Focus Visible",
+            "Checked=Checked, Label Position=After, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 2,
+          "of": 10,
+          "names": [
+            "Checked=Unchecked, Label Position=After, State=Focus Visible",
+            "Checked=Checked, Label Position=After, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 2,
+          "of": 10,
+          "names": [
+            "Checked=Unchecked, Label Position=After, State=Focus Visible",
+            "Checked=Checked, Label Position=After, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 2,
+          "of": 10,
+          "names": [
+            "Checked=Unchecked, Label Position=After, State=Focus Visible",
+            "Checked=Checked, Label Position=After, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -45935,6 +50473,40 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -45957,6 +50529,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -46199,6 +50774,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -46465,6 +51041,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -46483,7 +51060,10 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  results.push(withCodeOnlyFacts(await syncOne(C), C));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 
@@ -46501,7 +51081,7 @@ const COMPONENTS = [
     "contractId": "fluent.tab-list",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "TabList — generated from contract fluent.tab-list v0.2.0 †",
+    "description": "TabList — generated from contract fluent.tab-list v0.2.0 † (47 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -49976,6 +54556,677 @@ const COMPONENTS = [
     "semantics": {
       "element": "div"
     },
+    "codeOnlyFacts": [
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "flex-shrink",
+        "value": "{imported.shared.num-0}",
+        "reason": "Figma auto-layout children do not shrink below their content — there is no shrink factor.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "flex-shrink",
+        "value": "{imported.shared.num-0}",
+        "reason": "Figma auto-layout children do not shrink below their content — there is no shrink factor.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "grid-template-columns",
+        "value": "{imported.tab-list.tab.grid-template-columns.large}",
+        "reason": "Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Large, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Large, Orientation=Vertical",
+            "Appearance=Subtle, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Large, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Large, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Large, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Large, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "grid-template-columns",
+        "value": "{imported.tab-list.tab.grid-template-columns.medium}",
+        "reason": "Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Medium, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Medium, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Medium, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Medium, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "grid-template-columns",
+        "value": "{imported.tab-list.tab.grid-template-columns.small}",
+        "reason": "Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Small, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Small, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Small, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Small, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "grid-template-rows",
+        "value": "{imported.tab-list.tab.grid-template-rows.large}",
+        "reason": "Figma has no grid track sizing.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Large, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Large, Orientation=Vertical",
+            "Appearance=Subtle, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Large, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Large, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Large, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Large, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "grid-template-rows",
+        "value": "{imported.tab-list.tab.grid-template-rows.medium}",
+        "reason": "Figma has no grid track sizing.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Medium, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Medium, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Medium, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Medium, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "grid-template-rows",
+        "value": "{imported.tab-list.tab.grid-template-rows.small}",
+        "reason": "Figma has no grid track sizing.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Small, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Small, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Small, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Small, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.tab-list.tab.outline-color.filled-circular}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 6,
+          "of": 24,
+          "names": [
+            "Appearance=Filled Circular, Size=Medium, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Medium, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Small, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Small, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Large, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Large, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.tab-list.tab.outline-color.subtle-circular}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 6,
+          "of": 24,
+          "names": [
+            "Appearance=Subtle Circular, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Large, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.tab-list.tab.outline-color.subtle}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 6,
+          "of": 24,
+          "names": [
+            "Appearance=Subtle, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Large, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.tab-list.tab.outline-color.transparent}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 6,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Medium, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Medium, Orientation=Vertical",
+            "Appearance=Transparent, Size=Small, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Small, Orientation=Vertical",
+            "Appearance=Transparent, Size=Large, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Large, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "declared",
+        "channel": "outline-style",
+        "value": "solid",
+        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "declared",
+        "channel": "overflow-x",
+        "value": "hidden",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "declared",
+        "channel": "overflow-y",
+        "value": "hidden",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "flex-shrink",
+        "value": "{imported.shared.num-0}",
+        "reason": "Figma auto-layout children do not shrink below their content — there is no shrink factor.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "grid-template-columns",
+        "value": "{imported.tab-list.tab-2.grid-template-columns.large}",
+        "reason": "Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Large, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Large, Orientation=Vertical",
+            "Appearance=Subtle, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Large, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Large, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Large, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Large, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "grid-template-columns",
+        "value": "{imported.tab-list.tab-2.grid-template-columns.medium}",
+        "reason": "Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Medium, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Medium, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Medium, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Medium, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "grid-template-columns",
+        "value": "{imported.tab-list.tab-2.grid-template-columns.small}",
+        "reason": "Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Small, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Small, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Small, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Small, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "grid-template-rows",
+        "value": "{imported.tab-list.tab-2.grid-template-rows.large}",
+        "reason": "Figma has no grid track sizing.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Large, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Large, Orientation=Vertical",
+            "Appearance=Subtle, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Large, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Large, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Large, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Large, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "grid-template-rows",
+        "value": "{imported.tab-list.tab-2.grid-template-rows.medium}",
+        "reason": "Figma has no grid track sizing.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Medium, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Medium, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Medium, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Medium, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "grid-template-rows",
+        "value": "{imported.tab-list.tab-2.grid-template-rows.small}",
+        "reason": "Figma has no grid track sizing.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Small, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Small, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Small, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Small, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -50915,6 +56166,40 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -50937,6 +56222,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -51178,6 +56466,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -51444,6 +56733,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -51462,7 +56752,10 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  results.push(withCodeOnlyFacts(await syncOne(C), C));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 
@@ -51480,7 +56773,7 @@ const COMPONENTS = [
     "contractId": "fluent.tooltip",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Tooltip — generated from contract fluent.tooltip v0.2.0 †",
+    "description": "Tooltip — generated from contract fluent.tooltip v0.2.0 † (12 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -51647,6 +56940,140 @@ const COMPONENTS = [
     "semantics": {
       "element": "div"
     },
+    "codeOnlyFacts": [
+      {
+        "part": "part-0",
+        "kind": "declared",
+        "channel": "background-clip",
+        "value": "content-box",
+        "reason": "Background clipping exists only in code.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "part-0",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "default",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "part-0",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "part-0",
+        "kind": "declared",
+        "channel": "position",
+        "value": "absolute",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-left-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-right-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-top-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "default",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "position",
+        "value": "absolute",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "preview",
+        "channel": "display",
+        "value": "block",
+        "reason": "a block root has no intrinsic width — the canvas draws a preview width, the code surface fills its container",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -52639,6 +58066,40 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -52661,6 +58122,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -52929,6 +58393,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -53222,6 +58687,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -53240,7 +58706,10 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  results.push(withCodeOnlyFacts(await syncOne(C), C));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 

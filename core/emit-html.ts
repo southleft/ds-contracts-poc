@@ -22,7 +22,12 @@
  *     the token stylesheet (src/styles/tokens.css) or the custom properties
  *     resolve to nothing.
  *   · No events, no interactivity beyond CSS states (:hover /
- *     :focus-visible / :disabled render; toggles do not run).
+ *     :focus-visible / :disabled render; toggles do not run — but a
+ *     toggle's ARIA state renders per showcase item on its trigger, root
+ *     or part: aria-expanded / aria-pressed / aria-checked / aria-selected).
+ *   · anatomy.root.attrs ride the root element; attrs.role wins over
+ *     semantics.role (one rule across react / react-inline / wc / html; a
+ *     differing pair is refused by validateContract).
  *   · Slots render their declared defaultContent; an empty slot renders its
  *     wrapper EMPTY (absent content is absent — a comment names it; painted
  *     placeholder text would be invented ink the pixels then judge).
@@ -934,6 +939,22 @@ function renderComponentHtml(
     return state.bools[vw.prop] === true;
   };
 
+  // A toggling event's ARIA state renders per showcase item on its trigger
+  // (root or part): the static surface cannot RUN the toggle, but the state
+  // the item shows is a fact — aria-expanded / aria-pressed / aria-checked /
+  // aria-selected per the showcased prop value (off → "false", on → "true",
+  // any other enum member → "mixed", exactly the React/WC expression). Native
+  // checkable inputs carry `checked` instead (renderPart's input branch).
+  const toggleAriaFor = (triggerName: string): string => {
+    const ev = (contract.events ?? []).find((e) => e.trigger === triggerName && e.toggles?.aria);
+    if (!ev?.toggles?.aria) return '';
+    const [off, on] = ev.toggles.between;
+    const prop = contract.props.find((p) => p.name === ev.toggles!.prop);
+    const v = propValue(ev.toggles.prop) ?? (prop?.default !== undefined ? String(prop.default) : off);
+    const ariaState = v === on ? 'true' : v === off ? 'false' : 'mixed';
+    return ` aria-${ev.toggles.aria}="${ariaState}"`;
+  };
+
   const attrString = (part: Part): string =>
     Object.entries(part.attrs ?? {})
       .map(([attr, value]) => {
@@ -1116,9 +1137,10 @@ function renderComponentHtml(
     ]
       .filter(Boolean)
       .join('\n');
+    const ariaFrag = toggleAriaFor(name);
     return inner
-      ? `${pad}<${el} class="${cls}"${attrString(part)}>\n${inner}\n${pad}</${el}>`
-      : `${pad}<${el} class="${cls}"${attrString(part)}></${el}>`;
+      ? `${pad}<${el} class="${cls}"${ariaFrag}${attrString(part)}>\n${inner}\n${pad}</${el}>`
+      : `${pad}<${el} class="${cls}"${ariaFrag}${attrString(part)}></${el}>`;
   };
 
   // MULTI-ROOT composite: render each top-level root as a SIBLING via the same
@@ -1207,13 +1229,23 @@ function renderComponentHtml(
     const dataName = p.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
     attrs.push(`data-${dataName}="true"`);
   }
+  // ONE role on the root: anatomy.root.attrs.role (rendered above) wins over
+  // the semantics default — the same rule emit-react / react-inline / the WC
+  // emitter apply; a DIFFERING pair is refused by name in validateContract.
   const roleByProp = contract.semantics.roleByProp;
   if (roleByProp) {
     const role = roleByProp.map[propValue(roleByProp.prop) ?? ''];
     if (role) attrs.push(`role="${escapeHtml(safeRole(role, `${contract.id}.semantics.roleByProp`))}"`);
-  } else if (contract.semantics.role && contract.semantics.role !== contract.semantics.element) {
+  } else if (
+    root.attrs?.role === undefined &&
+    contract.semantics.role &&
+    contract.semantics.role !== contract.semantics.element
+  ) {
     attrs.push(`role="${escapeHtml(safeRole(contract.semantics.role, `${contract.id}.semantics.role`))}"`);
   }
+  // A root-triggered toggle's ARIA state (a press button's aria-pressed).
+  const rootAria = toggleAriaFor('root');
+  if (rootAria) attrs.push(rootAria.trim());
 
   // Bare text directly inside a <select> is DROPPED by HTML parsers — the
   // <option> wrapper is the only faithful rendering of a select's default
@@ -1311,7 +1343,8 @@ export function emitHtml(contract: Contract, ctx: EmitCtx): EmitHtmlResult {
   ${escapeHtmlComment(contract.name)} — static HTML+CSS emitted from contract ${contract.id} v${contract.version} by core/emit-html.ts.
   Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
   bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
-  Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
+  Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled); a toggle's
+  ARIA state (aria-expanded/aria-pressed/aria-checked/aria-selected) renders per showcase item, it does not flip.
   Slots render their declared defaultContent; an empty slot renders its wrapper empty (absent content
   is absent — named in an inline comment, never painted as placeholder text). Booleans render per showcase item.
 -->`;

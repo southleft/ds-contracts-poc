@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "polaris.button",
     "version": "0.4.0",
     "anchorKey": null,
-    "description": "Button — generated from contract polaris.button v0.4.0 †",
+    "description": "Button — generated from contract polaris.button v0.4.0 † (37 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -31192,6 +31192,631 @@ const COMPONENTS = [
         "to": "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain, State=Active"
       }
     ],
+    "codeOnlyFacts": [
+      {
+        "part": "icon",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "icon",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "icon",
+        "kind": "declared",
+        "channel": "user-select",
+        "value": "none",
+        "reason": "Text-selection behavior (user-select) exists only in the coded component.",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "icon-2",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "icon-2",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "icon-2",
+        "kind": "declared",
+        "channel": "max-height",
+        "value": "100%",
+        "reason": "Fluid max-height constraints live in code; the canvas draws the component at its real size (standing choice).",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "icon-2",
+        "kind": "declared",
+        "channel": "max-width",
+        "value": "100%",
+        "reason": "Fluid max-width constraints live in code; the canvas draws the component at its real size (standing choice).",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "icon-2",
+        "kind": "declared",
+        "channel": "user-select",
+        "value": "none",
+        "reason": "Text-selection behavior (user-select) exists only in the coded component.",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "pointer-events",
+        "value": "none",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "user-select",
+        "value": "none",
+        "reason": "Text-selection behavior (user-select) exists only in the coded component.",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "margin-top/margin-right/margin-bottom/margin-left",
+        "value": "-4px/-8px/-4px/-8px",
+        "reason": "root margins have no parent auto-layout to wrap — a COMPONENT_SET child is the component itself, so residual root margin is not canvas-drawable (FC-EMIT-ROOT-MARGIN-SILENT)",
+        "variants": {
+          "count": 30,
+          "of": 320,
+          "names": [
+            "Size=Micro, Text Align=Center, Tone=Default, Variant=Plain",
+            "Size=Micro, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Center, Tone=Critical, Variant=Plain",
+            "Size=Micro, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Center, Tone=Success, Variant=Plain",
+            "Size=Micro, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Left, Tone=Default, Variant=Plain",
+            "Size=Micro, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Left, Tone=Critical, Variant=Plain",
+            "Size=Micro, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Left, Tone=Success, Variant=Plain",
+            "Size=Micro, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Right, Tone=Default, Variant=Plain",
+            "Size=Micro, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Right, Tone=Critical, Variant=Plain",
+            "Size=Micro, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Right, Tone=Success, Variant=Plain",
+            "Size=Micro, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Start, Tone=Default, Variant=Plain",
+            "Size=Micro, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Start, Tone=Critical, Variant=Plain",
+            "Size=Micro, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Start, Tone=Success, Variant=Plain",
+            "Size=Micro, Text Align=Start, Tone=Success, Variant=Monochrome Plain"
+          ],
+          "more": 6
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "margin-top/margin-right/margin-bottom/margin-left",
+        "value": "-6px/-12px/-6px/-12px",
+        "reason": "root margins have no parent auto-layout to wrap — a COMPONENT_SET child is the component itself, so residual root margin is not canvas-drawable (FC-EMIT-ROOT-MARGIN-SILENT)",
+        "variants": {
+          "count": 98,
+          "of": 320,
+          "names": [
+            "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain",
+            "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain",
+            "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Center, Tone=Success, Variant=Plain",
+            "Size=Medium, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Left, Tone=Default, Variant=Plain",
+            "Size=Medium, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Left, Tone=Critical, Variant=Plain",
+            "Size=Medium, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Left, Tone=Success, Variant=Plain",
+            "Size=Medium, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Right, Tone=Default, Variant=Plain",
+            "Size=Medium, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Right, Tone=Critical, Variant=Plain",
+            "Size=Medium, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Right, Tone=Success, Variant=Plain",
+            "Size=Medium, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Start, Tone=Default, Variant=Plain",
+            "Size=Medium, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Start, Tone=Critical, Variant=Plain",
+            "Size=Medium, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Start, Tone=Success, Variant=Plain",
+            "Size=Medium, Text Align=Start, Tone=Success, Variant=Monochrome Plain"
+          ],
+          "more": 74
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.button.root.outline-color.monochromePlain.none}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 64,
+          "of": 320,
+          "names": [
+            "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=End, Tone=Default, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
+            "Size=Medium, Text Align=End, Tone=Success, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
+            "Size=Micro, Text Align=Right, Tone=Success, Variant=Monochrome Plain"
+          ],
+          "more": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.button.root.outline-color.plain.none}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 64,
+          "of": 320,
+          "names": [
+            "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain",
+            "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain",
+            "Size=Medium, Text Align=Center, Tone=Success, Variant=Plain",
+            "Size=Medium, Text Align=Left, Tone=Default, Variant=Plain",
+            "Size=Medium, Text Align=Left, Tone=Critical, Variant=Plain",
+            "Size=Medium, Text Align=Left, Tone=Success, Variant=Plain",
+            "Size=Medium, Text Align=Right, Tone=Default, Variant=Plain",
+            "Size=Medium, Text Align=Right, Tone=Critical, Variant=Plain",
+            "Size=Medium, Text Align=Right, Tone=Success, Variant=Plain",
+            "Size=Medium, Text Align=Start, Tone=Default, Variant=Plain",
+            "Size=Medium, Text Align=Start, Tone=Critical, Variant=Plain",
+            "Size=Medium, Text Align=Start, Tone=Success, Variant=Plain",
+            "Size=Medium, Text Align=End, Tone=Default, Variant=Plain",
+            "Size=Medium, Text Align=End, Tone=Critical, Variant=Plain",
+            "Size=Medium, Text Align=End, Tone=Success, Variant=Plain",
+            "Size=Micro, Text Align=Center, Tone=Default, Variant=Plain",
+            "Size=Micro, Text Align=Center, Tone=Critical, Variant=Plain",
+            "Size=Micro, Text Align=Center, Tone=Success, Variant=Plain",
+            "Size=Micro, Text Align=Left, Tone=Default, Variant=Plain",
+            "Size=Micro, Text Align=Left, Tone=Critical, Variant=Plain",
+            "Size=Micro, Text Align=Left, Tone=Success, Variant=Plain",
+            "Size=Micro, Text Align=Right, Tone=Default, Variant=Plain",
+            "Size=Micro, Text Align=Right, Tone=Critical, Variant=Plain",
+            "Size=Micro, Text Align=Right, Tone=Success, Variant=Plain"
+          ],
+          "more": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.button.root.outline-color.primary.none}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 64,
+          "of": 320,
+          "names": [
+            "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary",
+            "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary",
+            "Size=Medium, Text Align=Center, Tone=Success, Variant=Primary",
+            "Size=Medium, Text Align=Left, Tone=Default, Variant=Primary",
+            "Size=Medium, Text Align=Left, Tone=Critical, Variant=Primary",
+            "Size=Medium, Text Align=Left, Tone=Success, Variant=Primary",
+            "Size=Medium, Text Align=Right, Tone=Default, Variant=Primary",
+            "Size=Medium, Text Align=Right, Tone=Critical, Variant=Primary",
+            "Size=Medium, Text Align=Right, Tone=Success, Variant=Primary",
+            "Size=Medium, Text Align=Start, Tone=Default, Variant=Primary",
+            "Size=Medium, Text Align=Start, Tone=Critical, Variant=Primary",
+            "Size=Medium, Text Align=Start, Tone=Success, Variant=Primary",
+            "Size=Medium, Text Align=End, Tone=Default, Variant=Primary",
+            "Size=Medium, Text Align=End, Tone=Critical, Variant=Primary",
+            "Size=Medium, Text Align=End, Tone=Success, Variant=Primary",
+            "Size=Micro, Text Align=Center, Tone=Default, Variant=Primary",
+            "Size=Micro, Text Align=Center, Tone=Critical, Variant=Primary",
+            "Size=Micro, Text Align=Center, Tone=Success, Variant=Primary",
+            "Size=Micro, Text Align=Left, Tone=Default, Variant=Primary",
+            "Size=Micro, Text Align=Left, Tone=Critical, Variant=Primary",
+            "Size=Micro, Text Align=Left, Tone=Success, Variant=Primary",
+            "Size=Micro, Text Align=Right, Tone=Default, Variant=Primary",
+            "Size=Micro, Text Align=Right, Tone=Critical, Variant=Primary",
+            "Size=Micro, Text Align=Right, Tone=Success, Variant=Primary"
+          ],
+          "more": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.button.root.outline-color.secondary.none}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 64,
+          "of": 320,
+          "names": [
+            "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary",
+            "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary",
+            "Size=Medium, Text Align=Center, Tone=Success, Variant=Secondary",
+            "Size=Medium, Text Align=Left, Tone=Default, Variant=Secondary",
+            "Size=Medium, Text Align=Left, Tone=Critical, Variant=Secondary",
+            "Size=Medium, Text Align=Left, Tone=Success, Variant=Secondary",
+            "Size=Medium, Text Align=Right, Tone=Default, Variant=Secondary",
+            "Size=Medium, Text Align=Right, Tone=Critical, Variant=Secondary",
+            "Size=Medium, Text Align=Right, Tone=Success, Variant=Secondary",
+            "Size=Medium, Text Align=Start, Tone=Default, Variant=Secondary",
+            "Size=Medium, Text Align=Start, Tone=Critical, Variant=Secondary",
+            "Size=Medium, Text Align=Start, Tone=Success, Variant=Secondary",
+            "Size=Medium, Text Align=End, Tone=Default, Variant=Secondary",
+            "Size=Medium, Text Align=End, Tone=Critical, Variant=Secondary",
+            "Size=Medium, Text Align=End, Tone=Success, Variant=Secondary",
+            "Size=Micro, Text Align=Center, Tone=Default, Variant=Secondary",
+            "Size=Micro, Text Align=Center, Tone=Critical, Variant=Secondary",
+            "Size=Micro, Text Align=Center, Tone=Success, Variant=Secondary",
+            "Size=Micro, Text Align=Left, Tone=Default, Variant=Secondary",
+            "Size=Micro, Text Align=Left, Tone=Critical, Variant=Secondary",
+            "Size=Micro, Text Align=Left, Tone=Success, Variant=Secondary",
+            "Size=Micro, Text Align=Right, Tone=Default, Variant=Secondary",
+            "Size=Micro, Text Align=Right, Tone=Critical, Variant=Secondary",
+            "Size=Micro, Text Align=Right, Tone=Success, Variant=Secondary"
+          ],
+          "more": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.button.root.outline-color.tertiary.none}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 64,
+          "of": 320,
+          "names": [
+            "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary",
+            "Size=Medium, Text Align=Center, Tone=Critical, Variant=Tertiary",
+            "Size=Medium, Text Align=Center, Tone=Success, Variant=Tertiary",
+            "Size=Medium, Text Align=Left, Tone=Default, Variant=Tertiary",
+            "Size=Medium, Text Align=Left, Tone=Critical, Variant=Tertiary",
+            "Size=Medium, Text Align=Left, Tone=Success, Variant=Tertiary",
+            "Size=Medium, Text Align=Right, Tone=Default, Variant=Tertiary",
+            "Size=Medium, Text Align=Right, Tone=Critical, Variant=Tertiary",
+            "Size=Medium, Text Align=Right, Tone=Success, Variant=Tertiary",
+            "Size=Medium, Text Align=Start, Tone=Default, Variant=Tertiary",
+            "Size=Medium, Text Align=Start, Tone=Critical, Variant=Tertiary",
+            "Size=Medium, Text Align=Start, Tone=Success, Variant=Tertiary",
+            "Size=Medium, Text Align=End, Tone=Default, Variant=Tertiary",
+            "Size=Medium, Text Align=End, Tone=Critical, Variant=Tertiary",
+            "Size=Medium, Text Align=End, Tone=Success, Variant=Tertiary",
+            "Size=Micro, Text Align=Center, Tone=Default, Variant=Tertiary",
+            "Size=Micro, Text Align=Center, Tone=Critical, Variant=Tertiary",
+            "Size=Micro, Text Align=Center, Tone=Success, Variant=Tertiary",
+            "Size=Micro, Text Align=Left, Tone=Default, Variant=Tertiary",
+            "Size=Micro, Text Align=Left, Tone=Critical, Variant=Tertiary",
+            "Size=Micro, Text Align=Left, Tone=Success, Variant=Tertiary",
+            "Size=Micro, Text Align=Right, Tone=Default, Variant=Tertiary",
+            "Size=Micro, Text Align=Right, Tone=Critical, Variant=Tertiary",
+            "Size=Micro, Text Align=Right, Tone=Success, Variant=Tertiary"
+          ],
+          "more": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "appearance",
+        "value": "none",
+        "reason": "Native form-control appearance is reset only in the coded component.",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "none",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-left-style",
+        "value": "none",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-right-style",
+        "value": "none",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-top-style",
+        "value": "none",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "font-feature-settings",
+        "value": "\"calt\" 0",
+        "reason": "Tabular figures / ligature settings apply only in code — Figma's plugin API cannot set OpenType features.",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "outline-style",
+        "value": "solid",
+        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "pointer-events",
+        "value": "none",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "text-rendering",
+        "value": "optimizelegibility",
+        "reason": "Text rasterization hints (text-rendering) apply only in code.",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "touch-action",
+        "value": "manipulation",
+        "reason": "Touch gesture handling (touch-action) exists only in the coded component.",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "user-select",
+        "value": "none",
+        "reason": "Text-selection behavior (user-select) exists only in the coded component.",
+        "variants": {
+          "count": 320,
+          "of": 320
+        }
+      },
+      {
+        "part": "root",
+        "kind": "gradient",
+        "channel": "background-image",
+        "value": "linear-gradient(rgba(48, 48, 48, 0) 63.53%, rgba(255, 255, 2",
+        "reason": "did not parse as a linear gradient (radial / conic / foreign grammar) — Figma lowers linear-gradient stacks only",
+        "variants": {
+          "count": 64,
+          "of": 320,
+          "names": [
+            "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary",
+            "Size=Medium, Text Align=Center, Tone=Critical, Variant=Primary",
+            "Size=Medium, Text Align=Center, Tone=Success, Variant=Primary",
+            "Size=Medium, Text Align=Left, Tone=Default, Variant=Primary",
+            "Size=Medium, Text Align=Left, Tone=Critical, Variant=Primary",
+            "Size=Medium, Text Align=Left, Tone=Success, Variant=Primary",
+            "Size=Medium, Text Align=Right, Tone=Default, Variant=Primary",
+            "Size=Medium, Text Align=Right, Tone=Critical, Variant=Primary",
+            "Size=Medium, Text Align=Right, Tone=Success, Variant=Primary",
+            "Size=Medium, Text Align=Start, Tone=Default, Variant=Primary",
+            "Size=Medium, Text Align=Start, Tone=Critical, Variant=Primary",
+            "Size=Medium, Text Align=Start, Tone=Success, Variant=Primary",
+            "Size=Medium, Text Align=End, Tone=Default, Variant=Primary",
+            "Size=Medium, Text Align=End, Tone=Critical, Variant=Primary",
+            "Size=Medium, Text Align=End, Tone=Success, Variant=Primary",
+            "Size=Micro, Text Align=Center, Tone=Default, Variant=Primary",
+            "Size=Micro, Text Align=Center, Tone=Critical, Variant=Primary",
+            "Size=Micro, Text Align=Center, Tone=Success, Variant=Primary",
+            "Size=Micro, Text Align=Left, Tone=Default, Variant=Primary",
+            "Size=Micro, Text Align=Left, Tone=Critical, Variant=Primary",
+            "Size=Micro, Text Align=Left, Tone=Success, Variant=Primary",
+            "Size=Micro, Text Align=Right, Tone=Default, Variant=Primary",
+            "Size=Micro, Text Align=Right, Tone=Critical, Variant=Primary",
+            "Size=Micro, Text Align=Right, Tone=Success, Variant=Primary"
+          ],
+          "more": 40
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -32186,6 +32811,40 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -32208,6 +32867,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -32450,6 +33112,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -32716,6 +33379,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -32734,6 +33398,9 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  results.push(withCodeOnlyFacts(await syncOne(C), C));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };

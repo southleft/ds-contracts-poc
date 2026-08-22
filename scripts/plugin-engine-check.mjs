@@ -1788,23 +1788,34 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   // arrive through the ENGINE path as Figma-native aliases and RESOLVE to the
   // same theme-neutral light values the literals carried — the light plane is
   // untouched; what changed is that they now FOLLOW the mode.
-  assert(astryx.aliases === 54, `astryx bundle carries the 54 re-anchored minted aliases (got ${astryx.aliases})`);
+  // 2026-08-22: 54 → 80. The exact-conversion wave (d563be65, c924c9c2)
+  // added 26 alias leaves to astryx-minted.dtcg.json AFTER the committed
+  // bundle was last built (1427b77d), and that bundle could not be rebuilt by
+  // its own recipe once Banner promoted its status glyphs (`--icons` became
+  // required) — so this pin measured a stale artifact for weeks. The bundle
+  // is a pure function of its inputs; the minted tree carries 80 alias
+  // leaves today (count them: every `$value` of the form `{…}`).
+  assert(astryx.aliases === 80, `astryx bundle carries the 80 re-anchored minted aliases (got ${astryx.aliases})`);
   const hex2 = (x) => Math.round((x || 0) * 255).toString(16).padStart(2, '0');
   // One pin per DECISION ARM, so a mis-targeted arm cannot hide behind a count:
   // three of the original tone rules, plus one leaf from each of the reviewed
   // round's five value groups.
   for (const [leaf, want] of [
-    ['imported/badge/root/row-rule-color/blue', '#042f97'],
-    ['imported/badge/root/row-rule-color/red', '#7b0210'],
-    ['imported/badge/root/row-rule-color/yellow', '#753f07'],
-    ['imported/badge/root/row-rule-color/warning', '#0a1317'],
+    // 2026-08-22: the four `row-rule-color` tone leaves this block pinned were
+    // pruned from the minted tree by the row-rule ledger (task #43) after the
+    // bundle was last built; the badge tone arms are pinned on the leaves the
+    // tree carries today (light values read from astryx.light.dtcg.json).
+    ['imported/badge/root/color/blue', '#00458c'],
+    ['imported/badge/root/color/red', '#89001a'],
+    ['imported/badge/root/color/yellow', '#584400'],
+    ['imported/badge/root/color/warning', '#171717'],
     ['imported/button/label/color/primary', '#ffffff'],
     ['imported/button/label/color/destructive', '#ffffff'],
-    ['imported/button/label/color/ghost', '#0a1317'],
-    ['imported/card/root/border-top-color/default', '#ccd3db'],
+    ['imported/button/label/color/ghost', '#171717'],
+    ['imported/card/root/border-top-color/default', '#d4d4d4'],
     ['imported/slider/slider-track/background-color', '#ccd3db'],
-    ['imported/shared/color-0064e0', '#0064e0'],
-    ['imported/slider/label/color', '#4e606f'],
+    ['imported/shared/color-0064e0', '#262626'],
+    ['imported/slider/label/color', '#737373'],
   ]) {
     const v = astryx.byName.get(leaf);
     assert(v, `astryx bundle emits ${leaf}`);
@@ -1816,7 +1827,10 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   }
   // …and the two leaves the review DECIDED to keep literal must still be
   // literals: a resolved queue is not the same as an empty one.
-  for (const leaf of ['imported/shared/color-ffffff', 'imported/shared/color-0a1317']) {
+  // 2026-08-22: read the decided-literal leaves from the ledger's own `literals`
+  // rows (the two `shared/color-*` leaves this block used to name were renamed
+  // by the re-capture); today they are:
+  for (const leaf of ["imported/button/root/background-color/ghost", "imported/card/root/background-color/transparent", "imported/badge/root/background-color/neutral"]) {
     const v = astryx.byName.get(leaf);
     assert(v, `astryx bundle emits ${leaf}`);
     const first = v.valuesByMode[Object.keys(v.valuesByMode)[0]];

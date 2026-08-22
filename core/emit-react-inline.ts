@@ -57,6 +57,7 @@ import {
   UA_MARGIN_ELEMENTS,
   validateContract,
   ELEMENT_META,
+  holderDeclaresPosition,
 } from './emit-react.js';
 
 export interface EmitReactInlineCtx {
@@ -270,9 +271,13 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         }
       }
       if (contract.semantics.element === 'button') s.cursor = 'pointer';
+      // A declared holder is the positioning context — mirrors emit-react
+      // (FC-DUMP-PROPOSE-THUMB-HOLDER-RELATIVE).
       if (
         walkAnatomy(contract).some(
-          (w) => w.part.overlay || (w.part.stylesWhen ?? []).some((sw) => sw.styles['position'] === 'absolute'),
+          (w) =>
+            (w.part.overlay || (w.part.stylesWhen ?? []).some((sw) => sw.styles['position'] === 'absolute')) &&
+            !holderDeclaresPosition(contract, w.path),
         )
       ) {
         s.position = 'relative';
@@ -658,16 +663,23 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     return `{${cond} ? (${jsx}) : null}`;
   };
 
+  // `attrs` on a part (root included) — the same rule as emit-react: a text
+  // prop binds bare (`href={href}`), any other prop is coerced, literals land
+  // as literals (numeric DOM props as numbers).
   const NUMERIC_ATTRS = new Set(['rows', 'cols', 'tabIndex', 'colSpan', 'rowSpan']);
-  const partAttrString = (part: Part): string =>
-    Object.entries(part.attrs ?? {})
-      .map(([attr, value]) => {
-        const ref = value.match(/^\{([a-z][\w-]*)\}$/);
-        if (ref) return ` ${attr}={String(${codePropOf(ref[1])})}`;
-        if (NUMERIC_ATTRS.has(attr) && /^\d+$/.test(value)) return ` ${attr}={${value}}`;
-        return ` ${attr}=${JSON.stringify(value)}`;
-      })
-      .join('');
+  const partAttrList = (part: Part): string[] =>
+    Object.entries(part.attrs ?? {}).map(([attr, value]) => {
+      const ref = value.match(/^\{([a-z][\w-]*)\}$/);
+      if (ref) {
+        const bound = contract.props.find((p) => p.name === ref[1]);
+        return bound?.type === 'text'
+          ? `${attr}={${codePropOf(ref[1])}}`
+          : `${attr}={String(${codePropOf(ref[1])})}`;
+      }
+      if (NUMERIC_ATTRS.has(attr) && /^\d+$/.test(value)) return `${attr}={${value}}`;
+      return `${attr}=${JSON.stringify(value)}`;
+    });
+  const partAttrString = (part: Part): string => partAttrList(part).map((a) => ` ${a}`).join('');
 
   // Icon assets (fixed names + enum expansions), same table as the CSS-Module emitter.
   const neededIcons = new Map<string, string>();
@@ -883,12 +895,21 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     const dataName = p.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
     elementAttrs.push(`data-${dataName}={${p.bindings.code.prop} || undefined}`);
   }
+  // anatomy.root.attrs ride the root element like every part's attrs;
+  // attrs.role wins over the semantics default (a differing pair is refused
+  // by name in validateContract).
+  const rootAttrs = root?.attrs ?? {};
+  if (root) elementAttrs.push(...partAttrList(root));
   const roleByProp = contract.semantics.roleByProp;
   let roleMapConst = '';
   if (roleByProp) {
     roleMapConst = `const ROLE_MAP: Record<string, string> = ${JSON.stringify(roleByProp.map)};\n\n`;
     elementAttrs.push(`role={ROLE_MAP[${codePropOf(roleByProp.prop)}]}`);
-  } else if (contract.semantics.role && contract.semantics.role !== contract.semantics.element) {
+  } else if (
+    rootAttrs.role === undefined &&
+    contract.semantics.role &&
+    contract.semantics.role !== contract.semantics.element
+  ) {
     elementAttrs.push(`role="${contract.semantics.role}"`);
   }
   let elementMapConst = '';

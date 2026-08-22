@@ -356,6 +356,31 @@ export interface CompiledTokenSet {
   unparsedDimensions: string[];
   /** Mode keys matching no base key — their mode silently renders as base. */
   orphanModes: string[];
+  /** Tokens whose `$value` is not a string or number (DTCG object-form
+   *  shadow/typography/border composites, arrays, booleans, null) — NOT
+   *  compiled into a row. `String()` on these yields "[object Object]", which
+   *  used to ship as a STRING variable that draws nothing. Each entry is
+   *  `<variable name>: <shape>`. */
+  unsupportedValues: string[];
+}
+
+/** The shape of a `$value` no Figma variable can hold, or null when it is a
+ *  string/number (the only two shapes the converters below read). Named so a
+ *  refusal says what was there, not just that something was. */
+function unsupportedValueShape(v: unknown): string | null {
+  if (typeof v === 'string' || typeof v === 'number') return null;
+  if (v === undefined) return 'no $value';
+  if (v === null) return 'null';
+  if (Array.isArray(v)) return `array[${v.length}]` + (v.length > 0 && isPlainObject(v[0]) ? ` of {${Object.keys(v[0]).join(', ')}}` : '');
+  if (typeof v === 'object') return `object-form {${Object.keys(v as object).join(', ')}}`;
+  return typeof v;
+}
+
+/** Every token in a tokenSet whose `$value` (base, light, dark or minted) is
+ *  not a string/number, as `<variable name>: <shape>` — the bundle-time
+ *  (CLI) refusal list. Empty means every value is a shape a variable holds. */
+export function unsupportedTokenValues(tokenSet: TokenSetPayload): string[] {
+  return compileTokenSetRows(tokenSet).unsupportedValues;
 }
 
 interface TokenSetTextStyle {
@@ -491,6 +516,7 @@ export function compileTokenSetRows(tokenSet: TokenSetPayload): CompiledTokenSet
   const rows: TokenSetRow[] = [];
   const unparsedColors: string[] = [];
   const unparsedDimensions: string[] = [];
+  const unsupportedValues: string[] = [];
   // base first (alias targets must exist before minted alias rows apply —
   // the script does two passes, but ordering keeps the payload readable)
   for (const dotName of Object.keys(base).sort()) {
@@ -501,8 +527,20 @@ export function compileTokenSetRows(tokenSet: TokenSetPayload): CompiledTokenSet
     // this fires only for nested-tree wraps like Polaris (live gate finding:
     // Missing variable p/color-avatar-one-bg-fill).
     const name = dotName.split('.').join('/');
-    const lv = String(light[dotName]?.$value ?? entry.$value);
-    const dv = String(dark[dotName]?.$value ?? entry.$value);
+    // A composite (DTCG shadow/typography object, an array of layers, a
+    // boolean, null) has no Figma variable shape. `String()` turned it into
+    // "[object Object]" / "[object Object],[object Object]" and that text
+    // shipped as a STRING variable — a token that draws nothing and is
+    // reported as synced. Refuse BY NAME (and by shape) and compile no row.
+    const rawL = light[dotName]?.$value ?? entry.$value;
+    const rawD = dark[dotName]?.$value ?? entry.$value;
+    const badShape = unsupportedValueShape(rawL) ?? unsupportedValueShape(rawD);
+    if (badShape !== null) {
+      unsupportedValues.push(`${name}: ${badShape}`);
+      continue;
+    }
+    const lv = String(rawL);
+    const dv = String(rawD);
     const lc = colorOf(lv);
     const dc = colorOf(dv);
     if (entry.$type === 'color' && lc && dc) {
@@ -542,6 +580,11 @@ export function compileTokenSetRows(tokenSet: TokenSetPayload): CompiledTokenSet
   ];
   let aliasCount = 0;
   for (const name of Object.keys(mintedFlat).sort()) {
+    const mintedShape = unsupportedValueShape(mintedFlat[name].$value);
+    if (mintedShape !== null) {
+      unsupportedValues.push(`${name}: ${mintedShape}`);
+      continue;
+    }
     const v = String(mintedFlat[name].$value);
     const am = /^\{(.+)\}$/.exec(v);
     if (am) {
@@ -569,7 +612,7 @@ export function compileTokenSetRows(tokenSet: TokenSetPayload): CompiledTokenSet
     rows.push({ name, type: 'STRING', light: v, dark: v });
   }
   const counts = rows.reduce<Record<string, number>>((a, r) => ((a[r.type] = (a[r.type] ?? 0) + 1), a), {});
-  return { rows, counts, aliasCount, unparsedColors, unparsedDimensions, orphanModes };
+  return { rows, counts, aliasCount, unparsedColors, unparsedDimensions, orphanModes, unsupportedValues };
 }
 
 /** Plugin-API runtime shared by bundle tokenSet apply and first-party
@@ -664,21 +707,111 @@ if (!willPrune && leftovers.length > 0) {
 `;
 }
 
+/** Plugin-API runtime shared by bundle tokenSet apply and first-party
+ *  Primitives/Brand/Semantic apply: the VALUE door. Declares
+ *  `DS_OVERWRITE_TOKENS`, `variableDrift` (array of
+ *  `{name, mode, canvas, bundle, applied}`), `valueKey` and
+ *  `applyValue(variable, modeId, modeName, value, created)` → boolean
+ *  (whether the value was written). Every apply records what it wrote per
+ *  mode in the variable's shared plugin data (`ds_contracts/appliedValues`,
+ *  keyed by mode NAME so a file with different mode ids still compares).
+ *  A re-paste then distinguishes THREE canvas states:
+ *    canvas == bundle            → nothing to write
+ *    canvas == last applied      → ours; the bundle moved → overwrite
+ *    canvas != last applied, or no record → a designer (or another tool)
+ *                                  edited it → NAMED in `variableDrift` and
+ *                                  KEPT unless `globalThis.DS_OVERWRITE_TOKENS === true`
+ *  `FC-APPLY-TOKENS-KEEP-EDITS`. Same door style as DS_CREATE_ONLY and
+ *  DS_PRUNE_TOKENS: closed by default, never a silent revert. */
+export function guardedValueUpsertRuntime(): string {
+  return `// FC-APPLY-TOKENS-KEEP-EDITS — a re-paste never silently reverts a designer's
+// edit to a variable VALUE. Each apply records what it wrote per mode
+// (shared plugin data ds_contracts/appliedValues); a canvas value that is
+// neither the bundle's nor the last applied one is a designer edit: it is
+// NAMED in variableDrift and KEPT. Set globalThis.DS_OVERWRITE_TOKENS = true
+// before running this script to let the bundle win (the drift is still named).
+const DS_OVERWRITE_TOKENS = typeof globalThis !== 'undefined' && globalThis.DS_OVERWRITE_TOKENS === true;
+const variableDrift = [];
+const nameById = new Map();
+for (const v of await figma.variables.getLocalVariablesAsync()) nameById.set(v.id, v.name);
+const round4 = (n) => Math.round(n * 10000) / 10000;
+// One comparable spelling per value shape — alias by TARGET NAME (ids differ
+// per file), colour by rounded channels (Figma stores floats), number
+// rounded, string verbatim. Two values compare equal iff their keys do.
+const valueKey = (x) => {
+  if (x === undefined || x === null) return 'unset';
+  if (typeof x === 'number') return 'n:' + round4(x);
+  if (typeof x === 'string') return 's:' + JSON.stringify(x);
+  if (typeof x === 'boolean') return 'b:' + x;
+  if (typeof x === 'object' && x.type === 'VARIABLE_ALIAS') return 'alias:' + (nameById.get(x.id) || x.id);
+  if (typeof x === 'object' && typeof x.r === 'number') return 'rgba(' + [x.r, x.g, x.b, x.a === undefined ? 1 : x.a].map(round4).join(',') + ')';
+  return 'unknown:' + String(x);
+};
+const APPLIED_NS = 'ds_contracts', APPLIED_KEY = 'appliedValues';
+const readApplied = (v) => {
+  try {
+    const raw = typeof v.getSharedPluginData === 'function' ? v.getSharedPluginData(APPLIED_NS, APPLIED_KEY) : '';
+    const rec = raw ? JSON.parse(raw) : null;
+    return rec && typeof rec === 'object' ? rec : null;
+  } catch (e) { return null; }
+};
+const writeApplied = (v, rec) => {
+  if (typeof v.setSharedPluginData === 'function') v.setSharedPluginData(APPLIED_NS, APPLIED_KEY, JSON.stringify(rec));
+};
+const applyValue = (v, modeId, modeName, value, created) => {
+  const bundleKey = valueKey(value);
+  const canvasKey = created ? null : valueKey(v.valuesByMode ? v.valuesByMode[modeId] : undefined);
+  const applied = created ? null : readApplied(v);
+  const prevKey = applied ? applied[modeName] : undefined;
+  const ours = created || canvasKey === bundleKey || (prevKey !== undefined && prevKey === canvasKey);
+  if (!ours) {
+    variableDrift.push({ name: v.name, mode: modeName, canvas: canvasKey, bundle: bundleKey, applied: prevKey === undefined ? null : prevKey });
+    if (!DS_OVERWRITE_TOKENS) return false;
+  }
+  if (created || canvasKey !== bundleKey) v.setValueForMode(modeId, value);
+  if (created) nameById.set(v.id, v.name);
+  const rec = applied || {};
+  rec[modeName] = bundleKey;
+  writeApplied(v, rec);
+  return true;
+};
+const reportVariableDrift = (collectionName) => {
+  if (variableDrift.length === 0) return;
+  const verb = DS_OVERWRITE_TOKENS ? 'OVERWRITTEN (DS_OVERWRITE_TOKENS)' : 'kept — set globalThis.DS_OVERWRITE_TOKENS = true to let the bundle win';
+  const lines = variableDrift.map((d) => d.name + ' [' + d.mode + '] canvas ' + d.canvas + ' vs bundle ' + d.bundle);
+  console.warn('[ds-contracts] ' + variableDrift.length + ' designer-edited variable value(s) in ' + collectionName + ' ' + verb + ': ' + lines.join('; '));
+  figma.notify(variableDrift.length + ' edited variable value(s) ' + (DS_OVERWRITE_TOKENS ? 'overwritten' : 'kept') + ': ' + variableDrift.slice(0, 4).map((d) => d.name).join(', ') + (variableDrift.length > 4 ? ', …' : ''), { timeout: 6000 });
+};
+`;
+}
+
 // ---------------------------------------------------------------------------
 // The sync script (the example scripts' runtime, parameterized)
 // ---------------------------------------------------------------------------
 
 /** tokenSet → deterministic Figma Plugin-API script text: one collection
- *  named tokenSet.name, Light/Dark modes, TWO-PASS upsert (concrete values,
- *  then Figma-NATIVE VARIABLE ALIASES for the minted {alias} leaves), then
+ *  named tokenSet.name, a Dark mode ONLY when the set carries dark values
+ *  (an addMode the plan refuses is named in `modeSkipped`, not thrown),
+ *  TWO-PASS guarded upsert (concrete values, then Figma-NATIVE VARIABLE
+ *  ALIASES for the minted {alias} leaves; designer-edited values are named in
+ *  `variableDrift` and kept unless `globalThis.DS_OVERWRITE_TOKENS === true`;
+ *  composite $values are named in `skippedValues`, never stringified), then
  *  an OPT-IN prune (`globalThis.DS_PRUNE_TOKENS === true`) of unreferenced
  *  leftovers in THAT collection only — by default leftovers are named in the
  *  result, never removed (`FC-APPLY-TOKENS-NOT-PRUNED`). Re-run safe. Run
  *  BEFORE the component scripts; they bind by name. */
 export function emitTokenSetScript(tokenSet: TokenSetPayload, fileKey: string | null): string {
-  const { rows, aliasCount, unparsedColors, unparsedDimensions, orphanModes } = compileTokenSetRows(tokenSet);
+  const { rows, aliasCount, unparsedColors, unparsedDimensions, orphanModes, unsupportedValues } = compileTokenSetRows(tokenSet);
   const textStyles = tokenSetTextStyles(tokenSet, rows);
   const col = tokenSet.name;
+  // MODES ARE A FACT OF THE TOKEN SET, NOT A DEFAULT. A tokenSet with no
+  // `modes.dark` used to get a cloned "Dark" mode whose every value equalled
+  // Light — misleading on Pro files, and a hard throw on Starter files (one
+  // mode per collection). Add Dark only when the set carries dark values;
+  // name the lone mode "Value" (the Primitives spelling) when it carries none.
+  const hasLight = Object.keys(tokenSet.modes?.light ?? {}).length > 0;
+  const wantsDark = Object.keys(tokenSet.modes?.dark ?? {}).length > 0;
+  const mode0Name = hasLight || wantsDark ? 'Light' : 'Value';
   // THE RECEIPTS RIDE THE ARTIFACT. A count returned by compileTokenSetRows and
   // read by nobody is the same silent loss one layer up, so the three classes
   // that used to vanish are stamped into the script an adopter actually opens.
@@ -695,16 +828,26 @@ export function emitTokenSetScript(tokenSet: TokenSetPayload, fileKey: string | 
       ? `// ⚠ ${orphanModes.length} MODE key(s) match no base token, so their override never applies and that mode\n` +
         `//   renders as base: ${orphanModes.slice(0, 6).join(', ')}${orphanModes.length > 6 ? ', …' : ''}`
       : '',
+    unsupportedValues.length > 0
+      ? `// ⚠ ${unsupportedValues.length} token(s) carry a $value no Figma variable can hold (object-form composite, array,\n` +
+        `//   boolean, null) — SKIPPED by name, never stringified: ${unsupportedValues.slice(0, 6).join('; ')}${unsupportedValues.length > 6 ? '; …' : ''}`
+      : '',
   ].filter(Boolean).join('\n');
   return `// GENERATED by the ds-contracts engine from a CONTRACTS-BUNDLE tokenSet — DO NOT EDIT.
 // Deterministic variable UPSERT; leftovers in this collection are NAMED, and
 // removed only when globalThis.DS_PRUNE_TOKENS === true (opt-in,
-// FC-APPLY-TOKENS-NOT-PRUNED). One ${JSON.stringify(col)} collection,
-// Light/Dark modes, ${rows.length} variables (${aliasCount} Figma-native aliases from
+// FC-APPLY-TOKENS-NOT-PRUNED); designer-edited values are NAMED and kept
+// unless globalThis.DS_OVERWRITE_TOKENS === true (FC-APPLY-TOKENS-KEEP-EDITS).
+// One ${JSON.stringify(col)} collection, modes ${wantsDark ? 'Light/Dark' : mode0Name}, ${rows.length} variables (${aliasCount} Figma-native aliases from
 // the library's own token references). Runs BEFORE the component scripts.
 ${caveats ? `${caveats}\n` : ''}
 const TOKENS = ${JSON.stringify(rows)};
 const TEXT_STYLES = ${JSON.stringify(textStyles)};
+// Tokens compiled out by name: their $value has no variable shape (see the
+// caveat above). Returned as skippedValues so the loss is never silent.
+const SKIPPED_VALUES = ${JSON.stringify(unsupportedValues)};
+const WANTS_DARK = ${JSON.stringify(wantsDark)};
+const MODE0_NAME = ${JSON.stringify(mode0Name)};
 
 // File guard: multi-file bridge routing has been observed to hit the wrong
 // file — never write without verifying the target.
@@ -715,23 +858,45 @@ if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
 
 const collections = await figma.variables.getLocalVariableCollectionsAsync();
 let col = collections.find((c) => c.name === ${JSON.stringify(col)});
+const createdCollection = !col;
 if (!col) col = figma.variables.createVariableCollection(${JSON.stringify(col)});
 let lightId = col.modes[0].modeId;
-col.renameMode(lightId, 'Light');
+// Name the first mode only while it still wears Figma's default — a designer's
+// own mode name on an existing collection is theirs to keep.
+if (createdCollection || col.modes[0].name === 'Mode 1') col.renameMode(lightId, MODE0_NAME);
+const lightName = col.modes[0].name;
+// Dark: reuse one that exists; add one only when the set carries dark values;
+// and a plan that refuses a second mode (Starter: one mode per collection) is
+// NAMED in the result, not thrown — the Light values still land.
 let darkMode = col.modes.find((m) => m.name === 'Dark');
-const darkId = darkMode ? darkMode.modeId : col.addMode('Dark');
+let darkId = darkMode ? darkMode.modeId : null;
+let modeSkipped = null;
+if (!darkId && WANTS_DARK) {
+  try {
+    darkId = col.addMode('Dark');
+  } catch (e) {
+    modeSkipped = 'Dark mode not added to ' + ${JSON.stringify(col)} + ': ' + (e && e.message ? e.message : String(e)) + ' — the file plan refused a second mode (Figma Starter allows one per collection); the dark values were NOT written';
+  }
+}
+${guardedValueUpsertRuntime()}
 const existing = new Map();
 for (const v of await figma.variables.getLocalVariablesAsync()) {
   if (v.variableCollectionId === col.id) existing.set(v.name, v);
 }
 let created = 0, updated = 0;
+const skippedValues = SKIPPED_VALUES.slice();
 // pass 1: create/refresh every variable with concrete values
 for (const t of TOKENS) {
   if (t.type === 'ALIAS') continue;
+  // Runtime door: a payload row that is not a string/number/colour (a composite
+  // that escaped the compiler) is skipped BY NAME, never stringified.
+  const shapeOk = (x) => typeof x === 'string' || typeof x === 'number' || (x && typeof x === 'object' && typeof x.r === 'number');
+  if (!shapeOk(t.light) || !shapeOk(t.dark)) { skippedValues.push(t.name + ': ' + (Array.isArray(t.light) ? 'array' : typeof t.light)); continue; }
   let v = existing.get(t.name);
+  const isNew = !v;
   if (!v) { v = figma.variables.createVariable(t.name, col, t.type); existing.set(t.name, v); created++; } else { updated++; }
-  v.setValueForMode(lightId, t.light);
-  v.setValueForMode(darkId, t.dark);
+  applyValue(v, lightId, lightName, t.light, isNew);
+  if (darkId) applyValue(v, darkId, 'Dark', t.dark, isNew);
 }
 // pass 2: minted aliases — REAL variable aliases to the base tokens the
 // library's own source named (they inherit the target's Light/Dark values)
@@ -741,13 +906,20 @@ for (const t of TOKENS) {
   const target = existing.get(t.target);
   if (!target) throw new Error('token sync: alias target missing: ' + t.target + ' (for ' + t.name + ')');
   let v = existing.get(t.name);
+  const isNew = !v;
   const resolvedType = target.resolvedType;
   if (!v) { v = figma.variables.createVariable(t.name, col, resolvedType); existing.set(t.name, v); created++; } else { updated++; }
   const alias = figma.variables.createVariableAlias(target);
-  v.setValueForMode(lightId, alias);
-  v.setValueForMode(darkId, alias);
+  applyValue(v, lightId, lightName, alias, isNew);
+  if (darkId) applyValue(v, darkId, 'Dark', alias, isNew);
   aliased++;
 }
+reportVariableDrift(${JSON.stringify(col)});
+if (skippedValues.length > 0) {
+  console.warn('[ds-contracts] ' + skippedValues.length + ' token(s) skipped — their $value has no Figma variable shape: ' + skippedValues.join('; '));
+  figma.notify(skippedValues.length + ' token(s) skipped (composite $value): ' + skippedValues.slice(0, 4).map((x) => x.split(':')[0]).join(', ') + (skippedValues.length > 4 ? ', …' : ''), { timeout: 6000 });
+}
+if (modeSkipped) { console.warn('[ds-contracts] ' + modeSkipped); figma.notify(modeSkipped, { timeout: 6000 }); }
 const owned = new Map();
 owned.set(col.id, new Set(TOKENS.map((t) => t.name)));
 ${ownedCollectionPruneRuntime()}
@@ -774,7 +946,8 @@ for (const t of TEXT_STYLES) {
   s.fontName = { family: 'Inter', style: t.fontStyle };
   s.fontSize = t.fontSize;
 }
-figma.notify(${JSON.stringify(col)} + ' tokens: ' + created + ' created, ' + updated + ' updated, ' + pruned + ' pruned, ' + leftovers.length + ' leftover(s) (' + TOKENS.length + ' total, ' + aliased + ' aliases, Light/Dark; ' + createdStyles + ' text styles created)');
-return { created, updated, aliased, pruned, leftovers, pruneSkipped, total: TOKENS.length, textStyles: TEXT_STYLES.length, createdStyles };
+const modeNames = col.modes.map((m) => m.name).join('/');
+figma.notify(${JSON.stringify(col)} + ' tokens: ' + created + ' created, ' + updated + ' updated, ' + pruned + ' pruned, ' + leftovers.length + ' leftover(s), ' + variableDrift.length + ' edited value(s) ' + (DS_OVERWRITE_TOKENS ? 'overwritten' : 'kept') + ', ' + skippedValues.length + ' skipped (' + TOKENS.length + ' total, ' + aliased + ' aliases, modes ' + modeNames + '; ' + createdStyles + ' text styles created)');
+return { created, updated, aliased, pruned, leftovers, pruneSkipped, variableDrift, driftOverwritten: DS_OVERWRITE_TOKENS, skippedValues, modeSkipped, modes: col.modes.map((m) => m.name), total: TOKENS.length, textStyles: TEXT_STYLES.length, createdStyles };
 `;
 }

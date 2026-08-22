@@ -101,7 +101,22 @@ const STATE_SELECTORS: Record<string, string> = {
  *  color-kind only, bounded by the field evidence (the CBDS disabled label
  *  drew #556275 on the #dfe3eb root; extend only when fixtures demand more).
  *  The root keeps its full state vocabulary (outline-*, opacity, radius, …). */
-export const PART_STATE_CHANNELS = new Set(['color', 'background-color', 'border-color']);
+/** v13 was color-kind only. FC-DUMP-PROPOSE-PART-STATE-CHANNELS: a Hover-only
+ *  DROP_SHADOW / stroke weight / corner radius / node opacity on a drawn child
+ *  used to propose with ZERO notes (the channel had nowhere to land), so the
+ *  proposer now carries them here — box-shadow, border-width, border-radius,
+ *  opacity. The rule body below is channel-generic (`<prop>: var(...)`) and the
+ *  canvas leg merges part states into tokens, which applyTokens already lowers
+ *  for all four. */
+export const PART_STATE_CHANNELS = new Set([
+  'color',
+  'background-color',
+  'border-color',
+  'box-shadow',
+  'border-width',
+  'border-radius',
+  'opacity',
+]);
 
 /** Elements the UA stylesheet gives default MARGINS. A component's box is
  *  contract-governed — spacing between components belongs to the composing
@@ -1523,6 +1538,28 @@ export function validateContract(
       }
     }
   }
+
+  // ONE root role claim. `anatomy.root.attrs.role` and `semantics.role` are
+  // the same fact spelled twice; every code emitter (react / react-inline /
+  // web-components / html) renders the attrs spelling and skips the
+  // semantics default when both are present — so an EQUAL pair emits once,
+  // and a DIFFERING pair is refused here by name rather than letting an
+  // emitter pick one silently. A static attrs.role against a dynamic
+  // roleByProp can never agree, so that pair is always refused.
+  {
+    const attrsRole = contract.anatomy.root?.attrs?.role;
+    if (attrsRole !== undefined) {
+      if (contract.semantics.roleByProp) {
+        errors.push(
+          `${contract.id}: anatomy.root.attrs.role "${attrsRole}" conflicts with semantics.roleByProp (a static role cannot agree with a per-prop role) — keep one`,
+        );
+      } else if (contract.semantics.role !== undefined && contract.semantics.role !== attrsRole) {
+        errors.push(
+          `${contract.id}: anatomy.root.attrs.role "${attrsRole}" conflicts with semantics.role "${contract.semantics.role}" — the root has one role; keep one spelling`,
+        );
+      }
+    }
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -1854,9 +1891,18 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
   // v7 overlay / v9 shape placement: any out-of-flow part (an overlay, or a
   // part whose stylesWhen carries position: absolute — the shape-placement
   // spelling) positions against the root.
+  // ... UNLESS its DIRECT holder declares a position of its own (the proposer
+  // marks the track of a stylesWhen-placed thumb `position: relative`): the
+  // holder is the positioning context, and pushing the root too used to
+  // anchor the ToggleSwitch thumb's `right: 2px` to the 100px root instead of
+  // the 44px track whenever the holder was NOT declared
+  // (FC-DUMP-PROPOSE-THUMB-HOLDER-RELATIVE). Root-level parts keep the root
+  // anchor. Mirrors core/emit-react-inline.ts.
   if (
     walkAnatomy(contract).some(
-      (w) => w.part.overlay || (w.part.stylesWhen ?? []).some((sw) => sw.styles['position'] === 'absolute'),
+      (w) =>
+        (w.part.overlay || (w.part.stylesWhen ?? []).some((sw) => sw.styles['position'] === 'absolute')) &&
+        !holderDeclaresPosition(contract, w.path),
     )
   ) {
     rootDecls.push('position: relative');
@@ -3005,6 +3051,25 @@ export function generateTsx(
         `  // structure (a gated part, a per-value text/icon lookup, a child's own props) —\n` +
         `  // or, where the source drew no difference at all, nothing.\n`;
 
+  // `attrs` on a part (root included): a `{prop}` value binds to the prop —
+  // a text prop's code binding is already a string, so it binds bare
+  // (`href={href}`); an enum/number prop is coerced (`{String(size)}`). A
+  // literal lands as a literal (numeric DOM props as numbers).
+  const NUMERIC_ATTRS = new Set(['rows', 'cols', 'tabIndex', 'colSpan', 'rowSpan']);
+  const partAttrList = (part: Part | undefined): string[] =>
+    Object.entries(part?.attrs ?? {}).map(([attr, value]) => {
+      const ref = value.match(/^\{([a-z][\w-]*)\}$/);
+      if (ref) {
+        const bound = contract.props.find((p) => p.name === ref[1]);
+        return bound?.type === 'text'
+          ? `${attr}={${codePropOf(ref[1])}}`
+          : `${attr}={String(${codePropOf(ref[1])})}`;
+      }
+      if (NUMERIC_ATTRS.has(attr) && /^\d+$/.test(value)) return `${attr}={${value}}`;
+      return `${attr}=${JSON.stringify(value)}`;
+    });
+  const partAttrString = (part: Part): string => partAttrList(part).map((a) => ` ${a}`).join('');
+
   const nativeDisabled = meta.supportsDisabled && bools.some((p) => p.name === 'disabled');
   const elementAttrs: string[] = ['ref={ref}', 'className={classes}'];
   if (nativeDisabled) elementAttrs.push('disabled={disabled}');
@@ -3015,12 +3080,25 @@ export function generateTsx(
     const dataName = p.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
     elementAttrs.push(`data-${dataName}={${p.bindings.code.prop} || undefined}`);
   }
+  // anatomy.root.attrs — the root element's own attributes, carried exactly
+  // the way nested parts' attrs are (the P0 this closes: icon-button's
+  // aria-label + type, progress-bar's role, skeleton's aria-hidden and the
+  // <a>-rooted components' href were destructured and dropped). `role` here
+  // wins over the semantics default below (validateContract refuses a
+  // DIFFERING pair by name), and an authored `type` suppresses the implicit
+  // type="button" the root event would add.
+  const rootAttrs = contract.anatomy.root?.attrs ?? {};
+  elementAttrs.push(...partAttrList(contract.anatomy.root));
   const roleByProp = contract.semantics.roleByProp;
   let roleMapConst = '';
   if (roleByProp) {
     roleMapConst = `const ROLE_MAP: Record<string, string> = ${JSON.stringify(roleByProp.map)};\n\n`;
     elementAttrs.push(`role={ROLE_MAP[${codePropOf(roleByProp.prop)}]}`);
-  } else if (contract.semantics.role && contract.semantics.role !== contract.semantics.element) {
+  } else if (
+    rootAttrs.role === undefined &&
+    contract.semantics.role &&
+    contract.semantics.role !== contract.semantics.element
+  ) {
     elementAttrs.push(`role="${contract.semantics.role}"`);
   }
   // v7 elementByProp: mirror of ROLE_MAP — the rendered element follows the
@@ -3032,7 +3110,7 @@ export function generateTsx(
   }
   const rootEvent = events.find((e) => e.trigger === 'root');
   if (rootEvent) {
-    if (contract.semantics.element === 'button') {
+    if (contract.semantics.element === 'button' && rootAttrs.type === undefined) {
       elementAttrs.push('type="button"');
     }
     elementAttrs.push(`onClick={handle${pascal(rootEvent.name)}}`);
@@ -3075,17 +3153,6 @@ export function generateTsx(
   const JS_IDENT_RE = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
   const stylesRef = (cls: string): string =>
     JS_IDENT_RE.test(cls) ? `styles.${cls}` : `styles[${JSON.stringify(cls)}]`;
-
-  const NUMERIC_ATTRS = new Set(['rows', 'cols', 'tabIndex', 'colSpan', 'rowSpan']);
-  const partAttrString = (part: Part): string =>
-    Object.entries(part.attrs ?? {})
-      .map(([attr, value]) => {
-        const ref = value.match(/^\{([a-z][\w-]*)\}$/);
-        if (ref) return ` ${attr}={String(${codePropOf(ref[1])})}`;
-        if (NUMERIC_ATTRS.has(attr) && /^\d+$/.test(value)) return ` ${attr}={${value}}`;
-        return ` ${attr}=${JSON.stringify(value)}`;
-      })
-      .join('');
 
   const wrapVisibleWhen = (part: Part, jsx: string): string => {
     if (!part.visibleWhen) return jsx;
@@ -3541,12 +3608,18 @@ export const Disabled: Story = {
     .map((depName) => `import { ${depName} } from '../${depName}';`)
     .join('\n');
 
+  // `../tokens.css` — the custom-property sheet the generator writes at the
+  // output root (scripts/generate-components.ts → core/emit-tokens-css.ts),
+  // one level above this story's <Name>/ directory. Imported HERE so a
+  // Storybook glob over the generated tree paints with no preview.ts line:
+  // before this import the BETA.md golden path rendered unstyled (2026-08-22).
   return `/**
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import '../tokens.css';
 ${sampleImports}${sampleImports ? '\n' : ''}import { ${name} } from './${name}';
 
 const meta = {
@@ -3598,6 +3671,16 @@ export interface EmitReactResult {
  *  playground both run the same prettier/standalone pass — core/format.ts —
  *  so bytes match the shipped files). Throws with every named violation if
  *  the contract fails validation — invalid states are refused, not rendered. */
+/** The DIRECT holder of the part at `path` declares `position` (so it is the
+ *  positioning context for an out-of-flow child). Root-level parts (holder =
+ *  the root itself) return false so the root keeps its own anchor push. */
+export function holderDeclaresPosition(contract: Contract, path: string[]): boolean {
+  if (path.length < 3) return false;
+  let cur: Part | undefined = contract.anatomy[path[0]];
+  for (const seg of path.slice(1, -1)) cur = cur?.parts?.[seg];
+  return cur?.declared?.['position'] !== undefined;
+}
+
 export function emitReact(contract: Contract, ctx: EmitCtx): EmitReactResult {
   const errors: string[] = [];
   validateContract(contract, ctx.contracts, errors, ctx.icons);

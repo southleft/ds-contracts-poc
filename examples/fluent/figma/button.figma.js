@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "fluent.button",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Button — generated from contract fluent.button v0.2.0 †",
+    "description": "Button — generated from contract fluent.button v0.2.0 † (33 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -3532,6 +3532,565 @@ const COMPONENTS = [
         "to": "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active"
       }
     ],
+    "codeOnlyFacts": [
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.button.root.border-bottom-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.button.root.border-bottom-color-state-disabled.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.button.root.border-bottom-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.shared.color-000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.button.root.border-left-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.button.root.border-left-color-state-disabled.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.button.root.border-left-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.shared.color-000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.button.root.border-right-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.button.root.border-right-color-state-disabled.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.button.root.border-right-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.shared.color-000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.button.root.border-top-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.button.root.border-top-color-state-disabled.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.button.root.border-top-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.shared.color-000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.button.root.outline-color.outline}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 13,
+          "of": 65,
+          "names": [
+            "Appearance=Outline, Size=Medium, Shape=Rounded",
+            "Appearance=Outline, Size=Medium, Shape=Circular",
+            "Appearance=Outline, Size=Medium, Shape=Square",
+            "Appearance=Outline, Size=Small, Shape=Rounded",
+            "Appearance=Outline, Size=Small, Shape=Circular",
+            "Appearance=Outline, Size=Small, Shape=Square",
+            "Appearance=Outline, Size=Large, Shape=Rounded",
+            "Appearance=Outline, Size=Large, Shape=Circular",
+            "Appearance=Outline, Size=Large, Shape=Square",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.button.root.outline-color.primary}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 13,
+          "of": 65,
+          "names": [
+            "Appearance=Primary, Size=Medium, Shape=Rounded",
+            "Appearance=Primary, Size=Medium, Shape=Circular",
+            "Appearance=Primary, Size=Medium, Shape=Square",
+            "Appearance=Primary, Size=Small, Shape=Rounded",
+            "Appearance=Primary, Size=Small, Shape=Circular",
+            "Appearance=Primary, Size=Small, Shape=Square",
+            "Appearance=Primary, Size=Large, Shape=Rounded",
+            "Appearance=Primary, Size=Large, Shape=Circular",
+            "Appearance=Primary, Size=Large, Shape=Square",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.button.root.outline-color.secondary}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 13,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded",
+            "Appearance=Secondary, Size=Medium, Shape=Circular",
+            "Appearance=Secondary, Size=Medium, Shape=Square",
+            "Appearance=Secondary, Size=Small, Shape=Rounded",
+            "Appearance=Secondary, Size=Small, Shape=Circular",
+            "Appearance=Secondary, Size=Small, Shape=Square",
+            "Appearance=Secondary, Size=Large, Shape=Rounded",
+            "Appearance=Secondary, Size=Large, Shape=Circular",
+            "Appearance=Secondary, Size=Large, Shape=Square",
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.button.root.outline-color.subtle}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 13,
+          "of": 65,
+          "names": [
+            "Appearance=Subtle, Size=Medium, Shape=Rounded",
+            "Appearance=Subtle, Size=Medium, Shape=Circular",
+            "Appearance=Subtle, Size=Medium, Shape=Square",
+            "Appearance=Subtle, Size=Small, Shape=Rounded",
+            "Appearance=Subtle, Size=Small, Shape=Circular",
+            "Appearance=Subtle, Size=Small, Shape=Square",
+            "Appearance=Subtle, Size=Large, Shape=Rounded",
+            "Appearance=Subtle, Size=Large, Shape=Circular",
+            "Appearance=Subtle, Size=Large, Shape=Square",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.button.root.outline-color.transparent}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 13,
+          "of": 65,
+          "names": [
+            "Appearance=Transparent, Size=Medium, Shape=Rounded",
+            "Appearance=Transparent, Size=Medium, Shape=Circular",
+            "Appearance=Transparent, Size=Medium, Shape=Square",
+            "Appearance=Transparent, Size=Small, Shape=Rounded",
+            "Appearance=Transparent, Size=Small, Shape=Circular",
+            "Appearance=Transparent, Size=Small, Shape=Square",
+            "Appearance=Transparent, Size=Large, Shape=Rounded",
+            "Appearance=Transparent, Size=Large, Shape=Circular",
+            "Appearance=Transparent, Size=Large, Shape=Square",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "z-index",
+        "value": "{imported.button.root.z-index-state-focus-visible}",
+        "reason": "paint order on canvas is CHILD ORDER — a z-index a part carries independently of its DOM order has no field.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-left-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-right-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-top-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "declared for the active state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "declared for the hover state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "outline-style",
+        "value": "solid",
+        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "transition-duration",
+        "value": "0.1s",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "transition-property",
+        "value": "background, border, color",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.33, 0, 0.67, 1)",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -4428,6 +4987,40 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -4450,6 +5043,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -4691,6 +5287,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -4957,6 +5554,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -4975,6 +5573,9 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  results.push(withCodeOnlyFacts(await syncOne(C), C));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };

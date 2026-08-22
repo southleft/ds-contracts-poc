@@ -41,6 +41,20 @@
  * framing.json's C1 keeps) — without a snapshot the probe reports
  * SNAPSHOT-PENDING rather than guessing.
  *
+ * COMMITTED INPUTS ONLY (2026-08-22). The first-party lane's own scripts live
+ * under parity/receipts/console-loop/emitted/, a gitignored rebuild target, and
+ * the receipts name wave numbers that `npm run console-loop:emit` no longer
+ * produces — so for 13 stems the EXPECTED side existed on one machine and not
+ * on a clean clone (18 in-sync locally, 5 on CI; the eval was red from
+ * 2026-08-13). The probe now NEVER reads that directory: for any receipt whose
+ * script is under it, the distilled spec comes from the committed
+ * canvas-drift/EMIT-SPECS.json (minted once by
+ * scripts/console-loop-canvas-drift-mint-specs.mjs on the machine that has
+ * the files, sha256-stamped). A stem with no entry reports
+ * SPEC-RECEIPT-PENDING by name rather than falling back to whatever happens to
+ * be on disk. Every row names what it read in `specSource`, and the eval
+ * asserts none of it is the gitignored directory.
+ *
  * Three findings per stem:
  *
  *   BINDING-DRIFT   a field the spec binds that the live node does not bind at
@@ -61,6 +75,7 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { EMITTED_DIR, collectionsCreatedBy, distillScript, sha256 } from "./console-loop-emit-spec.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CL = path.join(ROOT, "parity/receipts/console-loop");
@@ -166,46 +181,102 @@ if (!pins) {
 }
 const framing = { stems: pins };
 
-/** The emitted script's `const COMPONENTS = [...]` payload is plain JSON. */
-function readComponents(scriptPath) {
-  const src = readFileSync(scriptPath, "utf8");
-  const marker = "const COMPONENTS = ";
-  const i = src.indexOf(marker);
-  if (i < 0) return null;
-  const j = src.indexOf("\n];", i);
-  if (j < 0) return null;
-  try {
-    return JSON.parse(src.slice(i + marker.length, j + 2));
-  } catch {
-    return null;
-  }
-}
+/** THE COMMITTED SPEC RECEIPT for the first-party lane — the distilled facts of
+ *  the gitignored emit scripts (see header). Read lazily, once. */
+const specsPath = path.join(laneDir, "canvas-drift/EMIT-SPECS.json");
+const specsRel = path.relative(ROOT, specsPath);
+const specs =
+  lane === "first-party" && existsSync(specsPath)
+    ? JSON.parse(readFileSync(specsPath, "utf8"))
+    : null;
 
-/** stem → the lane's committed emit script.
+/** stem → the distilled EXPECTED side, and WHERE it was read from.
  *
- *  Foreign lanes keep one per stem at `examples/<lane>/figma/<file>.figma.js`
- *  (the emitted names are kebab-case; the contract basenames are not, so try
- *  both spellings). The FIRST-PARTY lane does not: its scripts are numbered by
- *  wave under `parity/receipts/console-loop/emitted/NN-<stem>.js` (and
- *  `figma-sync/NN-<stem>.js` for the compositions), and the numbering is not
- *  derivable from the stem — so the path is read from the stem's OWN receipt,
- *  `components/<stem>.json`.script, which is the record of the script that
- *  actually built the cell. */
-function scriptFor(stem) {
+ *  Foreign lanes keep one committed script per stem at
+ *  `examples/<lane>/figma/<file>.figma.js` (the emitted names are kebab-case;
+ *  the contract basenames are not, so try both spellings); it is read and
+ *  distilled on the fly. The FIRST-PARTY lane does not: its scripts are
+ *  numbered by wave under the gitignored `parity/receipts/console-loop/emitted/`
+ *  (and `figma-sync/NN-<stem>.js` for the compositions, which ARE tracked), and
+ *  the numbering is not derivable from the stem — so the path is read from the
+ *  stem's OWN receipt, `components/<stem>.json`.script, the record of the
+ *  script that actually built the cell. A tracked path is read directly; a
+ *  path under the gitignored directory is NEVER read from disk — its distilled
+ *  spec comes from the committed EMIT-SPECS.json or the stem is
+ *  SPEC-RECEIPT-PENDING by name.
+ *
+ *  Returns { script, specSource, distilled, notes } or { status, note }. */
+function expectedFor(stem) {
+  const fromFile = (abs, script) => {
+    const src = readFileSync(abs, "utf8");
+    const distilled = distillScript(src);
+    if (!distilled) return { status: "UNPARSEABLE-SCRIPT", script };
+    return { script, specSource: script, distilled, notes: [] };
+  };
   if (lane === "first-party") {
     const receipt = path.join(CL, "components", `${stem}.json`);
-    if (!existsSync(receipt)) return null;
+    if (!existsSync(receipt)) {
+      return { status: "NO-SCRIPT", note: `no components/${stem}.json receipt names the script that built this cell` };
+    }
     const rel = JSON.parse(readFileSync(receipt, "utf8")).script;
-    if (!rel) return null;
-    const p = path.join(ROOT, rel);
-    return existsSync(p) ? p : null;
+    if (!rel) {
+      return { status: "NO-SCRIPT", note: `components/${stem}.json records no \`script\` — nothing names the emit script that built this cell` };
+    }
+    if (!rel.startsWith(EMITTED_DIR)) {
+      const p = path.join(ROOT, rel);
+      if (!existsSync(p)) return { status: "NO-SCRIPT", note: `components/${stem}.json names ${rel}, which is not in the tree` };
+      return fromFile(p, rel);
+    }
+    // The gitignored rebuild target: committed receipt or refuse by name.
+    if (!specs) {
+      return {
+        status: "SPEC-RECEIPT-PENDING",
+        script: rel,
+        note: `${rel} is gitignored and ${specsRel} is absent — mint it with \`node scripts/console-loop-canvas-drift-mint-specs.mjs\` on the machine that has the scripts; the probe does not read the gitignored directory`,
+      };
+    }
+    const entry = specs.stems?.[stem];
+    if (!entry) {
+      return {
+        status: "SPEC-RECEIPT-PENDING",
+        script: rel,
+        note: `${specsRel} carries no entry for ${stem} (receipt names ${rel}) — re-mint with \`node scripts/console-loop-canvas-drift-mint-specs.mjs\``,
+      };
+    }
+    if (entry.script !== rel) {
+      return {
+        status: "SPEC-RECEIPT-PENDING",
+        script: rel,
+        note: `${specsRel} was minted from ${entry.script} but components/${stem}.json now names ${rel} — re-mint`,
+      };
+    }
+    if (entry.unparseable || !entry.variants) return { status: "UNPARSEABLE-SCRIPT", script: rel };
+    const notes = [];
+    /** A local copy is NOT an input, but when one exists it can be told apart
+     *  from the receipt: a differing sha256 means the machine re-emitted past
+     *  the receipt (or kept an older leftover). Named, never counted. */
+    const local = path.join(ROOT, rel);
+    if (existsSync(local)) {
+      const localSha = sha256(readFileSync(local, "utf8"));
+      if (localSha !== entry.sha256) {
+        notes.push(
+          `local ${rel} (sha256 ${localSha.slice(0, 12)}) differs from the one ${specsRel} was minted from (${String(entry.sha256).slice(0, 12)}); the probe read the receipt — run the mint tool with --check`,
+        );
+      }
+    }
+    return {
+      script: rel,
+      specSource: specsRel,
+      distilled: { collections: entry.collections ?? [], variants: entry.variants, stateVariants: entry.stateVariants ?? [] },
+      notes,
+    };
   }
   const dir = path.join(ROOT, "examples", lane, "figma");
   for (const cand of [stem, stem.replace(/-/g, "")]) {
     const p = path.join(dir, `${cand}.figma.js`);
-    if (existsSync(p)) return p;
+    if (existsSync(p)) return fromFile(p, path.relative(ROOT, p));
   }
-  return null;
+  return { status: "NO-SCRIPT", note: `no examples/${lane}/figma/${stem}.figma.js — this stem has no committed emit script to compare against` };
 }
 
 /** The variant whose name the framing pin records. The emitted base variant is
@@ -249,22 +320,21 @@ function pickVariant(component, cellName) {
  *  two findings stand byte-for-byte — including checkbox's five bindings in
  *  'Imported (provisional)', which carbon's scripts never create and which is
  *  therefore still drift. */
-const tokensScriptCache = new Map();
-function collectionsCreatedBy(file) {
-  if (!file || !existsSync(file)) return [];
-  const src = readFileSync(file, "utf8");
-  return [...src.matchAll(/createVariableCollection\('([^']+)'\)/g)].map((m) => m[1]);
-}
-function ownedCollections(scriptPath) {
-  if (!tokensScriptCache.has(lane)) {
-    const t =
-      lane === "first-party"
-        ? path.join(CL, "emitted", "01-tokens.js")
-        : path.join(ROOT, "examples", lane, "figma", "00-tokens.figma.js");
-    tokensScriptCache.set(lane, collectionsCreatedBy(t));
+/** The lane's tokens-script collections. First-party's 01-tokens.js is under
+ *  the gitignored directory, so they come from the committed EMIT-SPECS.json
+ *  (`tokens.collections`) — never from disk. */
+let laneTokenCollections = null;
+function ownedCollections(scriptCollections) {
+  if (!laneTokenCollections) {
+    if (lane === "first-party") {
+      laneTokenCollections = specs?.tokens?.collections ?? [];
+    } else {
+      const t = path.join(ROOT, "examples", lane, "figma", "00-tokens.figma.js");
+      laneTokenCollections = existsSync(t) ? collectionsCreatedBy(readFileSync(t, "utf8")) : [];
+    }
   }
-  const owned = new Set(tokensScriptCache.get(lane));
-  for (const c of collectionsCreatedBy(scriptPath)) owned.add(c);
+  const owned = new Set(laneTokenCollections);
+  for (const c of scriptCollections) owned.add(c);
   return owned;
 }
 
@@ -293,21 +363,18 @@ for (const stem of stems) {
     continue;
   }
 
-  const scriptPath = scriptFor(stem);
-  if (!scriptPath) {
-    row.status = "NO-SCRIPT";
-    row.note = `no examples/${lane}/figma/${stem}.figma.js — this stem has no committed emit script to compare against`;
+  const expected = expectedFor(stem);
+  if (expected.status) {
+    row.status = expected.status;
+    if (expected.script) row.script = expected.script;
+    if (expected.note) row.note = expected.note;
     results.push(row);
     continue;
   }
-  row.script = path.relative(ROOT, scriptPath);
-  const components = readComponents(scriptPath);
-  const component = components && components[0];
-  if (!component) {
-    row.status = "UNPARSEABLE-SCRIPT";
-    results.push(row);
-    continue;
-  }
+  row.script = expected.script;
+  row.specSource = expected.specSource;
+  row.notes.push(...expected.notes);
+  const component = expected.distilled;
   const variant = pickVariant(component, pin.cellName);
   if (!variant) {
     row.status = "NO-MATCHING-VARIANT";
@@ -315,8 +382,8 @@ for (const stem of stems) {
     results.push(row);
     continue;
   }
-  const spec = variant.spec ?? {};
-  const owned = ownedCollections(scriptPath);
+  const spec = variant;
+  const owned = ownedCollections(component.collections ?? []);
   row.variant = variant.name;
   row.ownedCollections = [...owned].sort();
   if (!owned.size) {
@@ -434,7 +501,7 @@ for (const stem of stems) {
    *  the declared set instead — narrower where it was wrong, wider where it
    *  was blind. */
   const fonts = observed.fonts ?? [];
-  const declaredFamilies = specFontFamilies(spec);
+  const declaredFamilies = new Set(spec.fontFamilies ?? []);
   const inter = fonts.filter((f) => f.family === "Inter");
   const declares = declaredFamilies.size > 0;
   const substituted = declares
@@ -469,33 +536,25 @@ function shortField(field) {
   );
 }
 
-/** Every fontFamily the spec declares, anywhere in the tree. A CSS stack is
- *  split on commas and unquoted, so `"IBM Plex Sans", system-ui` matches a node
- *  drawing IBM Plex Sans. */
-function specFontFamilies(spec) {
-  const out = new Set();
-  const walk = (x) => {
-    if (!x || typeof x !== "object") return;
-    if (Array.isArray(x)) return x.forEach(walk);
-    if (x.fontFamily) {
-      for (const part of String(x.fontFamily).split(",")) {
-        const name = part.trim().replace(/^['"]|['"]$/g, "");
-        if (name) out.add(name);
-      }
-    }
-    for (const k of Object.keys(x)) walk(x[k]);
-  };
-  walk(spec);
-  return out;
-}
-
 if (asJson) {
-  console.log(JSON.stringify({ lane, snapshot: snapshot ? path.relative(ROOT, snapPath) : null, results }, null, 2));
+  console.log(
+    JSON.stringify(
+      {
+        lane,
+        snapshot: snapshot ? path.relative(ROOT, snapPath) : null,
+        specReceipt: specs ? specsRel : null,
+        results,
+      },
+      null,
+      2,
+    ),
+  );
 } else {
   for (const r of results) {
     console.log(`\n── ${lane}/${r.stem}  [${r.status}]`);
     console.log(`   cell      ${r.cellNodeId} "${r.cellName}"`);
     if (r.script) console.log(`   script    ${r.script}${r.variant ? ` · variant "${r.variant}"` : ""}`);
+    if (r.specSource && r.specSource !== r.script) console.log(`   spec from ${r.specSource}`);
     if (r.note) console.log(`   note      ${r.note}`);
     for (const f of r.findings) console.log(`   ${f}`);
     for (const n of r.notes ?? []) console.log(`   (note) ${n}`);
@@ -504,8 +563,9 @@ if (asJson) {
   const sync = results.filter((r) => r.status === "in-sync").length;
   const pending = results.filter((r) => r.status === "SNAPSHOT-PENDING").length;
   const cellPending = results.filter((r) => r.status === "CELL-PENDING").length;
+  const specPending = results.filter((r) => r.status === "SPEC-RECEIPT-PENDING").length;
   const noted = results.filter((r) => (r.notes ?? []).length).length;
   console.log(
-    `\n✔ console-loop:canvas-drift ${lane} — ${results.length} stem(s): ${sync} in-sync with their own emit script, ${drift} drifted, ${pending} snapshot-pending, ${cellPending} cell-pending; ${noted} carry a non-drift note (reporting only; never fails CI)`,
+    `\n✔ console-loop:canvas-drift ${lane} — ${results.length} stem(s): ${sync} in-sync with their own emit script, ${drift} drifted, ${pending} snapshot-pending, ${cellPending} cell-pending, ${specPending} spec-receipt-pending; ${noted} carry a non-drift note (reporting only; never fails CI)`,
   );
 }

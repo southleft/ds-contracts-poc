@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "fluent.input",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Input — generated from contract fluent.input v0.2.0 †",
+    "description": "Input — generated from contract fluent.input v0.2.0 † (45 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -3678,6 +3678,746 @@ const COMPONENTS = [
         "to": "Appearance=Filled Lighter Shadow, Size=Medium, State=Active"
       }
     ],
+    "codeOnlyFacts": [
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.shared.color-767676}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.shared.color-767676}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.shared.color-767676}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.shared.color-767676}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "flex-grow",
+        "value": "{imported.input.input.flex-grow}",
+        "reason": "the canvas approximates growth with layoutGrow/FILL, which is a boolean, not a ratio.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "appearance",
+        "value": "auto",
+        "reason": "Native form-control appearance is reset only in the coded component.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "text",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.input.root.border-bottom-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Filled Darker, Size=Medium, State=Active",
+            "Appearance=Filled Lighter, Size=Medium, State=Active",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Active",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.input.root.border-bottom-color-state-focus-visible.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.input.root.border-bottom-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Hover",
+            "Appearance=Underline, Size=Medium, State=Hover",
+            "Appearance=Filled Darker, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter, Size=Medium, State=Hover",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.input.root.border-bottom-color.outline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium",
+            "Appearance=Outline, Size=Small",
+            "Appearance=Outline, Size=Large",
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.input.root.border-bottom-color.underline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Underline, Size=Medium",
+            "Appearance=Underline, Size=Small",
+            "Appearance=Underline, Size=Large",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.shared.color-e0e0e0}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.input.root.border-left-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Filled Darker, Size=Medium, State=Active",
+            "Appearance=Filled Lighter, Size=Medium, State=Active",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Active",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.input.root.border-left-color-state-focus-visible.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.input.root.border-left-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Hover",
+            "Appearance=Underline, Size=Medium, State=Hover",
+            "Appearance=Filled Darker, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter, Size=Medium, State=Hover",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.input.root.border-left-color.outline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium",
+            "Appearance=Outline, Size=Small",
+            "Appearance=Outline, Size=Large",
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.input.root.border-left-color.underline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Underline, Size=Medium",
+            "Appearance=Underline, Size=Small",
+            "Appearance=Underline, Size=Large",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.shared.color-e0e0e0}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.input.root.border-right-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Filled Darker, Size=Medium, State=Active",
+            "Appearance=Filled Lighter, Size=Medium, State=Active",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Active",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.input.root.border-right-color-state-focus-visible.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.input.root.border-right-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Hover",
+            "Appearance=Underline, Size=Medium, State=Hover",
+            "Appearance=Filled Darker, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter, Size=Medium, State=Hover",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.input.root.border-right-color.outline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium",
+            "Appearance=Outline, Size=Small",
+            "Appearance=Outline, Size=Large",
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.input.root.border-right-color.underline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Underline, Size=Medium",
+            "Appearance=Underline, Size=Small",
+            "Appearance=Underline, Size=Large",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.shared.color-e0e0e0}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.input.root.border-top-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Filled Darker, Size=Medium, State=Active",
+            "Appearance=Filled Lighter, Size=Medium, State=Active",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Active",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.input.root.border-top-color-state-focus-visible.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.input.root.border-top-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Hover",
+            "Appearance=Underline, Size=Medium, State=Hover",
+            "Appearance=Filled Darker, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter, Size=Medium, State=Hover",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.input.root.border-top-color.outline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium",
+            "Appearance=Outline, Size=Small",
+            "Appearance=Outline, Size=Large",
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.input.root.border-top-color.underline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Underline, Size=Medium",
+            "Appearance=Underline, Size=Small",
+            "Appearance=Underline, Size=Large",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.shared.color-e0e0e0}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.input.root.row-gap.large}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Large",
+            "Appearance=Underline, Size=Large",
+            "Appearance=Filled Darker, Size=Large",
+            "Appearance=Filled Lighter, Size=Large",
+            "Appearance=Filled Darker Shadow, Size=Large",
+            "Appearance=Filled Lighter Shadow, Size=Large"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.input.root.row-gap.medium}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 30,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium",
+            "Appearance=Underline, Size=Medium",
+            "Appearance=Filled Darker, Size=Medium",
+            "Appearance=Filled Lighter, Size=Medium",
+            "Appearance=Filled Darker Shadow, Size=Medium",
+            "Appearance=Filled Lighter Shadow, Size=Medium",
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Filled Darker, Size=Medium, State=Active",
+            "Appearance=Filled Lighter, Size=Medium, State=Active",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Active",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Active",
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Disabled",
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Focus Visible"
+          ],
+          "more": 6
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.input.root.row-gap.small}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Small",
+            "Appearance=Underline, Size=Small",
+            "Appearance=Filled Darker, Size=Small",
+            "Appearance=Filled Lighter, Size=Small",
+            "Appearance=Filled Darker Shadow, Size=Small",
+            "Appearance=Filled Lighter Shadow, Size=Small"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "outline-style",
+        "value": "solid",
+        "reason": "declared for the active state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "outline-style",
+        "value": "solid",
+        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -4574,6 +5314,40 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -4596,6 +5370,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -4837,6 +5614,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -5103,6 +5881,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -5121,6 +5900,9 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  results.push(withCodeOnlyFacts(await syncOne(C), C));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };

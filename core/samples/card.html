@@ -2,7 +2,8 @@
   Card — static HTML+CSS emitted from contract ds.card v1.1.0 by core/emit-html.ts.
   Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
   bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
-  Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
+  Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled); a toggle's
+  ARIA state (aria-expanded/aria-pressed/aria-checked/aria-selected) renders per showcase item, it does not flip.
   Slots render their declared defaultContent; an empty slot renders its wrapper empty (absent content
   is absent — named in an inline comment, never painted as placeholder text). Booleans render per showcase item.
 -->

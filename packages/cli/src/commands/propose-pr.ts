@@ -620,6 +620,16 @@ export async function generateCodeFiles(
             );
             continue;
           }
+          // tokens.css (the custom-property sheet the CSS Module references)
+          // rides along ONLY when the stories do — they import it, and a PR
+          // must not ship an import it does not satisfy. Without stories the
+          // repo's own token build defines these names; say so, by count.
+          if (rel === "tokens.css" && !cfg.stories) {
+            notes.push(
+              `tokens.css is NOT in this PR — the ${cfg.outDir}/<Name>.module.css references custom properties your token build already defines (run \`ds-contracts generate\` with the same --tokens to emit the sheet beside the components if it does not).`,
+            );
+            continue;
+          }
           files.push({
             destPath: `${cfg.outDir}/${rel}`,
             contents: readFileSync(path.join(outDir, rel), "utf8"),

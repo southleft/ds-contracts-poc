@@ -16,7 +16,7 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { ContractSchema, type Contract } from '../../schema/src/index.js';
 import type { EmitterCtx } from '../../../core/emitter.js';
-import { flattenTokens } from '../../../core/tokens.js';
+import { flattenTokens, type TokenTreeInput } from '../../../core/tokens.js';
 
 // ---------------------------------------------------------------------------
 // Argument parsing
@@ -400,24 +400,32 @@ export function buildEmitterCtxWithRouting(
   fileKey?: string,
 ): { ctx: EmitterCtx; routing: TokenRouting } {
   const routing = buildTokenRouting(tokenEntries);
-  const brands: Record<string, Record<string, unknown>> = { default: {} };
-  for (const [slot, tree] of routing.bySlot) {
-    if (slot.startsWith('brand.')) brands[slot.slice('brand.'.length)] = tree;
-  }
   return {
     ctx: {
-      tokens: {
-        primitives: routing.bySlot.get('primitives') ?? {},
-        semantic: routing.bySlot.get('semantic') ?? {},
-        light: routing.bySlot.get('light') ?? {},
-        dark: routing.bySlot.get('dark') ?? {},
-        brands,
-      },
+      tokens: tokenTreesFromRouting(routing),
       icons: loadIcons(iconsDir),
       contracts,
       fileKey,
     },
     routing,
+  };
+}
+
+/** The routed slots as the layered TokenTreeInput every emitter reads — and
+ *  the layering core/emit-tokens-css.ts turns into `:root` + mode blocks.
+ *  One function, so the react shell (scripts/generate-components.ts) and
+ *  the registry targets cannot disagree about which file is the dark slot. */
+export function tokenTreesFromRouting(routing: TokenRouting): TokenTreeInput {
+  const brands: Record<string, Record<string, unknown>> = { default: {} };
+  for (const [slot, tree] of routing.bySlot) {
+    if (slot.startsWith('brand.')) brands[slot.slice('brand.'.length)] = tree;
+  }
+  return {
+    primitives: routing.bySlot.get('primitives') ?? {},
+    semantic: routing.bySlot.get('semantic') ?? {},
+    light: routing.bySlot.get('light') ?? {},
+    dark: routing.bySlot.get('dark') ?? {},
+    brands,
   };
 }
 

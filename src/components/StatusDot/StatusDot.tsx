@@ -21,7 +21,7 @@ export const StatusDot = forwardRef<HTMLSpanElement, StatusDotProps>(function St
 ) {
   const classes = [styles.root, styles[`variant-${variant}`], className].filter(Boolean).join(' ');
   return (
-    <span ref={ref} className={classes} role="img" {...rest}>
+    <span ref={ref} className={classes} aria-label={label} role="img" {...rest}>
       {children}
     </span>
   );

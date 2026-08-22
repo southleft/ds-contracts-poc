@@ -63,9 +63,17 @@ export interface MockVariable {
   resolvedType: string;
   valuesByMode: Record<string, unknown>;
   resolveForConsumer(consumer?: unknown): { resolvedType: string; value: unknown } | null;
+  getSharedPluginData(namespace: string, key: string): string;
+  setSharedPluginData(namespace: string, key: string, value: string): void;
 }
 
-export declare function createFigmaMock(): {
+export interface MockOptions {
+  /** `VariableCollection.addMode` throws past N modes, the way a Figma Starter
+   *  file does ("Limited to 1 modes only"); omitted = unlimited (Pro). */
+  modeLimit?: number | null;
+}
+
+export declare function createFigmaMock(options?: MockOptions): {
   figma: {
     root: MockNode;
     currentPage: MockNode;

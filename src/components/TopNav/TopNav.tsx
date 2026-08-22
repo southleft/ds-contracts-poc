@@ -25,7 +25,7 @@ export const TopNav = forwardRef<HTMLElement, TopNavProps>(function TopNav(
 ) {
   const classes = [styles.root, className].filter(Boolean).join(' ');
   return (
-    <nav ref={ref} className={classes} {...rest}>
+    <nav ref={ref} className={classes} aria-label={label} {...rest}>
       {heading != null ? <div className={styles.heading}>{heading}</div> : null}
       {startContent != null ? <div className={styles.startContent}>{startContent}</div> : null}
       {endContent != null ? <div className={styles.endContent}>{endContent}</div> : null}

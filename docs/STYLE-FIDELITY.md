@@ -40,8 +40,8 @@ named degradation — zero remain.
 | A4 | gradient fills/strokes | REST: no + `paint-unsupported` degradation; plugin: no, **silent** | — | — | NAMED-GAP (REST) / **SILENT-LOSS** (plugin) | NAMED-GAP — plugin dump gains a `_degradations` channel with the same code |
 | A5 | image fills | same as A4 | — | — | NAMED-GAP / **SILENT-LOSS** (plugin) | NAMED-GAP (both captures) |
 | A6 | additional paints beyond the first visible solid | **no — silently ignored in both captures** (only the first visible solid is read) | — | — | **SILENT-LOSS** | NAMED-GAP — `paint-stack-truncated` degradation when >1 visible paint |
-| A7 | effects: **drop shadow** | **no** | — | — | **SILENT-LOSS** | **MINTED** — dump v1.2 `effects` (single visible drop shadow → `{offsetX, offsetY, radius, spread, color{hex,alpha}}`); minted as a `box-shadow` CSS value token; CSS surfaces render it; canvas names the limit at proposal |
-| A8 | effects: inner shadow / layer blur / background blur / multiple shadows | **no** | — | — | **SILENT-LOSS** | NAMED-GAP — `effect-unsupported` degradation naming the effect type |
+| A7 | effects: **drop shadow** | **no** | — | — | **SILENT-LOSS** | **MINTED** — dump v1.2 `effects` (single visible drop shadow → `{offsetX, offsetY, radius, spread, color{hex,alpha}}`); minted as a `box-shadow` CSS value token; CSS surfaces render it; canvas names the limit at proposal. A stack drawn ONLY in a State variant carries as `states.<state>.box-shadow` on the root AND on a nested part (FC-DUMP-PROPOSE-PART-STATE-CHANNELS — a child's Hover-only shadow used to propose with zero notes) |
+| A8 | effects: inner shadow / layer blur / background blur / multiple shadows | **no** | — | — | **SILENT-LOSS** | NAMED-GAP — multi-layer DROP_SHADOW stacks now MINT (A7); inner shadow / blurs are NAMED at proposal by the effect-kind notes in `invertNodeEffects` and the part state pass (there is no `effect-unsupported` dump degradation — the old claim here was false) |
 | A9 | blend modes (node + paint) | **no** | — | — | **SILENT-LOSS** | NAMED-GAP — `blend-mode-unsupported` degradation when ≠ NORMAL/PASS_THROUGH |
 | A10 | corner radius, uniform | yes | `border-radius` | all four | OK / MINTED | OK / MINTED |
 | A11 | corner radius, per-corner | REST: `radii-nonuniform` degradation; plugin: `figma.mixed` → **silent** | — | — | NAMED-GAP / **SILENT-LOSS** (plugin) | NAMED-GAP (both captures) |
@@ -72,7 +72,7 @@ named degradation — zero remain.
 | B4 | **`outline` shorthand on `:focus-visible`** (`outline: 2px solid var(--x)`) | **dropped** — "var() inside a shorthand" note; the focus ring vanished from the CBDS convergence diff | — | NAMED-GAP (scorecard punch 4, half) | **OK / MINTED** — outline expands to `outline-width` + `outline-color`; `outline-offset` rides the generator boilerplate |
 | B5 | `:hover` / `:focus-visible` / `:disabled` root rules (incl. `:not()` state guards) | yes | `states.*` + state minting | OK / MINTED | OK / MINTED |
 | B6 | **`:active` root rules** (`&:active:not(:disabled)`) | **dropped** — "pseudo is not a contract state" note; pressed fills one-sided in the convergence diff | — | NAMED-GAP (scorecard punch 4) | **OK / MINTED** — `active` joins the contract state vocabulary (schema, all emitters `:active:not(:disabled)`, extractor, minting) |
-| B7 | state rules on nested parts | vocabulary + emitters + design proposer: yes (v13 `Part.states` — color-kind channels on non-ref parts, `.root:disabled .part` rules, canvas State-preview cells, `proposeStateDiffs` proposes depth-1 diffs); CSS→contract inversion: no | proposed (design side) / precise named note (code side) | NAMED-GAP | **RETIRED (design side)** / NAMED-GAP (css inversion only — note names the v13 vocabulary) |
+| B7 | state rules on nested parts | vocabulary + emitters + design proposer: yes (v13 `Part.states` — color-kind channels on non-ref parts, `.root:disabled .part` rules, canvas State-preview cells, `proposeStateDiffs` proposes depth-1 diffs; FC-DUMP-PROPOSE-PART-STATE-CHANNELS adds box-shadow / border-width / border-radius / opacity and resolves depth ≥ 2 descendants by unique part name — TEXT effects/stroke/type, visibility, geometry and layout diffs are NAMED per part+state+channel); CSS→contract inversion: no | proposed (design side) / precise named note (code side) | NAMED-GAP | **RETIRED (design side)** / NAMED-GAP (css inversion only — note names the v13 vocabulary) |
 | B8 | enum-modifier classes (incl. BEM) → substituted refs | yes | template inference / per-value minting | OK / MINTED | OK / MINTED |
 | B9 | boolean-modifier classes | no | note (stylesWhen is authored, not inverted) | NAMED-GAP | NAMED-GAP |
 | B10 | media queries / @supports / @container | no | named at-rule skip note | NAMED-GAP | NAMED-GAP |
@@ -120,8 +120,8 @@ codes, mirrored by the plugin dump's `_degradations` channel).
    `linear-gradient()` / `url()` mints later; degradations carry the stops.
 7. **Boolean-conditional styling, media queries** (B9/B10) — authored
    vocabulary exists (stylesWhen), inversion does not. Nested-part STATES
-   (B7) retired on the design side: `Part.states` (v13, color-kind channels
-   on non-ref parts) is proposed by `proposeStateDiffs` and rendered by every
+   (B7) retired on the design side: `Part.states` (v13 color-kind channels + box-shadow /
+   border-width / border-radius / opacity on non-ref parts) is proposed by `proposeStateDiffs` and rendered by every
    emitter (`.root:disabled .part`; canvas State-preview cells); only the
    CSS→contract inversion of that selector shape remains a precise named
    note.

@@ -63,6 +63,7 @@
     "console-loop:capture-framing": "node scripts/console-loop-capture-framing-check.mjs",
     "console-loop:reference-audit": "tsx scripts/console-loop-reference-audit.mjs",
     "console-loop:canvas-drift": "node scripts/console-loop-canvas-drift-probe.mjs",
+    "console-loop:canvas-drift:mint": "node scripts/console-loop-canvas-drift-mint-specs.mjs",
     "test:console-loop-capture-framing": "node --test scripts/console-loop-capture-framing-check.test.mjs",
     "trap-corpus:check": "node scripts/trap-corpus-check.mjs",
     "console-loop:developed-score": "tsx scripts/console-loop-developed-score.mjs",
@@ -70,7 +71,7 @@
     "parity:flowbite": "tsx scripts/flowbite-contract-parity.ts",
     "extract:figma:visual:catalog": "tsx extract/figma/visual-parity/run.ts --summary button badge checkbox switch heading",
     "extract:figma:visual:anchors": "tsx extract/figma/visual-parity/anchor-check.ts",
-    "maintain": "npm run string-boolean-coercion:check && npm run token-set-prune:check && npm run exact-proposal:check && npm run flowbite-bundle-fresh:check && npm run plugin:check && npm run flowbite-dump-propose:check && npm run extract:figma:visual:anchors && npm run functional:flowbite && npm run parity:flowbite",
+    "maintain": "npm run string-boolean-coercion:check && npm run token-set-prune:check && npm run exact-proposal:check && npm run flowbite-bundle-fresh:check && npm run plugin:check && npm run flowbite-dump-propose:check && npm run extract:figma:visual:anchors && npm run functional:flowbite && npm run parity:flowbite && npm run root-attrs:check && npm run css-vars:check && npm run code-only-facts:check",
     "maintain:visual": "npm run extract:figma:visual:catalog",
     "maintain:all": "npm run maintain && npm run maintain:visual",
     "eval:record:check": "node scripts/eval-record-check.mjs",
@@ -212,7 +213,10 @@
     "dagger:census": "tsx extract/figma/dagger-census.ts",
     "seed:gen": "tsx extract/computed/seed-gen.ts",
     "seed:verify": "for L in carbon mui tailwind; do echo \"== $L ==\"; tsx extract/computed/seed-gen.ts extract/computed/configs/$L.json --verify || FAIL=1; done; exit ${FAIL:-0}",
-    "eval:registry:check": "node scripts/eval-registry-coverage-check.mjs"
+    "eval:registry:check": "node scripts/eval-registry-coverage-check.mjs",
+    "root-attrs:check": "tsx core/root-attrs-check.ts",
+    "css-vars:check": "tsx core/css-vars-check.ts",
+    "code-only-facts:check": "tsx core/code-only-facts-check.ts"
   },
   "engines": {
     "node": ">=20"

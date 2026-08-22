@@ -1,7 +1,11 @@
 {
+ "platform": "darwin",
+ "architecture": "arm64",
  "generatedAt": "2026-08-20T23:27:00.962Z",
  "headCommit": "aaaeb034255f040d2e9cf6a517b4c085d915b5c0",
+ "notes": "Renamed from baseline.json 2026-08-22 (platform-keyed baselines). Scores and sizeOurs are the 2026-08-20 aaaeb03 record, untouched. sizeFigma was added from a same-machine --summary re-run of all 151 rows against the same cached Figma PNGs (node+version keyed): 147/151 rows reproduced sizeOurs exactly; cbds-dialog ×3 and eventz-button ×1 had moved and are left for the gate to name, not re-recorded here.",
  "epsilonPp": 0.1,
+ "sizeTolerancePx": 4,
  "subjects": {
   "cbds-button-brand-primary": {
    "version": "2374568486037958769",
@@ -121,6 +125,7 @@
    "masked": 0,
    "unmasked": 1.922123015873016,
    "sizeOurs": "168×96",
+   "sizeFigma": "168×96",
    "causeClass": "renderer"
   },
   "cbds-button-brand-primary :: size=medium, state=default": {
@@ -128,6 +133,7 @@
    "masked": 0,
    "unmasked": 2.096861471861472,
    "sizeOurs": "168×88",
+   "sizeFigma": "168×88",
    "causeClass": "renderer"
   },
   "cbds-button-brand-primary :: size=small, state=default": {
@@ -135,6 +141,7 @@
    "masked": 1.5430622009569377,
    "unmasked": 3.189935064935065,
    "sizeOurs": "138×88",
+   "sizeFigma": "140×88",
    "causeClass": "renderer"
   },
   "cbds-button-brand-primary :: size=large, state=hover": {
@@ -142,6 +149,7 @@
    "masked": 0,
    "unmasked": 1.922123015873016,
    "sizeOurs": "168×96",
+   "sizeFigma": "168×96",
    "causeClass": "renderer"
   },
   "cbds-button-brand-primary :: size=medium, state=hover": {
@@ -149,6 +157,7 @@
    "masked": 0,
    "unmasked": 2.096861471861472,
    "sizeOurs": "168×88",
+   "sizeFigma": "168×88",
    "causeClass": "renderer"
   },
   "cbds-button-brand-primary :: size=small, state=hover": {
@@ -156,6 +165,7 @@
    "masked": 1.5430622009569377,
    "unmasked": 3.189935064935065,
    "sizeOurs": "138×88",
+   "sizeFigma": "140×88",
    "causeClass": "renderer"
   },
   "cbds-button-brand-primary :: size=large, state=focus": {
@@ -163,6 +173,7 @@
    "masked": 0,
    "unmasked": 1.5042701863354038,
    "sizeOurs": "184×112",
+   "sizeFigma": "184×112",
    "causeClass": "renderer"
   },
   "cbds-button-brand-primary :: size=medium, state=focus": {
@@ -170,6 +181,7 @@
    "masked": 0,
    "unmasked": 1.6199832775919731,
    "sizeOurs": "184×104",
+   "sizeFigma": "184×104",
    "causeClass": "renderer"
   },
   "cbds-button-brand-primary :: size=small, state=focus": {
@@ -177,6 +189,7 @@
    "masked": 3.0088062622309195,
    "unmasked": 3.901627218934911,
    "sizeOurs": "154×104",
+   "sizeFigma": "156×104",
    "causeClass": "renderer"
   },
   "cbds-button-brand-primary :: size=large, state=pressed": {
@@ -184,6 +197,7 @@
    "masked": 0,
    "unmasked": 1.9283234126984128,
    "sizeOurs": "168×96",
+   "sizeFigma": "168×96",
    "causeClass": "renderer"
   },
   "cbds-button-brand-primary :: size=medium, state=pressed": {
@@ -191,6 +205,7 @@
    "masked": 0,
    "unmasked": 2.1036255411255413,
    "sizeOurs": "168×88",
+   "sizeFigma": "168×88",
    "causeClass": "renderer"
   },
   "cbds-button-brand-primary :: size=small, state=pressed": {
@@ -198,6 +213,7 @@
    "masked": 1.555023923444976,
    "unmasked": 3.1980519480519476,
    "sizeOurs": "138×88",
+   "sizeFigma": "140×88",
    "causeClass": "renderer"
   },
   "cbds-button-brand-primary :: size=large, state=disabled": {
@@ -205,6 +221,7 @@
    "masked": 0,
    "unmasked": 1.9035218253968251,
    "sizeOurs": "168×96",
+   "sizeFigma": "168×96",
    "causeClass": "renderer"
   },
   "cbds-button-brand-primary :: size=medium, state=disabled": {
@@ -212,6 +229,7 @@
    "masked": 0,
    "unmasked": 2.076569264069264,
    "sizeOurs": "168×88",
+   "sizeFigma": "168×88",
    "causeClass": "renderer"
   },
   "cbds-button-brand-primary :: size=small, state=disabled": {
@@ -219,6 +237,7 @@
    "masked": 1.3995215311004785,
    "unmasked": 3.0925324675324677,
    "sizeOurs": "138×88",
+   "sizeFigma": "140×88",
    "causeClass": "renderer"
   },
   "cbds-tooltip :: pointer=true, pointer-position=top-right": {
@@ -226,6 +245,7 @@
    "masked": 5.496726214533991,
    "unmasked": 9.09156626506024,
    "sizeOurs": "328×117",
+   "sizeFigma": "332×125",
    "causeClass": "capture-gap"
   },
   "cbds-tooltip :: pointer=false, pointer-position=none": {
@@ -233,6 +253,7 @@
    "masked": 5.397084125690483,
    "unmasked": 8.74523735969519,
    "sizeOurs": "328×117",
+   "sizeFigma": "332×109",
    "causeClass": "renderer"
   },
   "cbds-tooltip :: pointer=true, pointer-position=bottom-right": {
@@ -240,6 +261,7 @@
    "masked": 5.853045663287411,
    "unmasked": 7.003012048192771,
    "sizeOurs": "328×117",
+   "sizeFigma": "332×120",
    "causeClass": "capture-gap"
   },
   "cbds-tooltip :: pointer=true, pointer-position=left-center": {
@@ -247,6 +269,7 @@
    "masked": 4.735539616626819,
    "unmasked": 7.835168353900343,
    "sizeOurs": "328×117",
+   "sizeFigma": "347×109",
    "causeClass": "capture-gap"
   },
   "cbds-tooltip :: pointer=true, pointer-position=top-center": {
@@ -254,6 +277,7 @@
    "masked": 5.496726214533991,
    "unmasked": 9.09156626506024,
    "sizeOurs": "328×117",
+   "sizeFigma": "332×125",
    "causeClass": "capture-gap"
   },
   "cbds-tooltip :: pointer=true, pointer-position=bottom-center": {
@@ -261,6 +285,7 @@
    "masked": 5.861710423706785,
    "unmasked": 7.008032128514056,
    "sizeOurs": "328×117",
+   "sizeFigma": "332×120",
    "causeClass": "capture-gap"
   },
   "cbds-tooltip :: pointer=true, pointer-position=right-center": {
@@ -268,6 +293,7 @@
    "masked": 4.706178432112747,
    "unmasked": 8.010049508608587,
    "sizeOurs": "328×117",
+   "sizeFigma": "347×109",
    "causeClass": "capture-gap"
   },
   "cbds-tooltip :: pointer=true, pointer-position=top-left": {
@@ -275,6 +301,7 @@
    "masked": 5.496726214533991,
    "unmasked": 9.09156626506024,
    "sizeOurs": "328×117",
+   "sizeFigma": "332×125",
    "causeClass": "capture-gap"
   },
   "cbds-tooltip :: pointer=true, pointer-position=bottom-left": {
@@ -282,6 +309,7 @@
    "masked": 5.8227190018196,
    "unmasked": 6.985441767068274,
    "sizeOurs": "328×117",
+   "sizeFigma": "332×120",
    "causeClass": "capture-gap"
   },
   "cbds-dialog :: size=large": {
@@ -289,6 +317,7 @@
    "masked": 0.6147393609718145,
    "unmasked": 1.7779363807675381,
    "sizeOurs": "1604×442",
+   "sizeFigma": "1604×442",
    "causeClass": "renderer"
   },
   "cbds-dialog :: size=medium": {
@@ -296,6 +325,7 @@
    "masked": 2.8682910266017236,
    "unmasked": 4.988854941296285,
    "sizeOurs": "996×418",
+   "sizeFigma": "996×410",
    "causeClass": "renderer"
   },
   "cbds-dialog :: size=small-vertical": {
@@ -303,6 +333,7 @@
    "masked": 15.447594967190417,
    "unmasked": 15.472339831073095,
    "sizeOurs": "644×578",
+   "sizeFigma": "644×562",
    "causeClass": "capture-gap"
   },
   "cbds-dialog :: size=small": {
@@ -310,6 +341,7 @@
    "masked": 4.756979396581181,
    "unmasked": 7.667701863354037,
    "sizeOurs": "644×450",
+   "sizeFigma": "644×442",
    "causeClass": "renderer"
   },
   "shoelace-tooltip :: placement=left": {
@@ -317,6 +349,7 @@
    "masked": 11.045751633986928,
    "unmasked": 12.050189393939394,
    "sizeOurs": "180×66",
+   "sizeFigma": "192×66",
    "causeClass": "capture-gap"
   },
   "shoelace-tooltip :: placement=topLeft": {
@@ -324,6 +357,7 @@
    "masked": 27.190170940170937,
    "unmasked": 20.04985754985755,
    "sizeOurs": "180×66",
+   "sizeFigma": "180×78",
    "causeClass": "capture-gap"
   },
   "shoelace-tooltip :: placement=bottomLeft": {
@@ -331,6 +365,7 @@
    "masked": 27.190170940170937,
    "unmasked": 19.330484330484328,
    "sizeOurs": "180×66",
+   "sizeFigma": "180×78",
    "causeClass": "capture-gap"
   },
   "shoelace-tooltip :: placement=bottom": {
@@ -338,6 +373,7 @@
    "masked": 27.190170940170937,
    "unmasked": 19.330484330484328,
    "sizeOurs": "180×66",
+   "sizeFigma": "180×78",
    "causeClass": "capture-gap"
   },
   "shoelace-tooltip :: placement=top": {
@@ -345,6 +381,7 @@
    "masked": 27.190170940170937,
    "unmasked": 20.04985754985755,
    "sizeOurs": "180×66",
+   "sizeFigma": "180×78",
    "causeClass": "capture-gap"
   },
   "shoelace-tooltip :: placement=topRight": {
@@ -352,6 +389,7 @@
    "masked": 27.190170940170937,
    "unmasked": 20.04985754985755,
    "sizeOurs": "180×66",
+   "sizeFigma": "180×78",
    "causeClass": "capture-gap"
   },
   "shoelace-tooltip :: placement=bottomRight": {
@@ -359,6 +397,7 @@
    "masked": 27.190170940170937,
    "unmasked": 19.330484330484328,
    "sizeOurs": "180×66",
+   "sizeFigma": "180×78",
    "causeClass": "capture-gap"
   },
   "shoelace-tooltip :: placement=right": {
@@ -366,6 +405,7 @@
    "masked": 10.915032679738562,
    "unmasked": 12.334280303030303,
    "sizeOurs": "180×66",
+   "sizeFigma": "192×66",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=left, size=large, type=default, isPill=false": {
@@ -373,6 +413,7 @@
    "masked": 6.514900662251656,
    "unmasked": 7.274390243902438,
    "sizeOurs": "164×100",
+   "sizeFigma": "164×100",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=left, size=large, type=default, isPill=true": {
@@ -380,6 +421,7 @@
    "masked": 5.173841059602649,
    "unmasked": 6.286585365853659,
    "sizeOurs": "164×100",
+   "sizeFigma": "164×100",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=left, size=large, type=primary, isPill=false": {
@@ -387,6 +429,7 @@
    "masked": 0.695364238410596,
    "unmasked": 2.99390243902439,
    "sizeOurs": "164×100",
+   "sizeFigma": "164×100",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=left, size=large, type=primary, isPill=true": {
@@ -394,6 +437,7 @@
    "masked": 8.27814569536424,
    "unmasked": 8.579268292682928,
    "sizeOurs": "164×100",
+   "sizeFigma": "164×100",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=left, size=small, type=default, isPill=false": {
@@ -401,6 +445,7 @@
    "masked": 32.765151515151516,
    "unmasked": 18.882575757575758,
    "sizeOurs": "88×60",
+   "sizeFigma": "88×60",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=left, size=small, type=default, isPill=true": {
@@ -408,6 +453,7 @@
    "masked": 26.041666666666668,
    "unmasked": 16.83712121212121,
    "sizeOurs": "88×60",
+   "sizeFigma": "88×60",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=left, size=small, type=primary, isPill=false": {
@@ -415,6 +461,7 @@
    "masked": 0.7575757575757576,
    "unmasked": 10.681818181818182,
    "sizeOurs": "88×60",
+   "sizeFigma": "88×60",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=left, size=small, type=primary, isPill=true": {
@@ -422,6 +469,7 @@
    "masked": 18.560606060606062,
    "unmasked": 17.007575757575758,
    "sizeOurs": "88×60",
+   "sizeFigma": "88×60",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=left, size=medium, type=default, isPill=false": {
@@ -429,6 +477,7 @@
    "masked": 11.231617647058824,
    "unmasked": 12.110655737704919,
    "sizeOurs": "122×80",
+   "sizeFigma": "122×80",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=left, size=medium, type=default, isPill=true": {
@@ -436,6 +485,7 @@
    "masked": 8.474264705882353,
    "unmasked": 10.573770491803279,
    "sizeOurs": "122×80",
+   "sizeFigma": "122×80",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=left, size=medium, type=primary, isPill=false": {
@@ -443,6 +493,7 @@
    "masked": 0.29411764705882354,
    "unmasked": 6.055327868852459,
    "sizeOurs": "122×80",
+   "sizeFigma": "122×80",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=left, size=medium, type=primary, isPill=true": {
@@ -450,6 +501,7 @@
    "masked": 11.50735294117647,
    "unmasked": 12.305327868852459,
    "sizeOurs": "122×80",
+   "sizeFigma": "122×80",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=center, size=large, type=default, isPill=false": {
@@ -457,6 +509,7 @@
    "masked": 7.0198675496688745,
    "unmasked": 7.646341463414634,
    "sizeOurs": "164×100",
+   "sizeFigma": "164×100",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=center, size=large, type=default, isPill=true": {
@@ -464,6 +517,7 @@
    "masked": 7.0198675496688745,
    "unmasked": 7.646341463414634,
    "sizeOurs": "164×100",
+   "sizeFigma": "164×100",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=center, size=large, type=primary, isPill=false": {
@@ -471,6 +525,7 @@
    "masked": 1.6556291390728477,
    "unmasked": 3.701219512195122,
    "sizeOurs": "164×100",
+   "sizeFigma": "164×100",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=center, size=large, type=primary, isPill=true": {
@@ -478,6 +533,7 @@
    "masked": 1.6556291390728477,
    "unmasked": 3.701219512195122,
    "sizeOurs": "164×100",
+   "sizeFigma": "164×100",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=center, size=small, type=default, isPill=false": {
@@ -485,6 +541,7 @@
    "masked": 34.84848484848485,
    "unmasked": 19.261363636363637,
    "sizeOurs": "88×60",
+   "sizeFigma": "88×60",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=center, size=small, type=default, isPill=true": {
@@ -492,6 +549,7 @@
    "masked": 34.84848484848485,
    "unmasked": 19.261363636363637,
    "sizeOurs": "88×60",
+   "sizeFigma": "88×60",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=center, size=small, type=primary, isPill=false": {
@@ -499,6 +557,7 @@
    "masked": 2.272727272727273,
    "unmasked": 12.803030303030303,
    "sizeOurs": "88×60",
+   "sizeFigma": "88×60",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=center, size=small, type=primary, isPill=true": {
@@ -506,6 +565,7 @@
    "masked": 2.272727272727273,
    "unmasked": 12.803030303030303,
    "sizeOurs": "88×60",
+   "sizeFigma": "88×60",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=center, size=medium, type=default, isPill=false": {
@@ -513,6 +573,7 @@
    "masked": 11.76470588235294,
    "unmasked": 12.407786885245901,
    "sizeOurs": "122×80",
+   "sizeFigma": "122×80",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=center, size=medium, type=default, isPill=true": {
@@ -520,6 +581,7 @@
    "masked": 11.76470588235294,
    "unmasked": 12.407786885245901,
    "sizeOurs": "122×80",
+   "sizeFigma": "122×80",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=center, size=medium, type=primary, isPill=false": {
@@ -527,6 +589,7 @@
    "masked": 2.941176470588235,
    "unmasked": 7.530737704918032,
    "sizeOurs": "122×80",
+   "sizeFigma": "122×80",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=center, size=medium, type=primary, isPill=true": {
@@ -534,6 +597,7 @@
    "masked": 2.941176470588235,
    "unmasked": 7.530737704918032,
    "sizeOurs": "122×80",
+   "sizeFigma": "122×80",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=right, size=large, type=default, isPill=false": {
@@ -541,6 +605,7 @@
    "masked": 8.071192052980132,
    "unmasked": 8.420731707317074,
    "sizeOurs": "164×100",
+   "sizeFigma": "164×100",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=right, size=large, type=default, isPill=true": {
@@ -548,6 +613,7 @@
    "masked": 6.763245033112583,
    "unmasked": 7.4573170731707314,
    "sizeOurs": "164×100",
+   "sizeFigma": "164×100",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=right, size=large, type=primary, isPill=false": {
@@ -555,6 +621,7 @@
    "masked": 2.3509933774834435,
    "unmasked": 4.213414634146342,
    "sizeOurs": "164×100",
+   "sizeFigma": "164×100",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=right, size=large, type=primary, isPill=true": {
@@ -562,6 +629,7 @@
    "masked": 9.933774834437086,
    "unmasked": 9.798780487804878,
    "sizeOurs": "164×100",
+   "sizeFigma": "164×100",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=position4, size=small, type=default, isPill=false": {
@@ -569,6 +637,7 @@
    "masked": 34.46969696969697,
    "unmasked": 21.022727272727273,
    "sizeOurs": "88×60",
+   "sizeFigma": "88×60",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=position4, size=small, type=default, isPill=true": {
@@ -576,6 +645,7 @@
    "masked": 27.178030303030305,
    "unmasked": 18.901515151515152,
    "sizeOurs": "88×60",
+   "sizeFigma": "88×60",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=position4, size=small, type=primary, isPill=false": {
@@ -583,6 +653,7 @@
    "masked": 3.0303030303030303,
    "unmasked": 12.954545454545455,
    "sizeOurs": "88×60",
+   "sizeFigma": "88×60",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=position4, size=small, type=primary, isPill=true": {
@@ -590,6 +661,7 @@
    "masked": 20.833333333333336,
    "unmasked": 19.28030303030303,
    "sizeOurs": "88×60",
+   "sizeFigma": "88×60",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=right, size=medium, type=default, isPill=false": {
@@ -597,6 +669,7 @@
    "masked": 14.025735294117647,
    "unmasked": 13.668032786885245,
    "sizeOurs": "122×80",
+   "sizeFigma": "122×80",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=right, size=medium, type=default, isPill=true": {
@@ -604,6 +677,7 @@
    "masked": 11.213235294117647,
    "unmasked": 12.100409836065573,
    "sizeOurs": "122×80",
+   "sizeFigma": "122×80",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=right, size=medium, type=primary, isPill=false": {
@@ -611,6 +685,7 @@
    "masked": 3.2352941176470593,
    "unmasked": 7.6946721311475414,
    "sizeOurs": "122×80",
+   "sizeFigma": "122×80",
    "causeClass": "capture-gap"
   },
   "shoelace-button-group :: position=right, size=medium, type=primary, isPill=true": {
@@ -618,6 +693,7 @@
    "masked": 14.448529411764705,
    "unmasked": 13.94467213114754,
    "sizeOurs": "122×80",
+   "sizeFigma": "122×80",
    "causeClass": "capture-gap"
   },
   "eventz-button :: variant=primary, state=default, isDisabled=false": {
@@ -625,6 +701,7 @@
    "masked": 13.717643051771116,
    "unmasked": 11.623043712898003,
    "sizeOurs": "216×68",
+   "sizeFigma": "218×64",
    "causeClass": "capture-gap"
   },
   "eventz-button :: variant=knockout, state=default, isDisabled=false": {
@@ -632,6 +709,7 @@
    "masked": 4.920897718910964,
    "unmasked": 4.630160550458716,
    "sizeOurs": "212×64",
+   "sizeFigma": "218×64",
    "causeClass": "capture-gap"
   },
   "eventz-button :: variant=primary, state=default, isDisabled=true": {
@@ -639,6 +717,7 @@
    "masked": 13.555858310626704,
    "unmasked": 11.46788990825688,
    "sizeOurs": "216×68",
+   "sizeFigma": "218×64",
    "causeClass": "capture-gap"
   },
   "eventz-button :: variant=knockout, state=default, isDisabled=true": {
@@ -646,6 +725,7 @@
    "masked": 4.920897718910964,
    "unmasked": 4.608658256880735,
    "sizeOurs": "212×64",
+   "sizeFigma": "218×64",
    "causeClass": "capture-gap"
   },
   "eventz-button :: variant=secondary, state=default, isDisabled=false": {
@@ -653,6 +733,7 @@
    "masked": 13.683583106267031,
    "unmasked": 11.589314624932543,
    "sizeOurs": "216×68",
+   "sizeFigma": "218×64",
    "causeClass": "capture-gap"
   },
   "eventz-button :: variant=bare, state=default, isDisabled=false": {
@@ -660,6 +741,7 @@
    "masked": 29.433760683760685,
    "unmasked": 21.37325761486835,
    "sizeOurs": "66×22",
+   "sizeFigma": "149×26",
    "causeClass": "capture-gap"
   },
   "eventz-button :: variant=bare, state=default, isDisabled=true": {
@@ -667,6 +749,7 @@
    "masked": 29.433760683760685,
    "unmasked": 20.96024780588539,
    "sizeOurs": "65×22",
+   "sizeFigma": "149×26",
    "causeClass": "capture-gap"
   },
   "eventz-button :: variant=secondary, state=default, isDisabled=true": {
@@ -674,6 +757,7 @@
    "masked": 13.249483115093039,
    "unmasked": 13.051470588235295,
    "sizeOurs": "216×68",
+   "sizeFigma": "149×26",
    "causeClass": "harness"
   },
   "eventz-button :: variant=primary, state=hover, isDisabled=false": {
@@ -681,6 +765,7 @@
    "masked": 13.726158038147137,
    "unmasked": 11.63653534808419,
    "sizeOurs": "216×68",
+   "sizeFigma": "218×64",
    "causeClass": "capture-gap"
   },
   "eventz-button :: variant=knockout, state=hover, isDisabled=false": {
@@ -688,6 +773,7 @@
    "masked": 7.671081677704194,
    "unmasked": 6.77322247706422,
    "sizeOurs": "212×64",
+   "sizeFigma": "218×64",
    "causeClass": "capture-gap"
   },
   "eventz-button :: variant=secondary, state=hover, isDisabled=false": {
@@ -695,6 +781,7 @@
    "masked": 13.751702997275203,
    "unmasked": 11.64328116567728,
    "sizeOurs": "216×68",
+   "sizeFigma": "218×64",
    "causeClass": "capture-gap"
   },
   "eventz-button :: variant=bare, state=hover, isDisabled=false": {
@@ -702,6 +789,7 @@
    "masked": 7.671081677704194,
    "unmasked": 6.77322247706422,
    "sizeOurs": "212×64",
+   "sizeFigma": "218×64",
    "causeClass": "capture-gap"
   },
   "eventz-button :: variant=primary, state=active, isDisabled=false": {
@@ -709,6 +797,7 @@
    "masked": 13.726158038147137,
    "unmasked": 11.63653534808419,
    "sizeOurs": "216×68",
+   "sizeFigma": "218×64",
    "causeClass": "capture-gap"
   },
   "eventz-button :: variant=knockout, state=active, isDisabled=false": {
@@ -716,6 +805,7 @@
    "masked": 4.920897718910964,
    "unmasked": 4.630160550458716,
    "sizeOurs": "212×64",
+   "sizeFigma": "218×64",
    "causeClass": "capture-gap"
   },
   "eventz-button :: variant=secondary, state=active, isDisabled=false": {
@@ -723,6 +813,7 @@
    "masked": 13.683583106267031,
    "unmasked": 11.589314624932543,
    "sizeOurs": "216×68",
+   "sizeFigma": "218×64",
    "causeClass": "capture-gap"
   },
   "eventz-button :: variant=bare, state=active, isDisabled=false": {
@@ -730,6 +821,7 @@
    "masked": 29.433760683760685,
    "unmasked": 21.37325761486835,
    "sizeOurs": "66×22",
+   "sizeFigma": "149×26",
    "causeClass": "capture-gap"
   },
   "eventz-button :: variant=primary, state=focus, isDisabled=false": {
@@ -737,6 +829,7 @@
    "masked": 19.866071428571427,
    "unmasked": 17.322954822954824,
    "sizeOurs": "232×84",
+   "sizeFigma": "234×80",
    "causeClass": "renderer"
   },
   "eventz-button :: variant=knockout, state=focus, isDisabled=false": {
@@ -744,6 +837,7 @@
    "masked": 8.714833759590793,
    "unmasked": 7.8739316239316235,
    "sizeOurs": "228×80",
+   "sizeFigma": "234×80",
    "causeClass": "renderer"
   },
   "eventz-button :: variant=secondary, state=focus, isDisabled=false": {
@@ -751,6 +845,7 @@
    "masked": 19.878137065637066,
    "unmasked": 17.32804232804233,
    "sizeOurs": "232×84",
+   "sizeFigma": "234×80",
    "causeClass": "renderer"
   },
   "eventz-button :: variant=bare, state=focus, isDisabled=false": {
@@ -758,6 +853,7 @@
    "masked": 8.714833759590793,
    "unmasked": 7.905982905982905,
    "sizeOurs": "228×80",
+   "sizeFigma": "234×80",
    "causeClass": "renderer"
   },
   "eventz-button :: variant=primary, state=focus, isDisabled=true": {
@@ -765,6 +861,7 @@
    "masked": 16.535955598455597,
    "unmasked": 15.313390313390313,
    "sizeOurs": "232×84",
+   "sizeFigma": "240×80",
    "causeClass": "renderer"
   },
   "eventz-button :: variant=knockout, state=focus, isDisabled=true": {
@@ -772,6 +869,7 @@
    "masked": 8.702046035805626,
    "unmasked": 9.476495726495726,
    "sizeOurs": "228×80",
+   "sizeFigma": "234×80",
    "causeClass": "renderer"
   },
   "eventz-button :: variant=secondary, state=focus, isDisabled=true": {
@@ -779,6 +877,7 @@
    "masked": 19.473938223938227,
    "unmasked": 18.019943019943018,
    "sizeOurs": "232×84",
+   "sizeFigma": "234×80",
    "causeClass": "renderer"
   },
   "eventz-button :: variant=bare, state=focus, isDisabled=true": {
@@ -786,6 +885,7 @@
    "masked": 8.702046035805626,
    "unmasked": 8.958333333333334,
    "sizeOurs": "228×80",
+   "sizeFigma": "234×80",
    "causeClass": "renderer"
   },
   "heading :: Level=H2, Size=Large": {
@@ -793,6 +893,7 @@
    "masked": null,
    "unmasked": 2.186761229314421,
    "sizeOurs": "140×36",
+   "sizeFigma": "141×36",
    "causeClass": "renderer"
   },
   "heading :: Level=H2, Size=Small": {
@@ -800,6 +901,7 @@
    "masked": null,
    "unmasked": 4.1505791505791505,
    "sizeOurs": "111×28",
+   "sizeFigma": "110×28",
    "causeClass": "renderer"
   },
   "heading :: Level=H2, Size=Medium": {
@@ -807,6 +909,7 @@
    "masked": null,
    "unmasked": 1,
    "sizeOurs": "125×32",
+   "sizeFigma": "125×32",
    "causeClass": "renderer"
   },
   "heading :: Level=H1, Size=Large": {
@@ -814,6 +917,7 @@
    "masked": null,
    "unmasked": 2.186761229314421,
    "sizeOurs": "140×36",
+   "sizeFigma": "141×36",
    "causeClass": "renderer"
   },
   "heading :: Level=H1, Size=Small": {
@@ -821,6 +925,7 @@
    "masked": null,
    "unmasked": 4.1505791505791505,
    "sizeOurs": "111×28",
+   "sizeFigma": "110×28",
    "causeClass": "renderer"
   },
   "heading :: Level=H1, Size=Medium": {
@@ -828,6 +933,7 @@
    "masked": null,
    "unmasked": 1,
    "sizeOurs": "125×32",
+   "sizeFigma": "125×32",
    "causeClass": "renderer"
   },
   "heading :: Level=H3, Size=Large": {
@@ -835,6 +941,7 @@
    "masked": null,
    "unmasked": 2.186761229314421,
    "sizeOurs": "140×36",
+   "sizeFigma": "141×36",
    "causeClass": "renderer"
   },
   "heading :: Level=H3, Size=Small": {
@@ -842,6 +949,7 @@
    "masked": null,
    "unmasked": 4.1505791505791505,
    "sizeOurs": "111×28",
+   "sizeFigma": "110×28",
    "causeClass": "renderer"
   },
   "heading :: Level=H3, Size=Medium": {
@@ -849,6 +957,7 @@
    "masked": null,
    "unmasked": 1,
    "sizeOurs": "125×32",
+   "sizeFigma": "125×32",
    "causeClass": "renderer"
   },
   "heading :: Level=H4, Size=Large": {
@@ -856,6 +965,7 @@
    "masked": null,
    "unmasked": 2.186761229314421,
    "sizeOurs": "140×36",
+   "sizeFigma": "141×36",
    "causeClass": "renderer"
   },
   "heading :: Level=H4, Size=Small": {
@@ -863,6 +973,7 @@
    "masked": null,
    "unmasked": 4.1505791505791505,
    "sizeOurs": "111×28",
+   "sizeFigma": "110×28",
    "causeClass": "renderer"
   },
   "heading :: Level=H4, Size=Medium": {
@@ -870,6 +981,7 @@
    "masked": null,
    "unmasked": 1,
    "sizeOurs": "125×32",
+   "sizeFigma": "125×32",
    "causeClass": "renderer"
   },
   "heading :: Level=H5, Size=Large": {
@@ -877,6 +989,7 @@
    "masked": null,
    "unmasked": 2.186761229314421,
    "sizeOurs": "140×36",
+   "sizeFigma": "141×36",
    "causeClass": "renderer"
   },
   "heading :: Level=H5, Size=Small": {
@@ -884,6 +997,7 @@
    "masked": null,
    "unmasked": 4.1505791505791505,
    "sizeOurs": "111×28",
+   "sizeFigma": "110×28",
    "causeClass": "renderer"
   },
   "heading :: Level=H5, Size=Medium": {
@@ -891,6 +1005,7 @@
    "masked": null,
    "unmasked": 1,
    "sizeOurs": "125×32",
+   "sizeFigma": "125×32",
    "causeClass": "renderer"
   },
   "heading :: Level=H6, Size=Large": {
@@ -898,6 +1013,7 @@
    "masked": null,
    "unmasked": 2.186761229314421,
    "sizeOurs": "140×36",
+   "sizeFigma": "141×36",
    "causeClass": "renderer"
   },
   "heading :: Level=H6, Size=Small": {
@@ -905,6 +1021,7 @@
    "masked": null,
    "unmasked": 4.1505791505791505,
    "sizeOurs": "111×28",
+   "sizeFigma": "110×28",
    "causeClass": "renderer"
   },
   "heading :: Level=H6, Size=Medium": {
@@ -912,6 +1029,7 @@
    "masked": null,
    "unmasked": 1,
    "sizeOurs": "125×32",
+   "sizeFigma": "125×32",
    "causeClass": "renderer"
   },
   "switch :: Value=Off": {
@@ -919,6 +1037,7 @@
    "masked": 0,
    "unmasked": 0.7645566239316239,
    "sizeOurs": "415×72",
+   "sizeFigma": "416×72",
    "causeClass": "renderer"
   },
   "switch :: Value=On": {
@@ -926,6 +1045,7 @@
    "masked": 0,
    "unmasked": 0.7645566239316239,
    "sizeOurs": "415×72",
+   "sizeFigma": "416×72",
    "causeClass": "renderer"
   },
   "badge :: Variant=Info": {
@@ -933,6 +1053,7 @@
    "masked": 0,
    "unmasked": 0.08909479686386315,
    "sizeOurs": "122×46",
+   "sizeFigma": "122×46",
    "causeClass": "renderer"
   },
   "badge :: Variant=Success": {
@@ -940,6 +1061,7 @@
    "masked": 0,
    "unmasked": 0.08909479686386315,
    "sizeOurs": "122×46",
+   "sizeFigma": "122×46",
    "causeClass": "renderer"
   },
   "badge :: Variant=Warning": {
@@ -947,6 +1069,7 @@
    "masked": 0,
    "unmasked": 0.08909479686386315,
    "sizeOurs": "122×46",
+   "sizeFigma": "122×46",
    "causeClass": "renderer"
   },
   "badge :: Variant=Danger": {
@@ -954,6 +1077,7 @@
    "masked": 0,
    "unmasked": 0.07127583749109052,
    "sizeOurs": "122×46",
+   "sizeFigma": "122×46",
    "causeClass": "renderer"
   },
   "badge :: Variant=Error": {
@@ -961,6 +1085,7 @@
    "masked": 0,
    "unmasked": 0.07127583749109052,
    "sizeOurs": "122×46",
+   "sizeFigma": "122×46",
    "causeClass": "renderer"
   },
   "button :: Variant=Primary, Size=Medium, State=Default": {
@@ -968,6 +1093,7 @@
    "masked": 5.49645390070922,
    "unmasked": 4.183400267737617,
    "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
    "causeClass": "renderer"
   },
   "button :: Variant=Primary, Size=Small, State=Default": {
@@ -975,6 +1101,7 @@
    "masked": 1.8479776847977685,
    "unmasked": 1.3043478260869565,
    "sizeOurs": "136×50",
+   "sizeFigma": "138×50",
    "causeClass": "renderer"
   },
   "button :: Variant=Primary, Size=Large, State=Default": {
@@ -982,6 +1109,7 @@
    "masked": 5.191054502369669,
    "unmasked": 5.173297785069729,
    "sizeOurs": "208×90",
+   "sizeFigma": "212×92",
    "causeClass": "renderer"
   },
   "button :: Variant=Secondary, Size=Medium, State=Default": {
@@ -989,6 +1117,7 @@
    "masked": 0,
    "unmasked": 1.0876840696117804,
    "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
    "causeClass": "renderer"
   },
   "button :: Variant=Secondary, Size=Small, State=Default": {
@@ -996,6 +1125,7 @@
    "masked": 0,
    "unmasked": 0.5217391304347827,
    "sizeOurs": "136×50",
+   "sizeFigma": "138×50",
    "causeClass": "renderer"
   },
   "button :: Variant=Secondary, Size=Large, State=Default": {
@@ -1003,6 +1133,7 @@
    "masked": 0,
    "unmasked": 1.620180475799836,
    "sizeOurs": "208×90",
+   "sizeFigma": "212×92",
    "causeClass": "renderer"
   },
   "button :: Variant=Danger, Size=Medium, State=Default": {
@@ -1010,6 +1141,7 @@
    "masked": 5.49645390070922,
    "unmasked": 4.183400267737617,
    "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
    "causeClass": "renderer"
   },
   "button :: Variant=Danger, Size=Small, State=Default": {
@@ -1017,6 +1149,7 @@
    "masked": 1.8479776847977685,
    "unmasked": 1.3043478260869565,
    "sizeOurs": "136×50",
+   "sizeFigma": "138×50",
    "causeClass": "renderer"
   },
   "button :: Variant=Danger, Size=Large, State=Default": {
@@ -1024,6 +1157,7 @@
    "masked": 5.191054502369669,
    "unmasked": 5.173297785069729,
    "sizeOurs": "208×90",
+   "sizeFigma": "212×92",
    "causeClass": "renderer"
   },
   "button :: Variant=Ghost, Size=Medium, State=Default": {
@@ -1031,6 +1165,7 @@
    "masked": 0,
    "unmasked": 1.0876840696117804,
    "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
    "causeClass": "renderer"
   },
   "button :: Variant=Ghost, Size=Small, State=Default": {
@@ -1038,6 +1173,7 @@
    "masked": 0,
    "unmasked": 0.5217391304347827,
    "sizeOurs": "136×50",
+   "sizeFigma": "138×50",
    "causeClass": "renderer"
   },
   "button :: Variant=Ghost, Size=Large, State=Default": {
@@ -1045,6 +1181,7 @@
    "masked": 0,
    "unmasked": 1.620180475799836,
    "sizeOurs": "208×90",
+   "sizeFigma": "212×92",
    "causeClass": "renderer"
   },
   "button :: Variant=Primary, Size=Medium, State=Hover": {
@@ -1052,6 +1189,7 @@
    "masked": 5.49645390070922,
    "unmasked": 4.183400267737617,
    "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
    "causeClass": "renderer"
   },
   "button :: Variant=Secondary, Size=Medium, State=Hover": {
@@ -1059,6 +1197,7 @@
    "masked": 5.304373522458629,
    "unmasked": 4.091365461847389,
    "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
    "causeClass": "renderer"
   },
   "button :: Variant=Danger, Size=Medium, State=Hover": {
@@ -1066,6 +1205,7 @@
    "masked": 5.49645390070922,
    "unmasked": 4.183400267737617,
    "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
    "causeClass": "renderer"
   },
   "button :: Variant=Ghost, Size=Medium, State=Hover": {
@@ -1073,6 +1213,7 @@
    "masked": 0,
    "unmasked": 1.0876840696117804,
    "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
    "causeClass": "renderer"
   },
   "button :: Variant=Primary, Size=Medium, State=Focus Visible": {
@@ -1080,6 +1221,7 @@
    "masked": 31.58783783783784,
    "unmasked": 22.058080808080806,
    "sizeOurs": "180×88",
+   "sizeFigma": "174×78",
    "causeClass": "design"
   },
   "button :: Variant=Secondary, Size=Medium, State=Focus Visible": {
@@ -1087,6 +1229,7 @@
    "masked": 30.818318318318315,
    "unmasked": 21.5530303030303,
    "sizeOurs": "180×88",
+   "sizeFigma": "174×78",
    "causeClass": "design"
   },
   "button :: Variant=Danger, Size=Medium, State=Focus Visible": {
@@ -1094,6 +1237,7 @@
    "masked": 31.58783783783784,
    "unmasked": 22.058080808080806,
    "sizeOurs": "180×88",
+   "sizeFigma": "174×78",
    "causeClass": "design"
   },
   "button :: Variant=Ghost, Size=Medium, State=Focus Visible": {
@@ -1101,6 +1245,7 @@
    "masked": 30.893393393393392,
    "unmasked": 21.603535353535353,
    "sizeOurs": "180×88",
+   "sizeFigma": "174×78",
    "causeClass": "design"
   },
   "button :: Variant=Primary, Size=Medium, State=Disabled": {
@@ -1108,6 +1253,7 @@
    "masked": 5.4816784869976365,
    "unmasked": 4.124832663989291,
    "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
    "causeClass": "renderer"
   },
   "button :: Variant=Secondary, Size=Medium, State=Disabled": {
@@ -1115,6 +1261,7 @@
    "masked": 0,
    "unmasked": 1.037483266398929,
    "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
    "causeClass": "renderer"
   },
   "button :: Variant=Danger, Size=Medium, State=Disabled": {
@@ -1122,6 +1269,7 @@
    "masked": 5.4816784869976365,
    "unmasked": 4.124832663989291,
    "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
    "causeClass": "renderer"
   },
   "button :: Variant=Ghost, Size=Medium, State=Disabled": {
@@ -1129,6 +1277,7 @@
    "masked": 0,
    "unmasked": 1.037483266398929,
    "sizeOurs": "164×72",
+   "sizeFigma": "166×70",
    "causeClass": "renderer"
   },
   "checkbox :: Value=Unchecked, Size=Medium": {
@@ -1136,6 +1285,7 @@
    "masked": 1.126938333934367,
    "unmasked": 2.6740433379437527,
    "sizeOurs": "480×72",
+   "sizeFigma": "482×72",
    "causeClass": "renderer"
   },
   "checkbox :: Value=Unchecked, Size=Small": {
@@ -1143,6 +1293,7 @@
    "masked": 0.8843666793457587,
    "unmasked": 2.625410220346929,
    "sizeOurs": "472×72",
+   "sizeFigma": "474×72",
    "causeClass": "renderer"
   },
   "checkbox :: Value=Checked, Size=Medium": {
@@ -1150,6 +1301,7 @@
    "masked": 0.6581319870176704,
    "unmasked": 2.524204702627939,
    "sizeOurs": "480×72",
+   "sizeFigma": "482×72",
    "causeClass": "renderer"
   },
   "checkbox :: Value=Checked, Size=Small": {
@@ -1157,6 +1309,7 @@
    "masked": 0.5420311905667554,
    "unmasked": 2.5199249882794184,
    "sizeOurs": "472×72",
+   "sizeFigma": "474×72",
    "causeClass": "renderer"
   },
   "checkbox :: Value=Indeterminate, Size=Medium": {
@@ -1164,6 +1317,7 @@
    "masked": 0.5138838802740714,
    "unmasked": 2.4781005071461504,
    "sizeOurs": "480×72",
+   "sizeFigma": "482×72",
    "causeClass": "renderer"
   },
   "checkbox :: Value=Indeterminate, Size=Small": {
@@ -1171,6 +1325,7 @@
    "masked": 0.3898820844427539,
    "unmasked": 2.4730426629160807,
    "sizeOurs": "472×72",
+   "sizeFigma": "474×72",
    "causeClass": "renderer"
   }
  }
