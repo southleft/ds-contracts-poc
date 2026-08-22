@@ -15,6 +15,12 @@
  * could not see (all cards are named skips, e.g. file-inaccessible-403) are
  * WARNED by name, not failed — a lane the instrument cannot reach must stay
  * visibly open, but it is not a regression.
+ *
+ * A lane listed under RATCHET.json `advisory` (a floor the owner holds ABOVE
+ * the headless count, by recorded decision) is also WARNED by name rather than
+ * failed — but only while it sits between its measured headless count and its
+ * floor. Below the measured count it fails (regression); at or above the floor
+ * it fails too, because the advisory is then stale and must be removed.
  */
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
@@ -37,6 +43,23 @@ if (!ratchet) {
 }
 
 const floors = ratchet?.floors ?? {};
+// ADVISORY LANES — a floor the owner has DECIDED to hold ABOVE the headless
+// count (RATCHET.json `advisory.<lane>`, with the measurement and the
+// decision written into the file). The floor is untouched and the bridge
+// lanes still enforce it. Here, the below-floor verdict is printed as a named
+// WARNING instead of an error: this script runs in the REQUIRED fast lane, and
+// a gate that is red by standing decision is red forever, which hides every
+// other regression behind the one everyone has learned to ignore.
+//
+// It is not a waiver. The lane still FAILS when its headless count drops
+// below `headlessPassesMeasured` (a real regression), when `floorHeldAt` no
+// longer matches the floor (moved without revisiting the entry), and the
+// moment the lane MEETS its floor headlessly — then the entry is stale and is
+// refused until it is deleted, so enforcement resumes on its own.
+const advisory = ratchet?.advisory ?? {};
+if (advisory && typeof advisory !== "object") {
+  errors.push(`RATCHET.json advisory must be an object keyed by lane`);
+}
 const lanes = new Set(Object.keys(floors));
 if (existsSync(VT)) {
   for (const d of readdirSync(VT, { withFileTypes: true })) {
@@ -134,11 +157,45 @@ for (const lane of [...lanes].sort()) {
   }
 
   const floor = floors[lane];
+  const adv = Object.prototype.hasOwnProperty.call(advisory, lane) ? advisory[lane] : null;
+  if (adv !== null) {
+    const bad = [];
+    if (!adv || typeof adv !== "object") bad.push("entry is not an object");
+    else {
+      if (typeof floor !== "number") bad.push("lane has no floor to hold");
+      if (adv.floorHeldAt !== floor) bad.push(`floorHeldAt ${adv.floorHeldAt} != floors.${lane} ${floor} — the floor moved without revisiting this entry`);
+      if (typeof adv.headlessPassesMeasured !== "number") bad.push("headlessPassesMeasured must be a number");
+      if (typeof adv.reason !== "string" || adv.reason.trim() === "") bad.push("reason must be a non-empty string");
+      if (typeof adv.since !== "string") bad.push("since must be a date string");
+    }
+    if (bad.length > 0) {
+      errors.push(`${lane}: RATCHET.json advisory.${lane} is invalid — ${bad.join("; ")}`);
+    }
+  }
   if (scored === 0) {
     const reasons = [...skipReasons.entries()].map(([r, n]) => `${r}×${n}`).join(", ");
     warns.push(`${lane}: all ${files.length} cards are named skips (${reasons}) — lane unreachable headlessly, floor not enforced`);
   } else if (typeof floor === "number" && passed < floor) {
-    errors.push(`${lane}: headless pass-count ${passed} < RATCHET floor ${floor}`);
+    if (adv && typeof adv === "object" && typeof adv.headlessPassesMeasured === "number" && adv.floorHeldAt === floor) {
+      if (passed < adv.headlessPassesMeasured) {
+        errors.push(
+          `${lane}: headless pass-count ${passed} < ${adv.headlessPassesMeasured} measured when RATCHET advisory.${lane} was recorded (${adv.since}) — a regression, not the held floor`,
+        );
+      } else {
+        warns.push(
+          `${lane}: headless pass-count ${passed} < RATCHET floor ${floor} — ADVISORY, not enforced here (RATCHET.json advisory.${lane}, since ${adv.since}; ` +
+            `the floor is held by decision and is still enforced on the bridge instrument). ${adv.reason}`,
+        );
+      }
+    } else {
+      errors.push(`${lane}: headless pass-count ${passed} < RATCHET floor ${floor}`);
+    }
+  } else if (adv !== null) {
+    // The lane meets its floor: the advisory has nothing left to excuse and
+    // must not linger as a standing licence to fall back below it.
+    errors.push(
+      `${lane}: headless pass-count ${passed} >= RATCHET floor ${floor} but RATCHET.json still carries advisory.${lane} — the entry is STALE; delete it so the floor is enforced again`,
+    );
   } else {
     console.log(`✔ ${lane}: ${passed} headless passes (floor ${typeof floor === "number" ? floor : "none"}, ${scored} scored / ${files.length} cards)`);
   }

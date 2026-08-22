@@ -28,6 +28,7 @@
  */
 import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
+import { recordFreshnessFailures } from './eval-record-check.mjs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
@@ -44,6 +45,16 @@ if ((listed.status ?? -1) !== 0) {
 const registered = listed.stdout.split('\n').map((s) => s.trim()).filter(Boolean);
 
 const record = JSON.parse(readFileSync(path.join(ROOT, 'evals/results.json'), 'utf8'));
+// A record that covers the registry but was measured on a dirty tree, or on
+// another history, is still a self-attestation — refuse it by name.
+{
+  const stale = recordFreshnessFailures(record);
+  if (stale.length) {
+    console.error(`✖ eval:registry:check — evals/results.json is not a clean-tree measurement on this history:`);
+    for (const f of stale) console.error(`  - ${f}`);
+    process.exit(1);
+  }
+}
 const rows = record.results.map((r) => r.id);
 const rowSet = new Set(rows);
 const regSet = new Set(registered);

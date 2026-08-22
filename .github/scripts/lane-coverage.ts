@@ -19,6 +19,12 @@
  *      `steps.setup.outcome == 'success'` guard — without it, GitHub stops the
  *      job at the first red gate and hides every gate behind it, which is the
  *      failure mode the lanes were explicitly shaped to avoid
+ *   5. a member of a COMPOSITE script (a body that is only
+ *      `npm run a && npm run b …`, e.g. `maintain`) that no lane runs and no
+ *      EXCLUDED entry names — the suffix regex cannot see `functional:flowbite`
+ *      or `parity:flowbite`, but "npm run maintain is green" is a team claim,
+ *      so every member is a gate whatever its name, and the COMPOSITE COVERAGE
+ *      table proves the local set and the CI set are the same set
  *
  * FALSIFICATION. Delete any gate step from a workflow → (1) fires. Rename a
  * step's script → (2) fires. Drop an `if:` guard → (4) fires. There is no way
@@ -39,6 +45,9 @@ const NAMED_GATES = new Set([
   "dagger:census",
   "site:build",
   "parity",
+  // the team gate and its Figma-token half — composites, expanded below
+  "maintain",
+  "maintain:visual",
 ]);
 // `check` unanchored to a separator on purpose: the 33 spell it three ways —
 // `mint:check`, `plugin:ui-check`, `core:browser-check`. An earlier cut of this
@@ -46,6 +55,19 @@ const NAMED_GATES = new Set([
 // coverage census while still printing a confident "33".
 const isGate = (name: string) =>
   /(check|:fresh)$/.test(name) || NAMED_GATES.has(name);
+
+/**
+ * A composite script is a body that is NOTHING BUT a `&&` chain of
+ * `npm run <x>` — `maintain` is the one this was written for. Returns the
+ * member names, or null when the body carries anything else (a composite that
+ * also runs tsx/node inline is a gate in its own right and is judged by name).
+ */
+const COMPOSITE_RE =
+  /^\s*npm run [A-Za-z0-9:_-]+(?:\s*&&\s*npm run [A-Za-z0-9:_-]+)*\s*$/;
+const parseComposite = (body: string): string[] | null => {
+  if (!COMPOSITE_RE.test(body)) return null;
+  return [...body.matchAll(/npm run ([A-Za-z0-9:_-]+)/g)].map((m) => m[1]!);
+};
 
 /**
  * Gate-shaped scripts NO lane runs — each with the reason, so that "not in CI"
@@ -94,6 +116,16 @@ const EXCLUDED: Record<string, string> = {
     "Subsumed by console-loop:all:evidence:check (fast lane) — see console-loop:evidence:check.",
   "root:console-loop:tailwind:evidence:check":
     "Subsumed by console-loop:all:evidence:check (fast lane) — see console-loop:evidence:check.",
+  "root:extract:figma:visual:catalog":
+    "The Figma half of `npm run maintain:visual`: run.ts --summary fetches Figma's own PNG of every " +
+    "variant through the images API with FIGMA_TOKEN (figmaToken() in extract/fidelity-matrix/scripts/env.ts " +
+    "— env or .env.local) and keeps them in the gitignored extract/figma/visual-parity/out/_cache; on a " +
+    "clean clone with no cache it exits 1 with 'FIGMA_TOKEN not found'. `gh secret list` showed NO " +
+    "repository secret on 2026-08-22, so a lane step would be a guaranteed red wearing a contributor's " +
+    "name. It joins catalog-visual.yml the day a FIGMA_TOKEN secret exists (env: FIGMA_TOKEN: " +
+    "${{ secrets.FIGMA_TOKEN }} on the step). The token-free half — subject ≡ contract figma anchors " +
+    "(extract:figma:visual:anchors) — runs in the fast lane, and the committed baseline.json is what " +
+    "the local run compares against.",
   "root:fidelity:uui:fresh":
     "Byte-compares renders/fidelity.json against a re-derivation whose kernel runs canvas drawImage " +
     "resampling inside Chromium, so its byte-identity across OSes is UNVERIFIED (catalog-visual keeps " +
@@ -295,6 +327,19 @@ const validateReportingJobs = (
 };
 
 if (process.argv.includes("--self-test")) {
+  const chain = parseComposite(
+    "npm run a:check && npm run b && npm run c:fresh",
+  );
+  const mixed = parseComposite("npm run a:check && tsx scripts/b.ts");
+  const single = parseComposite("npm run only");
+  if (
+    JSON.stringify(chain) !== JSON.stringify(["a:check", "b", "c:fresh"]) ||
+    mixed !== null ||
+    JSON.stringify(single) !== JSON.stringify(["only"])
+  )
+    throw new Error(
+      `composite parser falsification failed: ${JSON.stringify({ chain, mixed, single })}`,
+    );
   const guard = "steps.setup.outcome == 'success'";
   const bootstrap = (): Step[] => [
     { uses: CHECKOUT_ACTION },
@@ -403,7 +448,7 @@ if (process.argv.includes("--self-test")) {
     );
   }
   console.log(
-    "✔ lane coverage self-test: valid bootstrap/control passes; second unguarded job, missing/duplicate setup, pre-setup run/action, and unguarded post-setup action fail",
+    "✔ lane coverage self-test: composite parser accepts a pure npm-run chain and refuses a mixed body; valid bootstrap/control passes; second unguarded job, missing/duplicate setup, pre-setup run/action, and unguarded post-setup action fail",
   );
   process.exit(0);
 }
@@ -496,12 +541,89 @@ for (const file of workflows) {
 // (1) every gate-shaped script in the root and every configured workspace is
 // in a lane or named as excluded. Keys are package-qualified so identically
 // named workspace gates cannot collapse into one apparently-covered entry.
+// Composite scripts (`npm run a && npm run b …`) are expanded to their
+// members, transitively, within their own manifest. Every leaf is a gate BY
+// MEMBERSHIP regardless of its name, so `maintain` being green locally and the
+// lanes being green are provably the same set of commands.
+interface Composite {
+  key: string;
+  entry: ManifestEntry;
+  members: string[]; // direct members — script names in the same manifest
+  leaves: string[]; // transitive non-composite members — qualified keys
+}
+const composites = new Map<string, Composite>();
+for (const entry of manifestEntries)
+  for (const [name, body] of Object.entries(entry.scripts)) {
+    const members = parseComposite(body);
+    if (members)
+      composites.set(scriptKey(entry, name), {
+        key: scriptKey(entry, name),
+        entry,
+        members,
+        leaves: [],
+      });
+  }
+const expandLeaves = (key: string, trail: string[] = []): string[] => {
+  const composite = composites.get(key);
+  if (!composite) return [key];
+  if (trail.includes(key)) {
+    problems.push(
+      `composite script ${key} recurses through ${[...trail, key].join(" → ")}`,
+    );
+    return [];
+  }
+  const leaves: string[] = [];
+  for (const member of composite.members) {
+    const memberKey = scriptKey(composite.entry, member);
+    if (!allScripts.has(memberKey)) {
+      problems.push(
+        `composite script ${key} runs \`npm run ${member}\` — no such script in ` +
+          `${composite.entry.qualifier}'s package.json`,
+      );
+      continue;
+    }
+    for (const leaf of expandLeaves(memberKey, [...trail, key]))
+      if (!leaves.includes(leaf)) leaves.push(leaf);
+  }
+  return leaves;
+};
+for (const composite of composites.values())
+  composite.leaves = expandLeaves(composite.key);
+// A composite is a GATE composite when it is a named gate itself or when any
+// member is gate-shaped (directly or as a gate composite). `build` is
+// `tokens && schema && generate` — a generator alias, not a gate; listing its
+// members as unwatched gates would be the false-red the lanes refuse to cause.
+const gateComposites = new Set<string>();
+const isGateComposite = (key: string, trail: string[] = []): boolean => {
+  const composite = composites.get(key);
+  if (!composite || trail.includes(key)) return false;
+  if (gateComposites.has(key)) return true;
+  const named = isGate(key.slice(composite.entry.qualifier.length + 1));
+  const viaMember = composite.members.some((member) => {
+    const memberKey = scriptKey(composite.entry, member);
+    return isGate(member) || isGateComposite(memberKey, [...trail, key]);
+  });
+  if (named || viaMember) gateComposites.add(key);
+  return named || viaMember;
+};
+for (const key of composites.keys()) isGateComposite(key);
+const compositeMembers = new Set(
+  [...gateComposites].flatMap((key) => composites.get(key)!.leaves),
+);
+
+// A composite is judged through its leaves (the COMPOSITE COVERAGE table),
+// never as a step of its own — no lane runs `npm run maintain`; the lanes run
+// its members, and that is the claim being checked.
 const gates = [...allScripts.entries()]
-  .filter(([, { name }]) => isGate(name))
+  .filter(
+    ([key, { name }]) =>
+      !composites.has(key) && (isGate(name) || compositeMembers.has(key)),
+  )
   .sort(([a], [b]) => a.localeCompare(b));
 const uncovered: string[] = [];
 console.log(
-  `GATE COVERAGE — ${gates.length} gate-shaped script(s) across ${manifestEntries.length} configured manifest(s)\n`,
+  `GATE COVERAGE — ${gates.length} gate-shaped script(s) across ${manifestEntries.length} configured manifest(s) ` +
+    `(by suffix, by name, or by composite membership)\n`,
 );
 for (const [key] of gates) {
   const lanes = invocations.get(key);
@@ -519,6 +641,45 @@ for (const key of uncovered) {
     `\`${key}\` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — ` +
       `wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why`,
   );
+}
+
+// (5) every composite's leaves are each in a lane or excluded by name, so
+// "npm run <composite> is green" and "the lanes are green" are the same claim.
+// Uncovered leaves were already pushed to `problems` by (1) above.
+console.log(
+  `\nCOMPOSITE COVERAGE — ${composites.size} composite script(s), ${gateComposites.size} gate-shaped; every leaf of a gate composite is a gate by membership\n`,
+);
+for (const composite of [...composites.values()].sort((a, b) =>
+  a.key.localeCompare(b.key),
+)) {
+  if (!gateComposites.has(composite.key)) {
+    console.log(
+      `  · ${composite.key} (${composite.leaves.length} leaf step(s)) alias, not a gate — no gate-shaped member: ${composite.members.join(" && ")}`,
+    );
+    continue;
+  }
+  const laneSet = new Set<string>();
+  const rows: string[] = [];
+  let complete = true;
+  for (const leaf of composite.leaves) {
+    const lanes = invocations.get(leaf);
+    if (lanes) {
+      for (const lane of lanes) laneSet.add(lane);
+      rows.push(`      ✔ ${leaf.padEnd(48)} ${[...lanes].sort().join(" + ")}`);
+    } else if (leaf in EXCLUDED) {
+      rows.push(`      – ${leaf.padEnd(48)} EXCLUDED BY NAME`);
+    } else {
+      complete = false;
+      rows.push(`      ✖ ${leaf.padEnd(48)} NO LANE, NO REASON`);
+    }
+  }
+  const verdict = complete
+    ? `≡ ${[...laneSet].sort().join(" + ") || "(every leaf excluded by name)"}`
+    : "NOT THE SAME SET AS CI";
+  console.log(
+    `  ${complete ? "✔" : "✖"} ${composite.key} (${composite.leaves.length} leaf step(s)) ${verdict}`,
+  );
+  for (const row of rows) console.log(row);
 }
 
 // (3) the exclusion list stays true.
@@ -644,7 +805,7 @@ if (problems.length) {
   process.exit(1);
 }
 console.log(
-  `\n✔ every gate-shaped script is either wired into a lane or excluded with a reason; ` +
+  `\n✔ every gate-shaped script (by suffix, by name, or by composite membership) is either wired into a lane or excluded with a reason; ` +
     `every root/workspace/prefixed lane invocation resolves to its manifest; every present test is CI-reachable; ` +
     `every fast/full executable step reports independently.`,
 );

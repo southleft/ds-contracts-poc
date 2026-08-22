@@ -19,7 +19,7 @@
  */
 import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, symlinkSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { spawnSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import path from 'node:path';
 // COVERAGE ROUND pins (pure modules — no side effects at import):
 import {
@@ -10107,6 +10107,23 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // so when an mui snapshot is minted it should read in-sync BY
       // CONSTRUCTION. A probe could still surface real drift, which throws
       // unconditionally above.
+      // 2026-08-22: tailwind/kbd JOINED this list — the first non-mui member,
+      // and it GREW the list, which needs a reviewed reason. Kbd landed in
+      // 8afae937 (2026-08-15) and earned its pass in a69ec633 (2026-08-16,
+      // 0.42% AA, compositionOk). It is un-probed because NOTHING pins its
+      // cell: tailwind/framing.json carries bridge-minted C1 pins for the five
+      // original stems only, and canvas-drift/LIVE-SNAPSHOT.json was minted
+      // 2026-08-09, six days before Kbd existed. Foreign lanes pin cells ONLY
+      // through framing.json (the probe returns it whole for any lane that is
+      // not first-party), and both that pin and the snapshot are LIVE facts
+      // read off the Desktop Bridge — the probe's own rule is that they are
+      // never back-derived from committed PNGs or receipts. CI has no bridge
+      // and no Figma token, so this cannot be closed offline: a maintainer
+      // with the bridge must pin kbd's cell in framing.json and re-mint the
+      // tailwind snapshot, at which point kbd reads in-sync (or surfaces real
+      // DRIFT, which throws above) and LEAVES this list. Pinning it here keeps
+      // the gap visible instead of letting a scored pass sit drift-unmeasured
+      // with nothing naming it.
       const wantUnmeasured = [
         'mui/autocomplete',
         'mui/checkbox',
@@ -10115,10 +10132,11 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         'mui/linear-progress',
         'mui/slider',
         'mui/switch',
+        'tailwind/kbd',
       ];
       if (unmeasuredPasses.sort().join(',') !== wantUnmeasured.join(',')) {
         throw new Error(
-          `expected exactly mui's ${wantUnmeasured.length} un-probed passes [${wantUnmeasured.join(', ')}], got [${unmeasuredPasses.join(', ')}]`,
+          `expected exactly the ${wantUnmeasured.length} named un-probed passes [${wantUnmeasured.join(', ')}], got [${unmeasuredPasses.join(', ')}]`,
         );
       }
       // DERIVED, NOT TYPED. This line used to be a hardcoded string and it went
@@ -11997,6 +12015,34 @@ const ONLY = (() => {
   return i > -1 && process.argv[i + 1] ? process.argv[i + 1].split(',') : null;
 })();
 
+// `--record <path>` writes the full-run record somewhere OTHER than
+// evals/results.json. CI uses it: the lane measures into a scratch path and
+// `scripts/eval-record-check.mjs <path>` compares that measurement row-by-row
+// against the committed record, so a committed "N/N" can no longer be a
+// self-attestation — it has to be what CI reproduced (2026-08-22: the
+// committed file said 225/225 while five consecutive CI runs said 222→214).
+const RECORD_PATH = (() => {
+  const i = process.argv.indexOf('--record');
+  return i > -1 && process.argv[i + 1] ? path.resolve(process.argv[i + 1]) : path.join(ROOT, 'evals', 'results.json');
+})();
+
+// Provenance stamped into every full-run record: which commit the suite ran
+// on and whether the tree was dirty. The readers (docs:check,
+// eval:registry:check, eval:record:check) refuse a dirty-tree record and a
+// record from a commit that is not an ancestor of HEAD.
+function recordProvenance(): { commit: string; dirty: boolean; recordedAt: string } {
+  const git = (args: string): string => {
+    try {
+      return execFileSync('git', args.split(' '), { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+    } catch {
+      return '';
+    }
+  };
+  const commit = git('rev-parse HEAD') || 'unknown';
+  const dirty = git('status --porcelain --untracked-files=no') !== '';
+  return { commit, dirty, recordedAt: new Date().toISOString().slice(0, 10) };
+}
+
 // `--list-ids` prints every REGISTERED case id and exits without running one.
 // It exists so a gate can assert that evals/results.json carries a row per
 // registered case. The runner writes one row per case it runs, so the record
@@ -12028,10 +12074,15 @@ const passed = results.filter((r) => r.pass).length;
 if (ONLY) {
   console.log(`\n${passed}/${results.length} evals passed — SUBSET run (--only ${ONLY.join(',')}); evals/results.json NOT written`);
 } else {
+  const provenance = recordProvenance();
+  mkdirSync(path.dirname(RECORD_PATH), { recursive: true });
   writeFileSync(
-    path.join(ROOT, 'evals', 'results.json'),
-    JSON.stringify({ passed, total: results.length, results }, null, 2) + '\n',
+    RECORD_PATH,
+    JSON.stringify({ passed, total: results.length, ...provenance, results }, null, 2) + '\n',
   );
-  console.log(`\n${passed}/${results.length} evals passed — evals/results.json`);
+  console.log(
+    `\n${passed}/${results.length} evals passed — ${path.relative(ROOT, RECORD_PATH)} ` +
+      `(commit ${provenance.commit.slice(0, 8)}${provenance.dirty ? ', DIRTY tree — this record cannot be committed as the suite result' : ''})`,
+  );
 }
 process.exit(passed === results.length ? 0 : 1);

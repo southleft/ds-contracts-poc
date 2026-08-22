@@ -48,12 +48,13 @@
 #     home is the scheduled workflow, not the PR lane.
 #
 #   · npm run build + `git diff --exit-code` (generated output is
-#     committed-fresh) — measured byte-inert on macOS/arm64/node 20.19.4 at this
-#     commit, but NOT verified on linux, and a false red here would be a
-#     generator-vs-platform difference wearing a contributor's name. Left out
-#     until someone confirms it on ubuntu. Determinism itself is not unguarded:
-#     the eval suite's C1-determinism family regenerates in a scratch copy and
-#     byte-compares.
+#     committed-fresh) — an earlier cut of this comment called it "measured
+#     byte-inert on macOS/arm64". It was not: on 2026-08-22 both committed
+#     contract.schema.json copies were eleven days behind the Zod document.
+#     The freshness claim now has a gate of its own — `schema:fresh`
+#     (scripts/schema-fresh-check.ts, fast lane) emits the JSON Schema in
+#     memory and refuses when either committed copy differs. Determinism is
+#     separately covered by the C1-determinism eval family.
 #
 #   · conformance / conformance:capture, extract:figma:gauntlet:live*,
 #     extract:figma:visual, extract:figma:rest, extract:figma:mcp,
@@ -228,9 +229,17 @@ jobs:
       # ----------------------------------------------------- the eval suite
       # Longest gate by a wide margin. It runs the REAL pipeline in a scratch
       # copy of the repo (evals/.scratch) per case.
-      - name: eval (the full deterministic suite)
+      # The suite MEASURES into a scratch record (evals/.ci/ is gitignored) and
+      # the next step compares it row-by-row against the committed
+      # evals/results.json — CI's number and the committed number must be the
+      # same number, named per case when they are not. `npm run eval` keeps its
+      # exit-code semantics: any red case is still a red step on its own.
+      - name: eval (the full deterministic suite, recorded to a scratch path)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run eval
+        run: mkdir -p evals/.ci && npm run eval -- --record evals/.ci/results.json
+      - name: eval record compare (CI's measurement vs the committed evals/results.json, row by row)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: node scripts/eval-record-check.mjs evals/.ci/results.json
 
       # ------------------------------------------------- engine + plugin
       - name: plugin:check (engine bundle + every plugin flow vs the mocked canvas)
@@ -240,6 +249,15 @@ jobs:
       - name: plugin:ui-check (the packaged ui.html driven in real Chrome)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run plugin:ui-check
+      - name: functional:flowbite (maintain — authored Flowbite contracts render, hydrate, and flip state in real Chromium)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run functional:flowbite
+      - name: parity:flowbite (maintain — authored vs code-captured Flowbite contracts; receipt date only moves when the body does)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run parity:flowbite
+      - name: generated:fresh (every committed examples/<lib>/storybook generated tree is byte-identical to a re-emission)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run generated:fresh
 
       - name: paste:check (contract → CLI bundle → paste door, both kits)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}

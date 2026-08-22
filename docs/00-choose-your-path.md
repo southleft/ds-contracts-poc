@@ -108,7 +108,7 @@ in your repo — plus the contract that produced them, in the same change.
   a 599-variant community kit (best set 98.0%, worst 81.2%); the
   canvas→code→canvas round trip **closes on 15 of 15** components with every
   one of 36,287 facts classified rather than dropped in silence; and the
-  generate step is **byte-identical on any machine** — 266 generated files
+  generate step is **byte-identical on any machine** — 291 generated files
   hashed against a golden manifest, no model in the path.
 - **What it costs** ([23](23-known-limitations.md)): only the sets you import
   exist — the kit's un-imported sets do not appear as low scores, they do not

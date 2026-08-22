@@ -91,3 +91,6 @@ demo/proposed/
 demo/generated/
 demo/from-contracts/
 .playwright-cli/
+
+# CI-measured eval record (compared against the committed evals/results.json by eval:record:check)
+evals/.ci/

@@ -207,6 +207,12 @@ jobs:
       - name: docs:check (every number and link the docs quote, re-derived)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run docs:check
+      - name: eval:record:check (evals/results.json was MEASURED on a clean ancestor commit, not asserted)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run eval:record:check
+      - name: schema:fresh (both committed contract.schema.json copies match an in-memory emission of the Zod document)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run schema:fresh
 
       - name: test v1 definition gate falsifications
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
@@ -435,6 +441,24 @@ jobs:
       - name: exact-proposal:check (strict proposal refuses legacy and semantic ambiguity)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run exact-proposal:check
+      - name: string-boolean-coercion:check (maintain — a string "true" never becomes a boolean property)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run string-boolean-coercion:check
+      - name: token-set-prune:check (maintain — pruning a token set drops nothing a contract still binds)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run token-set-prune:check
+      - name: flowbite-bundle-fresh:check (maintain — the committed tailwind bundle is byte-identical to a rebuild)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run flowbite-bundle-fresh:check
+      - name: flowbite-dump-propose:check (maintain — the fixture Flowbite dumps still propose the recorded contracts)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run flowbite-dump-propose:check
+      - name: extract:figma:visual:anchors (maintain — visual-parity subjects match the contracts' figma anchors; file-only, no token)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:figma:visual:anchors
+      - name: visual-truth:report:fresh (visual-truth REPORT.md re-renders byte-identically from its committed scorecards)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run visual-truth:report:fresh
 
       # The TOKEN half of `npm run parity`, split out so it can be automated.
       # parity itself is excluded from every lane (it needs a snapshot younger
