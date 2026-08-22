@@ -32,7 +32,7 @@
      "paddingBottom": "space/inset-y/sm"
     },
     "fill": {
-     "hex": "#000000",
+     "hex": "000000",
      "alpha": 0.05
     },
     "children": [

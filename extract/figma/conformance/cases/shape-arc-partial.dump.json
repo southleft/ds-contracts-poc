@@ -33,7 +33,7 @@
       "name": "a",
       "type": "ELLIPSE",
       "fill": {
-       "hex": "#12b76a"
+       "hex": "12b76a"
       },
       "shape": {
        "kind": "ellipse",

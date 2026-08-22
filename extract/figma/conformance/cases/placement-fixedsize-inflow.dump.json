@@ -33,7 +33,7 @@
       "name": "a",
       "type": "FRAME",
       "fill": {
-       "hex": "#12b76a"
+       "hex": "12b76a"
       },
       "fixedSize": {
        "width": 24,

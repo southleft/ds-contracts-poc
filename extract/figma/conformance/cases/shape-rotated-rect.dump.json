@@ -33,7 +33,7 @@
       "name": "a",
       "type": "RECTANGLE",
       "fill": {
-       "hex": "#12b76a"
+       "hex": "12b76a"
       },
       "shape": {
        "kind": "rect",

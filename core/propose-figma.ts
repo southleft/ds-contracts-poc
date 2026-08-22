@@ -1013,6 +1013,11 @@ export interface FigmaProposalResult {
    *  the child is guessed). Register them alongside the proposal so the
    *  emitters resolve the refs; replace each by importing the real child set. */
   childStubs?: Array<Record<string, unknown>>;
+  /** The base contract id this proposal was suffixed PAST (a session-claimed
+   *  holder with contradicting key evidence). Absent when the id is the
+   *  plain stamped/name-derived one. proposeBatchFromDump names the
+   *  collision at batch level when the holder is a sibling set. */
+  idSuffixedFrom?: string;
 }
 
 export type ExactProposalRefusalCode =
@@ -1720,11 +1725,16 @@ function attachByProp(holder: Record<string, unknown>, byProp: ByPropCollector):
  *  and mechanically invertible to Figma's RGBA — rgba() would satisfy only
  *  the CSS surfaces and break the minted tree's DTCG typing. */
 export const paintCssHex = (p: { hex?: string; alpha?: number }): string => {
-  if (p.alpha === undefined || p.alpha >= 1) return `#${p.hex}`;
+  // The dump spells `hex` BARE (`rrggbb`, dump.plugin.js / rest/map.ts). A
+  // producer that already prefixed `#` used to yield `##rrggbb` — a value the
+  // token schema swallowed and the literal schema refuses (the whole set was
+  // then skipped). One spelling in, one out.
+  const hex = (p.hex ?? '').replace(/^#/, '');
+  if (p.alpha === undefined || p.alpha >= 1) return `#${hex}`;
   const byte = Math.round(Math.max(0, Math.min(1, p.alpha)) * 255)
     .toString(16)
     .padStart(2, '0');
-  return `#${p.hex}${byte}`;
+  return `#${hex}${byte}`;
 };
 
 function unifyPaint(
@@ -2632,6 +2642,19 @@ function liftUnboundShapePaintsToLiterals(
   ctx: Ctx,
   where: string,
 ) {
+  // A set this pipeline did NOT draw keeps the Path A contract: every raw
+  // literal is MINTED by usage site (zero UNBOUND leftovers, the minted leaf
+  // resolves to the dump's value). The literal recovery below is the
+  // stamped-set door only (FC-DUMP-PROPOSE-SHAPE-PAINT was cut for the
+  // ToggleSwitch thumb this pipeline drew); on a foreign dump it turned the
+  // Tooltip pointer's minted fill into a literal and left the `fill`
+  // UNBOUND entry behind.
+  if (!ctx.drawnByThisPipeline) return;
+  const unboundProperty: Record<string, string> = {
+    'background-color': 'fill',
+    'border-color': 'stroke',
+    'border-width': 'strokeWeight',
+  };
   const lift = (
     cssProp: string,
     pick: (n: DumpNode) => string | undefined,
@@ -2694,6 +2717,8 @@ function liftUnboundShapePaintsToLiterals(
         (o) => !(o.nodePath === where && o.cssProperty === cssProp),
       );
     }
+    // Carried as a literal — no longer an UNBOUND leftover.
+    ctx.unbound = ctx.unbound.filter((u) => !(u.nodePath === where && u.property === unboundProperty[cssProp]));
     ctx.notes.push(
       `${where}: unbound ${cssProp} on a dump v1.3 shape part carried as ${distinct.length === 1 ? 'literal' : 'literalsByProp'}, not a dump-slug mint`,
     );
@@ -2725,6 +2750,10 @@ function liftUnboundTextPaintsToLiterals(
   ctx: Ctx,
   where: string,
 ) {
+  // Stamped-set door only — a foreign dump's unbound text fill is MINTED by
+  // usage site (Path A: zero UNBOUND leftovers, `text color minted by usage
+  // site`); see liftUnboundShapePaintsToLiterals.
+  if (!ctx.drawnByThisPipeline) return;
   const pick = (n: DumpNode): string | undefined => {
     const paint = n.text?.fillVar ? { var: n.text.fillVar } : n.fill;
     if (paint?.hex !== undefined && paint.var === undefined) return paintCssHex(paint);
@@ -2747,6 +2776,8 @@ function liftUnboundTextPaintsToLiterals(
       (o) => !(o.nodePath === where && o.cssProperty === 'color'),
     );
   }
+  // Carried as a literal — no longer an UNBOUND leftover.
+  ctx.unbound = ctx.unbound.filter((u) => !(u.nodePath === where && u.property === 'text fill'));
   ctx.notes.push(
     `${where}: unbound color on a TEXT node carried as literal, not a dump-slug mint`,
   );
@@ -3959,9 +3990,15 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
   // path (`imported.<set-slug>.label.font-size.{size}`) over the canvas
   // names (`imported/button/root/font-size/{size}`). FC-DUMP-PROPOSE-TYPE-UNPINNED.
   const stampedSize = unifyStampedTextVar(textOcc, (tx) => tx.fontSizeVar, ctx.axes);
-  if (stampedSize !== undefined) {
+  const stampedWeight = stampedSize !== undefined ? unifyStampedTextVar(textOcc, (tx) => tx.fontWeightVar, ctx.axes) : undefined;
+  const sizeVarsVary = new Set(textOcc.map((o) => o.node.text!.fontSizeVar)).size > 1;
+  // ONE size stamp and NO weight stamp (the repo's own pre-v1.22 dumps:
+  // Switch descriptionText) keeps the uniform-sizeVar branch below, whose
+  // fontStyle→corpus inference carries {font.weight.regular}; returning here
+  // minted a dump-slug weight the corpus already spells (design-roundtrip
+  // Switch MISMATCH 1).
+  if (stampedSize !== undefined && (stampedWeight !== undefined || sizeVarsVary)) {
     tokens['font-size'] = stampedSize;
-    const stampedWeight = unifyStampedTextVar(textOcc, (tx) => tx.fontWeightVar, ctx.axes);
     if (stampedWeight !== undefined) tokens['font-weight'] = stampedWeight;
     mintTextChannels(m, tokens, ctx, where, { weight: tokens['font-weight'] === undefined });
     return tokens;
@@ -9700,6 +9737,7 @@ export function proposeFromDump(
     projection,
     ...(mintedTokens ? { mintedTokens } : {}),
     ...(childStubs.length > 0 ? { childStubs } : {}),
+    ...(selfId !== baseSelfId ? { idSuffixedFrom: baseSelfId } : {}),
   };
 }
 
@@ -9800,6 +9838,82 @@ export function proposeBatchFromDump(
   const contractsById = new Map(opts.contractsById ?? []);
   const contractIdByKey = new Map(opts.contractIdByKey ?? []);
   const sessionClaimedIds = new Set(opts.sessionClaimedIds ?? []);
+  // STUBS a sibling set auto-proposed earlier in this batch, with the minted
+  // geometry leaves they reference. A later set whose instance LINKS to one
+  // (componentSetKey/name, via contractsById below) would otherwise ship an
+  // envelope that references a contract only the SIBLING's envelope carries
+  // — the plugin exports one envelope per set and `figma receive` lands them
+  // one at a time, so `generate` on that set alone refuses "no contract in
+  // scope" by name (fill-matrix Badge→Chip, ds.icon). Every envelope stands
+  // alone: the stub and its leaves ride each proposal that references it.
+  type SessionStub = {
+    stub: Record<string, unknown>;
+    fromSet: string;
+    tree: Record<string, unknown>;
+    entries: MintedEntry[];
+  };
+  const sessionStubs = new Map<string, SessionStub>();
+  const importedRefsOf = (c: unknown): string[] => [
+    ...new Set(JSON.stringify(c).match(/\{imported\.[^}"]+\}/g) ?? []),
+  ];
+  const mintSliceFor = (
+    refs: string[],
+    minted: FigmaProposalResult['mintedTokens'],
+  ): { tree: Record<string, unknown>; entries: MintedEntry[] } => {
+    const tree: Record<string, unknown> = {};
+    if (!minted) return { tree, entries: [] };
+    const wanted = new Set(refs);
+    for (const ref of refs) {
+      const path = ref.slice(1, -1).split('.');
+      let leaf: unknown = minted.tree;
+      for (const seg of path) leaf = leaf && typeof leaf === 'object' ? (leaf as Record<string, unknown>)[seg] : undefined;
+      if (leaf === undefined) continue;
+      let cur = tree;
+      for (const seg of path.slice(0, -1)) {
+        cur = (cur[seg] as Record<string, unknown> | undefined) ?? (cur[seg] = {});
+      }
+      cur[path[path.length - 1]] = leaf;
+    }
+    return { tree, entries: minted.entries.filter((e) => wanted.has(e.ref)) };
+  };
+  const componentRefIds = (contract: Record<string, unknown>): string[] => {
+    const ids: string[] = [];
+    const walk = (part: unknown) => {
+      if (!part || typeof part !== 'object') return;
+      const p = part as { component?: { id?: unknown }; parts?: Record<string, unknown> };
+      if (typeof p.component?.id === 'string') ids.push(p.component.id);
+      for (const child of Object.values(p.parts ?? {})) walk(child);
+    };
+    walk((contract.anatomy as { root?: unknown } | undefined)?.root);
+    return [...new Set(ids)];
+  };
+  const attachSiblingStubs = (proposal: DumpBatchResult['proposals'][number]) => {
+    const own = new Set((proposal.childStubs ?? []).map((s) => s.id));
+    for (const id of componentRefIds(proposal.contract)) {
+      if (own.has(id)) continue;
+      const sib = sessionStubs.get(id);
+      if (!sib) continue;
+      proposal.childStubs = [...(proposal.childStubs ?? []), sib.stub];
+      own.add(id);
+      let carried = 0;
+      if (sib.entries.length > 0) {
+        if (!proposal.mintedTokens) proposal.mintedTokens = { tree: {}, count: 0, entries: [] };
+        mergeMintTree(proposal.mintedTokens.tree, JSON.parse(JSON.stringify(sib.tree)) as Record<string, unknown>);
+        const have = new Set(proposal.mintedTokens.entries.map((e) => e.ref));
+        for (const e of sib.entries) {
+          if (have.has(e.ref)) continue;
+          proposal.mintedTokens.entries.push(e);
+          proposal.mintedTokens.count += 1;
+          carried += 1;
+        }
+      }
+      proposal.notes.push(
+        `${proposal.setName}: component ref "${id}" resolved to the STUB sibling set "${sib.fromSet}" auto-proposed earlier in this dump — the stub${
+          carried > 0 ? ` and its ${carried} minted geometry leaves` : ''
+        } ride this proposal's childStubs/mintedTokens too, so the envelope stands alone (identical copies; importing the real "${id}" set replaces both)`,
+      );
+    }
+  };
   const registerSession = (c: Record<string, unknown>, dumpName?: string, isStub = false) => {
     if (typeof c.id !== 'string') return;
     if (isStub && contractsById.has(c.id)) return;
@@ -9855,8 +9969,16 @@ export function proposeBatchFromDump(
     if (name === '_provenance' || !isDumpSet(value)) continue;
     try {
       const proposal = { setName: name, ...proposeFromDump(value, setOpts) };
+      attachSiblingStubs(proposal);
       registerSession(proposal.contract as Record<string, unknown>, name);
-      for (const stub of proposal.childStubs ?? []) registerSession(stub as Record<string, unknown>, undefined, true);
+      for (const stub of proposal.childStubs ?? []) {
+        const id = stub.id;
+        const fresh = typeof id === 'string' && !contractsById.has(id);
+        registerSession(stub as Record<string, unknown>, undefined, true);
+        if (fresh && typeof id === 'string') {
+          sessionStubs.set(id, { stub, fromSet: name, ...mintSliceFor(importedRefsOf(stub), proposal.mintedTokens) });
+        }
+      }
       if (captureGapNote) proposal.notes.unshift(captureGapNote);
       const setDegradations = degradations.filter(
         (d) => d.nodePath === name || d.nodePath.startsWith(`${name}:`),
@@ -9865,6 +9987,18 @@ export function proposeBatchFromDump(
         proposal.notes.unshift(...setDegradations.map(degradationNote));
       }
       const id = (proposal.contract as { id?: unknown }).id;
+      // A set suffixed PAST a sibling of this dump (session-claimed, keys
+      // contradict) is the SAME collision the un-suffixed path names below —
+      // the batch must say so, not just the suffixed proposal's own notes
+      // (CBDS: Phosphor "RadioButton" vs the kit's "Radio button").
+      if (typeof id === 'string' && proposal.idSuffixedFrom !== undefined) {
+        const holder = claimedIds.get(proposal.idSuffixedFrom);
+        if (holder !== undefined) {
+          notes.push(
+            `contract id "${proposal.idSuffixedFrom}" is claimed by two sets in this dump ("${holder}" and "${name}") — their names sanitize to the same id; "${name}" is proposed as "${id}" (deterministic arrival-order suffix, so neither import rebinds the other's child refs); rename one set (or edit one id) before adopting both`,
+          );
+        }
+      }
       if (typeof id === 'string') {
         const holder = claimedIds.get(id);
         if (holder !== undefined) {

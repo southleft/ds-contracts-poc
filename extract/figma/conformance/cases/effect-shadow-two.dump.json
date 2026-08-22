@@ -38,7 +38,7 @@
      {
       "type": "DROP_SHADOW",
       "color": {
-       "hex": "#000000",
+       "hex": "000000",
        "alpha": 0.1
       },
       "offset": {
@@ -50,7 +50,7 @@
      {
       "type": "DROP_SHADOW",
       "color": {
-       "hex": "#000000",
+       "hex": "000000",
        "alpha": 0.05
       },
       "offset": {

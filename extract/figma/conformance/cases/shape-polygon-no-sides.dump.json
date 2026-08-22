@@ -33,7 +33,7 @@
       "name": "a",
       "type": "REGULAR_POLYGON",
       "fill": {
-       "hex": "#12b76a"
+       "hex": "12b76a"
       },
       "shape": {
        "kind": "polygon",
