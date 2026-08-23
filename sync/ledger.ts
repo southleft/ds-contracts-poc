@@ -36,6 +36,16 @@
  *                        byte-compatible with the plugin dump). A designer
  *                        edit does NOT restamp v6, so THIS is what catches
  *                        it once a baseline exists.
+ *   observed.dumpVersion — the dump GRAMMAR (extract/figma/rest/map.ts
+ *                        REST_DUMP_VERSION) the baseline was computed under.
+ *                        Baselines compare only WITHIN a grammar: when the
+ *                        mapper moves, every baseline's bytes move with it and
+ *                        the difference is the instrument, not the canvas.
+ *                        Measured 2026-08-23: the 1.5 → 1.31 move turned 87
+ *                        untouched sets into "designer edit" rows on six
+ *                        scheduled spine runs. An untagged or foreign-grammar
+ *                        baseline is named INCOMPARABLE and never counts as
+ *                        canvas evidence.
  */
 import { canonicalJson, revisionOf } from '../core/contract-provenance.js';
 
@@ -56,6 +66,10 @@ export type RecordProvenance =
 export interface ObservationBaseline {
   /** `dumpv1:<djb2>` over canonicalJson of the set's dump-v1 projection. */
   dumpFingerprint: string;
+  /** The dump grammar (REST_DUMP_VERSION) that produced `dumpFingerprint`.
+   *  Absent on baselines recorded before 2026-08-23 — those are incomparable
+   *  with any current observation and must be re-recorded. */
+  dumpVersion?: string;
   /** Figma REST file `version` at observation time (null when the
    *  observation came from a fixture that carries none). */
   fileVersionId: string | null;
@@ -173,8 +187,11 @@ export function validateRecord(raw: unknown, where: string): LedgerRecord {
       refuse(`${where}.observed.dumpFingerprint`, 'must be a "dumpv1:<digits>" fingerprint');
     if (typeof ob.observedAt !== 'string' || Number.isNaN(Date.parse(ob.observedAt)))
       refuse(`${where}.observed.observedAt`, 'must be an ISO-8601 timestamp');
+    if (ob.dumpVersion !== undefined && (typeof ob.dumpVersion !== 'string' || ob.dumpVersion.length === 0))
+      refuse(`${where}.observed.dumpVersion`, 'must be a non-empty string when present');
     observed = {
       dumpFingerprint: ob.dumpFingerprint,
+      ...(typeof ob.dumpVersion === 'string' ? { dumpVersion: ob.dumpVersion } : {}),
       fileVersionId: optString(ob.fileVersionId, `${where}.observed.fileVersionId`),
       observedAt: ob.observedAt,
     };
@@ -403,10 +420,22 @@ export interface SetObservation {
   stamp: string | null;
   /** Observation-domain fingerprint over the set's dump-v1 projection. */
   dumpFingerprint: string;
+  /** The dump grammar that produced `dumpFingerprint` (REST_DUMP_VERSION). */
+  dumpVersion: string;
   fileVersionId: string | null;
 }
 
 export type CanvasEvidence = 'baseline' | 'stamp' | 'version' | 'none' | 'unobserved';
+
+/** A recorded baseline is comparable with an observation only when both were
+ *  computed under the SAME dump grammar. Untagged (pre-2026-08-23) baselines
+ *  are never comparable — refuse over guess. */
+export function baselineComparableWith(
+  observed: ObservationBaseline | null,
+  obs: Pick<SetObservation, 'dumpVersion'>,
+): boolean {
+  return observed !== null && observed.dumpVersion !== undefined && observed.dumpVersion === obs.dumpVersion;
+}
 
 export interface DriftRow {
   key: string;
@@ -457,7 +486,17 @@ export function classifyRecord(
       );
     }
     const stampChanged = stampComparable && obs.stamp !== record.canvasFingerprint;
-    const baselineComparable = record.observed !== null;
+    // Baselines compare only WITHIN a dump grammar (see the header). A
+    // baseline the current mapper cannot reproduce is named and ignored —
+    // it is evidence about the instrument, never about the canvas.
+    const baselineComparable = baselineComparableWith(record.observed, obs);
+    if (record.observed !== null && !baselineComparable) {
+      notes.push(
+        `observation baseline ${record.observed.dumpFingerprint} was recorded under dump grammar ` +
+          `${record.observed.dumpVersion ?? '(untagged)'} and the mapper now speaks ${obs.dumpVersion} — ` +
+          'incomparable (the instrument moved, not the canvas); re-record it with `sync observe --update`',
+      );
+    }
     const baselineChanged =
       baselineComparable && obs.dumpFingerprint !== record.observed!.dumpFingerprint;
     if (stampChanged) {
@@ -480,7 +519,9 @@ export function classifyRecord(
       // baseline.
       canvasChanged = false;
       canvasEvidence = 'stamp';
-      notes.push('stamp matches; no observation baseline yet (run observe --update to record one)');
+      if (record.observed === null)
+        notes.push('stamp matches; no observation baseline yet (run observe --update to record one)');
+      else notes.push('stamp matches; the baseline above is incomparable until re-recorded');
     } else if (
       record.lastSyncedVersionId !== null &&
       obs.fileVersionId !== null &&

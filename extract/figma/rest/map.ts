@@ -1695,6 +1695,15 @@ function mapNode(
  *  this route, never silent evidence about the design. Plugin dumps and
  *  hand-authored fixtures carry NO captureGaps field → zero new notes there
  *  (byte-identity preserved); nothing keys on dumpVersion comparisons. */
+/** The dump grammar this mapper speaks. Exported so the sync ledger can tag
+ *  every observation baseline with the grammar that produced it
+ *  (sync/ledger.ts): a baseline recorded under one grammar is INCOMPARABLE
+ *  with a fingerprint computed under another — the instrument moved, not the
+ *  canvas. Bump it whenever the projection changes (2026-08-23 finding: the
+ *  1.5 → 1.31 move re-fingerprinted 87 baselines and six scheduled spine runs
+ *  reported them as designer edits). */
+export const REST_DUMP_VERSION = '1.31';
+
 const REST_CAPTURE_GAPS: readonly string[] = [
   'absolute placement on non-shape nodes (dump v1.7): not captured on this route — an out-of-flow FRAME/TEXT (e.g. a corner-pinned badge) re-enters the flow and renders in-line',
   'image fills (dump v1.7 imageFill / v1.9 imageHash): not captured on this route — an IMAGE paint (e.g. an avatar photo) is read as no fill and renders as an empty box',
@@ -1748,8 +1757,8 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
   const provenance: NonNullable<DumpFile['_provenance']> & { captureGaps: string[] } = {
     fileKey: options.fileKey ?? null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.31) for design→contract proposal.',
-    dumpVersion: '1.31',
+    note: `Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v${REST_DUMP_VERSION}) for design→contract proposal.`,
+    dumpVersion: REST_DUMP_VERSION,
     captureGaps: [
       ...(options.variables ? [] : [variablesCaptureGap(variablesUnavailable)]),
       ...REST_CAPTURE_GAPS,

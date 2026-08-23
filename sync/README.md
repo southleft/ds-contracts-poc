@@ -48,6 +48,16 @@ not their own re-serialization.
   (`extract/figma/rest/map.ts`, the mapper built to be byte-compatible with
   the plugin dump). A designer edit does **not** restamp v6 — this baseline is
   what catches it, once `sync observe --update` has recorded one.
+- **`observed.dumpVersion`** tags the baseline with the dump grammar
+  (`REST_DUMP_VERSION` in the mapper) that produced it. Baselines compare
+  **only within a grammar**: when the mapper moves, every baseline's bytes move
+  with it, and that is the instrument, not the canvas. A baseline under another
+  grammar (or an untagged pre-2026-08-23 one) is named *incomparable* and never
+  counts as canvas evidence; `sync:ledger:check` refuses a committed ledger
+  whose baselines do not speak the mapper's current grammar, so a grammar bump
+  must ship with its live re-baseline. Measured 2026-08-23: the 1.5 → 1.31 move
+  shipped without one and six scheduled spine runs reported 87 untouched sets as
+  designer edits.
 
 ## Writers — every sync verb records what it just did
 
@@ -57,7 +67,9 @@ not their own re-serialization.
 | `ds-contracts figma publish` | code→canvas | contractHash per bundled contract at publish time, `pendingApply: true` — the canvas half is pending until a designer applies; cleared by the apply-side record or a confirming `observe --update` |
 | `npm run sync -- record --from-receipt <receipt.json>` | code→canvas | fileKey + setNodeId + v6 from a console-loop generation receipt — the verb the generate loops call after a receipt lands |
 | `npm run sync -- seed` | code→canvas | all committed console-loop receipts (first-party + foreign corpora), provenance `seeded-from-receipts` |
-| `npm run sync:observe -- --update` | (evidence only) | observation baselines for in-sync rows; adopts a post-publish restamp (clearing `pendingApply`, loudly) |
+| `npm run sync:observe -- --update` | (evidence only) | observation baselines for in-sync rows; adopts a post-publish restamp (clearing `pendingApply`, loudly); drops, by name, a baseline under a grammar the mapper no longer speaks on rows it cannot re-baseline |
+| `npm run sync:observe -- --repin id[,id…]` | (code half only) | the contract bytes moved by **bookkeeping** (a schema codemod, an anchor re-point) and the canvas provably did not — the observed stamp equals the ledger's — so `contractHash` is re-pinned to the current bytes and a fresh baseline recorded. **Refuses** any row whose stamp differs, is absent or is incomparable: that row needs `--adopt` or a re-apply, never a quiet re-pin |
+| `npm run sync:observe -- --adopt id[,id…] [--note …]` | canvas→code | the canvas is the truth for these rows: current contract hash + observed stamp + fresh baseline, `pendingApply` cleared, provenance `observe`. The after-merge step of a spine PR, and the record for a write nobody ledgered (a plugin apply, a rebuild whose receipt never reached `sync record`). Explicit ids only — never "all" |
 
 The CLI writers are **opt-in**: they record only when `sync/ledger.json`
 already exists in the cwd (this repo) or `DS_CONTRACTS_SYNC_LEDGER` names a
@@ -148,8 +160,9 @@ transport does the rest.
 ### The scheduled lane (.github/workflows/sync-spine.yml)
 
 Cron every 2 h + `workflow_dispatch`: report-only spine run, drift report
-uploaded as an artifact, **fails visibly** on drift (a red scheduled run IS
-the drift signal). Needs the `FIGMA_TOKEN` repository secret — the owner
+uploaded as an artifact and written to the job summary, **fails visibly** on
+drift (a red scheduled run IS the drift signal). Needs the `FIGMA_TOKEN`
+repository secret — the owner
 configures it; when absent the lane **skips by name** and stays green (a
 missing credential must never impersonate drift). Set the repository variable
 `SYNC_SPINE_OPEN_PR=true` to let the scheduled run open PRs (1 per run,
@@ -161,7 +174,9 @@ eval below.
 
 - `npm run sync:ledger:check` (fast lane) — offline: schema + deterministic
   bytes + every seeded record verified against the receipt it cites
-  (`parity/receipts/console-loop/**` is read-only evidence here) + the
+  (`parity/receipts/console-loop/**` is read-only evidence here) + every
+  baseline tagged with the mapper's current dump grammar (a grammar bump
+  without a live re-baseline refuses here, not on the cron) + the
   committed-fixture drift table classifying all five statuses.
 - eval `sync-ledger-lockfile` (`npm run eval -- --only sync-ledger`) — the
   red tests: hand-edited fingerprint → canvas-ahead naming the component,

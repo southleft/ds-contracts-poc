@@ -14,6 +14,7 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:2497296723",
+        "dumpVersion": "1.31",
         "fileVersionId": "41",
         "observedAt": "2026-08-07T00:00:00.000Z"
       },
@@ -32,6 +33,7 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:3471646910",
+        "dumpVersion": "1.31",
         "fileVersionId": "41",
         "observedAt": "2026-08-07T00:00:00.000Z"
       },
@@ -50,6 +52,7 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:1",
+        "dumpVersion": "1.31",
         "fileVersionId": "41",
         "observedAt": "2026-08-07T00:00:00.000Z"
       },
@@ -68,6 +71,7 @@
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:1",
+        "dumpVersion": "1.31",
         "fileVersionId": "41",
         "observedAt": "2026-08-07T00:00:00.000Z"
       },
