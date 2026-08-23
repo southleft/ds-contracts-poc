@@ -866,7 +866,19 @@ type Unified =
   | { kind: 'none' }
   | { kind: 'ref'; ref: string }
   | { kind: 'per-value'; perValue: PerValueRef }
-  | { kind: 'drift'; detail: string };
+  | { kind: 'drift'; detail: string; boolFn?: BoolAxisFn };
+
+/** FC-DUMP-PROPOSE-BOOL-AXIS-CORRELATION: refs that are a pure function of
+ *  ONE boolean variant axis (both planes bound, one ref per plane). The
+ *  vocabulary cannot bind it as a per-value map — tokensByProp is ENUM-keyed
+ *  (emit-react refuses a boolean prop there) and stylesWhen is literal-only
+ *  — so unifyRefs reports it as a NAMED drift that carries the axis; a
+ *  channel with a literal boolean vocabulary (opacity → stylesWhen) resolves
+ *  the refs and carries the value, naming the identity loss. */
+interface BoolAxisFn {
+  axis: Axis;
+  byValue: { true: string; false: string };
+}
 
 function unifyRefs(
   obs: Array<{ variant: string; path?: string }>,
@@ -949,6 +961,39 @@ function unifyRefs(
         defaultValue: camel(axis.values[0]),
         byValue: Object.fromEntries([...byValue].map(([v, p]) => [camel(v), `{${p}}`])),
       },
+    };
+  }
+  // BOOLEAN axes (FC-DUMP-PROPOSE-BOOL-AXIS-CORRELATION): a true/false axis
+  // is a two-value enum for the purpose of correlation. Eventz field case:
+  // Button roots bind opacity to theme/opacity/default on isDisabled=false
+  // and theme/opacity/disabled on isDisabled=true, and the receipt read
+  // "without correlating to any variant axis" — a FALSE note. The function
+  // is detected here and NAMED with its axis; see BoolAxisFn for why the
+  // per-value binding itself is not proposed.
+  for (const axis of axes) {
+    if (!isBoolAxis(axis.values)) continue;
+    const byValue = new Map<string, string>();
+    let fits = true;
+    for (const o of defined) {
+      const value = axisValuesOf(o.variant)[axis.property]?.trim().toLowerCase();
+      if (value === undefined) {
+        fits = false;
+        break;
+      }
+      const seen = byValue.get(value);
+      if (seen !== undefined && seen !== o.path) {
+        fits = false;
+        break;
+      }
+      byValue.set(value, o.path);
+    }
+    if (!fits || !byValue.has('true') || !byValue.has('false')) continue;
+    const whenFalse = byValue.get('false')!;
+    const whenTrue = byValue.get('true')!;
+    return {
+      kind: 'drift',
+      detail: `bindings differ across variants as a pure function of the BOOLEAN axis "${axis.property}" (false→${whenFalse}, true→${whenTrue}) — tokensByProp is enum-keyed and stylesWhen is literal-only, so the per-value binding is NAMED, not proposed; promote the axis to an enum (or bind one variable) to carry it`,
+      boolFn: { axis, byValue: { true: whenTrue, false: whenFalse } },
     };
   }
   if (!sameDepth) {
@@ -1308,6 +1353,10 @@ interface Ctx {
   swapPreferredValues?: Record<string, DumpPreferredValue[]>;
   /** Set-level BOOLEAN property defaults (dump v1.5). */
   boolDefaults?: Record<string, boolean>;
+  /** Bound fields whose refs are a pure function of one BOOLEAN axis, keyed
+   *  `${where}|${field}` (FC-DUMP-PROPOSE-BOOL-AXIS-CORRELATION) — written by
+   *  unifyField, read by the channels that own a boolean literal vocabulary. */
+  boolFnRefs?: Map<string, BoolAxisFn>;
   /** Set-level SLOT property descriptions (dump v1.18) — the words carrying
    *  what Figma refuses to enforce (min/max/required/restrict). */
   slotDescriptions?: Record<string, string>;
@@ -1662,7 +1711,13 @@ function unifyField(m: Merged, field: string, ctx: Ctx, where: string): UnifiedR
   );
   if (u.kind === 'ref') return u.ref;
   if (u.kind === 'per-value') return u.perValue;
-  if (u.kind === 'drift') ctx.notes.push(`${where} ${field}: ${u.detail}`);
+  if (u.kind === 'drift') {
+    if (u.boolFn) (ctx.boolFnRefs ??= new Map()).set(`${where}|${field}`, u.boolFn);
+    // opacity has a literal boolean vocabulary (stylesWhen) — invertNodeOpacity
+    // writes that channel's receipt, carried or named; every other field is
+    // named here with the axis.
+    if (!(u.boolFn && field === 'opacity')) ctx.notes.push(`${where} ${field}: ${u.detail}`);
+  }
   return undefined;
 }
 
@@ -2363,7 +2418,60 @@ function invertNodeOpacity(
   ctx: Ctx,
   where: string,
 ) {
-  if (m.occ.some((o) => o.node.bound?.opacity)) return; // rides tokens.opacity
+  if (m.occ.some((o) => o.node.bound?.opacity)) {
+    // One ref (or an enum per-value map) rides tokens.opacity; any other
+    // drift was named by unifyField — EXCEPT a pure function of one BOOLEAN
+    // axis (FC-DUMP-PROPOSE-BOOL-AXIS-CORRELATION), which lands here: the
+    // refs resolve through the corpus and the literal-CSS boolean vocabulary
+    // (stylesWhen, inversion 2 below) carries the VALUE; the token IDENTITY
+    // of the true-side variable is the named loss.
+    const fn = ctx.boolFnRefs?.get(`${where}|opacity`);
+    if (!fn) return;
+    // The VALUE is the canvas's own: dump v1.2 writes the rendered node
+    // opacity (< 1) beside the binding, so the carried literal is what was
+    // drawn — never a corpus number reinterpreted (Eventz spells its opacity
+    // variables in Figma's PERCENT, 100/40, while the node renders 0.4). The
+    // resolved variable rides the receipt as corroboration.
+    const plane = (want: 'true' | 'false') =>
+      new Set(
+        m.occ
+          .filter((o) => (axisValuesOf(o.variant)[fn.axis.property] ?? '').trim().toLowerCase() === want)
+          .map((o) => o.node.opacity ?? 1),
+      );
+    const resolve = (path: string): string | undefined => {
+      if (path.includes('{') || !ctx.corpus.has(path)) return undefined;
+      try {
+        return String(ctx.corpus.resolveLiteral(path));
+      } catch {
+        return undefined;
+      }
+    };
+    const slash = (path: string) => path.split('.').join('/');
+    const whenFalse = plane('false');
+    const whenTrue = plane('true');
+    const resolvedTrue = resolve(fn.byValue.true);
+    const names = `"${slash(fn.byValue.false)}" when false, "${slash(fn.byValue.true)}" when true`;
+    if (whenFalse.size === 1 && whenFalse.has(1) && whenTrue.size === 1 && !whenTrue.has(1)) {
+      const value = [...whenTrue][0];
+      const stylesWhen = (holder.stylesWhen as Array<Record<string, unknown>> | undefined) ?? [];
+      stylesWhen.push({ prop: fn.axis.propName, styles: { opacity: String(value) } });
+      holder.stylesWhen = stylesWhen;
+      ctx.notes.push(
+        `${where}: bound opacity is a pure function of the BOOLEAN axis "${fn.axis.property}" (${names}) — carried as stylesWhen { prop: ${fn.axis.propName}, styles: { opacity: ${value} } } from the RENDERED node opacity (dump v1.2${resolvedTrue !== undefined ? `; the variable resolves to ${resolvedTrue}${Number(resolvedTrue) === value * 100 ? ', Figma\'s percent spelling of the same value' : ''}` : ''}); tokensByProp is enum-keyed, so the token IDENTITY of "${slash(fn.byValue.true)}" is NOT carried, its value is (rename story lives here; review)`,
+      );
+      return;
+    }
+    const why =
+      whenFalse.size === 1 && whenFalse.has(1) && whenTrue.size === 1
+        ? 'both planes render opaque'
+        : whenTrue.size === 1 && whenTrue.has(1) && whenFalse.size === 1
+          ? 'the washed-out plane is the FALSE side and stylesWhen cannot express negation'
+          : `the rendered opacity is not one value per plane (false: ${[...whenFalse].join('/')}; true: ${[...whenTrue].join('/')})`;
+    ctx.notes.push(
+      `${where}: bound opacity is a pure function of the BOOLEAN axis "${fn.axis.property}" (${names}) but ${why} — NAMED, not proposed (review)`,
+    );
+    return;
+  }
   const occ = m.occ.map((o) => ({ variant: o.variant, value: o.node.opacity ?? 1 }));
   if (occ.every((o) => o.value === 1)) return;
   const distinct = [...new Set(occ.map((o) => o.value))];
@@ -3831,7 +3939,7 @@ function weightTokenRef(ctx: Ctx, fontStyle: string): string | undefined {
  *  line-height when the dump captured a PIXEL value (dump v1.3). Uniformity
  *  rules mirror font-size: identical across variants → one mint; varying →
  *  per-variant substituted refs (the mint classifier owns the split).
- *  Unknown weight names and italic styles are NAMED receipts. */
+ *  Unknown weight names are NAMED receipts; the slant is carryFontSlant's. */
 function mintTextChannels(
   m: Merged,
   tokens: Record<string, string>,
@@ -3894,12 +4002,10 @@ function mintTextChannels(
         styleKey,
       );
     }
-    const italics = parsed.filter((p) => p.italic);
-    if (italics.length > 0) {
-      ctx.notes.push(
-        `${where}: italic font style ("${italics[0].fontStyle}") — font-style has no contract vocabulary; italic NAMED, not carried (review)`,
-      );
-    }
+    // The slant half of the face name is carryFontSlant's (declared
+    // font-style) — it used to be receipted only on THIS branch, so a node
+    // whose weight was stamped lost its italic in silence
+    // (FC-DUMP-PROPOSE-ITALIC-DROPPED).
   }
   // line-height (dump v1.3, PIXELS only — other units were receipted at capture).
   // The STAMPED token wins, for the same reason it does for weight: 20px is not
@@ -3973,6 +4079,86 @@ function carryTextCase(m: Merged, holder: Record<string, unknown>, ctx: Ctx, whe
   holder.declared = declared;
   ctx.notes.push(
     `${where}: textCase ${drawn[0]} drawn in every variant — carried as declared text-transform: ${value} (dump v1.16; a canvas-drawable channel, the return leg writes Figma textCase)`,
+  );
+}
+
+/** FC-DUMP-PROPOSE-ITALIC-DROPPED. The slant is part of the face NAME
+ *  (fontName.style "Italic" / "Medium Italic"), and the weight reader was
+ *  the only place that looked at it — so a node whose weight was STAMPED
+ *  (dump v1.22 fontWeightVar) returned before the italic receipt ran, and
+ *  "Medium Italic" proposed as an upright Medium with no note. font-style is
+ *  a DECLARED channel (DECLARED_CHANNELS, canvas: draw — the return leg
+ *  selects the italic face), read here beside textCase, regardless of how
+ *  the weight half of the name was recovered. */
+function carryFontSlant(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const textOcc = m.occ.filter((o) => o.node.text !== undefined);
+  if (textOcc.length === 0) return;
+  const faces = textOcc.map((o) => o.node.text!.fontStyle ?? 'Medium');
+  const italic = faces.map((f) => fontStyleWeight(f).italic);
+  if (!italic.some(Boolean)) return; // upright everywhere: CSS's own default, not a fact
+  if (!italic.every(Boolean)) {
+    ctx.notes.push(
+      `${where}: italic face differs across variants (${[...new Set(faces)].map((f) => `"${f}"`).join(', ')}) — font-style is a declared literal with no per-variant vocabulary; italic NAMED, not proposed (review)`,
+    );
+    return;
+  }
+  const declared = (holder.declared as Record<string, string> | undefined) ?? {};
+  if (declared['font-style'] === undefined) declared['font-style'] = 'italic';
+  holder.declared = declared;
+  ctx.notes.push(
+    `${where}: italic face ("${faces[0]}") drawn in every variant — carried as declared font-style: italic (the slant rides the face name; the weight half carries through font-weight as before; the return leg selects the italic face)`,
+  );
+}
+
+/** FC-DUMP-PROPOSE-CLIP-UNREAD. The dump reads clipsContent (v1.20) and the
+ *  proposer never looked at it. Two honest dispositions, decided by
+ *  provenance:
+ *    · a set THIS pipeline drew: the emitter writes clipsContent on every
+ *      frame explicitly (`node.clipsContent = spec.clipsContent === true`),
+ *      true ONLY from a declared overflow hidden|clip — so the flag is an
+ *      authored fact and carries as declared overflow-x/overflow-y: hidden
+ *      (the FC-OVERFLOW-CLIP-LOST read leg);
+ *    · a foreign set: Figma's own FrameNode default is ALSO true, so an
+ *      authored clip and an untouched default are byte-identical — carrying
+ *      it would mint a fact nobody wrote (types.ts DumpNode.clipsContent), so
+ *      it is NAMED per node instead.
+ *  `carry: false` callers (slot / component-ref parts) own no `declared`
+ *  block — the child contract or the slot content owns the clip — so the
+ *  fact is named there whatever the provenance. */
+function carryClip(
+  m: Merged,
+  holder: Record<string, unknown>,
+  ctx: Ctx,
+  where: string,
+  opts: { carry: boolean; owner?: string },
+): void {
+  const clipping = m.occ.filter((o) => o.node.clipsContent === true);
+  if (clipping.length === 0) return; // absence is CSS's own default (visible)
+  const span = `${clipping.length}/${m.occ.length} variant(s)`;
+  if (!opts.carry) {
+    ctx.notes.push(
+      `${where}: clipsContent is true in ${span} (dump v1.20) on a ${opts.owner ?? 'part'} that owns no declared block — ${opts.owner === 'component-ref part' ? 'the child contract owns its overflow' : 'the slot content owns its overflow'}; NAMED, not inverted (review)`,
+    );
+    return;
+  }
+  if (!ctx.drawnByThisPipeline) {
+    ctx.notes.push(
+      `${where}: clipsContent is true in ${span} (dump v1.20) on a set this pipeline did not draw — Figma's own frame default is ALSO true, so an authored clip and an untouched default are byte-identical here; overflow NOT inverted (a blanket carry would mint a fact nobody wrote) — NAMED; declare overflow: hidden on this part if the clip is intended (review)`,
+    );
+    return;
+  }
+  if (clipping.length !== m.occ.length) {
+    ctx.notes.push(
+      `${where}: clipsContent differs across variants (true in ${span}, dump v1.20) — overflow is a declared literal with no per-variant vocabulary; NAMED, not proposed (review)`,
+    );
+    return;
+  }
+  const declared = (holder.declared as Record<string, string> | undefined) ?? {};
+  if (declared['overflow-x'] === undefined) declared['overflow-x'] = 'hidden';
+  if (declared['overflow-y'] === undefined) declared['overflow-y'] = 'hidden';
+  holder.declared = declared;
+  ctx.notes.push(
+    `${where}: clipsContent drawn in every variant on a set this pipeline drew (the emitter writes the flag explicitly, true only from a declared overflow) — carried as declared overflow-x: hidden; overflow-y: hidden (dump v1.20; FC-OVERFLOW-CLIP-LOST read leg)`,
   );
 }
 
@@ -5490,9 +5676,43 @@ function threadInstanceProps(
           .join(', ')}) — bound as a per-value lookup instead of pinning the first variant's value`,
       );
     } else {
-      ctx.notes.push(
-        `${where}: applied prop "${propName}" of the nested "${instanceOf}" varies across variants (${distinct.join(', ')}) without tracking any enum axis — first value "${String(base[propName])}" carried, review`,
-      );
+      // FC-DUMP-PROPOSE-BOOL-AXIS-CORRELATION: a pure function of one BOOLEAN
+      // axis (Eventz Checkbox: Icons/Checkbox state=unselected/selected as
+      // isChecked flips). The PropByProp lookup compares the parent's value
+      // as a STRING on every surface (emit-react `prop === 'true'`, emit-wc
+      // likewise), so a boolean parent prop would silently miss — the map is
+      // NAMED with its axis instead of the false "without tracking any enum
+      // axis" receipt, and the first value stays carried.
+      let boolFn: { axis: Axis; whenFalse: string; whenTrue: string } | undefined;
+      for (const a of ctx.axes.filter((ax) => isBoolAxis(ax.values))) {
+        const byValue = new Map<string, string>();
+        let pure = values.length > 0;
+        for (const v of values) {
+          const axisValue = axisValuesOf(v.variant)[a.property]?.trim().toLowerCase();
+          if (axisValue === undefined || typeof v.value !== 'string') {
+            pure = false;
+            break;
+          }
+          const prev = byValue.get(axisValue);
+          if (prev === undefined) byValue.set(axisValue, v.value);
+          else if (prev !== v.value) {
+            pure = false;
+            break;
+          }
+        }
+        if (!pure || !byValue.has('true') || !byValue.has('false')) continue;
+        boolFn = { axis: a, whenFalse: byValue.get('false')!, whenTrue: byValue.get('true')! };
+        break;
+      }
+      if (boolFn) {
+        ctx.notes.push(
+          `${where}: applied prop "${propName}" of the nested "${instanceOf}" is a pure function of the BOOLEAN axis "${boolFn.axis.property}" (false→${boolFn.whenFalse}, true→${boolFn.whenTrue}) — the PropByProp lookup compares the parent's value as a string and a boolean parent prop would silently miss on every surface, so the per-value lookup is NOT proposed; first value "${String(base[propName])}" carried, NAMED (promote the axis to an enum to carry it; review)`,
+        );
+      } else {
+        ctx.notes.push(
+          `${where}: applied prop "${propName}" of the nested "${instanceOf}" varies across variants (${distinct.join(', ')}) without tracking any variant axis (enum or boolean) — first value "${String(base[propName])}" carried, review`,
+        );
+      }
     }
   }
 }
@@ -6286,6 +6506,7 @@ function buildPart(
     const tokens = invertTextTokens(m, ctx, where, byProp);
     attachByProp(part, byProp);
     carryTextCase(m, part, ctx, where); // dump v1.16 — declared text-transform
+    carryFontSlant(m, part, ctx, where); // FC-DUMP-PROPOSE-ITALIC-DROPPED — declared font-style
     invertNodeOpacity(m, part, tokens, ctx, where);
     liftUnboundTextPaintsToLiterals(m, part, tokens, ctx, where);
     if (m.occ.some((o) => (o.node.effects?.length ?? 0) > 0)) {
@@ -6761,6 +6982,7 @@ function buildPart(
       }
     }
     part.component = component;
+    carryClip(m, part, ctx, where, { carry: false, owner: 'component-ref part' }); // FC-DUMP-PROPOSE-CLIP-UNREAD
     // A visibility binding on a component-ref part is a boolean prop +
     // visibleWhen, exactly like slot/swap/frame parts (field case: CBDS icon
     // toggles ↪️icon-left / ↪️icon-right — captured by the dump, previously
@@ -6869,12 +7091,14 @@ function buildPart(
     else if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where, m);
     part.slot = slot;
     ctx.slots.push({ part, property: soleSwap, optional });
+    carryClip(m, part, ctx, where, { carry: false, owner: 'slot part' }); // FC-DUMP-PROPOSE-CLIP-UNREAD
     if (visibleWhen) part.visibleWhen = visibleWhen;
     return part;
   }
 
   if (isWrapArtifact(m)) {
     invertNodeOpacity(m, part, tokens, ctx, where);
+    carryClip(m, part, ctx, where, { carry: true }); // FC-DUMP-PROPOSE-CLIP-UNREAD
     invertNodeEffects(m, tokens, ctx, where);
     carryAbsPlacement(m, part, tokens, ctx, where, { size: true });
     attachTokens(ctx, part, tokens);
@@ -6889,6 +7113,7 @@ function buildPart(
   // parent's mode is a function of an axis and this part draws fillWidth.
   crossAxisFillByProp(m, parentMode, part, ctx, where);
   invertNodeOpacity(m, part, tokens, ctx, where);
+  carryClip(m, part, ctx, where, { carry: true }); // FC-DUMP-PROPOSE-CLIP-UNREAD
   invertNodeEffects(m, tokens, ctx, where);
   // Overlay-flattened class: a FRAME/GROUP with a captured abs box becomes a
   // positioned box (position: absolute + minted offsets/size).
@@ -9210,6 +9435,7 @@ export function proposeFromDump(
   if (Object.keys(rootDeclared).length > 0) {
     root.declared = { ...(root.declared as Record<string, string> | undefined), ...rootDeclared };
   }
+  carryClip(merged, root, ctx, where, { carry: true }); // FC-DUMP-PROPOSE-CLIP-UNREAD — the variant root clips too
   // dump v1.7 tolerance ledger (root): an IMAGE fill on the variant root
   // (photo avatars) is captured by name only — the image stays unexported;
   // with minting on, the root renders the neutral placeholder gradient
@@ -9240,25 +9466,53 @@ export function proposeFromDump(
   // text node (contracts with a `children` text prop and no parts). The node
   // is not a part — its text tokens hoist to the root.
   const only = merged.children.length === 1 ? merged.children[0] : undefined;
-  const autoLabel =
-    only && only.type === 'TEXT' && only.name === 'label' && unifiedPropRef(only, 'characters', ctx, `${where}/label`);
-  if (only && autoLabel) {
+  const soleLabel = only !== undefined && only.type === 'TEXT' && only.name === 'label';
+  const autoLabel = soleLabel && unifiedPropRef(only!, 'characters', ctx, `${where}/label`);
+  // R7 (2026-08-22, core/root-text-check.ts): the UNBOUND sole `label` TEXT
+  // child is what the emitter draws for `anatomy.root.text` (rootTextSpecs:
+  // the root IS the text node, and a COMPONENT cannot be a TEXT node, so it
+  // hosts one TEXT child named `label`). Until this round the hoist required
+  // a BOUND text property, so a root text came back as `parts.label.text` +
+  // `parts.label.tokens.color` — a different spelling from the one that was
+  // sent, and the round trip never closed on it. The hoist rule is now:
+  //   sole child + TEXT + named `label` + (bound text property OR no host-
+  //   demanded text override) → the node is the root's own text.
+  // Bound: characters become the `children` prop (unchanged). Unbound:
+  // characters become anatomy.root.text (per-axis variation rides
+  // textByProp through bindTextByAxis, exactly as a child text part's does).
+  // Either way the text tokens / literal ink / case / slant hoist to root.
+  // A host-demanded text override (textPromote) is per-usage API and keeps
+  // the part path so the promotion can bind it.
+  const promotedLabel =
+    soleLabel && !autoLabel ? ctx.textPromote?.get(`${where}/label`.slice(`${ctx.setName}:root/`.length)) : undefined;
+  const unboundRootText = soleLabel && !autoLabel && promotedLabel === undefined;
+  if (only && (autoLabel || unboundRootText)) {
     // The label's tokens hoist to the root — its per-value correlations ride
     // the SAME root collector, so a hoisted function lands on root.tokensByProp.
     const textTokens = invertTextTokens(only, ctx, `${where}/label`, rootTokensByProp);
     Object.assign(rootTokens, textTokens);
     liftUnboundTextPaintsToLiterals(only, root, rootTokens, ctx, `${where}/label`);
     carryTextCase(only, root, ctx, `${where}/label`); // dump v1.16 — hoists with the label
+    carryFontSlant(only, root, ctx, `${where}/label`); // FC-DUMP-PROPOSE-ITALIC-DROPPED — hoists with the label
 
     // The label's tokens hoisted — retarget its captured mint observations
     // to the record that actually ships (rootTokens).
     if (ctx.mint) {
       for (const o of ctx.mint.observations) if (o.target === textTokens) o.target = rootTokens;
     }
-    registerTextProp(ctx, autoLabel, first(only.occ, (n) => n.text?.characters) ?? '', 'children');
-    ctx.notes.push(
-      `${where}/label: sole root text node named "label" is the generator's auto-injected children label — hoisted to root tokens, bound prop proposed as \`children\``,
-    );
+    const characters = first(only.occ, (n) => n.text?.characters) ?? '';
+    if (autoLabel) {
+      registerTextProp(ctx, autoLabel, characters, 'children');
+      ctx.notes.push(
+        `${where}/label: sole root text node named "label" is the generator's auto-injected children label — hoisted to root tokens, bound prop proposed as \`children\``,
+      );
+    } else {
+      root.text = characters;
+      bindTextByAxis(only, root, ctx, `${where}/label`);
+      ctx.notes.push(
+        `${where}/label: sole root text node named "label" with no bound text property is the root's own text (the emitter draws anatomy.root.text as exactly this node) — hoisted to anatomy.root.text, its text tokens to root tokens`,
+      );
+    }
   } else {
     const mode = parentModesOf(merged, ctx.mint !== undefined);
     // Pre-order key claiming + P9 run detection — see buildChildParts.
@@ -9464,6 +9718,52 @@ export function proposeFromDump(
         code: { prop: b.name },
       },
     });
+  }
+  // FC-DUMP-PROPOSE-UNBOUND-BOOLEAN. A BOOLEAN component property that no
+  // layer visibility or instance swap references (Eventz Button isFullWidth,
+  // a `Pressed` toggle wired to nothing yet) vanished from the proposed API
+  // with no receipt — the definition is CAPTURED evidence (dump v1.5
+  // boolDefaults / v1.14 propertyDefinitions) of a design API the set
+  // exposes, so it carries as a boolean prop bound to the Figma BOOLEAN
+  // (the forward emitter mints exactly such a property from boolProps), with
+  // the fact that it binds nothing named. Axis properties (flattened to a
+  // variant axis) and the slot "Show <Property>" convention are NOT API
+  // props and stay excluded, as before.
+  {
+    const boolDefs: Record<string, boolean> = { ...(set.boolDefaults ?? {}) };
+    for (const [rawName, def] of Object.entries(set.propertyDefinitions ?? {})) {
+      if (def.type === 'BOOLEAN' && typeof def.defaultValue === 'boolean') boolDefs[rawName.split('#')[0]] ??= def.defaultValue;
+    }
+    const referenced = new Set<string>();
+    const walkRefs = (n: DumpNode): void => {
+      for (const v of Object.values(n.propRefs ?? {})) if (typeof v === 'string') referenced.add(v);
+      for (const c of n.children ?? []) walkRefs(c);
+    };
+    for (const v of set.variants) walkRefs(v);
+    for (const [property, defaultValue] of Object.entries(boolDefs)) {
+      if (ctx.boolProps.some((b) => b.property === property)) continue;
+      if (referenced.has(property)) continue; // bound somewhere the passes above already judged (slot "Show", visibility)
+      if (axes.some((a) => a.property === property)) continue; // a variant axis, already a prop
+      const name = textPropName(ctx, property);
+      if (props.some((p) => p.name === name)) {
+        ctx.notes.push(
+          `prop \`${name}\`: BOOLEAN property "${property}" (default ${defaultValue}) binds nothing on the canvas AND its name collides with an existing prop — NAMED, not proposed (rename the property to carry it)`,
+        );
+        continue;
+      }
+      props.push({
+        name,
+        type: 'boolean',
+        default: defaultValue,
+        bindings: {
+          figma: { kind: 'BOOLEAN', property },
+          code: { prop: name },
+        },
+      });
+      ctx.notes.push(
+        `prop \`${name}\`: BOOLEAN property "${property}" (default ${defaultValue}, the property definition's defaultValue) binds nothing on the canvas — no layer visibility or instance swap references it — carried as a boolean prop so the design API survives the proposal; it restyles nothing until a binding is drawn (review)`,
+      );
+    }
   }
   // P9 repeated-children collections: the arrayOf prop each repeat part maps
   // over — code-only by declared fidelity limit (bindings.figma.kind NONE;

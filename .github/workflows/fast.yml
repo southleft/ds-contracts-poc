@@ -469,6 +469,12 @@ jobs:
       - name: code-only-facts:check (maintain — every fact the canvas cannot carry is NAMED in the script, the bundle, plugin data and the plugin report)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run code-only-facts:check
+      - name: conformance:roundtrip (canvas half of the conformance kit — contract → canvas → dump → propose, SILENT never waivable)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run conformance:roundtrip
+      - name: root-text:check (maintain — a root that IS the text node draws its characters, colour, size and weight; literal ink carried or named)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run root-text:check
       - name: extract:figma:visual:anchors (maintain — visual-parity subjects match the contracts' figma anchors; file-only, no token)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:visual:anchors

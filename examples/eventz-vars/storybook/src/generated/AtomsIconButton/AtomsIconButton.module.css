@@ -94,6 +94,10 @@
   background-color: var(--color-background-none);
 }
 
+.root[data-is-disabled] {
+  opacity: 0.4;
+}
+
 .Icon {
   display: flex;
 }

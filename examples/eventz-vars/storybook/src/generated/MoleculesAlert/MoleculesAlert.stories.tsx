@@ -26,6 +26,7 @@ const meta = {
     hasIcon: { control: 'boolean' },
     hasLink: { control: 'boolean' },
     isDismissible: { control: 'boolean' },
+    hasClose: { control: 'boolean' },
   },
   args: {
     variant: 'success',
@@ -34,6 +35,7 @@ const meta = {
     hasIcon: true,
     hasLink: true,
     isDismissible: true,
+    hasClose: true,
   },
 } satisfies Meta<typeof MoleculesAlert>;
 

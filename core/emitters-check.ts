@@ -19,6 +19,13 @@
  *      resolved var() names are byte-equal to the React emitter's for the
  *      same contract (P0 2026-08-22: parts only had the one-placeholder
  *      branch; two placeholders shipped invalid CSS, part colour lost).
+ *   6. A root or part `states` ref with ≥2 placeholders, and any ref with a
+ *      BOOLEAN placeholder on a part, expands to the same resolved leaves on
+ *      react / html / web-components (rule counts asserted, WC var() names
+ *      byte-compared with React's); react-inline carries the static part
+ *      token and NAMES the hover omission; a placeholder naming no prop is
+ *      refused by name on all four (the residual the fix in 5 left open:
+ *      every surface's `phs.length === 1` branch dropped these silently).
  *
  * This is a node script (it writes samples) over pure functions — the same
  * split as every other shell in the repo.
@@ -29,7 +36,7 @@ import { ContractSchema, type Contract } from "../scripts/contract-schema.js";
 import { importFromUrl } from "../extract/figma/rest/fetch.js";
 import { createFigmaEngine, emitFigmaScript } from "./emit-figma-script.js";
 import { emitHtml } from "./emit-html.js";
-import { generateCss } from "./emit-react.js";
+import { generateCss, validateContract } from "./emit-react.js";
 import { emitReactInline } from "./emit-react-inline.js";
 import { emitWebComponent } from "../packages/emitter-web-components/src/emit-wc.js";
 import { emitters, type EmitterCtx } from "./emitter.js";
@@ -303,6 +310,226 @@ for (const id of WC_SUBJECTS) {
     'wc: a part ref substituting a non-prop placeholder is REFUSED naming the part and the placeholder',
     message.includes('part "Text"') && message.includes("{nonsense}"),
   );
+}
+
+// ---- states refs with ≥2 placeholders / a boolean placeholder ---------------
+// RESIDUAL of the multi-axis fix above: `expandRef` covered tokens and
+// tokensByProp only. A root or part `states` ref with two placeholders
+// (`{color.{tone}.{emphasis}.hover}`) or a BOOLEAN placeholder fell through
+// every CSS surface's `phs.length === 1 && enums.get(…)` branch and emitted
+// NOTHING — not a refusal; the hover fact vanished. React's PART token path
+// had the same shape for a boolean placeholder (enumCombos over an empty
+// value set). Fixture: ds.button with every hole exercised at once, a token
+// tree that carries every leaf, and one refusal fixture (a placeholder
+// naming no prop) that must fail BY NAME on every target.
+console.log("\nstates refs: ≥2 placeholders and boolean placeholders (react / react-inline / web-components / html)");
+{
+  const VARIANTS = ["primary", "secondary", "danger", "ghost"];
+  const SIZES = ["sm", "md", "lg"];
+  const BOOLS = ["true", "false"];
+  const leaf = { $type: "color", $value: "#123456" };
+  const tree = (keys: string[][]): Record<string, unknown> => {
+    const out: Record<string, unknown> = {};
+    for (const path of keys) {
+      let cur = out;
+      for (const seg of path.slice(0, -1)) cur = (cur[seg] ??= {}) as Record<string, unknown>;
+      cur[path[path.length - 1]] = { ...leaf };
+    }
+    return out;
+  };
+  const fx = tree([
+    ...VARIANTS.flatMap((v) => SIZES.map((s) => ["hover", v, s])),
+    ...BOOLS.map((b) => ["hover-ink", b]),
+    ...VARIANTS.flatMap((v) => BOOLS.map((b) => ["label-hover", v, b])),
+    ...BOOLS.map((b) => ["label", b]),
+  ]);
+  const fxTokens = { ...ctx.tokens, primitives: { ...ctx.tokens.primitives, fx } };
+  const fxInventory = tokenInventoryFromJson([
+    ctx.tokens.primitives,
+    ctx.tokens.semantic,
+    ctx.tokens.light,
+    ctx.tokens.dark,
+    { fx },
+  ]);
+  // ds.button sets figmaStatePreviews, whose canvas rule refuses a state ref
+  // substituting two enum axes BY NAME ("previews multiply exactly ONE primary
+  // axis") — a canvas constraint, not a code one. The fixture drops it so the
+  // code surfaces are what is measured.
+  const { figmaStatePreviews: _previews, ...button } = contracts.get("ds.button")!;
+  const fixture = (id: string, name: string, labelStates: Record<string, Record<string, string>>) =>
+    ContractSchema.parse({
+      ...button,
+      id,
+      name,
+      anatomy: {
+        root: {
+          ...button.anatomy.root,
+          states: {
+            ...button.anatomy.root.states,
+            hover: {
+              ...button.anatomy.root.states?.hover,
+              "background-color": "{fx.hover.{variant}.{size}}",
+              color: "{fx.hover-ink.{loading}}",
+            },
+          },
+          parts: {
+            ...button.anatomy.root.parts,
+            label: {
+              ...button.anatomy.root.parts!.label,
+              tokens: { color: "{fx.label.{loading}}" },
+              states: labelStates,
+            },
+          },
+        },
+      },
+    });
+  const subject = fixture("ds.button-states", "ButtonStates", {
+    hover: { color: "{fx.label-hover.{variant}.{loading}}" },
+  });
+  /** [label, var() prefix, expected resolved leaf count] — the four facts. */
+  const facts: Array<[string, string, number]> = [
+    ["root states.hover.background-color {variant}×{size}", "--fx-hover-", VARIANTS.length * SIZES.length],
+    ["root states.hover.color {loading} (boolean)", "--fx-hover-ink-", BOOLS.length],
+    ['part "label" states.hover.color {variant}×{loading}', "--fx-label-hover-", VARIANTS.length * BOOLS.length],
+    ['part "label" tokens.color {loading} (boolean)', "--fx-label-", BOOLS.length],
+  ];
+  // Prefixes nest (--fx-hover- ⊃ --fx-hover-ink-, --fx-label- ⊃ --fx-label-hover-);
+  // count a name under the LONGEST prefix it matches.
+  const namesFor = (css: string, prefix: string): Set<string> => {
+    const longer = facts.map(([, p]) => p).filter((p) => p !== prefix && p.startsWith(prefix));
+    return new Set([...varNames(css, prefix)].filter((v) => !longer.some((p) => v.startsWith(p))));
+  };
+  const surfaces: Array<[string, () => string]> = [
+    [
+      "react",
+      () => {
+        const errors: string[] = [];
+        validateContract(subject, contracts, errors, icons);
+        const css = generateCss(subject, fxInventory, errors);
+        if (errors.length > 0) throw new Error(errors.join("\n"));
+        return css;
+      },
+    ],
+    ["html", () => emitHtml(subject, { tokens: fxInventory, icons, contracts }).css],
+    ["web-components", () => emitWebComponent(subject, { icons, contracts, tokens: fxInventory }).stylesheet],
+  ];
+  const emitted = new Map<string, string>();
+  for (const [surface, emit] of surfaces) {
+    try {
+      emitted.set(surface, emit());
+      check(`${surface}: the fixture emits`, true);
+    } catch (e) {
+      check(`${surface}: the fixture emits (${(e as Error).message.split("\n")[0]})`, false);
+    }
+  }
+  for (const [surface, css] of emitted) {
+    check(`${surface}: zero var(--…{…}) braces`, !BRACED_VAR.test(css));
+    for (const [label, prefix, expected] of facts) {
+      const got = namesFor(css, prefix);
+      check(`${surface}: ${label} → ${expected} resolved var() names (got ${got.size})`, got.size === expected);
+    }
+  }
+  const reactCss = emitted.get("react");
+  const wcCss = emitted.get("web-components");
+  if (reactCss !== undefined && wcCss !== undefined) {
+    for (const [label, prefix] of facts) {
+      const a = namesFor(reactCss, prefix);
+      const b = namesFor(wcCss, prefix);
+      check(
+        `web-components: ${label} resolves the SAME var() names React does`,
+        a.size > 0 && a.size === b.size && [...a].every((v) => b.has(v)),
+      );
+    }
+  }
+  // The selector each surface hangs the expanded rule on — enum values on
+  // the mirrored class / data attribute, the boolean on attribute presence.
+  if (reactCss !== undefined) {
+    check(
+      "react: .variant-primary.size-sm:hover:not(:disabled) { background-color: var(--fx-hover-primary-sm) }",
+      /\.variant-primary\.size-sm:hover:not\(:disabled\) \{\n  background-color: var\(--fx-hover-primary-sm\);/.test(reactCss),
+    );
+    check(
+      "react: .root:not([data-loading]):hover:not(:disabled) { color: var(--fx-hover-ink-false) }",
+      /\.root:not\(\[data-loading\]\):hover:not\(:disabled\) \{\n  color: var\(--fx-hover-ink-false\);/.test(reactCss),
+    );
+    check(
+      "react: .variant-danger[data-loading]:hover:not(:disabled) .label { color: var(--fx-label-hover-danger-true) }",
+      /\.variant-danger\[data-loading\]:hover:not\(:disabled\) \.label \{\n  color: var\(--fx-label-hover-danger-true\);/.test(reactCss),
+    );
+    check(
+      "react: .root[data-loading] .label { color: var(--fx-label-true) }",
+      /\.root\[data-loading\] \.label \{\n  color: var\(--fx-label-true\);/.test(reactCss),
+    );
+  }
+  const htmlCss = emitted.get("html");
+  if (htmlCss !== undefined) {
+    check(
+      "html: .button-states--variant-primary.button-states--size-sm:hover:not(:disabled) { background-color }",
+      htmlCss.includes(".button-states--variant-primary.button-states--size-sm:hover:not(:disabled) {\n  background-color: var(--fx-hover-primary-sm);"),
+    );
+    check(
+      "html: .button-states:not([data-loading]) .button-states__label { color: var(--fx-label-false) }",
+      htmlCss.includes(".button-states:not([data-loading]) .button-states__label {\n  color: var(--fx-label-false);"),
+    );
+  }
+  // The WC stylesheet is a TS module — the CSS is a JSON string, so the
+  // newline inside a rule is the two characters `\\n`.
+  if (wcCss !== undefined) {
+    check(
+      "wc: [part='root'][part='root']:where([data-variant='primary'][data-size='sm']):hover:not(:disabled) { background-color }",
+      wcCss.includes("[part='root'][part='root']:where([data-variant='primary'][data-size='sm']):hover:not(:disabled) {\\n  background-color: var(--fx-hover-primary-sm);"),
+    );
+    check(
+      "wc: [part='root']:where([data-loading]) [part='label'] { color: var(--fx-label-true) }",
+      wcCss.includes("[part='root']:where([data-loading]) [part='label'] {\\n  color: var(--fx-label-true);"),
+    );
+  }
+  // react-inline: hover states are a NAMED limit of the inline surface (no
+  // pseudo-classes) — the header must still say so; the boolean-placeholder
+  // PART token is a static fact and must be carried as a V[] entry per side.
+  try {
+    const { tsx } = emitReactInline(subject, { tokens: fxTokens, icons, contracts, mode: "light" });
+    check("inline: the fixture emits", true);
+    check("inline: hover state tokens are NAMED as omitted in the header", /hover.*state tokens are not expressible as inline/s.test(tsx.slice(0, tsx.indexOf("*/"))));
+    check(
+      'inline: part "label" tokens.color {loading} → V["loading-true:label"] and V["loading-false:label"] resolved to literals',
+      tsx.includes('"loading-true:label"') && tsx.includes('"loading-false:label"') && !tsx.includes("var(--"),
+    );
+    check("inline: zero unresolved {token.path} braces", !UNRESOLVED_TOKEN_PATH.test(tsx));
+  } catch (e) {
+    check(`inline: the fixture emits (${(e as Error).message.split("\n")[0]})`, false);
+  }
+  // A placeholder naming NO prop: refused BY NAME on every surface, never a
+  // silently empty rule set.
+  const poisoned = fixture("ds.button-states-poisoned", "ButtonStatesPoisoned", {
+    hover: { color: "{fx.label-hover.{nonsense}.{loading}}" },
+  });
+  const refusals: Array<[string, () => void]> = [
+    [
+      "react",
+      () => {
+        const errors: string[] = [];
+        validateContract(poisoned, contracts, errors, icons);
+        generateCss(poisoned, fxInventory, errors);
+        if (errors.length > 0) throw new Error(errors.join("\n"));
+      },
+    ],
+    ["html", () => void emitHtml(poisoned, { tokens: fxInventory, icons, contracts })],
+    ["react-inline", () => void emitReactInline(poisoned, { tokens: fxTokens, icons, contracts, mode: "light" })],
+    ["web-components", () => void emitWebComponent(poisoned, { icons, contracts, tokens: fxInventory })],
+  ];
+  for (const [surface, run] of refusals) {
+    let message = "";
+    try {
+      run();
+    } catch (e) {
+      message = (e as Error).message;
+    }
+    check(
+      `${surface}: a states ref substituting a non-prop placeholder is REFUSED naming the part and the placeholder`,
+      message.includes('part "label"') && message.includes("{nonsense}"),
+    );
+  }
 }
 
 // The registry itself is part of the spec story: four emitters, one contract.

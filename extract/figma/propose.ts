@@ -132,6 +132,10 @@ import {
 } from "./tokens.js";
 import { loadConfig } from "../config.js";
 import {
+  CAPTURED_VARIABLES_ABSENT_RECEIPT,
+  capturedTokensDocument,
+} from "../../core/captured-tokens.js";
+import {
   componentIdSlug,
   dumpCapturesHidden,
   figmaProposalsReport,
@@ -393,12 +397,34 @@ function main() {
     );
   }
 
+  // FC-DUMP-PROPOSE-CAPTURED-VARIABLES-DROPPED: the dump's `_variables`
+  // channel (values + per-mode trees, dump v1.4/v1.6) used to be discarded
+  // here with no receipt — a foreign kit's modes vanished between the dump
+  // and this folder while the playground and visual-parity read the same
+  // channel. It lands beside minted.dtcg.json as captured.dtcg.json (the
+  // same layer capturedTokensFromDump builds for them), and its absence is
+  // a named line, never nothing.
+  const capturedDoc = capturedTokensDocument(
+    dump as unknown as Record<string, unknown>,
+  );
+  let capturedFile: string | null = null;
+  if (capturedDoc) {
+    const file = path.resolve(root, outDir, "captured.dtcg.json");
+    writeFileSync(file, JSON.stringify(capturedDoc.document, null, 2) + "\n");
+    capturedFile = path.relative(root, file);
+    console.log(
+      `✔ captured variables (${capturedDoc.layer.count} token(s), ${Object.keys(capturedDoc.layer.modes ?? {}).length} mode tree(s), ${capturedDoc.layer.skipped.length} skipped by name) → ${capturedFile}`,
+    );
+  } else {
+    console.log(`- ${CAPTURED_VARIABLES_ABSENT_RECEIPT}`);
+  }
+
   // The runnable next step — the exact generate invocation whose --tokens
   // carries the corpus this run matched against PLUS the minted tree, so the
   // first generate resolves every ref instead of refusing one by name.
   const generateCommand =
     proposalFiles.length > 0
-      ? `npx ds-contracts generate ${[...proposalFiles, ...stubFiles].join(" ")} --out ${path.join(outDir, "generated")} --stories --tokens ${[...corpusFiles, ...(mintedFile ? [mintedFile] : [])].join(",")}`
+      ? `npx ds-contracts generate ${[...proposalFiles, ...stubFiles].join(" ")} --out ${path.join(outDir, "generated")} --stories --tokens ${[...corpusFiles, ...(capturedFile ? [capturedFile] : []), ...(mintedFile ? [mintedFile] : [])].join(",")}`
       : null;
 
   const reportExtras = [
@@ -416,6 +442,9 @@ function main() {
           `- minted token tree: ${mintedFile} (${mintedCount} token(s); machine-derived provisional names)`,
         ]
       : ["- no minted token tree (nothing needed minting)"]),
+    ...(capturedDoc && capturedFile
+      ? [`- captured variables: ${capturedFile} — ${capturedDoc.receipt}`]
+      : [`- ${CAPTURED_VARIABLES_ABSENT_RECEIPT}`]),
     ...(usedFallbackCorpus
       ? [
           `- ⚠ corpus fallback: no token corpus was supplied, so the repo-demo reference tokens (${REPO_FALLBACK_FILES.join(", ")}) matched the canvas values — for a foreign kit this binds their values to this repo's token names, wrong by construction.`,
@@ -432,7 +461,7 @@ function main() {
   console.log(`✔ report → ${path.join(outDir, "figma-proposals.md")}`);
   if (generateCommand) {
     console.log(
-      `\nNext — generate the code (the minted tree rides --tokens so every ref resolves):\n  ${generateCommand}`,
+      `\nNext — generate the code (the captured and minted trees ride --tokens so every ref resolves):\n  ${generateCommand}`,
     );
   }
 }

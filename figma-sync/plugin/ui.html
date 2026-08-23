@@ -959,6 +959,17 @@
           if (facts.length) {
             codeOnlyFactLines((rep0 && rep0.name) || step.title, facts).forEach(function (line) { log(line, 'warn'); });
           }
+          // RUNTIME DEGRADATIONS (R7, 2026-08-22): what the Plugin API REFUSED
+          // while the set was built (a FILL sizing, an out-of-flow placement,
+          // a min size, a truncation, a paint base). The script used to
+          // swallow every one in a bare catch; it now returns them per set,
+          // and they are listed here beside the code-only facts.
+          var degs = (rep0 && rep0.degradations) || [];
+          if (degs.length) {
+            log(((rep0 && rep0.name) || step.title) + ': ' + degs.length + ' runtime degradation' + (degs.length === 1 ? '' : 's') + ' — the Plugin API refused a canvas write; the set was built without it:', 'warn');
+            degs.slice(0, 40).forEach(function (d) { log('  ' + d.code + (d.nodePath ? ' @ ' + d.nodePath : '') + ': ' + d.message, 'warn'); });
+            if (degs.length > 40) log('  +' + (degs.length - 40) + ' more', 'warn');
+          }
         }
         next(i + 1);
       });
@@ -2952,7 +2963,7 @@ async function dumpNode(node, nodePath, parent) {
       channels.push('textAlignVertical ' + node.textAlignVertical);
     }
     if (node.textTruncation && node.textTruncation !== 'DISABLED') {
-      channels.push('textTruncation ' + node.textTruncation + (typeof node.maxLines === 'number' ? ' maxLines ' + node.maxLines : ''));
+      channels.push('textTruncation ' + node.textTruncation + (typeof node.maxLines === 'number' ? ' maxLines ' + node.maxLines : '') + ' (the canvas twin of CSS text-overflow: ellipsis — drawn, not read back)');
     }
     if (channels.length > 0) {
       degrade('text-channel-unsupported', nodePath, 'text channel(s) with no dump v1 projection: ' + channels.join('; ') + ' — typography carries (fontSize, fontStyle, style identity) only');

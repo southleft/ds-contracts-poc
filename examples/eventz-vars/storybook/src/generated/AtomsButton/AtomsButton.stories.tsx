@@ -27,6 +27,7 @@ const meta = {
     text: { control: 'text' },
     hasStartIcon: { control: 'boolean' },
     hasEndIcon: { control: 'boolean' },
+    isFullWidth: { control: 'boolean' },
     startIcon: { control: false },
     endIcon: { control: false },
   },
@@ -36,6 +37,7 @@ const meta = {
     text: 'Label',
     hasStartIcon: true,
     hasEndIcon: true,
+    isFullWidth: true,
   },
 } satisfies Meta<typeof AtomsButton>;
 

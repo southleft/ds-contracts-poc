@@ -467,12 +467,20 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   // Disabled-state tokens apply via the disabled prop (the one interaction
   // state a static style CAN honestly render). Non-substituted decls only.
   const disabledStyle: StyleRecord = {};
+  // A SUBSTITUTED root disabled-state ref (f(variant) / f(bool)) is not a
+  // static object — DISABLED_STYLE is one record — so it is NAMED in the
+  // emitted header rather than dropped (the css/html/web-components surfaces
+  // expand it per value tuple).
+  const disabledSubstOmitted: string[] = [];
   if (bools.some((p) => p.name === 'disabled')) {
     for (const [cssProp, ref] of Object.entries(contract.anatomy.root?.states?.disabled ?? {})) {
       const refPath = stripBraces(ref);
-      if (placeholdersIn(refPath).length === 0 && !cssProp.startsWith('outline')) {
-        disabledStyle[camel(cssProp)] = resolveValue(refPath);
+      if (cssProp.startsWith('outline')) continue;
+      if (placeholdersIn(refPath).length > 0) {
+        disabledSubstOmitted.push(`${cssProp} ${ref}`);
+        continue;
       }
+      disabledStyle[camel(cssProp)] = resolveValue(refPath);
     }
     // v15: root disabled-plane declared facts render the same way (already
     // literal values — no resolution).
@@ -974,6 +982,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   const canvasOnlyNote = canvasOnlyRefused.size > 0
     ? `\n * Fidelity: ${[...canvasOnlyRefused].sort().join(', ')} REFUSED BY NAME — synthetic\n * canvas-only channel(s) (decomposeTranslate) with no CSS spelling; the canvas\n * lowers them to absolute placement.`
     : '';
+  const disabledSubstNote = disabledSubstOmitted.length > 0
+    ? `\n * Fidelity: ROOT disabled-state ref(s) ${disabledSubstOmitted.join(', ')} substitute a prop —\n * omitted on this surface (DISABLED_STYLE is one static object; the css/html/\n * web-components surfaces expand them per value).`
+    : '';
 
   // MULTI-ROOT composite: the roots render as SIBLINGS in a Fragment (no
   // wrapper element — a Modal's backdrop + dialog are position-driven
@@ -989,7 +1000,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
  * Emitted by core/emit-react-inline.ts — token references RESOLVED to literals.
  * Resolution mode: ${mode} (brand: default).
  * MULTI-ROOT composite — ${topRoots(contract).length} top-level roots (${topRoots(contract).map(([n]) => n).join(', ')})
- * render as SIBLINGS in a Fragment; there is no single wrapping element.${canvasOnlyNote}
+ * render as SIBLINGS in a Fragment; there is no single wrapping element.${canvasOnlyNote}${disabledSubstNote}
  */
 import type { ${typeImports} } from 'react';
 ${depImports}${depImports ? '\n' : ''}
@@ -1024,7 +1035,7 @@ export function ${name}({ ${destructured.join(', ')} }: ${name}Props) {
  * Fidelity: :hover/:focus-visible state tokens are not expressible as inline
  * styles and are omitted; ROOT disabled-state tokens apply via the disabled
  * prop; PART-level state overrides (Part.states, v13) are omitted — the same
- * declared limit as the hover states (state-selected descendant styling).${overlapNote}${repeatNote}${canvasOnlyNote}
+ * declared limit as the hover states (state-selected descendant styling).${overlapNote}${repeatNote}${canvasOnlyNote}${disabledSubstNote}
  */
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
 import type { ${typeImports} } from 'react';

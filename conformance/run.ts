@@ -132,7 +132,7 @@ export function normValue(raw: string): string {
 /** A loose containment test: the CONTRACT value counts as carrying the
  *  captured value when they normalise equal, or when the captured value is a
  *  recognisable substring (shorthand-vs-longhand, `matrix(…)`, gradients). */
-const valueAgrees = (contractValue: string, capturedValue: string): boolean => {
+export const valueAgrees = (contractValue: string, capturedValue: string): boolean => {
   const a = normValue(contractValue);
   const b = normValue(capturedValue);
   return a === b || (b.length > 3 && a.includes(b)) || (a.length > 3 && b.includes(a));
@@ -199,13 +199,31 @@ export function readCarriage(outDir: string): Map<string, Array<{ part: string; 
   const contract = readJson<Record<string, unknown>>(path.join(outDir, 'enriched.contract.json'));
   const ext = readJson<{ mintedTokens?: Record<string, unknown> }>(path.join(outDir, 'enriched.extension.json'));
   const dtcg = readJson<Record<string, unknown>>(path.join(REPO, 'conformance', 'tokens', 'conformance.dtcg.json')) ?? {};
-  const out = new Map<string, Array<{ part: string; where: string; value: string }>>();
-  if (!contract) return out;
+  if (!contract) return new Map();
+  return carriageOfContract(contract, [ext?.mintedTokens ?? {}, dtcg]);
+}
+
+export interface CarriageHit {
+  part: string;
+  where: string;
+  /** The value with token refs RESOLVED through `trees` (first tree wins). */
+  value: string;
+  /** The value exactly as the contract spells it — a `{ref}` stays a ref. */
+  raw: string;
+}
+
+/** The same walk as readCarriage, over an in-memory contract — shared with
+ *  the canvas round-trip gate (conformance/canvas.ts), which compares a
+ *  PROPOSED contract against the captured one on the same channel and must
+ *  read both by one rule. `trees` are the DTCG trees token refs resolve
+ *  through, in priority order. */
+export function carriageOfContract(contract: Record<string, unknown>, trees: Record<string, unknown>[]): Map<string, CarriageHit[]> {
+  const out = new Map<string, CarriageHit[]>();
 
   const resolveRef = (ref: string): string => {
     const m = /^\{(.+)\}$/.exec(ref.trim());
     if (!m) return ref;
-    for (const tree of [ext?.mintedTokens ?? {}, dtcg]) {
+    for (const tree of trees) {
       let node: unknown = tree;
       for (const seg of m[1].split('.')) {
         if (!node || typeof node !== 'object') { node = undefined; break; }
@@ -218,7 +236,7 @@ export function readCarriage(outDir: string): Map<string, Array<{ part: string; 
     return ref;
   };
   const push = (ch: string, part: string, where: string, value: string): void => {
-    (out.get(ch) ?? out.set(ch, []).get(ch)!).push({ part, where, value: resolveRef(value) });
+    (out.get(ch) ?? out.set(ch, []).get(ch)!).push({ part, where, value: resolveRef(value), raw: value });
   };
   const eatMap = (part: string, where: string, m: unknown): void => {
     if (!m || typeof m !== 'object') return;

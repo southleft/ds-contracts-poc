@@ -645,6 +645,7 @@ export function validateContract(
         }
       }
     }
+    const substitutableProps = new Set([...enumProps(contract), ...boolProps(contract)].map((pr) => pr.name));
     if (p.length > 1) {
       // Nested parts (path.length > 1 — NOT a top-level root, single- or
       // multi-root) carry substituted tokens as descendant rules under the
@@ -667,11 +668,39 @@ export function validateContract(
       // (`.type-brand.style-fill.state-hover`) and the shape the S2
       // `tokensByProp` map lift already emits one level down. No new
       // vocabulary; the same rule, one nesting level deeper.
+      //
+      // RESIDUAL (2026-08-22, the states round): a BOOLEAN placeholder on a
+      // nested token used to be refused here as an "unknown enum prop" while
+      // the root carried it (substValues/boolFrag) and the web-components
+      // emitter carried it on parts too — three surfaces, two answers. The
+      // part path now expands booleans exactly like the root (attribute
+      // presence on the root element); only a placeholder naming NEITHER an
+      // enum nor a boolean prop is refused, by name, for every surface.
       for (const ref of Object.values(part.tokens ?? {})) {
         for (const ph of placeholdersIn(stripBraces(ref))) {
-          if (!enumProps(contract).some((pr) => pr.name === ph)) {
+          if (!substitutableProps.has(ph)) {
             errors.push(
-              `${contract.id}: part "${name}" token "${ref}" substitutes unknown enum prop "${ph}"`,
+              `${contract.id}: part "${name}" token "${ref}" substitutes "{${ph}}", which is not an enum or boolean prop of this contract — no surface has a class or attribute to select on`,
+            );
+          }
+        }
+      }
+    }
+    // STATES REFS (the residual the multi-axis fix left open): a root or part
+    // `states` ref may substitute ANY number of enum/boolean props — every CSS
+    // surface expands the cartesian exactly like a token ref (react comboCls,
+    // html comboSel, web-components rootWithCombo). Before this every surface's
+    // `phs.length === 1 && enums.get(…)` branch dropped a two-placeholder or
+    // boolean-placeholder state ref WITHOUT A WORD — the hover fact vanished.
+    // A placeholder naming no such prop has nothing to select on anywhere and
+    // is refused here, once, by name, so html/react-inline (which gate on
+    // validateContract alone) refuse exactly as react/web-components do.
+    for (const [state, overrides] of Object.entries(part.states ?? {})) {
+      for (const [cssProp, ref] of Object.entries(overrides)) {
+        for (const ph of placeholdersIn(stripBraces(ref))) {
+          if (!substitutableProps.has(ph)) {
+            errors.push(
+              `${contract.id}: part "${name}" states.${state}.${cssProp} ref "${ref}" substitutes "{${ph}}", which is not an enum or boolean prop of this contract — no surface has a class or attribute to select on`,
             );
           }
         }
@@ -1917,7 +1946,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
   // BOOLEAN prop; each side renders as a data-attribute selector on the
   // root element the TSX already emits for every boolean
   // (`[data-x]` / `:not([data-x])`; native disabled uses `:disabled`).
-  // Nested parts stay enum-only — their bool refs refuse by name above.
+  // Nested parts and `states` refs take the same expansion (expandRef below).
   const boolNames = new Set(boolProps(contract).map((p) => p.name));
   const substValues = (p: string): string[] | undefined =>
     enums.get(p) ?? (boolNames.has(p) ? ['true', 'false'] : undefined);
@@ -1934,6 +1963,37 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     const enumPart = pairs.filter(([p]) => !boolNames.has(p)).map(([p, v]) => `${p}-${v}`).join('.');
     const boolPart = pairs.filter(([p]) => boolNames.has(p)).map(([p, v]) => boolFrag(p, v)).join('');
     return (enumPart.length > 0 ? enumPart : 'root') + boolPart;
+  };
+  /** N-placeholder expansion over enum AND boolean props: the cartesian in
+   *  DECLARED placeholder order, then declared value order — the web-
+   *  components emitter's `expandRef` is this exact loop, so both resolve
+   *  the same leaves in the same order (core/emitters-check.ts byte-compares
+   *  the var() names). A placeholder naming neither kind of prop has no
+   *  class or attribute to select on and is REFUSED BY NAME — `where` is
+   *  the fact that would otherwise have vanished. */
+  const expandRef = (
+    where: string,
+    refPath: string,
+  ): Array<{ combo: Array<[string, string]>; resolved: string }> => {
+    const phs = placeholdersIn(refPath);
+    const unknown = phs.filter((ph) => substValues(ph) === undefined);
+    if (unknown.length > 0) {
+      errors.push(
+        `${contract.id}: ${where} ref "{${refPath}}" substitutes ${unknown.map((ph) => `{${ph}}`).join(', ')} — not an enum or boolean prop of this contract, so there is no class or attribute to select on`,
+      );
+      return [];
+    }
+    let out: Array<{ combo: Array<[string, string]>; resolved: string }> = [{ combo: [], resolved: refPath }];
+    for (const ph of phs) {
+      const next: typeof out = [];
+      for (const prefix of out) {
+        for (const value of substValues(ph)!) {
+          next.push({ combo: [...prefix.combo, [ph, value]], resolved: prefix.resolved.replaceAll(`{${ph}}`, value) });
+        }
+      }
+      out = next;
+    }
+    return out;
   };
 
   for (const [cssProp, ref] of Object.entries(rootTokens)) {
@@ -2203,13 +2263,15 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         if (checkToken(refPath, `anatomy.root.states.${state}.${cssProp}`)) {
           stateRules.push(`\n.root${sel} {\n  ${cssProp}: ${cssVar(refPath)};\n}`);
         }
-      } else if (phs.length === 1) {
-        const values = enums.get(phs[0]) ?? [];
-        for (const value of values) {
-          const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
-          if (!checkToken(resolved, `anatomy.root.states.${state}.${cssProp}`)) continue;
-          stateRules.push(`\n.${phs[0]}-${value}${sel} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
-        }
+        continue;
+      }
+      // N placeholders (enum and boolean alike) — one rule per value tuple on
+      // the same compound selector the root's tokens take (.variant-primary
+      // .size-sm:hover, .root[data-loading]:hover). One enum placeholder is
+      // byte-identical to the former single-axis branch.
+      for (const { combo, resolved } of expandRef(`anatomy.root.states.${state}.${cssProp}`, refPath)) {
+        if (!checkToken(resolved, `anatomy.root.states.${state}.${cssProp}`)) continue;
+        stateRules.push(`\n.${comboCls(combo)}${sel} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
       }
     }
   }
@@ -2429,12 +2491,13 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         // read as though a sparse cartesian were tolerated. It is not, and that
         // is the whole reason `mintTokens` must supply a leaf for EVERY
         // declared combination — see the ragged-matrix pass there.)
-        for (const combo of enumCombos(phs, enums)) {
-          let resolved = refPath;
-          for (const [ph, value] of combo) resolved = resolved.replaceAll(`{${ph}}`, value);
+        // A boolean placeholder rides the root's data attribute (or native
+        // :disabled) exactly as on the root's own tokens — `.root[data-loading]
+        // .label`; all-enum combos are byte-identical to the former enumCombos
+        // expansion.
+        for (const { combo, resolved } of expandRef(`anatomy.${name}.tokens.${cssProp}`, refPath)) {
           if (!checkToken(resolved, `anatomy.${name}.tokens.${cssProp}`)) continue;
-          const sel = combo.map(([ph, value]) => `.${ph}-${value}`).join('');
-          nestedSubRules.push(`\n${sel} .${name} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
+          nestedSubRules.push(`\n.${comboCls(combo)} .${name} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
         }
         continue;
       }
@@ -2551,12 +2614,13 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
           if (checkToken(refPath, `anatomy.${name}.states.${state}.${cssProp}`)) {
             nestedSubRules.push(`\n.root${sel} .${name} {\n  ${cssProp}: ${cssVar(refPath)};\n}`);
           }
-        } else if (phs.length === 1) {
-          for (const value of enums.get(phs[0]) ?? []) {
-            const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
-            if (!checkToken(resolved, `anatomy.${name}.states.${state}.${cssProp}`)) continue;
-            nestedSubRules.push(`\n.${phs[0]}-${value}${sel} .${name} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
-          }
+          continue;
+        }
+        // N placeholders, enum and boolean — the root's state expansion one
+        // level down (.variant-danger[data-loading]:hover .label).
+        for (const { combo, resolved } of expandRef(`anatomy.${name}.states.${state}.${cssProp}`, refPath)) {
+          if (!checkToken(resolved, `anatomy.${name}.states.${state}.${cssProp}`)) continue;
+          nestedSubRules.push(`\n.${comboCls(combo)}${sel} .${name} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
         }
       }
     }

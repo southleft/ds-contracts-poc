@@ -40,7 +40,8 @@
  *   substituted refs, root and parts alike, overlap gap), tokensByProp (plain +
  *   S2 one-placeholder map refs, ordered v14 entries), literals,
  *   literalsByProp, declared, declaredStates, states (root full
- *   vocabulary + v13 part color channels), statesByProp (v17 per-axis
+ *   vocabulary + v13 part color channels; plain and N-placeholder refs over
+ *   enum and boolean props, the same expandRef the tokens take), statesByProp (v17 per-axis
  *   state rules on the root and on nested parts), layout, layoutByProp,
  *   stylesWhen, overlay, shape, visibleWhen, slots (REAL <slot> elements
  *   with defaultContent as fallback), component refs (the child contract's
@@ -455,11 +456,14 @@ export function shadowCss(contract: Contract): string {
       const phs = placeholdersIn(refPath);
       if (phs.length === 0) {
         rule(`${ROOT_SEL}${sel}`, [`${cssProp}: ${cssVar(refPath)}`]);
-      } else if (phs.length === 1) {
-        for (const value of enums.get(phs[0]) ?? []) {
-          const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
-          rule(`${rootWithEnum(phs[0], value)}${sel}`, [`${cssProp}: ${cssVar(resolved)}`]);
-        }
+        continue;
+      }
+      // RESIDUAL of the multi-placeholder fix: `states` refs kept the
+      // one-enum-placeholder branch, so a two-placeholder or boolean-
+      // placeholder state ref emitted NOTHING. Same expandRef as the tokens;
+      // one enum placeholder is byte-identical to the former branch.
+      for (const { combo, resolved } of expandRef(`root states.${state} "${cssProp}"`, refPath)) {
+        rule(`${rootWithCombo(combo)}${sel}`, [`${cssProp}: ${cssVar(resolved)}`]);
       }
     }
   }
@@ -634,11 +638,12 @@ export function shadowCss(contract: Contract): string {
         const phs = placeholdersIn(refPath);
         if (phs.length === 0) {
           rule(`${ROOT_SEL}${sel} ${partSel(name)}`, [`${cssProp}: ${cssVar(refPath)}`]);
-        } else if (phs.length === 1) {
-          for (const value of enums.get(phs[0]) ?? []) {
-            const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
-            rule(`${rootWithEnum(phs[0], value)}${sel} ${partSel(name)}`, [`${cssProp}: ${cssVar(resolved)}`]);
-          }
+          continue;
+        }
+        // N placeholders (enum and boolean) — the root's state expansion one
+        // level down; the former branch dropped anything but one enum.
+        for (const { combo, resolved } of expandRef(`part "${name}" states.${state} "${cssProp}"`, refPath)) {
+          rule(`${rootWithCombo(combo)}${sel} ${partSel(name)}`, [`${cssProp}: ${cssVar(resolved)}`]);
         }
       }
     }

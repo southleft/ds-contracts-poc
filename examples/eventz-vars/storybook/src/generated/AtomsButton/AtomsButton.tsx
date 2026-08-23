@@ -13,6 +13,7 @@ export interface AtomsButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
   text?: string;
   hasStartIcon?: boolean;
   hasEndIcon?: boolean;
+  isFullWidth?: boolean;
   startIcon?: ReactNode;
   endIcon?: ReactNode;
 }
@@ -24,6 +25,7 @@ export const AtomsButton = forwardRef<HTMLButtonElement, AtomsButtonProps>(funct
     isDisabled = false,
     hasStartIcon = true,
     hasEndIcon = true,
+    isFullWidth = true,
     text = 'Label',
     startIcon,
     endIcon,
@@ -41,6 +43,7 @@ export const AtomsButton = forwardRef<HTMLButtonElement, AtomsButtonProps>(funct
       data-is-disabled={isDisabled || undefined}
       data-has-start-icon={hasStartIcon || undefined}
       data-has-end-icon={hasEndIcon || undefined}
+      data-is-full-width={isFullWidth || undefined}
       {...rest}
     >
       {hasStartIcon ? <div className={styles.startIcon}>{startIcon}</div> : null}

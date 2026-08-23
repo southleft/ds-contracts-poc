@@ -224,3 +224,66 @@ export function capturedTokensFromDump(dump: Record<string, unknown>): CapturedT
     skipped,
   };
 }
+
+// ---------------------------------------------------------------------------
+// FC-DUMP-PROPOSE-CAPTURED-VARIABLES-DROPPED — the CLI receipt
+// ---------------------------------------------------------------------------
+
+/** The receipt line Journey A prints when a dump carries no `_variables`
+ *  channel at all (REST dumps, pre-v1.4 plugin dumps). Named, so a reader of
+ *  the proposal folder can tell "the kit has no variables" from "the CLI
+ *  threw them away" — which is what it did before this receipt existed. */
+export const CAPTURED_VARIABLES_ABSENT_RECEIPT =
+  'no captured variables: the dump carries no `_variables` channel (REST transport or a pre-v1.4 plugin dump) — the designer\'s variables are not in this folder; recapture with the plugin (dump v1.4+) to carry them';
+
+export interface CapturedTokensDocument {
+  /** The DTCG document written as `captured.dtcg.json`: the consuming-mode
+   *  tree (what the proposal's refs resolve against, loadable through
+   *  `--tokens`), plus `$extensions["ds-contracts"].modes` — one DTCG tree
+   *  per Figma MODE NAME carrying that mode's values (dump v1.6), and the
+   *  named skips. */
+  document: Record<string, unknown>;
+  /** The human receipt for the proposal report — counts, modes, skips, and
+   *  the alias limit named. */
+  receipt: string;
+  layer: CapturedTokenLayer;
+}
+
+/**
+ * Build the `captured.dtcg.json` document + report receipt for a dump's
+ * `_variables` channel. Returns null when the dump carries none — the caller
+ * prints CAPTURED_VARIABLES_ABSENT_RECEIPT instead (never nothing).
+ *
+ * What this does NOT claim: the dump captures RESOLVED values per mode, not
+ * the variable's alias graph (a variable aliasing another arrives as the
+ * aliased value). The receipt names that limit, so "aliases preserved" is not
+ * something a reader can mistake this file for.
+ */
+export function capturedTokensDocument(dump: Record<string, unknown>): CapturedTokensDocument | null {
+  const layer = capturedTokensFromDump(dump);
+  if (!layer) return null;
+  const modeNames = Object.keys(layer.modes ?? {}).sort();
+  const modes: Record<string, Record<string, unknown>> = {};
+  for (const mode of modeNames) modes[mode] = layer.modes![mode].tree;
+  const document: Record<string, unknown> = {
+    ...layer.tree,
+    $extensions: {
+      'ds-contracts': {
+        source: 'figma `_variables` (dump v1.4 values, v1.6 per-mode values) — resolved values, not the alias graph',
+        captured: layer.count,
+        ...(modeNames.length > 0 ? { modes } : {}),
+        skipped: layer.skipped,
+      },
+    },
+  };
+  const skipNames = [...new Set(layer.skipped.map((s) => s.name))];
+  const receipt =
+    `${layer.count} captured variable(s) written to captured.dtcg.json as DTCG (the consuming mode's values; ` +
+    (modeNames.length > 0
+      ? `${modeNames.length} mode(s) — ${modeNames.join(', ')} — carried as one tree each under $extensions["ds-contracts"].modes)`
+      : 'single-mode: no per-mode trees captured)') +
+    `; ${layer.skipped.length} skipped by name` +
+    (skipNames.length > 0 ? ` (${skipNames.map((n) => `"${n}"`).join(', ')} — see $extensions["ds-contracts"].skipped for each reason)` : '') +
+    '. LIMIT: the dump carries RESOLVED values per mode, not the alias graph — a variable aliasing another lands as the aliased value; aliases are NOT preserved (named, dump v1.4/v1.6).';
+  return { document, receipt, layer };
+}
