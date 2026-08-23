@@ -102,7 +102,6 @@
     "active",
     "focus-visible"
   ],
-  "figmaStatePreviews": true,
   "anatomy": {
     "root": {
       "stylesWhen": [
@@ -137,7 +136,11 @@
         "startIcon": {
           "slot": {
             "name": "startIcon",
-            "figmaProperty": "startIcon",
+            "bindings": {
+              "figma": {
+                "property": "startIcon"
+              }
+            },
             "defaultContent": [
               {
                 "id": "ds.play"
@@ -162,7 +165,11 @@
         "endIcon": {
           "slot": {
             "name": "endIcon",
-            "figmaProperty": "endIcon",
+            "bindings": {
+              "figma": {
+                "property": "endIcon"
+              }
+            },
             "defaultContent": [
               {
                 "id": "ds.pause"
@@ -176,15 +183,20 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
-      "componentSetKey": "e480cd07dbf6ddbefd4e2c35cb16581b09285391",
-      "nodeId": "2313:42"
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+        "componentSetKey": "e480cd07dbf6ddbefd4e2c35cb16581b09285391",
+        "nodeId": "2313:42"
+      }
     },
     "code": {
-      "importPath": "src/components/Button",
-      "export": "Button"
+      "anchors": {
+        "importPath": "src/components/Button",
+        "export": "Button"
+      }
     }
   }
 }

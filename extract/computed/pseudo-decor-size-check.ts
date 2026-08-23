@@ -181,7 +181,7 @@ console.log('\n3. Emit — literalsByProp width/height resize the compiled shape
         },
       },
     },
-    anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'SizeThumb' } },
+    bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'x', export: 'SizeThumb' } } },
   } as unknown as Contract;
   const data = engine.compileComponentData(contract, new Map([[contract.id, contract]]));
   const find = (s: { name?: string; shape?: { width: number; height: number }; children?: unknown[] }, name: string): typeof s | undefined =>

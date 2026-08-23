@@ -8,9 +8,9 @@
  *
  * Named no-ops on this contract (canvas-only concepts, deliberately not
  * re-created here):
- *   · figmaStatePreviews (canvas State-preview axis — CSS pseudo-classes render these states live here)
+ *   · bindings.figma.statePreviews (canvas State-preview axis — CSS pseudo-classes render these states live here)
  *   · a11y.contrast AA (a review gate, not a rendering fact — no emitter renders it)
- *   · bindings.figma / anchors.figma / slot.figmaProperty (design-side identity, no DOM manifestation)
+ *   · bindings.figma / bindings.figma.anchors / slot.bindings.figma.property (design-side identity, no DOM manifestation)
  */
 import sheet from './ds-button.css.js';
 

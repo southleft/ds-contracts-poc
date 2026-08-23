@@ -21,7 +21,7 @@ treating a manifest edit as a release. Repository `1.0.0-rc.1`, CLI
 `0.5.0-rc.1`, schema `16.1.0-rc.1`, and emitter `0.4.0-rc.1` were published as
 the coordinated candidate under npm `next`; `latest` remains on the stable
 line. The current conversion program advances CLI source to unpublished
-`0.5.0-rc.2`, schema source to unpublished `16.1.0-rc.2`, and emitter source
+`0.5.0-rc.2`, schema source to unpublished `17.0.0-rc.1` (schema 17, the `bindings` hoist), and emitter source
 to unpublished `0.4.0-rc.2`. The coordinated verification and approval sequence is
 [docs/27](docs/27-release-process.md).
 Every open product limitation below has its symptom and status in

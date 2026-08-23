@@ -162,14 +162,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/Token/Token",
-      "export": "Token"
+      "anchors": {
+        "importPath": "src/components/Token/Token",
+        "export": "Token"
+      }
     }
   }
 }

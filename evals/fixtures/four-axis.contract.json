@@ -196,15 +196,19 @@
     "minHitArea": 44,
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null,
-      "nodeId": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null,
+        "nodeId": null
+      }
     },
     "code": {
-      "importPath": "src/components/FourAxis",
-      "export": "FourAxis"
+      "anchors": {
+        "importPath": "src/components/FourAxis",
+        "export": "FourAxis"
+      }
     }
   }
 }

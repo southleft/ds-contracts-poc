@@ -191,14 +191,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/Switch/Switch",
-      "export": "Switch"
+      "anchors": {
+        "importPath": "src/components/Switch/Switch",
+        "export": "Switch"
+      }
     }
   }
 }

@@ -111,14 +111,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
-      "componentSetKey": "2aeeb787afbdf535d2d864b30c279afbe07767c0"
+      "anchors": {
+        "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+        "componentSetKey": "2aeeb787afbdf535d2d864b30c279afbe07767c0"
+      }
     },
     "code": {
-      "importPath": "src/components/AtomsTextLink",
-      "export": "AtomsTextLink"
+      "anchors": {
+        "importPath": "src/components/AtomsTextLink",
+        "export": "AtomsTextLink"
+      }
     }
   }
 }

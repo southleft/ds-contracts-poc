@@ -74,14 +74,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "flowbite-react",
-      "export": "Card"
+      "anchors": {
+        "importPath": "flowbite-react",
+        "export": "Card"
+      }
     }
   }
 }

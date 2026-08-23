@@ -58,14 +58,18 @@
   "anatomy": {
     "root": {}
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "@mui/material",
-      "export": "Checkbox"
+      "anchors": {
+        "importPath": "@mui/material",
+        "export": "Checkbox"
+      }
     }
   }
 }

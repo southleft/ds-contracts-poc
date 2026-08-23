@@ -122,14 +122,18 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "polaris-react/src/components/Spinner/Spinner",
-      "export": "Spinner"
+      "anchors": {
+        "importPath": "polaris-react/src/components/Spinner/Spinner",
+        "export": "Spinner"
+      }
     }
   }
 }

@@ -15728,14 +15728,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@fluentui/react-components",
-          "export": "Avatar"
+          "anchors": {
+            "importPath": "@fluentui/react-components",
+            "export": "Avatar"
+          }
         }
       }
     },
@@ -15948,14 +15952,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@fluentui/react-components",
-          "export": "Badge"
+          "anchors": {
+            "importPath": "@fluentui/react-components",
+            "export": "Badge"
+          }
         }
       }
     },
@@ -16264,17 +16272,21 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@fluentui/react-components",
-          "export": "Button"
+          "anchors": {
+            "importPath": "@fluentui/react-components",
+            "export": "Button"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "./contract.schema.json",
@@ -16721,17 +16733,21 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@fluentui/react-components",
-          "export": "Card"
+          "anchors": {
+            "importPath": "@fluentui/react-components",
+            "export": "Card"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "./contract.schema.json",
@@ -17215,17 +17231,21 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@fluentui/react-components",
-          "export": "Checkbox"
+          "anchors": {
+            "importPath": "@fluentui/react-components",
+            "export": "Checkbox"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "./contract.schema.json",
@@ -17859,14 +17879,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@fluentui/react-components",
-          "export": "Dialog"
+          "anchors": {
+            "importPath": "@fluentui/react-components",
+            "export": "Dialog"
+          }
         }
       }
     },
@@ -18197,17 +18221,21 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@fluentui/react-components",
-          "export": "Input"
+          "anchors": {
+            "importPath": "@fluentui/react-components",
+            "export": "Input"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "./contract.schema.json",
@@ -18536,14 +18564,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@fluentui/react-components",
-          "export": "Spinner"
+          "anchors": {
+            "importPath": "@fluentui/react-components",
+            "export": "Spinner"
+          }
         }
       }
     },
@@ -18850,17 +18882,21 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@fluentui/react-components",
-          "export": "Switch"
+          "anchors": {
+            "importPath": "@fluentui/react-components",
+            "export": "Switch"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "./contract.schema.json",
@@ -19343,14 +19379,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@fluentui/react-components",
-          "export": "TabList"
+          "anchors": {
+            "importPath": "@fluentui/react-components",
+            "export": "TabList"
+          }
         }
       }
     },
@@ -19508,14 +19548,18 @@
           "hugsBelowMaxWidth": true
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@fluentui/react-components",
-          "export": "Tooltip"
+          "anchors": {
+            "importPath": "@fluentui/react-components",
+            "export": "Tooltip"
+          }
         }
       }
     }

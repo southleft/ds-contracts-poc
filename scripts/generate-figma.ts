@@ -67,7 +67,7 @@ const contracts = readdirSync(path.join(ROOT, 'contracts'))
 // FIGMA_FILE_KEY: rebuild-into-a-fresh-file support — overrides the anchor
 // file key baked into every script's WRONG FILE guard. FIGMA_BATCH_LIMIT:
 // transport cap per batch script (the desktop bridge accepts ~50k chars).
-const targetFileKey = process.env.FIGMA_FILE_KEY ?? contracts[0]?.anchors.figma.fileKey ?? null;
+const targetFileKey = process.env.FIGMA_FILE_KEY ?? contracts[0]?.bindings.figma.anchors.fileKey ?? null;
 writeFileSync(path.join(OUT, '01-tokens.js'), engine.buildTokensScript(targetFileKey));
 const ordered = sortByDependencies(contracts); // dependency order + cycle/ref gate
 const byId = new Map(contracts.map((c) => [c.id, c]));
@@ -75,7 +75,7 @@ const byId = new Map(contracts.map((c) => [c.id, c]));
 let index = 2;
 const emitted = ['01-tokens.js'];
 for (const contract of ordered) {
-  if (contract.figmaRepresentation === 'native') continue; // maps to native canvas capability
+  if (contract.bindings.figma.representation === 'native') continue; // maps to native canvas capability
   const outName = `${String(index).padStart(2, '0')}-${contract.name.toLowerCase()}.js`;
   writeFileSync(path.join(OUT, outName), engine.buildComponentScript(contract, byId, process.env.FIGMA_FILE_KEY));
   emitted.push(outName);
@@ -85,7 +85,7 @@ for (const contract of ordered) {
 // Batch scripts: all components in dependency order, chunked so each script
 // stays transport-friendly. Existing components skip, so batches are safe to re-run.
 const BATCH_LIMIT = Number(process.env.FIGMA_BATCH_LIMIT ?? 60_000);
-const batchable = ordered.filter((c) => c.figmaRepresentation !== 'native');
+const batchable = ordered.filter((c) => c.bindings.figma.representation !== 'native');
 const fileKey = targetFileKey;
 const batches: ComponentData[][] = [[]];
 for (const contract of batchable) {

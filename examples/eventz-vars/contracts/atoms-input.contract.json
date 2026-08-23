@@ -182,7 +182,11 @@
                     }
                   }
                 ],
-                "figmaProperty": "startIcon"
+                "bindings": {
+                  "figma": {
+                    "property": "startIcon"
+                  }
+                }
               },
               "visibleWhen": {
                 "prop": "hasStartIcon"
@@ -209,7 +213,11 @@
                     }
                   }
                 ],
-                "figmaProperty": "endIcon"
+                "bindings": {
+                  "figma": {
+                    "property": "endIcon"
+                  }
+                }
               },
               "visibleWhen": {
                 "prop": "hasEndIcon"
@@ -256,16 +264,20 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
-      "componentSetKey": "d03495f1e159b5aa11cb1bc35aa7d355ad626d66",
-      "nodeId": "2365:108"
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+        "componentSetKey": "d03495f1e159b5aa11cb1bc35aa7d355ad626d66",
+        "nodeId": "2365:108"
+      }
     },
     "code": {
-      "importPath": "src/components/AtomsInput",
-      "export": "AtomsInput"
+      "anchors": {
+        "importPath": "src/components/AtomsInput",
+        "export": "AtomsInput"
+      }
     }
-  },
-  "figmaStatePreviews": true
+  }
 }

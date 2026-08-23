@@ -83,9 +83,9 @@ const BLANK_CONTRACT = {
   props: [],
   states: [],
   anatomy: { root: {} },
-  anchors: {
-    figma: { fileKey: null, componentSetKey: null },
-    code: { importPath: "./Blank", export: "Blank" },
+  bindings: {
+    figma: { anchors: { fileKey: null, componentSetKey: null } },
+    code: { anchors: { importPath: "./Blank", export: "Blank" } },
   },
 };
 

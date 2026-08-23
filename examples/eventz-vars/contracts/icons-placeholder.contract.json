@@ -41,14 +41,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
-      "componentSetKey": "8f0ab06f0098a262cb887252f56e0ecbe530cca0"
+      "anchors": {
+        "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+        "componentSetKey": "8f0ab06f0098a262cb887252f56e0ecbe530cca0"
+      }
     },
     "code": {
-      "importPath": "src/components/IconsPlaceholder",
-      "export": "IconsPlaceholder"
+      "anchors": {
+        "importPath": "src/components/IconsPlaceholder",
+        "export": "IconsPlaceholder"
+      }
     }
   }
 }

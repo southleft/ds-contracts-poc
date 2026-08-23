@@ -10,7 +10,7 @@ import { InfoPopover } from './InfoPopover';
 /**
  * GROUND TRUTH — Figma's OWN render of the imported node, beside the
  * compiled canvas. The anchor (fileKey/nodeId) rides the contract itself
- * (anchors.figma, written at proposal time); the token is the session-only
+ * (bindings.figma.anchors, written at proposal time); the token is the session-only
  * one the Figma tab's import used. Every non-fetch state explains itself:
  * no anchor, no token, rate limit, node gone — named, never silent.
  */
@@ -22,7 +22,7 @@ type PanelState =
   | { kind: 'error'; error: string };
 
 export function FigmaGroundTruth({ contract }: { contract: Contract }) {
-  const anchor = contract.anchors?.figma;
+  const anchor = contract.bindings?.figma?.anchors;
   const fileKey = anchor?.fileKey ?? null;
   const nodeId = anchor?.nodeId ?? null;
   const token = figmaSessionToken();
@@ -56,7 +56,7 @@ export function FigmaGroundTruth({ contract }: { contract: Contract }) {
             <strong>Ground truth, not a compile.</strong> The canvas beside this is compiled from
             the contract; this panel is the PNG Figma itself draws for the imported node —
             GET /v1/images/:fileKey (PNG, @2x), using the contract’s own anchor
-            (anchors.figma.fileKey · nodeId) and the session token the import used.
+            (bindings.figma.anchors.fileKey · nodeId) and the session token the import used.
           </p>
           <p>
             The token is session-only by default — sent to api.figma.com and nowhere else, gone on
@@ -71,7 +71,7 @@ export function FigmaGroundTruth({ contract }: { contract: Contract }) {
         {!fileKey || !nodeId ? (
           <p className="gt__msg">
             No Figma source on this contract — it was not imported from a Figma node
-            (anchors.figma is empty), so there is no ground truth to fetch. Generate one via the
+            (bindings.figma.anchors is empty), so there is no ground truth to fetch. Generate one via the
             validation loop: paste the Figma script tab’s output into a file, then import that
             node back here.
           </p>

@@ -25,20 +25,20 @@ const notes: string[] = [];
 for (const subject of PARITY_SUBJECTS) {
   if (subject.kind !== 'contract') continue;
   const file = path.join(ROOT, 'contracts', `${subject.contractId.replace(/^ds\./, '')}.contract.json`);
-  let raw: { id?: string; anchors?: { figma?: FigmaAnchor } };
+  let raw: { id?: string; bindings?: { figma?: { anchors?: FigmaAnchor } } };
   try {
-    raw = JSON.parse(readFileSync(file, 'utf8')) as { id?: string; anchors?: { figma?: FigmaAnchor } };
+    raw = JSON.parse(readFileSync(file, 'utf8')) as { id?: string; bindings?: { figma?: { anchors?: FigmaAnchor } } };
   } catch {
     // catalog ids are ds.button → contracts/button.contract.json; some ids
     // do not map 1:1. Fall back to scanning by id.
     const guess = path.join(ROOT, 'contracts', `${subject.id}.contract.json`);
-    raw = JSON.parse(readFileSync(guess, 'utf8')) as { id?: string; anchors?: { figma?: FigmaAnchor } };
+    raw = JSON.parse(readFileSync(guess, 'utf8')) as { id?: string; bindings?: { figma?: { anchors?: FigmaAnchor } } };
   }
   if (raw.id && raw.id !== subject.contractId) {
     failures.push(`${subject.id}: opened ${file} but contract id is ${raw.id}, expected ${subject.contractId}`);
     continue;
   }
-  const anchor = raw.anchors?.figma;
+  const anchor = raw.bindings?.figma?.anchors;
   if (!anchor?.fileKey || !anchor.nodeId) {
     failures.push(`${subject.id}: contract ${subject.contractId} has no figma fileKey/nodeId`);
     continue;

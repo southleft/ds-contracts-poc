@@ -303,9 +303,9 @@ const MINIMAL_CONTRACT = (id: string, name: string, refId: string) => ({
   semantics: { element: 'div' },
   props: [],
   anatomy: { root: { parts: { inner: { component: { id: refId } } } } },
-  anchors: {
-    figma: { fileKey: null, componentSetKey: null },
-    code: { importPath: `src/components/${name}`, export: name },
+  bindings: {
+    figma: { anchors: { fileKey: null, componentSetKey: null } },
+    code: { anchors: { importPath: `src/components/${name}`, export: name } },
   },
 });
 
@@ -1913,18 +1913,18 @@ const cases: Case[] = [
     claim: 'C3-detection',
     run: () => {
       // Induce the never-synced state: null anchors + no set in the snapshot.
-      editJson('contracts/heading.contract.json', (c) => { c.anchors.figma.componentSetKey = null; c.anchors.figma.nodeId = null; });
+      editJson('contracts/heading.contract.json', (c) => { c.bindings.figma.anchors.componentSetKey = null; c.bindings.figma.anchors.nodeId = null; });
       editJson(FIGMA_COMPONENTS, (s2) => { s2.sets = s2.sets.filter((x: any) => x.name !== 'Heading'); });
       if (parity().status !== 0) throw new Error('never-synced contract failed parity');
       const report = JSON.parse(readFileSync(path.join(SCRATCH, 'parity', 'report.json'), 'utf8'));
       if (!report.pending?.some((p: any) => p.subject === 'Heading')) throw new Error('Heading not routed to pending');
-      editJson('contracts/heading.contract.json', (c) => { c.anchors.figma.componentSetKey = 'deadbeef'; });
+      editJson('contracts/heading.contract.json', (c) => { c.bindings.figma.anchors.componentSetKey = 'deadbeef'; });
       if (parity().status === 0) throw new Error('ANCHORED missing set must stay a hard BEHIND');
       expectFinding(readReport(), 'figma', 'behind', 'Heading');
     },
   },
   {
-    // figmaStatePreviews (v8): the opt-in must be refused by name when hollow.
+    // bindings.figma.statePreviews (v8): the opt-in must be refused by name when hollow.
     id: 'refuse-hollow-state-previews',
     claim: 'C2-refusal',
     run: () => {
@@ -2113,7 +2113,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         b.properties.State = { type: 'VARIANT', defaultValue: 'Default', variantOptions: ['Default', 'Hover', 'Focus Visible', 'Disabled'], preferredValues: null };
         b.variantCount = 24;
       });
-      editJson(CONTRACT, (c) => { delete c.figmaStatePreviews; });
+      editJson(CONTRACT, (c) => { delete c.bindings.figma.statePreviews; });
       editJson(FIGMA_COMPONENTS, (s) => {
         s.sets.find((x: any) => x.name === 'Button').properties.State = {
           type: 'VARIANT', defaultValue: 'Default', variantOptions: ['Default', 'Hover'], preferredValues: null,
@@ -2121,8 +2121,8 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       });
       if (parity().status === 0) throw new Error('Hand-built State axis passed parity');
       const fnd = expectFinding(readReport(), 'figma', 'ahead', 'Button.State');
-      if ((fnd.proposedPatch as any)?.figmaStatePreviews !== true)
-        throw new Error('Kit-rot State axis must propose adoption via figmaStatePreviews');
+      if ((fnd.proposedPatch as any)?.bindings?.figma?.statePreviews !== true)
+        throw new Error('Kit-rot State axis must propose adoption via bindings.figma.statePreviews');
     },
   },
   {
@@ -2419,7 +2419,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     // disabled) is the platform's interaction states, not API. Fixture replay
     // of the REAL imported set: the axis never becomes a prop; hover/pressed/
     // focus land as real state overrides; disabled is a BOOLEAN prop;
-    // figmaStatePreviews round-trips the axis to the canvas; and the emitted
+    // bindings.figma.statePreviews round-trips the axis to the canvas; and the emitted
     // padding/font-size per SIZE variant EQUAL the dump's values exactly —
     // a wrong-but-plausible constant is the worst outcome and is refused.
     id: 'design-state-axis-promotion-cbds-replay',
@@ -2431,7 +2431,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         '✔ NO `state` prop ships in the API',
         '✔ contract states [hover, active, focus-visible, disabled] declared',
         '✔ `disabled` is a real BOOLEAN prop (default false) — never an enum value shipped to code',
-        '✔ figmaStatePreviews: true (the canvas round-trips the states as a State preview axis)',
+        '✔ bindings.figma.statePreviews: true (the canvas round-trips the states as a State preview axis)',
         '✔ size=large: padding EXACT — emitted padding-inline resolves to 16px/16px, padding-block to 8px/8px (dump values)',
         '✔ size=small: padding EXACT — emitted padding-inline resolves to 12px/12px, padding-block to 8px/8px (dump values)',
         '✔ size=large: font-size EXACT — emitted value resolves to 16px (dump value)',
@@ -4118,9 +4118,9 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
             },
           ],
           anatomy: { root: rootExtra },
-          anchors: {
-            figma: { fileKey: null, componentSetKey: null },
-            code: { importPath: 'src/components/EvalFixture', export: 'EvalFixture' },
+          bindings: {
+            figma: { anchors: { fileKey: null, componentSetKey: null } },
+            code: { anchors: { importPath: 'src/components/EvalFixture', export: 'EvalFixture' } },
           },
         });
       // Ordered later-wins: two entries on DIFFERENT props overriding the
@@ -4356,7 +4356,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
             },
           },
         },
-        anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'src/components/S4Lifts', export: 'S4Lifts' } },
+        bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'src/components/S4Lifts', export: 'S4Lifts' } } },
       };
       const parsed = ContractSchema.parse(fixture); // v15 fields are schema vocabulary, not extensions
       const errs: string[] = [];
@@ -4470,7 +4470,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
             literals: { background: 'transparent' },
           },
         },
-        anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'src/components/FillClearFx', export: 'FillClearFx' } },
+        bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'src/components/FillClearFx', export: 'FillClearFx' } } },
       };
       const engine = createFigmaEngine({
         tokens: { primitives: { fx: { bg: { $value: '#301050', $type: 'color' } } }, semantic: {}, light: {}, dark: {}, brands: { default: {} } },
@@ -6124,7 +6124,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         const committedDir = path.join(ROOT, 'examples', lib);
         const manifest = JSON.parse(readFileSync(path.join(committedDir, 'ds-library.json'), 'utf8')) as PromoteConfig;
         // A throwaway example dir seeded with the committed icons (the icon map
-        // is an INPUT to the figmaStatePreviews probe) — everything else the
+        // is an INPUT to the statePreviews probe) — everything else the
         // module reads stays pointed at the repo.
         const workDir = path.join(tmp, lib);
         mkdirSync(path.join(workDir, 'contracts'), { recursive: true });
@@ -6608,7 +6608,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
               'icon-3-incomplete': { icon: { asset: 'eval-check' }, element: 'span' },
               'box-4': { layout: { display: 'flex' }, parts: { 'part-0-1': { text: 'leaf', literals: { 'padding-left': '2px' } } } },
             } } },
-            anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'src/components/HyphenParts', export: 'HyphenParts' } },
+            bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'src/components/HyphenParts', export: 'HyphenParts' } } },
           });
           const icons = new Map([['eval-check', '<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h20v20H0z"/></svg>']]);
           const contracts = new Map([[fixture.id, fixture]]);
@@ -6861,7 +6861,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
             } },
           } },
         } } },
-        anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'Control' } },
+        bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'x', export: 'Control' } } },
       };
       ContractSchema.parse(fixture);
       const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
@@ -6929,7 +6929,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
             },
           },
         },
-        anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'Adorned' } },
+        bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'x', export: 'Adorned' } } },
       };
       ContractSchema.parse(fixture);
       const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
@@ -11351,9 +11351,9 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       {
         const chip = JSON.parse(
           readFileSync(path.join(ROOT, 'examples/altitude/contracts/chip.contract.json'), 'utf8'),
-        ) as { figmaStatePreviews?: boolean };
-        if (chip.figmaStatePreviews) {
-          throw new Error('FC-STATE-PREVIEW-NOISE: altitude.chip figmaStatePreviews must be false (focus blue rings clutter showcase)');
+        ) as { bindings: { figma: { statePreviews?: boolean } } };
+        if (chip.bindings.figma.statePreviews) {
+          throw new Error('FC-STATE-PREVIEW-NOISE: altitude.chip bindings.figma.statePreviews must be false (focus blue rings clutter showcase)');
         }
         const chipScriptPath = path.join(ROOT, 'examples/altitude/figma/chip.figma.js');
         if (existsSync(chipScriptPath)) {
@@ -11363,7 +11363,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
           // "State=Focus Visible" leftovers it removes — that string is not a
           // variant. A real preview variant lands as a quoted node NAME in the
           // COMPONENTS payload ("Variant=…, State=Focus Visible"), which is
-          // what this pin forbids when figmaStatePreviews is off.
+          // what this pin forbids when statePreviews is off.
           if (/"name": "[^"]*State=Focus Visible/.test(chipScript)) {
             throw new Error('FC-STATE-PREVIEW-NOISE: chip emit must not include Focus Visible variants');
           }

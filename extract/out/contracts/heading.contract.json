@@ -87,14 +87,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/Heading/Heading",
-      "export": "Heading"
+      "anchors": {
+        "importPath": "src/components/Heading/Heading",
+        "export": "Heading"
+      }
     }
   }
 }

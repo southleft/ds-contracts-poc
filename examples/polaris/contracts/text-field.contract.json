@@ -1205,15 +1205,19 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "polaris-react/src/components/TextField/TextField",
-      "export": "TextField"
+      "anchors": {
+        "importPath": "polaris-react/src/components/TextField/TextField",
+        "export": "TextField"
+      }
     }
-  },
-  "figmaStatePreviews": true
+  }
 }

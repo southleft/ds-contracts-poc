@@ -70,14 +70,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "@ds-contracts/conformance",
-      "export": "CaseGridAbsoluteOverlay"
+      "anchors": {
+        "importPath": "@ds-contracts/conformance",
+        "export": "CaseGridAbsoluteOverlay"
+      }
     }
   }
 }

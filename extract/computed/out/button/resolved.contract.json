@@ -456,14 +456,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "polaris-react/src/components/Button/Button",
-      "export": "Button"
+      "anchors": {
+        "importPath": "polaris-react/src/components/Button/Button",
+        "export": "Button"
+      }
     }
   }
 }

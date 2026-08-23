@@ -41,14 +41,18 @@
   "anatomy": {
     "root": {}
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Chip/Chip",
-      "export": "Chip"
+      "anchors": {
+        "importPath": "extract/pilots/eventz/.src/eventz-design-system/packages/core/src/components/server/Chip/Chip",
+        "export": "Chip"
+      }
     }
   }
 }

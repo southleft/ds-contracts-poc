@@ -282,7 +282,10 @@ try {
       props: [],
       states: [],
       anatomy: { root },
-      anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: '@ds-contracts/code-only-facts-check', export: 'CodeOnlySynthetic' } },
+      bindings: {
+        figma: { anchors: { fileKey: null, componentSetKey: null } },
+        code: { anchors: { importPath: '@ds-contracts/code-only-facts-check', export: 'CodeOnlySynthetic' } },
+      },
     }) as Contract;
   const factsOf = (root: Record<string, unknown>): CodeOnlyFact[] => {
     const c = seed(root);

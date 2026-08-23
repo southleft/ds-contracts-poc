@@ -116,7 +116,7 @@ function sorted(v: unknown): unknown {
 // Part-tree comparison
 // ---------------------------------------------------------------------------
 
-const SLOT_DESIGN_FIELDS = ['accepts', 'acceptsMode', 'min', 'max', 'required', 'figmaProperty', 'defaultContent'];
+const SLOT_DESIGN_FIELDS = ['accepts', 'acceptsMode', 'min', 'max', 'required', 'bindings', 'defaultContent'];
 
 function compareParts(component: string, partPath: string, contract: Json, proposed: Json, isRoot: boolean) {
   const subject = `anatomy.${partPath}`;
@@ -239,9 +239,9 @@ function compareComponent(contract: Json, proposal: Json, proposalNotes: string[
 
   // Governance / design-side contract fields: genuinely not in code.
   add(name, 'version, status, description', 'CODE-ABSENT', 'contract governance prose — extraction proposes 0.1.0 draft');
-  add(name, 'anchors.figma', 'CODE-ABSENT', 'design-side identity anchors — written back by the Figma generator');
+  add(name, 'bindings.figma.anchors', 'CODE-ABSENT', 'design-side identity anchors — written back by the Figma generator');
   if (contract.a11y) add(name, 'a11y', 'CODE-ABSENT', 'declared a11y budget — a contract commitment, not code syntax');
-  if (contract.figmaStatePreviews) add(name, 'figmaStatePreviews', 'CODE-ABSENT', 'canvas-only opt-in');
+  if (contract.bindings.figma.statePreviews) add(name, 'bindings.figma.statePreviews', 'CODE-ABSENT', 'canvas-only opt-in');
   add(name, 'props.*.bindings.figma', 'CODE-ABSENT', 'design-side spellings — extraction infers TitleCase, reconcile confirms');
 
   // semantics

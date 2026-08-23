@@ -599,15 +599,19 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "polaris-react/src/components/Tag/Tag",
-      "export": "Tag"
+      "anchors": {
+        "importPath": "polaris-react/src/components/Tag/Tag",
+        "export": "Tag"
+      }
     }
-  },
-  "figmaStatePreviews": true
+  }
 }

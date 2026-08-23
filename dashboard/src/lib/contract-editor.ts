@@ -314,7 +314,7 @@ export function planAmend(original: Contract, edited: Contract): AmendPlan {
     capped: false,
   };
 
-  if ((edited.figmaRepresentation ?? 'component') === 'native') {
+  if ((edited.bindings.figma.representation ?? 'component') === 'native') {
     return {
       kind: 'native',
       ...empty,

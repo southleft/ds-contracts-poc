@@ -7,7 +7,7 @@
  *                 contract is PROPOSED from the dump (proposeFromDump with
  *                 minting + the captured-variables layer), exactly the
  *                 playground import path.
- *   · contract  — a repo catalog contract whose anchors.figma point at the
+ *   · contract  — a repo catalog contract whose bindings.figma.anchors point at the
  *                 generated set in the main POC file. The contract is the
  *                 shipping one; the canvas is the generator's output.
  *

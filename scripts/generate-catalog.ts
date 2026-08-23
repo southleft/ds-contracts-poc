@@ -168,9 +168,9 @@ const catalog = {
     version: c.version,
     status: c.status,
     description: c.description,
-    figma: c.figmaRepresentation === 'native'
+    figma: c.bindings.figma.representation === 'native'
       ? { representation: 'native' }
-      : { representation: 'component', componentSetKey: c.anchors.figma.componentSetKey },
+      : { representation: 'component', componentSetKey: c.bindings.figma.anchors.componentSetKey },
     props: catalogProps(c),
     ...(c.events && c.events.length > 0
       ? {

@@ -93,14 +93,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/MetadataListItem/MetadataListItem",
-      "export": "MetadataListItem"
+      "anchors": {
+        "importPath": "src/components/MetadataListItem/MetadataListItem",
+        "export": "MetadataListItem"
+      }
     }
   }
 }

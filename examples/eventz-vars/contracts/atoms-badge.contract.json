@@ -131,15 +131,19 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
-      "componentSetKey": "f94a876aad30083433e12119de1a5393008c492f",
-      "nodeId": "2369:2993"
+      "anchors": {
+        "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+        "componentSetKey": "f94a876aad30083433e12119de1a5393008c492f",
+        "nodeId": "2369:2993"
+      }
     },
     "code": {
-      "importPath": "src/components/AtomsBadge",
-      "export": "AtomsBadge"
+      "anchors": {
+        "importPath": "src/components/AtomsBadge",
+        "export": "AtomsBadge"
+      }
     }
   }
 }

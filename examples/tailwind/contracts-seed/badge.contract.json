@@ -67,14 +67,18 @@
   "anatomy": {
     "root": {}
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "flowbite-react",
-      "export": "Badge"
+      "anchors": {
+        "importPath": "flowbite-react",
+        "export": "Badge"
+      }
     }
   },
   "states": []

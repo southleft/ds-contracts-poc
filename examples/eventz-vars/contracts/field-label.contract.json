@@ -55,14 +55,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
-      "componentSetKey": "d66a0be49a66f26437e973eaff5e16f170e2b305"
+      "anchors": {
+        "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+        "componentSetKey": "d66a0be49a66f26437e973eaff5e16f170e2b305"
+      }
     },
     "code": {
-      "importPath": "src/components/FieldLabel",
-      "export": "FieldLabel"
+      "anchors": {
+        "importPath": "src/components/FieldLabel",
+        "export": "FieldLabel"
+      }
     }
   }
 }

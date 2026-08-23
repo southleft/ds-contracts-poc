@@ -66,7 +66,7 @@ const REQUIRED = (
  * BASE (prop absent) rendering.
  *
  * The canvas can only be on the non-base value when the contract binds that
- * prop as a Figma VARIANT axis, or when `figmaStatePreviews` compiles a `State=`
+ * prop as a Figma VARIANT axis, or when `bindings.figma.statePreviews` compiles a `State=`
  * axis. Bound as a Figma BOOLEAN property — which toggles child visibility and
  * CANNOT repaint a fill — no cell in the set is ever disabled, so a reference
  * pinned there is scored against a cell that is a DIFFERENT POINT IN PROP SPACE
@@ -110,7 +110,7 @@ if (existsSync(CONFIG) && existsSync(CONTRACTS)) {
     const prop = (contract.props ?? []).find((p) => p.name === sp.prop);
     const kind = prop?.bindings?.figma?.kind ?? null;
     const previews =
-      Boolean(contract.figmaStatePreviews) && (contract.states ?? []).includes(sp.state);
+      Boolean(contract.bindings.figma.statePreviews) && (contract.states ?? []).includes(sp.state);
     statePlanes.set(stem, {
       prop: sp.prop,
       state: sp.state,

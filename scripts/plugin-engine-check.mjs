@@ -175,7 +175,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   const childA = clone(badge);
   childA.id = 'test.identity-child-a';
   childA.name = 'CollisionChild';
-  childA.anchors.figma = { fileKey: null, componentSetKey: null, nodeId: null };
+  childA.bindings.figma.anchors = { fileKey: null, componentSetKey: null, nodeId: null };
   const childB = clone(childA);
   childB.id = 'test.identity-child-b';
   childB.description = 'The authoritative same-name child.';
@@ -190,14 +190,14 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
     choice: {
       slot: {
         name: 'choice',
-        figmaProperty: 'Choice',
+        bindings: { figma: { property: 'Choice' } },
         required: true,
         accepts: [childB.id],
         defaultContent: [{ id: childB.id }],
       },
     },
   };
-  parent.anchors.figma = { fileKey: null, componentSetKey: null, nodeId: null };
+  parent.bindings.figma.anchors = { fileKey: null, componentSetKey: null, nodeId: null };
 
   const identityMock = createFigmaMock();
   const runIdentity = (code) =>
@@ -227,7 +227,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   let ordinary = parentNode.findOne((n) => n.type === 'INSTANCE' && n.name === 'chosen');
   assert(ordinary && (await ownerOf(ordinary)) === childBNode, 'same-name distinct-ID parent targets the authoritative child');
   // NATIVE SLOTS: the slot is a real SlotNode whose LAYER NAME is the SLOT
-  // property's display name (the contract's slot.figmaProperty), and
+  // property's display name (the contract's slot.bindings.figma.property), and
   // `accepts` rides preferredValues on the SLOT definition — not an
   // INSTANCE_SWAP property pointing at a dashed placeholder.
   const choiceEntry = Object.entries(parentNode.componentPropertyDefinitions).find(
@@ -266,7 +266,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   childBNode.setSharedPluginData('ds_contracts', 'contractId', '');
   const anchoredB = clone(childB);
   anchoredB.description += ' Amended through its stable anchor.';
-  anchoredB.anchors.figma.componentSetKey = childBKey;
+  anchoredB.bindings.figma.anchors.componentSetKey = childBKey;
   const anchorPlan = DSC.planGenerate([anchoredB], { withTokens: false, fileKey: '' });
   assert(anchorPlan.ok, 'rename-stability anchor fixture plans');
   for (const step of anchorPlan.steps) await runIdentity(step.code);
@@ -1252,7 +1252,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   const shapeB = setShape(mockB);
   // STATE-PLANE PROJECTION round: Switch 14 → 28 (`checked` reclassified from
   // an out-of-vocabulary stateProp to a real VARIANT AXIS) and Button 63 → 75
-  // (the figmaStatePreviews probe accepted a State axis). Both must survive
+  // (the statePreviews probe accepted a State axis). Both must survive
   // the JSON-only paste identically to the compiled-script path.
   // Wave 5 denominator (2026-08-05): Accordion→TextField carried set expanded
   // from 11 to 27 COMPONENT_SETs as Alert/Avatar/Badge/… joined the paste surface.
@@ -1442,7 +1442,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
 
   // --- PROTOTYPE WIRING: the State axis is LIVE, and its limits are named --
   // MUI Button declares states ["disabled","active","focus-visible","hover"]
-  // and opts into figmaStatePreviews, so its State=Default cells on the
+  // and opts into bindings.figma.statePreviews, so its State=Default cells on the
   // default (Size=Medium) plane must carry EXACTLY [ON_HOVER→Hover,
   // ON_PRESS→Active]. Everything else in the set must carry ZERO — and the
   // two states Figma has no trigger for must be destinations of NOTHING.

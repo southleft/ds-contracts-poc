@@ -28,14 +28,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/Code/Code",
-      "export": "Code"
+      "anchors": {
+        "importPath": "src/components/Code/Code",
+        "export": "Code"
+      }
     }
   }
 }

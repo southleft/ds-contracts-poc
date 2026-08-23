@@ -79,7 +79,7 @@ export const examples: Example[] = [
     contractId: 'ds.button',
     name: 'Button',
     category: 'Atom',
-    blurb: 'Variants, sizes, icon slots, and figmaStatePreviews — the React output ships a state-preview story.',
+    blurb: 'Variants, sizes, icon slots, and bindings.figma.statePreviews — the React output ships a state-preview story.',
     caption: `State previews: ${buttonStateList} ship as extra canvas variants (the State axis) while code keeps them as live CSS states.`,
   },
   {

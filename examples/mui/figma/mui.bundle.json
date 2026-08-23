@@ -10805,14 +10805,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Accordion"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Accordion"
+          }
         }
       }
     },
@@ -11082,14 +11086,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Alert"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Alert"
+          }
         }
       }
     },
@@ -11764,14 +11772,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Autocomplete"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Autocomplete"
+          }
         }
       }
     },
@@ -11885,14 +11897,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Avatar"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Avatar"
+          }
         }
       }
     },
@@ -12181,14 +12197,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Badge"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Badge"
+          }
         }
       }
     },
@@ -12393,14 +12413,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Breadcrumbs"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Breadcrumbs"
+          }
         }
       }
     },
@@ -12648,17 +12672,21 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Button"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Button"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "./contract.schema.json",
@@ -12779,14 +12807,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Card"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Card"
+          }
         }
       }
     },
@@ -13035,14 +13067,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Checkbox"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Checkbox"
+          }
         }
       }
     },
@@ -13267,14 +13303,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Chip"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Chip"
+          }
         }
       }
     },
@@ -13349,14 +13389,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "CircularProgress"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "CircularProgress"
+          }
         }
       }
     },
@@ -13554,14 +13598,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Dialog"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Dialog"
+          }
         }
       }
     },
@@ -13649,14 +13697,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Divider"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Divider"
+          }
         }
       }
     },
@@ -13805,14 +13857,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Drawer"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Drawer"
+          }
         }
       }
     },
@@ -14031,14 +14087,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Fab"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Fab"
+          }
         }
       }
     },
@@ -14242,14 +14302,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "IconButton"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "IconButton"
+          }
         }
       }
     },
@@ -14357,14 +14421,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": "mui.input-adornment"
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": "mui.input-adornment"
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "InputAdornment"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "InputAdornment"
+          }
         }
       }
     },
@@ -14497,14 +14565,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "LinearProgress"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "LinearProgress"
+          }
         }
       }
     },
@@ -14665,17 +14737,21 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Link"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Link"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "./contract.schema.json",
@@ -14855,14 +14931,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Menu"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Menu"
+          }
         }
       }
     },
@@ -14998,14 +15078,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Paper"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Paper"
+          }
         }
       }
     },
@@ -15325,14 +15409,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Radio"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Radio"
+          }
         }
       }
     },
@@ -15667,14 +15755,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Select"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Select"
+          }
         }
       }
     },
@@ -16130,14 +16222,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Slider"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Slider"
+          }
         }
       }
     },
@@ -16245,14 +16341,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Snackbar"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Snackbar"
+          }
         }
       }
     },
@@ -16669,14 +16769,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Switch"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Switch"
+          }
         }
       }
     },
@@ -17044,14 +17148,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "TablePagination"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "TablePagination"
+          }
         }
       }
     },
@@ -18519,14 +18627,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Table"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Table"
+          }
         }
       }
     },
@@ -18892,14 +19004,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Tabs"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Tabs"
+          }
         }
       }
     },
@@ -19193,14 +19309,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "TextField"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "TextField"
+          }
         }
       }
     },
@@ -19321,14 +19441,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@mui/material",
-          "export": "Tooltip"
+          "anchors": {
+            "importPath": "@mui/material",
+            "export": "Tooltip"
+          }
         }
       }
     }

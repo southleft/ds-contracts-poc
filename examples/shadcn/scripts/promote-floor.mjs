@@ -4,7 +4,7 @@
  * probe calls the REAL referee rather than re-implementing its rules.)
  *
  * SHIM over the ONE shared pipeline (`packages/cli/src/promote.ts` — source-
- * alias pass, provenance anchors, figmaStatePreviews probe, minted merge,
+ * alias pass, provenance anchors, statePreviews probe, minted merge,
  * resolution guard), driven by `examples/shadcn/ds-library.json`.
  *
  * Equivalent:

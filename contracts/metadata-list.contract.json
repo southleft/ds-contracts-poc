@@ -95,15 +95,19 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
-      "componentSetKey": "f4c106dcd1de208ef1018b6d8ee4e30cdc030f0d",
-      "nodeId": "11:970"
+      "anchors": {
+        "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+        "componentSetKey": "f4c106dcd1de208ef1018b6d8ee4e30cdc030f0d",
+        "nodeId": "11:970"
+      }
     },
     "code": {
-      "importPath": "src/components/MetadataList",
-      "export": "MetadataList"
+      "anchors": {
+        "importPath": "src/components/MetadataList",
+        "export": "MetadataList"
+      }
     }
   }
 }

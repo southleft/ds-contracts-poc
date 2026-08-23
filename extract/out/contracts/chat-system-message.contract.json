@@ -118,14 +118,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/ChatSystemMessage/ChatSystemMessage",
-      "export": "ChatSystemMessage"
+      "anchors": {
+        "importPath": "src/components/ChatSystemMessage/ChatSystemMessage",
+        "export": "ChatSystemMessage"
+      }
     }
   }
 }

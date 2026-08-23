@@ -42,14 +42,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
-      "componentSetKey": "139e6a8cb445c8667beee1e949878ce532178690"
+      "anchors": {
+        "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+        "componentSetKey": "139e6a8cb445c8667beee1e949878ce532178690"
+      }
     },
     "code": {
-      "importPath": "src/components/IconsClose",
-      "export": "IconsClose"
+      "anchors": {
+        "importPath": "src/components/IconsClose",
+        "export": "IconsClose"
+      }
     }
   }
 }

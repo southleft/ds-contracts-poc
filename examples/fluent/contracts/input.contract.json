@@ -325,15 +325,19 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "@fluentui/react-components",
-      "export": "Input"
+      "anchors": {
+        "importPath": "@fluentui/react-components",
+        "export": "Input"
+      }
     }
-  },
-  "figmaStatePreviews": true
+  }
 }

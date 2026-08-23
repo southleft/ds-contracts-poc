@@ -53,7 +53,7 @@ const KNOWN_FILE_KEYS = new Set([
 
 /**
  * Required completed receipts — every first-party contract except
- * figmaRepresentation:native (inline, stack). Override with
+ * bindings.figma.representation:native (inline, stack). Override with
  * CONSOLE_LOOP_REQUIRED=a,b,c.
  */
 const DEFAULT_REQUIRED = [

@@ -14,6 +14,7 @@ import { generateCommand } from './commands/generate.js';
 import { figmaCommand } from './commands/figma.js';
 import { diffCommand } from './commands/diff.js';
 import { proposePrCommand } from './commands/propose-pr.js';
+import { migrateCommand } from './commands/migrate.js';
 
 declare const __DS_CONTRACTS_CLI_VERSION__: string;
 const VERSION = typeof __DS_CONTRACTS_CLI_VERSION__ === 'string' ? __DS_CONTRACTS_CLI_VERSION__ : 'dev';
@@ -48,7 +49,7 @@ Commands:
                                               still runs first, whatever stage you resume from)
   promote --config <ds-library.json>          computed-capture artifacts → promoted contracts +
                                               minted token tree (source-alias pass, provenance
-                                              anchors, figmaStatePreviews probe, resolution
+                                              anchors, statePreviews probe, resolution
                                               guard). Also runs as onboard's promote stage.
   init [--detect] [--force]                   write ds-contracts.config.json here (--detect
                                               prefills adapter/root/tokens + styling hints from
@@ -100,6 +101,11 @@ Commands:
                                               no recorded target it says so and writes no code.
   diff [config]                               parity referee: contracts vs code/design
                                               exit 0 clean · 1 drift · 2 error
+  migrate <paths..> [--check]                 schema 17 codemod: rewrite every JSON document
+                                              under <paths> from the v16 spellings
+                                              (figmaRepresentation, figmaStatePreviews,
+                                              anchors.*, slot.figmaProperty) to bindings.<surface>.*;
+                                              --check writes nothing, exit 1 if any remain
   propose-pr <file> --repo owner/name         open the contract change + generated code as one PR
           [--token t] [--base b] [--path p] [--title t] [--target t]
           [--code-path d] [--tokens f,f] [--icons d] [--stories]
@@ -158,7 +164,7 @@ Also:
   promote: `ds-contracts promote --config <ds-library.json>
 
 Computed-capture artifacts → promoted contracts + minted token tree
-(source-alias pass, provenance anchors, figmaStatePreviews, resolution guard).
+(source-alias pass, provenance anchors, bindings.figma.statePreviews, resolution guard).
 Also runs as onboard's promote stage.
 `,
   init: `ds-contracts init [--detect] [--force]
@@ -207,6 +213,21 @@ Bundle is the one-paste CONTRACTS-BUNDLE. receive writes nothing without --apply
     English per-channel contract diff (docs/18 G11). Exit 0 if identical,
     1 if channels changed, 2 on usage/config errors.
 `,
+  migrate: `ds-contracts migrate <paths..> [--check] [--quiet]
+
+The schema 17 codemod. Rewrites every *.json under <paths> (files or
+directories; node_modules/.git/dist skipped) from the v16 contract spellings
+to v17 — the ONE rename table @ds-contracts/schema ships:
+  figmaRepresentation        → bindings.figma.representation
+  figmaStatePreviews         → bindings.figma.statePreviews
+  anchors.figma              → bindings.figma.anchors
+  anchors.code               → bindings.code.anchors
+  <part>.slot.figmaProperty  → <part>.slot.bindings.figma.property
+Files without a v16 spelling are untouched. Each rewritten file keeps its own
+indentation and trailing newline; a file that cannot round-trip byte-for-byte
+is REFUSED by name (exit 1), never reformatted. --check: write nothing, exit 1
+while any file still carries a v16 spelling.
+`,
   'propose-pr': `ds-contracts propose-pr <file> --repo owner/name
   [--token t] [--base b] [--path p] [--title t] [--target t]
   [--code-path d] [--tokens f,f] [--icons d] [--stories]
@@ -242,6 +263,7 @@ async function main(): Promise<number> {
     case 'figma':
     case 'diff':
     case 'propose-pr':
+    case 'migrate':
       if (wantsHelp(rest)) {
         console.log(COMMAND_HELP[command] ?? USAGE);
         return 0;
@@ -267,6 +289,8 @@ async function main(): Promise<number> {
       return diffCommand(rest);
     case 'propose-pr':
       return proposePrCommand(rest);
+    case 'migrate':
+      return migrateCommand(rest);
     default:
       console.error(`Unknown command "${command}"\n\n${USAGE}`);
       return 2;

@@ -214,7 +214,7 @@ console.log('\n3. the canvas DRAWS it — the slant becomes the italic face, not
           ...(Object.keys(declared).length > 0 ? { declared } : {}),
         },
       },
-      anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'EvalSlant' } },
+      bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'x', export: 'EvalSlant' } } },
     }) as Contract;
 
   const emit = (c: Contract) => emitFigmaScript(c, { tokens: TOKENS, icons: new Map(), contracts: new Map([[c.id, c]]) });

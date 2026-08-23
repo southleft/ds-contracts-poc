@@ -842,7 +842,7 @@ for (const style of fontStyles) {
   await figma.loadFontAsync({ family: 'Inter', style });
 }
 
-// State previews (figmaStatePreviews): merge the enum-API cartesian with the
+// State previews (bindings.figma.statePreviews): merge the enum-API cartesian with the
 // canvas-only preview overlay; base variants gain an explicit State=Default
 // segment so every variant in the set carries the axis (Figma derives
 // variant properties from names). Contracts without previews pass through
@@ -1617,7 +1617,7 @@ function withCodeOnlyFacts(report, C, degradedFrom) {
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
 // REPORTED, never deleted — except State preview leftovers when
-// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
+// bindings.figma.statePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   set.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -1690,7 +1690,7 @@ async function amendSet(set, C) {
     }
   }
   // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
-  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // State=Focus Visible (etc.) variants from a prior statePreviews:true
   // sync must be removed — otherwise amend leaves a doubled showcase grid.
   const expectedHasState = EV.some((v) => /, State=/.test(v.name));
   if (!expectedHasState && report.extraVariants.length) {
@@ -1765,7 +1765,7 @@ async function amendSet(set, C) {
         if (defs[k].type !== 'INSTANCE_SWAP') {
           throw new Error(
             'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
-            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
           );
         }
         await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
@@ -1940,7 +1940,7 @@ async function amendComponent(comp, C) {
       if (defs[k].type !== 'INSTANCE_SWAP') {
         throw new Error(
           'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
-          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
         );
       }
       await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
@@ -3159,7 +3159,7 @@ for (const style of fontStyles) {
   await figma.loadFontAsync({ family: 'Inter', style });
 }
 
-// State previews (figmaStatePreviews): merge the enum-API cartesian with the
+// State previews (bindings.figma.statePreviews): merge the enum-API cartesian with the
 // canvas-only preview overlay; base variants gain an explicit State=Default
 // segment so every variant in the set carries the axis (Figma derives
 // variant properties from names). Contracts without previews pass through
@@ -3998,7 +3998,7 @@ function withCodeOnlyFacts(report, C, degradedFrom) {
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
 // REPORTED, never deleted — except State preview leftovers when
-// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
+// bindings.figma.statePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   set.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -4071,7 +4071,7 @@ async function amendSet(set, C) {
     }
   }
   // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
-  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // State=Focus Visible (etc.) variants from a prior statePreviews:true
   // sync must be removed — otherwise amend leaves a doubled showcase grid.
   const expectedHasState = EV.some((v) => /, State=/.test(v.name));
   if (!expectedHasState && report.extraVariants.length) {
@@ -4146,7 +4146,7 @@ async function amendSet(set, C) {
         if (defs[k].type !== 'INSTANCE_SWAP') {
           throw new Error(
             'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
-            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
           );
         }
         await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
@@ -4321,7 +4321,7 @@ async function amendComponent(comp, C) {
       if (defs[k].type !== 'INSTANCE_SWAP') {
         throw new Error(
           'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
-          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
         );
       }
       await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
@@ -5870,7 +5870,7 @@ for (const style of fontStyles) {
   await figma.loadFontAsync({ family: 'Inter', style });
 }
 
-// State previews (figmaStatePreviews): merge the enum-API cartesian with the
+// State previews (bindings.figma.statePreviews): merge the enum-API cartesian with the
 // canvas-only preview overlay; base variants gain an explicit State=Default
 // segment so every variant in the set carries the axis (Figma derives
 // variant properties from names). Contracts without previews pass through
@@ -6694,7 +6694,7 @@ function withCodeOnlyFacts(report, C, degradedFrom) {
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
 // REPORTED, never deleted — except State preview leftovers when
-// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
+// bindings.figma.statePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   set.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -6767,7 +6767,7 @@ async function amendSet(set, C) {
     }
   }
   // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
-  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // State=Focus Visible (etc.) variants from a prior statePreviews:true
   // sync must be removed — otherwise amend leaves a doubled showcase grid.
   const expectedHasState = EV.some((v) => /, State=/.test(v.name));
   if (!expectedHasState && report.extraVariants.length) {
@@ -6842,7 +6842,7 @@ async function amendSet(set, C) {
         if (defs[k].type !== 'INSTANCE_SWAP') {
           throw new Error(
             'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
-            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
           );
         }
         await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
@@ -7017,7 +7017,7 @@ async function amendComponent(comp, C) {
       if (defs[k].type !== 'INSTANCE_SWAP') {
         throw new Error(
           'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
-          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
         );
       }
       await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
@@ -8111,7 +8111,7 @@ for (const style of fontStyles) {
   await figma.loadFontAsync({ family: 'Inter', style });
 }
 
-// State previews (figmaStatePreviews): merge the enum-API cartesian with the
+// State previews (bindings.figma.statePreviews): merge the enum-API cartesian with the
 // canvas-only preview overlay; base variants gain an explicit State=Default
 // segment so every variant in the set carries the axis (Figma derives
 // variant properties from names). Contracts without previews pass through
@@ -8941,7 +8941,7 @@ function withCodeOnlyFacts(report, C, degradedFrom) {
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
 // REPORTED, never deleted — except State preview leftovers when
-// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
+// bindings.figma.statePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   set.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -9014,7 +9014,7 @@ async function amendSet(set, C) {
     }
   }
   // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
-  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // State=Focus Visible (etc.) variants from a prior statePreviews:true
   // sync must be removed — otherwise amend leaves a doubled showcase grid.
   const expectedHasState = EV.some((v) => /, State=/.test(v.name));
   if (!expectedHasState && report.extraVariants.length) {
@@ -9089,7 +9089,7 @@ async function amendSet(set, C) {
         if (defs[k].type !== 'INSTANCE_SWAP') {
           throw new Error(
             'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
-            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
           );
         }
         await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
@@ -9264,7 +9264,7 @@ async function amendComponent(comp, C) {
       if (defs[k].type !== 'INSTANCE_SWAP') {
         throw new Error(
           'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
-          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
         );
       }
       await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
@@ -9779,7 +9779,7 @@ for (const style of fontStyles) {
   await figma.loadFontAsync({ family: 'Inter', style });
 }
 
-// State previews (figmaStatePreviews): merge the enum-API cartesian with the
+// State previews (bindings.figma.statePreviews): merge the enum-API cartesian with the
 // canvas-only preview overlay; base variants gain an explicit State=Default
 // segment so every variant in the set carries the axis (Figma derives
 // variant properties from names). Contracts without previews pass through
@@ -10652,7 +10652,7 @@ function withCodeOnlyFacts(report, C, degradedFrom) {
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
 // REPORTED, never deleted — except State preview leftovers when
-// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
+// bindings.figma.statePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   set.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -10725,7 +10725,7 @@ async function amendSet(set, C) {
     }
   }
   // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
-  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // State=Focus Visible (etc.) variants from a prior statePreviews:true
   // sync must be removed — otherwise amend leaves a doubled showcase grid.
   const expectedHasState = EV.some((v) => /, State=/.test(v.name));
   if (!expectedHasState && report.extraVariants.length) {
@@ -10824,7 +10824,7 @@ async function amendSet(set, C) {
         if (defs[k].type !== 'INSTANCE_SWAP') {
           throw new Error(
             'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
-            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
           );
         }
         await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
@@ -11023,7 +11023,7 @@ async function amendComponent(comp, C) {
       if (defs[k].type !== 'INSTANCE_SWAP') {
         throw new Error(
           'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
-          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
         );
       }
       await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
@@ -11848,7 +11848,7 @@ for (const style of fontStyles) {
   await figma.loadFontAsync({ family: 'Inter', style });
 }
 
-// State previews (figmaStatePreviews): merge the enum-API cartesian with the
+// State previews (bindings.figma.statePreviews): merge the enum-API cartesian with the
 // canvas-only preview overlay; base variants gain an explicit State=Default
 // segment so every variant in the set carries the axis (Figma derives
 // variant properties from names). Contracts without previews pass through
@@ -12776,7 +12776,7 @@ function withCodeOnlyFacts(report, C, degradedFrom) {
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
 // REPORTED, never deleted — except State preview leftovers when
-// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
+// bindings.figma.statePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   set.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -12849,7 +12849,7 @@ async function amendSet(set, C) {
     }
   }
   // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
-  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // State=Focus Visible (etc.) variants from a prior statePreviews:true
   // sync must be removed — otherwise amend leaves a doubled showcase grid.
   const expectedHasState = EV.some((v) => /, State=/.test(v.name));
   if (!expectedHasState && report.extraVariants.length) {
@@ -12948,7 +12948,7 @@ async function amendSet(set, C) {
         if (defs[k].type !== 'INSTANCE_SWAP') {
           throw new Error(
             'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
-            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
           );
         }
         await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
@@ -13147,7 +13147,7 @@ async function amendComponent(comp, C) {
       if (defs[k].type !== 'INSTANCE_SWAP') {
         throw new Error(
           'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
-          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
         );
       }
       await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
@@ -15163,7 +15163,7 @@ for (const style of fontStyles) {
   await figma.loadFontAsync({ family: 'Inter', style });
 }
 
-// State previews (figmaStatePreviews): merge the enum-API cartesian with the
+// State previews (bindings.figma.statePreviews): merge the enum-API cartesian with the
 // canvas-only preview overlay; base variants gain an explicit State=Default
 // segment so every variant in the set carries the axis (Figma derives
 // variant properties from names). Contracts without previews pass through
@@ -16186,7 +16186,7 @@ function withCodeOnlyFacts(report, C, degradedFrom) {
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
 // REPORTED, never deleted — except State preview leftovers when
-// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
+// bindings.figma.statePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   set.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -16259,7 +16259,7 @@ async function amendSet(set, C) {
     }
   }
   // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
-  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // State=Focus Visible (etc.) variants from a prior statePreviews:true
   // sync must be removed — otherwise amend leaves a doubled showcase grid.
   const expectedHasState = EV.some((v) => /, State=/.test(v.name));
   if (!expectedHasState && report.extraVariants.length) {
@@ -16362,7 +16362,7 @@ async function amendSet(set, C) {
         if (defs[k].type !== 'INSTANCE_SWAP') {
           throw new Error(
             'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
-            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
           );
         }
         await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
@@ -16564,7 +16564,7 @@ async function amendComponent(comp, C) {
       if (defs[k].type !== 'INSTANCE_SWAP') {
         throw new Error(
           'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
-          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
         );
       }
       await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
@@ -18063,7 +18063,7 @@ for (const style of fontStyles) {
   await figma.loadFontAsync({ family: 'Inter', style });
 }
 
-// State previews (figmaStatePreviews): merge the enum-API cartesian with the
+// State previews (bindings.figma.statePreviews): merge the enum-API cartesian with the
 // canvas-only preview overlay; base variants gain an explicit State=Default
 // segment so every variant in the set carries the axis (Figma derives
 // variant properties from names). Contracts without previews pass through
@@ -19048,7 +19048,7 @@ function withCodeOnlyFacts(report, C, degradedFrom) {
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
 // REPORTED, never deleted — except State preview leftovers when
-// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
+// bindings.figma.statePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   set.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -19121,7 +19121,7 @@ async function amendSet(set, C) {
     }
   }
   // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
-  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // State=Focus Visible (etc.) variants from a prior statePreviews:true
   // sync must be removed — otherwise amend leaves a doubled showcase grid.
   const expectedHasState = EV.some((v) => /, State=/.test(v.name));
   if (!expectedHasState && report.extraVariants.length) {
@@ -19223,7 +19223,7 @@ async function amendSet(set, C) {
         if (defs[k].type !== 'INSTANCE_SWAP') {
           throw new Error(
             'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
-            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
           );
         }
         await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
@@ -19425,7 +19425,7 @@ async function amendComponent(comp, C) {
       if (defs[k].type !== 'INSTANCE_SWAP') {
         throw new Error(
           'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
-          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
         );
       }
       await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
@@ -20629,7 +20629,7 @@ for (const style of fontStyles) {
   await figma.loadFontAsync({ family: 'Inter', style });
 }
 
-// State previews (figmaStatePreviews): merge the enum-API cartesian with the
+// State previews (bindings.figma.statePreviews): merge the enum-API cartesian with the
 // canvas-only preview overlay; base variants gain an explicit State=Default
 // segment so every variant in the set carries the axis (Figma derives
 // variant properties from names). Contracts without previews pass through
@@ -21513,7 +21513,7 @@ function withCodeOnlyFacts(report, C, degradedFrom) {
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
 // REPORTED, never deleted — except State preview leftovers when
-// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
+// bindings.figma.statePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   set.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -21586,7 +21586,7 @@ async function amendSet(set, C) {
     }
   }
   // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
-  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // State=Focus Visible (etc.) variants from a prior statePreviews:true
   // sync must be removed — otherwise amend leaves a doubled showcase grid.
   const expectedHasState = EV.some((v) => /, State=/.test(v.name));
   if (!expectedHasState && report.extraVariants.length) {
@@ -21661,7 +21661,7 @@ async function amendSet(set, C) {
         if (defs[k].type !== 'INSTANCE_SWAP') {
           throw new Error(
             'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
-            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
           );
         }
         await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
@@ -21836,7 +21836,7 @@ async function amendComponent(comp, C) {
       if (defs[k].type !== 'INSTANCE_SWAP') {
         throw new Error(
           'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
-          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
         );
       }
       await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
@@ -23548,7 +23548,7 @@ for (const style of fontStyles) {
   await figma.loadFontAsync({ family: 'Inter', style });
 }
 
-// State previews (figmaStatePreviews): merge the enum-API cartesian with the
+// State previews (bindings.figma.statePreviews): merge the enum-API cartesian with the
 // canvas-only preview overlay; base variants gain an explicit State=Default
 // segment so every variant in the set carries the axis (Figma derives
 // variant properties from names). Contracts without previews pass through
@@ -24368,7 +24368,7 @@ function withCodeOnlyFacts(report, C, degradedFrom) {
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
 // REPORTED, never deleted — except State preview leftovers when
-// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
+// bindings.figma.statePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   set.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -24441,7 +24441,7 @@ async function amendSet(set, C) {
     }
   }
   // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
-  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // State=Focus Visible (etc.) variants from a prior statePreviews:true
   // sync must be removed — otherwise amend leaves a doubled showcase grid.
   const expectedHasState = EV.some((v) => /, State=/.test(v.name));
   if (!expectedHasState && report.extraVariants.length) {
@@ -24516,7 +24516,7 @@ async function amendSet(set, C) {
         if (defs[k].type !== 'INSTANCE_SWAP') {
           throw new Error(
             'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
-            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
           );
         }
         await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
@@ -24691,7 +24691,7 @@ async function amendComponent(comp, C) {
       if (defs[k].type !== 'INSTANCE_SWAP') {
         throw new Error(
           'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
-          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
         );
       }
       await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
@@ -25119,7 +25119,7 @@ for (const style of fontStyles) {
   await figma.loadFontAsync({ family: 'Inter', style });
 }
 
-// State previews (figmaStatePreviews): merge the enum-API cartesian with the
+// State previews (bindings.figma.statePreviews): merge the enum-API cartesian with the
 // canvas-only preview overlay; base variants gain an explicit State=Default
 // segment so every variant in the set carries the axis (Figma derives
 // variant properties from names). Contracts without previews pass through
@@ -25939,7 +25939,7 @@ function withCodeOnlyFacts(report, C, degradedFrom) {
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
 // REPORTED, never deleted — except State preview leftovers when
-// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
+// bindings.figma.statePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   set.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -26012,7 +26012,7 @@ async function amendSet(set, C) {
     }
   }
   // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
-  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // State=Focus Visible (etc.) variants from a prior statePreviews:true
   // sync must be removed — otherwise amend leaves a doubled showcase grid.
   const expectedHasState = EV.some((v) => /, State=/.test(v.name));
   if (!expectedHasState && report.extraVariants.length) {
@@ -26087,7 +26087,7 @@ async function amendSet(set, C) {
         if (defs[k].type !== 'INSTANCE_SWAP') {
           throw new Error(
             'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
-            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
           );
         }
         await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
@@ -26262,7 +26262,7 @@ async function amendComponent(comp, C) {
       if (defs[k].type !== 'INSTANCE_SWAP') {
         throw new Error(
           'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
-          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
         );
       }
       await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
@@ -26748,7 +26748,7 @@ for (const style of fontStyles) {
   await figma.loadFontAsync({ family: 'Inter', style });
 }
 
-// State previews (figmaStatePreviews): merge the enum-API cartesian with the
+// State previews (bindings.figma.statePreviews): merge the enum-API cartesian with the
 // canvas-only preview overlay; base variants gain an explicit State=Default
 // segment so every variant in the set carries the axis (Figma derives
 // variant properties from names). Contracts without previews pass through
@@ -27509,7 +27509,7 @@ async function buildNode(spec, registry) {
   }
   // A native slot's LAYER NAME is its property's display name: renaming the
   // layer renames the linked SLOT property (probe 2b), so the contract's
-  // slot.figmaProperty is spelled here and nowhere else.
+  // slot.bindings.figma.property is spelled here and nowhere else.
   node.name = spec.type === 'slot' ? spec.slotProperty : spec.name;
   if (spec.visibleProp) {
     registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
@@ -27829,7 +27829,7 @@ function withCodeOnlyFacts(report, C, degradedFrom) {
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
 // REPORTED, never deleted — except State preview leftovers when
-// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
+// bindings.figma.statePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   set.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -27902,7 +27902,7 @@ async function amendSet(set, C) {
     }
   }
   // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
-  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // State=Focus Visible (etc.) variants from a prior statePreviews:true
   // sync must be removed — otherwise amend leaves a doubled showcase grid.
   const expectedHasState = EV.some((v) => /, State=/.test(v.name));
   if (!expectedHasState && report.extraVariants.length) {
@@ -28002,7 +28002,7 @@ async function amendSet(set, C) {
         if (defs[k].type !== 'INSTANCE_SWAP') {
           throw new Error(
             'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
-            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
           );
         }
         await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
@@ -28202,7 +28202,7 @@ async function amendComponent(comp, C) {
       if (defs[k].type !== 'INSTANCE_SWAP') {
         throw new Error(
           'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
-          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
         );
       }
       await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);
@@ -28687,7 +28687,7 @@ for (const style of fontStyles) {
   await figma.loadFontAsync({ family: 'Inter', style });
 }
 
-// State previews (figmaStatePreviews): merge the enum-API cartesian with the
+// State previews (bindings.figma.statePreviews): merge the enum-API cartesian with the
 // canvas-only preview overlay; base variants gain an explicit State=Default
 // segment so every variant in the set carries the axis (Figma derives
 // variant properties from names). Contracts without previews pass through
@@ -29513,7 +29513,7 @@ function withCodeOnlyFacts(report, C, degradedFrom) {
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
 // REPORTED, never deleted — except State preview leftovers when
-// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
+// bindings.figma.statePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   set.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -29586,7 +29586,7 @@ async function amendSet(set, C) {
     }
   }
   // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
-  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // State=Focus Visible (etc.) variants from a prior statePreviews:true
   // sync must be removed — otherwise amend leaves a doubled showcase grid.
   const expectedHasState = EV.some((v) => /, State=/.test(v.name));
   if (!expectedHasState && report.extraVariants.length) {
@@ -29661,7 +29661,7 @@ async function amendSet(set, C) {
         if (defs[k].type !== 'INSTANCE_SWAP') {
           throw new Error(
             'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
-            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
           );
         }
         await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
@@ -29836,7 +29836,7 @@ async function amendComponent(comp, C) {
       if (defs[k].type !== 'INSTANCE_SWAP') {
         throw new Error(
           'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
-          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
         );
       }
       await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);

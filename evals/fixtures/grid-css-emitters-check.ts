@@ -57,7 +57,7 @@ const base = {
   semantics: { element: 'div' },
   props: [],
   states: [],
-  anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'X' } },
+  bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'x', export: 'X' } } },
 };
 const parse = (raw: Record<string, unknown>): Contract => ContractSchema.parse({ ...base, ...raw }) as Contract;
 
@@ -323,7 +323,7 @@ const soloMap = (c: Contract): Map<string, Contract> => new Map([[c.id, c]]);
     id: 'ds.eval-cell-dep',
     name: 'EvalCellDep',
     description: 'minimal dependency for the instance-in-grid fixture',
-    anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'EvalCellDep' } },
+    bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'x', export: 'EvalCellDep' } } },
     anatomy: { root: { literals: { 'background-color': '#abc' } } },
   });
   const c = parse({

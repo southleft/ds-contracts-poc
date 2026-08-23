@@ -43,8 +43,12 @@
     },
     "backdrop": { "declared": { "position": "absolute" } }
   },
-  "anchors": {
-    "figma": { "fileKey": null, "componentSetKey": null },
-    "code": { "importPath": "@shopify/polaris", "export": "Modal" }
+  "bindings": {
+    "figma": {
+      "anchors": { "fileKey": null, "componentSetKey": null }
+    },
+    "code": {
+      "anchors": { "importPath": "@shopify/polaris", "export": "Modal" }
+    }
   }
 }

@@ -8424,17 +8424,21 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@carbon/react",
-          "export": "Accordion"
+          "anchors": {
+            "importPath": "@carbon/react",
+            "export": "Accordion"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "./contract.schema.json",
@@ -8758,17 +8762,21 @@
           "hugsBelowMaxWidth": true
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@carbon/react",
-          "export": "Button"
+          "anchors": {
+            "importPath": "@carbon/react",
+            "export": "Button"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "./contract.schema.json",
@@ -9100,14 +9108,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@carbon/react",
-          "export": "Checkbox"
+          "anchors": {
+            "importPath": "@carbon/react",
+            "export": "Checkbox"
+          }
         }
       }
     },
@@ -9389,14 +9401,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@carbon/react",
-          "export": "IconButton"
+          "anchors": {
+            "importPath": "@carbon/react",
+            "export": "IconButton"
+          }
         }
       }
     },
@@ -9769,14 +9785,18 @@
           "hugsBelowMaxWidth": true
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@carbon/react",
-          "export": "InlineNotification"
+          "anchors": {
+            "importPath": "@carbon/react",
+            "export": "InlineNotification"
+          }
         }
       }
     },
@@ -10361,14 +10381,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@carbon/react",
-          "export": "Modal"
+          "anchors": {
+            "importPath": "@carbon/react",
+            "export": "Modal"
+          }
         }
       }
     },
@@ -10881,17 +10905,21 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@carbon/react",
-          "export": "Tabs"
+          "anchors": {
+            "importPath": "@carbon/react",
+            "export": "Tabs"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "./contract.schema.json",
@@ -11215,14 +11243,18 @@
           "hugsBelowMaxWidth": true
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@carbon/react",
-          "export": "Tag"
+          "anchors": {
+            "importPath": "@carbon/react",
+            "export": "Tag"
+          }
         }
       }
     },
@@ -11541,17 +11573,21 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@carbon/react",
-          "export": "TextInput"
+          "anchors": {
+            "importPath": "@carbon/react",
+            "export": "TextInput"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "./contract.schema.json",
@@ -11857,17 +11893,21 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@carbon/react",
-          "export": "Toggle"
+          "anchors": {
+            "importPath": "@carbon/react",
+            "export": "Toggle"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     }
   ],
   "codeOnlyFacts": [

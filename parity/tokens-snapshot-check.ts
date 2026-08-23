@@ -292,9 +292,9 @@ try {
     .sort()[0];
   if (first) {
     const c = JSON.parse(readFileSync(path.join(contractsDir, first), 'utf8')) as {
-      anchors?: { figma?: { fileKey?: string } };
+      bindings?: { figma?: { anchors?: { fileKey?: string } } };
     };
-    anchorFileKey = c.anchors?.figma?.fileKey ?? null;
+    anchorFileKey = c.bindings?.figma?.anchors?.fileKey ?? null;
   }
 } catch {
   /* no contracts dir — the provenance refusal above is the load-bearing check */

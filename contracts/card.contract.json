@@ -93,7 +93,11 @@
           },
           "slot": {
             "name": "children",
-            "figmaProperty": "Body",
+            "bindings": {
+              "figma": {
+                "property": "Body"
+              }
+            },
             "required": true
           }
         },
@@ -125,15 +129,19 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
-      "componentSetKey": "7cd7011e4f2374161cd212f02992c7fd0f899430",
-      "nodeId": "2:21"
+      "anchors": {
+        "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+        "componentSetKey": "7cd7011e4f2374161cd212f02992c7fd0f899430",
+        "nodeId": "2:21"
+      }
     },
     "code": {
-      "importPath": "src/components/Card",
-      "export": "Card"
+      "anchors": {
+        "importPath": "src/components/Card",
+        "export": "Card"
+      }
     }
   }
 }

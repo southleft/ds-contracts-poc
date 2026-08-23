@@ -131,15 +131,19 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "nl9P0h3brratHTdncjzKIr",
-      "componentSetKey": "8ea76f7b0299bf1a13c947556dbdf36986a879c1",
-      "nodeId": "376:3540"
+      "anchors": {
+        "fileKey": "nl9P0h3brratHTdncjzKIr",
+        "componentSetKey": "8ea76f7b0299bf1a13c947556dbdf36986a879c1",
+        "nodeId": "376:3540"
+      }
     },
     "code": {
-      "importPath": "src/components/ButtonGroup",
-      "export": "ButtonGroup"
+      "anchors": {
+        "importPath": "src/components/ButtonGroup",
+        "export": "ButtonGroup"
+      }
     }
   }
 }

@@ -16,7 +16,8 @@ This repository is the working proof, and the candidate reference implementation
 ## Release-candidate status
 
 The coordinated release candidate is repository `1.0.0-rc.1`, schema
-`16.1.0-rc.2`, and web-components emitter `0.4.0-rc.2`. The previous package
+`17.0.0-rc.1` (a MAJOR: the contract-level `bindings` hoist, with a
+`ds-contracts migrate` codemod), and web-components emitter `0.4.0-rc.2`. The previous package
 RCs (schema `16.1.0-rc.1`, emitter `0.4.0-rc.1`) were published under npm's
 `next` tag. The current conversion work advances the CLI source to
 `0.5.0-rc.2` and the schema and emitter sources to their `rc.2` versions; all

@@ -14,7 +14,7 @@ How the same contracts that generate code also generate — and will continuousl
 | `02-badge.js` | `Badge` component set — 4 variants, properties `Variant`, `Label` (TEXT). nodeId `6:10`, key `89f1fb…` |
 | `03-button.js` | `Button` component set — 9 variants (3×3), properties `Variant`, `Size`, `Label` (TEXT), `Disabled` (BOOLEAN). nodeId `5:21`, key `1b5d2a…` |
 
-Node IDs and component-set keys were **written back into each contract's `anchors.figma`** — from here on, parity matches by anchor, not by name. Scripts are idempotent-safe: the token script upserts; component scripts skip (returning the existing id/key) if a set with the same name exists. To rebuild a set from a changed contract, delete it in Figma and re-run.
+Node IDs and component-set keys were **written back into each contract's `bindings.figma.anchors`** (spelled `anchors.figma` before schema 17) — from here on, parity matches by anchor, not by name. Scripts are idempotent-safe: the token script upserts; component scripts skip (returning the existing id/key) if a set with the same name exists. To rebuild a set from a changed contract, delete it in Figma and re-run.
 
 **Fidelity notes from the run (all deliberate):**
 - `fontSize` is not variable-bindable in the Plugin API — set numerically from the resolved token value. Same for font family/weight (static Inter Medium).
@@ -60,7 +60,7 @@ No declarative "component set from contract" tool exists; the generator scripts 
 3. `figma_add_component_property` for BOOLEAN (`Disabled`) and TEXT (`Label`) props per `bindings.figma`.
 4. `figma_arrange_component_set` for a readable grid; `figma_set_description` with the contract's `description`.
 5. Screenshot-verify (`figma_capture_screenshot`) and iterate — max 3 passes, per the MCP's own guidance.
-6. **Write back anchors:** the new component set key/nodeId → `anchors.figma` in the contract. From now on, parity matches by anchor, not name.
+6. **Write back anchors:** the new component set key/nodeId → `bindings.figma.anchors` in the contract. From now on, parity matches by anchor, not name.
 
 Execution constraints: `figma_execute` is capped at 30s per call — generate one component set per call, not the whole library. Batch variable creation exists for a reason; use it.
 

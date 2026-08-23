@@ -124,8 +124,8 @@ check(
     "{bg.disabled}",
 );
 check(
-  "figmaStatePreviews stays on (the State axis still previews)",
-  contract.figmaStatePreviews === true,
+  "bindings.figma.statePreviews stays on (the State axis still previews)",
+  contract.bindings.figma.statePreviews === true,
 );
 
 // ---------------------------------------------------------------------------

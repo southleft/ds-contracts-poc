@@ -105,7 +105,7 @@ const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
  *  where `enabled` is the BASE (prop absent) rendering.
  *
  *  The canvas can only express that plane when the contract binds the prop as a
- *  Figma VARIANT axis, or when `figmaStatePreviews` is on and the emitter
+ *  Figma VARIANT axis, or when `bindings.figma.statePreviews` is on and the emitter
  *  compiles a `State=` axis (core/emit-figma-script.ts). Bound as a Figma
  *  BOOLEAN — which toggles child visibility and CANNOT repaint a fill — the
  *  non-base value has no cell anywhere in the set, so a reference pinned there
@@ -128,7 +128,7 @@ if (existsSync(CONFIG_PATH)) {
     const contract = JSON.parse(readFileSync(cPath, 'utf8'));
     const prop = (contract.props ?? []).find((p: any) => p.name === sp.prop);
     const kind = prop?.bindings?.figma?.kind ?? null;
-    const previews = Boolean(contract.figmaStatePreviews) && (contract.states ?? []).includes(sp.state);
+    const previews = Boolean(contract.bindings.figma.statePreviews) && (contract.states ?? []).includes(sp.state);
     statePlanes.set(stem, {
       prop: sp.prop,
       state: sp.state,
@@ -269,7 +269,7 @@ const committed = results.map((r) => {
   // matrix — that is the standing evidence that the base-plane pin is the
   // plane-consistent one, and it must survive the re-pin that makes
   // `crossPlane` false again. A plane the canvas CAN express (button, via
-  // figmaStatePreviews) is not at risk, so it elides like any other stem.
+  // bindings.figma.statePreviews) is not at risk, so it elides like any other stem.
   if (r.error || wantFull || r.crossPlane || (r.statePlane && !r.statePlane.canvasExpressible)) return r;
   const cited = new Set([r.pinned, r.repinKey, r.bestOrig?.key, r.defaultsKey].filter(Boolean));
   return { ...r, rows: r.rows.filter((x: any) => cited.has(x.key)), rowsElided: r.rows.length - cited.size };

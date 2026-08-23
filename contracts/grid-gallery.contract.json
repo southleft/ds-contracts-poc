@@ -48,42 +48,66 @@
           "description": "Gallery cell 1 — placed by order, not by anchor.",
           "slot": {
             "name": "item1",
-            "figmaProperty": "Item 1"
+            "bindings": {
+              "figma": {
+                "property": "Item 1"
+              }
+            }
           }
         },
         "item2": {
           "description": "Gallery cell 2 — placed by order, not by anchor.",
           "slot": {
             "name": "item2",
-            "figmaProperty": "Item 2"
+            "bindings": {
+              "figma": {
+                "property": "Item 2"
+              }
+            }
           }
         },
         "item3": {
           "description": "Gallery cell 3 — placed by order, not by anchor.",
           "slot": {
             "name": "item3",
-            "figmaProperty": "Item 3"
+            "bindings": {
+              "figma": {
+                "property": "Item 3"
+              }
+            }
           }
         },
         "item4": {
           "description": "Gallery cell 4 — wraps to the second derived row.",
           "slot": {
             "name": "item4",
-            "figmaProperty": "Item 4"
+            "bindings": {
+              "figma": {
+                "property": "Item 4"
+              }
+            }
           }
         },
         "item5": {
           "description": "Gallery cell 5 — wraps to the second derived row.",
           "slot": {
             "name": "item5",
-            "figmaProperty": "Item 5"
+            "bindings": {
+              "figma": {
+                "property": "Item 5"
+              }
+            }
           }
         },
         "item6": {
           "description": "Gallery cell 6 — wraps to the second derived row.",
           "slot": {
             "name": "item6",
-            "figmaProperty": "Item 6"
+            "bindings": {
+              "figma": {
+                "property": "Item 6"
+              }
+            }
           }
         }
       }
@@ -92,14 +116,18 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/GridGallery",
-      "export": "GridGallery"
+      "anchors": {
+        "importPath": "src/components/GridGallery",
+        "export": "GridGallery"
+      }
     }
   }
 }

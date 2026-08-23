@@ -353,20 +353,19 @@
       }
     },
     "figmaRepresentation": {
-      "type": "string",
-      "enum": [
-        "component",
-        "native"
-      ]
+      "not": {}
+    },
+    "figmaStatePreviews": {
+      "not": {}
+    },
+    "anchors": {
+      "not": {}
     },
     "modes": {
       "type": "array",
       "items": {
         "type": "string"
       }
-    },
-    "figmaStatePreviews": {
-      "type": "boolean"
     },
     "anatomy": {
       "type": "object",
@@ -395,62 +394,90 @@
         }
       }
     },
-    "anchors": {
+    "bindings": {
       "type": "object",
       "properties": {
         "figma": {
           "type": "object",
           "properties": {
-            "fileKey": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
+            "representation": {
+              "type": "string",
+              "enum": [
+                "component",
+                "native"
               ]
             },
-            "componentSetKey": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ]
+            "statePreviews": {
+              "type": "boolean"
             },
-            "nodeId": {
-              "anyOf": [
-                {
-                  "type": "string"
+            "anchors": {
+              "type": "object",
+              "properties": {
+                "fileKey": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
                 },
-                {
-                  "type": "null"
+                "componentSetKey": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "nodeId": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
                 }
-              ]
+              },
+              "required": [
+                "fileKey",
+                "componentSetKey"
+              ],
+              "additionalProperties": false
             }
           },
           "required": [
-            "fileKey",
-            "componentSetKey"
+            "anchors"
           ],
           "additionalProperties": false
         },
         "code": {
           "type": "object",
           "properties": {
-            "importPath": {
-              "type": "string"
-            },
-            "export": {
-              "type": "string"
+            "anchors": {
+              "type": "object",
+              "properties": {
+                "importPath": {
+                  "type": "string"
+                },
+                "export": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "importPath",
+                "export"
+              ],
+              "additionalProperties": false
             }
           },
           "required": [
-            "importPath",
-            "export"
+            "anchors"
           ],
           "additionalProperties": false
         }
@@ -533,7 +560,7 @@
     "semantics",
     "props",
     "anatomy",
-    "anchors"
+    "bindings"
   ],
   "additionalProperties": false,
   "definitions": {
@@ -1269,8 +1296,23 @@
             "required": {
               "type": "boolean"
             },
+            "bindings": {
+              "type": "object",
+              "properties": {
+                "figma": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            },
             "figmaProperty": {
-              "type": "string"
+              "not": {}
             },
             "defaultContent": {
               "type": "array",

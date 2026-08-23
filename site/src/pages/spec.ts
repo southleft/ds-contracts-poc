@@ -164,26 +164,24 @@ function contractPage(): { route: string; html: string } {
           props: `The canonical API — see <a href="/spec/props/">Props &amp; bindings</a>.`,
           events: `The declared interaction surface — see <a href="/spec/events/">Events &amp; toggles</a>.`,
           states: `Interaction states the component must support — see <a href="/spec/states/">States</a>.`,
-          figmaRepresentation: '<code>component</code> (default) generates a canvas component set. <code>native</code> declares the concept maps to a native canvas capability (layout primitives <em>are</em> auto-layout): no canvas component is generated, parity does not expect one, and the code surface is still fully generated and checked.',
           modes: 'Receipt-grade metadata naming the token modes a drawn theme/mode variant axis carried (e.g. <code>["light","dark"]</code>). The axis is never a prop — theming lives in the token collection’s modes — so this field changes no emitter output; it names the fact for reviewers and round-trip tooling.',
-          figmaStatePreviews: `Opt-in canvas-only state previews — see <a href="/spec/states/#state-previews">States</a>.`,
           anatomy: `The named part tree where all styling decisions live — see <a href="/spec/anatomy/">Anatomy &amp; parts</a>.`,
           a11y: 'Executable accessibility requirements — see below.',
-          anchors: 'Per-side identity anchors — see below.',
+          bindings: 'The contract-level per-surface bindings (schema 17): each tool’s identity anchors, plus the canvas-only facts <code>representation</code> and <code>statePreviews</code> under <code>bindings.figma</code> — see below.',
           provenance: 'Optional deterministic source/canonical revision evidence and stale-source adoption state — see below.',
-        }),
+        }, { skip: ['figmaRepresentation', 'figmaStatePreviews', 'anchors'] }),
     ),
     section(
       'anchors',
-      'Anchors — rename-safe identity',
+      'Bindings — per-surface anchors and canvas facts',
       ['generated', 'curated'],
-      `<p>The DTCG <code>$extensions</code> dual-ID pattern applied to components. After the first generation on each side, that side’s stable identifiers are written back here (<code>npm run anchors:writeback</code>). From then on, renames on either side never fork identity — parity matches by anchor, not by name.</p>` +
-        fieldList((ContractSchema.shape as Record<string, AnySchema>).anchors, {
-          figma: 'The design-tool side: file key, component-set key, node id. <code>null</code> until first sync — the differ reports such contracts as <em>pending</em>, which is workflow state, not drift.',
-          code: 'The code side: import path and export name of the generated component.',
+      `<p>Schema 17 hoists the <code>bindings.&lt;surface&gt;</code> namespace props already use to the contract itself: everything one tool owns lives under its own key, and the vendor-neutral core carries no tool name at any level. The v16 spellings <code>figmaRepresentation</code>, <code>figmaStatePreviews</code>, <code>anchors.figma</code>, <code>anchors.code</code> and <code>slot.figmaProperty</code> are refused by name with the new spelling in the message; <code>ds-contracts migrate &lt;dir&gt;</code> rewrites a tree.</p><p><code>anchors</code> is the DTCG <code>$extensions</code> dual-ID pattern applied to components. After the first generation on each side, that side’s stable identifiers are written back here (<code>npm run anchors:writeback</code>). From then on, renames on either side never fork identity — parity matches by anchor, not by name.</p>` +
+        fieldList((ContractSchema.shape as Record<string, AnySchema>).bindings, {
+          figma: 'The design-tool side: <code>anchors</code> (file key, component-set key, node id — <code>null</code> until first sync; the differ reports such contracts as <em>pending</em>, which is workflow state, not drift), <code>representation</code> (<code>component</code>, the default, generates a canvas component set; <code>native</code> declares the concept maps to a native canvas capability such as auto-layout — no component is generated, parity expects none, the code surface is still fully generated), and the <code>statePreviews</code> opt-in — see <a href="/spec/states/#state-previews">States</a>.',
+          code: 'The code side: <code>anchors</code> — import path and export name of the generated component.',
         }) +
         shippingExample('button.contract.json', {
-          paths: ['id', 'name', 'version', 'status', 'anchors'],
+          paths: ['id', 'name', 'version', 'status', 'bindings'],
         }),
     ),
     section(
@@ -707,17 +705,17 @@ function statesPage(): { route: string; html: string } {
     ),
     section(
       'state-previews',
-      'Canvas state previews (figmaStatePreviews)',
+      'Canvas state previews (bindings.figma.statePreviews)',
       ['generated', 'curated'],
-      `<p>Code gets real <code>:hover</code>/<code>:focus-visible</code>/<code>:disabled</code>; the canvas cannot run pseudo-classes, so real systems hand-build “State=Hover” variant axes — and those rot. <code>figmaStatePreviews: true</code> makes the generator own that axis instead: a <code>State</code> variant axis (<code>Default</code>, <code>Hover</code>, …) where each non-default state applies the state’s token overrides on top of the variant’s base bindings. The mirror image of code-only events: state previews are canvas-only, and the code surface is completely unaffected.</p><p>Bounded explosion: previews multiply only the <em>primary</em> enum axis — the one the overrides substitute (<code>{color.action.{variant}.background-hover}</code> names <code>variant</code>); every other axis sits at its default.</p><p><strong>The axis is live, not just drawn.</strong> The generator wires Figma prototype reactions from every <code>State=Default</code> cell on the default plane to its twin: <code>ON_HOVER</code> → <code>CHANGE_TO State=Hover</code>, <code>ON_PRESS</code> → <code>CHANGE_TO State=Active</code>, both auto-reverting, always with <code>transition: null</code> (durations are not contract facts). <code>focus-visible</code> and <code>disabled</code> are <em>excluded by name</em>: Figma’s trigger vocabulary has no focus and no disabled trigger, so those cells stay static previews — destinations of nothing. Cells whose non-primary axes sit off their defaults have no twin, so they carry no reaction: a named coverage limit that follows from the bounded explosion above.</p>` +
+      `<p>Code gets real <code>:hover</code>/<code>:focus-visible</code>/<code>:disabled</code>; the canvas cannot run pseudo-classes, so real systems hand-build “State=Hover” variant axes — and those rot. <code>bindings.figma.statePreviews: true</code> makes the generator own that axis instead: a <code>State</code> variant axis (<code>Default</code>, <code>Hover</code>, …) where each non-default state applies the state’s token overrides on top of the variant’s base bindings. The mirror image of code-only events: state previews are canvas-only, and the code surface is completely unaffected.</p><p>Bounded explosion: previews multiply only the <em>primary</em> enum axis — the one the overrides substitute (<code>{color.action.{variant}.background-hover}</code> names <code>variant</code>); every other axis sits at its default.</p><p><strong>The axis is live, not just drawn.</strong> The generator wires Figma prototype reactions from every <code>State=Default</code> cell on the default plane to its twin: <code>ON_HOVER</code> → <code>CHANGE_TO State=Hover</code>, <code>ON_PRESS</code> → <code>CHANGE_TO State=Active</code>, both auto-reverting, always with <code>transition: null</code> (durations are not contract facts). <code>focus-visible</code> and <code>disabled</code> are <em>excluded by name</em>: Figma’s trigger vocabulary has no focus and no disabled trigger, so those cells stay static previews — destinations of nothing. Cells whose non-primary axes sit off their defaults have no twin, so they carry no reaction: a named coverage limit that follows from the bounded explosion above.</p>` +
         refusals('The opt-in is refused by name when:', [
           'the contract declares no states',
           'any declared state has no root token overrides — its preview would render identically to Default',
           'overrides substitute more than one enum prop',
           'a prop already binds the design property <code>State</code>',
         ]) +
-        `<p>The differ treats the axis as contract API in both directions: a missing axis on an opted-in contract is <code>figma BEHIND</code>; a hand-built <code>State</code> axis <em>without</em> the opt-in is <code>figma AHEAD</code> — the kit-rot detector — and the proposed patch is the honest one: <code>figmaStatePreviews: true</code>, never a bogus <code>state</code> prop.</p>` +
-        shippingExample('button.contract.json', { paths: ['figmaStatePreviews', 'states'] }),
+        `<p>The differ treats the axis as contract API in both directions: a missing axis on an opted-in contract is <code>figma BEHIND</code>; a hand-built <code>State</code> axis <em>without</em> the opt-in is <code>figma AHEAD</code> — the kit-rot detector — and the proposed patch is the honest one: <code>bindings.figma.statePreviews: true</code>, never a bogus <code>state</code> prop.</p>` +
+        shippingExample('button.contract.json', { paths: ['bindings.figma.statePreviews', 'states'] }),
     ),
   ].join('');
   return specPage(
@@ -872,9 +870,9 @@ function compositionPage(replays: Awaited<ReturnType<typeof loadReplays>>): { ro
           min: 'Arity lower bound (maps to canvas slot min-children).',
           max: 'Arity upper bound.',
           required: 'The slot must be filled.',
-          figmaProperty: 'Canvas property name. Default: PascalCase(name).',
+          bindings: 'Per-surface slot bindings (schema 17): <code>bindings.figma.property</code> is the canvas property name, default PascalCase(name) — the slot-level twin of a prop’s <code>bindings.figma.property</code>.',
           defaultContent: 'See <a href="#default-content">default content</a>.',
-        }) +
+        }, { skip: ['figmaProperty'] }) +
         shippingExample('banner.contract.json', { paths: ['anatomy.root.parts.endArea.parts.endContent'] }),
     ),
     section(

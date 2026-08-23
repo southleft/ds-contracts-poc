@@ -524,29 +524,43 @@ const CONTRACT_SHAPE = {
         contrast: { enum: ['AA', 'AAA'] },
       },
     },
-    anchors: {
+    bindings: {
       type: 'object',
       additionalProperties: false,
       required: ['figma', 'code'],
-      description: 'Per-side identity anchors. Prompt-born contracts have no canvas yet: every figma anchor is null.',
+      description: 'Per-surface bindings (schema 17): each side\'s identity anchors. Prompt-born contracts have no canvas yet: every figma anchor is null.',
       properties: {
         figma: {
           type: 'object',
           additionalProperties: false,
-          required: ['fileKey', 'componentSetKey', 'nodeId'],
+          required: ['anchors'],
           properties: {
-            fileKey: { type: 'null' },
-            componentSetKey: { type: 'null' },
-            nodeId: { type: 'null' },
+            anchors: {
+              type: 'object',
+              additionalProperties: false,
+              required: ['fileKey', 'componentSetKey', 'nodeId'],
+              properties: {
+                fileKey: { type: 'null' },
+                componentSetKey: { type: 'null' },
+                nodeId: { type: 'null' },
+              },
+            },
           },
         },
         code: {
           type: 'object',
           additionalProperties: false,
-          required: ['importPath', 'export'],
+          required: ['anchors'],
           properties: {
-            importPath: { const: '@ds/components' },
-            export: { type: 'string', description: 'PascalCase(name).' },
+            anchors: {
+              type: 'object',
+              additionalProperties: false,
+              required: ['importPath', 'export'],
+              properties: {
+                importPath: { const: '@ds/components' },
+                export: { type: 'string', description: 'PascalCase(name).' },
+              },
+            },
           },
         },
       },

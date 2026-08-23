@@ -8130,14 +8130,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "polaris-react/src/components/Avatar/Avatar",
-          "export": "Avatar"
+          "anchors": {
+            "importPath": "polaris-react/src/components/Avatar/Avatar",
+            "export": "Avatar"
+          }
         }
       }
     },
@@ -8857,14 +8861,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "polaris-react/src/components/Badge/Badge",
-          "export": "Badge"
+          "anchors": {
+            "importPath": "polaris-react/src/components/Badge/Badge",
+            "export": "Badge"
+          }
         }
       }
     },
@@ -9623,17 +9631,21 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "polaris-react/src/components/Banner/Banner",
-          "export": "Banner"
+          "anchors": {
+            "importPath": "polaris-react/src/components/Banner/Banner",
+            "export": "Banner"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "../../../contracts/contract.schema.json",
@@ -10103,17 +10115,21 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "polaris-react/src/components/Button/Button",
-          "export": "Button"
+          "anchors": {
+            "importPath": "polaris-react/src/components/Button/Button",
+            "export": "Button"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "../../../contracts/contract.schema.json",
@@ -10653,14 +10669,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "polaris-react/src/components/Checkbox/Checkbox",
-          "export": "Checkbox"
+          "anchors": {
+            "importPath": "polaris-react/src/components/Checkbox/Checkbox",
+            "export": "Checkbox"
+          }
         }
       }
     },
@@ -10935,14 +10955,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "polaris-react/src/components/ProgressBar/ProgressBar",
-          "export": "ProgressBar"
+          "anchors": {
+            "importPath": "polaris-react/src/components/ProgressBar/ProgressBar",
+            "export": "ProgressBar"
+          }
         }
       }
     },
@@ -11326,14 +11350,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "polaris-react/src/components/RadioButton/RadioButton",
-          "export": "RadioButton"
+          "anchors": {
+            "importPath": "polaris-react/src/components/RadioButton/RadioButton",
+            "export": "RadioButton"
+          }
         }
       }
     },
@@ -11461,14 +11489,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "polaris-react/src/components/Spinner/Spinner",
-          "export": "Spinner"
+          "anchors": {
+            "importPath": "polaris-react/src/components/Spinner/Spinner",
+            "export": "Spinner"
+          }
         }
       }
     },
@@ -12073,17 +12105,21 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "polaris-react/src/components/Tag/Tag",
-          "export": "Tag"
+          "anchors": {
+            "importPath": "polaris-react/src/components/Tag/Tag",
+            "export": "Tag"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "../../../contracts/contract.schema.json",
@@ -13289,17 +13325,21 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "polaris-react/src/components/TextField/TextField",
-          "export": "TextField"
+          "anchors": {
+            "importPath": "polaris-react/src/components/TextField/TextField",
+            "export": "TextField"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "../../../contracts/contract.schema.json",
@@ -13704,14 +13744,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "polaris-react/src/components/Text/Text",
-          "export": "Text"
+          "anchors": {
+            "importPath": "polaris-react/src/components/Text/Text",
+            "export": "Text"
+          }
         }
       }
     },
@@ -13906,14 +13950,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "polaris-react/src/components/Thumbnail/Thumbnail",
-          "export": "Thumbnail"
+          "anchors": {
+            "importPath": "polaris-react/src/components/Thumbnail/Thumbnail",
+            "export": "Thumbnail"
+          }
         }
       }
     }

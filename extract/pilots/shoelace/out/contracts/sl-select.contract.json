@@ -413,14 +413,18 @@
   "anatomy": {
     "root": {}
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "extract/pilots/shoelace/custom-elements.json (components/select/select.js)",
-      "export": "SlSelect"
+      "anchors": {
+        "importPath": "extract/pilots/shoelace/custom-elements.json (components/select/select.js)",
+        "export": "SlSelect"
+      }
     }
   }
 }

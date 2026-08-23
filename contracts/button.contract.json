@@ -115,7 +115,6 @@
     "focus-visible",
     "disabled"
   ],
-  "figmaStatePreviews": true,
   "anatomy": {
     "root": {
       "tokens": {
@@ -173,15 +172,20 @@
     "minHitArea": 44,
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
-      "componentSetKey": "1b5d2a573f3f39404af396bdbe944a30ca0eaec3",
-      "nodeId": "4:412"
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+        "componentSetKey": "1b5d2a573f3f39404af396bdbe944a30ca0eaec3",
+        "nodeId": "4:412"
+      }
     },
     "code": {
-      "importPath": "src/components/Button",
-      "export": "Button"
+      "anchors": {
+        "importPath": "src/components/Button",
+        "export": "Button"
+      }
     }
   }
 }

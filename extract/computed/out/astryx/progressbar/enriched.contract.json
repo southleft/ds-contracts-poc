@@ -212,14 +212,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "@astryxdesign/core",
-      "export": "ProgressBar"
+      "anchors": {
+        "importPath": "@astryxdesign/core",
+        "export": "ProgressBar"
+      }
     }
   }
 }

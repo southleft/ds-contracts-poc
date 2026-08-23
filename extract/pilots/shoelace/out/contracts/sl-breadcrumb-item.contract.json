@@ -56,14 +56,18 @@
   "anatomy": {
     "root": {}
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "extract/pilots/shoelace/custom-elements.json (components/breadcrumb-item/breadcrumb-item.js)",
-      "export": "SlBreadcrumbItem"
+      "anchors": {
+        "importPath": "extract/pilots/shoelace/custom-elements.json (components/breadcrumb-item/breadcrumb-item.js)",
+        "export": "SlBreadcrumbItem"
+      }
     }
   }
 }

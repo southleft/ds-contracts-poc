@@ -357,14 +357,18 @@
       "trigger": "dismiss"
     }
   ],
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "flowbite-react",
-      "export": "Alert"
+      "anchors": {
+        "importPath": "flowbite-react",
+        "export": "Alert"
+      }
     }
   }
 }

@@ -77,8 +77,8 @@ export const contractIdByName = new Map<string, string>(
  *  instances resolve by publish key FIRST, rename-safe on both sides). */
 export const contractIdByKey = new Map<string, string>(
   [...contractsById.values()]
-    .filter((c) => c.anchors.figma.componentSetKey !== null)
-    .map((c) => [c.anchors.figma.componentSetKey!, c.id]),
+    .filter((c) => c.bindings.figma.anchors.componentSetKey !== null)
+    .map((c) => [c.bindings.figma.anchors.componentSetKey!, c.id]),
 );
 
 // ---------------------------------------------------------------------------

@@ -51,14 +51,18 @@
   "anatomy": {
     "root": {}
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": "mui.input-adornment"
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": "mui.input-adornment"
+      }
     },
     "code": {
-      "importPath": "@mui/material",
-      "export": "InputAdornment"
+      "anchors": {
+        "importPath": "@mui/material",
+        "export": "InputAdornment"
+      }
     }
   }
 }

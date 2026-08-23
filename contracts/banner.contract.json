@@ -221,15 +221,19 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
-      "componentSetKey": "6acb10544bd5dce1800d610744c0e346fc12bfb9",
-      "nodeId": "11:184"
+      "anchors": {
+        "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+        "componentSetKey": "6acb10544bd5dce1800d610744c0e346fc12bfb9",
+        "nodeId": "11:184"
+      }
     },
     "code": {
-      "importPath": "src/components/Banner",
-      "export": "Banner"
+      "anchors": {
+        "importPath": "src/components/Banner",
+        "export": "Banner"
+      }
     }
   }
 }

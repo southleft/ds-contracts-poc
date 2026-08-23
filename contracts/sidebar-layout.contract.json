@@ -46,7 +46,11 @@
           },
           "slot": {
             "name": "sidebar",
-            "figmaProperty": "Sidebar"
+            "bindings": {
+              "figma": {
+                "property": "Sidebar"
+              }
+            }
           }
         },
         "main": {
@@ -58,7 +62,11 @@
           },
           "slot": {
             "name": "main",
-            "figmaProperty": "Main"
+            "bindings": {
+              "figma": {
+                "property": "Main"
+              }
+            }
           }
         }
       }
@@ -67,14 +75,18 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/SidebarLayout",
-      "export": "SidebarLayout"
+      "anchors": {
+        "importPath": "src/components/SidebarLayout",
+        "export": "SidebarLayout"
+      }
     }
   }
 }

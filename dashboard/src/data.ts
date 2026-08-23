@@ -92,7 +92,7 @@ export interface AnatomyNode {
   component?: { id: string; props?: Record<string, unknown>; text?: string };
   slot?: {
     name: string;
-    figmaProperty?: string;
+    bindings?: { figma?: { property?: string } };
     required?: boolean;
     accepts?: string[];
     defaultContent?: unknown[];
@@ -122,11 +122,16 @@ export interface RawContract {
   props: RawProp[];
   states: string[];
   anatomy: { root: AnatomyNode };
-  anchors: {
-    // componentSetKey / nodeId are null for native-representation concepts
-    // (Stack, Inline) — they map to Figma auto-layout, not a component set.
-    figma: { fileKey: string; componentSetKey: string | null; nodeId: string | null };
-    code: { importPath: string; export: string };
+  /** v17: per-surface bindings (anchors, representation, state previews). */
+  bindings: {
+    figma: {
+      representation?: 'component' | 'native';
+      statePreviews?: boolean;
+      // componentSetKey / nodeId are null for native-representation concepts
+      // (Stack, Inline) — they map to Figma auto-layout, not a component set.
+      anchors: { fileKey: string; componentSetKey: string | null; nodeId: string | null };
+    };
+    code: { anchors: { importPath: string; export: string } };
   };
 }
 

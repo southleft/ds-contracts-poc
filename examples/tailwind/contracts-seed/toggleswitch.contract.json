@@ -75,14 +75,18 @@
   "anatomy": {
     "root": {}
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "flowbite-react",
-      "export": "ToggleSwitch"
+      "anchors": {
+        "importPath": "flowbite-react",
+        "export": "ToggleSwitch"
+      }
     }
   },
   "states": [

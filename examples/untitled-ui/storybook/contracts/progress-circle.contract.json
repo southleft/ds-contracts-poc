@@ -250,15 +250,19 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
-      "componentSetKey": "83a6f5810ff5ec9f0c0b91b0f1c08ba20b394081",
-      "nodeId": "1084:2717"
+      "anchors": {
+        "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+        "componentSetKey": "83a6f5810ff5ec9f0c0b91b0f1c08ba20b394081",
+        "nodeId": "1084:2717"
+      }
     },
     "code": {
-      "importPath": "src/components/ProgressCircle",
-      "export": "ProgressCircle"
+      "anchors": {
+        "importPath": "src/components/ProgressCircle",
+        "export": "ProgressCircle"
+      }
     }
   }
 }

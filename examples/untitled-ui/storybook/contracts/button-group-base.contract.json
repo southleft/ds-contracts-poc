@@ -150,15 +150,19 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
-      "componentSetKey": "02a0922ff577f89c5fbd7f95fbcedc28d4d776d7",
-      "nodeId": "1046:9312"
+      "anchors": {
+        "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+        "componentSetKey": "02a0922ff577f89c5fbd7f95fbcedc28d4d776d7",
+        "nodeId": "1046:9312"
+      }
     },
     "code": {
-      "importPath": "src/components/ButtonGroupBase",
-      "export": "ButtonGroupBase"
+      "anchors": {
+        "importPath": "src/components/ButtonGroupBase",
+        "export": "ButtonGroupBase"
+      }
     }
   }
 }

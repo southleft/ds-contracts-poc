@@ -227,6 +227,9 @@ jobs:
       - name: schema:fresh (both committed contract.schema.json copies match an in-memory emission of the Zod document)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run schema:fresh
+      - name: contracts:migrate:check (no JSON under the tree still carries a schema-16 spelling — figmaRepresentation / figmaStatePreviews / anchors / slot.figmaProperty)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run contracts:migrate:check
 
       - name: test v1 definition gate falsifications
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}

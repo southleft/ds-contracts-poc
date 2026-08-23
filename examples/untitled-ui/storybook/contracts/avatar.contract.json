@@ -272,15 +272,19 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
-      "componentSetKey": "51b12e9702676c93dc4470f0bc0874e378ab6ba2",
-      "nodeId": "19:1012"
+      "anchors": {
+        "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+        "componentSetKey": "51b12e9702676c93dc4470f0bc0874e378ab6ba2",
+        "nodeId": "19:1012"
+      }
     },
     "code": {
-      "importPath": "src/components/Avatar",
-      "export": "Avatar"
+      "anchors": {
+        "importPath": "src/components/Avatar",
+        "export": "Avatar"
+      }
     }
   }
 }

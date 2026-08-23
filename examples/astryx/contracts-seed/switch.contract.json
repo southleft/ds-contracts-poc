@@ -103,14 +103,18 @@
   "anatomy": {
     "root": {}
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "@astryxdesign/core",
-      "export": "Switch"
+      "anchors": {
+        "importPath": "@astryxdesign/core",
+        "export": "Switch"
+      }
     }
   }
 }

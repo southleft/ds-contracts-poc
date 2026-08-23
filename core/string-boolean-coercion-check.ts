@@ -32,7 +32,7 @@ const child = ContractSchema.parse({
   states: [],
   anatomy: { root: { tokens: {}, parts: {} } },
   a11y: { contrast: 'AA' },
-  anchors: { figma: { fileKey: 'pin', componentSetKey: 'avatar-pin', nodeId: '0:1' }, code: { importPath: 'x', export: 'Avatar' } },
+  bindings: { figma: { anchors: { fileKey: 'pin', componentSetKey: 'avatar-pin', nodeId: '0:1' } }, code: { anchors: { importPath: 'x', export: 'Avatar' } } },
 });
 
 const parent = ContractSchema.parse({
@@ -53,7 +53,7 @@ const parent = ContractSchema.parse({
     },
   },
   a11y: { contrast: 'AA' },
-  anchors: { figma: { fileKey: 'pin', componentSetKey: 'card-pin', nodeId: '0:2' }, code: { importPath: 'x', export: 'CardImage' } },
+  bindings: { figma: { anchors: { fileKey: 'pin', componentSetKey: 'card-pin', nodeId: '0:2' } }, code: { anchors: { importPath: 'x', export: 'CardImage' } } },
 });
 
 const byId = new Map<string, Contract>([

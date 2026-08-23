@@ -55,7 +55,11 @@
           },
           "slot": {
             "name": "children",
-            "figmaProperty": "Cells",
+            "bindings": {
+              "figma": {
+                "property": "Cells"
+              }
+            },
             "required": true,
             "accepts": [
               "ds.table-cell",
@@ -83,15 +87,19 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
-      "componentSetKey": "2630a1f30455c0b4d906930e9b3815cc0437fe1f",
-      "nodeId": "2:70"
+      "anchors": {
+        "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+        "componentSetKey": "2630a1f30455c0b4d906930e9b3815cc0437fe1f",
+        "nodeId": "2:70"
+      }
     },
     "code": {
-      "importPath": "src/components/TableRow",
-      "export": "TableRow"
+      "anchors": {
+        "importPath": "src/components/TableRow",
+        "export": "TableRow"
+      }
     }
   }
 }

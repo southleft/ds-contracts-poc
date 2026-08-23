@@ -60,14 +60,18 @@
   "anatomy": {
     "root": {}
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "@shadcn-sandbox/ui",
-      "export": "Switch"
+      "anchors": {
+        "importPath": "@shadcn-sandbox/ui",
+        "export": "Switch"
+      }
     }
   }
 }

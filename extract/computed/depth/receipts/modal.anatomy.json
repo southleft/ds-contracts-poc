@@ -184,14 +184,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "@shopify/polaris",
-      "export": "Modal"
+      "anchors": {
+        "importPath": "@shopify/polaris",
+        "export": "Modal"
+      }
     }
   }
 }

@@ -122,16 +122,20 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
-      "componentSetKey": "571c89f9c19968f485e8fea81cd081ebbe91f9b8",
-      "nodeId": "2600:5023"
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+        "componentSetKey": "571c89f9c19968f485e8fea81cd081ebbe91f9b8",
+        "nodeId": "2600:5023"
+      }
     },
     "code": {
-      "importPath": "src/components/AtomsTag",
-      "export": "AtomsTag"
+      "anchors": {
+        "importPath": "src/components/AtomsTag",
+        "export": "AtomsTag"
+      }
     }
-  },
-  "figmaStatePreviews": true
+  }
 }

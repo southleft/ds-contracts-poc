@@ -101,7 +101,7 @@ const importSet = (setName: string) => {
   session.idByName.set(contract.name, contract.id);
   session.idByName.set(setName, contract.id);
   session.claimedIds.add(contract.id);
-  const key = contract.anchors.figma.componentSetKey;
+  const key = contract.bindings.figma.anchors.componentSetKey;
   if (key) session.idByKey.set(key, contract.id);
   for (const raw of proposal.childStubs ?? []) {
     const stub = ContractSchema.safeParse(raw);
@@ -125,7 +125,7 @@ if (!stub)
   fail(
     `icon import did not stub ds.radio-button (stubs: ${[...session.stubs.keys()].join(", ")})`,
   );
-const stubKey = stub!.anchors.figma.componentSetKey;
+const stubKey = stub!.bindings.figma.anchors.componentSetKey;
 if (
   !stubKey ||
   !String((dump.RadioButton as { key?: string }).key).startsWith(

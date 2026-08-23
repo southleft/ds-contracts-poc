@@ -180,18 +180,22 @@
         }
       }
     },
-    "anchors": {
+    "bindings": {
       "figma": {
-        "fileKey": null,
-        "componentSetKey": "5fad2c8e8237430e516378667bc372f3fbfa78a9",
-        "nodeId": "14:515"
+        "statePreviews": true,
+        "anchors": {
+          "fileKey": null,
+          "componentSetKey": "5fad2c8e8237430e516378667bc372f3fbfa78a9",
+          "nodeId": "14:515"
+        }
       },
       "code": {
-        "importPath": "src/components/Button",
-        "export": "Button"
+        "anchors": {
+          "importPath": "src/components/Button",
+          "export": "Button"
+        }
       }
-    },
-    "figmaStatePreviews": true
+    }
   },
   "proposalNotes": [
     "semantics: element \"button\" inferred from the set name \"Button\" — inference is mechanical (name/axis table), review",

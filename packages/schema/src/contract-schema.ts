@@ -8,7 +8,9 @@
  * Design lineage (deliberate borrowing, not invention):
  *   - member model shape: Custom Elements Manifest (props/slots/parts)
  *   - prop/value binding grammar: Figma Code Connect
- *   - dual-anchor identity: DTCG $extensions pattern (rename-safe IDs per side)
+ *   - dual-anchor identity: DTCG $extensions pattern (rename-safe IDs per side),
+ *     spelled `bindings.<surface>.anchors` since v17 (one namespace per tool
+ *     at every level — see ContractBindingsSchema)
  *
  * v2 adds COMPOSITION — the three concrete decisions:
  *   1. Anatomy is a NESTED TREE (parts contain parts). Contracts are authored
@@ -26,6 +28,21 @@
  *      child's definition.
  */
 import * as z from "zod";
+
+/** SCHEMA 17 — the v16 → v17 renames, as the refusal messages the schema
+ *  prints. One table: the tombstone fields (`figmaRepresentation`,
+ *  `figmaStatePreviews`, `anchors`, `slot.figmaProperty`) quote it, the
+ *  migrate codemod (./migrate.ts) implements it, CHANGELOG/docs cite it. */
+export const LEGACY_V16 = {
+  figmaRepresentation:
+    "figmaRepresentation was renamed in schema 17 — spell it bindings.figma.representation (codemod: ds-contracts migrate <dir> / npm run contracts:migrate)",
+  figmaStatePreviews:
+    "figmaStatePreviews was renamed in schema 17 — spell it bindings.figma.statePreviews (codemod: ds-contracts migrate <dir> / npm run contracts:migrate)",
+  anchors:
+    "anchors was renamed in schema 17 — spell anchors.figma as bindings.figma.anchors and anchors.code as bindings.code.anchors (codemod: ds-contracts migrate <dir> / npm run contracts:migrate)",
+  slotFigmaProperty:
+    "slot.figmaProperty was renamed in schema 17 — spell it slot.bindings.figma.property (codemod: ds-contracts migrate <dir> / npm run contracts:migrate)",
+} as const;
 
 /** THE CLOSED INTERACTION-STATE VOCABULARY. A `state` is a PSEUDO-CLASS
  *  PLANE — a rendering the same component instance takes without any prop
@@ -1710,8 +1727,19 @@ export const SlotSchema = z.strictObject({
   min: z.number().int().min(0).optional(),
   max: z.number().int().min(1).optional(),
   required: z.boolean().optional(),
-  /** Figma property name. Default: PascalCase(name). */
-  figmaProperty: z.string().optional(),
+  /** v17: per-surface slot bindings — the slot-level twin of a prop's
+   *  `bindings`. `figma.property` is the canvas SLOT / INSTANCE_SWAP
+   *  property name (default: PascalCase(name)); the code side needs no
+   *  binding because the slot name IS the prop. Mirrors how props spell
+   *  `bindings.figma.property`: every tool-specific fact lives under its
+   *  surface namespace, at every level of the document. */
+  bindings: z
+    .strictObject({
+      figma: z.strictObject({ property: z.string().optional() }).optional(),
+    })
+    .optional(),
+  /** v16 spelling — REFUSED BY NAME since schema 17 (see LEGACY_V16). */
+  figmaProperty: z.never({ error: LEGACY_V16.slotFigmaProperty }).optional(),
   /** Sample content (see SlotContentItemSchema). Items must be drawn from
    *  `accepts` when accepts is present. NOTE: a slot whose default content
    *  has MULTIPLE items is a multi-child slot — inexpressible as a Figma
@@ -2264,6 +2292,55 @@ export const ContractProvenanceSchema = z.strictObject({
     .optional(),
 });
 
+// ---------------------------------------------------------------------------
+// v17 — CONTRACT-LEVEL BINDINGS. The 2026-08-22 vendor-neutrality audit found
+// four Figma-only fields leaking into the document's top level and anatomy
+// (`figmaRepresentation`, `figmaStatePreviews`, `anchors.figma`,
+// `slot.figmaProperty`) while props already spelled their design side as
+// `bindings.figma.*`. One rule now, at every level: a tool-specific fact
+// lives under `bindings.<surface>`. The DTCG `$extensions` bag was the
+// other candidate and was rejected: the design surface is a first-class
+// conformance target of this spec, not a foreign extension, and props had
+// already established the short-key namespace — two conventions in one
+// document is worse than one. Unknown surface keys are still REFUSED (strict
+// objects): a misspelled surface must never be silently accepted as a new
+// tool. Adding a surface is a schema change, by design.
+// ---------------------------------------------------------------------------
+
+/** The design tool's stable identifiers, written back after first
+ *  generation so renames on either side never fork identity. */
+export const FigmaAnchorsSchema = z.strictObject({
+  fileKey: z.string().nullable(),
+  componentSetKey: z.string().nullable(),
+  nodeId: z.string().nullable().optional(),
+});
+
+/** The code side's stable identifiers. */
+export const CodeAnchorsSchema = z.strictObject({
+  importPath: z.string(),
+  export: z.string(),
+});
+
+export const ContractBindingsSchema = z.strictObject({
+  figma: z.strictObject({
+    /** How this contract manifests on the canvas. 'component' (default)
+     *  generates a component (set). 'native' means the concept maps to a
+     *  native canvas capability (e.g. layout primitives ARE auto-layout) —
+     *  no component is generated and parity does not expect one; the code
+     *  surface is still fully generated and checked. (v16: figmaRepresentation) */
+    representation: z.enum(["component", "native"]).optional(),
+    /** OPT-IN canvas-only interaction previews — the rules are documented on
+     *  the contract's `states` field above. (v16: figmaStatePreviews) */
+    statePreviews: z.boolean().optional(),
+    /** (v16: anchors.figma) */
+    anchors: FigmaAnchorsSchema,
+  }),
+  code: z.strictObject({
+    /** (v16: anchors.code) */
+    anchors: CodeAnchorsSchema,
+  }),
+});
+
 export const ContractSchema = z.strictObject({
   $schema: z.string().optional(),
   /** Stable canonical id, never renamed. e.g. "ds.button". The namespace
@@ -2334,12 +2411,13 @@ export const ContractSchema = z.strictObject({
   props: z.array(PropSchema),
   events: z.array(EventSchema).optional(),
   states: z.array(z.enum(CONTRACT_STATES)).default([]),
-  /** How this contract manifests in Figma. 'component' (default) generates a
-   *  component (set). 'native' means the concept maps to a native canvas
-   *  capability (e.g. layout primitives ARE auto-layout) — no Figma component
-   *  is generated and parity does not expect one; the code surface is still
-   *  fully generated and checked. */
-  figmaRepresentation: z.enum(["component", "native"]).optional(),
+  /** v16 spellings — REFUSED BY NAME since schema 17 (see LEGACY_V16 and
+   *  `bindings` below). Declared as tombstones rather than left to the
+   *  strict-object "unrecognized key" issue so the refusal names the new
+   *  spelling and the codemod that writes it. */
+  figmaRepresentation: z.never({ error: LEGACY_V16.figmaRepresentation }).optional(),
+  figmaStatePreviews: z.never({ error: LEGACY_V16.figmaStatePreviews }).optional(),
+  anchors: z.never({ error: LEGACY_V16.anchors }).optional(),
   /** v12 (§3 theme-mode promotion): RECEIPT-GRADE metadata naming the token
    *  modes a drawn theme/mode variant axis carried (e.g. ['light','dark']).
    *  The axis is NEVER a prop — theming lives in the token collection's
@@ -2355,8 +2433,9 @@ export const ContractSchema = z.strictObject({
    *  state previews multiply only the PRIMARY enum axis — the one whose
    *  tokens the state overrides substitute — never the full cartesian; all
    *  other axes sit at their defaults in preview variants. Requires declared
-   *  `states`, each with root token overrides (refused by name otherwise). */
-  figmaStatePreviews: z.boolean().optional(),
+   *  `states`, each with root token overrides (refused by name otherwise).
+   *
+   *  v17: spelled `bindings.figma.statePreviews` — see ContractBindingsSchema. */
   anatomy: z.record(z.string(), PartSchema),
   a11y: z
     .object({
@@ -2365,19 +2444,12 @@ export const ContractSchema = z.strictObject({
       contrast: z.enum(["AA", "AAA"]).optional(),
     })
     .optional(),
-  /** Per-side identity anchors. Written back after first generation on each
-   *  side so renames on either side never fork identity. */
-  anchors: z.strictObject({
-    figma: z.strictObject({
-      fileKey: z.string().nullable(),
-      componentSetKey: z.string().nullable(),
-      nodeId: z.string().nullable().optional(),
-    }),
-    code: z.strictObject({
-      importPath: z.string(),
-      export: z.string(),
-    }),
-  }),
+  /** v17: the contract-level per-surface bindings — the same
+   *  `bindings.<surface>` namespace props and slots already use, hoisted to
+   *  the document. Everything a single tool owns (its identity anchors, its
+   *  representation, its canvas-only previews) lives under its own key; the
+   *  vendor-neutral core of the contract carries no tool name at any level. */
+  bindings: ContractBindingsSchema,
   /** v1 provenance is optional for backward compatibility. */
   provenance: ContractProvenanceSchema.optional(),
 }).superRefine((c, ctx) => {
@@ -2390,6 +2462,9 @@ export const ContractSchema = z.strictObject({
 });
 
 export type Contract = z.infer<typeof ContractSchema>;
+export type ContractBindings = z.infer<typeof ContractBindingsSchema>;
+export type FigmaAnchors = z.infer<typeof FigmaAnchorsSchema>;
+export type CodeAnchors = z.infer<typeof CodeAnchorsSchema>;
 export type ContractProvenance = z.infer<typeof ContractProvenanceSchema>;
 export type Prop = z.infer<typeof PropSchema>;
 export type ContractEvent = z.infer<typeof EventSchema>;
@@ -2648,7 +2723,7 @@ export function statePreviewSubstProps(contract: Contract): string[] {
 }
 
 export const slotFigmaProperty = (slot: Slot) =>
-  slot.figmaProperty ?? pascal(slot.name);
+  slot.bindings?.figma?.property ?? pascal(slot.name);
 export const slotVisibilityProperty = (slot: Slot) =>
   `Show ${slotFigmaProperty(slot)}`;
 

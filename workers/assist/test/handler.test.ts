@@ -606,9 +606,9 @@ const FIX_CONTRACT = {
   props: [],
   states: [],
   anatomy: { root: { tokens: { background: '{color.feedback.info.background}' } } },
-  anchors: {
-    figma: { fileKey: null, componentSetKey: null, nodeId: null },
-    code: { importPath: '@ds/components', export: 'Badge' },
+  bindings: {
+    figma: { anchors: { fileKey: null, componentSetKey: null, nodeId: null } },
+    code: { anchors: { importPath: '@ds/components', export: 'Badge' } },
   },
 };
 

@@ -16,7 +16,7 @@ One contract per component, at `contracts/<component>.contract.json`. The author
 | `states` | `("hover" \| "focus-visible" \| "disabled")[]` | Interaction states the component must support. Drives CSS pseudo-class rules (code) and, in phase 2, variant pseudo-state frames (canvas). |
 | `anatomy` | `Record<partName, Part>` | Named internal parts with **token bindings** — where all styling decisions live. |
 | `a11y` | object | Executable accessibility requirements (`focusVisible`, `minHitArea`, `contrast`). Phase 1 records them; later phases enforce them. |
-| `anchors` | object | Per-side identity anchors. See below. |
+| `bindings` | `{ figma: { representation?, statePreviews?, anchors }, code: { anchors } }` | **Schema 17.** The contract-level per-surface bindings — the same `bindings.<surface>` namespace every prop and slot uses, hoisted to the document. Everything one tool owns lives under its own key (identity anchors, canvas representation, canvas-only state previews); the vendor-neutral core carries no tool name at any level. See [Bindings](#bindings--per-surface-anchors-and-canvas-facts). |
 
 ## Props
 
@@ -52,7 +52,7 @@ Anatomy is a **nested tree** of named parts (CEM's slots/parts, Curtis's anatomy
 | Part field | Meaning | Code output | Canvas output |
 |---|---|---|---|
 | `component: { id, props? }` | Fixed instance of another contract; `props` spelled canonically, mapped through the *child's* bindings | imported `<Child prop="…">` | nested instance with properties set |
-| `slot: { name, accepts?, acceptsMode?, min?, max?, required?, designProperty? }` | Constrained insertion point; `accepts` lists contract IDs resolved via anchors | `children` / `ReactNode` prop | instance-swap slot property (Slot-utility default) whose preferred values are the accepted contracts' component keys; optional parts get a `Show X` boolean |
+| `slot: { name, accepts?, acceptsMode?, min?, max?, required?, bindings?: { figma?: { property? } } }` | Constrained insertion point; `accepts` lists contract IDs resolved via anchors | `children` / `ReactNode` prop | instance-swap slot property (Slot-utility default) whose preferred values are the accepted contracts' component keys; optional parts get a `Show X` boolean |
 | `content: { prop }` | Text bound to a declared text prop | `{title}` in the part's element | text node linked to the text property |
 
 Parts with none of these are structural (frames/elements containing `parts`). `optional: true` renders conditionally in code and toggles visibility on the canvas. Composition rules: part names are unique per contract; cycles and unknown contract refs **fail the build**; sync scripts emit in dependency order. See [docs/08](08-composition-and-spec.md) for the design rationale.
@@ -175,22 +175,42 @@ refused by name ([docs/23 §B.22](23-known-limitations.md)). CANVAS→contract i
 the direction still missing: `core/propose-figma.ts` does not read the dump's
 `grid` block, so a drawn grid proposes as the flex-era lowering.
 
-## State previews (`figmaStatePreviews`, v8)
+## State previews (`bindings.figma.statePreviews`, v8; spelled `figmaStatePreviews` until schema 17)
 
-Interaction states are declared once (`states` + per-state token overrides on `anatomy.root.states`) and rendered per surface at that surface's fidelity: code gets real `:hover`/`:focus-visible`/`:disabled` CSS; the canvas — which cannot run pseudo-classes — gets nothing by default. Real systems hand-build "State=Hover" variant axes to fill that gap, and those rot (all four drift-research pilots carry them). `figmaStatePreviews: true` makes the design generator own that axis instead: a `State` variant axis (`Default`, `Hover`, `Focus Visible`, …) where each non-default state applies the state's token overrides on top of the variant's base bindings. This is the mirror image of code-only events: events are code-only, state previews are canvas-only, and the code surface is completely unaffected.
+Interaction states are declared once (`states` + per-state token overrides on `anatomy.root.states`) and rendered per surface at that surface's fidelity: code gets real `:hover`/`:focus-visible`/`:disabled` CSS; the canvas — which cannot run pseudo-classes — gets nothing by default. Real systems hand-build "State=Hover" variant axes to fill that gap, and those rot (all four drift-research pilots carry them). `bindings.figma.statePreviews: true` makes the design generator own that axis instead: a `State` variant axis (`Default`, `Hover`, `Focus Visible`, …) where each non-default state applies the state's token overrides on top of the variant's base bindings. This is the mirror image of code-only events: events are code-only, state previews are canvas-only, and the code surface is completely unaffected.
 
 Bounds and refusals: previews multiply only the *primary* enum axis (the one the overrides substitute — `{color.action.{variant}.background-hover}` names `variant`); every other axis sits at its default. The opt-in is refused by name when the contract declares no states, when any declared state has no root token overrides (its preview would render identically to Default), when overrides substitute more than one enum prop, or when a prop already binds the design property `State`. Fidelity notes: `opacity` binds directly; the focus outline renders as a bound stroke (outline-offset has no canvas equivalent).
 
-## Anchors
+## Bindings — per-surface anchors and canvas facts
 
 ```jsonc
-"anchors": {
-  "design": { /* the design tool's stable file/component-set/node identifiers */ },
-  "code":   { "importPath": "src/components/Button", "export": "Button" }
+"bindings": {
+  "figma": {
+    "representation": "component",   // optional; "native" = the concept IS a canvas capability, no set is generated
+    "statePreviews": true,            // optional; the canvas-only State preview axis (see above)
+    "anchors": { "fileKey": "…", "componentSetKey": "…", "nodeId": "4:412" }
+  },
+  "code": {
+    "anchors": { "importPath": "src/components/Button", "export": "Button" }
+  }
 }
 ```
 
-This is the DTCG `$extensions` dual-ID pattern applied to components. After phase 2 first generates the canvas component set, its stable identifiers are written back here. From then on, renames on either side never fork identity — parity checks match by anchor, not by name. (In the reference implementation the design-side keys — here and in prop bindings — are namespaced after the bound commercial design tool; the concrete key shapes are documented in docs/internal/figma-sync.md.)
+One rule, at every level of the document: a fact that only one tool owns is spelled under `bindings.<surface>` — on a prop (`bindings.figma.property`, `bindings.code.prop`), on a slot (`bindings.figma.property`), and, since schema 17, on the contract itself. The surface keys are the same short names the prop level established (`figma`, `code`); a DTCG-style `$extensions` bag was considered and rejected because the design surface is a first-class conformance target of this spec, not a foreign extension, and two namespacing conventions in one document would be worse than one. Unknown surface keys are refused by name: a misspelled surface must never pass as a new tool, so adding a surface is a schema change.
+
+`anchors` is the DTCG `$extensions` dual-ID pattern applied to components. After phase 2 first generates the canvas component set, its stable identifiers are written back here (`npm run anchors:writeback`). From then on, renames on either side never fork identity — parity checks match by anchor, not by name.
+
+**Schema 17 migration (v16 → v17).** Four tool-specific fields used to leak outside the namespace; the schema now refuses each of them by name, with the new spelling in the message, and `ds-contracts migrate <dir>` (`npm run contracts:migrate` for the whole repo) rewrites a tree in place — key order preserved, every other byte untouched:
+
+| v16 spelling | v17 spelling |
+|---|---|
+| `figmaRepresentation` | `bindings.figma.representation` |
+| `figmaStatePreviews` | `bindings.figma.statePreviews` |
+| `anchors.figma` | `bindings.figma.anchors` |
+| `anchors.code` | `bindings.code.anchors` |
+| `<part>.slot.figmaProperty` | `<part>.slot.bindings.figma.property` |
+
+Nothing was loosened or tightened: the same fields are required, optional and typed exactly as before — they moved.
 
 ## Versioning & change policy
 
@@ -200,4 +220,4 @@ This is the DTCG `$extensions` dual-ID pattern applied to components. After phas
 
 ## Schema evolution
 
-The schema itself will grow (composition/nesting, layout block, behavior/events, multi-placeholder substitution are known gaps — see [architecture doc](01-architecture.md)). Schema changes happen in `scripts/contract-schema.ts`, are reflected by `npm run schema`, and must keep existing contracts parsing (add optional fields; never repurpose existing ones).
+The schema itself will grow (composition/nesting, layout block, behavior/events, multi-placeholder substitution are known gaps — see [architecture doc](01-architecture.md)). Schema changes happen in `packages/schema/src/contract-schema.ts` (the repo's `scripts/contract-schema.ts` is a re-export shim), are reflected by `npm run schema && npm --prefix packages/schema run build` (`npm run schema:fresh` refuses a stale projection), and follow the schema's own semver: an added optional field is a minor; removing, renaming or repurposing a field is a **major**, and a major ships three things together — the old spelling refused *by name* with the new spelling in the message, a codemod (`ds-contracts migrate`) that rewrites every committed contract, and a `BREAKING` entry in the CHANGELOG. Schema 17 (the `bindings` hoist above) is the first such major; the seven schema bumps of July 2026 (v9 → v16) were additive.

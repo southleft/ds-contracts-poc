@@ -2932,14 +2932,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@astryxdesign/core",
-          "export": "Badge"
+          "anchors": {
+            "importPath": "@astryxdesign/core",
+            "export": "Badge"
+          }
         }
       }
     },
@@ -3241,14 +3245,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@astryxdesign/core",
-          "export": "Banner"
+          "anchors": {
+            "importPath": "@astryxdesign/core",
+            "export": "Banner"
+          }
         }
       }
     },
@@ -3659,14 +3667,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@astryxdesign/core",
-          "export": "Button"
+          "anchors": {
+            "importPath": "@astryxdesign/core",
+            "export": "Button"
+          }
         }
       }
     },
@@ -3982,14 +3994,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@astryxdesign/core",
-          "export": "Card"
+          "anchors": {
+            "importPath": "@astryxdesign/core",
+            "export": "Card"
+          }
         }
       }
     },
@@ -4125,14 +4141,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@astryxdesign/core",
-          "export": "CheckboxInput"
+          "anchors": {
+            "importPath": "@astryxdesign/core",
+            "export": "CheckboxInput"
+          }
         }
       }
     },
@@ -4205,14 +4225,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@astryxdesign/core",
-          "export": "DropdownMenuItem"
+          "anchors": {
+            "importPath": "@astryxdesign/core",
+            "export": "DropdownMenuItem"
+          }
         }
       }
     },
@@ -4315,14 +4339,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@astryxdesign/core",
-          "export": "DropdownMenu"
+          "anchors": {
+            "importPath": "@astryxdesign/core",
+            "export": "DropdownMenu"
+          }
         }
       }
     },
@@ -4515,14 +4543,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@astryxdesign/core",
-          "export": "ProgressBar"
+          "anchors": {
+            "importPath": "@astryxdesign/core",
+            "export": "ProgressBar"
+          }
         }
       }
     },
@@ -5044,14 +5076,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@astryxdesign/core",
-          "export": "Slider"
+          "anchors": {
+            "importPath": "@astryxdesign/core",
+            "export": "Slider"
+          }
         }
       }
     },
@@ -5597,14 +5633,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@astryxdesign/core",
-          "export": "Switch"
+          "anchors": {
+            "importPath": "@astryxdesign/core",
+            "export": "Switch"
+          }
         }
       }
     },
@@ -5871,14 +5911,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@astryxdesign/core",
-          "export": "TextInput"
+          "anchors": {
+            "importPath": "@astryxdesign/core",
+            "export": "TextInput"
+          }
         }
       }
     },
@@ -5982,14 +6026,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@astryxdesign/core",
-          "export": "Toast"
+          "anchors": {
+            "importPath": "@astryxdesign/core",
+            "export": "Toast"
+          }
         }
       }
     },
@@ -6202,14 +6250,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@astryxdesign/core",
-          "export": "Token"
+          "anchors": {
+            "importPath": "@astryxdesign/core",
+            "export": "Token"
+          }
         }
       }
     }

@@ -49,14 +49,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/Stack/Stack",
-      "export": "Stack"
+      "anchors": {
+        "importPath": "src/components/Stack/Stack",
+        "export": "Stack"
+      }
     }
   }
 }

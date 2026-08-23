@@ -113,7 +113,7 @@ function emitLib(opts: {
   const byId = new Map(contracts.map((c) => [c.id, c]));
   mkdirSync(opts.outDir, { recursive: true });
   for (const c of sortByDependencies(contracts)) {
-    if (c.figmaRepresentation === "native") continue;
+    if (c.bindings.figma.representation === "native") continue;
     // Prefer human file stem (ToggleSwitch → toggle-switch) over id tail
     // (flowbite.toggleswitch → toggleswitch) so examples/*/figma names match.
     const nameStem = c.name

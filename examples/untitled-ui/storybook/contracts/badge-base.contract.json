@@ -173,15 +173,19 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
-      "componentSetKey": "f6cf0e698e060ee64e268bd7395bfffd6c3c12f3",
-      "nodeId": "1046:28"
+      "anchors": {
+        "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+        "componentSetKey": "f6cf0e698e060ee64e268bd7395bfffd6c3c12f3",
+        "nodeId": "1046:28"
+      }
     },
     "code": {
-      "importPath": "src/components/BadgeBase",
-      "export": "BadgeBase"
+      "anchors": {
+        "importPath": "src/components/BadgeBase",
+        "export": "BadgeBase"
+      }
     }
   }
 }

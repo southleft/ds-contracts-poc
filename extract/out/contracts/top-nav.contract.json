@@ -94,14 +94,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/TopNav/TopNav",
-      "export": "TopNav"
+      "anchors": {
+        "importPath": "src/components/TopNav/TopNav",
+        "export": "TopNav"
+      }
     }
   }
 }

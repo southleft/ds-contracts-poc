@@ -1,11 +1,11 @@
-# Normative rules — Spec draft v0.1
+# Normative rules — Spec draft v0.2 (schema 17)
 
 Language: **MUST** / **MUST NOT** / **SHOULD** / **MAY** as in RFC 2119.
 
 ## 1. Contract identity
 
 1. Every component contract MUST have a stable `id` that is never reused for a different component.
-2. Display `name` MAY change; identity MUST follow `id` (and per-surface `anchors` after first sync).
+2. Display `name` MAY change; identity MUST follow `id` (and per-surface `bindings.<surface>.anchors` after first sync).
 3. `version` MUST be semver and MUST bump when a contract change is published.
 
 ## 2. Dispositions (exact conversion grammar)
@@ -26,14 +26,16 @@ Silent loss, silent invention, silent fallback, and silent overwrite are MUST NO
 1. Adding an optional prop or widening accepted slot content SHOULD be a minor change.
 2. Removing/renaming a prop or value, or narrowing accepted slot content, MUST be a major change.
 3. Existing fields MUST NOT be repurposed to mean something else without a major bump and migration note.
+4. The schema itself follows the same rule: removing or renaming a schema field is a schema MAJOR, and a schema major MUST refuse the old spelling by name (naming the new spelling) and MUST ship a codemod that rewrites a conforming document of the previous major. Silent acceptance of the old spelling is a MUST NOT — a document that validates only after an unrecorded rewrite is a document whose committed bytes lie.
 
 (Working detail: [CONTRIBUTING.md](../CONTRIBUTING.md) contract change policy.)
 
 ## 4. Surfaces
 
-1. A contract MAY bind any number of surfaces (`code`, `figma`, …) via `bindings` / `anchors`.
+1. A contract MAY bind any number of surfaces (`code`, `figma`, …). Every surface-specific fact MUST live under `bindings.<surface>` — on the contract (`bindings.<surface>.anchors`, plus the surface's own facts such as `bindings.figma.representation` / `bindings.figma.statePreviews`), on a prop (`bindings.<surface>.property` / `.prop`) and on a slot (`bindings.<surface>.property`). The vendor-neutral core of the document (`id`, `name`, `version`, `semantics`, `props`, `events`, `states`, `anatomy`, `a11y`) MUST NOT carry a tool name at any level.
 2. A surface binding MUST NOT invent a canonical value absent from the contract prop enum/type.
-3. Generated artifacts MUST be deterministic for the same supported inputs (byte-stable where the implementation claims determinism).
+3. An implementation MUST refuse an unknown surface key by name rather than accept it as a new surface.
+4. Generated artifacts MUST be deterministic for the same supported inputs (byte-stable where the implementation claims determinism).
 
 ## 5. Anatomy
 

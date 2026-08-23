@@ -266,14 +266,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "polaris-react/src/components/ProgressBar/ProgressBar",
-      "export": "ProgressBar"
+      "anchors": {
+        "importPath": "polaris-react/src/components/ProgressBar/ProgressBar",
+        "export": "ProgressBar"
+      }
     }
   }
 }

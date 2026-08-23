@@ -8,7 +8,7 @@
  *
  * Named no-ops on this contract (canvas-only concepts, deliberately not
  * re-created here):
- *   · bindings.figma / anchors.figma / slot.figmaProperty (design-side identity, no DOM manifestation)
+ *   · bindings.figma / bindings.figma.anchors / slot.bindings.figma.property (design-side identity, no DOM manifestation)
  */
 import sheet from './polaris-badge.css.js';
 

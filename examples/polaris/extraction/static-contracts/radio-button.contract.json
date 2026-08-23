@@ -126,14 +126,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "polaris-react/src/components/RadioButton/RadioButton",
-      "export": "RadioButton"
+      "anchors": {
+        "importPath": "polaris-react/src/components/RadioButton/RadioButton",
+        "export": "RadioButton"
+      }
     }
   }
 }

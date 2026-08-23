@@ -107,14 +107,18 @@
   "anatomy": {
     "root": {}
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "@mui/material",
-      "export": "Chip"
+      "anchors": {
+        "importPath": "@mui/material",
+        "export": "Chip"
+      }
     }
   }
 }

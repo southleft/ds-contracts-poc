@@ -944,19 +944,20 @@ export function validateContract(
     }
   }
 
-  // figmaStatePreviews (v8): canvas-only state previews must be honest —
+  // bindings.figma.statePreviews (v8; spelled figmaStatePreviews until v17):
+  // canvas-only state previews must be honest —
   // a preview variant that renders identically to Default is kit noise, so
   // the opt-in is refused by name unless every declared state carries root
   // token overrides; and the multiplied axis must be unambiguous.
-  if (contract.figmaStatePreviews) {
-    if (contract.figmaRepresentation === 'native') {
+  if (contract.bindings.figma.statePreviews) {
+    if (contract.bindings.figma.representation === 'native') {
       errors.push(
-        `${contract.id}: figmaStatePreviews requires a generated Figma component — figmaRepresentation "native" declares there is none`,
+        `${contract.id}: bindings.figma.statePreviews requires a generated Figma component — bindings.figma.representation "native" declares there is none`,
       );
     }
     if (contract.states.length === 0) {
       errors.push(
-        `${contract.id}: figmaStatePreviews is set but the contract declares no interaction states — nothing to preview`,
+        `${contract.id}: bindings.figma.statePreviews is set but the contract declares no interaction states — nothing to preview`,
       );
     }
     for (const state of contract.states) {
@@ -981,19 +982,19 @@ export function validateContract(
       );
       if (!rootCarries && !partCarries && !byPropCarries) {
         errors.push(
-          `${contract.id}: figmaStatePreviews — state "${state}" declares no token overrides on anatomy.root.states (or any part's states), so its preview variant would render identically to Default`,
+          `${contract.id}: bindings.figma.statePreviews — state "${state}" declares no token overrides on anatomy.root.states (or any part's states), so its preview variant would render identically to Default`,
         );
       }
     }
     const substProps = statePreviewSubstProps(contract);
     if (substProps.length > 1) {
       errors.push(
-        `${contract.id}: figmaStatePreviews — state overrides substitute ${substProps.length} enum props (${substProps.join(', ')}); previews multiply exactly ONE primary axis`,
+        `${contract.id}: bindings.figma.statePreviews — state overrides substitute ${substProps.length} enum props (${substProps.join(', ')}); previews multiply exactly ONE primary axis`,
       );
     }
     if (contract.props.some((p) => p.bindings.figma.property === STATE_PREVIEW_PROPERTY)) {
       errors.push(
-        `${contract.id}: figmaStatePreviews reserves the design property "${STATE_PREVIEW_PROPERTY}" for the preview axis, but a prop already binds it`,
+        `${contract.id}: bindings.figma.statePreviews reserves the design property "${STATE_PREVIEW_PROPERTY}" for the preview axis, but a prop already binds it`,
       );
     }
   }

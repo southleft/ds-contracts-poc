@@ -113,14 +113,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/TopNavItem/TopNavItem",
-      "export": "TopNavItem"
+      "anchors": {
+        "importPath": "src/components/TopNavItem/TopNavItem",
+        "export": "TopNavItem"
+      }
     }
   }
 }

@@ -27,14 +27,18 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
-      "componentSetKey": "93f75d07a9d9a81e23af6cda238f8f520c35eb5a"
+      "anchors": {
+        "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+        "componentSetKey": "93f75d07a9d9a81e23af6cda238f8f520c35eb5a"
+      }
     },
     "code": {
-      "importPath": "src/components/Circle",
-      "export": "Circle"
+      "anchors": {
+        "importPath": "src/components/Circle",
+        "export": "Circle"
+      }
     }
   }
 }

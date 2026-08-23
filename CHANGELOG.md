@@ -6,6 +6,46 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### BREAKING — `@ds-contracts/schema` 17.0.0-rc.1: contract-level `bindings` (the vendor-neutral hoist)
+
+The contract is billed as vendor-neutral — props spell their design side as
+`bindings.figma.*` and their code side as `bindings.code.*` — yet the
+2026-08-22 audit found four Figma-only fields outside that namespace:
+`anchors.figma`, `figmaRepresentation`, `figmaStatePreviews` and
+`slot.figmaProperty`. Schema 17 moves them under `bindings.<surface>` at
+every level. This is a pure rename; nothing is loosened, tightened or retyped:
+
+| v16 | v17 |
+|---|---|
+| `figmaRepresentation` | `bindings.figma.representation` |
+| `figmaStatePreviews` | `bindings.figma.statePreviews` |
+| `anchors.figma` | `bindings.figma.anchors` |
+| `anchors.code` | `bindings.code.anchors` |
+| `<part>.slot.figmaProperty` | `<part>.slot.bindings.figma.property` |
+
+Every old spelling is REFUSED BY NAME with the new spelling in the message
+(`LEGACY_V16` in the Zod document — tombstone fields, not a silent
+"unrecognized key"). The codemod is `ds-contracts migrate <paths..> [--check]`
+(`npm run contracts:migrate` / `contracts:migrate:check` for the whole
+tree), built on the ONE implementation the schema package exports
+(`migrateDocumentToV17`): it rewrites every JSON document that embeds a
+contract in key order, keeps each file's own indentation / trailing newline /
+`\uXXXX` convention, and refuses by name any file it cannot round-trip
+byte-for-byte rather than reformat it. 812 committed JSON files were
+rewritten (contracts, seeds, bundles, proposals, receipts — 791 by the CLI, 21
+hand-formatted ones by a text-level pass that preserved their inline
+formatting); every generated CODE surface is byte-identical (`src/`, the
+three storybook trees, the emitted CSS/TSX/WC), and every surface that embeds
+a contract (the 60 first-party figma-sync scripts, 8 libraries' figma scripts,
+GENESIS batches and bundles, the golden manifest, the plugin engine receipt)
+was regenerated per its recipe. `@ds-contracts/core` now requires
+`@ds-contracts/schema@^17.0.0-rc.1`. The `$extensions`-style alternative was
+rejected in the schema's own comment: the design surface is a first-class
+conformance target, props had already established the short surface keys,
+and unknown surface keys stay refused. docs/02 § Bindings, docs/14,
+spec/normative.md v0.2 and CONTRIBUTING § Contract change policy carry the
+rule.
+
 ### Added — `@ds-contracts/core` (packages/core, slice 1)
 
 The emitter contract is now a published package: `Emitter` / `EmitterCtx` /

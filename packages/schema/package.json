@@ -1,6 +1,6 @@
 {
   "name": "@ds-contracts/schema",
-  "version": "16.1.0-rc.2",
+  "version": "17.0.0-rc.1",
   "publishConfig": {
     "access": "public"
   },

@@ -72,7 +72,7 @@ const bento = (): Contract =>
         },
       },
     },
-    anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'EvalBento' } },
+    bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'x', export: 'EvalBento' } } },
   }) as Contract;
 
 const emit = (c: Contract): string =>
@@ -304,7 +304,7 @@ expectRefusal('flow rows that do not cover the children', 'grid-implicit-tracks'
         },
       },
     },
-    anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'EvalGridHug' } },
+    bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'x', export: 'EvalGridHug' } } },
   }) as Contract;
   const hugScript = emit(hugging);
 

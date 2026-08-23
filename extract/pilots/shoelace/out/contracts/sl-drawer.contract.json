@@ -178,14 +178,18 @@
   "anatomy": {
     "root": {}
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "extract/pilots/shoelace/custom-elements.json (components/drawer/drawer.js)",
-      "export": "SlDrawer"
+      "anchors": {
+        "importPath": "extract/pilots/shoelace/custom-elements.json (components/drawer/drawer.js)",
+        "export": "SlDrawer"
+      }
     }
   }
 }

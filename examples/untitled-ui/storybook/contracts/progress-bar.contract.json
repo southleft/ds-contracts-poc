@@ -246,15 +246,19 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
-      "componentSetKey": "959d3d04f8f09f29e3136173d76e52ee7f035a82",
-      "nodeId": "1085:57382"
+      "anchors": {
+        "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+        "componentSetKey": "959d3d04f8f09f29e3136173d76e52ee7f035a82",
+        "nodeId": "1085:57382"
+      }
     },
     "code": {
-      "importPath": "src/components/ProgressBar",
-      "export": "ProgressBar"
+      "anchors": {
+        "importPath": "src/components/ProgressBar",
+        "export": "ProgressBar"
+      }
     }
   }
 }

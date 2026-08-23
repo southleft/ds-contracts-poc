@@ -327,15 +327,19 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
-      "componentSetKey": "c259e0e683849e75b72835d1f50c58e3e3f00b10",
-      "nodeId": "1090:57627"
+      "anchors": {
+        "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+        "componentSetKey": "c259e0e683849e75b72835d1f50c58e3e3f00b10",
+        "nodeId": "1090:57627"
+      }
     },
     "code": {
-      "importPath": "src/components/InputFieldBase",
-      "export": "InputFieldBase"
+      "anchors": {
+        "importPath": "src/components/InputFieldBase",
+        "export": "InputFieldBase"
+      }
     }
   }
 }

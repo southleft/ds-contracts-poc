@@ -215,6 +215,13 @@ function walkBranches(prefix: string, s: AnySchema, out: Set<string>, depth: num
   if (t === 'object') {
     const shape = shapeOf(schema) ?? {};
     for (const [k, v] of Object.entries(shape)) {
+      // A `z.never()` member is a schema-17 TOMBSTONE — a renamed spelling
+      // (figmaRepresentation, figmaStatePreviews, anchors, slot.figmaProperty)
+      // kept in the shape only so a v16 document is refused BY NAME with the
+      // codemod in the message. It is a refusal, not a branch of the spec, so
+      // it is neither documented nor counted; the reference pages skip the
+      // same keys when they render the shape.
+      if (defType(unwrap(v).schema) === 'never') continue;
       out.add(`${prefix}.${k}`);
       walkBranches(`${prefix}.${k}`, v, out, depth + 1);
     }

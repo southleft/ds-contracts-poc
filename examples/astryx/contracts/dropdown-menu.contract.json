@@ -65,8 +65,12 @@
       }
     }
   },
-  "anchors": {
-    "figma": { "fileKey": null, "componentSetKey": null },
-    "code": { "importPath": "@astryxdesign/core", "export": "DropdownMenu" }
+  "bindings": {
+    "figma": {
+      "anchors": { "fileKey": null, "componentSetKey": null }
+    },
+    "code": {
+      "anchors": { "importPath": "@astryxdesign/core", "export": "DropdownMenu" }
+    }
   }
 }

@@ -205,15 +205,19 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
-      "componentSetKey": "83b5ead2b038477a13c0647de71ee55bf458e0b3",
-      "nodeId": "11:446"
+      "anchors": {
+        "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+        "componentSetKey": "83b5ead2b038477a13c0647de71ee55bf458e0b3",
+        "nodeId": "11:446"
+      }
     },
     "code": {
-      "importPath": "src/components/TextField",
-      "export": "TextField"
+      "anchors": {
+        "importPath": "src/components/TextField",
+        "export": "TextField"
+      }
     }
   }
 }

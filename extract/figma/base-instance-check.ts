@@ -165,10 +165,10 @@ check(
   rByName.get("state") === undefined,
 );
 check(
-  "contract states [hover, active, focus-visible] declared with figmaStatePreviews",
+  "contract states [hover, active, focus-visible] declared with bindings.figma.statePreviews",
   JSON.stringify(rc.states) ===
     JSON.stringify(["hover", "active", "focus-visible"]) &&
-    rc.figmaStatePreviews === true,
+    rc.bindings.figma.statePreviews === true,
 );
 const rDisabled = rByName.get("isDisabled");
 check(

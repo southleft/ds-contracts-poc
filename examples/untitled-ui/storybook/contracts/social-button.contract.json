@@ -175,15 +175,19 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
-      "componentSetKey": "5f75de11cec02b37d986608601d068c9e24d0e47",
-      "nodeId": "1256:130788"
+      "anchors": {
+        "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+        "componentSetKey": "5f75de11cec02b37d986608601d068c9e24d0e47",
+        "nodeId": "1256:130788"
+      }
     },
     "code": {
-      "importPath": "src/components/SocialButton",
-      "export": "SocialButton"
+      "anchors": {
+        "importPath": "src/components/SocialButton",
+        "export": "SocialButton"
+      }
     }
   }
 }

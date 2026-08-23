@@ -217,7 +217,7 @@ export function SpecSheet({
               {comboCount} combination{comboCount === 1 ? '' : 's'} (
               {enums.map((p) => p.name).join(' × ')})
             </p>
-            {contract.figmaStatePreviews ? (
+            {contract.bindings.figma.statePreviews ? (
               <p className="spec__line">
                 State previews (canvas): a State axis renders{' '}
                 {['Default', ...contract.states.map(statePreviewLabel)].join(', ')} as extra Figma

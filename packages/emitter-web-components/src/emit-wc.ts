@@ -56,8 +56,8 @@
  *   uncontrolled flip, ARIA state / native checked+indeterminate),
  *   a11y.minHitArea + focusVisible (delegatesFocus + the focus chrome).
  *   NAMED NO-OPS (canvas-only concepts — listed in each emitted header
- *   when present): figmaStatePreviews, modes, bindings.figma,
- *   anchors.figma, slot.figmaProperty, figmaRepresentation.
+ *   when present): bindings.figma.statePreviews, modes, bindings.figma,
+ *   bindings.figma.anchors, slot.bindings.figma.property, bindings.figma.representation.
  *   a11y.contrast is a review gate, not a rendering fact (no emitter
  *   renders it) — named here, not silently dropped.
  */
@@ -745,11 +745,11 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
 
   // ---- named no-ops (canvas-only concepts present on THIS contract) ------
   const noOps: string[] = [];
-  if (contract.figmaStatePreviews) noOps.push('figmaStatePreviews (canvas State-preview axis — CSS pseudo-classes render these states live here)');
+  if (contract.bindings.figma.statePreviews) noOps.push('bindings.figma.statePreviews (canvas State-preview axis — CSS pseudo-classes render these states live here)');
   if (contract.modes) noOps.push(`modes [${contract.modes.join(', ')}] (theming lives in the token collection's modes, never the component API)`);
-  if (contract.figmaRepresentation) noOps.push(`figmaRepresentation "${contract.figmaRepresentation}" (canvas manifestation only)`);
+  if (contract.bindings.figma.representation) noOps.push(`bindings.figma.representation "${contract.bindings.figma.representation}" (canvas manifestation only)`);
   if (contract.a11y?.contrast) noOps.push(`a11y.contrast ${contract.a11y.contrast} (a review gate, not a rendering fact — no emitter renders it)`);
-  noOps.push('bindings.figma / anchors.figma / slot.figmaProperty (design-side identity, no DOM manifestation)');
+  noOps.push('bindings.figma / bindings.figma.anchors / slot.bindings.figma.property (design-side identity, no DOM manifestation)');
 
   const enums = enumProps(contract);
   const bools = boolProps(contract);

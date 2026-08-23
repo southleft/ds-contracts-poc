@@ -94,15 +94,19 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
-      "componentSetKey": "0abc553b16f20807f50d984a41dc6cb936958a93",
-      "nodeId": "11:461"
+      "anchors": {
+        "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+        "componentSetKey": "0abc553b16f20807f50d984a41dc6cb936958a93",
+        "nodeId": "11:461"
+      }
     },
     "code": {
-      "importPath": "src/components/Toast",
-      "export": "Toast"
+      "anchors": {
+        "importPath": "src/components/Toast",
+        "export": "Toast"
+      }
     }
   }
 }

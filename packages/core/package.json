@@ -25,7 +25,7 @@
     "package:smoke": "npm pack --dry-run --json"
   },
   "dependencies": {
-    "@ds-contracts/schema": "^16.1.0-rc.2"
+    "@ds-contracts/schema": "^17.0.0-rc.1"
   },
   "devDependencies": {
     "typescript": "^6.0.3"

@@ -6340,14 +6340,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "altitude-web-components",
-          "export": "al-avatar"
+          "anchors": {
+            "importPath": "altitude-web-components",
+            "export": "al-avatar"
+          }
         }
       }
     },
@@ -6513,14 +6517,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "altitude-web-components",
-          "export": "al-badge"
+          "anchors": {
+            "importPath": "altitude-web-components",
+            "export": "al-badge"
+          }
         }
       }
     },
@@ -6728,17 +6736,21 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "altitude-web-components",
-          "export": "al-button"
+          "anchors": {
+            "importPath": "altitude-web-components",
+            "export": "al-button"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "./contract.schema.json",
@@ -6961,17 +6973,21 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": false,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "altitude-web-components",
-          "export": "al-chip"
+          "anchors": {
+            "importPath": "altitude-web-components",
+            "export": "al-chip"
+          }
         }
-      },
-      "figmaStatePreviews": false
+      }
     },
     {
       "$schema": "./contract.schema.json",
@@ -7053,14 +7069,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "altitude-web-components",
-          "export": "al-divider"
+          "anchors": {
+            "importPath": "altitude-web-components",
+            "export": "al-divider"
+          }
         }
       }
     },
@@ -7206,14 +7226,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "altitude-web-components",
-          "export": "al-heading"
+          "anchors": {
+            "importPath": "altitude-web-components",
+            "export": "al-heading"
+          }
         }
       }
     },
@@ -7442,14 +7466,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "altitude-web-components",
-          "export": "al-icon-close"
+          "anchors": {
+            "importPath": "altitude-web-components",
+            "export": "al-icon-close"
+          }
         }
       }
     },
@@ -7572,17 +7600,21 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "altitude-web-components",
-          "export": "al-link"
+          "anchors": {
+            "importPath": "altitude-web-components",
+            "export": "al-link"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     }
   ],
   "codeOnlyFacts": [

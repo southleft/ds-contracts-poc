@@ -1,11 +1,11 @@
 /**
  * Anchors write-back — closes the loop the contract schema promises.
  *
- * contracts/*.contract.json each carry anchors.figma { fileKey,
+ * contracts/*.contract.json each carry bindings.figma.anchors { fileKey,
  * componentSetKey, nodeId } that the schema documents as "written back after
  * first generation". This script actually does that: it reads the Sync
  * Runner's POSTed outcome (figma-sync/.runner-result.json, written by
- * scripts/figma-serve.mjs) and updates each contract's anchors.figma from the
+ * scripts/figma-serve.mjs) and updates each contract's bindings.figma.anchors from the
  * per-component results the batch scripts return ({ name, nodeId, key }).
  *
  *   npm run anchors:writeback
@@ -17,7 +17,7 @@
  * anchor values — the rest of the file's formatting (2-space indent,
  * one-line objects, trailing newline) is untouched. Safe because "fileKey"/
  * "componentSetKey"/"nodeId" each occur exactly once per contract, inside
- * anchors.figma (verified before writing).
+ * bindings.figma.anchors (verified before writing).
  */
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import path from 'node:path';
@@ -123,9 +123,9 @@ for (const file of contractFiles) {
   if (byId.has(contract.id)) matchedIds.add(contract.id);
   else matchedLegacyNames.add(contract.name);
 
-  const anchor = contract.anchors?.figma;
+  const anchor = contract.bindings?.figma?.anchors;
   if (!anchor) {
-    console.warn(`⚠ ${file}: no anchors.figma object — skipped.`);
+    console.warn(`⚠ ${file}: no bindings.figma.anchors object — skipped.`);
     continue;
   }
   const next = {
@@ -152,14 +152,14 @@ for (const file of contractFiles) {
     continue;
   }
   // Sanity: the edited text must still parse and carry exactly the new anchor.
-  const check = JSON.parse(out).anchors.figma;
+  const check = JSON.parse(out).bindings.figma.anchors;
   if (check.fileKey !== next.fileKey || check.componentSetKey !== next.componentSetKey || check.nodeId !== next.nodeId) {
     console.warn(`⚠ ${file}: post-edit verification failed — skipped.`);
     continue;
   }
   writeFileSync(filePath, out.endsWith('\n') ? out : out + '\n');
   updated++;
-  console.log(`  ✎ ${file}: anchors.figma → { fileKey: ${next.fileKey}, componentSetKey: ${next.componentSetKey}, nodeId: ${next.nodeId} }`);
+  console.log(`  ✎ ${file}: bindings.figma.anchors → { fileKey: ${next.fileKey}, componentSetKey: ${next.componentSetKey}, nodeId: ${next.nodeId} }`);
 }
 
 const unmatched = [

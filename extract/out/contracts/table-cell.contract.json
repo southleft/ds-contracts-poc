@@ -53,14 +53,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/TableCell/TableCell",
-      "export": "TableCell"
+      "anchors": {
+        "importPath": "src/components/TableCell/TableCell",
+        "export": "TableCell"
+      }
     }
   }
 }

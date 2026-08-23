@@ -753,15 +753,19 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "polaris-react/src/components/Banner/Banner",
-      "export": "Banner"
+      "anchors": {
+        "importPath": "polaris-react/src/components/Banner/Banner",
+        "export": "Banner"
+      }
     }
-  },
-  "figmaStatePreviews": true
+  }
 }

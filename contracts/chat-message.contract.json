@@ -160,15 +160,19 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
-      "componentSetKey": "4af367f1f1c5044640cd31d2cbdd3e575b1bbb54",
-      "nodeId": "11:826"
+      "anchors": {
+        "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+        "componentSetKey": "4af367f1f1c5044640cd31d2cbdd3e575b1bbb54",
+        "nodeId": "11:826"
+      }
     },
     "code": {
-      "importPath": "src/components/ChatMessage",
-      "export": "ChatMessage"
+      "anchors": {
+        "importPath": "src/components/ChatMessage",
+        "export": "ChatMessage"
+      }
     }
   }
 }

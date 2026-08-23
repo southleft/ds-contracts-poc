@@ -415,9 +415,9 @@ export function proposeContract(
     ...(events.length > 0 ? { events } : {}),
     states,
     anatomy: anatomyJson,
-    anchors: {
-      figma: { fileKey: null, componentSetKey: null },
-      code: { importPath: c.source.replace(/\.tsx?$/, ''), export: c.name },
+    bindings: {
+      figma: { anchors: { fileKey: null, componentSetKey: null } },
+      code: { anchors: { importPath: c.source.replace(/\.tsx?$/, ''), export: c.name } },
     },
   };
 

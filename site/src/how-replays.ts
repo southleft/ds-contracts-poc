@@ -554,7 +554,7 @@ async function nestingReplay(): Promise<NestingReplay> {
     byName.set(c.name, c.id);
     byName.set(drawnName, c.id);
     byId.set(c.id, c as never);
-    const key = c.anchors.figma.componentSetKey;
+    const key = c.bindings.figma.anchors.componentSetKey;
     if (key) byKey.set(key, c.id);
   };
   const importStep = (drawnName: string, record: unknown): ImportStep => {
@@ -612,7 +612,7 @@ async function nestingReplay(): Promise<NestingReplay> {
   // drawn Icon instance and compare its captured key to the anchor key the
   // proposed Icon contract carries.
   const iconContract = session.get(steps[0].contractId)!;
-  const proposedAnchorKey = iconContract.anchors.figma.componentSetKey ?? "";
+  const proposedAnchorKey = iconContract.bindings.figma.anchors.componentSetKey ?? "";
   let keyProof: NestingReplay["keyProof"] | undefined;
   const meta = new Set(["_provenance", "_degradations", "_variables"]);
   for (const setName of Object.keys(v16).sort()) {

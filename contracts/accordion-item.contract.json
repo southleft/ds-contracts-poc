@@ -132,15 +132,19 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
-      "componentSetKey": "ba5ec62aa3c19bf86b7bcff8eb61ef1e86daad35",
-      "nodeId": "11:1171"
+      "anchors": {
+        "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+        "componentSetKey": "ba5ec62aa3c19bf86b7bcff8eb61ef1e86daad35",
+        "nodeId": "11:1171"
+      }
     },
     "code": {
-      "importPath": "src/components/AccordionItem",
-      "export": "AccordionItem"
+      "anchors": {
+        "importPath": "src/components/AccordionItem",
+        "export": "AccordionItem"
+      }
     }
   },
   "events": [

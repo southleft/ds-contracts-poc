@@ -1476,8 +1476,8 @@ return { inventory: rows };
         inventory.find(
           (r) =>
             r.key !== null &&
-            contract.anchors.figma.componentSetKey !== null &&
-            r.key === contract.anchors.figma.componentSetKey,
+            contract.bindings.figma.anchors.componentSetKey !== null &&
+            r.key === contract.bindings.figma.anchors.componentSetKey,
         ) ??
         null;
 
@@ -1953,10 +1953,10 @@ return { inventory: rows };
         ),
         contractIdByKey: new Map(
           [...bakedById.values()]
-            .filter((c) => c.anchors.figma.componentSetKey !== null)
+            .filter((c) => c.bindings.figma.anchors.componentSetKey !== null)
             .map(
               (c) =>
-                [c.anchors.figma.componentSetKey as string, c.id] as [
+                [c.bindings.figma.anchors.componentSetKey as string, c.id] as [
                   string,
                   string,
                 ],
