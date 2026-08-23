@@ -4221,7 +4221,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       });
       const errs5: string[] = [];
       coreValidateContract(dupBase, new Map([[dupBase.id, dupBase]]), errs5, new Map());
-      if (!errs5.some((e) => e.includes('BOTH a token binding and a literal'))) {
+      if (!errs5.some((e) => /carries channel "height" as BOTH a token binding \(\{size\.control\.sm\}\) and a literal \("16px"\) — ambiguous, refused by name: keep ONE of tokens\.height \/ literals\.height/.test(e))) {
         throw new Error(`token+literal same base channel must refuse by name; got: ${errs5.join('; ') || '(none)'}`);
       }
       // The committed Text contract exercises the lift: variant AND
