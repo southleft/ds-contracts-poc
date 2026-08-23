@@ -6,7 +6,7 @@ export default function Case() {
       <sup className="cf-b">
         <bdi>
           <span className="cf-c">
-            <span className="current">5</span>
+            <span>5</span>
           </span>
         </bdi>
       </sup>

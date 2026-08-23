@@ -16,7 +16,7 @@
             "$type": "dimension"
           }
         },
-        "inner": {
+        "c": {
           "padding-left": {
             "$value": "9px",
             "$type": "dimension"
@@ -206,22 +206,22 @@
         "value": "monospace"
       },
       {
-        "part": "inner",
+        "part": "c",
         "channel": "box-sizing",
         "value": "border-box"
       },
       {
-        "part": "inner",
+        "part": "c",
         "channel": "font-family",
         "value": "monospace"
       },
       {
-        "part": "inner",
+        "part": "c",
         "channel": "overflow-x",
         "value": "hidden"
       },
       {
-        "part": "inner",
+        "part": "c",
         "channel": "overflow-y",
         "value": "hidden"
       },
@@ -263,15 +263,19 @@
   "interactionOnlyPlaneDropCount": 0,
   "structureReceipts": [],
   "styledChannelReceipts": [
+    "geometry-excluded: a — block-size 0px, height 0px, inline-size 0px, perspective-origin 0px 0px, transform-origin 0px 0px, width 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: b — block-size 0px, height 0px, inline-size 46px, perspective-origin 23px 0px, transform-origin 23px 0px, width 46px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: c — block-size 22px, height 22px, inline-size 42px, perspective-origin 21px 11px, transform-origin 21px 11px, width 42px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 22px, height 22px, inline-size 44px, perspective-origin 22px 11px, transform-origin 22px 11px, width 44px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (a, b); -webkit-text-stroke-color (a, b)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
-    "inheritance-check-rejected: a.caret-color — values track ancestor \"inner\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: a.color — values track ancestor \"inner\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: b.caret-color — values track ancestor \"inner\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: b.color — values track ancestor \"inner\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-only: a.font-size equals ancestor \"inner\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: b.font-size equals ancestor \"inner\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: inner.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)"
+    "inheritance-check-rejected: a.caret-color — values track ancestor \"c\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: a.color — values track ancestor \"c\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: b.caret-color — values track ancestor \"c\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: b.color — values track ancestor \"c\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: a.font-size equals ancestor \"c\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: b.font-size equals ancestor \"c\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: c.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)"
   ],
   "frontierReceipts": [
     "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
@@ -287,7 +291,7 @@
         "join": "matched"
       },
       {
-        "part": "inner",
+        "part": "c",
         "join": "computed-only"
       },
       {
@@ -305,7 +309,7 @@
     "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
     "partsCarried": [
       "root",
-      "inner",
+      "c",
       "a",
       "b"
     ],
@@ -318,10 +322,10 @@
   "enrichmentNotes": [
     "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: root.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: inner.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: inner.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: inner.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: inner.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: c.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: c.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: c.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: c.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: a.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: a.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: b.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",

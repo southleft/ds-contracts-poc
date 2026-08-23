@@ -10,7 +10,7 @@
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
     "root": 10,
-    "inner": 7,
+    "c": 7,
     "a": 17,
     "b": 17
   },

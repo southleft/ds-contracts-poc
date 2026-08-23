@@ -12346,10 +12346,38 @@
         },
         {
           "part": "label-2",
+          "kind": "channel",
+          "channel": "margin-left",
+          "value": "32px",
+          "reason": "the margin-box wrapper is skipped — a FILL-sized child cannot be wrapped in a margin box without breaking the fill; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+          "variants": {
+            "count": 4,
+            "of": 8,
+            "names": [
+              "Align=Start, Size=Sm",
+              "Align=Start, Size=Md",
+              "Align=Start, Size=Lg",
+              "Align=Start, Size=Sm, State=Disabled"
+            ]
+          }
+        },
+        {
+          "part": "label-2",
           "kind": "declared",
           "channel": "display",
           "value": "block",
           "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+          "variants": {
+            "count": 8,
+            "of": 8
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "size [unset]",
+          "value": "sm|md|lg",
+          "reason": "defaultless axis — the library's own rendering when \"size\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 3 declared values only, and a proposal read back from the canvas will call \"sm\" the default (FC-UNSET-PLANE-UNDRAWN)",
           "variants": {
             "count": 8,
             "of": 8
@@ -12755,6 +12783,17 @@
         {
           "part": "root",
           "kind": "channel",
+          "channel": "size [unset]",
+          "value": "xs|sm|md|lg|xl|2xl",
+          "reason": "defaultless axis — the library's own rendering when \"size\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 6 declared values only, and a proposal read back from the canvas will call \"xs\" the default (FC-UNSET-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 80,
+            "of": 80
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
           "channel": "top",
           "value": "{imported.shared.size-0}",
           "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -12846,6 +12885,17 @@
       "contractId": "carbon.checkbox",
       "name": "Checkbox",
       "facts": [
+        {
+          "part": "checkbox",
+          "kind": "channel",
+          "channel": "color [disabled]",
+          "value": "{imported.checkbox.checkbox.color-state-disabled}",
+          "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 3,
+            "of": 3
+          }
+        },
         {
           "part": "checkbox",
           "kind": "declared",
@@ -12948,6 +12998,17 @@
         {
           "part": "checkbox-label",
           "kind": "channel",
+          "channel": "color [disabled]",
+          "value": "{imported.shared.color-16161640}",
+          "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 3,
+            "of": 3
+          }
+        },
+        {
+          "part": "checkbox-label",
+          "kind": "channel",
           "channel": "left",
           "value": "{imported.shared.size-0}",
           "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -13039,6 +13100,17 @@
           "channel": "display",
           "value": "none",
           "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+          "variants": {
+            "count": 3,
+            "of": 3
+          }
+        },
+        {
+          "part": "label",
+          "kind": "channel",
+          "channel": "color [disabled]",
+          "value": "{imported.shared.color-16161640}",
+          "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
           "variants": {
             "count": 3,
             "of": 3
@@ -13405,6 +13477,17 @@
         {
           "part": "root",
           "kind": "channel",
+          "channel": "size [unset]",
+          "value": "xs|sm|md|lg",
+          "reason": "defaultless axis — the library's own rendering when \"size\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 4 declared values only, and a proposal read back from the canvas will call \"xs\" the default (FC-UNSET-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 16,
+            "of": 16
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
           "channel": "top",
           "value": "{imported.shared.size-0}",
           "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -13667,6 +13750,17 @@
           "channel": "flex-grow",
           "value": "{imported.inline-notification.inline-notification-details.flex-grow}",
           "reason": "the canvas approximates growth with layoutGrow/FILL, which is a boolean, not a ratio.",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "inline-notification__details",
+          "kind": "channel",
+          "channel": "margin-left",
+          "value": "13px",
+          "reason": "the margin-box wrapper is skipped — a growing child (flex-grow → layoutGrow) cannot be wrapped without breaking the grow; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
           "variants": {
             "count": 12,
             "of": 12
@@ -14994,6 +15088,17 @@
           "channel": "right",
           "value": "{imported.shared.size-0}",
           "reason": "bound on an in-flow box (position: static) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+          "variants": {
+            "count": 4,
+            "of": 4
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "size [unset]",
+          "value": "xs|sm|md|lg",
+          "reason": "defaultless axis — the library's own rendering when \"size\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 4 declared values only, and a proposal read back from the canvas will call \"xs\" the default (FC-UNSET-PLANE-UNDRAWN)",
           "variants": {
             "count": 4,
             "of": 4
@@ -17195,6 +17300,28 @@
         },
         {
           "part": "root",
+          "kind": "channel",
+          "channel": "size [unset]",
+          "value": "sm|md|lg",
+          "reason": "defaultless axis — the library's own rendering when \"size\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 3 declared values only, and a proposal read back from the canvas will call \"sm\" the default (FC-UNSET-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 36,
+            "of": 36
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "type [unset]",
+          "value": "red|magenta|purple|blue|cyan|teal|green|gray|cool-gray|warm-gray|high-contrast|outline",
+          "reason": "defaultless axis — the library's own rendering when \"type\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 12 declared values only, and a proposal read back from the canvas will call \"red\" the default (FC-UNSET-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 36,
+            "of": 36
+          }
+        },
+        {
+          "part": "root",
           "kind": "declared",
           "channel": "cursor",
           "value": "default",
@@ -17238,6 +17365,17 @@
           "channel": "flex-grow",
           "value": "{imported.text-input.root.flex-grow}",
           "reason": "the canvas approximates growth with layoutGrow/FILL, which is a boolean, not a ratio.",
+          "variants": {
+            "count": 8,
+            "of": 8
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "size [unset]",
+          "value": "xs|sm|md|lg",
+          "reason": "defaultless axis — the library's own rendering when \"size\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 4 declared values only, and a proposal read back from the canvas will call \"xs\" the default (FC-UNSET-PLANE-UNDRAWN)",
           "variants": {
             "count": 8,
             "of": 8

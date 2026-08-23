@@ -59,7 +59,7 @@
       "axes": []
     },
     {
-      "__case": "geometry: span.inner > span.a(empty) + span.b(empty) — two EMPTY inline-block spans whose only facts are margin-inline-start/end (antd Switch inner-checked / inner-unchecked) — declared CARRIED",
+      "__case": "geometry: span.c > span.a(empty) + span.b(empty) — two EMPTY inline-block spans whose only facts are margin-inline-start/end (antd Switch inner-checked / inner-unchecked) — declared CARRIED",
       "name": "CaseAntdEmptyMarginOnlyParts",
       "importName": "CaseAntdEmptyMarginOnlyParts",
       "contract": "conformance/seeds/antd-empty-margin-only-parts.contract.json",
@@ -99,7 +99,7 @@
       "axes": []
     },
     {
-      "__case": "anatomy: sup(absolute, translate(50%,-50%)) > bdi > span > span.current — a count digit THREE levels deep in an absolutely positioned overlay, the deepest span carrying a transient class the classAllow grammar drops (antd Badge / rc-scroll-number) — declared CARRIED",
+      "__case": "anatomy: sup(absolute, translate(50%,-50%)) > bdi > span > span — a count digit THREE levels deep in an absolutely positioned overlay, the deepest span carrying NO identity class (antd's rc-scroll-number `current` is transient and dropped by classAllow; the fixture spells the same absence with a bare span — the frontier eval refuses any non-neutral class in a case) — declared CARRIED",
       "name": "CaseAntdOverlayDigitDepthThree",
       "importName": "CaseAntdOverlayDigitDepthThree",
       "contract": "conformance/seeds/antd-overlay-digit-depth-three.contract.json",

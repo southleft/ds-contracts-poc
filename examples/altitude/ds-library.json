@@ -1,5 +1,5 @@
 {
-  "__note": "LIBRARY MANIFEST — the per-library half of the whole code→canvas pipeline (docs/21). `ds-contracts promote --config <this>` runs the promote stage; `ds-contracts onboard --adopt examples/altitude` runs capture → promote → emit → bundle → publish from it. packages/cli/src/promote.ts is the shared engine-free pipeline; nothing here is library-specific code.",
+  "__note": "LIBRARY MANIFEST \u2014 the per-library half of the whole code\u2192canvas pipeline (docs/21). `ds-contracts promote --config <this>` runs the promote stage; `ds-contracts onboard --adopt examples/altitude` runs capture \u2192 promote \u2192 emit \u2192 bundle \u2192 publish from it. packages/cli/src/promote.ts is the shared engine-free pipeline; nothing here is library-specific code.",
   "library": "altitude",
   "exampleDir": "examples/altitude",
   "captureOut": "extract/computed/out/altitude",
@@ -32,6 +32,10 @@
   },
   "bundle": {
     "out": "examples/altitude/figma/altitude.bundle.json",
-    "name": "Altitude"
+    "name": "Altitude",
+    "modes": [
+      "examples/altitude/tokens/modes/altitude.light.dtcg.json",
+      "examples/altitude/tokens/modes/altitude.dark.dtcg.json"
+    ]
   }
 }

@@ -49,11 +49,11 @@
     {
       "id": "antd-empty-margin-only-parts",
       "feature": "geometry",
-      "construct": "span.inner > span.a(empty) + span.b(empty) — two EMPTY inline-block spans whose only facts are margin-inline-start/end (antd Switch inner-checked / inner-unchecked)",
+      "construct": "span.c > span.a(empty) + span.b(empty) — two EMPTY inline-block spans whose only facts are margin-inline-start/end (antd Switch inner-checked / inner-unchecked)",
       "why": "An empty part with nothing but margins is the shape the anatomy walk is most likely to drop as a non-part (no text, no paint, no size). First authored as REFUSED (\"margin is not a carried channel\") — wrong: the schema registers margin-left as DRAWN (the margin-box wrapper / sibling-gap itemSpacing lowering), and the first measurement carried it as a token on a part that still exists. The correction is recorded in parity/receipts/phase-2/ANTD-EXAM.md; the bar stands: never a vanished part (P2 exam S6).",
       "expect": "CARRIED",
       "expectName": "",
-      "expectWhere": "anatomy.root.parts.inner.parts.a.tokens.margin-left",
+      "expectWhere": "anatomy.root.parts.c.parts.a.tokens.margin-left",
       "observable": {
         "part": "a",
         "channel": "margin-left",
@@ -139,7 +139,7 @@
     {
       "id": "antd-overlay-digit-depth-three",
       "feature": "anatomy",
-      "construct": "sup(absolute, translate(50%,-50%)) > bdi > span > span.current — a count digit THREE levels deep in an absolutely positioned overlay, the deepest span carrying a transient class the classAllow grammar drops (antd Badge / rc-scroll-number)",
+      "construct": "sup(absolute, translate(50%,-50%)) > bdi > span > span — a count digit THREE levels deep in an absolutely positioned overlay, the deepest span carrying NO identity class (antd's rc-scroll-number `current` is transient and dropped by classAllow; the fixture spells the same absence with a bare span — the frontier eval refuses any non-neutral class in a case)",
       "why": "When union alignment collapses a deep unit span into positional naming (part-<path>), the label must still carry its text. A badge whose digit vanishes is still a red dot — recognisable, and silently wrong (P2 exam S7).",
       "expect": "CARRIED",
       "expectName": "",

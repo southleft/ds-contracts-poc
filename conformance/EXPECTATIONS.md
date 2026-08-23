@@ -70,7 +70,7 @@ manifest.
 | | case | feature | construct | declared | measured | verdict |
 |---|---|---|---|---|---|---|
 | 🟢 | `antd-forwarded-root-attrs` | anatomy | `label > [input.sr-only + span.box] + span.text — the component forwards className/data-* to the HIDDEN input, not the visible label root (antd Checkbox/Radio)` | CARRIED | carried | PASS |
-| 🟢 | `antd-overlay-digit-depth-three` | anatomy | `sup(absolute, translate(50%,-50%)) > bdi > span > span.current — a count digit THREE levels deep in an absolutely positioned overlay, the deepest span carrying a transient class the classAllow grammar drops (antd Badge / rc-scroll-number)` | CARRIED | carried | PASS |
+| 🟢 | `antd-overlay-digit-depth-three` | anatomy | `sup(absolute, translate(50%,-50%)) > bdi > span > span — a count digit THREE levels deep in an absolutely positioned overlay, the deepest span carrying NO identity class (antd's rc-scroll-number `current` is transient and dropped by classAllow; the fixture spells the same absence with a bare span — the frontier eval refuses any non-neutral class in a case)` | CARRIED | carried | PASS |
 | 🟢 | `antd-presence-times-axis-glyph` | anatomy | `a child part whose PRESENCE is one prop (showIcon) and whose paint is ANOTHER (type) — the base (default) combo mounts without it (antd Alert)` | CARRIED | carried | PASS |
 | 🔴 | `container-query` | at-rules | `@container (min-inline-size: 100px) { … }` | UNSUPPORTED | carried | UNDECLARED-CARRY |
 | 🔴 | `media-non-matching` | at-rules | `@media (min-width: 2000px) branch that does NOT match the pinned viewport` | UNSUPPORTED | carried | UNDECLARED-CARRY |
@@ -93,7 +93,7 @@ manifest.
 | 🟢 | `mask-image` | effects | `mask-image: linear-gradient(...)` | UNSUPPORTED | refused, by name | PASS |
 | 🟢 | `mix-blend-mode` | effects | `mix-blend-mode: multiply` | UNSUPPORTED | refused, by name | PASS |
 | 🟢 | `accent-color` | forms | `accent-color: rebeccapurple on a native checkbox` | UNSUPPORTED | refused, by name | PASS |
-| 🟢 | `antd-empty-margin-only-parts` | geometry | `span.inner > span.a(empty) + span.b(empty) — two EMPTY inline-block spans whose only facts are margin-inline-start/end (antd Switch inner-checked / inner-unchecked)` | CARRIED | carried | PASS |
+| 🟢 | `antd-empty-margin-only-parts` | geometry | `span.c > span.a(empty) + span.b(empty) — two EMPTY inline-block spans whose only facts are margin-inline-start/end (antd Switch inner-checked / inner-unchecked)` | CARRIED | carried | PASS |
 | 🟢 | `aspect-ratio` | geometry | `aspect-ratio: 2 / 1` | CARRIED | carried | PASS |
 | 🟢 | `border-radius-px` | geometry | `border-radius: 6px` | CARRIED | carried | PASS |
 | 🟢 | `min-max-width` | geometry | `min-width / max-width in px` | CARRIED | carried | PASS |

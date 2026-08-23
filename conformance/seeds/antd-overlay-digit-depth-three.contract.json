@@ -4,7 +4,7 @@
   "name": "CaseAntdOverlayDigitDepthThree",
   "version": "0.1.0",
   "status": "draft",
-  "description": "SEED contract for the CSS/DOM conformance fixture case \"antd-overlay-digit-depth-three\" (anatomy). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: sup(absolute, translate(50%,-50%)) > bdi > span > span.current — a count digit THREE levels deep in an absolutely positioned overlay, the deepest span carrying a transient class the classAllow grammar drops (antd Badge / rc-scroll-number)",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"antd-overlay-digit-depth-three\" (anatomy). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: sup(absolute, translate(50%,-50%)) > bdi > span > span — a count digit THREE levels deep in an absolutely positioned overlay, the deepest span carrying NO identity class (antd's rc-scroll-number `current` is transient and dropped by classAllow; the fixture spells the same absence with a bare span — the frontier eval refuses any non-neutral class in a case)",
   "semantics": {
     "element": "div"
   },
