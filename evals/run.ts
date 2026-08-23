@@ -5316,7 +5316,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         import { emitters, emitterByName, getEmitters, registerEmitter } from './core/emitter.ts';
         import testEmitter from './evals/fixtures/test-emitter.mjs';
         const before = emitters.map((e) => e.name).join(',');
-        if (before !== 'react,html,react-inline,figma-script') {
+        if (before !== 'react,html,react-inline,figma-script,code-connect,code-connect-html') {
           throw new Error('built-in emitter order changed (load-bearing): ' + before);
         }
         registerEmitter(testEmitter);
@@ -5336,7 +5336,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         }
         console.log('registry probe ok: ' + getEmitters().map((e) => e.name).join(','));
       `]);
-      if (probe.status !== 0 || !probe.out.includes('registry probe ok: react,html,react-inline,figma-script,test-emitter')) {
+      if (probe.status !== 0 || !probe.out.includes('registry probe ok: react,html,react-inline,figma-script,code-connect,code-connect-html,test-emitter')) {
         throw new Error(`registry probe failed:\n${probe.out}`);
       }
 
@@ -6473,7 +6473,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         if (!threw.includes('already registered')) throw new Error('collision not refused by name: ' + (threw || '(registered!)'));
         console.log('wc registry probe ok: ' + getEmitters().map((e) => e.name).join(','));
       `]);
-      if (probe.status !== 0 || !probe.out.includes('wc registry probe ok: react,html,react-inline,figma-script,web-components')) {
+      if (probe.status !== 0 || !probe.out.includes('wc registry probe ok: react,html,react-inline,figma-script,code-connect,code-connect-html,web-components')) {
         throw new Error(`wc registry probe failed:\n${probe.out}`);
       }
 

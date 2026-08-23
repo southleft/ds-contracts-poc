@@ -68,13 +68,11 @@ import path from "node:path";
 import { figmaScriptEmitter } from "../../../../core/emitter.js";
 import { unsupportedTokenValues } from "../../../../core/token-set.js";
 import {
+  assertContractProvenance,
   contractFileNameForId,
   flatIdStem,
-  proposalFileNameForId,
-} from "../../../../core/canvas-code-plan.js";
-import {
-  assertContractProvenance,
   markAwaitingCodeAdoption,
+  proposalFileNameForId,
   revisionOf,
   type ProvenancedContract,
 } from "@ds-contracts/core";
@@ -1254,7 +1252,7 @@ export {
   flatIdStem,
   mintedTokensFileNameForId,
   proposalFileNameForId,
-} from "../../../../core/canvas-code-plan.js";
+} from "@ds-contracts/core";
 
 /** Resolve a planned output below a trusted root. Both native and Windows
  * absolute forms are rejected so a plan remains safe across platforms. */

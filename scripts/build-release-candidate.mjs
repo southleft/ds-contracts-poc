@@ -37,6 +37,8 @@ const PACKAGES = [
   },
   {
     directory: "packages/core",
+    // Reviewed 2026-08-23 for slice 3 (the cheap pure siblings: figma-names,
+    // canvas-code-plan, emit-tokens-css, grid-css joined the package).
     // Reviewed 2026-08-23 for fix round 1: prop-collision + its @types/react table ship.
     // Reviewed 2026-08-22 for slice 2 (anatomy / elements / grid / validate / css
     // joined the package — the analysis half of emit-react).
@@ -44,14 +46,22 @@ const PACKAGES = [
       "README.md",
       "dist/anatomy.d.ts",
       "dist/anatomy.js",
+      "dist/canvas-code-plan.d.ts",
+      "dist/canvas-code-plan.js",
       "dist/contract-provenance.d.ts",
       "dist/contract-provenance.js",
       "dist/css.d.ts",
       "dist/css.js",
       "dist/elements.d.ts",
       "dist/elements.js",
+      "dist/emit-tokens-css.d.ts",
+      "dist/emit-tokens-css.js",
       "dist/emitter.d.ts",
       "dist/emitter.js",
+      "dist/figma-names.d.ts",
+      "dist/figma-names.js",
+      "dist/grid-css.d.ts",
+      "dist/grid-css.js",
       "dist/grid.d.ts",
       "dist/grid.js",
       "dist/index.d.ts",
