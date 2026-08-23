@@ -115,6 +115,30 @@
       "selector": ".ant-btn"
     },
     {
+      "leaf": "imported.button.root.height.large",
+      "token": "control-height-lg",
+      "part": "root",
+      "cssProperty": "height",
+      "varName": "--ant-control-height-lg",
+      "selector": ".ant-btn-lg"
+    },
+    {
+      "leaf": "imported.button.root.height.middle",
+      "token": "control-height",
+      "part": "root",
+      "cssProperty": "height",
+      "varName": "--ant-control-height",
+      "selector": ".ant-btn"
+    },
+    {
+      "leaf": "imported.button.root.height.small",
+      "token": "control-height-sm",
+      "part": "root",
+      "cssProperty": "height",
+      "varName": "--ant-control-height-sm",
+      "selector": ".ant-btn-sm"
+    },
+    {
       "leaf": "imported.button.root.opacity.on",
       "token": "opacity-loading",
       "part": "root",

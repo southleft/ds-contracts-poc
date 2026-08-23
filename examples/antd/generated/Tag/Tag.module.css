@@ -35,6 +35,7 @@
   padding-right: var(--imported-tag-root-padding-right);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
+  width: var(--imported-tag-root-width-off);
   display: block;
   border-bottom-style: solid;
   border-left-style: solid;

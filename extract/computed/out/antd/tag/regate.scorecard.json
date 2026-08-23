@@ -194,7 +194,7 @@
       ]
     ],
     "namedLosses": [
-      "overflow: root.width — presence-prop-driven styling (closable) — boolean tokensByProp has no spelling (round 4 residue)",
+      "overflow: root.width — presence-prop-driven styling (closable) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (closable present) is not",
       "code-only: root.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: anticon.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
@@ -204,7 +204,7 @@
     },
     "shippedMinted": {
       "path": "examples/antd/tokens/antd-minted.dtcg.json",
-      "leavesAdded": 1172,
+      "leavesAdded": 1184,
       "divergent": [
         {
           "token": "imported.tag.root.color.blue",

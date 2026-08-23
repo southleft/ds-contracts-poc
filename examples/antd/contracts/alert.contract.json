@@ -183,7 +183,9 @@
             }
           },
           "tokens": {
-            "line-height": "{imported.shared.size-0}"
+            "font-size": "{imported.alert.alert-icon.font-size.off}",
+            "line-height": "{imported.shared.size-0}",
+            "margin-right": "{imported.alert.alert-icon.margin-right.off}"
           },
           "tokensByProp": [
             {
@@ -225,7 +227,9 @@
               },
               "tokens": {
                 "color": "{imported.shared.color-000000e0}",
+                "font-size": "{imported.alert.label.font-size.off}",
                 "font-weight": "{imported.alert.label.font-weight}",
+                "margin-bottom": "{imported.alert.label.margin-bottom.off}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}"
               }
@@ -250,6 +254,9 @@
                 "min-width": "{imported.shared.size-0}"
               }
             }
+          },
+          "layout": {
+            "grow": true
           },
           "tokens": {
             "color": "{imported.shared.color-000000e0}",
@@ -349,8 +356,13 @@
         "line-height": "{imported.shared.size-22}",
         "min-height": "{imported.shared.size-0}",
         "min-width": "{imported.shared.size-0}",
+        "padding-bottom": "{imported.alert.root.padding-bottom.off}",
+        "padding-left": "{imported.alert.root.padding-left.off}",
+        "padding-right": "{imported.alert.root.padding-right.off}",
+        "padding-top": "{imported.alert.root.padding-top.off}",
         "right": "{imported.shared.size-0}",
-        "top": "{imported.shared.size-0}"
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.alert.root.width}"
       },
       "tokensByProp": [
         {

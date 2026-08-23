@@ -58,7 +58,7 @@ export class RadioElement extends HTMLElement {
       checked: this.checked,
       disabled: this.disabled,
     };
-    return `<label part="root" data-checked="${__esc(String(p.checked))}"${p.disabled ? ' data-disabled=""' : ''}><span part="radio"><input part="radio-input"></input><span part="radio-inner"></span></span><span part="label"><slot>Radio</slot></span></label>`;
+    return `<label part="root" data-checked="${__esc(String(p.checked))}"${p.disabled ? ' data-disabled=""' : ''}><span part="radio"><input part="radio-input"></input><span part="radio-inner"><div part="radio-inner-after"></div></span></span><span part="label"><slot>Radio</slot></span></label>`;
   }
 
   #render(): void {

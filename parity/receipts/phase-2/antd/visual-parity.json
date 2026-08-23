@@ -6,51 +6,51 @@
    "base": "default.middle.safe.off.off.enabled__default",
    "canvasCell": "button-cell.png",
    "reference": "extract/computed/out/antd/button/orig-shots/default.middle.safe.off.off.enabled__default.png",
-   "pctAA": 1.72,
+   "pctAA": 17.37,
    "sizeDelta": {
     "canvas": {
      "width": 74,
-     "height": 18
+     "height": 32
     },
     "library": {
-     "width": 320,
-     "height": 96
+     "width": 73,
+     "height": 34
     }
    },
    "pass": false
   },
   {
    "component": "tag",
-   "base": "unset.bordered.off__default",
+   "base": "blue.bordered.off__default",
    "canvasCell": "tag-cell.png",
-   "reference": "extract/computed/out/antd/tag/orig-shots/unset.bordered.off__default.png",
-   "pctAA": 0.97,
+   "reference": "extract/computed/out/antd/tag/orig-shots/blue.bordered.off__default.png",
+   "pctAA": 1.89,
    "sizeDelta": {
     "canvas": {
      "width": 36,
      "height": 22
     },
     "library": {
-     "width": 320,
-     "height": 96
+     "width": 36,
+     "height": 22
     }
    },
-   "pass": false
+   "pass": true
   },
   {
    "component": "badge",
-   "base": "count.unset__default",
+   "base": "count.blue__default",
    "canvasCell": "badge-cell.png",
-   "reference": "extract/computed/out/antd/badge/orig-shots/count.unset__default.png",
-   "pctAA": 7.1,
+   "reference": "extract/computed/out/antd/badge/orig-shots/count.blue__default.png",
+   "pctAA": 5.35,
    "sizeDelta": {
     "canvas": {
      "width": 43,
      "height": 43
     },
     "library": {
-     "width": 320,
-     "height": 96
+     "width": 42,
+     "height": 42
     }
    },
    "pass": false
@@ -60,15 +60,15 @@
    "base": "default.unchecked.enabled__default",
    "canvasCell": "switch-cell.png",
    "reference": "extract/computed/out/antd/switch/orig-shots/default.unchecked.enabled__default.png",
-   "pctAA": 3.49,
+   "pctAA": 9.07,
    "sizeDelta": {
     "canvas": {
      "width": 44,
      "height": 22
     },
     "library": {
-     "width": 320,
-     "height": 96
+     "width": 45,
+     "height": 25
     }
    },
    "pass": false
@@ -78,15 +78,15 @@
    "base": "unchecked.enabled__default",
    "canvasCell": "checkbox-cell.png",
    "reference": "extract/computed/out/antd/checkbox/orig-shots/unchecked.enabled__default.png",
-   "pctAA": 1.12,
+   "pctAA": 18.82,
    "sizeDelta": {
     "canvas": {
      "width": 85,
      "height": 17
     },
     "library": {
-     "width": 320,
-     "height": 96
+     "width": 85,
+     "height": 16
     }
    },
    "pass": false
@@ -96,108 +96,108 @@
    "base": "unchecked.enabled__default",
    "canvasCell": "radio-cell.png",
    "reference": "extract/computed/out/antd/radio/orig-shots/unchecked.enabled__default.png",
-   "pctAA": 0.76,
+   "pctAA": 16.15,
    "sizeDelta": {
     "canvas": {
      "width": 59,
      "height": 17
     },
     "library": {
-     "width": 320,
-     "height": 96
+     "width": 59,
+     "height": 16
     }
    },
    "pass": false
   },
   {
    "component": "input",
-   "base": "middle.unset.outlined.enabled__default",
+   "base": "middle.error.outlined.enabled__default",
    "canvasCell": "input-cell.png",
-   "reference": "extract/computed/out/antd/input/orig-shots/middle.unset.outlined.enabled__default.png",
-   "pctAA": 2.37,
+   "reference": "extract/computed/out/antd/input/orig-shots/middle.error.outlined.enabled__default.png",
+   "pctAA": 1.11,
    "sizeDelta": {
     "canvas": {
-     "width": 24,
-     "height": 10
+     "width": 288,
+     "height": 32
     },
     "library": {
-     "width": 320,
-     "height": 96
+     "width": 288,
+     "height": 32
     }
    },
-   "pass": false
+   "pass": true
   },
   {
    "component": "alert",
    "base": "info.noIcon.off.off__default",
    "canvasCell": "alert-cell.png",
    "reference": "extract/computed/out/antd/alert/orig-shots/info.noIcon.off.off__default.png",
-   "pctAA": 3.52,
+   "pctAA": 0.8,
    "sizeDelta": {
     "canvas": {
-     "width": 93,
-     "height": 24
+     "width": 288,
+     "height": 40
     },
     "library": {
-     "width": 320,
-     "height": 120
+     "width": 288,
+     "height": 40
     }
    },
-   "pass": false
+   "pass": true
   },
   {
    "component": "avatar",
    "base": "default.circle__default",
    "canvasCell": "avatar-cell.png",
    "reference": "extract/computed/out/antd/avatar/orig-shots/default.circle__default.png",
-   "pctAA": 2.91,
+   "pctAA": 0,
    "sizeDelta": {
     "canvas": {
-     "width": 12,
-     "height": 24
+     "width": 32,
+     "height": 32
     },
     "library": {
-     "width": 320,
-     "height": 96
+     "width": 32,
+     "height": 32
     }
    },
-   "pass": false
+   "pass": true
   },
   {
    "component": "progress",
    "base": "unset__default",
    "canvasCell": "progress-cell.png",
    "reference": "extract/computed/out/antd/progress/orig-shots/unset__default.png",
-   "pctAA": 4.6,
+   "pctAA": 3.44,
    "sizeDelta": {
     "canvas": {
-     "width": 35,
+     "width": 287,
      "height": 12
     },
     "library": {
-     "width": 320,
-     "height": 64
+     "width": 288,
+     "height": 12
     }
    },
-   "pass": false
+   "pass": true
   },
   {
    "component": "card",
    "base": "default.outlined__default",
    "canvasCell": "card-cell.png",
    "reference": "extract/computed/out/antd/card/orig-shots/default.outlined__default.png",
-   "pctAA": 1.06,
+   "pctAA": 1.48,
    "sizeDelta": {
     "canvas": {
      "width": 288,
      "height": 128
     },
     "library": {
-     "width": 320,
-     "height": 160
+     "width": 288,
+     "height": 127
     }
    },
-   "pass": false
+   "pass": true
   },
   {
    "component": "tooltip",

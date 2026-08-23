@@ -1445,6 +1445,16 @@ export const DeclaredValueSchema = z
  *  behavioral/positional properties with no token vocabulary (a color or a
  *  dimension belongs in `tokens`, and the generator refuses it here). */
 export const STYLES_WHEN_ALLOWED = new Set([
+  // ANTD EXAM (heal loop, 2026-08-23): a border STYLE that varies by an enum
+  // axis — antd's `type=dashed` Button — has no token vocabulary and no
+  // uniform declared value; per-value literal CSS is its honest spelling
+  // (`.type-dashed { border-style: dashed }`), and the canvas lowers it to a
+  // dashPattern on that variant's stroke.
+  "border-style",
+  "border-top-style",
+  "border-right-style",
+  "border-bottom-style",
+  "border-left-style",
   "position",
   "top",
   "right",

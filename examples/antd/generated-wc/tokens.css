@@ -353,6 +353,7 @@
   --imported-alert-root-padding-right-on: 24px;
   --imported-alert-root-padding-top-off: 8px;
   --imported-alert-root-padding-top-on: 20px;
+  --imported-alert-root-width: 288px;
   --imported-avatar-label-color: #ffffff;
   --imported-avatar-label-font-size: 14px;
   --imported-avatar-label-font-weight: 400;
@@ -384,7 +385,13 @@
   --imported-avatar-root-border-top-right-radius-small-square: 4px;
   --imported-avatar-root-color: var(--color-text-light-solid);
   --imported-avatar-root-font-size: var(--avatar-text-font-size);
+  --imported-avatar-root-height-default: var(--avatar-container-size);
+  --imported-avatar-root-height-large: var(--avatar-container-size-lg);
+  --imported-avatar-root-height-small: var(--avatar-container-size-sm);
   --imported-avatar-root-line-height: 22px;
+  --imported-avatar-root-width-default: var(--avatar-container-size);
+  --imported-avatar-root-width-large: var(--avatar-container-size-lg);
+  --imported-avatar-root-width-small: var(--avatar-container-size-sm);
   --imported-badge-avatar-background-color: #00000040;
   --imported-badge-avatar-line-height: 22px;
   --imported-badge-badge-count-background-color-blue: #1677ff;
@@ -731,6 +738,9 @@
   --imported-button-root-font-size-large: var(--button-content-font-size-lg);
   --imported-button-root-font-size-middle: var(--button-content-font-size);
   --imported-button-root-font-size-small: var(--button-content-font-size);
+  --imported-button-root-height-large: var(--control-height-lg);
+  --imported-button-root-height-middle: var(--control-height);
+  --imported-button-root-height-small: var(--control-height-sm);
   --imported-button-root-opacity-off: 1;
   --imported-button-root-opacity-on: var(--opacity-loading);
   --imported-button-root-outline-color-state-active-dashed-danger: #d9363e;
@@ -1296,6 +1306,7 @@
   --imported-input-root-padding-top-large: 7px;
   --imported-input-root-padding-top-middle: 4px;
   --imported-input-root-padding-top-small: 0px;
+  --imported-input-root-width: 288px;
   --imported-progress-anticon-vertical-align: -1.75px;
   --imported-progress-label-color-active: #000000e0;
   --imported-progress-label-color-exception: var(--color-error);
@@ -1309,6 +1320,7 @@
   --imported-progress-progress-bg-background-color-unset: #1677ff;
   --imported-progress-progress-inner-background-color: #0000000f;
   --imported-progress-progress-inner-flex-grow: 1;
+  --imported-progress-root-width: 288px;
   --imported-radio-label-color-state-disabled: #00000040;
   --imported-radio-label-font-weight: 400;
   --imported-radio-radio-inner-background-color-state-disabled: #0000000a;

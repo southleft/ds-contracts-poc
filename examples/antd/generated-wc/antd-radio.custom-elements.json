@@ -53,6 +53,9 @@
               "name": "radio-inner"
             },
             {
+              "name": "radio-inner-after"
+            },
+            {
               "name": "label"
             }
           ]

@@ -60,7 +60,7 @@ const COMPONENTS = [
     "contractId": "altitude.avatar",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Avatar — generated from contract altitude.avatar v0.2.0 † (7 code-only facts — see plugin report)",
+    "description": "Avatar — generated from contract altitude.avatar v0.2.0 † (8 code-only facts — see plugin report)",
     "isSet": false,
     "boolProps": [
       {
@@ -286,6 +286,17 @@ const COMPONENTS = [
         "channel": "position",
         "value": "absolute",
         "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 1,
+          "of": 1
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "variant [unset]",
+        "value": "sm",
+        "reason": "defaultless axis — the library's own rendering when \"variant\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 1 declared values only, and a proposal read back from the canvas will call \"sm\" the default (FC-UNSET-PLANE-UNDRAWN)",
         "variants": {
           "count": 1,
           "of": 1
@@ -726,6 +737,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -1251,6 +1264,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -1280,6 +1298,14 @@ async function buildNode(spec, registry) {
     applyInsetOverlay(node, childNode, child);
   }
   resizeOutOfFlow(node, built);
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
+    }
+  }
   return node;
 }
 
@@ -2108,7 +2134,7 @@ const COMPONENTS = [
     "contractId": "altitude.badge",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Badge — generated from contract altitude.badge v0.2.0 † (3 code-only facts — see plugin report)",
+    "description": "Badge — generated from contract altitude.badge v0.2.0 † (4 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -2458,6 +2484,17 @@ const COMPONENTS = [
             "Variant=Warning, Dot=Dot",
             "Variant=Danger, Dot=Dot"
           ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "variant [unset]",
+        "value": "info|success|warning|danger",
+        "reason": "defaultless axis — the library's own rendering when \"variant\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 4 declared values only, and a proposal read back from the canvas will call \"info\" the default (FC-UNSET-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 8,
+          "of": 8
         }
       }
     ],
@@ -2924,6 +2961,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -3168,6 +3207,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -3218,6 +3262,14 @@ async function buildNode(spec, registry) {
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
       Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
+  }
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
+    }
   }
   return node;
 }
@@ -4087,7 +4139,7 @@ const COMPONENTS = [
     "contractId": "altitude.button",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Button — generated from contract altitude.button v0.2.0 † (21 code-only facts — see plugin report)",
+    "description": "Button — generated from contract altitude.button v0.2.0 † (22 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -5011,6 +5063,17 @@ const COMPONENTS = [
       },
       {
         "part": "root",
+        "kind": "channel",
+        "channel": "variant [unset]",
+        "value": "secondary|tertiary|bare|danger",
+        "reason": "defaultless axis — the library's own rendering when \"variant\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 4 declared values only, and a proposal read back from the canvas will call \"secondary\" the default (FC-UNSET-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "root",
         "kind": "declared",
         "channel": "cursor",
         "value": "pointer",
@@ -5499,6 +5562,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = spec.strokeOutside ? 'OUTSIDE' : 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -5743,6 +5808,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -5768,6 +5838,14 @@ async function buildNode(spec, registry) {
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
+    }
+  }
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
     }
   }
   return node;
@@ -6590,7 +6668,7 @@ const COMPONENTS = [
     "contractId": "altitude.chip",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Chip — generated from contract altitude.chip v0.2.0 † (12 code-only facts — see plugin report)",
+    "description": "Chip — generated from contract altitude.chip v0.2.0 † (14 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -7250,6 +7328,28 @@ const COMPONENTS = [
       },
       {
         "part": "root",
+        "kind": "channel",
+        "channel": "type [unset]",
+        "value": "default|squared",
+        "reason": "defaultless axis — the library's own rendering when \"type\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 2 declared values only, and a proposal read back from the canvas will call \"default\" the default (FC-UNSET-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "variant [unset]",
+        "value": "secondary|info|success|warning|danger",
+        "reason": "defaultless axis — the library's own rendering when \"variant\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 5 declared values only, and a proposal read back from the canvas will call \"secondary\" the default (FC-UNSET-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "root",
         "kind": "declared",
         "channel": "cursor",
         "value": "pointer",
@@ -7716,6 +7816,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -7960,6 +8062,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -7985,6 +8092,14 @@ async function buildNode(spec, registry) {
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
+    }
+  }
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
     }
   }
   return node;
@@ -9354,6 +9469,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -9600,6 +9717,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -9650,6 +9772,14 @@ async function buildNode(spec, registry) {
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
       Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
+  }
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
+    }
   }
   return node;
 }
@@ -10519,7 +10649,7 @@ const COMPONENTS = [
     "contractId": "altitude.heading",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Heading — generated from contract altitude.heading v0.2.0 † (1 code-only facts — see plugin report)",
+    "description": "Heading — generated from contract altitude.heading v0.2.0 † (2 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -11033,6 +11163,17 @@ const COMPONENTS = [
     "codeOnlyFacts": [
       {
         "part": "root",
+        "kind": "channel",
+        "channel": "variant [unset]",
+        "value": "display-lg|display-md|display-sm|lg|md|sm",
+        "reason": "defaultless axis — the library's own rendering when \"variant\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 6 declared values only, and a proposal read back from the canvas will call \"display-lg\" the default (FC-UNSET-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "root",
         "kind": "declared",
         "channel": "display",
         "value": "block",
@@ -11477,6 +11618,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -11721,6 +11864,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -11746,6 +11894,14 @@ async function buildNode(spec, registry) {
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
+    }
+  }
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
     }
   }
   return node;
@@ -12568,7 +12724,7 @@ const COMPONENTS = [
     "contractId": "altitude.iconclose",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "IconClose — generated from contract altitude.iconclose v0.2.0 † (1 code-only facts — see plugin report)",
+    "description": "IconClose — generated from contract altitude.iconclose v0.2.0 † (2 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -12815,6 +12971,17 @@ const COMPONENTS = [
       "element": "span"
     },
     "codeOnlyFacts": [
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "size [unset]",
+        "value": "xs|sm|md|lg|xl|xxl|xxxl",
+        "reason": "defaultless axis — the library's own rendering when \"size\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 7 declared values only, and a proposal read back from the canvas will call \"xs\" the default (FC-UNSET-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 7,
+          "of": 7
+        }
+      },
       {
         "part": "root",
         "kind": "declared",
@@ -13261,6 +13428,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -13461,6 +13630,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -13486,6 +13660,14 @@ async function buildNode(spec, registry) {
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
+    }
+  }
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
     }
   }
   return node;
@@ -14308,7 +14490,7 @@ const COMPONENTS = [
     "contractId": "altitude.link",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Link — generated from contract altitude.link v0.2.0 † (7 code-only facts — see plugin report)",
+    "description": "Link — generated from contract altitude.link v0.2.0 † (8 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -14728,6 +14910,17 @@ const COMPONENTS = [
         "channel": "row-gap",
         "value": "{imported.link.root.row-gap}",
         "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 9,
+          "of": 9
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "variant [unset]",
+        "value": "xs|sm|lg",
+        "reason": "defaultless axis — the library's own rendering when \"variant\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 3 declared values only, and a proposal read back from the canvas will call \"xs\" the default (FC-UNSET-PLANE-UNDRAWN)",
         "variants": {
           "count": 9,
           "of": 9
@@ -15223,6 +15416,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -15467,6 +15662,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -15492,6 +15692,14 @@ async function buildNode(spec, registry) {
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
+    }
+  }
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
     }
   }
   return node;

@@ -458,6 +458,7 @@
       ]
     ],
     "namedLosses": [
+      "promotion: pseudo-decor-shadow-uncarried: switch-handle::before paints box-shadow rgba(0, 35, 11, 0.2) 0px 2px 4px 0px in 8/8 drawn combos — the bounded decor grammar carries background alpha + border rings only; the box is promoted, its shadow is not",
       "overflow: switch-inner-checked.margin-left [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: switch-inner-checked.margin-right [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: switch-inner-unchecked.margin-left [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -479,7 +480,7 @@
     },
     "shippedMinted": {
       "path": "examples/antd/tokens/antd-minted.dtcg.json",
-      "leavesAdded": 1161,
+      "leavesAdded": 1173,
       "divergent": [
         {
           "token": "imported.switch.root.height.default",

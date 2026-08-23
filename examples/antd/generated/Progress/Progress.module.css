@@ -24,6 +24,7 @@
   min-width: var(--imported-shared-size-0);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
+  width: var(--imported-progress-root-width);
   display: inline-block;
   box-sizing: border-box;
   font-family: Roboto, Helvetica, Arial, sans-serif;
@@ -33,6 +34,8 @@
 .progress-outer {
   display: inline-flex;
   align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
   color: var(--imported-shared-color-000000e0);
   font-size: var(--imported-shared-size-14);
   line-height: var(--imported-shared-size-22);
@@ -44,6 +47,8 @@
 
 .progress-inner {
   display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
   background-color: var(--imported-progress-progress-inner-background-color);
   border-bottom-left-radius: var(--imported-shared-size-100);
   border-bottom-right-radius: var(--imported-shared-size-100);
@@ -57,6 +62,7 @@
   line-height: var(--imported-shared-size-22);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
+  height: 8px;
   display: block;
   box-sizing: border-box;
   font-family: Roboto, Helvetica, Arial, sans-serif;
@@ -80,6 +86,7 @@
   min-width: var(--imported-shared-size-0);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
+  height: 8px;
   display: block;
   box-sizing: border-box;
   font-family: Roboto, Helvetica, Arial, sans-serif;

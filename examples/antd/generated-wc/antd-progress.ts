@@ -21,7 +21,7 @@ const ICONS: Record<string, string> = {
 };
 
 export class ProgressElement extends HTMLElement {
-  static observedAttributes = ["status"];
+  static observedAttributes = ["status","percent","max"];
 
   constructor() {
     super();
@@ -37,6 +37,28 @@ export class ProgressElement extends HTMLElement {
     if (v == null) this.removeAttribute('status');
     else this.setAttribute('status', v);
   }
+  /** Number prop "percent". */
+  get percent(): number | null {
+    const v = this.getAttribute('percent');
+    if (v === null || v === '') return 40;
+    const n = Number(v);
+    return Number.isNaN(n) ? 40 : n;
+  }
+  set percent(v: number | null) {
+    if (v == null) this.removeAttribute('percent');
+    else this.setAttribute('percent', String(v));
+  }
+  /** Number prop "max". */
+  get max(): number | null {
+    const v = this.getAttribute('max');
+    if (v === null || v === '') return 100;
+    const n = Number(v);
+    return Number.isNaN(n) ? 100 : n;
+  }
+  set max(v: number | null) {
+    if (v == null) this.removeAttribute('max');
+    else this.setAttribute('max', String(v));
+  }
 
   connectedCallback(): void {
     this.#render();
@@ -49,8 +71,11 @@ export class ProgressElement extends HTMLElement {
   #view(): string {
     const p = {
       status: this.status,
+      percent: this.percent,
+      max: this.max,
     };
-    return `<div part="root" data-status="${__esc(String(p.status))}"><div part="progress-outer"><div part="progress-inner"><div part="progress-bg"></div></div><span part="label">40%</span></div></div>`;
+    const __meter_progress_bg = Math.min(100, Math.max(0, ((p.percent ?? 0) / ((p.max ?? 100) || 100)) * 100));
+    return `<div part="root" data-status="${__esc(String(p.status))}"><div part="progress-outer"><div part="progress-inner"><div part="progress-bg" style="width: ${__meter_progress_bg}%"></div></div><span part="label">40%</span></div></div>`;
   }
 
   #render(): void {

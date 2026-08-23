@@ -169,7 +169,8 @@
         "padding-left": "{imported.tag.root.padding-left}",
         "padding-right": "{imported.tag.root.padding-right}",
         "right": "{imported.shared.size-0}",
-        "top": "{imported.shared.size-0}"
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.tag.root.width.off}"
       },
       "tokensByProp": [
         {

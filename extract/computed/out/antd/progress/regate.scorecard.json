@@ -161,9 +161,9 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 18,
-      "mintedLeavesUnfolded": 58,
-      "baseBindings": 52,
+      "mintedLeaves": 19,
+      "mintedLeavesUnfolded": 59,
+      "baseBindings": 53,
       "stateBindings": 0,
       "codeOnlyChannels": 9,
       "overflowBindings": 1,
@@ -289,7 +289,7 @@
     },
     "shippedMinted": {
       "path": "examples/antd/tokens/antd-minted.dtcg.json",
-      "leavesAdded": 1249,
+      "leavesAdded": 1260,
       "divergent": [
         {
           "token": "imported.progress.label.color.exception",

@@ -1,6 +1,6 @@
 {
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
-  "generatedBy": "extract/computed/run.ts",
+  "generatedBy": "extract/computed/regate.ts --write-enriched (OFFLINE RE-FUSE of the committed captured truth; no library recapture). Differences vs the harness path, NAMED: portal receipts are a capture-time artifact and are absent here; the frontier receipts are capture-time too and are CARRIED FORWARD unchanged from the extension this re-fuse overwrote (5 receipt(s)); every other receipt is recomputed from the same truth.",
   "library": "antd@5.29.3",
   "browser": "151.0.7922.34",
   "mintedTokens": {
@@ -442,6 +442,20 @@
             },
             "large": {
               "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "height": {
+            "small": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "middle": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "40px",
               "$type": "dimension"
             }
           },
@@ -2672,6 +2686,42 @@
     "base": [
       {
         "part": "root",
+        "channel": "border-bottom-style",
+        "value": "dashed",
+        "when": {
+          "prop": "type",
+          "equals": "dashed"
+        }
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "dashed",
+        "when": {
+          "prop": "type",
+          "equals": "dashed"
+        }
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "dashed",
+        "when": {
+          "prop": "type",
+          "equals": "dashed"
+        }
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "dashed",
+        "when": {
+          "prop": "type",
+          "equals": "dashed"
+        }
+      },
+      {
+        "part": "root",
         "channel": "font-family",
         "value": "Roboto, Helvetica, Arial, sans-serif"
       },
@@ -2925,34 +2975,6 @@
   "codeOnlyChannels": [
     {
       "part": "root",
-      "channel": "border-bottom-style",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "solid",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
-      "channel": "border-left-style",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "solid",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
-      "channel": "border-right-style",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "solid",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
-      "channel": "border-top-style",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "solid",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
       "channel": "cursor",
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "pointer",
@@ -3162,7 +3184,7 @@
       "part": "root",
       "channel": "opacity",
       "ref": "{imported.button.root.opacity.{loading}}",
-      "refusal": "presence-prop-driven styling (loading) — boolean tokensByProp has no spelling (round 4 residue)"
+      "refusal": "presence-prop-driven styling (loading) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (loading present) is not"
     },
     {
       "part": "btn-icon",
@@ -3335,6 +3357,7 @@
     "union-part-added: default.small.safe.on.off.enabled__default @0.0.0.0 (path|)"
   ],
   "styledChannelReceipts": [
+    "token-named-geometry-admitted: root.height — the library's own stylesheet binds it to --ant-control-height (32px) at `.ant-btn`; a dimension named by a token is a design value, not an environment measurement, so it joins fusion with its name (the absolute-cluster / table / block-root doors are unchanged)",
     "control-fallback: no control for <svg> — span control used (part icon)",
     "control-fallback: no control for <path> — span control used (part part-0-0-0-0)",
     "control-fallback: no control for <svg> — span control used (part icon-2)",
@@ -3349,9 +3372,13 @@
     "geometry-excluded: label — block-size 16px, height 16px, inline-size 41.1875px, perspective-origin 20.5938px 8px, transform-origin 20.5938px 8px, width 41.1875px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "geometry-excluded: part-0-0-0-0 — block-size auto, height auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px, width auto — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "geometry-excluded: part-0-0-0-0-2 — block-size auto, height auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px, width auto — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
-    "geometry-excluded: root — block-size 32px, height 32px, inline-size 73.1875px, perspective-origin 36.5938px 16px, transform-origin 36.5938px 16px, width 73.1875px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 32px, inline-size 73.1875px, perspective-origin 36.5938px 16px, transform-origin 36.5938px 16px, width 73.1875px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "webkit-prefixed-channels-refused: 3 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-font-smoothing (anticon, anticon-2, icon, icon-2, part-0-0-0-0, part-0-0-0-0-2); -webkit-text-fill-color (anticon, anticon-2, btn-icon, btn-icon-2, icon, icon-2, label, part-0-0-0-0, part-0-0-0-0-2, root); -webkit-text-stroke-color (anticon, anticon-2, btn-icon, btn-icon-2, icon, icon-2, label, part-0-0-0-0, part-0-0-0-0-2, root)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "border-style-by-axis-carried: root.border-bottom-style varies by \"type\" (default=solid, primary=solid, dashed=dashed, link=solid, text=solid) — carried as per-value stylesWhen rules (code: `.type-<value> { border-bottom-style: … }`; canvas: a dashPattern on that variant's stroke)",
+    "border-style-by-axis-carried: root.border-left-style varies by \"type\" (default=solid, primary=solid, dashed=dashed, link=solid, text=solid) — carried as per-value stylesWhen rules (code: `.type-<value> { border-left-style: … }`; canvas: a dashPattern on that variant's stroke)",
+    "border-style-by-axis-carried: root.border-right-style varies by \"type\" (default=solid, primary=solid, dashed=dashed, link=solid, text=solid) — carried as per-value stylesWhen rules (code: `.type-<value> { border-right-style: … }`; canvas: a dashPattern on that variant's stroke)",
+    "border-style-by-axis-carried: root.border-top-style varies by \"type\" (default=solid, primary=solid, dashed=dashed, link=solid, text=solid) — carried as per-value stylesWhen rules (code: `.type-<value> { border-top-style: … }`; canvas: a dashPattern on that variant's stroke)",
     "inheritance-check-rejected: anticon-2.line-height — values track ancestor \"btn-icon-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: anticon.line-height — values track ancestor \"btn-icon\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
@@ -3546,6 +3573,10 @@
     "layout enriched: root.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: anticon.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: anticon-2.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried per axis value: root.border-bottom-style = dashed when type=dashed (stylesWhen)",
+    "declared fact carried per axis value: root.border-left-style = dashed when type=dashed (stylesWhen)",
+    "declared fact carried per axis value: root.border-right-style = dashed when type=dashed (stylesWhen)",
+    "declared fact carried per axis value: root.border-top-style = dashed when type=dashed (stylesWhen)",
     "declared fact carried: root.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -3594,6 +3625,7 @@
     "declared state fact carried: [focus-visible] root.transition-duration = 0s, 0s (v15 declared vocabulary)",
     "declared state fact carried: [focus-visible] root.transition-property = outline-offset, outline (v15 declared vocabulary)",
     "declared state fact carried: [focus-visible] root.transition-timing-function = ease, ease (v15 declared vocabulary)",
+    "presence-off plane carried: root.opacity = {imported.button.root.opacity.off} (the base rendering, presence \"loading\" absent); the presence-ON plane is named residue below",
     "nested pair carried: label.color = per-danger map whose refs substitute type (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)"
   ]
 }

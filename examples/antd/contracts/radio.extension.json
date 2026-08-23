@@ -1,6 +1,6 @@
 {
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
-  "generatedBy": "extract/computed/run.ts",
+  "generatedBy": "extract/computed/regate.ts --write-enriched (OFFLINE RE-FUSE of the committed captured truth; no library recapture). Differences vs the harness path, NAMED: portal receipts are a capture-time artifact and are absent here; the frontier receipts are capture-time too and are CARRIED FORWARD unchanged from the extension this re-fuse overwrote (5 receipt(s)); every other receipt is recomputed from the same truth.",
   "library": "antd@5.29.3",
   "browser": "151.0.7922.34",
   "mintedTokens": {
@@ -984,6 +984,8 @@
     "absolute-geometry-admitted: radio-inner — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "control-fallback: no control for <label> — span control used (part root)",
     "control-fallback: no control for <input> — span control used (part radio-input)",
+    "token-named-geometry-admitted: radio-inner.width — the library's own stylesheet binds it to --ant-radio-radio-size (16) at `.ant-radio-wrapper .ant-radio-inner`; a dimension named by a token is a design value, not an environment measurement, so it joins fusion with its name (the absolute-cluster / table / block-root doors are unchanged)",
+    "token-named-geometry-admitted: radio-inner.height — the library's own stylesheet binds it to --ant-radio-radio-size (16) at `.ant-radio-wrapper .ant-radio-inner`; a dimension named by a token is a design value, not an environment measurement, so it joins fusion with its name (the absolute-cluster / table / block-root doors are unchanged)",
     "text-part-typography-carried: label — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
     "geometry-excluded: label — block-size 22px, height 22px, inline-size 51.5312px, perspective-origin 25.7656px 11px, transform-origin 25.7656px 11px, width 51.5312px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "geometry-excluded: radio — block-size 16px, inline-size 16px, perspective-origin 8px 8px, transform-origin 8px 8px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
@@ -1048,11 +1050,12 @@
     "svgAssets": [],
     "receipts": [
       "root-display-carried: flex",
-      "sr-only-carried-as-hidden: radio-input is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)"
+      "sr-only-carried-as-hidden: radio-input is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
+      "pseudo-decor-carried: radio-inner::after → shape part \"radio-inner-after\" (ellipse 6×6 at 4,4, fill rgba(255, 255, 255, 1); drawn in 2/4 default-interaction combos, hidden-when checked=unchecked; size uniform; rotation 0; translate folded into top/left — round 5c S5 + Wave B.2)"
     ],
     "refusals": [
-      "pseudo-decor-outside-grammar: radio-inner::after drawn with a non-carryable transform (matrix(0.375, 0, 0, 0.375, 0, 0)) — the bounded decor grammar carries translate + orthonormal rotate only; named refusal",
-      "pseudo-decor-hidden-in-combo: radio-inner::after is not drawn in every combo (transform matrix(0, 0, 0, 0, 0, 0) (scale 0)) — the component's own hidden state, NOT a grammar limit",
+      "pseudo-decor-state-paint-uncarried: radio-inner::after at checked.disabled paints {\"bg\":\"rgba(0, 0, 0, 0.25)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":16} where the matching enabled combo paints {\"bg\":\"rgba(255, 255, 255, 1)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":16} — the decor carries the ENABLED plane; a per-enum-value × per-state paint product has no contract spelling (states take token refs, decor paint is literal); named residue",
+      "pseudo-decor-state-geometry-uncarried: radio-inner::after at checked.disabled sits at {\"w\":8,\"h\":8,\"top\":3,\"left\":3} vs the enabled {\"w\":6,\"h\":6,\"top\":4,\"left\":4}; named residue",
       "pseudo-decor-hidden-in-combo: radio::after is not drawn in every combo (opacity 0, box 16x16) — the component's own hidden state, NOT a grammar limit",
       "pseudo-content-not-canvas-ink: root::after carries content \" \" — the bounded decor grammar promotes EMPTY-content decor boxes only. A glyph drawn by an icon-font ligature (Bootstrap/FontAwesome/Material carets, chevrons, close ×s) is real ink that does NOT reach the canvas; named refusal"
     ]

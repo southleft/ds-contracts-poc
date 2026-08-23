@@ -1,6 +1,6 @@
 {
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
-  "generatedBy": "extract/computed/run.ts",
+  "generatedBy": "extract/computed/regate.ts --write-enriched (OFFLINE RE-FUSE of the committed captured truth; no library recapture). Differences vs the harness path, NAMED: portal receipts are a capture-time artifact and are absent here; the frontier receipts are capture-time too and are CARRIED FORWARD unchanged from the extension this re-fuse overwrote (5 receipt(s)); every other receipt is recomputed from the same truth.",
   "library": "antd@5.29.3",
   "browser": "151.0.7922.34",
   "mintedTokens": {
@@ -28,6 +28,12 @@
         }
       },
       "progress": {
+        "root": {
+          "width": {
+            "$value": "288px",
+            "$type": "dimension"
+          }
+        },
         "progress-inner": {
           "background-color": {
             "$value": "#0000000f",
@@ -589,10 +595,23 @@
         "part": "anticon",
         "field": "align",
         "value": "center"
+      },
+      {
+        "part": "progress-outer",
+        "field": "grow",
+        "value": true
+      },
+      {
+        "part": "progress-inner",
+        "field": "grow",
+        "value": true
       }
     ],
     "contradictions": [],
-    "receipts": [],
+    "receipts": [
+      "layout-grow-carried: progress-outer — measures the inline-block root's content box in every enabled combo (width 288px) — a hugging row would give it no width; carried as layout.grow (the canvas FILL / layoutGrow twin)",
+      "layout-grow-carried: progress-inner — flex-grow 1 in a flex row parent (progress-outer); carried as layout.grow (the canvas FILL / layoutGrow twin)"
+    ],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
   },
   "declaredFacts": {
@@ -860,6 +879,8 @@
     "union-part-added: exception__default @0.1.0.0.0 (path|)"
   ],
   "styledChannelReceipts": [
+    "stage-fill-root-admitted: root — display:inline-block root measures exactly the stage content box (288px) in every enabled combo: it fills its container like a block root (antd Input `width: 100%`), so the captured stage width joins fusion under the block-root receipt below",
+    "block-root-width-admitted: root — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)",
     "text-part-typography-carried: label — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
     "control-fallback: no control for <svg> — span control used (part icon)",
     "control-fallback: no control for <path> — span control used (part part-0-1-0-0-0)",
@@ -870,7 +891,7 @@
     "geometry-excluded: progress-bg — block-size 8px, height 8px, inline-size 101.594px, perspective-origin 50.7969px 4px, transform-origin 50.7969px 4px, width 101.594px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "geometry-excluded: progress-inner — block-size 8px, height 8px, inline-size 254px, perspective-origin 127px 4px, transform-origin 127px 4px, width 254px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "geometry-excluded: progress-outer — block-size 14px, height 14px, inline-size 288px, perspective-origin 144px 7px, transform-origin 144px 7px, width 288px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
-    "geometry-excluded: root — block-size 22px, height 22px, inline-size 288px, perspective-origin 144px 11px, transform-origin 144px 11px, width 288px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 22px, height 22px, inline-size 288px, perspective-origin 144px 11px, transform-origin 144px 11px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "webkit-prefixed-channels-refused: 3 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-font-smoothing (anticon, icon, part-0-1-0-0-0); -webkit-text-fill-color (anticon, icon, label, part-0-1-0-0-0, progress-bg, progress-inner, progress-outer, root); -webkit-text-stroke-color (anticon, icon, label, part-0-1-0-0-0, progress-bg, progress-inner, progress-outer, root)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
     "inheritance-check-rejected: label.font-weight — values track ancestor \"progress-outer\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
@@ -964,6 +985,8 @@
   "enrichmentNotes": [
     "layout enriched: progress-outer.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: anticon.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: progress-outer.layout.grow = true (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: progress-inner.layout.grow = true (uniform computed keyword — the schema's own vocabulary)",
     "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: root.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",

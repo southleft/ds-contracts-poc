@@ -121,9 +121,9 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 35,
-      "mintedLeavesUnfolded": 34,
-      "baseBindings": 24,
+      "mintedLeaves": 41,
+      "mintedLeavesUnfolded": 40,
+      "baseBindings": 26,
       "stateBindings": 0,
       "codeOnlyChannels": 3,
       "overflowBindings": 0,
@@ -228,7 +228,7 @@
     },
     "shippedMinted": {
       "path": "examples/antd/tokens/antd-minted.dtcg.json",
-      "leavesAdded": 1232,
+      "leavesAdded": 1238,
       "divergent": [
         {
           "token": "imported.avatar.root.color",
@@ -240,6 +240,42 @@
           "token": "imported.avatar.root.font-size",
           "fresh": "14px",
           "shipped": "{avatar-text-font-size}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.avatar.root.height.default",
+          "fresh": "32px",
+          "shipped": "{avatar-container-size}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.avatar.root.height.large",
+          "fresh": "40px",
+          "shipped": "{avatar-container-size-lg}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.avatar.root.height.small",
+          "fresh": "24px",
+          "shipped": "{avatar-container-size-sm}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.avatar.root.width.default",
+          "fresh": "32px",
+          "shipped": "{avatar-container-size}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.avatar.root.width.large",
+          "fresh": "40px",
+          "shipped": "{avatar-container-size-lg}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.avatar.root.width.small",
+          "fresh": "24px",
+          "shipped": "{avatar-container-size-sm}",
           "resolvedEqual": true
         }
       ]

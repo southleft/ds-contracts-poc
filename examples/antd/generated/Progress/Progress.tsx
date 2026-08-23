@@ -16,11 +16,13 @@ const ICONS: Record<string, string> = {
 
 export interface ProgressProps extends HTMLAttributes<HTMLDivElement> {
   status?: 'unset' | 'exception' | 'active' | 'success';
+  percent?: number;
+  max?: number;
 }
 
-/** Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). THE METER (FC-METER / FC-GEOMETRY-EXCLUDED, T3). `status` is DEFAULTLESS — antd's ProgressStatuses tuple is normal|exception|active|success and `normal` IS the unset rendering, so the enum carries the other three and `unset` stands for normal (one value per rendering, no duplicate). percent is pinned at 40 and type at line by the config (the MUI LinearProgress value:40 precedent); the fill WIDTH is inline geometry the Option B exclusion must LEDGER. NAMED OUT: circle/dashboard (SVG stroke-dasharray geometry), steps, strokeColor gradients, format. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/antd/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Ant Design's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow. */
+/** Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). THE METER (FC-METER / FC-GEOMETRY-EXCLUDED, T3). `status` is DEFAULTLESS — antd's ProgressStatuses tuple is normal|exception|active|success and `normal` IS the unset rendering, so the enum carries the other three and `unset` stands for normal (one value per rendering, no duplicate). percent is pinned at 40 and type at line by the config (the MUI LinearProgress value:40 precedent); the fill WIDTH is inline geometry the Option B exclusion must LEDGER. NAMED OUT: circle/dashboard (SVG stroke-dasharray geometry), steps, strokeColor gradients, format. HEAL LOOP (2026-08-23): `percent` (40) and `max` (100) are NUMBER props so the fill part can carry a `meter` fact (examples/antd/authored-facts.json — the astryx/polaris progress-bar precedent); the capture pins percent at 40 and never enumerates numbers. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/antd/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Ant Design's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow. */
 export const Progress = forwardRef<HTMLDivElement, ProgressProps>(function Progress(
-  { status = 'unset', className, children, ...rest },
+  { status = 'unset', percent = 40, max = 100, className, children, ...rest },
   ref,
 ) {
   const classes = [styles.root, styles[`status-${status}`], className].filter(Boolean).join(' ');
@@ -28,7 +30,10 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(function Progr
     <div ref={ref} className={classes} {...rest}>
       <div className={styles['progress-outer']}>
         <div className={styles['progress-inner']}>
-          <div className={styles['progress-bg']}></div>
+          <div
+            className={styles['progress-bg']}
+            style={{ width: `${Math.min(100, Math.max(0, (percent / max) * 100))}%` }}
+          />
         </div>
         <span className={styles.label}>40%</span>
       </div>

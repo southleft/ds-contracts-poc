@@ -64,9 +64,9 @@
       "combos": 240,
       "pixelPerfect": "0/960",
       "sourceFacts": 1164,
-      "namedRefusals": 33,
+      "namedRefusals": 29,
       "refusalBreakdown": {
-        "codeOnlyChannels": 12,
+        "codeOnlyChannels": 8,
         "pairwiseRefusals": 0,
         "stateOverflow": 21,
         "bindingContradictions": 0
@@ -82,9 +82,9 @@
       "combos": 4,
       "pixelPerfect": "8/16",
       "sourceFacts": 20,
-      "namedRefusals": 10,
+      "namedRefusals": 6,
       "refusalBreakdown": {
-        "codeOnlyChannels": 10,
+        "codeOnlyChannels": 6,
         "pairwiseRefusals": 0,
         "stateOverflow": 0,
         "bindingContradictions": 0
@@ -118,9 +118,9 @@
       "combos": 72,
       "pixelPerfect": "0/288",
       "sourceFacts": 162,
-      "namedRefusals": 5,
+      "namedRefusals": 1,
       "refusalBreakdown": {
-        "codeOnlyChannels": 5,
+        "codeOnlyChannels": 1,
         "pairwiseRefusals": 0,
         "stateOverflow": 0,
         "bindingContradictions": 0
@@ -224,7 +224,7 @@
     "measured": 12,
     "weightedFloorPct": 83.97007488737059,
     "cellsCompared": 134068,
-    "namedRefusals": 125,
+    "namedRefusals": 113,
     "openQueue": 0,
     "quarantined": 0
   }

@@ -45,6 +45,8 @@
 }
 
 .size-small {
+  height: var(--imported-avatar-root-height-small);
+  width: var(--imported-avatar-root-width-small);
 }
 
 .shape-circle {
@@ -68,6 +70,8 @@
 }
 
 .size-default {
+  height: var(--imported-avatar-root-height-default);
+  width: var(--imported-avatar-root-width-default);
 }
 
 .size-default.shape-circle {
@@ -85,6 +89,8 @@
 }
 
 .size-large {
+  height: var(--imported-avatar-root-height-large);
+  width: var(--imported-avatar-root-width-large);
 }
 
 .size-large.shape-circle {

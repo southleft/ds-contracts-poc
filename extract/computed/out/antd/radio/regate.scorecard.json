@@ -357,8 +357,8 @@
       ]
     ],
     "namedLosses": [
-      "promotion: pseudo-decor-outside-grammar: radio-inner::after drawn with a non-carryable transform (matrix(0.375, 0, 0, 0.375, 0, 0)) — the bounded decor grammar carries translate + orthonormal rotate only; named refusal",
-      "promotion: pseudo-decor-hidden-in-combo: radio-inner::after is not drawn in every combo (transform matrix(0, 0, 0, 0, 0, 0) (scale 0)) — the component's own hidden state, NOT a grammar limit",
+      "promotion: pseudo-decor-state-paint-uncarried: radio-inner::after at checked.disabled paints {\"bg\":\"rgba(0, 0, 0, 0.25)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":16} where the matching enabled combo paints {\"bg\":\"rgba(255, 255, 255, 1)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":16} — the decor carries the ENABLED plane; a per-enum-value × per-state paint product has no contract spelling (states take token refs, decor paint is literal); named residue",
+      "promotion: pseudo-decor-state-geometry-uncarried: radio-inner::after at checked.disabled sits at {\"w\":8,\"h\":8,\"top\":3,\"left\":3} vs the enabled {\"w\":6,\"h\":6,\"top\":4,\"left\":4}; named residue",
       "promotion: pseudo-decor-hidden-in-combo: radio::after is not drawn in every combo (opacity 0, box 16x16) — the component's own hidden state, NOT a grammar limit",
       "promotion: pseudo-content-not-canvas-ink: root::after carries content \" \" — the bounded decor grammar promotes EMPTY-content decor boxes only. A glyph drawn by an icon-font ligature (Bootstrap/FontAwesome/Material carets, chevrons, close ×s) is real ink that does NOT reach the canvas; named refusal",
       "overflow: radio-inner.border-bottom-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -404,7 +404,7 @@
     },
     "shippedMinted": {
       "path": "examples/antd/tokens/antd-minted.dtcg.json",
-      "leavesAdded": 1229,
+      "leavesAdded": 1241,
       "divergent": [
         {
           "token": "imported.radio.radio-inner.background-color.checked",

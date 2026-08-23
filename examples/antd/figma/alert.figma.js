@@ -50,7 +50,15 @@ const COMPONENTS = [
             "strokeTopWeight": "imported/shared/size-1",
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
+            "paddingBottom": "imported/alert/root/padding-bottom/off",
+            "paddingLeft": "imported/alert/root/padding-left/off",
+            "paddingRight": "imported/alert/root/padding-right/off",
+            "paddingTop": "imported/alert/root/padding-top/off",
             "itemSpacing": "imported/shared/size-8"
+          },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/alert/root/width"
           },
           "fill": "imported/alert/root/background-color/info",
           "stroke": "imported/alert/root/border-top-color/info",
@@ -64,6 +72,7 @@ const COMPONENTS = [
                 "counter": "MIN",
                 "stretchChildren": true
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -71,6 +80,9 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "label",
+                  "margins": {
+                    "bottom": 0
+                  },
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
@@ -78,7 +90,7 @@ const COMPONENTS = [
                   "characters": "Alert message",
                   "fontSize": 14,
                   "fontStyle": "Regular",
-                  "fontSizeVar": "imported/shared/size-14",
+                  "fontSizeVar": "imported/alert/label/font-size/off",
                   "fontWeightVar": "imported/alert/label/font-weight",
                   "lineHeightVar": "imported/shared/size-22",
                   "textFill": "imported/shared/color-000000e0",
@@ -111,7 +123,8 @@ const COMPONENTS = [
                   "visibleProp": "Show Description",
                   "visibleDefault": false
                 }
-              ]
+              ],
+              "fillW": true
             },
             {
               "type": "frame",
@@ -173,7 +186,15 @@ const COMPONENTS = [
             "topRightRadius": "imported/shared/size-8",
             "strokeTopWeight": "imported/shared/size-1",
             "minHeight": "imported/shared/size-0",
-            "minWidth": "imported/shared/size-0"
+            "minWidth": "imported/shared/size-0",
+            "paddingBottom": "imported/alert/root/padding-bottom/off",
+            "paddingLeft": "imported/alert/root/padding-left/off",
+            "paddingRight": "imported/alert/root/padding-right/off",
+            "paddingTop": "imported/alert/root/padding-top/off"
+          },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/alert/root/width"
           },
           "fill": "imported/alert/root/background-color/info",
           "stroke": "imported/alert/root/border-top-color/info",
@@ -205,6 +226,7 @@ const COMPONENTS = [
                 "counter": "MIN",
                 "stretchChildren": true
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -212,6 +234,9 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "label",
+                  "margins": {
+                    "bottom": 0
+                  },
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
@@ -219,7 +244,7 @@ const COMPONENTS = [
                   "characters": "Alert message",
                   "fontSize": 14,
                   "fontStyle": "Regular",
-                  "fontSizeVar": "imported/shared/size-14",
+                  "fontSizeVar": "imported/alert/label/font-size/off",
                   "fontWeightVar": "imported/alert/label/font-weight",
                   "lineHeightVar": "imported/shared/size-22",
                   "textFill": "imported/shared/color-000000e0",
@@ -252,7 +277,8 @@ const COMPONENTS = [
                   "visibleProp": "Show Description",
                   "visibleDefault": false
                 }
-              ]
+              ],
+              "fillW": true
             },
             {
               "type": "frame",
@@ -273,9 +299,6 @@ const COMPONENTS = [
                 "paddingRight": "imported/shared/size-0",
                 "paddingTop": "imported/shared/size-0"
               },
-              "margins": {
-                "left": 8
-              },
               "clipsContent": true,
               "children": [
                 {
@@ -291,7 +314,10 @@ const COMPONENTS = [
               "visibleProp": "Show Closable",
               "visibleDefault": false
             }
-          ]
+          ],
+          "lits": {
+            "itemSpacing": 8
+          }
         }
       },
       {
@@ -318,7 +344,15 @@ const COMPONENTS = [
             "strokeTopWeight": "imported/shared/size-1",
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
+            "paddingBottom": "imported/alert/root/padding-bottom/off",
+            "paddingLeft": "imported/alert/root/padding-left/off",
+            "paddingRight": "imported/alert/root/padding-right/off",
+            "paddingTop": "imported/alert/root/padding-top/off",
             "itemSpacing": "imported/shared/size-8"
+          },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/alert/root/width"
           },
           "fill": "imported/alert/root/background-color/success",
           "stroke": "imported/alert/root/border-top-color/success",
@@ -332,6 +366,7 @@ const COMPONENTS = [
                 "counter": "MIN",
                 "stretchChildren": true
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -339,6 +374,9 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "label",
+                  "margins": {
+                    "bottom": 0
+                  },
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
@@ -346,7 +384,7 @@ const COMPONENTS = [
                   "characters": "Alert message",
                   "fontSize": 14,
                   "fontStyle": "Regular",
-                  "fontSizeVar": "imported/shared/size-14",
+                  "fontSizeVar": "imported/alert/label/font-size/off",
                   "fontWeightVar": "imported/alert/label/font-weight",
                   "lineHeightVar": "imported/shared/size-22",
                   "textFill": "imported/shared/color-000000e0",
@@ -379,7 +417,8 @@ const COMPONENTS = [
                   "visibleProp": "Show Description",
                   "visibleDefault": false
                 }
-              ]
+              ],
+              "fillW": true
             },
             {
               "type": "frame",
@@ -441,7 +480,15 @@ const COMPONENTS = [
             "topRightRadius": "imported/shared/size-8",
             "strokeTopWeight": "imported/shared/size-1",
             "minHeight": "imported/shared/size-0",
-            "minWidth": "imported/shared/size-0"
+            "minWidth": "imported/shared/size-0",
+            "paddingBottom": "imported/alert/root/padding-bottom/off",
+            "paddingLeft": "imported/alert/root/padding-left/off",
+            "paddingRight": "imported/alert/root/padding-right/off",
+            "paddingTop": "imported/alert/root/padding-top/off"
+          },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/alert/root/width"
           },
           "fill": "imported/alert/root/background-color/success",
           "stroke": "imported/alert/root/border-top-color/success",
@@ -473,6 +520,7 @@ const COMPONENTS = [
                 "counter": "MIN",
                 "stretchChildren": true
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -480,6 +528,9 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "label",
+                  "margins": {
+                    "bottom": 0
+                  },
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
@@ -487,7 +538,7 @@ const COMPONENTS = [
                   "characters": "Alert message",
                   "fontSize": 14,
                   "fontStyle": "Regular",
-                  "fontSizeVar": "imported/shared/size-14",
+                  "fontSizeVar": "imported/alert/label/font-size/off",
                   "fontWeightVar": "imported/alert/label/font-weight",
                   "lineHeightVar": "imported/shared/size-22",
                   "textFill": "imported/shared/color-000000e0",
@@ -520,7 +571,8 @@ const COMPONENTS = [
                   "visibleProp": "Show Description",
                   "visibleDefault": false
                 }
-              ]
+              ],
+              "fillW": true
             },
             {
               "type": "frame",
@@ -541,9 +593,6 @@ const COMPONENTS = [
                 "paddingRight": "imported/shared/size-0",
                 "paddingTop": "imported/shared/size-0"
               },
-              "margins": {
-                "left": 8
-              },
               "clipsContent": true,
               "children": [
                 {
@@ -559,7 +608,10 @@ const COMPONENTS = [
               "visibleProp": "Show Closable",
               "visibleDefault": false
             }
-          ]
+          ],
+          "lits": {
+            "itemSpacing": 8
+          }
         }
       },
       {
@@ -586,7 +638,15 @@ const COMPONENTS = [
             "strokeTopWeight": "imported/shared/size-1",
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
+            "paddingBottom": "imported/alert/root/padding-bottom/off",
+            "paddingLeft": "imported/alert/root/padding-left/off",
+            "paddingRight": "imported/alert/root/padding-right/off",
+            "paddingTop": "imported/alert/root/padding-top/off",
             "itemSpacing": "imported/shared/size-8"
+          },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/alert/root/width"
           },
           "fill": "imported/alert/root/background-color/warning",
           "stroke": "imported/alert/root/border-top-color/warning",
@@ -600,6 +660,7 @@ const COMPONENTS = [
                 "counter": "MIN",
                 "stretchChildren": true
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -607,6 +668,9 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "label",
+                  "margins": {
+                    "bottom": 0
+                  },
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
@@ -614,7 +678,7 @@ const COMPONENTS = [
                   "characters": "Alert message",
                   "fontSize": 14,
                   "fontStyle": "Regular",
-                  "fontSizeVar": "imported/shared/size-14",
+                  "fontSizeVar": "imported/alert/label/font-size/off",
                   "fontWeightVar": "imported/alert/label/font-weight",
                   "lineHeightVar": "imported/shared/size-22",
                   "textFill": "imported/shared/color-000000e0",
@@ -647,7 +711,8 @@ const COMPONENTS = [
                   "visibleProp": "Show Description",
                   "visibleDefault": false
                 }
-              ]
+              ],
+              "fillW": true
             },
             {
               "type": "frame",
@@ -709,7 +774,15 @@ const COMPONENTS = [
             "topRightRadius": "imported/shared/size-8",
             "strokeTopWeight": "imported/shared/size-1",
             "minHeight": "imported/shared/size-0",
-            "minWidth": "imported/shared/size-0"
+            "minWidth": "imported/shared/size-0",
+            "paddingBottom": "imported/alert/root/padding-bottom/off",
+            "paddingLeft": "imported/alert/root/padding-left/off",
+            "paddingRight": "imported/alert/root/padding-right/off",
+            "paddingTop": "imported/alert/root/padding-top/off"
+          },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/alert/root/width"
           },
           "fill": "imported/alert/root/background-color/warning",
           "stroke": "imported/alert/root/border-top-color/warning",
@@ -741,6 +814,7 @@ const COMPONENTS = [
                 "counter": "MIN",
                 "stretchChildren": true
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -748,6 +822,9 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "label",
+                  "margins": {
+                    "bottom": 0
+                  },
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
@@ -755,7 +832,7 @@ const COMPONENTS = [
                   "characters": "Alert message",
                   "fontSize": 14,
                   "fontStyle": "Regular",
-                  "fontSizeVar": "imported/shared/size-14",
+                  "fontSizeVar": "imported/alert/label/font-size/off",
                   "fontWeightVar": "imported/alert/label/font-weight",
                   "lineHeightVar": "imported/shared/size-22",
                   "textFill": "imported/shared/color-000000e0",
@@ -788,7 +865,8 @@ const COMPONENTS = [
                   "visibleProp": "Show Description",
                   "visibleDefault": false
                 }
-              ]
+              ],
+              "fillW": true
             },
             {
               "type": "frame",
@@ -809,9 +887,6 @@ const COMPONENTS = [
                 "paddingRight": "imported/shared/size-0",
                 "paddingTop": "imported/shared/size-0"
               },
-              "margins": {
-                "left": 8
-              },
               "clipsContent": true,
               "children": [
                 {
@@ -827,7 +902,10 @@ const COMPONENTS = [
               "visibleProp": "Show Closable",
               "visibleDefault": false
             }
-          ]
+          ],
+          "lits": {
+            "itemSpacing": 8
+          }
         }
       },
       {
@@ -854,7 +932,15 @@ const COMPONENTS = [
             "strokeTopWeight": "imported/shared/size-1",
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0",
+            "paddingBottom": "imported/alert/root/padding-bottom/off",
+            "paddingLeft": "imported/alert/root/padding-left/off",
+            "paddingRight": "imported/alert/root/padding-right/off",
+            "paddingTop": "imported/alert/root/padding-top/off",
             "itemSpacing": "imported/shared/size-8"
+          },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/alert/root/width"
           },
           "fill": "imported/alert/root/background-color/error",
           "stroke": "imported/alert/root/border-top-color/error",
@@ -868,6 +954,7 @@ const COMPONENTS = [
                 "counter": "MIN",
                 "stretchChildren": true
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -875,6 +962,9 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "label",
+                  "margins": {
+                    "bottom": 0
+                  },
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
@@ -882,7 +972,7 @@ const COMPONENTS = [
                   "characters": "Alert message",
                   "fontSize": 14,
                   "fontStyle": "Regular",
-                  "fontSizeVar": "imported/shared/size-14",
+                  "fontSizeVar": "imported/alert/label/font-size/off",
                   "fontWeightVar": "imported/alert/label/font-weight",
                   "lineHeightVar": "imported/shared/size-22",
                   "textFill": "imported/shared/color-000000e0",
@@ -915,7 +1005,8 @@ const COMPONENTS = [
                   "visibleProp": "Show Description",
                   "visibleDefault": false
                 }
-              ]
+              ],
+              "fillW": true
             },
             {
               "type": "frame",
@@ -977,7 +1068,15 @@ const COMPONENTS = [
             "topRightRadius": "imported/shared/size-8",
             "strokeTopWeight": "imported/shared/size-1",
             "minHeight": "imported/shared/size-0",
-            "minWidth": "imported/shared/size-0"
+            "minWidth": "imported/shared/size-0",
+            "paddingBottom": "imported/alert/root/padding-bottom/off",
+            "paddingLeft": "imported/alert/root/padding-left/off",
+            "paddingRight": "imported/alert/root/padding-right/off",
+            "paddingTop": "imported/alert/root/padding-top/off"
+          },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/alert/root/width"
           },
           "fill": "imported/alert/root/background-color/error",
           "stroke": "imported/alert/root/border-top-color/error",
@@ -1009,6 +1108,7 @@ const COMPONENTS = [
                 "counter": "MIN",
                 "stretchChildren": true
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
@@ -1016,6 +1116,9 @@ const COMPONENTS = [
                 {
                   "type": "text",
                   "name": "label",
+                  "margins": {
+                    "bottom": 0
+                  },
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
@@ -1023,7 +1126,7 @@ const COMPONENTS = [
                   "characters": "Alert message",
                   "fontSize": 14,
                   "fontStyle": "Regular",
-                  "fontSizeVar": "imported/shared/size-14",
+                  "fontSizeVar": "imported/alert/label/font-size/off",
                   "fontWeightVar": "imported/alert/label/font-weight",
                   "lineHeightVar": "imported/shared/size-22",
                   "textFill": "imported/shared/color-000000e0",
@@ -1056,7 +1159,8 @@ const COMPONENTS = [
                   "visibleProp": "Show Description",
                   "visibleDefault": false
                 }
-              ]
+              ],
+              "fillW": true
             },
             {
               "type": "frame",
@@ -1077,9 +1181,6 @@ const COMPONENTS = [
                 "paddingRight": "imported/shared/size-0",
                 "paddingTop": "imported/shared/size-0"
               },
-              "margins": {
-                "left": 8
-              },
               "clipsContent": true,
               "children": [
                 {
@@ -1095,7 +1196,10 @@ const COMPONENTS = [
               "visibleProp": "Show Closable",
               "visibleDefault": false
             }
-          ]
+          ],
+          "lits": {
+            "itemSpacing": 8
+          }
         }
       }
     ],
@@ -1817,6 +1921,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -1833,6 +1939,61 @@ function applyFrameSpec(node, spec) {
       if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED';
       else node.primaryAxisSizingMode = 'FIXED';
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
+    }
+  }
+  if (spec.lits) {
+    // v14 literals: no variable to bind — plain values, compile-parsed.
+    const li = spec.lits;
+    if (li.paddingTop !== undefined) node.paddingTop = li.paddingTop;
+    if (li.paddingBottom !== undefined) node.paddingBottom = li.paddingBottom;
+    if (li.paddingLeft !== undefined) node.paddingLeft = li.paddingLeft;
+    if (li.paddingRight !== undefined) node.paddingRight = li.paddingRight;
+    if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
+    if (li.radius !== undefined) node.cornerRadius = li.radius;
+    if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
+    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minWidth ' + li.minWidth + ' refused (needs auto-layout); the literal min-width does not draw', e); } }
+    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minHeight ' + li.minHeight + ' refused (needs auto-layout); the literal min-height does not draw', e); } }
+    // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
+    // trampled — fillClear only clears when no fill was spec'd. The compile
+    // side already drops fillClear when a fill binding exists (applyLiterals);
+    // this runtime guard makes the emitted script safe even for hand-fed
+    // specs carrying both.
+    if (li.fillClear && !spec.fill) node.fills = [];
+    else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
+    if (li.radiusCorners) {
+      const rc = li.radiusCorners;
+      if (rc.tl !== undefined) node.topLeftRadius = rc.tl;
+      if (rc.tr !== undefined) node.topRightRadius = rc.tr;
+      if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
+      if (rc.br !== undefined) node.bottomRightRadius = rc.br;
+    }
+    if (li.strokeSides) {
+      const sw = li.strokeSides;
+      // ELLIPSE/LINE expose strokeWeight only — per-side props throw
+      // "Cannot add property strokeTopWeight, object is not extensible"
+      // (Tailwind ToggleSwitch thumb live finding, Wave B.1).
+      if ('strokeTopWeight' in node) {
+        if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+        if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+        if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+        if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+      } else {
+        const w = sw.top !== undefined ? sw.top : (sw.right !== undefined ? sw.right : (sw.bottom !== undefined ? sw.bottom : sw.left));
+        if (w !== undefined) node.strokeWeight = w;
+      }
+    }
+    if (li.width !== undefined || li.height !== undefined) {
+      node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
+      // GRID's primary axis is HORIZONTAL (GP1b: primaryAxisSizingMode='AUTO'
+      // reads back as layoutSizingHorizontal 'HUG'), like a HORIZONTAL frame.
+      const gm = (spec.layout || { mode: 'HORIZONTAL' }).mode;
+      const horizontalIsPrimary = gm === 'HORIZONTAL' || gm === 'GRID';
+      if (li.width !== undefined) {
+        if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
+      }
+      if (li.height !== undefined) {
+        if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED'; else node.primaryAxisSizingMode = 'FIXED';
+      }
     }
   }
 }
@@ -2107,6 +2268,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -2134,6 +2300,14 @@ async function buildNode(spec, registry) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
     applyMarginBox(node, childNode, child, registry);
+  }
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
+    }
   }
   return node;
 }

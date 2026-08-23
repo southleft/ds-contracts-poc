@@ -4,7 +4,7 @@
   "name": "Progress",
   "version": "0.1.0",
   "status": "draft",
-  "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). THE METER (FC-METER / FC-GEOMETRY-EXCLUDED, T3). `status` is DEFAULTLESS — antd's ProgressStatuses tuple is normal|exception|active|success and `normal` IS the unset rendering, so the enum carries the other three and `unset` stands for normal (one value per rendering, no duplicate). percent is pinned at 40 and type at line by the config (the MUI LinearProgress value:40 precedent); the fill WIDTH is inline geometry the Option B exclusion must LEDGER. NAMED OUT: circle/dashboard (SVG stroke-dasharray geometry), steps, strokeColor gradients, format.",
+  "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code\u2192canvas, held out) \u2014 props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case \u2014 W1, examples/antd/RECON.md \u00a74). THE METER (FC-METER / FC-GEOMETRY-EXCLUDED, T3). `status` is DEFAULTLESS \u2014 antd's ProgressStatuses tuple is normal|exception|active|success and `normal` IS the unset rendering, so the enum carries the other three and `unset` stands for normal (one value per rendering, no duplicate). percent is pinned at 40 and type at line by the config (the MUI LinearProgress value:40 precedent); the fill WIDTH is inline geometry the Option B exclusion must LEDGER. NAMED OUT: circle/dashboard (SVG stroke-dasharray geometry), steps, strokeColor gradients, format. HEAL LOOP (2026-08-23): `percent` (40) and `max` (100) are NUMBER props so the fill part can carry a `meter` fact (examples/antd/authored-facts.json \u2014 the astryx/polaris progress-bar precedent); the capture pins percent at 40 and never enumerates numbers.",
   "semantics": {
     "element": "div"
   },
@@ -30,6 +30,34 @@
         },
         "code": {
           "prop": "status"
+        }
+      }
+    },
+    {
+      "name": "percent",
+      "type": "number",
+      "default": 40,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Percent"
+        },
+        "code": {
+          "prop": "percent"
+        }
+      }
+    },
+    {
+      "name": "max",
+      "type": "number",
+      "default": 100,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Max"
+        },
+        "code": {
+          "prop": "max"
         }
       }
     }

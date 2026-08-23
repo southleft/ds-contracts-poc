@@ -147,7 +147,8 @@
         "min-height": "{imported.shared.size-0}",
         "min-width": "{imported.shared.size-0}",
         "right": "{imported.shared.size-0}",
-        "top": "{imported.shared.size-0}"
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.input.root.width}"
       },
       "states": {
         "active": {
@@ -215,27 +216,6 @@
           }
         },
         {
-          "prop": "status",
-          "map": {
-            "error": {
-              "background-color": "{imported.input.root.background-color.error.{variant}}",
-              "border-bottom-color": "{imported.input.root.border-bottom-color.error.{variant}}",
-              "border-left-color": "{imported.input.root.border-left-color.error.{variant}}",
-              "border-right-color": "{imported.input.root.border-right-color.error.{variant}}",
-              "border-top-color": "{imported.input.root.border-top-color.error.{variant}}",
-              "color": "{imported.input.root.color.error.{variant}}"
-            },
-            "warning": {
-              "background-color": "{imported.input.root.background-color.warning.{variant}}",
-              "border-bottom-color": "{imported.input.root.border-bottom-color.warning.{variant}}",
-              "border-left-color": "{imported.input.root.border-left-color.warning.{variant}}",
-              "border-right-color": "{imported.input.root.border-right-color.warning.{variant}}",
-              "border-top-color": "{imported.input.root.border-top-color.warning.{variant}}",
-              "color": "{imported.input.root.color.warning.{variant}}"
-            }
-          }
-        },
-        {
           "prop": "variant",
           "map": {
             "borderless": {
@@ -285,6 +265,27 @@
               "border-top-color": "{imported.input.root.border-top-color.unset.underlined}",
               "border-top-width": "{imported.input.root.border-top-width.underlined}",
               "color": "{imported.input.root.color.unset.underlined}"
+            }
+          }
+        },
+        {
+          "prop": "status",
+          "map": {
+            "error": {
+              "background-color": "{imported.input.root.background-color.error.{variant}}",
+              "border-bottom-color": "{imported.input.root.border-bottom-color.error.{variant}}",
+              "border-left-color": "{imported.input.root.border-left-color.error.{variant}}",
+              "border-right-color": "{imported.input.root.border-right-color.error.{variant}}",
+              "border-top-color": "{imported.input.root.border-top-color.error.{variant}}",
+              "color": "{imported.input.root.color.error.{variant}}"
+            },
+            "warning": {
+              "background-color": "{imported.input.root.background-color.warning.{variant}}",
+              "border-bottom-color": "{imported.input.root.border-bottom-color.warning.{variant}}",
+              "border-left-color": "{imported.input.root.border-left-color.warning.{variant}}",
+              "border-right-color": "{imported.input.root.border-right-color.warning.{variant}}",
+              "border-top-color": "{imported.input.root.border-top-color.warning.{variant}}",
+              "color": "{imported.input.root.color.warning.{variant}}"
             }
           }
         }

@@ -220,6 +220,41 @@
                 "position": "relative",
                 "transition-duration": "0.2s"
               },
+              "parts": {
+                "radio-inner-after": {
+                  "shape": {
+                    "kind": "ellipse",
+                    "width": 6,
+                    "height": 6
+                  },
+                  "literals": {
+                    "background-color": "rgba(255, 255, 255, 1)",
+                    "border-top-width": "0px",
+                    "border-right-width": "0px",
+                    "border-bottom-width": "0px",
+                    "border-left-width": "0px"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "checked",
+                      "equals": "unchecked",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "checked",
+                      "equals": "checked",
+                      "styles": {
+                        "position": "absolute",
+                        "top": "4px",
+                        "left": "4px"
+                      }
+                    }
+                  ],
+                  "description": "Drawn ::after pseudo-element decor promoted from the computed floor (round 5c S5 + Wave B.2 rotate): a 6×6 ellipse at 4,4 inside radio-inner, fill rgba(255, 255, 255, 1) — background+box+radius; translate folded; rotation 0 (receipted)."
+                }
+              },
               "declaredStates": {
                 "disabled": {
                   "cursor": "not-allowed"

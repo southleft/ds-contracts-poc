@@ -9,7 +9,7 @@
   "elementsPerCapture": 8,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 24,
+    "root": 25,
     "progress-outer": 20,
     "progress-inner": 31,
     "progress-bg": 32,
@@ -502,8 +502,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 58,
-    "mintedLeavesFolded": 18
+    "mintedLeavesUnfolded": 59,
+    "mintedLeavesFolded": 19
   },
   "bound": {
     "cellsChecked": 0,
@@ -512,11 +512,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 18,
-    "baseBindings": 52,
+    "leaves": 19,
+    "baseBindings": 53,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 49,
+      "uniform": 50,
       "perAxis": 2,
       "perPair": 0,
       "refused": 1
@@ -565,8 +565,8 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0.84716796875,
-      "max": 0.9521484375,
+      "mean": 0.8447265625,
+      "max": 0.9130859375,
       "perfect": 0
     },
     "aa": {

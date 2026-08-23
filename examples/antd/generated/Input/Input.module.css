@@ -21,6 +21,7 @@
   min-width: var(--imported-shared-size-0);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
+  width: var(--imported-input-root-width);
   display: inline-block;
   appearance: auto;
   box-sizing: border-box;

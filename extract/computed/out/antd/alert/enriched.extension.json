@@ -1,6 +1,6 @@
 {
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
-  "generatedBy": "extract/computed/run.ts",
+  "generatedBy": "extract/computed/regate.ts --write-enriched (OFFLINE RE-FUSE of the committed captured truth; no library recapture). Differences vs the harness path, NAMED: portal receipts are a capture-time artifact and are absent here; the frontier receipts are capture-time too and are CARRIED FORWARD unchanged from the extension this re-fuse overwrote (5 receipt(s)); every other receipt is recomputed from the same truth.",
   "library": "antd@5.29.3",
   "browser": "151.0.7922.34",
   "mintedTokens": {
@@ -136,6 +136,10 @@
               "$value": "20px",
               "$type": "dimension"
             }
+          },
+          "width": {
+            "$value": "288px",
+            "$type": "dimension"
           }
         },
         "alert-icon": {
@@ -883,11 +887,17 @@
         "part": "anticon",
         "field": "align",
         "value": "center"
+      },
+      {
+        "part": "alert-content",
+        "field": "grow",
+        "value": true
       }
     ],
     "contradictions": [],
     "receipts": [
-      "layout-not-uniform: root.align-items varies across combos — stays code-only"
+      "layout-not-uniform: root.align-items varies across combos — stays code-only",
+      "layout-grow-carried: alert-content — flex-grow 1 in a flex row parent (root); carried as layout.grow (the canvas FILL / layoutGrow twin)"
     ],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
   },
@@ -1167,49 +1177,49 @@
       "part": "root",
       "channel": "padding-bottom",
       "ref": "{imported.alert.root.padding-bottom.{description}}",
-      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue)"
+      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (description present) is not"
     },
     {
       "part": "root",
       "channel": "padding-left",
       "ref": "{imported.alert.root.padding-left.{description}}",
-      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue)"
+      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (description present) is not"
     },
     {
       "part": "root",
       "channel": "padding-right",
       "ref": "{imported.alert.root.padding-right.{description}}",
-      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue)"
+      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (description present) is not"
     },
     {
       "part": "root",
       "channel": "padding-top",
       "ref": "{imported.alert.root.padding-top.{description}}",
-      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue)"
+      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (description present) is not"
     },
     {
       "part": "alert-icon",
       "channel": "font-size",
       "ref": "{imported.alert.alert-icon.font-size.{description}}",
-      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue)"
+      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (description present) is not"
     },
     {
       "part": "alert-icon",
       "channel": "margin-right",
       "ref": "{imported.alert.alert-icon.margin-right.{description}}",
-      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue)"
+      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (description present) is not"
     },
     {
       "part": "label",
       "channel": "font-size",
       "ref": "{imported.alert.label.font-size.{description}}",
-      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue)"
+      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (description present) is not"
     },
     {
       "part": "label",
       "channel": "margin-bottom",
       "ref": "{imported.alert.label.margin-bottom.{description}}",
-      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue)"
+      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (description present) is not"
     }
   ],
   "pairwiseRefusals": [],
@@ -1246,6 +1256,8 @@
     "union-part-added: success.icon.off.off__default @0.0.0 (path|)"
   ],
   "styledChannelReceipts": [
+    "stage-fill-root-admitted: root — display:flex root measures exactly the stage content box (288px) in every enabled combo: it fills its container like a block root (antd Input `width: 100%`), so the captured stage width joins fusion under the block-root receipt below",
+    "block-root-width-admitted: root — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)",
     "control-fallback: no control for <svg> — span control used (part icon)",
     "control-fallback: no control for <path> — span control used (part part-0-0-0)",
     "text-part-typography-carried: label — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
@@ -1262,7 +1274,7 @@
     "geometry-excluded: label-2 — block-size 22px, height 22px, inline-size 238px, perspective-origin 119px 11px, transform-origin 119px 11px, width 238px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "geometry-excluded: part-0-0-0 — block-size auto, height auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px, width auto — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "geometry-excluded: part-1-0-0-0 — block-size auto, height auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px, width auto — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
-    "geometry-excluded: root — block-size 40px, height 40px, inline-size 288px, perspective-origin 144px 20px, transform-origin 144px 20px, width 288px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 40px, height 40px, inline-size 288px, perspective-origin 144px 20px, transform-origin 144px 20px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "webkit-prefixed-channels-refused: 3 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-font-smoothing (alert-icon, anticon, icon, icon-2, part-0-0-0, part-1-0-0-0); -webkit-text-fill-color (alert-content, alert-icon, anticon, icon, icon-2, label, label-2, part-0-0-0, part-1-0-0-0, root); -webkit-text-stroke-color (alert-content, alert-icon, anticon, icon, icon-2, label, label-2, part-0-0-0, part-1-0-0-0, root)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
     "inheritance-check-rejected: anticon.caret-color — values track ancestor \"alert-close-icon\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
@@ -1403,6 +1415,7 @@
   "enrichmentNotes": [
     "layout enriched: alert-icon.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: anticon.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: alert-content.layout.grow = true (uniform computed keyword — the schema's own vocabulary)",
     "declared fact carried: root.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -1432,6 +1445,14 @@
     "declared fact carried: anticon.text-align = center (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: anticon.text-rendering = optimizelegibility (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: anticon.transition-duration = 0.2s (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: anticon.transition-property = color (v15 declared vocabulary — declared-not-drawn on canvas)"
+    "declared fact carried: anticon.transition-property = color (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "presence-off plane carried: root.padding-bottom = {imported.alert.root.padding-bottom.off} (the base rendering, presence \"description\" absent); the presence-ON plane is named residue below",
+    "presence-off plane carried: root.padding-left = {imported.alert.root.padding-left.off} (the base rendering, presence \"description\" absent); the presence-ON plane is named residue below",
+    "presence-off plane carried: root.padding-right = {imported.alert.root.padding-right.off} (the base rendering, presence \"description\" absent); the presence-ON plane is named residue below",
+    "presence-off plane carried: root.padding-top = {imported.alert.root.padding-top.off} (the base rendering, presence \"description\" absent); the presence-ON plane is named residue below",
+    "presence-off plane carried: alert-icon.font-size = {imported.alert.alert-icon.font-size.off} (the base rendering, presence \"description\" absent); the presence-ON plane is named residue below",
+    "presence-off plane carried: alert-icon.margin-right = {imported.alert.alert-icon.margin-right.off} (the base rendering, presence \"description\" absent); the presence-ON plane is named residue below",
+    "presence-off plane carried: label.font-size = {imported.alert.label.font-size.off} (the base rendering, presence \"description\" absent); the presence-ON plane is named residue below",
+    "presence-off plane carried: label.margin-bottom = {imported.alert.label.margin-bottom.off} (the base rendering, presence \"description\" absent); the presence-ON plane is named residue below"
   ]
 }

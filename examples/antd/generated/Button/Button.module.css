@@ -22,6 +22,7 @@
   bottom: var(--imported-shared-size-0);
   column-gap: var(--imported-button-root-column-gap);
   left: var(--imported-shared-size-0);
+  opacity: var(--imported-button-root-opacity-off);
   padding-bottom: var(--imported-shared-size-0);
   padding-top: var(--imported-shared-size-0);
   right: var(--imported-shared-size-0);
@@ -178,6 +179,7 @@
   border-top-left-radius: var(--imported-button-root-border-top-left-radius-large);
   border-top-right-radius: var(--imported-button-root-border-top-right-radius-large);
   font-size: var(--imported-button-root-font-size-large);
+  height: var(--imported-button-root-height-large);
   padding-left: var(--imported-button-root-padding-left-large);
   padding-right: var(--imported-button-root-padding-right-large);
 }
@@ -188,6 +190,7 @@
   border-top-left-radius: var(--imported-button-root-border-top-left-radius-middle);
   border-top-right-radius: var(--imported-button-root-border-top-right-radius-middle);
   font-size: var(--imported-button-root-font-size-middle);
+  height: var(--imported-button-root-height-middle);
   padding-left: var(--imported-button-root-padding-left-middle);
   padding-right: var(--imported-button-root-padding-right-middle);
 }
@@ -198,6 +201,7 @@
   border-top-left-radius: var(--imported-button-root-border-top-left-radius-small);
   border-top-right-radius: var(--imported-button-root-border-top-right-radius-small);
   font-size: var(--imported-button-root-font-size-small);
+  height: var(--imported-button-root-height-small);
   padding-left: var(--imported-button-root-padding-left-small);
   padding-right: var(--imported-button-root-padding-right-small);
 }
@@ -336,6 +340,13 @@
   transition-duration: 0s, 0s;
   transition-property: outline-offset, outline;
   transition-timing-function: ease, ease;
+}
+
+.type-dashed {
+  border-bottom-style: dashed;
+  border-left-style: dashed;
+  border-right-style: dashed;
+  border-top-style: dashed;
 }
 
 .btn-icon {

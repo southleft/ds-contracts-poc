@@ -122,6 +122,9 @@ export interface NodeSpec {
    *  so the ring wraps the full root bounds; the preview renders a CSS
    *  outline. */
   strokeOutside?: boolean;
+  /** ANTD EXAM (heal loop): a stylesWhen `border-*-style: dashed|dotted` on
+   *  this combo lowers to a Figma dashPattern on the stroke (solid otherwise). */
+  dashPattern?: number[];
   fixedWidth?: { px: number; varName: string };
   fixedHeight?: { px: number; varName?: string };
   /** CSS grow → layoutSizingHorizontal FILL after append. */
@@ -3565,7 +3568,6 @@ function applyStylesWhenOpacity(
 ): void {
   for (const sw of part.stylesWhen ?? []) {
     const raw = sw.styles['opacity'];
-    if (raw === undefined) continue;
     const applies =
       sw.equals !== undefined
         ? subst[sw.prop] === sw.equals
@@ -3573,6 +3575,13 @@ function applyStylesWhenOpacity(
           ? subst[sw.prop] === 'true' // VARIANT-bound bool: a compiled axis
           : contract.props.find((p) => p.name === sw.prop)?.default === true;
     if (!applies) continue;
+    // ANTD EXAM (heal loop): a per-value border STYLE on this combo — antd's
+    // dashed Button type drew a SOLID stroke, a wrong fact rather than a
+    // named one. dashed → [3,3], dotted → [1,2] (Chromium's 1px rendering).
+    const styles = ['border-style', 'border-top-style', 'border-right-style', 'border-bottom-style', 'border-left-style'].map((k) => sw.styles[k]).filter(Boolean);
+    if (styles.includes('dashed')) spec.dashPattern = [3, 3];
+    else if (styles.includes('dotted')) spec.dashPattern = [1, 2];
+    if (raw === undefined) continue;
     const value = Number.parseFloat(raw);
     if (!Number.isNaN(value)) spec.opacity = value;
   }
@@ -4729,9 +4738,13 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // declaration order (see isVariantBool). An enum-only contract's axis list
   // is exactly the old enum filter — byte-identical substitution space.
   const axisProps = contract.props.filter((p) => isEnum(p) || isVariantBool(p));
-  const textProp = contract.props.find(
-    (p) => p.type === 'text' && p.bindings.code.prop === 'children',
-  );
+  // ANTD EXAM (heal loop): a root with no parts and no `children` prop can
+  // still carry its text through another TEXT prop — antd's Input draws
+  // its `placeholder`. The canvas label follows the first text prop when no
+  // `children` exists (an <input> has no children in any grammar).
+  const textProp =
+    contract.props.find((p) => p.type === 'text' && p.bindings.code.prop === 'children') ??
+    (contract.anatomy.root?.parts ? undefined : contract.props.find((p) => p.type === 'text' && p.bindings.figma.kind === 'TEXT'));
   // VARIANT-bound booleans are axes, not BOOLEAN component properties.
   const boolPropsData = contract.props
     .filter((p) => p.type === 'boolean' && !isVariantBool(p))
@@ -4895,6 +4908,10 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       centerStrokeGlyphsInHosts(rootSpec.children);
       stampGridCells(rootSpec, root, subst); // A2 grid — see stampGridCells
     } else if (textProp) {
+      // ANTD EXAM (heal loop): a root whose label is a NON-children text prop
+      // is an <input> drawing its placeholder — text starts at the padding
+      // edge (antd `text-align: start`), it is never centred like a Button.
+      if (textProp.bindings.code.prop !== 'children' && rootSpec.layout && rootSpec.layout.primary === 'CENTER') rootSpec.layout = { ...rootSpec.layout, primary: 'MIN' };
       rootSpec.children = [
         {
           type: 'text',
@@ -5335,6 +5352,28 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // dump and the round trip reported SILENT, because the only receipts on
   // the set were about the REST plane. Name every state-bound channel the
   // undrawn plane holds.
+  // ANTD EXAM (Badge / Tag, 2026-08-23) — THE UNSET PLANE. A DEFAULTLESS enum
+  // axis (antd's Tag `color`, Badge `color`, Input `status`; Carbon's `size`,
+  // Altitude's `variant`, Polaris's `tone`) renders the library's OWN default
+  // when the prop is absent — antd's red count badge, its neutral grey tag —
+  // and the capture measured that plane as the set's BASE (its tokens ride
+  // `tokens`; the enum values ride tokensByProp). The canvas enumerates
+  // VARIANT cells from the enum values only, so the unset rendering — usually
+  // the most recognisable one — has no cell, and the round trip proposes the
+  // first enum value as the default. Measured on the scratch-file dump:
+  // Badge came back `Color: Blue|Green|Purple, default Blue` with the red
+  // badge nowhere and nothing naming it. One fact per defaultless axis.
+  for (const p of contract.props) {
+    if (!isEnum(p) || p.default !== undefined || p.bindings.figma.kind !== 'VARIANT') continue;
+    facts.push({
+      part: 'root',
+      variant: '',
+      kind: 'channel',
+      channel: `${p.name} [unset]`,
+      value: p.type.enum.join('|'),
+      reason: `defaultless axis — the library's own rendering when "${p.name}" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the ${p.type.enum.length} declared values only, and a proposal read back from the canvas will call "${p.type.enum[0]}" the default (FC-UNSET-PLANE-UNDRAWN)`,
+    });
+  }
   if (!contract.bindings?.figma?.statePreviews && contract.states.length > 0) {
     for (const { name: partName, part } of walkAnatomy(contract)) {
       for (const [state, m] of Object.entries(part.states ?? {})) {
@@ -7193,6 +7232,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = ${strokeAlignJs(hasStrokeOutside)};
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -7390,6 +7431,11 @@ ${hasSlot ? `  // A native slot's LAYER NAME is its property's display name: ren
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -7417,6 +7463,14 @@ ${hasSlot ? `  // A native slot's LAYER NAME is its property's display name: ren
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }${insetOverlayCall(hasInsetOverlay, 'node, childNode, child')}${marginBoxCall(hasMargins, 'node, childNode, child, registry')}
   }${gridChildrenCall(hasGrid, 'node, spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'node, built')}${birthBoxCall(hasChildlessBox, 'node', 'spec')}
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
+    }
+  }
   return node;
 }
 

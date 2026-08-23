@@ -175,7 +175,7 @@
     },
     "shippedMinted": {
       "path": "examples/antd/tokens/antd-minted.dtcg.json",
-      "leavesAdded": 1240,
+      "leavesAdded": 1252,
       "divergent": []
     },
     "rows": [

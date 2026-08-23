@@ -22,7 +22,9 @@ export const Radio = forwardRef<HTMLLabelElement, RadioProps>(function Radio(
     <label ref={ref} className={classes} data-disabled={disabled || undefined} {...rest}>
       <span className={styles.radio}>
         <input className={styles['radio-input']}></input>
-        <span className={styles['radio-inner']}></span>
+        <span className={styles['radio-inner']}>
+          <div className={styles['radio-inner-after']}></div>
+        </span>
       </span>
       <span className={styles.label}>{children}</span>
     </label>

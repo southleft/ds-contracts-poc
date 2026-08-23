@@ -136,7 +136,26 @@
         "line-height": "{imported.avatar.root.line-height}",
         "right": "{imported.shared.size-0}",
         "top": "{imported.shared.size-0}"
-      }
+      },
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "default": {
+              "height": "{imported.avatar.root.height.default}",
+              "width": "{imported.avatar.root.width.default}"
+            },
+            "large": {
+              "height": "{imported.avatar.root.height.large}",
+              "width": "{imported.avatar.root.width.large}"
+            },
+            "small": {
+              "height": "{imported.avatar.root.height.small}",
+              "width": "{imported.avatar.root.width.small}"
+            }
+          }
+        }
+      ]
     }
   },
   "bindings": {

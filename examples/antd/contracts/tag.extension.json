@@ -1,6 +1,6 @@
 {
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
-  "generatedBy": "extract/computed/run.ts",
+  "generatedBy": "extract/computed/regate.ts --write-enriched (OFFLINE RE-FUSE of the committed captured truth; no library recapture). Differences vs the harness path, NAMED: portal receipts are a capture-time artifact and are absent here; the frontier receipts are capture-time too and are CARRIED FORWARD unchanged from the extension this re-fuse overwrote (5 receipt(s)); every other receipt is recomputed from the same truth.",
   "library": "antd@5.29.3",
   "browser": "151.0.7922.34",
   "mintedTokens": {
@@ -812,7 +812,7 @@
       "part": "root",
       "channel": "width",
       "ref": "{imported.tag.root.width.{closable}}",
-      "refusal": "presence-prop-driven styling (closable) — boolean tokensByProp has no spelling (round 4 residue)"
+      "refusal": "presence-prop-driven styling (closable) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (closable present) is not"
     }
   ],
   "pairwiseRefusals": [],
@@ -928,6 +928,7 @@
     "pair-with-unset carried: root.border-bottom-color = base plane per bordered + placeholder maps per color (emitter capability lift)",
     "pair-with-unset carried: root.border-left-color = base plane per bordered + placeholder maps per color (emitter capability lift)",
     "pair-with-unset carried: root.border-right-color = base plane per bordered + placeholder maps per color (emitter capability lift)",
-    "pair-with-unset carried: root.border-top-color = base plane per bordered + placeholder maps per color (emitter capability lift)"
+    "pair-with-unset carried: root.border-top-color = base plane per bordered + placeholder maps per color (emitter capability lift)",
+    "presence-off plane carried: root.width = {imported.tag.root.width.off} (the base rendering, presence \"closable\" absent); the presence-ON plane is named residue below"
   ]
 }

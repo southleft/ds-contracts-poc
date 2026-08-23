@@ -209,7 +209,37 @@ const COMPONENTS = [
                   },
                   "fill": "imported/radio/radio-inner/background-color/checked",
                   "stroke": "imported/radio/radio-inner/border-top-color/checked",
-                  "children": []
+                  "children": [
+                    {
+                      "type": "shape",
+                      "name": "radio-inner-after",
+                      "shape": {
+                        "kind": "ellipse",
+                        "width": 6,
+                        "height": 6
+                      },
+                      "lits": {
+                        "fillColor": {
+                          "r": 1,
+                          "g": 1,
+                          "b": 1,
+                          "a": 1
+                        },
+                        "strokeSides": {
+                          "top": 0,
+                          "right": 0,
+                          "bottom": 0,
+                          "left": 0
+                        }
+                      },
+                      "absolute": {
+                        "h": "MIN",
+                        "v": "MIN",
+                        "left": 4,
+                        "top": 4
+                      }
+                    }
+                  ]
                 }
               ]
             },
@@ -1494,6 +1524,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -1510,6 +1542,61 @@ function applyFrameSpec(node, spec) {
       if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED';
       else node.primaryAxisSizingMode = 'FIXED';
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
+    }
+  }
+  if (spec.lits) {
+    // v14 literals: no variable to bind — plain values, compile-parsed.
+    const li = spec.lits;
+    if (li.paddingTop !== undefined) node.paddingTop = li.paddingTop;
+    if (li.paddingBottom !== undefined) node.paddingBottom = li.paddingBottom;
+    if (li.paddingLeft !== undefined) node.paddingLeft = li.paddingLeft;
+    if (li.paddingRight !== undefined) node.paddingRight = li.paddingRight;
+    if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
+    if (li.radius !== undefined) node.cornerRadius = li.radius;
+    if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
+    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minWidth ' + li.minWidth + ' refused (needs auto-layout); the literal min-width does not draw', e); } }
+    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minHeight ' + li.minHeight + ' refused (needs auto-layout); the literal min-height does not draw', e); } }
+    // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
+    // trampled — fillClear only clears when no fill was spec'd. The compile
+    // side already drops fillClear when a fill binding exists (applyLiterals);
+    // this runtime guard makes the emitted script safe even for hand-fed
+    // specs carrying both.
+    if (li.fillClear && !spec.fill) node.fills = [];
+    else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
+    if (li.radiusCorners) {
+      const rc = li.radiusCorners;
+      if (rc.tl !== undefined) node.topLeftRadius = rc.tl;
+      if (rc.tr !== undefined) node.topRightRadius = rc.tr;
+      if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
+      if (rc.br !== undefined) node.bottomRightRadius = rc.br;
+    }
+    if (li.strokeSides) {
+      const sw = li.strokeSides;
+      // ELLIPSE/LINE expose strokeWeight only — per-side props throw
+      // "Cannot add property strokeTopWeight, object is not extensible"
+      // (Tailwind ToggleSwitch thumb live finding, Wave B.1).
+      if ('strokeTopWeight' in node) {
+        if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+        if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+        if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+        if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+      } else {
+        const w = sw.top !== undefined ? sw.top : (sw.right !== undefined ? sw.right : (sw.bottom !== undefined ? sw.bottom : sw.left));
+        if (w !== undefined) node.strokeWeight = w;
+      }
+    }
+    if (li.width !== undefined || li.height !== undefined) {
+      node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
+      // GRID's primary axis is HORIZONTAL (GP1b: primaryAxisSizingMode='AUTO'
+      // reads back as layoutSizingHorizontal 'HUG'), like a HORIZONTAL frame.
+      const gm = (spec.layout || { mode: 'HORIZONTAL' }).mode;
+      const horizontalIsPrimary = gm === 'HORIZONTAL' || gm === 'GRID';
+      if (li.width !== undefined) {
+        if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
+      }
+      if (li.height !== undefined) {
+        if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED'; else node.primaryAxisSizingMode = 'FIXED';
+      }
     }
   }
 }
@@ -1530,6 +1617,105 @@ function applyOverlay(parent, childNode, childSpec) {
     else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
     else { childNode.x = parent.width; childNode.y = 0; }
   } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
+}
+
+// v9 shape placement: exact offsets vs the parent box, after append.
+function applyShapeAbsolute(parent, childNode, childSpec) {
+  if (!childSpec.absolute) return;
+  try {
+    // CSS overflow:visible — unclip parent AND FRAME/COMPONENT ancestors so
+    // overhanging absolute thumbs (Slider left:-10) aren't half-cut by a
+    // grandparent track that still defaults to clipsContent:true.
+    for (let n = parent; n && 'clipsContent' in n; n = n.parent) {
+      if (n.type === 'COMPONENT_SET' || n.type === 'PAGE' || n.type === 'SECTION') break;
+      if (dsDeclaredClipStops(n)) break;
+      n.clipsContent = false;
+      dsOverhangUnclip.add(n.id);
+    }
+    childNode.layoutPositioning = 'ABSOLUTE';
+    const a = childSpec.absolute;
+    // absolute-position round: STRETCH pins BOTH sides — size derives from
+    // the parent box minus the offsets (rail: left 0 + right 0, fixed height).
+    if (a.h === 'STRETCH' || a.v === 'STRETCH') {
+      const w2 = a.h === 'STRETCH' ? Math.max(parent.width - (a.left || 0) - (a.right || 0), 0.01) : childNode.width;
+      const h2 = a.v === 'STRETCH' ? Math.max(parent.height - (a.top || 0) - (a.bottom || 0), 0.01) : childNode.height;
+      childNode.resize(w2, h2);
+    }
+    childNode.constraints = {
+      horizontal: a.h === 'STRETCH' ? 'STRETCH' : a.h === 'MAX' ? 'MAX' : a.h === 'CENTER' ? 'CENTER' : 'MIN',
+      vertical: a.v === 'STRETCH' ? 'STRETCH' : a.v === 'MAX' ? 'MAX' : a.v === 'CENTER' ? 'CENTER' : 'MIN',
+    };
+    if (a.h === 'STRETCH' || a.v === 'STRETCH') {
+      childNode.x = a.h === 'STRETCH' ? (a.left || 0) : childNode.x;
+      childNode.y = a.v === 'STRETCH' ? (a.top || 0) : childNode.y;
+      if (a.h !== 'STRETCH' && a.left !== undefined) childNode.x = a.left;
+      if (a.h !== 'STRETCH' && a.right !== undefined) childNode.x = parent.width - a.right - childNode.width;
+      if (a.v !== 'STRETCH' && a.top !== undefined) childNode.y = a.top;
+      if (a.v !== 'STRETCH' && a.bottom !== undefined) childNode.y = parent.height - a.bottom - childNode.height;
+      return;
+    }
+    const w = childSpec.shape ? childSpec.shape.width : childNode.width;
+    const h = childSpec.shape ? childSpec.shape.height : childNode.height;
+    // Center of the intrinsic box in parent coordinates (MIN pins left/top,
+    // MAX pins right/bottom, CENTER centers):
+    const cx = a.left !== undefined ? a.left + w / 2 : a.right !== undefined ? parent.width - a.right - w / 2 : parent.width / 2;
+    const cy = a.top !== undefined ? a.top + h / 2 : a.bottom !== undefined ? parent.height - a.bottom - h / 2 : parent.height / 2;
+    // Rotation moves the measured box — correct against the actual bounds.
+    const bb = childNode.absoluteBoundingBox;
+    const pb = parent.absoluteBoundingBox;
+    if (bb && pb) {
+      childNode.x += cx - bb.width / 2 - (bb.x - pb.x);
+      childNode.y += cy - bb.height / 2 - (bb.y - pb.y);
+    } else {
+      childNode.x = cx - w / 2;
+      childNode.y = cy - h / 2;
+    }
+  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
+}
+
+function resizeOutOfFlow(parent, built) {
+  for (const pair of built) {
+    const childSpec = pair[0], childNode = pair[1];
+    try {
+      if (childSpec.insetOverlay) {
+        const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
+        childNode.x = o.left || 0;
+        childNode.y = o.top || 0;
+        const fw = childSpec.fixedWidth && typeof childSpec.fixedWidth.px === 'number' ? childSpec.fixedWidth.px : null;
+        const fh = childSpec.fixedHeight && typeof childSpec.fixedHeight.px === 'number' ? childSpec.fixedHeight.px : null;
+        if (fw != null || fh != null) {
+          childNode.resize(
+            Math.max(1, fw != null ? fw : (parent.width - (o.left || 0) - (o.right || 0))),
+            Math.max(1, fh != null ? fh : (parent.height - (o.top || 0) - (o.bottom || 0))),
+          );
+        } else {
+          childNode.resize(
+            Math.max(1, parent.width - (o.left || 0) - (o.right || 0)),
+            Math.max(1, parent.height - (o.top || 0) - (o.bottom || 0)),
+          );
+        }
+      } else if (childSpec.absolute && (childSpec.absolute.h === 'STRETCH' || childSpec.absolute.v === 'STRETCH')) {
+        const a = childSpec.absolute;
+        childNode.resize(
+          a.h === 'STRETCH' ? Math.max(parent.width - (a.left || 0) - (a.right || 0), 0.01) : childNode.width,
+          a.v === 'STRETCH' ? Math.max(parent.height - (a.top || 0) - (a.bottom || 0), 0.01) : childNode.height,
+        );
+        if (a.h === 'STRETCH') childNode.x = a.left || 0;
+        if (a.v === 'STRETCH') childNode.y = a.top || 0;
+      }
+    } catch (e) { degrade('FC-RT-ABSOLUTE-PLACEMENT-REFUSED', childNode, 'absolute placement was refused (parent not auto-layout); the child stayed in flow', e); }
+  }
+}
+
+function propagateOverflowVisible(childNode, parent) {
+  if (!childNode || !('clipsContent' in childNode) || childNode.clipsContent !== false) return;
+  if (!dsOverhangUnclip.has(childNode.id)) return;
+  for (let n = parent; n && 'clipsContent' in n; n = n.parent) {
+    if (n.type === 'COMPONENT_SET' || n.type === 'PAGE' || n.type === 'SECTION') break;
+    if (dsDeclaredClipStops(n)) break;
+    n.clipsContent = false;
+    dsOverhangUnclip.add(n.id);
+  }
 }
 
 async function buildNode(spec, registry) {
@@ -1720,6 +1906,71 @@ async function buildNode(spec, registry) {
       }
     }
     registry.slots.push({ spec, slot: node });
+  } else if (spec.type === 'shape') {
+    // FC-PSEUDO-STROKE-GLYPH: adjacent two-side border L collapsed to a
+    // ROUND-cap polyline SVG (see collapseTwoSideStrokeGlyph). Keep type
+    // 'shape' so absolute/rotation placement still uses shape.width/height.
+    if (spec.svg) {
+      node = figma.createNodeFromSvg(spec.svg);
+      node.fills = [];
+      node.clipsContent = false;
+      try { node.resize(spec.shape.width, spec.shape.height); } catch (e) { degrade('FC-RT-SVG-RESIZE-REFUSED', node, 'the glyph kept its intrinsic size (resize to ' + spec.shape.width + 'x' + spec.shape.height + ' refused)', e); }
+      if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;
+    } else {
+    // v9 shape (#42): a REAL parametric node with native rotation.
+    node = spec.shape.kind === 'ellipse' ? figma.createEllipse()
+      : spec.shape.kind === 'rect' ? figma.createRectangle()
+      : figma.createPolygon();
+    if (spec.shape.kind === 'polygon' && spec.shape.sides) node.pointCount = spec.shape.sides;
+    node.resize(spec.shape.width, spec.shape.height);
+    // Shape nodes ship a default gray paint — a spec with NO fill channel
+    // clears it (a canvas artifact is not contract data; Phase B deviation 3).
+    // Round 5f (B5E finding 2): a shape's LITERAL fill (lits.fillColor — the
+    // RadioButton checked dot's white, compiled from the decor's
+    // background-color literal) was DROPPED here (the shape branch never runs
+    // applyFrameSpec's litsRuntime), so the dot landed with no fill and had to
+    // be hand-corrected on canvas each re-amend. Apply it at the SOURCE:
+    // bound fill wins; else a literal fill; else clear.
+    node.fills = spec.fill
+      ? [boundPaint(spec.fill, node)]
+      : (spec.lits && spec.lits.fillColor)
+        ? [{ type: 'SOLID', color: { r: spec.lits.fillColor.r, g: spec.lits.fillColor.g, b: spec.lits.fillColor.b }, opacity: spec.lits.fillColor.a === undefined ? 1 : spec.lits.fillColor.a }]
+        : [];
+    // spec.stroke + spec.bindings apply exactly as on frames (Phase B
+    // deviation 2: the emitted shape branch silently dropped the checkbox /
+    // radio backdrop strokes and radii — the shim now lives at the source).
+    if (spec.stroke) {
+      node.strokes = [boundPaint(spec.stroke, node)];
+      node.strokeAlign = 'INSIDE';
+    }
+    // CARBON LIVE-DEFECT ROUND (D2): a shape's LITERAL RING. An unchecked
+    // Carbon checkbox box is a transparent square with a 1px border — a ring
+    // with no paint, no weight and no radius is not a box.
+    else if (spec.lits && spec.lits.strokeColor) {
+      node.strokes = [{ type: 'SOLID', color: { r: spec.lits.strokeColor.r, g: spec.lits.strokeColor.g, b: spec.lits.strokeColor.b }, opacity: spec.lits.strokeColor.a === undefined ? 1 : spec.lits.strokeColor.a }];
+      node.strokeAlign = 'INSIDE';
+    }
+    if (spec.lits && spec.lits.strokeWeight !== undefined) node.strokeWeight = spec.lits.strokeWeight;
+    if (spec.lits && spec.lits.strokeSides) {
+      const sw = spec.lits.strokeSides;
+      // ELLIPSE/LINE/etc. expose strokeWeight only — per-side props throw
+      // "Cannot add property strokeTopWeight, object is not extensible".
+      if ('strokeTopWeight' in node) {
+        if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+        if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+        if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+        if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+      } else {
+        const w = sw.top !== undefined ? sw.top : (sw.right !== undefined ? sw.right : (sw.bottom !== undefined ? sw.bottom : sw.left));
+        if (w !== undefined) node.strokeWeight = w;
+      }
+    }
+    if (spec.lits && spec.lits.radius !== undefined) node.cornerRadius = spec.lits.radius;
+    for (const [field, varName] of Object.entries(spec.bindings || {})) {
+      node.setBoundVariable(field, need(varName));
+    }
+    if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;
+    }
   } else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
@@ -1732,12 +1983,19 @@ async function buildNode(spec, registry) {
   for (const child of spec.children || []) {
     const childNode = await buildNode(child, registry);
     node.appendChild(childNode);
+    propagateOverflowVisible(childNode, node);
     built.push([child, childNode]);
     applyOverlay(node, childNode, child);
+    applyShapeAbsolute(node, childNode, child);
     if (child.pct != null) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -1765,6 +2023,7 @@ async function buildNode(spec, registry) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
   }
+  resizeOutOfFlow(node, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID
@@ -1788,6 +2047,14 @@ async function buildNode(spec, registry) {
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
       Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
+  }
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
+    }
   }
   return node;
 }
@@ -2150,8 +2417,10 @@ async function amendSet(set, C) {
       for (const childSpec of v.spec.children || []) {
         const childNode = await buildNode(childSpec, registry);
         comp.appendChild(childNode);
+    propagateOverflowVisible(childNode, comp);
         built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
+    applyShapeAbsolute(comp, childNode, childSpec);
         if (childSpec.pct != null) {
           try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
         }
@@ -2167,6 +2436,7 @@ async function amendSet(set, C) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
       }
+  resizeOutOfFlow(comp, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID
@@ -2358,8 +2628,10 @@ async function amendComponent(comp, C) {
   for (const childSpec of v.spec.children || []) {
     const childNode = await buildNode(childSpec, registry);
     comp.appendChild(childNode);
+    propagateOverflowVisible(childNode, comp);
     built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
+    applyShapeAbsolute(comp, childNode, childSpec);
     if (childSpec.pct != null) {
       try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
@@ -2375,6 +2647,7 @@ async function amendComponent(comp, C) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
   }
+  resizeOutOfFlow(comp, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID

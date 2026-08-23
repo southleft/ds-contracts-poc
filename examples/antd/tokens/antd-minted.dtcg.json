@@ -440,6 +440,20 @@
             "$type": "dimension"
           }
         },
+        "height": {
+          "small": {
+            "$value": "{control-height-sm}",
+            "$type": "dimension"
+          },
+          "middle": {
+            "$value": "{control-height}",
+            "$type": "dimension"
+          },
+          "large": {
+            "$value": "{control-height-lg}",
+            "$type": "dimension"
+          }
+        },
         "opacity": {
           "off": {
             "$value": "1",
@@ -4178,6 +4192,10 @@
             "$type": "dimension"
           }
         },
+        "width": {
+          "$value": "288px",
+          "$type": "dimension"
+        },
         "background-color-state-active": {
           "filled": {
             "$value": "#ffffff",
@@ -5521,6 +5539,10 @@
             "$value": "20px",
             "$type": "dimension"
           }
+        },
+        "width": {
+          "$value": "288px",
+          "$type": "dimension"
         }
       },
       "alert-icon": {
@@ -5760,9 +5782,37 @@
           "$value": "{avatar-text-font-size}",
           "$type": "dimension"
         },
+        "height": {
+          "small": {
+            "$value": "{avatar-container-size-sm}",
+            "$type": "dimension"
+          },
+          "default": {
+            "$value": "{avatar-container-size}",
+            "$type": "dimension"
+          },
+          "large": {
+            "$value": "{avatar-container-size-lg}",
+            "$type": "dimension"
+          }
+        },
         "line-height": {
           "$value": "22px",
           "$type": "dimension"
+        },
+        "width": {
+          "small": {
+            "$value": "{avatar-container-size-sm}",
+            "$type": "dimension"
+          },
+          "default": {
+            "$value": "{avatar-container-size}",
+            "$type": "dimension"
+          },
+          "large": {
+            "$value": "{avatar-container-size-lg}",
+            "$type": "dimension"
+          }
         }
       },
       "label": {
@@ -5785,6 +5835,12 @@
       }
     },
     "progress": {
+      "root": {
+        "width": {
+          "$value": "288px",
+          "$type": "dimension"
+        }
+      },
       "progress-inner": {
         "background-color": {
           "$value": "#0000000f",

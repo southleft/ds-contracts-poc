@@ -28,8 +28,13 @@
   line-height: var(--imported-shared-size-22);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
+  padding-bottom: var(--imported-alert-root-padding-bottom-off);
+  padding-left: var(--imported-alert-root-padding-left-off);
+  padding-right: var(--imported-alert-root-padding-right-off);
+  padding-top: var(--imported-alert-root-padding-top-off);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
+  width: var(--imported-alert-root-width);
   border-bottom-style: solid;
   border-left-style: solid;
   border-right-style: solid;
@@ -74,7 +79,9 @@
 .alert-icon {
   display: flex;
   align-items: center;
+  font-size: var(--imported-alert-alert-icon-font-size-off);
   line-height: var(--imported-shared-size-0);
+  margin-right: var(--imported-alert-alert-icon-margin-right-off);
   aspect-ratio: 1 / 1;
   box-sizing: border-box;
   font-family: Roboto, Helvetica, Arial, sans-serif;
@@ -144,6 +151,8 @@
 
 .alert-content {
   display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
   color: var(--imported-shared-color-000000e0);
   flex-grow: var(--imported-alert-alert-content-flex-grow);
   font-size: var(--imported-shared-size-14);
@@ -156,7 +165,9 @@
 
 .label {
   color: var(--imported-shared-color-000000e0);
+  font-size: var(--imported-alert-label-font-size-off);
   font-weight: var(--imported-alert-label-font-weight);
+  margin-bottom: var(--imported-alert-label-margin-bottom-off);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   display: block;

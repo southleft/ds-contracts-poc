@@ -563,6 +563,18 @@
           ]
         }
       },
+      "stylesWhen": [
+        {
+          "prop": "type",
+          "equals": "dashed",
+          "styles": {
+            "border-bottom-style": "dashed",
+            "border-left-style": "dashed",
+            "border-right-style": "dashed",
+            "border-top-style": "dashed"
+          }
+        }
+      ],
       "declared": {
         "font-family": "Roboto, Helvetica, Arial, sans-serif",
         "position": "relative",
@@ -599,6 +611,7 @@
         "color": "{imported.button.root.color.{type}.{danger}}",
         "column-gap": "{imported.button.root.column-gap}",
         "left": "{imported.shared.size-0}",
+        "opacity": "{imported.button.root.opacity.off}",
         "outline-color": "{imported.button.root.outline-color.{type}.{danger}}",
         "padding-bottom": "{imported.shared.size-0}",
         "padding-top": "{imported.shared.size-0}",
@@ -633,6 +646,7 @@
               "border-top-left-radius": "{imported.button.root.border-top-left-radius.large}",
               "border-top-right-radius": "{imported.button.root.border-top-right-radius.large}",
               "font-size": "{imported.button.root.font-size.large}",
+              "height": "{imported.button.root.height.large}",
               "padding-left": "{imported.button.root.padding-left.large}",
               "padding-right": "{imported.button.root.padding-right.large}"
             },
@@ -642,6 +656,7 @@
               "border-top-left-radius": "{imported.button.root.border-top-left-radius.middle}",
               "border-top-right-radius": "{imported.button.root.border-top-right-radius.middle}",
               "font-size": "{imported.button.root.font-size.middle}",
+              "height": "{imported.button.root.height.middle}",
               "padding-left": "{imported.button.root.padding-left.middle}",
               "padding-right": "{imported.button.root.padding-right.middle}"
             },
@@ -651,6 +666,7 @@
               "border-top-left-radius": "{imported.button.root.border-top-left-radius.small}",
               "border-top-right-radius": "{imported.button.root.border-top-right-radius.small}",
               "font-size": "{imported.button.root.font-size.small}",
+              "height": "{imported.button.root.height.small}",
               "padding-left": "{imported.button.root.padding-left.small}",
               "padding-right": "{imported.button.root.padding-right.small}"
             }

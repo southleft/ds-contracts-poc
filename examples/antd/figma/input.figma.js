@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "antd.input",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Input — generated from contract antd.input v0.2.0 † (50 code-only facts — see plugin report)",
+    "description": "Input — generated from contract antd.input v0.2.0 † (55 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -16,12 +16,7 @@ const COMPONENTS = [
         "default": false
       }
     ],
-    "textProps": [
-      {
-        "property": "Placeholder",
-        "default": "Input"
-      }
-    ],
+    "textProps": [],
     "fontStyles": [
       "Medium"
     ],
@@ -35,7 +30,7 @@ const COMPONENTS = [
           "name": "Size=Middle, Status=Error, Variant=Outlined",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -54,9 +49,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/outlined",
             "strokeTopWeight": "imported/input/root/border-top-width/outlined"
           },
-          "fill": "imported/input/root/background-color/unset/outlined",
-          "stroke": "imported/input/root/border-top-color/unset/outlined",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/error/outlined",
+          "stroke": "imported/input/root/border-top-color/error/outlined",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color/error/outlined",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -68,7 +86,7 @@ const COMPONENTS = [
           "name": "Size=Middle, Status=Error, Variant=Borderless",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -87,9 +105,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/borderless",
             "strokeTopWeight": "imported/input/root/border-top-width/borderless"
           },
-          "fill": "imported/input/root/background-color/unset/borderless",
-          "stroke": "imported/input/root/border-top-color/unset/borderless",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/error/borderless",
+          "stroke": "imported/input/root/border-top-color/error/borderless",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color/error/borderless",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -101,7 +142,7 @@ const COMPONENTS = [
           "name": "Size=Middle, Status=Error, Variant=Filled",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -120,9 +161,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/filled",
             "strokeTopWeight": "imported/input/root/border-top-width/filled"
           },
-          "fill": "imported/input/root/background-color/unset/filled",
-          "stroke": "imported/input/root/border-top-color/unset/filled",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/error/filled",
+          "stroke": "imported/input/root/border-top-color/error/filled",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color/error/filled",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -134,7 +198,7 @@ const COMPONENTS = [
           "name": "Size=Middle, Status=Error, Variant=Underlined",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -153,8 +217,31 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/underlined",
             "strokeTopWeight": "imported/input/root/border-top-width/underlined"
           },
-          "fill": "imported/input/root/background-color/unset/underlined",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/error/underlined",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color/error/underlined",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -166,7 +253,7 @@ const COMPONENTS = [
           "name": "Size=Middle, Status=Warning, Variant=Outlined",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -185,9 +272,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/outlined",
             "strokeTopWeight": "imported/input/root/border-top-width/outlined"
           },
-          "fill": "imported/input/root/background-color/unset/outlined",
-          "stroke": "imported/input/root/border-top-color/unset/outlined",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/warning/outlined",
+          "stroke": "imported/input/root/border-top-color/warning/outlined",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color/warning/outlined",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -199,7 +309,7 @@ const COMPONENTS = [
           "name": "Size=Middle, Status=Warning, Variant=Borderless",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -218,9 +328,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/borderless",
             "strokeTopWeight": "imported/input/root/border-top-width/borderless"
           },
-          "fill": "imported/input/root/background-color/unset/borderless",
-          "stroke": "imported/input/root/border-top-color/unset/borderless",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/warning/borderless",
+          "stroke": "imported/input/root/border-top-color/warning/borderless",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color/warning/borderless",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -232,7 +365,7 @@ const COMPONENTS = [
           "name": "Size=Middle, Status=Warning, Variant=Filled",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -251,9 +384,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/filled",
             "strokeTopWeight": "imported/input/root/border-top-width/filled"
           },
-          "fill": "imported/input/root/background-color/unset/filled",
-          "stroke": "imported/input/root/border-top-color/unset/filled",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/warning/filled",
+          "stroke": "imported/input/root/border-top-color/warning/filled",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color/warning/filled",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -265,7 +421,7 @@ const COMPONENTS = [
           "name": "Size=Middle, Status=Warning, Variant=Underlined",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -284,8 +440,31 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/underlined",
             "strokeTopWeight": "imported/input/root/border-top-width/underlined"
           },
-          "fill": "imported/input/root/background-color/unset/underlined",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/warning/underlined",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color/warning/underlined",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -297,7 +476,7 @@ const COMPONENTS = [
           "name": "Size=Small, Status=Error, Variant=Outlined",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -316,9 +495,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/outlined",
             "strokeTopWeight": "imported/input/root/border-top-width/outlined"
           },
-          "fill": "imported/input/root/background-color/unset/outlined",
-          "stroke": "imported/input/root/border-top-color/unset/outlined",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/error/outlined",
+          "stroke": "imported/input/root/border-top-color/error/outlined",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/small",
+              "lineHeightVar": "imported/input/root/line-height/small",
+              "textFill": "imported/input/root/color/error/outlined",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -330,7 +532,7 @@ const COMPONENTS = [
           "name": "Size=Small, Status=Error, Variant=Borderless",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -349,9 +551,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/borderless",
             "strokeTopWeight": "imported/input/root/border-top-width/borderless"
           },
-          "fill": "imported/input/root/background-color/unset/borderless",
-          "stroke": "imported/input/root/border-top-color/unset/borderless",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/error/borderless",
+          "stroke": "imported/input/root/border-top-color/error/borderless",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/small",
+              "lineHeightVar": "imported/input/root/line-height/small",
+              "textFill": "imported/input/root/color/error/borderless",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -363,7 +588,7 @@ const COMPONENTS = [
           "name": "Size=Small, Status=Error, Variant=Filled",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -382,9 +607,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/filled",
             "strokeTopWeight": "imported/input/root/border-top-width/filled"
           },
-          "fill": "imported/input/root/background-color/unset/filled",
-          "stroke": "imported/input/root/border-top-color/unset/filled",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/error/filled",
+          "stroke": "imported/input/root/border-top-color/error/filled",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/small",
+              "lineHeightVar": "imported/input/root/line-height/small",
+              "textFill": "imported/input/root/color/error/filled",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -396,7 +644,7 @@ const COMPONENTS = [
           "name": "Size=Small, Status=Error, Variant=Underlined",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -415,8 +663,31 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/underlined",
             "strokeTopWeight": "imported/input/root/border-top-width/underlined"
           },
-          "fill": "imported/input/root/background-color/unset/underlined",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/error/underlined",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/small",
+              "lineHeightVar": "imported/input/root/line-height/small",
+              "textFill": "imported/input/root/color/error/underlined",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -428,7 +699,7 @@ const COMPONENTS = [
           "name": "Size=Small, Status=Warning, Variant=Outlined",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -447,9 +718,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/outlined",
             "strokeTopWeight": "imported/input/root/border-top-width/outlined"
           },
-          "fill": "imported/input/root/background-color/unset/outlined",
-          "stroke": "imported/input/root/border-top-color/unset/outlined",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/warning/outlined",
+          "stroke": "imported/input/root/border-top-color/warning/outlined",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/small",
+              "lineHeightVar": "imported/input/root/line-height/small",
+              "textFill": "imported/input/root/color/warning/outlined",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -461,7 +755,7 @@ const COMPONENTS = [
           "name": "Size=Small, Status=Warning, Variant=Borderless",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -480,9 +774,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/borderless",
             "strokeTopWeight": "imported/input/root/border-top-width/borderless"
           },
-          "fill": "imported/input/root/background-color/unset/borderless",
-          "stroke": "imported/input/root/border-top-color/unset/borderless",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/warning/borderless",
+          "stroke": "imported/input/root/border-top-color/warning/borderless",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/small",
+              "lineHeightVar": "imported/input/root/line-height/small",
+              "textFill": "imported/input/root/color/warning/borderless",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -494,7 +811,7 @@ const COMPONENTS = [
           "name": "Size=Small, Status=Warning, Variant=Filled",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -513,9 +830,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/filled",
             "strokeTopWeight": "imported/input/root/border-top-width/filled"
           },
-          "fill": "imported/input/root/background-color/unset/filled",
-          "stroke": "imported/input/root/border-top-color/unset/filled",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/warning/filled",
+          "stroke": "imported/input/root/border-top-color/warning/filled",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/small",
+              "lineHeightVar": "imported/input/root/line-height/small",
+              "textFill": "imported/input/root/color/warning/filled",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -527,7 +867,7 @@ const COMPONENTS = [
           "name": "Size=Small, Status=Warning, Variant=Underlined",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -546,8 +886,31 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/underlined",
             "strokeTopWeight": "imported/input/root/border-top-width/underlined"
           },
-          "fill": "imported/input/root/background-color/unset/underlined",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/warning/underlined",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/small",
+              "lineHeightVar": "imported/input/root/line-height/small",
+              "textFill": "imported/input/root/color/warning/underlined",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -559,7 +922,7 @@ const COMPONENTS = [
           "name": "Size=Large, Status=Error, Variant=Outlined",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -578,9 +941,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/outlined",
             "strokeTopWeight": "imported/input/root/border-top-width/outlined"
           },
-          "fill": "imported/input/root/background-color/unset/outlined",
-          "stroke": "imported/input/root/border-top-color/unset/outlined",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/error/outlined",
+          "stroke": "imported/input/root/border-top-color/error/outlined",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 16,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/large",
+              "lineHeightVar": "imported/input/root/line-height/large",
+              "textFill": "imported/input/root/color/error/outlined",
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -592,7 +978,7 @@ const COMPONENTS = [
           "name": "Size=Large, Status=Error, Variant=Borderless",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -611,9 +997,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/borderless",
             "strokeTopWeight": "imported/input/root/border-top-width/borderless"
           },
-          "fill": "imported/input/root/background-color/unset/borderless",
-          "stroke": "imported/input/root/border-top-color/unset/borderless",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/error/borderless",
+          "stroke": "imported/input/root/border-top-color/error/borderless",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 16,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/large",
+              "lineHeightVar": "imported/input/root/line-height/large",
+              "textFill": "imported/input/root/color/error/borderless",
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -625,7 +1034,7 @@ const COMPONENTS = [
           "name": "Size=Large, Status=Error, Variant=Filled",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -644,9 +1053,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/filled",
             "strokeTopWeight": "imported/input/root/border-top-width/filled"
           },
-          "fill": "imported/input/root/background-color/unset/filled",
-          "stroke": "imported/input/root/border-top-color/unset/filled",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/error/filled",
+          "stroke": "imported/input/root/border-top-color/error/filled",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 16,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/large",
+              "lineHeightVar": "imported/input/root/line-height/large",
+              "textFill": "imported/input/root/color/error/filled",
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -658,7 +1090,7 @@ const COMPONENTS = [
           "name": "Size=Large, Status=Error, Variant=Underlined",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -677,8 +1109,31 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/underlined",
             "strokeTopWeight": "imported/input/root/border-top-width/underlined"
           },
-          "fill": "imported/input/root/background-color/unset/underlined",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/error/underlined",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 16,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/large",
+              "lineHeightVar": "imported/input/root/line-height/large",
+              "textFill": "imported/input/root/color/error/underlined",
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -690,7 +1145,7 @@ const COMPONENTS = [
           "name": "Size=Large, Status=Warning, Variant=Outlined",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -709,9 +1164,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/outlined",
             "strokeTopWeight": "imported/input/root/border-top-width/outlined"
           },
-          "fill": "imported/input/root/background-color/unset/outlined",
-          "stroke": "imported/input/root/border-top-color/unset/outlined",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/warning/outlined",
+          "stroke": "imported/input/root/border-top-color/warning/outlined",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 16,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/large",
+              "lineHeightVar": "imported/input/root/line-height/large",
+              "textFill": "imported/input/root/color/warning/outlined",
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -723,7 +1201,7 @@ const COMPONENTS = [
           "name": "Size=Large, Status=Warning, Variant=Borderless",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -742,9 +1220,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/borderless",
             "strokeTopWeight": "imported/input/root/border-top-width/borderless"
           },
-          "fill": "imported/input/root/background-color/unset/borderless",
-          "stroke": "imported/input/root/border-top-color/unset/borderless",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/warning/borderless",
+          "stroke": "imported/input/root/border-top-color/warning/borderless",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 16,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/large",
+              "lineHeightVar": "imported/input/root/line-height/large",
+              "textFill": "imported/input/root/color/warning/borderless",
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -756,7 +1257,7 @@ const COMPONENTS = [
           "name": "Size=Large, Status=Warning, Variant=Filled",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -775,9 +1276,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/filled",
             "strokeTopWeight": "imported/input/root/border-top-width/filled"
           },
-          "fill": "imported/input/root/background-color/unset/filled",
-          "stroke": "imported/input/root/border-top-color/unset/filled",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/warning/filled",
+          "stroke": "imported/input/root/border-top-color/warning/filled",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 16,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/large",
+              "lineHeightVar": "imported/input/root/line-height/large",
+              "textFill": "imported/input/root/color/warning/filled",
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -789,7 +1313,7 @@ const COMPONENTS = [
           "name": "Size=Large, Status=Warning, Variant=Underlined",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "bindings": {
@@ -808,8 +1332,31 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/underlined",
             "strokeTopWeight": "imported/input/root/border-top-width/underlined"
           },
-          "fill": "imported/input/root/background-color/unset/underlined",
-          "clipsContent": true
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
+          "fill": "imported/input/root/background-color/warning/underlined",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 16,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/large",
+              "lineHeightVar": "imported/input/root/line-height/large",
+              "textFill": "imported/input/root/color/warning/underlined",
+              "lineHeight": {
+                "value": 24,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       }
     ],
@@ -852,9 +1399,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/outlined",
             "strokeTopWeight": "imported/input/root/border-top-width/outlined"
           },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
           "fill": "imported/input/root/background-color-state-disabled/outlined",
-          "stroke": "imported/input/root/border-top-color/unset/outlined",
-          "clipsContent": true
+          "stroke": "imported/input/root/border-top-color/error/outlined",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color-state-disabled/unset/outlined",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -885,9 +1455,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/borderless",
             "strokeTopWeight": "imported/input/root/border-top-width/borderless"
           },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
           "fill": "imported/input/root/background-color-state-disabled/borderless",
-          "stroke": "imported/input/root/border-top-color/unset/borderless",
-          "clipsContent": true
+          "stroke": "imported/input/root/border-top-color/error/borderless",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color-state-disabled/unset/borderless",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -918,9 +1511,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/filled",
             "strokeTopWeight": "imported/input/root/border-top-width/filled"
           },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
           "fill": "imported/input/root/background-color-state-disabled/filled",
-          "stroke": "imported/input/root/border-top-color/unset/filled",
-          "clipsContent": true
+          "stroke": "imported/input/root/border-top-color/error/filled",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color-state-disabled/unset/filled",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -951,8 +1567,31 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/underlined",
             "strokeTopWeight": "imported/input/root/border-top-width/underlined"
           },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
           "fill": "imported/input/root/background-color-state-disabled/underlined",
-          "clipsContent": true
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color-state-disabled/unset/underlined",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -983,8 +1622,12 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/outlined",
             "strokeTopWeight": "imported/input/root/border-top-width/outlined"
           },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
           "fill": "imported/input/root/background-color-state-focus-visible/outlined",
-          "stroke": "imported/input/root/border-top-color/unset/outlined",
+          "stroke": "imported/input/root/border-top-color/error/outlined",
           "clipsContent": true,
           "effectStack": [
             {
@@ -998,6 +1641,25 @@ const COMPONENTS = [
                 "a": 0.1
               },
               "spread": 2
+            }
+          ],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color/error/outlined",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
             }
           ]
         }
@@ -1030,10 +1692,33 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/borderless",
             "strokeTopWeight": "imported/input/root/border-top-width/borderless"
           },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
           "fill": "imported/input/root/background-color-state-focus-visible/borderless",
-          "stroke": "imported/input/root/border-top-color/unset/borderless",
+          "stroke": "imported/input/root/border-top-color/error/borderless",
           "clipsContent": true,
-          "effectStack": []
+          "effectStack": [],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color/error/borderless",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -1064,10 +1749,33 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/filled",
             "strokeTopWeight": "imported/input/root/border-top-width/filled"
           },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
           "fill": "imported/input/root/background-color-state-focus-visible/filled",
-          "stroke": "imported/input/root/border-top-color/unset/filled",
+          "stroke": "imported/input/root/border-top-color/error/filled",
           "clipsContent": true,
-          "effectStack": []
+          "effectStack": [],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color/error/filled",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -1098,9 +1806,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/underlined",
             "strokeTopWeight": "imported/input/root/border-top-width/underlined"
           },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
           "fill": "imported/input/root/background-color-state-focus-visible/underlined",
           "clipsContent": true,
-          "effectStack": []
+          "effectStack": [],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color/error/underlined",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -1131,9 +1862,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/outlined",
             "strokeTopWeight": "imported/input/root/border-top-width/outlined"
           },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
           "fill": "imported/input/root/background-color-state-hover/unset/outlined",
-          "stroke": "imported/input/root/border-top-color/unset/outlined",
-          "clipsContent": true
+          "stroke": "imported/input/root/border-top-color/error/outlined",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color/error/outlined",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -1164,9 +1918,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/borderless",
             "strokeTopWeight": "imported/input/root/border-top-width/borderless"
           },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
           "fill": "imported/input/root/background-color-state-hover/unset/borderless",
-          "stroke": "imported/input/root/border-top-color/unset/borderless",
-          "clipsContent": true
+          "stroke": "imported/input/root/border-top-color/error/borderless",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color/error/borderless",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -1197,9 +1974,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/filled",
             "strokeTopWeight": "imported/input/root/border-top-width/filled"
           },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
           "fill": "imported/input/root/background-color-state-hover/unset/filled",
-          "stroke": "imported/input/root/border-top-color/unset/filled",
-          "clipsContent": true
+          "stroke": "imported/input/root/border-top-color/error/filled",
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color/error/filled",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -1230,8 +2030,31 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/underlined",
             "strokeTopWeight": "imported/input/root/border-top-width/underlined"
           },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
           "fill": "imported/input/root/background-color-state-hover/unset/underlined",
-          "clipsContent": true
+          "clipsContent": true,
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color/error/underlined",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -1262,8 +2085,12 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/outlined",
             "strokeTopWeight": "imported/input/root/border-top-width/outlined"
           },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
           "fill": "imported/input/root/background-color-state-active/outlined",
-          "stroke": "imported/input/root/border-top-color/unset/outlined",
+          "stroke": "imported/input/root/border-top-color/error/outlined",
           "clipsContent": true,
           "effectStack": [
             {
@@ -1277,6 +2104,25 @@ const COMPONENTS = [
                 "a": 0.1
               },
               "spread": 2
+            }
+          ],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color/error/outlined",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
             }
           ]
         }
@@ -1309,10 +2155,33 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/borderless",
             "strokeTopWeight": "imported/input/root/border-top-width/borderless"
           },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
           "fill": "imported/input/root/background-color-state-active/borderless",
-          "stroke": "imported/input/root/border-top-color/unset/borderless",
+          "stroke": "imported/input/root/border-top-color/error/borderless",
           "clipsContent": true,
-          "effectStack": []
+          "effectStack": [],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color/error/borderless",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -1343,10 +2212,33 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/filled",
             "strokeTopWeight": "imported/input/root/border-top-width/filled"
           },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
           "fill": "imported/input/root/background-color-state-active/filled",
-          "stroke": "imported/input/root/border-top-color/unset/filled",
+          "stroke": "imported/input/root/border-top-color/error/filled",
           "clipsContent": true,
-          "effectStack": []
+          "effectStack": [],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color/error/filled",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       },
       {
@@ -1377,9 +2269,32 @@ const COMPONENTS = [
             "strokeRightWeight": "imported/input/root/border-right-width/underlined",
             "strokeTopWeight": "imported/input/root/border-top-width/underlined"
           },
+          "fixedWidth": {
+            "px": 288,
+            "varName": "imported/input/root/width"
+          },
           "fill": "imported/input/root/background-color-state-active/underlined",
           "clipsContent": true,
-          "effectStack": []
+          "effectStack": [],
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Input",
+              "fontSize": 14,
+              "fontStyle": "Medium",
+              "fontSizeVar": "imported/input/root/font-size/middle",
+              "lineHeightVar": "imported/input/root/line-height/middle",
+              "textFill": "imported/input/root/color/error/underlined",
+              "lineHeight": {
+                "value": 22,
+                "unit": "PIXELS"
+              },
+              "fontFamily": "Roboto",
+              "textTruncation": true,
+              "contentProp": "Placeholder"
+            }
+          ]
         }
       }
     ],
@@ -1733,22 +2648,35 @@ const COMPONENTS = [
         "part": "root",
         "kind": "channel",
         "channel": "border-bottom-color",
-        "value": "{imported.input.root.border-bottom-color.unset.underlined}",
+        "value": "{imported.input.root.border-bottom-color.error.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 10,
+          "count": 7,
           "of": 40,
           "names": [
             "Size=Middle, Status=Error, Variant=Underlined",
-            "Size=Middle, Status=Warning, Variant=Underlined",
             "Size=Small, Status=Error, Variant=Underlined",
-            "Size=Small, Status=Warning, Variant=Underlined",
             "Size=Large, Status=Error, Variant=Underlined",
-            "Size=Large, Status=Warning, Variant=Underlined",
             "Size=Middle, Status=Error, Variant=Underlined, State=Disabled",
             "Size=Middle, Status=Error, Variant=Underlined, State=Focus Visible",
             "Size=Middle, Status=Error, Variant=Underlined, State=Hover",
             "Size=Middle, Status=Error, Variant=Underlined, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.input.root.border-bottom-color.warning.{variant}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 40,
+          "names": [
+            "Size=Middle, Status=Warning, Variant=Underlined",
+            "Size=Small, Status=Warning, Variant=Underlined",
+            "Size=Large, Status=Warning, Variant=Underlined"
           ]
         }
       },
@@ -1824,22 +2752,35 @@ const COMPONENTS = [
         "part": "root",
         "kind": "channel",
         "channel": "border-left-color",
-        "value": "{imported.input.root.border-left-color.unset.underlined}",
+        "value": "{imported.input.root.border-left-color.error.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 10,
+          "count": 7,
           "of": 40,
           "names": [
             "Size=Middle, Status=Error, Variant=Underlined",
-            "Size=Middle, Status=Warning, Variant=Underlined",
             "Size=Small, Status=Error, Variant=Underlined",
-            "Size=Small, Status=Warning, Variant=Underlined",
             "Size=Large, Status=Error, Variant=Underlined",
-            "Size=Large, Status=Warning, Variant=Underlined",
             "Size=Middle, Status=Error, Variant=Underlined, State=Disabled",
             "Size=Middle, Status=Error, Variant=Underlined, State=Focus Visible",
             "Size=Middle, Status=Error, Variant=Underlined, State=Hover",
             "Size=Middle, Status=Error, Variant=Underlined, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.input.root.border-left-color.warning.{variant}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 40,
+          "names": [
+            "Size=Middle, Status=Warning, Variant=Underlined",
+            "Size=Small, Status=Warning, Variant=Underlined",
+            "Size=Large, Status=Warning, Variant=Underlined"
           ]
         }
       },
@@ -1915,22 +2856,35 @@ const COMPONENTS = [
         "part": "root",
         "kind": "channel",
         "channel": "border-right-color",
-        "value": "{imported.input.root.border-right-color.unset.underlined}",
+        "value": "{imported.input.root.border-right-color.error.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 10,
+          "count": 7,
           "of": 40,
           "names": [
             "Size=Middle, Status=Error, Variant=Underlined",
-            "Size=Middle, Status=Warning, Variant=Underlined",
             "Size=Small, Status=Error, Variant=Underlined",
-            "Size=Small, Status=Warning, Variant=Underlined",
             "Size=Large, Status=Error, Variant=Underlined",
-            "Size=Large, Status=Warning, Variant=Underlined",
             "Size=Middle, Status=Error, Variant=Underlined, State=Disabled",
             "Size=Middle, Status=Error, Variant=Underlined, State=Focus Visible",
             "Size=Middle, Status=Error, Variant=Underlined, State=Hover",
             "Size=Middle, Status=Error, Variant=Underlined, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.input.root.border-right-color.warning.{variant}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 40,
+          "names": [
+            "Size=Middle, Status=Warning, Variant=Underlined",
+            "Size=Small, Status=Warning, Variant=Underlined",
+            "Size=Large, Status=Warning, Variant=Underlined"
           ]
         }
       },
@@ -2006,22 +2960,35 @@ const COMPONENTS = [
         "part": "root",
         "kind": "channel",
         "channel": "border-top-color",
-        "value": "{imported.input.root.border-top-color.unset.underlined}",
+        "value": "{imported.input.root.border-top-color.error.{variant}}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
-          "count": 10,
+          "count": 7,
           "of": 40,
           "names": [
             "Size=Middle, Status=Error, Variant=Underlined",
-            "Size=Middle, Status=Warning, Variant=Underlined",
             "Size=Small, Status=Error, Variant=Underlined",
-            "Size=Small, Status=Warning, Variant=Underlined",
             "Size=Large, Status=Error, Variant=Underlined",
-            "Size=Large, Status=Warning, Variant=Underlined",
             "Size=Middle, Status=Error, Variant=Underlined, State=Disabled",
             "Size=Middle, Status=Error, Variant=Underlined, State=Focus Visible",
             "Size=Middle, Status=Error, Variant=Underlined, State=Hover",
             "Size=Middle, Status=Error, Variant=Underlined, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.input.root.border-top-color.warning.{variant}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 40,
+          "names": [
+            "Size=Middle, Status=Warning, Variant=Underlined",
+            "Size=Small, Status=Warning, Variant=Underlined",
+            "Size=Large, Status=Warning, Variant=Underlined"
           ]
         }
       },
@@ -2053,6 +3020,17 @@ const COMPONENTS = [
         "channel": "right",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "status [unset]",
+        "value": "error|warning",
+        "reason": "defaultless axis — the library's own rendering when \"status\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 2 declared values only, and a proposal read back from the canvas will call \"error\" the default (FC-UNSET-PLANE-UNDRAWN)",
         "variants": {
           "count": 40,
           "of": 40
@@ -2473,35 +3451,6 @@ function ensureHostSection(page, target, displayName) {
 }
 
 
-function remeasureBirthBox(node, label, hasW, hasH) {
-  for (const axis of ['Vertical', 'Horizontal']) {
-    // A DECLARED SIZE IS NOT A BIRTH BOX. This repair dissolves Figma's
-    // 100x100 default by shrinking a HUG axis to 1 and letting it re-measure
-    // — which is right for a node whose size is supposed to come from its
-    // content, and destructive for one the CONTRACT sized. A childless frame
-    // has nothing to re-measure against, so the axis hugs to 1 and stays
-    // there: MUI's switch-track is declared 34x14 and shipped 1x1 exactly
-    // this way (the compile receipt's pin caught it, and the pin was right).
-    if (axis === 'Horizontal' && hasW) continue;
-    if (axis === 'Vertical' && hasH) continue;
-    const prop = 'layoutSizing' + axis;
-    let mode;
-    try { mode = node[prop]; } catch (e) { degrade('FC-RT-BIRTH-BOX-UNREADABLE', node, '"' + label + '": ' + prop + ' could not be read, so the HUG birth-box re-measure was skipped on this axis', e); continue; }
-    if (mode !== 'HUG') continue;
-    try {
-      node[prop] = 'FIXED';
-      node.resize(axis === 'Horizontal' ? 1 : node.width, axis === 'Vertical' ? 1 : node.height);
-      node[prop] = 'HUG';
-    } catch (e) {
-      throw new Error(
-        '"' + label + '": ' + axis.toLowerCase() + " axis reports HUG but kept Figma's 100px " +
-        'birth box, and the FIXED round-trip that forces the re-measure was refused (' +
-        e.message + ') — FC-SLOT-BIRTH-BOX',
-      );
-    }
-  }
-}
-
 // FC-OVERFLOW-CLIP-LOST: node ids whose clip the CONTRACT declared
 // (overflow-x/y hidden|clip). The unclip walks consult this so a declared clip
 // can never be reverted silently by an overhanging descendant.
@@ -2590,6 +3539,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.effectStack) {
     // v15: full box-shadow stack — multi-layer + inset as native effects.
@@ -2654,6 +3605,59 @@ async function buildNode(spec, registry) {
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
+    if (typeof spec.lineHeight === 'number') node.lineHeight = { unit: 'PIXELS', value: spec.lineHeight };
+    else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
+      node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
+    }
+    if (spec.fontFamily) {
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* a RETRY, not a swallow: the next candidate is this family's own spelling of the same face; the final outcome is named below */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+        degrade('FC-FONT-STYLE-UNRESOLVED', node, spec.fontFamily + ' / ' + wantStyle + ' is not available in this file (tried ' + styleCandidates.join(', ') + '); Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones');
+      }
+    }
+    if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
+    if (spec.textCase) node.textCase = spec.textCase;
+    if (spec.textDecoration) node.textDecoration = spec.textDecoration;
+    if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
+    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { degrade('FC-RT-TRUNCATION-REFUSED', node, 'textTruncation ENDING refused (older Plugin API); the declared ellipsis does not draw', e); } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -2793,6 +3797,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -2820,29 +3829,13 @@ async function buildNode(spec, registry) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
   }
-  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
-  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
-  // childless is affected — one with children has already relaid out — and GRID
-  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // A DECLARED layout is required, and that is not the timidity it looks like.
-  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
-  // root was a latent hole. It was speculation — the divider roots this fix
-  // exists for all declare layout — and the canvas refuted it: MUI Switch's
-  // switch-track is a childless FRAME with no declared layout that measures
-  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
-  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
-  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
-  // node whose sizing this repair understands.
-  //
-  // `children` IS the container test, and it stays explicit: a TEXT node
-  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
-  // birth box; a text or vector leaf measures itself.
-  if (spec.layout && spec.layout.mode !== 'GRID' &&
-      'layoutSizingVertical' in node && node.children &&
-      (spec.type === 'slot' || node.children.length === 0)) {
-    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
-      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
+    }
   }
   return node;
 }
@@ -3222,30 +4215,6 @@ async function amendSet(set, C) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
       }
-  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
-  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
-  // childless is affected — one with children has already relaid out — and GRID
-  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // A DECLARED layout is required, and that is not the timidity it looks like.
-  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
-  // root was a latent hole. It was speculation — the divider roots this fix
-  // exists for all declare layout — and the canvas refuted it: MUI Switch's
-  // switch-track is a childless FRAME with no declared layout that measures
-  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
-  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
-  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
-  // node whose sizing this repair understands.
-  //
-  // `children` IS the container test, and it stays explicit: a TEXT node
-  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
-  // birth box; a text or vector leaf measures itself.
-  if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
-      'layoutSizingVertical' in comp && comp.children &&
-      (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
-  }
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -3429,30 +4398,6 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
-  }
-  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
-  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
-  // childless is affected — one with children has already relaid out — and GRID
-  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // A DECLARED layout is required, and that is not the timidity it looks like.
-  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
-  // root was a latent hole. It was speculation — the divider roots this fix
-  // exists for all declare layout — and the canvas refuted it: MUI Switch's
-  // switch-track is a childless FRAME with no declared layout that measures
-  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
-  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
-  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
-  // node whose sizing this repair understands.
-  //
-  // `children` IS the container test, and it stays explicit: a TEXT node
-  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
-  // birth box; a text or vector leaf measures itself.
-  if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
-      'layoutSizingVertical' in comp && comp.children &&
-      (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);
