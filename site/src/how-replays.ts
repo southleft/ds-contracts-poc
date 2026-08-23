@@ -18,6 +18,14 @@
  *   · scale — the dependency graph of the committed whole-kit capture,
  *     counted and layered from the file; the real sortByDependencies over
  *     the shipping contracts; the committed mega-session receipt.
+ *   · flow — the "How it flows" page (docs/29): the real canvas round trip
+ *     (extract/figma/roundtrip.ts — propose + compareContracts over the
+ *     committed main-file dump) re-run and HELD to the committed
+ *     ROUNDTRIP.md table; the real Figma engine's compileComponentData over
+ *     the shipping Button and TopNavItem contracts; the ToggleSwitch
+ *     code-only facts read from the committed Flowbite bundle; the three
+ *     refusal sentences sliced verbatim from source; the dump grammar read
+ *     from both producers. Every value is re-derived or the build refuses.
  */
 import {
   cpSync,
@@ -285,10 +293,237 @@ export interface ScaleReplay {
   megaSession: Record<string, unknown>;
 }
 
+// ---------------------------------------------------------------------------
+// Flow — docs/29 "How it flows", replayed
+// ---------------------------------------------------------------------------
+
+export interface FlowCodeOnlyFact {
+  part: string;
+  kind: string;
+  channel: string;
+  value: string;
+  reason: string;
+  variants: { count: number; of: number };
+}
+
+export interface FlowCompiled {
+  contractId: string;
+  variants: number;
+  firstVariant: string;
+  /** The root fill binding of the first variant (a slash variable name), or null. */
+  rootFill: string | null;
+  textProps: Array<{ property: string; default: string }>;
+  codeOnlyFacts: FlowCodeOnlyFact[];
+  statePreviews: number;
+}
+
+export interface FlowReplay {
+  /** The committed ROUNDTRIP.md table, re-run at build and held to it. */
+  roundtrip: {
+    rows: Array<{ component: string; matched: number; canvasAbsent: number; mismatch: number }>;
+    badge: {
+      matched: string[];
+      canvasAbsent: Array<{ subject: string; detail: string }>;
+      mismatch: Array<{ subject: string; detail: string }>;
+      notes: string[];
+      unbound: number;
+      projection: string;
+      /** The fixture's own provenance — it predates dumpVersion stamps. */
+      dumpVersion: string | null;
+      hasPropertyDefinitions: boolean;
+    };
+  };
+  button: FlowCompiled;
+  topNavItem: FlowCompiled;
+  /** ToggleSwitch's code-only facts, read from the committed Flowbite bundle. */
+  toggleSwitch: { contractId: string; facts: FlowCodeOnlyFact[]; byKind: Record<string, number> };
+  /** The bundle-wide total, read from the same file. */
+  bundleFactTotal: number;
+  /** The three refusal sentences, sliced verbatim from source at build. */
+  refusals: { bundle: string; plan: string; generate: string };
+  /** The dump grammar, read from both producers. */
+  dumpGrammar: { plugin: string; rest: string };
+}
+
+/** Slice a labeled excerpt out of a real repo file — refuses by name when the
+ *  pattern stops matching, so a quoted sentence can never silently go stale. */
+function sliceSource(rel: string, pattern: RegExp, group = 0): string {
+  const text = readFileSync(path.join(ROOT, rel), "utf8");
+  const m = text.match(pattern);
+  if (!m || m[group] === undefined) {
+    throw new Error(
+      `how-flow: ${rel} no longer matches ${pattern} — the quoted refusal sentence went stale; update docs/29 and this slice together`,
+    );
+  }
+  return m[group];
+}
+
+async function flowReplay(): Promise<FlowReplay> {
+  const [{ runRoundtrip }, { createFigmaEngine }, schemaMod] = await Promise.all([
+    import("../../extract/figma/roundtrip.js"),
+    import("../../core/emit-figma-script.js"),
+    import("../../scripts/contract-schema.js"),
+  ]);
+  const { ContractSchema } = schemaMod;
+
+  // 1 · The canvas round trip — the SAME function that writes ROUNDTRIP.md.
+  const fixtureRel = "extract/figma/fixtures/main-file-dumps.json";
+  const results = runRoundtrip(ROOT, path.join(ROOT, fixtureRel), path.join(ROOT, "contracts"));
+  const count = (fs: Array<{ status: string }>, status: string) => fs.filter((f) => f.status === status).length;
+  const rows = results.map((r) => ({
+    component: r.component,
+    matched: count(r.findings, "matched"),
+    canvasAbsent: count(r.findings, "canvas-absent"),
+    mismatch: count(r.findings, "mismatch"),
+  }));
+  // Hold the replay to the committed receipt, row by row.
+  const receipt = readFileSync(path.join(ROOT, "extract/figma/ROUNDTRIP.md"), "utf8");
+  for (const row of rows) {
+    const re = new RegExp(`^\\| ${row.component} \\| (\\d+) \\| (\\d+) \\| (\\d+) \\|`, "m");
+    const m = receipt.match(re);
+    if (!m) throw new Error(`how-flow: extract/figma/ROUNDTRIP.md has no table row for ${row.component}`);
+    const want = [Number(m[1]), Number(m[2]), Number(m[3])];
+    const got = [row.matched, row.canvasAbsent, row.mismatch];
+    if (want.join("/") !== got.join("/")) {
+      throw new Error(
+        `how-flow: the round trip replayed at build (${row.component} ${got.join("/")}) disagrees with the committed ROUNDTRIP.md (${want.join("/")}) — re-run npm run extract:figma:roundtrip and commit the receipt`,
+      );
+    }
+  }
+  const badgeResult = results.find((r) => r.component === "Badge");
+  if (!badgeResult) throw new Error(`how-flow: ${fixtureRel} has no Badge set`);
+  const dump = readJson(fixtureRel) as {
+    _provenance?: { dumpVersion?: string };
+    Badge?: { propertyDefinitions?: unknown };
+  };
+  const badge = {
+    matched: badgeResult.findings.filter((f) => f.status === "matched").map((f) => f.subject),
+    canvasAbsent: badgeResult.findings
+      .filter((f) => f.status === "canvas-absent")
+      .map((f) => ({ subject: f.subject, detail: f.detail ?? "" })),
+    mismatch: badgeResult.findings
+      .filter((f) => f.status === "mismatch")
+      .map((f) => ({ subject: f.subject, detail: f.detail ?? "" })),
+    notes: badgeResult.proposal.notes,
+    unbound: badgeResult.proposal.unbound.length,
+    projection: String((badgeResult.proposal.projection as { status?: string }).status ?? "unknown"),
+    dumpVersion: dump._provenance?.dumpVersion ?? null,
+    hasPropertyDefinitions: dump.Badge?.propertyDefinitions !== undefined,
+  };
+
+  // 2 · The real Figma engine over the shipping contracts.
+  const tokens = {
+    primitives: readJson("tokens/primitives.tokens.json"),
+    semantic: readJson("tokens/semantic.tokens.json"),
+    light: readJson("tokens/modes/semantic.light.tokens.json"),
+    dark: readJson("tokens/modes/semantic.dark.tokens.json"),
+    brands: { default: readJson("tokens/modes/brand.default.tokens.json") },
+  };
+  const icons = new Map<string, string>(
+    readdirSync(path.join(ROOT, "assets/icons"))
+      .filter((f) => f.endsWith(".svg"))
+      .sort()
+      .map((f) => [f.replace(/\.svg$/, ""), readFileSync(path.join(ROOT, "assets/icons", f), "utf8").trim()]),
+  );
+  const contractsDir = path.join(ROOT, "contracts");
+  const byId = new Map(
+    readdirSync(contractsDir)
+      .filter((f) => f.endsWith(".contract.json"))
+      .map((f) => ContractSchema.parse(readJson(path.join("contracts", f))))
+      .map((c) => [c.id, c] as const),
+  );
+  const engine = createFigmaEngine({ tokens, icons });
+  const compile = (id: string, expectFacts: number, expectVariants: number): FlowCompiled => {
+    const contract = byId.get(id);
+    if (!contract) throw new Error(`how-flow: contracts/ has no ${id}`);
+    const data = engine.compileComponentData(contract, byId);
+    const first = data.variants[0];
+    const out: FlowCompiled = {
+      contractId: data.contractId,
+      variants: data.variants.length,
+      firstVariant: first?.name ?? "",
+      rootFill: (first?.spec as { fill?: string } | undefined)?.fill ?? null,
+      textProps: data.textProps,
+      codeOnlyFacts: (data.codeOnlyFacts ?? []) as FlowCodeOnlyFact[],
+      statePreviews: data.stateVariants?.length ?? 0,
+    };
+    if (out.codeOnlyFacts.length !== expectFacts || out.variants !== expectVariants) {
+      throw new Error(
+        `how-flow: ${id} compiled to ${out.variants} variants / ${out.codeOnlyFacts.length} code-only facts; docs/29 states ${expectVariants} / ${expectFacts} — update the doc and this pin together`,
+      );
+    }
+    return out;
+  };
+  const button = compile("ds.button", 0, 12);
+  if (button.firstVariant !== "Variant=Primary, Size=Medium" || button.rootFill !== "color/action/primary/background") {
+    throw new Error(
+      `how-flow: ds.button first variant is "${button.firstVariant}" with root fill ${button.rootFill}; docs/29 E1 states "Variant=Primary, Size=Medium" / color/action/primary/background`,
+    );
+  }
+  const topNavItem = compile("ds.top-nav-item", 0, 2);
+  if (JSON.stringify(topNavItem.textProps) !== JSON.stringify([{ property: "Href", default: "#" }])) {
+    throw new Error(`how-flow: ds.top-nav-item textProps are ${JSON.stringify(topNavItem.textProps)}; docs/29 E3 states [{Href, #}]`);
+  }
+
+  // 3 · ToggleSwitch's code-only facts, from the committed bundle (the
+  // per-contract counts are pinned by npm run code-only-facts:check).
+  const bundle = readJson("examples/tailwind/figma/tailwind.bundle.json") as {
+    codeOnlyFacts: Array<{ contractId: string; name: string; facts: FlowCodeOnlyFact[] }>;
+  };
+  const ts = bundle.codeOnlyFacts.find((c) => c.contractId === "flowbite.toggleswitch");
+  if (!ts) throw new Error("how-flow: tailwind.bundle.json carries no flowbite.toggleswitch code-only facts");
+  const byKind: Record<string, number> = {};
+  for (const f of ts.facts) byKind[f.kind] = (byKind[f.kind] ?? 0) + 1;
+  if (ts.facts.length !== 12 || byKind.channel !== 4 || byKind.declared !== 7 || byKind.event !== 1) {
+    throw new Error(
+      `how-flow: flowbite.toggleswitch carries ${ts.facts.length} code-only facts (${JSON.stringify(byKind)}); docs/29 E2 states 12 = 4 channel / 7 declared / 1 event`,
+    );
+  }
+  const bundleFactTotal = bundle.codeOnlyFacts.reduce((n, c) => n + c.facts.length, 0);
+  if (bundleFactTotal !== 54) {
+    throw new Error(`how-flow: the Flowbite bundle carries ${bundleFactTotal} code-only facts; docs/29 states 54`);
+  }
+
+  // 4 · The refusal sentences, verbatim from source.
+  const refusals = {
+    bundle: sliceSource(
+      "packages/cli/src/commands/figma.ts",
+      /`✘ Refused — \$\{hardRefusals\.length\} of \$\{contracts\.length\} contract\(s\) do not compile against this token set; the plugin would refuse each of them on paste, so nothing was written:\\n`/,
+    )
+      .slice(1, -1)
+      .replace("${hardRefusals.length}", "N")
+      .replace("${contracts.length}", "M")
+      .replace("\\n", ""),
+    plan: sliceSource(
+      "figma-sync/plugin/engine/entry.ts",
+      /`\$\{refusals\.length\} of \$\{ordered\.length\} contract\(s\) refused — nothing was planned; every refusal is listed below\.`/,
+    )
+      .slice(1, -1)
+      .replace("${refusals.length}", "N")
+      .replace("${ordered.length}", "M"),
+    generate: sliceSource(
+      "scripts/generate-components.ts",
+      /a contract that fails to\n \* parse, validate, or emit is REFUSED BY NAME and leaves no file; every\n \* contract that validates is generated; a contract depending on a refused\n \* one is refused too/,
+    ).replace(/\n \* /g, " "),
+  };
+
+  // 5 · The dump grammar, from both producers.
+  const dumpGrammar = {
+    plugin: sliceSource("extract/figma/dump.plugin.js", /dumpVersion: '(\d+\.\d+)'/, 1),
+    rest: sliceSource("extract/figma/rest/map.ts", /export const REST_DUMP_VERSION = '(\d+\.\d+)'/, 1),
+  };
+  if (dumpGrammar.plugin !== dumpGrammar.rest) {
+    throw new Error(`how-flow: dump grammar differs between producers (plugin ${dumpGrammar.plugin}, REST ${dumpGrammar.rest})`);
+  }
+
+  return { roundtrip: { rows, badge }, button, topNavItem, toggleSwitch: { contractId: ts.contractId, facts: ts.facts, byKind }, bundleFactTotal, refusals, dumpGrammar };
+}
+
 export interface HowReplays {
   lifecycle: LifecycleReplay;
   nesting: NestingReplay;
   scale: ScaleReplay;
+  flow: FlowReplay;
 }
 
 // ---------------------------------------------------------------------------
@@ -807,6 +1042,7 @@ export async function loadHowReplays(): Promise<HowReplays> {
     lifecycle: await lifecycleReplay(),
     nesting: await nestingReplay(),
     scale: await scaleReplay(),
+    flow: await flowReplay(),
   };
   return cached;
 }

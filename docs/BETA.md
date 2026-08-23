@@ -142,7 +142,7 @@ needs a `FIGMA_TOKEN` (env or `.env.local`); since 2026-08-22 it runs in
 the **catalog-visual** lane with the repository's secret — it is no longer
 excluded from CI.
 
-`maintain` today is fifteen steps: leftover string→boolean emit
+`maintain` today is sixteen steps: leftover string→boolean emit
 (`string-boolean-coercion:check`) + token-apply prune doors
 (`token-set-prune:check`) + exact proposal (`exact-proposal:check`) + hop-2
 bundle freshness (`flowbite-bundle-fresh:check` — the committed

@@ -1160,3 +1160,74 @@ tr:last-child td {
     padding: 32px 16px 40px;
   }
 }
+
+/* ---------------------------------------------------- rendered doc (flow) */
+/* The How-it-flows page renders docs/29 through marked; these rules give the
+   markdown's bare elements the site's shapes (the figure/table helpers wrap
+   what they can at build; blockquotes, nested lists and wide tables cannot). */
+.doc > blockquote {
+  border-left: 2px solid var(--border-strong);
+  margin: 0 0 1.5em;
+  padding: 4px 0 4px 18px;
+  color: var(--muted);
+  max-width: var(--measure);
+}
+
+.doc > blockquote p {
+  margin: 0;
+}
+
+.doc ul ul {
+  margin: 0.35em 0 0.5em;
+}
+
+.doc .table-wrap td {
+  font-size: 14px;
+}
+
+.doc .table-wrap td:first-child {
+  white-space: nowrap;
+}
+
+.doc .diagram {
+  margin: 28px 0 32px;
+}
+
+.doc h2 + hr,
+.doc hr + h2 {
+  margin-top: 0;
+}
+
+/* Build-time engine replays boxed beside the prose — same ground as the
+   receipt line, one border, so a reader can tell "the engine said" from
+   "the doc says". */
+.replay {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  background: var(--surface-2);
+  padding: 18px 20px 6px;
+  margin: 24px 0 32px;
+}
+
+.replay__head {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--faint);
+  max-width: none;
+}
+
+.replay p,
+.replay ul {
+  max-width: none;
+}
+
+.replay .receipt-line {
+  max-width: none;
+  margin-bottom: 12px;
+}
+
+.replay .code-figure {
+  margin-bottom: 14px;
+}
