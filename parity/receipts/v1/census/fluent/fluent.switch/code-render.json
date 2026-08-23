@@ -1,0 +1,227 @@
+{
+  "id": "fluent.switch",
+  "name": "Switch",
+  "library": "fluent",
+  "contractPath": "examples/fluent/contracts/switch.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/fluent/figma/fluent.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 10,
+      "sampled": 6,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "checked",
+        "type": "enum",
+        "default": "unchecked"
+      },
+      {
+        "name": "labelPosition",
+        "type": "enum",
+        "default": "after"
+      }
+    ],
+    "states": [
+      "disabled",
+      "focus-visible"
+    ],
+    "parts": [
+      "root",
+      "input",
+      "indicator",
+      "label"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.shared.color-00000000",
+      "imported.shared.color-bdbdbd",
+      "imported.shared.size-0",
+      "imported.shared.size-1",
+      "imported.shared.size-10000",
+      "imported.shared.size-8",
+      "imported.switch.indicator.background-color.checked",
+      "imported.switch.indicator.background-color.unchecked",
+      "imported.switch.indicator.border-bottom-color.checked",
+      "imported.switch.indicator.border-bottom-color.unchecked",
+      "imported.switch.indicator.border-left-color.checked",
+      "imported.switch.indicator.border-left-color.unchecked",
+      "imported.switch.indicator.border-right-color.checked",
+      "imported.switch.indicator.border-right-color.unchecked",
+      "imported.switch.indicator.border-top-color.checked",
+      "imported.switch.indicator.border-top-color.unchecked",
+      "imported.switch.indicator.color.checked",
+      "imported.switch.indicator.color.unchecked",
+      "imported.switch.indicator.fill.checked",
+      "imported.switch.indicator.fill.unchecked",
+      "imported.switch.indicator.flex-shrink",
+      "imported.switch.indicator.font-size",
+      "imported.switch.indicator.margin-top.above",
+      "imported.switch.indicator.margin-top.after",
+      "imported.switch.indicator.margin-top.before",
+      "imported.switch.indicator.width",
+      "imported.switch.input.color",
+      "imported.switch.input.color-state-disabled",
+      "imported.switch.input.font-size",
+      "imported.switch.input.height.above",
+      "imported.switch.input.height.after",
+      "imported.switch.input.height.before",
+      "imported.switch.input.left.above",
+      "imported.switch.input.left.after",
+      "imported.switch.input.left.before",
+      "imported.switch.input.opacity",
+      "imported.switch.input.outline-color",
+      "imported.switch.input.right.above",
+      "imported.switch.input.right.after",
+      "imported.switch.input.right.before",
+      "imported.switch.input.top.above",
+      "imported.switch.input.top.after",
+      "imported.switch.input.top.before",
+      "imported.switch.input.width.above",
+      "imported.switch.input.width.after",
+      "imported.switch.input.width.before",
+      "imported.switch.label.font-size",
+      "imported.switch.label.font-weight",
+      "imported.switch.label.line-height",
+      "imported.switch.label.padding-bottom.above",
+      "imported.switch.label.padding-bottom.after",
+      "imported.switch.label.padding-bottom.before",
+      "imported.switch.label.padding-left.above",
+      "imported.switch.label.padding-left.after",
+      "imported.switch.label.padding-left.before",
+      "imported.switch.label.padding-right.above",
+      "imported.switch.label.padding-right.after",
+      "imported.switch.label.padding-right.before",
+      "imported.switch.label.padding-top.above",
+      "imported.switch.label.padding-top.after",
+      "imported.switch.label.padding-top.before",
+      "imported.switch.root.height.above",
+      "imported.switch.root.height.after",
+      "imported.switch.root.height.before",
+      "imported.switch.root.width.above",
+      "imported.switch.root.width.after",
+      "imported.switch.root.width.before"
+    ],
+    "icons": [
+      "switch-indicator"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "checked-unchecked__label-position-after",
+      "variant": "Checked=Unchecked, Label Position=After",
+      "kind": "base",
+      "subst": {
+        "checked": "unchecked",
+        "labelPosition": "after"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-checked-unchecked__label-position-after.png",
+      "contentBox": {
+        "width": 111.38,
+        "height": 36
+      }
+    },
+    {
+      "slug": "checked-unchecked__label-position-above",
+      "variant": "Checked=Unchecked, Label Position=Above",
+      "kind": "base",
+      "subst": {
+        "checked": "unchecked",
+        "labelPosition": "above"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-checked-unchecked__label-position-above.png",
+      "contentBox": {
+        "width": 113.23,
+        "height": 56
+      }
+    },
+    {
+      "slug": "checked-unchecked__label-position-before",
+      "variant": "Checked=Unchecked, Label Position=Before",
+      "kind": "base",
+      "subst": {
+        "checked": "unchecked",
+        "labelPosition": "before"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-checked-unchecked__label-position-before.png",
+      "contentBox": {
+        "width": 111.38,
+        "height": 36
+      }
+    },
+    {
+      "slug": "checked-checked__label-position-after",
+      "variant": "Checked=Checked, Label Position=After",
+      "kind": "base",
+      "subst": {
+        "checked": "checked",
+        "labelPosition": "after"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-checked-checked__label-position-after.png",
+      "contentBox": {
+        "width": 111.38,
+        "height": 36
+      }
+    },
+    {
+      "slug": "checked-unchecked__label-position-after__state-disabled",
+      "variant": "Checked=Unchecked, Label Position=After, State=Disabled",
+      "kind": "state",
+      "state": "disabled",
+      "subst": {
+        "checked": "unchecked",
+        "labelPosition": "after"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "refused",
+      "error": "state \"disabled\" drives boolean prop \"disabled\", which fluent.switch does not declare"
+    },
+    {
+      "slug": "checked-unchecked__label-position-after__state-focus-visible",
+      "variant": "Checked=Unchecked, Label Position=After, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "subst": {
+        "checked": "unchecked",
+        "labelPosition": "after"
+      },
+      "bools": {},
+      "interaction": "focus-visible",
+      "status": "rendered",
+      "png": "code-checked-unchecked__label-position-after__state-focus-visible.png",
+      "contentBox": {
+        "width": 111.38,
+        "height": 36
+      }
+    }
+  ],
+  "rendered": 5,
+  "refused": 1,
+  "unavailable": null
+}

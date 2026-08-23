@@ -1,0 +1,384 @@
+{
+  "id": "fluent.button",
+  "name": "Button",
+  "library": "fluent",
+  "contractPath": "examples/fluent/contracts/button.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/fluent/figma/fluent.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 65,
+      "sampled": 13,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "appearance",
+        "type": "enum",
+        "default": "secondary"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "medium"
+      },
+      {
+        "name": "shape",
+        "type": "enum",
+        "default": "rounded"
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Button"
+      }
+    ],
+    "states": [
+      "active",
+      "disabled",
+      "focus-visible",
+      "hover"
+    ],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [
+      {
+        "part": "root",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.button.root.background-color.outline",
+      "imported.button.root.background-color.primary",
+      "imported.button.root.background-color.secondary",
+      "imported.button.root.background-color.subtle",
+      "imported.button.root.background-color.transparent",
+      "imported.button.root.border-bottom-color.outline",
+      "imported.button.root.border-bottom-color.primary",
+      "imported.button.root.border-bottom-color.secondary",
+      "imported.button.root.border-bottom-color.subtle",
+      "imported.button.root.border-bottom-color.transparent",
+      "imported.button.root.border-bottom-left-radius.circular",
+      "imported.button.root.border-bottom-left-radius.rounded",
+      "imported.button.root.border-bottom-left-radius.square",
+      "imported.button.root.border-bottom-right-radius.circular",
+      "imported.button.root.border-bottom-right-radius.rounded",
+      "imported.button.root.border-bottom-right-radius.square",
+      "imported.button.root.border-left-color.outline",
+      "imported.button.root.border-left-color.primary",
+      "imported.button.root.border-left-color.secondary",
+      "imported.button.root.border-left-color.subtle",
+      "imported.button.root.border-left-color.transparent",
+      "imported.button.root.border-right-color.outline",
+      "imported.button.root.border-right-color.primary",
+      "imported.button.root.border-right-color.secondary",
+      "imported.button.root.border-right-color.subtle",
+      "imported.button.root.border-right-color.transparent",
+      "imported.button.root.border-top-color.outline",
+      "imported.button.root.border-top-color.primary",
+      "imported.button.root.border-top-color.secondary",
+      "imported.button.root.border-top-color.subtle",
+      "imported.button.root.border-top-color.transparent",
+      "imported.button.root.border-top-left-radius.circular",
+      "imported.button.root.border-top-left-radius.rounded",
+      "imported.button.root.border-top-left-radius.square",
+      "imported.button.root.border-top-right-radius.circular",
+      "imported.button.root.border-top-right-radius.rounded",
+      "imported.button.root.border-top-right-radius.square",
+      "imported.button.root.color-state-disabled",
+      "imported.button.root.color.outline",
+      "imported.button.root.color.primary",
+      "imported.button.root.color.secondary",
+      "imported.button.root.color.subtle",
+      "imported.button.root.color.transparent",
+      "imported.button.root.font-size.large",
+      "imported.button.root.font-size.medium",
+      "imported.button.root.font-size.small",
+      "imported.button.root.font-weight.large",
+      "imported.button.root.font-weight.medium",
+      "imported.button.root.font-weight.small",
+      "imported.button.root.line-height.large",
+      "imported.button.root.line-height.medium",
+      "imported.button.root.line-height.small",
+      "imported.button.root.min-width.large",
+      "imported.button.root.min-width.medium",
+      "imported.button.root.min-width.small",
+      "imported.button.root.outline-color-state-disabled",
+      "imported.button.root.outline-color-state-focus-visible",
+      "imported.button.root.outline-color.outline",
+      "imported.button.root.outline-color.primary",
+      "imported.button.root.outline-color.secondary",
+      "imported.button.root.outline-color.subtle",
+      "imported.button.root.outline-color.transparent",
+      "imported.button.root.outline-width-state-focus-visible",
+      "imported.button.root.padding-bottom.large",
+      "imported.button.root.padding-bottom.medium",
+      "imported.button.root.padding-bottom.small",
+      "imported.button.root.padding-left.large",
+      "imported.button.root.padding-left.medium",
+      "imported.button.root.padding-left.small",
+      "imported.button.root.padding-right.large",
+      "imported.button.root.padding-right.medium",
+      "imported.button.root.padding-right.small",
+      "imported.button.root.padding-top.large",
+      "imported.button.root.padding-top.medium",
+      "imported.button.root.padding-top.small",
+      "imported.button.root.z-index-state-focus-visible",
+      "imported.shared.color-000000",
+      "imported.shared.size-1"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "appearance-secondary__size-medium__shape-rounded",
+      "variant": "Appearance=Secondary, Size=Medium, Shape=Rounded",
+      "kind": "base",
+      "subst": {
+        "appearance": "secondary",
+        "size": "medium",
+        "shape": "rounded"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-secondary__size-medium__shape-rounded.png",
+      "contentBox": {
+        "width": 96,
+        "height": 32
+      }
+    },
+    {
+      "slug": "appearance-secondary__size-medium__shape-circular",
+      "variant": "Appearance=Secondary, Size=Medium, Shape=Circular",
+      "kind": "base",
+      "subst": {
+        "appearance": "secondary",
+        "size": "medium",
+        "shape": "circular"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-secondary__size-medium__shape-circular.png",
+      "contentBox": {
+        "width": 96,
+        "height": 32
+      }
+    },
+    {
+      "slug": "appearance-secondary__size-medium__shape-square",
+      "variant": "Appearance=Secondary, Size=Medium, Shape=Square",
+      "kind": "base",
+      "subst": {
+        "appearance": "secondary",
+        "size": "medium",
+        "shape": "square"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-secondary__size-medium__shape-square.png",
+      "contentBox": {
+        "width": 96,
+        "height": 32
+      }
+    },
+    {
+      "slug": "appearance-secondary__size-small__shape-rounded",
+      "variant": "Appearance=Secondary, Size=Small, Shape=Rounded",
+      "kind": "base",
+      "subst": {
+        "appearance": "secondary",
+        "size": "small",
+        "shape": "rounded"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-secondary__size-small__shape-rounded.png",
+      "contentBox": {
+        "width": 64,
+        "height": 24
+      }
+    },
+    {
+      "slug": "appearance-secondary__size-large__shape-rounded",
+      "variant": "Appearance=Secondary, Size=Large, Shape=Rounded",
+      "kind": "base",
+      "subst": {
+        "appearance": "secondary",
+        "size": "large",
+        "shape": "rounded"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-secondary__size-large__shape-rounded.png",
+      "contentBox": {
+        "width": 96,
+        "height": 40
+      }
+    },
+    {
+      "slug": "appearance-primary__size-medium__shape-rounded",
+      "variant": "Appearance=Primary, Size=Medium, Shape=Rounded",
+      "kind": "base",
+      "subst": {
+        "appearance": "primary",
+        "size": "medium",
+        "shape": "rounded"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-primary__size-medium__shape-rounded.png",
+      "contentBox": {
+        "width": 96,
+        "height": 32
+      }
+    },
+    {
+      "slug": "appearance-outline__size-medium__shape-rounded",
+      "variant": "Appearance=Outline, Size=Medium, Shape=Rounded",
+      "kind": "base",
+      "subst": {
+        "appearance": "outline",
+        "size": "medium",
+        "shape": "rounded"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-outline__size-medium__shape-rounded.png",
+      "contentBox": {
+        "width": 96,
+        "height": 32
+      }
+    },
+    {
+      "slug": "appearance-subtle__size-medium__shape-rounded",
+      "variant": "Appearance=Subtle, Size=Medium, Shape=Rounded",
+      "kind": "base",
+      "subst": {
+        "appearance": "subtle",
+        "size": "medium",
+        "shape": "rounded"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-subtle__size-medium__shape-rounded.png",
+      "contentBox": {
+        "width": 96,
+        "height": 32
+      }
+    },
+    {
+      "slug": "appearance-transparent__size-medium__shape-rounded",
+      "variant": "Appearance=Transparent, Size=Medium, Shape=Rounded",
+      "kind": "base",
+      "subst": {
+        "appearance": "transparent",
+        "size": "medium",
+        "shape": "rounded"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-transparent__size-medium__shape-rounded.png",
+      "contentBox": {
+        "width": 96,
+        "height": 32
+      }
+    },
+    {
+      "slug": "appearance-secondary__size-medium__shape-rounded__state-active",
+      "variant": "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Active",
+      "kind": "state",
+      "state": "active",
+      "subst": {
+        "appearance": "secondary",
+        "size": "medium",
+        "shape": "rounded"
+      },
+      "bools": {},
+      "interaction": "active",
+      "status": "rendered",
+      "png": "code-appearance-secondary__size-medium__shape-rounded__state-active.png",
+      "contentBox": {
+        "width": 96,
+        "height": 32
+      }
+    },
+    {
+      "slug": "appearance-secondary__size-medium__shape-rounded__state-disabled",
+      "variant": "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Disabled",
+      "kind": "state",
+      "state": "disabled",
+      "subst": {
+        "appearance": "secondary",
+        "size": "medium",
+        "shape": "rounded"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "refused",
+      "error": "state \"disabled\" drives boolean prop \"disabled\", which fluent.button does not declare"
+    },
+    {
+      "slug": "appearance-secondary__size-medium__shape-rounded__state-focus-visible",
+      "variant": "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "subst": {
+        "appearance": "secondary",
+        "size": "medium",
+        "shape": "rounded"
+      },
+      "bools": {},
+      "interaction": "focus-visible",
+      "status": "rendered",
+      "png": "code-appearance-secondary__size-medium__shape-rounded__state-focus-visible.png",
+      "contentBox": {
+        "width": 96,
+        "height": 32
+      }
+    },
+    {
+      "slug": "appearance-secondary__size-medium__shape-rounded__state-hover",
+      "variant": "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Hover",
+      "kind": "state",
+      "state": "hover",
+      "subst": {
+        "appearance": "secondary",
+        "size": "medium",
+        "shape": "rounded"
+      },
+      "bools": {},
+      "interaction": "hover",
+      "status": "rendered",
+      "png": "code-appearance-secondary__size-medium__shape-rounded__state-hover.png",
+      "contentBox": {
+        "width": 96,
+        "height": 32
+      }
+    }
+  ],
+  "rendered": 12,
+  "refused": 1,
+  "unavailable": null
+}

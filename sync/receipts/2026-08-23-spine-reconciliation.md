@@ -75,3 +75,29 @@ npm run sync:observe -- --adopt altitude.button,altitude.heading,astryx.badge,as
 # D1 — altitude.avatar: restamp via plugin (WRITE), then --adopt
 ```
 Process hole to close separately: nothing records a plugin apply / console-loop rebuild into the ledger (README's "generate loops call sync record" is unwired) — every B row is that hole.
+
+## Decisions recorded — 2026-08-23, branch sync/spine-decisions (the 59 rows above, closed)
+
+Policy landed with this branch: **a red scheduled run means a row needs a human decision that is not yet
+recorded.** Every row carries its decision in `sync/ledger.json` (`decision`: kind, note, recordedAt,
+evidence, the facts it was taken against, and for `pending-*` the exact command); the pending ones are
+rendered to `sync/PENDING.md`. Figma was read only (REST `GET /versions` + `GET /nodes?version=…` to date
+each canvas write; no write, no branch, no PR from the spine).
+
+| class | n | outcome | dating (canvas write vs semantic code commit) |
+|---|---|---|---|
+| **B2** | 50 | **adopt** — `--adopt` with note `2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point` | code half re-verified first: `migrateDocumentToV17(bytes at the ledger's commit)` == HEAD for 46 rows; == HEAD after stripping `bindings.*.anchors` for 4 (ds.banner, ds.card, ds.token, flowbite.button). 0 rows failed the check → none moved to B3 |
+| **B3** astryx.banner | 1 | **adopt** | canvas 08-09 12:46Z → 08-10 00:56Z → 08-11 17:45Z (three restamps, TJ) vs code 98cfa8f2 08-09 20:30Z → canvas newer |
+| **B3** mui.accordion | 1 | **adopt** | canvas stamp 08-10 07:07Z, dump (no restamp) 08-17 12:30:29Z vs code 16889547 08-17 12:30:08Z → canvas newer by 21 s, same session's fix (VISUAL-REVIEW-2026-08-17) |
+| **B3** mui.avatar | 1 | **adopt** | canvas stamp 08-10 18:45Z, dump (no restamp) 08-17 12:30:29Z vs code 16889547 08-17 12:30:08Z → canvas newer by 21 s |
+| **B3** flowbite.alert | 1 | **pending-reapply** | canvas last moved 08-08 07:35Z vs code 968958cd 08-16 23:38Z (dismiss → declared event) → code newer |
+| **B3** mui.slider | 1 | **pending-reapply** | canvas last moved 08-11 15:40Z vs code 01aa5243 08-11 17:28Z (thumb shadow-pseudo fold) → code newer by 1 h 48 min |
+| **C** flowbite.toggleswitch | 1 | **pending-reapply** | stamp == ledger since 08-06; code 968958cd 08-16 (role=switch, onToggle) |
+| **D1** altitude.avatar | 1 | **pending-restamp** | no stamp at any of the 30 versions since 08-06 14:01Z; dump identical throughout; code codemod-only |
+| **D2** mui.fab, mui.link | 2 | **pending-reconcile** | both halves moved in the same minute 08-17 (canvas hand-edit 12:30:29Z without restamp; contract 16889547 12:30:08Z) — a human chooses canvas (`--adopt`) or contract (re-apply the set's `.figma.js`) |
+
+Live, read-only, after recording: **53 adopted, 6 pending (3 pending-reapply, 1 pending-restamp,
+2 pending-reconcile), 0 undecided → `sync:spine` exit 0, `Verdict: drift-decided`.** The six pending rows
+are each a Figma write to a non-scratch file (GnQnj… / 59mLQ…) or a human choice — out of bounds for
+automation by the 2026-08-22 scratch-file rule — and stay listed in `sync/PENDING.md` until a human runs
+the command there and records it with `--adopt`.

@@ -1,0 +1,194 @@
+{
+  "id": "astryx.banner",
+  "name": "Banner",
+  "library": "astryx",
+  "contractPath": "examples/astryx/contracts/banner.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/astryx/figma/astryx.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 8,
+      "sampled": 5,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "status",
+        "type": "enum",
+        "default": "info"
+      },
+      {
+        "name": "container",
+        "type": "enum",
+        "default": "card"
+      },
+      {
+        "name": "isDismissable",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "title",
+        "type": "text",
+        "default": "A new software update is available."
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "default": "See what changed in this version."
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "header",
+      "iconWrapper",
+      "iconInfo",
+      "iconWarning",
+      "iconError",
+      "iconSuccess",
+      "headerContent",
+      "title",
+      "description"
+    ],
+    "contentSlots": [
+      {
+        "part": "title",
+        "prop": "title"
+      },
+      {
+        "part": "description",
+        "prop": "description"
+      }
+    ],
+    "tokenRefs": [
+      "color-background-blue",
+      "color-error-muted",
+      "color-success-muted",
+      "color-text-blue",
+      "color-text-green",
+      "color-text-primary",
+      "color-text-red",
+      "color-text-secondary",
+      "color-text-yellow",
+      "color-warning-muted",
+      "font-weight-semibold",
+      "spacing-2",
+      "spacing-3",
+      "spacing-4",
+      "text-label-leading",
+      "text-label-size",
+      "text-supporting-leading",
+      "text-supporting-size",
+      "text-supporting-weight"
+    ],
+    "icons": [
+      "banner-error",
+      "banner-info",
+      "banner-success",
+      "banner-warning"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "status-info__container-card",
+      "variant": "Status=Info, Container=Card",
+      "kind": "base",
+      "subst": {
+        "status": "info",
+        "container": "card"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-status-info__container-card.png",
+      "contentBox": {
+        "width": 294.45,
+        "height": 64
+      }
+    },
+    {
+      "slug": "status-info__container-section",
+      "variant": "Status=Info, Container=Section",
+      "kind": "base",
+      "subst": {
+        "status": "info",
+        "container": "section"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-status-info__container-section.png",
+      "contentBox": {
+        "width": 294.45,
+        "height": 64
+      }
+    },
+    {
+      "slug": "status-warning__container-card",
+      "variant": "Status=Warning, Container=Card",
+      "kind": "base",
+      "subst": {
+        "status": "warning",
+        "container": "card"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-status-warning__container-card.png",
+      "contentBox": {
+        "width": 294.45,
+        "height": 64
+      }
+    },
+    {
+      "slug": "status-error__container-card",
+      "variant": "Status=Error, Container=Card",
+      "kind": "base",
+      "subst": {
+        "status": "error",
+        "container": "card"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-status-error__container-card.png",
+      "contentBox": {
+        "width": 294.45,
+        "height": 64
+      }
+    },
+    {
+      "slug": "status-success__container-card",
+      "variant": "Status=Success, Container=Card",
+      "kind": "base",
+      "subst": {
+        "status": "success",
+        "container": "card"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-status-success__container-card.png",
+      "contentBox": {
+        "width": 294.45,
+        "height": 64
+      }
+    }
+  ],
+  "rendered": 5,
+  "refused": 0,
+  "unavailable": null
+}

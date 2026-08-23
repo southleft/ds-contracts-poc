@@ -1,0 +1,192 @@
+{
+  "id": "mui.icon-button",
+  "name": "IconButton",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/icon-button.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 9,
+      "sampled": 5,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "medium"
+      },
+      {
+        "name": "color",
+        "type": "enum",
+        "default": "default"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "★"
+      }
+    ],
+    "states": [
+      "disabled",
+      "hover",
+      "focus-visible",
+      "active"
+    ],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [
+      {
+        "part": "root",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.icon-button.root.background-color",
+      "imported.icon-button.root.border-bottom-left-radius.large",
+      "imported.icon-button.root.border-bottom-left-radius.medium",
+      "imported.icon-button.root.border-bottom-left-radius.small",
+      "imported.icon-button.root.border-bottom-right-radius.large",
+      "imported.icon-button.root.border-bottom-right-radius.medium",
+      "imported.icon-button.root.border-bottom-right-radius.small",
+      "imported.icon-button.root.border-top-left-radius.large",
+      "imported.icon-button.root.border-top-left-radius.medium",
+      "imported.icon-button.root.border-top-left-radius.small",
+      "imported.icon-button.root.border-top-right-radius.large",
+      "imported.icon-button.root.border-top-right-radius.medium",
+      "imported.icon-button.root.border-top-right-radius.small",
+      "imported.icon-button.root.color-state-disabled",
+      "imported.icon-button.root.color.default",
+      "imported.icon-button.root.color.primary",
+      "imported.icon-button.root.color.secondary",
+      "imported.icon-button.root.flex-shrink",
+      "imported.icon-button.root.font-size.large",
+      "imported.icon-button.root.font-size.medium",
+      "imported.icon-button.root.font-size.small",
+      "imported.icon-button.root.font-weight",
+      "imported.icon-button.root.padding-bottom.large",
+      "imported.icon-button.root.padding-bottom.medium",
+      "imported.icon-button.root.padding-bottom.small",
+      "imported.icon-button.root.padding-left.large",
+      "imported.icon-button.root.padding-left.medium",
+      "imported.icon-button.root.padding-left.small",
+      "imported.icon-button.root.padding-right.large",
+      "imported.icon-button.root.padding-right.medium",
+      "imported.icon-button.root.padding-right.small",
+      "imported.icon-button.root.padding-top.large",
+      "imported.icon-button.root.padding-top.medium",
+      "imported.icon-button.root.padding-top.small",
+      "imported.shared.size-0"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "size-medium__color-default",
+      "variant": "Size=Medium, Color=Default",
+      "kind": "base",
+      "subst": {
+        "size": "medium",
+        "color": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-medium__color-default.png",
+      "contentBox": {
+        "width": 40,
+        "height": 52
+      }
+    },
+    {
+      "slug": "size-medium__color-primary",
+      "variant": "Size=Medium, Color=Primary",
+      "kind": "base",
+      "subst": {
+        "size": "medium",
+        "color": "primary"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-medium__color-primary.png",
+      "contentBox": {
+        "width": 40,
+        "height": 52
+      }
+    },
+    {
+      "slug": "size-medium__color-secondary",
+      "variant": "Size=Medium, Color=Secondary",
+      "kind": "base",
+      "subst": {
+        "size": "medium",
+        "color": "secondary"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-medium__color-secondary.png",
+      "contentBox": {
+        "width": 40,
+        "height": 52
+      }
+    },
+    {
+      "slug": "size-small__color-default",
+      "variant": "Size=Small, Color=Default",
+      "kind": "base",
+      "subst": {
+        "size": "small",
+        "color": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-small__color-default.png",
+      "contentBox": {
+        "width": 28,
+        "height": 37
+      }
+    },
+    {
+      "slug": "size-large__color-default",
+      "variant": "Size=Large, Color=Default",
+      "kind": "base",
+      "subst": {
+        "size": "large",
+        "color": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-large__color-default.png",
+      "contentBox": {
+        "width": 52,
+        "height": 66
+      }
+    }
+  ],
+  "rendered": 5,
+  "refused": 0,
+  "unavailable": null
+}

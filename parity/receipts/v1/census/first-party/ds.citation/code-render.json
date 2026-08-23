@@ -1,0 +1,114 @@
+{
+  "id": "ds.citation",
+  "name": "Citation",
+  "library": "first-party",
+  "contractPath": "contracts/citation.contract.json",
+  "contractVersion": "1.0.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "tokens/ (layered primitives + brand + semantic + light/dark) via src/styles/tokens.css",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 2,
+      "sampled": 2,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "label"
+      },
+      {
+        "name": "sourceTitle",
+        "type": "text",
+        "default": "example.com"
+      },
+      {
+        "name": "number",
+        "type": "text",
+        "default": "1"
+      },
+      {
+        "name": "href",
+        "type": "text",
+        "default": "https://example.com"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "labelText",
+      "numberText"
+    ],
+    "contentSlots": [
+      {
+        "part": "labelText",
+        "prop": "sourceTitle"
+      },
+      {
+        "part": "numberText",
+        "prop": "number"
+      }
+    ],
+    "tokenRefs": [
+      "color.surface.sunken",
+      "color.text.secondary",
+      "font.badge.size",
+      "font.control.family",
+      "font.control.weight",
+      "href",
+      "radius.100",
+      "space.inset-x.xs",
+      "space.inset-y.xs"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-label",
+      "variant": "Variant=Label",
+      "kind": "base",
+      "subst": {
+        "variant": "label"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-label.png",
+      "contentBox": {
+        "width": 92.91,
+        "height": 19
+      }
+    },
+    {
+      "slug": "variant-number",
+      "variant": "Variant=Number",
+      "kind": "base",
+      "subst": {
+        "variant": "number"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-number.png",
+      "contentBox": {
+        "width": 20.98,
+        "height": 19
+      }
+    }
+  ],
+  "rendered": 2,
+  "refused": 0,
+  "unavailable": null
+}

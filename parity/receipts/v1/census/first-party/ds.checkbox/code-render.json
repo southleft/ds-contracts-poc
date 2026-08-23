@@ -1,0 +1,162 @@
+{
+  "id": "ds.checkbox",
+  "name": "Checkbox",
+  "library": "first-party",
+  "contractPath": "contracts/checkbox.contract.json",
+  "contractVersion": "2.0.1",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "tokens/ (layered primitives + brand + semantic + light/dark) via src/styles/tokens.css",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 6,
+      "sampled": 4,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "value",
+        "type": "enum",
+        "default": "unchecked"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "md"
+      },
+      {
+        "name": "label",
+        "type": "text",
+        "default": "Checkbox label"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "default": "Supporting detail for this option."
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "box",
+      "input",
+      "checkGlyph",
+      "dashGlyph",
+      "textCol",
+      "labelText",
+      "descriptionText"
+    ],
+    "contentSlots": [
+      {
+        "part": "labelText",
+        "prop": "label"
+      },
+      {
+        "part": "descriptionText",
+        "prop": "description"
+      }
+    ],
+    "tokenRefs": [
+      "border-width.100",
+      "color.checkbox.icon",
+      "color.surface.foreground",
+      "color.text.secondary",
+      "font.control.family",
+      "font.control.size.sm",
+      "font.control.weight",
+      "font.weight.regular",
+      "radius.100",
+      "space.gap.sm",
+      "space.inset-y.xs"
+    ],
+    "icons": [
+      "check",
+      "dash"
+    ],
+    "events": [
+      "toggle"
+    ]
+  },
+  "variants": [
+    {
+      "slug": "value-unchecked__size-medium",
+      "variant": "Value=Unchecked, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "value": "unchecked",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-value-unchecked__size-medium.png",
+      "contentBox": {
+        "width": 240.61,
+        "height": 36
+      }
+    },
+    {
+      "slug": "value-unchecked__size-small",
+      "variant": "Value=Unchecked, Size=Small",
+      "kind": "base",
+      "subst": {
+        "value": "unchecked",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-value-unchecked__size-small.png",
+      "contentBox": {
+        "width": 236.61,
+        "height": 36
+      }
+    },
+    {
+      "slug": "value-checked__size-medium",
+      "variant": "Value=Checked, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "value": "checked",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-value-checked__size-medium.png",
+      "contentBox": {
+        "width": 240.61,
+        "height": 36
+      }
+    },
+    {
+      "slug": "value-indeterminate__size-medium",
+      "variant": "Value=Indeterminate, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "value": "indeterminate",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-value-indeterminate__size-medium.png",
+      "contentBox": {
+        "width": 240.61,
+        "height": 36
+      }
+    }
+  ],
+  "rendered": 4,
+  "refused": 0,
+  "unavailable": null
+}

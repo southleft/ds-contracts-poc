@@ -1,0 +1,382 @@
+{
+  "id": "fluent.input",
+  "name": "Input",
+  "library": "fluent",
+  "contractPath": "examples/fluent/contracts/input.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/fluent/figma/fluent.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 42,
+      "sampled": 12,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "appearance",
+        "type": "enum",
+        "default": "outline"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "medium"
+      }
+    ],
+    "states": [
+      "active",
+      "disabled",
+      "focus-visible",
+      "hover"
+    ],
+    "parts": [
+      "root",
+      "input"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.input.input.flex-grow",
+      "imported.input.input.font-size.large",
+      "imported.input.input.font-size.medium",
+      "imported.input.input.font-size.small",
+      "imported.input.input.line-height.large",
+      "imported.input.input.line-height.medium",
+      "imported.input.input.line-height.small",
+      "imported.input.input.padding-left.large",
+      "imported.input.input.padding-left.medium",
+      "imported.input.input.padding-left.small",
+      "imported.input.input.padding-right.large",
+      "imported.input.input.padding-right.medium",
+      "imported.input.input.padding-right.small",
+      "imported.input.input.width.large",
+      "imported.input.input.width.medium",
+      "imported.input.input.width.small",
+      "imported.input.root.background-color.filled-darker",
+      "imported.input.root.background-color.filled-darker-shadow",
+      "imported.input.root.background-color.filled-lighter",
+      "imported.input.root.background-color.filled-lighter-shadow",
+      "imported.input.root.background-color.outline",
+      "imported.input.root.background-color.underline",
+      "imported.input.root.border-bottom-color.filled-darker",
+      "imported.input.root.border-bottom-color.filled-darker-shadow",
+      "imported.input.root.border-bottom-color.filled-lighter",
+      "imported.input.root.border-bottom-color.filled-lighter-shadow",
+      "imported.input.root.border-bottom-color.outline",
+      "imported.input.root.border-bottom-color.underline",
+      "imported.input.root.border-bottom-left-radius.filled-darker",
+      "imported.input.root.border-bottom-left-radius.filled-darker-shadow",
+      "imported.input.root.border-bottom-left-radius.filled-lighter",
+      "imported.input.root.border-bottom-left-radius.filled-lighter-shadow",
+      "imported.input.root.border-bottom-left-radius.outline",
+      "imported.input.root.border-bottom-left-radius.underline",
+      "imported.input.root.border-bottom-right-radius.filled-darker",
+      "imported.input.root.border-bottom-right-radius.filled-darker-shadow",
+      "imported.input.root.border-bottom-right-radius.filled-lighter",
+      "imported.input.root.border-bottom-right-radius.filled-lighter-shadow",
+      "imported.input.root.border-bottom-right-radius.outline",
+      "imported.input.root.border-bottom-right-radius.underline",
+      "imported.input.root.border-bottom-width",
+      "imported.input.root.border-left-color.filled-darker",
+      "imported.input.root.border-left-color.filled-darker-shadow",
+      "imported.input.root.border-left-color.filled-lighter",
+      "imported.input.root.border-left-color.filled-lighter-shadow",
+      "imported.input.root.border-left-color.outline",
+      "imported.input.root.border-left-color.underline",
+      "imported.input.root.border-left-width.filled-darker",
+      "imported.input.root.border-left-width.filled-darker-shadow",
+      "imported.input.root.border-left-width.filled-lighter",
+      "imported.input.root.border-left-width.filled-lighter-shadow",
+      "imported.input.root.border-left-width.outline",
+      "imported.input.root.border-left-width.underline",
+      "imported.input.root.border-right-color.filled-darker",
+      "imported.input.root.border-right-color.filled-darker-shadow",
+      "imported.input.root.border-right-color.filled-lighter",
+      "imported.input.root.border-right-color.filled-lighter-shadow",
+      "imported.input.root.border-right-color.outline",
+      "imported.input.root.border-right-color.underline",
+      "imported.input.root.border-right-width.filled-darker",
+      "imported.input.root.border-right-width.filled-darker-shadow",
+      "imported.input.root.border-right-width.filled-lighter",
+      "imported.input.root.border-right-width.filled-lighter-shadow",
+      "imported.input.root.border-right-width.outline",
+      "imported.input.root.border-right-width.underline",
+      "imported.input.root.border-top-color.filled-darker",
+      "imported.input.root.border-top-color.filled-darker-shadow",
+      "imported.input.root.border-top-color.filled-lighter",
+      "imported.input.root.border-top-color.filled-lighter-shadow",
+      "imported.input.root.border-top-color.outline",
+      "imported.input.root.border-top-color.underline",
+      "imported.input.root.border-top-left-radius.filled-darker",
+      "imported.input.root.border-top-left-radius.filled-darker-shadow",
+      "imported.input.root.border-top-left-radius.filled-lighter",
+      "imported.input.root.border-top-left-radius.filled-lighter-shadow",
+      "imported.input.root.border-top-left-radius.outline",
+      "imported.input.root.border-top-left-radius.underline",
+      "imported.input.root.border-top-right-radius.filled-darker",
+      "imported.input.root.border-top-right-radius.filled-darker-shadow",
+      "imported.input.root.border-top-right-radius.filled-lighter",
+      "imported.input.root.border-top-right-radius.filled-lighter-shadow",
+      "imported.input.root.border-top-right-radius.outline",
+      "imported.input.root.border-top-right-radius.underline",
+      "imported.input.root.border-top-width.filled-darker",
+      "imported.input.root.border-top-width.filled-darker-shadow",
+      "imported.input.root.border-top-width.filled-lighter",
+      "imported.input.root.border-top-width.filled-lighter-shadow",
+      "imported.input.root.border-top-width.outline",
+      "imported.input.root.border-top-width.underline",
+      "imported.input.root.box-shadow.filled-darker",
+      "imported.input.root.box-shadow.filled-darker-shadow",
+      "imported.input.root.box-shadow.filled-lighter",
+      "imported.input.root.box-shadow.filled-lighter-shadow",
+      "imported.input.root.box-shadow.outline",
+      "imported.input.root.box-shadow.underline",
+      "imported.input.root.column-gap.large",
+      "imported.input.root.column-gap.medium",
+      "imported.input.root.column-gap.small",
+      "imported.input.root.font-size.large",
+      "imported.input.root.font-size.medium",
+      "imported.input.root.font-size.small",
+      "imported.input.root.height.large",
+      "imported.input.root.height.medium",
+      "imported.input.root.height.small",
+      "imported.input.root.line-height.large",
+      "imported.input.root.line-height.medium",
+      "imported.input.root.line-height.small",
+      "imported.input.root.min-height.large",
+      "imported.input.root.min-height.medium",
+      "imported.input.root.min-height.small",
+      "imported.input.root.outline-width-state-active",
+      "imported.input.root.outline-width-state-focus-visible",
+      "imported.input.root.row-gap.large",
+      "imported.input.root.row-gap.medium",
+      "imported.input.root.row-gap.small",
+      "imported.shared.color-00000000",
+      "imported.shared.color-767676",
+      "imported.shared.color-bdbdbd",
+      "imported.shared.color-e0e0e0",
+      "imported.shared.size-0"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "appearance-outline__size-medium",
+      "variant": "Appearance=Outline, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "appearance": "outline",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-outline__size-medium.png",
+      "contentBox": {
+        "width": 180,
+        "height": 32
+      }
+    },
+    {
+      "slug": "appearance-outline__size-small",
+      "variant": "Appearance=Outline, Size=Small",
+      "kind": "base",
+      "subst": {
+        "appearance": "outline",
+        "size": "small"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-outline__size-small.png",
+      "contentBox": {
+        "width": 150,
+        "height": 24
+      }
+    },
+    {
+      "slug": "appearance-outline__size-large",
+      "variant": "Appearance=Outline, Size=Large",
+      "kind": "base",
+      "subst": {
+        "appearance": "outline",
+        "size": "large"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-outline__size-large.png",
+      "contentBox": {
+        "width": 213,
+        "height": 40
+      }
+    },
+    {
+      "slug": "appearance-underline__size-medium",
+      "variant": "Appearance=Underline, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "appearance": "underline",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-underline__size-medium.png",
+      "contentBox": {
+        "width": 178,
+        "height": 32
+      }
+    },
+    {
+      "slug": "appearance-filled-darker__size-medium",
+      "variant": "Appearance=Filled Darker, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled-darker",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled-darker__size-medium.png",
+      "contentBox": {
+        "width": 180,
+        "height": 32
+      }
+    },
+    {
+      "slug": "appearance-filled-lighter__size-medium",
+      "variant": "Appearance=Filled Lighter, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled-lighter",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled-lighter__size-medium.png",
+      "contentBox": {
+        "width": 180,
+        "height": 32
+      }
+    },
+    {
+      "slug": "appearance-filled-darker-shadow__size-medium",
+      "variant": "Appearance=Filled Darker Shadow, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled-darker-shadow",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled-darker-shadow__size-medium.png",
+      "contentBox": {
+        "width": 180,
+        "height": 32
+      }
+    },
+    {
+      "slug": "appearance-filled-lighter-shadow__size-medium",
+      "variant": "Appearance=Filled Lighter Shadow, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled-lighter-shadow",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled-lighter-shadow__size-medium.png",
+      "contentBox": {
+        "width": 180,
+        "height": 32
+      }
+    },
+    {
+      "slug": "appearance-outline__size-medium__state-active",
+      "variant": "Appearance=Outline, Size=Medium, State=Active",
+      "kind": "state",
+      "state": "active",
+      "subst": {
+        "appearance": "outline",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "active",
+      "status": "rendered",
+      "png": "code-appearance-outline__size-medium__state-active.png",
+      "contentBox": {
+        "width": 180,
+        "height": 32
+      }
+    },
+    {
+      "slug": "appearance-outline__size-medium__state-disabled",
+      "variant": "Appearance=Outline, Size=Medium, State=Disabled",
+      "kind": "state",
+      "state": "disabled",
+      "subst": {
+        "appearance": "outline",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "refused",
+      "error": "state \"disabled\" drives boolean prop \"disabled\", which fluent.input does not declare"
+    },
+    {
+      "slug": "appearance-outline__size-medium__state-focus-visible",
+      "variant": "Appearance=Outline, Size=Medium, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "subst": {
+        "appearance": "outline",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "focus-visible",
+      "status": "rendered",
+      "png": "code-appearance-outline__size-medium__state-focus-visible.png",
+      "contentBox": {
+        "width": 180,
+        "height": 32
+      }
+    },
+    {
+      "slug": "appearance-outline__size-medium__state-hover",
+      "variant": "Appearance=Outline, Size=Medium, State=Hover",
+      "kind": "state",
+      "state": "hover",
+      "subst": {
+        "appearance": "outline",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "hover",
+      "status": "rendered",
+      "png": "code-appearance-outline__size-medium__state-hover.png",
+      "contentBox": {
+        "width": 180,
+        "height": 32
+      }
+    }
+  ],
+  "rendered": 11,
+  "refused": 1,
+  "unavailable": null
+}

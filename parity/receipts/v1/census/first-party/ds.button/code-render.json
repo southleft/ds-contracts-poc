@@ -1,0 +1,245 @@
+{
+  "id": "ds.button",
+  "name": "Button",
+  "library": "first-party",
+  "contractPath": "contracts/button.contract.json",
+  "contractVersion": "1.5.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "tokens/ (layered primitives + brand + semantic + light/dark) via src/styles/tokens.css",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 24,
+      "sampled": 9,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "primary"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "md"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Button"
+      }
+    ],
+    "states": [
+      "hover",
+      "focus-visible",
+      "disabled"
+    ],
+    "parts": [
+      "root",
+      "loadingSpinner",
+      "label"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "border.width.focus",
+      "color.border.focus",
+      "font.control.family",
+      "font.control.weight",
+      "opacity.disabled",
+      "radius.control",
+      "space.gap.control"
+    ],
+    "icons": [
+      "spinner"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-primary__size-medium",
+      "variant": "Variant=Primary, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "primary",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-primary__size-medium.png",
+      "contentBox": {
+        "width": 81.75,
+        "height": 36
+      }
+    },
+    {
+      "slug": "variant-primary__size-small",
+      "variant": "Variant=Primary, Size=Small",
+      "kind": "base",
+      "subst": {
+        "variant": "primary",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-primary__size-small.png",
+      "contentBox": {
+        "width": 67.84,
+        "height": 25
+      }
+    },
+    {
+      "slug": "variant-primary__size-large",
+      "variant": "Variant=Primary, Size=Large",
+      "kind": "base",
+      "subst": {
+        "variant": "primary",
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-primary__size-large.png",
+      "contentBox": {
+        "width": 103.58,
+        "height": 45
+      }
+    },
+    {
+      "slug": "variant-secondary__size-medium",
+      "variant": "Variant=Secondary, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "secondary",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-secondary__size-medium.png",
+      "contentBox": {
+        "width": 81.75,
+        "height": 36
+      }
+    },
+    {
+      "slug": "variant-danger__size-medium",
+      "variant": "Variant=Danger, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "danger",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-danger__size-medium.png",
+      "contentBox": {
+        "width": 81.75,
+        "height": 36
+      }
+    },
+    {
+      "slug": "variant-ghost__size-medium",
+      "variant": "Variant=Ghost, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "ghost",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-ghost__size-medium.png",
+      "contentBox": {
+        "width": 81.75,
+        "height": 36
+      }
+    },
+    {
+      "slug": "variant-primary__size-medium__state-hover",
+      "variant": "Variant=Primary, Size=Medium, State=Hover",
+      "kind": "state",
+      "state": "hover",
+      "subst": {
+        "variant": "primary",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "hover",
+      "status": "rendered",
+      "png": "code-variant-primary__size-medium__state-hover.png",
+      "contentBox": {
+        "width": 81.75,
+        "height": 36
+      }
+    },
+    {
+      "slug": "variant-primary__size-medium__state-focus-visible",
+      "variant": "Variant=Primary, Size=Medium, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "subst": {
+        "variant": "primary",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "focus-visible",
+      "status": "rendered",
+      "png": "code-variant-primary__size-medium__state-focus-visible.png",
+      "contentBox": {
+        "width": 81.75,
+        "height": 36
+      }
+    },
+    {
+      "slug": "variant-primary__size-medium__state-disabled",
+      "variant": "Variant=Primary, Size=Medium, State=Disabled",
+      "kind": "state",
+      "state": "disabled",
+      "subst": {
+        "variant": "primary",
+        "size": "md"
+      },
+      "bools": {
+        "disabled": true
+      },
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-primary__size-medium__state-disabled.png",
+      "contentBox": {
+        "width": 81.75,
+        "height": 36
+      }
+    }
+  ],
+  "rendered": 9,
+  "refused": 0,
+  "unavailable": null
+}

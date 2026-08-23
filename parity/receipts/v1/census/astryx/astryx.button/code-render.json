@@ -1,0 +1,238 @@
+{
+  "id": "astryx.button",
+  "name": "Button",
+  "library": "astryx",
+  "contractPath": "examples/astryx/contracts/button.contract.json",
+  "contractVersion": "0.3.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/astryx/figma/astryx.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 12,
+      "sampled": 6,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "secondary"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "md"
+      },
+      {
+        "name": "isDisabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "isLoading",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "isIconOnly",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "label",
+        "type": "text",
+        "default": "Button"
+      }
+    ],
+    "states": [
+      "focus-visible",
+      "disabled",
+      "active",
+      "hover"
+    ],
+    "parts": [
+      "root",
+      "part-0",
+      "label",
+      "part-1"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "label"
+      }
+    ],
+    "tokenRefs": [
+      "color-neutral",
+      "font-size-base",
+      "font-weight-medium",
+      "imported.button.label.color.destructive",
+      "imported.button.label.color.ghost",
+      "imported.button.label.color.primary",
+      "imported.button.label.color.secondary",
+      "imported.button.part-0.color.destructive",
+      "imported.button.part-0.color.ghost",
+      "imported.button.part-0.color.primary",
+      "imported.button.part-0.color.secondary",
+      "imported.button.part-1.bottom.lg",
+      "imported.button.part-1.bottom.md",
+      "imported.button.part-1.bottom.sm",
+      "imported.button.part-1.color.destructive",
+      "imported.button.part-1.color.ghost",
+      "imported.button.part-1.color.primary",
+      "imported.button.part-1.color.secondary",
+      "imported.button.part-1.height",
+      "imported.button.part-1.right",
+      "imported.button.part-1.width",
+      "imported.button.root.background-color.destructive",
+      "imported.button.root.background-color.ghost",
+      "imported.button.root.background-color.primary",
+      "imported.button.root.background-image-state-active",
+      "imported.button.root.background-image-state-hover",
+      "imported.button.root.color.destructive",
+      "imported.button.root.color.ghost",
+      "imported.button.root.color.primary",
+      "imported.button.root.color.secondary",
+      "imported.button.root.height.lg",
+      "imported.button.root.height.md",
+      "imported.button.root.height.sm",
+      "imported.button.root.opacity-state-disabled",
+      "imported.button.root.outline-color.destructive",
+      "imported.button.root.outline-color.ghost",
+      "imported.button.root.outline-color.primary",
+      "imported.button.root.outline-color.secondary",
+      "imported.button.root.outline-offset-state-focus-visible",
+      "imported.button.root.outline-width-state-focus-visible",
+      "imported.button.root.padding-left",
+      "imported.button.root.padding-right",
+      "imported.button.root.width",
+      "imported.shared.num-500",
+      "imported.shared.size-0",
+      "imported.shared.size-14",
+      "imported.shared.size-20-0004",
+      "imported.shared.size-8",
+      "imported.shared.size-neg-1",
+      "spacing-2",
+      "spacing-3"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-secondary__size-md",
+      "variant": "Variant=Secondary, Size=Md",
+      "kind": "base",
+      "subst": {
+        "variant": "secondary",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-secondary__size-md.png",
+      "contentBox": {
+        "width": 99.81,
+        "height": 32
+      }
+    },
+    {
+      "slug": "variant-secondary__size-sm",
+      "variant": "Variant=Secondary, Size=Sm",
+      "kind": "base",
+      "subst": {
+        "variant": "secondary",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-secondary__size-sm.png",
+      "contentBox": {
+        "width": 99.81,
+        "height": 28
+      }
+    },
+    {
+      "slug": "variant-secondary__size-lg",
+      "variant": "Variant=Secondary, Size=Lg",
+      "kind": "base",
+      "subst": {
+        "variant": "secondary",
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-secondary__size-lg.png",
+      "contentBox": {
+        "width": 99.81,
+        "height": 36
+      }
+    },
+    {
+      "slug": "variant-primary__size-md",
+      "variant": "Variant=Primary, Size=Md",
+      "kind": "base",
+      "subst": {
+        "variant": "primary",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-primary__size-md.png",
+      "contentBox": {
+        "width": 99.81,
+        "height": 32
+      }
+    },
+    {
+      "slug": "variant-ghost__size-md",
+      "variant": "Variant=Ghost, Size=Md",
+      "kind": "base",
+      "subst": {
+        "variant": "ghost",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-ghost__size-md.png",
+      "contentBox": {
+        "width": 99.81,
+        "height": 32
+      }
+    },
+    {
+      "slug": "variant-destructive__size-md",
+      "variant": "Variant=Destructive, Size=Md",
+      "kind": "base",
+      "subst": {
+        "variant": "destructive",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-destructive__size-md.png",
+      "contentBox": {
+        "width": 99.81,
+        "height": 32
+      }
+    }
+  ],
+  "rendered": 6,
+  "refused": 0,
+  "unavailable": null
+}

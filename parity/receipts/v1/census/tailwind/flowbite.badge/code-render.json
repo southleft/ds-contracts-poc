@@ -1,0 +1,254 @@
+{
+  "id": "flowbite.badge",
+  "name": "Badge",
+  "library": "tailwind",
+  "contractPath": "examples/tailwind/contracts/badge.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/tailwind/figma/tailwind.bundle.json tokenSet (flat base + minted)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 24,
+      "sampled": 9,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "color",
+        "type": "enum",
+        "default": "info"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "xs"
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Badge"
+      }
+    ],
+    "states": [
+      "active",
+      "hover"
+    ],
+    "parts": [
+      "root",
+      "label"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.badge.label.color.failure",
+      "imported.badge.label.color.indigo",
+      "imported.badge.label.color.info",
+      "imported.badge.label.color.pink",
+      "imported.badge.label.color.success",
+      "imported.badge.label.color.warning",
+      "imported.badge.label.font-size.sm",
+      "imported.badge.label.font-size.xs",
+      "imported.badge.label.font-weight",
+      "imported.badge.label.line-height.sm",
+      "imported.badge.label.line-height.xs",
+      "imported.badge.root.background-color.failure",
+      "imported.badge.root.background-color.indigo",
+      "imported.badge.root.background-color.info",
+      "imported.badge.root.background-color.pink",
+      "imported.badge.root.background-color.success",
+      "imported.badge.root.background-color.warning",
+      "imported.badge.root.color.failure",
+      "imported.badge.root.color.indigo",
+      "imported.badge.root.color.info",
+      "imported.badge.root.color.pink",
+      "imported.badge.root.color.success",
+      "imported.badge.root.color.warning",
+      "imported.badge.root.font-size.sm",
+      "imported.badge.root.font-size.xs",
+      "imported.badge.root.font-weight",
+      "imported.badge.root.line-height.sm",
+      "imported.badge.root.line-height.xs",
+      "imported.badge.root.padding-bottom",
+      "imported.badge.root.padding-left",
+      "imported.badge.root.padding-right",
+      "imported.badge.root.padding-top",
+      "imported.shared.size-4"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "color-info__size-xs",
+      "variant": "Color=Info, Size=Xs",
+      "kind": "base",
+      "subst": {
+        "color": "info",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-info__size-xs.png",
+      "contentBox": {
+        "width": 52.69,
+        "height": 20
+      }
+    },
+    {
+      "slug": "color-info__size-sm",
+      "variant": "Color=Info, Size=Sm",
+      "kind": "base",
+      "subst": {
+        "color": "info",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-info__size-sm.png",
+      "contentBox": {
+        "width": 58.8,
+        "height": 24
+      }
+    },
+    {
+      "slug": "color-failure__size-xs",
+      "variant": "Color=Failure, Size=Xs",
+      "kind": "base",
+      "subst": {
+        "color": "failure",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-failure__size-xs.png",
+      "contentBox": {
+        "width": 52.69,
+        "height": 20
+      }
+    },
+    {
+      "slug": "color-success__size-xs",
+      "variant": "Color=Success, Size=Xs",
+      "kind": "base",
+      "subst": {
+        "color": "success",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-success__size-xs.png",
+      "contentBox": {
+        "width": 52.69,
+        "height": 20
+      }
+    },
+    {
+      "slug": "color-warning__size-xs",
+      "variant": "Color=Warning, Size=Xs",
+      "kind": "base",
+      "subst": {
+        "color": "warning",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-warning__size-xs.png",
+      "contentBox": {
+        "width": 52.69,
+        "height": 20
+      }
+    },
+    {
+      "slug": "color-indigo__size-xs",
+      "variant": "Color=Indigo, Size=Xs",
+      "kind": "base",
+      "subst": {
+        "color": "indigo",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-indigo__size-xs.png",
+      "contentBox": {
+        "width": 52.69,
+        "height": 20
+      }
+    },
+    {
+      "slug": "color-pink__size-xs",
+      "variant": "Color=Pink, Size=Xs",
+      "kind": "base",
+      "subst": {
+        "color": "pink",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-pink__size-xs.png",
+      "contentBox": {
+        "width": 52.69,
+        "height": 20
+      }
+    },
+    {
+      "slug": "color-info__size-xs__state-active",
+      "variant": "Color=Info, Size=Xs, State=Active",
+      "kind": "state",
+      "state": "active",
+      "subst": {
+        "color": "info",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "active",
+      "status": "rendered",
+      "png": "code-color-info__size-xs__state-active.png",
+      "contentBox": {
+        "width": 52.69,
+        "height": 20
+      }
+    },
+    {
+      "slug": "color-info__size-xs__state-hover",
+      "variant": "Color=Info, Size=Xs, State=Hover",
+      "kind": "state",
+      "state": "hover",
+      "subst": {
+        "color": "info",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "hover",
+      "status": "rendered",
+      "png": "code-color-info__size-xs__state-hover.png",
+      "contentBox": {
+        "width": 52.69,
+        "height": 20
+      }
+    }
+  ],
+  "rendered": 9,
+  "refused": 0,
+  "unavailable": null
+}

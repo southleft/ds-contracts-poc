@@ -1,0 +1,163 @@
+{
+  "id": "mui.dialog",
+  "name": "Dialog",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/dialog.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 5,
+      "sampled": 5,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "maxWidth",
+        "type": "enum",
+        "default": "sm"
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Dialog body copy for the molecule round."
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "backdrop-root",
+      "dialog-container",
+      "dialog-paper",
+      "label"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.dialog.backdrop-root.background-color",
+      "imported.dialog.dialog-paper.background-color",
+      "imported.dialog.dialog-paper.box-shadow",
+      "imported.dialog.dialog-paper.color",
+      "imported.dialog.dialog-paper.max-width.lg",
+      "imported.dialog.dialog-paper.max-width.md",
+      "imported.dialog.dialog-paper.max-width.sm",
+      "imported.dialog.dialog-paper.max-width.xl",
+      "imported.dialog.dialog-paper.max-width.xs",
+      "imported.dialog.label.color",
+      "imported.dialog.label.flex-grow",
+      "imported.dialog.label.font-size",
+      "imported.dialog.label.font-weight",
+      "imported.dialog.label.padding-bottom",
+      "imported.dialog.label.padding-left",
+      "imported.dialog.label.padding-right",
+      "imported.dialog.label.padding-top",
+      "imported.dialog.root.width",
+      "imported.dialog.root.z-index",
+      "imported.shared.size-0",
+      "imported.shared.size-32",
+      "imported.shared.size-4"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "max-width-sm",
+      "variant": "Max width=Sm",
+      "kind": "base",
+      "subst": {
+        "maxWidth": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-max-width-sm.png",
+      "contentBox": {
+        "width": 900,
+        "height": 122
+      }
+    },
+    {
+      "slug": "max-width-xs",
+      "variant": "Max width=Xs",
+      "kind": "base",
+      "subst": {
+        "maxWidth": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-max-width-xs.png",
+      "contentBox": {
+        "width": 900,
+        "height": 122
+      }
+    },
+    {
+      "slug": "max-width-md",
+      "variant": "Max width=Md",
+      "kind": "base",
+      "subst": {
+        "maxWidth": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-max-width-md.png",
+      "contentBox": {
+        "width": 900,
+        "height": 122
+      }
+    },
+    {
+      "slug": "max-width-lg",
+      "variant": "Max width=Lg",
+      "kind": "base",
+      "subst": {
+        "maxWidth": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-max-width-lg.png",
+      "contentBox": {
+        "width": 900,
+        "height": 122
+      }
+    },
+    {
+      "slug": "max-width-xl",
+      "variant": "Max width=Xl",
+      "kind": "base",
+      "subst": {
+        "maxWidth": "xl"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-max-width-xl.png",
+      "contentBox": {
+        "width": 900,
+        "height": 122
+      }
+    }
+  ],
+  "rendered": 5,
+  "refused": 0,
+  "unavailable": null
+}

@@ -1,0 +1,85 @@
+{
+  "id": "altitude.divider",
+  "name": "Divider",
+  "library": "altitude",
+  "contractPath": "examples/altitude/contracts/divider.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/altitude/figma/altitude.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 2,
+      "sampled": 2,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "default"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.divider.root.background-color",
+      "imported.divider.root.color",
+      "imported.divider.root.min-height",
+      "imported.divider.root.min-width",
+      "imported.divider.root.width.unset",
+      "imported.divider.root.width.vertical"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-default",
+      "variant": "Variant=Default",
+      "kind": "base",
+      "subst": {
+        "variant": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-default.png",
+      "contentBox": {
+        "width": 288,
+        "height": 1
+      }
+    },
+    {
+      "slug": "variant-vertical",
+      "variant": "Variant=Vertical",
+      "kind": "base",
+      "subst": {
+        "variant": "vertical"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-vertical.png",
+      "contentBox": {
+        "width": 1,
+        "height": 100
+      }
+    }
+  ],
+  "rendered": 2,
+  "refused": 0,
+  "unavailable": null
+}

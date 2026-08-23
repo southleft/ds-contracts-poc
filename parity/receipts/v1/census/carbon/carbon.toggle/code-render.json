@@ -1,0 +1,133 @@
+{
+  "id": "carbon.toggle",
+  "name": "Toggle",
+  "library": "carbon",
+  "contractPath": "examples/carbon/contracts/toggle.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/carbon/figma/carbon.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 4,
+      "sampled": 3,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "toggled",
+        "type": "enum",
+        "default": "untoggled"
+      }
+    ],
+    "states": [
+      "disabled"
+    ],
+    "parts": [
+      "root",
+      "toggle__button",
+      "toggle__label",
+      "label",
+      "toggle__appearance",
+      "toggle__switch",
+      "toggle__switch-before",
+      "label-2"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.shared.color-1010104d",
+      "imported.shared.color-16161640",
+      "imported.shared.size-0",
+      "imported.shared.size-12",
+      "imported.shared.size-16",
+      "imported.shared.size-24",
+      "imported.shared.size-neg-1",
+      "imported.toggle.label-2.font-size",
+      "imported.toggle.label-2.font-weight",
+      "imported.toggle.label-2.letter-spacing",
+      "imported.toggle.label-2.line-height",
+      "imported.toggle.label.color",
+      "imported.toggle.label.font-weight",
+      "imported.toggle.label.letter-spacing",
+      "imported.toggle.root.height",
+      "imported.toggle.root.width.toggled",
+      "imported.toggle.root.width.untoggled",
+      "imported.toggle.toggle-appearance.column-gap",
+      "imported.toggle.toggle-appearance.width.toggled",
+      "imported.toggle.toggle-appearance.width.untoggled",
+      "imported.toggle.toggle-button.background-color-state-disabled",
+      "imported.toggle.toggle-button.bottom.toggled",
+      "imported.toggle.toggle-button.bottom.untoggled",
+      "imported.toggle.toggle-button.height",
+      "imported.toggle.toggle-button.right",
+      "imported.toggle.toggle-button.top.toggled",
+      "imported.toggle.toggle-button.top.untoggled",
+      "imported.toggle.toggle-button.width",
+      "imported.toggle.toggle-switch.background-color-state-disabled",
+      "imported.toggle.toggle-switch.background-color.toggled",
+      "imported.toggle.toggle-switch.background-color.untoggled",
+      "imported.toggle.toggle-switch.width"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "toggled-untoggled",
+      "variant": "Toggled=Untoggled",
+      "kind": "base",
+      "subst": {
+        "toggled": "untoggled"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-toggled-untoggled.png",
+      "contentBox": {
+        "width": 75.47,
+        "height": 60
+      }
+    },
+    {
+      "slug": "toggled-toggled",
+      "variant": "Toggled=Toggled",
+      "kind": "base",
+      "subst": {
+        "toggled": "toggled"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-toggled-toggled.png",
+      "contentBox": {
+        "width": 74.19,
+        "height": 60
+      }
+    },
+    {
+      "slug": "toggled-untoggled__state-disabled",
+      "variant": "Toggled=Untoggled, State=Disabled",
+      "kind": "state",
+      "state": "disabled",
+      "subst": {
+        "toggled": "untoggled"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "refused",
+      "error": "state \"disabled\" drives boolean prop \"disabled\", which carbon.toggle does not declare"
+    }
+  ],
+  "rendered": 2,
+  "refused": 1,
+  "unavailable": null
+}

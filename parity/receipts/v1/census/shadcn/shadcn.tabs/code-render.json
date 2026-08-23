@@ -1,0 +1,93 @@
+{
+  "id": "shadcn.tabs",
+  "name": "Tabs",
+  "library": "shadcn",
+  "contractPath": "examples/shadcn/contracts/tabs.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/shadcn/figma/shadcn.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 1,
+      "sampled": 1,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [],
+    "states": [
+      "focus-visible",
+      "active",
+      "hover"
+    ],
+    "parts": [
+      "root",
+      "part-0",
+      "label",
+      "label-2",
+      "label-3",
+      "label-4"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.shared.color-00000000",
+      "imported.shared.num-1",
+      "imported.shared.num-500",
+      "imported.shared.size-0",
+      "imported.shared.size-1",
+      "imported.shared.size-10",
+      "imported.shared.size-14",
+      "imported.shared.size-20",
+      "imported.shared.size-29",
+      "imported.shared.size-3",
+      "imported.shared.size-4",
+      "imported.shared.size-6",
+      "imported.shared.size-8",
+      "imported.tabs.label-2.color",
+      "imported.tabs.label-2.color-state-active",
+      "imported.tabs.label-2.color-state-hover",
+      "imported.tabs.label-2.width",
+      "imported.tabs.label-3.color",
+      "imported.tabs.label-3.width",
+      "imported.tabs.label-4.font-weight",
+      "imported.tabs.label.background-color",
+      "imported.tabs.label.box-shadow",
+      "imported.tabs.label.width",
+      "imported.tabs.part-0.background-color",
+      "imported.tabs.part-0.color",
+      "imported.tabs.part-0.height",
+      "imported.tabs.part-0.width",
+      "imported.tabs.root.height",
+      "imported.tabs.root.width"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "tabs",
+      "variant": "Tabs",
+      "kind": "base",
+      "subst": {},
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-tabs.png",
+      "contentBox": {
+        "width": 285.56,
+        "height": 64
+      }
+    }
+  ],
+  "rendered": 1,
+  "refused": 0,
+  "unavailable": null
+}

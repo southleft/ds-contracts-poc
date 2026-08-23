@@ -1,0 +1,161 @@
+{
+  "id": "shadcn.switch",
+  "name": "Switch",
+  "library": "shadcn",
+  "contractPath": "examples/shadcn/contracts/switch.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/shadcn/figma/shadcn.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 8,
+      "sampled": 5,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "default"
+      },
+      {
+        "name": "checked",
+        "type": "enum",
+        "default": "unchecked"
+      }
+    ],
+    "states": [
+      "disabled",
+      "focus-visible"
+    ],
+    "parts": [
+      "root",
+      "part-0"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.shared.color-00000000",
+      "imported.shared.color-a1a1a1",
+      "imported.shared.size-0",
+      "imported.shared.size-1",
+      "imported.shared.size-9999",
+      "imported.switch.part-0.background-color",
+      "imported.switch.part-0.box-shadow",
+      "imported.switch.part-0.height.default",
+      "imported.switch.part-0.height.sm",
+      "imported.switch.part-0.width.default",
+      "imported.switch.part-0.width.sm",
+      "imported.switch.root.background-color.checked",
+      "imported.switch.root.background-color.unchecked",
+      "imported.switch.root.box-shadow",
+      "imported.switch.root.box-shadow-state-focus-visible",
+      "imported.switch.root.flex-shrink",
+      "imported.switch.root.height.default",
+      "imported.switch.root.height.sm",
+      "imported.switch.root.opacity-state-disabled",
+      "imported.switch.root.outline-width-state-focus-visible",
+      "imported.switch.root.width.default",
+      "imported.switch.root.width.sm"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "size-default__checked-unchecked",
+      "variant": "Size=Default, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-default__checked-unchecked.png",
+      "contentBox": {
+        "width": 32,
+        "height": 18.38
+      }
+    },
+    {
+      "slug": "size-default__checked-checked",
+      "variant": "Size=Default, Checked=Checked",
+      "kind": "base",
+      "subst": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-default__checked-checked.png",
+      "contentBox": {
+        "width": 32,
+        "height": 18.38
+      }
+    },
+    {
+      "slug": "size-sm__checked-unchecked",
+      "variant": "Size=Sm, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "size": "sm",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-sm__checked-unchecked.png",
+      "contentBox": {
+        "width": 24,
+        "height": 14
+      }
+    },
+    {
+      "slug": "size-default__checked-unchecked__state-disabled",
+      "variant": "Size=Default, Checked=Unchecked, State=Disabled",
+      "kind": "state",
+      "state": "disabled",
+      "subst": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "refused",
+      "error": "state \"disabled\" drives boolean prop \"disabled\", which shadcn.switch does not declare"
+    },
+    {
+      "slug": "size-default__checked-unchecked__state-focus-visible",
+      "variant": "Size=Default, Checked=Unchecked, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "subst": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "focus-visible",
+      "status": "rendered",
+      "png": "code-size-default__checked-unchecked__state-focus-visible.png",
+      "contentBox": {
+        "width": 32,
+        "height": 18.38
+      }
+    }
+  ],
+  "rendered": 4,
+  "refused": 1,
+  "unavailable": null
+}

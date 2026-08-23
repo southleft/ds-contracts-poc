@@ -1,0 +1,101 @@
+{
+  "id": "ds.field",
+  "name": "Field",
+  "library": "first-party",
+  "contractPath": "contracts/field.contract.json",
+  "contractVersion": "1.0.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "tokens/ (layered primitives + brand + semantic + light/dark) via src/styles/tokens.css",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 1,
+      "sampled": 1,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "isRequired",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "label",
+        "type": "text",
+        "default": "Field label"
+      },
+      {
+        "name": "inputID",
+        "type": "text",
+        "default": "field-control"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "default": "Helper text for the wrapped control."
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "labelRow",
+      "labelText",
+      "requiredMark",
+      "descriptionText",
+      "control"
+    ],
+    "contentSlots": [
+      {
+        "part": "labelText",
+        "prop": "label"
+      },
+      {
+        "part": "descriptionText",
+        "prop": "description"
+      }
+    ],
+    "tokenRefs": [
+      "color.action.danger.background",
+      "color.surface.foreground",
+      "color.text.secondary",
+      "font.control.family",
+      "font.control.size.sm",
+      "font.control.weight",
+      "inputID",
+      "size.card.width",
+      "space.inset-y.sm"
+    ],
+    "icons": [
+      "asterisk"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "field",
+      "variant": "Field",
+      "kind": "base",
+      "subst": {},
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-field.png",
+      "contentBox": {
+        "width": 236.47,
+        "height": 42
+      }
+    }
+  ],
+  "rendered": 1,
+  "refused": 0,
+  "unavailable": null
+}

@@ -1,0 +1,254 @@
+{
+  "id": "altitude.chip",
+  "name": "Chip",
+  "library": "altitude",
+  "contractPath": "examples/altitude/contracts/chip.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/altitude/figma/altitude.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 10,
+      "sampled": 6,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": null
+      },
+      {
+        "name": "type",
+        "type": "enum",
+        "default": null
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Chip"
+      }
+    ],
+    "states": [
+      "focus-visible"
+    ],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [
+      {
+        "part": "root",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.chip.root.background-color.danger",
+      "imported.chip.root.background-color.info",
+      "imported.chip.root.background-color.secondary",
+      "imported.chip.root.background-color.success",
+      "imported.chip.root.background-color.unset",
+      "imported.chip.root.background-color.warning",
+      "imported.chip.root.border-bottom-color.danger",
+      "imported.chip.root.border-bottom-color.info",
+      "imported.chip.root.border-bottom-color.secondary",
+      "imported.chip.root.border-bottom-color.success",
+      "imported.chip.root.border-bottom-color.unset",
+      "imported.chip.root.border-bottom-color.warning",
+      "imported.chip.root.border-bottom-left-radius.squared",
+      "imported.chip.root.border-bottom-left-radius.unset",
+      "imported.chip.root.border-bottom-right-radius.squared",
+      "imported.chip.root.border-bottom-right-radius.unset",
+      "imported.chip.root.border-bottom-width.danger",
+      "imported.chip.root.border-bottom-width.info",
+      "imported.chip.root.border-bottom-width.secondary",
+      "imported.chip.root.border-bottom-width.success",
+      "imported.chip.root.border-bottom-width.unset",
+      "imported.chip.root.border-bottom-width.warning",
+      "imported.chip.root.border-left-color.danger",
+      "imported.chip.root.border-left-color.info",
+      "imported.chip.root.border-left-color.secondary",
+      "imported.chip.root.border-left-color.success",
+      "imported.chip.root.border-left-color.unset",
+      "imported.chip.root.border-left-color.warning",
+      "imported.chip.root.border-left-width.danger",
+      "imported.chip.root.border-left-width.info",
+      "imported.chip.root.border-left-width.secondary",
+      "imported.chip.root.border-left-width.success",
+      "imported.chip.root.border-left-width.unset",
+      "imported.chip.root.border-left-width.warning",
+      "imported.chip.root.border-right-color.danger",
+      "imported.chip.root.border-right-color.info",
+      "imported.chip.root.border-right-color.secondary",
+      "imported.chip.root.border-right-color.success",
+      "imported.chip.root.border-right-color.unset",
+      "imported.chip.root.border-right-color.warning",
+      "imported.chip.root.border-right-width.danger",
+      "imported.chip.root.border-right-width.info",
+      "imported.chip.root.border-right-width.secondary",
+      "imported.chip.root.border-right-width.success",
+      "imported.chip.root.border-right-width.unset",
+      "imported.chip.root.border-right-width.warning",
+      "imported.chip.root.border-top-color.danger",
+      "imported.chip.root.border-top-color.info",
+      "imported.chip.root.border-top-color.secondary",
+      "imported.chip.root.border-top-color.success",
+      "imported.chip.root.border-top-color.unset",
+      "imported.chip.root.border-top-color.warning",
+      "imported.chip.root.border-top-left-radius.squared",
+      "imported.chip.root.border-top-left-radius.unset",
+      "imported.chip.root.border-top-right-radius.squared",
+      "imported.chip.root.border-top-right-radius.unset",
+      "imported.chip.root.border-top-width.danger",
+      "imported.chip.root.border-top-width.info",
+      "imported.chip.root.border-top-width.secondary",
+      "imported.chip.root.border-top-width.success",
+      "imported.chip.root.border-top-width.unset",
+      "imported.chip.root.border-top-width.warning",
+      "imported.chip.root.color.danger",
+      "imported.chip.root.color.info",
+      "imported.chip.root.color.secondary",
+      "imported.chip.root.color.success",
+      "imported.chip.root.color.unset",
+      "imported.chip.root.color.warning",
+      "imported.chip.root.column-gap",
+      "imported.chip.root.font-size",
+      "imported.chip.root.font-weight",
+      "imported.chip.root.line-height",
+      "imported.chip.root.min-height",
+      "imported.chip.root.min-width",
+      "imported.chip.root.outline-color-state-focus-visible",
+      "imported.chip.root.outline-color.danger",
+      "imported.chip.root.outline-color.info",
+      "imported.chip.root.outline-color.secondary",
+      "imported.chip.root.outline-color.success",
+      "imported.chip.root.outline-color.unset",
+      "imported.chip.root.outline-color.warning",
+      "imported.chip.root.outline-offset-state-focus-visible",
+      "imported.chip.root.outline-width-state-focus-visible",
+      "imported.chip.root.padding-bottom",
+      "imported.chip.root.padding-left",
+      "imported.chip.root.padding-right",
+      "imported.chip.root.padding-top",
+      "imported.chip.root.row-gap"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-secondary__type-default",
+      "variant": "Variant=Secondary, Type=Default",
+      "kind": "base",
+      "subst": {
+        "variant": "secondary",
+        "type": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-secondary__type-default.png",
+      "contentBox": {
+        "width": 52.8,
+        "height": 28
+      }
+    },
+    {
+      "slug": "variant-secondary__type-squared",
+      "variant": "Variant=Secondary, Type=Squared",
+      "kind": "base",
+      "subst": {
+        "variant": "secondary",
+        "type": "squared"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-secondary__type-squared.png",
+      "contentBox": {
+        "width": 52.8,
+        "height": 28
+      }
+    },
+    {
+      "slug": "variant-info__type-default",
+      "variant": "Variant=Info, Type=Default",
+      "kind": "base",
+      "subst": {
+        "variant": "info",
+        "type": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-info__type-default.png",
+      "contentBox": {
+        "width": 52.8,
+        "height": 28
+      }
+    },
+    {
+      "slug": "variant-success__type-default",
+      "variant": "Variant=Success, Type=Default",
+      "kind": "base",
+      "subst": {
+        "variant": "success",
+        "type": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-success__type-default.png",
+      "contentBox": {
+        "width": 52.8,
+        "height": 28
+      }
+    },
+    {
+      "slug": "variant-warning__type-default",
+      "variant": "Variant=Warning, Type=Default",
+      "kind": "base",
+      "subst": {
+        "variant": "warning",
+        "type": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-warning__type-default.png",
+      "contentBox": {
+        "width": 52.8,
+        "height": 28
+      }
+    },
+    {
+      "slug": "variant-danger__type-default",
+      "variant": "Variant=Danger, Type=Default",
+      "kind": "base",
+      "subst": {
+        "variant": "danger",
+        "type": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-danger__type-default.png",
+      "contentBox": {
+        "width": 52.8,
+        "height": 28
+      }
+    }
+  ],
+  "rendered": 6,
+  "refused": 0,
+  "unavailable": null
+}

@@ -77,11 +77,13 @@ const parseComposite = (body: string): string[] | null => {
 const EXCLUDED: Record<string, string> = {
   "root:sync:spine":
     "The live drift spine: needs the FIGMA_TOKEN secret + network (Figma REST) and, with --open-pr, an " +
-    "authenticated gh — none of which belong in a PR gate, and its red means 'the canvas moved', not " +
-    "'this commit is wrong'. It runs on the scheduled sync-spine.yml lane (invoked via tsx there, so " +
+    "authenticated gh — none of which belong in a PR gate, and its red means 'a drifted row has no " +
+    "recorded human decision' (decided drift is a warning; a crash is a distinct red), never 'this " +
+    "commit is wrong'. It runs on the scheduled sync-spine.yml lane (invoked via tsx there, so " +
     "this entry stays true) and degrades to a NAMED skip when the secret is absent. The committed twin " +
     "is the fixture-mode eval sync-spine-drift (eval lane) + sync:ledger:check (fast lane), which pin " +
-    "the same plan/pull/cursor arithmetic over the committed fixture canvas.",
+    "the same plan/pull/cursor/decision arithmetic over the committed fixture canvas and keep " +
+    "sync/PENDING.md the byte-exact render of the ledger.",
   "root:parity":
     "RED at 8a5c455 for a wall-clock reason: parity/figma-{components,tokens}.json are 27.0 days " +
     "old and the differ refuses snapshots older than 14 (MAX_SNAPSHOT_AGE_DAYS). Refreshing them " +
