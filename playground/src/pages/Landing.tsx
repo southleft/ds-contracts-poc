@@ -54,6 +54,13 @@ export function Landing() {
       </div>
 
       <div className="landing__ctas">
+        <Link to="/flow" className="cta">
+          <div className="cta__title">How it flows</div>
+          <div className="cta__desc">
+            Two guided walkthroughs — code → Figma and Figma → code — through the contract, on the
+            real engine, with every receipt shown as it is produced.
+          </div>
+        </Link>
         <Link to="/examples" className="cta">
           <div className="cta__title">Try an example</div>
           <div className="cta__desc">

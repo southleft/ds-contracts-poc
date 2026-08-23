@@ -1,8 +1,41 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { emitters, type Contract, type EmittedFile, type SourceFileInput } from '../../../core/index.js';
-import { useRoute } from '../router';
+import { Link, useRoute } from '../router';
 import { useTheme } from '../theme';
-import { contractsById, icons, rawContractById } from '../engine/data';
+import { contractsById, corpus as repoCorpus, icons, rawContractById, tokenTree as repoTokenTree } from '../engine/data';
+import {
+  compileReceipt,
+  corpusFromTokenSet,
+  envelopePreview,
+  exactRefusalOf,
+  excerptOf,
+  factNeedle,
+  factsAgreeWithBundle,
+  locateNeedle,
+  parseRoundtripReceipt,
+  PRODUCER_DUMP_GRAMMAR,
+  proposeFixtureSet,
+  rootTokenAgreement,
+  summarizeDump,
+  withoutPropertyDefinitions,
+  type ProjectionMode,
+  type ProposeFixtureResult,
+  type ProposedSet,
+} from '../engine/flow-engine';
+import {
+  leaveTourTokens,
+  loadBadgeFixture,
+  loadFlowbiteEight,
+  loadTailwindBundle,
+  roundtripMd,
+  useBundleTokensForTour,
+  useRepoTokensForTour,
+  type FixtureDump,
+  type TailwindBundle,
+} from '../engine/flow-data';
+import { isTourId, TOURS, type StepId, type TourId } from '../engine/tours';
+import { FlowPanel, type FlowView } from '../components/FlowPanel';
+import type { DumpSet } from '../../../extract/figma/types.js';
 import { exampleBySlug, examples, type CodeExample } from '../engine/examples';
 import {
   capturedTokensFromDump,
@@ -70,6 +103,7 @@ import {
   type MintedTokenLayer,
 } from '../engine/token-source';
 import { locateJsonParseError, resolveIssueLines } from '../engine/refusal-lines';
+import { activeTokens } from '../engine/token-source';
 import { applyLinkedScope, linkedImportScope, mergeTrees } from '../engine/linked-scope';
 import { sessionRegistry } from '../engine/session-registry';
 import { setChildStubs } from '../engine/stub-contracts';
@@ -346,7 +380,7 @@ const notice = (headline: string): PlainError => ({ headline });
 // ---------------------------------------------------------------------------
 
 export function Playground() {
-  const { params } = useRoute();
+  const { params, navigate } = useRoute();
   const { theme, set: setTheme } = useTheme();
   // The active token source (repo bundled ↔ user pasted) — validation,
   // preview, proposals, and emitters all rebind when it changes.
@@ -403,6 +437,9 @@ export function Playground() {
     }
     return null;
   }, [validation, debouncedText, text]);
+  // Walkthrough anchors (the line a step is talking about) — painted by the
+  // editor in the accent colour, distinct from the refusal red.
+  const [tourHighlights, setTourHighlights] = useState<ReadonlySet<number>>(new Set());
   const highlightLines = useMemo(() => {
     const set = new Set<number>();
     for (const line of issueLines ?? []) if (line !== null) set.add(line);
@@ -1157,10 +1194,11 @@ export function Playground() {
 
   const handleImportResult = (result: FigmaImportResult, origin: string) => {
     const batch = proposalsFromDump(result.dump);
-    // ROUTE HONESTY: name the dump revision this route produced. Both callers
+    // ROUTE HONESTY: name the dump grammar this route produced. Both callers
     // are the REST routes (URL import + demo fixture) — the mapper stamps
-    // dump v1.5, a PARTIAL capture; the per-set read-limit note ("this
-    // dump's reader could not see: …") rides the proposal notes verbatim.
+    // REST_DUMP_VERSION (read, never typed here), a PARTIAL capture of that
+    // grammar; the per-set read-limit note ("this dump's reader could not
+    // see: …") rides the proposal notes verbatim.
     const dumpVersion = result.dump._provenance?.dumpVersion;
     const routeGroups: ReceiptGroup[] = dumpVersion
       ? [
@@ -1169,7 +1207,7 @@ export function Playground() {
             kind: 'note',
             entries: [
               {
-                message: `REST-mapped dump v${dumpVersion} — a partial capture; the plugin dump (v1.13) is the full one. Every channel this route cannot read is named per set in the proposal notes ("this dump's reader could not see: …").`,
+                message: `REST-mapped dump (grammar v${dumpVersion}) — a PARTIAL capture of that grammar; the plugin dump (extract/figma/dump.plugin.js, grammar v${PRODUCER_DUMP_GRAMMAR}) is the full one. Every channel this route cannot read is named per set in the proposal notes ("this dump's reader could not see: …").`,
               },
             ],
           },
@@ -1404,6 +1442,87 @@ export function Playground() {
       parsed = JSON.parse(jsonText);
     } catch (e) {
       setJsonError(plainWordsError(e));
+      return;
+    }
+    // A CONTRACT-PROPOSAL envelope (the plugin Send tab's export / what
+    // `figma receive` lands as .proposals/<id>.proposal.json): the proposed
+    // contract loads, and the envelope's own notes, minted tree, child stubs
+    // and provenance line become its receipts. Nothing is re-proposed.
+    const envelope =
+      parsed !== null && typeof parsed === 'object' && (parsed as { type?: unknown }).type === 'CONTRACT-PROPOSAL'
+        ? (parsed as {
+            setName?: unknown;
+            proposedContract?: unknown;
+            proposalNotes?: unknown;
+            mintedTokens?: MintedTokenLayer;
+            childStubs?: Array<Record<string, unknown>>;
+            provenance?: { kind?: unknown; note?: unknown };
+            baseFreshness?: { line?: unknown; stale?: unknown };
+          })
+        : null;
+    if (envelope) {
+      if (!envelope.proposedContract || typeof envelope.proposedContract !== 'object') {
+        setJsonError(notice('This CONTRACT-PROPOSAL envelope carries no proposedContract object.'));
+        return;
+      }
+      const setName = typeof envelope.setName === 'string' ? envelope.setName : 'Proposed set';
+      const origin = `CONTRACT-PROPOSAL envelope — ${setName}`;
+      const minted = envelope.mintedTokens && envelope.mintedTokens.count > 0 ? envelope.mintedTokens : null;
+      setMintedTokens(minted);
+      setCapturedTokens(null);
+      const stubResult = setChildStubs(envelope.childStubs ?? null);
+      const groups: ReceiptGroup[] = [];
+      if (envelope.provenance || envelope.baseFreshness) {
+        groups.push({
+          title: 'Envelope — provenance and base freshness',
+          kind: 'note',
+          entries: [
+            ...(envelope.provenance
+              ? [{ message: `canvas provenance: ${String(envelope.provenance.kind ?? 'unrecorded')} — ${String(envelope.provenance.note ?? '')}` }]
+              : []),
+            ...(envelope.baseFreshness && typeof envelope.baseFreshness.line === 'string'
+              ? [{ message: envelope.baseFreshness.line }]
+              : []),
+          ],
+        });
+      }
+      const notes = Array.isArray(envelope.proposalNotes) ? envelope.proposalNotes.filter((n): n is string => typeof n === 'string') : [];
+      if (notes.length > 0) {
+        groups.push({ title: `Proposal notes — ${setName}`, kind: 'note', entries: notes.map((message) => ({ message })) });
+      }
+      if (minted) {
+        groups.push({
+          title: 'Minted provisional tokens',
+          kind: 'minted',
+          entries: minted.entries.map((e) => ({ message: `${e.ref} = ${e.value} — provisional; bound at: ${e.usageSites.join(', ')}` })),
+        });
+      }
+      if (stubResult.registered.length > 0 || stubResult.refused.length > 0) {
+        groups.push({
+          title: 'Child stub contracts (provisional)',
+          kind: 'note',
+          entries: [
+            ...stubResult.registered.map((stub) => ({ message: `${stub.id} registered PROVISIONALLY for this session.` })),
+            ...stubResult.refused.map((message) => ({ message })),
+          ],
+        });
+      }
+      const contractText = pretty(envelope.proposedContract);
+      const recorded = recordImport({
+        name: setName,
+        contractId: contractIdOf(envelope.proposedContract),
+        source: 'json',
+        contractText,
+        receipts: { source: origin, groups },
+        ...(minted ? { mintedTokens: minted } : {}),
+        ...(envelope.childStubs && envelope.childStubs.length > 0 ? { childStubs: envelope.childStubs } : {}),
+      });
+      setText(contractText);
+      setReceipts(recorded.receipts);
+      setProvenance(`loaded from ${origin}`);
+      setPristine({ text: contractText, provenance: `loaded from ${origin}` });
+      setActiveExample(null);
+      setWsLoaded(null);
       return;
     }
     const isDump =
@@ -1670,6 +1789,12 @@ export function Playground() {
       return;
     }
     if (source === 'figma' || source === 'code' || source === 'json') setSourceTab(source);
+    const tour = params.get('tour');
+    if (isTourId(tour)) {
+      setTourStep(0);
+      void runTourStep(tour, 0);
+      return;
+    }
     // A share hash owns the boot state — don't race it with the default example.
     if (!text && !sharePayloadFromLocation()) {
       loadContract('ds.badge', 'loaded from examples — ds.badge', 'badge');
@@ -1772,6 +1897,465 @@ export function Playground() {
       },
     },
   ];
+
+  // ------------------------------------------------ guided walkthroughs
+  // Two tours (engine/tours.ts), selected by ?tour=code-to-figma |
+  // figma-to-code. Each step loads a committed input, runs the same core the
+  // CLI and plugin run, and shows the artifact in the Flow output tab with
+  // the relevant contract line highlighted. What cannot run in a browser
+  // (bundle assembly, the round-trip comparator, the canvas) is shown as a
+  // preview or a replay of a committed receipt and labelled so.
+  const tourId: TourId | null = isTourId(params.get('tour')) ? (params.get('tour') as TourId) : null;
+  const tour = tourId ? TOURS[tourId] : null;
+  const [tourStep, setTourStep] = useState(0);
+  const [tourDone, setTourDone] = useState<ReadonlySet<string>>(new Set());
+  const [flowView, setFlowView] = useState<FlowView>({ kind: 'loading', what: 'the walkthrough' });
+  const [tourMode, setTourMode] = useState<ProjectionMode>('exact');
+  // Async step runs race; only the newest run may publish its view.
+  const tourRun = useRef(0);
+  // Fixture-derived state shared across steps (the Badge proposal the
+  // Adjudicate / Generate / Envelope steps read back).
+  const badgeResult = useRef<ProposeFixtureResult | null>(null);
+
+  useEffect(() => {
+    if (!tourId) return;
+    return () => {
+      // Leaving the walkthrough (Exit, back button, another route) puts the
+      // visitor's token source back and drops the step anchors. StrictMode's
+      // mount/unmount/mount in dev runs this cleanup while the tour is still
+      // in the URL — that is not a leave, so nothing is torn down then.
+      if (isTourId(new URL(window.location.href).searchParams.get('tour'))) return;
+      leaveTourTokens();
+      setTourHighlights(new Set());
+      tourRun.current += 1;
+    };
+  }, [tourId]);
+
+  const anchorLines = (source: string, needles: string[]) =>
+    needles.map((needle) => ({ needle, line: locateNeedle(source, needle) }));
+
+  const highlightAndScroll = (lines: Array<number | null>) => {
+    const set = new Set<number>();
+    for (const l of lines) if (l !== null) set.add(l);
+    setTourHighlights(set);
+    const first = [...set].sort((a, b) => a - b)[0];
+    if (first !== undefined) window.setTimeout(() => editorRef.current?.scrollToLine(first), 60);
+  };
+
+  /** Put a contract's raw JSON in the editor under a walkthrough provenance
+   *  line, clearing every import layer — the same reset loadContract does,
+   *  for a document that is not one of contracts/. */
+  const loadRawForTour = (raw: unknown, provenanceLine: string) => {
+    const contractText = pretty(raw);
+    setText(contractText);
+    setReceipts(null);
+    setMintedTokens(null);
+    setCapturedTokens(null);
+    setChildStubs(null);
+    setProvenance(provenanceLine);
+    setPristine({ text: contractText, provenance: provenanceLine });
+    setActiveExample(null);
+    setExpectedRefusal(null);
+    setWsLoaded(null);
+    return contractText;
+  };
+
+  /** A fixture proposal into the editor with its receipts — the engine's
+   *  own notes/unbound/minted groups plus the exact-projection verdict,
+   *  without recording a workspace entry (it is a replay, not an import). */
+  const loadProposalForTour = (result: ProposeFixtureResult, origin: string) => {
+    const proposal = result.proposal;
+    if (!proposal) return '';
+    const minted: MintedTokenLayer | null =
+      proposal.mintedTokens && proposal.mintedTokens.count > 0 ? proposal.mintedTokens : null;
+    setMintedTokens(minted);
+    setCapturedTokens(null);
+    const stubResult = setChildStubs(proposal.childStubs ?? null);
+    const contractText = pretty(proposal.contract);
+    const provenanceLine = `proposed from ${origin} — ${proposal.setName}`;
+    const verdict: ReceiptGroup = {
+      title: 'Projection — exact mode verdict',
+      kind: 'note',
+      entries: [
+        {
+          ...(result.exactRefusal ? { code: result.exactRefusal.code } : {}),
+          message: result.exactRefusal
+            ? `${result.exactRefusal.message} — this proposal ran in ${result.mode} instead; projection status "${proposal.projection.status}".`
+            : `exact projection proposes this set (structured propertyDefinitions present); projection status "${proposal.projection.status}".`,
+        },
+        { message: `canvas provenance: ${result.provenance} — ${result.provenanceSentence}` },
+      ],
+    };
+    const stubGroups: ReceiptGroup[] =
+      stubResult.registered.length > 0 || stubResult.refused.length > 0
+        ? [
+            {
+              title: 'Child stub contracts (provisional)',
+              kind: 'note',
+              entries: [
+                ...stubResult.registered.map((stub) => ({
+                  message: `${stub.id} registered PROVISIONALLY for this session — auto-proposed from the nested "${stub.name}" instances.`,
+                })),
+                ...stubResult.refused.map((message) => ({ message })),
+              ],
+            },
+          ]
+        : [];
+    setText(contractText);
+    setProvenance(provenanceLine);
+    setPristine({ text: contractText, provenance: provenanceLine });
+    setReceipts({
+      source: provenanceLine,
+      groups: [verdict, ...proposalGroups(proposal as FigmaProposal), ...stubGroups, ...(result.skipped.length > 0 ? batchReceiptGroups({ proposals: [], skipped: result.skipped, notes: result.batchNotes }) : [])],
+    });
+    setActiveExample(null);
+    setExpectedRefusal(null);
+    setWsLoaded(null);
+    return contractText;
+  };
+
+  const emitWith = (target: string, contract: Contract, contracts: Map<string, Contract>, extraIcons?: Map<string, string>) => {
+    const emitter = emitters.find((e) => e.name === target);
+    if (!emitter) throw new Error(`no emitter registered as "${target}"`);
+    const byId = new Map(contracts);
+    byId.set(contract.id, contract);
+    // A pasted (modeless) token source has no brand modes; the figma engine
+    // requires a "default" brand — an empty one keeps its resolution
+    // semantics without inventing values (same rule as canvas-preview.ts).
+    const tree = activeTokens().tree;
+    const brands = Object.keys(tree.brands).length > 0 ? tree.brands : { default: {} };
+    return emitter.emit(contract, {
+      tokens: { ...tree, brands },
+      icons: extraIcons ? new Map([...icons, ...extraIcons]) : icons,
+      contracts: byId,
+      mode: theme,
+    });
+  };
+
+  const bundleIcons = (bundle: TailwindBundle) => new Map(Object.entries(bundle.icons ?? {}));
+
+  /** The Badge proposal from the committed fixture — proposed once per
+   *  walkthrough, read back by Adjudicate / Generate / Envelope. */
+  const proposeBadge = async (): Promise<{ dump: FixtureDump; result: ProposeFixtureResult }> => {
+    const dump = await loadBadgeFixture();
+    if (!badgeResult.current) {
+      badgeResult.current = proposeFixtureSet({
+        dump,
+        setName: 'Badge',
+        corpus: repoCorpus,
+        contractsById,
+        projectionMode: 'reviewable-inversion',
+        mintUnbound: true,
+      });
+    }
+    return { dump, result: badgeResult.current };
+  };
+
+  const proposeToggle = async (mode: ProjectionMode) => {
+    const [dump, bundle] = await Promise.all([loadFlowbiteEight(), loadTailwindBundle()]);
+    const result = proposeFixtureSet({
+      dump,
+      setName: 'ToggleSwitch',
+      corpus: corpusFromTokenSet(bundle.tokenSet.base, bundle.tokenSet.minted),
+      contractsById: bundle.contractsById,
+      projectionMode: mode,
+      mintUnbound: true,
+    });
+    return { dump, bundle, result };
+  };
+
+  const runTourStep = async (id: TourId, index: number) => {
+    const run = (tourRun.current += 1);
+    const t = TOURS[id];
+    const step = t.steps[index];
+    if (!step) return;
+    const publish = (view: FlowView) => {
+      if (tourRun.current === run) setFlowView(view);
+    };
+    setOutputTab('flow');
+    setFlowView({ kind: 'loading', what: step.label.toLowerCase() });
+    try {
+      await runStepBody(id, step.id, publish);
+      setTourDone((d) => new Set([...d, `${id}:${step.id}`]));
+    } catch (e) {
+      publish({ kind: 'error', message: e instanceof Error ? e.message : String(e) });
+    }
+  };
+
+  const runStepBody = async (id: TourId, stepId: StepId, publish: (v: FlowView) => void) => {
+    const buttonRaw = rawContractById.get('ds.button');
+    const button = contractsById.get('ds.button');
+    const badge = contractsById.get('ds.badge');
+    if (!buttonRaw || !button || !badge) throw new Error('contracts/button.contract.json or badge.contract.json is not in the bundled contracts');
+    const BUTTON_ORIGIN = 'walkthrough — contracts/button.contract.json';
+    const ensureButton = () => {
+      useRepoTokensForTour();
+      if (provenance !== BUTTON_ORIGIN || !text.includes('"id": "ds.button"')) {
+        loadRawForTour(buttonRaw, BUTTON_ORIGIN);
+      }
+      return pretty(buttonRaw);
+    };
+
+    if (id === 'code-to-figma') {
+      switch (stepId as import('../engine/tours').CodeToFigmaStep) {
+        case 'contract': {
+          setSourceTab('examples');
+          const source = ensureButton();
+          const highlighted = anchorLines(source, [
+            '"background-color": "{color.action.{variant}.background}"',
+            '"statePreviews": true',
+          ]);
+          highlightAndScroll(highlighted.map((h) => h.line));
+          publish({ kind: 'contract', highlighted });
+          return;
+        }
+        case 'compile': {
+          ensureButton();
+          setTourHighlights(new Set());
+          publish({ kind: 'compile', receipt: compileReceipt(button, contractsById, repoTokenTree, icons) });
+          return;
+        }
+        case 'script': {
+          ensureButton();
+          setTourHighlights(new Set());
+          const receipt = compileReceipt(button, contractsById, repoTokenTree, icons);
+          const files = emitWith('figma-script', button, contractsById);
+          const excerpt = receipt.rootFill ? excerptOf(files, `"fill": "${receipt.rootFill}"`) : null;
+          publish({ kind: 'script', excerpt, receipt, onOpenTab: () => setOutputTab('figma-script') });
+          return;
+        }
+        case 'facts': {
+          const bundle = await loadTailwindBundle();
+          const applied = useBundleTokensForTour(bundle);
+          if (!applied.ok) throw new Error(`the bundle token set did not apply: ${applied.errors.join('; ')}`);
+          const toggle = bundle.contractsById.get('flowbite.toggleswitch');
+          const toggleRaw = bundle.rawById.get('flowbite.toggleswitch');
+          if (!toggle || !toggleRaw) throw new Error('flowbite.toggleswitch is not in the committed bundle');
+          const source = loadRawForTour(toggleRaw, 'walkthrough — examples/tailwind/contracts/toggleswitch.contract.json (from tailwind.bundle.json)');
+          const receipt = compileReceipt(toggle, bundle.contractsById, activeTokens().tree, bundleIcons(bundle));
+          const bundleRow = bundle.codeOnlyFacts.find((r) => r.contractId === toggle.id);
+          const lines = receipt.codeOnlyFacts.map((f) => {
+            const needle = factNeedle(f);
+            return needle ? locateNeedle(source, needle) : null;
+          });
+          highlightAndScroll(lines);
+          const files = emitWith('figma-script', toggle, bundle.contractsById, bundleIcons(bundle));
+          const excerpts = [excerptOf(files, '"h": "MIN"'), excerptOf(files, '"h": "MAX"')].filter(
+            (x): x is NonNullable<typeof x> => x !== null,
+          );
+          publish({
+            kind: 'facts',
+            receipt,
+            bundleCheck: factsAgreeWithBundle(receipt.codeOnlyFacts, bundleRow),
+            lines,
+            onJump: jumpToLine,
+            excerpts,
+            onOpenTab: () => setOutputTab('figma-script'),
+          });
+          return;
+        }
+        case 'bundle': {
+          const bundle = await loadTailwindBundle();
+          publish({ kind: 'bundle', bundle });
+          return;
+        }
+        case 'canvas':
+          publish({ kind: 'canvas' });
+          return;
+        case 'break': {
+          useRepoTokensForTour();
+          const broken = pretty(buttonRaw).replace('{radius.control}', '{radius.bogus}');
+          const provenanceLine = 'walkthrough — contracts/button.contract.json with one token ref broken on purpose';
+          setText(broken);
+          setReceipts(null);
+          setMintedTokens(null);
+          setCapturedTokens(null);
+          setChildStubs(null);
+          setProvenance(provenanceLine);
+          setPristine({ text: pretty(buttonRaw), provenance: BUTTON_ORIGIN });
+          setActiveExample(null);
+          setExpectedRefusal(null);
+          setWsLoaded(null);
+          highlightAndScroll([locateNeedle(broken, '{radius.bogus}')]);
+          publish({ kind: 'break', refusals: [] });
+          return;
+        }
+        case 'reset': {
+          useRepoTokensForTour();
+          loadRawForTour(buttonRaw, BUTTON_ORIGIN);
+          setTourHighlights(new Set());
+          publish({ kind: 'reset' });
+          return;
+        }
+      }
+      return;
+    }
+
+    switch (stepId as import('../engine/tours').FigmaToCodeStep) {
+      case 'dump': {
+        useRepoTokensForTour();
+        setSourceTab('json');
+        const dump = await loadBadgeFixture();
+        const summary = summarizeDump(dump);
+        const set = dump.Badge as DumpSet;
+        loadContract('ds.badge', 'walkthrough — contracts/badge.contract.json, the contract the Badge set was drawn from');
+        setTourHighlights(new Set());
+        publish({ kind: 'dump', summary, focus: 'Badge', variantJson: pretty(set.variants[0]) });
+        return;
+      }
+      case 'propose': {
+        useRepoTokensForTour();
+        const { dump, result } = await proposeBadge();
+        const source = loadProposalForTour(result, 'extract/figma/fixtures/main-file-dumps.json');
+        highlightAndScroll([locateNeedle(source, '"background-color": "{color.feedback.{variant}.background}"')]);
+        publish({ kind: 'propose', result, setSummary: summarizeDump(dump) });
+        return;
+      }
+      case 'adjudicate': {
+        useRepoTokensForTour();
+        const { result } = await proposeBadge();
+        if (!result.proposal) throw new Error('the Badge set did not propose');
+        if (!text.includes('proposed from') && !provenance.includes('main-file-dumps')) {
+          loadProposalForTour(result, 'extract/figma/fixtures/main-file-dumps.json');
+        }
+        setTourHighlights(new Set());
+        publish({
+          kind: 'adjudicate',
+          rows: parseRoundtripReceipt(roundtripMd, 'Badge'),
+          live: rootTokenAgreement(result.proposal.contract, badge),
+          shippingId: badge.id,
+        });
+        return;
+      }
+      case 'generate': {
+        useRepoTokensForTour();
+        const { result } = await proposeBadge();
+        if (!result.proposal) throw new Error('the Badge set did not propose');
+        if (!provenance.includes('main-file-dumps')) loadProposalForTour(result, 'extract/figma/fixtures/main-file-dumps.json');
+        setTourHighlights(new Set());
+        const proposed = validateContractText(pretty(result.proposal.contract));
+        if (proposed.status !== 'valid' && proposed.status !== 'violations') {
+          throw new Error('the Badge proposal does not parse against the schema — nothing to generate');
+        }
+        const files = emitWith('react', proposed.contract, proposed.contracts);
+        publish({
+          kind: 'generate',
+          excerpt: excerptOf(files, 'var(--color-feedback-info-background)'),
+          onOpenTab: () => setOutputTab('react'),
+        });
+        return;
+      }
+      case 'envelope': {
+        const { result } = await proposeBadge();
+        const preview = envelopePreview(result, badge, null);
+        if (!preview) throw new Error('the Badge set did not propose');
+        setTourHighlights(new Set());
+        publish({ kind: 'envelope', preview, json: pretty(preview.envelope) });
+        return;
+      }
+      case 'absent': {
+        const bundle = await loadTailwindBundle();
+        const toggleRow = bundle.codeOnlyFacts.find((r) => r.contractId === 'flowbite.toggleswitch');
+        const { result } = await proposeToggle('exact');
+        setTourHighlights(new Set());
+        publish({
+          kind: 'absent',
+          rows: parseRoundtripReceipt(roundtripMd, 'Badge'),
+          toggleFact: toggleRow?.facts.find((f) => f.kind === 'event') ?? null,
+          toggleProposalEvents: result.proposal ? (result.proposal.contract as { events?: unknown }).events : undefined,
+          toggleShippingEvents: bundle.contractsById.get('flowbite.toggleswitch')?.events?.length ?? 0,
+        });
+        return;
+      }
+      case 'stamped': {
+        const { dump, bundle, result } = await proposeToggle(tourMode);
+        const applied = useBundleTokensForTour(bundle);
+        if (!applied.ok) throw new Error(`the bundle token set did not apply: ${applied.errors.join('; ')}`);
+        const source = loadProposalForTour(result, 'extract/figma/fixtures/flowbite-eight.dump.json');
+        highlightAndScroll([locateNeedle(source, '"right": "2px"')]);
+        publish({
+          kind: 'stamped',
+          result,
+          summary: summarizeDump(dump),
+          mode: tourMode,
+          referee: [],
+          onMode: (m) => {
+            setTourMode(m);
+            // Re-run this step with the new mode (state update lands after
+            // this call; pass the mode explicitly).
+            void rerunStamped(m);
+          },
+        });
+        return;
+      }
+      case 'break': {
+        const dump = await loadFlowbiteEight();
+        const bundle = await loadTailwindBundle();
+        const broken = withoutPropertyDefinitions(dump, 'ToggleSwitch');
+        const corpus = corpusFromTokenSet(bundle.tokenSet.base, bundle.tokenSet.minted);
+        const refusal = exactRefusalOf(broken.ToggleSwitch as DumpSet, {
+          corpus,
+          contractIdByName: new Map([...bundle.contractsById.values()].map((c) => [c.name, c.id])),
+          fileKey: summarizeDump(dump).fileKey,
+        });
+        const attempt = proposeFixtureSet({
+          dump: broken,
+          setName: 'ToggleSwitch',
+          corpus,
+          contractsById: bundle.contractsById,
+          projectionMode: 'exact',
+          mintUnbound: true,
+        });
+        setTourHighlights(new Set());
+        publish({ kind: 'exact-break', refusal, skipped: attempt.skipped });
+        return;
+      }
+    }
+  };
+
+  const rerunStamped = async (mode: ProjectionMode) => {
+    const run = (tourRun.current += 1);
+    setFlowView({ kind: 'loading', what: `the ToggleSwitch proposal in ${mode}` });
+    try {
+      const { dump, bundle, result } = await proposeToggle(mode);
+      if (tourRun.current !== run) return;
+      useBundleTokensForTour(bundle);
+      const source = loadProposalForTour(result, 'extract/figma/fixtures/flowbite-eight.dump.json');
+      highlightAndScroll([locateNeedle(source, '"right": "2px"')]);
+      setFlowView({
+        kind: 'stamped',
+        result,
+        summary: summarizeDump(dump),
+        mode,
+        referee: [],
+        onMode: (m) => {
+          setTourMode(m);
+          void rerunStamped(m);
+        },
+      });
+    } catch (e) {
+      if (tourRun.current === run) setFlowView({ kind: 'error', message: e instanceof Error ? e.message : String(e) });
+    }
+  };
+
+  const goTourStep = (index: number) => {
+    if (!tourId || !tour) return;
+    const clamped = Math.max(0, Math.min(tour.steps.length - 1, index));
+    setTourStep(clamped);
+    void runTourStep(tourId, clamped);
+  };
+
+  const exitTour = () => {
+    leaveTourTokens();
+    setTourHighlights(new Set());
+    setOutputTab('preview');
+    // Back to the playground's boot state — the walkthrough's last load
+    // (a fixture proposal, a bundle contract) is not something to leave a
+    // visitor stranded on.
+    loadContract('ds.badge', 'loaded from examples — ds.badge', 'badge');
+    setSourceTab('examples');
+    navigate('/playground');
+  };
 
   const runShare = async () => {
     try {
@@ -2057,7 +2641,50 @@ export function Playground() {
   // ------------------------------------------------------------------ render
   return (
     <>
-      {!onboardDismissed && (
+      {tour && tourId ? (
+        <div className="onboard tourstrip" role="note" aria-label={`Walkthrough — ${tour.title}`}>
+          <span className="onboard__title tourstrip__title">
+            <b>{tour.title}</b> — {tour.direction}
+          </span>
+          {tour.steps.map((step, i) => (
+            <button
+              key={step.id}
+              type="button"
+              className={`onboard__step${i === tourStep ? ' is-current' : ''}${tourDone.has(`${tourId}:${step.id}`) ? ' is-done' : ''}`}
+              aria-current={i === tourStep ? 'step' : undefined}
+              onClick={() => goTourStep(i)}
+            >
+              <span className="onboard__num" aria-hidden>
+                {i + 1}
+              </span>
+              {step.label}
+            </button>
+          ))}
+          <span className="tourstrip__nav">
+            <button type="button" className="btn--small" disabled={tourStep === 0} onClick={() => goTourStep(tourStep - 1)}>
+              ← Prev
+            </button>
+            <button
+              type="button"
+              className="btn--small btn--primary"
+              disabled={tourStep >= tour.steps.length - 1}
+              onClick={() => goTourStep(tourStep + 1)}
+            >
+              Next →
+            </button>
+            <Link
+              to={`/playground?tour=${tourId === 'code-to-figma' ? 'figma-to-code' : 'code-to-figma'}`}
+              className="btn--ghost onboard__dismiss tourstrip__other"
+            >
+              Other direction
+            </Link>
+            <button type="button" className="btn--ghost onboard__dismiss" onClick={exitTour}>
+              Exit walkthrough
+            </button>
+          </span>
+        </div>
+      ) : null}
+      {!onboardDismissed && !tour && (
         <div className="onboard" role="note" aria-label="Getting started">
           {/* Count derived from onboardSteps — the old copy said "three
               clicks, plus a reset" for a four-step array. */}
@@ -2316,8 +2943,9 @@ export function Playground() {
                 Two ways in, and a third that is currently switched off. <strong>Start with
                 the URL route below</strong> — paste a component URL and a token and you get a
                 proposed contract. Know the ladder: this route is a <em>partial</em> capture
-                (REST, dump v1.5) — the plugin dump (v1.13, via the <strong>JSON</strong> tab)
-                is the full one. What the REST reader cannot see (image fills, flex wrap,
+                (REST) — the plugin dump (<code>extract/figma/dump.plugin.js</code>, via the{' '}
+                <strong>JSON</strong> tab) is the full one; both write dump grammar v{PRODUCER_DUMP_GRAMMAR}.
+                What the REST reader cannot see (image fills, flex wrap,
                 strokeAlign, instance text overrides, multi-mode variable values, fixed sizes,
                 absolute placement, constraints) is NAMED in the proposal notes rather than
                 guessed; token <em>names</em> additionally degrade outside Enterprise plans,
@@ -2335,7 +2963,7 @@ export function Playground() {
                 &ldquo;this dump&rsquo;s reader could not see: &hellip;&rdquo;) are absent as a
                 read limit of the route, not evidence about the design. Variable (token){' '}
                 <em>names</em> additionally degrade outside Enterprise plans — receipted,
-                never invented. For the full capture (dump v1.13) and true-to-form token
+                never invented. For the full capture (the plugin dump) and true-to-form token
                 names, use the JSON dump route named above.
               </p>
             </div>
@@ -2434,39 +3062,38 @@ export function Playground() {
 
             {wsMiniList('figma')}
 
-            {/* The plugin route is CURRENTLY UNREACHABLE: the 2026-07-26 plugin
-                IA re-housing (87dd943) folded seven tabs into Build / Changes /
-                Send + Advanced and KILLED the "Send to Playground" tab. code.js
-                still handles `run-send` (runSendToPlayground) but ui.html never
-                posts it (`grep -c run-send figma-sync/plugin/ui.html` = 0), so
-                the code this button mints can never be fulfilled by the shipped
-                plugin. Transport (engine/bridge.ts) and this UI are left intact
-                and DISABLED rather than deleted — re-enabling is one flag when
-                the plugin regains a sender. Do not re-enable on the strength of
-                code.js alone; the orphan is named in 87dd943's own message.
-                The three-rung fidelity ladder lives in the Help drawer. */}
+            {/* The plugin's Send tab has ONE receiver: the CLI (`ds-contracts
+                figma receive`, packages/cli/src/commands/figma.ts) — it pairs
+                by code over the same bridge transport (engine/bridge.ts) this
+                panel can mint a code for, but the shipped plugin UI posts only
+                to that CLI door, never to this page. The transport and this
+                UI stay intact and DISABLED rather than deleted; re-enabling is
+                one flag when the plugin gains a playground sender. The
+                walkthrough (/flow) shows the envelope the Send tab exports. */}
             <div className="rail__group" style={{ marginTop: 24 }}>
               <div className="rail__group-title">
-                From the Figma plugin — currently unavailable
+                From the Figma plugin&rsquo;s Send tab — a CLI door, not a playground one
               </div>
               <p className="hint">
-                This route used to deliver full token names <em>and</em> values on any Figma
-                plan, by reading your component sets straight out of the open file. The
-                plugin&rsquo;s <strong>Send to Playground</strong> tab was removed on
-                2026-07-26 when its seven tabs were re-housed into Build / Changes / Send, so
-                nothing can answer a pairing code today. Named, not hidden: the button below
-                stays disabled until the plugin ships a sender again. Use the URL route above,
-                or paste a dump into the <strong>JSON</strong> tab.
+                The plugin&rsquo;s <strong>Send</strong> tab reads the selected set, proposes a
+                contract with the same engine this page runs, and exports a{' '}
+                <code>CONTRACT-PROPOSAL</code> envelope (proposed contract, notes, child stubs,
+                minted tokens, a provenance line). Its receiver is the CLI:{' '}
+                <code>ds-contracts figma receive --out &lt;contracts-dir&gt;</code> waits under a
+                pairing code and writes only <code>.proposals/&lt;id&gt;.proposal.json</code>{' '}
+                unless <code>--apply</code>. Nothing in the shipped plugin posts to this page,
+                so the button below stays disabled — named, not hidden. Paste the exported
+                envelope, or a plugin dump, into the <strong>JSON</strong> tab instead.
               </p>
               {bridge === null ? (
                 <button
                   type="button"
                   className="btn--primary"
                   disabled
-                  title="The plugin's Send to Playground tab was removed on 2026-07-26; no sender exists to answer a pairing code."
+                  title="The plugin's Send tab posts only to `ds-contracts figma receive`; no sender exists for this page's pairing code."
                   onClick={() => void startBridge()}
                 >
-                  Receive from plugin — unavailable
+                  Receive from plugin — no sender in the shipped plugin
                 </button>
               ) : (
                 <div className="notice" aria-live="polite">
@@ -2687,7 +3314,7 @@ export function Playground() {
         {sourceTab === 'json' && (
           <div className="rail__section">
             <div className="field">
-              <label htmlFor="json-paste">Contract JSON or Figma dump (v1)</label>
+              <label htmlFor="json-paste">Contract JSON, a Figma dump, or a CONTRACT-PROPOSAL envelope</label>
               <textarea
                 id="json-paste"
                 rows={14}
@@ -2697,9 +3324,12 @@ export function Playground() {
                 spellCheck={false}
               />
               <p className="hint">
-                The power-user path: a pasted contract goes straight to the editor; a pasted dump
-                (the JSON a Figma plugin or REST export produces) runs the same proposer the
-                Figma import runs.
+                The power-user path: a pasted contract goes straight to the editor; a
+                pasted dump (the JSON a Figma plugin or REST export produces) runs the same
+                proposer the Figma import runs; a pasted <code>CONTRACT-PROPOSAL</code> envelope
+                (what the plugin&rsquo;s Send tab exports, or what <code>figma receive</code> lands
+                as <code>.proposals/&lt;id&gt;.proposal.json</code>) loads its proposed contract with
+                the envelope&rsquo;s own notes, minted tokens and provenance as receipts.
               </p>
             </div>
             <button type="button" className="btn--primary" disabled={!jsonText.trim()} onClick={loadJson}>
@@ -2884,6 +3514,7 @@ export function Playground() {
               text={text}
               onChange={setText}
               highlights={highlightLines}
+              anchors={tourHighlights}
               placeholder="The contract — pick an example, import from Figma, or paste code."
             />
           )}
@@ -3023,6 +3654,18 @@ export function Playground() {
             >
               Preview
             </button>
+            {tour ? (
+              <button
+                type="button"
+                role="tab"
+                aria-selected={outputTab === 'flow'}
+                title="The walkthrough step's artifact — what the engine produced, and where it came from"
+                className={`tabs__tab tabs__tab--flow${outputTab === 'flow' ? ' is-active' : ''}`}
+                onClick={() => setOutputTab('flow')}
+              >
+                Flow
+              </button>
+            ) : null}
             {emitters.map((e) => (
               <button
                 key={e.name}
@@ -3112,7 +3755,7 @@ export function Playground() {
                   </div>
                 ) : null}
               </>
-            ) : outputTab !== 'preview' ? (
+            ) : outputTab !== 'preview' && outputTab !== 'flow' ? (
               <>
                 <label className="output__format" title="prettier over the emitted files — lazy chunk (~1.4 MB), first run only">
                   <input type="checkbox" checked={format} onChange={(e) => setFormat(e.target.checked)} />
@@ -3150,7 +3793,32 @@ export function Playground() {
         </div>
 
         <div className="output__body">
-          {outputTab === 'preview' ? (
+          {outputTab === 'flow' && tour ? (
+            <FlowPanel
+              step={tour.steps[tourStep]}
+              index={tourStep}
+              total={tour.steps.length}
+              view={
+                flowView.kind === 'break'
+                  ? {
+                      kind: 'break',
+                      refusals:
+                        validation.status === 'violations' || validation.status === 'schema-error'
+                          ? validation.issues
+                          : [],
+                    }
+                  : flowView.kind === 'stamped'
+                    ? {
+                        ...flowView,
+                        referee:
+                          validation.status === 'violations' || validation.status === 'schema-error'
+                            ? validation.issues
+                            : [],
+                      }
+                    : flowView
+              }
+            />
+          ) : outputTab === 'preview' ? (
             <div className="preview">
               {stale ? (
                 <div className="preview__stale">
