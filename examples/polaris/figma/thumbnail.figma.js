@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "polaris.thumbnail",
     "version": "0.4.0",
     "anchorKey": null,
-    "description": "Thumbnail — generated from contract polaris.thumbnail v0.4.0 † (12 code-only facts — see plugin report)",
+    "description": "Thumbnail — generated from contract polaris.thumbnail v0.4.0 † (13 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -308,6 +308,17 @@ const COMPONENTS = [
       "element": "span"
     },
     "codeOnlyFacts": [
+      {
+        "part": "part-0",
+        "kind": "channel",
+        "channel": "aspect-ratio",
+        "value": "1 / 1",
+        "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+        "variants": {
+          "count": 4,
+          "of": 4
+        }
+      },
       {
         "part": "part-0",
         "kind": "declared",

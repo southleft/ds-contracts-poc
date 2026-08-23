@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "fluent.checkbox",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Checkbox — generated from contract fluent.checkbox v0.2.0 † (59 code-only facts — see plugin report)",
+    "description": "Checkbox — generated from contract fluent.checkbox v0.2.0 † (61 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -2910,6 +2910,35 @@ const COMPONENTS = [
     "codeOnlyFacts": [
       {
         "part": "icon",
+        "kind": "channel",
+        "channel": "aspect-ratio",
+        "value": "1 / 1",
+        "reason": "the canvas has no aspect-ratio field — this part carries no bound or literal width to derive a height from, so nothing was drawn from the ratio (a parent that takes its height from this part's ratio names that lowering on itself)",
+        "variants": {
+          "count": 16,
+          "of": 24,
+          "names": [
+            "Checked=Checked, Size=Medium, Shape=Square",
+            "Checked=Checked, Size=Medium, Shape=Circular",
+            "Checked=Checked, Size=Large, Shape=Square",
+            "Checked=Checked, Size=Large, Shape=Circular",
+            "Checked=Mixed, Size=Medium, Shape=Square",
+            "Checked=Mixed, Size=Medium, Shape=Circular",
+            "Checked=Mixed, Size=Large, Shape=Square",
+            "Checked=Mixed, Size=Large, Shape=Circular",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Active",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Hover",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "icon",
         "kind": "declared",
         "channel": "cursor",
         "value": "pointer",
@@ -2936,6 +2965,17 @@ const COMPONENTS = [
         "channel": "pointer-events",
         "value": "none",
         "reason": "Pointer-event gating exists only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "channel",
+        "channel": "aspect-ratio",
+        "value": "1 / 1",
+        "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
         "variants": {
           "count": 24,
           "of": 24

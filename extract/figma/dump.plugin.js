@@ -151,9 +151,21 @@
 // NOT captured in v1 (declared limits, noted by propose.ts): element
 // semantics, events. Read-only — mutates nothing.
 
-// Target set names. Empty array = every local set/component except the Slot
-// utility. For the shipped fixtures this was ['Badge', 'Switch', 'Card'].
-const TARGET_SETS = ['Badge', 'Switch', 'Card'];
+// Target set names. EMPTY (the shipped default, dump v1.30 R8) = every local
+// COMPONENT_SET / top-level COMPONENT on every page except the Slot utility —
+// narrowed to the current selection when the selection holds sets or
+// components (a variant selected inside a set counts as its set). A NON-EMPTY
+// list is a contract: every name must be found, or the dump REFUSES BY NAME
+// (it never returns a quiet partial). Either way the set names dumped are
+// printed to the console and listed in `_provenance.sets`.
+//
+// Until R8 this shipped as ['Badge', 'Switch', 'Card'] — the repo's own
+// fixture names — so the script run as this header documents (any console
+// bridge, pasted unedited) silently dumped three MUI sets from the demo file
+// and not one Flowbite stem. The plugin's Send tab rewrites the list at
+// runtime to the set you picked (figma-sync/plugin/ui.html proposeFor) and
+// was never affected.
+const TARGET_SETS = [];
 
 await figma.loadAllPagesAsync();
 
@@ -592,10 +604,10 @@ async function dumpNode(node, nodePath, parent) {
 
   // dump v1.2: channels with NO dump projection are named receipts.
   if ('blendMode' in node && node.blendMode !== 'NORMAL' && node.blendMode !== 'PASS_THROUGH') {
-    degrade('blend-mode-unsupported', nodePath, 'blendMode ' + node.blendMode + ' has no dump v1 projection — node renders as NORMAL');
+    degrade('blend-mode-unsupported', nodePath, 'blendMode ' + node.blendMode + ' (CSS mix-blend-mode) has no dump v1 projection — node renders as NORMAL');
   }
   if (!shape && 'rotation' in node && typeof node.rotation === 'number' && Math.abs(node.rotation) > 1e-6) {
-    degrade('rotation-unsupported', nodePath, 'rotation ' + node.rotation + ' on a ' + node.type + ' has no dump projection (rotation is carried only on shape decor — dump v1.3) — node renders unrotated (#42 residue)');
+    degrade('rotation-unsupported', nodePath, 'rotation ' + node.rotation + ' on a ' + node.type + ' (CSS transform: rotate()) has no dump projection (rotation is carried only on shape decor — dump v1.3) — node renders unrotated (#42 residue)');
   }
   if (VECTOR_TYPES.indexOf(node.type) >= 0) {
     degrade('vector-geometry-unsupported', nodePath, node.type + ' geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)');
@@ -673,7 +685,7 @@ async function dumpNode(node, nodePath, parent) {
       // counterAxisAlignContent has NO dump projection and no contract
       // vocabulary — say so rather than let the default pass for the drawing.
       if (node.counterAxisAlignContent === 'SPACE_BETWEEN') {
-        degrade('wrap-align-content-unsupported', nodePath, 'counterAxisAlignContent SPACE_BETWEEN on a WRAPPING stack is not captured (dump v1.12 carries layoutWrap and a distinct counterAxisSpacing only) — the wrapped LINES render packed rather than distributed');
+        degrade('wrap-align-content-unsupported', nodePath, 'counterAxisAlignContent SPACE_BETWEEN (CSS align-content: space-between) on a WRAPPING stack is not captured (dump v1.12 carries layoutWrap and a distinct counterAxisSpacing only) — the wrapped LINES render packed rather than distributed');
       }
     }
   }
@@ -719,7 +731,7 @@ async function dumpNode(node, nodePath, parent) {
     out.cornerRadius = node.cornerRadius;
   } else if ('cornerRadius' in node && typeof node.cornerRadius !== 'number') {
     // figma.mixed — per-corner radii (dump v1.2: named, no longer silent)
-    degrade('radii-nonuniform', nodePath, 'per-corner radii [' + [node.topLeftRadius, node.topRightRadius, node.bottomRightRadius, node.bottomLeftRadius].join(', ') + '] are not uniform — dump v1 carries a uniform radius only; omitted');
+    degrade('radii-nonuniform', nodePath, 'per-corner radii [' + [node.topLeftRadius, node.topRightRadius, node.bottomRightRadius, node.bottomLeftRadius].join(', ') + '] (CSS border-top-left-radius / border-top-right-radius / border-bottom-right-radius / border-bottom-left-radius) are not uniform — dump v1 carries a uniform border-radius only; omitted');
   }
 
   // Direct variable bindings (paint bindings ride fill/stroke/text instead).
@@ -773,10 +785,10 @@ async function dumpNode(node, nodePath, parent) {
     // border is the utility's own) — no receipt for an unconsumed channel.
     if (node.type !== 'INSTANCE') {
       if (typeof node.strokeWeight !== 'number') {
-        degrade('stroke-weights-nonuniform', nodePath, 'per-side stroke weights [' + [node.strokeTopWeight, node.strokeRightWeight, node.strokeBottomWeight, node.strokeLeftWeight].join(', ') + '] — dump v1 carries a uniform strokeWeight only');
+        degrade('stroke-weights-nonuniform', nodePath, 'per-side stroke weights [' + [node.strokeTopWeight, node.strokeRightWeight, node.strokeBottomWeight, node.strokeLeftWeight].join(', ') + '] (CSS border-top-width / border-right-width / border-bottom-width / border-left-width) — dump v1 carries a uniform border-width (strokeWeight) only');
       }
       if (Array.isArray(node.dashPattern) && node.dashPattern.length > 0) {
-        degrade('stroke-style-unsupported', nodePath, 'dashPattern [' + node.dashPattern.join(', ') + '] — dashed strokes have no dump v1 projection; stroke renders solid');
+        degrade('stroke-style-unsupported', nodePath, 'dashPattern [' + node.dashPattern.join(', ') + '] (CSS border-style: dashed) — dashed strokes have no dump v1 projection; the stroke renders as border-style: solid');
       }
       // OUTSIDE and INSIDE both LOWER (outline / border). CENTER does not:
       // it straddles the edge, half the weight each side, and CSS has no
@@ -864,17 +876,30 @@ async function dumpNode(node, nodePath, parent) {
         ? node.lineHeight.value
         : null;
     const channels = [];
+    // R8 (2026-08-22): every text receipt names its CSS CHANNEL, not only the
+    // Figma property — the canvas gate (conformance/canvas.ts) and the
+    // proposer match a receipt to the contract BY CHANNEL WORD, so a receipt
+    // that said only `textAlignHorizontal` could never satisfy `text-align`
+    // (the hole `text-overflow` had before today, now closed for all of them).
     if (node.letterSpacing !== figma.mixed && node.letterSpacing && node.letterSpacing.value !== 0) {
-      channels.push('letterSpacing ' + node.letterSpacing.value + node.letterSpacing.unit);
+      channels.push('letterSpacing ' + node.letterSpacing.value + node.letterSpacing.unit + ' (the canvas twin of CSS letter-spacing — drawn, not read back)');
     }
     // dump v1.16: UPPER/LOWER/TITLE are CAPTURED (text.textCase below — the
     // canvas fact behind CSS text-transform); SMALL_CAPS[_FORCED] has no CSS
     // text-transform twin and stays a receipt.
     const TEXT_CASE_CAPTURED = { UPPER: true, LOWER: true, TITLE: true };
-    if (node.textCase !== figma.mixed && node.textCase && node.textCase !== 'ORIGINAL' && !TEXT_CASE_CAPTURED[node.textCase]) channels.push('textCase ' + node.textCase);
-    if (node.textDecoration !== figma.mixed && node.textDecoration && node.textDecoration !== 'NONE') channels.push('textDecoration ' + node.textDecoration);
+    if (node.textCase !== figma.mixed && node.textCase && node.textCase !== 'ORIGINAL' && !TEXT_CASE_CAPTURED[node.textCase]) {
+      channels.push('textCase ' + node.textCase + ' (CSS text-transform has no small-caps value — font-variant-caps: small-caps is the nearest CSS spelling and is not a contract channel)');
+    }
+    if (node.textDecoration !== figma.mixed && node.textDecoration && node.textDecoration !== 'NONE') {
+      const DECORATION_CSS = { UNDERLINE: 'underline', STRIKETHROUGH: 'line-through' };
+      channels.push('textDecoration ' + node.textDecoration + ' (the canvas twin of CSS text-decoration-line: ' + (DECORATION_CSS[node.textDecoration] || String(node.textDecoration).toLowerCase()) + ' — drawn, not read back)');
+    }
     if (node.lineHeight !== figma.mixed && node.lineHeight && node.lineHeight.unit !== 'AUTO' && node.lineHeight.unit !== 'PIXELS') {
-      channels.push('lineHeight ' + node.lineHeight.value + node.lineHeight.unit + ' — only PIXELS carries, dump v1.3');
+      channels.push('lineHeight ' + node.lineHeight.value + node.lineHeight.unit + ' (CSS line-height — only PIXELS carries, dump v1.3; a PERCENT line height has no carried spelling)');
+    }
+    if (typeof node.paragraphSpacing === 'number' && node.paragraphSpacing !== 0) {
+      channels.push('paragraphSpacing ' + node.paragraphSpacing + 'px (no CSS channel on one text node — paragraph spacing is a block margin between paragraphs, not a contract text channel)');
     }
     // CLOSURE GATE (extract/figma/channel-closure-check.ts). `text-align` and
     // `text-overflow` are DECLARED_CHANNELS the canvas DRAWS — the emitter
@@ -884,10 +909,11 @@ async function dumpNode(node, nodePath, parent) {
     // rather than carried: naming closes the SILENT hole, which is the bar;
     // carrying them is a follow-up with its own measured value.
     if (node.textAlignHorizontal && node.textAlignHorizontal !== 'LEFT') {
-      channels.push('textAlignHorizontal ' + node.textAlignHorizontal);
+      const ALIGN_CSS = { CENTER: 'center', RIGHT: 'right', JUSTIFIED: 'justify' };
+      channels.push('textAlignHorizontal ' + node.textAlignHorizontal + ' (the canvas twin of CSS text-align: ' + (ALIGN_CSS[node.textAlignHorizontal] || String(node.textAlignHorizontal).toLowerCase()) + ' — drawn, not read back)');
     }
     if (node.textAlignVertical && node.textAlignVertical !== 'TOP') {
-      channels.push('textAlignVertical ' + node.textAlignVertical);
+      channels.push('textAlignVertical ' + node.textAlignVertical + ' (no CSS text-align twin — vertical placement of the text inside its own box; CSS vertical-align is inline baseline alignment, a different fact)');
     }
     if (node.textTruncation && node.textTruncation !== 'DISABLED') {
       channels.push('textTruncation ' + node.textTruncation + (typeof node.maxLines === 'number' ? ' maxLines ' + node.maxLines : '') + ' (the canvas twin of CSS text-overflow: ellipsis — drawn, not read back)');
@@ -1099,11 +1125,26 @@ const dumps = {
 };
 dumps._degradations = degradations;
 dumps._variables = capturedVariables;
+// R8 scope (see TARGET_SETS): a non-empty list selects by name; an empty list
+// selects the current selection's sets when there is one, else every set.
+const selectedSetIds = new Set();
+if (TARGET_SETS.length === 0) {
+  try {
+    for (const sel of (figma.currentPage && figma.currentPage.selection) || []) {
+      if (sel.type === 'COMPONENT_SET') selectedSetIds.add(sel.id);
+      else if (sel.type === 'COMPONENT') selectedSetIds.add(sel.parent && sel.parent.type === 'COMPONENT_SET' ? sel.parent.id : sel.id);
+    }
+  } catch (e) { /* no selection surface on this bridge — every set */ }
+}
+const scope = TARGET_SETS.length > 0 ? 'TARGET_SETS' : selectedSetIds.size > 0 ? 'selection' : 'every set';
+const seenNames = [];
 for (const page of figma.root.children) {
   for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
     if (node.type === 'COMPONENT' && node.parent && node.parent.type === 'COMPONENT_SET') continue;
     if (node.name === 'Slot') continue; // utility, never a contract component
+    seenNames.push(node.name);
     if (TARGET_SETS.length > 0 && !TARGET_SETS.includes(node.name)) continue;
+    if (scope === 'selection' && !selectedSetIds.has(node.id)) continue;
     const variants = [];
     if (node.type === 'COMPONENT_SET') {
       for (const variant of node.children) variants.push(await dumpNode(variant, node.name + ':' + variant.name, node));
@@ -1177,4 +1218,21 @@ for (const page of figma.root.children) {
     if (Object.keys(defs.slotDescriptions).length > 0) dumps[node.name].slotDescriptions = defs.slotDescriptions;
   }
 }
+// R8: the dump says WHAT it dumped, and a named set that is not in the file is
+// a refusal — never a quiet `{}` that propose reads as "no sets".
+const dumpedSets = Object.keys(dumps).filter((k) => k.charAt(0) !== '_');
+if (TARGET_SETS.length > 0) {
+  const missing = TARGET_SETS.filter((name) => !dumpedSets.includes(name));
+  if (missing.length > 0) {
+    const available = seenNames.slice(0, 40).map((n) => JSON.stringify(n)).join(', ') + (seenNames.length > 40 ? ', +' + (seenNames.length - 40) + ' more' : '');
+    throw new Error(
+      'dump refused: TARGET_SETS names ' + missing.length + ' set(s) not found on any page of this file: ' +
+        missing.map((n) => JSON.stringify(n)).join(', ') +
+        ' — ' + (seenNames.length > 0 ? 'sets in this file: ' + available : 'this file has no COMPONENT_SET / COMPONENT at all') +
+        ' (dump v1.30; an empty TARGET_SETS dumps every set, or the selection)',
+    );
+  }
+}
+dumps._provenance.sets = dumpedSets;
+console.log('dump v1.30 (' + scope + '): ' + dumpedSets.length + ' set(s)' + (dumpedSets.length > 0 ? ' — ' + dumpedSets.join(', ') : ' — nothing to dump: this file has no COMPONENT_SET / COMPONENT outside the Slot utility'));
 return dumps;

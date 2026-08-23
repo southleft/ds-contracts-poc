@@ -13925,6 +13925,17 @@
       "facts": [
         {
           "part": "initials",
+          "kind": "channel",
+          "channel": "aspect-ratio",
+          "value": "1 / 1",
+          "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+          "variants": {
+            "count": 5,
+            "of": 5
+          }
+        },
+        {
+          "part": "initials",
           "kind": "declared",
           "channel": "position",
           "value": "absolute",
@@ -15921,6 +15932,21 @@
           "variants": {
             "count": 3,
             "of": 3
+          }
+        },
+        {
+          "part": "icon-3",
+          "kind": "channel",
+          "channel": "aspect-ratio",
+          "value": "1 / 1",
+          "reason": "the canvas has no aspect-ratio field — this part carries no bound or literal width to derive a height from, so nothing was drawn from the ratio (a parent that takes its height from this part's ratio names that lowering on itself)",
+          "variants": {
+            "count": 2,
+            "of": 3,
+            "names": [
+              "Checked=checked",
+              "Checked=indeterminate"
+            ]
           }
         },
         {
@@ -18660,6 +18686,17 @@
       "contractId": "polaris.thumbnail",
       "name": "Thumbnail",
       "facts": [
+        {
+          "part": "part-0",
+          "kind": "channel",
+          "channel": "aspect-ratio",
+          "value": "1 / 1",
+          "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+          "variants": {
+            "count": 4,
+            "of": 4
+          }
+        },
         {
           "part": "part-0",
           "kind": "declared",

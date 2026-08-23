@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "carbon.iconbutton",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "IconButton — generated from contract carbon.iconbutton v0.2.0 † (25 code-only facts — see plugin report)",
+    "description": "IconButton — generated from contract carbon.iconbutton v0.2.0 † (27 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -1404,6 +1404,17 @@ const COMPONENTS = [
       {
         "part": "btn",
         "kind": "channel",
+        "channel": "aspect-ratio",
+        "value": "1 / 1",
+        "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+        "variants": {
+          "count": 16,
+          "of": 16
+        }
+      },
+      {
+        "part": "btn",
+        "kind": "channel",
         "channel": "bottom",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -1649,6 +1660,17 @@ const COMPONENTS = [
         "channel": "position",
         "value": "relative",
         "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 16,
+          "of": 16
+        }
+      },
+      {
+        "part": "tooltip-trigger__wrapper",
+        "kind": "channel",
+        "channel": "aspect-ratio",
+        "value": "1 / 1",
+        "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
         "variants": {
           "count": 16,
           "of": 16
