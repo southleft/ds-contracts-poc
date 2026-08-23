@@ -16,7 +16,7 @@
  *     the enriched contract; bump the version; append promotion provenance;
  *   · copy floor-reconstructed svg assets into the example's icon dir (a
  *     contract referencing an uncopied asset refuses by name at emit);
- *   · probe `figmaStatePreviews` against the REAL referee (core/emit-react
+ *   · probe `bindings.figma.statePreviews` against the REAL referee (core/emit-react
  *     validateContract) — the referee decides, and its refusals are printed;
  *   · SOURCE-ALIAS the minted tree: a minted leaf whose covering combos all
  *     agree on ONE source token, and whose minted value equals that token's
@@ -923,7 +923,7 @@ export function promote(
 
   const stateRefusals: string[] = [];
   const statePreviewsOn: string[] = [];
-  /** The Polaris probe: opt into `figmaStatePreviews` wherever the REFEREE
+  /** The Polaris probe: opt into `bindings.figma.statePreviews` wherever the REFEREE
    *  accepts it, so the canvas draws a State cell per declared interaction
    *  state instead of pretending the component has only a default plane. The
    *  referee — not this module — decides: a state with no token overrides
@@ -932,14 +932,17 @@ export function promote(
    *  still drive the code surface and declaredStates). */
   const statePreviewProbe = (contract: Record<string, unknown>): void => {
     const states = (contract.states ?? []) as string[];
-    // An EXPLICIT `figmaStatePreviews` in the source artifact — true or
-    // false — is a reviewed decision and passes through untouched. The probe
-    // only fills the ABSENT case; without the `in` check an explicit
-    // reviewed `false` (altitude chip, exact-conversion wave) was silently
-    // flipped back to true on every re-promotion.
-    if (states.length === 0 || "figmaStatePreviews" in contract) return;
+    // An EXPLICIT `bindings.figma.statePreviews` in the source artifact —
+    // true or false — is a reviewed decision and passes through untouched.
+    // The probe only fills the ABSENT case; without the `in` check an
+    // explicit reviewed `false` (altitude chip, exact-conversion wave) was
+    // silently flipped back to true on every re-promotion.
+    type Bindings = { figma: Record<string, unknown>; code: Record<string, unknown> };
+    const own = contract.bindings as Bindings;
+    if (states.length === 0 || "statePreviews" in own.figma) return;
     const probe = structuredClone(contract) as Record<string, unknown>;
-    probe.figmaStatePreviews = true;
+    // Spelled BEFORE anchors — the schema's (and the codemod's) key order.
+    (probe.bindings as Bindings).figma = { statePreviews: true, ...own.figma };
     const probeErrors: string[] = [];
     validateContract(
       probe as never,
@@ -948,13 +951,13 @@ export function promote(
       icons,
     );
     if (probeErrors.length === 0) {
-      contract.figmaStatePreviews = true;
+      own.figma = { statePreviews: true, ...own.figma };
       statePreviewsOn.push(`${contract.id} (${states.join(", ")})`);
-      log(`  · ${contract.id}: figmaStatePreviews ON (${states.join(", ")})`);
+      log(`  · ${contract.id}: bindings.figma.statePreviews ON (${states.join(", ")})`);
     } else {
       stateRefusals.push(`${contract.id}: ${probeErrors[0]}`);
       log(
-        `  · ${contract.id}: figmaStatePreviews REFUSED by the referee (named): ${probeErrors[0]}`,
+        `  · ${contract.id}: bindings.figma.statePreviews REFUSED by the referee (named): ${probeErrors[0]}`,
       );
     }
   };
@@ -1187,7 +1190,7 @@ export function promote(
     `✔ minted tree → ${cfg.mintedOut} (${aliased} source-aliased, ${literalKept} literal, ${aliasReceipts.length} named refusals)`,
   );
   log(
-    `✔ figmaStatePreviews: ${statePreviewsOn.length} accepted by the referee` +
+    `✔ bindings.figma.statePreviews: ${statePreviewsOn.length} accepted by the referee` +
       (statePreviewsOn.length ? ` (${statePreviewsOn.join("; ")})` : "") +
       `, ${stateRefusals.length} REFUSED BY NAME` +
       (stateRefusals.length

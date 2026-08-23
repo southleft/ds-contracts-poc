@@ -117,15 +117,19 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
-      "componentSetKey": "e71ef70ee99e707af6c5eaa57b6336ae906b5690",
-      "nodeId": "11:1119"
+      "anchors": {
+        "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+        "componentSetKey": "e71ef70ee99e707af6c5eaa57b6336ae906b5690",
+        "nodeId": "11:1119"
+      }
     },
     "code": {
-      "importPath": "src/components/TypeaheadItem",
-      "export": "TypeaheadItem"
+      "anchors": {
+        "importPath": "src/components/TypeaheadItem",
+        "export": "TypeaheadItem"
+      }
     }
   }
 }

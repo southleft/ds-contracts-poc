@@ -219,15 +219,19 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "statePreviews": false,
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "altitude-web-components",
-      "export": "al-chip"
+      "anchors": {
+        "importPath": "altitude-web-components",
+        "export": "al-chip"
+      }
     }
-  },
-  "figmaStatePreviews": false
+  }
 }

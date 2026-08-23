@@ -269,7 +269,7 @@ export function runDiagnose(configArg?: string): number {
     if (!designByName) continue;
     // Native-representation contracts (layout primitives) intentionally have
     // no design component set — the concept IS the canvas capability.
-    if (contract.figmaRepresentation === "native") continue;
+    if (contract.bindings.figma.representation === "native") continue;
     const hit = designFor(contract.name);
     if (!hit) {
       add({

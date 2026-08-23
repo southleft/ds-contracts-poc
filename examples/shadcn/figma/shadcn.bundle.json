@@ -2918,14 +2918,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@shadcn-sandbox/ui",
-          "export": "Alert"
+          "anchors": {
+            "importPath": "@shadcn-sandbox/ui",
+            "export": "Alert"
+          }
         }
       }
     },
@@ -3052,14 +3056,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@shadcn-sandbox/ui",
-          "export": "Avatar"
+          "anchors": {
+            "importPath": "@shadcn-sandbox/ui",
+            "export": "Avatar"
+          }
         }
       }
     },
@@ -3247,17 +3255,21 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@shadcn-sandbox/ui",
-          "export": "Badge"
+          "anchors": {
+            "importPath": "@shadcn-sandbox/ui",
+            "export": "Badge"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "./contract.schema.json",
@@ -3548,17 +3560,21 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@shadcn-sandbox/ui",
-          "export": "Button"
+          "anchors": {
+            "importPath": "@shadcn-sandbox/ui",
+            "export": "Button"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "./contract.schema.json",
@@ -3740,14 +3756,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@shadcn-sandbox/ui",
-          "export": "Card"
+          "anchors": {
+            "importPath": "@shadcn-sandbox/ui",
+            "export": "Card"
+          }
         }
       }
     },
@@ -3914,17 +3934,21 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@shadcn-sandbox/ui",
-          "export": "Checkbox"
+          "anchors": {
+            "importPath": "@shadcn-sandbox/ui",
+            "export": "Checkbox"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "./contract.schema.json",
@@ -4006,17 +4030,21 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@shadcn-sandbox/ui",
-          "export": "Input"
+          "anchors": {
+            "importPath": "@shadcn-sandbox/ui",
+            "export": "Input"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "./contract.schema.json",
@@ -4155,14 +4183,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@shadcn-sandbox/ui",
-          "export": "Select"
+          "anchors": {
+            "importPath": "@shadcn-sandbox/ui",
+            "export": "Select"
+          }
         }
       }
     },
@@ -4353,17 +4385,21 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@shadcn-sandbox/ui",
-          "export": "Switch"
+          "anchors": {
+            "importPath": "@shadcn-sandbox/ui",
+            "export": "Switch"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "./contract.schema.json",
@@ -4601,14 +4637,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@shadcn-sandbox/ui",
-          "export": "Tabs"
+          "anchors": {
+            "importPath": "@shadcn-sandbox/ui",
+            "export": "Tabs"
+          }
         }
       }
     },
@@ -4739,14 +4779,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "@shadcn-sandbox/ui",
-          "export": "Tooltip"
+          "anchors": {
+            "importPath": "@shadcn-sandbox/ui",
+            "export": "Tooltip"
+          }
         }
       }
     }

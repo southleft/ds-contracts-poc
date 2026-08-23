@@ -342,7 +342,7 @@ export function ComponentDetail({ id }: { id: string }) {
   }
   const native = entry.figma.representation === 'native';
   const findings = findingsForComponent(entry.name);
-  const nodeId = entry.contract?.anchors.figma.nodeId ?? null;
+  const nodeId = entry.contract?.bindings.figma.anchors.nodeId ?? null;
 
   return (
     <>
@@ -357,7 +357,7 @@ export function ComponentDetail({ id }: { id: string }) {
         <p className="text-muted-foreground max-w-3xl text-sm">{entry.description}</p>
         <div className="flex flex-wrap items-center gap-3 pt-1">
           <code className="bg-muted rounded-md px-2 py-1 text-xs">
-            import {'{'} {entry.name} {'}'} from '{entry.contract?.anchors.code.importPath}'
+            import {'{'} {entry.name} {'}'} from '{entry.contract?.bindings.code.anchors.importPath}'
           </code>
           {!native && nodeId ? (
             <Button asChild variant="outline" size="sm">
@@ -478,7 +478,7 @@ export function ComponentDetail({ id }: { id: string }) {
                 </div>
               ))}
               <p className="text-muted-foreground font-mono text-xs">
-                key {entry.contract?.anchors.figma.componentSetKey?.slice(0, 16)}…
+                key {entry.contract?.bindings.figma.anchors.componentSetKey?.slice(0, 16)}…
               </p>
             </CardContent>
           </Card>

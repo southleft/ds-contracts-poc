@@ -1938,14 +1938,18 @@
           "trigger": "dismiss"
         }
       ],
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "flowbite-react",
-          "export": "Alert"
+          "anchors": {
+            "importPath": "flowbite-react",
+            "export": "Alert"
+          }
         }
       }
     },
@@ -2162,17 +2166,21 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "flowbite-react",
-          "export": "Badge"
+          "anchors": {
+            "importPath": "flowbite-react",
+            "export": "Badge"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "./contract.schema.json",
@@ -2446,17 +2454,21 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "statePreviews": true,
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "flowbite-react",
-          "export": "Button"
+          "anchors": {
+            "importPath": "flowbite-react",
+            "export": "Button"
+          }
         }
-      },
-      "figmaStatePreviews": true
+      }
     },
     {
       "$schema": "./contract.schema.json",
@@ -2534,14 +2546,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "flowbite-react",
-          "export": "Card"
+          "anchors": {
+            "importPath": "flowbite-react",
+            "export": "Card"
+          }
         }
       }
     },
@@ -2642,14 +2658,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "flowbite-react",
-          "export": "HelperText"
+          "anchors": {
+            "importPath": "flowbite-react",
+            "export": "HelperText"
+          }
         }
       }
     },
@@ -2720,14 +2740,18 @@
           }
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "flowbite-react",
-          "export": "Kbd"
+          "anchors": {
+            "importPath": "flowbite-react",
+            "export": "Kbd"
+          }
         }
       }
     },
@@ -2828,14 +2852,18 @@
           ]
         }
       },
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "flowbite-react",
-          "export": "Label"
+          "anchors": {
+            "importPath": "flowbite-react",
+            "export": "Label"
+          }
         }
       }
     },
@@ -3129,14 +3157,18 @@
           }
         }
       ],
-      "anchors": {
+      "bindings": {
         "figma": {
-          "fileKey": null,
-          "componentSetKey": null
+          "anchors": {
+            "fileKey": null,
+            "componentSetKey": null
+          }
         },
         "code": {
-          "importPath": "flowbite-react",
-          "export": "ToggleSwitch"
+          "anchors": {
+            "importPath": "flowbite-react",
+            "export": "ToggleSwitch"
+          }
         }
       }
     }

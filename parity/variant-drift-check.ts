@@ -297,7 +297,7 @@ async function rebuildFixtures(): Promise<void> {
   const canvas = await compileMockCanvas(path.join(ROOT, 'contracts'));
   const contracts = JSON.parse(
     readFileSync(path.join(ROOT, 'contracts', 'badge.contract.json'), 'utf8'),
-  ) as { anchors: { figma: { fileKey: string } } };
+  ) as { bindings: { figma: { anchors: { fileKey: string } } } };
 
   // ── pristine: the REAL plugin over the untouched generated canvas. Its
   // `fingerprint` rows are the pluginData the generate step actually wrote;
@@ -324,7 +324,7 @@ async function rebuildFixtures(): Promise<void> {
 
   const wrap = (sets: unknown[], note: string) => ({
     fileName: 'ds-contracts fixture — real parity/extract-figma.plugin.js output over the mocked canvas (rebuild: npx tsx parity/variant-drift-check.ts --rebuild-fixtures)',
-    fileKey: contracts.anchors.figma.fileKey,
+    fileKey: contracts.bindings.figma.anchors.fileKey,
     // Frozen on purpose: a fixture whose age moves would make the gate's
     // verdict depend on the wall clock. The gate passes MAX_SNAPSHOT_AGE_DAYS.
     extractedAt: 1754000000000,

@@ -130,15 +130,19 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
-      "componentSetKey": "84b0a3c9abb3122d60820f8047a8b6d200956067",
-      "nodeId": "11:844"
+      "anchors": {
+        "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+        "componentSetKey": "84b0a3c9abb3122d60820f8047a8b6d200956067",
+        "nodeId": "11:844"
+      }
     },
     "code": {
-      "importPath": "src/components/Citation",
-      "export": "Citation"
+      "anchors": {
+        "importPath": "src/components/Citation",
+        "export": "Citation"
+      }
     }
   }
 }

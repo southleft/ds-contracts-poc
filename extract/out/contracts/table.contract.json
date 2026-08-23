@@ -105,14 +105,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/Table/Table",
-      "export": "Table"
+      "anchors": {
+        "importPath": "src/components/Table/Table",
+        "export": "Table"
+      }
     }
   }
 }

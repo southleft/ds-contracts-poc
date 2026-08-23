@@ -233,15 +233,19 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
-      "componentSetKey": "a14d81db3f136a10a1b8f011bc2894198e92083e",
-      "nodeId": "1052:489"
+      "anchors": {
+        "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+        "componentSetKey": "a14d81db3f136a10a1b8f011bc2894198e92083e",
+        "nodeId": "1052:489"
+      }
     },
     "code": {
-      "importPath": "src/components/Tooltip",
-      "export": "Tooltip"
+      "anchors": {
+        "importPath": "src/components/Tooltip",
+        "export": "Tooltip"
+      }
     }
   }
 }

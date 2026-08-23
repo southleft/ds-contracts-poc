@@ -202,15 +202,19 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "altitude-web-components",
-      "export": "al-button"
+      "anchors": {
+        "importPath": "altitude-web-components",
+        "export": "al-button"
+      }
     }
-  },
-  "figmaStatePreviews": true
+  }
 }

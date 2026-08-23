@@ -96,14 +96,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "polaris-react/src/components/Badge/Badge",
-      "export": "Badge"
+      "anchors": {
+        "importPath": "polaris-react/src/components/Badge/Badge",
+        "export": "Badge"
+      }
     }
   }
 }

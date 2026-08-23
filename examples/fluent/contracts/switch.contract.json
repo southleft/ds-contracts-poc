@@ -301,15 +301,19 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "@fluentui/react-components",
-      "export": "Switch"
+      "anchors": {
+        "importPath": "@fluentui/react-components",
+        "export": "Switch"
+      }
     }
-  },
-  "figmaStatePreviews": true
+  }
 }

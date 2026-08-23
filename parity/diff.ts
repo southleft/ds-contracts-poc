@@ -200,7 +200,7 @@ const figmaTokens: {
 // snapshots stay usable (backward compatible).
 
 const MAX_SNAPSHOT_AGE_DAYS = Number(process.env.MAX_SNAPSHOT_AGE_DAYS ?? 14);
-const anchorFileKey = contracts[0]?.anchors.figma.fileKey ?? null;
+const anchorFileKey = contracts[0]?.bindings.figma.anchors.fileKey ?? null;
 const provenanceWarnings: string[] = [];
 
 for (const [label, snap] of [
@@ -405,13 +405,13 @@ const normalizeFigmaProps = (set: FigmaSet) => {
 };
 
 for (const contract of contracts) {
-  if (contract.figmaRepresentation === 'native') continue; // no Figma component expected
-  const anchorKey = contract.anchors.figma.componentSetKey;
+  if (contract.bindings.figma.representation === 'native') continue; // no Figma component expected
+  const anchorKey = contract.bindings.figma.anchors.componentSetKey;
   const set =
     figmaComponents.sets.find((s) => anchorKey && s.key === anchorKey) ??
     figmaComponents.sets.find((s) => s.name === contract.name);
   if (!set) {
-    if (!anchorKey && !contract.anchors.figma.nodeId) {
+    if (!anchorKey && !contract.bindings.figma.anchors.nodeId) {
       pending.push({
         subject: contract.name,
         detail: 'No design anchor yet — the contract has never been synced to Figma (pending first generation, not drift)',
@@ -505,12 +505,12 @@ for (const contract of contracts) {
     }
   }
 
-  // State previews (figmaStatePreviews): a DECLARED canvas-only surface.
+  // State previews (bindings.figma.statePreviews): a DECLARED canvas-only surface.
   // When the contract opts in, the set must carry the State variant axis
   // with exactly Default + the declared states — the axis is contract API,
   // not drift. (The converse — a State axis with NO opt-in — is handled in
   // the ahead sweep below: that's the kit-rot detection story.)
-  if (contract.figmaStatePreviews && contract.states.length > 0) {
+  if (contract.bindings.figma.statePreviews && contract.states.length > 0) {
     expectedNames.add(STATE_PREVIEW_PROPERTY);
     const def = figmaProps.get(STATE_PREVIEW_PROPERTY);
     const want = [STATE_PREVIEW_DEFAULT, ...contract.states.map(statePreviewLabel)];
@@ -519,7 +519,7 @@ for (const contract of contracts) {
         surface: 'figma',
         classification: 'behind',
         subject: `${contract.name}.${STATE_PREVIEW_PROPERTY}`,
-        detail: `Contract opts into state previews (figmaStatePreviews) but the Figma set has no ${STATE_PREVIEW_PROPERTY} variant axis`,
+        detail: `Contract opts into state previews (bindings.figma.statePreviews) but the Figma set has no ${STATE_PREVIEW_PROPERTY} variant axis`,
         remedy: 'Re-run the component sync script (amend adds the State preview axis and renames base variants with State=Default)',
       });
     } else {
@@ -554,7 +554,7 @@ for (const contract of contracts) {
     }
   }
 
-  // Slots: a NATIVE SLOT property per slot (the contract's slot.figmaProperty
+  // Slots: a NATIVE SLOT property per slot (the contract's slot.bindings.figma.property
   // is its display name); optional slots additionally get a "Show X" BOOLEAN.
   // `accepts` must round-trip as preferredValues whose keys are the accepted
   // contracts' componentSetKey anchors.
@@ -608,7 +608,7 @@ for (const contract of contracts) {
     }
     if (def && slot.accepts && slot.accepts.length > 0) {
       const expectedKeys = slot.accepts
-        .map((id) => byIdAll.get(id)?.anchors.figma.componentSetKey)
+        .map((id) => byIdAll.get(id)?.bindings.figma.anchors.componentSetKey)
         .filter((k): k is string => Boolean(k))
         .sort();
       const gotKeys = (def.preferredValues ?? []).map((p) => p.key).sort();
@@ -633,7 +633,7 @@ for (const contract of contracts) {
       for (const child of drawn ?? []) {
         if (child.key && expectedKeys.includes(child.key)) continue;
         const known = child.key
-          ? contracts.find((c) => c.anchors.figma.componentSetKey === child.key)
+          ? contracts.find((c) => c.bindings.figma.anchors.componentSetKey === child.key)
           : undefined;
         add({
           surface: 'figma',
@@ -700,17 +700,17 @@ for (const contract of contracts) {
     // built "State=Hover" variants because Figma can't run pseudo-classes,
     // and those rot. Propose adoption (the one-field opt-in regenerates
     // them from the contract's state token overrides), never a bogus prop.
-    if (name === STATE_PREVIEW_PROPERTY && def.type === 'VARIANT' && !contract.figmaStatePreviews) {
+    if (name === STATE_PREVIEW_PROPERTY && def.type === 'VARIANT' && !contract.bindings.figma.statePreviews) {
       add({
         surface: 'figma',
         classification: 'ahead',
         subject: `${contract.name}.${STATE_PREVIEW_PROPERTY}`,
         detail: `Figma set carries a hand-built ${STATE_PREVIEW_PROPERTY} variant axis [${(def.variantOptions ?? []).join(', ')}] the contract does not declare — hand-maintained state previews rot; the contract can own them`,
-        ...(contract.states.length > 0 ? { proposedPatch: { figmaStatePreviews: true } } : {}),
+        ...(contract.states.length > 0 ? { proposedPatch: { bindings: { figma: { statePreviews: true } } } } : {}),
         remedy:
           contract.states.length > 0
-            ? `Adopt: set "figmaStatePreviews": true in contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (bump minor), npm run figma:plan, re-sync — or retire the hand-built axis`
-            : 'Declare interaction states + root token overrides in the contract (then opt into figmaStatePreviews), or retire the hand-built axis',
+            ? `Adopt: set bindings.figma.statePreviews: true in contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (bump minor), npm run figma:plan, re-sync — or retire the hand-built axis`
+            : 'Declare interaction states + root token overrides in the contract (then opt into bindings.figma.statePreviews), or retire the hand-built axis',
       });
       continue;
     }

@@ -185,7 +185,7 @@ const register = (c: AnyContract): void => {
   if (typeof c?.id !== 'string' || typeof c?.name !== 'string') return;
   contractIdByName.set(c.name, c.id);
   contractsById.set(c.id, c);
-  const key = c.anchors?.figma?.componentSetKey;
+  const key = c.bindings?.figma?.anchors?.componentSetKey;
   if (typeof key === 'string' && key.length > 0) contractIdByKey.set(key, c.id);
   sessionClaimedIds.add(c.id);
   if (!contracts.has(c.id)) contracts.set(c.id, c);

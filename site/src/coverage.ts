@@ -77,18 +77,20 @@ reg('contract', 'fields', [
   'contract.version',
   'contract.status',
   'contract.description',
-  'contract.figmaRepresentation',
+  'contract.bindings.figma.representation',
   'contract.modes',
 ]);
 reg('contract', 'anchors', [
-  'contract.anchors',
-  'contract.anchors.figma',
-  'contract.anchors.figma.fileKey',
-  'contract.anchors.figma.componentSetKey',
-  'contract.anchors.figma.nodeId',
-  'contract.anchors.code',
-  'contract.anchors.code.importPath',
-  'contract.anchors.code.export',
+  'contract.bindings',
+  'contract.bindings.figma',
+  'contract.bindings.code',
+  'contract.bindings.figma.anchors',
+  'contract.bindings.figma.anchors.fileKey',
+  'contract.bindings.figma.anchors.componentSetKey',
+  'contract.bindings.figma.anchors.nodeId',
+  'contract.bindings.code.anchors',
+  'contract.bindings.code.anchors.importPath',
+  'contract.bindings.code.anchors.export',
 ]);
 reg('contract', 'provenance', [
   'contract.provenance',
@@ -112,7 +114,7 @@ reg('contract', 'a11y', [
 reg('props', 'props', ['contract.props']);
 reg('anatomy', 'anatomy', ['contract.anatomy']);
 reg('states', 'declared-states', ['contract.states']);
-reg('states', 'state-previews', ['contract.figmaStatePreviews']);
+reg('states', 'state-previews', ['contract.bindings.figma.statePreviews']);
 reg('events', 'events', ['contract.events']);
 
 // --- Semantics -------------------------------------------------------------
@@ -303,7 +305,9 @@ reg('composition', 'slots', [
   'slot.min',
   'slot.max',
   'slot.required',
-  'slot.figmaProperty',
+  'slot.bindings',
+  'slot.bindings.figma',
+  'slot.bindings.figma.property',
 ]);
 reg('composition', 'default-content', [
   'slot.defaultContent',

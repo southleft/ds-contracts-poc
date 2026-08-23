@@ -64,9 +64,9 @@ const tagContract = (borderRadius: string) => ({
     },
   },
   a11y: { contrast: 'AA' },
-  anchors: {
-    figma: { fileKey: null, componentSetKey: null, nodeId: null },
-    code: { importPath: '@ds/components', export: 'Tag' },
+  bindings: {
+    figma: { anchors: { fileKey: null, componentSetKey: null, nodeId: null } },
+    code: { anchors: { importPath: '@ds/components', export: 'Tag' } },
   },
 });
 

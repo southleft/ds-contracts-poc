@@ -56,14 +56,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/Kbd/Kbd",
-      "export": "Kbd"
+      "anchors": {
+        "importPath": "src/components/Kbd/Kbd",
+        "export": "Kbd"
+      }
     }
   }
 }

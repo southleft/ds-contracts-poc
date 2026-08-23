@@ -4,7 +4,7 @@
  * probe calls the REAL referee rather than re-implementing its rules.)
  *
  * SHIM. The pipeline this file used to carry inline — source-alias pass,
- * provenance anchors, figmaStatePreviews probe, minted merge, resolution guard
+ * provenance anchors, statePreviews probe, minted merge, resolution guard
  * — now lives ONCE in `packages/cli/src/promote.ts`, driven by
  * `examples/mui/ds-library.json`. Six near-identical copies meant a fix in
  * one (the class-stem join defect, task #25) stayed latent in the other five.

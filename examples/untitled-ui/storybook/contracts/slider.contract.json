@@ -420,15 +420,19 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
-      "componentSetKey": "f1853f5958218f60d7733b54b4bd5e47f59abb70",
-      "nodeId": "1086:534"
+      "anchors": {
+        "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+        "componentSetKey": "f1853f5958218f60d7733b54b4bd5e47f59abb70",
+        "nodeId": "1086:534"
+      }
     },
     "code": {
-      "importPath": "src/components/Slider",
-      "export": "Slider"
+      "anchors": {
+        "importPath": "src/components/Slider",
+        "export": "Slider"
+      }
     }
   }
 }

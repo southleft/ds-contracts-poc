@@ -54,9 +54,9 @@ const wrapper = (withHeight: boolean) =>
         parts: { holder: { slot: { name: 'children' } } },
       },
     },
-    anchors: {
-      figma: { fileKey: null, componentSetKey: null },
-      code: { importPath: 'src/components/EvalIconWrap', export: 'EvalIconWrap' },
+    bindings: {
+      figma: { anchors: { fileKey: null, componentSetKey: null } },
+      code: { anchors: { importPath: 'src/components/EvalIconWrap', export: 'EvalIconWrap' } },
     },
   });
 

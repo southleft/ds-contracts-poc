@@ -102,6 +102,8 @@ Hand-editing generated output is drift — the differ will flag it, which is the
 
 Semver semantics ([docs/02](docs/02-contract-spec.md)): added optional prop = minor; removed/renamed prop or value = major; widening a slot's `accepts` = minor, narrowing = major. The PR diff of a contract *is* the design-system change review — write descriptions for a designer and an engineer reading the same page.
 
+The **schema** (`@ds-contracts/schema`) follows the same rule, and a schema major is a package, not a commit: removing or renaming a schema field ships (1) the old spelling refused *by name* with the new spelling in the message (a `z.never()` tombstone quoting `LEGACY_V<n>`, never a bare "unrecognized key"), (2) a codemod under `ds-contracts migrate` built on the one migration function the schema package exports, run over every committed contract dir in the same change (`npm run contracts:migrate`; `contracts:migrate:check` is the gate), (3) regeneration of every surface that embeds a contract (figma scripts, GENESIS batches, bundles, goldens, the plugin engine receipt — each per its documented recipe; generated CODE surfaces must stay byte-identical), and (4) a `BREAKING` CHANGELOG entry naming the rename table. Tool-specific facts live under `bindings.<surface>` at every level; a new top-level field that names a tool is a review refusal.
+
 ## Honesty conventions
 
 - Limits are documented where the capability is claimed, not in a footnote elsewhere.

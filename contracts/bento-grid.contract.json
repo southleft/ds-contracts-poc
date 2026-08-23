@@ -81,7 +81,11 @@
           "element": "header",
           "slot": {
             "name": "header",
-            "figmaProperty": "Header"
+            "bindings": {
+              "figma": {
+                "property": "Header"
+              }
+            }
           }
         },
         "sidebar": {
@@ -89,7 +93,11 @@
           "element": "aside",
           "slot": {
             "name": "sidebar",
-            "figmaProperty": "Sidebar"
+            "bindings": {
+              "figma": {
+                "property": "Sidebar"
+              }
+            }
           }
         },
         "main": {
@@ -97,14 +105,22 @@
           "element": "main",
           "slot": {
             "name": "main",
-            "figmaProperty": "Main"
+            "bindings": {
+              "figma": {
+                "property": "Main"
+              }
+            }
           }
         },
         "rail": {
           "description": "Stationary 120px rail on the right, spanning both content rows.",
           "slot": {
             "name": "rail",
-            "figmaProperty": "Rail"
+            "bindings": {
+              "figma": {
+                "property": "Rail"
+              }
+            }
           }
         },
         "footer": {
@@ -112,7 +128,11 @@
           "element": "footer",
           "slot": {
             "name": "footer",
-            "figmaProperty": "Footer"
+            "bindings": {
+              "figma": {
+                "property": "Footer"
+              }
+            }
           }
         }
       }
@@ -121,14 +141,18 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/BentoGrid",
-      "export": "BentoGrid"
+      "anchors": {
+        "importPath": "src/components/BentoGrid",
+        "export": "BentoGrid"
+      }
     }
   }
 }

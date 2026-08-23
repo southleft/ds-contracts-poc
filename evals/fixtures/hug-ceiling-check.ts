@@ -75,7 +75,7 @@ const contractWith = (hugs: boolean): Contract =>
         ...(hugs ? { hugsBelowMaxWidth: true } : {}),
       },
     },
-    anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'EvalHug' } },
+    bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'x', export: 'EvalHug' } } },
   }) as Contract;
 
 const emit = (c: Contract): string =>

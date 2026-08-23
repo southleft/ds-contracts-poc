@@ -68,7 +68,11 @@
           "element": "header",
           "slot": {
             "name": "header",
-            "figmaProperty": "Header"
+            "bindings": {
+              "figma": {
+                "property": "Header"
+              }
+            }
           }
         },
         "aside": {
@@ -76,7 +80,11 @@
           "element": "aside",
           "slot": {
             "name": "aside",
-            "figmaProperty": "Aside",
+            "bindings": {
+              "figma": {
+                "property": "Aside"
+              }
+            },
             "accepts": [
               "ds.sidebar-layout"
             ],
@@ -88,7 +96,11 @@
           "element": "main",
           "slot": {
             "name": "main",
-            "figmaProperty": "Main",
+            "bindings": {
+              "figma": {
+                "property": "Main"
+              }
+            },
             "accepts": [
               "ds.two-column",
               "ds.sidebar-layout",
@@ -103,7 +115,11 @@
           "element": "footer",
           "slot": {
             "name": "footer",
-            "figmaProperty": "Footer",
+            "bindings": {
+              "figma": {
+                "property": "Footer"
+              }
+            },
             "accepts": [
               "ds.two-column"
             ],
@@ -116,14 +132,18 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/PageShell",
-      "export": "PageShell"
+      "anchors": {
+        "importPath": "src/components/PageShell",
+        "export": "PageShell"
+      }
     }
   }
 }

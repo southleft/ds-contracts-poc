@@ -149,14 +149,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/AccordionItem/AccordionItem",
-      "export": "AccordionItem"
+      "anchors": {
+        "importPath": "src/components/AccordionItem/AccordionItem",
+        "export": "AccordionItem"
+      }
     }
   }
 }

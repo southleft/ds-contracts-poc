@@ -33,7 +33,7 @@ type Contractish = {
   events?: Array<{ name: string; trigger?: string; bindings?: { code?: { prop?: string } }; toggles?: { prop?: string } }>;
   anatomy?: unknown;
   states?: string[];
-  figmaStatePreviews?: boolean;
+  bindings?: { figma?: { statePreviews?: boolean } };
 };
 
 const walkParts = (node: unknown, acc: string[] = []): string[] => {
@@ -169,7 +169,7 @@ for (const stem of stems) {
       .filter((f): f is NonNullable<typeof f> & { property: string; kind: string } =>
         Boolean(f?.property && f.kind && f.kind !== 'NONE'),
       );
-    if (a.figmaStatePreviews && (a.states?.length ?? 0) > 0) {
+    if (a.bindings?.figma?.statePreviews && (a.states?.length ?? 0) > 0) {
       authoredFigma.push({ kind: 'VARIANT', property: 'State' });
     }
     const canvasNames = new Set(canvas.props.map((p) => p.name));

@@ -64,15 +64,19 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
-      "componentSetKey": "2da0d4e2438f9b37a9ce159eafb4477f622b10bb",
-      "nodeId": "11:1259"
+      "anchors": {
+        "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+        "componentSetKey": "2da0d4e2438f9b37a9ce159eafb4477f622b10bb",
+        "nodeId": "11:1259"
+      }
     },
     "code": {
-      "importPath": "src/components/Skeleton",
-      "export": "Skeleton"
+      "anchors": {
+        "importPath": "src/components/Skeleton",
+        "export": "Skeleton"
+      }
     }
   }
 }

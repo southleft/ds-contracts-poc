@@ -497,7 +497,7 @@ export interface DumpNode {
   instanceKey?: string;
   /** For INSTANCE nodes (dump v1.5, additive): the main component's OWNING
    *  COMPONENT_SET publish key (absent when the main component is not in a
-   *  set). Matches contracts' anchors.figma.componentSetKey — checked FIRST
+   *  set). Matches contracts' bindings.figma.anchors.componentSetKey — checked FIRST
    *  by the resolver; instanceKey is the fallback for setless components. */
   instanceSetKey?: string;
   /** OBSERVED bounding box (dump v1.5, additive; post-layout width/height,
@@ -619,7 +619,7 @@ export interface DumpSet {
   propertyDefinitions?: Record<string, DumpPropertyDefinition>;
   /** The emitter's DECLARED sparse State-preview matrix (dump v1.21,
    *  additive), read from `ds_contracts/statePreviewAxis` on the set. A
-   *  figmaStatePreviews set draws Cartesian(axes)×{Default} PLUS one row per
+   *  bindings.figma.statePreviews set draws Cartesian(axes)×{Default} PLUS one row per
    *  state per primary value, so without this the exact reader held it to a
    *  full cartesian and refused sets this repo itself drew. Absence means the
    *  set was not drawn by this pipeline (or predates v1.21) and the full

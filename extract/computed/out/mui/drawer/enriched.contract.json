@@ -143,14 +143,18 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "@mui/material",
-      "export": "Drawer"
+      "anchors": {
+        "importPath": "@mui/material",
+        "export": "Drawer"
+      }
     }
   }
 }

@@ -184,7 +184,7 @@ export interface MinimalChildContract {
   /** `type` (P9): the repeat field classifier reads it to tell TEXT-certain
    *  props from enums — optional so pre-P9 callers keep passing slices. */
   props: Array<{ name: string; type?: unknown; bindings: { figma: { property?: string; values?: Record<string, string> } } }>;
-  anchors?: { figma?: { componentSetKey?: string | null } };
+  bindings?: { figma?: { anchors?: { componentSetKey?: string | null } } };
   /** Optional authored anatomy — hop-4 uses it to recover a stamped
    *  Disabled opacity token instead of minting a dump-slug
    *  (FC-DUMP-PROPOSE-DISABLED-OPACITY-MINTED), matching unbound
@@ -319,7 +319,7 @@ const isBoolAxis = (options: string[]): boolean => {
 // anatomy.root.states overrides — bound facts as (substituted) refs, raw
 // literals through the SAME mint pass as base facts, so an override that
 // varies with a remaining enum axis takes the substituted-ref shape the code
-// extractor already produces. Round trip: figmaStatePreviews is set when the
+// extractor already produces. Round trip: bindings.figma.statePreviews is set when the
 // promoted states carry overrides, so the canvas regeneration draws a State
 // preview axis — a RENAME relative to the import (property "State", values
 // Default/Hover/Active/Focus Visible per statePreviewLabel; disabled becomes
@@ -1285,7 +1285,7 @@ function exactRowsFromProposedContract(
   //
   // The shape comes from the SET's own declaration. Reconstruct whenever the
   // proposed API VARIANT axes can host that matrix, and model the rows the
-  // emitter WILL draw: figmaStatePreviews on, one preview row per PROMOTED
+  // emitter WILL draw: bindings.figma.statePreviews on, one preview row per PROMOTED
   // state (contract.states through statePreviewLabel) per PRIMARY value, with
   // every other axis pinned. Modelling the DECLARED states instead made a
   // proposal that recovered none of the Hover / Active / Focus Visible cells
@@ -1298,7 +1298,8 @@ function exactRowsFromProposedContract(
   const contractStates = Array.isArray(contract.states)
     ? (contract.states as unknown[]).filter((s): s is string => typeof s === 'string')
     : [];
-  if (sparse && contract.figmaStatePreviews === true && contractStates.length > 0) {
+  const contractBindings = contract.bindings as { figma?: { statePreviews?: boolean } } | undefined;
+  if (sparse && contractBindings?.figma?.statePreviews === true && contractStates.length > 0) {
     const inventedPreviewAxis = axes.some((a) => a.property === sparse.axis);
     const apiAxes = axes.filter((a) => a.property !== sparse.axis);
     const primaryAxis = apiAxes.find((a) => a.property === sparse.primary);
@@ -1513,7 +1514,7 @@ interface StubCapture {
   id: string;
   instanceOf: string;
   /** The observed owning-set publish key (dump v1.5) — carried onto the
-   *  stub's anchors.figma.componentSetKey so importing the real set later
+   *  stub's bindings.figma.anchors.componentSetKey so importing the real set later
    *  LINKS back to this identity by key. */
   setKey?: string;
   /** Every occurrence's applied componentProperties, across variants. */
@@ -5799,7 +5800,7 @@ function stubIdFor(
   const instKey = keys?.setKey ?? keys?.key;
   const registeredConflict = (id: string): boolean => {
     if (instKey === undefined) return false;
-    const regKey = ctx.contractsById?.get(id)?.anchors?.figma?.componentSetKey ?? null;
+    const regKey = ctx.contractsById?.get(id)?.bindings?.figma?.anchors?.componentSetKey ?? null;
     return regKey !== null && regKey !== instKey;
   };
   const base = `${ctx.prefix}.${componentIdSlug(instanceOf)}`;
@@ -5849,7 +5850,7 @@ function resolveChildContract(
   const named = ctx.contractIdByName.get(instanceOf);
   if (!named) return { id: null, mechanism: null };
   const instKey = keys.setKey ?? keys.key;
-  const contractKey = ctx.contractsById?.get(named)?.anchors?.figma?.componentSetKey ?? null;
+  const contractKey = ctx.contractsById?.get(named)?.bindings?.figma?.anchors?.componentSetKey ?? null;
   if (instKey !== undefined && contractKey !== null && contractKey !== instKey) {
     return { id: null, mechanism: null, keyMismatch: { contractId: named, contractKey, instanceKey: instKey } };
   }
@@ -8565,9 +8566,9 @@ function buildChildStub(
       props,
       states: [],
       anatomy: { root },
-      anchors: {
-        figma: { fileKey, componentSetKey: capture.setKey ?? null },
-        code: { importPath: `src/components/${name}`, export: name },
+      bindings: {
+        figma: { anchors: { fileKey, componentSetKey: capture.setKey ?? null } },
+        code: { anchors: { importPath: `src/components/${name}`, export: name } },
       },
     },
     geometry,
@@ -9669,7 +9670,7 @@ export function proposeFromDump(
     contractsById?: Map<string, MinimalChildContract>;
     /** componentSetKey (or setless component key) → contract id (dump v1.5)
      *  — the SESSION-LINKING index, checked BEFORE the name lookup; build it
-     *  from every in-scope contract's anchors.figma.componentSetKey
+     *  from every in-scope contract's bindings.figma.anchors.componentSetKey
      *  (repo contracts AND previously imported ones). */
     contractIdByKey?: Map<string, string>;
     prefix?: string;
@@ -9745,7 +9746,7 @@ export function proposeFromDump(
   set = stripNonScalarAppliedProps(set, slotValueReceipts);
   const sourceProjection = validateExactVariantProjection(set);
   /** The emitter's DECLARED sparse State matrix, carried by the dump (v1.21).
-   *  Present only for sets this pipeline drew with figmaStatePreviews on, and
+   *  Present only for sets this pipeline drew with bindings.figma.statePreviews on, and
    *  only trusted where it agrees with the axes — see
    *  core/exact-projection.ts. It is what makes promoting the State axis an
    *  inversion of a declared rule instead of a guess about someone's API. */
@@ -9903,7 +9904,7 @@ export function proposeFromDump(
   if (opts.sessionClaimedIds && ownKey !== null) {
     const contradicts = (id: string): boolean => {
       if (!opts.sessionClaimedIds!.has(id)) return false;
-      const holderKey = opts.contractsById?.get(id)?.anchors?.figma?.componentSetKey ?? null;
+      const holderKey = opts.contractsById?.get(id)?.bindings?.figma?.anchors?.componentSetKey ?? null;
       return holderKey !== null && holderKey !== ownKey;
     };
     for (let n = 2; contradicts(selfId); n += 1) selfId = `${baseSelfId}-${n}`;
@@ -10225,7 +10226,7 @@ export function proposeFromDump(
     // The disabled axis value → a REAL boolean prop (native attribute on
     // interactive elements), bound the forward generator's way — EXCEPT
     // when this pipeline already declared Disabled as a State-preview cell
-    // (FC-DUMP-PROPOSE-DISABLED-INVENTED). Emit with figmaStatePreviews
+    // (FC-DUMP-PROPOSE-DISABLED-INVENTED). Emit with bindings.figma.statePreviews
     // draws State=Disabled, not a Disabled BOOLEAN; inventing the BOOLEAN
     // remints API the canvas never had.
     if (statePromo.disabledValue !== undefined) {
@@ -10257,15 +10258,15 @@ export function proposeFromDump(
     const name = s === defaultSlot ? 'children' : canonicalPropName(s.property);
     const slot = s.part.slot as Record<string, unknown>;
     slot.name = name;
-    if (pascal(name) !== s.property) slot.figmaProperty = s.property;
+    if (pascal(name) !== s.property) slot.bindings = { figma: { property: s.property } };
     if (propNameSanitized(s.property)) {
       ctx.notes.push(
-        `slot \`${name}\`: Figma property "${s.property}" contains characters outside a legal identifier — name sanitized at proposal; the original spelling stays the design binding (slot.figmaProperty)`,
+        `slot \`${name}\`: Figma property "${s.property}" contains characters outside a legal identifier — name sanitized at proposal; the original spelling stays the design binding (slot.bindings.figma.property)`,
       );
     }
     if (s !== defaultSlot && propNameDigitLed(s.property)) {
       ctx.notes.push(
-        `slot \`${name}\`: Figma property "${s.property}" is digit-led — a code identifier cannot start with a digit, so the name gets the deterministic "p" prefix (the componentIdSlug digit-led discipline); the original spelling stays the design binding (slot.figmaProperty)`,
+        `slot \`${name}\`: Figma property "${s.property}" is digit-led — a code identifier cannot start with a digit, so the name gets the deterministic "p" prefix (the componentIdSlug digit-led discipline); the original spelling stays the design binding (slot.bindings.figma.property)`,
       );
     }
     if (s === defaultSlot) {
@@ -10553,13 +10554,15 @@ export function proposeFromDump(
     // names (never a prop; changes no emitter output).
     ...(modePromo ? { modes: modePromo.axis.values.map(normStateValue) } : {}),
     anatomy: { root },
-    anchors: {
+    bindings: {
       figma: {
-        fileKey: opts.fileKey ?? null,
-        componentSetKey: set.key ?? null,
-        ...(set.nodeId ? { nodeId: set.nodeId } : {}),
+        anchors: {
+          fileKey: opts.fileKey ?? null,
+          componentSetKey: set.key ?? null,
+          ...(set.nodeId ? { nodeId: set.nodeId } : {}),
+        },
       },
-      code: { importPath: `src/components/${componentName}`, export: componentName },
+      code: { anchors: { importPath: `src/components/${componentName}`, export: componentName } },
     },
   };
 
@@ -10719,7 +10722,7 @@ export function proposeFromDump(
   // State-axis promotion, final attach — AFTER the mint pass so minted state
   // refs have landed in their records. States whose overrides all refused
   // are dropped BY NAME; the survivors become the contract's `states` + root
-  // overrides, and figmaStatePreviews opts in when its own refusal rules
+  // overrides, and bindings.figma.statePreviews opts in when its own refusal rules
   // hold (every declared state has overrides — guaranteed here; overrides
   // substitute ≤1 enum prop; the "State" design property is free).
   if (statePromo) {
@@ -10824,13 +10827,15 @@ export function proposeFromDump(
         (p) => (p.bindings as { figma?: { property?: string } }).figma?.property === STATE_PREVIEW_PROPERTY,
       );
       if (substProps.size <= 1 && !statePropertyTaken) {
-        contract.figmaStatePreviews = true;
+        // Spelled BEFORE anchors — the schema's (and the codemod's) key order.
+        const cb = contract.bindings as { figma: Record<string, unknown> };
+        cb.figma = { statePreviews: true, ...cb.figma };
         ctx.notes.push(
-          `figmaStatePreviews: true — regenerating the canvas draws the promoted states as a "${STATE_PREVIEW_PROPERTY}" preview axis (values ${['Default', ...present.filter((s) => s !== 'disabled').map(statePreviewLabel)].join('|')}, the shared spelling rules) — a RENAME relative to the imported axis "${statePromo.axis.property}" (${statePromo.axis.values.join('|')}); the contract vocabulary carries no custom state-axis spellings, so the original spelling lives in this note and in the anchors' set`,
+          `bindings.figma.statePreviews: true — regenerating the canvas draws the promoted states as a "${STATE_PREVIEW_PROPERTY}" preview axis (values ${['Default', ...present.filter((s) => s !== 'disabled').map(statePreviewLabel)].join('|')}, the shared spelling rules) — a RENAME relative to the imported axis "${statePromo.axis.property}" (${statePromo.axis.values.join('|')}); the contract vocabulary carries no custom state-axis spellings, so the original spelling lives in this note and in the anchors' set`,
         );
       } else {
         ctx.notes.push(
-          `figmaStatePreviews NOT set: ${statePropertyTaken ? `a prop already binds the reserved design property "${STATE_PREVIEW_PROPERTY}"` : `state overrides substitute ${substProps.size} enum props (${[...substProps].join(', ')}) — previews multiply exactly ONE primary axis`} — canvas state previews refused by name, review`,
+          `bindings.figma.statePreviews NOT set: ${statePropertyTaken ? `a prop already binds the reserved design property "${STATE_PREVIEW_PROPERTY}"` : `state overrides substitute ${substProps.size} enum props (${[...substProps].join(', ')}) — previews multiply exactly ONE primary axis`} — canvas state previews refused by name, review`,
         );
       }
     } else {
@@ -11097,8 +11102,8 @@ export function proposeBatchFromDump(
     contractsById.set(c.id, asMinimalChildContract(c));
     if (typeof c.name === 'string') contractIdByName.set(c.name, c.id);
     if (dumpName) contractIdByName.set(dumpName, c.id);
-    const key = (c.anchors as { figma?: { componentSetKey?: string | null } } | undefined)?.figma
-      ?.componentSetKey;
+    const key = (c.bindings as { figma?: { anchors?: { componentSetKey?: string | null } } } | undefined)?.figma
+      ?.anchors?.componentSetKey;
     if (typeof key === 'string' && key.length > 0) contractIdByKey.set(key, c.id);
   };
   const setOpts = {

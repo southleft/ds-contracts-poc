@@ -26,7 +26,7 @@ Both *directions* ship today — design-first (canvas → contract → code) and
 
 ### "Is it React-only? Figma-only?"
 
-The architecture is adapter-shaped at both ends. Code side: adapters normalize any library into one shared shape — `react-tsx` and `cem` (any Web Component library publishing a manifest) exist; a Vue/Svelte adapter is the same pattern. Design side: the reference integration targets one commercial tool, but strictly behind a transport-agnostic script boundary, and every design binding lives in a namespaced `bindings` block — the extension point for other tools. Full vendor-neutral namespacing is a named spec-phase item ([docs/12](12-roadmap.md), Phase 3).
+The architecture is adapter-shaped at both ends. Code side: adapters normalize any library into one shared shape — `react-tsx` and `cem` (any Web Component library publishing a manifest) exist; a Vue/Svelte adapter is the same pattern. Design side: the reference integration targets one commercial tool, but strictly behind a transport-agnostic script boundary, and every design binding lives in a namespaced `bindings.<surface>` block — on props, on slots and (since schema 17, 2026-08-22) on the contract itself, where `figmaRepresentation`, `figmaStatePreviews`, `anchors.figma` and `slot.figmaProperty` used to leak outside the namespace. The vendor-neutral core now carries no tool name at any level; the remaining spec-phase item is the *extension model* — letting a second tool add a surface without a schema bump ([docs/12](12-roadmap.md), Phase 3).
 
 ### "What stops the contract itself from being wrong or rotting?"
 

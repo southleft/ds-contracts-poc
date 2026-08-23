@@ -14,7 +14,7 @@
  *     tokens/astryx-minted.dtcg.json (namespace `imported.*`), collision-
  *     checked — the emitters resolve these alongside the DTCG wrap.
  *
- * figmaStatePreviews stays OPTED OUT this round (default-state fidelity is
+ * bindings.figma.statePreviews stays OPTED OUT this round (default-state fidelity is
  * the current gate; state cells are the named next class). Deterministic by
  * construction; re-running is byte-stable.
  */

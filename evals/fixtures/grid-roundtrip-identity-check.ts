@@ -154,7 +154,7 @@ const bento = (): Contract =>
         ),
       },
     },
-    anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'EvalBentoRt' } },
+    bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'x', export: 'EvalBentoRt' } } },
   }) as Contract;
 
 console.log('\n1. IDENTITY — contract → canvas → contract, the shipping chain end to end');
@@ -239,7 +239,7 @@ console.log('\n3. G4 — named areas ARE slot anchors, and the canvas cannot sto
         },
       },
     },
-    anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'EvalGridShellRt' } },
+    bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'x', export: 'EvalGridShellRt' } } },
   }) as Contract;
 
   const r = await roundTrip(shell as Contract, 'EvalGridShellRt');
@@ -306,7 +306,7 @@ console.log('\n4. G5 — under flow the placement fact is CHILD ORDER, both ways
         },
       },
     },
-    anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'EvalGridFlowRt' } },
+    bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'x', export: 'EvalGridFlowRt' } } },
   }) as Contract;
 
   const r = await roundTrip(gallery as Contract, 'EvalGridFlowRt');

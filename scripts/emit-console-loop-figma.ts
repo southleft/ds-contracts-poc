@@ -13,7 +13,7 @@ const OUT = path.join(ROOT, 'parity/receipts/console-loop/emitted');
 const FILE_KEY = process.env.FIGMA_FILE_KEY ?? 'GnQnjSNBXtgtd2Ht0Hs1C8';
 
 /**
- * All first-party contracts except figmaRepresentation:native.
+ * All first-party contracts except bindings.figma.representation:native.
  * Override with CONSOLE_LOOP_COMPONENTS=a,b,c for a subset.
  */
 const DEFAULT_STEMS = [
@@ -113,9 +113,9 @@ const contracts = readdirSync(path.join(ROOT, 'contracts'))
   .map((f) => ContractSchema.parse(read(path.join('contracts', f))));
 
 for (const c of contracts) {
-  if (c.anchors?.figma) {
-    c.anchors.figma = {
-      ...c.anchors.figma,
+  if (c.bindings?.figma?.anchors) {
+    c.bindings.figma.anchors = {
+      ...c.bindings.figma.anchors,
       fileKey: FILE_KEY,
       nodeId: null,
       componentSetKey: null,
@@ -132,7 +132,7 @@ const emitted: string[] = ['01-tokens.js'];
 const skipped: string[] = [];
 
 for (const contract of ordered) {
-  if (contract.figmaRepresentation === 'native') {
+  if (contract.bindings.figma.representation === 'native') {
     skipped.push(`${contract.name} (native)`);
     continue;
   }

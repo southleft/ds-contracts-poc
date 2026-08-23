@@ -114,14 +114,18 @@
   "anatomy": {
     "root": {}
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "extract/pilots/shoelace/custom-elements.json (components/tag/tag.js)",
-      "export": "SlTag"
+      "anchors": {
+        "importPath": "extract/pilots/shoelace/custom-elements.json (components/tag/tag.js)",
+        "export": "SlTag"
+      }
     }
   }
 }

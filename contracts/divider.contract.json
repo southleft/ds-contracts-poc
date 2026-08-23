@@ -48,15 +48,19 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
-      "componentSetKey": "1bd0e157dee768b650c50a752a164562fc606822",
-      "nodeId": "11:320"
+      "anchors": {
+        "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+        "componentSetKey": "1bd0e157dee768b650c50a752a164562fc606822",
+        "nodeId": "11:320"
+      }
     },
     "code": {
-      "importPath": "src/components/Divider",
-      "export": "Divider"
+      "anchors": {
+        "importPath": "src/components/Divider",
+        "export": "Divider"
+      }
     }
   }
 }

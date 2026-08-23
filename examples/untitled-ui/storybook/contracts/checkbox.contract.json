@@ -180,14 +180,18 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
-      "componentSetKey": "34a1467d46c55f1d81b6c91d1fc90924f8fc9a5a"
+      "anchors": {
+        "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+        "componentSetKey": "34a1467d46c55f1d81b6c91d1fc90924f8fc9a5a"
+      }
     },
     "code": {
-      "importPath": "src/components/Checkbox",
-      "export": "Checkbox"
+      "anchors": {
+        "importPath": "src/components/Checkbox",
+        "export": "Checkbox"
+      }
     }
   }
 }

@@ -85,14 +85,18 @@
   "anatomy": {
     "root": {}
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "@fluentui/react-components",
-      "export": "Checkbox"
+      "anchors": {
+        "importPath": "@fluentui/react-components",
+        "export": "Checkbox"
+      }
     }
   }
 }

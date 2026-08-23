@@ -13,7 +13,7 @@
  *
  * WHAT THIS PINS:
  *   1. NATIVE EMISSION — a contract slot becomes a real SLOT node bound to a
- *      SLOT property named for `slot.figmaProperty`, with `accepts` on
+ *      SLOT property named for `slot.bindings.figma.property`, with `accepts` on
  *      preferredValues; NO dashed "Slot" utility component or instance exists
  *      anywhere in the file.
  *   2. UNIFICATION — a multi-variant set ends with exactly ONE set-level SLOT
@@ -68,7 +68,7 @@ const leaf = (): Contract =>
     props: [],
     states: [],
     anatomy: { root: {} },
-    anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'EvalSlotLeaf' } },
+    bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'x', export: 'EvalSlotLeaf' } } },
   }) as Contract;
 
 /** A CHILDLESS ROOT with a variant axis — the MUI Divider shape. No parts, so
@@ -96,7 +96,7 @@ const childlessRoot = (opts: { version?: string } = {}): Contract =>
     ],
     states: [],
     anatomy: { root: { declared: { display: 'block', 'border-bottom-style': 'solid' } } },
-    anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'EvalChildlessRoot' } },
+    bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'x', export: 'EvalChildlessRoot' } } },
   }) as Contract;
 
 /** Two variants (Size=Sm/Lg) so the unification trap is live, plus one slot. */
@@ -128,7 +128,7 @@ const host = (opts: { version?: string; slot?: Record<string, unknown>; partExtr
         },
       },
     },
-    anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'EvalSlotHost' } },
+    bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'x', export: 'EvalSlotHost' } } },
   }) as Contract;
 
 const emit = (c: Contract): string => {
@@ -357,8 +357,8 @@ refuses(
       anatomy: {
         root: {
           parts: {
-            body: { slot: { name: 'body', figmaProperty: 'Content' } },
-            footer: { slot: { name: 'footer', figmaProperty: 'Content' } },
+            body: { slot: { name: 'body', bindings: { figma: { property: 'Content' } } } },
+            footer: { slot: { name: 'footer', bindings: { figma: { property: 'Content' } } } },
           },
         },
       },
@@ -600,7 +600,7 @@ console.log("\n8. FC-SLOT-BIRTH-BOX ON AMEND — a variant COMPONENT root the em
     ],
     states: [],
     anatomy: { root: { parts: { label: { content: { prop: 'children' }, declared: { display: 'block' } } } } },
-    anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'EvalTextLeafHost' } },
+    bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'x', export: 'EvalTextLeafHost' } } },
   }) as Contract;
   const leafMock = createFigmaMock();
   try {
@@ -634,7 +634,7 @@ console.log('\n9. FC-OVERFLOW-CLIP-LOST — declared overflow hidden/clip draws 
       props: [],
       states: [],
       anatomy: { root: { declared: { display: 'block', 'overflow-x': v, 'overflow-y': v } } },
-      anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'EvalOverflow' } },
+      bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: 'x', export: 'EvalOverflow' } } },
     }) as Contract;
   const emitOne = (c: Contract): string =>
     emitFigmaScript(c, { tokens: TOKENS, icons: new Map(), contracts: new Map([[c.id, c]]) } as never);

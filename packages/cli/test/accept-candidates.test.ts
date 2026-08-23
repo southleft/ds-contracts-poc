@@ -74,9 +74,9 @@ const CONTRACT = {
   props: [],
   states: ['hover'],
   anatomy: { root: { parts: { label: {} } } },
-  anchors: {
-    figma: { fileKey: null, componentSetKey: null },
-    code: { importPath: 'src/components/Chip/Chip', export: 'Chip' },
+  bindings: {
+    figma: { anchors: { fileKey: null, componentSetKey: null } },
+    code: { anchors: { importPath: 'src/components/Chip/Chip', export: 'Chip' } },
   },
 };
 

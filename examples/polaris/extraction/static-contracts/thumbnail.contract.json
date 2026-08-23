@@ -107,14 +107,18 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "polaris-react/src/components/Thumbnail/Thumbnail",
-      "export": "Thumbnail"
+      "anchors": {
+        "importPath": "polaris-react/src/components/Thumbnail/Thumbnail",
+        "export": "Thumbnail"
+      }
     }
   }
 }

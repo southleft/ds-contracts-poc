@@ -63,8 +63,12 @@
   ],
   "states": [],
   "anatomy": { "root": {} },
-  "anchors": {
-    "figma": { "fileKey": null, "componentSetKey": null },
-    "code": { "importPath": "@mui/material", "export": "Link" }
+  "bindings": {
+    "figma": {
+      "anchors": { "fileKey": null, "componentSetKey": null }
+    },
+    "code": {
+      "anchors": { "importPath": "@mui/material", "export": "Link" }
+    }
   }
 }

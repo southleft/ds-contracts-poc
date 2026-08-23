@@ -78,14 +78,18 @@
   "anatomy": {
     "root": {}
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "@carbon/react",
-      "export": "Button"
+      "anchors": {
+        "importPath": "@carbon/react",
+        "export": "Button"
+      }
     }
   },
   "states": []

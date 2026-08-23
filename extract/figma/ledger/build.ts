@@ -503,7 +503,7 @@ const FEATURES = [
   'layoutByProp',
   'stylesWhen',
   'overrides',
-  'figmaStatePreviews',
+  'statePreviews',
   'asset',
   'mask',
 ] as const;
@@ -1141,7 +1141,7 @@ p(
   p(
     `- **Baked ink.** Icon fills and strokes are baked at the source main component, so per-usage ink divergence cannot ride the glyph. Round trip: \`vector-glyph\` moves ${fmt(ink?.facts ?? 0)} facts over ${ink?.components.size ?? 0} components and ${fmt(ink?.variants.size ?? 0)} variants. The icon manifest states the limit in its own scope note and refuses ${iconRefused.length} export over exactly this (\`${iconRefused.join(', ') || 'none'}\`). Capture-side.`,
     `- **First-claim sizes.** \`hug-vs-fixed\`: ${fmt(sizes?.facts ?? 0)} facts over ${sizes?.components.size ?? 0} components and ${fmt(sizes?.variants.size ?? 0)} variants — the canvas hugged, the emit lowered the captured measure to a FIXED/FILL axis, and the sizing *mode* disagreement is the finding. Inversion-side.`,
-    `- **Interaction states.** ${fmt(interactionRows.length)} of ${fmt(fidelity.length)} enumerated variants in ${interactionSets.length} sets (${interactionSets.join(', ')}) cannot be scored at all — they are CSS-rendered, not static. On the return leg \`interaction-states\` ledgers ${fmt(states?.facts ?? 0)} lost facts over ${states?.components.size ?? 0} components and ${fmt(states?.variants.size ?? 0)} variants. Only ${featureCounts['figmaStatePreviews'].contracts} of ${contracts.length} contracts carry \`figmaStatePreviews\` at all. Inversion-side.`,
+    `- **Interaction states.** ${fmt(interactionRows.length)} of ${fmt(fidelity.length)} enumerated variants in ${interactionSets.length} sets (${interactionSets.join(', ')}) cannot be scored at all — they are CSS-rendered, not static. On the return leg \`interaction-states\` ledgers ${fmt(states?.facts ?? 0)} lost facts over ${states?.components.size ?? 0} components and ${fmt(states?.variants.size ?? 0)} variants. Only ${featureCounts['statePreviews'].contracts} of ${contracts.length} contracts carry \`bindings.figma.statePreviews\` at all. Inversion-side.`,
     `- **Restructured trees.** The largest class in the whole measurement: \`restructured\` moves ${fmt(restr?.facts ?? 0)} facts (${fmt(restr?.kinds.loss ?? 0)} loss + ${fmt(restr?.kinds.invented ?? 0)} invented) over ${restr?.components.size ?? 0} components and ${fmt(restr?.variants.size ?? 0)} variants — the same content, the same value, at a different nesting depth because the proposal introduced or removed a wrapper. It is ledgered on BOTH sides, never silently matched. Inversion-side.`,
     '',
   );

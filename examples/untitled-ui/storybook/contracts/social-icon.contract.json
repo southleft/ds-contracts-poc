@@ -110,14 +110,18 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
-      "componentSetKey": "5a25c1d59da9186f10d26609825dfe77914d9dc6"
+      "anchors": {
+        "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+        "componentSetKey": "5a25c1d59da9186f10d26609825dfe77914d9dc6"
+      }
     },
     "code": {
-      "importPath": "src/components/SocialIcon",
-      "export": "SocialIcon"
+      "anchors": {
+        "importPath": "src/components/SocialIcon",
+        "export": "SocialIcon"
+      }
     }
   }
 }

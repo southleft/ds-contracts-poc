@@ -147,14 +147,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/Field/Field",
-      "export": "Field"
+      "anchors": {
+        "importPath": "src/components/Field/Field",
+        "export": "Field"
+      }
     }
   }
 }

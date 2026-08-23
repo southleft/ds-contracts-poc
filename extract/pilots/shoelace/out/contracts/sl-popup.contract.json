@@ -497,14 +497,18 @@
   "anatomy": {
     "root": {}
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "extract/pilots/shoelace/custom-elements.json (components/popup/popup.js)",
-      "export": "SlPopup"
+      "anchors": {
+        "importPath": "extract/pilots/shoelace/custom-elements.json (components/popup/popup.js)",
+        "export": "SlPopup"
+      }
     }
   }
 }

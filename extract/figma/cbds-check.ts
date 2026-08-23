@@ -17,7 +17,7 @@
  *   2. STATE AXIS     `state` never becomes a prop; hover→hover,
  *                     pressed→active, focus→focus-visible land as root
  *                     `states` overrides; disabled → a `disabled` BOOLEAN
- *                     prop; figmaStatePreviews: true (canvas round-trip)
+ *                     prop; bindings.figma.statePreviews: true (canvas round-trip)
  *   3. EXACT VALUES   per SIZE variant, the emitted CSS's padding (all four
  *                     sides) and font-size RESOLVE to byte-equal values from
  *                     the dump — a wrong-but-plausible constant is the worst
@@ -243,8 +243,8 @@ check(
     disabled.default === false,
 );
 check(
-  "figmaStatePreviews: true (the canvas round-trips the states as a State preview axis)",
-  c.figmaStatePreviews === true,
+  "bindings.figma.statePreviews: true (the canvas round-trips the states as a State preview axis)",
+  c.bindings.figma.statePreviews === true,
 );
 check(
   'the State-axis rename consequence is DOCUMENTED (property "State", statePreviewLabel values)',

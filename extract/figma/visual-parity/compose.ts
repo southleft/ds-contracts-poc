@@ -242,7 +242,7 @@ export function composeSubject(subject: ParitySubject): RenderablePackage {
     contractIdByName.set(contract.name, contract.id);
     contractIdByName.set(setName, contract.id);
     sessionClaimedIds.add(contract.id);
-    const setKey = contract.anchors.figma.componentSetKey;
+    const setKey = contract.bindings.figma.anchors.componentSetKey;
     if (setKey) contractIdByKey.set(setKey, contract.id);
     // Stubs never override a registered contract (playground precedence).
     for (const stub of stubs) {

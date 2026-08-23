@@ -67,14 +67,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/MetadataList/MetadataList",
-      "export": "MetadataList"
+      "anchors": {
+        "importPath": "src/components/MetadataList/MetadataList",
+        "export": "MetadataList"
+      }
     }
   }
 }

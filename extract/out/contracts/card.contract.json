@@ -118,14 +118,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/Card/Card",
-      "export": "Card"
+      "anchors": {
+        "importPath": "src/components/Card/Card",
+        "export": "Card"
+      }
     }
   }
 }

@@ -128,15 +128,19 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
-      "componentSetKey": "e56c9f77a873e973aa6f567d0c275710cb039795",
-      "nodeId": "11:1097"
+      "anchors": {
+        "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+        "componentSetKey": "e56c9f77a873e973aa6f567d0c275710cb039795",
+        "nodeId": "11:1097"
+      }
     },
     "code": {
-      "importPath": "src/components/Toolbar",
-      "export": "Toolbar"
+      "anchors": {
+        "importPath": "src/components/Toolbar",
+        "export": "Toolbar"
+      }
     }
   }
 }

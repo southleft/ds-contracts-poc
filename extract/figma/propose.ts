@@ -186,12 +186,12 @@ export function loadContracts(dir: string): {
       const c = JSON.parse(readFileSync(path.join(dir, f), "utf8")) as {
         id?: string;
         name?: string;
-        anchors?: { figma?: { componentSetKey?: string | null } };
+        bindings?: { figma?: { anchors?: { componentSetKey?: string | null } } };
       };
       if (c.id && c.name) {
         out.set(c.name, c.id);
         contractsById.set(c.id, c as unknown as MinimalChildContract);
-        const key = c.anchors?.figma?.componentSetKey;
+        const key = c.bindings?.figma?.anchors?.componentSetKey;
         if (key) byKey.set(key, c.id);
       }
     } catch {

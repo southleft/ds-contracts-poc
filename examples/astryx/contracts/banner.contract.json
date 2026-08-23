@@ -280,14 +280,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "@astryxdesign/core",
-      "export": "Banner"
+      "anchors": {
+        "importPath": "@astryxdesign/core",
+        "export": "Banner"
+      }
     }
   }
 }

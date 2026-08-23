@@ -61,14 +61,18 @@
   "anatomy": {
     "root": {}
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/DropdownMenu/DropdownMenu",
-      "export": "DropdownMenu"
+      "anchors": {
+        "importPath": "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/DropdownMenu/DropdownMenu",
+        "export": "DropdownMenu"
+      }
     }
   }
 }

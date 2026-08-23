@@ -1008,7 +1008,7 @@ function importSet(session: Session, setName: string): ImportResult {
     session.idByName.set(contract.name, contract.id);
     session.idByName.set(setName, contract.id);
     session.claimedIds.add(contract.id);
-    const key = contract.anchors.figma.componentSetKey;
+    const key = contract.bindings.figma.anchors.componentSetKey;
     if (key) session.idByKey.set(key, contract.id);
     if (mintedTree && Object.keys(mintedTree).length > 0)
       session.mintedTrees.push(mintedTree);
@@ -1269,9 +1269,9 @@ for (const t of tiers.filter((t) => t.tier === "T4" || t.tier === "T5")) {
       // stays stubbed is a heal failure.
       const depId = adv.idByName.get(stubbedDep) ?? idForSet(stubbedDep);
       const depKey =
-        adv.contracts.get(depId)?.anchors.figma.componentSetKey ?? null;
+        adv.contracts.get(depId)?.bindings.figma.anchors.componentSetKey ?? null;
       const stubKeyOf = (refId: string): string | null =>
-        adv.stubs.get(refId)?.anchors.figma.componentSetKey ?? null;
+        adv.stubs.get(refId)?.bindings.figma.anchors.componentSetKey ?? null;
       const depBase = idForSet(stubbedDep);
       const stillStubbed = p2.refs.filter(
         (r) =>

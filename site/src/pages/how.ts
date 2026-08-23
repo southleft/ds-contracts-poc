@@ -284,7 +284,7 @@ ${codeBlock(JSON.stringify(N.dialogLinkedRef, null, 2), 'json', 'the Dialog prop
 <h2 id="linked-by-key">Linked by key, not by luck</h2>
 <p>Names collide in real kits (the live capture holds 1,514 duplicate-named components). So resolution prefers the design tool’s stable <strong>component key</strong>: the drawn instance carries the key of the set it points at, and the proposed child contract carries the same key in its anchors. From the committed v1.6 whole-kit capture, at build time:</p>
 ${codeBlock(
-  `drawn instance of "Icon" inside the "${N.keyProof.parentSet}" set:\n  instanceSetKey  = ${N.keyProof.drawnInstanceSetKey}\nproposed ds.icon contract:\n  anchors.figma.componentSetKey = ${N.keyProof.proposedAnchorKey}\n// equal — the link is keyed identity, and a CONTRADICTING key refuses to link`,
+  `drawn instance of "Icon" inside the "${N.keyProof.parentSet}" set:\n  instanceSetKey  = ${N.keyProof.drawnInstanceSetKey}\nproposed ds.icon contract:\n  bindings.figma.anchors.componentSetKey = ${N.keyProof.proposedAnchorKey}\n// equal — the link is keyed identity, and a CONTRADICTING key refuses to link`,
   'text',
   'key-linking proof read from extract/figma/fixtures/cbds-plugin-all-sets.v16.dump.json at build time',
 )}

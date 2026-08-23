@@ -132,7 +132,7 @@ const cartesianTuples = (axes: readonly Axis[]): string[] => {
 /** THE SPARSE STATE-PREVIEW AXIS — why a full Cartesian is the WRONG expectation
  *  for a set this repo's own emitter produced.
  *
- *  `figmaStatePreviews` sets carry a `State` axis that is NOT a contract prop:
+ *  `bindings.figma.statePreviews` sets carry a `State` axis that is NOT a contract prop:
  *  it is a Figma-surface projection of the contract's `states`. The emitter
  *  (core/emit-figma-script.ts, the `stateVariants` loop) draws
  *
@@ -531,7 +531,7 @@ export function validateExactVariantProjection(
     ]);
   }
 
-  // A DECLARED sparse matrix (figmaStatePreviews) is validated against the
+  // A DECLARED sparse matrix (bindings.figma.statePreviews) is validated against the
   // shape the emitter says it drew; everything else against the full Cartesian.
   // An unreadable or disagreeing descriptor falls through to the Cartesian —
   // fail-closed, so a marker can never widen what counts as exact.

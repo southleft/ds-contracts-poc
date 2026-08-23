@@ -326,14 +326,18 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "polaris-react/src/components/Avatar/Avatar",
-      "export": "Avatar"
+      "anchors": {
+        "importPath": "polaris-react/src/components/Avatar/Avatar",
+        "export": "Avatar"
+      }
     }
   }
 }

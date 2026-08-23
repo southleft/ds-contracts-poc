@@ -34,14 +34,18 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
-      "componentSetKey": "31fcdcdbaa80e756f8a9d75d632affc6a8e580bc"
+      "anchors": {
+        "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+        "componentSetKey": "31fcdcdbaa80e756f8a9d75d632affc6a8e580bc"
+      }
     },
     "code": {
-      "importPath": "src/components/ChevronDown",
-      "export": "ChevronDown"
+      "anchors": {
+        "importPath": "src/components/ChevronDown",
+        "export": "ChevronDown"
+      }
     }
   }
 }

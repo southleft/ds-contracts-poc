@@ -54,9 +54,9 @@ const child = ContractSchema.parse({
       parts: { label: { content: { prop: 'children' } } },
     },
   },
-  anchors: {
-    figma: { fileKey: null, componentSetKey: null },
-    code: { importPath: 'src/components/EvalInputLabel', export: 'EvalInputLabel' },
+  bindings: {
+    figma: { anchors: { fileKey: null, componentSetKey: null } },
+    code: { anchors: { importPath: 'src/components/EvalInputLabel', export: 'EvalInputLabel' } },
   },
 });
 
@@ -81,9 +81,9 @@ const parentFor = (element: string, withParts: boolean) =>
           }
         : {},
     },
-    anchors: {
-      figma: { fileKey: null, componentSetKey: null },
-      code: { importPath: 'src/components/EvalField', export: 'EvalField' },
+    bindings: {
+      figma: { anchors: { fileKey: null, componentSetKey: null } },
+      code: { anchors: { importPath: 'src/components/EvalField', export: 'EvalField' } },
     },
   });
 
@@ -157,9 +157,9 @@ const ctx = { tokens: {} as never, icons: new Map<string, string>(), contracts: 
         },
       },
     },
-    anchors: {
-      figma: { fileKey: null, componentSetKey: null },
-      code: { importPath: 'src/components/EvalField', export: 'EvalField' },
+    bindings: {
+      figma: { anchors: { fileKey: null, componentSetKey: null } },
+      code: { anchors: { importPath: 'src/components/EvalField', export: 'EvalField' } },
     },
   });
   const out = emitHtml(rerooted, ctx as never);

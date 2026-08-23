@@ -177,15 +177,19 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
-      "componentSetKey": "2cb4581bfc1e7d9b0b5e32260d783accaea973ef",
-      "nodeId": "11:415"
+      "anchors": {
+        "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+        "componentSetKey": "2cb4581bfc1e7d9b0b5e32260d783accaea973ef",
+        "nodeId": "11:415"
+      }
     },
     "code": {
-      "importPath": "src/components/TextArea",
-      "export": "TextArea"
+      "anchors": {
+        "importPath": "src/components/TextArea",
+        "export": "TextArea"
+      }
     }
   }
 }

@@ -9,7 +9,7 @@
 //
 // v3 (provenance): the output carries `fileKey` + `extractedAt` so
 // parity/diff.ts can verify the snapshot's identity (against the contracts'
-// anchors.figma.fileKey) and freshness. The old hard-coded file-NAME guard is
+// bindings.figma.anchors.fileKey) and freshness. The old hard-coded file-NAME guard is
 // gone — names are user-editable and fileKey is authoritative; the caller
 // (diff.ts) verifies the key instead of this script guessing.
 //

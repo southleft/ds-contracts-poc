@@ -34,14 +34,18 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
-      "componentSetKey": "cf1e885a752ba2c2e8819c9fa7911521e78d3f9d"
+      "anchors": {
+        "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+        "componentSetKey": "cf1e885a752ba2c2e8819c9fa7911521e78d3f9d"
+      }
     },
     "code": {
-      "importPath": "src/components/ArrowRight",
-      "export": "ArrowRight"
+      "anchors": {
+        "importPath": "src/components/ArrowRight",
+        "export": "ArrowRight"
+      }
     }
   }
 }

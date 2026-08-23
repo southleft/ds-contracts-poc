@@ -82,7 +82,7 @@ The fixture proves the vocabulary exists. These counts prove the 15 full contrac
 | `layoutByProp` | 5 | 4 / 30 |
 | `stylesWhen` | 5 | 3 / 30 |
 | `overrides` | 23 | 9 / 30 |
-| `figmaStatePreviews` | 3 | 3 / 30 |
+| `statePreviews` | 3 | 3 / 30 |
 | `asset` | 12 | 12 / 30 |
 | `mask` | 2 | 1 / 30 |
 
@@ -231,7 +231,7 @@ Carried, but not carried perfectly. These are the classes an adopter will actual
 
 - **Baked ink.** Icon fills and strokes are baked at the source main component, so per-usage ink divergence cannot ride the glyph. Round trip: `vector-glyph` moves 344 facts over 11 components and 198 variants. The icon manifest states the limit in its own scope note and refuses 1 export over exactly this (`circle`). Capture-side.
 - **First-claim sizes.** `hug-vs-fixed`: 62 facts over 3 components and 41 variants — the canvas hugged, the emit lowered the captured measure to a FIXED/FILL axis, and the sizing *mode* disagreement is the finding. Inversion-side.
-- **Interaction states.** 58 of 599 enumerated variants in 4 sets (avatar-add-button, avatar-label-group, dropdown-list-item, toggle-base) cannot be scored at all — they are CSS-rendered, not static. On the return leg `interaction-states` ledgers 1,920 lost facts over 4 components and 63 variants. Only 3 of 30 contracts carry `figmaStatePreviews` at all. Inversion-side.
+- **Interaction states.** 58 of 599 enumerated variants in 4 sets (avatar-add-button, avatar-label-group, dropdown-list-item, toggle-base) cannot be scored at all — they are CSS-rendered, not static. On the return leg `interaction-states` ledgers 1,920 lost facts over 4 components and 63 variants. Only 3 of 30 contracts carry `bindings.figma.statePreviews` at all. Inversion-side.
 - **Restructured trees.** The largest class in the whole measurement: `restructured` moves 6,838 facts (3,419 loss + 3,419 invented) over 8 components and 279 variants — the same content, the same value, at a different nesting depth because the proposal introduced or removed a wrapper. It is ledgered on BOTH sides, never silently matched. Inversion-side.
 
 ### Degraded, then recovered — read this one carefully
@@ -334,10 +334,10 @@ npx tsx examples/untitled-ui/fidelity-score.mts
 | `examples/untitled-ui/dumps-v2/` | `bd05944e2685` | 887,477 | canvas dumps (15 files) |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | fidelity scores |
 | `examples/untitled-ui/renders/FIDELITY.md` | `3b0532cd2de8` | 4,242 | fidelity method |
-| `examples/untitled-ui/storybook/contracts/` | `63f093f001fb` | 129,887 | proposed contracts (30 files) |
+| `examples/untitled-ui/storybook/contracts/` | `3e7f9bd2b2c0` | 131,804 | proposed contracts (30 files) |
 | `examples/untitled-ui/storybook/src/generated/` | `73ca6c3fd182` | 276,029 | emitted components (30 dirs) |
 | `examples/untitled-ui/storybook/src/tokens.css` | `8c31938a1627` | 674,804 | emitted global tokens |
-| `extract/figma/conformance/MANIFEST.json` | `53fe5bdab95e` | 107,894 | conformance denominator |
+| `extract/figma/conformance/MANIFEST.json` | `728f08536c8c` | 107,924 | conformance denominator |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | round-trip facts |
 | `extract/figma/roundtrip-uui/REPORT.md` | `61f5c58f7f20` | 144,788 | round-trip narrative |
 

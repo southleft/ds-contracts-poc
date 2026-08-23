@@ -351,11 +351,13 @@ console.log("\nstates refs: ≥2 placeholders and boolean placeholders (react / 
     ctx.tokens.dark,
     { fx },
   ]);
-  // ds.button sets figmaStatePreviews, whose canvas rule refuses a state ref
+  // ds.button sets bindings.figma.statePreviews, whose canvas rule refuses a state ref
   // substituting two enum axes BY NAME ("previews multiply exactly ONE primary
   // axis") — a canvas constraint, not a code one. The fixture drops it so the
   // code surfaces are what is measured.
-  const { figmaStatePreviews: _previews, ...button } = contracts.get("ds.button")!;
+  const srcButton = contracts.get("ds.button")!;
+  const { statePreviews: _previews, ...buttonFigma } = srcButton.bindings.figma;
+  const button = { ...srcButton, bindings: { ...srcButton.bindings, figma: buttonFigma } };
   const fixture = (id: string, name: string, labelStates: Record<string, Record<string, string>>) =>
     ContractSchema.parse({
       ...button,

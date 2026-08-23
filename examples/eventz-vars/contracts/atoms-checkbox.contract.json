@@ -147,16 +147,20 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
-      "componentSetKey": "17f8473be2cf48e57a40ceaa97e23516af0d6ad6",
-      "nodeId": "2323:181"
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+        "componentSetKey": "17f8473be2cf48e57a40ceaa97e23516af0d6ad6",
+        "nodeId": "2323:181"
+      }
     },
     "code": {
-      "importPath": "src/components/AtomsCheckbox",
-      "export": "AtomsCheckbox"
+      "anchors": {
+        "importPath": "src/components/AtomsCheckbox",
+        "export": "AtomsCheckbox"
+      }
     }
-  },
-  "figmaStatePreviews": true
+  }
 }

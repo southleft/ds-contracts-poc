@@ -75,14 +75,18 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
-      "componentSetKey": "be2eb8cf6849821f12e0ccf414137e9fabdcb704"
+      "anchors": {
+        "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+        "componentSetKey": "be2eb8cf6849821f12e0ccf414137e9fabdcb704"
+      }
     },
     "code": {
-      "importPath": "src/components/PaymentMethodIcon",
-      "export": "PaymentMethodIcon"
+      "anchors": {
+        "importPath": "src/components/PaymentMethodIcon",
+        "export": "PaymentMethodIcon"
+      }
     }
   }
 }

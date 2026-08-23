@@ -14,7 +14,7 @@
  * carries the on-screen contract's).
  *
  * Index shapes match core/propose-figma.ts resolveChildContract:
- *   idByKey   anchors.figma.componentSetKey → id  (checked FIRST)
+ *   idByKey   bindings.figma.anchors.componentSetKey → id  (checked FIRST)
  *   idByName  entry display name (the DRAWN set name) AND contract.name → id
  */
 import { ContractSchema, type Contract } from '../../../core/index.js';
@@ -112,7 +112,7 @@ export function buildSessionRegistry(entries: WorkspaceEntry[]): SessionRegistry
     // spelled with the former.
     registry.idByName.set(contract.name, contract.id);
     if (entry.name) registry.idByName.set(entry.name, contract.id);
-    const key = contract.anchors.figma.componentSetKey;
+    const key = contract.bindings.figma.anchors.componentSetKey;
     if (key) registry.idByKey.set(key, contract.id);
   }
   return registry;

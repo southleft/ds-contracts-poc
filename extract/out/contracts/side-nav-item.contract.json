@@ -129,14 +129,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/SideNavItem/SideNavItem",
-      "export": "SideNavItem"
+      "anchors": {
+        "importPath": "src/components/SideNavItem/SideNavItem",
+        "export": "SideNavItem"
+      }
     }
   }
 }

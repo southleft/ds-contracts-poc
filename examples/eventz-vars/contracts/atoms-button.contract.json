@@ -127,7 +127,11 @@
                 "id": "ds.icons-play"
               }
             ],
-            "figmaProperty": "startIcon"
+            "bindings": {
+              "figma": {
+                "property": "startIcon"
+              }
+            }
           },
           "visibleWhen": {
             "prop": "hasStartIcon"
@@ -204,7 +208,11 @@
                 "id": "ds.icons-pause"
               }
             ],
-            "figmaProperty": "endIcon"
+            "bindings": {
+              "figma": {
+                "property": "endIcon"
+              }
+            }
           },
           "visibleWhen": {
             "prop": "hasEndIcon"
@@ -290,16 +298,20 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
-      "componentSetKey": "e480cd07dbf6ddbefd4e2c35cb16581b09285391",
-      "nodeId": "2313:42"
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+        "componentSetKey": "e480cd07dbf6ddbefd4e2c35cb16581b09285391",
+        "nodeId": "2313:42"
+      }
     },
     "code": {
-      "importPath": "src/components/AtomsButton",
-      "export": "AtomsButton"
+      "anchors": {
+        "importPath": "src/components/AtomsButton",
+        "export": "AtomsButton"
+      }
     }
-  },
-  "figmaStatePreviews": true
+  }
 }

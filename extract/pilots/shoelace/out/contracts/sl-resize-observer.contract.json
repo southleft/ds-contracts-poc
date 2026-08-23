@@ -41,14 +41,18 @@
   "anatomy": {
     "root": {}
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "extract/pilots/shoelace/custom-elements.json (components/resize-observer/resize-observer.js)",
-      "export": "SlResizeObserver"
+      "anchors": {
+        "importPath": "extract/pilots/shoelace/custom-elements.json (components/resize-observer/resize-observer.js)",
+        "export": "SlResizeObserver"
+      }
     }
   }
 }

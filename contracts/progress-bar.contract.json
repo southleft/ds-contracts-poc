@@ -133,15 +133,19 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
-      "componentSetKey": "b18870547d3ca85fb933e46457fde0d02d782fb3",
-      "nodeId": "11:1249"
+      "anchors": {
+        "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+        "componentSetKey": "b18870547d3ca85fb933e46457fde0d02d782fb3",
+        "nodeId": "11:1249"
+      }
     },
     "code": {
-      "importPath": "src/components/ProgressBar",
-      "export": "ProgressBar"
+      "anchors": {
+        "importPath": "src/components/ProgressBar",
+        "export": "ProgressBar"
+      }
     }
   }
 }

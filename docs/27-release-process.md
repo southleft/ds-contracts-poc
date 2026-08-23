@@ -10,7 +10,7 @@ never mistaken for a published release.
 | --- | --- | --- | --- |
 | Repository/reference implementation | `1.0.0-rc.1` | private root package; not published to npm | signed Git tag and GitHub prerelease |
 | `@ds-contracts/cli` | `0.5.0-rc.2` | `latest` is `0.4.0` · `next` is `0.5.0-rc.1` | publish exact RC under `next` |
-| `@ds-contracts/schema` | `16.1.0-rc.2` | `latest` is `16.0.0` · `next` is `16.1.0-rc.1` | publish exact RC under `next` |
+| `@ds-contracts/schema` | `17.0.0-rc.1` | `latest` is `16.0.0` · `next` is `16.1.0-rc.1` | publish exact RC under `next` — a MAJOR (schema 17 `bindings` hoist; consumers run `ds-contracts migrate`) |
 | `@ds-contracts/emitter-web-components` | `0.4.0-rc.2` | `latest` is `0.3.0` · `next` is `0.4.0-rc.1` | publish exact RC under `next` |
 
 Manifest versions are source state only. The candidate is not released until
@@ -133,8 +133,11 @@ Release notes must tell adopters:
 - Static extraction may refuse or leave geometry-only content empty instead of
   inventing visible text. Review proposals that previously depended on a
   placeholder.
-- Schema `16.1.0-rc.2` remains spec v16. Consumers must test validation and
-  generated types against the RC before changing their range.
+- Schema `17.0.0-rc.1` is spec v17 — a BREAKING rename (`figmaRepresentation`,
+  `figmaStatePreviews`, `anchors.*`, `slot.figmaProperty` → `bindings.<surface>.*`).
+  A v16 document is refused by name; consumers run `ds-contracts migrate <dir>`
+  over their contracts and test validation and generated types against the RC
+  before changing their range.
 - Emitter `0.4.0-rc.2` is newer than stable `0.3.0`. Consumers must install the
   exact RC, regenerate in a disposable output directory, and compare emitted
   Custom Elements, CSS, demos, and Custom Elements Manifest output before

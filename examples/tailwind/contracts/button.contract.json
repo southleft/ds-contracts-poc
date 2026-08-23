@@ -270,15 +270,19 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "flowbite-react",
-      "export": "Button"
+      "anchors": {
+        "importPath": "flowbite-react",
+        "export": "Button"
+      }
     }
-  },
-  "figmaStatePreviews": true
+  }
 }

@@ -33,14 +33,18 @@
   "anatomy": {
     "root": {}
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "altitude-web-components",
-      "export": "al-avatar"
+      "anchors": {
+        "importPath": "altitude-web-components",
+        "export": "al-avatar"
+      }
     }
   },
   "states": []

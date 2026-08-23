@@ -148,9 +148,9 @@ function seedContract(c: CaseEntry): Record<string, unknown> {
     props: [],
     states: [],
     anatomy: { root: {} },
-    anchors: {
-      figma: { fileKey: null, componentSetKey: null },
-      code: { importPath: '@ds-contracts/conformance', export: exportNameFor(c.id) },
+    bindings: {
+      figma: { anchors: { fileKey: null, componentSetKey: null } },
+      code: { anchors: { importPath: '@ds-contracts/conformance', export: exportNameFor(c.id) } },
     },
   };
 }

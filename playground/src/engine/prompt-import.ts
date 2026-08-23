@@ -247,29 +247,43 @@ const CONTRACT_TOOL = {
           contrast: { enum: ['AA', 'AAA'] },
         },
       },
-      anchors: {
+      bindings: {
         type: 'object',
         additionalProperties: false,
         required: ['figma', 'code'],
-        description: 'Per-side identity anchors. Prompt-born contracts have no canvas yet: every figma anchor is null.',
+        description: 'Per-surface bindings (schema 17): each side\'s identity anchors. Prompt-born contracts have no canvas yet: every figma anchor is null.',
         properties: {
           figma: {
             type: 'object',
             additionalProperties: false,
-            required: ['fileKey', 'componentSetKey', 'nodeId'],
+            required: ['anchors'],
             properties: {
-              fileKey: { type: 'null' },
-              componentSetKey: { type: 'null' },
-              nodeId: { type: 'null' },
+              anchors: {
+                type: 'object',
+                additionalProperties: false,
+                required: ['fileKey', 'componentSetKey', 'nodeId'],
+                properties: {
+                  fileKey: { type: 'null' },
+                  componentSetKey: { type: 'null' },
+                  nodeId: { type: 'null' },
+                },
+              },
             },
           },
           code: {
             type: 'object',
             additionalProperties: false,
-            required: ['importPath', 'export'],
+            required: ['anchors'],
             properties: {
-              importPath: { const: '@ds/components' },
-              export: { type: 'string', description: 'PascalCase(name).' },
+              anchors: {
+                type: 'object',
+                additionalProperties: false,
+                required: ['importPath', 'export'],
+                properties: {
+                  importPath: { const: '@ds/components' },
+                  export: { type: 'string', description: 'PascalCase(name).' },
+                },
+              },
             },
           },
         },
@@ -296,9 +310,9 @@ function promptBorn(raw: Record<string, unknown>, exportName: string): Record<st
     ...rest,
     version: '0.1.0',
     status: 'draft',
-    anchors: {
-      figma: { fileKey: null, componentSetKey: null, nodeId: null },
-      code: { importPath: '@ds/components', export: exportName },
+    bindings: {
+      figma: { anchors: { fileKey: null, componentSetKey: null, nodeId: null } },
+      code: { anchors: { importPath: '@ds/components', export: exportName } },
     },
   };
 }
@@ -309,12 +323,12 @@ function badgeExemplar(): string {
 
 /** Button — the interactive exemplar: TWO enum axes, each driving several
  *  substituted refs; state overrides; a boolean-gated part; text content.
- *  Channels outside the tool schema are pruned (figmaStatePreviews; the
+ *  Channels outside the tool schema are pruned (bindings.figma.statePreviews; the
  *  icon/animation spinner becomes a text glyph — the tool cannot spell
  *  icons, and an exemplar must not teach fields the schema refuses). */
 function buttonExemplar(): string {
   const born = promptBorn(buttonContract as Record<string, unknown>, 'Button');
-  delete born.figmaStatePreviews;
+  delete (born.bindings as { figma: Record<string, unknown> }).figma.statePreviews;
   const anatomy = JSON.parse(JSON.stringify(born.anatomy)) as {
     root: { parts?: Record<string, Record<string, unknown>> };
   };

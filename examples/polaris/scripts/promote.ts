@@ -757,7 +757,7 @@ function promoteOne(cur: ComponentCuration): { contract: Contract; ledgerMd: str
     ledger.curated.push(`semantics.roleByProp promoted — ${cur.roleByProp.cite}`);
   }
 
-  const sourcePath = (proposal.anchors as { code: { importPath: string } }).code.importPath.replace(
+  const sourcePath = (proposal.bindings as { code: { anchors: { importPath: string } } }).code.anchors.importPath.replace(
     /^examples\/polaris\/\.polaris-clone\//,
     '',
   );
@@ -779,9 +779,9 @@ function promoteOne(cur: ComponentCuration): { contract: Contract; ledgerMd: str
     ...(Array.isArray(proposal.events) && (proposal.events as unknown[]).length > 0 ? { events: proposal.events } : {}),
     states,
     anatomy: { root },
-    anchors: {
-      figma: { fileKey: null, componentSetKey: null },
-      code: { importPath: sourcePath, export: proposal.name },
+    bindings: {
+      figma: { anchors: { fileKey: null, componentSetKey: null } },
+      code: { anchors: { importPath: sourcePath, export: proposal.name } },
     },
   };
 

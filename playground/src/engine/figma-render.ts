@@ -3,7 +3,7 @@
  * images API (GET /v1/images/:fileKey?ids=:nodeId&format=png&scale=2).
  *
  * Where the anchor lives: every Figma-imported contract carries
- * `anchors.figma.{fileKey,nodeId}` (core/propose-figma.ts writes them from
+ * `bindings.figma.anchors.{fileKey,nodeId}` (core/propose-figma.ts writes them from
  * the dump's _provenance + set nodeId), and the workspace entry's
  * contractText carries the anchors with it — nothing extra to store.
  *

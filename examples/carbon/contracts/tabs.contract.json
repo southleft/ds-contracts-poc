@@ -507,15 +507,19 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "@carbon/react",
-      "export": "Tabs"
+      "anchors": {
+        "importPath": "@carbon/react",
+        "export": "Tabs"
+      }
     }
-  },
-  "figmaStatePreviews": true
+  }
 }

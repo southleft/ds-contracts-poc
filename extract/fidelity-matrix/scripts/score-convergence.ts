@@ -170,7 +170,7 @@ const axes: Axis[] = [
   },
   {
     axis: 'interaction states',
-    design: `contract states ${JSON.stringify(dContract.states)} + a native \`disabled\` boolean — PROMOTED from the drawn state axis (default|hover|focus|pressed|disabled); figmaStatePreviews round-trips it`,
+    design: `contract states ${JSON.stringify(dContract.states)} + a native \`disabled\` boolean — PROMOTED from the drawn state axis (default|hover|focus|pressed|disabled); bindings.figma.statePreviews round-trips it`,
     code: `contract states ${JSON.stringify(cContract.states)} (CSS pseudo-classes)`,
     verdict: JSON.stringify(dContract.states) === JSON.stringify(cContract.states) ? 'AGREE' : 'PARTIAL',
     note: 'ONE mechanism now: both sides declare the SAME contract states — the drawn axis never ships as a code prop (state-axis promotion)',

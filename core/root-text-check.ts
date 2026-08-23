@@ -117,7 +117,7 @@ const seed = (id: string, name: string, root: Record<string, unknown>): Record<s
   props: [],
   states: [],
   anatomy: { root },
-  anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: '@ds-contracts/root-text-check', export: name } },
+  bindings: { figma: { anchors: { fileKey: null, componentSetKey: null } }, code: { anchors: { importPath: '@ds-contracts/root-text-check', export: name } } },
 });
 
 const BOUND = seed('check.root-text-bound', 'RootTextBound', {

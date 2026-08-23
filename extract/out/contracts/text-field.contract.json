@@ -191,14 +191,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/TextField/TextField",
-      "export": "TextField"
+      "anchors": {
+        "importPath": "src/components/TextField/TextField",
+        "export": "TextField"
+      }
     }
   }
 }

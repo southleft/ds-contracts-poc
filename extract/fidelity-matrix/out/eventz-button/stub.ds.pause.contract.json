@@ -19,14 +19,18 @@
       "parts": {}
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/Pause",
-      "export": "Pause"
+      "anchors": {
+        "importPath": "src/components/Pause",
+        "export": "Pause"
+      }
     }
   }
 }

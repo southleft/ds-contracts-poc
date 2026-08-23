@@ -248,7 +248,7 @@ const probeRaw = {
           description: 'Main content.',
           layout: { direction: 'column', align: 'stretch' },
           tokens: { gap: '{space.gap.control}', 'padding-inline': '{space.inset-x.md}' },
-          slot: { name: 'content', figmaProperty: 'Content' },
+          slot: { name: 'content', bindings: { figma: { property: 'Content' } } },
         },
         collapsedMark: {
           element: 'span',
@@ -259,9 +259,9 @@ const probeRaw = {
       },
     },
   },
-  anchors: {
-    figma: { fileKey: null, componentSetKey: null },
-    code: { importPath: 'src/components/CollisionProbe', export: 'CollisionProbe' },
+  bindings: {
+    figma: { anchors: { fileKey: null, componentSetKey: null } },
+    code: { anchors: { importPath: 'src/components/CollisionProbe', export: 'CollisionProbe' } },
   },
 };
 const probe = ContractSchema.parse(probeRaw);

@@ -33,7 +33,7 @@ export interface RepoData {
   contracts: Map<string, Contract>;
   contractIdByName: Map<string, string>;
   /** componentSetKey → contract id (dump v1.5 session linking) — every repo
-   *  contract with a non-null anchors.figma.componentSetKey. */
+   *  contract with a non-null bindings.figma.anchors.componentSetKey. */
   contractIdByKey: Map<string, string>;
   icons: Map<string, string>;
   /** src/styles/tokens.css — the preview document's custom-property source. */
@@ -71,8 +71,8 @@ export function loadRepoData(): RepoData {
     contractIdByName: new Map([...contracts.values()].map((c) => [c.name, c.id])),
     contractIdByKey: new Map(
       [...contracts.values()]
-        .filter((c) => c.anchors.figma.componentSetKey !== null)
-        .map((c) => [c.anchors.figma.componentSetKey!, c.id]),
+        .filter((c) => c.bindings.figma.anchors.componentSetKey !== null)
+        .map((c) => [c.bindings.figma.anchors.componentSetKey!, c.id]),
     ),
     icons,
     tokensCss: readFileSync(path.join(REPO, 'src', 'styles', 'tokens.css'), 'utf8'),

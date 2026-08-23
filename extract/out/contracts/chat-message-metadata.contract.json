@@ -100,14 +100,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/ChatMessageMetadata/ChatMessageMetadata",
-      "export": "ChatMessageMetadata"
+      "anchors": {
+        "importPath": "src/components/ChatMessageMetadata/ChatMessageMetadata",
+        "export": "ChatMessageMetadata"
+      }
     }
   }
 }

@@ -266,7 +266,7 @@ async function main(): Promise<void> {
     if (isStub && contracts.has(c.id)) return;
     contractIdByName.set(c.name, c.id);
     contractsById.set(c.id, asMinimalChildContract(c));
-    const key = (c.anchors as { figma?: { componentSetKey?: string } } | undefined)?.figma?.componentSetKey;
+    const key = (c.bindings as { figma?: { anchors?: { componentSetKey?: string } } } | undefined)?.figma?.anchors?.componentSetKey;
     if (typeof key === 'string' && key.length > 0) contractIdByKey.set(key, c.id);
     sessionClaimedIds.add(c.id);
     contracts.set(c.id, c);

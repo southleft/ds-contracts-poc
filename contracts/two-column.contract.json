@@ -45,7 +45,11 @@
           },
           "slot": {
             "name": "start",
-            "figmaProperty": "Start"
+            "bindings": {
+              "figma": {
+                "property": "Start"
+              }
+            }
           }
         },
         "end": {
@@ -56,7 +60,11 @@
           },
           "slot": {
             "name": "end",
-            "figmaProperty": "End"
+            "bindings": {
+              "figma": {
+                "property": "End"
+              }
+            }
           }
         }
       }
@@ -65,14 +73,18 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/TwoColumn",
-      "export": "TwoColumn"
+      "anchors": {
+        "importPath": "src/components/TwoColumn",
+        "export": "TwoColumn"
+      }
     }
   }
 }

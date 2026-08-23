@@ -105,15 +105,19 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
-      "componentSetKey": "41e084d38457f2aebd4611e3ebd922a56c2c392d",
-      "nodeId": "11:1172"
+      "anchors": {
+        "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+        "componentSetKey": "41e084d38457f2aebd4611e3ebd922a56c2c392d",
+        "nodeId": "11:1172"
+      }
     },
     "code": {
-      "importPath": "src/components/AvatarGroup",
-      "export": "AvatarGroup"
+      "anchors": {
+        "importPath": "src/components/AvatarGroup",
+        "export": "AvatarGroup"
+      }
     }
   }
 }

@@ -111,16 +111,20 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
-      "componentSetKey": "ac0be5830a3570e5eed8a905c697473f9926baa7",
-      "nodeId": "1102:4864"
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+        "componentSetKey": "ac0be5830a3570e5eed8a905c697473f9926baa7",
+        "nodeId": "1102:4864"
+      }
     },
     "code": {
-      "importPath": "src/components/AvatarAddButton",
-      "export": "AvatarAddButton"
+      "anchors": {
+        "importPath": "src/components/AvatarAddButton",
+        "export": "AvatarAddButton"
+      }
     }
-  },
-  "figmaStatePreviews": true
+  }
 }

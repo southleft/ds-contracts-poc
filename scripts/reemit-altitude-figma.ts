@@ -86,7 +86,7 @@ const CHECK = process.argv.includes('--check');
  *  `--check` verdict is about the SAME bytes the write path would land. */
 const emitted = new Map<string, string>();
 for (const c of sortByDependencies(contracts)) {
-  if (c.figmaRepresentation === 'native') continue;
+  if (c.bindings.figma.representation === 'native') continue;
   const nameStem = c.name
     .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
     .replace(/\s+/g, '-')

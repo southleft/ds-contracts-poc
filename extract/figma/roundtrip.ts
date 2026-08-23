@@ -627,9 +627,10 @@ export function compareContracts(
         if (ss.name === ps.name) matched(`${at} slot name`);
         else mismatch(`${at} slot name`, `${ss.name} vs ${ps.name}`);
         const eff = (slot: J) =>
-          (slot.figmaProperty as string) ?? pascal(slot.name as string);
-        if (eff(ss) === eff(ps)) matched(`${at} slot figmaProperty`);
-        else mismatch(`${at} slot figmaProperty`, `${eff(ss)} vs ${eff(ps)}`);
+          ((slot.bindings as { figma?: { property?: string } } | undefined)?.figma?.property as string | undefined) ??
+          pascal(slot.name as string);
+        if (eff(ss) === eff(ps)) matched(`${at} slot bindings.figma.property`);
+        else mismatch(`${at} slot bindings.figma.property`, `${eff(ss)} vs ${eff(ps)}`);
         if (ss.required === true && ps.required !== true) {
           absent(
             `${at} slot required`,

@@ -120,7 +120,7 @@ sessionByName.set("Button-Brand Primary", buttonContract.id);
 const sessionById = new Map(loaded.byId);
 sessionById.set(buttonContract.id, buttonContract);
 const sessionByKey = new Map<string, string>();
-const buttonKey = buttonContract.anchors.figma.componentSetKey;
+const buttonKey = buttonContract.bindings.figma.anchors.componentSetKey;
 if (buttonKey) sessionByKey.set(buttonKey, buttonContract.id);
 
 const dialogDump = read("extract/figma/fixtures/cbds-plugin-dialog.dump.json");

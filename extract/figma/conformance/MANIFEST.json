@@ -1083,7 +1083,7 @@
       "check": {
         "carried": [
           "\"slot\":\\{\"name\":\"children\"",
-          "\"figmaProperty\":\"Content\""
+          "\"bindings\":\\{\"figma\":\\{\"property\":\"Content\"\\}\\}"
         ],
         "note": "Slot-utility instance styling is the utility's own"
       },

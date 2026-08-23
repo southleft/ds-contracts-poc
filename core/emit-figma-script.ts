@@ -601,7 +601,7 @@ export interface ComponentData {
   textProps: Array<{ property: string; default: string }>;
   fontStyles: string[];
   variants: VariantSpec[];
-  /** figmaStatePreviews: canvas-only preview variants carrying the "State"
+  /** bindings.figma.statePreviews: canvas-only preview variants carrying the "State"
    *  axis. Kept SEPARATE from `variants` (the pure enum-API cartesian) —
    *  the runtimes merge them via withStateAxis, renaming base variants with
    *  an explicit State=Default segment. Omitted entirely when the contract
@@ -3288,7 +3288,7 @@ const depEmitsStandalone = (dep: Contract): boolean => {
   const combos = dep.props
     .filter((p) => isEnum(p) || isVariantBool(p))
     .reduce((n, p) => n * (isEnum(p) ? p.type.enum.length : 2), 1);
-  const hasPreviews = Boolean(dep.figmaStatePreviews) && dep.states.length > 0;
+  const hasPreviews = Boolean(dep.bindings.figma.statePreviews) && dep.states.length > 0;
   return combos === 1 && !hasPreviews;
 };
 
@@ -3950,7 +3950,7 @@ function partToSpecs(
         name: i === 0 ? name : `${name} ${i + 1}`,
         dep: dep.name,
         depContractId: dep.id,
-        ...(dep.anchors.figma.componentSetKey ? { depAnchorKey: dep.anchors.figma.componentSetKey } : {}),
+        ...(dep.bindings.figma.anchors.componentSetKey ? { depAnchorKey: dep.bindings.figma.anchors.componentSetKey } : {}),
         depProps: mapDepProps(dep, { ...(part.component!.props ?? {}), ...fields }, subst, part.component!.text),
       };
       applyVisibleWhen(spec, part, contract);
@@ -4235,7 +4235,7 @@ function partToSpecInner(
       name,
       dep: dep.name,
       depContractId: dep.id,
-      ...(dep.anchors.figma.componentSetKey ? { depAnchorKey: dep.anchors.figma.componentSetKey } : {}),
+      ...(dep.bindings.figma.anchors.componentSetKey ? { depAnchorKey: dep.bindings.figma.anchors.componentSetKey } : {}),
       depProps: mapDepProps(dep, part.component.props ?? {}, subst, part.component.text, depLedger),
     };
     for (const line of depLedger) (spec.channelMiss ??= []).push(line);
@@ -4269,7 +4269,7 @@ function partToSpecInner(
         return {
           dep: dep.name,
           contractId: dep.id,
-          ...(dep.anchors.figma.componentSetKey ? { anchorKey: dep.anchors.figma.componentSetKey } : {}),
+          ...(dep.bindings.figma.anchors.componentSetKey ? { anchorKey: dep.bindings.figma.anchors.componentSetKey } : {}),
         };
       }),
     };
@@ -4281,7 +4281,7 @@ function partToSpecInner(
         return {
           dep: dep.name,
           contractId: dep.id,
-          ...(dep.anchors.figma.componentSetKey ? { anchorKey: dep.anchors.figma.componentSetKey } : {}),
+          ...(dep.bindings.figma.anchors.componentSetKey ? { anchorKey: dep.bindings.figma.anchors.componentSetKey } : {}),
           props: mapDepProps(dep, item.props ?? {}, subst, item.text),
         };
       });
@@ -4590,7 +4590,7 @@ function refuseUnresolvableRefs(contract: Contract, byId: Map<string, Contract>)
   for (const [property, names] of byProperty) {
     if (names.length > 1) {
       errors.push(
-        `${contract.id}: slot parts "${names.join('", "')}" all resolve to the Figma property "${property}" — one SLOT property cannot serve two areas (set slot.figmaProperty to disambiguate)`,
+        `${contract.id}: slot parts "${names.join('", "')}" all resolve to the Figma property "${property}" — one SLOT property cannot serve two areas (set slot.bindings.figma.property to disambiguate)`,
       );
     }
   }
@@ -4900,14 +4900,14 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     variants.push({ name: rootSpec.name, row, col, spec: rootSpec });
   }
 
-  // figmaStatePreviews: compile the canvas-only "State" preview variants.
+  // bindings.figma.statePreviews: compile the canvas-only "State" preview variants.
   // Bounded explosion: only the PRIMARY enum axis (the one whose tokens the
   // state overrides substitute; the first axis when overrides are variant-
   // independent) is multiplied — every other axis sits at its default.
   // Button (4 variants × 3 sizes, 3 states): 12 base + 4×3 = 24, not 48.
   const stateVariants: VariantSpec[] = [];
   let statePreviewAxis: ComponentData['statePreviewAxis'];
-  if (contract.figmaStatePreviews && contract.states.length > 0) {
+  if (contract.bindings?.figma?.statePreviews && contract.states.length > 0) {
     const overrides = root.states ?? {};
     const substProps = statePreviewSubstProps(contract); // validated: ≤1
     const primaryIdx = Math.max(0, axes.findIndex((a) => substProps.includes(a.prop.name)));
@@ -5289,7 +5289,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     setName: contract.name,
     contractId: contract.id,
     version: contract.version,
-    anchorKey: contract.anchors.figma.componentSetKey ?? null,
+    anchorKey: contract.bindings.figma.anchors.componentSetKey ?? null,
     // Part D (owner directive, 2026-07-19): the component description is ONE
     // short caption line — a name and a provenance pointer, nothing else.
     // The old paragraphs of capability-matrix copy (events, declared facts,
@@ -6541,7 +6541,7 @@ function buildComponentScript(
     );
   }
   const data = compileComponentData(contract, byId);
-  return buildSyncScript([data], fileKeyOverride ?? contract.anchors.figma.fileKey, {
+  return buildSyncScript([data], fileKeyOverride ?? contract.bindings.figma.anchors.fileKey, {
     header: `// GENERATED by scripts/generate-figma.ts — DO NOT EDIT.
 // Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})
 // Amend-capable (#60): an existing component (set) carrying our identity
@@ -6776,7 +6776,7 @@ for (const style of fontStyles) {
   await figma.loadFontAsync({ family: 'Inter', style });
 }
 
-// State previews (figmaStatePreviews): merge the enum-API cartesian with the
+// State previews (bindings.figma.statePreviews): merge the enum-API cartesian with the
 // canvas-only preview overlay; base variants gain an explicit State=Default
 // segment so every variant in the set carries the axis (Figma derives
 // variant properties from names). Contracts without previews pass through
@@ -7261,7 +7261,7 @@ async function buildNode(spec, registry) {
   }
 ${hasSlot ? `  // A native slot's LAYER NAME is its property's display name: renaming the
   // layer renames the linked SLOT property (probe 2b), so the contract's
-  // slot.figmaProperty is spelled here and nowhere else.
+  // slot.bindings.figma.property is spelled here and nowhere else.
   node.name = spec.type === 'slot' ? spec.slotProperty : spec.name;` : `  node.name = spec.name;`}${opacityRuntime(hasOpacity)}
   if (spec.visibleProp) {
     registry.visibles.push({ node, prop: spec.visibleProp, default: spec.visibleDefault === true });
@@ -7392,7 +7392,7 @@ function withCodeOnlyFacts(report, C, degradedFrom) {
 // instance-level property overrides survive because property IDs do.
 // Destructive changes (extra variants from removed enum values) are
 // REPORTED, never deleted — except State preview leftovers when
-// figmaStatePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
+// bindings.figma.statePreviews is off (FC-STATE-PREVIEW-NOISE), which amend removes.
 async function amendSet(set, C) {
   set.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   set.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -7465,7 +7465,7 @@ async function amendSet(set, C) {
     }
   }
   // FC-STATE-PREVIEW-NOISE: when the State preview axis is off, leftover
-  // State=Focus Visible (etc.) variants from a prior figmaStatePreviews:true
+  // State=Focus Visible (etc.) variants from a prior statePreviews:true
   // sync must be removed — otherwise amend leaves a doubled showcase grid.
   const expectedHasState = EV.some((v) => /, State=/.test(v.name));
   if (!expectedHasState && report.extraVariants.length) {
@@ -7541,7 +7541,7 @@ async function amendSet(set, C) {
         if (defs[k].type !== 'INSTANCE_SWAP') {
           throw new Error(
             'Slot "' + sl.spec.slotProperty + '": the set already carries a ' + defs[k].type +
-            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+            ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
           );
         }
         await migrateLegacySlotProperty(set, k, defs[k], sl.spec.slotProperty, report);
@@ -7717,7 +7717,7 @@ async function amendComponent(comp, C) {
       if (defs[k].type !== 'INSTANCE_SWAP') {
         throw new Error(
           'Slot "' + sl.spec.slotProperty + '": the component already carries a ' + defs[k].type +
-          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.figmaProperty) or retire the property in Figma',
+          ' property with that name — a slot cannot adopt it, and deleting it would strip every instance override bound to it; rename the contract slot (slot.bindings.figma.property) or retire the property in Figma',
         );
       }
       await migrateLegacySlotProperty(comp, k, defs[k], sl.spec.slotProperty, report);

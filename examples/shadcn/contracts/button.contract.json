@@ -287,15 +287,19 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "@shadcn-sandbox/ui",
-      "export": "Button"
+      "anchors": {
+        "importPath": "@shadcn-sandbox/ui",
+        "export": "Button"
+      }
     }
-  },
-  "figmaStatePreviews": true
+  }
 }

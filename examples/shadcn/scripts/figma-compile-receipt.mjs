@@ -96,7 +96,7 @@ for (const file of scripts) {
     if (name === 'checkbox' || name === 'switch') {
       // THE PROP-SELECTED-RENDERING PIN (RECON H4): `checked` is a VARIANT
       // AXIS, never a stateProp. Every plane must exist AND be orthogonal.
-      // figmaStatePreviews adds State-axis preview cells on the DEFAULT plane
+      // bindings.figma.statePreviews adds State-axis preview cells on the DEFAULT plane
       // only, so the orthogonality claim is over the pure enum API grid:
       // cells with no State segment, or State=Default.
       const gridCell = (n) => n.type === 'COMPONENT' && (!/State=/.test(n.name) || /State=Default(,|$)/.test(n.name));

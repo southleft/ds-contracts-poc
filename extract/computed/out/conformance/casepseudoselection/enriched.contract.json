@@ -26,14 +26,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "@ds-contracts/conformance",
-      "export": "CasePseudoSelection"
+      "anchors": {
+        "importPath": "@ds-contracts/conformance",
+        "export": "CasePseudoSelection"
+      }
     }
   }
 }

@@ -155,15 +155,19 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "@mui/material",
-      "export": "Link"
+      "anchors": {
+        "importPath": "@mui/material",
+        "export": "Link"
+      }
     }
-  },
-  "figmaStatePreviews": true
+  }
 }

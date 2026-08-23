@@ -146,15 +146,19 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
-      "componentSetKey": "ba2cfd0b9f6f47a728081edaf340c37cdeb53123",
-      "nodeId": "11:378"
+      "anchors": {
+        "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+        "componentSetKey": "ba2cfd0b9f6f47a728081edaf340c37cdeb53123",
+        "nodeId": "11:378"
+      }
     },
     "code": {
-      "importPath": "src/components/IconButton",
-      "export": "IconButton"
+      "anchors": {
+        "importPath": "src/components/IconButton",
+        "export": "IconButton"
+      }
     }
   }
 }

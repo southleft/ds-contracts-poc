@@ -72,8 +72,8 @@ const contractIdByName = new Map(
 );
 const contractIdByKey = new Map(
   [...contracts.values()]
-    .filter((c) => c.anchors.figma.componentSetKey !== null)
-    .map((c) => [c.anchors.figma.componentSetKey!, c.id]),
+    .filter((c) => c.bindings.figma.anchors.componentSetKey !== null)
+    .map((c) => [c.bindings.figma.anchors.componentSetKey!, c.id]),
 );
 
 const shoelaceDump = read(
@@ -99,9 +99,9 @@ check(
   typeof childSetKey === "string" && childSetKey.length > 0,
 );
 check(
-  `fixture: the key CONTRADICTS the repo ds.button anchor (${childSetKey.slice(0, 8)}… vs ${String(repoButton.anchors.figma.componentSetKey).slice(0, 8)}…)`,
-  repoButton.anchors.figma.componentSetKey !== null &&
-    repoButton.anchors.figma.componentSetKey !== childSetKey,
+  `fixture: the key CONTRADICTS the repo ds.button anchor (${childSetKey.slice(0, 8)}… vs ${String(repoButton.bindings.figma.anchors.componentSetKey).slice(0, 8)}…)`,
+  repoButton.bindings.figma.anchors.componentSetKey !== null &&
+    repoButton.bindings.figma.anchors.componentSetKey !== childSetKey,
 );
 
 const propose = (
@@ -150,12 +150,12 @@ const renamed = ContractSchema.parse({
   ...JSON.parse(JSON.stringify(read("contracts/button.contract.json"))),
   id: "sl.totally-renamed-button",
   name: "TotallyRenamedButton",
-  anchors: {
-    figma: { fileKey: "fixture", componentSetKey: childSetKey, nodeId: null },
-    code: {
+  bindings: {
+    figma: { anchors: { fileKey: "fixture", componentSetKey: childSetKey, nodeId: null } },
+    code: { anchors: {
       importPath: "src/components/TotallyRenamedButton",
       export: "TotallyRenamedButton",
-    },
+    } },
   },
 });
 const linked = propose(shoelaceSet, {
@@ -307,9 +307,9 @@ const iconContract = ContractSchema.parse({
   ...JSON.parse(JSON.stringify(read("contracts/badge.contract.json"))),
   id: "ev.icon",
   name: "EvIcon",
-  anchors: {
-    figma: { fileKey: "fixture", componentSetKey: prefKey!, nodeId: null },
-    code: { importPath: "src/components/EvIcon", export: "EvIcon" },
+  bindings: {
+    figma: { anchors: { fileKey: "fixture", componentSetKey: prefKey!, nodeId: null } },
+    code: { anchors: { importPath: "src/components/EvIcon", export: "EvIcon" } },
   },
 });
 const eventzLinked = propose(eventzSet, {

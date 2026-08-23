@@ -547,9 +547,9 @@ function buildSeed(name: string, props: Proposed[]): Record<string, unknown> {
       'Anatomy is left empty because parts are promoted from captured DOM truth, never inferred from types (docs/21 step 4).',
     semantics: { element: 'div' },
     anatomy: { root: {} },
-    anchors: {
-      figma: { fileKey: null, componentSetKey: null },
-      code: { importPath: config.library.package, export: name },
+    bindings: {
+      figma: { anchors: { fileKey: null, componentSetKey: null } },
+      code: { anchors: { importPath: config.library.package, export: name } },
     },
     states: [],
     props: props.map((p) => ({

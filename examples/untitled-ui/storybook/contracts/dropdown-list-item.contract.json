@@ -185,16 +185,20 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
-      "componentSetKey": "112863d35f4d9bed5e203f0c08a5bd558b49cbe6",
-      "nodeId": "18:319"
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+        "componentSetKey": "112863d35f4d9bed5e203f0c08a5bd558b49cbe6",
+        "nodeId": "18:319"
+      }
     },
     "code": {
-      "importPath": "src/components/DropdownListItem",
-      "export": "DropdownListItem"
+      "anchors": {
+        "importPath": "src/components/DropdownListItem",
+        "export": "DropdownListItem"
+      }
     }
-  },
-  "figmaStatePreviews": true
+  }
 }

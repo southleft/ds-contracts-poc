@@ -49,16 +49,20 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
-      "componentSetKey": null,
-      "nodeId": null
+      "representation": "native",
+      "anchors": {
+        "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+        "componentSetKey": null,
+        "nodeId": null
+      }
     },
     "code": {
-      "importPath": "src/components/Inline",
-      "export": "Inline"
+      "anchors": {
+        "importPath": "src/components/Inline",
+        "export": "Inline"
+      }
     }
-  },
-  "figmaRepresentation": "native"
+  }
 }

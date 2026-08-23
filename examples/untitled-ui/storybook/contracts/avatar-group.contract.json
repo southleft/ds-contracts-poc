@@ -275,15 +275,19 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
-      "componentSetKey": "bfe034bc6ad057c558303ee4015f6526767acd66",
-      "nodeId": "1274:812"
+      "anchors": {
+        "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+        "componentSetKey": "bfe034bc6ad057c558303ee4015f6526767acd66",
+        "nodeId": "1274:812"
+      }
     },
     "code": {
-      "importPath": "src/components/AvatarGroup",
-      "export": "AvatarGroup"
+      "anchors": {
+        "importPath": "src/components/AvatarGroup",
+        "export": "AvatarGroup"
+      }
     }
   }
 }

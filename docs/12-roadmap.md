@@ -62,7 +62,7 @@ Separate the **format** from the **implementation**, so a second party could bui
 - [ ] **`spec/` draft v0.1** — normative prose + the JSON Schema, versioned independently of the tooling; MUST/SHOULD language for refusal, drift-classification, and promotion semantics
 - [ ] **Namespacing** — package-qualified or reverse-domain component IDs and a `$schema` URL convention (today's `ds.*` works for one system, not an ecosystem)
 - [ ] **Normative compatibility rules** — widen-minor / narrow-major, prop and variant addition/removal semantics (currently prose in [docs/02](02-contract-spec.md))
-- [ ] **Extension model** — namespaced binding blocks so new tools and frameworks add surfaces without forking the schema (the DTCG `$extensions` lesson)
+- [ ] **Extension model** — namespaced binding blocks so new tools and frameworks add surfaces without forking the schema (the DTCG `$extensions` lesson). *Half done 2026-08-22 (schema 17):* every tool-specific fact now lives under `bindings.<surface>` at every level (contract, prop, slot) and the v16 spellings are refused by name with a codemod; what remains is letting a second surface be declared without a schema change.
 - [ ] **Conformance kit** — the eval suite repackaged to run against *any* implementation, not just this one; a spec with a verifier is the differentiator over descriptive formats like CEM
 - [ ] **Second independent implementation** — a renderer for another framework (e.g. Web Components) and/or a binding namespace for another design tool, built from the spec text alone
 

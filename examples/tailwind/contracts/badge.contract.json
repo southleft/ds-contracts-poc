@@ -211,15 +211,19 @@
       ]
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": null,
-      "componentSetKey": null
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "flowbite-react",
-      "export": "Badge"
+      "anchors": {
+        "importPath": "flowbite-react",
+        "export": "Badge"
+      }
     }
-  },
-  "figmaStatePreviews": true
+  }
 }

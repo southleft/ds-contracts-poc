@@ -110,9 +110,9 @@ const probe = (body: BodyLayout): Contract =>
         },
       },
     },
-    anchors: {
-      figma: { fileKey: null, componentSetKey: null },
-      code: { importPath: './StretchProbe', export: 'StretchProbe' },
+    bindings: {
+      figma: { anchors: { fileKey: null, componentSetKey: null } },
+      code: { anchors: { importPath: './StretchProbe', export: 'StretchProbe' } },
     },
   });
 

@@ -141,14 +141,18 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/Alert",
-      "export": "Alert"
+      "anchors": {
+        "importPath": "src/components/Alert",
+        "export": "Alert"
+      }
     }
   }
 }

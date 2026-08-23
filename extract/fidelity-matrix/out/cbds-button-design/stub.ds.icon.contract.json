@@ -39,14 +39,18 @@
       "parts": {}
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
-      "componentSetKey": null
+      "anchors": {
+        "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+        "componentSetKey": null
+      }
     },
     "code": {
-      "importPath": "src/components/Icon",
-      "export": "Icon"
+      "anchors": {
+        "importPath": "src/components/Icon",
+        "export": "Icon"
+      }
     }
   }
 }

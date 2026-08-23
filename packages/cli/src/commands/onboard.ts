@@ -841,7 +841,7 @@ async function phaseTwo(argv: string[]): Promise<number> {
 
   // ---- 2 · PROMOTE ----
   if (skip('promote')) stage(2, TOTAL, 'promote', `SKIPPED (--from ${fromArg}) — reusing the promoted contracts in ${manifest.exampleDir}/contracts`);
-  else stage(2, TOTAL, 'promote', `${promoteComponents.length} contract(s) → ${manifest.exampleDir}/contracts (source-alias pass + figmaStatePreviews probe)`
+  else stage(2, TOTAL, 'promote', `${promoteComponents.length} contract(s) → ${manifest.exampleDir}/contracts (source-alias pass + statePreviews probe)`
     + (quarantined.length > 0 ? ` — ${quarantined.length} quarantined component(s) excluded BY NAME` : ''));
   const promoted = skip('promote')
     ? { promoted: promoteComponents, promotedAssets: [], aliased: 0, literalKept: 0, receipts: [], statePreviewsOn: [], stateRefusals: [] }

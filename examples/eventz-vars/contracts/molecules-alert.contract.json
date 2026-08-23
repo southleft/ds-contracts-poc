@@ -258,15 +258,19 @@
       }
     }
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
-      "componentSetKey": "53f012e948c652da736a2fe49cf135e255df1eba",
-      "nodeId": "2629:56948"
+      "anchors": {
+        "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+        "componentSetKey": "53f012e948c652da736a2fe49cf135e255df1eba",
+        "nodeId": "2629:56948"
+      }
     },
     "code": {
-      "importPath": "src/components/MoleculesAlert",
-      "export": "MoleculesAlert"
+      "anchors": {
+        "importPath": "src/components/MoleculesAlert",
+        "export": "MoleculesAlert"
+      }
     }
   }
 }

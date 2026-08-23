@@ -72,15 +72,19 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "8nim1d0IPnehMxA7B7SYxC",
-      "componentSetKey": "91bf99af47cb2e09190eed770012e9c99661294f",
-      "nodeId": "2:53"
+      "anchors": {
+        "fileKey": "8nim1d0IPnehMxA7B7SYxC",
+        "componentSetKey": "91bf99af47cb2e09190eed770012e9c99661294f",
+        "nodeId": "2:53"
+      }
     },
     "code": {
-      "importPath": "src/components/TableHeaderCell",
-      "export": "TableHeaderCell"
+      "anchors": {
+        "importPath": "src/components/TableHeaderCell",
+        "export": "TableHeaderCell"
+      }
     }
   }
 }

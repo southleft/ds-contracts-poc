@@ -190,15 +190,19 @@
   "a11y": {
     "contrast": "AA"
   },
-  "anchors": {
+  "bindings": {
     "figma": {
-      "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
-      "componentSetKey": "9bc54e5a3f7c074b9ed016dfac8edff95ec45e23",
-      "nodeId": "4:594"
+      "anchors": {
+        "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
+        "componentSetKey": "9bc54e5a3f7c074b9ed016dfac8edff95ec45e23",
+        "nodeId": "4:594"
+      }
     },
     "code": {
-      "importPath": "src/components/Checkbox",
-      "export": "Checkbox"
+      "anchors": {
+        "importPath": "src/components/Checkbox",
+        "export": "Checkbox"
+      }
     }
   },
   "events": [
