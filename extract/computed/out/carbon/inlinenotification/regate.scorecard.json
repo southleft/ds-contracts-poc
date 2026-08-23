@@ -26,6 +26,16 @@
         "value": "hidden"
       },
       {
+        "part": "label",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
         "part": "inline-notification__close-button",
         "channel": "border-bottom-style",
         "value": "none"
@@ -87,9 +97,9 @@
     "combos": 12,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 4944,
-      "cellsEqual": 4800,
-      "pctEqual": 97.0873786407767,
+      "cellsCompared": 5040,
+      "cellsEqual": 4896,
+      "pctEqual": 97.14285714285714,
       "rowsFullyEqual": 0,
       "rows": 48
     },
@@ -204,7 +214,7 @@
     },
     "shippedMinted": {
       "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-      "leavesAdded": 793,
+      "leavesAdded": 800,
       "divergent": [
         {
           "token": "imported.inline-notification.icon.fill.error.high",
@@ -279,6 +289,12 @@
           "resolvedEqual": true
         },
         {
+          "token": "imported.inline-notification.inline-notification-close-button.color",
+          "fresh": "#000000",
+          "shipped": "(group)",
+          "resolvedEqual": false
+        },
+        {
           "token": "imported.inline-notification.root.color.high",
           "fresh": "#ffffff",
           "shipped": "{text-inverse}",
@@ -295,8 +311,8 @@
     "rows": [
       {
         "key": "error.high__default",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -324,8 +340,8 @@
       },
       {
         "key": "error.high__hover",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -353,8 +369,8 @@
       },
       {
         "key": "error.high__focus-visible",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -382,8 +398,8 @@
       },
       {
         "key": "error.high__active",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -411,8 +427,8 @@
       },
       {
         "key": "error.low__default",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -440,8 +456,8 @@
       },
       {
         "key": "error.low__hover",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -469,8 +485,8 @@
       },
       {
         "key": "error.low__focus-visible",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -498,8 +514,8 @@
       },
       {
         "key": "error.low__active",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -527,8 +543,8 @@
       },
       {
         "key": "info.high__default",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -556,8 +572,8 @@
       },
       {
         "key": "info.high__hover",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -585,8 +601,8 @@
       },
       {
         "key": "info.high__focus-visible",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -614,8 +630,8 @@
       },
       {
         "key": "info.high__active",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -643,8 +659,8 @@
       },
       {
         "key": "info.low__default",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -672,8 +688,8 @@
       },
       {
         "key": "info.low__hover",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -701,8 +717,8 @@
       },
       {
         "key": "info.low__focus-visible",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -730,8 +746,8 @@
       },
       {
         "key": "info.low__active",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -759,8 +775,8 @@
       },
       {
         "key": "info-square.high__default",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -788,8 +804,8 @@
       },
       {
         "key": "info-square.high__hover",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -817,8 +833,8 @@
       },
       {
         "key": "info-square.high__focus-visible",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -846,8 +862,8 @@
       },
       {
         "key": "info-square.high__active",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -875,8 +891,8 @@
       },
       {
         "key": "info-square.low__default",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -904,8 +920,8 @@
       },
       {
         "key": "info-square.low__hover",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -933,8 +949,8 @@
       },
       {
         "key": "info-square.low__focus-visible",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -962,8 +978,8 @@
       },
       {
         "key": "info-square.low__active",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -991,8 +1007,8 @@
       },
       {
         "key": "success.high__default",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1020,8 +1036,8 @@
       },
       {
         "key": "success.high__hover",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1049,8 +1065,8 @@
       },
       {
         "key": "success.high__focus-visible",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1078,8 +1094,8 @@
       },
       {
         "key": "success.high__active",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1107,8 +1123,8 @@
       },
       {
         "key": "success.low__default",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1136,8 +1152,8 @@
       },
       {
         "key": "success.low__hover",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1165,8 +1181,8 @@
       },
       {
         "key": "success.low__focus-visible",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1194,8 +1210,8 @@
       },
       {
         "key": "success.low__active",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1223,8 +1239,8 @@
       },
       {
         "key": "warning.high__default",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1252,8 +1268,8 @@
       },
       {
         "key": "warning.high__hover",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1281,8 +1297,8 @@
       },
       {
         "key": "warning.high__focus-visible",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1310,8 +1326,8 @@
       },
       {
         "key": "warning.high__active",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1339,8 +1355,8 @@
       },
       {
         "key": "warning.low__default",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1368,8 +1384,8 @@
       },
       {
         "key": "warning.low__hover",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1397,8 +1413,8 @@
       },
       {
         "key": "warning.low__focus-visible",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1426,8 +1442,8 @@
       },
       {
         "key": "warning.low__active",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1455,8 +1471,8 @@
       },
       {
         "key": "warning-alt.high__default",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1484,8 +1500,8 @@
       },
       {
         "key": "warning-alt.high__hover",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1513,8 +1529,8 @@
       },
       {
         "key": "warning-alt.high__focus-visible",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1542,8 +1558,8 @@
       },
       {
         "key": "warning-alt.high__active",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1571,8 +1587,8 @@
       },
       {
         "key": "warning-alt.low__default",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1600,8 +1616,8 @@
       },
       {
         "key": "warning-alt.low__hover",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1629,8 +1645,8 @@
       },
       {
         "key": "warning-alt.low__focus-visible",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1658,8 +1674,8 @@
       },
       {
         "key": "warning-alt.low__active",
-        "channelsCompared": 103,
-        "channelsEqual": 100,
+        "channelsCompared": 105,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

@@ -94,10 +94,6 @@ const EXCLUDED: Record<string, string> = {
   "root:seed:verify":
     "Regenerates library seeds from committed capture configs; it is an authoring instrument, not a " +
     "drift gate — figma:fresh and dagger:census are what hold the committed artifacts still.",
-  "root:extract:computed:drift":
-    "Needs a banked capture directory under extract/computed/out/** whose transient surfaces are " +
-    "gitignored; it replays a capture rather than asserting an invariant. The stylesheet-ceiling " +
-    "gate is the part of that pipeline with a fixture, and it runs in the full lane.",
   "root:mint:code:check":
     "Superseded surface kept for the code-side mint path; core/mint-check.ts (mint:check, full lane) " +
     "is the gate the minting invariants are pinned in. Listed here so its absence is visible.",

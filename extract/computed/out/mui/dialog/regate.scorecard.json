@@ -57,6 +57,11 @@
       },
       {
         "part": "label",
+        "channel": "font-family",
+        "value": "Times"
+      },
+      {
+        "part": "label",
         "channel": "overflow-x",
         "value": "auto"
       },
@@ -77,9 +82,9 @@
     "combos": 5,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 395,
-      "cellsEqual": 375,
-      "pctEqual": 94.9367088607595,
+      "cellsCompared": 400,
+      "cellsEqual": 380,
+      "pctEqual": 95,
       "rowsFullyEqual": 0,
       "rows": 20
     },
@@ -198,14 +203,14 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1965,
+      "leavesAdded": 1972,
       "divergent": []
     },
     "rows": [
       {
         "key": "xs__default",
-        "channelsCompared": 79,
-        "channelsEqual": 75,
+        "channelsCompared": 80,
+        "channelsEqual": 76,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -269,8 +274,8 @@
       },
       {
         "key": "sm__default",
-        "channelsCompared": 79,
-        "channelsEqual": 75,
+        "channelsCompared": 80,
+        "channelsEqual": 76,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -334,8 +339,8 @@
       },
       {
         "key": "md__default",
-        "channelsCompared": 79,
-        "channelsEqual": 75,
+        "channelsCompared": 80,
+        "channelsEqual": 76,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -399,8 +404,8 @@
       },
       {
         "key": "lg__default",
-        "channelsCompared": 79,
-        "channelsEqual": 75,
+        "channelsCompared": 80,
+        "channelsEqual": 76,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -464,8 +469,8 @@
       },
       {
         "key": "xl__default",
-        "channelsCompared": 79,
-        "channelsEqual": 75,
+        "channelsCompared": 80,
+        "channelsEqual": 76,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

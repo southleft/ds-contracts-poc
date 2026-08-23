@@ -17,6 +17,11 @@
       },
       {
         "part": "label",
+        "channel": "font-family",
+        "value": "Times"
+      },
+      {
+        "part": "label",
         "channel": "overflow-x",
         "value": "auto"
       },
@@ -52,9 +57,9 @@
     "combos": 2,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 92,
-      "cellsEqual": 74,
-      "pctEqual": 80.43478260869566,
+      "cellsCompared": 94,
+      "cellsEqual": 76,
+      "pctEqual": 80.85106382978724,
       "rowsFullyEqual": 0,
       "rows": 8
     },
@@ -225,14 +230,14 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1969,
+      "leavesAdded": 1976,
       "divergent": []
     },
     "rows": [
       {
         "key": "temporary__default",
-        "channelsCompared": 51,
-        "channelsEqual": 38,
+        "channelsCompared": 52,
+        "channelsEqual": 39,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -350,8 +355,8 @@
       },
       {
         "key": "permanent__default",
-        "channelsCompared": 41,
-        "channelsEqual": 36,
+        "channelsCompared": 42,
+        "channelsEqual": 37,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

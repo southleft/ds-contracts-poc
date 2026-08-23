@@ -33,6 +33,32 @@
  *   3 SNAPSHOT STALENESS — the design input is HAND-SAVED; no CI can refresh
  *     it, so an untouched dump would otherwise report green forever. Same
  *     gate as parity/diff.ts, same `MAX_SNAPSHOT_AGE_DAYS` override.
+ *
+ * Two more were missing until 2026-08-23, when this referee exited 1 with 24
+ * findings on the repo's own committed snapshot (docs/23 §B.28 → §D.32) and
+ * 23 of them were the referee reading the wrong thing:
+ *
+ *   4 STATE PREVIEWS — a contract that opts into `bindings.figma.statePreviews`
+ *     DECLARES the canvas `State` axis (Default + its interaction states).
+ *     parity/diff.ts has compared that axis since v8; this referee reported
+ *     it as `[design AHEAD] Button.State` — the pipeline disagreeing with
+ *     itself. Same rule, same schema constants, same option comparison.
+ *   5 PENDING FIRST SYNC — under the `parity-snapshot` design source (the
+ *     canvas THIS repo generates into, never a foreign kit), a contract with
+ *     no design anchor at all (`anchors.componentSetKey` AND `anchors.nodeId`
+ *     both null) and no set on the canvas has never been generated. That is
+ *     the same fact parity/diff.ts routes to its `pending` bucket, and it is
+ *     routed the same way here: printed, recorded in the report, NOT a
+ *     failure. It is scoped to the parity-snapshot source on purpose — a
+ *     hand-saved dump of a foreign kit has no generation step to be pending
+ *     on, so there "no set named like X" stays `[design BEHIND]` (the
+ *     shoelace-diagnose-prefix-match eval pins those 30).
+ *
+ *   The 24th finding was the snapshot's age, and the built-in default config
+ *   now referees `contracts/` (the ADOPTED contracts this repo's canvas was
+ *   generated from) rather than `extract/out/contracts` (the code-extraction
+ *   PROPOSALS, whose Figma spellings are the proposer's defaults and were
+ *   never adopted) — extract/config.ts names why.
  */
 import {
   readFileSync,
@@ -42,7 +68,13 @@ import {
   existsSync,
 } from "node:fs";
 import path from "node:path";
-import { ContractSchema, type Contract } from "../scripts/contract-schema.js";
+import {
+  ContractSchema,
+  STATE_PREVIEW_DEFAULT,
+  STATE_PREVIEW_PROPERTY,
+  statePreviewLabel,
+  type Contract,
+} from "../scripts/contract-schema.js";
 import { loadConfig, outDir, idPrefix } from "../extract/config.js";
 import { extractReactTsx } from "../extract/adapters/react-tsx.js";
 import { extractCem } from "../extract/adapters/cem.js";
@@ -131,6 +163,11 @@ export function runDiagnose(configArg?: string): number {
 
   const findings: Finding[] = [];
   const add = (f: Finding) => findings.push(f);
+  /** Rule 5 — never-synced contracts under the parity-snapshot source. The
+   *  same shape parity/diff.ts uses; recorded, printed, never a failure. */
+  const pending: Array<{ subject: string; detail: string; remedy: string }> =
+    [];
+  const isOwnCanvas = config.design?.source === "parity-snapshot";
 
   // Rule 1 — the vendor prefix. `idPrefix` is the same config key
   // extract/run.ts hands reconcile as `stripCodePrefix`; using anything else
@@ -272,6 +309,17 @@ export function runDiagnose(configArg?: string): number {
     if (contract.bindings.figma.representation === "native") continue;
     const hit = designFor(contract.name);
     if (!hit) {
+      const anchors = contract.bindings.figma.anchors;
+      if (isOwnCanvas && !anchors.componentSetKey && !anchors.nodeId) {
+        pending.push({
+          subject: contract.name,
+          detail:
+            "No design anchor yet (anchors.componentSetKey and anchors.nodeId are both null) and no set on the parity snapshot — the contract has never been generated onto this canvas (pending first sync, not drift; the same rule parity/diff.ts applies)",
+          remedy:
+            "Run its figma-sync script, write back anchors (npm run anchors:writeback), re-extract the snapshot",
+        });
+        continue;
+      }
       add({
         surface: "design",
         classification: "behind",
@@ -338,6 +386,40 @@ export function runDiagnose(configArg?: string): number {
         }
       }
     }
+    // Rule 4 — state previews. The opt-in declares the canvas State axis:
+    // Default + the contract's interaction states, spelled by the same
+    // statePreviewLabel the generator uses (mirrors parity/diff.ts).
+    if (contract.bindings.figma.statePreviews && contract.states.length > 0) {
+      const axis = Object.entries(d.variantProps).find(
+        ([an]) => normalizeName(an) === normalizeName(STATE_PREVIEW_PROPERTY),
+      );
+      const want = [
+        STATE_PREVIEW_DEFAULT,
+        ...contract.states.map(statePreviewLabel),
+      ];
+      if (!axis) {
+        add({
+          surface: "design",
+          classification: "behind",
+          subject: `${contract.name}.${STATE_PREVIEW_PROPERTY}`,
+          detail: `Contract opts into state previews (bindings.figma.statePreviews) but the design set has no ${STATE_PREVIEW_PROPERTY} variant axis`,
+          remedy:
+            "Re-run the component sync script (amend adds the State preview axis), or drop the opt-in",
+        });
+      } else {
+        claimed.add(axis[0]);
+        if (sortedSet(want) !== sortedSet(axis[1])) {
+          add({
+            surface: "design",
+            classification: "mismatch",
+            subject: `${contract.name}.${STATE_PREVIEW_PROPERTY}`,
+            detail: `State preview values differ — contract: [${want.join(", ")}], design has [${axis[1].join(", ")}]`,
+            remedy:
+              "Adopt into the contract states (promotion) or re-sync the set",
+          });
+        }
+      }
+    }
     for (const [axisName, options] of Object.entries(d.variantProps)) {
       if (!claimed.has(axisName)) {
         add({
@@ -394,6 +476,7 @@ export function runDiagnose(configArg?: string): number {
           : null,
         codePrefixStripped: prefix ? idPrefix(config) : null,
         prefixMatched,
+        pending,
         findings,
       },
       null,
@@ -418,9 +501,14 @@ export function runDiagnose(configArg?: string): number {
       );
     }
   }
+  if (pending.length > 0) {
+    console.log(
+      `ℹ ${pending.length} contract(s) pending first sync (no design anchor, no set on this repo's own canvas; does not fail the check): ${pending.map((p) => p.subject).join(", ")}`,
+    );
+  }
   if (findings.length === 0) {
     console.log(
-      `✔ Diagnostic clean — ${contracts.length} contract(s) hold on the checked surface(s). Report → ${out}/diagnose-report.json`,
+      `✔ Diagnostic clean — ${contracts.length} contract(s) hold on the checked surface(s)${pending.length > 0 ? ` (${pending.length} pending first sync)` : ""}. Report → ${out}/diagnose-report.json`,
     );
   } else {
     console.error(`✘ ${findings.length} finding(s):`);

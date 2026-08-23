@@ -21,6 +21,16 @@ export function loadConfig(argPath?: string): { config: ExtractConfig; from: str
       design: { source: 'parity-snapshot' },
       idPrefix: 'ds',
       out: 'extract/out',
+      // The referee (`npm run diagnose`) judges the ADOPTED contracts — the
+      // ones this repo's canvas and code were generated from. It used to fall
+      // back to `<out>/contracts`, the code-extraction PROPOSALS, whose Figma
+      // spellings (`Sm`/`Is Disabled`) are the proposer's defaults and were
+      // never adopted; refereeing those against a canvas built from
+      // `contracts/` reported 23 false "design BEHIND/MISMATCH" findings on
+      // an in-sync file (docs/23 §D.32). `extract:code` still writes its
+      // proposals to `<out>/contracts`; a brownfield config that wants the
+      // proposals refereed sets diagnose.contracts explicitly, as the pilots do.
+      diagnose: { contracts: 'contracts' },
     },
     from: '(built-in default — this repo\'s own library)',
   };

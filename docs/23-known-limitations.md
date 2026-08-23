@@ -1136,29 +1136,29 @@ live demo file. The entry, its specHash caveat and its gates are
 [§D.30](#d30-the-flowbite-eight-carried-no-canvas-anchor-in-the-contract--closed).
 The number is kept so the files that cite §B.27 still resolve.*
 
-## B.28 Two release-evidence commands from the 2026-08-22 audit, still open
+## B.28 Two release-evidence commands from the 2026-08-22 audit — CLOSED, see §D.32
 
 Both were raised as P1 by the 21-agent audit that preceded Phase 0 and both
-name a row in [docs/26](26-v1-definition.md):
+named a row in [docs/26](26-v1-definition.md). Both were closed on
+2026-08-23; the register entry [§D.32](#d32-the-two-acceptance-rows-that-were-red-on-the-commit-itself--closed)
+carries what was actually wrong (not quite what this row said), the fix, and
+the lanes that now pin each.
 
-- **`npm run extract:computed:drift` is not a check.** It replays captures in
-  a real Chromium, took longer than four minutes on the audit machine, and
-  writes `regate.scorecard.json` into TRACKED paths
-  (`extract/computed/regate.ts:438`) — eleven scorecard files dirtied during
-  a "check". It runs in no lane, excluded by name in
-  `.github/scripts/lane-coverage.ts` ("replays a capture rather than
-  asserting an invariant"). The number-level pins it produces (§C.1.1, §D.1)
-  are therefore dev-machine facts until it is split into a read-only compare.
-- **`npm run diagnose` exits 1 on the committed first-party snapshot**
-  (re-run 2026-08-23: `design BEHIND` / `design MISMATCH` findings — `Is
-  Required` / `Is Disabled` booleans missing from the design set, `Size`
-  option spellings `[Sm, Md, Lg]` vs `[Medium, Small, Large]`), so the
-  acceptance command on the Journey C row fails on this commit while
-  `npm run reconcile` exits 0. Whether the snapshot is stale or the design
-  set is behind is exactly the question the command cannot answer offline.
+## B.29 polaris Tag no longer re-fuses offline: an ambiguous `width` on the link part
 
-**What it would take — a re-capture** of the first-party snapshot, and an
-engine decision on the drift instrument's write path. Neither is scheduled.
+Found 2026-08-23 by the repaired drift instrument ([§D.32](#d32-the-two-acceptance-rows-that-were-red-on-the-commit-itself--closed)),
+not by a human. `extract/computed/regate.ts` replaying polaris Tag's committed
+captured truth through the engine at `d5b5b0b1` produces an enriched contract
+whose `link` part carries `width` as BOTH a token binding
+(`{imported.shared.size-59-9219}`) and a literal (`fit-content`); the contract
+validator refuses that by name ("ambiguous — keep ONE of tokens.width /
+literals.width"). The same component fused on 2026-08-09 (offline 80.521 %,
+12,896 cells). The refusal is PINNED in `extract/computed/regate-baseline.json`
+(`refused`), so the re-measure goes red if it changes or the component fuses
+again without a re-record; the committed harness scorecard (capture-time
+engine) is untouched. **Not fixed here** — the fix is in fusion (which of the
+two spellings the mint should keep for a `fit-content` width), and it owes a
+gapCause when it lands.
 
 ---
 
@@ -1828,6 +1828,10 @@ ratchets exist to prevent.*
 | D.26 | No published engine surface — a Vue emitter could not be built outside the monorepo | 2026-08-22 | `78b96e56`, `a3263f7c` |
 | D.27 | Four Figma-only fields outside the vendor-neutral `bindings` namespace | 2026-08-22 | `dbeb3575` |
 | D.28 | Path A regressed: hop-4 literal lifts ran on unstamped foreign dumps | 2026-08-22 | `996258af` |
+| D.29 | The held-out kit's last two silences, and the SLOT's primary-axis FILL | 2026-08-23 | — |
+| D.30 | The Flowbite eight carried no canvas anchor in the contract | 2026-08-23 | — |
+| D.31 | The exam SLOT's interior auto-layout | 2026-08-23 | `8162d7c4` |
+| D.32 | The two acceptance rows that were red on the commit itself: a drift "check" that wrote tracked files and a referee reading the wrong contracts | 2026-08-23 | `a46593b6` |
 
 *D.12–D.28 were found by the 2026-08-22 audit and closed within the same
 two days (PRs #18–#24); none of them ever had a §B row. They are registered
@@ -2732,3 +2736,126 @@ changed.
 
 *If you find something this document does not name, that is a bug in this
 document, and it is the kind worth reporting.*
+
+## D.32 The two acceptance rows that were red on the commit itself — CLOSED
+
+**Was §B.28.** Two [docs/26](26-v1-definition.md) acceptance commands failed
+on the commit they were meant to certify. Each turned out to be the
+instrument, not the thing measured (the 2026-08-04 lesson, again).
+
+**V1-CLASS-01 — `npm run extract:computed:drift`.** What §B.28 said: it took
+longer than four minutes and dirtied eleven tracked `regate.scorecard.json`
+files. What re-measurement found:
+
+- *"Did not complete" was a refusal, not a timeout.* shadcn's capture config
+  pointed its Inter face at `examples/shadcn/.shadcn-sandbox/node_modules/…`,
+  a gitignored npm sandbox, so on any tree without that sandbox the gate
+  threw `fonts: … not found` two seconds in and the check printed only
+  "sweep did not complete". The face is now committed under
+  `extract/computed/fonts/inter/` (the byte-identical file, the way the
+  altitude/mui/astryx faces already were) and the config names it.
+- *The writes were the runner's, by design.* `extract/computed/regate.ts`
+  wrote its scorecard, gate page and gate shots into the tracked
+  `out/<lib>/<comp>/` directory. It now takes `--scorecard-out <dir>`; the
+  drift instrument always passes `extract/computed/.drift-remeasure/`
+  (gitignored), and the tracked paths are read only.
+- *The committed numbers already disagreed with the committed artifacts.*
+  Before any re-measure, 20 of the 65 baseline rows did not match the tracked
+  `regate.scorecard.json` beside them (astryx ×5, carbon ×10, mui ×3,
+  polaris ×2, tailwind ×1 — the baseline's own marker says foreign rows were
+  "kept at their previously recorded value" on 2026-08-09 while a concurrent
+  wave was to re-record them; it never did), and 39 components (17 mui, 11
+  fluent, 6 tailwind, 5 astryx) had a harness scorecard and no baseline row
+  at all — which
+  the old check skipped in silence (`if (!prior) continue`) while printing
+  "65 components match".
+- *Where the time goes.* The runner now prints it per component: replay +
+  fuse is sub-second (polaris Badge: 0.6 s); the rest is the gate page
+  rendered per variant × interaction in Chromium and scored cell by cell
+  (polaris Badge: 53.8 s for 240 gate rows / 22,708 cells) — 7–55 s per
+  component, proportional to cells (fluent 134,660 cells → 472 s; carbon
+  55,204 → 222 s; altitude 6,388 → 53 s; polaris 12 components 739 s, its
+  Button alone 84,480 cells), 104 components, ~37 min total on the
+  recording machine. There is nothing to cache: the gate IS the render. So
+  the instrument was split rather than sped up.
+- *One refusal silenced eleven.* An engine refusal inside one component's
+  fusion threw out of regate's loop, so the rest of that library was never
+  re-fused and the check reported every one of them NOT RE-FUSED. The loop
+  now isolates each component (`REFUSED <Component>: <why>` on stderr,
+  sweep continues, exit 1 at the end), and the drift baseline can PIN a
+  refusal by name (`refused`) — the re-measure then fails if the refusal
+  changes or the component fuses again without a re-record. The standing
+  case is **polaris Tag**: through the engine at `d5b5b0b1` its re-fuse
+  carries `width` on the `link` part as BOTH a token binding
+  (`{imported.shared.size-59-9219}`) and a literal (`fit-content`), and the
+  validator refuses the ambiguity by name. It fused on 2026-08-09 (the old
+  baseline pinned it at 80.521 %). That is a real engine regression this
+  PR surfaces and does not fix; it is registered as [§B.29](#b29-polaris-tag-no-longer-re-fuses-offline-an-ambiguous-width-on-the-link-part).
+
+The split: `npm run extract:computed:drift` is now **VERIFY** — no browser,
+no writes, ~0.1 s — and holds three committed facts to one another for every
+component with a harness scorecard: the baseline row, the committed offline
+`regate.scorecard.json`, and the committed `scorecard.json`. An unpinned
+component, a stale row, an unnamed gap or two committed numbers that disagree
+are each a failure by name. `npm run extract:computed:drift:remeasure` is the
+old instrument done right — the full Chromium re-fuse, scored against the
+baseline, writing nothing tracked. `--write` re-records both the baseline and
+the tracked offline scorecards from one re-measure, so they cannot drift
+apart again. The re-record on `d5b5b0b1` pinned 104 rows (was 65): 30 of
+the 33 previously-unnamed gaps are the same post-capture vocabulary lift
+(N more cells compared than the capture-time engine, every added cell
+equal — named per row), three carry changed verdicts (shadcn Alert,
+tailwind Blockquote, tailwind Card), none is bisected to a commit.
+
+**V1-JOURNEY-03 — `npm run reconcile && npm run diagnose && npm run
+docs:check`.** What §B.28 said: `diagnose` exits 1 with `design BEHIND` /
+`design MISMATCH` findings — `Is Required` / `Is Disabled` booleans missing,
+`Size` spelt `[Sm, Md, Lg]` vs `[Small, Medium, Large]` — and "whether the
+snapshot is stale or the design set is behind is exactly the question the
+command cannot answer offline". The 24 findings, each dispositioned:
+
+- **18 — the referee read the wrong contracts.** The built-in default config
+  refereed `extract/out/contracts/` — the code-extraction PROPOSALS, whose
+  Figma spellings (`Sm`, `Is Disabled`, `Overflow Label`) are the proposer's
+  defaults and were never adopted — against a canvas generated from
+  `contracts/`, where the adopted bindings say `Small` and `Disabled`. Every
+  one of the 18 disappears when the adopted contracts are the input; the
+  default now names `contracts/` and says why.
+- **2 — `Inline` / `Stack` "no design set".** Same cause: the adopted
+  contracts declare `representation: native` (a layout primitive IS the
+  canvas capability), which the proposals do not carry.
+- **1 — `Button.State` "design AHEAD".** A diagnose-side misread: the
+  contract opts into `bindings.figma.statePreviews`, which DECLARES the
+  canvas `State` axis; `parity/diff.ts` has compared that axis since v8 and
+  `diagnose` never learned the rule. It applies it now, with the same schema
+  constants and the same option comparison.
+- **1 — the snapshot's age.** Real by the gate's definition (45.6 days), and
+  false as a statement about the canvas: read back over the REST API on
+  2026-08-23, the live file is identical on every set-level fact the referee
+  reads — 49/49 sets, every key, description, variant count and property
+  definition; the only move is a `Slot` instance inside `AccordionItem`
+  from the native-slots round. The refresh that used to need a human
+  pasting a script into Figma is now `npm run parity:snapshot:rest`
+  (`parity/snapshot-rest.ts`, read-only, `FIGMA_TOKEN` from `.env.local`);
+  it prints what moved before it writes. What it does NOT carry is named in
+  its header: variant fingerprints and slot content are plugin-only (the
+  snapshot it replaced carried none either), and the variables endpoint is an
+  Enterprise surface, so `figma-tokens.json` stays a plugin snapshot and
+  `npm run parity` still reports that one file stale.
+- **+5 — surfaced only once the above were fixed.** `BentoGrid`,
+  `GridGallery`, `PageShell`, `SidebarLayout`, `TwoColumn`: draft contracts
+  with null anchors and no set on the catalog file — never generated onto
+  it. REAL, and not drift: `parity/diff.ts` routes exactly this case to its
+  `pending` bucket, and `diagnose` now does the same, scoped to the
+  `parity-snapshot` source (this repo's own canvas) so a foreign kit's
+  missing set stays `[design BEHIND]` — the `shoelace-diagnose-prefix-match`
+  eval still pins those 30.
+
+The chain exits 0 on the commit. Nothing was weakened: `variant-drift:check`
+and `canvas:binding:check` still catch the planted edits, and the eval
+family `diagnose-*` is green.
+
+**Lanes now.** fast: `extract:computed:drift` (verify) and `reconcile &&
+diagnose`. full: `extract:computed:drift:remeasure`. The `diagnose` step goes
+red by design when the snapshot passes 14 days; the fix is the one REST
+command above. Commit `a46593b6`.

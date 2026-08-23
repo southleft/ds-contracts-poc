@@ -117,7 +117,7 @@
     },
     "shippedMinted": {
       "path": "examples/polaris/tokens/polaris-minted.dtcg.json",
-      "leavesAdded": 1314,
+      "leavesAdded": 1295,
       "divergent": []
     },
     "rows": [

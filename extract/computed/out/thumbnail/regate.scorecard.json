@@ -151,7 +151,7 @@
     "namedLosses": [
       "promotion: pseudo-decor-outside-grammar: root::before paints at position:static (80x80, opacity 1) — the bounded decor grammar reads position:absolute boxes only; an in-flow decor box is NOT promoted and NOT on the canvas",
       "promotion: pseudo-decor-outside-grammar: root::after is painted by a mechanism the grammar cannot read (box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px inset) — the decor grammar reads background-color alpha and border rings only; the box is NOT promoted",
-      "code-only: part-0.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+      "code-only: part-0.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <img>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <img> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it."
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -159,7 +159,7 @@
     },
     "shippedMinted": {
       "path": "examples/polaris/tokens/polaris-minted.dtcg.json",
-      "leavesAdded": 1299,
+      "leavesAdded": 1280,
       "divergent": [
         {
           "token": "imported.thumbnail.part-0.color",

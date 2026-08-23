@@ -4,7 +4,7 @@
  * network — the committed capture IS the truth; only a local Chromium is
  * needed, the CERTIFICATION convention).
  *
- *   npm run extract:computed:regate [-- --config <file>] [--component <Name>]
+ *   npm run extract:computed:regate [-- --config <file>] [--component <Name>] [--scorecard-out <dir>]
  *
  * Why it exists (S4 round 1): vocabulary lifts change what FUSION can carry,
  * and therefore what the enriched contract renders through emit-html — the
@@ -81,6 +81,16 @@ const OUT_ROOT = arg('out') ? path.resolve(arg('out')!) : path.join(HERE, 'out')
  *  it through changed vocabulary is deterministic and needs no Chromium
  *  recapture of the libraries. Guarded — see assertReplaySufficient. */
 const WRITE_ENRICHED = process.argv.includes('--write-enriched');
+/** V1 ACCEPTANCE (docs/23 §D.32) — `--scorecard-out <dir>`. regate.scorecard.json
+ *  is a TRACKED artifact under out/<component>/, and this runner used to
+ *  overwrite it on every run — which made `extract/computed/drift-check.ts`
+ *  (a CHECK) dirty eleven tracked files while it ran. With this flag every
+ *  artifact the run produces — the scorecard, the gate page, the gate shots,
+ *  the token probe page — lands under <dir>/<component>/ instead, and the
+ *  tracked paths are READ ONLY. The captured truth, decisions ledger and
+ *  committed scorecards are still read from `--out`. `--write-enriched`
+ *  is unaffected: it is a deliberate authoring verb for the tracked contract. */
+const SCORECARD_OUT = arg('scorecard-out') ? path.resolve(arg('scorecard-out')!) : null;
 
 /** GUARD for --write-enriched. Writing contracts from replayed truth is only
  *  legitimate when the truth file really is replay-sufficient. The FULL
@@ -128,6 +138,7 @@ async function main() {
   const components = cfg.components.filter(
     (c) => (!ONLY || c.name === ONLY) && existsSync(path.join(OUT_ROOT, c.name.toLowerCase(), 'captured-truth.json')),
   );
+  const refused: string[] = [];
   if (components.length === 0) {
     console.error(`no committed captured-truth for ${ONLY ?? 'any configured component'}`);
     process.exit(1);
@@ -145,7 +156,8 @@ async function main() {
   // probe is NAMED in the header).
   const tokensCss = readFileSync(path.join(REPO, cfg.tokens.css), 'utf8');
   const probePage = await context.newPage();
-  const probeHtml = path.join(OUT_ROOT, '.regate-probe.html');
+  if (SCORECARD_OUT) mkdirSync(SCORECARD_OUT, { recursive: true });
+  const probeHtml = path.join(SCORECARD_OUT ?? OUT_ROOT, '.regate-probe.html');
   writeFileSync(probeHtml, `<!doctype html><html><head><meta charset="utf-8"><style>${tokensCss}</style></head><body></body></html>`);
   await probePage.goto(`file://${probeHtml}`);
   const probeCache = new Map<string, string>();
@@ -172,7 +184,24 @@ async function main() {
   };
 
   for (const comp of components) {
+    // ONE component's refusal is ONE finding (docs/23 §D.32). Before
+    // 2026-08-23 an engine refusal inside fusion/validation threw out of this
+    // loop, the remaining components of the library were never re-fused, and
+    // the drift check reported all of them NOT RE-FUSED — eleven findings for
+    // one cause (polaris Tag). The refusal is printed BY NAME on stderr in a
+    // line the drift instrument parses (`REFUSED <Component>: <why>`), and the
+    // sweep continues; the process still exits 1 at the end so a bare
+    // `npm run extract:computed:regate` cannot read a refusal as green.
+    try {
     const outDir = path.join(OUT_ROOT, comp.name.toLowerCase());
+    // Where this run's artifacts land: the tracked component dir, or the
+    // --scorecard-out mirror of it (see SCORECARD_OUT).
+    const artifactDir = SCORECARD_OUT ? path.join(SCORECARD_OUT, comp.name.toLowerCase()) : outDir;
+    if (SCORECARD_OUT) mkdirSync(artifactDir, { recursive: true });
+    // Where the time goes, per component (printed in the summary): the drift
+    // re-measure is a full-lane step because of these numbers, and a claim
+    // about its cost should be a measurement, not a memory.
+    const tStart = Date.now();
     const truth = JSON.parse(readFileSync(path.join(outDir, 'captured-truth.json'), 'utf8')) as CapturedTruthFile;
     if (WRITE_ENRICHED) assertReplaySufficient(truth, comp.name);
     const space = propSpaceFor(REPO, cfg, comp);
@@ -393,6 +422,7 @@ async function main() {
       ...prep.stateCodeOnly.map((c) => `code-only[${c.state}]: ${c.part}.${c.channel} — ${c.reason}`),
     ];
 
+    const tFused = Date.now();
     const gatePage = await context.newPage();
     const scorecard = await runGate({
       page: gatePage,
@@ -405,7 +435,7 @@ async function main() {
       mintedTree: mergedTree,
       styled,
       origShotsDir: path.join(outDir, '.no-orig-shots'), // absent by design — pixel not re-scored offline
-      outDir,
+      outDir: artifactDir,
       browserVersion: sweep.browserVersion,
       fusionCounts: {
         boundConfirmed,
@@ -424,6 +454,7 @@ async function main() {
       contextStyles: truth.controls['span']?.style ?? {},
     });
     await gatePage.close();
+    const tGated = Date.now();
 
     const regate = {
       _marker:
@@ -435,7 +466,7 @@ async function main() {
       decisionsReapplied: decisionNotes,
       scorecard: { ...scorecard, rows: scorecard.rows },
     };
-    writeFileSync(path.join(outDir, 'regate.scorecard.json'), JSON.stringify(regate, null, 2) + '\n');
+    writeFileSync(path.join(artifactDir, 'regate.scorecard.json'), JSON.stringify(regate, null, 2) + '\n');
 
     const committed = JSON.parse(readFileSync(path.join(outDir, 'scorecard.json'), 'utf8')) as {
       computed: { pctEqual: number; cellsEqual: number; cellsCompared: number; rowsFullyEqual: number; rows: number };
@@ -448,11 +479,22 @@ async function main() {
     console.log(`  declared facts carried: ${declaredBase.length} base + ${declaredState.length} state · code-only remaining: ${prep.codeOnly.length} base + ${prep.stateCodeOnly.length} state`);
     console.log(`  human-acked decisions re-applied: ${decisionNotes.filter((d) => d.startsWith('applied')).length}${decisionNotes.some((d) => d.startsWith('SKIPPED')) ? ` (${decisionNotes.filter((d) => d.startsWith('SKIPPED')).length} SKIPPED — named in regate.scorecard.json)` : ''} — the harness gates this same resolved contract (run.ts:440)`);
     console.log(`  bound contradictions: committed ${committed.fusion.contradictions} vs re-probe ${contradictions.length}${committed.fusion.contradictions === contradictions.length ? ' (probe context equivalent)' : '  ← PROBE-CONTEXT DRIFT — investigate before quoting'}`);
+    console.log(`  time: ${((tGated - tStart) / 1000).toFixed(1)}s — replay + fuse ${((tFused - tStart) / 1000).toFixed(1)}s, gate render + score ${((tGated - tFused) / 1000).toFixed(1)}s (${scorecard.computed.rows} gate rows, ${scorecard.computed.cellsCompared} cells)`);
+    } catch (e) {
+      const why = (e as Error).message.split('\n').filter(Boolean).slice(0, 3).join(' | ');
+      refused.push(comp.name);
+      console.error(`REFUSED ${comp.name}: ${why}`);
+      console.log(`\n== ${comp.name} (offline regate)\n  ✗ REFUSED — ${why.slice(0, 400)}`);
+    }
   }
 
   rmSync(probeHtml, { force: true });
   await probePage.close();
   await browser.close();
+  if (refused.length > 0) {
+    console.error(`\n✗ ${refused.length} component(s) REFUSED to re-fuse through the current engine: ${refused.join(', ')}`);
+    process.exitCode = 1;
+  }
 }
 
 await main();

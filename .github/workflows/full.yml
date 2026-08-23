@@ -314,6 +314,20 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:computed:ceiling:check
 
+      # V1-CLASS-01's drift instrument, RE-MEASURE half (docs/23 §D.32): every
+      # committed captured truth replayed through the CURRENT fusion + emitters
+      # in headless Chromium and scored against the recorded baseline. Every
+      # artifact lands in extract/computed/.drift-remeasure/ (gitignored) via
+      # regate's --scorecard-out; the tracked out/** paths are read only, so a
+      # green run leaves `git status` clean. Cost, measured on the recording
+      # machine (macOS arm64): 7–55s per component (polaris Button, 84,480 cells, several minutes), 104 components, ~37 min —
+      # the gate page is rendered per variant × interaction and scored cell by
+      # cell (carbon Button alone is 21,056 cells). The fast lane runs the
+      # browser-free VERIFY half of the same instrument.
+      - name: extract:computed:drift:remeasure (the committed captures re-fused through the current engine, scored against the baseline)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:computed:drift:remeasure
+
       # Full lane, not fast: it launches Chromium and one of its four cases is
       # a real 10s Playwright screenshot timeout (the un-shootable root), so it
       # costs ~20s — the same reason the ceiling check above lives here.

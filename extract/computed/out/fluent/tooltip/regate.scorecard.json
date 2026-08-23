@@ -1,0 +1,485 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "Tooltip",
+  "config": "extract/computed/configs/fluent.json",
+  "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "declared": {
+    "base": [
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "cursor",
+        "value": "default"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "part-0",
+        "channel": "background-clip",
+        "value": "content-box"
+      },
+      {
+        "part": "part-0",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-0",
+        "channel": "cursor",
+        "value": "default"
+      }
+    ],
+    "state": []
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "Tooltip",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 4,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 228,
+      "cellsEqual": 210,
+      "pctEqual": 92.10526315789474,
+      "rowsFullyEqual": 0,
+      "rows": 16
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 16,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 34,
+      "mintedLeavesUnfolded": 66,
+      "baseBindings": 43,
+      "stateBindings": 0,
+      "codeOnlyChannels": 6,
+      "overflowBindings": 1,
+      "folds": 16
+    },
+    "worstRows": [
+      {
+        "key": "normal.on__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 6,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "inverted.on__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 6,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "normal.off__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 3,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "inverted.off__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 3,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "normal.off__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "normal.off__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "normal.off__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "normal.on__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "root.filter",
+        4
+      ],
+      [
+        "root.overflow-wrap",
+        4
+      ],
+      [
+        "root.transform",
+        4
+      ],
+      [
+        "part-0.overflow-wrap",
+        2
+      ],
+      [
+        "part-0.transform",
+        2
+      ],
+      [
+        "part-0.z-index",
+        2
+      ]
+    ],
+    "namedLosses": [
+      "promotion: pseudo-decor-outside-grammar: part-0::before paints at position:static (8.46875x8.46875, opacity 1) — the bounded decor grammar reads position:absolute boxes only; an in-flow decor box is NOT promoted and NOT on the canvas",
+      "overflow: root.translate-x — presence-prop-driven styling (withArrow) — boolean tokensByProp has no spelling (round 4 residue)",
+      "code-only: root.filter — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.transform — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: part-0.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0.transform — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: part-0.z-index — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/fluent/tokens/fluent-minted.dtcg.json",
+      "leavesAdded": 1630,
+      "divergent": []
+    },
+    "rows": [
+      {
+        "key": "normal.off__default",
+        "channelsCompared": 43,
+        "channelsEqual": 40,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "filter",
+            "ours": "none",
+            "theirs": "drop-shadow(rgba(0, 0, 0, 0.12) 0px 0px 2px) drop-shadow(rgba(0, 0, 0, 0.14) 0px 4px 8px)"
+          },
+          {
+            "part": "root",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "root",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 116, 18)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "normal.off__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "normal.off__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "normal.off__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "normal.on__default",
+        "channelsCompared": 71,
+        "channelsEqual": 65,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "filter",
+            "ours": "none",
+            "theirs": "drop-shadow(rgba(0, 0, 0, 0.12) 0px 0px 2px) drop-shadow(rgba(0, 0, 0, 0.14) 0px 4px 8px)"
+          },
+          {
+            "part": "root",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "root",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 122, 18)"
+          },
+          {
+            "part": "part-0",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-0",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.707107, 0.707107, -0.707107, 0.707107, 0, 0)"
+          },
+          {
+            "part": "part-0",
+            "channel": "z-index",
+            "ours": "auto",
+            "theirs": "-1"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "normal.on__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "normal.on__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "normal.on__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "inverted.off__default",
+        "channelsCompared": 43,
+        "channelsEqual": 40,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "filter",
+            "ours": "none",
+            "theirs": "drop-shadow(rgba(0, 0, 0, 0.12) 0px 0px 2px) drop-shadow(rgba(0, 0, 0, 0.14) 0px 4px 8px)"
+          },
+          {
+            "part": "root",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "root",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 116, 18)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "inverted.off__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "inverted.off__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "inverted.off__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "inverted.on__default",
+        "channelsCompared": 71,
+        "channelsEqual": 65,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "filter",
+            "ours": "none",
+            "theirs": "drop-shadow(rgba(0, 0, 0, 0.12) 0px 0px 2px) drop-shadow(rgba(0, 0, 0, 0.14) 0px 4px 8px)"
+          },
+          {
+            "part": "root",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "root",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 122, 18)"
+          },
+          {
+            "part": "part-0",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "part-0",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(0.707107, 0.707107, -0.707107, 0.707107, 0, 0)"
+          },
+          {
+            "part": "part-0",
+            "channel": "z-index",
+            "ours": "auto",
+            "theirs": "-1"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "inverted.on__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "inverted.on__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "inverted.on__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      }
+    ]
+  }
+}

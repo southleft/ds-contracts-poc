@@ -228,7 +228,7 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1865,
+      "leavesAdded": 1872,
       "divergent": [
         {
           "token": "imported.chip.root.background-color.filled.error",

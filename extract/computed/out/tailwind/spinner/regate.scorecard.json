@@ -1,0 +1,1723 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "Spinner",
+  "config": "extract/computed/configs/tailwind.json",
+  "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "declared": {
+    "base": [],
+    "state": []
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "Spinner",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 40,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 0,
+      "cellsEqual": 0,
+      "pctEqual": 100,
+      "rowsFullyEqual": 0,
+      "rows": 160
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 160,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 6,
+      "mintedLeavesUnfolded": 6,
+      "baseBindings": 2,
+      "stateBindings": 0,
+      "codeOnlyChannels": 0,
+      "overflowBindings": 0,
+      "folds": 30
+    },
+    "worstRows": [
+      {
+        "key": "info.xs__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "info.xs__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "info.xs__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "info.xs__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "info.sm__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "info.sm__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "info.sm__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "info.sm__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      }
+    ],
+    "topMismatchedChannels": [],
+    "namedLosses": [],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/tailwind/tokens/tailwind-minted.dtcg.json",
+      "leavesAdded": 263,
+      "divergent": []
+    },
+    "rows": [
+      {
+        "key": "info.xs__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.xs__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.xs__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.xs__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.sm__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.sm__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.sm__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.sm__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.md__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.md__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.md__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.md__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.lg__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.lg__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.lg__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.lg__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.xl__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.xl__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.xl__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info.xl__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "failure.xs__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "failure.xs__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "failure.xs__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "failure.xs__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "failure.sm__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "failure.sm__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "failure.sm__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "failure.sm__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "failure.md__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "failure.md__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "failure.md__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "failure.md__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "failure.lg__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "failure.lg__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "failure.lg__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "failure.lg__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "failure.xl__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "failure.xl__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "failure.xl__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "failure.xl__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.xs__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.xs__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.xs__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.xs__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.sm__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.sm__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.sm__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.sm__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.md__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.md__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.md__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.md__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.lg__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.lg__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.lg__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.lg__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.xl__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.xl__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.xl__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.xl__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.xs__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.xs__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.xs__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.xs__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.sm__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.sm__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.sm__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.sm__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.md__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.md__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.md__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.md__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.lg__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.lg__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.lg__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.lg__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.xl__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.xl__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.xl__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning.xl__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray.xs__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray.xs__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray.xs__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray.xs__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray.sm__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray.sm__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray.sm__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray.sm__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray.md__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray.md__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray.md__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray.md__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray.lg__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray.lg__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray.lg__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray.lg__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray.xl__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray.xl__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray.xl__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray.xl__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink.xs__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink.xs__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink.xs__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink.xs__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink.sm__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink.sm__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink.sm__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink.sm__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink.md__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink.md__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink.md__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink.md__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink.lg__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink.lg__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink.lg__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink.lg__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink.xl__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink.xl__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink.xl__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink.xl__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple.xs__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple.xs__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple.xs__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple.xs__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple.sm__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple.sm__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple.sm__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple.sm__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple.md__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple.md__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple.md__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple.md__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple.lg__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple.lg__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple.lg__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple.lg__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple.xl__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple.xl__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple.xl__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple.xl__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xs__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xs__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xs__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xs__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.sm__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.sm__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.sm__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.sm__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.md__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.md__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.md__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.md__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.lg__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.lg__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.lg__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.lg__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xl__default",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xl__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xl__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xl__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}

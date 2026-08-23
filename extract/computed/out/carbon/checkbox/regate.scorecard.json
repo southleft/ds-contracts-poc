@@ -72,6 +72,11 @@
       },
       {
         "part": "label",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "label",
         "channel": "user-select",
         "value": "none"
       }
@@ -106,9 +111,9 @@
     "combos": 6,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 1776,
-      "cellsEqual": 1497,
-      "pctEqual": 84.29054054054055,
+      "cellsCompared": 1800,
+      "cellsEqual": 1521,
+      "pctEqual": 84.5,
       "rowsFullyEqual": 0,
       "rows": 24
     },
@@ -298,14 +303,14 @@
     },
     "shippedMinted": {
       "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-      "leavesAdded": 843,
+      "leavesAdded": 851,
       "divergent": []
     },
     "rows": [
       {
         "key": "unchecked.enabled__default",
-        "channelsCompared": 74,
-        "channelsEqual": 69,
+        "channelsCompared": 75,
+        "channelsEqual": 70,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -345,8 +350,8 @@
       },
       {
         "key": "unchecked.enabled__hover",
-        "channelsCompared": 74,
-        "channelsEqual": 69,
+        "channelsCompared": 75,
+        "channelsEqual": 70,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -386,8 +391,8 @@
       },
       {
         "key": "unchecked.enabled__focus-visible",
-        "channelsCompared": 74,
-        "channelsEqual": 68,
+        "channelsCompared": 75,
+        "channelsEqual": 69,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -433,8 +438,8 @@
       },
       {
         "key": "unchecked.enabled__active",
-        "channelsCompared": 74,
-        "channelsEqual": 69,
+        "channelsCompared": 75,
+        "channelsEqual": 70,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -474,8 +479,8 @@
       },
       {
         "key": "unchecked.disabled__default",
-        "channelsCompared": 74,
-        "channelsEqual": 56,
+        "channelsCompared": 75,
+        "channelsEqual": 57,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -593,8 +598,8 @@
       },
       {
         "key": "unchecked.disabled__hover",
-        "channelsCompared": 74,
-        "channelsEqual": 56,
+        "channelsCompared": 75,
+        "channelsEqual": 57,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -712,8 +717,8 @@
       },
       {
         "key": "unchecked.disabled__focus-visible",
-        "channelsCompared": 74,
-        "channelsEqual": 56,
+        "channelsCompared": 75,
+        "channelsEqual": 57,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -831,8 +836,8 @@
       },
       {
         "key": "unchecked.disabled__active",
-        "channelsCompared": 74,
-        "channelsEqual": 56,
+        "channelsCompared": 75,
+        "channelsEqual": 57,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -950,8 +955,8 @@
       },
       {
         "key": "checked.enabled__default",
-        "channelsCompared": 74,
-        "channelsEqual": 69,
+        "channelsCompared": 75,
+        "channelsEqual": 70,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -991,8 +996,8 @@
       },
       {
         "key": "checked.enabled__hover",
-        "channelsCompared": 74,
-        "channelsEqual": 69,
+        "channelsCompared": 75,
+        "channelsEqual": 70,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1032,8 +1037,8 @@
       },
       {
         "key": "checked.enabled__focus-visible",
-        "channelsCompared": 74,
-        "channelsEqual": 68,
+        "channelsCompared": 75,
+        "channelsEqual": 69,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1079,8 +1084,8 @@
       },
       {
         "key": "checked.enabled__active",
-        "channelsCompared": 74,
-        "channelsEqual": 69,
+        "channelsCompared": 75,
+        "channelsEqual": 70,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1120,8 +1125,8 @@
       },
       {
         "key": "checked.disabled__default",
-        "channelsCompared": 74,
-        "channelsEqual": 56,
+        "channelsCompared": 75,
+        "channelsEqual": 57,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1239,8 +1244,8 @@
       },
       {
         "key": "checked.disabled__hover",
-        "channelsCompared": 74,
-        "channelsEqual": 56,
+        "channelsCompared": 75,
+        "channelsEqual": 57,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1358,8 +1363,8 @@
       },
       {
         "key": "checked.disabled__focus-visible",
-        "channelsCompared": 74,
-        "channelsEqual": 56,
+        "channelsCompared": 75,
+        "channelsEqual": 57,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1477,8 +1482,8 @@
       },
       {
         "key": "checked.disabled__active",
-        "channelsCompared": 74,
-        "channelsEqual": 56,
+        "channelsCompared": 75,
+        "channelsEqual": 57,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1596,8 +1601,8 @@
       },
       {
         "key": "indeterminate.enabled__default",
-        "channelsCompared": 74,
-        "channelsEqual": 69,
+        "channelsCompared": 75,
+        "channelsEqual": 70,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1637,8 +1642,8 @@
       },
       {
         "key": "indeterminate.enabled__hover",
-        "channelsCompared": 74,
-        "channelsEqual": 69,
+        "channelsCompared": 75,
+        "channelsEqual": 70,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1678,8 +1683,8 @@
       },
       {
         "key": "indeterminate.enabled__focus-visible",
-        "channelsCompared": 74,
-        "channelsEqual": 68,
+        "channelsCompared": 75,
+        "channelsEqual": 69,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1725,8 +1730,8 @@
       },
       {
         "key": "indeterminate.enabled__active",
-        "channelsCompared": 74,
-        "channelsEqual": 69,
+        "channelsCompared": 75,
+        "channelsEqual": 70,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1766,8 +1771,8 @@
       },
       {
         "key": "indeterminate.disabled__default",
-        "channelsCompared": 74,
-        "channelsEqual": 56,
+        "channelsCompared": 75,
+        "channelsEqual": 57,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1885,8 +1890,8 @@
       },
       {
         "key": "indeterminate.disabled__hover",
-        "channelsCompared": 74,
-        "channelsEqual": 56,
+        "channelsCompared": 75,
+        "channelsEqual": 57,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2004,8 +2009,8 @@
       },
       {
         "key": "indeterminate.disabled__focus-visible",
-        "channelsCompared": 74,
-        "channelsEqual": 56,
+        "channelsCompared": 75,
+        "channelsEqual": 57,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2123,8 +2128,8 @@
       },
       {
         "key": "indeterminate.disabled__active",
-        "channelsCompared": 74,
-        "channelsEqual": 56,
+        "channelsCompared": 75,
+        "channelsEqual": 57,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

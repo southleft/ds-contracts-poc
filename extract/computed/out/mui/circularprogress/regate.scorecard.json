@@ -156,7 +156,7 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1984,
+      "leavesAdded": 1991,
       "divergent": [
         {
           "token": "imported.circular-progress.root.color",

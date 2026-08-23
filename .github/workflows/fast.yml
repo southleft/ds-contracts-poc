@@ -356,6 +356,29 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run verify:catalog
 
+      # V1-CLASS-01's drift instrument, VERIFY half (docs/23 §D.32). No browser,
+      # no writes, ~0.6s: for every component with a committed harness
+      # scorecard it holds the baseline row, the committed offline
+      # regate.scorecard.json and the committed scorecard.json to one another,
+      # and refuses UNPINNED components (a scorecard with no baseline row — the
+      # old instrument skipped 39 of them in silence). The RE-MEASURE
+      # half — the same numbers re-fused through Chromium — is the full lane's
+      # extract:computed:drift:remeasure, ~37 min on the recording machine.
+      - name: extract:computed:drift (baseline ⟷ committed offline scorecards, no browser)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:computed:drift
+
+      # V1-JOURNEY-03's acceptance chain minus docs:check (which runs above):
+      # the brownfield referee over this repo's own adopted contracts, code and
+      # committed canvas snapshot (docs/23 §D.32). ~2s, no browser, no token.
+      # It goes RED by design when parity/snapshots/figma-components.json is
+      # older than 14 days (MAX_SNAPSHOT_AGE_DAYS) — the refresh is one
+      # token-bearing command, `npm run parity:snapshot:rest`, which re-reads
+      # the live catalog file over the REST API and prints what moved.
+      - name: reconcile + diagnose (the Journey C referee exits 0 on the committed first-party snapshot)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run reconcile && npm run diagnose
+
       # Pure functions, no browser, 0.2s — it belongs in the fast lane. It pins
       # the OKLab colour parser against an INDEPENDENT implementation written
       # from the published forward matrices, and pins that unknown colour

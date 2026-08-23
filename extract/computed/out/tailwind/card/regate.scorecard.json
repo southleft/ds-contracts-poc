@@ -24,6 +24,11 @@
         "part": "root",
         "channel": "border-top-style",
         "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
       }
     ],
     "state": []
@@ -37,9 +42,9 @@
     "combos": 1,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 132,
-      "cellsEqual": 116,
-      "pctEqual": 87.87878787878788,
+      "cellsCompared": 136,
+      "cellsEqual": 120,
+      "pctEqual": 88.23529411764706,
       "rowsFullyEqual": 0,
       "rows": 4
     },
@@ -126,7 +131,7 @@
     },
     "shippedMinted": {
       "path": "examples/tailwind/tokens/tailwind-minted.dtcg.json",
-      "leavesAdded": 228,
+      "leavesAdded": 255,
       "divergent": [
         {
           "token": "imported.card.root.background-color",
@@ -139,8 +144,8 @@
     "rows": [
       {
         "key": "__default",
-        "channelsCompared": 33,
-        "channelsEqual": 29,
+        "channelsCompared": 34,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -174,8 +179,8 @@
       },
       {
         "key": "__hover",
-        "channelsCompared": 33,
-        "channelsEqual": 29,
+        "channelsCompared": 34,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -209,8 +214,8 @@
       },
       {
         "key": "__focus-visible",
-        "channelsCompared": 33,
-        "channelsEqual": 29,
+        "channelsCompared": 34,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -244,8 +249,8 @@
       },
       {
         "key": "__active",
-        "channelsCompared": 33,
-        "channelsEqual": 29,
+        "channelsCompared": 34,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

@@ -96,3 +96,9 @@ demo/from-contracts/
 
 # CI-measured eval record (compared against the committed evals/results.json by eval:record:check)
 evals/.ci/
+
+# regate drift re-measure scratch (extract/computed/drift-check.ts --remeasure): fresh
+# offline scorecards land here, never in the tracked out/** paths
+extract/computed/.drift-remeasure/
+# diagnose report: carries an absolute path + a clock-measured age; rewritten on every run
+extract/out/diagnose-report.json

@@ -230,7 +230,7 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1950,
+      "leavesAdded": 1957,
       "divergent": [
         {
           "token": "imported.fab.root.background-color.default",
