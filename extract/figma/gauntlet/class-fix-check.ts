@@ -34,7 +34,7 @@ import {
   type Contract,
 } from "../../../scripts/contract-schema.js";
 import { capturedTokensFromDump } from "../../../core/captured-tokens.js";
-import { emitters, type EmitterCtx } from "../../../core/emitter.js";
+import { generateSurfaces, type EmitterCtx } from "../../../core/emitter.js";
 import { generateCss, validateContract } from "../../../core/emit-react.js";
 import { emitFigmaScript } from "../../../core/emit-figma-script.js";
 import {
@@ -199,7 +199,7 @@ function replay(fixtureFile: string): Replay {
   };
   const emitted: string[] = [];
   const refusals: Array<{ emitter: string; message: string }> = [];
-  for (const emitter of emitters) {
+  for (const emitter of generateSurfaces()) {
     try {
       emitter.emit(contract, ctx);
       emitted.push(emitter.name);
@@ -213,7 +213,7 @@ function replay(fixtureFile: string): Replay {
   return { contract, notes: proposal.notes, violations, emitted, refusals };
 }
 
-const surfaces = emitters.map((e) => e.name).join(", ");
+const surfaces = generateSurfaces().map((e) => e.name).join(", ");
 
 // ---------------------------------------------------------------------------
 // 1. component-ref-unknown-child-prop — Avatar group fixture
@@ -248,7 +248,7 @@ console.log(
   );
   check(
     `ALL FOUR surfaces emit (${surfaces})`,
-    r.emitted.length === emitters.length && r.refusals.length === 0,
+    r.emitted.length === generateSurfaces().length && r.refusals.length === 0,
   );
 }
 
@@ -291,7 +291,7 @@ console.log(
   );
   check(
     `ALL FOUR surfaces emit (${surfaces})`,
-    r.emitted.length === emitters.length && r.refusals.length === 0,
+    r.emitted.length === generateSurfaces().length && r.refusals.length === 0,
   );
 
   // The FALSE side (present exactly where the boolean is false) is
@@ -421,7 +421,7 @@ console.log(
   );
   check(
     `ALL FOUR surfaces emit (${surfaces})`,
-    r.emitted.length === emitters.length && r.refusals.length === 0,
+    r.emitted.length === generateSurfaces().length && r.refusals.length === 0,
   );
 }
 

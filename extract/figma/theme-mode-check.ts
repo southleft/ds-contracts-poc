@@ -41,7 +41,7 @@ import {
   type Contract,
 } from "../../scripts/contract-schema.js";
 import { capturedTokensFromDump } from "../../core/captured-tokens.js";
-import { emitters, type EmitterCtx } from "../../core/emitter.js";
+import { generateSurfaces, type EmitterCtx } from "../../core/emitter.js";
 import { generateCss, validateContract } from "../../core/emit-react.js";
 import {
   flattenTokens,
@@ -285,7 +285,7 @@ function replay(dump: Record<string, unknown>): Replay {
   };
   let emitted = 0;
   const refusals: string[] = [];
-  for (const emitter of emitters) {
+  for (const emitter of generateSurfaces()) {
     try {
       emitter.emit(contract, ctx);
       emitted++;
@@ -353,8 +353,8 @@ console.log(
     r.violations.length === 0,
   );
   check(
-    `ALL FOUR surfaces emit (got ${r.emitted}/${emitters.length})`,
-    r.emitted === emitters.length && r.refusals.length === 0,
+    `ALL FOUR surfaces emit (got ${r.emitted}/${generateSurfaces().length})`,
+    r.emitted === generateSurfaces().length && r.refusals.length === 0,
   );
 }
 

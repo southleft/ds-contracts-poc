@@ -488,6 +488,9 @@ jobs:
       - name: first-party-bundle:check (maintain — the 56 first-party contracts ride `figma bundle` with the layered token set; refusals arrive as one named list)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run first-party-bundle:check
+      - name: code-connect:check (maintain — every anchored contract emits one Code Connect file mapping every enum value by display name, every boolean/text prop and every slot; anchorless contracts refuse by name; byte-deterministic; TS-parsed)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run code-connect:check
       - name: prop-collision:check (maintain — a prop named like a DOM attribute / HTMLElement member is Omit<>-ed on react and accessor-less on web-components, named in the header; the collision table matches the installed @types/react + lib.dom; generate refuses per contract)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run prop-collision:check

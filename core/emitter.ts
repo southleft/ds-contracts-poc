@@ -6,10 +6,12 @@
  * packages/core/src/emitter.ts (@ds-contracts/core) so a plugin emitter built
  * outside this repo types against the SAME contract the CLI enforces. This
  * module re-exports them (every `../core/emitter.js` import keeps working)
- * and registers the four built-ins — scoped-CSS React (the shipping
- * generator), static HTML+CSS (no build step), inline-styles React (no token
- * pipeline), and the Figma sync script (the canvas itself is just another
- * emit target) — into that registry, in their load-bearing order, at load.
+ * and registers the built-ins — scoped-CSS React (the shipping generator),
+ * static HTML+CSS (no build step), inline-styles React (no token pipeline),
+ * the Figma sync script (the canvas itself is just another emit target), and
+ * the two Figma Code Connect flavours (core/emit-code-connect.ts — the set ↔
+ * code mapping, opt-in, never part of `npm run generate`) — into that
+ * registry, in their load-bearing order, at load.
  *
  * Every emitter is pure (contract + ctx in, file texts out) and browser-
  * importable. Only `react` is wired into `npm run generate`; its output is
@@ -22,12 +24,14 @@ import { emitReact } from './emit-react.js';
 import { emitHtml } from './emit-html.js';
 import { emitReactInline } from './emit-react-inline.js';
 import { emitFigmaScript } from './emit-figma-script.js';
+import { codeConnectEmitter, codeConnectHtmlEmitter } from './emit-code-connect.js';
 import { kebab } from '../extract/types.js';
 import { registerEmitter, type Emitter } from '../packages/core/src/emitter.js';
 
 export {
   emitterByName,
   emitters,
+  generateSurfaces,
   getEmitters,
   registerEmitter,
   type EmittedFile,
@@ -104,8 +108,19 @@ export const figmaScriptEmitter: Emitter = {
   },
 };
 
-/** The four built-ins register FIRST — in this order — so `emitters` reads
- *  react, html, react-inline, figma-script before any plugin appends. The
- *  registry refuses a second registration by name, so importing this module
- *  twice through different paths would refuse loudly rather than shadow. */
-for (const e of [reactEmitter, htmlEmitter, reactInlineEmitter, figmaScriptEmitter]) registerEmitter(e);
+export { codeConnectEmitter, codeConnectHtmlEmitter } from './emit-code-connect.js';
+
+/** The built-ins register FIRST — in this order — so `emitters` reads
+ *  react, html, react-inline, figma-script, code-connect, code-connect-html
+ *  before any plugin appends. The registry refuses a second registration by
+ *  name, so importing this module twice through different paths would refuse
+ *  loudly rather than shadow. */
+for (const e of [
+  reactEmitter,
+  htmlEmitter,
+  reactInlineEmitter,
+  figmaScriptEmitter,
+  codeConnectEmitter,
+  codeConnectHtmlEmitter,
+])
+  registerEmitter(e);

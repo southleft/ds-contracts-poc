@@ -53,7 +53,7 @@ import {
   type Contract,
 } from "../../../scripts/contract-schema.js";
 import { capturedTokensFromDump } from "../../../core/captured-tokens.js";
-import { emitters, type EmitterCtx } from "../../../core/emitter.js";
+import { generateSurfaces, type EmitterCtx } from "../../../core/emitter.js";
 import { generateCss, validateContract } from "../../../core/emit-react.js";
 import {
   flattenTokens,
@@ -87,7 +87,7 @@ const read = (p: string) =>
   >;
 
 // ---------------------------------------------------------------------------
-// Inputs — repo corpus/contracts/icons/tokens (emitters-check composition)
+// Inputs — repo corpus/contracts/icons/tokens (generateSurfaces()-check composition)
 // ---------------------------------------------------------------------------
 
 const argv = process.argv.slice(2).filter((a) => !a.startsWith("--"));
@@ -629,7 +629,7 @@ for (const setName of setKeys) {
         rec.violations = errors;
         rec.violationClasses = errors.map(violationClass);
 
-        // All four emitters over the composed tree (token-source recompose:
+        // All four generateSurfaces() over the composed tree (token-source recompose:
         // captured + minted merged into the semantic slot).
         const tokens: TokenTreeInput = {
           ...repoTrees,
@@ -643,7 +643,7 @@ for (const setName of setKeys) {
           fileKey: provenance?.fileKey ?? undefined,
           mintedTokens: mintedTree,
         };
-        for (const emitter of emitters) {
+        for (const emitter of generateSurfaces()) {
           try {
             emitter.emit(contract, ctx);
             rec.emittedSurfaces.push(emitter.name);
@@ -664,7 +664,7 @@ for (const setName of setKeys) {
   rec.clean =
     rec.proposed &&
     rec.violations.length === 0 &&
-    rec.emittedSurfaces.length === emitters.length &&
+    rec.emittedSurfaces.length === generateSurfaces().length &&
     !rec.internalError;
   records.push(rec);
   processed += 1;
@@ -676,7 +676,7 @@ for (const setName of setKeys) {
 
 // ---------------------------------------------------------------------------
 // Aggregation — BASE failure classes ranked by set frequency, with the
-// surfaces that report each (referee + refusing emitters)
+// surfaces that report each (referee + refusing generateSurfaces())
 // ---------------------------------------------------------------------------
 
 interface ClassAgg {
@@ -906,7 +906,7 @@ for (const pattern of PATTERN_CLASSES) {
 
 const ENGINEERING_READS: Record<string, string> = {
   "duplicate-part-name":
-    'Dies at the referee: `validateContract` (core/emit-react.ts:180) requires part names to be unique across the WHOLE anatomy (`walkAnatomy` global `seen` set), but the proposer dedupes only among SIBLINGS — `partKey` (core/propose-figma.ts:1777, `taken` is per-sibling-scope). Two same-named parts under different parents (Dialog\'s two "Title" sections, Table rows\' repeated "td") pass proposal and refuse at validation, which also blocks the react/html/react-inline emitters. Likely fix: thread one contract-global `taken` set (or parent-qualified names) through `partKey`, with the rename receipted as a note — this is the in-flight dedup branch.',
+    'Dies at the referee: `validateContract` (core/emit-react.ts:180) requires part names to be unique across the WHOLE anatomy (`walkAnatomy` global `seen` set), but the proposer dedupes only among SIBLINGS — `partKey` (core/propose-figma.ts:1777, `taken` is per-sibling-scope). Two same-named parts under different parents (Dialog\'s two "Title" sections, Table rows\' repeated "td") pass proposal and refuse at validation, which also blocks the react/html/react-inline generateSurfaces(). Likely fix: thread one contract-global `taken` set (or parent-qualified names) through `partKey`, with the rename receipted as a note — this is the in-flight dedup branch.',
   "component-ref-unknown-child-prop":
     "FIXED (census class-fix batch) — `canonicalizeInstanceProps` (core/propose-figma.ts) now DROPS applied props that do not map through an in-scope child contract's `bindings.figma`, each with a named note ('applied prop \"X\" on nested \"Y\" does not map through ds.y's bindings — not carried; verify the child contract is current'), never a guessed spelling the referee (core/emit-react.ts:195) would refuse. If this class ranks again, it is a REGRESSION — replay `extract/figma/gauntlet/class-fix-check.ts`.",
   "visiblewhen-value-outside-prop-enum":
@@ -941,7 +941,7 @@ const summary = {
   skipped: skipped.length,
   proposed: records.filter((r) => r.proposed).length,
   emitAllFour: records.filter(
-    (r) => r.emittedSurfaces.length === emitters.length,
+    (r) => r.emittedSurfaces.length === generateSurfaces().length,
   ).length,
   componentSets: {
     total: componentSets.length,
@@ -1012,7 +1012,7 @@ const md: string[] = [];
 md.push("# THE PATTERN GAUNTLET — kit census");
 md.push("");
 md.push(
-  `Every component set in the owner's kit replayed through the full deterministic receive pipeline — the EXACT playground semantics (proposeBatchFromDump + captured-token layer + child stubs → validateContract + generateCss referee → all four emitters). Reproduce: \`npm run extract:figma:gauntlet\`.`,
+  `Every component set in the owner's kit replayed through the full deterministic receive pipeline — the EXACT playground semantics (proposeBatchFromDump + captured-token layer + child stubs → validateContract + generateCss referee → all four generateSurfaces()). Reproduce: \`npm run extract:figma:gauntlet\`.`,
 );
 md.push("");
 md.push(
@@ -1044,7 +1044,7 @@ md.push(
 );
 md.push("");
 md.push(
-  `CLEAN = proposed, zero referee violations, all ${emitters.length} surfaces emit. The whole-kit number is icon-inflated: ${pct(plainComponents.length)} of the kit is single-variant COMPONENTs. The honest capability number is the COMPONENT_SET row — ${notClean.length > 0 ? "the failures concentrate exactly in the owner's real composites (Menu, Card-Image, Avatar group, Breadcrumb, Dialog…)" : "the owner's real composites (Menu, Card-Image, Avatar group, Breadcrumb, Dialog…), where the failures used to concentrate, are clean too"}.`,
+  `CLEAN = proposed, zero referee violations, all ${generateSurfaces().length} surfaces emit. The whole-kit number is icon-inflated: ${pct(plainComponents.length)} of the kit is single-variant COMPONENTs. The honest capability number is the COMPONENT_SET row — ${notClean.length > 0 ? "the failures concentrate exactly in the owner's real composites (Menu, Card-Image, Avatar group, Breadcrumb, Dialog…)" : "the owner's real composites (Menu, Card-Image, Avatar group, Breadcrumb, Dialog…), where the failures used to concentrate, are clean too"}.`,
 );
 md.push("");
 md.push(
@@ -1052,7 +1052,7 @@ md.push(
 );
 md.push("");
 md.push(
-  `**Surface honesty:** all four emitters referee — emit-figma-script calls validateContract (census class-fix batch), so a referee-violating contract refuses BY NAME on the canvas surface exactly like react/html/react-inline. (Before the batch it was the one surface that still emitted sync scripts for violating sets.)`,
+  `**Surface honesty:** all four generateSurfaces() referee — emit-figma-script calls validateContract (census class-fix batch), so a referee-violating contract refuses BY NAME on the canvas surface exactly like react/html/react-inline. (Before the batch it was the one surface that still emitted sync scripts for violating sets.)`,
 );
 md.push("");
 md.push("## Failure classes, ranked by set frequency");
@@ -1127,7 +1127,7 @@ if (fixedNow.length > 0) {
   md.push("## Fixed classes (census class-fix batch) — gone from the ranking");
   md.push("");
   md.push(
-    `Each fix is replayable offline against the committed class fixture (\`fixtures/<class>-<set>.dump.json\`) via \`tsx extract/figma/gauntlet/class-fix-check.ts\`, and the fourth guard rides along: emit-figma-script now calls validateContract, so an invalid contract refuses BY NAME on the canvas surface like the other three emitters.`,
+    `Each fix is replayable offline against the committed class fixture (\`fixtures/<class>-<set>.dump.json\`) via \`tsx extract/figma/gauntlet/class-fix-check.ts\`, and the fourth guard rides along: emit-figma-script now calls validateContract, so an invalid contract refuses BY NAME on the canvas surface like the other three generateSurfaces().`,
   );
   md.push("");
   for (const f of fixedNow) {

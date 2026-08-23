@@ -168,6 +168,7 @@ export {
 export {
   emitterByName,
   emitters,
+  generateSurfaces,
   getEmitters,
   registerEmitter,
   figmaScriptEmitter,

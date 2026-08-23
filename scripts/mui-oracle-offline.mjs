@@ -933,14 +933,34 @@ export function renderReportMarkdown(report) {
   return `${lines.join("\n")}\n`;
 }
 
+/** `scoredAt` moves ONLY when the rest of the report moves. `npm run
+ *  mui:oracle:offline` is a CHECK that runs in the fast lane; a check that
+ *  rewrites a committed receipt on every run dirties every tree it touches
+ *  (the only diff was the timestamp) and teaches people to `git checkout --`
+ *  the receipt without reading it. Same rule as the Recorded line in
+ *  scripts/flowbite-contract-parity.ts. */
 export function writeReports(report, root = ROOT) {
   const oracleDir = path.join(root, "examples", "mui", "oracle");
   mkdirSync(oracleDir, { recursive: true });
   const jsonPath = path.join(oracleDir, "report.json");
   const mdPath = path.join(oracleDir, "REPORT.md");
-  writeFileSync(jsonPath, `${JSON.stringify(report, null, 2)}\n`);
-  writeFileSync(mdPath, renderReportMarkdown(report));
-  return { jsonPath, mdPath };
+  const renderJson = (r) => `${JSON.stringify(r, null, 2)}\n`;
+  const previous = existsSync(jsonPath) ? readFileSync(jsonPath, "utf8") : null;
+  let previousScoredAt;
+  try {
+    previousScoredAt = previous === null ? undefined : JSON.parse(previous).scoredAt;
+  } catch {
+    previousScoredAt = undefined;
+  }
+  const unchanged =
+    typeof previousScoredAt === "string" &&
+    renderJson({ ...report, scoredAt: previousScoredAt }) === previous;
+  const final = unchanged ? { ...report, scoredAt: previousScoredAt } : report;
+  const json = renderJson(final);
+  const md = renderReportMarkdown(final);
+  if (json !== previous) writeFileSync(jsonPath, json);
+  if (!existsSync(mdPath) || readFileSync(mdPath, "utf8") !== md) writeFileSync(mdPath, md);
+  return { jsonPath, mdPath, unchanged, scoredAt: final.scoredAt };
 }
 
 const isMain =
@@ -949,12 +969,16 @@ const isMain =
 
 if (isMain) {
   const report = scoreCorpus(ROOT);
-  const { jsonPath, mdPath } = writeReports(report, ROOT);
+  const { jsonPath, mdPath, unchanged, scoredAt } = writeReports(report, ROOT);
   const { summary } = report;
   console.log(
     `mui-oracle-offline: ${summary.match} MATCH · ${summary.pending} PENDING · ${summary.fail} FAIL / ${summary.facts} facts`,
   );
-  console.log(`wrote ${path.relative(ROOT, mdPath)} and ${path.relative(ROOT, jsonPath)}`);
+  console.log(
+    unchanged
+      ? `${path.relative(ROOT, mdPath)} and ${path.relative(ROOT, jsonPath)} unchanged — scored ${scoredAt} kept`
+      : `wrote ${path.relative(ROOT, mdPath)} and ${path.relative(ROOT, jsonPath)}`,
+  );
   if (!report.ok) {
     for (const error of report.errors) console.error(`✘ ${error}`);
     process.exit(1);

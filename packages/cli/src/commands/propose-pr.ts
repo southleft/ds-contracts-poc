@@ -53,11 +53,9 @@ import {
 import { tmpdir } from "node:os";
 import path from "node:path";
 import {
+  assertContractProvenance,
   provenanceSentence,
   type CanvasProvenance,
-} from "../../../../core/canvas-code-plan.js";
-import {
-  assertContractProvenance,
   type ProvenancedContract,
 } from "@ds-contracts/core";
 import { emitterByName, getEmitters } from "../../../../core/emitter.js";

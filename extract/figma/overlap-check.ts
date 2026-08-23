@@ -35,7 +35,7 @@ import {
   type Contract,
 } from "../../scripts/contract-schema.js";
 import { capturedTokensFromDump } from "../../core/captured-tokens.js";
-import { emitters, type EmitterCtx } from "../../core/emitter.js";
+import { generateSurfaces, type EmitterCtx } from "../../core/emitter.js";
 import { generateCss, validateContract } from "../../core/emit-react.js";
 import { emitHtml } from "../../core/emit-html.js";
 import {
@@ -204,7 +204,7 @@ function replay(dump: Record<string, unknown>): Replay {
   };
   const emitted: string[] = [];
   const refusals: Array<{ emitter: string; message: string }> = [];
-  for (const emitter of emitters) {
+  for (const emitter of generateSurfaces()) {
     try {
       emitter.emit(contract, ctx);
       emitted.push(emitter.name);
@@ -222,7 +222,7 @@ function replay(dump: Record<string, unknown>): Replay {
   return { contract, proposal, violations, emitted, refusals, css, html, ctx };
 }
 
-const surfaces = emitters.map((e) => e.name).join(", ");
+const surfaces = generateSurfaces().map((e) => e.name).join(", ");
 const fixtureDump = read(FIXTURE);
 
 // ---------------------------------------------------------------------------
@@ -310,7 +310,7 @@ console.log(
   );
   check(
     `ALL FOUR surfaces emit (${surfaces})`,
-    r.emitted.length === emitters.length && r.refusals.length === 0,
+    r.emitted.length === generateSurfaces().length && r.refusals.length === 0,
   );
   check(
     "emit-html mirrors the projection (child-margin rule, no invalid gap)",
@@ -381,7 +381,7 @@ console.log(
   );
   check(
     `ALL FOUR surfaces emit (${surfaces})`,
-    r.emitted.length === emitters.length && r.refusals.length === 0,
+    r.emitted.length === generateSurfaces().length && r.refusals.length === 0,
   );
 }
 
@@ -416,7 +416,7 @@ console.log(
   );
   check(
     `ALL FOUR surfaces emit (${surfaces})`,
-    r.emitted.length === emitters.length && r.refusals.length === 0,
+    r.emitted.length === generateSurfaces().length && r.refusals.length === 0,
   );
 }
 
