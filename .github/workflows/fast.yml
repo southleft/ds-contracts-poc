@@ -361,7 +361,7 @@ jobs:
       # scorecard it holds the baseline row, the committed offline
       # regate.scorecard.json and the committed scorecard.json to one another,
       # and refuses UNPINNED components (a scorecard with no baseline row — the
-      # old instrument skipped seventeen of them in silence). The RE-MEASURE
+      # old instrument skipped 39 of them in silence). The RE-MEASURE
       # half — the same numbers re-fused through Chromium — is the full lane's
       # extract:computed:drift:remeasure, ~37 min on the recording machine.
       - name: extract:computed:drift (baseline ⟷ committed offline scorecards, no browser)

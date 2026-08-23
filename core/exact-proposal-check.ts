@@ -3767,7 +3767,7 @@ console.log(
 }
 
 console.log(
-  "\n49. PRIMARY-axis FILL on a native SLOT — a SLOT child that FILLS along its ROW parent's primary axis in every variant carries `layout.grow` exactly like a FRAME child (canvas conformance slot-primary-axis-fill + rest-slot-primary-axis-fill)",
+  "\n49. PRIMARY-axis FILL on a native SLOT — a SLOT child that FILLS along its ROW parent's primary axis in every variant carries `layout.grow` exactly like a FRAME child, inside the SAME layout block its interior auto-layout rides since r11 (canvas conformance slot-primary-axis-fill + rest-slot-primary-axis-fill)",
 );
 {
   // r9 found it, r10 fixes it: the Phase 2 exam's Card:Variant=Default/Image
@@ -3840,9 +3840,15 @@ console.log(
         '"slot":{"name":"children"',
       ),
   );
+  // r11: the slot's interior auto-layout (a VERTICAL / CENTER / CENTER slot
+  // with no drawn children — a container by definition) rides the same
+  // layout block as the grow, through invertLayout — the FULL object is
+  // pinned so the next move on this branch shows up here (§50 holds the
+  // interior facts on their own).
   check(
-    "the grow is the whole layout block — the slot's interior auto-layout is not inverted on this branch (a separate fact) and no FIXED receipt fires for a FILL axis",
-    JSON.stringify(layoutOf(uniform, "Image")) === '{"grow":true}' &&
+    "the layout block is the slot's interior auto-layout PLUS the grow (r11: invertLayout on the SLOT branch, one implementation) and no FIXED receipt fires for a FILL axis",
+    JSON.stringify(layoutOf(uniform, "Image")) ===
+      '{"direction":"column","justify":"center","align":"center","grow":true}' &&
       !uniform.notes.some((n) =>
         /P2SlotGrow:root\/Image: .*FC-GEOMETRY-EXCLUDED/.test(n),
       ),
@@ -3876,8 +3882,9 @@ console.log(
     reviewable,
   );
   check(
-    "FILL in 1/2 occurrences is NOT grow (the every-occurrence rule) and the per-variant FIXED receipt still names the FILL side",
-    layoutOf(split, "Image") === undefined &&
+    "FILL in 1/2 occurrences is NOT grow (the every-occurrence rule; the interior layout still carries) and the per-variant FIXED receipt still names the FILL side",
+    JSON.stringify(layoutOf(split, "Image")) ===
+      '{"direction":"column","justify":"center","align":"center"}' &&
       split.notes.some((n) =>
         /P2SlotGrowSplit:root\/Image: auto-layout SLOT child drawn FIXED on width \(FIXED in 1\/2 variant occurrence\(s\) — FIXED on Variant=Inline; FILL on Variant=Default/.test(
           n,
@@ -3898,8 +3905,9 @@ console.log(
     reviewable,
   );
   check(
-    "FILL-width under a COLUMN parent is the cross-axis stretch, not grow — no layout.grow, named by carryCrossAxisFill",
-    layoutOf(column, "Image") === undefined &&
+    "FILL-width under a COLUMN parent is the cross-axis stretch, not grow — no layout.grow (the interior layout still carries), named by carryCrossAxisFill",
+    JSON.stringify(layoutOf(column, "Image")) ===
+      '{"direction":"column","justify":"center","align":"center"}' &&
       column.notes.some((n) =>
         /P2SlotCross:root\/Image: drawn FILL-width under a COLUMN parent whose other children do not all fill/.test(
           n,
@@ -3978,6 +3986,143 @@ console.log(
           e.prop === "variant" &&
           e.map.inline?.height === "100%" &&
           e.map.default?.height === undefined,
+      ),
+  );
+}
+
+console.log(
+  "\n50. The native SLOT's INTERIOR auto-layout — direction / justify / align ride `layout`, gap and padding ride the token channels, a per-variant difference rides layoutByProp: the same doors every FRAME part walks (canvas conformance slot-interior-auto-layout + rest-slot-interior-auto-layout; docs/23 §B.24 → §D.31)",
+);
+{
+  // r11: the Phase 2 exam's Card Content slot — a padded COLUMN with item
+  // spacing and no drawn children — used to come back as a bare flex item
+  // (§49 pinned `{"grow":true}` as the WHOLE block; docs/23 §B.24). The SLOT
+  // branch of buildPart now walks invertNodeTokens + invertLayout +
+  // invertLayoutByProp exactly as the FRAME branch does.
+  const content = (extra: Partial<DumpNode>): DumpNode => ({
+    name: "Content",
+    type: "SLOT",
+    clipsContent: true,
+    layout: {
+      mode: "VERTICAL",
+      primary: "CENTER",
+      counter: "MAX",
+      spacing: 8,
+      padding: [12, 16, 12, 16],
+      primarySizing: "AUTO",
+      counterSizing: "AUTO",
+    },
+    children: [],
+    ...extra,
+  });
+  const variant = (name: string, c: DumpNode): DumpNode => ({
+    name,
+    type: "COMPONENT",
+    bbox: { width: 928, height: 96 },
+    layout: {
+      mode: "HORIZONTAL",
+      primary: "MIN",
+      counter: "MIN",
+      spacing: 24,
+      padding: [0, 0, 0, 0],
+      primarySizing: "FIXED",
+      counterSizing: "AUTO",
+    },
+    fill: { hex: "f0eeed" },
+    children: [c, label()],
+  });
+  const axis = {
+    propertyDefinitions: {
+      Variant: {
+        type: "VARIANT" as const,
+        defaultValue: "Default",
+        variantOptions: ["Default", "Inline"],
+      },
+    },
+  };
+  const uniform = proposeFromDump(
+    p2Set(
+      "P2SlotInterior",
+      [
+        variant("Variant=Default", content({ fillWidth: true })),
+        variant("Variant=Inline", content({ fillWidth: true })),
+      ],
+      axis,
+    ),
+    reviewable,
+  );
+  const part = partOf(uniform, "Content");
+  const tokens = (part?.tokens ?? {}) as Record<string, string>;
+  check(
+    "a SLOT drawn VERTICAL / CENTER / MAX with no drawn children carries layout {direction: column, justify: center, align: end} beside the r10 grow — a slot is a container by definition, so the empty child list does not gate justify/align",
+    JSON.stringify(part?.layout) ===
+      '{"direction":"column","justify":"center","align":"end","grow":true}' &&
+      JSON.stringify(part?.slot ?? {}).includes('"name":"children"'),
+  );
+  check(
+    "its itemSpacing and padding mint on the slot part's token channels (gap / padding-inline / padding-block) exactly as a FRAME part's do, each a named provisional mint",
+    tokens.gap === "{imported.p2-slot-interior.content.gap}" &&
+      tokens["padding-inline"] ===
+        "{imported.p2-slot-interior.content.padding-inline}" &&
+      tokens["padding-block"] ===
+        "{imported.p2-slot-interior.content.padding-block}" &&
+      mintedPaths(uniform).some((ref) => ref === tokens.gap) &&
+      uniform.notes.some((n) =>
+        /MINTED \{imported\.p2-slot-interior\.content\.gap\} = 8px/.test(n),
+      ) &&
+      uniform.notes.some((n) =>
+        /MINTED \{imported\.p2-slot-interior\.content\.padding-inline\} = 16px/.test(
+          n,
+        ),
+      ) &&
+      uniform.notes.some((n) =>
+        /MINTED \{imported\.p2-slot-interior\.content\.padding-block\} = 12px/.test(
+          n,
+        ),
+      ),
+  );
+  // A per-variant interior difference (the Inline variant lays its content
+  // out as a ROW) is a pure function of the `variant` axis → layoutByProp,
+  // the v7 carrier the FRAME branch already uses.
+  const split = proposeFromDump(
+    p2Set(
+      "P2SlotInteriorSplit",
+      [
+        variant("Variant=Default", content({ fillWidth: true })),
+        variant(
+          "Variant=Inline",
+          content({
+            fillWidth: true,
+            layout: {
+              mode: "HORIZONTAL",
+              primary: "MIN",
+              counter: "MIN",
+              spacing: 8,
+              padding: [12, 16, 12, 16],
+              primarySizing: "AUTO",
+              counterSizing: "AUTO",
+            },
+          }),
+        ),
+      ],
+      axis,
+    ),
+    reviewable,
+  );
+  const splitPart = partOf(split, "Content");
+  const lbp = splitPart?.layoutByProp as
+    { prop: string; map: Record<string, Record<string, string>> } | undefined;
+  check(
+    "a per-variant interior difference on the SLOT rides layoutByProp on the axis (Inline → row/start/start over the Default column base), named like a FRAME part's",
+    JSON.stringify(splitPart?.layout) ===
+      '{"direction":"column","justify":"center","align":"end","grow":true}' &&
+      lbp?.prop === "variant" &&
+      JSON.stringify(lbp.map) ===
+        '{"inline":{"direction":"row","justify":"start","align":"start"}}' &&
+      split.notes.some((n) =>
+        /P2SlotInteriorSplit:root\/Content: auto-layout differs across variants as a function of axis "Variant"/.test(
+          n,
+        ),
       ),
   );
 }

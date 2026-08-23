@@ -46,8 +46,9 @@
  *   · EVERY component with a committed harness scorecard has a baseline row.
  *     A component that REFUSES to re-fuse is pinned as such (`refused`).
  *     The old check silently skipped components the baseline had never seen
- *     (`if (!prior) continue`) — seventeen mui components were unpinned that
- *     way while the summary said "65 components match". UNPINNED is a failure.
+ *     (`if (!prior) continue`) — 39 components (17 mui, 11 fluent, 6 tailwind,
+ *     5 astryx) were unpinned that way while the summary said "65 components
+ *     match". UNPINNED is a failure.
  *
  * The baseline also carries each component's committed harness pctEqual and
  * the NAMED reason it differs, so the gap is documented where it is measured
