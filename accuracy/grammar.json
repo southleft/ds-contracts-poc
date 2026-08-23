@@ -45,10 +45,10 @@
     {
       "id": "canvas",
       "path": "extract/figma/conformance/MANIFEST.json",
-      "count": 135,
+      "count": 138,
       "expectations": {
         "CARRIED": 100,
-        "LEDGERED": 26,
+        "LEDGERED": 29,
         "REFUSED": 9
       }
     },

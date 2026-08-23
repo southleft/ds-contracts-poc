@@ -2,13 +2,17 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/card.contract.json (ds.card v1.1.0)
  * Regenerate with: npm run generate
+ *
+ * DOM attrs OMITTED from HTMLAttributes<HTMLElement> — the contract's own props claim these
+ * names, so the HTML attribute of the same name cannot be passed through ...rest:
+ *   title
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 import { Avatar } from '../Avatar';
 import styles from './Card.module.css';
 
-export interface CardProps extends HTMLAttributes<HTMLElement> {
+export interface CardProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
   /** Card heading, bound to the header title part on both surfaces. */
   title: string;
   /** Constrained actions slot — only actions-grade components. */

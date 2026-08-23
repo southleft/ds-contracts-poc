@@ -52,6 +52,7 @@ import { gridCellPlan } from '../packages/core/src/grid.js';
 import { validateContract } from '../packages/core/src/validate.js';
 import { generateCss } from '../packages/core/src/css.js';
 import { ELEMENT_META } from '../packages/core/src/elements.js';
+import { reactOmittedNote, reactPropsBase } from '../packages/core/src/prop-collision.js';
 
 // Re-export shim — the analysis layer's public names, exactly as this module
 // exported them before the move (plus ELEMENT_META / holderDeclaresPosition,
@@ -271,6 +272,12 @@ export function generateTsx(
         }),
     ),
   ];
+  // PROP-NAME COLLISIONS (core/prop-collision.ts): a prop named like a DOM
+  // attribute React types on the root (`content`, `title`, `hidden`…) is
+  // OMITTED from the base attrs type — the contract's prop wins — and named
+  // in the header. Byte-identical when nothing collides.
+  const { base: propsBase, omitted: omittedAttrs } = reactPropsBase(contract, meta);
+  const omittedNote = reactOmittedNote(omittedAttrs, meta);
 
   const events = contract.events ?? [];
   const toggledCodeProps = new Set(
@@ -721,12 +728,12 @@ export function generateTsx(
  * MULTI-ROOT composite — the anatomy declares ${topRoots(contract).length} top-level roots
  * (${topRoots(contract).map(([n]) => n).join(', ')}). They render as SIBLINGS in a
  * Fragment; there is no single wrapping element (a Modal's backdrop + dialog
- * are position-driven siblings). Each root's class is styles.<rootName>.
+ * are position-driven siblings). Each root's class is styles.<rootName>.${omittedNote}
  */
 import type { ${mrTypeImports} } from 'react';
 ${mrDepImports}${mrDepImports ? '\n' : ''}import styles from './${name}.module.css';
 
-${iconsConst}export interface ${name}Props extends ${meta.attrs}<${meta.el}> {
+${iconsConst}export interface ${name}Props extends ${propsBase} {
 ${propLines.join('\n')}
 }
 
@@ -768,13 +775,13 @@ export function ${name}({ ${destructured.join(', ')} }: ${name}Props) {
   return `/**
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})
- * Regenerate with: npm run generate
+ * Regenerate with: npm run generate${omittedNote}
  */
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
 import type { ${typeImports} } from 'react';
 ${depImports}${depImports ? '\n' : ''}import styles from './${name}.module.css';
 
-${iconsConst}${roleMapConst}${elementMapConst}export interface ${name}Props extends ${meta.attrs}<${meta.el}> {
+${iconsConst}${roleMapConst}${elementMapConst}export interface ${name}Props extends ${propsBase} {
 ${propLines.join('\n')}
 }
 

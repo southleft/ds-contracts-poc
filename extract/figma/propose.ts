@@ -132,8 +132,8 @@ import {
 } from "./tokens.js";
 import { loadConfig } from "../config.js";
 import {
-  CAPTURED_VARIABLES_ABSENT_RECEIPT,
   capturedTokensDocument,
+  capturedVariablesAbsentReceipt,
 } from "../../core/captured-tokens.js";
 import {
   componentIdSlug,
@@ -300,6 +300,11 @@ function main() {
       hiddenCaptured: dumpCapturesHidden(dump._provenance),
     },
   );
+  // Batch-level notes (a `_degradations` row whose nodePath names no set —
+  // the REST route's `variables-unavailable` receipt lands here) used to be
+  // computed and then dropped by this CLI. They print, and they ride the
+  // report below.
+  for (const n of batch.notes) console.error(`note: ${n}`);
   if (batch.skipped.length > 0) {
     console.error(
       `REFUSED: ${batch.skipped.length} component set(s) could not be proposed; no proposal artifacts were written.`,
@@ -416,7 +421,9 @@ function main() {
       `✔ captured variables (${capturedDoc.layer.count} token(s), ${Object.keys(capturedDoc.layer.modes ?? {}).length} mode tree(s), ${capturedDoc.layer.skipped.length} skipped by name) → ${capturedFile}`,
     );
   } else {
-    console.log(`- ${CAPTURED_VARIABLES_ABSENT_RECEIPT}`);
+    console.log(
+      `- ${capturedVariablesAbsentReceipt(dump as unknown as Record<string, unknown>)}`,
+    );
   }
 
   // The runnable next step — the exact generate invocation whose --tokens
@@ -444,7 +451,12 @@ function main() {
       : ["- no minted token tree (nothing needed minting)"]),
     ...(capturedDoc && capturedFile
       ? [`- captured variables: ${capturedFile} — ${capturedDoc.receipt}`]
-      : [`- ${CAPTURED_VARIABLES_ABSENT_RECEIPT}`]),
+      : [
+          `- ${capturedVariablesAbsentReceipt(dump as unknown as Record<string, unknown>)}`,
+        ]),
+    ...(batch.notes.length > 0
+      ? ["", "## Batch notes (receipts no single set owns)", "", ...batch.notes.map((n) => `- ${n}`)]
+      : []),
     ...(usedFallbackCorpus
       ? [
           `- ⚠ corpus fallback: no token corpus was supplied, so the repo-demo reference tokens (${REPO_FALLBACK_FILES.join(", ")}) matched the canvas values — for a foreign kit this binds their values to this repo's token names, wrong by construction.`,

@@ -2,6 +2,10 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/banner.contract.json (astryx.banner v0.2.0)
  * Regenerate with: npm run generate
+ *
+ * DOM attrs OMITTED from HTMLAttributes<HTMLDivElement> — the contract's own props claim these
+ * names, so the HTML attribute of the same name cannot be passed through ...rest:
+ *   title
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
@@ -18,7 +22,7 @@ const ICONS: Record<string, string> = {
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">\n  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 3a9 9 0 100 18 9 9 0 000-18zm4.06 6.56a.75.75 0 00-1.12-1l-3.94 4.4-1.94-1.94a.75.75 0 00-1.06 1.06l2.5 2.5a.75.75 0 001.09-.03l4.47-5z"/>\n</svg>',
 };
 
-export interface BannerProps extends HTMLAttributes<HTMLDivElement> {
+export interface BannerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** Status type controlling the icon and color scheme. */
   status?: 'info' | 'warning' | 'error' | 'success';
   /** How the banner is contained. */

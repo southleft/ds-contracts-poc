@@ -2,6 +2,10 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/atoms-input.contract.json (ds.atoms-input v0.1.0)
  * Regenerate with: npm run generate
+ *
+ * DOM attrs OMITTED from HTMLAttributes<HTMLDivElement> — the contract's own props claim these
+ * names, so the HTML attribute of the same name cannot be passed through ...rest:
+ *   content
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
@@ -10,7 +14,7 @@ import { InlineDanger } from '../InlineDanger';
 import { InlineHint } from '../InlineHint';
 import styles from './AtomsInput.module.css';
 
-export interface AtomsInputProps extends HTMLAttributes<HTMLDivElement> {
+export interface AtomsInputProps extends Omit<HTMLAttributes<HTMLDivElement>, 'content'> {
   isFilled?: boolean;
   hasError?: boolean;
   isDisabled?: boolean;

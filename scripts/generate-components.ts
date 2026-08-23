@@ -19,6 +19,14 @@
  * Output is byte-guarded by evals/golden.json (the golden-generated-output
  * eval): refactors of the core must not change a single emitted byte.
  *
+ * ATOMIC PER CONTRACT (phase-2 exam, 2026-08-22): a contract that fails to
+ * parse, validate, or emit is REFUSED BY NAME and leaves no file; every
+ * contract that validates is generated; a contract depending on a refused
+ * one is refused too ("depends on refused contract"). The shells print the
+ * generated set AND the refused list and exit non-zero when anything was
+ * refused. A batch-level failure (token routing, tokens.css itself) still
+ * throws ContractViolationError and writes nothing.
+ *
  * Generated files are never edited by hand. To change a component, change
  * its contract and re-run `npm run generate`.
  *
@@ -34,7 +42,7 @@
  */
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { ContractSchema, sortByDependencies, type Contract } from './contract-schema.js';
+import { ContractSchema, componentRefsOf, slotsOf, sortByDependencies, type Contract } from './contract-schema.js';
 import { generateCss, generateStories, generateTsx, validateContract } from '../core/emit-react.js';
 import {
   emitTokensCss,
@@ -123,6 +131,162 @@ interface PlannedFile {
   contents: string;
 }
 
+/** One refused contract — by id (the file's basename when it did not even
+ *  parse), with every violation named. */
+export interface RefusedContract {
+  id: string;
+  file: string;
+  violations: string[];
+}
+
+/** Direct composition dependencies of a contract (component refs, slot
+ *  accepts, slot defaultContent) — the edges a refusal propagates along. */
+export function contractDependencyIds(contract: Contract): string[] {
+  const ids = new Set<string>();
+  for (const { ref } of componentRefsOf(contract)) ids.add(ref.id);
+  for (const { slot } of slotsOf(contract)) {
+    for (const id of slot.accepts ?? []) ids.add(id);
+    for (const item of slot.defaultContent ?? []) ids.add(item.id);
+  }
+  return [...ids];
+}
+
+/** Parse contract files leniently: a file that is not JSON or not a valid
+ *  contract is REFUSED BY NAME (the file's basename, or its `id` when the
+ *  document carries one), never a batch failure. Duplicate ids and names
+ *  refuse every contract involved. Shared by both generate shells. */
+export function parseContractFiles(files: string[]): {
+  parsed: { contract: Contract; file: string }[];
+  refused: RefusedContract[];
+} {
+  const refused: RefusedContract[] = [];
+  const parsed: { contract: Contract; file: string }[] = [];
+  for (const filePath of files) {
+    const file = path.basename(filePath);
+    let raw: unknown;
+    try {
+      raw = JSON.parse(readFileSync(filePath, 'utf8'));
+    } catch (err) {
+      refused.push({ id: file, file: filePath, violations: [`${file}: not JSON — ${String(err instanceof Error ? err.message : err)}`] });
+      continue;
+    }
+    const result = ContractSchema.safeParse(raw);
+    if (!result.success) {
+      const id = typeof (raw as { id?: unknown })?.id === 'string' ? (raw as { id: string }).id : file;
+      refused.push({
+        id,
+        file: filePath,
+        violations: [`${file}: ${result.error.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join('; ')}`],
+      });
+      continue;
+    }
+    parsed.push({ contract: result.data, file: filePath });
+  }
+  // Identity gates: contract ids and names must be unique across the set —
+  // a duplicate id silently forks identity in the dependency map; a
+  // duplicate name silently clobbers the other contract's generated output.
+  const byIdCount = new Map<string, { contract: Contract; file: string }[]>();
+  const byNameCount = new Map<string, { contract: Contract; file: string }[]>();
+  for (const e of parsed) {
+    byIdCount.set(e.contract.id, [...(byIdCount.get(e.contract.id) ?? []), e]);
+    byNameCount.set(e.contract.name, [...(byNameCount.get(e.contract.name) ?? []), e]);
+  }
+  const dropped = new Set<{ contract: Contract; file: string }>();
+  for (const [id, entries] of byIdCount) {
+    if (entries.length < 2) continue;
+    for (const e of entries) {
+      refused.push({
+        id,
+        file: e.file,
+        violations: [`${id}: duplicate contract id (declared by ${entries.map((x) => path.basename(x.file)).join(', ')})`],
+      });
+      dropped.add(e);
+    }
+  }
+  for (const [name, entries] of byNameCount) {
+    if (entries.length < 2) continue;
+    for (const e of entries) {
+      if (dropped.has(e)) continue;
+      refused.push({
+        id: e.contract.id,
+        file: e.file,
+        violations: [
+          `${e.contract.id}: duplicate contract name "${name}" (also used by ${entries
+            .filter((x) => x !== e)
+            .map((x) => x.contract.id)
+            .join(', ')}) — would overwrite <out>/${name}/`,
+        ],
+      });
+      dropped.add(e);
+    }
+  }
+  return { parsed: parsed.filter((e) => !dropped.has(e)), refused };
+}
+
+/** The refusal ledger of one batch: refuse by id, then propagate along the
+ *  composition graph so no generated file imports a component that was not
+ *  written. Deterministic: propagation walks the batch in input order. */
+export class RefusalLedger {
+  readonly refused: RefusedContract[] = [];
+  private readonly ids = new Set<string>();
+  constructor(
+    private readonly entries: { contract: Contract; file: string }[],
+    seed: RefusedContract[] = [],
+  ) {
+    for (const r of seed) this.refused.push(r), this.ids.add(r.id);
+  }
+  has(id: string): boolean {
+    return this.ids.has(id);
+  }
+  refuse(id: string, violations: string[]): void {
+    const file = this.entries.find((e) => e.contract.id === id)?.file ?? id;
+    const existing = this.refused.find((r) => r.id === id);
+    if (existing) existing.violations.push(...violations);
+    else this.refused.push({ id, file, violations: [...violations] });
+    this.ids.add(id);
+  }
+  /** Refuse every active contract that depends (transitively) on a refused one. */
+  propagate(): void {
+    let changed = true;
+    while (changed) {
+      changed = false;
+      for (const { contract } of this.entries) {
+        if (this.ids.has(contract.id)) continue;
+        const dep = contractDependencyIds(contract).find((d) => this.ids.has(d));
+        if (dep === undefined) continue;
+        this.refuse(contract.id, [`${contract.id}: depends on refused contract "${dep}" — not generated`]);
+        changed = true;
+      }
+    }
+  }
+  active(): Contract[] {
+    return this.entries.filter((e) => !this.ids.has(e.contract.id)).map((e) => e.contract);
+  }
+}
+
+/** Topological order of the active set; a cycle or a reference to a contract
+ *  that was never in the batch refuses the contracts on that chain (by name)
+ *  and the sort is retried — deterministic, bounded by the batch size. */
+export function orderActive(ledger: RefusalLedger): Contract[] {
+  for (let guard = 0; ; guard++) {
+    const active = ledger.active();
+    try {
+      return sortByDependencies(active);
+    } catch (err) {
+      const message = String(err instanceof Error ? err.message : err);
+      const chain = message.match(/(?:cycle|dependency): (.+)$/)?.[1];
+      const offenders = chain
+        ? chain.split(' → ').map((s) => s.trim()).filter((id) => active.some((c) => c.id === id))
+        : [message.match(/^([a-z][a-z0-9-]*\.[a-z][a-z0-9-]*): /)?.[1] ?? ''].filter((id) => active.some((c) => c.id === id));
+      if (offenders.length === 0 || guard > active.length + 1) {
+        throw new ContractViolationError('✘ Refused — 1 contract violation(s):', [message]);
+      }
+      for (const id of offenders) ledger.refuse(id, [message]);
+      ledger.propagate();
+    }
+  }
+}
+
 /** The repo's layered layout — the same files scripts/build-tokens.mjs
  *  reads, brand trees included (discovered, sorted), so the emitted
  *  tokens.css resolves every `{brand.*}` alias instead of leaving it dangling.
@@ -168,7 +332,7 @@ function loadIconAssets(iconsDir: string): Map<string, string> {
 
 export async function generateComponents(
   options: GenerateComponentsOptions = {},
-): Promise<{ generated: string[]; outDir: string; tokensCss: TokensCssSummary }> {
+): Promise<{ generated: string[]; refused: RefusedContract[]; outDir: string; tokensCss: TokensCssSummary }> {
   const root = process.cwd();
   const contractsDir = options.contractsDir ?? path.join(root, 'contracts');
   const outDir = options.outDir ?? path.join(root, 'src', 'components');
@@ -186,75 +350,35 @@ export async function generateComponents(
     readdirSync(contractsDir)
       .filter((f) => f.endsWith('.contract.json'))
       .map((f) => path.join(contractsDir, f));
-  const errors: string[] = [];
 
-  const parsedContracts: Contract[] = [];
-  for (const filePath of contractFiles) {
-    const file = path.basename(filePath);
-    const raw = JSON.parse(readFileSync(filePath, 'utf8'));
-    const parsed = ContractSchema.safeParse(raw);
-    if (!parsed.success) {
-      errors.push(
-        `${file}: ${parsed.error.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join('; ')}`,
-      );
-      continue;
-    }
-    parsedContracts.push(parsed.data);
-  }
+  // PER-CONTRACT REFUSALS: parse, identity, graph, validation, CSS, emission
+  // each refuse BY NAME and propagate to dependents; the survivors are
+  // generated. Only a batch-level failure (tokens) throws.
+  const { parsed, refused: parseRefusals } = parseContractFiles(contractFiles);
+  const ledger = new RefusalLedger(parsed, parseRefusals);
+  ledger.propagate();
+  const byId = new Map(parsed.map((e) => [e.contract.id, e.contract]));
+  let ordered = orderActive(ledger);
 
-  // Identity gates: contract ids and names must be unique across the set —
-  // a duplicate id silently forks identity in the dependency map; a
-  // duplicate name silently clobbers the other contract's generated output.
-  const seenIds = new Map<string, string>();
-  const seenNames = new Map<string, string>();
-  for (const c of parsedContracts) {
-    if (seenIds.has(c.id)) {
-      errors.push(`${c.id}: duplicate contract id (also declared by "${seenIds.get(c.id)}")`);
-    }
-    seenIds.set(c.id, c.name);
-    if (seenNames.has(c.name)) {
-      errors.push(`${c.id}: duplicate contract name "${c.name}" (also used by ${seenNames.get(c.name)}) — would overwrite src/components/${c.name}/`);
-    }
-    seenNames.set(c.name, c.id);
-  }
-
-  // Composition graph gate: cycles and unknown refs are refused.
-  let ordered: Contract[] = parsedContracts;
-  if (errors.length === 0) {
-    try {
-      ordered = sortByDependencies(parsedContracts);
-    } catch (err) {
-      errors.push(String(err instanceof Error ? err.message : err));
-    }
-  }
-  const byId = new Map(parsedContracts.map((c) => [c.id, c]));
-
-  // Fail fast on parse/identity/graph errors: a refused contract leaves
-  // dangling refs in byId, and generating dependents against a broken map
-  // crashes with an unnamed TypeError INSTEAD of the named refusal — the
-  // exact opposite of C2. Name the violations and stop.
-  if (errors.length > 0) {
-    throw new ContractViolationError(`✘ Refused — ${errors.length} contract violation(s):`, errors);
-  }
-
-  // Complete contract validation before emission. Emitters and formatters may
-  // fail, and none of those failures may leave a partially updated outDir.
+  // Complete contract validation before emission; a refused contract (and
+  // everything composing it) leaves no file.
   for (const contract of ordered) {
+    const errors: string[] = [];
     validateContract(contract, byId, errors, iconAssets);
+    if (errors.length > 0) ledger.refuse(contract.id, errors);
   }
-
-  if (errors.length > 0) {
-    throw new ContractViolationError('✖ Contract validation failed:\n', errors);
-  }
+  ledger.propagate();
+  ordered = ordered.filter((c) => !ledger.has(c.id));
 
   const cssById = new Map<string, string>();
   for (const contract of ordered) {
-    cssById.set(contract.id, generateCss(contract, tokenInventory, errors));
+    const errors: string[] = [];
+    const css = generateCss(contract, tokenInventory, errors);
+    if (errors.length > 0) ledger.refuse(contract.id, errors);
+    else cssById.set(contract.id, css);
   }
-
-  if (errors.length > 0) {
-    throw new ContractViolationError('✖ Contract validation failed:\n', errors);
-  }
+  ledger.propagate();
+  ordered = ordered.filter((c) => !ledger.has(c.id));
 
   // tokens.css — the sheet the CSS Modules above reference. Built from the
   // routed slots; a $type disagreement between slots refuses by name.
@@ -270,19 +394,60 @@ export async function generateComponents(
   }
   // THE GATE: every var(--x) the generated CSS references is defined in
   // :root. The inventory check above makes this hold by construction for
-  // token refs; a composite the sheet had to skip is the case it catches.
+  // token refs; a composite the sheet had to skip is the case it catches —
+  // refused per referencing contract.
+  for (const contract of ordered) {
+    const referenced = [...referencedCssVars(cssById.get(contract.id)!)];
+    const undefinedVars = undefinedCssVars(referenced, sheet.defined);
+    if (undefinedVars.length > 0) {
+      ledger.refuse(
+        contract.id,
+        undefinedVars.map(
+          (n) => `${contract.id}: custom property ${n} the generated CSS references is not defined in tokens.css (it would render as nothing, silently)`,
+        ),
+      );
+    }
+  }
+  ledger.propagate();
+  ordered = ordered.filter((c) => !ledger.has(c.id));
+
+  const planById = new Map<string, PlannedFile[]>();
+  for (const contract of ordered) {
+    const css = cssById.get(contract.id)!;
+    const dir = path.join(outDir, contract.name);
+    try {
+      const plan: PlannedFile[] = [];
+      plan.push({
+        path: path.join(dir, `${contract.name}.module.css`),
+        contents: await formatCss(css),
+      });
+      plan.push({
+        path: path.join(dir, `${contract.name}.tsx`),
+        contents: await formatTsx(generateTsx(contract, byId, iconAssets, css)),
+      });
+      if (stories) {
+        plan.push({
+          path: path.join(dir, `${contract.name}.stories.tsx`),
+          contents: await formatTsx(generateStories(contract, byId)),
+        });
+      }
+      plan.push({
+        path: path.join(dir, 'index.ts'),
+        contents: `export { ${contract.name} } from './${contract.name}';\nexport type { ${contract.name}Props } from './${contract.name}';\n`,
+      });
+      planById.set(contract.id, plan);
+    } catch (err) {
+      ledger.refuse(contract.id, [`${contract.id}: emit failed — ${String(err instanceof Error ? err.message : err)}`]);
+    }
+  }
+  ledger.propagate();
+  ordered = ordered.filter((c) => !ledger.has(c.id));
+
   const referencedBy = new Map<string, string[]>();
   for (const contract of ordered) {
     for (const name of referencedCssVars(cssById.get(contract.id)!)) {
       referencedBy.set(name, [...(referencedBy.get(name) ?? []), contract.name]);
     }
-  }
-  const undefinedVars = undefinedCssVars(referencedBy.keys(), sheet.defined);
-  if (undefinedVars.length > 0) {
-    throw new ContractViolationError(
-      `✘ Refused — ${undefinedVars.length} custom propert(ies) the generated CSS references are not defined in tokens.css (they would render as nothing, silently):`,
-      undefinedVars.map((n) => `${n} — referenced by ${referencedBy.get(n)!.join(', ')}`),
-    );
   }
   const tokensCss: TokensCssSummary = {
     path: path.join(outDir, 'tokens.css'),
@@ -294,57 +459,52 @@ export async function generateComponents(
     skippedComposite: sheet.skippedComposite,
   };
 
-  const plan: PlannedFile[] = [];
   const generated = ordered.map((contract) => contract.name).sort();
-  for (const contract of ordered) {
-    const css = cssById.get(contract.id)!;
-    const dir = path.join(outDir, contract.name);
+  const plan: PlannedFile[] = ordered.flatMap((c) => planById.get(c.id)!);
+  if (ordered.length > 0) {
+    // The root barrel imports the sheet so `import { Button } from '<out>'`
+    // paints; every story imports it too (core/emit-react.ts generateStories),
+    // so a Storybook glob over the tree paints without a preview.ts line.
     plan.push({
-      path: path.join(dir, `${contract.name}.module.css`),
-      contents: await formatCss(css),
+      path: path.join(outDir, 'index.ts'),
+      contents: `import './tokens.css';\n` + generated.map((n) => `export * from './${n}';`).join('\n') + '\n',
     });
-    plan.push({
-      path: path.join(dir, `${contract.name}.tsx`),
-      contents: await formatTsx(generateTsx(contract, byId, iconAssets, css)),
-    });
-    if (stories) {
-      plan.push({
-        path: path.join(dir, `${contract.name}.stories.tsx`),
-        contents: await formatTsx(generateStories(contract, byId)),
-      });
-    }
-    plan.push({
-      path: path.join(dir, 'index.ts'),
-      contents: `export { ${contract.name} } from './${contract.name}';\nexport type { ${contract.name}Props } from './${contract.name}';\n`,
-    });
+    plan.push({ path: tokensCss.path, contents: sheet.css });
   }
 
-  // The root barrel imports the sheet so `import { Button } from '<out>'`
-  // paints; every story imports it too (core/emit-react.ts generateStories),
-  // so a Storybook glob over the tree paints without a preview.ts line.
-  plan.push({
-    path: path.join(outDir, 'index.ts'),
-    contents: `import './tokens.css';\n` + generated.map((n) => `export * from './${n}';`).join('\n') + '\n',
-  });
-  plan.push({ path: tokensCss.path, contents: sheet.css });
-
-  // The destination remains untouched until every contract has been parsed,
-  // validated, sorted, emitted, and formatted successfully.
+  // The destination remains untouched until every surviving contract has
+  // been parsed, validated, sorted, emitted, and formatted successfully; a
+  // refused contract has NO file in the plan.
   for (const file of plan) {
     mkdirSync(path.dirname(file.path), { recursive: true });
     writeFileSync(file.path, file.contents);
   }
 
-  return { generated, outDir, tokensCss };
+  return { generated, refused: ledger.refused, outDir, tokensCss };
+}
+
+/** The refused list, one header + one `  - id: violation` line each — the
+ *  same wording in `npm run generate` and every CLI target. */
+export function describeRefused(refused: RefusedContract[]): string[] {
+  if (refused.length === 0) return [];
+  return [
+    `✘ Refused ${refused.length} contract(s) — each by name; every other contract was generated:`,
+    ...refused.flatMap((r) => r.violations.map((v) => `  - ${v.startsWith(`${r.id}:`) ? v : `${r.id}: ${v}`}`)),
+  ];
 }
 
 /** Shared by both shells (this script and the ds-contracts CLI): run, print
- *  the historical success/refusal wording, exit non-zero on violations. */
+ *  the historical success wording plus the refused list, exit non-zero when
+ *  anything was refused. */
 export async function runGenerateComponents(options: GenerateComponentsOptions = {}): Promise<void> {
   try {
-    const { generated, tokensCss } = await generateComponents(options);
+    const { generated, refused, tokensCss } = await generateComponents(options);
     console.log(`✔ Generated ${generated.length} component(s) from contracts: ${generated.sort().join(', ')}`);
-    for (const line of describeTokensCss(tokensCss)) console.log(line);
+    if (generated.length > 0) for (const line of describeTokensCss(tokensCss)) console.log(line);
+    if (refused.length > 0) {
+      for (const line of describeRefused(refused)) console.error(line);
+      process.exit(1);
+    }
   } catch (err) {
     if (err instanceof ContractViolationError) {
       console.error(err.header);

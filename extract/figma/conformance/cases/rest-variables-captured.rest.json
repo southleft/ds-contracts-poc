@@ -1,9 +1,105 @@
 {
  "name": "canvas conformance fixture (REST boundary)",
+ "_variablesResponse": {
+  "status": 200,
+  "error": false,
+  "meta": {
+   "variables": {
+    "VariableID:9:1": {
+     "id": "VariableID:9:1",
+     "name": "color/feedback/info/background",
+     "key": "vk901",
+     "variableCollectionId": "VariableCollectionId:9:0",
+     "resolvedType": "COLOR",
+     "valuesByMode": {
+      "9:0": {
+       "r": 0.92,
+       "g": 0.95,
+       "b": 1,
+       "a": 1
+      },
+      "9:1": {
+       "type": "VARIABLE_ALIAS",
+       "id": "VariableID:9:2"
+      }
+     },
+     "remote": false,
+     "description": "",
+     "hiddenFromPublishing": false,
+     "scopes": [
+      "ALL_SCOPES"
+     ],
+     "codeSyntax": {}
+    },
+    "VariableID:9:2": {
+     "id": "VariableID:9:2",
+     "name": "color/blue/900",
+     "key": "vk902",
+     "variableCollectionId": "VariableCollectionId:9:9",
+     "resolvedType": "COLOR",
+     "valuesByMode": {
+      "9:9": {
+       "r": 0.1,
+       "g": 0.2,
+       "b": 0.5,
+       "a": 1
+      }
+     },
+     "remote": false,
+     "description": "",
+     "hiddenFromPublishing": false,
+     "scopes": [
+      "ALL_SCOPES"
+     ],
+     "codeSyntax": {}
+    }
+   },
+   "variableCollections": {
+    "VariableCollectionId:9:0": {
+     "id": "VariableCollectionId:9:0",
+     "name": "Semantic",
+     "key": "ck90",
+     "modes": [
+      {
+       "modeId": "9:0",
+       "name": "light"
+      },
+      {
+       "modeId": "9:1",
+       "name": "dark"
+      }
+     ],
+     "defaultModeId": "9:0",
+     "remote": false,
+     "hiddenFromPublishing": false,
+     "variableIds": [
+      "VariableID:9:1"
+     ]
+    },
+    "VariableCollectionId:9:9": {
+     "id": "VariableCollectionId:9:9",
+     "name": "Primitive",
+     "key": "ck99",
+     "modes": [
+      {
+       "modeId": "9:9",
+       "name": "Default"
+      }
+     ],
+     "defaultModeId": "9:9",
+     "remote": false,
+     "hiddenFromPublishing": false,
+     "variableIds": [
+      "VariableID:9:2"
+     ]
+    }
+   }
+  }
+ },
  "nodes": {
-  "1:28": {
+  "1:42": {
    "document": {
-    "id": "1:28",
+    "id": "1:42",
     "name": "Case",
     "type": "COMPONENT",
     "scrollBehavior": "SCROLLS",
@@ -14,10 +110,16 @@
       "blendMode": "NORMAL",
       "type": "SOLID",
       "color": {
-       "r": 0.9,
-       "g": 0.92,
-       "b": 0.95,
+       "r": 0.92,
+       "g": 0.95,
+       "b": 1,
        "a": 1
+      },
+      "boundVariables": {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:9:1"
+       }
       }
      }
     ],
@@ -50,57 +152,7 @@
     },
     "children": [
      {
-      "id": "1:29",
-      "name": "a",
-      "type": "FRAME",
-      "scrollBehavior": "SCROLLS",
-      "blendMode": "PASS_THROUGH",
-      "clipsContent": true,
-      "fills": [
-       {
-        "blendMode": "NORMAL",
-        "type": "SOLID",
-        "color": {
-         "r": 0.2,
-         "g": 0.4,
-         "b": 0.8,
-         "a": 1
-        }
-       }
-      ],
-      "strokes": [],
-      "strokeWeight": 1,
-      "strokeAlign": "INSIDE",
-      "cornerRadius": 0,
-      "layoutMode": "HORIZONTAL",
-      "primaryAxisSizingMode": "FIXED",
-      "counterAxisSizingMode": "FIXED",
-      "primaryAxisAlignItems": "CENTER",
-      "counterAxisAlignItems": "CENTER",
-      "paddingLeft": 0,
-      "paddingRight": 0,
-      "paddingTop": 0,
-      "paddingBottom": 0,
-      "itemSpacing": 0,
-      "layoutWrap": "NO_WRAP",
-      "layoutSizingHorizontal": "FIXED",
-      "layoutSizingVertical": "FIXED",
-      "absoluteBoundingBox": {
-       "x": 0,
-       "y": 0,
-       "width": 20,
-       "height": 20
-      },
-      "effects": [],
-      "interactions": [],
-      "constraints": {
-       "vertical": "TOP",
-       "horizontal": "LEFT"
-      },
-      "children": []
-     },
-     {
-      "id": "1:30",
+      "id": "1:43",
       "name": "t",
       "type": "TEXT",
       "scrollBehavior": "SCROLLS",

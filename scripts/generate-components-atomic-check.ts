@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import {
+  existsSync,
   mkdtempSync,
   mkdirSync,
   readFileSync,
@@ -11,10 +12,7 @@ import {
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import {
-  ContractViolationError,
-  generateComponents,
-} from "./generate-components.js";
+import { generateComponents } from "./generate-components.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const tokenFiles = [
@@ -81,23 +79,63 @@ try {
   );
   const before = snapshotTree(seededOut);
 
-  await assert.rejects(
-    generateComponents({
-      contractFiles: [earlyContract, lateContract],
-      tokenFiles,
-      iconsDir: path.join(root, "assets/icons"),
-      outDir: seededOut,
-    }),
-    (error) =>
-      error instanceof ContractViolationError &&
-      error.violations.some((violation) =>
-        violation.includes("{color.atomic-check.missing}"),
-      ),
+  // ATOMIC PER CONTRACT (phase-2 exam): the late invalid Heading is refused
+  // BY NAME and leaves no file; the valid Button is generated beside the
+  // pre-seeded files, which stay byte-identical.
+  const mixed = await generateComponents({
+    contractFiles: [earlyContract, lateContract],
+    tokenFiles,
+    iconsDir: path.join(root, "assets/icons"),
+    outDir: seededOut,
+  });
+  assert.deepEqual(mixed.generated, ["Button"]);
+  assert.deepEqual(
+    mixed.refused.map((r) => r.id),
+    ["ds.heading"],
+    "the invalid contract is refused by name",
+  );
+  assert.ok(
+    mixed.refused[0].violations.some((violation) =>
+      violation.includes("{color.atomic-check.missing}"),
+    ),
   );
   assert.equal(
-    snapshotTree(seededOut),
-    before,
-    "a late invalid contract must leave the pre-seeded output byte-identical",
+    existsSync(path.join(seededOut, "Heading")),
+    false,
+    "a refused contract leaves NO file (no partial Heading/)",
+  );
+  const after = snapshotTree(seededOut)
+    .split("\n")
+    .filter((entry) => !entry.startsWith("file:Button/") && !/^file:(index\.ts|tokens\.css):/.test(entry));
+  assert.deepEqual(
+    after,
+    before.split("\n").filter((entry) => !entry.startsWith("file:Button/")),
+    "the pre-seeded files a refusal does not own stay byte-identical",
+  );
+  assert.notEqual(
+    readFileSync(path.join(seededOut, "Button", "Button.tsx"), "utf8"),
+    "pre-seeded component\n",
+    "the valid contract IS generated over its stale pre-seed",
+  );
+
+  // Batch-level failures still throw and write nothing: a token file that
+  // does not exist is not one contract's fault.
+  const untouchedOut = path.join(temp, "untouched-output");
+  mkdirSync(untouchedOut);
+  writeFileSync(path.join(untouchedOut, "keep.txt"), "keep\n");
+  const untouchedBefore = snapshotTree(untouchedOut);
+  await assert.rejects(
+    generateComponents({
+      contractFiles: [earlyContract],
+      tokenFiles: [...tokenFiles, path.join(temp, "missing.tokens.json")],
+      iconsDir: path.join(root, "assets/icons"),
+      outDir: untouchedOut,
+    }),
+  );
+  assert.equal(
+    snapshotTree(untouchedOut),
+    untouchedBefore,
+    "a batch-level failure leaves the output byte-identical",
   );
 
   const result = await generateComponents({
@@ -127,7 +165,10 @@ try {
   );
 
   console.log(
-    "✔ atomic refusal leaves a pre-seeded output directory byte-identical",
+    "✔ per-contract refusal: the invalid contract is named and leaves no file; the valid one generates; foreign pre-seeded files stay byte-identical",
+  );
+  console.log(
+    "✔ batch-level failure (missing token file) leaves the output byte-identical",
   );
   console.log(
     "✔ successful generation writes the complete expected component file set",

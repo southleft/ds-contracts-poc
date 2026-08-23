@@ -1,9 +1,9 @@
 {
  "name": "canvas conformance fixture (REST boundary)",
  "nodes": {
-  "1:28": {
+  "1:44": {
    "document": {
-    "id": "1:28",
+    "id": "1:44",
     "name": "Case",
     "type": "COMPONENT",
     "scrollBehavior": "SCROLLS",
@@ -50,20 +50,19 @@
     },
     "children": [
      {
-      "id": "1:29",
-      "name": "a",
-      "type": "FRAME",
+      "id": "1:45",
+      "name": "v",
+      "type": "VECTOR",
       "scrollBehavior": "SCROLLS",
       "blendMode": "PASS_THROUGH",
-      "clipsContent": true,
       "fills": [
        {
         "blendMode": "NORMAL",
         "type": "SOLID",
         "color": {
          "r": 0.2,
-         "g": 0.4,
-         "b": 0.8,
+         "g": 0.2,
+         "b": 0.2,
          "a": 1
         }
        }
@@ -71,36 +70,23 @@
       "strokes": [],
       "strokeWeight": 1,
       "strokeAlign": "INSIDE",
-      "cornerRadius": 0,
-      "layoutMode": "HORIZONTAL",
-      "primaryAxisSizingMode": "FIXED",
-      "counterAxisSizingMode": "FIXED",
-      "primaryAxisAlignItems": "CENTER",
-      "counterAxisAlignItems": "CENTER",
-      "paddingLeft": 0,
-      "paddingRight": 0,
-      "paddingTop": 0,
-      "paddingBottom": 0,
-      "itemSpacing": 0,
-      "layoutWrap": "NO_WRAP",
       "layoutSizingHorizontal": "FIXED",
       "layoutSizingVertical": "FIXED",
       "absoluteBoundingBox": {
        "x": 0,
        "y": 0,
-       "width": 20,
-       "height": 20
+       "width": 12,
+       "height": 12
       },
       "effects": [],
       "interactions": [],
       "constraints": {
        "vertical": "TOP",
        "horizontal": "LEFT"
-      },
-      "children": []
+      }
      },
      {
-      "id": "1:30",
+      "id": "1:46",
       "name": "t",
       "type": "TEXT",
       "scrollBehavior": "SCROLLS",

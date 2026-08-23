@@ -1,9 +1,13 @@
 {
  "name": "canvas conformance fixture (REST boundary)",
+ "_variablesRefusal": {
+  "status": 403,
+  "body": "{\"status\":403,\"error\":true,\"message\":\"Invalid scope(s): files:read, file_comments:write, file_dev_resources:read, file_dev_resources:write, webhooks:write. This endpoint requires the file_variables:read scope\"}"
+ },
  "nodes": {
-  "1:28": {
+  "1:40": {
    "document": {
-    "id": "1:28",
+    "id": "1:40",
     "name": "Case",
     "type": "COMPONENT",
     "scrollBehavior": "SCROLLS",
@@ -14,10 +18,16 @@
       "blendMode": "NORMAL",
       "type": "SOLID",
       "color": {
-       "r": 0.9,
-       "g": 0.92,
-       "b": 0.95,
+       "r": 0.92,
+       "g": 0.95,
+       "b": 1,
        "a": 1
+      },
+      "boundVariables": {
+       "color": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:9:1"
+       }
       }
      }
     ],
@@ -50,57 +60,7 @@
     },
     "children": [
      {
-      "id": "1:29",
-      "name": "a",
-      "type": "FRAME",
-      "scrollBehavior": "SCROLLS",
-      "blendMode": "PASS_THROUGH",
-      "clipsContent": true,
-      "fills": [
-       {
-        "blendMode": "NORMAL",
-        "type": "SOLID",
-        "color": {
-         "r": 0.2,
-         "g": 0.4,
-         "b": 0.8,
-         "a": 1
-        }
-       }
-      ],
-      "strokes": [],
-      "strokeWeight": 1,
-      "strokeAlign": "INSIDE",
-      "cornerRadius": 0,
-      "layoutMode": "HORIZONTAL",
-      "primaryAxisSizingMode": "FIXED",
-      "counterAxisSizingMode": "FIXED",
-      "primaryAxisAlignItems": "CENTER",
-      "counterAxisAlignItems": "CENTER",
-      "paddingLeft": 0,
-      "paddingRight": 0,
-      "paddingTop": 0,
-      "paddingBottom": 0,
-      "itemSpacing": 0,
-      "layoutWrap": "NO_WRAP",
-      "layoutSizingHorizontal": "FIXED",
-      "layoutSizingVertical": "FIXED",
-      "absoluteBoundingBox": {
-       "x": 0,
-       "y": 0,
-       "width": 20,
-       "height": 20
-      },
-      "effects": [],
-      "interactions": [],
-      "constraints": {
-       "vertical": "TOP",
-       "horizontal": "LEFT"
-      },
-      "children": []
-     },
-     {
-      "id": "1:30",
+      "id": "1:41",
       "name": "t",
       "type": "TEXT",
       "scrollBehavior": "SCROLLS",

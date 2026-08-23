@@ -57,6 +57,12 @@
  *   componentPropertyDefinitions BOOLEAN            set.boolDefaults (dump v1.5 — visibility-bound boolean prop defaults)
  *     .defaultValue
  *   SLOT documents (native slots, Schema 2025)      carried verbatim (type 'SLOT') — propose maps them to slot parts
+ *   MapReport.degradations                          _degradations (dump v1.2 shape — Phase 2 exam 2026-08-22: the
+ *                                                     receipts ride the dump, not only stderr)
+ *   variables response (valuesByMode + collections) _variables (dump v1.4 values / v1.6 per-mode values, alias-resolved;
+ *                                                     the consuming mode is each collection's DEFAULT mode) — needs a
+ *                                                     token with file_variables:read; its absence is named BY CAUSE in
+ *                                                     _provenance.variables, captureGaps and a variables-unavailable row
  *   (no REST equivalent)                            textOverrides (dump v1.10) — PLUGIN-ONLY. The channel's source is
  *                                                     InstanceNode.overrides, Figma's own record of what a host changed;
  *                                                     the REST file response has no such field, and reconstructing it
@@ -70,7 +76,7 @@
  * the exact reason (e.g. a variable id that cannot be resolved because the
  * variables endpoint is Enterprise-only). Nothing is invented.
  */
-import type { DumpEffect, DumpFile, DumpGradient, DumpGridTrack, DumpLayout, DumpNode, DumpPaint, DumpPreferredValue, DumpPropertyDefinition, DumpSet, DumpShape, DumpText } from '../types.js';
+import type { DumpDegradation, DumpEffect, DumpFile, DumpGradient, DumpGridTrack, DumpLayout, DumpNode, DumpPaint, DumpPreferredValue, DumpPropertyDefinition, DumpSet, DumpShape, DumpText, DumpVariable } from '../types.js';
 
 // ---------------------------------------------------------------------------
 // REST shapes (trimmed to the consumed fields; figma/rest-api-spec names)
@@ -147,16 +153,24 @@ export interface RestEffect {
   spread?: number;
 }
 
-/** ComponentProperty (api_types.ts) — applied values on an INSTANCE. */
+/** ComponentProperty (api_types.ts) — applied values on an INSTANCE. A
+ *  SLOT-typed value is an OBJECT (`{ guid: { sessionID, localID } }`, a
+ *  slot-content node reference — measured on the Phase 2 exam kit), never a
+ *  scalar prop value; the mapper drops it BY NAME (instance-prop-unsupported)
+ *  instead of letting it reach ContractSchema. */
 export interface RestComponentProperty {
   type: 'BOOLEAN' | 'INSTANCE_SWAP' | 'TEXT' | 'VARIANT' | 'SLOT';
-  value: boolean | string;
+  value: boolean | string | Record<string, unknown>;
 }
 
-/** ComponentPropertyDefinition (api_types.ts) — set-level definitions. */
+/** ComponentPropertyDefinition (api_types.ts) — set-level definitions. A
+ *  SLOT definition's defaultValue is the same `{ guid }` object shape (a
+ *  sessionID/localID of -1 means "no default content"); REST DOES return SLOT
+ *  definitions WITH their preferredValues (Phase 2 exam, 2026-08-22 — six
+ *  of them on the kit), so they are carried, not reported as "EMPTY". */
 export interface RestComponentPropertyDefinition {
   type: 'BOOLEAN' | 'INSTANCE_SWAP' | 'TEXT' | 'VARIANT' | 'SLOT';
-  defaultValue?: boolean | string;
+  defaultValue?: boolean | string | Record<string, unknown>;
   variantOptions?: string[];
   preferredValues?: Array<{ type: string; key: string }>;
   description?: string;
@@ -263,10 +277,67 @@ export interface RestNodesResponse {
   >;
 }
 
-/** GetLocalVariablesResponse (api_types.ts), trimmed to id → name. */
-export interface RestVariablesResponse {
-  meta?: { variables?: Record<string, { id?: string; name: string }> };
+/** LocalVariable (api_types.ts), trimmed: the name (what bindings resolve
+ *  to) plus what the `_variables` channel needs — resolvedType, the per-mode
+ *  values (a value is a raw COLOR {r,g,b,a} / number / string / boolean or a
+ *  VARIABLE_ALIAS to another variable) and the owning collection. */
+export interface RestLocalVariable {
+  id?: string;
+  name: string;
+  resolvedType?: 'COLOR' | 'FLOAT' | 'STRING' | 'BOOLEAN' | string;
+  variableCollectionId?: string;
+  valuesByMode?: Record<string, unknown>;
 }
+
+/** LocalVariableCollection (api_types.ts), trimmed: mode ids → names and
+ *  the default mode — the only "consuming mode" the REST route has (there is
+ *  no consuming node; the Plugin API's resolveForConsumer has no REST twin). */
+export interface RestVariableCollection {
+  id?: string;
+  name?: string;
+  modes?: Array<{ modeId: string; name: string }>;
+  defaultModeId?: string;
+}
+
+/** GetLocalVariablesResponse (api_types.ts), trimmed. A names-only response
+ *  (`{ meta: { variables: { id: { name } } } }`) is still accepted — names
+ *  resolve, values are then not capturable and `_variables` stays absent
+ *  with the receipt naming why. */
+export interface RestVariablesResponse {
+  meta?: {
+    variables?: Record<string, RestLocalVariable>;
+    variableCollections?: Record<string, RestVariableCollection>;
+  };
+}
+
+/**
+ * WHY the variables response is absent — the caller's classification of the
+ * `/v1/files/:key/variables/local` refusal (extract/figma/rest/fetch.ts
+ * classifyVariablesRefusal), threaded into the mapper so every consequence
+ * (1,595 `variable-unresolved` rows on the Phase 2 exam kit) names the REAL
+ * cause and the one-line fix, not "Enterprise":
+ *   scope   — the token was minted without `file_variables:read` (HTTP 403
+ *             naming that scope). USER-FIXABLE: regenerate the token.
+ *   unknown — a 403 naming no scope, or a 404. The plan tier is one
+ *             UNVERIFIED candidate; nothing here asserts it.
+ *   network — the endpoint could not be reached (no HTTP status at all).
+ * Absent (no refusal passed, no response passed): the caller never fetched
+ * the endpoint — named as exactly that.
+ */
+export interface VariablesUnavailable {
+  kind: 'scope' | 'unknown' | 'network';
+  status?: number;
+  /** Ready to print. */
+  message: string;
+  /** The one-line remedy, or null when nothing on the user's side fixes it. */
+  fix: string | null;
+  /** The API's own words, truncated — never paraphrased away. */
+  body?: string;
+}
+
+/** The remedy for `kind: 'scope'`, spelled ONCE — the dump, the proposal
+ *  report and stderr all print this exact line. */
+export const VARIABLES_SCOPE_FIX = 'regenerate the token with file_variables:read';
 
 // ---------------------------------------------------------------------------
 // Map report — the receipt of everything the REST surface could not yield
@@ -297,7 +368,19 @@ export type MapDegradationCode =
   // 'min-max-size-unsupported' retired in dump v1.4: literal min/max sizing
   // is CARRIED (minWidth/minHeight/maxWidth/maxHeight style facts) instead
   // of degraded away.
-  | 'text-channel-unsupported';
+  | 'text-channel-unsupported'
+  // Phase 2 exam (2026-08-22), REST-route receipts:
+  // ONE row per import naming WHY the variables endpoint gave no response
+  // (scope missing / plan-or-unknown / network / never fetched) and the fix.
+  | 'variables-unavailable'
+  // A variable the response names whose value (default mode or a named
+  // mode) does not resolve — alias chain too deep or target missing. Same
+  // code the plugin dump uses (dump v1.6).
+  | 'variable-mode-unresolved'
+  // An INSTANCE componentProperties entry whose value is not a scalar (a
+  // SLOT-typed `{ guid }` slot-content reference) — dropped BY NAME instead
+  // of reaching ContractSchema as a prop value (the Card Grid refusal).
+  | 'instance-prop-unsupported';
 
 export interface MapDegradation {
   code: MapDegradationCode;
@@ -315,9 +398,17 @@ export interface MapReport {
 }
 
 export interface MapOptions {
-  /** GET /v1/files/:key/variables/local response (Enterprise-only). Absent →
-   *  bound facts degrade to resolved literals, each named in the report. */
+  /** GET /v1/files/:key/variables/local response (needs a token with the
+   *  `file_variables:read` scope — NOT a plan tier; see VariablesUnavailable).
+   *  Absent → bound facts degrade to resolved literals, each named in the
+   *  report with the cause from `variablesUnavailable`. */
   variables?: RestVariablesResponse;
+  /** WHY `variables` is absent, when the caller knows (fetch.ts classifies
+   *  the refusal). Threaded into every variable-unresolved row, the
+   *  `variables-unavailable` receipt, `_provenance.variables` and the
+   *  captureGaps note so the cause reaches the dump, the proposal report and
+   *  stderr by name. Ignored when `variables` is present. */
+  variablesUnavailable?: VariablesUnavailable;
   /** Extra style-id → name map (e.g. from GET /v1/files/:key/styles). The
    *  nodes response's own styles metadata is always consulted first. */
   styles?: Record<string, { name: string; key?: string } | string>;
@@ -363,25 +454,132 @@ const isAlias = (v: unknown): v is RestVariableAlias =>
 
 interface Ctx {
   varNameById: Map<string, string>;
+  /** The full variables response, indexed — present only when the caller
+   *  passed one; drives the `_variables` capture (values per mode). */
+  variables?: { byId: Map<string, RestLocalVariable>; collections: Map<string, RestVariableCollection> };
+  variablesUnavailable?: VariablesUnavailable;
+  /** dump v1.4/v1.6 `_variables`: every variable a binding resolved through,
+   *  keyed by slash-form name — the plugin dump's channel, mirrored. */
+  captured: Record<string, DumpVariable>;
   styleById: Map<string, { name: string; key?: string }>;
   components: Map<string, { name: string; componentSetId?: string; key?: string }>;
   componentSets: Map<string, { name: string; key?: string }>;
   report: MapReport;
 }
 
-const variableUnresolvedMessage = (id: string): string =>
-  `variable id ${id} unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used`;
+/** The per-binding consequence, naming the REAL cause (Phase 2 exam: the
+ *  same 403 was printed 1,595× as "Enterprise" when the token merely lacked
+ *  one scope). With no classification at all (the caller passed neither a
+ *  response nor a refusal — the round-trip fixture's degraded pass) the
+ *  legacy spelling stands: nothing here knows why, and says so. */
+const variableUnresolvedMessage = (id: string, ctx: Ctx): string => {
+  const u = ctx.variablesUnavailable;
+  if (u?.kind === 'scope') {
+    return `variable id ${id} unresolvable — the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local; NOT a plan limit); ${VARIABLES_SCOPE_FIX} and re-run; resolved value used meanwhile`;
+  }
+  if (u?.kind === 'network') {
+    return `variable id ${id} unresolvable — /v1/files/:key/variables/local could not be reached (network: ${u.message}); re-run when the API is reachable; resolved value used meanwhile`;
+  }
+  if (u) {
+    return `variable id ${id} unresolvable — /v1/files/:key/variables/local refused with HTTP ${u.status ?? '?'} naming no missing scope (the plan tier is one UNVERIFIED candidate — docs/HANDOFF.md); resolved value used`;
+  }
+  return `variable id ${id} unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used`;
+};
 
 function resolveVarName(ctx: Ctx, alias: RestVariableAlias, nodePath: string, field: string): string | undefined {
   const name = ctx.varNameById.get(alias.id);
-  if (name !== undefined) return name;
+  if (name !== undefined) {
+    captureVariable(ctx, alias.id, name);
+    return name;
+  }
   ctx.report.degradations.push({
     code: 'variable-unresolved',
     nodePath,
     field,
-    message: variableUnresolvedMessage(alias.id),
+    message: variableUnresolvedMessage(alias.id, ctx),
   });
   return undefined;
+}
+
+// ---------------------------------------------------------------------------
+// `_variables` capture (dump v1.4 values, v1.6 per-mode values) — the REST
+// twin of dump.plugin.js varNameById/resolveModeValue. Same spellings:
+// COLOR '#rrggbb' (+aa when alpha < 1), FLOAT raw number, STRING/BOOLEAN
+// as-is. The "consuming mode" is the collection's DEFAULT mode — REST has no
+// consuming node (no resolveForConsumer) — and every other mode of a
+// multi-mode collection rides `modes` by NAME, so no mode is lost; which one
+// `value` is, is stamped in `_provenance.variables.modeSource`.
+// ---------------------------------------------------------------------------
+
+const spellVariableValue = (resolvedType: string | undefined, value: unknown): string | number | boolean | undefined => {
+  if (resolvedType === 'COLOR') {
+    if (!value || typeof value !== 'object') return undefined;
+    const c = value as { r?: number; g?: number; b?: number; a?: number };
+    if (typeof c.r !== 'number' || typeof c.g !== 'number' || typeof c.b !== 'number') return undefined;
+    const alpha = typeof c.a === 'number' ? c.a : 1;
+    const suffix = alpha < 1 ? Math.round(alpha * 255).toString(16).padStart(2, '0') : '';
+    return '#' + rgbToHex({ r: c.r, g: c.g, b: c.b }) + suffix;
+  }
+  if (typeof value === 'number' || typeof value === 'string' || typeof value === 'boolean') return value;
+  return undefined;
+};
+
+/** Resolve a valuesByMode entry through VARIABLE_ALIAS hops (depth ≤ 5 — the
+ *  plugin's own bound). The aliased variable resolves through the SAME mode
+ *  id when its collection carries it, else its collection's default mode. */
+function resolveModeValue(ctx: Ctx, raw: unknown, modeId: string, depth: number): unknown {
+  if (isAlias(raw)) {
+    if (depth >= 5) return undefined;
+    const target = ctx.variables?.byId.get(raw.id);
+    if (!target?.valuesByMode) return undefined;
+    const coll = target.variableCollectionId ? ctx.variables?.collections.get(target.variableCollectionId) : undefined;
+    const fallbackMode = coll?.defaultModeId ?? Object.keys(target.valuesByMode)[0];
+    const next = target.valuesByMode[modeId] !== undefined ? target.valuesByMode[modeId] : target.valuesByMode[fallbackMode];
+    return resolveModeValue(ctx, next, modeId, depth + 1);
+  }
+  return raw;
+}
+
+function captureVariable(ctx: Ctx, id: string, name: string): void {
+  if (!ctx.variables || name in ctx.captured) return;
+  const v = ctx.variables.byId.get(id);
+  if (!v || !v.valuesByMode || !v.resolvedType) {
+    // A names-only response (the legacy fixture shape) — nothing to capture;
+    // the receipt is the `_provenance.variables` stamp, not a per-variable row.
+    return;
+  }
+  const coll = v.variableCollectionId ? ctx.variables.collections.get(v.variableCollectionId) : undefined;
+  const modeIds = Object.keys(v.valuesByMode);
+  const defaultModeId = coll?.defaultModeId ?? modeIds[0];
+  const resolved = resolveModeValue(ctx, v.valuesByMode[defaultModeId], defaultModeId, 0);
+  const value = spellVariableValue(v.resolvedType, resolved);
+  if (value === undefined) {
+    ctx.report.degradations.push({
+      code: 'variable-mode-unresolved',
+      nodePath: name,
+      message: `default mode "${coll?.modes?.find((m) => m.modeId === defaultModeId)?.name ?? defaultModeId}" did not resolve (alias chain too deep, target missing, or a value outside ${v.resolvedType}) — the variable's value is not captured in \`_variables\` (dump v1.4); bindings still carry the NAME`,
+    });
+    return;
+  }
+  const captured: DumpVariable = { type: v.resolvedType, value };
+  const modes = coll?.modes ?? [];
+  if (modes.length > 1) {
+    const perMode: Record<string, string | number | boolean> = {};
+    for (const m of modes) {
+      const spelled = spellVariableValue(v.resolvedType, resolveModeValue(ctx, v.valuesByMode[m.modeId], m.modeId, 0));
+      if (spelled === undefined) {
+        ctx.report.degradations.push({
+          code: 'variable-mode-unresolved',
+          nodePath: name,
+          message: `mode "${m.name}" did not resolve (alias chain too deep or target missing) — the mode value is not captured (dump v1.6)`,
+        });
+      } else {
+        perMode[m.name] = spelled;
+      }
+    }
+    if (Object.keys(perMode).length > 0) captured.modes = perMode;
+  }
+  ctx.captured[name] = captured;
 }
 
 // ---------------------------------------------------------------------------
@@ -1083,6 +1281,13 @@ function mapNode(
 
   const propRefs = mapPropRefs(node);
   if (propRefs) out.propRefs = propRefs;
+  // dump v1.18 parity with dump.plugin.js: a SLOT node's UNSTRIPPED
+  // slotContentId is the slot's identity (instance content is stored against
+  // the id) — propRefs keeps the stripped display name, slotKey the id.
+  if (node.type === 'SLOT') {
+    const slotRef = node.componentPropertyReferences?.slotContentId;
+    if (slotRef) out.slotKey = slotRef;
+  }
 
   if (node.type === 'INSTANCE') {
     const componentId = node.componentId;
@@ -1105,6 +1310,20 @@ function mapNode(
     const props: Record<string, string | boolean> = {};
     for (const [key, def] of Object.entries(node.componentProperties ?? {})) {
       if (def.type === 'INSTANCE_SWAP') continue; // slots ride propRefs instead
+      // Phase 2 exam: a SLOT-typed value is `{ guid }` — a slot-content node
+      // reference, not a prop value. Copied verbatim it reached ContractSchema
+      // as `props.sectionFooter = { guid: … }` and refused the WHOLE set (Card
+      // Grid, exact mode). Dropped BY NAME; the slot's content is the nested
+      // instance's own subtree, which dump v1 never recurses into.
+      if (def.type === 'SLOT' || typeof def.value === 'object') {
+        ctx.report.degradations.push({
+          code: 'instance-prop-unsupported',
+          nodePath,
+          field: key,
+          message: `componentProperties "${key}" is ${def.type === 'SLOT' ? 'SLOT-typed' : `a ${def.type} property with a non-scalar value`} (${JSON.stringify(def.value).slice(0, 80)}) — a slot-content reference, not a prop value the contract grammar holds; dropped by name (the nested instance's slot content is its own subtree, out of dump v1 scope)`,
+        });
+        continue;
+      }
       // dump v1.5: keys keep their "#id" suffix (the Plugin API's own
       // spelling). A suffixed string key is a TEXT property WITH CERTAINTY —
       // stripping it (dump v1.1) collapsed TEXT and VARIANT properties into
@@ -1142,7 +1361,6 @@ function mapNode(
  *  hand-authored fixtures carry NO captureGaps field → zero new notes there
  *  (byte-identity preserved); nothing keys on dumpVersion comparisons. */
 const REST_CAPTURE_GAPS: readonly string[] = [
-  'multi-mode variable values (dump v1.6 modes): not captured on this route — only one mode’s resolved values are readable, so a theme/mode axis resolves single-mode and the other modes’ values are absent',
   'absolute placement on non-shape nodes (dump v1.7): not captured on this route — an out-of-flow FRAME/TEXT (e.g. a corner-pinned badge) re-enters the flow and renders in-line',
   'image fills (dump v1.7 imageFill / v1.9 imageHash): not captured on this route — an IMAGE paint (e.g. an avatar photo) is read as no fill and renders as an empty box',
   'fixed sizes on plain rectangles (dump v1.8 fixedSize): not captured on this route — a drawn width/height is lost and the node sizes to content',
@@ -1152,13 +1370,39 @@ const REST_CAPTURE_GAPS: readonly string[] = [
   'the full constraints map (dump v1.13): not captured on this route — MIN/MAX/CENTER/STRETCH/SCALE pinning carries only on shape decor, not on other node types',
 ];
 
+/** The variables line of `captureGaps` — ONLY when no response was passed,
+ *  and then naming the real cause + fix (the Phase 2 exam's "Enterprise").
+ *  With a response, multi-mode values ARE captured (per-mode `modes`), so the
+ *  old blanket "not captured on this route" line would be false. */
+function variablesCaptureGap(u: VariablesUnavailable | undefined): string {
+  const consequence =
+    'every bound fact on this dump degrades to its resolved literal (the collection’s DEFAULT mode — Light/Default — with no mode recorded), no variable NAME survives into the proposal, and the other modes’ values are absent';
+  if (u?.kind === 'scope') {
+    return `variable names and multi-mode values (dump v1.4/v1.6): NOT captured because the token lacks the file_variables:read scope (Figma 403 on /v1/files/:key/variables/local — a token scope, not a plan limit): ${consequence}; FIX: ${VARIABLES_SCOPE_FIX} and re-run`;
+  }
+  if (u?.kind === 'network') {
+    return `variable names and multi-mode values (dump v1.4/v1.6): NOT captured because /v1/files/:key/variables/local could not be reached (network: ${u.message}): ${consequence}; re-run when the API is reachable`;
+  }
+  if (u) {
+    return `variable names and multi-mode values (dump v1.4/v1.6): NOT captured because /v1/files/:key/variables/local refused with HTTP ${u.status ?? '?'} naming no missing scope (plan tier UNVERIFIED — docs/HANDOFF.md): ${consequence}`;
+  }
+  return `variable names and multi-mode values (dump v1.4/v1.6): NOT captured because the caller passed no variables response (the endpoint was not fetched): ${consequence}`;
+}
+
 export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOptions = {}): MapResult {
   const report: MapReport = { fileName: nodesResponse.name, sets: [], degradations: [], notes: [] };
 
   const varNameById = new Map<string, string>();
+  const variablesById = new Map<string, RestLocalVariable>();
   for (const [id, v] of Object.entries(options.variables?.meta?.variables ?? {})) {
     varNameById.set(v.id ?? id, v.name);
+    variablesById.set(v.id ?? id, v);
   }
+  const variablesIndex = options.variables
+    ? { byId: variablesById, collections: new Map(Object.entries(options.variables.meta?.variableCollections ?? {})) }
+    : undefined;
+  const variablesUnavailable = options.variables ? undefined : options.variablesUnavailable;
+  const captured: Record<string, DumpVariable> = {};
 
   // `captureGaps` is additive provenance this mapper alone stamps (the
   // DumpFile type's `_provenance` predates it) — typed locally so the extra
@@ -1168,7 +1412,28 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     extractedAt: new Date().toISOString().slice(0, 10),
     note: 'Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.5) for design→contract proposal.',
     dumpVersion: '1.5',
-    captureGaps: [...REST_CAPTURE_GAPS],
+    captureGaps: [
+      ...(options.variables ? [] : [variablesCaptureGap(variablesUnavailable)]),
+      ...REST_CAPTURE_GAPS,
+    ],
+    // The variables channel's own receipt: what answered, or why nothing did.
+    variables: options.variables
+      ? {
+          status: 'resolved',
+          count: variablesById.size,
+          collections: variablesIndex ? variablesIndex.collections.size : 0,
+          modeSource:
+            'each collection’s DEFAULT mode (REST has no consuming node — the Plugin API’s resolveForConsumer has no REST twin); every other mode of a multi-mode collection rides `_variables[name].modes` by mode name',
+        }
+      : {
+          status: 'unavailable',
+          cause: variablesUnavailable?.kind ?? 'not-fetched',
+          ...(variablesUnavailable?.status !== undefined ? { httpStatus: variablesUnavailable.status } : {}),
+          message:
+            variablesUnavailable?.message ??
+            'no variables response was passed to the mapper — /v1/files/:key/variables/local was not fetched',
+          fix: variablesUnavailable ? variablesUnavailable.fix : null,
+        },
   };
   const dump: DumpFile = {
     _provenance: provenance,
@@ -1200,6 +1465,9 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     }
     const ctx: Ctx = {
       varNameById,
+      ...(variablesIndex ? { variables: variablesIndex } : {}),
+      ...(variablesUnavailable ? { variablesUnavailable } : {}),
+      captured,
       styleById,
       components: new Map(Object.entries(entry.components ?? {})),
       componentSets: new Map(Object.entries(entry.componentSets ?? {})),
@@ -1220,6 +1488,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     // property name — the component keys resolve downstream into slot
     // `accepts` (unresolvable keys stay named notes, never guessed ids).
     const swapPreferredValues: Record<string, DumpPreferredValue[]> = {};
+    const slotDescriptions: Record<string, string> = {};
     const boolDefaults: Record<string, boolean> = {};
     const propertyDefinitions: Record<string, DumpPropertyDefinition> = {};
     for (const [propName, def] of Object.entries(doc.componentPropertyDefinitions ?? {})) {
@@ -1245,26 +1514,49 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
           defaultValue: def.defaultValue,
         };
       } else if (def.type === 'INSTANCE_SWAP' && typeof def.defaultValue === 'string') {
+        // Phase 2 exam: preferredValues is carried AS RETURNED — an empty
+        // list is a canvas fact (an unconstrained swap), distinct from a
+        // definition the transport never delivered (field absent).
         propertyDefinitions[propName] = {
           type: 'INSTANCE_SWAP',
           defaultValue: def.defaultValue,
-          ...(Array.isArray(def.preferredValues) && def.preferredValues.length > 0
+          ...(Array.isArray(def.preferredValues)
             ? { preferredValues: def.preferredValues.map((value) => ({ type: value.type, key: value.key })) }
             : {}),
         };
-      } else if (def.type === 'SLOT' && typeof def.defaultValue === 'string') {
+      } else if (def.type === 'SLOT') {
+        // REST returns SLOT definitions (Phase 2 exam: six on the kit, each
+        // with preferredValues) whose defaultValue is a `{ guid }` object —
+        // sessionID/localID -1 meaning "no default content" — which the old
+        // `typeof defaultValue === 'string'` gate dropped whole, and propose
+        // then blamed the transport ("REST returns … EMPTY"). Carried: a
+        // string default as-is, an object default omitted (it is a node
+        // reference, not a value), preferredValues as returned.
         propertyDefinitions[propName] = {
           type: 'SLOT',
-          defaultValue: def.defaultValue,
-          ...(Array.isArray(def.preferredValues) && def.preferredValues.length > 0
+          ...(typeof def.defaultValue === 'string' ? { defaultValue: def.defaultValue } : {}),
+          ...(Array.isArray(def.preferredValues)
             ? { preferredValues: def.preferredValues.map((value) => ({ type: value.type, key: value.key })) }
             : {}),
           ...(typeof def.description === 'string' ? { description: def.description } : {}),
           ...(def.slotSettings ? { slotSettings: def.slotSettings } : {}),
         };
+        if (typeof def.description === 'string' && def.description !== '') {
+          slotDescriptions[propName.split('#')[0]] = def.description;
+        }
       }
-      if (def.type === 'INSTANCE_SWAP' && Array.isArray(def.preferredValues) && def.preferredValues.length > 0) {
-        swapPreferredValues[propName.split('#')[0]] = def.preferredValues.map((v) => ({ type: v.type, key: v.key }));
+      // dump v1.18 parity with dump.plugin.js: SLOT joins INSTANCE_SWAP on the
+      // `accepts` channel. The list is carried as REST returned it — `[]`
+      // included — so the proposer can say "unconstrained" for an empty list
+      // and "not captured" ONLY when the field is absent.
+      if ((def.type === 'INSTANCE_SWAP' || def.type === 'SLOT') && Array.isArray(def.preferredValues)) {
+        const shortName = propName.split('#')[0];
+        swapPreferredValues[shortName] = def.preferredValues.map((v) => ({ type: v.type, key: v.key }));
+        if (def.preferredValues.length === 0) {
+          report.notes.push(
+            `${doc.name}: ${def.type} property "${propName}" preferredValues is EMPTY ([]) as REST returned it — the ${def.type === 'SLOT' ? 'slot' : 'swap'} is unconstrained on the canvas (accepts any component); nothing to carry into \`accepts\``,
+          );
+        }
       }
       // dump v1.5: BOOLEAN defaults — the one property default variants alone
       // cannot recover (visibility-bound parts' boolean prop defaults).
@@ -1279,6 +1571,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       ...(key ? { key } : {}),
       ...(Object.keys(propertyDefinitions).length > 0 ? { propertyDefinitions } : {}),
       ...(Object.keys(swapPreferredValues).length > 0 ? { swapPreferredValues } : {}),
+      ...(Object.keys(slotDescriptions).length > 0 ? { slotDescriptions } : {}),
       ...(Object.keys(boolDefaults).length > 0 ? { boolDefaults } : {}),
       variants,
     };
@@ -1294,9 +1587,43 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     );
   }
   if (!options.variables) {
+    const u = variablesUnavailable;
     report.notes.push(
-      'variables response not provided — every bound fact degrades to its resolved literal; see variable-unresolved entries',
+      u
+        ? `variables response unavailable (${u.kind}${u.status !== undefined ? `, HTTP ${u.status}` : ''}): ${u.message}${u.fix ? ` FIX: ${u.fix}.` : ''} Every bound fact degrades to its resolved literal; see variable-unresolved entries`
+        : 'variables response not provided — every bound fact degrades to its resolved literal; see variable-unresolved entries',
     );
+    // ONE receipt row in the dump naming the cause — propose surfaces it as a
+    // batch note (its nodePath names no set), figma-proposals.md prints it.
+    report.degradations.unshift({
+      code: 'variables-unavailable',
+      nodePath: `file:${options.fileKey ?? '(unknown)'}`,
+      message: u
+        ? u.kind === 'scope'
+          ? `/v1/files/:key/variables/local refused with HTTP 403: the token lacks the file_variables:read scope (NOT a plan limit — the same token reads the file). FIX: ${VARIABLES_SCOPE_FIX} and re-run. Until then every variable binding on this dump is a resolved literal (see the variable-unresolved rows) and no variable name survives`
+          : u.kind === 'network'
+            ? `/v1/files/:key/variables/local could not be reached (network: ${u.message}); re-run when the API is reachable. Until then every variable binding on this dump is a resolved literal`
+            : `/v1/files/:key/variables/local refused with HTTP ${u.status ?? '?'} and named no missing scope — the plan tier is one UNVERIFIED candidate (docs/HANDOFF.md). Every variable binding on this dump is a resolved literal`
+        : 'no variables response was passed to the mapper (/v1/files/:key/variables/local was not fetched) — every variable binding on this dump is a resolved literal',
+    });
   }
+
+  // Phase 2 exam: the MapReport used to live only on stderr — the dump
+  // carried no `_degradations` on the REST route, so propose could not
+  // surface the 1,748 receipts and the round trip could not match them by
+  // channel. They ride the dump now in the plugin dump's own shape
+  // ({ code, nodePath, message }; the REST `field` folds into the message).
+  // The report keeps the structured rows for the CLI's stderr listing.
+  const dumpDegradations: DumpDegradation[] = report.degradations.map((d) => ({
+    code: d.code,
+    nodePath: d.nodePath,
+    message: d.field ? `${d.field}: ${d.message}` : d.message,
+  }));
+  if (dumpDegradations.length > 0) dump._degradations = dumpDegradations;
+  // dump v1.4/v1.6 `_variables` — written only when a binding resolved
+  // through a variable the response carries VALUES for (a names-only
+  // response resolves names but captures nothing; the provenance stamp says
+  // which happened).
+  if (Object.keys(captured).length > 0) dump._variables = captured;
   return { dump, report };
 }

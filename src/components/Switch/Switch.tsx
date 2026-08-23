@@ -2,12 +2,16 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/switch.contract.json (ds.switch v2.0.1)
  * Regenerate with: npm run generate
+ *
+ * DOM attrs OMITTED from LabelHTMLAttributes<HTMLLabelElement> — the contract's own props claim these
+ * names, so the HTML attribute of the same name cannot be passed through ...rest:
+ *   onToggle
  */
 import { forwardRef, useState } from 'react';
 import type { LabelHTMLAttributes } from 'react';
 import styles from './Switch.module.css';
 
-export interface SwitchProps extends LabelHTMLAttributes<HTMLLabelElement> {
+export interface SwitchProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'onToggle'> {
   /** On or off — drives the track color and thumb position. */
   value?: 'off' | 'on';
   /** Always rendered — users must know what they are toggling. */

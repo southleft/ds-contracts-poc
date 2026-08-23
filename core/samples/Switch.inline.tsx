@@ -9,6 +9,10 @@
  * styles and are omitted; ROOT disabled-state tokens apply via the disabled
  * prop; PART-level state overrides (Part.states, v13) are omitted — the same
  * declared limit as the hover states (state-selected descendant styling).
+ *
+ * DOM attrs OMITTED from LabelHTMLAttributes<HTMLLabelElement> — the contract's own props claim these
+ * names, so the HTML attribute of the same name cannot be passed through ...rest:
+ *   onToggle
  */
 import { forwardRef, useState } from 'react';
 import type { CSSProperties, LabelHTMLAttributes } from 'react';
@@ -88,7 +92,7 @@ const V: Record<string, CSSProperties> = {
   }
 };
 
-export interface SwitchProps extends LabelHTMLAttributes<HTMLLabelElement> {
+export interface SwitchProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'onToggle'> {
   /** On or off — drives the track color and thumb position. */
   value?: 'off' | 'on';
   /** Always rendered — users must know what they are toggling. */

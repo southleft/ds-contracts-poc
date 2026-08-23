@@ -2,6 +2,10 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/banner.contract.json (polaris.banner v0.4.0)
  * Regenerate with: npm run generate
+ *
+ * DOM attrs OMITTED from HTMLAttributes<HTMLDivElement> — the contract's own props claim these
+ * names, so the HTML attribute of the same name cannot be passed through ...rest:
+ *   title
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
@@ -17,7 +21,7 @@ const ICONS: Record<string, string> = {
 
 const ROLE_MAP: Record<string, string> = {"success":"status","info":"status","warning":"alert","critical":"alert"};
 
-export interface BannerProps extends HTMLAttributes<HTMLDivElement> {
+export interface BannerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** Title content for the banner. */
   title?: string;
   /** Renders the banner without a status icon. */

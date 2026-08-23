@@ -154,6 +154,21 @@ export interface DumpText {
    *  Eventz Badge labels ride textCase UPPER and rendered "Label" for
    *  "LABEL". */
   textCase?: 'UPPER' | 'LOWER' | 'TITLE';
+  /** Font FAMILY (dump v1.31, additive) — the Plugin API's fontName.family /
+   *  REST style.fontFamily, verbatim. The emitter renders Inter when the
+   *  contract declares nothing, so a non-Inter family with no field was a
+   *  SILENT substitution (Phase 2 exam: Manrope on 44 Heading/Kicker nodes).
+   *  propose carries a uniform non-Inter family as the declared `font-family`
+   *  channel (DECLARED_CHANNELS, canvas: draw) and NAMES a mixed axis.
+   *  Absence in older dumps means not captured, never "Inter". */
+  fontFamily?: string;
+  /** Horizontal text alignment (dump v1.31, additive) — textAlignHorizontal
+   *  verbatim. LEFT is the CSS default and may be omitted by producers;
+   *  CENTER/RIGHT/JUSTIFIED carry as the declared `text-align` channel
+   *  (canvas: draw — the emitter writes textAlignHorizontal back). Absence in
+   *  older dumps means not captured (their captures receipted the channel as
+   *  text-channel-unsupported). */
+  textAlign?: 'LEFT' | 'CENTER' | 'RIGHT' | 'JUSTIFIED';
 }
 
 /** One visible effect (dump v1.2, additive). Shadows carry their full
@@ -167,6 +182,67 @@ export interface DumpEffect {
   radius?: number;
   /** Omitted when 0. */
   spread?: number;
+  /** Variable bindings on the effect's channels (dump v1.31, additive):
+   *  channel → slash-form variable NAME, present only for bindings the
+   *  producer could name (REST: the variables response; plugin: the local
+   *  collection). A binding the producer could NOT name stays a
+   *  variable-unresolved receipt at capture and the resolved literal rides
+   *  the effect as before. The contract's box-shadow is ONE token, so propose
+   *  carries the literal stack and NAMES these per-channel bindings — never
+   *  drops them (Phase 2 exam: 5 Button hover roots × radius/spread/color/
+   *  offsetX/offsetY bound, SILENT). */
+  bound?: Partial<Record<'radius' | 'spread' | 'color' | 'offsetX' | 'offsetY', string>>;
+}
+
+/** A prototype reaction on a node (dump v1.31, additive) — the REST
+ *  `interactions[]` / Plugin `reactions[]` wiring, READ ONLY TO BE NAMED.
+ *  `destinationName` is the target variant's name when the destination node
+ *  is a sibling variant of the same set (the CHANGE_TO state-preview idiom);
+ *  propose never invents onClick/onHover from it (dump v1.27 rule — the
+ *  State axis + statePreviewAxis recover the matrix). */
+export interface DumpReaction {
+  /** ON_HOVER | ON_CLICK | ON_PRESS | … (trigger.type). */
+  trigger: string;
+  /** CHANGE_TO | NAVIGATE | OVERLAY | … (action navigation / type). */
+  action?: string;
+  /** Destination node id (transitionNodeID / destinationId). */
+  destination?: string;
+  /** The destination node's NAME when resolvable in the mapped scope. */
+  destinationName?: string;
+  /** SMART_ANIMATE | DISSOLVE | … */
+  transition?: string;
+  /** Milliseconds. */
+  duration?: number;
+}
+
+/** A HOST override on a nested instance's internals (dump v1.31, additive)
+ *  — Figma's own record (InstanceNode.overrides / REST overrides[]) that the
+ *  host changed a descendant of the instance. Instance internals are elided
+ *  by rule (the child contract owns them), but the override is a HOST fact
+ *  (the icon colour per variant) and must be named, never dropped. `path`
+ *  is the overridden descendant's name path inside the instance; `fields`
+ *  is Figma's overriddenFields; `fill` is the descendant's captured first
+ *  solid when "fills" is among them (so the note can say WHICH colour).
+ *  Character overrides keep their own channel (textOverrides, dump v1.10). */
+export interface DumpHostOverride {
+  path: string;
+  fields: string[];
+  fill?: DumpPaint;
+}
+
+/** A FIXED INSTANCE_SWAP value on a nested instance (dump v1.31, additive):
+ *  the main component the host swapped in for the child's swap property,
+ *  keyed by the suffix-stripped property name. Swap values bound to a HOST
+ *  property ride propRefs (mainComponent) instead; this is the UNBOUND
+ *  case — a configured nested instance (Chip's Icon, Toast's Button (Icon)).
+ *  The composition grammar's component ref carries props only, so propose
+ *  NAMES the fixed swap with the swapped component's identity. */
+export interface DumpFixedSwap {
+  /** The swapped-in main component's node id. */
+  id: string;
+  /** Its name / publish key when the producer could resolve them. */
+  name?: string;
+  key?: string;
 }
 
 /** Decor-shape geometry (dump v1.3, additive) — captured for the closed set
@@ -288,6 +364,41 @@ export interface DumpNode {
    *  `layout.grow` (in a row parent) and `align: stretch` (on children of a
    *  column parent); propose.ts disambiguates by parent direction. */
   fillWidth?: boolean;
+  /** layoutSizingVertical === 'FILL' (dump v1.31, additive) — the vertical
+   *  twin of fillWidth. Under a ROW parent it is the cross-axis STRETCH
+   *  (parent `align: stretch` when every eligible sibling fills, else the
+   *  part's own `height: 100%` literal under a FIXED-height parent — NAMED
+   *  under a HUG parent, where no grammar spelling is exact); under a COLUMN
+   *  parent it is `layout.grow`. Absence in older dumps means not captured,
+   *  never HUG. */
+  fillHeight?: boolean;
+  /** EFFECT style identity (dump v1.31, additive): the name (and publish
+   *  key) of the EffectStyle this node's effects ride — REST styles.effect
+   *  resolved through the response's styles map, Plugin effectStyleId. The
+   *  resolved layers still ride `effects`; the identity carries as
+   *  provenance in the proposal notes (the same way text.style names a
+   *  TextStyle) — there is no effect-style token class to mint into yet. */
+  effectStyle?: string;
+  effectStyleKey?: string;
+  /** Prototype reactions (dump v1.31, additive) — see DumpReaction. Named,
+   *  never inverted to events. Producers that only receipt reactions
+   *  (dump v1.27 prototype-reactions-unsupported) may omit the field. */
+  reactions?: DumpReaction[];
+  /** HOST overrides of this INSTANCE's internals (dump v1.31, additive) —
+   *  see DumpHostOverride. INSTANCE nodes only. */
+  hostOverrides?: DumpHostOverride[];
+  /** FIXED INSTANCE_SWAP values on this INSTANCE (dump v1.31, additive) —
+   *  see DumpFixedSwap. INSTANCE nodes only. */
+  fixedSwaps?: Record<string, DumpFixedSwap>;
+  /** Auto-layout paint order reversed (dump v1.31, additive): Figma's
+   *  itemReverseZIndex. Render-inert unless children overlap; no contract
+   *  field (z-index is declared-but-inert in the schema) — NAMED. Captured
+   *  only when true. */
+  itemReverseZIndex?: true;
+  /** Aspect-ratio lock (dump v1.31, additive): Figma's targetAspectRatio
+   *  {x, y}. A FRAME part carries it as the declared `aspect-ratio` channel
+   *  ("x / y"); an INSTANCE (child-owned box) is NAMED. */
+  targetAspectRatio?: { x: number; y: number };
   /** visible === false on the node (dump v1.1, additive). Positive evidence
    *  only: a visibility-bound part hidden in the default variant recovers a
    *  boolean-prop default of false. Absence means visible (REST mapper) or
@@ -399,6 +510,12 @@ export interface DumpNode {
    *  suffix, so bare string keys stay VARIANT/TEXT-ambiguous. Consumers
    *  split on '#' for the property NAME either way. */
   componentProperties?: Record<string, string | boolean>;
+  // dump v1.31 NOTE: the REST route copies a SLOT-typed property value
+  // through as the API's own `{ guid: … }` OBJECT (it is a slot-content node
+  // reference, not a value). The type above is the carriable grammar; the
+  // proposer strips any non-scalar value BY NAME before it can reach the
+  // contract schema (Phase 2 exam: Card Grid refused whole-set on one such
+  // value). Producers should prefer omitting SLOT-typed values.
   /** For INSTANCE nodes (dump v1.10): the characters this HOST set on the
    *  instance's text descendants, keyed by the overridden node's NAME PATH
    *  inside the instance ("Content/Text"). Source: InstanceNode.overrides
@@ -460,11 +577,18 @@ export type DumpPropertyDefinition =
   | {
       type: 'INSTANCE_SWAP';
       defaultValue: string;
+      /** Carried AS RETURNED — `[]` is a canvas fact (an unconstrained
+       *  swap), absence means the producer did not capture the list. */
       preferredValues?: DumpPreferredValue[];
     }
   | {
       type: 'SLOT';
-      defaultValue: string;
+      /** Optional since the Phase 2 exam (2026-08-22): REST returns a SLOT
+       *  definition's defaultValue as a `{ guid }` node reference (-1/-1 =
+       *  no default content), which the mapper omits rather than invents. */
+      defaultValue?: string;
+      /** Carried AS RETURNED — `[]` is a canvas fact (an unconstrained
+       *  slot), absence means the producer did not capture the list. */
       preferredValues?: DumpPreferredValue[];
       description?: string;
       slotSettings?: Record<string, unknown>;
@@ -600,15 +724,38 @@ export interface DumpFile {
      *  hand-authored fixtures — absence adds no note, so committed corpora
      *  are byte-stable. */
     captureGaps?: string[];
+    /** The variables channel's own receipt (REST route, Phase 2 exam
+     *  2026-08-22): what `/v1/files/:key/variables/local` answered, or WHY it
+     *  did not — `cause` is `scope` (the token lacks `file_variables:read`,
+     *  user-fixable: `fix` says how), `unknown` (a refusal naming no scope —
+     *  plan tier UNVERIFIED), `network`, or `not-fetched`. Absent on plugin
+     *  dumps (the Plugin API resolves names on every plan). */
+    variables?:
+      | {
+          status: 'resolved';
+          count: number;
+          collections: number;
+          modeSource: string;
+        }
+      | {
+          status: 'unavailable';
+          cause: 'scope' | 'unknown' | 'network' | 'not-fetched';
+          httpStatus?: number;
+          message: string;
+          fix: string | null;
+        };
   };
   /** dump v1.2, additive — absent in older dumps (their captures were run
-   *  before the channel existed; absence means "not receipted", not clean). */
+   *  before the channel existed; absence means "not receipted", not clean).
+   *  Written by BOTH producers since the Phase 2 exam: dump.plugin.js and
+   *  the REST mapper (its MapReport rows, field folded into the message). */
   _degradations?: DumpDegradation[];
   /** dump v1.4, additive — every variable the capture resolved a binding
    *  through, keyed by its slash-form name, with the resolved value for the
    *  consuming mode. Absent in older dumps (names-only capture) and in REST
-   *  dumps (the variables endpoint is Enterprise-only — value-only minting
-   *  stays the degraded route there). */
+   *  dumps whose token lacked `file_variables:read` (the mapper writes it
+   *  when the variables endpoint answered — `_provenance.variables` names
+   *  which; value-only minting stays the degraded route otherwise). */
   _variables?: Record<string, DumpVariable>;
   [setName: string]: DumpSet | DumpFile['_provenance'] | DumpDegradation[] | Record<string, DumpVariable> | undefined;
 }

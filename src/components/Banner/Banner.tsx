@@ -2,6 +2,10 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/banner.contract.json (ds.banner v1.0.1)
  * Regenerate with: npm run generate
+ *
+ * DOM attrs OMITTED from HTMLAttributes<HTMLDivElement> — the contract's own props claim these
+ * names, so the HTML attribute of the same name cannot be passed through ...rest:
+ *   title
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
@@ -26,7 +30,7 @@ const ROLE_MAP: Record<string, string> = {
   error: 'alert',
 };
 
-export interface BannerProps extends HTMLAttributes<HTMLDivElement> {
+export interface BannerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** Feedback tone — drives the color scheme, the leading icon, and the ARIA role (error/warning announce as alerts). */
   status?: 'info' | 'success' | 'warning' | 'error';
   /** card = standalone with radius; section = full-bleed, square. */
