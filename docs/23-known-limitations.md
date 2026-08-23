@@ -1149,21 +1149,36 @@ named a row in [docs/26](26-v1-definition.md). Both were closed on
 carries what was actually wrong (not quite what this row said), the fix, and
 the lanes that now pin each.
 
-## B.29 polaris Tag no longer re-fuses offline: an ambiguous `width` on the link part
+## B.29 polaris Tag no longer re-fuses offline: an ambiguous `width` on the link part — CLOSED, see §D.33
 
-Found 2026-08-23 by the repaired drift instrument ([§D.32](#d32-the-two-acceptance-rows-that-were-red-on-the-commit-itself--closed)),
-not by a human. `extract/computed/regate.ts` replaying polaris Tag's committed
-captured truth through the engine at `d5b5b0b1` produces an enriched contract
-whose `link` part carries `width` as BOTH a token binding
-(`{imported.shared.size-59-9219}`) and a literal (`fit-content`); the contract
-validator refuses that by name ("ambiguous — keep ONE of tokens.width /
-literals.width"). The same component fused on 2026-08-09 (offline 80.521 %,
-12,896 cells). The refusal is PINNED in `extract/computed/regate-baseline.json`
-(`refused`), so the re-measure goes red if it changes or the component fuses
-again without a re-record; the committed harness scorecard (capture-time
-engine) is untouched. **Not fixed here** — the fix is in fusion (which of the
-two spellings the mint should keep for a `fit-content` width), and it owes a
-gapCause when it lands.
+*Closed 2026-08-23 (r12). The refusal was real; the diagnosis in this row
+("the fix is in fusion — which of the two spellings the mint should keep")
+was half right: the promotion had already chosen (`literals.width =
+"fit-content"`, G8), and the mint re-minted the channel because the door
+that makes a stated channel bound territory did not see `width` at all. The
+register entry [§D.33](#d33-polaris-tag-refused-to-re-fuse-the-mint-re-minted-a-channel-the-promotion-had-already-stated--closed)
+carries the cause, the rule, the receipt and the re-recorded row. The number
+is kept so the files that cite §B.29 still resolve.*
+
+## B.30 `promote-floor` does not reproduce the committed polaris contracts
+
+Found 2026-08-23 while re-running the documented polaris recipe
+([examples/polaris/PROVENANCE.md](../examples/polaris/PROVENANCE.md)) on
+`537022b0` to prove it byte-neutral. `npx tsx examples/polaris/scripts/promote-floor.ts`
+rewrites 8 of the 12 committed contracts (avatar, button, checkbox,
+progress-bar, radio-button, spinner, text-field, thumbnail) and the minted
+tree; the diffs are hand-curated facts that live only in the committed
+files, not in the authored-facts ledger the promoter reads — avatar's
+`initials` default `"TP"` and `withInitials` default `true` (with the
+receipt-citing descriptions that explain them) are the clearest. The
+regenerate step then re-emits 20 figma scripts and the bundle from the
+rewritten contracts. `generate.ts --check` is green on the committed tree
+because it re-emits from the committed contracts; the promote step before
+it is the one that does not round-trip. Not fixed here — the fix is to move
+the curation into `ds-library.json`'s authored rows (or a receipt that says
+the committed contract is post-promotion curated), and it owes a gate that
+runs the promote step, not just the emit step. The tree was restored from
+git after the measurement; nothing from that run is in this round's patch.
 
 ---
 
@@ -2864,3 +2879,104 @@ family `diagnose-*` is green.
 diagnose`. full: `extract:computed:drift:remeasure`. The `diagnose` step goes
 red by design when the snapshot passes 14 days; the fix is the one REST
 command above. Commit `a46593b6`.
+
+## D.33 polaris Tag refused to re-fuse: the mint re-minted a channel the promotion had already stated — CLOSED
+
+**Was §B.29.** Found by the repaired drift instrument on 2026-08-23
+([§D.32](#d32-the-two-acceptance-rows-that-were-red-on-the-commit-itself--closed)):
+`extract/computed/regate.ts` replaying polaris Tag's committed captured truth
+through the current engine produced a `link` part carrying `width` as BOTH
+`tokens.width = {imported.shared.size-59-9219}` and `literals.width =
+"fit-content"`, and `validateContract` refused the ambiguity by name. What
+re-measurement found, against what §B.29 said:
+
+- *Not the promoter, and not the committed artifacts.* `packages/cli/src/promote.ts`
+  reads `resolved.contract.json`; neither it nor the committed
+  `enriched.contract.json` (capture-time engine, 2026-07-29) nor the promoted
+  `examples/polaris/contracts/tag.contract.json` ever carried the double
+  spelling — the committed `link` carries `tokens.width` alone (and the grid
+  tracks as a `grid-template-columns` token, the pre-G1–G5 spelling). The
+  double spelling existed only in the OFFLINE re-fuse through the current
+  engine.
+- *Not fusion choosing between two spellings of one fact.* The promotion had
+  already decided. `anatomy.ts gridDefiniteAxisLiterals` (G8, `e16b6f6c`,
+  2026-08-08) runs BEFORE the mint and states `literals.width = "fit-content"`
+  on a display:grid part whose used box equals its intrinsic track sum
+  (59.9219 px = the one fixed column) — the box IS its content, the canvas
+  hugs it. The mint then minted the same used box as a fixed token beside
+  it.
+- *The cause was a silent hole in the "already carried" door.*
+  `extract/computed/fuse.ts carriedChannels` — "channels the contract
+  carries for a part — BOUND territory; the mint pass never re-mints them"
+  — mapped each token / per-prop / literal / state channel through
+  `CHANNEL_TO_COMPUTED` with `?? []`. That registry spells shorthands and the
+  lifted longhands, not every bounded channel: 45 token/literal channels
+  (`width`, `height`, `top`/`right`/`bottom`/`left`, the four paddings and
+  margins, `opacity`, `z-index`, `flex-grow`, the grid placement longhands,
+  …) resolved to NOTHING, so a part that already stated one of them was
+  re-minted as if it stated nothing. The `declared` branch of the same
+  function already fell back to the channel's own name. Measured blast
+  radius: no capture seed in any of the eight configs carries a token,
+  literal, per-prop map or state on any of the 45 (0 hits); the only
+  pre-mint writer on them is G8, and the 2026-08-23 full re-measure refused
+  exactly one component. The polaris re-record then showed the one other
+  effect, and it is a removal of dead weight: avatar, progressbar and
+  thumbnail carry root `width`/`height` per size as a REVIEWED
+  `literalsByProp` entry, and the old door still minted those per-size
+  leaves into the minted tree (5 + 3 + 4 leaves) only for the
+  `tokensByProp conflict avoided` merge rule to keep them out of the
+  contract — orphan leaves. They are no longer minted; the re-fused
+  contracts are deep-compared HEAD engine vs fixed — avatar and thumbnail
+  identical, progressbar identical in every fact (its root `tokensByProp`
+  keeps the seed's single-entry object spelling instead of being
+  re-normalised to a one-element array, because no per-axis addition
+  touches the root any more; both spellings read through
+  `tokensByPropEntries`) — every percentage is unchanged, and the three
+  tracked `regate.scorecard.json` files move only in
+  `mintedLeaves`/`baseBindings`. No other library states
+  a channel on the list before the mint, so the rest of the corpus is
+  untouched.
+
+**The rule (one).** A channel the promoted contract already states —
+whichever field states it — is one carrier; the mint never re-mints it.
+`carriedChannels` now falls back to the channel's own name in every branch.
+For G8 this means the literal wins: `fit-content` is a sizing MODE (HUG)
+that a fixed px token cannot spell, and a fixed token beside a hugging axis
+would pin the canvas to the base plane's text width; the computed px is the
+literal's base-plane consequence, not a second fact. This is the same
+verdict the canvas→code proposer already gives (`core/exact-proposal-check.ts`
+#41: "height carries as the G8 literal fit-content only — no minted root
+height beside it"), so the two directions now agree. The not-minted value is
+receipted by name in the extension (`carried-axis-not-reminted: link.width —
+the promotion states it as literals.width "fit-content" (grid-axis-definite,
+G8); the computed 59.9219px is that literal's base-plane used box, not a
+second fact, and is NOT minted beside it`). Where a G8 px literal (used box
+larger than the track sum) is stated and the used box varies along a
+defaultless axis, the existing `carried-channel-reminted` door still re-mints
+the set planes; variation along a defaulted axis stays with the literal, the
+same as every other reviewed carriage — named, not hidden.
+
+**Numbers.** polaris Tag re-fuses: offline 81.551 % (6140/7529 cells, 0
+unresolved refs) against the committed harness 81.016 % (5996/7401); 128
+cells added and 144 more equal, so 16 previously-compared cells changed
+verdict to EQUAL — the hugging link. The baseline row drops `refused` and
+names the gap; the tracked `out/tag/regate.scorecard.json` is the re-record.
+The committed capture artifacts and the promoted Tag contract are
+UNTOUCHED: the hugging link reaches the canvas at Tag's next recapture (or
+a deliberate `regate --write-enriched` + resolve + promote round), which
+this round did not run — the recipe's promote step has its own open row
+([§B.30](#b30-promote-floor-does-not-reproduce-the-committed-polaris-contracts)).
+
+**One instrument defect on the way.** The re-record could not un-pin a
+refusal: `drift-check.ts` pushed "FUSES AGAIN … re-record with --write" as
+a failure in BOTH modes, and `--write` refuses to write on any failure, so
+the door the message named could never open (measured: the first polaris
+re-record ran 762 s and wrote nothing). The re-record now prints the move
+and un-pins the row; the re-measure still fails on it.
+
+**Gates.** `npm run extract:computed:drift` (VERIFY) green with no refused
+row; `npm run extract:computed:drift -- --write --config
+extract/computed/configs/polaris.json` is the re-record; `npx tsx
+examples/polaris/generate.ts --check`, `figma:fresh`, `generated:fresh`,
+`evals --only polaris,promote-generalization`, tsc, lint, format, docs all
+green on the patch. Round r12 (patch over `537022b0`).

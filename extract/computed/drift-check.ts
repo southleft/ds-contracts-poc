@@ -275,7 +275,16 @@ for (const lib of selected) {
       continue;
     }
     if (REMEASURE && p?.refused) {
-      failures.push(`${key}: FUSES AGAIN — the baseline pins a refusal ("${p.refused.slice(0, 120)}") but the current engine produced a scorecard (${fmt(readRegate(freshPath).pctEqual)}); re-record with --write and say what fixed it`);
+      // A pinned refusal that fuses again is a finding for the RE-MEASURE,
+      // and exactly what the RE-RECORD exists to absorb. Until 2026-08-23
+      // (docs/23 §D.33) it was pushed as a failure in both modes, and the
+      // re-record refuses to write on any failure — so the door the message
+      // named ("re-record with --write") could never be opened: a refused
+      // row stayed pinned forever. The re-record now prints the move and
+      // un-pins the row; what fixed it belongs in the row's gapCause.
+      const moved = `${key}: FUSES AGAIN — the baseline pins a refusal ("${p.refused.slice(0, 120)}") but the current engine produced a scorecard (${fmt(readRegate(freshPath).pctEqual)})`;
+      if (WRITE) console.log(`  ↺ ${moved} — un-pinned by this re-record; say what fixed it in the row's gapCause`);
+      else failures.push(`${moved}; re-record with --write and say what fixed it`);
     }
     const fresh = readRegate(freshPath);
     const row: BaselineRow = {

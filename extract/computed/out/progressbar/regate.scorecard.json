@@ -111,9 +111,9 @@
       "boundConfirmed": 72,
       "boundCells": 72,
       "contradictions": 0,
-      "mintedLeaves": 15,
-      "mintedLeavesUnfolded": 15,
-      "baseBindings": 19,
+      "mintedLeaves": 12,
+      "mintedLeavesUnfolded": 12,
+      "baseBindings": 18,
       "stateBindings": 0,
       "codeOnlyChannels": 3,
       "overflowBindings": 0,
@@ -202,7 +202,7 @@
     },
     "shippedMinted": {
       "path": "examples/polaris/tokens/polaris-minted.dtcg.json",
-      "leavesAdded": 1284,
+      "leavesAdded": 1287,
       "divergent": []
     },
     "rows": [
