@@ -1,0 +1,335 @@
+{
+  "id": "fluent.card",
+  "name": "Card",
+  "library": "fluent",
+  "contractPath": "examples/fluent/contracts/card.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/fluent/figma/fluent.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 40,
+      "sampled": 11,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "appearance",
+        "type": "enum",
+        "default": "filled"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "medium"
+      },
+      {
+        "name": "orientation",
+        "type": "enum",
+        "default": "vertical"
+      }
+    ],
+    "states": [
+      "disabled",
+      "focus-visible",
+      "active",
+      "hover"
+    ],
+    "parts": [
+      "root",
+      "checkbox",
+      "label",
+      "cardheader",
+      "label-2",
+      "label-3"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.card.cardheader.flex-grow.horizontal",
+      "imported.card.cardheader.flex-grow.vertical",
+      "imported.card.cardheader.flex-shrink",
+      "imported.card.cardheader.height",
+      "imported.card.checkbox.color",
+      "imported.card.checkbox.color-state-disabled",
+      "imported.card.checkbox.font-size",
+      "imported.card.checkbox.height",
+      "imported.card.checkbox.left.large",
+      "imported.card.checkbox.left.medium",
+      "imported.card.checkbox.left.small",
+      "imported.card.checkbox.margin-left",
+      "imported.card.checkbox.outline-color",
+      "imported.card.checkbox.right.large",
+      "imported.card.checkbox.right.medium",
+      "imported.card.checkbox.right.small",
+      "imported.card.checkbox.width",
+      "imported.card.label.margin-left.large",
+      "imported.card.label.margin-left.medium",
+      "imported.card.label.margin-left.small",
+      "imported.card.label.margin-top.large",
+      "imported.card.label.margin-top.medium",
+      "imported.card.label.margin-top.small",
+      "imported.card.root.background-color.filled",
+      "imported.card.root.background-color.filled-alternative",
+      "imported.card.root.background-color.outline",
+      "imported.card.root.background-color.subtle",
+      "imported.card.root.border-bottom-left-radius.large",
+      "imported.card.root.border-bottom-left-radius.medium",
+      "imported.card.root.border-bottom-left-radius.small",
+      "imported.card.root.border-bottom-right-radius.large",
+      "imported.card.root.border-bottom-right-radius.medium",
+      "imported.card.root.border-bottom-right-radius.small",
+      "imported.card.root.border-top-left-radius.large",
+      "imported.card.root.border-top-left-radius.medium",
+      "imported.card.root.border-top-left-radius.small",
+      "imported.card.root.border-top-right-radius.large",
+      "imported.card.root.border-top-right-radius.medium",
+      "imported.card.root.border-top-right-radius.small",
+      "imported.card.root.box-shadow.filled",
+      "imported.card.root.box-shadow.filled-alternative",
+      "imported.card.root.box-shadow.outline",
+      "imported.card.root.box-shadow.subtle",
+      "imported.card.root.column-gap.large",
+      "imported.card.root.column-gap.medium",
+      "imported.card.root.column-gap.small",
+      "imported.card.root.padding-bottom.large",
+      "imported.card.root.padding-bottom.medium",
+      "imported.card.root.padding-bottom.small",
+      "imported.card.root.padding-left.large",
+      "imported.card.root.padding-left.medium",
+      "imported.card.root.padding-left.small",
+      "imported.card.root.padding-right.large",
+      "imported.card.root.padding-right.medium",
+      "imported.card.root.padding-right.small",
+      "imported.card.root.padding-top.large",
+      "imported.card.root.padding-top.medium",
+      "imported.card.root.padding-top.small",
+      "imported.card.root.row-gap.large",
+      "imported.card.root.row-gap.medium",
+      "imported.card.root.row-gap.small",
+      "imported.card.root.width",
+      "imported.shared.color-00000000",
+      "imported.shared.color-bdbdbd",
+      "imported.shared.color-e0e0e0",
+      "imported.shared.num-400",
+      "imported.shared.size-0",
+      "imported.shared.size-14",
+      "imported.shared.size-20",
+      "imported.shared.size-3"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "appearance-filled__size-medium__orientation-vertical",
+      "variant": "Appearance=Filled, Size=Medium, Orientation=Vertical",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled",
+        "size": "medium",
+        "orientation": "vertical"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled__size-medium__orientation-vertical.png",
+      "contentBox": {
+        "width": 453.8,
+        "height": 84
+      }
+    },
+    {
+      "slug": "appearance-filled__size-medium__orientation-horizontal",
+      "variant": "Appearance=Filled, Size=Medium, Orientation=Horizontal",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled",
+        "size": "medium",
+        "orientation": "horizontal"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled__size-medium__orientation-horizontal.png",
+      "contentBox": {
+        "width": 428,
+        "height": 64
+      }
+    },
+    {
+      "slug": "appearance-filled__size-small__orientation-vertical",
+      "variant": "Appearance=Filled, Size=Small, Orientation=Vertical",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled",
+        "size": "small",
+        "orientation": "vertical"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled__size-small__orientation-vertical.png",
+      "contentBox": {
+        "width": 461.8,
+        "height": 76
+      }
+    },
+    {
+      "slug": "appearance-filled__size-large__orientation-vertical",
+      "variant": "Appearance=Filled, Size=Large, Orientation=Vertical",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled",
+        "size": "large",
+        "orientation": "vertical"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled__size-large__orientation-vertical.png",
+      "contentBox": {
+        "width": 445.8,
+        "height": 92
+      }
+    },
+    {
+      "slug": "appearance-filled-alternative__size-medium__orientation-vertical",
+      "variant": "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled-alternative",
+        "size": "medium",
+        "orientation": "vertical"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled-alternative__size-medium__orientation-vertical.png",
+      "contentBox": {
+        "width": 453.8,
+        "height": 84
+      }
+    },
+    {
+      "slug": "appearance-outline__size-medium__orientation-vertical",
+      "variant": "Appearance=Outline, Size=Medium, Orientation=Vertical",
+      "kind": "base",
+      "subst": {
+        "appearance": "outline",
+        "size": "medium",
+        "orientation": "vertical"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-outline__size-medium__orientation-vertical.png",
+      "contentBox": {
+        "width": 453.8,
+        "height": 84
+      }
+    },
+    {
+      "slug": "appearance-subtle__size-medium__orientation-vertical",
+      "variant": "Appearance=Subtle, Size=Medium, Orientation=Vertical",
+      "kind": "base",
+      "subst": {
+        "appearance": "subtle",
+        "size": "medium",
+        "orientation": "vertical"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-subtle__size-medium__orientation-vertical.png",
+      "contentBox": {
+        "width": 453.8,
+        "height": 84
+      }
+    },
+    {
+      "slug": "appearance-filled__size-medium__orientation-vertical__state-disabled",
+      "variant": "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+      "kind": "state",
+      "state": "disabled",
+      "subst": {
+        "appearance": "filled",
+        "size": "medium",
+        "orientation": "vertical"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "refused",
+      "error": "state \"disabled\" drives boolean prop \"disabled\", which fluent.card does not declare"
+    },
+    {
+      "slug": "appearance-filled__size-medium__orientation-vertical__state-focus-visible",
+      "variant": "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "subst": {
+        "appearance": "filled",
+        "size": "medium",
+        "orientation": "vertical"
+      },
+      "bools": {},
+      "interaction": "focus-visible",
+      "status": "rendered",
+      "png": "code-appearance-filled__size-medium__orientation-vertical__state-focus-visible.png",
+      "contentBox": {
+        "width": 453.8,
+        "height": 84
+      }
+    },
+    {
+      "slug": "appearance-filled__size-medium__orientation-vertical__state-active",
+      "variant": "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Active",
+      "kind": "state",
+      "state": "active",
+      "subst": {
+        "appearance": "filled",
+        "size": "medium",
+        "orientation": "vertical"
+      },
+      "bools": {},
+      "interaction": "active",
+      "status": "rendered",
+      "png": "code-appearance-filled__size-medium__orientation-vertical__state-active.png",
+      "contentBox": {
+        "width": 453.8,
+        "height": 84
+      }
+    },
+    {
+      "slug": "appearance-filled__size-medium__orientation-vertical__state-hover",
+      "variant": "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Hover",
+      "kind": "state",
+      "state": "hover",
+      "subst": {
+        "appearance": "filled",
+        "size": "medium",
+        "orientation": "vertical"
+      },
+      "bools": {},
+      "interaction": "hover",
+      "status": "rendered",
+      "png": "code-appearance-filled__size-medium__orientation-vertical__state-hover.png",
+      "contentBox": {
+        "width": 453.8,
+        "height": 84
+      }
+    }
+  ],
+  "rendered": 10,
+  "refused": 1,
+  "unavailable": null
+}

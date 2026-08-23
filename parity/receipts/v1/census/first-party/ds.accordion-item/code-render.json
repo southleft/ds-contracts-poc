@@ -1,0 +1,111 @@
+{
+  "id": "ds.accordion-item",
+  "name": "AccordionItem",
+  "library": "first-party",
+  "contractPath": "contracts/accordion-item.contract.json",
+  "contractVersion": "1.1.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "tokens/ (layered primitives + brand + semantic + light/dark) via src/styles/tokens.css",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 2,
+      "sampled": 2,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "state",
+        "type": "enum",
+        "default": "closed"
+      },
+      {
+        "name": "title",
+        "type": "text",
+        "default": "Section title"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "trigger",
+      "chevron",
+      "titleText",
+      "contentArea"
+    ],
+    "contentSlots": [
+      {
+        "part": "titleText",
+        "prop": "title"
+      }
+    ],
+    "tokenRefs": [
+      "border-width.100",
+      "color.border.subtle",
+      "color.surface.foreground",
+      "color.surface.raised",
+      "color.text.secondary",
+      "font.control.family",
+      "font.control.size.sm",
+      "font.control.weight",
+      "radius.card",
+      "size.card.width",
+      "space.gap.sm",
+      "space.inset-x.sm",
+      "space.inset-y.md",
+      "state"
+    ],
+    "icons": [
+      "{state}"
+    ],
+    "events": [
+      "toggle"
+    ]
+  },
+  "variants": [
+    {
+      "slug": "state-closed",
+      "variant": "State=Closed",
+      "kind": "base",
+      "subst": {
+        "state": "closed"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-state-closed.png",
+      "contentBox": {
+        "width": 127.06,
+        "height": 35
+      }
+    },
+    {
+      "slug": "state-open",
+      "variant": "State=Open",
+      "kind": "base",
+      "subst": {
+        "state": "open"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-state-open.png",
+      "contentBox": {
+        "width": 127.06,
+        "height": 51
+      }
+    }
+  ],
+  "rendered": 2,
+  "refused": 0,
+  "unavailable": null
+}

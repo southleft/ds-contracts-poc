@@ -1,0 +1,102 @@
+{
+  "id": "ds.tab",
+  "name": "Tab",
+  "library": "first-party",
+  "contractPath": "contracts/tab.contract.json",
+  "contractVersion": "1.0.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "tokens/ (layered primitives + brand + semantic + light/dark) via src/styles/tokens.css",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 2,
+      "sampled": 2,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "state",
+        "type": "enum",
+        "default": "default"
+      },
+      {
+        "name": "label",
+        "type": "text",
+        "default": "Tab"
+      }
+    ],
+    "states": [
+      "hover"
+    ],
+    "parts": [
+      "root",
+      "iconSlot",
+      "labelText",
+      "endContent"
+    ],
+    "contentSlots": [
+      {
+        "part": "labelText",
+        "prop": "label"
+      }
+    ],
+    "tokenRefs": [
+      "color.surface.background",
+      "color.surface.sunken",
+      "font.control.family",
+      "font.control.size.sm",
+      "radius.100",
+      "space.inset-x.sm",
+      "space.inset-y.md",
+      "space.inset-y.sm"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "state-default",
+      "variant": "State=Default",
+      "kind": "base",
+      "subst": {
+        "state": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-state-default.png",
+      "contentBox": {
+        "width": 56.73,
+        "height": 33
+      }
+    },
+    {
+      "slug": "state-selected",
+      "variant": "State=Selected",
+      "kind": "base",
+      "subst": {
+        "state": "selected"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-state-selected.png",
+      "contentBox": {
+        "width": 57,
+        "height": 33
+      }
+    }
+  ],
+  "rendered": 2,
+  "refused": 0,
+  "unavailable": null
+}

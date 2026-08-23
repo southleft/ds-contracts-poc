@@ -1,0 +1,97 @@
+{
+  "id": "mui.linear-progress",
+  "name": "LinearProgress",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/linear-progress.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 2,
+      "sampled": 2,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "indeterminate"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "linearprogress-bar",
+      "linearprogress-bar-2"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.linear-progress.linearprogress-bar-2.background-color",
+      "imported.linear-progress.linearprogress-bar-2.right",
+      "imported.linear-progress.linearprogress-bar.background-color",
+      "imported.linear-progress.linearprogress-bar.left.determinate",
+      "imported.linear-progress.linearprogress-bar.left.indeterminate",
+      "imported.linear-progress.linearprogress-bar.right.determinate",
+      "imported.linear-progress.linearprogress-bar.right.indeterminate",
+      "imported.linear-progress.linearprogress-bar.translate-x.determinate",
+      "imported.linear-progress.linearprogress-bar.translate-x.indeterminate",
+      "imported.linear-progress.linearprogress-bar.width.determinate",
+      "imported.linear-progress.linearprogress-bar.width.indeterminate",
+      "imported.linear-progress.root.background-color",
+      "imported.linear-progress.root.width",
+      "imported.linear-progress.root.z-index",
+      "imported.shared.size-0",
+      "imported.shared.size-4"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-indeterminate",
+      "variant": "Variant=Indeterminate",
+      "kind": "base",
+      "subst": {
+        "variant": "indeterminate"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-indeterminate.png",
+      "contentBox": {
+        "width": 388.8,
+        "height": 4
+      }
+    },
+    {
+      "slug": "variant-determinate",
+      "variant": "Variant=Determinate",
+      "kind": "base",
+      "subst": {
+        "variant": "determinate"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-determinate.png",
+      "contentBox": {
+        "width": 288,
+        "height": 4
+      }
+    }
+  ],
+  "rendered": 2,
+  "refused": 0,
+  "unavailable": null
+}

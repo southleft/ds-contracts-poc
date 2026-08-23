@@ -1,0 +1,232 @@
+{
+  "id": "altitude.button",
+  "name": "Button",
+  "library": "altitude",
+  "contractPath": "examples/altitude/contracts/button.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/altitude/figma/altitude.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 12,
+      "sampled": 6,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": null
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Button"
+      }
+    ],
+    "states": [
+      "focus-visible",
+      "hover"
+    ],
+    "parts": [
+      "root",
+      "label"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.button.label.font-weight",
+      "imported.button.label.line-height",
+      "imported.button.root.background-color-state-hover.unset",
+      "imported.button.root.background-color.bare",
+      "imported.button.root.background-color.danger",
+      "imported.button.root.background-color.secondary",
+      "imported.button.root.background-color.tertiary",
+      "imported.button.root.background-color.unset",
+      "imported.button.root.border-bottom-color-state-hover.unset",
+      "imported.button.root.border-bottom-color.bare",
+      "imported.button.root.border-bottom-color.danger",
+      "imported.button.root.border-bottom-color.secondary",
+      "imported.button.root.border-bottom-color.tertiary",
+      "imported.button.root.border-bottom-color.unset",
+      "imported.button.root.border-bottom-width.bare",
+      "imported.button.root.border-bottom-width.danger",
+      "imported.button.root.border-bottom-width.secondary",
+      "imported.button.root.border-bottom-width.tertiary",
+      "imported.button.root.border-bottom-width.unset",
+      "imported.button.root.border-left-color-state-hover.unset",
+      "imported.button.root.border-left-color.bare",
+      "imported.button.root.border-left-color.danger",
+      "imported.button.root.border-left-color.secondary",
+      "imported.button.root.border-left-color.tertiary",
+      "imported.button.root.border-left-color.unset",
+      "imported.button.root.border-left-width.bare",
+      "imported.button.root.border-left-width.danger",
+      "imported.button.root.border-left-width.secondary",
+      "imported.button.root.border-left-width.tertiary",
+      "imported.button.root.border-left-width.unset",
+      "imported.button.root.border-right-color-state-hover.unset",
+      "imported.button.root.border-right-color.bare",
+      "imported.button.root.border-right-color.danger",
+      "imported.button.root.border-right-color.secondary",
+      "imported.button.root.border-right-color.tertiary",
+      "imported.button.root.border-right-color.unset",
+      "imported.button.root.border-right-width.bare",
+      "imported.button.root.border-right-width.danger",
+      "imported.button.root.border-right-width.secondary",
+      "imported.button.root.border-right-width.tertiary",
+      "imported.button.root.border-right-width.unset",
+      "imported.button.root.border-top-color-state-hover.unset",
+      "imported.button.root.border-top-color.bare",
+      "imported.button.root.border-top-color.danger",
+      "imported.button.root.border-top-color.secondary",
+      "imported.button.root.border-top-color.tertiary",
+      "imported.button.root.border-top-color.unset",
+      "imported.button.root.border-top-width.bare",
+      "imported.button.root.border-top-width.danger",
+      "imported.button.root.border-top-width.secondary",
+      "imported.button.root.border-top-width.tertiary",
+      "imported.button.root.border-top-width.unset",
+      "imported.button.root.color-state-hover.unset",
+      "imported.button.root.color.bare",
+      "imported.button.root.color.danger",
+      "imported.button.root.color.secondary",
+      "imported.button.root.color.tertiary",
+      "imported.button.root.color.unset",
+      "imported.button.root.font-weight",
+      "imported.button.root.line-height",
+      "imported.button.root.outline-color-state-focus-visible",
+      "imported.button.root.outline-color-state-hover.unset",
+      "imported.button.root.outline-color.bare",
+      "imported.button.root.outline-color.danger",
+      "imported.button.root.outline-color.secondary",
+      "imported.button.root.outline-color.tertiary",
+      "imported.button.root.outline-color.unset",
+      "imported.button.root.outline-offset-state-focus-visible",
+      "imported.button.root.outline-width-state-focus-visible",
+      "imported.shared.size-0",
+      "imported.shared.size-16",
+      "imported.shared.size-4",
+      "imported.shared.size-8"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-secondary",
+      "variant": "Variant=Secondary",
+      "kind": "base",
+      "subst": {
+        "variant": "secondary"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-secondary.png",
+      "contentBox": {
+        "width": 83.53,
+        "height": 40
+      }
+    },
+    {
+      "slug": "variant-tertiary",
+      "variant": "Variant=Tertiary",
+      "kind": "base",
+      "subst": {
+        "variant": "tertiary"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-tertiary.png",
+      "contentBox": {
+        "width": 83.53,
+        "height": 40
+      }
+    },
+    {
+      "slug": "variant-bare",
+      "variant": "Variant=Bare",
+      "kind": "base",
+      "subst": {
+        "variant": "bare"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-bare.png",
+      "contentBox": {
+        "width": 83.53,
+        "height": 40
+      }
+    },
+    {
+      "slug": "variant-danger",
+      "variant": "Variant=Danger",
+      "kind": "base",
+      "subst": {
+        "variant": "danger"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-danger.png",
+      "contentBox": {
+        "width": 83.53,
+        "height": 40
+      }
+    },
+    {
+      "slug": "variant-secondary__state-focus-visible",
+      "variant": "Variant=Secondary, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "subst": {
+        "variant": "secondary"
+      },
+      "bools": {},
+      "interaction": "focus-visible",
+      "status": "rendered",
+      "png": "code-variant-secondary__state-focus-visible.png",
+      "contentBox": {
+        "width": 83.53,
+        "height": 40
+      }
+    },
+    {
+      "slug": "variant-secondary__state-hover",
+      "variant": "Variant=Secondary, State=Hover",
+      "kind": "state",
+      "state": "hover",
+      "subst": {
+        "variant": "secondary"
+      },
+      "bools": {},
+      "interaction": "hover",
+      "status": "rendered",
+      "png": "code-variant-secondary__state-hover.png",
+      "contentBox": {
+        "width": 83.53,
+        "height": 40
+      }
+    }
+  ],
+  "rendered": 6,
+  "refused": 0,
+  "unavailable": null
+}

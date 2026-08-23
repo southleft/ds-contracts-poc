@@ -1,0 +1,313 @@
+{
+  "id": "astryx.badge",
+  "name": "Badge",
+  "library": "astryx",
+  "contractPath": "examples/astryx/contracts/badge.contract.json",
+  "contractVersion": "0.3.1",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/astryx/figma/astryx.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 14,
+      "sampled": 14,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "neutral"
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "New"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "color-text-primary",
+      "font-size-sm",
+      "imported.badge.root.background-color.blue",
+      "imported.badge.root.background-color.cyan",
+      "imported.badge.root.background-color.error",
+      "imported.badge.root.background-color.green",
+      "imported.badge.root.background-color.info",
+      "imported.badge.root.background-color.neutral",
+      "imported.badge.root.background-color.orange",
+      "imported.badge.root.background-color.pink",
+      "imported.badge.root.background-color.purple",
+      "imported.badge.root.background-color.red",
+      "imported.badge.root.background-color.success",
+      "imported.badge.root.background-color.teal",
+      "imported.badge.root.background-color.warning",
+      "imported.badge.root.background-color.yellow",
+      "imported.badge.root.color.blue",
+      "imported.badge.root.color.cyan",
+      "imported.badge.root.color.error",
+      "imported.badge.root.color.green",
+      "imported.badge.root.color.info",
+      "imported.badge.root.color.orange",
+      "imported.badge.root.color.pink",
+      "imported.badge.root.color.purple",
+      "imported.badge.root.color.red",
+      "imported.badge.root.color.success",
+      "imported.badge.root.color.teal",
+      "imported.badge.root.color.warning",
+      "imported.badge.root.color.yellow",
+      "imported.badge.root.column-gap",
+      "imported.badge.root.font-weight",
+      "imported.badge.root.line-height",
+      "imported.badge.root.padding-left",
+      "imported.badge.root.padding-right",
+      "imported.badge.root.row-gap",
+      "imported.shared.size-9999",
+      "spacing-0"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-neutral",
+      "variant": "Variant=Neutral",
+      "kind": "base",
+      "subst": {
+        "variant": "neutral"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-neutral.png",
+      "contentBox": {
+        "width": 40.02,
+        "height": 20
+      }
+    },
+    {
+      "slug": "variant-info",
+      "variant": "Variant=Info",
+      "kind": "base",
+      "subst": {
+        "variant": "info"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-info.png",
+      "contentBox": {
+        "width": 40.02,
+        "height": 20
+      }
+    },
+    {
+      "slug": "variant-success",
+      "variant": "Variant=Success",
+      "kind": "base",
+      "subst": {
+        "variant": "success"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-success.png",
+      "contentBox": {
+        "width": 40.02,
+        "height": 20
+      }
+    },
+    {
+      "slug": "variant-warning",
+      "variant": "Variant=Warning",
+      "kind": "base",
+      "subst": {
+        "variant": "warning"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-warning.png",
+      "contentBox": {
+        "width": 40.02,
+        "height": 20
+      }
+    },
+    {
+      "slug": "variant-error",
+      "variant": "Variant=Error",
+      "kind": "base",
+      "subst": {
+        "variant": "error"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-error.png",
+      "contentBox": {
+        "width": 40.02,
+        "height": 20
+      }
+    },
+    {
+      "slug": "variant-blue",
+      "variant": "Variant=Blue",
+      "kind": "base",
+      "subst": {
+        "variant": "blue"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-blue.png",
+      "contentBox": {
+        "width": 40.02,
+        "height": 20
+      }
+    },
+    {
+      "slug": "variant-cyan",
+      "variant": "Variant=Cyan",
+      "kind": "base",
+      "subst": {
+        "variant": "cyan"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-cyan.png",
+      "contentBox": {
+        "width": 40.02,
+        "height": 20
+      }
+    },
+    {
+      "slug": "variant-green",
+      "variant": "Variant=Green",
+      "kind": "base",
+      "subst": {
+        "variant": "green"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-green.png",
+      "contentBox": {
+        "width": 40.02,
+        "height": 20
+      }
+    },
+    {
+      "slug": "variant-orange",
+      "variant": "Variant=Orange",
+      "kind": "base",
+      "subst": {
+        "variant": "orange"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-orange.png",
+      "contentBox": {
+        "width": 40.02,
+        "height": 20
+      }
+    },
+    {
+      "slug": "variant-pink",
+      "variant": "Variant=Pink",
+      "kind": "base",
+      "subst": {
+        "variant": "pink"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-pink.png",
+      "contentBox": {
+        "width": 40.02,
+        "height": 20
+      }
+    },
+    {
+      "slug": "variant-purple",
+      "variant": "Variant=Purple",
+      "kind": "base",
+      "subst": {
+        "variant": "purple"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-purple.png",
+      "contentBox": {
+        "width": 40.02,
+        "height": 20
+      }
+    },
+    {
+      "slug": "variant-red",
+      "variant": "Variant=Red",
+      "kind": "base",
+      "subst": {
+        "variant": "red"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-red.png",
+      "contentBox": {
+        "width": 40.02,
+        "height": 20
+      }
+    },
+    {
+      "slug": "variant-teal",
+      "variant": "Variant=Teal",
+      "kind": "base",
+      "subst": {
+        "variant": "teal"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-teal.png",
+      "contentBox": {
+        "width": 40.02,
+        "height": 20
+      }
+    },
+    {
+      "slug": "variant-yellow",
+      "variant": "Variant=Yellow",
+      "kind": "base",
+      "subst": {
+        "variant": "yellow"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-yellow.png",
+      "contentBox": {
+        "width": 40.02,
+        "height": 20
+      }
+    }
+  ],
+  "rendered": 14,
+  "refused": 0,
+  "unavailable": null
+}

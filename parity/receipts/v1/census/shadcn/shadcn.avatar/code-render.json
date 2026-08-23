@@ -1,0 +1,114 @@
+{
+  "id": "shadcn.avatar",
+  "name": "Avatar",
+  "library": "shadcn",
+  "contractPath": "examples/shadcn/contracts/avatar.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/shadcn/figma/shadcn.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 3,
+      "sampled": 3,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "default"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "label"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.avatar.label.background-color",
+      "imported.avatar.label.color",
+      "imported.avatar.label.font-size.default",
+      "imported.avatar.label.font-size.lg",
+      "imported.avatar.label.font-size.sm",
+      "imported.avatar.label.font-weight",
+      "imported.avatar.label.line-height.default",
+      "imported.avatar.label.line-height.lg",
+      "imported.avatar.label.line-height.sm",
+      "imported.avatar.root.flex-shrink",
+      "imported.avatar.root.height.default",
+      "imported.avatar.root.height.lg",
+      "imported.avatar.root.height.sm",
+      "imported.avatar.root.width.default",
+      "imported.avatar.root.width.lg",
+      "imported.avatar.root.width.sm",
+      "imported.shared.size-0",
+      "imported.shared.size-9999"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "size-default",
+      "variant": "Size=Default",
+      "kind": "base",
+      "subst": {
+        "size": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-default.png",
+      "contentBox": {
+        "width": 32,
+        "height": 32
+      }
+    },
+    {
+      "slug": "size-sm",
+      "variant": "Size=Sm",
+      "kind": "base",
+      "subst": {
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-sm.png",
+      "contentBox": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "slug": "size-lg",
+      "variant": "Size=Lg",
+      "kind": "base",
+      "subst": {
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-lg.png",
+      "contentBox": {
+        "width": 40,
+        "height": 40
+      }
+    }
+  ],
+  "rendered": 3,
+  "refused": 0,
+  "unavailable": null
+}

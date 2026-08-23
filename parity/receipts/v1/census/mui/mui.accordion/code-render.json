@@ -1,0 +1,174 @@
+{
+  "id": "mui.accordion",
+  "name": "Accordion",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/accordion.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 4,
+      "sampled": 3,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "elevation"
+      },
+      {
+        "name": "expanded",
+        "type": "enum",
+        "default": "collapsed"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "states": [
+      "disabled",
+      "hover",
+      "focus-visible",
+      "active"
+    ],
+    "parts": [
+      "root",
+      "accordion-heading",
+      "accordionsummary-gutters",
+      "label",
+      "collapse-root",
+      "collapse-vertical",
+      "collapse-vertical-2",
+      "accordion-region",
+      "label-2"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.accordion.accordion-region.width.elevation",
+      "imported.accordion.accordion-region.width.outlined",
+      "imported.accordion.accordionsummary-gutters.background-color",
+      "imported.accordion.accordionsummary-gutters.background-color-state-focus-visible",
+      "imported.accordion.accordionsummary-gutters.height.collapsed",
+      "imported.accordion.accordionsummary-gutters.height.expanded",
+      "imported.accordion.accordionsummary-gutters.min-height.collapsed",
+      "imported.accordion.accordionsummary-gutters.min-height.expanded",
+      "imported.accordion.accordionsummary-gutters.width.elevation",
+      "imported.accordion.accordionsummary-gutters.width.outlined",
+      "imported.accordion.collapse-root.height.collapsed",
+      "imported.accordion.collapse-root.height.expanded",
+      "imported.accordion.collapse-root.width.elevation",
+      "imported.accordion.collapse-root.width.outlined",
+      "imported.accordion.collapse-vertical-2.width.elevation",
+      "imported.accordion.collapse-vertical-2.width.outlined",
+      "imported.accordion.collapse-vertical.width.elevation",
+      "imported.accordion.collapse-vertical.width.outlined",
+      "imported.accordion.label-2.font-weight",
+      "imported.accordion.label-2.padding-top",
+      "imported.accordion.label.flex-grow",
+      "imported.accordion.label.font-size",
+      "imported.accordion.label.font-weight",
+      "imported.accordion.label.margin-bottom.collapsed",
+      "imported.accordion.label.margin-bottom.expanded",
+      "imported.accordion.label.margin-top.collapsed",
+      "imported.accordion.label.margin-top.expanded",
+      "imported.accordion.root.background-color",
+      "imported.accordion.root.background-color-state-disabled",
+      "imported.accordion.root.border-bottom-color.elevation",
+      "imported.accordion.root.border-bottom-color.outlined",
+      "imported.accordion.root.border-bottom-width.elevation",
+      "imported.accordion.root.border-bottom-width.outlined",
+      "imported.accordion.root.border-left-color.elevation",
+      "imported.accordion.root.border-left-color.outlined",
+      "imported.accordion.root.border-left-width.elevation",
+      "imported.accordion.root.border-left-width.outlined",
+      "imported.accordion.root.border-right-color.elevation",
+      "imported.accordion.root.border-right-color.outlined",
+      "imported.accordion.root.border-right-width.elevation",
+      "imported.accordion.root.border-right-width.outlined",
+      "imported.accordion.root.border-top-color.elevation",
+      "imported.accordion.root.border-top-color.outlined",
+      "imported.accordion.root.border-top-width.elevation",
+      "imported.accordion.root.border-top-width.outlined",
+      "imported.accordion.root.box-shadow.elevation",
+      "imported.accordion.root.box-shadow.outlined",
+      "imported.accordion.root.width",
+      "imported.shared.color-000000de",
+      "imported.shared.size-0",
+      "imported.shared.size-16",
+      "imported.shared.size-4",
+      "imported.shared.size-60"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-elevation__expanded-collapsed",
+      "variant": "Variant=Elevation, Expanded=Collapsed",
+      "kind": "base",
+      "subst": {
+        "variant": "elevation",
+        "expanded": "collapsed"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-elevation__expanded-collapsed.png",
+      "contentBox": {
+        "width": 288,
+        "height": 108
+      }
+    },
+    {
+      "slug": "variant-elevation__expanded-expanded",
+      "variant": "Variant=Elevation, Expanded=Expanded",
+      "kind": "base",
+      "subst": {
+        "variant": "elevation",
+        "expanded": "expanded"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-elevation__expanded-expanded.png",
+      "contentBox": {
+        "width": 288,
+        "height": 124
+      }
+    },
+    {
+      "slug": "variant-outlined__expanded-collapsed",
+      "variant": "Variant=Outlined, Expanded=Collapsed",
+      "kind": "base",
+      "subst": {
+        "variant": "outlined",
+        "expanded": "collapsed"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-outlined__expanded-collapsed.png",
+      "contentBox": {
+        "width": 288,
+        "height": 108
+      }
+    }
+  ],
+  "rendered": 3,
+  "refused": 0,
+  "unavailable": null
+}

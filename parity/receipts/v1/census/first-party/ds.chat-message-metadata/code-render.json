@@ -1,0 +1,147 @@
+{
+  "id": "ds.chat-message-metadata",
+  "name": "ChatMessageMetadata",
+  "library": "first-party",
+  "contractPath": "contracts/chat-message-metadata.contract.json",
+  "contractVersion": "1.0.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "tokens/ (layered primitives + brand + semantic + light/dark) via src/styles/tokens.css",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 5,
+      "sampled": 5,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "status",
+        "type": "enum",
+        "default": "sent"
+      },
+      {
+        "name": "timestamp",
+        "type": "text",
+        "default": "2:14 PM"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "statusIcon",
+      "timestampText",
+      "footer"
+    ],
+    "contentSlots": [
+      {
+        "part": "timestampText",
+        "prop": "timestamp"
+      }
+    ],
+    "tokenRefs": [
+      "color.text.secondary",
+      "font.badge.size",
+      "font.control.family",
+      "space.inset-y.sm",
+      "status"
+    ],
+    "icons": [
+      "{status}"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "status-sent",
+      "variant": "Status=Sent",
+      "kind": "base",
+      "subst": {
+        "status": "sent"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-status-sent.png",
+      "contentBox": {
+        "width": 65.3,
+        "height": 15
+      }
+    },
+    {
+      "slug": "status-sending",
+      "variant": "Status=Sending",
+      "kind": "base",
+      "subst": {
+        "status": "sending"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-status-sending.png",
+      "contentBox": {
+        "width": 65.3,
+        "height": 15
+      }
+    },
+    {
+      "slug": "status-delivered",
+      "variant": "Status=Delivered",
+      "kind": "base",
+      "subst": {
+        "status": "delivered"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-status-delivered.png",
+      "contentBox": {
+        "width": 65.3,
+        "height": 15
+      }
+    },
+    {
+      "slug": "status-read",
+      "variant": "Status=Read",
+      "kind": "base",
+      "subst": {
+        "status": "read"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-status-read.png",
+      "contentBox": {
+        "width": 65.3,
+        "height": 15
+      }
+    },
+    {
+      "slug": "status-error",
+      "variant": "Status=Error",
+      "kind": "base",
+      "subst": {
+        "status": "error"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-status-error.png",
+      "contentBox": {
+        "width": 65.3,
+        "height": 15
+      }
+    }
+  ],
+  "rendered": 5,
+  "refused": 0,
+  "unavailable": null
+}

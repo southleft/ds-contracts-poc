@@ -1,0 +1,441 @@
+{
+  "id": "shadcn.button",
+  "name": "Button",
+  "library": "shadcn",
+  "contractPath": "examples/shadcn/contracts/button.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/shadcn/figma/shadcn.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 72,
+      "sampled": 17,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "default"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "default"
+      },
+      {
+        "name": "asChild",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Button"
+      }
+    ],
+    "states": [
+      "active",
+      "disabled",
+      "focus-visible",
+      "hover"
+    ],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [
+      {
+        "part": "root",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.button.root.background-color.default",
+      "imported.button.root.background-color.destructive",
+      "imported.button.root.background-color.ghost",
+      "imported.button.root.background-color.link",
+      "imported.button.root.background-color.outline",
+      "imported.button.root.background-color.secondary",
+      "imported.button.root.border-bottom-color.default",
+      "imported.button.root.border-bottom-color.destructive",
+      "imported.button.root.border-bottom-color.ghost",
+      "imported.button.root.border-bottom-color.link",
+      "imported.button.root.border-bottom-color.outline",
+      "imported.button.root.border-bottom-color.secondary",
+      "imported.button.root.border-left-color.default",
+      "imported.button.root.border-left-color.destructive",
+      "imported.button.root.border-left-color.ghost",
+      "imported.button.root.border-left-color.link",
+      "imported.button.root.border-left-color.outline",
+      "imported.button.root.border-left-color.secondary",
+      "imported.button.root.border-right-color.default",
+      "imported.button.root.border-right-color.destructive",
+      "imported.button.root.border-right-color.ghost",
+      "imported.button.root.border-right-color.link",
+      "imported.button.root.border-right-color.outline",
+      "imported.button.root.border-right-color.secondary",
+      "imported.button.root.border-top-color.default",
+      "imported.button.root.border-top-color.destructive",
+      "imported.button.root.border-top-color.ghost",
+      "imported.button.root.border-top-color.link",
+      "imported.button.root.border-top-color.outline",
+      "imported.button.root.border-top-color.secondary",
+      "imported.button.root.box-shadow.default",
+      "imported.button.root.box-shadow.destructive",
+      "imported.button.root.box-shadow.ghost",
+      "imported.button.root.box-shadow.link",
+      "imported.button.root.box-shadow.outline",
+      "imported.button.root.box-shadow.secondary",
+      "imported.button.root.color.default",
+      "imported.button.root.color.destructive",
+      "imported.button.root.color.ghost",
+      "imported.button.root.color.link",
+      "imported.button.root.color.outline",
+      "imported.button.root.color.secondary",
+      "imported.button.root.flex-shrink",
+      "imported.button.root.font-size.default",
+      "imported.button.root.font-size.icon",
+      "imported.button.root.font-size.icon-lg",
+      "imported.button.root.font-size.icon-sm",
+      "imported.button.root.font-size.icon-xs",
+      "imported.button.root.font-size.lg",
+      "imported.button.root.font-size.sm",
+      "imported.button.root.font-size.xs",
+      "imported.button.root.font-weight",
+      "imported.button.root.line-height.default",
+      "imported.button.root.line-height.icon",
+      "imported.button.root.line-height.icon-lg",
+      "imported.button.root.line-height.icon-sm",
+      "imported.button.root.line-height.icon-xs",
+      "imported.button.root.line-height.lg",
+      "imported.button.root.line-height.sm",
+      "imported.button.root.line-height.xs",
+      "imported.button.root.opacity-state-disabled",
+      "imported.button.root.outline-width-state-focus-visible",
+      "imported.button.root.padding-left.default",
+      "imported.button.root.padding-left.icon",
+      "imported.button.root.padding-left.icon-lg",
+      "imported.button.root.padding-left.icon-sm",
+      "imported.button.root.padding-left.icon-xs",
+      "imported.button.root.padding-left.lg",
+      "imported.button.root.padding-left.sm",
+      "imported.button.root.padding-left.xs",
+      "imported.button.root.padding-right.default",
+      "imported.button.root.padding-right.icon",
+      "imported.button.root.padding-right.icon-lg",
+      "imported.button.root.padding-right.icon-sm",
+      "imported.button.root.padding-right.icon-xs",
+      "imported.button.root.padding-right.lg",
+      "imported.button.root.padding-right.sm",
+      "imported.button.root.padding-right.xs",
+      "imported.shared.size-1",
+      "imported.shared.size-8"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-default__size-default",
+      "variant": "Variant=Default, Size=Default",
+      "kind": "base",
+      "subst": {
+        "variant": "default",
+        "size": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-default__size-default.png",
+      "contentBox": {
+        "width": 62.48,
+        "height": 24
+      }
+    },
+    {
+      "slug": "variant-default__size-xs",
+      "variant": "Variant=Default, Size=Xs",
+      "kind": "base",
+      "subst": {
+        "variant": "default",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-default__size-xs.png",
+      "contentBox": {
+        "width": 52.7,
+        "height": 20
+      }
+    },
+    {
+      "slug": "variant-default__size-sm",
+      "variant": "Variant=Default, Size=Sm",
+      "kind": "base",
+      "subst": {
+        "variant": "default",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-default__size-sm.png",
+      "contentBox": {
+        "width": 62.48,
+        "height": 24
+      }
+    },
+    {
+      "slug": "variant-default__size-lg",
+      "variant": "Variant=Default, Size=Lg",
+      "kind": "base",
+      "subst": {
+        "variant": "default",
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-default__size-lg.png",
+      "contentBox": {
+        "width": 62.48,
+        "height": 24
+      }
+    },
+    {
+      "slug": "variant-default__size-icon",
+      "variant": "Variant=Default, Size=Icon",
+      "kind": "base",
+      "subst": {
+        "variant": "default",
+        "size": "icon"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-default__size-icon.png",
+      "contentBox": {
+        "width": 42.48,
+        "height": 24
+      }
+    },
+    {
+      "slug": "variant-default__size-icon-xs",
+      "variant": "Variant=Default, Size=Icon Xs",
+      "kind": "base",
+      "subst": {
+        "variant": "default",
+        "size": "icon-xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-default__size-icon-xs.png",
+      "contentBox": {
+        "width": 42.48,
+        "height": 24
+      }
+    },
+    {
+      "slug": "variant-default__size-icon-sm",
+      "variant": "Variant=Default, Size=Icon Sm",
+      "kind": "base",
+      "subst": {
+        "variant": "default",
+        "size": "icon-sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-default__size-icon-sm.png",
+      "contentBox": {
+        "width": 42.48,
+        "height": 24
+      }
+    },
+    {
+      "slug": "variant-default__size-icon-lg",
+      "variant": "Variant=Default, Size=Icon Lg",
+      "kind": "base",
+      "subst": {
+        "variant": "default",
+        "size": "icon-lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-default__size-icon-lg.png",
+      "contentBox": {
+        "width": 42.48,
+        "height": 24
+      }
+    },
+    {
+      "slug": "variant-outline__size-default",
+      "variant": "Variant=Outline, Size=Default",
+      "kind": "base",
+      "subst": {
+        "variant": "outline",
+        "size": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-outline__size-default.png",
+      "contentBox": {
+        "width": 62.48,
+        "height": 24
+      }
+    },
+    {
+      "slug": "variant-secondary__size-default",
+      "variant": "Variant=Secondary, Size=Default",
+      "kind": "base",
+      "subst": {
+        "variant": "secondary",
+        "size": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-secondary__size-default.png",
+      "contentBox": {
+        "width": 62.48,
+        "height": 24
+      }
+    },
+    {
+      "slug": "variant-ghost__size-default",
+      "variant": "Variant=Ghost, Size=Default",
+      "kind": "base",
+      "subst": {
+        "variant": "ghost",
+        "size": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-ghost__size-default.png",
+      "contentBox": {
+        "width": 62.48,
+        "height": 24
+      }
+    },
+    {
+      "slug": "variant-destructive__size-default",
+      "variant": "Variant=Destructive, Size=Default",
+      "kind": "base",
+      "subst": {
+        "variant": "destructive",
+        "size": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-destructive__size-default.png",
+      "contentBox": {
+        "width": 62.48,
+        "height": 24
+      }
+    },
+    {
+      "slug": "variant-link__size-default",
+      "variant": "Variant=Link, Size=Default",
+      "kind": "base",
+      "subst": {
+        "variant": "link",
+        "size": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-link__size-default.png",
+      "contentBox": {
+        "width": 62.48,
+        "height": 24
+      }
+    },
+    {
+      "slug": "variant-default__size-default__state-active",
+      "variant": "Variant=Default, Size=Default, State=Active",
+      "kind": "state",
+      "state": "active",
+      "subst": {
+        "variant": "default",
+        "size": "default"
+      },
+      "bools": {},
+      "interaction": "active",
+      "status": "rendered",
+      "png": "code-variant-default__size-default__state-active.png",
+      "contentBox": {
+        "width": 62.48,
+        "height": 25
+      }
+    },
+    {
+      "slug": "variant-default__size-default__state-disabled",
+      "variant": "Variant=Default, Size=Default, State=Disabled",
+      "kind": "state",
+      "state": "disabled",
+      "subst": {
+        "variant": "default",
+        "size": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "refused",
+      "error": "state \"disabled\" drives boolean prop \"disabled\", which shadcn.button does not declare"
+    },
+    {
+      "slug": "variant-default__size-default__state-focus-visible",
+      "variant": "Variant=Default, Size=Default, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "subst": {
+        "variant": "default",
+        "size": "default"
+      },
+      "bools": {},
+      "interaction": "focus-visible",
+      "status": "rendered",
+      "png": "code-variant-default__size-default__state-focus-visible.png",
+      "contentBox": {
+        "width": 62.48,
+        "height": 24
+      }
+    },
+    {
+      "slug": "variant-default__size-default__state-hover",
+      "variant": "Variant=Default, Size=Default, State=Hover",
+      "kind": "state",
+      "state": "hover",
+      "subst": {
+        "variant": "default",
+        "size": "default"
+      },
+      "bools": {},
+      "interaction": "hover",
+      "status": "rendered",
+      "png": "code-variant-default__size-default__state-hover.png",
+      "contentBox": {
+        "width": 62.48,
+        "height": 24
+      }
+    }
+  ],
+  "rendered": 16,
+  "refused": 1,
+  "unavailable": null
+}

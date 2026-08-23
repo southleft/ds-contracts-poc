@@ -1,0 +1,315 @@
+{
+  "id": "fluent.checkbox",
+  "name": "Checkbox",
+  "library": "fluent",
+  "contractPath": "examples/fluent/contracts/checkbox.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/fluent/figma/fluent.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 24,
+      "sampled": 9,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "checked",
+        "type": "enum",
+        "default": "unchecked"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "medium"
+      },
+      {
+        "name": "shape",
+        "type": "enum",
+        "default": "square"
+      }
+    ],
+    "states": [
+      "disabled",
+      "focus-visible",
+      "active",
+      "hover"
+    ],
+    "parts": [
+      "root",
+      "input",
+      "indicator",
+      "icon",
+      "part-1-0-0",
+      "label"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.checkbox.icon.font-size.large",
+      "imported.checkbox.icon.font-size.medium",
+      "imported.checkbox.indicator.background-color.checked",
+      "imported.checkbox.indicator.background-color.mixed",
+      "imported.checkbox.indicator.background-color.unchecked",
+      "imported.checkbox.indicator.border-bottom-color.checked",
+      "imported.checkbox.indicator.border-bottom-color.mixed",
+      "imported.checkbox.indicator.border-bottom-color.unchecked",
+      "imported.checkbox.indicator.border-bottom-left-radius.circular",
+      "imported.checkbox.indicator.border-bottom-left-radius.square",
+      "imported.checkbox.indicator.border-bottom-right-radius.circular",
+      "imported.checkbox.indicator.border-bottom-right-radius.square",
+      "imported.checkbox.indicator.border-left-color.checked",
+      "imported.checkbox.indicator.border-left-color.mixed",
+      "imported.checkbox.indicator.border-left-color.unchecked",
+      "imported.checkbox.indicator.border-right-color.checked",
+      "imported.checkbox.indicator.border-right-color.mixed",
+      "imported.checkbox.indicator.border-right-color.unchecked",
+      "imported.checkbox.indicator.border-top-color.checked",
+      "imported.checkbox.indicator.border-top-color.mixed",
+      "imported.checkbox.indicator.border-top-color.unchecked",
+      "imported.checkbox.indicator.border-top-left-radius.circular",
+      "imported.checkbox.indicator.border-top-left-radius.square",
+      "imported.checkbox.indicator.border-top-right-radius.circular",
+      "imported.checkbox.indicator.border-top-right-radius.square",
+      "imported.checkbox.indicator.color.checked",
+      "imported.checkbox.indicator.color.mixed",
+      "imported.checkbox.indicator.color.unchecked",
+      "imported.checkbox.indicator.fill.checked",
+      "imported.checkbox.indicator.fill.mixed",
+      "imported.checkbox.indicator.fill.unchecked",
+      "imported.checkbox.indicator.flex-shrink",
+      "imported.checkbox.indicator.font-size.large",
+      "imported.checkbox.indicator.font-size.medium",
+      "imported.checkbox.indicator.height.large",
+      "imported.checkbox.indicator.height.medium",
+      "imported.checkbox.indicator.width.large",
+      "imported.checkbox.indicator.width.medium",
+      "imported.checkbox.input.color",
+      "imported.checkbox.input.color-state-disabled",
+      "imported.checkbox.input.font-size",
+      "imported.checkbox.input.height.large",
+      "imported.checkbox.input.height.medium",
+      "imported.checkbox.input.opacity",
+      "imported.checkbox.input.outline-color",
+      "imported.checkbox.input.right",
+      "imported.checkbox.input.width.large",
+      "imported.checkbox.input.width.medium",
+      "imported.checkbox.label.color.checked",
+      "imported.checkbox.label.color.mixed",
+      "imported.checkbox.label.color.unchecked",
+      "imported.checkbox.label.font-size",
+      "imported.checkbox.label.font-weight",
+      "imported.checkbox.label.line-height",
+      "imported.checkbox.label.margin-bottom.large",
+      "imported.checkbox.label.margin-bottom.medium",
+      "imported.checkbox.label.margin-top.large",
+      "imported.checkbox.label.margin-top.medium",
+      "imported.checkbox.label.padding-left",
+      "imported.checkbox.part-1-0-0.font-size.large",
+      "imported.checkbox.part-1-0-0.font-size.medium",
+      "imported.checkbox.root.border-bottom-color.checked",
+      "imported.checkbox.root.border-bottom-color.mixed",
+      "imported.checkbox.root.border-bottom-color.unchecked",
+      "imported.checkbox.root.border-left-color.checked",
+      "imported.checkbox.root.border-left-color.mixed",
+      "imported.checkbox.root.border-left-color.unchecked",
+      "imported.checkbox.root.border-right-color.checked",
+      "imported.checkbox.root.border-right-color.mixed",
+      "imported.checkbox.root.border-right-color.unchecked",
+      "imported.checkbox.root.border-top-color.checked",
+      "imported.checkbox.root.border-top-color.mixed",
+      "imported.checkbox.root.border-top-color.unchecked",
+      "imported.checkbox.root.color.checked",
+      "imported.checkbox.root.color.mixed",
+      "imported.checkbox.root.color.unchecked",
+      "imported.checkbox.root.height.large",
+      "imported.checkbox.root.height.medium",
+      "imported.checkbox.root.width.large",
+      "imported.checkbox.root.width.medium",
+      "imported.shared.color-00000000",
+      "imported.shared.color-242424",
+      "imported.shared.color-bdbdbd",
+      "imported.shared.size-0",
+      "imported.shared.size-1",
+      "imported.shared.size-8"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "checked-unchecked__size-medium__shape-square",
+      "variant": "Checked=Unchecked, Size=Medium, Shape=Square",
+      "kind": "base",
+      "subst": {
+        "checked": "unchecked",
+        "size": "medium",
+        "shape": "square"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-checked-unchecked__size-medium__shape-square.png",
+      "contentBox": {
+        "width": 106.27,
+        "height": 36
+      }
+    },
+    {
+      "slug": "checked-unchecked__size-medium__shape-circular",
+      "variant": "Checked=Unchecked, Size=Medium, Shape=Circular",
+      "kind": "base",
+      "subst": {
+        "checked": "unchecked",
+        "size": "medium",
+        "shape": "circular"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-checked-unchecked__size-medium__shape-circular.png",
+      "contentBox": {
+        "width": 106.27,
+        "height": 36
+      }
+    },
+    {
+      "slug": "checked-unchecked__size-large__shape-square",
+      "variant": "Checked=Unchecked, Size=Large, Shape=Square",
+      "kind": "base",
+      "subst": {
+        "checked": "unchecked",
+        "size": "large",
+        "shape": "square"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-checked-unchecked__size-large__shape-square.png",
+      "contentBox": {
+        "width": 110.27,
+        "height": 36
+      }
+    },
+    {
+      "slug": "checked-checked__size-medium__shape-square",
+      "variant": "Checked=Checked, Size=Medium, Shape=Square",
+      "kind": "base",
+      "subst": {
+        "checked": "checked",
+        "size": "medium",
+        "shape": "square"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-checked-checked__size-medium__shape-square.png",
+      "contentBox": {
+        "width": 106.27,
+        "height": 36
+      }
+    },
+    {
+      "slug": "checked-mixed__size-medium__shape-square",
+      "variant": "Checked=Mixed, Size=Medium, Shape=Square",
+      "kind": "base",
+      "subst": {
+        "checked": "mixed",
+        "size": "medium",
+        "shape": "square"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-checked-mixed__size-medium__shape-square.png",
+      "contentBox": {
+        "width": 106.27,
+        "height": 36
+      }
+    },
+    {
+      "slug": "checked-unchecked__size-medium__shape-square__state-disabled",
+      "variant": "Checked=Unchecked, Size=Medium, Shape=Square, State=Disabled",
+      "kind": "state",
+      "state": "disabled",
+      "subst": {
+        "checked": "unchecked",
+        "size": "medium",
+        "shape": "square"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "refused",
+      "error": "state \"disabled\" drives boolean prop \"disabled\", which fluent.checkbox does not declare"
+    },
+    {
+      "slug": "checked-unchecked__size-medium__shape-square__state-focus-visible",
+      "variant": "Checked=Unchecked, Size=Medium, Shape=Square, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "subst": {
+        "checked": "unchecked",
+        "size": "medium",
+        "shape": "square"
+      },
+      "bools": {},
+      "interaction": "focus-visible",
+      "status": "rendered",
+      "png": "code-checked-unchecked__size-medium__shape-square__state-focus-visible.png",
+      "contentBox": {
+        "width": 106.27,
+        "height": 36
+      }
+    },
+    {
+      "slug": "checked-unchecked__size-medium__shape-square__state-active",
+      "variant": "Checked=Unchecked, Size=Medium, Shape=Square, State=Active",
+      "kind": "state",
+      "state": "active",
+      "subst": {
+        "checked": "unchecked",
+        "size": "medium",
+        "shape": "square"
+      },
+      "bools": {},
+      "interaction": "active",
+      "status": "rendered",
+      "png": "code-checked-unchecked__size-medium__shape-square__state-active.png",
+      "contentBox": {
+        "width": 106.27,
+        "height": 36
+      }
+    },
+    {
+      "slug": "checked-unchecked__size-medium__shape-square__state-hover",
+      "variant": "Checked=Unchecked, Size=Medium, Shape=Square, State=Hover",
+      "kind": "state",
+      "state": "hover",
+      "subst": {
+        "checked": "unchecked",
+        "size": "medium",
+        "shape": "square"
+      },
+      "bools": {},
+      "interaction": "hover",
+      "status": "rendered",
+      "png": "code-checked-unchecked__size-medium__shape-square__state-hover.png",
+      "contentBox": {
+        "width": 106.27,
+        "height": 36
+      }
+    }
+  ],
+  "rendered": 8,
+  "refused": 1,
+  "unavailable": null
+}

@@ -1,0 +1,303 @@
+{
+  "id": "mui.switch",
+  "name": "Switch",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/switch.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 28,
+      "sampled": 9,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "color",
+        "type": "enum",
+        "default": "primary"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "medium"
+      },
+      {
+        "name": "checked",
+        "type": "enum",
+        "default": "unchecked"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "states": [
+      "disabled",
+      "focus-visible",
+      "active",
+      "hover"
+    ],
+    "parts": [
+      "root",
+      "buttonbase-root",
+      "switch-input",
+      "switch-thumb",
+      "switch-track"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.shared.color-00000000",
+      "imported.shared.color-545454",
+      "imported.shared.num-0",
+      "imported.shared.size-0",
+      "imported.shared.size-1",
+      "imported.shared.size-7",
+      "imported.switch.buttonbase-root.border-bottom-left-radius.medium",
+      "imported.switch.buttonbase-root.border-bottom-left-radius.small",
+      "imported.switch.buttonbase-root.border-bottom-right-radius.medium",
+      "imported.switch.buttonbase-root.border-bottom-right-radius.small",
+      "imported.switch.buttonbase-root.border-top-left-radius.medium",
+      "imported.switch.buttonbase-root.border-top-left-radius.small",
+      "imported.switch.buttonbase-root.border-top-right-radius.medium",
+      "imported.switch.buttonbase-root.border-top-right-radius.small",
+      "imported.switch.buttonbase-root.height.medium",
+      "imported.switch.buttonbase-root.height.small",
+      "imported.switch.buttonbase-root.padding-bottom.medium",
+      "imported.switch.buttonbase-root.padding-bottom.small",
+      "imported.switch.buttonbase-root.padding-left.medium",
+      "imported.switch.buttonbase-root.padding-left.small",
+      "imported.switch.buttonbase-root.padding-right.medium",
+      "imported.switch.buttonbase-root.padding-right.small",
+      "imported.switch.buttonbase-root.padding-top.medium",
+      "imported.switch.buttonbase-root.padding-top.small",
+      "imported.switch.buttonbase-root.right.medium",
+      "imported.switch.buttonbase-root.right.small",
+      "imported.switch.buttonbase-root.width.medium",
+      "imported.switch.buttonbase-root.width.small",
+      "imported.switch.buttonbase-root.z-index",
+      "imported.switch.root.height.medium",
+      "imported.switch.root.height.small",
+      "imported.switch.root.padding-bottom.medium",
+      "imported.switch.root.padding-bottom.small",
+      "imported.switch.root.padding-left.medium",
+      "imported.switch.root.padding-left.small",
+      "imported.switch.root.padding-right.medium",
+      "imported.switch.root.padding-right.small",
+      "imported.switch.root.padding-top.medium",
+      "imported.switch.root.padding-top.small",
+      "imported.switch.root.width.medium",
+      "imported.switch.root.width.small",
+      "imported.switch.switch-input.font-size",
+      "imported.switch.switch-input.height.medium",
+      "imported.switch.switch-input.height.small",
+      "imported.switch.switch-input.left.medium",
+      "imported.switch.switch-input.left.small",
+      "imported.switch.switch-input.right.medium",
+      "imported.switch.switch-input.right.small",
+      "imported.switch.switch-input.width.medium",
+      "imported.switch.switch-input.width.small",
+      "imported.switch.switch-input.z-index",
+      "imported.switch.switch-thumb.border-bottom-left-radius.medium",
+      "imported.switch.switch-thumb.border-bottom-left-radius.small",
+      "imported.switch.switch-thumb.border-bottom-right-radius.medium",
+      "imported.switch.switch-thumb.border-bottom-right-radius.small",
+      "imported.switch.switch-thumb.border-top-left-radius.medium",
+      "imported.switch.switch-thumb.border-top-left-radius.small",
+      "imported.switch.switch-thumb.border-top-right-radius.medium",
+      "imported.switch.switch-thumb.border-top-right-radius.small",
+      "imported.switch.switch-thumb.box-shadow",
+      "imported.switch.switch-thumb.height.medium",
+      "imported.switch.switch-thumb.height.small",
+      "imported.switch.switch-thumb.width.medium",
+      "imported.switch.switch-thumb.width.small",
+      "imported.switch.switch-track.height.medium",
+      "imported.switch.switch-track.height.small",
+      "imported.switch.switch-track.opacity.checked",
+      "imported.switch.switch-track.opacity.unchecked",
+      "imported.switch.switch-track.width.medium",
+      "imported.switch.switch-track.width.small"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "color-primary__size-medium__checked-unchecked",
+      "variant": "Color=Primary, Size=Medium, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "color": "primary",
+        "size": "medium",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-primary__size-medium__checked-unchecked.png",
+      "contentBox": {
+        "width": 58,
+        "height": 38
+      }
+    },
+    {
+      "slug": "color-primary__size-medium__checked-checked",
+      "variant": "Color=Primary, Size=Medium, Checked=Checked",
+      "kind": "base",
+      "subst": {
+        "color": "primary",
+        "size": "medium",
+        "checked": "checked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-primary__size-medium__checked-checked.png",
+      "contentBox": {
+        "width": 58,
+        "height": 38
+      }
+    },
+    {
+      "slug": "color-primary__size-small__checked-unchecked",
+      "variant": "Color=Primary, Size=Small, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "color": "primary",
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-primary__size-small__checked-unchecked.png",
+      "contentBox": {
+        "width": 40,
+        "height": 24
+      }
+    },
+    {
+      "slug": "color-secondary__size-medium__checked-unchecked",
+      "variant": "Color=Secondary, Size=Medium, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "color": "secondary",
+        "size": "medium",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-secondary__size-medium__checked-unchecked.png",
+      "contentBox": {
+        "width": 58,
+        "height": 38
+      }
+    },
+    {
+      "slug": "color-error__size-medium__checked-unchecked",
+      "variant": "Color=Error, Size=Medium, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "color": "error",
+        "size": "medium",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-error__size-medium__checked-unchecked.png",
+      "contentBox": {
+        "width": 58,
+        "height": 38
+      }
+    },
+    {
+      "slug": "color-warning__size-medium__checked-unchecked",
+      "variant": "Color=Warning, Size=Medium, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "color": "warning",
+        "size": "medium",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-warning__size-medium__checked-unchecked.png",
+      "contentBox": {
+        "width": 58,
+        "height": 38
+      }
+    },
+    {
+      "slug": "color-info__size-medium__checked-unchecked",
+      "variant": "Color=Info, Size=Medium, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "color": "info",
+        "size": "medium",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-info__size-medium__checked-unchecked.png",
+      "contentBox": {
+        "width": 58,
+        "height": 38
+      }
+    },
+    {
+      "slug": "color-success__size-medium__checked-unchecked",
+      "variant": "Color=Success, Size=Medium, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "color": "success",
+        "size": "medium",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-success__size-medium__checked-unchecked.png",
+      "contentBox": {
+        "width": 58,
+        "height": 38
+      }
+    },
+    {
+      "slug": "color-default__size-medium__checked-unchecked",
+      "variant": "Color=Default, Size=Medium, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "color": "default",
+        "size": "medium",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-default__size-medium__checked-unchecked.png",
+      "contentBox": {
+        "width": 58,
+        "height": 38
+      }
+    }
+  ],
+  "rendered": 9,
+  "refused": 0,
+  "unavailable": null
+}

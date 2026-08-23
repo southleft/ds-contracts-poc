@@ -1,0 +1,631 @@
+{
+  "id": "polaris.text",
+  "name": "Text",
+  "library": "polaris",
+  "contractPath": "examples/polaris/contracts/text.contract.json",
+  "contractVersion": "0.4.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/polaris/figma/polaris.bundle.json tokenSet (flat base + minted)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 23232,
+      "sampled": 24,
+      "dropped": 14
+    },
+    "axisCoverageComplete": false,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "alignment",
+        "type": "enum",
+        "default": null
+      },
+      {
+        "name": "as",
+        "type": "enum",
+        "default": null
+      },
+      {
+        "name": "breakWord",
+        "type": "boolean",
+        "default": null
+      },
+      {
+        "name": "tone",
+        "type": "enum",
+        "default": null
+      },
+      {
+        "name": "fontWeight",
+        "type": "enum",
+        "default": null
+      },
+      {
+        "name": "numeric",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "truncate",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": null
+      },
+      {
+        "name": "visuallyHidden",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Online store dashboard"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [
+      {
+        "part": "root",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.text.root.color.none",
+      "imported.text.root.font-size.none",
+      "imported.text.root.line-height.none",
+      "p.color-text-caution",
+      "p.color-text-critical",
+      "p.color-text-disabled",
+      "p.color-text-inverse",
+      "p.color-text-inverse-secondary",
+      "p.color-text-magic",
+      "p.color-text-magic-secondary",
+      "p.color-text-secondary",
+      "p.color-text-success",
+      "p.font-letter-spacing-dense",
+      "p.font-letter-spacing-denser",
+      "p.font-line-height-1000",
+      "p.font-line-height-600",
+      "p.font-line-height-800",
+      "p.font-size-500",
+      "p.font-size-600",
+      "p.font-size-750",
+      "p.font-weight-bold",
+      "p.font-weight-medium",
+      "p.font-weight-regular",
+      "p.font-weight-semibold",
+      "p.text-body-lg-font-letter-spacing",
+      "p.text-body-lg-font-line-height",
+      "p.text-body-lg-font-size",
+      "p.text-body-md-font-letter-spacing",
+      "p.text-body-md-font-line-height",
+      "p.text-body-md-font-size",
+      "p.text-body-sm-font-letter-spacing",
+      "p.text-body-sm-font-line-height",
+      "p.text-body-sm-font-size",
+      "p.text-body-sm-font-weight",
+      "p.text-body-xs-font-letter-spacing",
+      "p.text-body-xs-font-line-height",
+      "p.text-body-xs-font-size",
+      "p.text-body-xs-font-weight",
+      "p.text-heading-lg-font-letter-spacing",
+      "p.text-heading-lg-font-line-height",
+      "p.text-heading-lg-font-size",
+      "p.text-heading-lg-font-weight",
+      "p.text-heading-md-font-letter-spacing",
+      "p.text-heading-md-font-line-height",
+      "p.text-heading-md-font-size",
+      "p.text-heading-md-font-weight",
+      "p.text-heading-sm-font-letter-spacing",
+      "p.text-heading-sm-font-line-height",
+      "p.text-heading-sm-font-size",
+      "p.text-heading-sm-font-weight",
+      "p.text-heading-xs-font-letter-spacing",
+      "p.text-heading-xs-font-line-height",
+      "p.text-heading-xs-font-size",
+      "p.text-heading-xs-font-weight"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-heading-xs",
+      "variant": "Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Xs",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-base__font-weight-regular__variant-heading-xs.png",
+      "contentBox": {
+        "width": 124.75,
+        "height": 16
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-heading-sm",
+      "variant": "Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Sm",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "headingSm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-base__font-weight-regular__variant-heading-sm.png",
+      "contentBox": {
+        "width": 135.16,
+        "height": 20
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-heading-md",
+      "variant": "Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Md",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "headingMd"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-base__font-weight-regular__variant-heading-md.png",
+      "contentBox": {
+        "width": 145.55,
+        "height": 20
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-heading-lg",
+      "variant": "Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Lg",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "headingLg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-base__font-weight-regular__variant-heading-lg.png",
+      "contentBox": {
+        "width": 203.52,
+        "height": 24
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-heading-xl",
+      "variant": "Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Xl",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "headingXl"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-base__font-weight-regular__variant-heading-xl.png",
+      "contentBox": {
+        "width": 203.52,
+        "height": 24
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-heading2xl",
+      "variant": "Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading2xl",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "heading2xl"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-base__font-weight-regular__variant-heading2xl.png",
+      "contentBox": {
+        "width": 245.09,
+        "height": 32
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-heading3xl",
+      "variant": "Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading3xl",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "heading3xl"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-base__font-weight-regular__variant-heading3xl.png",
+      "contentBox": {
+        "width": 305.27,
+        "height": 40
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-body-xs",
+      "variant": "Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Xs",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "bodyXs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-base__font-weight-regular__variant-body-xs.png",
+      "contentBox": {
+        "width": 114.36,
+        "height": 12
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-body-sm",
+      "variant": "Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Sm",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "bodySm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-base__font-weight-regular__variant-body-sm.png",
+      "contentBox": {
+        "width": 124.75,
+        "height": 16
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-body-md",
+      "variant": "Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Md",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "bodyMd"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-base__font-weight-regular__variant-body-md.png",
+      "contentBox": {
+        "width": 135.16,
+        "height": 20
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-regular__variant-body-lg",
+      "variant": "Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Lg",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "regular",
+        "variant": "bodyLg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-base__font-weight-regular__variant-body-lg.png",
+      "contentBox": {
+        "width": 145.55,
+        "height": 20
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-medium__variant-heading-xs",
+      "variant": "Alignment=Start, As=Dt, Tone=Base, Font Weight=Medium, Variant=Heading Xs",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "medium",
+        "variant": "headingXs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-base__font-weight-medium__variant-heading-xs.png",
+      "contentBox": {
+        "width": 134.7,
+        "height": 16
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-semibold__variant-heading-xs",
+      "variant": "Alignment=Start, As=Dt, Tone=Base, Font Weight=Semibold, Variant=Heading Xs",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "semibold",
+        "variant": "headingXs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-base__font-weight-semibold__variant-heading-xs.png",
+      "contentBox": {
+        "width": 134.7,
+        "height": 16
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-base__font-weight-bold__variant-heading-xs",
+      "variant": "Alignment=Start, As=Dt, Tone=Base, Font Weight=Bold, Variant=Heading Xs",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "base",
+        "fontWeight": "bold",
+        "variant": "headingXs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-base__font-weight-bold__variant-heading-xs.png",
+      "contentBox": {
+        "width": 134.7,
+        "height": 16
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-disabled__font-weight-regular__variant-heading-xs",
+      "variant": "Alignment=Start, As=Dt, Tone=Disabled, Font Weight=Regular, Variant=Heading Xs",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "disabled",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-disabled__font-weight-regular__variant-heading-xs.png",
+      "contentBox": {
+        "width": 124.75,
+        "height": 16
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-inherit__font-weight-regular__variant-heading-xs",
+      "variant": "Alignment=Start, As=Dt, Tone=Inherit, Font Weight=Regular, Variant=Heading Xs",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "inherit",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-inherit__font-weight-regular__variant-heading-xs.png",
+      "contentBox": {
+        "width": 124.75,
+        "height": 16
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-success__font-weight-regular__variant-heading-xs",
+      "variant": "Alignment=Start, As=Dt, Tone=Success, Font Weight=Regular, Variant=Heading Xs",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "success",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-success__font-weight-regular__variant-heading-xs.png",
+      "contentBox": {
+        "width": 124.75,
+        "height": 16
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-critical__font-weight-regular__variant-heading-xs",
+      "variant": "Alignment=Start, As=Dt, Tone=Critical, Font Weight=Regular, Variant=Heading Xs",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "critical",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-critical__font-weight-regular__variant-heading-xs.png",
+      "contentBox": {
+        "width": 124.75,
+        "height": 16
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-caution__font-weight-regular__variant-heading-xs",
+      "variant": "Alignment=Start, As=Dt, Tone=Caution, Font Weight=Regular, Variant=Heading Xs",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "caution",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-caution__font-weight-regular__variant-heading-xs.png",
+      "contentBox": {
+        "width": 124.75,
+        "height": 16
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-subdued__font-weight-regular__variant-heading-xs",
+      "variant": "Alignment=Start, As=Dt, Tone=Subdued, Font Weight=Regular, Variant=Heading Xs",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "subdued",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-subdued__font-weight-regular__variant-heading-xs.png",
+      "contentBox": {
+        "width": 124.75,
+        "height": 16
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-text-inverse__font-weight-regular__variant-heading-xs",
+      "variant": "Alignment=Start, As=Dt, Tone=Text Inverse, Font Weight=Regular, Variant=Heading Xs",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "text-inverse",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-text-inverse__font-weight-regular__variant-heading-xs.png",
+      "contentBox": {
+        "width": 124.75,
+        "height": 16
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-text-inverse-secondary__font-weight-regular__variant-heading-xs",
+      "variant": "Alignment=Start, As=Dt, Tone=Text Inverse Secondary, Font Weight=Regular, Variant=Heading Xs",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "text-inverse-secondary",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-text-inverse-secondary__font-weight-regular__variant-heading-xs.png",
+      "contentBox": {
+        "width": 124.75,
+        "height": 16
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-magic__font-weight-regular__variant-heading-xs",
+      "variant": "Alignment=Start, As=Dt, Tone=Magic, Font Weight=Regular, Variant=Heading Xs",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "magic",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-magic__font-weight-regular__variant-heading-xs.png",
+      "contentBox": {
+        "width": 124.75,
+        "height": 16
+      }
+    },
+    {
+      "slug": "alignment-start__as-dt__tone-magic-subdued__font-weight-regular__variant-heading-xs",
+      "variant": "Alignment=Start, As=Dt, Tone=Magic Subdued, Font Weight=Regular, Variant=Heading Xs",
+      "kind": "base",
+      "subst": {
+        "alignment": "start",
+        "as": "dt",
+        "tone": "magic-subdued",
+        "fontWeight": "regular",
+        "variant": "headingXs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-alignment-start__as-dt__tone-magic-subdued__font-weight-regular__variant-heading-xs.png",
+      "contentBox": {
+        "width": 124.75,
+        "height": 16
+      }
+    }
+  ],
+  "rendered": 24,
+  "refused": 0,
+  "unavailable": null
+}
