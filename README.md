@@ -96,13 +96,13 @@ One rule spans all three: **the surfaces never sync side-to-side.** A designer's
 
 ### What physically crosses each hop
 
-There is no Figma-to-code converter here and no code-to-Figma converter. There are two pure functions that each read or write exactly one artifact — the contract JSON — and a set of referees that classify drift against that artifact — none of them writes to a surface or picks a side. Every journey above is a path through the same five hops, and each hop moves one named file:
+There is no Figma-to-code converter here and no code-to-Figma converter. There is one pure function per direction — one compiles the contract into a Figma script, one proposes a contract from a canvas dump — plus the code emitters, and a set of referees that classify drift against the contract — none of them writes to a surface or picks a side. The contract is the fixed point — every hop reads or writes it — and each hop also carries its own envelope file (code extraction, bundle, generated code, dump, proposal) to or from that fixed point. Every journey above is a path through the same five hops:
 
 | hop | direction | what goes in | what comes out |
 |---|---|---|---|
 | **1** | code → contract | your `.tsx` / `.css` / custom-elements manifest, via `extract`, `extract --computed`, `promote` | `contracts/*.contract.json` proposals; the computed capture (`extract --computed`) also writes a `*.extension.json` sidecar naming every fact the vocabulary refused, and `promote` carries it forward |
 | **2** | contract → canvas | contracts + tokens, via `figma bundle` → one `CONTRACTS-BUNDLE` JSON (with `codeOnlyFacts`) | component sets + variable collections, built by the plugin when a human clicks Apply, each set stamped `ds_contracts/*` |
-| **3** | contract → code | contracts + tokens, via `generate --target react\|html\|react-inline\|…` | `<Name>.tsx`, `.module.css`, `.stories.tsx`, `index.ts`, `tokens.css` — atomic per contract |
+| **3** | contract → code | contracts + tokens, via `generate --target react\|html\|react-inline\|…` | `<Name>.tsx`, `.module.css`, `index.ts`, `tokens.css` — atomic per contract; `.stories.tsx` only with `--stories` |
 | **4** | canvas → proposal | a **dump** (plain JSON of what is drawn: variants, layers, bound variable names, `_provenance`, `_degradations`) from the plugin's Send tab or the REST mapper, run through the propose step (`npm run extract:figma` — *propose* names the step, not a CLI verb) | a `CONTRACT-PROPOSAL` envelope: the proposed contract, its `notes[]`, `unbound[]` rows, child stubs, minted `imported.*` tokens, a provenance line |
 | **5** | proposal → contract | the envelope, via a PR, `figma receive --apply`, or copying the JSON | a contract change in `contracts/`, merged by a human or not merged at all |
 

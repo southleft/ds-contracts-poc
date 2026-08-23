@@ -13,9 +13,10 @@ export function Flow() {
       <p className="landing__kicker">How it flows</p>
       <h1>Figma ↔ code, through the contract.</h1>
       <p className="landing__pitch">
-        There is no Figma-to-code converter here and no code-to-Figma converter. There are two pure
-        functions that each read or write exactly one artifact — the contract JSON — and a set of
-        referees that compare each surface to that artifact and never to each other. A change on
+        There is no Figma-to-code converter here and no code-to-Figma converter. There is one pure
+        function per direction — one compiles the contract into a Figma script, one proposes a
+        contract from a canvas dump — plus the code emitters, and a set of referees that compare
+        each surface to the contract and never to each other. A change on
         either side is a proposal to the contract, merged as a pull request or not merged at all.
         No tool picks a winner; a human merging a contract PR does.
       </p>

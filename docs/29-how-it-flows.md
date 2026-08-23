@@ -101,9 +101,10 @@ Terms are defined here once and used below without re-definition.
 ### 1.1 There is no converter
 
 There is no Figma-to-code converter in this repository and no code-to-Figma
-converter. There are two pure functions that each read or write exactly one
-artifact — the contract JSON — and a set of referees that compare each surface
-to that artifact and never to each other.
+converter. There is one pure function per direction — one that compiles the
+contract toward the canvas, one that proposes a contract from a canvas dump —
+plus the code emitters, three shapes named below, and a set of referees that
+compare each surface to the contract and never to each other. The contract is the fixed point — every hop reads or writes it — and each hop also carries its own envelope file (code extraction, bundle, generated code, dump, proposal) to or from that fixed point.
 
 - `core/emit-figma-script.ts` compiles a contract into a Figma Plugin-API
   script. The plugin runs the same engine, esbuild-bundled
@@ -129,7 +130,7 @@ tool picks a winner; a human merging a contract PR does.
 flowchart LR
   subgraph code["Code side"]
     TSX["tsx · css · cem"]
-    GEN["generated<br/>.tsx · .module.css · .stories.tsx · tokens.css"]
+    GEN["generated<br/>.tsx · .module.css · tokens.css<br/>+ .stories.tsx with --stories"]
   end
   subgraph contract["The contract (repo, PR-gated)"]
     C[("contracts/*.contract.json<br/>+ tokens (DTCG)")]
@@ -170,7 +171,7 @@ Use these five names everywhere. "Sync" is not one of them.
 | 1 | `ds-contracts extract --computed --config <capture.json> [--harness <dir>] [--out <dir>]` (`cli.ts:64-65`) | capture config + a sandbox with the library installed + Chromium | `extract/computed/out/<component>/` (capture, fuse, replay, scorecard) + `*.extension.json` — every captured fact the vocabulary refuses, with its reason ([16 — The Sync Boundary](16-sync-boundary.md)) | exit 3 when playwright-core / Chromium is missing; non-carryable transforms refused `pseudo-decor-outside-grammar` (`extract/computed/anatomy.ts:2281`) |
 | 1 | `ds-contracts promote --config <ds-library.json>` (`cli.ts:50-53`) | enriched contracts + minted tree | promoted contracts, `*-minted.dtcg.json` (source-aliased), `*.anchors.json` | the WHOLE promotion if any `{imported.*}` ref or alias fails to resolve (`packages/cli/src/promote.ts:28-29`) |
 | 2 | `ds-contracts figma bundle <contracts..> --out <file> --tokens <base[,minted]> \| <dir> \| slot=file,… [--modes] [--name] [--icons]` | contract files as RAW bytes + token set + icon SVGs | ONE `CONTRACTS-BUNDLE` JSON `{type, version: 1, tokenSet, icons?, contracts, codeOnlyFacts}` (`packages/cli/src/commands/figma.ts:639-646`); stdout lists every code-only fact per contract | missing provenance (`figma.ts:387-391`); drawable-empty anatomy (`:393`); any contract that does not compile against this token set — ONE list, nothing written (`:617-618`, quoted in §4.3) |
-| 2 | plugin **Build** tab (paste) · `figma push <bundle> --code <CODE>` · `figma claim-channel` + `figma publish` → **Changes** tab "Check for updates" → **Apply selected** | bundle | component sets + variable collections; each set stamped `ds_contracts/{contractId, specHash, version, canvasFingerprint, canvasSnapshot, canvasSetSnapshot, codeOnlyFacts, semantics}` (`figma-sync/plugin/code.js:496-611` reads them back) | `planGenerate` validates every contract; all-or-nothing (`entry.ts:922`, quoted in §4.3) |
+| 2 | plugin **Build** tab (paste) · `figma push <bundle> --code <CODE>` · `figma claim-channel` + `figma publish` → **Changes** tab "Check for updates" → **Apply selected** | bundle | component sets + variable collections; each set stamped `ds_contracts/{contractId, specHash, version, canvasFingerprint, canvasSnapshot, canvasSetSnapshot, codeOnlyFacts, semantics}` — all eight keys written by the compiled script (`core/emit-figma-script.ts`); the drift check at `figma-sync/plugin/code.js:496-611` reads back five of them: `contractId`, `specHash`, `canvasFingerprint`, `canvasSnapshot`, `canvasSetSnapshot` | `planGenerate` validates every contract; all-or-nothing (`entry.ts:922`, quoted in §4.3) |
 | 2 (developer route) | `npm run figma:plan` / `ds-contracts generate --target figma-script` (`core/emitter.ts:92-109` registers `figma-script` beside `react`) | contracts + tokens | `figma-sync/01-tokens.js`, `figma-sync/NN-<name>.js` (byte-pinned by `evals/golden.json`) → plugin **Advanced → Paste a script** | — ; the plugin's everyday door is Build (`playground/src/components/HelpDrawer.tsx:92-99`) |
 
 **What the compile produces per contract** (`core/emit-figma-script.ts`):
@@ -206,7 +207,7 @@ eight the bundle carries 54 facts, and `npm run code-only-facts:check` (a
 | 4 | `npm run extract:figma -- <dump.json> [--out dir] [--contracts dir] [--tokens a,b] [--reviewable-inversion]` (`extract/figma/propose.ts`) | dump + token corpus + in-scope contracts matched by `bindings.figma.anchors.componentSetKey` first, name second (`:184-200`) | `<out>/<slug>.contract.proposed.json`, `<out>/<stub>.stub.contract.proposed.json`, `<out>/minted.dtcg.json`, `<out>/captured.dtcg.json` (the dump's `_variables`; `FC-DUMP-PROPOSE-CAPTURED-VARIABLES-DROPPED` closed at `:405`), `<out>/figma-proposals.md` with notes + unbound + the EXACT next `generate` line (`:432-436`) | any skipped set → `process.exit(2)`, no artifacts (`:317`) |
 | 4 | plugin Send → `proposeDiff` (`figma-sync/plugin/engine/entry.ts`) | dump + optional base contract + tokenSet | `CONTRACT-PROPOSAL` envelope `{type, baseContractId, baseVersion, setName, summary, proposedContract, projection, proposalNotes, childStubs?, mintedTokens?, provenance{toolGenerated, kind, note}, baseFreshness}` (`entry.ts:2029-2070`) | projection = `exact` when structured `propertyDefinitions` exist or provenance is unrecorded, else `reviewable-inversion` (`:1970-1975`); a stale base → the G3 guard line leads the summary |
 | 5 | `ds-contracts figma receive --out <contracts-dir> [--apply]` · `ds-contracts propose-pr <file> --repo o/n [--target t] [--dry-run]` · copy the JSON | envelope | without `--apply`: **only** `<out>/.proposals/<id>.proposal.json` — the contract file is never touched (`figma.ts:44-46`, `:1434`); with `--apply`: the contract + childStubs + minted tree + generated code from the config's `generate` block; `propose-pr` opens one PR with the contract and the emitted component, target never guessed (`propose-pr.ts:36-39`) | a malformed envelope is refused by `parseProposal` (`figma.ts:1050`) |
-| 3 | `ds-contracts generate <contracts..> --out <dir> [--target react\|html\|react-inline\|figma-script\|code-connect\|<registered>] --tokens <corpus,captured.dtcg.json,minted.dtcg.json>` | proposed contracts + stubs + every token tree their refs resolve through | `<Name>.tsx`, `.module.css`, `.stories.tsx`, `index.ts`, `tokens.css` | ATOMIC PER CONTRACT: a contract that fails to parse / validate / emit leaves no file and anything composing it is refused too (`scripts/generate-components.ts:22-25`, quoted in §4.3); a `var(--x)` referenced by any `.css` / `.css.ts` / `.html` and undefined in `tokens.css` → `CliUsageError` (`packages/cli/src/commands/generate.ts:179-199`) |
+| 3 | `ds-contracts generate <contracts..> --out <dir> [--target react\|html\|react-inline\|figma-script\|code-connect\|<registered>] [--stories] --tokens <corpus,captured.dtcg.json,minted.dtcg.json>` | proposed contracts + stubs + every token tree their refs resolve through | `<Name>.tsx`, `.module.css`, `index.ts`, `tokens.css` — and `.stories.tsx` only when `--stories` is passed (`packages/cli/src/commands/generate.ts:89`) | ATOMIC PER CONTRACT: a contract that fails to parse / validate / emit leaves no file and anything composing it is refused too (`scripts/generate-components.ts:22-25`, quoted in §4.3); a `var(--x)` referenced by any `.css` / `.css.ts` / `.html` and undefined in `tokens.css` → `CliUsageError` (`packages/cli/src/commands/generate.ts:179-199`) |
 
 **The inversion is a catalogue of fixed rules**, each the inverse of a
 documented generator rule (`extract/figma/propose.ts:11-118`: LAYOUT, TOKENS,

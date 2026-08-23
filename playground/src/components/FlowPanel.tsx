@@ -195,9 +195,11 @@ function Body({ view }: { view: FlowView }) {
             ))}
           </ol>
           <p className="hint">
-            Every hop reads or writes exactly one artifact — the contract. The canvas and the codebase never see
-            each other. A fact crossing a hop ends carried, named (written to a receipt), or refused by name;
-            silent loss is the fourth outcome the conformance manifests treat as a hard failure.
+            The contract is the fixed point — every hop reads or writes it — and each hop also carries its own
+            envelope file (code extraction, bundle, generated code, dump, proposal) to or from that fixed point.
+            The canvas and the codebase never see each other. A fact crossing a hop ends carried, named (written
+            to a receipt), or refused by name; silent loss is the fourth outcome the conformance manifests treat
+            as a hard failure.
           </p>
         </>
       );
@@ -623,7 +625,8 @@ function Body({ view }: { view: FlowView }) {
           </div>
           <Source>
             <Mono>ds-contracts generate &lt;contracts..&gt; --out &lt;dir&gt; --target react</Mono> writes the same
-            files (<Mono>&lt;Name&gt;.tsx</Mono>, <Mono>.module.css</Mono>, <Mono>.stories.tsx</Mono>). It is atomic per
+            files (<Mono>&lt;Name&gt;.tsx</Mono>, <Mono>.module.css</Mono>; <Mono>.stories.tsx</Mono> with{' '}
+            <Mono>--stories</Mono>). It is atomic per
             contract: {QUOTED_REFUSALS.generate.text} A <Mono>var(--x)</Mono> the generated CSS references and{' '}
             <Mono>tokens.css</Mono> does not define is a refusal too.
           </Source>

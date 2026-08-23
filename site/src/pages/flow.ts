@@ -234,7 +234,7 @@ export function flowPageBody(F: FlowReplay): { title: string; description: strin
   const body = `
 <p class="eyebrow">How it works · the two directions</p>
 <h1>How it flows: Figma ↔ code through contracts</h1>
-<p class="lede">There is no Figma-to-code converter here and no code-to-Figma converter. Two pure functions each read or write one file — the contract — and six instruments classify drift against it — none writes to a surface, none picks a side. This page walks every hop, verb by verb, with the engine replayed beside the prose.</p>
+<p class="lede">There is no Figma-to-code converter here and no code-to-Figma converter. One pure function per direction — plus the code emitters — reads or writes one file — the contract — and six instruments classify drift against it — none writes to a surface, none picks a side. This page walks every hop, verb by verb, with the engine replayed beside the prose.</p>
 <p class="section-note">Rendered at build from <a href="${docUrl(FLOW_DOC_REL)}"><code>${FLOW_DOC_REL}</code></a>, the one prose source (GitHub renders the same file). The figures are that file's <code>mermaid</code> fences, pre-rendered as themed SVG at build; the boxed replays ran the real engine over committed fixtures and the build refuses when they disagree with the committed receipts. The <a href="${PLAYGROUND_URL}">Playground</a> runs the same engine on the same fixtures in the browser.</p>
 <div class="doc">${renderDoc(md, F)}</div>`;
   return {

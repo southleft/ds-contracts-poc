@@ -515,8 +515,11 @@ export function dispositionSvg(theme: Theme): string {
   parts.push(`<text class="lbl2" x="458" y="300">no — but a named rule</text>`);
   parts.push(`<text class="lbl2" x="458" y="315">lowers it</text>`);
   parts.push(`<path class="flow bad" d="M 560 280 C 560 310, 800 300, 800 335" marker-end="url(#arrowBad)"/>`);
-  parts.push(`<text class="lbl2 badt" x="700" y="300">no — and carrying it</text>`);
-  parts.push(`<text class="lbl2 badt" x="700" y="315">would be a guess</text>`);
+  // The red caption sits right of the curve's own endpoint, end-anchored at
+  // the canvas edge (at x=700 both lines lay on the arrow path in both
+  // themes — 2026-08-24 review).
+  parts.push(`<text class="lbl2 badt" x="930" y="300" text-anchor="end">no — and carrying it</text>`);
+  parts.push(`<text class="lbl2 badt" x="930" y="315" text-anchor="end">would be a guess</text>`);
   // the hard-failure denominator
   // Wide box + two sub lines: the one-line subtitle overran the old 600px
   // box by ~55px each side (2026-08-23 review).
