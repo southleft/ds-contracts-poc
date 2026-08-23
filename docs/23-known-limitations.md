@@ -1191,6 +1191,52 @@ companion figures — what the same measurements say went right — are in
 
 <a id="1-coverage--how-much-of-a-library-is-actually-captured"></a>
 
+## B.30 State previews are all-or-nothing per set — one override-less state hides every drawn plane
+
+**Found by the Ant Design exam** ([ANTD-EXAM.md](../parity/receipts/phase-2/ANTD-EXAM.md) §5).
+`bindings.figma.statePreviews` is probed per contract by the promote referee
+(`packages/cli/src/promote.ts` → `validateContract`), and a state that
+declares no token override on any part refuses the flag for the WHOLE set.
+antd's Button declares hover/active/focus-visible/disabled; its hover and
+active planes are a `type × danger` product (S3 residue, named), so the
+referee refuses previews — and the focus-visible ring and the disabled
+plane, which DO carry, get no preview cell either. Same on Tag and Alert
+(hover lives on the close icon) and on Checkbox/Radio (the focus ring lives
+on the inner part, v13). 5 of the 7 stateful antd sets ship with no State
+axis.
+
+**What you'd observe** — a Button set with thirty base cells and no
+focus/disabled row, while the contract carries both.
+
+**Status of the loss** — NAMED, not silent: every state binding the undrawn
+plane holds is a `channel`-kind code-only fact on the set
+(`FC-STATE-PLANE-UNDRAWN`, 19 on the antd sets; the same receipt surfaced on
+18 committed contracts across 8 libraries when it landed).
+
+**What it would take** — a per-state probe: draw the states that have
+overrides and name the ones that do not. Referee + emitter
+(`stateVariants`) + prototype-wiring pairs; not started.
+
+## B.31 The pseudo-decor grammar drops a decor's `box-shadow`, and the placeholder plane's ink
+
+Two named residues the exam's heal loop pinned with screenshot pairs
+(`parity/receipts/phase-2/antd/switch.triptych.png`, `input.triptych.png`):
+
+- antd's Switch knob is `.ant-switch-handle::before` with
+  `box-shadow: var(--ant-switch-handle-shadow)`. The decor grammar carries
+  background alpha + border rings; the box promotes, the shadow does not —
+  now receipted as `pseudo-decor-shadow-uncarried` beside the carriage
+  (before this round a painting decor's shadow vanished with no receipt at
+  all; the shadow refusal fired only when nothing else painted).
+- `::placeholder` is read and never carried (§B.5); antd's Input draws its
+  placeholder on the canvas in the root's text colour (`rgba(0,0,0,.88)`),
+  not antd's `.25`. The TEXT is carried (the first TEXT-kind prop hosts the
+  label when a root has no `children`); the colour is the named loss.
+
+**What it would take** — a shadow channel on shape parts (the schema has
+`box-shadow` on frames, not on decor shapes); a registry channel for the
+placeholder plane's colour. Neither started.
+
 ## C.1 Coverage — how much of a library is actually captured
 
 Seven distinct libraries across eight rounds, five styling architectures, one
@@ -2980,3 +3026,63 @@ extract/computed/configs/polaris.json` is the re-record; `npx tsx
 examples/polaris/generate.ts --check`, `figma:fresh`, `generated:fresh`,
 `evals --only polaris,promote-generalization`, tsc, lint, format, docs all
 green on the patch. Round r12 (patch over `537022b0`).
+## D.34 The Ant Design exam — 44 silent geometry drops, a silent outline width, a silent margin box, a silent state plane, a silent unset plane, a Tag with no label, an error input drawn grey — CLOSED
+
+The held-out code→canvas exam on the hardest library by design
+([ANTD-EXAM.md](../parity/receipts/phase-2/ANTD-EXAM.md)). Twelve subjects,
+6,007 captured facts, **SILENT 44 → 0** on the capture side, and five heal
+iterations on the scratch canvas until every set passed "I can tell what
+this is" beside the library's own render. What it closed, each with its
+case or screenshot pair:
+
+- **FC-GEOMETRY-EXCLUDED never ledgered per part** — 46 width/height facts
+  on Tag/Input/Avatar/Progress/Card refused by nothing anyone could grep.
+  `styledChannels` writes one `geometry-excluded:` line per part (the
+  Option B obligation, met).
+- **Token-named geometry is a design value** — `height: var(--ant-control-height)`
+  was refused as environment-dependent; buttons drew 18px tall. A dimension
+  the library's stylesheet binds to a token now joins fusion with its name
+  (`token-named-geometry-admitted`).
+- **The outline PAIR** (case `antd-focus-outline-ring-ua-width`) — antd's
+  3px focus width equals Chromium's `medium`, never differed between planes,
+  and the canvas ring had no width. The plane's width rides the state
+  whenever its style/colour changed.
+- **The state plane's refusals ride the contract** (schema v18
+  `Part.codeOnly`, W4) — a nested part's focus ring refused by v13 landed
+  only in capture-side sidecars; `figma bundle` compiles its facts from the
+  contract. 122 `capture`-kind facts on the antd sets.
+- **The margin box's four silent exits** (case `antd-empty-margin-only-parts`)
+  — FILL / grow / out-of-flow / the empty-frame #60 default returned without
+  a word; `FC-EMIT-MARGIN-BOX-SKIPPED` names each side (5 committed
+  contracts gained receipts).
+- **The undrawn state plane** — with `statePreviews` off every state binding
+  was unbuilt in silence; `FC-STATE-PLANE-UNDRAWN` (18 committed contracts
+  across 8 libraries gained receipts; the wall itself is §B.30).
+- **The undrawn unset plane** — a defaultless axis's library-default
+  rendering (antd's red Badge) had no cell and the proposal called the first
+  enum value the default; `FC-UNSET-PLANE-UNDRAWN`.
+- **A root's prop-bound text beside parts** (Tag) drew no text node; the
+  compile receipt's text pin was the only witness. `rootTextSpecs` hosts it.
+- **Presence-driven channels dropped whole** — Alert's padding and icon gap
+  vanished because `description` changes them; the presence-OFF plane is
+  carried, the ON plane named.
+- **`flex-grow` minted as an annotated token, never `layout.grow`** —
+  Progress's track drew 0 wide; uniform `flex-grow ≥ 1` (and a child that
+  measures a non-block root's content box) carries `layout.grow`, and the
+  meter fraction is re-applied after layout.
+- **A wrong fact on the canvas** — Input's `status × variant` border: the
+  pair-with-unset carriage wrote the unset-plane map after the named-plane
+  map and `resolveTokens` merges in order. Defaultless-axis maps sort last.
+- **`border-style` that varies by an axis** drew SOLID (Button `dashed`);
+  it carries as `stylesWhen` per value and lowers to a `dashPattern`.
+- **Pseudo-decor `scale()` and margins** (W5, the scale half) — Radio's dot
+  revealed by `scale(.375)` folds into a centred 6×6 ellipse; the pseudo's
+  own margins fold into its offset.
+- Instrument defects: `seed-gen`'s case-sensitive lookup (W1 — the recon
+  blamed the tuple grammar; re-measurement blamed the lookup), the
+  closed-shadow suspect on every svg `<path>`, the settle probe blind to
+  `outline-width`, the unset materialization missing the VARIANT values map.
+
+Gates: `npm run conformance` (91 cases), `npm run conformance:roundtrip`
+(54, 0 SILENT), `code-only-facts:check`, `dagger:census`, `figma:fresh`,
+`docs:check`, the drift baseline (12 antd rows).

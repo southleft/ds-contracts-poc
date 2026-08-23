@@ -77,7 +77,7 @@
     {
       "library": "antd",
       "component": "Alert",
-      "rerunPctEqual": 84.69827586206897,
+      "rerunPctEqual": 86.63793103448276,
       "cellsCompared": 14848,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 84.69827586206897,
@@ -104,7 +104,7 @@
     {
       "library": "antd",
       "component": "Button",
-      "rerunPctEqual": 81.96536144578313,
+      "rerunPctEqual": 83.89307228915662,
       "cellsCompared": 79680,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.96536144578313,

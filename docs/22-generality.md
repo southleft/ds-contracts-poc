@@ -683,7 +683,7 @@ left out:**
   Chip, Card, Checkbox, Tag, Avatar, Divider. The hardest thing in the corpus is
   MUI's `Table`, and the hardest classes (data grid, tree, virtualized list,
   date picker, rich text, charts) are captured **nowhere**. Read every floor
-  percentage as "on the easy 10.7%".
+  percentage as "on the easy 11.1%".
 - **The denominators do not lean against us. They are INCOHERENT** — which is
   a different thing, and this document said the wrong one until 2026-08-03.
   MUI's 135 counts every capitalised directory including utilities (`NoSsr`,
