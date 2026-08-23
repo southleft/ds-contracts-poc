@@ -68,12 +68,23 @@ jobs:
             exit 0
           fi
           mkdir -p sync/out
+          # Exit semantics are UNCHANGED (2026-08-08 decision: a red run IS the
+          # drift signal). The spine's exit code is captured only so the drift
+          # table (SPINE.md) can be copied into the job summary before the step
+          # re-raises that same exit code — the conclusion is the spine's own.
+          set +e
           if [ "$OPEN_PR" = "true" ]; then
             echo "SYNC_SPINE_OPEN_PR=true — the spine may open at most 1 PR this run (cursor-deduplicated)."
             npx tsx sync/spine.ts --run-id "gh-${GITHUB_RUN_ID}" --open-pr --max-prs 1
           else
             npx tsx sync/spine.ts --run-id "gh-${GITHUB_RUN_ID}"
           fi
+          rc=$?
+          set -e
+          echo "spine-exit=$rc" >> "$GITHUB_OUTPUT"
+          report="sync/out/gh-${GITHUB_RUN_ID}/SPINE.md"
+          if [ -f "$report" ]; then cat "$report" >> "$GITHUB_STEP_SUMMARY"; fi
+          exit "$rc"
 
       - name: upload drift report
         if: ${{ !cancelled() && steps.spine.outputs.skipped != 'true' }}

@@ -380,7 +380,7 @@ export function pullRecord(input: PullInput): PullOutcome {
     lastSyncedVersionId: fileVersionId,
     direction: 'canvas→code',
     observed: observation
-      ? { dumpFingerprint: observation.dumpFingerprint, fileVersionId }
+      ? { dumpFingerprint: observation.dumpFingerprint, dumpVersion: observation.dumpVersion, fileVersionId }
       : null,
   };
   const counts = findingCounts(findings);

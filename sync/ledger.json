@@ -12,26 +12,27 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:49:25.504Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:3149716910",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/altitude/components/avatar.json"
     },
     {
       "contractId": "altitude.badge",
       "contractPath": "examples/altitude/contracts/badge.contract.json",
-      "contractHash": "sha256:42693246bc95a9fdcb34a06edca990fff6903ace039fdd01ec53788fead20322",
+      "contractHash": "sha256:058c0be8f0d46fdc11ec32a62a9eb053e69b39999e98eb34a047401df6b60807",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "60:10083",
       "canvasFingerprint": "v6:3977245456",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:43:10.768Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
-      "observed": null,
-      "provenance": "sync-record",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2227710096",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
+      },
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/altitude/components/badge.json"
     },
     {
@@ -51,29 +52,39 @@
     {
       "contractId": "altitude.chip",
       "contractPath": "examples/altitude/contracts/chip.contract.json",
-      "contractHash": "sha256:d9a844ec9ff819bf7c0a266f06599b16beaf84723c681002ae259aa627c98b6b",
+      "contractHash": "sha256:a96d5815a6f2363bd2f198d365c1c34861e2254701267c210d4549d748d45aaf",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "60:10126",
       "canvasFingerprint": "v6:3288704793",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:43:13.030Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
-      "observed": null,
-      "provenance": "sync-record",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1120798882",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
+      },
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/altitude/components/chip.json"
     },
     {
       "contractId": "altitude.divider",
       "contractPath": "examples/altitude/contracts/divider.contract.json",
-      "contractHash": "sha256:f7aa750a69c0eee18cf0dce137bfc9bf9e49a4b0c7f62544e92ead9d361d784c",
+      "contractHash": "sha256:d1a3d207664c02b0c931e2a57795b164b5f1dba5fdbeb3159b9091f6969c27fd",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "59:9713",
       "canvasFingerprint": "v6:1673250268",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:43:13.347Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
-      "observed": null,
-      "provenance": "sync-record",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3506643804",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
+      },
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/altitude/components/divider.json"
     },
     {
@@ -93,29 +104,39 @@
     {
       "contractId": "altitude.iconclose",
       "contractPath": "examples/altitude/contracts/iconclose.contract.json",
-      "contractHash": "sha256:dfe8c8afc6ff9ade50fb951d2e969af2f10da920c7bd796233332a6f9e93a991",
+      "contractHash": "sha256:966af89b99cd59e9d4f9d4c42eb606e9417f88e25b354178bb8c98b3d55f57dc",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:3071",
       "canvasFingerprint": "v6:1912940653",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:43:14.336Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
-      "observed": null,
-      "provenance": "sync-record",
+      "observed": {
+        "dumpFingerprint": "dumpv1:319884819",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
+      },
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/altitude/components/icon-close.json"
     },
     {
       "contractId": "altitude.link",
       "contractPath": "examples/altitude/contracts/link.contract.json",
-      "contractHash": "sha256:a471ba09b99fc18c48c3bad31a102d53ec53b9c5b16e293a394c7d02c31fabcb",
+      "contractHash": "sha256:71d6f4a25bac985f6ab9e7ea1b994c71c708a9d609c1c65e98fa9b23c9e0889d",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "60:10102",
       "canvasFingerprint": "v6:3448013784",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:43:14.695Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
-      "observed": null,
-      "provenance": "sync-record",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2060152440",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
+      },
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/altitude/components/link.json"
     },
     {
@@ -317,19 +338,20 @@
     {
       "contractId": "carbon.button",
       "contractPath": "examples/carbon/contracts/button.contract.json",
-      "contractHash": "sha256:7201cf38f4fff0d0df63ddb751a664cf9e6c629ea7301bdd187b26b47bcc058d",
+      "contractHash": "sha256:787ec93bfcb47927fffb480b545b5fd8b9f53815526481a6362a0b0505a8d9ce",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:5528",
       "canvasFingerprint": "v6:310064922",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:03.732Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2265055463",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:496601980",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/carbon/components/button.json"
     },
     {
@@ -440,84 +462,84 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:47:09.501Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:3506480767",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/carbon/components/toggle.json"
     },
     {
       "contractId": "ds.accordion-item",
       "contractPath": "contracts/accordion-item.contract.json",
-      "contractHash": "sha256:fed66585aebea07275fae3d68c06e585b1ac180997aae0b29fafd1f976106e7e",
+      "contractHash": "sha256:5d5b3d76d4a9885c6a1359084ee3e296c833f8215113312707f858abbc68d9ae",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:908",
       "canvasFingerprint": "v6:362055825",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:55:41.724Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2279062718",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:4120265292",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/accordion-item.json"
     },
     {
       "contractId": "ds.avatar-group",
       "contractPath": "contracts/avatar-group.contract.json",
-      "contractHash": "sha256:d859c01820125a9c5573f5192b799fc1b55c952167cf74f1bbf1836457d0a51a",
+      "contractHash": "sha256:1319966b2c4bc3687af859b1641a053b440bb99d34dc0cb63eef517177487e77",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1442",
       "canvasFingerprint": "v6:73520369",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:04.824Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2272707179",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:3692949204",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/avatar-group.json"
     },
     {
       "contractId": "ds.avatar",
       "contractPath": "contracts/avatar.contract.json",
-      "contractHash": "sha256:b446ab8c8a4b6c6133053265ab835ed1b1cc5dd44bd052f49b765ee5e405d2e6",
+      "contractHash": "sha256:2af91751359eca603025df323157c367778c11036e7dae3da73b83ed53933a0e",
       "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
       "setNodeId": "4:300",
       "canvasFingerprint": "v6:1644631224",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-08T13:32:57.000Z",
+      "lastSyncedVersionId": "2388438498796415748",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3778221867",
-        "fileVersionId": "2385318059580510974",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:4064706845",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2388438498796415748",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/avatar.json"
     },
     {
       "contractId": "ds.badge",
       "contractPath": "contracts/badge.contract.json",
-      "contractHash": "sha256:70a28298b1353637d7e97abb2fab2b0558a79eb8e311f2ebeb4d8421ce5c7fa1",
+      "contractHash": "sha256:56193fadf3d194e5504eabaf435f550ae67640e707681ce64cc02a232074d68a",
       "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
       "setNodeId": "4:313",
       "canvasFingerprint": "v6:4254819976",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-08T13:32:57.000Z",
+      "lastSyncedVersionId": "2388438498796415748",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3750294563",
-        "fileVersionId": "2385318059580510974",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:650431504",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2388438498796415748",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/badge.json"
     },
     {
@@ -530,84 +552,84 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-08T13:32:57.000Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:2412317579",
-        "fileVersionId": "2385318059580510974",
-        "observedAt": "2026-08-08T13:51:42.600Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/components/banner.json"
     },
     {
       "contractId": "ds.blockquote",
       "contractPath": "contracts/blockquote.contract.json",
-      "contractHash": "sha256:f7f4c969b399105f2bca01f4bd50690345add1cc3e12f14e79a9b9607900174c",
+      "contractHash": "sha256:6b9f79155d87d721a75d9bc4981e376e71821d313b240dba8e197731818588ad",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:958",
       "canvasFingerprint": "v6:4276955563",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:58:58.465Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2354359567",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:3874849251",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/blockquote.json"
     },
     {
       "contractId": "ds.breadcrumb-item",
       "contractPath": "contracts/breadcrumb-item.contract.json",
-      "contractHash": "sha256:f4e24f544a8ab429589ea3720166e821bdcefd4f0f436f3df197828cf7a5c84f",
+      "contractHash": "sha256:f8bdfa1bc35a6b0b6885c3a09b2977480fc834f8d68b6182dc5d5ba6fe9fbd66",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1274",
       "canvasFingerprint": "v6:1787875132",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:02.831Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3566764418",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:1134562763",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/breadcrumb-item.json"
     },
     {
       "contractId": "ds.breadcrumbs",
       "contractPath": "contracts/breadcrumbs.contract.json",
-      "contractHash": "sha256:6338ce0a2003cc40925cf0fac7f40d4390db5e2d5e21359b6bd77b4ae4a85e6a",
+      "contractHash": "sha256:466a710903a81a7d2d25135b4f01971f924abf20fe0dbbdc8f1574d34e1ba9b5",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1280",
       "canvasFingerprint": "v6:649210368",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:03.091Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3672305563",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:3381771355",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/breadcrumbs.json"
     },
     {
       "contractId": "ds.button",
       "contractPath": "contracts/button.contract.json",
-      "contractHash": "sha256:cb8c6dd3a6be620f97beceef934681b42cf806d26559c3443e4cab5ea06fd2bf",
+      "contractHash": "sha256:87e1d27a91ce78f8441f67ed50fcde75a2bc9880b132fbf7531a4c6c20175cdc",
       "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
       "setNodeId": "4:412",
       "canvasFingerprint": "v6:3495939700",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-08T13:32:57.000Z",
+      "lastSyncedVersionId": "2388438498796415748",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1357660242",
-        "fileVersionId": "2385318059580510974",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:1666010662",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2388438498796415748",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/button.json"
     },
     {
@@ -620,624 +642,654 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-08T13:32:57.000Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:784848269",
-        "fileVersionId": "2385318059580510974",
-        "observedAt": "2026-08-08T13:51:42.600Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/components/card.json"
     },
     {
       "contractId": "ds.chat-message-metadata",
       "contractPath": "contracts/chat-message-metadata.contract.json",
-      "contractHash": "sha256:aa35fd43306d214bc33de8411b72b570ec55c3ee6eca77d648e9e3a570f90b9a",
+      "contractHash": "sha256:cb306a22edef1f9a8caa32f2f4209d34d5b540699d9f616b87ef53cbed7eeed6",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1724",
       "canvasFingerprint": "v6:3272099092",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:09.647Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2516269458",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:3223228161",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/chat-message-metadata.json"
     },
     {
       "contractId": "ds.chat-message",
       "contractPath": "contracts/chat-message.contract.json",
-      "contractHash": "sha256:1c966d877b437d0c806c29d15cc8f314e6cb0a959ac69a723200493b233716b3",
+      "contractHash": "sha256:2b8a4cc9b072600e0b9be43a7632be0af489af7ee6307f540847de5f082afa02",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1778",
       "canvasFingerprint": "v6:2328098173",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:10.652Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2028778432",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:132659479",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/chat-message.json"
     },
     {
       "contractId": "ds.chat-system-message",
       "contractPath": "contracts/chat-system-message.contract.json",
-      "contractHash": "sha256:7ae85d66c117479f7ac51f4cd621c0781811c7a00d84d82e035f360f0ed3bfc1",
+      "contractHash": "sha256:dda775bac61d51268bca84decd648c5a68e2542d63054d76a59146473bf78952",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1739",
       "canvasFingerprint": "v6:1239964147",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:10.042Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3272616708",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:3382675890",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/chat-system-message.json"
     },
     {
       "contractId": "ds.checkbox",
       "contractPath": "contracts/checkbox.contract.json",
-      "contractHash": "sha256:8da993a80bf82696318b13fda375c68da53b6abbcb5d649b1f6ead1bf619701e",
+      "contractHash": "sha256:6f596c420399ca4c3d3e82095fac70bf094748c1f2742bcca676daa8b0506493",
       "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
       "setNodeId": "4:594",
       "canvasFingerprint": "v6:2238650114",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-08T13:32:57.000Z",
+      "lastSyncedVersionId": "2388438498796415748",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1948266487",
-        "fileVersionId": "2385318059580510974",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:2478388003",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2388438498796415748",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/checkbox.json"
     },
     {
       "contractId": "ds.citation",
       "contractPath": "contracts/citation.contract.json",
-      "contractHash": "sha256:d5e05fb0bf7292b23093d8cc4593a35caafff3d45fe177d9beb90623a6af41b4",
+      "contractHash": "sha256:fade303eef3a691ae9a1ac53ddeafefbff2177ee1c9a64f0844fb440726f7b23",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:971",
       "canvasFingerprint": "v6:3382273654",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:58:58.731Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1662996363",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:134570909",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/citation.json"
     },
     {
       "contractId": "ds.code",
       "contractPath": "contracts/code.contract.json",
-      "contractHash": "sha256:a09ecd24db48505ec2e351ec456a505de1cef7e4d5628658732d32d1b6b734ca",
+      "contractHash": "sha256:922bcfaaddcc49c6b4d6036faef5f816db6604b238dfbe9d0b37e53b392b94fe",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:954",
       "canvasFingerprint": "v6:475555880",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:58:58.228Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3637466021",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:4031099918",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/code.json"
     },
     {
       "contractId": "ds.divider",
       "contractPath": "contracts/divider.contract.json",
-      "contractHash": "sha256:b89303e381c239c9dff527234d01fb97b617bb721b2fbab390beb5d9bb9b803b",
+      "contractHash": "sha256:4b2f8e6c8f17c90ccb96fe10156fe2837de03c4a0dec0dbf14ba4b3786146412",
       "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
       "setNodeId": "4:599",
       "canvasFingerprint": "v6:3338360677",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-08T13:32:57.000Z",
+      "lastSyncedVersionId": "2388438498796415748",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:1794851804",
-        "fileVersionId": "2385318059580510974",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpVersion": "1.31",
+        "fileVersionId": "2388438498796415748",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/divider.json"
     },
     {
       "contractId": "ds.empty-state",
       "contractPath": "contracts/empty-state.contract.json",
-      "contractHash": "sha256:5bf6bd732708b7a01066d71d6b0356d21a18ba53d21816c79fd8e2fdfd8de988",
+      "contractHash": "sha256:1b777105c99beeb4b4b2c837e45f86db4b8e9a65d620e665a6d72e2d7668ce27",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1457",
       "canvasFingerprint": "v6:1979502124",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:05.193Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3491784799",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:1588402733",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/empty-state.json"
     },
     {
       "contractId": "ds.field",
       "contractPath": "contracts/field.contract.json",
-      "contractHash": "sha256:cb9051cd6d49f979dcd564bbbf81f7c540ae86812c007826bc848736072d9b53",
+      "contractHash": "sha256:f931549f0b7a5827f6ce22df6023bd2067d6d4f02cfc9cb45352f0d0e35e6909",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:742",
       "canvasFingerprint": "v6:615833569",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:55:39.093Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2980351814",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:2676795796",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/field.json"
     },
     {
       "contractId": "ds.heading",
       "contractPath": "contracts/heading.contract.json",
-      "contractHash": "sha256:1c1c8753bda8042baf34c19b028deddd55d8c4782428943ffa5e496ca642d41f",
+      "contractHash": "sha256:1339f24f04a3a5354ca21dcf253cdd756333fe006943b5dcff99b4f14765e1e1",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:947",
       "canvasFingerprint": "v6:822703176",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:58:57.762Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2668007609",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:1238368155",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/heading.json"
     },
     {
       "contractId": "ds.icon-button",
       "contractPath": "contracts/icon-button.contract.json",
-      "contractHash": "sha256:13363f4fbf4b07347d09cb5ca58da4d82e4bf65a3c128a183750cede526e8d1a",
+      "contractHash": "sha256:25be813983d02f004c1a765ea73236fe974293282d08ea00d63ab83bcce5c744",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:739",
       "canvasFingerprint": "v6:1073239359",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:55:38.656Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2720964517",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:306589473",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/icon-button.json"
     },
     {
       "contractId": "ds.kbd",
       "contractPath": "contracts/kbd.contract.json",
-      "contractHash": "sha256:14b886eb4fa98103e3738b12f200dc5513630fdc87b1ef8b45ad7ca484e7e355",
+      "contractHash": "sha256:294560286f4cf9e173b9d680e66bfc4d1e659a0e57cd57698adb719385469696",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:950",
       "canvasFingerprint": "v6:1502495576",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:58:58.032Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:794530658",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:3038354923",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/kbd.json"
     },
     {
       "contractId": "ds.list-item",
       "contractPath": "contracts/list-item.contract.json",
-      "contractHash": "sha256:986ed24139e4d4750e51d0795dbdbe1f8db4ad0a954f137b199b0e91e5a182f3",
+      "contractHash": "sha256:83919a84b0d1b1e04a4cbcb1bb5ecc2283a9584e0714ddeb6496ccf98e3290c2",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1296",
       "canvasFingerprint": "v6:3305958002",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:03.390Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:4236786016",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:2580230446",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/list-item.json"
     },
     {
       "contractId": "ds.list",
       "contractPath": "contracts/list.contract.json",
-      "contractHash": "sha256:b81e1437689beafdc19106994bbefe945f11c8aaf84b9e68240a6b4165d1bbae",
+      "contractHash": "sha256:8076ed10e14c99eba759f7454e999072f6af056344a4eacfee355e686bdfa851",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1404",
       "canvasFingerprint": "v6:2994839928",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:03.856Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:4264804022",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:2161274955",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/list.json"
     },
     {
       "contractId": "ds.metadata-list-item",
       "contractPath": "contracts/metadata-list-item.contract.json",
-      "contractHash": "sha256:4b3c81b3f318fc902d0faed8549145d36053866733a750f7a480231d0f14c365",
+      "contractHash": "sha256:99d72039aa0a764a9cd3ae3785bccfafe59f8490f3fa611b723a1fcb5465c988",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1407",
       "canvasFingerprint": "v6:108085772",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:04.195Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1011744786",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:3474680320",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/metadata-list-item.json"
     },
     {
       "contractId": "ds.metadata-list",
       "contractPath": "contracts/metadata-list.contract.json",
-      "contractHash": "sha256:baed9cf3606794ac80fb5213c5f0ad150027aee72bfb7313ceec2468e14defd3",
+      "contractHash": "sha256:baf3d14d6b9c69a5caff9d3198f8f62024bb15e270576128e7ad88e9c370d4a7",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1416",
       "canvasFingerprint": "v6:4200369828",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:04.501Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:464061610",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:1875458055",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/metadata-list.json"
     },
     {
       "contractId": "ds.pagination",
       "contractPath": "contracts/pagination.contract.json",
-      "contractHash": "sha256:d97462631c44273537e747f173fa33783ac0a4a05bf8f1e326d93878b837a70e",
+      "contractHash": "sha256:b0c2daac308957a19a812d533ac144d25986a0325f1a6b53fc299e18a169c432",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:838",
       "canvasFingerprint": "v6:3346344777",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:55:40.683Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:992075153",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:2315734023",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/pagination.json"
     },
     {
       "contractId": "ds.progress-bar",
       "contractPath": "contracts/progress-bar.contract.json",
-      "contractHash": "sha256:8a5b717ccd43919a31090980b8fdf803bd88cf967339341e294b7edf80f62acb",
+      "contractHash": "sha256:06ea77f42fb21a97fc4e7664955d143ef11160480d35de2f6b114b6dce96e33d",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:659",
       "canvasFingerprint": "v6:3162590889",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:55:24.165Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3511886852",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:3918428932",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/progress-bar.json"
     },
     {
       "contractId": "ds.section",
       "contractPath": "contracts/section.contract.json",
-      "contractHash": "sha256:dcccc6fba217c16e463e211b3a44f0637b94a3ab21ed32ef1da3d31bc019cc62",
+      "contractHash": "sha256:b9b92673088d767a8f1146b4bbe867fd50d0098c0c871924b5dcc10c328d0fa7",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1476",
       "canvasFingerprint": "v6:3994772349",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:05.633Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1557040614",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:2118560066",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/section.json"
     },
     {
       "contractId": "ds.side-nav-item",
       "contractPath": "contracts/side-nav-item.contract.json",
-      "contractHash": "sha256:6fcc87a3c47d9625011bfa2b2abd52fc83010be39d2e910dc0ee5366a08ab59e",
+      "contractHash": "sha256:058bdcb7034587b5eaf838ebf7408ecc1a0eda3cb57bc619259b43a7cf52fc69",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1495",
       "canvasFingerprint": "v6:4041151291",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:06.107Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2930226781",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:1980335563",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/side-nav-item.json"
     },
     {
       "contractId": "ds.skeleton",
       "contractPath": "contracts/skeleton.contract.json",
-      "contractHash": "sha256:6e3302cb9216e68a4e38d7a5fa8503044267dff23158e1b3281263a38f0db9d8",
+      "contractHash": "sha256:4d0c4c1515d368bf905d40c2f7d4889b98447061792f9a2983e4ec83d2394c56",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:679",
       "canvasFingerprint": "v6:2572131761",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:55:24.616Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3818082324",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:1518934740",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/skeleton.json"
     },
     {
       "contractId": "ds.slider",
       "contractPath": "contracts/slider.contract.json",
-      "contractHash": "sha256:b0221bd574ac25381097c2783d2b054cea74a153519b62d1406a598db8cf6369",
+      "contractHash": "sha256:bda231dd448796017474db691dd9683e3362a882d77667aed08c2b718f415aaa",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:682",
       "canvasFingerprint": "v6:1021231104",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:55:38.270Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3823760448",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpFingerprint": "dumpv1:2383121865",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/slider.json"
     },
     {
       "contractId": "ds.spinner",
       "contractPath": "contracts/spinner.contract.json",
-      "contractHash": "sha256:fa5db35f0879326ce05537b9aaf9bfd8557ca99fa3b73543adecce3f32f0669b",
+      "contractHash": "sha256:c4d05c76306548f24c7bbaf2ac28ae9e3a4d7ae90d21c5d1b2a8154164bc52de",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:639",
       "canvasFingerprint": "v6:592169333",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:55:23.903Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:3269269541",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.600Z"
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/spinner.json"
     },
     {
       "contractId": "ds.status-dot",
       "contractPath": "contracts/status-dot.contract.json",
-      "contractHash": "sha256:b0999fa31c9d2dfe0db7ee57b5bd1a2f66cb65b0c4ba16a2d9160c434d0e6c74",
+      "contractHash": "sha256:e41d415af4afeef263fef2b4be5f0270c2a6066981a24680eab245b92fc27286",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:667",
       "canvasFingerprint": "v6:938381755",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:55:24.416Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:3888203497",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/status-dot.json"
     },
     {
       "contractId": "ds.switch",
       "contractPath": "contracts/switch.contract.json",
-      "contractHash": "sha256:6043693e8160abc8c6c32ac0f153121a54403d2c45f8fb818c099af7795183c4",
+      "contractHash": "sha256:e4360d3015a36eca1b0440d7b6d026b9a86e528503e30a83a6ccc3b6792cd8f8",
       "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
       "setNodeId": "4:618",
       "canvasFingerprint": "v6:2653995724",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-08T13:32:57.000Z",
+      "lastSyncedVersionId": "2388438498796415748",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3135940853",
-        "fileVersionId": "2385318059580510974",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:915203117",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2388438498796415748",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/switch.json"
     },
     {
       "contractId": "ds.tab-list",
       "contractPath": "contracts/tab-list.contract.json",
-      "contractHash": "sha256:c2b90a701865a29b4d8a42f80ee48e4e2ade4779602377c9692155f34faa656c",
+      "contractHash": "sha256:2621206bbdf5b1c2ca8c1263412f795a70b561a9b96e4c15f2a0fd510e64c270",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:860",
       "canvasFingerprint": "v6:2665649309",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:55:41.390Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:215814069",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:3455218876",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/tab-list.json"
     },
     {
       "contractId": "ds.tab",
       "contractPath": "contracts/tab.contract.json",
-      "contractHash": "sha256:48da5adc170ba095f9e0d7b512de701a32ea06d4459416191554a60af0d623fd",
+      "contractHash": "sha256:962ceb3ea90725154c4983993ebf75c122ba0afe5217d3d18fc655a61f6e0f2c",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:857",
       "canvasFingerprint": "v6:2164586031",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:55:41.057Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1417138273",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:380235727",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/tab.json"
     },
     {
       "contractId": "ds.table-cell",
       "contractPath": "contracts/table-cell.contract.json",
-      "contractHash": "sha256:bfb64aa9bed5e439bca204025053e78c053b0a47a48f13a45b559cb531a8f9a6",
+      "contractHash": "sha256:79e333f8515aa43175deaf71d14231bf32650d0e345b87f93d7798c2c26c1b9e",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1511",
       "canvasFingerprint": "v6:3685392620",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:06.888Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:323340422",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:433754616",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/table-cell.json"
     },
     {
       "contractId": "ds.table-header-cell",
       "contractPath": "contracts/table-header-cell.contract.json",
-      "contractHash": "sha256:2e7f8839b5494e5c2af932e12f4a7e7584895d97c1e66132c7dbeb434fdda795",
+      "contractHash": "sha256:01c94b8299ae729d6d93eedec67f9d4c9d19ba5ba268bbf9e683088076e55fd1",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1518",
       "canvasFingerprint": "v6:768570304",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:07.214Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3362513651",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:2664972485",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/table-header-cell.json"
     },
     {
       "contractId": "ds.table-row",
       "contractPath": "contracts/table-row.contract.json",
-      "contractHash": "sha256:fed41fde52c9eba646707a807e9d0338498bf11fecf86ccf0e8da6a2fb9db3e3",
+      "contractHash": "sha256:55f6ac5504a71b714292eba214cc89a6e2b55e14951b02864c65ef62f21d21e6",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1537",
       "canvasFingerprint": "v6:3502734612",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:07.553Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2406069605",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:3561042021",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/table-row.json"
     },
     {
       "contractId": "ds.table",
       "contractPath": "contracts/table.contract.json",
-      "contractHash": "sha256:7c687e7372b3b393400e48b780dcbf59bd5e0ef7e8b2f9cf67c95f44ce3566cf",
+      "contractHash": "sha256:e24f572b5582bc59b9c252608e2d0ad73931fc2a026956843be87e94d17f168d",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1623",
       "canvasFingerprint": "v6:772848675",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:08.063Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:479657509",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:3073040933",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/table.json"
     },
     {
       "contractId": "ds.text-area",
       "contractPath": "contracts/text-area.contract.json",
-      "contractHash": "sha256:f61a79804e5b22095d906552a333b12e9338438cda0cc6ad807e4086e2d9e28b",
+      "contractHash": "sha256:4134a810795981d1b44b987421445845747a65a41b5aa14b78ef7a03acf6c2f8",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1271",
       "canvasFingerprint": "v6:1681029316",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:02.492Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1671773342",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:2371069263",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/text-area.json"
     },
     {
       "contractId": "ds.text-field",
       "contractPath": "contracts/text-field.contract.json",
-      "contractHash": "sha256:81e248a95ad3af107a1e9e29675090a486d92762088e93ea9350b9461e7acadd",
+      "contractHash": "sha256:21199edf26c0a01db00761f72d7bc33f8d31f7c4d9e6bc1dcc6f91d19a161438",
       "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
       "setNodeId": "4:651",
       "canvasFingerprint": "v6:1181024118",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-08T13:32:57.000Z",
+      "lastSyncedVersionId": "2388438498796415748",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:560682207",
-        "fileVersionId": "2385318059580510974",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:1190214256",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2388438498796415748",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/text-field.json"
     },
     {
       "contractId": "ds.toast",
       "contractPath": "contracts/toast.contract.json",
-      "contractHash": "sha256:91c8c233834a9754f8d7ecdbb4c890ed22a23085b1af09508f80274ea828f3e6",
+      "contractHash": "sha256:16e93b75ad4ee11e20f25e9022236700e1de44b8a01073f23d000074037eddf2",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:802",
       "canvasFingerprint": "v6:3355364986",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:55:40.054Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2140310206",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:3003253434",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/toast.json"
     },
     {
@@ -1250,84 +1302,84 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-08T13:32:57.000Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:878597391",
-        "fileVersionId": "2385318059580510974",
-        "observedAt": "2026-08-08T13:51:42.601Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/components/token.json"
     },
     {
       "contractId": "ds.toolbar",
       "contractPath": "contracts/toolbar.contract.json",
-      "contractHash": "sha256:08f43d20e7dfd887ae4a226f58c4f7516071b2a520162d8d09b0e0eb6bcbd1b6",
+      "contractHash": "sha256:fc7bbef111efb896b2f0475504953155eb8efd7208514360771cd3c30437f98a",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1656",
       "canvasFingerprint": "v6:700448191",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:08.439Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:702474289",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:292303745",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/toolbar.json"
     },
     {
       "contractId": "ds.top-nav-item",
       "contractPath": "contracts/top-nav-item.contract.json",
-      "contractHash": "sha256:d7842527971f7aa303252c8c55ecd6fe6c7198df9cfd07b2d14585fc41f4ad60",
+      "contractHash": "sha256:5aa5ea4b36f205db6bfbd319e77cb8c62c9823b677b1dbf81c1a97c9519c775e",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1669",
       "canvasFingerprint": "v6:2704633324",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:08.837Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1883901480",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:1314675734",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/top-nav-item.json"
     },
     {
       "contractId": "ds.top-nav",
       "contractPath": "contracts/top-nav.contract.json",
-      "contractHash": "sha256:2ca77d2b4a95498839d4a27dab6d58bbc671e09cd8d3c48a313a31e14dabfcbb",
+      "contractHash": "sha256:ca79c6aebf4489cd43810a0933168a1e2361361a3441e3dda1b467a5c2d32347",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1672",
       "canvasFingerprint": "v6:3533008205",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:09.096Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3573897948",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:3469212260",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/top-nav.json"
     },
     {
       "contractId": "ds.typeahead-item",
       "contractPath": "contracts/typeahead-item.contract.json",
-      "contractHash": "sha256:0809df76911528cd2da922075a7f375bf5b5c0df2b32c46d265e6f532d215ced",
+      "contractHash": "sha256:5bdaaa58dabb1677be07087b1925116df97b622614f68b656f7e3387ea84a89a",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:1498",
       "canvasFingerprint": "v6:599440583",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T03:59:06.447Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1390565902",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:3858385212",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/typeahead-item.json"
     },
     {
@@ -1347,19 +1399,20 @@
     {
       "contractId": "flowbite.badge",
       "contractPath": "examples/tailwind/contracts/badge.contract.json",
-      "contractHash": "sha256:264068df0c0a086b0f39893030b3dec3b31205550286a00b450eb049efe9b85e",
+      "contractHash": "sha256:ed23d808ac5680c445b143e52c4362ee6cc5b6d761dc6733233b862ef684cb54",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:2149",
       "canvasFingerprint": "v6:2933199349",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:42:56.743Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3551633168",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:865067787",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/tailwind/components/badge.json"
     },
     {
@@ -1379,20 +1432,21 @@
     {
       "contractId": "flowbite.card",
       "contractPath": "examples/tailwind/contracts/card.contract.json",
-      "contractHash": "sha256:d9b5bcbefb68dfb9074ea58a3db312c9ac8c3d4343e42839bea75e4895f143df",
+      "contractHash": "sha256:566070ab47bce9bdaf4383bcb1d768e91a5b46e41314892cb50525b94ed7d666",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:2267",
-      "canvasFingerprint": "v6:3067143140",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:42:58.099Z",
-      "direction": "code→canvas",
+      "canvasFingerprint": "v6:1646135488",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:35.595Z",
+      "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:980311055",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:1126456408",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/tailwind/components/card.json"
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — restamped by an unrecorded write between 2026-08-09 and 2026-08-21 (Figma version history: TJ Pitre); the dump-v1 projection under the 2026-08-08 mapper (8ac96363) is byte-identical to the 2026-08-08 baseline — content unchanged, stamp adopted (scratchpad REPORT 2026-08-23) (prior: receipt parity/receipts/console-loop/tailwind/components/card.json)"
     },
     {
       "contractId": "flowbite.toggleswitch",
@@ -1404,11 +1458,7 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:42:58.542Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:3619871677",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.601Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/tailwind/components/toggle-switch.json"
     },
@@ -1422,11 +1472,7 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T04:51:10.513Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:28072018",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/mui/components/accordion.json"
     },
@@ -1440,30 +1486,27 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:17:13.440Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:381823219",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/mui/components/alert.json"
     },
     {
       "contractId": "mui.autocomplete",
       "contractPath": "examples/mui/contracts/autocomplete.contract.json",
-      "contractHash": "sha256:0e74f5f37b35a79e986df4e65980869d24f31db25b0382f906a2bd036a5a3112",
+      "contractHash": "sha256:8948aab5fdd956a62166858d0613c09ac54acb264a7d728e6a00bbe1e781c965",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "21:134",
       "canvasFingerprint": "v6:1521385897",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T04:51:10.513Z",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3440285766",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:4187961574",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/autocomplete.json"
     },
     {
@@ -1476,11 +1519,7 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:00:34.663Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:2673474047",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/mui/components/avatar.json"
     },
@@ -1494,66 +1533,65 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:22:31.359Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:1650325718",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/mui/components/badge.json"
     },
     {
       "contractId": "mui.breadcrumbs",
       "contractPath": "examples/mui/contracts/breadcrumbs.contract.json",
-      "contractHash": "sha256:da354a3d8124319adcd1497684e7186717f3e98d893c6b60b0dcf35d27bbb2f2",
+      "contractHash": "sha256:3697afdf7b7c29738ff951fd26e13d107b20c91068fd2f904c6da82a59d0b21b",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "83:1658",
       "canvasFingerprint": "v6:1233132133",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:00:36.193Z",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:805478728",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:1936982772",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/breadcrumbs.json"
     },
     {
       "contractId": "mui.button",
       "contractPath": "examples/mui/contracts/button.contract.json",
-      "contractHash": "sha256:941dc92b327dff855577583d6bd3ce659d5169ba445918d41ea7282de153e9fa",
+      "contractHash": "sha256:e85afbfc38e2591a369cfd5a66da253fb0445a4f4f2a2e464dca5e36b9f405e3",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "21:287",
       "canvasFingerprint": "v6:437388687",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T04:51:10.510Z",
-      "direction": "code→canvas",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T12:52:39.983Z",
+      "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:3123763879",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:2415220176",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/mui/components/button.json"
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — set carries a v5-era stamp (pre-v6 engine) while the receipt recorded a freshly computed v6 — two instruments, not a write; the dump-v1 projection under the 2026-08-08 mapper equals the 2026-08-08 baseline — content unchanged, re-baselined under grammar 1.31 (prior: receipt parity/receipts/console-loop/mui/components/button.json)"
     },
     {
       "contractId": "mui.card",
       "contractPath": "examples/mui/contracts/card.contract.json",
-      "contractHash": "sha256:ce6e431d950484f70284d5f5747f03b7ea7a0095ebea5c7f1c43af4c604b23ce",
+      "contractHash": "sha256:2d0d51eec80e244ee18ece0f3d590cde8b13c100f1af35a400483ded99025e34",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "21:308",
       "canvasFingerprint": "v6:2926211222",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T04:51:10.511Z",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2028771623",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:3693583755",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/card.json"
     },
     {
@@ -1566,66 +1604,65 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T04:51:10.514Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:833124426",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/mui/components/checkbox.json"
     },
     {
       "contractId": "mui.chip",
       "contractPath": "examples/mui/contracts/chip.contract.json",
-      "contractHash": "sha256:161992c91320471b5341565a42bda1f1d94545ebabd637492aaeb7c587703e16",
+      "contractHash": "sha256:18642235b52a33ddab8777f0e3123a9748f38137e28ec446635fbef783656905",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "21:410",
       "canvasFingerprint": "v6:1499592056",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T04:51:10.511Z",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:503719763",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:2168689507",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/chip.json"
     },
     {
       "contractId": "mui.circular-progress",
       "contractPath": "examples/mui/contracts/circular-progress.contract.json",
-      "contractHash": "sha256:308cf77329cb9542b1160cec3aeec65a32ffc55907c665789e890d973a2fd6cc",
+      "contractHash": "sha256:895fd2928a63161be36e405fdb74beb03cc4f4d80a52b566a399d5c73f94e6ed",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "83:1647",
       "canvasFingerprint": "v6:3509931486",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:00:35.254Z",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
         "dumpFingerprint": "dumpv1:2896218865",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/circular-progress.json"
     },
     {
       "contractId": "mui.dialog",
       "contractPath": "examples/mui/contracts/dialog.contract.json",
-      "contractHash": "sha256:498709c8ffc98ea8b5d2ac22da003d82e54d57fc4ac5d39e418da3350d07883b",
+      "contractHash": "sha256:aac08da1ce287d512bab818238fe813c9824f37212d49a1b180265fa1c356c70",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "21:448",
       "canvasFingerprint": "v6:915053960",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T04:51:10.514Z",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:495750069",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:2148376738",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/dialog.json"
     },
     {
@@ -1638,11 +1675,7 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:00:33.498Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:1559198692",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/mui/components/divider.json"
     },
@@ -1656,11 +1689,7 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:00:36.655Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:3428439317",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/mui/components/drawer.json"
     },
@@ -1674,67 +1703,66 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:17:13.326Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:3084139766",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/mui/components/fab.json"
     },
     {
       "contractId": "mui.icon-button",
       "contractPath": "examples/mui/contracts/icon-button.contract.json",
-      "contractHash": "sha256:06b9858a921510144e5809adaf31a91a0a3d3ab2ab2849e5b525cc443c73c58a",
+      "contractHash": "sha256:812bec1dfc5448e3394bc8b5c4f1f35c1b54b3c3f50f1add2abb7152c0bf2ef0",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "83:1708",
       "canvasFingerprint": "v6:1946274529",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:00:37.497Z",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:68632039",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:646966808",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/icon-button.json"
     },
     {
       "contractId": "mui.input-adornment",
       "contractPath": "examples/mui/contracts/input-adornment.contract.json",
-      "contractHash": "sha256:73f9ebc30b36d116a34116c146119dc805e275f738c680ecce246b908017791f",
+      "contractHash": "sha256:0c641597c8e744a952fb5e05f6e4202f44b3d646faa44130f9d1394b6f19befe",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "83:1687",
       "canvasFingerprint": "v6:3114867968",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:00:37.029Z",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2734101850",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:4091473170",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/input-adornment.json"
     },
     {
       "contractId": "mui.linear-progress",
       "contractPath": "examples/mui/contracts/linear-progress.contract.json",
-      "contractHash": "sha256:15589f23b2384b58b73fd839755909eea6d1fd2a9219910d3b8134ca4811f9be",
+      "contractHash": "sha256:d808c1d9883e57be70b6f6f8253d9c8403b1dba269ca3988d4f15b6245705f40",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "83:1655",
-      "canvasFingerprint": "v6:3801840436",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:00:35.671Z",
-      "direction": "code→canvas",
+      "canvasFingerprint": "v6:2483946288",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T12:52:35.595Z",
+      "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:138171495",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:3931827815",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/mui/components/linear-progress.json"
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — restamped by an unrecorded write between 2026-08-09 and 2026-08-21 (Figma version history: TJ Pitre); the dump-v1 projection under the 2026-08-08 mapper (8ac96363) is byte-identical to the 2026-08-08 baseline — content unchanged, stamp adopted (scratchpad REPORT 2026-08-23) (prior: receipt parity/receipts/console-loop/mui/components/linear-progress.json)"
     },
     {
       "contractId": "mui.link",
@@ -1746,31 +1774,28 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:04:41.915Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:3780408933",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/mui/components/link.json"
     },
     {
       "contractId": "mui.menu",
       "contractPath": "examples/mui/contracts/menu.contract.json",
-      "contractHash": "sha256:9efc0e8a2917753d66123781fb868d7175973a1ec0d7b18fb9de6c0a46268354",
+      "contractHash": "sha256:ba9afa5e60dfb236317ec8a3c53f3ecb28d112798ae6abe012a42627612f1d85",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "21:451",
       "canvasFingerprint": "v6:226276784",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T04:51:10.514Z",
-      "direction": "code→canvas",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T12:52:39.983Z",
+      "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:1451531493",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:1827025945",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/mui/components/menu.json"
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — set carries a v5-era stamp (pre-v6 engine) while the receipt recorded a freshly computed v6 — two instruments, not a write; the dump-v1 projection under the 2026-08-08 mapper equals the 2026-08-08 baseline — content unchanged, re-baselined under grammar 1.31 (prior: receipt parity/receipts/console-loop/mui/components/menu.json)"
     },
     {
       "contractId": "mui.paper",
@@ -1782,11 +1807,7 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:00:34.280Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:1549941020",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/mui/components/paper.json"
     },
@@ -1800,11 +1821,7 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:04:42.510Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:465181063",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/mui/components/radio.json"
     },
@@ -1818,11 +1835,7 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:12:50.620Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:3634141290",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/mui/components/select.json"
     },
@@ -1836,30 +1849,27 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T04:51:10.512Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:635612365",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/mui/components/slider.json"
     },
     {
       "contractId": "mui.snackbar",
       "contractPath": "examples/mui/contracts/snackbar.contract.json",
-      "contractHash": "sha256:3146d41ef4e06d03d356acd737175aecb86e3bbad97a00670753484886c1b3c7",
+      "contractHash": "sha256:88c5adbe692525cf312e75a16ed22a6e795bb458edca97a4863eee586ce006ac",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "84:2140",
       "canvasFingerprint": "v6:4279840767",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:12:51.070Z",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1794723124",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:2224078824",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/snackbar.json"
     },
     {
@@ -1872,31 +1882,28 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T04:51:10.511Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:1573175479",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/mui/components/switch.json"
     },
     {
       "contractId": "mui.table-pagination",
       "contractPath": "examples/mui/contracts/table-pagination.contract.json",
-      "contractHash": "sha256:146bfc2adcdf56c7e5f5f1b10da5f4ec6983ba05eaa3992332ecf6bd7a2e9d98",
+      "contractHash": "sha256:61a833bbdb98a6b46907129d9dfd09fac3bc3964931decaefc503ca228535b73",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "21:627",
-      "canvasFingerprint": "v6:527762080",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T04:51:10.514Z",
-      "direction": "code→canvas",
+      "canvasFingerprint": "v6:2432095718",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T12:52:35.595Z",
+      "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:1908555103",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:2335928335",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/mui/components/table-pagination.json"
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — restamped by an unrecorded write between 2026-08-09 and 2026-08-21 (Figma version history: TJ Pitre); the dump-v1 projection under the 2026-08-08 mapper (8ac96363) is byte-identical to the 2026-08-08 baseline — content unchanged, stamp adopted (scratchpad REPORT 2026-08-23) (prior: receipt parity/receipts/console-loop/mui/components/table-pagination.json)"
     },
     {
       "contractId": "mui.table",
@@ -1908,11 +1915,7 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T04:51:10.515Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:1275646288",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/mui/components/table.json"
     },
@@ -1926,11 +1929,7 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T04:51:10.512Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:2373902012",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/mui/components/tabs.json"
     },
@@ -1944,30 +1943,27 @@
       "lastSyncedVersionId": null,
       "lastSyncedAt": "2026-08-06T05:26:56.332Z",
       "direction": "code→canvas",
-      "observed": {
-        "dumpFingerprint": "dumpv1:3699061567",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
-      },
+      "observed": null,
       "provenance": "seeded-from-receipts",
       "note": "receipt parity/receipts/console-loop/mui/components/text-field.json"
     },
     {
       "contractId": "mui.tooltip",
       "contractPath": "examples/mui/contracts/tooltip.contract.json",
-      "contractHash": "sha256:180012c2f6315b158f85de72c1564fc028398eca8524d5ae3bffaab2d5b30b08",
+      "contractHash": "sha256:13d7e5e8ac14c7ffe2547d7c69e47b99de55a27f0d3b537c4ed3381481a0276f",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "21:810",
       "canvasFingerprint": "v6:1221797663",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T04:51:10.514Z",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2853288222",
-        "fileVersionId": "2384477865735882405",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:2057400026",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/tooltip.json"
     },
     {
@@ -2113,19 +2109,20 @@
     {
       "contractId": "polaris.text",
       "contractPath": "examples/polaris/contracts/text.contract.json",
-      "contractHash": "sha256:1e561e02a7d84ea2b5b4de238b9eb5193be654b311b4029ff1aeced5c6c4e306",
+      "contractHash": "sha256:ed8fbc6f63789757ec73c1479fe72470658685077c1b32db6e4401d03fe146ff",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:10480",
       "canvasFingerprint": "v6:3918753726",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:38.221Z",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:922913781",
-        "fileVersionId": "2385311290720626690",
-        "observedAt": "2026-08-08T13:51:42.601Z"
+        "dumpFingerprint": "dumpv1:1115150788",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T12:52:39.983Z"
       },
-      "provenance": "seeded-from-receipts",
+      "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/polaris/components/text.json"
     },
     {

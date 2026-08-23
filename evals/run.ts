@@ -11427,15 +11427,16 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         lastSyncedVersionId: '41',
         lastSyncedAt: AT,
         direction: 'code→canvas',
-        observed: { dumpFingerprint: 'dumpv1:10', fileVersionId: '41', observedAt: AT },
+        observed: { dumpFingerprint: 'dumpv1:10', dumpVersion: 'g1', fileVersionId: '41', observedAt: AT },
         provenance: 'sync-record',
       };
-      const obs = (stamp: string, dump: string): SyncSetObservation => ({
+      const obs = (stamp: string, dump: string, dumpVersion = 'g1'): SyncSetObservation => ({
         fileKey: 'FILEKEY',
         setNodeId: '1:1',
         setName: 'Probe',
         stamp,
         dumpFingerprint: dump,
+        dumpVersion,
         fileVersionId: '42',
       });
 
@@ -11459,6 +11460,32 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         throw new Error(
           `a v5 stamp vs a v6 record with an agreeing baseline must be in-sync with a named incomparability note (got ${crossVersion.status})`,
         );
+
+      // THE INSTRUMENT MOVED, NOT THE CANVAS (live finding 2026-08-23): the
+      // REST mapper's dump grammar went 1.5 → 1.31 and every baseline's
+      // bytes moved with it — six scheduled spine runs reported 87 untouched
+      // sets as "designer edit". Baselines compare only WITHIN a grammar: a
+      // baseline under another grammar is named incomparable and is never
+      // canvas evidence, so the row rides the stamp instead.
+      const grammarMoved = syncClassifyRecord(record, HASH_A, obs('v6:100', 'dumpv1:99', 'g2'));
+      if (grammarMoved.status !== 'in-sync' || !grammarMoved.notes.some((n) => n.includes('instrument moved')))
+        throw new Error(
+          `a baseline under a different dump grammar must be incomparable (in-sync by stamp, note names the instrument) — got ${grammarMoved.status}: ${grammarMoved.notes.join('; ')}`,
+        );
+      if (grammarMoved.canvasEvidence !== 'stamp')
+        throw new Error(`a foreign-grammar baseline must not count as evidence (got ${grammarMoved.canvasEvidence})`);
+      const untagged = syncClassifyRecord(
+        { ...record, observed: { dumpFingerprint: 'dumpv1:10', fileVersionId: '41', observedAt: AT } },
+        HASH_A,
+        obs('v6:100', 'dumpv1:10'),
+      );
+      if (untagged.canvasEvidence !== 'stamp' || !untagged.notes.some((n) => n.includes('untagged')))
+        throw new Error('an untagged (pre-grammar) baseline must be named incomparable, never silently trusted');
+      // …and a stamp that moved under a foreign grammar is still canvas-ahead
+      // (the stamp is its own instrument).
+      const stampMovedForeign = syncClassifyRecord(record, HASH_A, obs('v6:101', 'dumpv1:10', 'g2'));
+      if (stampMovedForeign.status !== 'canvas-ahead')
+        throw new Error(`a moved stamp must classify canvas-ahead regardless of baseline grammar (got ${stampMovedForeign.status})`);
 
       // RED 2: contract-hash bump → code-ahead.
       const codeBump = syncClassifyRecord(record, HASH_B, obs('v6:100', 'dumpv1:10'));
@@ -11552,7 +11579,8 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         throw new Error('sync:ledger:check did not report the five-status fixture drift table');
       console.log(
         'sync-ledger-lockfile: canvas-edit→canvas-ahead, hash-bump→code-ahead, both→conflict, recorded-amend echo→in-sync ' +
-          '(unrecorded amend raises the named false alarm); serialization deterministic; offline gate green over the committed ledger',
+          '(unrecorded amend raises the named false alarm); a foreign-grammar or untagged baseline is incomparable, never drift; ' +
+          'serialization deterministic; offline gate green over the committed ledger',
       );
     },
   },

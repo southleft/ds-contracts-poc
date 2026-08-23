@@ -241,8 +241,9 @@ function buildPrPlan(
     '',
     '## After merging',
     '',
-    '1. Re-baseline the sync ledger so the next observation records the adoption: ' +
-      '`npm run sync:observe -- --update` (or `ds-contracts figma receive --apply` when landing via the envelope path).',
+    `1. Record the adoption in the sync ledger: \`npm run sync:observe -- --adopt ${record.contractId}\` ` +
+      '(the canvas is the truth for this row: current contract hash + observed stamp + a fresh baseline, direction canvas→code). ' +
+      'A plain `--update` cannot do this — the merged contract hash differs from the ledger, so the row is not in-sync and `--update` skips it.',
     '2. Regenerate code surfaces from the adopted contract (`ds-contracts generate …`).',
     '',
     '_Opened by the sync spine (sync/spine.ts). The fingerprint marker at the top is how the spine avoids ' +

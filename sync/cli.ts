@@ -14,7 +14,7 @@
  *       records are marked provenance "seeded-from-receipts".
  *
  *   observe  [--fixture <fixture.json>] [--file-key K] [--update] [--json]
- *            [--ledger <path>]
+ *            [--repin id[,id…]] [--adopt id[,id…] [--note text]] [--ledger <path>]
  *       THE DRIFT ARITHMETIC. Reads the current canvas state headlessly —
  *       from a committed ObservationFixture (offline, gate-shaped) or live
  *       over the Figma REST API (FIGMA_TOKEN; per-set stamp via
@@ -23,7 +23,26 @@
  *       in-sync | code-ahead | canvas-ahead | conflict | untracked.
  *       Exit gate-style: 0 clean, 1 drift, 2 usage/config error.
  *       --update records observation baselines for in-sync rows (and adopts
- *       a post-publish restamp, clearing pendingApply — noted loudly).
+ *       a post-publish restamp, clearing pendingApply — noted loudly). A
+ *       baseline recorded under an older dump grammar (ledger.ts
+ *       observed.dumpVersion ≠ the mapper's REST_DUMP_VERSION) is
+ *       incomparable: --update re-records it where the row is in-sync and
+ *       DROPS it, loudly and by name, where it is not (it described nothing
+ *       the current instrument can re-measure).
+ *       --repin id[,id…] (implies --update): the contract bytes moved by a
+ *       bookkeeping change (a schema codemod, an anchor re-point) and the
+ *       canvas half is PROVABLY unchanged — the observed stamp equals the
+ *       ledger's — so re-pin contractHash to the current bytes without
+ *       claiming a write. REFUSES by name for any row whose stamp differs,
+ *       is absent, or is incomparable: a re-pin over a moved canvas would be
+ *       the echo-loop false negative. Measured 2026-08-23: schema 17 moved
+ *       104 contract hashes while 64 canvases carried the exact ledger stamp.
+ *       --adopt id[,id…] (implies --update): take the CANVAS as the truth for
+ *       these rows — record the current contract hash + the observed stamp +
+ *       a fresh baseline, direction canvas→code. This is the after-merge
+ *       step of a spine PR, and the record for a canvas write nobody ledgered
+ *       (a plugin apply, a console-loop rebuild whose receipt never reached
+ *       `sync record`). Explicit ids only, never "all"; --note is recorded.
  *
  *   pull     [--fixture <fixture.json>] [--file-key K] [--only id[,id…]]
  *            [--out sync/out] [--run-id id] [--ledger <path>]
@@ -40,12 +59,14 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import {
+  baselineComparableWith,
   contractHashOf,
   driftReport,
   recordCodeToCanvasSync,
   recordKey,
   type DriftRow,
   type LedgerRecord,
+  type ObservationBaseline,
   type SetObservation,
   type SyncLedger,
 } from './ledger.js';
@@ -256,7 +277,11 @@ async function observeCommand(args: string[]): Promise<number> {
   let ledger = loadLedger(ledgerPath);
   const fixturePath = flag(args, 'fixture');
   const fileKeyFilter = flag(args, 'file-key');
-  const update = has(args, 'update');
+  const repinIds = flag(args, 'repin')?.split(',').map((s) => s.trim()).filter(Boolean) ?? [];
+  const adoptIds = flag(args, 'adopt')?.split(',').map((s) => s.trim()).filter(Boolean) ?? [];
+  const update = has(args, 'update') || repinIds.length > 0 || adoptIds.length > 0;
+  if (has(args, 'repin') && repinIds.length === 0) usage('--repin needs id[,id…]');
+  if (has(args, 'adopt') && adoptIds.length === 0) usage('--adopt needs id[,id…] (explicit, never "all")');
 
   let observations: SetObservation[];
   let fileKeys: Set<string> | undefined;
@@ -296,24 +321,105 @@ async function observeCommand(args: string[]): Promise<number> {
 
   if (update) {
     const byNode = new Map(observations.map((o) => [`${o.fileKey ?? '(no-file)'}#${o.setNodeId}`, o]));
+    const now = new Date().toISOString();
+    const baselineOf = (obs: SetObservation): ObservationBaseline => ({
+      dumpFingerprint: obs.dumpFingerprint,
+      dumpVersion: obs.dumpVersion,
+      fileVersionId: obs.fileVersionId,
+      observedAt: now,
+    });
+    const byId = new Map(ledger.records.map((r) => [r.contractId, r]));
+    for (const id of [...repinIds, ...adoptIds])
+      if (!byId.has(id)) usage(`--repin/--adopt: ${id} is not a ledger record`);
+    const noteFlag = flag(args, 'note');
+
+    // --repin: the code bytes moved by bookkeeping; the canvas provably did
+    // not. Refuse anything short of an exact stamp match.
+    let repinned = 0;
+    for (const id of repinIds) {
+      const r = byId.get(id)!;
+      const obs = r.setNodeId ? byNode.get(`${r.fileKey ?? '(no-file)'}#${r.setNodeId}`) : undefined;
+      const currentHash = hashes.get(recordKey(r)) ?? null;
+      if (!obs) usage(`--repin ${id}: the set was not observed — nothing proves the canvas half`);
+      if (currentHash === null) usage(`--repin ${id}: contract ${r.contractPath ?? '(none)'} is unreadable — no hash to pin`);
+      if (obs.stamp === null || r.canvasFingerprint === null || obs.stamp !== r.canvasFingerprint)
+        usage(
+          `--repin ${id} REFUSED: canvas stamp ${obs.stamp ?? 'none'} ≠ ledger ${r.canvasFingerprint ?? 'none'} — ` +
+            'the canvas half is not provably unchanged; use --adopt (canvas is the truth) or re-apply from code',
+        );
+      if (r.pendingApply) usage(`--repin ${id} REFUSED: a publish is pending apply — the canvas has not adopted this contract`);
+      if (currentHash === r.contractHash) {
+        console.log(`  = ${id}: contract hash already matches the ledger — nothing to re-pin`);
+        continue;
+      }
+      repinned++;
+      console.log(`  ↻ ${id}: contractHash re-pinned ${r.contractHash?.slice(0, 19) ?? 'null'}… → ${currentHash.slice(0, 19)}… (stamp ${obs.stamp} unchanged)`);
+      byId.set(id, {
+        ...r,
+        contractHash: currentHash,
+        lastSyncedVersionId: obs.fileVersionId,
+        lastSyncedAt: now,
+        observed: baselineOf(obs),
+        provenance: 'observe',
+      });
+    }
+
+    // --adopt: the canvas is the truth for this row.
+    let adopted = 0;
+    for (const id of adoptIds) {
+      const r = byId.get(id)!;
+      const obs = r.setNodeId ? byNode.get(`${r.fileKey ?? '(no-file)'}#${r.setNodeId}`) : undefined;
+      const currentHash = hashes.get(recordKey(r)) ?? null;
+      if (!obs) usage(`--adopt ${id}: the set was not observed — nothing to adopt`);
+      if (currentHash === null) usage(`--adopt ${id}: contract ${r.contractPath ?? '(none)'} is unreadable — an adoption records the contract it lands on`);
+      const v6 = obs.stamp !== null && /^v6:\d+$/.test(obs.stamp) ? obs.stamp : null;
+      if (v6 === null)
+        console.log(
+          `  ⚠ ${id}: the set carries ${obs.stamp ?? 'no'} stamp (not a v6 value) — keeping the ledger's ${r.canvasFingerprint ?? 'null'}; ` +
+            'the baseline is the canvas evidence for this row',
+        );
+      adopted++;
+      const { pendingApply: _drop, ...rest } = r;
+      const why = `adopted from live observation ${now.slice(0, 10)}` + (noteFlag ? ` — ${noteFlag}` : '') + (r.note ? ` (prior: ${r.note})` : '');
+      console.log(`  ✚ ${id}: adopted canvas stamp ${v6 ?? r.canvasFingerprint} + contract hash ${currentHash.slice(0, 19)}… (canvas→code)`);
+      byId.set(id, {
+        ...rest,
+        contractHash: currentHash,
+        canvasFingerprint: v6 ?? r.canvasFingerprint,
+        lastSyncedVersionId: obs.fileVersionId,
+        lastSyncedAt: now,
+        direction: 'canvas→code',
+        observed: baselineOf(obs),
+        provenance: 'observe',
+        note: why,
+      });
+    }
+    ledger = { ...ledger, records: [...byId.values()] };
+
     let updated = 0;
+    let dropped = 0;
+    const touched = new Set([...repinIds, ...adoptIds]);
     ledger = {
       ...ledger,
       records: ledger.records.map((r) => {
+        if (touched.has(r.contractId)) return r;
         const obs = r.setNodeId ? byNode.get(`${r.fileKey ?? '(no-file)'}#${r.setNodeId}`) : undefined;
         if (!obs) return r;
         const row = report.rows.find((x) => x.key === recordKey(r));
         if (!row) return r;
         if (row.status === 'in-sync' && !r.pendingApply) {
           updated++;
-          return {
-            ...r,
-            observed: {
-              dumpFingerprint: obs.dumpFingerprint,
-              fileVersionId: obs.fileVersionId,
-              observedAt: new Date().toISOString(),
-            },
-          };
+          return { ...r, observed: baselineOf(obs) };
+        }
+        // A baseline the current grammar cannot re-measure on a row that is
+        // NOT in-sync: it names nothing about today's canvas. Drop it, by
+        // name, rather than carry evidence the instrument can no longer read.
+        if (r.observed !== null && !baselineComparableWith(r.observed, obs)) {
+          dropped++;
+          console.log(
+            `  ✂ ${r.contractId}: dropped baseline ${r.observed.dumpFingerprint} (dump grammar ${r.observed.dumpVersion ?? 'untagged'} → ${obs.dumpVersion}; row is ${row.status}, not re-baselined)`,
+          );
+          return { ...r, observed: null };
         }
         // A pendingApply record whose set now carries a DIFFERENT stamp than
         // the ledger recorded at publish time: the canvas was written after
@@ -328,11 +434,7 @@ async function observeCommand(args: string[]): Promise<number> {
           return {
             ...rest,
             canvasFingerprint: obs.stamp,
-            observed: {
-              dumpFingerprint: obs.dumpFingerprint,
-              fileVersionId: obs.fileVersionId,
-              observedAt: new Date().toISOString(),
-            },
+            observed: baselineOf(obs),
             provenance: 'observe' as const,
           };
         }
@@ -340,7 +442,10 @@ async function observeCommand(args: string[]): Promise<number> {
       }),
     };
     saveLedger(ledgerPath, ledger);
-    console.log(`✔ --update: ${updated} observation baseline(s) recorded → ${ledgerPath}`);
+    console.log(
+      `✔ --update: ${updated} observation baseline(s) recorded, ${repinned} re-pinned, ${adopted} adopted, ` +
+        `${dropped} incomparable baseline(s) dropped → ${ledgerPath}`,
+    );
   }
 
   return report.clean ? 0 : 1;

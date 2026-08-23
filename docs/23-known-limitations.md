@@ -588,12 +588,17 @@ Two named holes remain:
     dump script reads the stamp back (nine occurrences in
     `extract/figma/dump.plugin.js`, five in `parity/extract-figma.plugin.js`),
     and hop-4 dump→propose recovers the stamped names, `specHash` and
-    `version` from it (`flowbite-dump-propose:check`). What is still missing
-    is narrower: no headless path recomputes the v6 fingerprint off a REST
-    file dump and compares it to the stamp, so a canvas edit is still found
-    by a human clicking **Check Drift** in the plugin, never by CI. The REST
-    route cannot read shared plugin data at all — the stamp is plugin-only
-    — which is why the read half is an engine change and not a wiring one.
+    `version` from it (`flowbite-dump-propose:check`). **Second correction
+    (2026-08-23):** the read half DOES exist and runs on the scheduled
+    `sync-spine` lane — `sync/observe.ts` reads the v6 stamp back over REST
+    (`/nodes?plugin_data=shared`) and compares it to `sync/ledger.json`, and
+    catches un-restamped edits through the dump-v1 observation baseline
+    (`observed.dumpFingerprint`, tagged with the grammar that produced it).
+    What is true is narrower: the v6 fingerprint is never RECOMPUTED
+    headlessly (REST paint JSON cannot reproduce the plugin serialization),
+    so the stamp is compared, not re-derived — and the first six live runs
+    showed the baseline half is only as honest as its grammar tag
+    (`sync/README.md`, "Two fingerprint domains").
 
 **What it would take — an engine change** for the read half; the signing half
 is not buildable in-plugin.

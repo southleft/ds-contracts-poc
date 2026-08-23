@@ -14,7 +14,12 @@
  * the gate-shaped offline path, sync:ledger:check) and over the live API
  * (fetchObservation, FIGMA_TOKEN). Pure except fetchObservation.
  */
-import { mapRestToDump, type RestNode, type RestNodesResponse } from '../extract/figma/rest/map.js';
+import {
+  mapRestToDump,
+  REST_DUMP_VERSION,
+  type RestNode,
+  type RestNodesResponse,
+} from '../extract/figma/rest/map.js';
 import { FIGMA_API_BASE, type FetchLike } from '../extract/figma/rest/fetch.js';
 import { dumpFingerprint, type SetObservation } from './ledger.js';
 
@@ -56,6 +61,7 @@ export function observationsFromRestNodes(
       setName: doc.name,
       stamp: dsMarker(doc, 'canvasFingerprint'),
       dumpFingerprint: dumpFingerprint(entryDump),
+      dumpVersion: REST_DUMP_VERSION,
       fileVersionId,
     });
   }

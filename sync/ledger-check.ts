@@ -24,7 +24,16 @@
  *   4. a drift table over the committed fixture that stops classifying all
  *      five statuses — the gate-shaped offline variant of `sync observe`
  *      (the live variant needs FIGMA_TOKEN and runs by hand:
- *      `npm run sync:observe`).
+ *      `npm run sync:observe`);
+ *   5. any observation baseline recorded under a dump grammar other than the
+ *      one the mapper speaks now (extract/figma/rest/map.ts
+ *      REST_DUMP_VERSION). Such a baseline is incomparable — the scheduled
+ *      spine names it and ignores it — so the ledger is carrying evidence
+ *      nothing can re-measure. The repair is a live re-baseline
+ *      (`npm run sync:observe -- --update`, FIGMA_TOKEN), in the SAME change
+ *      that moved the grammar. Measured 2026-08-23: the 1.5 → 1.31 move
+ *      shipped without one and six scheduled runs reported 87 untouched sets
+ *      as designer edits.
  *
  * NOT checked on purpose: current contract hashes vs ledger hashes — a
  * contract editing ahead of its last sync is code-ahead DRIFT (observe's
@@ -35,6 +44,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { contractHashOf, driftReport, parseLedger, recordKey, serializeLedger } from './ledger.js';
 import { observationsFromFixture, type ObservationFixture } from './observe.js';
+import { REST_DUMP_VERSION } from '../extract/figma/rest/map.js';
 
 const ROOT = process.cwd();
 const failures: string[] = [];
@@ -88,6 +98,19 @@ for (const r of ledger.records) {
     fail(`${recordKey(r)}: contractPath ${r.contractPath} is not on disk`);
 }
 
+// 3b. Baselines speak the mapper's grammar ------------------------------------
+let baselines = 0;
+for (const r of ledger.records) {
+  if (r.observed === null) continue;
+  baselines++;
+  if (r.observed.dumpVersion !== REST_DUMP_VERSION)
+    fail(
+      `${recordKey(r)}: observation baseline ${r.observed.dumpFingerprint} was recorded under dump grammar ` +
+        `${r.observed.dumpVersion ?? '(untagged)'}; the mapper speaks ${REST_DUMP_VERSION} — incomparable. ` +
+        'Re-baseline in this change: `npm run sync:observe -- --update` (live, FIGMA_TOKEN)',
+    );
+}
+
 // 4. The offline drift table over the committed fixture ----------------------
 const fixture = JSON.parse(
   readFileSync(path.join(ROOT, 'sync', 'fixtures', 'canvas.rest.fixture.json'), 'utf8'),
@@ -132,6 +155,6 @@ if (failures.length > 0) {
 }
 console.log(
   `sync-ledger-check: ${ledger.records.length} record(s) ok (${cited} receipt-citing record(s) verified against the receipts they cite), ` +
-    'bytes deterministic, contract paths resolve; offline fixture drift table classifies ' +
-    'in-sync / code-ahead / canvas-ahead / conflict / untracked exactly.',
+    `bytes deterministic, contract paths resolve, ${baselines} baseline(s) speak dump grammar ${REST_DUMP_VERSION}; ` +
+    'offline fixture drift table classifies in-sync / code-ahead / canvas-ahead / conflict / untracked exactly.',
 );
