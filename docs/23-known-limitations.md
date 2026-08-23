@@ -548,7 +548,7 @@ re-verified against docs/18's own rows today:
 | **G5 — org-level GitHub App** | OPEN | designers still paste a fine-grained PAT into a plugin field. |
 | **G10 — PR-first CI defaults** | **PARTIAL** | `examples/ci/code-led.yml` is PR-first; confirm every published recipe |
 | **G11 — contract-diff English summarizer** | **PARTIAL** | `ds-contracts diff --summarize` + `contract-summarize:check` shipped |
-| **G13 — audit trail & loop closure** | OPEN (record shape exists) | no viewer tab, no "resolved by PR #N". |
+| **G13 — audit trail & loop closure** | **PARTIAL** | the sync ledger now records the human decision per drifted row (`decision`: adopt / pending-*, with evidence and the exact resolving command) and renders it to `sync/PENDING.md`; still no viewer tab, no "resolved by PR #N". |
 
 **G2 (drift-aware update warning), G8 (plain-words style diffs), G9 (sample-library
 cold start) and G14 (refusal triage + `init --detect`) are SHIPPED**; G1, G6 and
@@ -599,6 +599,23 @@ Two named holes remain:
     so the stamp is compared, not re-derived — and the first six live runs
     showed the baseline half is only as honest as its grammar tag
     (`sync/README.md`, "Two fingerprint domains").
+  - **What the lane's red means (policy, 2026-08-23).** A red scheduled
+    `sync-spine` run means exactly one thing: *a drifted row has no recorded
+    human decision* (or its decision is stale because the contract hash,
+    stamp or dump fingerprint moved after it was taken). Each ledger row can
+    carry a `decision` — `adopt` (the canvas is the truth; `observe --adopt`),
+    or `pending-reapply` / `pending-restamp` / `pending-reconcile` (`observe
+    --decide`), the three outcomes that need a **Figma write to a non-scratch
+    file** or a choice between two truths, which automation does not do.
+    Decided drift is green with a `::warning`; the pending writes are listed,
+    with the exact command and the file key they would write to, in
+    `sync/PENDING.md` (generated from the ledger, byte-checked by
+    `sync:ledger:check`); a spine crash is a distinct red. What remains a
+    limitation: the **write** half of every pending row is a human at a Figma
+    desktop (Sync Runner → *Paste a script*), and nothing records a plugin
+    apply or console-loop rebuild into the ledger automatically — every
+    unrecorded session write of 2026-08-09..21 became a row that needed this
+    decision (`sync/receipts/2026-08-23-spine-reconciliation.md`).
 
 **What it would take — an engine change** for the read half; the signing half
 is not buildable in-plugin.
@@ -1357,6 +1374,8 @@ captured in **zero** libraries inflates Astryx's denominator by more than twice
 that library's entire numerator (13):
 
 ```bash
+# examples/astryx/out/ and .astryx-sandbox/ are gitignored (not tracked): recreate the
+# sandbox per examples/astryx/PROVENANCE.md, then `npm run extract:code -- examples/astryx/extract.config.json`
 node -e "const ext=require('./examples/astryx/out/code-extraction.json');
 const pkg=require('./examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/package.json');
 const subs=new Set(Object.keys(pkg.exports).filter(k=>/^\.\/[A-Z][^/]*\$/.test(k)).map(k=>k.slice(2)));
@@ -1397,7 +1416,7 @@ data.
 | Altitude (`altitude-web-components@1.0.2`) | 8 | 67 | FAMILY | yes | **11.9%** | **64** | **12.5%** | 3 |
 | Polaris (`@shopify/polaris@13.9.5`) | 12 | 180 | PART | **NO** — GitHub clone `Shopify/polaris@2b1ea88`, name list not in this repo | **6.7%** | **98** *(substitute set: the captured package's own `build/esm/components`, 121 dirs)* | **12.2%** | 23 |
 | Carbon (`@carbon/react@1.112.0`) | 10 | 243 | PART | **NO** — GitHub clone `carbon-design-system/carbon@bc66fc71`, name list not in this repo | **4.1%** | **110** *(substitute set: the captured package's own `es/components`, 122 dirs)* | **9.1%** | 12 |
-| Astryx (`@astryxdesign/core@0.1.6`) | 13 | 222 | PART | yes (`examples/astryx/out/code-extraction.json`) | **5.9%** | **96** *(the package's own capitalised subpath exports, 99)* | **13.5%** | 3 |
+| Astryx (`@astryxdesign/core@0.1.6`) | 13 | 222 | PART | yes (`examples/astryx/out/code-extraction.json` — a gitignored extraction output, not tracked; regenerate it with `npm run extract:code -- examples/astryx/extract.config.json` over the sandbox in `examples/astryx/PROVENANCE.md`) | **5.9%** | **96** *(the package's own capitalised subpath exports, 99)* | **13.5%** | 3 |
 | **total** | **62** | **893** | mixed | — | **6.9%** | **529** | **11.7%** |  |
 | *unweighted mean of the six rows* |  |  |  |  | *8.3%* |  | *11.8%* |  |
 
@@ -1461,6 +1480,7 @@ classes rule keeps `Collapse` and `ScopedCssBaseline`, drops `MenuList` and
 rules, same count:
 
 ```bash
+# examples/mui/.mui-sandbox is the gitignored install sandbox (not tracked): recreate it per examples/mui/PROVENANCE.md
 node -e "const fs=require('fs');const d='examples/mui/.mui-sandbox/node_modules/@mui/material';
 const dirs=fs.readdirSync(d,{withFileTypes:true}).filter(e=>e.isDirectory()&&/^[A-Z]/.test(e.name)).map(e=>e.name);
 const no=dirs.filter(n=>!fs.readdirSync(d+'/'+n).includes(n[0].toLowerCase()+n.slice(1)+'Classes.js'));
@@ -2613,14 +2633,16 @@ console.log('total'.padEnd(9),'contracts',C,'drift rows',R)"
 # → 62 contracts, 54 drift rows
 
 # the unit defect in the published denominator (§C.1.3): 98 dirs, 97 public,
-# and `Table` alone is 29 of Astryx's 222
+# and `Table` alone is 29 of Astryx's 222 (examples/astryx/out/ and .astryx-sandbox/ are
+# gitignored: sandbox per examples/astryx/PROVENANCE.md, then `npm run extract:code -- examples/astryx/extract.config.json`)
 node -e "const ext=require('./examples/astryx/out/code-extraction.json');
 const pkg=require('./examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/package.json');
 const subs=new Set(Object.keys(pkg.exports).filter(k=>/^\.\/[A-Z][^/]*\$/.test(k)).map(k=>k.slice(2)));
 const f=new Map();for(const e of ext){const d=e.source.match(/\/src\/([^/]+)\//)[1];f.set(d,(f.get(d)||0)+1)}
 console.log(f.size,[...f.keys()].filter(d=>subs.has(d)).length,f.get('Table'))"   # → 98 97 29
 
-# the filtered MUI denominator, by a library-native rule (§C.1.3)
+# the filtered MUI denominator, by a library-native rule (§C.1.3); examples/mui/.mui-sandbox is
+# the gitignored install sandbox (not tracked) — recreate it per examples/mui/PROVENANCE.md
 node -e "const fs=require('fs');const d='examples/mui/.mui-sandbox/node_modules/@mui/material';
 const dirs=fs.readdirSync(d,{withFileTypes:true}).filter(e=>e.isDirectory()&&/^[A-Z]/.test(e.name)).map(e=>e.name);
 const no=dirs.filter(n=>!fs.readdirSync(d+'/'+n).includes(n[0].toLowerCase()+n.slice(1)+'Classes.js'));

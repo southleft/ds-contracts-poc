@@ -1,0 +1,344 @@
+{
+  "id": "fluent.spinner",
+  "name": "Spinner",
+  "library": "fluent",
+  "contractPath": "examples/fluent/contracts/spinner.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/fluent/figma/fluent.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 64,
+      "sampled": 12,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "medium"
+      },
+      {
+        "name": "appearance",
+        "type": "enum",
+        "default": "primary"
+      },
+      {
+        "name": "labelPosition",
+        "type": "enum",
+        "default": "after"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "spinner",
+      "spinnertail",
+      "label"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.shared.size-0",
+      "imported.spinner.label.color.inverted",
+      "imported.spinner.label.color.primary",
+      "imported.spinner.label.font-size.extra-large",
+      "imported.spinner.label.font-size.extra-small",
+      "imported.spinner.label.font-size.extra-tiny",
+      "imported.spinner.label.font-size.huge",
+      "imported.spinner.label.font-size.large",
+      "imported.spinner.label.font-size.medium",
+      "imported.spinner.label.font-size.small",
+      "imported.spinner.label.font-size.tiny",
+      "imported.spinner.label.font-weight.extra-large",
+      "imported.spinner.label.font-weight.extra-small",
+      "imported.spinner.label.font-weight.extra-tiny",
+      "imported.spinner.label.font-weight.huge",
+      "imported.spinner.label.font-weight.large",
+      "imported.spinner.label.font-weight.medium",
+      "imported.spinner.label.font-weight.small",
+      "imported.spinner.label.font-weight.tiny",
+      "imported.spinner.label.line-height.extra-large",
+      "imported.spinner.label.line-height.extra-small",
+      "imported.spinner.label.line-height.extra-tiny",
+      "imported.spinner.label.line-height.huge",
+      "imported.spinner.label.line-height.large",
+      "imported.spinner.label.line-height.medium",
+      "imported.spinner.label.line-height.small",
+      "imported.spinner.label.line-height.tiny",
+      "imported.spinner.root.column-gap",
+      "imported.spinner.root.row-gap",
+      "imported.spinner.spinner.background-color.inverted",
+      "imported.spinner.spinner.background-color.primary",
+      "imported.spinner.spinner.color.inverted",
+      "imported.spinner.spinner.color.primary",
+      "imported.spinner.spinner.flex-shrink",
+      "imported.spinner.spinner.height.extra-large",
+      "imported.spinner.spinner.height.extra-small",
+      "imported.spinner.spinner.height.extra-tiny",
+      "imported.spinner.spinner.height.huge",
+      "imported.spinner.spinner.height.large",
+      "imported.spinner.spinner.height.medium",
+      "imported.spinner.spinner.height.small",
+      "imported.spinner.spinner.height.tiny",
+      "imported.spinner.spinner.width.extra-large",
+      "imported.spinner.spinner.width.extra-small",
+      "imported.spinner.spinner.width.extra-tiny",
+      "imported.spinner.spinner.width.huge",
+      "imported.spinner.spinner.width.large",
+      "imported.spinner.spinner.width.medium",
+      "imported.spinner.spinner.width.small",
+      "imported.spinner.spinner.width.tiny",
+      "imported.spinner.spinnertail.color.inverted",
+      "imported.spinner.spinnertail.color.primary",
+      "imported.spinner.spinnertail.height.extra-large",
+      "imported.spinner.spinnertail.height.extra-small",
+      "imported.spinner.spinnertail.height.extra-tiny",
+      "imported.spinner.spinnertail.height.huge",
+      "imported.spinner.spinnertail.height.large",
+      "imported.spinner.spinnertail.height.medium",
+      "imported.spinner.spinnertail.height.small",
+      "imported.spinner.spinnertail.height.tiny",
+      "imported.spinner.spinnertail.width.extra-large",
+      "imported.spinner.spinnertail.width.extra-small",
+      "imported.spinner.spinnertail.width.extra-tiny",
+      "imported.spinner.spinnertail.width.huge",
+      "imported.spinner.spinnertail.width.large",
+      "imported.spinner.spinnertail.width.medium",
+      "imported.spinner.spinnertail.width.small",
+      "imported.spinner.spinnertail.width.tiny"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "size-medium__appearance-primary__label-position-after",
+      "variant": "Size=Medium, Appearance=Primary, Label Position=After",
+      "kind": "base",
+      "subst": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-medium__appearance-primary__label-position-after.png",
+      "contentBox": {
+        "width": 102.22,
+        "height": 32
+      }
+    },
+    {
+      "slug": "size-medium__appearance-primary__label-position-above",
+      "variant": "Size=Medium, Appearance=Primary, Label Position=Above",
+      "kind": "base",
+      "subst": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-medium__appearance-primary__label-position-above.png",
+      "contentBox": {
+        "width": 102.22,
+        "height": 62
+      }
+    },
+    {
+      "slug": "size-medium__appearance-primary__label-position-below",
+      "variant": "Size=Medium, Appearance=Primary, Label Position=Below",
+      "kind": "base",
+      "subst": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-medium__appearance-primary__label-position-below.png",
+      "contentBox": {
+        "width": 102.22,
+        "height": 62
+      }
+    },
+    {
+      "slug": "size-medium__appearance-primary__label-position-before",
+      "variant": "Size=Medium, Appearance=Primary, Label Position=Before",
+      "kind": "base",
+      "subst": {
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-medium__appearance-primary__label-position-before.png",
+      "contentBox": {
+        "width": 102.22,
+        "height": 32
+      }
+    },
+    {
+      "slug": "size-medium__appearance-inverted__label-position-after",
+      "variant": "Size=Medium, Appearance=Inverted, Label Position=After",
+      "kind": "base",
+      "subst": {
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-medium__appearance-inverted__label-position-after.png",
+      "contentBox": {
+        "width": 102.22,
+        "height": 32
+      }
+    },
+    {
+      "slug": "size-extra-tiny__appearance-primary__label-position-after",
+      "variant": "Size=Extra Tiny, Appearance=Primary, Label Position=After",
+      "kind": "base",
+      "subst": {
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-extra-tiny__appearance-primary__label-position-after.png",
+      "contentBox": {
+        "width": 75.31,
+        "height": 20
+      }
+    },
+    {
+      "slug": "size-tiny__appearance-primary__label-position-after",
+      "variant": "Size=Tiny, Appearance=Primary, Label Position=After",
+      "kind": "base",
+      "subst": {
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-tiny__appearance-primary__label-position-after.png",
+      "contentBox": {
+        "width": 79.31,
+        "height": 20
+      }
+    },
+    {
+      "slug": "size-extra-small__appearance-primary__label-position-after",
+      "variant": "Size=Extra Small, Appearance=Primary, Label Position=After",
+      "kind": "base",
+      "subst": {
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-extra-small__appearance-primary__label-position-after.png",
+      "contentBox": {
+        "width": 83.31,
+        "height": 24
+      }
+    },
+    {
+      "slug": "size-small__appearance-primary__label-position-after",
+      "variant": "Size=Small, Appearance=Primary, Label Position=After",
+      "kind": "base",
+      "subst": {
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-small__appearance-primary__label-position-after.png",
+      "contentBox": {
+        "width": 87.31,
+        "height": 28
+      }
+    },
+    {
+      "slug": "size-large__appearance-primary__label-position-after",
+      "variant": "Size=Large, Appearance=Primary, Label Position=After",
+      "kind": "base",
+      "subst": {
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-large__appearance-primary__label-position-after.png",
+      "contentBox": {
+        "width": 106.22,
+        "height": 36
+      }
+    },
+    {
+      "slug": "size-extra-large__appearance-primary__label-position-after",
+      "variant": "Size=Extra Large, Appearance=Primary, Label Position=After",
+      "kind": "base",
+      "subst": {
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-extra-large__appearance-primary__label-position-after.png",
+      "contentBox": {
+        "width": 110.22,
+        "height": 40
+      }
+    },
+    {
+      "slug": "size-huge__appearance-primary__label-position-after",
+      "variant": "Size=Huge, Appearance=Primary, Label Position=After",
+      "kind": "base",
+      "subst": {
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-huge__appearance-primary__label-position-after.png",
+      "contentBox": {
+        "width": 129.77,
+        "height": 44
+      }
+    }
+  ],
+  "rendered": 12,
+  "refused": 0,
+  "unavailable": null
+}

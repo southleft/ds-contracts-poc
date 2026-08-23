@@ -1,0 +1,222 @@
+{
+  "id": "polaris.tag",
+  "name": "Tag",
+  "library": "polaris",
+  "contractPath": "examples/polaris/contracts/tag.contract.json",
+  "contractVersion": "0.4.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/polaris/figma/polaris.bundle.json tokenSet (flat base + minted)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 8,
+      "sampled": 5,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "text",
+        "default": null
+      },
+      {
+        "name": "url",
+        "type": "text",
+        "default": null
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "none"
+      },
+      {
+        "name": "removable",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "clickable",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "linked",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Wholesale"
+      }
+    ],
+    "states": [
+      "disabled",
+      "active",
+      "focus-visible"
+    ],
+    "parts": [
+      "root",
+      "link",
+      "text-2",
+      "label-2",
+      "text",
+      "label",
+      "part-1",
+      "button",
+      "button-2",
+      "icon-3"
+    ],
+    "contentSlots": [
+      {
+        "part": "label-2",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.shared.color-8a8a8a",
+      "imported.shared.color-b5b5b5",
+      "imported.shared.num-0",
+      "imported.shared.size-0",
+      "imported.shared.size-1",
+      "imported.shared.size-12",
+      "imported.shared.size-18",
+      "imported.shared.size-2",
+      "imported.shared.size-20",
+      "imported.shared.size-59-9219",
+      "imported.shared.size-7",
+      "imported.shared.size-8",
+      "imported.tag.button-2.background-color",
+      "imported.tag.button-2.font-size",
+      "imported.tag.button.font-size",
+      "imported.tag.button.left",
+      "imported.tag.icon-3.font-weight",
+      "imported.tag.label-2.font-weight",
+      "imported.tag.link.color",
+      "imported.tag.root.background-color-state-disabled",
+      "imported.tag.root.height.large",
+      "imported.tag.root.height.none",
+      "imported.tag.root.outline-color-state-active",
+      "imported.tag.root.outline-color-state-focus-visible",
+      "imported.tag.root.outline-width-state-active",
+      "imported.tag.root.outline-width-state-focus-visible",
+      "imported.tag.text-2.line-height",
+      "imported.tag.text.line-height",
+      "p.border-radius-200",
+      "p.color-bg-fill-tertiary",
+      "p.color-text",
+      "p.font-line-height-500",
+      "p.text-body-sm-font-letter-spacing",
+      "p.text-body-sm-font-size",
+      "p.text-body-sm-font-weight"
+    ],
+    "icons": [
+      "tag-icon-3"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "size-none",
+      "variant": "Size=none",
+      "kind": "base",
+      "subst": {
+        "size": "none"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-none.png",
+      "contentBox": {
+        "width": 71.92,
+        "height": 20
+      }
+    },
+    {
+      "slug": "size-large",
+      "variant": "Size=large",
+      "kind": "base",
+      "subst": {
+        "size": "large"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-large.png",
+      "contentBox": {
+        "width": 75.92,
+        "height": 24
+      }
+    },
+    {
+      "slug": "size-none__state-disabled",
+      "variant": "Size=none, State=Disabled",
+      "kind": "state",
+      "state": "disabled",
+      "subst": {
+        "size": "none"
+      },
+      "bools": {
+        "disabled": true
+      },
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-none__state-disabled.png",
+      "contentBox": {
+        "width": 71.92,
+        "height": 20
+      }
+    },
+    {
+      "slug": "size-none__state-active",
+      "variant": "Size=none, State=Active",
+      "kind": "state",
+      "state": "active",
+      "subst": {
+        "size": "none"
+      },
+      "bools": {},
+      "interaction": "active",
+      "status": "rendered",
+      "png": "code-size-none__state-active.png",
+      "contentBox": {
+        "width": 71.92,
+        "height": 20
+      }
+    },
+    {
+      "slug": "size-none__state-focus-visible",
+      "variant": "Size=none, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "subst": {
+        "size": "none"
+      },
+      "bools": {},
+      "interaction": "focus-visible",
+      "status": "rendered",
+      "png": "code-size-none__state-focus-visible.png",
+      "contentBox": {
+        "width": 71.92,
+        "height": 20
+      }
+    }
+  ],
+  "rendered": 5,
+  "refused": 0,
+  "unavailable": null
+}

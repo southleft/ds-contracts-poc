@@ -1,0 +1,215 @@
+{
+  "id": "carbon.modal",
+  "name": "Modal",
+  "library": "carbon",
+  "contractPath": "examples/carbon/contracts/modal.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/carbon/figma/carbon.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 4,
+      "sampled": 4,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "size",
+        "type": "enum",
+        "default": null
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Modal body copy for the Carbon round."
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "label",
+      "modal-container",
+      "modal-header",
+      "label-2",
+      "label-3",
+      "modal-close-button",
+      "icon-tooltip",
+      "tooltip-trigger__wrapper",
+      "btn",
+      "label-5",
+      "btn-set",
+      "label-6",
+      "label-7",
+      "label-8"
+    ],
+    "contentSlots": [
+      {
+        "part": "label-5",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.modal.btn-set.height",
+      "imported.modal.btn-set.width.lg",
+      "imported.modal.btn-set.width.md",
+      "imported.modal.btn-set.width.sm",
+      "imported.modal.btn-set.width.unset",
+      "imported.modal.btn-set.width.xs",
+      "imported.modal.btn.flex-shrink",
+      "imported.modal.btn.max-width",
+      "imported.modal.icon-tooltip.z-index",
+      "imported.modal.label-2.color",
+      "imported.modal.label-2.letter-spacing",
+      "imported.modal.label-2.margin-bottom",
+      "imported.modal.label-3.font-size",
+      "imported.modal.label-3.line-height",
+      "imported.modal.label-3.padding-right.lg",
+      "imported.modal.label-3.padding-right.md",
+      "imported.modal.label-3.padding-right.sm",
+      "imported.modal.label-3.padding-right.unset",
+      "imported.modal.label-3.padding-right.xs",
+      "imported.modal.label-5.grid-row-start",
+      "imported.modal.label-5.line-height",
+      "imported.modal.label-5.padding-top",
+      "imported.modal.label-6.background-color",
+      "imported.modal.label-6.padding-bottom",
+      "imported.modal.label-6.padding-left",
+      "imported.modal.label-6.padding-right",
+      "imported.modal.label-7.background-color",
+      "imported.modal.label-7.box-shadow",
+      "imported.modal.label-7.padding-bottom",
+      "imported.modal.label-7.padding-left",
+      "imported.modal.label-7.padding-right",
+      "imported.modal.modal-close-button.bottom",
+      "imported.modal.modal-close-button.left.lg",
+      "imported.modal.modal-close-button.left.md",
+      "imported.modal.modal-close-button.left.sm",
+      "imported.modal.modal-close-button.left.unset",
+      "imported.modal.modal-close-button.left.xs",
+      "imported.modal.modal-container.background-color",
+      "imported.modal.modal-container.grid-template-columns.lg",
+      "imported.modal.modal-container.grid-template-columns.md",
+      "imported.modal.modal-container.grid-template-columns.sm",
+      "imported.modal.modal-container.grid-template-columns.unset",
+      "imported.modal.modal-container.grid-template-columns.xs",
+      "imported.modal.modal-container.height",
+      "imported.modal.modal-container.outline-offset",
+      "imported.modal.modal-container.width.lg",
+      "imported.modal.modal-container.width.md",
+      "imported.modal.modal-container.width.sm",
+      "imported.modal.modal-container.width.unset",
+      "imported.modal.modal-container.width.xs",
+      "imported.modal.modal-header.height",
+      "imported.modal.modal-header.margin-bottom",
+      "imported.modal.modal-header.max-height",
+      "imported.modal.modal-header.width.lg",
+      "imported.modal.modal-header.width.md",
+      "imported.modal.modal-header.width.sm",
+      "imported.modal.modal-header.width.unset",
+      "imported.modal.modal-header.width.xs",
+      "imported.modal.root.background-color",
+      "imported.modal.root.height",
+      "imported.modal.root.width",
+      "imported.modal.root.z-index",
+      "imported.shared.color-00000000",
+      "imported.shared.color-c6c6c6",
+      "imported.shared.color-ffffff",
+      "imported.shared.num-1",
+      "imported.shared.num-400",
+      "imported.shared.size-0",
+      "imported.shared.size-0-16",
+      "imported.shared.size-1",
+      "imported.shared.size-12",
+      "imported.shared.size-14",
+      "imported.shared.size-16",
+      "imported.shared.size-18-0001",
+      "imported.shared.size-450-5",
+      "imported.shared.size-48",
+      "imported.shared.size-500-5",
+      "imported.shared.size-neg-1"
+    ],
+    "icons": [
+      "modal-btn"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "size-xs",
+      "variant": "Size=Xs",
+      "kind": "base",
+      "subst": {
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-xs.png",
+      "contentBox": {
+        "width": 900,
+        "height": 1000
+      }
+    },
+    {
+      "slug": "size-sm",
+      "variant": "Size=Sm",
+      "kind": "base",
+      "subst": {
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-sm.png",
+      "contentBox": {
+        "width": 900,
+        "height": 1000
+      }
+    },
+    {
+      "slug": "size-md",
+      "variant": "Size=Md",
+      "kind": "base",
+      "subst": {
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-md.png",
+      "contentBox": {
+        "width": 900,
+        "height": 1000
+      }
+    },
+    {
+      "slug": "size-lg",
+      "variant": "Size=Lg",
+      "kind": "base",
+      "subst": {
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-lg.png",
+      "contentBox": {
+        "width": 900,
+        "height": 1000
+      }
+    }
+  ],
+  "rendered": 4,
+  "refused": 0,
+  "unavailable": null
+}

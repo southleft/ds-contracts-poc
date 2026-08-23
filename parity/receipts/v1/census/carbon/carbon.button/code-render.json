@@ -1,0 +1,473 @@
+{
+  "id": "carbon.button",
+  "name": "Button",
+  "library": "carbon",
+  "contractPath": "examples/carbon/contracts/button.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/carbon/figma/carbon.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 80,
+      "sampled": 17,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "kind",
+        "type": "enum",
+        "default": "primary"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": null
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Button"
+      }
+    ],
+    "states": [
+      "disabled",
+      "active",
+      "focus-visible",
+      "hover"
+    ],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [
+      {
+        "part": "root",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.button.root.background-color.danger",
+      "imported.button.root.background-color.danger--ghost",
+      "imported.button.root.background-color.danger--primary",
+      "imported.button.root.background-color.danger--tertiary",
+      "imported.button.root.background-color.ghost",
+      "imported.button.root.background-color.primary",
+      "imported.button.root.background-color.secondary",
+      "imported.button.root.background-color.tertiary",
+      "imported.button.root.border-bottom-color.danger",
+      "imported.button.root.border-bottom-color.danger--ghost",
+      "imported.button.root.border-bottom-color.danger--primary",
+      "imported.button.root.border-bottom-color.danger--tertiary",
+      "imported.button.root.border-bottom-color.ghost",
+      "imported.button.root.border-bottom-color.primary",
+      "imported.button.root.border-bottom-color.secondary",
+      "imported.button.root.border-bottom-color.tertiary",
+      "imported.button.root.border-bottom-width.danger",
+      "imported.button.root.border-bottom-width.danger--ghost",
+      "imported.button.root.border-bottom-width.danger--primary",
+      "imported.button.root.border-bottom-width.danger--tertiary",
+      "imported.button.root.border-bottom-width.ghost",
+      "imported.button.root.border-bottom-width.primary",
+      "imported.button.root.border-bottom-width.secondary",
+      "imported.button.root.border-bottom-width.tertiary",
+      "imported.button.root.border-left-color.danger",
+      "imported.button.root.border-left-color.danger--ghost",
+      "imported.button.root.border-left-color.danger--primary",
+      "imported.button.root.border-left-color.danger--tertiary",
+      "imported.button.root.border-left-color.ghost",
+      "imported.button.root.border-left-color.primary",
+      "imported.button.root.border-left-color.secondary",
+      "imported.button.root.border-left-color.tertiary",
+      "imported.button.root.border-left-width.danger",
+      "imported.button.root.border-left-width.danger--ghost",
+      "imported.button.root.border-left-width.danger--primary",
+      "imported.button.root.border-left-width.danger--tertiary",
+      "imported.button.root.border-left-width.ghost",
+      "imported.button.root.border-left-width.primary",
+      "imported.button.root.border-left-width.secondary",
+      "imported.button.root.border-left-width.tertiary",
+      "imported.button.root.border-right-color.danger",
+      "imported.button.root.border-right-color.danger--ghost",
+      "imported.button.root.border-right-color.danger--primary",
+      "imported.button.root.border-right-color.danger--tertiary",
+      "imported.button.root.border-right-color.ghost",
+      "imported.button.root.border-right-color.primary",
+      "imported.button.root.border-right-color.secondary",
+      "imported.button.root.border-right-color.tertiary",
+      "imported.button.root.border-right-width.danger",
+      "imported.button.root.border-right-width.danger--ghost",
+      "imported.button.root.border-right-width.danger--primary",
+      "imported.button.root.border-right-width.danger--tertiary",
+      "imported.button.root.border-right-width.ghost",
+      "imported.button.root.border-right-width.primary",
+      "imported.button.root.border-right-width.secondary",
+      "imported.button.root.border-right-width.tertiary",
+      "imported.button.root.border-top-color.danger",
+      "imported.button.root.border-top-color.danger--ghost",
+      "imported.button.root.border-top-color.danger--primary",
+      "imported.button.root.border-top-color.danger--tertiary",
+      "imported.button.root.border-top-color.ghost",
+      "imported.button.root.border-top-color.primary",
+      "imported.button.root.border-top-color.secondary",
+      "imported.button.root.border-top-color.tertiary",
+      "imported.button.root.border-top-width.danger",
+      "imported.button.root.border-top-width.danger--ghost",
+      "imported.button.root.border-top-width.danger--primary",
+      "imported.button.root.border-top-width.danger--tertiary",
+      "imported.button.root.border-top-width.ghost",
+      "imported.button.root.border-top-width.primary",
+      "imported.button.root.border-top-width.secondary",
+      "imported.button.root.border-top-width.tertiary",
+      "imported.button.root.color.danger",
+      "imported.button.root.color.danger--ghost",
+      "imported.button.root.color.danger--primary",
+      "imported.button.root.color.danger--tertiary",
+      "imported.button.root.color.ghost",
+      "imported.button.root.color.primary",
+      "imported.button.root.color.secondary",
+      "imported.button.root.color.tertiary",
+      "imported.button.root.flex-shrink",
+      "imported.button.root.font-size",
+      "imported.button.root.font-weight",
+      "imported.button.root.letter-spacing",
+      "imported.button.root.line-height",
+      "imported.button.root.max-width",
+      "imported.button.root.min-height.2xl",
+      "imported.button.root.min-height.lg",
+      "imported.button.root.min-height.md",
+      "imported.button.root.min-height.sm",
+      "imported.button.root.min-height.unset",
+      "imported.button.root.min-height.xl",
+      "imported.button.root.min-height.xs",
+      "imported.button.root.padding-bottom.2xl",
+      "imported.button.root.padding-bottom.lg",
+      "imported.button.root.padding-bottom.md",
+      "imported.button.root.padding-bottom.sm",
+      "imported.button.root.padding-bottom.unset",
+      "imported.button.root.padding-bottom.xl",
+      "imported.button.root.padding-bottom.xs",
+      "imported.button.root.padding-left",
+      "imported.button.root.padding-right.danger",
+      "imported.button.root.padding-right.danger--ghost",
+      "imported.button.root.padding-right.danger--primary",
+      "imported.button.root.padding-right.danger--tertiary",
+      "imported.button.root.padding-right.ghost",
+      "imported.button.root.padding-right.primary",
+      "imported.button.root.padding-right.secondary",
+      "imported.button.root.padding-right.tertiary",
+      "imported.button.root.padding-top.2xl",
+      "imported.button.root.padding-top.lg",
+      "imported.button.root.padding-top.md",
+      "imported.button.root.padding-top.sm",
+      "imported.button.root.padding-top.unset",
+      "imported.button.root.padding-top.xl",
+      "imported.button.root.padding-top.xs",
+      "imported.shared.size-0"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "kind-primary__size-xs",
+      "variant": "Kind=Primary, Size=Xs",
+      "kind": "base",
+      "subst": {
+        "kind": "primary",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-primary__size-xs.png",
+      "contentBox": {
+        "width": 119.44,
+        "height": 24
+      }
+    },
+    {
+      "slug": "kind-primary__size-sm",
+      "variant": "Kind=Primary, Size=Sm",
+      "kind": "base",
+      "subst": {
+        "kind": "primary",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-primary__size-sm.png",
+      "contentBox": {
+        "width": 119.44,
+        "height": 32
+      }
+    },
+    {
+      "slug": "kind-primary__size-md",
+      "variant": "Kind=Primary, Size=Md",
+      "kind": "base",
+      "subst": {
+        "kind": "primary",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-primary__size-md.png",
+      "contentBox": {
+        "width": 119.44,
+        "height": 40
+      }
+    },
+    {
+      "slug": "kind-primary__size-lg",
+      "variant": "Kind=Primary, Size=Lg",
+      "kind": "base",
+      "subst": {
+        "kind": "primary",
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-primary__size-lg.png",
+      "contentBox": {
+        "width": 119.44,
+        "height": 48
+      }
+    },
+    {
+      "slug": "kind-primary__size-xl",
+      "variant": "Kind=Primary, Size=Xl",
+      "kind": "base",
+      "subst": {
+        "kind": "primary",
+        "size": "xl"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-primary__size-xl.png",
+      "contentBox": {
+        "width": 119.44,
+        "height": 64
+      }
+    },
+    {
+      "slug": "kind-primary__size-2xl",
+      "variant": "Kind=Primary, Size=2XL",
+      "kind": "base",
+      "subst": {
+        "kind": "primary",
+        "size": "2xl"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-primary__size-2xl.png",
+      "contentBox": {
+        "width": 119.44,
+        "height": 80
+      }
+    },
+    {
+      "slug": "kind-secondary__size-xs",
+      "variant": "Kind=Secondary, Size=Xs",
+      "kind": "base",
+      "subst": {
+        "kind": "secondary",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-secondary__size-xs.png",
+      "contentBox": {
+        "width": 119.44,
+        "height": 24
+      }
+    },
+    {
+      "slug": "kind-tertiary__size-xs",
+      "variant": "Kind=Tertiary, Size=Xs",
+      "kind": "base",
+      "subst": {
+        "kind": "tertiary",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-tertiary__size-xs.png",
+      "contentBox": {
+        "width": 119.44,
+        "height": 24
+      }
+    },
+    {
+      "slug": "kind-ghost__size-xs",
+      "variant": "Kind=Ghost, Size=Xs",
+      "kind": "base",
+      "subst": {
+        "kind": "ghost",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-ghost__size-xs.png",
+      "contentBox": {
+        "width": 71.44,
+        "height": 24
+      }
+    },
+    {
+      "slug": "kind-danger__size-xs",
+      "variant": "Kind=Danger, Size=Xs",
+      "kind": "base",
+      "subst": {
+        "kind": "danger",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-danger__size-xs.png",
+      "contentBox": {
+        "width": 119.44,
+        "height": 24
+      }
+    },
+    {
+      "slug": "kind-danger-primary__size-xs",
+      "variant": "Kind=Danger Primary, Size=Xs",
+      "kind": "base",
+      "subst": {
+        "kind": "danger--primary",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-danger-primary__size-xs.png",
+      "contentBox": {
+        "width": 119.44,
+        "height": 24
+      }
+    },
+    {
+      "slug": "kind-danger-ghost__size-xs",
+      "variant": "Kind=Danger Ghost, Size=Xs",
+      "kind": "base",
+      "subst": {
+        "kind": "danger--ghost",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-danger-ghost__size-xs.png",
+      "contentBox": {
+        "width": 71.44,
+        "height": 24
+      }
+    },
+    {
+      "slug": "kind-danger-tertiary__size-xs",
+      "variant": "Kind=Danger Tertiary, Size=Xs",
+      "kind": "base",
+      "subst": {
+        "kind": "danger--tertiary",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-danger-tertiary__size-xs.png",
+      "contentBox": {
+        "width": 119.44,
+        "height": 24
+      }
+    },
+    {
+      "slug": "kind-primary__size-xs__state-disabled",
+      "variant": "Kind=Primary, Size=Xs, State=Disabled",
+      "kind": "state",
+      "state": "disabled",
+      "subst": {
+        "kind": "primary",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "refused",
+      "error": "state \"disabled\" drives boolean prop \"disabled\", which carbon.button does not declare"
+    },
+    {
+      "slug": "kind-primary__size-xs__state-active",
+      "variant": "Kind=Primary, Size=Xs, State=Active",
+      "kind": "state",
+      "state": "active",
+      "subst": {
+        "kind": "primary",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "active",
+      "status": "rendered",
+      "png": "code-kind-primary__size-xs__state-active.png",
+      "contentBox": {
+        "width": 119.44,
+        "height": 24
+      }
+    },
+    {
+      "slug": "kind-primary__size-xs__state-focus-visible",
+      "variant": "Kind=Primary, Size=Xs, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "subst": {
+        "kind": "primary",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "focus-visible",
+      "status": "rendered",
+      "png": "code-kind-primary__size-xs__state-focus-visible.png",
+      "contentBox": {
+        "width": 119.44,
+        "height": 24
+      }
+    },
+    {
+      "slug": "kind-primary__size-xs__state-hover",
+      "variant": "Kind=Primary, Size=Xs, State=Hover",
+      "kind": "state",
+      "state": "hover",
+      "subst": {
+        "kind": "primary",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "hover",
+      "status": "rendered",
+      "png": "code-kind-primary__size-xs__state-hover.png",
+      "contentBox": {
+        "width": 119.44,
+        "height": 24
+      }
+    }
+  ],
+  "rendered": 16,
+  "refused": 1,
+  "unavailable": null
+}

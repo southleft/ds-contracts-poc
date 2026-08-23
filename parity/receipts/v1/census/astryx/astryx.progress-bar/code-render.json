@@ -1,0 +1,171 @@
+{
+  "id": "astryx.progress-bar",
+  "name": "ProgressBar",
+  "library": "astryx",
+  "contractPath": "examples/astryx/contracts/progress-bar.contract.json",
+  "contractVersion": "0.1.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/astryx/figma/astryx.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 5,
+      "sampled": 5,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "value",
+        "type": "number",
+        "default": 40
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "default": 100
+      },
+      {
+        "name": "label",
+        "type": "text",
+        "default": "Uploading"
+      },
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "accent"
+      },
+      {
+        "name": "isIndeterminate",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "isDisabled",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "label",
+      "track",
+      "fill"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "label"
+      }
+    ],
+    "tokenRefs": [
+      "color-accent",
+      "color-error",
+      "color-neutral",
+      "color-success",
+      "color-text-secondary",
+      "color-track",
+      "color-warning",
+      "font-family-body",
+      "font-size-xs",
+      "radius-full",
+      "spacing-1"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-accent",
+      "variant": "Variant=Accent",
+      "kind": "base",
+      "subst": {
+        "variant": "accent"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-accent.png",
+      "contentBox": {
+        "width": 240,
+        "height": 20
+      }
+    },
+    {
+      "slug": "variant-success",
+      "variant": "Variant=Success",
+      "kind": "base",
+      "subst": {
+        "variant": "success"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-success.png",
+      "contentBox": {
+        "width": 240,
+        "height": 20
+      }
+    },
+    {
+      "slug": "variant-warning",
+      "variant": "Variant=Warning",
+      "kind": "base",
+      "subst": {
+        "variant": "warning"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-warning.png",
+      "contentBox": {
+        "width": 240,
+        "height": 20
+      }
+    },
+    {
+      "slug": "variant-neutral",
+      "variant": "Variant=Neutral",
+      "kind": "base",
+      "subst": {
+        "variant": "neutral"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-neutral.png",
+      "contentBox": {
+        "width": 240,
+        "height": 20
+      }
+    },
+    {
+      "slug": "variant-error",
+      "variant": "Variant=Error",
+      "kind": "base",
+      "subst": {
+        "variant": "error"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-error.png",
+      "contentBox": {
+        "width": 240,
+        "height": 20
+      }
+    }
+  ],
+  "rendered": 5,
+  "refused": 0,
+  "unavailable": null
+}

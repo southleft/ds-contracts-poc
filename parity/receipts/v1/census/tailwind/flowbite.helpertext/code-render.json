@@ -1,0 +1,147 @@
+{
+  "id": "flowbite.helpertext",
+  "name": "HelperText",
+  "library": "tailwind",
+  "contractPath": "examples/tailwind/contracts/helpertext.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/tailwind/figma/tailwind.bundle.json tokenSet (flat base + minted)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 5,
+      "sampled": 5,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "color",
+        "type": "enum",
+        "default": "gray"
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Helper text"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [
+      {
+        "part": "root",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.helper-text.root.color.failure",
+      "imported.helper-text.root.color.gray",
+      "imported.helper-text.root.color.info",
+      "imported.helper-text.root.color.success",
+      "imported.helper-text.root.color.warning",
+      "imported.helper-text.root.font-size",
+      "imported.helper-text.root.font-weight",
+      "imported.helper-text.root.line-height",
+      "imported.helper-text.root.margin-top",
+      "imported.helper-text.root.width"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "color-gray",
+      "variant": "Color=Gray",
+      "kind": "base",
+      "subst": {
+        "color": "gray"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-gray.png",
+      "contentBox": {
+        "width": 71.23,
+        "height": 28
+      }
+    },
+    {
+      "slug": "color-info",
+      "variant": "Color=Info",
+      "kind": "base",
+      "subst": {
+        "color": "info"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-info.png",
+      "contentBox": {
+        "width": 71.23,
+        "height": 28
+      }
+    },
+    {
+      "slug": "color-failure",
+      "variant": "Color=Failure",
+      "kind": "base",
+      "subst": {
+        "color": "failure"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-failure.png",
+      "contentBox": {
+        "width": 71.23,
+        "height": 28
+      }
+    },
+    {
+      "slug": "color-success",
+      "variant": "Color=Success",
+      "kind": "base",
+      "subst": {
+        "color": "success"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-success.png",
+      "contentBox": {
+        "width": 71.23,
+        "height": 28
+      }
+    },
+    {
+      "slug": "color-warning",
+      "variant": "Color=Warning",
+      "kind": "base",
+      "subst": {
+        "color": "warning"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-warning.png",
+      "contentBox": {
+        "width": 71.23,
+        "height": 28
+      }
+    }
+  ],
+  "rendered": 5,
+  "refused": 0,
+  "unavailable": null
+}

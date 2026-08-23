@@ -1,0 +1,115 @@
+{
+  "id": "astryx.checkbox-input",
+  "name": "CheckboxInput",
+  "library": "astryx",
+  "contractPath": "examples/astryx/contracts/checkbox-input.contract.json",
+  "contractVersion": "0.1.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/astryx/figma/astryx.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 2,
+      "sampled": 2,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "label",
+        "type": "text",
+        "default": "Accept terms"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "md"
+      },
+      {
+        "name": "isDisabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "isReadOnly",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "isRequired",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "control",
+      "label"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "label"
+      }
+    ],
+    "tokenRefs": [
+      "border-width",
+      "color-background-surface",
+      "color-border-emphasized",
+      "color-text-primary",
+      "font-family-body",
+      "font-size-sm",
+      "radius-inner",
+      "size-element-sm",
+      "spacing-2"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "size-md",
+      "variant": "Size=Md",
+      "kind": "base",
+      "subst": {
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-md.png",
+      "contentBox": {
+        "width": 111.63,
+        "height": 32
+      }
+    },
+    {
+      "slug": "size-sm",
+      "variant": "Size=Sm",
+      "kind": "base",
+      "subst": {
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-sm.png",
+      "contentBox": {
+        "width": 111.63,
+        "height": 32
+      }
+    }
+  ],
+  "rendered": 2,
+  "refused": 0,
+  "unavailable": null
+}

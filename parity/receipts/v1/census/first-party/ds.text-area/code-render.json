@@ -1,0 +1,145 @@
+{
+  "id": "ds.text-area",
+  "name": "TextArea",
+  "library": "first-party",
+  "contractPath": "contracts/text-area.contract.json",
+  "contractVersion": "1.0.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "tokens/ (layered primitives + brand + semantic + light/dark) via src/styles/tokens.css",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 3,
+      "sampled": 3,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "md"
+      },
+      {
+        "name": "isRequired",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "label",
+        "type": "text",
+        "default": "Label"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "default": "Helper text that explains the expected content."
+      },
+      {
+        "name": "placeholder",
+        "type": "text",
+        "default": "Write something…"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "labelRow",
+      "labelText",
+      "requiredMark",
+      "descriptionText",
+      "input"
+    ],
+    "contentSlots": [
+      {
+        "part": "labelText",
+        "prop": "label"
+      },
+      {
+        "part": "descriptionText",
+        "prop": "description"
+      }
+    ],
+    "tokenRefs": [
+      "border-width.100",
+      "color.action.danger.background",
+      "color.border.subtle",
+      "color.input.background",
+      "color.surface.foreground",
+      "color.text.secondary",
+      "font.control.family",
+      "font.control.size.sm",
+      "font.control.weight",
+      "placeholder",
+      "radius.control",
+      "size.card.width",
+      "space.inset-x.sm",
+      "space.inset-y.sm"
+    ],
+    "icons": [
+      "asterisk"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "size-medium",
+      "variant": "Size=Medium",
+      "kind": "base",
+      "subst": {
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-medium.png",
+      "contentBox": {
+        "width": 308.63,
+        "height": 120
+      }
+    },
+    {
+      "slug": "size-small",
+      "variant": "Size=Small",
+      "kind": "base",
+      "subst": {
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-small.png",
+      "contentBox": {
+        "width": 308.63,
+        "height": 103
+      }
+    },
+    {
+      "slug": "size-large",
+      "variant": "Size=Large",
+      "kind": "base",
+      "subst": {
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-large.png",
+      "contentBox": {
+        "width": 308.63,
+        "height": 131
+      }
+    }
+  ],
+  "rendered": 3,
+  "refused": 0,
+  "unavailable": null
+}

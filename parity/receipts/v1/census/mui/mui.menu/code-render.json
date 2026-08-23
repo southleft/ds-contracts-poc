@@ -1,0 +1,77 @@
+{
+  "id": "mui.menu",
+  "name": "Menu",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/menu.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 1,
+      "sampled": 1,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [],
+    "states": [],
+    "parts": [
+      "root",
+      "list-padding",
+      "label",
+      "label-2",
+      "label-3"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.menu.list-padding.height",
+      "imported.menu.list-padding.padding-bottom",
+      "imported.menu.list-padding.padding-top",
+      "imported.menu.list-padding.width",
+      "imported.menu.root.background-color",
+      "imported.menu.root.bottom",
+      "imported.menu.root.box-shadow",
+      "imported.menu.root.height",
+      "imported.menu.root.right",
+      "imported.menu.root.width",
+      "imported.shared.color-000000de",
+      "imported.shared.num-400",
+      "imported.shared.size-0",
+      "imported.shared.size-0-15008",
+      "imported.shared.size-16",
+      "imported.shared.size-24",
+      "imported.shared.size-4",
+      "imported.shared.size-6"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "menu",
+      "variant": "Menu",
+      "kind": "base",
+      "subst": {},
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-menu.png",
+      "contentBox": {
+        "width": 114.77,
+        "height": 124
+      }
+    }
+  ],
+  "rendered": 1,
+  "refused": 0,
+  "unavailable": null
+}

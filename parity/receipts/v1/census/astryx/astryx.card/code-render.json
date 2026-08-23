@@ -1,0 +1,439 @@
+{
+  "id": "astryx.card",
+  "name": "Card",
+  "library": "astryx",
+  "contractPath": "examples/astryx/contracts/card.contract.json",
+  "contractVersion": "0.3.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/astryx/figma/astryx.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 13,
+      "sampled": 13,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "default"
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Card content"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [
+      {
+        "part": "root",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "color-on-light",
+      "imported.card.root.background-color.blue",
+      "imported.card.root.background-color.cyan",
+      "imported.card.root.background-color.default",
+      "imported.card.root.background-color.gray",
+      "imported.card.root.background-color.green",
+      "imported.card.root.background-color.muted",
+      "imported.card.root.background-color.orange",
+      "imported.card.root.background-color.pink",
+      "imported.card.root.background-color.purple",
+      "imported.card.root.background-color.red",
+      "imported.card.root.background-color.teal",
+      "imported.card.root.background-color.transparent",
+      "imported.card.root.background-color.yellow",
+      "imported.card.root.border-bottom-color.blue",
+      "imported.card.root.border-bottom-color.cyan",
+      "imported.card.root.border-bottom-color.default",
+      "imported.card.root.border-bottom-color.gray",
+      "imported.card.root.border-bottom-color.green",
+      "imported.card.root.border-bottom-color.muted",
+      "imported.card.root.border-bottom-color.orange",
+      "imported.card.root.border-bottom-color.pink",
+      "imported.card.root.border-bottom-color.purple",
+      "imported.card.root.border-bottom-color.red",
+      "imported.card.root.border-bottom-color.teal",
+      "imported.card.root.border-bottom-color.transparent",
+      "imported.card.root.border-bottom-color.yellow",
+      "imported.card.root.border-bottom-width.blue",
+      "imported.card.root.border-bottom-width.cyan",
+      "imported.card.root.border-bottom-width.default",
+      "imported.card.root.border-bottom-width.gray",
+      "imported.card.root.border-bottom-width.green",
+      "imported.card.root.border-bottom-width.muted",
+      "imported.card.root.border-bottom-width.orange",
+      "imported.card.root.border-bottom-width.pink",
+      "imported.card.root.border-bottom-width.purple",
+      "imported.card.root.border-bottom-width.red",
+      "imported.card.root.border-bottom-width.teal",
+      "imported.card.root.border-bottom-width.transparent",
+      "imported.card.root.border-bottom-width.yellow",
+      "imported.card.root.border-left-color.blue",
+      "imported.card.root.border-left-color.cyan",
+      "imported.card.root.border-left-color.default",
+      "imported.card.root.border-left-color.gray",
+      "imported.card.root.border-left-color.green",
+      "imported.card.root.border-left-color.muted",
+      "imported.card.root.border-left-color.orange",
+      "imported.card.root.border-left-color.pink",
+      "imported.card.root.border-left-color.purple",
+      "imported.card.root.border-left-color.red",
+      "imported.card.root.border-left-color.teal",
+      "imported.card.root.border-left-color.transparent",
+      "imported.card.root.border-left-color.yellow",
+      "imported.card.root.border-left-width.blue",
+      "imported.card.root.border-left-width.cyan",
+      "imported.card.root.border-left-width.default",
+      "imported.card.root.border-left-width.gray",
+      "imported.card.root.border-left-width.green",
+      "imported.card.root.border-left-width.muted",
+      "imported.card.root.border-left-width.orange",
+      "imported.card.root.border-left-width.pink",
+      "imported.card.root.border-left-width.purple",
+      "imported.card.root.border-left-width.red",
+      "imported.card.root.border-left-width.teal",
+      "imported.card.root.border-left-width.transparent",
+      "imported.card.root.border-left-width.yellow",
+      "imported.card.root.border-right-color.blue",
+      "imported.card.root.border-right-color.cyan",
+      "imported.card.root.border-right-color.default",
+      "imported.card.root.border-right-color.gray",
+      "imported.card.root.border-right-color.green",
+      "imported.card.root.border-right-color.muted",
+      "imported.card.root.border-right-color.orange",
+      "imported.card.root.border-right-color.pink",
+      "imported.card.root.border-right-color.purple",
+      "imported.card.root.border-right-color.red",
+      "imported.card.root.border-right-color.teal",
+      "imported.card.root.border-right-color.transparent",
+      "imported.card.root.border-right-color.yellow",
+      "imported.card.root.border-right-width.blue",
+      "imported.card.root.border-right-width.cyan",
+      "imported.card.root.border-right-width.default",
+      "imported.card.root.border-right-width.gray",
+      "imported.card.root.border-right-width.green",
+      "imported.card.root.border-right-width.muted",
+      "imported.card.root.border-right-width.orange",
+      "imported.card.root.border-right-width.pink",
+      "imported.card.root.border-right-width.purple",
+      "imported.card.root.border-right-width.red",
+      "imported.card.root.border-right-width.teal",
+      "imported.card.root.border-right-width.transparent",
+      "imported.card.root.border-right-width.yellow",
+      "imported.card.root.border-top-color.blue",
+      "imported.card.root.border-top-color.cyan",
+      "imported.card.root.border-top-color.default",
+      "imported.card.root.border-top-color.gray",
+      "imported.card.root.border-top-color.green",
+      "imported.card.root.border-top-color.muted",
+      "imported.card.root.border-top-color.orange",
+      "imported.card.root.border-top-color.pink",
+      "imported.card.root.border-top-color.purple",
+      "imported.card.root.border-top-color.red",
+      "imported.card.root.border-top-color.teal",
+      "imported.card.root.border-top-color.transparent",
+      "imported.card.root.border-top-color.yellow",
+      "imported.card.root.border-top-width.blue",
+      "imported.card.root.border-top-width.cyan",
+      "imported.card.root.border-top-width.default",
+      "imported.card.root.border-top-width.gray",
+      "imported.card.root.border-top-width.green",
+      "imported.card.root.border-top-width.muted",
+      "imported.card.root.border-top-width.orange",
+      "imported.card.root.border-top-width.pink",
+      "imported.card.root.border-top-width.purple",
+      "imported.card.root.border-top-width.red",
+      "imported.card.root.border-top-width.teal",
+      "imported.card.root.border-top-width.transparent",
+      "imported.card.root.border-top-width.yellow",
+      "imported.card.root.font-weight",
+      "imported.card.root.line-height",
+      "imported.card.root.padding-bottom.blue",
+      "imported.card.root.padding-bottom.cyan",
+      "imported.card.root.padding-bottom.default",
+      "imported.card.root.padding-bottom.gray",
+      "imported.card.root.padding-bottom.green",
+      "imported.card.root.padding-bottom.muted",
+      "imported.card.root.padding-bottom.orange",
+      "imported.card.root.padding-bottom.pink",
+      "imported.card.root.padding-bottom.purple",
+      "imported.card.root.padding-bottom.red",
+      "imported.card.root.padding-bottom.teal",
+      "imported.card.root.padding-bottom.transparent",
+      "imported.card.root.padding-bottom.yellow",
+      "imported.card.root.padding-left.blue",
+      "imported.card.root.padding-left.cyan",
+      "imported.card.root.padding-left.default",
+      "imported.card.root.padding-left.gray",
+      "imported.card.root.padding-left.green",
+      "imported.card.root.padding-left.muted",
+      "imported.card.root.padding-left.orange",
+      "imported.card.root.padding-left.pink",
+      "imported.card.root.padding-left.purple",
+      "imported.card.root.padding-left.red",
+      "imported.card.root.padding-left.teal",
+      "imported.card.root.padding-left.transparent",
+      "imported.card.root.padding-left.yellow",
+      "imported.card.root.padding-right.blue",
+      "imported.card.root.padding-right.cyan",
+      "imported.card.root.padding-right.default",
+      "imported.card.root.padding-right.gray",
+      "imported.card.root.padding-right.green",
+      "imported.card.root.padding-right.muted",
+      "imported.card.root.padding-right.orange",
+      "imported.card.root.padding-right.pink",
+      "imported.card.root.padding-right.purple",
+      "imported.card.root.padding-right.red",
+      "imported.card.root.padding-right.teal",
+      "imported.card.root.padding-right.transparent",
+      "imported.card.root.padding-right.yellow",
+      "imported.card.root.padding-top.blue",
+      "imported.card.root.padding-top.cyan",
+      "imported.card.root.padding-top.default",
+      "imported.card.root.padding-top.gray",
+      "imported.card.root.padding-top.green",
+      "imported.card.root.padding-top.muted",
+      "imported.card.root.padding-top.orange",
+      "imported.card.root.padding-top.pink",
+      "imported.card.root.padding-top.purple",
+      "imported.card.root.padding-top.red",
+      "imported.card.root.padding-top.teal",
+      "imported.card.root.padding-top.transparent",
+      "imported.card.root.padding-top.yellow",
+      "imported.card.root.width",
+      "imported.shared.size-12"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-default",
+      "variant": "Variant=Default",
+      "kind": "base",
+      "subst": {
+        "variant": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-default.png",
+      "contentBox": {
+        "width": 114.19,
+        "height": 78
+      }
+    },
+    {
+      "slug": "variant-transparent",
+      "variant": "Variant=Transparent",
+      "kind": "base",
+      "subst": {
+        "variant": "transparent"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-transparent.png",
+      "contentBox": {
+        "width": 114.19,
+        "height": 80
+      }
+    },
+    {
+      "slug": "variant-muted",
+      "variant": "Variant=Muted",
+      "kind": "base",
+      "subst": {
+        "variant": "muted"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-muted.png",
+      "contentBox": {
+        "width": 114.19,
+        "height": 80
+      }
+    },
+    {
+      "slug": "variant-blue",
+      "variant": "Variant=Blue",
+      "kind": "base",
+      "subst": {
+        "variant": "blue"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-blue.png",
+      "contentBox": {
+        "width": 114.19,
+        "height": 80
+      }
+    },
+    {
+      "slug": "variant-cyan",
+      "variant": "Variant=Cyan",
+      "kind": "base",
+      "subst": {
+        "variant": "cyan"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-cyan.png",
+      "contentBox": {
+        "width": 114.19,
+        "height": 80
+      }
+    },
+    {
+      "slug": "variant-gray",
+      "variant": "Variant=Gray",
+      "kind": "base",
+      "subst": {
+        "variant": "gray"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-gray.png",
+      "contentBox": {
+        "width": 114.19,
+        "height": 80
+      }
+    },
+    {
+      "slug": "variant-green",
+      "variant": "Variant=Green",
+      "kind": "base",
+      "subst": {
+        "variant": "green"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-green.png",
+      "contentBox": {
+        "width": 114.19,
+        "height": 80
+      }
+    },
+    {
+      "slug": "variant-orange",
+      "variant": "Variant=Orange",
+      "kind": "base",
+      "subst": {
+        "variant": "orange"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-orange.png",
+      "contentBox": {
+        "width": 114.19,
+        "height": 80
+      }
+    },
+    {
+      "slug": "variant-pink",
+      "variant": "Variant=Pink",
+      "kind": "base",
+      "subst": {
+        "variant": "pink"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-pink.png",
+      "contentBox": {
+        "width": 114.19,
+        "height": 80
+      }
+    },
+    {
+      "slug": "variant-purple",
+      "variant": "Variant=Purple",
+      "kind": "base",
+      "subst": {
+        "variant": "purple"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-purple.png",
+      "contentBox": {
+        "width": 114.19,
+        "height": 80
+      }
+    },
+    {
+      "slug": "variant-red",
+      "variant": "Variant=Red",
+      "kind": "base",
+      "subst": {
+        "variant": "red"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-red.png",
+      "contentBox": {
+        "width": 114.19,
+        "height": 80
+      }
+    },
+    {
+      "slug": "variant-teal",
+      "variant": "Variant=Teal",
+      "kind": "base",
+      "subst": {
+        "variant": "teal"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-teal.png",
+      "contentBox": {
+        "width": 114.19,
+        "height": 80
+      }
+    },
+    {
+      "slug": "variant-yellow",
+      "variant": "Variant=Yellow",
+      "kind": "base",
+      "subst": {
+        "variant": "yellow"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-yellow.png",
+      "contentBox": {
+        "width": 114.19,
+        "height": 80
+      }
+    }
+  ],
+  "rendered": 13,
+  "refused": 0,
+  "unavailable": null
+}

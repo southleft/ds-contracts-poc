@@ -1,0 +1,159 @@
+{
+  "id": "altitude.link",
+  "name": "Link",
+  "library": "altitude",
+  "contractPath": "examples/altitude/contracts/link.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/altitude/figma/altitude.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 9,
+      "sampled": 5,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": null
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Link"
+      }
+    ],
+    "states": [
+      "focus-visible",
+      "hover"
+    ],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [
+      {
+        "part": "root",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.link.root.color",
+      "imported.link.root.color-state-hover",
+      "imported.link.root.column-gap",
+      "imported.link.root.font-size.lg",
+      "imported.link.root.font-size.sm",
+      "imported.link.root.font-size.unset",
+      "imported.link.root.font-size.xs",
+      "imported.link.root.font-weight",
+      "imported.link.root.line-height.lg",
+      "imported.link.root.line-height.sm",
+      "imported.link.root.line-height.unset",
+      "imported.link.root.line-height.xs",
+      "imported.link.root.min-height",
+      "imported.link.root.min-width",
+      "imported.link.root.outline-offset-state-focus-visible",
+      "imported.link.root.outline-width-state-focus-visible",
+      "imported.link.root.row-gap"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-xs",
+      "variant": "Variant=Xs",
+      "kind": "base",
+      "subst": {
+        "variant": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-xs.png",
+      "contentBox": {
+        "width": 22.02,
+        "height": 20
+      }
+    },
+    {
+      "slug": "variant-sm",
+      "variant": "Variant=Sm",
+      "kind": "base",
+      "subst": {
+        "variant": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-sm.png",
+      "contentBox": {
+        "width": 25.69,
+        "height": 20
+      }
+    },
+    {
+      "slug": "variant-lg",
+      "variant": "Variant=Lg",
+      "kind": "base",
+      "subst": {
+        "variant": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-lg.png",
+      "contentBox": {
+        "width": 33.03,
+        "height": 28
+      }
+    },
+    {
+      "slug": "variant-xs__state-focus-visible",
+      "variant": "Variant=Xs, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "subst": {
+        "variant": "xs"
+      },
+      "bools": {},
+      "interaction": "focus-visible",
+      "status": "rendered",
+      "png": "code-variant-xs__state-focus-visible.png",
+      "contentBox": {
+        "width": 22.02,
+        "height": 20
+      }
+    },
+    {
+      "slug": "variant-xs__state-hover",
+      "variant": "Variant=Xs, State=Hover",
+      "kind": "state",
+      "state": "hover",
+      "subst": {
+        "variant": "xs"
+      },
+      "bools": {},
+      "interaction": "hover",
+      "status": "rendered",
+      "png": "code-variant-xs__state-hover.png",
+      "contentBox": {
+        "width": 22.02,
+        "height": 20
+      }
+    }
+  ],
+  "rendered": 5,
+  "refused": 0,
+  "unavailable": null
+}

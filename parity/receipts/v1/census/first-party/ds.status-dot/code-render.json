@@ -1,0 +1,135 @@
+{
+  "id": "ds.status-dot",
+  "name": "StatusDot",
+  "library": "first-party",
+  "contractPath": "contracts/status-dot.contract.json",
+  "contractVersion": "1.0.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "tokens/ (layered primitives + brand + semantic + light/dark) via src/styles/tokens.css",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 5,
+      "sampled": 5,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "neutral"
+      },
+      {
+        "name": "label",
+        "type": "text",
+        "default": "Status"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "label",
+      "radius.pill",
+      "size.dot"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-neutral",
+      "variant": "Variant=Neutral",
+      "kind": "base",
+      "subst": {
+        "variant": "neutral"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-neutral.png",
+      "contentBox": {
+        "width": 8,
+        "height": 18
+      }
+    },
+    {
+      "slug": "variant-success",
+      "variant": "Variant=Success",
+      "kind": "base",
+      "subst": {
+        "variant": "success"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-success.png",
+      "contentBox": {
+        "width": 8,
+        "height": 18
+      }
+    },
+    {
+      "slug": "variant-warning",
+      "variant": "Variant=Warning",
+      "kind": "base",
+      "subst": {
+        "variant": "warning"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-warning.png",
+      "contentBox": {
+        "width": 8,
+        "height": 18
+      }
+    },
+    {
+      "slug": "variant-error",
+      "variant": "Variant=Error",
+      "kind": "base",
+      "subst": {
+        "variant": "error"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-error.png",
+      "contentBox": {
+        "width": 8,
+        "height": 18
+      }
+    },
+    {
+      "slug": "variant-accent",
+      "variant": "Variant=Accent",
+      "kind": "base",
+      "subst": {
+        "variant": "accent"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-accent.png",
+      "contentBox": {
+        "width": 8,
+        "height": 18
+      }
+    }
+  ],
+  "rendered": 5,
+  "refused": 0,
+  "unavailable": null
+}

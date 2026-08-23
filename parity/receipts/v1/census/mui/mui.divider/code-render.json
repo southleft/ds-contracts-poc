@@ -1,0 +1,110 @@
+{
+  "id": "mui.divider",
+  "name": "Divider",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/divider.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 3,
+      "sampled": 3,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "fullWidth"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.divider.root.border-bottom-width",
+      "imported.divider.root.color",
+      "imported.divider.root.flex-shrink",
+      "imported.divider.root.margin-left.fullWidth",
+      "imported.divider.root.margin-left.inset",
+      "imported.divider.root.margin-left.middle",
+      "imported.divider.root.margin-right.fullWidth",
+      "imported.divider.root.margin-right.inset",
+      "imported.divider.root.margin-right.middle",
+      "imported.divider.root.min-height",
+      "imported.divider.root.min-width",
+      "imported.divider.root.width.fullWidth",
+      "imported.divider.root.width.inset",
+      "imported.divider.root.width.middle",
+      "imported.shared.color-0000001f"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-fullwidth",
+      "variant": "Variant=FullWidth",
+      "kind": "base",
+      "subst": {
+        "variant": "fullWidth"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-fullwidth.png",
+      "contentBox": {
+        "width": 288,
+        "height": 1
+      }
+    },
+    {
+      "slug": "variant-inset",
+      "variant": "Variant=Inset",
+      "kind": "base",
+      "subst": {
+        "variant": "inset"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-inset.png",
+      "contentBox": {
+        "width": 288,
+        "height": 1
+      }
+    },
+    {
+      "slug": "variant-middle",
+      "variant": "Variant=Middle",
+      "kind": "base",
+      "subst": {
+        "variant": "middle"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-middle.png",
+      "contentBox": {
+        "width": 288,
+        "height": 1
+      }
+    }
+  ],
+  "rendered": 3,
+  "refused": 0,
+  "unavailable": null
+}

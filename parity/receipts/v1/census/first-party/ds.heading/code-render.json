@@ -1,0 +1,196 @@
+{
+  "id": "ds.heading",
+  "name": "Heading",
+  "library": "first-party",
+  "contractPath": "contracts/heading.contract.json",
+  "contractVersion": "1.0.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "tokens/ (layered primitives + brand + semantic + light/dark) via src/styles/tokens.css",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 18,
+      "sampled": 8,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "level",
+        "type": "enum",
+        "default": "2"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "lg"
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Heading"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "color.surface.foreground",
+      "font.control.family",
+      "font.title.weight"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "level-h2__size-large",
+      "variant": "Level=H2, Size=Large",
+      "kind": "base",
+      "subst": {
+        "level": "2",
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-level-h2__size-large.png",
+      "contentBox": {
+        "width": 71.8,
+        "height": 21
+      }
+    },
+    {
+      "slug": "level-h2__size-small",
+      "variant": "Level=H2, Size=Small",
+      "kind": "base",
+      "subst": {
+        "level": "2",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-level-h2__size-small.png",
+      "contentBox": {
+        "width": 56.63,
+        "height": 17
+      }
+    },
+    {
+      "slug": "level-h2__size-medium",
+      "variant": "Level=H2, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "level": "2",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-level-h2__size-medium.png",
+      "contentBox": {
+        "width": 64.27,
+        "height": 20
+      }
+    },
+    {
+      "slug": "level-h1__size-large",
+      "variant": "Level=H1, Size=Large",
+      "kind": "base",
+      "subst": {
+        "level": "1",
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-level-h1__size-large.png",
+      "contentBox": {
+        "width": 71.8,
+        "height": 21
+      }
+    },
+    {
+      "slug": "level-h3__size-large",
+      "variant": "Level=H3, Size=Large",
+      "kind": "base",
+      "subst": {
+        "level": "3",
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-level-h3__size-large.png",
+      "contentBox": {
+        "width": 71.8,
+        "height": 21
+      }
+    },
+    {
+      "slug": "level-h4__size-large",
+      "variant": "Level=H4, Size=Large",
+      "kind": "base",
+      "subst": {
+        "level": "4",
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-level-h4__size-large.png",
+      "contentBox": {
+        "width": 71.8,
+        "height": 21
+      }
+    },
+    {
+      "slug": "level-h5__size-large",
+      "variant": "Level=H5, Size=Large",
+      "kind": "base",
+      "subst": {
+        "level": "5",
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-level-h5__size-large.png",
+      "contentBox": {
+        "width": 71.8,
+        "height": 21
+      }
+    },
+    {
+      "slug": "level-h6__size-large",
+      "variant": "Level=H6, Size=Large",
+      "kind": "base",
+      "subst": {
+        "level": "6",
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-level-h6__size-large.png",
+      "contentBox": {
+        "width": 71.8,
+        "height": 21
+      }
+    }
+  ],
+  "rendered": 8,
+  "refused": 0,
+  "unavailable": null
+}

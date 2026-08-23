@@ -1,0 +1,192 @@
+{
+  "id": "polaris.progress-bar",
+  "name": "ProgressBar",
+  "library": "polaris",
+  "contractPath": "examples/polaris/contracts/progress-bar.contract.json",
+  "contractVersion": "0.4.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/polaris/figma/polaris.bundle.json tokenSet (flat base + minted)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 12,
+      "sampled": 6,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "progress",
+        "type": "number",
+        "default": 40
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "medium"
+      },
+      {
+        "name": "animated",
+        "type": "boolean",
+        "default": null
+      },
+      {
+        "name": "ariaLabelledBy",
+        "type": "text",
+        "default": null
+      },
+      {
+        "name": "tone",
+        "type": "enum",
+        "default": "highlight"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "progress",
+      "indicator",
+      "label"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.progress-bar.indicator.height.large",
+      "imported.progress-bar.indicator.height.medium",
+      "imported.progress-bar.indicator.height.small",
+      "imported.progress-bar.label.bottom.large",
+      "imported.progress-bar.label.bottom.medium",
+      "imported.progress-bar.label.bottom.small",
+      "imported.progress-bar.label.right",
+      "imported.progress-bar.progress.bottom",
+      "imported.progress-bar.progress.left",
+      "imported.progress-bar.progress.right",
+      "imported.progress-bar.progress.vertical-align",
+      "imported.progress-bar.root.width",
+      "imported.shared.size-0",
+      "imported.shared.size-1",
+      "p.border-radius-100",
+      "p.color-bg-fill-brand",
+      "p.color-bg-fill-critical",
+      "p.color-bg-fill-info",
+      "p.color-bg-fill-success",
+      "p.color-bg-fill-tertiary"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "size-medium__tone-highlight",
+      "variant": "Size=Medium, Tone=Highlight",
+      "kind": "base",
+      "subst": {
+        "size": "medium",
+        "tone": "highlight"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-medium__tone-highlight.png",
+      "contentBox": {
+        "width": 288,
+        "height": 16
+      }
+    },
+    {
+      "slug": "size-medium__tone-primary",
+      "variant": "Size=Medium, Tone=Primary",
+      "kind": "base",
+      "subst": {
+        "size": "medium",
+        "tone": "primary"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-medium__tone-primary.png",
+      "contentBox": {
+        "width": 288,
+        "height": 16
+      }
+    },
+    {
+      "slug": "size-medium__tone-success",
+      "variant": "Size=Medium, Tone=Success",
+      "kind": "base",
+      "subst": {
+        "size": "medium",
+        "tone": "success"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-medium__tone-success.png",
+      "contentBox": {
+        "width": 288,
+        "height": 16
+      }
+    },
+    {
+      "slug": "size-medium__tone-critical",
+      "variant": "Size=Medium, Tone=Critical",
+      "kind": "base",
+      "subst": {
+        "size": "medium",
+        "tone": "critical"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-medium__tone-critical.png",
+      "contentBox": {
+        "width": 288,
+        "height": 16
+      }
+    },
+    {
+      "slug": "size-small__tone-highlight",
+      "variant": "Size=Small, Tone=Highlight",
+      "kind": "base",
+      "subst": {
+        "size": "small",
+        "tone": "highlight"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-small__tone-highlight.png",
+      "contentBox": {
+        "width": 288,
+        "height": 8
+      }
+    },
+    {
+      "slug": "size-large__tone-highlight",
+      "variant": "Size=Large, Tone=Highlight",
+      "kind": "base",
+      "subst": {
+        "size": "large",
+        "tone": "highlight"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-large__tone-highlight.png",
+      "contentBox": {
+        "width": 288,
+        "height": 32
+      }
+    }
+  ],
+  "rendered": 6,
+  "refused": 0,
+  "unavailable": null
+}

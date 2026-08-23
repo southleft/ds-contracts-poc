@@ -1,0 +1,119 @@
+{
+  "id": "mui.snackbar",
+  "name": "Snackbar",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/snackbar.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 3,
+      "sampled": 3,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "position",
+        "type": "enum",
+        "default": "bottom-left"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "paper-root",
+      "label"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.shared.size-4",
+      "imported.snackbar.label.color",
+      "imported.snackbar.label.font-size",
+      "imported.snackbar.label.font-weight",
+      "imported.snackbar.label.letter-spacing",
+      "imported.snackbar.label.line-height",
+      "imported.snackbar.label.padding-bottom",
+      "imported.snackbar.label.padding-top",
+      "imported.snackbar.paper-root.background-color",
+      "imported.snackbar.paper-root.box-shadow",
+      "imported.snackbar.paper-root.color",
+      "imported.snackbar.paper-root.font-size",
+      "imported.snackbar.paper-root.letter-spacing",
+      "imported.snackbar.paper-root.line-height",
+      "imported.snackbar.paper-root.min-width",
+      "imported.snackbar.paper-root.padding-bottom",
+      "imported.snackbar.paper-root.padding-left",
+      "imported.snackbar.paper-root.padding-right",
+      "imported.snackbar.paper-root.padding-top",
+      "imported.snackbar.root.min-height",
+      "imported.snackbar.root.min-width",
+      "imported.snackbar.root.z-index"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "position-bottomleft",
+      "variant": "Position=BottomLeft",
+      "kind": "base",
+      "subst": {
+        "position": "bottom-left"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-position-bottomleft.png",
+      "contentBox": {
+        "width": 288,
+        "height": 48.02
+      }
+    },
+    {
+      "slug": "position-bottomcenter",
+      "variant": "Position=BottomCenter",
+      "kind": "base",
+      "subst": {
+        "position": "bottom-center"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-position-bottomcenter.png",
+      "contentBox": {
+        "width": 288,
+        "height": 48.02
+      }
+    },
+    {
+      "slug": "position-topright",
+      "variant": "Position=TopRight",
+      "kind": "base",
+      "subst": {
+        "position": "top-right"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-position-topright.png",
+      "contentBox": {
+        "width": 288,
+        "height": 48.02
+      }
+    }
+  ],
+  "rendered": 3,
+  "refused": 0,
+  "unavailable": null
+}

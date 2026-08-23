@@ -76,6 +76,59 @@ export interface ObservationBaseline {
   observedAt: string;
 }
 
+/**
+ * THE DECISION (2026-08-23). A non-in-sync row is one of two things: a row
+ * nobody has looked at, or a row a human HAS looked at and whose resolution
+ * needs something automation is not allowed to do (a Figma write to a
+ * non-scratch file, or a choice between two truths). The scheduled spine is
+ * red ONLY for the first kind — "a row needs a human decision that is not yet
+ * recorded". The second kind is recorded here, on the row, and the spine
+ * prints it as WARN and lists it in sync/PENDING.md (generated, byte-stable,
+ * checked by sync:ledger:check so it cannot go stale).
+ *
+ *   adopt             — the canvas is the truth; `observe --adopt` wrote it
+ *                       and the row is in-sync by construction.
+ *   pending-reapply   — the code is ahead; the canvas needs a publish+apply
+ *                       (a Figma write a human runs — `command` says which).
+ *   pending-restamp   — the set lost its v6 stamp; re-run its sync script.
+ *   pending-reconcile — both halves moved and a human must choose which wins;
+ *                       `command` spells both alternatives.
+ *
+ * A decision is bound to the FACTS it was taken on (`basedOn`): if the
+ * contract hash, the stamp or the dump fingerprint moves again, the decision
+ * is STALE — a pending-reapply recorded against last week's canvas must not
+ * quietly cover this week's hand edit — and the row is undecided (red) again.
+ */
+export type DecisionKind = 'adopt' | 'pending-reapply' | 'pending-restamp' | 'pending-reconcile';
+export const DECISION_KINDS: readonly DecisionKind[] = [
+  'adopt',
+  'pending-reapply',
+  'pending-restamp',
+  'pending-reconcile',
+];
+export const PENDING_KINDS: readonly DecisionKind[] = ['pending-reapply', 'pending-restamp', 'pending-reconcile'];
+
+export interface DecisionBasedOn {
+  contractHash: string | null;
+  canvasStamp: string | null;
+  canvasDump: string | null;
+  dumpVersion: string | null;
+}
+
+export interface RecordDecision {
+  kind: DecisionKind;
+  /** Why — the human-readable reason, recorded verbatim. */
+  note: string;
+  recordedAt: string;
+  /** Evidence lines (dates, commits, fingerprints) the decision rests on. */
+  evidence: string[];
+  /** The facts the decision was taken against — see the header. */
+  basedOn: DecisionBasedOn;
+  /** pending-* only: the exact repo command (or the named human choice) that
+   *  resolves the row. The Figma write itself is out of bounds for automation. */
+  command?: string;
+}
+
 export interface LedgerRecord {
   contractId: string;
   /** Repo-relative contract path — how observe finds the code half. */
@@ -107,6 +160,9 @@ export interface LedgerRecord {
   provenance: RecordProvenance;
   /** Free-form origin note (e.g. the receipt path a seed came from). */
   note?: string;
+  /** The recorded human decision for this row (see RecordDecision). Dropped
+   *  by the write verbs — a real write resolves what the decision was about. */
+  decision?: RecordDecision;
 }
 
 export interface SyncLedger {
@@ -153,6 +209,90 @@ function optString(v: unknown, where: string): string | null {
   if (typeof v !== 'string' || v.length === 0)
     refuse(where, 'must be a non-empty string or null');
   return v;
+}
+
+/** Build a decision in the FIXED key order the deterministic serializer
+ *  relies on (JSON.stringify follows insertion order). */
+export function makeDecision(d: {
+  kind: DecisionKind;
+  note: string;
+  recordedAt: string;
+  evidence: readonly string[];
+  basedOn: DecisionBasedOn;
+  command?: string;
+}): RecordDecision {
+  if (!DECISION_KINDS.includes(d.kind))
+    throw new Error(`decision kind must be one of ${DECISION_KINDS.join(' | ')} (got ${JSON.stringify(d.kind)})`);
+  if (d.note.trim().length === 0) throw new Error('a decision needs a non-empty --note (the why)');
+  if (PENDING_KINDS.includes(d.kind) && !(d.command && d.command.trim().length > 0))
+    throw new Error(`a ${d.kind} decision needs --command: the exact command (or the named human choice) that resolves it`);
+  if (d.kind === 'adopt' && d.command !== undefined)
+    throw new Error('an adopt decision carries no command — the adoption itself resolved the row');
+  return {
+    kind: d.kind,
+    note: d.note,
+    recordedAt: d.recordedAt,
+    evidence: [...d.evidence],
+    basedOn: {
+      contractHash: d.basedOn.contractHash,
+      canvasStamp: d.basedOn.canvasStamp,
+      canvasDump: d.basedOn.canvasDump,
+      dumpVersion: d.basedOn.dumpVersion,
+    },
+    ...(d.command !== undefined ? { command: d.command } : {}),
+  };
+}
+
+/** The facts a decision is taken against, from the current observation. */
+export function decisionBasedOn(
+  currentContractHash: string | null,
+  obs: Pick<SetObservation, 'stamp' | 'dumpFingerprint' | 'dumpVersion'> | undefined,
+): DecisionBasedOn {
+  return {
+    contractHash: currentContractHash,
+    canvasStamp: obs?.stamp ?? null,
+    canvasDump: obs?.dumpFingerprint ?? null,
+    dumpVersion: obs?.dumpVersion ?? null,
+  };
+}
+
+function validateDecision(raw: unknown, where: string): RecordDecision {
+  if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) refuse(where, 'must be an object');
+  const d = raw as Record<string, unknown>;
+  if (typeof d.kind !== 'string' || !DECISION_KINDS.includes(d.kind as DecisionKind))
+    refuse(`${where}.kind`, `must be one of ${DECISION_KINDS.join(' | ')} (got ${JSON.stringify(d.kind)})`);
+  if (typeof d.note !== 'string' || d.note.length === 0) refuse(`${where}.note`, 'must be a non-empty string');
+  if (typeof d.recordedAt !== 'string' || Number.isNaN(Date.parse(d.recordedAt)))
+    refuse(`${where}.recordedAt`, 'must be an ISO-8601 timestamp');
+  if (!Array.isArray(d.evidence) || d.evidence.some((e) => typeof e !== 'string' || e.length === 0))
+    refuse(`${where}.evidence`, 'must be an array of non-empty strings');
+  if (d.basedOn === null || typeof d.basedOn !== 'object' || Array.isArray(d.basedOn))
+    refuse(`${where}.basedOn`, 'must be an object {contractHash, canvasStamp, canvasDump, dumpVersion}');
+  const b = d.basedOn as Record<string, unknown>;
+  const contractHash = optString(b.contractHash, `${where}.basedOn.contractHash`);
+  if (contractHash !== null && !SHA_RE.test(contractHash))
+    refuse(`${where}.basedOn.contractHash`, 'must be "sha256:<64 hex>" or null');
+  const canvasDump = optString(b.canvasDump, `${where}.basedOn.canvasDump`);
+  if (canvasDump !== null && !DUMP_FP_RE.test(canvasDump))
+    refuse(`${where}.basedOn.canvasDump`, 'must be a "dumpv1:<digits>" fingerprint or null');
+  const command = d.command === undefined ? undefined : String(d.command);
+  const kind = d.kind as DecisionKind;
+  if (PENDING_KINDS.includes(kind) && !(command && command.length > 0))
+    refuse(`${where}.command`, `a ${kind} decision must carry the exact resolving command`);
+  if (kind === 'adopt' && command !== undefined) refuse(`${where}.command`, 'an adopt decision carries no command');
+  return makeDecision({
+    kind,
+    note: d.note,
+    recordedAt: d.recordedAt,
+    evidence: d.evidence as string[],
+    basedOn: {
+      contractHash,
+      canvasStamp: optString(b.canvasStamp, `${where}.basedOn.canvasStamp`),
+      canvasDump,
+      dumpVersion: optString(b.dumpVersion, `${where}.basedOn.dumpVersion`),
+    },
+    ...(command !== undefined ? { command } : {}),
+  });
 }
 
 export function validateRecord(raw: unknown, where: string): LedgerRecord {
@@ -213,6 +353,9 @@ export function validateRecord(raw: unknown, where: string): LedgerRecord {
     observed,
     provenance: o.provenance as RecordProvenance,
     ...(typeof o.note === 'string' && o.note.length > 0 ? { note: o.note } : {}),
+    ...(o.decision !== undefined && o.decision !== null
+      ? { decision: validateDecision(o.decision, `${where}.decision`) }
+      : {}),
   };
 }
 
@@ -267,6 +410,7 @@ const RECORD_KEY_ORDER: Array<keyof LedgerRecord> = [
   'observed',
   'provenance',
   'note',
+  'decision',
 ];
 
 export function serializeLedger(ledger: SyncLedger): string {
@@ -400,6 +544,9 @@ export function recordPublish(ledger: SyncLedger, sync: PublishSync): SyncLedger
     observed: prior?.observed ?? null,
     provenance: 'publish',
     ...(sync.note ? { note: sync.note } : {}),
+    // A publish is the first half of a re-apply; the decision (if any) stays
+    // until the apply-side record resolves it.
+    ...(prior?.decision ? { decision: prior.decision } : {}),
   });
 }
 
@@ -437,6 +584,16 @@ export function baselineComparableWith(
   return observed !== null && observed.dumpVersion !== undefined && observed.dumpVersion === obs.dumpVersion;
 }
 
+/** The recorded decision as the drift table sees it: `fresh` when the facts
+ *  it was taken against are the facts observed now. */
+export interface DriftDecision {
+  kind: DecisionKind;
+  note: string;
+  recordedAt: string;
+  command: string | null;
+  fresh: boolean;
+}
+
 export interface DriftRow {
   key: string;
   contractId: string;
@@ -444,7 +601,27 @@ export interface DriftRow {
   codeChanged: boolean | null; // null = contract file missing/unhashable
   canvasChanged: boolean | null; // null = no evidence either way
   canvasEvidence: CanvasEvidence;
+  decision: DriftDecision | null;
+  /** TRUE = this row needs a human decision that is not yet recorded (or the
+   *  recorded one is stale). The scheduled spine's only drift-red. Always
+   *  false for an in-sync row. */
+  undecided: boolean;
   notes: string[];
+}
+
+/** Is the recorded decision still about the facts observed now? */
+export function decisionIsFresh(
+  decision: RecordDecision,
+  currentContractHash: string | null,
+  obs: Pick<SetObservation, 'stamp' | 'dumpFingerprint' | 'dumpVersion'> | undefined,
+): { fresh: boolean; moved: string[] } {
+  const now = decisionBasedOn(currentContractHash, obs);
+  const moved: string[] = [];
+  if (decision.basedOn.contractHash !== now.contractHash) moved.push('contract hash');
+  if (decision.basedOn.canvasStamp !== now.canvasStamp) moved.push('canvas stamp');
+  if (decision.basedOn.dumpVersion !== now.dumpVersion) moved.push(`dump grammar (${decision.basedOn.dumpVersion ?? 'none'} → ${now.dumpVersion ?? 'none'})`);
+  else if (decision.basedOn.canvasDump !== now.canvasDump) moved.push('dump fingerprint');
+  return { fresh: moved.length === 0, moved };
 }
 
 /** Classify ONE record against the current contract hash and the current
@@ -544,6 +721,34 @@ export function classifyRecord(
   const canvas = canvasChanged === true;
   const status: DriftStatus =
     code && canvas ? 'conflict' : code ? 'code-ahead' : canvas ? 'canvas-ahead' : 'in-sync';
+
+  // The decision: recorded, and still about THESE facts?
+  let decision: DriftDecision | null = null;
+  if (record.decision) {
+    const { fresh, moved } = decisionIsFresh(record.decision, currentContractHash, obs);
+    decision = {
+      kind: record.decision.kind,
+      note: record.decision.note,
+      recordedAt: record.decision.recordedAt,
+      command: record.decision.command ?? null,
+      fresh,
+    };
+    if (status !== 'in-sync') {
+      if (fresh)
+        notes.push(
+          `decision ${record.decision.kind} recorded ${record.decision.recordedAt.slice(0, 10)}: ${record.decision.note}` +
+            (record.decision.command ? ` — resolve with: ${record.decision.command}` : ''),
+        );
+      else
+        notes.push(
+          `decision ${record.decision.kind} (${record.decision.recordedAt.slice(0, 10)}) is STALE — the ${moved.join(', ')} moved since it was taken; ` +
+            'the row needs a new decision (sync observe --decide / --adopt)',
+        );
+    }
+  }
+  const undecided = status !== 'in-sync' && !(decision !== null && decision.fresh);
+  if (undecided && decision === null)
+    notes.push('UNDECIDED — no recorded decision for this drift (sync observe --adopt, or --decide <id> --kind … --note … --command …)');
   return {
     key: recordKey(record),
     contractId: record.contractId,
@@ -551,6 +756,8 @@ export function classifyRecord(
     codeChanged,
     canvasChanged,
     canvasEvidence,
+    decision,
+    undecided,
     notes,
   };
 }
@@ -559,11 +766,46 @@ export interface DriftReport {
   rows: DriftRow[];
   /** Observed sets with NO ledger record — drift by definition. */
   untracked: Array<{ fileKey: string | null; setNodeId: string; setName: string }>;
+  /** Every row in-sync and nothing untracked. */
   clean: boolean;
+  /** Rows that need a human decision not yet recorded (plus every untracked
+   *  set — nothing can be decided for a set with no record). THIS is the
+   *  gate-style exit: 0 when empty, 1 otherwise; a decided-pending row is a
+   *  WARN, never a red. */
+  undecided: number;
+}
+
+/** Per-kind counts for the report line. */
+export function decisionSummary(rows: readonly DriftRow[]): {
+  adopted: number;
+  pending: Record<DecisionKind, number>;
+  stale: number;
+  undecided: number;
+} {
+  const pending: Record<DecisionKind, number> = {
+    adopt: 0,
+    'pending-reapply': 0,
+    'pending-restamp': 0,
+    'pending-reconcile': 0,
+  };
+  let adopted = 0;
+  let stale = 0;
+  let undecided = 0;
+  for (const r of rows) {
+    if (r.undecided) undecided++;
+    if (!r.decision) continue;
+    if (r.status !== 'in-sync' && !r.decision.fresh) {
+      stale++;
+      continue;
+    }
+    if (r.decision.kind === 'adopt') adopted++;
+    else if (r.status !== 'in-sync') pending[r.decision.kind]++;
+  }
+  return { adopted, pending, stale, undecided };
 }
 
 /** The full table: every ledger record classified, plus untracked observed
- *  sets. `clean` mirrors the gate exit code (0 clean, 1 drift). */
+ *  sets. `clean` = nothing drifted at all; `undecided` = what reds a run. */
 export function driftReport(
   ledger: SyncLedger,
   contractHashes: ReadonlyMap<string, string | null>,
@@ -594,7 +836,81 @@ export function driftReport(
     .map((o) => ({ fileKey: o.fileKey, setNodeId: o.setNodeId, setName: o.setName }))
     .sort((a, b) => (a.setNodeId < b.setNodeId ? -1 : 1));
   const clean = untracked.length === 0 && rows.every((r) => r.status === 'in-sync');
-  return { rows, untracked, clean };
+  const undecided = untracked.length + rows.filter((r) => r.undecided).length;
+  return { rows, untracked, clean, undecided };
+}
+
+// ---------------------------------------------------------------------------
+// sync/PENDING.md — the ONE place a human reads the pending decisions.
+// A pure function of the ledger (no timestamps of its own, no observation),
+// so the committed bytes can be checked against the committed ledger offline.
+// ---------------------------------------------------------------------------
+
+export const PENDING_MD_HEADER =
+  '<!-- GENERATED from sync/ledger.json by `npm run sync -- pending` (and by every sync:spine run). ' +
+  'Do not hand-edit: sync:ledger:check refuses a PENDING.md that is not the current render. -->';
+
+const KIND_HEADING: Record<DecisionKind, string> = {
+  adopt: 'Adopted',
+  'pending-reapply': 'Pending re-apply — the code is ahead; the canvas needs a publish+apply (Figma write)',
+  'pending-restamp': 'Pending restamp — the set lost its v6 stamp; re-run its sync script (Figma write)',
+  'pending-reconcile': 'Pending reconcile — both halves moved; a human chooses which wins',
+};
+
+export function renderPendingMd(ledger: SyncLedger): string {
+  const decided = [...ledger.records]
+    .filter((r): r is LedgerRecord & { decision: RecordDecision } => r.decision !== undefined)
+    .sort((a, b) => (recordKey(a) < recordKey(b) ? -1 : recordKey(a) > recordKey(b) ? 1 : 0));
+  const byKind = (k: DecisionKind) => decided.filter((r) => r.decision.kind === k);
+  const pendingTotal = PENDING_KINDS.reduce((n, k) => n + byKind(k).length, 0);
+  const lines: string[] = [
+    PENDING_MD_HEADER,
+    '',
+    '# Sync decisions — pending Figma writes and human choices',
+    '',
+    'Every row below carries a **recorded** decision in `sync/ledger.json`. The scheduled spine ' +
+      '(`.github/workflows/sync-spine.yml`) stays **green with a warning** while these are listed; it goes ' +
+      '**red only for a row with no recorded decision** (or a decision whose facts have since moved). ' +
+      'A `pending-*` row is resolved by a human running the command shown — it is a Figma write to a ' +
+      'non-scratch file, or a choice between two truths, and automation does not do either. After the ' +
+      'write, record it: `npm run sync:observe -- --adopt <id>` (or `npm run sync -- record …`), which ' +
+      'clears the decision.',
+    '',
+    `**${pendingTotal} pending** (${PENDING_KINDS.map((k) => `${byKind(k).length} ${k}`).join(', ')}) · **${byKind('adopt').length} adopted**.`,
+    '',
+  ];
+  for (const kind of PENDING_KINDS) {
+    const rows = byKind(kind);
+    lines.push(`## ${KIND_HEADING[kind]} (${rows.length})`, '');
+    if (rows.length === 0) {
+      lines.push('- none', '');
+      continue;
+    }
+    for (const r of rows) {
+      const d = r.decision;
+      lines.push(
+        `### \`${r.contractId}\``,
+        '',
+        `- **row**: \`${recordKey(r)}\` — contract \`${r.contractPath ?? '(none)'}\`, set \`${r.setNodeId ?? '?'}\``,
+        `- **kind**: ${d.kind} (recorded ${d.recordedAt.slice(0, 10)})`,
+        `- **why**: ${d.note}`,
+        `- **command**: \`${d.command ?? '(none)'}\``,
+        `- **writes to**: Figma file \`${r.fileKey ?? '(no file)'}\`, set \`${r.setNodeId ?? '?'}\` — not the scratch file; a human runs it`,
+        ...(d.evidence.length > 0 ? ['- **evidence**:', ...d.evidence.map((e) => `  - ${e}`)] : []),
+        '',
+      );
+    }
+  }
+  const adopted = byKind('adopt');
+  lines.push(`## ${KIND_HEADING.adopt} (${adopted.length}) — canvas taken as the truth, row in-sync by construction`, '');
+  if (adopted.length === 0) lines.push('- none', '');
+  else {
+    lines.push('| row | recorded | why |', '|---|---|---|');
+    for (const r of adopted)
+      lines.push(`| \`${r.contractId}\` | ${r.decision.recordedAt.slice(0, 10)} | ${r.decision.note.replaceAll('|', '\\|')} |`);
+    lines.push('');
+  }
+  return lines.join('\n');
 }
 
 // ---------------------------------------------------------------------------

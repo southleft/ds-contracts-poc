@@ -234,6 +234,10 @@ The commands below are Carbon's, verbatim from
 
 ### 2.1 Sandbox — pin, then go offline
 
+`examples/carbon/.carbon-sandbox` is gitignored (`examples/carbon/.gitignore`) —
+it is never committed; this recipe (and [`examples/carbon/PROVENANCE.md`](../examples/carbon/PROVENANCE.md))
+recreates it on any machine.
+
 ```bash
 mkdir -p examples/carbon/.carbon-sandbox && cd examples/carbon/.carbon-sandbox \
   && printf '{"name":"carbon-sandbox","private":true}\n' > package.json \

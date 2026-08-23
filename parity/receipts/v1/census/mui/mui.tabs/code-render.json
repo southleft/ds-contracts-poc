@@ -1,0 +1,165 @@
+{
+  "id": "mui.tabs",
+  "name": "Tabs",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/tabs.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 6,
+      "sampled": 4,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "textColor",
+        "type": "enum",
+        "default": "primary"
+      },
+      {
+        "name": "indicatorColor",
+        "type": "enum",
+        "default": "primary"
+      }
+    ],
+    "states": [
+      "hover",
+      "focus-visible",
+      "active"
+    ],
+    "parts": [
+      "root",
+      "tabs-fixed",
+      "tabs-list",
+      "label",
+      "label-2",
+      "label-3",
+      "tabs-indicator"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.shared.color-00000000",
+      "imported.shared.num-0",
+      "imported.shared.num-500",
+      "imported.shared.size-0",
+      "imported.shared.size-0-39998",
+      "imported.shared.size-12",
+      "imported.shared.size-14",
+      "imported.shared.size-16",
+      "imported.shared.size-17-5",
+      "imported.shared.size-288",
+      "imported.shared.size-360",
+      "imported.shared.size-48",
+      "imported.shared.size-90",
+      "imported.tabs.label-2.color.inherit",
+      "imported.tabs.label-2.color.primary",
+      "imported.tabs.label-2.color.secondary",
+      "imported.tabs.label-2.opacity.inherit",
+      "imported.tabs.label-2.opacity.primary",
+      "imported.tabs.label-2.opacity.secondary",
+      "imported.tabs.label-3.color.inherit",
+      "imported.tabs.label-3.color.primary",
+      "imported.tabs.label-3.color.secondary",
+      "imported.tabs.label-3.opacity.inherit",
+      "imported.tabs.label-3.opacity.primary",
+      "imported.tabs.label-3.opacity.secondary",
+      "imported.tabs.label.color.inherit",
+      "imported.tabs.label.color.primary",
+      "imported.tabs.label.color.secondary",
+      "imported.tabs.tabs-fixed.flex-grow",
+      "imported.tabs.tabs-indicator.background-color.primary",
+      "imported.tabs.tabs-indicator.background-color.secondary",
+      "imported.tabs.tabs-indicator.height",
+      "imported.tabs.tabs-indicator.right",
+      "imported.tabs.tabs-indicator.top",
+      "imported.tabs.tabs-indicator.width"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "text-color-primary__indicator-color-primary",
+      "variant": "Text color=Primary, Indicator color=Primary",
+      "kind": "base",
+      "subst": {
+        "textColor": "primary",
+        "indicatorColor": "primary"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-text-color-primary__indicator-color-primary.png",
+      "contentBox": {
+        "width": 295.59,
+        "height": 48
+      }
+    },
+    {
+      "slug": "text-color-primary__indicator-color-secondary",
+      "variant": "Text color=Primary, Indicator color=Secondary",
+      "kind": "base",
+      "subst": {
+        "textColor": "primary",
+        "indicatorColor": "secondary"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-text-color-primary__indicator-color-secondary.png",
+      "contentBox": {
+        "width": 295.59,
+        "height": 48
+      }
+    },
+    {
+      "slug": "text-color-secondary__indicator-color-primary",
+      "variant": "Text color=Secondary, Indicator color=Primary",
+      "kind": "base",
+      "subst": {
+        "textColor": "secondary",
+        "indicatorColor": "primary"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-text-color-secondary__indicator-color-primary.png",
+      "contentBox": {
+        "width": 295.59,
+        "height": 48
+      }
+    },
+    {
+      "slug": "text-color-inherit__indicator-color-primary",
+      "variant": "Text color=Inherit, Indicator color=Primary",
+      "kind": "base",
+      "subst": {
+        "textColor": "inherit",
+        "indicatorColor": "primary"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-text-color-inherit__indicator-color-primary.png",
+      "contentBox": {
+        "width": 295.59,
+        "height": 48
+      }
+    }
+  ],
+  "rendered": 4,
+  "refused": 0,
+  "unavailable": null
+}

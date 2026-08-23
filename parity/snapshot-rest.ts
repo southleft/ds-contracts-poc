@@ -37,7 +37,7 @@
  */
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { figmaToken } from '../extract/fidelity-matrix/scripts/env.js';
+import { figmaToken } from '../extract/figma/visual-parity/env.js';
 
 const ROOT = path.resolve(new URL('.', import.meta.url).pathname, '..');
 const SNAPSHOT = path.join(ROOT, 'parity', 'snapshots', 'figma-components.json');

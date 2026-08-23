@@ -30,7 +30,18 @@
  * after the PR produces new fingerprints and is pulled again (the branch-
  * exists check then refuses politely until the open PR is resolved).
  *
- * Exit codes, gate-style like `sync observe`: 0 clean, 1 drift, 2 usage.
+ * EXIT CODES (revised 2026-08-23 — "red means an undecided row"):
+ *   0  every drifted row carries a FRESH recorded decision (sync/ledger.json
+ *      `decision`, see sync/ledger.ts) — or nothing drifted. Decided-pending
+ *      rows print as WARN and are listed in sync/PENDING.md (written here
+ *      when the ledger is the repo's, always into the run dir).
+ *   1  a row needs a human decision that is not yet recorded (no decision,
+ *      or a decision whose facts have since moved), or an untracked set, or a
+ *      PR the spine tried and failed to open.
+ *   2  the spine itself could not run (usage/config error, API refusal,
+ *      crash). The scheduled lane makes this a DISTINCT red.
+ * SPINE.md carries a `Verdict:` line (clean | drift-decided | undecided) the
+ * lane reads.
  */
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
@@ -41,14 +52,17 @@ import { ContractSchema, type Contract } from '../scripts/contract-schema.js';
 import { createFigmaEngine } from '../core/emit-figma-script.js';
 import { componentIdSlug } from '../core/propose-figma.js';
 import {
+  decisionSummary,
   driftReport,
+  PENDING_KINDS,
   recordKey,
+  renderPendingMd,
   type DriftRow,
   type LedgerRecord,
   type SetObservation,
   type SyncLedger,
 } from './ledger.js';
-import { DEFAULT_LEDGER_PATH, loadLedger } from './ledger-io.js';
+import { DEFAULT_LEDGER_PATH, loadLedger, pendingPathFor } from './ledger-io.js';
 import {
   fetchNodesResponses,
   observationsFromFixture,
@@ -632,6 +646,20 @@ async function main(): Promise<number> {
   const statusCount = new Map<string, number>();
   for (const r of rows) statusCount.set(r.status, (statusCount.get(r.status) ?? 0) + 1);
   const untracked = only ? [] : report.untracked;
+  // -- decisions: what reds the run, what only warns -------------------------
+  const summary = decisionSummary(rows);
+  const undecidedRows = rows.filter((r) => r.undecided);
+  const decidedPending = rows.filter((r) => r.status !== 'in-sync' && r.decision !== null && r.decision.fresh);
+  const undecidedTotal = undecidedRows.length + untracked.length;
+  const drifted = rows.some((r) => r.status !== 'in-sync') || untracked.length > 0;
+  const verdict = !drifted ? 'clean' : undecidedTotal === 0 && prFailures.length === 0 ? 'drift-decided' : 'undecided';
+  // sync/PENDING.md — always into the run dir; next to the ledger only when
+  // it is the repo's own (a fixture run must not rewrite the committed page).
+  const pendingMd = renderPendingMd(ledger);
+  writeFileSync(path.join(runDir, 'PENDING.md'), pendingMd);
+  const repoPending =
+    path.resolve(ROOT, ledgerPath) === path.resolve(ROOT, DEFAULT_LEDGER_PATH) ? pendingPathFor(path.resolve(ROOT, ledgerPath)) : null;
+  if (repoPending) writeFileSync(repoPending, pendingMd);
   const lines: string[] = [
     `# sync spine — run ${runId}`,
     '',
@@ -656,6 +684,47 @@ async function main(): Promise<number> {
       .map((s) => `${statusCount.get(s)} ${s}`)
       .join(', ') || 'none'}${untracked.length > 0 ? `, ${untracked.length} untracked` : ''}.`,
     '',
+    `Decisions: ${summary.adopted} adopted, pending ${PENDING_KINDS.map((k) => `${summary.pending[k]} ${k}`).join(', ')}, ` +
+      `${summary.stale} stale, ${undecidedRows.length} undecided` +
+      (untracked.length > 0 ? `, ${untracked.length} untracked` : '') +
+      '.',
+    '',
+    `Verdict: ${verdict}` +
+      (verdict === 'clean'
+        ? ' — every record in-sync.'
+        : verdict === 'drift-decided'
+          ? ' — drift exists and every drifted row carries a fresh recorded decision (WARN, not red); the pending Figma writes are listed in PENDING.md.'
+          : ' — a row needs a human decision that is not yet recorded (RED).'),
+    '',
+    '## Decisions',
+    '',
+    ...(undecidedRows.length > 0 || untracked.length > 0
+      ? [
+          '### UNDECIDED — needs a human decision (this is what reds the run)',
+          '',
+          ...undecidedRows.map(
+            (r) =>
+              `- ✘ ${r.contractId}: ${r.status}` +
+              (r.decision ? ` — decision ${r.decision.kind} (${r.decision.recordedAt.slice(0, 10)}) is STALE, the facts moved` : ' — no recorded decision') +
+              ` → \`npm run sync:observe -- --adopt ${r.contractId} --note "…"\` or \`--decide ${r.contractId} --kind pending-reapply|pending-restamp|pending-reconcile --note "…" --command "…"\``,
+          ),
+          ...untracked.map((u) => `- ✘ untracked ${u.setName} (${u.fileKey ?? '?'}#${u.setNodeId}) — no ledger record to decide on`),
+          '',
+        ]
+      : []),
+    ...(decidedPending.length > 0
+      ? [
+          '### WARN — decided, pending a human-run Figma write or choice (see PENDING.md)',
+          '',
+          ...decidedPending.map(
+            (r) =>
+              `- ⚠ ${r.contractId}: ${r.status} — ${r.decision!.kind} (${r.decision!.recordedAt.slice(0, 10)}): ${r.decision!.note}` +
+              (r.decision!.command ? ` → \`${r.decision!.command}\`` : ''),
+          ),
+          '',
+        ]
+      : []),
+    ...(undecidedRows.length === 0 && untracked.length === 0 && decidedPending.length === 0 ? ['- nothing pending', ''] : []),
     '## Canvas → code (canvas-ahead): PR-shaped proposal bundles',
     '',
     ...(plans.length > 0
@@ -730,17 +799,25 @@ async function main(): Promise<number> {
         codeBehind,
         opened,
         prFailures,
+        decisions: {
+          verdict,
+          ...summary,
+          undecidedRows: undecidedRows.map((r) => r.contractId),
+          decidedPending: decidedPending.map((r) => ({ contractId: r.contractId, kind: r.decision!.kind, command: r.decision!.command })),
+        },
       },
       null,
       2,
     ) + '\n',
   );
   console.log(reportMd);
-  console.log(`✔ spine run → ${path.relative(ROOT, runDir)}/ (SPINE.md, spine-report.json)`);
+  console.log(
+    `✔ spine run → ${path.relative(ROOT, runDir)}/ (SPINE.md, spine-report.json, PENDING.md${repoPending ? `; ${path.relative(ROOT, repoPending)} regenerated` : ''})`,
+  );
 
-  const drift =
-    rows.some((r) => r.status !== 'in-sync') || untracked.length > 0 || prFailures.length > 0;
-  return drift ? 1 : 0;
+  // RED means "a row needs a human decision that is not yet recorded" — never
+  // drift that a human has already decided and that waits on a Figma write.
+  return verdict === 'undecided' ? 1 : 0;
 }
 
 main().then(

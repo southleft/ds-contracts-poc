@@ -1,0 +1,165 @@
+{
+  "id": "antd.badge",
+  "name": "Badge",
+  "library": "antd",
+  "contractPath": "examples/antd/contracts/badge.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/antd/figma/antd.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 6,
+      "sampled": 4,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "mode",
+        "type": "enum",
+        "default": "count"
+      },
+      {
+        "name": "color",
+        "type": "enum",
+        "default": null
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "avatar",
+      "label",
+      "badge-dot",
+      "badge-count",
+      "part-1-0",
+      "scroll-number-only",
+      "label-2"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.badge.avatar.background-color",
+      "imported.badge.avatar.line-height",
+      "imported.badge.badge-count.background-color.blue",
+      "imported.badge.badge-count.background-color.green",
+      "imported.badge.badge-count.background-color.purple",
+      "imported.badge.badge-count.background-color.unset",
+      "imported.badge.badge-count.box-shadow",
+      "imported.badge.badge-count.translate-y",
+      "imported.badge.badge-dot.background-color.blue",
+      "imported.badge.badge-dot.background-color.green",
+      "imported.badge.badge-dot.background-color.purple",
+      "imported.badge.badge-dot.background-color.unset",
+      "imported.badge.badge-dot.bottom",
+      "imported.badge.badge-dot.box-shadow",
+      "imported.badge.badge-dot.color.blue",
+      "imported.badge.badge-dot.color.green",
+      "imported.badge.badge-dot.color.purple",
+      "imported.badge.badge-dot.color.unset",
+      "imported.badge.badge-dot.font-size",
+      "imported.badge.badge-dot.left",
+      "imported.badge.badge-dot.translate-x",
+      "imported.badge.badge-dot.translate-y",
+      "imported.badge.label-2.font-weight",
+      "imported.badge.label.font-weight",
+      "imported.badge.label.line-height",
+      "imported.badge.part-1-0.width",
+      "imported.badge.root.color",
+      "imported.badge.scroll-number-only.width",
+      "imported.shared.color-00000000",
+      "imported.shared.color-ffffff",
+      "imported.shared.size-0",
+      "imported.shared.size-1",
+      "imported.shared.size-10",
+      "imported.shared.size-12",
+      "imported.shared.size-14",
+      "imported.shared.size-20",
+      "imported.shared.size-32",
+      "imported.shared.size-6"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "mode-count__color-blue",
+      "variant": "Mode=Count, Color=Blue",
+      "kind": "base",
+      "subst": {
+        "mode": "count",
+        "color": "blue"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-mode-count__color-blue.png",
+      "contentBox": {
+        "width": 42,
+        "height": 42
+      }
+    },
+    {
+      "slug": "mode-count__color-green",
+      "variant": "Mode=Count, Color=Green",
+      "kind": "base",
+      "subst": {
+        "mode": "count",
+        "color": "green"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-mode-count__color-green.png",
+      "contentBox": {
+        "width": 42,
+        "height": 42
+      }
+    },
+    {
+      "slug": "mode-count__color-purple",
+      "variant": "Mode=Count, Color=Purple",
+      "kind": "base",
+      "subst": {
+        "mode": "count",
+        "color": "purple"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-mode-count__color-purple.png",
+      "contentBox": {
+        "width": 42,
+        "height": 42
+      }
+    },
+    {
+      "slug": "mode-dot__color-blue",
+      "variant": "Mode=Dot, Color=Blue",
+      "kind": "base",
+      "subst": {
+        "mode": "dot",
+        "color": "blue"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-mode-dot__color-blue.png",
+      "contentBox": {
+        "width": 35,
+        "height": 35
+      }
+    }
+  ],
+  "rendered": 4,
+  "refused": 0,
+  "unavailable": null
+}

@@ -1,0 +1,101 @@
+{
+  "id": "mui.input-adornment",
+  "name": "InputAdornment",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/input-adornment.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 2,
+      "sampled": 2,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "position",
+        "type": "enum",
+        "default": "start"
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "$"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "label"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.input-adornment.label.color",
+      "imported.input-adornment.label.font-size",
+      "imported.input-adornment.label.font-weight",
+      "imported.input-adornment.label.letter-spacing",
+      "imported.input-adornment.label.line-height",
+      "imported.input-adornment.root.color",
+      "imported.input-adornment.root.margin-left.end",
+      "imported.input-adornment.root.margin-left.start",
+      "imported.input-adornment.root.margin-right.end",
+      "imported.input-adornment.root.margin-right.start",
+      "imported.input-adornment.root.max-height"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "position-start",
+      "variant": "Position=Start",
+      "kind": "base",
+      "subst": {
+        "position": "start"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-position-start.png",
+      "contentBox": {
+        "width": 16.92,
+        "height": 24
+      }
+    },
+    {
+      "slug": "position-end",
+      "variant": "Position=End",
+      "kind": "base",
+      "subst": {
+        "position": "end"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-position-end.png",
+      "contentBox": {
+        "width": 16.92,
+        "height": 24
+      }
+    }
+  ],
+  "rendered": 2,
+  "refused": 0,
+  "unavailable": null
+}

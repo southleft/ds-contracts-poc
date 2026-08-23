@@ -5,9 +5,36 @@
 # every canvas-ahead set into a reviewable proposal bundle (proposed contract
 # + diff + per-property classification), and surface every code-ahead record
 # as a "canvas is behind: publish+apply needed" row. Report-only by default —
-# the run uploads its sync/out/<runId>/ bundle as an artifact and FAILS
-# VISIBLY when drift exists (exit 1), which is the point: a red run here IS
-# the drift signal, not a broken build.
+# the run uploads its sync/out/<runId>/ bundle as an artifact and writes the
+# drift table + decisions to the job summary.
+#
+# RED MEANS AN UNDECIDED ROW (policy, 2026-08-23). A red run means "a row
+# needs a human decision that is not yet recorded". Every other outcome is
+# green:
+#   spine 0, Verdict: clean          → green, notice ("every record in-sync");
+#   spine 0, Verdict: drift-decided  → green WITH a ::warning — drift exists,
+#                                      but every drifted row carries a FRESH
+#                                      decision in sync/ledger.json (adopt /
+#                                      pending-reapply / pending-restamp /
+#                                      pending-reconcile); the drift table is
+#                                      in the summary, the bundles in the
+#                                      artifact, the pending Figma writes in
+#                                      sync/PENDING.md; output drift=true;
+#   spine 1, Verdict: undecided      → RED — a drifted row has no recorded
+#                                      decision (or its decision is stale: the
+#                                      contract hash / stamp / dump moved since
+#                                      it was taken), or an untracked set. The
+#                                      summary names the rows and the two verbs
+#                                      that record a decision;
+#   spine 2                          → RED with a DISTINCT summary — the spine
+#                                      itself could not run (usage/config
+#                                      error, API refusal, crash). Not drift.
+# Why: the first six live runs (2026-08-22/23) were red for one cause — the
+# repo's own instrument and ledger had moved — and a lane that stays red for
+# every 2-hour run while a decided write waits on a human conflates "the
+# canvas moved" with "nobody has looked". The previous rule ("a red run IS the
+# drift signal", 2026-08-08) is retired; the signal is the ::warning + summary
+# + artifact, and the red is reserved for the question nobody has answered.
 #
 # SECRET REQUIRED, DEGRADES BY NAME. The spine needs the repository secret
 # FIGMA_TOKEN (a Figma personal access token with file read scope; the owner
@@ -68,10 +95,8 @@ jobs:
             exit 0
           fi
           mkdir -p sync/out
-          # Exit semantics are UNCHANGED (2026-08-08 decision: a red run IS the
-          # drift signal). The spine's exit code is captured only so the drift
-          # table (SPINE.md) can be copied into the job summary before the step
-          # re-raises that same exit code — the conclusion is the spine's own.
+          # The spine's exit code is the verdict (see the header): 0 = clean or
+          # drift-decided, 1 = an undecided row, 2 = the spine could not run.
           set +e
           if [ "$OPEN_PR" = "true" ]; then
             echo "SYNC_SPINE_OPEN_PR=true — the spine may open at most 1 PR this run (cursor-deduplicated)."
@@ -83,8 +108,38 @@ jobs:
           set -e
           echo "spine-exit=$rc" >> "$GITHUB_OUTPUT"
           report="sync/out/gh-${GITHUB_RUN_ID}/SPINE.md"
-          if [ -f "$report" ]; then cat "$report" >> "$GITHUB_STEP_SUMMARY"; fi
-          exit "$rc"
+          verdict=$(grep -m1 '^Verdict:' "$report" 2>/dev/null | sed 's/^Verdict: *//; s/ .*//')
+          totals=$(grep -m1 '^Totals:' "$report" 2>/dev/null || echo 'Totals: (see summary)')
+          decisions=$(grep -m1 '^Decisions:' "$report" 2>/dev/null || echo 'Decisions: (see summary)')
+          echo "verdict=${verdict:-crashed}" >> "$GITHUB_OUTPUT"
+          case "$rc" in
+            0)
+              cat "$report" >> "$GITHUB_STEP_SUMMARY"
+              if [ "$verdict" = "clean" ]; then
+                echo "::notice title=sync-spine clean::every ledger record is in-sync with the canvas."
+                echo "drift=false" >> "$GITHUB_OUTPUT"
+              else
+                echo "::warning title=sync-spine drift (decided)::${totals} ${decisions} Every drifted row carries a recorded decision — the pending Figma writes are listed in sync/PENDING.md (also in the sync-spine-${GITHUB_RUN_ID} artifact with the proposal bundles). Green by policy: red is reserved for an UNDECIDED row."
+                echo "drift=true" >> "$GITHUB_OUTPUT"
+              fi
+              ;;
+            1)
+              cat "$report" >> "$GITHUB_STEP_SUMMARY"
+              echo "::error title=sync-spine UNDECIDED drift::${totals} ${decisions} A row needs a human decision that is not yet recorded (or its decision is stale). Record one: npm run sync:observe -- --adopt <id> --note \"…\"  OR  --decide <id> --kind pending-reapply|pending-restamp|pending-reconcile --note \"…\" --command \"…\". The rows are named under '### UNDECIDED' in the job summary."
+              echo "drift=true" >> "$GITHUB_OUTPUT"
+              exit 1
+              ;;
+            *)
+              {
+                echo "# sync-spine could not run (exit $rc)"
+                echo
+                echo "This is NOT a drift result. The spine itself failed — usage/config error, Figma API refusal, or a crash. Read the step log; no SPINE.md was produced$( [ -f "$report" ] && echo ' (a partial report follows)' )."
+                [ -f "$report" ] && { echo; cat "$report"; }
+              } >> "$GITHUB_STEP_SUMMARY"
+              echo "::error title=sync-spine FAILED (exit $rc)::the spine could not run — usage/config error, API refusal, or a crash. This red is distinct from drift; read the step log."
+              exit "$rc"
+              ;;
+          esac
 
       - name: upload drift report
         if: ${{ !cancelled() && steps.spine.outputs.skipped != 'true' }}
