@@ -128,7 +128,7 @@ if (existsSync(CONFIG_PATH)) {
     const contract = JSON.parse(readFileSync(cPath, 'utf8'));
     const prop = (contract.props ?? []).find((p: any) => p.name === sp.prop);
     const kind = prop?.bindings?.figma?.kind ?? null;
-    const previews = Boolean(contract.bindings.figma.statePreviews) && (contract.states ?? []).includes(sp.state);
+    const previews = Boolean(contract.bindings?.figma?.statePreviews) && (contract.states ?? []).includes(sp.state);
     statePlanes.set(stem, {
       prop: sp.prop,
       state: sp.state,

@@ -21,6 +21,7 @@
  * produce. `--check` writes nothing and exits 1 when any file still carries
  * a v16 spelling (the CI gate).
  */
+import { execFileSync } from 'node:child_process';
 import { readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { mayCarryV16Spelling, migrateDocumentToV17 } from '../../../schema/src/index.js';
@@ -28,7 +29,41 @@ import { CliUsageError, parseFlags } from '../lib.js';
 
 const SKIP_DIRS = new Set(['node_modules', '.git', 'dist', 'coverage']);
 
+/** Inside a git work tree, the scope is what git sees: tracked files plus
+ *  untracked files that are not ignored. A filesystem walk also reached
+ *  gitignored build outputs (examples/<lib>/out, demo/proposed, sync/out,
+ *  …) that exist only on one machine, so `migrate --check` refused locally
+ *  while the CI clone passed (2026-08-23). Outside a repo (or when git is
+ *  absent) the walk below is the fallback. */
+function gitVisibleJson(target: string): string[] | null {
+  try {
+    const root = execFileSync('git', ['rev-parse', '--show-toplevel'], {
+      cwd: statSync(target).isDirectory() ? target : path.dirname(target),
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
+    const listed = execFileSync(
+      'git',
+      ['ls-files', '-z', '--cached', '--others', '--exclude-standard', '--', path.resolve(target)],
+      { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'], maxBuffer: 256 * 1024 * 1024 },
+    );
+    return listed
+      .split('\0')
+      .filter((rel) => rel.endsWith('.json'))
+      .map((rel) => path.join(root, rel))
+      .filter((abs) => !abs.split(path.sep).some((seg) => SKIP_DIRS.has(seg)))
+      .sort();
+  } catch {
+    return null;
+  }
+}
+
 function collectJson(target: string, out: string[]): void {
+  const viaGit = gitVisibleJson(target);
+  if (viaGit) {
+    out.push(...viaGit);
+    return;
+  }
   const st = statSync(target);
   if (st.isFile()) {
     if (target.endsWith('.json')) out.push(target);

@@ -949,7 +949,11 @@ export function validateContract(
   // a preview variant that renders identically to Default is kit noise, so
   // the opt-in is refused by name unless every declared state carries root
   // token overrides; and the multiplied axis must be unambiguous.
-  if (contract.bindings.figma.statePreviews) {
+  // A fixture built by hand (the check scripts do this to exercise one
+  // refusal) may carry no `bindings` block at all; the v16 spelling lived at
+  // the top level and tolerated absence. Read optionally so the refusal the
+  // caller is testing for is the one reported, never a TypeError.
+  if (contract.bindings?.figma?.statePreviews) {
     if (contract.bindings.figma.representation === 'native') {
       errors.push(
         `${contract.id}: bindings.figma.statePreviews requires a generated Figma component — bindings.figma.representation "native" declares there is none`,

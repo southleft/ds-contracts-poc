@@ -110,7 +110,7 @@ if (existsSync(CONFIG) && existsSync(CONTRACTS)) {
     const prop = (contract.props ?? []).find((p) => p.name === sp.prop);
     const kind = prop?.bindings?.figma?.kind ?? null;
     const previews =
-      Boolean(contract.bindings.figma.statePreviews) && (contract.states ?? []).includes(sp.state);
+      Boolean(contract.bindings?.figma?.statePreviews) && (contract.states ?? []).includes(sp.state);
     statePlanes.set(stem, {
       prop: sp.prop,
       state: sp.state,

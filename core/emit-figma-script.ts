@@ -4907,7 +4907,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // Button (4 variants × 3 sizes, 3 states): 12 base + 4×3 = 24, not 48.
   const stateVariants: VariantSpec[] = [];
   let statePreviewAxis: ComponentData['statePreviewAxis'];
-  if (contract.bindings.figma.statePreviews && contract.states.length > 0) {
+  if (contract.bindings?.figma?.statePreviews && contract.states.length > 0) {
     const overrides = root.states ?? {};
     const substProps = statePreviewSubstProps(contract); // validated: ≤1
     const primaryIdx = Math.max(0, axes.findIndex((a) => substProps.includes(a.prop.name)));
