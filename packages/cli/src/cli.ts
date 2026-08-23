@@ -69,9 +69,12 @@ Commands:
           [--tokens f,f] [--icons dir] [--file-key KEY]
   figma bundle <contracts..> --out <file>     contracts + tokens → ONE self-contained
           --tokens <base[,minted]>            CONTRACTS-BUNDLE JSON (the only thing a user
-          [--modes <light[,dark]>]            pastes into the plugin — it syncs the tokenSet
-          [--name <collection>]               as a named collection and builds the components;
-          [--icons dir]                       icon assets referenced by the contracts embed
+                 | <dir> | <slot>=<file>,…    pastes into the plugin — it syncs the tokenSet
+          [--modes <light[,dark]>]            as a named collection, or a LAYERED set as
+          [--name <collection>]               Primitives / Brand / Semantic, and builds the
+          [--icons dir]                       components; every contract is COMPILED here
+                                              and a refusal lists every contract by name;
+                                              icon assets referenced by the contracts embed
                                               as SVG text — required when refs exist;
                                               deterministic: same inputs → identical bytes)
   figma push <file> --code <CODE>             send a CONTRACTS-BUNDLE to the plugin bridge
@@ -117,9 +120,15 @@ Two files that define the SAME token differently inside ONE slot are refused
 by name — a light tree merged over a dark one emits a dark component whose
 own header says light, so the merge that would hide it is not allowed.
 
-On "figma bundle", --tokens is the same FLAG (never positional) but takes
-EXACTLY <base[,minted]> — one flat DTCG base file, optionally the minted
-tree second; no slots, no directories.
+On "figma bundle", --tokens is the same FLAG (never positional) and takes
+ONE of two shapes — a FLAT set: <base[,minted]> (one flat DTCG base file,
+optionally the minted tree second; base=/minted= name them; --modes adds
+light/dark overrides of base) — or a LAYERED set: a directory, or slot=file
+entries (primitives, semantic, light, dark, brand, brand.<name>; bare
+*.tokens.json files follow the layer convention; --modes fills light/dark).
+Mixing the two is refused by name. A layered set lands in the plugin as the
+Primitives / Brand / Semantic collections, and contract refs resolve through
+primitives → brand.default → semantic → light, as the repo's own CSS does.
 
 ds-contracts <command> --help prints that command's section from this reference.
 `;
@@ -179,7 +188,7 @@ Contract → code. See top-level --help for --tokens slot routing.
   figma: `ds-contracts figma — contract ↔ Figma surfaces
 
   figma <contracts..> --out <dir> [--tokens f,f] [--icons dir] [--file-key KEY]
-  figma bundle <contracts..> --out <file> --tokens <base[,minted]>
+  figma bundle <contracts..> --out <file> --tokens <base[,minted]> | <dir> | <slot>=<file>,…
        [--modes <light[,dark]>] [--name <collection>] [--icons dir]
   figma push <file> --code <CODE> [--bridge <url>]
   figma claim-channel [--bridge <url>]

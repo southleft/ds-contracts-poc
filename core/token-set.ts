@@ -42,11 +42,24 @@ export interface TokenSetPayload {
   /** Optional minted layer — a NESTED DTCG tree (the `imported.*` spelling);
    *  leaves whose $value is "{alias}" become REAL Figma variable aliases. */
   minted?: Record<string, unknown>;
+  /** Optional LAYERED form (additive, 2026-08-22): the repo's own tokens/
+   *  layout — primitives + brand.<name> + semantic + light/dark modes — as
+   *  the nested DTCG trees `figma bundle --tokens <dir|slot=file,…>` routed
+   *  them. When present, the compile engine resolves contract refs through
+   *  primitives → brand.default → semantic → light (the same order
+   *  core/emit-tokens-css.ts layers `:root`), and the plugin's tokens step
+   *  upserts the Primitives / Brand / Semantic collections (Light/Dark,
+   *  one Brand mode per brand) instead of one flat named collection.
+   *  Absent → the flat base+minted path, byte-identical to before. */
+  layers?: TokenTreeInput;
 }
 
 const SHAPE =
   'a tokenSet is { "name": "<collection>", "base": { "<token>": { "$type", "$value" } }, ' +
-  '"modes"?: { "light"?, "dark"? }, "minted"?: <nested DTCG tree> } — ds-contracts figma bundle builds one';
+  '"modes"?: { "light"?, "dark"? }, "minted"?: <nested DTCG tree>, ' +
+  '"layers"?: { "primitives", "semantic", "light", "dark", "brands": { "default", … } } (nested DTCG trees) } — ds-contracts figma bundle builds one';
+
+const LAYER_SLOTS = ['primitives', 'semantic', 'light', 'dark'] as const;
 
 const isPlainObject = (v: unknown): v is Record<string, unknown> =>
   v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -77,7 +90,13 @@ export function parseTokenSet(
   // refusal for an adopter". Refuse only when there is nothing to sync AT ALL.
   const mintedEmpty =
     raw.minted === undefined || raw.minted === null || (isPlainObject(raw.minted) && Object.keys(raw.minted).length === 0);
-  if (Object.keys(raw.base).length === 0 && mintedEmpty) {
+  // A LAYERED set may keep `base` empty too — its vocabulary is the layers.
+  const layersEmpty =
+    !isPlainObject(raw.layers) ||
+    Object.values(raw.layers).every(
+      (v) => !isPlainObject(v) || Object.values(v).every((t) => !isPlainObject(t) || Object.keys(t).length === 0),
+    );
+  if (Object.keys(raw.base).length === 0 && mintedEmpty && layersEmpty) {
     return {
       ok: false,
       error:
@@ -132,6 +151,49 @@ export function parseTokenSet(
   if (raw.minted !== undefined && !isPlainObject(raw.minted)) {
     return { ok: false, error: `the tokenSet "minted" must be a nested DTCG tree object — ${SHAPE}.` };
   }
+  // The LAYERED form. Every slot is a nested DTCG tree (an absent slot is
+  // `{}`); `brands` is a map of brand name → tree and must carry "default"
+  // when any brand does — the compile resolves through brand.default, so a
+  // brand map without it would silently resolve nothing.
+  let layers: TokenTreeInput | undefined;
+  if (raw.layers !== undefined && raw.layers !== null) {
+    if (!isPlainObject(raw.layers)) {
+      return { ok: false, error: `the tokenSet "layers" must be an object of nested DTCG trees — ${SHAPE}.` };
+    }
+    const L = raw.layers;
+    for (const slot of LAYER_SLOTS) {
+      if (L[slot] !== undefined && !isPlainObject(L[slot])) {
+        return { ok: false, error: `the tokenSet "layers.${slot}" must be a nested DTCG tree object — ${SHAPE}.` };
+      }
+    }
+    const brands: Record<string, Record<string, unknown>> = {};
+    if (L.brands !== undefined) {
+      if (!isPlainObject(L.brands)) {
+        return { ok: false, error: `the tokenSet "layers.brands" must be an object of brand name → nested DTCG tree — ${SHAPE}.` };
+      }
+      for (const [brand, tree] of Object.entries(L.brands)) {
+        if (!isPlainObject(tree)) {
+          return { ok: false, error: `the tokenSet "layers.brands.${brand}" must be a nested DTCG tree object — ${SHAPE}.` };
+        }
+        brands[brand] = tree;
+      }
+      if (Object.keys(brands).length > 0 && !('default' in brands)) {
+        return {
+          ok: false,
+          error:
+            `the tokenSet "layers.brands" carries ${Object.keys(brands).map((b) => `"${b}"`).join(', ')} but no "default" — ` +
+            `contracts resolve through brand.default, so a brand map must name it; ${SHAPE}.`,
+        };
+      }
+    }
+    layers = {
+      primitives: (L.primitives as Record<string, unknown> | undefined) ?? {},
+      semantic: (L.semantic as Record<string, unknown> | undefined) ?? {},
+      light: (L.light as Record<string, unknown> | undefined) ?? {},
+      dark: (L.dark as Record<string, unknown> | undefined) ?? {},
+      brands: 'default' in brands ? brands : { default: {}, ...brands },
+    };
+  }
   return {
     ok: true,
     tokenSet: {
@@ -139,6 +201,7 @@ export function parseTokenSet(
       base: raw.base as Record<string, unknown>,
       ...(modes !== undefined ? { modes } : {}),
       ...(raw.minted !== undefined ? { minted: raw.minted as Record<string, unknown> } : {}),
+      ...(layers !== undefined ? { layers } : {}),
     },
   };
 }
@@ -163,9 +226,28 @@ const deepMerge = (a: Record<string, unknown>, b: Record<string, unknown>): Reco
   return a;
 };
 
+/** True when the tokenSet carries the LAYERED form (primitives / brand /
+ *  semantic / modes) rather than one flat base. */
+export const isLayeredTokenSet = (tokenSet: TokenSetPayload): boolean => tokenSet.layers !== undefined;
+
 /** TokenTreeInput for createFigmaEngine, byte-equivalent to what the CLI
- *  builds for `figma <contracts> --tokens base.dtcg.json,minted.dtcg.json`. */
+ *  builds for `figma <contracts> --tokens base.dtcg.json,minted.dtcg.json` —
+ *  or, for a LAYERED tokenSet, the routed slots exactly as `--tokens <dir>`
+ *  loads them, so a `{brand.*}` ref and a mode-only `{color.action.*}` ref
+ *  resolve the way the repo's own CSS build resolves them. */
 export function tokenSetTokenTrees(tokenSet: TokenSetPayload): TokenTreeInput {
+  if (tokenSet.layers) {
+    const clone = <T>(v: T): T => JSON.parse(JSON.stringify(v)) as T;
+    const brands = clone(tokenSet.layers.brands ?? {});
+    if (!brands.default) brands.default = {};
+    return {
+      primitives: clone(tokenSet.layers.primitives ?? {}),
+      semantic: clone(tokenSet.layers.semantic ?? {}),
+      light: clone(tokenSet.layers.light ?? {}),
+      dark: clone(tokenSet.layers.dark ?? {}),
+      brands,
+    };
+  }
   const primitives: Record<string, unknown> = {};
   deepMerge(primitives, JSON.parse(JSON.stringify(tokenSet.base)) as Record<string, unknown>);
   if (tokenSet.minted) {

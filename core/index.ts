@@ -70,6 +70,7 @@ export {
 export {
   compileTokenSetRows,
   emitTokenSetScript,
+  isLayeredTokenSet,
   okColorToRgba,
   oklabToRgba,
   oklchToRgba,

@@ -475,6 +475,9 @@ jobs:
       - name: root-text:check (maintain — a root that IS the text node draws its characters, colour, size and weight; literal ink carried or named)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run root-text:check
+      - name: first-party-bundle:check (maintain — the 56 first-party contracts ride `figma bundle` with the layered token set; refusals arrive as one named list)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run first-party-bundle:check
       - name: extract:figma:visual:anchors (maintain — visual-parity subjects match the contracts' figma anchors; file-only, no token)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:visual:anchors

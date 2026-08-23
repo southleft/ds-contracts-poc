@@ -43,6 +43,7 @@ import {
   createFigmaEngine,
   dumpCapturesHidden,
   emitTokenSetScript,
+  isLayeredTokenSet,
   mintedTokensFileNameForId,
   parseTokenSet,
   plannedCodePaths,
@@ -805,18 +806,60 @@ export function createPluginEngine(data: PluginEngineData) {
     // baked engine (they were written against the repo tokens).
     const tokenSet = opts.tokenSet ?? null;
     const bundleIcons = opts.icons ?? null;
-    const foreign = tokenSet
-      ? foreignEngineFor(tokenSet, bundleIcons)
-      : bundleIcons
-        ? createFigmaEngine({
-            tokens: data.tokens,
-            icons: mergedIcons(bundleIcons),
-          })
-        : null;
+    // The engine derives named text styles at construction, so a token set
+    // missing a layer (a semantic font whose weight lives in brand) refuses
+    // HERE — by name, never as an uncaught throw the UI cannot render.
+    let foreign: typeof engine | null;
+    try {
+      foreign = tokenSet
+        ? foreignEngineFor(tokenSet, bundleIcons)
+        : bundleIcons
+          ? createFigmaEngine({
+              tokens: data.tokens,
+              icons: mergedIcons(bundleIcons),
+            })
+          : null;
+    } catch (e) {
+      return {
+        ok: false,
+        issues: [
+          plainFromThrow(
+            `The bundle's token set "${tokenSet?.name ?? ""}" refused`,
+            e,
+          ),
+        ],
+      };
+    }
 
     const steps: GenerateStep[] = [];
     if (opts.withTokens !== false) {
-      if (tokenSet) {
+      if (tokenSet && foreign && isLayeredTokenSet(tokenSet)) {
+        // A LAYERED token set (the repo's own tokens/ layout, routed by
+        // `figma bundle --tokens <dir>`): the flat one-collection sync has
+        // no slot for brand or semantic aliases and no mode-only tokens, so
+        // it is not used. The same engine that compiles the contracts
+        // upserts the Primitives / Brand / Semantic collections (Light/Dark,
+        // one Brand mode per brand) — the exact script a repo paste runs.
+        let code: string;
+        try {
+          code = foreign.buildTokensScript(fileKey || null);
+        } catch (e) {
+          return {
+            ok: false,
+            issues: [
+              plainFromThrow(
+                `The bundle's layered token set "${tokenSet.name}" refused`,
+                e,
+              ),
+            ],
+          };
+        }
+        steps.push({
+          kind: "tokens",
+          title: `Token variables — Primitives / Brand / Semantic collections from the bundle's layered token set "${tokenSet.name}" (upserted; prune is opt-in via DS_PRUNE_TOKENS and leftovers are named)`,
+          code,
+        });
+      } else if (tokenSet) {
         steps.push({
           kind: "tokens",
           title: `Token variables — "${tokenSet.name}" collection from the bundle's token set (upserted; prune is opt-in via DS_PRUNE_TOKENS and leftovers are named)`,
@@ -833,6 +876,11 @@ export function createPluginEngine(data: PluginEngineData) {
         });
       }
     }
+    // EVERY refusal at once. This loop used to return on the FIRST contract
+    // the engine refused, so a 51-contract paste with 34 unresolvable token
+    // refs surfaced ONE refusal per paste — fix it, paste again, meet the
+    // next one. Compile them all, then refuse by name with the full list.
+    const refusals: PlainIssue[] = [];
     for (const contract of ordered) {
       const eng = foreign && incomingIds.has(contract.id) ? foreign : engine;
       let code: string;
@@ -846,10 +894,8 @@ export function createPluginEngine(data: PluginEngineData) {
       } catch (e) {
         // The emitter's referee refusal (named violations) or an
         // unresolvable token — both are the engine's own words.
-        return {
-          ok: false,
-          issues: [plainFromThrow(`${contract.name} refused`, e)],
-        };
+        refusals.push(plainFromThrow(`${contract.name} refused`, e));
+        continue;
       }
       steps.push({
         kind: "component",
@@ -864,6 +910,20 @@ export function createPluginEngine(data: PluginEngineData) {
         contractId: contract.id,
         code: versionMarkerScript(contract.id, contract.version),
       });
+    }
+    if (refusals.length > 0) {
+      return {
+        ok: false,
+        issues:
+          refusals.length === 1
+            ? refusals
+            : [
+                plain(
+                  `${refusals.length} of ${ordered.length} contract(s) refused — nothing was planned; every refusal is listed below.`,
+                ),
+                ...refusals,
+              ],
+      };
     }
     return { ok: true, steps, notes };
   }
@@ -1806,12 +1866,24 @@ return { inventory: rows };
       return { corpus, label: "the tokens baked into this plugin build" };
     const trees = tokenSetTokenTrees(tokenSet);
     return {
-      corpus: tokenCorpusFromJson({
-        primitives: {},
-        semantic: trees.primitives,
-        light: {},
-        brandDefault: {},
-      }),
+      corpus: tokenCorpusFromJson(
+        // A LAYERED set keeps its layers (suggestions resolve through
+        // primitives / brand.default / semantic / light exactly as the
+        // baked corpus does); a flat set lands in the semantic slot.
+        isLayeredTokenSet(tokenSet)
+          ? {
+              primitives: trees.primitives,
+              semantic: trees.semantic,
+              light: trees.light,
+              brandDefault: trees.brands.default ?? {},
+            }
+          : {
+              primitives: {},
+              semantic: trees.primitives,
+              light: {},
+              brandDefault: {},
+            },
+      ),
       label: `your token set "${tokenSet.name}" (from the bundle you pasted)`,
     };
   }

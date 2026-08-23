@@ -1,6 +1,6 @@
 {
   "_marker": "CHILD-WIDER-THAN-PARENT BASELINE — a committed per-library defect count that may only DECREASE. `overflows` counts in-flow children wider than their parent with a non-text cause; `textCaused` counts the exempted class (the corpus-wide text-wrapping gap, docs/22) separately so it can never flatter the first number. Both ratchet TWO-SIDED: an increase is a new defect, a decrease is a fix that must be re-recorded here with its cause named. Re-record deliberately with `node scripts/child-wider.mjs --write` and say what moved.",
-  "recordedAt": "2026-08-22",
+  "recordedAt": "2026-08-23",
   "rows": [
     {
       "library": "altitude",
@@ -33,9 +33,9 @@
       "library": "fluent",
       "scripts": 11,
       "overflows": 2,
-      "textCaused": 32,
+      "textCaused": 34,
       "marginBox": 43,
-      "cause": "overflows(2): 18 -> 2 on 2026-08-16, and the DEFECT DID NOT GET FIXED — it stopped MANIFESTING. 16 of the old 18 were one class: Checkbox's `indicator > icon` is an element:\"svg\" promoted from the computed floor with NO asset (examples/fluent/assets/icons ships only dialog-part-0-1-0.svg and switch-indicator.svg — there is still no checkbox glyph), so the mock handed it Figma's 100px birth box inside a 16px indicator, +84 per variant. c27e3fe0 (2026-08-10, AFTER the 2026-08-09 baseline) stopped the mock modelling the birth box on plain FRAMEs — the live canvas refutes it there — so an assetless svg part now measures its own box instead of 100. The missing glyph is unchanged and still named here; only the instrument stopped inflating it. The remaining 2 are Switch's `label` at 66px inside a 59px parent (+7) on the two `Label Position=Above` cells, where the stacked layout gives the label a narrower column than its own hug width — unchanged. textCaused(32) and marginBox(43) are the corpus-wide exempt classes (docs/22), counted separately and never folded in.",
+      "cause": "overflows(2): 18 -> 2 on 2026-08-16, and the DEFECT DID NOT GET FIXED — it stopped MANIFESTING. 16 of the old 18 were one class: Checkbox's `indicator > icon` is an element:\"svg\" promoted from the computed floor with NO asset (examples/fluent/assets/icons ships only dialog-part-0-1-0.svg and switch-indicator.svg — there is still no checkbox glyph), so the mock handed it Figma's 100px birth box inside a 16px indicator, +84 per variant. c27e3fe0 (2026-08-10, AFTER the 2026-08-09 baseline) stopped the mock modelling the birth box on plain FRAMEs — the live canvas refutes it there — so an assetless svg part now measures its own box instead of 100. The missing glyph is unchanged and still named here; only the instrument stopped inflating it. The remaining 2 are Switch's `label` at 66px inside a 59px parent (+7) on the two `Label Position=Above` cells, where the stacked layout gives the label a narrower column than its own hug width — unchanged. textCaused(32) and marginBox(43) are the corpus-wide exempt classes (docs/22), counted separately and never folded in. textCaused 33 → 34 on 2026-08-22: Tooltip's root copy is DRAWN for the first time (root-level text lowering, R6) and joins the named text-wrapping class — a fact that was silently absent is now counted, not a regression.",
       "detail": [
         "\"label\" 66 > parent \"Checked=Unchecked, Label Position=Above, State=Default\" 59 (Checked=Unchecked, Label Position=Above, State=Default)",
         "\"label\" 66 > parent \"Checked=Checked, Label Position=Above, State=Default\" 59 (Checked=Checked, Label Position=Above, State=Default)"
