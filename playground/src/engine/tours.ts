@@ -3,8 +3,9 @@
  * loads, computes and highlights lives in pages/Playground.tsx (it needs the
  * page's setters); what it shows lives in components/FlowPanel.tsx.
  *
- * Naming follows docs/BETA.md's hop numbering: hop 1 code → contract;
- * hop 2 contract → bundle → canvas (Apply); hop 3 contract → code
+ * Naming follows docs/29-how-it-flows.md §1.2 (the naming source;
+ * docs/BETA.md agrees where it numbers hop-2 and hop-4): hop 1 code →
+ * contract; hop 2 contract → bundle → canvas (Apply); hop 3 contract → code
  * (`generate`); hop 4 canvas (dump) → proposal; hop 5 proposal → contract
  * (PR). Never "sync".
  */
@@ -208,11 +209,11 @@ export const TOURS: Record<TourId, Tour> = {
 
 export const isTourId = (v: string | null): v is TourId => v === 'code-to-figma' || v === 'figma-to-code';
 
-/** The five hops, as docs/BETA.md numbers them. */
+/** The five hops, as docs/29-how-it-flows.md §1.2 numbers them. */
 export const HOPS: Array<{ n: number; from: string; to: string; verb: string }> = [
   { n: 1, from: 'code', to: 'contract', verb: 'extract · extract --computed · promote' },
   { n: 2, from: 'contract', to: 'canvas', verb: 'figma bundle → plugin Build → Apply' },
-  { n: 3, from: 'contract', to: 'code', verb: 'generate --target react | html | wc | figma-script' },
+  { n: 3, from: 'contract', to: 'code', verb: 'generate --target react | html | react-inline | figma-script' },
   { n: 4, from: 'canvas (dump)', to: 'proposal', verb: 'Send tab · extract:figma · propose' },
   { n: 5, from: 'proposal', to: 'contract', verb: 'PR · figma receive --apply · copy' },
 ];

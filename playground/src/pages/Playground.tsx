@@ -2074,6 +2074,12 @@ export function Playground() {
       if (tourRun.current === run) setFlowView(view);
     };
     setOutputTab('flow');
+    // Stacked layout (≤1100px): the Flow panel sits below the fold, so
+    // without this a Next click changes nothing on screen (2026-08-23
+    // review). The strip is sticky there; scroll-margin-top clears it.
+    if (typeof window !== 'undefined' && window.matchMedia('(max-width: 1100px)').matches) {
+      outputRef.current?.scrollIntoView({ block: 'start' });
+    }
     setFlowView({ kind: 'loading', what: step.label.toLowerCase() });
     try {
       await runStepBody(id, step.id, publish);

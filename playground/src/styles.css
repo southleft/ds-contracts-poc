@@ -2436,6 +2436,32 @@ label {
   text-decoration: none;
 }
 
+/* Stacked layout (≤1100px): the strip pins to the top as a compact pager —
+ * only the current step pill and Prev / Next stay — and Playground.tsx
+ * scrolls the output pane into view under it on every step change; without
+ * both, Next changed nothing on screen and each step cost a full-page
+ * scroll (2026-08-23 review). */
+@media (max-width: 1100px) {
+  .tourstrip {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+
+  .tourstrip .onboard__step:not(.is-current) {
+    display: none;
+  }
+
+  .tourstrip__title {
+    display: none;
+  }
+
+  .pg__output {
+    /* The strip is two rows (~80px) at phone widths; clear it fully. */
+    scroll-margin-top: 88px;
+  }
+}
+
 .tabs__tab--flow {
   font-weight: 600;
 }
@@ -2683,19 +2709,25 @@ label {
   border-top: 1px solid var(--pg-border);
 }
 
-/* Every column but the last (the reason / the prose) keeps its words whole;
- * the wrap container scrolls sideways instead. */
-.flow__table td:not(:last-child),
-.flow__table th:not(:last-child) {
+/* The output pane is ~480px wide and the widest step table carries six
+ * columns; nowrap cells hid the REASON column (the point of the step)
+ * behind an in-pane sideways scroll (2026-08-23 review). Every cell wraps
+ * instead — mono values may break mid-token — so every column is visible.
+ * Headers stay on one line. */
+.flow__table th {
   white-space: nowrap;
 }
 
+.flow__table td {
+  overflow-wrap: anywhere;
+}
+
 .flow__table td:last-child {
-  min-width: 220px;
+  min-width: 140px;
 }
 
 .flow__table .flow__mono {
-  overflow-wrap: normal;
+  overflow-wrap: anywhere;
 }
 
 .flow__table th {

@@ -44,9 +44,10 @@ Terms are defined here once and used below without re-definition.
   manifests. `npm run docs:check` refuses a doc number no receipt produces.
 - **wall code (`FC-*`)** — a named limit that appears in source comments,
   refusal messages and [23 — Known Limitations](23-known-limitations.md) so a
-  reader can grep for the class. The five docs/23 cites are
+  reader can grep for the class. The codes docs/23 cites today are
   `FC-APPLY-TOKENS-NOT-PRUNED`, `FC-DUMP-PROPOSE-PART-STATE-CHANNELS`,
-  `FC-FONT-SUBSTRATE`, `FC-GEOMETRY-EXCLUDED`, `FC-RT-*`. Two greppable reason
+  `FC-DUMP-PROPOSE-UNBOUND-BOOLEAN`, `FC-FONT-SUBSTRATE`,
+  `FC-GEOMETRY-EXCLUDED`, `FC-RT-*`. Two greppable reason
   prefixes carry no code: `no canvas field for this literal channel — …`
   (`core/emit-figma-script.ts:2444`) and `pseudo-decor-outside-grammar`
   (`extract/computed/anatomy.ts:2281`). The full census of `FC-*` codes is a
@@ -138,7 +139,7 @@ flowchart LR
     DUMP["dump JSON<br/>_provenance · _degradations · _variables"]
   end
   TSX -- "hop 1 · extract / extract --computed / promote<br/>(+ *.extension.json sidecar)" --> C
-  C -- "hop 3 · generate --target react|html|wc|…<br/>(atomic per contract)" --> GEN
+  C -- "hop 3 · generate --target react|html|react-inline|…<br/>(atomic per contract)" --> GEN
   C -- "hop 2 · figma bundle → CONTRACTS-BUNDLE<br/>(+ codeOnlyFacts)" --> B["CONTRACTS-BUNDLE JSON"]
   B -- "plugin Build tab · push --code · publish/Changes tab<br/>plan all-or-nothing, human clicks Apply" --> SET
   SET -- "hop 4 · Send tab · REST mapper<br/>(dump grammar 1.31)" --> DUMP
@@ -146,13 +147,14 @@ flowchart LR
   P -- "hop 5 · PR · figma receive --apply · copy" --> C
 ```
 
-The five hops, named the way [BETA.md](BETA.md) already names them:
+The five hops. This table is the naming source; [BETA.md](BETA.md) agrees
+where it already numbers (`hop-2`, `hop-4`):
 
 | hop | from → to | verb(s) |
 |---|---|---|
 | **1** | code → contract | `extract`, `extract --computed`, `promote` |
 | **2** | contract → bundle → canvas | `figma bundle`, then the plugin's Build tab / `figma push` / `figma publish` + **Apply** |
-| **3** | contract → code | `generate --target react\|html\|wc\|…` |
+| **3** | contract → code | `generate --target react\|html\|react-inline\|…` |
 | **4** | canvas (dump) → proposal | plugin Send tab or `extract:figma:rest`, then `propose` |
 | **5** | proposal → contract | a PR, `figma receive --apply`, or copy |
 
@@ -183,7 +185,7 @@ Use these five names everywhere. "Sync" is not one of them.
 
 The token → canvas-field lowering is one switch (`:1907-1935`):
 `background` / `background-color` → `fill`; `border-color` → `stroke`;
-per-side border colours that disagree → `miss(...)`, named (`:1930`). A
+per-side border colours that disagree → `miss(...)`, named (`:1935`). A
 literal with no px-shaped canvas field → `literalMiss`, whose reason always
 opens `no canvas field for this literal channel — …` (`:2438-2447`). The facts
 are stamped on the set as `ds_contracts/codeOnlyFacts` (`:7356`) and listed in
@@ -218,9 +220,10 @@ anything else becomes the note
 an `unbound[]` row with nearest-token candidates, or — with minting on — a
 provisional `imported.*` token the reader can see and rename. Projection
 `exact` refuses by one of the 13 `EXACT_*` codes in `accuracy/grammar.json`
-(`EXACT_DEFINITIONS_MISSING` … `EXACT_PROJECTION_COUNT_MISMATCH`);
-`reviewable-inversion` proposes anyway and stamps the projection
-`legacy-unverified` (`core/propose-figma.ts:1075`, `:1161`).
+(`EXACT_DEFINITIONS_MISSING` … `EXACT_PROJECTION_COUNT_MISMATCH` — the full
+set is thrown by `core/exact-projection.ts`; `core/propose-figma.ts` itself
+throws only the first two); `reviewable-inversion` proposes anyway and stamps
+the projection `legacy-unverified` (`core/propose-figma.ts:1075`, `:1161`).
 
 <!-- site:replay:roundtrip -->
 
@@ -258,7 +261,12 @@ Carried, lowered by a named rule, or refused by name. The conformance
 manifests are hand-authored denominators, "deliberately not derived" from the
 engine's own tables, so that "a construct that is neither carried nor
 named-refused is a hard failure rather than an absence"
-(`conformance/README.md:36-42`). Pinned in `accuracy/grammar.json:33-55`: the
+(`conformance/README.md:36-42`). The manifest labels map onto the three
+dispositions: CARRIED is carried; LOWERED and LEDGERED are the named middle
+(a named rule lowers the fact and a receipt carries the residue); REFUSED is
+refused by name; UNSUPPORTED is the CSS/DOM manifest's label for a construct
+pinned outside the vocabulary — a named refusal at the frontier, still
+counted in the denominator. Pinned in `accuracy/grammar.json:33-55`: the
 CSS / DOM frontier is 82 cases (CARRIED 42 · LOWERED 4 · REFUSED 18 ·
 UNSUPPORTED 18); the canvas-construct fixture is 154 cases (CARRIED 107 ·
 LEDGERED 38 · REFUSED 9).
@@ -281,7 +289,10 @@ build time; here they are quoted.
 
 ### 4.4 The direction of drift — but never the winner
 
-Six instruments, each comparing ONE surface to the contract:
+Six instruments. Five compare ONE surface to the contract; the sixth,
+`extract --reconcile`, lays the two extractions (code's, the dump's) side by
+side, property by property, and only classifies. None of the six writes to a
+surface, and none picks a side:
 
 | instrument | compares | classifies as | never compares |
 |---|---|---|---|
@@ -391,7 +402,8 @@ they argue" ([18 — User Flows](18-user-flows.md)).
   replay reads `textProps [{property: "Href", default: "#"}]`, 2 variants,
   zero code-only facts). The BINDING — "this property is the root element's
   href" — is not a canvas field and is not a code-only fact
-  (`grep -n attrs core/emit-figma-script.ts` hits only `placeholder`, `:3386`
+  (`grep -an 'part.attrs' core/emit-figma-script.ts` — the file carries NUL
+  bytes, so grep needs `-a` — hits only the `placeholder` attribute, `:3386`
   and `:3400`).
 - **Canvas → contract (hop 4).** `semantics.element: "a"` recovers from the
   `ds_contracts/semantics` stamp on a pipeline-drawn set

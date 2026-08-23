@@ -783,6 +783,20 @@ tr:last-child td {
   display: block;
 }
 
+/* The How-it-flows figures scale with the column at desktop, but scaled to
+   a 358px phone column their labels render ~3px; below 720px they keep a
+   readable minimum width and the container scrolls (2026-08-23 review). */
+.diagram--flow {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  .diagram--flow img {
+    min-width: 720px;
+  }
+}
+
 .section-note {
   font-size: 14.5px;
   color: var(--muted);
@@ -1190,6 +1204,15 @@ tr:last-child td {
    1280px lost its last column to the scroll edge — 2026-08-23 review). */
 .doc .table-wrap td:first-child {
   white-space: normal;
+}
+
+/* Below 720px the five/six-column verb and replay tables crushed every
+   column to 60-110px and clipped the REASON column; keep a readable
+   minimum width and let .table-wrap scroll instead (2026-08-23 review). */
+@media (max-width: 720px) {
+  .doc .table-wrap table {
+    min-width: 720px;
+  }
 }
 
 .doc .diagram {

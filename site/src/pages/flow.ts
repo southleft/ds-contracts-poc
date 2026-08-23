@@ -16,12 +16,13 @@
  *     code-only facts from the committed bundle, the refusal sentences
  *     sliced verbatim from source;
  *   · relative `NN-….md` links resolve to the repo docs on GitHub, and the
- *     five FC-* wall codes link to the docs/23 section that carries each.
+ *     FC-* wall codes link to the docs/23 section that carries each.
  */
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { Marked } from 'marked';
 import { codeBlock, esc, themedImage, REPO_URL, PLAYGROUND_URL } from '../html.js';
+import { flowChainLegend } from '../diagrams.js';
 import { docUrl, LIMITS_REL } from '../what-works.js';
 import type { FlowReplay, FlowCodeOnlyFact, FlowCompiled } from '../how-replays.js';
 
@@ -37,7 +38,7 @@ const FENCE_ALT: Record<(typeof FENCE_IDS)[number], string> = {
   disposition:
     'Disposition tree: a fact outside the contract vocabulary is NAMED in a sidecar or note; inside it, a fact with a field on the target surface is CARRIED, a fact a named rule can lower is LOWERED and NAMED, and a fact that would be a guess is REFUSED BY NAME. Neither carried nor named is a hard failure in the hand-authored conformance manifests.',
   'adjudication-star':
-    'The adjudication star: every instrument compares one surface to the contract — never two surfaces to each other — and a change to the contract is a pull request merged by a human.',
+    'The adjudication star: the instruments classify drift against the contract — the two surfaces never sync side-to-side — and a change to the contract is a pull request merged by a human.',
 };
 
 /** GitHub's heading slug, so docs/23 anchors resolve on github.com. */
@@ -49,15 +50,16 @@ const ghSlug = (heading: string): string =>
     .trim()
     .replace(/\s/g, '-');
 
-/** The five FC-* codes docs/23 carries, each resolved to the section that
- *  first names it — computed from the committed file so a moved section
- *  cannot leave a dead anchor, and a dropped code refuses the build. */
+/** The FC-* codes docs/23 cites (the list docs/29 §0 states), each resolved
+ *  to the section that first names it — computed from the committed file so
+ *  a moved section cannot leave a dead anchor, and a dropped code refuses
+ *  the build. */
 function fcAnchors(): Array<{ code: string; section: string; href: string }> {
   const lines = readFileSync(path.join(process.cwd(), LIMITS_REL), 'utf8').split('\n');
-  const codes = ['FC-APPLY-TOKENS-NOT-PRUNED', 'FC-DUMP-PROPOSE-PART-STATE-CHANNELS', 'FC-FONT-SUBSTRATE', 'FC-GEOMETRY-EXCLUDED', 'FC-RT-'];
+  const codes = ['FC-APPLY-TOKENS-NOT-PRUNED', 'FC-DUMP-PROPOSE-PART-STATE-CHANNELS', 'FC-DUMP-PROPOSE-UNBOUND-BOOLEAN', 'FC-FONT-SUBSTRATE', 'FC-GEOMETRY-EXCLUDED', 'FC-RT-'];
   return codes.map((code) => {
     const at = lines.findIndex((l) => l.includes(code));
-    if (at < 0) throw new Error(`how-flow: ${LIMITS_REL} no longer names ${code} — docs/29 §0 lists it as one of the five docs/23 cites`);
+    if (at < 0) throw new Error(`how-flow: ${LIMITS_REL} no longer names ${code} — docs/29 §0 lists it among the docs/23 cites`);
     let h = at;
     while (h >= 0 && !/^#{1,3} /.test(lines[h])) h -= 1;
     if (h < 0) throw new Error(`how-flow: ${LIMITS_REL} names ${code} before any heading`);
@@ -144,7 +146,7 @@ function namedRefusalsBlock(F: FlowReplay): string {
     .join('');
   return `
 <h3 id="named-refusals">Named refusals you can grep for</h3>
-<p>Walls carry codes. These are the five <code>FC-*</code> codes <a href="${docUrl(LIMITS_REL)}">Known Limitations</a> cites, each linked to the section that carries it, plus the two reason prefixes that carry no code. The full census of <code>FC-*</code> codes across the tree is a grep, not a committed receipt, so no count is stated here or in the doc.</p>
+<p>Walls carry codes. These are the <code>FC-*</code> codes <a href="${docUrl(LIMITS_REL)}">Known Limitations</a> cites (the list docs/29 §0 states), each linked to the section that carries it, plus the two reason prefixes that carry no code. The full census of <code>FC-*</code> codes across the tree is a grep, not a committed receipt, so no count is stated here or in the doc.</p>
 <div class="table-wrap"><table><thead><tr><th>wall code</th><th>docs/23 section</th></tr></thead><tbody>${rows}
 <tr><td><code>no canvas field for this literal channel — …</code></td><td>reason prefix, hop 2 — <code>core/emit-figma-script.ts</code> (<code>literalMiss</code>)</td></tr>
 <tr><td><code>pseudo-decor-outside-grammar</code></td><td>reason prefix, hop 1 — <code>extract/computed/anatomy.ts</code></td></tr>
@@ -172,7 +174,11 @@ function renderDoc(md: string, F: FlowReplay): string {
       throw new Error(`how-flow: ${FLOW_DOC_REL} carries a mermaid fence "%% id: ${id}" with no drawing in site/src/diagrams.ts — add one (and register it in site/build.ts) or the figure is lost`);
     }
     seen.add(id);
-    return `<div class="diagram">${themedImage(`/assets/${id}-light.svg`, `/assets/${id}-dark.svg`, FENCE_ALT[id as (typeof FENCE_IDS)[number]])}</div>`;
+    const legend =
+      id === 'flow-chain'
+        ? codeBlock(flowChainLegend(F.dumpGrammar.rest).join('\n'), 'text', 'the five hops — the verbs as the CLI spells them')
+        : '';
+    return `<div class="diagram diagram--flow">${themedImage(`/assets/${id}-light.svg`, `/assets/${id}-dark.svg`, FENCE_ALT[id as (typeof FENCE_IDS)[number]])}</div>${legend}`;
   });
   for (const id of FENCE_IDS) {
     if (!seen.has(id)) throw new Error(`how-flow: ${FLOW_DOC_REL} no longer carries the "%% id: ${id}" fence that site/src/diagrams.ts draws`);
@@ -228,7 +234,7 @@ export function flowPageBody(F: FlowReplay): { title: string; description: strin
   const body = `
 <p class="eyebrow">How it works · the two directions</p>
 <h1>How it flows: Figma ↔ code through contracts</h1>
-<p class="lede">There is no Figma-to-code converter here and no code-to-Figma converter. Two pure functions each read or write one file — the contract — and six instruments compare each surface to it, never to each other. This page walks every hop, verb by verb, with the engine replayed beside the prose.</p>
+<p class="lede">There is no Figma-to-code converter here and no code-to-Figma converter. Two pure functions each read or write one file — the contract — and six instruments classify drift against it — none writes to a surface, none picks a side. This page walks every hop, verb by verb, with the engine replayed beside the prose.</p>
 <p class="section-note">Rendered at build from <a href="${docUrl(FLOW_DOC_REL)}"><code>${FLOW_DOC_REL}</code></a>, the one prose source (GitHub renders the same file). The figures are that file's <code>mermaid</code> fences, pre-rendered as themed SVG at build; the boxed replays ran the real engine over committed fixtures and the build refuses when they disagree with the committed receipts. The <a href="${PLAYGROUND_URL}">Playground</a> runs the same engine on the same fixtures in the browser.</p>
 <div class="doc">${renderDoc(md, F)}</div>`;
   return {

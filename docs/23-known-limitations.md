@@ -1206,8 +1206,9 @@ Found 2026-08-23 while writing [docs/29 — How It Flows](29-how-it-flows.md)
 **value** of an unbound TEXT component property (`Href`, default `#`, via
 `textOnlyProps` in `core/emit-figma-script.ts`). The **binding** — "this
 property is the root element's `href`" — is not a canvas field, and it is not
-a code-only fact either: `grep -n attrs core/emit-figma-script.ts` hits only
-the `placeholder` attribute. On hop 4 the binding is never re-proposed; the
+a code-only fact either: `grep -an 'part.attrs' core/emit-figma-script.ts`
+(the file carries NUL bytes; grep needs `-a`) hits only the `placeholder`
+attribute (`:3386`, `:3400`). On hop 4 the binding is never re-proposed; the
 round-trip comparator files `element/attrs` under CANVAS-ABSENT
 (`extract/figma/roundtrip.ts`), so the shipping round trip sees it, but a set
 built by the plugin carries no receipt of it. **What you would observe:** a
@@ -3084,5 +3085,5 @@ value of a call that registers any missing built-in and refuses at load if
 one is still absent; `playground:flow-check` (a `maintain` step) pins that
 `Playground.tsx` reads the registry through that module. Marking
 `core/emitter.ts` in `sideEffects` was tried and rejected: esbuild honours the
-same field, and the plugin engine bundle grew from 811,089 to 924,206 bytes
-(`figma-sync/plugin/engine.receipt.json` refused it).
+same field, and the plugin engine bundle grew past its committed 811,089
+bytes (`figma-sync/plugin/engine.receipt.json` refused the grown bundle).

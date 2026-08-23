@@ -292,7 +292,9 @@ function Body({ view }: { view: FlowView }) {
             list is the same object that rides the bundle (<Mono>bundle.codeOnlyFacts[i].facts</Mono>), the
             <Mono>figma bundle</Mono> stdout, the plugin run report, and the set’s{' '}
             <Mono>ds_contracts/codeOnlyFacts</Mono> stamp; <Mono>npm run code-only-facts:check</Mono> pins the
-            per-contract counts.
+            per-contract counts. One known class of fact is named nowhere yet: an <Mono>anatomy.root.attrs</Mono>{' '}
+            binding (top-nav-item’s <Mono>href</Mono>) reaches the canvas only as a text property’s VALUE — the
+            binding itself is not a code-only fact (docs/23 §B.31).
           </Source>
         </>
       );
@@ -357,7 +359,8 @@ function Body({ view }: { view: FlowView }) {
           <ol className="flow__hops">
             <li>
               <b>Build tab</b> — paste the bundle (or <Mono>figma push &lt;bundle&gt; --code &lt;CODE&gt;</Mono>, or{' '}
-              <Mono>figma publish</Mono> to a channel the Changes tab polls). The plan validates every contract.
+              <Mono>figma publish</Mono> to a channel the Changes tab reads once on open and on “Check for
+              updates” — deliberately no poll timer). The plan validates every contract.
             </li>
             <li>
               <b>All or none</b> —
@@ -596,8 +599,10 @@ function Body({ view }: { view: FlowView }) {
           <Source>
             <Mono>compareContracts</Mono> lives in extract/figma/roundtrip.ts, which imports node:fs — it is not in
             the browser core, so the three counts above are the receipt’s, not this tab’s. The live table is the one
-            slice this tab can compute itself. The adjudication never picks a winner: a human merging the contract
-            PR does.
+            slice this tab can compute itself. Beyond this tab, six instruments classify drift —{' '}
+            <Mono>npm run parity</Mono>, <Mono>ds-contracts diff</Mono>/<Mono>diagnose</Mono>,{' '}
+            <Mono>extract --reconcile</Mono>, the plugin Changes tab, the sync ledger, and the conformance kits
+            (docs/29 §4.4). The adjudication never picks a winner: a human merging the contract PR does.
           </Source>
         </>
       );
