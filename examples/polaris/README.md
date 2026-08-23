@@ -22,7 +22,7 @@ them. Everything here regenerates from the committed inputs with the commands be
 | `generated/react/`, `generated/html/` | emitReact + emitHtml output from the contracts (byte-stable) |
 | `figma/` | Figma sync scripts (tokens + components) + the headless compile receipt |
 | `receipts/` | paired screenshots (ours \| theirs), `truth-table.json`, `RECEIPTS.md` |
-| `scripts/` | build-tokens, promote (+ curation + lib-css), verify |
+| `scripts/` | build-tokens, promote (+ curation; the CSS-module inverter is `extract/computed/lib-css.ts`), verify |
 | `extract.config.json` | the pipeline config for the mechanical extraction |
 
 ## Reproduce
