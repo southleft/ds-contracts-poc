@@ -191,7 +191,15 @@ function registryMetadata(name, version) {
       error && typeof error === "object" && "stderr" in error
         ? String(error.stderr)
         : "";
-    if (/\bE404\b|404 Not Found/i.test(stderr)) return null;
+    // `npm view --json` also spells the failure on stdout; under
+    // `npm run -s …` the inherited loglevel=silent empties stderr, so the
+    // 404 must be read from either stream or a missing version would be
+    // REFUSED as a lookup failure instead of reported as SOURCE AHEAD.
+    const stdout =
+      error && typeof error === "object" && "stdout" in error
+        ? String(error.stdout)
+        : "";
+    if (/\bE404\b|404 Not Found/i.test(stderr + stdout)) return null;
     throw new Error(
       `REFUSED: npm registry lookup failed for ${name}@${version}` +
         (stderr ? `: ${stderr.trim().split("\n").at(-1)}` : "."),

@@ -64,7 +64,7 @@ Commands:
   extract --computed --config <capture.json>  real-browser computed-style capture
           [--harness <dir>] [--out <dir>]     (needs playwright-core + Chromium; degrades by name)
   generate <contracts..> --out <dir>          contract → code
-          [--target react|html|react-inline|figma-script|<registered>]
+          [--target react|html|react-inline|figma-script|code-connect|<registered>]
           [--tokens f,f] [--icons dir] [--stories] [--emitter <module>]
   figma <contracts..> --out <dir>             contract → Figma sync scripts
           [--tokens f,f] [--icons dir] [--file-key KEY]
@@ -186,7 +186,7 @@ Static adapters: react-tsx | cem.
 until reviewed). --computed needs playwright-core + Chromium.
 `,
   generate: `ds-contracts generate <contracts..> --out <dir>
-  [--target react|html|react-inline|figma-script|<registered>]
+  [--target react|html|react-inline|figma-script|code-connect|<registered>]
   [--tokens f,f] [--icons dir] [--stories] [--emitter <module>]
 
 Contract → code. See top-level --help for --tokens slot routing.

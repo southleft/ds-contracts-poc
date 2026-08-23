@@ -100,6 +100,24 @@ emitter that resolves a token through `@ds-contracts/core` alone, plus the
 web-components emitter from its tarball. Dependency policy: core depends on
 `@ds-contracts/schema` and nothing else (the smoke refuses otherwise).
 
+### Added — `@ds-contracts/core` (packages/core, slice 3: the cheap pure siblings)
+
+Four more pure modules are package source, each a verbatim move with a root
+re-export shim: `core/emit-tokens-css.ts` (`tokensCssLayers`,
+`emitTokensCss`, `cssVarName`, `cssValueOf`, `referencedCssVars`,
+`mentionedCssVars`, `undefinedCssVars` — the `tokens.css` every generate
+shell writes), `core/grid-css.ts` (the A2 grid CSS inversion parsers +
+`GRID_STRUCTURAL_PROPS`; its `GRID_REFUSALS` import now reads
+`@ds-contracts/schema` directly), `core/canvas-code-plan.ts`
+(`plannedCodePaths`, `canvasCodePlan`, the provenance sentence, the
+proposal file-name spellings) and `core/figma-names.ts` (`camel`,
+`canonicalPropName`). Layout: `packages/core/src/{emit-tokens-css,grid-css,canvas-code-plan,figma-names}.ts`;
+the CLI's `generate`, `figma` and `propose-pr` commands import the moved
+names from `@ds-contracts/core`. Zero behaviour change: golden
+byte-identical; the RC tarball allowlist lists the eight new dist files; the
+plugin engine receipt is re-recorded (the bundle's input list names the new
+paths).
+
 ### Added — `@ds-contracts/core` (packages/core, slice 2: the analysis layer)
 
 The half of `core/emit-react.ts` that is a contract fact rather than a React

@@ -34,6 +34,26 @@ CLI's built-ins do:
   `holderDeclaresPosition`; and the fact tables (`ELEMENT_META`,
   `NATIVE_ROLE_HOSTS`, `PART_STATE_CHANNELS`, `UA_MARGIN_ELEMENTS`,
   `UA_PAINTED_ROOT_ELEMENTS`, `UA_PAINT_CHANNELS`).
+- **`tokens.css`** — the custom-property sheet the generated CSS
+  references, from the same DTCG trees the resolver flattens:
+  `tokensCssLayers(ctx.tokens)` (the repo's mode layering — `:root`,
+  `[data-theme="dark"]`, `[data-brand="<name>"]`), `emitTokensCss(layers)`
+  (refuses by name when two slots type one path differently; reports
+  dangling aliases and skipped composites), `cssVarName`, `cssValueOf`,
+  and the gate both CLI shells run: `referencedCssVars` /
+  `mentionedCssVars` / `undefinedCssVars`.
+- **The grid CSS inversion** — the code-side half of the A2 layout grammar
+  for a reader that turns computed CSS back into a contract:
+  `parseGridTrackList`, `parseGapPair`, `parseGridTemplateAreas`,
+  `parseGridLine`, `parseGridSelfAlign`, `parseGridAutoFlow`,
+  `GRID_STRUCTURAL_PROPS`. Every parser returns facts plus G7 named
+  refusals; none throws.
+- **Canvas → code** — `plannedCodePaths` / `canvasCodePlan` (the files a
+  target writes for one contract), `provenanceSentence` /
+  `provenanceHeadline` (tool-generated vs hand-built vs unrecorded), and
+  the proposal file-name spellings (`flatIdStem`, `contractFileNameForId`,
+  `proposalFileNameForId`, `mintedTokensFileNameForId`).
+- **Figma name spellings** — `camel`, `canonicalPropName`.
 
 ```ts
 import type { Emitter } from '@ds-contracts/core';
@@ -89,7 +109,8 @@ type and the anatomy helpers) and nothing else. No TypeScript compiler, no
 prettier, no browser automation, no `node:*` at import — every module is
 pure and browser-importable. The reference repo's `core/tokens.ts`,
 `core/contract-provenance.ts`, `core/emitter.ts`, `extract/types.ts`
-(`kebab`) and `core/emit-react.ts` (the analysis half) are re-export shims
+(`kebab`), `core/emit-react.ts` (the analysis half), `core/emit-tokens-css.ts`,
+`core/grid-css.ts`, `core/canvas-code-plan.ts` and `core/figma-names.ts` are re-export shims
 over this package's source, so repo and package cannot drift —
 `npm run verify:published` regenerates the Flowbite eight's stylesheets
 through the packed tarball and refuses on the first byte that differs from

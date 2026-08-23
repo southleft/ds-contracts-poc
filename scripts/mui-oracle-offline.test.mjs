@@ -1,10 +1,41 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import path from "node:path";
 import {
   collectEvidence,
   scoreCorpus,
   scoreFact,
+  writeReports,
 } from "./mui-oracle-offline.mjs";
+
+test("writeReports is byte-stable: scoredAt moves only when the rest of the report moves", () => {
+  const root = mkdtempSync(path.join(tmpdir(), "mui-oracle-offline-"));
+  try {
+    const report = scoreCorpus();
+    const first = writeReports({ ...report, scoredAt: "2026-01-01T00:00:00.000Z" }, root);
+    assert.equal(first.unchanged, false);
+    const json1 = readFileSync(first.jsonPath, "utf8");
+    const md1 = readFileSync(first.mdPath, "utf8");
+    // Same facts, a later clock: nothing is rewritten and the old stamp stays.
+    const second = writeReports({ ...report, scoredAt: "2026-02-02T00:00:00.000Z" }, root);
+    assert.equal(second.unchanged, true);
+    assert.equal(second.scoredAt, "2026-01-01T00:00:00.000Z");
+    assert.equal(readFileSync(second.jsonPath, "utf8"), json1);
+    assert.equal(readFileSync(second.mdPath, "utf8"), md1);
+    // A real change to the report moves the stamp with it.
+    const third = writeReports(
+      { ...report, scoredAt: "2026-03-03T00:00:00.000Z", limits: [...report.limits, "changed"] },
+      root,
+    );
+    assert.equal(third.unchanged, false);
+    assert.match(readFileSync(third.jsonPath, "utf8"), /2026-03-03T00:00:00\.000Z/);
+    assert.match(readFileSync(third.mdPath, "utf8"), /scored 2026-03-03T00:00:00\.000Z/);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
 
 test("offline oracle scores frozen corpus without fatal fails", () => {
   const report = scoreCorpus();

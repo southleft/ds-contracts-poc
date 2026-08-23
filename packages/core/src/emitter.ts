@@ -47,6 +47,12 @@ export interface Emitter {
   name: string;
   label: string;
   emit(contract: Contract, ctx: EmitterCtx): EmittedFile[];
+  /** `true` = an explicit-target surface (e.g. Figma Code Connect) that is
+   *  NOT one of the generate surfaces: it needs facts a fresh proposal never
+   *  carries (a synced set's anchors) and refuses by name without them, so
+   *  the "every surface emits" sweeps (census, gauntlet, overlap, theme-mode,
+   *  repeat-collection) read `generateSurfaces()` and never count it. */
+  optIn?: boolean;
 }
 
 /** The LIVE registry. `emitters` keeps its exported name and identity —
@@ -61,6 +67,10 @@ export const emitterByName = new Map<string, Emitter>();
 /** Registry snapshot — same live contents as `emitters`, copied so callers
  *  cannot mutate the registry by accident. */
 export const getEmitters = (): Emitter[] => [...emitters];
+
+/** The surfaces `generate` runs without an explicit --target — every
+ *  registered emitter that is not `optIn`. Same live registry, filtered. */
+export const generateSurfaces = (): Emitter[] => emitters.filter((e) => !e.optIn);
 
 /** Register an emitter. Refuses by name: a missing/invalid shape or a name
  *  collision (including the built-ins) never silently shadows an existing
