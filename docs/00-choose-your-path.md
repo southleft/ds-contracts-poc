@@ -112,10 +112,15 @@ the same as a plugin dump.
    `--apply`), or **copy the JSON out** and commit it yourself.
 3. `ds-contracts generate <contract> --out src/generated --target react
    --tokens <your.dtcg.json> --stories` — deterministic; the same contract
-   produces byte-identical output on any machine.
+   produces byte-identical output on any machine. `--tokens` takes flat
+   files, a directory, or layered `slot=file` entries; a contract that
+   fails to validate is refused by name while the rest are written.
 
 **What lands where.** A typed TSX component, a CSS Module, and CSF3 stories
-in your repo — plus the contract that produced them, in the same change.
+in your repo — plus `tokens.css` (every custom property the components
+reference: `:root`, `[data-theme="dark"]`, `[data-brand=…]`), which the
+emitted `index.ts` and stories import — plus the contract that produced them,
+in the same change.
 
 **Honest expectations.**
 
@@ -194,7 +199,12 @@ Delivery is any of: `figma publish` (standing channel; the designer clicks
 **Check for updates** in the plugin's **Changes** tab), `figma push --code
 <CODE>` (ad-hoc, both people online), or send the bundle JSON any way you
 like — the designer pastes it into the **Build** tab and clicks *Generate in
-this file*.
+this file*. The bundle is `ds-contracts figma bundle <contracts> --tokens …
+--name <Collection>`, where `--tokens` is the same grammar `generate` uses
+(flat files, a directory, or layered `primitives=…,semantic=…,brand.<name>=…`
+with `--modes light,dark`); every contract is compiled before ✔ is printed
+and a refusal is one named list. The run report on the designer's side lists
+every code-only fact the canvas could not carry, per set.
 
 **What lands where.** One variable collection plus one component set per
 contract, on the designer's canvas, token-bound. Applying updates is

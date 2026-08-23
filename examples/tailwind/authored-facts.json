@@ -107,6 +107,174 @@
         "after": "anatomy"
       },
       "cause": "Declared event (core/emit-react.ts execute gate, 968958cd): `onToggle` flips the `checked` variant axis and mirrors it to aria-checked — a code-surface fact the capture cannot see (it reads computed style per prop combo, never a click). Placed after `anatomy` to keep the committed byte order."
+    },
+    {
+      "component": "alert",
+      "path": "bindings.figma.anchors",
+      "set": {
+        "fields": {
+          "nodeId": "120:1979"
+        },
+        "after": "fileKey"
+      },
+      "edit": {
+        "fileKey": {
+          "from": null,
+          "to": "59mLQlOMiD5w5za6SUcoO5"
+        },
+        "componentSetKey": {
+          "from": null,
+          "to": "27fce6232d10fdd74f9f87d46c91ab29ecc98c68"
+        }
+      },
+      "cause": "The live demo set for this contract is node 120:1979 on Figma file 59mLQlOMiD5w5za6SUcoO5 (NORTH-STAR's demo file); its key is 27fce6232d10fdd74f9f87d46c91ab29ecc98c68. Verified READ-ONLY against the live file on 2026-08-23 (REST nodes?ids=…&plugin_data=shared: the node is that set, its `key` is this key, and `ds_contracts/contractId` equals the contract id; the key also equals the `key` field of extract/figma/fixtures/flowbite-eight.dump.json). The capture reads the library's DOM, so it cannot know where the contract's canvas twin lives; nothing writes the anchor back after a recorded apply yet (docs/23 §D.30), so the identity is authored here and re-derived on every promotion."
+    },
+    {
+      "component": "badge",
+      "path": "bindings.figma.anchors",
+      "set": {
+        "fields": {
+          "nodeId": "120:2098"
+        },
+        "after": "fileKey"
+      },
+      "edit": {
+        "fileKey": {
+          "from": null,
+          "to": "59mLQlOMiD5w5za6SUcoO5"
+        },
+        "componentSetKey": {
+          "from": null,
+          "to": "8c36b6b475b56aa2920113b250ac5c7186320b2d"
+        }
+      },
+      "cause": "The live demo set for this contract is node 120:2098 on Figma file 59mLQlOMiD5w5za6SUcoO5 (NORTH-STAR's demo file); its key is 8c36b6b475b56aa2920113b250ac5c7186320b2d. Verified READ-ONLY against the live file on 2026-08-23 (REST nodes?ids=…&plugin_data=shared: the node is that set, its `key` is this key, and `ds_contracts/contractId` equals the contract id; the key also equals the `key` field of extract/figma/fixtures/flowbite-eight.dump.json). The capture reads the library's DOM, so it cannot know where the contract's canvas twin lives; nothing writes the anchor back after a recorded apply yet (docs/23 §D.30), so the identity is authored here and re-derived on every promotion."
+    },
+    {
+      "component": "button",
+      "path": "bindings.figma.anchors",
+      "set": {
+        "fields": {
+          "nodeId": "120:2203"
+        },
+        "after": "fileKey"
+      },
+      "edit": {
+        "fileKey": {
+          "from": null,
+          "to": "59mLQlOMiD5w5za6SUcoO5"
+        },
+        "componentSetKey": {
+          "from": null,
+          "to": "8c1a78adb634d4277cd96bb53b275ca45885ff9a"
+        }
+      },
+      "cause": "The live demo set for this contract is node 120:2203 on Figma file 59mLQlOMiD5w5za6SUcoO5 (NORTH-STAR's demo file); its key is 8c1a78adb634d4277cd96bb53b275ca45885ff9a. Verified READ-ONLY against the live file on 2026-08-23 (REST nodes?ids=…&plugin_data=shared: the node is that set, its `key` is this key, and `ds_contracts/contractId` equals the contract id; the key also equals the `key` field of extract/figma/fixtures/flowbite-eight.dump.json). The capture reads the library's DOM, so it cannot know where the contract's canvas twin lives; nothing writes the anchor back after a recorded apply yet (docs/23 §D.30), so the identity is authored here and re-derived on every promotion."
+    },
+    {
+      "component": "card",
+      "path": "bindings.figma.anchors",
+      "set": {
+        "fields": {
+          "nodeId": "120:1999"
+        },
+        "after": "fileKey"
+      },
+      "edit": {
+        "fileKey": {
+          "from": null,
+          "to": "59mLQlOMiD5w5za6SUcoO5"
+        },
+        "componentSetKey": {
+          "from": null,
+          "to": "7b5427afe8d5766e80457327b0b04a50544808ed"
+        }
+      },
+      "cause": "The live demo set for this contract is node 120:1999 on Figma file 59mLQlOMiD5w5za6SUcoO5 (NORTH-STAR's demo file) — a standalone COMPONENT; the key is its component key; its key is 7b5427afe8d5766e80457327b0b04a50544808ed. Verified READ-ONLY against the live file on 2026-08-23 (REST nodes?ids=…&plugin_data=shared: the node is that set, its `key` is this key, and `ds_contracts/contractId` equals the contract id; the key also equals the `key` field of extract/figma/fixtures/flowbite-eight.dump.json). The capture reads the library's DOM, so it cannot know where the contract's canvas twin lives; nothing writes the anchor back after a recorded apply yet (docs/23 §D.30), so the identity is authored here and re-derived on every promotion."
+    },
+    {
+      "component": "helpertext",
+      "path": "bindings.figma.anchors",
+      "set": {
+        "fields": {
+          "nodeId": "120:2014"
+        },
+        "after": "fileKey"
+      },
+      "edit": {
+        "fileKey": {
+          "from": null,
+          "to": "59mLQlOMiD5w5za6SUcoO5"
+        },
+        "componentSetKey": {
+          "from": null,
+          "to": "9fda06f5ff7b04b37f7c325edc3d12c2ffdeb39c"
+        }
+      },
+      "cause": "The live demo set for this contract is node 120:2014 on Figma file 59mLQlOMiD5w5za6SUcoO5 (NORTH-STAR's demo file); its key is 9fda06f5ff7b04b37f7c325edc3d12c2ffdeb39c. Verified READ-ONLY against the live file on 2026-08-23 (REST nodes?ids=…&plugin_data=shared: the node is that set, its `key` is this key, and `ds_contracts/contractId` equals the contract id; the key also equals the `key` field of extract/figma/fixtures/flowbite-eight.dump.json). The capture reads the library's DOM, so it cannot know where the contract's canvas twin lives; nothing writes the anchor back after a recorded apply yet (docs/23 §D.30), so the identity is authored here and re-derived on every promotion."
+    },
+    {
+      "component": "kbd",
+      "path": "bindings.figma.anchors",
+      "set": {
+        "fields": {
+          "nodeId": "120:1982"
+        },
+        "after": "fileKey"
+      },
+      "edit": {
+        "fileKey": {
+          "from": null,
+          "to": "59mLQlOMiD5w5za6SUcoO5"
+        },
+        "componentSetKey": {
+          "from": null,
+          "to": "b2a08e2c5421c4d41e8920f1c4b85f9a85ab99c9"
+        }
+      },
+      "cause": "The live demo set for this contract is node 120:1982 on Figma file 59mLQlOMiD5w5za6SUcoO5 (NORTH-STAR's demo file) — a standalone COMPONENT; the key is its component key; its key is b2a08e2c5421c4d41e8920f1c4b85f9a85ab99c9. Verified READ-ONLY against the live file on 2026-08-23 (REST nodes?ids=…&plugin_data=shared: the node is that set, its `key` is this key, and `ds_contracts/contractId` equals the contract id; the key also equals the `key` field of extract/figma/fixtures/flowbite-eight.dump.json). The capture reads the library's DOM, so it cannot know where the contract's canvas twin lives; nothing writes the anchor back after a recorded apply yet (docs/23 §D.30), so the identity is authored here and re-derived on every promotion."
+    },
+    {
+      "component": "label",
+      "path": "bindings.figma.anchors",
+      "set": {
+        "fields": {
+          "nodeId": "120:1996"
+        },
+        "after": "fileKey"
+      },
+      "edit": {
+        "fileKey": {
+          "from": null,
+          "to": "59mLQlOMiD5w5za6SUcoO5"
+        },
+        "componentSetKey": {
+          "from": null,
+          "to": "76023d1204c57c7a0e07f86fb342f6c7a0536934"
+        }
+      },
+      "cause": "The live demo set for this contract is node 120:1996 on Figma file 59mLQlOMiD5w5za6SUcoO5 (NORTH-STAR's demo file); its key is 76023d1204c57c7a0e07f86fb342f6c7a0536934. Verified READ-ONLY against the live file on 2026-08-23 (REST nodes?ids=…&plugin_data=shared: the node is that set, its `key` is this key, and `ds_contracts/contractId` equals the contract id; the key also equals the `key` field of extract/figma/fixtures/flowbite-eight.dump.json). The capture reads the library's DOM, so it cannot know where the contract's canvas twin lives; nothing writes the anchor back after a recorded apply yet (docs/23 §D.30), so the identity is authored here and re-derived on every promotion."
+    },
+    {
+      "component": "toggleswitch",
+      "path": "bindings.figma.anchors",
+      "set": {
+        "fields": {
+          "nodeId": "120:2047"
+        },
+        "after": "fileKey"
+      },
+      "edit": {
+        "fileKey": {
+          "from": null,
+          "to": "59mLQlOMiD5w5za6SUcoO5"
+        },
+        "componentSetKey": {
+          "from": null,
+          "to": "08442ebe555baa908cd7ab07097bfcd58dd5fccc"
+        }
+      },
+      "cause": "The live demo set for this contract is node 120:2047 on Figma file 59mLQlOMiD5w5za6SUcoO5 (NORTH-STAR's demo file); its key is 08442ebe555baa908cd7ab07097bfcd58dd5fccc. Verified READ-ONLY against the live file on 2026-08-23 (REST nodes?ids=…&plugin_data=shared: the node is that set, its `key` is this key, and `ds_contracts/contractId` equals the contract id; the key also equals the `key` field of extract/figma/fixtures/flowbite-eight.dump.json). The capture reads the library's DOM, so it cannot know where the contract's canvas twin lives; nothing writes the anchor back after a recorded apply yet (docs/23 §D.30), so the identity is authored here and re-derived on every promotion."
     }
   ]
 }

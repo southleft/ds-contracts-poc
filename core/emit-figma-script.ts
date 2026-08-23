@@ -4262,6 +4262,12 @@ function partToSpecInner(
       type: 'slot',
       name,
       layout: layoutSpec(part, false, subst),
+      // r10: a slot part's `layout.grow` lowers to layoutSizingHorizontal FILL
+      // exactly like every other part class (the fillW runtime reads
+      // `grow` on any in-flow child) — it was the one spec built without it,
+      // so a proposed slot grow regenerated as a HUG slot (canvas conformance
+      // slot-primary-axis-fill).
+      grow: part.layout?.grow || undefined,
       slotProperty: slotFigmaProperty(part.slot),
       slotOptional: part.optional || undefined,
       slotAccepts: (part.slot.accepts ?? []).map((id) => {

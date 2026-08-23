@@ -22,11 +22,15 @@
  *      not figma.children/figma.instance); `children` rendered as the JSX
  *      child, every other mapping as an attribute; and every event, number
  *      prop and kind-NONE prop NAMED in the header as not mapped;
- *   3. the Flowbite eight as committed (bindings.figma.anchors.fileKey null) all
- *      refuse by name; given a FIXTURE anchor (named as such, never written
- *      anywhere) all eight emit and the same AST assertions hold — Color's
- *      display names (Info/Failure/…), Icon/Dismissable booleans, Content →
- *      children, ToggleSwitch's events named;
+ *   3. the Flowbite eight as committed carry their live demo-file identity
+ *      (bindings.figma.anchors = { fileKey 59mLQlOMiD5w5za6SUcoO5, nodeId,
+ *      componentSetKey }, written 2026-08-23 — docs/23 §D.30), so all eight
+ *      EMIT with the URL built from those anchors; the same eight with the
+ *      fileKey stripped (the pre-anchor committed shape) all refuse by name;
+ *      and given a FIXTURE anchor (named as such, never written anywhere) all
+ *      eight emit and the same AST assertions hold — Color's display names
+ *      (Info/Failure/…), Icon/Dismissable booleans, Content → children,
+ *      ToggleSwitch's events named;
  *   4. byte-determinism: the pure emitter twice, and the CLI
  *      (`generate … --target code-connect`) into two directories, hash
  *      equal; the CLI refuses an anchorless contract by name with exit 1;
@@ -299,18 +303,35 @@ for (const c of anchorless) {
 }
 
 // ---------------------------------------------------------------------------
-// 3. The Flowbite eight: refuse as committed; map under a FIXTURE anchor.
+// 3. The Flowbite eight: emit as committed (live anchors, docs/23 §D.30);
+//    refuse with the fileKey stripped; map under a FIXTURE anchor.
 // ---------------------------------------------------------------------------
 
 console.log('\nFlowbite eight (examples/tailwind/contracts)');
+const DEMO_FILE_KEY = '59mLQlOMiD5w5za6SUcoO5';
 for (const c of flowbite) {
+  const a = figmaAnchorsOf(c);
+  check(`${c.id}: as committed carries the live demo anchor (fileKey ${DEMO_FILE_KEY} + nodeId + componentSetKey)`, a?.fileKey === DEMO_FILE_KEY && typeof a.nodeId === 'string' && /^\d+:\d+$/.test(a.nodeId) && typeof a.componentSetKey === 'string' && a.componentSetKey.length > 0);
+  let files: { path: string; contents: string }[] = [];
+  let err = '';
+  try {
+    files = codeConnectEmitter.emit(c, ctx);
+  } catch (e) {
+    err = String(e instanceof Error ? e.message : e);
+  }
+  const ok = !err && files.length === 1 && files[0]!.path === `code-connect/${c.name}.figma.tsx`;
+  check(`${c.id}: as committed → one file code-connect/${c.name}.figma.tsx with the URL built from the live anchors${err ? ` — ${err}` : ''}`, ok && files[0]!.contents.includes(`https://www.figma.com/design/${DEMO_FILE_KEY}?node-id=${a?.nodeId}`));
+  if (ok) assertReactFile(c, files[0]!.contents, 'flowbite (committed)');
+  // The pre-anchor committed shape (fileKey null) must still refuse by name —
+  // the anchor is the ONLY thing that lets a Code Connect file be written.
+  const stripped: Contract = { ...c, bindings: { ...c.bindings, figma: { ...c.bindings.figma, anchors: { ...(a ?? { nodeId: null, componentSetKey: null }), fileKey: null } } } } as Contract;
   let msg = '';
   try {
-    codeConnectEmitter.emit(c, ctx);
+    codeConnectEmitter.emit(stripped, ctx);
   } catch (e) {
     msg = String(e instanceof Error ? e.message : e);
   }
-  check(`${c.id}: as committed (fileKey null) → REFUSED by name`, msg.startsWith(`${c.id}: code-connect refused`) && msg.includes('bindings.figma.anchors.fileKey'));
+  check(`${c.id}: fileKey stripped → REFUSED by name`, msg.startsWith(`${c.id}: code-connect refused`) && msg.includes('bindings.figma.anchors.fileKey'));
 }
 // FIXTURE anchors — exist only in this process so the mapping over the
 // eight's props can be asserted; nothing is written back, and the key is
@@ -444,4 +465,4 @@ if (failures.length > 0) {
   console.error(`\n✖ code-connect:check — ${failures.length} failure(s):\n${failures.map((f) => `  - ${f}`).join('\n')}`);
   process.exit(1);
 }
-console.log(`\n✔ code-connect:check — ${anchored.length} first-party + 8 Flowbite contracts mapped (React + HTML), ${anchorless.length} anchorless first-party + 8 as-committed Flowbite refused by name, byte-deterministic`);
+console.log(`\n✔ code-connect:check — ${anchored.length} first-party + 8 Flowbite contracts mapped (React + HTML), the eight as committed map through their live demo anchors (docs/23 §D.30), ${anchorless.length} anchorless first-party + the eight with fileKey stripped refused by name, byte-deterministic`);

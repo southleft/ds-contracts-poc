@@ -357,9 +357,10 @@ pair). Named precisely in `examples/carbon/PROVENANCE.md`.
 
 The conformance fixture's three open reds are all **UNDECLARED-CARRY**, and two
 of them are the harmful kind — the engine carried something with no canvas
-spelling. `conformance/EXPECTATIONS.md` lines 72/73/98 still show exactly three
-🔴 rows, and today's run prints `53 cases · 50 pass · 3 red · 0 yellow` with
-`no drift against conformance/BASELINE.json`:
+spelling. `conformance/EXPECTATIONS.md` still shows exactly three 🔴 rows, and the
+run on 2026-08-23 prints `82 cases · 79 pass · 3 red · 0 yellow` with
+`no drift against conformance/BASELINE.json` (the fixture grew from 53 to 82
+cases since this entry was written; the three reds are the same three):
 
 - **`@container` queries** — the rule matches at the pinned viewport and its
   value is carried as if unconditional. A size-conditional rendering is a MODE,
@@ -581,13 +582,18 @@ Two named holes remain:
     times in `core/canvas-fingerprint.ts`, so a designer who DETACHED a variable
     and typed the identical literal recomputed the same hash with no diff lines.
     v6 adds `|bound:<field>|<slash/name>` per field and stops the fill line
-    leaking a run-scoped `VariableID:` into the hash. What is still missing is
-    the read path: **neither `parity/extract-figma.plugin.js` nor
-    `extract/figma/dump.plugin.js` calls `getSharedPluginData`** (0 occurrences
-    in both), so the stamp is written to the canvas and never read back out.
-    Separately, `parity/extract-code.ts` computes `cssVars` which
-    `parity/diff.ts` references **zero** times — the code-side extractor
-    already reads the stylesheet and the differ discards the result.
+    leaking a run-scoped `VariableID:` into the hash. **Correction
+    (2026-08-23):** the sentence this entry used to carry — that neither dump
+    script calls `getSharedPluginData` — has been false since 2026-08-15: the
+    dump script reads the stamp back (nine occurrences in
+    `extract/figma/dump.plugin.js`, five in `parity/extract-figma.plugin.js`),
+    and hop-4 dump→propose recovers the stamped names, `specHash` and
+    `version` from it (`flowbite-dump-propose:check`). What is still missing
+    is narrower: no headless path recomputes the v6 fingerprint off a REST
+    file dump and compares it to the stamp, so a canvas edit is still found
+    by a human clicking **Check Drift** in the plugin, never by CI. The REST
+    route cannot read shared plugin data at all — the stamp is plugin-only
+    — which is why the read half is an engine change and not a wiring one.
 
 **What it would take — an engine change** for the read half; the signing half
 is not buildable in-plugin.
@@ -1003,12 +1009,18 @@ no-silent-widen rule. All 31 `grid-*` conformance cases are green.
   silently, the canvas throws (`Column span exceeds grid column count`, P3),
   so the contract refuses rather than carrying a clamped guess.
 
-**Still open, one direction away from here:** the CANVAS→contract half of the
-grid grammar. `extract/figma/dump.plugin.js` captures the `grid` block
-(tracks, gaps, `flow`, per-child cells) and `core/emit-figma-script.ts`
-compiles it, but `core/propose-figma.ts` never reads `DumpNode.grid` — a drawn
-grid still proposes as the flex-era lowering. The conformance fixture cannot
-see this: its canvas half is DECLARED, not measured (`spec/conformance/README.md`).
+**The CANVAS→contract half — corrected 2026-08-23.** This entry used to say
+`core/propose-figma.ts` never reads `DumpNode.grid`. That has been false since
+2026-08-08 (`0161ef9f`): propose reads the dump's `layout.grid` block and
+proposes `layout.grid` back, and every grid it cannot carry is a NAMED note.
+The second sentence is also stale: the conformance fixture's canvas half is
+MEASURED now, not declared — `npm run conformance:roundtrip`
+(`conformance/canvas.ts`, fast lane) drives every CARRIED/LOWERED case
+through the plugin engine, the mock canvas, the dump script and propose, and
+reads the case's own channel back; 46 cases, 0 SILENT on a decrease-only
+ratchet (2026-08-22). What is still fenced is exactly the list above
+(`grid-implicit-tracks`, half-auto/mixed children, over-wide spans) — on both
+directions, by name.
 
 ## B.23 Token prune does not see style-bound or cross-file consumers
 
@@ -1033,6 +1045,136 @@ runtime missing a style reader skips the prune entirely and says why
 (`pruneSkipped`). Cross-file consumers remain unprotected either way — turn
 the flag on only in a file whose published variables you know are not
 consumed elsewhere. Pin: `npm run token-set-prune:check` (three doors).
+
+The sibling door, same date: a designer's edit to a variable **value** used
+to be overwritten on every re-paste with no receipt. It is now named as
+`variableDrift` in the step result and the Build log and KEPT, unless
+`globalThis.DS_OVERWRITE_TOKENS = true` is set before the run
+(2026-08-22, `46029a88`; pinned in the same check). Composite `$value`s that
+used to land as the STRING `[object Object]` are refused by name at bundle
+and plan time, and a Dark mode is added only when the bundle carries one
+(the Starter-plan `addMode` refusal is named, not swallowed).
+
+## B.24 The exam SLOT's interior auto-layout is not inverted
+
+*The two silences this section held until 2026-08-23 — the Card Inline
+Image SLOT's FIXED 308px width (skipped whenever any occurrence filled) and
+its `fillHeight` under mixed parent modes — are CLOSED; they moved to
+[§D.29](#d29-the-held-out-kits-last-two-silences-and-the-slots-primary-axis-fill--closed)
+with their gates. The same round (r10) carried the primary-axis FILL on a
+native SLOT as `layout.grow`. What is left on that node was never silent
+and is not carried either.*
+
+A native SLOT child that FILLS along its ROW parent's primary axis in every
+variant now carries `layout.grow: true` (conformance cases
+`slot-primary-axis-fill` / `rest-slot-primary-axis-fill`, CARRIED). That
+grow is the **whole** layout block the slot part receives: the native-SLOT
+branch of `buildPart` (`core/propose-figma.ts`) reads the primary-axis fill
+through `primaryAxisGrow` — the one implementation the FRAME branch also
+reads — but does not walk `invertLayout`, so the slot's own auto-layout
+(direction, padding, item spacing, justify/align, its own sizing modes) is
+not inverted onto the part. `exact-proposal:check` §49 pins exactly this
+shape: the Image slot's `layout` is `{"grow":true}` and nothing else, and
+no `FC-GEOMETRY-EXCLUDED` receipt fires for a FILL axis.
+
+**What you'd observe** — a slot drawn as a padded COLUMN with item spacing
+comes back as a bare flex item: its size along the parent's row is right,
+its interior is whatever the consumer drops in. No note says so.
+
+**What it would take — an engine change** (route the native-SLOT branch
+through `invertLayout` with the slot's drawn children excluded, so the
+slot's own frame facts carry like any FRAME part's — or name them). Not
+pinned red in the canvas fixture, because no exam set lost a fact to it;
+it is named here so the grow cannot be read as "the slot's layout carries".
+
+## B.25 The REST route cannot name a variable binding without `file_variables:read`
+
+The no-plugin route (`npm run extract:figma:rest -- <figma-url>`) reads
+variable names and modes from `/v1/files/:key/variables/local`, which answers
+only to a personal access token minted with the **`file_variables:read`**
+scope. Without it every binding degrades to its resolved literal: on the
+held-out kit that is 1,746 `variable-unresolved` receipts and **102
+effect-binding receipts** (77 on the 15 exam sets) behind one scope, the
+kit's 1,025 variables / 11 collections / six-mode Appearance never reach
+`captured.dtcg.json` (not written), and every literal is the **Default**
+mode of its collection with no mode recorded anywhere — the other modes are
+indistinguishable from never having existed.
+
+**What is closed** (2026-08-22, `0dc0811c`, `cda65c2b`; §D.24): the CLI no
+longer calls this "Enterprise" 1,595 times — the 403 is classified once, at
+file level, as a missing scope with its one-line fix, on stderr, in
+`_provenance.variables`, as a `variables-unavailable` row in `_degradations`,
+and again in `figma-proposals.md`; a 403 naming no scope and a network failure
+are named as exactly that.
+
+**What you'd observe** — proposals whose every token is a minted `imported.*`
+literal, and no dark/brand/density mode on the code side.
+
+**What it would take — nothing in the engine; a user action**: regenerate
+the token with the scope. The route is then the plugin route's equal
+(`rest-variables-captured` pins it). Until a kit is re-read with the scope,
+its mode story is unmeasured, not absent.
+
+## B.26 Card on the held-out kit is not recognisable — and every loss is named
+
+The exam's five-cell render comparison after fix rounds 1–2: Button
+recognisable (its fill carries), Badge at both sizes the same as Figma's own
+render, Toast recognisable, **Card not**. The receipt's own list of what is
+off, all of it named and none of it carried:
+
+- the surface is a GLASS + BACKGROUND_BLUR effect stack over a near-transparent
+  fill (`#00000001` as REST resolves it) — `[DROP_SHADOW, GLASS,
+  BACKGROUND_BLUR] … channel NAMED, not proposed` (only a DROP_SHADOW stack
+  has a contract spelling, §A.1);
+- the image placeholder's vector glyph — `vector-geometry-unsupported`;
+- the Content slot's drawn FRAME children (Title → Kicker + Heading, Footer →
+  Chip + Button Group) — `design-time content that is not a bare INSTANCE … a
+  FRAME child has no carrier and is NAMED`, so the Default story passes no
+  content;
+- the two silences that were §B.24 — CLOSED 2026-08-23 (§D.29); the slot's own
+  auto-layout is still not inverted (§B.24).
+
+**What you'd observe** — a near-white box holding one grey square where the
+designer drew a card.
+
+**What it would take — a schema addition** (blur/glass effects have no
+vocabulary; a slot default that is a FRAME rather than an instance has no
+carrier) **plus an engine change** for the slot content. Not scheduled; the
+recognisability bar ("I can tell what this is") is the reason this row exists
+rather than a score.
+
+## B.27 The Flowbite eight carry no canvas anchor in the contract — CLOSED, moved
+
+*Closed 2026-08-23 (r9 exam round 2). The eight contracts under
+`examples/tailwind/contracts/` now spell `bindings.figma.anchors` as
+`{ fileKey, nodeId, componentSetKey }`, each verified read-only against the
+live demo file. The entry, its specHash caveat and its gates are
+[§D.30](#d30-the-flowbite-eight-carried-no-canvas-anchor-in-the-contract--closed).
+The number is kept so the files that cite §B.27 still resolve.*
+
+## B.28 Two release-evidence commands from the 2026-08-22 audit, still open
+
+Both were raised as P1 by the 21-agent audit that preceded Phase 0 and both
+name a row in [docs/26](26-v1-definition.md):
+
+- **`npm run extract:computed:drift` is not a check.** It replays captures in
+  a real Chromium, took longer than four minutes on the audit machine, and
+  writes `regate.scorecard.json` into TRACKED paths
+  (`extract/computed/regate.ts:438`) — eleven scorecard files dirtied during
+  a "check". It runs in no lane, excluded by name in
+  `.github/scripts/lane-coverage.ts` ("replays a capture rather than
+  asserting an invariant"). The number-level pins it produces (§C.1.1, §D.1)
+  are therefore dev-machine facts until it is split into a read-only compare.
+- **`npm run diagnose` exits 1 on the committed first-party snapshot**
+  (re-run 2026-08-23: `design BEHIND` / `design MISMATCH` findings — `Is
+  Required` / `Is Disabled` booleans missing from the design set, `Size`
+  option spellings `[Sm, Md, Lg]` vs `[Medium, Small, Large]`), so the
+  acceptance command on the Journey C row fails on this commit while
+  `npm run reconcile` exits 0. Whether the snapshot is stale or the design
+  set is behind is exactly the question the command cannot answer offline.
+
+**What it would take — a re-capture** of the first-party snapshot, and an
+engine decision on the drift instrument's write path. Neither is scheduled.
 
 ---
 
@@ -1378,9 +1520,10 @@ on your canvas. The counts are the honest way to see both halves at once.
 
 | vocabulary | cases | disposition | source |
 |---|---|---|---|
-| CSS / DOM frontier | 53 | CARRIED 22 · LOWERED 2 · REFUSED 11 · UNSUPPORTED 18 | `conformance/MANIFEST.json` (run today) |
-| canvas constructs | 91 | CARRIED 72 · LEDGERED 11 · REFUSED 8 | `extract/figma/conformance/MANIFEST.json` |
-| dropped-fact receipts (`†`) | 87 across 8 corpora | pinned exactly, in both directions | `extract/figma/dagger-census.json` |
+| CSS / DOM frontier | 82 | CARRIED 42 · LOWERED 4 · REFUSED 18 · UNSUPPORTED 18 (79 pass · 3 red) | `conformance/MANIFEST.json` (`npm run conformance`, 2026-08-23) |
+| canvas round trip of the CARRIED/LOWERED cases | 46 | ROUND-TRIPPED 26 · NAMED 5 · REFUSED-BY-NAME 15 · **SILENT 0** | `conformance/CANVAS-EXPECTATIONS.md` (`npm run conformance:roundtrip`) |
+| canvas constructs | 152 | CARRIED 105 · LEDGERED 38 · REFUSED 9 (152 PASS · 0 RED-EXPECTED — the last two closed 2026-08-23, §D.29) | `extract/figma/conformance/MANIFEST.json` (`npm run conformance:canvas`) |
+| dropped-fact receipts (`†`) and the facts they name | 104 receipts · 2,321 named facts | pinned exactly, in both directions; since 2026-08-22 every `†` carries its facts by part, channel, value and reason (`codeOnlyFacts`) | `extract/figma/dagger-census.json` (`npm run dagger:census`, `code-only-facts:check`) |
 
 **REFUSED and UNSUPPORTED are different facts** and the fixture counts them
 separately on purpose. A refusal appears in a receipt you can grep. An
@@ -1684,6 +1827,28 @@ ratchets exist to prevent.*
 | D.9 | Both export doors shipped 1 of the engine's 3 payloads | 2026-08-03 | `1a483e0` |
 | D.10 | The deployed surfaces served a two-month-old build | 2026-08-03 | `60bfe98` |
 | D.11 | Two security holes in the design-first door | 2026-08-03 | `eae868c`, `1a483e0` |
+| D.12 | `anatomy.root.attrs` dropped by the React and WC emitters | 2026-08-22 | `46029a88` |
+| D.13 | WC emitted multi-placeholder part refs with the braces intact | 2026-08-22 | `46029a88`, `042abde5` |
+| D.14 | Child-part state-only channels vanished under `verified-exact` | 2026-08-22 | `46029a88` |
+| D.15 | The recovered ToggleSwitch drew its thumb outside the track | 2026-08-22 | `46029a88` |
+| D.16 | Per-fact canvas receipts collapsed to a bare `†` | 2026-08-22 | `46029a88` |
+| D.17 | The visual gate could not see geometry | 2026-08-22 | `46029a88`, `848f64bc` |
+| D.18 | The token runtime wrote `[object Object]`, an unguarded Dark mode, and reverted designer values | 2026-08-22 | `46029a88` |
+| D.19 | Generated code referenced custom properties nothing defined | 2026-08-22 | `46029a88` |
+| D.20 | The first-party corpus could not ride the bundle | 2026-08-22 | `a14d9ba7` |
+| D.21 | Root-level text never drew; literal ink and the emitter's last silent default; thirty runtime swallows | 2026-08-22 | `042abde5` |
+| D.22 | The canvas round trip had SILENT rows | 2026-08-22 | `042abde5`, `6b6f8efb` |
+| D.23 | The shipped dump script dumped the repo's fixtures, not your sets | 2026-08-22 | `6b6f8efb` |
+| D.24 | The held-out kit: 295 silent facts, a wrong "Enterprise" reason, a batch-wide refusal, non-compiling Card | 2026-08-23 | `0dc0811c`, `cda65c2b` |
+| D.25 | One truth: red lanes, a self-attested eval record, stale receipts, a clean clone that could not build the plugin | 2026-08-22 | `436abe7b`, `7066eb86`, `01f1c986`, `848f64bc` |
+| D.26 | No published engine surface — a Vue emitter could not be built outside the monorepo | 2026-08-22 | `78b96e56`, `a3263f7c` |
+| D.27 | Four Figma-only fields outside the vendor-neutral `bindings` namespace | 2026-08-22 | `dbeb3575` |
+| D.28 | Path A regressed: hop-4 literal lifts ran on unstamped foreign dumps | 2026-08-22 | `996258af` |
+
+*D.12–D.28 were found by the 2026-08-22 audit and closed within the same
+two days (PRs #18–#24); none of them ever had a §B row. They are registered
+here anyway, with the gate that pins each, so the closure is a property of
+the present and not a claim about the past.*
 
 ## D.1 The fidelity gate sampled mid-transition — CLOSED (task #34)
 
@@ -2049,6 +2214,332 @@ real DTCG) refuses by name at parse.
 
 ---
 
+## D.12 `anatomy.root.attrs` dropped by the React and WC emitters — CLOSED
+
+**2026-08-22, `46029a88` (#19).** `emit-react`'s `elementAttrs` never called
+`partAttrString(root)` and `emit-wc` never read the field, so a contract's
+root `attrs` — `aria-label`, `type`, `role`, `href` — reached only the static
+HTML target. Shipped link components (`citation`, `side-nav-item`,
+`top-nav-item`) rendered `<a>` with no `href`. Carried on all four code
+targets now; one root role claim (attrs wins; a differing pair refuses by
+name); WC emits `statesByProp`; HTML renders `aria-expanded` /
+`aria-pressed`. Multi-root contracts with no `anatomy.root` are guarded.
+**Gate:** `npm run root-attrs:check` (321 pins; `maintain`, fast lane).
+
+## D.13 WC emitted multi-placeholder part refs with the braces intact — CLOSED
+
+**2026-08-22, `46029a88` + `042abde5`.** A part token ref with two
+placeholders (`{color.{variant}.{size}}`) reached the web-components
+stylesheet unexpanded — invalid CSS, the part's colour lost (nine hits in
+untitled-ui). One rule per value tuple now, byte-compared against React's
+`generateCss`; `states` refs with two or more placeholders and boolean
+placeholders expand as the cartesian on React, HTML and WC alike; a
+placeholder naming no axis refuses by name in `validateContract`.
+**Gate:** `npm run emitters:check` (WC section, `BRACED_VAR` scan; full lane).
+
+## D.14 Child-part state-only channels vanished under `verified-exact` — CLOSED
+
+**2026-08-22, `46029a88`.** A DROP_SHADOW, stroke weight, radius, opacity
+or depth-2 ink that existed only in a child part's Hover/Focus cell was
+dropped by propose while the proposal read `verified-exact`. Carried as the
+part's `states.<state>` channels, or NAMED per part + state + channel
+(`FC-DUMP-PROPOSE-PART-STATE-CHANNELS`) where the vocabulary has no slot.
+**Gate:** `npm run exact-proposal:check` §30.
+
+## D.15 The recovered ToggleSwitch drew its thumb outside the track — CLOSED
+
+**2026-08-22, `46029a88`.** A `stylesWhen`-absolute child never made its
+holder `position: relative`, and `emit-react` anchored it to the root.
+The holder declares position now; rendered in Chromium, the thumb sits
+68–88 px inside a 46–90 px track. (NORTH-STAR's ToggleSwitch row carried this
+as a 2026-08-22 NOTE; the row's own wall, `FC-FONT-SUBSTRATE`, is unchanged.)
+**Gate:** `npm run exact-proposal:check` §31.
+
+## D.16 Per-fact canvas receipts collapsed to a bare `†` — CLOSED
+
+**2026-08-22, `46029a88`.** `emit-figma-script` computed every code-only
+fact's name, channel, value and reason — and discarded the strings, leaving
+one dagger per contract. `codeOnlyFacts` `{part, kind, channel, value,
+reason, variants}` now rides the compiled data, `bundle.codeOnlyFacts`, the
+plugin data `ds_contracts/codeOnlyFacts`, the plugin run report and
+`figma bundle` stdout: 54 on the Flowbite eight, 2,321 across the census
+corpora. **Gate:** `npm run code-only-facts:check` (`maintain`, fast lane);
+`npm run dagger:census` counts named facts beside daggers.
+
+## D.17 The visual gate could not see geometry — CLOSED
+
+**2026-08-22, `46029a88`, `848f64bc`.** `compareToBaseline` scored masked
+pixels only; a Badge 39% wider passed green, and BETA.md said the hole
+"cannot silently reopen". Every row now gates both content boxes — ours and
+Figma's — at ±4 device px per axis, on per-platform baselines
+(`baseline.darwin.json`, `baseline.linux.json` transcribed from CI's own
+run), with `--self-test` red-testing nine refusals. First field catch: three
+`cbds-dialog` cells that had moved 8/8/32 px under green scores.
+**Gate:** `npm run maintain:visual` (catalog-visual lane, `FIGMA_TOKEN`).
+
+## D.18 The token runtime wrote `[object Object]`, an unguarded Dark mode, and reverted designer values — CLOSED
+
+**2026-08-22, `46029a88`.** A composite DTCG `$value` (object-form shadow)
+became the STRING `[object Object]` on the canvas; `addMode('Dark')` ran
+unguarded on plans that refuse it; a designer's edit to a variable value was
+overwritten on every re-paste. Composite values are refused by name at bundle
+and plan time; Dark is added only when the set carries it and the Starter
+refusal is named; value edits are named as `variableDrift` and kept unless
+`DS_OVERWRITE_TOKENS` (the prune's sibling door, §B.23).
+**Gate:** `npm run token-set-prune:check` (`maintain`, fast lane).
+
+## D.19 Generated code referenced custom properties nothing defined — CLOSED
+
+**2026-08-22, `46029a88`.** Generated React/WC/HTML referenced roughly 261
+`var(--…)` names no stylesheet defined, and dark mode never reached the code
+side. `generate` now emits `tokens.css` (`:root` + `[data-theme="dark"]` +
+`[data-brand=…]`) beside the components for every code target; `index.ts`
+and the stories import it; referenced ⊆ defined or refuse by name (a
+`var(--x, fallback)` override hook may stay undefined). Rendered Button =
+`rgb(26,86,219)` from the sheet. **Gate:** `npm run css-vars:check`.
+
+## D.20 The first-party corpus could not ride the bundle — CLOSED
+
+**2026-08-22, `a14d9ba7`.** `figma bundle contracts --tokens
+primitives,semantic --modes light,dark` printed ✔ and the plugin then refused
+34 of the 51 contracts ONE PER PASTE (the brand layer unreachable, mode-only
+tokens orphaned); a directory refused as `EISDIR`. `figma bundle` now takes
+the layered grammar `generate` already had (a directory, `slot=file`,
+`--modes light,dark`), carries `tokenSet.layers`, compiles every contract
+before printing ✔, and refuses with ONE named list plus the slot layout.
+**Gate:** `npm run first-party-bundle:check` (24 pins; `maintain`, fast lane).
+
+## D.21 Root-level text never drew; literal ink and the emitter's last silent default; thirty runtime swallows — CLOSED
+
+**2026-08-22, `042abde5`.** A root that IS the text node drew nothing
+(Fluent Tooltip's copy had never been on the canvas); `literals.color` was
+not carried as the text fill; `applyLiterals`' `default: break` dropped every
+literal channel with no canvas field (untitled-ui Dot/Circle
+`border-radius: 50%`); the emitted Figma runtime had 30 bare `catch {}`
+sites. The root text draws (one TEXT child `label`, read back by propose);
+literal ink is carried; every uncarried literal channel is a `codeOnlyFact`;
+the runtime pushes named `FC-RT-*` degradations into the per-set result.
+**Gates:** `npm run root-text:check` (33 pins), `npm run code-only-facts:check`.
+
+## D.22 The canvas round trip had SILENT rows — CLOSED
+
+**2026-08-22, `042abde5` (first measurement 22 / 3 / 15 / **6** SILENT →
+26 / 4 / 15 / 1), `6b6f8efb` (#21: aspect-ratio lowered to a fixed height
+when a bound width exists, named either way → **0**).** `conformance/canvas.ts`
+drives every CARRIED/LOWERED CSS case → figma script → mock engine → dump →
+propose and diffs the case's own channel: ROUND-TRIPPED / NAMED /
+REFUSED-BY-NAME / SILENT. **Gate:** `npm run conformance:roundtrip`
+(decrease-only ratchet, a new SILENT is red; fast lane).
+
+## D.23 The shipped dump script dumped the repo's fixtures, not your sets — CLOSED
+
+**2026-08-22, `6b6f8efb`.** `extract/figma/dump.plugin.js` shipped with
+`TARGET_SETS = ['Badge','Switch','Card']`, so an unedited paste into a
+Flowbite file dumped three MUI demo sets and never a Flowbite stem. The
+default is `[]` — every local set, narrowed to the selection when one is
+held — and a non-empty list refuses BY NAME on a missing set. Every dump
+degradation names its CSS channel so the canvas gate and propose match
+receipts by channel word. **Gate:** the verbatim `ui.html` embed is pinned by
+`npm run plugin:check` (`scripts/plugin-engine-check.mjs`).
+
+## D.24 The held-out kit: 295 silent facts, a wrong "Enterprise" reason, a batch-wide refusal, a non-compiling Card — CLOSED to two
+
+**2026-08-22 → 23, `0dc0811c`, `cda65c2b` (#22 exam, #23 fix rounds).**
+A hand-built "Figma Design System" kit this engine had never seen
+(`aekVseUceg35tVn62knRrj`, 15 sets, zero stamps) went through the REST
+Journey A path: 3,556 canvas facts, **1,502 carried · 1,759 named · 295
+silent · 8 wrong-name · 25 should-carry**; Button and Card not
+recognisable; the PAT's missing `file_variables:read` scope reported as
+"Enterprise" 1,595 times; 1,748 map receipts only on stderr;
+`captured.dtcg.json` never written on the REST path; `generate` refusing all
+80 proposals on one contract's height clash; `CardProps.content` colliding
+with `HTMLAttributes.content`. Re-measured after the rounds, same file, same
+PAT: **1,594 · 1,960 · 2 · 0 · 0** (dump v1.31 carries `fillHeight`,
+`text.fontFamily` / `textAlign`, `effectStyle`, `effects[].bound`,
+`reactions`, `hostOverrides`, `fixedSwaps`, `itemReverseZIndex`,
+`targetAspectRatio`; the 403 is named once with its fix; receipts ride the
+dump; `generate` refuses per contract and writes the rest; a prop or slot
+named like a DOM attribute is `Omit<>`-ed and named). Button is
+recognisable; Card is not (§B.26); the two silences closed 2026-08-23 (§D.29).
+**Gates:** `npm run conformance:canvas` (152 cases, 152 PASS — every exam case
+pinned before any fix; the two pinned RED-EXPECTED here stayed red until §D.29), `npm run prop-collision:check`
+(`maintain`, fast lane), `npm run generation:atomic:check`; receipt
+[parity/receipts/phase-2/FIGMA-DS-EXAM.md](../parity/receipts/phase-2/FIGMA-DS-EXAM.md).
+
+## D.25 One truth: red lanes, a self-attested eval record, stale receipts, a clean clone that could not build the plugin — CLOSED
+
+**2026-08-22, `436abe7b`, `7066eb86`, `01f1c986`, `848f64bc` (#18, #19).**
+Measured that morning: all three required lanes red on `main` since
+mid-August; `evals/results.json` said 225/225 while the five most recent CI
+runs said 222 → 214 and no CI run had ever reproduced the committed number;
+`npm run maintain` existed only in an uncommitted tree; both
+`contract.schema.json` copies were eleven days behind the Zod document; ten
+`*.figma.js` scripts stale; `plugin:zip` refused on a clean clone because a
+commit changed three nodeIds without re-recording the engine receipt; three
+different plugin engines in circulation. Now: the record carries the commit
+it measured and whether the tree was dirty, the full lane re-measures into
+`evals/.ci/results.json` and fails row-by-row on disagreement
+(`eval:record:check`; checkout is full-history so ancestry can be proven);
+`schema:fresh` refuses a stale JSON Schema projection; every `maintain` leaf
+runs in a lane and `ci:lanes` expands composites; `maintain:visual` runs in
+the catalog-visual lane with the `FIGMA_TOKEN` secret; every receipt was
+regenerated by its own recipe; the visual-truth astryx floor is a named
+advisory rather than a standing red; the golden path was re-run on a fresh
+clone at eight stems
+([GOLDEN-PATH-RECEIPT](../parity/receipts/beta/GOLDEN-PATH-RECEIPT.md)).
+**Gates:** `npm run eval:record:check`, `npm run schema:fresh`,
+`npm run figma:fresh`, `npm run capability:fresh`, `npm run ci:lanes`.
+
+## D.26 No published engine surface — CLOSED
+
+**2026-08-22, `78b96e56`, `a3263f7c` (#20).** The CLI imported 22 root
+modules via `../../../`; `Emitter` / `EmitterCtx` / `registerEmitter`, the
+token resolver, provenance and `kebab` lived only in root `core/`, so
+"Vue/Svelte/Angular as later plugins" was not a true sentence and the WC
+README pointed at an unresolvable specifier. `@ds-contracts/core`
+(`packages/core`, depends on the schema and nothing else) now carries the
+emitter surface AND the analysis half of `emit-react` (`validateContract`,
+`generateCss`, multi-root, grid, the prop classifiers, the fact tables);
+root files are re-export shims; golden byte-identical. **Gate:**
+`npm run verify:published` (full lane) packs the four tarballs into a temp
+project and generates the Flowbite eight through a Vue emitter that depends
+on the tarballs alone, refusing on the first CSS byte that differs from the
+in-repo React emitter.
+
+## D.27 Four Figma-only fields outside the vendor-neutral `bindings` namespace — CLOSED
+
+**2026-08-22, `dbeb3575` (#24).** `figmaRepresentation`,
+`figmaStatePreviews`, `anchors.figma` and `slot.figmaProperty` sat outside
+`bindings`. Schema 17 hoists them (`bindings.figma.representation`,
+`bindings.figma.statePreviews`, `bindings.figma.anchors`,
+`bindings.code.anchors`, `slot.bindings.figma.property`) — a pure rename.
+The v16 spellings stay as `z.never` tombstones so a v16 document fails at the
+exact path with the new spelling and the codemod (`ds-contracts migrate
+<paths..> [--check]`) in the message; 812 committed JSON files were
+rewritten and every embedding artifact regenerated. BREAKING:
+`@ds-contracts/schema` 17.0.0-rc.1. **Gates:**
+`npm run contracts:migrate:check` (fast lane; walks what git sees),
+`npm run schema:fresh`.
+
+## D.28 Path A regressed: hop-4 literal lifts ran on unstamped foreign dumps — CLOSED
+
+**2026-08-22, `996258af`.** The text/shape paint lifts written for sets THIS
+pipeline drew (the stamped contract spells the literal) ran on every dump, so
+an unstamped REST dump of CBDS turned a Button text fill into a literal that
+stayed in the UNBOUND ledger and Tooltip stopped minting by usage site —
+fourteen C5 replay evals red, and nothing had run the suite since 08-16.
+Both lifts now start at the `drawnByThisPipeline` predicate; `paintCssHex`
+no longer double-prefixes `#` (24 fixtures had been silently skipped whole);
+a sibling stub resolved later rides the resolving proposal's envelope.
+**Gates:** the C5 replay evals (full lane); `npm run flowbite-dump-propose:check`
+and `npm run exact-proposal:check` pin the stamped side.
+
+## D.29 The held-out kit's last two silences, and the SLOT's primary-axis FILL — CLOSED
+
+**2026-08-23, `phase-2/exam-close` (r9 exam round 2, r10).** Both silences
+were the Card's `Variant=Inline/Container/Image` native SLOT (§D.24 left
+them pinned RED-EXPECTED in `extract/figma/conformance/MANIFEST.json`):
+
+- `slot-fixed-width-by-variant` — `nameFixedChildGeometry` skipped an axis
+  when ANY occurrence filled it, so the Inline occurrence's FIXED 308px got
+  no receipt. It now accounts per variant: an occurrence that FILLS the axis
+  is excluded from the FIXED set instead of silencing the axis, and the
+  receipt names both sides (`FIXED in 1/2 variant occurrence(s) — FIXED on
+  Variant=Inline; FILL on Variant=Default … FC-GEOMETRY-EXCLUDED (Option B)
+  … NAMED`). Nothing is minted — no `imported.case.image.width`, no 308.
+- `layout-fill-height-parent-mode-by-variant` — the native-SLOT branch
+  returned before `crossAxisFillByProp` / `carryCrossAxisFill` (the FRAME
+  branch walks both), and `carryCrossAxisFill` returned silent at its
+  mixed-parent-modes door. The SLOT branch now walks the same two doors in
+  the same order; `nameCrossAxisFillByVariant` reads each occurrence against
+  its own parent mode and names the per-variant facts; `crossAxisFillByProp`
+  gained the height twin (FILL-height in every occurrence under an
+  axis-split parent carries `height: 100%` on the definite ROW planes, and
+  is named when those parents hug). This case's fill is on a different axis
+  per variant, so it is the named path and no `height: 100%` is written.
+
+The same SLOT's FILL along its ROW parent's **primary** axis was the
+finding r9 named and did not fix: the branch never called `invertLayout`,
+so `Card:Variant=Default` Image's FILL-width reached neither the contract
+nor a note. r10 extracted `primaryAxisGrow` — the ONE rule every FRAME,
+spacer and slot-wrapper part inverts through — and the SLOT branch reads it,
+so a SLOT that FILLS the primary axis in every occurrence carries
+`layout.grow: true` on the slot part; `emit-figma-script`'s slot spec, the
+one spec built without `grow`, now lowers it to `layoutSizingHorizontal
+FILL` like every other part class, so the carried fact survives
+regeneration. Two conformance cases were added for it
+(`slot-primary-axis-fill`, `rest-slot-primary-axis-fill`, both CARRIED).
+What the grow does **not** carry — the slot's interior auto-layout — is
+§B.24.
+
+**Gates:** `npm run conformance:canvas` (152 cases · CARRIED 105 ·
+LEDGERED 38 · REFUSED 9 · 152 PASS · 0 RED-EXPECTED), `npx tsx
+conformance/canvas.ts` (46 round-trip cases, 0 SILENT), `npm run
+exact-proposal:check` §47–§49 (the per-variant FIXED receipt, the
+per-variant cross-axis fill and its height twin, the slot grow in both the
+every-occurrence and the split shapes), `npm run emitters:check` (the slot
+spec's grow), `npm run accuracy:check` (`accuracy/grammar.json` pins 152 =
+105 / 38 / 9). The exam receipt's own re-measure
+([FIGMA-DS-EXAM.md](../parity/receipts/phase-2/FIGMA-DS-EXAM.md) — 1,594 ·
+1,960 · 2 · 0 · 0) was taken before these rounds and is not re-run here; the
+two cases it named are what the fixture now holds green.
+
+## D.30 The Flowbite eight carried no canvas anchor in the contract — CLOSED
+
+**2026-08-23, `phase-2/exam-close` (r9 exam round 2).** All eight
+`examples/tailwind/contracts/*.contract.json` spelled
+`bindings.figma.anchors` as `{ "fileKey": null, "componentSetKey": null }`
+while their live sets existed on `59mLQlOMiD5w5za6SUcoO5` (the
+`*.anchors.json` sidecars are token provenance, not identity), so nothing
+could address a demo set by id and `contractIdByKey` could never hit. Now
+`bindings.figma.anchors = { fileKey: "59mLQlOMiD5w5za6SUcoO5", nodeId,
+componentSetKey }` on all eight — Alert `120:1979`, Badge `120:2098`, Button
+`120:2203`, Card `120:1999` (a standalone COMPONENT; the key is its
+component key), HelperText `120:2014`, Kbd `120:1982` (standalone
+COMPONENT), Label `120:1996`, ToggleSwitch `120:2047` — each verified
+READ-ONLY against the live file (REST `nodes?ids=…&plugin_data=shared`: the
+node is that set, its `key` is the key written, and `ds_contracts/contractId`
+equals the contract id); the keys also equal the `key` field of
+`extract/figma/fixtures/flowbite-eight.dump.json`.
+
+What moved with it: the eight `*.figma.js`, `GENESIS-BATCH.figma.js` and
+`tailwind.bundle.json` were re-emitted by the hop-2 recipe — per script
+exactly two lines, `anchorKey` (was `null`) and `EXPECTED_FILE_KEY` (was
+`null`). **The specHash caveat:** `anchorKey` sits inside the compiled spec
+the hash covers, so the specHash moves for all eight (Button 41443591 →
+2941065026, ToggleSwitch 1041764168 → 612723347 through the mock engine).
+Measured honestly, the engine at this tree already hashed all eight
+differently from the live stamps before the anchors (`emit-figma-script`
+changed on 2026-08-22 after the last live emit), so the demo canvas is
+stale against HEAD either way; the next Apply re-reconciles all eight IN
+PLACE — same node id and key, identity resolving by the
+`ds_contracts/contractId` stamp first, then by `anchorKey` — and restamps
+the hash: a redraw, not a fork. Two surfaces read `fileKey` differently:
+the plugin plans against the OPEN file's key (`ui.html` →
+`planGenerate({ fileKey: currentFileKey })` overrides the contract's), so
+Journey A into a new file is unchanged; the standalone console scripts carry
+`EXPECTED_FILE_KEY` as a hard guard and refuse any other file by name
+(`WRONG FILE`). Not moved: `src/` and the golden (first-party contracts
+only), `extract:figma:visual:anchors` (its subjects are `contracts/`), the
+engine receipt's inputs (`scripts/build-plugin-zip.mjs` bakes `contracts/`,
+not `examples/tailwind`). Nothing writes the anchor back after a recorded
+apply yet — that door is still by hand; the anchors here were written and
+verified by a person against the live file, and they ride the tailwind
+authored-facts ledger (`examples/tailwind/authored-facts.json`, eight rows
+on `bindings.figma.anchors`, each quoting the verification) so the committed
+contracts stay re-derivable from the capture plus the ledger
+(`promote-generalization`).
+
+**Gates:** `npm run flowbite-bundle-fresh:check` (the committed scripts and
+bundle equal a fresh emit with the anchors in them), the
+`promote-generalization` eval (re-promotion reproduces the eight byte for
+byte through the ledger), `npm run
+flowbite-dump-propose:check` (all eight stems still verified-exact — the
+anchors did not change recovery; the contract-side `componentSetKey` now
+resolves the same id the dump's `key` resolved by name), `npm run
+exact-proposal:check`, `npm run contracts:migrate:check` (the anchors are
+the schema-17 spelling).
+
 # §E — How to check this document yourself
 
 ```bash
@@ -2122,7 +2613,17 @@ grep -c 'tokens\|spacing\|anatomy' extract/reconcile.ts     # → 0
 
 # the conformance frontier (§C.6.2) — reads committed artifacts, no browser
 npm run conformance
-# → 53 cases · 50 pass · 3 red · 0 yellow; CARRIED 22 · LOWERED 2 · REFUSED 11 · UNSUPPORTED 18
+# → 82 cases · 79 pass · 3 red · 0 yellow; CARRIED 42 · LOWERED 4 · REFUSED 18 · UNSUPPORTED 18
+
+# its canvas half, MEASURED through the plugin engine + mock canvas + dump + propose (§C.3)
+npm run conformance:roundtrip     # → 46 cases · 26 round-tripped · 5 named · 15 refused by name · 0 SILENT
+
+# the canvas-construct fixture, incl. the held-out kit's cases (§D.24, §D.29)
+npm run conformance:canvas        # → 152 cases · 152 PASS · 0 RED-EXPECTED · 0 FAIL
+
+# every dropped-fact receipt and the facts it names (§C.3)
+npm run dagger:census             # → 104 receipts · 2,321 named facts, no drift
+npm run code-only-facts:check     # → the per-fact receipts ride the bundle, the plugin data and the run report
 
 # the onboard review gate now actually prints, and is pinned (§D.8)
 npm run test:onboarding                          # → 40/40

@@ -17,7 +17,10 @@ This repository is the working proof, and the candidate reference implementation
 
 The coordinated release candidate is repository `1.0.0-rc.1`, schema
 `17.0.0-rc.1` (a MAJOR: the contract-level `bindings` hoist, with a
-`ds-contracts migrate` codemod), and web-components emitter `0.4.0-rc.2`. The previous package
+`ds-contracts migrate` codemod), web-components emitter `0.4.0-rc.2`, and a
+new fourth package, `@ds-contracts/core` `0.1.0-rc.1` (the emitter surface
+and the contract-analysis layer, so an emitter can be built outside this
+repository — unpublished). The previous package
 RCs (schema `16.1.0-rc.1`, emitter `0.4.0-rc.1`) were published under npm's
 `next` tag. The current conversion work advances the CLI source to
 `0.5.0-rc.2` and the schema and emitter sources to their `rc.2` versions; all
@@ -98,6 +101,7 @@ One rule spans all three: **the surfaces never sync side-to-side.** A designer's
 The goal: a designer has a component set in Figma; you want a real, typed React component in your repo. *(Design-first — [the canonical path page](docs/00-choose-your-path.md) is the full statement.)*
 
 1. **In the plugin, open the *Send* tab.** Select the set (or find it with *Scan this file*), leave the base-contract box empty if this tool did not build it, and click **Read the set & diff**. The engine reads the live set and proposes a contract from what is actually drawn — variants become props, layers become anatomy, bound variables become token refs.
+   *No plugin?* `npm run extract:figma:rest -- <figma-url>` with a `FIGMA_TOKEN` reads the same sets over REST and writes the same dump shape, with every mapper receipt riding the dump as `_degradations`. One thing that route needs from you: variable **names and modes** come from `/v1/files/:key/variables/local`, which answers only to a token minted with the `file_variables:read` scope — without it every binding degrades to its resolved literal and the CLI says so once, with the fix, instead of calling it a plan limit ([docs/23 §B.25](docs/23-known-limitations.md#b25-the-rest-route-cannot-name-a-variable-binding-without-file_variablesread)).
 2. **Get that contract into the repo — with the code already in it.** Three doors, all reviewable, and **none of them ends at a document nobody can run**. The contract and the component it generates travel together, in the same change:
    - **GitHub PR** — fill in `owner/repo` and a fine-grained token (session-only, never stored; leave *Dry run* ticked to see the exact plan first). The PR carries **both halves**: the contract *and* the emitted component files next to it. Which target it emits is never guessed — `--target` wins, otherwise the `generate` section of `ds-contracts.config.json` decides, and with neither recorded the PR carries the contract alone **and says so in the body**.
    - **Send to repo** — the developer runs `ds-contracts figma receive --out contracts` on their machine, which prints a 6-character code; the designer types it in. The CLI **writes nothing without `--apply`** — and with `--apply` it writes the generated component too, from the same config.
@@ -111,7 +115,9 @@ ds-contracts generate contracts/button.contract.json --out src/generated \
 
 `--target` accepts `react` (typed TSX + CSS Modules + stories), `html`, `react-inline`, `figma-script`, or any emitter you register with `--emitter`. An unknown target is refused with the list of registered names.
 
-`--tokens` takes DTCG files, **a directory** (every `*.tokens.json` / `*.dtcg.json` inside it), or slot-named entries — `--tokens light=<file>,dark=<file>` — when your token set is layered. Two files that fight over the same token inside one slot are refused by name rather than silently merged, because a light tree merged over a dark one produces a dark component that reports itself as light.
+`--tokens` takes DTCG files, **a directory** (every `*.tokens.json` / `*.dtcg.json` inside it), or slot-named entries — `--tokens light=<file>,dark=<file>` — when your token set is layered. Two files that fight over the same token inside one slot are refused by name rather than silently merged, because a light tree merged over a dark one produces a dark component that reports itself as light. `figma bundle` takes the same grammar (since 2026-08-22), so one token layout feeds both surfaces.
+
+Beside the components, `generate` writes **`tokens.css`** — every custom property the components reference, `:root` for the default slot and `[data-theme="dark"]` / `[data-brand=…]` for the named ones — and the emitted `index.ts` and stories import it; a reference the sheet cannot define is refused by name. A contract that fails to parse, validate or emit is refused **by name** (and so is anything composing it) while the rest of the batch is written; a prop or slot named like a DOM attribute (`content`, `title`, `color`) is `Omit<>`-ed from the React base type and named in the file header rather than failing to type-check.
 
 Generation is **fully deterministic**: the same contract produces byte-identical output, every time, on any machine. No model is in the path.
 
@@ -219,6 +225,10 @@ Promotion *used to be* a per-library script you copied and retargeted — six ne
 
 ```bash
 # 5. One file, containing everything: contracts + your token set + icons.
+#    --tokens is the same grammar `generate` uses: two flat files (base, minted),
+#    a directory, or layered slot=file entries (primitives=…,semantic=…,brand.<name>=…)
+#    with --modes light,dark. Every contract is compiled before ✔ is printed; a
+#    refusal is ONE named list, never one per paste.
 ds-contracts figma bundle examples/acme/contracts --out acme.bundle.json \
   --tokens examples/acme/tokens/acme.dtcg.json,examples/acme/tokens/acme-minted.dtcg.json \
   --modes light.json,dark.json --name Acme
@@ -380,7 +390,7 @@ All of it is gated by **225 executable checks** (`npm run eval`) that run the re
 |---|---|---|
 | `contracts/` | **The source of truth.** 56 component contracts — buttons through banners, form fields, chat messages, navigation, progress meters, switches, plus the A3 composition corpus (two-column, sidebar, gallery, bento, page shell). APIs mirror a shipping industry component library ([coverage map](docs/research/astryx-coverage.md)) on this system's own tokens. | ✅ This is where changes happen |
 | `tokens/` | 282 DTCG design tokens: primitives → **brand modes** (accent ramp + control radius per brand) → semantic aliases → light/dark mode files. One pipeline compiles them to CSS custom properties *and* design-tool variable collections. Adding a brand touches ONLY this directory — eval-proven. | ✅ |
-| `core/` | **The engine as a library** — schema, token corpus, both extraction proposers, and six emitters (`react`, `html`, `react-inline`, `figma-script`, and the opt-in Figma Code Connect pair `code-connect` / `code-connect-html`) behind a pluggable `Emitter` interface. Browser-importable, zero node globals; the CLI scripts are thin shells over it. | ✅ |
+| `core/` | **The engine as a library** — schema, token corpus, both extraction proposers, and six emitters (`react`, `html`, `react-inline`, `figma-script`, and the opt-in Figma Code Connect pair `code-connect` / `code-connect-html`) behind a pluggable `Emitter` interface. Browser-importable, zero node globals; the CLI scripts are thin shells over it. The part an outside emitter needs — the `Emitter` types and registry, the token resolver, `validateContract`, `generateCss`, the prop classifiers and the prop/DOM collision rule — is the published `packages/core` (`@ds-contracts/core`); the root files are re-export shims over it. | ✅ |
 | `src/components/` | The generated React library — typed, accessible, CSF3 stories, publishable package build. | ❌ Generated, never edited |
 | `figma-sync/` | Generated, transport-agnostic scripts that build the canvas library — plus the **Sync Runner** dev plugin (`plugin/`) that executes them from disk. A from-blank rebuild of the entire library ran this way and verified clean. | ❌ Generated (`plugin/`, `arrange.js` hand-maintained) |
 | `parity/` | The three-way differ: classifies every difference between contract, code, and canvas as *ahead*, *behind*, or *mismatched* — with a proposed remedy. Plus the adherence judge and the brownfield `diagnose` referee. | ✅ |

@@ -3477,9 +3477,19 @@ function nameFixedChildGeometry(m: Merged, ctx: Ctx, where: string): void {
     // auto-layout node (the plugin writes fixedSize for non-auto-layout
     // children only, where mintFixedSize mints it; on an auto-layout node it
     // is the same excluded geometry, and the drawn px joins the receipt).
+    const fillField = dim === 'width' ? 'fillWidth' : 'fillHeight';
     const fixedIn = m.occ.filter((o) => {
       const l = o.node.layout;
       if (!l) return false;
+      // PER-VARIANT accounting (canvas conformance slot-fixed-width-by-
+      // variant, Phase 2 exam: Card:Variant=Inline/Container/Image). A FILL
+      // axis is spelled FIXED by Figma's sizing mode too and is a different
+      // fact (grow/stretch) on THAT occurrence — so the occurrence that
+      // fills is excluded here, and an occurrence that is FIXED stays FIXED
+      // however the same child sizes in the other variants. The old door
+      // skipped the whole axis when ANY occurrence filled, so a 308px FIXED
+      // Inline Image under a FILL Default Image got no receipt at all.
+      if (o.node[fillField] === true) return false;
       if (o.node.fixedSize?.[dim] !== undefined) return true;
       const primaryIsWidth = l.mode !== 'VERTICAL'; // HORIZONTAL and GRID (GP1b)
       const mode = (dim === 'width') === primaryIsWidth ? l.primarySizing : l.counterSizing;
@@ -3497,10 +3507,15 @@ function nameFixedChildGeometry(m: Merged, ctx: Ctx, where: string): void {
     ) {
       continue; // a carrier exists — the size channels speak for it
     }
-    if (dim === 'width' && m.occ.some((o) => o.node.fillWidth === true)) continue;
-    if (dim === 'height' && m.occ.some((o) => o.node.fillHeight === true)) continue;
     const drawn = [...new Set(fixedIn.map((o) => o.node.fixedSize?.[dim]).filter((v): v is number => typeof v === 'number'))];
-    dims.push(`${dim} (FIXED in ${fixedIn.length}/${m.occ.length} variant occurrence(s)${drawn.length > 0 ? `; drawn ${drawn.join('/')}px` : ''})`);
+    // The variants where the same child FILLS instead are named beside the
+    // FIXED ones, so the receipt says which variant it is about.
+    const fillIn = m.occ.filter((o) => o.node[fillField] === true);
+    const byVariant =
+      fillIn.length > 0
+        ? ` — FIXED on ${fixedIn.map((o) => o.variant).join(', ')}; FILL on ${fillIn.map((o) => o.variant).join(', ')} (a different fact on those variants)`
+        : '';
+    dims.push(`${dim} (FIXED in ${fixedIn.length}/${m.occ.length} variant occurrence(s)${byVariant}${drawn.length > 0 ? `; drawn ${drawn.join('/')}px` : ''})`);
   }
   if (dims.length === 0) return;
   ctx.notes.push(
@@ -4737,7 +4752,14 @@ function carryCrossAxisFill(
   const fillField = base === 'HORIZONTAL' ? 'fillHeight' : 'fillWidth';
   const filling = m.occ.filter((o) => o.node[fillField] === true).length;
   if (filling === 0) return;
-  if (parentModes.byVariant.size > 0 && [...parentModes.byVariant.values()].some((mode) => mode !== base)) return; // mixed parent modes — crossAxisFillByProp's door
+  if (parentModes.byVariant.size > 0 && [...parentModes.byVariant.values()].some((mode) => mode !== base)) {
+    // Mixed parent modes — crossAxisFillByProp's door for a FILL drawn on
+    // the same axis in EVERY occurrence; whatever that door did not take
+    // (a fill on one axis in one variant and the other axis in the next) is
+    // accounted PER VARIANT here, never dropped at the door.
+    nameCrossAxisFillByVariant(m, parentModes, part, ctx, where);
+    return;
+  }
   if (m.occ.some((o) => o.node.bound?.[dim] !== undefined) || (part.tokens as Record<string, string> | undefined)?.[dim] !== undefined) return;
   if (filling !== m.occ.length) {
     ctx.notes.push(
@@ -4767,6 +4789,50 @@ function carryCrossAxisFill(
   );
 }
 
+/** PER-VARIANT accounting for the cross-axis FILL under a parent whose
+ *  direction differs by variant (canvas conformance layout-fill-height-
+ *  parent-mode-by-variant; Phase 2 exam: Card:Variant=Inline/Container/Image
+ *  — the Container is a COLUMN in Default and a ROW in Inline, and the Image
+ *  draws FILL-width under the one and FILL-height under the other). Each
+ *  occurrence is read against ITS OWN parent mode: the cross axis of that
+ *  variant, whether the FILL is drawn on it, and whether that variant's
+ *  parent is definite there. A plane crossAxisFillByProp owns (the FILL
+ *  drawn on the same axis in every occurrence) is skipped — it carried or
+ *  named it already. The rest has no exact per-variant spelling
+ *  (`align-self` is not in the schema, the parent's `align: stretch` would
+ *  stretch its other children, and a `100%` literal resolves against a
+ *  definite box only), so it is NAMED per variant. It used to return at
+ *  the mixed-modes door with no note — the SILENT-LOSS class. */
+function nameCrossAxisFillByVariant(
+  m: Merged,
+  parentModes: ParentModes,
+  part: Record<string, unknown>,
+  ctx: Ctx,
+  where: string,
+): void {
+  const everyWidth = m.occ.every((o) => o.node.fillWidth === true);
+  const everyHeight = m.occ.every((o) => o.node.fillHeight === true);
+  const tokens = part.tokens as Record<string, string> | undefined;
+  const facts: string[] = [];
+  for (const o of m.occ) {
+    const mode = parentModes.byVariant.get(o.variant) ?? parentModes.base;
+    if (mode !== 'HORIZONTAL' && mode !== 'VERTICAL') continue;
+    const dim = mode === 'HORIZONTAL' ? 'height' : 'width';
+    const fillField = mode === 'HORIZONTAL' ? 'fillHeight' : 'fillWidth';
+    if (o.node[fillField] !== true) continue;
+    if (dim === 'width' ? everyWidth : everyHeight) continue; // crossAxisFillByProp's plane
+    if (o.node.bound?.[dim] !== undefined || tokens?.[dim] !== undefined) continue; // a carrier exists
+    const definite = parentModes.crossDefiniteByVariant?.get(o.variant) === true;
+    facts.push(
+      `${o.variant}: FILL-${dim} under a ${mode === 'HORIZONTAL' ? 'ROW' : 'COLUMN'} parent that ${definite ? `has a DEFINITE ${dim}` : `HUGS its ${dim}`}`,
+    );
+  }
+  if (facts.length === 0) return;
+  ctx.notes.push(
+    `${where}: drawn ${facts.join('; ')} — the parent's auto-layout mode differs by variant, so the cross-axis stretch is a per-variant fact on a per-variant axis with no exact grammar spelling (\`align-self\` is not in the schema, the parent's \`align: stretch\` would stretch its other children, and a per-variant \`100%\` literal resolves against a definite box only); NAMED per variant, not carried (review)`,
+  );
+}
+
 /** GAP-CLOSING ROUND 6 — the parent's auto-layout MODE is not one scalar when
  *  the parent's own direction is a FUNCTION of an axis. Figma's FILL is one
  *  flag with two meanings: along the parent's PRIMARY axis it grows, ACROSS
@@ -4792,6 +4858,13 @@ interface ParentModes {
    *  sizing mode, a bound size, or a captured box), so a child's `100%` on
    *  that axis resolves against a real length. */
   crossDefinite?: boolean;
+  /** PER-VARIANT twin of crossDefinite (canvas conformance layout-fill-
+   *  height-parent-mode-by-variant): variant name → whether THAT variant's
+   *  parent is definite on its OWN cross axis (the axis a child's FILL
+   *  stretches across in that variant). A parent whose direction is a
+   *  function of the axis has a different cross axis per variant, so one
+   *  scalar cannot answer for it. */
+  crossDefiniteByVariant?: Map<string, boolean>;
   /** A2 grid (dump v1.17): the parent's grid-carriage decision — a PURE
    *  function of the dump (gridCarriageOf), computed once here so the parent
    *  layout (invertGridLayout) and the children's placement attach
@@ -4817,7 +4890,21 @@ function parentModesOf(m: Merged, mint: boolean): ParentModes {
         o.node.fixedSize?.[crossDim] !== undefined ||
         o.node.abs !== undefined,
     );
-  return { base, byVariant, stretchCross: stretchEvidence(m), crossDefinite, ...(grid ? { grid } : {}) };
+  const crossDefiniteByVariant = new Map<string, boolean>();
+  for (const o of m.occ) {
+    const mode = o.node.layout?.mode ?? null;
+    const dim = mode === 'HORIZONTAL' ? 'height' : mode === 'VERTICAL' ? 'width' : null;
+    crossDefiniteByVariant.set(
+      o.variant,
+      dim !== null &&
+        (o.node.layout?.counterSizing === 'FIXED' ||
+          o.node.bound?.[dim] !== undefined ||
+          o.node.bbox?.[dim] !== undefined ||
+          o.node.fixedSize?.[dim] !== undefined ||
+          o.node.abs !== undefined),
+    );
+  }
+  return { base, byVariant, stretchCross: stretchEvidence(m), crossDefinite, crossDefiniteByVariant, ...(grid ? { grid } : {}) };
 }
 
 // ---------------------------------------------------------------------------
@@ -5274,7 +5361,44 @@ function crossAxisFillByProp(
   const columns = modes.filter((x) => x.mode === 'VERTICAL');
   const rows = modes.filter((x) => x.mode === 'HORIZONTAL');
   if (columns.length === 0 || rows.length === 0) return; // uniform — the existing rules own it
-  if (!m.occ.every((o) => o.node.fillWidth === true)) return;
+  // The width plane (FILL-width: a stretch under the COLUMN variants) and its
+  // twin, the height plane (FILL-height: a stretch under the ROW variants —
+  // canvas conformance layout-fill-height-parent-mode-by-variant). Each fires
+  // only when the part draws that FILL in EVERY occurrence.
+  for (const dim of ['width', 'height'] as const) {
+    if (!m.occ.every((o) => o.node[dim === 'width' ? 'fillWidth' : 'fillHeight'] === true)) continue;
+    crossAxisFillByPropOn(dim, m, parentModes, modes, part, ctx, where);
+  }
+}
+
+function crossAxisFillByPropOn(
+  dim: 'width' | 'height',
+  m: Merged,
+  parentModes: ParentModes,
+  modes: Array<{ variant: string; mode: 'HORIZONTAL' | 'VERTICAL' | 'GRID' | null }>,
+  part: Record<string, unknown>,
+  ctx: Ctx,
+  where: string,
+): void {
+  const columns = modes.filter((x) => x.mode === 'VERTICAL');
+  const rows = modes.filter((x) => x.mode === 'HORIZONTAL');
+  // The planes where this FILL is the cross-axis STRETCH (carried as `100%`)
+  // vs the planes where it is the primary-axis GROW (`layout.grow`).
+  const stretchMode = dim === 'width' ? 'VERTICAL' : 'HORIZONTAL';
+  const stretchPlane = dim === 'width' ? 'COLUMN' : 'ROW';
+  const growPlane = dim === 'width' ? 'ROW' : 'COLUMN';
+  if (dim === 'height') {
+    // `height: 100%` of an auto height is auto: the ROW variants' parent must
+    // be definite on its height, or the fact is NAMED (the same rule
+    // carryCrossAxisFill applies to a uniform ROW parent).
+    const hugging = modes.filter((x) => x.mode === 'HORIZONTAL' && parentModes.crossDefiniteByVariant?.get(x.variant) !== true);
+    if (hugging.length > 0) {
+      ctx.notes.push(
+        `${where}: drawn FILL-height under a parent whose auto-layout mode CHANGES across variants (${rows.length} row, ${columns.length} column) and that HUGS its height on ${hugging.map((x) => x.variant).join(', ')} — the ROW plane(s)' cross-axis stretch has no exact spelling (\`height: 100%\` of an auto height is auto; the parent's \`align: stretch\` would stretch its other children); NAMED, not carried (review)`,
+      );
+      return;
+    }
+  }
   for (const axis of ctx.axes) {
     if (isBoolAxis(axis.values)) continue;
     const byValue = new Map<string, 'HORIZONTAL' | 'VERTICAL' | 'GRID' | null>();
@@ -5295,9 +5419,9 @@ function crossAxisFillByProp(
     if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
     const lbp =
       (part.literalsByProp as Array<{ prop: string; map: Record<string, Record<string, string>> }> | undefined) ?? [];
-    // The referee's channel+prop rule: a second claimant on `width` would
+    // The referee's channel+prop rule: a second claimant on the axis would
     // make the cascade order the meaning.
-    if (lbp.some((e) => e.prop !== axis.propName && Object.values(e.map).some((o) => 'width' in o))) break;
+    if (lbp.some((e) => e.prop !== axis.propName && Object.values(e.map).some((o) => dim in o))) break;
     let entry = lbp.find((e) => e.prop === axis.propName);
     if (!entry) {
       entry = { prop: axis.propName, map: {} };
@@ -5305,22 +5429,44 @@ function crossAxisFillByProp(
     }
     const stretched: string[] = [];
     for (const [value, mode] of byValue) {
-      if (mode !== 'VERTICAL') continue;
+      if (mode !== stretchMode) continue;
       const key = camel(value);
-      if ((entry.map[key] ??= {}).width !== undefined) continue; // an observed width already claims it
-      entry.map[key].width = '100%';
+      if ((entry.map[key] ??= {})[dim] !== undefined) continue; // an observed size already claims it
+      entry.map[key][dim] = '100%';
       stretched.push(key);
     }
     if (stretched.length === 0) return;
     part.literalsByProp = lbp;
     ctx.notes.push(
-      `${where}: drawn FILL-width under a parent whose auto-layout mode is a function of axis "${axis.property}" — a Figma FILL is a GROW along the parent's primary axis and a cross-axis STRETCH across it, so the two meanings split by variant: \`layout.grow\` carries the ROW plane(s) and the COLUMN plane(s) (${stretched.join(', ')}) carry width: 100% through literalsByProp on \`${axis.propName}\` (the cross-axis stretch). Carrying the default variant's meaning everywhere filled the wrong dimension`,
+      `${where}: drawn FILL-${dim} under a parent whose auto-layout mode is a function of axis "${axis.property}" — a Figma FILL is a GROW along the parent's primary axis and a cross-axis STRETCH across it, so the two meanings split by variant: \`layout.grow\` carries the ${growPlane} plane(s) and the ${stretchPlane} plane(s) (${stretched.join(', ')}) carry ${dim}: 100% through literalsByProp on \`${axis.propName}\` (the cross-axis stretch). Carrying the default variant's meaning everywhere filled the wrong dimension`,
     );
     return;
   }
   ctx.notes.push(
-    `${where}: drawn FILL-width under a parent whose auto-layout mode CHANGES across variants (${rows.length} row, ${columns.length} column) without correlating to any variant axis — the cross-axis stretch is NOT carried (the row meaning, \`layout.grow\`, stands for every variant); review`,
+    `${where}: drawn FILL-${dim} under a parent whose auto-layout mode CHANGES across variants (${rows.length} row, ${columns.length} column) without correlating to any variant axis — the cross-axis stretch is NOT carried (the ${growPlane.toLowerCase()} meaning, \`layout.grow\`, stands for every variant); review`,
   );
+}
+
+/** The PRIMARY-axis half of a Figma FILL — `layout.grow`. `base` is the
+ *  DEFAULT variant's parent mode (the ROW meaning of FILL-width); where the
+ *  parent's mode is MIXED the other planes' cross-axis stretch rides
+ *  crossAxisFillByProp on top of this. dump v1.31 fillHeight is the vertical
+ *  twin — a FILL along a COLUMN parent's primary axis is the same
+ *  `layout.grow` (Phase 2 exam, rest-layout-sizing-vertical-fill).
+ *
+ *  ONE rule with ONE implementation: invertLayout (FRAME / spacer / swap-
+ *  convention slot-wrapper parts) and the native SLOT branch of buildPart
+ *  both read it here. The SLOT branch used to reach no grow rule at all
+ *  (it never called invertLayout), so a native slot's primary-axis FILL —
+ *  the Phase 2 exam's Card:Variant=Default/Image under its FIXED-width
+ *  ROW — was silent on every variant (canvas conformance
+ *  slot-primary-axis-fill + its REST twin, r10 2026-08-23). */
+function primaryAxisGrow(m: Merged, parentModes: ParentModes | null): true | undefined {
+  const parentMode = parentModes?.base ?? null;
+  return (parentMode === 'HORIZONTAL' && m.occ.every((o) => o.node.fillWidth === true)) ||
+    (parentMode === 'VERTICAL' && m.occ.every((o) => o.node.fillHeight === true))
+    ? true
+    : undefined;
 }
 
 function invertLayout(
@@ -5334,19 +5480,11 @@ function invertLayout(
   const l = layouts[0];
   // Per-variant layout differences are handled by invertLayoutByProp (which
   // notes an uncorrelated spread); the base layout is the default variant's.
-  // `base` is likewise the DEFAULT variant's parent mode — the ROW meaning of
-  // FILL. Where the parent's mode is MIXED the COLUMN planes' cross-axis
-  // stretch rides crossAxisFillByProp instead (called next to every
-  // invertLayout site that owns a stylable part).
-  const parentMode = parentModes?.base ?? null;
-  // dump v1.31 fillHeight: the vertical twin — a FILL along a COLUMN parent's
-  // primary axis is the same `layout.grow` (Phase 2 exam, rest-layout-sizing-
-  // vertical-fill).
-  const grow =
-    (parentMode === 'HORIZONTAL' && m.occ.every((o) => o.node.fillWidth === true)) ||
-    (parentMode === 'VERTICAL' && m.occ.every((o) => o.node.fillHeight === true))
-      ? true
-      : undefined;
+  // The primary-axis FILL is primaryAxisGrow's rule (shared with the native
+  // SLOT branch) — the cross-axis half rides crossAxisFillByProp /
+  // carryCrossAxisFill, called next to every invertLayout site that owns a
+  // stylable part.
+  const grow = primaryAxisGrow(m, parentModes);
   if (!l) return grow ? { grow } : undefined;
 
   // A2 grid (dump v1.17): a GRID base layout inverts through its own door —
@@ -7107,6 +7245,26 @@ function buildPart(
       );
     }
     part.slot = nativeSlot;
+    // r10 (canvas conformance slot-primary-axis-fill + rest-slot-primary-
+    // axis-fill): the PRIMARY-axis half of the slot's FILL is `layout.grow`
+    // — the rule every FRAME child inverts through, read from the SAME
+    // implementation (primaryAxisGrow), never a second copy. This branch
+    // never computed it, so the Card:Variant=Default Image's FILL-width under
+    // its FIXED-width ROW reached neither the contract nor a note; the FRAME
+    // branch carries grow first and the cross-axis doors below assume it
+    // (crossAxisFillByProp's receipt says "`layout.grow` carries the ROW
+    // plane(s)" — on this branch that sentence used to be untrue). The
+    // slot's own interior auto-layout (direction/justify/align) is NOT
+    // inverted here — a separate, still-unnamed fact.
+    const grow = primaryAxisGrow(m, parentMode);
+    if (grow) part.layout = { grow };
+    // dump v1.31 — a native SLOT's cross-axis FILL had NO door on this branch
+    // (the FRAME branch walks both; this one returned first), so the Card
+    // Inline Image's FILL-height under its ROW-variant Container was silent
+    // (canvas conformance layout-fill-height-parent-mode-by-variant). Same
+    // two doors, same order as the FRAME branch.
+    crossAxisFillByProp(m, parentMode, part, ctx, where);
+    carryCrossAxisFill(m, parentMode, part, ctx, where);
     nameFixedChildGeometry(m, ctx, where); // FC-GEOMETRY-EXCLUDED receipt (Phase 2 exam: Card Inline Image SLOT 308px)
     // Same visibility conventions as every other slot path: the "Show X"
     // convention marks the part optional; any other BOOLEAN visibility

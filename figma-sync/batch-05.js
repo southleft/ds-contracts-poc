@@ -2844,6 +2844,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "slotProperty": "StartContent",
               "slotOptional": true,
               "slotAccepts": [
@@ -2856,7 +2857,8 @@ const COMPONENTS = [
               "slotDescription": "Accepts: ds.top-nav-item (preferred — Figma sorts these first; any component may still be placed).",
               "bindings": {
                 "itemSpacing": "space/inset-y/sm"
-              }
+              },
+              "fillW": true
             },
             {
               "type": "slot",

@@ -2095,17 +2095,8 @@
           "\"width\":\"308"
         ]
       },
-      "status": "red",
-      "observed": "SILENT — nameFixedChildGeometry skips the width axis when ANY occurrence has fillWidth (`if (dim === 'width' && m.occ.some((o) => o.node.fillWidth === true)) continue;`), so the Inline occurrence's FIXED 308px gets no receipt; nothing is minted either (re-measured on the live kit 2026-08-23: Card:Variant=Inline/Container/Image, the only FIXED-child silence left on the 15 sets)",
-      "observedCheck": {
-        "noteAbsent": [
-          "Case:root/Image: .*(FIXED|FC-GEOMETRY-EXCLUDED)"
-        ],
-        "absent": [
-          "imported\\.case\\.image\\.width",
-          "\"width\":\"308"
-        ]
-      },
+      "status": "green",
+      "observed": "RE-RECORDED red -> green (r9 exam 2, 2026-08-23, core/propose-figma.ts). nameFixedChildGeometry now accounts PER VARIANT: an occurrence that FILLS the axis is excluded from the FIXED set instead of the whole axis being skipped when ANY occurrence fills, and the receipt names both sides: 'auto-layout SLOT child drawn FIXED on width (FIXED in 1/2 variant occurrence(s) — FIXED on Variant=Inline; FILL on Variant=Default (a different fact on those variants)) with no bound size variable — FC-GEOMETRY-EXCLUDED (Option B) … NAMED'. Nothing is minted (no imported.case.image.width, no 308).",
       "exam": "phase-2 FIGMA-DS exam RE-MEASURED 2026-08-23 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)"
     },
     {
@@ -2119,17 +2110,39 @@
           "\"height\":\"100%\""
         ]
       },
-      "status": "red",
-      "observed": "SILENT — carryCrossAxisFill returns at `mixed parent modes — crossAxisFillByProp's door`, and crossAxisFillByProp requires every occurrence to be fillWidth (it spells WIDTH per variant only), so a fillHeight under the ROW variant has no carrier and no note (re-measured on the live kit 2026-08-23: Card:Variant=Inline/Container/Image)",
-      "observedCheck": {
-        "noteAbsent": [
-          "Case:root/Container/Image: .*(FILL-height|fillHeight|stretch)"
-        ],
-        "absent": [
-          "\"height\":\"100%\""
+      "status": "green",
+      "observed": "RE-RECORDED red -> green (r9 exam 2, 2026-08-23, core/propose-figma.ts). Two doors opened: (1) the native SLOT branch now walks crossAxisFillByProp + carryCrossAxisFill like the FRAME branch (it returned before either); (2) carryCrossAxisFill's mixed-parent-modes door no longer returns silent — nameCrossAxisFillByVariant reads each occurrence against ITS OWN parent mode and names the per-variant facts: 'drawn Variant=Default: FILL-width under a COLUMN parent that HUGS its width; Variant=Inline: FILL-height under a ROW parent that HUGS its height — … NAMED per variant, not carried'. crossAxisFillByProp also gained the height twin (FILL-height in EVERY occurrence under an axis-split parent carries height: 100% on the ROW planes via literalsByProp when those parents are definite, and is NAMED when they hug); this case's fill is on a different axis per variant, so it is the named path, and no height: 100% is written.",
+      "exam": "phase-2 FIGMA-DS exam RE-MEASURED 2026-08-23 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)"
+    },
+    {
+      "id": "slot-primary-axis-fill",
+      "construct": "a native SLOT child drawn layoutSizingHorizontal FILL in EVERY variant under a FIXED-width ROW parent (Phase 2 exam: Card:Variant=Default/Image — dump v1.31 fillWidth on a SLOT node)",
+      "expect": "CARRIED",
+      "why": "a Figma FILL along the parent's PRIMARY axis is the part's `layout.grow` (the rule every FRAME child inverts through — canvas conformance layout-fill-width-row); a native SLOT child is the same flex item under the same ROW parent, and the schema hosts `layout` on a slot part (emit-figma-script writes layoutSpec(part) onto the slot node; css.ts/emit-html/emit-react-inline spell grow as flex: 1 1 auto on any part)",
+      "check": {
+        "carried": [
+          "\"slot\"",
+          "\"grow\":true"
         ]
       },
-      "exam": "phase-2 FIGMA-DS exam RE-MEASURED 2026-08-23 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)"
+      "status": "green",
+      "observed": "RE-RECORDED red -> green (r10, 2026-08-23, core/propose-figma.ts + core/emit-figma-script.ts). The native SLOT branch of buildPart now reads the primary-axis FILL through primaryAxisGrow — the ONE rule invertLayout (FRAME / spacer / slot-wrapper parts) reads, extracted rather than copied — so a SLOT that FILLS along its ROW parent's primary axis in every occurrence carries `layout.grow: true` on the slot part (the FRAME carriage, canvas conformance layout-fill-width-row). emit-figma-script's slot spec was the one spec built without `grow`; it now lowers a slot part's layout.grow to layoutSizingHorizontal FILL like every other part class, so the carried fact survives regeneration. Was: SILENT — the SLOT branch never called invertLayout, so the FILL reached neither `layout.grow` nor a note.",
+      "exam": "phase-2 FIGMA-DS exam RE-MEASURED 2026-08-23 (parity/receipts/phase-2/FIGMA-DS-EXAM.md) — r9 exam 2 finding, not fixed there"
+    },
+    {
+      "id": "rest-slot-primary-axis-fill",
+      "construct": "REST: a native SLOT document with layoutSizingHorizontal FILL under a FIXED-width ROW root (the REST twin of slot-primary-axis-fill, mapped through extract/figma/rest/map.ts)",
+      "expect": "CARRIED",
+      "why": "a Figma FILL along the parent's PRIMARY axis is the part's `layout.grow` (the rule every FRAME child inverts through — canvas conformance layout-fill-width-row); a native SLOT child is the same flex item under the same ROW parent, and the schema hosts `layout` on a slot part (emit-figma-script writes layoutSpec(part) onto the slot node; css.ts/emit-html/emit-react-inline spell grow as flex: 1 1 auto on any part)",
+      "check": {
+        "carried": [
+          "\"slot\"",
+          "\"grow\":true"
+        ]
+      },
+      "status": "green",
+      "observed": "RE-RECORDED red -> green (r10, 2026-08-23, core/propose-figma.ts + core/emit-figma-script.ts). The native SLOT branch of buildPart now reads the primary-axis FILL through primaryAxisGrow — the ONE rule invertLayout (FRAME / spacer / slot-wrapper parts) reads, extracted rather than copied — so a SLOT that FILLS along its ROW parent's primary axis in every occurrence carries `layout.grow: true` on the slot part (the FRAME carriage, canvas conformance layout-fill-width-row). emit-figma-script's slot spec was the one spec built without `grow`; it now lowers a slot part's layout.grow to layoutSizingHorizontal FILL like every other part class, so the carried fact survives regeneration. Was: SILENT — the SLOT branch never called invertLayout, so the FILL reached neither `layout.grow` nor a note (the REST mapper already emitted fillWidth from layoutSizingHorizontal FILL on the SLOT document; the silence was propose-side).",
+      "exam": "phase-2 FIGMA-DS exam RE-MEASURED 2026-08-23 (parity/receipts/phase-2/FIGMA-DS-EXAM.md) — r9 exam 2 finding, not fixed there"
     }
   ]
 }

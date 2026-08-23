@@ -342,7 +342,7 @@ It fuses captured truth into
 the seed contracts, runs the **source-alias pass** (a minted leaf whose covering
 combos all agree on one source token, and whose minted value equals that token's
 DTCG value, becomes a DTCG alias to it — value-verified twice, so aliasing can
-never move a pixel), and probes `figmaStatePreviews` against the real referee.
+never move a pixel), and probes `bindings.figma.statePreviews` against the real referee.
 
 Refusals here are the product working. Carbon's Checkbox and IconButton were
 **refused state previews by name** ("state declares no token overrides, so its

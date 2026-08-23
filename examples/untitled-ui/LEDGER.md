@@ -15,7 +15,7 @@ Fifteen Untitled UI component sets were drawn by hand on a Figma canvas, capture
 | instrument | what it holds the tool to | current reading | artifact |
 |---|---|---|---|
 | Pixel fidelity | a render of the emitted React vs the canvas reference, per variant | **92.7%** mean over 537 scored variants in 15 sets (best toggle-base 98.0%, worst tooltip 81.2%) | `renders/fidelity.json` |
-| Document-model conformance | one hand-authored case per Figma construct, with a hand-authored expected disposition | **148/150** green, 2 pinned red — 103 constructs expected CARRIED, 9 REFUSED, 38 LEDGERED | `extract/figma/conformance/MANIFEST.json` |
+| Document-model conformance | one hand-authored case per Figma construct, with a hand-authored expected disposition | **152/152** green, 0 pinned red — 105 constructs expected CARRIED, 9 REFUSED, 38 LEDGERED | `extract/figma/conformance/MANIFEST.json` |
 | Canvas→code→canvas round trip | every (variant ▸ node ▸ channel) fact, four ways | **15/15** executed to fact diff · **0/15 verified exact** · 11,400 matched · 1,857 diverged · 7,671 loss · 15,359 invented | `extract/figma/roundtrip-uui/report.json` |
 | The named-refusal surface | what the pipeline writes down when it will not carry something | **491** capture receipts in 8 codes · 15 stub contracts · 47 named conformance limits · 1 refused icon export | dumps, contracts, icon manifest |
 
@@ -43,7 +43,7 @@ Method, quoted from `renders/FIDELITY.md`: *Score = % of pixels REPRODUCED, meas
 
 ## 2. What carries
 
-The document-model fixture is the answer to "will it survive the boundary at all". It is 150 hand-authored cases whose expected disposition was written from the Figma documentation model, never from engine output; a construct that is neither carried nor named-refused is a hard failure. **103 constructs are proven CARRIED and green.** Grouped, with the case ids you can re-run:
+The document-model fixture is the answer to "will it survive the boundary at all". It is 152 hand-authored cases whose expected disposition was written from the Figma documentation model, never from engine output; a construct that is neither carried nor named-refused is a hard failure. **105 constructs are proven CARRIED and green.** Grouped, with the case ids you can re-run:
 
 | construct family | carried | case ids |
 |---|---|---|
@@ -59,9 +59,9 @@ The document-model fixture is the answer to "will it survive the boundary at all
 | Node opacity | 1 | `opacity-node` |
 | Absolute placement and constraints | 3 | `placement-abs-frame` `placement-fixedsize-inflow` `placement-xy-none-layout` |
 | Corner radii | 2 | `radius-uniform-bound` `radius-uniform-literal` |
-| `rest-*` | 3 | `rest-layout-sizing-vertical-fill` `rest-text-align-center` `rest-variables-captured` |
+| `rest-*` | 4 | `rest-layout-sizing-vertical-fill` `rest-slot-primary-axis-fill` `rest-text-align-center` `rest-variables-captured` |
 | Drawn geometry (ellipse, polygon, arc, rotated rect, vector) | 8 | `shape-arc-donut` `shape-arc-full` `shape-arc-partial` `shape-ellipse` `shape-polygon` `shape-polygon-no-sides` `shape-rect-abs` `shape-rotated-rect` |
-| Slots and preferred values | 4 | `slot-native-node` `slot-optional-show` `slot-preferred-values` `slot-wrapper-swap` |
+| Slots and preferred values | 5 | `slot-native-node` `slot-optional-show` `slot-preferred-values` `slot-primary-axis-fill` `slot-wrapper-swap` |
 | Spacers and growth | 2 | `spacer-growth` `spacer-visiblewhen` |
 | Sparse / minority children | 2 | `sparse-minority-child` `sparse-unpredictable` |
 | Strokes | 5 | `stroke-align-inside` `stroke-align-outside` `stroke-only-no-fill` `stroke-uniform-var` `stroke-weight-bound` |
@@ -240,23 +240,11 @@ Carried, but not carried perfectly. These are the classes an adopter will actual
 
 ---
 
-## 5. The pinned reds, and the work order
+## 5. The work order
 
 ### 5.1 The pinned reds
 
-2 of the 150 conformance cases are FAIL-EXPECTED-RED: the documentation model says CARRIED, the engine does not deliver it, and the gap is pinned so it cannot be forgotten or quietly closed. Each is verbatim from the manifest.
-
-#### `layout-fill-height-parent-mode-by-variant` — expected LEDGERED, inversion-side
-
-- **Construct:** a child SLOT drawn fillHeight only under the variant where its parent is a ROW, the parent being a COLUMN in the other variant (layoutByProp) and HUGGING its height in both (Phase 2 exam: Card Inline Image, dump v1.31 fillHeight)
-- **Why it should carry:** the cross-axis stretch under a HUG-height ROW parent has no exact grammar spelling (carryCrossAxisFill names it for a uniform parent); a parent whose direction is a function of the axis is the same fact per variant and must be named per variant, not dropped at the mixed-modes door
-- **What actually happens:** SILENT — carryCrossAxisFill returns at `mixed parent modes — crossAxisFillByProp's door`, and crossAxisFillByProp requires every occurrence to be fillWidth (it spells WIDTH per variant only), so a fillHeight under the ROW variant has no carrier and no note (re-measured on the live kit 2026-08-23: Card:Variant=Inline/Container/Image)
-
-#### `slot-fixed-width-by-variant` — expected LEDGERED, inversion-side
-
-- **Construct:** a native SLOT child drawn FILL-width in Variant=Default and FIXED-width (308px, no bound size, no fixedSize/bbox) in Variant=Inline under a ROW parent (Phase 2 exam: Card Inline Image)
-- **Why it should carry:** Option B (FC-GEOMETRY-EXCLUDED): a child's drawn px is excluded geometry and must be a RECEIPT carrying the code — nameFixedChildGeometry already names a FIXED FRAME/SLOT child; an occurrence that is FIXED in one variant and FILL in another is the same excluded geometry on that variant and must be named, not skipped
-- **What actually happens:** SILENT — nameFixedChildGeometry skips the width axis when ANY occurrence has fillWidth (`if (dim === 'width' && m.occ.some((o) => o.node.fillWidth === true)) continue;`), so the Inline occurrence's FIXED 308px gets no receipt; nothing is minted either (re-measured on the live kit 2026-08-23: Card:Variant=Inline/Container/Image, the only FIXED-child silence left on the 15 sets)
+NONE. All 152 conformance cases are green: every construct the documentation model says is CARRIED is carried, and every refusal is named. This section stays in the ledger because an empty pinned-red list is a reading, not a formatting accident — when a red returns it is printed here verbatim from the manifest.
 
 ### 5.2 The round-1 audit, re-checked
 
@@ -295,12 +283,11 @@ Named holes, so that no reader mistakes an absence for a zero.
 ### 5.4 The work order, in the order it pays
 
 1. **The paste door is OPEN** (§3.4) — closed for two rounds, and the two blockers that held it (an empty `base` tokenSet refused outright, and `social-button`'s `{platform}` icon ref read as a literal filename) are both fixed and pinned by `npm run paste:check`, which drives the REAL referee for this kit and for a variable-publishing one. An adopter can now take these 15 contracts through the shipping path unaided. What ranks first NOW is below.
-2. **The 2 pinned reds** (§5.1) — `layout-fill-height-parent-mode-by-variant`, `slot-fixed-width-by-variant`. A pinned red outranks every OPEN class below it: the documentation model says the construct is CARRIED and the engine does not deliver it, which is the one failure this project treats as a bug rather than a boundary.
-3. **variant-name-transliteration-api** — OPEN, mint stage (inversion-side). 1 reserved-name collision (SocialIcon.style); 11 props whose enum still spells `'false'` instead of absence/boolean; 3 numeric-valued string enums (ProgressBar.progress, Slider.leftControl, Slider.rightControl).
-4. **duplicate-parts-from-wrapper-union** — PARTIAL, propose-invert stage (inversion-side). 3 numbered part names whose base name is also a part of the same contract (progress-bar.Progress2, slider.leftControl2, slider.rightControl2); the audited duplicates (ProgressCircle's four label parts, DropdownListItem's Text2/Checkbox×2/circle×2, InputFieldBase's tripled trailing icons) are all absent. The probe cannot prove the residuals are not genuine sibling nodes.
-5. **ua-default-leakage** — PARTIAL, emit-react stage (emitter-side). global `box-sizing: border-box` reset in tokens.css: present; 8/30 emitted `.root` rules set a background explicitly. No `appearance:` reset exists anywhere in the emitted CSS (1 files).
-6. **story-space-mismatch** — PARTIAL, story-gen stage (emitter-side). 14/15 sets enumerate exactly the variants the capture holds; disagreements: progress-circle 20 enumerated vs 16 captured. Story files are generated per set (30 of 30 emitted components ship stories).
-7. **Classify the 0 untagged round-trip facts** (§5.3) — until divergence and loss are classified the way invention already is, no blast-radius number in §4 can claim to be complete.
+2. **variant-name-transliteration-api** — OPEN, mint stage (inversion-side). 1 reserved-name collision (SocialIcon.style); 11 props whose enum still spells `'false'` instead of absence/boolean; 3 numeric-valued string enums (ProgressBar.progress, Slider.leftControl, Slider.rightControl).
+3. **duplicate-parts-from-wrapper-union** — PARTIAL, propose-invert stage (inversion-side). 3 numbered part names whose base name is also a part of the same contract (progress-bar.Progress2, slider.leftControl2, slider.rightControl2); the audited duplicates (ProgressCircle's four label parts, DropdownListItem's Text2/Checkbox×2/circle×2, InputFieldBase's tripled trailing icons) are all absent. The probe cannot prove the residuals are not genuine sibling nodes.
+4. **ua-default-leakage** — PARTIAL, emit-react stage (emitter-side). global `box-sizing: border-box` reset in tokens.css: present; 8/30 emitted `.root` rules set a background explicitly. No `appearance:` reset exists anywhere in the emitted CSS (1 files).
+5. **story-space-mismatch** — PARTIAL, story-gen stage (emitter-side). 14/15 sets enumerate exactly the variants the capture holds; disagreements: progress-circle 20 enumerated vs 16 captured. Story files are generated per set (30 of 30 emitted components ship stories).
+6. **Classify the 0 untagged round-trip facts** (§5.3) — until divergence and loss are classified the way invention already is, no blast-radius number in §4 can claim to be complete.
 
 ---
 
@@ -312,7 +299,7 @@ npx tsx extract/figma/ledger/build.ts
 
 # 2 · the document-model fixture — fast, read-only, no engine changes
 npm run conformance:canvas
-#    expect: 150 case(s): 148 PASS, 2 RED-EXPECTED (pinned findings), 0 FAIL, 0 UNEXPECTED-GREEN, 0 UNLISTED, 0 MISSING
+#    expect: 152 case(s): 152 PASS, 0 RED-EXPECTED (pinned findings), 0 FAIL, 0 UNEXPECTED-GREEN, 0 UNLISTED, 0 MISSING
 
 # 3 · the canvas→code→canvas round trip (rewrites REPORT.md + report.json)
 npm run extract:figma:roundtrip:uui
@@ -337,7 +324,7 @@ npx tsx examples/untitled-ui/fidelity-score.mts
 | `examples/untitled-ui/storybook/contracts/` | `3e7f9bd2b2c0` | 131,804 | proposed contracts (30 files) |
 | `examples/untitled-ui/storybook/src/generated/` | `73ca6c3fd182` | 276,029 | emitted components (30 dirs) |
 | `examples/untitled-ui/storybook/src/tokens.css` | `8c31938a1627` | 674,804 | emitted global tokens |
-| `extract/figma/conformance/MANIFEST.json` | `728f08536c8c` | 107,924 | conformance denominator |
+| `extract/figma/conformance/MANIFEST.json` | `ae03f5783d7f` | 112,058 | conformance denominator |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | round-trip facts |
 | `extract/figma/roundtrip-uui/REPORT.md` | `61f5c58f7f20` | 144,788 | round-trip narrative |
 

@@ -7,7 +7,7 @@ const COMPONENTS = [
     "setName": "ToggleSwitch",
     "contractId": "flowbite.toggleswitch",
     "version": "0.2.0",
-    "anchorKey": null,
+    "anchorKey": "08442ebe555baa908cd7ab07097bfcd58dd5fccc",
     "description": "ToggleSwitch — generated from contract flowbite.toggleswitch v0.2.0 † (12 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
@@ -849,7 +849,7 @@ const COMPONENTS = [
 ];
 const ROW_H = 240, PAD = 40;
 
-const EXPECTED_FILE_KEY = null;
+const EXPECTED_FILE_KEY = "59mLQlOMiD5w5za6SUcoO5";
 if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
   throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
 }
