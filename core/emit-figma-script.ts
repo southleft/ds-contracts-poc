@@ -481,7 +481,11 @@ export interface VariantSpec {
  *  its facts in the same order. */
 export interface CodeOnlyFact {
   part: string;
-  kind: 'channel' | 'declared' | 'gradient' | 'shadow' | 'event' | 'meter' | 'scrim' | 'preview';
+  /** `capture` (antd exam, W4): a state-plane fact the computed capture
+   *  observed and the contract grammar refused — carried on the part as
+   *  `Part.codeOnly` so the bundle, the plugin report and the set's plugin
+   *  data repeat it. The channel is spelled `outline-width [focus-visible]`. */
+  kind: 'channel' | 'declared' | 'gradient' | 'shadow' | 'event' | 'meter' | 'scrim' | 'preview' | 'capture';
   channel: string;
   value: string;
   reason: string;
@@ -5230,6 +5234,58 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // sees the final spec shape (after margin lowering / miss stripping).
   for (const v of variants) annotateFillW(v.spec);
   for (const v of stateVariants) annotateFillW(v.spec);
+  // ANTD EXAM (S6, 2026-08-23) — THE MARGIN BOX HAS A SILENT EXIT. The
+  // runtime's applyMarginBox returns without a word when the child is
+  // FILL-sized, grows, or is out of flow (overlay / inset / absolute): a
+  // wrapper around a FILL child would break the fill, so the residual margin
+  // is simply not drawn. Measured on the conformance case
+  // `antd-empty-margin-only-parts` (antd Switch's inner-checked/unchecked
+  // spans): `margin-left: 24px` on a display:block child of a vertical stack
+  // compiled to fillW, the margin box was skipped, and the canvas round trip
+  // reported SILENT — the contract carried the token, the dump carried no
+  // trace, and none of the three code-only facts was this one. FILL is
+  // decided just above (annotateFillW runs last), so this is the first point
+  // the compile can know the runtime will skip; name every residual side as
+  // a channel miss and strip the dead field, exactly as refuseRootMargins
+  // does for the root.
+  const refuseSkippedMargins = (spec: NodeSpec, variant: string) => {
+    for (const child of spec.children ?? []) {
+      const m = child.margins;
+      if (m) {
+        const sides = (['top', 'right', 'bottom', 'left'] as const).filter((s) => m[s]);
+        // The fourth exit is the one the exam found: an EMPTY in-flow frame
+        // takes the parent's height (layoutSizingVertical FILL — the #60
+        // runtime default, so a ProgressBar indicator never inherits Figma's
+        // 100×100 createFrame box), and applyMarginBox tests EITHER axis.
+        const emptyRuntimeSized =
+          child.type === 'frame' && (child.children?.length ?? 0) === 0 &&
+          !child.fixedHeight && child.lits?.height === undefined && !child.shape;
+        const why = child.overlay || child.insetOverlay || child.absolute
+          ? 'an out-of-flow child (overlay / inset / absolute) keeps its own placement lowering'
+          : child.grow
+            ? 'a growing child (flex-grow → layoutGrow) cannot be wrapped without breaking the grow'
+            : child.fillW
+              ? 'a FILL-sized child cannot be wrapped in a margin box without breaking the fill'
+              : emptyRuntimeSized
+                ? 'an EMPTY in-flow box takes the parent height (layoutSizingVertical FILL, the #60 runtime default) and a FILL-sized child cannot be wrapped'
+                : null;
+        if (sides.length > 0 && why) {
+          facts.push({
+            part: child.name,
+            variant,
+            kind: 'channel',
+            channel: sides.map((s) => `margin-${s}`).join('/'),
+            value: sides.map((s) => `${m[s]}px`).join('/'),
+            reason: `the margin-box wrapper is skipped — ${why}; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)`,
+          });
+          delete child.margins;
+        }
+      }
+      refuseSkippedMargins(child, variant);
+    }
+  };
+  for (const v of variants) refuseSkippedMargins(v.spec, v.name);
+  for (const v of stateVariants) refuseSkippedMargins(v.spec, v.name);
   // Meter parts are runtime-sized (the canvas shows the defaults' fraction;
   // height follows the track) — a code-only fact like the rest.
   for (const { name: partName, part } of walkAnatomy(contract)) {
@@ -5242,6 +5298,23 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       value: '',
       reason: "runtime-sized — the canvas shows the defaults' fraction and the height follows the track",
     });
+  }
+  // ANTD EXAM (W4): capture-side receipts the CONTRACT carries (Part.codeOnly)
+  // — state-plane facts the computed capture observed and the grammar refused
+  // (a nested part's focus-visible outline-width; a state delta outside every
+  // mintable kind). Repeated here verbatim so the bundle, the plugin report
+  // and the set's plugin data name them; nothing draws them.
+  for (const { name: partName, part } of walkAnatomy(contract)) {
+    for (const c of part.codeOnly ?? []) {
+      facts.push({
+        part: partName,
+        variant: '',
+        kind: 'capture',
+        channel: c.state ? `${c.channel} [${c.state}]` : c.channel,
+        value: c.value,
+        reason: `observed by the computed capture and refused by the contract grammar — ${c.reason}`,
+      });
+    }
   }
   // Round 5: compiled facts the SYNC RUNTIME cannot apply natively — the
   // image-placeholder wash (raster content is runtime data), the block-root

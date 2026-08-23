@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "carbon.accordion",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Accordion — generated from contract carbon.accordion v0.2.0 † (41 code-only facts — see plugin report)",
+    "description": "Accordion — generated from contract carbon.accordion v0.2.0 † (42 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -667,9 +667,6 @@ const COMPONENTS = [
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/accordion/label-2/padding-right"
                       },
-                      "margins": {
-                        "left": 32
-                      },
                       "fillW": true
                     }
                   ],
@@ -833,9 +830,6 @@ const COMPONENTS = [
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/accordion/label-2/padding-right"
                       },
-                      "margins": {
-                        "left": 32
-                      },
                       "fillW": true
                     }
                   ],
@@ -998,9 +992,6 @@ const COMPONENTS = [
                         "minWidth": "imported/shared/size-0",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/accordion/label-2/padding-right"
-                      },
-                      "margins": {
-                        "left": 32
                       },
                       "fillW": true
                     }
@@ -1339,9 +1330,6 @@ const COMPONENTS = [
                         "minWidth": "imported/shared/size-0",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/accordion/label-2/padding-right"
-                      },
-                      "margins": {
-                        "left": 32
                       },
                       "fillW": true
                     }
@@ -1794,6 +1782,23 @@ const COMPONENTS = [
         "variants": {
           "count": 8,
           "of": 8
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "channel",
+        "channel": "margin-left",
+        "value": "32px",
+        "reason": "the margin-box wrapper is skipped — a FILL-sized child cannot be wrapped in a margin box without breaking the fill; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+        "variants": {
+          "count": 4,
+          "of": 8,
+          "names": [
+            "Align=Start, Size=Sm",
+            "Align=Start, Size=Md",
+            "Align=Start, Size=Lg",
+            "Align=Start, Size=Sm, State=Disabled"
+          ]
         }
       },
       {

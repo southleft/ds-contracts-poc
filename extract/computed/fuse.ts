@@ -2299,6 +2299,13 @@ export function applyMintToContract(
    *  `stateDeltas` = keys on which some state delta was observed at all
    *  (see MintPrep.inheritanceOnly / .inheritanceStateDeltas). */
   inheritance: { only: string[]; stateDeltas: string[] } = { only: [], stateDeltas: [] },
+  /** ANTD EXAM (W4): prepareMint's STATE-plane code-only residue
+   *  (`stateCodeOnly`) — a state delta whose value shape no mintable kind
+   *  accepts, a partial-coverage declared delta, a custom property. Folded
+   *  into `Part.codeOnly` below together with the state-plane overflow
+   *  bindings this function refuses, so the contract itself names every
+   *  state fact the capture saw and the grammar dropped. */
+  captureCodeOnly: CodeOnlyEntry[] = [],
 ): ApplyResult {
   const enriched = structuredClone(contract) as Contract & Record<string, unknown>;
   const overflowBindings: OverflowBinding[] = [];
@@ -2755,6 +2762,47 @@ export function applyMintToContract(
     if (existing.length > 0) target.tokensByProp = existing as never;
   }
 
+  // ANTD EXAM (W4) — THE STATE PLANE'S REFUSALS RIDE THE CONTRACT. Every
+  // state-plane binding refused above (overflowBindings with a `state`) and
+  // every state-plane code-only residue prepareMint named (captureCodeOnly)
+  // lands on its part as `Part.codeOnly`, value resolved to the minted
+  // literal where a leaf exists. Measured on the P2 exam's S1 case: the
+  // focus-visible `outline-width: 3px` on a nested part was refused by name
+  // ("v13 Part.states carries plain color-kind refs only on non-root parts")
+  // into enriched.extension.json and LEDGER.md — and `figma bundle`, which
+  // compiles codeOnlyFacts from the CONTRACT, never heard of it. The designer
+  // pasting the bundle saw a Checkbox with no focus ring and no receipt.
+  // Base-plane residue stays where it was (hundreds of per-part declared/
+  // custom-property lines a designer would not read); the state plane is the
+  // one whose silence costs a visible affordance.
+  {
+    const literalOf = (ref: string | undefined): string | undefined => {
+      if (!ref) return undefined;
+      const hit = mintStates.entries.find((e) => e.ref === ref) ?? mintBase.entries.find((e) => e.ref === ref);
+      return hit?.value;
+    };
+    const seen = new Set<string>();
+    const add = (partName: string, entry: { state?: string; channel: string; value: string; reason: string }) => {
+      const target = partByName.get(partName);
+      if (!target) return; // a computed-only part absent from the anatomy is already its own named refusal
+      const key = `${partName}|${entry.state ?? ''}|${entry.channel}|${entry.reason}`;
+      if (seen.has(key)) return;
+      seen.add(key);
+      (target.codeOnly ??= []).push(entry);
+    };
+    for (const o of overflowBindings) {
+      if (!o.state) continue;
+      add(o.part, { state: o.state, channel: o.channel, value: literalOf(o.ref) ?? o.ref ?? '', reason: o.refusal });
+    }
+    for (const c of captureCodeOnly) {
+      if (!c.state) continue;
+      add(c.part, { state: c.state, channel: c.channel, value: c.sample, reason: c.reason });
+    }
+    for (const target of partByName.values()) {
+      // plain string order, never localeCompare — the enriched contract is byte-pinned
+      if (target.codeOnly) target.codeOnly.sort((a, b) => { const ka = `${a.state}|${a.channel}|${a.reason}`; const kb = `${b.state}|${b.channel}|${b.reason}`; return ka < kb ? -1 : ka > kb ? 1 : 0; });
+    }
+  }
   return { enriched, overflowBindings, enrichmentNotes };
 }
 

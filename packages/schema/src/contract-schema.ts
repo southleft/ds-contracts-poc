@@ -1841,6 +1841,21 @@ export interface Part {
    *  drawn from the contract's declared `states`. Rendered as state-selector
    *  rules by the CSS emitters; declared-not-drawn on the canvas. */
   declaredStates?: Record<string, Record<string, string>>;
+  /** v18 (antd exam, W4) — CAPTURE-SIDE CODE-ONLY RECEIPTS on this part:
+   *  state-plane facts the computed capture OBSERVED and the contract grammar
+   *  could not hold (a focus-visible `outline-width` on a nested part — v13
+   *  Part.states carries plain color-kind refs only below the root; a state
+   *  delta whose value shape is outside every mintable kind; a state outside
+   *  the schema vocabulary). Until this field existed those refusals lived in
+   *  `enriched.extension.json` / `LEDGER.md` beside the capture and NOWHERE
+   *  the canvas ever reads: `figma bundle` compiles `codeOnlyFacts` from the
+   *  contract alone, so a designer pasting antd's Checkbox saw no trace that
+   *  its keyboard focus ring had been dropped. MEASURED, never hand-authored
+   *  (fuse.ts applyMintToContract writes it; promote preserves it); the
+   *  code emitters ignore it; the canvas emitter repeats every entry as a
+   *  `capture`-kind code-only fact (bundle JSON, plugin report, set plugin
+   *  data). A receipt, not a styling instruction — nothing reads it to draw. */
+  codeOnly?: Array<{ state?: string; channel: string; value: string; reason: string }>;
   /** v16 (root max-width round, task #37) — MEASURED sizing evidence, never
    *  hand-authored. TRUE when the CAPTURED element's used width stayed
    *  STRICTLY BELOW its captured `max-width` in every enumerated combo: the
@@ -2202,6 +2217,19 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     /** v15 (S4): per-state declared facts (state → channel → value). */
     declaredStates: z
       .record(z.string(), z.record(z.string(), DeclaredValueSchema))
+      .optional(),
+    /** v18 (antd exam, W4): capture-side code-only receipts — see the Part
+     *  interface. A receipt the canvas emitter repeats; nothing draws it. */
+    codeOnly: z
+      .array(
+        z.strictObject({
+          state: z.string().optional(),
+          channel: z.string().min(1),
+          value: z.string(),
+          reason: z.string().min(1),
+        }),
+      )
+      .min(1)
       .optional(),
     /** v16 (task #37): MEASURED sizing evidence — see the Part interface. */
     hugsBelowMaxWidth: z.boolean().optional(),

@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "astryx.slider",
     "version": "0.4.0",
     "anchorKey": null,
-    "description": "Slider — generated from contract astryx.slider v0.4.0 † (43 code-only facts — see plugin report)",
+    "description": "Slider — generated from contract astryx.slider v0.4.0 † (45 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -201,12 +201,6 @@ const COMPONENTS = [
                         "topRightRadius": "imported/shared/size-12",
                         "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
-                      },
-                      "margins": {
-                        "bottom": 4,
-                        "left": 0,
-                        "right": 0,
-                        "top": 4
                       },
                       "children": [
                         {
@@ -767,12 +761,6 @@ const COMPONENTS = [
                         "topRightRadius": "imported/shared/size-12",
                         "minHeight": "imported/shared/size-0",
                         "minWidth": "imported/shared/size-0"
-                      },
-                      "margins": {
-                        "bottom": 0,
-                        "left": 4,
-                        "right": 4,
-                        "top": 0
                       },
                       "children": [
                         {
@@ -1568,6 +1556,34 @@ const COMPONENTS = [
       },
       {
         "part": "tooltip",
+        "kind": "channel",
+        "channel": "margin-right/margin-left",
+        "value": "4px/4px",
+        "reason": "the margin-box wrapper is skipped — an out-of-flow child (overlay / inset / absolute) keeps its own placement lowering; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+        "variants": {
+          "count": 1,
+          "of": 6,
+          "names": [
+            "Orientation=Vertical, Value Display=Tooltip"
+          ]
+        }
+      },
+      {
+        "part": "tooltip",
+        "kind": "channel",
+        "channel": "margin-top/margin-bottom",
+        "value": "4px/4px",
+        "reason": "the margin-box wrapper is skipped — an out-of-flow child (overlay / inset / absolute) keeps its own placement lowering; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+        "variants": {
+          "count": 1,
+          "of": 6,
+          "names": [
+            "Orientation=Horizontal, Value Display=Tooltip"
+          ]
+        }
+      },
+      {
+        "part": "tooltip",
         "kind": "declared",
         "channel": "border-bottom-style",
         "value": "none",
@@ -2301,43 +2317,6 @@ function propagateOverflowVisible(childNode, parent) {
   }
 }
 
-// Round 5d: auto-layout has no per-child margin — a child carrying residual
-// margins gets its CSS MARGIN BOX as a fixed wrapper frame (clipsContent
-// false), the child placed at (left, top). Negative margins shrink the flow
-// box and let the glyph overhang — the exact CSS geometry (the Badge pip's
-// -2/-2/-8 is what keeps the real pill 20px tall). Out-of-flow children
-// (overlay / inset / absolute) and FILL-sized children keep their own
-// lowering.
-function applyMarginBox(parent, childNode, childSpec, registry) {
-  const m = childSpec.margins;
-  if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
-  try {
-    if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;
-  } catch (e) { degrade('FC-RT-MARGIN-BOX-SIZING-UNREADABLE', childNode, 'layout sizing could not be read before the margin box was applied; applied as if the child were not FILL-sized', e); }
-  const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
-  if (!t && !r && !b && !l) return;
-  const w = Math.max(childNode.width + l + r, 0.01);
-  const h = Math.max(childNode.height + t + b, 0.01);
-  const box = figma.createFrame();
-  box.name = childSpec.name + ' (margin box)';
-  box.fills = [];
-  box.clipsContent = false;
-  parent.insertChild(parent.children.indexOf(childNode), box);
-  box.resize(w, h);
-  box.appendChild(childNode);
-  childNode.x = l;
-  childNode.y = t;
-  // Wave B.4 / Polaris Button: a Show-bound child wrapped in a margin box
-  // must transfer the visible binding to the WRAPPER — hiding only the
-  // inner icon leaves the ~20px margin box in auto-layout (blank left gap).
-  if (childSpec.visibleProp && registry && registry.visibles) {
-    for (const vis of registry.visibles) {
-      if (vis.node === childNode) vis.node = box;
-    }
-    childNode.visible = true;
-  }
-}
-
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -2523,7 +2502,6 @@ async function buildNode(spec, registry) {
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
-    applyMarginBox(node, childNode, child, registry);
   }
   resizeOutOfFlow(node, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
@@ -2929,7 +2907,6 @@ async function amendSet(set, C) {
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
-    applyMarginBox(comp, childNode, childSpec, registry);
       }
   resizeOutOfFlow(comp, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
