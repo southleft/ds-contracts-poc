@@ -29,6 +29,10 @@ There's a second reason, and it's becoming the bigger one: **AI generation.** Wh
 
 ## How the two sides stay connected
 
+> The verb-by-verb version of this section — which file each hop reads and
+> writes, what it refuses by name, and three facts traced both ways — is
+> [docs/29 — How It Flows](29-how-it-flows.md).
+
 <svg id="contract-flow" viewBox="0 0 920 470" role="img" aria-label="Workflow diagram: the contract sits between the design surface and the code surface. Generation flows outward from the contract to both surfaces; changes on either surface flow back into the contract as promotions, and the contract regenerates the other side. A differ continuously compares all three." style="max-width:100%;height:auto;font-family:inherit">
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -205,4 +209,4 @@ Then prove the loop to yourself in about two minutes:
 4. Revert, or carry the change through — regenerate, sync the canvas, and watch it go green again.
 5. `npm run eval` — 225 deterministic checks that the machinery itself (detection, refusal, convergence, byte-identical regeneration) still holds.
 
-From there: [The Bridge](./00-the-bridge.md) for the narrative, [Architecture](./01-architecture.md) for the model, [Contract Specification](./02-contract-spec.md) when you're ready to write one. Testing the tool against your own library and planning to report what you find? [The Beta Tester Runbook](./28-beta-runbook.md) is the packaged version of that: three tracks, exact commands, the named limitations each will hit, and the issue forms.
+From there: [The Bridge](./00-the-bridge.md) for the narrative, [Architecture](./01-architecture.md) for the model, [How It Flows](./29-how-it-flows.md) for the mechanics of every hop, [Contract Specification](./02-contract-spec.md) when you're ready to write one. Testing the tool against your own library and planning to report what you find? [The Beta Tester Runbook](./28-beta-runbook.md) is the packaged version of that: three tracks, exact commands, the named limitations each will hit, and the issue forms.

@@ -335,6 +335,9 @@ real cost, it is human, and today it is unassisted.
   the path-C walkthrough: extract, reconcile, diagnose.
 - [docs/18 — User Flows](18-user-flows.md) — the same loop cut by
   *persona* (designer / engineer / lead), not by journey.
+- [docs/29 — How It Flows](29-how-it-flows.md) — the mechanics under every
+  path: the five hops, what each verb reads, writes and refuses, and how a
+  fact ends up carried, named, or refused — never silently lost.
 - [docs/24 — What Works](24-what-works.md) — the measured success side, every
   number carrying the artifact it was read from. Generated; `npm run
   capability:fresh` refuses it if it has gone stale.

@@ -3,10 +3,14 @@
  * pattern: every diagram is emitted twice (light + dark) at build and paired
  * on the page via themedImage(); no client JS is involved in theming.
  *
- * Four hand-drawn diagrams (prop lifecycle, session linking, receipts flow,
- * instrument relationships) plus one COMPUTED diagram: the dependency graph
- * rendered from the committed whole-kit capture (see how-replays.ts for the
- * data extraction — this module only draws what it is handed).
+ * Seven hand-drawn diagrams (prop lifecycle, session linking, receipts flow,
+ * instrument relationships, and the three "How it flows" figures — the hop
+ * chain, the disposition tree, the adjudication star — which are the
+ * build-time renderings of the ```mermaid fences in docs/29-how-it-flows.md,
+ * keyed by each fence's `%% id:` line) plus one COMPUTED diagram: the
+ * dependency graph rendered from the committed whole-kit capture (see
+ * how-replays.ts for the data extraction — this module only draws what it is
+ * handed).
  */
 
 export type Theme = 'light' | 'dark';
@@ -412,5 +416,141 @@ export function dependencyGraphSvg(theme: Theme, g: GraphData): string {
   parts.push(`<text class="lbl" x="${bandX[bandX.length - 1]}" y="40">leaf components</text>`);
   parts.push(`<text class="lbl2" x="${bandX[0]}" y="58">build order runs right → left: leaves first, composites after their children</text>`);
 
+  return parts.join('\n  ') + CLOSE;
+}
+
+// ---------------------------------------------------------------------------
+// 6 · How it flows — the hop chain (docs/29 fence `%% id: flow-chain`)
+// ---------------------------------------------------------------------------
+
+export function flowChainSvg(theme: Theme): string {
+  const parts: string[] = [
+    svgOpen(
+      theme,
+      960,
+      650,
+      'The five hops, one shape: code source reaches the contract through hop 1 (extract, extract --computed, promote); the contract reaches generated code through hop 3 (generate, atomic per contract) and reaches the canvas through hop 2 (figma bundle to a CONTRACTS-BUNDLE, then the plugin plans every contract and a human clicks Apply, stamping the set ds_contracts/*); the canvas comes back through hop 4 (the Send tab or REST mapper writes a dump with _provenance, _degradations and _variables; propose turns it into a CONTRACT-PROPOSAL envelope with notes, unbound values and minted imported.* tokens) and hop 5 (a PR, figma receive --apply, or copy) lands the proposal on the contract. The contract is the only file every hop reads or writes.',
+    ),
+  ];
+  // Code side
+  parts.push(box(20, 60, 240, 90, 'Code source', ['tsx · css · custom-elements manifest', 'hop 1 reads; nothing else does']));
+  parts.push(box(20, 400, 240, 100, 'Generated code', ['.tsx · .module.css · .stories.tsx', 'index.ts · tokens.css', 'hop 3 writes; never hand-edited']));
+  // The contract
+  parts.push(box(370, 200, 220, 150, 'THE CONTRACT', ['contracts/*.contract.json', '+ tokens (DTCG)', 'in the repo · PR-gated', 'the one file every hop touches'], true));
+  // Canvas side
+  parts.push(box(700, 40, 240, 80, 'CONTRACTS-BUNDLE', ['tokenSet · contracts (raw bytes)', 'codeOnlyFacts']));
+  parts.push(box(700, 160, 240, 90, 'Component set', ['+ variable collections', 'stamped ds_contracts/*']));
+  parts.push(box(700, 300, 240, 80, 'Dump JSON', ['_provenance · _degradations', '_variables']));
+  parts.push(box(700, 430, 240, 90, 'CONTRACT-PROPOSAL', ['proposed contract · notes · unbound', 'minted imported.* · provenance']));
+  // hop 1: code → contract
+  parts.push(`<path class="flow" d="M 260 105 C 320 105, 320 240, 365 240" marker-end="url(#arrow)"/>`);
+  parts.push(`<text class="lbl" x="300" y="168" text-anchor="end">hop 1</text>`);
+  // hop 3: contract → generated code
+  parts.push(`<path class="flow" d="M 365 310 C 320 310, 320 450, 265 450" marker-end="url(#arrow)"/>`);
+  parts.push(`<text class="lbl" x="300" y="400" text-anchor="end">hop 3</text>`);
+  // hop 2: contract → bundle → set
+  parts.push(`<path class="flow" d="M 590 240 C 650 240, 640 80, 695 80" marker-end="url(#arrow)"/>`);
+  parts.push(`<text class="lbl" x="662" y="150">hop 2</text>`);
+  parts.push(`<line class="flow" x1="820" y1="120" x2="820" y2="155" marker-end="url(#arrow)"/>`);
+  parts.push(`<text class="lbl" x="828" y="143">Apply — a human clicks</text>`);
+  // hop 4: set → dump → proposal
+  parts.push(`<line class="flow" x1="820" y1="250" x2="820" y2="295" marker-end="url(#arrow)"/>`);
+  parts.push(`<text class="lbl" x="828" y="278">hop 4 · dump</text>`);
+  parts.push(`<line class="flow" x1="820" y1="380" x2="820" y2="425" marker-end="url(#arrow)"/>`);
+  parts.push(`<text class="lbl" x="828" y="408">propose</text>`);
+  // hop 5: proposal → contract
+  parts.push(`<path class="flow" d="M 700 475 C 640 475, 640 310, 595 310" marker-end="url(#arrow)"/>`);
+  parts.push(`<text class="lbl" x="662" y="400">hop 5</text>`);
+  // Legend — one line per hop, the verbs as the CLI spells them
+  const legend = [
+    'hop 1  code → contract   ds-contracts extract · extract --computed · promote   (overflow → *.extension.json sidecar, with reasons)',
+    'hop 2  contract → canvas   figma bundle → CONTRACTS-BUNDLE → plugin Build tab / figma push / figma publish → plan all-or-nothing → Apply',
+    'hop 3  contract → code   generate --target react | html | wc | …   (atomic per contract: a refused contract leaves no file)',
+    'hop 4  canvas → proposal   Send tab or extract:figma:rest writes a dump (grammar 1.31) → propose by fixed inversion rules → CONTRACT-PROPOSAL',
+    'hop 5  proposal → contract   a pull request · figma receive --apply (without --apply: only .proposals/<id>.proposal.json) · copy the JSON',
+  ];
+  legend.forEach((line, i) => parts.push(`<text class="lbl2 mono" x="20" y="${562 + i * 17}">${line.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')}</text>`));
+  return parts.join('\n  ') + CLOSE;
+}
+
+// ---------------------------------------------------------------------------
+// 7 · How it flows — the disposition tree (docs/29 fence `%% id: disposition`)
+// ---------------------------------------------------------------------------
+
+export function dispositionSvg(theme: Theme): string {
+  const parts: string[] = [
+    svgOpen(
+      theme,
+      960,
+      540,
+      'Disposition of a fact crossing a hop: if it is outside the contract vocabulary it is NAMED in a sidecar or note (extension sidecar, proposal notes, unbound rows, dump degradations). If it is inside the vocabulary and the target surface has a field for it, it is CARRIED. If the surface has no field but a named rule lowers it, it is LOWERED and NAMED as a code-only fact or CANVAS-ABSENT row. If carrying it would be a guess, it is REFUSED BY NAME with a non-zero exit and nothing written for that contract. A fact that is neither carried nor named is a hard failure in the hand-authored conformance manifests (82 CSS/DOM cases, 154 canvas cases).',
+    ),
+  ];
+  parts.push(box(330, 20, 300, 50, 'a fact about to cross a hop', []));
+  parts.push(box(330, 110, 300, 60, 'inside the contract vocabulary?', ['the schema is the referee on every door']));
+  parts.push(`<line class="flow" x1="480" y1="70" x2="480" y2="105" marker-end="url(#arrow)"/>`);
+  // no → NAMED
+  parts.push(box(660, 100, 280, 90, 'NAMED', ['*.extension.json · proposal notes[]', 'unbound[] · dump _degradations']));
+  parts.push(`<line class="flow" x1="630" y1="140" x2="655" y2="140" marker-end="url(#arrow)"/>`);
+  parts.push(`<text class="lbl" x="642" y="130" text-anchor="middle">no</text>`);
+  // yes → field?
+  parts.push(box(330, 220, 300, 60, 'does the target surface have a field?', ['canvas field · code construct']));
+  parts.push(`<line class="flow" x1="480" y1="170" x2="480" y2="215" marker-end="url(#arrow)"/>`);
+  parts.push(`<text class="lbl" x="490" y="198">yes</text>`);
+  // outcomes
+  parts.push(box(20, 340, 280, 100, 'CARRIED', ['a canvas field · a bound variable', 'a code construct']));
+  parts.push(box(340, 340, 280, 100, 'LOWERED + NAMED', ['codeOnlyFact — part · kind · channel', 'value · reason · variants', 'or a CANVAS-ABSENT row']));
+  parts.push(box(660, 340, 280, 100, 'REFUSED BY NAME', ['exit ≠ 0 · nothing written for that contract', 'FC-* / EXACT_* code or a plain sentence']));
+  parts.push(`<path class="flow" d="M 400 280 C 400 310, 160 300, 160 335" marker-end="url(#arrow)"/>`);
+  parts.push(`<text class="lbl" x="250" y="300" text-anchor="end">yes</text>`);
+  parts.push(`<line class="flow" x1="480" y1="280" x2="480" y2="335" marker-end="url(#arrow)"/>`);
+  parts.push(`<text class="lbl2" x="490" y="300">no — but a named rule</text>`);
+  parts.push(`<text class="lbl2" x="490" y="315">lowers it</text>`);
+  parts.push(`<path class="flow bad" d="M 560 280 C 560 310, 800 300, 800 335" marker-end="url(#arrowBad)"/>`);
+  parts.push(`<text class="lbl2 badt" x="700" y="300">no — and carrying it</text>`);
+  parts.push(`<text class="lbl2 badt" x="700" y="315">would be a guess</text>`);
+  // the hard-failure denominator
+  parts.push(box(180, 470, 600, 60, 'neither carried nor named = HARD FAILURE', ['conformance/MANIFEST.json (82 cases) · extract/figma/conformance/MANIFEST.json (154 cases) — hand-authored denominators']));
+  parts.push(`<line class="back" x1="160" y1="440" x2="300" y2="465" marker-end="url(#arrowBack)"/>`);
+  parts.push(`<line class="back" x1="480" y1="440" x2="480" y2="465" marker-end="url(#arrowBack)"/>`);
+  parts.push(`<line class="back" x1="800" y1="440" x2="660" y2="465" marker-end="url(#arrowBack)"/>`);
+  return parts.join('\n  ') + CLOSE;
+}
+
+// ---------------------------------------------------------------------------
+// 8 · How it flows — the adjudication star (docs/29 fence `%% id: adjudication-star`)
+// ---------------------------------------------------------------------------
+
+export function adjudicationStarSvg(theme: Theme): string {
+  const parts: string[] = [
+    svgOpen(
+      theme,
+      960,
+      340,
+      'The adjudication star: every instrument compares ONE surface to the contract and never two surfaces to each other. The code surface is compared by parity and diff/diagnose; the canvas surface by parity, the plugin Changes tab and the sync ledger; the design dump by extract --reconcile against the code extraction; the conformance manifests compare engine behaviour to a hand-authored denominator. The line between the code surface and the canvas surface is crossed out: never side-to-side. A change to the contract is a pull request merged by a human.',
+    ),
+  ];
+  parts.push(box(380, 130, 200, 80, 'THE CONTRACT', ['contract.json — one arbiter'], true));
+  parts.push(box(20, 40, 220, 70, 'Code surface', ['generated + hand-edited code']));
+  parts.push(box(720, 40, 220, 70, 'Canvas surface', ['the live component set']));
+  parts.push(box(20, 230, 220, 70, 'Conformance manifests', ['hand-authored denominators']));
+  parts.push(box(720, 230, 220, 70, 'Design dump', ['hop-4 output, vs code extraction']));
+  // dashed compare lines → contract
+  parts.push(`<line class="back" x1="240" y1="85" x2="375" y2="150" marker-end="url(#arrowBack)"/>`);
+  parts.push(`<text class="lbl2" x="250" y="100">parity · diff / diagnose</text>`);
+  parts.push(`<line class="back" x1="720" y1="85" x2="585" y2="150" marker-end="url(#arrowBack)"/>`);
+  parts.push(`<text class="lbl2" x="710" y="100" text-anchor="end">parity · Changes tab · ledger</text>`);
+  parts.push(`<line class="back" x1="240" y1="255" x2="375" y2="195" marker-end="url(#arrowBack)"/>`);
+  parts.push(`<text class="lbl2" x="250" y="252">conformance · closure:check</text>`);
+  parts.push(`<line class="back" x1="720" y1="255" x2="585" y2="195" marker-end="url(#arrowBack)"/>`);
+  parts.push(`<text class="lbl2" x="710" y="252" text-anchor="end">extract --reconcile</text>`);
+  // never side-to-side
+  parts.push(`<line class="back bad" x1="240" y1="55" x2="430" y2="55"/>`);
+  parts.push(`<line class="back bad" x1="530" y1="55" x2="720" y2="55"/>`);
+  parts.push(`<text class="lbl badt" x="480" y="59" text-anchor="middle">never side-to-side</text>`);
+  // the human
+  parts.push(`<text class="lbl" x="480" y="240" text-anchor="middle">a change to the contract is a pull request —</text>`);
+  parts.push(`<text class="lbl" x="480" y="256" text-anchor="middle">merged by a human, or not merged at all</text>`);
+  parts.push(`<text class="lbl2" x="480" y="322" text-anchor="middle">six instruments say which surface drifted, and in which direction; none of them picks a winner</text>`);
   return parts.join('\n  ') + CLOSE;
 }

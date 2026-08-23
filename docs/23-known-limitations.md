@@ -1180,6 +1180,41 @@ the committed contract is post-promotion curated), and it owes a gate that
 runs the promote step, not just the emit step. The tree was restored from
 git after the measurement; nothing from that run is in this round's patch.
 
+## B.31 `anatomy.root.attrs` bindings are not named on the canvas
+
+Found 2026-08-23 while writing [docs/29 — How It Flows](29-how-it-flows.md)
+(worked example E3). A contract prop bound to a root attribute —
+`contracts/top-nav-item.contract.json` `href` with
+`anatomy.root.attrs = {href: "{href}"}` — reaches the canvas only as the
+**value** of an unbound TEXT component property (`Href`, default `#`, via
+`textOnlyProps` in `core/emit-figma-script.ts`). The **binding** — "this
+property is the root element's `href`" — is not a canvas field, and it is not
+a code-only fact either: `grep -n attrs core/emit-figma-script.ts` hits only
+the `placeholder` attribute. On hop 4 the binding is never re-proposed; the
+round-trip comparator files `element/attrs` under CANVAS-ABSENT
+(`extract/figma/roundtrip.ts`), so the shipping round trip sees it, but a set
+built by the plugin carries no receipt of it. **What you would observe:** a
+designer reading the set cannot tell that `Href` is an attribute rather than
+visible text. **What it would take:** one more `codeOnlyFacts` kind
+(`attr`) emitted per bound attribute, and the same row in the proposal
+notes when a TEXT definition with no text-node reference is met on hop 4 —
+the BOOLEAN twin already has that branch (`FC-DUMP-PROPOSE-UNBOUND-BOOLEAN`);
+the TEXT case is unverified by execution and is not claimed either way.
+
+## B.32 A native checkable part compiles to no node, and is not receipted per contract
+
+Same date, same source. `input[type=checkbox|radio]` parts are code
+semantics — the presentational box and glyphs are the visual — so the canvas
+emitter draws nothing for them (`isNativeCheckablePart`,
+`packages/schema/src/contract-schema.ts`; the filter in
+`core/emit-figma-script.ts`). That is the right lowering, and it is documented
+in the emitter, but it is not a `codeOnlyFacts` row: the bundle, the plugin run
+report and the set's `ds_contracts/codeOnlyFacts` stamp are all silent about
+the part. **What you would observe:** Checkbox's and Radio's receipts read as
+if every part crossed. **What it would take:** one `declared`-kind fact per
+native checkable part with the reason the emitter already states in its
+comment, and a pin in `core/code-only-facts-check.ts`.
+
 ---
 
 # §C — THE MEASURED PRICE OF WHAT WORKS
@@ -2164,9 +2199,9 @@ dup-key / `__proto__` forms.
 `childStubs` + `mintedTokens` in the export — *"this pin fails the build if
 either payload is ever dropped again."*
 
-**A named limit that came with it:** the playground's recommended REST import
-route is a v1.5 mapper against a v1.13 plugin dump — eight revisions of channels
-it cannot see (`strokeAlign`, wrap, constraints, imageFill, textOverrides,
+**A named limit that came with it (as of that date):** the playground's
+recommended REST import route was a v1.5 mapper against a v1.13 plugin dump —
+eight revisions of channels it could not see (`strokeAlign`, wrap, constraints, imageFill, textOverrides,
 fixedSize, multi-mode values, non-shape abs). Those were previously silent while
 the UI said "values still come through exactly". The mapper now stamps
 `_provenance.captureGaps` with 8 named entries and their consequences (*"an
