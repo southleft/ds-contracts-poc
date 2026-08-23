@@ -20,6 +20,7 @@ const DEFAULT_OUTPUT = path.join(ROOT, "dist", "release-candidate");
 const PACKAGES = [
   {
     directory: "packages/schema",
+    // Reviewed 2026-08-23 for schema 17: dist/migrate.* (the v16 → v17 codemod) ships.
     expected: [
       "README.md",
       "contract.schema.json",
@@ -27,6 +28,8 @@ const PACKAGES = [
       "dist/contract-schema.js",
       "dist/index.d.ts",
       "dist/index.js",
+      "dist/migrate.d.ts",
+      "dist/migrate.js",
       "dist/validate.d.ts",
       "dist/validate.js",
       "package.json",
