@@ -2143,6 +2143,52 @@
       "status": "green",
       "observed": "RE-RECORDED red -> green (r10, 2026-08-23, core/propose-figma.ts + core/emit-figma-script.ts). The native SLOT branch of buildPart now reads the primary-axis FILL through primaryAxisGrow — the ONE rule invertLayout (FRAME / spacer / slot-wrapper parts) reads, extracted rather than copied — so a SLOT that FILLS along its ROW parent's primary axis in every occurrence carries `layout.grow: true` on the slot part (the FRAME carriage, canvas conformance layout-fill-width-row). emit-figma-script's slot spec was the one spec built without `grow`; it now lowers a slot part's layout.grow to layoutSizingHorizontal FILL like every other part class, so the carried fact survives regeneration. Was: SILENT — the SLOT branch never called invertLayout, so the FILL reached neither `layout.grow` nor a note (the REST mapper already emitted fillWidth from layoutSizingHorizontal FILL on the SLOT document; the silence was propose-side).",
       "exam": "phase-2 FIGMA-DS exam RE-MEASURED 2026-08-23 (parity/receipts/phase-2/FIGMA-DS-EXAM.md) — r9 exam 2 finding, not fixed there"
+    },
+    {
+      "id": "slot-interior-auto-layout",
+      "construct": "a native SLOT child drawn as a padded COLUMN with item spacing (layoutMode VERTICAL, primary CENTER, counter MAX, itemSpacing 8, padding 12/16) and FILL-width under a FIXED-width ROW parent, in EVERY variant (Phase 2 exam: the Card Content slot's shape — docs/23 §B.24)",
+      "expect": "CARRIED",
+      "why": "a SLOT node on the canvas IS a frame with auto-layout (dump v1.31 captures its `layout` like any frame's; REST serializes layoutMode/alignment/padding/itemSpacing on the SLOT document), and its interior layout is the layout the consumer's content renders in — the same fact a FRAME part carries as `layout.direction/justify/align` (invertLayout) with gap and padding on the token channels (invertNodeTokens → mintUnbound). The schema hosts `layout` and `tokens` on a slot part (42 first-party slot parts carry them — ds.empty-state actions, ds.accordion-item contentArea, ds.tab-list tabs), emit-figma-script builds the slot spec with layoutSpec(part) + applyStyling (applyFrameSpec writes layoutMode/primary/counter/padding/itemSpacing onto the created slot), and packages/core/src/css.ts writes flex-direction/justify-content/align-items/gap/padding for any part with them — so the disposition is CARRIED, beside the r10 `layout.grow`",
+      "check": {
+        "carried": [
+          "\"slot\"",
+          "\"direction\":\"column\"",
+          "\"justify\":\"center\"",
+          "\"align\":\"end\"",
+          "\"grow\":true",
+          "\"gap\":\"\\{imported\\.case\\.s\\.gap\\}\"",
+          "\"\\$value\":\"8px\"",
+          "\"padding-inline\":\"\\{imported\\.case\\.s\\.padding-inline\\}\"",
+          "\"padding-block\":\"\\{imported\\.",
+          "\"\\$value\":\"12px\""
+        ]
+      },
+      "status": "green",
+      "observed": "RE-RECORDED red -> green (r11, 2026-08-23, core/propose-figma.ts). The native SLOT branch of buildPart now walks the SAME doors every FRAME and swap-convention slot-wrapper part walks — invertNodeTokens (gap / padding and the box channels), invertLayout (direction / justify / align / wrap, with r10's grow computed inside it by primaryAxisGrow) and invertLayoutByProp (the per-variant split) — so the slot part carries layout {direction: column, justify: center, align: end, grow: true} with gap / padding-inline / padding-block minted on its token channels. A slot with no drawn children is a container by definition: invertLayout's justify/align and the gap mint read m.type === 'SLOT', not the drawn child count. Was: SILENT — the branch computed primaryAxisGrow alone and returned (docs/23 §B.24; exact-proposal:check §49 pinned `layout` as exactly {\"grow\":true}).",
+      "exam": "phase-2 FIGMA-DS exam (parity/receipts/phase-2/FIGMA-DS-EXAM.md) — the Card Content slot; named in docs/23 §B.24 after r10, not fixed there"
+    },
+    {
+      "id": "rest-slot-interior-auto-layout",
+      "construct": "REST: a native SLOT document drawn layoutMode VERTICAL / primaryAxisAlignItems CENTER / counterAxisAlignItems MAX / itemSpacing 8 / padding 12,16 with layoutSizingHorizontal FILL under a FIXED-width ROW root (the REST twin of slot-interior-auto-layout, mapped through extract/figma/rest/map.ts)",
+      "expect": "CARRIED",
+      "why": "a SLOT node on the canvas IS a frame with auto-layout (dump v1.31 captures its `layout` like any frame's; REST serializes layoutMode/alignment/padding/itemSpacing on the SLOT document), and its interior layout is the layout the consumer's content renders in — the same fact a FRAME part carries as `layout.direction/justify/align` (invertLayout) with gap and padding on the token channels (invertNodeTokens → mintUnbound). The schema hosts `layout` and `tokens` on a slot part (42 first-party slot parts carry them — ds.empty-state actions, ds.accordion-item contentArea, ds.tab-list tabs), emit-figma-script builds the slot spec with layoutSpec(part) + applyStyling (applyFrameSpec writes layoutMode/primary/counter/padding/itemSpacing onto the created slot), and packages/core/src/css.ts writes flex-direction/justify-content/align-items/gap/padding for any part with them — so the disposition is CARRIED, beside the r10 `layout.grow`",
+      "check": {
+        "carried": [
+          "\"slot\"",
+          "\"direction\":\"column\"",
+          "\"justify\":\"center\"",
+          "\"align\":\"end\"",
+          "\"grow\":true",
+          "\"gap\":\"\\{imported\\.case\\.s\\.gap\\}\"",
+          "\"\\$value\":\"8px\"",
+          "\"padding-inline\":\"\\{imported\\.case\\.s\\.padding-inline\\}\"",
+          "\"padding-block\":\"\\{imported\\.",
+          "\"\\$value\":\"12px\""
+        ]
+      },
+      "status": "green",
+      "observed": "RE-RECORDED red -> green (r11, 2026-08-23, core/propose-figma.ts). Same fix as slot-interior-auto-layout; the REST mapper already emitted the SLOT document's layout and fillWidth, the silence was propose-side. This twin's root draws 12px inline padding and its label 12px type beside the slot's 12px block padding, so padding-block rides the shared-value mint ({imported.shared.size-12}) rather than a slot-named one — the probe pins the channel, not the mint spelling. Was: SILENT — the native SLOT branch computed primaryAxisGrow alone and returned (docs/23 §B.24).",
+      "exam": "phase-2 FIGMA-DS exam (parity/receipts/phase-2/FIGMA-DS-EXAM.md) — the Card Content slot; named in docs/23 §B.24 after r10, not fixed there"
     }
   ]
 }

@@ -481,7 +481,7 @@ None of the three steps rewrites `renders/FIDELITY.md`, `renders/fidelity.json` 
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | fidelity table |
 | `examples/untitled-ui/renders/FIDELITY.md` | `3b0532cd2de8` | 4,242 | fidelity method |
 | `examples/untitled-ui/storybook/contracts/` | `3e7f9bd2b2c0` | 131,804 | proposed contracts (30 files) |
-| `extract/figma/conformance/MANIFEST.json` | `ae03f5783d7f` | 112,058 | conformance denominator |
+| `extract/figma/conformance/MANIFEST.json` | `b17a451f6eb3` | 117,548 | conformance denominator |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | round-trip facts |
 
 Same bytes in, same file out: this build reads no clock, no git state and no environment, and sorts every collection before rendering.

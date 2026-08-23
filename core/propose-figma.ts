@@ -2386,7 +2386,10 @@ function invertNodeTokens(
     // the FIRST variant's child count let a set whose default variant has a
     // single child (Badge base Icon=False) drop every other variant's
     // itemSpacing with no receipt (untitled-ui round 2, style-channel-dropped).
-    m.occ.some((o) => (o.node.children?.length ?? 0) > 1) &&
+    // r11: a native SLOT's itemSpacing is a rendered fact the moment the
+    // consumer drops two children in — the drawn child count is not the
+    // denominator there (canvas conformance slot-interior-auto-layout).
+    (m.type === 'SLOT' || m.occ.some((o) => (o.node.children?.length ?? 0) > 1)) &&
     m.occ.some((o) => (o.node.layout?.spacing ?? 0) !== 0)
   ) {
     const spacings = m.occ.map((o) => o.node.layout?.spacing ?? 0);
@@ -5501,7 +5504,11 @@ function invertLayout(
     return gridOut;
   }
 
-  const hasChildren = m.children.length > 0;
+  // r11: a native SLOT is a container BY DEFINITION — its children are the
+  // consumer's, so its interior justify/align are facts even when no
+  // design-time content is drawn (the exam's empty Card Content slot). Read
+  // through the node class, not the drawn child count.
+  const hasChildren = m.children.length > 0 || m.type === 'SLOT';
   // P21 overlap collections (AvatarGroup shape): negative itemSpacing in
   // EVERY variant means the children OVERLAP — the existing `layout.overlap`
   // vocabulary, whose shipped projection (ds.avatar-group owner-precedent:
@@ -7245,27 +7252,43 @@ function buildPart(
       );
     }
     part.slot = nativeSlot;
-    // r10 (canvas conformance slot-primary-axis-fill + rest-slot-primary-
-    // axis-fill): the PRIMARY-axis half of the slot's FILL is `layout.grow`
-    // — the rule every FRAME child inverts through, read from the SAME
-    // implementation (primaryAxisGrow), never a second copy. This branch
-    // never computed it, so the Card:Variant=Default Image's FILL-width under
-    // its FIXED-width ROW reached neither the contract nor a note; the FRAME
-    // branch carries grow first and the cross-axis doors below assume it
-    // (crossAxisFillByProp's receipt says "`layout.grow` carries the ROW
-    // plane(s)" — on this branch that sentence used to be untrue). The
-    // slot's own interior auto-layout (direction/justify/align) is NOT
-    // inverted here — a separate, still-unnamed fact.
-    const grow = primaryAxisGrow(m, parentMode);
-    if (grow) part.layout = { grow };
+    // r11 (canvas conformance slot-interior-auto-layout + rest-slot-
+    // interior-auto-layout; docs/23 §B.24 → §D.31): a SLOT node IS a frame with
+    // auto-layout, and its interior layout is the layout the consumer's
+    // content renders in. It inverts through the SAME doors every FRAME and
+    // swap-convention slot-wrapper part walks — invertNodeTokens (gap /
+    // padding and the box channels, minted or bound), invertLayout
+    // (direction / justify / align / wrap, with r10's primary-axis `grow`
+    // computed inside it by primaryAxisGrow — one rule, one implementation)
+    // and invertLayoutByProp (the per-variant split) — never a second copy
+    // of any rule. Until r11 this branch computed the grow alone and
+    // returned, so the exam's Card Content slot (a padded COLUMN with item
+    // spacing) reached neither the contract nor a note. A slot with no
+    // drawn children is still a container (its children are the consumer's):
+    // invertLayout's justify/align and the gap mint read that through
+    // m.type, not the drawn child count.
+    const slotByProp: ByPropCollector = { map: {} };
+    const slotDeclared: Record<string, string> = {};
+    const slotTokens = invertNodeTokens(m, false, ctx, where, slotByProp, part, slotDeclared);
+    if (Object.keys(slotDeclared).length > 0) {
+      part.declared = { ...(part.declared as Record<string, string> | undefined), ...slotDeclared };
+    }
+    attachByProp(part, slotByProp);
+    const slotLayout = invertLayout(m, false, parentMode, ctx, where);
+    if (slotLayout) part.layout = slotLayout;
+    applyLayoutSplit(part, invertLayoutByProp(m, ctx, where));
     // dump v1.31 — a native SLOT's cross-axis FILL had NO door on this branch
     // (the FRAME branch walks both; this one returned first), so the Card
     // Inline Image's FILL-height under its ROW-variant Container was silent
     // (canvas conformance layout-fill-height-parent-mode-by-variant). Same
-    // two doors, same order as the FRAME branch.
+    // two doors, same order as the FRAME branch (r9); the grow they assume
+    // is carried by invertLayout above (r10).
     crossAxisFillByProp(m, parentMode, part, ctx, where);
     carryCrossAxisFill(m, parentMode, part, ctx, where);
+    invertNodeOpacity(m, part, slotTokens, ctx, where);
+    invertNodeEffects(m, slotTokens, ctx, where);
     nameFixedChildGeometry(m, ctx, where); // FC-GEOMETRY-EXCLUDED receipt (Phase 2 exam: Card Inline Image SLOT 308px)
+    attachTokens(ctx, part, slotTokens);
     // Same visibility conventions as every other slot path: the "Show X"
     // convention marks the part optional; any other BOOLEAN visibility
     // binding is a real boolean prop driving the part.
