@@ -220,7 +220,7 @@ their component-property overrides.
   pipeline never opened still counts against it. 104 components across eight
   libraries and six styling architectures: 86.1% cell-weighted over 583,950
   cells, 52 of 104 at ≥90%, 81 of 104 at ≥80%. Every one of the 104 is listed
-  worst-first in [24 §3.1](24-what-works.md) — the worst is 69.8%.
+  worst-first in [24 §3.1](24-what-works.md) — the worst is 50.0%.
 - **What it costs** ([23](23-known-limitations.md)): hours of expert
   configuration per library (below), and breadth — see the coverage bullet.
 - **The STOP is the design, not friction.** The drafted capture config
