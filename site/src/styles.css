@@ -795,6 +795,28 @@ tr:last-child td {
   .diagram--flow img {
     min-width: 720px;
   }
+
+  /* The wide figures and code blocks scroll inside their own container at
+     phone widths, but overlay scrollbars stay invisible until touched, so
+     the cut-off right edge read as clipped, not scrollable (2026-08-23
+     review frame: flow-390 diagram cut mid-box, five-hops pre truncated).
+     Keep a thin scrollbar visible as the affordance. */
+  .diagram--flow,
+  .code-block {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .diagram--flow::-webkit-scrollbar,
+  .code-block::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .diagram--flow::-webkit-scrollbar-thumb,
+  .code-block::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+  }
 }
 
 .section-note {

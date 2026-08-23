@@ -151,6 +151,19 @@ textarea,
 
   .topbar {
     overflow-x: auto;
+    /* The bar scrolls sideways by design (see .topbar__link above); keep a
+       thin scrollbar visible so the off-screen links read as reachable. */
+    scrollbar-width: thin;
+    scrollbar-color: var(--pg-border) transparent;
+  }
+
+  .topbar::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .topbar::-webkit-scrollbar-thumb {
+    background: var(--pg-border);
+    border-radius: 2px;
   }
 }
 
@@ -2726,8 +2739,27 @@ label {
   min-width: 140px;
 }
 
+/* Identifiers must not break mid-word ("poin ter", "flowbite.toggl
+   eswitch" — 2026-08-23 390px review frame): mono cells opt back out of the
+   td's overflow-wrap and the wrap scrolls instead, with a visible thin
+   scrollbar as the affordance. Prose cells (the REASON column) keep
+   wrapping. */
 .flow__table .flow__mono {
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+}
+
+.flow__table-wrap {
+  scrollbar-width: thin;
+  scrollbar-color: var(--pg-border) transparent;
+}
+
+.flow__table-wrap::-webkit-scrollbar {
+  height: 6px;
+}
+
+.flow__table-wrap::-webkit-scrollbar-thumb {
+  background: var(--pg-border);
+  border-radius: 3px;
 }
 
 .flow__table th {

@@ -197,7 +197,7 @@ export const FIGMA_TO_CODE: Tour<FigmaToCodeStep> = {
       title: 'Exact refuses, by code',
       hop: 'hop 4',
       lead:
-        'The ToggleSwitch set’s propertyDefinitions were deleted in memory (the fixture on disk is untouched) and exact projection was asked again. The refusal carries one of the EXACT_* codes from accuracy/grammar.json, printed verbatim below. Nothing was proposed.',
+        'The ToggleSwitch set’s propertyDefinitions were deleted in memory (the fixture on disk is untouched) and exact projection was asked again. The refusal below is printed verbatim: EXACT_DEFINITIONS_MISSING, one of the 13 EXACT_* codes receipted in accuracy/grammar.json. (Exact proposal has one more refusal outside that receipt — EXACT_SEMANTIC_PROJECTION_AMBIGUOUS, thrown by core/propose-figma.ts when promoting a variant axis to semantics would change the variant projection.) Nothing was proposed.',
     },
   ],
 };

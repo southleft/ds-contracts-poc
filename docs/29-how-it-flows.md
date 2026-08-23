@@ -170,7 +170,7 @@ Use these five names everywhere. "Sync" is not one of them.
 | 1 | `ds-contracts extract --computed --config <capture.json> [--harness <dir>] [--out <dir>]` (`cli.ts:64-65`) | capture config + a sandbox with the library installed + Chromium | `extract/computed/out/<component>/` (capture, fuse, replay, scorecard) + `*.extension.json` — every captured fact the vocabulary refuses, with its reason ([16 — The Sync Boundary](16-sync-boundary.md)) | exit 3 when playwright-core / Chromium is missing; non-carryable transforms refused `pseudo-decor-outside-grammar` (`extract/computed/anatomy.ts:2281`) |
 | 1 | `ds-contracts promote --config <ds-library.json>` (`cli.ts:50-53`) | enriched contracts + minted tree | promoted contracts, `*-minted.dtcg.json` (source-aliased), `*.anchors.json` | the WHOLE promotion if any `{imported.*}` ref or alias fails to resolve (`packages/cli/src/promote.ts:28-29`) |
 | 2 | `ds-contracts figma bundle <contracts..> --out <file> --tokens <base[,minted]> \| <dir> \| slot=file,… [--modes] [--name] [--icons]` | contract files as RAW bytes + token set + icon SVGs | ONE `CONTRACTS-BUNDLE` JSON `{type, version: 1, tokenSet, icons?, contracts, codeOnlyFacts}` (`packages/cli/src/commands/figma.ts:639-646`); stdout lists every code-only fact per contract | missing provenance (`figma.ts:387-391`); drawable-empty anatomy (`:393`); any contract that does not compile against this token set — ONE list, nothing written (`:617-618`, quoted in §4.3) |
-| 2 | plugin **Build** tab (paste) · `figma push <bundle> --code <CODE>` · `figma claim-channel` + `figma publish` → **Changes** tab "Check for updates" → **Apply selected** | bundle | component sets + variable collections; each set stamped `ds_contracts/{contractId, specHash, version, canvasFingerprint, canvasSnapshot, canvasSetSnapshot, codeOnlyFacts, semantics}` (`figma-sync/plugin/code.js:496-611` reads them back) | `planGenerate` validates every contract; all-or-nothing (`entry.ts:919-921`, quoted in §4.3) |
+| 2 | plugin **Build** tab (paste) · `figma push <bundle> --code <CODE>` · `figma claim-channel` + `figma publish` → **Changes** tab "Check for updates" → **Apply selected** | bundle | component sets + variable collections; each set stamped `ds_contracts/{contractId, specHash, version, canvasFingerprint, canvasSnapshot, canvasSetSnapshot, codeOnlyFacts, semantics}` (`figma-sync/plugin/code.js:496-611` reads them back) | `planGenerate` validates every contract; all-or-nothing (`entry.ts:922`, quoted in §4.3) |
 | 2 (developer route) | `npm run figma:plan` / `ds-contracts generate --target figma-script` (`core/emitter.ts:92-109` registers `figma-script` beside `react`) | contracts + tokens | `figma-sync/01-tokens.js`, `figma-sync/NN-<name>.js` (byte-pinned by `evals/golden.json`) → plugin **Advanced → Paste a script** | — ; the plugin's everyday door is Build (`playground/src/components/HelpDrawer.tsx:92-99`) |
 
 **What the compile produces per contract** (`core/emit-figma-script.ts`):
@@ -192,7 +192,7 @@ are stamped on the set as `ds_contracts/codeOnlyFacts` (`:7356`) and listed in
 the plugin run report (`figma-sync/plugin/ui.html:876-890`). On the Flowbite
 eight the bundle carries 54 facts, and `npm run code-only-facts:check` (a
 `maintain` step) refuses if any per-contract count moves
-(`core/code-only-facts-check.ts:53-70`).
+(`core/code-only-facts-check.ts:53-72`).
 
 <!-- site:replay:compile -->
 
@@ -219,10 +219,16 @@ anything else becomes the note
 (`core/propose-figma.ts:1035`) — never a guess. A raw hex with no variable is
 an `unbound[]` row with nearest-token candidates, or — with minting on — a
 provisional `imported.*` token the reader can see and rename. Projection
-`exact` refuses by one of the 13 `EXACT_*` codes in `accuracy/grammar.json`
-(`EXACT_DEFINITIONS_MISSING` … `EXACT_PROJECTION_COUNT_MISMATCH` — the full
-set is thrown by `core/exact-projection.ts`; `core/propose-figma.ts` itself
-throws only the first two); `reviewable-inversion` proposes anyway and stamps
+`exact` refuses by a stable code: one of the 13 `EXACT_*` codes receipted in
+`accuracy/grammar.json` (`EXACT_DEFINITIONS_MISSING` …
+`EXACT_PROJECTION_COUNT_MISMATCH`, all thrown by `core/exact-projection.ts`),
+or the one code outside that receipt — `EXACT_SEMANTIC_PROJECTION_AMBIGUOUS`,
+which only `core/propose-figma.ts` throws (`:1101`, `:1239`) when promoting a
+variant axis to semantics would change the authoritative variant projection.
+`core/propose-figma.ts` itself throws exactly two codes:
+`EXACT_DEFINITIONS_MISSING` (`:1160`) and that unreceipted 14th
+(`npm run playground:flow-check` pins both directions of this sentence);
+`reviewable-inversion` proposes anyway and stamps
 the projection `legacy-unverified` (`core/propose-figma.ts:1075`, `:1161`).
 
 <!-- site:replay:roundtrip -->
@@ -278,7 +284,7 @@ build time; here they are quoted.
 
 - Hop 2, `figma bundle` (`packages/cli/src/commands/figma.ts:617-618`):
   `✘ Refused — N of M contract(s) do not compile against this token set; the plugin would refuse each of them on paste, so nothing was written:`
-- Hop 2, the plugin's plan (`figma-sync/plugin/engine/entry.ts:919-921`):
+- Hop 2, the plugin's plan (`figma-sync/plugin/engine/entry.ts:922`):
   `N of M contract(s) refused — nothing was planned; every refusal is listed below.`
 - Hop 3, `generate` (`scripts/generate-components.ts:22-25`): "a contract that
   fails to parse, validate, or emit is REFUSED BY NAME and leaves no file; every
@@ -289,10 +295,12 @@ build time; here they are quoted.
 
 ### 4.4 The direction of drift — but never the winner
 
-Six instruments. Five compare ONE surface to the contract; the sixth,
-`extract --reconcile`, lays the two extractions (code's, the dump's) side by
-side, property by property, and only classifies. None of the six writes to a
-surface, and none picks a side:
+Six instruments. Four compare ONE surface to the contract (`parity`,
+`diff`/`diagnose`, the **Changes** tab, the ledger); `extract --reconcile`
+lays the two extractions (code's, the dump's) side by side, property by
+property; the conformance kits hold the engine itself to a hand-authored
+manifest. All six only classify. The one thing none of them ever does is pick
+the winner — and none writes to a surface:
 
 | instrument | compares | classifies as | never compares |
 |---|---|---|---|
@@ -370,7 +378,7 @@ they argue" ([18 — User Flows](18-user-flows.md)).
   insets on `part-0` (`{imported.shared.size-0}` top / right / bottom / left —
   "bound on an in-flow box"), seven `declared` (`cursor`, `display`, `position`
   on label / part-0 / part-0-after / root), one event
-  `root toggle → onToggle`. Pinned: `core/code-only-facts-check.ts:69`.
+  `root toggle → onToggle`. Pinned: `core/code-only-facts-check.ts:71`.
 - **Canvas → contract (hop 4).** Fixture
   `extract/figma/fixtures/flowbite-eight.dump.json:1673-1697`
   `part-0-after: ELLIPSE {x: 2, y: 2, constraints LEFT/TOP}, fill ffffff, stroke d1d5db`;
@@ -444,11 +452,12 @@ Number-free by design; each row has a home in [23 — Known Limitations](23-know
 | number | receipt | re-derive |
 |---|---|---|
 | 54 code-only facts on the Flowbite eight | `examples/tailwind/figma/tailwind.bundle.json` → `codeOnlyFacts` | `npm run code-only-facts:check` |
-| ToggleSwitch 12 code-only facts (4 channel · 7 declared · 1 event) | same file; pinned at `core/code-only-facts-check.ts:69` | same |
+| ToggleSwitch 12 code-only facts (4 channel · 7 declared · 1 event) | same file; pinned at `core/code-only-facts-check.ts:71` | same |
 | Button 12 variants, first `Variant=Primary, Size=Medium`, 0 code-only facts; TopNavItem `textProps [{Href, #}]` | `createFigmaEngine().compileComponentData` over the shipping contracts — the site build runs it and refuses to build if the values move | `npm run site:build` |
 | Badge MATCHED 11 · CANVAS-ABSENT 4 · MISMATCH 0 | `extract/figma/ROUNDTRIP.md` (generated by `extract/figma/roundtrip.ts`); the site build re-runs the round trip and refuses to build if it disagrees with the committed table | `npm run extract:figma:roundtrip` |
 | 82 cases (42 / 4 / 18 / 18) and 154 cases (107 / 38 / 9) | `accuracy/grammar.json:33-55` over `conformance/MANIFEST.json` and `extract/figma/conformance/MANIFEST.json` | `npm run conformance`, `npm run conformance:canvas` |
 | 13 `EXACT_*` codes | `accuracy/grammar.json` | `grep -o '"EXACT_[A-Z_]*"' accuracy/grammar.json \| sort -u` |
+| the 14th code, `EXACT_SEMANTIC_PROJECTION_AMBIGUOUS` | **no receipt** — thrown only at `core/propose-figma.ts:1239`, absent from `accuracy/grammar.json`; both facts pinned by `npm run playground:flow-check` | `grep -a -c EXACT_SEMANTIC_PROJECTION_AMBIGUOUS core/propose-figma.ts` |
 | dump grammar `1.31` | `extract/figma/dump.plugin.js:1304`, `extract/figma/rest/map.ts:1705` | `npm run plugin:check` |
 | the FC-* census | **no receipt** — a grep over the tree | not quoted anywhere in this document |
 

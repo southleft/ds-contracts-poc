@@ -294,6 +294,19 @@ check(
   brokenRefusal ? brokenRefusal.code : 'no refusal',
 );
 check('that refusal is EXACT_DEFINITIONS_MISSING', brokenRefusal?.code === 'EXACT_DEFINITIONS_MISSING', brokenRefusal?.code);
+// docs/29 §3 and the break-step tour copy name ONE exact-refusal code outside
+// the grammar receipt: EXACT_SEMANTIC_PROJECTION_AMBIGUOUS, thrown only by
+// core/propose-figma.ts. Pin both directions so the sentence goes stale
+// loudly if the code is ever receipted, renamed, or removed.
+check(
+  'core/propose-figma.ts throws EXACT_SEMANTIC_PROJECTION_AMBIGUOUS and accuracy/grammar.json does not receipt it',
+  /EXACT_SEMANTIC_PROJECTION_AMBIGUOUS/.test(read('core/propose-figma.ts')) && !exactCodes.has('EXACT_SEMANTIC_PROJECTION_AMBIGUOUS'),
+);
+check(
+  'docs/29 and the tour copy name the unreceipted 14th code beside the receipted 13',
+  read('docs/29-how-it-flows.md').includes('EXACT_SEMANTIC_PROJECTION_AMBIGUOUS') &&
+    read('playground/src/engine/tours.ts').includes('EXACT_SEMANTIC_PROJECTION_AMBIGUOUS'),
+);
 check(
   'canvasProvenanceOf: unstamped set on a stamp-reading producer reads hand-built',
   canvasProvenanceOf(brokenFe.ToggleSwitch as DumpSet, feSummary) === 'tool-generated' &&
