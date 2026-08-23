@@ -83,7 +83,7 @@ import {
   UA_MARGIN_ELEMENTS,
   validateContract,
 } from '../../../core/emit-react.js';
-import { kebab } from '../../../extract/types.js';
+import { kebab } from '@ds-contracts/core';
 
 // ---------------------------------------------------------------------------
 // Naming

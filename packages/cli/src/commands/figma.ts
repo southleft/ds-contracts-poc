@@ -77,7 +77,7 @@ import {
   markAwaitingCodeAdoption,
   revisionOf,
   type ProvenancedContract,
-} from "../../../../core/contract-provenance.js";
+} from "@ds-contracts/core";
 import {
   createFigmaEngine,
   summarizeCodeOnlyFacts,

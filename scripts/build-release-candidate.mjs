@@ -33,6 +33,23 @@ const PACKAGES = [
     ],
   },
   {
+    directory: "packages/core",
+    expected: [
+      "README.md",
+      "dist/contract-provenance.d.ts",
+      "dist/contract-provenance.js",
+      "dist/emitter.d.ts",
+      "dist/emitter.js",
+      "dist/index.d.ts",
+      "dist/index.js",
+      "dist/naming.d.ts",
+      "dist/naming.js",
+      "dist/tokens.d.ts",
+      "dist/tokens.js",
+      "package.json",
+    ],
+  },
+  {
     directory: "packages/cli",
     expected: ["README.md", "dist/cli.js", "dist/computed.js", "package.json"],
   },
@@ -46,6 +63,10 @@ const GATES = [
   {
     name: "build-schema",
     command: ["npm", "--prefix", "packages/schema", "run", "build"],
+  },
+  {
+    name: "build-core",
+    command: ["npm", "--prefix", "packages/core", "run", "build"],
   },
   {
     name: "test-v1-definition",
@@ -67,6 +88,10 @@ const GATES = [
   {
     name: "typecheck-schema",
     command: ["npm", "--prefix", "packages/schema", "run", "typecheck"],
+  },
+  {
+    name: "typecheck-core",
+    command: ["npm", "--prefix", "packages/core", "run", "typecheck"],
   },
   {
     name: "typecheck-emitter",

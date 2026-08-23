@@ -196,6 +196,13 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         env: { CI_LANE_STEP: prep }
         run: npm --prefix packages/schema run build
+      - name: build @ds-contracts/core (published engine surface)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npm --prefix packages/core run build
+      - name: verify:published (pack schema/core/wc/cli tarballs into a temp project; a Vue emitter that depends only on the published packages generates the Flowbite eight)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run verify:published
 
       # packages/cli/dist/ (.gitignore:3) — dagger:census and paste:check both
       # EXECUTE the built cli.js. dagger-census.ts:72 refuses by name

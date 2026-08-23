@@ -10,7 +10,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "types": ["node"]
+    "types": ["node"],
+    "paths": {
+      "@ds-contracts/core": ["../core/src/index.ts"]
+    }
   },
   "include": ["src", "scripts"]
 }

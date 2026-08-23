@@ -102,6 +102,10 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         env: { CI_LANE_STEP: prep }
         run: npm --prefix packages/schema run build
+      - name: build @ds-contracts/core (the published engine surface; depends on the schema dist)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npm --prefix packages/core run build
 
       # publish:check packs all three BUILT packages and compares every file
       # against the registry; dist/ is gitignored, so each must be built here.
@@ -156,6 +160,9 @@ jobs:
       - name: typecheck @ds-contracts/schema
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm --prefix packages/schema run typecheck
+      - name: "@ds-contracts/core: typecheck"
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm --prefix packages/core run typecheck
 
       - name: package smoke @ds-contracts/schema
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}

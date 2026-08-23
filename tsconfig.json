@@ -18,7 +18,12 @@
     "types": [
       "vite/client",
       "node"
-    ]
+    ],
+    "paths": {
+      "@ds-contracts/core": [
+        "./packages/core/src/index.ts"
+      ]
+    }
   },
   "include": [
     "src",

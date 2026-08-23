@@ -19,9 +19,16 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
+// @ds-contracts/core is bundled IN from its in-repo SOURCE (never dist, never
+// the workspace link) — the same bytes the published tarball is built from,
+// with no build-order dependency and no stale-dist hazard. Plugin emitters
+// resolve the bare specifier from their own node_modules; the CLI registers
+// the Emitter objects they export, so registry identity never crosses.
+const CORE_ALIAS = { '@ds-contracts/core': path.join(here, '..', 'core', 'src', 'index.ts') };
 
 await build({
   bundle: true,
+  alias: CORE_ALIAS,
   platform: 'neutral',
   mainFields: ['module', 'main'],
   format: 'esm',

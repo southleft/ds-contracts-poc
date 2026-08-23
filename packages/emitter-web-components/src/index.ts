@@ -13,8 +13,7 @@
  * discipline as the four built-ins in core/emitter.ts.
  */
 import type { Contract } from '../../schema/src/contract-schema.js';
-import type { EmittedFile, Emitter, EmitterCtx } from '../../../core/emitter.js';
-import { tokenInventoryFromJson } from '../../../core/tokens.js';
+import { tokenInventoryFromJson, type EmittedFile, type Emitter, type EmitterCtx } from '@ds-contracts/core';
 import { emitWebComponent, tagOf, type EmitWcResult, type WcEmitCtx } from './emit-wc.js';
 
 export {

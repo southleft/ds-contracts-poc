@@ -6,6 +6,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added — `@ds-contracts/core` (packages/core, slice 1)
+
+The emitter contract is now a published package: `Emitter` / `EmitterCtx` /
+`EmittedFile`, the registry (`emitters`, `emitterByName`, `getEmitters`,
+`registerEmitter`), the DTCG token resolver (`tokenInventoryFromJson`,
+`flattenTokens`, `makeResolveLiteral`, `collectTokenPaths`, `aliasTarget`,
+`px`, `pxOrNull`), `kebab`, and the contract-provenance helpers. The repo's
+`core/tokens.ts`, `core/contract-provenance.ts`, `core/emitter.ts` and
+`extract/types.ts` (`kebab`) are re-export shims over `packages/core/src` —
+one implementation, zero behaviour change (golden byte-identical). The CLI and
+`@ds-contracts/emitter-web-components` import these from `@ds-contracts/core`
+(bundled from source via tsconfig `paths` + esbuild `alias`). The
+web-components README's unresolvable `'ds-contracts core'` specifier is fixed.
+`npm run verify:published` packs schema + core + emitter-web-components + cli,
+installs the four tarballs into a temp project with no path back to this repo,
+and runs `ds-contracts generate` over the Flowbite eight with a throwaway Vue
+emitter that resolves a token through `@ds-contracts/core` alone, plus the
+web-components emitter from its tarball. Dependency policy: core depends on
+`@ds-contracts/schema` and nothing else (the smoke refuses otherwise).
+
 ### Coordinated release candidate
 
 The source tree stages repository `1.0.0-rc.1`,

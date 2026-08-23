@@ -1,0 +1,43 @@
+{
+  "name": "@ds-contracts/core",
+  "version": "0.1.0-rc.1",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "The ds-contracts emitter contract — the Emitter/EmitterCtx/EmittedFile shapes, the emitter registry, the DTCG token resolver (inventory, flatten, alias resolution, px), naming and contract-provenance helpers. Everything an emitter plugin needs from the engine, published.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "package:smoke": "npm pack --dry-run --json"
+  },
+  "dependencies": {
+    "@ds-contracts/schema": "^16.1.0-rc.2"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/southleft/ds-contracts-poc.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://ds-contracts-spec.pages.dev",
+  "bugs": "https://github.com/southleft/ds-contracts-poc/issues"
+}

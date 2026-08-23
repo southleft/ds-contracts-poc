@@ -60,7 +60,7 @@ import {
   assertContractProvenance,
   revisionOf,
   type ProvenancedContract,
-} from "../../../core/contract-provenance.js";
+} from "@ds-contracts/core";
 import { promoteStaticArtifact } from "../../../extract/static-promotion.js";
 
 // ---------------------------------------------------------------------------

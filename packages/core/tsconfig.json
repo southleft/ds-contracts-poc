@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "declaration": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "paths": {
+      "@ds-contracts/schema": [
+        "../schema/dist/index.d.ts"
+      ]
+    }
+  },
+  "include": [
+    "src"
+  ]
+}
