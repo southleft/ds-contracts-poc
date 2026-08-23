@@ -60,7 +60,7 @@
  * capturing them with dump.plugin.js, so the CAPTURE stage is measured too)
  * is named future work — see README.md alongside this file.
  */
-import { readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
@@ -70,6 +70,7 @@ import {
 import { loadTokenCorpus } from "../tokens.js";
 import { loadContracts } from "../propose.js";
 import type { DumpDegradation, DumpFile } from "../types.js";
+import { mapRestToDump, type RestNodesResponse } from "../rest/map.js";
 
 // ---------------------------------------------------------------------------
 // Manifest shapes (hand-authored — see MANIFEST.json)
@@ -128,8 +129,30 @@ interface CaseRun {
   namingUnion: string[];
 }
 
-function runCase(dumpPath: string, deps: ReturnType<typeof loadDeps>): CaseRun {
-  const dump = JSON.parse(readFileSync(dumpPath, "utf8")) as DumpFile;
+/** A case may enter at EITHER boundary: `<id>.dump.json` (the plugin dump,
+ *  dump v1 grammar) or `<id>.rest.json` (a GET /v1/files/:key/nodes
+ *  response, mapped through the REAL extract/figma/rest/map.ts — the
+ *  Journey A CLI's own transport). REST cases measure the mapper too: its
+ *  MapReport degradations/notes join the naming union exactly as the CLI
+ *  prints them to stderr, so a fact the mapper drops without a receipt is
+ *  a SILENT loss here, not an absence (Phase 2 exam, 2026-08-22). */
+function caseFileFor(id: string): string {
+  const rest = path.join(CASES_DIR, `${id}.rest.json`);
+  return existsSync(rest) ? rest : path.join(CASES_DIR, `${id}.dump.json`);
+}
+
+function runCase(casePath: string, deps: ReturnType<typeof loadDeps>): CaseRun {
+  const restReceipts: string[] = [];
+  const dump = ((): DumpFile => {
+    const json = JSON.parse(readFileSync(casePath, "utf8")) as unknown;
+    if (!casePath.endsWith(".rest.json")) return json as DumpFile;
+    const { dump: mapped, report } = mapRestToDump(json as RestNodesResponse, { fileKey: null });
+    for (const n of report.notes) restReceipts.push(`rest note: ${n}`);
+    for (const d of report.degradations) {
+      restReceipts.push(`degradation ${d.code} @ ${d.nodePath}${d.field ? ` ${d.field}` : ""}: ${d.message}`);
+    }
+    return mapped as unknown as DumpFile;
+  })();
   const batch = proposeBatchFromDump(
     dump as unknown as Record<string, unknown>,
     {
@@ -167,6 +190,7 @@ function runCase(dumpPath: string, deps: ReturnType<typeof loadDeps>): CaseRun {
   for (const d of (dump._degradations ?? []) as DumpDegradation[]) {
     union.push(`degradation ${d.code} @ ${d.nodePath}: ${d.message}`);
   }
+  union.push(...restReceipts);
   return { contractText: JSON.stringify(contractPieces), namingUnion: union };
 }
 
@@ -240,15 +264,15 @@ function main() {
     );
     process.exit(2);
   }
-  const caseFiles = readdirSync(CASES_DIR).filter((f) =>
-    f.endsWith(".dump.json"),
+  const caseFiles = readdirSync(CASES_DIR).filter(
+    (f) => f.endsWith(".dump.json") || f.endsWith(".rest.json"),
   );
-  const fileIds = new Set(caseFiles.map((f) => f.replace(/\.dump\.json$/, "")));
+  const fileIds = new Set(caseFiles.map((f) => f.replace(/\.(dump|rest)\.json$/, "")));
 
   const deps = loadDeps();
 
   if (probe !== undefined) {
-    const run = runCase(path.join(CASES_DIR, `${probe}.dump.json`), deps);
+    const run = runCase(caseFileFor(probe), deps);
     console.log("--- naming union ---");
     for (const n of run.namingUnion) console.log("  " + n);
     console.log("--- contract text ---");
@@ -283,7 +307,7 @@ function main() {
         expect: c.expect,
         pin: c.status,
         verdict: "MISSING",
-        detail: "manifest entry has no cases/<id>.dump.json",
+        detail: "manifest entry has no cases/<id>.dump.json or cases/<id>.rest.json",
       });
   }
 
@@ -292,7 +316,7 @@ function main() {
     if (!fileIds.has(c.id)) continue;
     let run: CaseRun;
     try {
-      run = runCase(path.join(CASES_DIR, `${c.id}.dump.json`), deps);
+      run = runCase(caseFileFor(c.id), deps);
     } catch (e) {
       rows.push({
         id: c.id,
