@@ -4,11 +4,11 @@
     {
       "name": "alert",
       "measured": true,
-      "floorPct": 84.69827586206897,
+      "floorPct": 86.63793103448276,
       "cellsCompared": 14848,
-      "cellsEqual": 12576,
+      "cellsEqual": 12864,
       "combos": 32,
-      "pixelPerfect": "0/128",
+      "pixelPerfect": "16/128",
       "sourceFacts": 200,
       "namedRefusals": 16,
       "refusalBreakdown": {
@@ -26,7 +26,7 @@
       "cellsCompared": 1488,
       "cellsEqual": 1368,
       "combos": 6,
-      "pixelPerfect": "0/24",
+      "pixelPerfect": "24/24",
       "sourceFacts": 30,
       "namedRefusals": 3,
       "refusalBreakdown": {
@@ -58,11 +58,11 @@
     {
       "name": "button",
       "measured": true,
-      "floorPct": 81.96536144578313,
+      "floorPct": 83.89307228915662,
       "cellsCompared": 79680,
-      "cellsEqual": 65310,
+      "cellsEqual": 66846,
       "combos": 240,
-      "pixelPerfect": "0/960",
+      "pixelPerfect": "36/960",
       "sourceFacts": 1164,
       "namedRefusals": 29,
       "refusalBreakdown": {
@@ -222,7 +222,7 @@
   "quarantined": [],
   "totals": {
     "measured": 12,
-    "weightedFloorPct": 83.97007488737059,
+    "weightedFloorPct": 85.3305785123967,
     "cellsCompared": 134068,
     "namedRefusals": 113,
     "openQueue": 0,

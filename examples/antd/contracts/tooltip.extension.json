@@ -1,6 +1,6 @@
 {
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
-  "generatedBy": "extract/computed/regate.ts --write-enriched (OFFLINE RE-FUSE of the committed captured truth; no library recapture). Differences vs the harness path, NAMED: portal receipts are a capture-time artifact and are absent here; the frontier receipts are capture-time too and are CARRIED FORWARD unchanged from the extension this re-fuse overwrote (6 receipt(s)); every other receipt is recomputed from the same truth.",
+  "generatedBy": "extract/computed/run.ts",
   "library": "antd@5.29.3",
   "browser": "151.0.7922.34",
   "mintedTokens": {
@@ -510,7 +510,10 @@
   "interactionOnDisabled": [],
   "interactionOnlyPlaneDrops": [],
   "interactionOnlyPlaneDropCount": 0,
-  "structureReceipts": [],
+  "structureReceipts": [
+    "portal-anchor-receipt:  — 1 in-stage root(s) (the mount's anchor child) NOT carried; the portaled overlay is the captured root",
+    "portal-wrapper-unwrapped:  — 1 pass-through portal WRAPPER element(s) between document.body and the overlay were unwrapped BEFORE the single-root policy ran; the captured root is the wrapper's one element child (div|ant-tooltip.ant-tooltip-placement-bottom). Decided by MEASUREMENT, never by attribute name: <div> position:static; display:block; 900×0; 1 element child; draws no box"
+  ],
   "styledChannelReceipts": [
     "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
     "viewport-derived-geometry-refused: root (position:absolute) — bottom, left, right, top NOT minted. The part is out of flow and no ancestor in the captured tree establishes its containing block, so its box was laid out against the INITIAL CONTAINING BLOCK — the capture window: left 11px + box 85.9062px + right 803.094px = 900px = browser.viewport.width (900px); top 60px + box 34px + bottom 906px = 1000px = browser.viewport.height (1000px). These numbers are a function of the harness viewport, not of the library; a canvas frame has no window, and Chromium reports a resolved `auto` inset with the same syntax as an authored one, so the pair is refused together rather than half-guessed.",
@@ -595,6 +598,7 @@
     "declared fact carried: tooltip-content.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: tooltip-content.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)"
+    "declared fact carried: label.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "sizing evidence carried: root.hugsBelowMaxWidth = true (MEASURED — the used width stayed strictly below the max-width cap in every enumerated combo, so the max-width is a CEILING the box hugs beneath, not a design width)"
   ]
 }

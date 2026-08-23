@@ -9,7 +9,7 @@
   "elementsPerCapture": 11,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 43,
+    "root": 44,
     "alert-icon": 23,
     "icon": 23,
     "part-0-0-0": 24,
@@ -629,8 +629,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 97,
-    "mintedLeavesFolded": 53
+    "mintedLeavesUnfolded": 98,
+    "mintedLeavesFolded": 54
   },
   "bound": {
     "cellsChecked": 0,
@@ -639,11 +639,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 53,
-    "baseBindings": 65,
+    "leaves": 54,
+    "baseBindings": 66,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 51,
+      "uniform": 52,
       "perAxis": 14,
       "perPair": 0,
       "refused": 0
@@ -696,7 +696,7 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 4.003662109375002,
+      "mean": 4.003824869791669,
       "max": 6.583333333333333,
       "perfect": 0
     },
@@ -749,11 +749,11 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 84.69827586206897,
+    "computedPctEqual": 86.63793103448276,
     "rowsFullyEqual": 0,
     "rows": 128,
-    "pixelPerfectExact": 0,
-    "pixelPerfectAA": 0,
+    "pixelPerfectExact": 16,
+    "pixelPerfectAA": 16,
     "pairs": 128
   },
   "focusVisibleDriverMatched": 0,

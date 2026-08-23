@@ -37056,7 +37056,7 @@ const COMPONENTS = [
     "contractId": "antd.tooltip",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Tooltip — generated from contract antd.tooltip v0.2.0 † (15 code-only facts — see plugin report)",
+    "description": "Tooltip — generated from contract antd.tooltip v0.2.0 † (16 code-only facts — see plugin report)",
     "isSet": false,
     "boolProps": [],
     "textProps": [],
@@ -37082,13 +37082,12 @@ const COMPONENTS = [
             "px": 34,
             "varName": "imported/tooltip/root/height"
           },
-          "fixedWidth": {
-            "px": 85.9062,
-            "varName": "imported/tooltip/root/width"
-          },
           "bindings": {
+            "maxWidth": "imported/tooltip/root/max-width",
             "minWidth": "imported/shared/size-0"
           },
+          "hugCeiling": true,
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -37295,6 +37294,17 @@ const COMPONENTS = [
         "channel": "position",
         "value": "absolute",
         "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 1,
+          "of": 1
+        }
+      },
+      {
+        "part": "root",
+        "kind": "preview",
+        "channel": "display",
+        "value": "block",
+        "reason": "a block root has no intrinsic width — the canvas draws a preview width, the code surface fills its container",
         "variants": {
           "count": 1,
           "of": 1

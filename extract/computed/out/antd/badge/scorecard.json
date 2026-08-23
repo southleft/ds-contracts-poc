@@ -174,7 +174,7 @@
   },
   "shippedMinted": {
     "path": "examples/antd/tokens/antd-minted.dtcg.json",
-    "leavesAdded": 1227,
+    "leavesAdded": 1241,
     "divergent": [
       {
         "token": "imported.badge.badge-dot.color.blue",

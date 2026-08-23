@@ -87,6 +87,10 @@ Zero contradictions.
 
 - leaves: **53** · bindings: 55 base + 0 state
 - shape: 36 uniform · 19 per-axis · 0 per-axis-pair · 0 refused (uncorrelated — nothing minted, named)
+- border-style-by-axis-carried: root.border-bottom-style varies by "variant" (outlined=solid, borderless=none) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-bottom-style: … }`; canvas: a dashPattern on that variant's stroke)
+- border-style-by-axis-carried: root.border-left-style varies by "variant" (outlined=solid, borderless=none) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-left-style: … }`; canvas: a dashPattern on that variant's stroke)
+- border-style-by-axis-carried: root.border-right-style varies by "variant" (outlined=solid, borderless=none) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-right-style: … }`; canvas: a dashPattern on that variant's stroke)
+- border-style-by-axis-carried: root.border-top-style varies by "variant" (outlined=solid, borderless=none) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-top-style: … }`; canvas: a dashPattern on that variant's stroke)
 
 ## Declared facts (v15 — carried, first-class)
 
@@ -111,11 +115,7 @@ Zero contradictions.
 
 ## Code-only / overflow (named, in the extension file)
 
-- base channels outside mintable kinds: **10**
-  - root.border-bottom-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue (sample: `solid`, 2 distinct value(s))
-  - root.border-left-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue (sample: `solid`, 2 distinct value(s))
-  - root.border-right-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue (sample: `solid`, 2 distinct value(s))
-  - root.border-top-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue (sample: `solid`, 2 distinct value(s))
+- base channels outside mintable kinds: **6**
   - root.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today (sample: `none`, 1 distinct value(s))
   - card-head.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today (sample: `none`, 1 distinct value(s))
   - card-head-wrapper.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today (sample: `none`, 1 distinct value(s))

@@ -9,7 +9,7 @@
   "elementsPerCapture": 10,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 48,
+    "root": 49,
     "btn-icon": 18,
     "anticon": 24,
     "icon": 23,
@@ -636,8 +636,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 1218,
-    "mintedLeavesFolded": 363
+    "mintedLeavesUnfolded": 1221,
+    "mintedLeavesFolded": 366
   },
   "bound": {
     "cellsChecked": 0,
@@ -646,22 +646,22 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 363,
-    "baseBindings": 45,
+    "leaves": 366,
+    "baseBindings": 46,
     "stateBindings": 28,
     "byShape": {
       "uniform": 26,
-      "perAxis": 18,
+      "perAxis": 19,
       "perPair": 29,
       "refused": 0
     }
   },
   "declared": {
-    "base": 40,
+    "base": 44,
     "state": 8
   },
   "codeOnly": {
-    "base": 12,
+    "base": 8,
     "state": 21,
     "overflowBindings": 21
   },
@@ -760,11 +760,11 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 81.96536144578313,
-    "rowsFullyEqual": 0,
+    "computedPctEqual": 83.89307228915662,
+    "rowsFullyEqual": 24,
     "rows": 960,
-    "pixelPerfectExact": 0,
-    "pixelPerfectAA": 0,
+    "pixelPerfectExact": 22,
+    "pixelPerfectAA": 36,
     "pairs": 960
   },
   "focusVisibleDriverMatched": 120,

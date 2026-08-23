@@ -9,7 +9,7 @@
   "elementsPerCapture": 1,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 47
+    "root": 48
   },
   "folds": {
     "count": 6,
@@ -51,8 +51,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 559,
-    "mintedLeavesFolded": 415
+    "mintedLeavesUnfolded": 560,
+    "mintedLeavesFolded": 416
   },
   "bound": {
     "cellsChecked": 0,
@@ -61,11 +61,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 415,
-    "baseBindings": 26,
+    "leaves": 416,
+    "baseBindings": 27,
     "stateBindings": 25,
     "byShape": {
-      "uniform": 6,
+      "uniform": 7,
       "perAxis": 15,
       "perPair": 30,
       "refused": 0
@@ -76,7 +76,7 @@
     "state": 1
   },
   "codeOnly": {
-    "base": 5,
+    "base": 1,
     "state": 0,
     "overflowBindings": 20
   },

@@ -121,10 +121,10 @@ Zero contradictions.
   - anticon.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today (sample: `none`, 1 distinct value(s))
 - state channels outside mintable kinds: **0**
 - refused/overflow bindings: **1**
-  - {"part":"root","channel":"width","ref":"{imported.tag.root.width.{closable}}","refusal":"presence-prop-driven styling (closable) — boolean tokensByProp has no spelling (round 4 residue)"}
+  - {"part":"root","channel":"width","ref":"{imported.tag.root.width.{closable}}","refusal":"presence-prop-driven styling (closable) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (closable present) is not"}
 
 ## Fidelity gate (scorecard.json)
 
 - computed-equality (styled channels, contract-mediated): **97.500%** (4992/5120 cells; 0/128 combo×state rows fully equal)
-- pixel: 0/128 pairs perfect at threshold 0 · 0/128 at the AA point (mean AA 0.392%, max 0.589%; 128/128 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
+- pixel: 0/128 pairs perfect at threshold 0 · 0/128 at the AA point (mean AA 0.377%, max 0.531%; 128/128 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
 

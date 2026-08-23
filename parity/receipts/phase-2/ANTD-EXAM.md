@@ -18,7 +18,7 @@ node examples/antd/scripts/build-tokens.mjs                                 # 35
 npm run seed:gen -- extract/computed/configs/antd.json                      # dry run (W1): Button 7 axes, Progress 5, Tooltip 1 — the curated seeds prune them
 for C in Button Tag Badge Switch Checkbox Radio Input Alert Avatar Progress Card Tooltip; do
   npm run extract:computed -- --harness examples/antd/.antd-sandbox --config extract/computed/configs/antd.json --component $C --out extract/computed/out/antd --keep-originals
-done                                                                         # pass 1 with tokens.mintedBootstrap; promote; flag deleted; pass 2 = the committed scorecards
+done                                                                         # pass 1 with tokens.mintedBootstrap; promote; flag deleted; passes 2–4 as the heal loop moved the engine; pass 4 = the committed scorecards
 npx tsx examples/antd/scripts/promote-floor.mjs                             # 91 source-aliased + 1,204 literal leaves; 3 authored rows; statePreviews 2 ON / 5 refused by name
 npm run extract:computed:scorecard -- --dir extract/computed/out/antd --config extract/computed/configs/antd.json --write
 npm run extract:computed:regate -- --config extract/computed/configs/antd.json --out extract/computed/out/antd --write-enriched   # the heal loop re-fused offline (5×)
@@ -28,7 +28,7 @@ npx tsx packages/cli/src/cli.ts generate examples/antd/contracts --target web-co
 npx tsx packages/cli/src/cli.ts figma examples/antd/contracts --out examples/antd/figma --icons examples/antd/assets/icons --tokens …
 node examples/antd/scripts/build-figma-tokens.mjs && node examples/antd/scripts/figma-compile-receipt.mjs && node examples/antd/scripts/build-genesis-batch.mjs
 npx tsx packages/cli/src/cli.ts figma bundle examples/antd/contracts/*.contract.json --out examples/antd/figma/antd.bundle.json --tokens … --modes examples/antd/tokens/modes/antd.light.dtcg.json,examples/antd/tokens/modes/antd.dark.dtcg.json --name "Ant Design" --icons examples/antd/assets/icons
-# sha256 aedbcbd8a1e6299848f4e495da9314076d47965fb086c9dc374ae405ae965d7a — byte-identical on rebuild
+# sha256 2fefba105ca34db9fa779cd24809e286202389b8ff33775901225c81a150b836 — byte-identical on rebuild
 # canvas leg: the bundle planned by the REAL plugin engine (scripts/build-plugin-zip.mjs buildEngineBundle → DSC.parseIncomingText → DSC.planGenerate(fileKey byMp6lt0Ij9b2QbkDGFwBh)) → 25 steps
 # served on localhost:9231 (scripts/console-loop-stem-serve.mjs) → fetched + eval'd inside figma_execute, file key asserted before EVERY write
 npx tsx extract/figma/rest/cli.ts https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project --out <scratch>/antd-rest.dump.json
@@ -40,20 +40,20 @@ npx tsx extract/figma/roundtrip.ts --fixtures <scratch>/antd-plugin.dump.json --
 
 | subject | combos × planes | seed | double-run | replay eq | gate eq | src-facts | parts carried (svg) | refusals | minted vars | canvas set (node, variants) | parity AA (canvas vs library, default cell) | recognisable |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Button | 240 × 4 | ✔ curated (type×size×danger; seed-gen proposes 7 axes) | IDENTICAL | 99.930% | 82.0% | 1,164 | 6 (2) | 29 | — | `33:5066`, 30 | 17.4% (74×32 vs 73×34 — text AA + the library's 2px shadow) | ✔ |
+| Button | 240 × 4 | ✔ curated (type×size×danger; seed-gen proposes 7 axes) | IDENTICAL | 99.930% | 83.9% | 1,164 | 6 (2) | 29 | — | `33:5066`, 30 | 17.4% (74×32 vs 73×34 — text AA + the library's 2px shadow) | ✔ |
 | Tag | 32 × 4 | ✔ | IDENTICAL | — | 97.5% | 124 | 2 (1) | 2 | — | `33:5408`, 14 | 1.9% ✔ (36×22) | ✔ |
 | Badge | 8 × 4 | ✔ | IDENTICAL | — | 93.4% | 103 | 8 | 16 | — | `33:4823`, 6 | 5.4% (43×43 vs 42×42 — the "5" glyph AA) | ✔ |
 | Switch | 8 × 4 | ✔ | IDENTICAL | — | 94.3% | 140 | 5 (+knob) | 10 | — | `33:5345`, 12 (4 + 8 State previews) | 9.1% (44×22 vs 45×25 — the knob's box-shadow, named) | ✔ |
 | Checkbox | 6 × 4 | ✔ | IDENTICAL | — | 85.0% | 51 | 5 (+tick) | 8 | — | `33:5114`, 3 | 18.8% (85×17 vs 85×16 — text AA) | ✔ |
 | Radio | 4 × 4 | ✔ | IDENTICAL | — | 74.8% | 26 | 5 (+dot) | 8 | — | `33:5252`, 2 | 16.2% (59×17 vs 59×16 — text AA) | ✔ |
 | Input | 72 × 4 | ✔ | IDENTICAL (after the probe fix, §4) | — | 79.9% | 162 | 1 | 1 | — | `33:5197`, 40 (36 + 4 previews) | 1.1% ✔ (288×32) | ✔ |
-| Alert | 32 × 4 | ✔ | IDENTICAL | — | 84.7% | 200 | 9 (4 glyphs + close) | 16 | — | `33:4769`, 8 | 0.8% ✔ (288×40) | ✔ |
+| Alert | 32 × 4 | ✔ | IDENTICAL | — | 86.6% | 200 | 9 (4 glyphs + close) | 16 | — | `33:4769`, 8 | 0.8% ✔ (288×40) | ✔ |
 | Avatar | 6 × 4 | ✔ | IDENTICAL | — | 91.9% | 30 | 2 | 3 | — | `33:4784`, 6 | 0.0% ✔ (32×32) | ✔ |
 | Progress | 4 × 4 | ✔ (+ percent/max number props, heal loop) | IDENTICAL (after the unset fix, §4) | — | 93.1% | 18 | 8 (2 glyphs) | 9 | — | `33:5238`, 4 | 3.4% ✔ (287×12) | ✔ |
 | Card | 4 × 4 | ✔ | IDENTICAL | — | 91.4% | 20 | 5 | 6 | — | `33:5093`, 4 | 1.5% ✔ (288×128 vs 288×127) | ✔ |
-| Tooltip | 1 × 1 (portal, B.2) | ✔ | IDENTICAL | — | 95.0% | 0 (B.1) | 4 (+arrow) | 5 | — | `33:5411`, standalone | 11.5% (92×50 vs 86×34 — the arrow sits outside the portal root's box in the library shot) | ✔ |
+| Tooltip | 1 × 1 (portal, B.2) | ✔ | IDENTICAL | — | 95.0% | 0 (B.1) | 4 (+arrow) | 5 | — | `33:5419`, standalone | 11.5% (92×50 vs 86×34 — the arrow sits outside the portal root's box in the library shot) | ✔ |
 
-Library floor 84.0% computed equality over 134,068 cells · 113 named refusals in the extension sidecars · 0 open review-queue items. Tokens on the canvas: one "Ant Design" collection, Light/Dark, **1,781 variables** (1,075 colour · 509 float · 106 string · 91 Figma-native aliases to antd's own token names). Parity: `extract/figma/visual-parity/img.ts` (ink-trim, white-flatten, pixelmatch AA) over the canvas DEFAULT cell vs the sandbox's real render of the same combo (`orig-shots/`, `--keep-originals`); no text mask, so the text-bearing small components carry the font-substrate AA in their number — the triptychs show the residue is glyph edges. The ±2px content-box gate holds on 10 of 12 (Switch: the knob shadow; Tooltip: the arrow).
+Library floor 85.3% computed equality over 134,068 cells (the committed scorecards are the harness re-measure under the FINAL engine — pass 4; the drift baseline's 12 antd rows agree EXACTLY with them) · 113 named refusals in the extension sidecars · 0 open review-queue items. Tokens on the canvas: one "Ant Design" collection, Light/Dark, **1,781 variables** (1,075 colour · 509 float · 106 string · 91 Figma-native aliases to antd's own token names). Parity: `extract/figma/visual-parity/img.ts` (ink-trim, white-flatten, pixelmatch AA) over the canvas DEFAULT cell vs the sandbox's real render of the same combo (`orig-shots/`, `--keep-originals`); no text mask, so the text-bearing small components carry the font-substrate AA in their number — the triptychs show the residue is glyph edges. The ±2px content-box gate holds on 10 of 12 (Switch: the knob shadow; Tooltip: the arrow).
 
 ## 3. Accounting — SILENT before → after
 

@@ -346,7 +346,7 @@
   "anatomyPromotion": {
     "partsCarried": 5,
     "svgAssets": 0,
-    "refusals": 0
+    "refusals": 1
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,

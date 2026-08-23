@@ -22,9 +22,9 @@
       "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": 1.1535644531249998,
-    "meanAA": 0.42887369791666663,
-    "maxAA": 0.751953125
+    "meanExact": 1.1633300781249998,
+    "meanAA": 0.41503906249999994,
+    "maxAA": 0.6966145833333334
   },
   "fusion": {
     "boundConfirmed": 0,
@@ -41,32 +41,32 @@
   "worstRows": [
     {
       "key": "checked.disabled__default",
-      "pctAA": 0.751953125,
+      "pctAA": 0.6966145833333334,
       "pctExact": 1.6536458333333333,
       "channelsMismatched": 47
     },
     {
       "key": "checked.disabled__hover",
-      "pctAA": 0.751953125,
+      "pctAA": 0.6966145833333334,
       "pctExact": 1.6536458333333333,
       "channelsMismatched": 47
     },
     {
       "key": "checked.disabled__focus-visible",
-      "pctAA": 0.751953125,
+      "pctAA": 0.6966145833333334,
       "pctExact": 1.6536458333333333,
       "channelsMismatched": 47
     },
     {
       "key": "checked.disabled__active",
-      "pctAA": 0.751953125,
+      "pctAA": 0.6966145833333334,
       "pctExact": 1.6536458333333333,
       "channelsMismatched": 47
     },
     {
       "key": "checked.enabled__focus-visible",
       "pctAA": 0.6705729166666666,
-      "pctExact": 1.2565104166666667,
+      "pctExact": 1.2955729166666667,
       "channelsMismatched": 17
     },
     {
@@ -151,8 +151,8 @@
     ]
   ],
   "namedLosses": [
-    "promotion: pseudo-decor-outside-grammar: radio-inner::after drawn with a non-carryable transform (matrix(0.375, 0, 0, 0.375, 0, 0)) — the bounded decor grammar carries translate + orthonormal rotate only; named refusal",
-    "promotion: pseudo-decor-hidden-in-combo: radio-inner::after is not drawn in every combo (transform matrix(0, 0, 0, 0, 0, 0) (scale 0)) — the component's own hidden state, NOT a grammar limit",
+    "promotion: pseudo-decor-state-paint-uncarried: radio-inner::after at checked.disabled paints {\"bg\":\"rgba(0, 0, 0, 0.25)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":16} where the matching enabled combo paints {\"bg\":\"rgba(255, 255, 255, 1)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":16} — the decor carries the ENABLED plane; a per-enum-value × per-state paint product has no contract spelling (states take token refs, decor paint is literal); named residue",
+    "promotion: pseudo-decor-state-geometry-uncarried: radio-inner::after at checked.disabled sits at {\"w\":8,\"h\":8,\"top\":3,\"left\":3} vs the enabled {\"w\":6,\"h\":6,\"top\":4,\"left\":4}; named residue",
     "promotion: pseudo-decor-hidden-in-combo: radio::after is not drawn in every combo (opacity 0, box 16x16) — the component's own hidden state, NOT a grammar limit",
     "promotion: pseudo-content-not-canvas-ink: root::after carries content \" \" — the bounded decor grammar promotes EMPTY-content decor boxes only. A glyph drawn by an icon-font ligature (Bootstrap/FontAwesome/Material carets, chevrons, close ×s) is real ink that does NOT reach the canvas; named refusal",
     "overflow: radio-inner.border-bottom-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -198,7 +198,7 @@
   },
   "shippedMinted": {
     "path": "examples/antd/tokens/antd-minted.dtcg.json",
-    "leavesAdded": 1227,
+    "leavesAdded": 1241,
     "divergent": [
       {
         "token": "imported.radio.radio-inner.background-color.checked",
@@ -1743,7 +1743,7 @@
       "key": "checked.enabled__default",
       "channelsCompared": 122,
       "channelsEqual": 107,
-      "pctExact": 0.5729166666666666,
+      "pctExact": 0.6119791666666666,
       "pctAA": 0.1953125,
       "mismatches": [
         {
@@ -1842,7 +1842,7 @@
       "key": "checked.enabled__hover",
       "channelsCompared": 122,
       "channelsEqual": 107,
-      "pctExact": 0.5729166666666666,
+      "pctExact": 0.6119791666666666,
       "pctAA": 0.1953125,
       "mismatches": [
         {
@@ -1941,7 +1941,7 @@
       "key": "checked.enabled__focus-visible",
       "channelsCompared": 122,
       "channelsEqual": 105,
-      "pctExact": 1.2565104166666667,
+      "pctExact": 1.2955729166666667,
       "pctAA": 0.6705729166666666,
       "mismatches": [
         {
@@ -2052,7 +2052,7 @@
       "key": "checked.enabled__active",
       "channelsCompared": 122,
       "channelsEqual": 107,
-      "pctExact": 0.5729166666666666,
+      "pctExact": 0.6119791666666666,
       "pctAA": 0.1953125,
       "mismatches": [
         {
@@ -2152,7 +2152,7 @@
       "channelsCompared": 122,
       "channelsEqual": 75,
       "pctExact": 1.6536458333333333,
-      "pctAA": 0.751953125,
+      "pctAA": 0.6966145833333334,
       "mismatches": [
         {
           "part": "root",
@@ -2443,7 +2443,7 @@
       "channelsCompared": 122,
       "channelsEqual": 75,
       "pctExact": 1.6536458333333333,
-      "pctAA": 0.751953125,
+      "pctAA": 0.6966145833333334,
       "mismatches": [
         {
           "part": "root",
@@ -2734,7 +2734,7 @@
       "channelsCompared": 122,
       "channelsEqual": 75,
       "pctExact": 1.6536458333333333,
-      "pctAA": 0.751953125,
+      "pctAA": 0.6966145833333334,
       "mismatches": [
         {
           "part": "root",
@@ -3025,7 +3025,7 @@
       "channelsCompared": 122,
       "channelsEqual": 75,
       "pctExact": 1.6536458333333333,
-      "pctAA": 0.751953125,
+      "pctAA": 0.6966145833333334,
       "mismatches": [
         {
           "part": "root",
