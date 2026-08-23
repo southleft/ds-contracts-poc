@@ -1328,6 +1328,8 @@ captured in **zero** libraries inflates Astryx's denominator by more than twice
 that library's entire numerator (13):
 
 ```bash
+# examples/astryx/out/ and .astryx-sandbox/ are gitignored (not tracked): recreate the
+# sandbox per examples/astryx/PROVENANCE.md, then `npm run extract:code -- examples/astryx/extract.config.json`
 node -e "const ext=require('./examples/astryx/out/code-extraction.json');
 const pkg=require('./examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/package.json');
 const subs=new Set(Object.keys(pkg.exports).filter(k=>/^\.\/[A-Z][^/]*\$/.test(k)).map(k=>k.slice(2)));
@@ -1368,7 +1370,7 @@ data.
 | Altitude (`altitude-web-components@1.0.2`) | 8 | 67 | FAMILY | yes | **11.9%** | **64** | **12.5%** | 3 |
 | Polaris (`@shopify/polaris@13.9.5`) | 12 | 180 | PART | **NO** — GitHub clone `Shopify/polaris@2b1ea88`, name list not in this repo | **6.7%** | **98** *(substitute set: the captured package's own `build/esm/components`, 121 dirs)* | **12.2%** | 23 |
 | Carbon (`@carbon/react@1.112.0`) | 10 | 243 | PART | **NO** — GitHub clone `carbon-design-system/carbon@bc66fc71`, name list not in this repo | **4.1%** | **110** *(substitute set: the captured package's own `es/components`, 122 dirs)* | **9.1%** | 12 |
-| Astryx (`@astryxdesign/core@0.1.6`) | 13 | 222 | PART | yes (`examples/astryx/out/code-extraction.json`) | **5.9%** | **96** *(the package's own capitalised subpath exports, 99)* | **13.5%** | 3 |
+| Astryx (`@astryxdesign/core@0.1.6`) | 13 | 222 | PART | yes (`examples/astryx/out/code-extraction.json` — a gitignored extraction output, not tracked; regenerate it with `npm run extract:code -- examples/astryx/extract.config.json` over the sandbox in `examples/astryx/PROVENANCE.md`) | **5.9%** | **96** *(the package's own capitalised subpath exports, 99)* | **13.5%** | 3 |
 | **total** | **62** | **893** | mixed | — | **6.9%** | **529** | **11.7%** |  |
 | *unweighted mean of the six rows* |  |  |  |  | *8.3%* |  | *11.8%* |  |
 
@@ -1432,6 +1434,7 @@ classes rule keeps `Collapse` and `ScopedCssBaseline`, drops `MenuList` and
 rules, same count:
 
 ```bash
+# examples/mui/.mui-sandbox is the gitignored install sandbox (not tracked): recreate it per examples/mui/PROVENANCE.md
 node -e "const fs=require('fs');const d='examples/mui/.mui-sandbox/node_modules/@mui/material';
 const dirs=fs.readdirSync(d,{withFileTypes:true}).filter(e=>e.isDirectory()&&/^[A-Z]/.test(e.name)).map(e=>e.name);
 const no=dirs.filter(n=>!fs.readdirSync(d+'/'+n).includes(n[0].toLowerCase()+n.slice(1)+'Classes.js'));
@@ -2584,14 +2587,16 @@ console.log('total'.padEnd(9),'contracts',C,'drift rows',R)"
 # → 62 contracts, 54 drift rows
 
 # the unit defect in the published denominator (§C.1.3): 98 dirs, 97 public,
-# and `Table` alone is 29 of Astryx's 222
+# and `Table` alone is 29 of Astryx's 222 (examples/astryx/out/ and .astryx-sandbox/ are
+# gitignored: sandbox per examples/astryx/PROVENANCE.md, then `npm run extract:code -- examples/astryx/extract.config.json`)
 node -e "const ext=require('./examples/astryx/out/code-extraction.json');
 const pkg=require('./examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/package.json');
 const subs=new Set(Object.keys(pkg.exports).filter(k=>/^\.\/[A-Z][^/]*\$/.test(k)).map(k=>k.slice(2)));
 const f=new Map();for(const e of ext){const d=e.source.match(/\/src\/([^/]+)\//)[1];f.set(d,(f.get(d)||0)+1)}
 console.log(f.size,[...f.keys()].filter(d=>subs.has(d)).length,f.get('Table'))"   # → 98 97 29
 
-# the filtered MUI denominator, by a library-native rule (§C.1.3)
+# the filtered MUI denominator, by a library-native rule (§C.1.3); examples/mui/.mui-sandbox is
+# the gitignored install sandbox (not tracked) — recreate it per examples/mui/PROVENANCE.md
 node -e "const fs=require('fs');const d='examples/mui/.mui-sandbox/node_modules/@mui/material';
 const dirs=fs.readdirSync(d,{withFileTypes:true}).filter(e=>e.isDirectory()&&/^[A-Z]/.test(e.name)).map(e=>e.name);
 const no=dirs.filter(n=>!fs.readdirSync(d+'/'+n).includes(n[0].toLowerCase()+n.slice(1)+'Classes.js'));

@@ -462,7 +462,10 @@ ship.
 
 ### The original finding
 
-`extract/computed/out/badge/decisions.json` carries two human-acked
+`extract/computed/out/badge/decisions.json` (the un-namespaced ledger; removed
+in `d10511c4` when the Polaris Badge directory was restored — its rows were
+astryx's, and they remain verbatim in
+`extract/computed/out/astryx/badge/decisions.json`) carried two human-acked
 resolutions to `{font-size-sm}` and `{spacing-0}` — the REPO's token spelling,
 not Polaris's `{p.*}`. This is the same cross-library contamination class that
 `b66e5a3` fixed for astryx (via `--out` namespacing) and never audited for

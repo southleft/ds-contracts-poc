@@ -27,7 +27,7 @@ import {
   parseModuleCss,
   resolveToRef,
   type TokenLookup,
-} from '../examples/polaris/scripts/lib-css.js';
+} from '../extract/computed/lib-css.js';
 import {
   CONTRACT_STATES,
   ContractSchema,
