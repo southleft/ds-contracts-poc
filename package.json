@@ -147,6 +147,7 @@
     "extract:computed": "tsx extract/computed/run.ts",
     "extract:computed:regate": "tsx extract/computed/regate.ts",
     "extract:computed:drift": "tsx extract/computed/drift-check.ts",
+    "extract:computed:drift:remeasure": "tsx extract/computed/drift-check.ts --remeasure",
     "extract:computed:resolve": "tsx extract/computed/resolve.ts",
     "extract:computed:ceiling:check": "tsx extract/computed/stylesheet-ceiling-check.ts",
     "extract:computed:color:check": "tsx extract/computed/color-parse-check.ts",
@@ -225,7 +226,8 @@
     "conformance:roundtrip": "tsx conformance/canvas.ts",
     "root-text:check": "tsx core/root-text-check.ts",
     "first-party-bundle:check": "tsx core/first-party-bundle-check.ts",
-    "prop-collision:check": "tsx core/prop-collision-check.ts"
+    "prop-collision:check": "tsx core/prop-collision-check.ts",
+    "parity:snapshot:rest": "tsx parity/snapshot-rest.ts"
   },
   "engines": {
     "node": ">=20"

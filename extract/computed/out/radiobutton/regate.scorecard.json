@@ -124,6 +124,11 @@
         "part": "label",
         "channel": "cursor",
         "value": "pointer"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Inter, -apple-system, \"system-ui\", \"San Francisco\", \"Segoe UI\", Roboto, \"Helvetica Neue\", sans-serif"
       }
     ],
     "state": [
@@ -210,9 +215,9 @@
     "combos": 4,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 1392,
-      "cellsEqual": 1132,
-      "pctEqual": 81.32183908045977,
+      "cellsCompared": 1408,
+      "cellsEqual": 1148,
+      "pctEqual": 81.5340909090909,
       "rowsFullyEqual": 0,
       "rows": 16
     },
@@ -413,8 +418,8 @@
       "overflow: backdrop.border-left-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: backdrop.border-right-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: backdrop.border-top-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "code-only: input.clip-path — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: input.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+      "code-only: input.clip-path — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: input.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it."
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -422,7 +427,7 @@
     },
     "shippedMinted": {
       "path": "examples/polaris/tokens/polaris-minted.dtcg.json",
-      "leavesAdded": 1265,
+      "leavesAdded": 1256,
       "divergent": [
         {
           "token": "imported.radio-button.backdrop.background-color-state-active.checked",
@@ -435,26 +440,14 @@
           "fresh": "#303030",
           "shipped": "{p.color-bg-fill-brand-selected}",
           "resolvedEqual": true
-        },
-        {
-          "token": "imported.radio-button.backdrop.background-color.checked",
-          "fresh": "#303030",
-          "shipped": "{p.color-bg-fill-brand-selected}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.radio-button.backdrop.background-color.unchecked",
-          "fresh": "#fdfdfd",
-          "shipped": "{p.color-input-bg-surface}",
-          "resolvedEqual": true
         }
       ]
     },
     "rows": [
       {
         "key": "unchecked.enabled__default",
-        "channelsCompared": 87,
-        "channelsEqual": 86,
+        "channelsCompared": 88,
+        "channelsEqual": 87,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -470,8 +463,8 @@
       },
       {
         "key": "unchecked.enabled__hover",
-        "channelsCompared": 87,
-        "channelsEqual": 81,
+        "channelsCompared": 88,
+        "channelsEqual": 82,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -517,8 +510,8 @@
       },
       {
         "key": "unchecked.enabled__focus-visible",
-        "channelsCompared": 87,
-        "channelsEqual": 85,
+        "channelsCompared": 88,
+        "channelsEqual": 86,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -540,8 +533,8 @@
       },
       {
         "key": "unchecked.enabled__active",
-        "channelsCompared": 87,
-        "channelsEqual": 77,
+        "channelsCompared": 88,
+        "channelsEqual": 78,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -611,8 +604,8 @@
       },
       {
         "key": "unchecked.disabled__default",
-        "channelsCompared": 87,
-        "channelsEqual": 56,
+        "channelsCompared": 88,
+        "channelsEqual": 57,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -808,8 +801,8 @@
       },
       {
         "key": "unchecked.disabled__hover",
-        "channelsCompared": 87,
-        "channelsEqual": 56,
+        "channelsCompared": 88,
+        "channelsEqual": 57,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1005,8 +998,8 @@
       },
       {
         "key": "unchecked.disabled__focus-visible",
-        "channelsCompared": 87,
-        "channelsEqual": 56,
+        "channelsCompared": 88,
+        "channelsEqual": 57,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1202,8 +1195,8 @@
       },
       {
         "key": "unchecked.disabled__active",
-        "channelsCompared": 87,
-        "channelsEqual": 56,
+        "channelsCompared": 88,
+        "channelsEqual": 57,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1399,8 +1392,8 @@
       },
       {
         "key": "checked.enabled__default",
-        "channelsCompared": 87,
-        "channelsEqual": 86,
+        "channelsCompared": 88,
+        "channelsEqual": 87,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1416,8 +1409,8 @@
       },
       {
         "key": "checked.enabled__hover",
-        "channelsCompared": 87,
-        "channelsEqual": 86,
+        "channelsCompared": 88,
+        "channelsEqual": 87,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1433,8 +1426,8 @@
       },
       {
         "key": "checked.enabled__focus-visible",
-        "channelsCompared": 87,
-        "channelsEqual": 85,
+        "channelsCompared": 88,
+        "channelsEqual": 86,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1456,8 +1449,8 @@
       },
       {
         "key": "checked.enabled__active",
-        "channelsCompared": 87,
-        "channelsEqual": 82,
+        "channelsCompared": 88,
+        "channelsEqual": 83,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1497,8 +1490,8 @@
       },
       {
         "key": "checked.disabled__default",
-        "channelsCompared": 87,
-        "channelsEqual": 60,
+        "channelsCompared": 88,
+        "channelsEqual": 61,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1670,8 +1663,8 @@
       },
       {
         "key": "checked.disabled__hover",
-        "channelsCompared": 87,
-        "channelsEqual": 60,
+        "channelsCompared": 88,
+        "channelsEqual": 61,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1843,8 +1836,8 @@
       },
       {
         "key": "checked.disabled__focus-visible",
-        "channelsCompared": 87,
-        "channelsEqual": 60,
+        "channelsCompared": 88,
+        "channelsEqual": 61,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2016,8 +2009,8 @@
       },
       {
         "key": "checked.disabled__active",
-        "channelsCompared": 87,
-        "channelsEqual": 60,
+        "channelsCompared": 88,
+        "channelsEqual": 61,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

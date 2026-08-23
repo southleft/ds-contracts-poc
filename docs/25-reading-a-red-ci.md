@@ -187,7 +187,7 @@ that does not exist.
   `adherence:aggregate`** — capture and replay instruments, not invariants. Each
   needs a live Figma file, a Figma token, or a banked artifact directory that is
   gitignored.
-- **`seed:verify`, `extract:computed:drift`, `mint:code:check`** — carried with
+- **`seed:verify`, `mint:code:check`** — carried with
   their reasons in the `EXCLUDED` table at the top of
   [`.github/scripts/lane-coverage.ts`](../.github/scripts/lane-coverage.ts).
   `npm run ci:lanes` fails if one of those reasons goes stale, or if a lane

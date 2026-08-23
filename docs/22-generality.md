@@ -948,9 +948,12 @@ npm run plugin:check             # MUI 14 / Astryx 13 / Polaris 12 / Carbon 10 b
 
 Two commands are **not** in that list on purpose. `npm run extract:computed`
 re-captures a library and needs a gitignored sandbox installed per the recipe in
-that library's PROVENANCE. `npm run extract:computed:drift` costs ~6 minutes of
-real Chromium and re-records `regate-baseline.json` when passed `--write`; run
-it deliberately, alone, and say what moved.
+that library's PROVENANCE. `npm run extract:computed:drift:remeasure` costs
+~37 minutes of real Chromium (104 components; the full lane runs it) and, as
+`extract:computed:drift -- --write`, re-records `regate-baseline.json` plus the
+tracked offline scorecards; run the re-record deliberately, alone, and say what
+moved. The browser-free `npm run extract:computed:drift` (fast lane) is what
+holds the committed numbers to the committed artifacts in between.
 
 ---
 

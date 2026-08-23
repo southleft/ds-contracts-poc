@@ -399,7 +399,7 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1889,
+      "leavesAdded": 1896,
       "divergent": [
         {
           "token": "imported.radio.root.color.default.checked",

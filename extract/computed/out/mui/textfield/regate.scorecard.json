@@ -385,7 +385,7 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1946,
+      "leavesAdded": 1953,
       "divergent": [
         {
           "token": "imported.text-field.label-2.color",

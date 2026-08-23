@@ -7,6 +7,11 @@
     "base": [
       {
         "part": "root",
+        "channel": "font-family",
+        "value": "Times"
+      },
+      {
+        "part": "root",
         "channel": "transition-duration",
         "value": "0.3s"
       },
@@ -32,9 +37,9 @@
     "combos": 8,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 1056,
-      "cellsEqual": 928,
-      "pctEqual": 87.87878787878788,
+      "cellsCompared": 1088,
+      "cellsEqual": 960,
+      "pctEqual": 88.23529411764706,
       "rowsFullyEqual": 16,
       "rows": 32
     },
@@ -169,7 +174,7 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1954,
+      "leavesAdded": 1961,
       "divergent": [
         {
           "token": "imported.paper.root.background-color",
@@ -182,8 +187,8 @@
     "rows": [
       {
         "key": "0.elevation__default",
-        "channelsCompared": 33,
-        "channelsEqual": 33,
+        "channelsCompared": 34,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -192,8 +197,8 @@
       },
       {
         "key": "0.elevation__hover",
-        "channelsCompared": 33,
-        "channelsEqual": 33,
+        "channelsCompared": 34,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -202,8 +207,8 @@
       },
       {
         "key": "0.elevation__focus-visible",
-        "channelsCompared": 33,
-        "channelsEqual": 33,
+        "channelsCompared": 34,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -212,8 +217,8 @@
       },
       {
         "key": "0.elevation__active",
-        "channelsCompared": 33,
-        "channelsEqual": 33,
+        "channelsCompared": 34,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -222,8 +227,8 @@
       },
       {
         "key": "0.outlined__default",
-        "channelsCompared": 33,
-        "channelsEqual": 25,
+        "channelsCompared": 34,
+        "channelsEqual": 26,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -281,8 +286,8 @@
       },
       {
         "key": "0.outlined__hover",
-        "channelsCompared": 33,
-        "channelsEqual": 25,
+        "channelsCompared": 34,
+        "channelsEqual": 26,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -340,8 +345,8 @@
       },
       {
         "key": "0.outlined__focus-visible",
-        "channelsCompared": 33,
-        "channelsEqual": 25,
+        "channelsCompared": 34,
+        "channelsEqual": 26,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -399,8 +404,8 @@
       },
       {
         "key": "0.outlined__active",
-        "channelsCompared": 33,
-        "channelsEqual": 25,
+        "channelsCompared": 34,
+        "channelsEqual": 26,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -458,8 +463,8 @@
       },
       {
         "key": "1.elevation__default",
-        "channelsCompared": 33,
-        "channelsEqual": 33,
+        "channelsCompared": 34,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -468,8 +473,8 @@
       },
       {
         "key": "1.elevation__hover",
-        "channelsCompared": 33,
-        "channelsEqual": 33,
+        "channelsCompared": 34,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -478,8 +483,8 @@
       },
       {
         "key": "1.elevation__focus-visible",
-        "channelsCompared": 33,
-        "channelsEqual": 33,
+        "channelsCompared": 34,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -488,8 +493,8 @@
       },
       {
         "key": "1.elevation__active",
-        "channelsCompared": 33,
-        "channelsEqual": 33,
+        "channelsCompared": 34,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -498,8 +503,8 @@
       },
       {
         "key": "1.outlined__default",
-        "channelsCompared": 33,
-        "channelsEqual": 25,
+        "channelsCompared": 34,
+        "channelsEqual": 26,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -557,8 +562,8 @@
       },
       {
         "key": "1.outlined__hover",
-        "channelsCompared": 33,
-        "channelsEqual": 25,
+        "channelsCompared": 34,
+        "channelsEqual": 26,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -616,8 +621,8 @@
       },
       {
         "key": "1.outlined__focus-visible",
-        "channelsCompared": 33,
-        "channelsEqual": 25,
+        "channelsCompared": 34,
+        "channelsEqual": 26,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -675,8 +680,8 @@
       },
       {
         "key": "1.outlined__active",
-        "channelsCompared": 33,
-        "channelsEqual": 25,
+        "channelsCompared": 34,
+        "channelsEqual": 26,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -734,8 +739,8 @@
       },
       {
         "key": "3.elevation__default",
-        "channelsCompared": 33,
-        "channelsEqual": 33,
+        "channelsCompared": 34,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -744,8 +749,8 @@
       },
       {
         "key": "3.elevation__hover",
-        "channelsCompared": 33,
-        "channelsEqual": 33,
+        "channelsCompared": 34,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -754,8 +759,8 @@
       },
       {
         "key": "3.elevation__focus-visible",
-        "channelsCompared": 33,
-        "channelsEqual": 33,
+        "channelsCompared": 34,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -764,8 +769,8 @@
       },
       {
         "key": "3.elevation__active",
-        "channelsCompared": 33,
-        "channelsEqual": 33,
+        "channelsCompared": 34,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -774,8 +779,8 @@
       },
       {
         "key": "3.outlined__default",
-        "channelsCompared": 33,
-        "channelsEqual": 25,
+        "channelsCompared": 34,
+        "channelsEqual": 26,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -833,8 +838,8 @@
       },
       {
         "key": "3.outlined__hover",
-        "channelsCompared": 33,
-        "channelsEqual": 25,
+        "channelsCompared": 34,
+        "channelsEqual": 26,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -892,8 +897,8 @@
       },
       {
         "key": "3.outlined__focus-visible",
-        "channelsCompared": 33,
-        "channelsEqual": 25,
+        "channelsCompared": 34,
+        "channelsEqual": 26,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -951,8 +956,8 @@
       },
       {
         "key": "3.outlined__active",
-        "channelsCompared": 33,
-        "channelsEqual": 25,
+        "channelsCompared": 34,
+        "channelsEqual": 26,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1010,8 +1015,8 @@
       },
       {
         "key": "8.elevation__default",
-        "channelsCompared": 33,
-        "channelsEqual": 33,
+        "channelsCompared": 34,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1020,8 +1025,8 @@
       },
       {
         "key": "8.elevation__hover",
-        "channelsCompared": 33,
-        "channelsEqual": 33,
+        "channelsCompared": 34,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1030,8 +1035,8 @@
       },
       {
         "key": "8.elevation__focus-visible",
-        "channelsCompared": 33,
-        "channelsEqual": 33,
+        "channelsCompared": 34,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1040,8 +1045,8 @@
       },
       {
         "key": "8.elevation__active",
-        "channelsCompared": 33,
-        "channelsEqual": 33,
+        "channelsCompared": 34,
+        "channelsEqual": 34,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1050,8 +1055,8 @@
       },
       {
         "key": "8.outlined__default",
-        "channelsCompared": 33,
-        "channelsEqual": 25,
+        "channelsCompared": 34,
+        "channelsEqual": 26,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1109,8 +1114,8 @@
       },
       {
         "key": "8.outlined__hover",
-        "channelsCompared": 33,
-        "channelsEqual": 25,
+        "channelsCompared": 34,
+        "channelsEqual": 26,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1168,8 +1173,8 @@
       },
       {
         "key": "8.outlined__focus-visible",
-        "channelsCompared": 33,
-        "channelsEqual": 25,
+        "channelsCompared": 34,
+        "channelsEqual": 26,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1227,8 +1232,8 @@
       },
       {
         "key": "8.outlined__active",
-        "channelsCompared": 33,
-        "channelsEqual": 25,
+        "channelsCompared": 34,
+        "channelsEqual": 26,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

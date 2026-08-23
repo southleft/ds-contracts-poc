@@ -1,0 +1,1075 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "Dialog",
+  "config": "extract/computed/configs/fluent.json",
+  "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "declared": {
+    "base": [
+      {
+        "part": "dialogbody-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-4",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "box-sizing",
+        "value": "content-box"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "label-5",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-5",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "label-5",
+        "channel": "overflow-x",
+        "value": "auto"
+      },
+      {
+        "part": "label-5",
+        "channel": "overflow-y",
+        "value": "auto"
+      },
+      {
+        "part": "dialogactions-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-6",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-6",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-6",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-6",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-6",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "label-6",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label-6",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label-6",
+        "channel": "transition-duration",
+        "value": "0.1s"
+      },
+      {
+        "part": "label-6",
+        "channel": "transition-property",
+        "value": "background, border, color"
+      },
+      {
+        "part": "label-6",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.33, 0, 0.67, 1)"
+      },
+      {
+        "part": "dialogsurface",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "dialogsurface",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "dialogsurface",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "dialogsurface",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "dialogsurface",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "dialogbody",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "label-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "label-2",
+        "channel": "overflow-x",
+        "value": "auto"
+      },
+      {
+        "part": "label-2",
+        "channel": "overflow-y",
+        "value": "auto"
+      },
+      {
+        "part": "dialogactions",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-3",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-3",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-3",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-3",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-3",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "label-3",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label-3",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label-3",
+        "channel": "transition-duration",
+        "value": "0.1s"
+      },
+      {
+        "part": "label-3",
+        "channel": "transition-property",
+        "value": "background, border, color"
+      },
+      {
+        "part": "label-3",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.33, 0, 0.67, 1)"
+      }
+    ],
+    "state": []
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "Dialog",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 3,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 448,
+      "cellsEqual": 370,
+      "pctEqual": 82.58928571428571,
+      "rowsFullyEqual": 0,
+      "rows": 12
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 12,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 98,
+      "mintedLeavesUnfolded": 98,
+      "baseBindings": 160,
+      "stateBindings": 0,
+      "codeOnlyChannels": 54,
+      "overflowBindings": 0,
+      "folds": 18
+    },
+    "worstRows": [
+      {
+        "key": "non-modal__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 34,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "modal__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 22,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "alert__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 22,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "modal__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "modal__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "modal__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "non-modal__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "non-modal__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "root.position",
+        3
+      ],
+      [
+        "root.box-sizing",
+        2
+      ],
+      [
+        "root.z-index",
+        2
+      ],
+      [
+        "dialogsurface__backdrop.position",
+        2
+      ],
+      [
+        "dialogsurface.position",
+        2
+      ],
+      [
+        "dialogbody.display",
+        2
+      ],
+      [
+        "dialogbody.grid-template-columns",
+        2
+      ],
+      [
+        "dialogbody.grid-template-rows",
+        2
+      ],
+      [
+        "label.grid-column-end",
+        2
+      ],
+      [
+        "label.grid-column-start",
+        2
+      ],
+      [
+        "label.grid-row-end",
+        2
+      ],
+      [
+        "label.grid-row-start",
+        2
+      ],
+      [
+        "label-2.grid-column-end",
+        2
+      ],
+      [
+        "label-2.grid-column-start",
+        2
+      ],
+      [
+        "label-2.grid-row-end",
+        2
+      ]
+    ],
+    "namedLosses": [
+      "promotion: grid-two-dimensional: grid resolves 3 columns × 3 rows — a two-dimensional grid has no auto-layout spelling (one axis would have to be invented); no layout carried (named refusal) (part dialogbody-2)",
+      "promotion: non-painting-part: part-1-0 <i> renders NO INK in any combo it appears in (content-visibility: hidden) and no descendant paints — NOT promoted. A part that paints nowhere must carry the fact that hides it (declared display:none / an opacity token) or be refused by name; neither `visibility` nor `content-visibility` has a carried spelling, so promoting this box would put a VISIBLE frame on the canvas that the browser draws nowhere (the general form of the SVG <title> defect)",
+      "promotion: grid-two-dimensional: grid resolves 3 columns × 3 rows — a two-dimensional grid has no auto-layout spelling (one axis would have to be invented); no layout carried (named refusal) (part dialogbody)",
+      "promotion: non-painting-part: part-1-2 <i> renders NO INK in any combo it appears in (content-visibility: hidden) and no descendant paints — NOT promoted. A part that paints nowhere must carry the fact that hides it (declared display:none / an opacity token) or be refused by name; neither `visibility` nor `content-visibility` has a carried spelling, so promoting this box would put a VISIBLE frame on the canvas that the browser draws nowhere (the general form of the SVG <title> defect)",
+      "code-only: root.border-bottom-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: root.border-left-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: root.border-right-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: root.border-top-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: root.box-sizing — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: root.max-height — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: root.max-width — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: root.position — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: root.scale — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.z-index — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: dialogbody-2.display — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: dialogbody-2.grid-template-columns — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: dialogbody-2.grid-template-rows — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-4.grid-column-end — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: label-4.grid-column-start — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: label-4.grid-row-end — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: label-4.grid-row-start — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: label-4.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h2>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h2> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: dialogtitle__action.align-self — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: dialogtitle__action.grid-column-start — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: dialogtitle__action.grid-row-end — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: dialogtitle__action.grid-row-start — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: dialogtitle__action.justify-self — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0-1-0.appearance — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: label-5.grid-column-end — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: label-5.grid-column-start — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: label-5.grid-row-end — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: label-5.grid-row-start — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: dialogactions-2.grid-column-end — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: dialogactions-2.grid-column-start — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: dialogactions-2.grid-row-end — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: dialogactions-2.grid-row-start — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: dialogactions-2.justify-self — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-6.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: dialogsurface__backdrop.position — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: dialogsurface.position — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: dialogbody.display — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: dialogbody.grid-template-columns — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: dialogbody.grid-template-rows — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.grid-column-end — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: label.grid-column-start — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: label.grid-row-end — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: label.grid-row-start — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: label.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h2>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h2> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: label-2.grid-column-end — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: label-2.grid-column-start — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: label-2.grid-row-end — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: label-2.grid-row-start — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: dialogactions.grid-column-end — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: dialogactions.grid-column-start — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: dialogactions.grid-row-end — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: dialogactions.grid-row-start — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: dialogactions.justify-self — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-3.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/fluent/tokens/fluent-minted.dtcg.json",
+      "leavesAdded": 1566,
+      "divergent": []
+    },
+    "rows": [
+      {
+        "key": "modal__default",
+        "channelsCompared": 160,
+        "channelsEqual": 138,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "box-sizing",
+            "ours": "border-box",
+            "theirs": "content-box"
+          },
+          {
+            "part": "root",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "absolute"
+          },
+          {
+            "part": "root",
+            "channel": "z-index",
+            "ours": "auto",
+            "theirs": "1000000"
+          },
+          {
+            "part": "dialogsurface__backdrop",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "fixed"
+          },
+          {
+            "part": "dialogsurface",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "fixed"
+          },
+          {
+            "part": "dialogbody",
+            "channel": "display",
+            "ours": "flex",
+            "theirs": "grid"
+          },
+          {
+            "part": "dialogbody",
+            "channel": "grid-template-columns",
+            "ours": "none",
+            "theirs": "267px 267px 0px"
+          },
+          {
+            "part": "dialogbody",
+            "channel": "grid-template-rows",
+            "ours": "none",
+            "theirs": "28px 28px 32px"
+          },
+          {
+            "part": "label",
+            "channel": "grid-column-end",
+            "ours": "auto",
+            "theirs": "4"
+          },
+          {
+            "part": "label",
+            "channel": "grid-column-start",
+            "ours": "auto",
+            "theirs": "1"
+          },
+          {
+            "part": "label",
+            "channel": "grid-row-end",
+            "ours": "auto",
+            "theirs": "1"
+          },
+          {
+            "part": "label",
+            "channel": "grid-row-start",
+            "ours": "auto",
+            "theirs": "1"
+          },
+          {
+            "part": "label-2",
+            "channel": "grid-column-end",
+            "ours": "auto",
+            "theirs": "4"
+          },
+          {
+            "part": "label-2",
+            "channel": "grid-column-start",
+            "ours": "auto",
+            "theirs": "1"
+          },
+          {
+            "part": "label-2",
+            "channel": "grid-row-end",
+            "ours": "auto",
+            "theirs": "2"
+          },
+          {
+            "part": "label-2",
+            "channel": "grid-row-start",
+            "ours": "auto",
+            "theirs": "2"
+          },
+          {
+            "part": "dialogactions",
+            "channel": "grid-column-end",
+            "ours": "auto",
+            "theirs": "4"
+          },
+          {
+            "part": "dialogactions",
+            "channel": "grid-column-start",
+            "ours": "auto",
+            "theirs": "2"
+          },
+          {
+            "part": "dialogactions",
+            "channel": "grid-row-end",
+            "ours": "auto",
+            "theirs": "3"
+          },
+          {
+            "part": "dialogactions",
+            "channel": "grid-row-start",
+            "ours": "auto",
+            "theirs": "3"
+          },
+          {
+            "part": "dialogactions",
+            "channel": "justify-self",
+            "ours": "auto",
+            "theirs": "end"
+          },
+          {
+            "part": "label-3",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "modal__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "modal__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "modal__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "non-modal__default",
+        "channelsCompared": 128,
+        "channelsEqual": 94,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-style",
+            "ours": "none",
+            "theirs": "solid"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-width",
+            "ours": "0px",
+            "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "max-height",
+            "ours": "none",
+            "theirs": "1400px"
+          },
+          {
+            "part": "root",
+            "channel": "max-width",
+            "ours": "none",
+            "theirs": "600px"
+          },
+          {
+            "part": "root",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "fixed"
+          },
+          {
+            "part": "root",
+            "channel": "scale",
+            "ours": "none",
+            "theirs": "1"
+          },
+          {
+            "part": "dialogbody-2",
+            "channel": "display",
+            "ours": "flex",
+            "theirs": "grid"
+          },
+          {
+            "part": "dialogbody-2",
+            "channel": "grid-template-columns",
+            "ours": "none",
+            "theirs": "257px 257px 20px"
+          },
+          {
+            "part": "dialogbody-2",
+            "channel": "grid-template-rows",
+            "ours": "none",
+            "theirs": "28px 28px 32px"
+          },
+          {
+            "part": "label-4",
+            "channel": "grid-column-end",
+            "ours": "auto",
+            "theirs": "3"
+          },
+          {
+            "part": "label-4",
+            "channel": "grid-column-start",
+            "ours": "auto",
+            "theirs": "1"
+          },
+          {
+            "part": "label-4",
+            "channel": "grid-row-end",
+            "ours": "auto",
+            "theirs": "1"
+          },
+          {
+            "part": "label-4",
+            "channel": "grid-row-start",
+            "ours": "auto",
+            "theirs": "1"
+          },
+          {
+            "part": "dialogtitle__action",
+            "channel": "align-self",
+            "ours": "auto",
+            "theirs": "start"
+          },
+          {
+            "part": "dialogtitle__action",
+            "channel": "grid-column-start",
+            "ours": "auto",
+            "theirs": "3"
+          },
+          {
+            "part": "dialogtitle__action",
+            "channel": "grid-row-end",
+            "ours": "auto",
+            "theirs": "1"
+          },
+          {
+            "part": "dialogtitle__action",
+            "channel": "grid-row-start",
+            "ours": "auto",
+            "theirs": "1"
+          },
+          {
+            "part": "dialogtitle__action",
+            "channel": "justify-self",
+            "ours": "auto",
+            "theirs": "end"
+          },
+          {
+            "part": "label-5",
+            "channel": "grid-column-end",
+            "ours": "auto",
+            "theirs": "4"
+          },
+          {
+            "part": "label-5",
+            "channel": "grid-column-start",
+            "ours": "auto",
+            "theirs": "1"
+          },
+          {
+            "part": "label-5",
+            "channel": "grid-row-end",
+            "ours": "auto",
+            "theirs": "2"
+          },
+          {
+            "part": "label-5",
+            "channel": "grid-row-start",
+            "ours": "auto",
+            "theirs": "2"
+          },
+          {
+            "part": "dialogactions-2",
+            "channel": "grid-column-end",
+            "ours": "auto",
+            "theirs": "4"
+          },
+          {
+            "part": "dialogactions-2",
+            "channel": "grid-column-start",
+            "ours": "auto",
+            "theirs": "2"
+          },
+          {
+            "part": "dialogactions-2",
+            "channel": "grid-row-end",
+            "ours": "auto",
+            "theirs": "3"
+          },
+          {
+            "part": "dialogactions-2",
+            "channel": "grid-row-start",
+            "ours": "auto",
+            "theirs": "3"
+          },
+          {
+            "part": "dialogactions-2",
+            "channel": "justify-self",
+            "ours": "auto",
+            "theirs": "end"
+          },
+          {
+            "part": "label-6",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "non-modal__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "non-modal__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "non-modal__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "alert__default",
+        "channelsCompared": 160,
+        "channelsEqual": 138,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "box-sizing",
+            "ours": "border-box",
+            "theirs": "content-box"
+          },
+          {
+            "part": "root",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "absolute"
+          },
+          {
+            "part": "root",
+            "channel": "z-index",
+            "ours": "auto",
+            "theirs": "1000000"
+          },
+          {
+            "part": "dialogsurface__backdrop",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "fixed"
+          },
+          {
+            "part": "dialogsurface",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "fixed"
+          },
+          {
+            "part": "dialogbody",
+            "channel": "display",
+            "ours": "flex",
+            "theirs": "grid"
+          },
+          {
+            "part": "dialogbody",
+            "channel": "grid-template-columns",
+            "ours": "none",
+            "theirs": "267px 267px 0px"
+          },
+          {
+            "part": "dialogbody",
+            "channel": "grid-template-rows",
+            "ours": "none",
+            "theirs": "28px 28px 32px"
+          },
+          {
+            "part": "label",
+            "channel": "grid-column-end",
+            "ours": "auto",
+            "theirs": "4"
+          },
+          {
+            "part": "label",
+            "channel": "grid-column-start",
+            "ours": "auto",
+            "theirs": "1"
+          },
+          {
+            "part": "label",
+            "channel": "grid-row-end",
+            "ours": "auto",
+            "theirs": "1"
+          },
+          {
+            "part": "label",
+            "channel": "grid-row-start",
+            "ours": "auto",
+            "theirs": "1"
+          },
+          {
+            "part": "label-2",
+            "channel": "grid-column-end",
+            "ours": "auto",
+            "theirs": "4"
+          },
+          {
+            "part": "label-2",
+            "channel": "grid-column-start",
+            "ours": "auto",
+            "theirs": "1"
+          },
+          {
+            "part": "label-2",
+            "channel": "grid-row-end",
+            "ours": "auto",
+            "theirs": "2"
+          },
+          {
+            "part": "label-2",
+            "channel": "grid-row-start",
+            "ours": "auto",
+            "theirs": "2"
+          },
+          {
+            "part": "dialogactions",
+            "channel": "grid-column-end",
+            "ours": "auto",
+            "theirs": "4"
+          },
+          {
+            "part": "dialogactions",
+            "channel": "grid-column-start",
+            "ours": "auto",
+            "theirs": "2"
+          },
+          {
+            "part": "dialogactions",
+            "channel": "grid-row-end",
+            "ours": "auto",
+            "theirs": "3"
+          },
+          {
+            "part": "dialogactions",
+            "channel": "grid-row-start",
+            "ours": "auto",
+            "theirs": "3"
+          },
+          {
+            "part": "dialogactions",
+            "channel": "justify-self",
+            "ours": "auto",
+            "theirs": "end"
+          },
+          {
+            "part": "label-3",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "alert__hover",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "alert__focus-visible",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      },
+      {
+        "key": "alert__active",
+        "channelsCompared": 0,
+        "channelsEqual": 0,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [],
+        "note": "no captured truth for this combo×state"
+      }
+    ]
+  }
+}

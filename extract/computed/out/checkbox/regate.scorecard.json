@@ -189,6 +189,11 @@
         "part": "label",
         "channel": "cursor",
         "value": "pointer"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Inter, -apple-system, \"system-ui\", \"San Francisco\", \"Segoe UI\", Roboto, \"Helvetica Neue\", sans-serif"
       }
     ],
     "state": [
@@ -253,9 +258,9 @@
     "combos": 6,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 2464,
-      "cellsEqual": 1996,
-      "pctEqual": 81.00649350649351,
+      "cellsCompared": 2488,
+      "cellsEqual": 2020,
+      "pctEqual": 81.18971061093248,
       "rowsFullyEqual": 0,
       "rows": 24
     },
@@ -461,15 +466,15 @@
       "overflow: backdrop.border-right-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: backdrop.border-top-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: backdrop.box-shadow [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "code-only: input.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: input.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: backdrop.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: icon-3.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: icon-3.transition-delay — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: icon-3.transition-duration — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: icon-3.transition-property — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: icon-3.transition-timing-function — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: icon-6.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: icon-6.shape-rendering — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: icon-6.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: icon-6.shape-rendering — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only[disabled]: icon-3.cursor — declared-channel state delta on 2/3 combos — partial coverage cannot carry as a state selector (v15); named residue",
       "code-only[disabled]: icon-4.cursor — declared-channel state delta on 1/3 combos — partial coverage cannot carry as a state selector (v15); named residue",
       "code-only[disabled]: icon-6.cursor — declared-channel state delta on 1/3 combos — partial coverage cannot carry as a state selector (v15); named residue",
@@ -481,7 +486,7 @@
     },
     "shippedMinted": {
       "path": "examples/polaris/tokens/polaris-minted.dtcg.json",
-      "leavesAdded": 1250,
+      "leavesAdded": 1239,
       "divergent": [
         {
           "token": "imported.checkbox.backdrop.background-color-state-active.checked",
@@ -520,24 +525,6 @@
           "resolvedEqual": true
         },
         {
-          "token": "imported.checkbox.backdrop.background-color.checked",
-          "fresh": "#303030",
-          "shipped": "{p.color-bg-fill-brand-selected}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.checkbox.backdrop.background-color.indeterminate",
-          "fresh": "#303030",
-          "shipped": "{p.color-bg-fill-brand-selected}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.checkbox.backdrop.background-color.unchecked",
-          "fresh": "#ffffff",
-          "shipped": "{p.color-bg-surface}",
-          "resolvedEqual": true
-        },
-        {
           "token": "imported.checkbox.icon-6.fill",
           "fresh": "#ffffff",
           "shipped": "{p.color-text-brand-on-bg-fill}",
@@ -554,8 +541,8 @@
     "rows": [
       {
         "key": "unchecked.enabled__default",
-        "channelsCompared": 100,
-        "channelsEqual": 95,
+        "channelsCompared": 101,
+        "channelsEqual": 96,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -595,8 +582,8 @@
       },
       {
         "key": "unchecked.enabled__hover",
-        "channelsCompared": 100,
-        "channelsEqual": 97,
+        "channelsCompared": 101,
+        "channelsEqual": 98,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -624,8 +611,8 @@
       },
       {
         "key": "unchecked.enabled__focus-visible",
-        "channelsCompared": 100,
-        "channelsEqual": 93,
+        "channelsCompared": 101,
+        "channelsEqual": 94,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -677,8 +664,8 @@
       },
       {
         "key": "unchecked.enabled__active",
-        "channelsCompared": 100,
-        "channelsEqual": 93,
+        "channelsCompared": 101,
+        "channelsEqual": 94,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -730,8 +717,8 @@
       },
       {
         "key": "unchecked.disabled__default",
-        "channelsCompared": 100,
-        "channelsEqual": 75,
+        "channelsCompared": 101,
+        "channelsEqual": 76,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -891,8 +878,8 @@
       },
       {
         "key": "unchecked.disabled__hover",
-        "channelsCompared": 100,
-        "channelsEqual": 75,
+        "channelsCompared": 101,
+        "channelsEqual": 76,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1052,8 +1039,8 @@
       },
       {
         "key": "unchecked.disabled__focus-visible",
-        "channelsCompared": 100,
-        "channelsEqual": 75,
+        "channelsCompared": 101,
+        "channelsEqual": 76,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1213,8 +1200,8 @@
       },
       {
         "key": "unchecked.disabled__active",
-        "channelsCompared": 100,
-        "channelsEqual": 75,
+        "channelsCompared": 101,
+        "channelsEqual": 76,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1374,8 +1361,8 @@
       },
       {
         "key": "checked.enabled__default",
-        "channelsCompared": 104,
-        "channelsEqual": 97,
+        "channelsCompared": 105,
+        "channelsEqual": 98,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1427,8 +1414,8 @@
       },
       {
         "key": "checked.enabled__hover",
-        "channelsCompared": 104,
-        "channelsEqual": 93,
+        "channelsCompared": 105,
+        "channelsEqual": 94,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1504,8 +1491,8 @@
       },
       {
         "key": "checked.enabled__focus-visible",
-        "channelsCompared": 104,
-        "channelsEqual": 96,
+        "channelsCompared": 105,
+        "channelsEqual": 97,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1563,8 +1550,8 @@
       },
       {
         "key": "checked.enabled__active",
-        "channelsCompared": 104,
-        "channelsEqual": 93,
+        "channelsCompared": 105,
+        "channelsEqual": 94,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1640,8 +1627,8 @@
       },
       {
         "key": "checked.disabled__default",
-        "channelsCompared": 104,
-        "channelsEqual": 73,
+        "channelsCompared": 105,
+        "channelsEqual": 74,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1837,8 +1824,8 @@
       },
       {
         "key": "checked.disabled__hover",
-        "channelsCompared": 104,
-        "channelsEqual": 73,
+        "channelsCompared": 105,
+        "channelsEqual": 74,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2034,8 +2021,8 @@
       },
       {
         "key": "checked.disabled__focus-visible",
-        "channelsCompared": 104,
-        "channelsEqual": 73,
+        "channelsCompared": 105,
+        "channelsEqual": 74,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2231,8 +2218,8 @@
       },
       {
         "key": "checked.disabled__active",
-        "channelsCompared": 104,
-        "channelsEqual": 73,
+        "channelsCompared": 105,
+        "channelsEqual": 74,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2428,8 +2415,8 @@
       },
       {
         "key": "indeterminate.enabled__default",
-        "channelsCompared": 104,
-        "channelsEqual": 94,
+        "channelsCompared": 105,
+        "channelsEqual": 95,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2499,8 +2486,8 @@
       },
       {
         "key": "indeterminate.enabled__hover",
-        "channelsCompared": 104,
-        "channelsEqual": 90,
+        "channelsCompared": 105,
+        "channelsEqual": 91,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2594,8 +2581,8 @@
       },
       {
         "key": "indeterminate.enabled__focus-visible",
-        "channelsCompared": 104,
-        "channelsEqual": 93,
+        "channelsCompared": 105,
+        "channelsEqual": 94,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2671,8 +2658,8 @@
       },
       {
         "key": "indeterminate.enabled__active",
-        "channelsCompared": 104,
-        "channelsEqual": 90,
+        "channelsCompared": 105,
+        "channelsEqual": 91,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2766,8 +2753,8 @@
       },
       {
         "key": "indeterminate.disabled__default",
-        "channelsCompared": 104,
-        "channelsEqual": 70,
+        "channelsCompared": 105,
+        "channelsEqual": 71,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2981,8 +2968,8 @@
       },
       {
         "key": "indeterminate.disabled__hover",
-        "channelsCompared": 104,
-        "channelsEqual": 70,
+        "channelsCompared": 105,
+        "channelsEqual": 71,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3196,8 +3183,8 @@
       },
       {
         "key": "indeterminate.disabled__focus-visible",
-        "channelsCompared": 104,
-        "channelsEqual": 70,
+        "channelsCompared": 105,
+        "channelsEqual": 71,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3411,8 +3398,8 @@
       },
       {
         "key": "indeterminate.disabled__active",
-        "channelsCompared": 104,
-        "channelsEqual": 70,
+        "channelsCompared": 105,
+        "channelsEqual": 71,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

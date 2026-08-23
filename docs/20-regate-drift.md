@@ -518,7 +518,10 @@ round compares like with like:
 - `extract/computed/regate-baseline.json` — 36 rows: offline `pctEqual`,
   `cellsCompared`, `unresolvedTokenRefs`, the committed harness number for
   context, and **`gapCause`, a named reason for every one of the 11 gaps**.
-- `npm run extract:computed:drift` — re-runs all four sweeps and fails by name
+- `npm run extract:computed:drift:remeasure` (since 2026-08-23, docs/23 §D.32;
+  `npm run extract:computed:drift` is now the browser-free VERIFY of the
+  baseline against the committed offline scorecards) — re-runs every sweep
+  into a gitignored scratch directory and fails by name
   on: `pctEqual` outside tolerance (default 0.001), ANY change in
   `cellsCompared` (a moved denominator is a vocabulary change and must be
   acknowledged, never averaged into a percentage), ANY change in unresolved-ref

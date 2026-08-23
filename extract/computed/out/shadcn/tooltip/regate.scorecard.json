@@ -11,6 +11,11 @@
         "value": "matrix(1, 0, 0, 1, 0, 50)"
       },
       {
+        "part": "label",
+        "channel": "font-family",
+        "value": "\"Inter Variable\", sans-serif"
+      },
+      {
         "part": "icon",
         "channel": "overflow-x",
         "value": "hidden"
@@ -32,9 +37,9 @@
     "combos": 1,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 84,
-      "cellsEqual": 48,
-      "pctEqual": 57.142857142857146,
+      "cellsCompared": 85,
+      "cellsEqual": 49,
+      "pctEqual": 57.64705882352941,
       "rowsFullyEqual": 0,
       "rows": 4
     },
@@ -181,8 +186,8 @@
     "rows": [
       {
         "key": "__default",
-        "channelsCompared": 84,
-        "channelsEqual": 48,
+        "channelsCompared": 85,
+        "channelsEqual": 49,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

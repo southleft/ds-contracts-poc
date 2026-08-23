@@ -29,6 +29,11 @@
         "part": "label",
         "channel": "cursor",
         "value": "pointer"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
       }
     ],
     "state": []
@@ -42,9 +47,9 @@
     "combos": 6,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 864,
-      "cellsEqual": 768,
-      "pctEqual": 88.88888888888889,
+      "cellsCompared": 888,
+      "cellsEqual": 792,
+      "pctEqual": 89.1891891891892,
       "rowsFullyEqual": 0,
       "rows": 24
     },
@@ -153,10 +158,10 @@
     "namedLosses": [
       "overflow: part-0.box-shadow [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: part-0.box-shadow [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "code-only[active]: part-0.--tw-ring-shadow — value shape outside mintable kinds and outside the declared vocabulary",
-      "code-only[active]: root.--tw-outline-style — value shape outside mintable kinds and outside the declared vocabulary",
-      "code-only[focus-visible]: part-0.--tw-ring-shadow — value shape outside mintable kinds and outside the declared vocabulary",
-      "code-only[focus-visible]: root.--tw-outline-style — value shape outside mintable kinds and outside the declared vocabulary"
+      "code-only[active]: part-0.--tw-ring-shadow — CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel",
+      "code-only[active]: root.--tw-outline-style — CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel",
+      "code-only[focus-visible]: part-0.--tw-ring-shadow — CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel",
+      "code-only[focus-visible]: root.--tw-outline-style — CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -164,7 +169,7 @@
     },
     "shippedMinted": {
       "path": "examples/tailwind/tokens/tailwind-minted.dtcg.json",
-      "leavesAdded": 206,
+      "leavesAdded": 233,
       "divergent": [
         {
           "token": "imported.toggle-switch.label.font-weight",
@@ -177,8 +182,8 @@
     "rows": [
       {
         "key": "sm.unchecked__default",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -212,8 +217,8 @@
       },
       {
         "key": "sm.unchecked__hover",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -247,8 +252,8 @@
       },
       {
         "key": "sm.unchecked__focus-visible",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -282,8 +287,8 @@
       },
       {
         "key": "sm.unchecked__active",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -317,8 +322,8 @@
       },
       {
         "key": "sm.checked__default",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -352,8 +357,8 @@
       },
       {
         "key": "sm.checked__hover",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -387,8 +392,8 @@
       },
       {
         "key": "sm.checked__focus-visible",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -422,8 +427,8 @@
       },
       {
         "key": "sm.checked__active",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -457,8 +462,8 @@
       },
       {
         "key": "md.unchecked__default",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -492,8 +497,8 @@
       },
       {
         "key": "md.unchecked__hover",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -527,8 +532,8 @@
       },
       {
         "key": "md.unchecked__focus-visible",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -562,8 +567,8 @@
       },
       {
         "key": "md.unchecked__active",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -597,8 +602,8 @@
       },
       {
         "key": "md.checked__default",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -632,8 +637,8 @@
       },
       {
         "key": "md.checked__hover",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -667,8 +672,8 @@
       },
       {
         "key": "md.checked__focus-visible",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -702,8 +707,8 @@
       },
       {
         "key": "md.checked__active",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -737,8 +742,8 @@
       },
       {
         "key": "lg.unchecked__default",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -772,8 +777,8 @@
       },
       {
         "key": "lg.unchecked__hover",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -807,8 +812,8 @@
       },
       {
         "key": "lg.unchecked__focus-visible",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -842,8 +847,8 @@
       },
       {
         "key": "lg.unchecked__active",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -877,8 +882,8 @@
       },
       {
         "key": "lg.checked__default",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -912,8 +917,8 @@
       },
       {
         "key": "lg.checked__hover",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -947,8 +952,8 @@
       },
       {
         "key": "lg.checked__focus-visible",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -982,8 +987,8 @@
       },
       {
         "key": "lg.checked__active",
-        "channelsCompared": 36,
-        "channelsEqual": 32,
+        "channelsCompared": 37,
+        "channelsEqual": 33,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

@@ -177,6 +177,11 @@
       },
       {
         "part": "label",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "label",
         "channel": "text-rendering",
         "value": "auto"
       },
@@ -312,6 +317,11 @@
       },
       {
         "part": "label-2",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "label-2",
         "channel": "text-rendering",
         "value": "auto"
       },
@@ -447,6 +457,11 @@
       },
       {
         "part": "label-3",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "label-3",
         "channel": "text-rendering",
         "value": "auto"
       },
@@ -522,9 +537,9 @@
     "combos": 1,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 1240,
-      "cellsEqual": 1156,
-      "pctEqual": 93.2258064516129,
+      "cellsCompared": 1252,
+      "cellsEqual": 1168,
+      "pctEqual": 93.29073482428115,
       "rowsFullyEqual": 0,
       "rows": 4
     },
@@ -678,7 +693,7 @@
     },
     "shippedMinted": {
       "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-      "leavesAdded": 827,
+      "leavesAdded": 841,
       "divergent": [
         {
           "token": "imported.tabs.part-0.background-color",
@@ -703,8 +718,8 @@
     "rows": [
       {
         "key": "__default",
-        "channelsCompared": 310,
-        "channelsEqual": 290,
+        "channelsCompared": 313,
+        "channelsEqual": 293,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -834,8 +849,8 @@
       },
       {
         "key": "__hover",
-        "channelsCompared": 310,
-        "channelsEqual": 289,
+        "channelsCompared": 313,
+        "channelsEqual": 292,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -971,8 +986,8 @@
       },
       {
         "key": "__focus-visible",
-        "channelsCompared": 310,
-        "channelsEqual": 289,
+        "channelsCompared": 313,
+        "channelsEqual": 292,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1108,8 +1123,8 @@
       },
       {
         "key": "__active",
-        "channelsCompared": 310,
-        "channelsEqual": 288,
+        "channelsCompared": 313,
+        "channelsEqual": 291,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

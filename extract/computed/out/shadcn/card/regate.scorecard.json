@@ -14,6 +14,21 @@
         "part": "root",
         "channel": "overflow-y",
         "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "\"Inter Variable\", sans-serif"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-family",
+        "value": "\"Inter Variable\", sans-serif"
+      },
+      {
+        "part": "label-3",
+        "channel": "font-family",
+        "value": "\"Inter Variable\", sans-serif"
       }
     ],
     "state": []
@@ -27,9 +42,9 @@
     "combos": 2,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 432,
-      "cellsEqual": 304,
-      "pctEqual": 70.37037037037037,
+      "cellsCompared": 456,
+      "cellsEqual": 328,
+      "pctEqual": 71.9298245614035,
       "rowsFullyEqual": 0,
       "rows": 8
     },
@@ -220,8 +235,8 @@
     "rows": [
       {
         "key": "default__default",
-        "channelsCompared": 54,
-        "channelsEqual": 38,
+        "channelsCompared": 57,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -327,8 +342,8 @@
       },
       {
         "key": "default__hover",
-        "channelsCompared": 54,
-        "channelsEqual": 38,
+        "channelsCompared": 57,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -434,8 +449,8 @@
       },
       {
         "key": "default__focus-visible",
-        "channelsCompared": 54,
-        "channelsEqual": 38,
+        "channelsCompared": 57,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -541,8 +556,8 @@
       },
       {
         "key": "default__active",
-        "channelsCompared": 54,
-        "channelsEqual": 38,
+        "channelsCompared": 57,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -648,8 +663,8 @@
       },
       {
         "key": "sm__default",
-        "channelsCompared": 54,
-        "channelsEqual": 38,
+        "channelsCompared": 57,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -755,8 +770,8 @@
       },
       {
         "key": "sm__hover",
-        "channelsCompared": 54,
-        "channelsEqual": 38,
+        "channelsCompared": 57,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -862,8 +877,8 @@
       },
       {
         "key": "sm__focus-visible",
-        "channelsCompared": 54,
-        "channelsEqual": 38,
+        "channelsCompared": 57,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -969,8 +984,8 @@
       },
       {
         "key": "sm__active",
-        "channelsCompared": 54,
-        "channelsEqual": 38,
+        "channelsCompared": 57,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
