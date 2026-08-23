@@ -17,7 +17,7 @@
  * The live-Figma round-trip evals (export→import zero-diff) can't run
  * headless; their executed results are recorded in docs/07-validation.md.
  */
-import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, symlinkSync, writeFileSync } from 'node:fs';
+import { copyFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, symlinkSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { execFileSync, spawnSync } from 'node:child_process';
 import path from 'node:path';
@@ -84,6 +84,8 @@ import {
   parseLedger as syncParseLedger,
   validateLedger as syncValidateLedger,
   emptyLedger as syncEmptyLedger,
+  makeDecision as syncMakeDecision,
+  renderPendingMd as syncRenderPendingMd,
   type LedgerRecord as SyncLedgerRecord,
   type SetObservation as SyncSetObservation,
 } from '../sync/ledger.js';
@@ -11496,6 +11498,63 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const both = syncClassifyRecord(record, HASH_B, obs('v6:100', 'dumpv1:99'));
       if (both.status !== 'conflict') throw new Error(`both halves drifting must classify conflict (got ${both.status})`);
 
+      // THE DECISION (policy 2026-08-23: red means an undecided row). A
+      // drifted row with no decision is undecided; with a FRESH pending
+      // decision it is decided (WARN, not red); when any fact the decision
+      // was taken against moves, it is STALE and undecided again. An in-sync
+      // row is never undecided, whatever it carries.
+      if (clean.undecided || clean.decision !== null) throw new Error('an in-sync row must never be undecided');
+      if (!codeBump.undecided || !codeBump.notes.some((n) => n.includes('UNDECIDED')))
+        throw new Error('a drifted row with no recorded decision must be undecided and say so');
+      const decided: SyncLedgerRecord = {
+        ...record,
+        decision: syncMakeDecision({
+          kind: 'pending-reapply',
+          note: 'code is ahead; re-apply is a Figma write',
+          recordedAt: AT,
+          evidence: ['eval'],
+          basedOn: { contractHash: HASH_B, canvasStamp: 'v6:100', canvasDump: 'dumpv1:10', dumpVersion: 'g1' },
+          command: 'paste probe.figma.js',
+        }),
+      };
+      const decidedRow = syncClassifyRecord(decided, HASH_B, obs('v6:100', 'dumpv1:10'));
+      if (decidedRow.status !== 'code-ahead' || decidedRow.undecided || !decidedRow.decision?.fresh)
+        throw new Error(`a fresh pending-reapply decision must leave the row code-ahead but DECIDED (got ${decidedRow.status}, undecided=${decidedRow.undecided})`);
+      if (!decidedRow.notes.some((n) => n.includes('paste probe.figma.js')))
+        throw new Error('a decided row must print its resolving command');
+      for (const [label, o, h] of [
+        ['stamp moved', obs('v6:101', 'dumpv1:10'), HASH_B],
+        ['dump moved', obs('v6:100', 'dumpv1:11'), HASH_B],
+        ['grammar moved', obs('v6:100', 'dumpv1:10', 'g2'), HASH_B],
+        ['contract moved', obs('v6:100', 'dumpv1:10'), `sha256:${'c'.repeat(64)}`],
+      ] as const) {
+        const stale = syncClassifyRecord(decided, h, o);
+        if (!stale.undecided || stale.decision?.fresh !== false || !stale.notes.some((n) => n.includes('STALE')))
+          throw new Error(`a decision whose ${label} must be STALE and the row undecided again (got undecided=${stale.undecided})`);
+      }
+      let kindRefusal = '';
+      try {
+        syncValidateLedger({ version: 1, records: [{ ...decided, decision: { ...decided.decision, kind: 'maybe' } }] });
+      } catch (e) {
+        kindRefusal = String(e);
+      }
+      if (!kindRefusal.includes('decision.kind')) throw new Error('an unknown decision kind must refuse naming the field');
+      let cmdRefusal = '';
+      try {
+        syncMakeDecision({ kind: 'pending-restamp', note: 'n', recordedAt: AT, evidence: [], basedOn: decided.decision!.basedOn });
+      } catch (e) {
+        cmdRefusal = String(e);
+      }
+      if (!cmdRefusal.includes('--command')) throw new Error('a pending decision without its resolving command must refuse');
+      const decidedBytes = syncSerializeLedger({ ...syncEmptyLedger(), records: [decided] });
+      if (syncSerializeLedger(syncParseLedger(decidedBytes)) !== decidedBytes)
+        throw new Error('a ledger carrying a decision must still serialize deterministically');
+      const pendingMd = syncRenderPendingMd(syncParseLedger(decidedBytes));
+      if (!pendingMd.includes('ds.probe') || !pendingMd.includes('paste probe.figma.js') || !pendingMd.includes('FILEKEY'))
+        throw new Error('PENDING.md must list the pending row with its command and the file key it would write to');
+      if (pendingMd !== syncRenderPendingMd(syncParseLedger(decidedBytes)))
+        throw new Error('PENDING.md must render byte-stably from the same ledger');
+
       // ECHO-LOOP INVARIANT. The amend records its new v6 at write time…
       const ledger0 = { ...syncEmptyLedger(), records: [record] };
       const ledger1 = syncRecordCodeToCanvas(ledger0, {
@@ -11605,7 +11664,8 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     claim: 'C3-detection',
     run: () => {
       const outRoot = path.join(SCRATCH, 'spine-out');
-      const spine = (extra: string[]): { status: number | null; out: string } => {
+      const FIXTURE_LEDGER = 'sync/fixtures/ledger.fixture.json';
+      const spine = (extra: string[], ledger = FIXTURE_LEDGER): { status: number | null; out: string } => {
         const r = spawnSync(
           TSX,
           [
@@ -11613,7 +11673,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
             '--fixture',
             'sync/fixtures/canvas.rest.fixture.json',
             '--ledger',
-            'sync/fixtures/ledger.fixture.json',
+            ledger,
             '--out',
             outRoot,
             ...extra,
@@ -11626,7 +11686,9 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // RED 1: the canvas-ahead fixture must land in the plan as a full bundle.
       const run1 = spine(['--run-id', 'run1']);
       if (run1.status !== 1)
-        throw new Error(`fixture spine must exit 1 (drift present) — got ${run1.status}:\n${run1.out}`);
+        throw new Error(`fixture spine must exit 1 (undecided drift present) — got ${run1.status}:\n${run1.out}`);
+      if (!run1.out.includes('Verdict: undecided') || !run1.out.includes('3 undecided'))
+        throw new Error('an undecided fixture run must carry the Verdict: undecided line and count its undecided rows');
       if (!run1.out.includes('canvas-ahead') || !run1.out.includes('fixture.gamma'))
         throw new Error('spine plan must classify and name the canvas-ahead record');
       const gammaDir = path.join(outRoot, 'run1', 'fixture-gamma');
@@ -11702,9 +11764,90 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         throw new Error('a cursor-skipped record must not be pulled again');
       if (!existsSync(path.join(outRoot, 'run3', 'fixture-delta')))
         throw new Error('the cursor must skip ONLY the PR-d record — the conflict record still pulls');
+
+      // THE POLICY (2026-08-23): red means an UNDECIDED row. The three
+      // drifted fixture rows get a recorded decision through the real verb
+      // (`observe --decide`, bound to the fixture observation's facts) and
+      // the spine must go GREEN with the rows under WARN and in PENDING.md —
+      // while one row left undecided, a stale decision, or an untracked set
+      // still reds it.
+      const decidedLedger = path.join(outRoot, 'decided', 'ledger.fixture.json');
+      mkdirSync(path.dirname(decidedLedger), { recursive: true });
+      copyFileSync(path.join(ROOT, FIXTURE_LEDGER), decidedLedger);
+      // A fresh cursor: RED 3 left gamma "already PR'd" in outRoot/state.json.
+      const freshState = ['--state', path.join(outRoot, 'decided', 'state.json')];
+      const decide = (ledger: string, id: string, kind: string, command: string): { status: number | null; out: string } => {
+        const r = spawnSync(
+          TSX,
+          [
+            path.join(ROOT, 'sync', 'cli.ts'),
+            'observe',
+            '--fixture',
+            'sync/fixtures/canvas.rest.fixture.json',
+            '--ledger',
+            ledger,
+            '--decide',
+            id,
+            '--kind',
+            kind,
+            '--note',
+            `eval: ${id} waits on a human`,
+            '--command',
+            command,
+            '--evidence',
+            'eval evidence line',
+          ],
+          { cwd: ROOT, encoding: 'utf8' },
+        );
+        return { status: r.status, out: `${r.stdout ?? ''}${r.stderr ?? ''}` };
+      };
+      // Refusals first: an in-sync row has nothing to decide; adopt is not a --decide kind.
+      const refuseInSync = decide(decidedLedger, 'fixture.alpha', 'pending-reapply', 'x');
+      if (refuseInSync.status !== 2 || !refuseInSync.out.includes('in-sync'))
+        throw new Error(`--decide on an in-sync row must refuse by name (got ${refuseInSync.status}):\n${refuseInSync.out}`);
+      const refuseAdopt = decide(decidedLedger, 'fixture.beta', 'adopt', 'x');
+      if (refuseAdopt.status !== 2 || !refuseAdopt.out.includes('--adopt'))
+        throw new Error('--decide --kind adopt must refuse and point at --adopt');
+      const d1 = decide(decidedLedger, 'fixture.beta', 'pending-reapply', 'paste beta.figma.js in SYNCFIXTUREFILE0');
+      if (!d1.out.includes('pending-reapply recorded')) throw new Error(`--decide must record the decision:\n${d1.out}`);
+      // RED 5: one decided row does not green the run while others are undecided.
+      const run5 = spine(['--run-id', 'run5', '--only', 'fixture.beta,fixture.gamma,fixture.delta', ...freshState], decidedLedger);
+      if (run5.status !== 1 || !run5.out.includes('Verdict: undecided') || !run5.out.includes('✘ fixture.delta') || !run5.out.includes('⚠ fixture.beta'))
+        throw new Error(`with gamma+delta undecided the run must stay red, naming them (and beta under WARN) — got ${run5.status}:\n${run5.out}`);
+      decide(decidedLedger, 'fixture.gamma', 'pending-reconcile', 'choose: --adopt fixture.gamma | re-apply gamma.figma.js');
+      decide(decidedLedger, 'fixture.delta', 'pending-reconcile', 'choose: --adopt fixture.delta | re-apply delta.figma.js');
+      // RED 4: decided-pending rows do NOT red the lane.
+      const run4 = spine(['--run-id', 'run4', '--only', 'fixture.beta,fixture.gamma,fixture.delta', ...freshState], decidedLedger);
+      if (run4.status !== 0)
+        throw new Error(`every drifted row decided → the spine must exit 0 (got ${run4.status}):\n${run4.out}`);
+      if (!run4.out.includes('Verdict: drift-decided') || !run4.out.includes('pending 1 pending-reapply, 0 pending-restamp, 2 pending-reconcile') || !run4.out.includes('0 undecided'))
+        throw new Error('a decided run must say Verdict: drift-decided and count the decisions by kind');
+      if (!run4.out.includes('⚠ fixture.gamma') || !run4.out.includes('paste beta.figma.js'))
+        throw new Error('decided rows must print under WARN with their resolving command');
+      if (!existsSync(path.join(outRoot, 'run4', 'fixture-gamma', 'PR.md')))
+        throw new Error('a decided canvas-ahead row must STILL be pulled into its proposal bundle — a decision is not a suppression');
+      const pendingMd = readFileSync(path.join(outRoot, 'run4', 'PENDING.md'), 'utf8');
+      for (const want of ['fixture.beta', 'pending-reapply', 'paste beta.figma.js in SYNCFIXTUREFILE0', 'SYNCFIXTUREFILE0', 'fixture.delta', 'eval evidence line'])
+        if (!pendingMd.includes(want)) throw new Error(`PENDING.md must list every pending decision with row, kind, command, file key and evidence (missing ${JSON.stringify(want)})`);
+      if (existsSync(path.join(outRoot, 'decided', 'PENDING.md')) !== true)
+        throw new Error('--decide must regenerate PENDING.md next to the ledger it wrote');
+      // …but an untracked set has no record to decide on: without --only the same ledger is red again.
+      const run4b = spine(['--run-id', 'run4b', ...freshState], decidedLedger);
+      if (run4b.status !== 1 || !run4b.out.includes('untracked Epsilon'))
+        throw new Error('an untracked set must still red the run — nothing can be decided for a set with no ledger record');
+      // RED 6: a decision is bound to its facts — move one and the row is undecided again.
+      const staleLedger = path.join(outRoot, 'decided', 'stale.fixture.json');
+      const parsed = JSON.parse(readFileSync(decidedLedger, 'utf8')) as { records: Array<{ contractId: string; decision?: { basedOn: { canvasStamp: string } } }> };
+      parsed.records.find((r) => r.contractId === 'fixture.beta')!.decision!.basedOn.canvasStamp = 'v6:999999';
+      writeFileSync(staleLedger, JSON.stringify(parsed, null, 2) + '\n');
+      const run6 = spine(['--run-id', 'run6', '--only', 'fixture.beta', ...freshState], staleLedger);
+      if (run6.status !== 1 || !run6.out.includes('STALE') || !run6.out.includes('✘ fixture.beta'))
+        throw new Error(`a decision whose facts moved must read STALE and red the run (got ${run6.status}):\n${run6.out}`);
       console.log(
         'sync-spine-drift: canvas-ahead fixture → plan carries proposal+diff+classification+marker PR body; ' +
-          'in-sync scope plans nothing; cursor skips the already-PR-d drift by name (conflict sibling still pulls)',
+          'in-sync scope plans nothing; cursor skips the already-PR-d drift by name (conflict sibling still pulls); ' +
+          'decided-pending rows do not red the lane (Verdict: drift-decided, WARN + PENDING.md), an undecided row still does, ' +
+          'a stale decision is undecided again, an untracked set is always red',
       );
     },
   },

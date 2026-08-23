@@ -42,7 +42,27 @@
  *       a fresh baseline, direction canvas→code. This is the after-merge
  *       step of a spine PR, and the record for a canvas write nobody ledgered
  *       (a plugin apply, a console-loop rebuild whose receipt never reached
- *       `sync record`). Explicit ids only, never "all"; --note is recorded.
+ *       `sync record`). Explicit ids only, never "all"; --note is recorded
+ *       as the row's DECISION (kind adopt, with --evidence lines).
+ *       --decide <id> --kind pending-reapply|pending-restamp|pending-reconcile
+ *            --note <why> --command <exact command> [--evidence <line>]…
+ *       Record a HUMAN DECISION on a drifted row that automation cannot
+ *       resolve (a Figma write to a non-scratch file; a choice between two
+ *       truths). The row stays drifted, but the scheduled spine stops
+ *       counting it as undecided (WARN, not red) and lists it in
+ *       sync/PENDING.md with the command. The decision is bound to the
+ *       facts observed now (contract hash, stamp, dump fingerprint) — if any
+ *       of them moves again the decision is STALE and the row is undecided
+ *       again. Refuses on an in-sync row (nothing to decide) and on kind
+ *       adopt (that is --adopt, which changes the record).
+ *       Exit is gate-style on UNDECIDED rows: 0 when every drifted row
+ *       carries a fresh decision (decided-pending rows print as WARN),
+ *       1 when a row needs a human decision that is not yet recorded (or
+ *       an untracked set exists), 2 usage/config error.
+ *
+ *   pending  [--ledger <path>]
+ *       Regenerate sync/PENDING.md (next to the ledger) from the ledger —
+ *       offline, byte-stable; sync:ledger:check refuses a stale one.
  *
  *   pull     [--fixture <fixture.json>] [--file-key K] [--only id[,id…]]
  *            [--out sync/out] [--run-id id] [--ledger <path>]
@@ -61,16 +81,28 @@ import path from 'node:path';
 import {
   baselineComparableWith,
   contractHashOf,
+  decisionBasedOn,
+  decisionSummary,
   driftReport,
+  makeDecision,
+  PENDING_KINDS,
   recordCodeToCanvasSync,
   recordKey,
+  type DecisionKind,
   type DriftRow,
   type LedgerRecord,
   type ObservationBaseline,
   type SetObservation,
   type SyncLedger,
 } from './ledger.js';
-import { DEFAULT_LEDGER_PATH, loadLedger, loadOrInitLedger, saveLedger } from './ledger-io.js';
+import {
+  DEFAULT_LEDGER_PATH,
+  loadLedger,
+  loadOrInitLedger,
+  pendingPathFor,
+  saveLedger,
+  savePendingMd,
+} from './ledger-io.js';
 import {
   fetchNodesResponses,
   fetchObservation,
@@ -89,10 +121,16 @@ function flag(args: string[], name: string): string | undefined {
   return i >= 0 ? args[i + 1] : undefined;
 }
 const has = (args: string[], name: string): boolean => args.includes(`--${name}`);
+/** Every value of a repeatable flag (`--evidence a --evidence b`). */
+function flags(args: string[], name: string): string[] {
+  const out: string[] = [];
+  for (let i = 0; i < args.length; i++) if (args[i] === `--${name}` && args[i + 1] !== undefined) out.push(args[i + 1]);
+  return out;
+}
 
 function usage(msg?: string): never {
   if (msg) console.error(`✘ ${msg}`);
-  console.error('Usage: sync/cli.ts record|seed|observe|pull — see the header of sync/cli.ts');
+  console.error('Usage: sync/cli.ts record|seed|observe|pending|pull — see the header of sync/cli.ts');
   process.exit(2);
 }
 
@@ -282,6 +320,10 @@ async function observeCommand(args: string[]): Promise<number> {
   const update = has(args, 'update') || repinIds.length > 0 || adoptIds.length > 0;
   if (has(args, 'repin') && repinIds.length === 0) usage('--repin needs id[,id…]');
   if (has(args, 'adopt') && adoptIds.length === 0) usage('--adopt needs id[,id…] (explicit, never "all")');
+  const decideId = flag(args, 'decide');
+  if (has(args, 'decide') && !decideId) usage('--decide needs <id>');
+  if (decideId && update) usage('--decide is its own verb — not combined with --update/--repin/--adopt');
+  const evidenceLines = flags(args, 'evidence');
 
   let observations: SetObservation[];
   let fileKeys: Set<string> | undefined;
@@ -318,6 +360,50 @@ async function observeCommand(args: string[]): Promise<number> {
 
   if (has(args, 'json')) console.log(JSON.stringify(report, null, 2));
   else printTable(report.rows, report.untracked, has(args, 'verbose'));
+
+  // --decide: record a human decision on ONE drifted row, bound to the
+  // facts observed right now. The record itself does not change.
+  if (decideId) {
+    const kind = flag(args, 'kind') as DecisionKind | undefined;
+    const note = flag(args, 'note');
+    const command = flag(args, 'command');
+    if (!kind || !PENDING_KINDS.includes(kind))
+      usage(`--decide needs --kind ${PENDING_KINDS.join('|')} (adopt is \`--adopt\`, which changes the record)`);
+    if (!note) usage('--decide needs --note <why>');
+    if (!command) usage(`--decide --kind ${kind} needs --command <the exact command, or the named human choice, that resolves it>`);
+    const r = ledger.records.find((x) => x.contractId === decideId);
+    if (!r) usage(`--decide ${decideId}: not a ledger record`);
+    const row = report.rows.find((x) => x.key === recordKey(r));
+    if (!row) usage(`--decide ${decideId}: the row is outside this observation's scope (file ${r.fileKey ?? '(none)'})`);
+    if (row.status === 'in-sync') usage(`--decide ${decideId} REFUSED: the row is in-sync — there is nothing to decide`);
+    const obs = r.setNodeId
+      ? observations.find((o) => `${o.fileKey ?? '(no-file)'}#${o.setNodeId}` === `${r.fileKey ?? '(no-file)'}#${r.setNodeId}`)
+      : undefined;
+    const now = new Date().toISOString();
+    const decision = makeDecision({
+      kind,
+      note,
+      recordedAt: now,
+      evidence: [
+        `drift at decision time: ${row.status} (canvas evidence ${row.canvasEvidence}); contract hash ${hashes.get(recordKey(r)) ?? 'none'}; ` +
+          `observed stamp ${obs?.stamp ?? 'none'}, dump ${obs?.dumpFingerprint ?? 'none'} (grammar ${obs?.dumpVersion ?? 'none'}), file version ${obs?.fileVersionId ?? 'none'}`,
+        ...evidenceLines,
+      ],
+      basedOn: decisionBasedOn(hashes.get(recordKey(r)) ?? null, obs),
+      command,
+    });
+    ledger = {
+      ...ledger,
+      records: ledger.records.map((x) => (x === r ? { ...x, decision } : x)),
+    };
+    saveLedger(ledgerPath, ledger);
+    const pendingPath = savePendingMd(ledgerPath, ledger);
+    console.log(`✔ --decide ${decideId}: ${kind} recorded (${note}) → ${ledgerPath}; ${pendingPath} regenerated`);
+    console.log(`  resolve with: ${command}`);
+    // Re-classify so the exit code reflects the decision just taken.
+    const after = driftReport(ledger, hashes, observations, fileKeys ? { fileKeys } : {});
+    return after.undecided === 0 ? 0 : 1;
+  }
 
   if (update) {
     const byNode = new Map(observations.map((o) => [`${o.fileKey ?? '(no-file)'}#${o.setNodeId}`, o]));
@@ -379,9 +465,23 @@ async function observeCommand(args: string[]): Promise<number> {
             'the baseline is the canvas evidence for this row',
         );
       adopted++;
-      const { pendingApply: _drop, ...rest } = r;
+      const { pendingApply: _drop, decision: _prior, ...rest } = r;
       const why = `adopted from live observation ${now.slice(0, 10)}` + (noteFlag ? ` — ${noteFlag}` : '') + (r.note ? ` (prior: ${r.note})` : '');
+      const rowBefore = report.rows.find((x) => x.key === recordKey(r));
       console.log(`  ✚ ${id}: adopted canvas stamp ${v6 ?? r.canvasFingerprint} + contract hash ${currentHash.slice(0, 19)}… (canvas→code)`);
+      // The adoption IS the decision: recorded on the row, bound to the
+      // facts adopted, so a later move re-opens the question.
+      const decision = makeDecision({
+        kind: 'adopt',
+        note: noteFlag ?? `adopted from live observation ${now.slice(0, 10)}`,
+        recordedAt: now,
+        evidence: [
+          `before adoption: ${rowBefore?.status ?? '?'} (canvas evidence ${rowBefore?.canvasEvidence ?? '?'}); ledger stamp ${r.canvasFingerprint ?? 'none'} → observed ${obs.stamp ?? 'none'}; ` +
+            `ledger hash ${r.contractHash?.slice(0, 19) ?? 'none'}… → ${currentHash.slice(0, 19)}…; dump ${obs.dumpFingerprint} (grammar ${obs.dumpVersion}); file version ${obs.fileVersionId ?? 'none'}`,
+          ...evidenceLines,
+        ],
+        basedOn: decisionBasedOn(currentHash, obs),
+      });
       byId.set(id, {
         ...rest,
         contractHash: currentHash,
@@ -392,6 +492,7 @@ async function observeCommand(args: string[]): Promise<number> {
         observed: baselineOf(obs),
         provenance: 'observe',
         note: why,
+        decision,
       });
     }
     ledger = { ...ledger, records: [...byId.values()] };
@@ -442,13 +543,44 @@ async function observeCommand(args: string[]): Promise<number> {
       }),
     };
     saveLedger(ledgerPath, ledger);
+    const pendingPath = savePendingMd(ledgerPath, ledger);
     console.log(
       `✔ --update: ${updated} observation baseline(s) recorded, ${repinned} re-pinned, ${adopted} adopted, ` +
-        `${dropped} incomparable baseline(s) dropped → ${ledgerPath}`,
+        `${dropped} incomparable baseline(s) dropped → ${ledgerPath}; ${pendingPath} regenerated`,
     );
+    // Exit on the ledger as it now stands.
+    const after = driftReport(ledger, hashes, observations, fileKeys ? { fileKeys } : {});
+    printDecisionLine(after.rows, after.untracked.length);
+    return after.undecided === 0 ? 0 : 1;
   }
 
-  return report.clean ? 0 : 1;
+  printDecisionLine(report.rows, report.untracked.length);
+  return report.undecided === 0 ? 0 : 1;
+}
+
+/** The one line the exit code is read from: what is decided, what is not. */
+function printDecisionLine(rows: DriftRow[], untracked: number): void {
+  const s = decisionSummary(rows);
+  const pending = PENDING_KINDS.map((k) => `${s.pending[k]} ${k}`).join(', ');
+  console.log(
+    `decisions: ${s.adopted} adopted, pending ${pending}, ${s.stale} stale, ${s.undecided} undecided` +
+      (untracked > 0 ? `, ${untracked} untracked` : '') +
+      ` — exit ${s.undecided + untracked === 0 ? '0 (every drifted row carries a fresh decision)' : '1 (a row needs a human decision that is not yet recorded)'}`,
+  );
+}
+
+// ---------------------------------------------------------------------------
+// pending — regenerate sync/PENDING.md from the ledger (offline)
+// ---------------------------------------------------------------------------
+
+function pendingCommand(args: string[]): number {
+  const ledgerPath = flag(args, 'ledger') ?? DEFAULT_LEDGER_PATH;
+  if (!existsSync(ledgerPath)) usage(`no ledger at ${ledgerPath}`);
+  const ledger = loadLedger(ledgerPath);
+  const p = savePendingMd(ledgerPath, ledger);
+  const n = ledger.records.filter((r) => r.decision && PENDING_KINDS.includes(r.decision.kind)).length;
+  console.log(`✔ ${p} regenerated from ${ledgerPath} — ${n} pending decision(s)`);
+  return 0;
 }
 
 // ---------------------------------------------------------------------------
@@ -513,9 +645,10 @@ async function pullCommand(args: string[]): Promise<number> {
   const recordByKey = new Map(ledger.records.map((r) => [recordKey(r), r]));
 
   const canvasRows = rows.filter((r) => r.status === 'canvas-ahead' || r.status === 'conflict');
+  const undecidedInScope = rows.filter((r) => r.undecided).length + (only ? 0 : report.untracked.length);
   if (canvasRows.length === 0) {
     console.log('sync pull: no canvas-ahead record in scope — nothing to pull');
-    return rows.every((r) => r.status === 'in-sync') ? 0 : 1;
+    return undecidedInScope === 0 ? 0 : 1;
   }
   mkdirSync(runDir, { recursive: true });
   let pulled = 0;
@@ -559,7 +692,7 @@ async function pullCommand(args: string[]): Promise<number> {
     `\nsync pull: ${canvasRows.length} canvas-ahead record(s) — ${pulled} pulled, ${refused} refused → ${path.relative(ROOT, runDir)}/`,
   );
   console.log('  (proposals are reviewable files only — nothing was applied to contracts/ or the ledger)');
-  return 1; // canvas-ahead records existed — the drift exit mirrors observe
+  return undecidedInScope === 0 ? 0 : 1; // the exit mirrors observe: undecided rows, not drift
 }
 
 // ---------------------------------------------------------------------------
@@ -573,6 +706,8 @@ async function main(): Promise<number> {
       return seedCommand(rest);
     case 'observe':
       return observeCommand(rest);
+    case 'pending':
+      return pendingCommand(rest);
     case 'pull':
       return pullCommand(rest);
     default:
