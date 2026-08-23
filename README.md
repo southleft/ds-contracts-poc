@@ -147,6 +147,10 @@ The goal: your real Button, with its real padding, its real colors, and its real
 
 ### The path
 
+`acme` stands in for your package name throughout: `examples/acme/…` and
+`extract/computed/out/acme` are the paths `onboard` creates for a library called
+`acme`, and none of them exist in this repo.
+
 ```bash
 npm i -g @ds-contracts/cli   # installs the stable 0.4.0; the 0.5.0 RC line is on the `next` tag
 
