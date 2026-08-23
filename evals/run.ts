@@ -43,7 +43,7 @@ import { buildPlan as proposePrBuildPlan, contentsPutBody, summarize as proposeP
 // generalized libraries now share (was six copies under examples/*/scripts/).
 import { promote as promoteFloor, applyAuthoredContractRow, applyAuthoredMint, applyAuthoredPrune, parseAuthoredLedger, type PromoteConfig } from '../packages/cli/src/promote.js';
 import { emitReact as coreEmitReact, generateCss as coreGenerateCss, isMultiRoot as coreIsMultiRoot, stripCanvasOnlyChannels as coreStripCanvasOnly, validateContract as coreValidateContract } from '../core/emit-react.js';
-import { createFigmaEngine, RUNTIME_EMIT_REV } from '../core/emit-figma-script.js';
+import { createFigmaEngine, RUNTIME_EMIT_REV, type CodeOnlyFact } from '../core/emit-figma-script.js';
 import { emitHtml as coreEmitHtml } from '../core/emit-html.js';
 import { tokenInventoryFromJson } from '../core/tokens.js';
 // DEPTH BUILD Stage A+B pins (pure — production capture/anatomy over committed
@@ -147,6 +147,18 @@ function resetScratch() {
   cpSync(path.join(ROOT, 'examples', 'depth-composite'), path.join(SCRATCH, 'examples', 'depth-composite'), {
     recursive: true,
   });
+  // PHASE 1 (2026-08-22): core/emitters-check.ts grew a web-components section
+  // that re-emits four untitled-ui captures (the multi-placeholder part-ref
+  // expansion) from the capture's own contracts, token trees and icons — the
+  // hermeticity lesson again: emitter-invariants-hold-and-fail died in
+  // scratch on ENOENT examples/untitled-ui/storybook/contracts. Staged as the
+  // three directories the check reads, not the whole kit (renders/ alone is
+  // 595 PNGs).
+  for (const sub of [path.join('storybook', 'contracts'), path.join('storybook', 'tokens'), path.join('assets', 'icons')]) {
+    cpSync(path.join(ROOT, 'examples', 'untitled-ui', sub), path.join(SCRATCH, 'examples', 'untitled-ui', sub), {
+      recursive: true,
+    });
+  }
   // plugin-engine-check's foreign-token-bundle flow reads exactly these two
   // MUI artifacts (the JSON-only bundle and the compiled-script path it must
   // be equivalent to) — staged as files, not the whole examples/mui tree.
@@ -231,19 +243,22 @@ function editJson(rel: string, fn: (data: any) => void) {
   writeFileSync(p, JSON.stringify(data, null, 2) + '\n');
 }
 
-function hashTree(rel: string): string {
+/** sha256 over every file under SCRATCH/<rel> (name + bytes, sorted). `skip`
+ *  receives each file's path relative to <rel> and excludes it when true. */
+function hashTree(rel: string, skip?: (relPath: string) => boolean): string {
   const hash = createHash('sha256');
+  const base = path.join(SCRATCH, rel);
   const walk = (dir: string) => {
     for (const entry of readdirSync(dir).sort()) {
       const full = path.join(dir, entry);
       if (statSync(full).isDirectory()) walk(full);
-      else {
+      else if (!skip?.(path.relative(base, full))) {
         hash.update(entry);
         hash.update(readFileSync(full));
       }
     }
   };
-  walk(path.join(SCRATCH, rel));
+  walk(base);
   return hash.digest('hex');
 }
 
@@ -555,7 +570,18 @@ const cases: Case[] = [
       if (r.status !== 0) throw new Error(`Baseline token build failed:\n${r.out}`);
       r = generate();
       if (r.status !== 0) throw new Error(`Baseline generate failed:\n${r.out}`);
-      const before = hashTree('src/components');
+      // PHASE 1 (2026-08-22): generate now ships src/components/tokens.css —
+      // the custom-property sheet the CSS Modules reference, with one block
+      // per theme and brand. That sheet IS the token layer, so it is the one
+      // file under src/components a new brand is ALLOWED to change (measured:
+      // adding nocturne changes exactly tokens.css — a `[data-brand="nocturne"]`
+      // block and the source-of-truth header — and nothing else). The
+      // component claim excludes it; a separate pin below proves the brand
+      // LANDED there, so the exclusion cannot hide a sheet that ignored it.
+      const TOKEN_SHEET = path.join(SCRATCH, 'src', 'components', 'tokens.css');
+      const componentsOnly = (rel: string) => rel === 'tokens.css';
+      const before = hashTree('src/components', componentsOnly);
+      const sheetBefore = readFileSync(TOKEN_SHEET, 'utf8');
       const nocturne = {
         brand: {
           accent: Object.fromEntries(
@@ -577,8 +603,15 @@ const cases: Case[] = [
       if (r.status !== 0) throw new Error(`Token build failed with new brand:\n${r.out}`);
       r = generate();
       if (r.status !== 0) throw new Error(`Generate failed with new brand:\n${r.out}`);
-      if (hashTree('src/components') !== before) {
-        throw new Error('Adding a brand CHANGED generated component output — theming leaked out of the token layer');
+      if (hashTree('src/components', componentsOnly) !== before) {
+        throw new Error('Adding a brand CHANGED generated component output (beyond tokens.css) — theming leaked out of the token layer');
+      }
+      const sheetAfter = readFileSync(TOKEN_SHEET, 'utf8');
+      if (sheetAfter === sheetBefore) {
+        throw new Error('Adding a brand left src/components/tokens.css byte-identical — the generated token sheet never picked the brand up');
+      }
+      if (!sheetAfter.includes('[data-brand="nocturne"]')) {
+        throw new Error('src/components/tokens.css changed with the new brand but carries no [data-brand="nocturne"] block');
       }
       const css = readFileSync(path.join(SCRATCH, 'src', 'styles', 'tokens.brands.css'), 'utf8');
       if (!css.includes('[data-brand="nocturne"]')) throw new Error('No [data-brand="nocturne"] CSS block emitted');
@@ -8809,11 +8842,41 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       });
       const icons = new Map(readdirSync(path.join(ROOT, 'examples/carbon/assets/icons')).map((f) => [f.replace(/\.svg$/, ''), readFileSync(path.join(ROOT, 'examples/carbon/assets/icons', f), 'utf8')]));
       const emit = (c: SchemaContract) => mkEngine(trees, icons).buildComponentScript(c as never, new Map([[c.id, c as never]]));
+      // PHASE 1 (2026-08-22): the marker is no longer a bare trailing † on
+      // the caption. The caption reads `† (N code-only facts — see plugin
+      // report)` and the script carries `codeOnlyFacts`, a sorted list of
+      // {part, kind, channel, value, reason, variants} receipts — one per
+      // named fact — which the plugin stamps as ds_contracts/codeOnlyFacts
+      // and lists in its run report. The refusal semantics are unchanged: a
+      // carried channel with no canvas field MUST be named, never dropped.
+      // This pin reads both surfaces: the caption count (the one a designer
+      // sees) and the receipt list (the one that names the channel).
+      const DAGGER = /"description": "[^"]*† \((\d+) code-only facts — see plugin report\)"/;
+      const facts = (c: SchemaContract, t: Record<string, unknown>[], ic?: Map<string, string>): CodeOnlyFact[] =>
+        (mkEngine(t, ic).compileComponentData(c as never, new Map([[c.id, c as never]])) as { codeOnlyFacts?: CodeOnlyFact[] }).codeOnlyFacts ?? [];
+      const channelsNamed = (list: CodeOnlyFact[]) => new Set(list.filter((f) => f.kind === 'channel').map((f) => f.channel));
       // Carbon's Modal carries grid-template-columns / grid-column-start /
-      // max-height — real facts, no Figma field. The dagger must be on.
+      // max-height — real facts, no Figma field. The dagger must be on, its
+      // count must agree with the receipt list, and each of those three
+      // channels must be NAMED in it.
       const script = emit(contract);
-      if (!/"description": "[^"]*†"/.test(script)) {
+      const dagger = script.match(DAGGER);
+      if (!dagger) {
         throw new Error('a component carrying grid/max-height token channels emitted NO code-only-fact marker — the miss is silent again');
+      }
+      const modalFacts = facts(contract, trees, icons);
+      if (Number(dagger[1]) !== modalFacts.length || modalFacts.length === 0) {
+        throw new Error(`carbon Modal caption says ${dagger[1]} code-only facts but the receipt list carries ${modalFacts.length} — the count a designer reads does not match the names`);
+      }
+      if (!script.includes('"codeOnlyFacts": [')) throw new Error('carbon Modal script carries the † caption but no codeOnlyFacts receipt list — the names never reach the plugin');
+      for (const f of modalFacts) {
+        for (const key of ['part', 'kind', 'channel', 'value', 'reason', 'variants'] as const) {
+          if (f[key] === undefined) throw new Error(`a carbon Modal code-only fact is missing "${key}": ${JSON.stringify(f)}`);
+        }
+      }
+      const modalChannels = channelsNamed(modalFacts);
+      for (const ch of ['grid-template-columns', 'grid-column-start', 'max-height']) {
+        if (!modalChannels.has(ch)) throw new Error(`carbon Modal carries "${ch}" (no canvas field) but no code-only fact names it — named: ${[...modalChannels].join(', ')}`);
       }
       // FALSIFICATION: strip every unhandled channel and the dagger must go
       // away for the right reason — i.e. the marker tracks the FACT, not the
@@ -8825,8 +8888,19 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       );
       const emitTw = (c: SchemaContract) => mkEngine(twTrees).buildComponentScript(c as never, new Map([[c.id, c as never]]));
       const withMiss = emitTw(bare);
-      if (!/"description": "[^"]*†"/.test(withMiss)) {
-        throw new Error('tailwind Card carries row-rule-color (a channel with no canvas field) and emitted no marker');
+      if (!DAGGER.test(withMiss)) {
+        throw new Error('tailwind Card carries a cross-axis gap longhand (a channel with no canvas field) and emitted no marker');
+      }
+      // MEASURED 2026-08-22, when this pin first read the receipt NAMES instead
+      // of a bare †: tailwind's Card carries NO row-rule-color (the prose this
+      // pin used to print was stale — nothing in the contract or in core
+      // spells that channel). The fact the marker stands on is `column-gap`
+      // on the label part: the CROSS axis of a vertical stack, which Figma's
+      // single itemSpacing cannot hold. The old regex could not tell the two
+      // apart; the receipt list can, so the name is pinned.
+      const cardFacts = facts(bare, twTrees);
+      if (!cardFacts.some((f) => f.kind === 'channel' && f.channel === 'column-gap' && f.part === 'label')) {
+        throw new Error(`tailwind Card is marked † but no code-only fact names column-gap on part "label" — the marker is on without the name (named: ${cardFacts.map((f) => `${f.part}.${f.channel}`).join(', ') || 'nothing'})`);
       }
       // Remove every channel that CAN miss: the registry's non-'draw'
       // verdicts, plus the two CONDITIONAL no-ops (a gap longhand on the
@@ -8849,10 +8923,13 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       }
       if (removed === 0) throw new Error('the falsification removed nothing — tailwind Card carries no undrawable channel, so this pin proves nothing');
       const noMiss = emitTw(stripped);
-      if (/"description": "[^"]*†"/.test(noMiss)) {
+      if (DAGGER.test(noMiss) || noMiss.includes('†')) {
         throw new Error(`removing all ${removed} undrawable channel(s) left the marker on — it is not tracking the miss`);
       }
-      console.log(`channel-miss-named: a carried channel with no canvas field marks the component as carrying code-only facts (carbon Modal: grid-template-columns/grid-column-start/max-height; tailwind Card: row-rule-color AND a CROSS-AXIS gap longhand — the conditional no-op class this pin found on its first run); removing all ${removed} missable channels from Card clears the marker — the mark tracks the FACT, not the component`);
+      if (noMiss.includes('"codeOnlyFacts"') || facts(stripped, twTrees).length > 0) {
+        throw new Error(`removing all ${removed} undrawable channel(s) left code-only-fact receipts behind — the list is not tracking the miss`);
+      }
+      console.log(`channel-miss-named: a carried channel with no canvas field marks the component as carrying code-only facts — the caption counts them (${modalFacts.length} on carbon Modal) and codeOnlyFacts names each one as {part, kind, channel, value, reason, variants} (carbon Modal: grid-template-columns/grid-column-start/max-height; tailwind Card: column-gap, the CROSS-AXIS gap longhand on a vertical stack — the conditional no-op class this pin found on its first run); removing all ${removed} missable channels from Card clears both the marker and the list — the mark tracks the FACT, not the component`);
     },
   },
   {

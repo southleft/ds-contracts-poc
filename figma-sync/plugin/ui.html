@@ -869,6 +869,45 @@
     } }, '*');
   }
 
+  /** The run-report lines for one set's code-only facts: a headline with the
+   *  count, then one line per channel (grouped — Button's 225 facts are a
+   *  dozen channels with multipliers), each carrying the first reason.
+   *  Capped at MAX_FACT_GROUPS lines; the remainder is counted by name, and
+   *  the full list is in the bundle's codeOnlyFacts and on the set's
+   *  ds_contracts/codeOnlyFacts plugin data. */
+  var MAX_FACT_GROUPS = 40;
+  function codeOnlyFactLines(setName, facts) {
+    var groups = [];
+    var byLabel = {};
+    facts.forEach(function (f) {
+      var label = f.kind === 'channel' ? f.channel : f.kind + ' ' + f.channel;
+      if (!byLabel[label]) { byLabel[label] = { n: 0, parts: {}, reason: f.reason, variants: f.variants, kind: f.kind }; groups.push(label); }
+      byLabel[label].n++;
+      byLabel[label].parts[f.part] = true;
+    });
+    var lines = [
+      setName + ': ' + facts.length + ' fact' + (facts.length === 1 ? '' : 's') + ' stay code-only — the contract carries ' +
+        (facts.length === 1 ? 'it' : 'them') + ', the canvas cannot (stamped on the set as ds_contracts/codeOnlyFacts; full list in the bundle\'s codeOnlyFacts):',
+    ];
+    groups.slice(0, MAX_FACT_GROUPS).forEach(function (label) {
+      var g = byLabel[label];
+      // Variant coverage: one fact on all of a set's variants says so; a fact
+      // on some of them names which (the engine lists the first 24).
+      var cov = '';
+      var perVariant = g.kind === 'channel' || g.kind === 'gradient' || g.kind === 'shadow' || g.kind === 'scrim' || g.kind === 'preview';
+      if (g.n === 1 && perVariant && g.variants && g.variants.of > 1) {
+        cov = g.variants.count === g.variants.of
+          ? ' (all ' + g.variants.of + ' variants)'
+          : ' (' + g.variants.count + ' of ' + g.variants.of + ' variants: ' + (g.variants.names || []).join('; ') + (g.variants.more ? '; +' + g.variants.more + ' more' : '') + ')';
+      }
+      lines.push('  ' + label + (g.n > 1 ? ' ×' + g.n : '') + ' on ' + Object.keys(g.parts).join(', ') + cov + ' — ' + g.reason);
+    });
+    if (groups.length > MAX_FACT_GROUPS) {
+      lines.push('  +' + (groups.length - MAX_FACT_GROUPS) + ' more channel(s): ' + groups.slice(MAX_FACT_GROUPS).join(', '));
+    }
+    return lines;
+  }
+
   /** Run steps sequentially; stop on first failure. done(ok, results). */
   function runSteps(steps, log, done) {
     var results = [];
@@ -891,6 +930,46 @@
           log(msg.result.leftovers.length + ' leftover variable(s) kept' +
             (msg.result.pruneSkipped ? ' (' + msg.result.pruneSkipped + ')' : ' (prune is opt-in: DS_PRUNE_TOKENS)') +
             ': ' + msg.result.leftovers.join(', '), 'warn');
+        }
+        // Designer-edited variable VALUES are kept (named), never silently
+        // reverted; DS_OVERWRITE_TOKENS lets the bundle win. Composite $values
+        // the apply could not hold, and a Dark mode the plan refused, are
+        // named the same way.
+        if (step.kind === 'tokens' && msg.result && msg.result.variableDrift && msg.result.variableDrift.length) {
+          log(msg.result.variableDrift.length + ' edited variable value(s) ' +
+            (msg.result.driftOverwritten ? 'overwritten (DS_OVERWRITE_TOKENS)' : 'kept (set globalThis.DS_OVERWRITE_TOKENS = true to let the bundle win)') +
+            ': ' + msg.result.variableDrift.map(function (d) { return d.name + ' [' + d.mode + '] canvas ' + d.canvas + ' vs bundle ' + d.bundle; }).join('; '), 'warn');
+        }
+        if (step.kind === 'tokens' && msg.result && msg.result.skippedValues && msg.result.skippedValues.length) {
+          log(msg.result.skippedValues.length + ' token(s) skipped — $value has no Figma variable shape: ' + msg.result.skippedValues.join('; '), 'warn');
+        }
+        if (step.kind === 'tokens' && msg.result && msg.result.modeSkipped) {
+          log(msg.result.modeSkipped, 'warn');
+        }
+        // CODE-ONLY FACTS (2026-08-22): the facts the contract carries and
+        // the canvas cannot — named under the set, the same way the tokens
+        // step names its leftovers. The script returns the list in its
+        // per-set result (and stamps it as ds_contracts/codeOnlyFacts); the
+        // plan step carries the same list as a fallback. Until this round
+        // the only trace was a trailing † in the description that nothing
+        // in this UI ever mentioned.
+        if (step.kind === 'component') {
+          var rep0 = msg.result && ((msg.result.results && msg.result.results[0]) || msg.result);
+          var facts = (rep0 && rep0.codeOnlyFacts) || step.codeOnlyFacts || [];
+          if (facts.length) {
+            codeOnlyFactLines((rep0 && rep0.name) || step.title, facts).forEach(function (line) { log(line, 'warn'); });
+          }
+          // RUNTIME DEGRADATIONS (R7, 2026-08-22): what the Plugin API REFUSED
+          // while the set was built (a FILL sizing, an out-of-flow placement,
+          // a min size, a truncation, a paint base). The script used to
+          // swallow every one in a bare catch; it now returns them per set,
+          // and they are listed here beside the code-only facts.
+          var degs = (rep0 && rep0.degradations) || [];
+          if (degs.length) {
+            log(((rep0 && rep0.name) || step.title) + ': ' + degs.length + ' runtime degradation' + (degs.length === 1 ? '' : 's') + ' — the Plugin API refused a canvas write; the set was built without it:', 'warn');
+            degs.slice(0, 40).forEach(function (d) { log('  ' + d.code + (d.nodePath ? ' @ ' + d.nodePath : '') + ': ' + d.message, 'warn'); });
+            if (degs.length > 40) log('  +' + (degs.length - 40) + ' more', 'warn');
+          }
         }
         next(i + 1);
       });
@@ -2884,7 +2963,7 @@ async function dumpNode(node, nodePath, parent) {
       channels.push('textAlignVertical ' + node.textAlignVertical);
     }
     if (node.textTruncation && node.textTruncation !== 'DISABLED') {
-      channels.push('textTruncation ' + node.textTruncation + (typeof node.maxLines === 'number' ? ' maxLines ' + node.maxLines : ''));
+      channels.push('textTruncation ' + node.textTruncation + (typeof node.maxLines === 'number' ? ' maxLines ' + node.maxLines : '') + ' (the canvas twin of CSS text-overflow: ellipsis — drawn, not read back)');
     }
     if (channels.length > 0) {
       degrade('text-channel-unsupported', nodePath, 'text channel(s) with no dump v1 projection: ' + channels.join('; ') + ' — typography carries (fontSize, fontStyle, style identity) only');

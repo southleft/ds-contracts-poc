@@ -4,6 +4,7 @@
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import '../tokens.css';
 import { AtomsCheckbox } from './AtomsCheckbox';
 
 const meta = {

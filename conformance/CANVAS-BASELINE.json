@@ -1,0 +1,514 @@
+{
+  "_marker": "THE MEASURED ROUND TRIP — contract → Figma (mock) → dump → propose ≡ contract, per conformance case, on the case's own channel. Every SILENT entry is an OPEN DEFECT the engine must name or carry; it is never waivable and leaves this file only by being fixed. The gate refuses drift in EITHER direction: a regression is red, and an improvement must be re-recorded here so a fix can never be absorbed silently.",
+  "measuredAt": "extract/computed/out/conformance/<case>/enriched.contract.json through figma-sync/plugin/engine (mock figma) and core/propose-figma (npx tsx conformance/canvas.ts)",
+  "counts": {
+    "ROUND-TRIPPED": 26,
+    "NAMED": 4,
+    "DRIFTED": 0,
+    "HARMFUL": 0,
+    "SILENT": 1,
+    "REFUSED-BY-NAME": 15,
+    "SEED-ABSENT": 0
+  },
+  "cases": {
+    "aspect-ratio": {
+      "classification": "SILENT",
+      "channel": "aspect-ratio",
+      "seed": [
+        "2 / 1"
+      ],
+      "proposed": [],
+      "note": ""
+    },
+    "border-radius-px": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "border-top-left-radius",
+      "seed": [
+        "6px"
+      ],
+      "proposed": [
+        "6px"
+      ],
+      "refIdentical": true,
+      "channelAs": "border-radius",
+      "note": "channel respelled: border-top-left-radius → border-radius"
+    },
+    "box-shadow-single": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "box-shadow",
+      "seed": [
+        "rgba(0, 0, 0, 0.2) 0px 1px 3px 0px"
+      ],
+      "proposed": [
+        "rgba(0, 0, 0, 0.2) 0px 1px 3px 0px"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "calc-var": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "padding-left",
+      "seed": [
+        "16px"
+      ],
+      "proposed": [
+        "16px"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "color-hex": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "color",
+      "seed": [
+        "#1976d2"
+      ],
+      "proposed": [
+        "#1976d2"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "color-rgb-solid": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "background-color",
+      "seed": [
+        "#1976d2"
+      ],
+      "proposed": [
+        "#1976d2"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "color-rgba-alpha": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "background-color",
+      "seed": [
+        "#1976d280"
+      ],
+      "proposed": [
+        "#1976d280"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "custom-prop-two-hop": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "color",
+      "seed": [
+        "#123456"
+      ],
+      "proposed": [
+        "#123456"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "display-block": {
+      "classification": "NAMED",
+      "channel": "display",
+      "seed": [
+        "block"
+      ],
+      "proposed": [
+        "flex"
+      ],
+      "note": "value came back as flex (seed block) — code-only declared root.display = block — CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack)."
+    },
+    "display-flex": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "display",
+      "seed": [
+        "flex"
+      ],
+      "proposed": [
+        "flex"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "display-inline-flex": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "display",
+      "seed": [
+        "flex"
+      ],
+      "proposed": [
+        "flex"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "em-relative-padding": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "padding-left",
+      "seed": [
+        "18px"
+      ],
+      "proposed": [
+        "18px"
+      ],
+      "refIdentical": true,
+      "channelAs": "padding-inline",
+      "note": "channel respelled: padding-left → padding-inline"
+    },
+    "flex-gap": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "column-gap",
+      "seed": [
+        "12px"
+      ],
+      "proposed": [
+        "12px"
+      ],
+      "refIdentical": true,
+      "channelAs": "gap",
+      "note": "channel respelled: column-gap → gap"
+    },
+    "grid-2d": {
+      "classification": "REFUSED-BY-NAME",
+      "channel": "display",
+      "seed": [
+        "grid"
+      ],
+      "proposed": [],
+      "note": "plugin plan: conformance.grid-2d — anatomy.root.literals.height: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, \"fit-content\" (G8), or layout.grow (width, flex parent). Absence is refused because it resolves DIFFERENTLY per surface: primary/counterAxisSizingMode are INERT on a GRID frame (GP1b/GP8), so the canvas keeps createFrame's FIXED 100 while CSS takes content height — the FC-GRID-ROOT-VSIZE defect the composition corpus measured on three of five stems"
+    },
+    "grid-absolute-overlay": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "position",
+      "seed": [
+        "absolute"
+      ],
+      "proposed": [
+        "absolute",
+        "relative"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "grid-area-empty-slot": {
+      "classification": "REFUSED-BY-NAME",
+      "channel": "grid-template-areas",
+      "seed": [
+        "\"a b\""
+      ],
+      "proposed": [],
+      "note": "plugin plan: conformance.grid-area-empty-slot — anatomy.root.literals.height: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, \"fit-content\" (G8), or layout.grow (width, flex parent). Absence is refused because it resolves DIFFERENTLY per surface: primary/counterAxisSizingMode are INERT on a GRID frame (GP1b/GP8), so the canvas keeps createFrame's FIXED 100 while CSS takes content height — the FC-GRID-ROOT-VSIZE defect the composition corpus measured on three of five stems"
+    },
+    "grid-area-nonrectangular": {
+      "classification": "REFUSED-BY-NAME",
+      "channel": "grid-column-end",
+      "seed": [
+        "span 2"
+      ],
+      "proposed": [],
+      "note": "plugin plan: conformance.grid-area-nonrectangular — anatomy.root.literals.height: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, \"fit-content\" (G8), or layout.grow (width, flex parent). Absence is refused because it resolves DIFFERENTLY per surface: primary/counterAxisSizingMode are INERT on a GRID frame (GP1b/GP8), so the canvas keeps createFrame's FIXED 100 while CSS takes content height — the FC-GRID-ROOT-VSIZE defect the composition corpus measured on three of five stems"
+    },
+    "grid-auto-flow-row": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "grid-auto-flow",
+      "seed": [
+        "row"
+      ],
+      "proposed": [
+        "row"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "grid-bento-span-matrix": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "grid-template-columns",
+      "seed": [
+        "160px 1fr 1fr 120px"
+      ],
+      "proposed": [
+        "160px 1fr 1fr 120px"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "grid-child-align": {
+      "classification": "REFUSED-BY-NAME",
+      "channel": "justify-self",
+      "seed": [
+        "center"
+      ],
+      "proposed": [],
+      "note": "plugin plan: conformance.grid-child-align — anatomy.root.literals.height: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, \"fit-content\" (G8), or layout.grow (width, flex parent). Absence is refused because it resolves DIFFERENTLY per surface: primary/counterAxisSizingMode are INERT on a GRID frame (GP1b/GP8), so the canvas keeps createFrame's FIXED 100 while CSS takes content height — the FC-GRID-ROOT-VSIZE defect the composition corpus measured on three of five stems"
+    },
+    "grid-child-fill-cell": {
+      "classification": "REFUSED-BY-NAME",
+      "channel": "grid-row-start",
+      "seed": [
+        "1"
+      ],
+      "proposed": [],
+      "note": "plugin plan: conformance.grid-child-fill-cell — anatomy.root.literals.height: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, \"fit-content\" (G8), or layout.grow (width, flex parent). Absence is refused because it resolves DIFFERENTLY per surface: primary/counterAxisSizingMode are INERT on a GRID frame (GP1b/GP8), so the canvas keeps createFrame's FIXED 100 while CSS takes content height — the FC-GRID-ROOT-VSIZE defect the composition corpus measured on three of five stems"
+    },
+    "grid-child-text-hug": {
+      "classification": "REFUSED-BY-NAME",
+      "channel": "__text",
+      "seed": [
+        "Hug"
+      ],
+      "proposed": [],
+      "note": "plugin plan: conformance.grid-child-text-hug — anatomy.root.literals.height: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, \"fit-content\" (G8), or layout.grow (width, flex parent). Absence is refused because it resolves DIFFERENTLY per surface: primary/counterAxisSizingMode are INERT on a GRID frame (GP1b/GP8), so the canvas keeps createFrame's FIXED 100 while CSS takes content height — the FC-GRID-ROOT-VSIZE defect the composition corpus measured on three of five stems"
+    },
+    "grid-col-span": {
+      "classification": "REFUSED-BY-NAME",
+      "channel": "grid-column-end",
+      "seed": [
+        "span 2"
+      ],
+      "proposed": [],
+      "note": "plugin plan: conformance.grid-col-span — anatomy.root.literals.width: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, \"fit-content\" (G8), or layout.grow (width, flex parent). Absence is refused because it resolves DIFFERENTLY per surface: primary/counterAxisSizingMode are INERT on a GRID frame (GP1b/GP8), so the canvas keeps createFrame's FIXED 100 while CSS takes content height — the FC-GRID-ROOT-VSIZE defect the composition corpus measured on three of five stems; conformance.grid-col-span — anatomy.root.literals.height: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, \"fit-content\" (G8), or layout.grow (width, flex parent). Absence is refused because it resolves DIFFERENTLY per surface: primary/counterAxisSizingMode are INERT on a GRID frame (GP1b/GP8), so the canvas keeps createFrame's FIXED 100 while CSS takes content height — the FC-GRID-ROOT-VSIZE defect the composition corpus measured on three of five stems"
+    },
+    "grid-explicit-anchor": {
+      "classification": "REFUSED-BY-NAME",
+      "channel": "grid-row-start",
+      "seed": [
+        "3"
+      ],
+      "proposed": [],
+      "note": "plugin plan: conformance.grid-explicit-anchor — anatomy.root.literals.height: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, \"fit-content\" (G8), or layout.grow (width, flex parent). Absence is refused because it resolves DIFFERENTLY per surface: primary/counterAxisSizingMode are INERT on a GRID frame (GP1b/GP8), so the canvas keeps createFrame's FIXED 100 while CSS takes content height — the FC-GRID-ROOT-VSIZE defect the composition corpus measured on three of five stems"
+    },
+    "grid-gap-row-column": {
+      "classification": "REFUSED-BY-NAME",
+      "channel": "row-gap",
+      "seed": [
+        "8px"
+      ],
+      "proposed": [],
+      "note": "plugin plan: conformance.grid-gap-row-column — anatomy.root.literals.height: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, \"fit-content\" (G8), or layout.grow (width, flex parent). Absence is refused because it resolves DIFFERENTLY per surface: primary/counterAxisSizingMode are INERT on a GRID frame (GP1b/GP8), so the canvas keeps createFrame's FIXED 100 while CSS takes content height — the FC-GRID-ROOT-VSIZE defect the composition corpus measured on three of five stems"
+    },
+    "grid-gap-shorthand": {
+      "classification": "REFUSED-BY-NAME",
+      "channel": "row-gap",
+      "seed": [
+        "12px"
+      ],
+      "proposed": [],
+      "note": "plugin plan: conformance.grid-gap-shorthand — anatomy.root.literals.height: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, \"fit-content\" (G8), or layout.grow (width, flex parent). Absence is refused because it resolves DIFFERENTLY per surface: primary/counterAxisSizingMode are INERT on a GRID frame (GP1b/GP8), so the canvas keeps createFrame's FIXED 100 while CSS takes content height — the FC-GRID-ROOT-VSIZE defect the composition corpus measured on three of five stems"
+    },
+    "grid-in-flex-fill": {
+      "classification": "REFUSED-BY-NAME",
+      "channel": "display",
+      "seed": [
+        "grid"
+      ],
+      "proposed": [],
+      "note": "plugin plan: conformance.grid-in-flex-fill — anatomy.root.parts.a.literals.height: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, \"fit-content\" (G8), or layout.grow (width, flex parent). Absence is refused because it resolves DIFFERENTLY per surface: primary/counterAxisSizingMode are INERT on a GRID frame (GP1b/GP8), so the canvas keeps createFrame's FIXED 100 while CSS takes content height — the FC-GRID-ROOT-VSIZE defect the composition corpus measured on three of five stems"
+    },
+    "grid-instance-child": {
+      "classification": "REFUSED-BY-NAME",
+      "channel": "grid-column-start",
+      "seed": [
+        "2"
+      ],
+      "proposed": [],
+      "note": "plugin plan: conformance.grid-instance-child — anatomy.root.literals.height: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, \"fit-content\" (G8), or layout.grow (width, flex parent). Absence is refused because it resolves DIFFERENTLY per surface: primary/counterAxisSizingMode are INERT on a GRID frame (GP1b/GP8), so the canvas keeps createFrame's FIXED 100 while CSS takes content height — the FC-GRID-ROOT-VSIZE defect the composition corpus measured on three of five stems"
+    },
+    "grid-named-area-slots": {
+      "classification": "REFUSED-BY-NAME",
+      "channel": "grid-template-areas",
+      "seed": [
+        "\"a a\" \"b c\""
+      ],
+      "proposed": [],
+      "note": "plugin plan: conformance.grid-named-area-slots — anatomy.root.literals.height: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, \"fit-content\" (G8), or layout.grow (width, flex parent). Absence is refused because it resolves DIFFERENTLY per surface: primary/counterAxisSizingMode are INERT on a GRID frame (GP1b/GP8), so the canvas keeps createFrame's FIXED 100 while CSS takes content height — the FC-GRID-ROOT-VSIZE defect the composition corpus measured on three of five stems"
+    },
+    "grid-on-component-variant": {
+      "classification": "REFUSED-BY-NAME",
+      "channel": "grid-template-rows",
+      "seed": [
+        "16px 16px"
+      ],
+      "proposed": [],
+      "note": "plugin plan: conformance.grid-on-component-variant — anatomy.root.literals.width: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, \"fit-content\" (G8), or layout.grow (width, flex parent). Absence is refused because it resolves DIFFERENTLY per surface: primary/counterAxisSizingMode are INERT on a GRID frame (GP1b/GP8), so the canvas keeps createFrame's FIXED 100 while CSS takes content height — the FC-GRID-ROOT-VSIZE defect the composition corpus measured on three of five stems; conformance.grid-on-component-variant — anatomy.root.literals.height: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, \"fit-content\" (G8), or layout.grow (width, flex parent). Absence is refused because it resolves DIFFERENTLY per surface: primary/counterAxisSizingMode are INERT on a GRID frame (GP1b/GP8), so the canvas keeps createFrame's FIXED 100 while CSS takes content height — the FC-GRID-ROOT-VSIZE defect the composition corpus measured on three of five stems"
+    },
+    "grid-row-span": {
+      "classification": "REFUSED-BY-NAME",
+      "channel": "grid-row-end",
+      "seed": [
+        "span 2"
+      ],
+      "proposed": [],
+      "note": "plugin plan: conformance.grid-row-span — anatomy.root.literals.height: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, \"fit-content\" (G8), or layout.grow (width, flex parent). Absence is refused because it resolves DIFFERENTLY per surface: primary/counterAxisSizingMode are INERT on a GRID frame (GP1b/GP8), so the canvas keeps createFrame's FIXED 100 while CSS takes content height — the FC-GRID-ROOT-VSIZE defect the composition corpus measured on three of five stems"
+    },
+    "grid-sidebar-px-fr": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "grid-template-columns",
+      "seed": [
+        "240px 1fr"
+      ],
+      "proposed": [
+        "240px 1fr"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "grid-track-fit-content": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "grid-template-columns",
+      "seed": [
+        "fit-content(100%) 1fr"
+      ],
+      "proposed": [
+        "fit-content(100%) 1fr"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "grid-tracks-mixed-fractional": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "grid-template-columns",
+      "seed": [
+        "33.5px 2.5fr 1fr"
+      ],
+      "proposed": [
+        "33.5px 2.5fr 1fr"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "grid-two-column": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "grid-template-columns",
+      "seed": [
+        "1fr 1fr"
+      ],
+      "proposed": [
+        "1fr 1fr"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "min-max-width": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "min-width",
+      "seed": [
+        "96px"
+      ],
+      "proposed": [
+        "96px"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "nonpainting-text-display-none": {
+      "classification": "NAMED",
+      "channel": "__text",
+      "seed": [
+        "INVISIBLE-SENTINEL"
+      ],
+      "proposed": [],
+      "note": "code-only declared label-2.display = none — CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack)."
+    },
+    "oklch-color": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "background-color",
+      "seed": [
+        "#2784d5"
+      ],
+      "proposed": [
+        "#2784d5"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "percentage-padding": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "padding-left",
+      "seed": [
+        "28.7969px"
+      ],
+      "proposed": [
+        "28.7969px"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "position-absolute-insets": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "top",
+      "seed": [
+        "4px"
+      ],
+      "proposed": [
+        "4px",
+        "6px"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "shadow-part": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "color",
+      "seed": [
+        "#b4145a"
+      ],
+      "proposed": [
+        "#b4145a"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "text-overflow-ellipsis": {
+      "classification": "NAMED",
+      "channel": "text-overflow",
+      "seed": [
+        "ellipsis"
+      ],
+      "proposed": [],
+      "note": "degradation text-channel-unsupported @ «self»:«self»/label: text channel(s) with no dump v1 projection: textTruncation ENDING (the canvas twin of CSS text-overflow: ellipsis — drawn, not read back) — typography carries (fontSize, fontStyle, style identity) only"
+    },
+    "transition-channel": {
+      "classification": "NAMED",
+      "channel": "transition-duration",
+      "seed": [
+        "0.2s"
+      ],
+      "proposed": [],
+      "note": "code-only declared root.transition-duration = 0.2s — Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame."
+    },
+    "var-fallback-chain": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "color",
+      "seed": [
+        "#663399"
+      ],
+      "proposed": [
+        "#663399"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "var-longhand": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "background-color",
+      "seed": [
+        "#1976d2"
+      ],
+      "proposed": [
+        "#1976d2"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "webkit-text-fill-color": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "color",
+      "seed": [
+        "#999999"
+      ],
+      "proposed": [
+        "#999999"
+      ],
+      "refIdentical": true,
+      "note": ""
+    }
+  }
+}

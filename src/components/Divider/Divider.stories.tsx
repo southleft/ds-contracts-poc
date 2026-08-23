@@ -4,6 +4,7 @@
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import '../tokens.css';
 import { Divider } from './Divider';
 
 const meta = {

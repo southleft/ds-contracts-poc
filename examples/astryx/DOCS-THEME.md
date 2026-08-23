@@ -120,7 +120,8 @@ npx tsx examples/astryx/scripts/build-docs-tokens.ts     # pure emit → the thr
 npx tsx packages/cli/src/cli.ts figma bundle examples/astryx/contracts \
   --tokens examples/astryx/tokens/astryx-docs.dtcg.json,examples/astryx/tokens/astryx-minted.dtcg.json \
   --modes examples/astryx/tokens/modes/astryx-docs.light.dtcg.json,examples/astryx/tokens/modes/astryx-docs.dark.dtcg.json \
-  --name "Astryx (docs theme)" --out examples/astryx/figma/astryx-docs.bundle.json
+  --name "Astryx (docs theme)" --icons examples/astryx/assets/icons \
+  --out examples/astryx/figma/astryx-docs.bundle.json   # --icons since Banner promoted its four status glyphs as real assets
 ```
 
 - `tokens/astryx-docs.dtcg.json` — 186 tokens, SAME names/order/$type/alias

@@ -22,7 +22,12 @@
  *     the token stylesheet (src/styles/tokens.css) or the custom properties
  *     resolve to nothing.
  *   · No events, no interactivity beyond CSS states (:hover /
- *     :focus-visible / :disabled render; toggles do not run).
+ *     :focus-visible / :disabled render; toggles do not run — but a
+ *     toggle's ARIA state renders per showcase item on its trigger, root
+ *     or part: aria-expanded / aria-pressed / aria-checked / aria-selected).
+ *   · anatomy.root.attrs ride the root element; attrs.role wins over
+ *     semantics.role (one rule across react / react-inline / wc / html; a
+ *     differing pair is refused by validateContract).
  *   · Slots render their declared defaultContent; an empty slot renders its
  *     wrapper EMPTY (absent content is absent — a comment names it; painted
  *     placeholder text would be invented ink the pixels then judge).
@@ -41,6 +46,7 @@ import {
 import { kebab } from '../extract/types.js';
 import {
   boolProps,
+  ELEMENT_META,
   enumProps,
   gridCellPlan,
   gridChildCrossAxisDecls,
@@ -59,18 +65,6 @@ import {
 
 const stripBraces = (ref: string) => ref.slice(1, -1);
 const cssVar = (tokenPath: string) => `var(--${tokenPath.split('.').join('-')})`;
-/** Round 10 — cartesian of a substituted ref's placeholder values, declared
- *  order, so rule order is a function of the contract alone. */
-function enumCombos(phs: string[], enums: Map<string, string[]>): Array<Array<[string, string]>> {
-  let out: Array<Array<[string, string]>> = [[]];
-  for (const ph of phs) {
-    const next: Array<Array<[string, string]>> = [];
-    for (const prefix of out) for (const value of enums.get(ph) ?? []) next.push([...prefix, [ph, value]]);
-    out = next;
-  }
-  return out;
-}
-
 const placeholdersIn = (refPath: string): string[] =>
   [...refPath.matchAll(/\{([a-z][\w-]*)\}/g)].map((m) => m[1]);
 
@@ -150,6 +144,54 @@ function componentCss(contract: Contract): string[] {
   const partCls = (name: string) => `.${k}__${name}`;
   const enumCls = (prop: string, value: string) => `.${k}--${prop}-${value}`;
   const enums = new Map(enumProps(contract).map((p) => [p.name, p.type.enum]));
+  // N-PLACEHOLDER REFS over enum AND boolean props (the states residual of the
+  // multi-axis fix, 2026-08-22). Round 10's enumCombos expanded enums only: a
+  // boolean placeholder — and any `states` ref with two placeholders — fell
+  // through and emitted NOTHING, not a refusal. This is emit-react's
+  // expandRef/comboCls spelled in this surface's class grammar: enum values
+  // as modifier classes, a boolean as the root's data attribute (presence /
+  // :not) — native :disabled where the element carries the attribute (the
+  // showcase renders `disabled`, not `data-disabled`, on those). Declared
+  // placeholder order, then declared value order, so the resolved leaves are
+  // the same set React and the web-components emitter resolve.
+  const boolNames = new Set(boolProps(contract).map((p) => p.name));
+  const substValues = (ph: string): string[] | undefined =>
+    enums.get(ph) ?? (boolNames.has(ph) ? ['true', 'false'] : undefined);
+  const boolFrag = (ph: string, value: string): string => {
+    const nativeDisabled = ph === 'disabled' && ELEMENT_META[contract.semantics.element]?.supportsDisabled;
+    const sel = nativeDisabled ? ':disabled' : `[data-${ph.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}]`;
+    return value === 'true' ? sel : `:not(${sel})`;
+  };
+  /** Enum values as the compound modifier classes (byte-identical to the
+   *  former `enumCls…` join for all-enum combos); boolean fragments appended,
+   *  on the root class when every participant is a boolean. */
+  const comboSel = (combo: Array<[string, string]>): string => {
+    const enumPart = combo.filter(([ph]) => !boolNames.has(ph)).map(([ph, v]) => enumCls(ph, v)).join('');
+    const boolPart = combo.filter(([ph]) => boolNames.has(ph)).map(([ph, v]) => boolFrag(ph, v)).join('');
+    return (enumPart.length > 0 ? enumPart : rootCls) + boolPart;
+  };
+  const expandRef = (where: string, refPath: string): Array<{ combo: Array<[string, string]>; resolved: string }> => {
+    const phs = placeholdersIn(refPath);
+    const unknown = phs.filter((ph) => substValues(ph) === undefined);
+    if (unknown.length > 0) {
+      // validateContract refuses this first; a second, local refusal rather
+      // than a silently empty rule set if a caller ever skips the gate.
+      throw new Error(
+        `${contract.id}: ${where} ref "{${refPath}}" substitutes ${unknown.map((ph) => `{${ph}}`).join(', ')} — not an enum or boolean prop of this contract, so there is no class or attribute to select on`,
+      );
+    }
+    let out: Array<{ combo: Array<[string, string]>; resolved: string }> = [{ combo: [], resolved: refPath }];
+    for (const ph of phs) {
+      const next: typeof out = [];
+      for (const prefix of out) {
+        for (const value of substValues(ph)!) {
+          next.push({ combo: [...prefix.combo, [ph, value]], resolved: prefix.resolved.replaceAll(`{${ph}}`, value) });
+        }
+      }
+      out = next;
+    }
+    return out;
+  };
   // A2 grid: the ONE compiled cell plan (core/emit-react.ts gridCellPlan) —
   // child placements, empty-area placeholders, instance wrappers.
   const gridPlan = gridCellPlan(contract);
@@ -332,7 +374,7 @@ function componentCss(contract: Contract): string[] {
     if (phs.length === 0) {
       rootDecls.push(`${cssProp}: ${cssVar(refPath)}`);
       if (floorMirror) rootDecls.push(`min-width: ${cssVar(refPath)}`);
-    } else if (phs.length === 1) {
+    } else if (phs.length === 1 && enums.has(phs[0])) {
       for (const value of enums.get(phs[0]) ?? []) {
         const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
         const key = `${phs[0]} ${value}`;
@@ -341,35 +383,13 @@ function componentCss(contract: Contract): string[] {
         if (floorMirror) entry.decls.push(`min-width: ${cssVar(resolved)}`);
         enumRules.set(key, entry);
       }
-    } else if (phs.length === 2) {
-      const [pa, pb] = phs;
-      for (const a of enums.get(pa) ?? []) {
-        for (const b of enums.get(pb) ?? []) {
-          const resolved = refPath.replaceAll(`{${pa}}`, a).replaceAll(`{${pb}}`, b);
-          pairRules.push({
-            selector: `${enumCls(pa, a)}${enumCls(pb, b)}`,
-            decls: [`${cssProp}: ${cssVar(resolved)}`],
-          });
-        }
-      }
-    } else if (phs.length === 3) {
-      // Three-axis root token (live-gauntlet class ①: a minted background =
-      // f(type, style, state) — CBDS Chip's root fill): one triple-compound
-      // rule per value combination — mirrors emit-react generateCss.
-      const [pa, pb, pc] = phs;
-      for (const a of enums.get(pa) ?? []) {
-        for (const b of enums.get(pb) ?? []) {
-          for (const c of enums.get(pc) ?? []) {
-            const resolved = refPath
-              .replaceAll(`{${pa}}`, a)
-              .replaceAll(`{${pb}}`, b)
-              .replaceAll(`{${pc}}`, c);
-            pairRules.push({
-              selector: `${enumCls(pa, a)}${enumCls(pb, b)}${enumCls(pc, c)}`,
-              decls: [`${cssProp}: ${cssVar(resolved)}`],
-            });
-          }
-        }
+    } else {
+      // Two or three axes (generateCss refuses more) — one compound rule per
+      // value tuple (all-enum tuples are byte-identical to the former pair /
+      // triple branches); also the single BOOLEAN placeholder the enum-only
+      // branch above used to drop — mirrors emit-react generateCss.
+      for (const { combo, resolved } of expandRef(`anatomy.root.tokens.${cssProp}`, refPath)) {
+        pairRules.push({ selector: comboSel(combo), decls: [`${cssProp}: ${cssVar(resolved)}`] });
       }
     }
   }
@@ -502,11 +522,13 @@ function componentCss(contract: Contract): string[] {
       const phs = placeholdersIn(refPath);
       if (phs.length === 0) {
         rule(`${rootCls}${sel}`, [`${cssProp}: ${cssVar(refPath)}`]);
-      } else if (phs.length === 1) {
-        for (const value of enums.get(phs[0]) ?? []) {
-          const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
-          rule(`${enumCls(phs[0], value)}${sel}`, [`${cssProp}: ${cssVar(resolved)}`]);
-        }
+        continue;
+      }
+      // N placeholders, enum and boolean — the root's token expansion with the
+      // state selector appended (one enum placeholder is byte-identical to the
+      // former single-axis branch).
+      for (const { combo, resolved } of expandRef(`anatomy.root.states.${state}.${cssProp}`, refPath)) {
+        rule(`${comboSel(combo)}${sel}`, [`${cssProp}: ${cssVar(resolved)}`]);
       }
     }
   }
@@ -641,11 +663,10 @@ function componentCss(contract: Contract): string[] {
         // ROUND 10 — N placeholders expand as the cartesian of their values
         // on a COMPOUND ancestor selector (every enum class rides the root),
         // the same shape the root's own multi-placeholder tokens take.
-        for (const combo of enumCombos(phs, enums)) {
-          let resolved = refPath;
-          for (const [ph, value] of combo) resolved = resolved.replaceAll(`{${ph}}`, value);
-          const sel = `${combo.map(([ph, value]) => enumCls(ph, value)).join('')} ${partCls(name)}`;
-          subRules.push([sel, [`${cssProp}: ${cssVar(resolved)}`]]);
+        // A boolean placeholder rides the root's data attribute, as on the
+        // root's own tokens; all-enum combos are unchanged.
+        for (const { combo, resolved } of expandRef(`anatomy.${name}.tokens.${cssProp}`, refPath)) {
+          subRules.push([`${comboSel(combo)} ${partCls(name)}`, [`${cssProp}: ${cssVar(resolved)}`]]);
         }
         continue;
       }
@@ -753,11 +774,12 @@ function componentCss(contract: Contract): string[] {
         const phs = placeholdersIn(refPath);
         if (phs.length === 0) {
           rule(`${rootCls}${sel} ${partCls(name)}`, [`${cssProp}: ${cssVar(refPath)}`]);
-        } else if (phs.length === 1) {
-          for (const value of enums.get(phs[0]) ?? []) {
-            const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
-            rule(`${enumCls(phs[0], value)}${sel} ${partCls(name)}`, [`${cssProp}: ${cssVar(resolved)}`]);
-          }
+          continue;
+        }
+        // N placeholders, enum and boolean — the root's state expansion one
+        // level down.
+        for (const { combo, resolved } of expandRef(`anatomy.${name}.states.${state}.${cssProp}`, refPath)) {
+          rule(`${comboSel(combo)}${sel} ${partCls(name)}`, [`${cssProp}: ${cssVar(resolved)}`]);
         }
       }
     }
@@ -868,8 +890,26 @@ function validateStaticHtmlIdentity(contract: Contract, ctx: EmitCtx): void {
         if (!HTML_ATTR_NAME.test(attr) || /^on/i.test(attr)) {
           refuseUnsafe('attribute name', attr, `${location}.attrs`);
         }
-        if (attr.toLowerCase() === 'role' && !/^\{[a-z][\w-]*\}$/.test(value)) {
-          safeRole(value, `${location}.attrs.role`);
+        if (attr.toLowerCase() === 'role') {
+          const ref = value.match(/^\{([a-z][\w-]*)\}$/);
+          if (!ref) {
+            safeRole(value, `${location}.attrs.role`);
+          } else {
+            // A prop-driven role (`role: "{label}"`) resolves at the sink from
+            // the prop's default or, for an enum, one of its values. Every
+            // statically known value is refused HERE, before any byte and
+            // before validateContract's one-root-role rule — which otherwise
+            // reports an injected prop-driven role as a spelling conflict with
+            // semantics.role, and the security check (2026-08-22) went red on
+            // exactly that ordering: refused, but not by the unsafe-role name.
+            const site = `${location}.attrs.role`;
+            const prop = c.props.find((p) => p.name === ref[1]);
+            if (prop?.default !== undefined) safeRole(String(prop.default), site);
+            for (const enumProp of enumProps(c)) {
+              if (enumProp.name !== ref[1]) continue;
+              for (const candidate of enumProp.type.enum) safeRole(candidate, site);
+            }
+          }
         }
       }
       if (part.component) {
@@ -932,6 +972,22 @@ function renderComponentHtml(
     const vw = part.visibleWhen;
     if (vw.equals !== undefined) return (propValue(vw.prop) ?? '') === vw.equals;
     return state.bools[vw.prop] === true;
+  };
+
+  // A toggling event's ARIA state renders per showcase item on its trigger
+  // (root or part): the static surface cannot RUN the toggle, but the state
+  // the item shows is a fact — aria-expanded / aria-pressed / aria-checked /
+  // aria-selected per the showcased prop value (off → "false", on → "true",
+  // any other enum member → "mixed", exactly the React/WC expression). Native
+  // checkable inputs carry `checked` instead (renderPart's input branch).
+  const toggleAriaFor = (triggerName: string): string => {
+    const ev = (contract.events ?? []).find((e) => e.trigger === triggerName && e.toggles?.aria);
+    if (!ev?.toggles?.aria) return '';
+    const [off, on] = ev.toggles.between;
+    const prop = contract.props.find((p) => p.name === ev.toggles!.prop);
+    const v = propValue(ev.toggles.prop) ?? (prop?.default !== undefined ? String(prop.default) : off);
+    const ariaState = v === on ? 'true' : v === off ? 'false' : 'mixed';
+    return ` aria-${ev.toggles.aria}="${ariaState}"`;
   };
 
   const attrString = (part: Part): string =>
@@ -1116,9 +1172,10 @@ function renderComponentHtml(
     ]
       .filter(Boolean)
       .join('\n');
+    const ariaFrag = toggleAriaFor(name);
     return inner
-      ? `${pad}<${el} class="${cls}"${attrString(part)}>\n${inner}\n${pad}</${el}>`
-      : `${pad}<${el} class="${cls}"${attrString(part)}></${el}>`;
+      ? `${pad}<${el} class="${cls}"${ariaFrag}${attrString(part)}>\n${inner}\n${pad}</${el}>`
+      : `${pad}<${el} class="${cls}"${ariaFrag}${attrString(part)}></${el}>`;
   };
 
   // MULTI-ROOT composite: render each top-level root as a SIBLING via the same
@@ -1207,13 +1264,23 @@ function renderComponentHtml(
     const dataName = p.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
     attrs.push(`data-${dataName}="true"`);
   }
+  // ONE role on the root: anatomy.root.attrs.role (rendered above) wins over
+  // the semantics default — the same rule emit-react / react-inline / the WC
+  // emitter apply; a DIFFERING pair is refused by name in validateContract.
   const roleByProp = contract.semantics.roleByProp;
   if (roleByProp) {
     const role = roleByProp.map[propValue(roleByProp.prop) ?? ''];
     if (role) attrs.push(`role="${escapeHtml(safeRole(role, `${contract.id}.semantics.roleByProp`))}"`);
-  } else if (contract.semantics.role && contract.semantics.role !== contract.semantics.element) {
+  } else if (
+    root.attrs?.role === undefined &&
+    contract.semantics.role &&
+    contract.semantics.role !== contract.semantics.element
+  ) {
     attrs.push(`role="${escapeHtml(safeRole(contract.semantics.role, `${contract.id}.semantics.role`))}"`);
   }
+  // A root-triggered toggle's ARIA state (a press button's aria-pressed).
+  const rootAria = toggleAriaFor('root');
+  if (rootAria) attrs.push(rootAria.trim());
 
   // Bare text directly inside a <select> is DROPPED by HTML parsers — the
   // <option> wrapper is the only faithful rendering of a select's default
@@ -1311,7 +1378,8 @@ export function emitHtml(contract: Contract, ctx: EmitCtx): EmitHtmlResult {
   ${escapeHtmlComment(contract.name)} — static HTML+CSS emitted from contract ${contract.id} v${contract.version} by core/emit-html.ts.
   Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
   bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
-  Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).
+  Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled); a toggle's
+  ARIA state (aria-expanded/aria-pressed/aria-checked/aria-selected) renders per showcase item, it does not flip.
   Slots render their declared defaultContent; an empty slot renders its wrapper empty (absent content
   is absent — named in an inline comment, never painted as placeholder text). Booleans render per showcase item.
 -->`;

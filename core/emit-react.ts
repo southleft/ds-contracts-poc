@@ -101,7 +101,22 @@ const STATE_SELECTORS: Record<string, string> = {
  *  color-kind only, bounded by the field evidence (the CBDS disabled label
  *  drew #556275 on the #dfe3eb root; extend only when fixtures demand more).
  *  The root keeps its full state vocabulary (outline-*, opacity, radius, …). */
-export const PART_STATE_CHANNELS = new Set(['color', 'background-color', 'border-color']);
+/** v13 was color-kind only. FC-DUMP-PROPOSE-PART-STATE-CHANNELS: a Hover-only
+ *  DROP_SHADOW / stroke weight / corner radius / node opacity on a drawn child
+ *  used to propose with ZERO notes (the channel had nowhere to land), so the
+ *  proposer now carries them here — box-shadow, border-width, border-radius,
+ *  opacity. The rule body below is channel-generic (`<prop>: var(...)`) and the
+ *  canvas leg merges part states into tokens, which applyTokens already lowers
+ *  for all four. */
+export const PART_STATE_CHANNELS = new Set([
+  'color',
+  'background-color',
+  'border-color',
+  'box-shadow',
+  'border-width',
+  'border-radius',
+  'opacity',
+]);
 
 /** Elements the UA stylesheet gives default MARGINS. A component's box is
  *  contract-governed — spacing between components belongs to the composing
@@ -630,6 +645,7 @@ export function validateContract(
         }
       }
     }
+    const substitutableProps = new Set([...enumProps(contract), ...boolProps(contract)].map((pr) => pr.name));
     if (p.length > 1) {
       // Nested parts (path.length > 1 — NOT a top-level root, single- or
       // multi-root) carry substituted tokens as descendant rules under the
@@ -652,11 +668,39 @@ export function validateContract(
       // (`.type-brand.style-fill.state-hover`) and the shape the S2
       // `tokensByProp` map lift already emits one level down. No new
       // vocabulary; the same rule, one nesting level deeper.
+      //
+      // RESIDUAL (2026-08-22, the states round): a BOOLEAN placeholder on a
+      // nested token used to be refused here as an "unknown enum prop" while
+      // the root carried it (substValues/boolFrag) and the web-components
+      // emitter carried it on parts too — three surfaces, two answers. The
+      // part path now expands booleans exactly like the root (attribute
+      // presence on the root element); only a placeholder naming NEITHER an
+      // enum nor a boolean prop is refused, by name, for every surface.
       for (const ref of Object.values(part.tokens ?? {})) {
         for (const ph of placeholdersIn(stripBraces(ref))) {
-          if (!enumProps(contract).some((pr) => pr.name === ph)) {
+          if (!substitutableProps.has(ph)) {
             errors.push(
-              `${contract.id}: part "${name}" token "${ref}" substitutes unknown enum prop "${ph}"`,
+              `${contract.id}: part "${name}" token "${ref}" substitutes "{${ph}}", which is not an enum or boolean prop of this contract — no surface has a class or attribute to select on`,
+            );
+          }
+        }
+      }
+    }
+    // STATES REFS (the residual the multi-axis fix left open): a root or part
+    // `states` ref may substitute ANY number of enum/boolean props — every CSS
+    // surface expands the cartesian exactly like a token ref (react comboCls,
+    // html comboSel, web-components rootWithCombo). Before this every surface's
+    // `phs.length === 1 && enums.get(…)` branch dropped a two-placeholder or
+    // boolean-placeholder state ref WITHOUT A WORD — the hover fact vanished.
+    // A placeholder naming no such prop has nothing to select on anywhere and
+    // is refused here, once, by name, so html/react-inline (which gate on
+    // validateContract alone) refuse exactly as react/web-components do.
+    for (const [state, overrides] of Object.entries(part.states ?? {})) {
+      for (const [cssProp, ref] of Object.entries(overrides)) {
+        for (const ph of placeholdersIn(stripBraces(ref))) {
+          if (!substitutableProps.has(ph)) {
+            errors.push(
+              `${contract.id}: part "${name}" states.${state}.${cssProp} ref "${ref}" substitutes "{${ph}}", which is not an enum or boolean prop of this contract — no surface has a class or attribute to select on`,
             );
           }
         }
@@ -1523,6 +1567,28 @@ export function validateContract(
       }
     }
   }
+
+  // ONE root role claim. `anatomy.root.attrs.role` and `semantics.role` are
+  // the same fact spelled twice; every code emitter (react / react-inline /
+  // web-components / html) renders the attrs spelling and skips the
+  // semantics default when both are present — so an EQUAL pair emits once,
+  // and a DIFFERING pair is refused here by name rather than letting an
+  // emitter pick one silently. A static attrs.role against a dynamic
+  // roleByProp can never agree, so that pair is always refused.
+  {
+    const attrsRole = contract.anatomy.root?.attrs?.role;
+    if (attrsRole !== undefined) {
+      if (contract.semantics.roleByProp) {
+        errors.push(
+          `${contract.id}: anatomy.root.attrs.role "${attrsRole}" conflicts with semantics.roleByProp (a static role cannot agree with a per-prop role) — keep one`,
+        );
+      } else if (contract.semantics.role !== undefined && contract.semantics.role !== attrsRole) {
+        errors.push(
+          `${contract.id}: anatomy.root.attrs.role "${attrsRole}" conflicts with semantics.role "${contract.semantics.role}" — the root has one role; keep one spelling`,
+        );
+      }
+    }
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -1854,9 +1920,18 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
   // v7 overlay / v9 shape placement: any out-of-flow part (an overlay, or a
   // part whose stylesWhen carries position: absolute — the shape-placement
   // spelling) positions against the root.
+  // ... UNLESS its DIRECT holder declares a position of its own (the proposer
+  // marks the track of a stylesWhen-placed thumb `position: relative`): the
+  // holder is the positioning context, and pushing the root too used to
+  // anchor the ToggleSwitch thumb's `right: 2px` to the 100px root instead of
+  // the 44px track whenever the holder was NOT declared
+  // (FC-DUMP-PROPOSE-THUMB-HOLDER-RELATIVE). Root-level parts keep the root
+  // anchor. Mirrors core/emit-react-inline.ts.
   if (
     walkAnatomy(contract).some(
-      (w) => w.part.overlay || (w.part.stylesWhen ?? []).some((sw) => sw.styles['position'] === 'absolute'),
+      (w) =>
+        (w.part.overlay || (w.part.stylesWhen ?? []).some((sw) => sw.styles['position'] === 'absolute')) &&
+        !holderDeclaresPosition(contract, w.path),
     )
   ) {
     rootDecls.push('position: relative');
@@ -1871,7 +1946,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
   // BOOLEAN prop; each side renders as a data-attribute selector on the
   // root element the TSX already emits for every boolean
   // (`[data-x]` / `:not([data-x])`; native disabled uses `:disabled`).
-  // Nested parts stay enum-only — their bool refs refuse by name above.
+  // Nested parts and `states` refs take the same expansion (expandRef below).
   const boolNames = new Set(boolProps(contract).map((p) => p.name));
   const substValues = (p: string): string[] | undefined =>
     enums.get(p) ?? (boolNames.has(p) ? ['true', 'false'] : undefined);
@@ -1888,6 +1963,37 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     const enumPart = pairs.filter(([p]) => !boolNames.has(p)).map(([p, v]) => `${p}-${v}`).join('.');
     const boolPart = pairs.filter(([p]) => boolNames.has(p)).map(([p, v]) => boolFrag(p, v)).join('');
     return (enumPart.length > 0 ? enumPart : 'root') + boolPart;
+  };
+  /** N-placeholder expansion over enum AND boolean props: the cartesian in
+   *  DECLARED placeholder order, then declared value order — the web-
+   *  components emitter's `expandRef` is this exact loop, so both resolve
+   *  the same leaves in the same order (core/emitters-check.ts byte-compares
+   *  the var() names). A placeholder naming neither kind of prop has no
+   *  class or attribute to select on and is REFUSED BY NAME — `where` is
+   *  the fact that would otherwise have vanished. */
+  const expandRef = (
+    where: string,
+    refPath: string,
+  ): Array<{ combo: Array<[string, string]>; resolved: string }> => {
+    const phs = placeholdersIn(refPath);
+    const unknown = phs.filter((ph) => substValues(ph) === undefined);
+    if (unknown.length > 0) {
+      errors.push(
+        `${contract.id}: ${where} ref "{${refPath}}" substitutes ${unknown.map((ph) => `{${ph}}`).join(', ')} — not an enum or boolean prop of this contract, so there is no class or attribute to select on`,
+      );
+      return [];
+    }
+    let out: Array<{ combo: Array<[string, string]>; resolved: string }> = [{ combo: [], resolved: refPath }];
+    for (const ph of phs) {
+      const next: typeof out = [];
+      for (const prefix of out) {
+        for (const value of substValues(ph)!) {
+          next.push({ combo: [...prefix.combo, [ph, value]], resolved: prefix.resolved.replaceAll(`{${ph}}`, value) });
+        }
+      }
+      out = next;
+    }
+    return out;
   };
 
   for (const [cssProp, ref] of Object.entries(rootTokens)) {
@@ -2157,13 +2263,15 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         if (checkToken(refPath, `anatomy.root.states.${state}.${cssProp}`)) {
           stateRules.push(`\n.root${sel} {\n  ${cssProp}: ${cssVar(refPath)};\n}`);
         }
-      } else if (phs.length === 1) {
-        const values = enums.get(phs[0]) ?? [];
-        for (const value of values) {
-          const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
-          if (!checkToken(resolved, `anatomy.root.states.${state}.${cssProp}`)) continue;
-          stateRules.push(`\n.${phs[0]}-${value}${sel} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
-        }
+        continue;
+      }
+      // N placeholders (enum and boolean alike) — one rule per value tuple on
+      // the same compound selector the root's tokens take (.variant-primary
+      // .size-sm:hover, .root[data-loading]:hover). One enum placeholder is
+      // byte-identical to the former single-axis branch.
+      for (const { combo, resolved } of expandRef(`anatomy.root.states.${state}.${cssProp}`, refPath)) {
+        if (!checkToken(resolved, `anatomy.root.states.${state}.${cssProp}`)) continue;
+        stateRules.push(`\n.${comboCls(combo)}${sel} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
       }
     }
   }
@@ -2383,12 +2491,13 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         // read as though a sparse cartesian were tolerated. It is not, and that
         // is the whole reason `mintTokens` must supply a leaf for EVERY
         // declared combination — see the ragged-matrix pass there.)
-        for (const combo of enumCombos(phs, enums)) {
-          let resolved = refPath;
-          for (const [ph, value] of combo) resolved = resolved.replaceAll(`{${ph}}`, value);
+        // A boolean placeholder rides the root's data attribute (or native
+        // :disabled) exactly as on the root's own tokens — `.root[data-loading]
+        // .label`; all-enum combos are byte-identical to the former enumCombos
+        // expansion.
+        for (const { combo, resolved } of expandRef(`anatomy.${name}.tokens.${cssProp}`, refPath)) {
           if (!checkToken(resolved, `anatomy.${name}.tokens.${cssProp}`)) continue;
-          const sel = combo.map(([ph, value]) => `.${ph}-${value}`).join('');
-          nestedSubRules.push(`\n${sel} .${name} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
+          nestedSubRules.push(`\n.${comboCls(combo)} .${name} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
         }
         continue;
       }
@@ -2505,12 +2614,13 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
           if (checkToken(refPath, `anatomy.${name}.states.${state}.${cssProp}`)) {
             nestedSubRules.push(`\n.root${sel} .${name} {\n  ${cssProp}: ${cssVar(refPath)};\n}`);
           }
-        } else if (phs.length === 1) {
-          for (const value of enums.get(phs[0]) ?? []) {
-            const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
-            if (!checkToken(resolved, `anatomy.${name}.states.${state}.${cssProp}`)) continue;
-            nestedSubRules.push(`\n.${phs[0]}-${value}${sel} .${name} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
-          }
+          continue;
+        }
+        // N placeholders, enum and boolean — the root's state expansion one
+        // level down (.variant-danger[data-loading]:hover .label).
+        for (const { combo, resolved } of expandRef(`anatomy.${name}.states.${state}.${cssProp}`, refPath)) {
+          if (!checkToken(resolved, `anatomy.${name}.states.${state}.${cssProp}`)) continue;
+          nestedSubRules.push(`\n.${comboCls(combo)}${sel} .${name} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
         }
       }
     }
@@ -3005,6 +3115,25 @@ export function generateTsx(
         `  // structure (a gated part, a per-value text/icon lookup, a child's own props) —\n` +
         `  // or, where the source drew no difference at all, nothing.\n`;
 
+  // `attrs` on a part (root included): a `{prop}` value binds to the prop —
+  // a text prop's code binding is already a string, so it binds bare
+  // (`href={href}`); an enum/number prop is coerced (`{String(size)}`). A
+  // literal lands as a literal (numeric DOM props as numbers).
+  const NUMERIC_ATTRS = new Set(['rows', 'cols', 'tabIndex', 'colSpan', 'rowSpan']);
+  const partAttrList = (part: Part | undefined): string[] =>
+    Object.entries(part?.attrs ?? {}).map(([attr, value]) => {
+      const ref = value.match(/^\{([a-z][\w-]*)\}$/);
+      if (ref) {
+        const bound = contract.props.find((p) => p.name === ref[1]);
+        return bound?.type === 'text'
+          ? `${attr}={${codePropOf(ref[1])}}`
+          : `${attr}={String(${codePropOf(ref[1])})}`;
+      }
+      if (NUMERIC_ATTRS.has(attr) && /^\d+$/.test(value)) return `${attr}={${value}}`;
+      return `${attr}=${JSON.stringify(value)}`;
+    });
+  const partAttrString = (part: Part): string => partAttrList(part).map((a) => ` ${a}`).join('');
+
   const nativeDisabled = meta.supportsDisabled && bools.some((p) => p.name === 'disabled');
   const elementAttrs: string[] = ['ref={ref}', 'className={classes}'];
   if (nativeDisabled) elementAttrs.push('disabled={disabled}');
@@ -3015,12 +3144,25 @@ export function generateTsx(
     const dataName = p.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
     elementAttrs.push(`data-${dataName}={${p.bindings.code.prop} || undefined}`);
   }
+  // anatomy.root.attrs — the root element's own attributes, carried exactly
+  // the way nested parts' attrs are (the P0 this closes: icon-button's
+  // aria-label + type, progress-bar's role, skeleton's aria-hidden and the
+  // <a>-rooted components' href were destructured and dropped). `role` here
+  // wins over the semantics default below (validateContract refuses a
+  // DIFFERING pair by name), and an authored `type` suppresses the implicit
+  // type="button" the root event would add.
+  const rootAttrs = contract.anatomy.root?.attrs ?? {};
+  elementAttrs.push(...partAttrList(contract.anatomy.root));
   const roleByProp = contract.semantics.roleByProp;
   let roleMapConst = '';
   if (roleByProp) {
     roleMapConst = `const ROLE_MAP: Record<string, string> = ${JSON.stringify(roleByProp.map)};\n\n`;
     elementAttrs.push(`role={ROLE_MAP[${codePropOf(roleByProp.prop)}]}`);
-  } else if (contract.semantics.role && contract.semantics.role !== contract.semantics.element) {
+  } else if (
+    rootAttrs.role === undefined &&
+    contract.semantics.role &&
+    contract.semantics.role !== contract.semantics.element
+  ) {
     elementAttrs.push(`role="${contract.semantics.role}"`);
   }
   // v7 elementByProp: mirror of ROLE_MAP — the rendered element follows the
@@ -3032,7 +3174,7 @@ export function generateTsx(
   }
   const rootEvent = events.find((e) => e.trigger === 'root');
   if (rootEvent) {
-    if (contract.semantics.element === 'button') {
+    if (contract.semantics.element === 'button' && rootAttrs.type === undefined) {
       elementAttrs.push('type="button"');
     }
     elementAttrs.push(`onClick={handle${pascal(rootEvent.name)}}`);
@@ -3075,17 +3217,6 @@ export function generateTsx(
   const JS_IDENT_RE = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
   const stylesRef = (cls: string): string =>
     JS_IDENT_RE.test(cls) ? `styles.${cls}` : `styles[${JSON.stringify(cls)}]`;
-
-  const NUMERIC_ATTRS = new Set(['rows', 'cols', 'tabIndex', 'colSpan', 'rowSpan']);
-  const partAttrString = (part: Part): string =>
-    Object.entries(part.attrs ?? {})
-      .map(([attr, value]) => {
-        const ref = value.match(/^\{([a-z][\w-]*)\}$/);
-        if (ref) return ` ${attr}={String(${codePropOf(ref[1])})}`;
-        if (NUMERIC_ATTRS.has(attr) && /^\d+$/.test(value)) return ` ${attr}={${value}}`;
-        return ` ${attr}=${JSON.stringify(value)}`;
-      })
-      .join('');
 
   const wrapVisibleWhen = (part: Part, jsx: string): string => {
     if (!part.visibleWhen) return jsx;
@@ -3541,12 +3672,18 @@ export const Disabled: Story = {
     .map((depName) => `import { ${depName} } from '../${depName}';`)
     .join('\n');
 
+  // `../tokens.css` — the custom-property sheet the generator writes at the
+  // output root (scripts/generate-components.ts → core/emit-tokens-css.ts),
+  // one level above this story's <Name>/ directory. Imported HERE so a
+  // Storybook glob over the generated tree paints with no preview.ts line:
+  // before this import the BETA.md golden path rendered unstyled (2026-08-22).
   return `/**
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import '../tokens.css';
 ${sampleImports}${sampleImports ? '\n' : ''}import { ${name} } from './${name}';
 
 const meta = {
@@ -3598,6 +3735,16 @@ export interface EmitReactResult {
  *  playground both run the same prettier/standalone pass — core/format.ts —
  *  so bytes match the shipped files). Throws with every named violation if
  *  the contract fails validation — invalid states are refused, not rendered. */
+/** The DIRECT holder of the part at `path` declares `position` (so it is the
+ *  positioning context for an out-of-flow child). Root-level parts (holder =
+ *  the root itself) return false so the root keeps its own anchor push. */
+export function holderDeclaresPosition(contract: Contract, path: string[]): boolean {
+  if (path.length < 3) return false;
+  let cur: Part | undefined = contract.anatomy[path[0]];
+  for (const seg of path.slice(1, -1)) cur = cur?.parts?.[seg];
+  return cur?.declared?.['position'] !== undefined;
+}
+
 export function emitReact(contract: Contract, ctx: EmitCtx): EmitReactResult {
   const errors: string[] = [];
   validateContract(contract, ctx.contracts, errors, ctx.icons);

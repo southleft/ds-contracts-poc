@@ -1,5 +1,9 @@
-import type { DumpNode, DumpSet } from "../extract/figma/types.js";
+import type { DumpLayout, DumpNode, DumpSet } from "../extract/figma/types.js";
 import { tokenCorpusFromJson } from "./token-corpus.js";
+import {
+  CAPTURED_VARIABLES_ABSENT_RECEIPT,
+  capturedTokensDocument,
+} from "./captured-tokens.js";
 import {
   ExactProjectionError,
   proposeBatchFromDump,
@@ -1995,6 +1999,662 @@ check(
     stampedStateShadow.notes.some((n) =>
       n.includes("FC-DUMP-PROPOSE-SHADOW-MINTED"),
     ),
+);
+
+console.log(
+  "\n30. Child-part state-only channels (FC-DUMP-PROPOSE-PART-STATE-CHANNELS)",
+);
+// A Badge-shaped set under State promotion. The merged `icon` part is built
+// from DEFAULT-state variants only, so invertNodeEffects never sees the
+// Hover-only DROP_SHADOW and the child state loop used to carry fill/stroke
+// and nothing else: the icon proposed with ZERO notes, status verified-exact.
+// Every child channel the loop drops must carry or NAME — never silent.
+const partStateRow = (color: string, state: string): DumpNode => {
+  const hover = state === "Hover";
+  return {
+    name: `Color=${color}, State=${state}`,
+    type: "COMPONENT",
+    variantProperties: { Color: color, State: state },
+    fill: {
+      var: `imported/badge/root/background-color/${hover ? "hover/" : ""}${color.toLowerCase()}`,
+    },
+    children: [
+      {
+        name: "icon",
+        type: "FRAME",
+        fill: { hex: "111111" },
+        ...(hover ? { effects: shadowStack("0e9f6e") } : {}),
+        children: [
+          {
+            name: "glyph",
+            type: "TEXT",
+            text: { characters: "i", fontSize: 10, fontStyle: "Regular" },
+            fill: { hex: hover ? "ffffff" : "222222" },
+          },
+        ],
+      },
+      {
+        name: "box",
+        type: "FRAME",
+        fill: { hex: "333333" },
+        stroke: { hex: "444444" },
+        strokeWeight: hover ? 2 : 1,
+        cornerRadius: hover ? 8 : 4,
+        opacity: hover ? 0.8 : 1,
+      },
+      {
+        name: "caption",
+        type: "TEXT",
+        text: {
+          characters: "Badge",
+          fontSize: hover ? 14 : 12,
+          fontStyle: "Medium",
+        },
+        fill: { hex: "555555" },
+        ...(hover ? { effects: shadowStack("000000") } : {}),
+      },
+    ],
+  };
+};
+const partStateSet: DumpSet = {
+  setName: "Badge (flowbite.badge)",
+  type: "COMPONENT_SET",
+  semantics: { element: "span" },
+  propNames: { Color: "color" },
+  statePreviewAxis: {
+    axis: "State",
+    default: "Default",
+    states: ["Hover"],
+    primary: "Color",
+    pinned: {},
+  },
+  propertyDefinitions: {
+    Color: {
+      type: "VARIANT",
+      defaultValue: "Default",
+      variantOptions: ["Default", "Red"],
+    },
+    State: {
+      type: "VARIANT",
+      defaultValue: "Default",
+      variantOptions: ["Default", "Hover"],
+    },
+  },
+  variants: [
+    partStateRow("Default", "Default"),
+    partStateRow("Red", "Default"),
+    partStateRow("Default", "Hover"),
+    partStateRow("Red", "Hover"),
+  ],
+};
+const partStateExact = proposeFromDump(partStateSet, {
+  ...baseOpts,
+  mintUnbound: true,
+});
+type StatePart = {
+  states?: Record<string, Record<string, string>>;
+  parts?: Record<string, StatePart>;
+};
+const partStateParts =
+  (partStateExact.contract as { anatomy?: { root?: StatePart } }).anatomy?.root
+    ?.parts ?? {};
+const partNamed = (
+  parts: Record<string, StatePart>,
+  key: string,
+): StatePart | undefined => {
+  for (const [k, v] of Object.entries(parts)) {
+    if (k === key) return v;
+    const deeper = partNamed(v.parts ?? {}, key);
+    if (deeper) return deeper;
+  }
+  return undefined;
+};
+const iconHover = partNamed(partStateParts, "icon")?.states?.hover;
+const boxHover = partNamed(partStateParts, "box")?.states?.hover;
+const glyphHover = partNamed(partStateParts, "glyph")?.states?.hover;
+const partStateNotes = partStateExact.notes;
+const namesChild = (child: string, channel: RegExp): boolean =>
+  partStateNotes.some(
+    (n) =>
+      n.includes(`/${child}`) && n.includes('state "hover"') && channel.test(n),
+  );
+check(
+  "child-part Hover-only DROP_SHADOW carries as the part's states.hover.box-shadow (was silent, verified-exact)",
+  partStateExact.projection.status === "verified-exact" &&
+    typeof iconHover?.["box-shadow"] === "string" &&
+    iconHover["box-shadow"].includes("box-shadow") &&
+    partStateNotes.some(
+      (n) =>
+        n.includes("/icon") &&
+        n.includes("box-shadow") &&
+        n.includes('"hover"'),
+    ),
+);
+check(
+  "child-part Hover stroke weight / corner radius / opacity carry as states.hover border-width / border-radius / opacity",
+  typeof boxHover?.["border-width"] === "string" &&
+    boxHover["border-width"].includes("border-width") &&
+    typeof boxHover?.["border-radius"] === "string" &&
+    boxHover["border-radius"].includes("border-radius") &&
+    typeof boxHover?.["opacity"] === "string" &&
+    boxHover["opacity"].includes("opacity"),
+);
+check(
+  "TEXT child Hover-only effects and font-size change are NAMED per part+state+channel (no text-shadow / text-state vocabulary)",
+  namesChild("caption", /effect/i) &&
+    namesChild("caption", /fontSize|font-size/),
+);
+check(
+  "depth-2 child (icon/glyph) Hover ink carries as the nested part's states.hover.color or is NAMED — never silent",
+  (typeof glyphHover?.["color"] === "string" &&
+    glyphHover["color"].includes("color")) ||
+    namesChild("glyph", /fill|color/),
+);
+
+console.log(
+  "\n31. Positioned-child holder (FC-DUMP-PROPOSE-THUMB-HOLDER-RELATIVE)",
+);
+// The ELLIPSE thumb's placement rides stylesWhen { position: absolute, left/
+// right } on part-0-after. declareRelativeIfPositionedChildren read only
+// declared.position, so the DIRECT holder (part-0, the 44px track) never
+// became the positioning context and emit-react's root fallback anchored
+// `right: 2px` to the 100px root: the recovered ToggleSwitch drew its thumb
+// OUTSIDE the track. The holder must own position: relative, not the root.
+const thumbHolder = (
+  thumbShapeExact.contract as {
+    anatomy?: {
+      root?: {
+        declared?: Record<string, string>;
+        parts?: { "part-0"?: { declared?: Record<string, string> } };
+      };
+    };
+  }
+).anatomy?.root;
+check(
+  "holder of a stylesWhen position:absolute child declares position: relative (the track, not the root)",
+  thumbHolder?.parts?.["part-0"]?.declared?.position === "relative" &&
+    thumbHolder?.declared?.position === undefined &&
+    thumbWhen.some((row) => row.styles?.position === "absolute"),
+);
+
+/** A plain auto-layout row for the section-32+ fixtures (every DumpLayout
+ *  field the type requires, at the generator's inert defaults). */
+const rowLayout = (): DumpLayout => ({
+  mode: "HORIZONTAL",
+  primary: "MIN",
+  counter: "MIN",
+  spacing: 0,
+  padding: [0, 0, 0, 0],
+  primarySizing: "AUTO",
+  counterSizing: "AUTO",
+});
+
+console.log(
+  "\n32. BOOLEAN variant axes join correlation (FC-DUMP-PROPOSE-BOOL-AXIS-CORRELATION)",
+);
+// Eventz field case: Button roots bind opacity to theme/opacity/default on
+// isDisabled=false and theme/opacity/disabled on isDisabled=true, and the
+// Checkbox's nested Icons/Checkbox applies state=unselected/selected exactly
+// as isChecked flips. Both correlation routines skipped boolean axes, and the
+// note said "without correlating to any variant axis" — a FALSE receipt.
+const boolAxisCorpus = tokenCorpusFromJson({
+  primitives: {},
+  semantic: {
+    theme: {
+      opacity: {
+        default: { $value: 100, $type: "number" },
+        disabled: { $value: 40, $type: "number" },
+      },
+    },
+    spacing: {
+      sm: { $value: "8px", $type: "dimension" },
+      lg: { $value: "16px", $type: "dimension" },
+    },
+  },
+  light: {},
+  brandDefault: {},
+});
+const boolAxisRow = (
+  tone: string,
+  disabled: boolean,
+  checked: boolean,
+): DumpNode => ({
+  name: `Tone=${tone}, Disabled=${disabled}, Checked=${checked}`,
+  type: "COMPONENT",
+  variantProperties: {
+    Tone: tone,
+    Disabled: String(disabled),
+    Checked: String(checked),
+  },
+  layout: rowLayout(),
+  // dump v1.2 writes the RENDERED node opacity beside the binding (Eventz:
+  // the variable holds Figma's percent 40, the node renders 0.4).
+  ...(disabled ? { opacity: 0.4 } : {}),
+  bound: {
+    opacity: disabled ? "theme/opacity/disabled" : "theme/opacity/default",
+    paddingLeft: disabled ? "spacing/lg" : "spacing/sm",
+    paddingRight: disabled ? "spacing/lg" : "spacing/sm",
+  },
+  children: [
+    {
+      name: "icon",
+      type: "INSTANCE",
+      instanceOf: "Glyph",
+      componentProperties: { State: checked ? "Selected" : "Unselected" },
+    },
+  ],
+});
+const boolAxisSet: DumpSet = {
+  setName: "BoolAxis",
+  type: "COMPONENT_SET",
+  propertyDefinitions: {
+    Tone: {
+      type: "VARIANT",
+      defaultValue: "Neutral",
+      variantOptions: ["Neutral", "Brand"],
+    },
+    Disabled: {
+      type: "VARIANT",
+      defaultValue: "false",
+      variantOptions: ["false", "true"],
+    },
+    Checked: {
+      type: "VARIANT",
+      defaultValue: "false",
+      variantOptions: ["false", "true"],
+    },
+  },
+  variants: [
+    boolAxisRow("Neutral", false, false),
+    boolAxisRow("Brand", false, false),
+    boolAxisRow("Neutral", true, false),
+    boolAxisRow("Brand", true, false),
+    boolAxisRow("Neutral", false, true),
+    boolAxisRow("Brand", false, true),
+    boolAxisRow("Neutral", true, true),
+    boolAxisRow("Brand", true, true),
+  ],
+};
+const boolAxisExact = proposeFromDump(boolAxisSet, {
+  ...baseOpts,
+  corpus: boolAxisCorpus,
+  mintUnbound: true,
+});
+const boolAxisRoot = (
+  boolAxisExact.contract as {
+    anatomy?: {
+      root?: {
+        stylesWhen?: Array<{ prop: string; styles: Record<string, string> }>;
+        parts?: Record<
+          string,
+          { component?: { props?: Record<string, unknown> } }
+        >;
+      };
+    };
+  }
+).anatomy?.root;
+const boolAxisNotes = boolAxisExact.notes;
+check(
+  "no note claims a boolean-axis function is uncorrelated (the FALSE 'without correlating to any variant axis' receipt is gone)",
+  boolAxisExact.projection.status === "verified-exact" &&
+    !boolAxisNotes.some(
+      (n) =>
+        n.includes("without correlating to any variant axis") ||
+        n.includes("without tracking any enum axis"),
+    ),
+);
+check(
+  "bound opacity that is a function of the Disabled boolean axis CARRIES as stylesWhen { prop: disabled, opacity: 0.4 } with both variable names on the receipt",
+  (boolAxisRoot?.stylesWhen ?? []).some(
+    (sw) => sw.prop === "disabled" && sw.styles.opacity === "0.4",
+  ) &&
+    boolAxisNotes.some(
+      (n) =>
+        n.includes("opacity") &&
+        n.includes("theme/opacity/disabled") &&
+        n.includes("theme/opacity/default") &&
+        n.includes('"Disabled"'),
+    ),
+);
+check(
+  "bound padding that is a function of the Disabled boolean axis is NAMED with the axis and the per-value refs (tokensByProp is enum-keyed)",
+  boolAxisNotes.some(
+    (n) =>
+      /padding/i.test(n) &&
+      n.includes('BOOLEAN axis "Disabled"') &&
+      n.includes("spacing.sm") &&
+      n.includes("spacing.lg"),
+  ),
+);
+check(
+  "nested-instance applied prop tracking the Checked boolean axis is NAMED with the axis and the value map, first value carried (PropByProp compares strings; a boolean parent would silently miss)",
+  boolAxisNotes.some(
+    (n) =>
+      n.includes('applied prop "state"') &&
+      n.includes('BOOLEAN axis "Checked"') &&
+      n.includes("false→unselected") &&
+      n.includes("true→selected"),
+  ),
+);
+
+console.log(
+  "\n33. Italic face carries as declared font-style (FC-DUMP-PROPOSE-ITALIC-DROPPED)",
+);
+// With a stamped weight token the text path returned before the italic
+// receipt ever ran: "Medium Italic" proposed as an upright Medium, silently.
+const italicRow = (size: string, face: string): DumpNode => ({
+  name: `Size=${size}`,
+  type: "COMPONENT",
+  variantProperties: { Size: size },
+  layout: rowLayout(),
+  children: [
+    {
+      name: "label",
+      type: "TEXT",
+      text: {
+        characters: "Quote",
+        fontSize: 14,
+        fontStyle: face,
+        fontSizeVar: "imported/quote/label/font-size",
+        fontWeightVar: "imported/quote/label/font-weight",
+      },
+      fill: { var: "imported/quote/label/color" },
+    },
+    {
+      name: "plain",
+      type: "TEXT",
+      text: { characters: "x", fontSize: 12, fontStyle: "Regular" },
+      fill: { hex: "111111" },
+    },
+  ],
+});
+const italicSet: DumpSet = {
+  setName: "Quote",
+  type: "COMPONENT_SET",
+  propertyDefinitions: {
+    Size: { type: "VARIANT", defaultValue: "Sm", variantOptions: ["Sm", "Lg"] },
+  },
+  variants: [
+    italicRow("Sm", "Medium Italic"),
+    italicRow("Lg", "Medium Italic"),
+  ],
+};
+const italicExact = proposeFromDump(italicSet, {
+  ...baseOpts,
+  mintUnbound: true,
+});
+type DeclaredPart = {
+  declared?: Record<string, string>;
+  tokens?: Record<string, string>;
+  parts?: Record<string, DeclaredPart>;
+};
+const italicParts =
+  (italicExact.contract as { anatomy?: { root?: DeclaredPart } }).anatomy?.root
+    ?.parts ?? {};
+check(
+  "stamped-weight italic text carries declared font-style: italic beside the recovered weight token, with a receipt",
+  italicExact.projection.status === "verified-exact" &&
+    italicParts.label?.declared?.["font-style"] === "italic" &&
+    italicParts.label?.tokens?.["font-weight"] ===
+      "{imported.quote.label.font-weight}" &&
+    italicExact.notes.some(
+      (n) =>
+        n.includes("/label") &&
+        n.includes("Medium Italic") &&
+        n.includes("font-style: italic"),
+    ),
+);
+check(
+  "upright text declares no font-style (absence is the CSS default, not a fact)",
+  italicParts.plain?.declared?.["font-style"] === undefined,
+);
+const italicMixed: DumpSet = {
+  ...italicSet,
+  setName: "QuoteMixed",
+  variants: [italicRow("Sm", "Medium Italic"), italicRow("Lg", "Medium")],
+};
+const italicMixedExact = proposeFromDump(italicMixed, {
+  ...baseOpts,
+  mintUnbound: true,
+});
+const italicMixedParts =
+  (italicMixedExact.contract as { anatomy?: { root?: DeclaredPart } }).anatomy
+    ?.root?.parts ?? {};
+check(
+  "italic on only some variants is NAMED, never carried as a constant",
+  italicMixedParts.label?.declared?.["font-style"] === undefined &&
+    italicMixedExact.notes.some(
+      (n) =>
+        n.includes("/label") &&
+        n.includes("italic") &&
+        /differs across variants/i.test(n),
+    ),
+);
+
+console.log("\n34. clipsContent read back (FC-DUMP-PROPOSE-CLIP-UNREAD)");
+// The dump captured clipsContent (v1.20) and propose never looked at it. On a
+// set THIS pipeline drew, every frame's clipsContent is written explicitly
+// (true only from a declared overflow), so the flag is an authored fact and
+// carries; on a foreign set Figma's frame default is also true, so the flag
+// cannot be attributed and is NAMED instead of minted.
+const clipRow = (size: string): DumpNode => ({
+  name: `Size=${size}`,
+  type: "COMPONENT",
+  variantProperties: { Size: size },
+  layout: rowLayout(),
+  clipsContent: true,
+  children: [
+    {
+      name: "viewport",
+      type: "FRAME",
+      layout: rowLayout(),
+      clipsContent: true,
+      fill: { hex: "eeeeee" },
+      children: [
+        {
+          name: "t",
+          type: "TEXT",
+          text: { characters: "x", fontSize: 12, fontStyle: "Regular" },
+          fill: { hex: "111111" },
+        },
+      ],
+    },
+    {
+      name: "open",
+      type: "FRAME",
+      layout: rowLayout(),
+      fill: { hex: "dddddd" },
+    },
+  ],
+});
+const clipDrawnSet: DumpSet = {
+  setName: "Clip (ds.clip)",
+  type: "COMPONENT_SET",
+  contractId: "ds.clip",
+  semantics: { element: "div" },
+  propertyDefinitions: {
+    Size: { type: "VARIANT", defaultValue: "Sm", variantOptions: ["Sm", "Lg"] },
+  },
+  variants: [clipRow("Sm"), clipRow("Lg")],
+};
+const clipDrawn = proposeFromDump(clipDrawnSet, {
+  ...baseOpts,
+  mintUnbound: true,
+});
+const clipDrawnRoot = (
+  clipDrawn.contract as { anatomy?: { root?: DeclaredPart } }
+).anatomy?.root;
+check(
+  "pipeline-drawn set: clipsContent carries as declared overflow-x/overflow-y: hidden on the root and the clipping part only",
+  clipDrawn.projection.status === "verified-exact" &&
+    clipDrawnRoot?.declared?.["overflow-x"] === "hidden" &&
+    clipDrawnRoot?.declared?.["overflow-y"] === "hidden" &&
+    clipDrawnRoot?.parts?.viewport?.declared?.["overflow-x"] === "hidden" &&
+    clipDrawnRoot?.parts?.viewport?.declared?.["overflow-y"] === "hidden" &&
+    clipDrawnRoot?.parts?.open?.declared?.["overflow-x"] === undefined &&
+    clipDrawn.notes.some(
+      (n) =>
+        n.includes("/viewport") &&
+        n.includes("clipsContent") &&
+        n.includes("overflow"),
+    ),
+);
+const clipForeignSet: DumpSet = {
+  setName: "ClipForeign",
+  type: "COMPONENT_SET",
+  propertyDefinitions: {
+    Size: { type: "VARIANT", defaultValue: "Sm", variantOptions: ["Sm", "Lg"] },
+  },
+  variants: [clipRow("Sm"), clipRow("Lg")],
+};
+const clipForeign = proposeFromDump(clipForeignSet, {
+  ...baseOpts,
+  mintUnbound: true,
+});
+const clipForeignRoot = (
+  clipForeign.contract as { anatomy?: { root?: DeclaredPart } }
+).anatomy?.root;
+check(
+  "foreign set: clipsContent is NAMED per node (Figma's frame default is also true) and no overflow is minted",
+  clipForeignRoot?.declared?.["overflow-x"] === undefined &&
+    clipForeignRoot?.parts?.viewport?.declared?.["overflow-x"] === undefined &&
+    clipForeign.notes.some(
+      (n) =>
+        n.includes("/viewport") &&
+        n.includes("clipsContent") &&
+        /not (carried|proposed|inverted)/i.test(n),
+    ) &&
+    clipForeign.notes.some(
+      (n) => n.startsWith("ClipForeign:root:") && n.includes("clipsContent"),
+    ),
+);
+
+console.log(
+  "\n35. Unbound BOOLEAN property survives as a prop (FC-DUMP-PROPOSE-UNBOUND-BOOLEAN)",
+);
+// Eventz field case: Button defines isFullWidth (default true) and no layer
+// visibility or instance swap references it — the property vanished from the
+// proposed API with no receipt.
+const unboundBoolSet: DumpSet = {
+  setName: "Press",
+  type: "COMPONENT_SET",
+  propertyDefinitions: {
+    Size: { type: "VARIANT", defaultValue: "Sm", variantOptions: ["Sm", "Lg"] },
+    Pressed: { type: "BOOLEAN", defaultValue: false },
+    "Show Icon": { type: "BOOLEAN", defaultValue: true },
+  },
+  boolDefaults: { Pressed: false, "Show Icon": true },
+  variants: [
+    {
+      name: "Size=Sm",
+      type: "COMPONENT",
+      variantProperties: { Size: "Sm" },
+      layout: rowLayout(),
+      children: [
+        {
+          name: "icon",
+          type: "FRAME",
+          propRefs: { visible: "Show Icon" },
+          fill: { hex: "222222" },
+        },
+      ],
+    },
+    {
+      name: "Size=Lg",
+      type: "COMPONENT",
+      variantProperties: { Size: "Lg" },
+      layout: rowLayout(),
+      children: [
+        {
+          name: "icon",
+          type: "FRAME",
+          propRefs: { visible: "Show Icon" },
+          fill: { hex: "222222" },
+        },
+      ],
+    },
+  ],
+};
+const unboundBool = proposeFromDump(unboundBoolSet, {
+  ...baseOpts,
+  mintUnbound: true,
+});
+const unboundProps = (
+  unboundBool.contract as {
+    props: Array<{
+      name: string;
+      type: unknown;
+      default?: unknown;
+      bindings: { figma: { kind?: string; property?: string } };
+    }>;
+  }
+).props;
+const pressed = unboundProps.find((p) => p.name === "pressed");
+check(
+  "an unreferenced BOOLEAN property is carried as a boolean prop (default from the definition, bound to the Figma BOOLEAN) with a receipt that it binds nothing on the canvas",
+  unboundBool.projection.status === "verified-exact" &&
+    pressed !== undefined &&
+    pressed.type === "boolean" &&
+    pressed.default === false &&
+    pressed.bindings.figma.kind === "BOOLEAN" &&
+    pressed.bindings.figma.property === "Pressed" &&
+    unboundBool.notes.some(
+      (n) =>
+        n.includes("`pressed`") &&
+        n.includes('"Pressed"') &&
+        /binds nothing|no layer/i.test(n),
+    ),
+);
+check(
+  "the visibility-bound BOOLEAN is proposed exactly once (the unbound pass never duplicates a bound prop)",
+  unboundProps.filter((p) => p.bindings.figma.property === "Show Icon")
+    .length === 1,
+);
+
+console.log(
+  "\n36. Captured variables leave a receipt on the CLI path (FC-DUMP-PROPOSE-CAPTURED-VARIABLES-DROPPED)",
+);
+// Journey A discarded the dump's `_variables` (values + per-mode trees): a
+// foreign kit's modes vanished between the dump and the proposal folder.
+const capturedDump = {
+  _provenance: { dumpVersion: "1.6" },
+  _variables: {
+    "bg/brand": {
+      type: "COLOR",
+      value: "#0e61ba",
+      modes: { Light: "#0e61ba", Dark: "#3b82f6" },
+    },
+    "space/md": { type: "FLOAT", value: 12 },
+    "label/x": { type: "STRING", value: "x" },
+  },
+};
+const capturedDoc = capturedTokensDocument(capturedDump);
+const capturedModes =
+  (
+    capturedDoc?.document as {
+      $extensions?: {
+        "ds-contracts"?: { modes?: Record<string, Record<string, unknown>> };
+      };
+    }
+  )?.$extensions?.["ds-contracts"]?.modes ?? {};
+check(
+  "captured.dtcg.json carries the consuming-mode tree as DTCG plus one mode block per Figma mode under $extensions, and the receipt counts variables, modes and skips",
+  capturedDoc !== null &&
+    (capturedDoc.document as { bg?: { brand?: { $value?: string } } }).bg?.brand
+      ?.$value === "#0e61ba" &&
+    Object.keys(capturedModes).sort().join(",") === "Dark,Light" &&
+    (capturedModes.Dark as { bg?: { brand?: { $value?: string } } }).bg?.brand
+      ?.$value === "#3b82f6" &&
+    capturedDoc.receipt.includes("2 captured variable(s)") &&
+    capturedDoc.receipt.includes("2 mode(s)") &&
+    capturedDoc.receipt.includes("1 skipped") &&
+    capturedDoc.receipt.includes("label/x") &&
+    /alias/i.test(capturedDoc.receipt),
+);
+check(
+  "a dump with no `_variables` yields a NAMED absence, never a silent nothing",
+  capturedTokensDocument({ _provenance: {} }) === null &&
+    CAPTURED_VARIABLES_ABSENT_RECEIPT.includes("no `_variables`"),
 );
 
 if (failures.length > 0) {

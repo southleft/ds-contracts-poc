@@ -66,6 +66,7 @@ import {
 } from "node:fs";
 import path from "node:path";
 import { figmaScriptEmitter } from "../../../../core/emitter.js";
+import { unsupportedTokenValues } from "../../../../core/token-set.js";
 import {
   contractFileNameForId,
   flatIdStem,
@@ -77,6 +78,14 @@ import {
   revisionOf,
   type ProvenancedContract,
 } from "../../../../core/contract-provenance.js";
+import {
+  createFigmaEngine,
+  summarizeCodeOnlyFacts,
+  tokenSetTokenTrees,
+  type CodeOnlyFact,
+  type TokenSetPayload,
+  type TokenTreeInput,
+} from "../../../../core/index.js";
 import {
   contractHashOf,
   recordCanvasToCodeSync,
@@ -90,7 +99,10 @@ import {
 } from "../../../../sync/ledger-io.js";
 import {
   buildEmitterCtxWithRouting,
+  buildTokenRouting,
+  classifyBundleTokenEntries,
   CliUsageError,
+  describeTokenRouting,
   expandContractArgs,
   expandTokenArgs,
   flagString,
@@ -98,6 +110,7 @@ import {
   loadIcons,
   parseFlags,
   splitList,
+  tokenTreesFromRouting,
   withTokenDiagnostics,
 } from "../lib.js";
 // propose-pr's three code-plan functions are imported LAZILY, inside the
@@ -155,6 +168,12 @@ export interface ContractsBundle {
   /** Bundle-carried icon assets ({name: svgMarkup}; figma bundle --icons
    *  writes it) — rides through push verbatim. */
   icons?: unknown;
+  /** THE NAMED RECEIPT (figma bundle writes it): one row per contract, in
+   *  contract order — `{ contractId, name, facts: CodeOnlyFact[] }`, or
+   *  `{ contractId, name, refused }` when the compile could not run. The
+   *  facts the canvas cannot carry, named where the paste goes; rides
+   *  through push/publish verbatim. */
+  codeOnlyFacts?: unknown;
 }
 
 /** True when an anatomy node (or any descendant part) carries drawable
@@ -232,11 +251,22 @@ export function assertContractsNotDrawableEmpty(
   contracts: readonly unknown[],
   surface: "bundle" | "publish",
 ): void {
-  for (const contract of contracts) {
-    if (isDrawableEmptyContract(contract)) {
-      throw new CliUsageError(drawableEmptyRefusalMessage(contract, surface));
-    }
+  // EVERY stub at once — the first cut threw on the first one, so a
+  // directory with five layout stubs refused five times, one per run.
+  const stubs = contracts.filter((c) => isDrawableEmptyContract(c));
+  if (stubs.length === 0) return;
+  if (stubs.length === 1) {
+    throw new CliUsageError(drawableEmptyRefusalMessage(stubs[0], surface));
   }
+  const ids = stubs.map((c) =>
+    typeof (c as { id?: unknown }).id === "string"
+      ? (c as { id: string }).id
+      : "(unnamed)",
+  );
+  throw new CliUsageError(
+    `${DRAWABLE_EMPTY}: ${ids.join(", ")} — ${stubs.length} contract(s) whose anatomy has nothing drawable (empty anatomy / empty root / hollow parts or content with no tokens, content binding, or component); ` +
+      `${surface} refuses rather than ${surface === "publish" ? "delivering" : "publishing"} blank frames. Leave them out of the ${surface}, or run computed capture / carry real anatomy first.`,
+  );
 }
 
 /** Read a file as a bundle: an existing CONTRACTS-BUNDLE envelope passes
@@ -264,6 +294,7 @@ export function toBundle(filePath: string): ContractsBundle {
     }
     const tokenSet = (raw as { tokenSet?: unknown }).tokenSet;
     const icons = (raw as { icons?: unknown }).icons;
+    const codeOnlyFacts = (raw as { codeOnlyFacts?: unknown }).codeOnlyFacts;
     for (const [i, contract] of contracts.entries()) {
       assertContractProvenance(
         contract as ProvenancedContract,
@@ -278,6 +309,7 @@ export function toBundle(filePath: string): ContractsBundle {
       contracts,
       ...(tokenSet !== undefined && tokenSet !== null ? { tokenSet } : {}),
       ...(icons !== undefined && icons !== null ? { icons } : {}),
+      ...(Array.isArray(codeOnlyFacts) ? { codeOnlyFacts } : {}),
     };
   }
   if (
@@ -327,12 +359,17 @@ async function bundleCommand(argv: string[]): Promise<number> {
   }
   const out = flagString(parsed, "out");
   if (!out) throw new CliUsageError("figma bundle needs --out <file.json>");
-  const tokenFiles = splitList(flagString(parsed, "tokens"));
-  if (tokenFiles.length === 0 || tokenFiles.length > 2) {
+  const tokenArgs = splitList(flagString(parsed, "tokens"));
+  if (tokenArgs.length === 0) {
     throw new CliUsageError(
-      "figma bundle needs --tokens <base.dtcg.json[,minted.dtcg.json]> — the flat DTCG base first, the minted tree (optional) second",
+      "figma bundle needs --tokens: a FLAT set as <base.dtcg.json[,minted.dtcg.json]> (base first, minted tree optional second), " +
+        "or a LAYERED set as <dir> / <slot>=<file>,… (slots: primitives, semantic, light, dark, brand, brand.<name>)",
     );
   }
+  // Flat (base[,minted]) or layered (the repo's tokens/ layout) — decided per
+  // entry, refused by name when mixed (see lib.ts classifyBundleTokenEntries).
+  const routedArgs = classifyBundleTokenEntries(tokenArgs);
+  const layeredSet = routedArgs.layered.length > 0;
   const modeFiles = splitList(flagString(parsed, "modes"));
   if (modeFiles.length > 2) {
     throw new CliUsageError(
@@ -344,7 +381,7 @@ async function bundleCommand(argv: string[]): Promise<number> {
   // embed the RAW documents — the bundle carries the files as written, not a
   // schema-normalized copy ($schema keys and field order survive verbatim).
   const files = expandContractArgs(parsed.positionals);
-  loadContracts(files);
+  const loaded = loadContracts(files);
   const contracts = files.map(
     (f) => JSON.parse(readFileSync(f, "utf8")) as Record<string, unknown>,
   );
@@ -452,10 +489,42 @@ async function bundleCommand(argv: string[]): Promise<number> {
     }
     return out;
   };
-  const base = flattenDtcg(readJsonObject(path.resolve(tokenFiles[0])));
-  const minted = tokenFiles[1]
-    ? readJsonObject(path.resolve(tokenFiles[1]))
-    : undefined;
+  const name = flagString(parsed, "name") ?? "Tokens";
+  // THE LAYERED SET — the repo's own tokens/ layout (primitives + brand.<n>
+  // + semantic + light/dark), routed slot by slot exactly as `generate
+  // --tokens` routes it. `--modes light[,dark]` is the same fact spelled the
+  // flat way, so it lands in the light/dark slots (a second file for the
+  // same slot that disagrees is refused by the routing's collision check).
+  // The flat base/modes/minted shape cannot carry this layout: it has no
+  // brand slot, no semantic slot, and a mode-only token is an orphan — which
+  // is why 34 of the 51 first-party contracts refused inside the plugin.
+  let layers: TokenTreeInput | undefined;
+  let layerRoutingText: string | null = null;
+  let base: Record<string, unknown>;
+  let minted: Record<string, unknown> | undefined;
+  let light: Record<string, unknown> | undefined;
+  let dark: Record<string, unknown> | undefined;
+  if (layeredSet) {
+    const entries = expandTokenArgs([
+      ...routedArgs.layered,
+      ...(modeFiles[0] ? [`light=${modeFiles[0]}`] : []),
+      ...(modeFiles[1] ? [`dark=${modeFiles[1]}`] : []),
+    ]);
+    const routing = buildTokenRouting(entries);
+    layers = tokenTreesFromRouting(routing);
+    layerRoutingText = describeTokenRouting(routing);
+    // `base` stays the flat inventory of the primitives layer — a receipt
+    // (the "N base tokens" count), never the resolution path: with `layers`
+    // present the engine resolves through every slot.
+    base = flattenDtcg(layers.primitives);
+    minted = undefined;
+    light = undefined;
+    dark = undefined;
+  } else {
+    base = flattenDtcg(readJsonObject(path.resolve(routedArgs.flat.base!)));
+    minted = routedArgs.flat.minted
+      ? readJsonObject(path.resolve(routedArgs.flat.minted))
+      : undefined;
   // The mode trees flatten by the SAME rule as base, and for the same reason.
   // They did not, and the failure was silent rather than loud: a NESTED mode
   // file has no key matching base's dot-path names, so every variable fell
@@ -466,36 +535,154 @@ async function bundleCommand(argv: string[]): Promise<number> {
   // library bundles are unaffected and nothing caught it; the first NESTED
   // mode input (a real captured Figma variable tree — DTCG is nested by
   // nature) exposed it. Same fix, same flattener, both halves now closed.
-  const light = modeFiles[0]
-    ? flattenDtcg(readJsonObject(path.resolve(modeFiles[0])))
-    : undefined;
-  const dark = modeFiles[1]
-    ? flattenDtcg(readJsonObject(path.resolve(modeFiles[1])))
-    : undefined;
-  const name = flagString(parsed, "name") ?? "Tokens";
+    light = modeFiles[0]
+      ? flattenDtcg(readJsonObject(path.resolve(modeFiles[0])))
+      : undefined;
+    dark = modeFiles[1]
+      ? flattenDtcg(readJsonObject(path.resolve(modeFiles[1])))
+      : undefined;
+  }
+  const tokenSet: TokenSetPayload = {
+    name,
+    base,
+    ...(light || dark
+      ? { modes: { ...(light ? { light } : {}), ...(dark ? { dark } : {}) } }
+      : {}),
+    ...(minted ? { minted } : {}),
+    ...(layers ? { layers } : {}),
+  };
+
+  // THE NAMED RECEIPT, AND THE DOOR. Compile every contract EXACTLY the way
+  // the plugin compiles a paste (createPluginEngine's foreignEngineFor: the
+  // bundle's own token set + its icon assets) and carry the facts the canvas
+  // cannot — as a sibling of `contracts` in the bundle bytes, and as one
+  // summary line per contract on stdout. Until 2026-08-22 these facts were
+  // computed by the compile and discarded; the only trace was a `†` in the
+  // set description that nothing a person reads ever explained.
+  //
+  // A compile REFUSAL here is the same refusal the plugin would raise on
+  // paste — the token inventory is the bundle's and nothing else — so it is
+  // refused HERE, by name, with the FULL list (the first cut recorded it as
+  // a `refused` row, printed ✔, and the plugin then refused one contract per
+  // paste: 34 pastes for the first-party corpus). The one exception is a
+  // COMPOSITION ref the bundle does not carry ("has no contract in scope"):
+  // the plugin resolves those against its baked scope, so that row ships as
+  // a `refused` receipt and stdout WARNS by name instead of printing ✔.
+  const slotHint = layers
+    ? `\nToken slots as loaded from --tokens:\n${layerRoutingText}\nA ref that leaves the loaded inventory is usually a MISSING LAYER (a brand tree, a mode tree), not a bad contract — pass the whole layout (--tokens <dir>) or name the slot (primitives, semantic, light, dark, brand, brand.<name>).`
+    : `\nThe flat set resolves refs against base${minted ? " + minted" : ""} only. A layered token set (primitives + brand + semantic + light/dark) rides as --tokens <dir> or --tokens primitives=<f>,semantic=<f>,light=<f>,dark=<f>,brand=<f>.`;
+  // The engine derives its named text styles at construction (a semantic
+  // font token whose weight lives in the brand layer resolves HERE), and the
+  // layered tokens script is the plugin's first step — its alias rules
+  // (brand and mode tokens alias; semantic tokens alias) and the composite
+  // referee must pass at bundle time, not on paste.
+  let engine: ReturnType<typeof createFigmaEngine>;
+  try {
+    engine = createFigmaEngine({
+      tokens: tokenSetTokenTrees(tokenSet),
+      icons: new Map(Object.entries(icons ?? {})),
+    });
+    if (layers) engine.buildTokensScript(null);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    throw new CliUsageError(
+      `✘ Refused — the token set itself does not compile (the plugin would refuse the paste's first step): ${message}${/Cannot resolve token/.test(message) ? slotHint : ""}`,
+    );
+  }
+  const SCOPE_ONLY = /has no contract in scope/;
+  const hardRefusals: string[] = [];
+  const codeOnlyFacts = contracts.map((raw, i) => {
+    const contract = loaded.get(String(raw.id))!;
+    const row = { contractId: contract.id, name: contract.name };
+    try {
+      const facts: CodeOnlyFact[] =
+        engine.compileComponentData(contract, loaded).codeOnlyFacts ?? [];
+      return { ...row, facts };
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      const scopeOnly = message
+        .split("\n")
+        .filter((l) => l.trim() !== "")
+        .every((l) => SCOPE_ONLY.test(l));
+      if (!scopeOnly) {
+        hardRefusals.push(`${contract.name} (${contract.id}, ${path.basename(files[i])}): ${message}`);
+      }
+      return {
+        ...row,
+        refused: `code-only facts not computed for ${files[i]} — ${message}`,
+      };
+    }
+  });
+  if (hardRefusals.length > 0) {
+    const tokenHint = hardRefusals.some((r) => /Cannot resolve token/.test(r)) ? slotHint : "";
+    throw new CliUsageError(
+      `✘ Refused — ${hardRefusals.length} of ${contracts.length} contract(s) do not compile against this token set; the plugin would refuse each of them on paste, so nothing was written:\n` +
+        hardRefusals.map((r) => `  - ${r}`).join("\n") +
+        tokenHint,
+    );
+  }
+
+  // (tokenSet is declared above, before the code-only-facts compile, so the
+  // facts and the referee below read the same payload.)
+  // BUNDLE-TIME SHAPE REFEREE. A DTCG object-form composite (shadow,
+  // typography, border) or an array of layers has no Figma variable shape;
+  // the plugin used to `String()` it and ship "[object Object]" as a STRING
+  // variable that draws nothing. The plugin now skips such tokens by name;
+  // the CLI refuses to WRITE a bundle that carries them, so the loss is
+  // caught where the author can fix it — flatten the composite into scalars.
+  const composite = unsupportedTokenValues(tokenSet);
+  if (composite.length > 0) {
+    throw new CliUsageError(
+      `${composite.length} token(s) carry a $value no Figma variable can hold — flatten each composite into scalar tokens ` +
+        `(shadow → color/offsetX/offsetY/blur/spread; typography → fontFamily/fontSize/…) and re-run: ${composite.join("; ")}`,
+    );
+  }
 
   const bundle = {
     type: CONTRACTS_BUNDLE_TYPE,
     version: 1 as const,
-    tokenSet: {
-      name,
-      base,
-      ...(light || dark
-        ? { modes: { ...(light ? { light } : {}), ...(dark ? { dark } : {}) } }
-        : {}),
-      ...(minted ? { minted } : {}),
-    },
+    tokenSet,
     ...(icons ? { icons } : {}),
     contracts,
+    codeOnlyFacts,
   };
   const text = JSON.stringify(bundle, null, 2) + "\n";
   const outPath = path.resolve(out);
   mkdirSync(path.dirname(outPath), { recursive: true });
   writeFileSync(outPath, text);
   const baseCount = Object.keys(base).length;
+  const layerSummary = layers
+    ? (() => {
+        const count = (tree: Record<string, unknown>) =>
+          Object.keys(flattenDtcg(tree)).length;
+        const brandNames = Object.keys(layers.brands).sort();
+        return (
+          `layered: ${count(layers.primitives)} primitives, ${count(layers.brands.default ?? {})} brand tokens × ${brandNames.length} brand mode(s) [${brandNames.join(", ")}], ` +
+          `${count(layers.semantic)} semantic, ${count(layers.light)} light / ${count(layers.dark)} dark mode tokens → Primitives / Brand / Semantic collections`
+        );
+      })()
+    : `${baseCount} base tokens${minted ? ", minted tree" : ""}${light || dark ? `, modes: ${[light && "light", dark && "dark"].filter(Boolean).join("/")}` : ""}`;
   console.log(
-    `✔ Bundle written: ${out} — ${contracts.length} contract(s) + tokenSet "${name}" (${baseCount} base tokens${minted ? ", minted tree" : ""}${light || dark ? `, modes: ${[light && "light", dark && "dark"].filter(Boolean).join("/")}` : ""}${icons ? `, ${Object.keys(icons).length} icon asset(s)` : ""}; ${text.length} bytes). Paste it into the plugin's Build tab — JSON is the only thing a user ever pastes.`,
+    `✔ Bundle written: ${out} — ${contracts.length} contract(s) + tokenSet "${name}" (${layerSummary}${icons ? `, ${Object.keys(icons).length} icon asset(s)` : ""}; ${text.length} bytes). Paste it into the plugin's Build tab — JSON is the only thing a user ever pastes.`,
   );
+  const scopeRefused = codeOnlyFacts.filter((row) => "refused" in row);
+  if (scopeRefused.length > 0) {
+    console.log(
+      `⚠ ${scopeRefused.length} contract(s) reference components this bundle does not carry and could not be compiled here — the plugin resolves them against its baked scope, or include the referenced contracts: ${scopeRefused.map((r) => r.name).join(", ")}`,
+    );
+  }
+  const named = codeOnlyFacts.reduce(
+    (n, row) => n + ("facts" in row ? row.facts.length : 0),
+    0,
+  );
+  console.log(
+    `  Code-only facts — what the contracts carry and the canvas cannot (${named} named across ${contracts.length} contract(s); the plugin stamps them as ds_contracts/codeOnlyFacts and lists them in its run report):`,
+  );
+  for (const row of codeOnlyFacts) {
+    console.log(
+      `    ${"facts" in row ? summarizeCodeOnlyFacts(row.name, row.facts) : `${row.name}: ${row.refused}`}`,
+    );
+  }
   return 0;
 }
 

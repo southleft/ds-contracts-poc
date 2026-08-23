@@ -118,11 +118,12 @@ try {
       "file:Button/Button.tsx",
       "file:Button/index.ts",
       "file:index.ts",
+      "file:tokens.css",
     ],
   );
   assert.equal(
     readFileSync(path.join(successOut, "index.ts"), "utf8"),
-    "export * from './Button';\n",
+    "import './tokens.css';\nexport * from './Button';\n",
   );
 
   console.log(

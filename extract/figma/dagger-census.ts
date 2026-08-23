@@ -83,8 +83,22 @@ if (!existsSync(CLI)) {
   process.exit(1);
 }
 
+/** One corpus's census: `daggers` is the per-contract dagger count (the
+ *  historical pin — one `†` per contract carrying any code-only fact, plus
+ *  any `channelMiss` mention the emitted script still carries); `named` is
+ *  the per-contract count of NAMED facts (2026-08-22: `GenerateStep.
+ *  codeOnlyFacts`, the list the script stamps as ds_contracts/codeOnlyFacts
+ *  and the plugin report lists). The dagger said THAT something was dropped;
+ *  the named count says HOW MANY, and pins every one. Refusals land in
+ *  `daggers` under their parenthesised key, as before. */
+interface CorpusCensus {
+  daggers: Record<string, number>;
+  named: Record<string, number>;
+}
+
 /** Per-contract dropped-fact receipts, read out of the emitted bundle. */
-function censusOf(c: Corpus): Record<string, number> | null {
+function censusOf(c: Corpus): CorpusCensus | null {
+  const refused = (why: string): CorpusCensus => ({ daggers: { [why]: 1 }, named: {} });
   const dir = path.join(ROOT, c.contractsDir);
   if (!existsSync(dir)) return null;
   const contracts = readdirSync(dir).filter((f) => f.endsWith('.contract.json')).map((f) => path.join(dir, f));
@@ -96,7 +110,7 @@ function censusOf(c: Corpus): Record<string, number> | null {
   // so the filter quietly dropped it and the bundle refused for a reason that
   // looked like a real engine refusal. Name the miss instead.
   const missing = c.tokens.filter((t) => !existsSync(path.join(ROOT, t)));
-  if (missing.length > 0) return { [`(token file NOT FOUND: ${missing.join(', ')})`]: 1 };
+  if (missing.length > 0) return refused(`(token file NOT FOUND: ${missing.join(', ')})`);
   if (tokens.length === 0) return null;
   try {
     execFileSync(
@@ -113,7 +127,7 @@ function censusOf(c: Corpus): Record<string, number> | null {
   } catch (e) {
     // A corpus the CLI refuses is a finding, not a skip — record it as such so
     // the pin notices when a bundle stops building at all.
-    return { '(bundle REFUSED)': 1 };
+    return refused('(bundle REFUSED)');
   }
   // COUNT WHERE THE DAGGERS ACTUALLY LIVE. `figma bundle` emits CONTRACTS; the
   // dropped-fact receipts are produced later, when the plugin engine COMPILES
@@ -127,12 +141,13 @@ function censusOf(c: Corpus): Record<string, number> | null {
   const parsed = engine.parseIncomingText(readFileSync(out, 'utf8')) as {
     ok: boolean; contracts?: unknown[]; tokenSet?: unknown; icons?: Record<string, string> | null;
   };
-  const counts: Record<string, number> = {};
-  if (!parsed.ok) return { '(paste REFUSED)': 1 };
+  const daggers: Record<string, number> = {};
+  const named: Record<string, number> = {};
+  if (!parsed.ok) return refused('(paste REFUSED)');
   const plan = engine.planGenerate(parsed.contracts as unknown[], {
     withTokens: true, fileKey: '', tokenSet: parsed.tokenSet as never, icons: parsed.icons ?? undefined,
   }) as { ok: boolean; steps?: Array<Record<string, unknown>> };
-  if (!plan.ok) return { '(generate REFUSED)': 1 };
+  if (!plan.ok) return refused('(generate REFUSED)');
   for (const step of plan.steps ?? []) {
     if (step.kind !== 'component') continue;
     const code = String(step.code ?? '');
@@ -140,22 +155,42 @@ function censusOf(c: Corpus): Record<string, number> | null {
     // `contractId` — NOT `name`/`id`, which are undefined on a step. Keying on
     // a missing field made every component overwrite one `(unnamed)` bucket, so
     // the census recorded the LAST component's count as the whole corpus's.
-    if (n > 0) counts[String(step.contractId ?? step.title ?? '(unnamed)')] = n;
+    const key = String(step.contractId ?? step.title ?? '(unnamed)');
+    if (n > 0) daggers[key] = n;
+    // THE NAMED COUNT. The plan step carries the receipt list itself — what
+    // the dagger only pointed at. A dagger with zero named facts, or named
+    // facts with no dagger, is a contradiction between the two honesty
+    // channels and fails below by name.
+    const facts = Array.isArray(step.codeOnlyFacts) ? step.codeOnlyFacts.length : 0;
+    if (facts > 0) named[key] = facts;
+    if ((n > 0) !== (facts > 0)) {
+      console.error(`REFUSED: ${c.id} ▸ ${key}: ${n} dagger(s) but ${facts} named fact(s) — the † and the receipt list disagree.`);
+      process.exit(1);
+    }
   }
-  return counts;
+  return { daggers, named };
 }
 
 const current: Record<string, Record<string, number>> = {};
+const currentNamed: Record<string, Record<string, number>> = {};
 for (const c of CORPORA) {
   const r = censusOf(c);
-  if (r !== null) current[c.id] = r;
+  if (r !== null) {
+    current[c.id] = r.daggers;
+    currentNamed[c.id] = r.named;
+  }
 }
 
-const total = Object.values(current).reduce((a, m) => a + Object.values(m).reduce((x, y) => x + y, 0), 0);
+const sum = (m: Record<string, number>): number => Object.values(m).reduce((x, y) => x + y, 0);
+const total = Object.values(current).reduce((a, m) => a + sum(m), 0);
+const totalNamed = Object.values(currentNamed).reduce((a, m) => a + sum(m), 0);
 
 if (UPDATE) {
-  writeFileSync(BASELINE, `${JSON.stringify({ generatedBy: 'extract/figma/dagger-census.ts', census: current }, null, 2)}\n`);
-  console.log(`recorded ${Object.keys(current).length} corpus/corpora, ${total} dropped-fact receipt(s) → ${path.relative(ROOT, BASELINE)}`);
+  // `census` keeps its historical shape (corpus → contract → dagger count) —
+  // scripts/build-capability-report.mjs reads it; `named` is the sibling
+  // the 2026-08-22 round added (corpus → contract → named fact count).
+  writeFileSync(BASELINE, `${JSON.stringify({ generatedBy: 'extract/figma/dagger-census.ts', census: current, named: currentNamed }, null, 2)}\n`);
+  console.log(`recorded ${Object.keys(current).length} corpus/corpora, ${total} dropped-fact receipt(s), ${totalNamed} named fact(s) → ${path.relative(ROOT, BASELINE)}`);
   process.exit(0);
 }
 
@@ -163,24 +198,38 @@ if (!existsSync(BASELINE)) {
   console.error('REFUSED: no baseline. Run `npm run dagger:census -- --update` in a reviewed change.');
   process.exit(1);
 }
-const baseline = (JSON.parse(readFileSync(BASELINE, 'utf8')) as { census: Record<string, Record<string, number>> }).census;
+const recorded = JSON.parse(readFileSync(BASELINE, 'utf8')) as {
+  census: Record<string, Record<string, number>>;
+  named?: Record<string, Record<string, number>>;
+};
+const baseline = recorded.census;
+if (!recorded.named) {
+  console.error('REFUSED: the baseline records no `named` counts — re-record with `npm run dagger:census -- --update` in a reviewed change.');
+  process.exit(1);
+}
+const baselineNamed = recorded.named;
 
 const drift: string[] = [];
-for (const id of new Set([...Object.keys(baseline), ...Object.keys(current)])) {
-  const was = baseline[id] ?? {};
-  const now = current[id] ?? {};
-  for (const key of new Set([...Object.keys(was), ...Object.keys(now)])) {
-    const a = was[key] ?? 0;
-    const b = now[key] ?? 0;
-    if (a !== b) drift.push(`  ${id} ▸ ${key}: ${a} → ${b}${b > a ? '  (NEW receipts — a real loss found, or a false alarm)' : '  (receipts GONE — a real fix, or honesty switched off)'}`);
+const diff = (label: string, was: Record<string, Record<string, number>>, now: Record<string, Record<string, number>>): void => {
+  for (const id of new Set([...Object.keys(was), ...Object.keys(now)])) {
+    const w = was[id] ?? {};
+    const n = now[id] ?? {};
+    for (const key of new Set([...Object.keys(w), ...Object.keys(n)])) {
+      const a = w[key] ?? 0;
+      const b = n[key] ?? 0;
+      if (a !== b) drift.push(`  ${id} ▸ ${key} [${label}]: ${a} → ${b}${b > a ? '  (NEW receipts — a real loss found, or a false alarm)' : '  (receipts GONE — a real fix, or honesty switched off)'}`);
+    }
   }
-}
+};
+diff('daggers', baseline, current);
+diff('named', baselineNamed, currentNamed);
 
 for (const [id, m] of Object.entries(current)) {
-  const n = Object.values(m).reduce((x, y) => x + y, 0);
-  console.log(`  ${id.padEnd(14)} ${n} dropped-fact receipt(s)${n === 0 ? '' : ` across ${Object.keys(m).length} contract(s)`}`);
+  const n = sum(m);
+  const named = sum(currentNamed[id] ?? {});
+  console.log(`  ${id.padEnd(14)} ${n} dropped-fact receipt(s)${n === 0 ? '' : ` across ${Object.keys(m).length} contract(s), ${named} fact(s) named`}`);
 }
-console.log(`\n${total} dropped-fact receipt(s) across ${Object.keys(current).length} corpora.`);
+console.log(`\n${total} dropped-fact receipt(s) across ${Object.keys(current).length} corpora; ${totalNamed} fact(s) named.`);
 
 if (drift.length > 0) {
   console.error(
@@ -191,4 +240,4 @@ if (drift.length > 0) {
   );
   process.exit(1);
 }
-console.log('✔ every corpus reports exactly the dropped facts it reported when this was last reviewed.');
+console.log('✔ every corpus reports exactly the dropped facts it reported when this was last reviewed — by dagger and by name.');

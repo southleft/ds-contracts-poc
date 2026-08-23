@@ -19,7 +19,7 @@ export const Skeleton = forwardRef<HTMLSpanElement, SkeletonProps>(function Skel
 ) {
   const classes = [styles.root, styles[`variant-${variant}`], className].filter(Boolean).join(' ');
   return (
-    <span ref={ref} className={classes} {...rest}>
+    <span ref={ref} className={classes} aria-hidden="true" {...rest}>
       <span className={styles.block}></span>
     </span>
   );

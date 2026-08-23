@@ -62,6 +62,9 @@ conformance/
   build.ts   capture.ts   run.ts   report.ts
   BASELINE.json               THE MEASURED FRONTIER (the ratchet)
   EXPECTATIONS.md             GENERATED — the living capability matrix
+  canvas.ts                   THE CANVAS HALF — contract → mock Figma → dump → propose ≡ contract
+  CANVAS-BASELINE.json        the measured round trip (its own ratchet; SILENT never waivable)
+  CANVAS-EXPECTATIONS.md      GENERATED — the canvas column, measured
 ```
 
 ## Commands
@@ -72,6 +75,7 @@ npm run conformance:capture    # the real pipeline, one case per invocation (nee
 npm run conformance            # THE GATE — measure + compare against BASELINE.json
 npm run conformance -- --write # re-record the frontier (an explicit act)
 npm run conformance:report     # write EXPECTATIONS.md
+npx tsx conformance/canvas.ts  # THE CANVAS GATE — the round trip (see below)
 ```
 
 The gate never launches a browser; it reads the committed artifacts under
@@ -121,6 +125,81 @@ whole-round stop rather than a per-construct receipt.
    any non-neutral class. The gate additionally strips the case's compound
    identity tokens (`CaseFilterBlur`, `conformance.filter-blur`, the seed path)
    from the naming union before searching it.
+
+## The canvas half — the round trip (`conformance/canvas.ts`)
+
+Everything above proves a construct reached the **contract**. The canvas
+column in each manifest entry was, until this gate, DECLARED — and there was
+no round trip. The v1 bar (docs/26) is **idempotence**: contract → Figma →
+dump → propose ≡ contract, modulo walls that are NAMED where a person reads
+them. `canvas.ts` measures that bar on the same manifest, the same
+denominator, the same channel per case.
+
+```bash
+npx tsx conformance/canvas.ts              # THE GATE — round-trip every CARRIED/LOWERED case, compare against CANVAS-BASELINE.json
+npx tsx conformance/canvas.ts --write      # re-record CANVAS-BASELINE.json + CANVAS-EXPECTATIONS.md (an explicit act)
+npx tsx conformance/canvas.ts --report     # rewrite CANVAS-EXPECTATIONS.md only
+npx tsx conformance/canvas.ts --case <id>  # one case, with the naming union, the dump set and the proposal printed
+```
+
+No browser, no Figma, no network: the canvas is the mock `figma`
+(`scripts/plugin-engine-mock-figma.mjs`) in a bare VM, the same harness
+`core/code-only-facts-check.ts` drives. Every link is the shipping code path:
+
+1. **bundle** — the captured contract (`extract/computed/out/conformance/<case>/enriched.contract.json`,
+   the contract the construct actually reached) + its minted tree + the
+   fixture DTCG form a CONTRACTS-BUNDLE; `createPluginEngine` parses and
+   plans it exactly as a paste (`foreignEngineFor` — the construction
+   `figma bundle` uses), and the same engine compiles the code-only facts.
+2. **canvas** — every plan step is executed against a fresh mock.
+3. **dump** — the `ui.html` `#dump-source` block (the bytes the Propose tab
+   runs, drift-guarded against `extract/figma/dump.plugin.js`) reads the
+   built set back.
+4. **propose** — `proposeBatchFromDump`, exact projection, `mintUnbound`.
+5. **diff** — the proposal is read on the case's channel by the same walk the
+   CSS/DOM gate reads the captured contract with (`carriageOfContract`),
+   refs resolved on both sides, compared by strict normalised equality (the
+   containment comparator above would launder `inline-flex` into `flex`).
+
+> The seed under `conformance/seeds/<id>.contract.json` is the EMPTY prop
+> space the capture enumerated against — `anatomy.root` is `{}` there. It
+> must exist, but it carries no construct; the round trip starts from the
+> captured contract.
+
+### The verdicts
+
+| verdict | means | colour |
+|---|---|---|
+| **ROUND-TRIPPED** | the channel came back with the seed's value. `refIdentical` says whether the token SPELLING survived; `channelAs` names a shorthand/logical sibling the proposer used (`border-radius` for `border-top-left-radius`, `padding-inline` for `padding-left`) — a small, mirrored family table, the one equivalence the gate admits | 🟢 |
+| **NAMED** | dropped (or lowered to a different value), and the channel is named in the **naming union**: the compiled `codeOnlyFacts`, the set description, plan notes, the mock step results, the dump's `_degradations`, the proposal's notes and unbound entries, the batch's notes and skips. The union is searched for the channel as a WORD (`color` is not satisfied by `background-color`), with the case's identity tokens removed first; minted-token trees are excluded (a channel name inside a token PATH is bookkeeping, not a receipt). The synthetic `__text` channel never names itself — only a receipt naming the seed's own part counts | 🟢 |
+| **REFUSED-BY-NAME** | the canvas cannot host the seed and says so — the plan refused, the mock threw, or the runtime skipped the set with a reason. A named wall | 🟡 |
+| **SEED-ABSENT** | the captured contract does not carry the construct — the CSS/DOM gate's finding, nothing to round-trip | ⚪ |
+| **DRIFTED** | a different value came back and NOTHING names the lowering — a wrong answer, worse than a named drop | 🔴 |
+| **HARMFUL** | the manifest says the construct has no canvas spelling (`canvas.expect: ABSENT`) and it came back anyway | 🔴 |
+| **SILENT** | the construct vanished and nothing says so. **Never waivable** — no receipt turns a SILENT green; it leaves `CANVAS-BASELINE.json` only by being fixed | 🔴 |
+
+### The ratchet
+
+`CANVAS-BASELINE.json` mirrors `BASELINE.json`: any change of classification
+is drift in EITHER direction (a regression is red; an improvement must be
+re-recorded with `--write` so a fix is never absorbed silently), a new or
+removed case is drift, and the SILENT count may only DECREASE.
+`CANVAS-EXPECTATIONS.md` is the generated table — the canvas column of the
+capability matrix, measured.
+
+### First measurement (2026-08-22, HEAD 46029a88)
+
+46 cases: **22 round-tripped · 3 named · 15 refused by name · 6 SILENT**.
+
+- The 15 refusals are one wall: every grid case's captured contract has no
+  definite root height, and the emitter refuses it by name
+  (`grid-axis-indefinite`, FC-GRID-ROOT-VSIZE). The capture writes grid
+  roots the canvas will not host.
+- Five of the six SILENTs are one defect: a **root-level `text`** is never
+  lowered (`partToSpecs` handles `part.text` for child parts only), so the
+  root's text, its `color`, `font-size`, `font-weight` and `text-overflow`
+  vanish with no code-only fact — the dump shows `children: []` and a 1×1
+  box. The sixth is `aspect-ratio`, declared on the root and dropped unnamed.
 
 ## Adding a case
 

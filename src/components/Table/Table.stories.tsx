@@ -4,6 +4,7 @@
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import '../tokens.css';
 import { TableRow } from '../TableRow';
 import { TableCell } from '../TableCell';
 import { Table } from './Table';

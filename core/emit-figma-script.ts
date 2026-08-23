@@ -58,7 +58,7 @@ import {
   type Prop,
 } from '../scripts/contract-schema.js';
 import { flattenTokens, aliasTarget, px, pxOrNull, type TokenEntry, type TokenTreeInput } from './tokens.js';
-import { ownedCollectionPruneRuntime } from './token-set.js';
+import { guardedValueUpsertRuntime, ownedCollectionPruneRuntime } from './token-set.js';
 import { FINGERPRINT_SRC, FINGERPRINT_VERSION } from './canvas-fingerprint.js';
 import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
 
@@ -254,9 +254,10 @@ export interface NodeSpec {
    *  native field exists; anything that is not `canvas: 'draw'` lands here,
    *  as do the three CONDITIONAL lowerings that silently no-op (cross-axis
    *  gap longhands, disagreeing per-side border colours). Collected by
-   *  compileComponentData into the code-only-fact footnote (†) and STRIPPED
-   *  before the spec JSON is emitted. */
-  channelMiss?: string[];
+   *  compileComponentData into `ComponentData.codeOnlyFacts` (the named
+   *  receipt — every miss keeps its channel, value and reason) and STRIPPED
+   *  from the spec before the JSON is emitted. */
+  channelMiss?: CodeOnlyFactSeed[];
   /** B-3 finding 5: inset-0 overlay lowering. Compiled when a part carries
    *  ALL FOUR inset channels (top/right/bottom/left) resolving to 0 and does
    *  not itself declare position:relative (TextField's backdrop). The
@@ -414,6 +415,11 @@ export interface NodeSpec {
    *  (`imported.label.root.line-height`). Stamped so the original binds back. */
   lineHeightVar?: string;
   textFill?: string;
+  /** R7 LITERAL INK: the TEXT node's fill when the contract carries
+   *  `literals.color` and no variable binds the channel — a literal SOLID
+   *  paint at runtime (no variable to bind), the text twin of lits.fillColor.
+   *  Absent whenever textFill is set (a bound paint wins). */
+  textFillLit?: { r: number; g: number; b: number; a?: number };
   contentProp?: string;
   // instance
   dep?: string;
@@ -447,6 +453,136 @@ export interface VariantSpec {
   row: number;
   col: number;
   spec: NodeSpec;
+}
+
+/** ONE fact the contract carries and the canvas cannot. THE receipt shape —
+ *  the same object rides the emitted script (`COMPONENTS[i].codeOnlyFacts`),
+ *  the `figma bundle` JSON (`bundle.codeOnlyFacts[i].facts`), the plugin's
+ *  plan step, the built set's shared plugin data (`ds_contracts/
+ *  codeOnlyFacts`) and the plugin UI's run report. Until 2026-08-22 every
+ *  one of these was computed and then discarded: the only consumer was
+ *  `.size`, feeding a single trailing `†` in the set description.
+ *
+ *  `part` is the anatomy part the fact sits on (`root`, `label`, …; for an
+ *  event, its trigger part). `kind` names the honesty channel it came
+ *  through; `channel` the CSS channel / event / property; `value` what the
+ *  contract carried ('' when the fact has no single value); `reason` why the
+ *  canvas has no field for it. `variants` says WHICH compiled variants carry
+ *  the fact: `count === of` is every variant (names omitted — the common
+ *  case, and what a contract-wide fact such as a declared channel or an
+ *  event always reports); otherwise `names` lists them, the first
+ *  CODE_ONLY_FACT_VARIANT_NAMES of them, with `more` counting the rest.
+ *
+ *  ONE entry per distinct (part, kind, channel, value, reason) — never one
+ *  per variant. Measured before this fold, polaris.text-field produced
+ *  47,655 per-variant entries for 89 distinct facts (the bundle path compiles
+ *  the full cartesian) and the fluent genesis paste grew by 1.8 MB. Lists are
+ *  sorted on that key and duplicate-free, so the same contract always names
+ *  its facts in the same order. */
+export interface CodeOnlyFact {
+  part: string;
+  kind: 'channel' | 'declared' | 'gradient' | 'shadow' | 'event' | 'meter' | 'scrim' | 'preview';
+  channel: string;
+  value: string;
+  reason: string;
+  variants: { count: number; of: number; names?: string[]; more?: number };
+}
+
+/** The kinds a collector observes PER COMPILED VARIANT (the rest — declared
+ *  channels, events, meters — are contract-wide by construction). Summaries
+ *  spell out variant coverage for these only. */
+export const CODE_ONLY_PER_VARIANT_KINDS: ReadonlySet<CodeOnlyFact['kind']> = new Set(['channel', 'gradient', 'shadow', 'scrim', 'preview']);
+
+/** How many variant NAMES a partial-coverage fact spells out before it
+ *  counts the rest (`more`). */
+export const CODE_ONLY_FACT_VARIANT_NAMES = 24;
+
+/** A channel miss BEFORE it knows its part (pushed onto `NodeSpec.channelMiss`
+ *  by the lowering that refused it; compileComponentData adds the part). */
+export type CodeOnlyFactSeed = Pick<CodeOnlyFact, 'channel' | 'value' | 'reason'>;
+
+/** A fact as the collectors see it — one observation in one compiled
+ *  variant ('' = contract-wide). foldCodeOnlyFacts turns observations into
+ *  the receipt entries. */
+export interface CodeOnlyFactObservation extends CodeOnlyFactSeed {
+  part: string;
+  variant: string;
+  kind: CodeOnlyFact['kind'];
+}
+
+const factKey = (f: CodeOnlyFactSeed & { part: string; kind: string }): string =>
+  JSON.stringify([f.part, f.kind, f.channel, f.value, f.reason]);
+
+/** Observations → receipt entries: folded per distinct fact, sorted on the
+ *  fact key, duplicate-free, with the variant coverage counted against
+ *  `totalVariants` (the compiled variant + state-preview total). Plain
+ *  string comparison (never localeCompare): the order must not depend on
+ *  the host's locale, because the emitted bytes are golden-pinned. */
+export function foldCodeOnlyFacts(observations: Iterable<CodeOnlyFactObservation>, totalVariants: number): CodeOnlyFact[] {
+  const folded = new Map<string, { fact: Omit<CodeOnlyFact, 'variants'>; names: string[]; seen: Set<string>; all: boolean }>();
+  for (const o of observations) {
+    const key = factKey(o);
+    let entry = folded.get(key);
+    if (!entry) {
+      entry = {
+        fact: { part: o.part, kind: o.kind, channel: o.channel, value: o.value, reason: o.reason },
+        names: [],
+        seen: new Set(),
+        all: false,
+      };
+      folded.set(key, entry);
+    }
+    if (o.variant === '') entry.all = true;
+    else if (!entry.seen.has(o.variant)) {
+      entry.seen.add(o.variant);
+      entry.names.push(o.variant);
+    }
+  }
+  const of = Math.max(totalVariants, 1);
+  return [...folded.entries()]
+    .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
+    .map(([, { fact, names, all }]) => {
+      if (all || names.length >= of) return { ...fact, variants: { count: of, of } };
+      const shown = names.slice(0, CODE_ONLY_FACT_VARIANT_NAMES);
+      const more = names.length - shown.length;
+      return { ...fact, variants: { count: names.length, of, names: shown, ...(more > 0 ? { more } : {}) } };
+    });
+}
+
+/** The short label a summary line uses for one fact — `column-gap`,
+ *  `event dismiss`, `declared overflow-x`, `gradient background-image`. */
+export function codeOnlyFactLabel(f: CodeOnlyFact): string {
+  if (f.kind === 'channel') return f.channel;
+  return `${f.kind} ${f.channel}`;
+}
+
+/** The one-line per-contract summary `figma bundle` prints — counts per
+ *  label so 225 Button facts read as a dozen channels with multipliers:
+ *  `Button: 225 facts stay code-only (border-top-color ×45, …) — see
+ *  bundle.codeOnlyFacts`. */
+export function summarizeCodeOnlyFacts(name: string, facts: CodeOnlyFact[], maxGroups = 12): string {
+  if (facts.length === 0) return `${name}: 0 facts stay code-only`;
+  const verb = facts.length === 1 ? 'fact stays' : 'facts stay';
+  const counts = new Map<string, number>();
+  for (const f of facts) {
+    const label = codeOnlyFactLabel(f);
+    counts.set(label, (counts.get(label) ?? 0) + 1);
+  }
+  const groups = [...counts.entries()].map(([label, n]) => (n > 1 ? `${label} ×${n}` : label));
+  // A per-variant fact carried by several variants says so — Badge's
+  // row-gap is one fact on all 24 variants, not one fact. Contract-wide
+  // kinds (declared channels, events, meters) hold everywhere by
+  // construction and carry no coverage suffix.
+  const withCoverage = groups.map((g, i) => {
+    const label = [...counts.keys()][i];
+    const entries = facts.filter((f) => codeOnlyFactLabel(f) === label);
+    const one = entries.length === 1 ? entries[0] : null;
+    if (!one || !CODE_ONLY_PER_VARIANT_KINDS.has(one.kind) || one.variants.of <= 1) return g;
+    return `${g} (${one.variants.count === one.variants.of ? 'all ' : `${one.variants.count} of `}${one.variants.of} variants)`;
+  });
+  const shown = withCoverage.slice(0, maxGroups);
+  const rest = withCoverage.length - shown.length;
+  return `${name}: ${facts.length} ${verb} code-only (${shown.join(', ')}${rest > 0 ? `, +${rest} more channel${rest === 1 ? '' : 's'}` : ''}) — see bundle.codeOnlyFacts`;
 }
 
 export interface ComponentData {
@@ -517,6 +653,14 @@ export interface ComponentData {
    *  canvas-gate channels cannot measure reactions and must not grow the
    *  concept. */
   stateReactions?: StateReaction[];
+  /** THE NAMED RECEIPT (2026-08-22): every fact this contract carries that
+   *  the canvas cannot — see CodeOnlyFact. Sorted, duplicate-free. Omitted
+   *  entirely when empty, so a contract with nothing to name keeps a stable
+   *  specHash; a contract WITH facts changes hash once (its description
+   *  changes anyway — the count now rides beside the dagger). The runtime
+   *  stamps it as `ds_contracts/codeOnlyFacts` (capped) and returns it in
+   *  the per-set result, which is what the plugin report lists. */
+  codeOnlyFacts?: CodeOnlyFact[];
   colW: number;
 }
 
@@ -623,7 +767,7 @@ function remeasureBirthBox(node, label, hasW, hasH) {
     if (axis === 'Vertical' && hasH) continue;
     const prop = 'layoutSizing' + axis;
     let mode;
-    try { mode = node[prop]; } catch (e) { continue; }
+    try { mode = node[prop]; } catch (e) { degrade('FC-RT-BIRTH-BOX-UNREADABLE', node, '"' + label + '": ' + prop + ' could not be read, so the HUG birth-box re-measure was skipped on this axis', e); continue; }
     if (mode !== 'HUG') continue;
     try {
       node[prop] = 'FIXED';
@@ -738,7 +882,19 @@ export function createFigmaEngine(input: FigmaEngineInput) {
     let guard = 0;
     while (entry && guard++ < 10) {
       const target = aliasTarget(entry.value);
-      if (!target) return entry.value;
+      if (!target) {
+        // A composite (DTCG shadow/typography object, an array) is not a
+        // literal any emitter can place: `String()` downstream spelled it
+        // "[object Object]" and px() made it NaN, silently. Refuse by name.
+        if (entry.value !== null && typeof entry.value === 'object') {
+          throw new Error(
+            `Token "${dotPath}" resolves to a ${Array.isArray(entry.value) ? 'array' : 'object-form'} $value ` +
+              `(${Array.isArray(entry.value) ? `${entry.value.length} entries` : Object.keys(entry.value as object).join(', ')}) — ` +
+              'Figma variables hold one string/number/colour; flatten the composite into scalar tokens.',
+          );
+        }
+        return entry.value;
+      }
       entry = all.get(target);
     }
     throw new Error(`Cannot resolve token "${dotPath}"`);
@@ -807,6 +963,28 @@ function figmaValue(entry: TokenEntry): unknown {
   if (aliasTarget(entry.value) !== null) return entry.value;
   const n = pxOrNull(entry.value);
   return n === null ? String(entry.value) : n;
+}
+
+/** The tokens step's shape referee: a `$value` that is not a string or number
+ *  (an object-form shadow/typography composite, an array of layers, a
+ *  boolean, null) has no Figma variable shape. `String()` turned it into
+ *  "[object Object]" and that text shipped as a STRING variable — reported as
+ *  synced, drawing nothing. Refused BY NAME at plan time (figma:plan / the
+ *  CLI), so the first-party script can never carry one. */
+function refuseCompositeValue(dotPath: string, entry: TokenEntry): void {
+  const v = entry.value;
+  if (typeof v === 'string' || typeof v === 'number') return;
+  const shape =
+    v === undefined ? 'no $value'
+    : v === null ? 'null'
+    : Array.isArray(v) ? `array[${v.length}]`
+    : typeof v === 'object' ? `object-form {${Object.keys(v as object).join(', ')}}`
+    : typeof v;
+  throw new Error(
+    `Token "${dotPath}" carries a $value no Figma variable can hold (${shape}) — ` +
+      'variables hold one string/number/colour; flatten the composite (shadow → color/offsetX/offsetY/blur/spread, ' +
+      'typography → fontFamily/fontSize/…) into scalar tokens before generating.',
+  );
 }
 
 function scopesFor(dotPath: string, entry: TokenEntry): string[] {
@@ -961,6 +1139,11 @@ const { styles: derivedTextStyles, byTokenPath: textStyleByTokenPath } =
 // ---------------------------------------------------------------------------
 
 function buildTokensScript(fileKey: string | null): string {
+  for (const [p, entry] of primitives) refuseCompositeValue(p, entry);
+  for (const [p, entry] of semantic) refuseCompositeValue(p, entry);
+  for (const [p, entry] of light) refuseCompositeValue(p, entry);
+  for (const [p, entry] of dark) refuseCompositeValue(p, entry);
+  for (const [, tokens] of brandModes) for (const [p, entry] of tokens) refuseCompositeValue(p, entry);
   const prim = [...primitives].map(([p, entry]) => ({
     name: figmaName(p),
     type: figmaType(entry),
@@ -1023,6 +1206,8 @@ function buildTokensScript(fileKey: string | null): string {
 // per brand), Semantic (modes "Light"/"Dark", aliasing primitives AND brand).
 // Leftovers in those three collections are NAMED; they are removed only when
 // globalThis.DS_PRUNE_TOKENS === true (opt-in, FC-APPLY-TOKENS-NOT-PRUNED).
+// Designer-edited variable VALUES are NAMED (variableDrift) and kept unless
+// globalThis.DS_OVERWRITE_TOKENS === true (FC-APPLY-TOKENS-KEEP-EDITS).
 const PRIMITIVES = ${JSON.stringify(prim)};
 const BRAND = ${JSON.stringify(brand)};
 const BRAND_MODES = ${JSON.stringify(brandNames.map((n) => pascal(n)))};
@@ -1064,7 +1249,7 @@ function hexToRgb(value) {
 const collections = await figma.variables.getLocalVariableCollectionsAsync();
 const allVars = await figma.variables.getLocalVariablesAsync();
 const varsIn = (col) => allVars.filter((v) => v.variableCollectionId === col.id);
-
+${guardedValueUpsertRuntime()}
 let prim = collections.find((c) => c.name === 'Primitives');
 if (!prim) prim = figma.variables.createVariableCollection('Primitives');
 if (prim.modes[0].name !== 'Value') prim.renameMode(prim.modes[0].modeId, 'Value');
@@ -1074,12 +1259,13 @@ for (const v of varsIn(prim)) primByName[v.name] = v;
 let createdPrim = 0;
 for (const t of PRIMITIVES) {
   let v = primByName[t.name];
+  const isNew = !v;
   if (!v) {
     v = figma.variables.createVariable(t.name, prim, t.type);
     primByName[t.name] = v;
     createdPrim++;
   }
-  v.setValueForMode(primModeId, t.type === 'COLOR' ? hexToRgb(t.value) : t.value);
+  applyValue(v, primModeId, 'Value', t.type === 'COLOR' ? hexToRgb(t.value) : t.value, isNew);
   v.scopes = t.scopes;
   v.setVariableCodeSyntax('WEB', t.codeSyntax);
 }
@@ -1098,6 +1284,7 @@ for (const v of varsIn(brandCol)) brandByName[v.name] = v;
 let createdBrand = 0;
 for (const t of BRAND) {
   let v = brandByName[t.name];
+  const isNew = !v;
   if (!v) {
     v = figma.variables.createVariable(t.name, brandCol, t.type);
     brandByName[t.name] = v;
@@ -1106,7 +1293,7 @@ for (const t of BRAND) {
   for (const modeName of BRAND_MODES) {
     const target = primByName[t.perBrand[modeName]];
     if (!target) throw new Error('Missing primitive ' + t.perBrand[modeName] + ' for ' + t.name);
-    v.setValueForMode(brandModeIds[modeName], { type: 'VARIABLE_ALIAS', id: target.id });
+    applyValue(v, brandModeIds[modeName], modeName, { type: 'VARIABLE_ALIAS', id: target.id }, isNew);
   }
   v.scopes = t.scopes;
   v.setVariableCodeSyntax('WEB', t.codeSyntax);
@@ -1123,6 +1310,7 @@ for (const v of varsIn(sem)) semByName[v.name] = v;
 let createdSem = 0;
 for (const t of SEMANTIC) {
   let v = semByName[t.name];
+  const isNew = !v;
   if (!v) {
     v = figma.variables.createVariable(t.name, sem, t.type);
     semByName[t.name] = v;
@@ -1131,8 +1319,8 @@ for (const t of SEMANTIC) {
   const lightVar = primByName[t.light] || brandByName[t.light];
   const darkVar = primByName[t.dark] || brandByName[t.dark];
   if (!lightVar || !darkVar) throw new Error('Missing primitive/brand for ' + t.name);
-  v.setValueForMode(lightModeId, { type: 'VARIABLE_ALIAS', id: lightVar.id });
-  v.setValueForMode(darkModeId, { type: 'VARIABLE_ALIAS', id: darkVar.id });
+  applyValue(v, lightModeId, 'Light', { type: 'VARIABLE_ALIAS', id: lightVar.id }, isNew);
+  applyValue(v, darkModeId, 'Dark', { type: 'VARIABLE_ALIAS', id: darkVar.id }, isNew);
   v.scopes = t.scopes;
   v.setVariableCodeSyntax('WEB', t.codeSyntax);
 }
@@ -1173,6 +1361,7 @@ for (const t of TEXT_STYLES) {
   s.description = 'ds_contracts: derived from tokens/' + t.tokenPath;
 }
 
+reportVariableDrift('Primitives/Brand/Semantic');
 return {
   primitives: { collectionId: prim.id, total: PRIMITIVES.length, created: createdPrim },
   brand: { collectionId: brandCol.id, modes: BRAND_MODES, total: BRAND.length, created: createdBrand },
@@ -1181,6 +1370,8 @@ return {
   pruned,
   leftovers,
   pruneSkipped,
+  variableDrift,
+  driftOverwritten: DS_OVERWRITE_TOKENS,
 };
 `;
 }
@@ -1195,6 +1386,16 @@ interface TextCtx {
   textFill?: string;
   /** Token dot-path behind textFill — icon parts resolve it to a literal hex. */
   textFillPath?: string;
+  /** R7 LITERAL INK (2026-08-22, core/root-text-check.ts): a part's
+   *  `literals.color`, compile-parsed — the TEXT fill when no token binds
+   *  the channel on the same part. Inherited by text / icon children exactly
+   *  as textFill is; a child's own `color` (token OR literal) replaces it.
+   *  Until this round applyLiterals had no `color` case: the ink compiled to
+   *  nothing, the text drew Figma's default black, and nothing named it. */
+  textFillLit?: { r: number; g: number; b: number; a?: number };
+  /** The same literal as CSS text — what an icon child bakes into its glyph
+   *  markup in place of the token path's resolved literal (iconSvg). */
+  textFillLitCss?: string;
   /** Round 4: token dot-path behind a part's CSS `fill` channel — promoted
    *  svg hosts' glyph paint (attribute-less paths inherit it). */
   glyphFillPath?: string;
@@ -1412,7 +1613,7 @@ function boundFullBleedScrimRoot(
   rootSpec: NodeSpec,
   root: Part,
   subst: Record<string, string>,
-  notes: Set<string>,
+  notes: CodeOnlyFactObservation[],
 ): void {
   // A `position: relative | static | sticky` root's inset channels are INERT
   // in CSS — the box is still in flow and its width/height are its own. Only
@@ -1451,9 +1652,15 @@ function boundFullBleedScrimRoot(
     delete rootSpec.bindings.height;
   }
   rootSpec.scrimBounded = true;
-  notes.add(
-    `root: viewport-pinned overlay scrim (inset:0) — captured box ${was} is the CAPTURE STAGE, not the component; the canvas box is bound to the overlay's content (deliberate canvas-vs-DOM divergence; the contract's inset/width/height channels are unchanged)`,
-  );
+  notes.push({
+    part: 'root',
+    variant: rootSpec.name,
+    kind: 'scrim',
+    channel: 'inset',
+    value: was,
+    reason:
+      "viewport-pinned overlay scrim (inset:0) — the captured box is the CAPTURE STAGE, not the component; the canvas box is bound to the overlay's content (deliberate canvas-vs-DOM divergence; the contract's inset/width/height channels are unchanged)",
+  });
 }
 
 /** A2 grid: contract align vocabulary → the canvas enum (P3/P4's four).
@@ -1620,8 +1827,17 @@ function applyTokens(
    *  ring (an OUTSIDE-aligned canvas stroke) or a resting CSS
    *  focus-ring reservation that paints nothing — see the outline cases. */
   declared?: Record<string, string>,
+  /** R7: whether THIS combo places the part absolutely — the emitter's own
+   *  gate (isAbsoluteThisCombo: declared position OR a matching stylesWhen
+   *  `position: absolute`). The inset default below used to read only the
+   *  DECLARED position, so a part that goes absolute under one enum value
+   *  (Astryx Slider's vertical readout, Carbon's checked checkmark) had its
+   *  lowered offsets named as an in-flow drop — a false receipt. Callers
+   *  that do not pass it keep the declared-only test byte-identically. */
+  absoluteThisCombo?: boolean,
 ): TextCtx {
   const next: TextCtx = { ...ctx };
+  const inFlowInsets = absoluteThisCombo === undefined ? (declared?.position ?? 'static') !== 'absolute' : !absoluteThisCombo;
   // ROUND 9 — DOES THIS OUTLINE ACTUALLY PAINT?
   //
   // A CSS outline with no `outline-style` draws NOTHING, and `outline: Npx
@@ -1716,7 +1932,7 @@ function applyTokens(
         // per-side colours only lower when every carried side agrees AND a
         // width source exists. Disagreeing sides used to no-op in silence.
         else if (uniformSideStroke === null) {
-          miss(spec, cssProp, 'per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.');
+          miss(spec, cssProp, 'per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.', ref);
         }
         break;
       case 'border-width':
@@ -1725,6 +1941,9 @@ function applyTokens(
       case 'color':
         next.textFill = varName;
         next.textFillPath = tokenPath;
+        // R7: a bound ink on THIS part replaces an inherited literal one.
+        next.textFillLit = undefined;
+        next.textFillLitCss = undefined;
         break;
       // Round 4 (canvas-gate finding): the CSS `fill` channel — promoted svg
       // hosts carry per-axis glyph paint as `fill` (attribute-less paths
@@ -1788,14 +2007,14 @@ function applyTokens(
           // fix 3: the CROSS axis of a vertical stack — only observable
           // under wrap, which Figma auto-layout expresses differently. It
           // used to no-op in silence.
-          miss(spec, cssProp, 'the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.');
+          miss(spec, cssProp, 'the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.', ref);
         }
         break;
       case 'row-gap':
         if (spec.layout?.mode === 'VERTICAL') {
           spec.bindings = { ...spec.bindings, itemSpacing: varName };
         } else {
-          miss(spec, cssProp, 'the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.');
+          miss(spec, cssProp, 'the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.', ref);
         }
         break;
       // Round 5 (canvas-gate finding): margin channels — the floor-promoted
@@ -1880,14 +2099,14 @@ function applyTokens(
           spec.stroke = varName;
           spec.strokeOutside = true;
         } else {
-          miss(spec, cssProp, outlineRefusal(outlinePaints && outlineColorPaints, borderClaimsStroke, 'outline-width'));
+          miss(spec, cssProp, outlineRefusal(outlinePaints && outlineColorPaints, borderClaimsStroke, 'outline-width'), ref);
         }
         break;
       case 'outline-width':
         if (outlineDrawsStroke) {
           spec.bindings = { ...spec.bindings, strokeWeight: varName };
         } else {
-          miss(spec, cssProp, outlineRefusal(outlinePaints && outlineColorPaints, borderClaimsStroke, 'outline-color'));
+          miss(spec, cssProp, outlineRefusal(outlinePaints && outlineColorPaints, borderClaimsStroke, 'outline-color'), ref);
         }
         break;
       case 'border-radius':
@@ -2072,6 +2291,9 @@ function applyTokens(
       case 'line-height':
         // dump v1.3 PIXELS + CSS unitless ratios → PERCENT (compileLineHeight).
         next.lineHeight = compileLineHeight(resolveLiteral(tokenPath));
+        // R7: compileLineHeight swallows its own parse failure (`catch {
+        // return undefined }`); a token whose value it cannot spell is named.
+        if (next.lineHeight === undefined) miss(spec, cssProp, `the token resolves to "${String(resolveLiteral(tokenPath))}", which is not a px/rem/em measure or a unitless ratio the canvas line height can hold`, ref);
         // The resolved number cannot say WHICH token produced it, and 20px is
         // not unique. Keep the token so the reader binds it instead of minting
         // a second name for a token the corpus already carries.
@@ -2092,7 +2314,7 @@ function applyTokens(
         // boundFullBleedScrimRoot — TOKEN_CHANNELS marks those `draw`), or
         // it has NO canvas field at all. The second class is now named.
         const reg = TOKEN_CHANNELS[cssProp];
-        if (reg && reg.canvas !== 'draw') miss(spec, cssProp, reg.note);
+        if (reg && reg.canvas !== 'draw') miss(spec, cssProp, reg.note, ref);
         // SILENT-LOSS ROUND, the half that was left open. The comment above
         // is right that top/right/bottom/left are lowered OUTSIDE this switch
         // — but only for parts those paths actually claim (absolute,
@@ -2107,11 +2329,12 @@ function applyTokens(
         // drawn and must not be invented. Name it instead. Read from the
         // part's DECLARED position (a contract fact) rather than from spec
         // flags, which the placement passes have not set yet at this point.
-        else if (reg && INSET_CHANNELS.has(cssProp) && (declared?.position ?? 'static') !== 'absolute') {
+        else if (reg && INSET_CHANNELS.has(cssProp) && inFlowInsets) {
           miss(
             spec,
             cssProp,
             `bound on an in-flow box (position: ${declared?.position ?? 'static'}) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back`,
+            ref,
           );
         }
         break;
@@ -2141,8 +2364,8 @@ function outlineRefusal(paints: boolean, borderWins: boolean, sibling: string): 
  *  carry them, which is why the default branch names them. */
 const INSET_CHANNELS = new Set(['top', 'right', 'bottom', 'left']);
 
-function miss(spec: NodeSpec, cssProp: string, why: string): void {
-  (spec.channelMiss ??= []).push(`${cssProp}: ${why}`);
+function miss(spec: NodeSpec, cssProp: string, why: string, value = ''): void {
+  (spec.channelMiss ??= []).push({ channel: cssProp, value, reason: why });
 }
 
 /** GAP-CLOSING ROUND 6 — the CONTENT-SIZED keyword a HUG axis carries
@@ -2212,16 +2435,82 @@ function parseLitColor(value: string): { r: number; g: number; b: number; a?: nu
   return c;
 }
 
+/** R7 (2026-08-22): the literal-channel receipt. EVERY literal a part
+ *  carries that does not become a canvas field lands here, through the same
+ *  `miss` collector the token path uses (→ NodeSpec.channelMiss →
+ *  codeOnlyFacts, kind `channel`). The reason always opens with the same
+ *  words so a reader can grep the receipt for the class:
+ *    "no canvas field for this literal channel — <why>". */
+const LITERAL_MISS = 'no canvas field for this literal channel';
+function literalMiss(spec: NodeSpec, cssProp: string, value: string, why: string): void {
+  miss(spec, cssProp, `${LITERAL_MISS} — ${why}`, value.trim());
+}
+
+/** R7: parse a literal dimension for a px-shaped canvas field, NAMING the
+ *  value the parser cannot spell (`50%`, `inherit`, `auto`) instead of
+ *  returning undefined into an `if (n !== undefined)` that drops it. The
+ *  storybook circle/dot pills carry `border-radius: 50%` — Figma's
+ *  cornerRadius is px, and until this round the percentage vanished with no
+ *  receipt. HUG keywords are the caller's business (they compile to no
+ *  fixed size on purpose) and are never a miss. */
+function litPx(spec: NodeSpec, cssProp: string, value: string): number | undefined {
+  const n = parseLitPx(value);
+  if (n === undefined && !isHugKeyword(value)) {
+    literalMiss(spec, cssProp, value, `"${value.trim()}" is not a px/rem/em measure and the canvas field is px-shaped (percentages and keywords have no twin here)`);
+  }
+  return n;
+}
+
 /** v14 literals: distribute a part's resolved literal channels into the
  *  spec's `lits` struct (frame-kind runtime application) and the text ctx
- *  (font-size/line-height). Channels with no canvas projection here
- *  (`inherit`/`currentColor` paints, letter-spacing) stay CSS-side — the
- *  same documented fidelity scope as font-family. */
-function applyLiterals(spec: NodeSpec, lits: Record<string, string>, ctx: TextCtx): TextCtx {
+ *  (font-size/line-height/colour). `inherit`/`currentColor` paints keep the
+ *  inherited context (that IS the canvas behaviour — nothing is lost);
+ *  everything else that cannot become a field is NAMED (R7 — see
+ *  literalMiss; the `default` branch is no longer a bare `break`).
+ *  @param placement whether THIS combo places the part absolutely (the
+ *                   emitter's own gate, isAbsoluteThisCombo — declared OR a
+ *                   matching stylesWhen) plus the declared position for the
+ *                   receipt's wording; decides whether an inset literal is
+ *                   lowered elsewhere (absolutePartPlacement) or has no
+ *                   canvas field at all.
+ *  @param tokens    the part's OWN resolved token bindings — a token on the
+ *                   same channel wins over the literal, by name. */
+function applyLiterals(
+  spec: NodeSpec,
+  lits: Record<string, string>,
+  ctx: TextCtx,
+  placement?: { absolute: boolean; position: string },
+  tokens?: Record<string, string>,
+): TextCtx {
   const next: TextCtx = { ...ctx };
   const li = () => (spec.lits ??= {});
   for (const [cssProp, value] of Object.entries(lits)) {
     switch (cssProp) {
+      // R7 LITERAL INK — the case this switch never had. The text twin of
+      // the `background-color` literal above: a literal SOLID paint on the
+      // TEXT node (runtime), and the ink an icon child bakes into its glyph.
+      // A token binding the same channel on THIS part wins (applyTokens ran
+      // first) — the literal is then named, not dropped. inherit /
+      // currentColor keep the inherited context: that is what the canvas
+      // child inherits anyway, so nothing is lost and nothing is claimed.
+      case 'color': {
+        const v = value.trim();
+        if (tokens?.color !== undefined) {
+          literalMiss(spec, cssProp, value, 'a token binds the same channel on this part — the bound variable is the canvas fill, the literal is not drawn');
+          break;
+        }
+        if (v === 'inherit' || v === 'currentColor') break; // inherited ink — the child context carries it
+        const c = v === 'transparent' ? { r: 0, g: 0, b: 0, a: 0 } : parseLitColor(v);
+        if (!c) {
+          literalMiss(spec, cssProp, value, `"${v}" is not a hex / rgb() / rgba() colour the canvas can paint`);
+          break;
+        }
+        next.textFillLit = c;
+        next.textFillLitCss = v;
+        next.textFill = undefined;
+        next.textFillPath = undefined;
+        break;
+      }
       case 'background':
       case 'background-color': {
         // #60 fix 1 (compile side): fill + fillClear on one spec = fill wins.
@@ -2250,53 +2539,57 @@ function applyLiterals(spec: NodeSpec, lits: Record<string, string>, ctx: TextCt
         const n = parseLitPx(value);
         if (n !== undefined) li().width = n;
         else if (value.trim().endsWith('%')) {
-          (spec.channelMiss ??= []).push(`width: ${value.trim()} — a fractional width has no canvas twin (Figma sizing is FIXED / HUG / FILL; only 100% lowers, as FILL)`);
+          miss(spec, 'width', 'a fractional width has no canvas twin (Figma sizing is FIXED / HUG / FILL; only 100% lowers, as FILL)', value.trim());
+        } else {
+          // R7: every other unparsable width (auto / inherit / calc) is named
+          // through the same literal receipt as the px-shaped cases below.
+          litPx(spec, cssProp, value);
         }
         break;
       }
       case 'height': {
         if (isHugKeyword(value)) break; // HUG = no fixed size compiled (see applyTokens)
-        const n = parseLitPx(value);
+        const n = litPx(spec, cssProp, value);
         if (n !== undefined) li().height = n;
         break;
       }
-      case 'min-width': { const n = parseLitPx(value); if (n !== undefined) li().minWidth = n; break; }
-      case 'min-height': { const n = parseLitPx(value); if (n !== undefined) li().minHeight = n; break; }
-      case 'padding-block': { const n = parseLitPx(value); if (n !== undefined) { li().paddingTop = n; li().paddingBottom = n; } break; }
-      case 'padding-inline': { const n = parseLitPx(value); if (n !== undefined) { li().paddingLeft = n; li().paddingRight = n; } break; }
+      case 'min-width': { const n = litPx(spec, cssProp, value); if (n !== undefined) li().minWidth = n; break; }
+      case 'min-height': { const n = litPx(spec, cssProp, value); if (n !== undefined) li().minHeight = n; break; }
+      case 'padding-block': { const n = litPx(spec, cssProp, value); if (n !== undefined) { li().paddingTop = n; li().paddingBottom = n; } break; }
+      case 'padding-inline': { const n = litPx(spec, cssProp, value); if (n !== undefined) { li().paddingLeft = n; li().paddingRight = n; } break; }
       // Round 4 (canvas-gate finding): literal padding longhands were dropped.
-      case 'padding-left': { const n = parseLitPx(value); if (n !== undefined) li().paddingLeft = n; break; }
-      case 'padding-right': { const n = parseLitPx(value); if (n !== undefined) li().paddingRight = n; break; }
-      case 'padding-top': { const n = parseLitPx(value); if (n !== undefined) li().paddingTop = n; break; }
-      case 'padding-bottom': { const n = parseLitPx(value); if (n !== undefined) li().paddingBottom = n; break; }
-      case 'gap': { const n = parseLitPx(value); if (n !== undefined) li().itemSpacing = n; break; }
+      case 'padding-left': { const n = litPx(spec, cssProp, value); if (n !== undefined) li().paddingLeft = n; break; }
+      case 'padding-right': { const n = litPx(spec, cssProp, value); if (n !== undefined) li().paddingRight = n; break; }
+      case 'padding-top': { const n = litPx(spec, cssProp, value); if (n !== undefined) li().paddingTop = n; break; }
+      case 'padding-bottom': { const n = litPx(spec, cssProp, value); if (n !== undefined) li().paddingBottom = n; break; }
+      case 'gap': { const n = litPx(spec, cssProp, value); if (n !== undefined) li().itemSpacing = n; break; }
       // Round 5: gap longhands (see the token side) — main-axis only.
       case 'column-gap': {
-        const n = parseLitPx(value);
+        const n = litPx(spec, cssProp, value);
         if (n !== undefined && (spec.layout?.mode ?? 'HORIZONTAL') === 'HORIZONTAL') li().itemSpacing = n;
         break;
       }
       case 'row-gap': {
-        const n = parseLitPx(value);
+        const n = litPx(spec, cssProp, value);
         if (n !== undefined && spec.layout?.mode === 'VERTICAL') li().itemSpacing = n;
         break;
       }
       // Round 5: literal margin channels — same lowering as the token side.
-      case 'margin-top': { const n = parseLitPx(value); if (n !== undefined) spec.margins = { ...spec.margins, top: n }; break; }
-      case 'margin-right': { const n = parseLitPx(value); if (n !== undefined) spec.margins = { ...spec.margins, right: n }; break; }
-      case 'margin-bottom': { const n = parseLitPx(value); if (n !== undefined) spec.margins = { ...spec.margins, bottom: n }; break; }
-      case 'margin-left': { const n = parseLitPx(value); if (n !== undefined) spec.margins = { ...spec.margins, left: n }; break; }
-      case 'border-radius': { const n = parseLitPx(value); if (n !== undefined) li().radius = n; break; }
-      case 'border-width': { const n = parseLitPx(value); if (n !== undefined) li().strokeWeight = n; break; }
+      case 'margin-top': { const n = litPx(spec, cssProp, value); if (n !== undefined) spec.margins = { ...spec.margins, top: n }; break; }
+      case 'margin-right': { const n = litPx(spec, cssProp, value); if (n !== undefined) spec.margins = { ...spec.margins, right: n }; break; }
+      case 'margin-bottom': { const n = litPx(spec, cssProp, value); if (n !== undefined) spec.margins = { ...spec.margins, bottom: n }; break; }
+      case 'margin-left': { const n = litPx(spec, cssProp, value); if (n !== undefined) spec.margins = { ...spec.margins, left: n }; break; }
+      case 'border-radius': { const n = litPx(spec, cssProp, value); if (n !== undefined) li().radius = n; break; }
+      case 'border-width': { const n = litPx(spec, cssProp, value); if (n !== undefined) li().strokeWeight = n; break; }
       // v15 (S4): per-corner literal radii and per-side literal widths.
-      case 'border-top-left-radius': { const n = parseLitPx(value); if (n !== undefined) (li().radiusCorners ??= {}).tl = n; break; }
-      case 'border-top-right-radius': { const n = parseLitPx(value); if (n !== undefined) (li().radiusCorners ??= {}).tr = n; break; }
-      case 'border-bottom-left-radius': { const n = parseLitPx(value); if (n !== undefined) (li().radiusCorners ??= {}).bl = n; break; }
-      case 'border-bottom-right-radius': { const n = parseLitPx(value); if (n !== undefined) (li().radiusCorners ??= {}).br = n; break; }
-      case 'border-top-width': { const n = parseLitPx(value); if (n !== undefined) (li().strokeSides ??= {}).top = n; break; }
-      case 'border-right-width': { const n = parseLitPx(value); if (n !== undefined) (li().strokeSides ??= {}).right = n; break; }
-      case 'border-bottom-width': { const n = parseLitPx(value); if (n !== undefined) (li().strokeSides ??= {}).bottom = n; break; }
-      case 'border-left-width': { const n = parseLitPx(value); if (n !== undefined) (li().strokeSides ??= {}).left = n; break; }
+      case 'border-top-left-radius': { const n = litPx(spec, cssProp, value); if (n !== undefined) (li().radiusCorners ??= {}).tl = n; break; }
+      case 'border-top-right-radius': { const n = litPx(spec, cssProp, value); if (n !== undefined) (li().radiusCorners ??= {}).tr = n; break; }
+      case 'border-bottom-left-radius': { const n = litPx(spec, cssProp, value); if (n !== undefined) (li().radiusCorners ??= {}).bl = n; break; }
+      case 'border-bottom-right-radius': { const n = litPx(spec, cssProp, value); if (n !== undefined) (li().radiusCorners ??= {}).br = n; break; }
+      case 'border-top-width': { const n = litPx(spec, cssProp, value); if (n !== undefined) (li().strokeSides ??= {}).top = n; break; }
+      case 'border-right-width': { const n = litPx(spec, cssProp, value); if (n !== undefined) (li().strokeSides ??= {}).right = n; break; }
+      case 'border-bottom-width': { const n = litPx(spec, cssProp, value); if (n !== undefined) (li().strokeSides ??= {}).bottom = n; break; }
+      case 'border-left-width': { const n = litPx(spec, cssProp, value); if (n !== undefined) (li().strokeSides ??= {}).left = n; break; }
       // D2: LITERAL border colour (see lits.strokeColor). A token-bound
       // border colour wins (applyTokens ran first and set spec.stroke); the
       // per-side spellings only lower when every carried side agrees, the
@@ -2319,15 +2612,18 @@ function applyLiterals(spec: NodeSpec, lits: Record<string, string>, ctx: TextCt
         if (c) li().strokeColor = c;
         break;
       }
-      case 'letter-spacing': { const n = parseLitPx(value); if (n !== undefined) next.letterSpacing = n; break; }
+      case 'letter-spacing': { const n = litPx(spec, cssProp, value); if (n !== undefined) next.letterSpacing = n; break; }
       case 'font-size': {
-        const n = parseLitPx(value);
+        const n = litPx(spec, cssProp, value);
         if (n !== undefined) { next.fontSize = n; next.fontSizePath = undefined; }
         break;
       }
       case 'line-height': {
         const lh = compileLineHeight(value);
         if (lh !== undefined) next.lineHeight = lh;
+        // R7: compileLineHeight swallows its own parse failure (`catch {
+        // return undefined }`) — the literal then died in this `if`. Named.
+        else literalMiss(spec, cssProp, value, `"${value.trim()}" is not a px/rem/em measure or a unitless ratio the canvas line height can hold`);
         break;
       }
       case 'box-shadow': {
@@ -2349,8 +2645,44 @@ function applyLiterals(spec: NodeSpec, lits: Record<string, string>, ctx: TextCt
         }
         break;
       }
-      default:
+      default: {
+        // R7 — THE NAMED DEFAULT. This was a bare `break` (the fourth
+        // occurrence of the S9 class: applyTokens' default, padding
+        // longhands, column-gap, the RadioButton ring — each found on a
+        // canvas, by a person, after shipping). A literal the schema admits
+        // (LITERAL_CHANNELS) that reaches here is one of:
+        //   · an inset (top/right/bottom/left) — lowered OUTSIDE this switch
+        //     by absolutePartPlacement / insetOverlayOffsets /
+        //     boundFullBleedScrimRoot for parts those paths claim; on an
+        //     IN-FLOW box no path claims it, and Figma has no offset field
+        //     for a child in auto-layout. The token default names exactly
+        //     this case (declared position, not spec flags) — mirrored.
+        //   · a channel the registry marks non-draw — the registry's own
+        //     reason rides the receipt, as on the token path.
+        //   · a channel with no literal case at all (the `color` hole this
+        //     round closed lived here) — named so the NEXT one cannot hide.
+        const reg = TOKEN_CHANNELS[cssProp];
+        if (INSET_CHANNELS.has(cssProp)) {
+          if (!(placement?.absolute ?? false)) {
+            literalMiss(
+              spec,
+              cssProp,
+              value,
+              `carried on an in-flow box (position: ${placement?.position ?? 'static'}) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this literal draws nothing and cannot be read back`,
+            );
+          }
+        } else if (reg && reg.canvas !== 'draw') {
+          literalMiss(spec, cssProp, value, reg.note);
+        } else {
+          literalMiss(
+            spec,
+            cssProp,
+            value,
+            `the literal lowering has no case for \`${cssProp}\`${reg ? ' (the token path draws it — carry it as a token, or add the literal case)' : ' (the channel registry does not know it either)'}`,
+          );
+        }
         break;
+      }
     }
   }
   // Wave B.2 residual: transparent-fill + exactly one non-zero border side
@@ -2704,8 +3036,15 @@ function applyStyling(
   subst: Record<string, string>,
   ctx: TextCtx,
 ): TextCtx {
-  const t = applyTokens(spec, resolveTokens(part, subst), subst, ctx, part.hugsBelowMaxWidth, part.declared);
-  const l = applyLiterals(spec, resolveLiterals(part, subst), t);
+  const tokens = resolveTokens(part, subst);
+  // R7: both passes read the SAME absolute gate the placement pass uses
+  // (isAbsoluteThisCombo — declared OR this combo's stylesWhen), so an inset
+  // that absolutePartPlacement lowers is never named as an in-flow drop.
+  const absolute = isAbsoluteThisCombo(part, subst);
+  const t = applyTokens(spec, tokens, subst, ctx, part.hugsBelowMaxWidth, part.declared, absolute);
+  // The literal pass also sees the part's own token map (a token on the
+  // same channel wins, by name).
+  const l = applyLiterals(spec, resolveLiterals(part, subst), t, { absolute, position: part.declared?.['position'] ?? 'static' }, tokens);
   // absolute-position round: content-box geometry means captured width/
   // height EXCLUDE padding — a canvas frame resize is border-box, so the
   // carried paddings are added back (MUI's Slider root declares
@@ -2949,7 +3288,10 @@ function iconSvg(part: Part, subst: Record<string, string>, ctx: TextCtx): strin
   // svg hosts), else the text color; currentColor AND attribute-less paths
   // (CSS-inherited fill) both bake to the resolved literal.
   const paintPath = ctx.glyphFillPath ?? ctx.textFillPath;
-  const hex = paintPath ? String(resolveLiteral(paintPath)) : '#000000';
+  // R7: a LITERAL ink (literals.color on the part or an ancestor) bakes into
+  // the glyph exactly as the token path's resolved literal does.
+  const hex = paintPath ? String(resolveLiteral(paintPath)) : (ctx.textFillLitCss ?? '#000000');
+  const hasPaint = paintPath !== undefined || ctx.textFillLitCss !== undefined;
   let out = svg.replaceAll('currentColor', hex);
   // Bake the resolved paint as a `fill` ONLY for icons that declare no fill
   // anywhere — pure CSS-inherited glyphs. If the <svg> tag itself already sets
@@ -2960,7 +3302,7 @@ function iconSvg(part: Part, subst: Record<string, string>, ctx: TextCtx): strin
   // parsed it leniently, so this only surfaced on a live canvas.
   const svgTagHasFill = /<svg\b[^>]*\sfill=/.test(out);
   const childHasFill = /<(path|circle|rect|polygon|ellipse|g)[^>]*\sfill=/.test(out);
-  if (paintPath && !svgTagHasFill && !childHasFill) {
+  if (hasPaint && !svgTagHasFill && !childHasFill) {
     out = out.replace(/^<svg /, `<svg fill="${hex}" `);
   }
   if (part.icon!.size) {
@@ -3051,7 +3393,7 @@ function mapDepProps(
   text?: string,
   /** Named-loss sink (single-variant-dep-collapse): the caller appends these
    *  to the instance spec's channelMiss footnote — never a silent drop. */
-  ledger?: string[],
+  ledger?: CodeOnlyFactSeed[],
 ): Record<string, string | boolean> {
   const out: Record<string, string | boolean> = {};
   const standalone = depEmitsStandalone(dep);
@@ -3063,9 +3405,11 @@ function mapDepProps(
       // arrayOf value never reaches here (the emitter refuses it in
       // anatomy); a fixed text value is a REAL canvas loss — ledgered.
       if (typeof rawValue === 'string' || typeof rawValue === 'object') {
-        ledger?.push(
-          `${dep.name} prop "${propName}" set to ${typeof rawValue === 'object' ? `a per-value lookup on "${rawValue.prop}"` : JSON.stringify(rawValue)}: not wired — the dependency binds it figma kind NONE (code-only), so the canvas instance renders ${dep.name}'s own default`,
-        );
+        ledger?.push({
+          channel: `${dep.name} prop "${propName}"`,
+          value: typeof rawValue === 'object' ? `a per-value lookup on "${rawValue.prop}"` : JSON.stringify(rawValue),
+          reason: `not wired — the dependency binds it figma kind NONE (code-only), so the canvas instance renders ${dep.name}'s own default`,
+        });
       }
       continue;
     }
@@ -3111,9 +3455,11 @@ function mapDepProps(
       const sole =
         isEnum(depProp) && depProp.type.enum.length === 1 ? depProp.type.enum[0] : undefined;
       if (sole === undefined || canonical !== sole) {
-        ledger?.push(
-          `${dep.name} variant property "${fig.property}" bound to "${canonical}": not wired — the dependency emits standalone (single variant, no variant properties) and renders its only form${sole !== undefined ? ` ("${sole}")` : ''}`,
-        );
+        ledger?.push({
+          channel: `${dep.name} variant property "${fig.property}"`,
+          value: canonical,
+          reason: `not wired — the dependency emits standalone (single variant, no variant properties) and renders its only form${sole !== undefined ? ` ("${sole}")` : ''}`,
+        });
       }
       continue;
     }
@@ -3131,9 +3477,11 @@ function mapDepProps(
     // binds figma kind NONE — there is no component property to write, and
     // `out[undefined]` would have minted a garbage key. Named loss instead.
     if (textProp && textProp.bindings.figma.kind === 'NONE') {
-      ledger?.push(
-        `${dep.name} children text "${text}": not wired — ${dep.id} exposes no TEXT component property for it (the canvas carries such labels as raw instance overrides, which the contract vocabulary does not model)`,
-      );
+      ledger?.push({
+        channel: `${dep.name} children text`,
+        value: text,
+        reason: `not wired — ${dep.id} exposes no TEXT component property for it (the canvas carries such labels as raw instance overrides, which the contract vocabulary does not model)`,
+      });
     } else if (textProp) out[textProp.bindings.figma.property!] = text;
   }
   return out;
@@ -3454,6 +3802,10 @@ function variantParts(
  *  contracts without them emit byte-identical specs (golden discipline). */
 function textExtras(ctx: TextCtx): Partial<NodeSpec> {
   return {
+    // R7 LITERAL INK: rides every text-spec site through this one spread (the
+    // child text part, the boxed text, the bound-prop label, the auto-injected
+    // label, the input placeholder). A bound fill on the context wins.
+    ...(ctx.textFillLit !== undefined && ctx.textFill === undefined ? { textFillLit: ctx.textFillLit } : {}),
     ...(ctx.letterSpacing !== undefined ? { letterSpacing: ctx.letterSpacing } : {}),
     ...(ctx.textCase !== undefined ? { textCase: ctx.textCase } : {}),
     ...(ctx.textDecoration !== undefined ? { textDecoration: ctx.textDecoration } : {}),
@@ -3586,6 +3938,43 @@ function partToSpecs(
   return [partToSpec(name, part, contract, byId, ctx, subst)];
 }
 
+/** ROOT TEXT (canvas round-trip gate, 2026-08-22 — core/root-text-check.ts).
+ *
+ *  A contract whose ROOT carries `text` — `<div>Sample</div>` captured as
+ *  one element (the conformance cases color-hex / custom-prop-two-hop /
+ *  var-fallback-chain / webkit-text-fill-color / text-overflow-ellipsis;
+ *  Fluent's Tooltip, whose root is the copy plus an arrow part) — was never
+ *  lowered. `partToSpecs` reads `part.text` for CHILD parts only, and the
+ *  root handling in compileComponentData knew `icon`, `parts` and the
+ *  `children` text prop, not `text`: the variant compiled to `children: []`,
+ *  the canvas drew a 1×1 empty box, and the root's characters, colour,
+ *  font-size, font-weight and text-overflow vanished with ZERO code-only
+ *  facts — five of the gate's six SILENT rows.
+ *
+ *  The root is a COMPONENT (a frame — it cannot itself be a TEXT node), so
+ *  it HOSTS one TEXT child named `label`: the name the generator already
+ *  gives the auto-injected `children` label, and the name the proposer's
+ *  sole-root-text hoist looks for. The child is projected through
+ *  partToSpecs exactly as a CHILD text part is — a part carrying only the
+ *  text inherits the root's compiled text context (fill, size, weight,
+ *  truncation, case, family) the way every child text part inherits its
+ *  parent's — so nothing bespoke is invented: the root simply hosts the
+ *  text it declared. `textByProp` rides along unchanged. */
+function rootTextSpecs(
+  root: Contract['anatomy']['root'],
+  contract: Contract,
+  byId: Map<string, Contract>,
+  ctx: TextCtx,
+  subst: Record<string, string>,
+): NodeSpec[] {
+  if (root.text === undefined) return [];
+  return partToSpecs(
+    'label',
+    { text: root.text, ...(root.textByProp ? { textByProp: root.textByProp } : {}) } as Part,
+    contract, byId, ctx, subst,
+  );
+}
+
 function partToSpec(
   name: string,
   part: Part,
@@ -3616,7 +4005,9 @@ function partToSpecInner(
     const iconCtx = applyTokens({ type: 'frame', name: '_' }, resolveTokens(part, subst), subst, ctx);
     const markup = iconSvg(part, subst, iconCtx);
     const paintPath = iconCtx.glyphFillPath ?? iconCtx.textFillPath;
-    const paintHex = paintPath ? String(resolveLiteral(paintPath)) : '#000000';
+    // R7: a literal ink has no variable to re-bind (svgPaintVar stays unset);
+    // the baked hex is the literal itself.
+    const paintHex = paintPath ? String(resolveLiteral(paintPath)) : (iconCtx.textFillLitCss ?? '#000000');
     const paintVar = svgSinglePaintVar(markup, paintHex, paintPath);
     // FC-SVG-ROTATION: declared transform rotate(<n>deg) on bare (and
     // box-hosted) icon parts — Polaris Spinner capture gaps at 12 o'clock
@@ -3796,7 +4187,7 @@ function partToSpecInner(
   }
   if (part.component) {
     const dep = byId.get(part.component.id)!; // resolvability guaranteed by refuseUnresolvableRefs
-    const depLedger: string[] = [];
+    const depLedger: CodeOnlyFactSeed[] = [];
     const spec: NodeSpec = {
       type: 'instance',
       name,
@@ -3812,8 +4203,11 @@ function partToSpecInner(
     // ledgered through the existing channelMiss footnote (never a silent
     // drop; the instance renders the child's own defaults).
     for (const [channel, ref] of Object.entries(part.component.overrides ?? {})) {
-      (spec.channelMiss ??= []).push(
-        `${name} per-instance override "${channel}" (${ref}): canvas emission not carried this round — the instance draws the child's own defaults`,
+      miss(
+        spec,
+        `per-instance override "${channel}"`,
+        "canvas emission not carried this round — the instance draws the child's own defaults",
+        String(ref),
       );
     }
     // Boolean-toggled component-ref parts (CBDS icon toggles): the instance's
@@ -4282,7 +4676,19 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   const boolPropsData = contract.props
     .filter((p) => p.type === 'boolean' && !isVariantBool(p))
     .map((p) => ({ property: p.bindings.figma.property!, default: p.default === true }));
-  const label = typeof textProp?.default === 'string' ? textProp.default : contract.name;
+  // A root that carries literal `text` beside a `children` prop with no
+  // string default draws its own text as the bound label's characters — the
+  // prop stays the per-usage API, the literal is its default (see
+  // rootTextSpecs). Byte-identical whenever the prop carries a default.
+  // (`root?.` — a MULTI-ROOT composite such as Modal = {dialog, backdrop}
+  // has no `anatomy.root`; it takes the container branch below.)
+  const label =
+    typeof textProp?.default === 'string' ? textProp.default : (contract.anatomy.root?.text ?? contract.name);
+  // ROOT TEXT (see rootTextSpecs): the root hosts its own text child unless
+  // the `children` prop branch below is the one drawing it (no parts + a
+  // bound text prop — the literal is that label's default, never a second
+  // text node).
+  const hostsRootText = contract.anatomy.root?.text !== undefined && !(textProp && !contract.anatomy.root?.parts);
 
   const orderedValues = (p: Prop): string[] => {
     if (!isEnum(p)) return boolAxisValues(p); // bool axis: default first
@@ -4297,7 +4703,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
 
   const root = contract.anatomy.root;
   /** D5: viewport-pinned-scrim bounding notes (code-only facts, never silent). */
-  const scrimNotes = new Set<string>();
+  const scrimNotes: CodeOnlyFactObservation[] = [];
   const variants: VariantSpec[] = [];
   // N-axis variant support: EVERY enum prop AND VARIANT-bound boolean prop
   // becomes a variant axis, in prop declaration order, with each axis's
@@ -4413,10 +4819,18 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
         { icon: root.icon, tokens: root.tokens, declared: root.declared } as Part,
         contract, byId, ctx, subst,
       );
-    } else if (root.parts) {
-      rootSpec.children = variantParts(root.parts, subst).flatMap(([childName, child]) =>
-        partToSpecs(childName, child, contract, byId, ctx, subst),
-      );
+    } else if (root.parts || hostsRootText) {
+      // ROOT TEXT: the root's own text child comes FIRST (DOM order — the
+      // text precedes the element children), then the parts; a root with
+      // no parts hosts the text alone. Reversal applies to the whole list
+      // (CSS row-reverse reverses the anonymous text box too). Byte-neutral
+      // for every root without `text`.
+      rootSpec.children = [
+        ...rootTextSpecs(root, contract, byId, ctx, subst),
+        ...variantParts(root.parts ?? {}, subst).flatMap(([childName, child]) =>
+          partToSpecs(childName, child, contract, byId, ctx, subst),
+        ),
+      ];
       if (isReversed(root, subst)) rootSpec.children.reverse();
       centerStrokeGlyphsInHosts(rootSpec.children);
       stampGridCells(rootSpec, root, subst); // A2 grid — see stampGridCells
@@ -4528,15 +4942,21 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
         ) {
           rootSpec.blockRoot = true;
         }
-        if (root.parts) {
+        if (root.parts || hostsRootText) {
           // v13: part-level state overrides apply INSIDE the preview variant
           // (withPartStateOverrides) — the State=Disabled cell draws the
           // disabled label color, mirroring .root:disabled .label on the CSS
           // surfaces.
-          const stateParts = withPartStateOverrides(root.parts, stateName, subst);
-          rootSpec.children = variantParts(stateParts, subst).flatMap(([childName, child]) =>
-            partToSpecs(childName, child, contract, byId, ctx, subst),
-          );
+          const stateParts = withPartStateOverrides(root.parts ?? {}, stateName, subst);
+          // ROOT TEXT — the same text-first rule as the base loop; the
+          // state's root overrides already ride `ctx`, so the text child
+          // draws the state's ink.
+          rootSpec.children = [
+            ...rootTextSpecs(root, contract, byId, ctx, subst),
+            ...variantParts(stateParts, subst).flatMap(([childName, child]) =>
+              partToSpecs(childName, child, contract, byId, ctx, subst),
+            ),
+          ];
           if (isReversed(root, subst)) rootSpec.children.reverse();
           centerStrokeGlyphsInHosts(rootSpec.children);
           stampGridCells(rootSpec, root, subst); // A2 grid — see stampGridCells
@@ -4626,12 +5046,19 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
         typeof p.default === 'string' ? p.default : typeof p.default === 'number' ? String(p.default) : '',
     }));
 
-  // v15 (S4): declared-not-drawn facts land ON the component as description
-  // text — the capability matrix's annotation copy, deduped and sorted for
-  // deterministic emission. 'draw'-verdict base facts render natively and
-  // need no note; state-plane declared facts are always annotated (state
-  // previews do not draw declared facts yet — a named limit).
-  const declaredNoteLines = new Set<string>();
+  // THE NAMED RECEIPT (2026-08-22). Every code-only fact this function
+  // learns about lands in `facts` — declared-not-drawn channels, gradient /
+  // shadow grammar misses, channel misses, root margins, events, meters,
+  // scrim bounding, preview-only washes — and leaves as
+  // `ComponentData.codeOnlyFacts` (sorted, duplicate-free). Until this round
+  // the lists below were Sets of strings whose ONLY consumer was `.size`,
+  // feeding one trailing `†`: 279 channel misses and 19 declared facts on
+  // the eight Flowbite contracts collapsed to 8 bare daggers, and nothing a
+  // designer could open named a single one of them.
+  const facts: CodeOnlyFactObservation[] = [];
+  // v15 (S4): declared-not-drawn facts. 'draw'-verdict base facts render
+  // natively and need no receipt; state-plane declared facts are always
+  // code-only (state previews do not draw declared facts yet — a named limit).
   for (const { name: partName, part } of walkAnatomy(contract)) {
     const note = (channel: string, value: string, state?: string) => {
       const reg = DECLARED_CHANNELS[channel];
@@ -4641,10 +5068,20 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       // hidden|clip draw, and text-decoration-line/overline annotates.
       const drawn = channelDraws(channel, value) && !state;
       if (drawn) return;
-      // Part D (owner directive, 2026-07-19): the annotation COPY no longer
-      // lands on the canvas (it lives in repo receipts) — the set only feeds
-      // the code-only-fact footnote (†) below.
-      declaredNoteLines.add(`${partName}.${channel}: ${value}${state ? ` [${state}]` : ''}`);
+      // Part D (owner directive, 2026-07-19): the annotation COPY does not
+      // land on the canvas as description text — it rides the receipt.
+      facts.push({
+        part: partName,
+        variant: '',
+        kind: 'declared',
+        channel,
+        value,
+        reason: state
+          ? `declared for the ${state} state — state previews do not draw declared facts (a named limit)`
+          : reg.canvas === 'draw'
+            ? `declared value outside the canvas grammar for this channel — ${reg.note}`
+            : reg.note,
+      });
     };
     for (const [ch, v] of Object.entries(part.declared ?? {})) note(ch, v);
     for (const [state, m] of Object.entries(part.declaredStates ?? {})) {
@@ -4665,40 +5102,55 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       spec,
       sides.map((s) => `margin-${s}`).join('/'),
       'root margins have no parent auto-layout to wrap — a COMPONENT_SET child is the component itself, so residual root margin is not canvas-drawable (FC-EMIT-ROOT-MARGIN-SILENT)',
+      sides.map((s) => `${m[s]}px`).join('/'),
     );
     delete spec.margins;
     delete spec.marginVars;
   };
   for (const v of variants) refuseRootMargins(v.spec);
   for (const v of stateVariants) refuseRootMargins(v.spec);
-  // Gradient / shadow misses: collected off the compiled specs (they feed
-  // the code-only-fact footnote) and STRIPPED from the emitted JSON — never
-  // a silent drop, never emitted noise.
-  const gradientMissLines = new Set<string>();
-  const shadowMissLines = new Set<string>();
+  // Gradient / shadow misses: collected off the compiled specs into the
+  // receipt and STRIPPED from the emitted JSON — never a silent drop, never
+  // emitted noise.
   // SILENT-LOSS ROUND (task #33, fix 3): channel misses ride the SAME
   // collection path as the gradient/shadow misses this file already had —
   // one "I had a value and could not draw it" mechanism, not three.
-  const channelMissLines = new Set<string>();
-  const stripMisses = (spec: NodeSpec) => {
+  // `variant` is the compiled variant's name; the root spec is NAMED after
+  // its variant, so the part is re-spelled `root` there and every other node
+  // keeps its part name — the same spelling the declared facts use.
+  const stripMisses = (spec: NodeSpec, variant: string, part = spec.name) => {
     if (spec.gradientMiss !== undefined) {
-      gradientMissLines.add(`${spec.name}.background-image: ${spec.gradientMiss}`);
+      facts.push({
+        part,
+        variant,
+        kind: 'gradient',
+        channel: 'background-image',
+        value: spec.gradientMiss,
+        reason: 'did not parse as a linear gradient (radial / conic / foreign grammar) — Figma lowers linear-gradient stacks only',
+      });
       delete spec.gradientMiss;
     }
     if (spec.shadowMiss !== undefined) {
-      shadowMissLines.add(`${spec.name}.box-shadow: ${spec.shadowMiss}`);
+      facts.push({
+        part,
+        variant,
+        kind: 'shadow',
+        channel: 'box-shadow',
+        value: spec.shadowMiss,
+        reason: 'parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar',
+      });
       delete spec.shadowMiss;
     }
     if (spec.channelMiss !== undefined) {
-      for (const line of spec.channelMiss) channelMissLines.add(`${spec.name}.${line}`);
+      for (const seed of spec.channelMiss) facts.push({ part, variant, kind: 'channel', ...seed });
       delete spec.channelMiss;
     }
     // D5: compile-side flag only — the bounding already happened on the box.
     delete spec.scrimBounded;
-    (spec.children ?? []).forEach(stripMisses);
+    (spec.children ?? []).forEach((child) => stripMisses(child, variant));
   };
-  for (const v of variants) stripMisses(v.spec);
-  for (const v of stateVariants) stripMisses(v.spec);
+  for (const v of variants) stripMisses(v.spec, v.name, 'root');
+  for (const v of stateVariants) stripMisses(v.spec, v.name, 'root');
   // Round 5d: sibling-margin → itemSpacing lowering (then marginVars strip —
   // compile-side only, never serialized).
   for (const v of variants) lowerMarginGaps(v.spec);
@@ -4715,27 +5167,64 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   for (const v of stateVariants) annotateFillW(v.spec);
   // Meter parts are runtime-sized (the canvas shows the defaults' fraction;
   // height follows the track) — a code-only fact like the rest.
-  const hasMeter = walkAnatomy(contract).some((w) => w.part.meter);
+  for (const { name: partName, part } of walkAnatomy(contract)) {
+    if (!part.meter) continue;
+    facts.push({
+      part: partName,
+      variant: '',
+      kind: 'meter',
+      channel: 'meter',
+      value: '',
+      reason: "runtime-sized — the canvas shows the defaults' fraction and the height follows the track",
+    });
+  }
   // Round 5: compiled facts the SYNC RUNTIME cannot apply natively — the
   // image-placeholder wash (raster content is runtime data), the block-root
-  // width fact (no intrinsic width) — join the code-only footnote, never a
-  // silent drop. (Round 5d: margin channels left this list — they now apply
-  // on canvas as itemSpacing or the margin-box wrapper.)
-  const hasPreviewOnlyFacts = [...variants, ...stateVariants].some((v) =>
-    specSome(v.spec, (x) => x.imgPlaceholder === true || x.blockRoot === true),
-  );
-  // Part D (owner directive): every code-only fact — events, declared-not-
-  // drawn channels, gradient/shadow misses, runtime-sized meters — leaves
-  // exactly ONE canvas trace: a single trailing † on the caption line.
-  const hasCodeOnlyFacts =
-    (contract.events ?? []).length > 0 ||
-    declaredNoteLines.size > 0 ||
-    gradientMissLines.size > 0 ||
-    shadowMissLines.size > 0 ||
-    channelMissLines.size > 0 ||
-    hasMeter ||
-    scrimNotes.size > 0 ||
-    hasPreviewOnlyFacts;
+  // width fact (no intrinsic width) — join the receipt, never a silent drop.
+  // (Round 5d: margin channels left this list — they now apply on canvas as
+  // itemSpacing or the margin-box wrapper.)
+  const collectPreviewOnly = (s: NodeSpec, variant: string, part = s.name) => {
+    if (s.imgPlaceholder === true) {
+      facts.push({
+        part,
+        variant,
+        kind: 'preview',
+        channel: 'img',
+        value: '',
+        reason: 'raster content is runtime data — the canvas draws the standard image-placeholder wash unless the contract carries a fill',
+      });
+    }
+    if (s.blockRoot === true) {
+      facts.push({
+        part,
+        variant,
+        kind: 'preview',
+        channel: 'display',
+        value: 'block',
+        reason: 'a block root has no intrinsic width — the canvas draws a preview width, the code surface fills its container',
+      });
+    }
+    (s.children ?? []).forEach((child) => collectPreviewOnly(child, variant));
+  };
+  for (const v of variants) collectPreviewOnly(v.spec, v.name, 'root');
+  for (const v of stateVariants) collectPreviewOnly(v.spec, v.name, 'root');
+  // Events: the canvas cannot run behaviour — the interaction surface is
+  // code-only by construction (the schema's own words).
+  for (const ev of contract.events ?? []) {
+    facts.push({
+      part: ev.trigger,
+      variant: '',
+      kind: 'event',
+      channel: ev.name,
+      value: ev.bindings.code.prop,
+      reason: `fires when the ${ev.trigger} part is activated — the canvas cannot run behaviour, so the event stays a code-side callback${ev.toggles ? ` (toggles ${ev.toggles.prop} between ${ev.toggles.between.join(' / ')})` : ''}`,
+    });
+  }
+  facts.push(...scrimNotes);
+  const codeOnlyFacts = foldCodeOnlyFacts(facts, variants.length + stateVariants.length);
+  // Part D (owner directive): the canvas CAPTION carries one trailing † —
+  // with the count beside it now, pointing at where the names live.
+  const hasCodeOnlyFacts = codeOnlyFacts.length > 0;
 
   return {
     setName: contract.name,
@@ -4746,10 +5235,12 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     // short caption line — a name and a provenance pointer, nothing else.
     // The old paragraphs of capability-matrix copy (events, declared facts,
     // gradient misses, meter sizing) were meaningless to designers on the
-    // canvas; the detailed docs stay in repo receipts. The single trailing
-    // dagger marks that code-only facts exist. Plugin-data identity markers
-    // (ds_contracts/*) are machine identity and remain untouched.
-    description: `${contract.name} — generated from contract ${contract.id} v${contract.version}${hasCodeOnlyFacts ? ' †' : ''}`,
+    // canvas; the detailed facts ride `codeOnlyFacts` (stamped as plugin
+    // data and listed in the plugin report). The single trailing dagger
+    // marks that code-only facts exist, and says how many. Plugin-data
+    // identity markers (ds_contracts/*) are machine identity and remain
+    // untouched.
+    description: `${contract.name} — generated from contract ${contract.id} v${contract.version}${hasCodeOnlyFacts ? ` † (${codeOnlyFacts.length} code-only facts — see plugin report)` : ''}`,
     isSet: variants.length + stateVariants.length > 1,
     boolProps: boolPropsData,
     textProps: textOnlyProps,
@@ -4774,6 +5265,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     ...(stateVariants.length > 0 ? { stateVariants } : {}),
     ...(stateVariants.length > 0 && statePreviewAxis ? { statePreviewAxis } : {}),
     ...(stateReactions.length > 0 ? { stateReactions } : {}),
+    ...(hasCodeOnlyFacts ? { codeOnlyFacts } : {}),
     colW: Math.max(
       380,
       ...[...variants, ...stateVariants].map((v) => (v.spec.fixedWidth?.px ?? 0) + 60),
@@ -4904,7 +5396,7 @@ const opacityRuntime = (has: boolean): string =>
   // Figma's percent-scaled field) wins over the literal and paints 0.5
   // as 0.5% — the Disabled wash (visual-parity Button, 93.91% masked).
   if (typeof spec.opacity === 'number') {
-    try { if (node.boundVariables && node.boundVariables.opacity) node.setBoundVariable('opacity', null); } catch (e) { /* not bindable */ }
+    try { if (node.boundVariables && node.boundVariables.opacity) node.setBoundVariable('opacity', null); } catch (e) { degrade('FC-RT-OPACITY-UNBIND-REFUSED', node, 'a stale opacity variable could not be unbound before the literal opacity was set; the variable may still win over spec.opacity', e); }
     node.opacity = spec.opacity;
   }`
     : '';
@@ -5001,7 +5493,7 @@ function applyMarginBox(parent, childNode, childSpec, registry) {
   if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
   try {
     if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;
-  } catch (e) { /* nodes without layout sizing */ }
+  } catch (e) { degrade('FC-RT-MARGIN-BOX-SIZING-UNREADABLE', childNode, 'layout sizing could not be read before the margin box was applied; applied as if the child were not FILL-sized', e); }
   const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
   if (!t && !r && !b && !l) return;
   const w = Math.max(childNode.width + l + r, 0.01);
@@ -5061,7 +5553,7 @@ const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLit
       node = figma.createNodeFromSvg(spec.svg);
       node.fills = [];
       node.clipsContent = false;
-      try { node.resize(spec.shape.width, spec.shape.height); } catch (e) { /* svg intrinsic */ }
+      try { node.resize(spec.shape.width, spec.shape.height); } catch (e) { degrade('FC-RT-SVG-RESIZE-REFUSED', node, 'the glyph kept its intrinsic size (resize to ' + spec.shape.width + 'x' + spec.shape.height + ' refused)', e); }
       if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;${effects}
     } else {
     // v9 shape (#42): a REAL parametric node with native rotation.
@@ -5341,7 +5833,7 @@ async function strandedSwapOverrides(legacyKey, legacyDefault) {
   for (const page of figma.root.children) {
     for (const inst of page.findAll((n) => n.type === 'INSTANCE')) {
       let props = {};
-      try { props = inst.componentProperties || {}; } catch (e) { continue; }
+      try { props = inst.componentProperties || {}; } catch (e) { degrade('FC-RT-INSTANCE-PROPS-UNREADABLE', inst, 'componentProperties unreadable; this instance was not checked for stranded swap overrides', e); continue; }
       const def = props[legacyKey];
       if (!def || def.value === undefined || def.value === null) continue;
       if (String(def.value) === String(legacyDefault)) continue;
@@ -5349,7 +5841,7 @@ async function strandedSwapOverrides(legacyKey, legacyDefault) {
       try {
         const node = await figma.getNodeByIdAsync(String(def.value));
         if (node && node.name) chosen = node.name;
-      } catch (e) { /* the swapped main may be gone — the id is still the truth */ }
+      } catch (e) { degrade('FC-RT-SWAP-MAIN-MISSING', inst, 'the swapped main component could not be resolved by id; reported by id, not by name', e); }
       out.push(inst.name + ' (' + inst.id + ') → ' + chosen);
     }
   }
@@ -5381,7 +5873,7 @@ function retireSlotUtility() {
   if (!util) return null;
   for (const t of allSyncTargets()) {
     let defs = {};
-    try { defs = t.componentPropertyDefinitions || {}; } catch (e) { defs = {}; }
+    try { defs = t.componentPropertyDefinitions || {}; } catch (e) { defs = {}; degrade('FC-RT-PROP-DEFS-UNREADABLE', t, 'componentPropertyDefinitions unreadable; slot-utility references on this target were not checked', e); }
     for (const k of Object.keys(defs)) {
       const d = defs[k];
       if (d && d.type === 'INSTANCE_SWAP' && String(d.defaultValue) === util.id) {
@@ -5440,7 +5932,7 @@ const textExtrasRuntime = (has: boolean): string =>
           node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
           fontResolved = true;
           break;
-        } catch (e) { /* try this family's own spelling of the same face */ }
+        } catch (e) { /* a RETRY, not a swallow: the next candidate is this family's own spelling of the same face; the final outcome is named below */ }
       }
       if (!fontResolved) {
         console.warn(
@@ -5448,13 +5940,14 @@ const textExtrasRuntime = (has: boolean): string =>
           ' is not available in this file (tried ' + styleCandidates.join(', ') +
           ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
         );
+        degrade('FC-FONT-STYLE-UNRESOLVED', node, spec.fontFamily + ' / ' + wantStyle + ' is not available in this file (tried ' + styleCandidates.join(', ') + '); Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones');
       }
     }
     if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
     if (spec.textCase) node.textCase = spec.textCase;
     if (spec.textDecoration) node.textDecoration = spec.textDecoration;
     if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
-    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { /* older API */ } }`
+    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { degrade('FC-RT-TRUNCATION-REFUSED', node, 'textTruncation ENDING refused (older Plugin API); the declared ellipsis does not draw', e); } }`
     : '';
 
 /** A2 grid — the GRID runtime, feature-gated so grid-less corpora emit
@@ -5639,14 +6132,14 @@ function applyGridChildren(parent, spec, built) {
     const hugW = !!(l.grid.hugWidth || (childGrid && childGrid.hugWidth));
     const hugH = !!(l.grid.hugHeight || (childGrid && childGrid.hugHeight));
     if (!cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined) && !hugW) {
-      try { cn.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
+      try { cn.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingHorizontal FILL refused; the grid child keeps its drawn width', e); }
     } else if (l.grid.hugWidth && !cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined)) {
-      try { cn.layoutSizingHorizontal = 'HUG'; } catch (e) { /* keeps its drawn box */ }
+      try { cn.layoutSizingHorizontal = 'HUG'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingHorizontal HUG refused; the grid child keeps its drawn width', e); }
     }
     if (!cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined) && !hugH) {
-      try { cn.layoutSizingVertical = 'FILL'; } catch (e) { /* HUG-only nodes */ }
+      try { cn.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingVertical FILL refused; the grid child keeps its drawn height', e); }
     } else if (l.grid.hugHeight && !cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined)) {
-      try { cn.layoutSizingVertical = 'HUG'; } catch (e) { /* keeps its drawn box */ }
+      try { cn.layoutSizingVertical = 'HUG'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingVertical HUG refused; the grid child keeps its drawn height', e); }
     }
   }
   for (const p of placed) {
@@ -5718,7 +6211,7 @@ function applyShapeAbsolute(parent, childNode, childSpec) {
       childNode.x = cx - w / 2;
       childNode.y = cy - h / 2;
     }
-  } catch (e) { /* parent not auto-layout — leave in flow */ }
+  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 `
     : '';
@@ -5791,7 +6284,7 @@ function applyInsetOverlay(parent, childNode, childSpec) {
         Math.max(1, parent.height - o.top - o.bottom),
       );
     }
-  } catch (e) { /* parent not auto-layout — leave in flow */ }
+  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 `
     : '';
@@ -5848,7 +6341,7 @@ function resizeOutOfFlow(parent, built) {
         if (a.h === 'STRETCH') childNode.x = a.left || 0;
         if (a.v === 'STRETCH') childNode.y = a.top || 0;
       }
-    } catch (e) { /* parent not auto-layout — the child stayed in flow */ }
+    } catch (e) { degrade('FC-RT-ABSOLUTE-PLACEMENT-REFUSED', childNode, 'absolute placement was refused (parent not auto-layout); the child stayed in flow', e); }
   }
 }
 `
@@ -5896,6 +6389,14 @@ const overflowPropagateCall = (has: boolean, child: string, parent: string): str
  *  Emitted ONLY when a compiled spec carries lits — contracts without
  *  literals emit byte-identical scripts (the golden discipline, same as
  *  shapeRuntime/opacityRuntime). */
+/** R7 LITERAL INK: the TEXT node's literal fill — a plain SOLID paint, the
+ *  text twin of lits.fillColor. Emitted only when a spec carries it. */
+const textFillLitRuntime = (has: boolean): string =>
+  has
+    ? `
+    else if (spec.textFillLit) node.fills = [{ type: 'SOLID', color: { r: spec.textFillLit.r, g: spec.textFillLit.g, b: spec.textFillLit.b }, opacity: spec.textFillLit.a === undefined ? 1 : spec.textFillLit.a }];`
+    : '';
+
 const litsRuntime = (has: boolean, hasStrokeColor = false): string =>
   has
     ? `
@@ -5909,8 +6410,8 @@ const litsRuntime = (has: boolean, hasStrokeColor = false): string =>
     if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
     if (li.radius !== undefined) node.cornerRadius = li.radius;
     if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
-    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { /* needs auto-layout */ } }
-    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { /* needs auto-layout */ } }
+    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minWidth ' + li.minWidth + ' refused (needs auto-layout); the literal min-width does not draw', e); } }
+    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minHeight ' + li.minHeight + ' refused (needs auto-layout); the literal min-height does not draw', e); } }
     // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
     // trampled — fillClear only clears when no fill was spec'd. The compile
     // side already drops fillClear when a fill binding exists (applyLiterals);
@@ -6027,6 +6528,9 @@ function buildSyncScript(
   // D2: literal stroke COLOUR — feature-gated like every other lits field so
   // a contract that never carries one emits a byte-identical script.
   const hasLitStrokeColor = datas.some((d) => dataSome(d, (x) => x.lits?.strokeColor !== undefined));
+  // R7 LITERAL INK: the runtime line is emitted only when a spec carries it,
+  // so every existing emission stays byte-identical.
+  const hasTextFillLit = datas.some((d) => dataSome(d, (x) => x.textFillLit !== undefined));
   // …and the SHAPE branch's literal ring/weight/radius application.
   const hasShapeLits = datas.some((d) =>
     dataSome(d, (x) => x.shape !== undefined && (x.lits?.strokeColor !== undefined || x.lits?.strokeWeight !== undefined || x.lits?.strokeSides !== undefined || x.lits?.radius !== undefined)),
@@ -6143,6 +6647,26 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }` : ''}
+// NAMED RUNTIME DEGRADATIONS (R7, 2026-08-22). The emitted script used to
+// carry ~30 bare try/catch swallows (a comment where the handler should be) — every one a
+// canvas fact the spec asked for and the API refused (FILL sizing, out-of-
+// flow placement, min sizes, truncation, a paint base) with NO trace in the
+// result. Each now pushes ONE named entry here; syncOne's report carries
+// the entries raised while it ran as report.degradations (the same code /
+// nodePath / message shape the dump script's _degradations uses), and the
+// plugin UI lists them under the set beside the code-only facts. A
+// degradation is never a failure: the sync still completes, it just says so.
+const DEGRADATIONS = [];
+function nodePathOf(node) {
+  const parts = [];
+  let n = node;
+  let guard = 0;
+  while (n && n.type !== 'PAGE' && n.type !== 'DOCUMENT' && guard++ < 64) { parts.unshift(n.name || n.type); n = n.parent; }
+  return parts.join('/');
+}
+function degrade(code, node, message, e) {
+  DEGRADATIONS.push({ code: code, nodePath: node ? nodePathOf(node) : '', message: message + (e && e.message ? ' (' + e.message + ')' : '') });
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -6166,7 +6690,7 @@ const boundPaint = (varName, consumer) => {
         base = { r: r.value.r, g: r.value.g, b: r.value.b };
         if (typeof r.value.a === 'number') alpha = r.value.a;
       }
-    } catch (e) { /* fall back to black base */ }
+    } catch (e) { degrade('FC-RT-PAINT-BASE-UNRESOLVED', consumer, 'variable ' + varName + ' could not be resolved for this consumer; the bound paint keeps its binding over a black literal base', e); }
   }
   return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base, opacity: alpha }, 'color', v);
 };
@@ -6340,7 +6864,7 @@ function setInstanceProps(inst, props, owner) {
   const instProps = inst.componentProperties;
   const instKeys = Object.keys(instProps);
   let ownerDefs = {};
-  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; }
+  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; degrade('FC-RT-PROP-DEFS-UNREADABLE', owner, 'componentPropertyDefinitions unreadable on the owner; property references were resolved without them', e); }
   const ownerKeys = Object.keys(ownerDefs);
   const variantProps = {};
   const otherProps = {};
@@ -6486,8 +7010,8 @@ function applyFrameSpec(node, spec) {
     if (spec.lits && spec.lits[field] !== undefined) continue;
     try {
       if (node.boundVariables && node.boundVariables[field]) node.setBoundVariable(field, null);
-    } catch (e) { /* field not bindable on this node type */ }
-    try { node[field] = 0; } catch (e) { /* not an auto-layout frame */ }
+    } catch (e) { degrade('FC-RT-FIELD-UNBIND-REFUSED', node, 'a stale ' + field + ' variable could not be unbound before the reset', e); }
+    try { node[field] = 0; } catch (e) { degrade('FC-RT-FIELD-RESET-REFUSED', node, field + ' could not be reset to 0 (not an auto-layout frame)', e); }
   }
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -6531,7 +7055,7 @@ function applyOverlay(parent, childNode, childSpec) {
     else if (p === 'bottom') { childNode.x = 0; childNode.y = parent.height; }
     else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
     else { childNode.x = parent.width; childNode.y = 0; }
-  } catch (e) { /* parent not auto-layout — leave in flow */ }
+  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 ${absoluteRuntime(hasAbsolute)}${insetOverlayRuntime(hasInsetOverlay)}${outOfFlowResizeRuntime(hasInsetOverlay || hasAbsolute)}${overflowPropagateRuntime(hasAbsolute || hasInsetOverlay)}${marginBoxRuntime(hasMargins)}${gridRuntime(hasGrid)}
 async function buildNode(spec, registry) {
@@ -6582,7 +7106,7 @@ async function buildNode(spec, registry) {
     // that stops declaring one cannot keep answering with a stale token.
     node.setSharedPluginData('ds_contracts', 'fontWeightVar', spec.fontWeightVar || '');
     node.setSharedPluginData('ds_contracts', 'lineHeightVar', spec.lineHeightVar || '');
-    if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
+    if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];${textFillLitRuntime(hasTextFillLit)}
     if (spec.contentProp) {
       registry.texts.push({ prop: spec.contentProp, node, default: spec.characters || '' });
     }
@@ -6665,7 +7189,7 @@ async function buildNode(spec, registry) {
       if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
       if (spec.layout && spec.layout.stretchChildren) {
-        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', inst, 'slot default content could not stretch (layoutSizingHorizontal FILL refused); it keeps its own width', e); }
       }
     }
     registry.slots.push({ spec, slot: node });
@@ -6693,7 +7217,7 @@ ${hasSlot ? `  // A native slot's LAYER NAME is its property's display name: ren
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
-      } catch (e) { /* track not fixed-width */ }
+      } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       child.type === 'frame' && (!child.children || child.children.length === 0) &&
@@ -6712,12 +7236,12 @@ ${hasSlot ? `  // A native slot's LAYER NAME is its property's display name: ren
       // overflowed their fixed-height tracks). Width stays the spec'd
       // fraction (meter pct) or the placeholder box, named in the component
       // description.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }${insetOverlayCall(hasInsetOverlay, 'node, childNode, child')}${marginBoxCall(hasMargins, 'node, childNode, child, registry')}
   }${gridChildrenCall(hasGrid, 'node, spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'node, built')}${birthBoxCall(hasChildlessBox, 'node', 'spec')}
   return node;
@@ -6764,6 +7288,43 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C, degradedFrom) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  // R7: the runtime degradations raised while this set synced ride the same
+  // per-set result — named beside the facts, never only in a console.
+  if (typeof degradedFrom === 'number' && DEGRADATIONS.length > degradedFrom) report.degradations = DEGRADATIONS.slice(degradedFrom);
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -6786,6 +7347,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -6880,7 +7444,7 @@ async function amendSet(set, C) {
         built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);${absoluteCall(hasAbsolute, 'comp, childNode, childSpec')}
         if (childSpec.pct != null) {
-          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
         }
         if (
           childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -6888,10 +7452,10 @@ async function amendSet(set, C) {
           !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
         ) {
           // #60 fix 4 (amend path): same empty-child declared default.
-          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
         }
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}${marginBoxCall(hasMargins, 'comp, childNode, childSpec, registry')}
       }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}
       report.rebuiltVariants++;
@@ -7028,6 +7592,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -7064,7 +7629,7 @@ async function amendComponent(comp, C) {
     built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);${absoluteCall(hasAbsolute, 'comp, childNode, childSpec')}
     if (childSpec.pct != null) {
-      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -7072,10 +7637,10 @@ async function amendComponent(comp, C) {
       !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
     ) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }${insetOverlayCall(hasInsetOverlay, 'comp, childNode, childSpec')}
   }${gridChildrenCall(hasGrid, 'comp, v.spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'comp, built')}${birthBoxCall(hasChildlessBox, 'comp', 'v.spec')}
   for (const t of registry.texts) {
@@ -7295,6 +7860,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -7313,7 +7879,11 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  const degradedFrom = DEGRADATIONS.length;
+  results.push(withCodeOnlyFacts(await syncOne(C), C, degradedFrom));
 }${hasSlot ? `
 // Proposal §6.4 — the dashed "Slot" utility goes LAST, and only once no
 // INSTANCE_SWAP slot reference remains anywhere in the file.

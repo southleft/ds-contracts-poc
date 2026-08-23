@@ -4,6 +4,7 @@
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import '../tokens.css';
 import { IconsPlay } from '../IconsPlay';
 import { IconsPause } from '../IconsPause';
 import { AtomsButton } from './AtomsButton';
@@ -26,6 +27,7 @@ const meta = {
     text: { control: 'text' },
     hasStartIcon: { control: 'boolean' },
     hasEndIcon: { control: 'boolean' },
+    isFullWidth: { control: 'boolean' },
     startIcon: { control: false },
     endIcon: { control: false },
   },
@@ -35,6 +37,7 @@ const meta = {
     text: 'Label',
     hasStartIcon: true,
     hasEndIcon: true,
+    isFullWidth: true,
   },
 } satisfies Meta<typeof AtomsButton>;
 

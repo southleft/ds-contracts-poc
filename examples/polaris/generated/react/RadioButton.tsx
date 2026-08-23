@@ -32,7 +32,7 @@ export const RadioButton = forwardRef<HTMLSpanElement, RadioButtonProps>(functio
     <span ref={ref} className={classes} data-label-hidden={labelHidden || undefined} data-disabled={disabled || undefined} {...rest}>
       <span className={styles.choice__control}>
 <span className={styles.radiobutton}>
-<input className={styles.input} type="radio" name={String(name)} value={String(value)}>
+<input className={styles.input} type="radio" name={name} value={value}>
 
 </input>
 <div className={styles.backdrop}>

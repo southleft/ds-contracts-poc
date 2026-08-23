@@ -16,7 +16,7 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { ContractSchema, type Contract } from '../../schema/src/index.js';
 import type { EmitterCtx } from '../../../core/emitter.js';
-import { flattenTokens } from '../../../core/tokens.js';
+import { flattenTokens, type TokenTreeInput } from '../../../core/tokens.js';
 
 // ---------------------------------------------------------------------------
 // Argument parsing
@@ -400,25 +400,126 @@ export function buildEmitterCtxWithRouting(
   fileKey?: string,
 ): { ctx: EmitterCtx; routing: TokenRouting } {
   const routing = buildTokenRouting(tokenEntries);
-  const brands: Record<string, Record<string, unknown>> = { default: {} };
-  for (const [slot, tree] of routing.bySlot) {
-    if (slot.startsWith('brand.')) brands[slot.slice('brand.'.length)] = tree;
-  }
   return {
     ctx: {
-      tokens: {
-        primitives: routing.bySlot.get('primitives') ?? {},
-        semantic: routing.bySlot.get('semantic') ?? {},
-        light: routing.bySlot.get('light') ?? {},
-        dark: routing.bySlot.get('dark') ?? {},
-        brands,
-      },
+      tokens: tokenTreesFromRouting(routing),
       icons: loadIcons(iconsDir),
       contracts,
       fileKey,
     },
     routing,
   };
+}
+
+/** The routed slots as the layered TokenTreeInput every emitter reads — and
+ *  the layering core/emit-tokens-css.ts turns into `:root` + mode blocks.
+ *  One function, so the react shell (scripts/generate-components.ts) and
+ *  the registry targets cannot disagree about which file is the dark slot. */
+export function tokenTreesFromRouting(routing: TokenRouting): TokenTreeInput {
+  const brands: Record<string, Record<string, unknown>> = { default: {} };
+  for (const [slot, tree] of routing.bySlot) {
+    if (slot.startsWith('brand.')) brands[slot.slice('brand.'.length)] = tree;
+  }
+  return {
+    primitives: routing.bySlot.get('primitives') ?? {},
+    semantic: routing.bySlot.get('semantic') ?? {},
+    light: routing.bySlot.get('light') ?? {},
+    dark: routing.bySlot.get('dark') ?? {},
+    brands,
+  };
+}
+
+// ---------------------------------------------------------------------------
+// `figma bundle --tokens` — ONE flat set OR ONE layered set, decided per entry
+// ---------------------------------------------------------------------------
+//
+// The bundle's tokenSet has two shapes. The FLAT shape (`base[,minted]`, plus
+// `--modes light[,dark]` overrides of base) is what every published foreign
+// example rides and must stay byte-identical. The LAYERED shape is the repo's
+// own tokens/ layout — primitives + brand.<name> + semantic + light/dark —
+// which the flat shape cannot carry: it has no brand slot, no semantic slot,
+// and a mode-only token is an orphan. Until 2026-08-22 `figma bundle` took
+// ONLY the flat shape, so the 51 first-party contracts bundled with ✔ and 34
+// of them refused inside the plugin, one "Cannot resolve token" per paste.
+//
+// Each `--tokens` entry is classified exactly once:
+//   · `base=<file>` / `minted=<file>`          → the flat set, by name
+//   · `<slot>=<file>` (primitives, semantic, light, dark, brand, brand.<n>)
+//                                              → a layer (same grammar as generate)
+//   · a DIRECTORY                               → layers (every *.tokens.json /
+//                                                 *.dtcg.json inside, routed by
+//                                                 the *.tokens.json convention)
+//   · a bare `*.tokens.json` the convention can name → that layer
+//   · any other bare file                       → the flat set, positionally
+//                                                 (first = base, second = minted)
+// Mixing the two shapes in one bundle is refused by name: nothing decides
+// silently which tree a ref resolves against.
+
+export interface BundleTokenEntries {
+  /** The flat foreign set — absent when the bundle is layered. */
+  flat: { base?: string; minted?: string };
+  /** Raw entries (slot-prefixed or convention-named) for buildTokenRouting —
+   *  empty when the bundle is flat. */
+  layered: string[];
+}
+
+export function classifyBundleTokenEntries(raw: string[]): BundleTokenEntries {
+  const flat: { base?: string; minted?: string } = {};
+  const flatNamed: string[] = [];
+  const layered: string[] = [];
+  const flatPositional: string[] = [];
+  for (const entry of raw) {
+    const { prefix, file } = parseTokenEntry(entry);
+    const slot = prefix.trim().toLowerCase();
+    if (slot === 'base' || slot === 'minted') {
+      if (flat[slot] !== undefined) {
+        throw new CliUsageError(`--tokens "${entry}": "${slot}=" was given twice — a flat set has one ${slot} file`);
+      }
+      flat[slot] = file;
+      flatNamed.push(entry);
+      continue;
+    }
+    if (slot) {
+      layered.push(entry); // expandTokenArgs refuses an unknown slot by name
+      continue;
+    }
+    const st = statSync(path.resolve(file), { throwIfNoEntry: false });
+    if (!st) throw new CliUsageError(`Token path not found: ${file}`);
+    if (st.isDirectory() || classifyTokenFile(file).why === 'convention') {
+      layered.push(entry);
+      continue;
+    }
+    flatPositional.push(file);
+  }
+  if (flatPositional.length > 2) {
+    throw new CliUsageError(
+      `figma bundle --tokens takes a flat set as <base[,minted]> — ${flatPositional.length} flat files were given (${flatPositional.map((f) => path.basename(f)).join(', ')}). ` +
+        `A layered set names its slots: --tokens <dir> or --tokens primitives=<f>,semantic=<f>,light=<f>,dark=<f>,brand=<f>.`,
+    );
+  }
+  if (flatPositional.length > 0) {
+    if (flat.base !== undefined || (flatPositional.length > 1 && flat.minted !== undefined)) {
+      throw new CliUsageError(
+        `figma bundle --tokens mixes positional flat files (${flatPositional.map((f) => path.basename(f)).join(', ')}) with named base=/minted= — use one spelling`,
+      );
+    }
+    if (flat.base === undefined) flat.base = flatPositional[0];
+    if (flatPositional[1] !== undefined) flat.minted = flatPositional[1];
+    else if (flatPositional.length === 1 && flat.minted === undefined) {
+      // one bare flat file: base only
+    }
+  }
+  const isFlat = flat.base !== undefined || flat.minted !== undefined;
+  if (isFlat && layered.length > 0) {
+    throw new CliUsageError(
+      `figma bundle --tokens got BOTH a flat set (${[...flatNamed, ...flatPositional.map((f) => path.basename(f))].join(', ')}) and layered slots (${layered.map((e) => path.basename(e)).join(', ')}) — a bundle's token set is one or the other. ` +
+        `Name the flat files' slots (primitives=<file>) to make them layers, or drop the layer files. Slots: ${SLOT_NAMES}, base, minted.`,
+    );
+  }
+  if (isFlat && flat.base === undefined) {
+    throw new CliUsageError('figma bundle --tokens minted=<file> needs a base too: --tokens base=<file>,minted=<file>');
+  }
+  return { flat, layered };
 }
 
 export const splitList = (v: string | undefined): string[] =>

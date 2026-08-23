@@ -890,7 +890,7 @@ async function dumpNode(node, nodePath, parent) {
       channels.push('textAlignVertical ' + node.textAlignVertical);
     }
     if (node.textTruncation && node.textTruncation !== 'DISABLED') {
-      channels.push('textTruncation ' + node.textTruncation + (typeof node.maxLines === 'number' ? ' maxLines ' + node.maxLines : ''));
+      channels.push('textTruncation ' + node.textTruncation + (typeof node.maxLines === 'number' ? ' maxLines ' + node.maxLines : '') + ' (the canvas twin of CSS text-overflow: ellipsis — drawn, not read back)');
     }
     if (channels.length > 0) {
       degrade('text-channel-unsupported', nodePath, 'text channel(s) with no dump v1 projection: ' + channels.join('; ') + ' — typography carries (fontSize, fontStyle, style identity) only');

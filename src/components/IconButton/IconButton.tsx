@@ -38,7 +38,14 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(functio
     .filter(Boolean)
     .join(' ');
   return (
-    <button ref={ref} className={classes} data-is-disabled={isDisabled || undefined} {...rest}>
+    <button
+      ref={ref}
+      className={classes}
+      data-is-disabled={isDisabled || undefined}
+      aria-label={label}
+      type="button"
+      {...rest}
+    >
       <div className={styles.iconSlot}>{icon}</div>
     </button>
   );

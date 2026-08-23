@@ -95,6 +95,20 @@
           "prop": "hasEndIcon"
         }
       }
+    },
+    {
+      "name": "isFullWidth",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "isFullWidth"
+        },
+        "code": {
+          "prop": "isFullWidth"
+        }
+      }
     }
   ],
   "states": [
@@ -197,6 +211,14 @@
           }
         }
       },
+      "stylesWhen": [
+        {
+          "prop": "isDisabled",
+          "styles": {
+            "opacity": "0.4"
+          }
+        }
+      ],
       "literals": {
         "width": "fit-content",
         "height": "fit-content"

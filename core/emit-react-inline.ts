@@ -57,6 +57,7 @@ import {
   UA_MARGIN_ELEMENTS,
   validateContract,
   ELEMENT_META,
+  holderDeclaresPosition,
 } from './emit-react.js';
 
 export interface EmitReactInlineCtx {
@@ -270,9 +271,13 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         }
       }
       if (contract.semantics.element === 'button') s.cursor = 'pointer';
+      // A declared holder is the positioning context — mirrors emit-react
+      // (FC-DUMP-PROPOSE-THUMB-HOLDER-RELATIVE).
       if (
         walkAnatomy(contract).some(
-          (w) => w.part.overlay || (w.part.stylesWhen ?? []).some((sw) => sw.styles['position'] === 'absolute'),
+          (w) =>
+            (w.part.overlay || (w.part.stylesWhen ?? []).some((sw) => sw.styles['position'] === 'absolute')) &&
+            !holderDeclaresPosition(contract, w.path),
         )
       ) {
         s.position = 'relative';
@@ -462,12 +467,20 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   // Disabled-state tokens apply via the disabled prop (the one interaction
   // state a static style CAN honestly render). Non-substituted decls only.
   const disabledStyle: StyleRecord = {};
+  // A SUBSTITUTED root disabled-state ref (f(variant) / f(bool)) is not a
+  // static object — DISABLED_STYLE is one record — so it is NAMED in the
+  // emitted header rather than dropped (the css/html/web-components surfaces
+  // expand it per value tuple).
+  const disabledSubstOmitted: string[] = [];
   if (bools.some((p) => p.name === 'disabled')) {
     for (const [cssProp, ref] of Object.entries(contract.anatomy.root?.states?.disabled ?? {})) {
       const refPath = stripBraces(ref);
-      if (placeholdersIn(refPath).length === 0 && !cssProp.startsWith('outline')) {
-        disabledStyle[camel(cssProp)] = resolveValue(refPath);
+      if (cssProp.startsWith('outline')) continue;
+      if (placeholdersIn(refPath).length > 0) {
+        disabledSubstOmitted.push(`${cssProp} ${ref}`);
+        continue;
       }
+      disabledStyle[camel(cssProp)] = resolveValue(refPath);
     }
     // v15: root disabled-plane declared facts render the same way (already
     // literal values — no resolution).
@@ -658,16 +671,23 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     return `{${cond} ? (${jsx}) : null}`;
   };
 
+  // `attrs` on a part (root included) — the same rule as emit-react: a text
+  // prop binds bare (`href={href}`), any other prop is coerced, literals land
+  // as literals (numeric DOM props as numbers).
   const NUMERIC_ATTRS = new Set(['rows', 'cols', 'tabIndex', 'colSpan', 'rowSpan']);
-  const partAttrString = (part: Part): string =>
-    Object.entries(part.attrs ?? {})
-      .map(([attr, value]) => {
-        const ref = value.match(/^\{([a-z][\w-]*)\}$/);
-        if (ref) return ` ${attr}={String(${codePropOf(ref[1])})}`;
-        if (NUMERIC_ATTRS.has(attr) && /^\d+$/.test(value)) return ` ${attr}={${value}}`;
-        return ` ${attr}=${JSON.stringify(value)}`;
-      })
-      .join('');
+  const partAttrList = (part: Part): string[] =>
+    Object.entries(part.attrs ?? {}).map(([attr, value]) => {
+      const ref = value.match(/^\{([a-z][\w-]*)\}$/);
+      if (ref) {
+        const bound = contract.props.find((p) => p.name === ref[1]);
+        return bound?.type === 'text'
+          ? `${attr}={${codePropOf(ref[1])}}`
+          : `${attr}={String(${codePropOf(ref[1])})}`;
+      }
+      if (NUMERIC_ATTRS.has(attr) && /^\d+$/.test(value)) return `${attr}={${value}}`;
+      return `${attr}=${JSON.stringify(value)}`;
+    });
+  const partAttrString = (part: Part): string => partAttrList(part).map((a) => ` ${a}`).join('');
 
   // Icon assets (fixed names + enum expansions), same table as the CSS-Module emitter.
   const neededIcons = new Map<string, string>();
@@ -883,12 +903,21 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     const dataName = p.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
     elementAttrs.push(`data-${dataName}={${p.bindings.code.prop} || undefined}`);
   }
+  // anatomy.root.attrs ride the root element like every part's attrs;
+  // attrs.role wins over the semantics default (a differing pair is refused
+  // by name in validateContract).
+  const rootAttrs = root?.attrs ?? {};
+  if (root) elementAttrs.push(...partAttrList(root));
   const roleByProp = contract.semantics.roleByProp;
   let roleMapConst = '';
   if (roleByProp) {
     roleMapConst = `const ROLE_MAP: Record<string, string> = ${JSON.stringify(roleByProp.map)};\n\n`;
     elementAttrs.push(`role={ROLE_MAP[${codePropOf(roleByProp.prop)}]}`);
-  } else if (contract.semantics.role && contract.semantics.role !== contract.semantics.element) {
+  } else if (
+    rootAttrs.role === undefined &&
+    contract.semantics.role &&
+    contract.semantics.role !== contract.semantics.element
+  ) {
     elementAttrs.push(`role="${contract.semantics.role}"`);
   }
   let elementMapConst = '';
@@ -953,6 +982,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   const canvasOnlyNote = canvasOnlyRefused.size > 0
     ? `\n * Fidelity: ${[...canvasOnlyRefused].sort().join(', ')} REFUSED BY NAME — synthetic\n * canvas-only channel(s) (decomposeTranslate) with no CSS spelling; the canvas\n * lowers them to absolute placement.`
     : '';
+  const disabledSubstNote = disabledSubstOmitted.length > 0
+    ? `\n * Fidelity: ROOT disabled-state ref(s) ${disabledSubstOmitted.join(', ')} substitute a prop —\n * omitted on this surface (DISABLED_STYLE is one static object; the css/html/\n * web-components surfaces expand them per value).`
+    : '';
 
   // MULTI-ROOT composite: the roots render as SIBLINGS in a Fragment (no
   // wrapper element — a Modal's backdrop + dialog are position-driven
@@ -968,7 +1000,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
  * Emitted by core/emit-react-inline.ts — token references RESOLVED to literals.
  * Resolution mode: ${mode} (brand: default).
  * MULTI-ROOT composite — ${topRoots(contract).length} top-level roots (${topRoots(contract).map(([n]) => n).join(', ')})
- * render as SIBLINGS in a Fragment; there is no single wrapping element.${canvasOnlyNote}
+ * render as SIBLINGS in a Fragment; there is no single wrapping element.${canvasOnlyNote}${disabledSubstNote}
  */
 import type { ${typeImports} } from 'react';
 ${depImports}${depImports ? '\n' : ''}
@@ -1003,7 +1035,7 @@ export function ${name}({ ${destructured.join(', ')} }: ${name}Props) {
  * Fidelity: :hover/:focus-visible state tokens are not expressible as inline
  * styles and are omitted; ROOT disabled-state tokens apply via the disabled
  * prop; PART-level state overrides (Part.states, v13) are omitted — the same
- * declared limit as the hover states (state-selected descendant styling).${overlapNote}${repeatNote}${canvasOnlyNote}
+ * declared limit as the hover states (state-selected descendant styling).${overlapNote}${repeatNote}${canvasOnlyNote}${disabledSubstNote}
  */
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
 import type { ${typeImports} } from 'react';

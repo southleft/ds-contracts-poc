@@ -10,6 +10,11 @@
  *   src/components/<Name>/<Name>.module.css    styles from anatomy token bindings
  *   src/components/<Name>/<Name>.stories.tsx   CSF3 stories (argTypes from contract)
  *   src/components/<Name>/index.ts             re-export
+ *   src/components/tokens.css                  EVERY custom property the CSS Modules
+ *                                              reference — `:root` (default/light slot)
+ *                                              + `[data-theme="dark"]` + `[data-brand=…]`
+ *                                              (core/emit-tokens-css.ts); the root barrel
+ *                                              and every story import it
  *
  * Output is byte-guarded by evals/golden.json (the golden-generated-output
  * eval): refactors of the core must not change a single emitted byte.
@@ -19,7 +24,8 @@
  *
  * PARAMETERIZED (Phase 1, @ds-contracts/cli): every path is now an option —
  *   --contracts <dir>   contract documents        (default: <cwd>/contracts)
- *   --tokens <files>    comma-separated DTCG files (default: the repo's 4-file layout)
+ *   --tokens <files>    comma-separated DTCG files, optionally `slot=path`
+ *                       (default: the repo's layered layout incl. brand.* trees)
  *   --icons <dir>       SVG icon assets           (default: <cwd>/assets/icons)
  *   --out <dir>         output root               (default: <cwd>/src/components)
  * Defaults are the repo paths, so `npm run generate` is byte-identical to
@@ -30,8 +36,20 @@ import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { ContractSchema, sortByDependencies, type Contract } from './contract-schema.js';
 import { generateCss, generateStories, generateTsx, validateContract } from '../core/emit-react.js';
+import {
+  emitTokensCss,
+  referencedCssVars,
+  tokensCssLayers,
+  undefinedCssVars,
+  type TokensCssReport,
+} from '../core/emit-tokens-css.js';
 import { formatCss, formatTsx } from '../core/format.js';
 import { tokenInventoryFromJson } from '../core/tokens.js';
+// Token ROUTING (which file is the dark slot, which the brand) is the CLI's
+// rule — one rule for every target, so the react shell cannot call a tree
+// "dark" that `--target html` calls "primitives". lib.ts imports only core/
+// and the schema package; no cycle.
+import { buildTokenRouting, tokenTreesFromRouting } from '../packages/cli/src/lib.js';
 
 export interface GenerateComponentsOptions {
   /** Directory of *.contract.json documents. */
@@ -40,7 +58,10 @@ export interface GenerateComponentsOptions {
    *  (contractsDir is not listed). The CLI's `generate <contracts..>` uses
    *  this; the npm script keeps directory discovery. */
   contractFiles?: string[];
-  /** DTCG token files — the union is the token inventory. */
+  /** DTCG token files — the union is the token inventory. An entry may carry
+   *  a `slot=` prefix (primitives, semantic, light, dark, brand, brand.<name>;
+   *  see packages/cli/src/lib.ts) — the slot decides which tokens.css block
+   *  the tree lands in; a bare `*.dtcg.json` is the default (`:root`) slot. */
   tokenFiles?: string[];
   /** Directory of <name>.svg icon assets. */
   iconsDir?: string;
@@ -48,6 +69,42 @@ export interface GenerateComponentsOptions {
   outDir?: string;
   /** Emit <Name>.stories.tsx per component (default true — the repo path). */
   stories?: boolean;
+  /** The "Regenerate with:" line in the emitted tokens.css header. */
+  regenerateHint?: string;
+}
+
+/** What landed in <outDir>/tokens.css — printed by both shells, asserted by
+ *  core/css-vars-check.ts. Counts, not judgements: an unreferenced token is
+ *  a fact about the inventory, not a defect. */
+export interface TokensCssSummary {
+  path: string;
+  /** Custom properties defined in `:root`. */
+  defined: number;
+  /** Distinct `var(--x)` names the generated CSS Modules reference. */
+  referenced: number;
+  unreferenced: number;
+  modes: TokensCssReport['modes'];
+  danglingAliases: string[];
+  skippedComposite: string[];
+}
+
+/** One line per fact, the same wording in `npm run generate` and the CLI. */
+export function describeTokensCss(t: TokensCssSummary): string[] {
+  const modes = t.modes.length > 0 ? ` + ${t.modes.map((m) => `${m.selector} (${m.count})`).join(', ')}` : '';
+  const lines = [
+    `✔ tokens.css: ${t.defined} custom properties in :root${modes} → ${t.path} — ${t.referenced} referenced by the components, ${t.unreferenced} unreferenced`,
+  ];
+  if (t.danglingAliases.length > 0) {
+    lines.push(
+      `⚠ tokens.css: ${t.danglingAliases.length} alias target(s) are in none of the supplied token files (kept as var() refs — define them in a stylesheet of your own, or pass the missing tree): ${t.danglingAliases.slice(0, 5).join(', ')}${t.danglingAliases.length > 5 ? ', …' : ''}`,
+    );
+  }
+  if (t.skippedComposite.length > 0) {
+    lines.push(
+      `⚠ tokens.css: ${t.skippedComposite.length} composite token(s) have no single-custom-property form and were skipped: ${t.skippedComposite.slice(0, 5).join(', ')}${t.skippedComposite.length > 5 ? ', …' : ''}`,
+    );
+  }
+  return lines;
 }
 
 /** Named refusal — the caller prints `header` then one `  - line` per error
@@ -66,12 +123,31 @@ interface PlannedFile {
   contents: string;
 }
 
-const defaultTokenFiles = (root: string) => [
-  path.join(root, 'tokens', 'primitives.tokens.json'),
-  path.join(root, 'tokens', 'semantic.tokens.json'),
-  path.join(root, 'tokens', 'modes', 'semantic.light.tokens.json'),
-  path.join(root, 'tokens', 'modes', 'semantic.dark.tokens.json'),
-];
+/** The repo's layered layout — the same files scripts/build-tokens.mjs
+ *  reads, brand trees included (discovered, sorted), so the emitted
+ *  tokens.css resolves every `{brand.*}` alias instead of leaving it dangling.
+ *  Brand files are named explicitly by slot: the filename convention in
+ *  packages/cli/src/lib.ts would classify them the same way, but a default
+ *  should not depend on a heuristic. */
+const defaultTokenFiles = (root: string) => {
+  const modes = path.join(root, 'tokens', 'modes');
+  let brandFiles: string[] = [];
+  try {
+    brandFiles = readdirSync(modes)
+      .filter((f) => /^brand\.[a-z][a-z0-9-]*\.tokens\.json$/.test(f))
+      .sort()
+      .map((f) => `brand.${f.replace(/^brand\.|\.tokens\.json$/g, '')}=${path.join(modes, f)}`);
+  } catch {
+    brandFiles = [];
+  }
+  return [
+    path.join(root, 'tokens', 'primitives.tokens.json'),
+    path.join(root, 'tokens', 'semantic.tokens.json'),
+    path.join(modes, 'semantic.light.tokens.json'),
+    path.join(modes, 'semantic.dark.tokens.json'),
+    ...brandFiles,
+  ];
+};
 
 /** Icon assets are SOURCE (like tokens): <iconsDir>/<name>.svg, inlined by
  *  the generator on the code side and rendered as vectors in Figma. */
@@ -90,18 +166,20 @@ function loadIconAssets(iconsDir: string): Map<string, string> {
   }
 }
 
-function loadTokenInventory(tokenFiles: string[]): Set<string> {
-  return tokenInventoryFromJson(tokenFiles.map((file) => JSON.parse(readFileSync(file, 'utf8'))));
-}
-
 export async function generateComponents(
   options: GenerateComponentsOptions = {},
-): Promise<{ generated: string[]; outDir: string }> {
+): Promise<{ generated: string[]; outDir: string; tokensCss: TokensCssSummary }> {
   const root = process.cwd();
   const contractsDir = options.contractsDir ?? path.join(root, 'contracts');
   const outDir = options.outDir ?? path.join(root, 'src', 'components');
   const stories = options.stories ?? true;
-  const tokenInventory = loadTokenInventory(options.tokenFiles ?? defaultTokenFiles(root));
+  // ROUTED, not merely read: the union of every slot is the inventory (the
+  // same set the flat read produced), and the slots themselves become the
+  // tokens.css blocks. A same-slot value collision refuses by name here
+  // exactly as it does for every other target.
+  const routing = buildTokenRouting(options.tokenFiles ?? defaultTokenFiles(root));
+  const tokenTrees = tokenTreesFromRouting(routing);
+  const tokenInventory = tokenInventoryFromJson([...routing.bySlot.values()]);
   const iconAssets = loadIconAssets(options.iconsDir ?? path.join(root, 'assets', 'icons'));
   const contractFiles =
     options.contractFiles ??
@@ -178,6 +256,44 @@ export async function generateComponents(
     throw new ContractViolationError('✖ Contract validation failed:\n', errors);
   }
 
+  // tokens.css — the sheet the CSS Modules above reference. Built from the
+  // routed slots; a $type disagreement between slots refuses by name.
+  let sheet: TokensCssReport;
+  try {
+    sheet = emitTokensCss(tokensCssLayers(tokenTrees), {
+      sources: routing.decisions.map((d) => `${path.basename(d.file)} [${d.slot}]`),
+      regenerate: options.regenerateHint ?? 'npm run generate',
+    });
+  } catch (err) {
+    const [head, ...rest] = String(err instanceof Error ? err.message : err).split('\n');
+    throw new ContractViolationError(`✘ tokens.css ${head}`, rest.map((l) => l.replace(/^\s*-\s*/, '')));
+  }
+  // THE GATE: every var(--x) the generated CSS references is defined in
+  // :root. The inventory check above makes this hold by construction for
+  // token refs; a composite the sheet had to skip is the case it catches.
+  const referencedBy = new Map<string, string[]>();
+  for (const contract of ordered) {
+    for (const name of referencedCssVars(cssById.get(contract.id)!)) {
+      referencedBy.set(name, [...(referencedBy.get(name) ?? []), contract.name]);
+    }
+  }
+  const undefinedVars = undefinedCssVars(referencedBy.keys(), sheet.defined);
+  if (undefinedVars.length > 0) {
+    throw new ContractViolationError(
+      `✘ Refused — ${undefinedVars.length} custom propert(ies) the generated CSS references are not defined in tokens.css (they would render as nothing, silently):`,
+      undefinedVars.map((n) => `${n} — referenced by ${referencedBy.get(n)!.join(', ')}`),
+    );
+  }
+  const tokensCss: TokensCssSummary = {
+    path: path.join(outDir, 'tokens.css'),
+    defined: sheet.defined.length,
+    referenced: referencedBy.size,
+    unreferenced: sheet.defined.filter((n) => !referencedBy.has(n)).length,
+    modes: sheet.modes,
+    danglingAliases: sheet.danglingAliases,
+    skippedComposite: sheet.skippedComposite,
+  };
+
   const plan: PlannedFile[] = [];
   const generated = ordered.map((contract) => contract.name).sort();
   for (const contract of ordered) {
@@ -203,10 +319,14 @@ export async function generateComponents(
     });
   }
 
+  // The root barrel imports the sheet so `import { Button } from '<out>'`
+  // paints; every story imports it too (core/emit-react.ts generateStories),
+  // so a Storybook glob over the tree paints without a preview.ts line.
   plan.push({
     path: path.join(outDir, 'index.ts'),
-    contents: generated.map((n) => `export * from './${n}';`).join('\n') + '\n',
+    contents: `import './tokens.css';\n` + generated.map((n) => `export * from './${n}';`).join('\n') + '\n',
   });
+  plan.push({ path: tokensCss.path, contents: sheet.css });
 
   // The destination remains untouched until every contract has been parsed,
   // validated, sorted, emitted, and formatted successfully.
@@ -215,15 +335,16 @@ export async function generateComponents(
     writeFileSync(file.path, file.contents);
   }
 
-  return { generated, outDir };
+  return { generated, outDir, tokensCss };
 }
 
 /** Shared by both shells (this script and the ds-contracts CLI): run, print
  *  the historical success/refusal wording, exit non-zero on violations. */
 export async function runGenerateComponents(options: GenerateComponentsOptions = {}): Promise<void> {
   try {
-    const { generated } = await generateComponents(options);
+    const { generated, tokensCss } = await generateComponents(options);
     console.log(`✔ Generated ${generated.length} component(s) from contracts: ${generated.sort().join(', ')}`);
+    for (const line of describeTokensCss(tokensCss)) console.log(line);
   } catch (err) {
     if (err instanceof ContractViolationError) {
       console.error(err.header);

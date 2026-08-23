@@ -80,6 +80,14 @@
           }
         }
       },
+      "stylesWhen": [
+        {
+          "prop": "isDisabled",
+          "styles": {
+            "opacity": "0.4"
+          }
+        }
+      ],
       "literals": {
         "width": "fit-content",
         "height": "fit-content"

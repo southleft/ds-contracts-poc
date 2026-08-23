@@ -105,6 +105,20 @@
           "prop": "isDismissible"
         }
       }
+    },
+    {
+      "name": "hasClose",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "hasClose"
+        },
+        "code": {
+          "prop": "hasClose"
+        }
+      }
     }
   ],
   "states": [],

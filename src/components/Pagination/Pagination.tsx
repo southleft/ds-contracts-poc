@@ -36,7 +36,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(function Pagi
   // or, where the source drew no difference at all, nothing.
   const classes = [styles.root, className].filter(Boolean).join(' ');
   return (
-    <nav ref={ref} className={classes} {...rest}>
+    <nav ref={ref} className={classes} aria-label={label} {...rest}>
       <button className={styles.prevButton} aria-label="Previous page" type="button">
         <span
           aria-hidden="true"

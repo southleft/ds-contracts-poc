@@ -4,6 +4,7 @@
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import '../tokens.css';
 import { MoleculesAlert } from './MoleculesAlert';
 
 const meta = {
@@ -25,6 +26,7 @@ const meta = {
     hasIcon: { control: 'boolean' },
     hasLink: { control: 'boolean' },
     isDismissible: { control: 'boolean' },
+    hasClose: { control: 'boolean' },
   },
   args: {
     variant: 'success',
@@ -33,6 +35,7 @@ const meta = {
     hasIcon: true,
     hasLink: true,
     isDismissible: true,
+    hasClose: true,
   },
 } satisfies Meta<typeof MoleculesAlert>;
 

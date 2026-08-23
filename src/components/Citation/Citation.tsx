@@ -39,7 +39,14 @@ export const Citation = forwardRef<HTMLAnchorElement, CitationProps>(function Ci
   // or, where the source drew no difference at all, nothing.
   const classes = [styles.root, className].filter(Boolean).join(' ');
   return (
-    <a ref={ref} className={classes} {...rest}>
+    <a
+      ref={ref}
+      className={classes}
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      {...rest}
+    >
       {variant === 'label' ? <span className={styles.labelText}>{sourceTitle}</span> : null}
       {variant === 'number' ? <span className={styles.numberText}>{number}</span> : null}
     </a>

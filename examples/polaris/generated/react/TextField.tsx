@@ -112,7 +112,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Tex
 {withPrefix ? (<div className={styles.prefix}>
 {withPrefix ? (<span className={styles["label-3"]}>$</span>) : null}
 </div>) : null}
-<input className={styles.input} name={String(name)} value={String(value)} placeholder={String(placeholder)}>
+<input className={styles.input} name={name} value={value} placeholder={placeholder}>
 
 </input>
 {withSuffix ? (<div className={styles.suffix}>

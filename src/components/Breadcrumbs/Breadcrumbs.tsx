@@ -19,7 +19,7 @@ export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(function Br
 ) {
   const classes = [styles.root, className].filter(Boolean).join(' ');
   return (
-    <nav ref={ref} className={classes} {...rest}>
+    <nav ref={ref} className={classes} aria-label={label} {...rest}>
       <div className={styles.trail}>{children}</div>
     </nav>
   );

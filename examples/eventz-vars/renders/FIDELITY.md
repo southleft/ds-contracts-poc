@@ -1,17 +1,17 @@
-# Eventz canvas→code fidelity — 2026-08-08 @ HEAD
+# Eventz canvas→code fidelity — 2026-08-22 @ HEAD
 
 Score = % of pixels REPRODUCED, measured at the reference's own true scale with the two ROOT BOXES anchored — the untitled-ui v2.1 kernel verbatim (see examples/untitled-ui/fidelity-score.mts for its full derivation and the two measured blindnesses it replaced), with three named deltas for this kit. (1) TRUE SCALE IS 1 BY CONSTRUCTION — references come from the REST images API at scale=1 (fetch-references.mts), not a hand shooter's min(2, 600/w) rule; verified over all 108 references against the dump's variant bboxes: 0 negative overflows, residuals all explainable positives (74 exact, 8px focus rings, 1px rounding, 120px Molecules/Alert shadow). (2) state=active is interaction-state alongside hover|focus — Eventz crosses state=default|hover|active|focus with its variant axes; the hover/active carriage is CSS pseudo-class rules via statesByProp (v17), real but not reachable by a static screenshot. (3) The drawn boxes come from dumps/MERGED.json (the kit's committed plugin dump), with dumps/REST-RECOVERY.json grafting the two dump-v1.16 channels the v1.11 capture predates (GRADIENT_LINEAR fills, textCase — see NOTES.md's REST recovery section). TOLERANCE unchanged: a reference pixel is reproduced when some pixel in its 3x3 neighbourhood of the render is within 10 PER CHANNEL; the denominator is the union of the two ink rectangles, never the frame. DELIBERATELY IGNORED, same as uui: sub-pixel and 1px placement; the component's position on the page; effect ink beyond the render clip's 8px margin — which BITES here: Molecules/Alert's canvas shadow reaches ~60px/side, so most of its shadow is absent from the render and scores as missing by design. MEASURED FLOOR: Figma-vs-Chrome glyph rasterisation differs beyond the one-pixel escape on nearly every stem, and this harness loads NO webfonts (FC-FONT-SUBSTRATE), so text-dominated rows read compressed. Trend metric, not the final gate.
 
 | component | variants scored | mean fidelity % | axis-not-carried | interaction-state | unscored |
 |---|---|---|---|---|---|
 | atoms-badge | 15 | 61.2 | 0 | 0 | 0 |
-| atoms-button | 8 | 63.7 | 0 | 16 | 0 |
-| atoms-icon-button | 10 | 67.7 | 0 | 20 | 0 |
+| atoms-button | 8 | 68.2 | 0 | 16 | 0 |
+| atoms-icon-button | 10 | 70.2 | 0 | 20 | 0 |
 | atoms-checkbox | 4 | 89.9 | 0 | 5 | 0 |
 | atoms-input | 6 | 91.5 | 0 | 7 | 0 |
 | atoms-tag | 5 | 29.8 | 0 | 8 | 0 |
 | molecules-alert | 4 | 30.1 | 0 | 0 | 0 |
-| **ALL** | 52 | **63.1** | | | |
+| **ALL** | 52 | **64.3** | | | |
 
 ## Honest residual notes — where the score goes, named
 
@@ -39,10 +39,10 @@ Score = % pixels within tolerance under the superseded v2.0 rule (content-trim +
 | component | variants scored | mean fidelity % | axis-not-carried | interaction-state | unscored |
 |---|---|---|---|---|---|
 | atoms-badge | 15 | 58.6 | 0 | 0 | 0 |
-| atoms-button | 8 | 61.2 | 0 | 16 | 0 |
-| atoms-icon-button | 10 | 73.5 | 0 | 20 | 0 |
+| atoms-button | 8 | 65.5 | 0 | 16 | 0 |
+| atoms-icon-button | 10 | 79.1 | 0 | 20 | 0 |
 | atoms-checkbox | 4 | 69.5 | 0 | 5 | 0 |
 | atoms-input | 6 | 85.5 | 0 | 7 | 0 |
 | atoms-tag | 5 | 48.6 | 0 | 8 | 0 |
 | molecules-alert | 4 | 87.8 | 0 | 0 | 0 |
-| **ALL** | 52 | **67.1** | | | |
+| **ALL** | 52 | **68.8** | | | |

@@ -28,7 +28,7 @@ In the other direction, a 599-variant Figma kit converted to code scores
 canvas→code→canvas executes through the fact diff on **15 of 15** components with every
 one of 36,287 facts classified as matched, diverged, lost or invented rather than dropped in silence.
 Exact structured projection is separately evidenced: **0 verified exact, 15 legacy unverified, 0 refused**.
-The whole thing is pinned by 225 executable claim gates and a 291-file byte-identical
+The whole thing is pinned by 225 executable claim gates and a 292-file byte-identical
 generation manifest. **What that does not say:** those 104 components are
 10.7% of the 8 libraries they came from, and they were picked because they were the tractable ones.
 
@@ -312,11 +312,11 @@ asserted in prose.
 
 | pin | value | what it forbids | source |
 |---|---|---|---|
-| generated source, byte-identical | 291 files hashed | a contract change altering generated code without review | `evals/golden.json` |
+| generated source, byte-identical | 292 files hashed | a contract change altering generated code without review | `evals/golden.json` |
 | capture double-sweep identity | 184/184 runs | a capture whose second sweep disagrees with its first | `extract/computed/out/**/numbers.json`, `determinism` |
 | browser captures behind the corpus | 10,148 | a floor quoted from a sample smaller than it claims | same files, `captures` |
 | executable claims | 225 gates | a documented behaviour with no test | `evals/results.json` |
-| dropped-fact receipt count | 103 pinned exactly | honesty being switched off unnoticed — see §6 | `extract/figma/dagger-census.json` |
+| dropped-fact receipt count | 104 pinned exactly | honesty being switched off unnoticed — see §6 | `extract/figma/dagger-census.json` |
 | doc numbers vs the repo | gated | a doc quoting a number the repo no longer produces | `scripts/docs-numbers-check.mjs` |
 | this document vs its sources | `--check` | this page going stale while still reading as current | `scripts/build-capability-report.mjs` |
 
@@ -351,23 +351,28 @@ capable — it is just quieter.
 ### 6.1 Dropped-fact receipts (`†`)
 
 When the plugin engine compiles a contract and cannot carry a fact onto the
-canvas, it emits a receipt naming the fact. Across 9 committed corpora there are
-**103** such receipts, and the count is pinned **exactly** — in both directions.
+canvas, it names the fact: the compiled component data carries a `codeOnlyFacts`
+list (part, kind, channel, value, reason, variant coverage), `figma bundle` writes that list
+beside `contracts` and prints a per-contract summary, the built set is stamped
+`ds_contracts/codeOnlyFacts`, the plugin's run report lists the facts under the set,
+and the set description keeps one trailing `†` with the count. Across 9 committed
+corpora there are **104** daggered contracts naming **2,308** facts, and both
+counts are pinned **exactly** — in both directions.
 Fewer receipts is not automatically progress: it is either a real fix or a
 refusal path that quietly stopped firing, and both require a human to look.
 
-| corpus | dropped-fact receipts | contracts carrying one | source |
-|---|---|---|---|
-| `mui` | 31 | 31 | `extract/figma/dagger-census.json` |
-| `untitled-ui` | 15 | 15 | `extract/figma/dagger-census.json` |
-| `polaris` | 12 | 12 | `extract/figma/dagger-census.json` |
-| `shadcn` | 11 | 11 | `extract/figma/dagger-census.json` |
-| `carbon` | 10 | 10 | `extract/figma/dagger-census.json` |
-| `altitude` | 8 | 8 | `extract/figma/dagger-census.json` |
-| `astryx` | 8 | 8 | `extract/figma/dagger-census.json` |
-| `tailwind` | 8 | 8 | `extract/figma/dagger-census.json` |
-| `eventz-vars` | 0 | 0 | `extract/figma/dagger-census.json` |
-| **total** | **103** |  |  |
+| corpus | dropped-fact receipts | contracts carrying one | facts named | source |
+|---|---|---|---|---|
+| `mui` | 31 | 31 | 887 | `extract/figma/dagger-census.json` |
+| `untitled-ui` | 16 | 16 | 72 | `extract/figma/dagger-census.json` |
+| `polaris` | 12 | 12 | 411 | `extract/figma/dagger-census.json` |
+| `shadcn` | 11 | 11 | 198 | `extract/figma/dagger-census.json` |
+| `carbon` | 10 | 10 | 506 | `extract/figma/dagger-census.json` |
+| `altitude` | 8 | 8 | 50 | `extract/figma/dagger-census.json` |
+| `astryx` | 8 | 8 | 130 | `extract/figma/dagger-census.json` |
+| `tailwind` | 8 | 8 | 54 | `extract/figma/dagger-census.json` |
+| `eventz-vars` | 0 | 0 | 0 | `extract/figma/dagger-census.json` |
+| **total** | **104** |  | **2,308** |  |
 
 ### 6.2 Named refusals — the construct vocabularies
 
@@ -530,13 +535,13 @@ npm run capability:fresh
 |---|---|---|---|
 | `conformance/MANIFEST.json` | `8231a2e8b195` | 76,456 | CSS/DOM frontier vocabulary |
 | `docs/22-generality.md` | `0ae9595b1aad` | 72,312 | coverage denominators (docs/22 §8.3 table) |
-| `evals/golden.json` | `29b46c303e69` | 32,157 | generated-source golden manifest |
+| `evals/golden.json` | `29091114a7c0` | 32,256 | generated-source golden manifest |
 | `evals/results.json` | `5081770dbb7e` | 6,982 | executable claim suite (registry ids + size; the pass column is the suite's own output) |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
 | `extract/computed/out/**/numbers.json` | `d5bcd57769dc` | 1,056,246 | capture counts + determinism receipts — 184 files |
 | `extract/computed/out/**/scorecard.json` | `3f0067a3f412` | 16,283,364 | computed-equality per component — 184 files |
 | `extract/figma/conformance/MANIFEST.json` | `71392fbbb21e` | 67,755 | canvas construct vocabulary |
-| `extract/figma/dagger-census.json` | `37efdd8cc31e` | 3,033 | dropped-fact receipt census |
+| `extract/figma/dagger-census.json` | `02c91c8d4a42` | 6,112 | dropped-fact receipt census |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | canvas→code→canvas round trip |
 
 Same bytes in, same file out: this build reads no clock, no git state and no

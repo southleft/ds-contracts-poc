@@ -25,7 +25,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(function
 ) {
   const classes = [styles.root, styles[`variant-${variant}`], className].filter(Boolean).join(' ');
   return (
-    <div ref={ref} className={classes} {...rest}>
+    <div ref={ref} className={classes} role="progressbar" aria-label={label} {...rest}>
       <div className={styles.track}>
         <div
           className={styles.fill}

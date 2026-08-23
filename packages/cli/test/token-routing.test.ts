@@ -27,6 +27,7 @@ import path from 'node:path';
 import {
   buildEmitterCtx,
   buildTokenRouting,
+  classifyBundleTokenEntries,
   classifyTokenFile,
   CliUsageError,
   expandTokenArgs,
@@ -159,4 +160,68 @@ test('tokenPathsOf strips slots — the react target gets plain paths', () => {
   assert.deepEqual(tokenPathsOf([`light=${LIGHT}`, PRIM]), [LIGHT, PRIM]);
   // A path that merely CONTAINS "=" is a path, not a slot.
   assert.deepEqual(tokenPathsOf(['/tmp/a=b.dtcg.json']), ['/tmp/a=b.dtcg.json']);
+});
+
+// ---------------------------------------------------------------------------
+// `figma bundle --tokens` — flat <base[,minted]> OR the layered slot grammar
+// ---------------------------------------------------------------------------
+//
+// The defect (2026-08-22): `figma bundle` took ONLY the flat shape, so the
+// 51 first-party contracts bundled with ✔ and 34 refused inside the plugin
+// ("Cannot resolve token" — brand and mode-only refs had no slot to land in).
+
+const FLAT_BASE = write('foreign/tailwind.dtcg.json', {
+  color: { $type: 'color', white: { $value: '#FFFFFF' } },
+});
+const FLAT_MINTED = write('foreign/tailwind-minted.dtcg.json', {
+  imported: { button: { fill: { $type: 'color', $value: '{color.white}' } } },
+});
+
+test('bundle grammar: bare flat files keep the positional base[,minted] meaning (every published example byte-identical)', () => {
+  assert.deepEqual(classifyBundleTokenEntries([FLAT_BASE, FLAT_MINTED]), {
+    flat: { base: FLAT_BASE, minted: FLAT_MINTED },
+    layered: [],
+  });
+  assert.deepEqual(classifyBundleTokenEntries([FLAT_BASE]), { flat: { base: FLAT_BASE }, layered: [] });
+  // base= / minted= name the same two slots.
+  assert.deepEqual(classifyBundleTokenEntries([`minted=${FLAT_MINTED}`, `base=${FLAT_BASE}`]), {
+    flat: { base: FLAT_BASE, minted: FLAT_MINTED },
+    layered: [],
+  });
+});
+
+test('bundle grammar: a directory, a slot=file, or a convention-named *.tokens.json is a LAYER', () => {
+  const layoutDir = path.join(dir, 'tokens');
+  assert.deepEqual(classifyBundleTokenEntries([layoutDir]), { flat: {}, layered: [layoutDir] });
+  assert.deepEqual(classifyBundleTokenEntries([PRIM, SEM, LIGHT, DARK, BRAND, AURORA]), {
+    flat: {},
+    layered: [PRIM, SEM, LIGHT, DARK, BRAND, AURORA],
+  });
+  assert.deepEqual(classifyBundleTokenEntries([`primitives=${FLAT_BASE}`, `brand=${BRAND}`]), {
+    flat: {},
+    layered: [`primitives=${FLAT_BASE}`, `brand=${BRAND}`],
+  });
+});
+
+test('bundle grammar: mixing a flat set with layers is refused by name; three bare flat files are refused', () => {
+  assert.throws(
+    () => classifyBundleTokenEntries([FLAT_BASE, SEM]),
+    (err: unknown) => err instanceof CliUsageError && /BOTH a flat set .* and layered slots/.test(err.message),
+  );
+  assert.throws(
+    () => classifyBundleTokenEntries([FLAT_BASE, FLAT_MINTED, write('foreign/third.dtcg.json', {})]),
+    (err: unknown) => err instanceof CliUsageError && /3 flat files were given/.test(err.message),
+  );
+  assert.throws(
+    () => classifyBundleTokenEntries([`base=${FLAT_BASE}`, `base=${FLAT_MINTED}`]),
+    (err: unknown) => err instanceof CliUsageError && /"base=" was given twice/.test(err.message),
+  );
+  assert.throws(
+    () => classifyBundleTokenEntries([`minted=${FLAT_MINTED}`]),
+    (err: unknown) => err instanceof CliUsageError && /needs a base too/.test(err.message),
+  );
+  assert.throws(
+    () => classifyBundleTokenEntries([path.join(dir, 'nope.dtcg.json')]),
+    (err: unknown) => err instanceof CliUsageError && /Token path not found/.test(err.message),
+  );
 });

@@ -22,7 +22,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(function Toast(
 ) {
   const classes = [styles.root, className].filter(Boolean).join(' ');
   return (
-    <div ref={ref} className={classes} role="status" {...rest}>
+    <div ref={ref} className={classes} aria-atomic="true" role="status" {...rest}>
       <div className={styles.content}>
         <span className={styles.bodyText}>{body}</span>
       </div>

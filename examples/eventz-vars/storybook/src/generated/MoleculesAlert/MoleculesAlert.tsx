@@ -17,6 +17,7 @@ export interface MoleculesAlertProps extends HTMLAttributes<HTMLDivElement> {
   hasIcon?: boolean;
   hasLink?: boolean;
   isDismissible?: boolean;
+  hasClose?: boolean;
 }
 
 /** PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption. */
@@ -27,6 +28,7 @@ export const MoleculesAlert = forwardRef<HTMLDivElement, MoleculesAlertProps>(
       hasIcon = true,
       hasLink = true,
       isDismissible = true,
+      hasClose = true,
       titleText = 'Title',
       descriptionText = 'Description',
       className,
@@ -49,6 +51,7 @@ export const MoleculesAlert = forwardRef<HTMLDivElement, MoleculesAlertProps>(
         data-has-icon={hasIcon || undefined}
         data-has-link={hasLink || undefined}
         data-is-dismissible={isDismissible || undefined}
+        data-has-close={hasClose || undefined}
         {...rest}
       >
         {hasIcon ? (

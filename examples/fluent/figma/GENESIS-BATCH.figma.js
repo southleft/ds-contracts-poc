@@ -60,7 +60,7 @@ const COMPONENTS = [
     "contractId": "fluent.avatar",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Avatar — generated from contract fluent.avatar v0.2.0 †",
+    "description": "Avatar — generated from contract fluent.avatar v0.2.0 † (13 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -1374,6 +1374,151 @@ const COMPONENTS = [
     "semantics": {
       "element": "span"
     },
+    "codeOnlyFacts": [
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "border-left-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "border-right-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "border-top-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "position",
+        "value": "absolute",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "user-select",
+        "value": "none",
+        "reason": "Text-selection behavior (user-select) exists only in the coded component.",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "flex-shrink",
+        "value": "{imported.avatar.root.flex-shrink}",
+        "reason": "Figma auto-layout children do not shrink below their content — there is no shrink factor.",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -1430,6 +1575,26 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }
+// NAMED RUNTIME DEGRADATIONS (R7, 2026-08-22). The emitted script used to
+// carry ~30 bare try/catch swallows (a comment where the handler should be) — every one a
+// canvas fact the spec asked for and the API refused (FILL sizing, out-of-
+// flow placement, min sizes, truncation, a paint base) with NO trace in the
+// result. Each now pushes ONE named entry here; syncOne's report carries
+// the entries raised while it ran as report.degradations (the same code /
+// nodePath / message shape the dump script's _degradations uses), and the
+// plugin UI lists them under the set beside the code-only facts. A
+// degradation is never a failure: the sync still completes, it just says so.
+const DEGRADATIONS = [];
+function nodePathOf(node) {
+  const parts = [];
+  let n = node;
+  let guard = 0;
+  while (n && n.type !== 'PAGE' && n.type !== 'DOCUMENT' && guard++ < 64) { parts.unshift(n.name || n.type); n = n.parent; }
+  return parts.join('/');
+}
+function degrade(code, node, message, e) {
+  DEGRADATIONS.push({ code: code, nodePath: node ? nodePathOf(node) : '', message: message + (e && e.message ? ' (' + e.message + ')' : '') });
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -1453,7 +1618,7 @@ const boundPaint = (varName, consumer) => {
         base = { r: r.value.r, g: r.value.g, b: r.value.b };
         if (typeof r.value.a === 'number') alpha = r.value.a;
       }
-    } catch (e) { /* fall back to black base */ }
+    } catch (e) { degrade('FC-RT-PAINT-BASE-UNRESOLVED', consumer, 'variable ' + varName + ' could not be resolved for this consumer; the bound paint keeps its binding over a black literal base', e); }
   }
   return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base, opacity: alpha }, 'color', v);
 };
@@ -1627,7 +1792,7 @@ function setInstanceProps(inst, props, owner) {
   const instProps = inst.componentProperties;
   const instKeys = Object.keys(instProps);
   let ownerDefs = {};
-  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; }
+  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; degrade('FC-RT-PROP-DEFS-UNREADABLE', owner, 'componentPropertyDefinitions unreadable on the owner; property references were resolved without them', e); }
   const ownerKeys = Object.keys(ownerDefs);
   const variantProps = {};
   const otherProps = {};
@@ -1769,8 +1934,8 @@ function applyFrameSpec(node, spec) {
     if (spec.lits && spec.lits[field] !== undefined) continue;
     try {
       if (node.boundVariables && node.boundVariables[field]) node.setBoundVariable(field, null);
-    } catch (e) { /* field not bindable on this node type */ }
-    try { node[field] = 0; } catch (e) { /* not an auto-layout frame */ }
+    } catch (e) { degrade('FC-RT-FIELD-UNBIND-REFUSED', node, 'a stale ' + field + ' variable could not be unbound before the reset', e); }
+    try { node[field] = 0; } catch (e) { degrade('FC-RT-FIELD-RESET-REFUSED', node, field + ' could not be reset to 0 (not an auto-layout frame)', e); }
   }
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -1814,7 +1979,7 @@ function applyOverlay(parent, childNode, childSpec) {
     else if (p === 'bottom') { childNode.x = 0; childNode.y = parent.height; }
     else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
     else { childNode.x = parent.width; childNode.y = 0; }
-  } catch (e) { /* parent not auto-layout — leave in flow */ }
+  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
 // v9 shape placement: exact offsets vs the parent box, after append.
@@ -1868,7 +2033,7 @@ function applyShapeAbsolute(parent, childNode, childSpec) {
       childNode.x = cx - w / 2;
       childNode.y = cy - h / 2;
     }
-  } catch (e) { /* parent not auto-layout — leave in flow */ }
+  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
 function resizeOutOfFlow(parent, built) {
@@ -1901,7 +2066,7 @@ function resizeOutOfFlow(parent, built) {
         if (a.h === 'STRETCH') childNode.x = a.left || 0;
         if (a.v === 'STRETCH') childNode.y = a.top || 0;
       }
-    } catch (e) { /* parent not auto-layout — the child stayed in flow */ }
+    } catch (e) { degrade('FC-RT-ABSOLUTE-PLACEMENT-REFUSED', childNode, 'absolute placement was refused (parent not auto-layout); the child stayed in flow', e); }
   }
 }
 
@@ -1963,7 +2128,7 @@ async function buildNode(spec, registry) {
           node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
           fontResolved = true;
           break;
-        } catch (e) { /* try this family's own spelling of the same face */ }
+        } catch (e) { /* a RETRY, not a swallow: the next candidate is this family's own spelling of the same face; the final outcome is named below */ }
       }
       if (!fontResolved) {
         console.warn(
@@ -1971,13 +2136,14 @@ async function buildNode(spec, registry) {
           ' is not available in this file (tried ' + styleCandidates.join(', ') +
           ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
         );
+        degrade('FC-FONT-STYLE-UNRESOLVED', node, spec.fontFamily + ' / ' + wantStyle + ' is not available in this file (tried ' + styleCandidates.join(', ') + '); Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones');
       }
     }
     if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
     if (spec.textCase) node.textCase = spec.textCase;
     if (spec.textDecoration) node.textDecoration = spec.textDecoration;
     if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
-    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { /* older API */ } }
+    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { degrade('FC-RT-TRUNCATION-REFUSED', node, 'textTruncation ENDING refused (older Plugin API); the declared ellipsis does not draw', e); } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -2095,7 +2261,7 @@ async function buildNode(spec, registry) {
       if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
       if (spec.layout && spec.layout.stretchChildren) {
-        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', inst, 'slot default content could not stretch (layoutSizingHorizontal FILL refused); it keeps its own width', e); }
       }
     }
     registry.slots.push({ spec, slot: node });
@@ -2109,7 +2275,7 @@ async function buildNode(spec, registry) {
   // Figma's percent-scaled field) wins over the literal and paints 0.5
   // as 0.5% — the Disabled wash (visual-parity Button, 93.91% masked).
   if (typeof spec.opacity === 'number') {
-    try { if (node.boundVariables && node.boundVariables.opacity) node.setBoundVariable('opacity', null); } catch (e) { /* not bindable */ }
+    try { if (node.boundVariables && node.boundVariables.opacity) node.setBoundVariable('opacity', null); } catch (e) { degrade('FC-RT-OPACITY-UNBIND-REFUSED', node, 'a stale opacity variable could not be unbound before the literal opacity was set; the variable may still win over spec.opacity', e); }
     node.opacity = spec.opacity;
   }
   if (spec.visibleProp) {
@@ -2127,7 +2293,7 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
-      } catch (e) { /* track not fixed-width */ }
+      } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       child.type === 'frame' && (!child.children || child.children.length === 0) &&
@@ -2146,12 +2312,12 @@ async function buildNode(spec, registry) {
       // overflowed their fixed-height tracks). Width stays the spec'd
       // fraction (meter pct) or the placeholder box, named in the component
       // description.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
   }
   resizeOutOfFlow(node, built);
@@ -2364,6 +2530,43 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C, degradedFrom) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  // R7: the runtime degradations raised while this set synced ride the same
+  // per-set result — named beside the facts, never only in a console.
+  if (typeof degradedFrom === 'number' && DEGRADATIONS.length > degradedFrom) report.degradations = DEGRADATIONS.slice(degradedFrom);
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -2386,6 +2589,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -2481,7 +2687,7 @@ async function amendSet(set, C) {
         applyOverlay(comp, childNode, childSpec);
     applyShapeAbsolute(comp, childNode, childSpec);
         if (childSpec.pct != null) {
-          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
         }
         if (
           childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -2489,10 +2695,10 @@ async function amendSet(set, C) {
           !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
         ) {
           // #60 fix 4 (amend path): same empty-child declared default.
-          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
         }
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
       }
   resizeOutOfFlow(comp, built);
@@ -2630,6 +2836,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -2667,7 +2874,7 @@ async function amendComponent(comp, C) {
     applyOverlay(comp, childNode, childSpec);
     applyShapeAbsolute(comp, childNode, childSpec);
     if (childSpec.pct != null) {
-      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -2675,10 +2882,10 @@ async function amendComponent(comp, C) {
       !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
     ) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
   }
   resizeOutOfFlow(comp, built);
@@ -2899,6 +3106,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -2917,7 +3125,11 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  const degradedFrom = DEGRADATIONS.length;
+  results.push(withCodeOnlyFacts(await syncOne(C), C, degradedFrom));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 
@@ -2935,7 +3147,7 @@ const COMPONENTS = [
     "contractId": "fluent.badge",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Badge — generated from contract fluent.badge v0.2.0 †",
+    "description": "Badge — generated from contract fluent.badge v0.2.0 † (9 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -12362,6 +12574,107 @@ const COMPONENTS = [
     "semantics": {
       "element": "div"
     },
+    "codeOnlyFacts": [
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.badge.root.border-bottom-color.{appearance}.{color}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 192,
+          "of": 192
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.badge.root.border-left-color.{appearance}.{color}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 192,
+          "of": 192
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.badge.root.border-right-color.{appearance}.{color}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 192,
+          "of": 192
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.badge.root.border-top-color.{appearance}.{color}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 192,
+          "of": 192
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 192,
+          "of": 192
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 192,
+          "of": 192
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 192,
+          "of": 192
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 192,
+          "of": 192
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 192,
+          "of": 192
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -12418,6 +12731,26 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }
+// NAMED RUNTIME DEGRADATIONS (R7, 2026-08-22). The emitted script used to
+// carry ~30 bare try/catch swallows (a comment where the handler should be) — every one a
+// canvas fact the spec asked for and the API refused (FILL sizing, out-of-
+// flow placement, min sizes, truncation, a paint base) with NO trace in the
+// result. Each now pushes ONE named entry here; syncOne's report carries
+// the entries raised while it ran as report.degradations (the same code /
+// nodePath / message shape the dump script's _degradations uses), and the
+// plugin UI lists them under the set beside the code-only facts. A
+// degradation is never a failure: the sync still completes, it just says so.
+const DEGRADATIONS = [];
+function nodePathOf(node) {
+  const parts = [];
+  let n = node;
+  let guard = 0;
+  while (n && n.type !== 'PAGE' && n.type !== 'DOCUMENT' && guard++ < 64) { parts.unshift(n.name || n.type); n = n.parent; }
+  return parts.join('/');
+}
+function degrade(code, node, message, e) {
+  DEGRADATIONS.push({ code: code, nodePath: node ? nodePathOf(node) : '', message: message + (e && e.message ? ' (' + e.message + ')' : '') });
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -12441,7 +12774,7 @@ const boundPaint = (varName, consumer) => {
         base = { r: r.value.r, g: r.value.g, b: r.value.b };
         if (typeof r.value.a === 'number') alpha = r.value.a;
       }
-    } catch (e) { /* fall back to black base */ }
+    } catch (e) { degrade('FC-RT-PAINT-BASE-UNRESOLVED', consumer, 'variable ' + varName + ' could not be resolved for this consumer; the bound paint keeps its binding over a black literal base', e); }
   }
   return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base, opacity: alpha }, 'color', v);
 };
@@ -12615,7 +12948,7 @@ function setInstanceProps(inst, props, owner) {
   const instProps = inst.componentProperties;
   const instKeys = Object.keys(instProps);
   let ownerDefs = {};
-  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; }
+  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; degrade('FC-RT-PROP-DEFS-UNREADABLE', owner, 'componentPropertyDefinitions unreadable on the owner; property references were resolved without them', e); }
   const ownerKeys = Object.keys(ownerDefs);
   const variantProps = {};
   const otherProps = {};
@@ -12757,8 +13090,8 @@ function applyFrameSpec(node, spec) {
     if (spec.lits && spec.lits[field] !== undefined) continue;
     try {
       if (node.boundVariables && node.boundVariables[field]) node.setBoundVariable(field, null);
-    } catch (e) { /* field not bindable on this node type */ }
-    try { node[field] = 0; } catch (e) { /* not an auto-layout frame */ }
+    } catch (e) { degrade('FC-RT-FIELD-UNBIND-REFUSED', node, 'a stale ' + field + ' variable could not be unbound before the reset', e); }
+    try { node[field] = 0; } catch (e) { degrade('FC-RT-FIELD-RESET-REFUSED', node, field + ' could not be reset to 0 (not an auto-layout frame)', e); }
   }
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -12802,7 +13135,7 @@ function applyOverlay(parent, childNode, childSpec) {
     else if (p === 'bottom') { childNode.x = 0; childNode.y = parent.height; }
     else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
     else { childNode.x = parent.width; childNode.y = 0; }
-  } catch (e) { /* parent not auto-layout — leave in flow */ }
+  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
 async function buildNode(spec, registry) {
@@ -12940,7 +13273,7 @@ async function buildNode(spec, registry) {
       if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
       if (spec.layout && spec.layout.stretchChildren) {
-        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', inst, 'slot default content could not stretch (layoutSizingHorizontal FILL refused); it keeps its own width', e); }
       }
     }
     registry.slots.push({ spec, slot: node });
@@ -12962,7 +13295,7 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
-      } catch (e) { /* track not fixed-width */ }
+      } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       child.type === 'frame' && (!child.children || child.children.length === 0) &&
@@ -12981,12 +13314,12 @@ async function buildNode(spec, registry) {
       // overflowed their fixed-height tracks). Width stays the spec'd
       // fraction (meter pct) or the placeholder box, named in the component
       // description.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
   }
   return node;
@@ -13198,6 +13531,43 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C, degradedFrom) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  // R7: the runtime degradations raised while this set synced ride the same
+  // per-set result — named beside the facts, never only in a console.
+  if (typeof degradedFrom === 'number' && DEGRADATIONS.length > degradedFrom) report.degradations = DEGRADATIONS.slice(degradedFrom);
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -13220,6 +13590,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -13313,7 +13686,7 @@ async function amendSet(set, C) {
         built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
         if (childSpec.pct != null) {
-          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
         }
         if (
           childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -13321,10 +13694,10 @@ async function amendSet(set, C) {
           !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
         ) {
           // #60 fix 4 (amend path): same empty-child declared default.
-          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
         }
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
       }
       report.rebuiltVariants++;
@@ -13461,6 +13834,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -13496,7 +13870,7 @@ async function amendComponent(comp, C) {
     built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
     if (childSpec.pct != null) {
-      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -13504,10 +13878,10 @@ async function amendComponent(comp, C) {
       !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
     ) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
   }
   for (const t of registry.texts) {
@@ -13727,6 +14101,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -13745,7 +14120,11 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  const degradedFrom = DEGRADATIONS.length;
+  results.push(withCodeOnlyFacts(await syncOne(C), C, degradedFrom));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 
@@ -13763,7 +14142,7 @@ const COMPONENTS = [
     "contractId": "fluent.button",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Button — generated from contract fluent.button v0.2.0 †",
+    "description": "Button — generated from contract fluent.button v0.2.0 † (33 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -17287,6 +17666,565 @@ const COMPONENTS = [
         "to": "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active"
       }
     ],
+    "codeOnlyFacts": [
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.button.root.border-bottom-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.button.root.border-bottom-color-state-disabled.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.button.root.border-bottom-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.shared.color-000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.button.root.border-left-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.button.root.border-left-color-state-disabled.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.button.root.border-left-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.shared.color-000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.button.root.border-right-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.button.root.border-right-color-state-disabled.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.button.root.border-right-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.shared.color-000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.button.root.border-top-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.button.root.border-top-color-state-disabled.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.button.root.border-top-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Hover",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.shared.color-000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.button.root.outline-color.outline}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 13,
+          "of": 65,
+          "names": [
+            "Appearance=Outline, Size=Medium, Shape=Rounded",
+            "Appearance=Outline, Size=Medium, Shape=Circular",
+            "Appearance=Outline, Size=Medium, Shape=Square",
+            "Appearance=Outline, Size=Small, Shape=Rounded",
+            "Appearance=Outline, Size=Small, Shape=Circular",
+            "Appearance=Outline, Size=Small, Shape=Square",
+            "Appearance=Outline, Size=Large, Shape=Rounded",
+            "Appearance=Outline, Size=Large, Shape=Circular",
+            "Appearance=Outline, Size=Large, Shape=Square",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.button.root.outline-color.primary}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 13,
+          "of": 65,
+          "names": [
+            "Appearance=Primary, Size=Medium, Shape=Rounded",
+            "Appearance=Primary, Size=Medium, Shape=Circular",
+            "Appearance=Primary, Size=Medium, Shape=Square",
+            "Appearance=Primary, Size=Small, Shape=Rounded",
+            "Appearance=Primary, Size=Small, Shape=Circular",
+            "Appearance=Primary, Size=Small, Shape=Square",
+            "Appearance=Primary, Size=Large, Shape=Rounded",
+            "Appearance=Primary, Size=Large, Shape=Circular",
+            "Appearance=Primary, Size=Large, Shape=Square",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.button.root.outline-color.secondary}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 13,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded",
+            "Appearance=Secondary, Size=Medium, Shape=Circular",
+            "Appearance=Secondary, Size=Medium, Shape=Square",
+            "Appearance=Secondary, Size=Small, Shape=Rounded",
+            "Appearance=Secondary, Size=Small, Shape=Circular",
+            "Appearance=Secondary, Size=Small, Shape=Square",
+            "Appearance=Secondary, Size=Large, Shape=Rounded",
+            "Appearance=Secondary, Size=Large, Shape=Circular",
+            "Appearance=Secondary, Size=Large, Shape=Square",
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.button.root.outline-color.subtle}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 13,
+          "of": 65,
+          "names": [
+            "Appearance=Subtle, Size=Medium, Shape=Rounded",
+            "Appearance=Subtle, Size=Medium, Shape=Circular",
+            "Appearance=Subtle, Size=Medium, Shape=Square",
+            "Appearance=Subtle, Size=Small, Shape=Rounded",
+            "Appearance=Subtle, Size=Small, Shape=Circular",
+            "Appearance=Subtle, Size=Small, Shape=Square",
+            "Appearance=Subtle, Size=Large, Shape=Rounded",
+            "Appearance=Subtle, Size=Large, Shape=Circular",
+            "Appearance=Subtle, Size=Large, Shape=Square",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.button.root.outline-color.transparent}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 13,
+          "of": 65,
+          "names": [
+            "Appearance=Transparent, Size=Medium, Shape=Rounded",
+            "Appearance=Transparent, Size=Medium, Shape=Circular",
+            "Appearance=Transparent, Size=Medium, Shape=Square",
+            "Appearance=Transparent, Size=Small, Shape=Rounded",
+            "Appearance=Transparent, Size=Small, Shape=Circular",
+            "Appearance=Transparent, Size=Small, Shape=Square",
+            "Appearance=Transparent, Size=Large, Shape=Rounded",
+            "Appearance=Transparent, Size=Large, Shape=Circular",
+            "Appearance=Transparent, Size=Large, Shape=Square",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Active",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Disabled",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "z-index",
+        "value": "{imported.button.root.z-index-state-focus-visible}",
+        "reason": "paint order on canvas is CHILD ORDER — a z-index a part carries independently of its DOM order has no field.",
+        "variants": {
+          "count": 5,
+          "of": 65,
+          "names": [
+            "Appearance=Secondary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Primary, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Shape=Rounded, State=Focus Visible",
+            "Appearance=Transparent, Size=Medium, Shape=Rounded, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-left-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-right-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-top-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "declared for the active state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "declared for the hover state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "outline-style",
+        "value": "solid",
+        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "transition-duration",
+        "value": "0.1s",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "transition-property",
+        "value": "background, border, color",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.33, 0, 0.67, 1)",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 65,
+          "of": 65
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -17343,6 +18281,26 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }
+// NAMED RUNTIME DEGRADATIONS (R7, 2026-08-22). The emitted script used to
+// carry ~30 bare try/catch swallows (a comment where the handler should be) — every one a
+// canvas fact the spec asked for and the API refused (FILL sizing, out-of-
+// flow placement, min sizes, truncation, a paint base) with NO trace in the
+// result. Each now pushes ONE named entry here; syncOne's report carries
+// the entries raised while it ran as report.degradations (the same code /
+// nodePath / message shape the dump script's _degradations uses), and the
+// plugin UI lists them under the set beside the code-only facts. A
+// degradation is never a failure: the sync still completes, it just says so.
+const DEGRADATIONS = [];
+function nodePathOf(node) {
+  const parts = [];
+  let n = node;
+  let guard = 0;
+  while (n && n.type !== 'PAGE' && n.type !== 'DOCUMENT' && guard++ < 64) { parts.unshift(n.name || n.type); n = n.parent; }
+  return parts.join('/');
+}
+function degrade(code, node, message, e) {
+  DEGRADATIONS.push({ code: code, nodePath: node ? nodePathOf(node) : '', message: message + (e && e.message ? ' (' + e.message + ')' : '') });
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -17366,7 +18324,7 @@ const boundPaint = (varName, consumer) => {
         base = { r: r.value.r, g: r.value.g, b: r.value.b };
         if (typeof r.value.a === 'number') alpha = r.value.a;
       }
-    } catch (e) { /* fall back to black base */ }
+    } catch (e) { degrade('FC-RT-PAINT-BASE-UNRESOLVED', consumer, 'variable ' + varName + ' could not be resolved for this consumer; the bound paint keeps its binding over a black literal base', e); }
   }
   return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base, opacity: alpha }, 'color', v);
 };
@@ -17540,7 +18498,7 @@ function setInstanceProps(inst, props, owner) {
   const instProps = inst.componentProperties;
   const instKeys = Object.keys(instProps);
   let ownerDefs = {};
-  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; }
+  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; degrade('FC-RT-PROP-DEFS-UNREADABLE', owner, 'componentPropertyDefinitions unreadable on the owner; property references were resolved without them', e); }
   const ownerKeys = Object.keys(ownerDefs);
   const variantProps = {};
   const otherProps = {};
@@ -17682,8 +18640,8 @@ function applyFrameSpec(node, spec) {
     if (spec.lits && spec.lits[field] !== undefined) continue;
     try {
       if (node.boundVariables && node.boundVariables[field]) node.setBoundVariable(field, null);
-    } catch (e) { /* field not bindable on this node type */ }
-    try { node[field] = 0; } catch (e) { /* not an auto-layout frame */ }
+    } catch (e) { degrade('FC-RT-FIELD-UNBIND-REFUSED', node, 'a stale ' + field + ' variable could not be unbound before the reset', e); }
+    try { node[field] = 0; } catch (e) { degrade('FC-RT-FIELD-RESET-REFUSED', node, field + ' could not be reset to 0 (not an auto-layout frame)', e); }
   }
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -17739,7 +18697,7 @@ function applyOverlay(parent, childNode, childSpec) {
     else if (p === 'bottom') { childNode.x = 0; childNode.y = parent.height; }
     else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
     else { childNode.x = parent.width; childNode.y = 0; }
-  } catch (e) { /* parent not auto-layout — leave in flow */ }
+  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
 async function buildNode(spec, registry) {
@@ -17793,7 +18751,7 @@ async function buildNode(spec, registry) {
           node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
           fontResolved = true;
           break;
-        } catch (e) { /* try this family's own spelling of the same face */ }
+        } catch (e) { /* a RETRY, not a swallow: the next candidate is this family's own spelling of the same face; the final outcome is named below */ }
       }
       if (!fontResolved) {
         console.warn(
@@ -17801,13 +18759,14 @@ async function buildNode(spec, registry) {
           ' is not available in this file (tried ' + styleCandidates.join(', ') +
           ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
         );
+        degrade('FC-FONT-STYLE-UNRESOLVED', node, spec.fontFamily + ' / ' + wantStyle + ' is not available in this file (tried ' + styleCandidates.join(', ') + '); Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones');
       }
     }
     if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
     if (spec.textCase) node.textCase = spec.textCase;
     if (spec.textDecoration) node.textDecoration = spec.textDecoration;
     if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
-    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { /* older API */ } }
+    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { degrade('FC-RT-TRUNCATION-REFUSED', node, 'textTruncation ENDING refused (older Plugin API); the declared ellipsis does not draw', e); } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -17925,7 +18884,7 @@ async function buildNode(spec, registry) {
       if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
       if (spec.layout && spec.layout.stretchChildren) {
-        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', inst, 'slot default content could not stretch (layoutSizingHorizontal FILL refused); it keeps its own width', e); }
       }
     }
     registry.slots.push({ spec, slot: node });
@@ -17947,7 +18906,7 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
-      } catch (e) { /* track not fixed-width */ }
+      } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       child.type === 'frame' && (!child.children || child.children.length === 0) &&
@@ -17966,12 +18925,12 @@ async function buildNode(spec, registry) {
       // overflowed their fixed-height tracks). Width stays the spec'd
       // fraction (meter pct) or the placeholder box, named in the component
       // description.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
   }
   return node;
@@ -18183,6 +19142,43 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C, degradedFrom) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  // R7: the runtime degradations raised while this set synced ride the same
+  // per-set result — named beside the facts, never only in a console.
+  if (typeof degradedFrom === 'number' && DEGRADATIONS.length > degradedFrom) report.degradations = DEGRADATIONS.slice(degradedFrom);
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -18205,6 +19201,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -18298,7 +19297,7 @@ async function amendSet(set, C) {
         built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
         if (childSpec.pct != null) {
-          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
         }
         if (
           childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -18306,10 +19305,10 @@ async function amendSet(set, C) {
           !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
         ) {
           // #60 fix 4 (amend path): same empty-child declared default.
-          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
         }
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
       }
       report.rebuiltVariants++;
@@ -18446,6 +19445,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -18481,7 +19481,7 @@ async function amendComponent(comp, C) {
     built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
     if (childSpec.pct != null) {
-      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -18489,10 +19489,10 @@ async function amendComponent(comp, C) {
       !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
     ) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
   }
   for (const t of registry.texts) {
@@ -18712,6 +19712,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -18730,7 +19731,11 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  const degradedFrom = DEGRADATIONS.length;
+  results.push(withCodeOnlyFacts(await syncOne(C), C, degradedFrom));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 
@@ -18748,7 +19753,7 @@ const COMPONENTS = [
     "contractId": "fluent.card",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Card — generated from contract fluent.card v0.2.0 †",
+    "description": "Card — generated from contract fluent.card v0.2.0 † (52 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -23600,6 +24605,745 @@ const COMPONENTS = [
         "to": "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Active"
       }
     ],
+    "codeOnlyFacts": [
+      {
+        "part": "cardheader",
+        "kind": "channel",
+        "channel": "flex-grow",
+        "value": "{imported.card.cardheader.flex-grow.horizontal}",
+        "reason": "the canvas approximates growth with layoutGrow/FILL, which is a boolean, not a ratio.",
+        "variants": {
+          "count": 12,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Horizontal",
+            "Appearance=Filled, Size=Small, Orientation=Horizontal",
+            "Appearance=Filled, Size=Large, Orientation=Horizontal",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Horizontal",
+            "Appearance=Filled Alternative, Size=Small, Orientation=Horizontal",
+            "Appearance=Filled Alternative, Size=Large, Orientation=Horizontal",
+            "Appearance=Outline, Size=Medium, Orientation=Horizontal",
+            "Appearance=Outline, Size=Small, Orientation=Horizontal",
+            "Appearance=Outline, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Large, Orientation=Horizontal"
+          ]
+        }
+      },
+      {
+        "part": "cardheader",
+        "kind": "channel",
+        "channel": "flex-grow",
+        "value": "{imported.card.cardheader.flex-grow.vertical}",
+        "reason": "the canvas approximates growth with layoutGrow/FILL, which is a boolean, not a ratio.",
+        "variants": {
+          "count": 28,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical",
+            "Appearance=Filled, Size=Small, Orientation=Vertical",
+            "Appearance=Filled, Size=Large, Orientation=Vertical",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical",
+            "Appearance=Filled Alternative, Size=Small, Orientation=Vertical",
+            "Appearance=Filled Alternative, Size=Large, Orientation=Vertical",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical",
+            "Appearance=Outline, Size=Small, Orientation=Vertical",
+            "Appearance=Outline, Size=Large, Orientation=Vertical",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle, Size=Large, Orientation=Vertical",
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Active",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Active",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Active",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Active"
+          ],
+          "more": 4
+        }
+      },
+      {
+        "part": "cardheader",
+        "kind": "channel",
+        "channel": "flex-shrink",
+        "value": "{imported.card.cardheader.flex-shrink}",
+        "reason": "Figma auto-layout children do not shrink below their content — there is no shrink factor.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "cardheader",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "cardheader",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "cardheader",
+        "kind": "declared",
+        "channel": "user-select",
+        "value": "none",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "checkbox",
+        "kind": "declared",
+        "channel": "appearance",
+        "value": "auto",
+        "reason": "Native form-control appearance is reset only in the coded component.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "checkbox",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "default",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "checkbox",
+        "kind": "declared",
+        "channel": "display",
+        "value": "none",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "checkbox",
+        "kind": "declared",
+        "channel": "outline-style",
+        "value": "auto",
+        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "checkbox",
+        "kind": "declared",
+        "channel": "position",
+        "value": "absolute",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "checkbox",
+        "kind": "declared",
+        "channel": "text-wrap-mode",
+        "value": "nowrap",
+        "reason": "Line-breaking rules differ: Figma wraps by box width only.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "checkbox",
+        "kind": "declared",
+        "channel": "user-select",
+        "value": "none",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "user-select",
+        "value": "none",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "declared",
+        "channel": "user-select",
+        "value": "none",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "declared",
+        "channel": "user-select",
+        "value": "none",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.shared.color-e0e0e0}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.shared.color-e0e0e0}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.shared.color-e0e0e0}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.shared.color-e0e0e0}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "caret-color",
+        "value": "{imported.shared.color-bdbdbd}",
+        "reason": "the text caret is runtime UI, not canvas ink.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "column-rule-color",
+        "value": "{imported.shared.color-bdbdbd}",
+        "reason": "a column-rule longhand the computed sweep enumerates; the canvas has no column rules.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.card.root.row-gap.large}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 8,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Large, Orientation=Vertical",
+            "Appearance=Filled, Size=Large, Orientation=Horizontal",
+            "Appearance=Filled Alternative, Size=Large, Orientation=Vertical",
+            "Appearance=Filled Alternative, Size=Large, Orientation=Horizontal",
+            "Appearance=Outline, Size=Large, Orientation=Vertical",
+            "Appearance=Outline, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Large, Orientation=Vertical",
+            "Appearance=Subtle, Size=Large, Orientation=Horizontal"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.card.root.row-gap.medium}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 24,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical",
+            "Appearance=Filled, Size=Medium, Orientation=Horizontal",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Horizontal",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical",
+            "Appearance=Outline, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle, Size=Medium, Orientation=Horizontal",
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Active",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Active",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Active",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Active",
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Hover",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Hover",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Hover",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.card.root.row-gap.small}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 8,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Small, Orientation=Vertical",
+            "Appearance=Filled, Size=Small, Orientation=Horizontal",
+            "Appearance=Filled Alternative, Size=Small, Orientation=Vertical",
+            "Appearance=Filled Alternative, Size=Small, Orientation=Horizontal",
+            "Appearance=Outline, Size=Small, Orientation=Vertical",
+            "Appearance=Outline, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle, Size=Small, Orientation=Horizontal"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "row-rule-color",
+        "value": "{imported.shared.color-bdbdbd}",
+        "reason": "a Chromium GAP-DECORATION longhand (CSS gap decorations) that the computed sweep enumerates for every element — nobody authored it, and neither surface paints it. Registered so it is CARRIED and NAMED rather than silently believed.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "text-decoration-color",
+        "value": "{imported.shared.color-bdbdbd}",
+        "reason": "Figma textDecoration is an enum with no independent colour.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "text-emphasis-color",
+        "value": "{imported.shared.color-bdbdbd}",
+        "reason": "Figma has no text-emphasis marks.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "user-select",
+        "value": "none",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      }
+    ],
     "colW": 488
   }
 ];
@@ -23656,6 +25400,26 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }
+// NAMED RUNTIME DEGRADATIONS (R7, 2026-08-22). The emitted script used to
+// carry ~30 bare try/catch swallows (a comment where the handler should be) — every one a
+// canvas fact the spec asked for and the API refused (FILL sizing, out-of-
+// flow placement, min sizes, truncation, a paint base) with NO trace in the
+// result. Each now pushes ONE named entry here; syncOne's report carries
+// the entries raised while it ran as report.degradations (the same code /
+// nodePath / message shape the dump script's _degradations uses), and the
+// plugin UI lists them under the set beside the code-only facts. A
+// degradation is never a failure: the sync still completes, it just says so.
+const DEGRADATIONS = [];
+function nodePathOf(node) {
+  const parts = [];
+  let n = node;
+  let guard = 0;
+  while (n && n.type !== 'PAGE' && n.type !== 'DOCUMENT' && guard++ < 64) { parts.unshift(n.name || n.type); n = n.parent; }
+  return parts.join('/');
+}
+function degrade(code, node, message, e) {
+  DEGRADATIONS.push({ code: code, nodePath: node ? nodePathOf(node) : '', message: message + (e && e.message ? ' (' + e.message + ')' : '') });
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -23679,7 +25443,7 @@ const boundPaint = (varName, consumer) => {
         base = { r: r.value.r, g: r.value.g, b: r.value.b };
         if (typeof r.value.a === 'number') alpha = r.value.a;
       }
-    } catch (e) { /* fall back to black base */ }
+    } catch (e) { degrade('FC-RT-PAINT-BASE-UNRESOLVED', consumer, 'variable ' + varName + ' could not be resolved for this consumer; the bound paint keeps its binding over a black literal base', e); }
   }
   return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base, opacity: alpha }, 'color', v);
 };
@@ -23853,7 +25617,7 @@ function setInstanceProps(inst, props, owner) {
   const instProps = inst.componentProperties;
   const instKeys = Object.keys(instProps);
   let ownerDefs = {};
-  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; }
+  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; degrade('FC-RT-PROP-DEFS-UNREADABLE', owner, 'componentPropertyDefinitions unreadable on the owner; property references were resolved without them', e); }
   const ownerKeys = Object.keys(ownerDefs);
   const variantProps = {};
   const otherProps = {};
@@ -23995,8 +25759,8 @@ function applyFrameSpec(node, spec) {
     if (spec.lits && spec.lits[field] !== undefined) continue;
     try {
       if (node.boundVariables && node.boundVariables[field]) node.setBoundVariable(field, null);
-    } catch (e) { /* field not bindable on this node type */ }
-    try { node[field] = 0; } catch (e) { /* not an auto-layout frame */ }
+    } catch (e) { degrade('FC-RT-FIELD-UNBIND-REFUSED', node, 'a stale ' + field + ' variable could not be unbound before the reset', e); }
+    try { node[field] = 0; } catch (e) { degrade('FC-RT-FIELD-RESET-REFUSED', node, field + ' could not be reset to 0 (not an auto-layout frame)', e); }
   }
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -24052,7 +25816,7 @@ function applyOverlay(parent, childNode, childSpec) {
     else if (p === 'bottom') { childNode.x = 0; childNode.y = parent.height; }
     else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
     else { childNode.x = parent.width; childNode.y = 0; }
-  } catch (e) { /* parent not auto-layout — leave in flow */ }
+  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
 // Round 5d: auto-layout has no per-child margin — a child carrying residual
@@ -24067,7 +25831,7 @@ function applyMarginBox(parent, childNode, childSpec, registry) {
   if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
   try {
     if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;
-  } catch (e) { /* nodes without layout sizing */ }
+  } catch (e) { degrade('FC-RT-MARGIN-BOX-SIZING-UNREADABLE', childNode, 'layout sizing could not be read before the margin box was applied; applied as if the child were not FILL-sized', e); }
   const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
   if (!t && !r && !b && !l) return;
   const w = Math.max(childNode.width + l + r, 0.01);
@@ -24227,7 +25991,7 @@ async function buildNode(spec, registry) {
       if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
       if (spec.layout && spec.layout.stretchChildren) {
-        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', inst, 'slot default content could not stretch (layoutSizingHorizontal FILL refused); it keeps its own width', e); }
       }
     }
     registry.slots.push({ spec, slot: node });
@@ -24249,7 +26013,7 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
-      } catch (e) { /* track not fixed-width */ }
+      } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       child.type === 'frame' && (!child.children || child.children.length === 0) &&
@@ -24268,12 +26032,12 @@ async function buildNode(spec, registry) {
       // overflowed their fixed-height tracks). Width stays the spec'd
       // fraction (meter pct) or the placeholder box, named in the component
       // description.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
     applyMarginBox(node, childNode, child, registry);
   }
@@ -24486,6 +26250,43 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C, degradedFrom) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  // R7: the runtime degradations raised while this set synced ride the same
+  // per-set result — named beside the facts, never only in a console.
+  if (typeof degradedFrom === 'number' && DEGRADATIONS.length > degradedFrom) report.degradations = DEGRADATIONS.slice(degradedFrom);
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -24508,6 +26309,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -24601,7 +26405,7 @@ async function amendSet(set, C) {
         built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
         if (childSpec.pct != null) {
-          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
         }
         if (
           childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -24609,10 +26413,10 @@ async function amendSet(set, C) {
           !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
         ) {
           // #60 fix 4 (amend path): same empty-child declared default.
-          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
         }
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
     applyMarginBox(comp, childNode, childSpec, registry);
       }
@@ -24750,6 +26554,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -24785,7 +26590,7 @@ async function amendComponent(comp, C) {
     built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
     if (childSpec.pct != null) {
-      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -24793,10 +26598,10 @@ async function amendComponent(comp, C) {
       !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
     ) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
   }
   for (const t of registry.texts) {
@@ -25016,6 +26821,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -25034,7 +26840,11 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  const degradedFrom = DEGRADATIONS.length;
+  results.push(withCodeOnlyFacts(await syncOne(C), C, degradedFrom));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 
@@ -25052,7 +26862,7 @@ const COMPONENTS = [
     "contractId": "fluent.checkbox",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Checkbox — generated from contract fluent.checkbox v0.2.0 †",
+    "description": "Checkbox — generated from contract fluent.checkbox v0.2.0 † (59 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -27951,6 +29761,857 @@ const COMPONENTS = [
         "to": "Checked=Mixed, Size=Medium, Shape=Square, State=Active"
       }
     ],
+    "codeOnlyFacts": [
+      {
+        "part": "icon",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "icon",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "icon",
+        "kind": "declared",
+        "channel": "pointer-events",
+        "value": "none",
+        "reason": "Pointer-event gating exists only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "channel",
+        "channel": "flex-shrink",
+        "value": "{imported.checkbox.indicator.flex-shrink}",
+        "reason": "Figma auto-layout children do not shrink below their content — there is no shrink factor.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "border-left-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "border-right-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "border-top-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "default",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "pointer-events",
+        "value": "none",
+        "reason": "Pointer-event gating exists only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "appearance",
+        "value": "auto",
+        "reason": "Native form-control appearance is reset only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "default",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "display",
+        "value": "none",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "outline-style",
+        "value": "auto",
+        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "position",
+        "value": "absolute",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "default",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "part-1-0-0",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "part-1-0-0",
+        "kind": "declared",
+        "channel": "display",
+        "value": "inline",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "part-1-0-0",
+        "kind": "declared",
+        "channel": "pointer-events",
+        "value": "none",
+        "reason": "Pointer-event gating exists only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.checkbox.root.border-bottom-color-state-hover.{checked}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Hover",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Hover",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.checkbox.root.border-bottom-color.checked}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Checked, Size=Medium, Shape=Square",
+            "Checked=Checked, Size=Medium, Shape=Circular",
+            "Checked=Checked, Size=Large, Shape=Square",
+            "Checked=Checked, Size=Large, Shape=Circular",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.checkbox.root.border-bottom-color.mixed}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Mixed, Size=Medium, Shape=Square",
+            "Checked=Mixed, Size=Medium, Shape=Circular",
+            "Checked=Mixed, Size=Large, Shape=Square",
+            "Checked=Mixed, Size=Large, Shape=Circular",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Active",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.checkbox.root.border-bottom-color.unchecked}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square",
+            "Checked=Unchecked, Size=Medium, Shape=Circular",
+            "Checked=Unchecked, Size=Large, Shape=Square",
+            "Checked=Unchecked, Size=Large, Shape=Circular",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.shared.color-242424}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.shared.color-bdbdbd}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.checkbox.root.border-left-color-state-hover.{checked}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Hover",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Hover",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.checkbox.root.border-left-color.checked}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Checked, Size=Medium, Shape=Square",
+            "Checked=Checked, Size=Medium, Shape=Circular",
+            "Checked=Checked, Size=Large, Shape=Square",
+            "Checked=Checked, Size=Large, Shape=Circular",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.checkbox.root.border-left-color.mixed}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Mixed, Size=Medium, Shape=Square",
+            "Checked=Mixed, Size=Medium, Shape=Circular",
+            "Checked=Mixed, Size=Large, Shape=Square",
+            "Checked=Mixed, Size=Large, Shape=Circular",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Active",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.checkbox.root.border-left-color.unchecked}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square",
+            "Checked=Unchecked, Size=Medium, Shape=Circular",
+            "Checked=Unchecked, Size=Large, Shape=Square",
+            "Checked=Unchecked, Size=Large, Shape=Circular",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.shared.color-242424}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.shared.color-bdbdbd}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.checkbox.root.border-right-color-state-hover.{checked}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Hover",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Hover",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.checkbox.root.border-right-color.checked}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Checked, Size=Medium, Shape=Square",
+            "Checked=Checked, Size=Medium, Shape=Circular",
+            "Checked=Checked, Size=Large, Shape=Square",
+            "Checked=Checked, Size=Large, Shape=Circular",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.checkbox.root.border-right-color.mixed}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Mixed, Size=Medium, Shape=Square",
+            "Checked=Mixed, Size=Medium, Shape=Circular",
+            "Checked=Mixed, Size=Large, Shape=Square",
+            "Checked=Mixed, Size=Large, Shape=Circular",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Active",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.checkbox.root.border-right-color.unchecked}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square",
+            "Checked=Unchecked, Size=Medium, Shape=Circular",
+            "Checked=Unchecked, Size=Large, Shape=Square",
+            "Checked=Unchecked, Size=Large, Shape=Circular",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.shared.color-242424}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.shared.color-bdbdbd}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.checkbox.root.border-top-color-state-hover.{checked}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Hover",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Hover",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.checkbox.root.border-top-color.checked}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Checked, Size=Medium, Shape=Square",
+            "Checked=Checked, Size=Medium, Shape=Circular",
+            "Checked=Checked, Size=Large, Shape=Square",
+            "Checked=Checked, Size=Large, Shape=Circular",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.checkbox.root.border-top-color.mixed}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Mixed, Size=Medium, Shape=Square",
+            "Checked=Mixed, Size=Medium, Shape=Circular",
+            "Checked=Mixed, Size=Large, Shape=Square",
+            "Checked=Mixed, Size=Large, Shape=Circular",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Active",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.checkbox.root.border-top-color.unchecked}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square",
+            "Checked=Unchecked, Size=Medium, Shape=Circular",
+            "Checked=Unchecked, Size=Large, Shape=Square",
+            "Checked=Unchecked, Size=Large, Shape=Circular",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.shared.color-242424}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.shared.color-bdbdbd}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 3,
+          "of": 24,
+          "names": [
+            "Checked=Unchecked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "default",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "max-width",
+        "value": "fit-content",
+        "reason": "Fluid max-width constraints live in code; the canvas draws the component at its real size (standing choice).",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -28007,6 +30668,26 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }
+// NAMED RUNTIME DEGRADATIONS (R7, 2026-08-22). The emitted script used to
+// carry ~30 bare try/catch swallows (a comment where the handler should be) — every one a
+// canvas fact the spec asked for and the API refused (FILL sizing, out-of-
+// flow placement, min sizes, truncation, a paint base) with NO trace in the
+// result. Each now pushes ONE named entry here; syncOne's report carries
+// the entries raised while it ran as report.degradations (the same code /
+// nodePath / message shape the dump script's _degradations uses), and the
+// plugin UI lists them under the set beside the code-only facts. A
+// degradation is never a failure: the sync still completes, it just says so.
+const DEGRADATIONS = [];
+function nodePathOf(node) {
+  const parts = [];
+  let n = node;
+  let guard = 0;
+  while (n && n.type !== 'PAGE' && n.type !== 'DOCUMENT' && guard++ < 64) { parts.unshift(n.name || n.type); n = n.parent; }
+  return parts.join('/');
+}
+function degrade(code, node, message, e) {
+  DEGRADATIONS.push({ code: code, nodePath: node ? nodePathOf(node) : '', message: message + (e && e.message ? ' (' + e.message + ')' : '') });
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -28030,7 +30711,7 @@ const boundPaint = (varName, consumer) => {
         base = { r: r.value.r, g: r.value.g, b: r.value.b };
         if (typeof r.value.a === 'number') alpha = r.value.a;
       }
-    } catch (e) { /* fall back to black base */ }
+    } catch (e) { degrade('FC-RT-PAINT-BASE-UNRESOLVED', consumer, 'variable ' + varName + ' could not be resolved for this consumer; the bound paint keeps its binding over a black literal base', e); }
   }
   return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base, opacity: alpha }, 'color', v);
 };
@@ -28204,7 +30885,7 @@ function setInstanceProps(inst, props, owner) {
   const instProps = inst.componentProperties;
   const instKeys = Object.keys(instProps);
   let ownerDefs = {};
-  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; }
+  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; degrade('FC-RT-PROP-DEFS-UNREADABLE', owner, 'componentPropertyDefinitions unreadable on the owner; property references were resolved without them', e); }
   const ownerKeys = Object.keys(ownerDefs);
   const variantProps = {};
   const otherProps = {};
@@ -28281,7 +30962,7 @@ function remeasureBirthBox(node, label, hasW, hasH) {
     if (axis === 'Vertical' && hasH) continue;
     const prop = 'layoutSizing' + axis;
     let mode;
-    try { mode = node[prop]; } catch (e) { continue; }
+    try { mode = node[prop]; } catch (e) { degrade('FC-RT-BIRTH-BOX-UNREADABLE', node, '"' + label + '": ' + prop + ' could not be read, so the HUG birth-box re-measure was skipped on this axis', e); continue; }
     if (mode !== 'HUG') continue;
     try {
       node[prop] = 'FIXED';
@@ -28375,8 +31056,8 @@ function applyFrameSpec(node, spec) {
     if (spec.lits && spec.lits[field] !== undefined) continue;
     try {
       if (node.boundVariables && node.boundVariables[field]) node.setBoundVariable(field, null);
-    } catch (e) { /* field not bindable on this node type */ }
-    try { node[field] = 0; } catch (e) { /* not an auto-layout frame */ }
+    } catch (e) { degrade('FC-RT-FIELD-UNBIND-REFUSED', node, 'a stale ' + field + ' variable could not be unbound before the reset', e); }
+    try { node[field] = 0; } catch (e) { degrade('FC-RT-FIELD-RESET-REFUSED', node, field + ' could not be reset to 0 (not an auto-layout frame)', e); }
   }
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -28420,7 +31101,7 @@ function applyOverlay(parent, childNode, childSpec) {
     else if (p === 'bottom') { childNode.x = 0; childNode.y = parent.height; }
     else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
     else { childNode.x = parent.width; childNode.y = 0; }
-  } catch (e) { /* parent not auto-layout — leave in flow */ }
+  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
 // Round 5d: auto-layout has no per-child margin — a child carrying residual
@@ -28435,7 +31116,7 @@ function applyMarginBox(parent, childNode, childSpec, registry) {
   if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
   try {
     if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;
-  } catch (e) { /* nodes without layout sizing */ }
+  } catch (e) { degrade('FC-RT-MARGIN-BOX-SIZING-UNREADABLE', childNode, 'layout sizing could not be read before the margin box was applied; applied as if the child were not FILL-sized', e); }
   const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
   if (!t && !r && !b && !l) return;
   const w = Math.max(childNode.width + l + r, 0.01);
@@ -28595,7 +31276,7 @@ async function buildNode(spec, registry) {
       if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
       if (spec.layout && spec.layout.stretchChildren) {
-        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', inst, 'slot default content could not stretch (layoutSizingHorizontal FILL refused); it keeps its own width', e); }
       }
     }
     registry.slots.push({ spec, slot: node });
@@ -28617,7 +31298,7 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
-      } catch (e) { /* track not fixed-width */ }
+      } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       child.type === 'frame' && (!child.children || child.children.length === 0) &&
@@ -28636,12 +31317,12 @@ async function buildNode(spec, registry) {
       // overflowed their fixed-height tracks). Width stays the spec'd
       // fraction (meter pct) or the placeholder box, named in the component
       // description.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
     applyMarginBox(node, childNode, child, registry);
   }
@@ -28878,6 +31559,43 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C, degradedFrom) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  // R7: the runtime degradations raised while this set synced ride the same
+  // per-set result — named beside the facts, never only in a console.
+  if (typeof degradedFrom === 'number' && DEGRADATIONS.length > degradedFrom) report.degradations = DEGRADATIONS.slice(degradedFrom);
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -28900,6 +31618,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -28993,7 +31714,7 @@ async function amendSet(set, C) {
         built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
         if (childSpec.pct != null) {
-          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
         }
         if (
           childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -29001,10 +31722,10 @@ async function amendSet(set, C) {
           !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
         ) {
           // #60 fix 4 (amend path): same empty-child declared default.
-          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
         }
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
     applyMarginBox(comp, childNode, childSpec, registry);
       }
@@ -29166,6 +31887,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -29201,7 +31923,7 @@ async function amendComponent(comp, C) {
     built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
     if (childSpec.pct != null) {
-      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -29209,10 +31931,10 @@ async function amendComponent(comp, C) {
       !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
     ) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
   }
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
@@ -29456,6 +32178,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -29474,7 +32197,11 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  const degradedFrom = DEGRADATIONS.length;
+  results.push(withCodeOnlyFacts(await syncOne(C), C, degradedFrom));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 
@@ -29492,7 +32219,7 @@ const COMPONENTS = [
     "contractId": "fluent.dialog",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Dialog — generated from contract fluent.dialog v0.2.0 †",
+    "description": "Dialog — generated from contract fluent.dialog v0.2.0 † (51 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -30234,6 +32961,613 @@ const COMPONENTS = [
     "semantics": {
       "element": "div"
     },
+    "codeOnlyFacts": [
+      {
+        "part": "dialogactions",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.shared.size-8}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 2,
+          "of": 3,
+          "names": [
+            "Modal Type=Modal",
+            "Modal Type=Alert"
+          ]
+        }
+      },
+      {
+        "part": "dialogactions-2",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.shared.size-8}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 1,
+          "of": 3,
+          "names": [
+            "Modal Type=Non Modal"
+          ]
+        }
+      },
+      {
+        "part": "dialogbody",
+        "kind": "channel",
+        "channel": "max-height",
+        "value": "{imported.dialog.dialogbody.max-height}",
+        "reason": "Figma has no maxHeight field (maxWidth exists; its height twin does not).",
+        "variants": {
+          "count": 2,
+          "of": 3,
+          "names": [
+            "Modal Type=Modal",
+            "Modal Type=Alert"
+          ]
+        }
+      },
+      {
+        "part": "dialogbody",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.shared.size-8}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 2,
+          "of": 3,
+          "names": [
+            "Modal Type=Modal",
+            "Modal Type=Alert"
+          ]
+        }
+      },
+      {
+        "part": "dialogbody-2",
+        "kind": "channel",
+        "channel": "max-height",
+        "value": "{imported.dialog.dialogbody-2.max-height}",
+        "reason": "Figma has no maxHeight field (maxWidth exists; its height twin does not).",
+        "variants": {
+          "count": 1,
+          "of": 3,
+          "names": [
+            "Modal Type=Non Modal"
+          ]
+        }
+      },
+      {
+        "part": "dialogbody-2",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.shared.size-8}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 1,
+          "of": 3,
+          "names": [
+            "Modal Type=Non Modal"
+          ]
+        }
+      },
+      {
+        "part": "dialogsurface",
+        "kind": "channel",
+        "channel": "max-height",
+        "value": "{imported.dialog.dialogsurface.max-height}",
+        "reason": "Figma has no maxHeight field (maxWidth exists; its height twin does not).",
+        "variants": {
+          "count": 2,
+          "of": 3,
+          "names": [
+            "Modal Type=Modal",
+            "Modal Type=Alert"
+          ]
+        }
+      },
+      {
+        "part": "dialogsurface",
+        "kind": "channel",
+        "channel": "scale",
+        "value": "{imported.dialog.dialogsurface.scale}",
+        "reason": "Figma has no scale transform — a node's size IS its box, so a scale factor cannot be lowered without silently rewriting the box; the third independent-transform longhand alongside translate (folded to absolute placement) and rotate (carried by the transform grammar).",
+        "variants": {
+          "count": 2,
+          "of": 3,
+          "names": [
+            "Modal Type=Modal",
+            "Modal Type=Alert"
+          ]
+        }
+      },
+      {
+        "part": "dialogsurface",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "dialogsurface",
+        "kind": "declared",
+        "channel": "border-left-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "dialogsurface",
+        "kind": "declared",
+        "channel": "border-right-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "dialogsurface",
+        "kind": "declared",
+        "channel": "border-top-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "dialogsurface",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "dialogsurface__backdrop",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "dialogtitle__action",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "declared",
+        "channel": "overflow-x",
+        "value": "auto",
+        "reason": "declared value outside the canvas grammar for this channel — hidden/clip clip natively (clipsContent). auto/scroll are scrolling, which exists only in code.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "declared",
+        "channel": "overflow-y",
+        "value": "auto",
+        "reason": "declared value outside the canvas grammar for this channel — hidden/clip clip natively (clipsContent). auto/scroll are scrolling, which exists only in code.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "declared",
+        "channel": "border-left-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "declared",
+        "channel": "border-right-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "declared",
+        "channel": "border-top-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "declared",
+        "channel": "transition-duration",
+        "value": "0.1s",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "declared",
+        "channel": "transition-property",
+        "value": "background, border, color",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "declared",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.33, 0, 0.67, 1)",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-4",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-5",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-5",
+        "kind": "declared",
+        "channel": "overflow-x",
+        "value": "auto",
+        "reason": "declared value outside the canvas grammar for this channel — hidden/clip clip natively (clipsContent). auto/scroll are scrolling, which exists only in code.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-5",
+        "kind": "declared",
+        "channel": "overflow-y",
+        "value": "auto",
+        "reason": "declared value outside the canvas grammar for this channel — hidden/clip clip natively (clipsContent). auto/scroll are scrolling, which exists only in code.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-6",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-6",
+        "kind": "declared",
+        "channel": "border-left-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-6",
+        "kind": "declared",
+        "channel": "border-right-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-6",
+        "kind": "declared",
+        "channel": "border-top-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-6",
+        "kind": "declared",
+        "channel": "transition-duration",
+        "value": "0.1s",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-6",
+        "kind": "declared",
+        "channel": "transition-property",
+        "value": "background, border, color",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label-6",
+        "kind": "declared",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.33, 0, 0.67, 1)",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 1,
+          "of": 3,
+          "names": [
+            "Modal Type=Non Modal"
+          ]
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 1,
+          "of": 3,
+          "names": [
+            "Modal Type=Non Modal"
+          ]
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 1,
+          "of": 3,
+          "names": [
+            "Modal Type=Non Modal"
+          ]
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 1,
+          "of": 3,
+          "names": [
+            "Modal Type=Non Modal"
+          ]
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "none",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "declared",
+        "channel": "border-left-style",
+        "value": "none",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "declared",
+        "channel": "border-right-style",
+        "value": "none",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "declared",
+        "channel": "border-top-style",
+        "value": "none",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "declared",
+        "channel": "display",
+        "value": "inline-block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "part-0-1-0",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "margin-top/margin-right/margin-bottom/margin-left",
+        "value": "623px/250px/623px/250px",
+        "reason": "root margins have no parent auto-layout to wrap — a COMPONENT_SET child is the component itself, so residual root margin is not canvas-drawable (FC-EMIT-ROOT-MARGIN-SILENT)",
+        "variants": {
+          "count": 1,
+          "of": 3,
+          "names": [
+            "Modal Type=Non Modal"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "root",
+        "kind": "preview",
+        "channel": "display",
+        "value": "block",
+        "reason": "a block root has no intrinsic width — the canvas draws a preview width, the code surface fills its container",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -30290,6 +33624,26 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }
+// NAMED RUNTIME DEGRADATIONS (R7, 2026-08-22). The emitted script used to
+// carry ~30 bare try/catch swallows (a comment where the handler should be) — every one a
+// canvas fact the spec asked for and the API refused (FILL sizing, out-of-
+// flow placement, min sizes, truncation, a paint base) with NO trace in the
+// result. Each now pushes ONE named entry here; syncOne's report carries
+// the entries raised while it ran as report.degradations (the same code /
+// nodePath / message shape the dump script's _degradations uses), and the
+// plugin UI lists them under the set beside the code-only facts. A
+// degradation is never a failure: the sync still completes, it just says so.
+const DEGRADATIONS = [];
+function nodePathOf(node) {
+  const parts = [];
+  let n = node;
+  let guard = 0;
+  while (n && n.type !== 'PAGE' && n.type !== 'DOCUMENT' && guard++ < 64) { parts.unshift(n.name || n.type); n = n.parent; }
+  return parts.join('/');
+}
+function degrade(code, node, message, e) {
+  DEGRADATIONS.push({ code: code, nodePath: node ? nodePathOf(node) : '', message: message + (e && e.message ? ' (' + e.message + ')' : '') });
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -30313,7 +33667,7 @@ const boundPaint = (varName, consumer) => {
         base = { r: r.value.r, g: r.value.g, b: r.value.b };
         if (typeof r.value.a === 'number') alpha = r.value.a;
       }
-    } catch (e) { /* fall back to black base */ }
+    } catch (e) { degrade('FC-RT-PAINT-BASE-UNRESOLVED', consumer, 'variable ' + varName + ' could not be resolved for this consumer; the bound paint keeps its binding over a black literal base', e); }
   }
   return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base, opacity: alpha }, 'color', v);
 };
@@ -30487,7 +33841,7 @@ function setInstanceProps(inst, props, owner) {
   const instProps = inst.componentProperties;
   const instKeys = Object.keys(instProps);
   let ownerDefs = {};
-  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; }
+  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; degrade('FC-RT-PROP-DEFS-UNREADABLE', owner, 'componentPropertyDefinitions unreadable on the owner; property references were resolved without them', e); }
   const ownerKeys = Object.keys(ownerDefs);
   const variantProps = {};
   const otherProps = {};
@@ -30564,7 +33918,7 @@ function remeasureBirthBox(node, label, hasW, hasH) {
     if (axis === 'Vertical' && hasH) continue;
     const prop = 'layoutSizing' + axis;
     let mode;
-    try { mode = node[prop]; } catch (e) { continue; }
+    try { mode = node[prop]; } catch (e) { degrade('FC-RT-BIRTH-BOX-UNREADABLE', node, '"' + label + '": ' + prop + ' could not be read, so the HUG birth-box re-measure was skipped on this axis', e); continue; }
     if (mode !== 'HUG') continue;
     try {
       node[prop] = 'FIXED';
@@ -30658,8 +34012,8 @@ function applyFrameSpec(node, spec) {
     if (spec.lits && spec.lits[field] !== undefined) continue;
     try {
       if (node.boundVariables && node.boundVariables[field]) node.setBoundVariable(field, null);
-    } catch (e) { /* field not bindable on this node type */ }
-    try { node[field] = 0; } catch (e) { /* not an auto-layout frame */ }
+    } catch (e) { degrade('FC-RT-FIELD-UNBIND-REFUSED', node, 'a stale ' + field + ' variable could not be unbound before the reset', e); }
+    try { node[field] = 0; } catch (e) { degrade('FC-RT-FIELD-RESET-REFUSED', node, field + ' could not be reset to 0 (not an auto-layout frame)', e); }
   }
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -30715,7 +34069,7 @@ function applyOverlay(parent, childNode, childSpec) {
     else if (p === 'bottom') { childNode.x = 0; childNode.y = parent.height; }
     else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
     else { childNode.x = parent.width; childNode.y = 0; }
-  } catch (e) { /* parent not auto-layout — leave in flow */ }
+  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
 // Round 5d: auto-layout has no per-child margin — a child carrying residual
@@ -30730,7 +34084,7 @@ function applyMarginBox(parent, childNode, childSpec, registry) {
   if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
   try {
     if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;
-  } catch (e) { /* nodes without layout sizing */ }
+  } catch (e) { degrade('FC-RT-MARGIN-BOX-SIZING-UNREADABLE', childNode, 'layout sizing could not be read before the margin box was applied; applied as if the child were not FILL-sized', e); }
   const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
   if (!t && !r && !b && !l) return;
   const w = Math.max(childNode.width + l + r, 0.01);
@@ -30815,7 +34169,7 @@ async function buildNode(spec, registry) {
           node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
           fontResolved = true;
           break;
-        } catch (e) { /* try this family's own spelling of the same face */ }
+        } catch (e) { /* a RETRY, not a swallow: the next candidate is this family's own spelling of the same face; the final outcome is named below */ }
       }
       if (!fontResolved) {
         console.warn(
@@ -30823,13 +34177,14 @@ async function buildNode(spec, registry) {
           ' is not available in this file (tried ' + styleCandidates.join(', ') +
           ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
         );
+        degrade('FC-FONT-STYLE-UNRESOLVED', node, spec.fontFamily + ' / ' + wantStyle + ' is not available in this file (tried ' + styleCandidates.join(', ') + '); Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones');
       }
     }
     if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
     if (spec.textCase) node.textCase = spec.textCase;
     if (spec.textDecoration) node.textDecoration = spec.textDecoration;
     if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
-    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { /* older API */ } }
+    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { degrade('FC-RT-TRUNCATION-REFUSED', node, 'textTruncation ENDING refused (older Plugin API); the declared ellipsis does not draw', e); } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -30947,7 +34302,7 @@ async function buildNode(spec, registry) {
       if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
       if (spec.layout && spec.layout.stretchChildren) {
-        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', inst, 'slot default content could not stretch (layoutSizingHorizontal FILL refused); it keeps its own width', e); }
       }
     }
     registry.slots.push({ spec, slot: node });
@@ -30969,7 +34324,7 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
-      } catch (e) { /* track not fixed-width */ }
+      } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       child.type === 'frame' && (!child.children || child.children.length === 0) &&
@@ -30988,12 +34343,12 @@ async function buildNode(spec, registry) {
       // overflowed their fixed-height tracks). Width stays the spec'd
       // fraction (meter pct) or the placeholder box, named in the component
       // description.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
     applyMarginBox(node, childNode, child, registry);
   }
@@ -31230,6 +34585,43 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C, degradedFrom) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  // R7: the runtime degradations raised while this set synced ride the same
+  // per-set result — named beside the facts, never only in a console.
+  if (typeof degradedFrom === 'number' && DEGRADATIONS.length > degradedFrom) report.degradations = DEGRADATIONS.slice(degradedFrom);
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -31252,6 +34644,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -31345,7 +34740,7 @@ async function amendSet(set, C) {
         built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
         if (childSpec.pct != null) {
-          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
         }
         if (
           childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -31353,10 +34748,10 @@ async function amendSet(set, C) {
           !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
         ) {
           // #60 fix 4 (amend path): same empty-child declared default.
-          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
         }
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
     applyMarginBox(comp, childNode, childSpec, registry);
       }
@@ -31518,6 +34913,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -31553,7 +34949,7 @@ async function amendComponent(comp, C) {
     built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
     if (childSpec.pct != null) {
-      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -31561,10 +34957,10 @@ async function amendComponent(comp, C) {
       !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
     ) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
   }
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
@@ -31808,6 +35204,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -31826,7 +35223,11 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  const degradedFrom = DEGRADATIONS.length;
+  results.push(withCodeOnlyFacts(await syncOne(C), C, degradedFrom));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 
@@ -31844,7 +35245,7 @@ const COMPONENTS = [
     "contractId": "fluent.input",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Input — generated from contract fluent.input v0.2.0 †",
+    "description": "Input — generated from contract fluent.input v0.2.0 † (45 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -35514,6 +38915,746 @@ const COMPONENTS = [
         "to": "Appearance=Filled Lighter Shadow, Size=Medium, State=Active"
       }
     ],
+    "codeOnlyFacts": [
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.shared.color-767676}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.shared.color-767676}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.shared.color-767676}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.shared.color-767676}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "flex-grow",
+        "value": "{imported.input.input.flex-grow}",
+        "reason": "the canvas approximates growth with layoutGrow/FILL, which is a boolean, not a ratio.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "appearance",
+        "value": "auto",
+        "reason": "Native form-control appearance is reset only in the coded component.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "text",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.input.root.border-bottom-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Filled Darker, Size=Medium, State=Active",
+            "Appearance=Filled Lighter, Size=Medium, State=Active",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Active",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.input.root.border-bottom-color-state-focus-visible.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.input.root.border-bottom-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Hover",
+            "Appearance=Underline, Size=Medium, State=Hover",
+            "Appearance=Filled Darker, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter, Size=Medium, State=Hover",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.input.root.border-bottom-color.outline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium",
+            "Appearance=Outline, Size=Small",
+            "Appearance=Outline, Size=Large",
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.input.root.border-bottom-color.underline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Underline, Size=Medium",
+            "Appearance=Underline, Size=Small",
+            "Appearance=Underline, Size=Large",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.shared.color-e0e0e0}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.input.root.border-left-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Filled Darker, Size=Medium, State=Active",
+            "Appearance=Filled Lighter, Size=Medium, State=Active",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Active",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.input.root.border-left-color-state-focus-visible.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.input.root.border-left-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Hover",
+            "Appearance=Underline, Size=Medium, State=Hover",
+            "Appearance=Filled Darker, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter, Size=Medium, State=Hover",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.input.root.border-left-color.outline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium",
+            "Appearance=Outline, Size=Small",
+            "Appearance=Outline, Size=Large",
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.input.root.border-left-color.underline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Underline, Size=Medium",
+            "Appearance=Underline, Size=Small",
+            "Appearance=Underline, Size=Large",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.shared.color-e0e0e0}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.input.root.border-right-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Filled Darker, Size=Medium, State=Active",
+            "Appearance=Filled Lighter, Size=Medium, State=Active",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Active",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.input.root.border-right-color-state-focus-visible.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.input.root.border-right-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Hover",
+            "Appearance=Underline, Size=Medium, State=Hover",
+            "Appearance=Filled Darker, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter, Size=Medium, State=Hover",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.input.root.border-right-color.outline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium",
+            "Appearance=Outline, Size=Small",
+            "Appearance=Outline, Size=Large",
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.input.root.border-right-color.underline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Underline, Size=Medium",
+            "Appearance=Underline, Size=Small",
+            "Appearance=Underline, Size=Large",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.shared.color-e0e0e0}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.input.root.border-top-color-state-active.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Filled Darker, Size=Medium, State=Active",
+            "Appearance=Filled Lighter, Size=Medium, State=Active",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Active",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Active"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.input.root.border-top-color-state-focus-visible.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.input.root.border-top-color-state-hover.{appearance}}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Hover",
+            "Appearance=Underline, Size=Medium, State=Hover",
+            "Appearance=Filled Darker, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter, Size=Medium, State=Hover",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Hover",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.input.root.border-top-color.outline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium",
+            "Appearance=Outline, Size=Small",
+            "Appearance=Outline, Size=Large",
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.input.root.border-top-color.underline}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 7,
+          "of": 42,
+          "names": [
+            "Appearance=Underline, Size=Medium",
+            "Appearance=Underline, Size=Small",
+            "Appearance=Underline, Size=Large",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.shared.color-e0e0e0}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.input.root.row-gap.large}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Large",
+            "Appearance=Underline, Size=Large",
+            "Appearance=Filled Darker, Size=Large",
+            "Appearance=Filled Lighter, Size=Large",
+            "Appearance=Filled Darker Shadow, Size=Large",
+            "Appearance=Filled Lighter Shadow, Size=Large"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.input.root.row-gap.medium}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 30,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Medium",
+            "Appearance=Underline, Size=Medium",
+            "Appearance=Filled Darker, Size=Medium",
+            "Appearance=Filled Lighter, Size=Medium",
+            "Appearance=Filled Darker Shadow, Size=Medium",
+            "Appearance=Filled Lighter Shadow, Size=Medium",
+            "Appearance=Outline, Size=Medium, State=Active",
+            "Appearance=Underline, Size=Medium, State=Active",
+            "Appearance=Filled Darker, Size=Medium, State=Active",
+            "Appearance=Filled Lighter, Size=Medium, State=Active",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Active",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Active",
+            "Appearance=Outline, Size=Medium, State=Disabled",
+            "Appearance=Underline, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter, Size=Medium, State=Disabled",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Disabled",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Disabled",
+            "Appearance=Outline, Size=Medium, State=Focus Visible",
+            "Appearance=Underline, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Darker Shadow, Size=Medium, State=Focus Visible",
+            "Appearance=Filled Lighter Shadow, Size=Medium, State=Focus Visible"
+          ],
+          "more": 6
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.input.root.row-gap.small}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 6,
+          "of": 42,
+          "names": [
+            "Appearance=Outline, Size=Small",
+            "Appearance=Underline, Size=Small",
+            "Appearance=Filled Darker, Size=Small",
+            "Appearance=Filled Lighter, Size=Small",
+            "Appearance=Filled Darker Shadow, Size=Small",
+            "Appearance=Filled Lighter Shadow, Size=Small"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "outline-style",
+        "value": "solid",
+        "reason": "declared for the active state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "outline-style",
+        "value": "solid",
+        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -35570,6 +39711,26 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }
+// NAMED RUNTIME DEGRADATIONS (R7, 2026-08-22). The emitted script used to
+// carry ~30 bare try/catch swallows (a comment where the handler should be) — every one a
+// canvas fact the spec asked for and the API refused (FILL sizing, out-of-
+// flow placement, min sizes, truncation, a paint base) with NO trace in the
+// result. Each now pushes ONE named entry here; syncOne's report carries
+// the entries raised while it ran as report.degradations (the same code /
+// nodePath / message shape the dump script's _degradations uses), and the
+// plugin UI lists them under the set beside the code-only facts. A
+// degradation is never a failure: the sync still completes, it just says so.
+const DEGRADATIONS = [];
+function nodePathOf(node) {
+  const parts = [];
+  let n = node;
+  let guard = 0;
+  while (n && n.type !== 'PAGE' && n.type !== 'DOCUMENT' && guard++ < 64) { parts.unshift(n.name || n.type); n = n.parent; }
+  return parts.join('/');
+}
+function degrade(code, node, message, e) {
+  DEGRADATIONS.push({ code: code, nodePath: node ? nodePathOf(node) : '', message: message + (e && e.message ? ' (' + e.message + ')' : '') });
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -35593,7 +39754,7 @@ const boundPaint = (varName, consumer) => {
         base = { r: r.value.r, g: r.value.g, b: r.value.b };
         if (typeof r.value.a === 'number') alpha = r.value.a;
       }
-    } catch (e) { /* fall back to black base */ }
+    } catch (e) { degrade('FC-RT-PAINT-BASE-UNRESOLVED', consumer, 'variable ' + varName + ' could not be resolved for this consumer; the bound paint keeps its binding over a black literal base', e); }
   }
   return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base, opacity: alpha }, 'color', v);
 };
@@ -35767,7 +39928,7 @@ function setInstanceProps(inst, props, owner) {
   const instProps = inst.componentProperties;
   const instKeys = Object.keys(instProps);
   let ownerDefs = {};
-  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; }
+  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; degrade('FC-RT-PROP-DEFS-UNREADABLE', owner, 'componentPropertyDefinitions unreadable on the owner; property references were resolved without them', e); }
   const ownerKeys = Object.keys(ownerDefs);
   const variantProps = {};
   const otherProps = {};
@@ -35909,8 +40070,8 @@ function applyFrameSpec(node, spec) {
     if (spec.lits && spec.lits[field] !== undefined) continue;
     try {
       if (node.boundVariables && node.boundVariables[field]) node.setBoundVariable(field, null);
-    } catch (e) { /* field not bindable on this node type */ }
-    try { node[field] = 0; } catch (e) { /* not an auto-layout frame */ }
+    } catch (e) { degrade('FC-RT-FIELD-UNBIND-REFUSED', node, 'a stale ' + field + ' variable could not be unbound before the reset', e); }
+    try { node[field] = 0; } catch (e) { degrade('FC-RT-FIELD-RESET-REFUSED', node, field + ' could not be reset to 0 (not an auto-layout frame)', e); }
   }
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -35966,7 +40127,7 @@ function applyOverlay(parent, childNode, childSpec) {
     else if (p === 'bottom') { childNode.x = 0; childNode.y = parent.height; }
     else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
     else { childNode.x = parent.width; childNode.y = 0; }
-  } catch (e) { /* parent not auto-layout — leave in flow */ }
+  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
 async function buildNode(spec, registry) {
@@ -36020,7 +40181,7 @@ async function buildNode(spec, registry) {
           node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
           fontResolved = true;
           break;
-        } catch (e) { /* try this family's own spelling of the same face */ }
+        } catch (e) { /* a RETRY, not a swallow: the next candidate is this family's own spelling of the same face; the final outcome is named below */ }
       }
       if (!fontResolved) {
         console.warn(
@@ -36028,13 +40189,14 @@ async function buildNode(spec, registry) {
           ' is not available in this file (tried ' + styleCandidates.join(', ') +
           ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
         );
+        degrade('FC-FONT-STYLE-UNRESOLVED', node, spec.fontFamily + ' / ' + wantStyle + ' is not available in this file (tried ' + styleCandidates.join(', ') + '); Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones');
       }
     }
     if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
     if (spec.textCase) node.textCase = spec.textCase;
     if (spec.textDecoration) node.textDecoration = spec.textDecoration;
     if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
-    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { /* older API */ } }
+    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { degrade('FC-RT-TRUNCATION-REFUSED', node, 'textTruncation ENDING refused (older Plugin API); the declared ellipsis does not draw', e); } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -36152,7 +40314,7 @@ async function buildNode(spec, registry) {
       if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
       if (spec.layout && spec.layout.stretchChildren) {
-        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', inst, 'slot default content could not stretch (layoutSizingHorizontal FILL refused); it keeps its own width', e); }
       }
     }
     registry.slots.push({ spec, slot: node });
@@ -36174,7 +40336,7 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
-      } catch (e) { /* track not fixed-width */ }
+      } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       child.type === 'frame' && (!child.children || child.children.length === 0) &&
@@ -36193,12 +40355,12 @@ async function buildNode(spec, registry) {
       // overflowed their fixed-height tracks). Width stays the spec'd
       // fraction (meter pct) or the placeholder box, named in the component
       // description.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
   }
   return node;
@@ -36410,6 +40572,43 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C, degradedFrom) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  // R7: the runtime degradations raised while this set synced ride the same
+  // per-set result — named beside the facts, never only in a console.
+  if (typeof degradedFrom === 'number' && DEGRADATIONS.length > degradedFrom) report.degradations = DEGRADATIONS.slice(degradedFrom);
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -36432,6 +40631,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -36525,7 +40727,7 @@ async function amendSet(set, C) {
         built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
         if (childSpec.pct != null) {
-          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
         }
         if (
           childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -36533,10 +40735,10 @@ async function amendSet(set, C) {
           !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
         ) {
           // #60 fix 4 (amend path): same empty-child declared default.
-          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
         }
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
       }
       report.rebuiltVariants++;
@@ -36673,6 +40875,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -36708,7 +40911,7 @@ async function amendComponent(comp, C) {
     built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
     if (childSpec.pct != null) {
-      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -36716,10 +40919,10 @@ async function amendComponent(comp, C) {
       !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
     ) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
   }
   for (const t of registry.texts) {
@@ -36939,6 +41142,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -36957,7 +41161,11 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  const degradedFrom = DEGRADATIONS.length;
+  results.push(withCodeOnlyFacts(await syncOne(C), C, degradedFrom));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 
@@ -36975,7 +41183,7 @@ const COMPONENTS = [
     "contractId": "fluent.spinner",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Spinner — generated from contract fluent.spinner v0.2.0 †",
+    "description": "Spinner — generated from contract fluent.spinner v0.2.0 † (12 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -42434,6 +46642,140 @@ const COMPONENTS = [
     "semantics": {
       "element": "div"
     },
+    "codeOnlyFacts": [
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "default",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "row-gap",
+        "value": "{imported.spinner.root.row-gap}",
+        "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "spinner",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "spinner",
+        "kind": "channel",
+        "channel": "flex-shrink",
+        "value": "{imported.spinner.spinner.flex-shrink}",
+        "reason": "Figma auto-layout children do not shrink below their content — there is no shrink factor.",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "spinner",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "spinner",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "spinner",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "spinner",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "spinner",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "spinnertail",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "spinnertail",
+        "kind": "declared",
+        "channel": "position",
+        "value": "absolute",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -42490,6 +46832,26 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }
+// NAMED RUNTIME DEGRADATIONS (R7, 2026-08-22). The emitted script used to
+// carry ~30 bare try/catch swallows (a comment where the handler should be) — every one a
+// canvas fact the spec asked for and the API refused (FILL sizing, out-of-
+// flow placement, min sizes, truncation, a paint base) with NO trace in the
+// result. Each now pushes ONE named entry here; syncOne's report carries
+// the entries raised while it ran as report.degradations (the same code /
+// nodePath / message shape the dump script's _degradations uses), and the
+// plugin UI lists them under the set beside the code-only facts. A
+// degradation is never a failure: the sync still completes, it just says so.
+const DEGRADATIONS = [];
+function nodePathOf(node) {
+  const parts = [];
+  let n = node;
+  let guard = 0;
+  while (n && n.type !== 'PAGE' && n.type !== 'DOCUMENT' && guard++ < 64) { parts.unshift(n.name || n.type); n = n.parent; }
+  return parts.join('/');
+}
+function degrade(code, node, message, e) {
+  DEGRADATIONS.push({ code: code, nodePath: node ? nodePathOf(node) : '', message: message + (e && e.message ? ' (' + e.message + ')' : '') });
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -42513,7 +46875,7 @@ const boundPaint = (varName, consumer) => {
         base = { r: r.value.r, g: r.value.g, b: r.value.b };
         if (typeof r.value.a === 'number') alpha = r.value.a;
       }
-    } catch (e) { /* fall back to black base */ }
+    } catch (e) { degrade('FC-RT-PAINT-BASE-UNRESOLVED', consumer, 'variable ' + varName + ' could not be resolved for this consumer; the bound paint keeps its binding over a black literal base', e); }
   }
   return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base, opacity: alpha }, 'color', v);
 };
@@ -42687,7 +47049,7 @@ function setInstanceProps(inst, props, owner) {
   const instProps = inst.componentProperties;
   const instKeys = Object.keys(instProps);
   let ownerDefs = {};
-  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; }
+  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; degrade('FC-RT-PROP-DEFS-UNREADABLE', owner, 'componentPropertyDefinitions unreadable on the owner; property references were resolved without them', e); }
   const ownerKeys = Object.keys(ownerDefs);
   const variantProps = {};
   const otherProps = {};
@@ -42764,7 +47126,7 @@ function remeasureBirthBox(node, label, hasW, hasH) {
     if (axis === 'Vertical' && hasH) continue;
     const prop = 'layoutSizing' + axis;
     let mode;
-    try { mode = node[prop]; } catch (e) { continue; }
+    try { mode = node[prop]; } catch (e) { degrade('FC-RT-BIRTH-BOX-UNREADABLE', node, '"' + label + '": ' + prop + ' could not be read, so the HUG birth-box re-measure was skipped on this axis', e); continue; }
     if (mode !== 'HUG') continue;
     try {
       node[prop] = 'FIXED';
@@ -42858,8 +47220,8 @@ function applyFrameSpec(node, spec) {
     if (spec.lits && spec.lits[field] !== undefined) continue;
     try {
       if (node.boundVariables && node.boundVariables[field]) node.setBoundVariable(field, null);
-    } catch (e) { /* field not bindable on this node type */ }
-    try { node[field] = 0; } catch (e) { /* not an auto-layout frame */ }
+    } catch (e) { degrade('FC-RT-FIELD-UNBIND-REFUSED', node, 'a stale ' + field + ' variable could not be unbound before the reset', e); }
+    try { node[field] = 0; } catch (e) { degrade('FC-RT-FIELD-RESET-REFUSED', node, field + ' could not be reset to 0 (not an auto-layout frame)', e); }
   }
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -42903,7 +47265,7 @@ function applyOverlay(parent, childNode, childSpec) {
     else if (p === 'bottom') { childNode.x = 0; childNode.y = parent.height; }
     else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
     else { childNode.x = parent.width; childNode.y = 0; }
-  } catch (e) { /* parent not auto-layout — leave in flow */ }
+  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
 // B-3 finding 5: an inset-0 overlay part (top/right/bottom/left all 0) is
@@ -42962,7 +47324,7 @@ function applyInsetOverlay(parent, childNode, childSpec) {
         Math.max(1, parent.height - o.top - o.bottom),
       );
     }
-  } catch (e) { /* parent not auto-layout — leave in flow */ }
+  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
 function resizeOutOfFlow(parent, built) {
@@ -42995,7 +47357,7 @@ function resizeOutOfFlow(parent, built) {
         if (a.h === 'STRETCH') childNode.x = a.left || 0;
         if (a.v === 'STRETCH') childNode.y = a.top || 0;
       }
-    } catch (e) { /* parent not auto-layout — the child stayed in flow */ }
+    } catch (e) { degrade('FC-RT-ABSOLUTE-PLACEMENT-REFUSED', childNode, 'absolute placement was refused (parent not auto-layout); the child stayed in flow', e); }
   }
 }
 
@@ -43145,7 +47507,7 @@ async function buildNode(spec, registry) {
       if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
       if (spec.layout && spec.layout.stretchChildren) {
-        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', inst, 'slot default content could not stretch (layoutSizingHorizontal FILL refused); it keeps its own width', e); }
       }
     }
     registry.slots.push({ spec, slot: node });
@@ -43168,7 +47530,7 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
-      } catch (e) { /* track not fixed-width */ }
+      } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       child.type === 'frame' && (!child.children || child.children.length === 0) &&
@@ -43187,12 +47549,12 @@ async function buildNode(spec, registry) {
       // overflowed their fixed-height tracks). Width stays the spec'd
       // fraction (meter pct) or the placeholder box, named in the component
       // description.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
     applyInsetOverlay(node, childNode, child);
   }
@@ -43430,6 +47792,43 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C, degradedFrom) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  // R7: the runtime degradations raised while this set synced ride the same
+  // per-set result — named beside the facts, never only in a console.
+  if (typeof degradedFrom === 'number' && DEGRADATIONS.length > degradedFrom) report.degradations = DEGRADATIONS.slice(degradedFrom);
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -43452,6 +47851,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -43546,7 +47948,7 @@ async function amendSet(set, C) {
         built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
         if (childSpec.pct != null) {
-          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
         }
         if (
           childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -43554,10 +47956,10 @@ async function amendSet(set, C) {
           !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
         ) {
           // #60 fix 4 (amend path): same empty-child declared default.
-          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
         }
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
     applyInsetOverlay(comp, childNode, childSpec);
       }
@@ -43720,6 +48122,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -43756,7 +48159,7 @@ async function amendComponent(comp, C) {
     built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
     if (childSpec.pct != null) {
-      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -43764,10 +48167,10 @@ async function amendComponent(comp, C) {
       !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
     ) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
     applyInsetOverlay(comp, childNode, childSpec);
   }
@@ -44013,6 +48416,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -44031,7 +48435,11 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  const degradedFrom = DEGRADATIONS.length;
+  results.push(withCodeOnlyFacts(await syncOne(C), C, degradedFrom));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 
@@ -44049,7 +48457,7 @@ const COMPONENTS = [
     "contractId": "fluent.switch",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Switch — generated from contract fluent.switch v0.2.0 †",
+    "description": "Switch — generated from contract fluent.switch v0.2.0 † (28 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -45052,6 +49460,332 @@ const COMPONENTS = [
         "Label Position": "After"
       }
     },
+    "codeOnlyFacts": [
+      {
+        "part": "indicator",
+        "kind": "channel",
+        "channel": "flex-shrink",
+        "value": "{imported.switch.indicator.flex-shrink}",
+        "reason": "Figma auto-layout children do not shrink below their content — there is no shrink factor.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "border-left-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "border-right-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "border-top-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "pointer-events",
+        "value": "none",
+        "reason": "Pointer-event gating exists only in the coded component.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "transition-duration",
+        "value": "0.2s",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "transition-property",
+        "value": "background, border, color",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "declared",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.33, 0, 0.67, 1)",
+        "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "appearance",
+        "value": "auto",
+        "reason": "Native form-control appearance is reset only in the coded component.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "default",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "display",
+        "value": "none",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "outline-style",
+        "value": "auto",
+        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "input",
+        "kind": "declared",
+        "channel": "position",
+        "value": "absolute",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "default",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-bottom-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 2,
+          "of": 10,
+          "names": [
+            "Checked=Unchecked, Label Position=After, State=Focus Visible",
+            "Checked=Checked, Label Position=After, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-left-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 2,
+          "of": 10,
+          "names": [
+            "Checked=Unchecked, Label Position=After, State=Focus Visible",
+            "Checked=Checked, Label Position=After, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-right-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 2,
+          "of": 10,
+          "names": [
+            "Checked=Unchecked, Label Position=After, State=Focus Visible",
+            "Checked=Checked, Label Position=After, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "border-top-color",
+        "value": "{imported.shared.color-00000000}",
+        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "variants": {
+          "count": 2,
+          "of": 10,
+          "names": [
+            "Checked=Unchecked, Label Position=After, State=Focus Visible",
+            "Checked=Checked, Label Position=After, State=Focus Visible"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -45108,6 +49842,26 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }
+// NAMED RUNTIME DEGRADATIONS (R7, 2026-08-22). The emitted script used to
+// carry ~30 bare try/catch swallows (a comment where the handler should be) — every one a
+// canvas fact the spec asked for and the API refused (FILL sizing, out-of-
+// flow placement, min sizes, truncation, a paint base) with NO trace in the
+// result. Each now pushes ONE named entry here; syncOne's report carries
+// the entries raised while it ran as report.degradations (the same code /
+// nodePath / message shape the dump script's _degradations uses), and the
+// plugin UI lists them under the set beside the code-only facts. A
+// degradation is never a failure: the sync still completes, it just says so.
+const DEGRADATIONS = [];
+function nodePathOf(node) {
+  const parts = [];
+  let n = node;
+  let guard = 0;
+  while (n && n.type !== 'PAGE' && n.type !== 'DOCUMENT' && guard++ < 64) { parts.unshift(n.name || n.type); n = n.parent; }
+  return parts.join('/');
+}
+function degrade(code, node, message, e) {
+  DEGRADATIONS.push({ code: code, nodePath: node ? nodePathOf(node) : '', message: message + (e && e.message ? ' (' + e.message + ')' : '') });
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -45131,7 +49885,7 @@ const boundPaint = (varName, consumer) => {
         base = { r: r.value.r, g: r.value.g, b: r.value.b };
         if (typeof r.value.a === 'number') alpha = r.value.a;
       }
-    } catch (e) { /* fall back to black base */ }
+    } catch (e) { degrade('FC-RT-PAINT-BASE-UNRESOLVED', consumer, 'variable ' + varName + ' could not be resolved for this consumer; the bound paint keeps its binding over a black literal base', e); }
   }
   return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base, opacity: alpha }, 'color', v);
 };
@@ -45305,7 +50059,7 @@ function setInstanceProps(inst, props, owner) {
   const instProps = inst.componentProperties;
   const instKeys = Object.keys(instProps);
   let ownerDefs = {};
-  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; }
+  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; degrade('FC-RT-PROP-DEFS-UNREADABLE', owner, 'componentPropertyDefinitions unreadable on the owner; property references were resolved without them', e); }
   const ownerKeys = Object.keys(ownerDefs);
   const variantProps = {};
   const otherProps = {};
@@ -45447,8 +50201,8 @@ function applyFrameSpec(node, spec) {
     if (spec.lits && spec.lits[field] !== undefined) continue;
     try {
       if (node.boundVariables && node.boundVariables[field]) node.setBoundVariable(field, null);
-    } catch (e) { /* field not bindable on this node type */ }
-    try { node[field] = 0; } catch (e) { /* not an auto-layout frame */ }
+    } catch (e) { degrade('FC-RT-FIELD-UNBIND-REFUSED', node, 'a stale ' + field + ' variable could not be unbound before the reset', e); }
+    try { node[field] = 0; } catch (e) { degrade('FC-RT-FIELD-RESET-REFUSED', node, field + ' could not be reset to 0 (not an auto-layout frame)', e); }
   }
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -45492,7 +50246,7 @@ function applyOverlay(parent, childNode, childSpec) {
     else if (p === 'bottom') { childNode.x = 0; childNode.y = parent.height; }
     else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
     else { childNode.x = parent.width; childNode.y = 0; }
-  } catch (e) { /* parent not auto-layout — leave in flow */ }
+  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
 // Round 5d: auto-layout has no per-child margin — a child carrying residual
@@ -45507,7 +50261,7 @@ function applyMarginBox(parent, childNode, childSpec, registry) {
   if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
   try {
     if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;
-  } catch (e) { /* nodes without layout sizing */ }
+  } catch (e) { degrade('FC-RT-MARGIN-BOX-SIZING-UNREADABLE', childNode, 'layout sizing could not be read before the margin box was applied; applied as if the child were not FILL-sized', e); }
   const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
   if (!t && !r && !b && !l) return;
   const w = Math.max(childNode.width + l + r, 0.01);
@@ -45676,7 +50430,7 @@ async function buildNode(spec, registry) {
       if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
       if (spec.layout && spec.layout.stretchChildren) {
-        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', inst, 'slot default content could not stretch (layoutSizingHorizontal FILL refused); it keeps its own width', e); }
       }
     }
     registry.slots.push({ spec, slot: node });
@@ -45698,7 +50452,7 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
-      } catch (e) { /* track not fixed-width */ }
+      } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       child.type === 'frame' && (!child.children || child.children.length === 0) &&
@@ -45717,12 +50471,12 @@ async function buildNode(spec, registry) {
       // overflowed their fixed-height tracks). Width stays the spec'd
       // fraction (meter pct) or the placeholder box, named in the component
       // description.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
     applyMarginBox(node, childNode, child, registry);
   }
@@ -45935,6 +50689,43 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C, degradedFrom) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  // R7: the runtime degradations raised while this set synced ride the same
+  // per-set result — named beside the facts, never only in a console.
+  if (typeof degradedFrom === 'number' && DEGRADATIONS.length > degradedFrom) report.degradations = DEGRADATIONS.slice(degradedFrom);
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -45957,6 +50748,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -46050,7 +50844,7 @@ async function amendSet(set, C) {
         built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
         if (childSpec.pct != null) {
-          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
         }
         if (
           childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -46058,10 +50852,10 @@ async function amendSet(set, C) {
           !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
         ) {
           // #60 fix 4 (amend path): same empty-child declared default.
-          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
         }
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
     applyMarginBox(comp, childNode, childSpec, registry);
       }
@@ -46199,6 +50993,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -46234,7 +51029,7 @@ async function amendComponent(comp, C) {
     built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
     if (childSpec.pct != null) {
-      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -46242,10 +51037,10 @@ async function amendComponent(comp, C) {
       !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
     ) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
   }
   for (const t of registry.texts) {
@@ -46465,6 +51260,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -46483,7 +51279,11 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  const degradedFrom = DEGRADATIONS.length;
+  results.push(withCodeOnlyFacts(await syncOne(C), C, degradedFrom));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 
@@ -46501,7 +51301,7 @@ const COMPONENTS = [
     "contractId": "fluent.tab-list",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "TabList — generated from contract fluent.tab-list v0.2.0 †",
+    "description": "TabList — generated from contract fluent.tab-list v0.2.0 † (47 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -49976,6 +54776,677 @@ const COMPONENTS = [
     "semantics": {
       "element": "div"
     },
+    "codeOnlyFacts": [
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "label",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "flex-shrink",
+        "value": "{imported.shared.num-0}",
+        "reason": "Figma auto-layout children do not shrink below their content — there is no shrink factor.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "flex-shrink",
+        "value": "{imported.shared.num-0}",
+        "reason": "Figma auto-layout children do not shrink below their content — there is no shrink factor.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "grid-template-columns",
+        "value": "{imported.tab-list.tab.grid-template-columns.large}",
+        "reason": "Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Large, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Large, Orientation=Vertical",
+            "Appearance=Subtle, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Large, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Large, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Large, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Large, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "grid-template-columns",
+        "value": "{imported.tab-list.tab.grid-template-columns.medium}",
+        "reason": "Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Medium, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Medium, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Medium, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Medium, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "grid-template-columns",
+        "value": "{imported.tab-list.tab.grid-template-columns.small}",
+        "reason": "Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Small, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Small, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Small, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Small, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "grid-template-rows",
+        "value": "{imported.tab-list.tab.grid-template-rows.large}",
+        "reason": "Figma has no grid track sizing.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Large, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Large, Orientation=Vertical",
+            "Appearance=Subtle, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Large, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Large, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Large, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Large, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "grid-template-rows",
+        "value": "{imported.tab-list.tab.grid-template-rows.medium}",
+        "reason": "Figma has no grid track sizing.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Medium, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Medium, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Medium, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Medium, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "grid-template-rows",
+        "value": "{imported.tab-list.tab.grid-template-rows.small}",
+        "reason": "Figma has no grid track sizing.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Small, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Small, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Small, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Small, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.tab-list.tab.outline-color.filled-circular}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 6,
+          "of": 24,
+          "names": [
+            "Appearance=Filled Circular, Size=Medium, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Medium, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Small, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Small, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Large, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Large, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.tab-list.tab.outline-color.subtle-circular}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 6,
+          "of": 24,
+          "names": [
+            "Appearance=Subtle Circular, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Large, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.tab-list.tab.outline-color.subtle}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 6,
+          "of": 24,
+          "names": [
+            "Appearance=Subtle, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Large, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "outline-color",
+        "value": "{imported.tab-list.tab.outline-color.transparent}",
+        "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+        "variants": {
+          "count": 6,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Medium, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Medium, Orientation=Vertical",
+            "Appearance=Transparent, Size=Small, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Small, Orientation=Vertical",
+            "Appearance=Transparent, Size=Large, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Large, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "declared",
+        "channel": "outline-style",
+        "value": "solid",
+        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "declared",
+        "channel": "overflow-x",
+        "value": "hidden",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "declared",
+        "channel": "overflow-y",
+        "value": "hidden",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "bottom",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "flex-shrink",
+        "value": "{imported.shared.num-0}",
+        "reason": "Figma auto-layout children do not shrink below their content — there is no shrink factor.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "grid-template-columns",
+        "value": "{imported.tab-list.tab-2.grid-template-columns.large}",
+        "reason": "Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Large, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Large, Orientation=Vertical",
+            "Appearance=Subtle, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Large, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Large, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Large, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Large, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "grid-template-columns",
+        "value": "{imported.tab-list.tab-2.grid-template-columns.medium}",
+        "reason": "Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Medium, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Medium, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Medium, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Medium, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "grid-template-columns",
+        "value": "{imported.tab-list.tab-2.grid-template-columns.small}",
+        "reason": "Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Small, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Small, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Small, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Small, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "grid-template-rows",
+        "value": "{imported.tab-list.tab-2.grid-template-rows.large}",
+        "reason": "Figma has no grid track sizing.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Large, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Large, Orientation=Vertical",
+            "Appearance=Subtle, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Large, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Large, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Large, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Large, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Large, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "grid-template-rows",
+        "value": "{imported.tab-list.tab-2.grid-template-rows.medium}",
+        "reason": "Figma has no grid track sizing.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Medium, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Medium, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Medium, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Medium, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Medium, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "grid-template-rows",
+        "value": "{imported.tab-list.tab-2.grid-template-rows.small}",
+        "reason": "Figma has no grid track sizing.",
+        "variants": {
+          "count": 8,
+          "of": 24,
+          "names": [
+            "Appearance=Transparent, Size=Small, Orientation=Horizontal",
+            "Appearance=Transparent, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle Circular, Size=Small, Orientation=Horizontal",
+            "Appearance=Subtle Circular, Size=Small, Orientation=Vertical",
+            "Appearance=Filled Circular, Size=Small, Orientation=Horizontal",
+            "Appearance=Filled Circular, Size=Small, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "left",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "right",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "channel",
+        "channel": "top",
+        "value": "{imported.shared.size-0}",
+        "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "not-allowed",
+        "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "pointer",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "tab-2",
+        "kind": "declared",
+        "channel": "position",
+        "value": "relative",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -50032,6 +55503,26 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }
+// NAMED RUNTIME DEGRADATIONS (R7, 2026-08-22). The emitted script used to
+// carry ~30 bare try/catch swallows (a comment where the handler should be) — every one a
+// canvas fact the spec asked for and the API refused (FILL sizing, out-of-
+// flow placement, min sizes, truncation, a paint base) with NO trace in the
+// result. Each now pushes ONE named entry here; syncOne's report carries
+// the entries raised while it ran as report.degradations (the same code /
+// nodePath / message shape the dump script's _degradations uses), and the
+// plugin UI lists them under the set beside the code-only facts. A
+// degradation is never a failure: the sync still completes, it just says so.
+const DEGRADATIONS = [];
+function nodePathOf(node) {
+  const parts = [];
+  let n = node;
+  let guard = 0;
+  while (n && n.type !== 'PAGE' && n.type !== 'DOCUMENT' && guard++ < 64) { parts.unshift(n.name || n.type); n = n.parent; }
+  return parts.join('/');
+}
+function degrade(code, node, message, e) {
+  DEGRADATIONS.push({ code: code, nodePath: node ? nodePathOf(node) : '', message: message + (e && e.message ? ' (' + e.message + ')' : '') });
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -50055,7 +55546,7 @@ const boundPaint = (varName, consumer) => {
         base = { r: r.value.r, g: r.value.g, b: r.value.b };
         if (typeof r.value.a === 'number') alpha = r.value.a;
       }
-    } catch (e) { /* fall back to black base */ }
+    } catch (e) { degrade('FC-RT-PAINT-BASE-UNRESOLVED', consumer, 'variable ' + varName + ' could not be resolved for this consumer; the bound paint keeps its binding over a black literal base', e); }
   }
   return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base, opacity: alpha }, 'color', v);
 };
@@ -50229,7 +55720,7 @@ function setInstanceProps(inst, props, owner) {
   const instProps = inst.componentProperties;
   const instKeys = Object.keys(instProps);
   let ownerDefs = {};
-  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; }
+  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; degrade('FC-RT-PROP-DEFS-UNREADABLE', owner, 'componentPropertyDefinitions unreadable on the owner; property references were resolved without them', e); }
   const ownerKeys = Object.keys(ownerDefs);
   const variantProps = {};
   const otherProps = {};
@@ -50371,8 +55862,8 @@ function applyFrameSpec(node, spec) {
     if (spec.lits && spec.lits[field] !== undefined) continue;
     try {
       if (node.boundVariables && node.boundVariables[field]) node.setBoundVariable(field, null);
-    } catch (e) { /* field not bindable on this node type */ }
-    try { node[field] = 0; } catch (e) { /* not an auto-layout frame */ }
+    } catch (e) { degrade('FC-RT-FIELD-UNBIND-REFUSED', node, 'a stale ' + field + ' variable could not be unbound before the reset', e); }
+    try { node[field] = 0; } catch (e) { degrade('FC-RT-FIELD-RESET-REFUSED', node, field + ' could not be reset to 0 (not an auto-layout frame)', e); }
   }
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -50409,8 +55900,8 @@ function applyFrameSpec(node, spec) {
     if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
     if (li.radius !== undefined) node.cornerRadius = li.radius;
     if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
-    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { /* needs auto-layout */ } }
-    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { /* needs auto-layout */ } }
+    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minWidth ' + li.minWidth + ' refused (needs auto-layout); the literal min-width does not draw', e); } }
+    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minHeight ' + li.minHeight + ' refused (needs auto-layout); the literal min-height does not draw', e); } }
     // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
     // trampled — fillClear only clears when no fill was spec'd. The compile
     // side already drops fillClear when a fill binding exists (applyLiterals);
@@ -50471,7 +55962,7 @@ function applyOverlay(parent, childNode, childSpec) {
     else if (p === 'bottom') { childNode.x = 0; childNode.y = parent.height; }
     else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
     else { childNode.x = parent.width; childNode.y = 0; }
-  } catch (e) { /* parent not auto-layout — leave in flow */ }
+  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
 async function buildNode(spec, registry) {
@@ -50525,7 +56016,7 @@ async function buildNode(spec, registry) {
           node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
           fontResolved = true;
           break;
-        } catch (e) { /* try this family's own spelling of the same face */ }
+        } catch (e) { /* a RETRY, not a swallow: the next candidate is this family's own spelling of the same face; the final outcome is named below */ }
       }
       if (!fontResolved) {
         console.warn(
@@ -50533,13 +56024,14 @@ async function buildNode(spec, registry) {
           ' is not available in this file (tried ' + styleCandidates.join(', ') +
           ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
         );
+        degrade('FC-FONT-STYLE-UNRESOLVED', node, spec.fontFamily + ' / ' + wantStyle + ' is not available in this file (tried ' + styleCandidates.join(', ') + '); Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones');
       }
     }
     if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
     if (spec.textCase) node.textCase = spec.textCase;
     if (spec.textDecoration) node.textDecoration = spec.textDecoration;
     if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
-    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { /* older API */ } }
+    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { degrade('FC-RT-TRUNCATION-REFUSED', node, 'textTruncation ENDING refused (older Plugin API); the declared ellipsis does not draw', e); } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -50657,7 +56149,7 @@ async function buildNode(spec, registry) {
       if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
       if (spec.layout && spec.layout.stretchChildren) {
-        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', inst, 'slot default content could not stretch (layoutSizingHorizontal FILL refused); it keeps its own width', e); }
       }
     }
     registry.slots.push({ spec, slot: node });
@@ -50679,7 +56171,7 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
-      } catch (e) { /* track not fixed-width */ }
+      } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       child.type === 'frame' && (!child.children || child.children.length === 0) &&
@@ -50698,12 +56190,12 @@ async function buildNode(spec, registry) {
       // overflowed their fixed-height tracks). Width stays the spec'd
       // fraction (meter pct) or the placeholder box, named in the component
       // description.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
   }
   return node;
@@ -50915,6 +56407,43 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C, degradedFrom) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  // R7: the runtime degradations raised while this set synced ride the same
+  // per-set result — named beside the facts, never only in a console.
+  if (typeof degradedFrom === 'number' && DEGRADATIONS.length > degradedFrom) report.degradations = DEGRADATIONS.slice(degradedFrom);
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -50937,6 +56466,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -51030,7 +56562,7 @@ async function amendSet(set, C) {
         built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
         if (childSpec.pct != null) {
-          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
         }
         if (
           childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -51038,10 +56570,10 @@ async function amendSet(set, C) {
           !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
         ) {
           // #60 fix 4 (amend path): same empty-child declared default.
-          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
         }
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
       }
       report.rebuiltVariants++;
@@ -51178,6 +56710,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -51213,7 +56746,7 @@ async function amendComponent(comp, C) {
     built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
     if (childSpec.pct != null) {
-      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -51221,10 +56754,10 @@ async function amendComponent(comp, C) {
       !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
     ) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
   }
   for (const t of registry.texts) {
@@ -51444,6 +56977,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -51462,7 +56996,11 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  const degradedFrom = DEGRADATIONS.length;
+  results.push(withCodeOnlyFacts(await syncOne(C), C, degradedFrom));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 
@@ -51480,7 +57018,7 @@ const COMPONENTS = [
     "contractId": "fluent.tooltip",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Tooltip — generated from contract fluent.tooltip v0.2.0 †",
+    "description": "Tooltip — generated from contract fluent.tooltip v0.2.0 † (12 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -51490,7 +57028,8 @@ const COMPONENTS = [
     ],
     "textProps": [],
     "fontStyles": [
-      "Medium"
+      "Medium",
+      "Regular"
     ],
     "variants": [
       {
@@ -51531,6 +57070,21 @@ const COMPONENTS = [
           "fill": "imported/tooltip/root/background-color/normal",
           "blockRoot": true,
           "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Tooltip copy for the Fluent round.",
+              "fontSize": 12,
+              "fontStyle": "Regular",
+              "fontSizeVar": "imported/tooltip/root/font-size",
+              "fontWeightVar": "imported/tooltip/root/font-weight",
+              "lineHeightVar": "imported/tooltip/root/line-height",
+              "textFill": "imported/tooltip/root/color/normal",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              }
+            },
             {
               "type": "frame",
               "name": "part-0",
@@ -51605,6 +57159,21 @@ const COMPONENTS = [
           "blockRoot": true,
           "children": [
             {
+              "type": "text",
+              "name": "label",
+              "characters": "Tooltip copy for the Fluent round.",
+              "fontSize": 12,
+              "fontStyle": "Regular",
+              "fontSizeVar": "imported/tooltip/root/font-size",
+              "fontWeightVar": "imported/tooltip/root/font-weight",
+              "lineHeightVar": "imported/tooltip/root/line-height",
+              "textFill": "imported/tooltip/root/color/inverted",
+              "lineHeight": {
+                "value": 16,
+                "unit": "PIXELS"
+              }
+            },
+            {
               "type": "frame",
               "name": "part-0",
               "layout": {
@@ -51647,6 +57216,140 @@ const COMPONENTS = [
     "semantics": {
       "element": "div"
     },
+    "codeOnlyFacts": [
+      {
+        "part": "part-0",
+        "kind": "declared",
+        "channel": "background-clip",
+        "value": "content-box",
+        "reason": "Background clipping exists only in code.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "part-0",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "default",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "part-0",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "part-0",
+        "kind": "declared",
+        "channel": "position",
+        "value": "absolute",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-left-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-right-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-top-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "cursor",
+        "value": "default",
+        "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "display",
+        "value": "block",
+        "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "position",
+        "value": "absolute",
+        "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "root",
+        "kind": "preview",
+        "channel": "display",
+        "value": "block",
+        "reason": "a block root has no intrinsic width — the canvas draws a preview width, the code surface fills its container",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      }
+    ],
     "colW": 380
   }
 ];
@@ -51703,6 +57406,26 @@ for (const v of allVars) varByName[v.name] = v;
     }
   }
 }
+// NAMED RUNTIME DEGRADATIONS (R7, 2026-08-22). The emitted script used to
+// carry ~30 bare try/catch swallows (a comment where the handler should be) — every one a
+// canvas fact the spec asked for and the API refused (FILL sizing, out-of-
+// flow placement, min sizes, truncation, a paint base) with NO trace in the
+// result. Each now pushes ONE named entry here; syncOne's report carries
+// the entries raised while it ran as report.degradations (the same code /
+// nodePath / message shape the dump script's _degradations uses), and the
+// plugin UI lists them under the set beside the code-only facts. A
+// degradation is never a failure: the sync still completes, it just says so.
+const DEGRADATIONS = [];
+function nodePathOf(node) {
+  const parts = [];
+  let n = node;
+  let guard = 0;
+  while (n && n.type !== 'PAGE' && n.type !== 'DOCUMENT' && guard++ < 64) { parts.unshift(n.name || n.type); n = n.parent; }
+  return parts.join('/');
+}
+function degrade(code, node, message, e) {
+  DEGRADATIONS.push({ code: code, nodePath: node ? nodePathOf(node) : '', message: message + (e && e.message ? ' (' + e.message + ')' : '') });
+}
 const need = (name) => {
   const v = varByName[name];
   if (!v) throw new Error('Missing variable: ' + name);
@@ -51726,7 +57449,7 @@ const boundPaint = (varName, consumer) => {
         base = { r: r.value.r, g: r.value.g, b: r.value.b };
         if (typeof r.value.a === 'number') alpha = r.value.a;
       }
-    } catch (e) { /* fall back to black base */ }
+    } catch (e) { degrade('FC-RT-PAINT-BASE-UNRESOLVED', consumer, 'variable ' + varName + ' could not be resolved for this consumer; the bound paint keeps its binding over a black literal base', e); }
   }
   return figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: base, opacity: alpha }, 'color', v);
 };
@@ -51900,7 +57623,7 @@ function setInstanceProps(inst, props, owner) {
   const instProps = inst.componentProperties;
   const instKeys = Object.keys(instProps);
   let ownerDefs = {};
-  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; }
+  try { ownerDefs = (owner && owner.componentPropertyDefinitions) || {}; } catch (e) { ownerDefs = {}; degrade('FC-RT-PROP-DEFS-UNREADABLE', owner, 'componentPropertyDefinitions unreadable on the owner; property references were resolved without them', e); }
   const ownerKeys = Object.keys(ownerDefs);
   const variantProps = {};
   const otherProps = {};
@@ -51977,7 +57700,7 @@ function remeasureBirthBox(node, label, hasW, hasH) {
     if (axis === 'Vertical' && hasH) continue;
     const prop = 'layoutSizing' + axis;
     let mode;
-    try { mode = node[prop]; } catch (e) { continue; }
+    try { mode = node[prop]; } catch (e) { degrade('FC-RT-BIRTH-BOX-UNREADABLE', node, '"' + label + '": ' + prop + ' could not be read, so the HUG birth-box re-measure was skipped on this axis', e); continue; }
     if (mode !== 'HUG') continue;
     try {
       node[prop] = 'FIXED';
@@ -52071,8 +57794,8 @@ function applyFrameSpec(node, spec) {
     if (spec.lits && spec.lits[field] !== undefined) continue;
     try {
       if (node.boundVariables && node.boundVariables[field]) node.setBoundVariable(field, null);
-    } catch (e) { /* field not bindable on this node type */ }
-    try { node[field] = 0; } catch (e) { /* not an auto-layout frame */ }
+    } catch (e) { degrade('FC-RT-FIELD-UNBIND-REFUSED', node, 'a stale ' + field + ' variable could not be unbound before the reset', e); }
+    try { node[field] = 0; } catch (e) { degrade('FC-RT-FIELD-RESET-REFUSED', node, field + ' could not be reset to 0 (not an auto-layout frame)', e); }
   }
   for (const [field, varName] of Object.entries(spec.bindings || {})) {
     node.setBoundVariable(field, need(varName));
@@ -52116,7 +57839,7 @@ function applyOverlay(parent, childNode, childSpec) {
     else if (p === 'bottom') { childNode.x = 0; childNode.y = parent.height; }
     else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
     else { childNode.x = parent.width; childNode.y = 0; }
-  } catch (e) { /* parent not auto-layout — leave in flow */ }
+  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
 // B-3 finding 5: an inset-0 overlay part (top/right/bottom/left all 0) is
@@ -52175,7 +57898,7 @@ function applyInsetOverlay(parent, childNode, childSpec) {
         Math.max(1, parent.height - o.top - o.bottom),
       );
     }
-  } catch (e) { /* parent not auto-layout — leave in flow */ }
+  } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
 }
 
 function resizeOutOfFlow(parent, built) {
@@ -52208,7 +57931,7 @@ function resizeOutOfFlow(parent, built) {
         if (a.h === 'STRETCH') childNode.x = a.left || 0;
         if (a.v === 'STRETCH') childNode.y = a.top || 0;
       }
-    } catch (e) { /* parent not auto-layout — the child stayed in flow */ }
+    } catch (e) { degrade('FC-RT-ABSOLUTE-PLACEMENT-REFUSED', childNode, 'absolute placement was refused (parent not auto-layout); the child stayed in flow', e); }
   }
 }
 
@@ -52237,6 +57960,10 @@ async function buildNode(spec, registry) {
     node.fontName = { family: 'Inter', style: spec.fontStyle || 'Medium' };
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
+    if (typeof spec.lineHeight === 'number') node.lineHeight = { unit: 'PIXELS', value: spec.lineHeight };
+    else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
+      node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
+    }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -52354,7 +58081,7 @@ async function buildNode(spec, registry) {
       if (item.props) setInstanceProps(inst, item.props, target);
       node.appendChild(inst);
       if (spec.layout && spec.layout.stretchChildren) {
-        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { /* fixed-size deps */ }
+        try { inst.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', inst, 'slot default content could not stretch (layoutSizingHorizontal FILL refused); it keeps its own width', e); }
       }
     }
     registry.slots.push({ spec, slot: node });
@@ -52377,7 +58104,7 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
-      } catch (e) { /* track not fixed-width */ }
+      } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       child.type === 'frame' && (!child.children || child.children.length === 0) &&
@@ -52396,12 +58123,12 @@ async function buildNode(spec, registry) {
       // overflowed their fixed-height tracks). Width stays the spec'd
       // fraction (meter pct) or the placeholder box, named in the component
       // description.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     // FILL is compiled (annotateFillW): candidates only fill when the parent
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
     applyInsetOverlay(node, childNode, child);
   }
@@ -52639,6 +58366,43 @@ function specHash(C) {
   return String(h);
 }
 
+// THE NAMED RECEIPT ON THE CANVAS (2026-08-22): ds_contracts/codeOnlyFacts.
+// C.codeOnlyFacts is the sorted list of facts the contract carries and the
+// canvas cannot (see CodeOnlyFact in core/emit-figma-script.ts). Shared
+// plugin data has a per-entry size limit, so the stamp keeps as many FULL
+// facts as fit under CODE_ONLY_FACTS_STAMP_BYTES, then names the rest by
+// part.channel ("+N more"), then counts whatever still does not fit. The
+// count is always exact; the full list rides the bundle JSON and the
+// per-set result the plugin report lists. Written as '' (deletes the key)
+// when there is nothing to name, so a set that lost its last fact does not
+// keep a stale receipt.
+const CODE_ONLY_FACTS_STAMP_BYTES = 24000;
+function codeOnlyFactsStamp(C) {
+  const facts = C.codeOnlyFacts || [];
+  if (facts.length === 0) return '';
+  const kept = [];
+  const moreNames = [];
+  const body = () => JSON.stringify({ count: facts.length, facts: kept, more: facts.length - kept.length, moreNames: moreNames });
+  for (const f of facts) {
+    kept.push(f);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { kept.pop(); break; }
+  }
+  for (let i = kept.length; i < facts.length; i++) {
+    moreNames.push(facts[i].part + '.' + facts[i].channel);
+    if (body().length > CODE_ONLY_FACTS_STAMP_BYTES) { moreNames.pop(); break; }
+  }
+  const stamp = { count: facts.length, facts: kept, more: facts.length - kept.length };
+  if (stamp.more > 0) stamp.moreNames = moreNames;
+  return JSON.stringify(stamp);
+}
+function withCodeOnlyFacts(report, C, degradedFrom) {
+  if (C.codeOnlyFacts && C.codeOnlyFacts.length > 0) report.codeOnlyFacts = C.codeOnlyFacts;
+  // R7: the runtime degradations raised while this set synced ride the same
+  // per-set result — named beside the facts, never only in a console.
+  if (typeof degradedFrom === 'number' && DEGRADATIONS.length > degradedFrom) report.degradations = DEGRADATIONS.slice(degradedFrom);
+  return report;
+}
+
 // IN-PLACE AMEND (2026-07-08, closes the create-only gap): reconcile an
 // existing COMPONENT_SET against the compiled spec while preserving what
 // instances bind to — the set node + key, each variant COMPONENT node, and
@@ -52661,6 +58425,9 @@ async function amendSet(set, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   set.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  // The named receipt — refreshed BEFORE the specHash early return, like the
+  // markers above, so an unchanged set still carries a current one.
+  set.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (set.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     // DRIFT ROUND migration: no stamp OR a pre-v2 stamp (geometry-bearing —
@@ -52755,7 +58522,7 @@ async function amendSet(set, C) {
         built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
         if (childSpec.pct != null) {
-          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+          try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
         }
         if (
           childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -52763,10 +58530,10 @@ async function amendSet(set, C) {
           !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
         ) {
           // #60 fix 4 (amend path): same empty-child declared default.
-          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+          try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
         }
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+          try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
     applyInsetOverlay(comp, childNode, childSpec);
       }
@@ -52929,6 +58696,7 @@ async function amendComponent(comp, C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   comp.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  comp.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
@@ -52965,7 +58733,7 @@ async function amendComponent(comp, C) {
     built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
     if (childSpec.pct != null) {
-      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
+      try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
       childSpec.type === 'frame' && (!childSpec.children || childSpec.children.length === 0) &&
@@ -52973,10 +58741,10 @@ async function amendComponent(comp, C) {
       !childSpec.overlay && !childSpec.insetOverlay && !childSpec.absolute
     ) {
       // #60 fix 4 (standalone amend path): same empty-child declared default.
-      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { /* parent not auto-layout */ }
+      try { childNode.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the empty box could not take the parent height (layoutSizingVertical FILL refused)', e); }
     }
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
-      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
+      try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
     applyInsetOverlay(comp, childNode, childSpec);
   }
@@ -53222,6 +58990,7 @@ async function syncOne(C) {
     C.semantics ? JSON.stringify(C.semantics) : '');
   target.setSharedPluginData('ds_contracts', 'propNames',
     C.propNames ? JSON.stringify(C.propNames) : '');
+  target.setSharedPluginData('ds_contracts', 'codeOnlyFacts', codeOnlyFactsStamp(C));
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp (see amendSet).
   const wiredReactions = await wireStateReactions(target, new Map(built.map((b) => [b.v.name, b.comp])), C);
   dsStampFingerprints(target);
@@ -53240,7 +59009,11 @@ async function syncOne(C) {
 
 const results = [];
 for (const C of COMPONENTS) {
-  results.push(await syncOne(C));
+  // Every per-set result — created, amended, skipped as unchanged, refused
+  // by the create-only door — carries the named receipt, so the plugin's run
+  // report can list the facts under the set whatever the sync did.
+  const degradedFrom = DEGRADATIONS.length;
+  results.push(withCodeOnlyFacts(await syncOne(C), C, degradedFrom));
 }
 return { createdNodeIds: results.filter((r) => !r.skipped).map((r) => r.nodeId), results };
 
