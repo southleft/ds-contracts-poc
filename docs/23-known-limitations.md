@@ -548,7 +548,7 @@ re-verified against docs/18's own rows today:
 | **G5 — org-level GitHub App** | OPEN | designers still paste a fine-grained PAT into a plugin field. |
 | **G10 — PR-first CI defaults** | **PARTIAL** | `examples/ci/code-led.yml` is PR-first; confirm every published recipe |
 | **G11 — contract-diff English summarizer** | **PARTIAL** | `ds-contracts diff --summarize` + `contract-summarize:check` shipped |
-| **G13 — audit trail & loop closure** | OPEN (record shape exists) | no viewer tab, no "resolved by PR #N". |
+| **G13 — audit trail & loop closure** | **PARTIAL** | the sync ledger now records the human decision per drifted row (`decision`: adopt / pending-*, with evidence and the exact resolving command) and renders it to `sync/PENDING.md`; still no viewer tab, no "resolved by PR #N". |
 
 **G2 (drift-aware update warning), G8 (plain-words style diffs), G9 (sample-library
 cold start) and G14 (refusal triage + `init --detect`) are SHIPPED**; G1, G6 and
@@ -599,6 +599,23 @@ Two named holes remain:
     so the stamp is compared, not re-derived — and the first six live runs
     showed the baseline half is only as honest as its grammar tag
     (`sync/README.md`, "Two fingerprint domains").
+  - **What the lane's red means (policy, 2026-08-23).** A red scheduled
+    `sync-spine` run means exactly one thing: *a drifted row has no recorded
+    human decision* (or its decision is stale because the contract hash,
+    stamp or dump fingerprint moved after it was taken). Each ledger row can
+    carry a `decision` — `adopt` (the canvas is the truth; `observe --adopt`),
+    or `pending-reapply` / `pending-restamp` / `pending-reconcile` (`observe
+    --decide`), the three outcomes that need a **Figma write to a non-scratch
+    file** or a choice between two truths, which automation does not do.
+    Decided drift is green with a `::warning`; the pending writes are listed,
+    with the exact command and the file key they would write to, in
+    `sync/PENDING.md` (generated from the ledger, byte-checked by
+    `sync:ledger:check`); a spine crash is a distinct red. What remains a
+    limitation: the **write** half of every pending row is a human at a Figma
+    desktop (Sync Runner → *Paste a script*), and nothing records a plugin
+    apply or console-loop rebuild into the ledger automatically — every
+    unrecorded session write of 2026-08-09..21 became a row that needed this
+    decision (`sync/receipts/2026-08-23-spine-reconciliation.md`).
 
 **What it would take — an engine change** for the read half; the signing half
 is not buildable in-plugin.
