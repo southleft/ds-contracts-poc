@@ -13,7 +13,7 @@
     "prep:schema": "npm --prefix packages/schema run build",
     "prep:core": "npm run prep:schema && npm --prefix packages/core run build",
     "lint": "oxlint --deny-warnings -A no-unused-vars -A unicorn/no-new-array -A no-unsafe-optional-chaining -A unicorn/prefer-string-starts-ends-with -A no-unreachable .github/scripts packages/cli/src packages/cli/test packages/schema/src packages/core/src packages/emitter-web-components/src workers/assist/src workers/assist/test playground/src dashboard/src site/src",
-    "format:check": "prettier --check .github/scripts/lane-coverage.ts package.json packages/cli/package.json packages/schema/package.json packages/core/package.json packages/emitter-web-components/package.json playground/tsconfig.json dashboard/tsconfig.json site/tsconfig.json accuracy/*.json core/exact-projection.ts core/figma-names.ts core/exact-proposal-check.ts extract/figma/exact-projection.ts extract/figma/exact-projection-check.ts extract/figma/rest/structured-axis-check.ts scripts/accuracy-contract-check.mjs scripts/accuracy-contract-check.test.mjs scripts/roundtrip-uui-fresh.mjs scripts/fidelity-uui-fresh.mjs scripts/figma-propose-atomic-check.ts site/src/what-works.ts site/src/pages/what-works.ts",
+    "format:check": "prettier --check .github/scripts/lane-coverage.ts package.json packages/cli/package.json packages/schema/package.json packages/core/package.json packages/emitter-web-components/package.json playground/tsconfig.json dashboard/tsconfig.json site/tsconfig.json accuracy/*.json core/exact-projection.ts core/figma-names.ts core/exact-proposal-check.ts extract/figma/exact-projection.ts extract/figma/exact-projection-check.ts extract/figma/rest/structured-axis-check.ts scripts/accuracy-contract-check.mjs scripts/accuracy-contract-check.test.mjs scripts/roundtrip-uui-fresh.mjs scripts/fidelity-uui-fresh.mjs scripts/figma-propose-atomic-check.ts site/src/what-works.ts site/src/pages/what-works.ts scripts/canvas-census-check.ts extract/figma/census/corpus.ts extract/figma/census/render.ts",
     "test:cli": "npm --prefix packages/cli run test",
     "coverage:cli": "npm --prefix packages/cli run coverage",
     "test:worker": "npm --prefix workers/assist run test",
@@ -227,7 +227,9 @@
     "root-text:check": "tsx core/root-text-check.ts",
     "first-party-bundle:check": "tsx core/first-party-bundle-check.ts",
     "prop-collision:check": "tsx core/prop-collision-check.ts",
-    "parity:snapshot:rest": "tsx parity/snapshot-rest.ts"
+    "parity:snapshot:rest": "tsx parity/snapshot-rest.ts",
+    "census:check": "tsx scripts/canvas-census-check.ts",
+    "census:render": "tsx extract/figma/census/render.ts"
   },
   "engines": {
     "node": ">=20"

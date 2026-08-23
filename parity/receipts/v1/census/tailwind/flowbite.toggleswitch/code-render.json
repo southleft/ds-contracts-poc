@@ -1,0 +1,167 @@
+{
+  "id": "flowbite.toggleswitch",
+  "name": "ToggleSwitch",
+  "library": "tailwind",
+  "contractPath": "examples/tailwind/contracts/toggleswitch.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/tailwind/figma/tailwind.bundle.json tokenSet (flat base + minted)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 6,
+      "sampled": 4,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "sizing",
+        "type": "enum",
+        "default": "md"
+      },
+      {
+        "name": "checked",
+        "type": "enum",
+        "default": "unchecked"
+      },
+      {
+        "name": "label",
+        "type": "text",
+        "default": "Toggle"
+      }
+    ],
+    "states": [
+      "disabled",
+      "focus-visible",
+      "hover"
+    ],
+    "parts": [
+      "root",
+      "part-0",
+      "part-0-after",
+      "label"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "label"
+      }
+    ],
+    "tokenRefs": [
+      "imported.shared.size-0",
+      "imported.shared.size-8",
+      "imported.shared.size-9999",
+      "imported.toggle-switch.label.color",
+      "imported.toggle-switch.label.font-size",
+      "imported.toggle-switch.label.font-weight",
+      "imported.toggle-switch.label.line-height",
+      "imported.toggle-switch.label.margin-left",
+      "imported.toggle-switch.label.margin-top",
+      "imported.toggle-switch.part-0.background-color.checked",
+      "imported.toggle-switch.part-0.background-color.unchecked",
+      "imported.toggle-switch.part-0.height.lg",
+      "imported.toggle-switch.part-0.height.md",
+      "imported.toggle-switch.part-0.height.sm",
+      "imported.toggle-switch.part-0.min-width.lg",
+      "imported.toggle-switch.part-0.min-width.md",
+      "imported.toggle-switch.part-0.min-width.sm",
+      "imported.toggle-switch.part-0.width.lg",
+      "imported.toggle-switch.part-0.width.md",
+      "imported.toggle-switch.part-0.width.sm",
+      "imported.toggle-switch.root.height.lg",
+      "imported.toggle-switch.root.height.md",
+      "imported.toggle-switch.root.height.sm",
+      "imported.toggle-switch.root.outline-color-state-focus-visible",
+      "imported.toggle-switch.root.outline-width-state-focus-visible",
+      "imported.toggle-switch.root.width.lg",
+      "imported.toggle-switch.root.width.md",
+      "imported.toggle-switch.root.width.sm"
+    ],
+    "icons": [],
+    "events": [
+      "toggle"
+    ]
+  },
+  "variants": [
+    {
+      "slug": "sizing-md__checked-unchecked",
+      "variant": "Sizing=Md, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "sizing": "md",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-sizing-md__checked-unchecked.png",
+      "contentBox": {
+        "width": 103.27,
+        "height": 24
+      }
+    },
+    {
+      "slug": "sizing-md__checked-checked",
+      "variant": "Sizing=Md, Checked=Checked",
+      "kind": "base",
+      "subst": {
+        "sizing": "md",
+        "checked": "checked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-sizing-md__checked-checked.png",
+      "contentBox": {
+        "width": 103.27,
+        "height": 24
+      }
+    },
+    {
+      "slug": "sizing-sm__checked-unchecked",
+      "variant": "Sizing=Sm, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "sizing": "sm",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-sizing-sm__checked-unchecked.png",
+      "contentBox": {
+        "width": 95.27,
+        "height": 22
+      }
+    },
+    {
+      "slug": "sizing-lg__checked-unchecked",
+      "variant": "Sizing=Lg, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "sizing": "lg",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-sizing-lg__checked-unchecked.png",
+      "contentBox": {
+        "width": 111.27,
+        "height": 28
+      }
+    }
+  ],
+  "rendered": 4,
+  "refused": 0,
+  "unavailable": null
+}

@@ -1,0 +1,114 @@
+{
+  "id": "mui.table-pagination",
+  "name": "TablePagination",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/table-pagination.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 1,
+      "sampled": 1,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [],
+    "states": [],
+    "parts": [
+      "root",
+      "tablepagination-toolbar",
+      "tablepagination-spacer",
+      "label",
+      "inputbase-root",
+      "label-2",
+      "select-nativeinput",
+      "icon",
+      "label-3",
+      "tablepagination-actions",
+      "buttonbase-root",
+      "buttonbase-root-2"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.pagination.buttonbase-root-2.background-color",
+      "imported.pagination.buttonbase-root-2.color",
+      "imported.pagination.buttonbase-root.background-color",
+      "imported.pagination.buttonbase-root.color",
+      "imported.pagination.icon.bottom",
+      "imported.pagination.icon.color",
+      "imported.pagination.icon.fill",
+      "imported.pagination.icon.top",
+      "imported.pagination.inputbase-root.height",
+      "imported.pagination.inputbase-root.margin-right",
+      "imported.pagination.inputbase-root.width",
+      "imported.pagination.label-2.min-width",
+      "imported.pagination.label-2.padding-bottom",
+      "imported.pagination.label-2.padding-top",
+      "imported.pagination.label-3.letter-spacing",
+      "imported.pagination.label-3.line-height",
+      "imported.pagination.label.letter-spacing",
+      "imported.pagination.label.line-height",
+      "imported.pagination.root.width",
+      "imported.pagination.select-nativeinput.background-color",
+      "imported.pagination.select-nativeinput.font-size",
+      "imported.pagination.select-nativeinput.height",
+      "imported.pagination.select-nativeinput.padding-bottom",
+      "imported.pagination.select-nativeinput.padding-top",
+      "imported.pagination.select-nativeinput.top",
+      "imported.pagination.select-nativeinput.width",
+      "imported.pagination.tablepagination-actions.width",
+      "imported.pagination.tablepagination-spacer.flex-grow",
+      "imported.pagination.tablepagination-spacer.width",
+      "imported.pagination.tablepagination-toolbar.width",
+      "imported.shared.color-000000de",
+      "imported.shared.color-767676",
+      "imported.shared.num-0",
+      "imported.shared.num-400",
+      "imported.shared.size-0",
+      "imported.shared.size-0-13132",
+      "imported.shared.size-14",
+      "imported.shared.size-2",
+      "imported.shared.size-20",
+      "imported.shared.size-20-125",
+      "imported.shared.size-24",
+      "imported.shared.size-40",
+      "imported.shared.size-52",
+      "imported.shared.size-8"
+    ],
+    "icons": [
+      "table-pagination-buttonbase-root",
+      "table-pagination-buttonbase-root-2",
+      "table-pagination-icon"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "tablepagination",
+      "variant": "TablePagination",
+      "kind": "base",
+      "subst": {},
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-tablepagination.png",
+      "contentBox": {
+        "width": 428,
+        "height": 86
+      }
+    }
+  ],
+  "rendered": 1,
+  "refused": 0,
+  "unavailable": null
+}

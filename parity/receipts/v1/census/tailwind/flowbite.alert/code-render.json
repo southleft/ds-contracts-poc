@@ -1,0 +1,184 @@
+{
+  "id": "flowbite.alert",
+  "name": "Alert",
+  "library": "tailwind",
+  "contractPath": "examples/tailwind/contracts/alert.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/tailwind/figma/tailwind.bundle.json tokenSet (flat base + minted)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 4,
+      "sampled": 4,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "color",
+        "type": "enum",
+        "default": "info"
+      },
+      {
+        "name": "icon",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "dismissable",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Alert message"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "part-0",
+      "alert-icon",
+      "alert-icon-info",
+      "alert-icon-failure",
+      "alert-icon-success",
+      "alert-icon-warning",
+      "label",
+      "dismiss"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.alert.label.color.failure",
+      "imported.alert.label.color.info",
+      "imported.alert.label.color.success",
+      "imported.alert.label.color.warning",
+      "imported.alert.label.font-weight",
+      "imported.alert.part-0.color.failure",
+      "imported.alert.part-0.color.info",
+      "imported.alert.part-0.color.success",
+      "imported.alert.part-0.color.warning",
+      "imported.alert.root.background-color.failure",
+      "imported.alert.root.background-color.info",
+      "imported.alert.root.background-color.success",
+      "imported.alert.root.background-color.warning",
+      "imported.alert.root.border-bottom-color.failure",
+      "imported.alert.root.border-bottom-color.info",
+      "imported.alert.root.border-bottom-color.success",
+      "imported.alert.root.border-bottom-color.warning",
+      "imported.alert.root.border-left-color.failure",
+      "imported.alert.root.border-left-color.info",
+      "imported.alert.root.border-left-color.success",
+      "imported.alert.root.border-left-color.warning",
+      "imported.alert.root.border-right-color.failure",
+      "imported.alert.root.border-right-color.info",
+      "imported.alert.root.border-right-color.success",
+      "imported.alert.root.border-right-color.warning",
+      "imported.alert.root.border-top-color.failure",
+      "imported.alert.root.border-top-color.info",
+      "imported.alert.root.border-top-color.success",
+      "imported.alert.root.border-top-color.warning",
+      "imported.alert.root.color.failure",
+      "imported.alert.root.color.info",
+      "imported.alert.root.color.success",
+      "imported.alert.root.color.warning",
+      "imported.shared.size-14",
+      "imported.shared.size-16",
+      "imported.shared.size-20",
+      "imported.shared.size-8"
+    ],
+    "icons": [
+      "alert-alert-icon-failure",
+      "alert-alert-icon-info",
+      "alert-alert-icon-success",
+      "alert-alert-icon-warning",
+      "alert-dismiss-icon"
+    ],
+    "events": [
+      "dismiss"
+    ]
+  },
+  "variants": [
+    {
+      "slug": "color-info",
+      "variant": "Color=Info",
+      "kind": "base",
+      "subst": {
+        "color": "info"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-info.png",
+      "contentBox": {
+        "width": 121.48,
+        "height": 52
+      }
+    },
+    {
+      "slug": "color-failure",
+      "variant": "Color=Failure",
+      "kind": "base",
+      "subst": {
+        "color": "failure"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-failure.png",
+      "contentBox": {
+        "width": 121.48,
+        "height": 52
+      }
+    },
+    {
+      "slug": "color-success",
+      "variant": "Color=Success",
+      "kind": "base",
+      "subst": {
+        "color": "success"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-success.png",
+      "contentBox": {
+        "width": 121.48,
+        "height": 52
+      }
+    },
+    {
+      "slug": "color-warning",
+      "variant": "Color=Warning",
+      "kind": "base",
+      "subst": {
+        "color": "warning"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-warning.png",
+      "contentBox": {
+        "width": 121.48,
+        "height": 52
+      }
+    }
+  ],
+  "rendered": 4,
+  "refused": 0,
+  "unavailable": null
+}

@@ -1,0 +1,394 @@
+{
+  "id": "fluent.badge",
+  "name": "Badge",
+  "library": "fluent",
+  "contractPath": "examples/fluent/contracts/badge.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/fluent/figma/fluent.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 192,
+      "sampled": 16,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "appearance",
+        "type": "enum",
+        "default": "filled"
+      },
+      {
+        "name": "color",
+        "type": "enum",
+        "default": "brand"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "medium"
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "9"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [
+      {
+        "part": "root",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.badge.root.font-size.extra-large",
+      "imported.badge.root.font-size.extra-small",
+      "imported.badge.root.font-size.large",
+      "imported.badge.root.font-size.medium",
+      "imported.badge.root.font-size.small",
+      "imported.badge.root.font-size.tiny",
+      "imported.badge.root.font-weight",
+      "imported.badge.root.height.extra-large",
+      "imported.badge.root.height.extra-small",
+      "imported.badge.root.height.large",
+      "imported.badge.root.height.medium",
+      "imported.badge.root.height.small",
+      "imported.badge.root.height.tiny",
+      "imported.badge.root.line-height.extra-large",
+      "imported.badge.root.line-height.extra-small",
+      "imported.badge.root.line-height.large",
+      "imported.badge.root.line-height.medium",
+      "imported.badge.root.line-height.small",
+      "imported.badge.root.line-height.tiny",
+      "imported.badge.root.padding-left.extra-large",
+      "imported.badge.root.padding-left.extra-small",
+      "imported.badge.root.padding-left.large",
+      "imported.badge.root.padding-left.medium",
+      "imported.badge.root.padding-left.small",
+      "imported.badge.root.padding-left.tiny",
+      "imported.badge.root.padding-right.extra-large",
+      "imported.badge.root.padding-right.extra-small",
+      "imported.badge.root.padding-right.large",
+      "imported.badge.root.padding-right.medium",
+      "imported.badge.root.padding-right.small",
+      "imported.badge.root.padding-right.tiny",
+      "imported.badge.root.width.extra-large",
+      "imported.badge.root.width.extra-small",
+      "imported.badge.root.width.large",
+      "imported.badge.root.width.medium",
+      "imported.badge.root.width.small",
+      "imported.badge.root.width.tiny",
+      "imported.shared.size-0",
+      "imported.shared.size-10000"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "appearance-filled__color-brand__size-medium",
+      "variant": "Appearance=Filled, Color=Brand, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled",
+        "color": "brand",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled__color-brand__size-medium.png",
+      "contentBox": {
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "slug": "appearance-filled__color-brand__size-tiny",
+      "variant": "Appearance=Filled, Color=Brand, Size=Tiny",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled",
+        "color": "brand",
+        "size": "tiny"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled__color-brand__size-tiny.png",
+      "contentBox": {
+        "width": 6,
+        "height": 6
+      }
+    },
+    {
+      "slug": "appearance-filled__color-brand__size-extra-small",
+      "variant": "Appearance=Filled, Color=Brand, Size=Extra Small",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled",
+        "color": "brand",
+        "size": "extra-small"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled__color-brand__size-extra-small.png",
+      "contentBox": {
+        "width": 10,
+        "height": 10
+      }
+    },
+    {
+      "slug": "appearance-filled__color-brand__size-small",
+      "variant": "Appearance=Filled, Color=Brand, Size=Small",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled",
+        "color": "brand",
+        "size": "small"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled__color-brand__size-small.png",
+      "contentBox": {
+        "width": 16,
+        "height": 16
+      }
+    },
+    {
+      "slug": "appearance-filled__color-brand__size-large",
+      "variant": "Appearance=Filled, Color=Brand, Size=Large",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled",
+        "color": "brand",
+        "size": "large"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled__color-brand__size-large.png",
+      "contentBox": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "slug": "appearance-filled__color-brand__size-extra-large",
+      "variant": "Appearance=Filled, Color=Brand, Size=Extra Large",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled",
+        "color": "brand",
+        "size": "extra-large"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled__color-brand__size-extra-large.png",
+      "contentBox": {
+        "width": 32,
+        "height": 32
+      }
+    },
+    {
+      "slug": "appearance-filled__color-danger__size-medium",
+      "variant": "Appearance=Filled, Color=Danger, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled",
+        "color": "danger",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled__color-danger__size-medium.png",
+      "contentBox": {
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "slug": "appearance-filled__color-important__size-medium",
+      "variant": "Appearance=Filled, Color=Important, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled",
+        "color": "important",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled__color-important__size-medium.png",
+      "contentBox": {
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "slug": "appearance-filled__color-informative__size-medium",
+      "variant": "Appearance=Filled, Color=Informative, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled",
+        "color": "informative",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled__color-informative__size-medium.png",
+      "contentBox": {
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "slug": "appearance-filled__color-severe__size-medium",
+      "variant": "Appearance=Filled, Color=Severe, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled",
+        "color": "severe",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled__color-severe__size-medium.png",
+      "contentBox": {
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "slug": "appearance-filled__color-subtle__size-medium",
+      "variant": "Appearance=Filled, Color=Subtle, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled",
+        "color": "subtle",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled__color-subtle__size-medium.png",
+      "contentBox": {
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "slug": "appearance-filled__color-success__size-medium",
+      "variant": "Appearance=Filled, Color=Success, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled",
+        "color": "success",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled__color-success__size-medium.png",
+      "contentBox": {
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "slug": "appearance-filled__color-warning__size-medium",
+      "variant": "Appearance=Filled, Color=Warning, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "appearance": "filled",
+        "color": "warning",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-filled__color-warning__size-medium.png",
+      "contentBox": {
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "slug": "appearance-ghost__color-brand__size-medium",
+      "variant": "Appearance=Ghost, Color=Brand, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "appearance": "ghost",
+        "color": "brand",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-ghost__color-brand__size-medium.png",
+      "contentBox": {
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "slug": "appearance-outline__color-brand__size-medium",
+      "variant": "Appearance=Outline, Color=Brand, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "appearance": "outline",
+        "color": "brand",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-outline__color-brand__size-medium.png",
+      "contentBox": {
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "slug": "appearance-tint__color-brand__size-medium",
+      "variant": "Appearance=Tint, Color=Brand, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "appearance": "tint",
+        "color": "brand",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-appearance-tint__color-brand__size-medium.png",
+      "contentBox": {
+        "width": 20,
+        "height": 20
+      }
+    }
+  ],
+  "rendered": 16,
+  "refused": 0,
+  "unavailable": null
+}

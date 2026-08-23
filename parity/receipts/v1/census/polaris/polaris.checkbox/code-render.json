@@ -1,0 +1,173 @@
+{
+  "id": "polaris.checkbox",
+  "name": "Checkbox",
+  "library": "polaris",
+  "contractPath": "examples/polaris/contracts/checkbox.contract.json",
+  "contractVersion": "0.4.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/polaris/figma/polaris.bundle.json tokenSet (flat base + minted)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 3,
+      "sampled": 3,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "checked",
+        "type": "enum",
+        "default": "unchecked"
+      },
+      {
+        "name": "ariaControls",
+        "type": "text",
+        "default": null
+      },
+      {
+        "name": "ariaDescribedBy",
+        "type": "text",
+        "default": null
+      },
+      {
+        "name": "labelHidden",
+        "type": "boolean",
+        "default": null
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": null
+      },
+      {
+        "name": "name",
+        "type": "text",
+        "default": null
+      },
+      {
+        "name": "value",
+        "type": "text",
+        "default": null
+      },
+      {
+        "name": "labelClassName",
+        "type": "text",
+        "default": null
+      }
+    ],
+    "states": [
+      "hover",
+      "disabled",
+      "focus-visible"
+    ],
+    "parts": [
+      "root",
+      "choice__control",
+      "checkbox",
+      "input",
+      "backdrop",
+      "icon-3",
+      "icon-4",
+      "icon-6",
+      "icon",
+      "choice__label",
+      "label"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.checkbox.backdrop.background-color-state-disabled",
+      "imported.checkbox.choice-control.margin-right",
+      "imported.checkbox.icon-6.color",
+      "imported.checkbox.icon-6.fill",
+      "imported.checkbox.input.color",
+      "imported.checkbox.input.color-state-disabled",
+      "imported.checkbox.input.font-size",
+      "imported.checkbox.input.font-weight",
+      "imported.checkbox.input.outline-color",
+      "imported.checkbox.input.z-index",
+      "imported.checkbox.label.font-size",
+      "imported.checkbox.label.font-weight",
+      "imported.checkbox.root.height",
+      "imported.shared.color-303030",
+      "imported.shared.color-b5b5b5",
+      "imported.shared.num-0",
+      "imported.shared.size-0",
+      "imported.shared.size-1",
+      "imported.shared.size-14",
+      "imported.shared.size-18",
+      "imported.shared.size-2",
+      "imported.shared.size-20",
+      "imported.shared.size-4",
+      "name",
+      "p.color-input-border-hover",
+      "value"
+    ],
+    "icons": [
+      "checkbox-icon-4",
+      "checkbox-icon-6"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "checked-unchecked",
+      "variant": "Checked=unchecked",
+      "kind": "base",
+      "subst": {
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-checked-unchecked.png",
+      "contentBox": {
+        "width": 149.41,
+        "height": 28
+      }
+    },
+    {
+      "slug": "checked-checked",
+      "variant": "Checked=checked",
+      "kind": "base",
+      "subst": {
+        "checked": "checked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-checked-checked.png",
+      "contentBox": {
+        "width": 149.41,
+        "height": 37
+      }
+    },
+    {
+      "slug": "checked-indeterminate",
+      "variant": "Checked=indeterminate",
+      "kind": "base",
+      "subst": {
+        "checked": "indeterminate"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-checked-indeterminate.png",
+      "contentBox": {
+        "width": 149.41,
+        "height": 45
+      }
+    }
+  ],
+  "rendered": 3,
+  "refused": 0,
+  "unavailable": null
+}

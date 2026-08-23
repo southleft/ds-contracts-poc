@@ -1,0 +1,108 @@
+{
+  "id": "mui.drawer",
+  "name": "Drawer",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/drawer.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 2,
+      "sampled": 2,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "temporary"
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Drawer content"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "backdrop-root",
+      "label"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.drawer.backdrop-root.background-color",
+      "imported.drawer.label.background-color",
+      "imported.drawer.label.border-right-color.permanent",
+      "imported.drawer.label.border-right-color.temporary",
+      "imported.drawer.label.border-right-width.permanent",
+      "imported.drawer.label.border-right-width.temporary",
+      "imported.drawer.label.box-shadow.permanent",
+      "imported.drawer.label.box-shadow.temporary",
+      "imported.drawer.label.color",
+      "imported.drawer.label.flex-grow",
+      "imported.drawer.label.flex-shrink",
+      "imported.drawer.label.font-size",
+      "imported.drawer.label.font-weight",
+      "imported.drawer.label.z-index",
+      "imported.drawer.root.flex-shrink.permanent",
+      "imported.drawer.root.flex-shrink.temporary",
+      "imported.shared.size-0"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-temporary",
+      "variant": "Variant=Temporary",
+      "kind": "base",
+      "subst": {
+        "variant": "temporary"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-temporary.png",
+      "contentBox": {
+        "width": 108.5,
+        "height": 18
+      }
+    },
+    {
+      "slug": "variant-permanent",
+      "variant": "Variant=Permanent",
+      "kind": "base",
+      "subst": {
+        "variant": "permanent"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-permanent.png",
+      "contentBox": {
+        "width": 108.5,
+        "height": 18
+      }
+    }
+  ],
+  "rendered": 2,
+  "refused": 0,
+  "unavailable": null
+}

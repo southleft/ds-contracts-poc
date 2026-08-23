@@ -1,0 +1,265 @@
+{
+  "id": "polaris.banner",
+  "name": "Banner",
+  "library": "polaris",
+  "contractPath": "examples/polaris/contracts/banner.contract.json",
+  "contractVersion": "0.4.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/polaris/figma/polaris.bundle.json tokenSet (flat base + minted)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 8,
+      "sampled": 5,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "title",
+        "type": "text",
+        "default": null
+      },
+      {
+        "name": "hideIcon",
+        "type": "boolean",
+        "default": null
+      },
+      {
+        "name": "tone",
+        "type": "enum",
+        "default": "info"
+      },
+      {
+        "name": "stopAnnouncements",
+        "type": "boolean",
+        "default": null
+      },
+      {
+        "name": "dismissible",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "withAction",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Use your finance report to get detailed insights."
+      }
+    ],
+    "states": [
+      "focus-visible"
+    ],
+    "parts": [
+      "root",
+      "box",
+      "blockstack",
+      "box-2",
+      "inlinestack",
+      "inlinestack-2",
+      "part-0-0-0-0-0-0",
+      "icon",
+      "icon-success",
+      "icon-info",
+      "icon-warning",
+      "icon-critical",
+      "title",
+      "button",
+      "button__icon",
+      "part-0-0-0-0-1-0-0",
+      "icon-3",
+      "box-3",
+      "blockstack-2",
+      "part-0-0-1-0-0",
+      "label-2",
+      "buttongroup",
+      "buttongroup__item",
+      "button-2",
+      "label-3"
+    ],
+    "contentSlots": [
+      {
+        "part": "title",
+        "prop": "title"
+      },
+      {
+        "part": "label-2",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.banner.box-2.background-color.critical",
+      "imported.banner.box-2.background-color.info",
+      "imported.banner.box-2.background-color.success",
+      "imported.banner.box-2.background-color.warning",
+      "imported.banner.box-2.color.critical",
+      "imported.banner.box-2.color.info",
+      "imported.banner.box-2.color.success",
+      "imported.banner.box-2.color.warning",
+      "imported.banner.button-2.background-color",
+      "imported.banner.button-2.box-shadow",
+      "imported.banner.button-2.padding-bottom",
+      "imported.banner.button-2.padding-top",
+      "imported.banner.button-2.width",
+      "imported.banner.button-icon.margin-bottom",
+      "imported.banner.button-icon.margin-top",
+      "imported.banner.button.background-color",
+      "imported.banner.buttongroup-item.width",
+      "imported.banner.buttongroup.height",
+      "imported.banner.buttongroup.margin-left",
+      "imported.banner.buttongroup.margin-top",
+      "imported.banner.buttongroup.width",
+      "imported.banner.icon.color.critical",
+      "imported.banner.icon.color.info",
+      "imported.banner.icon.color.success",
+      "imported.banner.icon.color.warning",
+      "imported.banner.inlinestack-2.color.critical",
+      "imported.banner.inlinestack-2.color.info",
+      "imported.banner.inlinestack-2.color.success",
+      "imported.banner.inlinestack-2.color.warning",
+      "imported.banner.inlinestack-2.width",
+      "imported.banner.inlinestack.color.critical",
+      "imported.banner.inlinestack.color.info",
+      "imported.banner.inlinestack.color.success",
+      "imported.banner.inlinestack.color.warning",
+      "imported.banner.label-3.font-weight",
+      "imported.banner.label-3.line-height",
+      "imported.banner.part-0-0-0-0-0-0.color.critical",
+      "imported.banner.part-0-0-0-0-0-0.color.info",
+      "imported.banner.part-0-0-0-0-0-0.color.success",
+      "imported.banner.part-0-0-0-0-0-0.color.warning",
+      "imported.banner.root.box-shadow",
+      "imported.banner.root.outline-color-state-focus-visible",
+      "imported.banner.root.outline-width-state-focus-visible",
+      "imported.banner.title.color.critical",
+      "imported.banner.title.color.info",
+      "imported.banner.title.color.success",
+      "imported.banner.title.color.warning",
+      "imported.shared.color-303030",
+      "imported.shared.num-450",
+      "imported.shared.size-0",
+      "imported.shared.size-12",
+      "imported.shared.size-13",
+      "imported.shared.size-2",
+      "imported.shared.size-20",
+      "imported.shared.size-295-328",
+      "imported.shared.size-319-328",
+      "imported.shared.size-32",
+      "imported.shared.size-4",
+      "imported.shared.size-8",
+      "imported.shared.size-neg-4",
+      "p.color-bg-surface",
+      "p.color-text",
+      "p.text-heading-sm-font-letter-spacing",
+      "p.text-heading-sm-font-line-height",
+      "p.text-heading-sm-font-size",
+      "p.text-heading-sm-font-weight"
+    ],
+    "icons": [
+      "banner-icon-3",
+      "banner-icon-critical",
+      "banner-icon-info",
+      "banner-icon-success",
+      "banner-icon-warning"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "tone-info",
+      "variant": "Tone=Info",
+      "kind": "base",
+      "subst": {
+        "tone": "info"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-tone-info.png",
+      "contentBox": {
+        "width": 319.31,
+        "height": 92
+      }
+    },
+    {
+      "slug": "tone-success",
+      "variant": "Tone=Success",
+      "kind": "base",
+      "subst": {
+        "tone": "success"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-tone-success.png",
+      "contentBox": {
+        "width": 319.31,
+        "height": 92
+      }
+    },
+    {
+      "slug": "tone-warning",
+      "variant": "Tone=Warning",
+      "kind": "base",
+      "subst": {
+        "tone": "warning"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-tone-warning.png",
+      "contentBox": {
+        "width": 319.31,
+        "height": 92
+      }
+    },
+    {
+      "slug": "tone-critical",
+      "variant": "Tone=Critical",
+      "kind": "base",
+      "subst": {
+        "tone": "critical"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-tone-critical.png",
+      "contentBox": {
+        "width": 319.31,
+        "height": 92
+      }
+    },
+    {
+      "slug": "tone-info__state-focus-visible",
+      "variant": "Tone=Info, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "subst": {
+        "tone": "info"
+      },
+      "bools": {},
+      "interaction": "focus-visible",
+      "status": "rendered",
+      "png": "code-tone-info__state-focus-visible.png",
+      "contentBox": {
+        "width": 319.31,
+        "height": 92
+      }
+    }
+  ],
+  "rendered": 5,
+  "refused": 0,
+  "unavailable": null
+}

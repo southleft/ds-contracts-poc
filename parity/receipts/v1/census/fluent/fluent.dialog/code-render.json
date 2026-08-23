@@ -1,0 +1,209 @@
+{
+  "id": "fluent.dialog",
+  "name": "Dialog",
+  "library": "fluent",
+  "contractPath": "examples/fluent/contracts/dialog.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/fluent/figma/fluent.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 3,
+      "sampled": 3,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "modalType",
+        "type": "enum",
+        "default": "modal"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "dialogbody-2",
+      "label-4",
+      "dialogtitle__action",
+      "part-0-1-0",
+      "label-5",
+      "dialogactions-2",
+      "label-6",
+      "dialogsurface__backdrop",
+      "dialogsurface",
+      "dialogbody",
+      "label",
+      "label-2",
+      "dialogactions",
+      "label-3"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.dialog.dialogbody-2.max-height",
+      "imported.dialog.dialogbody.max-height",
+      "imported.dialog.dialogsurface-backdrop.background-color",
+      "imported.dialog.dialogsurface.box-shadow",
+      "imported.dialog.dialogsurface.margin-bottom",
+      "imported.dialog.dialogsurface.margin-left",
+      "imported.dialog.dialogsurface.margin-right",
+      "imported.dialog.dialogsurface.margin-top",
+      "imported.dialog.dialogsurface.max-height",
+      "imported.dialog.dialogsurface.max-width",
+      "imported.dialog.dialogsurface.scale",
+      "imported.dialog.label-2.font-weight",
+      "imported.dialog.label-2.min-height",
+      "imported.dialog.label-3.min-width",
+      "imported.dialog.label-4.line-height",
+      "imported.dialog.label-5.font-weight",
+      "imported.dialog.label-5.min-height",
+      "imported.dialog.label-6.min-width",
+      "imported.dialog.label.line-height",
+      "imported.dialog.root.border-bottom-color.alert",
+      "imported.dialog.root.border-bottom-color.modal",
+      "imported.dialog.root.border-bottom-color.non-modal",
+      "imported.dialog.root.border-bottom-left-radius.alert",
+      "imported.dialog.root.border-bottom-left-radius.modal",
+      "imported.dialog.root.border-bottom-left-radius.non-modal",
+      "imported.dialog.root.border-bottom-right-radius.alert",
+      "imported.dialog.root.border-bottom-right-radius.modal",
+      "imported.dialog.root.border-bottom-right-radius.non-modal",
+      "imported.dialog.root.border-bottom-width.alert",
+      "imported.dialog.root.border-bottom-width.modal",
+      "imported.dialog.root.border-bottom-width.non-modal",
+      "imported.dialog.root.border-left-color.alert",
+      "imported.dialog.root.border-left-color.modal",
+      "imported.dialog.root.border-left-color.non-modal",
+      "imported.dialog.root.border-left-width.alert",
+      "imported.dialog.root.border-left-width.modal",
+      "imported.dialog.root.border-left-width.non-modal",
+      "imported.dialog.root.border-right-color.alert",
+      "imported.dialog.root.border-right-color.modal",
+      "imported.dialog.root.border-right-color.non-modal",
+      "imported.dialog.root.border-right-width.alert",
+      "imported.dialog.root.border-right-width.modal",
+      "imported.dialog.root.border-right-width.non-modal",
+      "imported.dialog.root.border-top-color.alert",
+      "imported.dialog.root.border-top-color.modal",
+      "imported.dialog.root.border-top-color.non-modal",
+      "imported.dialog.root.border-top-left-radius.alert",
+      "imported.dialog.root.border-top-left-radius.modal",
+      "imported.dialog.root.border-top-left-radius.non-modal",
+      "imported.dialog.root.border-top-right-radius.alert",
+      "imported.dialog.root.border-top-right-radius.modal",
+      "imported.dialog.root.border-top-right-radius.non-modal",
+      "imported.dialog.root.border-top-width.alert",
+      "imported.dialog.root.border-top-width.modal",
+      "imported.dialog.root.border-top-width.non-modal",
+      "imported.dialog.root.box-shadow.alert",
+      "imported.dialog.root.box-shadow.modal",
+      "imported.dialog.root.box-shadow.non-modal",
+      "imported.dialog.root.margin-bottom.alert",
+      "imported.dialog.root.margin-bottom.modal",
+      "imported.dialog.root.margin-bottom.non-modal",
+      "imported.dialog.root.margin-left.alert",
+      "imported.dialog.root.margin-left.modal",
+      "imported.dialog.root.margin-left.non-modal",
+      "imported.dialog.root.margin-right.alert",
+      "imported.dialog.root.margin-right.modal",
+      "imported.dialog.root.margin-right.non-modal",
+      "imported.dialog.root.margin-top.alert",
+      "imported.dialog.root.margin-top.modal",
+      "imported.dialog.root.margin-top.non-modal",
+      "imported.dialog.root.padding-bottom.alert",
+      "imported.dialog.root.padding-bottom.modal",
+      "imported.dialog.root.padding-bottom.non-modal",
+      "imported.dialog.root.padding-left.alert",
+      "imported.dialog.root.padding-left.modal",
+      "imported.dialog.root.padding-left.non-modal",
+      "imported.dialog.root.padding-right.alert",
+      "imported.dialog.root.padding-right.modal",
+      "imported.dialog.root.padding-right.non-modal",
+      "imported.dialog.root.padding-top.alert",
+      "imported.dialog.root.padding-top.modal",
+      "imported.dialog.root.padding-top.non-modal",
+      "imported.shared.color-00000000",
+      "imported.shared.color-242424",
+      "imported.shared.color-d1d1d1",
+      "imported.shared.color-ffffff",
+      "imported.shared.num-600",
+      "imported.shared.size-0",
+      "imported.shared.size-1",
+      "imported.shared.size-12",
+      "imported.shared.size-14",
+      "imported.shared.size-2",
+      "imported.shared.size-20",
+      "imported.shared.size-24",
+      "imported.shared.size-4",
+      "imported.shared.size-5",
+      "imported.shared.size-8",
+      "imported.shared.size-neg-2"
+    ],
+    "icons": [
+      "dialog-part-0-1-0"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "modal-type-modal",
+      "variant": "Modal Type=Modal",
+      "kind": "base",
+      "subst": {
+        "modalType": "modal"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-modal-type-modal.png",
+      "contentBox": {
+        "width": 1017.17,
+        "height": 1328
+      }
+    },
+    {
+      "slug": "modal-type-non-modal",
+      "variant": "Modal Type=Non Modal",
+      "kind": "base",
+      "subst": {
+        "modalType": "non-modal"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-modal-type-non-modal.png",
+      "contentBox": {
+        "width": 1043.17,
+        "height": 1326
+      }
+    },
+    {
+      "slug": "modal-type-alert",
+      "variant": "Modal Type=Alert",
+      "kind": "base",
+      "subst": {
+        "modalType": "alert"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-modal-type-alert.png",
+      "contentBox": {
+        "width": 1017.17,
+        "height": 1328
+      }
+    }
+  ],
+  "rendered": 3,
+  "refused": 0,
+  "unavailable": null
+}

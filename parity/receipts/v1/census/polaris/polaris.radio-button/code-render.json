@@ -1,0 +1,140 @@
+{
+  "id": "polaris.radio-button",
+  "name": "RadioButton",
+  "library": "polaris",
+  "contractPath": "examples/polaris/contracts/radio-button.contract.json",
+  "contractVersion": "0.4.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/polaris/figma/polaris.bundle.json tokenSet (flat base + minted)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 2,
+      "sampled": 2,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "ariaDescribedBy",
+        "type": "text",
+        "default": null
+      },
+      {
+        "name": "labelHidden",
+        "type": "boolean",
+        "default": null
+      },
+      {
+        "name": "checked",
+        "type": "enum",
+        "default": "unchecked"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": null
+      },
+      {
+        "name": "name",
+        "type": "text",
+        "default": null
+      },
+      {
+        "name": "value",
+        "type": "text",
+        "default": null
+      }
+    ],
+    "states": [
+      "disabled",
+      "focus-visible"
+    ],
+    "parts": [
+      "root",
+      "choice__control",
+      "radiobutton",
+      "input",
+      "backdrop",
+      "backdrop-before",
+      "choice__label",
+      "label"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.radio-button.backdrop.background-color-state-disabled",
+      "imported.radio-button.choice-control.flex-shrink",
+      "imported.radio-button.choice-control.margin-right",
+      "imported.radio-button.choice-control.width",
+      "imported.radio-button.choice-label.width",
+      "imported.radio-button.input.bottom",
+      "imported.radio-button.input.color",
+      "imported.radio-button.input.color-state-disabled",
+      "imported.radio-button.input.font-size",
+      "imported.radio-button.input.font-weight",
+      "imported.radio-button.input.outline-color",
+      "imported.radio-button.input.right",
+      "imported.radio-button.label.font-size",
+      "imported.radio-button.label.font-weight",
+      "imported.radio-button.label.line-height",
+      "imported.radio-button.root.height",
+      "imported.radio-button.root.padding-bottom",
+      "imported.radio-button.root.padding-top",
+      "imported.radio-button.root.width",
+      "imported.shared.color-b5b5b5",
+      "imported.shared.size-0",
+      "imported.shared.size-1",
+      "imported.shared.size-18",
+      "name",
+      "p.border-radius-full",
+      "value"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "checked-unchecked",
+      "variant": "Checked=unchecked",
+      "kind": "base",
+      "subst": {
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-checked-unchecked.png",
+      "contentBox": {
+        "width": 166.31,
+        "height": 28
+      }
+    },
+    {
+      "slug": "checked-checked",
+      "variant": "Checked=checked",
+      "kind": "base",
+      "subst": {
+        "checked": "checked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-checked-checked.png",
+      "contentBox": {
+        "width": 166.31,
+        "height": 28
+      }
+    }
+  ],
+  "rendered": 2,
+  "refused": 0,
+  "unavailable": null
+}

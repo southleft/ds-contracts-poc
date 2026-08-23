@@ -1,0 +1,217 @@
+{
+  "id": "fluent.avatar",
+  "name": "Avatar",
+  "library": "fluent",
+  "contractPath": "examples/fluent/contracts/avatar.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/fluent/figma/fluent.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 18,
+      "sampled": 6,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "shape",
+        "type": "enum",
+        "default": "circular"
+      },
+      {
+        "name": "active",
+        "type": "enum",
+        "default": "none"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": null
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "label"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.avatar.label.background-color",
+      "imported.avatar.label.border-bottom-left-radius.circular.unset",
+      "imported.avatar.label.border-bottom-left-radius.square.unset",
+      "imported.avatar.label.border-bottom-right-radius.circular.unset",
+      "imported.avatar.label.border-bottom-right-radius.square.unset",
+      "imported.avatar.label.border-top-left-radius.circular.unset",
+      "imported.avatar.label.border-top-left-radius.square.unset",
+      "imported.avatar.label.border-top-right-radius.circular.unset",
+      "imported.avatar.label.border-top-right-radius.square.unset",
+      "imported.avatar.label.color",
+      "imported.avatar.label.font-size.24",
+      "imported.avatar.label.font-size.48",
+      "imported.avatar.label.font-size.96",
+      "imported.avatar.label.font-size.unset",
+      "imported.avatar.label.font-weight",
+      "imported.avatar.label.height.24",
+      "imported.avatar.label.height.48",
+      "imported.avatar.label.height.96",
+      "imported.avatar.label.height.unset",
+      "imported.avatar.label.width.24",
+      "imported.avatar.label.width.48",
+      "imported.avatar.label.width.96",
+      "imported.avatar.label.width.unset",
+      "imported.avatar.root.border-bottom-left-radius.circular.unset",
+      "imported.avatar.root.border-bottom-left-radius.square.unset",
+      "imported.avatar.root.border-bottom-right-radius.circular.unset",
+      "imported.avatar.root.border-bottom-right-radius.square.unset",
+      "imported.avatar.root.border-top-left-radius.circular.unset",
+      "imported.avatar.root.border-top-left-radius.square.unset",
+      "imported.avatar.root.border-top-right-radius.circular.unset",
+      "imported.avatar.root.border-top-right-radius.square.unset",
+      "imported.avatar.root.flex-shrink",
+      "imported.avatar.root.font-size.24",
+      "imported.avatar.root.font-size.48",
+      "imported.avatar.root.font-size.96",
+      "imported.avatar.root.font-size.unset",
+      "imported.avatar.root.font-weight",
+      "imported.avatar.root.height.24",
+      "imported.avatar.root.height.48",
+      "imported.avatar.root.height.96",
+      "imported.avatar.root.height.unset",
+      "imported.avatar.root.opacity.active",
+      "imported.avatar.root.opacity.inactive",
+      "imported.avatar.root.opacity.none",
+      "imported.avatar.root.width.24",
+      "imported.avatar.root.width.48",
+      "imported.avatar.root.width.96",
+      "imported.avatar.root.width.unset",
+      "imported.shared.color-00000000",
+      "imported.shared.size-0",
+      "imported.shared.size-1"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "shape-circular__active-none__size-24",
+      "variant": "Shape=Circular, Active=None, Size=24",
+      "kind": "base",
+      "subst": {
+        "shape": "circular",
+        "active": "none",
+        "size": "24"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-shape-circular__active-none__size-24.png",
+      "contentBox": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "slug": "shape-circular__active-none__size-48",
+      "variant": "Shape=Circular, Active=None, Size=48",
+      "kind": "base",
+      "subst": {
+        "shape": "circular",
+        "active": "none",
+        "size": "48"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-shape-circular__active-none__size-48.png",
+      "contentBox": {
+        "width": 48,
+        "height": 48
+      }
+    },
+    {
+      "slug": "shape-circular__active-none__size-96",
+      "variant": "Shape=Circular, Active=None, Size=96",
+      "kind": "base",
+      "subst": {
+        "shape": "circular",
+        "active": "none",
+        "size": "96"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-shape-circular__active-none__size-96.png",
+      "contentBox": {
+        "width": 96,
+        "height": 96
+      }
+    },
+    {
+      "slug": "shape-circular__active-active__size-24",
+      "variant": "Shape=Circular, Active=Active, Size=24",
+      "kind": "base",
+      "subst": {
+        "shape": "circular",
+        "active": "active",
+        "size": "24"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-shape-circular__active-active__size-24.png",
+      "contentBox": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "slug": "shape-circular__active-inactive__size-24",
+      "variant": "Shape=Circular, Active=Inactive, Size=24",
+      "kind": "base",
+      "subst": {
+        "shape": "circular",
+        "active": "inactive",
+        "size": "24"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-shape-circular__active-inactive__size-24.png",
+      "contentBox": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "slug": "shape-square__active-none__size-24",
+      "variant": "Shape=Square, Active=None, Size=24",
+      "kind": "base",
+      "subst": {
+        "shape": "square",
+        "active": "none",
+        "size": "24"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-shape-square__active-none__size-24.png",
+      "contentBox": {
+        "width": 24,
+        "height": 24
+      }
+    }
+  ],
+  "rendered": 6,
+  "refused": 0,
+  "unavailable": null
+}

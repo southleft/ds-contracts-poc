@@ -1,0 +1,180 @@
+{
+  "id": "carbon.textinput",
+  "name": "TextInput",
+  "library": "carbon",
+  "contractPath": "examples/carbon/contracts/textinput.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/carbon/figma/carbon.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 8,
+      "sampled": 5,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "size",
+        "type": "enum",
+        "default": null
+      }
+    ],
+    "states": [
+      "disabled"
+    ],
+    "parts": [
+      "root",
+      "text-input__label-wrapper",
+      "label",
+      "text-input__field-outer-wrapper",
+      "text-input__field-wrapper",
+      "text-input",
+      "text-input__counter-alert"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.shared.color-16161640",
+      "imported.shared.size-0",
+      "imported.shared.size-0-16",
+      "imported.shared.size-1",
+      "imported.shared.size-14",
+      "imported.shared.size-16",
+      "imported.shared.size-18-0001",
+      "imported.shared.size-288",
+      "imported.shared.size-neg-1",
+      "imported.text-input.label.color",
+      "imported.text-input.label.font-size",
+      "imported.text-input.label.font-weight",
+      "imported.text-input.label.letter-spacing",
+      "imported.text-input.label.margin-bottom",
+      "imported.text-input.root.flex-grow",
+      "imported.text-input.root.height.lg",
+      "imported.text-input.root.height.md",
+      "imported.text-input.root.height.sm",
+      "imported.text-input.root.height.unset",
+      "imported.text-input.root.height.xs",
+      "imported.text-input.text-input-counter-alert.bottom.lg",
+      "imported.text-input.text-input-counter-alert.bottom.md",
+      "imported.text-input.text-input-counter-alert.bottom.sm",
+      "imported.text-input.text-input-counter-alert.bottom.unset",
+      "imported.text-input.text-input-counter-alert.bottom.xs",
+      "imported.text-input.text-input-counter-alert.right",
+      "imported.text-input.text-input-field-outer-wrapper.flex-grow",
+      "imported.text-input.text-input-field-outer-wrapper.height.lg",
+      "imported.text-input.text-input-field-outer-wrapper.height.md",
+      "imported.text-input.text-input-field-outer-wrapper.height.sm",
+      "imported.text-input.text-input-field-outer-wrapper.height.unset",
+      "imported.text-input.text-input-field-outer-wrapper.height.xs",
+      "imported.text-input.text-input-field-wrapper.height.lg",
+      "imported.text-input.text-input-field-wrapper.height.md",
+      "imported.text-input.text-input-field-wrapper.height.sm",
+      "imported.text-input.text-input-field-wrapper.height.unset",
+      "imported.text-input.text-input-field-wrapper.height.xs",
+      "imported.text-input.text-input-label-wrapper.height",
+      "imported.text-input.text-input.background-color",
+      "imported.text-input.text-input.border-bottom-color",
+      "imported.text-input.text-input.height.lg",
+      "imported.text-input.text-input.height.md",
+      "imported.text-input.text-input.height.sm",
+      "imported.text-input.text-input.height.unset",
+      "imported.text-input.text-input.height.xs",
+      "imported.text-input.text-input.outline-color",
+      "imported.text-input.text-input.outline-offset",
+      "imported.text-input.text-input.outline-width"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "size-xs",
+      "variant": "Size=Xs",
+      "kind": "base",
+      "subst": {
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-xs.png",
+      "contentBox": {
+        "width": 288,
+        "height": 48
+      }
+    },
+    {
+      "slug": "size-sm",
+      "variant": "Size=Sm",
+      "kind": "base",
+      "subst": {
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-sm.png",
+      "contentBox": {
+        "width": 288,
+        "height": 56
+      }
+    },
+    {
+      "slug": "size-md",
+      "variant": "Size=Md",
+      "kind": "base",
+      "subst": {
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-md.png",
+      "contentBox": {
+        "width": 288,
+        "height": 64
+      }
+    },
+    {
+      "slug": "size-lg",
+      "variant": "Size=Lg",
+      "kind": "base",
+      "subst": {
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-lg.png",
+      "contentBox": {
+        "width": 288,
+        "height": 72
+      }
+    },
+    {
+      "slug": "size-xs__state-disabled",
+      "variant": "Size=Xs, State=Disabled",
+      "kind": "state",
+      "state": "disabled",
+      "subst": {
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "refused",
+      "error": "state \"disabled\" drives boolean prop \"disabled\", which carbon.textinput does not declare"
+    }
+  ],
+  "rendered": 4,
+  "refused": 1,
+  "unavailable": null
+}

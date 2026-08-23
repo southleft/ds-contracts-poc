@@ -1,0 +1,294 @@
+{
+  "id": "mui.slider",
+  "name": "Slider",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/slider.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 12,
+      "sampled": 7,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "color",
+        "type": "enum",
+        "default": "primary"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "medium"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "states": [
+      "focus-visible"
+    ],
+    "parts": [
+      "root",
+      "slider-rail",
+      "slider-track",
+      "slider-thumb",
+      "part-2-0"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.shared.size-0",
+      "imported.shared.size-1",
+      "imported.shared.size-12",
+      "imported.shared.size-neg-1",
+      "imported.slider.part-2-0.background-color",
+      "imported.slider.part-2-0.color",
+      "imported.slider.part-2-0.font-size",
+      "imported.slider.part-2-0.height.medium",
+      "imported.slider.part-2-0.height.small",
+      "imported.slider.part-2-0.outline-color",
+      "imported.slider.part-2-0.width.medium",
+      "imported.slider.part-2-0.width.small",
+      "imported.slider.root.color.error",
+      "imported.slider.root.color.info",
+      "imported.slider.root.color.primary",
+      "imported.slider.root.color.secondary",
+      "imported.slider.root.color.success",
+      "imported.slider.root.color.warning",
+      "imported.slider.root.height.medium",
+      "imported.slider.root.height.small",
+      "imported.slider.root.padding-bottom",
+      "imported.slider.root.padding-top",
+      "imported.slider.root.width",
+      "imported.slider.slider-rail.background-color.error",
+      "imported.slider.slider-rail.background-color.info",
+      "imported.slider.slider-rail.background-color.primary",
+      "imported.slider.slider-rail.background-color.secondary",
+      "imported.slider.slider-rail.background-color.success",
+      "imported.slider.slider-rail.background-color.warning",
+      "imported.slider.slider-rail.bottom.medium",
+      "imported.slider.slider-rail.bottom.small",
+      "imported.slider.slider-rail.color.error",
+      "imported.slider.slider-rail.color.info",
+      "imported.slider.slider-rail.color.primary",
+      "imported.slider.slider-rail.color.secondary",
+      "imported.slider.slider-rail.color.success",
+      "imported.slider.slider-rail.color.warning",
+      "imported.slider.slider-rail.height.medium",
+      "imported.slider.slider-rail.height.small",
+      "imported.slider.slider-rail.opacity",
+      "imported.slider.slider-rail.top.medium",
+      "imported.slider.slider-rail.top.small",
+      "imported.slider.slider-rail.translate-y.medium",
+      "imported.slider.slider-rail.translate-y.small",
+      "imported.slider.slider-rail.width",
+      "imported.slider.slider-thumb.background-color.error",
+      "imported.slider.slider-thumb.background-color.info",
+      "imported.slider.slider-thumb.background-color.primary",
+      "imported.slider.slider-thumb.background-color.secondary",
+      "imported.slider.slider-thumb.background-color.success",
+      "imported.slider.slider-thumb.background-color.warning",
+      "imported.slider.slider-thumb.border-bottom-left-radius.medium",
+      "imported.slider.slider-thumb.border-bottom-left-radius.small",
+      "imported.slider.slider-thumb.border-bottom-right-radius.medium",
+      "imported.slider.slider-thumb.border-bottom-right-radius.small",
+      "imported.slider.slider-thumb.border-top-left-radius.medium",
+      "imported.slider.slider-thumb.border-top-left-radius.small",
+      "imported.slider.slider-thumb.border-top-right-radius.medium",
+      "imported.slider.slider-thumb.border-top-right-radius.small",
+      "imported.slider.slider-thumb.bottom.medium",
+      "imported.slider.slider-thumb.bottom.small",
+      "imported.slider.slider-thumb.color.error",
+      "imported.slider.slider-thumb.color.info",
+      "imported.slider.slider-thumb.color.primary",
+      "imported.slider.slider-thumb.color.secondary",
+      "imported.slider.slider-thumb.color.success",
+      "imported.slider.slider-thumb.color.warning",
+      "imported.slider.slider-thumb.height.medium",
+      "imported.slider.slider-thumb.height.small",
+      "imported.slider.slider-thumb.left",
+      "imported.slider.slider-thumb.right.medium",
+      "imported.slider.slider-thumb.right.small",
+      "imported.slider.slider-thumb.top.medium",
+      "imported.slider.slider-thumb.top.small",
+      "imported.slider.slider-thumb.translate-x.medium",
+      "imported.slider.slider-thumb.translate-x.small",
+      "imported.slider.slider-thumb.translate-y.medium",
+      "imported.slider.slider-thumb.translate-y.small",
+      "imported.slider.slider-thumb.width.medium",
+      "imported.slider.slider-thumb.width.small",
+      "imported.slider.slider-track.background-color.error",
+      "imported.slider.slider-track.background-color.info",
+      "imported.slider.slider-track.background-color.primary",
+      "imported.slider.slider-track.background-color.secondary",
+      "imported.slider.slider-track.background-color.success",
+      "imported.slider.slider-track.background-color.warning",
+      "imported.slider.slider-track.border-bottom-width.medium",
+      "imported.slider.slider-track.border-bottom-width.small",
+      "imported.slider.slider-track.border-left-width.medium",
+      "imported.slider.slider-track.border-left-width.small",
+      "imported.slider.slider-track.border-right-width.medium",
+      "imported.slider.slider-track.border-right-width.small",
+      "imported.slider.slider-track.border-top-width.medium",
+      "imported.slider.slider-track.border-top-width.small",
+      "imported.slider.slider-track.bottom.medium",
+      "imported.slider.slider-track.bottom.small",
+      "imported.slider.slider-track.color.error",
+      "imported.slider.slider-track.color.info",
+      "imported.slider.slider-track.color.primary",
+      "imported.slider.slider-track.color.secondary",
+      "imported.slider.slider-track.color.success",
+      "imported.slider.slider-track.color.warning",
+      "imported.slider.slider-track.height.medium",
+      "imported.slider.slider-track.height.small",
+      "imported.slider.slider-track.right.medium",
+      "imported.slider.slider-track.right.small",
+      "imported.slider.slider-track.top.medium",
+      "imported.slider.slider-track.top.small",
+      "imported.slider.slider-track.translate-y.medium",
+      "imported.slider.slider-track.translate-y.small",
+      "imported.slider.slider-track.width.medium",
+      "imported.slider.slider-track.width.small"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "color-primary__size-medium",
+      "variant": "Color=Primary, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "color": "primary",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-primary__size-medium.png",
+      "contentBox": {
+        "width": 288,
+        "height": 35
+      }
+    },
+    {
+      "slug": "color-primary__size-small",
+      "variant": "Color=Primary, Size=Small",
+      "kind": "base",
+      "subst": {
+        "color": "primary",
+        "size": "small"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-primary__size-small.png",
+      "contentBox": {
+        "width": 288,
+        "height": 28
+      }
+    },
+    {
+      "slug": "color-secondary__size-medium",
+      "variant": "Color=Secondary, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "color": "secondary",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-secondary__size-medium.png",
+      "contentBox": {
+        "width": 288,
+        "height": 35
+      }
+    },
+    {
+      "slug": "color-error__size-medium",
+      "variant": "Color=Error, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "color": "error",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-error__size-medium.png",
+      "contentBox": {
+        "width": 288,
+        "height": 35
+      }
+    },
+    {
+      "slug": "color-warning__size-medium",
+      "variant": "Color=Warning, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "color": "warning",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-warning__size-medium.png",
+      "contentBox": {
+        "width": 288,
+        "height": 35
+      }
+    },
+    {
+      "slug": "color-info__size-medium",
+      "variant": "Color=Info, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "color": "info",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-info__size-medium.png",
+      "contentBox": {
+        "width": 288,
+        "height": 35
+      }
+    },
+    {
+      "slug": "color-success__size-medium",
+      "variant": "Color=Success, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "color": "success",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-success__size-medium.png",
+      "contentBox": {
+        "width": 288,
+        "height": 35
+      }
+    }
+  ],
+  "rendered": 7,
+  "refused": 0,
+  "unavailable": null
+}

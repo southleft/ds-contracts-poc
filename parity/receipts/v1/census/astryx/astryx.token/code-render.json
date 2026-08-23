@@ -1,0 +1,322 @@
+{
+  "id": "astryx.token",
+  "name": "Token",
+  "library": "astryx",
+  "contractPath": "examples/astryx/contracts/token.contract.json",
+  "contractVersion": "0.1.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/astryx/figma/astryx.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 33,
+      "sampled": 13,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "label",
+        "type": "text",
+        "default": "Tag"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "md"
+      },
+      {
+        "name": "color",
+        "type": "enum",
+        "default": "default"
+      },
+      {
+        "name": "isDisabled",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "label"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "label"
+      }
+    ],
+    "tokenRefs": [
+      "color-background-blue",
+      "color-background-cyan",
+      "color-background-gray",
+      "color-background-green",
+      "color-background-muted",
+      "color-background-orange",
+      "color-background-pink",
+      "color-background-purple",
+      "color-background-red",
+      "color-background-teal",
+      "color-background-yellow",
+      "color-text-blue",
+      "color-text-cyan",
+      "color-text-gray",
+      "color-text-green",
+      "color-text-orange",
+      "color-text-pink",
+      "color-text-primary",
+      "color-text-purple",
+      "color-text-red",
+      "color-text-teal",
+      "color-text-yellow",
+      "font-family-body",
+      "font-size-2xs",
+      "font-size-sm",
+      "font-size-xs",
+      "font-weight-medium",
+      "radius-full",
+      "spacing-0-5",
+      "spacing-1",
+      "spacing-1-5",
+      "spacing-2",
+      "spacing-3"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "size-md__color-default",
+      "variant": "Size=Md, Color=Default",
+      "kind": "base",
+      "subst": {
+        "size": "md",
+        "color": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-md__color-default.png",
+      "contentBox": {
+        "width": 33.66,
+        "height": 18
+      }
+    },
+    {
+      "slug": "size-md__color-red",
+      "variant": "Size=Md, Color=Red",
+      "kind": "base",
+      "subst": {
+        "size": "md",
+        "color": "red"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-md__color-red.png",
+      "contentBox": {
+        "width": 33.66,
+        "height": 18
+      }
+    },
+    {
+      "slug": "size-md__color-orange",
+      "variant": "Size=Md, Color=Orange",
+      "kind": "base",
+      "subst": {
+        "size": "md",
+        "color": "orange"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-md__color-orange.png",
+      "contentBox": {
+        "width": 33.66,
+        "height": 18
+      }
+    },
+    {
+      "slug": "size-md__color-yellow",
+      "variant": "Size=Md, Color=Yellow",
+      "kind": "base",
+      "subst": {
+        "size": "md",
+        "color": "yellow"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-md__color-yellow.png",
+      "contentBox": {
+        "width": 33.66,
+        "height": 18
+      }
+    },
+    {
+      "slug": "size-md__color-green",
+      "variant": "Size=Md, Color=Green",
+      "kind": "base",
+      "subst": {
+        "size": "md",
+        "color": "green"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-md__color-green.png",
+      "contentBox": {
+        "width": 33.66,
+        "height": 18
+      }
+    },
+    {
+      "slug": "size-md__color-teal",
+      "variant": "Size=Md, Color=Teal",
+      "kind": "base",
+      "subst": {
+        "size": "md",
+        "color": "teal"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-md__color-teal.png",
+      "contentBox": {
+        "width": 33.66,
+        "height": 18
+      }
+    },
+    {
+      "slug": "size-md__color-cyan",
+      "variant": "Size=Md, Color=Cyan",
+      "kind": "base",
+      "subst": {
+        "size": "md",
+        "color": "cyan"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-md__color-cyan.png",
+      "contentBox": {
+        "width": 33.66,
+        "height": 18
+      }
+    },
+    {
+      "slug": "size-md__color-blue",
+      "variant": "Size=Md, Color=Blue",
+      "kind": "base",
+      "subst": {
+        "size": "md",
+        "color": "blue"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-md__color-blue.png",
+      "contentBox": {
+        "width": 33.66,
+        "height": 18
+      }
+    },
+    {
+      "slug": "size-md__color-purple",
+      "variant": "Size=Md, Color=Purple",
+      "kind": "base",
+      "subst": {
+        "size": "md",
+        "color": "purple"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-md__color-purple.png",
+      "contentBox": {
+        "width": 33.66,
+        "height": 18
+      }
+    },
+    {
+      "slug": "size-md__color-pink",
+      "variant": "Size=Md, Color=Pink",
+      "kind": "base",
+      "subst": {
+        "size": "md",
+        "color": "pink"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-md__color-pink.png",
+      "contentBox": {
+        "width": 33.66,
+        "height": 18
+      }
+    },
+    {
+      "slug": "size-md__color-gray",
+      "variant": "Size=Md, Color=Gray",
+      "kind": "base",
+      "subst": {
+        "size": "md",
+        "color": "gray"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-md__color-gray.png",
+      "contentBox": {
+        "width": 33.66,
+        "height": 18
+      }
+    },
+    {
+      "slug": "size-sm__color-default",
+      "variant": "Size=Sm, Color=Default",
+      "kind": "base",
+      "subst": {
+        "size": "sm",
+        "color": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-sm__color-default.png",
+      "contentBox": {
+        "width": 26.45,
+        "height": 18
+      }
+    },
+    {
+      "slug": "size-lg__color-default",
+      "variant": "Size=Lg, Color=Default",
+      "kind": "base",
+      "subst": {
+        "size": "lg",
+        "color": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-lg__color-default.png",
+      "contentBox": {
+        "width": 44.77,
+        "height": 23
+      }
+    }
+  ],
+  "rendered": 13,
+  "refused": 0,
+  "unavailable": null
+}

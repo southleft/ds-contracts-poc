@@ -1,0 +1,208 @@
+{
+  "id": "mui.radio",
+  "name": "Radio",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/radio.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 14,
+      "sampled": 8,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "color",
+        "type": "enum",
+        "default": "primary"
+      },
+      {
+        "name": "checked",
+        "type": "enum",
+        "default": "unchecked"
+      }
+    ],
+    "states": [
+      "disabled",
+      "focus-visible"
+    ],
+    "parts": [
+      "root",
+      "part-0",
+      "part-1",
+      "icon",
+      "icon-2"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.radio.part-0.font-size",
+      "imported.radio.part-0.z-index",
+      "imported.shared.color-00000042",
+      "imported.shared.color-545454",
+      "imported.shared.num-0",
+      "imported.shared.size-0",
+      "imported.shared.size-21",
+      "imported.shared.size-24",
+      "imported.shared.size-42",
+      "imported.shared.size-9"
+    ],
+    "icons": [
+      "radio-icon",
+      "radio-icon-2"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "color-primary__checked-unchecked",
+      "variant": "Color=Primary, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "color": "primary",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-primary__checked-unchecked.png",
+      "contentBox": {
+        "width": 42,
+        "height": 42
+      }
+    },
+    {
+      "slug": "color-primary__checked-checked",
+      "variant": "Color=Primary, Checked=Checked",
+      "kind": "base",
+      "subst": {
+        "color": "primary",
+        "checked": "checked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-primary__checked-checked.png",
+      "contentBox": {
+        "width": 42,
+        "height": 42
+      }
+    },
+    {
+      "slug": "color-secondary__checked-unchecked",
+      "variant": "Color=Secondary, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "color": "secondary",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-secondary__checked-unchecked.png",
+      "contentBox": {
+        "width": 42,
+        "height": 42
+      }
+    },
+    {
+      "slug": "color-error__checked-unchecked",
+      "variant": "Color=Error, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "color": "error",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-error__checked-unchecked.png",
+      "contentBox": {
+        "width": 42,
+        "height": 42
+      }
+    },
+    {
+      "slug": "color-info__checked-unchecked",
+      "variant": "Color=Info, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "color": "info",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-info__checked-unchecked.png",
+      "contentBox": {
+        "width": 42,
+        "height": 42
+      }
+    },
+    {
+      "slug": "color-success__checked-unchecked",
+      "variant": "Color=Success, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "color": "success",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-success__checked-unchecked.png",
+      "contentBox": {
+        "width": 42,
+        "height": 42
+      }
+    },
+    {
+      "slug": "color-warning__checked-unchecked",
+      "variant": "Color=Warning, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "color": "warning",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-warning__checked-unchecked.png",
+      "contentBox": {
+        "width": 42,
+        "height": 42
+      }
+    },
+    {
+      "slug": "color-default__checked-unchecked",
+      "variant": "Color=Default, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "color": "default",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-default__checked-unchecked.png",
+      "contentBox": {
+        "width": 42,
+        "height": 42
+      }
+    }
+  ],
+  "rendered": 8,
+  "refused": 0,
+  "unavailable": null
+}

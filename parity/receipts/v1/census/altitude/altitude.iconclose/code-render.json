@@ -1,0 +1,188 @@
+{
+  "id": "altitude.iconclose",
+  "name": "IconClose",
+  "library": "altitude",
+  "contractPath": "examples/altitude/contracts/iconclose.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/altitude/figma/altitude.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 7,
+      "sampled": 7,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "size",
+        "type": "enum",
+        "default": null
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "root-unset",
+      "root-xs",
+      "root-sm",
+      "root-md",
+      "root-lg",
+      "root-xl",
+      "root-xxl",
+      "root-xxxl"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.icon-close.root.color",
+      "imported.icon-close.root.line-height",
+      "imported.icon-close.root.min-height",
+      "imported.icon-close.root.min-width",
+      "imported.icon-close.root.width.lg",
+      "imported.icon-close.root.width.md",
+      "imported.icon-close.root.width.sm",
+      "imported.icon-close.root.width.unset",
+      "imported.icon-close.root.width.xl",
+      "imported.icon-close.root.width.xs",
+      "imported.icon-close.root.width.xxl",
+      "imported.icon-close.root.width.xxxl"
+    ],
+    "icons": [
+      "icon-close-root-lg",
+      "icon-close-root-md",
+      "icon-close-root-sm",
+      "icon-close-root-unset",
+      "icon-close-root-xl",
+      "icon-close-root-xs",
+      "icon-close-root-xxl",
+      "icon-close-root-xxxl"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "size-xs",
+      "variant": "Size=Xs",
+      "kind": "base",
+      "subst": {
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-xs.png",
+      "contentBox": {
+        "width": 8,
+        "height": 16
+      }
+    },
+    {
+      "slug": "size-sm",
+      "variant": "Size=Sm",
+      "kind": "base",
+      "subst": {
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-sm.png",
+      "contentBox": {
+        "width": 12,
+        "height": 16
+      }
+    },
+    {
+      "slug": "size-md",
+      "variant": "Size=Md",
+      "kind": "base",
+      "subst": {
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-md.png",
+      "contentBox": {
+        "width": 20,
+        "height": 23
+      }
+    },
+    {
+      "slug": "size-lg",
+      "variant": "Size=Lg",
+      "kind": "base",
+      "subst": {
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-lg.png",
+      "contentBox": {
+        "width": 24,
+        "height": 27
+      }
+    },
+    {
+      "slug": "size-xl",
+      "variant": "Size=Xl",
+      "kind": "base",
+      "subst": {
+        "size": "xl"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-xl.png",
+      "contentBox": {
+        "width": 32,
+        "height": 35
+      }
+    },
+    {
+      "slug": "size-xxl",
+      "variant": "Size=Xxl",
+      "kind": "base",
+      "subst": {
+        "size": "xxl"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-xxl.png",
+      "contentBox": {
+        "width": 36,
+        "height": 39
+      }
+    },
+    {
+      "slug": "size-xxxl",
+      "variant": "Size=Xxxl",
+      "kind": "base",
+      "subst": {
+        "size": "xxxl"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-xxxl.png",
+      "contentBox": {
+        "width": 40,
+        "height": 43
+      }
+    }
+  ],
+  "rendered": 7,
+  "refused": 0,
+  "unavailable": null
+}

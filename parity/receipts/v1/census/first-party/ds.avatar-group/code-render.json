@@ -1,0 +1,77 @@
+{
+  "id": "ds.avatar-group",
+  "name": "AvatarGroup",
+  "library": "first-party",
+  "contractPath": "contracts/avatar-group.contract.json",
+  "contractVersion": "1.0.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "tokens/ (layered primitives + brand + semantic + light/dark) via src/styles/tokens.css",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 1,
+      "sampled": 1,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "overflowLabel",
+        "type": "text",
+        "default": "+3"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "stack",
+      "overflowText"
+    ],
+    "contentSlots": [
+      {
+        "part": "overflowText",
+        "prop": "overflowLabel"
+      }
+    ],
+    "tokenRefs": [
+      "color.action.secondary.background",
+      "color.text.secondary",
+      "font.avatar.size.md",
+      "font.control.family",
+      "font.control.weight",
+      "radius.pill",
+      "size.avatar.md",
+      "space.avatarGroup.overlap",
+      "space.gap.sm"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "avatargroup",
+      "variant": "AvatarGroup",
+      "kind": "base",
+      "subst": {},
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-avatargroup.png",
+      "contentBox": {
+        "width": 120,
+        "height": 32
+      }
+    }
+  ],
+  "rendered": 1,
+  "refused": 0,
+  "unavailable": null
+}

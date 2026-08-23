@@ -1,0 +1,137 @@
+{
+  "id": "carbon.tabs",
+  "name": "Tabs",
+  "library": "carbon",
+  "contractPath": "examples/carbon/contracts/tabs.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/carbon/figma/carbon.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 3,
+      "sampled": 3,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [],
+    "states": [
+      "active",
+      "hover"
+    ],
+    "parts": [
+      "root",
+      "part-0",
+      "part-1",
+      "tabs__nav-item",
+      "tabs__nav-item-label-wrapper",
+      "label",
+      "part-1-1",
+      "tabs__nav-item-2",
+      "tabs__nav-item-label-wrapper-2",
+      "label-2",
+      "part-1-3",
+      "tabs__nav-item-3",
+      "tabs__nav-item-label-wrapper-3",
+      "label-3",
+      "part-1-5",
+      "part-2"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.shared.color-00000000",
+      "imported.shared.color-161616",
+      "imported.shared.color-525252",
+      "imported.shared.num-0",
+      "imported.shared.num-1",
+      "imported.shared.num-600",
+      "imported.shared.size-0",
+      "imported.shared.size-0-16",
+      "imported.shared.size-1",
+      "imported.shared.size-14",
+      "imported.shared.size-16",
+      "imported.shared.size-18",
+      "imported.shared.size-18-0001",
+      "imported.shared.size-2",
+      "imported.shared.size-3",
+      "imported.shared.size-40",
+      "imported.shared.size-neg-1",
+      "imported.shared.size-neg-2",
+      "imported.tabs.label-2.font-weight",
+      "imported.tabs.label-3.font-weight",
+      "imported.tabs.part-0.background-color",
+      "imported.tabs.part-0.color",
+      "imported.tabs.part-1.width",
+      "imported.tabs.part-2.background-color",
+      "imported.tabs.part-2.color",
+      "imported.tabs.root.max-height",
+      "imported.tabs.root.width",
+      "imported.tabs.tabs-nav-item-2.border-bottom-color",
+      "imported.tabs.tabs-nav-item-3.border-bottom-color",
+      "imported.tabs.tabs-nav-item.border-bottom-color",
+      "imported.tabs.tabs-nav-item.color"
+    ],
+    "icons": [
+      "tabs-part-0",
+      "tabs-part-2"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "tabs",
+      "variant": "Tabs",
+      "kind": "base",
+      "subst": {},
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-tabs.png",
+      "contentBox": {
+        "width": 328,
+        "height": 40
+      }
+    },
+    {
+      "slug": "state-active",
+      "variant": "State=Active",
+      "kind": "state",
+      "state": "active",
+      "subst": {},
+      "bools": {},
+      "interaction": "active",
+      "status": "rendered",
+      "png": "code-state-active.png",
+      "contentBox": {
+        "width": 328,
+        "height": 40
+      }
+    },
+    {
+      "slug": "state-hover",
+      "variant": "State=Hover",
+      "kind": "state",
+      "state": "hover",
+      "subst": {},
+      "bools": {},
+      "interaction": "hover",
+      "status": "rendered",
+      "png": "code-state-hover.png",
+      "contentBox": {
+        "width": 328,
+        "height": 40
+      }
+    }
+  ],
+  "rendered": 3,
+  "refused": 0,
+  "unavailable": null
+}

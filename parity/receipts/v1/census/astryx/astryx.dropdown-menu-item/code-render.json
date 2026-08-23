@@ -1,0 +1,77 @@
+{
+  "id": "astryx.dropdown-menu-item",
+  "name": "DropdownMenuItem",
+  "library": "astryx",
+  "contractPath": "examples/astryx/contracts/dropdown-menu-item.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/astryx/figma/astryx.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 1,
+      "sampled": 1,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "label",
+        "type": "text",
+        "default": "Menu item"
+      },
+      {
+        "name": "isDisabled",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "label"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "label"
+      }
+    ],
+    "tokenRefs": [
+      "color-text-primary",
+      "font-family-body",
+      "radius-element",
+      "spacing-2",
+      "text-label-size"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "dropdownmenuitem",
+      "variant": "DropdownMenuItem",
+      "kind": "base",
+      "subst": {},
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-dropdownmenuitem.png",
+      "contentBox": {
+        "width": 83.78,
+        "height": 33
+      }
+    }
+  ],
+  "rendered": 1,
+  "refused": 0,
+  "unavailable": null
+}
