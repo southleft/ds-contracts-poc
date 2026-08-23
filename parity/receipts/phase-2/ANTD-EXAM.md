@@ -146,4 +146,4 @@ Plugin dump (`dump.plugin.js` run inside the file via `figma_execute`, dump v1.3
 
 ## 10. Gates
 
-_(filled in below after the rebase; the full-suite record is stamped on the clean commit.)_
+On the rebased tree (origin/main `ef16e161`, #29 + #30 merged), every gate exit 0: `typecheck` · `lint` · `format:check` · `docs:check` (every gated number agrees, 116 components / 11.1%) · `ci:lanes` · `schema:fresh` · `conformance` (91 cases · 88 pass · 3 red-expected, the pre-existing HARMFUL trio) · `conformance:roundtrip` (54 cases · 0 SILENT · 0 DRIFTED · 0 HARMFUL) · `conformance:canvas` · `accuracy:check` · `code-only-facts:check` · `figma:fresh` (9/9 libraries byte-fresh) · `generated:fresh` · `maintain` · `extract:computed:drift` (116 rows agree; the 12 antd rows EXACT). Full suite: `npm run eval` on the clean commit `94d07217` → **225/225**, `evals/results.json` stamped clean (`npm run eval:record:check` green). The first full run (219/225) found five stale library bundles (the new receipts ride them), two antd fixtures with non-neutral class names, and two antd baseline rows nobody had recorded — each fixed and re-run, never waived.
