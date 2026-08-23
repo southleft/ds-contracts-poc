@@ -9,7 +9,13 @@ be measured in advance instead of discovered one Figma kit at a time.*
 
 - **Cases** are hand-authored dump v1 JSON (`cases/<id>.dump.json`) — the
   documented format of `extract/figma/types.ts`, the same bytes
-  `dump.plugin.js` produces. One SMALL, single-purpose case per construct:
+  `dump.plugin.js` produces. Since the Phase 2 exam (2026-08-22,
+  `parity/receipts/phase-2/FIGMA-DS-EXAM.md`) a case may instead enter at the
+  REST boundary as `cases/<id>.rest.json` — a `GET /v1/files/:key/nodes`
+  response, mapped through the real `extract/figma/rest/map.ts` (the Journey A
+  CLI's own transport); the mapper's MapReport joins the naming union exactly
+  as the CLI prints it, so a fact the mapper drops without a receipt is
+  measured as SILENT here, not as an absence of the dump grammar. One SMALL, single-purpose case per construct:
   auto-layout forms, paints, strokes, effects, text, radii, parametric decor
   shapes, absolute placement, variant axes (enum/bool/state/theme), nested
   instances, slots, spacers, wrapper artifacts, sparse presence,

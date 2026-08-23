@@ -304,7 +304,7 @@ What each would need in order to stop costing pixels, quoted from the receipt th
 
 ### 5.4 Refusals that are structural given the contract vocabulary
 
-The conformance manifest names **9 constructs REFUSED** and **14 LEDGERED** — the vocabulary boundary itself, hand-authored from Figma's documentation model rather than from engine output. A refusal is closable only by a VOCABULARY change, which is a different kind of round from a defect fix.
+The conformance manifest names **9 constructs REFUSED** and **26 LEDGERED** — the vocabulary boundary itself, hand-authored from Figma's documentation model rather than from engine output. A refusal is closable only by a VOCABULARY change, which is a different kind of round from a defect fix.
 
 | case | the construct | the vocabulary change it would need |
 |---|---|---|
@@ -324,8 +324,20 @@ The conformance manifest names **9 constructs REFUSED** and **14 LEDGERED** — 
 | `instance-override-paint-observed` | an observed subtree paint on an instance LINKED to a real contract (classic path, no instanceOverrides ledger) | the child contract owns its paint; a per-usage override is not representable on a component ref without the opt-in override machinery - ledgered by name |
 | `placement-constraints-scale` | an ABSOLUTE child whose constraints are SCALE x SCALE | SCALE placement has no carried offset spelling (a stretch percentage, not an offset); must be a named refusal, the part renders in flow |
 | `radius-per-corner` | per-corner (non-uniform) radii (capture-boundary: dump v1 carries a uniform radius only) | the capture receipts radii-nonuniform; nothing corner-shaped may be invented |
+| `rest-effect-bound-variables` | REST: a DROP_SHADOW whose radius/spread/color/offset are bound to variables, with no variables response | every other bound channel degrades to its literal under a named variable-unresolved receipt; an effect binding must get the same receipt — BOUND_FIELDS_SKIPPED silences "effects" and the effect mapper reads no boundVariables |
+| `rest-effect-style-identity` | REST: a DROP_SHADOW on the root that rides an EFFECT style (node.styles.effect + styles metadata name "shadow/md") | the shadow geometry carries as box-shadow; the STYLE identity is a token-class fact (the same way text.style carries a TextStyle name) and must be carried or named — map.ts reads styles.text only |
+| `rest-instance-fill-override` | REST: a nested INSTANCE whose internal vector fill is OVERRIDDEN by the host (overrides[].overriddenFields includes "fills") | instance internals are elided by rule, but a HOST override is a host fact (the icon colour per variant) and must be named |
+| `rest-instance-slot-prop-value` | REST: a nested INSTANCE with a SLOT-typed property value ({guid}) in componentProperties | an object is not a prop value the contract grammar can hold (exact mode crashed on Card Grid with a ContractSchema error); it must be dropped BY NAME |
+| `rest-instance-swap-fixed-value` | REST: a nested INSTANCE with a FIXED INSTANCE_SWAP value (componentProperties "Icon#3:1" = 9:9) and no host propRef | fixed prop values ride componentProperties (propose.ts COMPOSITION rule); the mapper skips INSTANCE_SWAP ("slots ride propRefs instead") so a fixed swap with no propRef vanishes |
+| `rest-instance-target-aspect-ratio` | REST: a nested INSTANCE with a targetAspectRatio lock (16:16) | an aspect lock acts on resize; the code twin is aspect-ratio — carry it or name it |
+| `rest-item-reverse-z-index` | REST: an auto-layout root with itemReverseZIndex true | paint order is a canvas fact with no dump field; render-inert without overlap but must be named, not dropped |
+| `rest-prototype-reaction` | REST: an ON_HOVER → CHANGE_TO prototype reaction (interactions[] + transitionNodeID) on the root | the plugin dump names this class as prototype-reactions-unsupported (dump v1.27); the REST route must name it too — map.ts never reads interactions and no captureGap names prototypes |
+| `rest-slot-property-definition` | REST: a native SLOT property definition whose defaultValue is an object ({guid}) and whose preferredValues name a COMPONENT_SET key | REST does return SLOT definitions with preferredValues (live probe 2026-08-22, file aekVseUceg35tVn62knRrj); the accepts list must be carried or named as "no in-scope contract for key" — not reported as "REST returns componentPropertyDefinitions EMPTY" |
+| `rest-swap-preferred-values-empty` | REST: an INSTANCE_SWAP property whose preferredValues is an EMPTY list | an empty list is a fact (unconstrained swap), not an uncaptured one — the note must say unconstrained/empty rather than "not captured in dump v1" |
+| `rest-text-font-family` | REST: a TEXT node in a non-default family (Manrope 700) | propose.ts declares font-family "never recoverable (everything renders Inter — fidelity scope)"; a declared limit must be a note in the report, not a source comment |
 | `rotation-nonshape` | rotation on a non-decor node (capture-boundary: rotation rides shape decor only) | the capture receipts rotation-unsupported; the node renders unrotated and nothing rotation-shaped may be invented |
 | `shape-vector-path` | a VECTOR child (arbitrary-path geometry) with a fill and a drawn fixed size | arbitrary paths are outside dump v1 (parametric decor only); the capture receipts vector-geometry-unsupported and the node carries paints + box only |
+| `slot-frame-child-default-content` | dump: a native SLOT whose drawn content is a FRAME (holding an instance and a text), not a bare INSTANCE | the SLOTS rule carries an INSTANCE child as defaultContent; a FRAME child (and everything under it) is drawn content too and must be carried as a stub or named as dropped — never silent |
 | `slot-preferred-unresolvable` | preferredValues naming a key with NO in-scope contract | unresolvable keys are named, never guessed into ids - accepts stays unauthored |
 | `stroke-align-center` | a stroke aligned CENTER (straddling the node box edge) | a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither spelling carries it exactly. The capture receipts stroke-align-unsupported under its OWN code - not folded into stroke-style-unsupported, which is what made this boundary uncountable for eight rounds - and the inversion NAMES the approximation instead of proposing an outline it cannot justify |
 | `stroke-dashed` | a dashed stroke (dashPattern - capture-boundary) | dashed strokes have no dump v1 projection; the receipt names it and the stroke renders solid |
@@ -457,7 +469,7 @@ None of the three steps rewrites `renders/FIDELITY.md`, `renders/fidelity.json` 
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | fidelity table |
 | `examples/untitled-ui/renders/FIDELITY.md` | `3b0532cd2de8` | 4,242 | fidelity method |
 | `examples/untitled-ui/storybook/contracts/` | `63f093f001fb` | 129,887 | proposed contracts (30 files) |
-| `extract/figma/conformance/MANIFEST.json` | `71392fbbb21e` | 67,755 | conformance denominator |
+| `extract/figma/conformance/MANIFEST.json` | `9c2374097aba` | 86,207 | conformance denominator |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | round-trip facts |
 
 Same bytes in, same file out: this build reads no clock, no git state and no environment, and sorts every collection before rendering.

@@ -1,0 +1,168 @@
+{
+ "name": "canvas conformance fixture (REST boundary)",
+ "nodes": {
+  "1:34": {
+   "document": {
+    "id": "1:34",
+    "name": "Case",
+    "type": "COMPONENT",
+    "scrollBehavior": "SCROLLS",
+    "blendMode": "PASS_THROUGH",
+    "clipsContent": false,
+    "fills": [
+     {
+      "blendMode": "NORMAL",
+      "type": "SOLID",
+      "color": {
+       "r": 0.9,
+       "g": 0.92,
+       "b": 0.95,
+       "a": 1
+      }
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 0,
+    "layoutMode": "HORIZONTAL",
+    "primaryAxisAlignItems": "CENTER",
+    "counterAxisAlignItems": "CENTER",
+    "paddingLeft": 12,
+    "paddingRight": 12,
+    "paddingTop": 4,
+    "paddingBottom": 4,
+    "itemSpacing": 0,
+    "layoutWrap": "NO_WRAP",
+    "layoutSizingHorizontal": "HUG",
+    "layoutSizingVertical": "HUG",
+    "absoluteBoundingBox": {
+     "x": 0,
+     "y": 0,
+     "width": 80,
+     "height": 28
+    },
+    "effects": [],
+    "interactions": [],
+    "constraints": {
+     "vertical": "TOP",
+     "horizontal": "LEFT"
+    },
+    "children": [
+     {
+      "id": "1:35",
+      "name": "Chip",
+      "type": "INSTANCE",
+      "scrollBehavior": "SCROLLS",
+      "blendMode": "PASS_THROUGH",
+      "clipsContent": false,
+      "fills": [],
+      "strokes": [],
+      "strokeWeight": 1,
+      "strokeAlign": "INSIDE",
+      "cornerRadius": 0,
+      "layoutMode": "HORIZONTAL",
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "paddingLeft": 0,
+      "paddingRight": 0,
+      "paddingTop": 0,
+      "paddingBottom": 0,
+      "itemSpacing": 0,
+      "layoutWrap": "NO_WRAP",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED",
+      "absoluteBoundingBox": {
+       "x": 0,
+       "y": 0,
+       "width": 48,
+       "height": 20
+      },
+      "effects": [],
+      "interactions": [],
+      "constraints": {
+       "vertical": "TOP",
+       "horizontal": "LEFT"
+      },
+      "children": [],
+      "componentId": "8:8",
+      "overrides": [],
+      "componentProperties": {
+       "Icon#3:1": {
+        "type": "INSTANCE_SWAP",
+        "value": "9:9"
+       },
+       "State": {
+        "type": "VARIANT",
+        "value": "Default"
+       }
+      }
+     },
+     {
+      "id": "1:36",
+      "name": "t",
+      "type": "TEXT",
+      "scrollBehavior": "SCROLLS",
+      "blendMode": "PASS_THROUGH",
+      "characters": "Case",
+      "fills": [
+       {
+        "blendMode": "NORMAL",
+        "type": "SOLID",
+        "color": {
+         "r": 0.1,
+         "g": 0.1,
+         "b": 0.1,
+         "a": 1
+        }
+       }
+      ],
+      "strokes": [],
+      "strokeWeight": 1,
+      "strokeAlign": "OUTSIDE",
+      "layoutSizingHorizontal": "HUG",
+      "layoutSizingVertical": "HUG",
+      "absoluteBoundingBox": {
+       "x": 0,
+       "y": 0,
+       "width": 40,
+       "height": 16
+      },
+      "effects": [],
+      "interactions": [],
+      "constraints": {
+       "vertical": "TOP",
+       "horizontal": "LEFT"
+      },
+      "style": {
+       "fontFamily": "Inter",
+       "fontPostScriptName": "Inter-Medium",
+       "fontStyle": "Medium",
+       "fontWeight": 500,
+       "fontSize": 12,
+       "textAlignHorizontal": "LEFT",
+       "textAlignVertical": "TOP",
+       "letterSpacing": 0,
+       "lineHeightPx": 16,
+       "lineHeightPercent": 100,
+       "lineHeightUnit": "PIXELS",
+       "textAutoResize": "WIDTH_AND_HEIGHT"
+      }
+     }
+    ]
+   },
+   "components": {
+    "8:8": {
+     "name": "Chip",
+     "key": "chipkey1"
+    },
+    "9:9": {
+     "name": "Glyph",
+     "key": "glyphkey1"
+    }
+   },
+   "componentSets": {},
+   "styles": {}
+  }
+ }
+}

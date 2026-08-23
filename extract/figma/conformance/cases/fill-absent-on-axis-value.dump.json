@@ -1,0 +1,155 @@
+{
+ "_provenance": {
+  "fileKey": null,
+  "dumpVersion": "1.9",
+  "note": "canvas conformance fixture - hand-authored dump v1.9 (Phase 2 exam)"
+ },
+ "Case": {
+  "setName": "Case",
+  "type": "COMPONENT_SET",
+  "variants": [
+   {
+    "name": "Size=Sm, Variant=Info",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "CENTER",
+     "counter": "CENTER",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "cornerRadius": 9999,
+    "children": [
+     {
+      "name": "a",
+      "type": "ELLIPSE",
+      "fill": {
+       "var": "color/feedback/info/foreground"
+      },
+      "shape": {
+       "kind": "ellipse",
+       "width": 8,
+       "height": 8
+      }
+     }
+    ]
+   },
+   {
+    "name": "Size=Sm, Variant=Success",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "CENTER",
+     "counter": "CENTER",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "cornerRadius": 9999,
+    "children": [
+     {
+      "name": "a",
+      "type": "ELLIPSE",
+      "fill": {
+       "var": "color/feedback/success/foreground"
+      },
+      "shape": {
+       "kind": "ellipse",
+       "width": 8,
+       "height": 8
+      }
+     }
+    ]
+   },
+   {
+    "name": "Size=Lg, Variant=Info",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "CENTER",
+     "counter": "CENTER",
+     "spacing": 0,
+     "padding": [
+      4,
+      12,
+      4,
+      12
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "cornerRadius": 8,
+    "fill": {
+     "hex": "b7e9c5"
+    },
+    "children": [
+     {
+      "name": "t",
+      "type": "TEXT",
+      "text": {
+       "characters": "Case",
+       "fontSize": 12,
+       "fontStyle": "Medium",
+       "style": "badge",
+       "fillVar": "color/feedback/info/foreground"
+      },
+      "fill": {
+       "var": "color/feedback/info/foreground"
+      }
+     }
+    ]
+   },
+   {
+    "name": "Size=Lg, Variant=Success",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "CENTER",
+     "counter": "CENTER",
+     "spacing": 0,
+     "padding": [
+      4,
+      12,
+      4,
+      12
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "cornerRadius": 8,
+    "fill": {
+     "hex": "bfdfff"
+    },
+    "children": [
+     {
+      "name": "t",
+      "type": "TEXT",
+      "text": {
+       "characters": "Case",
+       "fontSize": 12,
+       "fontStyle": "Medium",
+       "style": "badge",
+       "fillVar": "color/feedback/success/foreground"
+      },
+      "fill": {
+       "var": "color/feedback/success/foreground"
+      }
+     }
+    ]
+   }
+  ]
+ }
+}
