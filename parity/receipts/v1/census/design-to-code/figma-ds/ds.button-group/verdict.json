@@ -1,0 +1,7 @@
+{
+  "recognisable": false,
+  "walls": [
+    "SLOT-CONTENT-NAMED"
+  ],
+  "notes": "The group's drawn buttons are SLOT content (\"Items\" SLOT-typed property, named instance-prop-unsupported) — nested slot CONTENT is not expressible in the composition grammar, so the code side renders the empty group box. Named, not silent."
+}

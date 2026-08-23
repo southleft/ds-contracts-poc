@@ -1,0 +1,49 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.toast",
+  "setName": "Toast",
+  "renderer": "code: generated React (design-to-code pipeline bytes) → esbuild bundle → playwright-core screenshot at deviceScaleFactor 2; canvas: GET /v1/images/:key?scale=2 (Figma's own renderer, read-only)",
+  "cells": [
+    {
+      "slug": "variant-default",
+      "figmaVariant": "Variant=Default",
+      "nodeId": "86:2196",
+      "props": {
+        "variant": "default"
+      }
+    },
+    {
+      "slug": "variant-success",
+      "figmaVariant": "Variant=Success",
+      "nodeId": "91:4972",
+      "props": {
+        "variant": "success"
+      }
+    },
+    {
+      "slug": "variant-warning",
+      "figmaVariant": "Variant=Warning",
+      "nodeId": "91:4981",
+      "props": {
+        "variant": "warning"
+      }
+    },
+    {
+      "slug": "variant-danger",
+      "figmaVariant": "Variant=Danger",
+      "nodeId": "91:4990",
+      "props": {
+        "variant": "danger"
+      }
+    },
+    {
+      "slug": "variant-info",
+      "figmaVariant": "Variant=Info",
+      "nodeId": "91:4999",
+      "props": {
+        "variant": "info"
+      }
+    }
+  ],
+  "notSampled": []
+}

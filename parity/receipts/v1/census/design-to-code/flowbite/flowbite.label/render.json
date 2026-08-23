@@ -1,0 +1,54 @@
+{
+  "kit": "flowbite",
+  "id": "flowbite.label",
+  "setName": "Label",
+  "renderer": "code: generated React (design-to-code pipeline bytes) → esbuild bundle → playwright-core screenshot at deviceScaleFactor 2; canvas: GET /v1/images/:key?scale=2 (Figma's own renderer, read-only)",
+  "cells": [
+    {
+      "slug": "color-default",
+      "figmaVariant": "Color=Default",
+      "nodeId": "120:1986",
+      "props": {
+        "color": "default",
+        "children": "Label text"
+      }
+    },
+    {
+      "slug": "color-info",
+      "figmaVariant": "Color=Info",
+      "nodeId": "120:1988",
+      "props": {
+        "color": "info",
+        "children": "Label text"
+      }
+    },
+    {
+      "slug": "color-failure",
+      "figmaVariant": "Color=Failure",
+      "nodeId": "120:1990",
+      "props": {
+        "color": "failure",
+        "children": "Label text"
+      }
+    },
+    {
+      "slug": "color-success",
+      "figmaVariant": "Color=Success",
+      "nodeId": "120:1992",
+      "props": {
+        "color": "success",
+        "children": "Label text"
+      }
+    },
+    {
+      "slug": "color-warning",
+      "figmaVariant": "Color=Warning",
+      "nodeId": "120:1994",
+      "props": {
+        "color": "warning",
+        "children": "Label text"
+      }
+    }
+  ],
+  "notSampled": []
+}

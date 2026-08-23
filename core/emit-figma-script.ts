@@ -600,6 +600,12 @@ export interface ComponentData {
   version: string;
   anchorKey: string | null;
   description: string;
+  /** schema 18 documentationLinks — written onto the set as Figma's own
+   *  documentationLinks so the pointer survives contract → canvas too.
+   *  OMITTED (not []) when the contract declares none, so the serialized
+   *  ComponentData in every generated sync script is byte-identical for the
+   *  corpus (figma:fresh) and specHash never moves for a link-less contract. */
+  documentationLinks?: Array<{ uri: string }>;
   isSet: boolean;
   boolProps: Array<{ property: string; default: boolean }>;
   /** Text props with no bound text node (aria-label-only props like
@@ -5453,6 +5459,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     // identity markers (ds_contracts/*) are machine identity and remain
     // untouched.
     description: `${contract.name} — generated from contract ${contract.id} v${contract.version}${hasCodeOnlyFacts ? ` † (${codeOnlyFacts.length} code-only facts — see plugin report)` : ''}`,
+    ...(contract.documentationLinks && contract.documentationLinks.length > 0
+      ? { documentationLinks: contract.documentationLinks.map((l) => ({ uri: l.uri })) }
+      : {}),
     isSet: variants.length + stateVariants.length > 1,
     boolProps: boolPropsData,
     textProps: textOnlyProps,
@@ -7785,6 +7794,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -7912,6 +7922,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -8078,6 +8089,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');

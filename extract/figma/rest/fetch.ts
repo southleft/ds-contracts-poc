@@ -126,7 +126,13 @@ export async function fetchNodes(
   opts: ClientOptions = {},
 ): Promise<RestNodesResponse> {
   const ids = encodeURIComponent(nodeIds.join(','));
-  return (await get(`/v1/files/${fileKey}/nodes?ids=${ids}`, token, opts)) as RestNodesResponse;
+  // `plugin_data=shared` rides every node fetch (dump v1.32): the response
+  // then carries `sharedPluginData` — the ds_contracts stamps this pipeline
+  // writes at emit time (contractId/specHash/version/propNames/semantics/
+  // statePreviewAxis + the per-TEXT fontWeightVar/lineHeightVar token names).
+  // Without it a REST dump of a stamped set forgets its own identity and
+  // exact-mode proposal is impossible on this route.
+  return (await get(`/v1/files/${fileKey}/nodes?ids=${ids}&plugin_data=shared`, token, opts)) as RestNodesResponse;
 }
 
 /**
@@ -275,7 +281,7 @@ interface RestFileResponse {
 }
 
 export async function fetchFile(fileKey: string, token: string, opts: ClientOptions = {}): Promise<RestFileResponse> {
-  return (await get(`/v1/files/${fileKey}`, token, opts)) as RestFileResponse;
+  return (await get(`/v1/files/${fileKey}?plugin_data=shared`, token, opts)) as RestFileResponse;
 }
 
 // ---------------------------------------------------------------------------

@@ -1,0 +1,322 @@
+{
+  "kit": "flowbite",
+  "id": "flowbite.button",
+  "setName": "Button (flowbite.button)",
+  "nodeId": "120:2203",
+  "mode": "exact",
+  "variantCount": 45,
+  "contractSha256": "43acc508a7577b0c6b0ee34a3d755ab453d0991df0644c0588d612757c9f78e8",
+  "carriage": {
+    "carried": 569,
+    "named": 688,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "set description (designer's words)": [
+      0,
+      1,
+      0
+    ],
+    "stamp ds_contracts/version": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/statePreviewAxis": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/semantics": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/propNames": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/specHash": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/contractId": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/canvasSetSnapshot": [
+      0,
+      1,
+      0
+    ],
+    "stamp ds_contracts/canvasFingerprint": [
+      0,
+      1,
+      0
+    ],
+    "TEXT property": [
+      1,
+      0,
+      0
+    ],
+    "variant axis": [
+      2,
+      0,
+      0
+    ],
+    "declared axis default": [
+      2,
+      0,
+      0
+    ],
+    "interaction-state axis": [
+      1,
+      0,
+      0
+    ],
+    "boundVariables.paddingLeft": [
+      0,
+      45,
+      0
+    ],
+    "boundVariables.paddingRight": [
+      0,
+      45,
+      0
+    ],
+    "boundVariables.individualStrokeWeights": [
+      0,
+      180,
+      0
+    ],
+    "boundVariables.rectangleCornerRadii": [
+      0,
+      180,
+      0
+    ],
+    "boundVariables.fills": [
+      0,
+      90,
+      0
+    ],
+    "boundVariables.strokes": [
+      0,
+      45,
+      0
+    ],
+    "fills[0] SOLID": [
+      45,
+      45,
+      0
+    ],
+    "strokes[0] + strokeWeight": [
+      45,
+      0,
+      0
+    ],
+    "cornerRadius": [
+      45,
+      0,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      45,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      45,
+      0,
+      0
+    ],
+    "root layoutSizingVertical": [
+      45,
+      0,
+      0
+    ],
+    "interactions (prototype reactions)": [
+      0,
+      5,
+      0
+    ],
+    "boundVariables.fontSize": [
+      0,
+      45,
+      0
+    ],
+    "text.characters": [
+      45,
+      0,
+      0
+    ],
+    "text font size/weight": [
+      45,
+      0,
+      0
+    ],
+    "text fontFamily": [
+      45,
+      0,
+      0
+    ],
+    "text lineHeight": [
+      45,
+      0,
+      0
+    ],
+    "stamp ds_contracts/fontWeightVar": [
+      45,
+      0,
+      0
+    ],
+    "stamp ds_contracts/lineHeightVar": [
+      45,
+      0,
+      0
+    ],
+    "opacity": [
+      5,
+      0,
+      0
+    ],
+    "effects": [
+      10,
+      0,
+      0
+    ],
+    "strokeAlign": [
+      0,
+      5,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "8c1a78adb634d4277cd96bb53b275ca45885ff9a",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "120:2203",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "set description (designer's words)",
+      "value": "Button — generated from contract flowbite.button v0.2.0 †",
+      "disposition": "NAMED",
+      "landing": "description: the set's Figma description is this pipeline's own emit caption (\"Button —…"
+    },
+    {
+      "fact": "stamp ds_contracts/version",
+      "value": "0.2.0",
+      "disposition": "CARRIED",
+      "landing": "contract.version"
+    },
+    {
+      "fact": "stamp ds_contracts/statePreviewAxis",
+      "value": "{\"axis\":\"State\",\"default\":\"Default\",\"states\":[\"Disabled\",…",
+      "disposition": "CARRIED",
+      "landing": "contract.states (sparse State matrix accepted via the declared axis)"
+    },
+    {
+      "fact": "stamp ds_contracts/semantics",
+      "value": "{\"element\":\"button\"}",
+      "disposition": "CARRIED",
+      "landing": "contract.semantics (stamp outranks inference)"
+    },
+    {
+      "fact": "stamp ds_contracts/propNames",
+      "value": "{\"Color\":\"color\",\"Size\":\"size\",\"Content\":\"children\"}",
+      "disposition": "CARRIED",
+      "landing": "prop names (design spelling → contract prop names)"
+    },
+    {
+      "fact": "stamp ds_contracts/specHash",
+      "value": "3792380235",
+      "disposition": "CARRIED",
+      "landing": "dump.specHash — exact-mode evidence (proves the set matches the emit)"
+    },
+    {
+      "fact": "stamp ds_contracts/contractId",
+      "value": "flowbite.button",
+      "disposition": "CARRIED",
+      "landing": "contract.id (dump v1.32 stamp read-back)"
+    },
+    {
+      "fact": "stamp ds_contracts/canvasSetSnapshot",
+      "value": "400 chars",
+      "disposition": "NAMED",
+      "landing": "sync-domain fingerprint stamp — read by sync/observe.ts (drift arithmetic), deliberately not a contract fact"
+    },
+    {
+      "fact": "stamp ds_contracts/canvasFingerprint",
+      "value": "11 chars",
+      "disposition": "NAMED",
+      "landing": "sync-domain fingerprint stamp — read by sync/observe.ts (drift arithmetic), deliberately not a contract fact"
+    },
+    {
+      "fact": "TEXT property",
+      "value": "default=Button",
+      "disposition": "CARRIED",
+      "landing": "props.children (text, default \"Button\") → React prop / children + story args"
+    },
+    {
+      "fact": "variant axis",
+      "value": "Default|Alternative|Dark|Green|Red",
+      "disposition": "CARRIED",
+      "landing": "props.color (enum[5]) → React prop `color` + story argTypes + CSS .color-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "Default",
+      "disposition": "CARRIED",
+      "landing": "props.color.default = \"default\" → React default arg + story args"
+    },
+    {
+      "fact": "variant axis",
+      "value": "Md|Xs|Sm|Lg|Xl",
+      "disposition": "CARRIED",
+      "landing": "props.size (enum[5]) → React prop `size` + story argTypes + CSS .size-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "Md",
+      "disposition": "CARRIED",
+      "landing": "props.size.default = \"md\" → React default arg + story args"
+    },
+    {
+      "fact": "interaction-state axis",
+      "value": "Default|Disabled|Active|Focus Visible|Hover",
+      "disposition": "CARRIED",
+      "landing": "contract.states [hover, active, focus-visible, disabled] → CSS pseudo-class planes (:hover/:active/:focus-visible/[disabled]) + statePreviews"
+    }
+  ],
+  "generatedFiles": {
+    "react/Button/Button.module.css": "b4a46d16f80b2bd75f543320ef8ff569b82498556c0fb609dd2fd0b41b4a5b52",
+    "react/Button/Button.stories.tsx": "391a96a111fe2c1cad8fc7db929d1e25c5dcf0dd7367189810a21b5ec5befd30",
+    "react/Button/Button.tsx": "eb2f1789ddcd6cb6f287c3c797e95ddb7169d4d3928fa3887d7c5f1a4f5d4824",
+    "react/Button/index.ts": "73b563fcd1c682da3aea99406157d50b4197a966444b6c08c9e17db0d5b629b8",
+    "wc/flowbite-button.ts": "60124528db35b03c0b2681fd253ee2d1bf6c4f7b4e04915013759531f5b95d69",
+    "wc/flowbite-button.css.ts": "7cb4d10d05133b5833d644f2cf9a6cc1d544a42aee12e811b08e65f553a10770",
+    "wc/flowbite-button.demo.html": "20832062212272e4182289c823cd2a3f10c8f4ac2c73d9a758e11ff99d9fafac",
+    "wc/flowbite-button.custom-elements.json": "3ac6858009a9d2dd19b71a5e024662ad47ba31fb123613029418161a1af513ae"
+  },
+  "notesCount": 500
+}

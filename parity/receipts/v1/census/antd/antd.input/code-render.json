@@ -1,0 +1,336 @@
+{
+  "id": "antd.input",
+  "name": "Input",
+  "library": "antd",
+  "contractPath": "examples/antd/contracts/input.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/antd/figma/antd.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 40,
+      "sampled": 11,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "middle"
+      },
+      {
+        "name": "status",
+        "type": "enum",
+        "default": null
+      },
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "outlined"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "placeholder",
+        "type": "text",
+        "default": "Input"
+      }
+    ],
+    "states": [
+      "disabled",
+      "focus-visible",
+      "hover",
+      "active"
+    ],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.input.root.background-color.unset.borderless",
+      "imported.input.root.background-color.unset.filled",
+      "imported.input.root.background-color.unset.outlined",
+      "imported.input.root.background-color.unset.underlined",
+      "imported.input.root.border-bottom-color.unset.borderless",
+      "imported.input.root.border-bottom-color.unset.filled",
+      "imported.input.root.border-bottom-color.unset.outlined",
+      "imported.input.root.border-bottom-color.unset.underlined",
+      "imported.input.root.border-bottom-width.borderless",
+      "imported.input.root.border-bottom-width.filled",
+      "imported.input.root.border-bottom-width.outlined",
+      "imported.input.root.border-bottom-width.underlined",
+      "imported.input.root.border-left-color.unset.borderless",
+      "imported.input.root.border-left-color.unset.filled",
+      "imported.input.root.border-left-color.unset.outlined",
+      "imported.input.root.border-left-color.unset.underlined",
+      "imported.input.root.border-left-width.borderless",
+      "imported.input.root.border-left-width.filled",
+      "imported.input.root.border-left-width.outlined",
+      "imported.input.root.border-left-width.underlined",
+      "imported.input.root.border-right-color.unset.borderless",
+      "imported.input.root.border-right-color.unset.filled",
+      "imported.input.root.border-right-color.unset.outlined",
+      "imported.input.root.border-right-color.unset.underlined",
+      "imported.input.root.border-right-width.borderless",
+      "imported.input.root.border-right-width.filled",
+      "imported.input.root.border-right-width.outlined",
+      "imported.input.root.border-right-width.underlined",
+      "imported.input.root.border-top-color.unset.borderless",
+      "imported.input.root.border-top-color.unset.filled",
+      "imported.input.root.border-top-color.unset.outlined",
+      "imported.input.root.border-top-color.unset.underlined",
+      "imported.input.root.border-top-width.borderless",
+      "imported.input.root.border-top-width.filled",
+      "imported.input.root.border-top-width.outlined",
+      "imported.input.root.border-top-width.underlined",
+      "imported.input.root.color.unset.borderless",
+      "imported.input.root.color.unset.filled",
+      "imported.input.root.color.unset.outlined",
+      "imported.input.root.color.unset.underlined",
+      "imported.input.root.font-size.large",
+      "imported.input.root.font-size.middle",
+      "imported.input.root.font-size.small",
+      "imported.input.root.line-height.large",
+      "imported.input.root.line-height.middle",
+      "imported.input.root.line-height.small",
+      "imported.input.root.padding-bottom.large",
+      "imported.input.root.padding-bottom.middle",
+      "imported.input.root.padding-bottom.small",
+      "imported.input.root.padding-left.large",
+      "imported.input.root.padding-left.middle",
+      "imported.input.root.padding-left.small",
+      "imported.input.root.padding-right.large",
+      "imported.input.root.padding-right.middle",
+      "imported.input.root.padding-right.small",
+      "imported.input.root.padding-top.large",
+      "imported.input.root.padding-top.middle",
+      "imported.input.root.padding-top.small",
+      "imported.input.root.width",
+      "imported.shared.size-0"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "size-middle__status-error__variant-outlined",
+      "variant": "Size=Middle, Status=Error, Variant=Outlined",
+      "kind": "base",
+      "subst": {
+        "size": "middle",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-middle__status-error__variant-outlined.png",
+      "contentBox": {
+        "width": 288,
+        "height": 30
+      }
+    },
+    {
+      "slug": "size-middle__status-error__variant-borderless",
+      "variant": "Size=Middle, Status=Error, Variant=Borderless",
+      "kind": "base",
+      "subst": {
+        "size": "middle",
+        "status": "error",
+        "variant": "borderless"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-middle__status-error__variant-borderless.png",
+      "contentBox": {
+        "width": 288,
+        "height": 30
+      }
+    },
+    {
+      "slug": "size-middle__status-error__variant-filled",
+      "variant": "Size=Middle, Status=Error, Variant=Filled",
+      "kind": "base",
+      "subst": {
+        "size": "middle",
+        "status": "error",
+        "variant": "filled"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-middle__status-error__variant-filled.png",
+      "contentBox": {
+        "width": 288,
+        "height": 30
+      }
+    },
+    {
+      "slug": "size-middle__status-error__variant-underlined",
+      "variant": "Size=Middle, Status=Error, Variant=Underlined",
+      "kind": "base",
+      "subst": {
+        "size": "middle",
+        "status": "error",
+        "variant": "underlined"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-middle__status-error__variant-underlined.png",
+      "contentBox": {
+        "width": 288,
+        "height": 30
+      }
+    },
+    {
+      "slug": "size-middle__status-warning__variant-outlined",
+      "variant": "Size=Middle, Status=Warning, Variant=Outlined",
+      "kind": "base",
+      "subst": {
+        "size": "middle",
+        "status": "warning",
+        "variant": "outlined"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-middle__status-warning__variant-outlined.png",
+      "contentBox": {
+        "width": 288,
+        "height": 30
+      }
+    },
+    {
+      "slug": "size-small__status-error__variant-outlined",
+      "variant": "Size=Small, Status=Error, Variant=Outlined",
+      "kind": "base",
+      "subst": {
+        "size": "small",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-small__status-error__variant-outlined.png",
+      "contentBox": {
+        "width": 288,
+        "height": 22
+      }
+    },
+    {
+      "slug": "size-large__status-error__variant-outlined",
+      "variant": "Size=Large, Status=Error, Variant=Outlined",
+      "kind": "base",
+      "subst": {
+        "size": "large",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-large__status-error__variant-outlined.png",
+      "contentBox": {
+        "width": 288,
+        "height": 38
+      }
+    },
+    {
+      "slug": "size-middle__status-error__variant-outlined__state-disabled",
+      "variant": "Size=Middle, Status=Error, Variant=Outlined, State=Disabled",
+      "kind": "state",
+      "state": "disabled",
+      "subst": {
+        "size": "middle",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "bools": {
+        "disabled": true
+      },
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-middle__status-error__variant-outlined__state-disabled.png",
+      "contentBox": {
+        "width": 288,
+        "height": 30
+      }
+    },
+    {
+      "slug": "size-middle__status-error__variant-outlined__state-focus-visible",
+      "variant": "Size=Middle, Status=Error, Variant=Outlined, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "subst": {
+        "size": "middle",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "bools": {},
+      "interaction": "focus-visible",
+      "status": "rendered",
+      "png": "code-size-middle__status-error__variant-outlined__state-focus-visible.png",
+      "contentBox": {
+        "width": 288,
+        "height": 30
+      }
+    },
+    {
+      "slug": "size-middle__status-error__variant-outlined__state-hover",
+      "variant": "Size=Middle, Status=Error, Variant=Outlined, State=Hover",
+      "kind": "state",
+      "state": "hover",
+      "subst": {
+        "size": "middle",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "bools": {},
+      "interaction": "hover",
+      "status": "rendered",
+      "png": "code-size-middle__status-error__variant-outlined__state-hover.png",
+      "contentBox": {
+        "width": 288,
+        "height": 30
+      }
+    },
+    {
+      "slug": "size-middle__status-error__variant-outlined__state-active",
+      "variant": "Size=Middle, Status=Error, Variant=Outlined, State=Active",
+      "kind": "state",
+      "state": "active",
+      "subst": {
+        "size": "middle",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "bools": {},
+      "interaction": "active",
+      "status": "rendered",
+      "png": "code-size-middle__status-error__variant-outlined__state-active.png",
+      "contentBox": {
+        "width": 288,
+        "height": 30
+      }
+    }
+  ],
+  "rendered": 11,
+  "refused": 0,
+  "unavailable": null
+}

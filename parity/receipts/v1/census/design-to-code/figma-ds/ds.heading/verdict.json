@@ -1,0 +1,7 @@
+{
+  "recognisable": true,
+  "walls": [
+    "FC-FONT-SUBSTRATE"
+  ],
+  "notes": "Weight/size steps track the axis on both sides; the kit's Manrope face is not available to the headless browser so the code side falls back (declared font-family carried; face availability is a substrate fact)."
+}

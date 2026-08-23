@@ -1,0 +1,264 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.badge",
+  "setName": "Badge",
+  "nodeId": "91:4928",
+  "mode": "reviewable-inversion",
+  "variantCount": 10,
+  "contractSha256": "7e588a912e0f772effb840abe3624c29eda5515ba50ac79ec128d0c7528c66be",
+  "carriage": {
+    "carried": 114,
+    "named": 139,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "set description (designer's words)": [
+      1,
+      0,
+      0
+    ],
+    "set documentationLinks": [
+      1,
+      0,
+      0
+    ],
+    "TEXT property": [
+      1,
+      0,
+      0
+    ],
+    "variant axis": [
+      2,
+      0,
+      0
+    ],
+    "declared axis default": [
+      2,
+      0,
+      0
+    ],
+    "boundVariables.itemSpacing": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.rectangleCornerRadii": [
+      0,
+      40,
+      0
+    ],
+    "cornerRadius": [
+      10,
+      0,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      10,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      10,
+      0,
+      0
+    ],
+    "root layoutSizingVertical": [
+      10,
+      0,
+      0
+    ],
+    "boundVariables.fills": [
+      0,
+      15,
+      0
+    ],
+    "fills[0] SOLID": [
+      15,
+      0,
+      0
+    ],
+    "opacity": [
+      5,
+      0,
+      0
+    ],
+    "layoutSizingHorizontal=FIXED (child)": [
+      5,
+      0,
+      0
+    ],
+    "layoutSizingVertical=FIXED (child)": [
+      5,
+      0,
+      0
+    ],
+    "ELLIPSE decor": [
+      5,
+      0,
+      0
+    ],
+    "boundVariables.paddingLeft": [
+      0,
+      5,
+      0
+    ],
+    "boundVariables.paddingTop": [
+      0,
+      5,
+      0
+    ],
+    "boundVariables.paddingRight": [
+      0,
+      5,
+      0
+    ],
+    "boundVariables.paddingBottom": [
+      0,
+      5,
+      0
+    ],
+    "boundVariables.individualStrokeWeights": [
+      0,
+      24,
+      0
+    ],
+    "boundVariables.strokes": [
+      0,
+      5,
+      0
+    ],
+    "strokes[0] + strokeWeight": [
+      5,
+      0,
+      0
+    ],
+    "boundVariables.lineHeight": [
+      0,
+      5,
+      0
+    ],
+    "boundVariables.letterSpacing": [
+      0,
+      5,
+      0
+    ],
+    "boundVariables.fontWeight": [
+      0,
+      5,
+      0
+    ],
+    "boundVariables.fontFamily": [
+      0,
+      5,
+      0
+    ],
+    "boundVariables.fontSize": [
+      0,
+      5,
+      0
+    ],
+    "text.characters": [
+      5,
+      0,
+      0
+    ],
+    "text font size/weight": [
+      5,
+      0,
+      0
+    ],
+    "text fontFamily": [
+      5,
+      0,
+      0
+    ],
+    "text lineHeight": [
+      5,
+      0,
+      0
+    ],
+    "text textAlignHorizontal": [
+      5,
+      0,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "3b1a82d50d3608387d5dfbc022d3eb06c85477d6",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "91:4928",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "set description (designer's words)",
+      "value": "A small status indicator badge with two presentation types: a simple dot indicator or a…",
+      "disposition": "CARRIED",
+      "landing": "contract.description (verbatim) → React JSDoc + Storybook docs + WC header"
+    },
+    {
+      "fact": "set documentationLinks",
+      "value": "http://ec1components.qa.xcloudiq.com/ec1/latest/webcomponents/?path=/story/components-b…",
+      "disposition": "CARRIED",
+      "landing": "contract.documentationLinks → JSDoc @see + Storybook docs link"
+    },
+    {
+      "fact": "TEXT property",
+      "value": "default=Badge",
+      "disposition": "CARRIED",
+      "landing": "props.text (text, default \"Badge\") → React prop / children + story args"
+    },
+    {
+      "fact": "variant axis",
+      "value": "sm|Default",
+      "disposition": "CARRIED",
+      "landing": "props.size (enum[2]) → React prop `size` + story argTypes + CSS .size-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "Default",
+      "disposition": "CARRIED",
+      "landing": "props.size.default = \"default\" → React default arg + story args"
+    },
+    {
+      "fact": "variant axis",
+      "value": "Default|Info|Success|Warning|Danger",
+      "disposition": "CARRIED",
+      "landing": "props.variant (enum[5]) → React prop `variant` + story argTypes + CSS .variant-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "Success",
+      "disposition": "CARRIED",
+      "landing": "props.variant.default = \"success\" → React default arg + story args"
+    }
+  ],
+  "generatedFiles": {
+    "react/Badge/Badge.module.css": "1070110f1b70cce1fce3e2ab01be783809f311a96ad017ed15fd5186178cb603",
+    "react/Badge/Badge.stories.tsx": "6821f7484c6842bdee77b0645f83d993e655cd2c858eb0149813bcc006dae8f6",
+    "react/Badge/Badge.tsx": "7be9d0a396311a201725a1c22bdff5bcf49329febb2853e619e911b726ef3a3f",
+    "react/Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
+    "wc/ds-badge.ts": "9ec9d31a4388794c50bcf7af1623d40a31b3dff8f8038bc25df47e6266b4b54d",
+    "wc/ds-badge.css.ts": "5c974f19f57cb3117a3894fdaade9ec2d9e5fd1102ded8edb6c1773d4abeb024",
+    "wc/ds-badge.demo.html": "36708d8c35ce5bbf764ed5bd5101fa44c6cbd96c5a503d4818bd1612cbbc1697",
+    "wc/ds-badge.custom-elements.json": "512070c152381b5b6a09cefef49a90235b2264ee7dd1108a77da711665710703"
+  },
+  "notesCount": 145
+}

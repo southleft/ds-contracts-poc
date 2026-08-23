@@ -1,0 +1,63 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.badge",
+  "setName": "Badge",
+  "renderer": "code: generated React (design-to-code pipeline bytes) → esbuild bundle → playwright-core screenshot at deviceScaleFactor 2; canvas: GET /v1/images/:key?scale=2 (Figma's own renderer, read-only)",
+  "cells": [
+    {
+      "slug": "size-default__variant-success",
+      "figmaVariant": "Size=Default, Variant=Success",
+      "nodeId": "91:4941",
+      "props": {
+        "size": "default",
+        "variant": "success"
+      }
+    },
+    {
+      "slug": "size-sm__variant-success",
+      "figmaVariant": "Size=sm, Variant=Success",
+      "nodeId": "91:4929",
+      "props": {
+        "size": "sm",
+        "variant": "success"
+      }
+    },
+    {
+      "slug": "size-default__variant-info",
+      "figmaVariant": "Size=Default, Variant=Info",
+      "nodeId": "91:4956",
+      "props": {
+        "size": "default",
+        "variant": "info"
+      }
+    },
+    {
+      "slug": "size-default__variant-warning",
+      "figmaVariant": "Size=Default, Variant=Warning",
+      "nodeId": "91:4961",
+      "props": {
+        "size": "default",
+        "variant": "warning"
+      }
+    },
+    {
+      "slug": "size-default__variant-danger",
+      "figmaVariant": "Size=Default, Variant=Danger",
+      "nodeId": "91:4966",
+      "props": {
+        "size": "default",
+        "variant": "danger"
+      }
+    },
+    {
+      "slug": "size-default__variant-default",
+      "figmaVariant": "Size=Default, Variant=Default",
+      "nodeId": "91:4951",
+      "props": {
+        "size": "default",
+        "variant": "default"
+      }
+    }
+  ],
+  "notSampled": []
+}

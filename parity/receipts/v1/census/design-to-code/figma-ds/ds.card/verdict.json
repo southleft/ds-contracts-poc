@@ -1,0 +1,9 @@
+{
+  "recognisable": false,
+  "walls": [
+    "EFFECT-GLASS-NAMED",
+    "VECTOR-GLYPH-NAMED",
+    "SLOT-DEFAULT-CONTENT"
+  ],
+  "notes": "The GLASS/BACKGROUND_BLUR surface resolves to a near-transparent fill (effects named, not proposed), the image glyph is a named vector, and the Content slot's drawn FRAME children are named design-time content the default cell does not pass — the drawn card does not read as a card in code. All losses named; none silent."
+}

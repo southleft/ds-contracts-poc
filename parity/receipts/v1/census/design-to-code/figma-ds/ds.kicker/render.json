@@ -1,0 +1,25 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.kicker",
+  "setName": "Kicker",
+  "renderer": "code: generated React (design-to-code pipeline bytes) → esbuild bundle → playwright-core screenshot at deviceScaleFactor 2; canvas: GET /v1/images/:key?scale=2 (Figma's own renderer, read-only)",
+  "cells": [
+    {
+      "slug": "size-default",
+      "figmaVariant": "Size=Default",
+      "nodeId": "53:4498",
+      "props": {
+        "size": "default"
+      }
+    },
+    {
+      "slug": "size-sm",
+      "figmaVariant": "Size=sm",
+      "nodeId": "53:4500",
+      "props": {
+        "size": "sm"
+      }
+    }
+  ],
+  "notSampled": []
+}

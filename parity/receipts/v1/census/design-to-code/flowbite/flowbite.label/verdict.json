@@ -1,0 +1,7 @@
+{
+  "recognisable": true,
+  "walls": [
+    "FC-GEOMETRY-EXCLUDED:root-width"
+  ],
+  "notes": "Same as HelperText: ink/type match; content-sized box wraps where the canvas box is wider."
+}

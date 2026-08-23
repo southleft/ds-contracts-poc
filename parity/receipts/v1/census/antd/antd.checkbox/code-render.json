@@ -1,0 +1,152 @@
+{
+  "id": "antd.checkbox",
+  "name": "Checkbox",
+  "library": "antd",
+  "contractPath": "examples/antd/contracts/checkbox.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/antd/figma/antd.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 3,
+      "sampled": 3,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "checked",
+        "type": "enum",
+        "default": "unchecked"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Checkbox"
+      }
+    ],
+    "states": [
+      "disabled",
+      "focus-visible",
+      "active",
+      "hover"
+    ],
+    "parts": [
+      "root",
+      "checkbox",
+      "checkbox-input",
+      "checkbox-inner",
+      "checkbox-inner-after",
+      "label"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.checkbox.checkbox-inner.background-color-state-disabled",
+      "imported.checkbox.checkbox-inner.background-color.checked",
+      "imported.checkbox.checkbox-inner.background-color.indeterminate",
+      "imported.checkbox.checkbox-inner.background-color.unchecked",
+      "imported.checkbox.checkbox-inner.border-bottom-color.checked",
+      "imported.checkbox.checkbox-inner.border-bottom-color.indeterminate",
+      "imported.checkbox.checkbox-inner.border-bottom-color.unchecked",
+      "imported.checkbox.checkbox-inner.border-left-color.checked",
+      "imported.checkbox.checkbox-inner.border-left-color.indeterminate",
+      "imported.checkbox.checkbox-inner.border-left-color.unchecked",
+      "imported.checkbox.checkbox-inner.border-right-color.checked",
+      "imported.checkbox.checkbox-inner.border-right-color.indeterminate",
+      "imported.checkbox.checkbox-inner.border-right-color.unchecked",
+      "imported.checkbox.checkbox-inner.border-top-color.checked",
+      "imported.checkbox.checkbox-inner.border-top-color.indeterminate",
+      "imported.checkbox.checkbox-inner.border-top-color.unchecked",
+      "imported.checkbox.checkbox-input.font-size",
+      "imported.checkbox.checkbox-input.opacity",
+      "imported.checkbox.checkbox-input.z-index",
+      "imported.checkbox.label.color-state-disabled",
+      "imported.checkbox.label.font-weight",
+      "imported.checkbox.label.padding-left",
+      "imported.checkbox.label.padding-right",
+      "imported.checkbox.root.width",
+      "imported.shared.color-000000e0",
+      "imported.shared.color-545454",
+      "imported.shared.size-0",
+      "imported.shared.size-1",
+      "imported.shared.size-14",
+      "imported.shared.size-16",
+      "imported.shared.size-22",
+      "imported.shared.size-4"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "checked-unchecked",
+      "variant": "Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-checked-unchecked.png",
+      "contentBox": {
+        "width": 93.31,
+        "height": 22
+      }
+    },
+    {
+      "slug": "checked-checked",
+      "variant": "Checked=Checked",
+      "kind": "base",
+      "subst": {
+        "checked": "checked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-checked-checked.png",
+      "contentBox": {
+        "width": 93.31,
+        "height": 22
+      }
+    },
+    {
+      "slug": "checked-indeterminate",
+      "variant": "Checked=Indeterminate",
+      "kind": "base",
+      "subst": {
+        "checked": "indeterminate"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-checked-indeterminate.png",
+      "contentBox": {
+        "width": 93.31,
+        "height": 22
+      }
+    }
+  ],
+  "rendered": 3,
+  "refused": 0,
+  "unavailable": null
+}

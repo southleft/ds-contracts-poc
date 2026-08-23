@@ -1,0 +1,154 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.dek",
+  "setName": "Dek",
+  "nodeId": "53:4327",
+  "mode": "reviewable-inversion",
+  "variantCount": 2,
+  "contractSha256": "6fa8ad6a1ee25383c78fb702d5306cd442bfa37175a454586fec8c0afd5b1104",
+  "carriage": {
+    "carried": 20,
+    "named": 16,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "variant axis": [
+      1,
+      0,
+      0
+    ],
+    "declared axis default": [
+      1,
+      0,
+      0
+    ],
+    "boundVariables.itemSpacing": [
+      0,
+      2,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      2,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      2,
+      0,
+      0
+    ],
+    "root layoutSizingVertical": [
+      2,
+      0,
+      0
+    ],
+    "boundVariables.fills": [
+      0,
+      2,
+      0
+    ],
+    "boundVariables.lineHeight": [
+      0,
+      2,
+      0
+    ],
+    "boundVariables.letterSpacing": [
+      0,
+      2,
+      0
+    ],
+    "boundVariables.fontWeight": [
+      0,
+      2,
+      0
+    ],
+    "boundVariables.fontFamily": [
+      0,
+      2,
+      0
+    ],
+    "boundVariables.fontSize": [
+      0,
+      2,
+      0
+    ],
+    "fills[0] SOLID": [
+      2,
+      0,
+      0
+    ],
+    "layoutSizingHorizontal=FILL": [
+      2,
+      0,
+      0
+    ],
+    "text.characters": [
+      0,
+      2,
+      0
+    ],
+    "text font size/weight": [
+      2,
+      0,
+      0
+    ],
+    "text fontFamily": [
+      2,
+      0,
+      0
+    ],
+    "text lineHeight": [
+      2,
+      0,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "759bcaa0c21801b907c74d4b68ec94b92b325be4",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "53:4327",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "variant axis",
+      "value": "default|sm",
+      "disposition": "CARRIED",
+      "landing": "props.size (enum[2]) → React prop `size` + story argTypes + CSS .size-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "default",
+      "disposition": "CARRIED",
+      "landing": "props.size.default = \"default\" → React default arg + story args"
+    }
+  ],
+  "generatedFiles": {
+    "react/Dek/Dek.module.css": "1c6e4a17eb044910f727a6b7d3ecd9be4141874515041b986297127d01c0a9f4",
+    "react/Dek/Dek.stories.tsx": "b0d3fb9d37852fd3924cc730b26eeb670b3eb173583495e886f50039c32b2245",
+    "react/Dek/Dek.tsx": "14c3eca6166f542e50c9930daad0df02798a47c742c2e021fb83c0302c36c256",
+    "react/Dek/index.ts": "9895f37860ec3bb45a38bfe4d1e08865f9c9f6af6167c78e69f9f6139e2e1375",
+    "wc/ds-dek.ts": "59ab8ab13703e17941235f0ada2ec03756a065e115eea7f05b353ebb4f2dfb78",
+    "wc/ds-dek.css.ts": "9c3114f57c54c4f7ef74a1814503d1d032503ac3ecdb16dd0a3bc6992e90f096",
+    "wc/ds-dek.demo.html": "7eb38c7a5df81ac91cb9541f0eb3d2de406801eede62b528f19ae119b5a924fe",
+    "wc/ds-dek.custom-elements.json": "1f65aa7108818ef1551cadb5df261ab8852544d5dd11bd0e36a7af7f8c6cc3e5"
+  },
+  "notesCount": 16
+}

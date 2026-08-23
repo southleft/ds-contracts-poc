@@ -1,0 +1,271 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.toast",
+  "setName": "Toast",
+  "nodeId": "86:2195",
+  "mode": "reviewable-inversion",
+  "variantCount": 5,
+  "contractSha256": "c63286253164a77515202e3e01697760ed89a3207dfb47abb29289a90fa5353e",
+  "carriage": {
+    "carried": 135,
+    "named": 246,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "INSTANCE_SWAP property": [
+      1,
+      0,
+      0
+    ],
+    "swap/slot accepts": [
+      0,
+      1,
+      0
+    ],
+    "variant axis": [
+      1,
+      0,
+      0
+    ],
+    "declared axis default": [
+      1,
+      0,
+      0
+    ],
+    "boundVariables.itemSpacing": [
+      0,
+      15,
+      0
+    ],
+    "boundVariables.paddingLeft": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.paddingTop": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.paddingRight": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.paddingBottom": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.size": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.individualStrokeWeights": [
+      0,
+      20,
+      0
+    ],
+    "boundVariables.rectangleCornerRadii": [
+      0,
+      40,
+      0
+    ],
+    "boundVariables.fills": [
+      0,
+      15,
+      0
+    ],
+    "boundVariables.strokes": [
+      0,
+      5,
+      0
+    ],
+    "boundVariables.effects": [
+      0,
+      25,
+      0
+    ],
+    "fills[0] SOLID": [
+      15,
+      0,
+      0
+    ],
+    "strokes[0] + strokeWeight": [
+      5,
+      0,
+      0
+    ],
+    "effects": [
+      5,
+      0,
+      0
+    ],
+    "styles.effect (effect STYLE identity)": [
+      0,
+      5,
+      0
+    ],
+    "cornerRadius": [
+      5,
+      0,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      15,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      5,
+      0,
+      0
+    ],
+    "root layoutSizingVertical": [
+      5,
+      0,
+      0
+    ],
+    "minHeight": [
+      5,
+      0,
+      0
+    ],
+    "instance main component": [
+      10,
+      0,
+      0
+    ],
+    "overrides[] (host overrides inside the instance)": [
+      0,
+      10,
+      0
+    ],
+    "targetAspectRatio": [
+      0,
+      5,
+      0
+    ],
+    "layoutSizingHorizontal=FILL": [
+      15,
+      0,
+      0
+    ],
+    "boundVariables.lineHeight": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.letterSpacing": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.fontWeight": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.fontFamily": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.fontSize": [
+      0,
+      10,
+      0
+    ],
+    "text.characters": [
+      10,
+      0,
+      0
+    ],
+    "text font size/weight": [
+      10,
+      0,
+      0
+    ],
+    "text fontFamily": [
+      10,
+      0,
+      0
+    ],
+    "text lineHeight": [
+      10,
+      0,
+      0
+    ],
+    "componentProperties.Icon (fixed swap)": [
+      0,
+      5,
+      0
+    ],
+    "componentProperties.State": [
+      5,
+      0,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "747f45cb204365f3a9475e4011d48d0d7d1aa686",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "86:2195",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "INSTANCE_SWAP property",
+      "value": "default=53:3934",
+      "disposition": "CARRIED",
+      "landing": "anatomy slot part (property \"Icon\") → React slot prop / children"
+    },
+    {
+      "fact": "swap/slot accepts",
+      "value": "[] (unconstrained)",
+      "disposition": "NAMED",
+      "landing": "Toast:root/Icon: slot \"Icon\" INSTANCE_SWAP preferredValues is EMPTY ([]) — an UNCONSTRA…"
+    },
+    {
+      "fact": "variant axis",
+      "value": "Default|Success|Warning|Danger|Info",
+      "disposition": "CARRIED",
+      "landing": "props.variant (enum[5]) → React prop `variant` + story argTypes + CSS .variant-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "Default",
+      "disposition": "CARRIED",
+      "landing": "props.variant.default = \"default\" → React default arg + story args"
+    }
+  ],
+  "generatedFiles": {
+    "react/Toast/Toast.module.css": "5eed0fa7eacc4c83ecb9bc6fb77a1d034da3cf881bac78ebf1da0e28e16ab870",
+    "react/Toast/Toast.stories.tsx": "4542a15ab13c34729632df4cf9c99afa61e65659d353193ed75d3bdcf3440f91",
+    "react/Toast/Toast.tsx": "6259bba2b23c3e4bcff9807a47e443e0ed27f9c42d4fb7f4390c26e3818d9bef",
+    "react/Toast/index.ts": "b2b42b8647a43e3b09abc682303c5ec4d8d72e53fcae06a3045fbd0cf6e7f8f4",
+    "wc/ds-toast.ts": "8a1d84420b2f5a2231b5b409e5c3885f692df4f8a342f9a9f1c55082ab3ca9a9",
+    "wc/ds-toast.css.ts": "ba44f3adc9e3d059bd2ae5d8275232381ba10f27ba0666d2f827c23d21f8b08c",
+    "wc/ds-toast.demo.html": "cc5dae9be075c0455ddd8b5c93826d734cabc98164464512be8f33c46564c682",
+    "wc/ds-toast.custom-elements.json": "9bc48934a4eea00fd08875dab752a231c76dab02905474ef473c0ea0e81558a5"
+  },
+  "notesCount": 214
+}

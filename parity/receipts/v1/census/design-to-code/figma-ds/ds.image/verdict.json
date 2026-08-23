@@ -1,0 +1,7 @@
+{
+  "recognisable": true,
+  "walls": [
+    "VECTOR-GLYPH-NAMED"
+  ],
+  "notes": "The placeholder box (fill, radius, size) matches; the picture glyph inside is a named vector."
+}

@@ -1236,7 +1236,7 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
   // ---- assemble ----------------------------------------------------------
   const header = `/**
  * ${contract.name} — vanilla Custom Element <${tag}> emitted from contract
- * ${contract.id} v${contract.version} by @ds-contracts/emitter-web-components. Do not edit.
+ * ${contract.id} v${contract.version} by @ds-contracts/emitter-web-components. Do not edit.${(contract.documentationLinks ?? []).map((l) => `\n * @see ${l.uri}`).join('')}
  *
  * Token values arrive via CSS custom properties (custom properties inherit
  * through the shadow boundary) — include the token stylesheet on the page

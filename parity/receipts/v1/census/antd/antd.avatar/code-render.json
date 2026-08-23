@@ -1,0 +1,148 @@
+{
+  "id": "antd.avatar",
+  "name": "Avatar",
+  "library": "antd",
+  "contractPath": "examples/antd/contracts/avatar.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/antd/figma/antd.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 6,
+      "sampled": 4,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "default"
+      },
+      {
+        "name": "shape",
+        "type": "enum",
+        "default": "circle"
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "A"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "label"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.avatar.label.color",
+      "imported.avatar.label.font-size",
+      "imported.avatar.label.font-weight",
+      "imported.avatar.label.line-height",
+      "imported.avatar.root.background-color",
+      "imported.avatar.root.color",
+      "imported.avatar.root.font-size",
+      "imported.avatar.root.height.default",
+      "imported.avatar.root.height.large",
+      "imported.avatar.root.height.small",
+      "imported.avatar.root.line-height",
+      "imported.avatar.root.width.default",
+      "imported.avatar.root.width.large",
+      "imported.avatar.root.width.small",
+      "imported.shared.color-00000000",
+      "imported.shared.size-0",
+      "imported.shared.size-1"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "size-default__shape-circle",
+      "variant": "Size=Default, Shape=Circle",
+      "kind": "base",
+      "subst": {
+        "size": "default",
+        "shape": "circle"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-default__shape-circle.png",
+      "contentBox": {
+        "width": 32,
+        "height": 32
+      }
+    },
+    {
+      "slug": "size-default__shape-square",
+      "variant": "Size=Default, Shape=Square",
+      "kind": "base",
+      "subst": {
+        "size": "default",
+        "shape": "square"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-default__shape-square.png",
+      "contentBox": {
+        "width": 32,
+        "height": 32
+      }
+    },
+    {
+      "slug": "size-small__shape-circle",
+      "variant": "Size=Small, Shape=Circle",
+      "kind": "base",
+      "subst": {
+        "size": "small",
+        "shape": "circle"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-small__shape-circle.png",
+      "contentBox": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "slug": "size-large__shape-circle",
+      "variant": "Size=Large, Shape=Circle",
+      "kind": "base",
+      "subst": {
+        "size": "large",
+        "shape": "circle"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-large__shape-circle.png",
+      "contentBox": {
+        "width": 40,
+        "height": 40
+      }
+    }
+  ],
+  "rendered": 4,
+  "refused": 0,
+  "unavailable": null
+}

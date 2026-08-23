@@ -1,0 +1,8 @@
+{
+  "recognisable": true,
+  "walls": [
+    "FC-FONT-SUBSTRATE",
+    "TEXT-LETTER-SPACING-NAMED"
+  ],
+  "notes": "Purple all-caps kicker reads on both sides; letter-spacing is a named text-channel limit on this route and Manrope falls back."
+}

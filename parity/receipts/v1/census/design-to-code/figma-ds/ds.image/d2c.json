@@ -1,0 +1,140 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.image",
+  "setName": "Image",
+  "nodeId": "53:4618",
+  "mode": "reviewable-inversion",
+  "variantCount": 1,
+  "contractSha256": "75d36ea2d05d8a18a7bd3efaf827afb8c44ecae3485305d2d555179995596728",
+  "carriage": {
+    "carried": 13,
+    "named": 11,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "variant axis": [
+      1,
+      0,
+      0
+    ],
+    "declared axis default": [
+      1,
+      0,
+      0
+    ],
+    "interaction-state axis": [
+      1,
+      0,
+      0
+    ],
+    "boundVariables.rectangleCornerRadii": [
+      0,
+      4,
+      0
+    ],
+    "boundVariables.fills": [
+      0,
+      3,
+      0
+    ],
+    "fills[0] SOLID": [
+      3,
+      0,
+      0
+    ],
+    "cornerRadius": [
+      1,
+      0,
+      0
+    ],
+    "clipsContent": [
+      0,
+      1,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      1,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      1,
+      0,
+      0
+    ],
+    "root layoutSizingVertical": [
+      1,
+      0,
+      0
+    ],
+    "opacity": [
+      1,
+      0,
+      0
+    ],
+    "layoutPositioning=ABSOLUTE": [
+      0,
+      1,
+      0
+    ],
+    "vector geometry": [
+      0,
+      2,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "38ff07c764893fa0825bd78b198961907169dd3c",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "53:4618",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "variant axis",
+      "value": "Default",
+      "disposition": "CARRIED",
+      "landing": "props.variant (enum[1]) → React prop `variant` + story argTypes + CSS .variant-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "Default",
+      "disposition": "CARRIED",
+      "landing": "props.variant.default = \"default\" → React default arg + story args"
+    },
+    {
+      "fact": "interaction-state axis",
+      "value": "Default",
+      "disposition": "CARRIED",
+      "landing": "props.state — kept as an enum prop (no default/non-default split to promote; the proposal names it for review)"
+    }
+  ],
+  "generatedFiles": {
+    "react/Image/Image.module.css": "ff1d3d4ae0fd2267fc8f55e3bd33aad00e6f5fa35b6ab2bd18bf95536ab905c9",
+    "react/Image/Image.stories.tsx": "801a16b5148a0861de91bc958a6c51716cea3c4af0f1a52cfb33b55f8855907b",
+    "react/Image/Image.tsx": "c9ebd9a37b3e00ac59ba6f086623fb0285d2420c326d5f9f5f67caf4a8946ac7",
+    "react/Image/index.ts": "977fc22315de6b799603d19e4bcfa3f725d8af82ba0b909d87b4019986ce06f6",
+    "wc/ds-image.ts": "4438b26e9b5e15a8867b13b0474be58a295f90444860967b2a9c6a612993013c",
+    "wc/ds-image.css.ts": "fd36afe107214a1250958c22bcc2c223101ef63b2737b0f561072f205a61d258",
+    "wc/ds-image.demo.html": "b361a7b3f9afa180e1e80670a856cd299d4aebd005c699d9be44a65b093ecbf6",
+    "wc/ds-image.custom-elements.json": "21a572be4f8d6efe69634be9a0b4be57750283164f8e0cce1e1210ec2fd4457f"
+  },
+  "notesCount": 23
+}

@@ -2393,6 +2393,15 @@ export const ContractSchema = z.strictObject({
     .regex(/^\d+\.\d+\.\d+$/, "version must be semver (MAJOR.MINOR.PATCH)"),
   status: z.enum(["draft", "stable", "deprecated"]).default("draft"),
   description: z.string(),
+  /** Figma-parity documentation pointers (schema 18, additive/optional):
+   *  the component's own documentation links, carried BOTH ways — the
+   *  Figma emitter writes them as the set's documentationLinks, and the
+   *  design→contract proposal reads them back (dump v1.32). Code emitters
+   *  surface them as JSDoc `@see` lines and Storybook docs links, so the
+   *  designer's pointer survives into every generated surface. */
+  documentationLinks: z
+    .array(z.strictObject({ uri: z.string().min(1) }))
+    .optional(),
   semantics: z.strictObject({
     element: z.enum([
       "button",

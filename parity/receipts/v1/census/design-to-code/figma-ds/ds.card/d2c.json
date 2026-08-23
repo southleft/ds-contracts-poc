@@ -1,0 +1,243 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.card",
+  "setName": "Card",
+  "nodeId": "53:1777",
+  "mode": "reviewable-inversion",
+  "variantCount": 2,
+  "contractSha256": "8c8c43163e1e770cb848412633432a410b30248605eb039525c192c9f7a31bd6",
+  "carriage": {
+    "carried": 39,
+    "named": 72,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "SLOT property": [
+      2,
+      0,
+      0
+    ],
+    "swap/slot accepts": [
+      0,
+      2,
+      0
+    ],
+    "variant axis": [
+      1,
+      0,
+      0
+    ],
+    "declared axis default": [
+      1,
+      0,
+      0
+    ],
+    "boundVariables.itemSpacing": [
+      0,
+      6,
+      0
+    ],
+    "boundVariables.paddingLeft": [
+      0,
+      2,
+      0
+    ],
+    "boundVariables.paddingTop": [
+      0,
+      2,
+      0
+    ],
+    "boundVariables.paddingRight": [
+      0,
+      2,
+      0
+    ],
+    "boundVariables.paddingBottom": [
+      0,
+      2,
+      0
+    ],
+    "boundVariables.size": [
+      0,
+      2,
+      0
+    ],
+    "boundVariables.individualStrokeWeights": [
+      0,
+      8,
+      0
+    ],
+    "boundVariables.rectangleCornerRadii": [
+      0,
+      16,
+      0
+    ],
+    "boundVariables.strokes": [
+      0,
+      2,
+      0
+    ],
+    "boundVariables.effects": [
+      0,
+      12,
+      0
+    ],
+    "fills[0] SOLID": [
+      2,
+      0,
+      0
+    ],
+    "strokes[0] + strokeWeight": [
+      2,
+      0,
+      0
+    ],
+    "effects": [
+      0,
+      2,
+      0
+    ],
+    "styles.effect (effect STYLE identity)": [
+      0,
+      2,
+      0
+    ],
+    "cornerRadius": [
+      4,
+      0,
+      0
+    ],
+    "clipsContent": [
+      0,
+      4,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      8,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      2,
+      0,
+      0
+    ],
+    "root layoutSizingVertical": [
+      2,
+      0,
+      0
+    ],
+    "minWidth": [
+      0,
+      1,
+      0
+    ],
+    "maxWidth": [
+      0,
+      1,
+      0
+    ],
+    "layoutSizingHorizontal=FILL": [
+      5,
+      0,
+      0
+    ],
+    "SLOT node (native insertion point)": [
+      4,
+      0,
+      0
+    ],
+    "SLOT child INSTANCE (design-time content)": [
+      4,
+      0,
+      0
+    ],
+    "SLOT child FRAME (design-time content)": [
+      0,
+      4,
+      0
+    ],
+    "layoutSizingVertical=FILL": [
+      0,
+      1,
+      0
+    ],
+    "layoutSizingHorizontal=FIXED (child)": [
+      0,
+      1,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "9452ebc5a399e7cbbfd1e7f248f7022bbb571c3d",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "53:1777",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "SLOT property",
+      "value": "default={\"guid\":{\"sessionID\":-1,\"localID\":-1}}",
+      "disposition": "CARRIED",
+      "landing": "anatomy slot part (property \"Image\") → React slot prop / children"
+    },
+    {
+      "fact": "swap/slot accepts",
+      "value": "de1d1f4d",
+      "disposition": "NAMED",
+      "landing": "Card:root/Container/Image: slot \"Image\" preferredValues name 1 component key(s) with no…"
+    },
+    {
+      "fact": "SLOT property",
+      "value": "default={\"guid\":{\"sessionID\":-1,\"localID\":-1}}",
+      "disposition": "CARRIED",
+      "landing": "anatomy slot part (property \"Content\") → React slot prop / children"
+    },
+    {
+      "fact": "swap/slot accepts",
+      "value": "[] (unconstrained)",
+      "disposition": "NAMED",
+      "landing": "Card:root/Container/Content: slot \"Content\" SLOT preferredValues is EMPTY ([]) — an UNC…"
+    },
+    {
+      "fact": "variant axis",
+      "value": "Default|Inline",
+      "disposition": "CARRIED",
+      "landing": "props.variant (enum[2]) → React prop `variant` + story argTypes + CSS .variant-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "Default",
+      "disposition": "CARRIED",
+      "landing": "props.variant.default = \"default\" → React default arg + story args"
+    }
+  ],
+  "generatedFiles": {
+    "react/Card/Card.module.css": "6b8835a16302ffcedb4eae50a9ecc3fd990ea8cbb820f43873e7e7750f6fc4f8",
+    "react/Card/Card.stories.tsx": "b8d6e30ea1e174f3b1ee77b61857899e1cd00156f77eb9bd8c880704fa814414",
+    "react/Card/Card.tsx": "5ab7e2d90a106a57c4b0917f0448d1040ca60001ecc6886779139c22fd3f4726",
+    "react/Card/index.ts": "6abf31a433c1ff35092ff51548df0a3e7e3a15c082141450a4a5f6c51b43630a",
+    "wc/ds-card.ts": "2cd6ccfa711e9697ce9b5e6a54cd258a78fc4eb205a63658a96a372586f97aeb",
+    "wc/ds-card.css.ts": "b107646b1b14b46bbcaab71f548ade9452d5102d8e4a264327af9445c805655a",
+    "wc/ds-card.demo.html": "5dd5ee96c8e414429f515caf26b688f88b1326693312653276cda8a4bb3c93a8",
+    "wc/ds-card.custom-elements.json": "6ac746f276599d4160d17a3b6e292571329437eca88f2620cf2e12f364617b86"
+  },
+  "notesCount": 131
+}
