@@ -1,0 +1,46 @@
+{
+  "__note": "LIBRARY MANIFEST — the per-library half of the whole code→canvas pipeline (docs/21). `ds-contracts promote --config <this>` runs the promote stage; `ds-contracts onboard --adopt examples/antd` runs capture → promote → emit → bundle → publish from it. packages/cli/src/promote.ts is the shared engine-free pipeline; nothing here is library-specific code. Ant Design v5 is NPM-PINNED SOURCE: the harness examples/antd/.antd-sandbox mounts antd@5.29.3 (+ @ant-design/icons@5.6.1, react 18.3.1, esbuild 0.28) and the pin is that sandbox's package.json (archived at examples/antd/probe/sandbox-package.json) — the runner refuses a version drift by name. @ant-design/cssinjs is runtime CSS-in-JS and ships NO stylesheet — every rule is injected at runtime, and in cssVar mode all 350 global + 152 component custom properties are declared on the cssVar KEY CLASS placed on every component root (`.antd`), never on :root (RECON §2.5) — which is why the capture config carries a ConfigProvider mount wrapper with four measured pins instead of a stylesheet import (examples/antd/README.md).",
+  "library": "antd",
+  "exampleDir": "examples/antd",
+  "captureOut": "extract/computed/out/antd",
+  "dtcg": "examples/antd/tokens/antd.dtcg.json",
+  "mintedOut": "examples/antd/tokens/antd-minted.dtcg.json",
+  "mintedDoc": "examples/antd/tokens/MINTED.md",
+  "__note:components": "THE P2 EXAM SET — twelve subjects chosen to stress the engine's named walls (RECON §3): the densest state matrix (Button), defaultless enums (Tag, Badge, Input, Progress), the pseudo-thumb (Switch), the pseudo-glyph (Checkbox), the scale-revealed pseudo dot (Radio), presence×axis factoring (Alert), the inline-scale text fit (Avatar), the meter (Progress), a head/body container (Card) and the portal lane (Tooltip). Capture dirs are extract/computed/out/antd/<config component name lowercased>; every name is one word, so contractStem is empty.",
+  "components": [
+    "button",
+    "tag",
+    "badge",
+    "switch",
+    "checkbox",
+    "radio",
+    "input",
+    "alert",
+    "avatar",
+    "progress",
+    "card",
+    "tooltip"
+  ],
+  "contractStem": {},
+  "contractVersion": "0.2.0",
+  "promoterPath": "examples/antd/scripts/promote-floor.mjs",
+  "possessive": "Ant Design's",
+  "mintedDocTitle": "Ant Design minted tokens",
+  "capture": {
+    "config": "extract/computed/configs/antd.json",
+    "harness": "examples/antd/.antd-sandbox"
+  },
+  "seeds": "examples/antd/contracts-seed",
+  "emit": {
+    "out": "examples/antd/figma",
+    "icons": "examples/antd/assets/icons"
+  },
+  "bundle": {
+    "out": "examples/antd/figma/antd.bundle.json",
+    "name": "Ant Design",
+    "modes": [
+      "examples/antd/tokens/modes/antd.light.dtcg.json",
+      "examples/antd/tokens/modes/antd.dark.dtcg.json"
+    ]
+  }
+}
