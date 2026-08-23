@@ -1086,6 +1086,11 @@ label {
   background: color-mix(in srgb, var(--pg-danger) 14%, transparent);
 }
 
+.editor__line--anchor {
+  background: color-mix(in srgb, var(--pg-accent) 22%, transparent);
+  box-shadow: inset 3px 0 0 var(--pg-accent);
+}
+
 /* When Prism paints the backdrop, the backdrop IS the text layer: the
  * textarea's glyphs go transparent (caret and selection stay visible) and
  * the backdrop-pre's color flips on. Metrics never change — same font,
@@ -2387,4 +2392,398 @@ label {
 
 .checkline input {
   width: auto;
+}
+
+/* ------------------------------------------------ guided walkthroughs */
+
+/* The tour strip reuses the onboarding strip's chrome; the current step is
+ * the accent-bordered one, done steps go green like onboarding's. */
+.tourstrip__title b {
+  color: var(--pg-fg);
+}
+
+.onboard__step.is-current {
+  border-color: var(--pg-accent);
+  box-shadow: inset 0 0 0 1px var(--pg-accent);
+}
+
+.onboard__step.is-current .onboard__num {
+  background: var(--pg-accent);
+  color: var(--pg-accent-fg);
+  border-color: var(--pg-accent);
+}
+
+.tourstrip__nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.tourstrip__nav .onboard__dismiss {
+  margin-left: 0;
+}
+
+.tourstrip__other {
+  text-decoration: none;
+}
+
+.tabs__tab--flow {
+  font-weight: 600;
+}
+
+/* The Flow panel — one artifact per step. Scrolls inside the output body. */
+.flow {
+  padding: 16px 20px 28px;
+  font-size: 13px;
+  line-height: 1.5;
+  max-width: 960px;
+}
+
+.flow__head {
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--pg-border);
+}
+
+.flow__step {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--pg-faint);
+}
+
+.flow__title {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 4px 0 6px;
+  line-height: 1.25;
+}
+
+.flow__lead {
+  margin: 0;
+  color: var(--pg-muted);
+}
+
+.flow__h {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pg-faint);
+  margin: 18px 0 6px;
+  font-weight: 600;
+}
+
+.flow__label {
+  display: inline-block;
+  font-size: 11.5px;
+  padding: 2px 8px;
+  margin: 0 0 10px;
+  border: 1px solid var(--pg-warn);
+  color: var(--pg-warn);
+  background: var(--pg-surface);
+}
+
+.flow__mono {
+  font-family: var(--pg-mono);
+  font-size: 12px;
+  background: var(--pg-surface);
+  padding: 0 4px;
+  overflow-wrap: anywhere;
+}
+
+.flow__muted {
+  color: var(--pg-faint);
+}
+
+.flow__ok {
+  color: var(--pg-ok);
+}
+
+.flow__bad {
+  color: var(--pg-danger);
+  font-weight: 600;
+}
+
+.flow__source {
+  margin: 14px 0 0;
+  padding: 10px 12px;
+  border-left: 2px solid var(--pg-border-strong);
+  color: var(--pg-muted);
+  font-size: 12.5px;
+}
+
+.flow__kv {
+  margin: 0;
+  display: grid;
+  grid-template-columns: minmax(140px, 220px) 1fr;
+  border: 1px solid var(--pg-border);
+}
+
+.flow__kv-row {
+  display: contents;
+}
+
+.flow__kv dt,
+.flow__kv dd {
+  margin: 0;
+  padding: 6px 10px;
+  border-top: 1px solid var(--pg-border);
+  overflow-wrap: anywhere;
+}
+
+.flow__kv-row:first-child dt,
+.flow__kv-row:first-child dd {
+  border-top: none;
+}
+
+.flow__kv dt {
+  color: var(--pg-muted);
+  background: var(--pg-surface);
+  font-size: 12px;
+}
+
+.flow__hops {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.flow__hops li + li {
+  margin-top: 6px;
+}
+
+.flow__chip {
+  display: inline-block;
+  margin: 2px 6px 2px 0;
+  padding: 1px 8px;
+  border: 1px solid var(--pg-border);
+  font-size: 12px;
+}
+
+.flow__chip.is-focus {
+  border-color: var(--pg-accent);
+  font-weight: 600;
+}
+
+.flow__chips {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.flow__refusals {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.flow__refusals li {
+  color: var(--pg-danger);
+  margin: 4px 0;
+}
+
+.flow__refusals--soft li {
+  color: var(--pg-fg);
+}
+
+.flow__details summary {
+  cursor: pointer;
+  font-size: 12.5px;
+  color: var(--pg-muted);
+  margin-top: 8px;
+}
+
+.flow__quote {
+  margin: 8px 0;
+  padding: 10px 12px;
+  border-left: 3px solid var(--pg-danger);
+  background: var(--pg-surface);
+  font-family: var(--pg-mono);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.flow__quote--inline {
+  margin-top: 6px;
+}
+
+.flow__quote footer {
+  margin-top: 6px;
+  font-family: var(--pg-font);
+  font-size: 11.5px;
+  color: var(--pg-faint);
+}
+
+.flow__excerpt {
+  margin: 12px 0;
+  border: 1px solid var(--pg-border);
+}
+
+.flow__excerpt figcaption {
+  font-size: 12px;
+  padding: 6px 10px;
+  background: var(--pg-surface);
+  border-bottom: 1px solid var(--pg-border);
+  color: var(--pg-muted);
+}
+
+.flow__excerpt pre {
+  margin: 0;
+  padding: 6px 0;
+  font-family: var(--pg-mono);
+  font-size: 12px;
+  overflow-x: auto;
+}
+
+.flow__excerpt-row {
+  display: flex;
+  gap: 12px;
+  padding: 0 10px;
+  white-space: pre;
+}
+
+.flow__excerpt-row.is-hit {
+  background: color-mix(in srgb, var(--pg-accent) 16%, transparent);
+  font-weight: 600;
+}
+
+.flow__excerpt-n {
+  width: 3.5em;
+  text-align: right;
+  color: var(--pg-faint);
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.flow__table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--pg-border);
+  margin: 6px 0;
+}
+
+.flow__table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12.5px;
+}
+
+.flow__table th,
+.flow__table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 6px 10px;
+  border-top: 1px solid var(--pg-border);
+}
+
+/* Every column but the last (the reason / the prose) keeps its words whole;
+ * the wrap container scrolls sideways instead. */
+.flow__table td:not(:last-child),
+.flow__table th:not(:last-child) {
+  white-space: nowrap;
+}
+
+.flow__table td:last-child {
+  min-width: 220px;
+}
+
+.flow__table .flow__mono {
+  overflow-wrap: normal;
+}
+
+.flow__table th {
+  border-top: none;
+  background: var(--pg-surface);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pg-faint);
+  font-weight: 600;
+}
+
+.flow__table tr.is-jumpable {
+  cursor: pointer;
+}
+
+.flow__table tr.is-jumpable:hover td {
+  background: var(--pg-surface);
+}
+
+.flow__json {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--pg-border);
+  font-family: var(--pg-mono);
+  font-size: 12px;
+  max-height: 320px;
+  overflow: auto;
+  white-space: pre;
+}
+
+.flow__json--tall {
+  max-height: 420px;
+}
+
+.flow__json-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  padding: 6px 10px;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-border);
+  border-bottom: none;
+}
+
+.flow__body .btn-row {
+  margin-top: 10px;
+}
+
+/* /flow — the landing for both walkthroughs */
+.flowpage__hops {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 8px;
+  margin: 0 0 28px;
+}
+
+.flowpage__hop {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border: 1px solid var(--pg-border);
+  padding: 10px 12px;
+  font-size: 12.5px;
+}
+
+.flowpage__hop-n {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--pg-faint);
+}
+
+.flowpage__hop-path {
+  font-weight: 600;
+}
+
+.flowpage__hop-verb {
+  color: var(--pg-muted);
+  font-family: var(--pg-mono);
+  font-size: 11.5px;
+}
+
+.flowpage__ctas {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.cta__steps {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  font-size: 12.5px;
+  color: var(--pg-muted);
+  columns: 2;
+}
+
+.cta__steps li {
+  break-inside: avoid;
 }
