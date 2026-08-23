@@ -167,11 +167,11 @@
       "mui.paper": 4,
       "mui.radio": 43,
       "mui.select": 40,
-      "mui.slider": 31,
+      "mui.slider": 32,
       "mui.snackbar": 6,
-      "mui.switch": 40,
+      "mui.switch": 42,
       "mui.table-pagination": 74,
-      "mui.table": 125,
+      "mui.table": 128,
       "mui.tabs": 56,
       "mui.text-field": 33,
       "mui.tooltip": 10
@@ -180,7 +180,7 @@
       "carbon.accordion": 41,
       "carbon.button": 28,
       "carbon.checkbox": 29,
-      "carbon.iconbutton": 25,
+      "carbon.iconbutton": 27,
       "carbon.inlinenotification": 33,
       "carbon.modal": 112,
       "carbon.tabs": 135,
@@ -220,30 +220,30 @@
     },
     "shadcn": {
       "shadcn.alert": 13,
-      "shadcn.avatar": 8,
+      "shadcn.avatar": 9,
       "shadcn.badge": 9,
       "shadcn.button": 17,
       "shadcn.card": 9,
       "shadcn.checkbox": 22,
       "shadcn.input": 17,
       "shadcn.select": 22,
-      "shadcn.switch": 26,
+      "shadcn.switch": 27,
       "shadcn.tabs": 46,
       "shadcn.tooltip": 9
     },
     "polaris": {
-      "polaris.avatar": 10,
+      "polaris.avatar": 11,
       "polaris.badge": 12,
       "polaris.banner": 66,
       "polaris.button": 37,
-      "polaris.checkbox": 61,
+      "polaris.checkbox": 62,
       "polaris.progress-bar": 13,
       "polaris.radio-button": 47,
       "polaris.spinner": 1,
       "polaris.tag": 61,
       "polaris.text-field": 89,
       "polaris.text": 2,
-      "polaris.thumbnail": 12
+      "polaris.thumbnail": 13
     }
   }
 }

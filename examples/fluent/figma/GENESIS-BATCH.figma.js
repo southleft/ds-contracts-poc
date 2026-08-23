@@ -60,7 +60,7 @@ const COMPONENTS = [
     "contractId": "fluent.avatar",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Avatar — generated from contract fluent.avatar v0.2.0 † (13 code-only facts — see plugin report)",
+    "description": "Avatar — generated from contract fluent.avatar v0.2.0 † (14 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -1375,6 +1375,17 @@ const COMPONENTS = [
       "element": "span"
     },
     "codeOnlyFacts": [
+      {
+        "part": "label",
+        "kind": "channel",
+        "channel": "aspect-ratio",
+        "value": "1 / 1",
+        "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
       {
         "part": "label",
         "kind": "declared",
@@ -26862,7 +26873,7 @@ const COMPONENTS = [
     "contractId": "fluent.checkbox",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Checkbox — generated from contract fluent.checkbox v0.2.0 † (59 code-only facts — see plugin report)",
+    "description": "Checkbox — generated from contract fluent.checkbox v0.2.0 † (61 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -29764,6 +29775,35 @@ const COMPONENTS = [
     "codeOnlyFacts": [
       {
         "part": "icon",
+        "kind": "channel",
+        "channel": "aspect-ratio",
+        "value": "1 / 1",
+        "reason": "the canvas has no aspect-ratio field — this part carries no bound or literal width to derive a height from, so nothing was drawn from the ratio (a parent that takes its height from this part's ratio names that lowering on itself)",
+        "variants": {
+          "count": 16,
+          "of": 24,
+          "names": [
+            "Checked=Checked, Size=Medium, Shape=Square",
+            "Checked=Checked, Size=Medium, Shape=Circular",
+            "Checked=Checked, Size=Large, Shape=Square",
+            "Checked=Checked, Size=Large, Shape=Circular",
+            "Checked=Mixed, Size=Medium, Shape=Square",
+            "Checked=Mixed, Size=Medium, Shape=Circular",
+            "Checked=Mixed, Size=Large, Shape=Square",
+            "Checked=Mixed, Size=Large, Shape=Circular",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Disabled",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Focus Visible",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Active",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Active",
+            "Checked=Checked, Size=Medium, Shape=Square, State=Hover",
+            "Checked=Mixed, Size=Medium, Shape=Square, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "icon",
         "kind": "declared",
         "channel": "cursor",
         "value": "pointer",
@@ -29790,6 +29830,17 @@ const COMPONENTS = [
         "channel": "pointer-events",
         "value": "none",
         "reason": "Pointer-event gating exists only in the coded component.",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "indicator",
+        "kind": "channel",
+        "channel": "aspect-ratio",
+        "value": "1 / 1",
+        "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
         "variants": {
           "count": 24,
           "of": 24
@@ -41183,7 +41234,7 @@ const COMPONENTS = [
     "contractId": "fluent.spinner",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Spinner — generated from contract fluent.spinner v0.2.0 † (12 code-only facts — see plugin report)",
+    "description": "Spinner — generated from contract fluent.spinner v0.2.0 † (14 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -46679,6 +46730,17 @@ const COMPONENTS = [
       {
         "part": "spinner",
         "kind": "channel",
+        "channel": "aspect-ratio",
+        "value": "1 / 1",
+        "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "spinner",
+        "kind": "channel",
         "channel": "bottom",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -46748,6 +46810,17 @@ const COMPONENTS = [
         "channel": "position",
         "value": "relative",
         "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 64,
+          "of": 64
+        }
+      },
+      {
+        "part": "spinnertail",
+        "kind": "channel",
+        "channel": "aspect-ratio",
+        "value": "1 / 1",
+        "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
         "variants": {
           "count": 64,
           "of": 64

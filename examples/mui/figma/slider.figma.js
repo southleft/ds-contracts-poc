@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "mui.slider",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Slider — generated from contract mui.slider v0.2.0 † (31 code-only facts — see plugin report)",
+    "description": "Slider — generated from contract mui.slider v0.2.0 † (32 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -2079,6 +2079,17 @@ const COMPONENTS = [
         "channel": "position",
         "value": "absolute",
         "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "slider-thumb",
+        "kind": "channel",
+        "channel": "aspect-ratio",
+        "value": "1 / 1",
+        "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
         "variants": {
           "count": 12,
           "of": 12

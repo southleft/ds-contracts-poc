@@ -3,22 +3,22 @@
   "measuredAt": "extract/computed/out/conformance/<case>/enriched.contract.json through figma-sync/plugin/engine (mock figma) and core/propose-figma (npx tsx conformance/canvas.ts)",
   "counts": {
     "ROUND-TRIPPED": 26,
-    "NAMED": 4,
+    "NAMED": 5,
     "DRIFTED": 0,
     "HARMFUL": 0,
-    "SILENT": 1,
+    "SILENT": 0,
     "REFUSED-BY-NAME": 15,
     "SEED-ABSENT": 0
   },
   "cases": {
     "aspect-ratio": {
-      "classification": "SILENT",
+      "classification": "NAMED",
       "channel": "aspect-ratio",
       "seed": [
         "2 / 1"
       ],
       "proposed": [],
-      "note": ""
+      "note": "code-only channel root.aspect-ratio = 2 / 1 — the canvas has no aspect-ratio field — LOWERED to a fixed height of 40px (bound width 80px ÷ 2); the ratio does not reach the canvas, a width change there will not follow it, and the dump reads back a fixed height"
     },
     "border-radius-px": {
       "classification": "ROUND-TRIPPED",

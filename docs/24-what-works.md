@@ -356,23 +356,23 @@ list (part, kind, channel, value, reason, variant coverage), `figma bundle` writ
 beside `contracts` and prints a per-contract summary, the built set is stamped
 `ds_contracts/codeOnlyFacts`, the plugin's run report lists the facts under the set,
 and the set description keeps one trailing `†` with the count. Across 9 committed
-corpora there are **104** daggered contracts naming **2,308** facts, and both
+corpora there are **104** daggered contracts naming **2,321** facts, and both
 counts are pinned **exactly** — in both directions.
 Fewer receipts is not automatically progress: it is either a real fix or a
 refusal path that quietly stopped firing, and both require a human to look.
 
 | corpus | dropped-fact receipts | contracts carrying one | facts named | source |
 |---|---|---|---|---|
-| `mui` | 31 | 31 | 887 | `extract/figma/dagger-census.json` |
+| `mui` | 31 | 31 | 893 | `extract/figma/dagger-census.json` |
 | `untitled-ui` | 16 | 16 | 72 | `extract/figma/dagger-census.json` |
-| `polaris` | 12 | 12 | 411 | `extract/figma/dagger-census.json` |
-| `shadcn` | 11 | 11 | 198 | `extract/figma/dagger-census.json` |
-| `carbon` | 10 | 10 | 506 | `extract/figma/dagger-census.json` |
+| `polaris` | 12 | 12 | 414 | `extract/figma/dagger-census.json` |
+| `shadcn` | 11 | 11 | 200 | `extract/figma/dagger-census.json` |
+| `carbon` | 10 | 10 | 508 | `extract/figma/dagger-census.json` |
 | `altitude` | 8 | 8 | 50 | `extract/figma/dagger-census.json` |
 | `astryx` | 8 | 8 | 130 | `extract/figma/dagger-census.json` |
 | `tailwind` | 8 | 8 | 54 | `extract/figma/dagger-census.json` |
 | `eventz-vars` | 0 | 0 | 0 | `extract/figma/dagger-census.json` |
-| **total** | **104** |  | **2,308** |  |
+| **total** | **104** |  | **2,321** |  |
 
 ### 6.2 Named refusals — the construct vocabularies
 
@@ -383,10 +383,10 @@ filter that decides carriage scores 100% on a channel it never opened.
 
 | manifest | cases | breakdown | source |
 |---|---|---|---|
-| canvas constructs | 138 | CARRIED 100 · LEDGERED 29 · REFUSED 9 | `extract/figma/conformance/MANIFEST.json` |
+| canvas constructs | 135 | CARRIED 100 · LEDGERED 26 · REFUSED 9 | `extract/figma/conformance/MANIFEST.json` |
 | CSS / DOM frontier | 82 | CARRIED 42 · REFUSED 18 · UNSUPPORTED 18 · LOWERED 4 | `conformance/MANIFEST.json` |
 
-Of the 138 canvas constructs, **128** are `green`, **10** are `red`.
+Of the 135 canvas constructs, **116** are `green`, **19** are `red`.
 A construct that is neither carried nor named-refused is a hard failure of that
 suite — "it silently did nothing" is not an allowed outcome.
 
@@ -535,13 +535,13 @@ npm run capability:fresh
 |---|---|---|---|
 | `conformance/MANIFEST.json` | `8231a2e8b195` | 76,456 | CSS/DOM frontier vocabulary |
 | `docs/22-generality.md` | `0ae9595b1aad` | 72,312 | coverage denominators (docs/22 §8.3 table) |
-| `evals/golden.json` | `2b7935da342d` | 32,256 | generated-source golden manifest |
+| `evals/golden.json` | `29091114a7c0` | 32,256 | generated-source golden manifest |
 | `evals/results.json` | `5081770dbb7e` | 6,982 | executable claim suite (registry ids + size; the pass column is the suite's own output) |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
 | `extract/computed/out/**/numbers.json` | `d5bcd57769dc` | 1,056,246 | capture counts + determinism receipts — 184 files |
 | `extract/computed/out/**/scorecard.json` | `3f0067a3f412` | 16,283,364 | computed-equality per component — 184 files |
-| `extract/figma/conformance/MANIFEST.json` | `52628b8882bf` | 93,687 | canvas construct vocabulary |
-| `extract/figma/dagger-census.json` | `02c91c8d4a42` | 6,112 | dropped-fact receipt census |
+| `extract/figma/conformance/MANIFEST.json` | `9c2374097aba` | 86,207 | canvas construct vocabulary |
+| `extract/figma/dagger-census.json` | `a8445c32d0b1` | 6,112 | dropped-fact receipt census |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | canvas→code→canvas round trip |
 
 Same bytes in, same file out: this build reads no clock, no git state and no

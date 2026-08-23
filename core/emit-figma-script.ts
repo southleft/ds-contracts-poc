@@ -3070,19 +3070,60 @@ function applyStyling(
   // squares whose real height rides a pseudo-element padding hack).
   // Round 5: the LITERAL width channel (v14 lits — Avatar/Thumbnail carry
   // per-size width literals, not token widths) lowers the same way.
-  const aspect = part.declared?.['aspect-ratio'];
-  if (aspect && !spec.fixedHeight && spec.lits?.height === undefined) {
-    const m = /^([\d.]+)(?: \/ ([\d.]+))?$/.exec(aspect);
-    if (m) {
-      const ratio = Number(m[1]) / Number(m[2] ?? '1');
-      if (ratio > 0 && spec.fixedWidth && Number.isFinite(spec.fixedWidth.px)) {
-        spec.fixedHeight = { px: spec.fixedWidth.px / ratio };
-      } else if (ratio > 0 && spec.lits?.width !== undefined) {
-        spec.lits.height = spec.lits.width / ratio;
-      }
-    }
-  }
+  // R8 (2026-08-22, canvas gate `aspect-ratio` SILENT): the registry calls
+  // this channel 'draw', so the declared collector in compileComponentData
+  // names nothing — and what draws is a FIXED HEIGHT, not a ratio. Figma has
+  // no aspect-ratio field: the dump reads back `height: 40` and the proposal
+  // mints a height token; the channel the contract carried vanished with no
+  // receipt. Every branch below now NAMES what happened to the ratio (the
+  // lowering with its numbers, or why nothing was derived) through the same
+  // channelMiss collector applyTokens / applyLiterals use.
+  applyAspectRatio(spec, part.declared?.['aspect-ratio']);
   return d;
+}
+
+/** The receipt every aspect-ratio lowering opens with, so a reader can grep
+ *  the code-only facts for the class. */
+const ASPECT_MISS = 'the canvas has no aspect-ratio field';
+
+/** Parse the declared grammar (`<n>` or `<n> / <n>`) to a width/height ratio;
+ *  undefined when it does not parse or is not positive. */
+function aspectRatioOf(aspect: string): number | undefined {
+  const m = /^([\d.]+)(?: \/ ([\d.]+))?$/.exec(aspect);
+  if (!m) return undefined;
+  const ratio = Number(m[1]) / Number(m[2] ?? '1');
+  return Number.isFinite(ratio) && ratio > 0 ? ratio : undefined;
+}
+
+const fmtPx = (n: number): string => `${Math.round(n * 100) / 100}px`;
+
+/** Declared aspect-ratio on THIS part: lower it to a fixed height from the
+ *  part's own bound/literal width when no height channel is carried, and
+ *  NAME the outcome either way (see applyStyling). */
+function applyAspectRatio(spec: NodeSpec, aspect: string | undefined): void {
+  if (aspect === undefined) return;
+  const ratio = aspectRatioOf(aspect);
+  if (ratio === undefined) {
+    miss(spec, 'aspect-ratio', `${ASPECT_MISS} — "${aspect}" did not parse as <n> or <n> / <n>, so nothing was derived from it`, aspect);
+    return;
+  }
+  if (spec.fixedHeight !== undefined || spec.lits?.height !== undefined) {
+    miss(spec, 'aspect-ratio', `${ASPECT_MISS} — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas`, aspect);
+    return;
+  }
+  if (spec.fixedWidth && Number.isFinite(spec.fixedWidth.px)) {
+    const h = spec.fixedWidth.px / ratio;
+    spec.fixedHeight = { px: h };
+    miss(spec, 'aspect-ratio', `${ASPECT_MISS} — LOWERED to a fixed height of ${fmtPx(h)} (bound width ${fmtPx(spec.fixedWidth.px)} ÷ ${ratio}); the ratio does not reach the canvas, a width change there will not follow it, and the dump reads back a fixed height`, aspect);
+    return;
+  }
+  if (spec.lits?.width !== undefined) {
+    const h = spec.lits.width / ratio;
+    spec.lits.height = h;
+    miss(spec, 'aspect-ratio', `${ASPECT_MISS} — LOWERED to a fixed height of ${fmtPx(h)} (literal width ${fmtPx(spec.lits.width)} ÷ ${ratio}); the ratio does not reach the canvas, a width change there will not follow it, and the dump reads back a fixed height`, aspect);
+    return;
+  }
+  miss(spec, 'aspect-ratio', `${ASPECT_MISS} — this part carries no bound or literal width to derive a height from, so nothing was drawn from the ratio (a parent that takes its height from this part's ratio names that lowering on itself)`, aspect);
 }
 
 /** Round 5 (canvas-gate): parent aspect lowering. A frame with a known width
@@ -3095,16 +3136,17 @@ function applyChildAspect(spec: NodeSpec, part: Part): void {
   const w = spec.fixedWidth?.px ?? spec.lits?.width;
   if (w === undefined || !Number.isFinite(w)) return;
   if (spec.fixedHeight || spec.lits?.height !== undefined) return;
-  for (const child of Object.values(part.parts ?? {})) {
+  for (const [childName, child] of Object.entries(part.parts ?? {})) {
     const aspect = child.declared?.['aspect-ratio'];
     if (!aspect || child.declared?.['position'] !== 'absolute') continue;
-    const m = /^([\d.]+)(?: \/ ([\d.]+))?$/.exec(aspect);
-    if (!m) continue;
-    const ratio = Number(m[1]) / Number(m[2] ?? '1');
-    if (ratio > 0) {
-      (spec.lits ??= {}).height = w / ratio;
-      return;
-    }
+    const ratio = aspectRatioOf(aspect);
+    if (ratio === undefined) continue;
+    const h = w / ratio;
+    (spec.lits ??= {}).height = h;
+    // R8: the lowering is named on the frame that took the height (the
+    // child's own receipt says it carried no width of its own).
+    miss(spec, 'aspect-ratio', `${ASPECT_MISS} — child "${childName}"'s declared aspect-ratio LOWERED to this frame's fixed height of ${fmtPx(h)} (width ${fmtPx(w)} ÷ ${ratio}); the ratio does not reach the canvas and a width change there will not follow it`, aspect);
+    return;
   }
 }
 
@@ -5062,7 +5104,24 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   for (const { name: partName, part } of walkAnatomy(contract)) {
     const note = (channel: string, value: string, state?: string) => {
       const reg = DECLARED_CHANNELS[channel];
-      if (!reg) return; // refused upstream by validateContract
+      // R8 (2026-08-22): a channel the registry does not know used to
+      // `return` here — "refused upstream by validateContract" — which is
+      // true only on the paths that validate first. A compile reached any
+      // other way dropped the declared fact in silence. Name it: nothing
+      // draws it and no registry note describes it.
+      if (!reg) {
+        facts.push({
+          part: partName,
+          variant: '',
+          kind: 'declared',
+          channel,
+          value,
+          reason: state
+            ? `declared for the ${state} state on a channel outside the DECLARED_CHANNELS registry — nothing draws it and no registry note describes it (validateContract refuses it by name; named here so an unvalidated compile can never drop it in silence)`
+            : 'declared channel outside the DECLARED_CHANNELS registry — nothing draws it and no registry note describes it (validateContract refuses it by name; named here so an unvalidated compile can never drop it in silence)',
+        });
+        return;
+      }
       // channelDraws owns the per-value exceptions (drawExcept) that used to
       // be spelled out here — overflow-x/y auto|scroll annotate while
       // hidden|clip draw, and text-decoration-line/overline annotates.
