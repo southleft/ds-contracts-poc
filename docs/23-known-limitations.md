@@ -1197,6 +1197,66 @@ the committed contract is post-promotion curated), and it owes a gate that
 runs the promote step, not just the emit step. The tree was restored from
 git after the measurement; nothing from that run is in this round's patch.
 
+## B.31 `anatomy.root.attrs` bindings are not named on the canvas
+
+Found 2026-08-23 while writing [docs/29 — How It Flows](29-how-it-flows.md)
+(worked example E3). A contract prop bound to a root attribute —
+`contracts/top-nav-item.contract.json` `href` with
+`anatomy.root.attrs = {href: "{href}"}` — reaches the canvas only as the
+**value** of an unbound TEXT component property (`Href`, default `#`, via
+`textOnlyProps` in `core/emit-figma-script.ts`). The **binding** — "this
+property is the root element's `href`" — is not a canvas field, and it is not
+a code-only fact either: `grep -an 'part.attrs' core/emit-figma-script.ts`
+(the file carries NUL bytes; grep needs `-a`) hits only the `placeholder`
+attribute (`:3386`, `:3400`). On hop 4 the binding is never re-proposed; the
+round-trip comparator files `element/attrs` under CANVAS-ABSENT
+(`extract/figma/roundtrip.ts`), so the shipping round trip sees it, but a set
+built by the plugin carries no receipt of it. **What you would observe:** a
+designer reading the set cannot tell that `Href` is an attribute rather than
+visible text. **What it would take:** one more `codeOnlyFacts` kind
+(`attr`) emitted per bound attribute, and the same row in the proposal
+notes when a TEXT definition with no text-node reference is met on hop 4 —
+the BOOLEAN twin already has that branch (`FC-DUMP-PROPOSE-UNBOUND-BOOLEAN`);
+the TEXT case is unverified by execution and is not claimed either way.
+
+## B.32 A native checkable part compiles to no node, and is not receipted per contract
+
+Same date, same source. `input[type=checkbox|radio]` parts are code
+semantics — the presentational box and glyphs are the visual — so the canvas
+emitter draws nothing for them (`isNativeCheckablePart`,
+`packages/schema/src/contract-schema.ts`; the filter in
+`core/emit-figma-script.ts`). That is the right lowering, and it is documented
+in the emitter, but it is not a `codeOnlyFacts` row: the bundle, the plugin run
+report and the set's `ds_contracts/codeOnlyFacts` stamp are all silent about
+the part. **What you would observe:** Checkbox's and Radio's receipts read as
+if every part crossed. **What it would take:** one `declared`-kind fact per
+native checkable part with the reason the emitter already states in its
+comment, and a pin in `core/code-only-facts-check.ts`.
+
+## B.33 `semantics.roleException` is not stamped on the canvas, so a hop-4 proposal of a role-excepted component is refused by the referee
+
+Found 2026-08-23 by the Playground walkthrough (`?tour=figma-to-code`,
+"Stamped set" step) and pinned by `npm run playground:flow-check`. The
+`ds_contracts/semantics` stamp a generated set carries holds `element` and
+`role` only (`extract/figma/dump.plugin.js`, the dump v1.24 comment block);
+`core/propose-figma.ts` does not carry a `roleException` (`grep -a
+roleException core/propose-figma.ts` is empty). The Flowbite ToggleSwitch
+contract declares `semantics.roleException` — a `<button role="switch">`
+with no native checkbox in the DOM
+(`examples/tailwind/contracts/toggleswitch.contract.json`). Proposed back
+from `extract/figma/fixtures/flowbite-eight.dump.json`, the contract carries
+`role: "switch"` on `element: "button"` and no exception, so the native-role
+rule in `packages/core/src/validate.ts` refuses it: `semantics.role claims
+role "switch" on element "button" — native <input type="checkbox"> (role="switch"
+on it is the modern switch pattern) exists; use it or declare the exception
+(semantics.roleException: "<one-sentence reason>")`. **What you would
+observe:** `ds-contracts generate` on that proposal refuses by name; the
+walkthrough shows the refusal under the editor rather than hiding it.
+**What it would take:** stamp `roleException` (root and per-part) beside
+`element`/`role` in the dump, and carry it through `proposeFromDump`; the
+flow-check pin then fails and the tour copy is rewritten. The count of
+affected contracts is not measured here.
+
 ---
 
 # §C — THE MEASURED PRICE OF WHAT WORKS
@@ -2181,9 +2241,9 @@ dup-key / `__proto__` forms.
 `childStubs` + `mintedTokens` in the export — *"this pin fails the build if
 either payload is ever dropped again."*
 
-**A named limit that came with it:** the playground's recommended REST import
-route is a v1.5 mapper against a v1.13 plugin dump — eight revisions of channels
-it cannot see (`strokeAlign`, wrap, constraints, imageFill, textOverrides,
+**A named limit that came with it (as of that date):** the playground's
+recommended REST import route was a v1.5 mapper against a v1.13 plugin dump —
+eight revisions of channels it could not see (`strokeAlign`, wrap, constraints, imageFill, textOverrides,
 fixedSize, multi-mode values, non-shape abs). Those were previously silent while
 the UI said "values still come through exactly". The mapper now stamps
 `_provenance.captureGaps` with 8 named entries and their consequences (*"an
@@ -2239,6 +2299,7 @@ A third, adjacent robustness hole closed with them: a **500-deep minted tree**
 blew the stack with a `RangeError` *after* deliver-once had burned the payload,
 so the delivery just vanished. An iterative depth guard (64 levels, far past any
 real DTCG) refuses by name at parse.
+
 
 ---
 
@@ -3002,3 +3063,27 @@ extract/computed/configs/polaris.json` is the re-record; `npx tsx
 examples/polaris/generate.ts --check`, `figma:fresh`, `generated:fresh`,
 `evals --only polaris,promote-generalization`, tsc, lint, format, docs all
 green on the patch. Round r12 (patch over `537022b0`).
+
+## D.34 The built Playground shipped an EMPTY emitter registry — CLOSED
+
+Found 2026-08-23 by the integrator walking the **built** Playground
+(`npm run build:playground` + `vite preview`, Playwright over both guided
+tours): the Code → Figma walkthrough's Script step refused `no emitter
+registered as "figma-script"`, and the output tab strip (React / HTML + CSS /
+React inline / Figma script) was empty. The dev server showed none of it.
+Cause: the root `package.json` declares `"sideEffects": ["**/*.css"]`, so the
+production bundler (Rolldown under Vite 8) treats `core/emitter.ts` as
+side-effect free and drops its load-time registration loop whenever no
+value export of that module is referenced — `playground/src/pages/Playground.tsx`
+imported only `emitters` (the bare array in `packages/core/src/emitter.ts`).
+Reproduced on `origin/main` at `e6225760` by building the playground from a
+worktree with no other change: the bundle carried no `registerEmitter` and
+no emitter label, so the limitation predates this round and was live in any
+deploy built from that state (the 2026-08-17 deploy's bundle still carried
+them). Closed by `playground/src/engine/emitters.ts`: the registry is the
+value of a call that registers any missing built-in and refuses at load if
+one is still absent; `playground:flow-check` (a `maintain` step) pins that
+`Playground.tsx` reads the registry through that module. Marking
+`core/emitter.ts` in `sideEffects` was tried and rejected: esbuild honours the
+same field, and the plugin engine bundle grew past its committed 811,089
+bytes (`figma-sync/plugin/engine.receipt.json` refused the grown bundle).

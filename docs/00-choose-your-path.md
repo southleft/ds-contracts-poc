@@ -220,7 +220,7 @@ their component-property overrides.
   pipeline never opened still counts against it. 104 components across eight
   libraries and six styling architectures: 86.1% cell-weighted over 583,950
   cells, 52 of 104 at ≥90%, 81 of 104 at ≥80%. Every one of the 104 is listed
-  worst-first in [24 §3.1](24-what-works.md) — the worst is 69.8%.
+  worst-first in [24 §3.1](24-what-works.md) — the worst is 50.0%.
 - **What it costs** ([23](23-known-limitations.md)): hours of expert
   configuration per library (below), and breadth — see the coverage bullet.
 - **The STOP is the design, not friction.** The drafted capture config
@@ -335,6 +335,9 @@ real cost, it is human, and today it is unassisted.
   the path-C walkthrough: extract, reconcile, diagnose.
 - [docs/18 — User Flows](18-user-flows.md) — the same loop cut by
   *persona* (designer / engineer / lead), not by journey.
+- [docs/29 — How It Flows](29-how-it-flows.md) — the mechanics under every
+  path: the five hops, what each verb reads, writes and refuses, and how a
+  fact ends up carried, named, or refused — never silently lost.
 - [docs/24 — What Works](24-what-works.md) — the measured success side, every
   number carrying the artifact it was read from. Generated; `npm run
   capability:fresh` refuses it if it has gone stale.

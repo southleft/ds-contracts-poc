@@ -1,8 +1,9 @@
 /**
  * How it works — the section opens with the three questions real audiences
  * ask (each answered with build-time engine replays over committed fixtures
- * — see src/how-replays.ts), followed by four foundation pages distilled
- * from docs/*.md. Prose is reused from the repo docs where it was already
+ * — see src/how-replays.ts), preceded by the two-directions page (docs/29
+ * rendered through marked, with its own replays — see src/pages/flow.ts)
+ * and followed by six foundation pages distilled from docs/*.md. Prose is reused from the repo docs where it was already
  * right; numbers link to their committed receipts.
  */
 import { readFileSync } from 'node:fs';
@@ -11,6 +12,7 @@ import { layout, codeBlock, esc, themedImage, REPO_URL, PLAYGROUND_URL } from '.
 import { dependencyGraphSize } from '../diagrams.js';
 import type { SiteStats } from '../stats.js';
 import type { FileDiff, HowReplays, ImportStep, ParityFinding, RefResolution } from '../how-replays.js';
+import { flowPageBody } from './flow.js';
 
 interface HowPage {
   id: string;
@@ -18,6 +20,9 @@ interface HowPage {
   title: string;
   nav: string;
 }
+
+/** The two directions — docs/29 rendered, with the engine replayed beside it. */
+const FLOW_PAGE: HowPage = { id: 'flow', route: '/how-it-works/flow/', title: 'How it flows: Figma ↔ code through contracts', nav: 'How it flows' };
 
 const QUESTION_PAGES: HowPage[] = [
   { id: 'adding-a-prop', route: '/how-it-works/adding-a-prop/', title: 'How are properties added?', nav: 'Adding a property' },
@@ -34,7 +39,7 @@ const FOUNDATION_PAGES: HowPage[] = [
   { id: 'round-trips', route: '/how-it-works/round-trips/', title: 'Round-trips', nav: 'Round-trips' },
 ];
 
-const HOW_PAGES: HowPage[] = [...QUESTION_PAGES, ...FOUNDATION_PAGES];
+const HOW_PAGES: HowPage[] = [FLOW_PAGE, ...QUESTION_PAGES, ...FOUNDATION_PAGES];
 
 /** Look a foundation page up by id — refuses by name so a reordered list cannot silently misfile a page. */
 function foundation(id: string): HowPage {
@@ -49,6 +54,9 @@ function sideNav(activePath: string): string {
   return [
     `<p class="sidenav__group">How it works</p>`,
     link('/how-it-works/', 'Overview'),
+    `<p class="sidenav__group">The two directions</p>`,
+    link(FLOW_PAGE.route, FLOW_PAGE.nav),
+    link(`${FLOW_PAGE.route}#0-glossary`, 'Glossary'),
     `<p class="sidenav__group">The three questions</p>`,
     ...QUESTION_PAGES.map((p) => link(p.route, p.nav)),
     `<p class="sidenav__group">Foundations</p>`,
@@ -179,6 +187,10 @@ function indexPage(): { route: string; html: string } {
 <p class="eyebrow">How it works</p>
 <h1>Three questions, answered with the engine running</h1>
 <p class="lede">Every page in this section that shows a number, a diff, or a finding produced it by running the real machinery at build time — over committed contracts and committed captures. Start with the question you came here with.</p>
+<h2>The two directions</h2>
+<p>The hardest thing to see from the outside is how a fact gets from Figma to code and from code to Figma <em>through</em> a contract — and why nothing ever goes straight across. One page walks it verb by verb, with the engine replayed beside the prose.</p>
+<div class="qcards"><a class="qcard" href="${FLOW_PAGE.route}"><h3>${FLOW_PAGE.title}</h3><p>Five hops, one file. What each verb reads, writes and refuses; the three dispositions of a fact (carried, named, refused — silent loss is the forbidden fourth); the six instruments that compare a surface to the contract and never to each other; three facts traced both ways.</p><span class="qcard__meta">docs/29 rendered · round trip and engine replayed at build</span></a><a class="qcard" href="${FLOW_PAGE.route}#0-glossary"><h3>Glossary</h3><p>Contract, part, channel, hop, carried / named / refused, receipt, wall code, code-only fact, bundle, dump, propose, envelope, promote, minted token, stamp, degradation, CANVAS-ABSENT, diagnose, sync — each defined once, where the page uses it.</p><span class="qcard__meta">docs/29 §0</span></a></div>
+<h2>The three questions</h2>
 <div class="qcards">${qcards}</div>
 <h2>Foundations</h2>
 <p>The positions and machinery under those answers, in six short pages.</p>
@@ -186,7 +198,7 @@ function indexPage(): { route: string; html: string } {
   return howShell(
     undefined,
     'How it works',
-    'Three questions answered with build-time engine replays — adding a property, nested components, and scale — plus the model, determinism, instruments, and round-trips.',
+    'How a fact flows Figma ↔ code through contracts, three questions answered with build-time engine replays — adding a property, nested components, and scale — plus the model, determinism, instruments, and round-trips.',
     body,
   );
 }
@@ -600,9 +612,15 @@ ${diagram('prop-lifecycle', 'The promotion loop: a hand edit on one surface is f
   return howShell(foundation('round-trips'), 'Round-trips', 'The promotion loop executed in both directions — engineer’s prop and designer’s token change through the same door — plus zero-mismatch re-extraction receipts.', body);
 }
 
+function flowPage(replays: HowReplays): { route: string; html: string } {
+  const { title, description, body } = flowPageBody(replays.flow);
+  return howShell(FLOW_PAGE, title, description, body);
+}
+
 export function buildHowPages(stats: SiteStats, replays: HowReplays): Array<{ route: string; html: string }> {
   return [
     indexPage(),
+    flowPage(replays),
     addingAPropPage(replays),
     nestedComponentsPage(replays),
     atScalePage(replays, stats),

@@ -517,6 +517,9 @@ jobs:
       - name: prop-collision:check (maintain — a prop named like a DOM attribute / HTMLElement member is Omit<>-ed on react and accessor-less on web-components, named in the header; the collision table matches the installed @types/react + lib.dom; generate refuses per contract)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run prop-collision:check
+      - name: playground:flow-check (maintain — every number the Playground's two guided tours print is re-derived headless from the same engine calls over the same committed inputs; quoted refusals exist verbatim in source; the ToggleSwitch roleException refusal is pinned)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run playground:flow-check
       - name: extract:figma:visual:anchors (maintain — visual-parity subjects match the contracts' figma anchors; file-only, no token)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:visual:anchors
