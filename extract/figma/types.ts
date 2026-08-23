@@ -11,6 +11,17 @@
  *
  * Fixture ground truth: extract/figma/fixtures/main-file-dumps.json (live
  * dumps of the contract-generated Badge / Switch / Card sets).
+ *
+ * CURRENT FORMAT: dump v1.31 (Phase 2 fix round 2, 2026-08-23). Two producers
+ * write it — extract/figma/dump.plugin.js (Plugin API; stamps
+ * `_provenance.dumpVersion` 1.31) and extract/figma/rest/map.ts (REST nodes
+ * response) — and the v1.31 fields (fillHeight, text.fontFamily,
+ * text.textAlign, effectStyle/effectStyleKey, effects[].bound, reactions,
+ * hostOverrides, fixedSwaps, itemReverseZIndex, targetAspectRatio) are
+ * spelled identically by both; extract/figma/conformance pins each construct
+ * at BOTH boundaries (rest-* cases and their plugin-shape twins). Every field
+ * is additive: a v1.31 reader accepts every earlier dump (absence = not
+ * captured, never a value).
  */
 
 /** One declared grid track (dump v1.17) — the NORMALIZED spelling shared by
@@ -519,7 +530,9 @@ export interface DumpNode {
   /** For INSTANCE nodes (dump v1.10): the characters this HOST set on the
    *  instance's text descendants, keyed by the overridden node's NAME PATH
    *  inside the instance ("Content/Text"). Source: InstanceNode.overrides
-   *  filtered to 'characters' — Figma's own record, not a computed diff.
+   *  filtered to 'characters' — Figma's own record, not a computed diff
+   *  (since dump v1.31 the REST route reads the same record off
+   *  `overrides[]` against the returned instance subtree).
    *  The channel exists because a child component with NO TEXT property has
    *  nowhere else to carry a per-usage label: `componentProperties` is empty
    *  of it by construction. Absence = no override observed (or a pre-v1.10
@@ -677,7 +690,13 @@ export interface DumpSet {
  *  mirror of extract/figma/rest/map.ts MapDegradation: every channel the
  *  capture reads but cannot carry is NAMED, never dropped silently.
  *  dump v1.27 adds `prototype-reactions-unsupported` for CHANGE_TO /
- *  ON_HOVER / ON_PRESS wiring (not inverted into `onClick`). */
+ *  ON_HOVER / ON_PRESS wiring (not inverted into `onClick`).
+ *  dump v1.31 adds, on both producers: `variable-unresolved` for an effect
+ *  channel alias the producer could not name (effects[i].<channel>),
+ *  `effect-style-unresolved` (an effect style id with no name),
+ *  `host-override-unlocated` (an overrides[] id the instance subtree does
+ *  not contain) beside the plugin's `text-override-*` family, which the REST
+ *  route now raises too. */
 export interface DumpDegradation {
   code: string;
   /** setName:variant/child/… — same spelling as propose.ts note paths. */

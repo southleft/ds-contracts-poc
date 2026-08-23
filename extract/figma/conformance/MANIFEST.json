@@ -69,7 +69,7 @@
       "id": "effect-shadow-two",
       "construct": "a TWO-layer drop-shadow stack on the root",
       "expect": "CARRIED",
-      "why": "CSS box-shadow is natively a comma-separated LIST and the canvas emitter's stack grammar projects every layer back as its own native DROP_SHADOW, so a DROP_SHADOW-only stack has a lossless projection in both directions; refusing it (the pre-gap-round-4 rule) dropped the only visible edge of a light-on-light surface. BOTH layers must appear, in dump order \u2014 a truncation to one layer is still a failure",
+      "why": "CSS box-shadow is natively a comma-separated LIST and the canvas emitter's stack grammar projects every layer back as its own native DROP_SHADOW, so a DROP_SHADOW-only stack has a lossless projection in both directions; refusing it (the pre-gap-round-4 rule) dropped the only visible edge of a light-on-light surface. BOTH layers must appear, in dump order — a truncation to one layer is still a failure",
       "check": {
         "carried": [
           "box-shadow",
@@ -120,7 +120,7 @@
       "id": "text-style-named-untokened",
       "construct": "a TEXT node riding a NAMED Figma text style that the token corpus does not derive",
       "expect": "CARRIED",
-      "why": "`text-style-token` covers the good case: a style whose name matches a derived `font.<group>.size` token binds that token. This is the case a real kit actually hits \u2014 the designer named a text style and bound no VARIABLE to its typography, so nothing is derivable. That used to end at 'typography not proposed' and the size/weight/line-height minted under the COMPONENT/PART path, which turned ONE style into as many unrelated token families as there were parts drawing it (measured on Eventz: `body/sm` on 52 nodes across five sets produced five copies of 14px/500/20px under names like `atoms-tag.label.font-size`; Untitled UI has 17 styles over 288 nodes). A named text style IS design-system vocabulary, so v17 mints it under `imported.text.<style>` \u2014 component-independent, so every part riding the style shares one leaf and the name is the designer's. The style is still not TOKEN-derived and the note still says so.",
+      "why": "`text-style-token` covers the good case: a style whose name matches a derived `font.<group>.size` token binds that token. This is the case a real kit actually hits — the designer named a text style and bound no VARIABLE to its typography, so nothing is derivable. That used to end at 'typography not proposed' and the size/weight/line-height minted under the COMPONENT/PART path, which turned ONE style into as many unrelated token families as there were parts drawing it (measured on Eventz: `body/sm` on 52 nodes across five sets produced five copies of 14px/500/20px under names like `atoms-tag.label.font-size`; Untitled UI has 17 styles over 288 nodes). A named text style IS design-system vocabulary, so v17 mints it under `imported.text.<style>` — component-independent, so every part riding the style shares one leaf and the name is the designer's. The style is still not TOKEN-derived and the note still says so.",
       "check": {
         "carried": [
           "imported\\.text\\.body-sm\\.font-size",
@@ -199,7 +199,7 @@
         ]
       },
       "status": "green",
-      "observed": "RE-RECORDED red -> green (canvas-fidelity gap-closing round 1, HEAD bd3843b). The SILENT LOSS is closed by CARRIAGE, not by a note. Mechanism: ALIGN_INV (core/propose-figma.ts:2548) held only MIN/CENTER/MAX, so the fourth documented DumpLayout.counter value fell through to undefined and invertLayout emitted direction only \u2014 no align, and nothing in the naming union. Fix: ALIGN_INV.BASELINE = 'baseline', and the align fact widened end-to-end on BOTH surfaces so the proposal is legal and renderable: LayoutSchema/VariantLayoutSchema align enum + ResolvedLayout (packages/schema/src/contract-schema.ts:114,140,1263) regenerated into contracts/contract.schema.json and packages/schema/contract.schema.json; ALIGN_CSS -> align-items: baseline (core/emit-react.ts:135, core/emit-html.ts:72, core/emit-react-inline.ts:72, packages/emitter-web-components/src/emit-wc.ts:170); ALIGN_FIGMA -> counterAxisAlignItems BASELINE (core/emit-figma-script.ts:922) with a VERTICAL guard in layoutSpec (:1070) because Figma throws on BASELINE under a column; roundtrip A_MAP (extract/figma/roundtrip.ts:77); COUNTER_CSS previews (extract/figma/canvas-gate/canvas-doc.ts:116, playground/src/engine/canvas-preview.ts:171). MEASURED: the two-text-child row now proposes anatomy.root.layout = {\"display\":\"flex\",\"direction\":\"row\",\"align\":\"baseline\"}. Every edit is a map key addition \u2014 zero committed dumps carry counter:BASELINE and zero committed contracts carry align:baseline, so no committed artifact moves."
+      "observed": "RE-RECORDED red -> green (canvas-fidelity gap-closing round 1, HEAD bd3843b). The SILENT LOSS is closed by CARRIAGE, not by a note. Mechanism: ALIGN_INV (core/propose-figma.ts:2548) held only MIN/CENTER/MAX, so the fourth documented DumpLayout.counter value fell through to undefined and invertLayout emitted direction only — no align, and nothing in the naming union. Fix: ALIGN_INV.BASELINE = 'baseline', and the align fact widened end-to-end on BOTH surfaces so the proposal is legal and renderable: LayoutSchema/VariantLayoutSchema align enum + ResolvedLayout (packages/schema/src/contract-schema.ts:114,140,1263) regenerated into contracts/contract.schema.json and packages/schema/contract.schema.json; ALIGN_CSS -> align-items: baseline (core/emit-react.ts:135, core/emit-html.ts:72, core/emit-react-inline.ts:72, packages/emitter-web-components/src/emit-wc.ts:170); ALIGN_FIGMA -> counterAxisAlignItems BASELINE (core/emit-figma-script.ts:922) with a VERTICAL guard in layoutSpec (:1070) because Figma throws on BASELINE under a column; roundtrip A_MAP (extract/figma/roundtrip.ts:77); COUNTER_CSS previews (extract/figma/canvas-gate/canvas-doc.ts:116, playground/src/engine/canvas-preview.ts:171). MEASURED: the two-text-child row now proposes anatomy.root.layout = {\"display\":\"flex\",\"direction\":\"row\",\"align\":\"baseline\"}. Every edit is a map key addition — zero committed dumps carry counter:BASELINE and zero committed contracts carry align:baseline, so no committed artifact moves."
     },
     {
       "id": "layout-gap-literal",
@@ -509,7 +509,7 @@
       "id": "token-nested-two-axis",
       "construct": "a NESTED part's channel that is a function of TWO variant axes (irreducible to either alone)",
       "expect": "CARRIED",
-      "why": "A nested part's token that is a total function of TWO enum axes carries as a two-axis substituted ref. This fixture is deliberately WITNESSED \u2014 a third axis (Density) gives each Tone x Size cell two observations \u2014 so the correlation is corroborated and the carriage ships with NO caveat. Its saturated twin (token-nested-pair-saturated) holds the same construct at one observation per cell and must carry the SAME ref WITH a caveat; the pair of cases is what makes the caveat meaningful, since a caveat that appears on everything says nothing. Re-authored in gap-closing round 10.",
+      "why": "A nested part's token that is a total function of TWO enum axes carries as a two-axis substituted ref. This fixture is deliberately WITNESSED — a third axis (Density) gives each Tone x Size cell two observations — so the correlation is corroborated and the carriage ships with NO caveat. Its saturated twin (token-nested-pair-saturated) holds the same construct at one observation per cell and must carry the SAME ref WITH a caveat; the pair of cases is what makes the caveat meaningful, since a caveat that appears on everything says nothing. Re-authored in gap-closing round 10.",
       "check": {
         "carried": [
           "imported\\.case\\.a\\.color\\.\\{tone\\}\\.\\{size\\}",
@@ -526,7 +526,7 @@
       "id": "token-nested-pair-saturated",
       "construct": "the SAME two-axis nested channel at exactly one observation per cell (a SATURATED pair)",
       "expect": "CARRIED",
-      "why": "A pair spanning |a| x |b| cells with no more than that many observations fits ANY values, so the correlation is unwitnessed \u2014 but every per-cell value is still MEASURED. Gap-closing round 10 first refused this case outright; measured against the kit, that discarded ButtonBase's twenty Size x Icon paddings and rendered a 22px-tall button where the canvas draws 40 \u2014 losing measured facts, the same class as border-color -> currentColor. The doctrine is therefore CARRY AND NAME: the ref reproduces the drawing exactly, and a caveat says the correlation is unwitnessed and may be drift rather than intent. This case pins BOTH halves \u2014 carriage and caveat \u2014 so neither a silent overclaim nor a silent loss can pass.",
+      "why": "A pair spanning |a| x |b| cells with no more than that many observations fits ANY values, so the correlation is unwitnessed — but every per-cell value is still MEASURED. Gap-closing round 10 first refused this case outright; measured against the kit, that discarded ButtonBase's twenty Size x Icon paddings and rendered a 22px-tall button where the canvas draws 40 — losing measured facts, the same class as border-color -> currentColor. The doctrine is therefore CARRY AND NAME: the ref reproduces the drawing exactly, and a caveat says the correlation is unwitnessed and may be drift rather than intent. This case pins BOTH halves — carriage and caveat — so neither a silent overclaim nor a silent loss can pass.",
       "check": {
         "carried": [
           "imported\\.case\\.a\\.color\\.\\{tone\\}\\.\\{size\\}"
@@ -738,7 +738,7 @@
         ]
       },
       "status": "green",
-      "observed": "RE-RECORDED red -> green (canvas-fidelity gap-closing round 1, HEAD bd3843b). The WRONG-NAME is closed at its source. Mechanism: isSpacer (core/propose-figma.ts:3222) tested fill/stroke/bound/text only, so a childless, paint-less image FRAME was classified a spacer; the spacer branch (:3941) carries layout and returns early, the part landed {}, its drawn 32px box was lost \u2014 while buildPart's note at :3603 still announced \"IMAGE fill carried BY HASH\". Fix: isSpacer now also refuses any node carrying imageFill or fixedSize (both absent-field no-ops, so a real spacer classifies exactly as before). MEASURED: the part carries tokens background-image = {imported.case.a.background-image} = url('./assets/images/3ba1c6f0aa.png'), width/height = {imported.case.a.width}/{imported.case.a.height} = 32px, and the declared cover triple (background-size: cover, background-position: 50% 50%, background-repeat: no-repeat); the note and the contract finally say the same thing. The CASE FILE was also corrected in the same pass: dump.plugin.js:429 writes figma's raw imageHash and imageFillCss appends the .png, so the old fixture's \"3ba1c6f0aa.png\" mis-modelled the capture surface and produced a .png.png URL; the case now holds the bare hash \"3ba1c6f0aa\". Byte-neutrality: a scan of all 3,982 FRAME nodes in every committed dump found exactly TWO childless paint-less frames carrying imageFill/fixedSize \u2014 this case and fill-image-bool."
+      "observed": "RE-RECORDED red -> green (canvas-fidelity gap-closing round 1, HEAD bd3843b). The WRONG-NAME is closed at its source. Mechanism: isSpacer (core/propose-figma.ts:3222) tested fill/stroke/bound/text only, so a childless, paint-less image FRAME was classified a spacer; the spacer branch (:3941) carries layout and returns early, the part landed {}, its drawn 32px box was lost — while buildPart's note at :3603 still announced \"IMAGE fill carried BY HASH\". Fix: isSpacer now also refuses any node carrying imageFill or fixedSize (both absent-field no-ops, so a real spacer classifies exactly as before). MEASURED: the part carries tokens background-image = {imported.case.a.background-image} = url('./assets/images/3ba1c6f0aa.png'), width/height = {imported.case.a.width}/{imported.case.a.height} = 32px, and the declared cover triple (background-size: cover, background-position: 50% 50%, background-repeat: no-repeat); the note and the contract finally say the same thing. The CASE FILE was also corrected in the same pass: dump.plugin.js:429 writes figma's raw imageHash and imageFillCss appends the .png, so the old fixture's \"3ba1c6f0aa.png\" mis-modelled the capture surface and produced a .png.png URL; the case now holds the bare hash \"3ba1c6f0aa\". Byte-neutrality: a scan of all 3,982 FRAME nodes in every committed dump found exactly TWO childless paint-less frames carrying imageFill/fixedSize — this case and fill-image-bool."
     },
     {
       "id": "fill-image-bool",
@@ -751,7 +751,7 @@
         ]
       },
       "status": "green",
-      "observed": "RE-RECORDED red -> green (canvas-fidelity gap-closing round 1, HEAD bd3843b). Same isSpacer trap as fill-image-hash, same one-line fix (core/propose-figma.ts:3222 now also refuses imageFill/fixedSize). MEASURED: the part carries background-image = {imported.case.a.background-image} = linear-gradient(135deg, #f2f4f7 0%, #d0d5dd 100%) \u2014 IMAGE_FILL_PLACEHOLDER_GRADIENT, the one documented spelling \u2014 plus the drawn 32px box as width/height mint observations. No cover triple here, by design: declareImageFillCover is hash-only (a placeholder gradient needs no background-size)."
+      "observed": "RE-RECORDED red -> green (canvas-fidelity gap-closing round 1, HEAD bd3843b). Same isSpacer trap as fill-image-hash, same one-line fix (core/propose-figma.ts:3222 now also refuses imageFill/fixedSize). MEASURED: the part carries background-image = {imported.case.a.background-image} = linear-gradient(135deg, #f2f4f7 0%, #d0d5dd 100%) — IMAGE_FILL_PLACEHOLDER_GRADIENT, the one documented spelling — plus the drawn 32px box as width/height mint observations. No cover triple here, by design: declareImageFillCover is hash-only (a placeholder gradient needs no background-size)."
     },
     {
       "id": "fill-gradient",
@@ -826,7 +826,7 @@
       "id": "axis-state-by-variant",
       "construct": "an interaction-state axis CROSSED with a variant axis, where the per-value state refs are UNRELATED token names",
       "expect": "CARRIED",
-      "why": "`states` holds ONE ref per channel, and a root state ref carrying a single {prop} placeholder expands per enum value \u2014 which covers a token FAMILY parameterised by the axis. It cannot cover the commoner case this fixture holds: per-variant state colours that share no stem (comp/button/primary/color/background/hover vs comp/button/color/background/knockout-hover), so no substituted ref can reach them. Before v17 this was refused by name and the whole hover plane landed empty \u2014 measured on Eventz, it cost Button and Icon Button every hover and active binding they had. v17 carries it as `statesByProp`. The case pins BOTH halves: the per-value refs must appear, and the state must be DECLARED (a state carried only this way used to count as 'nothing recoverable' and be dropped).",
+      "why": "`states` holds ONE ref per channel, and a root state ref carrying a single {prop} placeholder expands per enum value — which covers a token FAMILY parameterised by the axis. It cannot cover the commoner case this fixture holds: per-variant state colours that share no stem (comp/button/primary/color/background/hover vs comp/button/color/background/knockout-hover), so no substituted ref can reach them. Before v17 this was refused by name and the whole hover plane landed empty — measured on Eventz, it cost Button and Icon Button every hover and active binding they had. v17 carries it as `statesByProp`. The case pins BOTH halves: the per-value refs must appear, and the state must be DECLARED (a state carried only this way used to count as 'nothing recoverable' and be dropped).",
       "check": {
         "carried": [
           "statesByProp",
@@ -1200,7 +1200,7 @@
       "id": "instance-override-size-carried",
       "construct": "a per-instance SIZE override on a self-claimed child stub (the same instance drawn at two different square boxes)",
       "expect": "CARRIED",
-      "why": "The fixture pinned the REFUSAL side of per-instance overrides (instance-override-paint-observed: a per-usage paint the child does not declare overridable stays LEDGERED) and never pinned the CARRIAGE, so  \u2014 the whole per-instance override vocabulary \u2014 was exercised by the kits and by nothing failable. This holds the carriage: the host draws ONE child at two different SQUARE boxes while the instance applies NO component properties, so the stub has no axis that could explain the divergence and only the host can tell the two apart. The size is carried as component.overrides[\"size\"] and the divergence is named. Both sides of the vocabulary are now pinned, which is what makes either one meaningful.",
+      "why": "The fixture pinned the REFUSAL side of per-instance overrides (instance-override-paint-observed: a per-usage paint the child does not declare overridable stays LEDGERED) and never pinned the CARRIAGE, so  — the whole per-instance override vocabulary — was exercised by the kits and by nothing failable. This holds the carriage: the host draws ONE child at two different SQUARE boxes while the instance applies NO component properties, so the stub has no axis that could explain the divergence and only the host can tell the two apart. The size is carried as component.overrides[\"size\"] and the divergence is named. Both sides of the vocabulary are now pinned, which is what makes either one meaningful.",
       "check": {
         "carried": [
           "\"component\":\\{\"id\":\"ds\\.zorble\",\"overrides\":\\{\"size\":\"\\{imported\\.case\\.a\\.size\\.\\{size\\}\\}\"\\}\\}"
@@ -1619,18 +1619,10 @@
         ],
         "note": "effect style|shadow/md"
       },
-      "status": "red",
-      "observed": "SILENT — box-shadow carries, nothing names the effect style id/name (map.ts reads styles.text only) | Propose side READY (2026-08-22, dump v1.31 DumpNode.effectStyle/effectStyleKey — nameEffectProvenance names the style as provenance beside the carried box-shadow, base AND state planes); map.ts must resolve node.styles.effect through the response styles map and emit the fields.",
-      "observedCheck": {
-        "carried": [
-          "box-shadow"
-        ],
-        "noteAbsent": [
-          "effect style",
-          "shadow/md"
-        ]
-      },
-      "exam": "phase-2 FIGMA-DS exam 2026-08-22 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)"
+      "status": "green",
+      "observed": "RE-RECORDED red -> green (Phase 2 fix round 2, 2026-08-23): F4 extract/figma/rest/map.ts resolves node.styles.effect through the response styles map into effectStyle/effectStyleKey (effect-style-unresolved when the map lacks it); propose nameEffectProvenance names the style beside the carried box-shadow. dump.plugin.js mirrors it from effectStyleId.",
+      "exam": "phase-2 FIGMA-DS exam 2026-08-22 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)",
+      "closed": "2026-08-23 F4 REST mapper + plugin dump (dump v1.31) — was: SILENT — box-shadow carries, nothing names the effect style id/name (map.ts reads styles.text only) | Propose side READY (2026-08-22, dump v1.31 DumpNode.effectStyle/effectStyleKey — nameEffectProvenance names the style as provenance beside the carried box-shadow, base AND state planes); map.ts must resolve node.styles.effect through the response styles map and emit the fields."
     },
     {
       "id": "rest-effect-bound-variables",
@@ -1643,18 +1635,10 @@
         ],
         "note": "variable-unresolved @ Case:Case effects|effect.*variable"
       },
-      "status": "red",
-      "observed": "SILENT — the shadow carries as a literal box-shadow; no variable-unresolved receipt for the five effect aliases (BOUND_FIELDS_SKIPPED \"effects\") | Propose side READY (2026-08-22, dump v1.31 DumpEffect.bound — named per channel as rename targets); the variable-unresolved receipt for unnamed aliases is map.ts's (drop 'effects' from BOUND_FIELDS_SKIPPED and receipt each alias like every other bound field).",
-      "observedCheck": {
-        "carried": [
-          "box-shadow"
-        ],
-        "noteAbsent": [
-          "variable-unresolved @ Case:Case effects",
-          "effect.*variable"
-        ]
-      },
-      "exam": "phase-2 FIGMA-DS exam 2026-08-22 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)"
+      "status": "green",
+      "observed": "RE-RECORDED red -> green (Phase 2 fix round 2, 2026-08-23): F4 map.ts reads effects[i].boundVariables.{radius,spread,color,offsetX,offsetY} — each alias resolves through the variables response into effects[].bound or receipts variable-unresolved under its channel (effects[0].radius …), and a node-level boundVariables.effects alias no effect carries is receipted channel-less. dump.plugin.js mirrors it (plugin names the variables; a null lookup is variable-unresolved).",
+      "exam": "phase-2 FIGMA-DS exam 2026-08-22 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)",
+      "closed": "2026-08-23 F4 REST mapper + plugin dump (dump v1.31) — was: SILENT — the shadow carries as a literal box-shadow; no variable-unresolved receipt for the five effect aliases (BOUND_FIELDS_SKIPPED \"effects\") | Propose side READY (2026-08-22, dump v1.31 DumpEffect.bound — named per channel as rename targets); the variable-unresolved receipt for unnamed aliases is map.ts's (drop 'effects' from BOUND_FIELDS_SKIPPED and receipt each alias like every other bound field)."
     },
     {
       "id": "rest-prototype-reaction",
@@ -1664,16 +1648,10 @@
       "check": {
         "note": "prototype-reactions-unsupported|ON_HOVER|reaction"
       },
-      "status": "red",
-      "observed": "SILENT — interactions/transitionNodeID are never read on the REST route; no note, no captureGap | Propose side READY (2026-08-22, dump v1.31 DumpNode.reactions — nameReactions names trigger → action → destinationName, never invents onClick); map.ts must read interactions[]/transitionNodeID and emit the field (or receipt prototype-reactions-unsupported as the plugin does).",
-      "observedCheck": {
-        "noteAbsent": [
-          "prototype-reactions-unsupported",
-          "ON_HOVER",
-          "reaction"
-        ]
-      },
-      "exam": "phase-2 FIGMA-DS exam 2026-08-22 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)"
+      "status": "green",
+      "observed": "RE-RECORDED red -> green (Phase 2 fix round 2, 2026-08-23): F4 map.ts reads interactions[] (trigger.type, actions[].navigation|type, destinationId → NAME when inside the document, transition, duration seconds→ms; legacy transitionNodeID → trigger UNKNOWN + note) into reactions[]; propose nameReactions names ON_HOVER → CHANGE_TO with its target. dump.plugin.js emits the same field beside its v1.27 receipt.",
+      "exam": "phase-2 FIGMA-DS exam 2026-08-22 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)",
+      "closed": "2026-08-23 F4 REST mapper + plugin dump (dump v1.31) — was: SILENT — interactions/transitionNodeID are never read on the REST route; no note, no captureGap | Propose side READY (2026-08-22, dump v1.31 DumpNode.reactions — nameReactions names trigger → action → destinationName, never invents onClick); map.ts must read interactions[]/transitionNodeID and emit the field (or receipt prototype-reactions-unsupported as the plugin does)."
     },
     {
       "id": "rest-slot-property-definition",
@@ -1717,23 +1695,16 @@
       "id": "rest-layout-sizing-vertical-fill",
       "construct": "REST: a child FRAME with layoutSizingVertical FILL inside a fixed-height ROW root",
       "expect": "CARRIED",
-      "why": "cross-axis fill is the artifact of align:stretch on the parent (propose.ts LAYOUT rule) — the vertical twin of fillWidth must invert the same way",
+      "why": "cross-axis fill under a ROW parent is the cross-axis STRETCH: the parent's `align: stretch` when every eligible sibling fills, else the filling part's own `height: 100%` against a DEFINITE-height parent (propose.ts LAYOUT rule, dump v1.31 fillHeight) — this fixture's TEXT sibling hugs and the parent is FIXED-height, so the honest spelling is the part literal",
       "check": {
         "carried": [
-          "\"align\":\"stretch\""
+          "\"height\":\"100%\""
         ]
       },
-      "status": "red",
-      "observed": "SILENT — only layoutSizingHorizontal FILL maps (fillWidth); the vertical FILL child leaves no align:stretch and no note | Propose side READY (2026-08-22, dump v1.31 DumpNode.fillHeight — stretchEvidence handles a ROW parent whose eligible children all fill (align: stretch); a lone filling child under a DEFINITE-height ROW parent carries literals.height 100%, under a HUG parent it is named); map.ts must emit fillHeight from layoutSizingVertical FILL. This fixture's TEXT sibling hugs and the parent is FIXED-height, so the expected carriage is the part literal, not align: stretch — re-author check.carried to '\"height\":\"100%\"' when re-recording.",
-      "observedCheck": {
-        "absent": [
-          "\"align\":\"stretch\""
-        ],
-        "noteAbsent": [
-          "Case:root/a: .*(FILL|fill|stretch)"
-        ]
-      },
-      "exam": "phase-2 FIGMA-DS exam 2026-08-22 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)"
+      "status": "green",
+      "observed": "RE-RECORDED red -> green (Phase 2 fix round 2, 2026-08-23): F4 map.ts emits fillHeight from layoutSizingVertical FILL (dump.plugin.js mirrors it). check.carried re-authored from align:stretch to the part literal height:100% — this fixture's ROW parent is FIXED-height and its TEXT sibling HUGS, so the parent's `align: stretch` would also stretch the text (not what was drawn); the exact spelling is the filling part's own `height: 100%` against the parent's definite box, the same carrier crossAxisFillByProp uses for width.",
+      "exam": "phase-2 FIGMA-DS exam 2026-08-22 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)",
+      "closed": "2026-08-23 F4 REST mapper + plugin dump (dump v1.31) — was: SILENT — only layoutSizingHorizontal FILL maps (fillWidth); the vertical FILL child leaves no align:stretch and no note | Propose side READY (2026-08-22, dump v1.31 DumpNode.fillHeight — stretchEvidence handles a ROW parent whose eligible children all fill (align: stretch); a lone filling child under a DEFINITE-height ROW parent carries literals.height 100%, under a HUG parent it is named); map.ts must emit fillHeight from layoutSizingVertical FILL. This fixture's TEXT sibling hugs and the parent is FIXED-height, so the expected carriage is the part literal, not align: stretch — re-author check.carried to '\"height\":\"100%\"' when re-recording."
     },
     {
       "id": "rest-child-frame-fixed-size",
@@ -1759,16 +1730,10 @@
       "check": {
         "note": "fill override|overridden|host override"
       },
-      "status": "red",
-      "observed": "SILENT — overrides[] is never read; the only \"override\" in the union is the generic read-limit note about TEXT overrides | Propose side READY (2026-08-22, dump v1.31 DumpNode.hostOverrides — nameHostOverrides names path/fields/fill per variant on the component-ref, slot-content and state planes); map.ts must read overrides[] and the overridden descendant's fill.",
-      "observedCheck": {
-        "noteAbsent": [
-          "fill override",
-          "overridden",
-          "host override"
-        ]
-      },
-      "exam": "phase-2 FIGMA-DS exam 2026-08-22 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)"
+      "status": "green",
+      "observed": "RE-RECORDED red -> green (Phase 2 fix round 2, 2026-08-23): F4 map.ts reads overrides[] against the instance's returned subtree: each overridden id resolves to a name path; \"characters\" → textOverrides (dump v1.10, the REST_CAPTURE_GAPS line retired), every other field → hostOverrides {path, fields, fill} with the descendant's first solid; an unlocatable id is host-override-unlocated. propose nameHostOverrides names \"Vector\" fills = #ffffff. dump.plugin.js mirrors it through InstanceNode.overrides.",
+      "exam": "phase-2 FIGMA-DS exam 2026-08-22 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)",
+      "closed": "2026-08-23 F4 REST mapper + plugin dump (dump v1.31) — was: SILENT — overrides[] is never read; the only \"override\" in the union is the generic read-limit note about TEXT overrides | Propose side READY (2026-08-22, dump v1.31 DumpNode.hostOverrides — nameHostOverrides names path/fields/fill per variant on the component-ref, slot-content and state planes); map.ts must read overrides[] and the overridden descendant's fill."
     },
     {
       "id": "rest-instance-swap-fixed-value",
@@ -1778,17 +1743,10 @@
       "check": {
         "note": "Icon"
       },
-      "status": "red",
-      "observed": "SILENT — the VARIANT prop canonicalizes ({\"state\":\"default\"}); the INSTANCE_SWAP value is skipped in mapInstance (`continue`) and no note names \"Icon\" | Propose side READY (2026-08-22, dump v1.31 DumpNode.fixedSwaps — nameFixedSwaps names property = swapped component (id/name/key) per variant); map.ts must stop skipping INSTANCE_SWAP in mapInstance and resolve the value through the components map.",
-      "observedCheck": {
-        "carried": [
-          "\"props\":\\{\"state\":\"default\"\\}"
-        ],
-        "noteAbsent": [
-          "Icon"
-        ]
-      },
-      "exam": "phase-2 FIGMA-DS exam 2026-08-22 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)"
+      "status": "green",
+      "observed": "RE-RECORDED red -> green (Phase 2 fix round 2, 2026-08-23): F4 map.ts no longer `continue`s on INSTANCE_SWAP applied values: the component id resolves through the response components map into fixedSwaps[name] {id, name, key} (an unmapped id keeps the id + a note); propose nameFixedSwaps names Icon = \"Glyph\" (9:9, key glyphkey1). dump.plugin.js mirrors it through getNodeByIdAsync.",
+      "exam": "phase-2 FIGMA-DS exam 2026-08-22 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)",
+      "closed": "2026-08-23 F4 REST mapper + plugin dump (dump v1.31) — was: SILENT — the VARIANT prop canonicalizes ({\"state\":\"default\"}); the INSTANCE_SWAP value is skipped in mapInstance (`continue`) and no note names \"Icon\" | Propose side READY (2026-08-22, dump v1.31 DumpNode.fixedSwaps — nameFixedSwaps names property = swapped component (id/name/key) per variant); map.ts must stop skipping INSTANCE_SWAP in mapInstance and resolve the value through the components map."
     },
     {
       "id": "rest-instance-slot-prop-value",
@@ -1817,16 +1775,10 @@
       "check": {
         "note": "font-family|fontFamily|Manrope"
       },
-      "status": "red",
-      "observed": "SILENT — DumpText has no fontFamily field; Manrope 700 degrades to the emitter default family with no note | Propose side READY (2026-08-22, dump v1.31 DumpText.fontFamily — carryFontFamily carries a uniform non-Inter family as declared font-family, names a mixed axis); map.ts must copy style.fontFamily.",
-      "observedCheck": {
-        "noteAbsent": [
-          "font-family",
-          "fontFamily",
-          "Manrope"
-        ]
-      },
-      "exam": "phase-2 FIGMA-DS exam 2026-08-22 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)"
+      "status": "green",
+      "observed": "RE-RECORDED red -> green (Phase 2 fix round 2, 2026-08-23): F4 map.ts copies style.fontFamily verbatim (Inter included, so \"Inter drawn\" and \"not captured\" differ); propose carryFontFamily carries Manrope as declared font-family and names the FC-FONT-SUBSTRATE limit. dump.plugin.js copies fontName.family.",
+      "exam": "phase-2 FIGMA-DS exam 2026-08-22 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)",
+      "closed": "2026-08-23 F4 REST mapper + plugin dump (dump v1.31) — was: SILENT — DumpText has no fontFamily field; Manrope 700 degrades to the emitter default family with no note | Propose side READY (2026-08-22, dump v1.31 DumpText.fontFamily — carryFontFamily carries a uniform non-Inter family as declared font-family, names a mixed axis); map.ts must copy style.fontFamily."
     },
     {
       "id": "rest-text-align-center",
@@ -1838,18 +1790,10 @@
           "text-align"
         ]
       },
-      "status": "red",
-      "observed": "SILENT — textAlignHorizontal is never read; no text-align in the contract, no note | Propose side READY (2026-08-22, dump v1.31 DumpText.textAlign — carryTextAlign carries CENTER/RIGHT/JUSTIFIED as declared text-align); map.ts must copy style.textAlignHorizontal.",
-      "observedCheck": {
-        "absent": [
-          "text-align"
-        ],
-        "noteAbsent": [
-          "text-align",
-          "textAlign"
-        ]
-      },
-      "exam": "phase-2 FIGMA-DS exam 2026-08-22 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)"
+      "status": "green",
+      "observed": "RE-RECORDED red -> green (Phase 2 fix round 2, 2026-08-23): F4 map.ts copies style.textAlignHorizontal CENTER|RIGHT|JUSTIFIED into text.textAlign (LEFT omitted on both producers); propose carryTextAlign carries declared text-align: center. dump.plugin.js carries textAlignHorizontal instead of receipting it (textAlignVertical stays a receipt).",
+      "exam": "phase-2 FIGMA-DS exam 2026-08-22 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)",
+      "closed": "2026-08-23 F4 REST mapper + plugin dump (dump v1.31) — was: SILENT — textAlignHorizontal is never read; no text-align in the contract, no note | Propose side READY (2026-08-22, dump v1.31 DumpText.textAlign — carryTextAlign carries CENTER/RIGHT/JUSTIFIED as declared text-align); map.ts must copy style.textAlignHorizontal."
     },
     {
       "id": "rest-item-reverse-z-index",
@@ -1859,16 +1803,10 @@
       "check": {
         "note": "itemReverseZIndex|z-index|paint order"
       },
-      "status": "red",
-      "observed": "SILENT — itemReverseZIndex is never read (render-inert without overlapping children, still a dropped fact) | Propose side READY (2026-08-22, dump v1.31 DumpNode.itemReverseZIndex — nameItemReverseZIndex); map.ts must copy the flag when true.",
-      "observedCheck": {
-        "noteAbsent": [
-          "itemReverseZIndex",
-          "z-index",
-          "paint order"
-        ]
-      },
-      "exam": "phase-2 FIGMA-DS exam 2026-08-22 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)"
+      "status": "green",
+      "observed": "RE-RECORDED red -> green (Phase 2 fix round 2, 2026-08-23): F4 map.ts copies itemReverseZIndex when true; propose nameItemReverseZIndex names the reversed paint order. dump.plugin.js mirrors it.",
+      "exam": "phase-2 FIGMA-DS exam 2026-08-22 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)",
+      "closed": "2026-08-23 F4 REST mapper + plugin dump (dump v1.31) — was: SILENT — itemReverseZIndex is never read (render-inert without overlapping children, still a dropped fact) | Propose side READY (2026-08-22, dump v1.31 DumpNode.itemReverseZIndex — nameItemReverseZIndex); map.ts must copy the flag when true."
     },
     {
       "id": "rest-instance-target-aspect-ratio",
@@ -1878,17 +1816,10 @@
       "check": {
         "note": "aspect"
       },
-      "status": "red",
-      "observed": "SILENT — targetAspectRatio is never read; the stub carries the observed 16×16 box only | Propose side READY (2026-08-22, dump v1.31 DumpNode.targetAspectRatio — carryAspectRatio: declared aspect-ratio on a FRAME part, named on an instance/slot); map.ts must copy targetAspectRatio.",
-      "observedCheck": {
-        "carried": [
-          "imported\\.stub-glyph\\.root\\.width"
-        ],
-        "noteAbsent": [
-          "aspect"
-        ]
-      },
-      "exam": "phase-2 FIGMA-DS exam 2026-08-22 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)"
+      "status": "green",
+      "observed": "RE-RECORDED red -> green (Phase 2 fix round 2, 2026-08-23): F4 map.ts copies targetAspectRatio {x, y} when both > 0; propose carryAspectRatio names the 16 / 16 lock on the nested instance (a FRAME part would carry declared aspect-ratio). dump.plugin.js mirrors it.",
+      "exam": "phase-2 FIGMA-DS exam 2026-08-22 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)",
+      "closed": "2026-08-23 F4 REST mapper + plugin dump (dump v1.31) — was: SILENT — targetAspectRatio is never read; the stub carries the observed 16×16 box only | Propose side READY (2026-08-22, dump v1.31 DumpNode.targetAspectRatio — carryAspectRatio: declared aspect-ratio on a FRAME part, named on an instance/slot); map.ts must copy targetAspectRatio."
     },
     {
       "id": "axis-default-from-set",
@@ -2012,6 +1943,193 @@
       },
       "status": "green",
       "exam": "phase-2 FIGMA-DS exam 2026-08-22 (parity/receipts/phase-2/FIGMA-DS-EXAM.md) — F1 REST closure"
+    },
+    {
+      "id": "effect-style-identity",
+      "construct": "PLUGIN twin of rest-effect-style-identity: a DROP_SHADOW root whose effects ride an EffectStyle (dump v1.31 effectStyle/effectStyleKey from effectStyleId)",
+      "expect": "LEDGERED",
+      "why": "the shadow geometry carries as box-shadow; the STYLE identity is a token-class fact the plugin reads off effectStyleId and must be named",
+      "check": {
+        "carried": [
+          "box-shadow"
+        ],
+        "note": "EFFECT STYLE \"shadow/md\"|shadow/md"
+      },
+      "status": "green",
+      "exam": "phase-2 fix round 2 (2026-08-23) — plugin-shape twin of rest-effect-style-identity; authored from the REST case mapped through extract/figma/rest/map.ts and stripped of REST-route provenance"
+    },
+    {
+      "id": "effect-bound-variables-named",
+      "construct": "PLUGIN twin of rest-effect-bound-variables: a DROP_SHADOW whose five channels are bound to LOCAL variables the plugin can NAME (dump v1.31 effects[].bound + _variables)",
+      "expect": "LEDGERED",
+      "why": "a box-shadow is ONE token in the contract grammar, so per-channel effect bindings have no carrier — the resolved stack carries and the variable names are NAMED as rename targets, never dropped",
+      "check": {
+        "carried": [
+          "box-shadow"
+        ],
+        "note": "effect channel\\(s\\) bound to variables.*radius.*spread.*color.*offsetX.*offsetY",
+        "absent": [
+          "shadow\\.md\\.blur"
+        ]
+      },
+      "status": "green",
+      "exam": "phase-2 fix round 2 (2026-08-23) — plugin-shape twin of rest-effect-bound-variables; authored from the REST case mapped through extract/figma/rest/map.ts and stripped of REST-route provenance"
+    },
+    {
+      "id": "prototype-reaction-field",
+      "construct": "PLUGIN twin of rest-prototype-reaction: an ON_HOVER → CHANGE_TO reaction carried as dump v1.31 reactions[] BESIDE the v1.27 prototype-reactions-unsupported receipt",
+      "expect": "LEDGERED",
+      "why": "prototype wiring is named with its target, never inverted into onClick/onHover (the State axis + statePreviewAxis recover the matrix)",
+      "check": {
+        "note": "prototype reaction\\(s\\) ON_HOVER → CHANGE_TO",
+        "absent": [
+          "onClick",
+          "onHover"
+        ]
+      },
+      "status": "green",
+      "exam": "phase-2 fix round 2 (2026-08-23) — plugin-shape twin of rest-prototype-reaction; authored from the REST case mapped through extract/figma/rest/map.ts and stripped of REST-route provenance"
+    },
+    {
+      "id": "layout-fill-height-row-fixed",
+      "construct": "PLUGIN twin of rest-layout-sizing-vertical-fill: a child FRAME with fillHeight (layoutSizingVertical FILL) inside a FIXED-height ROW root whose TEXT sibling hugs (dump v1.31)",
+      "expect": "CARRIED",
+      "why": "the filling part carries its own `height: 100%` against the parent's definite box (the parent's `align: stretch` would also stretch the hugging text)",
+      "check": {
+        "carried": [
+          "\"height\":\"100%\""
+        ]
+      },
+      "status": "green",
+      "exam": "phase-2 fix round 2 (2026-08-23) — plugin-shape twin of rest-layout-sizing-vertical-fill; authored from the REST case mapped through extract/figma/rest/map.ts and stripped of REST-route provenance"
+    },
+    {
+      "id": "instance-host-fill-override",
+      "construct": "PLUGIN twin of rest-instance-fill-override: a nested INSTANCE whose internal vector fill the host overrode (dump v1.31 hostOverrides from InstanceNode.overrides)",
+      "expect": "LEDGERED",
+      "why": "instance internals are elided by rule, but a HOST override is a host fact (the icon colour per variant) and must be named with the colour",
+      "check": {
+        "note": "host override\\(s\\) on nested \"Glyph\".*\"Vector\" fills = #ffffff"
+      },
+      "status": "green",
+      "exam": "phase-2 fix round 2 (2026-08-23) — plugin-shape twin of rest-instance-fill-override; authored from the REST case mapped through extract/figma/rest/map.ts and stripped of REST-route provenance"
+    },
+    {
+      "id": "instance-swap-fixed-value",
+      "construct": "PLUGIN twin of rest-instance-swap-fixed-value: a nested INSTANCE with a FIXED INSTANCE_SWAP value (dump v1.31 fixedSwaps, resolved to the swapped component's name/key)",
+      "expect": "LEDGERED",
+      "why": "a component ref carries props only; nested slot CONTENT is not expressible in the composition grammar, so the fixed swap is named with the swapped component's identity",
+      "check": {
+        "carried": [
+          "\"props\":\\{\"state\":\"default\"\\}"
+        ],
+        "note": "fixes INSTANCE_SWAP \"Icon\" = \"Glyph\" \\(9:9, key glyphkey1\\)"
+      },
+      "status": "green",
+      "exam": "phase-2 fix round 2 (2026-08-23) — plugin-shape twin of rest-instance-swap-fixed-value; authored from the REST case mapped through extract/figma/rest/map.ts and stripped of REST-route provenance"
+    },
+    {
+      "id": "text-font-family",
+      "construct": "PLUGIN twin of rest-text-font-family: a TEXT node in Manrope 700 (dump v1.31 text.fontFamily from fontName.family)",
+      "expect": "CARRIED",
+      "why": "a uniform non-Inter family drawn in every variant is the declared font-family channel (canvas: draw); Inter is the pipeline default and carries nothing",
+      "check": {
+        "carried": [
+          "\"font-family\":\"Manrope\""
+        ],
+        "note": "font family \"Manrope\" drawn in every variant"
+      },
+      "status": "green",
+      "exam": "phase-2 fix round 2 (2026-08-23) — plugin-shape twin of rest-text-font-family; authored from the REST case mapped through extract/figma/rest/map.ts and stripped of REST-route provenance"
+    },
+    {
+      "id": "text-align-center",
+      "construct": "PLUGIN twin of rest-text-align-center: a fixed-width TEXT node with textAlignHorizontal CENTER (dump v1.31 text.textAlign)",
+      "expect": "CARRIED",
+      "why": "text-align is a declared CSS channel with a 1:1 canvas fact; the plugin dump used to receipt textAlignHorizontal as text-channel-unsupported and now carries it",
+      "check": {
+        "carried": [
+          "\"text-align\":\"center\""
+        ],
+        "noteAbsent": [
+          "text-channel-unsupported.*textAlignHorizontal"
+        ]
+      },
+      "status": "green",
+      "exam": "phase-2 fix round 2 (2026-08-23) — plugin-shape twin of rest-text-align-center; authored from the REST case mapped through extract/figma/rest/map.ts and stripped of REST-route provenance"
+    },
+    {
+      "id": "layout-item-reverse-z-index",
+      "construct": "PLUGIN twin of rest-item-reverse-z-index: an auto-layout root with itemReverseZIndex true (dump v1.31)",
+      "expect": "LEDGERED",
+      "why": "paint order is a canvas fact with no contract carrier (z-index is declared-but-inert); render-inert without overlap but must be named",
+      "check": {
+        "note": "itemReverseZIndex is true in 1/1 variant"
+      },
+      "status": "green",
+      "exam": "phase-2 fix round 2 (2026-08-23) — plugin-shape twin of rest-item-reverse-z-index; authored from the REST case mapped through extract/figma/rest/map.ts and stripped of REST-route provenance"
+    },
+    {
+      "id": "instance-target-aspect-ratio",
+      "construct": "PLUGIN twin of rest-instance-target-aspect-ratio: a nested INSTANCE with a 16:16 aspect lock (dump v1.31 targetAspectRatio)",
+      "expect": "LEDGERED",
+      "why": "an aspect lock acts on resize; on an instance (child-owned box) it is named, a FRAME part would carry declared aspect-ratio",
+      "check": {
+        "carried": [
+          "imported\\.stub-glyph\\.root\\.width"
+        ],
+        "note": "aspect-ratio lock 16 / 16"
+      },
+      "status": "green",
+      "exam": "phase-2 fix round 2 (2026-08-23) — plugin-shape twin of rest-instance-target-aspect-ratio; authored from the REST case mapped through extract/figma/rest/map.ts and stripped of REST-route provenance"
+    },
+    {
+      "id": "slot-fixed-width-by-variant",
+      "construct": "a native SLOT child drawn FILL-width in Variant=Default and FIXED-width (308px, no bound size, no fixedSize/bbox) in Variant=Inline under a ROW parent (Phase 2 exam: Card Inline Image)",
+      "expect": "LEDGERED",
+      "why": "Option B (FC-GEOMETRY-EXCLUDED): a child's drawn px is excluded geometry and must be a RECEIPT carrying the code — nameFixedChildGeometry already names a FIXED FRAME/SLOT child; an occurrence that is FIXED in one variant and FILL in another is the same excluded geometry on that variant and must be named, not skipped",
+      "check": {
+        "note": "Case:root/Image: .*FC-GEOMETRY-EXCLUDED",
+        "absent": [
+          "imported\\.case\\.image\\.width",
+          "\"width\":\"308"
+        ]
+      },
+      "status": "red",
+      "observed": "SILENT — nameFixedChildGeometry skips the width axis when ANY occurrence has fillWidth (`if (dim === 'width' && m.occ.some((o) => o.node.fillWidth === true)) continue;`), so the Inline occurrence's FIXED 308px gets no receipt; nothing is minted either (re-measured on the live kit 2026-08-23: Card:Variant=Inline/Container/Image, the only FIXED-child silence left on the 15 sets)",
+      "observedCheck": {
+        "noteAbsent": [
+          "Case:root/Image: .*(FIXED|FC-GEOMETRY-EXCLUDED)"
+        ],
+        "absent": [
+          "imported\\.case\\.image\\.width",
+          "\"width\":\"308"
+        ]
+      },
+      "exam": "phase-2 FIGMA-DS exam RE-MEASURED 2026-08-23 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)"
+    },
+    {
+      "id": "layout-fill-height-parent-mode-by-variant",
+      "construct": "a child SLOT drawn fillHeight only under the variant where its parent is a ROW, the parent being a COLUMN in the other variant (layoutByProp) and HUGGING its height in both (Phase 2 exam: Card Inline Image, dump v1.31 fillHeight)",
+      "expect": "LEDGERED",
+      "why": "the cross-axis stretch under a HUG-height ROW parent has no exact grammar spelling (carryCrossAxisFill names it for a uniform parent); a parent whose direction is a function of the axis is the same fact per variant and must be named per variant, not dropped at the mixed-modes door",
+      "check": {
+        "note": "Case:root/Container/Image: .*FILL-height",
+        "absent": [
+          "\"height\":\"100%\""
+        ]
+      },
+      "status": "red",
+      "observed": "SILENT — carryCrossAxisFill returns at `mixed parent modes — crossAxisFillByProp's door`, and crossAxisFillByProp requires every occurrence to be fillWidth (it spells WIDTH per variant only), so a fillHeight under the ROW variant has no carrier and no note (re-measured on the live kit 2026-08-23: Card:Variant=Inline/Container/Image)",
+      "observedCheck": {
+        "noteAbsent": [
+          "Case:root/Container/Image: .*(FILL-height|fillHeight|stretch)"
+        ],
+        "absent": [
+          "\"height\":\"100%\""
+        ]
+      },
+      "exam": "phase-2 FIGMA-DS exam RE-MEASURED 2026-08-23 (parity/receipts/phase-2/FIGMA-DS-EXAM.md)"
     }
   ]
 }

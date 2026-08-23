@@ -63,20 +63,42 @@
  *                                                     the consuming mode is each collection's DEFAULT mode) — needs a
  *                                                     token with file_variables:read; its absence is named BY CAUSE in
  *                                                     _provenance.variables, captureGaps and a variables-unavailable row
- *   (no REST equivalent)                            textOverrides (dump v1.10) — PLUGIN-ONLY. The channel's source is
- *                                                     InstanceNode.overrides, Figma's own record of what a host changed;
- *                                                     the REST file response has no such field, and reconstructing it
- *                                                     would mean diffing every instance subtree against its main
- *                                                     component (a guess where the plugin has an answer). A REST-mapped
- *                                                     dump therefore carries NO character overrides and the child's own
- *                                                     default characters stand — a declared limit of this surface.
+ *   INSTANCE overrides[] {id, overriddenFields}     textOverrides (dump v1.10) + hostOverrides (dump v1.31). REST DOES
+ *     + the instance's returned subtree              return the host's override record (measured on the Phase 2 exam kit
+ *                                                     and the rest-instance-fill-override case) AND the instance subtree,
+ *                                                     so each overridden id resolves to a name path inside the instance:
+ *                                                     'characters' → textOverrides[path] (the plugin's own channel, the
+ *                                                     earlier "PLUGIN-ONLY" note here was a read limit nobody had
+ *                                                     tested); every other field → hostOverrides[{path, fields, fill}]
+ *                                                     with the descendant's first solid when "fills" is among them. An
+ *                                                     id the subtree does not contain is host-override-unlocated.
+ *   layoutSizingVertical === 'FILL'                 fillHeight: true (dump v1.31 — the vertical twin of fillWidth)
+ *   style.fontFamily                                text.fontFamily (dump v1.31, verbatim — Inter included, so "Inter
+ *                                                     drawn" and "not captured" stay different facts)
+ *   style.textAlignHorizontal                       text.textAlign (dump v1.31 — CENTER | RIGHT | JUSTIFIED; LEFT is
+ *                                                     the CSS default and is omitted, as the plugin dump omits it)
+ *   node.styles.effect → styles metadata map        effectStyle / effectStyleKey (dump v1.31 — the EffectStyle's name
+ *                                                     and publish key), else effect-style-unresolved
+ *   effects[].boundVariables.{radius,spread,color,  effects[].bound.<channel> (dump v1.31) via the variables response,
+ *     offsetX,offsetY}                                else a variable-unresolved receipt PER CHANNEL (the node-level
+ *                                                     boundVariables.effects array repeats the same aliases without a
+ *                                                     channel; an alias found ONLY there is receipted as channel-less)
+ *   interactions[] (trigger.type, actions[].        reactions[] (dump v1.31 — trigger, action, destination id + NAME
+ *     navigation|type, destinationId, transition)     when the id is in the mapped document, transition, duration in ms);
+ *     / legacy transitionNodeID                       a legacy transitionNodeID with no interactions[] rides with
+ *                                                     trigger 'UNKNOWN' (the field carries no trigger) and a note
+ *   componentProperties INSTANCE_SWAP value         fixedSwaps[name] { id, name?, key? } (dump v1.31) — resolved through
+ *                                                     the response's components map; an id the map lacks keeps the id
+ *                                                     and a note
+ *   itemReverseZIndex === true                      itemReverseZIndex: true (dump v1.31)
+ *   targetAspectRatio { x, y }                      targetAspectRatio (dump v1.31, verbatim when both > 0)
  *
  * Refusals are receipts, not silence: every place the REST surface cannot
  * yield the dump fact lands in MapReport.degradations with a named code and
  * the exact reason (e.g. a variable id that cannot be resolved because the
  * variables endpoint is Enterprise-only). Nothing is invented.
  */
-import type { DumpDegradation, DumpEffect, DumpFile, DumpGradient, DumpGridTrack, DumpLayout, DumpNode, DumpPaint, DumpPreferredValue, DumpPropertyDefinition, DumpSet, DumpShape, DumpText, DumpVariable } from '../types.js';
+import type { DumpDegradation, DumpEffect, DumpFile, DumpFixedSwap, DumpGradient, DumpGridTrack, DumpHostOverride, DumpLayout, DumpNode, DumpPaint, DumpPreferredValue, DumpPropertyDefinition, DumpReaction, DumpSet, DumpShape, DumpText, DumpVariable } from '../types.js';
 
 // ---------------------------------------------------------------------------
 // REST shapes (trimmed to the consumed fields; figma/rest-api-spec names)
@@ -118,6 +140,8 @@ export interface RestTypeStyle {
   textDecoration?: string;
   lineHeightUnit?: string;
   lineHeightPx?: number;
+  /** dump v1.31: LEFT | CENTER | RIGHT | JUSTIFIED → text.textAlign. */
+  textAlignHorizontal?: string;
 }
 
 /** HasBoundVariablesTrait (api_types.ts) — the spellings that differ from the
@@ -143,6 +167,11 @@ export interface RestBoundVariables {
     | undefined;
 }
 
+/** The five effect channels Figma can bind (Effect.boundVariables in
+ *  api_types.ts) — the same spelling DumpEffect.bound uses. */
+export type RestEffectChannel = 'radius' | 'spread' | 'color' | 'offsetX' | 'offsetY';
+export const REST_EFFECT_CHANNELS: readonly RestEffectChannel[] = ['radius', 'spread', 'color', 'offsetX', 'offsetY'];
+
 /** Effect (api_types.ts), trimmed to the consumed fields. */
 export interface RestEffect {
   type: string;
@@ -151,6 +180,29 @@ export interface RestEffect {
   offset?: { x: number; y: number };
   radius?: number;
   spread?: number;
+  /** dump v1.31: per-channel variable bindings (Effect.boundVariables). The
+   *  node-level `boundVariables.effects` array repeats these aliases WITHOUT
+   *  a channel — this is the carrier that says which channel. */
+  boundVariables?: Partial<Record<RestEffectChannel, RestVariableAlias>>;
+}
+
+/** Interaction (api_types.ts) — prototype wiring, read ONLY to be named
+ *  (dump v1.31 reactions). `transition.duration` is SECONDS on the wire. */
+export interface RestInteraction {
+  trigger?: { type?: string } | null;
+  actions?: Array<{
+    type?: string;
+    navigation?: string;
+    destinationId?: string | null;
+    transition?: { type?: string; duration?: number } | null;
+  }> | null;
+}
+
+/** Overrides (api_types.ts) — InstanceNode.overrides as REST returns it: the
+ *  host's own record of which descendants it changed and which fields. */
+export interface RestOverride {
+  id: string;
+  overriddenFields: string[];
 }
 
 /** ComponentProperty (api_types.ts) — applied values on an INSTANCE. A
@@ -235,12 +287,23 @@ export interface RestNode {
   effects?: RestEffect[];
   // HasLayoutTrait
   layoutSizingHorizontal?: 'FIXED' | 'HUG' | 'FILL';
+  /** dump v1.31 fillHeight — the vertical twin of layoutSizingHorizontal. */
+  layoutSizingVertical?: 'FIXED' | 'HUG' | 'FILL';
+  /** dump v1.31 targetAspectRatio (HasLayoutTrait) — the aspect lock. */
+  targetAspectRatio?: { x: number; y: number } | null;
+  /** dump v1.31 itemReverseZIndex (HasFramePropertiesTrait) — paint order. */
+  itemReverseZIndex?: boolean;
   // TypePropertiesTrait
   characters?: string;
   style?: RestTypeStyle;
   // IsLayerTrait
   componentPropertyReferences?: Record<string, string>;
   boundVariables?: RestBoundVariables;
+  /** dump v1.31 reactions — IsLayerTrait.interactions; the pre-interactions
+   *  schema spelled ONE destination as transitionNodeID/transitionDuration. */
+  interactions?: RestInteraction[];
+  transitionNodeID?: string | null;
+  transitionDuration?: number | null;
   // Decor-shape geometry (dump v1.3, #42): the post-rotation axis-aligned
   // box, radians rotation, out-of-flow marker + constraints.
   absoluteBoundingBox?: { x: number; y: number; width: number; height: number } | null;
@@ -259,6 +322,8 @@ export interface RestNode {
   // InstanceNode
   componentId?: string;
   componentProperties?: Record<string, RestComponentProperty>;
+  /** dump v1.10 textOverrides / v1.31 hostOverrides — the host's record. */
+  overrides?: RestOverride[];
   // COMPONENT_SET / COMPONENT documents (dump v1.5): swap preferredValues.
   componentPropertyDefinitions?: Record<string, RestComponentPropertyDefinition>;
 }
@@ -380,7 +445,17 @@ export type MapDegradationCode =
   // An INSTANCE componentProperties entry whose value is not a scalar (a
   // SLOT-typed `{ guid }` slot-content reference) — dropped BY NAME instead
   // of reaching ContractSchema as a prop value (the Card Grid refusal).
-  | 'instance-prop-unsupported';
+  | 'instance-prop-unsupported'
+  // Phase 2 fix round 2 (dump v1.31), REST-route receipts:
+  // node.styles.effect names a style id the response's styles map does not
+  // carry — the effect layers still ride `effects`; the identity is omitted.
+  | 'effect-style-unresolved'
+  // An overrides[] id the instance's returned subtree does not contain (a
+  // hidden branch REST elided) — the host override is not captured.
+  | 'host-override-unlocated'
+  // Two overridden TEXT descendants share one name path — both character
+  // overrides refused (the plugin dump's own code, dump v1.10).
+  | 'text-override-ambiguous-path';
 
 export interface MapDegradation {
   code: MapDegradationCode;
@@ -464,6 +539,10 @@ interface Ctx {
   styleById: Map<string, { name: string; key?: string }>;
   components: Map<string, { name: string; componentSetId?: string; key?: string }>;
   componentSets: Map<string, { name: string; key?: string }>;
+  /** Every node id in the mapped document → its name (dump v1.31 reactions:
+   *  a CHANGE_TO destination that is a sibling variant resolves to its NAME
+   *  here; an id outside the document stays an id). */
+  nodeNameById: Map<string, string>;
   report: MapReport;
 }
 
@@ -744,7 +823,11 @@ const NESTED_BOUND_FIELDS: Record<string, Record<string, string>> = {
   },
 };
 
-/** Paint/text bindings ride fill/stroke/text in dump v1, not `bound`. */
+/** Paint/text bindings ride fill/stroke/text in dump v1, not `bound`.
+ *  `effects` stays here because the node-level array carries the aliases
+ *  WITHOUT a channel — the per-effect `boundVariables` is read instead (dump
+ *  v1.31 effects[].bound), and an alias found only at node level is
+ *  receipted as channel-less in mapEffects, never skipped. */
 const BOUND_FIELDS_SKIPPED = new Set(['fills', 'strokes', 'characters', 'textRangeFills', 'componentProperties', 'effects', 'layoutGrids']);
 
 function mapBound(node: RestNode, ctx: Ctx, nodePath: string): Record<string, string> | undefined {
@@ -942,6 +1025,21 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
   if (s.lineHeightUnit === 'PIXELS' && typeof s.lineHeightPx === 'number') {
     text.lineHeight = s.lineHeightPx;
   }
+  // dump v1.31: the font FAMILY, verbatim (REST style.fontFamily ≡ Plugin
+  // fontName.family). Inter is copied too — propose treats Inter as the
+  // pipeline's own default and carries any other family as declared
+  // font-family; omitting Inter here would make "Inter drawn" and "not
+  // captured" the same absence. Phase 2 exam: 44 Manrope nodes rendered
+  // Inter with no receipt.
+  if (typeof s.fontFamily === 'string' && s.fontFamily.trim() !== '') text.fontFamily = s.fontFamily;
+  // dump v1.31: textAlignHorizontal → text.textAlign. LEFT is CSS's own
+  // default and is OMITTED (the plugin dump omits it too — the two producers
+  // must agree on what an absent field means: left-or-not-captured, never a
+  // different alignment). CENTER / RIGHT / JUSTIFIED carry as the declared
+  // text-align channel downstream.
+  if (s.textAlignHorizontal === 'CENTER' || s.textAlignHorizontal === 'RIGHT' || s.textAlignHorizontal === 'JUSTIFIED') {
+    text.textAlign = s.textAlignHorizontal;
+  }
   // dump v1.2: text channels with no dump projection are NAMED per node.
   const channels: string[] = [];
   if (typeof s.letterSpacing === 'number' && s.letterSpacing !== 0) channels.push(`letterSpacing ${s.letterSpacing}`);
@@ -1129,6 +1227,129 @@ function nameUnsupportedChannels(node: RestNode, ctx: Ctx, nodePath: string, str
   // Literal min/max sizing is CARRIED since dump v1.4 (mapNode) — no receipt.
 }
 
+/** VISIBLE effects (dump v1.2) + per-channel variable bindings (dump v1.31
+ *  effects[].bound). REST spells an effect's bindings TWICE: on the effect
+ *  itself (`effects[i].boundVariables.{radius,spread,color,offsetX,offsetY}`
+ *  — the carrier with a channel) and again as the node-level
+ *  `boundVariables.effects[]` alias list (no channel). Each per-effect alias
+ *  resolves through the variables response or receipts variable-unresolved
+ *  under its channel, like every other bound field; a node-level alias that
+ *  no effect carries is receipted as channel-less — nothing here is skipped
+ *  silently (Phase 2 exam: 5 Button hover roots × 5 bound channels, SILENT). */
+function mapEffects(node: RestNode, ctx: Ctx, nodePath: string): DumpEffect[] {
+  const effects: DumpEffect[] = [];
+  const seenAliasIds = new Set<string>();
+  (node.effects ?? []).forEach((e, i) => {
+    if (e.visible === false) return;
+    let eff: DumpEffect;
+    if ((e.type === 'DROP_SHADOW' || e.type === 'INNER_SHADOW') && e.color && e.offset) {
+      const alpha = e.color.a ?? 1;
+      eff = {
+        type: e.type,
+        color: alpha < 1 ? { hex: rgbToHex(e.color), alpha: Math.round(alpha * 10000) / 10000 } : { hex: rgbToHex(e.color) },
+        offset: { x: e.offset.x, y: e.offset.y },
+        radius: e.radius ?? 0,
+      };
+      if (typeof e.spread === 'number' && e.spread !== 0) eff.spread = e.spread;
+    } else {
+      eff = typeof e.radius === 'number' ? { type: e.type, radius: e.radius } : { type: e.type };
+    }
+    const bv = e.boundVariables;
+    if (bv) {
+      const bound: NonNullable<DumpEffect['bound']> = {};
+      for (const channel of REST_EFFECT_CHANNELS) {
+        const alias = bv[channel];
+        if (!alias || !isAlias(alias)) continue;
+        seenAliasIds.add(alias.id);
+        const name = resolveVarName(ctx, alias, nodePath, `effects[${i}].${channel}`);
+        if (name) bound[channel] = name;
+      }
+      if (Object.keys(bound).length > 0) eff.bound = bound;
+    }
+    effects.push(eff);
+  });
+  // The node-level alias list: anything the per-effect read did not place on
+  // a channel is a binding this route cannot attribute — named, not dropped.
+  const nodeLevel = node.boundVariables?.effects;
+  if (Array.isArray(nodeLevel)) {
+    for (const alias of nodeLevel) {
+      if (!isAlias(alias) || seenAliasIds.has(alias.id)) continue;
+      const name = ctx.varNameById.get(alias.id);
+      ctx.report.degradations.push({
+        code: 'variable-unresolved',
+        nodePath,
+        field: 'effects',
+        message: name
+          ? `effect binding to variable "${name}" (${alias.id}) appears only in the node-level boundVariables.effects list — REST names no channel for it (the per-effect boundVariables carries none); the resolved literal rides the effect, the binding is not attributable (dump v1.31)`
+          : `${variableUnresolvedMessage(alias.id, ctx)} (node-level boundVariables.effects alias with no per-effect channel)`,
+      });
+    }
+  }
+  return effects;
+}
+
+/** Prototype wiring (dump v1.31 reactions): REST `interactions[]` — one row
+ *  per trigger × action — with the CHANGE_TO destination resolved to its
+ *  NAME when the id is inside the mapped document (a sibling variant), the
+ *  transition type, and the duration converted from the wire's SECONDS to
+ *  the dump's milliseconds (the Plugin API's Transition.duration is seconds
+ *  too, so the two producers meet in ms). A response predating
+ *  `interactions` spells one destination as `transitionNodeID` with NO
+ *  trigger — carried with trigger 'UNKNOWN' and a note, never invented. */
+function mapReactions(node: RestNode, ctx: Ctx, nodePath: string): DumpReaction[] | undefined {
+  const out: DumpReaction[] = [];
+  const destination = (id: string | null | undefined, r: DumpReaction): void => {
+    if (!id) return;
+    r.destination = id;
+    const name = ctx.nodeNameById.get(id);
+    if (name !== undefined) r.destinationName = name;
+  };
+  for (const it of node.interactions ?? []) {
+    const trigger = it?.trigger?.type ?? 'UNKNOWN';
+    const actions = it?.actions ?? [];
+    if (actions.length === 0) {
+      out.push({ trigger });
+      continue;
+    }
+    for (const a of actions) {
+      const r: DumpReaction = { trigger };
+      const action = a.navigation ?? a.type;
+      if (action) r.action = action;
+      destination(a.destinationId, r);
+      if (a.transition?.type) r.transition = a.transition.type;
+      if (typeof a.transition?.duration === 'number') r.duration = Math.round(a.transition.duration * 1000);
+      out.push(r);
+    }
+  }
+  if (out.length === 0 && typeof node.transitionNodeID === 'string' && node.transitionNodeID !== '') {
+    const r: DumpReaction = { trigger: 'UNKNOWN' };
+    destination(node.transitionNodeID, r);
+    if (typeof node.transitionDuration === 'number') r.duration = Math.round(node.transitionDuration);
+    out.push(r);
+    ctx.report.notes.push(
+      `${nodePath}: transitionNodeID ${node.transitionNodeID} with no interactions[] — the legacy field names a destination but no trigger; carried as trigger UNKNOWN (dump v1.31 reactions)`,
+    );
+  }
+  return out.length > 0 ? out : undefined;
+}
+
+/** Walk a REST subtree collecting id → { node, name path } (dump v1.31
+ *  hostOverrides / dump v1.10 textOverrides on the REST route). Capped like
+ *  the plugin's findAll walk so a huge instance cannot stall the mapper. */
+function indexSubtree(root: RestNode, cap = 200): Map<string, { node: RestNode; path: string[] }> {
+  const byId = new Map<string, { node: RestNode; path: string[] }>();
+  const walk = (n: RestNode, path: string[]): void => {
+    for (const child of n.children ?? []) {
+      if (byId.size >= cap) return;
+      const p = [...path, child.name];
+      byId.set(child.id, { node: child, path: p });
+      walk(child, p);
+    }
+  };
+  walk(root, []);
+  return byId;
+}
+
 function mapNode(
   node: RestNode,
   ctx: Ctx,
@@ -1244,6 +1465,20 @@ function mapNode(
   if (typeof node.maxWidth === 'number' && node.maxWidth > 0) out.maxWidth = node.maxWidth;
   if (typeof node.maxHeight === 'number' && node.maxHeight > 0) out.maxHeight = node.maxHeight;
   if (node.layoutSizingHorizontal === 'FILL') out.fillWidth = true;
+  // dump v1.31: the vertical twin — REST layoutSizingVertical FILL. Under a
+  // ROW parent it is the cross-axis stretch, under a COLUMN parent the grow;
+  // propose disambiguates by parent direction exactly as for fillWidth.
+  if (node.layoutSizingVertical === 'FILL') out.fillHeight = true;
+  // dump v1.31: paint order reversed (REST itemReverseZIndex) — captured
+  // only when true, like layout.wrap / clipsContent; propose NAMES it.
+  if (node.itemReverseZIndex === true) out.itemReverseZIndex = true;
+  // dump v1.31: the aspect lock (REST targetAspectRatio {x, y}) — verbatim
+  // when both sides are positive; a FRAME part carries it as declared
+  // aspect-ratio, an instance/slot is named.
+  const ratio = node.targetAspectRatio;
+  if (ratio && typeof ratio.x === 'number' && typeof ratio.y === 'number' && ratio.x > 0 && ratio.y > 0) {
+    out.targetAspectRatio = { x: ratio.x, y: ratio.y };
+  }
   if (node.visible === false) out.hidden = true;
   // dump v1.2: NODE opacity (distinct from paint alpha) — the disabled-variant
   // wash-out channel (Eventz roots at opacity 0.4). Omitted when 1.
@@ -1252,24 +1487,28 @@ function mapNode(
   }
   // dump v1.2: VISIBLE effects — shadows with geometry + color; blur types
   // by name only (propose.ts names the gap; nothing is lost silently).
-  const effects: DumpEffect[] = [];
-  for (const e of node.effects ?? []) {
-    if (e.visible === false) continue;
-    if ((e.type === 'DROP_SHADOW' || e.type === 'INNER_SHADOW') && e.color && e.offset) {
-      const alpha = e.color.a ?? 1;
-      const eff: DumpEffect = {
-        type: e.type,
-        color: alpha < 1 ? { hex: rgbToHex(e.color), alpha: Math.round(alpha * 10000) / 10000 } : { hex: rgbToHex(e.color) },
-        offset: { x: e.offset.x, y: e.offset.y },
-        radius: e.radius ?? 0,
-      };
-      if (typeof e.spread === 'number' && e.spread !== 0) eff.spread = e.spread;
-      effects.push(eff);
+  // dump v1.31: per-channel bindings + the effect STYLE identity ride too.
+  const effects = mapEffects(node, ctx, nodePath);
+  if (effects.length > 0) out.effects = effects;
+  const effectStyleId = node.styles?.effect ?? node.styles?.EFFECT;
+  if (effectStyleId) {
+    const style = ctx.styleById.get(effectStyleId);
+    if (style) {
+      out.effectStyle = style.name;
+      if (style.key) out.effectStyleKey = style.key;
     } else {
-      effects.push(typeof e.radius === 'number' ? { type: e.type, radius: e.radius } : { type: e.type });
+      ctx.report.degradations.push({
+        code: 'effect-style-unresolved',
+        nodePath,
+        field: 'effectStyle',
+        message: `effect style id ${effectStyleId} has no name in the styles map — style identity omitted; the resolved effect layers still carry (dump v1.31)`,
+      });
     }
   }
-  if (effects.length > 0) out.effects = effects;
+  // dump v1.31: prototype wiring is READ to be named (the plugin dump has
+  // receipted it since v1.27; the REST route never looked).
+  const reactions = mapReactions(node, ctx, nodePath);
+  if (reactions) out.reactions = reactions;
 
   if (node.type === 'TEXT') {
     out.text = mapText(node, ctx, nodePath);
@@ -1308,8 +1547,32 @@ function mapNode(
       });
     }
     const props: Record<string, string | boolean> = {};
+    const fixedSwaps: Record<string, DumpFixedSwap> = {};
     for (const [key, def] of Object.entries(node.componentProperties ?? {})) {
-      if (def.type === 'INSTANCE_SWAP') continue; // slots ride propRefs instead
+      if (def.type === 'INSTANCE_SWAP') {
+        // dump v1.31 fixedSwaps: the child's own INSTANCE_SWAP property with
+        // the value the HOST fixed on this nested instance (a component id),
+        // resolved through the response's components map. Before v1.31 this
+        // `continue`d on the theory that "slots ride propRefs" — propRefs
+        // is THIS node's binding to a HOST property, a different fact; the
+        // child's configured swap (Chip's Icon, Toast's Button (Icon))
+        // vanished with no receipt (Phase 2 exam). The composition grammar
+        // carries props only, so propose NAMES the swap with its identity.
+        if (typeof def.value === 'string' && def.value !== '') {
+          const target = ctx.components.get(def.value);
+          const swap: DumpFixedSwap = { id: def.value };
+          if (target) {
+            swap.name = target.name;
+            if (target.key) swap.key = target.key;
+          } else {
+            ctx.report.notes.push(
+              `${nodePath}: INSTANCE_SWAP "${key}" = ${def.value} — the swapped component is not in the response's components map; the id is carried without a name/key (dump v1.31 fixedSwaps)`,
+            );
+          }
+          fixedSwaps[key.split('#')[0]] = swap;
+        }
+        continue;
+      }
       // Phase 2 exam: a SLOT-typed value is `{ guid }` — a slot-content node
       // reference, not a prop value. Copied verbatim it reached ContractSchema
       // as `props.sectionFooter = { guid: … }` and refused the WHOLE set (Card
@@ -1331,6 +1594,78 @@ function mapNode(
       props[key] = def.value;
     }
     if (Object.keys(props).length > 0) out.componentProperties = props;
+    if (Object.keys(fixedSwaps).length > 0) out.fixedSwaps = fixedSwaps;
+    // dump v1.10 textOverrides + dump v1.31 hostOverrides on the REST route:
+    // `overrides[]` is Figma's OWN record of what this host changed inside
+    // the instance ({ id, overriddenFields }), and the nodes endpoint returns
+    // the instance subtree alongside it — so each id resolves to a NAME PATH
+    // inside the instance without diffing anything against the main
+    // component. 'characters' on a TEXT descendant is the v1.10 channel;
+    // every other field is a v1.31 host override, with the descendant's
+    // first solid when "fills" is among them (the icon colour per variant,
+    // SILENT on the Phase 2 exam). An id the returned subtree lacks is
+    // receipted, never guessed. Internals are still not recursed as anatomy.
+    const overrides = (node.overrides ?? []).filter(
+      (o) => o && typeof o.id === 'string' && Array.isArray(o.overriddenFields) && o.overriddenFields.length > 0,
+    );
+    if (overrides.length > 0) {
+      const byId = indexSubtree(node);
+      const textOverrides: Record<string, string> = {};
+      const ambiguous = new Set<string>();
+      const hostOverrides: DumpHostOverride[] = [];
+      let unlocated = 0;
+      let selfRows = 0;
+      for (const o of overrides) {
+        // The instance's OWN id appears in overrides[] when the host changed
+        // the instance root itself (measured on the exam kit: every Button
+        // "Icon Before" lists {id: <self>, overriddenFields: [boundVariables,
+        // name, targetAspectRatio]}). Those fields ride THIS node's own
+        // channels (bound / name / targetAspectRatio / hidden / stroke /
+        // componentProperties / bbox) — a root entry is located, not an
+        // internal override, and is not a row here.
+        if (o.id === node.id) {
+          selfRows++;
+          continue;
+        }
+        const hit = byId.get(o.id);
+        if (!hit) {
+          unlocated++;
+          continue;
+        }
+        const path = hit.path.join('/');
+        if (o.overriddenFields.includes('characters') && hit.node.type === 'TEXT' && typeof hit.node.characters === 'string') {
+          if (path in textOverrides || ambiguous.has(path)) {
+            ambiguous.add(path);
+            delete textOverrides[path];
+            ctx.report.degradations.push({
+              code: 'text-override-ambiguous-path',
+              nodePath,
+              message: `two text descendants of this instance share the name path "${path}" — both character overrides refused (a name path must identify one node)`,
+            });
+          } else {
+            textOverrides[path] = hit.node.characters;
+          }
+        }
+        const fields = o.overriddenFields.filter((f) => f !== 'characters');
+        if (fields.length > 0) {
+          const h: DumpHostOverride = { path, fields };
+          if (fields.includes('fills')) {
+            const fill = mapPaint(hit.node.fills, ctx, `${nodePath}/${path}`, 'fill');
+            if (fill) h.fill = fill;
+          }
+          hostOverrides.push(h);
+        }
+      }
+      if (Object.keys(textOverrides).length > 0) out.textOverrides = textOverrides;
+      if (hostOverrides.length > 0) out.hostOverrides = hostOverrides;
+      if (unlocated > 0) {
+        ctx.report.degradations.push({
+          code: 'host-override-unlocated',
+          nodePath,
+          message: `${unlocated} of ${overrides.length - selfRows} override(s) reported by overrides[] name an id the returned instance subtree does not contain (hidden branch elided by REST, or past the ${200}-node index cap) — not captured (dump v1.31)`,
+        });
+      }
+    }
     // dump v1.5: the OBSERVED bounding box — the honest geometry a child STUB
     // renders when the child contract is out of scope (dump v1 still never
     // recurses into instance internals).
@@ -1364,7 +1699,10 @@ const REST_CAPTURE_GAPS: readonly string[] = [
   'absolute placement on non-shape nodes (dump v1.7): not captured on this route — an out-of-flow FRAME/TEXT (e.g. a corner-pinned badge) re-enters the flow and renders in-line',
   'image fills (dump v1.7 imageFill / v1.9 imageHash): not captured on this route — an IMAGE paint (e.g. an avatar photo) is read as no fill and renders as an empty box',
   'fixed sizes on plain rectangles (dump v1.8 fixedSize): not captured on this route — a drawn width/height is lost and the node sizes to content',
-  'instance text overrides (dump v1.10 textOverrides): not captured on this route — a host’s edited label is read as the child’s own default characters',
+  // 'instance text overrides (dump v1.10 textOverrides)' left this list in
+  // dump v1.31: REST returns overrides[] AND the instance subtree, so the
+  // channel is captured here (mapNode, INSTANCE branch) — the old line was a
+  // read limit nobody had measured, not a transport fact.
   'strokeAlign (dump v1.11): not captured on this route — an OUTSIDE stroke (focus ring) will be read as an inward border',
   'layout wrap + row spacing (dump v1.12 layout.wrap/rowSpacing): not captured on this route — a wrapping row is read as a single non-wrapping line',
   'the full constraints map (dump v1.13): not captured on this route — MIN/MAX/CENTER/STRETCH/SCALE pinning carries only on shape decor, not on other node types',
@@ -1410,8 +1748,8 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
   const provenance: NonNullable<DumpFile['_provenance']> & { captureGaps: string[] } = {
     fileKey: options.fileKey ?? null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.5) for design→contract proposal.',
-    dumpVersion: '1.5',
+    note: 'Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.31) for design→contract proposal.',
+    dumpVersion: '1.31',
     captureGaps: [
       ...(options.variables ? [] : [variablesCaptureGap(variablesUnavailable)]),
       ...REST_CAPTURE_GAPS,
@@ -1463,6 +1801,14 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
           : { name: s.name, ...(s.key ? { key: s.key } : {}) },
       );
     }
+    // dump v1.31 reactions: every id in THIS document → name, so a CHANGE_TO
+    // destination that is a sibling variant carries its name, not an id.
+    const nodeNameById = new Map<string, string>();
+    const indexNames = (n: RestNode): void => {
+      nodeNameById.set(n.id, n.name);
+      for (const child of n.children ?? []) indexNames(child);
+    };
+    indexNames(doc);
     const ctx: Ctx = {
       varNameById,
       ...(variablesIndex ? { variables: variablesIndex } : {}),
@@ -1471,6 +1817,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       styleById,
       components: new Map(Object.entries(entry.components ?? {})),
       componentSets: new Map(Object.entries(entry.componentSets ?? {})),
+      nodeNameById,
       report,
     };
 

@@ -196,3 +196,123 @@ Not fixtured (no manifest can exercise HTTP): `cli.ts` dropping `classifyVariabl
 6. Effect styles, effect variable bindings, prototype reactions, icon-colour overrides, fixed swap values on nested instances, vertical FILL, fixed child-frame sizes, non-Inter families, text-align, declared axis defaults: silent (14 cases).
 7. Generated `Card.tsx` does not type-check (slot named `content`).
 8. `lineHeight: 1.5 (PIXELS)` — the kit binds line height to a variable valued 1.5; Figma renders it as 1.5px too (text overlaps on both sides). Faithful, not a defect of the engine; worth telling the kit's author.
+
+---
+
+## RE-MEASURED after fix rounds 1+2 — 2026-08-23
+
+Tree: `phase-2/fix-round-1` at `4a711b55` with F4 (the dump v1.31 REST/plugin fields) applied — the commit that carries this section. Same file `aekVseUceg35tVn62knRrj`, same read-only REST route, same PAT (still without `file_variables:read`, deliberately — the comparison is like-for-like with 2026-08-22). Nothing in the engine was changed during the re-measure; the two silences it found are pinned red below, not fixed.
+
+Artifacts (scratch, outside the tree): `…/scratchpad/f4-exam-out/` — `figma-ds.dump.json` (1,113,196 bytes, dump v1.31), `rest-cli.log`, `rest-raw-15sets.json` (re-fetched, not copied), `proposed/` (80 proposals, `figma-proposals.md`), `proposed/generated/` (78 components + `tokens.css`, generated with THIS tree's `packages/cli/dist/cli.js`; the first pass went through the mirrored `node_modules/.bin` and ran the main tree's pre-F3 CLI — kept as `proposed/generated.main-cli-pre-f3/` + `typecheck.main-cli-pre-f3.log`, renders byte-identical), `figma-png/`, `react-png/`, `side-by-side/`, `accounting.json`, `account2.mjs`, `accounting2.txt`, `four-set-table2.md`. PNGs: `side-by-side/{button-primary-default,badge-sm-success,badge-default-success,card-default,toast-default}.png`.
+
+**Result: SILENT = 2 of 3,556** (was 295). 1,594 carried · 1,960 named · 2 silent (0 render-inert) · 0 wrong-name (was 8) · 0 named-but-should-carry (was 25). Both silences are one node — `Card:Variant=Inline/Container/Image` — and are new findings with cases; the 102 effect-binding receipts (77 on the 15 sets) are NAMED behind the token scope as predicted.
+
+### 1. Dump — what changed on the same route
+
+```
+✔ 77 set(s) → figma-ds.dump.json          dump v1.31 · 1,113,196 bytes (was 332,960 at v1.5)
+1,908 receipts, now IN the dump (`_degradations`) and repeated per set in figma-proposals.md — no longer stderr-only:
+  1746 variable-unresolved · 94 vector-geometry-unsupported · 36 stroke-style-unsupported · 14 text-channel-unsupported
+  · 8 instance-prop-unsupported (new: the SLOT-typed {guid} prop values) · 6 stroke-weights-nonuniform · 3 rotation-unsupported
+  · 1 variables-unavailable (new, file-level, once): "/v1/files/:key/variables/local refused with HTTP 403: the token lacks the
+    file_variables:read scope (NOT a plan limit — the same token reads the file). FIX: regenerate the token with file_variables:read"
+_provenance.captureGaps: 7 (was 8 — instance text overrides now carry)
+```
+
+The 1,595 "Enterprise" lines are gone; the one user-fixable diagnosis is printed first, and every `variable-unresolved` row repeats it. Every binding still degrades to its Default-mode literal (the PAT was not changed).
+
+### 2. Propose — `--reviewable-inversion`, empty corpus, empty contracts dir
+
+```
+77 sets proposed (+1 stub), 0 skipped
+Button 596 notes (was 53), 0 unbound (was 1) · Badge 143 / 0 (was 1) · Card 126 / 2 (minWidth, maxWidth 416 — unchanged) · Toast 213 / 0
+```
+
+The note counts grew because the dump's receipts ride the report now; the unbound counts fell because the root fills carry (`Button:root fill: drawn in 4/5 variant(s) — the ABSENT variants mint #00000000`; Badge `5/10`). Badge's proposed default is `size=default`, the set's declared default (was the first variant, `sm`); Heading `tag=h1, variant=xxl`; Chip `dismissible=true`.
+
+### 3. Generate, type-check, render
+
+`npx ds-contracts generate <all 80 files> …` → **78 components generated, exit 0, first try** (was: the whole batch refused on the section-header/footer double spelling, 76 after dropping two by hand). `tokens.css`: 456 custom properties, 0 unreferenced.
+
+Type-check: **0 errors** (was 1). `CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'content'>` — F3's prop-collision rule (`packages/core/src/prop-collision.ts`, slot names included) carries 08-22's defect #7. Instrument note: the first re-measure pass ran `npx ds-contracts generate` through the worktree's mirrored `.bin`, which resolves to the MAIN tree's pre-F3 `packages/cli/dist` — it reproduced TS2430 and a case was authored for it before the instrument was checked; re-run with this tree's CLI, the error is gone and the case was retracted. Component count (78), `tokens.css` (456) and every React PNG are byte-identical between the two CLIs.
+
+Render (same harness as 08-22: esbuild bundle + Playwright @2x, Figma `/v1/images?scale=2` left, React right; 0 page errors):
+
+| cell | 08-22 | 08-23 | what changed / what is still off |
+|---|---|---|---|
+| `button-primary-default` | **NOT recognisable** (no fill) | **recognisable** | solid #8f8781 rounded fill, white label; React 90×28 vs Figma 88×28. Nothing visibly off at this cell. |
+| `badge-sm-success` | recognisable | recognisable | 8×8 green dot both sides (unchanged). |
+| `badge-default-success` | same shape, missing fill | **same as Figma** | the #b7e9c5 pill fill carries; both sides still collapse to a ~2px bar under the kit's 1.5 px line height (faithful). |
+| `card-default` | **NOT recognisable** | **still NOT recognisable** — but every loss is named | Figma: light-grey GLASS surface, image glyph, Kicker/Heading/Dek, Chip, arrow. React: near-white box (`#00000001` — the REST-resolved fill under GLASS; `[DROP_SHADOW, GLASS, BACKGROUND_BLUR] … channel NAMED, not proposed`) holding one grey square (vector glyph named). The Content slot's Title/Footer FRAMEs are now NAMED (`design-time content that is not a bare INSTANCE … a FRAME child has no carrier and is NAMED`); the harness passes only the Image child and the Default story passes no `content`, as on 08-22. The picture is the same; the silence is not. |
+| `toast-default` | recognisable | recognisable | grey bar, 1px border, shadow, 600×48; title/body overlap on both sides (kit line height). Icon glyph absent (vector, named); close glyph absent — the nested Button (Icon)'s fixed swap is now NAMED: `fixes INSTANCE_SWAP "Icon" = "close" (53:3841, key cc1cced5…) in 5/5 variant(s) (dump v1.31 fixedSwaps)`. |
+
+### 4. Accounting — the four sampled sets (same denominator rules; `account2.mjs` re-authors only the classification of constructs a fix moved, each rule quoting the note it now matches)
+
+| set | carried | named | silent (inert) | wrong-name | should-carry |
+|---|---|---|---|---|---|
+| Button | 426 → **446** | 549 → **638** | 109 (65) → **0** | 0 | 20 → **0** |
+| Badge | 88 → **99** | 96 → **91** | 6 → **0** | 0 | 5 → **0** |
+| Card | 34 → **34** | 34 → **42** | 10 → **2** | 2 → **0** | 0 |
+| Toast | 127 → **127** | 156 → **186** | 30 (5) → **0** | 1 → **0** | 0 |
+
+Where each 08-22 silence went (construct · rows on the four sets · disposition now · the note):
+
+- `interactions` ON_HOVER→CHANGE_TO (Button 2) → NAMED: `prototype reaction(s) ON_HOVER → CHANGE_TO "Variant=Primary, State=Hover" (53:2786); SMART_ANIMATE 300ms … prototype-reactions-unsupported` (dump v1.31 `reactions`).
+- `styles.effect` (Button 5, Card 2, Toast 5) → NAMED: `effects ride the EFFECT STYLE "drop-shadow/default" (key a7ba60f2…) in 5/5 variant(s) — the style's resolved layers carry as box-shadow; the style IDENTITY has no token class` (`effectStyle`/`effectStyleKey`).
+- `boundVariables.effects` (Button 5, Card 2, Toast 5 nodes; 48 aliases) → NAMED: `dump variable-unresolved: … effects[0].radius/spread/color/offsetX/offsetY` — behind the token scope, as every other binding.
+- `overrides[].fills` (Button 32, Toast 10) → NAMED: `host override(s) on nested "arrow-left" internals — "Vector" fills = #f7f6f5 in 1/5 variant(s) [Variant=Primary] …` (`hostOverrides`).
+- `targetAspectRatio` (Button 50, Toast 5; inert) → NAMED: `aspect-ratio lock 16 / 16 … on a nested instance — … the lock acts on resize`.
+- `itemReverseZIndex` (Button 15; inert) → NAMED: `itemReverseZIndex is true in 3/5 variant(s) — paint order reversed … render-inert unless children overlap … NAMED, not carried`.
+- Badge `propertyDefinitions.Size.defaultValue` → CARRIED (`prop size: the set's DECLARED default for "Size" is "Default" … the proposal's default follows the declared default`).
+- Badge `textAlignHorizontal=CENTER` (5) → CARRIED (`carried as declared text-align: center`; `text.textAlign`).
+- Card SLOT child FRAMEs Title/Footer (4) → NAMED (quoted above).
+- Toast `componentProperties.Icon#21315:0` fixed swap (5) → NAMED (quoted above).
+- Card `Inline/Container/Image` `layoutSizingVertical: FILL` (1) → **still SILENT** — the dump now carries `fillHeight: true` on the SLOT, but the proposed slot part has no layout block, no `height: 100%`, no note. Cause (core/propose-figma.ts `carryCrossAxisFill`): the Container is a COLUMN in Default and a ROW in Inline, so the function returns at `mixed parent modes — crossAxisFillByProp's door`, and `crossAxisFillByProp` requires every occurrence to be `fillWidth` (it spells WIDTH per variant only). Case `layout-fill-height-parent-mode-by-variant`.
+- Card `Inline/Container/Image` FIXED width 308 on a SLOT (1) → **still SILENT** — `nameFixedChildGeometry` (the FC-GEOMETRY-EXCLUDED receipt, which does fire for Button (contract)'s 20×20 frames, 60 rows) skips the width axis when ANY occurrence has `fillWidth` (`if (dim === 'width' && m.occ.some((o) => o.node.fillWidth === true)) continue;`); the Default variant fills, so the Inline occurrence's FIXED px is never receipted. Case `slot-fixed-width-by-variant`.
+
+Wrong-name (was 8) → 0: the six SLOT definitions are read and named by content (`slot "Image" preferredValues name 1 component key(s) with no in-scope contract …`; `slot "Content" SLOT preferredValues is EMPTY ([]) — an UNCONSTRAINED swap by the designer's own declaration`); the two empty INSTANCE_SWAP lists say `EMPTY ([]) — UNCONSTRAINED` instead of "not captured in dump v1". Named-but-should-carry (was 25) → 0: both root fills carry, the absent variants minting `#00000000`.
+
+### All 15 sets — counts (08-22 → 08-23)
+
+| set | carried | named | silent (inert) | wrong-name | should-carry |
+|---|---|---|---|---|---|
+| Badge | 88 → 99 | 96 → 91 | 6 → 0 | 0 | 5 → 0 |
+| Button | 426 → 446 | 549 → 638 | 109 (65) → 0 | 0 | 20 → 0 |
+| Button (Icon) | 31 → 31 | 43 → 51 | 8 (5) → 0 | 0 | 0 |
+| Button (contract) | 225 → 225 | 290 → 350 | 60 → 0 | 0 | 0 |
+| Chip | 153 → 154 | 194 → 208 | 15 → 0 | 1 → 0 | 0 |
+| Dek | 19 | 14 | 0 | 0 | 0 |
+| Heading | 296 → 340 | 294 → 294 | 44 → 0 | 0 | 0 |
+| Image | 9 | 9 | 0 | 0 | 0 |
+| Kicker | 17 → 21 | 16 → 16 | 4 → 0 | 0 | 0 |
+| Button Group | 15 | 7 | 0 | 1 → 0 | 0 |
+| Section Header | 27 → 37 | 30 → 24 | 4 (1) → 0 | 0 | 0 |
+| Section Footer | 16 → 18 | 14 → 14 | 2 → 0 | 0 | 0 |
+| Toast | 127 → 127 | 156 → 186 | 30 (5) → 0 | 1 → 0 | 0 |
+| Card | 34 → 34 | 34 → 42 | 10 → 2 | 2 → 0 | 0 |
+| Section | 19 → 19 | 13 → 16 | 3 → 0 | 3 → 0 | 0 |
+| **total** | **1,502 → 1,594** | **1,759 → 1,960** | **295 (76) → 2 (0)** | **8 → 0** | **25 → 0** |
+
+Every 08-22 row was re-classified by one of: a landed fix (293 SILENT rows: 56 → CARRIED — axis defaults 4, fontFamily Manrope 44, textAlign 8; 237 → NAMED — FIXED child frames 60, targetAspectRatio 60, host overrides 44, itemReverseZIndex 16, effect bindings 15, effect styles 15, fixed swaps 15, SLOT child frames 7, SLOT-typed prop values 3, reactions 2), the fill rule (25 NAMED → CARRIED), or — 11 rows in Section Header, an instrument note — `componentProperties` on nested Kicker/Heading/Dek/Button Group that 08-22's heuristic flagged NAMED because one "does not map through" note (the Button Group's SLOT-typed `Items`) mentioned the node; that prop is now an `instance-prop-unsupported` receipt and the others `canonicalized through ds.*'s bindings`. `account2.mjs` also stops the min/max-width heuristics from matching the binding receipts that now ride the report (they read notes, not receipts). Denominator unchanged at 3,556.
+
+### 5. Modes — unchanged
+
+Still 1,025 variables / 11 collections on the canvas; `captured.dtcg.json` still not written; every literal is still the Default mode of its collection with no mode recorded. What changed is only that the refusal now names its cause and its fix once, at file level, instead of calling it Enterprise 1,595 times.
+
+### 6. Cases
+
+The 19 cases authored on 08-22 are all green (re-recorded by F1–F4 and the propose rounds; their `observed` fields carry the closure). This re-measure adds two, pinned red (`status: "red"`, `observedCheck` pins the silence):
+
+| case | boundary | expect | observed (pinned) |
+|---|---|---|---|
+| slot-fixed-width-by-variant | dump | LEDGERED (FC-GEOMETRY-EXCLUDED receipt on the FIXED occurrence) | SILENT — `nameFixedChildGeometry` skips the axis when any occurrence fills |
+| layout-fill-height-parent-mode-by-variant | dump | LEDGERED (the HUG-parent FILL-height note, per variant) | SILENT — `carryCrossAxisFill` returns on mixed parent modes; `crossAxisFillByProp` spells width only |
+
+`npx tsx extract/figma/conformance/run.ts` → `150 case(s): 148 PASS, 2 RED-EXPECTED (pinned findings), 0 FAIL, 0 UNEXPECTED-GREEN, 0 UNLISTED, 0 MISSING` (before this re-measure: 148/148 PASS). `accuracy/grammar.json` canvas denominator: 150 (CARRIED 103 · LEDGERED 38 · REFUSED 9).
+
+### 7. What remains, in the order a designer hits it
+
+1. The kit's 1,025 variables are still unnameable on this route until the PAT gains `file_variables:read` — the CLI now says exactly that, once, with the fix. The 102 effect-binding receipts dump-wide (77 on these 15 sets) sit behind the same scope.
+2. Card is still not recognisable in the harness cell: the GLASS/BACKGROUND_BLUR surface is named-not-proposed (the resolved fill is `#00000001`), the vector glyphs are named, and the Default story passes no content. All named; none carried.
+3. The Card Inline Image SLOT's `fillHeight` and FIXED 308px are the two silences left on the 15 sets (cases above).
+4. `lineHeight: 1.5 (PIXELS)` — the kit's own authoring; faithful on both sides.

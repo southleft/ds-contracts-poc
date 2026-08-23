@@ -1,4 +1,35 @@
-// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.17).
+// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.31).
+//
+// dump v1.31 (Phase 2 fix round 2, 2026-08-23) — ten facts the Phase 2 exam
+// measured as SILENT on the REST route, now read by BOTH producers in ONE
+// spelling (extract/figma/rest/map.ts is the REST twin of every line below;
+// extract/figma/conformance pins each at both boundaries):
+//   fillHeight         layoutSizingVertical === 'FILL' — the vertical twin of
+//                      fillWidth (cross-axis stretch under a ROW parent, grow
+//                      under a COLUMN parent; propose disambiguates)
+//   text.fontFamily    fontName.family, verbatim (Inter included — "Inter
+//                      drawn" and "not captured" must stay different facts)
+//   text.textAlign     textAlignHorizontal CENTER | RIGHT | JUSTIFIED (LEFT is
+//                      the CSS default and is omitted) — CARRIED now, no
+//                      longer a text-channel-unsupported receipt
+//   effectStyle /      effectStyleId → the EffectStyle's name and publish key
+//   effectStyleKey     (provenance beside the carried box-shadow)
+//   effects[].bound    per-channel variable bindings (radius / spread / color /
+//                      offsetX / offsetY → slash-form name); a binding whose
+//                      variable cannot be fetched is variable-unresolved
+//   reactions          prototype wiring as DATA beside the v1.27 receipt:
+//                      trigger, action, destination id + NAME, transition,
+//                      duration in ms — read only to be named
+//   hostOverrides      InstanceNode.overrides entries whose overriddenFields go
+//                      beyond 'characters' → { path, fields, fill } (the
+//                      descendant's first solid when fills is among them);
+//                      the same walk textOverrides already used
+//   fixedSwaps         INSTANCE_SWAP applied values on a nested instance →
+//                      { id, name, key } of the swapped-in main component
+//                      (was `continue`d — "slots ride propRefs" named THIS
+//                      node's host binding, a different fact)
+//   itemReverseZIndex  captured only when true (paint order reversed)
+//   targetAspectRatio  { x, y } when both > 0 (the aspect lock)
 //
 // Transport-agnostic Plugin API script (same boundary as extract/figma-dump.js
 // and parity/extract-figma.plugin.js): run it through any console/plugin-runner
@@ -813,6 +844,21 @@ async function dumpNode(node, nodePath, parent) {
   if ('layoutSizingHorizontal' in node && node.layoutSizingHorizontal === 'FILL') {
     out.fillWidth = true;
   }
+  // dump v1.31: the vertical twin (REST map.ts: layoutSizingVertical FILL).
+  if ('layoutSizingVertical' in node && node.layoutSizingVertical === 'FILL') {
+    out.fillHeight = true;
+  }
+  // dump v1.31: paint order reversed — captured only when true, like
+  // layout.wrap / clipsContent; propose NAMES it (no contract carrier).
+  if ('itemReverseZIndex' in node && node.itemReverseZIndex === true) {
+    out.itemReverseZIndex = true;
+  }
+  // dump v1.31: the aspect lock — verbatim when both sides are positive
+  // (the Plugin API reports a Vector; null/zero means unlocked).
+  if ('targetAspectRatio' in node && node.targetAspectRatio && typeof node.targetAspectRatio.x === 'number'
+      && typeof node.targetAspectRatio.y === 'number' && node.targetAspectRatio.x > 0 && node.targetAspectRatio.y > 0) {
+    out.targetAspectRatio = { x: node.targetAspectRatio.x, y: node.targetAspectRatio.y };
+  }
   // dump v1.1: hidden nodes are captured, not skipped — visibility-bound
   // parts recover their boolean default from this (REST mapper parity).
   if (node.visible === false) out.hidden = true;
@@ -825,19 +871,53 @@ async function dumpNode(node, nodePath, parent) {
   // carry the type — propose.ts NAMES what it cannot invert.
   if ('effects' in node && Array.isArray(node.effects) && node.effects.length > 0) {
     const effects = [];
-    for (const e of node.effects) {
+    for (let i = 0; i < node.effects.length; i++) {
+      const e = node.effects[i];
       if (e.visible === false) continue;
+      let eff;
       if (e.type === 'DROP_SHADOW' || e.type === 'INNER_SHADOW') {
         const alpha = typeof e.color.a === 'number' ? e.color.a : 1;
         const color = alpha < 1 ? { hex: rgbToHex(e.color), alpha: Math.round(alpha * 10000) / 10000 } : { hex: rgbToHex(e.color) };
-        const eff = { type: e.type, color, offset: { x: e.offset.x, y: e.offset.y }, radius: e.radius };
+        eff = { type: e.type, color, offset: { x: e.offset.x, y: e.offset.y }, radius: e.radius };
         if (typeof e.spread === 'number' && e.spread !== 0) eff.spread = e.spread;
-        effects.push(eff);
       } else {
-        effects.push(typeof e.radius === 'number' ? { type: e.type, radius: e.radius } : { type: e.type });
+        eff = typeof e.radius === 'number' ? { type: e.type, radius: e.radius } : { type: e.type };
       }
+      // dump v1.31: per-channel variable bindings (Effect.boundVariables —
+      // the REST twin reads effects[i].boundVariables the same way). A
+      // binding the API cannot fetch is a variable-unresolved receipt under
+      // its channel; the resolved literal above still rides the effect.
+      const bv = e.boundVariables;
+      if (bv && typeof bv === 'object') {
+        const bound = {};
+        for (const channel of ['radius', 'spread', 'color', 'offsetX', 'offsetY']) {
+          const alias = bv[channel];
+          if (!alias || !alias.id) continue;
+          const name = await varNameById(alias.id, node);
+          if (name) bound[channel] = name;
+          else degrade('variable-unresolved', nodePath, 'effects[' + i + '].' + channel + ': variable id ' + alias.id + ' not found (getVariableByIdAsync returned null) — the resolved literal rides the effect; the binding is not named (dump v1.31)');
+        }
+        if (Object.keys(bound).length > 0) eff.bound = bound;
+      }
+      effects.push(eff);
     }
     if (effects.length > 0) out.effects = effects;
+  }
+  // dump v1.31: the EFFECT STYLE identity (REST twin: node.styles.effect via
+  // the styles map) — the style's name and publish key, carried as
+  // provenance beside the resolved layers. figma.mixed / '' = no style.
+  if ('effectStyleId' in node && typeof node.effectStyleId === 'string' && node.effectStyleId !== '') {
+    try {
+      const style = await figma.getStyleByIdAsync(node.effectStyleId);
+      if (style) {
+        out.effectStyle = style.name;
+        if (typeof style.key === 'string' && style.key) out.effectStyleKey = style.key;
+      } else {
+        degrade('effect-style-unresolved', nodePath, 'effect style id ' + node.effectStyleId + ' has no style (getStyleByIdAsync returned null) — style identity omitted; the resolved effect layers still carry (dump v1.31)');
+      }
+    } catch (e) {
+      degrade('effect-style-unresolved', nodePath, 'effectStyleId read threw (' + (e && e.message ? e.message : String(e)) + ') — style identity omitted; the resolved effect layers still carry (dump v1.31)');
+    }
   }
   // dump v1.27: prototype CHANGE_TO / ON_HOVER / ON_PRESS wiring is NAMED,
   // not silent. Emit writes these on State-preview Default-plane variants.
@@ -848,12 +928,37 @@ async function dumpNode(node, nodePath, parent) {
   if ('reactions' in node && Array.isArray(node.reactions) && node.reactions.length > 0) {
     try {
       const bits = [];
+      // dump v1.31: the wiring as DATA beside the v1.27 receipt (REST twin:
+      // interactions[] → reactions[]). Destination NAME resolved by id
+      // (a sibling variant's "State=Hover"); Transition.duration is seconds
+      // on the Plugin API and milliseconds in the dump, as over REST.
+      const reactions = [];
       for (const r of node.reactions) {
         const trg = r && r.trigger && r.trigger.type ? r.trigger.type : 'UNKNOWN';
         const acts = (r && r.actions) || (r && r.action ? [r.action] : []);
         const kinds = acts.map((a) => (a && (a.navigation || a.type)) || 'UNKNOWN').join(',');
         bits.push(trg + '→' + kinds);
+        if (acts.length === 0) {
+          reactions.push({ trigger: trg });
+          continue;
+        }
+        for (const a of acts) {
+          const rx = { trigger: trg };
+          const action = a && (a.navigation || a.type);
+          if (action) rx.action = action;
+          if (a && typeof a.destinationId === 'string' && a.destinationId) {
+            rx.destination = a.destinationId;
+            try {
+              const dest = await figma.getNodeByIdAsync(a.destinationId);
+              if (dest && typeof dest.name === 'string') rx.destinationName = dest.name;
+            } catch (e) { /* destination outside the readable scope — id only */ }
+          }
+          if (a && a.transition && typeof a.transition.type === 'string') rx.transition = a.transition.type;
+          if (a && a.transition && typeof a.transition.duration === 'number') rx.duration = Math.round(a.transition.duration * 1000);
+          reactions.push(rx);
+        }
       }
+      if (reactions.length > 0) out.reactions = reactions;
       degrade(
         'prototype-reactions-unsupported',
         nodePath,
@@ -905,13 +1010,10 @@ async function dumpNode(node, nodePath, parent) {
     // `text-overflow` are DECLARED_CHANNELS the canvas DRAWS — the emitter
     // writes textAlignHorizontal and textTruncation back to Figma — and no
     // reader mentioned either property, so a designer's centred label or
-    // authored ellipsis vanished on the return leg with no receipt. Named here
-    // rather than carried: naming closes the SILENT hole, which is the bar;
-    // carrying them is a follow-up with its own measured value.
-    if (node.textAlignHorizontal && node.textAlignHorizontal !== 'LEFT') {
-      const ALIGN_CSS = { CENTER: 'center', RIGHT: 'right', JUSTIFIED: 'justify' };
-      channels.push('textAlignHorizontal ' + node.textAlignHorizontal + ' (the canvas twin of CSS text-align: ' + (ALIGN_CSS[node.textAlignHorizontal] || String(node.textAlignHorizontal).toLowerCase()) + ' — drawn, not read back)');
-    }
+    // authored ellipsis vanished on the return leg with no receipt. Since
+    // dump v1.31 textAlignHorizontal is CARRIED (text.textAlign below; the
+    // REST twin copies style.textAlignHorizontal) — the vertical alignment
+    // and truncation stay named receipts.
     if (node.textAlignVertical && node.textAlignVertical !== 'TOP') {
       channels.push('textAlignVertical ' + node.textAlignVertical + ' (no CSS text-align twin — vertical placement of the text inside its own box; CSS vertical-align is inline baseline alignment, a different fact)');
     }
@@ -928,6 +1030,22 @@ async function dumpNode(node, nodePath, parent) {
     };
     if (typeof pxLineHeight === 'number') text.lineHeight = pxLineHeight;
     if (node.textCase !== figma.mixed && TEXT_CASE_CAPTURED[node.textCase]) text.textCase = node.textCase;
+    // dump v1.31: the font FAMILY, verbatim (REST twin: style.fontFamily).
+    // Inter is copied too — propose treats Inter as the pipeline default and
+    // carries any other family as declared font-family; omitting Inter would
+    // make "Inter drawn" and "not captured" the same absence. A mixed
+    // fontName carries nothing (the fontStyle above is null for the same
+    // reason) — a named receipt, not a first-range guess.
+    if (node.fontName !== figma.mixed && node.fontName && typeof node.fontName.family === 'string' && node.fontName.family.trim() !== '') {
+      text.fontFamily = node.fontName.family;
+    } else if (node.fontName === figma.mixed) {
+      degrade('text-channel-unsupported', nodePath, 'fontName is mixed across character ranges — dump v1 carries ONE family/face per text node; fontFamily and fontStyle omitted (dump v1.31)');
+    }
+    // dump v1.31: textAlignHorizontal CENTER | RIGHT | JUSTIFIED → text.textAlign
+    // (LEFT is the CSS default and is OMITTED — the REST twin omits it too).
+    if (node.textAlignHorizontal === 'CENTER' || node.textAlignHorizontal === 'RIGHT' || node.textAlignHorizontal === 'JUSTIFIED') {
+      text.textAlign = node.textAlignHorizontal;
+    }
     if (node.textStyleId && node.textStyleId !== figma.mixed) {
       const style = await figma.getStyleByIdAsync(node.textStyleId);
       if (style) {
@@ -1010,11 +1128,37 @@ async function dumpNode(node, nodePath, parent) {
     // collapsed TEXT and VARIANT properties into one ambiguous shape.
     try {
       const props = {};
+      const fixedSwaps = {};
       for (const [key, def] of Object.entries(node.componentProperties || {})) {
-        if (def.type === 'INSTANCE_SWAP') continue; // slots ride propRefs instead
+        if (def.type === 'INSTANCE_SWAP') {
+          // dump v1.31 fixedSwaps: the child's own INSTANCE_SWAP property with
+          // the value the HOST fixed on this nested instance (a component
+          // id), resolved to the swapped-in main component's name/key. This
+          // used to `continue` as "slots ride propRefs" — propRefs is THIS
+          // node's binding to a HOST property, a different fact; the child's
+          // configured swap vanished with no receipt (Phase 2 exam). The
+          // REST twin resolves the id through the response components map.
+          if (typeof def.value === 'string' && def.value !== '') {
+            const swap = { id: def.value };
+            try {
+              const target = await figma.getNodeByIdAsync(def.value);
+              if (target) {
+                swap.name = target.name;
+                if (typeof target.key === 'string' && target.key) swap.key = target.key;
+              } else {
+                degrade('instance-main-unresolved', nodePath, 'INSTANCE_SWAP "' + key + '" = ' + def.value + ' — the swapped component is not readable (getNodeByIdAsync returned null); the id is carried without a name/key (dump v1.31 fixedSwaps)');
+              }
+            } catch (e) {
+              degrade('instance-main-unresolved', nodePath, 'INSTANCE_SWAP "' + key + '" = ' + def.value + ' — lookup threw (' + (e && e.message ? e.message : String(e)) + '); the id is carried without a name/key (dump v1.31 fixedSwaps)');
+            }
+            fixedSwaps[key.split('#')[0]] = swap;
+          }
+          continue;
+        }
         props[key] = def.value;
       }
       if (Object.keys(props).length > 0) out.componentProperties = props;
+      if (Object.keys(fixedSwaps).length > 0) out.fixedSwaps = fixedSwaps;
     } catch (e) {
       // componentProperties can throw on detached/broken instances — dump v1
       // fixtures shipped without this field, so absence is always tolerated.
@@ -1029,10 +1173,47 @@ async function dumpNode(node, nodePath, parent) {
     try {
       const overridden = {};
       let overriddenCount = 0;
+      // dump v1.31 hostOverrides: the SAME record, every field beyond
+      // 'characters' (fills on an icon's vector, strokes, visible, …) — a
+      // HOST fact on a child-owned node, named with the descendant's first
+      // solid when "fills" is among them. REST twin: overrides[] against the
+      // returned instance subtree. Same walk, same path spelling.
+      const hostFieldsById = {};
+      let hostCount = 0;
       for (const o of node.overrides || []) {
         if (o && o.id && Array.isArray(o.overriddenFields) && o.overriddenFields.indexOf('characters') >= 0) {
           overridden[o.id] = true;
           overriddenCount++;
+        }
+        // The instance's OWN id lists the fields the host changed on the
+        // instance ROOT (boundVariables / name / targetAspectRatio on the
+        // exam kit's Button icons) — those ride this node's own channels,
+        // so a root entry is not an internal override (REST twin: same rule).
+        if (o && o.id && o.id !== node.id && Array.isArray(o.overriddenFields)) {
+          const rest = o.overriddenFields.filter(function (f) { return f !== 'characters'; });
+          if (rest.length > 0) {
+            hostFieldsById[o.id] = rest;
+            hostCount++;
+          }
+        }
+      }
+      if (hostCount > 0 && typeof node.findAll === 'function') {
+        const hostOverrides = [];
+        let located = 0;
+        for (const n of node.findAll(function (d) { return Object.prototype.hasOwnProperty.call(hostFieldsById, d.id); }).slice(0, 60)) {
+          const seg = [];
+          for (let p = n; p && p.id !== node.id; p = p.parent) seg.unshift(p.name);
+          const h = { path: seg.join('/'), fields: hostFieldsById[n.id] };
+          if (h.fields.indexOf('fills') >= 0 && 'fills' in n && Array.isArray(n.fills)) {
+            const paint = await dumpPaint(n.fills, null, 'fill', n);
+            if (paint) h.fill = paint;
+          }
+          hostOverrides.push(h);
+          located++;
+        }
+        if (hostOverrides.length > 0) out.hostOverrides = hostOverrides;
+        if (located < hostCount) {
+          degrade('host-override-unlocated', nodePath, (hostCount - located) + ' of ' + hostCount + ' host override(s) reported by InstanceNode.overrides could not be matched to a descendant of this instance (hidden branch, or past the 60-node walk cap) — not captured (dump v1.31)');
         }
       }
       if (overriddenCount > 0 && typeof node.findAll === 'function') {
@@ -1119,8 +1300,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.30) for design→contract proposal.',
-    dumpVersion: '1.30',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.',
+    dumpVersion: '1.31',
   },
 };
 dumps._degradations = degradations;

@@ -1,0 +1,79 @@
+{
+  "_provenance": {
+    "fileKey": null,
+    "extractedAt": "2026-08-23",
+    "note": "Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal — hand-authored plugin-shape twin of rest-layout-sizing-vertical-fill (the dump v1.31 spelling dump.plugin.js emits for this construct).",
+    "dumpVersion": "1.31"
+  },
+  "Case": {
+    "setName": "Case",
+    "type": "COMPONENT",
+    "nodeId": "1:25",
+    "variants": [
+      {
+        "name": "Case",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 120,
+          "height": 64
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            4,
+            12,
+            4,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "FIXED"
+        },
+        "fill": {
+          "hex": "e6ebf2"
+        },
+        "children": [
+          {
+            "name": "a",
+            "type": "FRAME",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "fill": {
+              "hex": "3366cc"
+            },
+            "fillHeight": true,
+            "children": []
+          },
+          {
+            "name": "t",
+            "type": "TEXT",
+            "text": {
+              "characters": "Case",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "lineHeight": 16,
+              "fontFamily": "Inter"
+            },
+            "fill": {
+              "hex": "1a1a1a"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

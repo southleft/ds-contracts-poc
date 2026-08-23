@@ -1,0 +1,210 @@
+{
+ "_provenance": {
+  "fileKey": null,
+  "extractedAt": "2026-08-23",
+  "note": "Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) \u2014 hand-authored from the Phase 2 exam RE-MEASURE (2026-08-23): the Card's Container is a COLUMN in Variant=Default and a ROW in Variant=Inline (layoutByProp), and its Image SLOT is drawn FILL-height only under the ROW; carryCrossAxisFill returns on mixed parent modes (crossAxisFillByProp's door) but crossAxisFillByProp spells fillWidth only, so the vertical fill has no carrier and no receipt.",
+  "dumpVersion": "1.31"
+ },
+ "Case": {
+  "setName": "Case",
+  "type": "COMPONENT_SET",
+  "nodeId": "1:41",
+  "propertyDefinitions": {
+   "Variant": {
+    "type": "VARIANT",
+    "defaultValue": "Default",
+    "variantOptions": [
+     "Default",
+     "Inline"
+    ]
+   },
+   "Image#5649:19": {
+    "type": "SLOT",
+    "preferredValues": [
+     {
+      "type": "COMPONENT_SET",
+      "key": "de1d1f4d9674a79e188e32cf71ea15dafc2355bf"
+     }
+    ]
+   }
+  },
+  "variants": [
+   {
+    "name": "Variant=Default",
+    "type": "COMPONENT",
+    "bbox": {
+     "width": 960,
+     "height": 120
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      16,
+      16,
+      16,
+      16
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "fill": {
+     "hex": "f0eeed"
+    },
+    "children": [
+     {
+      "name": "Container",
+      "type": "FRAME",
+      "fillWidth": true,
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 24,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "AUTO"
+      },
+      "children": [
+       {
+        "name": "Image",
+        "type": "SLOT",
+        "clipsContent": true,
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "CENTER",
+         "counter": "CENTER",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "AUTO"
+        },
+        "cornerRadius": 12,
+        "propRefs": {
+         "slotContentId": "Image"
+        },
+        "slotKey": "Image#5649:19",
+        "children": [],
+        "fillWidth": true
+       },
+       {
+        "name": "t",
+        "type": "TEXT",
+        "text": {
+         "characters": "Case",
+         "fontSize": 12,
+         "fontStyle": "Medium",
+         "lineHeight": 16,
+         "fontFamily": "Inter"
+        },
+        "fill": {
+         "hex": "1a1a1a"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Variant=Inline",
+    "type": "COMPONENT",
+    "bbox": {
+     "width": 960,
+     "height": 120
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      16,
+      16,
+      16,
+      16
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "fill": {
+     "hex": "f0eeed"
+    },
+    "children": [
+     {
+      "name": "Container",
+      "type": "FRAME",
+      "fillWidth": true,
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "MIN",
+       "spacing": 24,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "AUTO"
+      },
+      "children": [
+       {
+        "name": "Image",
+        "type": "SLOT",
+        "clipsContent": true,
+        "layout": {
+         "mode": "VERTICAL",
+         "primary": "CENTER",
+         "counter": "CENTER",
+         "spacing": 0,
+         "padding": [
+          0,
+          0,
+          0,
+          0
+         ],
+         "primarySizing": "AUTO",
+         "counterSizing": "AUTO"
+        },
+        "cornerRadius": 12,
+        "propRefs": {
+         "slotContentId": "Image"
+        },
+        "slotKey": "Image#5649:19",
+        "children": [],
+        "fillHeight": true
+       },
+       {
+        "name": "t",
+        "type": "TEXT",
+        "text": {
+         "characters": "Case",
+         "fontSize": 12,
+         "fontStyle": "Medium",
+         "lineHeight": 16,
+         "fontFamily": "Inter"
+        },
+        "fill": {
+         "hex": "1a1a1a"
+        }
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}
