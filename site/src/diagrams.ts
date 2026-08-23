@@ -423,12 +423,13 @@ export function dependencyGraphSvg(theme: Theme, g: GraphData): string {
 // 6 · How it flows — the hop chain (docs/29 fence `%% id: flow-chain`)
 // ---------------------------------------------------------------------------
 
-export function flowChainSvg(theme: Theme): string {
+/** @param dumpGrammar the producers' dump grammar, read from source by how-replays (never a literal here). */
+export function flowChainSvg(theme: Theme, dumpGrammar: string): string {
   const parts: string[] = [
     svgOpen(
       theme,
-      960,
-      650,
+      1040,
+      690,
       'The five hops, one shape: code source reaches the contract through hop 1 (extract, extract --computed, promote); the contract reaches generated code through hop 3 (generate, atomic per contract) and reaches the canvas through hop 2 (figma bundle to a CONTRACTS-BUNDLE, then the plugin plans every contract and a human clicks Apply, stamping the set ds_contracts/*); the canvas comes back through hop 4 (the Send tab or REST mapper writes a dump with _provenance, _degradations and _variables; propose turns it into a CONTRACT-PROPOSAL envelope with notes, unbound values and minted imported.* tokens) and hop 5 (a PR, figma receive --apply, or copy) lands the proposal on the contract. The contract is the only file every hop reads or writes.',
     ),
   ];
@@ -462,14 +463,18 @@ export function flowChainSvg(theme: Theme): string {
   parts.push(`<path class="flow" d="M 700 475 C 640 475, 640 310, 595 310" marker-end="url(#arrow)"/>`);
   parts.push(`<text class="lbl" x="662" y="400">hop 5</text>`);
   // Legend — one line per hop, the verbs as the CLI spells them
+  // Wrapped by hand to the 1040px viewBox: a <text> never wraps, and a line
+  // past the edge is silently cut (the 2026-08-23 review frame showed it).
   const legend = [
-    'hop 1  code → contract   ds-contracts extract · extract --computed · promote   (overflow → *.extension.json sidecar, with reasons)',
-    'hop 2  contract → canvas   figma bundle → CONTRACTS-BUNDLE → plugin Build tab / figma push / figma publish → plan all-or-nothing → Apply',
-    'hop 3  contract → code   generate --target react | html | wc | …   (atomic per contract: a refused contract leaves no file)',
-    'hop 4  canvas → proposal   Send tab or extract:figma:rest writes a dump (grammar 1.31) → propose by fixed inversion rules → CONTRACT-PROPOSAL',
-    'hop 5  proposal → contract   a pull request · figma receive --apply (without --apply: only .proposals/<id>.proposal.json) · copy the JSON',
+    'hop 1  code → contract    ds-contracts extract · extract --computed · promote   (overflow → *.extension.json sidecar, with reasons)',
+    'hop 2  contract → canvas  figma bundle → CONTRACTS-BUNDLE → plugin Build tab / figma push / figma publish',
+    '                          → plan all-or-nothing → Apply',
+    'hop 3  contract → code    generate --target react | html | wc | …   (atomic per contract: a refused contract leaves no file)',
+    `hop 4  canvas → proposal  Send tab or extract:figma:rest writes a dump (grammar ${dumpGrammar})`,
+    '                          → propose by fixed inversion rules → CONTRACT-PROPOSAL',
+    'hop 5  proposal → contract  a pull request · figma receive --apply (without --apply: only .proposals/<id>.proposal.json) · copy the JSON',
   ];
-  legend.forEach((line, i) => parts.push(`<text class="lbl2 mono" x="20" y="${562 + i * 17}">${line.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')}</text>`));
+  legend.forEach((line, i) => parts.push(`<text class="lbl2 mono" x="20" y="${562 + i * 17}" xml:space="preserve">${line.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')}</text>`));
   return parts.join('\n  ') + CLOSE;
 }
 
@@ -526,7 +531,7 @@ export function adjudicationStarSvg(theme: Theme): string {
     svgOpen(
       theme,
       960,
-      340,
+      370,
       'The adjudication star: every instrument compares ONE surface to the contract and never two surfaces to each other. The code surface is compared by parity and diff/diagnose; the canvas surface by parity, the plugin Changes tab and the sync ledger; the design dump by extract --reconcile against the code extraction; the conformance manifests compare engine behaviour to a hand-authored denominator. The line between the code surface and the canvas surface is crossed out: never side-to-side. A change to the contract is a pull request merged by a human.',
     ),
   ];
@@ -549,8 +554,9 @@ export function adjudicationStarSvg(theme: Theme): string {
   parts.push(`<line class="back bad" x1="530" y1="55" x2="720" y2="55"/>`);
   parts.push(`<text class="lbl badt" x="480" y="59" text-anchor="middle">never side-to-side</text>`);
   // the human
-  parts.push(`<text class="lbl" x="480" y="240" text-anchor="middle">a change to the contract is a pull request —</text>`);
-  parts.push(`<text class="lbl" x="480" y="256" text-anchor="middle">merged by a human, or not merged at all</text>`);
-  parts.push(`<text class="lbl2" x="480" y="322" text-anchor="middle">six instruments say which surface drifted, and in which direction; none of them picks a winner</text>`);
+  // Below the boxes, clear of the two lower compare labels (the 2026-08-23
+  // review frame had it overprinting "conformance · closure:check").
+  parts.push(`<text class="lbl" x="480" y="326" text-anchor="middle">a change to the contract is a pull request — merged by a human, or not merged at all</text>`);
+  parts.push(`<text class="lbl2" x="480" y="352" text-anchor="middle">six instruments say which surface drifted, and in which direction; none of them picks a winner</text>`);
   return parts.join('\n  ') + CLOSE;
 }

@@ -1185,8 +1185,11 @@ tr:last-child td {
   font-size: 14px;
 }
 
+/* The first column names a command or a file; let it wrap rather than
+   push the other three columns past the edge (the instruments table at
+   1280px lost its last column to the scroll edge — 2026-08-23 review). */
 .doc .table-wrap td:first-child {
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .doc .diagram {

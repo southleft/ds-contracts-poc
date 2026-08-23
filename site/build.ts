@@ -142,7 +142,7 @@ for (const theme of ['light', 'dark'] as Theme[]) {
     ['instruments', instrumentsSvg(theme)],
     ['dependency-graph', dependencyGraphSvg(theme, replays.scale.graph)],
     // docs/29's three ```mermaid fences, pre-rendered by `%% id:` (src/pages/flow.ts swaps them in).
-    ['flow-chain', flowChainSvg(theme)],
+    ['flow-chain', flowChainSvg(theme, replays.flow.dumpGrammar.rest)],
     ['disposition', dispositionSvg(theme)],
     ['adjudication-star', adjudicationStarSvg(theme)],
   ];

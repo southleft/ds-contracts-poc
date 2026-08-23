@@ -1215,6 +1215,30 @@ if every part crossed. **What it would take:** one `declared`-kind fact per
 native checkable part with the reason the emitter already states in its
 comment, and a pin in `core/code-only-facts-check.ts`.
 
+## B.33 `semantics.roleException` is not stamped on the canvas, so a hop-4 proposal of a role-excepted component is refused by the referee
+
+Found 2026-08-23 by the Playground walkthrough (`?tour=figma-to-code`,
+"Stamped set" step) and pinned by `npm run playground:flow-check`. The
+`ds_contracts/semantics` stamp a generated set carries holds `element` and
+`role` only (`extract/figma/dump.plugin.js`, the dump v1.24 comment block);
+`core/propose-figma.ts` does not carry a `roleException` (`grep -a
+roleException core/propose-figma.ts` is empty). The Flowbite ToggleSwitch
+contract declares `semantics.roleException` — a `<button role="switch">`
+with no native checkbox in the DOM
+(`examples/tailwind/contracts/toggleswitch.contract.json`). Proposed back
+from `extract/figma/fixtures/flowbite-eight.dump.json`, the contract carries
+`role: "switch"` on `element: "button"` and no exception, so the native-role
+rule in `packages/core/src/validate.ts` refuses it: `semantics.role claims
+role "switch" on element "button" — native <input type="checkbox"> (role="switch"
+on it is the modern switch pattern) exists; use it or declare the exception
+(semantics.roleException: "<one-sentence reason>")`. **What you would
+observe:** `ds-contracts generate` on that proposal refuses by name; the
+walkthrough shows the refusal under the editor rather than hiding it.
+**What it would take:** stamp `roleException` (root and per-part) beside
+`element`/`role` in the dump, and carry it through `proposeFromDump`; the
+flow-check pin then fails and the tour copy is rewritten. The count of
+affected contracts is not measured here.
+
 ---
 
 # §C — THE MEASURED PRICE OF WHAT WORKS
@@ -2258,6 +2282,7 @@ blew the stack with a `RangeError` *after* deliver-once had burned the payload,
 so the delivery just vanished. An iterative depth guard (64 levels, far past any
 real DTCG) refuses by name at parse.
 
+
 ---
 
 ## D.12 `anatomy.root.attrs` dropped by the React and WC emitters — CLOSED
@@ -3020,3 +3045,27 @@ extract/computed/configs/polaris.json` is the re-record; `npx tsx
 examples/polaris/generate.ts --check`, `figma:fresh`, `generated:fresh`,
 `evals --only polaris,promote-generalization`, tsc, lint, format, docs all
 green on the patch. Round r12 (patch over `537022b0`).
+
+## D.34 The built Playground shipped an EMPTY emitter registry — CLOSED
+
+Found 2026-08-23 by the integrator walking the **built** Playground
+(`npm run build:playground` + `vite preview`, Playwright over both guided
+tours): the Code → Figma walkthrough's Script step refused `no emitter
+registered as "figma-script"`, and the output tab strip (React / HTML + CSS /
+React inline / Figma script) was empty. The dev server showed none of it.
+Cause: the root `package.json` declares `"sideEffects": ["**/*.css"]`, so the
+production bundler (Rolldown under Vite 8) treats `core/emitter.ts` as
+side-effect free and drops its load-time registration loop whenever no
+value export of that module is referenced — `playground/src/pages/Playground.tsx`
+imported only `emitters` (the bare array in `packages/core/src/emitter.ts`).
+Reproduced on `origin/main` at `e6225760` by building the playground from a
+worktree with no other change: the bundle carried no `registerEmitter` and
+no emitter label, so the limitation predates this round and was live in any
+deploy built from that state (the 2026-08-17 deploy's bundle still carried
+them). Closed by `playground/src/engine/emitters.ts`: the registry is the
+value of a call that registers any missing built-in and refuses at load if
+one is still absent; `playground:flow-check` (a `maintain` step) pins that
+`Playground.tsx` reads the registry through that module. Marking
+`core/emitter.ts` in `sideEffects` was tried and rejected: esbuild honours the
+same field, and the plugin engine bundle grew from 811,089 to 924,206 bytes
+(`figma-sync/plugin/engine.receipt.json` refused it).

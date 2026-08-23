@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
-import { emitters, type Contract, type EmittedFile, type SourceFileInput } from '../../../core/index.js';
+import { type Contract, type EmittedFile, type SourceFileInput } from '../../../core/index.js';
+import { emitters } from '../engine/emitters';
 import { Link, useRoute } from '../router';
 import { useTheme } from '../theme';
 import { contractsById, corpus as repoCorpus, icons, rawContractById, tokenTree as repoTokenTree } from '../engine/data';

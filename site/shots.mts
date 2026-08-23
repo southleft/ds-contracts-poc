@@ -72,18 +72,35 @@ const shots: Array<[string, string, 'light' | 'dark', number]> = args.length
       ['/contribute/', 'contribute-light.png', 'light', 1280],
     ];
 
+/** Device-pixel ceiling under which a Chromium full-page raster still paints text. */
+const MAX_DEVICE_PX = 16000;
+const DPR = 2;
 const browser = await chromium.launch({ executablePath: chromiumExecutable(), headless: true });
 for (const [route, name, scheme, width] of shots) {
   const ctx = await browser.newContext({
     viewport: { width, height: 900 },
     colorScheme: scheme,
-    deviceScaleFactor: 2,
+    deviceScaleFactor: DPR,
   });
   const page = await ctx.newPage();
   await page.goto(`http://127.0.0.1:${port}${route}`, { waitUntil: 'networkidle' });
-  await page.screenshot({ path: path.join(OUT, name), fullPage: true });
-  await ctx.close();
-  console.log(`✔ ${name} (${route}, ${scheme}, ${width}px)`);
+  // Chromium rasters a full-page capture as one texture and silently
+  // returns a BLANK image past ~16384 device pixels (found 2026-08-23: the
+  // /how-it-works/flow/ frames came back as white pages with borders and no
+  // text). Clip tall pages to the ceiling and say so, rather than commit a
+  // blank review frame.
+  const scrollHeight = await page.evaluate(() => document.documentElement.scrollHeight);
+  const ceiling = Math.floor(MAX_DEVICE_PX / DPR);
+  if (scrollHeight > ceiling) {
+    // A viewport-sized capture, not fullPage+clip: Playwright clips within
+    // the viewport unless the whole page is rastered first.
+    await page.setViewportSize({ width, height: ceiling });
+    await page.screenshot({ path: path.join(OUT, name) });
+    console.log(`✔ ${name} (${route}, ${scheme}, ${width}px) — CLIPPED to ${ceiling}px of ${scrollHeight}px; a full-page raster above ${MAX_DEVICE_PX} device px comes back blank`);
+  } else {
+    await page.screenshot({ path: path.join(OUT, name), fullPage: true });
+    console.log(`✔ ${name} (${route}, ${scheme}, ${width}px)`);
+  }
 }
 await browser.close();
 server.close();

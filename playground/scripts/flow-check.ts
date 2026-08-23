@@ -331,6 +331,19 @@ for (const file of ['playground/src/engine/tours.ts', 'playground/src/components
   const src = read('playground/src/pages/Playground.tsx');
   check('Playground.tsx no longer mentions the dead run-send relay', !src.includes('run-send'));
   check('Playground.tsx no longer quotes v1.5 / v1.13 dump versions', !/v1\.5\b|v1\.13\b/.test(src));
+  // The production bundle drops core/emitter.ts (root package.json
+  // sideEffects) unless a value export is referenced; engine/emitters.ts is
+  // that reference and refuses at load when the registry is empty. A direct
+  // `emitters` import from core here would reopen the hole silently.
+  check(
+    'Playground.tsx reads the emitter registry through engine/emitters.ts (the value-import that keeps core/emitter.ts in the production bundle)',
+    src.includes("import { emitters } from '../engine/emitters'") && !/import \{[^}]*\bemitters\b[^}]*\} from '\.\.\/\.\.\/\.\.\/core\/index\.js'/.test(src),
+  );
+  const guard = read('playground/src/engine/emitters.ts');
+  check(
+    'engine/emitters.ts references the four built-in emitters by value and guards the registry',
+    ['reactEmitter', 'htmlEmitter', 'reactInlineEmitter', 'figmaScriptEmitter'].every((n) => guard.includes(n)) && guard.includes('withBuiltins(registry)'),
+  );
 }
 
 // ------------------------------------------------- 8. quoted refusals

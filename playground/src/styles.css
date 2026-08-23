@@ -143,6 +143,14 @@ textarea,
 
   .topbar__link {
     padding: 0 8px;
+    /* Six links at 390px: wrapping inside a 48px bar stacked "How it
+       flows" on three lines (2026-08-23 review frame); keep each link on
+       one line and let the bar scroll sideways instead. */
+    white-space: nowrap;
+  }
+
+  .topbar {
+    overflow-x: auto;
   }
 }
 
