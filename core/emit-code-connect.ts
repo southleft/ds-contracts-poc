@@ -375,6 +375,7 @@ export function emitCodeConnectHtml(contract: Contract): string {
 
 export const codeConnectEmitter: Emitter = {
   name: 'code-connect',
+  optIn: true,
   label: 'Figma Code Connect — React (<out>/code-connect/<Name>.figma.tsx, imports the generated component)',
   emit(contract) {
     return [{ path: `code-connect/${contract.name}.figma.tsx`, contents: emitCodeConnectReact(contract) }];
@@ -383,6 +384,7 @@ export const codeConnectEmitter: Emitter = {
 
 export const codeConnectHtmlEmitter: Emitter = {
   name: 'code-connect-html',
+  optIn: true,
   label: 'Figma Code Connect — HTML flavour for the web-components target (<out>/code-connect/<tag>.figma.ts)',
   emit(contract) {
     return [

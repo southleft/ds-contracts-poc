@@ -14,6 +14,7 @@
 export {
   emitterByName,
   emitters,
+  generateSurfaces,
   getEmitters,
   registerEmitter,
   type EmittedFile,

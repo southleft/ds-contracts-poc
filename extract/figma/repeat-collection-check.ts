@@ -37,7 +37,7 @@ import {
 } from "../../scripts/contract-schema.js";
 import { capturedTokensFromDump } from "../../core/captured-tokens.js";
 import {
-  emitters,
+  generateSurfaces,
   type EmittedFile,
   type EmitterCtx,
 } from "../../core/emitter.js";
@@ -199,7 +199,7 @@ function replay(dump: Record<string, unknown>): Replay {
   };
   const files = new Map<string, EmittedFile[]>();
   const refusals: Array<{ emitter: string; message: string }> = [];
-  for (const emitter of emitters) {
+  for (const emitter of generateSurfaces()) {
     try {
       files.set(emitter.name, emitter.emit(contract, ctx));
     } catch (e) {
@@ -212,7 +212,7 @@ function replay(dump: Record<string, unknown>): Replay {
   return { contract, proposal, violations, refusals, files };
 }
 
-const surfaces = emitters.map((e) => e.name).join(", ");
+const surfaces = generateSurfaces().map((e) => e.name).join(", ");
 const fileText = (r: Replay, emitter: string, suffix: string): string =>
   r.files.get(emitter)?.find((f) => f.path.endsWith(suffix))?.contents ?? "";
 
@@ -307,7 +307,7 @@ console.log(
   );
   check(
     `ALL FOUR surfaces emit (${surfaces})`,
-    r.files.size === emitters.length && r.refusals.length === 0,
+    r.files.size === generateSurfaces().length && r.refusals.length === 0,
   );
   const tsx = fileText(r, "react", "NavigationHeader.tsx");
   check(
@@ -406,7 +406,7 @@ console.log(
   );
   check(
     `ALL FOUR surfaces emit (${surfaces})`,
-    r.files.size === emitters.length && r.refusals.length === 0,
+    r.files.size === generateSurfaces().length && r.refusals.length === 0,
   );
   const tsx = fileText(r, "react", "BadgeRow.tsx");
   check(
@@ -526,7 +526,7 @@ console.log(
   );
   check(
     `ALL FOUR surfaces emit (${surfaces})`,
-    r.files.size === emitters.length && r.refusals.length === 0,
+    r.files.size === generateSurfaces().length && r.refusals.length === 0,
   );
 }
 

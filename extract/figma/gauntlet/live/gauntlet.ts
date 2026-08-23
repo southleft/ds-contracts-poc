@@ -52,7 +52,7 @@ import {
   type Contract,
 } from "../../../../scripts/contract-schema.js";
 import { capturedTokensFromDump } from "../../../../core/captured-tokens.js";
-import { emitters, type EmitterCtx } from "../../../../core/emitter.js";
+import { generateSurfaces, type EmitterCtx } from "../../../../core/emitter.js";
 import { emitHtml } from "../../../../core/emit-html.js";
 import { mintedTokenCss } from "../../../../core/mint-tokens.js";
 import { createFigmaEngine } from "../../../../core/emit-figma-script.js";
@@ -279,7 +279,7 @@ function addFinding(
 }
 
 // ---------------------------------------------------------------------------
-// STAGE A — the batch pass (repo scope): propose → referee → 4 emitters
+// STAGE A — the batch pass (repo scope): propose → referee → 4 generateSurfaces()
 // ---------------------------------------------------------------------------
 
 interface BaseRecord {
@@ -395,7 +395,7 @@ function refereeAndEmit(
   };
   const emitted: string[] = [];
   const refusals: Array<{ emitter: string; message: string }> = [];
-  for (const emitter of emitters) {
+  for (const emitter of generateSurfaces()) {
     try {
       emitter.emit(contract, ctx);
       emitted.push(emitter.name);
@@ -521,7 +521,7 @@ for (const setName of subjectNames) {
   rec.clean =
     rec.proposed &&
     rec.violations.length === 0 &&
-    rec.emitted.length === emitters.length &&
+    rec.emitted.length === generateSurfaces().length &&
     !rec.internalError;
   baseRecords.push(rec);
   baseByName.set(setName, rec);

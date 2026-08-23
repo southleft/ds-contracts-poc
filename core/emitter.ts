@@ -31,6 +31,7 @@ import { registerEmitter, type Emitter } from '../packages/core/src/emitter.js';
 export {
   emitterByName,
   emitters,
+  generateSurfaces,
   getEmitters,
   registerEmitter,
   type EmittedFile,
