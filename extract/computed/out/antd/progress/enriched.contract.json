@@ -1,0 +1,268 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "antd.progress",
+  "name": "Progress",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). THE METER (FC-METER / FC-GEOMETRY-EXCLUDED, T3). `status` is DEFAULTLESS — antd's ProgressStatuses tuple is normal|exception|active|success and `normal` IS the unset rendering, so the enum carries the other three and `unset` stands for normal (one value per rendering, no duplicate). percent is pinned at 40 and type at line by the config (the MUI LinearProgress value:40 precedent); the fill WIDTH is inline geometry the Option B exclusion must LEDGER. NAMED OUT: circle/dashboard (SVG stroke-dasharray geometry), steps, strokeColor gradients, format. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "status",
+      "type": {
+        "enum": [
+          "unset",
+          "exception",
+          "active",
+          "success"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Status",
+          "values": {
+            "unset": "Unset",
+            "exception": "Exception",
+            "active": "Active",
+            "success": "Success"
+          }
+        },
+        "code": {
+          "prop": "status"
+        }
+      },
+      "default": "unset"
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "inline-block",
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
+        "position": "relative"
+      },
+      "parts": {
+        "progress-outer": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|progress-outer — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "inline-flex",
+            "align": "center"
+          },
+          "parts": {
+            "progress-inner": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|progress-inner — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "box-sizing": "border-box",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "position": "relative"
+              },
+              "parts": {
+                "progress-bg": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|progress-bg.progress-bg-outer — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "box-sizing": "border-box",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "overflow-x": "hidden",
+                    "overflow-y": "hidden",
+                    "position": "relative",
+                    "transition-duration": "0.3s",
+                    "transition-timing-function": "cubic-bezier(0.78, 0.14, 0.15, 0.86)"
+                  },
+                  "tokens": {
+                    "background-color": "{imported.progress.progress-bg.background-color.unset}",
+                    "border-bottom-left-radius": "{imported.shared.size-100}",
+                    "border-bottom-right-radius": "{imported.shared.size-100}",
+                    "border-top-left-radius": "{imported.shared.size-100}",
+                    "border-top-right-radius": "{imported.shared.size-100}",
+                    "bottom": "{imported.shared.size-0}",
+                    "color": "{imported.shared.color-000000e0}",
+                    "font-size": "{imported.shared.size-14}",
+                    "left": "{imported.shared.size-0}",
+                    "line-height": "{imported.shared.size-22}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "right": "{imported.shared.size-0}",
+                    "top": "{imported.shared.size-0}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "status",
+                      "map": {
+                        "active": {
+                          "background-color": "{imported.progress.progress-bg.background-color.active}"
+                        },
+                        "exception": {
+                          "background-color": "{imported.progress.progress-bg.background-color.exception}"
+                        },
+                        "success": {
+                          "background-color": "{imported.progress.progress-bg.background-color.success}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "tokens": {
+                "background-color": "{imported.progress.progress-inner.background-color}",
+                "border-bottom-left-radius": "{imported.shared.size-100}",
+                "border-bottom-right-radius": "{imported.shared.size-100}",
+                "border-top-left-radius": "{imported.shared.size-100}",
+                "border-top-right-radius": "{imported.shared.size-100}",
+                "bottom": "{imported.shared.size-0}",
+                "color": "{imported.shared.color-000000e0}",
+                "flex-grow": "{imported.progress.progress-inner.flex-grow}",
+                "font-size": "{imported.shared.size-14}",
+                "left": "{imported.shared.size-0}",
+                "line-height": "{imported.shared.size-22}",
+                "right": "{imported.shared.size-0}",
+                "top": "{imported.shared.size-0}"
+              }
+            },
+            "label": {
+              "text": "40%",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|progress-text — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "box-sizing": "border-box",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                "text-wrap-mode": "nowrap"
+              },
+              "parts": {
+                "anticon": {
+                  "element": "span",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|anticon — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "inline-flex",
+                    "align": "center"
+                  },
+                  "declared": {
+                    "display": "none",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "text-align": "center",
+                    "text-rendering": "optimizelegibility",
+                    "text-wrap-mode": "nowrap"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "status",
+                      "equals": "exception",
+                      "styles": {
+                        "display": "inline-flex"
+                      }
+                    },
+                    {
+                      "prop": "status",
+                      "equals": "success",
+                      "styles": {
+                        "display": "inline-flex"
+                      }
+                    }
+                  ],
+                  "parts": {
+                    "anticon-exception": {
+                      "icon": {
+                        "asset": "progress-anticon-exception",
+                        "size": 14
+                      },
+                      "visibleWhen": {
+                        "prop": "status",
+                        "equals": "exception"
+                      },
+                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when status=exception."
+                    },
+                    "anticon-success": {
+                      "icon": {
+                        "asset": "progress-anticon-success",
+                        "size": 14
+                      },
+                      "visibleWhen": {
+                        "prop": "status",
+                        "equals": "success"
+                      },
+                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when status=success."
+                    }
+                  },
+                  "tokens": {
+                    "font-size": "{imported.shared.size-14}",
+                    "line-height": "{imported.shared.size-0}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "vertical-align": "{imported.progress.anticon.vertical-align}"
+                  }
+                }
+              },
+              "tokens": {
+                "color": "{imported.progress.label.color.unset}",
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.progress.label.font-weight}",
+                "line-height": "{imported.shared.size-14}",
+                "margin-left": "{imported.progress.label.margin-left}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "status",
+                  "map": {
+                    "active": {
+                      "color": "{imported.progress.label.color.active}"
+                    },
+                    "exception": {
+                      "color": "{imported.progress.label.color.exception}"
+                    },
+                    "success": {
+                      "color": "{imported.progress.label.color.success}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "declared": {
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif"
+          },
+          "tokens": {
+            "color": "{imported.shared.color-000000e0}",
+            "font-size": "{imported.shared.size-14}",
+            "line-height": "{imported.shared.size-22}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}"
+          }
+        }
+      },
+      "tokens": {
+        "bottom": "{imported.shared.size-0}",
+        "color": "{imported.shared.color-000000e0}",
+        "font-size": "{imported.shared.size-14}",
+        "left": "{imported.shared.size-0}",
+        "line-height": "{imported.shared.size-22}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "antd",
+        "export": "Progress"
+      }
+    }
+  }
+}

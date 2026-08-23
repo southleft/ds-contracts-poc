@@ -1,0 +1,768 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "antd.button",
+  "name": "Button",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). type×size×danger = 30 renderings (RECON §3 #1). `danger` is antd's boolean but rides as a 2-value ENUM AXIS (safe|danger) because a rendering a prop selects is an axis, never a state (the MUI Switch `checked` reclassification); the capture config maps safe→false, danger→true. NAMED OUT (RECON §4 static-seed trap): htmlType/href/target/block/ghost/iconPosition/autoInsertSpace and the 5.21+ color(16)×variant(6) decomposition — type+danger select the five documented renderings; href swaps the root to <a>. `icon` and `loading` are PRESENCE props in the config (structure-creating), not axes. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/antd/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Ant Design's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "type",
+      "type": {
+        "enum": [
+          "default",
+          "primary",
+          "dashed",
+          "link",
+          "text"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Type",
+          "values": {
+            "default": "Default",
+            "primary": "Primary",
+            "dashed": "Dashed",
+            "link": "Link",
+            "text": "Text"
+          }
+        },
+        "code": {
+          "prop": "type"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "middle",
+          "large"
+        ]
+      },
+      "default": "middle",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "middle": "Middle",
+            "large": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "danger",
+      "type": {
+        "enum": [
+          "safe",
+          "danger"
+        ]
+      },
+      "default": "safe",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Danger",
+          "values": {
+            "safe": "Safe",
+            "danger": "Danger"
+          }
+        },
+        "code": {
+          "prop": "danger"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Button",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    },
+    {
+      "name": "icon",
+      "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `icon` ({\"$element\":\"@ant-design/icons#SearchOutlined\"}); the created subtree is carried as parts gated on this prop.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Show Icon"
+        },
+        "code": {
+          "prop": "icon"
+        }
+      }
+    },
+    {
+      "name": "loading",
+      "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `loading` (true); the created subtree is carried as parts gated on this prop.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Show Loading"
+        },
+        "code": {
+          "prop": "loading"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "active",
+    "focus-visible",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "parts": {
+        "btn-icon": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|btn-icon — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "cursor": "pointer",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "text-align": "center",
+            "text-wrap-mode": "nowrap",
+            "user-select": "none"
+          },
+          "visibleWhen": {
+            "prop": "icon"
+          },
+          "stylesWhen": [
+            {
+              "prop": "loading",
+              "styles": {
+                "display": "none"
+              }
+            },
+            {
+              "prop": "disabled",
+              "styles": {
+                "display": "none"
+              }
+            }
+          ],
+          "parts": {
+            "anticon": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|anticon — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "inline-flex",
+                "align": "center"
+              },
+              "declared": {
+                "aspect-ratio": "1 / 1",
+                "cursor": "pointer",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                "text-align": "center",
+                "text-rendering": "optimizelegibility",
+                "text-wrap-mode": "nowrap",
+                "user-select": "none"
+              },
+              "visibleWhen": {
+                "prop": "icon"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "loading",
+                  "styles": {
+                    "display": "none"
+                  }
+                },
+                {
+                  "prop": "disabled",
+                  "styles": {
+                    "display": "none"
+                  }
+                }
+              ],
+              "icon": {
+                "asset": "button-anticon",
+                "size": 14
+              },
+              "tokens": {
+                "line-height": "{imported.shared.size-0}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "large": {
+                      "font-size": "{imported.button.anticon.font-size.large}"
+                    },
+                    "middle": {
+                      "font-size": "{imported.button.anticon.font-size.middle}"
+                    },
+                    "small": {
+                      "font-size": "{imported.button.anticon.font-size.small}"
+                    }
+                  }
+                }
+              ],
+              "codeOnly": [
+                {
+                  "state": "active",
+                  "channel": "color",
+                  "value": "rgba(9, 88, 217, 1)",
+                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "color",
+                  "value": "rgba(0, 0, 0, 0.25)",
+                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "cursor",
+                  "value": "not-allowed",
+                  "reason": "declared-channel state delta on 30/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "pointer-events",
+                  "value": "none",
+                  "reason": "declared-channel state delta on 30/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                },
+                {
+                  "state": "hover",
+                  "channel": "color",
+                  "value": "rgba(64, 150, 255, 1)",
+                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                }
+              ]
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "large": {
+                  "font-size": "{imported.button.btn-icon.font-size.large}"
+                },
+                "middle": {
+                  "font-size": "{imported.button.btn-icon.font-size.middle}"
+                },
+                "small": {
+                  "font-size": "{imported.button.btn-icon.font-size.small}"
+                }
+              }
+            }
+          ],
+          "codeOnly": [
+            {
+              "state": "active",
+              "channel": "color",
+              "value": "rgba(9, 88, 217, 1)",
+              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+            },
+            {
+              "state": "disabled",
+              "channel": "color",
+              "value": "rgba(0, 0, 0, 0.25)",
+              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+            },
+            {
+              "state": "disabled",
+              "channel": "cursor",
+              "value": "not-allowed",
+              "reason": "declared-channel state delta on 30/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+            },
+            {
+              "state": "disabled",
+              "channel": "pointer-events",
+              "value": "none",
+              "reason": "declared-channel state delta on 30/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+            },
+            {
+              "state": "hover",
+              "channel": "color",
+              "value": "rgba(64, 150, 255, 1)",
+              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+            }
+          ]
+        },
+        "btn-icon-2": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|btn-icon.btn-loading-icon — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "cursor": "default",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "text-align": "center",
+            "text-wrap-mode": "nowrap",
+            "transition-delay": "0s, 0s, 0s",
+            "transition-duration": "0.3s, 0.3s, 0.3s",
+            "transition-property": "width, opacity, margin",
+            "transition-timing-function": "cubic-bezier(0.645, 0.045, 0.355, 1), cubic-bezier(0.645, 0.045, 0.355, 1), cubic-bezier(0.645, 0.045, 0.355, 1)",
+            "user-select": "none"
+          },
+          "visibleWhen": {
+            "prop": "loading"
+          },
+          "stylesWhen": [
+            {
+              "prop": "disabled",
+              "styles": {
+                "display": "none"
+              }
+            }
+          ],
+          "parts": {
+            "anticon-2": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|anticon — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "inline-flex",
+                "align": "center"
+              },
+              "declared": {
+                "aspect-ratio": "1 / 1",
+                "cursor": "default",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                "text-align": "center",
+                "text-rendering": "optimizelegibility",
+                "text-wrap-mode": "nowrap",
+                "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                "user-select": "none"
+              },
+              "visibleWhen": {
+                "prop": "loading"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "disabled",
+                  "styles": {
+                    "display": "none"
+                  }
+                }
+              ],
+              "icon": {
+                "asset": "button-anticon-2",
+                "size": 14
+              },
+              "tokens": {
+                "line-height": "{imported.shared.size-0}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "large": {
+                      "font-size": "{imported.button.anticon-2.font-size.large}"
+                    },
+                    "middle": {
+                      "font-size": "{imported.button.anticon-2.font-size.middle}"
+                    },
+                    "small": {
+                      "font-size": "{imported.button.anticon-2.font-size.small}"
+                    }
+                  }
+                }
+              ],
+              "codeOnly": [
+                {
+                  "state": "active",
+                  "channel": "color",
+                  "value": "rgba(9, 88, 217, 1)",
+                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "color",
+                  "value": "rgba(0, 0, 0, 0.25)",
+                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "cursor",
+                  "value": "not-allowed",
+                  "reason": "declared-channel state delta on 60/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "pointer-events",
+                  "value": "none",
+                  "reason": "declared-channel state delta on 60/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                },
+                {
+                  "state": "hover",
+                  "channel": "color",
+                  "value": "rgba(64, 150, 255, 1)",
+                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                }
+              ]
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "large": {
+                  "font-size": "{imported.button.btn-icon-2.font-size.large}"
+                },
+                "middle": {
+                  "font-size": "{imported.button.btn-icon-2.font-size.middle}"
+                },
+                "small": {
+                  "font-size": "{imported.button.btn-icon-2.font-size.small}"
+                }
+              }
+            }
+          ],
+          "codeOnly": [
+            {
+              "state": "active",
+              "channel": "color",
+              "value": "rgba(9, 88, 217, 1)",
+              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+            },
+            {
+              "state": "disabled",
+              "channel": "color",
+              "value": "rgba(0, 0, 0, 0.25)",
+              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+            },
+            {
+              "state": "disabled",
+              "channel": "cursor",
+              "value": "not-allowed",
+              "reason": "declared-channel state delta on 60/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+            },
+            {
+              "state": "disabled",
+              "channel": "pointer-events",
+              "value": "none",
+              "reason": "declared-channel state delta on 60/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+            },
+            {
+              "state": "hover",
+              "channel": "color",
+              "value": "rgba(64, 150, 255, 1)",
+              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+            }
+          ]
+        },
+        "label": {
+          "content": {
+            "prop": "children"
+          },
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "text-align": "center",
+            "text-wrap-mode": "nowrap",
+            "user-select": "none"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed",
+              "pointer-events": "none"
+            }
+          },
+          "tokens": {
+            "font-weight": "{imported.button.label.font-weight}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{imported.shared.color-00000040}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "danger",
+              "map": {
+                "danger": {
+                  "color": "{imported.button.label.color.{type}.danger}"
+                },
+                "safe": {
+                  "color": "{imported.button.label.color.{type}.safe}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "large": {
+                  "font-size": "{imported.button.label.font-size.large}"
+                },
+                "middle": {
+                  "font-size": "{imported.button.label.font-size.middle}"
+                },
+                "small": {
+                  "font-size": "{imported.button.label.font-size.small}"
+                }
+              }
+            }
+          ],
+          "codeOnly": [
+            {
+              "state": "active",
+              "channel": "color",
+              "value": "{imported.button.label.color-state-active.{type}.{danger}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "hover",
+              "channel": "color",
+              "value": "{imported.button.label.color-state-hover.{type}.{danger}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
+          ]
+        }
+      },
+      "declared": {
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
+        "position": "relative",
+        "text-wrap-mode": "nowrap",
+        "touch-action": "manipulation",
+        "transition-duration": "0.2s",
+        "transition-timing-function": "cubic-bezier(0.645, 0.045, 0.355, 1)",
+        "user-select": "none"
+      },
+      "declaredStates": {
+        "disabled": {
+          "cursor": "not-allowed"
+        },
+        "focus-visible": {
+          "outline-style": "solid",
+          "transition-delay": "0s, 0s",
+          "transition-duration": "0s, 0s",
+          "transition-property": "outline-offset, outline",
+          "transition-timing-function": "ease, ease"
+        }
+      },
+      "tokens": {
+        "background-color": "{imported.button.root.background-color.{type}.{danger}}",
+        "border-bottom-color": "{imported.button.root.border-bottom-color.{type}.{danger}}",
+        "border-bottom-width": "{imported.shared.size-1}",
+        "border-left-color": "{imported.button.root.border-left-color.{type}.{danger}}",
+        "border-left-width": "{imported.shared.size-1}",
+        "border-right-color": "{imported.button.root.border-right-color.{type}.{danger}}",
+        "border-right-width": "{imported.shared.size-1}",
+        "border-top-color": "{imported.button.root.border-top-color.{type}.{danger}}",
+        "border-top-width": "{imported.shared.size-1}",
+        "bottom": "{imported.shared.size-0}",
+        "box-shadow": "{imported.button.root.box-shadow.{type}.{danger}}",
+        "color": "{imported.button.root.color.{type}.{danger}}",
+        "column-gap": "{imported.button.root.column-gap}",
+        "left": "{imported.shared.size-0}",
+        "outline-color": "{imported.button.root.outline-color.{type}.{danger}}",
+        "padding-bottom": "{imported.shared.size-0}",
+        "padding-top": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "row-gap": "{imported.button.root.row-gap}",
+        "top": "{imported.shared.size-0}"
+      },
+      "states": {
+        "disabled": {
+          "background-color": "{imported.button.root.background-color-state-disabled.{type}}",
+          "border-bottom-color": "{imported.button.root.border-bottom-color-state-disabled.{type}}",
+          "border-left-color": "{imported.button.root.border-left-color-state-disabled.{type}}",
+          "border-right-color": "{imported.button.root.border-right-color-state-disabled.{type}}",
+          "border-top-color": "{imported.button.root.border-top-color-state-disabled.{type}}",
+          "box-shadow": "{imported.button.root.box-shadow-state-disabled}",
+          "color": "{imported.shared.color-00000040}",
+          "outline-color": "{imported.shared.color-00000040}"
+        },
+        "focus-visible": {
+          "outline-color": "{imported.button.root.outline-color-state-focus-visible}",
+          "outline-offset": "{imported.button.root.outline-offset-state-focus-visible}",
+          "outline-width": "{imported.button.root.outline-width-state-focus-visible}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "large": {
+              "border-bottom-left-radius": "{imported.button.root.border-bottom-left-radius.large}",
+              "border-bottom-right-radius": "{imported.button.root.border-bottom-right-radius.large}",
+              "border-top-left-radius": "{imported.button.root.border-top-left-radius.large}",
+              "border-top-right-radius": "{imported.button.root.border-top-right-radius.large}",
+              "font-size": "{imported.button.root.font-size.large}",
+              "padding-left": "{imported.button.root.padding-left.large}",
+              "padding-right": "{imported.button.root.padding-right.large}"
+            },
+            "middle": {
+              "border-bottom-left-radius": "{imported.button.root.border-bottom-left-radius.middle}",
+              "border-bottom-right-radius": "{imported.button.root.border-bottom-right-radius.middle}",
+              "border-top-left-radius": "{imported.button.root.border-top-left-radius.middle}",
+              "border-top-right-radius": "{imported.button.root.border-top-right-radius.middle}",
+              "font-size": "{imported.button.root.font-size.middle}",
+              "padding-left": "{imported.button.root.padding-left.middle}",
+              "padding-right": "{imported.button.root.padding-right.middle}"
+            },
+            "small": {
+              "border-bottom-left-radius": "{imported.button.root.border-bottom-left-radius.small}",
+              "border-bottom-right-radius": "{imported.button.root.border-bottom-right-radius.small}",
+              "border-top-left-radius": "{imported.button.root.border-top-left-radius.small}",
+              "border-top-right-radius": "{imported.button.root.border-top-right-radius.small}",
+              "font-size": "{imported.button.root.font-size.small}",
+              "padding-left": "{imported.button.root.padding-left.small}",
+              "padding-right": "{imported.button.root.padding-right.small}"
+            }
+          }
+        }
+      ],
+      "codeOnly": [
+        {
+          "state": "active",
+          "channel": "background-color",
+          "value": "{imported.button.root.background-color-state-active.{type}.{danger}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "active",
+          "channel": "border-bottom-color",
+          "value": "{imported.button.root.border-bottom-color-state-active.{type}.{danger}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "active",
+          "channel": "border-left-color",
+          "value": "{imported.button.root.border-left-color-state-active.{type}.{danger}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "active",
+          "channel": "border-right-color",
+          "value": "{imported.button.root.border-right-color-state-active.{type}.{danger}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "active",
+          "channel": "border-top-color",
+          "value": "{imported.button.root.border-top-color-state-active.{type}.{danger}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "active",
+          "channel": "color",
+          "value": "{imported.button.root.color-state-active.{type}.{danger}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "active",
+          "channel": "outline-color",
+          "value": "{imported.button.root.outline-color-state-active.{type}.{danger}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "focus-visible",
+          "channel": "transition-behavior",
+          "value": "normal, normal",
+          "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+        },
+        {
+          "state": "hover",
+          "channel": "background-color",
+          "value": "{imported.button.root.background-color-state-hover.{type}.{danger}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "hover",
+          "channel": "border-bottom-color",
+          "value": "{imported.button.root.border-bottom-color-state-hover.{type}.{danger}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "hover",
+          "channel": "border-left-color",
+          "value": "{imported.button.root.border-left-color-state-hover.{type}.{danger}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "hover",
+          "channel": "border-right-color",
+          "value": "{imported.button.root.border-right-color-state-hover.{type}.{danger}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "hover",
+          "channel": "border-top-color",
+          "value": "{imported.button.root.border-top-color-state-hover.{type}.{danger}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "hover",
+          "channel": "color",
+          "value": "{imported.button.root.color-state-hover.{type}.{danger}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "hover",
+          "channel": "outline-color",
+          "value": "{imported.button.root.outline-color-state-hover.{type}.{danger}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        }
+      ]
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "antd",
+        "export": "Button"
+      }
+    }
+  }
+}

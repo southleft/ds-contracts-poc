@@ -1,0 +1,303 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Card",
+  "varPrefix": "--ant-",
+  "facts": [
+    {
+      "part": "card-head",
+      "channel": "font-size",
+      "combo": "default.outlined",
+      "axisValues": {
+        "size": "default",
+        "variant": "outlined"
+      },
+      "token": "card-header-font-size",
+      "varName": "--ant-card-header-font-size",
+      "anchor": {
+        "selector": ".ant-card .ant-card-head"
+      }
+    },
+    {
+      "part": "card-head",
+      "channel": "font-size",
+      "combo": "default.borderless",
+      "axisValues": {
+        "size": "default",
+        "variant": "borderless"
+      },
+      "token": "card-header-font-size",
+      "varName": "--ant-card-header-font-size",
+      "anchor": {
+        "selector": ".ant-card .ant-card-head"
+      }
+    },
+    {
+      "part": "card-head",
+      "channel": "font-size",
+      "combo": "small.outlined",
+      "axisValues": {
+        "size": "small",
+        "variant": "outlined"
+      },
+      "token": "card-header-font-size-sm",
+      "varName": "--ant-card-header-font-size-sm",
+      "anchor": {
+        "selector": ".ant-card-small > .ant-card-head"
+      }
+    },
+    {
+      "part": "card-head",
+      "channel": "font-size",
+      "combo": "small.borderless",
+      "axisValues": {
+        "size": "small",
+        "variant": "borderless"
+      },
+      "token": "card-header-font-size-sm",
+      "varName": "--ant-card-header-font-size-sm",
+      "anchor": {
+        "selector": ".ant-card-small > .ant-card-head"
+      }
+    },
+    {
+      "part": "card-head",
+      "channel": "font-weight",
+      "combo": "default.outlined",
+      "axisValues": {
+        "size": "default",
+        "variant": "outlined"
+      },
+      "token": "font-weight-strong",
+      "varName": "--ant-font-weight-strong",
+      "anchor": {
+        "selector": ".ant-card .ant-card-head"
+      }
+    },
+    {
+      "part": "card-head",
+      "channel": "font-weight",
+      "combo": "default.borderless",
+      "axisValues": {
+        "size": "default",
+        "variant": "borderless"
+      },
+      "token": "font-weight-strong",
+      "varName": "--ant-font-weight-strong",
+      "anchor": {
+        "selector": ".ant-card .ant-card-head"
+      }
+    },
+    {
+      "part": "card-head",
+      "channel": "font-weight",
+      "combo": "small.outlined",
+      "axisValues": {
+        "size": "small",
+        "variant": "outlined"
+      },
+      "token": "font-weight-strong",
+      "varName": "--ant-font-weight-strong",
+      "anchor": {
+        "selector": ".ant-card .ant-card-head"
+      }
+    },
+    {
+      "part": "card-head",
+      "channel": "font-weight",
+      "combo": "small.borderless",
+      "axisValues": {
+        "size": "small",
+        "variant": "borderless"
+      },
+      "token": "font-weight-strong",
+      "varName": "--ant-font-weight-strong",
+      "anchor": {
+        "selector": ".ant-card .ant-card-head"
+      }
+    },
+    {
+      "part": "card-head",
+      "channel": "min-height",
+      "combo": "default.outlined",
+      "axisValues": {
+        "size": "default",
+        "variant": "outlined"
+      },
+      "token": "card-header-height",
+      "varName": "--ant-card-header-height",
+      "anchor": {
+        "selector": ".ant-card .ant-card-head"
+      }
+    },
+    {
+      "part": "card-head",
+      "channel": "min-height",
+      "combo": "default.borderless",
+      "axisValues": {
+        "size": "default",
+        "variant": "borderless"
+      },
+      "token": "card-header-height",
+      "varName": "--ant-card-header-height",
+      "anchor": {
+        "selector": ".ant-card .ant-card-head"
+      }
+    },
+    {
+      "part": "card-head",
+      "channel": "min-height",
+      "combo": "small.outlined",
+      "axisValues": {
+        "size": "small",
+        "variant": "outlined"
+      },
+      "token": "card-header-height-sm",
+      "varName": "--ant-card-header-height-sm",
+      "anchor": {
+        "selector": ".ant-card-small > .ant-card-head"
+      }
+    },
+    {
+      "part": "card-head",
+      "channel": "min-height",
+      "combo": "small.borderless",
+      "axisValues": {
+        "size": "small",
+        "variant": "borderless"
+      },
+      "token": "card-header-height-sm",
+      "varName": "--ant-card-header-height-sm",
+      "anchor": {
+        "selector": ".ant-card-small > .ant-card-head"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "default.outlined",
+      "axisValues": {
+        "size": "default",
+        "variant": "outlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-card"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "default.borderless",
+      "axisValues": {
+        "size": "default",
+        "variant": "borderless"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-card"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.outlined",
+      "axisValues": {
+        "size": "small",
+        "variant": "outlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-card"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.borderless",
+      "axisValues": {
+        "size": "small",
+        "variant": "borderless"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-card"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "default.outlined",
+      "axisValues": {
+        "size": "default",
+        "variant": "outlined"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-card"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "default.borderless",
+      "axisValues": {
+        "size": "default",
+        "variant": "borderless"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-card"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.outlined",
+      "axisValues": {
+        "size": "small",
+        "variant": "outlined"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-card"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.borderless",
+      "axisValues": {
+        "size": "small",
+        "variant": "borderless"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-card"
+      }
+    }
+  ],
+  "skips": [
+    "card-head.color: candidate --ant-color-text-heading → \"color-text-heading\" = rgba(0,0,0,0.88) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.box-shadow: candidate --ant-box-shadow-tertiary → \"box-shadow-tertiary\" = 0 1px 2px 0 rgba(0, 0, 0, 0.03),\n      0 1px 6px -1px rgba(0, 0, 0, 0.02),\n      0 2px 4px 0 rgba(0, 0, 0, 0.02) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.color: candidate --ant-color-text → \"color-text\" = rgba(0,0,0,0.88) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.line-height: candidate --ant-line-height → \"line-height\" = 1.5714285714285714 names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 3,
+  "shorthandSkips": [
+    "label-2.padding: SHORTHAND carrying var(--ant-card-body-padding) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "label-2.padding: SHORTHAND carrying var(--ant-card-body-padding, --ant-card-body-padding-sm) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border: SHORTHAND carrying var(--ant-color-border-secondary, --ant-line-type, --ant-line-width) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

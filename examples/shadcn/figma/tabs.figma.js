@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "shadcn.tabs",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Tabs — generated from contract shadcn.tabs v0.2.0 † (46 code-only facts — see plugin report)",
+    "description": "Tabs — generated from contract shadcn.tabs v0.2.0 † (48 code-only facts — see plugin report)",
     "isSet": false,
     "boolProps": [],
     "textProps": [],
@@ -485,6 +485,28 @@ const COMPONENTS = [
         "channel": "bottom",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 1,
+          "of": 1
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "channel",
+        "channel": "color [active]",
+        "value": "{imported.tabs.label-2.color-state-active}",
+        "reason": "the active plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 1,
+          "of": 1
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "channel",
+        "channel": "color [hover]",
+        "value": "{imported.tabs.label-2.color-state-hover}",
+        "reason": "the hover plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
         "variants": {
           "count": 1,
           "of": 1

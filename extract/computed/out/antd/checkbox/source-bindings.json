@@ -1,0 +1,684 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Checkbox",
+  "varPrefix": "--ant-",
+  "facts": [
+    {
+      "part": "checkbox",
+      "channel": "font-family",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-checkbox"
+      }
+    },
+    {
+      "part": "checkbox",
+      "channel": "font-family",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-checkbox"
+      }
+    },
+    {
+      "part": "checkbox",
+      "channel": "font-family",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-checkbox"
+      }
+    },
+    {
+      "part": "checkbox",
+      "channel": "font-family",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-checkbox"
+      }
+    },
+    {
+      "part": "checkbox",
+      "channel": "font-family",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-checkbox"
+      }
+    },
+    {
+      "part": "checkbox",
+      "channel": "font-family",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-checkbox"
+      }
+    },
+    {
+      "part": "checkbox",
+      "channel": "font-size",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-checkbox"
+      }
+    },
+    {
+      "part": "checkbox",
+      "channel": "font-size",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-checkbox"
+      }
+    },
+    {
+      "part": "checkbox",
+      "channel": "font-size",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-checkbox"
+      }
+    },
+    {
+      "part": "checkbox",
+      "channel": "font-size",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-checkbox"
+      }
+    },
+    {
+      "part": "checkbox",
+      "channel": "font-size",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-checkbox"
+      }
+    },
+    {
+      "part": "checkbox",
+      "channel": "font-size",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-checkbox"
+      }
+    },
+    {
+      "part": "checkbox-inner",
+      "channel": "background-color",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "color-bg-container",
+      "varName": "--ant-color-bg-container",
+      "anchor": {
+        "selector": ".ant-checkbox .ant-checkbox-inner"
+      }
+    },
+    {
+      "part": "checkbox-inner",
+      "channel": "background-color",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "color-primary",
+      "varName": "--ant-color-primary",
+      "anchor": {
+        "selector": ".ant-checkbox-checked .ant-checkbox-inner"
+      }
+    },
+    {
+      "part": "checkbox-inner",
+      "channel": "background-color",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "color-bg-container",
+      "varName": "--ant-color-bg-container",
+      "anchor": {
+        "selector": ".ant-checkbox .ant-checkbox-inner"
+      }
+    },
+    {
+      "part": "checkbox-inner",
+      "channel": "height",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "control-interactive-size",
+      "varName": "--ant-control-interactive-size",
+      "anchor": {
+        "selector": ".ant-checkbox .ant-checkbox-inner"
+      }
+    },
+    {
+      "part": "checkbox-inner",
+      "channel": "height",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "control-interactive-size",
+      "varName": "--ant-control-interactive-size",
+      "anchor": {
+        "selector": ".ant-checkbox .ant-checkbox-inner"
+      }
+    },
+    {
+      "part": "checkbox-inner",
+      "channel": "height",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "control-interactive-size",
+      "varName": "--ant-control-interactive-size",
+      "anchor": {
+        "selector": ".ant-checkbox .ant-checkbox-inner"
+      }
+    },
+    {
+      "part": "checkbox-inner",
+      "channel": "height",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "control-interactive-size",
+      "varName": "--ant-control-interactive-size",
+      "anchor": {
+        "selector": ".ant-checkbox .ant-checkbox-inner"
+      }
+    },
+    {
+      "part": "checkbox-inner",
+      "channel": "height",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "control-interactive-size",
+      "varName": "--ant-control-interactive-size",
+      "anchor": {
+        "selector": ".ant-checkbox .ant-checkbox-inner"
+      }
+    },
+    {
+      "part": "checkbox-inner",
+      "channel": "height",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "control-interactive-size",
+      "varName": "--ant-control-interactive-size",
+      "anchor": {
+        "selector": ".ant-checkbox .ant-checkbox-inner"
+      }
+    },
+    {
+      "part": "checkbox-inner",
+      "channel": "width",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "control-interactive-size",
+      "varName": "--ant-control-interactive-size",
+      "anchor": {
+        "selector": ".ant-checkbox .ant-checkbox-inner"
+      }
+    },
+    {
+      "part": "checkbox-inner",
+      "channel": "width",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "control-interactive-size",
+      "varName": "--ant-control-interactive-size",
+      "anchor": {
+        "selector": ".ant-checkbox .ant-checkbox-inner"
+      }
+    },
+    {
+      "part": "checkbox-inner",
+      "channel": "width",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "control-interactive-size",
+      "varName": "--ant-control-interactive-size",
+      "anchor": {
+        "selector": ".ant-checkbox .ant-checkbox-inner"
+      }
+    },
+    {
+      "part": "checkbox-inner",
+      "channel": "width",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "control-interactive-size",
+      "varName": "--ant-control-interactive-size",
+      "anchor": {
+        "selector": ".ant-checkbox .ant-checkbox-inner"
+      }
+    },
+    {
+      "part": "checkbox-inner",
+      "channel": "width",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "control-interactive-size",
+      "varName": "--ant-control-interactive-size",
+      "anchor": {
+        "selector": ".ant-checkbox .ant-checkbox-inner"
+      }
+    },
+    {
+      "part": "checkbox-inner",
+      "channel": "width",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "control-interactive-size",
+      "varName": "--ant-control-interactive-size",
+      "anchor": {
+        "selector": ".ant-checkbox .ant-checkbox-inner"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-inline-end",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "padding-xs",
+      "varName": "--ant-padding-xs",
+      "anchor": {
+        "selector": ".ant-checkbox + span"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-inline-end",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "padding-xs",
+      "varName": "--ant-padding-xs",
+      "anchor": {
+        "selector": ".ant-checkbox + span"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-inline-end",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "padding-xs",
+      "varName": "--ant-padding-xs",
+      "anchor": {
+        "selector": ".ant-checkbox + span"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-inline-end",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "padding-xs",
+      "varName": "--ant-padding-xs",
+      "anchor": {
+        "selector": ".ant-checkbox + span"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-inline-end",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "padding-xs",
+      "varName": "--ant-padding-xs",
+      "anchor": {
+        "selector": ".ant-checkbox + span"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-inline-end",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "padding-xs",
+      "varName": "--ant-padding-xs",
+      "anchor": {
+        "selector": ".ant-checkbox + span"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-inline-start",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "padding-xs",
+      "varName": "--ant-padding-xs",
+      "anchor": {
+        "selector": ".ant-checkbox + span"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-inline-start",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "padding-xs",
+      "varName": "--ant-padding-xs",
+      "anchor": {
+        "selector": ".ant-checkbox + span"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-inline-start",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "padding-xs",
+      "varName": "--ant-padding-xs",
+      "anchor": {
+        "selector": ".ant-checkbox + span"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-inline-start",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "padding-xs",
+      "varName": "--ant-padding-xs",
+      "anchor": {
+        "selector": ".ant-checkbox + span"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-inline-start",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "padding-xs",
+      "varName": "--ant-padding-xs",
+      "anchor": {
+        "selector": ".ant-checkbox + span"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-inline-start",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "padding-xs",
+      "varName": "--ant-padding-xs",
+      "anchor": {
+        "selector": ".ant-checkbox + span"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-checkbox-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-checkbox-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-checkbox-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-checkbox-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-checkbox-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-checkbox-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-checkbox-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-checkbox-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-checkbox-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-checkbox-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-checkbox-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-checkbox-css-var"
+      }
+    }
+  ],
+  "skips": [
+    "checkbox.color: candidate --ant-color-text → \"color-text\" = rgba(0,0,0,0.88) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label.color: candidate --ant-color-text-disabled → \"color-text-disabled\" = rgba(0,0,0,0.25) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.color: candidate --ant-color-text → \"color-text\" = rgba(0,0,0,0.88) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.line-height: candidate --ant-line-height → \"line-height\" = 1.5714285714285714 names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "checkbox-inner.background: SHORTHAND carrying var(--ant-color-bg-container-disabled) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

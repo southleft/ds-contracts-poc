@@ -1,0 +1,440 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Avatar",
+  "varPrefix": "--ant-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "small.circle",
+      "axisValues": {
+        "size": "small",
+        "shape": "circle"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "small.square",
+      "axisValues": {
+        "size": "small",
+        "shape": "square"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "default.circle",
+      "axisValues": {
+        "size": "default",
+        "shape": "circle"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "default.square",
+      "axisValues": {
+        "size": "default",
+        "shape": "square"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.circle",
+      "axisValues": {
+        "size": "large",
+        "shape": "circle"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.square",
+      "axisValues": {
+        "size": "large",
+        "shape": "square"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.circle",
+      "axisValues": {
+        "size": "small",
+        "shape": "circle"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-avatar-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.square",
+      "axisValues": {
+        "size": "small",
+        "shape": "square"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-avatar-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "default.circle",
+      "axisValues": {
+        "size": "default",
+        "shape": "circle"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-avatar-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "default.square",
+      "axisValues": {
+        "size": "default",
+        "shape": "square"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-avatar-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.circle",
+      "axisValues": {
+        "size": "large",
+        "shape": "circle"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-avatar-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.square",
+      "axisValues": {
+        "size": "large",
+        "shape": "square"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-avatar-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.circle",
+      "axisValues": {
+        "size": "small",
+        "shape": "circle"
+      },
+      "token": "avatar-text-font-size",
+      "varName": "--ant-avatar-text-font-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.square",
+      "axisValues": {
+        "size": "small",
+        "shape": "square"
+      },
+      "token": "avatar-text-font-size",
+      "varName": "--ant-avatar-text-font-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "default.circle",
+      "axisValues": {
+        "size": "default",
+        "shape": "circle"
+      },
+      "token": "avatar-text-font-size",
+      "varName": "--ant-avatar-text-font-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "default.square",
+      "axisValues": {
+        "size": "default",
+        "shape": "square"
+      },
+      "token": "avatar-text-font-size",
+      "varName": "--ant-avatar-text-font-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.circle",
+      "axisValues": {
+        "size": "large",
+        "shape": "circle"
+      },
+      "token": "avatar-text-font-size",
+      "varName": "--ant-avatar-text-font-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.square",
+      "axisValues": {
+        "size": "large",
+        "shape": "square"
+      },
+      "token": "avatar-text-font-size",
+      "varName": "--ant-avatar-text-font-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "height",
+      "combo": "small.circle",
+      "axisValues": {
+        "size": "small",
+        "shape": "circle"
+      },
+      "token": "avatar-container-size-sm",
+      "varName": "--ant-avatar-container-size-sm",
+      "anchor": {
+        "selector": ".ant-avatar-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "height",
+      "combo": "small.square",
+      "axisValues": {
+        "size": "small",
+        "shape": "square"
+      },
+      "token": "avatar-container-size-sm",
+      "varName": "--ant-avatar-container-size-sm",
+      "anchor": {
+        "selector": ".ant-avatar-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "height",
+      "combo": "default.circle",
+      "axisValues": {
+        "size": "default",
+        "shape": "circle"
+      },
+      "token": "avatar-container-size",
+      "varName": "--ant-avatar-container-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "height",
+      "combo": "default.square",
+      "axisValues": {
+        "size": "default",
+        "shape": "square"
+      },
+      "token": "avatar-container-size",
+      "varName": "--ant-avatar-container-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "height",
+      "combo": "large.circle",
+      "axisValues": {
+        "size": "large",
+        "shape": "circle"
+      },
+      "token": "avatar-container-size-lg",
+      "varName": "--ant-avatar-container-size-lg",
+      "anchor": {
+        "selector": ".ant-avatar-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "height",
+      "combo": "large.square",
+      "axisValues": {
+        "size": "large",
+        "shape": "square"
+      },
+      "token": "avatar-container-size-lg",
+      "varName": "--ant-avatar-container-size-lg",
+      "anchor": {
+        "selector": ".ant-avatar-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "width",
+      "combo": "small.circle",
+      "axisValues": {
+        "size": "small",
+        "shape": "circle"
+      },
+      "token": "avatar-container-size-sm",
+      "varName": "--ant-avatar-container-size-sm",
+      "anchor": {
+        "selector": ".ant-avatar-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "width",
+      "combo": "small.square",
+      "axisValues": {
+        "size": "small",
+        "shape": "square"
+      },
+      "token": "avatar-container-size-sm",
+      "varName": "--ant-avatar-container-size-sm",
+      "anchor": {
+        "selector": ".ant-avatar-sm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "width",
+      "combo": "default.circle",
+      "axisValues": {
+        "size": "default",
+        "shape": "circle"
+      },
+      "token": "avatar-container-size",
+      "varName": "--ant-avatar-container-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "width",
+      "combo": "default.square",
+      "axisValues": {
+        "size": "default",
+        "shape": "square"
+      },
+      "token": "avatar-container-size",
+      "varName": "--ant-avatar-container-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "width",
+      "combo": "large.circle",
+      "axisValues": {
+        "size": "large",
+        "shape": "circle"
+      },
+      "token": "avatar-container-size-lg",
+      "varName": "--ant-avatar-container-size-lg",
+      "anchor": {
+        "selector": ".ant-avatar-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "width",
+      "combo": "large.square",
+      "axisValues": {
+        "size": "large",
+        "shape": "square"
+      },
+      "token": "avatar-container-size-lg",
+      "varName": "--ant-avatar-container-size-lg",
+      "anchor": {
+        "selector": ".ant-avatar-lg"
+      }
+    }
+  ],
+  "skips": [
+    "root.line-height: candidate --ant-line-height → \"line-height\" = 1.5714285714285714 names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 3,
+  "shorthandSkips": [
+    "root.border-radius: SHORTHAND carrying var(--ant-border-radius) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-radius: SHORTHAND carrying var(--ant-border-radius, --ant-border-radius-lg) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-radius: SHORTHAND carrying var(--ant-border-radius, --ant-border-radius-sm) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

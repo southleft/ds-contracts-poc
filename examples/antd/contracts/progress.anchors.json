@@ -1,0 +1,38 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "progress",
+  "anchors": [
+    {
+      "leaf": "imported.progress.label.color.exception",
+      "token": "color-error",
+      "part": "label",
+      "cssProperty": "color",
+      "varName": "--ant-color-error",
+      "selector": ".ant-progress.ant-progress-status-exception .ant-progress-text"
+    },
+    {
+      "leaf": "imported.progress.label.color.success",
+      "token": "color-success",
+      "part": "label",
+      "cssProperty": "color",
+      "varName": "--ant-color-success",
+      "selector": ".ant-progress.ant-progress-status-success .ant-progress-text"
+    },
+    {
+      "leaf": "imported.progress.progress-bg.background-color.exception",
+      "token": "color-error",
+      "part": "progress-bg",
+      "cssProperty": "background-color",
+      "varName": "--ant-color-error",
+      "selector": ".ant-progress.ant-progress-status-exception .ant-progress-bg"
+    },
+    {
+      "leaf": "imported.progress.progress-bg.background-color.success",
+      "token": "color-success",
+      "part": "progress-bg",
+      "cssProperty": "background-color",
+      "varName": "--ant-color-success",
+      "selector": ".ant-progress.ant-progress-status-success .ant-progress-bg"
+    }
+  ]
+}

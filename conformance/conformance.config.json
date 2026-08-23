@@ -83,6 +83,14 @@
       "axes": []
     },
     {
+      "__case": "interaction-states: button.root { outline-style: none } :focus-visible { outline: 3px solid rgb(145, 202, 255); outline-offset: 1px } — the ring's declared width EQUALS Chromium's own `outline-width: medium` (3px) at rest, so the width never differs between planes (antd Button/Switch: --ant-line-width-focus is 3px) — declared CARRIED",
+      "name": "CaseAntdFocusOutlineRingUaWidth",
+      "importName": "CaseAntdFocusOutlineRingUaWidth",
+      "contract": "conformance/seeds/antd-focus-outline-ring-ua-width.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
       "__case": "anatomy: label > [input.sr-only + span.box] + span.text — the component forwards className/data-* to the HIDDEN input, not the visible label root (antd Checkbox/Radio) — declared CARRIED",
       "name": "CaseAntdForwardedRootAttrs",
       "importName": "CaseAntdForwardedRootAttrs",

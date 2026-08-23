@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "antd-avatar.ts",
+      "description": "Generated from contract antd.avatar v0.2.0 by @ds-contracts/emitter-web-components.",
+      "declarations": [
+        {
+          "kind": "class",
+          "customElement": true,
+          "name": "AvatarElement",
+          "tagName": "antd-avatar",
+          "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). ATOM, SIZE×SHAPE (the MUI Avatar precedent plus antd's real size enum small|default|large → 24/32/40px). The text child is ONE glyph on purpose: antd's text-fit ResizeObserver writes an inline `transform: scale(n)` on span.ant-avatar-string (scale(1) for a single initial; a T3 dynamic channel if the initial overflowed). NAMED OUT: `icon` (child SWAP — replaces the string part), `src`, numeric `size`, `gap`. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/antd/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Ant Design's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+          "attributes": [
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'small' | 'default' | 'large'"
+              },
+              "default": "'default'"
+            },
+            {
+              "name": "shape",
+              "fieldName": "shape",
+              "type": {
+                "text": "'circle' | 'square'"
+              },
+              "default": "'circle'"
+            }
+          ],
+          "members": [],
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "Avatar text content."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "root"
+            },
+            {
+              "name": "label"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "AvatarElement",
+          "declaration": {
+            "name": "AvatarElement",
+            "module": "antd-avatar.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "antd-avatar",
+          "declaration": {
+            "name": "AvatarElement",
+            "module": "antd-avatar.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

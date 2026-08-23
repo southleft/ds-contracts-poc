@@ -4013,12 +4013,20 @@ function rootTextSpecs(
   ctx: TextCtx,
   subst: Record<string, string>,
 ): NodeSpec[] {
-  if (root.text === undefined) return [];
-  return partToSpecs(
-    'label',
-    { text: root.text, ...(root.textByProp ? { textByProp: root.textByProp } : {}) } as Part,
-    contract, byId, ctx, subst,
-  );
+  // ANTD EXAM (Tag, 2026-08-23): the root's text can also be PROP-BOUND —
+  // `content: { prop: 'children' }` on a root that ALSO has parts (antd's
+  // Tag: `<span class="ant-tag">Tag<span class="anticon">…</span></span>`).
+  // The literal branch above was the only one this function knew, so a
+  // prop-bound root label beside a part compiled to no text node at all —
+  // the compile receipt's "no TEXT node carrying Tag" pin was the only
+  // thing that noticed, and nothing named it. The bound label is hosted the
+  // same way a child `content` part is (a TEXT child named `label` linked to
+  // the text property). A root with NO parts keeps the `children` branch.
+  if (root.text === undefined && root.content === undefined) return [];
+  const hosted: Part = root.text !== undefined
+    ? ({ text: root.text, ...(root.textByProp ? { textByProp: root.textByProp } : {}) } as Part)
+    : ({ content: root.content } as Part);
+  return partToSpecs('label', hosted, contract, byId, ctx, subst);
 }
 
 function partToSpec(
@@ -4740,7 +4748,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // the `children` prop branch below is the one drawing it (no parts + a
   // bound text prop — the literal is that label's default, never a second
   // text node).
-  const hostsRootText = contract.anatomy.root?.text !== undefined && !(textProp && !contract.anatomy.root?.parts);
+  const hostsRootText = (contract.anatomy.root?.text !== undefined || contract.anatomy.root?.content !== undefined) && !(textProp && !contract.anatomy.root?.parts);
 
   const orderedValues = (p: Prop): string[] => {
     if (!isEnum(p)) return boolAxisValues(p); // bool axis: default first
@@ -5314,6 +5322,33 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
         value: c.value,
         reason: `observed by the computed capture and refused by the contract grammar — ${c.reason}`,
       });
+    }
+  }
+  // ANTD EXAM (S1 third half, 2026-08-23) — THE UNDRAWN STATE PLANE. A
+  // contract whose parts carry STATE token bindings (root.states.focus-visible
+  // .outline-width …) draws them on the canvas only as State preview cells,
+  // and those exist only when bindings.figma.statePreviews is on (promote's
+  // referee probe turns it on where it can; an explicit reviewed `false` or a
+  // refusal leaves it off). With previews off the whole state plane is
+  // simply not built — measured on the conformance fixture (which never
+  // promotes): the focus ring's three carried channels vanished from the
+  // dump and the round trip reported SILENT, because the only receipts on
+  // the set were about the REST plane. Name every state-bound channel the
+  // undrawn plane holds.
+  if (!contract.bindings?.figma?.statePreviews && contract.states.length > 0) {
+    for (const { name: partName, part } of walkAnatomy(contract)) {
+      for (const [state, m] of Object.entries(part.states ?? {})) {
+        for (const [ch, ref] of Object.entries(m)) {
+          facts.push({
+            part: partName,
+            variant: '',
+            kind: 'channel',
+            channel: `${ch} [${state}]`,
+            value: ref,
+            reason: `the ${state} plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)`,
+          });
+        }
+      }
     }
   }
   // Round 5: compiled facts the SYNC RUNTIME cannot apply natively — the

@@ -1,0 +1,430 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "antd.input",
+  "name": "Input",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). ATOM WITH A ROOT-SWAP TRAP. Bare Input is ONE element (input.ant-input); prefix/suffix/addon/allowClear each REPLACE the root with span.ant-input-affix-wrapper > [prefix + input] (measured, RECON §2.6) — a presence prop that swaps the ROOT signature cannot factor (the Altitude href precedent), so they are NAMED OUT; an `InputAffix` subject with prefix pinned on is the honest spelling if wanted. `variant` is antd's FOUR-value tuple (underlined since 5.24, seed-gen read it); `bordered` is @deprecated (Input.d.ts:45) and not an axis. `status` is DEFAULTLESS (unset = no status). Focus is a box-shadow ring (carried channel), not an outline. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "input"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "middle",
+          "large"
+        ]
+      },
+      "default": "middle",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "middle": "Middle",
+            "large": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "status",
+      "type": {
+        "enum": [
+          "error",
+          "warning"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Status",
+          "values": {
+            "error": "Error",
+            "warning": "Warning"
+          }
+        },
+        "code": {
+          "prop": "status"
+        }
+      }
+    },
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "outlined",
+          "borderless",
+          "filled",
+          "underlined"
+        ]
+      },
+      "default": "outlined",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "outlined": "Outlined",
+            "borderless": "Borderless",
+            "filled": "Filled",
+            "underlined": "Underlined"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    },
+    {
+      "name": "placeholder",
+      "type": "text",
+      "default": "Input",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Placeholder"
+        },
+        "code": {
+          "prop": "placeholder"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible",
+    "hover",
+    "active"
+  ],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "inline-block",
+        "appearance": "auto",
+        "box-sizing": "border-box",
+        "cursor": "text",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
+        "overflow-x": "clip",
+        "overflow-y": "clip",
+        "position": "relative",
+        "text-overflow": "ellipsis",
+        "transition-duration": "0.2s"
+      },
+      "declaredStates": {
+        "disabled": {
+          "cursor": "not-allowed"
+        }
+      },
+      "tokens": {
+        "border-bottom-left-radius": "{imported.input.root.border-bottom-left-radius.{size}.{variant}}",
+        "border-bottom-right-radius": "{imported.input.root.border-bottom-right-radius.{size}.{variant}}",
+        "border-top-left-radius": "{imported.input.root.border-top-left-radius.{size}.{variant}}",
+        "border-top-right-radius": "{imported.input.root.border-top-right-radius.{size}.{variant}}",
+        "bottom": "{imported.shared.size-0}",
+        "left": "{imported.shared.size-0}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      },
+      "states": {
+        "active": {
+          "background-color": "{imported.input.root.background-color-state-active.{variant}}",
+          "border-bottom-color": "{imported.input.root.border-bottom-color-state-active.unset.{variant}}",
+          "border-left-color": "{imported.input.root.border-left-color-state-active.unset.{variant}}",
+          "border-right-color": "{imported.input.root.border-right-color-state-active.unset.{variant}}",
+          "border-top-color": "{imported.input.root.border-top-color-state-active.unset.{variant}}",
+          "box-shadow": "{imported.input.root.box-shadow-state-active.unset.{variant}}",
+          "outline-width": "{imported.input.root.outline-width-state-active.{variant}}"
+        },
+        "disabled": {
+          "background-color": "{imported.input.root.background-color-state-disabled.{variant}}",
+          "border-bottom-color": "{imported.input.root.border-bottom-color-state-disabled.unset.{variant}}",
+          "border-left-color": "{imported.input.root.border-left-color-state-disabled.unset.{variant}}",
+          "border-right-color": "{imported.input.root.border-right-color-state-disabled.unset.{variant}}",
+          "border-top-color": "{imported.input.root.border-top-color-state-disabled.unset.{variant}}",
+          "color": "{imported.input.root.color-state-disabled.unset.{variant}}"
+        },
+        "focus-visible": {
+          "background-color": "{imported.input.root.background-color-state-focus-visible.{variant}}",
+          "border-bottom-color": "{imported.input.root.border-bottom-color-state-focus-visible.unset.{variant}}",
+          "border-left-color": "{imported.input.root.border-left-color-state-focus-visible.unset.{variant}}",
+          "border-right-color": "{imported.input.root.border-right-color-state-focus-visible.unset.{variant}}",
+          "border-top-color": "{imported.input.root.border-top-color-state-focus-visible.unset.{variant}}",
+          "box-shadow": "{imported.input.root.box-shadow-state-focus-visible.unset.{variant}}",
+          "outline-width": "{imported.input.root.outline-width-state-focus-visible.{variant}}"
+        },
+        "hover": {
+          "background-color": "{imported.input.root.background-color-state-hover.unset.{variant}}",
+          "border-bottom-color": "{imported.input.root.border-bottom-color-state-hover.unset.{variant}}",
+          "border-left-color": "{imported.input.root.border-left-color-state-hover.unset.{variant}}",
+          "border-right-color": "{imported.input.root.border-right-color-state-hover.unset.{variant}}",
+          "border-top-color": "{imported.input.root.border-top-color-state-hover.unset.{variant}}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "large": {
+              "font-size": "{imported.input.root.font-size.large}",
+              "line-height": "{imported.input.root.line-height.large}",
+              "padding-bottom": "{imported.input.root.padding-bottom.large}",
+              "padding-left": "{imported.input.root.padding-left.large}",
+              "padding-right": "{imported.input.root.padding-right.large}",
+              "padding-top": "{imported.input.root.padding-top.large}"
+            },
+            "middle": {
+              "font-size": "{imported.input.root.font-size.middle}",
+              "line-height": "{imported.input.root.line-height.middle}",
+              "padding-bottom": "{imported.input.root.padding-bottom.middle}",
+              "padding-left": "{imported.input.root.padding-left.middle}",
+              "padding-right": "{imported.input.root.padding-right.middle}",
+              "padding-top": "{imported.input.root.padding-top.middle}"
+            },
+            "small": {
+              "font-size": "{imported.input.root.font-size.small}",
+              "line-height": "{imported.input.root.line-height.small}",
+              "padding-bottom": "{imported.input.root.padding-bottom.small}",
+              "padding-left": "{imported.input.root.padding-left.small}",
+              "padding-right": "{imported.input.root.padding-right.small}",
+              "padding-top": "{imported.input.root.padding-top.small}"
+            }
+          }
+        },
+        {
+          "prop": "status",
+          "map": {
+            "error": {
+              "background-color": "{imported.input.root.background-color.error.{variant}}",
+              "border-bottom-color": "{imported.input.root.border-bottom-color.error.{variant}}",
+              "border-left-color": "{imported.input.root.border-left-color.error.{variant}}",
+              "border-right-color": "{imported.input.root.border-right-color.error.{variant}}",
+              "border-top-color": "{imported.input.root.border-top-color.error.{variant}}",
+              "color": "{imported.input.root.color.error.{variant}}"
+            },
+            "warning": {
+              "background-color": "{imported.input.root.background-color.warning.{variant}}",
+              "border-bottom-color": "{imported.input.root.border-bottom-color.warning.{variant}}",
+              "border-left-color": "{imported.input.root.border-left-color.warning.{variant}}",
+              "border-right-color": "{imported.input.root.border-right-color.warning.{variant}}",
+              "border-top-color": "{imported.input.root.border-top-color.warning.{variant}}",
+              "color": "{imported.input.root.color.warning.{variant}}"
+            }
+          }
+        },
+        {
+          "prop": "variant",
+          "map": {
+            "borderless": {
+              "background-color": "{imported.input.root.background-color.unset.borderless}",
+              "border-bottom-color": "{imported.input.root.border-bottom-color.unset.borderless}",
+              "border-bottom-width": "{imported.input.root.border-bottom-width.borderless}",
+              "border-left-color": "{imported.input.root.border-left-color.unset.borderless}",
+              "border-left-width": "{imported.input.root.border-left-width.borderless}",
+              "border-right-color": "{imported.input.root.border-right-color.unset.borderless}",
+              "border-right-width": "{imported.input.root.border-right-width.borderless}",
+              "border-top-color": "{imported.input.root.border-top-color.unset.borderless}",
+              "border-top-width": "{imported.input.root.border-top-width.borderless}",
+              "color": "{imported.input.root.color.unset.borderless}"
+            },
+            "filled": {
+              "background-color": "{imported.input.root.background-color.unset.filled}",
+              "border-bottom-color": "{imported.input.root.border-bottom-color.unset.filled}",
+              "border-bottom-width": "{imported.input.root.border-bottom-width.filled}",
+              "border-left-color": "{imported.input.root.border-left-color.unset.filled}",
+              "border-left-width": "{imported.input.root.border-left-width.filled}",
+              "border-right-color": "{imported.input.root.border-right-color.unset.filled}",
+              "border-right-width": "{imported.input.root.border-right-width.filled}",
+              "border-top-color": "{imported.input.root.border-top-color.unset.filled}",
+              "border-top-width": "{imported.input.root.border-top-width.filled}",
+              "color": "{imported.input.root.color.unset.filled}"
+            },
+            "outlined": {
+              "background-color": "{imported.input.root.background-color.unset.outlined}",
+              "border-bottom-color": "{imported.input.root.border-bottom-color.unset.outlined}",
+              "border-bottom-width": "{imported.input.root.border-bottom-width.outlined}",
+              "border-left-color": "{imported.input.root.border-left-color.unset.outlined}",
+              "border-left-width": "{imported.input.root.border-left-width.outlined}",
+              "border-right-color": "{imported.input.root.border-right-color.unset.outlined}",
+              "border-right-width": "{imported.input.root.border-right-width.outlined}",
+              "border-top-color": "{imported.input.root.border-top-color.unset.outlined}",
+              "border-top-width": "{imported.input.root.border-top-width.outlined}",
+              "color": "{imported.input.root.color.unset.outlined}"
+            },
+            "underlined": {
+              "background-color": "{imported.input.root.background-color.unset.underlined}",
+              "border-bottom-color": "{imported.input.root.border-bottom-color.unset.underlined}",
+              "border-bottom-width": "{imported.input.root.border-bottom-width.underlined}",
+              "border-left-color": "{imported.input.root.border-left-color.unset.underlined}",
+              "border-left-width": "{imported.input.root.border-left-width.underlined}",
+              "border-right-color": "{imported.input.root.border-right-color.unset.underlined}",
+              "border-right-width": "{imported.input.root.border-right-width.underlined}",
+              "border-top-color": "{imported.input.root.border-top-color.unset.underlined}",
+              "border-top-width": "{imported.input.root.border-top-width.underlined}",
+              "color": "{imported.input.root.color.unset.underlined}"
+            }
+          }
+        }
+      ],
+      "codeOnly": [
+        {
+          "state": "active",
+          "channel": "border-bottom-color",
+          "value": "{imported.input.root.border-bottom-color-state-active.{status}.{variant}}",
+          "reason": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "active",
+          "channel": "border-left-color",
+          "value": "{imported.input.root.border-left-color-state-active.{status}.{variant}}",
+          "reason": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "active",
+          "channel": "border-right-color",
+          "value": "{imported.input.root.border-right-color-state-active.{status}.{variant}}",
+          "reason": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "active",
+          "channel": "border-top-color",
+          "value": "{imported.input.root.border-top-color-state-active.{status}.{variant}}",
+          "reason": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "active",
+          "channel": "box-shadow",
+          "value": "{imported.input.root.box-shadow-state-active.{status}.{variant}}",
+          "reason": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "disabled",
+          "channel": "border-bottom-color",
+          "value": "{imported.input.root.border-bottom-color-state-disabled.{status}.{variant}}",
+          "reason": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "disabled",
+          "channel": "border-left-color",
+          "value": "{imported.input.root.border-left-color-state-disabled.{status}.{variant}}",
+          "reason": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "disabled",
+          "channel": "border-right-color",
+          "value": "{imported.input.root.border-right-color-state-disabled.{status}.{variant}}",
+          "reason": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "disabled",
+          "channel": "border-top-color",
+          "value": "{imported.input.root.border-top-color-state-disabled.{status}.{variant}}",
+          "reason": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "disabled",
+          "channel": "color",
+          "value": "{imported.input.root.color-state-disabled.{status}.{variant}}",
+          "reason": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "focus-visible",
+          "channel": "border-bottom-color",
+          "value": "{imported.input.root.border-bottom-color-state-focus-visible.{status}.{variant}}",
+          "reason": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "focus-visible",
+          "channel": "border-left-color",
+          "value": "{imported.input.root.border-left-color-state-focus-visible.{status}.{variant}}",
+          "reason": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "focus-visible",
+          "channel": "border-right-color",
+          "value": "{imported.input.root.border-right-color-state-focus-visible.{status}.{variant}}",
+          "reason": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "focus-visible",
+          "channel": "border-top-color",
+          "value": "{imported.input.root.border-top-color-state-focus-visible.{status}.{variant}}",
+          "reason": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "focus-visible",
+          "channel": "box-shadow",
+          "value": "{imported.input.root.box-shadow-state-focus-visible.{status}.{variant}}",
+          "reason": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "hover",
+          "channel": "background-color",
+          "value": "{imported.input.root.background-color-state-hover.{status}.{variant}}",
+          "reason": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "hover",
+          "channel": "border-bottom-color",
+          "value": "{imported.input.root.border-bottom-color-state-hover.{status}.{variant}}",
+          "reason": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "hover",
+          "channel": "border-left-color",
+          "value": "{imported.input.root.border-left-color-state-hover.{status}.{variant}}",
+          "reason": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "hover",
+          "channel": "border-right-color",
+          "value": "{imported.input.root.border-right-color-state-hover.{status}.{variant}}",
+          "reason": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "hover",
+          "channel": "border-top-color",
+          "value": "{imported.input.root.border-top-color-state-hover.{status}.{variant}}",
+          "reason": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        }
+      ]
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "antd",
+        "export": "Input"
+      }
+    }
+  }
+}

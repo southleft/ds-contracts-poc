@@ -25,8 +25,7 @@
     ],
     "css": "examples/antd/tokens/antd.vars.css",
     "minted": "examples/antd/tokens/antd-minted.dtcg.json",
-    "mintedBootstrap": true,
-    "__note:mintedBootstrap": "FIRST-EVER PASS ONLY (capture.ts:404-413 refuses BOTH a zero-leaf tree without the flag AND a filled tree with it). Sequence: capture with the flag + zero-leaf stub → promote-floor fills the tree → DELETE the flag → re-capture → commit the re-measured scorecards (the fluent ordering).",
+    "__note:mintedBootstrap": "BOOTSTRAP FLAG REMOVED same-round (task #28 ordering guard, the Fluent ordering): the first capture pass ran with a zero-leaf stub + mintedBootstrap:true (receipted \"measured without a shipped minted tree\"); promote-floor then filled the tree (82 source-aliased + 1199 literal leaves) and every component was RE-CAPTURED against the shipped tree — the committed scorecards are the re-measured ones.",
     "__note:dark": "modes/antd.light.dtcg.json + modes/antd.dark.dtcg.json (mui precedent). Dark is NOT captured this round (browser.colorScheme light, algorithm default); it rides the token set so the Figma collection gets Light/Dark modes for the aliased leaves only."
   },
   "icons": "examples/antd/assets/icons",

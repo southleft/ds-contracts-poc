@@ -67,8 +67,11 @@ const PINNED: Record<string, { total: number; byKind: Record<string, number> }> 
   // per-side border-style ×4 + display, all declared on root.
   'flowbite.kbd': { total: 5, byKind: { declared: 5 } },
   'flowbite.label': { total: 2, byKind: { declared: 2 } },
-  // part-0's four inset bindings on an in-flow box + 7 declared + the toggle event.
-  'flowbite.toggleswitch': { total: 12, byKind: { channel: 4, declared: 7, event: 1 } },
+  // part-0's four inset bindings on an in-flow box + 7 declared + the toggle
+  // event + (antd exam, 2026-08-23) the two state bindings of an UNDRAWN plane:
+  // the referee refused statePreviews on this set, so its checked/disabled
+  // state channels have no preview cell to land on (FC-STATE-PLANE-UNDRAWN).
+  'flowbite.toggleswitch': { total: 14, byKind: { channel: 6, declared: 7, event: 1 } },
 };
 
 const tsx = path.join(ROOT, 'node_modules', '.bin', 'tsx');

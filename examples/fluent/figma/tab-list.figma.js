@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "fluent.tab-list",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "TabList — generated from contract fluent.tab-list v0.2.0 † (47 code-only facts — see plugin report)",
+    "description": "TabList — generated from contract fluent.tab-list v0.2.0 † (49 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -3486,6 +3486,17 @@ const COMPONENTS = [
     "codeOnlyFacts": [
       {
         "part": "label",
+        "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.tab-list.label.color-state-disabled}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "label",
         "kind": "declared",
         "channel": "cursor",
         "value": "not-allowed",
@@ -3512,6 +3523,17 @@ const COMPONENTS = [
         "channel": "display",
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 24,
+          "of": 24
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.tab-list.label-2.color-state-disabled}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
         "variants": {
           "count": 24,
           "of": 24

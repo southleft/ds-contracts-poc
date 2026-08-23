@@ -16227,7 +16227,7 @@ const COMPONENTS = [
     "contractId": "flowbite.toggleswitch",
     "version": "0.2.0",
     "anchorKey": "08442ebe555baa908cd7ab07097bfcd58dd5fccc",
-    "description": "ToggleSwitch — generated from contract flowbite.toggleswitch v0.2.0 † (12 code-only facts — see plugin report)",
+    "description": "ToggleSwitch — generated from contract flowbite.toggleswitch v0.2.0 † (14 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -17035,6 +17035,28 @@ const COMPONENTS = [
         "channel": "position",
         "value": "absolute",
         "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 6,
+          "of": 6
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color [focus-visible]",
+        "value": "{imported.toggle-switch.root.outline-color-state-focus-visible}",
+        "reason": "the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 6,
+          "of": 6
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-width [focus-visible]",
+        "value": "{imported.toggle-switch.root.outline-width-state-focus-visible}",
+        "reason": "the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
         "variants": {
           "count": 6,
           "of": 6

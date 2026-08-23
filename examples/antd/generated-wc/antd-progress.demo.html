@@ -1,0 +1,33 @@
+<!--
+  Progress — Custom Element showcase emitted from contract antd.progress v0.2.0
+  by @ds-contracts/emitter-web-components. The story-equivalent grid: the all-defaults rendering,
+  one rendering per enum value of every axis (other axes at their defaults), and one per boolean
+  prop set true — the exact enumeration core/emit-html.ts showcases, spelled with <antd-progress>.
+  Token values arrive via CSS custom properties (they inherit through the shadow boundary) —
+  include the token stylesheet on the page or nothing resolves. Text content is the default-slot
+  fallback; pass light DOM children to replace it.
+  Serve next to the COMPILED element module (antd-progress.ts → antd-progress.js).
+-->
+<script type="module" src="./antd-progress.js"></script>
+<style>
+  .showcase { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; font-family: sans-serif; }
+  .showcase__label { margin: 0 0 8px; font: 12px/1 monospace; opacity: 0.6; }
+</style>
+<section class="showcase showcase--antd-progress">
+  <div class="showcase__item">
+    <p class="showcase__label">default</p>
+    <antd-progress></antd-progress>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">status=exception</p>
+    <antd-progress status="exception"></antd-progress>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">status=active</p>
+    <antd-progress status="active"></antd-progress>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">status=success</p>
+    <antd-progress status="success"></antd-progress>
+  </div>
+</section>

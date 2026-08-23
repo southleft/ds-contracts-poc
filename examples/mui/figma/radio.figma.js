@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "mui.radio",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Radio — generated from contract mui.radio v0.2.0 † (43 code-only facts — see plugin report)",
+    "description": "Radio — generated from contract mui.radio v0.2.0 † (48 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -1049,6 +1049,17 @@ const COMPONENTS = [
     "codeOnlyFacts": [
       {
         "part": "icon",
+        "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.shared.color-00000042}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 14,
+          "of": 14
+        }
+      },
+      {
+        "part": "icon",
         "kind": "declared",
         "channel": "cursor",
         "value": "default",
@@ -1137,6 +1148,17 @@ const COMPONENTS = [
       },
       {
         "part": "icon-2",
+        "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.shared.color-00000042}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 14,
+          "of": 14
+        }
+      },
+      {
+        "part": "icon-2",
         "kind": "declared",
         "channel": "cursor",
         "value": "default",
@@ -1218,6 +1240,17 @@ const COMPONENTS = [
         "channel": "user-select",
         "value": "none",
         "reason": "Text-selection behavior (user-select) exists only in the coded component.",
+        "variants": {
+          "count": 14,
+          "of": 14
+        }
+      },
+      {
+        "part": "part-0",
+        "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.shared.color-545454}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
         "variants": {
           "count": 14,
           "of": 14
@@ -1325,6 +1358,17 @@ const COMPONENTS = [
       {
         "part": "part-1",
         "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.shared.color-00000042}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 14,
+          "of": 14
+        }
+      },
+      {
+        "part": "part-1",
+        "kind": "channel",
         "channel": "left",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -1416,6 +1460,17 @@ const COMPONENTS = [
         "channel": "bottom",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 14,
+          "of": 14
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.shared.color-00000042}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
         "variants": {
           "count": 14,
           "of": 14

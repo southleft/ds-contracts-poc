@@ -4564,7 +4564,7 @@ const COMPONENTS = [
     "contractId": "astryx.button",
     "version": "0.3.0",
     "anchorKey": null,
-    "description": "Button — generated from contract astryx.button v0.3.0 † (39 code-only facts — see plugin report)",
+    "description": "Button — generated from contract astryx.button v0.3.0 † (45 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -5506,6 +5506,28 @@ const COMPONENTS = [
       {
         "part": "root",
         "kind": "channel",
+        "channel": "background-image [active]",
+        "value": "{imported.button.root.background-image-state-active}",
+        "reason": "the active plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "background-image [hover]",
+        "value": "{imported.button.root.background-image-state-hover}",
+        "reason": "the hover plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
         "channel": "bottom",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -5520,6 +5542,28 @@ const COMPONENTS = [
         "channel": "left",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "opacity [disabled]",
+        "value": "{imported.button.root.opacity-state-disabled}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-color [focus-visible]",
+        "value": "{imported.button.root.outline-color-state-focus-visible.{variant}}",
+        "reason": "the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
         "variants": {
           "count": 12,
           "of": 12
@@ -5587,6 +5631,28 @@ const COMPONENTS = [
             "Variant=Secondary, Size=Sm",
             "Variant=Secondary, Size=Lg"
           ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-offset [focus-visible]",
+        "value": "{imported.button.root.outline-offset-state-focus-visible}",
+        "reason": "the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-width [focus-visible]",
+        "value": "{imported.button.root.outline-width-state-focus-visible}",
+        "reason": "the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 12,
+          "of": 12
         }
       },
       {

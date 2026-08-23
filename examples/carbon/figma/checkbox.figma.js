@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "carbon.checkbox",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Checkbox — generated from contract carbon.checkbox v0.2.0 † (29 code-only facts — see plugin report)",
+    "description": "Checkbox — generated from contract carbon.checkbox v0.2.0 † (32 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -429,6 +429,17 @@ const COMPONENTS = [
     "codeOnlyFacts": [
       {
         "part": "checkbox",
+        "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.checkbox.checkbox.color-state-disabled}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "checkbox",
         "kind": "declared",
         "channel": "appearance",
         "value": "auto",
@@ -529,6 +540,17 @@ const COMPONENTS = [
       {
         "part": "checkbox-label",
         "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.shared.color-16161640}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "checkbox-label",
+        "kind": "channel",
         "channel": "left",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -620,6 +642,17 @@ const COMPONENTS = [
         "channel": "display",
         "value": "none",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label",
+        "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.shared.color-16161640}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
         "variants": {
           "count": 3,
           "of": 3

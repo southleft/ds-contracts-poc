@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "mui.icon-button",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "IconButton — generated from contract mui.icon-button v0.2.0 † (19 code-only facts — see plugin report)",
+    "description": "IconButton — generated from contract mui.icon-button v0.2.0 † (20 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -417,6 +417,17 @@ const COMPONENTS = [
         "channel": "bottom",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 9,
+          "of": 9
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.icon-button.root.color-state-disabled}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
         "variants": {
           "count": 9,
           "of": 9

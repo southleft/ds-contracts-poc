@@ -1,0 +1,310 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "antd.card",
+  "name": "Card",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). MOLECULE CONTAINER (the MUI Card precedent with a real head part). `variant` is antd 5.24+'s outlined|borderless (`bordered` is @deprecated, Card.d.ts:17 — seed-gen proposed variant(2)); `size` default|small. title is pinned by the config; the head title renders fontWeightStrong=600, the Roboto-600 substrate residue (examples/antd/README.md). NAMED OUT: cover/actions/extra/tabList/loading. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/antd/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Ant Design's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "default",
+          "small"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "default": "Default",
+            "small": "Small"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "outlined",
+          "borderless"
+        ]
+      },
+      "default": "outlined",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "outlined": "Outlined",
+            "borderless": "Borderless"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "title",
+      "type": "text",
+      "default": "Card title",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Title"
+        },
+        "code": {
+          "prop": "title"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Card body copy for the exam.",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Body"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
+        "position": "relative"
+      },
+      "parts": {
+        "card-head": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|card-head — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "direction": "column",
+            "justify": "center"
+          },
+          "parts": {
+            "card-head-wrapper": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|card-head-wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "align": "center"
+              },
+              "parts": {
+                "label": {
+                  "content": {
+                    "prop": "title"
+                  },
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|card-head-title — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "box-sizing": "border-box",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "overflow-x": "hidden",
+                    "overflow-y": "hidden",
+                    "text-overflow": "ellipsis",
+                    "text-wrap-mode": "nowrap"
+                  },
+                  "layout": {
+                    "grow": true
+                  },
+                  "tokens": {
+                    "color": "{imported.shared.color-000000e0}",
+                    "flex-grow": "{imported.card.label.flex-grow}",
+                    "font-weight": "{imported.shared.num-600}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "default": {
+                          "font-size": "{imported.card.label.font-size.default}"
+                        },
+                        "small": {
+                          "font-size": "{imported.card.label.font-size.small}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "declared": {
+                "box-sizing": "border-box",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif"
+              },
+              "tokens": {
+                "color": "{imported.shared.color-000000e0}",
+                "font-weight": "{imported.shared.num-600}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "default": {
+                      "font-size": "{imported.card.card-head-wrapper.font-size.default}"
+                    },
+                    "small": {
+                      "font-size": "{imported.card.card-head-wrapper.font-size.small}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "declared": {
+            "border-bottom-style": "solid",
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif"
+          },
+          "tokens": {
+            "border-bottom-color": "{imported.card.card-head.border-bottom-color}",
+            "border-bottom-width": "{imported.card.card-head.border-bottom-width}",
+            "border-top-left-radius": "{imported.shared.size-8}",
+            "border-top-right-radius": "{imported.shared.size-8}",
+            "color": "{imported.shared.color-000000e0}",
+            "font-weight": "{imported.shared.num-600}",
+            "margin-bottom": "{imported.card.card-head.margin-bottom}",
+            "min-width": "{imported.shared.size-0}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "default": {
+                  "font-size": "{imported.card.card-head.font-size.default}",
+                  "min-height": "{imported.card.card-head.min-height.default}",
+                  "padding-left": "{imported.card.card-head.padding-left.default}",
+                  "padding-right": "{imported.card.card-head.padding-right.default}"
+                },
+                "small": {
+                  "font-size": "{imported.card.card-head.font-size.small}",
+                  "min-height": "{imported.card.card-head.min-height.small}",
+                  "padding-left": "{imported.card.card-head.padding-left.small}",
+                  "padding-right": "{imported.card.card-head.padding-right.small}"
+                }
+              }
+            }
+          ]
+        },
+        "label-2": {
+          "content": {
+            "prop": "children"
+          },
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|card-body — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif"
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-8}",
+            "border-bottom-right-radius": "{imported.shared.size-8}",
+            "color": "{imported.shared.color-000000e0}",
+            "font-size": "{imported.card.label-2.font-size}",
+            "font-weight": "{imported.card.label-2.font-weight}",
+            "line-height": "{imported.card.label-2.line-height}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "default": {
+                  "padding-bottom": "{imported.card.label-2.padding-bottom.default}",
+                  "padding-left": "{imported.card.label-2.padding-left.default}",
+                  "padding-right": "{imported.card.label-2.padding-right.default}",
+                  "padding-top": "{imported.card.label-2.padding-top.default}"
+                },
+                "small": {
+                  "padding-bottom": "{imported.card.label-2.padding-bottom.small}",
+                  "padding-left": "{imported.card.label-2.padding-left.small}",
+                  "padding-right": "{imported.card.label-2.padding-right.small}",
+                  "padding-top": "{imported.card.label-2.padding-top.small}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "tokens": {
+        "background-color": "{imported.card.root.background-color}",
+        "border-bottom-left-radius": "{imported.shared.size-8}",
+        "border-bottom-right-radius": "{imported.shared.size-8}",
+        "border-top-left-radius": "{imported.shared.size-8}",
+        "border-top-right-radius": "{imported.shared.size-8}",
+        "bottom": "{imported.shared.size-0}",
+        "color": "{imported.shared.color-000000e0}",
+        "font-size": "{imported.card.root.font-size}",
+        "left": "{imported.shared.size-0}",
+        "line-height": "{imported.card.root.line-height}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.card.root.width}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "variant",
+          "map": {
+            "borderless": {
+              "border-bottom-color": "{imported.card.root.border-bottom-color.borderless}",
+              "border-bottom-width": "{imported.card.root.border-bottom-width.borderless}",
+              "border-left-color": "{imported.card.root.border-left-color.borderless}",
+              "border-left-width": "{imported.card.root.border-left-width.borderless}",
+              "border-right-color": "{imported.card.root.border-right-color.borderless}",
+              "border-right-width": "{imported.card.root.border-right-width.borderless}",
+              "border-top-color": "{imported.card.root.border-top-color.borderless}",
+              "border-top-width": "{imported.card.root.border-top-width.borderless}",
+              "box-shadow": "{imported.card.root.box-shadow.borderless}"
+            },
+            "outlined": {
+              "border-bottom-color": "{imported.card.root.border-bottom-color.outlined}",
+              "border-bottom-width": "{imported.card.root.border-bottom-width.outlined}",
+              "border-left-color": "{imported.card.root.border-left-color.outlined}",
+              "border-left-width": "{imported.card.root.border-left-width.outlined}",
+              "border-right-color": "{imported.card.root.border-right-color.outlined}",
+              "border-right-width": "{imported.card.root.border-right-width.outlined}",
+              "border-top-color": "{imported.card.root.border-top-color.outlined}",
+              "border-top-width": "{imported.card.root.border-top-width.outlined}",
+              "box-shadow": "{imported.card.root.box-shadow.outlined}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "antd",
+        "export": "Card"
+      }
+    }
+  }
+}

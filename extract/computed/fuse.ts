@@ -41,6 +41,7 @@ import { PRESENCE_OFF } from './capture.js';
 import type { ComponentConfig, PropSpace, SweepResult, Interaction } from './capture.js';
 import {
   CHANNEL_TO_COMPUTED,
+  GEOMETRY_CHANNELS,
   DECOR_PSEUDOS,
   flatten,
   isFusable,
@@ -686,6 +687,17 @@ export function styledChannels(
    *  so the next vendor-prefixed construct announces itself instead of
    *  evaporating. */
   const webkitStyled = new Map<string, Set<string>>(); // channel -> parts
+  // ANTD EXAM (2026-08-23) — THE GEOMETRY EXCLUSION STOPS BEING SILENT PER
+  // PART. Option B (docs/BETA.md) keeps width/height out of fusion as
+  // environment-dependent and carries the obligation to LEDGER each drop.
+  // Measured on the exam's accounting: Tag root.height 22px, Input root
+  // width 288px (the stage's content box), Avatar 32×32, Progress's four
+  // track boxes, Card's head/body heights — 46 (part, channel) facts that
+  // differ from the control, refused by `isFusable`, and named by NOTHING in
+  // LEDGER.md, the extension or stdout. Same shape as the -webkit census
+  // above: one line per part naming every excluded geometry channel and its
+  // base value, so the drop is greppable by part AND channel.
+  const geometryExcluded = new Map<string, Map<string, string>>(); // part -> channel -> base value
   for (let pi = 0; pi < a.baseFlat.length; pi++) {
     const set = new Set<string>();
     const inTableBox = table.lowered.has(pi);
@@ -714,6 +726,9 @@ export function styledChannels(
       // uses (differs from the control), on the channels the door refuses.
       if (p.startsWith('-webkit-') && a.baseFlat[pi].node.style[p] !== ctrl[p]) {
         (webkitStyled.get(p) ?? webkitStyled.set(p, new Set()).get(p)!).add(a.partNames[pi]);
+      }
+      if (GEOMETRY_CHANNELS.has(p) && !admit(p) && a.baseFlat[pi].node.style[p] !== ctrl[p]) {
+        (geometryExcluded.get(a.partNames[pi]) ?? geometryExcluded.set(a.partNames[pi], new Map()).get(a.partNames[pi])!).set(p, a.baseFlat[pi].node.style[p] ?? '');
       }
       if (!admit(p)) continue;
       if (a.baseFlat[pi].node.style[p] !== ctrl[p]) set.add(p);
@@ -902,6 +917,12 @@ export function styledChannels(
   // "the blanket refused nothing here" and "the blanket ate a construct" are
   // different, visible facts. `-webkit-line-clamp` gets the argued refusal it
   // has earned by measurement (see WEBKIT_NOTES).
+  for (const [part, chans] of [...geometryExcluded].sort(([x], [y]) => (x < y ? -1 : x > y ? 1 : 0))) {
+    const listed = [...chans].sort(([x], [y]) => (x < y ? -1 : x > y ? 1 : 0)).map(([c, v]) => `${c} ${v}`).join(', ');
+    receipts.push(
+      `geometry-excluded: ${part} — ${listed} — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.`,
+    );
+  }
   const wk = [...webkitStyled].sort(([x], [y]) => x.localeCompare(y));
   if (wk.length > 0) {
     receipts.push(
@@ -2116,6 +2137,35 @@ export function prepareMint(
             continue;
           }
           pushStateValue(interaction, a.partNames[pi], p, combo, pv1);
+        }
+        // ANTD EXAM (S1 on the real Button, 2026-08-23) — THE OUTLINE PAIR.
+        // antd's focus ring is `outline: var(--line-width-focus) solid …` and
+        // its width is 3px — Chromium's OWN `outline-width: medium`. The rest
+        // plane computes 3px too (style none, nothing painted), so the
+        // focus-visible delta is style none→solid + color + offset and the
+        // WIDTH never differs from the default: the loop above carried color
+        // and offset, declared the style, and dropped the width as "not a
+        // fact". The canvas draws an outside stroke only from the PAIR
+        // (outline-color + outline-width), so the focus ring vanished with
+        // every half of it receipted. When a plane changes outline-color or
+        // outline-style and the plane's outline-width is a non-zero length,
+        // that width IS the ring's width on this plane and rides the state
+        // as a value, UA-default or not. (A zero or absent width stays
+        // absent — nothing would be drawn.)
+        if (isEnabled(combo)) {
+          // Interaction planes are reconstructed from DELTAS against the
+          // default plane, so a channel that did not change reads undefined
+          // there — the unchanged width is the default plane's width.
+          const onPlane = (p: string): string | undefined => planeValue(d1.node.style, p) ?? planeValue(d0.node.style, p);
+          const w1 = onPlane('outline-width');
+          const styleOn = onPlane('outline-style');
+          const ringChanged = (['outline-color', 'outline-style'] as const).some(
+            (p) => planeValue(d1.node.style, p) !== undefined && planeValue(d0.node.style, p) !== planeValue(d1.node.style, p),
+          );
+          const widthUnchanged = planeValue(d1.node.style, 'outline-width') === undefined || planeValue(d0.node.style, 'outline-width') === w1;
+          if (ringChanged && widthUnchanged && w1 !== undefined && styleOn !== undefined && styleOn !== 'none' && /^[1-9][\d.]*px$/.test(w1)) {
+            pushStateValue(interaction, a.partNames[pi], 'outline-width', combo, w1);
+          }
         }
       }
     }

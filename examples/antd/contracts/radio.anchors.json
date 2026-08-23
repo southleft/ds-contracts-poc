@@ -1,0 +1,22 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "radio",
+  "anchors": [
+    {
+      "leaf": "imported.radio.radio-inner.background-color.checked",
+      "token": "radio-radio-bg-color",
+      "part": "radio-inner",
+      "cssProperty": "background-color",
+      "varName": "--ant-radio-radio-bg-color",
+      "selector": ".ant-radio-wrapper .ant-radio-checked .ant-radio-inner"
+    },
+    {
+      "leaf": "imported.radio.radio-inner.background-color.unchecked",
+      "token": "color-bg-container",
+      "part": "radio-inner",
+      "cssProperty": "background-color",
+      "varName": "--ant-color-bg-container",
+      "selector": ".ant-radio-wrapper .ant-radio-inner"
+    }
+  ]
+}

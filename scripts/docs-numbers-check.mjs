@@ -137,7 +137,7 @@ const FID_CARRIAGE = FID_UNSCORED - FID_INTERACTION;
 // module was invisible to both. What makes the duplicate safe is the stray
 // refusal below: a corpus this list has never heard of is a failure by name,
 // so the next library cannot be silently left out the way Fluent was.
-const LIB_DIRS = new Set(['altitude', 'astryx', 'carbon', 'fluent', 'mui', 'polaris', 'shadcn', 'tailwind']);
+const LIB_DIRS = new Set(['altitude', 'antd', 'astryx', 'carbon', 'fluent', 'mui', 'polaris', 'shadcn', 'tailwind']);
 const scorecards = (() => {
   const outDir = path.join(ROOT, 'extract/computed/out');
   const acc = [];

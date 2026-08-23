@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "mui.checkbox",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Checkbox — generated from contract mui.checkbox v0.2.0 † (27 code-only facts — see plugin report)",
+    "description": "Checkbox — generated from contract mui.checkbox v0.2.0 † (30 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -225,6 +225,17 @@ const COMPONENTS = [
       {
         "part": "icon",
         "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.shared.color-00000042}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "icon",
+        "kind": "channel",
         "channel": "flex-shrink",
         "value": "{imported.checkbox.icon.flex-shrink}",
         "reason": "Figma auto-layout children do not shrink below their content — there is no shrink factor.",
@@ -316,6 +327,17 @@ const COMPONENTS = [
         "channel": "user-select",
         "value": "none",
         "reason": "Text-selection behavior (user-select) exists only in the coded component.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "part-0",
+        "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.shared.color-545454}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
         "variants": {
           "count": 3,
           "of": 3
@@ -415,6 +437,17 @@ const COMPONENTS = [
         "channel": "bottom",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.shared.color-00000042}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
         "variants": {
           "count": 3,
           "of": 3

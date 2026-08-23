@@ -1,0 +1,78 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "input",
+  "anchors": [
+    {
+      "leaf": "imported.input.root.color-state-disabled.error.borderless",
+      "token": "color-error",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-color-error",
+      "selector": ".ant-input-borderless.ant-input-status-error, .ant-input-borderless.ant-input-status-error input, .ant-input-borderless.ant-input-status-error textarea"
+    },
+    {
+      "leaf": "imported.input.root.color-state-disabled.warning.borderless",
+      "token": "color-warning",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-color-warning",
+      "selector": ".ant-input-borderless.ant-input-status-warning, .ant-input-borderless.ant-input-status-warning input, .ant-input-borderless.ant-input-status-warning textarea"
+    },
+    {
+      "leaf": "imported.input.root.color.error.borderless",
+      "token": "color-error",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-color-error",
+      "selector": ".ant-input-borderless.ant-input-status-error, .ant-input-borderless.ant-input-status-error input, .ant-input-borderless.ant-input-status-error textarea"
+    },
+    {
+      "leaf": "imported.input.root.color.error.filled",
+      "token": "color-error-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-color-error-text",
+      "selector": "input.ant-input-filled.ant-input-status-error:not(.ant-input-disabled), .ant-input-filled.ant-input-status-error:not(.ant-input-disabled) input, textarea.ant-input-filled.ant-input-status-error:not(.ant-input-disabled), .ant-input-filled.ant-input-status-error:not(.ant-input-disabled) textarea"
+    },
+    {
+      "leaf": "imported.input.root.color.warning.borderless",
+      "token": "color-warning",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-color-warning",
+      "selector": ".ant-input-borderless.ant-input-status-warning, .ant-input-borderless.ant-input-status-warning input, .ant-input-borderless.ant-input-status-warning textarea"
+    },
+    {
+      "leaf": "imported.input.root.color.warning.filled",
+      "token": "color-warning-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-color-warning-text",
+      "selector": "input.ant-input-filled.ant-input-status-warning:not(.ant-input-disabled), .ant-input-filled.ant-input-status-warning:not(.ant-input-disabled) input, textarea.ant-input-filled.ant-input-status-warning:not(.ant-input-disabled), .ant-input-filled.ant-input-status-warning:not(.ant-input-disabled) textarea"
+    },
+    {
+      "leaf": "imported.input.root.font-size.large",
+      "token": "input-input-font-size-lg",
+      "part": "root",
+      "cssProperty": "font-size",
+      "varName": "--ant-input-input-font-size-lg",
+      "selector": ".ant-input-lg"
+    },
+    {
+      "leaf": "imported.input.root.font-size.middle",
+      "token": "input-input-font-size",
+      "part": "root",
+      "cssProperty": "font-size",
+      "varName": "--ant-input-input-font-size",
+      "selector": ".ant-input"
+    },
+    {
+      "leaf": "imported.input.root.font-size.small",
+      "token": "input-input-font-size",
+      "part": "root",
+      "cssProperty": "font-size",
+      "varName": "--ant-input-input-font-size",
+      "selector": ".ant-input"
+    }
+  ]
+}

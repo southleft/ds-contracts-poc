@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "antd-button.ts",
+      "description": "Generated from contract antd.button v0.2.0 by @ds-contracts/emitter-web-components.",
+      "declarations": [
+        {
+          "kind": "class",
+          "customElement": true,
+          "name": "ButtonElement",
+          "tagName": "antd-button",
+          "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). type×size×danger = 30 renderings (RECON §3 #1). `danger` is antd's boolean but rides as a 2-value ENUM AXIS (safe|danger) because a rendering a prop selects is an axis, never a state (the MUI Switch `checked` reclassification); the capture config maps safe→false, danger→true. NAMED OUT (RECON §4 static-seed trap): htmlType/href/target/block/ghost/iconPosition/autoInsertSpace and the 5.21+ color(16)×variant(6) decomposition — type+danger select the five documented renderings; href swaps the root to <a>. `icon` and `loading` are PRESENCE props in the config (structure-creating), not axes. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/antd/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Ant Design's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+          "attributes": [
+            {
+              "name": "type",
+              "fieldName": "type",
+              "type": {
+                "text": "'default' | 'primary' | 'dashed' | 'link' | 'text'"
+              },
+              "default": "'default'"
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'small' | 'middle' | 'large'"
+              },
+              "default": "'middle'"
+            },
+            {
+              "name": "danger",
+              "fieldName": "danger",
+              "type": {
+                "text": "'safe' | 'danger'"
+              },
+              "default": "'safe'"
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "icon",
+              "fieldName": "icon",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `icon` ({\"$element\":\"@ant-design/icons#SearchOutlined\"}); the created subtree is carried as parts gated on this prop."
+            },
+            {
+              "name": "loading",
+              "fieldName": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `loading` (true); the created subtree is carried as parts gated on this prop."
+            }
+          ],
+          "members": [],
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "Button text content."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "root"
+            },
+            {
+              "name": "btn-icon"
+            },
+            {
+              "name": "anticon"
+            },
+            {
+              "name": "anticon-glyph"
+            },
+            {
+              "name": "btn-icon-2"
+            },
+            {
+              "name": "anticon-2"
+            },
+            {
+              "name": "anticon-2-glyph"
+            },
+            {
+              "name": "label"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ButtonElement",
+          "declaration": {
+            "name": "ButtonElement",
+            "module": "antd-button.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "antd-button",
+          "declaration": {
+            "name": "ButtonElement",
+            "module": "antd-button.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

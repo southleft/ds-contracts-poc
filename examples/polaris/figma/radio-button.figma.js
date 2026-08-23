@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "polaris.radio-button",
     "version": "0.4.0",
     "anchorKey": null,
-    "description": "RadioButton — generated from contract polaris.radio-button v0.4.0 † (47 code-only facts — see plugin report)",
+    "description": "RadioButton — generated from contract polaris.radio-button v0.4.0 † (51 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -387,6 +387,17 @@ const COMPONENTS = [
       {
         "part": "backdrop",
         "kind": "channel",
+        "channel": "background-color [disabled]",
+        "value": "{imported.radio-button.backdrop.background-color-state-disabled}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "backdrop",
+        "kind": "channel",
         "channel": "bottom",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -639,6 +650,17 @@ const COMPONENTS = [
       },
       {
         "part": "choice__label",
+        "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.shared.color-b5b5b5}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "choice__label",
         "kind": "declared",
         "channel": "cursor",
         "value": "default",
@@ -665,6 +687,17 @@ const COMPONENTS = [
         "channel": "display",
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "input",
+        "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.radio-button.input.color-state-disabled}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
         "variants": {
           "count": 2,
           "of": 2
@@ -753,6 +786,17 @@ const COMPONENTS = [
         "channel": "text-wrap-mode",
         "value": "nowrap",
         "reason": "Line-breaking rules differ: Figma wraps by box width only.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "label",
+        "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.shared.color-b5b5b5}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
         "variants": {
           "count": 2,
           "of": 2

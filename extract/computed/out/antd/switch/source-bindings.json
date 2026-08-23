@@ -1,0 +1,1981 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Switch",
+  "varPrefix": "--ant-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "default.unchecked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "default.checked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "default.checked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.unchecked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.unchecked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.checked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.checked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "default.unchecked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "default.checked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "default.checked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.unchecked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.unchecked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.checked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.checked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "height",
+      "combo": "default.unchecked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-height",
+      "varName": "--ant-switch-track-height",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "height",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-height",
+      "varName": "--ant-switch-track-height",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "height",
+      "combo": "default.checked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "switch-track-height",
+      "varName": "--ant-switch-track-height",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "height",
+      "combo": "default.checked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "switch-track-height",
+      "varName": "--ant-switch-track-height",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "height",
+      "combo": "small.unchecked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-height-sm",
+      "varName": "--ant-switch-track-height-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "height",
+      "combo": "small.unchecked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-height-sm",
+      "varName": "--ant-switch-track-height-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "height",
+      "combo": "small.checked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-track-height-sm",
+      "varName": "--ant-switch-track-height-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "height",
+      "combo": "small.checked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-track-height-sm",
+      "varName": "--ant-switch-track-height-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "line-height",
+      "combo": "default.unchecked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-height",
+      "varName": "--ant-switch-track-height",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "line-height",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-height",
+      "varName": "--ant-switch-track-height",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "line-height",
+      "combo": "default.checked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "switch-track-height",
+      "varName": "--ant-switch-track-height",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "line-height",
+      "combo": "default.checked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "switch-track-height",
+      "varName": "--ant-switch-track-height",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "line-height",
+      "combo": "small.unchecked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-height-sm",
+      "varName": "--ant-switch-track-height-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "line-height",
+      "combo": "small.unchecked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-height-sm",
+      "varName": "--ant-switch-track-height-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "line-height",
+      "combo": "small.checked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-track-height-sm",
+      "varName": "--ant-switch-track-height-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "line-height",
+      "combo": "small.checked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-track-height-sm",
+      "varName": "--ant-switch-track-height-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "min-width",
+      "combo": "default.unchecked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-min-width",
+      "varName": "--ant-switch-track-min-width",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "min-width",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-min-width",
+      "varName": "--ant-switch-track-min-width",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "min-width",
+      "combo": "default.checked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "switch-track-min-width",
+      "varName": "--ant-switch-track-min-width",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "min-width",
+      "combo": "default.checked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "switch-track-min-width",
+      "varName": "--ant-switch-track-min-width",
+      "anchor": {
+        "selector": ".ant-switch"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "min-width",
+      "combo": "small.unchecked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-min-width-sm",
+      "varName": "--ant-switch-track-min-width-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "min-width",
+      "combo": "small.unchecked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-min-width-sm",
+      "varName": "--ant-switch-track-min-width-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "min-width",
+      "combo": "small.checked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-track-min-width-sm",
+      "varName": "--ant-switch-track-min-width-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "min-width",
+      "combo": "small.checked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-track-min-width-sm",
+      "varName": "--ant-switch-track-min-width-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "opacity",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "opacity-loading",
+      "varName": "--ant-opacity-loading",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-loading, .ant-switch.ant-switch-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "opacity",
+      "combo": "default.checked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "opacity-loading",
+      "varName": "--ant-opacity-loading",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-loading, .ant-switch.ant-switch-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "opacity",
+      "combo": "small.unchecked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "opacity-loading",
+      "varName": "--ant-opacity-loading",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-loading, .ant-switch.ant-switch-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "opacity",
+      "combo": "small.checked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "opacity-loading",
+      "varName": "--ant-opacity-loading",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-loading, .ant-switch.ant-switch-disabled"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "height",
+      "combo": "default.unchecked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-handle-size",
+      "varName": "--ant-switch-handle-size",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "height",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-handle-size",
+      "varName": "--ant-switch-handle-size",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "height",
+      "combo": "default.checked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "switch-handle-size",
+      "varName": "--ant-switch-handle-size",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "height",
+      "combo": "default.checked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "switch-handle-size",
+      "varName": "--ant-switch-handle-size",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "height",
+      "combo": "small.unchecked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-handle-size-sm",
+      "varName": "--ant-switch-handle-size-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "height",
+      "combo": "small.unchecked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-handle-size-sm",
+      "varName": "--ant-switch-handle-size-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "height",
+      "combo": "small.checked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-handle-size-sm",
+      "varName": "--ant-switch-handle-size-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "height",
+      "combo": "small.checked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-handle-size-sm",
+      "varName": "--ant-switch-handle-size-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "inset-inline-start",
+      "combo": "default.unchecked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-padding",
+      "varName": "--ant-switch-track-padding",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "inset-inline-start",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-padding",
+      "varName": "--ant-switch-track-padding",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "inset-inline-start",
+      "combo": "small.unchecked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-padding",
+      "varName": "--ant-switch-track-padding",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "inset-inline-start",
+      "combo": "small.unchecked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-padding",
+      "varName": "--ant-switch-track-padding",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "top",
+      "combo": "default.unchecked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-padding",
+      "varName": "--ant-switch-track-padding",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "top",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-padding",
+      "varName": "--ant-switch-track-padding",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "top",
+      "combo": "default.checked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "switch-track-padding",
+      "varName": "--ant-switch-track-padding",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "top",
+      "combo": "default.checked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "switch-track-padding",
+      "varName": "--ant-switch-track-padding",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "top",
+      "combo": "small.unchecked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-padding",
+      "varName": "--ant-switch-track-padding",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "top",
+      "combo": "small.unchecked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-padding",
+      "varName": "--ant-switch-track-padding",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "top",
+      "combo": "small.checked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-track-padding",
+      "varName": "--ant-switch-track-padding",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "top",
+      "combo": "small.checked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-track-padding",
+      "varName": "--ant-switch-track-padding",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "width",
+      "combo": "default.unchecked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-handle-size",
+      "varName": "--ant-switch-handle-size",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "width",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-handle-size",
+      "varName": "--ant-switch-handle-size",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "width",
+      "combo": "default.checked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "switch-handle-size",
+      "varName": "--ant-switch-handle-size",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "width",
+      "combo": "default.checked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "switch-handle-size",
+      "varName": "--ant-switch-handle-size",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "width",
+      "combo": "small.unchecked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-handle-size-sm",
+      "varName": "--ant-switch-handle-size-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "width",
+      "combo": "small.unchecked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-handle-size-sm",
+      "varName": "--ant-switch-handle-size-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "width",
+      "combo": "small.checked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-handle-size-sm",
+      "varName": "--ant-switch-handle-size-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-handle",
+      "channel": "width",
+      "combo": "small.checked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-handle-size-sm",
+      "varName": "--ant-switch-handle-size-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small .ant-switch-handle"
+      }
+    },
+    {
+      "part": "switch-inner",
+      "channel": "padding-inline-end",
+      "combo": "default.unchecked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-inner-min-margin",
+      "varName": "--ant-switch-inner-min-margin",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner"
+      }
+    },
+    {
+      "part": "switch-inner",
+      "channel": "padding-inline-end",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-inner-min-margin",
+      "varName": "--ant-switch-inner-min-margin",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner"
+      }
+    },
+    {
+      "part": "switch-inner",
+      "channel": "padding-inline-end",
+      "combo": "default.checked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "switch-inner-max-margin",
+      "varName": "--ant-switch-inner-max-margin",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-checked .ant-switch-inner"
+      }
+    },
+    {
+      "part": "switch-inner",
+      "channel": "padding-inline-end",
+      "combo": "default.checked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "switch-inner-max-margin",
+      "varName": "--ant-switch-inner-max-margin",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-checked .ant-switch-inner"
+      }
+    },
+    {
+      "part": "switch-inner",
+      "channel": "padding-inline-end",
+      "combo": "small.unchecked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-inner-min-margin-sm",
+      "varName": "--ant-switch-inner-min-margin-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small .ant-switch-inner"
+      }
+    },
+    {
+      "part": "switch-inner",
+      "channel": "padding-inline-end",
+      "combo": "small.unchecked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-inner-min-margin-sm",
+      "varName": "--ant-switch-inner-min-margin-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small .ant-switch-inner"
+      }
+    },
+    {
+      "part": "switch-inner",
+      "channel": "padding-inline-end",
+      "combo": "small.checked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-inner-max-margin-sm",
+      "varName": "--ant-switch-inner-max-margin-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small.ant-switch-checked .ant-switch-inner"
+      }
+    },
+    {
+      "part": "switch-inner",
+      "channel": "padding-inline-end",
+      "combo": "small.checked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-inner-max-margin-sm",
+      "varName": "--ant-switch-inner-max-margin-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small.ant-switch-checked .ant-switch-inner"
+      }
+    },
+    {
+      "part": "switch-inner",
+      "channel": "padding-inline-start",
+      "combo": "default.unchecked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-inner-max-margin",
+      "varName": "--ant-switch-inner-max-margin",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner"
+      }
+    },
+    {
+      "part": "switch-inner",
+      "channel": "padding-inline-start",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-inner-max-margin",
+      "varName": "--ant-switch-inner-max-margin",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner"
+      }
+    },
+    {
+      "part": "switch-inner",
+      "channel": "padding-inline-start",
+      "combo": "default.checked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "switch-inner-min-margin",
+      "varName": "--ant-switch-inner-min-margin",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-checked .ant-switch-inner"
+      }
+    },
+    {
+      "part": "switch-inner",
+      "channel": "padding-inline-start",
+      "combo": "default.checked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "switch-inner-min-margin",
+      "varName": "--ant-switch-inner-min-margin",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-checked .ant-switch-inner"
+      }
+    },
+    {
+      "part": "switch-inner",
+      "channel": "padding-inline-start",
+      "combo": "small.unchecked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-inner-max-margin-sm",
+      "varName": "--ant-switch-inner-max-margin-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small .ant-switch-inner"
+      }
+    },
+    {
+      "part": "switch-inner",
+      "channel": "padding-inline-start",
+      "combo": "small.unchecked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-inner-max-margin-sm",
+      "varName": "--ant-switch-inner-max-margin-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small .ant-switch-inner"
+      }
+    },
+    {
+      "part": "switch-inner",
+      "channel": "padding-inline-start",
+      "combo": "small.checked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-inner-min-margin-sm",
+      "varName": "--ant-switch-inner-min-margin-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small.ant-switch-checked .ant-switch-inner"
+      }
+    },
+    {
+      "part": "switch-inner",
+      "channel": "padding-inline-start",
+      "combo": "small.checked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-inner-min-margin-sm",
+      "varName": "--ant-switch-inner-min-margin-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small.ant-switch-checked .ant-switch-inner"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "color",
+      "combo": "default.unchecked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "color",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "color",
+      "combo": "default.checked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "color",
+      "combo": "default.checked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "color",
+      "combo": "small.unchecked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "color",
+      "combo": "small.unchecked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "color",
+      "combo": "small.checked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "color",
+      "combo": "small.checked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "font-size",
+      "combo": "default.unchecked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "font-size-sm",
+      "varName": "--ant-font-size-sm",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "font-size",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "font-size-sm",
+      "varName": "--ant-font-size-sm",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "font-size",
+      "combo": "default.checked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "font-size-sm",
+      "varName": "--ant-font-size-sm",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "font-size",
+      "combo": "default.checked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "font-size-sm",
+      "varName": "--ant-font-size-sm",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "font-size",
+      "combo": "small.unchecked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "font-size-sm",
+      "varName": "--ant-font-size-sm",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "font-size",
+      "combo": "small.unchecked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "font-size-sm",
+      "varName": "--ant-font-size-sm",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "font-size",
+      "combo": "small.checked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "font-size-sm",
+      "varName": "--ant-font-size-sm",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "font-size",
+      "combo": "small.checked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "font-size-sm",
+      "varName": "--ant-font-size-sm",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "margin-inline-end",
+      "combo": "small.unchecked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-inner-max-margin",
+      "varName": "--ant-switch-inner-max-margin",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "margin-inline-end",
+      "combo": "small.unchecked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-inner-max-margin",
+      "varName": "--ant-switch-inner-max-margin",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "min-height",
+      "combo": "default.unchecked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-height",
+      "varName": "--ant-switch-track-height",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "min-height",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-height",
+      "varName": "--ant-switch-track-height",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "min-height",
+      "combo": "default.checked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "switch-track-height",
+      "varName": "--ant-switch-track-height",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "min-height",
+      "combo": "default.checked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "switch-track-height",
+      "varName": "--ant-switch-track-height",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "min-height",
+      "combo": "small.unchecked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-height-sm",
+      "varName": "--ant-switch-track-height-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small .ant-switch-inner .ant-switch-inner-checked, .ant-switch.ant-switch-small .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "min-height",
+      "combo": "small.unchecked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-height-sm",
+      "varName": "--ant-switch-track-height-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small .ant-switch-inner .ant-switch-inner-checked, .ant-switch.ant-switch-small .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "min-height",
+      "combo": "small.checked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-track-height-sm",
+      "varName": "--ant-switch-track-height-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small .ant-switch-inner .ant-switch-inner-checked, .ant-switch.ant-switch-small .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-checked",
+      "channel": "min-height",
+      "combo": "small.checked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-track-height-sm",
+      "varName": "--ant-switch-track-height-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small .ant-switch-inner .ant-switch-inner-checked, .ant-switch.ant-switch-small .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "color",
+      "combo": "default.unchecked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "color",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "color",
+      "combo": "default.checked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "color",
+      "combo": "default.checked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "color",
+      "combo": "small.unchecked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "color",
+      "combo": "small.unchecked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "color",
+      "combo": "small.checked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "color",
+      "combo": "small.checked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "font-size",
+      "combo": "default.unchecked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "font-size-sm",
+      "varName": "--ant-font-size-sm",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "font-size",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "font-size-sm",
+      "varName": "--ant-font-size-sm",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "font-size",
+      "combo": "default.checked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "font-size-sm",
+      "varName": "--ant-font-size-sm",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "font-size",
+      "combo": "default.checked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "font-size-sm",
+      "varName": "--ant-font-size-sm",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "font-size",
+      "combo": "small.unchecked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "font-size-sm",
+      "varName": "--ant-font-size-sm",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "font-size",
+      "combo": "small.unchecked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "font-size-sm",
+      "varName": "--ant-font-size-sm",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "font-size",
+      "combo": "small.checked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "font-size-sm",
+      "varName": "--ant-font-size-sm",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "font-size",
+      "combo": "small.checked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "font-size-sm",
+      "varName": "--ant-font-size-sm",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "margin-inline-start",
+      "combo": "small.checked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-inner-max-margin",
+      "varName": "--ant-switch-inner-max-margin",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-checked .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "margin-inline-start",
+      "combo": "small.checked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-inner-max-margin",
+      "varName": "--ant-switch-inner-max-margin",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-checked .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "min-height",
+      "combo": "default.unchecked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-height",
+      "varName": "--ant-switch-track-height",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "min-height",
+      "combo": "default.unchecked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-height",
+      "varName": "--ant-switch-track-height",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "min-height",
+      "combo": "default.checked.enabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "switch-track-height",
+      "varName": "--ant-switch-track-height",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "min-height",
+      "combo": "default.checked.disabled",
+      "axisValues": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "token": "switch-track-height",
+      "varName": "--ant-switch-track-height",
+      "anchor": {
+        "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "min-height",
+      "combo": "small.unchecked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-height-sm",
+      "varName": "--ant-switch-track-height-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small .ant-switch-inner .ant-switch-inner-checked, .ant-switch.ant-switch-small .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "min-height",
+      "combo": "small.unchecked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "token": "switch-track-height-sm",
+      "varName": "--ant-switch-track-height-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small .ant-switch-inner .ant-switch-inner-checked, .ant-switch.ant-switch-small .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "min-height",
+      "combo": "small.checked.enabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-track-height-sm",
+      "varName": "--ant-switch-track-height-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small .ant-switch-inner .ant-switch-inner-checked, .ant-switch.ant-switch-small .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    },
+    {
+      "part": "switch-inner-unchecked",
+      "channel": "min-height",
+      "combo": "small.checked.disabled",
+      "axisValues": {
+        "size": "small",
+        "checked": "checked"
+      },
+      "token": "switch-track-height-sm",
+      "varName": "--ant-switch-track-height-sm",
+      "anchor": {
+        "selector": ".ant-switch.ant-switch-small .ant-switch-inner .ant-switch-inner-checked, .ant-switch.ant-switch-small .ant-switch-inner .ant-switch-inner-unchecked"
+      }
+    }
+  ],
+  "skips": [
+    "root.color: candidate --ant-color-text → \"color-text\" = rgba(0,0,0,0.88) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "switch-inner-checked.margin-inline-start: source declares `calc(-100% + calc(var(--ant-switch-handle-size-sm) + var(--ant-switch-track-padding) * 2) - calc(var(--ant-switch-inner-` — a calc() over var(--ant-switch-handle-size-sm, --ant-switch-inner-max-margin-sm, --ant-switch-track-padding). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "switch-inner-unchecked.margin-inline-end: source declares `calc(-100% + calc(var(--ant-switch-handle-size-sm) + var(--ant-switch-track-padding) * 2) - calc(var(--ant-switch-inner-` — a calc() over var(--ant-switch-handle-size-sm, --ant-switch-inner-max-margin-sm, --ant-switch-track-padding). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "switch-inner-unchecked.margin-top: source declares `calc(var(--ant-switch-track-height-sm) * -1)` — a calc() over var(--ant-switch-track-height-sm). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
+  ],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "root.background: SHORTHAND carrying var(--ant-color-primary) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 6,
+  "calcCeiling": 3,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

@@ -1,0 +1,2456 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Input",
+  "varPrefix": "--ant-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "small.error.borderless.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "error",
+        "variant": "borderless"
+      },
+      "token": "color-error",
+      "varName": "--ant-color-error",
+      "anchor": {
+        "selector": ".ant-input-borderless.ant-input-status-error, .ant-input-borderless.ant-input-status-error input, .ant-input-borderless.ant-input-status-error textarea"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "small.error.borderless.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "error",
+        "variant": "borderless"
+      },
+      "token": "color-error",
+      "varName": "--ant-color-error",
+      "anchor": {
+        "selector": ".ant-input-borderless.ant-input-status-error, .ant-input-borderless.ant-input-status-error input, .ant-input-borderless.ant-input-status-error textarea"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "small.error.filled.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "error",
+        "variant": "filled"
+      },
+      "token": "color-error-text",
+      "varName": "--ant-color-error-text",
+      "anchor": {
+        "selector": "input.ant-input-filled.ant-input-status-error:not(.ant-input-disabled), .ant-input-filled.ant-input-status-error:not(.ant-input-disabled) input, textarea.ant-input-filled.ant-input-status-error:not(.ant-input-disabled), .ant-input-filled.ant-input-status-error:not(.ant-input-disabled) textarea"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "small.warning.borderless.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "warning",
+        "variant": "borderless"
+      },
+      "token": "color-warning",
+      "varName": "--ant-color-warning",
+      "anchor": {
+        "selector": ".ant-input-borderless.ant-input-status-warning, .ant-input-borderless.ant-input-status-warning input, .ant-input-borderless.ant-input-status-warning textarea"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "small.warning.borderless.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "warning",
+        "variant": "borderless"
+      },
+      "token": "color-warning",
+      "varName": "--ant-color-warning",
+      "anchor": {
+        "selector": ".ant-input-borderless.ant-input-status-warning, .ant-input-borderless.ant-input-status-warning input, .ant-input-borderless.ant-input-status-warning textarea"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "small.warning.filled.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "warning",
+        "variant": "filled"
+      },
+      "token": "color-warning-text",
+      "varName": "--ant-color-warning-text",
+      "anchor": {
+        "selector": "input.ant-input-filled.ant-input-status-warning:not(.ant-input-disabled), .ant-input-filled.ant-input-status-warning:not(.ant-input-disabled) input, textarea.ant-input-filled.ant-input-status-warning:not(.ant-input-disabled), .ant-input-filled.ant-input-status-warning:not(.ant-input-disabled) textarea"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "middle.error.borderless.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "error",
+        "variant": "borderless"
+      },
+      "token": "color-error",
+      "varName": "--ant-color-error",
+      "anchor": {
+        "selector": ".ant-input-borderless.ant-input-status-error, .ant-input-borderless.ant-input-status-error input, .ant-input-borderless.ant-input-status-error textarea"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "middle.error.borderless.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "error",
+        "variant": "borderless"
+      },
+      "token": "color-error",
+      "varName": "--ant-color-error",
+      "anchor": {
+        "selector": ".ant-input-borderless.ant-input-status-error, .ant-input-borderless.ant-input-status-error input, .ant-input-borderless.ant-input-status-error textarea"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "middle.error.filled.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "error",
+        "variant": "filled"
+      },
+      "token": "color-error-text",
+      "varName": "--ant-color-error-text",
+      "anchor": {
+        "selector": "input.ant-input-filled.ant-input-status-error:not(.ant-input-disabled), .ant-input-filled.ant-input-status-error:not(.ant-input-disabled) input, textarea.ant-input-filled.ant-input-status-error:not(.ant-input-disabled), .ant-input-filled.ant-input-status-error:not(.ant-input-disabled) textarea"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "middle.warning.borderless.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "warning",
+        "variant": "borderless"
+      },
+      "token": "color-warning",
+      "varName": "--ant-color-warning",
+      "anchor": {
+        "selector": ".ant-input-borderless.ant-input-status-warning, .ant-input-borderless.ant-input-status-warning input, .ant-input-borderless.ant-input-status-warning textarea"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "middle.warning.borderless.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "warning",
+        "variant": "borderless"
+      },
+      "token": "color-warning",
+      "varName": "--ant-color-warning",
+      "anchor": {
+        "selector": ".ant-input-borderless.ant-input-status-warning, .ant-input-borderless.ant-input-status-warning input, .ant-input-borderless.ant-input-status-warning textarea"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "middle.warning.filled.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "warning",
+        "variant": "filled"
+      },
+      "token": "color-warning-text",
+      "varName": "--ant-color-warning-text",
+      "anchor": {
+        "selector": "input.ant-input-filled.ant-input-status-warning:not(.ant-input-disabled), .ant-input-filled.ant-input-status-warning:not(.ant-input-disabled) input, textarea.ant-input-filled.ant-input-status-warning:not(.ant-input-disabled), .ant-input-filled.ant-input-status-warning:not(.ant-input-disabled) textarea"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.error.borderless.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "error",
+        "variant": "borderless"
+      },
+      "token": "color-error",
+      "varName": "--ant-color-error",
+      "anchor": {
+        "selector": ".ant-input-borderless.ant-input-status-error, .ant-input-borderless.ant-input-status-error input, .ant-input-borderless.ant-input-status-error textarea"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.error.borderless.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "error",
+        "variant": "borderless"
+      },
+      "token": "color-error",
+      "varName": "--ant-color-error",
+      "anchor": {
+        "selector": ".ant-input-borderless.ant-input-status-error, .ant-input-borderless.ant-input-status-error input, .ant-input-borderless.ant-input-status-error textarea"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.error.filled.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "error",
+        "variant": "filled"
+      },
+      "token": "color-error-text",
+      "varName": "--ant-color-error-text",
+      "anchor": {
+        "selector": "input.ant-input-filled.ant-input-status-error:not(.ant-input-disabled), .ant-input-filled.ant-input-status-error:not(.ant-input-disabled) input, textarea.ant-input-filled.ant-input-status-error:not(.ant-input-disabled), .ant-input-filled.ant-input-status-error:not(.ant-input-disabled) textarea"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.warning.borderless.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "warning",
+        "variant": "borderless"
+      },
+      "token": "color-warning",
+      "varName": "--ant-color-warning",
+      "anchor": {
+        "selector": ".ant-input-borderless.ant-input-status-warning, .ant-input-borderless.ant-input-status-warning input, .ant-input-borderless.ant-input-status-warning textarea"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.warning.borderless.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "warning",
+        "variant": "borderless"
+      },
+      "token": "color-warning",
+      "varName": "--ant-color-warning",
+      "anchor": {
+        "selector": ".ant-input-borderless.ant-input-status-warning, .ant-input-borderless.ant-input-status-warning input, .ant-input-borderless.ant-input-status-warning textarea"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.warning.filled.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "warning",
+        "variant": "filled"
+      },
+      "token": "color-warning-text",
+      "varName": "--ant-color-warning-text",
+      "anchor": {
+        "selector": "input.ant-input-filled.ant-input-status-warning:not(.ant-input-disabled), .ant-input-filled.ant-input-status-warning:not(.ant-input-disabled) input, textarea.ant-input-filled.ant-input-status-warning:not(.ant-input-disabled), .ant-input-filled.ant-input-status-warning:not(.ant-input-disabled) textarea"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.unset.outlined.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "unset",
+        "variant": "outlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.unset.outlined.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "unset",
+        "variant": "outlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.unset.borderless.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "unset",
+        "variant": "borderless"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.unset.borderless.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "unset",
+        "variant": "borderless"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.unset.filled.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "unset",
+        "variant": "filled"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.unset.filled.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "unset",
+        "variant": "filled"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.unset.underlined.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "unset",
+        "variant": "underlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.unset.underlined.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "unset",
+        "variant": "underlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.error.outlined.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.error.outlined.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.error.borderless.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "error",
+        "variant": "borderless"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.error.borderless.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "error",
+        "variant": "borderless"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.error.filled.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "error",
+        "variant": "filled"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.error.filled.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "error",
+        "variant": "filled"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.error.underlined.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "error",
+        "variant": "underlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.error.underlined.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "error",
+        "variant": "underlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.warning.outlined.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "warning",
+        "variant": "outlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.warning.outlined.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "warning",
+        "variant": "outlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.warning.borderless.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "warning",
+        "variant": "borderless"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.warning.borderless.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "warning",
+        "variant": "borderless"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.warning.filled.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "warning",
+        "variant": "filled"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.warning.filled.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "warning",
+        "variant": "filled"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.warning.underlined.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "warning",
+        "variant": "underlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "small.warning.underlined.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "warning",
+        "variant": "underlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.unset.outlined.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "unset",
+        "variant": "outlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.unset.outlined.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "unset",
+        "variant": "outlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.unset.borderless.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "unset",
+        "variant": "borderless"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.unset.borderless.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "unset",
+        "variant": "borderless"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.unset.filled.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "unset",
+        "variant": "filled"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.unset.filled.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "unset",
+        "variant": "filled"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.unset.underlined.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "unset",
+        "variant": "underlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.unset.underlined.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "unset",
+        "variant": "underlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.error.outlined.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.error.outlined.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.error.borderless.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "error",
+        "variant": "borderless"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.error.borderless.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "error",
+        "variant": "borderless"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.error.filled.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "error",
+        "variant": "filled"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.error.filled.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "error",
+        "variant": "filled"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.error.underlined.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "error",
+        "variant": "underlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.error.underlined.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "error",
+        "variant": "underlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.warning.outlined.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "warning",
+        "variant": "outlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.warning.outlined.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "warning",
+        "variant": "outlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.warning.borderless.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "warning",
+        "variant": "borderless"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.warning.borderless.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "warning",
+        "variant": "borderless"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.warning.filled.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "warning",
+        "variant": "filled"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.warning.filled.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "warning",
+        "variant": "filled"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.warning.underlined.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "warning",
+        "variant": "underlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "middle.warning.underlined.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "warning",
+        "variant": "underlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.unset.outlined.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "unset",
+        "variant": "outlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.unset.outlined.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "unset",
+        "variant": "outlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.unset.borderless.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "unset",
+        "variant": "borderless"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.unset.borderless.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "unset",
+        "variant": "borderless"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.unset.filled.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "unset",
+        "variant": "filled"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.unset.filled.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "unset",
+        "variant": "filled"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.unset.underlined.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "unset",
+        "variant": "underlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.unset.underlined.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "unset",
+        "variant": "underlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.error.outlined.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.error.outlined.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.error.borderless.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "error",
+        "variant": "borderless"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.error.borderless.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "error",
+        "variant": "borderless"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.error.filled.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "error",
+        "variant": "filled"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.error.filled.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "error",
+        "variant": "filled"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.error.underlined.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "error",
+        "variant": "underlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.error.underlined.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "error",
+        "variant": "underlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.warning.outlined.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "warning",
+        "variant": "outlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.warning.outlined.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "warning",
+        "variant": "outlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.warning.borderless.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "warning",
+        "variant": "borderless"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.warning.borderless.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "warning",
+        "variant": "borderless"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.warning.filled.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "warning",
+        "variant": "filled"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.warning.filled.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "warning",
+        "variant": "filled"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.warning.underlined.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "warning",
+        "variant": "underlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "large.warning.underlined.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "warning",
+        "variant": "underlined"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.unset.outlined.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "unset",
+        "variant": "outlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.unset.outlined.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "unset",
+        "variant": "outlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.unset.borderless.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "unset",
+        "variant": "borderless"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.unset.borderless.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "unset",
+        "variant": "borderless"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.unset.filled.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "unset",
+        "variant": "filled"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.unset.filled.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "unset",
+        "variant": "filled"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.unset.underlined.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "unset",
+        "variant": "underlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.unset.underlined.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "unset",
+        "variant": "underlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.error.outlined.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.error.outlined.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.error.borderless.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "error",
+        "variant": "borderless"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.error.borderless.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "error",
+        "variant": "borderless"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.error.filled.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "error",
+        "variant": "filled"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.error.filled.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "error",
+        "variant": "filled"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.error.underlined.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "error",
+        "variant": "underlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.error.underlined.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "error",
+        "variant": "underlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.warning.outlined.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "warning",
+        "variant": "outlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.warning.outlined.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "warning",
+        "variant": "outlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.warning.borderless.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "warning",
+        "variant": "borderless"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.warning.borderless.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "warning",
+        "variant": "borderless"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.warning.filled.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "warning",
+        "variant": "filled"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.warning.filled.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "warning",
+        "variant": "filled"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.warning.underlined.enabled",
+      "axisValues": {
+        "size": "small",
+        "status": "warning",
+        "variant": "underlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "small.warning.underlined.disabled",
+      "axisValues": {
+        "size": "small",
+        "status": "warning",
+        "variant": "underlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.unset.outlined.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "unset",
+        "variant": "outlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.unset.outlined.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "unset",
+        "variant": "outlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.unset.borderless.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "unset",
+        "variant": "borderless"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.unset.borderless.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "unset",
+        "variant": "borderless"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.unset.filled.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "unset",
+        "variant": "filled"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.unset.filled.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "unset",
+        "variant": "filled"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.unset.underlined.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "unset",
+        "variant": "underlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.unset.underlined.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "unset",
+        "variant": "underlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.error.outlined.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.error.outlined.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.error.borderless.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "error",
+        "variant": "borderless"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.error.borderless.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "error",
+        "variant": "borderless"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.error.filled.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "error",
+        "variant": "filled"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.error.filled.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "error",
+        "variant": "filled"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.error.underlined.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "error",
+        "variant": "underlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.error.underlined.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "error",
+        "variant": "underlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.warning.outlined.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "warning",
+        "variant": "outlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.warning.outlined.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "warning",
+        "variant": "outlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.warning.borderless.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "warning",
+        "variant": "borderless"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.warning.borderless.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "warning",
+        "variant": "borderless"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.warning.filled.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "warning",
+        "variant": "filled"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.warning.filled.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "warning",
+        "variant": "filled"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.warning.underlined.enabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "warning",
+        "variant": "underlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "middle.warning.underlined.disabled",
+      "axisValues": {
+        "size": "middle",
+        "status": "warning",
+        "variant": "underlined"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.unset.outlined.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "unset",
+        "variant": "outlined"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.unset.outlined.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "unset",
+        "variant": "outlined"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.unset.borderless.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "unset",
+        "variant": "borderless"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.unset.borderless.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "unset",
+        "variant": "borderless"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.unset.filled.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "unset",
+        "variant": "filled"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.unset.filled.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "unset",
+        "variant": "filled"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.unset.underlined.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "unset",
+        "variant": "underlined"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.unset.underlined.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "unset",
+        "variant": "underlined"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.error.outlined.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.error.outlined.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "error",
+        "variant": "outlined"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.error.borderless.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "error",
+        "variant": "borderless"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.error.borderless.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "error",
+        "variant": "borderless"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.error.filled.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "error",
+        "variant": "filled"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.error.filled.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "error",
+        "variant": "filled"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.error.underlined.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "error",
+        "variant": "underlined"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.error.underlined.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "error",
+        "variant": "underlined"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.warning.outlined.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "warning",
+        "variant": "outlined"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.warning.outlined.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "warning",
+        "variant": "outlined"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.warning.borderless.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "warning",
+        "variant": "borderless"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.warning.borderless.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "warning",
+        "variant": "borderless"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.warning.filled.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "warning",
+        "variant": "filled"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.warning.filled.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "warning",
+        "variant": "filled"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.warning.underlined.enabled",
+      "axisValues": {
+        "size": "large",
+        "status": "warning",
+        "variant": "underlined"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "large.warning.underlined.disabled",
+      "axisValues": {
+        "size": "large",
+        "status": "warning",
+        "variant": "underlined"
+      },
+      "token": "input-input-font-size-lg",
+      "varName": "--ant-input-input-font-size-lg",
+      "anchor": {
+        "selector": ".ant-input-lg"
+      }
+    }
+  ],
+  "skips": [
+    "root.background-color: candidate --ant-color-bg-container-disabled → \"color-bg-container-disabled\" = rgba(0,0,0,0.04) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.line-height: candidates --ant-line-height → \"line-height\" = 1.5714285714285714; --ant-line-height-lg → \"line-height-lg\" = 1.5 name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 8,
+  "shorthandSkips": [
+    "root.background: SHORTHAND carrying var(--ant-color-bg-container) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.background: SHORTHAND carrying var(--ant-color-error-bg, --ant-color-fill-tertiary) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.background: SHORTHAND carrying var(--ant-color-fill-tertiary) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.background: SHORTHAND carrying var(--ant-color-fill-tertiary, --ant-color-warning-bg) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-color: SHORTHAND carrying var(--ant-color-error) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-color: SHORTHAND carrying var(--ant-color-warning) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.padding: SHORTHAND carrying var(--ant-input-padding-block-lg, --ant-input-padding-inline-lg) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.padding: SHORTHAND carrying var(--ant-input-padding-block-sm, --ant-input-padding-inline-sm) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

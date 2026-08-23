@@ -3,7 +3,7 @@
   "measuredAt": "extract/computed/out/conformance/<case>/enriched.contract.json through figma-sync/plugin/engine (mock figma) and core/propose-figma (npx tsx conformance/canvas.ts)",
   "counts": {
     "ROUND-TRIPPED": 29,
-    "NAMED": 9,
+    "NAMED": 10,
     "DRIFTED": 0,
     "HARMFUL": 0,
     "SILENT": 0,
@@ -39,7 +39,16 @@
         "3px"
       ],
       "proposed": [],
-      "note": "code-only channel root.outline-width = {«self».root.outline-width} — a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw."
+      "note": "code-only channel root.outline-width [focus-visible] = {«self».root.outline-width-state-focus-visible} — the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)"
+    },
+    "antd-focus-outline-ring-ua-width": {
+      "classification": "NAMED",
+      "channel": "outline-width",
+      "seed": [
+        "3px"
+      ],
+      "proposed": [],
+      "note": "code-only channel root.outline-width [focus-visible] = {«self».root.outline-width-state-focus-visible} — the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)"
     },
     "antd-forwarded-root-attrs": {
       "classification": "ROUND-TRIPPED",

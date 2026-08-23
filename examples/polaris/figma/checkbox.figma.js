@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "polaris.checkbox",
     "version": "0.4.0",
     "anchorKey": null,
-    "description": "Checkbox — generated from contract polaris.checkbox v0.4.0 † (62 code-only facts — see plugin report)",
+    "description": "Checkbox — generated from contract polaris.checkbox v0.4.0 † (67 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -551,6 +551,28 @@ const COMPONENTS = [
       {
         "part": "backdrop",
         "kind": "channel",
+        "channel": "background-color [disabled]",
+        "value": "{imported.checkbox.backdrop.background-color-state-disabled}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "backdrop",
+        "kind": "channel",
+        "channel": "border-color [hover]",
+        "value": "{p.color-input-border-hover}",
+        "reason": "the hover plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "backdrop",
+        "kind": "channel",
         "channel": "bottom",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -858,6 +880,17 @@ const COMPONENTS = [
       },
       {
         "part": "choice__label",
+        "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.shared.color-b5b5b5}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "choice__label",
         "kind": "declared",
         "channel": "cursor",
         "value": "default",
@@ -1104,6 +1137,17 @@ const COMPONENTS = [
       },
       {
         "part": "input",
+        "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.checkbox.input.color-state-disabled}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "input",
         "kind": "declared",
         "channel": "appearance",
         "value": "auto",
@@ -1174,6 +1218,17 @@ const COMPONENTS = [
         "channel": "text-rendering",
         "value": "auto",
         "reason": "Text rasterization hints (text-rendering) apply only in code.",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label",
+        "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.shared.color-b5b5b5}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
         "variants": {
           "count": 3,
           "of": 3

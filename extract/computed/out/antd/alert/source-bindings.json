@@ -1,0 +1,3226 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Alert",
+  "varPrefix": "--ant-",
+  "facts": [
+    {
+      "part": "alert-close-icon",
+      "channel": "font-size",
+      "combo": "success.noIcon.off.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "font-size",
+      "combo": "success.noIcon.on.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "font-size",
+      "combo": "success.icon.off.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "font-size",
+      "combo": "success.icon.on.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "font-size",
+      "combo": "info.noIcon.off.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "font-size",
+      "combo": "info.noIcon.on.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "font-size",
+      "combo": "info.icon.off.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "font-size",
+      "combo": "info.icon.on.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "font-size",
+      "combo": "warning.noIcon.off.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "font-size",
+      "combo": "warning.noIcon.on.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "font-size",
+      "combo": "warning.icon.off.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "font-size",
+      "combo": "warning.icon.on.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "font-size",
+      "combo": "error.noIcon.off.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "font-size",
+      "combo": "error.noIcon.on.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "font-size",
+      "combo": "error.icon.off.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "font-size",
+      "combo": "error.icon.on.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "line-height",
+      "combo": "success.noIcon.off.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "line-height",
+      "combo": "success.noIcon.on.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "line-height",
+      "combo": "success.icon.off.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "line-height",
+      "combo": "success.icon.on.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "line-height",
+      "combo": "info.noIcon.off.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "line-height",
+      "combo": "info.noIcon.on.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "line-height",
+      "combo": "info.icon.off.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "line-height",
+      "combo": "info.icon.on.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "line-height",
+      "combo": "warning.noIcon.off.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "line-height",
+      "combo": "warning.noIcon.on.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "line-height",
+      "combo": "warning.icon.off.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "line-height",
+      "combo": "warning.icon.on.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "line-height",
+      "combo": "error.noIcon.off.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "line-height",
+      "combo": "error.noIcon.on.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "line-height",
+      "combo": "error.icon.off.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "line-height",
+      "combo": "error.icon.on.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-icon",
+      "varName": "--ant-font-size-icon",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "margin-inline-start",
+      "combo": "success.noIcon.off.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "margin-inline-start",
+      "combo": "success.noIcon.on.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "margin-inline-start",
+      "combo": "success.icon.off.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "margin-inline-start",
+      "combo": "success.icon.on.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "margin-inline-start",
+      "combo": "info.noIcon.off.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "margin-inline-start",
+      "combo": "info.noIcon.on.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "margin-inline-start",
+      "combo": "info.icon.off.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "margin-inline-start",
+      "combo": "info.icon.on.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "margin-inline-start",
+      "combo": "warning.noIcon.off.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "margin-inline-start",
+      "combo": "warning.noIcon.on.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "margin-inline-start",
+      "combo": "warning.icon.off.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "margin-inline-start",
+      "combo": "warning.icon.on.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "margin-inline-start",
+      "combo": "error.noIcon.off.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "margin-inline-start",
+      "combo": "error.noIcon.on.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "margin-inline-start",
+      "combo": "error.icon.off.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "margin-inline-start",
+      "combo": "error.icon.on.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-close-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "color",
+      "combo": "success.icon.off.off",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "color-success",
+      "varName": "--ant-color-success",
+      "anchor": {
+        "selector": ".ant-alert-success .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "color",
+      "combo": "success.icon.off.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "color-success",
+      "varName": "--ant-color-success",
+      "anchor": {
+        "selector": ".ant-alert-success .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "color",
+      "combo": "success.icon.on.off",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "color-success",
+      "varName": "--ant-color-success",
+      "anchor": {
+        "selector": ".ant-alert-success .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "color",
+      "combo": "success.icon.on.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "color-success",
+      "varName": "--ant-color-success",
+      "anchor": {
+        "selector": ".ant-alert-success .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "color",
+      "combo": "info.icon.off.off",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "color-info",
+      "varName": "--ant-color-info",
+      "anchor": {
+        "selector": ".ant-alert-info .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "color",
+      "combo": "info.icon.off.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "color-info",
+      "varName": "--ant-color-info",
+      "anchor": {
+        "selector": ".ant-alert-info .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "color",
+      "combo": "info.icon.on.off",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "color-info",
+      "varName": "--ant-color-info",
+      "anchor": {
+        "selector": ".ant-alert-info .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "color",
+      "combo": "info.icon.on.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "color-info",
+      "varName": "--ant-color-info",
+      "anchor": {
+        "selector": ".ant-alert-info .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "color",
+      "combo": "warning.icon.off.off",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "color-warning",
+      "varName": "--ant-color-warning",
+      "anchor": {
+        "selector": ".ant-alert-warning .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "color",
+      "combo": "warning.icon.off.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "color-warning",
+      "varName": "--ant-color-warning",
+      "anchor": {
+        "selector": ".ant-alert-warning .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "color",
+      "combo": "warning.icon.on.off",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "color-warning",
+      "varName": "--ant-color-warning",
+      "anchor": {
+        "selector": ".ant-alert-warning .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "color",
+      "combo": "warning.icon.on.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "color-warning",
+      "varName": "--ant-color-warning",
+      "anchor": {
+        "selector": ".ant-alert-warning .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "color",
+      "combo": "error.icon.off.off",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "color-error",
+      "varName": "--ant-color-error",
+      "anchor": {
+        "selector": ".ant-alert-error .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "color",
+      "combo": "error.icon.off.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "color-error",
+      "varName": "--ant-color-error",
+      "anchor": {
+        "selector": ".ant-alert-error .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "color",
+      "combo": "error.icon.on.off",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "color-error",
+      "varName": "--ant-color-error",
+      "anchor": {
+        "selector": ".ant-alert-error .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "color",
+      "combo": "error.icon.on.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "color-error",
+      "varName": "--ant-color-error",
+      "anchor": {
+        "selector": ".ant-alert-error .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "font-size",
+      "combo": "success.icon.on.off",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "alert-with-description-icon-size",
+      "varName": "--ant-alert-with-description-icon-size",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "font-size",
+      "combo": "success.icon.on.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "alert-with-description-icon-size",
+      "varName": "--ant-alert-with-description-icon-size",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "font-size",
+      "combo": "info.icon.on.off",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "alert-with-description-icon-size",
+      "varName": "--ant-alert-with-description-icon-size",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "font-size",
+      "combo": "info.icon.on.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "alert-with-description-icon-size",
+      "varName": "--ant-alert-with-description-icon-size",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "font-size",
+      "combo": "warning.icon.on.off",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "alert-with-description-icon-size",
+      "varName": "--ant-alert-with-description-icon-size",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "font-size",
+      "combo": "warning.icon.on.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "alert-with-description-icon-size",
+      "varName": "--ant-alert-with-description-icon-size",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "font-size",
+      "combo": "error.icon.on.off",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "alert-with-description-icon-size",
+      "varName": "--ant-alert-with-description-icon-size",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "font-size",
+      "combo": "error.icon.on.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "alert-with-description-icon-size",
+      "varName": "--ant-alert-with-description-icon-size",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "margin-inline-end",
+      "combo": "success.icon.off.off",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "margin-inline-end",
+      "combo": "success.icon.off.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "margin-inline-end",
+      "combo": "success.icon.on.off",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "margin-sm",
+      "varName": "--ant-margin-sm",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "margin-inline-end",
+      "combo": "success.icon.on.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "margin-sm",
+      "varName": "--ant-margin-sm",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "margin-inline-end",
+      "combo": "info.icon.off.off",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "margin-inline-end",
+      "combo": "info.icon.off.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "margin-inline-end",
+      "combo": "info.icon.on.off",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "margin-sm",
+      "varName": "--ant-margin-sm",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "margin-inline-end",
+      "combo": "info.icon.on.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "margin-sm",
+      "varName": "--ant-margin-sm",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "margin-inline-end",
+      "combo": "warning.icon.off.off",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "margin-inline-end",
+      "combo": "warning.icon.off.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "margin-inline-end",
+      "combo": "warning.icon.on.off",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "margin-sm",
+      "varName": "--ant-margin-sm",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "margin-inline-end",
+      "combo": "warning.icon.on.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "margin-sm",
+      "varName": "--ant-margin-sm",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "margin-inline-end",
+      "combo": "error.icon.off.off",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "margin-inline-end",
+      "combo": "error.icon.off.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "margin-inline-end",
+      "combo": "error.icon.on.off",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "margin-sm",
+      "varName": "--ant-margin-sm",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-icon"
+      }
+    },
+    {
+      "part": "alert-icon",
+      "channel": "margin-inline-end",
+      "combo": "error.icon.on.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "margin-sm",
+      "varName": "--ant-margin-sm",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-icon"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "success.noIcon.on.off",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size-lg",
+      "varName": "--ant-font-size-lg",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "success.noIcon.on.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-lg",
+      "varName": "--ant-font-size-lg",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "success.icon.on.off",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size-lg",
+      "varName": "--ant-font-size-lg",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "success.icon.on.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-lg",
+      "varName": "--ant-font-size-lg",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "info.noIcon.on.off",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size-lg",
+      "varName": "--ant-font-size-lg",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "info.noIcon.on.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-lg",
+      "varName": "--ant-font-size-lg",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "info.icon.on.off",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size-lg",
+      "varName": "--ant-font-size-lg",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "info.icon.on.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-lg",
+      "varName": "--ant-font-size-lg",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "warning.noIcon.on.off",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size-lg",
+      "varName": "--ant-font-size-lg",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "warning.noIcon.on.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-lg",
+      "varName": "--ant-font-size-lg",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "warning.icon.on.off",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size-lg",
+      "varName": "--ant-font-size-lg",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "warning.icon.on.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-lg",
+      "varName": "--ant-font-size-lg",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "error.noIcon.on.off",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size-lg",
+      "varName": "--ant-font-size-lg",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "error.noIcon.on.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-lg",
+      "varName": "--ant-font-size-lg",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "error.icon.on.off",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size-lg",
+      "varName": "--ant-font-size-lg",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "error.icon.on.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size-lg",
+      "varName": "--ant-font-size-lg",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "margin-bottom",
+      "combo": "success.noIcon.on.off",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "margin-bottom",
+      "combo": "success.noIcon.on.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "margin-bottom",
+      "combo": "success.icon.on.off",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "margin-bottom",
+      "combo": "success.icon.on.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "margin-bottom",
+      "combo": "info.noIcon.on.off",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "margin-bottom",
+      "combo": "info.noIcon.on.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "margin-bottom",
+      "combo": "info.icon.on.off",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "margin-bottom",
+      "combo": "info.icon.on.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "margin-bottom",
+      "combo": "warning.noIcon.on.off",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "margin-bottom",
+      "combo": "warning.noIcon.on.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "margin-bottom",
+      "combo": "warning.icon.on.off",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "margin-bottom",
+      "combo": "warning.icon.on.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "margin-bottom",
+      "combo": "error.noIcon.on.off",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "margin-bottom",
+      "combo": "error.noIcon.on.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "margin-bottom",
+      "combo": "error.icon.on.off",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "margin-bottom",
+      "combo": "error.icon.on.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-alert-with-description .ant-alert-message"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "success.noIcon.on.off",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert-description"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "success.noIcon.on.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert-description"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "success.icon.on.off",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert-description"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "success.icon.on.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert-description"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "info.noIcon.on.off",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert-description"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "info.noIcon.on.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert-description"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "info.icon.on.off",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert-description"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "info.icon.on.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert-description"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "warning.noIcon.on.off",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert-description"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "warning.noIcon.on.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert-description"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "warning.icon.on.off",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert-description"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "warning.icon.on.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert-description"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "error.noIcon.on.off",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert-description"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "error.noIcon.on.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert-description"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "error.icon.on.off",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert-description"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "error.icon.on.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert-description"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "success.noIcon.off.off",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "success.noIcon.off.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "success.noIcon.on.off",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "success.noIcon.on.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "success.icon.off.off",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "success.icon.off.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "success.icon.on.off",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "success.icon.on.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "info.noIcon.off.off",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "info.noIcon.off.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "info.noIcon.on.off",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "info.noIcon.on.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "info.icon.off.off",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "info.icon.off.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "info.icon.on.off",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "info.icon.on.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "warning.noIcon.off.off",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "warning.noIcon.off.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "warning.noIcon.on.off",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "warning.noIcon.on.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "warning.icon.off.off",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "warning.icon.off.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "warning.icon.on.off",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "warning.icon.on.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "error.noIcon.off.off",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "error.noIcon.off.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "error.noIcon.on.off",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "error.noIcon.on.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "error.icon.off.off",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "error.icon.off.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "error.icon.on.off",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "error.icon.on.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "success.noIcon.off.off",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "success.noIcon.off.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "success.noIcon.on.off",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "success.noIcon.on.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "success.icon.off.off",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "success.icon.off.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "success.icon.on.off",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "success.icon.on.on",
+      "axisValues": {
+        "type": "success",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "info.noIcon.off.off",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "info.noIcon.off.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "info.noIcon.on.off",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "info.noIcon.on.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "info.icon.off.off",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "info.icon.off.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "info.icon.on.off",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "info.icon.on.on",
+      "axisValues": {
+        "type": "info",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "warning.noIcon.off.off",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "warning.noIcon.off.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "warning.noIcon.on.off",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "warning.noIcon.on.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "warning.icon.off.off",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "warning.icon.off.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "warning.icon.on.off",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "warning.icon.on.on",
+      "axisValues": {
+        "type": "warning",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "error.noIcon.off.off",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "error.noIcon.off.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "noIcon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "error.noIcon.on.off",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "error.noIcon.on.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "noIcon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "error.icon.off.off",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "error.icon.off.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "off",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "error.icon.on.off",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "off"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "error.icon.on.on",
+      "axisValues": {
+        "type": "error",
+        "showIcon": "icon",
+        "description": "on",
+        "closable": "on"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-alert"
+      }
+    }
+  ],
+  "skips": [
+    "anticon.color: candidate --ant-color-icon → \"color-icon\" = rgba(0,0,0,0.45) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label.color: candidate --ant-color-text-heading → \"color-text-heading\" = rgba(0,0,0,0.88) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label-2.color: candidate --ant-color-text → \"color-text\" = rgba(0,0,0,0.88) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label-2.line-height: candidate --ant-line-height → \"line-height\" = 1.5714285714285714 names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.color: candidate --ant-color-text → \"color-text\" = rgba(0,0,0,0.88) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.line-height: candidate --ant-line-height → \"line-height\" = 1.5714285714285714 names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 4,
+  "shorthandSkips": [
+    "root.background: SHORTHAND carrying var(--ant-color-error-bg) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.background: SHORTHAND carrying var(--ant-color-info-bg) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.background: SHORTHAND carrying var(--ant-color-success-bg) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.background: SHORTHAND carrying var(--ant-color-warning-bg) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

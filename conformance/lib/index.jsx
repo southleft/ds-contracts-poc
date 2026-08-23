@@ -4,6 +4,7 @@ export { default as CaseAntdComponentScopedCustomProperty } from '../cases/antd-
 export { default as CaseAntdEmptyMarginOnlyParts } from '../cases/antd-empty-margin-only-parts/Case.tsx';
 export { default as CaseAntdFocusOutlineRing } from '../cases/antd-focus-outline-ring/Case.tsx';
 export { default as CaseAntdFocusOutlineRingChildPart } from '../cases/antd-focus-outline-ring-child-part/Case.tsx';
+export { default as CaseAntdFocusOutlineRingUaWidth } from '../cases/antd-focus-outline-ring-ua-width/Case.tsx';
 export { default as CaseAntdForwardedRootAttrs } from '../cases/antd-forwarded-root-attrs/Case.tsx';
 export { default as CaseAntdOverlayDigitDepthThree } from '../cases/antd-overlay-digit-depth-three/Case.tsx';
 export { default as CaseAntdPartTransitionChannel } from '../cases/antd-part-transition-channel/Case.tsx';

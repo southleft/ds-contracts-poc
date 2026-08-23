@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "mui.accordion",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Accordion — generated from contract mui.accordion v0.2.0 † (46 code-only facts — see plugin report)",
+    "description": "Accordion — generated from contract mui.accordion v0.2.0 † (48 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -999,6 +999,17 @@ const COMPONENTS = [
       {
         "part": "accordionsummary-gutters",
         "kind": "channel",
+        "channel": "background-color [focus-visible]",
+        "value": "{imported.accordion.accordionsummary-gutters.background-color-state-focus-visible}",
+        "reason": "the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 4,
+          "of": 4
+        }
+      },
+      {
+        "part": "accordionsummary-gutters",
+        "kind": "channel",
         "channel": "bottom",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -1384,6 +1395,17 @@ const COMPONENTS = [
         "channel": "display",
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 4,
+          "of": 4
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "background-color [disabled]",
+        "value": "{imported.accordion.root.background-color-state-disabled}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
         "variants": {
           "count": 4,
           "of": 4

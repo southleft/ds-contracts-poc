@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "altitude.chip",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Chip — generated from contract altitude.chip v0.2.0 † (9 code-only facts — see plugin report)",
+    "description": "Chip — generated from contract altitude.chip v0.2.0 † (12 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -550,6 +550,17 @@ const COMPONENTS = [
       {
         "part": "root",
         "kind": "channel",
+        "channel": "outline-color [focus-visible]",
+        "value": "{imported.chip.root.outline-color-state-focus-visible}",
+        "reason": "the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
         "channel": "outline-color",
         "value": "{imported.chip.root.outline-color.danger}",
         "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
@@ -620,6 +631,28 @@ const COMPONENTS = [
             "Variant=Warning, Type=Default",
             "Variant=Warning, Type=Squared"
           ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-offset [focus-visible]",
+        "value": "{imported.chip.root.outline-offset-state-focus-visible}",
+        "reason": "the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 10,
+          "of": 10
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "outline-width [focus-visible]",
+        "value": "{imported.chip.root.outline-width-state-focus-visible}",
+        "reason": "the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 10,
+          "of": 10
         }
       },
       {

@@ -1,0 +1,151 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "antd.tooltip",
+  "name": "Tooltip",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). THE PORTAL LANE (docs/23 §B.1 + §B.2 — expected LEDGERED; the exam measures whether it is NAMED). Portal-aware capture: the popper subtree (div.ant-tooltip) is the component's rendered contribution; the Button anchor (config childWrap) is receipted, never carried. `open`, `title` and `placement: top` are pinned by the config's openDriver; placement is NOT an axis (anchored positioning is not modelled — the MUI Tooltip precedent). `getPopupContainer` takes a function the marker grammar cannot express, so the in-stage route is unreachable from config (W9) and B.1 is MEASURED, not dodged. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
+        "position": "absolute"
+      },
+      "parts": {
+        "tooltip-arrow": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|tooltip-arrow — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "position": "absolute",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "pointer-events": "none",
+            "transform": "matrix(1, 0, 0, 1, -8, -16)"
+          },
+          "parts": {
+            "tooltip-arrow-before": {
+              "shape": {
+                "kind": "rect",
+                "width": 16,
+                "height": 8
+              },
+              "declared": {
+                "position": "absolute"
+              },
+              "literals": {
+                "background-color": "rgba(0, 0, 0, 0.85)",
+                "border-top-width": "0px",
+                "border-right-width": "0px",
+                "border-bottom-width": "0px",
+                "border-left-width": "0px",
+                "top": "8px",
+                "left": "0px"
+              },
+              "description": "Drawn ::before pseudo-element decor promoted from the computed floor (pseudo-decor v2, Carbon live-defect round + Wave B.2): an UNCONDITIONAL 16×8 rect at 0,8 inside tooltip-arrow — position:absolute with literal offsets; rotation 0; background+border+box+radius only, no content text; translate folded into top/left (receipted)."
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.tooltip.tooltip-arrow.bottom}",
+            "color": "{imported.shared.color-000000e0}",
+            "font-size": "{imported.shared.size-14}",
+            "height": "{imported.tooltip.tooltip-arrow.height}",
+            "left": "{imported.tooltip.tooltip-arrow.left}",
+            "line-height": "{imported.shared.size-22}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.tooltip.tooltip-arrow.right}",
+            "top": "{imported.shared.size-0}",
+            "translate-x": "{imported.tooltip.tooltip-arrow.translate-x}",
+            "translate-y": "{imported.tooltip.tooltip-arrow.translate-y}",
+            "width": "{imported.tooltip.tooltip-arrow.width}",
+            "z-index": "{imported.tooltip.tooltip-arrow.z-index}"
+          }
+        },
+        "tooltip-content": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|tooltip-content — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "position": "relative"
+          },
+          "parts": {
+            "label": {
+              "text": "Tooltip text",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|tooltip-inner — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "box-sizing": "border-box",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif"
+              },
+              "tokens": {
+                "background-color": "{imported.tooltip.label.background-color}",
+                "border-bottom-left-radius": "{imported.shared.size-6}",
+                "border-bottom-right-radius": "{imported.shared.size-6}",
+                "border-top-left-radius": "{imported.shared.size-6}",
+                "border-top-right-radius": "{imported.shared.size-6}",
+                "box-shadow": "{imported.tooltip.label.box-shadow}",
+                "color": "{imported.tooltip.label.color}",
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.tooltip.label.font-weight}",
+                "line-height": "{imported.shared.size-22}",
+                "min-height": "{imported.tooltip.label.min-height}",
+                "min-width": "{imported.tooltip.label.min-width}",
+                "padding-bottom": "{imported.shared.size-6}",
+                "padding-left": "{imported.tooltip.label.padding-left}",
+                "padding-right": "{imported.tooltip.label.padding-right}",
+                "padding-top": "{imported.shared.size-6}"
+              }
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.shared.size-0}",
+            "color": "{imported.shared.color-000000e0}",
+            "font-size": "{imported.shared.size-14}",
+            "height": "{imported.tooltip.tooltip-content.height}",
+            "left": "{imported.shared.size-0}",
+            "line-height": "{imported.shared.size-22}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.tooltip.tooltip-content.width}"
+          }
+        }
+      },
+      "tokens": {
+        "color": "{imported.shared.color-000000e0}",
+        "font-size": "{imported.shared.size-14}",
+        "height": "{imported.tooltip.root.height}",
+        "line-height": "{imported.shared.size-22}",
+        "max-width": "{imported.tooltip.root.max-width}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "width": "{imported.tooltip.root.width}",
+        "z-index": "{imported.tooltip.root.z-index}"
+      },
+      "hugsBelowMaxWidth": true
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "antd",
+        "export": "Tooltip"
+      }
+    }
+  }
+}

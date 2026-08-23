@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "mui.switch",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Switch — generated from contract mui.switch v0.2.0 † (42 code-only facts — see plugin report)",
+    "description": "Switch — generated from contract mui.switch v0.2.0 † (43 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -4856,6 +4856,17 @@ const COMPONENTS = [
         "channel": "position",
         "value": "relative",
         "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 28,
+          "of": 28
+        }
+      },
+      {
+        "part": "switch-input",
+        "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.shared.color-545454}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
         "variants": {
           "count": 28,
           "of": 28

@@ -5,6 +5,7 @@
 @import '../cases/antd-empty-margin-only-parts/case.css';
 @import '../cases/antd-focus-outline-ring/case.css';
 @import '../cases/antd-focus-outline-ring-child-part/case.css';
+@import '../cases/antd-focus-outline-ring-ua-width/case.css';
 @import '../cases/antd-forwarded-root-attrs/case.css';
 @import '../cases/antd-overlay-digit-depth-three/case.css';
 @import '../cases/antd-part-transition-channel/case.css';

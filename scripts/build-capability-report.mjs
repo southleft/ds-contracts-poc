@@ -168,6 +168,10 @@ const LIBRARIES = [
   // range, so the real pin is examples/fluent/sandbox.package-lock.json (sha256
   // in examples/fluent/PROVENANCE.md) — the same reasoning as shadcn's ledger.
   { dir: 'fluent', label: 'Fluent 2', pkg: '@fluentui/react-components@9.74.5', contracts: 'examples/fluent/contracts' },
+  // Ant Design v5 (library #11, the P2 code→canvas exam): npm-pinned in
+  // examples/antd/.antd-sandbox (package.json archived at examples/antd/probe/
+  // sandbox-package.json); the runner refuses a version drift by name.
+  { dir: 'antd', label: 'Ant Design', pkg: 'antd@5.29.3', contracts: 'examples/antd/contracts' },
 ];
 
 /* ==================================================================== READ */

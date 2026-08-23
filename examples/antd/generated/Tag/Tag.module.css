@@ -1,0 +1,225 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/tag.contract.json (antd.tag v0.2.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background-color: var(--imported-tag-root-background-color-unset);
+  border-bottom-left-radius: var(--imported-shared-size-4);
+  border-bottom-right-radius: var(--imported-shared-size-4);
+  border-bottom-width: var(--imported-shared-size-1);
+  border-left-width: var(--imported-shared-size-1);
+  border-right-width: var(--imported-shared-size-1);
+  border-top-left-radius: var(--imported-shared-size-4);
+  border-top-right-radius: var(--imported-shared-size-4);
+  border-top-width: var(--imported-shared-size-1);
+  bottom: var(--imported-shared-size-0);
+  color: var(--imported-tag-root-color-unset);
+  font-size: var(--imported-tag-root-font-size);
+  font-weight: var(--imported-tag-root-font-weight);
+  left: var(--imported-shared-size-0);
+  line-height: var(--imported-tag-root-line-height);
+  margin-right: var(--imported-tag-root-margin-right);
+  padding-left: var(--imported-tag-root-padding-left);
+  padding-right: var(--imported-tag-root-padding-right);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  display: block;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-top-style: solid;
+  box-sizing: border-box;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  position: relative;
+  text-wrap-mode: nowrap;
+  transition-duration: 0.2s;
+}
+
+.bordered-bordered {
+  border-bottom-color: var(--imported-tag-root-border-bottom-color-unset-bordered);
+  border-left-color: var(--imported-tag-root-border-left-color-unset-bordered);
+  border-right-color: var(--imported-tag-root-border-right-color-unset-bordered);
+  border-top-color: var(--imported-tag-root-border-top-color-unset-bordered);
+}
+
+.bordered-borderless {
+  border-bottom-color: var(--imported-tag-root-border-bottom-color-unset-borderless);
+  border-left-color: var(--imported-tag-root-border-left-color-unset-borderless);
+  border-right-color: var(--imported-tag-root-border-right-color-unset-borderless);
+  border-top-color: var(--imported-tag-root-border-top-color-unset-borderless);
+}
+
+.color-blue {
+  background-color: var(--imported-tag-root-background-color-blue);
+  color: var(--imported-tag-root-color-blue);
+}
+
+.color-blue.bordered-bordered {
+  border-bottom-color: var(--imported-tag-root-border-bottom-color-blue-bordered);
+  border-left-color: var(--imported-tag-root-border-left-color-blue-bordered);
+  border-right-color: var(--imported-tag-root-border-right-color-blue-bordered);
+  border-top-color: var(--imported-tag-root-border-top-color-blue-bordered);
+}
+
+.color-blue.bordered-borderless {
+  border-bottom-color: var(--imported-tag-root-border-bottom-color-blue-borderless);
+  border-left-color: var(--imported-tag-root-border-left-color-blue-borderless);
+  border-right-color: var(--imported-tag-root-border-right-color-blue-borderless);
+  border-top-color: var(--imported-tag-root-border-top-color-blue-borderless);
+}
+
+.color-error {
+  background-color: var(--imported-tag-root-background-color-error);
+  color: var(--imported-tag-root-color-error);
+}
+
+.color-error.bordered-bordered {
+  border-bottom-color: var(--imported-tag-root-border-bottom-color-error-bordered);
+  border-left-color: var(--imported-tag-root-border-left-color-error-bordered);
+  border-right-color: var(--imported-tag-root-border-right-color-error-bordered);
+  border-top-color: var(--imported-tag-root-border-top-color-error-bordered);
+}
+
+.color-error.bordered-borderless {
+  border-bottom-color: var(--imported-tag-root-border-bottom-color-error-borderless);
+  border-left-color: var(--imported-tag-root-border-left-color-error-borderless);
+  border-right-color: var(--imported-tag-root-border-right-color-error-borderless);
+  border-top-color: var(--imported-tag-root-border-top-color-error-borderless);
+}
+
+.color-gold {
+  background-color: var(--imported-tag-root-background-color-gold);
+  color: var(--imported-tag-root-color-gold);
+}
+
+.color-gold.bordered-bordered {
+  border-bottom-color: var(--imported-tag-root-border-bottom-color-gold-bordered);
+  border-left-color: var(--imported-tag-root-border-left-color-gold-bordered);
+  border-right-color: var(--imported-tag-root-border-right-color-gold-bordered);
+  border-top-color: var(--imported-tag-root-border-top-color-gold-bordered);
+}
+
+.color-gold.bordered-borderless {
+  border-bottom-color: var(--imported-tag-root-border-bottom-color-gold-borderless);
+  border-left-color: var(--imported-tag-root-border-left-color-gold-borderless);
+  border-right-color: var(--imported-tag-root-border-right-color-gold-borderless);
+  border-top-color: var(--imported-tag-root-border-top-color-gold-borderless);
+}
+
+.color-green {
+  background-color: var(--imported-tag-root-background-color-green);
+  color: var(--imported-tag-root-color-green);
+}
+
+.color-green.bordered-bordered {
+  border-bottom-color: var(--imported-tag-root-border-bottom-color-green-bordered);
+  border-left-color: var(--imported-tag-root-border-left-color-green-bordered);
+  border-right-color: var(--imported-tag-root-border-right-color-green-bordered);
+  border-top-color: var(--imported-tag-root-border-top-color-green-bordered);
+}
+
+.color-green.bordered-borderless {
+  border-bottom-color: var(--imported-tag-root-border-bottom-color-green-borderless);
+  border-left-color: var(--imported-tag-root-border-left-color-green-borderless);
+  border-right-color: var(--imported-tag-root-border-right-color-green-borderless);
+  border-top-color: var(--imported-tag-root-border-top-color-green-borderless);
+}
+
+.color-processing {
+  background-color: var(--imported-tag-root-background-color-processing);
+  color: var(--imported-tag-root-color-processing);
+}
+
+.color-processing.bordered-bordered {
+  border-bottom-color: var(--imported-tag-root-border-bottom-color-processing-bordered);
+  border-left-color: var(--imported-tag-root-border-left-color-processing-bordered);
+  border-right-color: var(--imported-tag-root-border-right-color-processing-bordered);
+  border-top-color: var(--imported-tag-root-border-top-color-processing-bordered);
+}
+
+.color-processing.bordered-borderless {
+  border-bottom-color: var(--imported-tag-root-border-bottom-color-processing-borderless);
+  border-left-color: var(--imported-tag-root-border-left-color-processing-borderless);
+  border-right-color: var(--imported-tag-root-border-right-color-processing-borderless);
+  border-top-color: var(--imported-tag-root-border-top-color-processing-borderless);
+}
+
+.color-red {
+  background-color: var(--imported-tag-root-background-color-red);
+  color: var(--imported-tag-root-color-red);
+}
+
+.color-red.bordered-bordered {
+  border-bottom-color: var(--imported-tag-root-border-bottom-color-red-bordered);
+  border-left-color: var(--imported-tag-root-border-left-color-red-bordered);
+  border-right-color: var(--imported-tag-root-border-right-color-red-bordered);
+  border-top-color: var(--imported-tag-root-border-top-color-red-bordered);
+}
+
+.color-red.bordered-borderless {
+  border-bottom-color: var(--imported-tag-root-border-bottom-color-red-borderless);
+  border-left-color: var(--imported-tag-root-border-left-color-red-borderless);
+  border-right-color: var(--imported-tag-root-border-right-color-red-borderless);
+  border-top-color: var(--imported-tag-root-border-top-color-red-borderless);
+}
+
+.color-success {
+  background-color: var(--imported-tag-root-background-color-success);
+  color: var(--imported-tag-root-color-success);
+}
+
+.color-success.bordered-bordered {
+  border-bottom-color: var(--imported-tag-root-border-bottom-color-success-bordered);
+  border-left-color: var(--imported-tag-root-border-left-color-success-bordered);
+  border-right-color: var(--imported-tag-root-border-right-color-success-bordered);
+  border-top-color: var(--imported-tag-root-border-top-color-success-bordered);
+}
+
+.color-success.bordered-borderless {
+  border-bottom-color: var(--imported-tag-root-border-bottom-color-success-borderless);
+  border-left-color: var(--imported-tag-root-border-left-color-success-borderless);
+  border-right-color: var(--imported-tag-root-border-right-color-success-borderless);
+  border-top-color: var(--imported-tag-root-border-top-color-success-borderless);
+}
+
+.anticon svg {
+  width: 10px;
+  height: 10px;
+}
+
+.anticon {
+  display: inline-flex;
+  align-items: center;
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--imported-tag-anticon-color);
+  font-size: var(--imported-tag-anticon-font-size);
+  line-height: var(--imported-shared-size-0);
+  margin-left: var(--imported-tag-anticon-margin-left);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  vertical-align: var(--imported-tag-anticon-vertical-align);
+  box-sizing: border-box;
+  cursor: pointer;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  text-align: center;
+  text-rendering: optimizelegibility;
+  text-wrap-mode: nowrap;
+  transition-duration: 0.2s;
+}
+
+.anticonGlyph {
+  display: inline-flex;
+}

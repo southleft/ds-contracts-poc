@@ -1,0 +1,231 @@
+{
+  "library": "antd",
+  "rows": [
+    {
+      "name": "alert",
+      "measured": true,
+      "floorPct": 84.69827586206897,
+      "cellsCompared": 14848,
+      "cellsEqual": 12576,
+      "combos": 32,
+      "pixelPerfect": "0/128",
+      "sourceFacts": 200,
+      "namedRefusals": 16,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 16,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "avatar",
+      "measured": true,
+      "floorPct": 91.93548387096774,
+      "cellsCompared": 1488,
+      "cellsEqual": 1368,
+      "combos": 6,
+      "pixelPerfect": "0/24",
+      "sourceFacts": 30,
+      "namedRefusals": 3,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 3,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "badge",
+      "measured": true,
+      "floorPct": 93.40836012861736,
+      "cellsCompared": 4976,
+      "cellsEqual": 4648,
+      "combos": 8,
+      "pixelPerfect": "32/32",
+      "sourceFacts": 103,
+      "namedRefusals": 16,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 16,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "button",
+      "measured": true,
+      "floorPct": 81.96536144578313,
+      "cellsCompared": 79680,
+      "cellsEqual": 65310,
+      "combos": 240,
+      "pixelPerfect": "0/960",
+      "sourceFacts": 1164,
+      "namedRefusals": 33,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 12,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 21,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "card",
+      "measured": true,
+      "floorPct": 91.35338345864662,
+      "cellsCompared": 2128,
+      "cellsEqual": 1944,
+      "combos": 4,
+      "pixelPerfect": "8/16",
+      "sourceFacts": 20,
+      "namedRefusals": 10,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 10,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "checkbox",
+      "measured": true,
+      "floorPct": 85.04273504273505,
+      "cellsCompared": 2808,
+      "cellsEqual": 2388,
+      "combos": 6,
+      "pixelPerfect": "0/24",
+      "sourceFacts": 51,
+      "namedRefusals": 8,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 7,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 1,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "input",
+      "measured": true,
+      "floorPct": 79.87588652482269,
+      "cellsCompared": 13536,
+      "cellsEqual": 10812,
+      "combos": 72,
+      "pixelPerfect": "0/288",
+      "sourceFacts": 162,
+      "namedRefusals": 5,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 5,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "progress",
+      "measured": true,
+      "floorPct": 93.14079422382672,
+      "cellsCompared": 2216,
+      "cellsEqual": 2064,
+      "combos": 4,
+      "pixelPerfect": "0/16",
+      "sourceFacts": 18,
+      "namedRefusals": 9,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 9,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "radio",
+      "measured": true,
+      "floorPct": 74.79508196721312,
+      "cellsCompared": 1952,
+      "cellsEqual": 1460,
+      "combos": 4,
+      "pixelPerfect": "0/16",
+      "sourceFacts": 26,
+      "namedRefusals": 8,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 7,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 1,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "switch",
+      "measured": true,
+      "floorPct": 94.32515337423312,
+      "cellsCompared": 5216,
+      "cellsEqual": 4920,
+      "combos": 8,
+      "pixelPerfect": "28/32",
+      "sourceFacts": 140,
+      "namedRefusals": 10,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 9,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 1,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "tag",
+      "measured": true,
+      "floorPct": 97.5,
+      "cellsCompared": 5120,
+      "cellsEqual": 4992,
+      "combos": 32,
+      "pixelPerfect": "0/128",
+      "sourceFacts": 124,
+      "namedRefusals": 2,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 2,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    },
+    {
+      "name": "tooltip",
+      "measured": true,
+      "floorPct": 95,
+      "cellsCompared": 100,
+      "cellsEqual": 95,
+      "combos": 1,
+      "pixelPerfect": "0/1",
+      "sourceFacts": 0,
+      "namedRefusals": 5,
+      "refusalBreakdown": {
+        "codeOnlyChannels": 5,
+        "pairwiseRefusals": 0,
+        "stateOverflow": 0,
+        "bindingContradictions": 0
+      },
+      "openQueue": 0
+    }
+  ],
+  "unmeasured": [],
+  "quarantined": [],
+  "totals": {
+    "measured": 12,
+    "weightedFloorPct": 83.97007488737059,
+    "cellsCompared": 134068,
+    "namedRefusals": 125,
+    "openQueue": 0,
+    "quarantined": 0
+  }
+}

@@ -1,0 +1,1239 @@
+{
+  "component": "Progress",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 4,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 2216,
+    "cellsEqual": 2064,
+    "pctEqual": 93.14079422382672,
+    "rowsFullyEqual": 0,
+    "rows": 16
+  },
+  "pixel": {
+    "pairs": 16,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 16,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 11.463623046875,
+    "meanAA": 4.27734375,
+    "maxAA": 4.375
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 18,
+    "mintedLeavesUnfolded": 58,
+    "baseBindings": 52,
+    "stateBindings": 0,
+    "codeOnlyChannels": 9,
+    "overflowBindings": 1,
+    "folds": 80
+  },
+  "worstRows": [
+    {
+      "key": "success__default",
+      "pctAA": 4.375,
+      "pctExact": 11.6845703125,
+      "channelsMismatched": 10
+    },
+    {
+      "key": "success__hover",
+      "pctAA": 4.375,
+      "pctExact": 11.6845703125,
+      "channelsMismatched": 10
+    },
+    {
+      "key": "success__focus-visible",
+      "pctAA": 4.375,
+      "pctExact": 11.6845703125,
+      "channelsMismatched": 10
+    },
+    {
+      "key": "success__active",
+      "pctAA": 4.375,
+      "pctExact": 11.6845703125,
+      "channelsMismatched": 10
+    },
+    {
+      "key": "exception__default",
+      "pctAA": 4.345703125,
+      "pctExact": 11.6796875,
+      "channelsMismatched": 10
+    },
+    {
+      "key": "exception__hover",
+      "pctAA": 4.345703125,
+      "pctExact": 11.6796875,
+      "channelsMismatched": 10
+    },
+    {
+      "key": "exception__focus-visible",
+      "pctAA": 4.345703125,
+      "pctExact": 11.6796875,
+      "channelsMismatched": 10
+    },
+    {
+      "key": "exception__active",
+      "pctAA": 4.345703125,
+      "pctExact": 11.6796875,
+      "channelsMismatched": 10
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.display",
+      16
+    ],
+    [
+      "root.list-style-type",
+      16
+    ],
+    [
+      "progress-outer.list-style-type",
+      16
+    ],
+    [
+      "progress-inner.flex-basis",
+      16
+    ],
+    [
+      "progress-inner.list-style-type",
+      16
+    ],
+    [
+      "progress-inner.vertical-align",
+      16
+    ],
+    [
+      "progress-bg.list-style-type",
+      16
+    ],
+    [
+      "label.list-style-type",
+      16
+    ],
+    [
+      "label.vertical-align",
+      16
+    ],
+    [
+      "anticon.list-style-type",
+      8
+    ]
+  ],
+  "namedLosses": [
+    "promotion: pseudo-decor-outside-grammar: progress-bg::before drawn with a non-carryable transform (matrix(0, 0, 0, 1, -101.594, 0)) — the bounded decor grammar carries translate + orthonormal rotate only; named refusal",
+    "promotion: pseudo-decor-outside-grammar: progress-bg::after paints at position:static (265.969x8, opacity 1) — the bounded decor grammar reads position:absolute boxes only; an in-flow decor box is NOT promoted and NOT on the canvas",
+    "overflow: anticon.color — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
+    "code-only: root.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: progress-outer.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: progress-inner.flex-basis — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: progress-inner.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: progress-inner.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: progress-bg.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: anticon.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/antd/tokens/antd-minted.dtcg.json",
+    "leavesAdded": 1247,
+    "divergent": [
+      {
+        "token": "imported.progress.label.color.exception",
+        "fresh": "#ff4d4f",
+        "shipped": "{color-error}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.progress.label.color.success",
+        "fresh": "#52c41a",
+        "shipped": "{color-success}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.progress.progress-bg.background-color.exception",
+        "fresh": "#ff4d4f",
+        "shipped": "{color-error}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.progress.progress-bg.background-color.success",
+        "fresh": "#52c41a",
+        "shipped": "{color-success}",
+        "resolvedEqual": true
+      }
+    ]
+  },
+  "rows": [
+    {
+      "key": "unset__default",
+      "channelsCompared": 127,
+      "channelsEqual": 118,
+      "pctExact": 11.2451171875,
+      "pctAA": 4.1943359375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-outer",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "progress-bg",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        }
+      ]
+    },
+    {
+      "key": "unset__hover",
+      "channelsCompared": 127,
+      "channelsEqual": 118,
+      "pctExact": 11.2451171875,
+      "pctAA": 4.1943359375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-outer",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "progress-bg",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        }
+      ]
+    },
+    {
+      "key": "unset__focus-visible",
+      "channelsCompared": 127,
+      "channelsEqual": 118,
+      "pctExact": 11.2451171875,
+      "pctAA": 4.1943359375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-outer",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "progress-bg",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        }
+      ]
+    },
+    {
+      "key": "unset__active",
+      "channelsCompared": 127,
+      "channelsEqual": 118,
+      "pctExact": 11.2451171875,
+      "pctAA": 4.1943359375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-outer",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "progress-bg",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        }
+      ]
+    },
+    {
+      "key": "exception__default",
+      "channelsCompared": 150,
+      "channelsEqual": 140,
+      "pctExact": 11.6796875,
+      "pctAA": 4.345703125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-outer",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "progress-bg",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "anticon",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "exception__hover",
+      "channelsCompared": 150,
+      "channelsEqual": 140,
+      "pctExact": 11.6796875,
+      "pctAA": 4.345703125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-outer",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "progress-bg",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "anticon",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "exception__focus-visible",
+      "channelsCompared": 150,
+      "channelsEqual": 140,
+      "pctExact": 11.6796875,
+      "pctAA": 4.345703125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-outer",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "progress-bg",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "anticon",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "exception__active",
+      "channelsCompared": 150,
+      "channelsEqual": 140,
+      "pctExact": 11.6796875,
+      "pctAA": 4.345703125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-outer",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "progress-bg",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "anticon",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "active__default",
+      "channelsCompared": 127,
+      "channelsEqual": 118,
+      "pctExact": 11.2451171875,
+      "pctAA": 4.1943359375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-outer",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "progress-bg",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        }
+      ]
+    },
+    {
+      "key": "active__hover",
+      "channelsCompared": 127,
+      "channelsEqual": 118,
+      "pctExact": 11.2451171875,
+      "pctAA": 4.1943359375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-outer",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "progress-bg",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        }
+      ]
+    },
+    {
+      "key": "active__focus-visible",
+      "channelsCompared": 127,
+      "channelsEqual": 118,
+      "pctExact": 11.2451171875,
+      "pctAA": 4.1943359375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-outer",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "progress-bg",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        }
+      ]
+    },
+    {
+      "key": "active__active",
+      "channelsCompared": 127,
+      "channelsEqual": 118,
+      "pctExact": 11.2451171875,
+      "pctAA": 4.1943359375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-outer",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "progress-bg",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        }
+      ]
+    },
+    {
+      "key": "success__default",
+      "channelsCompared": 150,
+      "channelsEqual": 140,
+      "pctExact": 11.6845703125,
+      "pctAA": 4.375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-outer",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "progress-bg",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "anticon",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "success__hover",
+      "channelsCompared": 150,
+      "channelsEqual": 140,
+      "pctExact": 11.6845703125,
+      "pctAA": 4.375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-outer",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "progress-bg",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "anticon",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "success__focus-visible",
+      "channelsCompared": 150,
+      "channelsEqual": 140,
+      "pctExact": 11.6845703125,
+      "pctAA": 4.375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-outer",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "progress-bg",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "anticon",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "success__active",
+      "channelsCompared": 150,
+      "channelsEqual": 140,
+      "pctExact": 11.6845703125,
+      "pctAA": 4.375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-outer",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "progress-inner",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "progress-bg",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "anticon",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    }
+  ]
+}

@@ -16,13 +16,13 @@ repo it is simply absent from the denominator and scores 100%.
 
 | | |
 |---|---|
-| cases | **90** |
-| 🟢 pass | **87** |
+| cases | **91** |
+| 🟢 pass | **88** |
 | 🔴 red | **3** |
 | 🟡 yellow (UNSUPPORTED, never read) | **0** |
 | **UNSUPPORTED declared — THE RATCHET** | **18** · may only DECREASE without an explicit manifest edit |
 
-Declared dispositions: CARRIED 49 · LOWERED 4 · REFUSED 19 · UNSUPPORTED 18.
+Declared dispositions: CARRIED 50 · LOWERED 4 · REFUSED 19 · UNSUPPORTED 18.
 
 **A green gate here would mean the cases are too easy.** The point of the
 fixture is a measured frontier, and every red below is an open, named defect —
@@ -129,6 +129,7 @@ manifest.
 | 🟢 | `grid-two-column` | grid-tracks | `display: grid; grid-template-columns: 1fr 1fr` | CARRIED | carried | PASS |
 | 🟢 | `antd-focus-outline-ring` | interaction-states | `button.root:focus-visible { outline: 3px solid rgb(145, 202, 255); outline-offset: 1px } — the focus ring as an OUTLINE state delta on the ROOT (antd Button, Switch)` | CARRIED | carried | PASS |
 | 🟢 | `antd-focus-outline-ring-child-part` | interaction-states | `label > span > [input.sr-only:focus-visible + span.box { outline: 3px solid rgb(145, 202, 255) }] — the focus ring as an OUTLINE state delta on a NESTED PART (antd Checkbox-inner, Radio-inner)` | REFUSED | refused, by name | PASS |
+| 🟢 | `antd-focus-outline-ring-ua-width` | interaction-states | `button.root { outline-style: none } :focus-visible { outline: 3px solid rgb(145, 202, 255); outline-offset: 1px } — the ring's declared width EQUALS Chromium's own `outline-width: medium` (3px) at rest, so the width never differs between planes (antd Button/Switch: --ant-line-width-focus is 3px)` | CARRIED | carried | PASS |
 | 🟢 | `nonpainting-text-display-none` | invariant | `a NON-PAINTING element carrying text (display: none)` | CARRIED | carried | PASS |
 | 🟢 | `nonpainting-text-visibility-hidden` | invariant | `a NON-PAINTING element carrying text (visibility: hidden)` | REFUSED | refused, by name | PASS |
 | 🔴 | `stage-box-equal` | invariant | `a captured box exactly equal to the STAGE box (100% × 100%)` | REFUSED | carried | UNDECLARED-CARRY |

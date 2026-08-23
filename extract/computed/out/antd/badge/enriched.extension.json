@@ -1,0 +1,1303 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "antd@5.29.3",
+  "browser": "151.0.7922.34",
+  "mintedTokens": {
+    "imported": {
+      "shared": {
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-14": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "size-32": {
+          "$value": "32px",
+          "$type": "dimension"
+        },
+        "color-00000000": {
+          "$value": "#00000000",
+          "$type": "color"
+        },
+        "size-6": {
+          "$value": "6px",
+          "$type": "dimension"
+        },
+        "size-1": {
+          "$value": "1px",
+          "$type": "dimension"
+        },
+        "color-ffffff": {
+          "$value": "#ffffff",
+          "$type": "color"
+        },
+        "size-10": {
+          "$value": "10px",
+          "$type": "dimension"
+        },
+        "size-12": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
+        "size-20": {
+          "$value": "20px",
+          "$type": "dimension"
+        }
+      },
+      "badge": {
+        "root": {
+          "color": {
+            "$value": "#000000e0",
+            "$type": "color"
+          }
+        },
+        "avatar": {
+          "background-color": {
+            "$value": "#00000040",
+            "$type": "color"
+          },
+          "line-height": {
+            "$value": "22px",
+            "$type": "dimension"
+          }
+        },
+        "label": {
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "line-height": {
+            "$value": "22px",
+            "$type": "dimension"
+          }
+        },
+        "badge-dot": {
+          "background-color": {
+            "unset": {
+              "$value": "#ff4d4f",
+              "$type": "color"
+            },
+            "blue": {
+              "$value": "#1677ff",
+              "$type": "color"
+            },
+            "green": {
+              "$value": "#52c41a",
+              "$type": "color"
+            },
+            "purple": {
+              "$value": "#722ed1",
+              "$type": "color"
+            }
+          },
+          "bottom": {
+            "$value": "26px",
+            "$type": "dimension"
+          },
+          "box-shadow": {
+            "$value": "rgba(255, 255, 255, 1) 0px 0px 0px 1px",
+            "$type": "shadow"
+          },
+          "color": {
+            "unset": {
+              "$value": "#000000e0",
+              "$type": "color"
+            },
+            "blue": {
+              "$value": "#1677ff",
+              "$type": "color"
+            },
+            "green": {
+              "$value": "#52c41a",
+              "$type": "color"
+            },
+            "purple": {
+              "$value": "#722ed1",
+              "$type": "color"
+            }
+          },
+          "font-size": {
+            "$value": "11.6667px",
+            "$type": "dimension"
+          },
+          "left": {
+            "$value": "26px",
+            "$type": "dimension"
+          },
+          "translate-x": {
+            "$value": "3px",
+            "$type": "dimension"
+          },
+          "translate-y": {
+            "$value": "-3px",
+            "$type": "dimension"
+          }
+        },
+        "badge-count": {
+          "background-color": {
+            "unset": {
+              "$value": "#ff4d4f",
+              "$type": "color"
+            },
+            "blue": {
+              "$value": "#1677ff",
+              "$type": "color"
+            },
+            "green": {
+              "$value": "#52c41a",
+              "$type": "color"
+            },
+            "purple": {
+              "$value": "#722ed1",
+              "$type": "color"
+            }
+          },
+          "box-shadow": {
+            "$value": "rgba(255, 255, 255, 1) 0px 0px 0px 1px",
+            "$type": "shadow"
+          },
+          "translate-y": {
+            "$value": "-10px",
+            "$type": "dimension"
+          }
+        },
+        "part-1-0": {
+          "width": {
+            "$value": "6.75px",
+            "$type": "dimension"
+          }
+        },
+        "scroll-number-only": {
+          "width": {
+            "$value": "6.75px",
+            "$type": "dimension"
+          }
+        },
+        "label-2": {
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          }
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "avatar",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "avatar",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "avatar",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "avatar",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "avatar",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "avatar",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-dot",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-dot",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-dot",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-dot",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-dot",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-dot",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-dot",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-dot",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-dot",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-dot",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-count",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-count",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-count",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-count",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-count",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-count",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-count",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-count",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-count",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-count",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "scroll-number-only",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "scroll-number-only",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "scroll-number-only",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "scroll-number-only",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "scroll-number-only",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "scroll-number-only",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "scroll-number-only",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "scroll-number-only",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "scroll-number-only",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "scroll-number-only",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "avatar",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "avatar",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "badge-count",
+        "field": "justify",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "avatar",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "avatar",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "avatar",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "avatar",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "avatar",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "avatar",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "avatar",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "avatar",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "avatar",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "avatar",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "avatar",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "label",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "label",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "part": "badge-dot",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "badge-dot",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "badge-dot",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "badge-dot",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "badge-dot",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, 3, -3)"
+      },
+      {
+        "part": "badge-dot",
+        "channel": "transition-duration",
+        "value": "0.2s"
+      },
+      {
+        "part": "badge-dot",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.12, 0.4, 0.29, 1.46)"
+      },
+      {
+        "part": "badge-count",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "badge-count",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "badge-count",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "badge-count",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "badge-count",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "badge-count",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "badge-count",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, 10, -10)"
+      },
+      {
+        "part": "badge-count",
+        "channel": "transition-duration",
+        "value": "0.2s"
+      },
+      {
+        "part": "badge-count",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.12, 0.4, 0.29, 1.46)"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "scroll-number-only",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "scroll-number-only",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "scroll-number-only",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "scroll-number-only",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "scroll-number-only",
+        "channel": "transition-property",
+        "value": "none"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-2",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "label-2",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "line-height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "list-style-type",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "avatar",
+      "channel": "list-style-type",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "avatar",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "list-style-type",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "badge-dot",
+      "channel": "line-height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <sup>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <sup> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "normal",
+      "distinctValues": 2
+    },
+    {
+      "part": "badge-dot",
+      "channel": "list-style-type",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <sup>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <sup> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "badge-dot",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <sup>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <sup> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "super",
+      "distinctValues": 1
+    },
+    {
+      "part": "badge-count",
+      "channel": "list-style-type",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <sup>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <sup> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "badge-count",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <sup>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <sup> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "super",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-0",
+      "channel": "list-style-type",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <bdi>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <bdi> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-0",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <bdi>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <bdi> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "scroll-number-only",
+      "channel": "backface-visibility",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "hidden",
+      "distinctValues": 1
+    },
+    {
+      "part": "scroll-number-only",
+      "channel": "list-style-type",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "scroll-number-only",
+      "channel": "transform-style",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "preserve-3d",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "list-style-type",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [
+    "badge-count: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "badge-count: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "badge-count: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "badge-dot: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "badge-dot: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "badge-dot: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label-2: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label-2: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label-2: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "part-1-0: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "part-1-0: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "part-1-0: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "scroll-number-only: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "scroll-number-only: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "scroll-number-only: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only"
+  ],
+  "interactionOnlyPlaneDropCount": 15,
+  "structureReceipts": [
+    "union-part-added: dot.unset__default @1 (sup|badge-dot.scroll-number)",
+    "root-signature-varies: dot.blue__default: span|badge → span|badge.badge-status (element-varies receipt; root always aligns)",
+    "root-signature-varies: dot.blue__hover: span|badge → span|badge.badge-status (element-varies receipt; root always aligns)",
+    "root-signature-varies: dot.blue__focus-visible: span|badge → span|badge.badge-status (element-varies receipt; root always aligns)",
+    "root-signature-varies: dot.blue__active: span|badge → span|badge.badge-status (element-varies receipt; root always aligns)",
+    "root-signature-varies: dot.green__default: span|badge → span|badge.badge-status (element-varies receipt; root always aligns)",
+    "root-signature-varies: dot.green__hover: span|badge → span|badge.badge-status (element-varies receipt; root always aligns)",
+    "root-signature-varies: dot.green__focus-visible: span|badge → span|badge.badge-status (element-varies receipt; root always aligns)",
+    "root-signature-varies: dot.green__active: span|badge → span|badge.badge-status (element-varies receipt; root always aligns)",
+    "root-signature-varies: dot.purple__default: span|badge → span|badge.badge-status (element-varies receipt; root always aligns)",
+    "root-signature-varies: dot.purple__hover: span|badge → span|badge.badge-status (element-varies receipt; root always aligns)",
+    "root-signature-varies: dot.purple__focus-visible: span|badge → span|badge.badge-status (element-varies receipt; root always aligns)",
+    "root-signature-varies: dot.purple__active: span|badge → span|badge.badge-status (element-varies receipt; root always aligns)",
+    "part-missing: dot.unset__default badge-count",
+    "part-missing: dot.unset__default part-1-0",
+    "part-missing: dot.unset__default scroll-number-only",
+    "part-missing: dot.unset__default label-2",
+    "part-missing: dot.unset__hover badge-count",
+    "part-missing: dot.unset__hover part-1-0",
+    "part-missing: dot.unset__hover scroll-number-only",
+    "part-missing: dot.unset__hover label-2",
+    "part-missing: dot.unset__focus-visible badge-count",
+    "part-missing: dot.unset__focus-visible part-1-0",
+    "part-missing: dot.unset__focus-visible scroll-number-only",
+    "part-missing: dot.unset__focus-visible label-2",
+    "part-missing: dot.unset__active badge-count",
+    "part-missing: dot.unset__active part-1-0",
+    "part-missing: dot.unset__active scroll-number-only",
+    "part-missing: dot.unset__active label-2",
+    "signature-drift: dot.blue__default root: span|badge → span|badge.badge-status",
+    "part-missing: dot.blue__default badge-count",
+    "part-missing: dot.blue__default part-1-0",
+    "part-missing: dot.blue__default scroll-number-only",
+    "part-missing: dot.blue__default label-2",
+    "signature-drift: dot.blue__hover root: span|badge → span|badge.badge-status",
+    "part-missing: dot.blue__hover badge-count",
+    "part-missing: dot.blue__hover part-1-0",
+    "part-missing: dot.blue__hover scroll-number-only",
+    "part-missing: dot.blue__hover label-2",
+    "signature-drift: dot.blue__focus-visible root: span|badge → span|badge.badge-status",
+    "part-missing: dot.blue__focus-visible badge-count",
+    "part-missing: dot.blue__focus-visible part-1-0",
+    "part-missing: dot.blue__focus-visible scroll-number-only",
+    "part-missing: dot.blue__focus-visible label-2",
+    "signature-drift: dot.blue__active root: span|badge → span|badge.badge-status",
+    "part-missing: dot.blue__active badge-count",
+    "part-missing: dot.blue__active part-1-0",
+    "part-missing: dot.blue__active scroll-number-only",
+    "part-missing: dot.blue__active label-2",
+    "signature-drift: dot.green__default root: span|badge → span|badge.badge-status",
+    "part-missing: dot.green__default badge-count",
+    "part-missing: dot.green__default part-1-0",
+    "part-missing: dot.green__default scroll-number-only",
+    "part-missing: dot.green__default label-2",
+    "signature-drift: dot.green__hover root: span|badge → span|badge.badge-status",
+    "part-missing: dot.green__hover badge-count",
+    "part-missing: dot.green__hover part-1-0",
+    "part-missing: dot.green__hover scroll-number-only",
+    "part-missing: dot.green__hover label-2",
+    "signature-drift: dot.green__focus-visible root: span|badge → span|badge.badge-status",
+    "part-missing: dot.green__focus-visible badge-count",
+    "part-missing: dot.green__focus-visible part-1-0",
+    "part-missing: dot.green__focus-visible scroll-number-only",
+    "part-missing: dot.green__focus-visible label-2",
+    "signature-drift: dot.green__active root: span|badge → span|badge.badge-status",
+    "part-missing: dot.green__active badge-count",
+    "part-missing: dot.green__active part-1-0",
+    "part-missing: dot.green__active scroll-number-only",
+    "part-missing: dot.green__active label-2",
+    "signature-drift: dot.purple__default root: span|badge → span|badge.badge-status",
+    "part-missing: dot.purple__default badge-count",
+    "part-missing: dot.purple__default part-1-0",
+    "part-missing: dot.purple__default scroll-number-only",
+    "part-missing: dot.purple__default label-2",
+    "signature-drift: dot.purple__hover root: span|badge → span|badge.badge-status",
+    "part-missing: dot.purple__hover badge-count",
+    "part-missing: dot.purple__hover part-1-0",
+    "part-missing: dot.purple__hover scroll-number-only",
+    "part-missing: dot.purple__hover label-2",
+    "signature-drift: dot.purple__focus-visible root: span|badge → span|badge.badge-status",
+    "part-missing: dot.purple__focus-visible badge-count",
+    "part-missing: dot.purple__focus-visible part-1-0",
+    "part-missing: dot.purple__focus-visible scroll-number-only",
+    "part-missing: dot.purple__focus-visible label-2",
+    "signature-drift: dot.purple__active root: span|badge → span|badge.badge-status",
+    "part-missing: dot.purple__active badge-count",
+    "part-missing: dot.purple__active part-1-0",
+    "part-missing: dot.purple__active scroll-number-only",
+    "part-missing: dot.purple__active label-2"
+  ],
+  "styledChannelReceipts": [
+    "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label-2 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: avatar — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: badge-dot — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: badge-count — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: scroll-number-only — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "text-part-typography-carried: label — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-fallback: no control for <sup> — span control used (part badge-dot)",
+    "translate-door-generalized: badge-dot — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
+    "control-fallback: no control for <sup> — span control used (part badge-count)",
+    "translate-door-generalized: badge-count — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
+    "control-fallback: no control for <bdi> — span control used (part part-1-0)",
+    "text-part-typography-carried: label-2 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "geometry-excluded: avatar — block-size 32px, inline-size 32px, perspective-origin 16px 16px, transform-origin 16px 16px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: badge-count — block-size 20px, inline-size 20px, perspective-origin 10px 10px, transform-origin 20px 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: badge-dot — block-size 6px, inline-size 6px, perspective-origin 3px 3px, transform-origin 6px 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label — block-size 22px, height 22px, inline-size 9.14062px, perspective-origin 4.5625px 11px, transform-origin 4.57031px 11px, width 9.14062px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-2 — block-size auto, height auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px, width auto — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-1-0 — block-size 20px, inline-size 6.75px, perspective-origin 3.375px 10px, transform-origin 3.375px 10px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 32px, inline-size 32px, perspective-origin 16px 16px, transform-origin 16px 16px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: scroll-number-only — block-size 20px, inline-size 6.75px, perspective-origin 3.375px 10px, transform-origin 3.375px 10px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (avatar, badge-count, badge-dot, label, label-2, part-1-0, root, scroll-number-only); -webkit-text-stroke-color (avatar, badge-count, badge-dot, label, label-2, part-1-0, root, scroll-number-only)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"scroll-number-only\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"avatar\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: avatar.font-size equals ancestor \"root\" on all 32 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.caret-color equals ancestor \"scroll-number-only\" on all 16 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.color equals ancestor \"scroll-number-only\" on all 16 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.font-size equals ancestor \"scroll-number-only\" on all 16 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.line-height equals ancestor \"scroll-number-only\" on all 16 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: label.caret-color equals ancestor \"avatar\" on all 32 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label.color equals ancestor \"avatar\" on all 32 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label.font-size equals ancestor \"avatar\" on all 32 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label.line-height equals ancestor \"avatar\" on all 32 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0.caret-color equals ancestor \"badge-count\" on all 16 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0.color equals ancestor \"badge-count\" on all 16 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0.font-size equals ancestor \"badge-count\" on all 16 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0.line-height equals ancestor \"badge-count\" on all 16 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: scroll-number-only.caret-color equals ancestor \"part-1-0\" on all 16 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: scroll-number-only.color equals ancestor \"part-1-0\" on all 16 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: scroll-number-only.font-size equals ancestor \"part-1-0\" on all 16 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: scroll-number-only.line-height equals ancestor \"part-1-0\" on all 16 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on no part. Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "avatar",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      },
+      {
+        "part": "badge-dot",
+        "join": "computed-only"
+      },
+      {
+        "part": "badge-count",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "scroll-number-only",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "avatar",
+      "label",
+      "badge-dot",
+      "badge-count",
+      "part-1-0",
+      "scroll-number-only",
+      "label-2"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "literal-text-carried: label = \"A\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "presence-carried: badge-dot (4/8 combos) →  hidden-when mode=count",
+      "presence-carried: badge-count (4/8 combos) →  hidden-when mode=dot",
+      "presence-carried: part-1-0 (4/8 combos) →  hidden-when mode=dot",
+      "presence-carried: scroll-number-only (4/8 combos) →  hidden-when mode=dot",
+      "literal-text-carried: label-2 = \"5\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "presence-carried: label-2 (4/8 combos) →  hidden-when mode=dot"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: avatar.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: avatar.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: badge-count.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: avatar.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: avatar.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: avatar.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: avatar.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: avatar.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: avatar.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: avatar.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: avatar.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: avatar.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: avatar.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: avatar.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.transform = matrix(1, 0, 0, 1, 0, 0) (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: badge-dot.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: badge-dot.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: badge-dot.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: badge-dot.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: badge-dot.transform = matrix(1, 0, 0, 1, 3, -3) (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: badge-dot.transition-duration = 0.2s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: badge-dot.transition-timing-function = cubic-bezier(0.12, 0.4, 0.29, 1.46) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: badge-count.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: badge-count.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: badge-count.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: badge-count.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: badge-count.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: badge-count.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: badge-count.transform = matrix(1, 0, 0, 1, 10, -10) (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: badge-count.transition-duration = 0.2s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: badge-count.transition-timing-function = cubic-bezier(0.12, 0.4, 0.29, 1.46) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1-0.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1-0.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: scroll-number-only.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: scroll-number-only.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: scroll-number-only.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: scroll-number-only.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: scroll-number-only.transition-property = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)"
+  ]
+}

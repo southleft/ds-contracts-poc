@@ -3450,6 +3450,15 @@ export function promoteAnatomy(
     if (prop.type.enum.includes(ax.unset) || prop.default !== undefined) continue;
     prop.type.enum = [ax.unset, ...prop.type.enum];
     (prop as { default?: unknown }).default = ax.unset;
+    // ANTD EXAM (2026-08-23): the enum grew and the figma VARIANT values map
+    // did not — validateContract then refused the WHOLE component ("figma
+    // values map is missing enum value unset") and antd's Progress was
+    // quarantined with its capture intact. The materialized value needs its
+    // display name in the same breath it joins the enum.
+    const fb = (prop as { bindings?: { figma?: { kind?: string; values?: Record<string, string> } } }).bindings?.figma;
+    if (fb?.kind === 'VARIANT' && fb.values && !(ax.unset in fb.values)) {
+      fb.values = { [ax.unset]: ax.unset.charAt(0).toUpperCase() + ax.unset.slice(1), ...fb.values };
+    }
     receipts.push(
       `optional-adornment-unset-materialized: ${axProp} — defaultless enum gates a present-only-when-set part; unset value "${ax.unset}" added to the enum as the DEFAULT so a PLAIN (adornment-absent) variant is enumerated and the base-hidden part renders nothing there (round 5f — S2 unset extended from styling to STRUCTURE)`,
     );
