@@ -1055,37 +1055,20 @@ used to land as the STRING `[object Object]` are refused by name at bundle
 and plan time, and a Dark mode is added only when the bundle carries one
 (the Starter-plan `addMode` refusal is named, not swallowed).
 
-## B.24 The exam SLOT's interior auto-layout is not inverted
+## B.24 The exam SLOT's interior auto-layout is not inverted — CLOSED, moved
 
-*The two silences this section held until 2026-08-23 — the Card Inline
-Image SLOT's FIXED 308px width (skipped whenever any occurrence filled) and
-its `fillHeight` under mixed parent modes — are CLOSED; they moved to
-[§D.29](#d29-the-held-out-kits-last-two-silences-and-the-slots-primary-axis-fill--closed)
-with their gates. The same round (r10) carried the primary-axis FILL on a
-native SLOT as `layout.grow`. What is left on that node was never silent
-and is not carried either.*
-
-A native SLOT child that FILLS along its ROW parent's primary axis in every
-variant now carries `layout.grow: true` (conformance cases
-`slot-primary-axis-fill` / `rest-slot-primary-axis-fill`, CARRIED). That
-grow is the **whole** layout block the slot part receives: the native-SLOT
-branch of `buildPart` (`core/propose-figma.ts`) reads the primary-axis fill
-through `primaryAxisGrow` — the one implementation the FRAME branch also
-reads — but does not walk `invertLayout`, so the slot's own auto-layout
-(direction, padding, item spacing, justify/align, its own sizing modes) is
-not inverted onto the part. `exact-proposal:check` §49 pins exactly this
-shape: the Image slot's `layout` is `{"grow":true}` and nothing else, and
-no `FC-GEOMETRY-EXCLUDED` receipt fires for a FILL axis.
-
-**What you'd observe** — a slot drawn as a padded COLUMN with item spacing
-comes back as a bare flex item: its size along the parent's row is right,
-its interior is whatever the consumer drops in. No note says so.
-
-**What it would take — an engine change** (route the native-SLOT branch
-through `invertLayout` with the slot's drawn children excluded, so the
-slot's own frame facts carry like any FRAME part's — or name them). Not
-pinned red in the canvas fixture, because no exam set lost a fact to it;
-it is named here so the grow cannot be read as "the slot's layout carries".
+*Closed 2026-08-23 (r11) — moved to
+[§D.31](#d31-the-exam-slots-interior-auto-layout--closed) with its gates.
+The two silences this section held before that (the Card Inline Image SLOT's
+FIXED 308px width and its `fillHeight` under mixed parent modes) closed in
+[§D.29](#d29-the-held-out-kits-last-two-silences-and-the-slots-primary-axis-fill--closed).
+The native-SLOT branch of `buildPart` now walks `invertNodeTokens`,
+`invertLayout` and `invertLayoutByProp` like every FRAME part, so a slot
+drawn as a padded COLUMN with item spacing carries `layout.direction /
+justify / align` and minted `gap` / `padding-*` on the slot part beside the
+r10 `grow`; `exact-proposal:check` §49 pins the full layout object and §50
+the interior facts; conformance cases `slot-interior-auto-layout` and
+`rest-slot-interior-auto-layout` are CARRIED.*
 
 ## B.25 The REST route cannot name a variable binding without `file_variables:read`
 
@@ -1132,7 +1115,8 @@ off, all of it named and none of it carried:
   FRAME child has no carrier and is NAMED`, so the Default story passes no
   content;
 - the two silences that were §B.24 — CLOSED 2026-08-23 (§D.29); the slot's own
-  auto-layout is still not inverted (§B.24).
+  auto-layout — CLOSED 2026-08-23 (§D.31): the Content slot's padded column
+  and its gap now carry on the slot part.
 
 **What you'd observe** — a near-white box holding one grey square where the
 designer drew a card.
@@ -1522,7 +1506,7 @@ on your canvas. The counts are the honest way to see both halves at once.
 |---|---|---|---|
 | CSS / DOM frontier | 82 | CARRIED 42 · LOWERED 4 · REFUSED 18 · UNSUPPORTED 18 (79 pass · 3 red) | `conformance/MANIFEST.json` (`npm run conformance`, 2026-08-23) |
 | canvas round trip of the CARRIED/LOWERED cases | 46 | ROUND-TRIPPED 26 · NAMED 5 · REFUSED-BY-NAME 15 · **SILENT 0** | `conformance/CANVAS-EXPECTATIONS.md` (`npm run conformance:roundtrip`) |
-| canvas constructs | 152 | CARRIED 105 · LEDGERED 38 · REFUSED 9 (152 PASS · 0 RED-EXPECTED — the last two closed 2026-08-23, §D.29) | `extract/figma/conformance/MANIFEST.json` (`npm run conformance:canvas`) |
+| canvas constructs | 154 | CARRIED 107 · LEDGERED 38 · REFUSED 9 (154 PASS · 0 RED-EXPECTED — the last two exam silences closed 2026-08-23, §D.29; the slot's interior layout the same day, §D.31) | `extract/figma/conformance/MANIFEST.json` (`npm run conformance:canvas`) |
 | dropped-fact receipts (`†`) and the facts they name | 104 receipts · 2,321 named facts | pinned exactly, in both directions; since 2026-08-22 every `†` carries its facts by part, channel, value and reason (`codeOnlyFacts`) | `extract/figma/dagger-census.json` (`npm run dagger:census`, `code-only-facts:check`) |
 
 **REFUSED and UNSUPPORTED are different facts** and the fixture counts them
@@ -2469,8 +2453,8 @@ one spec built without `grow`, now lowers it to `layoutSizingHorizontal
 FILL` like every other part class, so the carried fact survives
 regeneration. Two conformance cases were added for it
 (`slot-primary-axis-fill`, `rest-slot-primary-axis-fill`, both CARRIED).
-What the grow does **not** carry — the slot's interior auto-layout — is
-§B.24.
+What the grow did **not** carry — the slot's interior auto-layout — was
+§B.24 until r11 the same day; closed in §D.31.
 
 **Gates:** `npm run conformance:canvas` (152 cases · CARRIED 105 ·
 LEDGERED 38 · REFUSED 9 · 152 PASS · 0 RED-EXPECTED), `npx tsx
@@ -2618,8 +2602,8 @@ npm run conformance
 # its canvas half, MEASURED through the plugin engine + mock canvas + dump + propose (§C.3)
 npm run conformance:roundtrip     # → 46 cases · 26 round-tripped · 5 named · 15 refused by name · 0 SILENT
 
-# the canvas-construct fixture, incl. the held-out kit's cases (§D.24, §D.29)
-npm run conformance:canvas        # → 152 cases · 152 PASS · 0 RED-EXPECTED · 0 FAIL
+# the canvas-construct fixture, incl. the held-out kit's cases (§D.24, §D.29, §D.31)
+npm run conformance:canvas        # → 154 cases · 154 PASS · 0 RED-EXPECTED · 0 FAIL
 
 # every dropped-fact receipt and the facts it names (§C.3)
 npm run dagger:census             # → 104 receipts · 2,321 named facts, no drift
@@ -2690,6 +2674,59 @@ numbers are not reused; this is where they went.
 | §6 out of scope by decision | [§A.4](#a4-out-of-scope-by-decision--not-gaps) |
 | §6b the scale wall | [§B.19](#b19-the-scale-wall--intake-cost-is-linear-in-component-count-and-human) |
 | §7 how to check this yourself | [§E](#e--how-to-check-this-document-yourself) |
+
+## D.31 The exam SLOT's interior auto-layout — CLOSED
+
+**2026-08-23, r11 (`core/propose-figma.ts`).** The last named slot gap
+(§B.24): the native-SLOT branch of `buildPart` computed `primaryAxisGrow`
+and returned, so a slot drawn as a padded COLUMN with item spacing — the
+held-out kit's Card Content slot — came back as a bare flex item, and
+nothing said so (`exact-proposal:check` §49 pinned the slot's `layout` as
+exactly `{"grow":true}` so the silence had a shape).
+
+**Disposition: CARRIED, not ledgered — decided by reading.** A SLOT node on
+the canvas IS a frame with auto-layout (dump v1.31 captures its `layout`
+like any frame's; the REST mapper serializes its layoutMode / alignment /
+padding / itemSpacing), and its interior layout is the layout the
+consumer's content renders in. The schema already hosts `layout` and
+`tokens` on a slot part (42 first-party slot parts carry them —
+`ds.empty-state` actions, `ds.accordion-item` contentArea, `ds.tab-list`
+tabs); `emit-figma-script` builds the slot spec with `layoutSpec(part)` +
+`applyStyling`, and its runtime's `applyFrameSpec` writes layoutMode /
+alignment / padding / itemSpacing onto the created slot; `packages/core/
+src/css.ts` writes flex-direction / justify-content / align-items / gap /
+padding for any part that carries them. Every emitter re-draws what the
+proposer now carries, so no receipt was the honest answer.
+
+**The fix.** The SLOT branch walks the same three doors every FRAME and
+swap-convention slot-wrapper part walks — `invertNodeTokens` (gap /
+padding and the box channels, minted under `mintUnbound` or bound),
+`invertLayout` (direction / justify / align / wrap, with r10's primary-axis
+`grow` computed inside it by `primaryAxisGrow` — one rule, one
+implementation) and `invertLayoutByProp` (the per-variant split) — then
+the r9 cross-axis doors, opacity / effects, `nameFixedChildGeometry` and
+`attachTokens`, in the FRAME branch's order. Two container rules read the
+node class rather than the drawn child count, because a slot with no
+design-time content is still a container (its children are the
+consumer's): `invertLayout` carries an empty slot's justify / align, and
+the itemSpacing mint no longer waits for two drawn children. Nothing is
+invented — `accepts`, `defaultContent`, the FC-GEOMETRY-EXCLUDED receipt
+and the 152 prior cases did not move.
+
+**Gates:** conformance cases `slot-interior-auto-layout` +
+`rest-slot-interior-auto-layout` (authored RED-EXPECTED with the silence
+pinned in `observedCheck`, proven red, then re-recorded CARRIED); `npm run
+conformance:canvas` (154 cases · CARRIED 107 · LEDGERED 38 · REFUSED 9 ·
+154 PASS · 0 RED-EXPECTED); `npm run exact-proposal:check` §49 (now pins
+the FULL layout object `{direction, justify, align, grow}` on every shape)
+and §50 (the interior facts on their own: the layout block, the three
+minted channels, the layoutByProp split); `npm run accuracy:check`
+(`accuracy/grammar.json` pins 154 = 107 / 38 / 9); `npm run
+emitters:check`; `npx tsx conformance/canvas.ts` (46 cases, 0 SILENT);
+`npm run flowbite-dump-propose:check` (8 stems). The Flowbite eight draw no
+native SLOT and the first-party `figma/*.figma.js` are emitted from
+contracts, not proposed from dumps, so no golden and no figma script
+changed.
 
 ---
 

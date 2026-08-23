@@ -1,0 +1,166 @@
+{
+ "_provenance": {
+  "fileKey": null,
+  "extractedAt": "2026-08-23",
+  "note": "Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) — hand-authored (r11, 2026-08-23): a native SLOT child drawn as a padded COLUMN with item spacing (layoutMode VERTICAL, primary CENTER, counter MAX, itemSpacing 8, padding 12/16) and layoutSizingHorizontal FILL under a FIXED-width ROW parent, in EVERY variant (the Phase 2 exam's Card Content slot shape). A SLOT node IS a frame with auto-layout: its interior layout is the consumer content's layout, so it carries on the slot part exactly as a FRAME part's does (invertLayout + the gap/padding channels) beside the r10 grow.",
+  "dumpVersion": "1.31"
+ },
+ "Case": {
+  "setName": "Case",
+  "type": "COMPONENT_SET",
+  "nodeId": "1:42",
+  "propertyDefinitions": {
+   "Variant": {
+    "type": "VARIANT",
+    "defaultValue": "Default",
+    "variantOptions": [
+     "Default",
+     "Inline"
+    ]
+   },
+   "s#1:1": {
+    "type": "SLOT",
+    "preferredValues": [
+     {
+      "type": "COMPONENT_SET",
+      "key": "de1d1f4d9674a79e188e32cf71ea15dafc2355bf"
+     }
+    ]
+   }
+  },
+  "variants": [
+   {
+    "name": "Variant=Default",
+    "type": "COMPONENT",
+    "bbox": {
+     "width": 928,
+     "height": 96
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 24,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "fill": {
+     "hex": "f0eeed"
+    },
+    "children": [
+     {
+      "name": "s",
+      "type": "SLOT",
+      "clipsContent": true,
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "CENTER",
+       "counter": "MAX",
+       "spacing": 8,
+       "padding": [
+        12,
+        16,
+        12,
+        16
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "AUTO"
+      },
+      "propRefs": {
+       "slotContentId": "s"
+      },
+      "slotKey": "s#1:1",
+      "children": [],
+      "fillWidth": true
+     },
+     {
+      "name": "t",
+      "type": "TEXT",
+      "text": {
+       "characters": "Case",
+       "fontSize": 12,
+       "fontStyle": "Medium",
+       "lineHeight": 16,
+       "fontFamily": "Inter"
+      },
+      "fill": {
+       "hex": "1a1a1a"
+      }
+     }
+    ]
+   },
+   {
+    "name": "Variant=Inline",
+    "type": "COMPONENT",
+    "bbox": {
+     "width": 928,
+     "height": 96
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 24,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "AUTO"
+    },
+    "fill": {
+     "hex": "f0eeed"
+    },
+    "children": [
+     {
+      "name": "s",
+      "type": "SLOT",
+      "clipsContent": true,
+      "layout": {
+       "mode": "VERTICAL",
+       "primary": "CENTER",
+       "counter": "MAX",
+       "spacing": 8,
+       "padding": [
+        12,
+        16,
+        12,
+        16
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "AUTO"
+      },
+      "propRefs": {
+       "slotContentId": "s"
+      },
+      "slotKey": "s#1:1",
+      "children": [],
+      "fillWidth": true
+     },
+     {
+      "name": "t",
+      "type": "TEXT",
+      "text": {
+       "characters": "Case",
+       "fontSize": 12,
+       "fontStyle": "Medium",
+       "lineHeight": 16,
+       "fontFamily": "Inter"
+      },
+      "fill": {
+       "hex": "1a1a1a"
+      }
+     }
+    ]
+   }
+  ]
+ }
+}
