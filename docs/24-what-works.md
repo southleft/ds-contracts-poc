@@ -550,12 +550,12 @@ npm run capability:fresh
 
 | artifact | sha256 (12) | bytes | what it supplied |
 |---|---|---|---|
-| `conformance/MANIFEST.json` | `49dd3c71c754` | 87,042 | CSS/DOM frontier vocabulary |
+| `conformance/MANIFEST.json` | `7121abd2ed06` | 87,156 | CSS/DOM frontier vocabulary |
 | `docs/22-generality.md` | `b982ebe18ddb` | 72,952 | coverage denominators (docs/22 §8.3 table) |
 | `evals/golden.json` | `458632a3775e` | 32,256 | generated-source golden manifest |
 | `evals/results.json` | `5081770dbb7e` | 6,982 | executable claim suite (registry ids + size; the pass column is the suite's own output) |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
-| `extract/computed/out/**/numbers.json` | `03b50c590f31` | 1,225,538 | capture counts + determinism receipts — 205 files |
+| `extract/computed/out/**/numbers.json` | `40515b87af13` | 1,225,534 | capture counts + determinism receipts — 205 files |
 | `extract/computed/out/**/scorecard.json` | `34cd563c9729` | 19,798,337 | computed-equality per component — 205 files |
 | `extract/figma/conformance/MANIFEST.json` | `b17a451f6eb3` | 117,548 | canvas construct vocabulary |
 | `extract/figma/dagger-census.json` | `95dc26ea1aae` | 6,733 | dropped-fact receipt census |
