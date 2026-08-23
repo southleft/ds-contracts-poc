@@ -1,0 +1,199 @@
+{
+ "name": "canvas conformance fixture (REST boundary)",
+ "nodes": {
+  "1:21": {
+   "document": {
+    "id": "1:21",
+    "name": "Case",
+    "type": "COMPONENT_SET",
+    "scrollBehavior": "SCROLLS",
+    "blendMode": "PASS_THROUGH",
+    "clipsContent": false,
+    "fills": [],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "absoluteBoundingBox": {
+     "x": 0,
+     "y": 0,
+     "width": 120,
+     "height": 32
+    },
+    "effects": [],
+    "interactions": [],
+    "layoutSizingHorizontal": "FIXED",
+    "layoutSizingVertical": "FIXED",
+    "constraints": {
+     "vertical": "TOP",
+     "horizontal": "LEFT"
+    },
+    "componentPropertyDefinitions": {
+     "Icon#7:2": {
+      "type": "INSTANCE_SWAP",
+      "defaultValue": "8:8",
+      "preferredValues": []
+     },
+     "Variant": {
+      "type": "VARIANT",
+      "defaultValue": "Default",
+      "variantOptions": [
+       "Default"
+      ]
+     }
+    },
+    "children": [
+     {
+      "id": "1:22",
+      "name": "Variant=Default",
+      "type": "COMPONENT",
+      "scrollBehavior": "SCROLLS",
+      "blendMode": "PASS_THROUGH",
+      "clipsContent": false,
+      "fills": [
+       {
+        "blendMode": "NORMAL",
+        "type": "SOLID",
+        "color": {
+         "r": 0.9,
+         "g": 0.92,
+         "b": 0.95,
+         "a": 1
+        }
+       }
+      ],
+      "strokes": [],
+      "strokeWeight": 1,
+      "strokeAlign": "INSIDE",
+      "cornerRadius": 0,
+      "layoutMode": "HORIZONTAL",
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 4,
+      "paddingBottom": 4,
+      "itemSpacing": 0,
+      "layoutWrap": "NO_WRAP",
+      "layoutSizingHorizontal": "HUG",
+      "layoutSizingVertical": "HUG",
+      "absoluteBoundingBox": {
+       "x": 0,
+       "y": 0,
+       "width": 120,
+       "height": 32
+      },
+      "effects": [],
+      "interactions": [],
+      "constraints": {
+       "vertical": "TOP",
+       "horizontal": "LEFT"
+      },
+      "children": [
+       {
+        "id": "1:23",
+        "name": "Icon",
+        "type": "INSTANCE",
+        "scrollBehavior": "SCROLLS",
+        "blendMode": "PASS_THROUGH",
+        "clipsContent": false,
+        "fills": [],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "INSIDE",
+        "cornerRadius": 0,
+        "layoutMode": "HORIZONTAL",
+        "primaryAxisAlignItems": "CENTER",
+        "counterAxisAlignItems": "CENTER",
+        "paddingLeft": 0,
+        "paddingRight": 0,
+        "paddingTop": 0,
+        "paddingBottom": 0,
+        "itemSpacing": 0,
+        "layoutWrap": "NO_WRAP",
+        "layoutSizingHorizontal": "FIXED",
+        "layoutSizingVertical": "FIXED",
+        "absoluteBoundingBox": {
+         "x": 0,
+         "y": 0,
+         "width": 16,
+         "height": 16
+        },
+        "effects": [],
+        "interactions": [],
+        "constraints": {
+         "vertical": "TOP",
+         "horizontal": "LEFT"
+        },
+        "children": [],
+        "componentId": "8:8",
+        "overrides": [],
+        "componentPropertyReferences": {
+         "mainComponent": "Icon#7:2"
+        }
+       },
+       {
+        "id": "1:24",
+        "name": "t",
+        "type": "TEXT",
+        "scrollBehavior": "SCROLLS",
+        "blendMode": "PASS_THROUGH",
+        "characters": "Case",
+        "fills": [
+         {
+          "blendMode": "NORMAL",
+          "type": "SOLID",
+          "color": {
+           "r": 0.1,
+           "g": 0.1,
+           "b": 0.1,
+           "a": 1
+          }
+         }
+        ],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "OUTSIDE",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "absoluteBoundingBox": {
+         "x": 0,
+         "y": 0,
+         "width": 40,
+         "height": 16
+        },
+        "effects": [],
+        "interactions": [],
+        "constraints": {
+         "vertical": "TOP",
+         "horizontal": "LEFT"
+        },
+        "style": {
+         "fontFamily": "Inter",
+         "fontPostScriptName": "Inter-Medium",
+         "fontStyle": "Medium",
+         "fontWeight": 500,
+         "fontSize": 12,
+         "textAlignHorizontal": "LEFT",
+         "textAlignVertical": "TOP",
+         "letterSpacing": 0,
+         "lineHeightPx": 16,
+         "lineHeightPercent": 100,
+         "lineHeightUnit": "PIXELS",
+         "textAutoResize": "WIDTH_AND_HEIGHT"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "components": {
+    "8:8": {
+     "name": "Glyph",
+     "key": "glyphkey1"
+    }
+   },
+   "componentSets": {},
+   "styles": {}
+  }
+ }
+}

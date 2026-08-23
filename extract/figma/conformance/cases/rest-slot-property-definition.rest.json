@@ -1,0 +1,247 @@
+{
+ "name": "canvas conformance fixture (REST boundary)",
+ "nodes": {
+  "1:16": {
+   "document": {
+    "id": "1:16",
+    "name": "Case",
+    "type": "COMPONENT_SET",
+    "scrollBehavior": "SCROLLS",
+    "blendMode": "PASS_THROUGH",
+    "clipsContent": false,
+    "fills": [],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "absoluteBoundingBox": {
+     "x": 0,
+     "y": 0,
+     "width": 120,
+     "height": 80
+    },
+    "effects": [],
+    "interactions": [],
+    "layoutSizingHorizontal": "FIXED",
+    "layoutSizingVertical": "FIXED",
+    "constraints": {
+     "vertical": "TOP",
+     "horizontal": "LEFT"
+    },
+    "componentPropertyDefinitions": {
+     "Media#7:1": {
+      "type": "SLOT",
+      "defaultValue": {
+       "guid": {
+        "sessionID": -1,
+        "localID": -1
+       }
+      },
+      "preferredValues": [
+       {
+        "type": "COMPONENT_SET",
+        "key": "de1d1f4d9674a79e188e32cf71ea15dafc2355bf"
+       }
+      ]
+     },
+     "Variant": {
+      "type": "VARIANT",
+      "defaultValue": "Default",
+      "variantOptions": [
+       "Default"
+      ]
+     }
+    },
+    "children": [
+     {
+      "id": "1:17",
+      "name": "Variant=Default",
+      "type": "COMPONENT",
+      "scrollBehavior": "SCROLLS",
+      "blendMode": "PASS_THROUGH",
+      "clipsContent": false,
+      "fills": [
+       {
+        "blendMode": "NORMAL",
+        "type": "SOLID",
+        "color": {
+         "r": 0.9,
+         "g": 0.92,
+         "b": 0.95,
+         "a": 1
+        }
+       }
+      ],
+      "strokes": [],
+      "strokeWeight": 1,
+      "strokeAlign": "INSIDE",
+      "cornerRadius": 0,
+      "layoutMode": "VERTICAL",
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 4,
+      "paddingBottom": 4,
+      "itemSpacing": 0,
+      "layoutWrap": "NO_WRAP",
+      "layoutSizingHorizontal": "HUG",
+      "layoutSizingVertical": "HUG",
+      "absoluteBoundingBox": {
+       "x": 0,
+       "y": 0,
+       "width": 120,
+       "height": 80
+      },
+      "effects": [],
+      "interactions": [],
+      "constraints": {
+       "vertical": "TOP",
+       "horizontal": "LEFT"
+      },
+      "children": [
+       {
+        "id": "1:18",
+        "name": "s",
+        "type": "SLOT",
+        "scrollBehavior": "SCROLLS",
+        "blendMode": "PASS_THROUGH",
+        "clipsContent": false,
+        "fills": [],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "INSIDE",
+        "cornerRadius": 0,
+        "layoutMode": "HORIZONTAL",
+        "primaryAxisAlignItems": "CENTER",
+        "counterAxisAlignItems": "CENTER",
+        "paddingLeft": 0,
+        "paddingRight": 0,
+        "paddingTop": 0,
+        "paddingBottom": 0,
+        "itemSpacing": 0,
+        "layoutWrap": "NO_WRAP",
+        "layoutSizingHorizontal": "FILL",
+        "layoutSizingVertical": "HUG",
+        "absoluteBoundingBox": {
+         "x": 0,
+         "y": 0,
+         "width": 96,
+         "height": 48
+        },
+        "effects": [],
+        "interactions": [],
+        "constraints": {
+         "vertical": "TOP",
+         "horizontal": "LEFT"
+        },
+        "children": [
+         {
+          "id": "1:19",
+          "name": "Glyph",
+          "type": "INSTANCE",
+          "scrollBehavior": "SCROLLS",
+          "blendMode": "PASS_THROUGH",
+          "clipsContent": false,
+          "fills": [],
+          "strokes": [],
+          "strokeWeight": 1,
+          "strokeAlign": "INSIDE",
+          "cornerRadius": 0,
+          "layoutMode": "HORIZONTAL",
+          "primaryAxisAlignItems": "CENTER",
+          "counterAxisAlignItems": "CENTER",
+          "paddingLeft": 0,
+          "paddingRight": 0,
+          "paddingTop": 0,
+          "paddingBottom": 0,
+          "itemSpacing": 0,
+          "layoutWrap": "NO_WRAP",
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "absoluteBoundingBox": {
+           "x": 0,
+           "y": 0,
+           "width": 24,
+           "height": 24
+          },
+          "effects": [],
+          "interactions": [],
+          "constraints": {
+           "vertical": "TOP",
+           "horizontal": "LEFT"
+          },
+          "children": [],
+          "componentId": "8:8",
+          "overrides": []
+         }
+        ],
+        "componentPropertyReferences": {
+         "slotContentId": "Media#7:1"
+        }
+       },
+       {
+        "id": "1:20",
+        "name": "t",
+        "type": "TEXT",
+        "scrollBehavior": "SCROLLS",
+        "blendMode": "PASS_THROUGH",
+        "characters": "Case",
+        "fills": [
+         {
+          "blendMode": "NORMAL",
+          "type": "SOLID",
+          "color": {
+           "r": 0.1,
+           "g": 0.1,
+           "b": 0.1,
+           "a": 1
+          }
+         }
+        ],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "OUTSIDE",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "absoluteBoundingBox": {
+         "x": 0,
+         "y": 0,
+         "width": 40,
+         "height": 16
+        },
+        "effects": [],
+        "interactions": [],
+        "constraints": {
+         "vertical": "TOP",
+         "horizontal": "LEFT"
+        },
+        "style": {
+         "fontFamily": "Inter",
+         "fontPostScriptName": "Inter-Medium",
+         "fontStyle": "Medium",
+         "fontWeight": 500,
+         "fontSize": 12,
+         "textAlignHorizontal": "LEFT",
+         "textAlignVertical": "TOP",
+         "letterSpacing": 0,
+         "lineHeightPx": 16,
+         "lineHeightPercent": 100,
+         "lineHeightUnit": "PIXELS",
+         "textAutoResize": "WIDTH_AND_HEIGHT"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "components": {
+    "8:8": {
+     "name": "Glyph",
+     "key": "glyphkey1"
+    }
+   },
+   "componentSets": {},
+   "styles": {}
+  }
+ }
+}

@@ -1,0 +1,160 @@
+{
+ "name": "canvas conformance fixture (REST boundary)",
+ "nodes": {
+  "1:25": {
+   "document": {
+    "id": "1:25",
+    "name": "Case",
+    "type": "COMPONENT",
+    "scrollBehavior": "SCROLLS",
+    "blendMode": "PASS_THROUGH",
+    "clipsContent": false,
+    "fills": [
+     {
+      "blendMode": "NORMAL",
+      "type": "SOLID",
+      "color": {
+       "r": 0.9,
+       "g": 0.92,
+       "b": 0.95,
+       "a": 1
+      }
+     }
+    ],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "cornerRadius": 0,
+    "layoutMode": "HORIZONTAL",
+    "primaryAxisAlignItems": "CENTER",
+    "counterAxisAlignItems": "MIN",
+    "paddingLeft": 12,
+    "paddingRight": 12,
+    "paddingTop": 4,
+    "paddingBottom": 4,
+    "itemSpacing": 0,
+    "layoutWrap": "NO_WRAP",
+    "layoutSizingHorizontal": "HUG",
+    "layoutSizingVertical": "FIXED",
+    "absoluteBoundingBox": {
+     "x": 0,
+     "y": 0,
+     "width": 120,
+     "height": 64
+    },
+    "effects": [],
+    "interactions": [],
+    "constraints": {
+     "vertical": "TOP",
+     "horizontal": "LEFT"
+    },
+    "children": [
+     {
+      "id": "1:26",
+      "name": "a",
+      "type": "FRAME",
+      "scrollBehavior": "SCROLLS",
+      "blendMode": "PASS_THROUGH",
+      "clipsContent": false,
+      "fills": [
+       {
+        "blendMode": "NORMAL",
+        "type": "SOLID",
+        "color": {
+         "r": 0.2,
+         "g": 0.4,
+         "b": 0.8,
+         "a": 1
+        }
+       }
+      ],
+      "strokes": [],
+      "strokeWeight": 1,
+      "strokeAlign": "INSIDE",
+      "cornerRadius": 0,
+      "layoutMode": "HORIZONTAL",
+      "primaryAxisAlignItems": "CENTER",
+      "counterAxisAlignItems": "CENTER",
+      "paddingLeft": 0,
+      "paddingRight": 0,
+      "paddingTop": 0,
+      "paddingBottom": 0,
+      "itemSpacing": 0,
+      "layoutWrap": "NO_WRAP",
+      "layoutSizingHorizontal": "HUG",
+      "layoutSizingVertical": "FILL",
+      "absoluteBoundingBox": {
+       "x": 0,
+       "y": 0,
+       "width": 40,
+       "height": 56
+      },
+      "effects": [],
+      "interactions": [],
+      "constraints": {
+       "vertical": "TOP",
+       "horizontal": "LEFT"
+      },
+      "children": [],
+      "layoutAlign": "STRETCH"
+     },
+     {
+      "id": "1:27",
+      "name": "t",
+      "type": "TEXT",
+      "scrollBehavior": "SCROLLS",
+      "blendMode": "PASS_THROUGH",
+      "characters": "Case",
+      "fills": [
+       {
+        "blendMode": "NORMAL",
+        "type": "SOLID",
+        "color": {
+         "r": 0.1,
+         "g": 0.1,
+         "b": 0.1,
+         "a": 1
+        }
+       }
+      ],
+      "strokes": [],
+      "strokeWeight": 1,
+      "strokeAlign": "OUTSIDE",
+      "layoutSizingHorizontal": "HUG",
+      "layoutSizingVertical": "HUG",
+      "absoluteBoundingBox": {
+       "x": 0,
+       "y": 0,
+       "width": 40,
+       "height": 16
+      },
+      "effects": [],
+      "interactions": [],
+      "constraints": {
+       "vertical": "TOP",
+       "horizontal": "LEFT"
+      },
+      "style": {
+       "fontFamily": "Inter",
+       "fontPostScriptName": "Inter-Medium",
+       "fontStyle": "Medium",
+       "fontWeight": 500,
+       "fontSize": 12,
+       "textAlignHorizontal": "LEFT",
+       "textAlignVertical": "TOP",
+       "letterSpacing": 0,
+       "lineHeightPx": 16,
+       "lineHeightPercent": 100,
+       "lineHeightUnit": "PIXELS",
+       "textAutoResize": "WIDTH_AND_HEIGHT"
+      }
+     }
+    ],
+    "counterAxisSizingMode": "FIXED"
+   },
+   "components": {},
+   "componentSets": {},
+   "styles": {}
+  }
+ }
+}
