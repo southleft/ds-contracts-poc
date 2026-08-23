@@ -1,0 +1,245 @@
+{
+  "id": "mui.badge",
+  "name": "Badge",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/badge.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 14,
+      "sampled": 8,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "color",
+        "type": "enum",
+        "default": "default"
+      },
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "standard"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "label",
+      "badge-anchororigintopright",
+      "label-2"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.badge.badge-anchororigintopright.background-color.default",
+      "imported.badge.badge-anchororigintopright.background-color.error",
+      "imported.badge.badge-anchororigintopright.background-color.info",
+      "imported.badge.badge-anchororigintopright.background-color.primary",
+      "imported.badge.badge-anchororigintopright.background-color.secondary",
+      "imported.badge.badge-anchororigintopright.background-color.success",
+      "imported.badge.badge-anchororigintopright.background-color.warning",
+      "imported.badge.badge-anchororigintopright.bottom",
+      "imported.badge.badge-anchororigintopright.color.default",
+      "imported.badge.badge-anchororigintopright.color.error",
+      "imported.badge.badge-anchororigintopright.color.info",
+      "imported.badge.badge-anchororigintopright.color.primary",
+      "imported.badge.badge-anchororigintopright.color.secondary",
+      "imported.badge.badge-anchororigintopright.color.success",
+      "imported.badge.badge-anchororigintopright.color.warning",
+      "imported.badge.badge-anchororigintopright.font-weight",
+      "imported.badge.badge-anchororigintopright.left",
+      "imported.badge.badge-anchororigintopright.translate-y",
+      "imported.badge.badge-anchororigintopright.z-index",
+      "imported.badge.label-2.background-color.default",
+      "imported.badge.label-2.background-color.error",
+      "imported.badge.label-2.background-color.info",
+      "imported.badge.label-2.background-color.primary",
+      "imported.badge.label-2.background-color.secondary",
+      "imported.badge.label-2.background-color.success",
+      "imported.badge.label-2.background-color.warning",
+      "imported.badge.label-2.bottom",
+      "imported.badge.label-2.color.default",
+      "imported.badge.label-2.color.error",
+      "imported.badge.label-2.color.info",
+      "imported.badge.label-2.color.primary",
+      "imported.badge.label-2.color.secondary",
+      "imported.badge.label-2.color.success",
+      "imported.badge.label-2.color.warning",
+      "imported.badge.label-2.font-weight",
+      "imported.badge.label-2.left",
+      "imported.badge.label-2.padding-left",
+      "imported.badge.label-2.padding-right",
+      "imported.badge.label-2.translate-y",
+      "imported.badge.label-2.z-index",
+      "imported.badge.label.background-color",
+      "imported.badge.label.color",
+      "imported.badge.label.flex-shrink",
+      "imported.badge.label.font-weight",
+      "imported.badge.root.flex-shrink",
+      "imported.badge.root.height",
+      "imported.badge.root.width",
+      "imported.shared.size-0",
+      "imported.shared.size-10",
+      "imported.shared.size-12",
+      "imported.shared.size-20",
+      "imported.shared.size-4",
+      "imported.shared.size-5-59375",
+      "imported.shared.size-8"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "color-default__variant-standard",
+      "variant": "Color=Default, Variant=Standard",
+      "kind": "base",
+      "subst": {
+        "color": "default",
+        "variant": "standard"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-default__variant-standard.png",
+      "contentBox": {
+        "width": 44.39,
+        "height": 44.41
+      }
+    },
+    {
+      "slug": "color-default__variant-dot",
+      "variant": "Color=Default, Variant=Dot",
+      "kind": "base",
+      "subst": {
+        "color": "default",
+        "variant": "dot"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-default__variant-dot.png",
+      "contentBox": {
+        "width": 40,
+        "height": 40
+      }
+    },
+    {
+      "slug": "color-primary__variant-standard",
+      "variant": "Color=Primary, Variant=Standard",
+      "kind": "base",
+      "subst": {
+        "color": "primary",
+        "variant": "standard"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-primary__variant-standard.png",
+      "contentBox": {
+        "width": 44.39,
+        "height": 44.41
+      }
+    },
+    {
+      "slug": "color-secondary__variant-standard",
+      "variant": "Color=Secondary, Variant=Standard",
+      "kind": "base",
+      "subst": {
+        "color": "secondary",
+        "variant": "standard"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-secondary__variant-standard.png",
+      "contentBox": {
+        "width": 44.39,
+        "height": 44.41
+      }
+    },
+    {
+      "slug": "color-error__variant-standard",
+      "variant": "Color=Error, Variant=Standard",
+      "kind": "base",
+      "subst": {
+        "color": "error",
+        "variant": "standard"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-error__variant-standard.png",
+      "contentBox": {
+        "width": 44.39,
+        "height": 44.41
+      }
+    },
+    {
+      "slug": "color-info__variant-standard",
+      "variant": "Color=Info, Variant=Standard",
+      "kind": "base",
+      "subst": {
+        "color": "info",
+        "variant": "standard"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-info__variant-standard.png",
+      "contentBox": {
+        "width": 44.39,
+        "height": 44.41
+      }
+    },
+    {
+      "slug": "color-success__variant-standard",
+      "variant": "Color=Success, Variant=Standard",
+      "kind": "base",
+      "subst": {
+        "color": "success",
+        "variant": "standard"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-success__variant-standard.png",
+      "contentBox": {
+        "width": 44.39,
+        "height": 44.41
+      }
+    },
+    {
+      "slug": "color-warning__variant-standard",
+      "variant": "Color=Warning, Variant=Standard",
+      "kind": "base",
+      "subst": {
+        "color": "warning",
+        "variant": "standard"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-warning__variant-standard.png",
+      "contentBox": {
+        "width": 44.39,
+        "height": 44.41
+      }
+    }
+  ],
+  "rendered": 8,
+  "refused": 0,
+  "unavailable": null
+}

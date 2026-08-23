@@ -1,0 +1,174 @@
+{
+  "id": "mui.text-field",
+  "name": "TextField",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/text-field.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 6,
+      "sampled": 4,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "outlined"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "medium"
+      },
+      {
+        "name": "label",
+        "type": "text",
+        "default": "Amount"
+      },
+      {
+        "name": "helperText",
+        "type": "text",
+        "default": "Enter a valid amount"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "label",
+      "inputbase-adornedend",
+      "inputadornment-positionstart",
+      "inputbase-input",
+      "inputadornment-positionend",
+      "outlinedinput-notchedoutline",
+      "label-5"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "label"
+      },
+      {
+        "part": "label-5",
+        "prop": "helperText"
+      }
+    ],
+    "tokenRefs": [
+      "imported.shared.color-000000de",
+      "imported.shared.color-d32f2f",
+      "imported.shared.num-400",
+      "imported.shared.size-0",
+      "imported.shared.size-0-15008",
+      "imported.shared.size-1",
+      "imported.shared.size-14",
+      "imported.shared.size-23",
+      "imported.shared.size-252-969",
+      "imported.shared.size-4",
+      "imported.shared.size-8",
+      "imported.text-field.inputbase-adornedend.height",
+      "imported.text-field.inputbase-input.height",
+      "imported.text-field.inputbase-input.padding-bottom",
+      "imported.text-field.inputbase-input.padding-top",
+      "imported.text-field.inputbase-input.width",
+      "imported.text-field.label-5.font-size",
+      "imported.text-field.label-5.letter-spacing",
+      "imported.text-field.label-5.line-height",
+      "imported.text-field.label-5.margin-top",
+      "imported.text-field.label.bottom",
+      "imported.text-field.label.font-size",
+      "imported.text-field.label.right",
+      "imported.text-field.label.width",
+      "imported.text-field.label.z-index",
+      "imported.text-field.outlinedinput-notchedoutline.height",
+      "imported.text-field.outlinedinput-notchedoutline.top",
+      "imported.text-field.root.height"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-outlined__size-medium",
+      "variant": "Variant=Outlined, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "outlined",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-outlined__size-medium.png",
+      "contentBox": {
+        "width": 252.97,
+        "height": 83.92
+      }
+    },
+    {
+      "slug": "variant-outlined__size-small",
+      "variant": "Variant=Outlined, Size=Small",
+      "kind": "base",
+      "subst": {
+        "variant": "outlined",
+        "size": "small"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-outlined__size-small.png",
+      "contentBox": {
+        "width": 252.97,
+        "height": 83.92
+      }
+    },
+    {
+      "slug": "variant-filled__size-medium",
+      "variant": "Variant=Filled, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "filled",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-filled__size-medium.png",
+      "contentBox": {
+        "width": 252.97,
+        "height": 83.92
+      }
+    },
+    {
+      "slug": "variant-standard__size-medium",
+      "variant": "Variant=Standard, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "standard",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-standard__size-medium.png",
+      "contentBox": {
+        "width": 252.97,
+        "height": 83.92
+      }
+    }
+  ],
+  "rendered": 4,
+  "refused": 0,
+  "unavailable": null
+}

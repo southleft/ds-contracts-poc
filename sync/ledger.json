@@ -14,7 +14,25 @@
       "direction": "code→canvas",
       "observed": null,
       "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/altitude/components/avatar.json"
+      "note": "receipt parity/receipts/console-loop/altitude/components/avatar.json",
+      "decision": {
+        "kind": "pending-restamp",
+        "note": "the set carries no ds_contracts/canvasFingerprint stamp (content unchanged); restamping means re-running its sync script — a Figma write to GnQnjSNBXtgtd2Ht0Hs1C8",
+        "recordedAt": "2026-08-23T15:06:07.736Z",
+        "evidence": [
+          "drift at decision time: code-ahead (canvas evidence none); contract hash sha256:1a68884844ea208e2967ff0f4e8437f226a97f4ca0cb653f7f8a1cfda7cfe64f; observed stamp none, dump dumpv1:3160575606 (grammar 1.31), file version 2390537264651373038",
+          "canvas (Figma versions API, read-only): set 1:10498 has NO canvasFingerprint at any of the 30 most recent versions (2026-08-06T14:01:14Z → now); the receipt's write (2026-08-06T05:49:25Z, v6:923243794) predates that window; the dump is identical across all 30 versions (dumpv1:3160575606) and the 08-08 mapper reproduces the baseline — content unchanged",
+          "code: only the schema-17 codemod dbeb3575 touched the contract (bookkeeping)",
+          "verdict: nothing to reconcile; the canvas merely needs its stamp back → pending-restamp, then --adopt"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:1a68884844ea208e2967ff0f4e8437f226a97f4ca0cb653f7f8a1cfda7cfe64f",
+          "canvasStamp": null,
+          "canvasDump": "dumpv1:3160575606",
+          "dumpVersion": "1.31"
+        },
+        "command": "Figma desktop → open file GnQnjSNBXtgtd2Ht0Hs1C8 → Sync Runner plugin → \"Paste a script\" tab → paste examples/altitude/figma/avatar.figma.js (amend-capable: reconciles set 1:10498 in place and restamps v6; byte-fresh per `npm run figma:fresh`) → Run script → then record: npm run sync:observe -- --adopt altitude.avatar --note \"restamped 2026-08-23\""
+      }
     },
     {
       "contractId": "altitude.badge",
@@ -30,7 +48,7 @@
         "dumpFingerprint": "dumpv1:2227710096",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/altitude/components/badge.json"
@@ -38,16 +56,37 @@
     {
       "contractId": "altitude.button",
       "contractPath": "examples/altitude/contracts/button.contract.json",
-      "contractHash": "sha256:c535887b34f3a9b797f35fa7ff7f443c1e6b798732cc4b74e70ecdfd85ea0270",
+      "contractHash": "sha256:0aae505d86a65a3dec4e5b7c0058dc5064c905c0fa28b0980c689a93a66c4dfd",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "60:10151",
-      "canvasFingerprint": "v6:3313935822",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:43:11.810Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "sync-record",
-      "note": "receipt parity/receipts/console-loop/altitude/components/button.json"
+      "canvasFingerprint": "v6:3591154238",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:948028923",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/altitude/components/button.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:3313935822 → observed v6:3591154238; ledger hash sha256:c535887b34f3… → sha256:0aae505d86a6…; dump dumpv1:948028923 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:0aae505d86a65a3dec4e5b7c0058dc5064c905c0fa28b0980c689a93a66c4dfd",
+          "canvasStamp": "v6:3591154238",
+          "canvasDump": "dumpv1:948028923",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "altitude.chip",
@@ -63,7 +102,7 @@
         "dumpFingerprint": "dumpv1:1120798882",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/altitude/components/chip.json"
@@ -82,7 +121,7 @@
         "dumpFingerprint": "dumpv1:3506643804",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/altitude/components/divider.json"
@@ -90,16 +129,37 @@
     {
       "contractId": "altitude.heading",
       "contractPath": "examples/altitude/contracts/heading.contract.json",
-      "contractHash": "sha256:3055234e8a343491f962d27d4d552724dd3cbe09a790c33081f8fa0424295d2a",
+      "contractHash": "sha256:e27724f7dfd685b39710562bbc4518c4321a569c4db787211c42506698584481",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:3047",
-      "canvasFingerprint": "v6:541267266",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:43:13.859Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "sync-record",
-      "note": "receipt parity/receipts/console-loop/altitude/components/heading.json"
+      "canvasFingerprint": "v6:896621370",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3332768636",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/altitude/components/heading.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:541267266 → observed v6:896621370; ledger hash sha256:3055234e8a34… → sha256:e27724f7dfd6…; dump dumpv1:3332768636 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:e27724f7dfd685b39710562bbc4518c4321a569c4db787211c42506698584481",
+          "canvasStamp": "v6:896621370",
+          "canvasDump": "dumpv1:3332768636",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "altitude.iconclose",
@@ -115,7 +175,7 @@
         "dumpFingerprint": "dumpv1:319884819",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/altitude/components/icon-close.json"
@@ -134,7 +194,7 @@
         "dumpFingerprint": "dumpv1:2060152440",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/altitude/components/link.json"
@@ -142,198 +202,493 @@
     {
       "contractId": "astryx.badge",
       "contractPath": "examples/astryx/contracts/badge.contract.json",
-      "contractHash": "sha256:faba6d2b51f80611d714a07ec261b7236fd2868b7bc98db03e09483ce9201930",
+      "contractHash": "sha256:0d6fe02268d3c0f3e64c4bdb98f6ee234b3e01cdf135dd8a73a94701e0c88871",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:3794",
-      "canvasFingerprint": "v6:1192491616",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:44:07.010Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "sync-record",
-      "note": "receipt parity/receipts/console-loop/astryx/components/badge.json"
+      "canvasFingerprint": "v6:2501290716",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:584095604",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/badge.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:1192491616 → observed v6:2501290716; ledger hash sha256:faba6d2b51f8… → sha256:0d6fe02268d3…; dump dumpv1:584095604 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:0d6fe02268d3c0f3e64c4bdb98f6ee234b3e01cdf135dd8a73a94701e0c88871",
+          "canvasStamp": "v6:2501290716",
+          "canvasDump": "dumpv1:584095604",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "astryx.banner",
       "contractPath": "examples/astryx/contracts/banner.contract.json",
-      "contractHash": "sha256:e29986a07bce8ec76aa3419023635c6fd22a8571522e087a2180464aa3b2c83d",
+      "contractHash": "sha256:987e713c28e65131a4cbae91f46c93bf46d10f7413d0aa26e55bbcc1fcb3e733",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:3813",
-      "canvasFingerprint": "v6:3231585800",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:44:07.801Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "sync-record",
-      "note": "receipt parity/receipts/console-loop/astryx/components/banner.json"
+      "canvasFingerprint": "v6:694873963",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T15:02:22.844Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1723211790",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt (B3): canvas write 2026-08-11 is newer than the semantic contract commit 98cfa8f2 (2026-08-09) (prior: receipt parity/receipts/console-loop/astryx/components/banner.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt (B3): canvas write 2026-08-11 is newer than the semantic contract commit 98cfa8f2 (2026-08-09)",
+        "recordedAt": "2026-08-23T15:02:22.844Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:3231585800 → observed v6:694873963; ledger hash sha256:e29986a07bce… → sha256:987e713c28e6…; dump dumpv1:1723211790 (grammar 1.31); file version 2390537264651373038",
+          "canvas (Figma versions API, read-only, nodes?version=): set 1:3813 stamp moved 2026-08-09T12:46:50Z (v6:1996314995, version 2385684163107003670), 2026-08-10T00:56:33Z (v6:3947713837, version 2385845696305302138), 2026-08-11T17:45:51Z (v6:694873963 = the stamp observed now, version 2386528832367177523) — all authored by TJ Pitre",
+          "code: the only semantic contract commit since the ledger's hash is 98cfa8f2 2026-08-09T20:30:36Z (status ink: header/icon/title/description tokensByProp); dbeb3575 is the schema-17 codemod (bookkeeping)",
+          "verdict: the canvas was rebuilt twice AFTER the code change (08-10, 08-11) → the canvas is the newer truth → adopt"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:987e713c28e65131a4cbae91f46c93bf46d10f7413d0aa26e55bbcc1fcb3e733",
+          "canvasStamp": "v6:694873963",
+          "canvasDump": "dumpv1:1723211790",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "astryx.button",
       "contractPath": "examples/astryx/contracts/button.contract.json",
-      "contractHash": "sha256:0dc07f49258767a34e488765a926eebf5e73ca471253a16c7eaee6418be661d5",
+      "contractHash": "sha256:cb29d6bc2e2d3fd9cf4cbd8491b3d3ebc8128fc182f55893b3af8439f3ad60ec",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:3864",
-      "canvasFingerprint": "v6:1886612596",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:44:08.324Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "sync-record",
-      "note": "receipt parity/receipts/console-loop/astryx/components/button.json"
+      "canvasFingerprint": "v6:3336401095",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3060258365",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/button.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:1886612596 → observed v6:3336401095; ledger hash sha256:0dc07f492587… → sha256:cb29d6bc2e2d…; dump dumpv1:3060258365 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:cb29d6bc2e2d3fd9cf4cbd8491b3d3ebc8128fc182f55893b3af8439f3ad60ec",
+          "canvasStamp": "v6:3336401095",
+          "canvasDump": "dumpv1:3060258365",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "astryx.card",
       "contractPath": "examples/astryx/contracts/card.contract.json",
-      "contractHash": "sha256:80ea595484fda25ed0e2c09cb51283077e4f55ad80ed9439ca7d12932abf7af0",
+      "contractHash": "sha256:0a809f522b4a0b84779d8224178d4b6b0bbeaa2eed8e7f1cf3061d2304ae3d3c",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:4047",
-      "canvasFingerprint": "v6:3092228042",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:44:13.994Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "sync-record",
-      "note": "receipt parity/receipts/console-loop/astryx/components/card.json"
+      "canvasFingerprint": "v6:3665999710",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:4294906959",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/card.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:3092228042 → observed v6:3665999710; ledger hash sha256:80ea595484fd… → sha256:0a809f522b4a…; dump dumpv1:4294906959 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:0a809f522b4a0b84779d8224178d4b6b0bbeaa2eed8e7f1cf3061d2304ae3d3c",
+          "canvasStamp": "v6:3665999710",
+          "canvasDump": "dumpv1:4294906959",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "astryx.checkbox-input",
       "contractPath": "examples/astryx/contracts/checkbox-input.contract.json",
-      "contractHash": "sha256:7d6f7ebfdcd0319ffe1849481f3b3a9c0b9843c471903785861c5dff27aa7e3a",
+      "contractHash": "sha256:dc9c5c0c900cafa59919e9615c012c0fe43d8410e9b3288dee84d6802213c1d2",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:3873",
-      "canvasFingerprint": "v6:2853217606",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:44:08.786Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "sync-record",
-      "note": "receipt parity/receipts/console-loop/astryx/components/checkbox-input.json"
+      "canvasFingerprint": "v6:1082151352",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2550445534",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/checkbox-input.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:2853217606 → observed v6:1082151352; ledger hash sha256:7d6f7ebfdcd0… → sha256:dc9c5c0c900c…; dump dumpv1:2550445534 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:dc9c5c0c900cafa59919e9615c012c0fe43d8410e9b3288dee84d6802213c1d2",
+          "canvasStamp": "v6:1082151352",
+          "canvasDump": "dumpv1:2550445534",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "astryx.dropdown-menu-item",
       "contractPath": "examples/astryx/contracts/dropdown-menu-item.contract.json",
-      "contractHash": "sha256:b09f5ada2e40c9ddfbc3d478ccae7e3b6387d0194e01f684a4d9df6dc06d4133",
+      "contractHash": "sha256:4af4c1d393cdf95a2b85e97a9eee70fb33d1c4a5befd51faaaf968eb679d1a04",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:3876",
-      "canvasFingerprint": "v6:2766064663",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:44:09.106Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "sync-record",
-      "note": "receipt parity/receipts/console-loop/astryx/components/dropdown-menu-item.json"
+      "canvasFingerprint": "v6:4104657345",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1550018815",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/dropdown-menu-item.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:2766064663 → observed v6:4104657345; ledger hash sha256:b09f5ada2e40… → sha256:4af4c1d393cd…; dump dumpv1:1550018815 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:4af4c1d393cdf95a2b85e97a9eee70fb33d1c4a5befd51faaaf968eb679d1a04",
+          "canvasStamp": "v6:4104657345",
+          "canvasDump": "dumpv1:1550018815",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "astryx.dropdown-menu",
       "contractPath": "examples/astryx/contracts/dropdown-menu.contract.json",
-      "contractHash": "sha256:f27062fa6f52fa44da757fc9164c5db0b32fda29b90f3a3b549e8449805edadd",
+      "contractHash": "sha256:0cfb83192c55cfc48a2e950833ea6daf3d750e3dffe11492e68f1bcafc48c78b",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:4050",
-      "canvasFingerprint": "v6:253339315",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:44:14.392Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "sync-record",
-      "note": "receipt parity/receipts/console-loop/astryx/components/dropdown-menu.json"
+      "canvasFingerprint": "v6:3484132068",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3138675180",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/dropdown-menu.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:253339315 → observed v6:3484132068; ledger hash sha256:f27062fa6f52… → sha256:0cfb83192c55…; dump dumpv1:3138675180 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:0cfb83192c55cfc48a2e950833ea6daf3d750e3dffe11492e68f1bcafc48c78b",
+          "canvasStamp": "v6:3484132068",
+          "canvasDump": "dumpv1:3138675180",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "astryx.progress-bar",
       "contractPath": "examples/astryx/contracts/progress-bar.contract.json",
-      "contractHash": "sha256:3d9a79b241287bb9dea61f32e405c39ce144622080747e2675a85f2de2049cb2",
+      "contractHash": "sha256:4fada03fd43556950c38e045093b9180cea3fff88efa17465dbe57559495a53c",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:3900",
-      "canvasFingerprint": "v6:1229328490",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:44:09.675Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "sync-record",
-      "note": "receipt parity/receipts/console-loop/astryx/components/progress-bar.json"
+      "canvasFingerprint": "v6:2177033928",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3435506286",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/progress-bar.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:1229328490 → observed v6:2177033928; ledger hash sha256:3d9a79b24128… → sha256:4fada03fd435…; dump dumpv1:3435506286 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:4fada03fd43556950c38e045093b9180cea3fff88efa17465dbe57559495a53c",
+          "canvasStamp": "v6:2177033928",
+          "canvasDump": "dumpv1:3435506286",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "astryx.slider",
       "contractPath": "examples/astryx/contracts/slider.contract.json",
-      "contractHash": "sha256:d21039151cfbf169ccdf91d4002ef6d141a50b99e2e40481e0f633b1ef18e1b1",
+      "contractHash": "sha256:dd5c1ddae609c136719d0a0cbf48b4b5e45f88f98c6e1ecfed5565e65fb8fd7b",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "9:831",
-      "canvasFingerprint": "v6:3600925889",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:44:10.926Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "sync-record",
-      "note": "receipt parity/receipts/console-loop/astryx/components/slider.json"
+      "canvasFingerprint": "v6:3375391513",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1991569256",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/slider.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:3600925889 → observed v6:3375391513; ledger hash sha256:d21039151cfb… → sha256:dd5c1ddae609…; dump dumpv1:1991569256 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:dd5c1ddae609c136719d0a0cbf48b4b5e45f88f98c6e1ecfed5565e65fb8fd7b",
+          "canvasStamp": "v6:3375391513",
+          "canvasDump": "dumpv1:1991569256",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "astryx.switch",
       "contractPath": "examples/astryx/contracts/switch.contract.json",
-      "contractHash": "sha256:e84066e6d20b47358fe6dd96206ff9d8b12d2c797ece18cac0be7619eb32b4d2",
+      "contractHash": "sha256:2a12ec1f30d0ba2a5a08fcb9a6f44516651c1dfb6da8d9cb8cbeb908621801b4",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:3964",
-      "canvasFingerprint": "v6:204491426",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:44:11.441Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "sync-record",
-      "note": "receipt parity/receipts/console-loop/astryx/components/switch.json"
+      "canvasFingerprint": "v6:4186792922",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2427374214",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/switch.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:204491426 → observed v6:4186792922; ledger hash sha256:e84066e6d20b… → sha256:2a12ec1f30d0…; dump dumpv1:2427374214 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:2a12ec1f30d0ba2a5a08fcb9a6f44516651c1dfb6da8d9cb8cbeb908621801b4",
+          "canvasStamp": "v6:4186792922",
+          "canvasDump": "dumpv1:2427374214",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "astryx.text-input",
       "contractPath": "examples/astryx/contracts/text-input.contract.json",
-      "contractHash": "sha256:f7f615cff0fe664d8f3dc064b95df8bfbfb2f5be673b4526a91061cbe855ce2f",
+      "contractHash": "sha256:9e139f6db92b4e215b03f407bacd147bc93c404db4ec994c4e4d9d1c78d8afee",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:4003",
-      "canvasFingerprint": "v6:1777886922",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:44:12.948Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "sync-record",
-      "note": "receipt parity/receipts/console-loop/astryx/components/text-input.json"
+      "canvasFingerprint": "v6:4008755206",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:381639615",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/text-input.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:1777886922 → observed v6:4008755206; ledger hash sha256:f7f615cff0fe… → sha256:9e139f6db92b…; dump dumpv1:381639615 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:9e139f6db92b4e215b03f407bacd147bc93c404db4ec994c4e4d9d1c78d8afee",
+          "canvasStamp": "v6:4008755206",
+          "canvasDump": "dumpv1:381639615",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "astryx.toast",
       "contractPath": "examples/astryx/contracts/toast.contract.json",
-      "contractHash": "sha256:5660d165d188d8827c08af7accdd81ecde1ef0b824a882bb9e7dc16cb99a77f0",
+      "contractHash": "sha256:93466d27edf515a72838061bb185ee83074bb8fd611761b81c0e792bc622579b",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:4006",
-      "canvasFingerprint": "v6:4236041702",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:44:13.449Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "sync-record",
-      "note": "receipt parity/receipts/console-loop/astryx/components/toast.json"
+      "canvasFingerprint": "v6:920785462",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3323713016",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/toast.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:4236041702 → observed v6:920785462; ledger hash sha256:5660d165d188… → sha256:93466d27edf5…; dump dumpv1:3323713016 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:93466d27edf515a72838061bb185ee83074bb8fd611761b81c0e792bc622579b",
+          "canvasStamp": "v6:920785462",
+          "canvasDump": "dumpv1:3323713016",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "astryx.token",
       "contractPath": "examples/astryx/contracts/token.contract.json",
-      "contractHash": "sha256:55e43ffae33aa7c345def3bd6ab0a7851e34e88157938ce4eaa29e800f110916",
+      "contractHash": "sha256:e785620ea67556ffd8c735ef323f0b6cddfa1fa4b5fced5b66e7463bd4fbb3e6",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:3763",
-      "canvasFingerprint": "v6:1746840295",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:44:06.476Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "sync-record",
-      "note": "receipt parity/receipts/console-loop/astryx/components/token.json"
+      "canvasFingerprint": "v6:3404840563",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:819494676",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/token.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:1746840295 → observed v6:3404840563; ledger hash sha256:55e43ffae33a… → sha256:e785620ea675…; dump dumpv1:819494676 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:e785620ea67556ffd8c735ef323f0b6cddfa1fa4b5fced5b66e7463bd4fbb3e6",
+          "canvasStamp": "v6:3404840563",
+          "canvasDump": "dumpv1:819494676",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "carbon.accordion",
       "contractPath": "examples/carbon/contracts/accordion.contract.json",
-      "contractHash": "sha256:8dcad949eda95b991097b2977e96149c17bc4b7d773bac5ff6d1eba75c34ac1d",
+      "contractHash": "sha256:fdd50baf482aba88d1686d348b977880bd0c2f7ff1799869dd5bbdb3dc6efa71",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "60:10429",
-      "canvasFingerprint": "v6:1242425722",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:02.201Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/carbon/components/accordion.json"
+      "canvasFingerprint": "v6:338861929",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:742076368",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/carbon/components/accordion.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:1242425722 → observed v6:338861929; ledger hash sha256:8dcad949eda9… → sha256:fdd50baf482a…; dump dumpv1:742076368 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:fdd50baf482aba88d1686d348b977880bd0c2f7ff1799869dd5bbdb3dc6efa71",
+          "canvasStamp": "v6:338861929",
+          "canvasDump": "dumpv1:742076368",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "carbon.button",
@@ -349,7 +704,7 @@
         "dumpFingerprint": "dumpv1:496601980",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/carbon/components/button.json"
@@ -357,114 +712,282 @@
     {
       "contractId": "carbon.checkbox",
       "contractPath": "examples/carbon/contracts/checkbox.contract.json",
-      "contractHash": "sha256:b6f53e11dd43a40df9006ec27829387004b50038803c675c1e9138662627cf5d",
+      "contractHash": "sha256:782a591d499e4ef982f7bf903283cf80486ab78c436f147a131f682199a37ec0",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:5562",
-      "canvasFingerprint": "v6:4163950863",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:04.230Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/carbon/components/checkbox.json"
+      "canvasFingerprint": "v6:28619094",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:4108081308",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/carbon/components/checkbox.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:4163950863 → observed v6:28619094; ledger hash sha256:b6f53e11dd43… → sha256:782a591d499e…; dump dumpv1:4108081308 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:782a591d499e4ef982f7bf903283cf80486ab78c436f147a131f682199a37ec0",
+          "canvasStamp": "v6:28619094",
+          "canvasDump": "dumpv1:4108081308",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "carbon.iconbutton",
       "contractPath": "examples/carbon/contracts/iconbutton.contract.json",
-      "contractHash": "sha256:0071459893503bedf4d129d6a385c094a6ce26371a10be620b5f9250522f4815",
+      "contractHash": "sha256:4089253a16ff64203066f6077c8883ae121ac4a45165b570d2a47ac08dafc6d0",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:5645",
-      "canvasFingerprint": "v6:1501913482",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:04.887Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/carbon/components/icon-button.json"
+      "canvasFingerprint": "v6:1094165408",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3622083865",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/carbon/components/icon-button.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:1501913482 → observed v6:1094165408; ledger hash sha256:007145989350… → sha256:4089253a16ff…; dump dumpv1:3622083865 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:4089253a16ff64203066f6077c8883ae121ac4a45165b570d2a47ac08dafc6d0",
+          "canvasStamp": "v6:1094165408",
+          "canvasDump": "dumpv1:3622083865",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "carbon.inlinenotification",
       "contractPath": "examples/carbon/contracts/inlinenotification.contract.json",
-      "contractHash": "sha256:8b2d7973e2e91e460e108d291cdeb472868a5c8476969228091b5ac2b57ec80a",
+      "contractHash": "sha256:c15687086fd6481a1f8750bea30fad900713b068ff04b060c0594338cdb7de25",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "60:10344",
-      "canvasFingerprint": "v6:1173442392",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:05.837Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/carbon/components/inline-notification.json"
+      "canvasFingerprint": "v6:3436782517",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2153018007",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/carbon/components/inline-notification.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:1173442392 → observed v6:3436782517; ledger hash sha256:8b2d7973e2e9… → sha256:c15687086fd6…; dump dumpv1:2153018007 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:c15687086fd6481a1f8750bea30fad900713b068ff04b060c0594338cdb7de25",
+          "canvasStamp": "v6:3436782517",
+          "canvasDump": "dumpv1:2153018007",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "carbon.modal",
       "contractPath": "examples/carbon/contracts/modal.contract.json",
-      "contractHash": "sha256:961426a606f5ad15f35dbdbf7146a9558ec19f28084945dbb83e235e4775312a",
+      "contractHash": "sha256:223758cba3668d8d6b9d2f97a72bf7bc6498cb3a5c8ef2df5857d20d4df88a25",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:5911",
-      "canvasFingerprint": "v6:2103121654",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:06.733Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/carbon/components/modal.json"
+      "canvasFingerprint": "v6:3098348550",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2893122542",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/carbon/components/modal.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:2103121654 → observed v6:3098348550; ledger hash sha256:961426a606f5… → sha256:223758cba366…; dump dumpv1:2893122542 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:223758cba3668d8d6b9d2f97a72bf7bc6498cb3a5c8ef2df5857d20d4df88a25",
+          "canvasStamp": "v6:3098348550",
+          "canvasDump": "dumpv1:2893122542",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "carbon.tabs",
       "contractPath": "examples/carbon/contracts/tabs.contract.json",
-      "contractHash": "sha256:95005cfd23acf9bc0b70407aa6f8a87d5d198d52e5ec074978c5634d3261f1fc",
+      "contractHash": "sha256:2c6a87ddd14146efcc7b59f9da27b7193d97db5ffddf63586d93fd5486835b75",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:5947",
-      "canvasFingerprint": "v6:3251309082",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:07.520Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/carbon/components/tabs.json"
+      "canvasFingerprint": "v6:3973376029",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2628574167",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/carbon/components/tabs.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:3251309082 → observed v6:3973376029; ledger hash sha256:95005cfd23ac… → sha256:2c6a87ddd141…; dump dumpv1:2628574167 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:2c6a87ddd14146efcc7b59f9da27b7193d97db5ffddf63586d93fd5486835b75",
+          "canvasStamp": "v6:3973376029",
+          "canvasDump": "dumpv1:2628574167",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "carbon.tag",
       "contractPath": "examples/carbon/contracts/tag.contract.json",
-      "contractHash": "sha256:cc32412dface202225c3f74a0c9b28dab085beee0d82b7ab6a9f6860f5ab529c",
+      "contractHash": "sha256:cb9723fd6b3ee8f0b915e5be7f0dfc1c2979817fa85700ce8b0e1e29d77de748",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:6024",
-      "canvasFingerprint": "v6:640356538",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:08.323Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/carbon/components/tag.json"
+      "canvasFingerprint": "v6:1914113927",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:614325908",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/carbon/components/tag.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:640356538 → observed v6:1914113927; ledger hash sha256:cc32412dface… → sha256:cb9723fd6b3e…; dump dumpv1:614325908 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:cb9723fd6b3ee8f0b915e5be7f0dfc1c2979817fa85700ce8b0e1e29d77de748",
+          "canvasStamp": "v6:1914113927",
+          "canvasDump": "dumpv1:614325908",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "carbon.textinput",
       "contractPath": "examples/carbon/contracts/textinput.contract.json",
-      "contractHash": "sha256:6bfc15841935800569bb1d4716136a32a1bfefca57436ec1d594d2dcfa17247f",
+      "contractHash": "sha256:2f53ba87474ec7f7c965f5d5ee17e07ea5f58e1b22177c50883cc149abaf89f5",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:6091",
-      "canvasFingerprint": "v6:2635523164",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:08.947Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/carbon/components/text-input.json"
+      "canvasFingerprint": "v6:3436629982",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2581579881",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/carbon/components/text-input.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:2635523164 → observed v6:3436629982; ledger hash sha256:6bfc15841935… → sha256:2f53ba87474e…; dump dumpv1:2581579881 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:2f53ba87474ec7f7c965f5d5ee17e07ea5f58e1b22177c50883cc149abaf89f5",
+          "canvasStamp": "v6:3436629982",
+          "canvasDump": "dumpv1:2581579881",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "carbon.toggle",
       "contractPath": "examples/carbon/contracts/toggle.contract.json",
-      "contractHash": "sha256:e76d86ffe3c81226b01c435cb2ca90a2874a31ce6b9237a0294c6d21c0ea0623",
+      "contractHash": "sha256:b74f7cea1a263a8432a4cb15dea9dde300fbcfca32df4265816de80688e72a21",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:6126",
-      "canvasFingerprint": "v6:756328093",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:09.501Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/carbon/components/toggle.json"
+      "canvasFingerprint": "v6:2277225447",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:800162275",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/carbon/components/toggle.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:756328093 → observed v6:2277225447; ledger hash sha256:e76d86ffe3c8… → sha256:b74f7cea1a26…; dump dumpv1:800162275 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:b74f7cea1a263a8432a4cb15dea9dde300fbcfca32df4265816de80688e72a21",
+          "canvasStamp": "v6:2277225447",
+          "canvasDump": "dumpv1:800162275",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "ds.accordion-item",
@@ -480,7 +1003,7 @@
         "dumpFingerprint": "dumpv1:4120265292",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/accordion-item.json"
@@ -499,7 +1022,7 @@
         "dumpFingerprint": "dumpv1:3692949204",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/avatar-group.json"
@@ -518,7 +1041,7 @@
         "dumpFingerprint": "dumpv1:4064706845",
         "dumpVersion": "1.31",
         "fileVersionId": "2388438498796415748",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/avatar.json"
@@ -537,7 +1060,7 @@
         "dumpFingerprint": "dumpv1:650431504",
         "dumpVersion": "1.31",
         "fileVersionId": "2388438498796415748",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/badge.json"
@@ -545,16 +1068,37 @@
     {
       "contractId": "ds.banner",
       "contractPath": "contracts/banner.contract.json",
-      "contractHash": "sha256:0dff56b704a0d4f25a1b799e275779f79166d8dfdd6506cb29df6d40d6a707ad",
+      "contractHash": "sha256:398bc7c6de93d75c0e60ceb9a742a8b116838982de7d2c76f3df7beee3776c3e",
       "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
       "setNodeId": "4:540",
-      "canvasFingerprint": "v6:2032049522",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-08T13:32:57.000Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/components/banner.json"
+      "canvasFingerprint": "v6:4148696291",
+      "lastSyncedVersionId": "2388438498796415748",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3973084246",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2388438498796415748",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/components/banner.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:2032049522 → observed v6:4148696291; ledger hash sha256:0dff56b704a0… → sha256:398bc7c6de93…; dump dumpv1:3973084246 (grammar 1.31); file version 2388438498796415748",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:398bc7c6de93d75c0e60ceb9a742a8b116838982de7d2c76f3df7beee3776c3e",
+          "canvasStamp": "v6:4148696291",
+          "canvasDump": "dumpv1:3973084246",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "ds.blockquote",
@@ -570,7 +1114,7 @@
         "dumpFingerprint": "dumpv1:3874849251",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/blockquote.json"
@@ -589,7 +1133,7 @@
         "dumpFingerprint": "dumpv1:1134562763",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/breadcrumb-item.json"
@@ -608,7 +1152,7 @@
         "dumpFingerprint": "dumpv1:3381771355",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/breadcrumbs.json"
@@ -627,7 +1171,7 @@
         "dumpFingerprint": "dumpv1:1666010662",
         "dumpVersion": "1.31",
         "fileVersionId": "2388438498796415748",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/button.json"
@@ -635,16 +1179,37 @@
     {
       "contractId": "ds.card",
       "contractPath": "contracts/card.contract.json",
-      "contractHash": "sha256:b3e71b595d0ec29757b506664543316f5fe0dde74cb0c8fdc5d1a969ddef0178",
+      "contractHash": "sha256:7e6521e5efb6dfb02be337098612b5c3fdf82ea9f6e3ba0ecc90b4e3b52cf09a",
       "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
       "setNodeId": "4:543",
-      "canvasFingerprint": "v6:2202853943",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-08T13:32:57.000Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/components/card.json"
+      "canvasFingerprint": "v6:2213811657",
+      "lastSyncedVersionId": "2388438498796415748",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:22407837",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2388438498796415748",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/components/card.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:2202853943 → observed v6:2213811657; ledger hash sha256:b3e71b595d0e… → sha256:7e6521e5efb6…; dump dumpv1:22407837 (grammar 1.31); file version 2388438498796415748",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:7e6521e5efb6dfb02be337098612b5c3fdf82ea9f6e3ba0ecc90b4e3b52cf09a",
+          "canvasStamp": "v6:2213811657",
+          "canvasDump": "dumpv1:22407837",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "ds.chat-message-metadata",
@@ -660,7 +1225,7 @@
         "dumpFingerprint": "dumpv1:3223228161",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/chat-message-metadata.json"
@@ -679,7 +1244,7 @@
         "dumpFingerprint": "dumpv1:132659479",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/chat-message.json"
@@ -698,7 +1263,7 @@
         "dumpFingerprint": "dumpv1:3382675890",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/chat-system-message.json"
@@ -717,7 +1282,7 @@
         "dumpFingerprint": "dumpv1:2478388003",
         "dumpVersion": "1.31",
         "fileVersionId": "2388438498796415748",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/checkbox.json"
@@ -736,7 +1301,7 @@
         "dumpFingerprint": "dumpv1:134570909",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/citation.json"
@@ -755,7 +1320,7 @@
         "dumpFingerprint": "dumpv1:4031099918",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/code.json"
@@ -774,7 +1339,7 @@
         "dumpFingerprint": "dumpv1:1794851804",
         "dumpVersion": "1.31",
         "fileVersionId": "2388438498796415748",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/divider.json"
@@ -793,7 +1358,7 @@
         "dumpFingerprint": "dumpv1:1588402733",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/empty-state.json"
@@ -812,7 +1377,7 @@
         "dumpFingerprint": "dumpv1:2676795796",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/field.json"
@@ -831,7 +1396,7 @@
         "dumpFingerprint": "dumpv1:1238368155",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/heading.json"
@@ -850,7 +1415,7 @@
         "dumpFingerprint": "dumpv1:306589473",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/icon-button.json"
@@ -869,7 +1434,7 @@
         "dumpFingerprint": "dumpv1:3038354923",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/kbd.json"
@@ -888,7 +1453,7 @@
         "dumpFingerprint": "dumpv1:2580230446",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/list-item.json"
@@ -907,7 +1472,7 @@
         "dumpFingerprint": "dumpv1:2161274955",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/list.json"
@@ -926,7 +1491,7 @@
         "dumpFingerprint": "dumpv1:3474680320",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/metadata-list-item.json"
@@ -945,7 +1510,7 @@
         "dumpFingerprint": "dumpv1:1875458055",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/metadata-list.json"
@@ -964,7 +1529,7 @@
         "dumpFingerprint": "dumpv1:2315734023",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/pagination.json"
@@ -983,7 +1548,7 @@
         "dumpFingerprint": "dumpv1:3918428932",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/progress-bar.json"
@@ -1002,7 +1567,7 @@
         "dumpFingerprint": "dumpv1:2118560066",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/section.json"
@@ -1021,7 +1586,7 @@
         "dumpFingerprint": "dumpv1:1980335563",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/side-nav-item.json"
@@ -1040,7 +1605,7 @@
         "dumpFingerprint": "dumpv1:1518934740",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/skeleton.json"
@@ -1059,7 +1624,7 @@
         "dumpFingerprint": "dumpv1:2383121865",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/slider.json"
@@ -1078,7 +1643,7 @@
         "dumpFingerprint": "dumpv1:3269269541",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/spinner.json"
@@ -1097,7 +1662,7 @@
         "dumpFingerprint": "dumpv1:3888203497",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/status-dot.json"
@@ -1116,7 +1681,7 @@
         "dumpFingerprint": "dumpv1:915203117",
         "dumpVersion": "1.31",
         "fileVersionId": "2388438498796415748",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/switch.json"
@@ -1135,7 +1700,7 @@
         "dumpFingerprint": "dumpv1:3455218876",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/tab-list.json"
@@ -1154,7 +1719,7 @@
         "dumpFingerprint": "dumpv1:380235727",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/tab.json"
@@ -1173,7 +1738,7 @@
         "dumpFingerprint": "dumpv1:433754616",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/table-cell.json"
@@ -1192,7 +1757,7 @@
         "dumpFingerprint": "dumpv1:2664972485",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/table-header-cell.json"
@@ -1211,7 +1776,7 @@
         "dumpFingerprint": "dumpv1:3561042021",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/table-row.json"
@@ -1230,7 +1795,7 @@
         "dumpFingerprint": "dumpv1:3073040933",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/table.json"
@@ -1249,7 +1814,7 @@
         "dumpFingerprint": "dumpv1:2371069263",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/text-area.json"
@@ -1268,7 +1833,7 @@
         "dumpFingerprint": "dumpv1:1190214256",
         "dumpVersion": "1.31",
         "fileVersionId": "2388438498796415748",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/text-field.json"
@@ -1287,7 +1852,7 @@
         "dumpFingerprint": "dumpv1:3003253434",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/toast.json"
@@ -1295,16 +1860,37 @@
     {
       "contractId": "ds.token",
       "contractPath": "contracts/token.contract.json",
-      "contractHash": "sha256:d2cce8b506e783f1298521e248cb2b8396285454e7c6435cb1d529a58e936473",
+      "contractHash": "sha256:1ceeba4c186fe86a98b641428bccd4dedcf79c2b05ae5e16b638ae26d60b25a6",
       "fileKey": "BMjUA2ue5CaZXU4kufxL0z",
       "setNodeId": "4:918",
-      "canvasFingerprint": "v6:2438401982",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-08T13:32:57.000Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/components/token.json"
+      "canvasFingerprint": "v6:3235844825",
+      "lastSyncedVersionId": "2388438498796415748",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:634577696",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2388438498796415748",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/components/token.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:2438401982 → observed v6:3235844825; ledger hash sha256:d2cce8b506e7… → sha256:1ceeba4c186f…; dump dumpv1:634577696 (grammar 1.31); file version 2388438498796415748",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:1ceeba4c186fe86a98b641428bccd4dedcf79c2b05ae5e16b638ae26d60b25a6",
+          "canvasStamp": "v6:3235844825",
+          "canvasDump": "dumpv1:634577696",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "ds.toolbar",
@@ -1320,7 +1906,7 @@
         "dumpFingerprint": "dumpv1:292303745",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/toolbar.json"
@@ -1339,7 +1925,7 @@
         "dumpFingerprint": "dumpv1:1314675734",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/top-nav-item.json"
@@ -1358,7 +1944,7 @@
         "dumpFingerprint": "dumpv1:3469212260",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/top-nav.json"
@@ -1377,7 +1963,7 @@
         "dumpFingerprint": "dumpv1:3858385212",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/typeahead-item.json"
@@ -1394,7 +1980,25 @@
       "direction": "code→canvas",
       "observed": null,
       "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/tailwind/components/alert.json"
+      "note": "receipt parity/receipts/console-loop/tailwind/components/alert.json",
+      "decision": {
+        "kind": "pending-reapply",
+        "note": "code is ahead: the dismiss button became a declared event (968958cd, 2026-08-16) after the last canvas write (2026-08-08); re-applying is a Figma write to GnQnjSNBXtgtd2Ht0Hs1C8",
+        "recordedAt": "2026-08-23T15:04:52.249Z",
+        "evidence": [
+          "drift at decision time: conflict (canvas evidence stamp); contract hash sha256:88359167eacb3fb3104b1394021c79466a1999fdd4d0d722425a5e9593181fbb; observed stamp v6:941557944, dump dumpv1:4197814634 (grammar 1.31), file version 2390537264651373038",
+          "canvas (Figma versions API, read-only): set 1:2098 stamp last moved 2026-08-08T07:35:42Z (v6:941557944 = observed now, version 2385245229284424737, TJ Pitre); unchanged through every later version",
+          "code: the only semantic contract commit is 968958cd 2026-08-16T23:38:13Z (props, dismiss element/attrs/description, events: onDismiss); dbeb3575 + 763b0f86 are bookkeeping (codemod, anchors)",
+          "verdict: code is 8 days newer → canvas is behind → pending-reapply"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:88359167eacb3fb3104b1394021c79466a1999fdd4d0d722425a5e9593181fbb",
+          "canvasStamp": "v6:941557944",
+          "canvasDump": "dumpv1:4197814634",
+          "dumpVersion": "1.31"
+        },
+        "command": "Figma desktop → open file GnQnjSNBXtgtd2Ht0Hs1C8 → Sync Runner plugin → \"Paste a script\" tab → paste examples/tailwind/figma/alert.figma.js (amend-capable: reconciles set 1:2098 in place and restamps v6; byte-fresh per `npm run figma:fresh`) → Run script → then record: npm run sync:observe -- --adopt flowbite.alert --note \"re-applied from 968958cd\""
+      }
     },
     {
       "contractId": "flowbite.badge",
@@ -1410,7 +2014,7 @@
         "dumpFingerprint": "dumpv1:865067787",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/tailwind/components/badge.json"
@@ -1418,16 +2022,37 @@
     {
       "contractId": "flowbite.button",
       "contractPath": "examples/tailwind/contracts/button.contract.json",
-      "contractHash": "sha256:df201d733953aa23d7442f6597c90713418620e51d0323d1bf3b7d42388b9707",
+      "contractHash": "sha256:3f3d3faf38dcaf6d791bbeac0f3acdfbd790e06d4e6c269c2bd27783018fd579",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:2254",
-      "canvasFingerprint": "v6:2297298321",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:42:57.761Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/tailwind/components/button.json"
+      "canvasFingerprint": "v6:3078140227",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:669508031",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/tailwind/components/button.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:2297298321 → observed v6:3078140227; ledger hash sha256:df201d733953… → sha256:3f3d3faf38dc…; dump dumpv1:669508031 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:3f3d3faf38dcaf6d791bbeac0f3acdfbd790e06d4e6c269c2bd27783018fd579",
+          "canvasStamp": "v6:3078140227",
+          "canvasDump": "dumpv1:669508031",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "flowbite.card",
@@ -1443,7 +2068,7 @@
         "dumpFingerprint": "dumpv1:1126456408",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — restamped by an unrecorded write between 2026-08-09 and 2026-08-21 (Figma version history: TJ Pitre); the dump-v1 projection under the 2026-08-08 mapper (8ac96363) is byte-identical to the 2026-08-08 baseline — content unchanged, stamp adopted (scratchpad REPORT 2026-08-23) (prior: receipt parity/receipts/console-loop/tailwind/components/card.json)"
@@ -1460,35 +2085,96 @@
       "direction": "code→canvas",
       "observed": null,
       "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/tailwind/components/toggle-switch.json"
+      "note": "receipt parity/receipts/console-loop/tailwind/components/toggle-switch.json",
+      "decision": {
+        "kind": "pending-reapply",
+        "note": "genuine code-ahead: role=switch + onToggle event + root align landed in the contract (968958cd, 2026-08-16) and the canvas still carries the 2026-08-06 stamp; re-applying is a Figma write to GnQnjSNBXtgtd2Ht0Hs1C8",
+        "recordedAt": "2026-08-23T15:05:42.059Z",
+        "evidence": [
+          "drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:3e9089a96a5287cf7d87fb82b82276d71def69bae78ca7de8e545f98f62da5f4; observed stamp v6:3468428338, dump dumpv1:327010899 (grammar 1.31), file version 2390537264651373038",
+          "canvas (Figma versions API, read-only): set 1:2296 stamp v6:3468428338 == ledger since 2026-08-06T15:14:25Z; dump last moved 2026-08-07T04:32:19Z (before the 08-08 seed; the 08-08 mapper reproduces the baseline) — the canvas has not moved since the receipt",
+          "code: the only semantic contract commit is 968958cd 2026-08-16T23:38:13Z (semantics.role, roleException, root layout align, events: onToggle); dbeb3575 + 763b0f86 are bookkeeping",
+          "verdict: code moved, canvas did not → pending-reapply"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:3e9089a96a5287cf7d87fb82b82276d71def69bae78ca7de8e545f98f62da5f4",
+          "canvasStamp": "v6:3468428338",
+          "canvasDump": "dumpv1:327010899",
+          "dumpVersion": "1.31"
+        },
+        "command": "Figma desktop → open file GnQnjSNBXtgtd2Ht0Hs1C8 → Sync Runner plugin → \"Paste a script\" tab → paste examples/tailwind/figma/toggle-switch.figma.js (amend-capable: reconciles set 1:2296 in place and restamps v6; byte-fresh per `npm run figma:fresh`) → Run script → then record: npm run sync:observe -- --adopt flowbite.toggleswitch --note \"re-applied from 968958cd\""
+      }
     },
     {
       "contractId": "mui.accordion",
       "contractPath": "examples/mui/contracts/accordion.contract.json",
-      "contractHash": "sha256:12cd68b52a37559bc51fa0500b31d2f34cc6bae6409b89744624644f9cf54d0b",
+      "contractHash": "sha256:e2659b69a4b4261cc7e43567e0ad303b9b3db52a6d78084cd07b6354f7cb0030",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "21:79",
-      "canvasFingerprint": "v6:4119792290",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T04:51:10.513Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/mui/components/accordion.json"
+      "canvasFingerprint": "v6:4131670946",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T15:02:27.788Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2962234838",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt (B3): canvas write 2026-08-17T12:30:29Z is newer than the semantic contract commit 16889547 (2026-08-17T12:30:08Z) — same session, 21 s apart (prior: receipt parity/receipts/console-loop/mui/components/accordion.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt (B3): canvas write 2026-08-17T12:30:29Z is newer than the semantic contract commit 16889547 (2026-08-17T12:30:08Z) — same session, 21 s apart",
+        "recordedAt": "2026-08-23T15:02:27.788Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:4119792290 → observed v6:4131670946; ledger hash sha256:12cd68b52a37… → sha256:e2659b69a4b4…; dump dumpv1:2962234838 (grammar 1.31); file version 2389961688576685812",
+          "canvas (Figma versions API, read-only): set 21:79 stamp moved 2026-08-10T07:07:18Z (v5→v6:4131670946, version 2385991253299270553); dump moved WITHOUT restamp 2026-08-17T12:30:29Z (version 2388670813585618209) — parity/receipts/console-loop/mui/VISUAL-REVIEW-2026-08-17.md: collapsed is header-only, 0-height collapse-root now clips",
+          "code: the only semantic contract commit is 16889547 2026-08-17T12:30:08Z (collapse-root declared overflow-x/overflow-y hidden); 7066eb86 and dbeb3575 are bookkeeping",
+          "verdict: canvas write is 21 s newer and is the same session's fix for the same defect → adopt"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:e2659b69a4b4261cc7e43567e0ad303b9b3db52a6d78084cd07b6354f7cb0030",
+          "canvasStamp": "v6:4131670946",
+          "canvasDump": "dumpv1:2962234838",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "mui.alert",
       "contractPath": "examples/mui/contracts/alert.contract.json",
-      "contractHash": "sha256:a827ed80ead670b9c7cf60ebfb27f319a173f7d95583ad3bbf7bbde0776e0c9e",
+      "contractHash": "sha256:0683dd225acb675d08ea27e80286d0a8218cfcfeb5e457b6e446bf8b6a45f7c6",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "84:2264",
-      "canvasFingerprint": "v6:1383530075",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:17:13.440Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/mui/components/alert.json"
+      "canvasFingerprint": "v6:1482935549",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2956187053",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/alert.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:1383530075 → observed v6:1482935549; ledger hash sha256:a827ed80ead6… → sha256:0683dd225acb…; dump dumpv1:2956187053 (grammar 1.31); file version 2389961688576685812",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:0683dd225acb675d08ea27e80286d0a8218cfcfeb5e457b6e446bf8b6a45f7c6",
+          "canvasStamp": "v6:1482935549",
+          "canvasDump": "dumpv1:2956187053",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "mui.autocomplete",
@@ -1504,7 +2190,7 @@
         "dumpFingerprint": "dumpv1:4187961574",
         "dumpVersion": "1.31",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/autocomplete.json"
@@ -1512,30 +2198,73 @@
     {
       "contractId": "mui.avatar",
       "contractPath": "examples/mui/contracts/avatar.contract.json",
-      "contractHash": "sha256:3fd3173e5d45cf398aca9c58fa63d345412aab7cf09fb2141584440f9507d723",
+      "contractHash": "sha256:e0846f9703c2e343d1153927a302909274f698db57f07f8aead0c74c9244d3b9",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "83:1638",
-      "canvasFingerprint": "v6:2993664762",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:00:34.663Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/mui/components/avatar.json"
+      "canvasFingerprint": "v6:95806038",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T15:02:31.715Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2836052992",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt (B3): canvas write 2026-08-17T12:30:29Z is newer than the semantic contract commit 16889547 (2026-08-17T12:30:08Z) — same session, 21 s apart (prior: receipt parity/receipts/console-loop/mui/components/avatar.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt (B3): canvas write 2026-08-17T12:30:29Z is newer than the semantic contract commit 16889547 (2026-08-17T12:30:08Z) — same session, 21 s apart",
+        "recordedAt": "2026-08-23T15:02:31.715Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:2993664762 → observed v6:95806038; ledger hash sha256:3fd3173e5d45… → sha256:e0846f9703c2…; dump dumpv1:2836052992 (grammar 1.31); file version 2389961688576685812",
+          "canvas (Figma versions API, read-only): set 83:1638 stamp moved 2026-08-10T18:45:18Z (v6:95806038, version 2386179981680353079); dump moved WITHOUT restamp 2026-08-17T12:30:29Z (version 2388670813585618209) — VISUAL-REVIEW-2026-08-17.md: circle/rounded/square all 40×40, the tall oval is gone",
+          "code: the only semantic contract commit is 16889547 2026-08-17T12:30:08Z (root tokens width/height authored = 40); dbeb3575 is bookkeeping",
+          "verdict: canvas write is 21 s newer and is the same session's fix for the same defect → adopt"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:e0846f9703c2e343d1153927a302909274f698db57f07f8aead0c74c9244d3b9",
+          "canvasStamp": "v6:95806038",
+          "canvasDump": "dumpv1:2836052992",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "mui.badge",
       "contractPath": "examples/mui/contracts/badge.contract.json",
-      "contractHash": "sha256:a2bf3e9944986df607453b9e981edf76253059489d5895f87ac6b52ae6f56eaf",
+      "contractHash": "sha256:ff7c0294f40a682a775429df3605396331df9f63fa374fd840f21a744719e6f3",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "84:2376",
-      "canvasFingerprint": "v6:3419500101",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:22:31.359Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/mui/components/badge.json"
+      "canvasFingerprint": "v6:2630266081",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:547180498",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/badge.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:3419500101 → observed v6:2630266081; ledger hash sha256:a2bf3e994498… → sha256:ff7c0294f40a…; dump dumpv1:547180498 (grammar 1.31); file version 2389961688576685812",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:ff7c0294f40a682a775429df3605396331df9f63fa374fd840f21a744719e6f3",
+          "canvasStamp": "v6:2630266081",
+          "canvasDump": "dumpv1:547180498",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "mui.breadcrumbs",
@@ -1551,7 +2280,7 @@
         "dumpFingerprint": "dumpv1:1936982772",
         "dumpVersion": "1.31",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/breadcrumbs.json"
@@ -1570,7 +2299,7 @@
         "dumpFingerprint": "dumpv1:2415220176",
         "dumpVersion": "1.31",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — set carries a v5-era stamp (pre-v6 engine) while the receipt recorded a freshly computed v6 — two instruments, not a write; the dump-v1 projection under the 2026-08-08 mapper equals the 2026-08-08 baseline — content unchanged, re-baselined under grammar 1.31 (prior: receipt parity/receipts/console-loop/mui/components/button.json)"
@@ -1589,7 +2318,7 @@
         "dumpFingerprint": "dumpv1:3693583755",
         "dumpVersion": "1.31",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/card.json"
@@ -1597,16 +2326,37 @@
     {
       "contractId": "mui.checkbox",
       "contractPath": "examples/mui/contracts/checkbox.contract.json",
-      "contractHash": "sha256:6238d32beb7c365528f2154aff9c1feb6648224cd7737ee27fa2d299fab7137c",
+      "contractHash": "sha256:444a432bc86f90bb30b4373722e92e9203170839d315f9b587503b4d81a39384",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "21:323",
-      "canvasFingerprint": "v6:820111622",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T04:51:10.514Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/mui/components/checkbox.json"
+      "canvasFingerprint": "v6:32994491",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1204135693",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/checkbox.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:820111622 → observed v6:32994491; ledger hash sha256:6238d32beb7c… → sha256:444a432bc86f…; dump dumpv1:1204135693 (grammar 1.31); file version 2389961688576685812",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:444a432bc86f90bb30b4373722e92e9203170839d315f9b587503b4d81a39384",
+          "canvasStamp": "v6:32994491",
+          "canvasDump": "dumpv1:1204135693",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "mui.chip",
@@ -1622,7 +2372,7 @@
         "dumpFingerprint": "dumpv1:2168689507",
         "dumpVersion": "1.31",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/chip.json"
@@ -1641,7 +2391,7 @@
         "dumpFingerprint": "dumpv1:2896218865",
         "dumpVersion": "1.31",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/circular-progress.json"
@@ -1660,7 +2410,7 @@
         "dumpFingerprint": "dumpv1:2148376738",
         "dumpVersion": "1.31",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/dialog.json"
@@ -1668,30 +2418,72 @@
     {
       "contractId": "mui.divider",
       "contractPath": "examples/mui/contracts/divider.contract.json",
-      "contractHash": "sha256:c0538b3161f7557ff4164c5d43fcbd2bc608328abc58ea812a889018f2052d68",
+      "contractHash": "sha256:7d486dd150ff0406782967d7e545aba5d6b99657065ddc29137416a7a3222616",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "83:1610",
-      "canvasFingerprint": "v6:1949352536",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:00:33.498Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/mui/components/divider.json"
+      "canvasFingerprint": "v6:2994012916",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1060879172",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/divider.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:1949352536 → observed v6:2994012916; ledger hash sha256:c0538b3161f7… → sha256:7d486dd150ff…; dump dumpv1:1060879172 (grammar 1.31); file version 2389961688576685812",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:7d486dd150ff0406782967d7e545aba5d6b99657065ddc29137416a7a3222616",
+          "canvasStamp": "v6:2994012916",
+          "canvasDump": "dumpv1:1060879172",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "mui.drawer",
       "contractPath": "examples/mui/contracts/drawer.contract.json",
-      "contractHash": "sha256:e51c7a5878423cf038bf1d0480384500f45e514e5af009b4ddc0798e50579ae6",
+      "contractHash": "sha256:1e536c79d397a9ba1b0239f9df75b3b31b3fc1f6251fc500a4c6bcb219f93027",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "83:1680",
-      "canvasFingerprint": "v6:415446264",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:00:36.655Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/mui/components/drawer.json"
+      "canvasFingerprint": "v6:3646443927",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:4128778073",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/drawer.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:415446264 → observed v6:3646443927; ledger hash sha256:e51c7a587842… → sha256:1e536c79d397…; dump dumpv1:4128778073 (grammar 1.31); file version 2389961688576685812",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:1e536c79d397a9ba1b0239f9df75b3b31b3fc1f6251fc500a4c6bcb219f93027",
+          "canvasStamp": "v6:3646443927",
+          "canvasDump": "dumpv1:4128778073",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "mui.fab",
@@ -1705,7 +2497,25 @@
       "direction": "code→canvas",
       "observed": null,
       "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/mui/components/fab.json"
+      "note": "receipt parity/receipts/console-loop/mui/components/fab.json",
+      "decision": {
+        "kind": "pending-reconcile",
+        "note": "both halves moved in the same minute on 2026-08-17 (canvas hand-edit without restamp 12:30:29Z; contract commit 16889547 12:30:08Z) — a human chooses whether the reviewed canvas or the authored contract is the truth",
+        "recordedAt": "2026-08-23T15:06:32.100Z",
+        "evidence": [
+          "drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:0f83656df4db10b872279c3881c54afd8b5d923f2cee21d16d6e27f0df56f540; observed stamp v6:2082406472, dump dumpv1:527766217 (grammar 1.31), file version 2389961688576685812",
+          "canvas (Figma versions API, read-only): set 84:1743 stamp v6:2082406472 == ledger since 2026-08-06T05:07:02Z (never restamped); dump moved 2026-08-17T12:30:29Z (version 2388670813585618209, TJ Pitre) — VISUAL-REVIEW-2026-08-17.md: circles at 56/48/40, duplicate set 84:1954 deleted, grid reflowed; the 1.5-grammar baseline that first proved this move was dropped by the 08-23 re-baseline (sync/receipts/2026-08-23-spine-reconciliation.md, class D2, is the record)",
+          "code: the only semantic contract commit is 16889547 2026-08-17T12:30:08Z (anatomy.root.tokensByProp: authored 40/48/56 boxes); dbeb3575 is bookkeeping",
+          "what a human must choose: whether the reviewed canvas (hand-reflowed, unstamped) or the authored contract boxes are the truth; if (b), the re-apply overwrites the hand reflow"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:0f83656df4db10b872279c3881c54afd8b5d923f2cee21d16d6e27f0df56f540",
+          "canvasStamp": "v6:2082406472",
+          "canvasDump": "dumpv1:527766217",
+          "dumpVersion": "1.31"
+        },
+        "command": "CHOOSE ONE — (a) the canvas is the truth (keep the 2026-08-17 hand-fix): npm run sync:observe -- --adopt mui.fab --note \"canvas wins: 08-17 review fix kept\"  |  (b) the contract is the truth: Figma desktop → open 59mLQlOMiD5w5za6SUcoO5 → Sync Runner plugin → \"Paste a script\" tab → paste examples/mui/figma/fab.figma.js (amends set 84:1743 in place, restamps v6) → Run script → npm run sync:observe -- --adopt mui.fab --note \"re-applied from 16889547\""
+      }
     },
     {
       "contractId": "mui.icon-button",
@@ -1721,7 +2531,7 @@
         "dumpFingerprint": "dumpv1:646966808",
         "dumpVersion": "1.31",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/icon-button.json"
@@ -1740,7 +2550,7 @@
         "dumpFingerprint": "dumpv1:4091473170",
         "dumpVersion": "1.31",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/input-adornment.json"
@@ -1759,7 +2569,7 @@
         "dumpFingerprint": "dumpv1:3931827815",
         "dumpVersion": "1.31",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — restamped by an unrecorded write between 2026-08-09 and 2026-08-21 (Figma version history: TJ Pitre); the dump-v1 projection under the 2026-08-08 mapper (8ac96363) is byte-identical to the 2026-08-08 baseline — content unchanged, stamp adopted (scratchpad REPORT 2026-08-23) (prior: receipt parity/receipts/console-loop/mui/components/linear-progress.json)"
@@ -1776,7 +2586,25 @@
       "direction": "code→canvas",
       "observed": null,
       "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/mui/components/link.json"
+      "note": "receipt parity/receipts/console-loop/mui/components/link.json",
+      "decision": {
+        "kind": "pending-reconcile",
+        "note": "both halves moved in the same minute on 2026-08-17 (canvas hand-edit without restamp 12:30:29Z; contract commit 16889547 12:30:08Z) — a human chooses whether the reviewed canvas or the authored contract is the truth",
+        "recordedAt": "2026-08-23T15:06:57.807Z",
+        "evidence": [
+          "drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:53d3814ea6390478f606061835ce8a5a4073c8732ff5d4d26dc375db8f3084d2; observed stamp v6:3316422374, dump dumpv1:2837578434 (grammar 1.31), file version 2389961688576685812",
+          "canvas (Figma versions API, read-only): set 84:1832 stamp v6:3316422374 == ledger since 2026-08-06T05:07:02Z (never restamped); dump moved 2026-08-17T12:30:29Z (version 2388670813585618209, TJ Pitre) — root layout HORIZONTAL/CENTER → VERTICAL/MIN (reconciliation receipt D2 row); VISUAL-REVIEW-2026-08-17.md: 'Link' on one line (31×19); the 1.5-grammar baseline that first proved this move was dropped by the 08-23 re-baseline",
+          "code: the only semantic contract commit is 16889547 2026-08-17T12:30:08Z (anatomy.root.tokens.width dropped so the label hugs); dbeb3575 is bookkeeping",
+          "what a human must choose: whether the reviewed canvas (hand-edited root layout, unstamped) or the authored contract (width dropped) is the truth; if (b), the re-apply overwrites the hand edit"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:53d3814ea6390478f606061835ce8a5a4073c8732ff5d4d26dc375db8f3084d2",
+          "canvasStamp": "v6:3316422374",
+          "canvasDump": "dumpv1:2837578434",
+          "dumpVersion": "1.31"
+        },
+        "command": "CHOOSE ONE — (a) the canvas is the truth (keep the 2026-08-17 hand-fix): npm run sync:observe -- --adopt mui.link --note \"canvas wins: 08-17 review fix kept\"  |  (b) the contract is the truth: Figma desktop → open 59mLQlOMiD5w5za6SUcoO5 → Sync Runner plugin → \"Paste a script\" tab → paste examples/mui/figma/link.figma.js (amends set 84:1832 in place, restamps v6) → Run script → npm run sync:observe -- --adopt mui.link --note \"re-applied from 16889547\""
+      }
     },
     {
       "contractId": "mui.menu",
@@ -1792,7 +2620,7 @@
         "dumpFingerprint": "dumpv1:1827025945",
         "dumpVersion": "1.31",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — set carries a v5-era stamp (pre-v6 engine) while the receipt recorded a freshly computed v6 — two instruments, not a write; the dump-v1 projection under the 2026-08-08 mapper equals the 2026-08-08 baseline — content unchanged, re-baselined under grammar 1.31 (prior: receipt parity/receipts/console-loop/mui/components/menu.json)"
@@ -1800,44 +2628,107 @@
     {
       "contractId": "mui.paper",
       "contractPath": "examples/mui/contracts/paper.contract.json",
-      "contractHash": "sha256:7001491a7e1634789d2cc8376938d6a87405eb0a9fa655328e6f29a7132f8584",
+      "contractHash": "sha256:80f5847d51de7571dc65e4ea852cf9d0a06ed15d83264101cf3236a341ca5e87",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "83:1629",
-      "canvasFingerprint": "v6:4002091254",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:00:34.280Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/mui/components/paper.json"
+      "canvasFingerprint": "v6:1052547642",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:945670748",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/paper.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:4002091254 → observed v6:1052547642; ledger hash sha256:7001491a7e16… → sha256:80f5847d51de…; dump dumpv1:945670748 (grammar 1.31); file version 2389961688576685812",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:80f5847d51de7571dc65e4ea852cf9d0a06ed15d83264101cf3236a341ca5e87",
+          "canvasStamp": "v6:1052547642",
+          "canvasDump": "dumpv1:945670748",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "mui.radio",
       "contractPath": "examples/mui/contracts/radio.contract.json",
-      "contractHash": "sha256:7a09dc0bc93e23ca6a29a3ead898d543b750b4921feb2f9ce4ad596923b45ae8",
+      "contractHash": "sha256:5d991308f12dffa320202f38947a578d3fa3ffea49b18e53e3a65217666d2c2f",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "84:1933",
-      "canvasFingerprint": "v6:4150206674",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:04:42.510Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/mui/components/radio.json"
+      "canvasFingerprint": "v6:1387416576",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3708516313",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/radio.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:4150206674 → observed v6:1387416576; ledger hash sha256:7a09dc0bc93e… → sha256:5d991308f12d…; dump dumpv1:3708516313 (grammar 1.31); file version 2389961688576685812",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:5d991308f12dffa320202f38947a578d3fa3ffea49b18e53e3a65217666d2c2f",
+          "canvasStamp": "v6:1387416576",
+          "canvasDump": "dumpv1:3708516313",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "mui.select",
       "contractPath": "examples/mui/contracts/select.contract.json",
-      "contractHash": "sha256:8f648951bc408efcad955b3e5d553d4bc967146bb505faa609ec78edf4ac789a",
+      "contractHash": "sha256:983fb739f9e204fc86ca6e96cc3fa9d5dc8ef2ea88e93092797296f5b83fb060",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "84:2125",
-      "canvasFingerprint": "v6:273231726",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:12:50.620Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/mui/components/select.json"
+      "canvasFingerprint": "v6:614835266",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3688301010",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/select.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:273231726 → observed v6:614835266; ledger hash sha256:8f648951bc40… → sha256:983fb739f9e2…; dump dumpv1:3688301010 (grammar 1.31); file version 2389961688576685812",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:983fb739f9e204fc86ca6e96cc3fa9d5dc8ef2ea88e93092797296f5b83fb060",
+          "canvasStamp": "v6:614835266",
+          "canvasDump": "dumpv1:3688301010",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "mui.slider",
@@ -1851,7 +2742,25 @@
       "direction": "code→canvas",
       "observed": null,
       "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/mui/components/slider.json"
+      "note": "receipt parity/receipts/console-loop/mui/components/slider.json",
+      "decision": {
+        "kind": "pending-reapply",
+        "note": "code is ahead: the slider-thumb shadow-pseudo fold landed in the contract (01aa5243, 2026-08-11T17:28Z) 1 h 48 min after the last canvas write (2026-08-11T15:40Z); re-applying is a Figma write to 59mLQlOMiD5w5za6SUcoO5",
+        "recordedAt": "2026-08-23T15:05:16.870Z",
+        "evidence": [
+          "drift at decision time: conflict (canvas evidence stamp); contract hash sha256:c91b6cf3cfe10ed0a1302557eebd4adbd2e913db56ac850d84bf6a51d6c5ee86; observed stamp v6:2972081627, dump dumpv1:1907087401 (grammar 1.31), file version 2389961688576685812",
+          "canvas (Figma versions API, read-only): set 21:509 stamp moved 2026-08-10T18:45:18Z (v5→v6:1845442048) and 2026-08-11T15:40:41Z (v6:2972081627 = observed now, version 2386493120203841936, TJ Pitre); unchanged since",
+          "code: the only semantic contract commit is 01aa5243 2026-08-11T17:28:31Z (slider-thumb literals/literalsByProp); dbeb3575 is bookkeeping",
+          "verdict: code is newer (by 1 h 48 min) → canvas is behind → pending-reapply"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:c91b6cf3cfe10ed0a1302557eebd4adbd2e913db56ac850d84bf6a51d6c5ee86",
+          "canvasStamp": "v6:2972081627",
+          "canvasDump": "dumpv1:1907087401",
+          "dumpVersion": "1.31"
+        },
+        "command": "Figma desktop → open file 59mLQlOMiD5w5za6SUcoO5 → Sync Runner plugin → \"Paste a script\" tab → paste examples/mui/figma/slider.figma.js (amend-capable: reconciles set 21:509 in place and restamps v6; byte-fresh per `npm run figma:fresh`) → Run script → then record: npm run sync:observe -- --adopt mui.slider --note \"re-applied from 01aa5243\""
+      }
     },
     {
       "contractId": "mui.snackbar",
@@ -1867,7 +2776,7 @@
         "dumpFingerprint": "dumpv1:2224078824",
         "dumpVersion": "1.31",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/snackbar.json"
@@ -1875,16 +2784,37 @@
     {
       "contractId": "mui.switch",
       "contractPath": "examples/mui/contracts/switch.contract.json",
-      "contractHash": "sha256:e0fffea813f4c3b6a5246808b40a5a32a1cc0bfa60916654ace9ba5c6ed23f3d",
+      "contractHash": "sha256:52d22b1f0b47c144f5f7a6a62608210456b1d9441576cc7b5a21111d7a066293",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "21:624",
-      "canvasFingerprint": "v6:2381775060",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T04:51:10.511Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/mui/components/switch.json"
+      "canvasFingerprint": "v6:2753390164",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3412250931",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/switch.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:2381775060 → observed v6:2753390164; ledger hash sha256:e0fffea813f4… → sha256:52d22b1f0b47…; dump dumpv1:3412250931 (grammar 1.31); file version 2389961688576685812",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:52d22b1f0b47c144f5f7a6a62608210456b1d9441576cc7b5a21111d7a066293",
+          "canvasStamp": "v6:2753390164",
+          "canvasDump": "dumpv1:3412250931",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "mui.table-pagination",
@@ -1900,7 +2830,7 @@
         "dumpFingerprint": "dumpv1:2335928335",
         "dumpVersion": "1.31",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — restamped by an unrecorded write between 2026-08-09 and 2026-08-21 (Figma version history: TJ Pitre); the dump-v1 projection under the 2026-08-08 mapper (8ac96363) is byte-identical to the 2026-08-08 baseline — content unchanged, stamp adopted (scratchpad REPORT 2026-08-23) (prior: receipt parity/receipts/console-loop/mui/components/table-pagination.json)"
@@ -1908,44 +2838,107 @@
     {
       "contractId": "mui.table",
       "contractPath": "examples/mui/contracts/table.contract.json",
-      "contractHash": "sha256:49ab68570d76c6f2e299325aadecc40f65f9398ae0ed66ee06d680d5a2d80d4f",
+      "contractHash": "sha256:aa3a93b46ba8727e23fa26dcd88a9b6750f17bb108a602077b457fd2a9c5e4c7",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "21:744",
-      "canvasFingerprint": "v6:966664822",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T04:51:10.515Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/mui/components/table.json"
+      "canvasFingerprint": "v6:3733871081",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1853677951",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/table.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:966664822 → observed v6:3733871081; ledger hash sha256:49ab68570d76… → sha256:aa3a93b46ba8…; dump dumpv1:1853677951 (grammar 1.31); file version 2389961688576685812",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:aa3a93b46ba8727e23fa26dcd88a9b6750f17bb108a602077b457fd2a9c5e4c7",
+          "canvasStamp": "v6:3733871081",
+          "canvasDump": "dumpv1:1853677951",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "mui.tabs",
       "contractPath": "examples/mui/contracts/tabs.contract.json",
-      "contractHash": "sha256:66fc863aa079cde868356449fdf17bf4cc701d179bd56766aece04df0e66331b",
+      "contractHash": "sha256:3ff1c689c65b3edf0a29f82c5c4ec145302310b982407ce186f54a32debf842b",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "21:807",
-      "canvasFingerprint": "v6:2607696146",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T04:51:10.512Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/mui/components/tabs.json"
+      "canvasFingerprint": "v6:3458982322",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:426521364",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/tabs.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:2607696146 → observed v6:3458982322; ledger hash sha256:66fc863aa079… → sha256:3ff1c689c65b…; dump dumpv1:426521364 (grammar 1.31); file version 2389961688576685812",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:3ff1c689c65b3edf0a29f82c5c4ec145302310b982407ce186f54a32debf842b",
+          "canvasStamp": "v6:3458982322",
+          "canvasDump": "dumpv1:426521364",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "mui.text-field",
       "contractPath": "examples/mui/contracts/text-field.contract.json",
-      "contractHash": "sha256:3b5acafdc9399390eb0e66ec27a9182d972cb37bb4cfc29c3bec723ba58920fe",
+      "contractHash": "sha256:d3e183bd6dc8e083809bc04aa95dc3fb68597c0e7a8f2860391463330f13f5cf",
       "fileKey": "59mLQlOMiD5w5za6SUcoO5",
       "setNodeId": "84:2480",
-      "canvasFingerprint": "v6:3304990436",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:26:56.332Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/mui/components/text-field.json"
+      "canvasFingerprint": "v6:944851435",
+      "lastSyncedVersionId": "2389961688576685812",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:889646355",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2389961688576685812",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/text-field.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:3304990436 → observed v6:944851435; ledger hash sha256:3b5acafdc939… → sha256:d3e183bd6dc8…; dump dumpv1:889646355 (grammar 1.31); file version 2389961688576685812",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:d3e183bd6dc8e083809bc04aa95dc3fb68597c0e7a8f2860391463330f13f5cf",
+          "canvasStamp": "v6:944851435",
+          "canvasDump": "dumpv1:889646355",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "mui.tooltip",
@@ -1961,7 +2954,7 @@
         "dumpFingerprint": "dumpv1:2057400026",
         "dumpVersion": "1.31",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/tooltip.json"
@@ -1969,142 +2962,352 @@
     {
       "contractId": "polaris.avatar",
       "contractPath": "examples/polaris/contracts/avatar.contract.json",
-      "contractHash": "sha256:257a87e37e99c5fcb9421bdd218d703f7b87f3c5f76fd168a641ee2534638174",
+      "contractHash": "sha256:674d3bdaa4987bf7247c69fbe431f00ef7d706c87674f537c1b43b82a9572f4c",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:7849",
-      "canvasFingerprint": "v6:635946300",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:17.394Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/polaris/components/avatar.json"
+      "canvasFingerprint": "v6:2102008762",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2976127600",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/avatar.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:635946300 → observed v6:2102008762; ledger hash sha256:257a87e37e99… → sha256:674d3bdaa498…; dump dumpv1:2976127600 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:674d3bdaa4987bf7247c69fbe431f00ef7d706c87674f537c1b43b82a9572f4c",
+          "canvasStamp": "v6:2102008762",
+          "canvasDump": "dumpv1:2976127600",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "polaris.badge",
       "contractPath": "examples/polaris/contracts/badge.contract.json",
-      "contractHash": "sha256:3943a73bcabdc61672a1bf816a27a40593d711683c071ca5875952226be24475",
+      "contractHash": "sha256:28f1f47aae3467ab58391735c27b48a3162c4d0f41ce0b21cf6d9364ab1acbb3",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:8216",
-      "canvasFingerprint": "v6:68910415",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:19.080Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/polaris/components/badge.json"
+      "canvasFingerprint": "v6:3168495261",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1037761570",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/badge.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:68910415 → observed v6:3168495261; ledger hash sha256:3943a73bcabd… → sha256:28f1f47aae34…; dump dumpv1:1037761570 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:28f1f47aae3467ab58391735c27b48a3162c4d0f41ce0b21cf6d9364ab1acbb3",
+          "canvasStamp": "v6:3168495261",
+          "canvasDump": "dumpv1:1037761570",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "polaris.banner",
       "contractPath": "examples/polaris/contracts/banner.contract.json",
-      "contractHash": "sha256:fa937dfd70d9ae60621bf18cbe8ecac7e012e102475b90e6bfd3a8fc33123ee4",
+      "contractHash": "sha256:84ee2b41c40d1ce3ba60b6e8f54b639875a0427686669d18b9fb80f91b7455fc",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:8463",
-      "canvasFingerprint": "v6:75310864",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:20.654Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/polaris/components/banner.json"
+      "canvasFingerprint": "v6:3901270438",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:4159336422",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/banner.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:75310864 → observed v6:3901270438; ledger hash sha256:fa937dfd70d9… → sha256:84ee2b41c40d…; dump dumpv1:4159336422 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:84ee2b41c40d1ce3ba60b6e8f54b639875a0427686669d18b9fb80f91b7455fc",
+          "canvasStamp": "v6:3901270438",
+          "canvasDump": "dumpv1:4159336422",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "polaris.button",
       "contractPath": "examples/polaris/contracts/button.contract.json",
-      "contractHash": "sha256:df73d3678dfe48f3fefd76e0e4d1d6acb530cb6cf037828328e31d6f5a824f04",
+      "contractHash": "sha256:6f54128a0917d05c072450a94d7e539da05f3746b049ed3ca50df1ed9d1a6374",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:10006",
-      "canvasFingerprint": "v6:3705147195",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:30.153Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/polaris/components/button.json"
+      "canvasFingerprint": "v6:2494801010",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:1097453579",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/button.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:3705147195 → observed v6:2494801010; ledger hash sha256:df73d3678dfe… → sha256:6f54128a0917…; dump dumpv1:1097453579 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:6f54128a0917d05c072450a94d7e539da05f3746b049ed3ca50df1ed9d1a6374",
+          "canvasStamp": "v6:2494801010",
+          "canvasDump": "dumpv1:1097453579",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "polaris.checkbox",
       "contractPath": "examples/polaris/contracts/checkbox.contract.json",
-      "contractHash": "sha256:922cdc8d3274a0e546b7c916b7d37a9884a089633b23eab3d0ff9d881f7f94a1",
+      "contractHash": "sha256:c917c96be5c724c5f30f188feb927c49225758c5419d59c61ae6a53413a22324",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:10049",
-      "canvasFingerprint": "v6:1753212640",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:31.032Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/polaris/components/checkbox.json"
+      "canvasFingerprint": "v6:3805934675",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:4004159349",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/checkbox.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:1753212640 → observed v6:3805934675; ledger hash sha256:922cdc8d3274… → sha256:c917c96be5c7…; dump dumpv1:4004159349 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:c917c96be5c724c5f30f188feb927c49225758c5419d59c61ae6a53413a22324",
+          "canvasStamp": "v6:3805934675",
+          "canvasDump": "dumpv1:4004159349",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "polaris.progress-bar",
       "contractPath": "examples/polaris/contracts/progress-bar.contract.json",
-      "contractHash": "sha256:58f89b49ab61217e1f6566f16684f6a403c0ae55f84a8a155717fa5a479925dc",
+      "contractHash": "sha256:1cdb827fcc7a911aa0b15a00f8a57729400420881e0c0c363c34d4c222d3d331",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:10076",
-      "canvasFingerprint": "v6:3437476105",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:31.926Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/polaris/components/progress-bar.json"
+      "canvasFingerprint": "v6:4071347715",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3687579860",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/progress-bar.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:3437476105 → observed v6:4071347715; ledger hash sha256:58f89b49ab61… → sha256:1cdb827fcc7a…; dump dumpv1:3687579860 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:1cdb827fcc7a911aa0b15a00f8a57729400420881e0c0c363c34d4c222d3d331",
+          "canvasStamp": "v6:4071347715",
+          "canvasDump": "dumpv1:3687579860",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "polaris.radio-button",
       "contractPath": "examples/polaris/contracts/radio-button.contract.json",
-      "contractHash": "sha256:17df1c0e0916d40bc039faaf941866241851b0febf3c69feeb22a62ac3c940f9",
+      "contractHash": "sha256:8590937b645b2bd83e9683bec404e608fb7fdb4ebeaa446fcf898d462193e689",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:10096",
-      "canvasFingerprint": "v6:2212519889",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:32.776Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/polaris/components/radio-button.json"
+      "canvasFingerprint": "v6:28097978",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:4291162996",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/radio-button.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:2212519889 → observed v6:28097978; ledger hash sha256:17df1c0e0916… → sha256:8590937b645b…; dump dumpv1:4291162996 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:8590937b645b2bd83e9683bec404e608fb7fdb4ebeaa446fcf898d462193e689",
+          "canvasStamp": "v6:28097978",
+          "canvasDump": "dumpv1:4291162996",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "polaris.spinner",
       "contractPath": "examples/polaris/contracts/spinner.contract.json",
-      "contractHash": "sha256:88ee8b7817c897a4db9ebf6dbc4d52cc0405a00788ace891f449c83b18eda8b0",
+      "contractHash": "sha256:af561d7cd2a5a4babec65e7591491a71e9c00bbfe1088ecc4e18d5d65fb92f1e",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:10105",
-      "canvasFingerprint": "v6:3043290729",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:33.504Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/polaris/components/spinner.json"
+      "canvasFingerprint": "v6:1296260101",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:3849701374",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/spinner.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:3043290729 → observed v6:1296260101; ledger hash sha256:88ee8b7817c8… → sha256:af561d7cd2a5…; dump dumpv1:3849701374 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:af561d7cd2a5a4babec65e7591491a71e9c00bbfe1088ecc4e18d5d65fb92f1e",
+          "canvasStamp": "v6:1296260101",
+          "canvasDump": "dumpv1:3849701374",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "polaris.tag",
       "contractPath": "examples/polaris/contracts/tag.contract.json",
-      "contractHash": "sha256:09e54199b33efa1637e7a5d55d9db3e9d5b6e7dd056b006d6bee14bc512c2868",
+      "contractHash": "sha256:4ff306f3edfddced6b3b5845ddb7751becb3fb1e58a08de9c09022f12e67bcdb",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:10192",
-      "canvasFingerprint": "v6:2986545534",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:34.491Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/polaris/components/tag.json"
+      "canvasFingerprint": "v6:1850428760",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:4138318705",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/tag.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:2986545534 → observed v6:1850428760; ledger hash sha256:09e54199b33e… → sha256:4ff306f3edfd…; dump dumpv1:4138318705 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:4ff306f3edfddced6b3b5845ddb7751becb3fb1e58a08de9c09022f12e67bcdb",
+          "canvasStamp": "v6:1850428760",
+          "canvasDump": "dumpv1:4138318705",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "polaris.text-field",
       "contractPath": "examples/polaris/contracts/text-field.contract.json",
-      "contractHash": "sha256:6f6e308923452afbdae6c738f76045cbbf9e8fdcf1b974a9692901004a16fa6c",
+      "contractHash": "sha256:a68d7e4eb92460c6327e790583ddf2c465665c378414482c48f3c30b659a0a4d",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:10365",
-      "canvasFingerprint": "v6:3489765104",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:35.867Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/polaris/components/text-field.json"
+      "canvasFingerprint": "v6:1201159595",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:549257339",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/text-field.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:3489765104 → observed v6:1201159595; ledger hash sha256:6f6e30892345… → sha256:a68d7e4eb924…; dump dumpv1:549257339 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:a68d7e4eb92460c6327e790583ddf2c465665c378414482c48f3c30b659a0a4d",
+          "canvasStamp": "v6:1201159595",
+          "canvasDump": "dumpv1:549257339",
+          "dumpVersion": "1.31"
+        }
+      }
     },
     {
       "contractId": "polaris.text",
@@ -2120,7 +3323,7 @@
         "dumpFingerprint": "dumpv1:1115150788",
         "dumpVersion": "1.31",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T12:52:39.983Z"
+        "observedAt": "2026-08-23T15:02:31.715Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/polaris/components/text.json"
@@ -2128,16 +3331,37 @@
     {
       "contractId": "polaris.thumbnail",
       "contractPath": "examples/polaris/contracts/thumbnail.contract.json",
-      "contractHash": "sha256:f79bc2b2496968ebc6db8c8407f39b31eeba668ffbff66268e825aca624004da",
+      "contractHash": "sha256:c6e0a3c143f747aead88d22a6251720cd599de80858f37e86eb7dec76af02c35",
       "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
       "setNodeId": "1:10491",
-      "canvasFingerprint": "v6:2374750881",
-      "lastSyncedVersionId": null,
-      "lastSyncedAt": "2026-08-06T05:47:39.023Z",
-      "direction": "code→canvas",
-      "observed": null,
-      "provenance": "seeded-from-receipts",
-      "note": "receipt parity/receipts/console-loop/polaris/components/thumbnail.json"
+      "canvasFingerprint": "v6:229901749",
+      "lastSyncedVersionId": "2390537264651373038",
+      "lastSyncedAt": "2026-08-23T14:57:31.334Z",
+      "direction": "canvas→code",
+      "observed": {
+        "dumpFingerprint": "dumpv1:2403445535",
+        "dumpVersion": "1.31",
+        "fileVersionId": "2390537264651373038",
+        "observedAt": "2026-08-23T15:02:31.715Z"
+      },
+      "provenance": "observe",
+      "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/thumbnail.json)",
+      "decision": {
+        "kind": "adopt",
+        "note": "2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point",
+        "recordedAt": "2026-08-23T14:57:31.334Z",
+        "evidence": [
+          "before adoption: conflict (canvas evidence stamp); ledger stamp v6:2374750881 → observed v6:229901749; ledger hash sha256:f79bc2b24969… → sha256:c6e0a3c143f7…; dump dumpv1:2403445535 (grammar 1.31); file version 2390537264651373038",
+          "code half re-verified 2026-08-23 before adopting: migrateDocumentToV17(contract bytes at the commit whose hash the ledger recorded) hashes equal to HEAD for 46 of the 50 rows, and equal after stripping bindings.*.anchors for the other 4 (ds.banner, ds.card, ds.token, flowbite.button: anchor re-points cc6a2976/2d0ffef1) — no semantic contract change on any B2 row",
+          "canvas half: the observed v6 stamp appears in no committed receipt and no ledger record (sync/receipts/2026-08-23-spine-reconciliation.md, class B2); Figma versions API (read-only) shows every version of GnQnj/BMjUA/59mLQ since 2026-08-09 authored by TJ Pitre (plugin/console-loop sessions 08-09, 10, 11, 12, 16, 17, 20, 21) plus one Figma autosave 08-22 — no other user"
+        ],
+        "basedOn": {
+          "contractHash": "sha256:c6e0a3c143f747aead88d22a6251720cd599de80858f37e86eb7dec76af02c35",
+          "canvasStamp": "v6:229901749",
+          "canvasDump": "dumpv1:2403445535",
+          "dumpVersion": "1.31"
+        }
+      }
     }
   ]
 }

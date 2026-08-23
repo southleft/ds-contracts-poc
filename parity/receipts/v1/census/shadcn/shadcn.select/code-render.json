@@ -1,0 +1,78 @@
+{
+  "id": "shadcn.select",
+  "name": "Select",
+  "library": "shadcn",
+  "contractPath": "examples/shadcn/contracts/select.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/shadcn/figma/shadcn.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 1,
+      "sampled": 1,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [],
+    "states": [
+      "active",
+      "disabled",
+      "focus-visible"
+    ],
+    "parts": [
+      "root",
+      "label",
+      "icon"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.select.icon.flex-shrink",
+      "imported.select.icon.stroke-width",
+      "imported.select.label.font-weight",
+      "imported.select.root.box-shadow",
+      "imported.select.root.box-shadow-state-focus-visible",
+      "imported.select.root.opacity-state-disabled",
+      "imported.select.root.outline-width-state-focus-visible",
+      "imported.select.root.padding-left",
+      "imported.shared.color-737373",
+      "imported.shared.color-a1a1a1",
+      "imported.shared.size-1",
+      "imported.shared.size-14",
+      "imported.shared.size-20",
+      "imported.shared.size-6",
+      "imported.shared.size-8"
+    ],
+    "icons": [
+      "select-icon"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "select",
+      "variant": "Select",
+      "kind": "base",
+      "subst": {},
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-select.png",
+      "contentBox": {
+        "width": 142.41,
+        "height": 38
+      }
+    }
+  ],
+  "rendered": 1,
+  "refused": 0,
+  "unavailable": null
+}

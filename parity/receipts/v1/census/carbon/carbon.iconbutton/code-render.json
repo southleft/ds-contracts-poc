@@ -1,0 +1,243 @@
+{
+  "id": "carbon.iconbutton",
+  "name": "IconButton",
+  "library": "carbon",
+  "contractPath": "examples/carbon/contracts/iconbutton.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/carbon/figma/carbon.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 16,
+      "sampled": 7,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "kind",
+        "type": "enum",
+        "default": "primary"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": null
+      }
+    ],
+    "states": [
+      "disabled"
+    ],
+    "parts": [
+      "root",
+      "tooltip-trigger__wrapper",
+      "btn"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.icon-button.btn.background-color.ghost",
+      "imported.icon-button.btn.background-color.primary",
+      "imported.icon-button.btn.background-color.secondary",
+      "imported.icon-button.btn.background-color.tertiary",
+      "imported.icon-button.btn.border-bottom-color.ghost",
+      "imported.icon-button.btn.border-bottom-color.primary",
+      "imported.icon-button.btn.border-bottom-color.secondary",
+      "imported.icon-button.btn.border-bottom-color.tertiary",
+      "imported.icon-button.btn.border-left-color.ghost",
+      "imported.icon-button.btn.border-left-color.primary",
+      "imported.icon-button.btn.border-left-color.secondary",
+      "imported.icon-button.btn.border-left-color.tertiary",
+      "imported.icon-button.btn.border-right-color.ghost",
+      "imported.icon-button.btn.border-right-color.primary",
+      "imported.icon-button.btn.border-right-color.secondary",
+      "imported.icon-button.btn.border-right-color.tertiary",
+      "imported.icon-button.btn.border-top-color.ghost",
+      "imported.icon-button.btn.border-top-color.primary",
+      "imported.icon-button.btn.border-top-color.secondary",
+      "imported.icon-button.btn.border-top-color.tertiary",
+      "imported.icon-button.btn.color.ghost",
+      "imported.icon-button.btn.color.primary",
+      "imported.icon-button.btn.color.secondary",
+      "imported.icon-button.btn.color.tertiary",
+      "imported.icon-button.btn.flex-shrink",
+      "imported.icon-button.btn.font-size",
+      "imported.icon-button.btn.height.lg",
+      "imported.icon-button.btn.height.md",
+      "imported.icon-button.btn.height.sm",
+      "imported.icon-button.btn.height.unset",
+      "imported.icon-button.btn.height.xs",
+      "imported.icon-button.btn.letter-spacing",
+      "imported.icon-button.btn.line-height",
+      "imported.icon-button.btn.max-width",
+      "imported.icon-button.btn.min-height.lg",
+      "imported.icon-button.btn.min-height.md",
+      "imported.icon-button.btn.min-height.sm",
+      "imported.icon-button.btn.min-height.unset",
+      "imported.icon-button.btn.min-height.xs",
+      "imported.icon-button.btn.width.lg",
+      "imported.icon-button.btn.width.md",
+      "imported.icon-button.btn.width.sm",
+      "imported.icon-button.btn.width.unset",
+      "imported.icon-button.btn.width.xs",
+      "imported.icon-button.root.height.lg",
+      "imported.icon-button.root.height.md",
+      "imported.icon-button.root.height.sm",
+      "imported.icon-button.root.height.unset",
+      "imported.icon-button.root.height.xs",
+      "imported.icon-button.root.width.lg",
+      "imported.icon-button.root.width.md",
+      "imported.icon-button.root.width.sm",
+      "imported.icon-button.root.width.unset",
+      "imported.icon-button.root.width.xs",
+      "imported.icon-button.tooltip-trigger-wrapper.height.lg",
+      "imported.icon-button.tooltip-trigger-wrapper.height.md",
+      "imported.icon-button.tooltip-trigger-wrapper.height.sm",
+      "imported.icon-button.tooltip-trigger-wrapper.height.unset",
+      "imported.icon-button.tooltip-trigger-wrapper.height.xs",
+      "imported.icon-button.tooltip-trigger-wrapper.width.lg",
+      "imported.icon-button.tooltip-trigger-wrapper.width.md",
+      "imported.icon-button.tooltip-trigger-wrapper.width.sm",
+      "imported.icon-button.tooltip-trigger-wrapper.width.unset",
+      "imported.icon-button.tooltip-trigger-wrapper.width.xs",
+      "imported.shared.size-0",
+      "imported.shared.size-1"
+    ],
+    "icons": [
+      "icon-button-btn"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "kind-primary__size-xs",
+      "variant": "Kind=Primary, Size=Xs",
+      "kind": "base",
+      "subst": {
+        "kind": "primary",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-primary__size-xs.png",
+      "contentBox": {
+        "width": 48,
+        "height": 72
+      }
+    },
+    {
+      "slug": "kind-primary__size-sm",
+      "variant": "Kind=Primary, Size=Sm",
+      "kind": "base",
+      "subst": {
+        "kind": "primary",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-primary__size-sm.png",
+      "contentBox": {
+        "width": 48,
+        "height": 80
+      }
+    },
+    {
+      "slug": "kind-primary__size-md",
+      "variant": "Kind=Primary, Size=Md",
+      "kind": "base",
+      "subst": {
+        "kind": "primary",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-primary__size-md.png",
+      "contentBox": {
+        "width": 48,
+        "height": 88
+      }
+    },
+    {
+      "slug": "kind-primary__size-lg",
+      "variant": "Kind=Primary, Size=Lg",
+      "kind": "base",
+      "subst": {
+        "kind": "primary",
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-primary__size-lg.png",
+      "contentBox": {
+        "width": 54,
+        "height": 96
+      }
+    },
+    {
+      "slug": "kind-secondary__size-xs",
+      "variant": "Kind=Secondary, Size=Xs",
+      "kind": "base",
+      "subst": {
+        "kind": "secondary",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-secondary__size-xs.png",
+      "contentBox": {
+        "width": 48,
+        "height": 72
+      }
+    },
+    {
+      "slug": "kind-tertiary__size-xs",
+      "variant": "Kind=Tertiary, Size=Xs",
+      "kind": "base",
+      "subst": {
+        "kind": "tertiary",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-tertiary__size-xs.png",
+      "contentBox": {
+        "width": 48,
+        "height": 72
+      }
+    },
+    {
+      "slug": "kind-ghost__size-xs",
+      "variant": "Kind=Ghost, Size=Xs",
+      "kind": "base",
+      "subst": {
+        "kind": "ghost",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-ghost__size-xs.png",
+      "contentBox": {
+        "width": 48,
+        "height": 72
+      }
+    }
+  ],
+  "rendered": 7,
+  "refused": 0,
+  "unavailable": null
+}

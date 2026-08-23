@@ -10,7 +10,7 @@
  *   1. takes the mechanical proposal's API surface VERBATIM (props, events,
  *      defaults — nothing re-added, every dropped prop stays a named note)
  *   2. re-reads the component's REAL module.css from the pinned clone and
- *      mechanically inverts it under the curated class map (lib-css.ts):
+ *      mechanically inverts it under the curated class map (extract/computed/lib-css.ts):
  *      single-token var() chains become bindings; literals, calc(), mixins,
  *      shorthands, combinators, @media and multi-axis conditions are
  *      REFUSED BY NAME into the promotion ledger
@@ -40,7 +40,7 @@ import {
   type FlatRule,
   type StateName,
   type TokenLookup,
-} from './lib-css.js';
+} from '../../../extract/computed/lib-css.js';
 import {
   CURATION,
   type ComponentCuration,

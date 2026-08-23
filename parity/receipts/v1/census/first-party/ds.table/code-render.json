@@ -1,0 +1,91 @@
+{
+  "id": "ds.table",
+  "name": "Table",
+  "library": "first-party",
+  "contractPath": "contracts/table.contract.json",
+  "contractVersion": "1.1.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "tokens/ (layered primitives + brand + semantic + light/dark) via src/styles/tokens.css",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 2,
+      "sampled": 2,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "density",
+        "type": "enum",
+        "default": "comfortable"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "header",
+      "nameHeader",
+      "roleHeader",
+      "statusHeader",
+      "body"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "border-width.100",
+      "color.border.subtle",
+      "color.surface.raised",
+      "color.surface.sunken",
+      "density",
+      "radius.card",
+      "size.table.width"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "density-comfortable",
+      "variant": "Density=Comfortable",
+      "kind": "base",
+      "subst": {
+        "density": "comfortable"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-density-comfortable.png",
+      "contentBox": {
+        "width": 362,
+        "height": 166
+      }
+    },
+    {
+      "slug": "density-compact",
+      "variant": "Density=Compact",
+      "kind": "base",
+      "subst": {
+        "density": "compact"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-density-compact.png",
+      "contentBox": {
+        "width": 362,
+        "height": 150
+      }
+    }
+  ],
+  "rendered": 2,
+  "refused": 0,
+  "unavailable": null
+}

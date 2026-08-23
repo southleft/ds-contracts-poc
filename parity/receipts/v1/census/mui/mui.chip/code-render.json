@@ -1,0 +1,245 @@
+{
+  "id": "mui.chip",
+  "name": "Chip",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/chip.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 28,
+      "sampled": 9,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "filled"
+      },
+      {
+        "name": "color",
+        "type": "enum",
+        "default": "default"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "medium"
+      },
+      {
+        "name": "label",
+        "type": "text",
+        "default": "Chip"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "label"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "label"
+      }
+    ],
+    "tokenRefs": [
+      "imported.chip.label.font-size",
+      "imported.chip.label.font-weight",
+      "imported.chip.label.line-height",
+      "imported.chip.root.border-bottom-width.filled",
+      "imported.chip.root.border-bottom-width.outlined",
+      "imported.chip.root.border-left-width.filled",
+      "imported.chip.root.border-left-width.outlined",
+      "imported.chip.root.border-right-width.filled",
+      "imported.chip.root.border-right-width.outlined",
+      "imported.chip.root.border-top-width.filled",
+      "imported.chip.root.border-top-width.outlined",
+      "imported.chip.root.font-size",
+      "imported.chip.root.line-height",
+      "imported.chip.root.outline-width",
+      "imported.shared.size-16"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-filled__color-default__size-medium",
+      "variant": "Variant=Filled, Color=Default, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "filled",
+        "color": "default",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-filled__color-default__size-medium.png",
+      "contentBox": {
+        "width": 49.34,
+        "height": 19.5
+      }
+    },
+    {
+      "slug": "variant-filled__color-default__size-small",
+      "variant": "Variant=Filled, Color=Default, Size=Small",
+      "kind": "base",
+      "subst": {
+        "variant": "filled",
+        "color": "default",
+        "size": "small"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-filled__color-default__size-small.png",
+      "contentBox": {
+        "width": 41.34,
+        "height": 19.5
+      }
+    },
+    {
+      "slug": "variant-filled__color-primary__size-medium",
+      "variant": "Variant=Filled, Color=Primary, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "filled",
+        "color": "primary",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-filled__color-primary__size-medium.png",
+      "contentBox": {
+        "width": 49.34,
+        "height": 19.5
+      }
+    },
+    {
+      "slug": "variant-filled__color-secondary__size-medium",
+      "variant": "Variant=Filled, Color=Secondary, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "filled",
+        "color": "secondary",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-filled__color-secondary__size-medium.png",
+      "contentBox": {
+        "width": 49.34,
+        "height": 19.5
+      }
+    },
+    {
+      "slug": "variant-filled__color-error__size-medium",
+      "variant": "Variant=Filled, Color=Error, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "filled",
+        "color": "error",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-filled__color-error__size-medium.png",
+      "contentBox": {
+        "width": 49.34,
+        "height": 19.5
+      }
+    },
+    {
+      "slug": "variant-filled__color-success__size-medium",
+      "variant": "Variant=Filled, Color=Success, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "filled",
+        "color": "success",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-filled__color-success__size-medium.png",
+      "contentBox": {
+        "width": 49.34,
+        "height": 19.5
+      }
+    },
+    {
+      "slug": "variant-filled__color-warning__size-medium",
+      "variant": "Variant=Filled, Color=Warning, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "filled",
+        "color": "warning",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-filled__color-warning__size-medium.png",
+      "contentBox": {
+        "width": 49.34,
+        "height": 19.5
+      }
+    },
+    {
+      "slug": "variant-filled__color-info__size-medium",
+      "variant": "Variant=Filled, Color=Info, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "filled",
+        "color": "info",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-filled__color-info__size-medium.png",
+      "contentBox": {
+        "width": 49.34,
+        "height": 19.5
+      }
+    },
+    {
+      "slug": "variant-outlined__color-default__size-medium",
+      "variant": "Variant=Outlined, Color=Default, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "outlined",
+        "color": "default",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-outlined__color-default__size-medium.png",
+      "contentBox": {
+        "width": 47.34,
+        "height": 19.5
+      }
+    }
+  ],
+  "rendered": 9,
+  "refused": 0,
+  "unavailable": null
+}

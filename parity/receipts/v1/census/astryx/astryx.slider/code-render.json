@@ -1,0 +1,180 @@
+{
+  "id": "astryx.slider",
+  "name": "Slider",
+  "library": "astryx",
+  "contractPath": "examples/astryx/contracts/slider.contract.json",
+  "contractVersion": "0.4.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/astryx/figma/astryx.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 6,
+      "sampled": 4,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "label",
+        "type": "text",
+        "default": "Volume"
+      },
+      {
+        "name": "orientation",
+        "type": "enum",
+        "default": "horizontal"
+      },
+      {
+        "name": "valueDisplay",
+        "type": "enum",
+        "default": "tooltip"
+      },
+      {
+        "name": "isDisabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "isRequired",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "label",
+      "slider",
+      "part-1-0",
+      "slider-track",
+      "part-1-0-1",
+      "slider-thumb-2",
+      "tooltip",
+      "label-2",
+      "label-3"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "label"
+      }
+    ],
+    "tokenRefs": [
+      "color-accent",
+      "color-on-light",
+      "imported.shared.num-1",
+      "imported.shared.size-0",
+      "imported.shared.size-12",
+      "imported.shared.size-14",
+      "imported.shared.size-20-0004",
+      "imported.shared.size-4",
+      "imported.shared.size-8",
+      "imported.slider.label-2.color",
+      "imported.slider.label-2.font-weight",
+      "imported.slider.label-2.max-width",
+      "imported.slider.label-3.color",
+      "imported.slider.label-3.flex-shrink",
+      "imported.slider.label-3.font-weight",
+      "imported.slider.label-3.line-height",
+      "imported.slider.label.color",
+      "imported.slider.label.font-weight",
+      "imported.slider.slider-track.background-color",
+      "imported.slider.tooltip.background-color",
+      "imported.slider.tooltip.color",
+      "imported.slider.tooltip.margin-bottom.horizontal",
+      "imported.slider.tooltip.margin-bottom.vertical",
+      "imported.slider.tooltip.margin-left.horizontal",
+      "imported.slider.tooltip.margin-left.vertical",
+      "imported.slider.tooltip.margin-right.horizontal",
+      "imported.slider.tooltip.margin-right.vertical",
+      "imported.slider.tooltip.margin-top.horizontal",
+      "imported.slider.tooltip.margin-top.vertical",
+      "radius-full",
+      "spacing-1"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "orientation-horizontal__value-display-tooltip",
+      "variant": "Orientation=Horizontal, Value Display=Tooltip",
+      "kind": "base",
+      "subst": {
+        "orientation": "horizontal",
+        "valueDisplay": "tooltip"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-orientation-horizontal__value-display-tooltip.png",
+      "contentBox": {
+        "width": 240,
+        "height": 52
+      }
+    },
+    {
+      "slug": "orientation-horizontal__value-display-text",
+      "variant": "Orientation=Horizontal, Value Display=Text",
+      "kind": "base",
+      "subst": {
+        "orientation": "horizontal",
+        "valueDisplay": "text"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-orientation-horizontal__value-display-text.png",
+      "contentBox": {
+        "width": 240,
+        "height": 45
+      }
+    },
+    {
+      "slug": "orientation-horizontal__value-display-none",
+      "variant": "Orientation=Horizontal, Value Display=None",
+      "kind": "base",
+      "subst": {
+        "orientation": "horizontal",
+        "valueDisplay": "none"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-orientation-horizontal__value-display-none.png",
+      "contentBox": {
+        "width": 240,
+        "height": 44
+      }
+    },
+    {
+      "slug": "orientation-vertical__value-display-tooltip",
+      "variant": "Orientation=Vertical, Value Display=Tooltip",
+      "kind": "base",
+      "subst": {
+        "orientation": "vertical",
+        "valueDisplay": "tooltip"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-orientation-vertical__value-display-tooltip.png",
+      "contentBox": {
+        "width": 92,
+        "height": 184
+      }
+    }
+  ],
+  "rendered": 4,
+  "refused": 0,
+  "unavailable": null
+}

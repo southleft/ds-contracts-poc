@@ -1,0 +1,369 @@
+{
+  "id": "flowbite.button",
+  "name": "Button",
+  "library": "tailwind",
+  "contractPath": "examples/tailwind/contracts/button.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/tailwind/figma/tailwind.bundle.json tokenSet (flat base + minted)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 45,
+      "sampled": 13,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "color",
+        "type": "enum",
+        "default": "default"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "md"
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Button"
+      }
+    ],
+    "states": [
+      "disabled",
+      "active",
+      "focus-visible",
+      "hover"
+    ],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [
+      {
+        "part": "root",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.button.root.background-color.alternative",
+      "imported.button.root.background-color.dark",
+      "imported.button.root.background-color.default",
+      "imported.button.root.background-color.green",
+      "imported.button.root.background-color.red",
+      "imported.button.root.border-bottom-color.alternative",
+      "imported.button.root.border-bottom-color.dark",
+      "imported.button.root.border-bottom-color.default",
+      "imported.button.root.border-bottom-color.green",
+      "imported.button.root.border-bottom-color.red",
+      "imported.button.root.border-bottom-width.alternative",
+      "imported.button.root.border-bottom-width.dark",
+      "imported.button.root.border-bottom-width.default",
+      "imported.button.root.border-bottom-width.green",
+      "imported.button.root.border-bottom-width.red",
+      "imported.button.root.border-left-color.alternative",
+      "imported.button.root.border-left-color.dark",
+      "imported.button.root.border-left-color.default",
+      "imported.button.root.border-left-color.green",
+      "imported.button.root.border-left-color.red",
+      "imported.button.root.border-left-width.alternative",
+      "imported.button.root.border-left-width.dark",
+      "imported.button.root.border-left-width.default",
+      "imported.button.root.border-left-width.green",
+      "imported.button.root.border-left-width.red",
+      "imported.button.root.border-right-color.alternative",
+      "imported.button.root.border-right-color.dark",
+      "imported.button.root.border-right-color.default",
+      "imported.button.root.border-right-color.green",
+      "imported.button.root.border-right-color.red",
+      "imported.button.root.border-right-width.alternative",
+      "imported.button.root.border-right-width.dark",
+      "imported.button.root.border-right-width.default",
+      "imported.button.root.border-right-width.green",
+      "imported.button.root.border-right-width.red",
+      "imported.button.root.border-top-color.alternative",
+      "imported.button.root.border-top-color.dark",
+      "imported.button.root.border-top-color.default",
+      "imported.button.root.border-top-color.green",
+      "imported.button.root.border-top-color.red",
+      "imported.button.root.border-top-width.alternative",
+      "imported.button.root.border-top-width.dark",
+      "imported.button.root.border-top-width.default",
+      "imported.button.root.border-top-width.green",
+      "imported.button.root.border-top-width.red",
+      "imported.button.root.color.alternative",
+      "imported.button.root.color.dark",
+      "imported.button.root.color.default",
+      "imported.button.root.color.green",
+      "imported.button.root.color.red",
+      "imported.button.root.font-size.lg",
+      "imported.button.root.font-size.md",
+      "imported.button.root.font-size.sm",
+      "imported.button.root.font-size.xl",
+      "imported.button.root.font-size.xs",
+      "imported.button.root.font-weight",
+      "imported.button.root.line-height.lg",
+      "imported.button.root.line-height.md",
+      "imported.button.root.line-height.sm",
+      "imported.button.root.line-height.xl",
+      "imported.button.root.line-height.xs",
+      "imported.button.root.opacity-state-disabled",
+      "imported.button.root.outline-color-state-focus-visible",
+      "imported.button.root.outline-color.alternative",
+      "imported.button.root.outline-color.dark",
+      "imported.button.root.outline-color.default",
+      "imported.button.root.outline-color.green",
+      "imported.button.root.outline-color.red",
+      "imported.button.root.outline-width-state-focus-visible",
+      "imported.button.root.padding-left.lg",
+      "imported.button.root.padding-left.md",
+      "imported.button.root.padding-left.sm",
+      "imported.button.root.padding-left.xl",
+      "imported.button.root.padding-left.xs",
+      "imported.button.root.padding-right.lg",
+      "imported.button.root.padding-right.md",
+      "imported.button.root.padding-right.sm",
+      "imported.button.root.padding-right.xl",
+      "imported.button.root.padding-right.xs",
+      "imported.shared.size-0",
+      "imported.shared.size-8"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "color-default__size-md",
+      "variant": "Color=Default, Size=Md",
+      "kind": "base",
+      "subst": {
+        "color": "default",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-default__size-md.png",
+      "contentBox": {
+        "width": 80.48,
+        "height": 40
+      }
+    },
+    {
+      "slug": "color-default__size-xs",
+      "variant": "Color=Default, Size=Xs",
+      "kind": "base",
+      "subst": {
+        "color": "default",
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-default__size-xs.png",
+      "contentBox": {
+        "width": 58.7,
+        "height": 32
+      }
+    },
+    {
+      "slug": "color-default__size-sm",
+      "variant": "Color=Default, Size=Sm",
+      "kind": "base",
+      "subst": {
+        "color": "default",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-default__size-sm.png",
+      "contentBox": {
+        "width": 64.48,
+        "height": 36
+      }
+    },
+    {
+      "slug": "color-default__size-lg",
+      "variant": "Color=Default, Size=Lg",
+      "kind": "base",
+      "subst": {
+        "color": "default",
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-default__size-lg.png",
+      "contentBox": {
+        "width": 86.27,
+        "height": 48
+      }
+    },
+    {
+      "slug": "color-default__size-xl",
+      "variant": "Color=Default, Size=Xl",
+      "kind": "base",
+      "subst": {
+        "color": "default",
+        "size": "xl"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-default__size-xl.png",
+      "contentBox": {
+        "width": 94.27,
+        "height": 52
+      }
+    },
+    {
+      "slug": "color-alternative__size-md",
+      "variant": "Color=Alternative, Size=Md",
+      "kind": "base",
+      "subst": {
+        "color": "alternative",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-alternative__size-md.png",
+      "contentBox": {
+        "width": 80.48,
+        "height": 40
+      }
+    },
+    {
+      "slug": "color-dark__size-md",
+      "variant": "Color=Dark, Size=Md",
+      "kind": "base",
+      "subst": {
+        "color": "dark",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-dark__size-md.png",
+      "contentBox": {
+        "width": 80.48,
+        "height": 40
+      }
+    },
+    {
+      "slug": "color-green__size-md",
+      "variant": "Color=Green, Size=Md",
+      "kind": "base",
+      "subst": {
+        "color": "green",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-green__size-md.png",
+      "contentBox": {
+        "width": 80.48,
+        "height": 40
+      }
+    },
+    {
+      "slug": "color-red__size-md",
+      "variant": "Color=Red, Size=Md",
+      "kind": "base",
+      "subst": {
+        "color": "red",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-red__size-md.png",
+      "contentBox": {
+        "width": 80.48,
+        "height": 40
+      }
+    },
+    {
+      "slug": "color-default__size-md__state-disabled",
+      "variant": "Color=Default, Size=Md, State=Disabled",
+      "kind": "state",
+      "state": "disabled",
+      "subst": {
+        "color": "default",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "refused",
+      "error": "state \"disabled\" drives boolean prop \"disabled\", which flowbite.button does not declare"
+    },
+    {
+      "slug": "color-default__size-md__state-active",
+      "variant": "Color=Default, Size=Md, State=Active",
+      "kind": "state",
+      "state": "active",
+      "subst": {
+        "color": "default",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "active",
+      "status": "rendered",
+      "png": "code-color-default__size-md__state-active.png",
+      "contentBox": {
+        "width": 80.48,
+        "height": 40
+      }
+    },
+    {
+      "slug": "color-default__size-md__state-focus-visible",
+      "variant": "Color=Default, Size=Md, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "subst": {
+        "color": "default",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "focus-visible",
+      "status": "rendered",
+      "png": "code-color-default__size-md__state-focus-visible.png",
+      "contentBox": {
+        "width": 80.48,
+        "height": 40
+      }
+    },
+    {
+      "slug": "color-default__size-md__state-hover",
+      "variant": "Color=Default, Size=Md, State=Hover",
+      "kind": "state",
+      "state": "hover",
+      "subst": {
+        "color": "default",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "hover",
+      "status": "rendered",
+      "png": "code-color-default__size-md__state-hover.png",
+      "contentBox": {
+        "width": 80.48,
+        "height": 40
+      }
+    }
+  ],
+  "rendered": 12,
+  "refused": 1,
+  "unavailable": null
+}

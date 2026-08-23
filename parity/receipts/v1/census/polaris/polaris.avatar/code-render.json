@@ -1,0 +1,214 @@
+{
+  "id": "polaris.avatar",
+  "name": "Avatar",
+  "library": "polaris",
+  "contractPath": "examples/polaris/contracts/avatar.contract.json",
+  "contractVersion": "0.4.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/polaris/figma/polaris.bundle.json tokenSet (flat base + minted)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 5,
+      "sampled": 5,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "md"
+      },
+      {
+        "name": "name",
+        "type": "text",
+        "default": null
+      },
+      {
+        "name": "initials",
+        "type": "text",
+        "default": "TP"
+      },
+      {
+        "name": "customer",
+        "type": "boolean",
+        "default": null
+      },
+      {
+        "name": "source",
+        "type": "text",
+        "default": null
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "text",
+        "default": null
+      },
+      {
+        "name": "withInitials",
+        "type": "boolean",
+        "default": true
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "initials",
+      "initials-xs",
+      "initials-sm",
+      "initials-md",
+      "initials-lg",
+      "initials-xl"
+    ],
+    "contentSlots": [
+      {
+        "part": "initials",
+        "prop": "initials"
+      }
+    ],
+    "tokenRefs": [
+      "imported.avatar.initials.height.lg",
+      "imported.avatar.initials.height.md",
+      "imported.avatar.initials.height.sm",
+      "imported.avatar.initials.height.xl",
+      "imported.avatar.initials.height.xs",
+      "imported.avatar.initials.width.lg",
+      "imported.avatar.initials.width.md",
+      "imported.avatar.initials.width.sm",
+      "imported.avatar.initials.width.xl",
+      "imported.avatar.initials.width.xs",
+      "imported.avatar.root.border-bottom-left-radius.lg",
+      "imported.avatar.root.border-bottom-left-radius.md",
+      "imported.avatar.root.border-bottom-left-radius.sm",
+      "imported.avatar.root.border-bottom-left-radius.xl",
+      "imported.avatar.root.border-bottom-left-radius.xs",
+      "imported.avatar.root.border-bottom-right-radius.lg",
+      "imported.avatar.root.border-bottom-right-radius.md",
+      "imported.avatar.root.border-bottom-right-radius.sm",
+      "imported.avatar.root.border-bottom-right-radius.xl",
+      "imported.avatar.root.border-bottom-right-radius.xs",
+      "imported.avatar.root.border-top-left-radius.lg",
+      "imported.avatar.root.border-top-left-radius.md",
+      "imported.avatar.root.border-top-left-radius.sm",
+      "imported.avatar.root.border-top-left-radius.xl",
+      "imported.avatar.root.border-top-left-radius.xs",
+      "imported.avatar.root.border-top-right-radius.lg",
+      "imported.avatar.root.border-top-right-radius.md",
+      "imported.avatar.root.border-top-right-radius.sm",
+      "imported.avatar.root.border-top-right-radius.xl",
+      "imported.avatar.root.border-top-right-radius.xs",
+      "imported.avatar.root.height.lg",
+      "imported.avatar.root.height.md",
+      "imported.avatar.root.height.sm",
+      "imported.avatar.root.height.xl",
+      "imported.avatar.root.height.xs",
+      "imported.shared.size-0",
+      "p.color-avatar-one-bg-fill",
+      "p.color-avatar-one-text-on-bg-fill",
+      "p.font-size-325",
+      "p.font-weight-regular"
+    ],
+    "icons": [
+      "avatar-initials-lg",
+      "avatar-initials-md",
+      "avatar-initials-sm",
+      "avatar-initials-xl",
+      "avatar-initials-xs"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "size-md",
+      "variant": "Size=Md",
+      "kind": "base",
+      "subst": {
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-md.png",
+      "contentBox": {
+        "width": 28,
+        "height": 43
+      }
+    },
+    {
+      "slug": "size-xs",
+      "variant": "Size=Xs",
+      "kind": "base",
+      "subst": {
+        "size": "xs"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-xs.png",
+      "contentBox": {
+        "width": 20,
+        "height": 35
+      }
+    },
+    {
+      "slug": "size-sm",
+      "variant": "Size=Sm",
+      "kind": "base",
+      "subst": {
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-sm.png",
+      "contentBox": {
+        "width": 24,
+        "height": 39
+      }
+    },
+    {
+      "slug": "size-lg",
+      "variant": "Size=Lg",
+      "kind": "base",
+      "subst": {
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-lg.png",
+      "contentBox": {
+        "width": 32,
+        "height": 47
+      }
+    },
+    {
+      "slug": "size-xl",
+      "variant": "Size=Xl",
+      "kind": "base",
+      "subst": {
+        "size": "xl"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-xl.png",
+      "contentBox": {
+        "width": 40,
+        "height": 55
+      }
+    }
+  ],
+  "rendered": 5,
+  "refused": 0,
+  "unavailable": null
+}

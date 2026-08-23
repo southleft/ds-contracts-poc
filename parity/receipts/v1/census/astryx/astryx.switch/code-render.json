@@ -1,0 +1,171 @@
+{
+  "id": "astryx.switch",
+  "name": "Switch",
+  "library": "astryx",
+  "contractPath": "examples/astryx/contracts/switch.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/astryx/figma/astryx.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 4,
+      "sampled": 3,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "compiled-name-parse (astryx.switch: cell derivation drift at base variant 0: derived \"Label Position=End\" vs compiled \"Value=Off, Label Position=End\")"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "label",
+        "type": "text",
+        "default": "Enable notifications"
+      },
+      {
+        "name": "value",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "labelPosition",
+        "type": "enum",
+        "default": "end"
+      },
+      {
+        "name": "isDisabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "isRequired",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "part-0",
+      "part-0-0",
+      "label-2",
+      "part-0-0-0",
+      "switch",
+      "switch-thumb",
+      "part-0-1",
+      "part-0-1-0",
+      "switch-2",
+      "switch-thumb-2",
+      "label"
+    ],
+    "contentSlots": [
+      {
+        "part": "label-2",
+        "prop": "label"
+      },
+      {
+        "part": "label",
+        "prop": "label"
+      }
+    ],
+    "tokenRefs": [
+      "imported.shared.size-0",
+      "imported.shared.size-4",
+      "imported.shared.size-40",
+      "imported.shared.size-9999",
+      "imported.switch.label-2.color",
+      "imported.switch.label-2.font-size",
+      "imported.switch.label-2.font-weight",
+      "imported.switch.label-2.line-height",
+      "imported.switch.label.color",
+      "imported.switch.label.font-size",
+      "imported.switch.label.font-weight",
+      "imported.switch.label.line-height",
+      "imported.switch.part-0-0-0.opacity",
+      "imported.switch.part-0-0-0.z-index",
+      "imported.switch.part-0-0.flex-shrink.end",
+      "imported.switch.part-0-0.flex-shrink.start",
+      "imported.switch.part-0-0.width.end",
+      "imported.switch.part-0-0.width.start",
+      "imported.switch.part-0-1-0.opacity",
+      "imported.switch.part-0-1-0.z-index",
+      "imported.switch.part-0-1.flex-shrink.end",
+      "imported.switch.part-0-1.flex-shrink.start",
+      "imported.switch.part-0-1.width.end",
+      "imported.switch.part-0-1.width.start",
+      "imported.switch.part-0.column-gap",
+      "imported.switch.part-0.row-gap",
+      "imported.switch.part-0.width",
+      "imported.switch.root.width",
+      "imported.switch.switch-thumb-2.background-color",
+      "imported.switch.switch-thumb.background-color"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "value-off__label-position-end",
+      "variant": "Value=Off, Label Position=End",
+      "kind": "base",
+      "subst": {
+        "labelPosition": "end"
+      },
+      "bools": {
+        "value": false
+      },
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-value-off__label-position-end.png",
+      "contentBox": {
+        "width": 178.02,
+        "height": 24
+      }
+    },
+    {
+      "slug": "value-off__label-position-start",
+      "variant": "Value=Off, Label Position=Start",
+      "kind": "base",
+      "subst": {
+        "labelPosition": "start"
+      },
+      "bools": {
+        "value": false
+      },
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-value-off__label-position-start.png",
+      "contentBox": {
+        "width": 178.02,
+        "height": 24
+      }
+    },
+    {
+      "slug": "value-on__label-position-end",
+      "variant": "Value=On, Label Position=End",
+      "kind": "base",
+      "subst": {
+        "labelPosition": "end"
+      },
+      "bools": {
+        "value": true
+      },
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-value-on__label-position-end.png",
+      "contentBox": {
+        "width": 178.02,
+        "height": 24
+      }
+    }
+  ],
+  "rendered": 3,
+  "refused": 0,
+  "unavailable": null
+}

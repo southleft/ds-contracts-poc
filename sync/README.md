@@ -69,7 +69,9 @@ not their own re-serialization.
 | `npm run sync -- seed` | code→canvas | all committed console-loop receipts (first-party + foreign corpora), provenance `seeded-from-receipts` |
 | `npm run sync:observe -- --update` | (evidence only) | observation baselines for in-sync rows; adopts a post-publish restamp (clearing `pendingApply`, loudly); drops, by name, a baseline under a grammar the mapper no longer speaks on rows it cannot re-baseline |
 | `npm run sync:observe -- --repin id[,id…]` | (code half only) | the contract bytes moved by **bookkeeping** (a schema codemod, an anchor re-point) and the canvas provably did not — the observed stamp equals the ledger's — so `contractHash` is re-pinned to the current bytes and a fresh baseline recorded. **Refuses** any row whose stamp differs, is absent or is incomparable: that row needs `--adopt` or a re-apply, never a quiet re-pin |
-| `npm run sync:observe -- --adopt id[,id…] [--note …]` | canvas→code | the canvas is the truth for these rows: current contract hash + observed stamp + fresh baseline, `pendingApply` cleared, provenance `observe`. The after-merge step of a spine PR, and the record for a write nobody ledgered (a plugin apply, a rebuild whose receipt never reached `sync record`). Explicit ids only — never "all" |
+| `npm run sync:observe -- --adopt id[,id…] [--note …] [--evidence …]…` | canvas→code | the canvas is the truth for these rows: current contract hash + observed stamp + fresh baseline, `pendingApply` cleared, provenance `observe`, and a `decision` of kind **adopt** (note + evidence lines, bound to the facts adopted). The after-merge step of a spine PR, and the record for a write nobody ledgered (a plugin apply, a rebuild whose receipt never reached `sync record`). Explicit ids only — never "all" |
+| `npm run sync:observe -- --decide <id> --kind pending-reapply\|pending-restamp\|pending-reconcile --note <why> --command <exact command> [--evidence …]…` | (decision only) | records a **human decision** on a drifted row that automation may not resolve (a Figma write to a non-scratch file; a choice between two truths). The record does not change; the row stops counting as *undecided* (WARN instead of red on the scheduled lane) and is listed in `sync/PENDING.md` with the command. Bound to the facts observed now — if the contract hash, stamp or dump fingerprint moves again the decision is **stale** and the row is undecided again. Refuses an in-sync row and kind `adopt` (that is `--adopt`) |
+| `npm run sync -- pending` | (render only) | regenerates `sync/PENDING.md` from the ledger, offline and byte-stable (`sync:ledger:check` refuses a stale one; every `--adopt` / `--decide` and every spine run regenerates it too) |
 
 The CLI writers are **opt-in**: they record only when `sync/ledger.json`
 already exists in the cwd (this repo) or `DS_CONTRACTS_SYNC_LEDGER` names a
@@ -101,8 +103,12 @@ the current contract hashes, and classifies every record:
 
 `in-sync | code-ahead | canvas-ahead | conflict | untracked`
 
-Exit codes are gate-style: **0 clean, 1 drift, 2 usage/config error**. This is
-the arithmetic step 2's scheduled spine runs.
+Exit codes are gate-style on **undecided** rows (policy 2026-08-23): **0**
+when every drifted row carries a fresh recorded decision (or nothing
+drifted — decided-pending rows print as WARN and a `decisions:` line counts
+adopted / pending-by-kind / stale / undecided), **1** when a row needs a
+human decision that is not yet recorded (or an untracked set exists), **2**
+usage/config error. This is the arithmetic step 2's scheduled spine runs.
 
 ## `sync pull` — the canvas→code half of the spine (STEP 2)
 
@@ -155,13 +161,26 @@ transport does the rest.
   name, any record whose current observed fingerprints it already PR'd. In CI
   (fresh checkout, no cursor) the branch-exists check is the durable half: an
   unresolved `sync-spine/<slug>` branch refuses a second PR by name.
-- Exit codes mirror observe: 0 clean, 1 drift, 2 usage.
+- Exit codes mirror observe: 0 clean **or decided drift**, 1 an undecided
+  row, 2 usage. `SPINE.md` carries a `Verdict:` line (`clean` |
+  `drift-decided` | `undecided`) and a `Decisions:` count line; decided-pending
+  rows print under WARN with their command; `PENDING.md` is written into the
+  run dir and, when the ledger is the repo's, regenerated at `sync/PENDING.md`.
 
 ### The scheduled lane (.github/workflows/sync-spine.yml)
 
-Cron every 2 h + `workflow_dispatch`: report-only spine run, drift report
-uploaded as an artifact and written to the job summary, **fails visibly** on
-drift (a red scheduled run IS the drift signal). Needs the `FIGMA_TOKEN`
+Cron every 2 h + `workflow_dispatch`: report-only spine run, drift table +
+decisions in the job summary, bundles uploaded as an artifact. **Red means an
+undecided row** (policy, 2026-08-23): the lane goes red only when a drifted
+row has **no recorded human decision** (or its decision is stale — the
+contract hash, stamp or dump fingerprint moved since it was taken), or an
+untracked set exists. Drift whose every row carries a fresh decision in
+`sync/ledger.json` (`decision`: adopt / pending-reapply / pending-restamp /
+pending-reconcile) is **green with a `::warning`**, the pending Figma writes
+listed in `sync/PENDING.md`; a spine crash (exit 2) is a **distinct red**
+with its own summary. The 2026-08-08 rule ("a red run IS the drift signal")
+is retired: six consecutive reds with one repo-side cause showed it could not
+tell "the canvas moved" from "nobody has looked". Needs the `FIGMA_TOKEN`
 repository secret — the owner
 configures it; when absent the lane **skips by name** and stays green (a
 missing credential must never impersonate drift). Set the repository variable
@@ -176,8 +195,10 @@ eval below.
   bytes + every seeded record verified against the receipt it cites
   (`parity/receipts/console-loop/**` is read-only evidence here) + every
   baseline tagged with the mapper's current dump grammar (a grammar bump
-  without a live re-baseline refuses here, not on the cron) + the
-  committed-fixture drift table classifying all five statuses.
+  without a live re-baseline refuses here, not on the cron) + every pending
+  decision taken under that grammar + `sync/PENDING.md` the byte-exact render
+  of the ledger + the committed-fixture drift table classifying all five
+  statuses (and counting its 4 undecided rows).
 - eval `sync-ledger-lockfile` (`npm run eval -- --only sync-ledger`) — the
   red tests: hand-edited fingerprint → canvas-ahead naming the component,
   contract-hash bump → code-ahead, both → conflict, recorded-amend echo →
@@ -206,7 +227,12 @@ eval below.
   proposal → per-property drift report, as files only.
 - `spine.ts` — the one-shot drift spine (observe → pull → PR-shaped bundles
   + the code-behind rows + the echo-safety cursor).
-- `cli.ts` — `record | seed | observe | pull`.
+- `cli.ts` — `record | seed | observe | pending | pull`.
+- `PENDING.md` — GENERATED from `ledger.json` (`npm run sync -- pending`;
+  every `--adopt`/`--decide` and every spine run rewrites it): the one place
+  a human reads the pending decisions — row, kind, why, the exact command,
+  the file key it would write to, the evidence. Byte-checked by
+  `ledger-check.ts`; never hand-edited.
 - `ledger-check.ts` — the offline gate.
 - `out/` — gitignored working dir: per-run bundles + `state.json` (the PR
   cursor).

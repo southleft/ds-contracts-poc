@@ -726,6 +726,8 @@ component captured in **zero** libraries inflates Astryx's denominator by more
 than twice that library's entire numerator (13):
 
 ```bash
+# examples/astryx/out/ and .astryx-sandbox/ are gitignored (not tracked): recreate the
+# sandbox per examples/astryx/PROVENANCE.md, then `npm run extract:code -- examples/astryx/extract.config.json`
 node -e "const ext=require('./examples/astryx/out/code-extraction.json');
 const pkg=require('./examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/package.json');
 const subs=new Set(Object.keys(pkg.exports).filter(k=>/^\.\/[A-Z][^/]*\$/.test(k)).map(k=>k.slice(2)));
@@ -769,6 +771,7 @@ no judgement — also excludes exactly **19** of 135. The two sets differ by two
 names in each direction. Two independent rules, same count:
 
 ```bash
+# examples/mui/.mui-sandbox is the gitignored install sandbox (not tracked): recreate it per examples/mui/PROVENANCE.md
 node -e "const fs=require('fs');const d='examples/mui/.mui-sandbox/node_modules/@mui/material';
 const dirs=fs.readdirSync(d,{withFileTypes:true}).filter(e=>e.isDirectory()&&/^[A-Z]/.test(e.name)).map(e=>e.name);
 const no=dirs.filter(n=>!fs.readdirSync(d+'/'+n).includes(n[0].toLowerCase()+n.slice(1)+'Classes.js'));

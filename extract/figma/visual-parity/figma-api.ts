@@ -20,7 +20,7 @@
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { figmaToken } from '../../fidelity-matrix/scripts/env.js';
+import { figmaToken } from './env.js';
 
 const API_DELAY_MS = 700;
 const IDS_PER_CALL = 30;

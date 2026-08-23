@@ -1,0 +1,171 @@
+{
+  "id": "mui.paper",
+  "name": "Paper",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/paper.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 8,
+      "sampled": 5,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "elevation",
+        "type": "enum",
+        "default": "1"
+      },
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "elevation"
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Paper content"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [
+      {
+        "part": "root",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.paper.root.background-color",
+      "imported.paper.root.border-bottom-color.elevation",
+      "imported.paper.root.border-bottom-color.outlined",
+      "imported.paper.root.border-bottom-width.elevation",
+      "imported.paper.root.border-bottom-width.outlined",
+      "imported.paper.root.border-left-color.elevation",
+      "imported.paper.root.border-left-color.outlined",
+      "imported.paper.root.border-left-width.elevation",
+      "imported.paper.root.border-left-width.outlined",
+      "imported.paper.root.border-right-color.elevation",
+      "imported.paper.root.border-right-color.outlined",
+      "imported.paper.root.border-right-width.elevation",
+      "imported.paper.root.border-right-width.outlined",
+      "imported.paper.root.border-top-color.elevation",
+      "imported.paper.root.border-top-color.outlined",
+      "imported.paper.root.border-top-width.elevation",
+      "imported.paper.root.border-top-width.outlined",
+      "imported.paper.root.color",
+      "imported.paper.root.font-size",
+      "imported.paper.root.font-weight",
+      "imported.paper.root.min-height",
+      "imported.paper.root.min-width",
+      "imported.paper.root.width",
+      "imported.shared.size-4"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "elevation-1__variant-elevation",
+      "variant": "Elevation=1, Variant=Elevation",
+      "kind": "base",
+      "subst": {
+        "elevation": "1",
+        "variant": "elevation"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-elevation-1__variant-elevation.png",
+      "contentBox": {
+        "width": 288,
+        "height": 18
+      }
+    },
+    {
+      "slug": "elevation-1__variant-outlined",
+      "variant": "Elevation=1, Variant=Outlined",
+      "kind": "base",
+      "subst": {
+        "elevation": "1",
+        "variant": "outlined"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-elevation-1__variant-outlined.png",
+      "contentBox": {
+        "width": 288,
+        "height": 18
+      }
+    },
+    {
+      "slug": "elevation-0__variant-elevation",
+      "variant": "Elevation=0, Variant=Elevation",
+      "kind": "base",
+      "subst": {
+        "elevation": "0",
+        "variant": "elevation"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-elevation-0__variant-elevation.png",
+      "contentBox": {
+        "width": 288,
+        "height": 18
+      }
+    },
+    {
+      "slug": "elevation-3__variant-elevation",
+      "variant": "Elevation=3, Variant=Elevation",
+      "kind": "base",
+      "subst": {
+        "elevation": "3",
+        "variant": "elevation"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-elevation-3__variant-elevation.png",
+      "contentBox": {
+        "width": 288,
+        "height": 18
+      }
+    },
+    {
+      "slug": "elevation-8__variant-elevation",
+      "variant": "Elevation=8, Variant=Elevation",
+      "kind": "base",
+      "subst": {
+        "elevation": "8",
+        "variant": "elevation"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-elevation-8__variant-elevation.png",
+      "contentBox": {
+        "width": 288,
+        "height": 18
+      }
+    }
+  ],
+  "rendered": 5,
+  "refused": 0,
+  "unavailable": null
+}

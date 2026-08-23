@@ -1,0 +1,60 @@
+{
+  "id": "ds.tab-list",
+  "name": "TabList",
+  "library": "first-party",
+  "contractPath": "contracts/tab-list.contract.json",
+  "contractVersion": "1.0.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "tokens/ (layered primitives + brand + semantic + light/dark) via src/styles/tokens.css",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 1,
+      "sampled": 1,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [],
+    "states": [],
+    "parts": [
+      "root",
+      "tabs"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "border-width.100",
+      "color.border.subtle",
+      "space.inset-y.sm",
+      "space.inset-y.xs"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "tablist",
+      "variant": "TabList",
+      "kind": "base",
+      "subst": {},
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-tablist.png",
+      "contentBox": {
+        "width": 304.2,
+        "height": 39
+      }
+    }
+  ],
+  "rendered": 1,
+  "refused": 0,
+  "unavailable": null
+}

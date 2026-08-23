@@ -544,6 +544,19 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run figma:rest:refusal:check
 
+      # CANVAS CENSUS (docs/23 §C.1.1 vocabulary; the owner's v1 bar, 2026-08-23):
+      # the denominator is EVERY committed contract with a Figma script — the
+      # manifest is regenerated and compared (a contract outside it refuses by
+      # name) and every row's code render must exist. `--phase code` lets the
+      # canvas columns read PENDING; flip to `--phase full` when the canvas
+      # half (scripts/canvas-census-check.ts header recipe) lands.
+      - name: census:check --phase code (the denominator is every committed contract; code renders for all of them)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run census:check -- --phase code
+      - name: census self-test (the gate goes red on a deleted render, a contract outside the manifest, and a pending canvas half)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run census:check -- --self-test
+
       # Not one of the 33 named gates, but CONTRIBUTING.md § "The gates" tells
       # contributors to run it and it costs under a second with no extra build.
       - name: test packages/cli (all node:test files)
