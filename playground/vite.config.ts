@@ -21,6 +21,16 @@ const pluginZip: PluginOption = {
 export default defineConfig({
   root: playgroundRoot,
   plugins: [react(), pluginZip],
+  resolve: {
+    // Vite does not read tsconfig `paths`: pin the published-package
+    // specifiers to their in-repo SOURCE so the engine graph (core/index.ts →
+    // packages/core/src → @ds-contracts/schema) carries one schema module,
+    // never packages/*/dist.
+    alias: {
+      '@ds-contracts/core': resolve(repoRoot, 'packages', 'core', 'src', 'index.ts'),
+      '@ds-contracts/schema': resolve(repoRoot, 'packages', 'schema', 'src', 'index.ts'),
+    },
+  },
   server: {
     port: 5181,
     fs: {

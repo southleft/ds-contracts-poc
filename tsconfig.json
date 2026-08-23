@@ -22,6 +22,9 @@
     "paths": {
       "@ds-contracts/core": [
         "./packages/core/src/index.ts"
+      ],
+      "@ds-contracts/schema": [
+        "./packages/schema/src/index.ts"
       ]
     }
   },

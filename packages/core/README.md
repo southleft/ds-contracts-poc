@@ -19,15 +19,43 @@ CLI's built-ins do:
   CLI's file plan uses.
 - **Contract provenance** — `canonicalJson`, `revisionOf`,
   `assertContractProvenance`, `markAwaitingCodeAdoption`.
+- **The analysis layer** — the contract facts the CLI's built-in emitters
+  read, so a plugin emitter reads the same ones: `validateContract(contract,
+  byId, errors, icons)` (the deep referee beyond the Zod schema — it APPENDS
+  to `errors`, never throws), `generateCss(contract, inventory, errors)` (the
+  unformatted scoped stylesheet every code target shares) and
+  `stripCanvasOnlyChannels`; multi-root anatomy (`rootElementsOf`,
+  `topRoots`, `topRootNames`, `isMultiRoot`); the prop classifiers
+  (`isEnum`, `isVariantBool`, `isArrayType`, `enumProps`, `boolProps`,
+  `numberProps`, `arrayProps`, `textProps`, `namedTextProps`, `namedSlots`,
+  `textDefault`); the A2 grid CSS helpers (`gridCellPlan`, `gridTrackCss`,
+  `gridTemplateAreasValue`, `gridGapCss`, `gridParentDecls`,
+  `gridPlacementDecls`, `gridChildCrossAxisDecls`, `GRID_SELF_ALIGN`);
+  `holderDeclaresPosition`; and the fact tables (`ELEMENT_META`,
+  `NATIVE_ROLE_HOSTS`, `PART_STATE_CHANNELS`, `UA_MARGIN_ELEMENTS`,
+  `UA_PAINTED_ROOT_ELEMENTS`, `UA_PAINT_CHANNELS`).
 
 ```ts
 import type { Emitter } from '@ds-contracts/core';
-import { flattenTokens, makeResolveLiteral, kebab } from '@ds-contracts/core';
+import {
+  flattenTokens,
+  generateCss,
+  kebab,
+  makeResolveLiteral,
+  tokenInventoryFromJson,
+  validateContract,
+} from '@ds-contracts/core';
 
 const vue: Emitter = {
   name: 'vue',
   label: 'Vue single-file components',
   emit(contract, ctx) {
+    // Refuse the way the built-ins do: the deep referee appends to `errors`.
+    const errors: string[] = [];
+    validateContract(contract, ctx.contracts, errors, ctx.icons);
+    const inventory = tokenInventoryFromJson([ctx.tokens.primitives, ctx.tokens.semantic, ctx.tokens.light, ctx.tokens.dark]);
+    const css = generateCss(contract, inventory, errors); // the same sheet the react/html/wc targets emit
+    if (errors.length > 0) throw new Error(`Refused:\n${errors.join('\n')}`);
     const all = new Map([
       ...flattenTokens(ctx.tokens.primitives),
       ...flattenTokens(ctx.tokens.semantic),
@@ -35,7 +63,10 @@ const vue: Emitter = {
     ]);
     const literal = makeResolveLiteral(all);
     // ... walk contract.anatomy, resolve `{token.path}` refs with literal(path)
-    return [{ path: `${kebab(contract.name)}.vue`, contents: '<template>…</template>' }];
+    return [
+      { path: `${kebab(contract.name)}.vue`, contents: '<template>…</template>' },
+      { path: `${kebab(contract.name)}.css`, contents: css },
+    ];
   },
 };
 export default vue;
@@ -57,9 +88,12 @@ yours.
 type and the anatomy helpers) and nothing else. No TypeScript compiler, no
 prettier, no browser automation, no `node:*` at import — every module is
 pure and browser-importable. The reference repo's `core/tokens.ts`,
-`core/contract-provenance.ts`, `core/emitter.ts` and `extract/types.ts`
-(`kebab`) are re-export shims over this package's source, so repo and
-package cannot drift.
+`core/contract-provenance.ts`, `core/emitter.ts`, `extract/types.ts`
+(`kebab`) and `core/emit-react.ts` (the analysis half) are re-export shims
+over this package's source, so repo and package cannot drift —
+`npm run verify:published` regenerates the Flowbite eight's stylesheets
+through the packed tarball and refuses on the first byte that differs from
+the repo's react emitter.
 
 ## Versioning
 

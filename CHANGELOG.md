@@ -26,6 +26,35 @@ emitter that resolves a token through `@ds-contracts/core` alone, plus the
 web-components emitter from its tarball. Dependency policy: core depends on
 `@ds-contracts/schema` and nothing else (the smoke refuses otherwise).
 
+### Added — `@ds-contracts/core` (packages/core, slice 2: the analysis layer)
+
+The half of `core/emit-react.ts` that is a contract fact rather than a React
+projection is now package source: `validateContract` (the deep referee —
+published with its append-to-`errors` / icon-map signature as-is),
+`generateCss` + `stripCanvasOnlyChannels`, multi-root anatomy
+(`rootElementsOf`, `topRoots`, `topRootNames`, `isMultiRoot`), the prop
+classifiers (`isEnum` … `textDefault`), the A2 grid CSS helpers
+(`gridCellPlan` and siblings), and the fact tables (`NATIVE_ROLE_HOSTS`,
+`PART_STATE_CHANNELS`, `UA_*`). `ELEMENT_META` and `holderDeclaresPosition`
+were hoisted out of the TSX half first — the analysis layer read them, and
+they are contract facts, not React facts. Layout:
+`packages/core/src/{anatomy,elements,grid,validate,css}.ts`; root
+`core/emit-react.ts` keeps `generateTsx` / `generateStories` / `emitReact`
+and re-exports every moved name, so every `./emit-react.js` import
+(emit-html, emit-react-inline, emit-figma-script, the check scripts,
+`scripts/generate-components.ts`) compiles unchanged. The web-components
+emitter and the CLI's promote step now import the moved symbols from
+`@ds-contracts/core` directly. Because the moved modules VALUE-import
+`@ds-contracts/schema`, every in-repo resolver pins that specifier to
+`packages/schema/src` (tsconfig `paths` at root / cli / emitter-web-components,
+esbuild `alias` in the two package builds and the plugin-engine bundle, vite
+`resolve.alias` in playground + dashboard) — one Zod document per bundle,
+never `packages/*/dist`. Zero behaviour change: golden byte-identical; the
+plugin engine receipt is re-recorded (+35 bytes, 124 → 131 inputs).
+`npm run verify:published`'s Vue emitter now calls `validateContract` +
+`generateCss` from the tarball and the smoke refuses on the first byte where
+that CSS differs from the in-repo `core/emit-react.ts` output.
+
 ### Coordinated release candidate
 
 The source tree stages repository `1.0.0-rc.1`,

@@ -37,6 +37,51 @@ export {
 // Naming.
 export { kebab } from './naming.js';
 
+// The analysis layer — contract facts every emitter reads (moved from the
+// reference repo's core/emit-react.ts; that file re-exports these).
+export {
+  arrayProps,
+  boolProps,
+  enumProps,
+  holderDeclaresPosition,
+  isArrayType,
+  isEnum,
+  isMultiRoot,
+  isVariantBool,
+  namedSlots,
+  namedTextProps,
+  NATIVE_ROLE_HOSTS,
+  numberProps,
+  PART_STATE_CHANNELS,
+  rootElementsOf,
+  textDefault,
+  textProps,
+  topRootNames,
+  topRoots,
+  UA_MARGIN_ELEMENTS,
+  UA_PAINT_CHANNELS,
+  UA_PAINTED_ROOT_ELEMENTS,
+} from './anatomy.js';
+export { ELEMENT_META } from './elements.js';
+
+// A2 grid — the CSS half of the layout grammar, shared by every CSS target.
+export {
+  GRID_SELF_ALIGN,
+  gridCellPlan,
+  gridChildCrossAxisDecls,
+  gridGapCss,
+  gridParentDecls,
+  gridPlacementDecls,
+  gridTemplateAreasValue,
+  gridTrackCss,
+  type GridCellPlan,
+} from './grid.js';
+
+// The deep referee (appends to `errors`; takes the icon map) and the shared
+// stylesheet every code target emits.
+export { validateContract } from './validate.js';
+export { generateCss, stripCanvasOnlyChannels } from './css.js';
+
 // Optional provenance + stale-source state machine (browser-safe).
 export {
   assertContractProvenance,

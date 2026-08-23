@@ -22,6 +22,12 @@
  *      `ds-contracts generate --emitter ./my-vue-emitter` over the Flowbite
  *      eight writes eight .vue files each carrying at least one resolved
  *      literal (a token that came back as a real value, not a dangling ref);
+ *   4b. the SAME emitter runs the package's deep referee (validateContract)
+ *      and stylesheet generator (generateCss) — slice 2 of @ds-contracts/core
+ *      — and writes the raw CSS beside each .vue; the smoke regenerates that
+ *      CSS through the in-repo core/emit-react.ts and refuses on the first
+ *      byte that differs (the tarball and the reference emitter share one
+ *      analysis layer, proven, not promised);
  *   5. `--target web-components --emitter @ds-contracts/emitter-web-components`
  *      from ITS tarball emits the same eight.
  *
@@ -154,7 +160,7 @@ const emitterDir = path.join(project, 'my-vue-emitter');
 mkdirSync(emitterDir);
 writeFileSync(
   path.join(emitterDir, 'index.mjs'),
-  `import { flattenTokens, kebab, makeResolveLiteral, tokenInventoryFromJson } from '@ds-contracts/core';
+  `import { flattenTokens, generateCss, kebab, makeResolveLiteral, tokenInventoryFromJson, validateContract } from '@ds-contracts/core';
 import { walkAnatomy } from '@ds-contracts/schema';
 
 const REF = /^\\{([^}]+)\\}$/;
@@ -171,6 +177,12 @@ const vue = {
       for (const [k, v] of flattenTokens(tree)) all.set(k, v);
     }
     const inventory = tokenInventoryFromJson([ctx.tokens.primitives, ctx.tokens.semantic, ctx.tokens.light, ctx.tokens.dark]);
+    // The deep referee + the shared stylesheet, from the package: refuse
+    // the way every built-in does, then emit the UNFORMATTED css verbatim.
+    const errors = [];
+    validateContract(contract, ctx.contracts, errors, ctx.icons);
+    const css = generateCss(contract, inventory, errors);
+    if (errors.length > 0) throw new Error('Refused — ' + errors.length + ' contract violation(s):\\n' + errors.join('\\n'));
     const literal = makeResolveLiteral(all);
     const rules = [];
     const unresolved = [];
@@ -198,10 +210,47 @@ const vue = {
       unresolved.length ? '<!-- unresolved: ' + [...new Set(unresolved)].join(', ') + ' -->' : '',
       '',
     ].join('\\n');
-    return [{ path: tag + '.vue', contents }];
+    return [
+      { path: tag + '.vue', contents },
+      { path: tag + '.css', contents: css },
+    ];
   },
 };
 export default vue;
+`,
+);
+
+// 4b's oracle: the in-repo reference emitter, run from THIS repo (tsx +
+// root tsconfig paths), over the same contracts / tokens / icons the CLI
+// fed the Vue emitter. Writes <stem>.css per contract for the byte compare.
+const oracleDir = path.join(work, 'oracle');
+mkdirSync(oracleDir);
+writeFileSync(
+  path.join(oracleDir, 'reference-css.ts'),
+  `import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import path from 'node:path';
+import { ContractSchema, type Contract } from ${JSON.stringify(path.join(ROOT, 'scripts', 'contract-schema.ts'))};
+import { generateCss, validateContract } from ${JSON.stringify(path.join(ROOT, 'core', 'emit-react.ts'))};
+import { tokenInventoryFromJson } from ${JSON.stringify(path.join(ROOT, 'core', 'tokens.ts'))};
+import { kebab } from ${JSON.stringify(path.join(ROOT, 'extract', 'types.ts'))};
+
+const [outDir, primitivesFile, semanticFile, iconsDir, ...contractFiles] = process.argv.slice(2);
+const byId = new Map<string, Contract>();
+for (const f of contractFiles) {
+  const contract = ContractSchema.parse(JSON.parse(readFileSync(f, 'utf8'))) as Contract;
+  byId.set(contract.id, contract);
+}
+const json = (f: string) => JSON.parse(readFileSync(f, 'utf8')) as Record<string, unknown>;
+// The CLI routes primitives= and semantic=; unrouted slots are {} (lib.ts tokenTreesFromRouting).
+const inventory = tokenInventoryFromJson([json(primitivesFile), json(semanticFile), {}, {}]);
+const icons = new Map(readdirSync(iconsDir).filter((f) => f.endsWith('.svg')).map((f) => [f.replace(/\\.svg$/, ''), readFileSync(path.join(iconsDir, f), 'utf8').trim()]));
+for (const contract of byId.values()) {
+  const errors: string[] = [];
+  validateContract(contract, byId, errors, icons);
+  const css = generateCss(contract, inventory, errors);
+  if (errors.length > 0) throw new Error(contract.id + ' refused: ' + errors.join('; '));
+  writeFileSync(path.join(outDir, kebab(contract.name) + '.css'), css);
+}
 `,
 );
 
@@ -247,6 +296,55 @@ const generate = (label, target, emitter, outDir) => {
     }
   }
   console.log(`  vue emitter: ${files.length}/${FLOWBITE_EIGHT.length} .vue files, every {token.ref} resolved to a literal through @ds-contracts/core`);
+
+  // 4b. the tarball's generateCss === the in-repo reference emitter's, byte for byte.
+  const oracleOut = path.join(oracleDir, 'out');
+  mkdirSync(oracleOut);
+  const oracle = run(
+    path.join(ROOT, 'node_modules', '.bin', 'tsx'),
+    [
+      path.join(oracleDir, 'reference-css.ts'),
+      oracleOut,
+      path.join(FLOWBITE, 'tokens', 'tailwind.dtcg.json'),
+      path.join(FLOWBITE, 'tokens', 'tailwind-minted.dtcg.json'),
+      icons,
+      ...contracts,
+    ],
+    { cwd: ROOT },
+  );
+  if (oracle.status !== 0) {
+    cleanup();
+    fail(`reference css oracle (in-repo core/emit-react.ts) failed:\n${oracle.out}`);
+  }
+  const cssFiles = readdirSync(outDir).filter((f) => f.endsWith('.css') && f !== 'tokens.css');
+  if (cssFiles.length !== FLOWBITE_EIGHT.length) {
+    cleanup();
+    fail(`vue emitter: expected ${FLOWBITE_EIGHT.length} generateCss sidecars, got ${cssFiles.length} (${cssFiles.join(', ')})`);
+  }
+  let cssBytes = 0;
+  for (const f of cssFiles) {
+    const fromTarball = readFileSync(path.join(outDir, f), 'utf8');
+    const oraclePath = path.join(oracleOut, f);
+    if (!existsSync(oraclePath)) {
+      cleanup();
+      fail(`vue emitter: ${f} has no in-repo counterpart (oracle wrote ${readdirSync(oracleOut).join(', ')})`);
+    }
+    const fromRepo = readFileSync(oraclePath, 'utf8');
+    if (fromTarball !== fromRepo) {
+      let i = 0;
+      while (i < fromTarball.length && fromTarball[i] === fromRepo[i]) i++;
+      cleanup();
+      fail(
+        `vue emitter: ${f} from the @ds-contracts/core tarball differs from core/emit-react.ts generateCss at byte ${i} (${fromTarball.length} vs ${fromRepo.length} bytes):\n  tarball: ${JSON.stringify(fromTarball.slice(Math.max(0, i - 40), i + 40))}\n  repo:    ${JSON.stringify(fromRepo.slice(Math.max(0, i - 40), i + 40))}`,
+      );
+    }
+    if (fromTarball.length === 0) {
+      cleanup();
+      fail(`vue emitter: ${f} is empty — generateCss produced nothing`);
+    }
+    cssBytes += fromTarball.length;
+  }
+  console.log(`  vue emitter: ${cssFiles.length}/${FLOWBITE_EIGHT.length} generateCss stylesheets byte-identical to the in-repo react emitter (${cssBytes} bytes)`);
 }
 
 // 5. the web-components emitter from ITS tarball.
@@ -272,5 +370,5 @@ const generate = (label, target, emitter, outDir) => {
 
 cleanup();
 console.log(
-  `✔ verify:published — ${PACKAGES.map((p) => `@ds-contracts/${p}@${packed[`@ds-contracts/${p}`].version}`).join(', ')} packed, installed with no path back to the repo; a Vue emitter on @ds-contracts/core + @ds-contracts/schema alone and the web-components tarball both generated the Flowbite eight`,
+  `✔ verify:published — ${PACKAGES.map((p) => `@ds-contracts/${p}@${packed[`@ds-contracts/${p}`].version}`).join(', ')} packed, installed with no path back to the repo; a Vue emitter on @ds-contracts/core + @ds-contracts/schema alone (validateContract + generateCss byte-identical to the repo's) and the web-components tarball both generated the Flowbite eight`,
 );

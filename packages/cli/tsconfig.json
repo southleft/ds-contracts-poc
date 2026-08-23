@@ -12,7 +12,8 @@
     "noEmit": true,
     "types": ["node"],
     "paths": {
-      "@ds-contracts/core": ["../core/src/index.ts"]
+      "@ds-contracts/core": ["../core/src/index.ts"],
+      "@ds-contracts/schema": ["../schema/src/index.ts"]
     }
   },
   "include": ["src"]
