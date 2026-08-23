@@ -503,10 +503,34 @@ function resolve(typeExpr: string, seen: Set<string> = new Set()): string[] | nu
   return null;
 }
 
-/** The component's own .d.ts, by convention `<Name>/<Name>.d.ts`. */
+/** The component's own .d.ts, by convention `<Name>/<Name>.d.ts`.
+ *
+ *  ANTD ROUND (P2 exam, W1) — THE LOOKUP WAS CASE-SENSITIVE AND BASENAME-
+ *  FIRST, AND THAT WAS THE BLIND SPOT, NOT THE TUPLE GRAMMAR. The recon
+ *  diagnosed "seed-gen does not parse `declare const X: readonly [...]`";
+ *  re-measured, the tuple regex above resolves `ButtonType` to all five
+ *  values. What actually happened: antd spells its directories in lower
+ *  case (`button/button.d.ts`, `progress/progress.d.ts`, `tooltip/index.d.ts`),
+ *  so `<Name>/<Name>.d.ts` never matched and the `<Name>.d.ts` fallback took
+ *  the FIRST basename hit anywhere in the package — `skeleton/Button.d.ts`
+ *  (Skeleton.Button, which has only `size`) for Button, `spin/Indicator/
+ *  Progress.d.ts` for Progress, nothing for Tooltip. Button proposed
+ *  `size(3)` and the receipt said "1 enum axis" with a green tick.
+ *
+ *  The rule now: a file whose DIRECTORY is the component's name (case-
+ *  insensitively) wins — `<name>/<Name>.d.ts`, `<name>/<name>.d.ts`,
+ *  `<name>/index.d.ts`, `<name>/interface.d.ts` in that order — before any
+ *  basename match elsewhere in the package. Carbon (`Button/Button.d.ts`)
+ *  and MUI (`Button/Button.d.ts`) resolve through the same first branch
+ *  they always did; `npm run seed:verify` is the corpus-neutrality proof. */
 const declFor = (name: string): string | undefined => {
+  const lower = name.toLowerCase();
+  const dirIs = (f: string): boolean => path.basename(path.dirname(f)).toLowerCase() === lower;
+  const base = (f: string): string => path.basename(f).toLowerCase();
   const own =
-    dts.find((f) => f.endsWith(`${path.sep}${name}${path.sep}${name}.d.ts`)) ??
+    dts.find((f) => dirIs(f) && base(f) === `${lower}.d.ts`) ??
+    dts.find((f) => dirIs(f) && base(f) === 'index.d.ts') ??
+    dts.find((f) => dirIs(f) && base(f) === 'interface.d.ts') ??
     dts.find((f) => f.endsWith(`${path.sep}${name}.d.ts`));
   if (own) return own;
   // Carbon declares InlineNotification's props inside Notification.d.ts, so a
