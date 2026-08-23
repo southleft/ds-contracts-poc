@@ -327,3 +327,36 @@ cases added for the same SLOT's primary-axis FILL, now carried as
 `layout.grow`). The numbers in this receipt are the last re-measure and are
 not re-run here; docs/23 §D.29 carries the closes and their gates, §B.24 the
 one fact left named on that node (the slot's interior auto-layout).
+
+## Screenshots
+
+Grammar: `scripts/exam-screenshots-check.ts` (`npm run exam:screenshots:check`, fast lane). One row per rendered cell; `canvas` is Figma's own `/v1/images?scale=2` render of the source set, `reference` is the generated React component rendered in Chromium (esbuild bundle + Playwright, deviceScaleFactor 2, white ground) — the pair the verdicts in §3 were read from. The five cells below are the 2026-08-23 re-measure renders (`…/scratchpad/f4-exam-out/{figma-png,react-png}/`) copied into the tree; the other eleven sets were never rendered at exam time and say so — [docs/23 §B.31](../../../docs/23-known-limitations.md#b31-the-held-out-exam-rendered-five-cells-not-fifteen-sets).
+
+| set | canvas | reference | note |
+|---|---|---|---|
+| Button | figma-ds/button-primary-default.canvas.png | figma-ds/button-primary-default.react.png | `button-primary-default` (53:2776) — recognisable after fix rounds 1–2; React 90×28 vs Figma 88×28 |
+| Badge | figma-ds/badge-sm-success.canvas.png | figma-ds/badge-sm-success.react.png | `badge-sm-success` (91:4929) — 8×8 green dot both sides |
+| Badge | figma-ds/badge-default-success.canvas.png | figma-ds/badge-default-success.react.png | `badge-default-success` (91:4941) — pill fill carries; both sides collapse under the kit's 1.5 px line height |
+| Card | figma-ds/card-default.canvas.png | figma-ds/card-default.react.png | `card-default` (53:1778) — NOT recognisable; every loss named ([§B.26](../../../docs/23-known-limitations.md#b26-card-on-the-held-out-kit-is-not-recognisable--and-every-loss-is-named)) |
+| Toast | figma-ds/toast-default.canvas.png | figma-ds/toast-default.react.png | `toast-default` (86:2196) — recognisable; icon and close glyphs absent (vector geometry named) |
+| Button (Icon) | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
+| Button (contract) | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
+| Chip | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
+| Dek | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
+| Heading | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
+| Image | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
+| Kicker | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
+| Button Group | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
+| Section Header | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
+| Section Footer | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
+| Section | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
+
+## Self-heal log
+
+What this exam re-ran, retracted or corrected about its own instrument, in order:
+
+1. **2026-08-22 — conformance cases before fixes.** Every silent construct was pinned as a RED-EXPECTED case in `extract/figma/conformance/` (19 cases) before any engine change, so a later green could not be a moved goalpost.
+2. **2026-08-23 — wrong CLI in the first re-measure pass.** `npx ds-contracts generate` resolved through the worktree's mirrored `node_modules/.bin` to the MAIN tree's pre-F3 `packages/cli/dist`; it reproduced TS2430 and a case was authored for it before the instrument was checked. Re-run with this tree's CLI the error was gone; the case was retracted. The component count (78), `tokens.css` (456) and every React PNG are byte-identical between the two CLIs (§3 of the re-measure).
+3. **2026-08-23 — `account2.mjs` re-authored only moved classifications.** The re-measure's accounting re-authors only the classification of constructs a fix moved, each rule quoting the note it now matches; the denominator rules are unchanged from 08-22.
+4. **2026-08-23 — the two remaining silences closed after this receipt.** `slot-fixed-width-by-variant` and `layout-fill-height-parent-mode-by-variant` were closed in `phase-2/exam-close` (docs/23 §D.29); the SILENT count here (2) is the pre-close measurement and is not re-run in this file.
+5. **2026-08-23 — screenshots moved into the tree.** The five rendered pairs were scratch artifacts "not in the patch"; they are now `figma-ds/*.png` beside this receipt, and the eleven sets that were never rendered are named as such above rather than left implicit (`npm run exam:screenshots:check`).

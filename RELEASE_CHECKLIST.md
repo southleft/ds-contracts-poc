@@ -88,7 +88,8 @@ See also
 ## v1 and live evidence (frozen 2026-08-06/08 — STALE, see above)
 
 - [x] All definition-of-v1 requirement evidence attached: automation commands green via fast/full/catalog-visual; see docs/26 + wave10 `AUDIT-LEDGER.md` (STALE: docs/26's acceptance commands changed 2026-08-23 — `eval:record:check`, `contracts:migrate:check`, `conformance:roundtrip`, `verify:published`, `maintain`, `maintain:visual` — and two of them are known not to pass on the current commit: `npm run diagnose`, `npm run extract:computed:drift`; docs/23 §B.28)
-- [x] P0/P1 audit ledger has no open or waived automation row: `.agents/runs/post-exact-conversion-next-waves/wave10/AUDIT-LEDGER.md`
+- [x] P0/P1 audit ledger has no open or waived automation row: `.agents/runs/post-exact-conversion-next-waves/wave10/AUDIT-LEDGER.md` (STALE: the 2026-08-05 automation slice; the release audit V1-REL-01 names is the 2026-08-22 21-agent audit, whose generated ledger is `parity/receipts/v1/AUDIT-LEDGER.md` — 60 P0/P1 rows, verified by `npm run v1:readiness`; its open human rows are the signed-tag and deployment approvals below)
+- [ ] `npm run v1:readiness` on the new freeze SHA (no `--trust-lanes`, no `--pre-release`): every docs/26 row GREEN in `parity/receipts/v1/READINESS.md`, zero open rows in `parity/receipts/v1/AUDIT-LEDGER.md`; attach both
 - [x] Live Figma drift receipt linked: `parity/receipts/live-figma-variant-drift.md` + `.json` on file `GnQnjSNBXtgtd2Ht0Hs1C8` · `npm run live-figma:evidence:check`
 - [x] Figma controlled edit and restoration: Console MCP `figma_execute` re-ack (baseline `v6:3552508208` → edit `v6:4062076634` → restore); prior cloud `use_figma` same stamps; scripts under `parity/receipts/console-mcp/`
 - [x] Final live Figma stamp/file state is clean: restored fingerprint matches baseline; Console MCP Desktop Bridge re-ack recorded 2026-08-06
