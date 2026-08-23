@@ -707,12 +707,11 @@
     {
       "library": "polaris",
       "component": "Tag",
-      "rerunPctEqual": 81.01607890825564,
-      "cellsCompared": 7401,
+      "rerunPctEqual": 81.55133483862399,
+      "cellsCompared": 7529,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.01607890825564,
-      "gapCause": "REFUSED 2026-08-23 (docs/23 §B.29): the current engine (d5b5b0b1) refuses to re-fuse this component — the link part carries width as both a token binding and a literal; the numbers here are the last successful offline re-fuse (the committed regate.scorecard.json, the 2026-08-09 baseline pinned 81.016/7401). Harness number untouched.",
-      "refused": "Tag: re-fused enriched contract fails validateContract: |   - polaris.tag: part \"link\" carries channel \"width\" as BOTH a token binding ({imported.shared.size-59-9219}) and a literal (\"fit-content\") — ambiguous, refused by name: keep ONE of tokens.width / literals.width (which wins is the contract author's choice; the emitter will not pick)"
+      "gapCause": "ENGINE MOVED SINCE CAPTURE (re-recorded 2026-08-23, r12 over 537022b0; docs/23 §D.33): cells compared 7401 -> 7529, cells equal 5996 -> 6140 — 128 added cell(s), 144 more equal, so 16 previously-compared cells changed verdict to EQUAL. repaired: this row was pinned REFUSED on 2026-08-23 (§B.29) — the offline re-fuse carried link.width as BOTH the G8 literal fit-content and a minted token because fuse.ts carriedChannels mapped width through CHANNEL_TO_COMPUTED with `?? []` and so never saw the stated literal; the literal is now the one carrier (the link hugs) and the not-minted px is receipted (carried-axis-not-reminted). Harness number untouched."
     },
     {
       "library": "polaris",

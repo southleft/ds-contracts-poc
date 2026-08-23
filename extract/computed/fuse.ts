@@ -1320,12 +1320,31 @@ export async function boundCheck(
 }
 
 /** Channels the contract carries for a part (any combo/state) — BOUND
- *  territory; the mint pass never re-mints them. */
+ *  territory; the mint pass never re-mints them.
+ *
+ *  DEFECT FIXED (2026-08-23, docs/23 §D.33). The tokens / per-prop / literals /
+ *  states branches mapped each channel through CHANNEL_TO_COMPUTED with
+ *  `?? []`, so a channel that registry does not spell — `width`, `height`
+ *  and every other bounded channel whose computed longhand IS its own name —
+ *  was silently NOT in this set: the door said "never re-mints" and
+ *  re-minted. First measured on polaris Tag's `link` part, a display:grid
+ *  part whose G8 definite-axis pass (anatomy.ts gridDefiniteAxisLiterals,
+ *  which runs BEFORE the mint) states `literals.width = "fit-content"`; the
+ *  mint then minted `tokens.width = {imported.shared.size-59-9219}` beside it
+ *  and validateContract refused the double spelling by name (the 2026-08-23
+ *  drift re-measure's one REFUSED row). The `declared` branch below already
+ *  fell back to the channel's own name; every branch does now, so a channel
+ *  the promotion has stated — whichever field states it — is one carrier.
+ *  The same hole let a root `width`/`height` carried by a REVIEWED
+ *  literalsByProp entry (polaris avatar/progressbar/thumbnail, per size)
+ *  mint per-size leaves that the tokensByProp merge then kept out of the
+ *  contract ("conflict avoided") — orphan leaves in the minted tree. Those
+ *  are no longer minted; the contracts are byte-identical either way. */
 export function carriedChannels(part: Part | undefined): Set<string> {
   const out = new Set<string>();
   if (!part) return out;
   const addAll = (rec?: Record<string, string>) => {
-    for (const ch of Object.keys(rec ?? {})) for (const cp of CHANNEL_TO_COMPUTED[ch] ?? []) out.add(cp);
+    for (const ch of Object.keys(rec ?? {})) for (const cp of CHANNEL_TO_COMPUTED[ch] ?? [ch]) out.add(cp);
   };
   addAll(part.tokens);
   for (const e of tokensByPropEntries(part)) for (const m of Object.values(e.map)) addAll(m);
@@ -1701,7 +1720,25 @@ export function prepareMint(
       for (const channel of [...(styled.get(partName) ?? [])].sort()) {
         if (carried.has(channel)) {
           const contestingAxis = contestedByUnsetAxis(pi, channel);
-          if (contestingAxis === null) continue;
+          if (contestingAxis === null) {
+            // G8 (docs/23 §D.33): a grid part's definite axis that the
+            // promotion already states as a literal (`fit-content` when the
+            // used box equals the intrinsic track sum, else the used px) is
+            // ONE fact. The computed used box the mint would have minted is
+            // that literal's base-plane consequence, not a second fact; a
+            // fixed token beside a hugging axis would pin the canvas to the
+            // base plane's text width, and validateContract refuses the
+            // double spelling by name. The literal wins; the not-minted px
+            // is receipted here so the drop is greppable.
+            const lit = partByName.get(partName)?.literals?.[channel];
+            if (skipFolds && lit !== undefined && (channel === 'width' || channel === 'height')) {
+              const base = a.getAligned(`${space.baseComboKey}__default`)[pi]?.node.style[channel];
+              remintReceipts.push(
+                `carried-axis-not-reminted: ${partName}.${channel} — the promotion states it as literals.${channel} ${JSON.stringify(lit)} (grid-axis-definite, G8); the computed ${base ?? '<unobserved>'} is that literal's base-plane used box, not a second fact, and is NOT minted beside it (one carrier per channel — validateContract refuses two)`,
+              );
+            }
+            continue;
+          }
           if (skipFolds) {
             remintReceipts.push(
               `carried-channel-reminted: ${partName}.${channel} — observed values vary along the defaultless axis "${contestingAxis}" while the reviewed carriage has no ${contestingAxis} plane; re-minted so the set planes carry (round 5c — S2 ${contestingAxis} maps with the unset base; reviewed bindings win every collision)`,
