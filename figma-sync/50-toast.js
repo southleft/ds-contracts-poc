@@ -53,8 +53,10 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "slotProperty": "Children",
-              "slotAccepts": []
+              "slotAccepts": [],
+              "fillW": true
             },
             {
               "type": "slot",
@@ -115,8 +117,10 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "slotProperty": "Children",
-              "slotAccepts": []
+              "slotAccepts": [],
+              "fillW": true
             },
             {
               "type": "slot",

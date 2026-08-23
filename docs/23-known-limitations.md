@@ -2524,10 +2524,16 @@ only), `extract:figma:visual:anchors` (its subjects are `contracts/`), the
 engine receipt's inputs (`scripts/build-plugin-zip.mjs` bakes `contracts/`,
 not `examples/tailwind`). Nothing writes the anchor back after a recorded
 apply yet — that door is still by hand; the anchors here were written and
-verified by a person against the live file.
+verified by a person against the live file, and they ride the tailwind
+authored-facts ledger (`examples/tailwind/authored-facts.json`, eight rows
+on `bindings.figma.anchors`, each quoting the verification) so the committed
+contracts stay re-derivable from the capture plus the ledger
+(`promote-generalization`).
 
 **Gates:** `npm run flowbite-bundle-fresh:check` (the committed scripts and
-bundle equal a fresh emit with the anchors in them), `npm run
+bundle equal a fresh emit with the anchors in them), the
+`promote-generalization` eval (re-promotion reproduces the eight byte for
+byte through the ledger), `npm run
 flowbite-dump-propose:check` (all eight stems still verified-exact — the
 anchors did not change recovery; the contract-side `componentSetKey` now
 resolves the same id the dump's `key` resolved by name), `npm run

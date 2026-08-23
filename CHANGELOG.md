@@ -38,7 +38,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   Code Connect (PR #25): the eight as committed now EMIT
   `code-connect/<Name>.figma.tsx` with the URL built from the live anchors;
   `code-connect:check` asserts that, and that the same eight with the
-  fileKey stripped still refuse by name.
+  fileKey stripped still refuse by name. The anchors ride the tailwind
+  authored-facts ledger (eight rows on `bindings.figma.anchors`), so
+  re-promotion still reproduces the committed contracts byte for byte
+  (`promote-generalization`; MINTED.md quotes 14 applied rows).
+- **Four first-party sync scripts regenerated** (`figma-sync/50-toast.js`,
+  `54-topnav.js`, `batch-04.js`, `batch-05.js`): the Toast and TopNav
+  `children` slots declare `layout.grow: true`, which the slot spec used to
+  drop on the way to the canvas; it now lowers to `layoutSizingHorizontal
+  FILL` (`grow`/`fillW` on the slot spec). `evals/golden.json` moved for
+  exactly those four files.
 - **Docs truth pass.** docs/23 §B.24–B.28 and §D.12–D.30, docs/26's
   commands, BETA, docs/00, README, ROADMAP, NORTH-STAR, RELEASE_CHECKLIST,
   GET-STARTED and the package READMEs re-read against the tree; every count

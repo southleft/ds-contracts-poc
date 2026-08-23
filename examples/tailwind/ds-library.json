@@ -27,7 +27,7 @@
     "harness": "examples/tailwind/.tw-sandbox"
   },
   "seeds": "examples/tailwind/contracts-seed",
-  "__note:authored": "AUTHORED FACTS LEDGER — reviewed hand-authored facts the capture cannot carry (Alert dismiss event + dismissable rebinding + dismiss <button aria-label>, ToggleSwitch toggle event + role=switch + root align — commit 968958cd had edited the promoted contracts directly). promote.ts applies it after the computed contract and before the resolution guard, so the committed contracts stay re-derivable; every row names its cause and a stale row refuses by name.",
+  "__note:authored": "AUTHORED FACTS LEDGER — reviewed hand-authored facts the capture cannot carry (Alert dismiss event + dismissable rebinding + dismiss <button aria-label>, ToggleSwitch toggle event + role=switch + root align — commit 968958cd had edited the promoted contracts directly; since 2026-08-23 also the eight sets' live Figma identity, bindings.figma.anchors fileKey/nodeId/componentSetKey, verified read-only against file 59mLQlOMiD5w5za6SUcoO5 — docs/23 §D.30). promote.ts applies it after the computed contract and before the resolution guard, so the committed contracts stay re-derivable; every row names its cause and a stale row refuses by name.",
   "authored": "examples/tailwind/authored-facts.json",
   "emit": {
     "out": "examples/tailwind/figma",

@@ -296,3 +296,23 @@ moved `from` value, or a missing `after` key refuses the promotion by name.
 Measured: with the ledger, `alert.contract.json` and `toggleswitch.contract.json` re-promote
 byte-identical to the committed files (no committed contract changed in this round); the other
 six tailwind contracts and the minted tree are untouched.
+
+## AUTHORED FACTS (2026-08-23) — the eight sets' Figma identity rides the same door
+
+The eight contracts' `bindings.figma.anchors` spelled `{ fileKey: null, componentSetKey: null }`
+while their live sets existed on `59mLQlOMiD5w5za6SUcoO5` (docs/23 §D.30). The capture reads the
+library's DOM and can never know where a contract's canvas twin lives, and nothing writes the
+anchor back after a recorded apply yet, so the identity is an authored fact: eight rows in
+`authored-facts.json`, one per component, each `path: bindings.figma.anchors` with
+`set.fields.nodeId` placed `after: fileKey` and `edit` on `fileKey` / `componentSetKey`
+(`from: null`, so a capture that ever learns to carry an anchor refuses the row by name). Every
+row's cause quotes the READ-ONLY verification against the live file (REST `nodes?ids=…&
+plugin_data=shared`: the node is that set, its `key` is the key written, `ds_contracts/contractId`
+equals the contract id; the keys equal the `key` field of
+`extract/figma/fixtures/flowbite-eight.dump.json`).
+
+Measured: all eight contracts re-promote byte-identical to the committed files with the rows
+applied (`promote-generalization` green; MINTED.md quotes 14 applied rows). The anchors sit
+inside the compiled spec the canvas hash covers, so every set's specHash moved with them — the
+next Apply re-reconciles the demo sets in place by the `ds_contracts/contractId` stamp, then by
+`anchorKey`.
