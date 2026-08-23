@@ -1,0 +1,18 @@
+{
+  "id": "antd-component-scoped-custom-property",
+  "feature": "tokens",
+  "construct": ".cf-root { --cf-scoped-pad: 15px } .cf-root .cf-a { padding-inline: var(--cf-scoped-pad) } — a token DECLARED ON THE COMPONENT ROOT (not :root) and consumed by a descendant (antd cssVar component tokens on `.antd.ant-btn`)",
+  "why": "antd declares its 152 component tokens on the cssVar key class of each component root, never on :root. The reader binds by matching rules to elements and resolving one hop — the name must bind on the descendant exactly as a :root declaration would, and the regate page (which renders against the :root-scoped antd.vars.css) must print a contradiction-count drift rather than swallow one (P2 exam S4).",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a.tokens.padding-inline = {scoped-pad}",
+  "observable": {
+    "part": "a",
+    "channel": "padding-left",
+    "capturedValue": "15px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "paddingLeft/Right bound to the scoped-pad variable"
+  }
+}

@@ -1,0 +1,4 @@
+[data-cf="antd-empty-margin-only-parts"] { display: inline-flex; min-width: 44px; height: 22px; background: rgb(22, 119, 255); border-radius: 100px; }
+[data-cf="antd-empty-margin-only-parts"] .cf-inner { display: block; overflow: hidden; height: 100%; padding-inline: 9px; }
+[data-cf="antd-empty-margin-only-parts"] .cf-a { display: block; margin-inline-start: 24px; margin-inline-end: 0; color: rgb(255, 255, 255); font-size: 12px; }
+[data-cf="antd-empty-margin-only-parts"] .cf-b { display: block; margin-inline-start: 0; margin-inline-end: -22px; color: rgb(255, 255, 255); font-size: 12px; }

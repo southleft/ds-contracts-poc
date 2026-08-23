@@ -2,8 +2,8 @@
   "_marker": "THE MEASURED ROUND TRIP — contract → Figma (mock) → dump → propose ≡ contract, per conformance case, on the case's own channel. Every SILENT entry is an OPEN DEFECT the engine must name or carry; it is never waivable and leaves this file only by being fixed. The gate refuses drift in EITHER direction: a regression is red, and an improvement must be re-recorded here so a fix can never be absorbed silently.",
   "measuredAt": "extract/computed/out/conformance/<case>/enriched.contract.json through figma-sync/plugin/engine (mock figma) and core/propose-figma (npx tsx conformance/canvas.ts)",
   "counts": {
-    "ROUND-TRIPPED": 26,
-    "NAMED": 5,
+    "ROUND-TRIPPED": 29,
+    "NAMED": 9,
     "DRIFTED": 0,
     "HARMFUL": 0,
     "SILENT": 0,
@@ -11,6 +11,78 @@
     "SEED-ABSENT": 0
   },
   "cases": {
+    "antd-component-scoped-custom-property": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "padding-left",
+      "seed": [
+        "15px"
+      ],
+      "proposed": [
+        "15px"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "antd-empty-margin-only-parts": {
+      "classification": "NAMED",
+      "channel": "margin-left",
+      "seed": [
+        "24px"
+      ],
+      "proposed": [],
+      "note": "code-only channel a.margin-left = 24px — the margin-box wrapper is skipped — an EMPTY in-flow box takes the parent height (layoutSizingVertical FILL, the #60 runtime default) and a FILL-sized child cannot be wrapped; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)"
+    },
+    "antd-focus-outline-ring": {
+      "classification": "NAMED",
+      "channel": "outline-width",
+      "seed": [
+        "3px"
+      ],
+      "proposed": [],
+      "note": "code-only channel root.outline-width = {«self».root.outline-width} — a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw."
+    },
+    "antd-forwarded-root-attrs": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "background-color",
+      "seed": [
+        "#1677ff"
+      ],
+      "proposed": [
+        "#1677ff"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "antd-overlay-digit-depth-three": {
+      "classification": "NAMED",
+      "channel": "__text",
+      "seed": [
+        "5"
+      ],
+      "proposed": [],
+      "note": "code-only declared label-2.display = inline-block — CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack)."
+    },
+    "antd-part-transition-channel": {
+      "classification": "NAMED",
+      "channel": "transition-duration",
+      "seed": [
+        "0.2s"
+      ],
+      "proposed": [],
+      "note": "code-only declared label.transition-duration = 0.2s — Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame."
+    },
+    "antd-presence-times-axis-glyph": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "color",
+      "seed": [
+        "#000000e0"
+      ],
+      "proposed": [
+        "#000000e0"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
     "aspect-ratio": {
       "classification": "NAMED",
       "channel": "aspect-ratio",

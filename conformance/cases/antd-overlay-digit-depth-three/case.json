@@ -1,0 +1,18 @@
+{
+  "id": "antd-overlay-digit-depth-three",
+  "feature": "anatomy",
+  "construct": "sup(absolute, translate(50%,-50%)) > bdi > span > span.current — a count digit THREE levels deep in an absolutely positioned overlay, the deepest span carrying a transient class the classAllow grammar drops (antd Badge / rc-scroll-number)",
+  "why": "When union alignment collapses a deep unit span into positional naming (part-<path>), the label must still carry its text. A badge whose digit vanishes is still a red dot — recognisable, and silently wrong (P2 exam S7).",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.<deepest>.text = 5",
+  "observable": {
+    "part": "@path:1.0.0.0",
+    "channel": "__text",
+    "capturedValue": "5"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the digit is the badge's only content; the overlay is the absolute-cluster door (GEOM_ADMIT)"
+  }
+}

@@ -2,11 +2,11 @@
   "_marker": "THE DENOMINATOR. Hand-authored per case, generated into one index. Deliberately NOT derived from isFusable / styled / DECLARED_CHANNELS / CHANNEL_TO_COMPUTED / TOKEN_CHANNELS / carriedParts — every instrument in the pipeline derives its denominator from the same filter that decides carriage, which is why a channel the filter never opened scores 100%. This file is the independent one.",
   "generatedBy": "conformance/build.ts",
   "library": "@ds-contracts/conformance@0.1.0",
-  "count": 82,
+  "count": 90,
   "byExpectation": {
-    "CARRIED": 42,
+    "CARRIED": 49,
     "LOWERED": 4,
-    "REFUSED": 18,
+    "REFUSED": 19,
     "UNSUPPORTED": 18
   },
   "cases": [
@@ -26,6 +26,150 @@
       "canvas": {
         "expect": "PRESENT",
         "note": "the checked box fill is real ink"
+      }
+    },
+    {
+      "id": "antd-component-scoped-custom-property",
+      "feature": "tokens",
+      "construct": ".cf-root { --cf-scoped-pad: 15px } .cf-root .cf-a { padding-inline: var(--cf-scoped-pad) } — a token DECLARED ON THE COMPONENT ROOT (not :root) and consumed by a descendant (antd cssVar component tokens on `.antd.ant-btn`)",
+      "why": "antd declares its 152 component tokens on the cssVar key class of each component root, never on :root. The reader binds by matching rules to elements and resolving one hop — the name must bind on the descendant exactly as a :root declaration would, and the regate page (which renders against the :root-scoped antd.vars.css) must print a contradiction-count drift rather than swallow one (P2 exam S4).",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.a.tokens.padding-inline = {scoped-pad}",
+      "observable": {
+        "part": "a",
+        "channel": "padding-left",
+        "capturedValue": "15px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "paddingLeft/Right bound to the scoped-pad variable"
+      }
+    },
+    {
+      "id": "antd-empty-margin-only-parts",
+      "feature": "geometry",
+      "construct": "span.inner > span.a(empty) + span.b(empty) — two EMPTY inline-block spans whose only facts are margin-inline-start/end (antd Switch inner-checked / inner-unchecked)",
+      "why": "An empty part with nothing but margins is the shape the anatomy walk is most likely to drop as a non-part (no text, no paint, no size). First authored as REFUSED (\"margin is not a carried channel\") — wrong: the schema registers margin-left as DRAWN (the margin-box wrapper / sibling-gap itemSpacing lowering), and the first measurement carried it as a token on a part that still exists. The correction is recorded in parity/receipts/phase-2/ANTD-EXAM.md; the bar stands: never a vanished part (P2 exam S6).",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.inner.parts.a.tokens.margin-left",
+      "observable": {
+        "part": "a",
+        "channel": "margin-left",
+        "capturedValue": "24px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the margin-box wrapper lowering — an in-flow margin on an empty inline span draws as wrapper padding"
+      }
+    },
+    {
+      "id": "antd-focus-outline-ring",
+      "feature": "interaction-states",
+      "construct": "button.root:focus-visible { outline: 3px solid rgb(145, 202, 255); outline-offset: 1px } — the focus ring as an OUTLINE state delta on the ROOT (antd Button, Switch)",
+      "why": "antd draws every keyboard focus ring with `outline`, not box-shadow. The rest plane paints nothing (outline-width 0), so the ONLY observation is a focus-visible delta on a channel that is not in CHANNEL_TO_COMPUTED — if the state round drops it the component has no focus ring anywhere and nothing says so (P2 exam S1, root half; the nested-part half is antd-focus-outline-ring-child-part).",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.states.focus-visible.tokens.outline-width",
+      "observable": {
+        "part": "root",
+        "channel": "outline-width",
+        "capturedValue": "3px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the focus-visible state preview draws an OUTSIDE-aligned stroke (outline-color + outline-width carried as a pair); outline-offset is annotated — Figma strokes have no offset"
+      }
+    },
+    {
+      "id": "antd-focus-outline-ring-child-part",
+      "feature": "interaction-states",
+      "construct": "label > span > [input.sr-only:focus-visible + span.box { outline: 3px solid rgb(145, 202, 255) }] — the focus ring as an OUTLINE state delta on a NESTED PART (antd Checkbox-inner, Radio-inner)",
+      "why": "antd's Checkbox and Radio draw the keyboard focus ring on the inner box, a child part, not on the root label. v13 Part.states carries plain color-kind refs only below the root — `outline-width` is a dimension — so the doc model says CARRIED and the grammar is expected to refuse. The exam's bar is that the refusal is NAMED where the canvas reads it (Part.codeOnly → bundle codeOnlyFacts), never a silent ring-less checkbox (P2 exam S1, nested half; W4).",
+      "expect": "REFUSED",
+      "expectName": "v13 Part.states carries plain color-kind refs only on non-root parts",
+      "expectWhere": "anatomy.root.parts.<box>.codeOnly (W4) + enriched.extension.json overflowBindings + LEDGER.md",
+      "observable": {
+        "part": "a",
+        "channel": "outline-width",
+        "capturedValue": "3px"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "no state preview draws a nested part's focus ring today (a named wall); the bundle's codeOnlyFacts must name `outline-width [focus-visible]` on the part"
+      }
+    },
+    {
+      "id": "antd-forwarded-root-attrs",
+      "feature": "anatomy",
+      "construct": "label > [input.sr-only + span.box] + span.text — the component forwards className/data-* to the HIDDEN input, not the visible label root (antd Checkbox/Radio)",
+      "why": "Anything that identifies the root by class or attribute would measure a 0×0 screen-reader-only input and report a clean, empty part. The harness stamps the STAGE child, so the root must still be the label and its visible box must carry paint (P2 exam S2).",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.a.tokens.background-color",
+      "observable": {
+        "part": "a",
+        "channel": "background-color",
+        "capturedValue": "rgb(22, 119, 255)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the 16×16 filled box is real ink; the sr-only input is a 0-size node the canvas must not draw"
+      }
+    },
+    {
+      "id": "antd-overlay-digit-depth-three",
+      "feature": "anatomy",
+      "construct": "sup(absolute, translate(50%,-50%)) > bdi > span > span.current — a count digit THREE levels deep in an absolutely positioned overlay, the deepest span carrying a transient class the classAllow grammar drops (antd Badge / rc-scroll-number)",
+      "why": "When union alignment collapses a deep unit span into positional naming (part-<path>), the label must still carry its text. A badge whose digit vanishes is still a red dot — recognisable, and silently wrong (P2 exam S7).",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.<deepest>.text = 5",
+      "observable": {
+        "part": "@path:1.0.0.0",
+        "channel": "__text",
+        "capturedValue": "5"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the digit is the badge's only content; the overlay is the absolute-cluster door (GEOM_ADMIT)"
+      }
+    },
+    {
+      "id": "antd-part-transition-channel",
+      "feature": "motion",
+      "construct": ".cf-a { transition: background-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) } — a transition declared on a CHILD PART, not the root (antd's `motionDurationMid` on every interactive part)",
+      "why": "The root-level transition case is green; antd puts its transitions on parts (the Switch handle, the Checkbox inner, the close icon). Nothing in the canvas vocabulary spells motion, so the honest treatment is a DECLARED fact per part with its own canvas verdict — not silence on every part but the root (P2 exam S5).",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.a.declared.transition-duration",
+      "observable": {
+        "part": "a",
+        "channel": "transition-duration",
+        "capturedValue": "0.2s"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "no canvas spelling — the channel is a DECLARED fact on the part with its own canvas verdict, which is the honest treatment, not a loss"
+      }
+    },
+    {
+      "id": "antd-presence-times-axis-glyph",
+      "feature": "anatomy",
+      "construct": "a child part whose PRESENCE is one prop (showIcon) and whose paint is ANOTHER (type) — the base (default) combo mounts without it (antd Alert)",
+      "why": "Two props factor one part. If the presence set does not factor, the refusal must name it; a base-hidden part that never restores is FC-BASE-HIDDEN-RESTORE. With NO prop space in this fixture the part is simply absent at base and present in CSS only behind a class the fixture never mounts — the engine must either carry nothing and say nothing (no phantom) or name the absent part. The observable below is the VISIBLE sibling: it must carry, and no phantom glyph part may appear beside it (P2 exam S3).",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.a.tokens.color",
+      "observable": {
+        "part": "a",
+        "channel": "color",
+        "capturedValue": "rgba(0, 0, 0, 0.88)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the message text is real ink; the never-mounted icon must not be drawn as a phantom 0-size part"
       }
     },
     {

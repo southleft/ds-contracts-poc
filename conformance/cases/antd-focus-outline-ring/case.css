@@ -1,0 +1,2 @@
+[data-cf="antd-focus-outline-ring"] { display: inline-flex; align-items: center; background: rgb(22, 119, 255); color: rgb(255, 255, 255); border: 1px solid transparent; border-radius: 6px; padding: 4px 15px; outline: 0 solid transparent; }
+[data-cf="antd-focus-outline-ring"]:focus-visible { outline: 3px solid rgb(145, 202, 255); outline-offset: 1px; }

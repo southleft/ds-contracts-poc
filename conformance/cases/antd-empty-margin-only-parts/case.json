@@ -1,0 +1,18 @@
+{
+  "id": "antd-empty-margin-only-parts",
+  "feature": "geometry",
+  "construct": "span.inner > span.a(empty) + span.b(empty) \u2014 two EMPTY inline-block spans whose only facts are margin-inline-start/end (antd Switch inner-checked / inner-unchecked)",
+  "why": "An empty part with nothing but margins is the shape the anatomy walk is most likely to drop as a non-part (no text, no paint, no size). First authored as REFUSED (\"margin is not a carried channel\") \u2014 wrong: the schema registers margin-left as DRAWN (the margin-box wrapper / sibling-gap itemSpacing lowering), and the first measurement carried it as a token on a part that still exists. The correction is recorded in parity/receipts/phase-2/ANTD-EXAM.md; the bar stands: never a vanished part (P2 exam S6).",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.inner.parts.a.tokens.margin-left",
+  "observable": {
+    "part": "a",
+    "channel": "margin-left",
+    "capturedValue": "24px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the margin-box wrapper lowering \u2014 an in-flow margin on an empty inline span draws as wrapper padding"
+  }
+}

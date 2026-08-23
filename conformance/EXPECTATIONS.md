@@ -16,13 +16,13 @@ repo it is simply absent from the denominator and scores 100%.
 
 | | |
 |---|---|
-| cases | **82** |
-| 🟢 pass | **79** |
+| cases | **90** |
+| 🟢 pass | **87** |
 | 🔴 red | **3** |
 | 🟡 yellow (UNSUPPORTED, never read) | **0** |
 | **UNSUPPORTED declared — THE RATCHET** | **18** · may only DECREASE without an explicit manifest edit |
 
-Declared dispositions: CARRIED 42 · LOWERED 4 · REFUSED 18 · UNSUPPORTED 18.
+Declared dispositions: CARRIED 49 · LOWERED 4 · REFUSED 19 · UNSUPPORTED 18.
 
 **A green gate here would mean the cases are too easy.** The point of the
 fixture is a measured frontier, and every red below is an open, named defect —
@@ -69,6 +69,9 @@ manifest.
 
 | | case | feature | construct | declared | measured | verdict |
 |---|---|---|---|---|---|---|
+| 🟢 | `antd-forwarded-root-attrs` | anatomy | `label > [input.sr-only + span.box] + span.text — the component forwards className/data-* to the HIDDEN input, not the visible label root (antd Checkbox/Radio)` | CARRIED | carried | PASS |
+| 🟢 | `antd-overlay-digit-depth-three` | anatomy | `sup(absolute, translate(50%,-50%)) > bdi > span > span.current — a count digit THREE levels deep in an absolutely positioned overlay, the deepest span carrying a transient class the classAllow grammar drops (antd Badge / rc-scroll-number)` | CARRIED | carried | PASS |
+| 🟢 | `antd-presence-times-axis-glyph` | anatomy | `a child part whose PRESENCE is one prop (showIcon) and whose paint is ANOTHER (type) — the base (default) combo mounts without it (antd Alert)` | CARRIED | carried | PASS |
 | 🔴 | `container-query` | at-rules | `@container (min-inline-size: 100px) { … }` | UNSUPPORTED | carried | UNDECLARED-CARRY |
 | 🔴 | `media-non-matching` | at-rules | `@media (min-width: 2000px) branch that does NOT match the pinned viewport` | UNSUPPORTED | carried | UNDECLARED-CARRY |
 | 🟢 | `color-hex` | color | `color: #1976d2 (authored as hex)` | CARRIED | carried | PASS |
@@ -90,6 +93,7 @@ manifest.
 | 🟢 | `mask-image` | effects | `mask-image: linear-gradient(...)` | UNSUPPORTED | refused, by name | PASS |
 | 🟢 | `mix-blend-mode` | effects | `mix-blend-mode: multiply` | UNSUPPORTED | refused, by name | PASS |
 | 🟢 | `accent-color` | forms | `accent-color: rebeccapurple on a native checkbox` | UNSUPPORTED | refused, by name | PASS |
+| 🟢 | `antd-empty-margin-only-parts` | geometry | `span.inner > span.a(empty) + span.b(empty) — two EMPTY inline-block spans whose only facts are margin-inline-start/end (antd Switch inner-checked / inner-unchecked)` | CARRIED | carried | PASS |
 | 🟢 | `aspect-ratio` | geometry | `aspect-ratio: 2 / 1` | CARRIED | carried | PASS |
 | 🟢 | `border-radius-px` | geometry | `border-radius: 6px` | CARRIED | carried | PASS |
 | 🟢 | `min-max-width` | geometry | `min-width / max-width in px` | CARRIED | carried | PASS |
@@ -123,11 +127,14 @@ manifest.
 | 🟢 | `grid-track-zero-value` | grid-tracks | `a 0px or 0fr track written to the canvas` | REFUSED | refused, by name | PASS |
 | 🟢 | `grid-tracks-mixed-fractional` | grid-tracks | `grid-template-columns: 33.5px 2.5fr 1fr (mixed list, fractional values)` | CARRIED | carried | PASS |
 | 🟢 | `grid-two-column` | grid-tracks | `display: grid; grid-template-columns: 1fr 1fr` | CARRIED | carried | PASS |
+| 🟢 | `antd-focus-outline-ring` | interaction-states | `button.root:focus-visible { outline: 3px solid rgb(145, 202, 255); outline-offset: 1px } — the focus ring as an OUTLINE state delta on the ROOT (antd Button, Switch)` | CARRIED | carried | PASS |
+| 🟢 | `antd-focus-outline-ring-child-part` | interaction-states | `label > span > [input.sr-only:focus-visible + span.box { outline: 3px solid rgb(145, 202, 255) }] — the focus ring as an OUTLINE state delta on a NESTED PART (antd Checkbox-inner, Radio-inner)` | REFUSED | refused, by name | PASS |
 | 🟢 | `nonpainting-text-display-none` | invariant | `a NON-PAINTING element carrying text (display: none)` | CARRIED | carried | PASS |
 | 🟢 | `nonpainting-text-visibility-hidden` | invariant | `a NON-PAINTING element carrying text (visibility: hidden)` | REFUSED | refused, by name | PASS |
 | 🔴 | `stage-box-equal` | invariant | `a captured box exactly equal to the STAGE box (100% × 100%)` | REFUSED | carried | UNDECLARED-CARRY |
 | 🟢 | `flex-gap` | layout | `column-gap / row-gap in px` | CARRIED | carried | PASS |
 | 🟢 | `grid-2d` | layout | `display: grid + grid-template-columns: 1fr 1fr (children AUTO-PLACED)` | CARRIED | carried | PASS |
+| 🟢 | `antd-part-transition-channel` | motion | `.cf-a { transition: background-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) } — a transition declared on a CHILD PART, not the root (antd's `motionDurationMid` on every interactive part)` | CARRIED | carried | PASS |
 | 🟢 | `transition-channel` | motion | `transition: background-color 200ms ease` | CARRIED | carried | PASS |
 | 🟢 | `position-absolute-insets` | position | `position: absolute + top/left insets` | CARRIED | carried | PASS |
 | 🟢 | `position-fixed` | position | `position: fixed` | REFUSED | refused, by name | PASS |
@@ -143,6 +150,7 @@ manifest.
 | 🟢 | `shadow-root-closed` | shadow-dom | `a custom element with a CLOSED shadow root` | UNSUPPORTED | not read | PASS |
 | 🟢 | `svg-outside-grammar` | svg | `<svg> whose children are <circle> and <rect>` | REFUSED | refused, by name | PASS |
 | 🟢 | `text-overflow-ellipsis` | text | `text-overflow: ellipsis + overflow hidden + nowrap` | CARRIED | carried | PASS |
+| 🟢 | `antd-component-scoped-custom-property` | tokens | `.cf-root { --cf-scoped-pad: 15px } .cf-root .cf-a { padding-inline: var(--cf-scoped-pad) } — a token DECLARED ON THE COMPONENT ROOT (not :root) and consumed by a descendant (antd cssVar component tokens on `.antd.ant-btn`)` | CARRIED | carried | PASS |
 | 🟢 | `rotate-independent-property` | transform | `rotate: 15deg (the INDEPENDENT transform property)` | UNSUPPORTED | refused, by name | PASS |
 | 🟢 | `transform-scale-rotate` | transform | `transform: rotate(15deg) scale(1.2)` | REFUSED | refused, by name | PASS |
 | 🟢 | `em-relative-padding` | units | `padding: 1.5em against a 12px font-size` | CARRIED | carried | PASS |
