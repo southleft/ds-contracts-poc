@@ -42,6 +42,7 @@ const ROOT = process.cwd();
 const PACKAGES = [
   "packages/cli",
   "packages/schema",
+  "packages/core",
   "packages/emitter-web-components",
 ];
 const sha = (b) => createHash("sha256").update(b).digest("hex");

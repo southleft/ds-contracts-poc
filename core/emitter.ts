@@ -1,19 +1,21 @@
 /**
- * The Emitter interface — the pluggability story, made a type.
+ * The built-in emitters + the registry, for the reference repo.
  *
- * A contract is the single source of truth; an emitter is ONE projection of
- * it. The four registered here prove the spread: scoped-CSS React (the
- * shipping generator), static HTML+CSS (no build step), inline-styles React
- * (no token pipeline), and the Figma sync script (the canvas itself is just
- * another emit target). A new surface = a new pure function over the same
- * contract — nothing upstream changes.
+ * The Emitter/EmitterCtx/EmittedFile shapes and the registry itself
+ * (emitters, emitterByName, getEmitters, registerEmitter) moved to
+ * packages/core/src/emitter.ts (@ds-contracts/core) so a plugin emitter built
+ * outside this repo types against the SAME contract the CLI enforces. This
+ * module re-exports them (every `../core/emitter.js` import keeps working)
+ * and registers the four built-ins — scoped-CSS React (the shipping
+ * generator), static HTML+CSS (no build step), inline-styles React (no token
+ * pipeline), and the Figma sync script (the canvas itself is just another
+ * emit target) — into that registry, in their load-bearing order, at load.
  *
  * Every emitter is pure (contract + ctx in, file texts out) and browser-
  * importable. Only `react` is wired into `npm run generate`; its output is
  * byte-guarded by evals/golden.json. The others are receipted by
  * core/emitters-check.ts.
  */
-import type { Contract } from '../scripts/contract-schema.js';
 import type { TokenTreeInput } from './tokens.js';
 import { tokenInventoryFromJson } from './tokens.js';
 import { emitReact } from './emit-react.js';
@@ -21,36 +23,17 @@ import { emitHtml } from './emit-html.js';
 import { emitReactInline } from './emit-react-inline.js';
 import { emitFigmaScript } from './emit-figma-script.js';
 import { kebab } from '../extract/types.js';
+import { registerEmitter, type Emitter } from '../packages/core/src/emitter.js';
 
-export interface EmittedFile {
-  /** Suggested file name (relative), e.g. "Badge.tsx", "badge.html". */
-  path: string;
-  contents: string;
-}
-
-/** Everything any emitter may need — data only, no paths. */
-export interface EmitterCtx {
-  /** Parsed DTCG token trees (see core/tokens.ts TokenTreeInput). */
-  tokens: TokenTreeInput;
-  /** Icon asset name → SVG markup. */
-  icons: Map<string, string>;
-  /** Every known contract by id — composition refs resolve through it. */
-  contracts: Map<string, Contract>;
-  /** figma-script: overrides the anchor file key in the WRONG FILE guard. */
-  fileKey?: string;
-  /** figma-script: minted provisional tokens (`imported.*` DTCG tree) — the
-   *  script gains a preamble that upserts them as Figma variables, so it runs
-   *  in files that never synced them. Absent/empty → no preamble. */
-  mintedTokens?: Record<string, unknown>;
-  /** react-inline: token resolution mode (default 'light'). */
-  mode?: 'light' | 'dark';
-}
-
-export interface Emitter {
-  name: string;
-  label: string;
-  emit(contract: Contract, ctx: EmitterCtx): EmittedFile[];
-}
+export {
+  emitterByName,
+  emitters,
+  getEmitters,
+  registerEmitter,
+  type EmittedFile,
+  type Emitter,
+  type EmitterCtx,
+} from '../packages/core/src/emitter.js';
 
 const inventoryOf = (t: TokenTreeInput) =>
   tokenInventoryFromJson([t.primitives, t.semantic, t.light, t.dark]);
@@ -121,42 +104,8 @@ export const figmaScriptEmitter: Emitter = {
   },
 };
 
-/** The LIVE registry. `emitters` keeps its exported name and identity (the
- *  four built-ins, in their load-bearing order) — registerEmitter() appends
- *  to the SAME array, so every consumer that iterates `emitters` generically
- *  (playground tabs, emitters-check, browser-check) sees plugin emitters
- *  without edits. */
-export const emitters: Emitter[] = [reactEmitter, htmlEmitter, reactInlineEmitter, figmaScriptEmitter];
-export const emitterByName = new Map(emitters.map((e) => [e.name, e]));
-
-/** Registry snapshot — same live contents as `emitters`, copied so callers
- *  cannot mutate the registry by accident. */
-export const getEmitters = (): Emitter[] => [...emitters];
-
-/** Register a plugin emitter (CLI `--emitter <module>`, future
- *  @ds-contracts/emitter-* packages). Refuses by name: a missing/invalid
- *  shape or a name collision (including the four built-ins) never silently
- *  shadows an existing projection. */
-export function registerEmitter(emitter: Emitter): Emitter {
-  if (!emitter || typeof emitter !== 'object') {
-    throw new Error('registerEmitter: not an Emitter object');
-  }
-  const { name, label, emit } = emitter;
-  if (typeof name !== 'string' || name.trim() === '') {
-    throw new Error('registerEmitter: emitter.name must be a non-empty string');
-  }
-  if (typeof label !== 'string' || label.trim() === '') {
-    throw new Error(`registerEmitter: emitter "${name}" needs a human-readable label`);
-  }
-  if (typeof emit !== 'function') {
-    throw new Error(`registerEmitter: emitter "${name}" has no emit(contract, ctx) function`);
-  }
-  if (emitterByName.has(name)) {
-    throw new Error(
-      `registerEmitter: an emitter named "${name}" is already registered — names are identities, pick another`,
-    );
-  }
-  emitters.push(emitter);
-  emitterByName.set(name, emitter);
-  return emitter;
-}
+/** The four built-ins register FIRST — in this order — so `emitters` reads
+ *  react, html, react-inline, figma-script before any plugin appends. The
+ *  registry refuses a second registration by name, so importing this module
+ *  twice through different paths would refuse loudly rather than shadow. */
+for (const e of [reactEmitter, htmlEmitter, reactInlineEmitter, figmaScriptEmitter]) registerEmitter(e);

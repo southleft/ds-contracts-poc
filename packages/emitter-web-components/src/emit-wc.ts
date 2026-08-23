@@ -77,13 +77,13 @@ import {
   generateCss,
   isArrayType,
   isEnum,
+  kebab,
   numberProps,
   rootElementsOf,
   textProps,
   UA_MARGIN_ELEMENTS,
   validateContract,
-} from '../../../core/emit-react.js';
-import { kebab } from '../../../extract/types.js';
+} from '@ds-contracts/core';
 
 // ---------------------------------------------------------------------------
 // Naming

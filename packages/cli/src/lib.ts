@@ -15,8 +15,7 @@
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { ContractSchema, type Contract } from '../../schema/src/index.js';
-import type { EmitterCtx } from '../../../core/emitter.js';
-import { flattenTokens, type TokenTreeInput } from '../../../core/tokens.js';
+import { flattenTokens, type EmitterCtx, type TokenTreeInput } from '@ds-contracts/core';
 
 // ---------------------------------------------------------------------------
 // Argument parsing

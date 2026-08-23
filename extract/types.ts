@@ -232,11 +232,9 @@ export const isEventCallbackName = (name: string): boolean =>
 export const normalizeName = (s: string): string =>
   s.toLowerCase().replace(/[^a-z0-9]/g, "");
 
-export const kebab = (s: string): string =>
-  s
-    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
-    .replace(/[\s_]+/g, "-")
-    .toLowerCase();
+// kebab's SOURCE is packages/core/src/naming.ts (@ds-contracts/core) — the
+// one spelling every emitter, in or out of this repo, must share.
+export { kebab } from "../packages/core/src/naming.js";
 
 export const titleCase = (s: string): string =>
   s

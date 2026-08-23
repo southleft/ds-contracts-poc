@@ -23,8 +23,23 @@ import path from 'node:path';
 const here = path.dirname(fileURLToPath(import.meta.url));
 const pkg = JSON.parse(readFileSync(path.join(here, 'package.json'), 'utf8'));
 
+// @ds-contracts/core is bundled IN from its in-repo SOURCE (never dist, never
+// the workspace link) — the same bytes the published tarball is built from,
+// with no build-order dependency and no stale-dist hazard. Plugin emitters
+// resolve the bare specifier from their own node_modules; the CLI registers
+// the Emitter objects they export, so registry identity never crosses.
+// @ds-contracts/schema rides the same rule: core's analysis modules import it
+// by bare specifier (value imports — walkAnatomy, TOKEN_CHANNELS, …), and the
+// alias keeps that ONE Zod document in the bundle rather than a second copy
+// from packages/schema/dist.
+const CORE_ALIAS = {
+  '@ds-contracts/core': path.join(here, '..', 'core', 'src', 'index.ts'),
+  '@ds-contracts/schema': path.join(here, '..', 'schema', 'src', 'index.ts'),
+};
+
 const shared = {
   bundle: true,
+  alias: CORE_ALIAS,
   platform: 'node',
   format: 'esm',
   target: 'node20',

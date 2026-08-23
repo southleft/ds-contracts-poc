@@ -356,6 +356,15 @@ function devApiPlugin(): Plugin {
 export default defineConfig({
   root: dashboardRoot,
   plugins: [react(), tailwindcss(), devApiPlugin()],
+  resolve: {
+    // Vite does not read tsconfig `paths`: pin the published-package
+    // specifiers to their in-repo SOURCE (the dashboard reaches core/index.ts
+    // → packages/core/src → @ds-contracts/schema), never packages/*/dist.
+    alias: {
+      '@ds-contracts/core': resolve(repoRoot, 'packages', 'core', 'src', 'index.ts'),
+      '@ds-contracts/schema': resolve(repoRoot, 'packages', 'schema', 'src', 'index.ts'),
+    },
+  },
   server: {
     port: 5180,
     fs: {

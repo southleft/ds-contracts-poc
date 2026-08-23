@@ -59,7 +59,7 @@ import {
 import {
   assertContractProvenance,
   type ProvenancedContract,
-} from "../../../../core/contract-provenance.js";
+} from "@ds-contracts/core";
 import { emitterByName, getEmitters } from "../../../../core/emitter.js";
 import { generateComponents } from "../../../../scripts/generate-components.js";
 import {

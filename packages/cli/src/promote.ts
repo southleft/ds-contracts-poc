@@ -55,12 +55,12 @@ import {
   writeFileSync,
 } from "node:fs";
 import path from "node:path";
-import { validateContract } from "../../../core/emit-react.js";
 import {
   assertContractProvenance,
   revisionOf,
+  validateContract,
   type ProvenancedContract,
-} from "../../../core/contract-provenance.js";
+} from "@ds-contracts/core";
 import { promoteStaticArtifact } from "../../../extract/static-promotion.js";
 
 // ---------------------------------------------------------------------------

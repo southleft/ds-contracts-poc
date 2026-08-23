@@ -2318,7 +2318,9 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       let r = run(process.execPath, ['scripts/core-browser-check.mjs']);
       if (r.status !== 0 || !r.out.includes('no node globals'))
         throw new Error(`Browser check failed on a clean tree:\n${r.out}`);
-      replaceInFile('core/tokens.ts',
+      // 2026-08-22: core/tokens.ts is a re-export shim since @ds-contracts/core
+      // slice 1; the body lives in packages/core/src/tokens.ts.
+      replaceInFile('packages/core/src/tokens.ts',
         'export function collectTokenPaths',
         "import { readFileSync } from 'node:fs';\nvoid readFileSync;\nexport function collectTokenPaths");
       r = run(process.execPath, ['scripts/core-browser-check.mjs']);
