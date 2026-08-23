@@ -329,3 +329,16 @@ now stamps the sparse State matrix it actually drew, and the reader holds the
 dump to that declaration. A set nobody declared is still held to a full
 Cartesian. Generating React from that proposal is a preview of the recovery.
 The development output remains `generate` from the authored contracts above.
+
+The no-plugin twin, `npm run extract:figma:rest -- <figma-url>` (a
+`FIGMA_TOKEN`, REST GET only), writes the same dump shape — including the
+mapper's receipts as `_degradations`, so propose surfaces every named loss
+instead of leaving it on a terminal. One thing that route cannot read without
+your help: variable names and modes need the token's **`file_variables:read`**
+scope. A token minted without it gets a 403 that the CLI now reports as what
+it is — a missing scope with a one-line fix (`regenerate the token with
+file_variables:read`) — on stderr, in `_provenance.variables`, and in
+`figma-proposals.md`; it is not an "Enterprise" limit, and a 403 naming no
+scope (plan tier UNVERIFIED) or a network failure is named separately. With
+the scope, the dump carries `_variables` and propose writes
+`captured.dtcg.json` exactly as it does for a plugin dump.

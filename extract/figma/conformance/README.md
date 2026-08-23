@@ -15,7 +15,14 @@ be measured in advance instead of discovered one Figma kit at a time.*
   response, mapped through the real `extract/figma/rest/map.ts` (the Journey A
   CLI's own transport); the mapper's MapReport joins the naming union exactly
   as the CLI prints it, so a fact the mapper drops without a receipt is
-  measured as SILENT here, not as an absence of the dump grammar. One SMALL, single-purpose case per construct:
+  measured as SILENT here, not as an absence of the dump grammar. A REST case
+  may also carry `_variablesResponse` (a `/variables/local` body) or
+  `_variablesRefusal` (`{ status, body }`, run through the real
+  `classifyVariablesRefusal`) beside `nodes`, so the variables channel —
+  `_variables` written, or its absence named BY CAUSE (scope / plan-or-unknown
+  / network) — is measured too; the mapper's receipts enter the naming union
+  ONLY through the dump's `_degradations` (a loss named on stderr alone is
+  SILENT here). One SMALL, single-purpose case per construct:
   auto-layout forms, paints, strokes, effects, text, radii, parametric decor
   shapes, absolute placement, variant axes (enum/bool/state/theme), nested
   instances, slots, spacers, wrapper artifacts, sparse presence,
@@ -84,9 +91,12 @@ tsx extract/figma/conformance/run.ts --probe <id> # naming union + contract (aut
   close that gap and turn the capture-boundary cases' hand-authored
   `_degradations` into measured facts. Until it exists, that gap is this
   fixture's own declared fidelity limit.
-- **REST-mapper parity.** The same cases could feed
-  `extract/figma/rest/map.ts` to measure the REST capture surface against the
-  plugin surface.
+- **REST-mapper parity.** The `.rest.json` boundary measures the mapper per
+  construct; feeding the SAME construct through both boundaries and diffing
+  the two dumps (plugin vs REST capture surface) is not done yet.
+- **The HTTP itself.** `_variablesRefusal` replays a recorded body through the
+  classifier; `fetch.ts` talking to api.figma.com is exercised only by
+  `npm run figma:rest:refusal:check` (injected fetch) and live runs.
 - **Per-instance override machinery.** `instanceOverrides` /
   `sessionClaimedIds` opt-in paths are exercised only in their classic
   (absent) form here; a session-shaped fixture (multiple dumps, accumulated

@@ -2,12 +2,16 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/token.contract.json (astryx.token v0.1.0)
  * Regenerate with: npm run generate
+ *
+ * DOM attrs OMITTED from HTMLAttributes<HTMLSpanElement> — the contract's own props claim these
+ * names, so the HTML attribute of the same name cannot be passed through ...rest:
+ *   color
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 import styles from './Token.module.css';
 
-export interface TokenProps extends HTMLAttributes<HTMLSpanElement> {
+export interface TokenProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'color'> {
   /** Tag label. */
   label: string;
   /** The size of the tag. */

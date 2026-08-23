@@ -436,7 +436,7 @@ export function validateContract(
       }
       if (part.tokens && cssProp in part.tokens) {
         errors.push(
-          `${contract.id}: part "${name}" carries channel "${cssProp}" as BOTH a token binding and a literal — ambiguous, refused by name`,
+          `${contract.id}: part "${name}" carries channel "${cssProp}" as BOTH a token binding (${part.tokens[cssProp]}) and a literal ("${part.literals![cssProp]}") — ambiguous, refused by name: keep ONE of tokens.${cssProp} / literals.${cssProp} (which wins is the contract author's choice; the emitter will not pick)`,
         );
       }
     }

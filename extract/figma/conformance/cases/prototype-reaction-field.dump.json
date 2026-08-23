@@ -1,0 +1,72 @@
+{
+  "_provenance": {
+    "fileKey": null,
+    "extractedAt": "2026-08-23",
+    "note": "Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal — hand-authored plugin-shape twin of rest-prototype-reaction (the dump v1.31 spelling dump.plugin.js emits for this construct).",
+    "dumpVersion": "1.31"
+  },
+  "Case": {
+    "setName": "Case",
+    "type": "COMPONENT",
+    "nodeId": "1:14",
+    "variants": [
+      {
+        "name": "Case",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 64,
+          "height": 24
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            4,
+            12,
+            4,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "fill": {
+          "hex": "e6ebf2"
+        },
+        "reactions": [
+          {
+            "trigger": "ON_HOVER",
+            "action": "CHANGE_TO",
+            "destination": "1:99",
+            "transition": "SMART_ANIMATE",
+            "duration": 300
+          }
+        ],
+        "children": [
+          {
+            "name": "t",
+            "type": "TEXT",
+            "text": {
+              "characters": "Case",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "lineHeight": 16,
+              "fontFamily": "Inter"
+            },
+            "fill": {
+              "hex": "1a1a1a"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "_degradations": [
+    {
+      "code": "prototype-reactions-unsupported",
+      "nodePath": "Case:Case",
+      "message": "prototype reaction(s) ON_HOVER→CHANGE_TO — dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+    }
+  ]
+}

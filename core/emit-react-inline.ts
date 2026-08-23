@@ -59,6 +59,7 @@ import {
   ELEMENT_META,
   holderDeclaresPosition,
 } from './emit-react.js';
+import { reactOmittedNote, reactPropsBase } from '../packages/core/src/prop-collision.js';
 
 export interface EmitReactInlineCtx {
   /** Parsed DTCG trees — literals resolve through primitives + default brand
@@ -500,6 +501,11 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     : ELEMENT_META[contract.semantics.element];
   const slots = namedSlots(contract);
   const texts = namedTextProps(contract);
+  // PROP-NAME COLLISIONS — the same rule as the CSS-Module emitter
+  // (packages/core/src/prop-collision.ts): colliding DOM attrs are OMITTED from the base
+  // attrs type and named in the header. Byte-identical when nothing collides.
+  const { base: propsBase, omitted: omittedAttrs } = reactPropsBase(contract, meta);
+  const omittedNote = reactOmittedNote(omittedAttrs, meta);
   const toggledCodeProps = new Set(events.filter((e) => e.toggles).map((e) => codePropOf(e.toggles!.prop)));
 
   const propLines: string[] = [];
@@ -1000,7 +1006,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
  * Emitted by core/emit-react-inline.ts — token references RESOLVED to literals.
  * Resolution mode: ${mode} (brand: default).
  * MULTI-ROOT composite — ${topRoots(contract).length} top-level roots (${topRoots(contract).map(([n]) => n).join(', ')})
- * render as SIBLINGS in a Fragment; there is no single wrapping element.${canvasOnlyNote}${disabledSubstNote}
+ * render as SIBLINGS in a Fragment; there is no single wrapping element.${canvasOnlyNote}${disabledSubstNote}${omittedNote}
  */
 import type { ${typeImports} } from 'react';
 ${depImports}${depImports ? '\n' : ''}
@@ -1009,7 +1015,7 @@ ${iconsConst}${keyframesConst}const S: Record<string, CSSProperties> = ${JSON.st
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
 const V: Record<string, CSSProperties> = ${JSON.stringify(variantFlat, null, 2)};
 
-export interface ${name}Props extends ${meta.attrs}<${meta.el}> {
+export interface ${name}Props extends ${propsBase} {
 ${propLines.join('\n')}
 }
 
@@ -1035,7 +1041,7 @@ export function ${name}({ ${destructured.join(', ')} }: ${name}Props) {
  * Fidelity: :hover/:focus-visible state tokens are not expressible as inline
  * styles and are omitted; ROOT disabled-state tokens apply via the disabled
  * prop; PART-level state overrides (Part.states, v13) are omitted — the same
- * declared limit as the hover states (state-selected descendant styling).${overlapNote}${repeatNote}${canvasOnlyNote}${disabledSubstNote}
+ * declared limit as the hover states (state-selected descendant styling).${overlapNote}${repeatNote}${canvasOnlyNote}${disabledSubstNote}${omittedNote}
  */
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
 import type { ${typeImports} } from 'react';
@@ -1045,7 +1051,7 @@ ${iconsConst}${roleMapConst}${elementMapConst}${keyframesConst}const S: Record<s
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
 const V: Record<string, CSSProperties> = ${JSON.stringify(variantFlat, null, 2)};
 ${Object.keys(disabledStyle).length > 0 ? `\nconst DISABLED_STYLE: CSSProperties = ${JSON.stringify(disabledStyle)};\n` : ''}
-export interface ${name}Props extends ${meta.attrs}<${meta.el}> {
+export interface ${name}Props extends ${propsBase} {
 ${propLines.join('\n')}
 }
 

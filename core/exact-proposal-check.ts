@@ -2657,6 +2657,834 @@ check(
     CAPTURED_VARIABLES_ABSENT_RECEIPT.includes("no `_variables`"),
 );
 
+// ---------------------------------------------------------------------------
+// PHASE 2 EXAM (parity/receipts/phase-2/FIGMA-DS-EXAM.md, 2026-08-22) — the
+// canvas→code constructs the hand-built Figma DS kit found SILENT or
+// WRONG-NAMED in the inverter. Each section is one construct; the bar is
+// SILENT = 0: every fact below is either CARRIED into the contract or NAMED
+// (one note per node+channel), and the pin says which.
+// ---------------------------------------------------------------------------
+
+const reviewable = {
+  ...baseOpts,
+  mintUnbound: true,
+  projectionMode: "reviewable-inversion" as const,
+};
+const row = (
+  extra: Partial<DumpNode> = {},
+  children: DumpNode[] = [],
+): Pick<DumpNode, "layout" | "children"> & Partial<DumpNode> => ({
+  layout: {
+    mode: "HORIZONTAL",
+    primary: "CENTER",
+    counter: "CENTER",
+    spacing: 4,
+    padding: [4, 12, 4, 12],
+    primarySizing: "AUTO",
+    counterSizing: "AUTO",
+  } satisfies DumpLayout,
+  children,
+  ...extra,
+});
+const label = (extra: Partial<DumpNode["text"]> = {}): DumpNode => ({
+  name: "t",
+  type: "TEXT",
+  fill: { hex: "1a1a1a" },
+  text: { characters: "Case", fontSize: 12, fontStyle: "Medium", ...extra },
+});
+const p2Set = (
+  name: string,
+  variants: DumpNode[],
+  extra: Partial<DumpSet> = {},
+): DumpSet => ({
+  setName: name,
+  type: "COMPONENT_SET",
+  variants,
+  ...extra,
+});
+const rootOf = (r: ReturnType<typeof proposeFromDump>) =>
+  (r.contract as { anatomy: { root: Record<string, unknown> } }).anatomy.root;
+const partOf = (r: ReturnType<typeof proposeFromDump>, key: string) =>
+  ((rootOf(r).parts ?? {}) as Record<string, Record<string, unknown>>)[key];
+const mintedPaths = (r: ReturnType<typeof proposeFromDump>) =>
+  (r.mintedTokens?.entries ?? []).map((e) => e.ref);
+
+console.log(
+  "\n37. An ABSENT root fill is the drawn transparent box, not a capture gap (Button/Badge background)",
+);
+{
+  const r = proposeFromDump(
+    p2Set("P2Fill", [
+      {
+        name: "Variant=Info",
+        type: "COMPONENT",
+        ...row({ fill: { hex: "8f8781" } }, [label()]),
+      },
+      { name: "Variant=Ghost", type: "COMPONENT", ...row({}, [label()]) },
+    ]),
+    reviewable,
+  );
+  const tokens = rootOf(r).tokens as Record<string, string>;
+  check(
+    "the root background-color channel carries for the whole axis (Info mints its colour, Ghost mints #00000000)",
+    tokens["background-color"] ===
+      "{imported.p2-fill.root.background-color.{variant}}" &&
+      (r.mintedTokens?.entries ?? []).some(
+        (e) =>
+          e.ref === "{imported.p2-fill.root.background-color.ghost}" &&
+          e.value === "#00000000",
+      ) &&
+      (r.mintedTokens?.entries ?? []).some(
+        (e) =>
+          e.ref === "{imported.p2-fill.root.background-color.info}" &&
+          e.value === "#8f8781",
+      ),
+  );
+  check(
+    "the absence is NAMED as a drawn fact and the old UNBOUND-and-dropped receipt is gone",
+    r.notes.some((n) =>
+      /P2Fill:root fill: drawn in 1\/2 variant\(s\) — the ABSENT variants mint #00000000/.test(
+        n,
+      ),
+    ) && !r.notes.some((n) => /UNBOUND P2Fill:root fill/.test(n)),
+  );
+}
+
+console.log(
+  "\n38. A state override TO no fill is an override to transparent, never 'cannot unset' (Button hover plane)",
+);
+{
+  const r = proposeFromDump(
+    p2Set("P2State", [
+      {
+        name: "Variant=Info, State=Default",
+        type: "COMPONENT",
+        ...row({ fill: { hex: "8f8781" } }, [label()]),
+      },
+      {
+        name: "Variant=Ghost, State=Default",
+        type: "COMPONENT",
+        ...row({}, [label()]),
+      },
+      {
+        name: "Variant=Info, State=Hover",
+        type: "COMPONENT",
+        ...row({ fill: { hex: "dddad7" } }, [label()]),
+      },
+      {
+        name: "Variant=Ghost, State=Hover",
+        type: "COMPONENT",
+        ...row({}, [label()]),
+      },
+    ]),
+    reviewable,
+  );
+  const states = rootOf(r).states as
+    Record<string, Record<string, string>> | undefined;
+  check(
+    "base AND hover background-color carry per variant (ghost = #00000000 on both planes)",
+    (rootOf(r).tokens as Record<string, string>)["background-color"] ===
+      "{imported.p2-state.root.background-color.{variant}}" &&
+      states?.hover?.["background-color"] ===
+        "{imported.p2-state.state-hover.background-color.{variant}}" &&
+      (r.mintedTokens?.entries ?? []).some(
+        (e) =>
+          e.ref === "{imported.p2-state.state-hover.background-color.ghost}" &&
+          e.value === "#00000000",
+      ),
+  );
+  check(
+    "the 'a state override cannot unset a channel' refusal no longer fires for the fill",
+    !r.notes.some((n) => /fill differs in state "hover" but is absent/.test(n)),
+  );
+}
+
+console.log(
+  "\n39. The set's DECLARED axis default wins over tree order (Badge Size, Chip Dismissible, Heading Tag/Variant)",
+);
+{
+  const r = proposeFromDump(
+    p2Set(
+      "P2Default",
+      [
+        {
+          name: "Size=Sm",
+          type: "COMPONENT",
+          ...row({ fill: { hex: "b7e9c5" } }, [label()]),
+        },
+        {
+          name: "Size=Lg",
+          type: "COMPONENT",
+          ...row({ fill: { hex: "bfdfff" } }, [label()]),
+        },
+      ],
+      {
+        propertyDefinitions: {
+          Size: {
+            type: "VARIANT",
+            defaultValue: "Lg",
+            variantOptions: ["Sm", "Lg"],
+          },
+        },
+      },
+    ),
+    reviewable,
+  );
+  const size = (
+    r.contract.props as Array<{
+      name: string;
+      default?: unknown;
+      type: { enum?: string[] };
+    }>
+  ).find((p) => p.name === "size");
+  check(
+    "prop default is the declared 'lg' and the enum lists it first (tree order kept for the rest)",
+    size?.default === "lg" &&
+      JSON.stringify(size?.type.enum) === JSON.stringify(["lg", "sm"]),
+  );
+  check(
+    "the base plane follows the declared default (the lg colour is the base token, sm the deviation) and the move is NAMED",
+    (r.mintedTokens?.entries ?? []).some(
+      (e) =>
+        e.ref === "{imported.p2-default.root.background-color.lg}" &&
+        e.value === "#bfdfff",
+    ) &&
+      r.notes.some((n) =>
+        /prop `size`: the set's DECLARED default for "Size" is "Lg"/.test(n),
+      ),
+  );
+  const stray = proposeFromDump(
+    p2Set(
+      "P2Stray",
+      [
+        { name: "Size=Sm", type: "COMPONENT", ...row({}, [label()]) },
+        { name: "Size=Lg", type: "COMPONENT", ...row({}, [label()]) },
+      ],
+      {
+        propertyDefinitions: {
+          Size: {
+            type: "VARIANT",
+            defaultValue: "Xl",
+            variantOptions: ["Sm", "Lg", "Xl"],
+          },
+        },
+      },
+    ),
+    reviewable,
+  );
+  const straySize = (
+    stray.contract.props as Array<{ name: string; default?: unknown }>
+  ).find((p) => p.name === "size");
+  check(
+    "a declared default that names no drawn variant is NAMED and the first drawn variant stands",
+    straySize?.default === "sm" &&
+      stray.notes.some((n) =>
+        /declared default for "Size" is "Xl" .* but no variant draws that value/.test(
+          n,
+        ),
+      ),
+  );
+}
+
+console.log(
+  "\n40. A native SLOT's FRAME children are design-time content — NAMED with their subtree, never dropped (Card Content)",
+);
+{
+  const r = proposeFromDump(
+    p2Set("P2Slot", [
+      {
+        name: "P2Slot",
+        type: "COMPONENT",
+        ...row({ fill: { hex: "ffffff" } }, [
+          {
+            name: "s",
+            type: "SLOT",
+            propRefs: { slotContentId: "Content" },
+            ...row({}, [
+              {
+                name: "a",
+                type: "FRAME",
+                ...row({}, [
+                  {
+                    name: "Chip",
+                    type: "INSTANCE",
+                    instanceOf: "Chip",
+                    instanceKey: "chipkey1",
+                    bbox: { width: 48, height: 20 },
+                    fill: { hex: "dddddd" },
+                  },
+                  label(),
+                ]),
+              },
+            ]),
+          },
+        ]),
+      },
+    ]),
+    reviewable,
+  );
+  const slot = partOf(r, "s")?.slot as Record<string, unknown> | undefined;
+  check(
+    "the slot part proposes with no invented defaultContent and the FRAME child is named with everything under it",
+    slot !== undefined &&
+      slot.defaultContent === undefined &&
+      r.notes.some((n) =>
+        /native slot "s" drawn content includes FRAME "a" \[INSTANCE "Chip" of "Chip", TEXT "t" "Case"\]/.test(
+          n,
+        ),
+      ),
+  );
+}
+
+console.log(
+  "\n41. A GRID root spells its height ONCE (Section Header / Footer blocked the whole generate batch)",
+);
+{
+  const r = proposeFromDump(
+    p2Set("P2Grid", [
+      {
+        name: "P2Grid",
+        type: "COMPONENT",
+        bbox: { width: 1296, height: 95 },
+        maxWidth: 1296,
+        fillWidth: true,
+        layout: {
+          mode: "GRID",
+          padding: [0, 0, 0, 0],
+          primarySizing: "FIXED",
+          counterSizing: "AUTO",
+          grid: {
+            rows: [{ fit: true }],
+            columns: [{ fr: 1 }, { fr: 1 }],
+            rowGap: 24,
+            columnGap: 24,
+            flow: "row",
+          },
+        },
+        children: [
+          {
+            name: "a",
+            type: "FRAME",
+            ...row({ fill: { hex: "eeeeee" } }, [label()]),
+            cell: { row: 0, column: 0 },
+          },
+        ],
+      },
+    ]),
+    reviewable,
+  );
+  const root = rootOf(r);
+  check(
+    "height carries as the G8 literal fit-content only — no minted root height beside it",
+    (root.literals as Record<string, string> | undefined)?.height ===
+      "fit-content" &&
+      (root.tokens as Record<string, string> | undefined)?.height ===
+        undefined &&
+      !mintedPaths(r).some((p) => p === "{imported.p2-grid.root.height}"),
+  );
+  check(
+    "the FILL root width (spelled FIXED by the sizing mode) is named fluid, not minted; max-width carries the cap",
+    !mintedPaths(r).some((p) => p === "{imported.p2-grid.root.width}") &&
+      (root.tokens as Record<string, string> | undefined)?.["max-width"] ===
+        "{imported.p2-grid.root.max-width}" &&
+      r.notes.some((n) => /root width is FILL in every variant/.test(n)),
+  );
+}
+
+console.log(
+  "\n42. A nested instance's SLOT-typed prop value ({guid}) is dropped BY NAME, never a whole-set schema refusal (Card Grid)",
+);
+{
+  const guidNode: DumpNode = {
+    name: "Group",
+    type: "INSTANCE",
+    instanceOf: "Group",
+    instanceKey: "groupkey1",
+    bbox: { width: 48, height: 20 },
+    componentProperties: {
+      "Items#3:2": {
+        guid: { sessionID: -1, localID: -1 },
+      } as unknown as string,
+      Alignment: "Default",
+    },
+  };
+  const dump: DumpSet = p2Set("P2Guid", [
+    {
+      name: "P2Guid",
+      type: "COMPONENT",
+      ...row({ fill: { hex: "ffffff" } }, [guidNode, label()]),
+    },
+  ]);
+  const r = proposeFromDump(dump, reviewable);
+  check(
+    "the set proposes, the {guid} never reaches the contract, the scalar sibling prop still canonicalizes, and the drop is named per node+property",
+    r.contract.id === "ds.p2-guid" &&
+      !JSON.stringify(r.contract).includes("sessionID") &&
+      !JSON.stringify(r.contract).includes("{guid") &&
+      JSON.stringify(partOf(r, "Group")?.component).includes(
+        '"alignment":"default"',
+      ) &&
+      r.notes.some((n) =>
+        /P2Guid:P2Guid\/Group: applied prop "Items" on nested "Group" is a SLOT-typed value \(\{guid\}/.test(
+          n,
+        ),
+      ),
+  );
+  check(
+    "the caller's dump is not mutated (the strip runs on a private clone)",
+    typeof (
+      dump.variants[0].children![0].componentProperties as Record<
+        string,
+        unknown
+      >
+    )["Items#3:2"] === "object",
+  );
+}
+
+console.log(
+  "\n43. An EMPTY preferredValues list is an unconstrained swap by declaration, not 'not captured' (Chip/Toast Icon)",
+);
+{
+  const withDef = proposeFromDump(
+    p2Set(
+      "P2Swap",
+      [
+        {
+          name: "P2Swap",
+          type: "COMPONENT",
+          ...row({ fill: { hex: "ffffff" } }, [
+            {
+              name: "Icon",
+              type: "INSTANCE",
+              instanceOf: "Glyph",
+              instanceKey: "glyphkey1",
+              bbox: { width: 16, height: 16 },
+              propRefs: { mainComponent: "Icon" },
+            },
+            label(),
+          ]),
+        },
+      ],
+      {
+        propertyDefinitions: {
+          "Icon#7:2": { type: "INSTANCE_SWAP", defaultValue: "8:8" },
+        },
+      },
+    ),
+    reviewable,
+  );
+  check(
+    "a captured INSTANCE_SWAP definition with no preferredValues is named EMPTY/unconstrained; the retired 'not captured in dump v1' never fires",
+    withDef.notes.some((n) =>
+      /slot "Icon" INSTANCE_SWAP preferredValues is EMPTY \(\[\]\) — an UNCONSTRAINED swap/.test(
+        n,
+      ),
+    ) && !withDef.notes.some((n) => /not captured in dump v1/.test(n)),
+  );
+  const noDef = proposeFromDump(
+    p2Set("P2NoDef", [
+      {
+        name: "P2NoDef",
+        type: "COMPONENT",
+        ...row({ fill: { hex: "ffffff" } }, [
+          {
+            name: "Icon",
+            type: "INSTANCE",
+            instanceOf: "Glyph",
+            instanceKey: "glyphkey1",
+            bbox: { width: 16, height: 16 },
+            propRefs: { mainComponent: "Icon" },
+          },
+          label(),
+        ]),
+      },
+    ]),
+    reviewable,
+  );
+  check(
+    "with NO definition in the dump the note says the definition is missing (a read limit), never 'REST returns componentPropertyDefinitions EMPTY'",
+    noDef.notes.some((n) =>
+      /no propertyDefinitions entry for "Icon"/.test(n),
+    ) &&
+      !noDef.notes.some((n) =>
+        /REST returns componentPropertyDefinitions EMPTY/.test(n),
+      ),
+  );
+  const slotDef = proposeFromDump(
+    p2Set(
+      "P2SlotDef",
+      [
+        {
+          name: "P2SlotDef",
+          type: "COMPONENT",
+          ...row({ fill: { hex: "ffffff" } }, [
+            {
+              name: "Media",
+              type: "SLOT",
+              propRefs: { slotContentId: "Media" },
+              ...row({}, []),
+            },
+            label(),
+          ]),
+        },
+      ],
+      {
+        propertyDefinitions: {
+          "Media#7:1": {
+            type: "SLOT",
+            defaultValue: "",
+            preferredValues: [{ type: "COMPONENT_SET", key: "de1d1f4d" }],
+          },
+        },
+      },
+    ),
+    reviewable,
+  );
+  check(
+    "a SLOT definition's own preferredValues are read from propertyDefinitions when the producer did not fold them into swapPreferredValues (REST)",
+    slotDef.notes.some((n) =>
+      /slot "Media" preferredValues name 1 component key\(s\) with no in-scope contract \(de1d1f4d\)/.test(
+        n,
+      ),
+    ),
+  );
+}
+
+console.log(
+  "\n44. A FIXED auto-layout child FRAME/SLOT is FC-GEOMETRY-EXCLUDED — NAMED with the code, never minted, never silent (Button (contract) 20×20)",
+);
+{
+  const fixedBox = (name: string, type = "FRAME"): DumpNode => ({
+    name,
+    type,
+    layout: {
+      mode: "HORIZONTAL",
+      primary: "CENTER",
+      counter: "CENTER",
+      spacing: 0,
+      padding: [0, 0, 0, 0],
+      primarySizing: "FIXED",
+      counterSizing: "FIXED",
+    },
+    fill: { hex: "3366cc" },
+    children: [],
+  });
+  const r = proposeFromDump(
+    p2Set("P2Fixed", [
+      {
+        name: "P2Fixed",
+        type: "COMPONENT",
+        ...row({ fill: { hex: "ffffff" } }, [fixedBox("a"), label()]),
+      },
+    ]),
+    reviewable,
+  );
+  check(
+    "the child's drawn FIXED axes are named FC-GEOMETRY-EXCLUDED and nothing is minted for them",
+    r.notes.some((n) =>
+      /P2Fixed:root\/a: auto-layout FRAME child drawn FIXED on width \(FIXED in 1\/1 variant occurrence\(s\)\) and height .* — FC-GEOMETRY-EXCLUDED \(Option B\)/.test(
+        n,
+      ),
+    ) &&
+      !mintedPaths(r).some((p) =>
+        /imported\.p2-fixed\.a\.(width|height)/.test(p),
+      ),
+  );
+  const producerFixed = proposeFromDump(
+    p2Set("P2FixedSize", [
+      {
+        name: "P2FixedSize",
+        type: "COMPONENT",
+        ...row({ fill: { hex: "ffffff" } }, [
+          { ...fixedBox("a"), fixedSize: { width: 20, height: 20 } },
+          label(),
+        ]),
+      },
+    ]),
+    reviewable,
+  );
+  check(
+    "a producer's `fixedSize` on an AUTO-LAYOUT node is refused by the same name (the plugin never writes one there; non-auto-layout fixedSize still mints as before)",
+    producerFixed.notes.some((n) =>
+      /P2FixedSize:root\/a: auto-layout FRAME child drawn FIXED on width \(FIXED in 1\/1 variant occurrence\(s\); drawn 20px\) and height \(FIXED in 1\/1 variant occurrence\(s\); drawn 20px\) .* FC-GEOMETRY-EXCLUDED/.test(
+        n,
+      ),
+    ) &&
+      !mintedPaths(producerFixed).some((p) =>
+        /imported\.p2-fixed-size\.a\.(width|height)/.test(p),
+      ),
+  );
+}
+
+console.log(
+  "\n45. dump v1.31 — the fields the REST mapper must emit (types.ts) are consumed: carried where the grammar allows, NAMED where it does not",
+);
+{
+  const icon = (fill: string): DumpNode => ({
+    name: "Icon",
+    type: "INSTANCE",
+    instanceOf: "Glyph",
+    instanceKey: "glyphkey1",
+    bbox: { width: 16, height: 16 },
+    targetAspectRatio: { x: 16, y: 16 },
+    hostOverrides: [{ path: "Vector", fields: ["fills"], fill: { hex: fill } }],
+    fixedSwaps: { Icon: { id: "9:9", name: "Glyph", key: "glyphkey1" } },
+    componentProperties: { State: "Default" },
+  });
+  const box = (): DumpNode => ({
+    name: "box",
+    type: "FRAME",
+    fillHeight: true,
+    targetAspectRatio: { x: 1, y: 1 },
+    layout: {
+      mode: "HORIZONTAL",
+      primary: "CENTER",
+      counter: "CENTER",
+      spacing: 0,
+      padding: [0, 0, 0, 0],
+      primarySizing: "FIXED",
+      counterSizing: "FIXED",
+    },
+    fill: { hex: "3366cc" },
+    children: [],
+  });
+  const shadow = (): Partial<DumpNode> => ({
+    effectStyle: "shadow/md",
+    effectStyleKey: "effstylekey1",
+    effects: [
+      {
+        type: "DROP_SHADOW",
+        color: { hex: "000000", alpha: 0.1 },
+        offset: { x: 0, y: 4 },
+        radius: 8,
+        bound: { radius: "shadow/md/blur", color: "shadow/md/color" },
+      },
+    ],
+  });
+  const v131 = (
+    name: string,
+    extra: Partial<DumpNode>,
+    iconFill: string,
+  ): DumpNode => ({
+    name,
+    type: "COMPONENT",
+    bbox: { width: 120, height: 48 },
+    ...row(
+      {
+        layout: {
+          mode: "HORIZONTAL",
+          primary: "CENTER",
+          counter: "MIN",
+          spacing: 4,
+          padding: [4, 12, 4, 12],
+          primarySizing: "AUTO",
+          counterSizing: "FIXED",
+        },
+        ...extra,
+      },
+      [
+        icon(iconFill),
+        box(),
+        label({
+          fontStyle: "Bold",
+          fontFamily: "Manrope",
+          textAlign: "CENTER",
+        }),
+      ],
+    ),
+  });
+  const r = proposeFromDump(
+    p2Set("P2V131", [
+      v131(
+        "Variant=Primary, State=Default",
+        {
+          fill: { hex: "8f8781" },
+          itemReverseZIndex: true,
+          reactions: [
+            {
+              trigger: "ON_HOVER",
+              action: "CHANGE_TO",
+              destination: "1:99",
+              destinationName: "Variant=Primary, State=Hover",
+              transition: "SMART_ANIMATE",
+              duration: 300,
+            },
+          ],
+        },
+        "ffffff",
+      ),
+      v131("Variant=Ghost, State=Default", {}, "8f8781"),
+      v131(
+        "Variant=Primary, State=Hover",
+        { fill: { hex: "dddad7" }, ...shadow() },
+        "ffffff",
+      ),
+      v131("Variant=Ghost, State=Hover", { ...shadow() }, "8f8781"),
+    ]),
+    reviewable,
+  );
+  const t = partOf(r, "t");
+  const boxPart = partOf(r, "box");
+  check(
+    "fontFamily Manrope and textAlignHorizontal CENTER carry as declared font-family / text-align on the text part",
+    (t?.declared as Record<string, string> | undefined)?.["font-family"] ===
+      "Manrope" &&
+      (t?.declared as Record<string, string> | undefined)?.["text-align"] ===
+        "center",
+  );
+  check(
+    "fillHeight under a DEFINITE-height ROW parent whose siblings hug carries as the part literal height: 100%; its FIXED width is FC-GEOMETRY-EXCLUDED; its aspect lock is declared",
+    (boxPart?.literals as Record<string, string> | undefined)?.height ===
+      "100%" &&
+      (boxPart?.declared as Record<string, string> | undefined)?.[
+        "aspect-ratio"
+      ] === "1 / 1" &&
+      r.notes.some((n) =>
+        /P2V131:root\/box: auto-layout FRAME child drawn FIXED on width .* FC-GEOMETRY-EXCLUDED/.test(
+          n,
+        ),
+      ),
+  );
+  check(
+    "effect style identity and per-channel effect bindings are NAMED on the hover plane beside the carried box-shadow",
+    (rootOf(r).states as Record<string, Record<string, string>>).hover[
+      "box-shadow"
+    ] === "{imported.p2-v131.state-hover.box-shadow}" &&
+      r.notes.some((n) =>
+        /P2V131:root \(state hover\): effects ride the EFFECT STYLE "shadow\/md" \(key effstylekey1\)/.test(
+          n,
+        ),
+      ) &&
+      r.notes.some((n) =>
+        /P2V131:root \(state hover\): effect channel\(s\) bound to variables .*DROP_SHADOW radius=\{shadow\/md\/blur\}.*DROP_SHADOW color=\{shadow\/md\/color\}/.test(
+          n,
+        ),
+      ),
+  );
+  check(
+    "the ON_HOVER → CHANGE_TO reaction is NAMED with its target variant as the promoted State axis's preview wiring, and no event is invented",
+    r.notes.some((n) =>
+      /P2V131:root: prototype reaction\(s\) ON_HOVER → CHANGE_TO "Variant=Primary, State=Hover" \(1:99\); SMART_ANIMATE 300ms \[Variant=Primary\] — prototype-reactions-unsupported: the State axis carries/.test(
+        n,
+      ),
+    ) &&
+      !JSON.stringify(r.contract).includes("onClick") &&
+      !JSON.stringify(r.contract).includes("onHover"),
+  );
+  check(
+    "host fill overrides on the nested Icon are NAMED per variant with the colour; the fixed INSTANCE_SWAP is NAMED with the swapped component; the aspect lock on an instance is NAMED",
+    r.notes.some((n) =>
+      /P2V131:root\/Icon: host override\(s\) on nested "Glyph" internals — "Vector" fills = #ffffff in 1\/2 variant\(s\) \[Variant=Primary\]; "Vector" fills = #8f8781 in 1\/2 variant\(s\) \[Variant=Ghost\]/.test(
+        n,
+      ),
+    ) &&
+      r.notes.some((n) =>
+        /P2V131:root\/Icon: nested "Glyph" fixes INSTANCE_SWAP "Icon" = "Glyph" \(9:9, key glyphkey1\) in 2\/2 variant\(s\)/.test(
+          n,
+        ),
+      ) &&
+      r.notes.some((n) =>
+        /P2V131:root\/Icon: aspect-ratio lock 16 \/ 16 .* on a nested instance .* NAMED, not carried/.test(
+          n,
+        ),
+      ) &&
+      JSON.stringify(partOf(r, "Icon")?.component) ===
+        '{"id":"ds.glyph","props":{"state":"default"}}',
+  );
+  check(
+    "itemReverseZIndex is NAMED (render-inert, no carrier); the state plane's host overrides are named too (state groups never pass through buildPart)",
+    r.notes.some((n) =>
+      /P2V131:root: itemReverseZIndex is true in 1\/2 variant\(s\)/.test(n),
+    ) &&
+      r.notes.some((n) =>
+        /P2V131:root \(state hover\)\/Icon: host override\(s\) on nested "Glyph"/.test(
+          n,
+        ),
+      ),
+  );
+  const inter = proposeFromDump(
+    p2Set("P2Inter", [
+      {
+        name: "P2Inter",
+        type: "COMPONENT",
+        ...row({ fill: { hex: "ffffff" } }, [
+          label({ fontFamily: "Inter", textAlign: "LEFT" }),
+        ]),
+      },
+    ]),
+    reviewable,
+  );
+  check(
+    "Inter and LEFT are the defaults the emitters already render — no declared block is invented for them",
+    partOf(inter, "t")?.declared === undefined,
+  );
+}
+
+console.log(
+  "\n46. dump v1.31 fillHeight — the COLUMN and all-children-fill ROW cases take the existing grow / align: stretch carriers",
+);
+{
+  const filler = (name: string): DumpNode => ({
+    name,
+    type: "FRAME",
+    fillHeight: true,
+    ...row({ fill: { hex: "3366cc" } }, []),
+  });
+  const column = proposeFromDump(
+    p2Set("P2Col", [
+      {
+        name: "P2Col",
+        type: "COMPONENT",
+        bbox: { width: 120, height: 200 },
+        layout: {
+          mode: "VERTICAL",
+          primary: "MIN",
+          counter: "MIN",
+          spacing: 0,
+          padding: [0, 0, 0, 0],
+          primarySizing: "FIXED",
+          counterSizing: "AUTO",
+        },
+        fill: { hex: "ffffff" },
+        children: [filler("a"), label()],
+      },
+    ]),
+    reviewable,
+  );
+  check(
+    "fillHeight under a COLUMN parent is layout.grow on the child (the vertical twin of fillWidth under a row)",
+    (partOf(column, "a")?.layout as Record<string, unknown> | undefined)
+      ?.grow === true,
+  );
+  const rowAll = proposeFromDump(
+    p2Set("P2Row", [
+      {
+        name: "P2Row",
+        type: "COMPONENT",
+        bbox: { width: 120, height: 64 },
+        layout: {
+          mode: "HORIZONTAL",
+          primary: "MIN",
+          counter: "MIN",
+          spacing: 0,
+          padding: [0, 0, 0, 0],
+          primarySizing: "AUTO",
+          counterSizing: "FIXED",
+        },
+        fill: { hex: "ffffff" },
+        children: [filler("a"), filler("b")],
+      },
+    ]),
+    reviewable,
+  );
+  check(
+    "every eligible child filling the ROW's height is the parent's align: stretch (no per-part literal needed)",
+    (rootOf(rowAll).layout as Record<string, unknown>).align === "stretch" &&
+      (partOf(rowAll, "a")?.literals as Record<string, string> | undefined)
+        ?.height === undefined,
+  );
+}
+
 if (failures.length > 0) {
   console.error(`\n${failures.length}/${checks} exact proposal checks failed:`);
   for (const failure of failures) console.error(`  - ${failure}`);

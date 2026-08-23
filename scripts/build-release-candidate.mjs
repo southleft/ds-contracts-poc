@@ -37,6 +37,7 @@ const PACKAGES = [
   },
   {
     directory: "packages/core",
+    // Reviewed 2026-08-23 for fix round 1: prop-collision + its @types/react table ship.
     // Reviewed 2026-08-22 for slice 2 (anatomy / elements / grid / validate / css
     // joined the package — the analysis half of emit-react).
     expected: [
@@ -57,6 +58,10 @@ const PACKAGES = [
       "dist/index.js",
       "dist/naming.d.ts",
       "dist/naming.js",
+      "dist/prop-collision.d.ts",
+      "dist/prop-collision.js",
+      "dist/prop-collision.table.d.ts",
+      "dist/prop-collision.table.js",
       "dist/tokens.d.ts",
       "dist/tokens.js",
       "dist/validate.d.ts",

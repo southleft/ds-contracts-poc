@@ -542,8 +542,8 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   }
   const storedHash = markerOf(badge.id)?.getSharedPluginData('ds_contracts', 'specHash');
   assert(
-    dump._provenance && dump._provenance.dumpVersion === '1.30',
-    `dump v1.30: provenance dumpVersion is 1.30 (got ${dump._provenance && dump._provenance.dumpVersion})`,
+    dump._provenance && dump._provenance.dumpVersion === '1.31',
+    `dump v1.31: provenance dumpVersion is 1.31 (got ${dump._provenance && dump._provenance.dumpVersion})`,
   );
   assert(
     storedHash && dump.Badge.specHash === storedHash,
@@ -1572,8 +1572,8 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
       const buttonDump = await runIn(mockA, scopedButton);
       const rxNotes = (buttonDump._degradations || []).filter((d) => d.code === 'prototype-reactions-unsupported');
       assert(
-        buttonDump._provenance && buttonDump._provenance.dumpVersion === '1.30',
-        `dump v1.30: provenance dumpVersion is 1.30 (got ${buttonDump._provenance && buttonDump._provenance.dumpVersion})`,
+        buttonDump._provenance && buttonDump._provenance.dumpVersion === '1.31',
+        `dump v1.31: provenance dumpVersion is 1.31 (got ${buttonDump._provenance && buttonDump._provenance.dumpVersion})`,
       );
       assert(
         rxNotes.length === wiringA.length,
@@ -1582,6 +1582,27 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
       assert(
         rxNotes.every((d) => d.message.includes('ON_HOVER→CHANGE_TO') && d.message.includes('ON_PRESS→CHANGE_TO') && d.message.includes('does not invent onClick')),
         `dump v1.27 receipts name both CHANGE_TO wires and refuse onClick (got ${rxNotes.map((d) => d.message).join(' | ')})`,
+      );
+      // dump v1.31: the wiring ALSO rides as data (reactions[]) beside the
+      // receipt, with the destination resolved to its NAME — the field the
+      // REST mapper emits from interactions[] (producer parity, F4).
+      const wired = (buttonDump.Button.variants || []).filter((v) => Array.isArray(v.reactions) && v.reactions.length > 0);
+      assert(
+        wired.length === wiringA.length,
+        `dump v1.31 reactions[] rides on every wired Default-plane source (got ${wired.length} vs ${wiringA.length})`,
+      );
+      assert(
+        wired.every((v) => v.reactions.length === 2
+          && v.reactions.some((r) => r.trigger === 'ON_HOVER' && r.action === 'CHANGE_TO' && /(^|, )State=Hover$/.test(r.destinationName || ''))
+          && v.reactions.some((r) => r.trigger === 'ON_PRESS' && r.action === 'CHANGE_TO' && /(^|, )State=Active$/.test(r.destinationName || ''))
+          && v.reactions.every((r) => typeof r.destination === 'string' && r.transition === undefined)),
+        `dump v1.31 reactions[] spell trigger/action/destination NAME (ON_HOVER→…State=Hover, ON_PRESS→…State=Active, transition null → absent) (got ${JSON.stringify(wired[0] && wired[0].reactions)})`,
+      );
+      const anyText = (n) => (n.text ? [n] : []).concat(...(n.children || []).map(anyText));
+      const texts = (buttonDump.Button.variants || []).flatMap(anyText);
+      assert(
+        texts.length > 0 && texts.every((t) => typeof t.text.fontFamily === 'string' && t.text.fontFamily !== '' && t.text.textAlign === undefined),
+        `dump v1.31 text.fontFamily rides verbatim (the drawn family, never empty) and a LEFT textAlignHorizontal is omitted (got ${JSON.stringify(texts[0] && texts[0].text)})`,
       );
     }
 

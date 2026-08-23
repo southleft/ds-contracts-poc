@@ -2,6 +2,10 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/accordion-item.contract.json (ds.accordion-item v1.1.0)
  * Regenerate with: npm run generate
+ *
+ * DOM attrs OMITTED from HTMLAttributes<HTMLDivElement> — the contract's own props claim these
+ * names, so the HTML attribute of the same name cannot be passed through ...rest:
+ *   onToggle, title
  */
 import { forwardRef, useState } from 'react';
 import type { HTMLAttributes } from 'react';
@@ -13,7 +17,10 @@ const ICONS: Record<string, string> = {
   open: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="5.5,7.8 10,12.3 14.5,7.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
 };
 
-export interface AccordionItemProps extends HTMLAttributes<HTMLDivElement> {
+export interface AccordionItemProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  'onToggle' | 'title'
+> {
   /** Closed shows only the trigger; open reveals the content and rotates the chevron. */
   state?: 'closed' | 'open';
   /** The always-visible trigger text. */

@@ -73,7 +73,7 @@
     "parity:flowbite": "tsx scripts/flowbite-contract-parity.ts",
     "extract:figma:visual:catalog": "tsx extract/figma/visual-parity/run.ts --summary button badge checkbox switch heading",
     "extract:figma:visual:anchors": "tsx extract/figma/visual-parity/anchor-check.ts",
-    "maintain": "npm run string-boolean-coercion:check && npm run token-set-prune:check && npm run exact-proposal:check && npm run flowbite-bundle-fresh:check && npm run plugin:check && npm run flowbite-dump-propose:check && npm run extract:figma:visual:anchors && npm run functional:flowbite && npm run parity:flowbite && npm run root-attrs:check && npm run css-vars:check && npm run code-only-facts:check && npm run root-text:check && npm run first-party-bundle:check",
+    "maintain": "npm run string-boolean-coercion:check && npm run token-set-prune:check && npm run exact-proposal:check && npm run flowbite-bundle-fresh:check && npm run plugin:check && npm run flowbite-dump-propose:check && npm run extract:figma:visual:anchors && npm run functional:flowbite && npm run parity:flowbite && npm run root-attrs:check && npm run css-vars:check && npm run code-only-facts:check && npm run root-text:check && npm run first-party-bundle:check && npm run prop-collision:check",
     "maintain:visual": "npm run extract:figma:visual:catalog",
     "maintain:all": "npm run maintain && npm run maintain:visual",
     "eval:record:check": "node scripts/eval-record-check.mjs",
@@ -223,7 +223,8 @@
     "code-only-facts:check": "tsx core/code-only-facts-check.ts",
     "conformance:roundtrip": "tsx conformance/canvas.ts",
     "root-text:check": "tsx core/root-text-check.ts",
-    "first-party-bundle:check": "tsx core/first-party-bundle-check.ts"
+    "first-party-bundle:check": "tsx core/first-party-bundle-check.ts",
+    "prop-collision:check": "tsx core/prop-collision-check.ts"
   },
   "engines": {
     "node": ">=20"

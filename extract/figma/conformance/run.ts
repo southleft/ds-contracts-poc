@@ -70,7 +70,12 @@ import {
 import { loadTokenCorpus } from "../tokens.js";
 import { loadContracts } from "../propose.js";
 import type { DumpDegradation, DumpFile } from "../types.js";
-import { mapRestToDump, type RestNodesResponse } from "../rest/map.js";
+import { mapRestToDump, type RestNodesResponse, type RestVariablesResponse } from "../rest/map.js";
+import { classifyVariablesRefusal } from "../rest/fetch.js";
+import {
+  capturedTokensDocument,
+  capturedVariablesAbsentReceipt,
+} from "../../../core/captured-tokens.js";
 
 // ---------------------------------------------------------------------------
 // Manifest shapes (hand-authored — see MANIFEST.json)
@@ -141,16 +146,36 @@ function caseFileFor(id: string): string {
   return existsSync(rest) ? rest : path.join(CASES_DIR, `${id}.dump.json`);
 }
 
+/** A REST case may carry, beside `nodes`, what the Journey A CLI would have
+ *  learned from the variables endpoint (Phase 2 exam — "not fixtured: no
+ *  manifest can exercise HTTP"; the HTTP is still not exercised, the
+ *  classification → mapper → dump → propose plumbing IS):
+ *    `_variablesResponse`  a GET /v1/files/:key/variables/local body (200)
+ *    `_variablesRefusal`   `{ status, body }` — a recorded refusal, run
+ *                          through the real classifyVariablesRefusal */
+interface RestCaseFile extends RestNodesResponse {
+  _variablesResponse?: RestVariablesResponse;
+  _variablesRefusal?: { status: number; body: string };
+}
+
 function runCase(casePath: string, deps: ReturnType<typeof loadDeps>): CaseRun {
   const restReceipts: string[] = [];
   const dump = ((): DumpFile => {
     const json = JSON.parse(readFileSync(casePath, "utf8")) as unknown;
     if (!casePath.endsWith(".rest.json")) return json as DumpFile;
-    const { dump: mapped, report } = mapRestToDump(json as RestNodesResponse, { fileKey: null });
+    const { _variablesResponse, _variablesRefusal, ...nodes } = json as RestCaseFile;
+    const { dump: mapped, report } = mapRestToDump(nodes, {
+      fileKey: null,
+      ...(_variablesResponse ? { variables: _variablesResponse } : {}),
+      ...(_variablesRefusal
+        ? { variablesUnavailable: classifyVariablesRefusal(_variablesRefusal.status, _variablesRefusal.body) }
+        : {}),
+    });
     for (const n of report.notes) restReceipts.push(`rest note: ${n}`);
-    for (const d of report.degradations) {
-      restReceipts.push(`degradation ${d.code} @ ${d.nodePath}${d.field ? ` ${d.field}` : ""}: ${d.message}`);
-    }
+    // The mapper's degradations are deliberately NOT read off the MapReport
+    // here: they must ride the DUMP as `_degradations` (joined below, the
+    // same way a plugin dump's receipts join) — a mapper that names a loss
+    // only on the report is measured as SILENT at this boundary.
     return mapped as unknown as DumpFile;
   })();
   const batch = proposeBatchFromDump(
@@ -191,6 +216,15 @@ function runCase(casePath: string, deps: ReturnType<typeof loadDeps>): CaseRun {
     union.push(`degradation ${d.code} @ ${d.nodePath}: ${d.message}`);
   }
   union.push(...restReceipts);
+  // The captured-variables receipt Journey A prints beside captured.dtcg.json
+  // (or the cause-named line for its absence) — so a case can pin that the
+  // `_variables` channel was written, and WHY it was not.
+  const capturedDoc = capturedTokensDocument(dump as unknown as Record<string, unknown>);
+  union.push(
+    capturedDoc
+      ? `captured variables: ${capturedDoc.receipt}`
+      : capturedVariablesAbsentReceipt(dump as unknown as Record<string, unknown>),
+  );
   return { contractText: JSON.stringify(contractPieces), namingUnion: union };
 }
 

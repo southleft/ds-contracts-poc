@@ -2,12 +2,16 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/text-field.contract.json (polaris.text-field v0.4.0)
  * Regenerate with: npm run generate
+ *
+ * DOM attrs OMITTED from HTMLAttributes<HTMLDivElement> — the contract's own props claim these
+ * names, so the HTML attribute of the same name cannot be passed through ...rest:
+ *   autoFocus, inputMode, onFocus, role, spellCheck
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 import styles from './TextField.module.css';
 
-export interface TextFieldProps extends HTMLAttributes<HTMLDivElement> {
+export interface TextFieldProps extends Omit<HTMLAttributes<HTMLDivElement>, 'autoFocus' | 'inputMode' | 'onFocus' | 'role' | 'spellCheck'> {
   /** Hint text to display */
   placeholder?: string;
   /** Initial value for the input */

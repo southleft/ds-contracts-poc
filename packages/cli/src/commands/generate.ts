@@ -16,6 +16,11 @@
  * Positional args are *.contract.json files or directories; the union is
  * both the generation set and the composition-ref resolution scope.
  *
+ * ATOMIC PER CONTRACT: a contract that fails to parse, validate or emit is
+ * refused BY NAME (and so is anything composing it); every other contract
+ * is written; the verb exits 1 with the refused list. A refused contract
+ * leaves no file.
+ *
  * EVERY code target also gets `<out>/tokens.css` — the custom-property sheet
  * the emitted CSS references (core/emit-tokens-css.ts): `:root` for the
  * default/light slot, `[data-theme="dark"]` for dark, `[data-brand="<n>"]`
@@ -33,14 +38,20 @@ import type { Emitter } from '@ds-contracts/core';
 // the graph had loaded the built-ins first.
 import { emitterByName, getEmitters, registerEmitter } from '../../../../core/emitter.js';
 import { emitTokensCss, referencedCssVars, tokensCssLayers, undefinedCssVars } from '../../../../core/emit-tokens-css.js';
-import { describeTokensCss, generateComponents } from '../../../../scripts/generate-components.js';
+import {
+  describeRefused,
+  describeTokensCss,
+  generateComponents,
+  orderActive,
+  parseContractFiles,
+  RefusalLedger,
+} from '../../../../scripts/generate-components.js';
 import {
   buildEmitterCtxWithRouting,
   CliUsageError,
   expandContractArgs,
   expandTokenArgs,
   flagString,
-  loadContracts,
   parseFlags,
   parseTokenEntry,
   withTokenDiagnostics,
@@ -115,7 +126,7 @@ export async function generateCommand(argv: string[]): Promise<number> {
     // runs (prettier formatting, per-component index, root barrel,
     // tokens.css). Slot prefixes travel WITH the entries: the generator
     // routes them through the same lib.ts rule as every other target.
-    const { generated, tokensCss } = await generateComponents({
+    const { generated, refused, tokensCss } = await generateComponents({
       contractFiles: files,
       tokenFiles: tokenEntries.length > 0 ? tokenEntries : undefined,
       iconsDir,
@@ -124,8 +135,9 @@ export async function generateCommand(argv: string[]): Promise<number> {
       regenerateHint,
     });
     console.log(`✔ Generated ${generated.length} component(s) → ${outDir}: ${generated.sort().join(', ')}`);
-    for (const line of describeTokensCss(tokensCss)) console.log(line);
-    return 0;
+    if (generated.length > 0) for (const line of describeTokensCss(tokensCss)) console.log(line);
+    for (const line of describeRefused(refused)) console.error(line);
+    return refused.length > 0 ? 1 : 0;
   }
 
   const emitter = emitterByName.get(target);
@@ -134,21 +146,37 @@ export async function generateCommand(argv: string[]): Promise<number> {
       `Unknown --target "${target}" — registered emitters: ${getEmitters().map((e) => e.name).join(', ')}`,
     );
   }
-  const contracts = loadContracts(files);
+  // Per-contract parse + identity + graph refusals (the react shell's
+  // ledger) — a contract that does not parse refuses by name, the rest go on.
+  const { parsed: parsedContracts, refused: parseRefusals } = parseContractFiles(files);
+  const ledger = new RefusalLedger(parsedContracts, parseRefusals);
+  ledger.propagate();
+  const contracts = new Map(parsedContracts.map((e) => [e.contract.id, e.contract]));
+  let ordered = orderActive(ledger);
   const { ctx, routing } = buildEmitterCtxWithRouting(
     contracts,
     tokenEntries,
     iconsDir,
     flagString(parsed, 'file-key'),
   );
-  // Emit everything to memory first: a refusal below must leave the
-  // destination untouched (the react shell's atomic rule, kept here).
-  const planned: { path: string; contents: string }[] = [];
-  for (const contract of contracts.values()) {
-    for (const file of withTokenDiagnostics(routing, () => emitter.emit(contract, ctx))) {
-      planned.push({ path: file.path, contents: file.contents });
+  // Emit everything to memory first, PER CONTRACT: an emitter refusal names
+  // that contract (and everything composing it) and leaves it no file; the
+  // rest are written.
+  const plannedById = new Map<string, { path: string; contents: string }[]>();
+  for (const contract of ordered) {
+    try {
+      plannedById.set(
+        contract.id,
+        withTokenDiagnostics(routing, () => emitter.emit(contract, ctx)).map((file) => ({ path: file.path, contents: file.contents })),
+      );
+    } catch (err) {
+      const message = String(err instanceof Error ? err.message : err);
+      ledger.refuse(contract.id, [message.startsWith(`${contract.id}:`) ? message : `${contract.id}: ${message}`]);
     }
   }
+  ledger.propagate();
+  ordered = ordered.filter((c) => !ledger.has(c.id));
+  const planned = ordered.flatMap((c) => plannedById.get(c.id)!);
   // tokens.css beside the emitted files, gated: every var(--x) the
   // stylesheets reference (.css, .css.ts, .html — never a .js/.tsx comment)
   // must be defined in :root.
@@ -175,7 +203,7 @@ export async function generateCommand(argv: string[]): Promise<number> {
         missing.map((n) => `  - ${n} — referenced by ${referencedBy.get(n)!.join(', ')}`).join('\n'),
     );
   }
-  planned.push({ path: 'tokens.css', contents: sheet.css });
+  if (ordered.length > 0) planned.push({ path: 'tokens.css', contents: sheet.css });
 
   mkdirSync(outDir, { recursive: true });
   const written: string[] = [];
@@ -195,7 +223,8 @@ export async function generateCommand(argv: string[]): Promise<number> {
     danglingAliases: sheet.danglingAliases,
     skippedComposite: sheet.skippedComposite,
   })) {
-    console.log(line);
+    if (ordered.length > 0) console.log(line);
   }
-  return 0;
+  for (const line of describeRefused(ledger.refused)) console.error(line);
+  return ledger.refused.length > 0 ? 1 : 0;
 }
