@@ -179,7 +179,7 @@ function main() {
     unresolved.every((d) =>
       /variable id VariableID:\S+ unresolvable/.test(d.message),
     ),
-    "every degradation names the exact variable id and the reason (Enterprise endpoint unavailable)",
+    "every degradation names the exact variable id and the reason (no variables response was passed — the mapper says so rather than guessing a plan tier)",
   );
 
   const fillUnbound = degradedProposal.unbound.find(

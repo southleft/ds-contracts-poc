@@ -9,18 +9,23 @@
  *
  * Endpoints (https://www.figma.com/developers/api):
  *   GET /v1/files/:key/nodes?ids=…        node documents + components/styles metadata
- *   GET /v1/files/:key/variables/local    variable id → name (Enterprise-only; 403 is
- *                                         an expected DEGRADATION, not an error)
+ *   GET /v1/files/:key/variables/local    variable id → name + values per mode. Needs a
+ *                                         token with the `file_variables:read` scope — a
+ *                                         403 naming that scope is a TOKEN defect, not a
+ *                                         plan tier; every refusal is a classified
+ *                                         DEGRADATION (VariablesRefusal), never an error
  *   GET /v1/files/:key                    full document — only when the URL has no
  *                                         node-id and the target set must be found by name
  */
 import {
   mapRestToDump,
+  VARIABLES_SCOPE_FIX,
   type MapOptions,
   type MapResult,
   type RestNode,
   type RestNodesResponse,
   type RestVariablesResponse,
+  type VariablesUnavailable,
 } from './map.js';
 
 export const FIGMA_API_BASE = 'https://api.figma.com';
@@ -128,7 +133,7 @@ export async function fetchNodes(
  * Why the variables endpoint refused, and — the part that matters — whether
  * the person running the import can do anything about it.
  */
-export interface VariablesRefusal {
+export interface VariablesRefusal extends VariablesUnavailable {
   status: number;
   /**
    * `scope`   — the token is missing `file_variables:read`. USER-FIXABLE: mint
@@ -136,11 +141,16 @@ export interface VariablesRefusal {
    * `unknown` — a 403 that names no scope, or a 404. Not user-fixable from
    *             here; the plan tier is one candidate cause and it is NOT
    *             something this code has verified (see below).
+   * `network` — no HTTP status at all: fetch itself threw (DNS, offline,
+   *             CORS). Not a refusal by Figma; the import continues degraded
+   *             and the nodes fetch decides whether anything reaches at all.
    */
-  kind: 'scope' | 'unknown';
+  kind: 'scope' | 'unknown' | 'network';
   userFixable: boolean;
   /** Ready to print at a CLI. */
   message: string;
+  /** The one-line remedy (scope: VARIABLES_SCOPE_FIX), null when none. */
+  fix: string | null;
   /** The API's own words, truncated — never paraphrased away. */
   body: string;
 }
@@ -185,10 +195,11 @@ export function classifyVariablesRefusal(status: number, body: string): Variable
       userFixable: true,
       message:
         'Figma refused /variables/local: your personal access token is missing the ' +
-        '`file_variables:read` scope. This is fixable — mint a new token at ' +
+        '`file_variables:read` scope (HTTP 403 — a token scope, NOT a plan limit). This is fixable — mint a new token at ' +
         'figma.com → Settings → Security → Personal access tokens with "Variables: read" ' +
         'enabled, and re-run. (Variable NAMES will be unresolved until you do; the import ' +
         'still works, using resolved values.)',
+      fix: VARIABLES_SCOPE_FIX,
       body: b.slice(0, 300),
     };
   }
@@ -200,7 +211,25 @@ export function classifyVariablesRefusal(status: number, body: string): Variable
       `Figma refused /variables/local with ${status} and did not name a missing scope. ` +
       'Possible causes include the file\'s plan tier — UNVERIFIED by this project, see ' +
       'docs/HANDOFF.md. Importing without variable names; resolved values are used instead.',
+    fix: null,
     body: b.slice(0, 300),
+  };
+}
+
+/** A thrown fetch (no HTTP status: DNS, offline, CORS) on the variables
+ *  endpoint — named as NETWORK, the third cause the Phase 2 exam asked to be
+ *  told apart from "scope" and "plan". */
+export function classifyVariablesNetworkFailure(err: unknown): VariablesRefusal {
+  const detail = err instanceof Error ? err.message : String(err);
+  return {
+    status: 0,
+    kind: 'network',
+    userFixable: false,
+    message:
+      `Figma /variables/local could not be reached (${detail}) — not a refusal by Figma; ` +
+      'importing without variable names; re-run when the API is reachable.',
+    fix: 're-run when api.figma.com is reachable',
+    body: '',
   };
 }
 
@@ -225,6 +254,12 @@ export async function fetchVariables(
     const err = e as Error & { status?: number; body?: string };
     if (err.status === 403 || err.status === 404) {
       opts.onVariablesUnavailable?.(classifyVariablesRefusal(err.status, err.body ?? err.message ?? ''));
+      return undefined;
+    }
+    if (err.status === undefined) {
+      // fetch threw before any HTTP status existed — the network, not Figma.
+      // A 5xx (status present) still THROWS (variables-refusal-check §6).
+      opts.onVariablesUnavailable?.(classifyVariablesNetworkFailure(e));
       return undefined;
     }
     throw e;
@@ -268,9 +303,20 @@ const findSets = (node: RestNode, out: RestNode[] = []): RestNode[] => {
  */
 export async function importFromUrl(url: string, token: string, opts: ImportOptions = {}): Promise<MapResult> {
   const parsed = parseFigmaUrl(url);
-  const variables = await fetchVariables(parsed.fileKey, token, opts);
+  // The classified refusal reaches BOTH the caller's callback and the mapper
+  // (Phase 2 exam: cli.ts never wired the callback, and the mapper had no
+  // way to learn the cause — so 1,595 rows said "Enterprise").
+  let refusal: VariablesRefusal | undefined;
+  const variables = await fetchVariables(parsed.fileKey, token, {
+    ...opts,
+    onVariablesUnavailable: (info) => {
+      refusal = info;
+      opts.onVariablesUnavailable?.(info);
+    },
+  });
   const mapOptions: MapOptions = {
     ...(variables ? { variables } : {}),
+    ...(refusal ? { variablesUnavailable: refusal } : {}),
     ...(opts.target ? { target: opts.target } : {}),
     fileKey: parsed.fileKey,
   };

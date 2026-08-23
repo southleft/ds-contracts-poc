@@ -2,12 +2,16 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/empty-state.contract.json (ds.empty-state v1.0.0)
  * Regenerate with: npm run generate
+ *
+ * DOM attrs OMITTED from HTMLAttributes<HTMLDivElement> — the contract's own props claim these
+ * names, so the HTML attribute of the same name cannot be passed through ...rest:
+ *   title
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 import styles from './EmptyState.module.css';
 
-export interface EmptyStateProps extends HTMLAttributes<HTMLDivElement> {
+export interface EmptyStateProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** Primary message. */
   title: string;
   /** Secondary text explaining what will appear here and how. */

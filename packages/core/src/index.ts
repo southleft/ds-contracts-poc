@@ -94,3 +94,18 @@ export {
   type ContractSourceProvenance,
   type ProvenancedContract,
 } from './contract-provenance.js';
+
+// Prop-name collisions with the platform — ONE rule for React (Omit<> on the
+// base attrs type) and Web Components (no accessor shadowing HTMLElement);
+// the table is extracted from @types/react + lib.dom and refused on drift by
+// core/prop-collision-check.ts.
+export {
+  contractApiNames,
+  reactDomCollisions,
+  reactOmittedNote,
+  reactPropsBase,
+  wcHostAttributeEffect,
+  wcHostCollisions,
+  type ElementMeta,
+} from './prop-collision.js';
+export { HTML_ELEMENT_MEMBERS, PROP_COLLISION_SOURCES, REACT_ELEMENT_ATTRIBUTES, REACT_HTML_ATTRIBUTES } from './prop-collision.table.js';

@@ -1,0 +1,90 @@
+{
+  "_provenance": {
+    "fileKey": null,
+    "extractedAt": "2026-08-23",
+    "note": "Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal — hand-authored plugin-shape twin of rest-instance-swap-fixed-value (the dump v1.31 spelling dump.plugin.js emits for this construct).",
+    "dumpVersion": "1.31"
+  },
+  "Case": {
+    "setName": "Case",
+    "type": "COMPONENT",
+    "nodeId": "1:34",
+    "variants": [
+      {
+        "name": "Case",
+        "type": "COMPONENT",
+        "bbox": {
+          "width": 80,
+          "height": 28
+        },
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "CENTER",
+          "counter": "CENTER",
+          "spacing": 0,
+          "padding": [
+            4,
+            12,
+            4,
+            12
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "fill": {
+          "hex": "e6ebf2"
+        },
+        "children": [
+          {
+            "name": "Chip",
+            "type": "INSTANCE",
+            "layout": {
+              "mode": "HORIZONTAL",
+              "primary": "CENTER",
+              "counter": "CENTER",
+              "spacing": 0,
+              "padding": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "primarySizing": "AUTO",
+              "counterSizing": "AUTO"
+            },
+            "instanceOf": "Chip",
+            "instanceKey": "chipkey1",
+            "componentProperties": {
+              "State": "Default"
+            },
+            "fixedSwaps": {
+              "Icon": {
+                "id": "9:9",
+                "name": "Glyph",
+                "key": "glyphkey1"
+              }
+            },
+            "bbox": {
+              "width": 48,
+              "height": 20
+            }
+          },
+          {
+            "name": "t",
+            "type": "TEXT",
+            "text": {
+              "characters": "Case",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "lineHeight": 16,
+              "fontFamily": "Inter"
+            },
+            "fill": {
+              "hex": "1a1a1a"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -73,6 +73,8 @@
       "strokeAlign": "INSIDE",
       "cornerRadius": 0,
       "layoutMode": "HORIZONTAL",
+      "primaryAxisSizingMode": "FIXED",
+      "counterAxisSizingMode": "FIXED",
       "primaryAxisAlignItems": "CENTER",
       "counterAxisAlignItems": "CENTER",
       "paddingLeft": 0,

@@ -101,7 +101,7 @@
       "children": [
        {
         "id": "1:18",
-        "name": "s",
+        "name": "Media",
         "type": "SLOT",
         "scrollBehavior": "SCROLLS",
         "blendMode": "PASS_THROUGH",

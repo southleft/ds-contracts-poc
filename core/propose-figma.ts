@@ -22,7 +22,7 @@
  */
 import { arcMaskCss, ContractSchema, GRID_REFUSALS, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel, VOID_ELEMENTS } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
-import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpSet } from '../extract/figma/types.js';
+import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpPropertyDefinition, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
 import { capturedTokensFromDump, foldVariablePath, ONE_DOT_LEADER } from './captured-tokens.js';
 import { mintTokens, type MintAxis, type MintObservation, type MintedEntry } from './mint-tokens.js';
@@ -257,6 +257,37 @@ function parseAxes(variantNames: string[]): Axis[] {
       }
       if (!axis.values.includes(value)) axis.values.push(value);
     }
+  }
+  return axes;
+}
+
+/** PHASE 2 EXAM (axis-default-from-set): the set's DECLARED default for a
+ *  VARIANT property (propertyDefinitions[...].defaultValue, dump v1.5) is the
+ *  designer's default — the first variant in tree order is only the
+ *  generator's convention (it emits the all-defaults combo first). Every
+ *  reader of `axis.values[0]` (the prop default, the tokensByProp base
+ *  plane, the mode-axis base, layoutByProp's default tuple) takes the
+ *  declared default by MOVING it to the front; the remaining options keep
+ *  tree order. A declared default that names no drawn variant is NAMED and
+ *  the tree order stands. Sets without definitions (pre-v1.5 dumps, hand
+ *  fixtures) are byte-identical. */
+function applyDeclaredAxisDefaults(axes: Axis[], set: DumpSet, notes?: string[]): Axis[] {
+  for (const axis of axes) {
+    const def = set.propertyDefinitions?.[axis.property];
+    if (!def || def.type !== 'VARIANT' || typeof def.defaultValue !== 'string') continue;
+    const i = axis.values.indexOf(def.defaultValue);
+    if (i === 0) continue;
+    if (i < 0) {
+      notes?.push(
+        `prop \`${axis.propName}\`: the set's declared default for "${axis.property}" is "${def.defaultValue}" (propertyDefinitions, dump v1.5) but no variant draws that value (drawn: ${axis.values.join('|')}) — the declared default is NOT applied; the first drawn variant ("${axis.values[0]}") stands as the default, review`,
+      );
+      continue;
+    }
+    const first = axis.values[0];
+    axis.values = [def.defaultValue, ...axis.values.filter((_, j) => j !== i)];
+    notes?.push(
+      `prop \`${axis.propName}\`: the set's DECLARED default for "${axis.property}" is "${def.defaultValue}" (propertyDefinitions.defaultValue, dump v1.5), not the first variant in tree order ("${first}") — the proposal's default follows the declared default, and the base plane every per-value carrier deviates from (tokens / tokensByProp / layoutByProp / textByProp) is the ${def.defaultValue} plane (Phase 2 exam: Badge Size, Chip Dismissible, Heading Tag/Variant defaulted to the first-drawn value with no receipt)`,
+    );
   }
   return axes;
 }
@@ -1360,6 +1391,19 @@ interface Ctx {
   /** Set-level SLOT property descriptions (dump v1.18) — the words carrying
    *  what Figma refuses to enforce (min/max/required/restrict). */
   slotDescriptions?: Record<string, string>;
+  /** The set's structured property definitions (dump v1.5), keyed by the
+   *  producer's own spelling ("Icon#7:2", "Variant"). Read by the slot
+   *  `accepts` door: a definition present with NO preferredValues is an
+   *  EMPTY list — an unconstrained swap by declaration — and must not be
+   *  reported as "not captured" (Phase 2 exam, rest-swap-preferred-values-
+   *  empty); a SLOT definition's own preferredValues are read here when the
+   *  producer did not fold them into swapPreferredValues (REST map.ts). */
+  propertyDefinitions?: Record<string, DumpPropertyDefinition>;
+  /** The interaction-state axis this proposal PROMOTED (its Figma property
+   *  name), when one was — read by the prototype-reaction receipt so a
+   *  CHANGE_TO into a hover variant is described as the state-preview
+   *  wiring it is (dump v1.31). */
+  stateAxisPromoted?: string;
   /** The dump's producer captures `hidden` (dump v1.1+) — see
    *  dumpCapturesHidden; callers derive it from the dump's _provenance. */
   hiddenCaptured?: boolean;
@@ -1876,13 +1920,41 @@ function unifyPaint(
         );
         if (!allHex) {
           ctx.notes.push(
-            `${where} ${paintName}: drawn in ${paints.filter((p) => p.paint !== undefined).length}/${paints.length} variant(s) — the ABSENT variants mint ${absentLiterals.join('/')} (their absence is a DRAWN fact this node explains: a strokeless node is a zero-width transparent stroke, and a node whose paint stack is an imageFill draws no solid under it), so ${mint.cssProperty} carries for the whole axis instead of falling back to currentColor or dropping`,
+            `${where} ${paintName}: drawn in ${paints.filter((p) => p.paint !== undefined).length}/${paints.length} variant(s) — the ABSENT variants mint ${absentLiterals.join('/')} (their absence is a DRAWN fact: a strokeless node is a zero-width transparent stroke, a node with no solid fill shows what is behind it — the capture receipts every other paint kind by name, so "no fill" is an observation, not a gap), so ${mint.cssProperty} carries for the whole axis instead of falling back to currentColor or dropping (Phase 2 exam: the Button/Badge background)`,
           );
         }
       } else {
         ctx.mint.partialSources.add(`${where}|${paintName}`);
       }
     }
+    return undefined;
+  }
+  // PHASE 2 EXAM — BOUND paints on some variants, ABSENT on the rest, on a
+  // channel whose absence is a drawn literal (absentAs): the bound refs
+  // cannot unify (a hole in the axis is not a ref), and the drift note used
+  // to be the whole story — the channel dropped. When every bound ref
+  // resolves through the captured-variable layer, the observation routes
+  // into the mint pass (captured literal where drawn, the neutral literal
+  // where not) — the same door the all-bound drift case below takes.
+  if (ctx.mint && mint && mint.absentAs !== undefined && paints.some((p) => p.paint === undefined)) {
+    const values = paints.map((p) =>
+      p.paint === undefined ? absentFor(p) : p.paint.var !== undefined ? ctx.capturedValues?.get(dotPath(p.paint.var)) : undefined,
+    );
+    if (values.every((v): v is string => v !== undefined)) {
+      mintObservation(
+        ctx, mint.target, where, mint.cssProperty, 'color',
+        paints.map((p, i) => ({ variant: p.variant, value: values[i] as string })),
+        `${where}|${paintName}`,
+        mint.sparse,
+      );
+      ctx.notes.push(
+        `${where} ${paintName}: bound in ${paints.filter((p) => p.paint !== undefined).length}/${paints.length} variant(s) and ABSENT in the rest — routed to the mint pass at captured-value literal fidelity (the absent variants mint ${[...new Set(paints.filter((p) => p.paint === undefined).map((p) => absentFor(p)!))].join('/')}: their absence is a DRAWN fact); the bound refs (${[...new Set(paints.filter((p) => p.paint?.var !== undefined).map((p) => p.paint!.var!))].join(', ')}) are the rename targets`,
+      );
+      return undefined;
+    }
+    ctx.notes.push(
+      `${where} ${paintName}: bound in ${paints.filter((p) => p.paint !== undefined).length}/${paints.length} variant(s) and ABSENT in the rest — the bound refs do not resolve through a captured-variable layer (no \`_variables\` in this dump), so the channel cannot mint at literal fidelity; NAMED, not proposed (review)`,
+    );
     return undefined;
   }
   const u = unifyRefs(
@@ -2163,10 +2235,19 @@ function invertNodeTokens(
     unifyPaint(m, (n) => (n.type === 'TEXT' ? undefined : n.fill), ctx, where, 'fill', {
       cssProperty: 'background-color',
       target: tokens,
-      // A node whose paint stack is an IMAGE draws no solid under it that
-      // the capture saw — absence there is an observation, not a gap. Every
-      // other absent fill keeps the named refusal (see the absentAs doc).
-      absentAs: (n) => (typeof n.imageFill === 'string' ? '#00000000' : undefined),
+      // PHASE 2 EXAM (fill-absent-on-axis-value / fill-unset-by-state): an
+      // ABSENT fill is a DRAWN fact, exactly as an absent stroke is. Both
+      // readers (dump.plugin.js dumpPaint / rest map.ts mapFillStack) take
+      // the first visible SOLID and receipt every other paint kind by name
+      // (paint-unsupported / paint-stack-truncated / imageFill), so a node
+      // with no `fill` field and no receipt was DRAWN with no solid — it
+      // shows what is behind it, which IS the rendering of `#00000000`. The
+      // old reading ("a partial fill is a genuine capture gap") refused the
+      // whole channel for the variants that DO draw one: the Button (Ghost
+      // has none) and the Badge (Size=sm is a bare dot) rendered with no
+      // background at all. The variants that draw a fill mint their colour;
+      // the variants that draw none mint transparent; nothing is invented.
+      absentAs: '#00000000',
       sparse: '#00000000',
     }),
   );
@@ -2676,7 +2757,50 @@ const recoverAuthoredBoxShadow = (
  *  channel never drops silently. The canvas preview has no box-shadow
  *  projection in v1; that limit is named here at proposal (the minted
  *  preamble also skips shadow-typed leaves). */
+/** dump v1.31 — the two effect facts beside the effect GEOMETRY, named
+ *  wherever effects are read (box parts, text parts, instances, the root):
+ *    · the EFFECT STYLE identity (effectStyle / effectStyleKey) — the
+ *      canvas's own name for the stack (the way text.style names a
+ *      TextStyle). There is no effect-style token class to mint into, so the
+ *      name carries as PROVENANCE in the note; the resolved layers still
+ *      carry as box-shadow. Phase 2 exam: 53:3846 "shadow/md" on every hover
+ *      root, silent.
+ *    · per-channel VARIABLE BINDINGS on an effect (effects[].bound) — a
+ *      box-shadow is ONE token in the contract grammar, so five bindings
+ *      (radius/spread/color/offsetX/offsetY) have no carrier; the literal
+ *      stack carries and the bindings are NAMED as the rename targets. */
+function nameEffectProvenance(m: Merged, ctx: Ctx, where: string): void {
+  const styles = new Map<string, { key?: string; variants: string[] }>();
+  for (const o of m.occ) {
+    const name = o.node.effectStyle;
+    if (name === undefined) continue;
+    const rec = styles.get(name) ?? { key: o.node.effectStyleKey, variants: [] };
+    rec.variants.push(o.variant);
+    styles.set(name, rec);
+  }
+  for (const [name, rec] of styles) {
+    ctx.notes.push(
+      `${where}: effects ride the EFFECT STYLE "${name}"${rec.key ? ` (key ${rec.key})` : ''} in ${rec.variants.length}/${m.occ.length} variant(s) (dump v1.31 effectStyle) — the style's resolved layers carry as box-shadow; the style IDENTITY has no token class in the contract grammar (text styles mint under imported.text.<style>, effect styles do not yet), so it is carried here as provenance — the rename target for the minted shadow`,
+    );
+  }
+  const bindings = new Map<string, string[]>();
+  for (const o of m.occ) {
+    for (const e of o.node.effects ?? []) {
+      for (const [channel, variable] of Object.entries(e.bound ?? {})) {
+        const key = `${e.type} ${channel}={${variable}}`;
+        bindings.set(key, [...(bindings.get(key) ?? []), o.variant]);
+      }
+    }
+  }
+  if (bindings.size > 0) {
+    ctx.notes.push(
+      `${where}: effect channel(s) bound to variables (dump v1.31 effects[].bound): ${[...bindings].map(([k, vs]) => `${k} (${vs.length}/${m.occ.length} variant(s))`).join('; ')} — a box-shadow is ONE token in the contract grammar, so per-channel effect bindings have no carrier; the resolved stack carries at literal fidelity and these variable names are the rename targets — NAMED, not bound`,
+    );
+  }
+}
+
 function invertNodeEffects(m: Merged, tokens: Record<string, string>, ctx: Ctx, where: string) {
+  nameEffectProvenance(m, ctx, where); // dump v1.31 — style identity + channel bindings, never silent
   if (m.occ.every((o) => (o.node.effects?.length ?? 0) === 0)) return;
   const kinds = [...new Set(m.occ.flatMap((o) => (o.node.effects ?? []).map((e) => e.type)))];
   const dropShadowStackEverywhere = m.occ.every((o) => {
@@ -3334,9 +3458,63 @@ function mintPlainRectGeometry(m: Merged, part: Record<string, unknown>, tokens:
  *  base-combo literal fallback on refusal, presence-shaped '0' fill for
  *  subset-present parts. A dimension already carried (bound variable or an
  *  earlier channel) is never overridden. Absent field — exact no-op. */
+/** PHASE 2 EXAM (rest-child-frame-fixed-size; Button (contract) 20×20
+ *  slot-before/slot-after/icon ×60, Card Inline Image 308px): an AUTO-LAYOUT
+ *  child FRAME/SLOT drawn FIXED on an axis carries `layout.primarySizing /
+ *  counterSizing: FIXED` (both readers) but NO box — `fixedSize` (dump v1.8)
+ *  is captured for non-auto-layout children only, `bbox` rides roots and
+ *  instances, `abs` rides out-of-flow nodes. The drawn px is environment-
+ *  dependent child geometry this pipeline deliberately does not read back
+ *  or mint — Option B, FC-GEOMETRY-EXCLUDED (parity/receipts/beta/
+ *  KIT-CLIMB.md) — so the part sizes to content. That was SILENT; it is a
+ *  receipt now, with the code. A FILL axis (fillWidth/fillHeight) is spelled
+ *  FIXED by Figma too and is excluded (it is carried as grow/stretch). */
+function nameFixedChildGeometry(m: Merged, ctx: Ctx, where: string): void {
+  const dims: string[] = [];
+  for (const dim of ['width', 'height'] as const) {
+    // FIXED by the auto-layout sizing MODE, or a producer's `fixedSize` on an
+    // auto-layout node (the plugin writes fixedSize for non-auto-layout
+    // children only, where mintFixedSize mints it; on an auto-layout node it
+    // is the same excluded geometry, and the drawn px joins the receipt).
+    const fixedIn = m.occ.filter((o) => {
+      const l = o.node.layout;
+      if (!l) return false;
+      if (o.node.fixedSize?.[dim] !== undefined) return true;
+      const primaryIsWidth = l.mode !== 'VERTICAL'; // HORIZONTAL and GRID (GP1b)
+      const mode = (dim === 'width') === primaryIsWidth ? l.primarySizing : l.counterSizing;
+      return mode === 'FIXED';
+    });
+    if (fixedIn.length === 0) continue;
+    if (
+      m.occ.some(
+        (o) =>
+          o.node.bound?.[dim] !== undefined ||
+          (o.node.layout === undefined && o.node.fixedSize?.[dim] !== undefined) ||
+          o.node.abs !== undefined ||
+          o.node.bbox !== undefined,
+      )
+    ) {
+      continue; // a carrier exists — the size channels speak for it
+    }
+    if (dim === 'width' && m.occ.some((o) => o.node.fillWidth === true)) continue;
+    if (dim === 'height' && m.occ.some((o) => o.node.fillHeight === true)) continue;
+    const drawn = [...new Set(fixedIn.map((o) => o.node.fixedSize?.[dim]).filter((v): v is number => typeof v === 'number'))];
+    dims.push(`${dim} (FIXED in ${fixedIn.length}/${m.occ.length} variant occurrence(s)${drawn.length > 0 ? `; drawn ${drawn.join('/')}px` : ''})`);
+  }
+  if (dims.length === 0) return;
+  ctx.notes.push(
+    `${where}: auto-layout ${m.type} child drawn FIXED on ${dims.join(' and ')} with no bound size variable — FC-GEOMETRY-EXCLUDED (Option B): a child's drawn px is environment-dependent geometry this pipeline does not read back or mint, so the part sizes to its content and the drawn size is NOT carried; NAMED (bind the size to a variable, or declare width/height on this part in the contract, to carry it)`,
+  );
+}
+
 function mintFixedSize(m: Merged, part: Record<string, unknown>, tokens: Record<string, string>, ctx: Ctx, where: string) {
   const withFixed = m.occ.filter((o) => o.node.fixedSize !== undefined);
   if (withFixed.length === 0) return;
+  // A producer that writes `fixedSize` on an AUTO-LAYOUT node (the plugin
+  // never does — dump v1.8 is non-auto-layout children only) is describing
+  // exactly the geometry nameFixedChildGeometry excludes and receipts (every
+  // branch that reaches here calls it); it is not minted.
+  if (withFixed.some((o) => o.node.layout !== undefined)) return;
   const sparse = m.occ.length < ctx.totalVariants.length ? '0' : undefined;
   const carried: string[] = [];
   for (const dim of ['width', 'height'] as const) {
@@ -4082,6 +4260,69 @@ function carryTextCase(m: Merged, holder: Record<string, unknown>, ctx: Ctx, whe
   );
 }
 
+/** dump v1.31 — the text node's font FAMILY (fontName.family / REST
+ *  style.fontFamily) → the declared `font-family` channel (DECLARED_CHANNELS,
+ *  canvas: draw — the emitter sets fontName.family from the first stack
+ *  entry). Inter is the pipeline's own default (every emitter renders Inter
+ *  when nothing is declared), so Inter is not a fact to carry; any other
+ *  family drawn in every variant carries, a mixed axis is NAMED (no
+ *  per-variant declared vocabulary). Phase 2 exam: 44 Manrope nodes rendered
+ *  Inter with no receipt (rest-text-font-family). */
+const DEFAULT_FONT_FAMILY = 'Inter';
+function carryFontFamily(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const textOcc = m.occ.filter((o) => o.node.text !== undefined);
+  if (textOcc.length === 0) return;
+  const families = [...new Set(textOcc.map((o) => o.node.text!.fontFamily))];
+  const captured = families.filter((f): f is string => typeof f === 'string' && f.trim() !== '');
+  if (captured.length === 0) return; // not captured (pre-v1.31) — nothing to say
+  if (families.length > 1) {
+    ctx.notes.push(
+      `${where}: font family differs across variants (${families.map((f) => f ?? 'not captured').join(', ')}) — font-family is a declared literal with no per-variant vocabulary; NAMED, not proposed (the emitter renders ${DEFAULT_FONT_FAMILY}; review)`,
+    );
+    return;
+  }
+  const family = captured[0];
+  if (family === DEFAULT_FONT_FAMILY) return; // the pipeline's own default — absence already renders it
+  const declared = (holder.declared as Record<string, string> | undefined) ?? {};
+  if (declared['font-family'] === undefined) declared['font-family'] = family;
+  holder.declared = declared;
+  ctx.notes.push(
+    `${where}: font family "${family}" drawn in every variant (dump v1.31) — carried as declared font-family: ${family} (a canvas-drawable channel; the return leg sets fontName.family — the face must be available to the renderer, else it falls back to ${DEFAULT_FONT_FAMILY} — FC-FONT-SUBSTRATE, named limit)`,
+  );
+}
+
+/** dump v1.31 — textAlignHorizontal → the declared `text-align` channel
+ *  (DECLARED_CHANNELS, canvas: draw — the emitter writes textAlignHorizontal
+ *  back). LEFT is the CSS default and is not a fact to carry; CENTER / RIGHT
+ *  / JUSTIFIED drawn in every variant carry, a mixed axis is NAMED. Phase 2
+ *  exam: 8 centred labels rendered start-aligned with no receipt
+ *  (rest-text-align-center). */
+const TEXT_ALIGN_BY_CANVAS: Record<string, string> = {
+  CENTER: 'center',
+  RIGHT: 'right',
+  JUSTIFIED: 'justify',
+};
+function carryTextAlign(m: Merged, holder: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const textOcc = m.occ.filter((o) => o.node.text !== undefined);
+  if (textOcc.length === 0) return;
+  const aligns = [...new Set(textOcc.map((o) => o.node.text!.textAlign))];
+  const drawn = aligns.filter((a): a is 'CENTER' | 'RIGHT' | 'JUSTIFIED' => a !== undefined && a in TEXT_ALIGN_BY_CANVAS);
+  if (drawn.length === 0) return; // LEFT / not captured — CSS's own default
+  if (aligns.length > 1) {
+    ctx.notes.push(
+      `${where}: textAlignHorizontal differs across variants (${aligns.map((a) => a ?? 'LEFT/not captured').join(', ')}) — text-align is a declared literal with no per-variant vocabulary; NAMED, not proposed (review)`,
+    );
+    return;
+  }
+  const value = TEXT_ALIGN_BY_CANVAS[drawn[0]];
+  const declared = (holder.declared as Record<string, string> | undefined) ?? {};
+  if (declared['text-align'] === undefined) declared['text-align'] = value;
+  holder.declared = declared;
+  ctx.notes.push(
+    `${where}: textAlignHorizontal ${drawn[0]} drawn in every variant (dump v1.31) — carried as declared text-align: ${value} (a canvas-drawable channel; the return leg writes textAlignHorizontal)`,
+  );
+}
+
 /** FC-DUMP-PROPOSE-ITALIC-DROPPED. The slant is part of the face NAME
  *  (fontName.style "Italic" / "Medium Italic"), and the weight reader was
  *  the only place that looked at it — so a node whose weight was STAMPED
@@ -4457,13 +4698,72 @@ const ALIGN_INV: Record<string, string | undefined> = {
  *  excluded from the generator's stretch path) ALL carry fill-width. */
 function stretchEvidence(m: Merged): boolean {
   const l = m.occ[0].node.layout;
-  if (!l || l.mode !== 'VERTICAL') return false;
+  if (!l || (l.mode !== 'VERTICAL' && l.mode !== 'HORIZONTAL')) return false;
+  // A COLUMN stretches its children's WIDTH (fillWidth); a ROW stretches
+  // their HEIGHT (dump v1.31 fillHeight — the vertical twin, Phase 2 exam).
+  const dim = l.mode === 'VERTICAL' ? 'width' : 'height';
+  const fillField = l.mode === 'VERTICAL' ? 'fillWidth' : 'fillHeight';
   const eligible = m.children.filter((c) => {
     const n = c.occ[0].node;
-    return (n.type === 'FRAME' || n.type === 'TEXT') && !n.bound?.width;
+    return (n.type === 'FRAME' || n.type === 'TEXT') && !n.bound?.[dim];
   });
   if (eligible.length === 0) return false;
-  return eligible.every((c) => c.occ.every((o) => o.node.fillWidth === true));
+  return eligible.every((c) => c.occ.every((o) => o.node[fillField] === true));
+}
+
+/** dump v1.31 — the CROSS-AXIS half of a FILL that the parent's `align:
+ *  stretch` did NOT absorb (stretchEvidence needs EVERY eligible sibling to
+ *  fill; here only this part does). Under a parent whose cross axis is
+ *  DEFINITE (FIXED sizing mode, a bound size, or a captured box) the exact
+ *  CSS spelling is the part's own `100%` literal on that axis — the same
+ *  carrier crossAxisFillByProp already uses for the COLUMN planes. Under a
+ *  HUG parent no grammar spelling is exact (`100%` of an auto height is
+ *  auto; `align-self` is not in the schema), so the fact is NAMED. The
+ *  vertical case (fillHeight under a ROW) is the Phase 2 exam construct; the
+ *  horizontal twin (fillWidth under a COLUMN, partial siblings) was silent
+ *  for the same reason and is named here without changing its bytes. */
+function carryCrossAxisFill(
+  m: Merged,
+  parentModes: ParentModes | null,
+  part: Record<string, unknown>,
+  ctx: Ctx,
+  where: string,
+): void {
+  if (!parentModes || parentModes.stretchCross) return; // the parent's align: stretch owns it
+  const base = parentModes.base;
+  if (base !== 'HORIZONTAL' && base !== 'VERTICAL') return;
+  const dim = base === 'HORIZONTAL' ? 'height' : 'width';
+  const fillField = base === 'HORIZONTAL' ? 'fillHeight' : 'fillWidth';
+  const filling = m.occ.filter((o) => o.node[fillField] === true).length;
+  if (filling === 0) return;
+  if (parentModes.byVariant.size > 0 && [...parentModes.byVariant.values()].some((mode) => mode !== base)) return; // mixed parent modes — crossAxisFillByProp's door
+  if (m.occ.some((o) => o.node.bound?.[dim] !== undefined) || (part.tokens as Record<string, string> | undefined)?.[dim] !== undefined) return;
+  if (filling !== m.occ.length) {
+    ctx.notes.push(
+      `${where}: drawn FILL-${dim} under a ${base === 'HORIZONTAL' ? 'ROW' : 'COLUMN'} parent in ${filling}/${m.occ.length} variant occurrence(s) only — the cross-axis stretch has no per-variant spelling; NAMED, not carried (review)`,
+    );
+    return;
+  }
+  if (dim === 'width') {
+    // The horizontal twin keeps its bytes (no existing fixture changes): named.
+    ctx.notes.push(
+      `${where}: drawn FILL-width under a COLUMN parent whose other children do not all fill — the parent cannot carry \`align: stretch\` for this part alone and the contract has no per-part align-self; the cross-axis stretch is NAMED, not carried (review)`,
+    );
+    return;
+  }
+  if (!parentModes.crossDefinite) {
+    ctx.notes.push(
+      `${where}: drawn FILL-height under a ROW parent that HUGS its height (dump v1.31 fillHeight) — the parent cannot carry \`align: stretch\` for this part alone (its other children hug) and \`height: 100%\` of an auto height is auto, so no grammar spelling is exact; the cross-axis stretch is NAMED, not carried (review)`,
+    );
+    return;
+  }
+  const literals = (part.literals as Record<string, string> | undefined) ?? {};
+  if (literals.height !== undefined) return;
+  literals.height = '100%';
+  part.literals = literals;
+  ctx.notes.push(
+    `${where}: drawn FILL-height under a ROW parent with a DEFINITE height (dump v1.31 fillHeight; the parent's other children hug, so the parent's \`align: stretch\` cannot carry it) — carried as the part literal \`height: 100%\` (the cross-axis stretch against the parent's definite box, the same carrier crossAxisFillByProp uses for width)`,
+  );
 }
 
 /** GAP-CLOSING ROUND 6 — the parent's auto-layout MODE is not one scalar when
@@ -4484,6 +4784,13 @@ interface ParentModes {
   base: 'HORIZONTAL' | 'VERTICAL' | 'GRID' | null;
   /** variant name → that variant's parent auto-layout mode. */
   byVariant: Map<string, 'HORIZONTAL' | 'VERTICAL' | 'GRID' | null>;
+  /** dump v1.31 — the parent carries `align: stretch` (stretchEvidence): every
+   *  eligible child fills the cross axis, so no child needs its own carrier. */
+  stretchCross?: boolean;
+  /** dump v1.31 — the parent's CROSS axis is definite in every variant (FIXED
+   *  sizing mode, a bound size, or a captured box), so a child's `100%` on
+   *  that axis resolves against a real length. */
+  crossDefinite?: boolean;
   /** A2 grid (dump v1.17): the parent's grid-carriage decision — a PURE
    *  function of the dump (gridCarriageOf), computed once here so the parent
    *  layout (invertGridLayout) and the children's placement attach
@@ -4498,7 +4805,18 @@ function parentModesOf(m: Merged, mint: boolean): ParentModes {
   for (const o of m.occ) byVariant.set(o.variant, o.node.layout?.mode ?? null);
   const base = m.occ[0]?.node.layout?.mode ?? null;
   const grid = gridCarriageOf(m, mint); // undefined unless the base layout is GRID
-  return { base, byVariant, ...(grid ? { grid } : {}) };
+  const crossDim = base === 'HORIZONTAL' ? 'height' : base === 'VERTICAL' ? 'width' : null;
+  const crossDefinite =
+    crossDim !== null &&
+    m.occ.every(
+      (o) =>
+        o.node.layout?.counterSizing === 'FIXED' ||
+        o.node.bound?.[crossDim] !== undefined ||
+        o.node.bbox?.[crossDim] !== undefined ||
+        o.node.fixedSize?.[crossDim] !== undefined ||
+        o.node.abs !== undefined,
+    );
+  return { base, byVariant, stretchCross: stretchEvidence(m), crossDefinite, ...(grid ? { grid } : {}) };
 }
 
 // ---------------------------------------------------------------------------
@@ -4766,12 +5084,23 @@ function carryGridAxisSizing(
   part: Record<string, unknown>,
   ctx: Ctx,
   where: string,
+  /** The part's token record as it stands BEFORE attachTokens (the root
+   *  attaches after this door) — with minting on, a size the mint pass will
+   *  land there is already spoken for (a queued observation), and writing
+   *  the G8 literal beside it is the one-channel-two-spellings contradiction
+   *  the emitter refuses whole (grid-root-hug-height-fixed-conflict). */
+  tokensRecord?: Record<string, string>,
 ): void {
   const layout = part.layout as Record<string, unknown> | undefined;
   if (layout?.display !== 'grid') return;
   const l = m.occ.map((o) => o.node.layout).find((x) => x !== undefined);
   if (!l) return;
-  const tokens = (part.tokens ?? {}) as Record<string, string>;
+  const tokens = { ...(tokensRecord ?? {}), ...((part.tokens ?? {}) as Record<string, string>) };
+  for (const o of ctx.mint?.observations ?? []) {
+    if (tokensRecord !== undefined && o.target === tokensRecord && (o.cssProperty === 'width' || o.cssProperty === 'height')) {
+      tokens[o.cssProperty] ??= `(minted ${o.kind})`;
+    }
+  }
   const lits = (part.literals ?? {}) as Record<string, string>;
   const hasFr = (tracks: unknown): boolean =>
     Array.isArray(tracks) && tracks.some((t) => t !== null && typeof t === 'object' && 'fr' in (t as object));
@@ -5009,8 +5338,14 @@ function invertLayout(
   // stretch rides crossAxisFillByProp instead (called next to every
   // invertLayout site that owns a stylable part).
   const parentMode = parentModes?.base ?? null;
+  // dump v1.31 fillHeight: the vertical twin — a FILL along a COLUMN parent's
+  // primary axis is the same `layout.grow` (Phase 2 exam, rest-layout-sizing-
+  // vertical-fill).
   const grow =
-    parentMode === 'HORIZONTAL' && m.occ.every((o) => o.node.fillWidth === true) ? true : undefined;
+    (parentMode === 'HORIZONTAL' && m.occ.every((o) => o.node.fillWidth === true)) ||
+    (parentMode === 'VERTICAL' && m.occ.every((o) => o.node.fillHeight === true))
+      ? true
+      : undefined;
   if (!l) return grow ? { grow } : undefined;
 
   // A2 grid (dump v1.17): a GRID base layout inverts through its own door —
@@ -5822,18 +6157,57 @@ function carryTextOverrides(
  *  (acceptsMode 'prefer' — Figma's own preferredValues tier); unresolved
  *  keys stay a NAMED note carrying the keys verbatim. Pre-v1.5 dumps keep
  *  the classic "author `accepts` manually" note. */
-function applySlotAccepts(slot: Record<string, unknown>, property: string, ctx: Ctx, where: string, native = false) {
-  const prefs = ctx.swapPreferredValues?.[property];
+function applySlotAccepts(
+  slot: Record<string, unknown>,
+  property: string,
+  ctx: Ctx,
+  where: string,
+  native = false,
+  /** A native SLOT's bound property name (propRefs.slotContentId) when it
+   *  differs from the layer name the slot part is keyed by — the definition
+   *  is keyed by the PROPERTY (dump v1.31). */
+  propertyAlias?: string,
+) {
+  // The definition, by suffix-stripped name (dump v1.5 keys keep "#id").
+  const names = propertyAlias !== undefined && propertyAlias !== property ? [property, propertyAlias] : [property];
+  const definition = Object.entries(ctx.propertyDefinitions ?? {}).find(([k]) => names.includes(k.split('#')[0]))?.[1];
+  const spelled = names.length > 1 ? `"${property}" / slotContentId "${propertyAlias}"` : `"${property}"`;
+  const definedPrefs =
+    definition && (definition.type === 'INSTANCE_SWAP' || definition.type === 'SLOT') ? definition.preferredValues : undefined;
+  // `carried` is the set-level list (dump swapPreferredValues — the REST
+  // mapper emits it AS RETURNED since fix round 1, `[]` included; the plugin
+  // since v1.18); `undefined` means the producer did not carry it, which is
+  // NOT the same fact as an empty list.
+  const carried = names.map((n) => ctx.swapPreferredValues?.[n]).find((v) => v !== undefined);
+  const prefs = carried ?? definedPrefs;
   if (!prefs || prefs.length === 0) {
+    // PHASE 2 EXAM (rest-swap-preferred-values-empty, rest-slot-property-
+    // definition — the WRONG-NAME class). Three different facts used to share
+    // one sentence, and the sentence was false for two of them:
+    //   · the list IS captured (set-level `[]`, or a definition whose
+    //     preferredValues is empty/absent) — an UNCONSTRAINED swap by the
+    //     designer's own declaration (REST returns `preferredValues: []`; the
+    //     plugin omits an empty list but carries the definition);
+    //   · the list is not in the dump at all — no definition and no
+    //     set-level entry: a plugin dump before v1.18, or a REST dump mapped
+    //     before fix round 1 (map.ts dropped a SLOT definition whose
+    //     defaultValue is a {guid}; it keeps it now — the guid is a node
+    //     reference, not a value, and preferredValues ride as returned);
+    //   · (retired) "REST returns componentPropertyDefinitions EMPTY for SLOT
+    //     properties" — the live response contradicts it (2026-08-22 probe).
+    const definedType = definition && (definition.type === 'INSTANCE_SWAP' || definition.type === 'SLOT') ? definition.type : undefined;
+    if (definedType !== undefined || carried !== undefined) {
+      const kind = definedType ?? (native ? 'SLOT' : 'INSTANCE_SWAP');
+      const via = definedType !== undefined ? 'dump v1.5 propertyDefinitions' : 'set-level swapPreferredValues, carried as the reader returned it';
+      ctx.notes.push(
+        `${where}: slot "${property}" ${kind} preferredValues is EMPTY ([]) — an UNCONSTRAINED swap by the designer's own declaration (any component may fill it; ${via}); no \`accepts\` proposed and acceptsMode is left open — declare \`accepts\` in the contract if the code side should constrain it`,
+      );
+      return;
+    }
     ctx.notes.push(
       native
-        // The REST dead end, named where it bites (live probe 2e): REST
-        // serializes the SLOT node and its slotContentId but returns
-        // componentPropertyDefinitions EMPTY, so preferredValues never arrive
-        // over that transport. "Not captured" here means the READER could not
-        // see it — never "this slot accepts anything".
-        ? `${where}: slot "${property}" accepts (SLOT preferredValues) is not captured in this dump — the plugin dump is the authoritative slot reader (REST returns componentPropertyDefinitions EMPTY for SLOT properties, so accepts is INVISIBLE over REST); author \`accepts\` manually or re-dump through the plugin`
-        : `${where}: slot "${property}" accepts (INSTANCE_SWAP preferredValues) is not captured in dump v1 — author \`accepts\` manually`,
+        ? `${where}: slot "${property}" accepts (SLOT preferredValues) is not in this dump — no propertyDefinitions entry for ${spelled} and no set-level list: the producer did not carry the SLOT definition (a plugin dump before v1.18, or a REST dump mapped before the Phase 2 fix round — the mapper now keeps SLOT definitions with a {guid} default and their preferredValues as returned); never "this slot accepts anything" — author \`accepts\` manually or re-dump`
+        : `${where}: slot "${property}" accepts (INSTANCE_SWAP preferredValues) is not in this dump — no propertyDefinitions entry for ${spelled} and no set-level list (a pre-v1.5 dump, or the reader dropped the definition); author \`accepts\` manually`,
     );
     return;
   }
@@ -5875,6 +6249,11 @@ function applySlotDefaultContent(
     ctx.notes.push(`${where}: Slot-utility instance styling is the utility's own — elided`);
     return;
   }
+  // dump v1.31 — host facts on the drawn content instance (it never passes
+  // through buildPart's INSTANCE branch).
+  nameHostOverrides(contentInstance, ctx, `${where}/${contentInstance.name}`);
+  nameFixedSwaps(contentInstance, ctx, `${where}/${contentInstance.name}`);
+  nameReactions(contentInstance, ctx, `${where}/${contentInstance.name}`);
   const keys = instanceKeysOf(contentInstance);
   const res = resolveChildContract(instanceOf, keys, ctx);
   let contentId: string | null = res.id;
@@ -6415,6 +6794,125 @@ function buildRepeatPart(run: Merged[], ctx: Ctx, where: string, selfKey: string
 
 /** Children → parts record, with P9 run detection in front of the per-child
  *  walk (ONE walker serves buildPart's frame branch and the root). */
+/** dump v1.31 — prototype reactions (REST interactions[] / Plugin
+ *  reactions[]) NAMED with their target: the CHANGE_TO state-preview wiring
+ *  the dump v1.27 plugin receipt already names, now on the REST route too.
+ *  Never inverted to onClick/onHover (the State axis + statePreviewAxis
+ *  recover the state matrix; events are not drawn). */
+function nameReactions(m: Merged, ctx: Ctx, where: string): void {
+  const rows = new Map<string, string[]>();
+  for (const o of m.occ) {
+    for (const r of o.node.reactions ?? []) {
+      const target = r.destinationName !== undefined ? `"${r.destinationName}"${r.destination ? ` (${r.destination})` : ''}` : r.destination ?? '(no destination)';
+      const key = `${r.trigger} → ${r.action ?? 'ACTION'} ${target}${r.transition ? `; ${r.transition}${typeof r.duration === 'number' ? ` ${r.duration}ms` : ''}` : ''}`;
+      rows.set(key, [...(rows.get(key) ?? []), o.variant]);
+    }
+  }
+  if (rows.size === 0) return;
+  const hasStateAxis = ctx.stateAxisPromoted !== undefined || ctx.axes.some((a) => /^state$/i.test(a.property));
+  ctx.notes.push(
+    `${where}: prototype reaction(s) ${[...rows].map(([k, vs]) => `${k} [${vs.join(', ')}]`).join('; ')} — prototype-reactions-unsupported: ${hasStateAxis ? 'the State axis carries the hover/active/focus matrix as promoted state overrides, which is what this CHANGE_TO wiring previews' : 'no State axis is drawn, so the reaction previews a variant swap the contract models as a prop'}; the dump does not invent onClick/onHover from it — NAMED, not carried (dump v1.31 reactions)`,
+  );
+}
+
+/** dump v1.31 — the promoted STATE groups never pass through buildPart (the
+ *  base anatomy is built from the default-state variants only; the state
+ *  diff reads channels), so the facts named above would be SILENT on a
+ *  hover/active/focus plane — exactly where the Phase 2 exam found them
+ *  (effect style + effect bindings on the 5 Button Hover roots, the icon
+ *  colour overrides per state). Named here per state, root and depth-1. */
+function nameStateGroupFacts(ctx: Ctx, state: string, occs: Array<{ variant: string; node: DumpNode }>): void {
+  const where = `${ctx.setName}:root (state ${state})`;
+  const rootM: Merged = { name: 'root', type: 'COMPONENT', occ: occs.map((o) => ({ variant: o.variant, node: o.node })), children: [] };
+  nameEffectProvenance(rootM, ctx, where);
+  nameReactions(rootM, ctx, where);
+  nameItemReverseZIndex(rootM, ctx, where);
+  const byChild = new Map<string, Occ[]>();
+  for (const o of occs) {
+    for (const c of o.node.children ?? []) byChild.set(c.name, [...(byChild.get(c.name) ?? []), { variant: o.variant, node: c }]);
+  }
+  for (const [name, occ] of byChild) {
+    const m: Merged = { name, type: occ[0].node.type, occ, children: [] };
+    const at = `${where}/${name}`;
+    nameEffectProvenance(m, ctx, at);
+    nameReactions(m, ctx, at);
+    if (m.type === 'INSTANCE') {
+      nameHostOverrides(m, ctx, at);
+      nameFixedSwaps(m, ctx, at);
+    }
+  }
+}
+
+/** dump v1.31 — HOST overrides of a nested instance's internals. */
+function nameHostOverrides(m: Merged, ctx: Ctx, where: string): void {
+  const rows = new Map<string, string[]>();
+  for (const o of m.occ) {
+    for (const h of o.node.hostOverrides ?? []) {
+      const key = `"${h.path}" ${h.fields.join('/')}${h.fill ? ` = ${paintCssHex(h.fill)}${h.fill.var ? ` ({${dotPath(h.fill.var)}})` : ''}` : ''}`;
+      rows.set(key, [...(rows.get(key) ?? []), o.variant]);
+    }
+  }
+  if (rows.size === 0) return;
+  const instanceOf = first(m.occ, (n) => n.instanceOf) ?? m.name;
+  ctx.notes.push(
+    `${where}: host override(s) on nested "${instanceOf}" internals — ${[...rows].map(([k, vs]) => `${k} in ${vs.length}/${m.occ.length} variant(s) [${vs.join(', ')}]`).join('; ')} — a HOST fact (the icon colour per variant) on a child-owned node: instance internals are elided by rule and the child contract declares no overridable channel for it, so the override is NAMED, not carried (declare \`overridable\` on the child's root part and the component.overrides machinery can carry it as a minted per-variant ref)`,
+  );
+}
+
+/** dump v1.31 — FIXED INSTANCE_SWAP values on a nested instance. */
+function nameFixedSwaps(m: Merged, ctx: Ctx, where: string): void {
+  const rows = new Map<string, string[]>();
+  for (const o of m.occ) {
+    for (const [prop, swap] of Object.entries(o.node.fixedSwaps ?? {})) {
+      const key = `"${prop}" = ${swap.name !== undefined ? `"${swap.name}" (${swap.id}${swap.key ? `, key ${swap.key}` : ''})` : swap.id}`;
+      rows.set(key, [...(rows.get(key) ?? []), o.variant]);
+    }
+  }
+  if (rows.size === 0) return;
+  const instanceOf = first(m.occ, (n) => n.instanceOf) ?? m.name;
+  ctx.notes.push(
+    `${where}: nested "${instanceOf}" fixes INSTANCE_SWAP ${[...rows].map(([k, vs]) => `${k} in ${vs.length}/${m.occ.length} variant(s) [${vs.join(', ')}]`).join('; ')} (dump v1.31 fixedSwaps) — a component ref carries props only; nested slot CONTENT is not expressible in the composition grammar, so the fixed swap is NAMED, not carried (author the child's slot defaultContent, or expose the swap as a host property, to carry it)`,
+  );
+}
+
+/** dump v1.31 — itemReverseZIndex: paint order reversed. Render-inert unless
+ *  children overlap; the contract's z-index is declared-but-inert (paint
+ *  order on canvas is child order), so there is nothing to carry — NAMED. */
+function nameItemReverseZIndex(m: Merged, ctx: Ctx, where: string): void {
+  const on = m.occ.filter((o) => o.node.itemReverseZIndex === true);
+  if (on.length === 0) return;
+  ctx.notes.push(
+    `${where}: itemReverseZIndex is true in ${on.length}/${m.occ.length} variant(s) (dump v1.31) — auto-layout paint order reversed (the first child paints on top); render-inert unless children overlap, and the contract's z-index channel is declared-but-inert (canvas paint order IS child order), so the fact is NAMED, not carried`,
+  );
+}
+
+/** dump v1.31 — targetAspectRatio: a FRAME part carries it as the declared
+ *  `aspect-ratio` channel (DECLARED_CHANNELS, canvas: draw); an INSTANCE /
+ *  slot part owns no declared block (the child owns its box) — NAMED. */
+function carryAspectRatio(m: Merged, holder: Record<string, unknown> | null, ctx: Ctx, where: string): void {
+  const ratios = [...new Set(m.occ.map((o) => (o.node.targetAspectRatio ? `${o.node.targetAspectRatio.x} / ${o.node.targetAspectRatio.y}` : undefined)))];
+  const drawn = ratios.filter((r): r is string => r !== undefined);
+  if (drawn.length === 0) return;
+  if (holder === null) {
+    ctx.notes.push(
+      `${where}: aspect-ratio lock ${drawn.join(' / ')} (dump v1.31 targetAspectRatio) on a ${m.type === 'INSTANCE' ? 'nested instance' : m.type} — the declared aspect-ratio channel lives on a part's declared block and this part owns none (the child contract / slot content owns its box); the lock acts on resize only and the observed box already carries; NAMED, not carried`,
+    );
+    return;
+  }
+  if (ratios.length > 1) {
+    ctx.notes.push(
+      `${where}: aspect-ratio lock differs across variants (${ratios.map((r) => r ?? 'none').join(', ')}; dump v1.31) — aspect-ratio is a declared literal with no per-variant vocabulary; NAMED, not proposed (review)`,
+    );
+    return;
+  }
+  const declared = (holder.declared as Record<string, string> | undefined) ?? {};
+  if (declared['aspect-ratio'] === undefined) declared['aspect-ratio'] = drawn[0];
+  holder.declared = declared;
+  ctx.notes.push(
+    `${where}: aspect-ratio lock ${drawn[0]} drawn in every variant (dump v1.31 targetAspectRatio) — carried as declared aspect-ratio: ${drawn[0]} (canvas: the emitter resolves height from the bound width)`,
+  );
+}
+
 function buildChildParts(
   children: Merged[],
   mode: ParentModes | null,
@@ -6488,6 +6986,11 @@ function buildPart(
   // degradation (see OMIT_PART) — an unconditional emission would draw it in
   // variants that never carried it.
   if (visibleWhen === OMIT_PART) return null;
+  // dump v1.31 canvas facts with no carrier on ANY part class — named once
+  // here so no branch below can return past them.
+  nameReactions(m, ctx, where);
+  nameItemReverseZIndex(m, ctx, where);
+  if (m.type !== 'FRAME' && m.type !== 'COMPONENT') carryAspectRatio(m, null, ctx, where);
 
   // dump v1.7 tolerance ledger — additive capture channels the proposer does
   // not carry yet are NAMED once per part, never a throw and never silent.
@@ -6507,8 +7010,11 @@ function buildPart(
     attachByProp(part, byProp);
     carryTextCase(m, part, ctx, where); // dump v1.16 — declared text-transform
     carryFontSlant(m, part, ctx, where); // FC-DUMP-PROPOSE-ITALIC-DROPPED — declared font-style
+    carryFontFamily(m, part, ctx, where); // dump v1.31 — declared font-family
+    carryTextAlign(m, part, ctx, where); // dump v1.31 — declared text-align
     invertNodeOpacity(m, part, tokens, ctx, where);
     liftUnboundTextPaintsToLiterals(m, part, tokens, ctx, where);
+    nameEffectProvenance(m, ctx, where); // dump v1.31
     if (m.occ.some((o) => (o.node.effects?.length ?? 0) > 0)) {
       ctx.notes.push(
         `${where}: visible effect(s) on a TEXT node — a text shadow has no contract vocabulary (box-shadow is a box channel); channel NAMED, not proposed (dump v1.2)`,
@@ -6557,11 +7063,30 @@ function buildPart(
     // so `m.name` is the property and the part's slot name canonicalizes from
     // it exactly as the INSTANCE_SWAP path canonicalizes its property.
     const nativeSlot: Record<string, unknown> = { name: canonicalPropName(m.name) };
-    applySlotAccepts(nativeSlot, m.name, ctx, where, true);
+    applySlotAccepts(nativeSlot, m.name, ctx, where, true, first(m.occ, (n) => n.propRefs?.slotContentId));
     // The slot's DRAWN CHILDREN are its design-time content (instances
     // inherit them; resetSlot returns to them) — the native spelling of what
     // the swap convention held as one swapped instance.
     const drawn = m.children.filter((c) => c.type === 'INSTANCE');
+    // PHASE 2 EXAM (slot-frame-child-default-content): drawn content that is
+    // NOT a bare instance — a FRAME (with whatever it holds), a TEXT, a
+    // shape — is design-time content too, and it vanished with no receipt
+    // (the Card's Content slot lost Title[Kicker, Heading] and Footer[Chip,
+    // Button Group]; only the bare Dek instance survived). defaultContent
+    // holds component refs only, so a FRAME has no carrier: NAMED, with its
+    // whole subtree spelled out, never silent.
+    const undrawn = m.children.filter((c) => c.type !== 'INSTANCE');
+    if (undrawn.length > 0) {
+      const describe = (c: Merged): string => {
+        const kids = c.children.map(describe);
+        const n = c.occ[0].node;
+        const what = c.type === 'INSTANCE' ? `INSTANCE "${c.name}" of "${n.instanceOf ?? c.name}"` : `${c.type} "${c.name}"${c.type === 'TEXT' && n.text ? ` ${JSON.stringify(n.text.characters)}` : ''}`;
+        return kids.length > 0 ? `${what} [${kids.join(', ')}]` : what;
+      };
+      ctx.notes.push(
+        `${where}: native slot "${m.name}" drawn content includes ${undrawn.map(describe).join('; ')} — design-time content that is not a bare INSTANCE; slot defaultContent carries component refs only, so a FRAME child (and everything under it) has no carrier and is NAMED, not carried (Phase 2 exam: the Card Content slot's Title/Footer frames; make the frame a component, or author the slot's defaultContent, to carry it)`,
+      );
+    }
     if (drawn.length === 1) {
       applySlotDefaultContent(nativeSlot, m.name, drawn[0], ctx, where);
     } else if (drawn.length > 1) {
@@ -6581,6 +7106,7 @@ function buildPart(
       );
     }
     part.slot = nativeSlot;
+    nameFixedChildGeometry(m, ctx, where); // FC-GEOMETRY-EXCLUDED receipt (Phase 2 exam: Card Inline Image SLOT 308px)
     // Same visibility conventions as every other slot path: the "Show X"
     // convention marks the part optional; any other BOOLEAN visibility
     // binding is a real boolean prop driving the part.
@@ -6607,11 +7133,19 @@ function buildPart(
         `${where}: node opacity ${instOpacity.node.opacity} on a nested instance — parent-context opacity is not representable on a component ref (dump v1.2); review`,
       );
     }
+    nameEffectProvenance(m, ctx, where); // dump v1.31
     if (m.occ.some((o) => (o.node.effects?.length ?? 0) > 0)) {
       ctx.notes.push(
         `${where}: visible effect(s) on a nested instance — not representable on a component ref (dump v1.2); review`,
       );
     }
+    // dump v1.31 — HOST facts on a nested instance, named before any branch
+    // returns: overrides of the child's internals (the icon colour per
+    // variant) and FIXED swap values (a configured nested Icon). Both are
+    // host facts the child contract cannot know; neither has a carrier in
+    // the composition grammar (a component ref carries props only).
+    nameHostOverrides(m, ctx, where);
+    nameFixedSwaps(m, ctx, where);
     const swapProperty = unifiedPropRef(m, 'mainComponent', ctx, where);
     if (swapProperty) {
       // A swap-bound instance outside a dedicated wrapper: still a slot part,
@@ -7008,6 +7542,7 @@ function buildPart(
     const layout = invertLayout(m, false, parentMode, ctx, where);
     if (layout) part.layout = layout;
     applyLayoutSplit(part, invertLayoutByProp(m, ctx, where));
+    nameFixedChildGeometry(m, ctx, where); // FC-GEOMETRY-EXCLUDED receipt
     if (m.occ.some((o) => absBoxOf(o.node) !== undefined)) {
       ctx.notes.push(
         `${where}: absolute placement captured (dump v1.7 \`abs\`) on a SPACER part — a spacer's job is in-flow growth; placement not carried (ledgered by name)`,
@@ -7081,7 +7616,8 @@ function buildPart(
     invertNodeOpacity(m, part, tokens, ctx, where);
     invertNodeEffects(m, tokens, ctx, where);
     attachTokens(ctx, part, tokens);
-    carryGridAxisSizing(m, part, ctx, where); // G8
+    carryGridAxisSizing(m, part, ctx, where, tokens); // G8
+    nameFixedChildGeometry(m, ctx, where); // FC-GEOMETRY-EXCLUDED receipt
     const slot: Record<string, unknown> = { name: canonicalPropName(soleSwap) };
     applySlotAccepts(slot, soleSwap, ctx, where);
     applySlotDefaultContent(slot, soleSwap, soleChild, ctx, where);
@@ -7101,6 +7637,9 @@ function buildPart(
     carryClip(m, part, ctx, where, { carry: true }); // FC-DUMP-PROPOSE-CLIP-UNREAD
     invertNodeEffects(m, tokens, ctx, where);
     carryAbsPlacement(m, part, tokens, ctx, where, { size: true });
+    carryCrossAxisFill(m, parentMode, part, ctx, where); // dump v1.31
+    carryAspectRatio(m, part, ctx, where); // dump v1.31
+    nameFixedChildGeometry(m, ctx, where); // FC-GEOMETRY-EXCLUDED receipt
     attachTokens(ctx, part, tokens);
     if (visibleWhen) part.visibleWhen = visibleWhen;
     return part;
@@ -7112,6 +7651,9 @@ function buildPart(
   // The COLUMN half of a per-variant FILL (round 6) — no-op unless the
   // parent's mode is a function of an axis and this part draws fillWidth.
   crossAxisFillByProp(m, parentMode, part, ctx, where);
+  // dump v1.31: the cross-axis FILL the parent's align: stretch did not absorb.
+  carryCrossAxisFill(m, parentMode, part, ctx, where);
+  carryAspectRatio(m, part, ctx, where); // dump v1.31 targetAspectRatio → declared aspect-ratio
   invertNodeOpacity(m, part, tokens, ctx, where);
   carryClip(m, part, ctx, where, { carry: true }); // FC-DUMP-PROPOSE-CLIP-UNREAD
   invertNodeEffects(m, tokens, ctx, where);
@@ -7121,8 +7663,9 @@ function buildPart(
   // dump v1.8 `fixedSize`: the in-flow fixed-size box (mutually exclusive
   // with `abs` by dump construction — exact no-op on older dumps).
   mintFixedSize(m, part, tokens, ctx, where);
+  nameFixedChildGeometry(m, ctx, where); // FC-GEOMETRY-EXCLUDED receipt (Phase 2 exam: Button (contract) 20×20 slot frames)
   attachTokens(ctx, part, tokens);
-  carryGridAxisSizing(m, part, ctx, where); // G8
+  carryGridAxisSizing(m, part, ctx, where, tokens); // G8
   const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
   if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where, m);
   const mode = parentModesOf(m, ctx.mint !== undefined);
@@ -8058,7 +8601,12 @@ function invertRootFixedSize(merged: Merged, root: Record<string, unknown>, root
   const fixedAxis = (o: Occ, dim: 'width' | 'height'): boolean => {
     const l = o.node.layout;
     if (!l) return true; // non-auto-layout root: fixed by construction (see above)
-    const alongPrimary = (l.mode === 'HORIZONTAL') === (dim === 'width');
+    // GRID: primary = horizontal (GP1b) — the same axis rule carryGridAxisSizing
+    // reads. Reading a GRID root as a column put its HUG height on the FIXED
+    // plane and minted the drawn 95px beside G8's `fit-content` — the double
+    // spelling the emitter refuses by name (Phase 2 exam: Section Header /
+    // Footer blocked the whole generate batch; grid-root-hug-height-fixed-conflict).
+    const alongPrimary = l.mode === 'GRID' ? dim === 'width' : (l.mode === 'HORIZONTAL') === (dim === 'width');
     return (alongPrimary ? l.primarySizing : l.counterSizing) === 'FIXED';
   };
   // The bbox is the BORDER box and size tokens SPEAK border-box — Figma's
@@ -8074,6 +8622,18 @@ function invertRootFixedSize(merged: Merged, root: Record<string, unknown>, root
   for (const dim of ['width', 'height'] as const) {
     const fixedIn = withBox.filter((o) => fixedAxis(o, dim));
     if (rootTokens[dim] !== undefined || merged.occ.some((o) => o.node.bound?.[dim])) continue;
+    // A FILL root (layoutSizingHorizontal/Vertical FILL — dump fillWidth /
+    // fillHeight) is spelled FIXED by Figma's sizing MODE, but the drawn box
+    // is the container's width, not a design value: minting it would pin a
+    // fluid root (Phase 2 exam: the 1296px Section Header/Footer grid roots
+    // fill their page column; max-width already carries the drawn cap).
+    const fillField = dim === 'width' ? 'fillWidth' : 'fillHeight';
+    if (withBox.every((o) => o.node[fillField] === true)) {
+      ctx.notes.push(
+        `${where}: root ${dim} is FILL in every variant (the sizing mode spells it FIXED; the drawn ${[...new Set(withBox.map((o) => o.node.bbox![dim]))].join('/')}px is the CONTAINER's measure) — fluid, NOT minted as a root ${dim}; the component fills its host${dim === 'width' && (rootTokens['max-width'] !== undefined || merged.occ.some((o) => typeof o.node.maxWidth === 'number')) ? ' up to the carried max-width' : ''}`,
+      );
+      continue;
+    }
     // GAP-CLOSING ROUND 6 — A HUG AXIS IS A FACT, NOT A NUMBER.
     //
     // A hugging axis has no design-authored measure: its drawn box is a
@@ -8180,6 +8740,17 @@ function invertRootFixedSize(merged: Merged, root: Record<string, unknown>, root
 const paintKey = (p?: { var?: string; hex?: string; alpha?: number }): string =>
   p === undefined ? 'none' : p.var !== undefined ? `var:${p.var}` : `hex:${paintCssHex(p)}`;
 
+/** PHASE 2 EXAM (fill-unset-by-state): the literal an ABSENT fill on a
+ *  non-TEXT node IS — `#00000000` — as a paint, so the state-diff channels
+ *  read "no fill" as the drawn transparent box exactly as the base channel
+ *  does (invertNodeTokens absentAs). A state override that "unsets" a fill
+ *  is an override TO transparent; naming-and-dropping it cost the Button its
+ *  whole hover plane AND (through UNBOUND) its base background. TEXT fills
+ *  keep the undefined reading (an ink-less text node is a capture gap). */
+const TRANSPARENT_FILL: { hex: string; alpha: number } = { hex: '000000', alpha: 0 };
+const boxFillOf = (n: DumpNode): { var?: string; hex?: string; alpha?: number } | undefined =>
+  n.type === 'TEXT' ? undefined : (n.fill ?? TRANSPARENT_FILL);
+
 /** Push a mint observation for a STATE override — same machinery as base
  *  observations (ONE mintTokens call dedupes/claims across both), with the
  *  part spelled `state-<state>` so minted paths read
@@ -8280,6 +8851,7 @@ function proposeStateDiffs(
     .filter((v) => baseByName.has(v.name))
     .map((v) => ({ variant: v.name, node: v, base: baseByName.get(v.name)! }));
   if (occs.length === 0) return;
+  nameStateGroupFacts(ctx, state, occs); // dump v1.31 — effect style/bindings, reactions, host overrides on the state plane
 
   const paintChannel = (
     cssProp: string,
@@ -8404,7 +8976,7 @@ function proposeStateDiffs(
     }
   };
 
-  paintChannel('background-color', 'fill', (n) => (n.type === 'TEXT' ? undefined : n.fill));
+  paintChannel('background-color', 'fill', boxFillOf);
   paintChannel('border-color', 'stroke', (n) => n.stroke);
   numberChannel('border-width', 'strokeWeight', 'px', (n) => n.strokeWeight, 0, ['strokeWeight', 'strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight']);
   numberChannel('border-radius', 'cornerRadius', 'px', (n) => n.cornerRadius, 0, ['topLeftRadius', 'topRightRadius', 'bottomLeftRadius', 'bottomRightRadius']);
@@ -8669,7 +9241,7 @@ function proposeStateDiffs(
       childOccs.every((x) => x.node.type === 'TEXT')
         ? [{ cssProp: 'color', paintName: 'fill', pick: (n) => n.fill }]
         : [
-            { cssProp: 'background-color', paintName: 'fill', pick: (n) => n.fill },
+            { cssProp: 'background-color', paintName: 'fill', pick: boxFillOf },
             { cssProp: 'border-color', paintName: 'stroke', pick: (n) => n.stroke },
           ];
     for (const ch of channels) {
@@ -8968,7 +9540,7 @@ function proposeStateDiffs(
         const paintChannels = isText
           ? [{ cssProp: 'color', fieldName: 'fill', pick: (n: DumpNode) => n.fill }]
           : [
-              { cssProp: 'background-color', fieldName: 'fill', pick: (n: DumpNode) => n.fill },
+              { cssProp: 'background-color', fieldName: 'fill', pick: boxFillOf },
               { cssProp: 'border-color', fieldName: 'stroke', pick: (n: DumpNode) => n.stroke },
             ];
         for (const ch of paintChannels) {
@@ -9049,6 +9621,46 @@ function dropStateMintTargets(ctx: Ctx, target: Record<string, string>, state: s
 // Whole-set proposal
 // ---------------------------------------------------------------------------
 
+/** Drop every applied componentProperties value that is not a string or a
+ *  boolean (the carriable grammar — extract/figma/types.ts DumpNode) from a
+ *  PRIVATE clone of the set, one receipt per (variant, node, property). The
+ *  only producer of such values today is the REST mapper copying a
+ *  SLOT-typed value through as `{ guid }`. Sets without one are returned
+ *  as-is (same object, zero receipts — byte-identical). */
+function stripNonScalarAppliedProps(set: DumpSet, receipts: string[]): DumpSet {
+  const offenders: Array<{ variant: string; path: string; node: DumpNode; keys: string[] }> = [];
+  const scan = (n: DumpNode, variant: string, path: string): void => {
+    const bad = Object.entries(n.componentProperties ?? {})
+      .filter(([, v]) => typeof v !== 'string' && typeof v !== 'boolean')
+      .map(([k]) => k);
+    if (bad.length > 0) offenders.push({ variant, path, node: n, keys: bad });
+    for (const c of n.children ?? []) scan(c, variant, `${path}/${c.name}`);
+  };
+  for (const v of set.variants) scan(v, v.name, `${set.setName}:${v.name}`);
+  if (offenders.length === 0) return set;
+  const clone = JSON.parse(JSON.stringify(set)) as DumpSet;
+  const strip = (n: DumpNode): void => {
+    if (n.componentProperties) {
+      for (const [k, v] of Object.entries(n.componentProperties)) {
+        if (typeof v !== 'string' && typeof v !== 'boolean') delete n.componentProperties[k];
+      }
+      if (Object.keys(n.componentProperties).length === 0) delete n.componentProperties;
+    }
+    for (const c of n.children ?? []) strip(c);
+  };
+  for (const v of clone.variants) strip(v);
+  for (const o of offenders) {
+    for (const key of o.keys) {
+      const raw = (o.node.componentProperties as Record<string, unknown>)[key];
+      const kind = raw !== null && typeof raw === 'object' && 'guid' in (raw as object) ? 'a SLOT-typed value ({guid} — a slot-content node reference)' : `a non-scalar value (${JSON.stringify(raw)})`;
+      receipts.push(
+        `${o.path}: applied prop "${key.split('#')[0]}" on nested "${o.node.instanceOf ?? o.node.name}" is ${kind}, not a prop value the contract grammar holds — dropped BY NAME (the slot's drawn content is the child component's own; this value used to refuse the whole set at the contract schema — Phase 2 exam, Card Grid)`,
+      );
+    }
+  }
+  return clone;
+}
+
 export function proposeFromDump(
   set: DumpSet,
   opts: {
@@ -9123,6 +9735,14 @@ export function proposeFromDump(
   },
 ): FigmaProposalResult {
   const projectionMode = opts.projectionMode ?? 'exact';
+  // PHASE 2 EXAM (rest-instance-slot-prop-value): a nested instance's
+  // SLOT-typed property value arrives from the REST route as the API's own
+  // `{ guid: … }` OBJECT — a slot-content node reference, not a prop value.
+  // It used to ride componentProperties into the component ref and crash
+  // the whole set on ContractSchema ("Unrecognized key: guid" — Card Grid in
+  // exact mode). Stripped here, on a private clone, BY NAME per node.
+  const slotValueReceipts: string[] = [];
+  set = stripNonScalarAppliedProps(set, slotValueReceipts);
   const sourceProjection = validateExactVariantProjection(set);
   /** The emitter's DECLARED sparse State matrix, carried by the dump (v1.21).
    *  Present only for sets this pipeline drew with figmaStatePreviews on, and
@@ -9144,7 +9764,7 @@ export function proposeFromDump(
   }
 
   const prefix = opts.prefix ?? 'ds';
-  const preNotes: string[] = [];
+  const preNotes: string[] = [...slotValueReceipts];
 
   // dump v1.16 — U+2024 fold receipts, ONE per distinct variable per set:
   // every binding site below spells refs through dotPath, which folds ONE DOT
@@ -9179,7 +9799,7 @@ export function proposeFromDump(
   // DEFAULT mode's variants only — the other modes never feed anatomy,
   // facts, or the mint pass (their resolved literals are receipts, not a
   // second palette).
-  const modePromo = detectModeAxis(parseAxes(set.variants.map((v) => v.name)), set.variants, set.setName, preNotes);
+  const modePromo = detectModeAxis(applyDeclaredAxisDefaults(parseAxes(set.variants.map((v) => v.name)), set), set.variants, set.setName, preNotes);
   if (projectionMode === 'exact' && modePromo) {
     semanticProjectionRefusal(sourceProjection, modePromo.axis, 'token-mode');
   }
@@ -9201,7 +9821,7 @@ export function proposeFromDump(
   // are the base the whole pipeline runs on; each promoted state's variants
   // (and the disabled group) are kept aside, names stripped of the state
   // pair, for the root-diff pass after the anatomy is built.
-  let statePromo = detectStateAxis(parseAxes(sourceVariants.map((v) => v.name)), preNotes);
+  let statePromo = detectStateAxis(applyDeclaredAxisDefaults(parseAxes(sourceVariants.map((v) => v.name)), set), preNotes);
   let baseVariants: DumpNode[] | null = null;
   const stateGroups = new Map<PromotedState, DumpNode[]>();
   let disabledGroup: DumpNode[] = [];
@@ -9256,7 +9876,7 @@ export function proposeFromDump(
   }
 
   const variantNames = (baseVariants ?? sourceVariants).map((v) => v.name);
-  const axes = parseAxes(variantNames);
+  const axes = applyDeclaredAxisDefaults(parseAxes(variantNames), set, preNotes);
   const enumAxes = axes.filter((a) => !isBoolAxis(a.values));
 
   // Self contract id — the STAMPED id outranks the name-derived slug
@@ -9305,6 +9925,8 @@ export function proposeFromDump(
     swapPreferredValues: set.swapPreferredValues,
     boolDefaults: set.boolDefaults,
     slotDescriptions: set.slotDescriptions,
+    propertyDefinitions: set.propertyDefinitions,
+    ...(statePromo ? { stateAxisPromoted: statePromo.axis.property } : {}),
     hiddenCaptured: opts.hiddenCaptured,
     capturedValues: opts.capturedValues,
     iconAssets: opts.iconAssets,
@@ -9436,6 +10058,9 @@ export function proposeFromDump(
     root.declared = { ...(root.declared as Record<string, string> | undefined), ...rootDeclared };
   }
   carryClip(merged, root, ctx, where, { carry: true }); // FC-DUMP-PROPOSE-CLIP-UNREAD — the variant root clips too
+  nameReactions(merged, ctx, where); // dump v1.31 — Button ON_HOVER → CHANGE_TO wiring, named with its target
+  nameItemReverseZIndex(merged, ctx, where); // dump v1.31
+  carryAspectRatio(merged, root, ctx, where); // dump v1.31
   // dump v1.7 tolerance ledger (root): an IMAGE fill on the variant root
   // (photo avatars) is captured by name only — the image stays unexported;
   // with minting on, the root renders the neutral placeholder gradient
@@ -9494,6 +10119,8 @@ export function proposeFromDump(
     liftUnboundTextPaintsToLiterals(only, root, rootTokens, ctx, `${where}/label`);
     carryTextCase(only, root, ctx, `${where}/label`); // dump v1.16 — hoists with the label
     carryFontSlant(only, root, ctx, `${where}/label`); // FC-DUMP-PROPOSE-ITALIC-DROPPED — hoists with the label
+    carryFontFamily(only, root, ctx, `${where}/label`); // dump v1.31 — hoists with the label
+    carryTextAlign(only, root, ctx, `${where}/label`); // dump v1.31 — hoists with the label
 
     // The label's tokens hoisted — retarget its captured mint observations
     // to the record that actually ships (rootTokens).
@@ -9534,7 +10161,7 @@ export function proposeFromDump(
   // G8: a grid ROOT states each axis too. Runs AFTER invertRootFixedSize so an
   // axis that door already made definite (px mint, or its own 'fit-content'
   // all-HUG branch) is left exactly as it found it.
-  carryGridAxisSizing(merged, root, ctx, where);
+  carryGridAxisSizing(merged, root, ctx, where, rootTokens);
   attachByProp(root, rootTokensByProp);
   attachTokens(ctx, root, rootTokens);
 

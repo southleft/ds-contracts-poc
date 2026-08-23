@@ -83,6 +83,8 @@ import {
   textProps,
   UA_MARGIN_ELEMENTS,
   validateContract,
+  wcHostAttributeEffect,
+  wcHostCollisions,
 } from '@ds-contracts/core';
 
 // ---------------------------------------------------------------------------
@@ -758,6 +760,29 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
   const arrays = contract.props.filter(isArrayType);
   const attrProps = attributeProps(contract);
   const observed = attrProps.map((p) => attrOf(p.name));
+  // PROP-NAME COLLISIONS with the host (core/prop-collision.ts): a prop
+  // named like an HTMLElement member (`title`, `hidden`, `id`…) gets NO
+  // accessor — it would shadow the platform's own property (and fail to
+  // compile where the types differ). The attribute stays observed and the
+  // view reads it directly, with the contract default; the header names it.
+  const hostCollisions = new Set(wcHostCollisions(contract));
+  /** The accessor's getter body as an expression — for a colliding prop the
+   *  view reads the attribute here instead of through `this.<prop>`. */
+  const attrReadExpr = (p: Prop): string => {
+    const a = attrOf(p.name);
+    if (isEnum(p)) {
+      const union = enumUnion(p.type.enum);
+      return p.default !== undefined
+        ? `(this.getAttribute('${a}') as ${union} | null) ?? ${JSON.stringify(p.default).replace(/"/g, "'")}`
+        : `this.getAttribute('${a}') as ${union} | null`;
+    }
+    if (p.type === 'boolean') return `this.hasAttribute('${a}')`;
+    if (p.type === 'number') {
+      const fallback = typeof p.default === 'number' ? String(p.default) : 'null';
+      return `((v) => (v === null || v === '' || Number.isNaN(Number(v)) ? ${fallback} : Number(v)))(this.getAttribute('${a}'))`;
+    }
+    return `this.getAttribute('${a}') ?? ${typeof p.default === 'string' ? JSON.stringify(p.default) : 'null'}`;
+  };
 
   const interactive =
     events.length > 0 ||
@@ -772,6 +797,7 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
   const accessors: string[] = [];
   const accessorName = (name: string) => (isIdent(name) ? name : `[${JSON.stringify(name)}]`);
   for (const p of enums) {
+    if (hostCollisions.has(p.name)) continue;
     const a = attrOf(p.name);
     const union = enumUnion(p.type.enum);
     const hasDefault = p.default !== undefined;
@@ -790,6 +816,7 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
     );
   }
   for (const p of bools) {
+    if (hostCollisions.has(p.name)) continue;
     const a = attrOf(p.name);
     accessors.push(
       `  /** ${p.description ?? `Boolean prop "${p.name}".`} */`,
@@ -802,6 +829,7 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
     );
   }
   for (const p of numbers) {
+    if (hostCollisions.has(p.name)) continue;
     const a = attrOf(p.name);
     const fallback = typeof p.default === 'number' ? String(p.default) : 'null';
     accessors.push(
@@ -819,6 +847,7 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
     );
   }
   for (const p of namedTexts) {
+    if (hostCollisions.has(p.name)) continue;
     const a = attrOf(p.name);
     const fallback = typeof p.default === 'string' ? JSON.stringify(p.default) : 'null';
     accessors.push(
@@ -833,6 +862,7 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
     );
   }
   for (const p of arrays) {
+    if (hostCollisions.has(p.name)) continue;
     const fields = p.type.arrayOf;
     const recType = `{ ${Object.entries(fields)
       .map(([f, t]) => `${isIdent(f) ? f : JSON.stringify(f)}?: ${t === 'text' ? 'string' : t}`)
@@ -1147,7 +1177,12 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
   const viewProps = [...attrProps, ...arrays];
   const viewBody = [
     `    const p = {`,
-    ...viewProps.map((p) => `      ${isIdent(p.name) ? p.name : JSON.stringify(p.name)}: this.${isIdent(p.name) ? p.name : `[${JSON.stringify(p.name)}]`},`),
+    ...viewProps.map(
+      (p) =>
+        `      ${isIdent(p.name) ? p.name : JSON.stringify(p.name)}: ${
+          hostCollisions.has(p.name) ? attrReadExpr(p) : `this.${isIdent(p.name) ? p.name : `[${JSON.stringify(p.name)}]`}`
+        },`,
+    ),
     `    };`,
     ...(viewProps.length === 0 ? ['    void p;'] : []),
     ...extraConsts,
@@ -1209,7 +1244,13 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
  *
  * Named no-ops on this contract (canvas-only concepts, deliberately not
  * re-created here):
-${noOps.map((n) => ` *   · ${n}`).join('\n')}
+${noOps.map((n) => ` *   · ${n}`).join('\n')}${
+    hostCollisions.size === 0
+      ? ''
+      : `\n *\n * HTMLElement members the contract's props collide with — NO accessor is\n * generated (it would shadow the platform's own property); the attribute is\n * observed and rendered from, and the platform still applies it:\n${[...hostCollisions]
+          .map((n) => ` *   · prop ${JSON.stringify(n)} is an HTMLElement member — ${wcHostAttributeEffect(n)}`)
+          .join('\n')}`
+  }
  */`;
 
   const defaultTrueBools = bools.filter((p) => p.default === true);

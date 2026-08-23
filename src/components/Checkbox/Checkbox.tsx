@@ -2,6 +2,10 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/checkbox.contract.json (ds.checkbox v2.0.1)
  * Regenerate with: npm run generate
+ *
+ * DOM attrs OMITTED from LabelHTMLAttributes<HTMLLabelElement> — the contract's own props claim these
+ * names, so the HTML attribute of the same name cannot be passed through ...rest:
+ *   onToggle
  */
 import { forwardRef, useState } from 'react';
 import type { LabelHTMLAttributes } from 'react';
@@ -13,7 +17,7 @@ const ICONS: Record<string, string> = {
   dash: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5.5" y1="10" x2="14.5" y2="10" stroke-linecap="round"/></svg>',
 };
 
-export interface CheckboxProps extends LabelHTMLAttributes<HTMLLabelElement> {
+export interface CheckboxProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'onToggle'> {
   /** Checked, unchecked, or indeterminate (partial selection in a group). */
   value?: 'unchecked' | 'checked' | 'indeterminate';
   /** Control size. */

@@ -9,6 +9,10 @@
  * styles and are omitted; ROOT disabled-state tokens apply via the disabled
  * prop; PART-level state overrides (Part.states, v13) are omitted — the same
  * declared limit as the hover states (state-selected descendant styling).
+ *
+ * DOM attrs OMITTED from HTMLAttributes<HTMLElement> — the contract's own props claim these
+ * names, so the HTML attribute of the same name cannot be passed through ...rest:
+ *   title
  */
 import { forwardRef } from 'react';
 import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
@@ -67,7 +71,7 @@ const S: Record<string, CSSProperties> = {
 /** Per-variant overrides, resolved per enum value: "prop-value:part" → styles. */
 const V: Record<string, CSSProperties> = {};
 
-export interface CardProps extends HTMLAttributes<HTMLElement> {
+export interface CardProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
   /** Card heading, bound to the header title part on both surfaces. */
   title: string;
   /** Constrained actions slot — only actions-grade components. */

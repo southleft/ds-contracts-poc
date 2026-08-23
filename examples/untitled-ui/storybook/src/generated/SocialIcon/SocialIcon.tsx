@@ -2,6 +2,10 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/social-icon.contract.json (ds.social-icon v0.1.0)
  * Regenerate with: npm run generate
+ *
+ * DOM attrs OMITTED from HTMLAttributes<HTMLSpanElement> — the contract's own props claim these
+ * names, so the HTML attribute of the same name cannot be passed through ...rest:
+ *   style
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
@@ -22,7 +26,7 @@ const ICONS: Record<string, string> = {
     '<svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\n<path fill-rule="evenodd" clip-rule="evenodd" d="M15.9455 23L10.396 15.0901L3.44886 23H0.509766L9.09209 13.2311L0.509766 1H8.05571L13.286 8.45502L19.8393 1H22.7784L14.5943 10.3165L23.4914 23H15.9455ZM19.2185 20.77H17.2398L4.71811 3.23H6.6971L11.7121 10.2532L12.5793 11.4719L19.2185 20.77Z" fill="currentColor"/>\n</svg>',
 };
 
-export interface SocialIconProps extends HTMLAttributes<HTMLSpanElement> {
+export interface SocialIconProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'style'> {
   platform?: 'facebook' | 'google' | 'apple' | 'figma' | 'dribbble' | 'xtwitter';
   state?: 'default';
   style?: 'white' | 'brand';

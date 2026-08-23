@@ -236,6 +236,37 @@ export function capturedTokensFromDump(dump: Record<string, unknown>): CapturedT
 export const CAPTURED_VARIABLES_ABSENT_RECEIPT =
   'no captured variables: the dump carries no `_variables` channel (REST transport or a pre-v1.4 plugin dump) — the designer\'s variables are not in this folder; recapture with the plugin (dump v1.4+) to carry them';
 
+/**
+ * The receipt for a dump WITHOUT `_variables`, by cause (Phase 2 exam,
+ * 2026-08-22). A REST dump stamps `_provenance.variables` with what the
+ * variables endpoint answered or why it did not; the generic line above said
+ * "REST transport … recapture with the plugin" for a kit whose only problem
+ * was a token minted without `file_variables:read` — wrong route, wrong fix.
+ * Falls back to the generic constant when the dump carries no stamp (plugin
+ * dumps, hand-authored fixtures).
+ */
+export function capturedVariablesAbsentReceipt(dump: Record<string, unknown>): string {
+  const prov = dump['_provenance'] as { variables?: unknown } | undefined;
+  const v = prov?.variables as
+    | { status: 'resolved'; count: number; collections: number; modeSource: string }
+    | { status: 'unavailable'; cause: string; httpStatus?: number; message: string; fix: string | null }
+    | undefined;
+  if (!v || typeof v !== 'object') return CAPTURED_VARIABLES_ABSENT_RECEIPT;
+  if (v.status === 'resolved') {
+    return `no captured variables: the REST variables endpoint answered (${v.count} variable(s) in ${v.collections} collection(s)) but no binding on the mapped sets resolved through a variable carrying values — nothing to write to captured.dtcg.json (a names-only response resolves names and captures no values)`;
+  }
+  if (v.cause === 'scope') {
+    return `no captured variables: the REST variables endpoint refused — the token lacks the \`file_variables:read\` scope (HTTP ${v.httpStatus ?? 403}; a token scope, NOT a plan limit). FIX: ${v.fix ?? 'regenerate the token with file_variables:read'} and re-run extract:figma:rest; until then every binding is a resolved literal and captured.dtcg.json is NOT written`;
+  }
+  if (v.cause === 'network') {
+    return `no captured variables: the REST variables endpoint could not be reached (network) — ${v.message}; captured.dtcg.json is NOT written`;
+  }
+  if (v.cause === 'not-fetched') {
+    return `no captured variables: the caller never fetched /v1/files/:key/variables/local — ${v.message}; captured.dtcg.json is NOT written`;
+  }
+  return `no captured variables: the REST variables endpoint refused with HTTP ${v.httpStatus ?? '?'} naming no missing scope (plan tier UNVERIFIED — docs/HANDOFF.md) — ${v.message}; captured.dtcg.json is NOT written`;
+}
+
 export interface CapturedTokensDocument {
   /** The DTCG document written as `captured.dtcg.json`: the consuming-mode
    *  tree (what the proposal's refs resolve against, loadable through

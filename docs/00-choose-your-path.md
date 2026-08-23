@@ -80,6 +80,22 @@ by this tool — and you want real, typed code from it.
 **Prerequisites.** Node ≥ 20; Figma desktop + the plugin. No browser
 capture, no channel key.
 
+*Without the plugin* (`npm run extract:figma:rest -- <figma-url>` with a
+`FIGMA_TOKEN`): the REST route reads the same sets, but the kit's **variable
+names and modes** come from `/v1/files/:key/variables/local`, which answers
+only to a token minted with the **`file_variables:read`** scope ("Variables:
+read" on the personal-access-token form — a token scope, *not* a plan tier).
+Without it every binding degrades to its resolved literal, the proposals
+mint `imported.*` tokens from those literals, and `captured.dtcg.json` is
+not written. The CLI names the cause on stderr (`✖ variables: TOKEN SCOPE
+MISSING … fix: regenerate the token with file_variables:read`), the dump
+carries it in `_provenance.variables` and as a `variables-unavailable` row
+in `_degradations`, and `figma-proposals.md` repeats it — a refusal naming no
+scope, or a network failure, is named as exactly that instead. With the
+scope, the dump carries `_variables` (values per collection mode, aliases
+resolved) and propose writes `captured.dtcg.json` beside `minted.dtcg.json`,
+the same as a plugin dump.
+
 **The verbs.**
 
 1. In the plugin, open the **Send** tab, select the set (or find it with

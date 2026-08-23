@@ -38,15 +38,16 @@ Fixtures in `extract/figma/rest/fixtures/` are hand-crafted `GetFileNodesRespons
 ## Degraded path (variables response absent — Enterprise endpoint unavailable)
 
 - ✅ variables absent → variable-unresolved degradations named (50)
-- ✅ every degradation names the exact variable id and the reason (Enterprise endpoint unavailable)
+- ✅ every degradation names the exact variable id and the reason (no variables response was passed — the mapper says so rather than guessing a plan tier)
 - ✅ raw fill surfaced as a named UNBOUND entry (#dbeafe)
 - ✅ nearest-token candidates include color.feedback.info.background (got: color.feedback.info.background, color.identity.background, color.table.row.selected, color.token.blue.background, color.chat.user.background)
 - ✅ unbound padding and cornerRadius literals reported (bindings degraded, values never tokenized)
 - ✅ zero fabrication: no color token ref anywhere in the degraded proposal
 - ✅ text-style identity survives (styles map is not Enterprise-gated): font-size = {font.badge.size}
 
-### Degradations named by the mapper (50)
+### Degradations named by the mapper (51)
 
+- `[variables-unavailable]` file:8nim1d0IPnehMxA7B7SYxC — no variables response was passed to the mapper (/v1/files/:key/variables/local was not fetched) — every variable binding on this dump is a resolved literal
 - `[variable-unresolved]` Badge:Variant=Info `paddingLeft` — variable id VariableID:2:1 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used
 - `[variable-unresolved]` Badge:Variant=Info `paddingRight` — variable id VariableID:2:1 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used
 - `[variable-unresolved]` Badge:Variant=Info `paddingTop` — variable id VariableID:2:2 unresolvable — variables endpoint unavailable (Enterprise) or not provided; resolved value used
