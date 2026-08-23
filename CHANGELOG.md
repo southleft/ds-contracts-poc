@@ -34,7 +34,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   re-reconciles in place by stamp, then by key. The plugin still plans
   against the open file; the standalone console scripts now refuse any other
   file by name (`WRONG FILE`). Recovery unchanged
-  (`flowbite-dump-propose:check`, 8 stems verified-exact).
+  (`flowbite-dump-propose:check`, 8 stems verified-exact). Consequence for
+  Code Connect (PR #25): the eight as committed now EMIT
+  `code-connect/<Name>.figma.tsx` with the URL built from the live anchors;
+  `code-connect:check` asserts that, and that the same eight with the
+  fileKey stripped still refuse by name.
 - **Docs truth pass.** docs/23 §B.24–B.28 and §D.12–D.30, docs/26's
   commands, BETA, docs/00, README, ROADMAP, NORTH-STAR, RELEASE_CHECKLIST,
   GET-STARTED and the package READMEs re-read against the tree; every count
