@@ -1,6 +1,6 @@
 /**
  * Emitter authoring guide — /emitters/. The Emitter interface is extracted
- * from core/emitter.ts at build time (it cannot drift from the engine), and
+ * from packages/core/src/emitter.ts at build time (it cannot drift from the engine), and
  * the worked example is the published @ds-contracts/emitter-web-components
  * plugin — its receipts (round-trip closure, CSS parity) are the didactic
  * core: an emitter is trustworthy when its output survives extraction.
@@ -11,9 +11,9 @@ import { layout, codeBlock, badge, REPO_URL } from '../html.js';
 
 /** Slice a source region; refuse by name when the pattern stops matching. */
 function iface(name: string): string {
-  const text = readFileSync(path.join(process.cwd(), 'core/emitter.ts'), 'utf8');
+  const text = readFileSync(path.join(process.cwd(), 'packages/core/src/emitter.ts'), 'utf8');
   const m = text.match(new RegExp(`(export interface ${name} \\{[\\s\\S]*?\\n\\})`));
-  if (!m) throw new Error(`emitters page: core/emitter.ts no longer declares "export interface ${name}" — update the extraction`);
+  if (!m) throw new Error(`emitters page: packages/core/src/emitter.ts no longer declares "export interface ${name}" — update the extraction`);
   return m[1];
 }
 
@@ -25,8 +25,8 @@ export function emittersPage(): { route: string; html: string } {
 <h1>Writing an emitter</h1>
 <p class="lede">A contract is the single source of truth; an emitter is <strong>one projection of it</strong> — a pure function from contract to file texts. The four built-ins prove the spread (scoped-CSS React, static HTML, inline-styles React, and the Figma sync script — the canvas itself is just another emit target). A new surface for Angular, SwiftUI, or Compose is a new pure function over the same contract; nothing upstream changes.</p>
 
-<h2 id="interface">The interface ${badge('generated', 'Extracted from core/emitter.ts at build time — the guide cannot drift from the engine.')}</h2>
-${codeBlock(interfaces, 'ts', 'core/emitter.ts — the three types every emitter is written against; extracted at build time')}
+<h2 id="interface">The interface ${badge('generated', 'Extracted from packages/core/src/emitter.ts (@ds-contracts/core) at build time — the guide cannot drift from the engine.')}</h2>
+${codeBlock(interfaces, 'ts', 'packages/core/src/emitter.ts (@ds-contracts/core) — the three types every emitter is written against; extracted at build time')}
 <p>Three rules the registry holds you to:</p>
 <ul>
 <li><strong>Pure.</strong> Contract + ctx in, file texts out. No filesystem, no network, no globals — every emitter must be browser-importable (the playground runs them all).</li>

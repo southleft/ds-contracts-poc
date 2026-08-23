@@ -11,13 +11,18 @@ ds-contracts generate contracts/ --out wc/ \
   --tokens tokens.json --icons icons/
 ```
 
-or directly:
+or from your own host (a build script, a playground) that owns the generation loop:
 
 ```ts
-import { registerEmitter } from 'ds-contracts core';
+import { registerEmitter, type EmitterCtx } from '@ds-contracts/core';
 import webComponents from '@ds-contracts/emitter-web-components';
 registerEmitter(webComponents);
+// webComponents.emit(contract, ctx) — ctx is an @ds-contracts/core EmitterCtx
 ```
+
+The registry is process-local: the CLI registers whatever `--emitter` exports
+into its own copy, so a plugin module never calls `registerEmitter()` on itself
+— it exports the Emitter and the host registers it.
 
 ## What one contract becomes
 

@@ -166,6 +166,16 @@ window.DSC = createPluginEngine(__DSC_DATA__);
       sourcefile: 'plugin-engine-main.ts',
     },
     define: { __DSC_DATA__: dataJson },
+    // The engine reaches @ds-contracts/core's analysis modules through the
+    // root shims; those modules import @ds-contracts/schema by bare
+    // specifier. Alias both to SOURCE so the bundle carries one schema (the
+    // same file core/ already imports through scripts/contract-schema.ts),
+    // never packages/*/dist — no build-order dependency, no stale-dist
+    // hazard, and the receipt's input list stays a list of repo files.
+    alias: {
+      '@ds-contracts/core': join(repoRoot, 'packages', 'core', 'src', 'index.ts'),
+      '@ds-contracts/schema': join(repoRoot, 'packages', 'schema', 'src', 'index.ts'),
+    },
     bundle: true,
     platform: 'browser',
     format: 'iife',

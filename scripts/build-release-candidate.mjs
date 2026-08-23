@@ -33,6 +33,35 @@ const PACKAGES = [
     ],
   },
   {
+    directory: "packages/core",
+    // Reviewed 2026-08-22 for slice 2 (anatomy / elements / grid / validate / css
+    // joined the package — the analysis half of emit-react).
+    expected: [
+      "README.md",
+      "dist/anatomy.d.ts",
+      "dist/anatomy.js",
+      "dist/contract-provenance.d.ts",
+      "dist/contract-provenance.js",
+      "dist/css.d.ts",
+      "dist/css.js",
+      "dist/elements.d.ts",
+      "dist/elements.js",
+      "dist/emitter.d.ts",
+      "dist/emitter.js",
+      "dist/grid.d.ts",
+      "dist/grid.js",
+      "dist/index.d.ts",
+      "dist/index.js",
+      "dist/naming.d.ts",
+      "dist/naming.js",
+      "dist/tokens.d.ts",
+      "dist/tokens.js",
+      "dist/validate.d.ts",
+      "dist/validate.js",
+      "package.json",
+    ],
+  },
+  {
     directory: "packages/cli",
     expected: ["README.md", "dist/cli.js", "dist/computed.js", "package.json"],
   },
@@ -46,6 +75,10 @@ const GATES = [
   {
     name: "build-schema",
     command: ["npm", "--prefix", "packages/schema", "run", "build"],
+  },
+  {
+    name: "build-core",
+    command: ["npm", "--prefix", "packages/core", "run", "build"],
   },
   {
     name: "test-v1-definition",
@@ -67,6 +100,10 @@ const GATES = [
   {
     name: "typecheck-schema",
     command: ["npm", "--prefix", "packages/schema", "run", "typecheck"],
+  },
+  {
+    name: "typecheck-core",
+    command: ["npm", "--prefix", "packages/core", "run", "typecheck"],
   },
   {
     name: "typecheck-emitter",
