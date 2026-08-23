@@ -111,17 +111,17 @@ pipeline never opened still counts against it.
 | shadcn/ui | 11 | **70.7** | 70.4 | 1/11 | 3/11 | 22,516 | 73.6 | `extract/computed/out/shadcn/<comp>/scorecard.json` |
 | Flowbite / Tailwind | 11 | **90.4** | 90.7 | 6/11 | 10/11 | 13,804 | 93.5 | `extract/computed/out/tailwind/<comp>/scorecard.json` |
 | Fluent 2 | 11 | **82.5** | 82.4 | 4/11 | 7/11 | 132,426 | 80.8 | `extract/computed/out/fluent/<comp>/scorecard.json` |
-| Ant Design | 12 | **88.6** | 91.6 | 7/12 | 10/12 | 134,068 | 84.0 | `extract/computed/out/antd/<comp>/scorecard.json` |
-| **all libraries** | **116** | **86.8** | 90.1 | **59/116** | **91/116** | **718,018** | **85.7** |  |
+| Ant Design | 12 | **88.9** | 91.6 | 7/12 | 10/12 | 134,068 | 85.3 | `extract/computed/out/antd/<comp>/scorecard.json` |
+| **all libraries** | **116** | **86.8** | 90.1 | **59/116** | **91/116** | **718,018** | **85.9** |  |
 
 **Read every percentage on this page as "on the easy 11.1%."** The 116 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. Across the 9 libraries they are 113 of 1,015 components (11.1%). Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
 
 **Two means, both printed, because they answer different questions.** The
 unweighted mean (86.8%) treats a 16-cell Spinner and an 83,520-cell Button as equals;
-the cell-weighted figure (85.7%) is what fraction of every style cell in the corpus
+the cell-weighted figure (85.9%) is what fraction of every style cell in the corpus
 actually matched. Neither is quoted alone. Whole-row exactness is the harshest
-cut of the same data: **2,960 of 11,568** rendered rows
-(25.6%) match the original on *every* channel at once.
+cut of the same data: **2,984 of 11,568** rendered rows
+(25.8%) match the original on *every* channel at once.
 
 ### 3.1 Every measured component, worst first
 
@@ -162,7 +162,6 @@ No component is omitted. The worst row in the corpus is at the top.
 | `Button` | Altitude | 81.5 | 5 × 4 | 1,280 | `extract/computed/out/altitude/button/scorecard.json` |
 | `Switch` | Fluent 2 | 81.5 | 12 × 4 | 2,064 | `extract/computed/out/fluent/switch/scorecard.json` |
 | `Avatar` | Altitude | 81.7 | 4 × 4 | 568 | `extract/computed/out/altitude/avatar/scorecard.json` |
-| `Button` | Ant Design | 82.0 | 240 × 4 | 79,680 | `extract/computed/out/antd/button/scorecard.json` |
 | `TextField` | Polaris | 82.0 | 64 × 4 | 41,440 | `extract/computed/out/textfield/scorecard.json` |
 | `Tabs` | shadcn/ui | 82.1 | 1 × 4 | 632 | `extract/computed/out/shadcn/tabs/scorecard.json` |
 | `Badge` | shadcn/ui | 82.3 | 6 × 4 | 1,008 | `extract/computed/out/shadcn/badge/scorecard.json` |
@@ -170,14 +169,15 @@ No component is omitted. The worst row in the corpus is at the top.
 | `Link` | Altitude | 82.4 | 4 × 4 | 432 | `extract/computed/out/altitude/link/scorecard.json` |
 | `LinearProgress` | MUI | 82.9 | 2 × 4 | 280 | `extract/computed/out/mui/linearprogress/scorecard.json` |
 | `Spinner` | Fluent 2 | 83.3 | 64 × 4 | 19,200 | `extract/computed/out/fluent/spinner/scorecard.json` |
+| `Button` | Ant Design | 83.9 | 240 × 4 | 79,680 | `extract/computed/out/antd/button/scorecard.json` |
 | `Checkbox` | Carbon | 84.3 | 6 × 4 | 1,776 | `extract/computed/out/carbon/checkbox/scorecard.json` |
 | `Toggle` | Carbon | 84.3 | 4 × 4 | 1,376 | `extract/computed/out/carbon/toggle/scorecard.json` |
 | `Alert` | Flowbite / Tailwind | 84.5 | 4 × 4 | 880 | `extract/computed/out/tailwind/alert/scorecard.json` |
-| `Alert` | Ant Design | 84.7 | 32 × 4 | 14,848 | `extract/computed/out/antd/alert/scorecard.json` |
 | `Checkbox` | Ant Design | 85.0 | 6 × 4 | 2,808 | `extract/computed/out/antd/checkbox/scorecard.json` |
 | `Table` | MUI | 85.2 | 2 × 4 | 6,176 | `extract/computed/out/mui/table/scorecard.json` |
 | `Label` | Flowbite / Tailwind | 86.3 | 5 × 4 | 320 | `extract/computed/out/tailwind/label/scorecard.json` |
 | `Button` | MUI | 86.4 | 126 × 4 | 27,216 | `extract/computed/out/mui/button/scorecard.json` |
+| `Alert` | Ant Design | 86.6 | 32 × 4 | 14,848 | `extract/computed/out/antd/alert/scorecard.json` |
 | `HelperText` | Flowbite / Tailwind | 87.1 | 5 × 4 | 340 | `extract/computed/out/tailwind/helpertext/scorecard.json` |
 | `Paper` | MUI | 87.9 | 8 × 4 | 1,056 | `extract/computed/out/mui/paper/scorecard.json` |
 | `ToggleSwitch` | Flowbite / Tailwind | 88.9 | 6 × 4 | 864 | `extract/computed/out/tailwind/toggleswitch/scorecard.json` |
@@ -370,7 +370,7 @@ list (part, kind, channel, value, reason, variant coverage), `figma bundle` writ
 beside `contracts` and prints a per-contract summary, the built set is stamped
 `ds_contracts/codeOnlyFacts`, the plugin's run report lists the facts under the set,
 and the set description keeps one trailing `†` with the count. Across 10 committed
-corpora there are **116** daggered contracts naming **2,903** facts, and both
+corpora there are **116** daggered contracts naming **2,904** facts, and both
 counts are pinned **exactly** — in both directions.
 Fewer receipts is not automatically progress: it is either a real fix or a
 refusal path that quietly stopped firing, and both require a human to look.
@@ -379,7 +379,7 @@ refusal path that quietly stopped firing, and both require a human to look.
 |---|---|---|---|---|
 | `mui` | 31 | 31 | 915 | `extract/figma/dagger-census.json` |
 | `untitled-ui` | 16 | 16 | 72 | `extract/figma/dagger-census.json` |
-| `antd` | 12 | 12 | 501 | `extract/figma/dagger-census.json` |
+| `antd` | 12 | 12 | 502 | `extract/figma/dagger-census.json` |
 | `polaris` | 12 | 12 | 431 | `extract/figma/dagger-census.json` |
 | `shadcn` | 11 | 11 | 209 | `extract/figma/dagger-census.json` |
 | `carbon` | 10 | 10 | 520 | `extract/figma/dagger-census.json` |
@@ -387,7 +387,7 @@ refusal path that quietly stopped firing, and both require a human to look.
 | `astryx` | 8 | 8 | 138 | `extract/figma/dagger-census.json` |
 | `tailwind` | 8 | 8 | 56 | `extract/figma/dagger-census.json` |
 | `eventz-vars` | 0 | 0 | 0 | `extract/figma/dagger-census.json` |
-| **total** | **116** |  | **2,903** |  |
+| **total** | **116** |  | **2,904** |  |
 
 ### 6.2 Named refusals — the construct vocabularies
 
@@ -552,13 +552,13 @@ npm run capability:fresh
 |---|---|---|---|
 | `conformance/MANIFEST.json` | `49dd3c71c754` | 87,042 | CSS/DOM frontier vocabulary |
 | `docs/22-generality.md` | `b982ebe18ddb` | 72,952 | coverage denominators (docs/22 §8.3 table) |
-| `evals/golden.json` | `9a2856a58666` | 32,256 | generated-source golden manifest |
+| `evals/golden.json` | `458632a3775e` | 32,256 | generated-source golden manifest |
 | `evals/results.json` | `5081770dbb7e` | 6,982 | executable claim suite (registry ids + size; the pass column is the suite's own output) |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
-| `extract/computed/out/**/numbers.json` | `0a08565ce5c3` | 1,225,533 | capture counts + determinism receipts — 205 files |
-| `extract/computed/out/**/scorecard.json` | `4ba42200b859` | 20,057,011 | computed-equality per component — 205 files |
+| `extract/computed/out/**/numbers.json` | `03b50c590f31` | 1,225,538 | capture counts + determinism receipts — 205 files |
+| `extract/computed/out/**/scorecard.json` | `34cd563c9729` | 19,798,337 | computed-equality per component — 205 files |
 | `extract/figma/conformance/MANIFEST.json` | `b17a451f6eb3` | 117,548 | canvas construct vocabulary |
-| `extract/figma/dagger-census.json` | `2fe264964c25` | 6,733 | dropped-fact receipt census |
+| `extract/figma/dagger-census.json` | `95dc26ea1aae` | 6,733 | dropped-fact receipt census |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | canvas→code→canvas round trip |
 
 Same bytes in, same file out: this build reads no clock, no git state and no
