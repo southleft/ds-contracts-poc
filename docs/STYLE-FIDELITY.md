@@ -85,10 +85,10 @@ named degradation — zero remain.
 
 | # | channel | html | react | inline | canvas (figma-script) | verdict |
 |---|---------|------|-------|--------|------------------------|---------|
-| C1 | arbitrary token keys (opacity, box-shadow, line-height, min-height…) | generic `prop: var(--path)` | generic | generic (resolved literal) | **whitelist** — `applyTokens` maps ~15 keys; anything else silently skipped | canvas skip is a NAMED-GAP **at proposal** (mint notes name the canvas limit for box-shadow); node opacity joins the whitelist |
+| C1 | arbitrary token keys (opacity, box-shadow, line-height, min-height…) | generic `prop: var(--path)` | generic | generic (resolved literal) | **whitelist** — `applyTokens` maps ~15 keys; since 2026-08-22 anything else is a NAMED `codeOnlyFact` (part, channel, value, reason) carried in the bundle, the plugin data and the run report — no longer silently skipped | NAMED-GAP at proposal AND at emit (`code-only-facts:check`); node opacity joins the whitelist |
 | C2 | `layoutByProp` | per-value modifier classes | descendant rules | per-variant style merge | resolved per compiled variant (incl. reversed child order) | OK |
 | C3 | `stylesWhen` | data-attr / enum-class rules | same | inline condition | resolved per compiled variant for enum `equals` and boolean defaults (this audit); boolean-true combos are not compiled — documented | OK / NAMED-GAP (canvas booleans) |
-| C4 | `states.*` overrides | pseudo rules | pseudo rules | `disabled` only (honest static) | opt-in state previews (figmaStatePreviews) | OK |
+| C4 | `states.*` overrides | pseudo rules | pseudo rules | `disabled` only (honest static) | opt-in state previews (`bindings.figma.statePreviews`; `figmaStatePreviews` before schema 17) | OK |
 | C5 | focus ring (outline pair) | boilerplate + `outline-color` token | same | not rendered (static) | approximated as bound stroke in state previews (documented) | OK / NAMED-GAP |
 
 ## Silent-loss census

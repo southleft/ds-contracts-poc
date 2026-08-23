@@ -3485,6 +3485,503 @@ console.log(
   );
 }
 
+console.log(
+  "\n47. PER-VARIANT FIXED geometry — a SLOT that FILLS in one variant and is FIXED in another is FC-GEOMETRY-EXCLUDED on the FIXED variant (canvas conformance slot-fixed-width-by-variant)",
+);
+{
+  // The Phase 2 exam shape: Card:Variant=Inline/Container/Image — FILL-width
+  // under Default's ROW, FIXED-width (counterSizing FIXED, no bound size, no
+  // fixedSize/bbox) under Inline's ROW. The old door skipped the width axis
+  // when ANY occurrence filled; the receipt is per variant now.
+  const image = (extra: Partial<DumpNode>): DumpNode => ({
+    name: "Image",
+    type: "SLOT",
+    clipsContent: true,
+    layout: {
+      mode: "VERTICAL",
+      primary: "CENTER",
+      counter: "CENTER",
+      spacing: 0,
+      padding: [0, 0, 0, 0],
+      primarySizing: "AUTO",
+      counterSizing: "AUTO",
+    },
+    children: [],
+    ...extra,
+  });
+  const variant = (name: string, img: DumpNode): DumpNode => ({
+    name,
+    type: "COMPONENT",
+    bbox: { width: 928, height: 96 },
+    layout: {
+      mode: "HORIZONTAL",
+      primary: "MIN",
+      counter: "MIN",
+      spacing: 24,
+      padding: [0, 0, 0, 0],
+      primarySizing: "FIXED",
+      counterSizing: "AUTO",
+    },
+    fill: { hex: "f0eeed" },
+    children: [img, label()],
+  });
+  const r = proposeFromDump(
+    p2Set(
+      "P2FixedByVariant",
+      [
+        variant("Variant=Default", image({ fillWidth: true })),
+        variant(
+          "Variant=Inline",
+          image({
+            layout: {
+              mode: "VERTICAL",
+              primary: "CENTER",
+              counter: "CENTER",
+              spacing: 0,
+              padding: [0, 0, 0, 0],
+              primarySizing: "AUTO",
+              counterSizing: "FIXED",
+            },
+          }),
+        ),
+      ],
+      {
+        propertyDefinitions: {
+          Variant: {
+            type: "VARIANT",
+            defaultValue: "Default",
+            variantOptions: ["Default", "Inline"],
+          },
+        },
+      },
+    ),
+    reviewable,
+  );
+  check(
+    "the FIXED variant is receipted BY NAME with both sides (FIXED on Variant=Inline; FILL on Variant=Default) — FC-GEOMETRY-EXCLUDED, not silent",
+    r.notes.some((n) =>
+      /P2FixedByVariant:root\/Image: auto-layout SLOT child drawn FIXED on width \(FIXED in 1\/2 variant occurrence\(s\) — FIXED on Variant=Inline; FILL on Variant=Default \(a different fact on those variants\)\) with no bound size variable — FC-GEOMETRY-EXCLUDED/.test(
+        n,
+      ),
+    ),
+  );
+  check(
+    "nothing is minted or literalled for the drawn px (Option B)",
+    !mintedPaths(r).some((ref) => /image\.width/.test(ref)) &&
+      !JSON.stringify(partOf(r, "Image") ?? {}).includes("308"),
+  );
+  const uniformFill = proposeFromDump(
+    p2Set(
+      "P2FillBoth",
+      [
+        variant("Variant=Default", image({ fillWidth: true })),
+        variant("Variant=Inline", image({ fillWidth: true })),
+      ],
+      {
+        propertyDefinitions: {
+          Variant: {
+            type: "VARIANT",
+            defaultValue: "Default",
+            variantOptions: ["Default", "Inline"],
+          },
+        },
+      },
+    ),
+    reviewable,
+  );
+  check(
+    "a SLOT that FILLS in every variant gets no FIXED receipt (the FILL axis is a different fact, not excluded geometry)",
+    !uniformFill.notes.some((n) =>
+      /P2FillBoth:root\/Image: .*FC-GEOMETRY-EXCLUDED/.test(n),
+    ),
+  );
+}
+
+console.log(
+  "\n48. PER-VARIANT cross-axis FILL — a parent whose direction differs by variant is accounted per variant, never dropped at the mixed-modes door (canvas conformance layout-fill-height-parent-mode-by-variant)",
+);
+{
+  const slot = (extra: Partial<DumpNode>): DumpNode => ({
+    name: "Image",
+    type: "SLOT",
+    clipsContent: true,
+    layout: {
+      mode: "VERTICAL",
+      primary: "CENTER",
+      counter: "CENTER",
+      spacing: 0,
+      padding: [0, 0, 0, 0],
+      primarySizing: "AUTO",
+      counterSizing: "AUTO",
+    },
+    children: [],
+    ...extra,
+  });
+  const container = (
+    mode: "VERTICAL" | "HORIZONTAL",
+    img: DumpNode,
+    counterSizing: "AUTO" | "FIXED" = "AUTO",
+  ): DumpNode => ({
+    name: "Container",
+    type: "FRAME",
+    fillWidth: true,
+    layout: {
+      mode,
+      primary: "MIN",
+      counter: "MIN",
+      spacing: 24,
+      padding: [0, 0, 0, 0],
+      primarySizing: mode === "VERTICAL" ? "AUTO" : "FIXED",
+      counterSizing,
+    },
+    children: [img, label()],
+  });
+  const variant = (name: string, c: DumpNode): DumpNode => ({
+    name,
+    type: "COMPONENT",
+    bbox: { width: 960, height: 120 },
+    layout: {
+      mode: "VERTICAL",
+      primary: "MIN",
+      counter: "MIN",
+      spacing: 0,
+      padding: [16, 16, 16, 16],
+      primarySizing: "AUTO",
+      counterSizing: "FIXED",
+    },
+    fill: { hex: "f0eeed" },
+    children: [c],
+  });
+  const axis = {
+    propertyDefinitions: {
+      Variant: {
+        type: "VARIANT" as const,
+        defaultValue: "Default",
+        variantOptions: ["Default", "Inline"],
+      },
+    },
+  };
+  // The exam shape: FILL-width under Default's COLUMN, FILL-height under
+  // Inline's HUG-height ROW — a different cross axis per variant.
+  const mixedAxes = proposeFromDump(
+    p2Set(
+      "P2CrossByVariant",
+      [
+        variant(
+          "Variant=Default",
+          container("VERTICAL", slot({ fillWidth: true })),
+        ),
+        variant(
+          "Variant=Inline",
+          container("HORIZONTAL", slot({ fillHeight: true })),
+        ),
+      ],
+      axis,
+    ),
+    reviewable,
+  );
+  check(
+    "each variant's cross-axis FILL is NAMED against ITS OWN parent mode (FILL-width under the COLUMN, FILL-height under the HUG-height ROW)",
+    mixedAxes.notes.some((n) =>
+      /P2CrossByVariant:root\/Container\/Image: drawn Variant=Default: FILL-width under a COLUMN parent that HUGS its width; Variant=Inline: FILL-height under a ROW parent that HUGS its height — .*NAMED per variant, not carried/.test(
+        n,
+      ),
+    ),
+  );
+  const imagePart = (r: ReturnType<typeof proposeFromDump>) =>
+    (
+      (partOf(r, "Container")?.parts ?? {}) as Record<
+        string,
+        Record<string, unknown>
+      >
+    ).Image;
+  check(
+    "no height: 100% is written — 100% of a HUG height is auto",
+    !JSON.stringify(imagePart(mixedAxes) ?? {}).includes('"height":"100%"'),
+  );
+  // The height twin of crossAxisFillByProp: FILL-height in EVERY occurrence,
+  // the parent a COLUMN in Default (primary-axis grow) and a DEFINITE-height
+  // ROW in Inline (cross-axis stretch) — the ROW plane carries height: 100%
+  // through literalsByProp on the axis, the same carrier width already uses.
+  const heightTwin = proposeFromDump(
+    p2Set(
+      "P2HeightTwin",
+      [
+        variant(
+          "Variant=Default",
+          container("VERTICAL", slot({ fillHeight: true })),
+        ),
+        variant(
+          "Variant=Inline",
+          container("HORIZONTAL", slot({ fillHeight: true }), "FIXED"),
+        ),
+      ],
+      axis,
+    ),
+    reviewable,
+  );
+  const twinLbp = (imagePart(heightTwin)?.literalsByProp ?? []) as Array<{
+    prop: string;
+    map: Record<string, Record<string, string>>;
+  }>;
+  check(
+    "FILL-height in every occurrence under an axis-split parent carries height: 100% on the DEFINITE ROW plane via literalsByProp (the height twin of the width rule)",
+    twinLbp.some(
+      (e) =>
+        e.prop === "variant" &&
+        e.map.inline?.height === "100%" &&
+        e.map.default?.height === undefined,
+    ) &&
+      heightTwin.notes.some((n) =>
+        /P2HeightTwin:root\/Container\/Image: drawn FILL-height under a parent whose auto-layout mode is a function of axis "Variant" — .*`layout\.grow` carries the COLUMN plane\(s\) and the ROW plane\(s\) \(inline\) carry height: 100% through literalsByProp on `variant`/.test(
+          n,
+        ),
+      ),
+  );
+  const hugTwin = proposeFromDump(
+    p2Set(
+      "P2HeightTwinHug",
+      [
+        variant(
+          "Variant=Default",
+          container("VERTICAL", slot({ fillHeight: true })),
+        ),
+        variant(
+          "Variant=Inline",
+          container("HORIZONTAL", slot({ fillHeight: true })),
+        ),
+      ],
+      axis,
+    ),
+    reviewable,
+  );
+  check(
+    "the same FILL under a HUG-height ROW plane is NAMED, never a 100% of auto",
+    !JSON.stringify(imagePart(hugTwin) ?? {}).includes('"height":"100%"') &&
+      hugTwin.notes.some((n) =>
+        /P2HeightTwinHug:root\/Container\/Image: drawn FILL-height under a parent whose auto-layout mode CHANGES across variants \(1 row, 1 column\) and that HUGS its height on Variant=Inline — .*NAMED, not carried/.test(
+          n,
+        ),
+      ),
+  );
+}
+
+console.log(
+  "\n49. PRIMARY-axis FILL on a native SLOT — a SLOT child that FILLS along its ROW parent's primary axis in every variant carries `layout.grow` exactly like a FRAME child (canvas conformance slot-primary-axis-fill + rest-slot-primary-axis-fill)",
+);
+{
+  // r9 found it, r10 fixes it: the Phase 2 exam's Card:Variant=Default/Image
+  // — a native SLOT drawn FILL-width under a FIXED-width ROW — had no grow
+  // rule on the SLOT branch of buildPart (it never called invertLayout), so
+  // the fact reached neither the contract nor a note on ANY variant. The
+  // rule is now ONE implementation (primaryAxisGrow) read by both branches.
+  const image = (extra: Partial<DumpNode>): DumpNode => ({
+    name: "Image",
+    type: "SLOT",
+    clipsContent: true,
+    layout: {
+      mode: "VERTICAL",
+      primary: "CENTER",
+      counter: "CENTER",
+      spacing: 0,
+      padding: [0, 0, 0, 0],
+      primarySizing: "AUTO",
+      counterSizing: "AUTO",
+    },
+    children: [],
+    ...extra,
+  });
+  const variant = (
+    name: string,
+    mode: "HORIZONTAL" | "VERTICAL",
+    img: DumpNode,
+  ): DumpNode => ({
+    name,
+    type: "COMPONENT",
+    bbox: { width: 928, height: 96 },
+    layout: {
+      mode,
+      primary: "MIN",
+      counter: "MIN",
+      spacing: 24,
+      padding: [0, 0, 0, 0],
+      primarySizing: mode === "HORIZONTAL" ? "FIXED" : "AUTO",
+      counterSizing: "AUTO",
+    },
+    fill: { hex: "f0eeed" },
+    children: [img, label()],
+  });
+  const axis = {
+    propertyDefinitions: {
+      Variant: {
+        type: "VARIANT" as const,
+        defaultValue: "Default",
+        variantOptions: ["Default", "Inline"],
+      },
+    },
+  };
+  const layoutOf = (r: ReturnType<typeof proposeFromDump>, key: string) =>
+    partOf(r, key)?.layout as Record<string, unknown> | undefined;
+  const uniform = proposeFromDump(
+    p2Set(
+      "P2SlotGrow",
+      [
+        variant("Variant=Default", "HORIZONTAL", image({ fillWidth: true })),
+        variant("Variant=Inline", "HORIZONTAL", image({ fillWidth: true })),
+      ],
+      axis,
+    ),
+    reviewable,
+  );
+  check(
+    "a SLOT that FILLS along its ROW parent's primary axis in every occurrence carries layout.grow: true on the slot part (the FRAME rule, one implementation)",
+    layoutOf(uniform, "Image")?.grow === true &&
+      JSON.stringify(partOf(uniform, "Image") ?? {}).includes(
+        '"slot":{"name":"children"',
+      ),
+  );
+  check(
+    "the grow is the whole layout block — the slot's interior auto-layout is not inverted on this branch (a separate fact) and no FIXED receipt fires for a FILL axis",
+    JSON.stringify(layoutOf(uniform, "Image")) === '{"grow":true}' &&
+      !uniform.notes.some((n) =>
+        /P2SlotGrow:root\/Image: .*FC-GEOMETRY-EXCLUDED/.test(n),
+      ),
+  );
+  // FILL in one occurrence and FIXED in the other: the every-occurrence rule
+  // (unchanged from FRAME parts) carries no grow; §47's per-variant receipt
+  // names both sides, so the Default FILL is not silent either.
+  const split = proposeFromDump(
+    p2Set(
+      "P2SlotGrowSplit",
+      [
+        variant("Variant=Default", "HORIZONTAL", image({ fillWidth: true })),
+        variant(
+          "Variant=Inline",
+          "HORIZONTAL",
+          image({
+            layout: {
+              mode: "VERTICAL",
+              primary: "CENTER",
+              counter: "CENTER",
+              spacing: 0,
+              padding: [0, 0, 0, 0],
+              primarySizing: "AUTO",
+              counterSizing: "FIXED",
+            },
+          }),
+        ),
+      ],
+      axis,
+    ),
+    reviewable,
+  );
+  check(
+    "FILL in 1/2 occurrences is NOT grow (the every-occurrence rule) and the per-variant FIXED receipt still names the FILL side",
+    layoutOf(split, "Image") === undefined &&
+      split.notes.some((n) =>
+        /P2SlotGrowSplit:root\/Image: auto-layout SLOT child drawn FIXED on width \(FIXED in 1\/2 variant occurrence\(s\) — FIXED on Variant=Inline; FILL on Variant=Default/.test(
+          n,
+        ),
+      ),
+  );
+  // FILL-width under a COLUMN parent is the CROSS-axis meaning — never grow;
+  // carryCrossAxisFill names it (the parent hugs its width, so no 100%).
+  const column = proposeFromDump(
+    p2Set(
+      "P2SlotCross",
+      [
+        variant("Variant=Default", "VERTICAL", image({ fillWidth: true })),
+        variant("Variant=Inline", "VERTICAL", image({ fillWidth: true })),
+      ],
+      axis,
+    ),
+    reviewable,
+  );
+  check(
+    "FILL-width under a COLUMN parent is the cross-axis stretch, not grow — no layout.grow, named by carryCrossAxisFill",
+    layoutOf(column, "Image") === undefined &&
+      column.notes.some((n) =>
+        /P2SlotCross:root\/Image: drawn FILL-width under a COLUMN parent whose other children do not all fill/.test(
+          n,
+        ),
+      ),
+  );
+  // §48's height twin claimed "`layout.grow` carries the COLUMN plane(s)" —
+  // on the SLOT branch that sentence used to be untrue (nothing set grow).
+  const container = (
+    mode: "VERTICAL" | "HORIZONTAL",
+    img: DumpNode,
+    counterSizing: "AUTO" | "FIXED" = "AUTO",
+  ): DumpNode => ({
+    name: "Container",
+    type: "FRAME",
+    fillWidth: true,
+    layout: {
+      mode,
+      primary: "MIN",
+      counter: "MIN",
+      spacing: 24,
+      padding: [0, 0, 0, 0],
+      primarySizing: mode === "VERTICAL" ? "AUTO" : "FIXED",
+      counterSizing,
+    },
+    children: [img, label()],
+  });
+  const outer = (name: string, c: DumpNode): DumpNode => ({
+    name,
+    type: "COMPONENT",
+    bbox: { width: 960, height: 120 },
+    layout: {
+      mode: "VERTICAL",
+      primary: "MIN",
+      counter: "MIN",
+      spacing: 0,
+      padding: [16, 16, 16, 16],
+      primarySizing: "AUTO",
+      counterSizing: "FIXED",
+    },
+    fill: { hex: "f0eeed" },
+    children: [c],
+  });
+  const heightTwin = proposeFromDump(
+    p2Set(
+      "P2SlotHeightTwin",
+      [
+        outer(
+          "Variant=Default",
+          container("VERTICAL", image({ fillHeight: true })),
+        ),
+        outer(
+          "Variant=Inline",
+          container("HORIZONTAL", image({ fillHeight: true }), "FIXED"),
+        ),
+      ],
+      axis,
+    ),
+    reviewable,
+  );
+  const twinImage = (
+    (partOf(heightTwin, "Container")?.parts ?? {}) as Record<
+      string,
+      Record<string, unknown>
+    >
+  ).Image;
+  const twinLbp = (twinImage?.literalsByProp ?? []) as Array<{
+    prop: string;
+    map: Record<string, Record<string, string>>;
+  }>;
+  check(
+    "the axis-split height twin now carries the grow its receipt already claimed: layout.grow on the COLUMN plane AND height: 100% on the DEFINITE ROW plane",
+    (twinImage?.layout as Record<string, unknown> | undefined)?.grow === true &&
+      twinLbp.some(
+        (e) =>
+          e.prop === "variant" &&
+          e.map.inline?.height === "100%" &&
+          e.map.default?.height === undefined,
+      ),
+  );
+}
+
 if (failures.length > 0) {
   console.error(`\n${failures.length}/${checks} exact proposal checks failed:`);
   for (const failure of failures) console.error(`  - ${failure}`);

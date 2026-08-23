@@ -72,6 +72,15 @@ built with, so the file you build and the file the tree checks are the same
 bytes. `flowbite.bundle.json` is a local build artifact — gitignored, and rebuilt
 byte-identically from the committed contracts whenever you need it.
 
+`--tokens` on this lane is the flat two-file form (base, minted). Since
+2026-08-22 `figma bundle` also takes the layered grammar `generate` already
+had — a directory of `*.tokens.json`, `slot=file` entries
+(`primitives=…,semantic=…,brand.aurora=…`), `--modes light,dark` — and
+carries the layers in `tokenSet.layers`, so a first-party-shaped corpus
+compiles in the plugin with native aliases instead of refusing one paste at
+a time (`first-party-bundle:check`). A bundle whose contracts do not all
+compile is refused with ONE named list before ✔ is ever printed.
+
 Then, in the Figma **desktop** app:
 
 1. **Plugins → Development → Import plugin from manifest…** and choose
@@ -80,7 +89,21 @@ Then, in the Figma **desktop** app:
 3. **Build** tab → paste the contents of `flowbite.bundle.json` → run it.
 
 You get eight token-bound components (Alert, Badge, Button, Card, HelperText,
-Kbd, Label, ToggleSwitch) and a `Tokens` variable collection.
+Kbd, Label, ToggleSwitch) and a `Tailwind` variable collection (the
+`--name`). The plugin's run report lists, under each set, every code-only
+fact the canvas could not carry — part, channel, value, reason
+(`codeOnlyFacts`, 54 on these eight) — the same list `figma bundle` prints
+on stdout.
+
+The eight contracts carry the live demo sets' identity under
+`bindings.figma.anchors` (`fileKey` `59mLQlOMiD5w5za6SUcoO5`, the set
+`nodeId`, the set `componentSetKey`). That does not pin the paste to that file:
+the plugin plans against the file you have open (it passes the open file's key,
+overriding the contract's), so a new file works as above. The standalone
+`examples/tailwind/figma/*.figma.js` console scripts are the exception — they
+carry the demo file key as a hard guard and refuse any other file by name
+(`WRONG FILE`). The anchors also sit inside the hashed spec, so the demo file's
+sets will re-reconcile in place (same node id and key) on the next Apply.
 
 **The code guarantee** — same authored contracts → typed React + CSS Modules
 (this is *not* generate-from-a-Figma-dump):
@@ -108,35 +131,49 @@ hook is allowed to stay undefined until a consumer sets it.
 After a contract edit, a canvas amend, or a recovery dump, run:
 
 ```bash
-npm run maintain          # token-free; every step also runs in CI (fast + full lanes)
+npm run maintain          # token-free; every one of its steps is also a fast- or full-lane step
 npm run maintain:visual   # catalog visual-parity; needs FIGMA_TOKEN and the Figma PNG cache
 ```
 
-`maintain` is the adopter gate and needs nothing but the clone. The visual
-half reads rendered Figma cells through the REST images API, so it needs a
-`FIGMA_TOKEN` (env or `.env.local`) and is excluded from CI by name until
-the repository has that secret (`npm run ci:lanes` prints the exclusion).
+`maintain` is the adopter gate and needs nothing but the clone; `npm run
+ci:lanes` expands it and refuses if any leaf is missing from a lane. The
+visual half reads rendered Figma cells through the REST images API, so it
+needs a `FIGMA_TOKEN` (env or `.env.local`); since 2026-08-22 it runs in
+the **catalog-visual** lane with the repository's secret — it is no longer
+excluded from CI.
 
-That is leftover string→boolean emit + token-apply prune + hop-2 bundle
-freshness (`examples/tailwind/figma/tailwind.bundle.json` matches a fresh
-build and still carries Alert `dismissable`/`onDismiss` and ToggleSwitch
-`role=switch`/`onToggle`) + hop-2 Apply plugin (`plugin:check` vs the
-engine receipt) + exact proposal (`exact-proposal:check`) + hop-4 dump→propose (`flowbite-dump-propose:check`
-— all eight pipeline-drawn Flowbite dumps recover their props/host and
-stamped `imported.*` layout, paint, stroke, type, dump `_degradations`
-(Alert VECTOR receipts), and Badge/Button
-State-preview paint names, and do not invent
-`onClick`/`onDismiss`/`onToggle`) + catalog/live anchor agreement +
-`functional:flowbite` (clicks/dismiss still execute) +
-`parity:flowbite` (authored vs recovered, named walls stay named) +
-catalog visual-parity on Button / Badge / Checkbox / Switch / Heading
-(every row's masked pixel score within ±0.1pp of the platform's committed
-baseline AND both content boxes — ours and Figma's — within ±4 device px of
-it; the pixel score alone provably misses a pale-fill size move, so a
-closed pixel hole cannot silently reopen and a geometry move fails by name;
-`-- --self-test` is the gate's own red test). Eventz / CBDS
-/ Shoelace rows stay on the full `--summary` map; they are not the ship set.
-A green maintain is the beta handoff bar. It is not v1.
+`maintain` today is fifteen steps: leftover string→boolean emit
+(`string-boolean-coercion:check`) + token-apply prune doors
+(`token-set-prune:check`) + exact proposal (`exact-proposal:check`) + hop-2
+bundle freshness (`flowbite-bundle-fresh:check` — the committed
+`examples/tailwind/figma/tailwind.bundle.json` matches a fresh build and still
+carries Alert `dismissable`/`onDismiss` and ToggleSwitch
+`role=switch`/`onToggle`) + hop-2 Apply plugin (`plugin:check` vs the engine
+receipt, incl. the verbatim dump-script embed) + hop-4 dump→propose
+(`flowbite-dump-propose:check` — all eight pipeline-drawn Flowbite dumps
+recover their props/host and stamped `imported.*` layout, paint, stroke,
+type, dump `_degradations`, and Badge/Button State-preview paint names, and
+do not invent `onClick`/`onDismiss`/`onToggle`) + catalog/live anchor
+agreement (`extract:figma:visual:anchors`) + `functional:flowbite`
+(clicks/dismiss still execute) + `parity:flowbite` (authored vs recovered,
+named walls stay named) + the Phase 1 gates added 2026-08-22: root `attrs`
+carried on every code target (`root-attrs:check`), every referenced custom
+property defined in the emitted `tokens.css` (`css-vars:check`), every
+canvas-dropped fact named where a person reads it (`code-only-facts:check`),
+a root that IS the text node draws (`root-text:check`), the first-party
+corpus bundles and compiles in the plugin as one plan
+(`first-party-bundle:check`), and a prop named like a DOM attribute is
+`Omit<>`-ed and named rather than colliding (`prop-collision:check`).
+
+`maintain:visual` is the catalog visual-parity gate on Button / Badge /
+Checkbox / Switch / Heading: every row's masked pixel score within ±0.1pp
+of the platform's committed baseline (`baseline.darwin.json` /
+`baseline.linux.json`) AND both content boxes — ours and Figma's — within
+±4 device px of it. The pixel score alone provably missed a 39%-wider Badge
+on 2026-08-22, which is why the geometry half exists; `-- --self-test` is
+the gate's own red test. Eventz / CBDS / Shoelace rows stay on the full
+`--summary` map; they are not the ship set. A green `maintain` is the beta
+handoff bar. It is not v1.
 
 ### It is verified, and here is the proof
 
@@ -147,13 +184,21 @@ with exit codes. The claim it exists to support:
 > the bundle a stranger builds is **byte-identical** to the one the
 > development tree builds.
 
-The sha moves whenever the component set changes. At the eight stems on this
-page it is `2714be6104ae881e…` (109,841 bytes), re-run 2026-08-22 on
-`phase-0/one-truth` and byte-identical to the committed
-`examples/tailwind/figma/tailwind.bundle.json`. What the
-receipts pin is the REPRODUCIBILITY, not the constant: during the kit climb
-components were added and removed three times and the bundle returned
-byte-identical to `bb96f43e…` (the five-component set) every time.
+The sha moves whenever the component set — or the bundle grammar — changes,
+and this page does not quote it. The receipt's last clean-clone run
+(2026-08-22, branch `phase-0/one-truth` at `7066eb86`, eight stems) measured
+`2714be61…` (109,841 bytes) and found it byte-identical to the committed
+bundle of that commit. The committed `tailwind.bundle.json` has been
+regenerated by its recipe several times since (the `codeOnlyFacts` sibling,
+dump v1.31 fields, the schema-17 `bindings` spelling), and the clean-clone
+run has **not** been repeated on the current commit. What holds between
+receipts is `flowbite-bundle-fresh:check` — on every `maintain` and
+fast-lane run the committed bytes must equal a fresh emit — so the
+REPRODUCIBILITY is pinned continuously and the constant is read from the
+file (`shasum -a 256 examples/tailwind/figma/tailwind.bundle.json`), never
+from prose. During the kit climb components were added and removed three
+times and the bundle returned byte-identical to `bb96f43e…` (the
+five-component set) every time.
 
 The bundle is a pure function of (contracts, tokens, icons) — no timestamp, no
 machine id, no ordering nondeterminism.
@@ -170,16 +215,18 @@ being surprised by them is.
    `npx tsx packages/cli/src/cli.ts …`. There is *also* a published
    **`@ds-contracts/cli`**, currently **0.4.0**, while this source tree is
    `0.5.0-rc.2` — **the published CLI is behind the source.**
-   For the one command on this page that gap did not bite when it was last
-   checked — and it was checked rather than assumed: `npx
+   When that was last checked (the FIVE-stem set, schema 16), `npx
    @ds-contracts/cli@0.4.0 figma bundle …` produced a bundle **byte-identical**
    to the source tree's, sha256 `bb96f43e…`, 92,764 bytes both ways. **That
-   check was made against the FIVE-stem set and has not been re-run at eight**,
-   because re-running it reaches the network for a published package, which is
-   a human step here (docs/27). Treat the parity as unverified at this set
-   size. Pin the version if you use it, and do not assume the same parity for
-   other commands — the source is ahead and nothing verifies the rest of that
-   surface here.
+   parity no longer describes this tree's inputs:** every contract here is
+   schema 17 (the contract-level `bindings` hoist, 2026-08-22), and the
+   published 0.4.0 carries schema 16, so it should be expected to refuse
+   these contracts rather than reproduce the bundle — unverified, because
+   re-running it reaches the network for a published package, which is a
+   human step here (docs/27). From a clone, use `npx tsx
+   packages/cli/src/cli.ts …` as written above; if you must use the published
+   package, pin the version and expect the refusal until a schema-17 CLI is
+   published.
 2. **The plugin is not in the clone.** `playground/public/*.zip` and
    `figma-sync/plugin-dist/` are gitignored (`.gitignore:28,50`). You must run
    `npm run plugin:zip` before you have anything to import. A clean clone that

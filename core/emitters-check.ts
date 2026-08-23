@@ -815,6 +815,32 @@ console.log("\nText-style identity fail-closed");
   );
 }
 
+// ---- figma-script slot part `layout.grow` (r10, canvas conformance
+// slot-primary-axis-fill). The slot spec was the one NodeSpec built without
+// `grow`, so a slot part proposed with layout.grow (a native SLOT drawn FILL
+// along its ROW parent's primary axis) regenerated as a HUG slot — the
+// carried fact lost on the way back to the canvas. The fillW runtime reads
+// `grow` on any in-flow child; the spec just has to carry it.
+console.log("\nFigma script — a slot part's layout.grow reaches its spec");
+{
+  const card = contracts.get("ds.card")!;
+  const grown = structuredClone(card);
+  const body = grown.anatomy.root.parts!.body!;
+  body.layout = { ...(body.layout ?? {}), grow: true };
+  const scriptCtx = { tokens: ctx.tokens, icons, contracts };
+  const withGrow = emitFigmaScript(grown, scriptCtx);
+  const withoutGrow = emitFigmaScript(card, scriptCtx);
+  const slotGrow = /"grow": true,\n\s*"slotProperty": "Body"/;
+  check(
+    "a slot part with layout.grow emits grow: true on its slot spec (ahead of slotProperty — the fillW runtime's input)",
+    slotGrow.test(withGrow),
+  );
+  check(
+    "a slot part without layout.grow emits no grow on its spec (byte-invariant for every repo contract)",
+    !slotGrow.test(withoutGrow) && !withoutGrow.includes('"grow": true,\n      "slotProperty"'),
+  );
+}
+
 // ---- figma-script minted-variable preamble (the designer validation loop) --
 // The degraded Badge demo import (committed REST fixture, variables endpoint
 // answered with the non-Enterprise 403 — the exact path the playground's

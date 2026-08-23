@@ -72,6 +72,17 @@ npx @ds-contracts/cli figma bundle <contracts-dir> \
   [--modes <light.json[,dark.json]>] --name <Collection> --out my-library.bundle.json
 ```
 
+`--tokens` is the same grammar `generate` uses (since 2026-08-22): the flat
+two-file form above, **a directory** of `*.tokens.json` / `*.dtcg.json`, or
+layered `slot=file` entries — `primitives=…,semantic=…,brand.<name>=…` with
+`--modes light,dark` — in which case the bundle carries `tokenSet.layers`
+and the plugin's tokens step builds Primitives / Brand / Semantic with
+native aliases instead of one flat collection. Every contract is compiled
+before ✔ is printed; a bundle that does not compile is refused with ONE named
+list plus the slot layout, never one paste at a time. The bundle also carries
+`codeOnlyFacts` — every fact the canvas cannot hold, per part, channel,
+value and reason — and the plugin's run report lists them under each set.
+
 Paste that single JSON into the **Build** tab. The plugin syncs the token set first —
 one variable collection named after the library, Light/Dark modes, Figma-native
 variable aliases for minted `{alias}` leaves — then builds every component set bound to
@@ -89,11 +100,24 @@ The bundle's `tokenSet` shape (the CLI writes it; refusals in the plugin restate
     "name": "MUI",                                  // Figma variable-collection name
     "base": { "<token>": { "$type": "…", "$value": "…" } },   // flat DTCG
     "modes": { "light": { … }, "dark": { … } },     // optional per-mode overrides
-    "minted": { … }                                 // optional nested DTCG tree;
-  },                                                //   "{alias}" leaves alias base tokens
-  "contracts": [ … ]
+    "minted": { … },                                // optional nested DTCG tree;
+                                                    //   "{alias}" leaves alias base tokens
+    "layers": { … }                                 // optional (layered --tokens only):
+  },                                                //   primitives / brand.<name> / semantic / light / dark
+  "contracts": [ … ],
+  "codeOnlyFacts": [                                // one entry per contract: every fact the
+    { "contractId": "…", "name": "…",               //   canvas cannot hold, by part / kind /
+      "facts": [ { "part", "kind", "channel", "value", "reason", "variants" } ] }
+  ]                                                 //   channel / value / reason
 }
 ```
+
+Since 2026-08-22 the tokens step also **names** what it finds: variables in
+the owned collection the bundle no longer names are listed as `leftovers`
+and removed only behind `globalThis.DS_PRUNE_TOKENS = true`; a designer's
+edit to a variable value is named as `variableDrift` and kept unless
+`globalThis.DS_OVERWRITE_TOKENS = true`; a composite `$value` is refused by
+name rather than landing as `[object Object]`.
 
 Contracts in such a bundle resolve their token refs against `base` + `minted` — a ref
 outside both is refused by name, exactly like a repo contract referencing an unknown

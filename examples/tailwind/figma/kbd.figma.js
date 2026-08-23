@@ -7,7 +7,7 @@ const COMPONENTS = [
     "setName": "Kbd",
     "contractId": "flowbite.kbd",
     "version": "0.2.0",
-    "anchorKey": null,
+    "anchorKey": "b2a08e2c5421c4d41e8920f1c4b85f9a85ab99c9",
     "description": "Kbd — generated from contract flowbite.kbd v0.2.0 † (5 code-only facts — see plugin report)",
     "isSet": false,
     "boolProps": [],
@@ -139,7 +139,7 @@ const COMPONENTS = [
 ];
 const ROW_H = 240, PAD = 40;
 
-const EXPECTED_FILE_KEY = null;
+const EXPECTED_FILE_KEY = "59mLQlOMiD5w5za6SUcoO5";
 if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
   throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
 }

@@ -59,7 +59,7 @@ const COMPONENTS = [
     "setName": "Alert",
     "contractId": "flowbite.alert",
     "version": "0.2.0",
-    "anchorKey": null,
+    "anchorKey": "27fce6232d10fdd74f9f87d46c91ab29ecc98c68",
     "description": "Alert — generated from contract flowbite.alert v0.2.0 † (19 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
@@ -812,7 +812,7 @@ const COMPONENTS = [
 ];
 const ROW_H = 240, PAD = 40;
 
-const EXPECTED_FILE_KEY = null;
+const EXPECTED_FILE_KEY = "59mLQlOMiD5w5za6SUcoO5";
 if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
   throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
 }
@@ -2337,7 +2337,7 @@ const COMPONENTS = [
     "setName": "Badge",
     "contractId": "flowbite.badge",
     "version": "0.2.0",
-    "anchorKey": null,
+    "anchorKey": "8c36b6b475b56aa2920113b250ac5c7186320b2d",
     "description": "Badge — generated from contract flowbite.badge v0.2.0 † (2 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
@@ -3541,7 +3541,7 @@ const COMPONENTS = [
 ];
 const ROW_H = 240, PAD = 40;
 
-const EXPECTED_FILE_KEY = null;
+const EXPECTED_FILE_KEY = "59mLQlOMiD5w5za6SUcoO5";
 if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
   throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
 }
@@ -5002,7 +5002,7 @@ const COMPONENTS = [
     "setName": "Button",
     "contractId": "flowbite.button",
     "version": "0.2.0",
-    "anchorKey": null,
+    "anchorKey": "8c1a78adb634d4277cd96bb53b275ca45885ff9a",
     "description": "Button — generated from contract flowbite.button v0.2.0 † (11 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
@@ -8071,7 +8071,7 @@ const COMPONENTS = [
 ];
 const ROW_H = 240, PAD = 40;
 
-const EXPECTED_FILE_KEY = null;
+const EXPECTED_FILE_KEY = "59mLQlOMiD5w5za6SUcoO5";
 if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
   throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
 }
@@ -9607,7 +9607,7 @@ const COMPONENTS = [
     "setName": "Card",
     "contractId": "flowbite.card",
     "version": "0.2.0",
-    "anchorKey": null,
+    "anchorKey": "7b5427afe8d5766e80457327b0b04a50544808ed",
     "description": "Card — generated from contract flowbite.card v0.2.0 † (1 code-only facts — see plugin report)",
     "isSet": false,
     "boolProps": [],
@@ -9775,7 +9775,7 @@ const COMPONENTS = [
 ];
 const ROW_H = 240, PAD = 40;
 
-const EXPECTED_FILE_KEY = null;
+const EXPECTED_FILE_KEY = "59mLQlOMiD5w5za6SUcoO5";
 if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
   throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
 }
@@ -11248,7 +11248,7 @@ const COMPONENTS = [
     "setName": "HelperText",
     "contractId": "flowbite.helpertext",
     "version": "0.2.0",
-    "anchorKey": null,
+    "anchorKey": "9fda06f5ff7b04b37f7c325edc3d12c2ffdeb39c",
     "description": "HelperText — generated from contract flowbite.helpertext v0.2.0 † (2 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
@@ -11480,7 +11480,7 @@ const COMPONENTS = [
 ];
 const ROW_H = 240, PAD = 40;
 
-const EXPECTED_FILE_KEY = null;
+const EXPECTED_FILE_KEY = "59mLQlOMiD5w5za6SUcoO5";
 if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
   throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
 }
@@ -12941,7 +12941,7 @@ const COMPONENTS = [
     "setName": "Kbd",
     "contractId": "flowbite.kbd",
     "version": "0.2.0",
-    "anchorKey": null,
+    "anchorKey": "b2a08e2c5421c4d41e8920f1c4b85f9a85ab99c9",
     "description": "Kbd — generated from contract flowbite.kbd v0.2.0 † (5 code-only facts — see plugin report)",
     "isSet": false,
     "boolProps": [],
@@ -13073,7 +13073,7 @@ const COMPONENTS = [
 ];
 const ROW_H = 240, PAD = 40;
 
-const EXPECTED_FILE_KEY = null;
+const EXPECTED_FILE_KEY = "59mLQlOMiD5w5za6SUcoO5";
 if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
   throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
 }
@@ -14534,7 +14534,7 @@ const COMPONENTS = [
     "setName": "Label",
     "contractId": "flowbite.label",
     "version": "0.2.0",
-    "anchorKey": null,
+    "anchorKey": "76023d1204c57c7a0e07f86fb342f6c7a0536934",
     "description": "Label — generated from contract flowbite.label v0.2.0 † (2 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
@@ -14765,7 +14765,7 @@ const COMPONENTS = [
 ];
 const ROW_H = 240, PAD = 40;
 
-const EXPECTED_FILE_KEY = null;
+const EXPECTED_FILE_KEY = "59mLQlOMiD5w5za6SUcoO5";
 if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
   throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
 }
@@ -16226,7 +16226,7 @@ const COMPONENTS = [
     "setName": "ToggleSwitch",
     "contractId": "flowbite.toggleswitch",
     "version": "0.2.0",
-    "anchorKey": null,
+    "anchorKey": "08442ebe555baa908cd7ab07097bfcd58dd5fccc",
     "description": "ToggleSwitch — generated from contract flowbite.toggleswitch v0.2.0 † (12 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
@@ -17068,7 +17068,7 @@ const COMPONENTS = [
 ];
 const ROW_H = 240, PAD = 40;
 
-const EXPECTED_FILE_KEY = null;
+const EXPECTED_FILE_KEY = "59mLQlOMiD5w5za6SUcoO5";
 if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
   throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
 }

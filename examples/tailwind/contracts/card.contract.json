@@ -77,8 +77,9 @@
   "bindings": {
     "figma": {
       "anchors": {
-        "fileKey": null,
-        "componentSetKey": null
+        "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+        "nodeId": "120:1999",
+        "componentSetKey": "7b5427afe8d5766e80457327b0b04a50544808ed"
       }
     },
     "code": {

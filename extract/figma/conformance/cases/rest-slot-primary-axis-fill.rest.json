@@ -1,0 +1,209 @@
+{
+ "name": "canvas conformance fixture (REST boundary) — a native SLOT child layoutSizingHorizontal FILL under a FIXED-width ROW root: a FILL along the parent's PRIMARY axis is layout.grow (Phase 2 exam Card:Variant=Default/Image; r9 2026-08-23)",
+ "nodes": {
+  "1:16": {
+   "document": {
+    "id": "1:16",
+    "name": "Case",
+    "type": "COMPONENT_SET",
+    "scrollBehavior": "SCROLLS",
+    "blendMode": "PASS_THROUGH",
+    "clipsContent": false,
+    "fills": [],
+    "strokes": [],
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "absoluteBoundingBox": {
+     "x": 0,
+     "y": 0,
+     "width": 120,
+     "height": 80
+    },
+    "effects": [],
+    "interactions": [],
+    "layoutSizingHorizontal": "FIXED",
+    "layoutSizingVertical": "FIXED",
+    "constraints": {
+     "vertical": "TOP",
+     "horizontal": "LEFT"
+    },
+    "componentPropertyDefinitions": {
+     "Variant": {
+      "type": "VARIANT",
+      "defaultValue": "Default",
+      "variantOptions": [
+       "Default"
+      ]
+     },
+     "s#1:1": {
+      "type": "SLOT",
+      "defaultValue": {
+       "guid": {
+        "sessionID": -1,
+        "localID": -1
+       }
+      },
+      "preferredValues": [
+       {
+        "type": "COMPONENT_SET",
+        "key": "de1d1f4d9674a79e188e32cf71ea15dafc2355bf"
+       }
+      ]
+     }
+    },
+    "children": [
+     {
+      "id": "1:17",
+      "name": "Variant=Default",
+      "type": "COMPONENT",
+      "scrollBehavior": "SCROLLS",
+      "blendMode": "PASS_THROUGH",
+      "clipsContent": false,
+      "fills": [
+       {
+        "blendMode": "NORMAL",
+        "type": "SOLID",
+        "color": {
+         "r": 0.9,
+         "g": 0.92,
+         "b": 0.95,
+         "a": 1
+        }
+       }
+      ],
+      "strokes": [],
+      "strokeWeight": 1,
+      "strokeAlign": "INSIDE",
+      "cornerRadius": 0,
+      "layoutMode": "HORIZONTAL",
+      "primaryAxisAlignItems": "MIN",
+      "counterAxisAlignItems": "MIN",
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 4,
+      "paddingBottom": 4,
+      "itemSpacing": 24,
+      "layoutWrap": "NO_WRAP",
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "HUG",
+      "absoluteBoundingBox": {
+       "x": 0,
+       "y": 0,
+       "width": 928,
+       "height": 96
+      },
+      "effects": [],
+      "interactions": [],
+      "constraints": {
+       "vertical": "TOP",
+       "horizontal": "LEFT"
+      },
+      "children": [
+       {
+        "id": "1:18",
+        "name": "s",
+        "type": "SLOT",
+        "scrollBehavior": "SCROLLS",
+        "blendMode": "PASS_THROUGH",
+        "clipsContent": false,
+        "fills": [],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "INSIDE",
+        "cornerRadius": 0,
+        "layoutMode": "VERTICAL",
+        "primaryAxisAlignItems": "CENTER",
+        "counterAxisAlignItems": "CENTER",
+        "paddingLeft": 0,
+        "paddingRight": 0,
+        "paddingTop": 0,
+        "paddingBottom": 0,
+        "itemSpacing": 0,
+        "layoutWrap": "NO_WRAP",
+        "layoutSizingHorizontal": "FILL",
+        "layoutSizingVertical": "HUG",
+        "absoluteBoundingBox": {
+         "x": 0,
+         "y": 0,
+         "width": 848,
+         "height": 48
+        },
+        "effects": [],
+        "interactions": [],
+        "constraints": {
+         "vertical": "TOP",
+         "horizontal": "LEFT"
+        },
+        "children": [],
+        "componentPropertyReferences": {
+         "slotContentId": "s#1:1"
+        }
+       },
+       {
+        "id": "1:20",
+        "name": "t",
+        "type": "TEXT",
+        "scrollBehavior": "SCROLLS",
+        "blendMode": "PASS_THROUGH",
+        "characters": "Case",
+        "fills": [
+         {
+          "blendMode": "NORMAL",
+          "type": "SOLID",
+          "color": {
+           "r": 0.1,
+           "g": 0.1,
+           "b": 0.1,
+           "a": 1
+          }
+         }
+        ],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "OUTSIDE",
+        "layoutSizingHorizontal": "HUG",
+        "layoutSizingVertical": "HUG",
+        "absoluteBoundingBox": {
+         "x": 0,
+         "y": 0,
+         "width": 40,
+         "height": 16
+        },
+        "effects": [],
+        "interactions": [],
+        "constraints": {
+         "vertical": "TOP",
+         "horizontal": "LEFT"
+        },
+        "style": {
+         "fontFamily": "Inter",
+         "fontPostScriptName": "Inter-Medium",
+         "fontStyle": "Medium",
+         "fontWeight": 500,
+         "fontSize": 12,
+         "textAlignHorizontal": "LEFT",
+         "textAlignVertical": "TOP",
+         "letterSpacing": 0,
+         "lineHeightPx": 16,
+         "lineHeightPercent": 100,
+         "lineHeightUnit": "PIXELS",
+         "textAutoResize": "WIDTH_AND_HEIGHT"
+        }
+       }
+      ],
+      "primaryAxisSizingMode": "FIXED",
+      "counterAxisSizingMode": "AUTO"
+     }
+    ]
+   },
+   "components": {
+    "8:8": {
+     "name": "Glyph",
+     "key": "glyphkey1"
+    }
+   },
+   "componentSets": {},
+   "styles": {}
+  }
+ }
+}

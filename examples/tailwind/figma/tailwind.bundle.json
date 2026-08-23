@@ -1941,8 +1941,9 @@
       "bindings": {
         "figma": {
           "anchors": {
-            "fileKey": null,
-            "componentSetKey": null
+            "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+            "nodeId": "120:1979",
+            "componentSetKey": "27fce6232d10fdd74f9f87d46c91ab29ecc98c68"
           }
         },
         "code": {
@@ -2170,8 +2171,9 @@
         "figma": {
           "statePreviews": true,
           "anchors": {
-            "fileKey": null,
-            "componentSetKey": null
+            "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+            "nodeId": "120:2098",
+            "componentSetKey": "8c36b6b475b56aa2920113b250ac5c7186320b2d"
           }
         },
         "code": {
@@ -2458,8 +2460,9 @@
         "figma": {
           "statePreviews": true,
           "anchors": {
-            "fileKey": null,
-            "componentSetKey": null
+            "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+            "nodeId": "120:2203",
+            "componentSetKey": "8c1a78adb634d4277cd96bb53b275ca45885ff9a"
           }
         },
         "code": {
@@ -2549,8 +2552,9 @@
       "bindings": {
         "figma": {
           "anchors": {
-            "fileKey": null,
-            "componentSetKey": null
+            "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+            "nodeId": "120:1999",
+            "componentSetKey": "7b5427afe8d5766e80457327b0b04a50544808ed"
           }
         },
         "code": {
@@ -2661,8 +2665,9 @@
       "bindings": {
         "figma": {
           "anchors": {
-            "fileKey": null,
-            "componentSetKey": null
+            "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+            "nodeId": "120:2014",
+            "componentSetKey": "9fda06f5ff7b04b37f7c325edc3d12c2ffdeb39c"
           }
         },
         "code": {
@@ -2743,8 +2748,9 @@
       "bindings": {
         "figma": {
           "anchors": {
-            "fileKey": null,
-            "componentSetKey": null
+            "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+            "nodeId": "120:1982",
+            "componentSetKey": "b2a08e2c5421c4d41e8920f1c4b85f9a85ab99c9"
           }
         },
         "code": {
@@ -2855,8 +2861,9 @@
       "bindings": {
         "figma": {
           "anchors": {
-            "fileKey": null,
-            "componentSetKey": null
+            "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+            "nodeId": "120:1996",
+            "componentSetKey": "76023d1204c57c7a0e07f86fb342f6c7a0536934"
           }
         },
         "code": {
@@ -3160,8 +3167,9 @@
       "bindings": {
         "figma": {
           "anchors": {
-            "fileKey": null,
-            "componentSetKey": null
+            "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+            "nodeId": "120:2047",
+            "componentSetKey": "08442ebe555baa908cd7ab07097bfcd58dd5fccc"
           }
         },
         "code": {

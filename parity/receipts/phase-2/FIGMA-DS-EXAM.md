@@ -316,3 +316,14 @@ The 19 cases authored on 08-22 are all green (re-recorded by F1–F4 and the pro
 2. Card is still not recognisable in the harness cell: the GLASS/BACKGROUND_BLUR surface is named-not-proposed (the resolved fill is `#00000001`), the vector glyphs are named, and the Default story passes no content. All named; none carried.
 3. The Card Inline Image SLOT's `fillHeight` and FIXED 308px are the two silences left on the 15 sets (cases above).
 4. `lineHeight: 1.5 (PIXELS)` — the kit's own authoring; faithful on both sides.
+
+---
+
+**Addendum 2026-08-23 (`phase-2/exam-close`, r9 round 2 + r10).** The two
+silences named above (the Card Inline Image SLOT's FIXED 308px and its
+`fillHeight` under mixed parent modes) are closed — both hold green in
+`npm run conformance:canvas` (152 cases · 152 PASS · 0 RED-EXPECTED; two
+cases added for the same SLOT's primary-axis FILL, now carried as
+`layout.grow`). The numbers in this receipt are the last re-measure and are
+not re-run here; docs/23 §D.29 carries the closes and their gates, §B.24 the
+one fact left named on that node (the slot's interior auto-layout).

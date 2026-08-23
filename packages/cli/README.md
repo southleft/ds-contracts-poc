@@ -10,13 +10,19 @@ ds-contracts extract [config] [--reconcile]            # code → proposed contr
 ds-contracts extract --computed --config <capture.json> --harness <dir> [--out <dir>]
                                                        # real-browser computed-style capture
 ds-contracts promote --config <library.json>           # reviewed capture → promoted contracts
-ds-contracts generate <contracts..> --out <dir>        # contract → code
+ds-contracts generate <contracts..> --out <dir>        # contract → code (+ tokens.css beside it)
     [--target react|html|react-inline|figma-script|<registered>]
-    [--tokens f,f] [--icons dir] [--stories] [--emitter <module>]
+    [--tokens f,f | <dir> | slot=file,…] [--icons dir] [--stories] [--emitter <module>]
+                                                       # a contract that fails to validate is refused
+                                                       # BY NAME; the rest are written; exit 1 with the list
 ds-contracts figma <contracts..> --out <dir>           # contract → Figma sync scripts
 ds-contracts figma bundle <contracts..> --out <file>   # contracts + tokens → ONE self-contained
     --tokens <base.dtcg.json[,minted.dtcg.json]>       # CONTRACTS-BUNDLE JSON (paste it into the
     [--modes <light.json[,dark.json]>] [--name <col>]  # plugin's Build tab; deterministic bytes)
+                                                       # --tokens takes generate's layered grammar too
+                                                       # (a directory, primitives=…,semantic=…,brand.<name>=…)
+ds-contracts migrate <paths..> [--check]               # schema 16 → 17 codemod (bindings.figma.*);
+                                                       # --check names any v16 spelling and writes nothing
 ds-contracts figma push <file> --code <CODE>           # send a CONTRACTS-BUNDLE to the plugin bridge
 ds-contracts figma receive --out <dir> [--apply]        # receive a proposal; no writes without --apply
 ds-contracts diff [config]                             # parity referee — exit 0 clean · 1 drift · 2 error
@@ -27,6 +33,8 @@ ds-contracts propose-pr <file> --repo owner/name [--dry-run]
 - **Emitter plugins**: `--emitter <module>` dynamic-imports a module exporting an `Emitter` (`default`, `emitter`, or an `emitters` array) and registers it via `registerEmitter()` before generation; `--target <its-name>` then emits through it.
 - **propose-pr token discipline**: the fine-grained GitHub token comes from `--token`, `DS_CONTRACTS_GITHUB_TOKEN`, or `GITHUB_TOKEN`; it is used in memory for the run and never persisted or logged. `--dry-run` prints the exact REST plan with no token and no network.
 - **`extract --computed`** degrades with a named message (exit 3) when `playwright-core` or its Chromium is absent; every other verb works without a browser.
+- **Prop/DOM collisions**: a prop or slot named like a DOM attribute (`content`, `title`, `color`, …) is `Omit<>`-ed from the React base attrs type and named in the emitted header; a prop that is an `HTMLElement` member gets no web-components accessor (the attribute is still observed and rendered). The rule lives in `@ds-contracts/core`.
+- **Schema 17**: every Figma-only field lives under `bindings.figma` (`representation`, `statePreviews`, `anchors`; `slot.bindings.figma.property`). A v16 document is refused by name with the new spelling and `ds-contracts migrate` in the message.
 
 ## Release status
 

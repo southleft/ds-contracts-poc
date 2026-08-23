@@ -7,7 +7,7 @@ const COMPONENTS = [
     "setName": "Card",
     "contractId": "flowbite.card",
     "version": "0.2.0",
-    "anchorKey": null,
+    "anchorKey": "7b5427afe8d5766e80457327b0b04a50544808ed",
     "description": "Card — generated from contract flowbite.card v0.2.0 † (1 code-only facts — see plugin report)",
     "isSet": false,
     "boolProps": [],
@@ -175,7 +175,7 @@ const COMPONENTS = [
 ];
 const ROW_H = 240, PAD = 40;
 
-const EXPECTED_FILE_KEY = null;
+const EXPECTED_FILE_KEY = "59mLQlOMiD5w5za6SUcoO5";
 if (EXPECTED_FILE_KEY && figma.fileKey && figma.fileKey !== EXPECTED_FILE_KEY) {
   throw new Error('WRONG FILE: expected ' + EXPECTED_FILE_KEY + ', got ' + figma.fileKey);
 }

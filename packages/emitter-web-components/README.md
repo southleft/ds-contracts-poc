@@ -36,9 +36,19 @@ into its own copy, so a plugin module never calls `registerEmitter()` on itself
 Token values arrive via CSS custom properties (they inherit through the
 shadow boundary) — include your token stylesheet on the page.
 
-Canvas-only contract concepts (`figmaStatePreviews`, `modes`,
-`bindings.figma`, anchors) are **named no-ops**, listed in each emitted
-file's header — never silently dropped.
+Canvas-only contract concepts (`bindings.figma.statePreviews`, `modes`,
+`bindings.figma.representation`, `bindings.figma.anchors`) are **named
+no-ops**, listed in each emitted file's header — never silently dropped.
+
+Carried since 2026-08-22, each with its gate in the reference repo: the
+contract's root `attrs` (ARIA, `type`, `href`) on the host element and
+`statesByProp` (`root-attrs:check`); part token refs with two or more
+placeholders expanded to one rule per value tuple, byte-compared against the
+React emitter's CSS (`emitters:check`); a prop that is an `HTMLElement`
+member gets no accessor and says so in the header (`prop-collision:check`).
+Token values are expected from the `tokens.css` that `ds-contracts generate`
+writes beside the components (or any sheet defining the same custom
+properties).
 
 Part of the [ds-contracts](https://ds-contracts-spec.pages.dev) open spec. MIT.
 
