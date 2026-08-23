@@ -26,7 +26,10 @@ import { assertRegistryTruth, REGISTRY_TRUTH_REL } from './src/registry-truth.js
 import { layout } from './src/html.js';
 import { loadHowReplays } from './src/how-replays.js';
 import {
+  adjudicationStarSvg,
   dependencyGraphSvg,
+  dispositionSvg,
+  flowChainSvg,
   instrumentsSvg,
   propLifecycleSvg,
   receiptsFlowSvg,
@@ -129,7 +132,8 @@ for (const asset of ['contract-flow-light.svg', 'contract-flow-dark.svg']) {
 
 // Build-time themed diagrams (the contract-flow-*.svg pattern): each is
 // emitted light + dark; the dependency graph is COMPUTED from the committed
-// whole-kit capture via the replays above.
+// whole-kit capture via the replays above. No mermaid runtime ships: the
+// docs/29 fences are drawn here at build and swapped in by id.
 for (const theme of ['light', 'dark'] as Theme[]) {
   const diagrams: Array<[string, string]> = [
     ['prop-lifecycle', propLifecycleSvg(theme)],
@@ -137,6 +141,10 @@ for (const theme of ['light', 'dark'] as Theme[]) {
     ['receipts-flow', receiptsFlowSvg(theme)],
     ['instruments', instrumentsSvg(theme)],
     ['dependency-graph', dependencyGraphSvg(theme, replays.scale.graph)],
+    // docs/29's three ```mermaid fences, pre-rendered by `%% id:` (src/pages/flow.ts swaps them in).
+    ['flow-chain', flowChainSvg(theme, replays.flow.dumpGrammar.rest)],
+    ['disposition', dispositionSvg(theme)],
+    ['adjudication-star', adjudicationStarSvg(theme)],
   ];
   for (const [name, svg] of diagrams) {
     writeFileSync(path.join(DIST, 'assets', `${name}-${theme}.svg`), svg);

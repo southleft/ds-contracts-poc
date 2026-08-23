@@ -173,6 +173,10 @@ const REAL_GE80 = realPcts.filter((x) => x >= 80).length;
 const REAL_CELLS = realCards.reduce((a, s) => a + s.v.computed.cellsCompared, 0);
 const REAL_EQUAL = realCards.reduce((a, s) => a + s.v.computed.cellsEqual, 0);
 const REAL_WEIGHTED = REAL_CELLS ? (100 * REAL_EQUAL) / REAL_CELLS : 0;
+// The worst-first table's top row (docs/24 §3.1) — quoted as "the worst is X%"
+// in README and docs/00-choose-your-path; the two drifted apart (50.0 vs 69.8)
+// when shadcn joined the corpus, so the phrase is pinned here to the minimum.
+const REAL_MIN = realPcts.length ? Math.min(...realPcts) : 0;
 
 // ---- the COVERAGE population: measured AND committed --------------------
 // Measured is not covered. A component can carry a full scorecard and no
@@ -381,6 +385,7 @@ const DERIVED_CLAIMS = [
   ['capture mean equality', /([\d.]+)% mean\s+computed-style equality/g, () => [{ pct: REAL_MEAN }]],
   ['capture mean equality', /([\d.]+)% mean, and every component is listed/g, () => [{ pct: REAL_MEAN }]],
   ['capture mean equality', /the ([\d.]+)% above describes only the tractable/g, () => [{ pct: REAL_MEAN }]],
+  ['capture worst component', /\bthe worst is ([\d.]+)%/g, () => [{ pct: REAL_MIN }]],
 ];
 
 for (const doc of DOCS) {

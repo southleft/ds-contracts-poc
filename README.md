@@ -94,17 +94,31 @@ Three situations bring people here. They are genuinely different amounts of work
 
 One rule spans all three: **the surfaces never sync side-to-side.** A designer's change and an engineer's change both travel *through the contract*, as a reviewable diff. Nothing writes to your repo without a pull request, and nothing writes to the canvas without a human clicking Apply.
 
+### What physically crosses each hop
+
+There is no Figma-to-code converter here and no code-to-Figma converter. There is one pure function per direction — one compiles the contract into a Figma script, one proposes a contract from a canvas dump — plus the code emitters, and a set of referees that classify drift against the contract — none of them writes to a surface or picks a side. The contract is the fixed point — every hop reads or writes it — and each hop also carries its own envelope file (code extraction, bundle, generated code, dump, proposal) to or from that fixed point. Every journey above is a path through the same five hops:
+
+| hop | direction | what goes in | what comes out |
+|---|---|---|---|
+| **1** | code → contract | your `.tsx` / `.css` / custom-elements manifest, via `extract`, `extract --computed`, `promote` | `contracts/*.contract.json` proposals; the computed capture (`extract --computed`) also writes a `*.extension.json` sidecar naming every fact the vocabulary refused, and `promote` carries it forward |
+| **2** | contract → canvas | contracts + tokens, via `figma bundle` → one `CONTRACTS-BUNDLE` JSON (with `codeOnlyFacts`) | component sets + variable collections, built by the plugin when a human clicks Apply, each set stamped `ds_contracts/*` |
+| **3** | contract → code | contracts + tokens, via `generate --target react\|html\|react-inline\|…` | `<Name>.tsx`, `.module.css`, `index.ts`, `tokens.css` — atomic per contract; `.stories.tsx` only with `--stories` |
+| **4** | canvas → proposal | a **dump** (plain JSON of what is drawn: variants, layers, bound variable names, `_provenance`, `_degradations`) from the plugin's Send tab or the REST mapper, run through the propose step (`npm run extract:figma` — *propose* names the step, not a CLI verb) | a `CONTRACT-PROPOSAL` envelope: the proposed contract, its `notes[]`, `unbound[]` rows, child stubs, minted `imported.*` tokens, a provenance line |
+| **5** | proposal → contract | the envelope, via a PR, `figma receive --apply`, or copying the JSON | a contract change in `contracts/`, merged by a human or not merged at all |
+
+A fact crossing any hop ends in one of three dispositions — **carried**, **named** in a receipt a person can read, or **refused by name** — and the conformance manifests treat the fourth, silent loss, as a hard failure ([Carried, named, or refused](#carried-named-or-refused), below). The full walk, verb by verb, with three facts traced in both directions, is **[docs/29 — How It Flows](docs/29-how-it-flows.md)**.
+
 ---
 
 ## Journey A — "I have a component on the canvas; I want code"
 
 The goal: a designer has a component set in Figma; you want a real, typed React component in your repo. *(Design-first — [the canonical path page](docs/00-choose-your-path.md) is the full statement.)*
 
-1. **In the plugin, open the *Send* tab.** Select the set (or find it with *Scan this file*), leave the base-contract box empty if this tool did not build it, and click **Read the set & diff**. The engine reads the live set and proposes a contract from what is actually drawn — variants become props, layers become anatomy, bound variables become token refs.
+1. **In the plugin, open the *Send* tab.** Select the set (or find it with *Scan this file*), leave the base-contract box empty if this tool did not build it, and click **Read the set & diff**. The engine reads the live set and proposes a contract from what is actually drawn — variants become props, layers become anatomy, bound variables become token refs. What it reads is a *dump* (plain JSON of what is drawn, with its own `_degradations` — the reader's receipt of what it could not see); where bindings differ across variants without correlating to an axis the proposal records a note and guesses nothing; a raw value with no variable becomes a binding to a provisional `imported.*` token the envelope lists under `mintedTokens` — visible and renamable, never a silent guess (the CLI route, `npm run extract:figma`, mints nothing by default and writes an `unbound` row with nearest-token candidates instead).
    *No plugin?* `npm run extract:figma:rest -- <figma-url>` with a `FIGMA_TOKEN` reads the same sets over REST and writes the same dump shape, with every mapper receipt riding the dump as `_degradations`. One thing that route needs from you: variable **names and modes** come from `/v1/files/:key/variables/local`, which answers only to a token minted with the `file_variables:read` scope — without it every binding degrades to its resolved literal and the CLI says so once, with the fix, instead of calling it a plan limit ([docs/23 §B.25](docs/23-known-limitations.md#b25-the-rest-route-cannot-name-a-variable-binding-without-file_variablesread)).
-2. **Get that contract into the repo — with the code already in it.** Three doors, all reviewable, and **none of them ends at a document nobody can run**. The contract and the component it generates travel together, in the same change:
+2. **Get that contract into the repo — with the code already in it.** What leaves the Send tab is a `CONTRACT-PROPOSAL` JSON carrying the proposed contract, its notes, child stubs, minted tokens, and a provenance line: tool-generated, hand-built, or unrecorded. Three doors take it, all reviewable, and **none of them ends at a document nobody can run**. The contract and the component it generates travel together, in the same change:
    - **GitHub PR** — fill in `owner/repo` and a fine-grained token (session-only, never stored; leave *Dry run* ticked to see the exact plan first). The PR carries **both halves**: the contract *and* the emitted component files next to it. Which target it emits is never guessed — `--target` wins, otherwise the `generate` section of `ds-contracts.config.json` decides, and with neither recorded the PR carries the contract alone **and says so in the body**.
-   - **Send to repo** — the developer runs `ds-contracts figma receive --out contracts` on their machine, which prints a 6-character code; the designer types it in. The CLI **writes nothing without `--apply`** — and with `--apply` it writes the generated component too, from the same config.
+   - **Send to repo** — the developer runs `ds-contracts figma receive --out contracts` on their machine, which prints a 6-character code; the designer types it in. Without `--apply` the CLI **writes only the proposal artifact** (`.proposals/<id>.proposal.json`); the contract file is never touched. With `--apply` it writes the contract, and the generated component too, from the same config.
    - **Copy the JSON out** and commit it yourself, then run `generate` (below).
 3. **Generate the component** — the explicit form, and what the two doors above run for you:
 
@@ -112,6 +126,8 @@ The goal: a designer has a component set in Figma; you want a real, typed React 
 ds-contracts generate contracts/button.contract.json --out src/generated \
   --target react --tokens tokens/captured.dtcg.json --stories
 ```
+
+The CLI twin of the Send tab, for a dump you already have on disk: `npm run extract:figma -- <dump.json> --out <dir>` writes the proposals, `minted.dtcg.json`, `captured.dtcg.json` (the dump's own variables) and `figma-proposals.md`, which prints the exact next `generate` line with every token tree the proposals resolve through.
 
 `--target` accepts `react` (typed TSX + CSS Modules + stories), `html`, `react-inline`, `figma-script`, or any emitter you register with `--emitter`. An unknown target is refused with the list of registered names.
 
@@ -125,9 +141,9 @@ Generation is **fully deterministic**: the same contract produces byte-identical
 
 Every PR states which of these it is, in the body — the tool does not let you find out later.
 
-For a set **this tool generated** (it carries a `ds_contracts/contractId` marker), Journey A is a **true round trip**: re-running the emitters reproduces the component **byte for byte** from the contract in the PR, and this repo's own components re-extract to zero mismatches in both directions.
+For a set **this tool generated** (it carries a `ds_contracts/contractId` marker), Journey A is a **true round trip**: re-running the emitters reproduces the component **byte for byte** from the contract in the PR, and this repo's own components re-extract to zero mismatches in both directions. For a **hand-built** set, it is **an inversion**, not a reproduction: real structure, real variants, real bound variables — but a canvas cannot tell you about a `useEffect`, a keyboard handler, or why a value is what it is. **Treat the generated component as a reviewable starting point**, and review it as new code. What one fact looks like on each hop — a Button token that is carried both ways, a ToggleSwitch `translate` that is folded into an anchor and described, an `href` whose value reaches the canvas while its binding does not — is traced in [docs/29's three worked examples](docs/29-how-it-flows.md).
 
-For a **hand-built** set, it is **an inversion**, not a reproduction. The proposal is what can be read off the canvas: real structure, real variants, real bound variables — but a canvas cannot tell you about a `useEffect`, a keyboard handler, or why a value is what it is. **Treat the generated component as a reviewable starting point, not as your finished component**, and review it as new code. The measured shape of that claim, on a real kit this project does not own: all 15 Untitled UI sets that were run executed through the set-level fact diff, and the totals across them are **11,400 matched · 1,857 diverged · 7,671 lost · 15,359 invented**.
+The measured shape of the hand-built claim, on a real kit this project does not own: all 15 Untitled UI sets that were run executed through the set-level fact diff, and the totals across them are **11,400 matched · 1,857 diverged · 7,671 lost · 15,359 invented**.
 
 **Read those four numbers with their context, and do not expect the context to rescue them.** They are 36,287 facts, so matched is **31.4%** — and the claim is *not* that the round trip is lossless, because at 31.4% it plainly is not. The claim is that it **closes**: it ran to completion on 15 of 15 components and every fact landed in exactly one of four named buckets, so a loss is a row in a table rather than an absence. One caveat cuts the other way — the largest single divergence class is an artifact of the comparison, not a loss: **934 of the 954** `layout.mode` divergences are tagged `auto-layout-inert` (a frame whose children are all absolutely placed has no observable auto-layout direction to read back), which changes nothing that is drawn; the remaining 20 are real. The bucket-and-tag accounting, including the untagged remainder it does not explain, is [docs/24 §6.3](docs/24-what-works.md) — and the tagged detail is in [the full report](extract/figma/roundtrip-uui/REPORT.md).
 
@@ -237,6 +253,14 @@ ds-contracts figma bundle examples/acme/contracts --out acme.bundle.json \
   --tokens examples/acme/tokens/acme.dtcg.json,examples/acme/tokens/acme-minted.dtcg.json \
   --modes light.json,dark.json --name Acme
 
+#    The bundle's `codeOnlyFacts` lists, per contract, every fact the canvas
+#    cannot carry — part, kind, channel, value, reason. On the Flowbite eight
+#    (examples/tailwind/figma/tailwind.bundle.json) it is 54 facts, and
+#    `npm run code-only-facts:check` pins the per-contract counts. The same
+#    list prints on stdout, in the plugin run report, and is stamped on each
+#    set as `ds_contracts/codeOnlyFacts`. The ToggleSwitch thumb is the worked
+#    case: docs/29-how-it-flows.md.
+
 # 6. Mint the standing channel ONCE. It prints two keys: a write key (a CI
 #    secret — it publishes) and a read key (sha256 of it — the half you send
 #    the designer; it can never publish).
@@ -308,14 +332,13 @@ Brownfield: a mature Figma library your team drew by hand, and a mature codebase
 
 The two numbers that matter pull in opposite directions, and both are true. Both are measured in [docs/24 — What Works](docs/24-what-works.md), and both are priced in [docs/23 — Known Limitations](docs/23-known-limitations.md):
 
-**Fidelity per captured component is high — 86.8% mean, and every component is listed.** What lands on the canvas is the browser's own computed truth for your real component: not an approximation, not a screenshot, not a guess. Measured against the original npm package rendering, per prop combination × interaction state, as an exact string match with no tolerance and no whitelist, 116 components across eight libraries score **86.8% mean computed-style equality** (85.9% cell-weighted over 718018 cells; 59 of 116 at ≥90%, 91 of 116 at ≥80%). [docs/24 §3.1](docs/24-what-works.md) lists all 116 worst-first, with nothing omitted — the worst is 50.0% (shadcn Avatar, pixel-AA-perfect 12/12; the divergence is channel-string spelling). The capture runs twice and refuses if the runs disagree, which catches uncontrolled state, random ids and animation sampling before any of it reaches a contract.
-
+**Fidelity per captured component is high — 86.8% mean, and every component is listed.** What lands on the canvas is the browser's own computed truth for your real component: not an approximation, not a screenshot, not a guess. Measured against the original npm package rendering, per prop combination × interaction state, as an exact string match with no tolerance and no whitelist, 116 components across nine libraries (the measured capture corpus of [docs/24 §2](docs/24-what-works.md) — shadcn/ui, Fluent 2 and Ant Design are in it, this repo's own library is not) score **86.8% mean computed-style equality** (85.9% cell-weighted over 718,018 cells; 59 of 116 at ≥90%, 91 of 116 at ≥80%). [docs/24 §3.1](docs/24-what-works.md) lists all 116 worst-first, with nothing omitted — the worst is 50.0% (shadcn Avatar, pixel-AA-perfect 12/12; the divergence is channel-string spelling). The capture runs twice and refuses if the runs disagree, which catches uncontrolled state, random ids and animation sampling before any of it reaches a contract.
 **Coverage per library is partial, and a first pass will not be your whole library.** Each foreign-library round in this repo committed between 5 and 31 components out of a library of 46 to 243 — the measured per-library coverage runs from about 2% to about 23%, and those 113 components are **11.1% of the 1015** in the seven libraries with a measured size. The per-library table with its denominators is [docs/24 §2](docs/24-what-works.md), printed there *before* any fidelity average for exactly this reason; the source of those denominators is [docs/22 §8.3](docs/22-generality.md). Budget hours per library for the recon and the config, then machine time for the capture.
 
 Beyond that, four properties you can rely on:
 
 - **It refuses rather than guesses.** A token ref outside the inventory, an illegal contract, an unreviewed draft config, a state preview that would render identically to Default — each stops with a message that names the thing. A plausible substituted value is treated as worse than a crash.
-- **Everything it cannot carry, it names.** Every extraction writes a `*.extension.json` sidecar listing each captured fact the vocabulary refuses, with the reason. Nothing is dropped on the floor.
+- **Everything it cannot carry, it names.** The computed capture (`extract --computed`) writes a `*.extension.json` sidecar listing each captured fact the vocabulary refuses, with the reason, and `promote` carries it forward beside the promoted contracts. Nothing is dropped on the floor.
 - **Re-running is always safe.** Same input, same bytes. Applying an update to a live canvas preserves node ids, component keys and component-property overrides on placed instances.
 - **The known gaps are written down, not discovered.** Three you will meet soon enough: **overlay components** (Dialog, Menu, Tooltip) have no hover/focus/active planes in the captured truth, so those contracts declare `states: []` by design; **text wrapping is not implemented**, so a hugging text node inside a narrower fixed-width ancestor clips; **webfonts load only where a library's capture config declares them** (per-library `fonts` field, committed font files, no network — Altitude is configured today), so wherever unconfigured absolute text widths are fallback-font widths. **The complete inventory is [Known Limitations](docs/23-known-limitations.md)** — coverage, fidelity, per-library freshness, the journey verbs that don't exist, and what each gate leaves out of its denominator; its counterpart, the measured success side, is [What Works](docs/24-what-works.md). The evidence behind the generality claim, and where it leaks, is [docs/22 §8](docs/22-generality.md).
 
@@ -329,16 +352,12 @@ Beyond that, four properties you can rely on:
 
 *Try first:* open **Examples**, pick the Badge, then break its contract on purpose — delete a required field, or point a token binding at a name that doesn't exist. The refusal appears on screen, named. That refusal is the whole product.
 
-What is in there:
+The playground walks the same two directions as this README, one guided tour each. Most steps run the same `core/` barrel the CLI runs, in your browser, and show the artifact it produced; what cannot run in a browser is labelled on the step itself — the bundle step previews the committed `tailwind.bundle.json`, the adjudication counts are replayed from the committed round-trip receipt (the comparator imports `node:fs`), the envelope is assembled in the shape the plugin exports, and the canvas step is a hand-off (nothing in the browser writes to Figma):
 
-- a gallery of live-emitted examples from the shipping contracts
-- a governed contract editor — schema violations and generator refusals shown on screen, by name
-- import a component from a **figma.com URL** (your token), with an honest degradation ladder when your plan gates the variables endpoint
-- import code from a **public GitHub file URL**, or paste TSX + a CSS Module — the stylesheet unlocks anatomy, every failure named
-- paste a **plugin dump** (`extract/figma/dump.plugin.js`) into the **JSON** tab for native variable names on any Figma plan
-- paste **your own DTCG tokens** and watch every consumer rebind to them
-- describe a component in a sentence and let Claude (your key) propose a contract the schema can refuse
-- share any contract as a ~1 KB permalink
+- **Code → Figma** (`?tour=code-to-figma`) — a shipping contract in the governed editor, compiled to a Figma script with its variants, bound variable names and **code-only facts** listed by name; break the contract on purpose and the refusal appears on screen.
+- **Figma → code** (`?tour=figma-to-code`) — a real plugin dump (paste your own into the **JSON** tab, or import from a **figma.com URL** with your token), proposed into a contract with its notes and `unbound` rows, then emitted to React and HTML; what the canvas could not say is listed, with its reason.
+
+Code import (a public GitHub file URL, or pasted TSX + CSS Module), your own DTCG tokens, a prompt-to-contract assistant (your key) and ~1 KB permalinks are there too.
 
 **One route is off, and the playground says so on the button:** live relay from the Figma plugin. The plugin's *Send to Playground* tab was removed when its seven tabs were re-housed into Build / Changes / Send, so nothing can answer a pairing code today. Use the figma.com URL route, or paste a dump into the JSON tab. Both credential-gated paths — Figma URL import and prompt-to-contract — are live-verified against real endpoints ([MILESTONES.md](MILESTONES.md)).
 
@@ -362,6 +381,25 @@ Every organization that takes design systems seriously eventually splits into tw
 This project takes a third position: **the source of truth is neither surface.** Each component is defined once, in a small versioned JSON contract capturing everything design and engineering must agree on — props and their legal values, anatomy, token bindings, slot constraints, accessibility semantics, declared events. Both libraries are *renderers* of that contract: generated from it on the first pass, validated against it forever after.
 
 The rule that makes it work: **surfaces never sync side-to-side.** An engineer's new prop and a designer's color change take the same path — flagged by the differ, promoted into the contract as a reviewable diff, then regenerated out to the other surface. One arbiter, version-controlled, no arbitration meetings. It's the governance model that made Git work for code and the DTCG token format work for design tokens, run one level up — at the component-API layer.
+
+### Carried, named, or refused
+
+The contract is not an AI and not a merge algorithm. It adjudicates by doing three things mechanically. **It is the vocabulary:** the schema is the referee on every door, so a fact outside it cannot enter silently. **It fixes the disposition of every fact crossing a hop:** carried (it becomes a field or construct on the other side), named (it cannot cross, so it is written to a receipt with its reason), or refused by name (the conversion stops for that contract and writes nothing for it). **It says which way drift runs — but never who wins:** a human merging a contract PR does that.
+
+Each direction has its own receipt channel for the named facts. Code → canvas: the bundle's `codeOnlyFacts` (part, kind, channel, value, reason), printed by `figma bundle`, listed in the plugin run report, stamped on the set. Canvas → contract: the proposal's `notes[]` and `unbound[]` rows, the dump's `_degradations`, and the round-trip receipt's CANVAS-ABSENT class ([`extract/figma/ROUNDTRIP.md`](extract/figma/ROUNDTRIP.md)). Code → contract: the `*.extension.json` sidecar the computed capture writes and `promote` carries forward ([docs/16](docs/16-sync-boundary.md)). Walls carry `FC-*` codes catalogued in [docs/23](docs/23-known-limitations.md). Silent loss is the forbidden fourth outcome: the conformance manifests are hand-authored denominators, deliberately not derived from the engine's own tables, so a construct that is neither carried nor named-refused is a hard failure rather than an absence ([`conformance/README.md`](conformance/README.md)).
+
+Six instruments classify drift. Four compare **one surface to the contract** (`parity`, `diagnose`, the plugin's **Changes** tab, the ledger); `extract --reconcile` lays the two extractions (code's, the dump's) side by side; the conformance kits hold the engine itself to a hand-authored manifest:
+
+| instrument | compares | classifies as |
+|---|---|---|
+| `npm run parity` (`parity/diff.ts`) | code ⟷ contract; canvas ⟷ contract; canvas variables ⟷ `tokens/` | `ahead` (propose a patch) · `behind` (regenerate) · `mismatch` (contract is canonical) — [docs/06](docs/06-parity-loop.md) |
+| `ds-contracts diff` = `npm run diagnose` (`parity/diagnose.ts`) | contracts ⟷ real library source ⟷ optional design dump | ahead / behind / mismatch with a remedy; exit `0` clean · `1` drift · `2` config error |
+| `ds-contracts extract --reconcile` = `npm run reconcile` (`extract/reconcile.ts`) | code extraction ⟷ design dump, per property | `agree` · `options-differ` · `code-only` · `design-only` |
+| plugin **Changes** tab (`figma-sync/plugin/code.js`) | the set's stored `canvasFingerprint` vs a fresh one; `specHash` for the code side | `in-sync` · `canvas-edited` · `unstamped` · `fingerprint version changed … NOT a canvas edit`; read-only |
+| `sync/ledger.json` + `npm run sync:ledger:check` ([`sync/README.md`](sync/README.md)) | `contractHash` vs disk; the `canvasFingerprint` stamp over REST | `in-sync` · `code-ahead` · `canvas-ahead` · `conflict` · `untracked`; exit `0` / `1` / `2` |
+| conformance kits (`npm run conformance`, `conformance:canvas`, `closure:check`) | engine behaviour ⟷ the hand-authored manifest | CARRIED / LOWERED / LEDGERED / REFUSED / UNSUPPORTED, a two-sided ratchet |
+
+All six only classify. The one thing none of them ever does is pick the winner — a human merging a contract PR does that — and none writes to a surface. The verb-by-verb walk of all five hops, with the refusal sentences quoted verbatim, is [docs/29 — How It Flows](docs/29-how-it-flows.md).
 
 There's a second reason, and it's becoming the bigger one: **AI generation.** In this repo's A/B evaluation, an ungoverned agent building screens scored **69/100 adherence with 90 violations** — invented props, hard-coded colors, restyled components. The same model constrained by the compiled contract catalog scored **100/100 with zero violations**, and when it hit a real gap in the system, it *reported the gap* instead of faking around it. The gap became a contract proposal, the proposal became a version bump, and the score went back to 100. The contract isn't just how design and code stay aligned — it's how generation stays honest.
 
@@ -430,15 +468,13 @@ npm run eval     # ④ 225 checks that detection, refusal, and convergence still
 npm run docs:check # ⑤ every number these docs quote, re-derived from the repo (seconds, no browser)
 ```
 
-**What step ① actually prints on a fresh clone:** likely *not* an all-green report. The design-side inputs are committed Figma snapshots, and the differ refuses to trust one older than 14 days (`MAX_SNAPSHOT_AGE_DAYS`) — **by design**, because an untouched snapshot would otherwise report green forever. So expect `snapshot-stale` findings naming each old snapshot and its age: that is the staleness gate working, not drift in the components. Contract-vs-code checks still run and should be clean; re-extract the snapshots (or override `MAX_SNAPSHOT_AGE_DAYS`) if you want the canvas half re-verified against a live file.
-
-That honest red state in step ③ is the product. Most design-system tooling shows you the happy path; this one is built to tell you precisely when and where the surfaces have stopped agreeing. (Point a token binding at a token that doesn't exist and the *build itself* fails — the contract↔token integrity gate.)
+**What step ① actually prints on a fresh clone:** likely *not* an all-green report. The design-side inputs are committed Figma snapshots, and the differ refuses to trust one older than 14 days (`MAX_SNAPSHOT_AGE_DAYS`) — **by design**, because an untouched snapshot would otherwise report green forever. Expect `snapshot-stale` findings naming each old snapshot and its age; contract-vs-code checks still run and should be clean. What `ahead` / `behind` / `mismatch` mean, and which other instruments classify drift, is [the table above](#carried-named-or-refused). That honest red state in step ③ is the product. (Point a token binding at a token that doesn't exist and the *build itself* fails — the contract↔token integrity gate.)
 
 ## Bring your own design system
 
 The model isn't specific to these components, React, or any tool — and you can test that claim on **your** library.
 
-**Seven distinct libraries across eight rounds have now gone through this pipeline, and none of them was special-cased in the engine**: this repo's own CSS Modules library, Polaris (CSS Modules), Astryx (StyleX), MUI (Emotion runtime), Flowbite (Tailwind v4 utilities), Carbon (precompiled CSS with theme *class scopes*), and Altitude (Lit web components, **shadow DOM**) — five distinct styling methods. Carbon, the seventh round, was run deliberately as a **control case** for the generality claim: predict "config-only, zero engine changes," then count what it actually cost. The count was **one expression** in `extract/computed/capture.ts`, and it turned out to be a universal bug the other six had tolerated by accident, not a Carbon accommodation ([`examples/carbon/PROVENANCE.md`](examples/carbon/PROVENANCE.md)). Altitude, the eighth, is the honest counterexample: a shadow-DOM library **could not** be a config-only round, and what it cost was one engine file of *general* open-shadow-DOM reader rules — per-root CSSOM collection, host descent, `<slot>` splicing, shadow-walking state drivers — every one of them a no-op where there are no shadow roots, with byte-identity for the other seven proven by re-capture ([`examples/altitude/PROVENANCE.md`](examples/altitude/PROVENANCE.md)).
+**Seven distinct libraries across eight recipe rounds have now gone through this pipeline, and none of them was special-cased in the engine**: this repo's own CSS Modules library, Polaris (CSS Modules), Astryx (StyleX), MUI (Emotion runtime), Flowbite (Tailwind v4 utilities), Carbon (precompiled CSS with theme *class scopes*), and Altitude (Lit web components, **shadow DOM**) — five distinct styling methods. (The "eight libraries" the fidelity numbers above are measured over is a different population — the capture corpus of [docs/24 §2](docs/24-what-works.md), which adds shadcn/ui and Fluent 2 and does not include this repo's own library.) Carbon, the seventh round, was run deliberately as a **control case** for the generality claim: predict "config-only, zero engine changes," then count what it actually cost. The count was **one expression** in `extract/computed/capture.ts`, and it turned out to be a universal bug the other six had tolerated by accident, not a Carbon accommodation ([`examples/carbon/PROVENANCE.md`](examples/carbon/PROVENANCE.md)). Altitude, the eighth, is the honest counterexample: a shadow-DOM library **could not** be a config-only round, and what it cost was one engine file of *general* open-shadow-DOM reader rules — per-root CSSOM collection, host descent, `<slot>` splicing, shadow-walking state drivers — every one of them a no-op where there are no shadow roots, with byte-identity for the other seven proven by re-capture ([`examples/altitude/PROVENANCE.md`](examples/altitude/PROVENANCE.md)).
 
 **→ [docs/21 — Bring Your Own Design System](docs/21-bring-your-own-design-system.md)** is the recipe those seven followed: the nine steps with real commands, the full capture-config reference, and — the honest core — the decision guide for the three things that still take craft (`classAllow`, `varPrefix`, axis-vs-state), each of which fails *silently* when answered wrong. It ends with a section naming where the recipe is genuinely harder than a guide can make it.
 
@@ -462,7 +498,7 @@ That is a claim about the future, so it's held to the same standard as everythin
 
 ## Documentation
 
-**If you are new, read these in this order:** [Choose Your Path](docs/00-choose-your-path.md) (which of the three situations is yours) → [Getting Started](docs/00-getting-started.md) (the five-minute orientation) → [User Flows](docs/18-user-flows.md) (the loop as two people actually live it, every step tagged built or missing) → [Bring Your Own Design System](docs/21-bring-your-own-design-system.md) (the recipe, when you're ready to run it on your library).
+**If you are new, read these in this order:** [Choose Your Path](docs/00-choose-your-path.md) (which of the three situations is yours) → [Getting Started](docs/00-getting-started.md) (the five-minute orientation) → [How It Flows](docs/29-how-it-flows.md) (what crosses each hop between Figma and code, and how the contract adjudicates) → [User Flows](docs/18-user-flows.md) (the loop as two people actually live it, every step tagged built or missing) → [Bring Your Own Design System](docs/21-bring-your-own-design-system.md) (the recipe, when you're ready to run it on your library).
 
 **If you are deciding whether to adopt this, read the pair alongside them** — [What Works](docs/24-what-works.md) (everything the tool provably does, each number carrying the artifact it was read from) and [Known Limitations](docs/23-known-limitations.md) (everything it cannot do, in one place, sourced to a measurement). They share a denominator on purpose; either one alone is a sales document.
 
@@ -494,6 +530,7 @@ That is a claim about the future, so it's held to the same standard as everythin
 26. [Definition of v1](docs/26-v1-definition.md) · the pinned release contract and its exact evidence
 27. [Release Process](docs/27-release-process.md) · coordinated RC build, pack, verify, publish, deploy, and rollback mechanics
 28. [Beta Tester Runbook](docs/28-beta-runbook.md) · the three journeys packaged for someone who has never seen this repo — prerequisites, exact commands, what success looks like, the named limitations each track WILL hit, honest time budgets, and the structured issue forms for reporting
+29. [How It Flows](docs/29-how-it-flows.md) · what crosses each of the five hops between Figma and code, carried / named / refused, the six adjudication instruments, and three facts traced both ways
 
 ## Honesty as a design principle
 
