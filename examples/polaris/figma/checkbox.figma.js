@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "polaris.checkbox",
     "version": "0.4.0",
     "anchorKey": null,
-    "description": "Checkbox — generated from contract polaris.checkbox v0.4.0 † (61 code-only facts — see plugin report)",
+    "description": "Checkbox — generated from contract polaris.checkbox v0.4.0 † (62 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -931,6 +931,21 @@ const COMPONENTS = [
         "variants": {
           "count": 3,
           "of": 3
+        }
+      },
+      {
+        "part": "icon-3",
+        "kind": "channel",
+        "channel": "aspect-ratio",
+        "value": "1 / 1",
+        "reason": "the canvas has no aspect-ratio field — this part carries no bound or literal width to derive a height from, so nothing was drawn from the ratio (a parent that takes its height from this part's ratio names that lowering on itself)",
+        "variants": {
+          "count": 2,
+          "of": 3,
+          "names": [
+            "Checked=checked",
+            "Checked=indeterminate"
+          ]
         }
       },
       {

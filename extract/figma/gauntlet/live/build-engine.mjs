@@ -17,9 +17,12 @@ const src = fs.readFileSync(path.join(repoRoot, 'extract/figma/dump.plugin.js'),
 
 // The engine body: everything between the TARGET_SETS const (exclusive) and
 // the driver (`const dumps = {` … end) — the capture functions, verbatim.
-const startMarker = "const TARGET_SETS = ['Badge', 'Switch', 'Card'];";
+// R8: the default list is now empty (the name list is rewritten per run),
+// so the marker matches the const LINE, whatever it carries.
+const startMatch = /^const TARGET_SETS = \[[^\n]*\];$/m.exec(src);
+const startMarker = startMatch ? startMatch[0] : '';
 const endMarker = 'const dumps = {';
-const startIdx = src.indexOf(startMarker);
+const startIdx = startMatch ? startMatch.index : -1;
 const endIdx = src.indexOf(endMarker);
 if (startIdx < 0 || endIdx < 0) {
   console.error('dump.plugin.js markers not found — engine build refuses (script shape changed?)');

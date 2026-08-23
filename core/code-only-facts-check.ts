@@ -259,6 +259,71 @@ try {
   const ui = readFileSync(path.join(ROOT, 'figma-sync', 'plugin', 'ui.html'), 'utf8');
   check('plugin ui.html runSteps lists codeOnlyFacts under the set (the same place the tokens step logs leftovers)',
     ui.includes('codeOnlyFacts') && ui.includes('stay code-only'));
+
+  // --- 4. R8 (2026-08-22): the declared paths that escaped the naming -------
+  // Found by conformance/canvas.ts: `aspect-ratio` was the one SILENT row.
+  // The registry calls the channel 'draw' (so the declared collector names
+  // nothing) and the emitter lowers it to a FIXED HEIGHT — the ratio itself
+  // never reaches a canvas that has no aspect-ratio field, the dump reads a
+  // height back and the proposal mints a height token. Synthetic seeds pin
+  // every branch of that lowering as a NAMED channel fact, and pin that a
+  // declared channel the registry does not know (compileComponentData does
+  // NOT run validateContract — only the script emitter does) produces a
+  // fact instead of the bare `return` it used to.
+  const seed = (root: Record<string, unknown>): Contract =>
+    ContractSchema.parse({
+      $schema: './contract.schema.json',
+      id: 'check.code-only-synthetic',
+      name: 'CodeOnlySynthetic',
+      version: '0.1.0',
+      status: 'draft',
+      description: 'code-only facts synthetic seed',
+      semantics: { element: 'div' },
+      props: [],
+      states: [],
+      anatomy: { root },
+      anchors: { figma: { fileKey: null, componentSetKey: null }, code: { importPath: '@ds-contracts/code-only-facts-check', export: 'CodeOnlySynthetic' } },
+    }) as Contract;
+  const factsOf = (root: Record<string, unknown>): CodeOnlyFact[] => {
+    const c = seed(root);
+    return engine.compileComponentData(c, new Map([[c.id, c]])).codeOnlyFacts ?? [];
+  };
+  const names = (facts: CodeOnlyFact[], part: string, kind: CodeOnlyFact['kind'], channel: string, value: string, words: string[]): boolean =>
+    facts.some((f) => f.part === part && f.kind === kind && f.channel === channel && f.value === value && words.every((w) => f.reason.includes(w)));
+  {
+    const lowered = factsOf({ layout: { display: 'flex' }, declared: { 'aspect-ratio': '2 / 1' }, literals: { width: '80px' } });
+    check('aspect-ratio lowered from a literal width is NAMED with its numbers (kind channel, "LOWERED to a fixed height of 40px")',
+      names(lowered, 'root', 'channel', 'aspect-ratio', '2 / 1', ['no aspect-ratio field', 'LOWERED to a fixed height of 40px', '80px ÷ 2']));
+    const widthless = factsOf({ layout: { display: 'flex' }, declared: { 'aspect-ratio': '2 / 1' } });
+    check('aspect-ratio with no width to derive from is NAMED (nothing drawn, and the receipt says why)',
+      names(widthless, 'root', 'channel', 'aspect-ratio', '2 / 1', ['no aspect-ratio field', 'no bound or literal width']));
+    const heightWins = factsOf({ layout: { display: 'flex' }, declared: { 'aspect-ratio': '2 / 1' }, literals: { width: '80px', height: '20px' } });
+    check('aspect-ratio beside a carried height is NAMED (the height wins; the ratio is not enforced)',
+      names(heightWins, 'root', 'channel', 'aspect-ratio', '2 / 1', ['no aspect-ratio field', 'height channel, which wins']));
+    const parent = factsOf({
+      layout: { display: 'flex' },
+      literals: { width: '80px' },
+      parts: { glyph: { element: 'span', declared: { position: 'absolute', 'aspect-ratio': '1 / 1' } } },
+    });
+    check('a parent taking its height from an absolute child\'s aspect-ratio NAMES that lowering on itself, by child name',
+      names(parent, 'root', 'channel', 'aspect-ratio', '1 / 1', ['child "glyph"', 'LOWERED to this frame\'s fixed height of 80px']));
+    check('…and the child still names its own ratio (no width of its own)',
+      names(parent, 'glyph', 'channel', 'aspect-ratio', '1 / 1', ['no bound or literal width']));
+    const unknown = factsOf({ layout: { display: 'flex' }, declared: { 'scroll-snap-type': 'x mandatory' }, literals: { width: '80px', height: '20px' } });
+    check('a declared channel the DECLARED_CHANNELS registry does not know is a NAMED declared fact, never silence',
+      names(unknown, 'root', 'declared', 'scroll-snap-type', 'x mandatory', ['outside the DECLARED_CHANNELS registry']));
+    const unknownState = factsOf({
+      layout: { display: 'flex' },
+      declaredStates: { hover: { 'scroll-snap-type': 'x mandatory' } },
+      literals: { width: '80px', height: '20px' },
+    });
+    check('…and so is one declared for a state',
+      names(unknownState, 'root', 'declared', 'scroll-snap-type', 'x mandatory', ['hover state', 'outside the DECLARED_CHANNELS registry']));
+    // Naming, not carrying: the synthetic seeds must not make the Flowbite
+    // census move — the eight stems declare no aspect-ratio (pinned above).
+    check('no Flowbite stem names aspect-ratio (the census above is untouched by this round)',
+      [...compiled.values()].every((facts) => !facts.some((f) => f.channel === 'aspect-ratio')));
+  }
 } finally {
   rmSync(dir, { recursive: true, force: true });
 }

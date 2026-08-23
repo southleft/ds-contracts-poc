@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "mui.table",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Table — generated from contract mui.table v0.2.0 † (125 code-only facts — see plugin report)",
+    "description": "Table — generated from contract mui.table v0.2.0 † (128 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -1867,6 +1867,17 @@ const COMPONENTS = [
       {
         "part": "buttonbase-root",
         "kind": "channel",
+        "channel": "aspect-ratio",
+        "value": "1 / 1",
+        "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "buttonbase-root",
+        "kind": "channel",
         "channel": "bottom",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -1955,6 +1966,17 @@ const COMPONENTS = [
       {
         "part": "buttonbase-root-2",
         "kind": "channel",
+        "channel": "aspect-ratio",
+        "value": "1 / 1",
+        "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "buttonbase-root-2",
+        "kind": "channel",
         "channel": "bottom",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -2035,6 +2057,17 @@ const COMPONENTS = [
         "channel": "user-select",
         "value": "none",
         "reason": "Text-selection behavior (user-select) exists only in the coded component.",
+        "variants": {
+          "count": 2,
+          "of": 2
+        }
+      },
+      {
+        "part": "buttonbase-root-3",
+        "kind": "channel",
+        "channel": "aspect-ratio",
+        "value": "1 / 1",
+        "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
         "variants": {
           "count": 2,
           "of": 2

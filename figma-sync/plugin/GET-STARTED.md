@@ -109,14 +109,16 @@ repo token.
 Both directions run the same deterministic engine (`window.DSC`) — the CLI
 (`ds-contracts extract` / `generate`) runs the identical functions outside Figma.
 
-**If you run the raw dump script instead of the Send tab, edit `TARGET_SETS`
-first.** `extract/figma/dump.plugin.js` hard-codes its target list at line
-114 — `const TARGET_SETS = ['Badge', 'Switch', 'Card']`, the repo's shipped
-fixtures. The plugin's own **Send** flow rewrites that list at runtime to the
-set you selected; the copy-paste-the-script path (console, Advanced drawer)
-does **not** — pasted unedited, it dumps those three fixture names (or
-nothing, in a file that doesn't have them) instead of your sets. An empty
-array means "every local set/component except the Slot utility".
+**Running the raw dump script instead of the Send tab.** `extract/figma/
+dump.plugin.js` ships with `const TARGET_SETS = [];` — empty means every local
+set/component on every page except the Slot utility, narrowed to your current
+selection when you have sets selected. It prints the set names it dumped and
+lists them in `_provenance.sets`. Put names in the array to scope it, and a
+name the file does not have makes the dump **refuse by name** (it never
+returns a quiet partial). The plugin's own **Send** flow rewrites that list at
+runtime to the set you picked. (Until 2026-08-22 the shipped default was the
+repo's three fixture names, so the pasted script dumped `Badge`/`Switch`/
+`Card` and nothing of yours.)
 
 ---
 

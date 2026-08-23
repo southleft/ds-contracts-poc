@@ -25437,6 +25437,17 @@
         {
           "part": "slider-thumb",
           "kind": "channel",
+          "channel": "aspect-ratio",
+          "value": "1 / 1",
+          "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "slider-thumb",
+          "kind": "channel",
           "channel": "outline-width",
           "value": "{imported.shared.size-0}",
           "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
@@ -25666,6 +25677,17 @@
       "contractId": "mui.switch",
       "name": "Switch",
       "facts": [
+        {
+          "part": "buttonbase-root",
+          "kind": "channel",
+          "channel": "aspect-ratio",
+          "value": "1 / 1",
+          "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+          "variants": {
+            "count": 28,
+            "of": 28
+          }
+        },
         {
           "part": "buttonbase-root",
           "kind": "channel",
@@ -25947,6 +25969,17 @@
           "channel": "user-select",
           "value": "none",
           "reason": "Text-selection behavior (user-select) exists only in the coded component.",
+          "variants": {
+            "count": 28,
+            "of": 28
+          }
+        },
+        {
+          "part": "switch-thumb",
+          "kind": "channel",
+          "channel": "aspect-ratio",
+          "value": "1 / 1",
+          "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
           "variants": {
             "count": 28,
             "of": 28
@@ -26935,6 +26968,17 @@
         {
           "part": "buttonbase-root",
           "kind": "channel",
+          "channel": "aspect-ratio",
+          "value": "1 / 1",
+          "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+          "variants": {
+            "count": 2,
+            "of": 2
+          }
+        },
+        {
+          "part": "buttonbase-root",
+          "kind": "channel",
           "channel": "bottom",
           "value": "{imported.shared.size-0}",
           "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -27023,6 +27067,17 @@
         {
           "part": "buttonbase-root-2",
           "kind": "channel",
+          "channel": "aspect-ratio",
+          "value": "1 / 1",
+          "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+          "variants": {
+            "count": 2,
+            "of": 2
+          }
+        },
+        {
+          "part": "buttonbase-root-2",
+          "kind": "channel",
           "channel": "bottom",
           "value": "{imported.shared.size-0}",
           "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -27103,6 +27158,17 @@
           "channel": "user-select",
           "value": "none",
           "reason": "Text-selection behavior (user-select) exists only in the coded component.",
+          "variants": {
+            "count": 2,
+            "of": 2
+          }
+        },
+        {
+          "part": "buttonbase-root-3",
+          "kind": "channel",
+          "channel": "aspect-ratio",
+          "value": "1 / 1",
+          "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
           "variants": {
             "count": 2,
             "of": 2

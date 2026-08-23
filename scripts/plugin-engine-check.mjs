@@ -486,6 +486,60 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   assert(scoped !== source, 'the dump script TARGET_SETS seam scopes');
   const dump = await runScript(scoped);
   assert(dump && dump.Badge, 'the dump captures the mock-built Badge set');
+  // --- R8 (2026-08-22): the shipped TARGET_SETS default and its contract ---
+  // The canonical script shipped with `['Badge', 'Switch', 'Card']` baked in,
+  // so the console-bridge path (pasted unedited, as its header documents)
+  // dumped three fixture names and no Flowbite stem — in silence. Pinned:
+  // the default is EMPTY and dumps every set on the page; a selection of
+  // sets narrows it; a NAMED set that is absent REFUSES by name, never a
+  // quiet partial; and the dump lists what it dumped.
+  {
+    assert(/^const TARGET_SETS = \[\];$/m.test(source), 'dump.plugin.js ships with an EMPTY TARGET_SETS default (not the Badge/Switch/Card fixture names)');
+    const onCanvas = root
+      .findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })
+      .filter((n) => !(n.type === 'COMPONENT' && n.parent && n.parent.type === 'COMPONENT_SET') && n.name !== 'Slot')
+      .map((n) => n.name);
+    assert(onCanvas.includes('Badge'), 'the mock canvas carries Badge as a dumpable set');
+    const everything = await runScript(source);
+    const dumpedNames = Object.keys(everything).filter((k) => k.charAt(0) !== '_');
+    assert(
+      JSON.stringify([...new Set(onCanvas)].sort()) === JSON.stringify([...dumpedNames].sort()),
+      `the EMPTY default dumps every set on the page — canvas [${[...new Set(onCanvas)].sort().join(', ')}] vs dumped [${[...dumpedNames].sort().join(', ')}]`,
+    );
+    assert(
+      everything._provenance && JSON.stringify(everything._provenance.sets) === JSON.stringify(dumpedNames),
+      'the dump lists the set names it dumped in _provenance.sets (the console line prints the same list)',
+    );
+    const badgeSet = root.findOne((n) => n.type === 'COMPONENT_SET' && n.name === 'Badge');
+    const page = badgeSet;
+    let pageNode = page;
+    while (pageNode && pageNode.type !== 'PAGE') pageNode = pageNode.parent;
+    assert(pageNode, 'the Badge set sits on a page');
+    const keepPage = figma.currentPage;
+    const keepSelection = pageNode.selection;
+    figma.currentPage = pageNode;
+    pageNode.selection = [badgeSet.children[0]];
+    const selected = await runScript(source);
+    figma.currentPage = keepPage;
+    pageNode.selection = keepSelection;
+    const selectedNames = Object.keys(selected).filter((k) => k.charAt(0) !== '_');
+    assert(
+      JSON.stringify(selectedNames) === JSON.stringify(['Badge']),
+      `an EMPTY default with a selection (a variant inside Badge) narrows to that set — got [${selectedNames.join(', ')}]`,
+    );
+    const absent = source.replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify(['Badge', 'NoSuchSet'])};`);
+    let refusal = null;
+    try {
+      await runScript(absent);
+    } catch (e) {
+      refusal = e && e.message ? e.message : String(e);
+    }
+    assert(
+      refusal !== null && refusal.includes('dump refused') && refusal.includes('not found on any page of this file: "NoSuchSet" —') && refusal.includes('sets in this file: ') && refusal.includes('"Badge"'),
+      `a NAMED set that is absent REFUSES by name and lists the sets the file has (got: ${refusal})`,
+    );
+    console.log('✔ dump scope: EMPTY default dumps every set (names listed in _provenance.sets), a selection narrows it, an absent named set refuses by name');
+  }
   const storedHash = markerOf(badge.id)?.getSharedPluginData('ds_contracts', 'specHash');
   assert(
     dump._provenance && dump._provenance.dumpVersion === '1.30',

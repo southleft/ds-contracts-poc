@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "fluent.avatar",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Avatar — generated from contract fluent.avatar v0.2.0 † (13 code-only facts — see plugin report)",
+    "description": "Avatar — generated from contract fluent.avatar v0.2.0 † (14 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -1323,6 +1323,17 @@ const COMPONENTS = [
       "element": "span"
     },
     "codeOnlyFacts": [
+      {
+        "part": "label",
+        "kind": "channel",
+        "channel": "aspect-ratio",
+        "value": "1 / 1",
+        "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
       {
         "part": "label",
         "kind": "declared",
