@@ -121,7 +121,13 @@ jobs:
   full:
     name: full gate sweep
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    # 2026-08-23: 60 → 120. The lane now carries the eval suite (~35 min) AND
+    # extract:computed:drift:remeasure (~37 min of Chromium re-fusing, the
+    # V1-CLASS-01 evidence); at 60 the job was CANCELLED mid-remeasure on
+    # 537022b0 and a merge went through on a cancelled lane — the watcher
+    # counted failures, not non-successes. Both are fixed: the budget here,
+    # the watcher in the session that merges.
+    timeout-minutes: 120
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
