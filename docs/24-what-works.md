@@ -383,10 +383,10 @@ filter that decides carriage scores 100% on a channel it never opened.
 
 | manifest | cases | breakdown | source |
 |---|---|---|---|
-| canvas constructs | 116 | CARRIED 93 · LEDGERED 14 · REFUSED 9 | `extract/figma/conformance/MANIFEST.json` |
+| canvas constructs | 135 | CARRIED 100 · LEDGERED 26 · REFUSED 9 | `extract/figma/conformance/MANIFEST.json` |
 | CSS / DOM frontier | 82 | CARRIED 42 · REFUSED 18 · UNSUPPORTED 18 · LOWERED 4 | `conformance/MANIFEST.json` |
 
-Of the 116 canvas constructs, **116** are `green`.
+Of the 135 canvas constructs, **116** are `green`, **19** are `red`.
 A construct that is neither carried nor named-refused is a hard failure of that
 suite — "it silently did nothing" is not an allowed outcome.
 
@@ -540,7 +540,7 @@ npm run capability:fresh
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
 | `extract/computed/out/**/numbers.json` | `d5bcd57769dc` | 1,056,246 | capture counts + determinism receipts — 184 files |
 | `extract/computed/out/**/scorecard.json` | `3f0067a3f412` | 16,283,364 | computed-equality per component — 184 files |
-| `extract/figma/conformance/MANIFEST.json` | `71392fbbb21e` | 67,755 | canvas construct vocabulary |
+| `extract/figma/conformance/MANIFEST.json` | `9c2374097aba` | 86,207 | canvas construct vocabulary |
 | `extract/figma/dagger-census.json` | `02c91c8d4a42` | 6,112 | dropped-fact receipt census |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | canvas→code→canvas round trip |
 
