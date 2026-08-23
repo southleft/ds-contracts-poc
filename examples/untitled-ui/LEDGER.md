@@ -426,7 +426,7 @@ npx tsx examples/untitled-ui/fidelity-score.mts
 | `examples/untitled-ui/storybook/contracts/` | `3e7f9bd2b2c0` | 131,804 | proposed contracts (30 files) |
 | `examples/untitled-ui/storybook/src/generated/` | `be9c86b4f480` | 275,818 | emitted components (30 dirs) |
 | `examples/untitled-ui/storybook/src/tokens.css` | `8c31938a1627` | 674,804 | emitted global tokens |
-| `extract/figma/conformance/MANIFEST.json` | `9c2374097aba` | 86,207 | conformance denominator |
+| `extract/figma/conformance/MANIFEST.json` | `c21b8f8079fa` | 86,237 | conformance denominator |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | round-trip facts |
 | `extract/figma/roundtrip-uui/REPORT.md` | `61f5c58f7f20` | 144,788 | round-trip narrative |
 

@@ -540,7 +540,7 @@ npm run capability:fresh
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
 | `extract/computed/out/**/numbers.json` | `d5bcd57769dc` | 1,056,246 | capture counts + determinism receipts — 184 files |
 | `extract/computed/out/**/scorecard.json` | `3f0067a3f412` | 16,283,364 | computed-equality per component — 184 files |
-| `extract/figma/conformance/MANIFEST.json` | `9c2374097aba` | 86,207 | canvas construct vocabulary |
+| `extract/figma/conformance/MANIFEST.json` | `c21b8f8079fa` | 86,237 | canvas construct vocabulary |
 | `extract/figma/dagger-census.json` | `a8445c32d0b1` | 6,112 | dropped-fact receipt census |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | canvas→code→canvas round trip |
 

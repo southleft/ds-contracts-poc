@@ -10499,7 +10499,10 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const engine = createFigmaEngine({ tokens: emptyTokens, icons: new Map() });
       const find = (s: any, name: string): any =>
         s.name === name ? s : (s.children ?? []).map((c: any) => find(c, name)).find(Boolean);
-      const baseAnchors = { figma: { fileKey: null, componentSetKey: null }, code: { importPath: 'x', export: 'Fx' } };
+      const baseBindings = {
+        figma: { anchors: { fileKey: null, componentSetKey: null } },
+        code: { anchors: { importPath: 'x', export: 'Fx' } },
+      };
       const variantProp = {
         name: 'variant', type: { enum: ['a'] }, default: 'a',
         bindings: { figma: { kind: 'VARIANT', property: 'V' }, code: { prop: 'variant' } },
@@ -10523,7 +10526,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
               },
             },
           },
-          anchors: baseAnchors,
+          bindings: baseBindings,
         };
         ContractSchema.parse(fixture);
         const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
@@ -10564,7 +10567,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
               },
             },
           },
-          anchors: baseAnchors,
+          bindings: baseBindings,
         };
         ContractSchema.parse(fixture);
         const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
@@ -10595,7 +10598,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
               },
             },
           },
-          anchors: baseAnchors,
+          bindings: baseBindings,
         };
         ContractSchema.parse(fixture);
         const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
@@ -10631,7 +10634,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
               },
             },
           },
-          anchors: baseAnchors,
+          bindings: baseBindings,
         };
         ContractSchema.parse(fixture);
         const script = engine.buildComponentScript(fixture, new Map([[fixture.id, fixture]]));
@@ -10678,7 +10681,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
               },
             },
           },
-          anchors: baseAnchors,
+          bindings: baseBindings,
         };
         ContractSchema.parse(fixture);
         const script = engine.buildComponentScript(fixture, new Map([[fixture.id, fixture]]));
@@ -10719,7 +10722,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
               },
             },
           },
-          anchors: baseAnchors,
+          bindings: baseBindings,
         };
         ContractSchema.parse(fixture);
         const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
@@ -10779,7 +10782,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
               },
             },
           },
-          anchors: baseAnchors,
+          bindings: baseBindings,
         };
         ContractSchema.parse(fixture);
         const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
@@ -10873,7 +10876,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
               },
             },
           },
-          anchors: baseAnchors,
+          bindings: baseBindings,
         };
         ContractSchema.parse(fixture);
         const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
@@ -10952,7 +10955,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
               },
             },
           },
-          anchors: baseAnchors,
+          bindings: baseBindings,
         };
         ContractSchema.parse(fixture);
         const data = engine.compileComponentData(fixture, new Map([[fixture.id, fixture]]));
