@@ -1,0 +1,221 @@
+{
+ "scorer": "extract/figma/visual-parity/img.ts alignPair+diffPair (ink-trimmed, white-flattened, pixelmatch AA), no text mask; bar 5% AA and a ±2px content box",
+ "rows": [
+  {
+   "component": "button",
+   "base": "default.middle.safe.off.off.enabled__default",
+   "canvasCell": "button-cell.png",
+   "reference": "extract/computed/out/antd/button/orig-shots/default.middle.safe.off.off.enabled__default.png",
+   "pctAA": 1.72,
+   "sizeDelta": {
+    "canvas": {
+     "width": 74,
+     "height": 18
+    },
+    "library": {
+     "width": 320,
+     "height": 96
+    }
+   },
+   "pass": false
+  },
+  {
+   "component": "tag",
+   "base": "unset.bordered.off__default",
+   "canvasCell": "tag-cell.png",
+   "reference": "extract/computed/out/antd/tag/orig-shots/unset.bordered.off__default.png",
+   "pctAA": 0.97,
+   "sizeDelta": {
+    "canvas": {
+     "width": 36,
+     "height": 22
+    },
+    "library": {
+     "width": 320,
+     "height": 96
+    }
+   },
+   "pass": false
+  },
+  {
+   "component": "badge",
+   "base": "count.unset__default",
+   "canvasCell": "badge-cell.png",
+   "reference": "extract/computed/out/antd/badge/orig-shots/count.unset__default.png",
+   "pctAA": 7.1,
+   "sizeDelta": {
+    "canvas": {
+     "width": 43,
+     "height": 43
+    },
+    "library": {
+     "width": 320,
+     "height": 96
+    }
+   },
+   "pass": false
+  },
+  {
+   "component": "switch",
+   "base": "default.unchecked.enabled__default",
+   "canvasCell": "switch-cell.png",
+   "reference": "extract/computed/out/antd/switch/orig-shots/default.unchecked.enabled__default.png",
+   "pctAA": 3.49,
+   "sizeDelta": {
+    "canvas": {
+     "width": 44,
+     "height": 22
+    },
+    "library": {
+     "width": 320,
+     "height": 96
+    }
+   },
+   "pass": false
+  },
+  {
+   "component": "checkbox",
+   "base": "unchecked.enabled__default",
+   "canvasCell": "checkbox-cell.png",
+   "reference": "extract/computed/out/antd/checkbox/orig-shots/unchecked.enabled__default.png",
+   "pctAA": 1.12,
+   "sizeDelta": {
+    "canvas": {
+     "width": 85,
+     "height": 17
+    },
+    "library": {
+     "width": 320,
+     "height": 96
+    }
+   },
+   "pass": false
+  },
+  {
+   "component": "radio",
+   "base": "unchecked.enabled__default",
+   "canvasCell": "radio-cell.png",
+   "reference": "extract/computed/out/antd/radio/orig-shots/unchecked.enabled__default.png",
+   "pctAA": 0.76,
+   "sizeDelta": {
+    "canvas": {
+     "width": 59,
+     "height": 17
+    },
+    "library": {
+     "width": 320,
+     "height": 96
+    }
+   },
+   "pass": false
+  },
+  {
+   "component": "input",
+   "base": "middle.unset.outlined.enabled__default",
+   "canvasCell": "input-cell.png",
+   "reference": "extract/computed/out/antd/input/orig-shots/middle.unset.outlined.enabled__default.png",
+   "pctAA": 2.37,
+   "sizeDelta": {
+    "canvas": {
+     "width": 24,
+     "height": 10
+    },
+    "library": {
+     "width": 320,
+     "height": 96
+    }
+   },
+   "pass": false
+  },
+  {
+   "component": "alert",
+   "base": "info.noIcon.off.off__default",
+   "canvasCell": "alert-cell.png",
+   "reference": "extract/computed/out/antd/alert/orig-shots/info.noIcon.off.off__default.png",
+   "pctAA": 3.52,
+   "sizeDelta": {
+    "canvas": {
+     "width": 93,
+     "height": 24
+    },
+    "library": {
+     "width": 320,
+     "height": 120
+    }
+   },
+   "pass": false
+  },
+  {
+   "component": "avatar",
+   "base": "default.circle__default",
+   "canvasCell": "avatar-cell.png",
+   "reference": "extract/computed/out/antd/avatar/orig-shots/default.circle__default.png",
+   "pctAA": 2.91,
+   "sizeDelta": {
+    "canvas": {
+     "width": 12,
+     "height": 24
+    },
+    "library": {
+     "width": 320,
+     "height": 96
+    }
+   },
+   "pass": false
+  },
+  {
+   "component": "progress",
+   "base": "unset__default",
+   "canvasCell": "progress-cell.png",
+   "reference": "extract/computed/out/antd/progress/orig-shots/unset__default.png",
+   "pctAA": 4.6,
+   "sizeDelta": {
+    "canvas": {
+     "width": 35,
+     "height": 12
+    },
+    "library": {
+     "width": 320,
+     "height": 64
+    }
+   },
+   "pass": false
+  },
+  {
+   "component": "card",
+   "base": "default.outlined__default",
+   "canvasCell": "card-cell.png",
+   "reference": "extract/computed/out/antd/card/orig-shots/default.outlined__default.png",
+   "pctAA": 1.06,
+   "sizeDelta": {
+    "canvas": {
+     "width": 288,
+     "height": 128
+    },
+    "library": {
+     "width": 320,
+     "height": 160
+    }
+   },
+   "pass": false
+  },
+  {
+   "component": "tooltip",
+   "base": "__default",
+   "canvasCell": "tooltip.png",
+   "reference": "extract/computed/out/antd/tooltip/orig-shots/__default.png",
+   "pctAA": 11.5,
+   "sizeDelta": {
+    "canvas": {
+     "width": 92,
+     "height": 50
+    },
+    "library": {
+     "width": 86,
+     "height": 34
+    }
+   },
+   "pass": false
+  }
+ ]
+}

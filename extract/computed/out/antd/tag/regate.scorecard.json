@@ -1,0 +1,2438 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "Tag",
+  "config": "extract/computed/configs/antd.json",
+  "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "declared": {
+    "base": [
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "root",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "root",
+        "channel": "transition-duration",
+        "value": "0.2s"
+      },
+      {
+        "part": "anticon",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "anticon",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "anticon",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "anticon",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "anticon",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "anticon",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "anticon",
+        "channel": "transition-duration",
+        "value": "0.2s"
+      }
+    ],
+    "state": []
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "Tag",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 32,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 5120,
+      "cellsEqual": 4992,
+      "pctEqual": 97.5,
+      "rowsFullyEqual": 0,
+      "rows": 128
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 128,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 95,
+      "mintedLeavesUnfolded": 143,
+      "baseBindings": 32,
+      "stateBindings": 0,
+      "codeOnlyChannels": 2,
+      "overflowBindings": 1,
+      "folds": 36
+    },
+    "worstRows": [
+      {
+        "key": "unset.bordered.off__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "unset.bordered.off__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "unset.bordered.off__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "unset.bordered.off__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "unset.bordered.on__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "unset.bordered.on__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "unset.bordered.on__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "unset.bordered.on__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "root.list-style-type",
+        128
+      ]
+    ],
+    "namedLosses": [
+      "overflow: root.width — presence-prop-driven styling (closable) — boolean tokensByProp has no spelling (round 4 residue)",
+      "code-only: root.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: anticon.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/antd/tokens/antd-minted.dtcg.json",
+      "leavesAdded": 1172,
+      "divergent": [
+        {
+          "token": "imported.tag.root.color.blue",
+          "fresh": "#0958d9",
+          "shipped": "{blue-7}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.tag.root.color.error",
+          "fresh": "#ff4d4f",
+          "shipped": "{color-error}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.tag.root.color.gold",
+          "fresh": "#d48806",
+          "shipped": "{gold-7}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.tag.root.color.green",
+          "fresh": "#389e0d",
+          "shipped": "{green-7}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.tag.root.color.processing",
+          "fresh": "#1677ff",
+          "shipped": "{color-info}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.tag.root.color.red",
+          "fresh": "#cf1322",
+          "shipped": "{red-7}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.tag.root.color.success",
+          "fresh": "#52c41a",
+          "shipped": "{color-success}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.tag.root.font-size",
+          "fresh": "12px",
+          "shipped": "{font-size-sm}",
+          "resolvedEqual": true
+        }
+      ]
+    },
+    "rows": [
+      {
+        "key": "unset.bordered.off__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unset.bordered.off__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unset.bordered.off__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unset.bordered.off__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unset.bordered.on__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unset.bordered.on__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unset.bordered.on__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unset.bordered.on__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unset.borderless.off__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unset.borderless.off__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unset.borderless.off__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unset.borderless.off__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unset.borderless.on__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unset.borderless.on__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unset.borderless.on__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unset.borderless.on__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue.bordered.off__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue.bordered.off__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue.bordered.off__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue.bordered.off__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue.bordered.on__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue.bordered.on__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue.bordered.on__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue.bordered.on__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue.borderless.off__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue.borderless.off__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue.borderless.off__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue.borderless.off__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue.borderless.on__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue.borderless.on__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue.borderless.on__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue.borderless.on__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green.bordered.off__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green.bordered.off__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green.bordered.off__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green.bordered.off__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green.bordered.on__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green.bordered.on__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green.bordered.on__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green.bordered.on__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green.borderless.off__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green.borderless.off__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green.borderless.off__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green.borderless.off__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green.borderless.on__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green.borderless.on__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green.borderless.on__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green.borderless.on__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red.bordered.off__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red.bordered.off__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red.bordered.off__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red.bordered.off__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red.bordered.on__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red.bordered.on__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red.bordered.on__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red.bordered.on__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red.borderless.off__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red.borderless.off__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red.borderless.off__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red.borderless.off__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red.borderless.on__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red.borderless.on__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red.borderless.on__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red.borderless.on__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gold.bordered.off__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gold.bordered.off__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gold.bordered.off__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gold.bordered.off__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gold.bordered.on__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gold.bordered.on__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gold.bordered.on__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gold.bordered.on__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gold.borderless.off__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gold.borderless.off__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gold.borderless.off__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gold.borderless.off__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gold.borderless.on__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gold.borderless.on__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gold.borderless.on__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gold.borderless.on__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.bordered.off__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.bordered.off__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.bordered.off__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.bordered.off__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.bordered.on__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.bordered.on__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.bordered.on__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.bordered.on__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.borderless.off__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.borderless.off__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.borderless.off__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.borderless.off__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.borderless.on__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.borderless.on__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.borderless.on__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success.borderless.on__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "processing.bordered.off__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "processing.bordered.off__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "processing.bordered.off__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "processing.bordered.off__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "processing.bordered.on__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "processing.bordered.on__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "processing.bordered.on__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "processing.bordered.on__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "processing.borderless.off__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "processing.borderless.off__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "processing.borderless.off__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "processing.borderless.off__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "processing.borderless.on__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "processing.borderless.on__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "processing.borderless.on__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "processing.borderless.on__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.bordered.off__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.bordered.off__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.bordered.off__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.bordered.off__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.bordered.on__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.bordered.on__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.bordered.on__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.bordered.on__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.borderless.off__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.borderless.off__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.borderless.off__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.borderless.off__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.borderless.on__default",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.borderless.on__hover",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.borderless.on__focus-visible",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error.borderless.on__active",
+        "channelsCompared": 40,
+        "channelsEqual": 39,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}
