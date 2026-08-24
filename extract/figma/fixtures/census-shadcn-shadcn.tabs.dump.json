@@ -1,0 +1,2147 @@
+{
+ "_provenance": {
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "extractedAt": "2026-08-24",
+  "note": "Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design\u2192contract proposal.",
+  "dumpVersion": "1.32",
+  "sets": [
+   "Tabs (shadcn.tabs)"
+  ]
+ },
+ "_degradations": [
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Badge (shadcn.badge):Variant=Default, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Badge (shadcn.badge):Variant=Secondary, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Badge (shadcn.badge):Variant=Destructive, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Badge (shadcn.badge):Variant=Outline, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Badge (shadcn.badge):Variant=Ghost, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Badge (shadcn.badge):Variant=Link, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Button (shadcn.button):Variant=Default, Size=Default, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Button (shadcn.button):Variant=Outline, Size=Default, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Button (shadcn.button):Variant=Secondary, Size=Default, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Button (shadcn.button):Variant=Ghost, Size=Default, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Button (shadcn.button):Variant=Destructive, Size=Default, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Button (shadcn.button):Variant=Link, Size=Default, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "radii-nonuniform",
+   "nodePath": "Card (shadcn.card):Size=Default/part-0",
+   "message": "per-corner radii [14, 14, 0, 0] (CSS border-top-left-radius / border-top-right-radius / border-bottom-right-radius / border-bottom-left-radius) are not uniform \u2014 dump v1 carries a uniform border-radius only; omitted"
+  },
+  {
+   "code": "radii-nonuniform",
+   "nodePath": "Card (shadcn.card):Size=Sm/part-0",
+   "message": "per-corner radii [14, 14, 0, 0] (CSS border-top-left-radius / border-top-right-radius / border-bottom-right-radius / border-bottom-left-radius) are not uniform \u2014 dump v1 carries a uniform border-radius only; omitted"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Checkbox (shadcn.checkbox):Checked=Checked, State=Default/part-0/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Checkbox (shadcn.checkbox):Checked=Checked, State=Default/part-0/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Checkbox (shadcn.checkbox):Checked=Indeterminate, State=Default/part-0/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Checkbox (shadcn.checkbox):Checked=Indeterminate, State=Default/part-0/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Checkbox (shadcn.checkbox):Checked=Checked, State=Disabled/part-0/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Checkbox (shadcn.checkbox):Checked=Checked, State=Disabled/part-0/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Checkbox (shadcn.checkbox):Checked=Indeterminate, State=Disabled/part-0/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Checkbox (shadcn.checkbox):Checked=Indeterminate, State=Disabled/part-0/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Checkbox (shadcn.checkbox):Checked=Checked, State=Focus Visible/part-0/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Checkbox (shadcn.checkbox):Checked=Checked, State=Focus Visible/part-0/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Checkbox (shadcn.checkbox):Checked=Indeterminate, State=Focus Visible/part-0/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Checkbox (shadcn.checkbox):Checked=Indeterminate, State=Focus Visible/part-0/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Input (shadcn.input):State=Default",
+   "message": "prototype reaction(s) ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Select:Select/icon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Select:Select/icon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  }
+ ],
+ "_variables": {
+  "imported/alert/root/row-gap": {
+   "type": "FLOAT",
+   "value": 2,
+   "modes": {
+    "Light": 2,
+    "Dark": 2
+   }
+  },
+  "imported/alert/root/padding-left": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/alert/root/padding-top": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/alert/root/padding-right": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/alert/root/padding-bottom": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/shared/size-10": {
+   "type": "FLOAT",
+   "value": 10,
+   "modes": {
+    "Light": 10,
+    "Dark": 10
+   }
+  },
+  "imported/shared/size-1": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/alert/root/background-color": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#171717"
+   }
+  },
+  "imported/shared/size-14": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/alert/label/color/default": {
+   "type": "COLOR",
+   "value": "#0a0a0a",
+   "modes": {
+    "Light": "#0a0a0a",
+    "Dark": "#0a0a0a"
+   }
+  },
+  "imported/alert/label-2/color/default": {
+   "type": "COLOR",
+   "value": "#737373",
+   "modes": {
+    "Light": "#737373",
+    "Dark": "#a1a1a1"
+   }
+  },
+  "imported/alert/label/color/destructive": {
+   "type": "COLOR",
+   "value": "#e7000b",
+   "modes": {
+    "Light": "#e7000b",
+    "Dark": "#e7000b"
+   }
+  },
+  "imported/alert/label-2/color/destructive": {
+   "type": "COLOR",
+   "value": "#e7000be6",
+   "modes": {
+    "Light": "#e7000be6",
+    "Dark": "#e7000be6"
+   }
+  },
+  "imported/avatar/root/width/default": {
+   "type": "FLOAT",
+   "value": 32,
+   "modes": {
+    "Light": 32,
+    "Dark": 32
+   }
+  },
+  "imported/avatar/root/height/default": {
+   "type": "FLOAT",
+   "value": 32,
+   "modes": {
+    "Light": 32,
+    "Dark": 32
+   }
+  },
+  "imported/shared/size-9999": {
+   "type": "FLOAT",
+   "value": 9999,
+   "modes": {
+    "Light": 9999,
+    "Dark": 9999
+   }
+  },
+  "imported/avatar/label/background-color": {
+   "type": "COLOR",
+   "value": "#f5f5f5",
+   "modes": {
+    "Light": "#f5f5f5",
+    "Dark": "#262626"
+   }
+  },
+  "imported/avatar/label/font-size/default": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/avatar/label/color": {
+   "type": "COLOR",
+   "value": "#737373",
+   "modes": {
+    "Light": "#737373",
+    "Dark": "#a1a1a1"
+   }
+  },
+  "imported/avatar/root/width/sm": {
+   "type": "FLOAT",
+   "value": 24,
+   "modes": {
+    "Light": 24,
+    "Dark": 24
+   }
+  },
+  "imported/avatar/root/height/sm": {
+   "type": "FLOAT",
+   "value": 24,
+   "modes": {
+    "Light": 24,
+    "Dark": 24
+   }
+  },
+  "imported/avatar/label/font-size/sm": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/avatar/root/width/lg": {
+   "type": "FLOAT",
+   "value": 40,
+   "modes": {
+    "Light": 40,
+    "Dark": 40
+   }
+  },
+  "imported/avatar/root/height/lg": {
+   "type": "FLOAT",
+   "value": 40,
+   "modes": {
+    "Light": 40,
+    "Dark": 40
+   }
+  },
+  "imported/avatar/label/font-size/lg": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/badge/root/column-gap": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/badge/root/padding-left": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "imported/badge/root/padding-top": {
+   "type": "FLOAT",
+   "value": 2,
+   "modes": {
+    "Light": 2,
+    "Dark": 2
+   }
+  },
+  "imported/badge/root/padding-right": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "imported/badge/root/padding-bottom": {
+   "type": "FLOAT",
+   "value": 2,
+   "modes": {
+    "Light": 2,
+    "Dark": 2
+   }
+  },
+  "imported/shared/size-26": {
+   "type": "FLOAT",
+   "value": 26,
+   "modes": {
+    "Light": 26,
+    "Dark": 26
+   }
+  },
+  "imported/badge/root/background-color/default": {
+   "type": "COLOR",
+   "value": "#171717",
+   "modes": {
+    "Light": "#171717",
+    "Dark": "#e5e5e5"
+   }
+  },
+  "imported/badge/root/border-top-color/default": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/badge/root/font-size": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/badge/root/color/default": {
+   "type": "COLOR",
+   "value": "#fafafa",
+   "modes": {
+    "Light": "#fafafa",
+    "Dark": "#171717"
+   }
+  },
+  "imported/badge/root/background-color/secondary": {
+   "type": "COLOR",
+   "value": "#f5f5f5",
+   "modes": {
+    "Light": "#f5f5f5",
+    "Dark": "#262626"
+   }
+  },
+  "imported/badge/root/border-top-color/secondary": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/badge/root/color/secondary": {
+   "type": "COLOR",
+   "value": "#171717",
+   "modes": {
+    "Light": "#171717",
+    "Dark": "#fafafa"
+   }
+  },
+  "imported/badge/root/background-color/destructive": {
+   "type": "COLOR",
+   "value": "#e7000b1a",
+   "modes": {
+    "Light": "#e7000b1a",
+    "Dark": "#e7000b1a"
+   }
+  },
+  "imported/badge/root/border-top-color/destructive": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/badge/root/color/destructive": {
+   "type": "COLOR",
+   "value": "#e7000b",
+   "modes": {
+    "Light": "#e7000b",
+    "Dark": "#ff6467"
+   }
+  },
+  "imported/badge/root/background-color/outline": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/badge/root/border-top-color/outline": {
+   "type": "COLOR",
+   "value": "#e5e5e5",
+   "modes": {
+    "Light": "#e5e5e5",
+    "Dark": "#e5e5e5"
+   }
+  },
+  "imported/badge/root/color/outline": {
+   "type": "COLOR",
+   "value": "#0a0a0a",
+   "modes": {
+    "Light": "#0a0a0a",
+    "Dark": "#fafafa"
+   }
+  },
+  "imported/badge/root/background-color/ghost": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/badge/root/border-top-color/ghost": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/badge/root/color/ghost": {
+   "type": "COLOR",
+   "value": "#0a0a0a",
+   "modes": {
+    "Light": "#0a0a0a",
+    "Dark": "#0a0a0a"
+   }
+  },
+  "imported/badge/root/background-color/link": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/badge/root/border-top-color/link": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/badge/root/color/link": {
+   "type": "COLOR",
+   "value": "#171717",
+   "modes": {
+    "Light": "#171717",
+    "Dark": "#e5e5e5"
+   }
+  },
+  "imported/badge/root/background-color-state-active/default": {
+   "type": "COLOR",
+   "value": "#171717",
+   "modes": {
+    "Light": "#171717",
+    "Dark": "#e5e5e5"
+   }
+  },
+  "imported/badge/root/color-state-active/default": {
+   "type": "COLOR",
+   "value": "#fafafa",
+   "modes": {
+    "Light": "#fafafa",
+    "Dark": "#171717"
+   }
+  },
+  "imported/badge/root/background-color-state-active/secondary": {
+   "type": "COLOR",
+   "value": "#f5f5f5",
+   "modes": {
+    "Light": "#f5f5f5",
+    "Dark": "#262626"
+   }
+  },
+  "imported/badge/root/color-state-active/secondary": {
+   "type": "COLOR",
+   "value": "#171717",
+   "modes": {
+    "Light": "#171717",
+    "Dark": "#fafafa"
+   }
+  },
+  "imported/badge/root/background-color-state-active/destructive": {
+   "type": "COLOR",
+   "value": "#e7000b1a",
+   "modes": {
+    "Light": "#e7000b1a",
+    "Dark": "#e7000b1a"
+   }
+  },
+  "imported/badge/root/color-state-active/destructive": {
+   "type": "COLOR",
+   "value": "#e7000b",
+   "modes": {
+    "Light": "#e7000b",
+    "Dark": "#ff6467"
+   }
+  },
+  "imported/badge/root/background-color-state-active/outline": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/badge/root/color-state-active/outline": {
+   "type": "COLOR",
+   "value": "#0a0a0a",
+   "modes": {
+    "Light": "#0a0a0a",
+    "Dark": "#fafafa"
+   }
+  },
+  "imported/badge/root/background-color-state-active/ghost": {
+   "type": "COLOR",
+   "value": "#f5f5f5",
+   "modes": {
+    "Light": "#f5f5f5",
+    "Dark": "#f5f5f5"
+   }
+  },
+  "imported/badge/root/color-state-active/ghost": {
+   "type": "COLOR",
+   "value": "#737373",
+   "modes": {
+    "Light": "#737373",
+    "Dark": "#737373"
+   }
+  },
+  "imported/badge/root/background-color-state-active/link": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/badge/root/color-state-active/link": {
+   "type": "COLOR",
+   "value": "#171717",
+   "modes": {
+    "Light": "#171717",
+    "Dark": "#e5e5e5"
+   }
+  },
+  "imported/badge/root/background-color-state-hover/default": {
+   "type": "COLOR",
+   "value": "#171717",
+   "modes": {
+    "Light": "#171717",
+    "Dark": "#e5e5e5"
+   }
+  },
+  "imported/badge/root/color-state-hover/default": {
+   "type": "COLOR",
+   "value": "#fafafa",
+   "modes": {
+    "Light": "#fafafa",
+    "Dark": "#171717"
+   }
+  },
+  "imported/badge/root/background-color-state-hover/secondary": {
+   "type": "COLOR",
+   "value": "#f5f5f5",
+   "modes": {
+    "Light": "#f5f5f5",
+    "Dark": "#262626"
+   }
+  },
+  "imported/badge/root/color-state-hover/secondary": {
+   "type": "COLOR",
+   "value": "#171717",
+   "modes": {
+    "Light": "#171717",
+    "Dark": "#fafafa"
+   }
+  },
+  "imported/badge/root/background-color-state-hover/destructive": {
+   "type": "COLOR",
+   "value": "#e7000b1a",
+   "modes": {
+    "Light": "#e7000b1a",
+    "Dark": "#e7000b1a"
+   }
+  },
+  "imported/badge/root/color-state-hover/destructive": {
+   "type": "COLOR",
+   "value": "#e7000b",
+   "modes": {
+    "Light": "#e7000b",
+    "Dark": "#ff6467"
+   }
+  },
+  "imported/badge/root/background-color-state-hover/outline": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/badge/root/color-state-hover/outline": {
+   "type": "COLOR",
+   "value": "#0a0a0a",
+   "modes": {
+    "Light": "#0a0a0a",
+    "Dark": "#fafafa"
+   }
+  },
+  "imported/badge/root/background-color-state-hover/ghost": {
+   "type": "COLOR",
+   "value": "#f5f5f5",
+   "modes": {
+    "Light": "#f5f5f5",
+    "Dark": "#f5f5f5"
+   }
+  },
+  "imported/badge/root/color-state-hover/ghost": {
+   "type": "COLOR",
+   "value": "#737373",
+   "modes": {
+    "Light": "#737373",
+    "Dark": "#737373"
+   }
+  },
+  "imported/badge/root/background-color-state-hover/link": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/badge/root/color-state-hover/link": {
+   "type": "COLOR",
+   "value": "#171717",
+   "modes": {
+    "Light": "#171717",
+    "Dark": "#e5e5e5"
+   }
+  },
+  "imported/button/root/padding-left/default": {
+   "type": "FLOAT",
+   "value": 10,
+   "modes": {
+    "Light": 10,
+    "Dark": 10
+   }
+  },
+  "imported/button/root/padding-right/default": {
+   "type": "FLOAT",
+   "value": 10,
+   "modes": {
+    "Light": 10,
+    "Dark": 10
+   }
+  },
+  "imported/shared/size-8": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "imported/button/root/background-color/default": {
+   "type": "COLOR",
+   "value": "#171717",
+   "modes": {
+    "Light": "#171717",
+    "Dark": "#e5e5e5"
+   }
+  },
+  "imported/button/root/border-top-color/default": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/button/root/font-size/default": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/button/root/color/default": {
+   "type": "COLOR",
+   "value": "#fafafa",
+   "modes": {
+    "Light": "#fafafa",
+    "Dark": "#171717"
+   }
+  },
+  "imported/button/root/padding-left/xs": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "imported/button/root/padding-right/xs": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "imported/button/root/font-size/xs": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/button/root/padding-left/sm": {
+   "type": "FLOAT",
+   "value": 10,
+   "modes": {
+    "Light": 10,
+    "Dark": 10
+   }
+  },
+  "imported/button/root/padding-right/sm": {
+   "type": "FLOAT",
+   "value": 10,
+   "modes": {
+    "Light": 10,
+    "Dark": 10
+   }
+  },
+  "imported/button/root/font-size/sm": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/button/root/padding-left/lg": {
+   "type": "FLOAT",
+   "value": 10,
+   "modes": {
+    "Light": 10,
+    "Dark": 10
+   }
+  },
+  "imported/button/root/padding-right/lg": {
+   "type": "FLOAT",
+   "value": 10,
+   "modes": {
+    "Light": 10,
+    "Dark": 10
+   }
+  },
+  "imported/button/root/font-size/lg": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/button/root/padding-left/icon": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/padding-right/icon": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/font-size/icon": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/button/root/padding-left/icon-xs": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/padding-right/icon-xs": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/font-size/icon-xs": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/button/root/padding-left/icon-sm": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/padding-right/icon-sm": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/font-size/icon-sm": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/button/root/padding-left/icon-lg": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/padding-right/icon-lg": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/font-size/icon-lg": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/button/root/background-color/outline": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#0a0a0a"
+   }
+  },
+  "imported/button/root/border-top-color/outline": {
+   "type": "COLOR",
+   "value": "#e5e5e5",
+   "modes": {
+    "Light": "#e5e5e5",
+    "Dark": "#e5e5e5"
+   }
+  },
+  "imported/button/root/color/outline": {
+   "type": "COLOR",
+   "value": "#0a0a0a",
+   "modes": {
+    "Light": "#0a0a0a",
+    "Dark": "#0a0a0a"
+   }
+  },
+  "imported/button/root/background-color/secondary": {
+   "type": "COLOR",
+   "value": "#f5f5f5",
+   "modes": {
+    "Light": "#f5f5f5",
+    "Dark": "#262626"
+   }
+  },
+  "imported/button/root/border-top-color/secondary": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/button/root/color/secondary": {
+   "type": "COLOR",
+   "value": "#171717",
+   "modes": {
+    "Light": "#171717",
+    "Dark": "#fafafa"
+   }
+  },
+  "imported/button/root/background-color/ghost": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/button/root/border-top-color/ghost": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/button/root/color/ghost": {
+   "type": "COLOR",
+   "value": "#0a0a0a",
+   "modes": {
+    "Light": "#0a0a0a",
+    "Dark": "#0a0a0a"
+   }
+  },
+  "imported/button/root/background-color/destructive": {
+   "type": "COLOR",
+   "value": "#e7000b1a",
+   "modes": {
+    "Light": "#e7000b1a",
+    "Dark": "#e7000b1a"
+   }
+  },
+  "imported/button/root/border-top-color/destructive": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/button/root/color/destructive": {
+   "type": "COLOR",
+   "value": "#e7000b",
+   "modes": {
+    "Light": "#e7000b",
+    "Dark": "#ff6467"
+   }
+  },
+  "imported/button/root/background-color/link": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/button/root/border-top-color/link": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/button/root/color/link": {
+   "type": "COLOR",
+   "value": "#171717",
+   "modes": {
+    "Light": "#171717",
+    "Dark": "#e5e5e5"
+   }
+  },
+  "imported/button/root/background-color-state-active/default": {
+   "type": "COLOR",
+   "value": "#171717cc",
+   "modes": {
+    "Light": "#171717cc",
+    "Dark": "#171717cc"
+   }
+  },
+  "imported/button/root/background-color-state-active/outline": {
+   "type": "COLOR",
+   "value": "#f5f5f5",
+   "modes": {
+    "Light": "#f5f5f5",
+    "Dark": "#f5f5f5"
+   }
+  },
+  "imported/button/root/background-color-state-active/secondary": {
+   "type": "COLOR",
+   "value": "#e7e7e7",
+   "modes": {
+    "Light": "#e7e7e7",
+    "Dark": "#e7e7e7"
+   }
+  },
+  "imported/button/root/background-color-state-active/ghost": {
+   "type": "COLOR",
+   "value": "#f5f5f5",
+   "modes": {
+    "Light": "#f5f5f5",
+    "Dark": "#f5f5f5"
+   }
+  },
+  "imported/button/root/background-color-state-active/destructive": {
+   "type": "COLOR",
+   "value": "#e7000b33",
+   "modes": {
+    "Light": "#e7000b33",
+    "Dark": "#e7000b33"
+   }
+  },
+  "imported/button/root/background-color-state-active/link": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/button/root/background-color-state-hover/default": {
+   "type": "COLOR",
+   "value": "#171717cc",
+   "modes": {
+    "Light": "#171717cc",
+    "Dark": "#171717cc"
+   }
+  },
+  "imported/button/root/background-color-state-hover/outline": {
+   "type": "COLOR",
+   "value": "#f5f5f5",
+   "modes": {
+    "Light": "#f5f5f5",
+    "Dark": "#f5f5f5"
+   }
+  },
+  "imported/button/root/background-color-state-hover/secondary": {
+   "type": "COLOR",
+   "value": "#e7e7e7",
+   "modes": {
+    "Light": "#e7e7e7",
+    "Dark": "#e7e7e7"
+   }
+  },
+  "imported/button/root/background-color-state-hover/ghost": {
+   "type": "COLOR",
+   "value": "#f5f5f5",
+   "modes": {
+    "Light": "#f5f5f5",
+    "Dark": "#f5f5f5"
+   }
+  },
+  "imported/button/root/background-color-state-hover/destructive": {
+   "type": "COLOR",
+   "value": "#e7000b33",
+   "modes": {
+    "Light": "#e7000b33",
+    "Dark": "#e7000b33"
+   }
+  },
+  "imported/button/root/background-color-state-hover/link": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/card/root/row-gap/default": {
+   "type": "FLOAT",
+   "value": 24,
+   "modes": {
+    "Light": 24,
+    "Dark": 24
+   }
+  },
+  "imported/card/root/padding-top/default": {
+   "type": "FLOAT",
+   "value": 24,
+   "modes": {
+    "Light": 24,
+    "Dark": 24
+   }
+  },
+  "imported/card/root/padding-bottom/default": {
+   "type": "FLOAT",
+   "value": 24,
+   "modes": {
+    "Light": 24,
+    "Dark": 24
+   }
+  },
+  "imported/card/root/background-color": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#171717"
+   }
+  },
+  "imported/card/part-0/row-gap": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/card/part-0/padding-left/default": {
+   "type": "FLOAT",
+   "value": 24,
+   "modes": {
+    "Light": 24,
+    "Dark": 24
+   }
+  },
+  "imported/card/part-0/padding-right/default": {
+   "type": "FLOAT",
+   "value": 24,
+   "modes": {
+    "Light": 24,
+    "Dark": 24
+   }
+  },
+  "imported/card/label/font-size/default": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/card/label-2/color": {
+   "type": "COLOR",
+   "value": "#737373",
+   "modes": {
+    "Light": "#737373",
+    "Dark": "#a1a1a1"
+   }
+  },
+  "imported/card/label-3/row-gap": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/card/label-3/padding-left/default": {
+   "type": "FLOAT",
+   "value": 24,
+   "modes": {
+    "Light": 24,
+    "Dark": 24
+   }
+  },
+  "imported/card/label-3/padding-right/default": {
+   "type": "FLOAT",
+   "value": 24,
+   "modes": {
+    "Light": 24,
+    "Dark": 24
+   }
+  },
+  "imported/card/root/row-gap/sm": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/card/root/padding-top/sm": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/card/root/padding-bottom/sm": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/card/part-0/padding-left/sm": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/card/part-0/padding-right/sm": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/card/label/font-size/sm": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/card/label-3/padding-left/sm": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/card/label-3/padding-right/sm": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/checkbox/root/width": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/checkbox/root/height": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/shared/size-4": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/checkbox/root/background-color/unchecked": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/checkbox/root/border-top-color/unchecked": {
+   "type": "COLOR",
+   "value": "#e5e5e5",
+   "modes": {
+    "Light": "#e5e5e5",
+    "Dark": "#e5e5e5"
+   }
+  },
+  "imported/checkbox/root/background-color/checked": {
+   "type": "COLOR",
+   "value": "#171717",
+   "modes": {
+    "Light": "#171717",
+    "Dark": "#e5e5e5"
+   }
+  },
+  "imported/checkbox/root/border-top-color/checked": {
+   "type": "COLOR",
+   "value": "#171717",
+   "modes": {
+    "Light": "#171717",
+    "Dark": "#171717"
+   }
+  },
+  "imported/checkbox/root/color/checked": {
+   "type": "COLOR",
+   "value": "#fafafa",
+   "modes": {
+    "Light": "#fafafa",
+    "Dark": "#171717"
+   }
+  },
+  "imported/checkbox/root/background-color/indeterminate": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/checkbox/root/border-top-color/indeterminate": {
+   "type": "COLOR",
+   "value": "#e5e5e5",
+   "modes": {
+    "Light": "#e5e5e5",
+    "Dark": "#e5e5e5"
+   }
+  },
+  "imported/checkbox/root/color/indeterminate": {
+   "type": "COLOR",
+   "value": "#0a0a0a",
+   "modes": {
+    "Light": "#0a0a0a",
+    "Dark": "#0a0a0a"
+   }
+  },
+  "imported/input/root/padding-left": {
+   "type": "FLOAT",
+   "value": 10,
+   "modes": {
+    "Light": 10,
+    "Dark": 10
+   }
+  },
+  "imported/input/root/padding-top": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/padding-right": {
+   "type": "FLOAT",
+   "value": 10,
+   "modes": {
+    "Light": 10,
+    "Dark": 10
+   }
+  },
+  "imported/input/root/padding-bottom": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/width": {
+   "type": "FLOAT",
+   "value": 288,
+   "modes": {
+    "Light": 288,
+    "Dark": 288
+   }
+  },
+  "imported/input/root/min-width": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/shared/size-6": {
+   "type": "FLOAT",
+   "value": 6,
+   "modes": {
+    "Light": 6,
+    "Dark": 6
+   }
+  },
+  "imported/select/root/padding-left": {
+   "type": "FLOAT",
+   "value": 10,
+   "modes": {
+    "Light": 10,
+    "Dark": 10
+   }
+  },
+  "imported/shared/color-737373": {
+   "type": "COLOR",
+   "value": "#737373",
+   "modes": {
+    "Light": "#737373",
+    "Dark": "#737373"
+   }
+  },
+  "imported/switch/root/width/default": {
+   "type": "FLOAT",
+   "value": 32,
+   "modes": {
+    "Light": 32,
+    "Dark": 32
+   }
+  },
+  "imported/switch/root/height/default": {
+   "type": "FLOAT",
+   "value": 18.390600204467773,
+   "modes": {
+    "Light": 18.390600204467773,
+    "Dark": 18.390600204467773
+   }
+  },
+  "imported/switch/root/background-color/unchecked": {
+   "type": "COLOR",
+   "value": "#e5e5e5",
+   "modes": {
+    "Light": "#e5e5e5",
+    "Dark": "#ffffff26"
+   }
+  },
+  "imported/shared/color-00000000": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/switch/part-0/width/default": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/switch/part-0/height/default": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/switch/part-0/background-color": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#0a0a0a"
+   }
+  },
+  "imported/switch/root/background-color/checked": {
+   "type": "COLOR",
+   "value": "#171717",
+   "modes": {
+    "Light": "#171717",
+    "Dark": "#e5e5e5"
+   }
+  },
+  "imported/switch/root/width/sm": {
+   "type": "FLOAT",
+   "value": 24,
+   "modes": {
+    "Light": 24,
+    "Dark": 24
+   }
+  },
+  "imported/switch/root/height/sm": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/switch/part-0/width/sm": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/switch/part-0/height/sm": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/tabs/root/width": {
+   "type": "FLOAT",
+   "value": 285.5780029296875,
+   "modes": {
+    "Light": 285.5780029296875,
+    "Dark": 285.5780029296875
+   }
+  },
+  "imported/tabs/root/height": {
+   "type": "FLOAT",
+   "value": 64,
+   "modes": {
+    "Light": 64,
+    "Dark": 64
+   }
+  },
+  "imported/shared/size-3": {
+   "type": "FLOAT",
+   "value": 3,
+   "modes": {
+    "Light": 3,
+    "Dark": 3
+   }
+  },
+  "imported/tabs/part-0/width": {
+   "type": "FLOAT",
+   "value": 229.2969970703125,
+   "modes": {
+    "Light": 229.2969970703125,
+    "Dark": 229.2969970703125
+   }
+  },
+  "imported/tabs/part-0/height": {
+   "type": "FLOAT",
+   "value": 36,
+   "modes": {
+    "Light": 36,
+    "Dark": 36
+   }
+  },
+  "imported/tabs/part-0/background-color": {
+   "type": "COLOR",
+   "value": "#f5f5f5",
+   "modes": {
+    "Light": "#f5f5f5",
+    "Dark": "#262626"
+   }
+  },
+  "imported/tabs/label/width": {
+   "type": "FLOAT",
+   "value": 81.53119659423828,
+   "modes": {
+    "Light": 81.53119659423828,
+    "Dark": 81.53119659423828
+   }
+  },
+  "imported/shared/size-29": {
+   "type": "FLOAT",
+   "value": 29,
+   "modes": {
+    "Light": 29,
+    "Dark": 29
+   }
+  },
+  "imported/tabs/label/background-color": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#0a0a0a"
+   }
+  },
+  "imported/tabs/part-0/color": {
+   "type": "COLOR",
+   "value": "#737373",
+   "modes": {
+    "Light": "#737373",
+    "Dark": "#a1a1a1"
+   }
+  },
+  "imported/tabs/label-2/width": {
+   "type": "FLOAT",
+   "value": 68.8593978881836,
+   "modes": {
+    "Light": 68.8593978881836,
+    "Dark": 68.8593978881836
+   }
+  },
+  "imported/tabs/label-2/color": {
+   "type": "COLOR",
+   "value": "#0a0a0a99",
+   "modes": {
+    "Light": "#0a0a0a99",
+    "Dark": "#0a0a0a99"
+   }
+  },
+  "imported/tabs/label-3/width": {
+   "type": "FLOAT",
+   "value": 72.90619659423828,
+   "modes": {
+    "Light": 72.90619659423828,
+    "Dark": 72.90619659423828
+   }
+  },
+  "imported/tabs/label-3/color": {
+   "type": "COLOR",
+   "value": "#0a0a0a99",
+   "modes": {
+    "Light": "#0a0a0a99",
+    "Dark": "#0a0a0a99"
+   }
+  },
+  "imported/tooltip/root/width": {
+   "type": "FLOAT",
+   "value": 219.031005859375,
+   "modes": {
+    "Light": 219.031005859375,
+    "Dark": 219.031005859375
+   }
+  },
+  "imported/tooltip/root/height": {
+   "type": "FLOAT",
+   "value": 28,
+   "modes": {
+    "Light": 28,
+    "Dark": 28
+   }
+  },
+  "imported/shared/size-12": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/shared/size-0": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/tooltip/label/max-width": {
+   "type": "FLOAT",
+   "value": 320,
+   "modes": {
+    "Light": 320,
+    "Dark": 320
+   }
+  },
+  "imported/shared/color-0a0a0a": {
+   "type": "COLOR",
+   "value": "#0a0a0a",
+   "modes": {
+    "Light": "#0a0a0a",
+    "Dark": "#0a0a0a"
+   }
+  },
+  "imported/shared/color-ffffff": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "imported/shared/size-2": {
+   "type": "FLOAT",
+   "value": 2,
+   "modes": {
+    "Light": 2,
+    "Dark": 2
+   }
+  }
+ },
+ "Tabs (shadcn.tabs)": {
+  "setName": "Tabs (shadcn.tabs)",
+  "description": "Tabs \u2014 generated from contract shadcn.tabs v0.2.0 \u2020 (48 code-only facts \u2014 see plugin report)",
+  "contractId": "shadcn.tabs",
+  "specHash": "2243979834",
+  "version": "0.2.0",
+  "semantics": {
+   "element": "div"
+  },
+  "type": "COMPONENT",
+  "nodeId": "39:9594",
+  "key": "8e837d6e0d710cbc126379df6de8e7ca711fba1a",
+  "variants": [
+   {
+    "name": "Tabs (shadcn.tabs)",
+    "type": "COMPONENT",
+    "bbox": {
+     "width": 285.58,
+     "height": 64
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 8,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "itemSpacing": "imported/shared/size-8",
+     "width": "imported/tabs/root/width",
+     "height": "imported/tabs/root/height"
+    },
+    "children": [
+     {
+      "name": "part-0",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "CENTER",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        3,
+        3,
+        3,
+        3
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "cornerRadius": 10,
+      "bound": {
+       "paddingLeft": "imported/shared/size-3",
+       "paddingTop": "imported/shared/size-3",
+       "paddingRight": "imported/shared/size-3",
+       "paddingBottom": "imported/shared/size-3",
+       "width": "imported/tabs/part-0/width",
+       "height": "imported/tabs/part-0/height",
+       "topLeftRadius": "imported/shared/size-10",
+       "topRightRadius": "imported/shared/size-10",
+       "bottomLeftRadius": "imported/shared/size-10",
+       "bottomRightRadius": "imported/shared/size-10"
+      },
+      "fill": {
+       "var": "imported/tabs/part-0/background-color"
+      },
+      "children": [
+       {
+        "name": "label",
+        "type": "FRAME",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "CENTER",
+         "counter": "CENTER",
+         "spacing": 6,
+         "padding": [
+          4,
+          8,
+          4,
+          8
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "bound": {
+         "itemSpacing": "imported/shared/size-6",
+         "paddingLeft": "imported/shared/size-8",
+         "paddingTop": "imported/shared/size-4",
+         "paddingRight": "imported/shared/size-8",
+         "paddingBottom": "imported/shared/size-4",
+         "width": "imported/tabs/label/width",
+         "height": "imported/shared/size-29",
+         "topLeftRadius": "imported/shared/size-8",
+         "topRightRadius": "imported/shared/size-8",
+         "bottomLeftRadius": "imported/shared/size-8",
+         "bottomRightRadius": "imported/shared/size-8",
+         "strokeTopWeight": "imported/shared/size-1",
+         "strokeBottomWeight": "imported/shared/size-1",
+         "strokeLeftWeight": "imported/shared/size-1",
+         "strokeRightWeight": "imported/shared/size-1"
+        },
+        "fill": {
+         "var": "imported/tabs/label/background-color"
+        },
+        "stroke": {
+         "var": "imported/shared/color-00000000",
+         "alpha": 0
+        },
+        "strokeWeight": 1,
+        "strokeAlign": "INSIDE",
+        "effects": [
+         {
+          "type": "DROP_SHADOW",
+          "color": {
+           "hex": "000000",
+           "alpha": 0
+          },
+          "offset": {
+           "x": 0,
+           "y": 0
+          },
+          "radius": 0
+         },
+         {
+          "type": "DROP_SHADOW",
+          "color": {
+           "hex": "000000",
+           "alpha": 0
+          },
+          "offset": {
+           "x": 0,
+           "y": 0
+          },
+          "radius": 0
+         },
+         {
+          "type": "DROP_SHADOW",
+          "color": {
+           "hex": "000000",
+           "alpha": 0
+          },
+          "offset": {
+           "x": 0,
+           "y": 0
+          },
+          "radius": 0
+         },
+         {
+          "type": "DROP_SHADOW",
+          "color": {
+           "hex": "000000",
+           "alpha": 0
+          },
+          "offset": {
+           "x": 0,
+           "y": 0
+          },
+          "radius": 0
+         },
+         {
+          "type": "DROP_SHADOW",
+          "color": {
+           "hex": "000000",
+           "alpha": 0.1
+          },
+          "offset": {
+           "x": 0,
+           "y": 1
+          },
+          "radius": 3
+         },
+         {
+          "type": "DROP_SHADOW",
+          "color": {
+           "hex": "000000",
+           "alpha": 0.1
+          },
+          "offset": {
+           "x": 0,
+           "y": 1
+          },
+          "radius": 2,
+          "spread": -1
+         }
+        ],
+        "children": [
+         {
+          "name": "label-text",
+          "type": "TEXT",
+          "text": {
+           "characters": "Overview",
+           "fontSize": 14,
+           "fontStyle": "Medium",
+           "lineHeight": 20,
+           "fontFamily": "Inter",
+           "fontSizeVar": "imported/shared/size-14",
+           "fontWeightVar": "imported/shared/num-500",
+           "lineHeightVar": "imported/shared/size-20",
+           "fillVar": "imported/tabs/part-0/color"
+          },
+          "fill": {
+           "var": "imported/tabs/part-0/color"
+          }
+         }
+        ]
+       },
+       {
+        "name": "label-2",
+        "type": "FRAME",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "CENTER",
+         "counter": "CENTER",
+         "spacing": 6,
+         "padding": [
+          4,
+          8,
+          4,
+          8
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "bound": {
+         "itemSpacing": "imported/shared/size-6",
+         "paddingLeft": "imported/shared/size-8",
+         "paddingTop": "imported/shared/size-4",
+         "paddingRight": "imported/shared/size-8",
+         "paddingBottom": "imported/shared/size-4",
+         "width": "imported/tabs/label-2/width",
+         "height": "imported/shared/size-29",
+         "topLeftRadius": "imported/shared/size-8",
+         "topRightRadius": "imported/shared/size-8",
+         "bottomLeftRadius": "imported/shared/size-8",
+         "bottomRightRadius": "imported/shared/size-8",
+         "strokeTopWeight": "imported/shared/size-1",
+         "strokeBottomWeight": "imported/shared/size-1",
+         "strokeLeftWeight": "imported/shared/size-1",
+         "strokeRightWeight": "imported/shared/size-1"
+        },
+        "stroke": {
+         "var": "imported/shared/color-00000000",
+         "alpha": 0
+        },
+        "strokeWeight": 1,
+        "strokeAlign": "INSIDE",
+        "children": [
+         {
+          "name": "label-2-text",
+          "type": "TEXT",
+          "text": {
+           "characters": "Activity",
+           "fontSize": 14,
+           "fontStyle": "Medium",
+           "lineHeight": 20,
+           "fontFamily": "Inter",
+           "fontSizeVar": "imported/shared/size-14",
+           "fontWeightVar": "imported/shared/num-500",
+           "lineHeightVar": "imported/shared/size-20",
+           "fillVar": "imported/tabs/label-2/color"
+          },
+          "fill": {
+           "var": "imported/tabs/label-2/color",
+           "alpha": 0.6000000238418579
+          }
+         }
+        ]
+       },
+       {
+        "name": "label-3",
+        "type": "FRAME",
+        "layout": {
+         "mode": "HORIZONTAL",
+         "primary": "CENTER",
+         "counter": "CENTER",
+         "spacing": 6,
+         "padding": [
+          4,
+          8,
+          4,
+          8
+         ],
+         "primarySizing": "FIXED",
+         "counterSizing": "FIXED"
+        },
+        "cornerRadius": 8,
+        "bound": {
+         "itemSpacing": "imported/shared/size-6",
+         "paddingLeft": "imported/shared/size-8",
+         "paddingTop": "imported/shared/size-4",
+         "paddingRight": "imported/shared/size-8",
+         "paddingBottom": "imported/shared/size-4",
+         "width": "imported/tabs/label-3/width",
+         "height": "imported/shared/size-29",
+         "topLeftRadius": "imported/shared/size-8",
+         "topRightRadius": "imported/shared/size-8",
+         "bottomLeftRadius": "imported/shared/size-8",
+         "bottomRightRadius": "imported/shared/size-8",
+         "strokeTopWeight": "imported/shared/size-1",
+         "strokeBottomWeight": "imported/shared/size-1",
+         "strokeLeftWeight": "imported/shared/size-1",
+         "strokeRightWeight": "imported/shared/size-1"
+        },
+        "stroke": {
+         "var": "imported/shared/color-00000000",
+         "alpha": 0
+        },
+        "strokeWeight": 1,
+        "strokeAlign": "INSIDE",
+        "children": [
+         {
+          "name": "label-3-text",
+          "type": "TEXT",
+          "text": {
+           "characters": "Settings",
+           "fontSize": 14,
+           "fontStyle": "Medium",
+           "lineHeight": 20,
+           "fontFamily": "Inter",
+           "fontSizeVar": "imported/shared/size-14",
+           "fontWeightVar": "imported/shared/num-500",
+           "lineHeightVar": "imported/shared/size-20",
+           "fillVar": "imported/tabs/label-3/color"
+          },
+          "fill": {
+           "var": "imported/tabs/label-3/color",
+           "alpha": 0.6000000238418579
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "label-4",
+      "type": "TEXT",
+      "text": {
+       "characters": "Overview panel copy for the shadcn round.",
+       "fontSize": 14,
+       "fontStyle": "Regular",
+       "lineHeight": 20,
+       "fontFamily": "Inter",
+       "fontSizeVar": "imported/shared/size-14",
+       "fontWeightVar": "imported/tabs/label-4/font-weight",
+       "lineHeightVar": "imported/shared/size-20"
+      },
+      "fill": {
+       "hex": "000000"
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

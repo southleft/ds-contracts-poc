@@ -1,0 +1,41 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "14 type colors incl. outline + high-contrast match",
+ "reviewedAt": "3f3b23b4",
+ "setNodeId": "39:8765",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-carbon-carbon.tag.dump.json",
+  "matched": 7,
+  "diverged": [
+   "prop type type \u2014 {\"enum\":[\"red\",\"magenta\",\"purple\",\"blue\",\"cyan\",\"teal\",\"green\",\"gray\",\"cool-gray\",\"warm-gray\",\"high-contrast\",\"outline\"]} vs {\"enum\":[\"red\",\"magenta\",\"purple\",\"blue\",\"cyan\",\"teal\",\"green\",\"gray\",\"coolGra",
+   "prop type default \u2014 undefined vs \"red\"",
+   "prop type bindings.figma.values \u2014 {\"red\":\"Red\",\"magenta\":\"Magenta\",\"purple\":\"Purple\",\"blue\":\"Blue\",\"cyan\":\"Cyan\",\"teal\":\"Teal\",\"green\":\"Green\",\"gray\":\"Gray\",\"cool-gray\":\"Cool Gray\",\"warm-gray\":\"Warm Gray\",\"high-contrast\"",
+   "prop size default \u2014 undefined vs \"sm\"",
+   "part root/label \u2014 missing from proposal",
+   "part root background-color \u2014 {imported.tag.root.background-color.unset} vs {imported.tag.root.background-color.red}",
+   "part root border-bottom-left-radius \u2014 {imported.shared.size-16} missing from proposal",
+   "part root border-bottom-right-radius \u2014 {imported.shared.size-16} missing from proposal",
+   "part root border-top-left-radius \u2014 {imported.shared.size-16} missing from proposal",
+   "part root border-top-right-radius \u2014 {imported.shared.size-16} missing from proposal",
+   "part root letter-spacing \u2014 {imported.tag.root.letter-spacing} missing from proposal",
+   "part root min-height \u2014 {imported.tag.root.min-height.unset} vs {imported.tag.root.min-height.{size}}",
+   "part root outline-color \u2014 {imported.tag.root.outline-color.unset} missing from proposal",
+   "part root outline-offset \u2014 {imported.tag.root.outline-offset.unset} missing from proposal",
+   "part root outline-width \u2014 {imported.tag.root.outline-width.unset} missing from proposal",
+   "part root padding-left \u2014 {imported.tag.root.padding-left.unset} vs {imported.tag.root.padding-left.{size}}",
+   "part root padding-right \u2014 {imported.tag.root.padding-right.unset} vs {imported.tag.root.padding-right.{size}}",
+   "part root border-radius \u2014 proposal has {imported.shared.size-16}, contract has nothing",
+   "part root line-height \u2014 proposal has {imported.shared.size-16}, contract has nothing"
+  ],
+  "lost": [
+   "`part root color` \u2014 {imported.tag.root.color.unset} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root font-size` \u2014 {imported.tag.root.font-size} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/label color` \u2014 {imported.tag.label.color.unset} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/label font-size` \u2014 {imported.tag.label.font-size} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/label font-weight` \u2014 {imported.tag.label.font-weight} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`Tag:root` stroke = `#393939` \u2014 nearest tokens: (none)",
+   "`Tag:root` strokeWeight = `1` \u2014 nearest tokens: `{border.width.divider.subtle}`, `{border-width.100}`"
+  ]
+ }
+}

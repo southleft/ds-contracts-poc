@@ -1,0 +1,39 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "gray/green track + knob position match both states",
+ "reviewedAt": "3f3b23b4",
+ "setNodeId": "39:8867",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-carbon-carbon.toggle.dump.json",
+  "matched": 5,
+  "diverged": [
+   "part root/toggle__button \u2014 missing from proposal",
+   "part root/toggle__label \u2014 missing from proposal",
+   "part root/toggle__label/label \u2014 missing from proposal",
+   "part root/toggle__label/toggle__appearance \u2014 missing from proposal",
+   "part root/toggle__label/toggle__appearance/toggle__switch \u2014 missing from proposal",
+   "part root/toggle__label/toggle__appearance/toggle__switch/toggle__switch-before \u2014 missing from proposal",
+   "part root/toggle__label/toggle__appearance/label-2 \u2014 missing from proposal",
+   "part root/toggleLabel \u2014 proposal has a part the contract does not",
+   "part root/toggleLabel/label \u2014 proposal has a part the contract does not",
+   "part root/toggleLabel/label/Toggle \u2014 proposal has a part the contract does not",
+   "part root/toggleLabel/toggleAppearance \u2014 proposal has a part the contract does not",
+   "part root/toggleLabel/toggleAppearance/toggleSwitch \u2014 proposal has a part the contract does not",
+   "part root/toggleLabel/toggleAppearance/toggleSwitch/toggleSwitchBefore \u2014 proposal has a part the contract does not",
+   "part root/toggleLabel/toggleAppearance/label-2 \u2014 proposal has a part the contract does not",
+   "part root layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"CENTER\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"VERTICAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":true}",
+   "part root max-width \u2014 proposal has {imported.toggle.root.width.{toggled}}, contract has nothing"
+  ],
+  "lost": [
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`part root/toggle__label/label color` \u2014 {imported.toggle.label.color} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/toggle__label/label font-size` \u2014 {imported.shared.size-12} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/toggle__label/label font-weight` \u2014 {imported.toggle.label.font-weight} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/toggle__label/toggle__appearance/label-2 font-size` \u2014 {imported.toggle.label-2.font-size} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/toggle__label/toggle__appearance/label-2 font-weight` \u2014 {imported.toggle.label-2.font-weight} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`Toggle:root/toggle__label/toggle__appearance/toggle__switch/toggle__switch-before` fill = `#ffffff` \u2014 nearest tokens: `{color.surface.raised}`, `{color.action.primary.foreground}`, `{color.action.danger.foreground}`, `{",
+   "`Toggle:root/toggle__label/toggle__appearance/label-2` text fill = `#000000` \u2014 nearest tokens: `{color.black}`"
+  ]
+ }
+}

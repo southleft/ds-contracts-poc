@@ -1,0 +1,35 @@
+{
+ "recognisable": true,
+ "walls": [
+  "CODE-RENDER-UNSTYLED:iconbutton"
+ ],
+ "notes": "canvas draws colored kinds (primary blue, secondary dark, tertiary outlined, ghost); the code render shows an unstyled bordered square with a stray tooltip block above \u2014 a code-half artifact, canvas judged against the contract",
+ "reviewedAt": "3f3b23b4",
+ "setNodeId": "39:8416",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-carbon-carbon.iconbutton.dump.json",
+  "matched": 3,
+  "diverged": [
+   "name \u2014 IconButton vs Iconbutton",
+   "prop size default \u2014 undefined vs \"xs\"",
+   "part root/tooltip-trigger__wrapper \u2014 missing from proposal",
+   "part root/tooltip-trigger__wrapper/btn \u2014 missing from proposal",
+   "part root/tooltipTriggerWrapper \u2014 proposal has a part the contract does not",
+   "part root/tooltipTriggerWrapper/btn \u2014 proposal has a part the contract does not",
+   "part root/tooltipTriggerWrapper/btn/btn-icon \u2014 proposal has a part the contract does not",
+   "part root/tooltipTriggerWrapper/btn/btn-icon/Vector \u2014 proposal has a part the contract does not",
+   "part root layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"CENTER\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"VERTICAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":false}",
+   "part root bottom \u2014 {imported.shared.size-0} missing from proposal",
+   "part root height \u2014 {imported.icon-button.root.height.unset} vs {imported.icon-button.root.height.{size}}",
+   "part root left \u2014 {imported.shared.size-0} missing from proposal",
+   "part root right \u2014 {imported.shared.size-0} missing from proposal",
+   "part root top \u2014 {imported.shared.size-0} missing from proposal",
+   "part root width \u2014 {imported.icon-button.root.width.unset} missing from proposal",
+   "part root max-width \u2014 proposal has {imported.icon-button.root.width.{size}}, contract has nothing"
+  ],
+  "lost": [
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`part root/tooltip-trigger__wrapper/btn font-size` \u2014 {imported.icon-button.btn.font-size} \u2014 text-cascade token with no bound text node beneath it on the canvas"
+  ]
+ }
+}
