@@ -191,7 +191,7 @@ literal with no px-shaped canvas field → `literalMiss`, whose reason always
 opens `no canvas field for this literal channel — …` (`:2438-2447`). The facts
 are stamped on the set as `ds_contracts/codeOnlyFacts` (`:7356`) and listed in
 the plugin run report (`figma-sync/plugin/ui.html:876-890`). On the Flowbite
-eight the bundle carries 54 facts, and `npm run code-only-facts:check` (a
+eight the bundle carries 56 facts, and `npm run code-only-facts:check` (a
 `maintain` step) refuses if any per-contract count moves
 (`core/code-only-facts-check.ts:53-72`).
 
@@ -203,7 +203,7 @@ eight the bundle carries 54 facts, and `npm run code-only-facts:check` (a
 
 | hop | verb | reads | writes | refuses by name |
 |---|---|---|---|---|
-| 4 | plugin **Send** tab → "Read the set & diff" (runs the verbatim copy of `extract/figma/dump.plugin.js`; `dumpVersion: '1.31'` at `:1304`) · or `npm run extract:figma:rest -- <figma-url>` with `FIGMA_TOKEN` (`REST_DUMP_VERSION = '1.31'`, `extract/figma/rest/map.ts:1705`) | the live set / REST nodes | dump JSON: per set `{setName, type, nodeId, key, variants[{name, variantProperties, layout, bound, children…}], propertyDefinitions, semantics, contractId, specHash, version…}` + `_provenance{fileKey, dumpVersion}`, `_degradations[]`, `_variables` | the reader's own gaps ride as `_degradations` rows via `degrade(code, nodePath, message)` (`dump.plugin.js:307`, `:363`, `:371`); the REST route names a refused variables endpoint BY CAUSE (`extract/figma/rest/cli.ts:9-14`) |
+| 4 | plugin **Send** tab → "Read the set & diff" (runs the verbatim copy of `extract/figma/dump.plugin.js`; `dumpVersion: '1.32'` at `:1304`) · or `npm run extract:figma:rest -- <figma-url>` with `FIGMA_TOKEN` (`REST_DUMP_VERSION = '1.32'`, `extract/figma/rest/map.ts:1730`) | the live set / REST nodes | dump JSON: per set `{setName, type, nodeId, key, variants[{name, variantProperties, layout, bound, children…}], propertyDefinitions, semantics, contractId, specHash, version…}` + `_provenance{fileKey, dumpVersion}`, `_degradations[]`, `_variables` | the reader's own gaps ride as `_degradations` rows via `degrade(code, nodePath, message)` (`dump.plugin.js:307`, `:363`, `:371`); the REST route names a refused variables endpoint BY CAUSE (`extract/figma/rest/cli.ts:9-14`) |
 | 4 | `npm run extract:figma -- <dump.json> [--out dir] [--contracts dir] [--tokens a,b] [--reviewable-inversion]` (`extract/figma/propose.ts`) | dump + token corpus + in-scope contracts matched by `bindings.figma.anchors.componentSetKey` first, name second (`:184-200`) | `<out>/<slug>.contract.proposed.json`, `<out>/<stub>.stub.contract.proposed.json`, `<out>/minted.dtcg.json`, `<out>/captured.dtcg.json` (the dump's `_variables`; `FC-DUMP-PROPOSE-CAPTURED-VARIABLES-DROPPED` closed at `:405`), `<out>/figma-proposals.md` with notes + unbound + the EXACT next `generate` line (`:432-436`) | any skipped set → `process.exit(2)`, no artifacts (`:317`) |
 | 4 | plugin Send → `proposeDiff` (`figma-sync/plugin/engine/entry.ts`) | dump + optional base contract + tokenSet | `CONTRACT-PROPOSAL` envelope `{type, baseContractId, baseVersion, setName, summary, proposedContract, projection, proposalNotes, childStubs?, mintedTokens?, provenance{toolGenerated, kind, note}, baseFreshness}` (`entry.ts:2029-2070`) | projection = `exact` when structured `propertyDefinitions` exist or provenance is unrecorded, else `reviewable-inversion` (`:1970-1975`); a stale base → the G3 guard line leads the summary |
 | 5 | `ds-contracts figma receive --out <contracts-dir> [--apply]` · `ds-contracts propose-pr <file> --repo o/n [--target t] [--dry-run]` · copy the JSON | envelope | without `--apply`: **only** `<out>/.proposals/<id>.proposal.json` — the contract file is never touched (`figma.ts:44-46`, `:1434`); with `--apply`: the contract + childStubs + minted tree + generated code from the config's `generate` block; `propose-pr` opens one PR with the contract and the emitted component, target never guessed (`propose-pr.ts:36-39`) | a malformed envelope is refused by `parseProposal` (`figma.ts:1050`) |
@@ -374,12 +374,14 @@ they argue" ([18 — User Flows](18-user-flows.md)).
 - **Contract → canvas (hop 2).** `examples/tailwind/figma/toggle-switch.figma.js:102-107`
   `absolute {h: MIN, v: MIN, left: 2, top: 2}` and `:216-221`
   `absolute {h: MAX, v: MIN, right: 2, top: 2}` → Figma constraints LEFT /
-  RIGHT. The set's 12 code-only facts
+  RIGHT. The set's 14 code-only facts
   (`examples/tailwind/figma/tailwind.bundle.json`, ToggleSwitch): four in-flow
   insets on `part-0` (`{imported.shared.size-0}` top / right / bottom / left —
-  "bound on an in-flow box"), seven `declared` (`cursor`, `display`, `position`
-  on label / part-0 / part-0-after / root), one event
-  `root toggle → onToggle`. Pinned: `core/code-only-facts-check.ts:71`.
+  "bound on an in-flow box"), two `[focus-visible]` outline channels on root
+  (`outline-color` / `outline-width` — the state plane is undrawn with
+  `statePreviews` off, FC-STATE-PLANE-UNDRAWN), seven `declared` (`cursor`,
+  `display`, `position` on label / part-0 / part-0-after / root), one event
+  `root toggle → onToggle`. Pinned: `core/code-only-facts-check.ts:74`.
 - **Canvas → contract (hop 4).** Fixture
   `extract/figma/fixtures/flowbite-eight.dump.json:1673-1697`
   `part-0-after: ELLIPSE {x: 2, y: 2, constraints LEFT/TOP}, fill ffffff, stroke d1d5db`;
@@ -409,7 +411,8 @@ they argue" ([18 — User Flows](18-user-flows.md)).
   text node binds, so it becomes an unbound TEXT component property `Href`
   with default `#` (`textOnlyProps`, `emit-figma-script.ts:5081`; the site
   replay reads `textProps [{property: "Href", default: "#"}]`, 2 variants,
-  zero code-only facts). The BINDING — "this property is the root element's
+  one code-only fact — the root hover plane is undrawn with `statePreviews`
+  off and rides as FC-STATE-PLANE-UNDRAWN). The BINDING — "this property is the root element's
   href" — is not a canvas field and is not a code-only fact
   (`grep -an 'part.attrs' core/emit-figma-script.ts` — the file carries NUL
   bytes, so grep needs `-a` — hits only the `placeholder` attribute, `:3386`
@@ -452,9 +455,9 @@ Number-free by design; each row has a home in [23 — Known Limitations](23-know
 
 | number | receipt | re-derive |
 |---|---|---|
-| 54 code-only facts on the Flowbite eight | `examples/tailwind/figma/tailwind.bundle.json` → `codeOnlyFacts` | `npm run code-only-facts:check` |
-| ToggleSwitch 12 code-only facts (4 channel · 7 declared · 1 event) | same file; pinned at `core/code-only-facts-check.ts:71` | same |
-| Button 12 variants, first `Variant=Primary, Size=Medium`, 0 code-only facts; TopNavItem `textProps [{Href, #}]` | `createFigmaEngine().compileComponentData` over the shipping contracts — the site build runs it and refuses to build if the values move | `npm run site:build` |
+| 56 code-only facts on the Flowbite eight | `examples/tailwind/figma/tailwind.bundle.json` → `codeOnlyFacts` | `npm run code-only-facts:check` |
+| ToggleSwitch 14 code-only facts (6 channel · 7 declared · 1 event) | same file; pinned at `core/code-only-facts-check.ts:74` | same |
+| Button 12 variants, first `Variant=Primary, Size=Medium`, 0 code-only facts; TopNavItem `textProps [{Href, #}]` + 1 code-only fact (FC-STATE-PLANE-UNDRAWN) | `createFigmaEngine().compileComponentData` over the shipping contracts — the site build runs it and refuses to build if the values move | `npm run site:build` |
 | Badge MATCHED 11 · CANVAS-ABSENT 4 · MISMATCH 0 | `extract/figma/ROUNDTRIP.md` (generated by `extract/figma/roundtrip.ts`); the site build re-runs the round trip and refuses to build if it disagrees with the committed table | `npm run extract:figma:roundtrip` |
 | 82 cases (42 / 4 / 18 / 18) and 154 cases (107 / 38 / 9) | `accuracy/grammar.json:33-55` over `conformance/MANIFEST.json` and `extract/figma/conformance/MANIFEST.json` | `npm run conformance`, `npm run conformance:canvas` |
 | 13 `EXACT_*` codes | `accuracy/grammar.json` | `grep -o '"EXACT_[A-Z_]*"' accuracy/grammar.json \| sort -u` |
