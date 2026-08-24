@@ -1,0 +1,23 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "arc spinner matches both sizes",
+ "reviewedAt": "ef10d9b1",
+ "setNodeId": "39:22566",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-polaris-polaris.spinner.dump.json",
+  "matched": 9,
+  "diverged": [
+   "prop size type \u2014 {\"enum\":[\"small\",\"large\"]} vs {\"enum\":[\"large\",\"small\"]}",
+   "prop size bindings.figma.values \u2014 {\"small\":\"Small\",\"large\":\"Large\"} vs {\"large\":\"Large\",\"small\":\"Small\"}",
+   "prop accessibilityLabel \u2014 missing from proposal",
+   "prop hasFocusableParent default \u2014 undefined vs false",
+   "part root/root-small/Vector \u2014 proposal has a part the contract does not",
+   "part root/root-large/root-largeVector \u2014 proposal has a part the contract does not",
+   "part root max-width \u2014 proposal has {imported.spinner.root.width.{size}}, contract has nothing"
+  ],
+  "lost": [
+   "`part root color` \u2014 {imported.spinner.root.color} \u2014 text-cascade token with no bound text node beneath it on the canvas"
+  ]
+ }
+}

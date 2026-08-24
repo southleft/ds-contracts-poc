@@ -1,7 +1,9 @@
 {
  "recognisable": true,
- "walls": [],
- "notes": "canvas draws the neutral oval with AB initials; the committed code render is near-blank at this size (pale oval on white) \u2014 canvas judged the richer of the pair",
+ "walls": [
+  "CODE-RENDER-BLANK:avatar"
+ ],
+ "notes": "canvas draws the neutral oval with AB initials; the committed code render PNG carries ZERO ink pixels (blank 96x96) \u2014 a code-half rendering gap, canvas judged against the contract",
  "reviewedAt": "6804cb8f",
  "setNodeId": "39:6673",
  "roundTrip": {

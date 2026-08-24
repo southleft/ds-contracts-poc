@@ -1,0 +1,50 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "circle + label matches",
+ "reviewedAt": "ef10d9b1",
+ "setNodeId": "39:22557",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-polaris-polaris.radio-button.dump.json",
+  "matched": 7,
+  "diverged": [
+   "prop ariaDescribedBy \u2014 missing from proposal",
+   "prop labelHidden default \u2014 undefined vs false",
+   "prop checked bindings.figma.values \u2014 undefined vs {\"unchecked\":\"unchecked\",\"checked\":\"checked\"}",
+   "prop disabled default \u2014 undefined vs false",
+   "prop name \u2014 missing from proposal",
+   "prop value \u2014 missing from proposal",
+   "part root/choice__control \u2014 missing from proposal",
+   "part root/choice__control/radiobutton \u2014 missing from proposal",
+   "part root/choice__control/radiobutton/backdrop \u2014 missing from proposal",
+   "part root/choice__control/radiobutton/backdrop-before \u2014 missing from proposal",
+   "part root/choice__label \u2014 missing from proposal",
+   "part root/choice__label/label \u2014 missing from proposal",
+   "part root/choiceControl \u2014 proposal has a part the contract does not",
+   "part root/choiceControl/radiobuttonmarginBox \u2014 proposal has a part the contract does not",
+   "part root/choiceControl/radiobuttonmarginBox/radiobutton \u2014 proposal has a part the contract does not",
+   "part root/choiceControl/radiobuttonmarginBox/radiobutton/backdrop \u2014 proposal has a part the contract does not",
+   "part root/choiceControl/radiobuttonmarginBox/radiobutton/backdrop-before \u2014 proposal has a part the contract does not",
+   "part root/choiceLabel \u2014 proposal has a part the contract does not",
+   "part root/choiceLabel/label \u2014 proposal has a part the contract does not",
+   "part root/choiceLabel/label/accountsAreDisabled \u2014 proposal has a part the contract does not",
+   "part root width \u2014 {imported.radio-button.root.width} missing from proposal",
+   "part root gap \u2014 proposal has {imported.radio-button.choice-control.margin-right}, contract has nothing",
+   "part root max-width \u2014 proposal has {imported.radio-button.root.width}, contract has nothing"
+  ],
+  "lost": [
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`part root/choice__control/radiobutton/input` \u2014 native checkable control \u2014 code semantics; the canvas draws the presentational box, never the input",
+   "`part root/choice__control/radiobutton/input color` \u2014 {imported.radio-button.input.color} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/choice__control/radiobutton/input font-size` \u2014 {imported.radio-button.input.font-size} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/choice__control/radiobutton/input font-weight` \u2014 {imported.radio-button.input.font-weight} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/choice__label/label font-size` \u2014 {imported.radio-button.label.font-size} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/choice__label/label font-weight` \u2014 {imported.radio-button.label.font-weight} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`RadioButton:root/choice__control/radiobutton (margin box)/radiobutton/backdrop` fill = `#ffffff` \u2014 nearest tokens: `{color.surface.raised}`, `{color.action.primary.foreground}`, `{color.action.danger.foreground}`, `{col",
+   "`RadioButton:root/choice__control/radiobutton (margin box)/radiobutton/backdrop` stroke = `#8a8a8a` \u2014 nearest tokens: (none)",
+   "`RadioButton:root/choice__control/radiobutton (margin box)/radiobutton/backdrop` strokeWeight = `1` \u2014 nearest tokens: `{border.width.divider.subtle}`, `{border-width.100}`",
+   "`RadioButton:root/choice__control/radiobutton (margin box)/radiobutton/backdrop-before` fill = `#ffffff` \u2014 nearest tokens: `{color.surface.raised}`, `{color.action.primary.foreground}`, `{color.action.danger.foreground}`",
+   "`RadioButton:root/choice__label/label/Accounts are disabled` text fill = `#000000` \u2014 nearest tokens: `{color.black}`"
+  ]
+ }
+}

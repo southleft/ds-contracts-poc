@@ -1,0 +1,61 @@
+{
+ "recognisable": true,
+ "walls": [
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Xs",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Sm",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Md",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Lg",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading Xl",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading2xl",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Heading3xl",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Xs",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Sm",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Md",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Regular, Variant=Body Lg",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Medium, Variant=Heading Xs",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Semibold, Variant=Heading Xs",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Base, Font Weight=Bold, Variant=Heading Xs",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Disabled, Font Weight=Regular, Variant=Heading Xs",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Inherit, Font Weight=Regular, Variant=Heading Xs",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Success, Font Weight=Regular, Variant=Heading Xs",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Critical, Font Weight=Regular, Variant=Heading Xs",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Caution, Font Weight=Regular, Variant=Heading Xs",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Subdued, Font Weight=Regular, Variant=Heading Xs",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Text Inverse, Font Weight=Regular, Variant=Heading Xs",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Text Inverse Secondary, Font Weight=Regular, Variant=Heading Xs",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Magic, Font Weight=Regular, Variant=Heading Xs",
+  "CANVAS-PROJECTION:Alignment=Start, As=Dt, Tone=Magic Subdued, Font Weight=Regular, Variant=Heading Xs"
+ ],
+ "notes": "the canvas draws 55 of 23,232 cells (As=P planes, verified by set export: every variant/tone/weight renders Online store dashboard); the 24 sampled As=Dt cells are outside the projection and named CANVAS-PROJECTION walls",
+ "reviewedAt": "ef10d9b1",
+ "setNodeId": "39:22933",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-polaris-polaris.text.dump.json",
+  "matched": 8,
+  "diverged": [
+   "prop alignment type \u2014 {\"enum\":[\"start\",\"center\",\"end\",\"justify\"]} vs {\"enum\":[\"start\"]}",
+   "prop alignment default \u2014 undefined vs \"start\"",
+   "prop alignment bindings.figma.values \u2014 {\"start\":\"Start\",\"center\":\"Center\",\"end\":\"End\",\"justify\":\"Justify\"} vs {\"start\":\"Start\"}",
+   "prop as type \u2014 {\"enum\":[\"dt\",\"dd\",\"h1\",\"h2\",\"h3\",\"h4\",\"h5\",\"h6\",\"p\",\"span\",\"strong\",\"legend\"]} vs {\"enum\":[\"p\"]}",
+   "prop as default \u2014 undefined vs \"p\"",
+   "prop as bindings.figma.values \u2014 {\"dt\":\"Dt\",\"dd\":\"Dd\",\"h1\":\"H1\",\"h2\":\"H2\",\"h3\":\"H3\",\"h4\":\"H4\",\"h5\":\"H5\",\"h6\":\"H6\",\"p\":\"P\",\"span\":\"Span\",\"strong\":\"Strong\",\"legend\":\"Legend\"} vs {\"p\":\"P\"}",
+   "prop breakWord default \u2014 undefined vs false",
+   "prop tone type \u2014 {\"enum\":[\"base\",\"disabled\",\"inherit\",\"success\",\"critical\",\"caution\",\"subdued\",\"text-inverse\",\"text-inverse-secondary\",\"magic\",\"magic-subdued\"]} vs {\"enum\":[\"base\",\"success\",\"critical\",\"caution\",\"subdued\"",
+   "prop tone default \u2014 undefined vs \"base\"",
+   "prop tone bindings.figma.values \u2014 {\"base\":\"Base\",\"disabled\":\"Disabled\",\"inherit\":\"Inherit\",\"success\":\"Success\",\"critical\":\"Critical\",\"caution\":\"Caution\",\"subdued\":\"Subdued\",\"text-inverse\":\"Text Inverse\",\"text-inverse-sec",
+   "prop fontWeight type \u2014 {\"enum\":[\"regular\",\"medium\",\"semibold\",\"bold\"]} vs {\"enum\":[\"regular\"]}",
+   "prop fontWeight default \u2014 undefined vs \"regular\"",
+   "prop fontWeight bindings.figma.values \u2014 {\"regular\":\"Regular\",\"medium\":\"Medium\",\"semibold\":\"Semibold\",\"bold\":\"Bold\"} vs {\"regular\":\"Regular\"}",
+   "prop variant default \u2014 undefined vs \"headingXs\"",
+   "part root layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"CENTER\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"VERTICAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":false}",
+   "part root line-height \u2014 {imported.text.root.line-height.none} missing from proposal",
+   "part root content \u2014 {\"prop\":\"children\"} vs undefined",
+   "text root font-size (effective) \u2014 {imported.text.root.font-size.none} missing from proposal",
+   "text root font-weight (effective) \u2014 proposal has {p.font-weight-regular}, contract has nothing"
+  ],
+  "lost": [
+   "`Text:root/label` fontSize = `12` \u2014 nearest tokens: `{space.inset-x.sm}`, `{space.inset-y.lg}`, `{space.table.cell-y.comfortable}`, `{space.list.spacious}`, `{size.spinner.sm}`",
+   "`Text:root/label` lineHeight = `16` \u2014 nearest tokens: `{space.inset-x.md}`, `{space.gap.md}`, `{size.checkbox.sm}`, `{size.slider.thumb}`, `{size.switch.thumb}`"
+  ]
+ }
+}

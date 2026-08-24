@@ -1,0 +1,53 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "tone pills match across variants",
+ "reviewedAt": "ef10d9b1",
+ "setNodeId": "39:19977",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-polaris-polaris.badge.dump.json",
+  "matched": 12,
+  "diverged": [
+   "prop tone type \u2014 {\"enum\":[\"info\",\"success\",\"warning\",\"critical\",\"attention\",\"new\",\"magic\",\"info-strong\",\"success-strong\",\"warning-strong\",\"critical-strong\",\"attention-strong\",\"read-only\",\"enabled\"]} vs {\"enum\":[\"info\",\"s",
+   "prop tone default \u2014 undefined vs \"info\"",
+   "prop tone bindings.figma.values \u2014 undefined vs {\"info\":\"info\",\"success\":\"success\",\"warning\":\"warning\",\"critical\":\"critical\",\"attention\":\"attention\",\"new\":\"new\",\"magic\":\"magic\",\"infoStrong\":\"info-strong\",\"successStrong\":\"",
+   "prop progress type \u2014 {\"enum\":[\"none\",\"incomplete\",\"partiallyComplete\",\"complete\"]} vs {\"enum\":[\"none\",\"incomplete\",\"partiallycomplete\",\"complete\"]}",
+   "prop progress bindings.figma.values \u2014 undefined vs {\"none\":\"none\",\"incomplete\":\"incomplete\",\"partiallycomplete\":\"partiallyComplete\",\"complete\":\"complete\"}",
+   "prop toneAndProgressLabelOverride \u2014 missing from proposal",
+   "part root/label-2 \u2014 missing from proposal",
+   "part root/icon \u2014 missing from proposal",
+   "part root/icon/icon-2 \u2014 missing from proposal",
+   "part root/icon/icon-2/label-3 \u2014 missing from proposal",
+   "part root/icon/icon-2/icon-3 \u2014 missing from proposal",
+   "part root/icon/icon-2/icon-3/icon-3-incomplete \u2014 missing from proposal",
+   "part root/icon/icon-2/icon-3/icon-3-partiallycomplete \u2014 missing from proposal",
+   "part root/icon/icon-2/icon-3/icon-3-complete \u2014 missing from proposal",
+   "part root/iconmarginBox \u2014 proposal has a part the contract does not",
+   "part root/iconmarginBox/icon \u2014 proposal has a part the contract does not",
+   "part root/iconmarginBox/icon/icon-2 \u2014 proposal has a part the contract does not",
+   "part root/iconmarginBox/icon/icon-2/icon-3 \u2014 proposal has a part the contract does not",
+   "part root/iconmarginBox/icon/icon-2/icon-3/icon-3-complete \u2014 proposal has a part the contract does not",
+   "part root/iconmarginBox/icon/icon-2/icon-3/icon-3-complete/Vector \u2014 proposal has a part the contract does not",
+   "part root/iconmarginBox/icon/icon-2/icon-3/icon-3-partiallycomplete \u2014 proposal has a part the contract does not",
+   "part root/iconmarginBox/icon/icon-2/icon-3/icon-3-partiallycomplete/icon-3-partiallycompleteVector \u2014 proposal has a part the contract does not",
+   "part root/iconmarginBox/icon/icon-2/icon-3/icon-3-incomplete \u2014 proposal has a part the contract does not",
+   "part root/iconmarginBox/icon/icon-2/icon-3/icon-3-incomplete/icon-3-incompleteVector \u2014 proposal has a part the contract does not",
+   "part root background-color \u2014 {imported.badge.root.background-color.none} vs {imported.badge.root.background-color.info}",
+   "text root/label color (effective) \u2014 {imported.badge.label.color.none} vs {imported.badge.label.color.info}",
+   "text root/label font-weight (effective) \u2014 {imported.badge.label.font-weight.none} missing from proposal"
+  ],
+  "lost": [
+   "`part root/label element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`part root color` \u2014 {imported.badge.root.color.none} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root font-weight` \u2014 {imported.badge.root.font-weight.none} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/icon color` \u2014 {imported.badge.icon.color.none} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/icon font-weight` \u2014 {imported.badge.icon.font-weight.none} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/icon/icon-2 color` \u2014 {imported.badge.icon-2.color.none} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/icon/icon-2 font-weight` \u2014 {imported.badge.icon-2.font-weight.none} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/icon/icon-2/label-3 color` \u2014 {imported.badge.label-3.color.none} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/icon/icon-2/label-3 font-weight` \u2014 {imported.badge.label-3.font-weight.none} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/icon/icon-2/icon-3 color` \u2014 {imported.badge.icon-3.color.none} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/icon/icon-2/icon-3 font-weight` \u2014 {imported.badge.icon-3.font-weight.none} \u2014 text-cascade token with no bound text node beneath it on the canvas"
+  ]
+ }
+}
