@@ -1,7 +1,9 @@
 {
  "recognisable": true,
- "walls": [],
- "notes": "9 color/size cells match; Active/Focus Visible ring carried as spread-4 shadow (export bounds grow 8px), faint vs code render",
+ "walls": [
+  "FC-EXPORT-RING-UNPAINTED"
+ ],
+ "notes": "9 color/size cells match; Active/Focus Visible spread-4 ring is carried as effect data (round-trips) and reserves export bounds, but the raster leaves it unpainted on COMPONENT exports \u2014 paints on a bare node with identical effect",
  "reviewedAt": "ad1e0fbb",
  "setNodeId": "39:5969",
  "roundTrip": {

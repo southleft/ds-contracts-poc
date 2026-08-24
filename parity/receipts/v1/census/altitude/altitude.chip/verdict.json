@@ -1,0 +1,40 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "pill chips match across variants and squared type",
+ "reviewedAt": "6804cb8f",
+ "setNodeId": "39:6746",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-altitude-altitude.chip.dump.json",
+  "matched": 14,
+  "diverged": [
+   "prop variant default \u2014 undefined vs \"secondary\"",
+   "prop type default \u2014 undefined vs \"default\"",
+   "part root background-color \u2014 {imported.chip.root.background-color.unset} vs {imported.chip.root.background-color.{variant}}",
+   "part root border-bottom-color \u2014 {imported.chip.root.border-bottom-color.unset} missing from proposal",
+   "part root border-bottom-left-radius \u2014 {imported.chip.root.border-bottom-left-radius.unset} missing from proposal",
+   "part root border-bottom-right-radius \u2014 {imported.chip.root.border-bottom-right-radius.unset} missing from proposal",
+   "part root border-bottom-width \u2014 {imported.chip.root.border-bottom-width.unset} vs {imported.chip.root.border-bottom-width.{variant}}",
+   "part root border-left-color \u2014 {imported.chip.root.border-left-color.unset} missing from proposal",
+   "part root border-left-width \u2014 {imported.chip.root.border-left-width.unset} vs {imported.chip.root.border-left-width.{variant}}",
+   "part root border-right-color \u2014 {imported.chip.root.border-right-color.unset} missing from proposal",
+   "part root border-right-width \u2014 {imported.chip.root.border-right-width.unset} vs {imported.chip.root.border-right-width.{variant}}",
+   "part root border-top-color \u2014 {imported.chip.root.border-top-color.unset} missing from proposal",
+   "part root border-top-left-radius \u2014 {imported.chip.root.border-top-left-radius.unset} missing from proposal",
+   "part root border-top-right-radius \u2014 {imported.chip.root.border-top-right-radius.unset} missing from proposal",
+   "part root border-top-width \u2014 {imported.chip.root.border-top-width.unset} vs {imported.chip.root.border-top-width.{variant}}",
+   "part root column-gap \u2014 {imported.chip.root.column-gap} missing from proposal",
+   "part root outline-color \u2014 {imported.chip.root.outline-color.unset} missing from proposal",
+   "part root row-gap \u2014 {imported.chip.root.row-gap} missing from proposal",
+   "part root border-color \u2014 proposal has {imported.chip.root.border-top-color.{variant}}, contract has nothing",
+   "part root gap \u2014 proposal has {imported.chip.root.column-gap}, contract has nothing",
+   "part root content \u2014 {\"prop\":\"children\"} vs undefined",
+   "text root color (effective) \u2014 {imported.chip.root.color.unset} vs {imported.chip.root.color.{variant}}"
+  ],
+  "lost": [
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`part root layout.display` \u2014 inline vs block flex has no canvas projection",
+   "`part root states` \u2014 interaction-state token overrides are code-side (CSS)"
+  ]
+ }
+}

@@ -1,0 +1,29 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "display/lg/md/sm levels and bold weight match; regular weight renders slightly lighter (Inter substrate)",
+ "reviewedAt": "6804cb8f",
+ "setNodeId": "39:6778",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-altitude-altitude.heading.dump.json",
+  "matched": 6,
+  "diverged": [
+   "prop variant type \u2014 {\"enum\":[\"display-lg\",\"display-md\",\"display-sm\",\"lg\",\"md\",\"sm\"]} vs {\"enum\":[\"displayLg\",\"displayMd\",\"displaySm\",\"lg\",\"md\",\"sm\"]}",
+   "prop variant default \u2014 undefined vs \"displayLg\"",
+   "prop variant bindings.figma.values \u2014 {\"display-lg\":\"Display Lg\",\"display-md\":\"Display Md\",\"display-sm\":\"Display Sm\",\"lg\":\"Lg\",\"md\":\"Md\",\"sm\":\"Sm\"} vs {\"displayLg\":\"Display Lg\",\"displayMd\":\"Display Md\",\"displaySm\":\"Displa",
+   "prop weight bindings.code.prop \u2014 \"isBold\" vs \"weight\"",
+   "part root layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"CENTER\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"VERTICAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":false}",
+   "part root line-height \u2014 {imported.heading.root.line-height.unset} missing from proposal",
+   "part root width \u2014 {imported.heading.root.width} missing from proposal",
+   "part root max-width \u2014 proposal has {imported.heading.root.width}, contract has nothing",
+   "part root content \u2014 {\"prop\":\"children\"} vs undefined",
+   "text root font-size (effective) \u2014 {imported.heading.root.font-size.unset} missing from proposal",
+   "text root font-weight (effective) \u2014 proposal has {imported.heading.root.font-weight.{weight}}, contract has nothing"
+  ],
+  "lost": [
+   "`Heading:root/label` text fill = `#000000` \u2014 nearest tokens: `{color.black}`",
+   "`Heading:root/label` fontSize = `48` \u2014 nearest tokens: (none)",
+   "`Heading:root/label` lineHeight = `52` \u2014 nearest tokens: (none)"
+  ]
+ }
+}

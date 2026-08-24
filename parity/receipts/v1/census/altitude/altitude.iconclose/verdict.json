@@ -1,0 +1,31 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "close glyph across 7 sizes matches",
+ "reviewedAt": "6804cb8f",
+ "setNodeId": "39:6802",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-altitude-altitude.iconclose.dump.json",
+  "matched": 18,
+  "diverged": [
+   "name \u2014 IconClose vs Iconclose",
+   "prop size default \u2014 undefined vs \"xs\"",
+   "part root/root-unset \u2014 missing from proposal",
+   "part root/root-xxxl/Vector \u2014 proposal has a part the contract does not",
+   "part root/root-xxl/root-xxlVector \u2014 proposal has a part the contract does not",
+   "part root/root-xl/root-xlVector \u2014 proposal has a part the contract does not",
+   "part root/root-lg/root-lgVector \u2014 proposal has a part the contract does not",
+   "part root/root-md/root-mdVector \u2014 proposal has a part the contract does not",
+   "part root/root-sm/root-smVector \u2014 proposal has a part the contract does not",
+   "part root/root-xs/root-xsVector \u2014 proposal has a part the contract does not",
+   "part root child order \u2014 root-xs,root-sm,root-md,root-lg,root-xl,root-xxl,root-xxxl vs root-xxxl,root-xxl,root-xl,root-lg,root-md,root-sm,root-xs",
+   "part root layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"CENTER\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"VERTICAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":true}",
+   "part root line-height \u2014 {imported.icon-close.root.line-height} missing from proposal",
+   "part root width \u2014 {imported.icon-close.root.width.unset} missing from proposal",
+   "part root max-width \u2014 proposal has {imported.icon-close.root.width.{size}}, contract has nothing"
+  ],
+  "lost": [
+   "`part root color` \u2014 {imported.icon-close.root.color} \u2014 text-cascade token with no bound text node beneath it on the canvas"
+  ]
+ }
+}

@@ -1,0 +1,40 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "canvas draws the neutral oval with AB initials; the committed code render is near-blank at this size (pale oval on white) \u2014 canvas judged the richer of the pair",
+ "reviewedAt": "6804cb8f",
+ "setNodeId": "39:6673",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-altitude-altitude.avatar.dump.json",
+  "matched": 8,
+  "diverged": [
+   "prop variant \u2014 missing from proposal",
+   "prop hasBadge \u2014 missing from proposal",
+   "prop showHasbadge \u2014 proposal has a prop the contract does not",
+   "part root/avatar__badge \u2014 missing from proposal",
+   "part root/avatar__badge/badge \u2014 missing from proposal",
+   "part root/avatar__badge/badge/badge-after \u2014 missing from proposal",
+   "part root/label \u2014 proposal has a part the contract does not",
+   "part root/avatarBadge \u2014 proposal has a part the contract does not",
+   "part root/avatarBadge/badge \u2014 proposal has a part the contract does not",
+   "part root/avatarBadge/badge/badge-after \u2014 proposal has a part the contract does not",
+   "part root border-bottom-left-radius \u2014 {imported.avatar.root.border-bottom-left-radius.unset} missing from proposal",
+   "part root border-bottom-right-radius \u2014 {imported.avatar.root.border-bottom-right-radius.unset} missing from proposal",
+   "part root border-top-left-radius \u2014 {imported.avatar.root.border-top-left-radius.unset} missing from proposal",
+   "part root border-top-right-radius \u2014 {imported.avatar.root.border-top-right-radius.unset} missing from proposal",
+   "part root line-height \u2014 {imported.avatar.root.line-height.unset} missing from proposal",
+   "part root content \u2014 {\"prop\":\"children\"} vs undefined",
+   "text root font-size (effective) \u2014 {imported.avatar.root.font-size.unset} missing from proposal",
+   "text root font-weight (effective) \u2014 {imported.shared.num-600} missing from proposal"
+  ],
+  "lost": [
+   "`part root/avatar__badge font-size` \u2014 {imported.avatar.avatar-badge.font-size.unset} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/avatar__badge font-weight` \u2014 {imported.shared.num-600} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/avatar__badge/badge font-size` \u2014 {imported.avatar.badge.font-size} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/avatar__badge/badge font-weight` \u2014 {imported.shared.num-600} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`Avatar:root/label` text fill = `#000000` \u2014 nearest tokens: `{color.black}`",
+   "`Avatar:root/avatar__badge/badge/badge-after` stroke = `#e9e7e2` \u2014 nearest tokens: (none)",
+   "`Avatar:root/avatar__badge/badge/badge-after` strokeWeight = `2` \u2014 nearest tokens: `{space.inset-y.xs}`, `{border.width.focus}`, `{border.width.divider.strong}`, `{space.25}`, `{border-width.200}`"
+  ]
+ }
+}

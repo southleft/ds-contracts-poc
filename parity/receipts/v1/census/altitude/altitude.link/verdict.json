@@ -1,0 +1,25 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "underlined link across sizes + focus/hover previews match",
+ "reviewedAt": "6804cb8f",
+ "setNodeId": "39:6823",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-altitude-altitude.link.dump.json",
+  "matched": 9,
+  "diverged": [
+   "prop variant default \u2014 undefined vs \"xs\"",
+   "part root column-gap \u2014 {imported.link.root.column-gap} missing from proposal",
+   "part root line-height \u2014 {imported.link.root.line-height.unset} vs {imported.link.root.line-height.{variant}}",
+   "part root row-gap \u2014 {imported.link.root.row-gap} missing from proposal",
+   "part root gap \u2014 proposal has {imported.link.root.column-gap}, contract has nothing",
+   "part root content \u2014 {\"prop\":\"children\"} vs undefined",
+   "text root font-size (effective) \u2014 {imported.link.root.font-size.unset} vs {imported.link.root.font-size.{variant}}"
+  ],
+  "lost": [
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`part root layout.display` \u2014 inline vs block flex has no canvas projection",
+   "`part root states` \u2014 interaction-state token overrides are code-side (CSS)"
+  ]
+ }
+}

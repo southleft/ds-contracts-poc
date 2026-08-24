@@ -1,0 +1,30 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "pill colors and the dot-only variant match",
+ "reviewedAt": "6804cb8f",
+ "setNodeId": "39:6692",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-altitude-altitude.badge.dump.json",
+  "matched": 6,
+  "diverged": [
+   "prop variant default \u2014 undefined vs \"info\"",
+   "prop dot bindings.code.prop \u2014 \"isDot\" vs \"dot\"",
+   "part root/label \u2014 missing from proposal",
+   "part root background-color \u2014 {imported.badge.root.background-color.unset} vs {imported.badge.root.background-color.{variant}}",
+   "part root column-gap \u2014 {imported.badge.root.column-gap} missing from proposal",
+   "part root row-gap \u2014 {imported.badge.root.row-gap} missing from proposal",
+   "part root padding-left \u2014 proposal has {imported.badge.root.padding-left.{dot}}, contract has nothing",
+   "part root padding-right \u2014 proposal has {imported.badge.root.padding-right.{dot}}, contract has nothing",
+   "part root gap \u2014 proposal has {imported.badge.root.column-gap}, contract has nothing",
+   "part root min-width \u2014 proposal has {imported.badge.root.min-width.{dot}}, contract has nothing",
+   "part root min-height \u2014 proposal has {imported.badge.root.min-height.{dot}}, contract has nothing"
+  ],
+  "lost": [
+   "`part root layout.display` \u2014 inline vs block flex has no canvas projection",
+   "`part root color` \u2014 {imported.badge.root.color.unset} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root font-size` \u2014 {imported.badge.root.font-size} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root font-weight` \u2014 {imported.badge.root.font-weight} \u2014 text-cascade token with no bound text node beneath it on the canvas"
+  ]
+ }
+}
