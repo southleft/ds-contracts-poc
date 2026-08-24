@@ -1,0 +1,22 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "menu item pill matches (canvas without hover fill)",
+ "reviewedAt": "796581f0",
+ "setNodeId": "39:14131",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-astryx-astryx.dropdown-menu-item.dump.json",
+  "matched": 7,
+  "diverged": [
+   "prop label \u2014 missing from proposal",
+   "prop children \u2014 proposal has a prop the contract does not",
+   "part root/label \u2014 missing from proposal"
+  ],
+  "lost": [
+   "`semantics` \u2014 element/role are not drawn on the canvas ({\"element\":\"button\",\"role\":\"menuitem\"})",
+   "`part root font-family` \u2014 {font-family-body} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root font-size` \u2014 {text-label-size} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root color` \u2014 {color-text-primary} \u2014 text-cascade token with no bound text node beneath it on the canvas"
+  ]
+ }
+}

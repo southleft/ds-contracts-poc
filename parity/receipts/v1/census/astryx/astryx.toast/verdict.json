@@ -1,0 +1,30 @@
+{
+ "recognisable": true,
+ "walls": [
+  "CANVAS-SURFACE-WHITE-ON-WHITE:toast"
+ ],
+ "notes": "message + Dismiss match; the toast card surface is white with only a shadow and reads as unboxed in the export",
+ "reviewedAt": "796581f0",
+ "setNodeId": "39:14331",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-astryx-astryx.toast.dump.json",
+  "matched": 16,
+  "diverged": [
+   "part root/endContent \u2014 missing from proposal",
+   "part root/EndContent \u2014 proposal has a part the contract does not",
+   "part root box-shadow \u2014 {shadow-med} missing from proposal",
+   "part root line-height \u2014 {text-body-leading} missing from proposal",
+   "part root/content/bodyText line-height \u2014 proposal has {text-body-leading}, contract has nothing",
+   "part root/dismiss component id \u2014 astryx.button vs ds.button-astryx-button",
+   "part root/dismiss component props \u2014 {\"variant\":\"ghost\",\"label\":\"Dismiss\"} vs {\"isDisabled\":false,\"isIconOnly\":false,\"isLoading\":false,\"label\":\"Dismiss\",\"variant\":\"ghost\",\"size\":\"md\"}"
+  ],
+  "lost": [
+   "`semantics` \u2014 element/role are not drawn on the canvas ({\"element\":\"div\",\"role\":\"status\"})",
+   "`part root attrs` \u2014 HTML/ARIA attributes are code-side surface",
+   "`part root/content element` \u2014 host element (\"div\") is not drawn on the canvas",
+   "`part root/content/bodyText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/content/bodyText font-family (effective)` \u2014 {font-family-body} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`Toast:root/content/bodyText` text fill = `#000000` \u2014 nearest tokens: `{color.black}`"
+  ]
+ }
+}

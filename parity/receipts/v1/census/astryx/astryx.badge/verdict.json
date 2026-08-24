@@ -1,0 +1,24 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "all 15 variant colors match",
+ "reviewedAt": "796581f0",
+ "setNodeId": "39:13984",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-astryx-astryx.badge.dump.json",
+  "matched": 12,
+  "diverged": [
+   "part root border-bottom-left-radius \u2014 {imported.shared.size-9999} missing from proposal",
+   "part root border-bottom-right-radius \u2014 {imported.shared.size-9999} missing from proposal",
+   "part root border-top-left-radius \u2014 {imported.shared.size-9999} missing from proposal",
+   "part root border-top-right-radius \u2014 {imported.shared.size-9999} missing from proposal",
+   "part root column-gap \u2014 {imported.badge.root.column-gap} missing from proposal",
+   "part root row-gap \u2014 {imported.badge.root.row-gap} missing from proposal",
+   "part root background-color \u2014 proposal has {imported.badge.root.background-color.{variant}}, contract has nothing",
+   "part root border-radius \u2014 proposal has {imported.shared.size-9999}, contract has nothing",
+   "part root gap \u2014 proposal has {imported.badge.root.column-gap}, contract has nothing",
+   "text root color (effective) \u2014 proposal has {color-text-primary}, contract has nothing"
+  ],
+  "lost": []
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "label + bordered field with leading glyph and placeholder across types/sizes match",
+ "reviewedAt": "796581f0",
+ "setNodeId": "39:14328",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-astryx-astryx.text-input.dump.json",
+  "matched": 36,
+  "diverged": [
+   "prop size type \u2014 {\"enum\":[\"sm\",\"md\",\"lg\"]} vs {\"enum\":[\"md\",\"sm\",\"lg\"]}",
+   "prop size bindings.figma.values \u2014 {\"sm\":\"Sm\",\"md\":\"Md\",\"lg\":\"Lg\"} vs {\"md\":\"Md\",\"sm\":\"Sm\",\"lg\":\"Lg\"}",
+   "part root/field/start-icon/icon-email/Vector \u2014 proposal has a part the contract does not",
+   "part root/field/start-icon/icon-password/icon-passwordVector \u2014 proposal has a part the contract does not",
+   "part root/field/start-icon/icon-text/icon-textVector \u2014 proposal has a part the contract does not",
+   "part root/field/start-icon child order \u2014 icon-text,icon-email,icon-password vs icon-email,icon-password,icon-text"
+  ],
+  "lost": [
+   "`prop label required` \u2014 requiredness is not drawn on the canvas",
+   "`part root/label element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`part root/field element` \u2014 host element (\"div\") is not drawn on the canvas",
+   "`part root/field/placeholder-text element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/label font-family (effective)` \u2014 {font-family-body} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`text root/field/placeholder-text font-family (effective)` \u2014 {font-family-body} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`part root color` \u2014 {color-text-primary} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root font-size` \u2014 {font-size-sm} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/field/start-icon/icon-text color` \u2014 {color-icon-secondary} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/field/start-icon/icon-email color` \u2014 {color-icon-secondary} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/field/start-icon/icon-password color` \u2014 {color-icon-secondary} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`TextInput:root/field/start-icon/icon-email/Vector` strokeWeight = `1.3333333730697632` \u2014 nearest tokens: (none)",
+   "`TextInput:root/field/start-icon/icon-password/Vector` strokeWeight = `1.3333333730697632` \u2014 nearest tokens: (none)",
+   "`TextInput:root/field/start-icon/icon-text/Vector` strokeWeight = `1.3333333730697632` \u2014 nearest tokens: (none)"
+  ]
+ }
+}

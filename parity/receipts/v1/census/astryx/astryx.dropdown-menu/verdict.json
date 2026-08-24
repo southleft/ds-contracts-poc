@@ -1,0 +1,21 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "trigger + Edit/Duplicate/Delete list matches; canvas menu card is white-on-white (shadow not visible in export)",
+ "reviewedAt": "796581f0",
+ "setNodeId": "39:14135",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-astryx-astryx.dropdown-menu.dump.json",
+  "matched": 5,
+  "diverged": [
+   "part trigger \u2014 missing from proposal",
+   "part menu \u2014 missing from proposal",
+   "part menu/item \u2014 missing from proposal",
+   "part root \u2014 proposal has a part the contract does not",
+   "part root/trigger \u2014 proposal has a part the contract does not",
+   "part root/menu \u2014 proposal has a part the contract does not",
+   "part root/menu/item \u2014 proposal has a part the contract does not"
+  ],
+  "lost": []
+ }
+}

@@ -1,0 +1,22 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "label + track/fill across 5 variants match",
+ "reviewedAt": "796581f0",
+ "setNodeId": "39:14168",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-astryx-astryx.progress-bar.dump.json",
+  "matched": 23,
+  "diverged": [
+   "prop value \u2014 missing from proposal",
+   "prop max \u2014 missing from proposal"
+  ],
+  "lost": [
+   "`prop label required` \u2014 requiredness is not drawn on the canvas",
+   "`part root/label element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`part root/track element` \u2014 host element (\"div\") is not drawn on the canvas",
+   "`part root/track/fill element` \u2014 host element (\"div\") is not drawn on the canvas",
+   "`text root/label font-family (effective)` \u2014 {font-family-body} \u2014 the canvas renders Inter regardless (documented fidelity scope)"
+  ]
+ }
+}
