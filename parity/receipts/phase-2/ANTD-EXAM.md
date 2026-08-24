@@ -38,7 +38,7 @@ npx tsx extract/figma/roundtrip.ts --fixtures <scratch>/antd-plugin.dump.json --
 
 ## 2. Per-subject stanzas
 
-| subject | combos × planes | seed | double-run | replay eq | gate eq | src-facts | parts carried (svg) | refusals | minted vars | canvas set (node, variants) | parity AA (canvas vs library, default cell) | recognisable |
+| set | combos × planes | seed | double-run | replay eq | gate eq | src-facts | parts carried (svg) | refusals | minted vars | canvas set (node, variants) | parity AA (canvas vs library, default cell) | recognisable |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Button | 240 × 4 | ✔ curated (type×size×danger; seed-gen proposes 7 axes) | IDENTICAL | 99.930% | 83.9% | 1,164 | 6 (2) | 29 | — | `33:5066`, 30 | 17.4% (74×32 vs 73×34 — text AA + the library's 2px shadow) | ✔ |
 | Tag | 32 × 4 | ✔ | IDENTICAL | — | 97.5% | 124 | 2 (1) | 2 | — | `33:5408`, 14 | 1.9% ✔ (36×22) | ✔ |
@@ -113,7 +113,9 @@ Instrument defects found by measuring (each closed in this round's engine commit
 - **Radio dot (W5, carried with a 1px residue).** The uniform `scale(.375)` now folds into a 6×6 centred ellipse; the canvas dot sits at 4,4 of the 16px inner (the host border is folded only for bubbled decor) — within the ±2px gate.
 - **Input `status × variant` border (FIXED, was a wrong fact).** The pair-with-unset carriage wrote the unset-plane map AFTER the named-plane map and `resolveTokens` merges in order → every Status=Error cell drew the unset grey. Defaultless-axis maps now sort last. Cause, located: `extract/computed/fuse.ts` applyMintToContract.
 
-## 6. Self-heal log (owner bar: put the canvas beside the sandbox render; only the named walls may differ)
+## Self-heal log
+
+*(§6 — owner bar: put the canvas beside the sandbox render; only the named walls may differ.)*
 
 Every iteration: mint by the engine (25 planned steps), screenshot every set + default cell (`exportAsync` scale 1 → `parity/receipts/phase-2/antd/iterN/`), triptych against the sandbox render, diagnose, fix at the cause in the repo, re-fuse offline (`regate --write-enriched`), promote, emit, delete the superseded pages, re-mint.
 
@@ -125,6 +127,30 @@ Every iteration: mint by the engine (25 planned steps), screenshot every set + d
 | 4 → 5 | Input Status=Error cell grey (`iter4/input.triptych.png`) | unset-plane map merged after the error map | defaultless-axis maps sort last | finals (`*.png`, `*.triptych.png`): Input 1.1% |
 
 Final verdicts (the canvas DEFAULT cell beside the sandbox render of the same combo): Button ✔ (types/sizes/danger/dashed; 17% AA is glyph edges + the library's shadow) · Tag ✔ 1.9% · Badge ✔ 5.4% (the "5") · Switch ✔ (knob shadow named) · Checkbox ✔ (tick and indeterminate square) · Radio ✔ (white dot) · Input ✔ 1.1% · Alert ✔ 0.8% · Avatar ✔ 0.0% · Progress ✔ 3.4% · Card ✔ 1.5% · Tooltip ✔ (arrow side = the capture's flipped placement). The engine mints one page per component; the finals were moved onto page `antd exam 2026-08-23` (12 sections) and the per-component pages removed — every superseded mint deleted before the next.
+
+## Screenshots
+
+The pair per set: `canvas` is the minted set's DEFAULT cell exported from the
+Figma file (`exportAsync` scale 1), `reference` is the sandbox's real render of
+the same combo (the orig-shot the parity scorer read, copied beside this
+receipt from `extract/computed/out/antd/<component>/orig-shots/`). The scored
+numbers and the ±2px content-box verdicts are `antd/visual-parity.json`; the
+`*.triptych.png` files show canvas | library | diff.
+
+| set | canvas | reference | note |
+|---|---|---|---|
+| Button | antd/button-cell.png | antd/button-library.png | default cell `default.middle.safe.off.off.enabled__default`, 17.37% AA; diff in `antd/button.triptych.png` |
+| Tag | antd/tag-cell.png | antd/tag-library.png | default cell `blue.bordered.off__default`, 1.89% AA; diff in `antd/tag.triptych.png` |
+| Badge | antd/badge-cell.png | antd/badge-library.png | default cell `count.blue__default`, 5.35% AA; diff in `antd/badge.triptych.png` |
+| Switch | antd/switch-cell.png | antd/switch-library.png | default cell `default.unchecked.enabled__default`, 9.07% AA; diff in `antd/switch.triptych.png` |
+| Checkbox | antd/checkbox-cell.png | antd/checkbox-library.png | default cell `unchecked.enabled__default`, 18.82% AA; diff in `antd/checkbox.triptych.png` |
+| Radio | antd/radio-cell.png | antd/radio-library.png | default cell `unchecked.enabled__default`, 16.15% AA; diff in `antd/radio.triptych.png` |
+| Input | antd/input-cell.png | antd/input-library.png | default cell `middle.error.outlined.enabled__default`, 1.11% AA; diff in `antd/input.triptych.png` |
+| Alert | antd/alert-cell.png | antd/alert-library.png | default cell `info.noIcon.off.off__default`, 0.8% AA; diff in `antd/alert.triptych.png` |
+| Avatar | antd/avatar-cell.png | antd/avatar-library.png | default cell `default.circle__default`, 0% AA; diff in `antd/avatar.triptych.png` |
+| Progress | antd/progress-cell.png | antd/progress-library.png | default cell `unset__default`, 3.44% AA; diff in `antd/progress.triptych.png` |
+| Card | antd/card-cell.png | antd/card-library.png | default cell `default.outlined__default`, 1.48% AA; diff in `antd/card.triptych.png` |
+| Tooltip | antd/tooltip.png | antd/tooltip-library.png | default cell `__default`, 11.5% AA; diff in `antd/tooltip.triptych.png` |
 
 ## 7. Round trip (the idempotence measure)
 
