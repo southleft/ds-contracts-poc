@@ -1,0 +1,44 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "9 color/size cells match; Active/Focus Visible ring carried as spread-4 shadow (export bounds grow 8px), faint vs code render",
+ "reviewedAt": "ad1e0fbb",
+ "setNodeId": "39:5969",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-tailwind-flowbite.button.dump.json",
+  "matched": 7,
+  "diverged": [
+   "prop size type \u2014 {\"enum\":[\"xs\",\"sm\",\"md\",\"lg\",\"xl\"]} vs {\"enum\":[\"md\",\"xs\",\"sm\",\"lg\",\"xl\"]}",
+   "prop size bindings.figma.values \u2014 {\"xs\":\"Xs\",\"sm\":\"Sm\",\"md\":\"Md\",\"lg\":\"Lg\",\"xl\":\"Xl\"} vs {\"md\":\"Md\",\"xs\":\"Xs\",\"sm\":\"Sm\",\"lg\":\"Lg\",\"xl\":\"Xl\"}",
+   "part root border-bottom-left-radius \u2014 {imported.shared.size-8} missing from proposal",
+   "part root border-bottom-right-radius \u2014 {imported.shared.size-8} missing from proposal",
+   "part root border-top-left-radius \u2014 {imported.shared.size-8} missing from proposal",
+   "part root border-top-right-radius \u2014 {imported.shared.size-8} missing from proposal",
+   "part root bottom \u2014 {imported.shared.size-0} missing from proposal",
+   "part root left \u2014 {imported.shared.size-0} missing from proposal",
+   "part root right \u2014 {imported.shared.size-0} missing from proposal",
+   "part root top \u2014 {imported.shared.size-0} missing from proposal",
+   "part root background-color \u2014 proposal has {imported.button.root.background-color.{color}}, contract has nothing",
+   "part root border-color \u2014 proposal has {imported.button.root.border-top-color.{color}}, contract has nothing",
+   "part root padding-left \u2014 proposal has {imported.button.root.padding-left.{size}}, contract has nothing",
+   "part root padding-right \u2014 proposal has {imported.button.root.padding-right.{size}}, contract has nothing",
+   "part root border-radius \u2014 proposal has {imported.shared.size-8}, contract has nothing",
+   "part root border-top-width \u2014 proposal has {imported.button.root.border-top-width.{color}}, contract has nothing",
+   "part root border-right-width \u2014 proposal has {imported.button.root.border-right-width.{color}}, contract has nothing",
+   "part root border-bottom-width \u2014 proposal has {imported.button.root.border-bottom-width.{color}}, contract has nothing",
+   "part root border-left-width \u2014 proposal has {imported.button.root.border-left-width.{color}}, contract has nothing",
+   "part root line-height \u2014 proposal has {imported.button.root.line-height.{size}}, contract has nothing",
+   "part root content \u2014 {\"prop\":\"children\"} vs undefined",
+   "text root color (effective) \u2014 proposal has {imported.button.root.color.{color}}, contract has nothing",
+   "text root font-size (effective) \u2014 proposal has {imported.button.root.font-size.{size}}, contract has nothing"
+  ],
+  "lost": [
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`part root states` \u2014 interaction-state token overrides are code-side (CSS)",
+   "`Button:root (state active)` effects = `0px 0px 0px #00000000, 0px 0px 0px #00000000, 0px 0px 0px #00000000, 0px 0px 0px 4px #a4cafe, 0px 0px 0px #00000000` \u2014 nearest tokens: `{radius.banner.section}`, `{radius.none}`",
+   "`Button:root (state focus-visible)` effects = `0px 0px 0px #00000000, 0px 0px 0px #00000000, 0px 0px 0px #00000000, 0px 0px 0px 4px #a4cafe, 0px 0px 0px #00000000` \u2014 nearest tokens: `{radius.banner.section}`, `{radius.no",
+   "`Button:root (state disabled)` opacity = `0.5` \u2014 nearest tokens: `{opacity.disabled}`"
+  ],
+  "identicalToCommittedBaseline": true
+ }
+}
