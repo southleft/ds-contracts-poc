@@ -19693,6 +19693,17 @@
         {
           "part": "root",
           "kind": "channel",
+          "channel": "size [unset]",
+          "value": "24|48|96",
+          "reason": "defaultless axis — the library's own rendering when \"size\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 3 declared values only, and a proposal read back from the canvas will call \"24\" the default (FC-UNSET-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 18,
+            "of": 18
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
           "channel": "top",
           "value": "{imported.shared.size-0}",
           "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -23882,6 +23893,17 @@
       "facts": [
         {
           "part": "label",
+          "kind": "channel",
+          "channel": "color [disabled]",
+          "value": "{imported.tab-list.label.color-state-disabled}",
+          "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "label",
           "kind": "declared",
           "channel": "cursor",
           "value": "not-allowed",
@@ -23908,6 +23930,17 @@
           "channel": "display",
           "value": "block",
           "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "label-2",
+          "kind": "channel",
+          "channel": "color [disabled]",
+          "value": "{imported.tab-list.label-2.color-state-disabled}",
+          "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
           "variants": {
             "count": 24,
             "of": 24

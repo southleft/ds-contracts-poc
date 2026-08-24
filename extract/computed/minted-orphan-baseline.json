@@ -7,6 +7,11 @@
       "unreferenced": 38
     },
     {
+      "library": "antd",
+      "leaves": 1279,
+      "unreferenced": 64
+    },
+    {
       "library": "astryx",
       "leaves": 320,
       "unreferenced": 8
@@ -28,7 +33,7 @@
     },
     {
       "library": "mui",
-      "leaves": 1986,
+      "leaves": 1993,
       "unreferenced": 373
     },
     {
@@ -43,7 +48,7 @@
     },
     {
       "library": "tailwind",
-      "leaves": 236,
+      "leaves": 263,
       "unreferenced": 2
     }
   ]

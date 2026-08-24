@@ -19,6 +19,13 @@
       "contracts": 8
     },
     {
+      "library": "antd",
+      "contractsDir": "examples/antd/contracts",
+      "figmaDir": "examples/antd/figma",
+      "bundlePath": "examples/antd/figma/antd.bundle.json",
+      "contracts": 12
+    },
+    {
       "library": "astryx",
       "contractsDir": "examples/astryx/contracts",
       "figmaDir": "examples/astryx/figma",
@@ -1489,6 +1496,384 @@
       "stateVariantCount": 6,
       "compileRefusal": null,
       "scriptVariantRows": 9
+    },
+    {
+      "id": "antd.alert",
+      "name": "Alert",
+      "library": "antd",
+      "contractPath": "examples/antd/contracts/alert.contract.json",
+      "figmaScriptPath": "examples/antd/figma/alert.figma.js",
+      "bundlePath": "examples/antd/figma/antd.bundle.json",
+      "archetype": "banner / alert / toast",
+      "variantAxes": 2,
+      "axes": [
+        {
+          "prop": "type",
+          "figmaProperty": "Type",
+          "values": [
+            "success",
+            "info",
+            "warning",
+            "error"
+          ]
+        },
+        {
+          "prop": "showIcon",
+          "figmaProperty": "Show Icon",
+          "values": [
+            "noIcon",
+            "icon"
+          ]
+        }
+      ],
+      "variantCount": 8,
+      "stateVariantCount": 0,
+      "compileRefusal": null,
+      "scriptVariantRows": 8
+    },
+    {
+      "id": "antd.avatar",
+      "name": "Avatar",
+      "library": "antd",
+      "contractPath": "examples/antd/contracts/avatar.contract.json",
+      "figmaScriptPath": "examples/antd/figma/avatar.figma.js",
+      "bundlePath": "examples/antd/figma/antd.bundle.json",
+      "archetype": "avatar",
+      "variantAxes": 2,
+      "axes": [
+        {
+          "prop": "size",
+          "figmaProperty": "Size",
+          "values": [
+            "small",
+            "default",
+            "large"
+          ]
+        },
+        {
+          "prop": "shape",
+          "figmaProperty": "Shape",
+          "values": [
+            "circle",
+            "square"
+          ]
+        }
+      ],
+      "variantCount": 6,
+      "stateVariantCount": 0,
+      "compileRefusal": null,
+      "scriptVariantRows": 6
+    },
+    {
+      "id": "antd.badge",
+      "name": "Badge",
+      "library": "antd",
+      "contractPath": "examples/antd/contracts/badge.contract.json",
+      "figmaScriptPath": "examples/antd/figma/badge.figma.js",
+      "bundlePath": "examples/antd/figma/antd.bundle.json",
+      "archetype": "badge / tag / chip",
+      "variantAxes": 2,
+      "axes": [
+        {
+          "prop": "mode",
+          "figmaProperty": "Mode",
+          "values": [
+            "count",
+            "dot"
+          ]
+        },
+        {
+          "prop": "color",
+          "figmaProperty": "Color",
+          "values": [
+            "blue",
+            "green",
+            "purple"
+          ]
+        }
+      ],
+      "variantCount": 6,
+      "stateVariantCount": 0,
+      "compileRefusal": null,
+      "scriptVariantRows": 6
+    },
+    {
+      "id": "antd.button",
+      "name": "Button",
+      "library": "antd",
+      "contractPath": "examples/antd/contracts/button.contract.json",
+      "figmaScriptPath": "examples/antd/figma/button.figma.js",
+      "bundlePath": "examples/antd/figma/antd.bundle.json",
+      "archetype": "button",
+      "variantAxes": 3,
+      "axes": [
+        {
+          "prop": "type",
+          "figmaProperty": "Type",
+          "values": [
+            "default",
+            "primary",
+            "dashed",
+            "link",
+            "text"
+          ]
+        },
+        {
+          "prop": "size",
+          "figmaProperty": "Size",
+          "values": [
+            "small",
+            "middle",
+            "large"
+          ]
+        },
+        {
+          "prop": "danger",
+          "figmaProperty": "Danger",
+          "values": [
+            "safe",
+            "danger"
+          ]
+        }
+      ],
+      "variantCount": 30,
+      "stateVariantCount": 0,
+      "compileRefusal": null,
+      "scriptVariantRows": 30
+    },
+    {
+      "id": "antd.card",
+      "name": "Card",
+      "library": "antd",
+      "contractPath": "examples/antd/contracts/card.contract.json",
+      "figmaScriptPath": "examples/antd/figma/card.figma.js",
+      "bundlePath": "examples/antd/figma/antd.bundle.json",
+      "archetype": "card",
+      "variantAxes": 2,
+      "axes": [
+        {
+          "prop": "size",
+          "figmaProperty": "Size",
+          "values": [
+            "default",
+            "small"
+          ]
+        },
+        {
+          "prop": "variant",
+          "figmaProperty": "Variant",
+          "values": [
+            "outlined",
+            "borderless"
+          ]
+        }
+      ],
+      "variantCount": 4,
+      "stateVariantCount": 0,
+      "compileRefusal": null,
+      "scriptVariantRows": 4
+    },
+    {
+      "id": "antd.checkbox",
+      "name": "Checkbox",
+      "library": "antd",
+      "contractPath": "examples/antd/contracts/checkbox.contract.json",
+      "figmaScriptPath": "examples/antd/figma/checkbox.figma.js",
+      "bundlePath": "examples/antd/figma/antd.bundle.json",
+      "archetype": "checkbox / radio",
+      "variantAxes": 1,
+      "axes": [
+        {
+          "prop": "checked",
+          "figmaProperty": "Checked",
+          "values": [
+            "unchecked",
+            "checked",
+            "indeterminate"
+          ]
+        }
+      ],
+      "variantCount": 3,
+      "stateVariantCount": 0,
+      "compileRefusal": null,
+      "scriptVariantRows": 3
+    },
+    {
+      "id": "antd.input",
+      "name": "Input",
+      "library": "antd",
+      "contractPath": "examples/antd/contracts/input.contract.json",
+      "figmaScriptPath": "examples/antd/figma/input.figma.js",
+      "bundlePath": "examples/antd/figma/antd.bundle.json",
+      "archetype": "input / field",
+      "variantAxes": 3,
+      "axes": [
+        {
+          "prop": "size",
+          "figmaProperty": "Size",
+          "values": [
+            "small",
+            "middle",
+            "large"
+          ]
+        },
+        {
+          "prop": "status",
+          "figmaProperty": "Status",
+          "values": [
+            "error",
+            "warning"
+          ]
+        },
+        {
+          "prop": "variant",
+          "figmaProperty": "Variant",
+          "values": [
+            "outlined",
+            "borderless",
+            "filled",
+            "underlined"
+          ]
+        }
+      ],
+      "variantCount": 24,
+      "stateVariantCount": 16,
+      "compileRefusal": null,
+      "scriptVariantRows": 40
+    },
+    {
+      "id": "antd.progress",
+      "name": "Progress",
+      "library": "antd",
+      "contractPath": "examples/antd/contracts/progress.contract.json",
+      "figmaScriptPath": "examples/antd/figma/progress.figma.js",
+      "bundlePath": "examples/antd/figma/antd.bundle.json",
+      "archetype": "progress / spinner",
+      "variantAxes": 1,
+      "axes": [
+        {
+          "prop": "status",
+          "figmaProperty": "Status",
+          "values": [
+            "unset",
+            "exception",
+            "active",
+            "success"
+          ]
+        }
+      ],
+      "variantCount": 4,
+      "stateVariantCount": 0,
+      "compileRefusal": null,
+      "scriptVariantRows": 4
+    },
+    {
+      "id": "antd.radio",
+      "name": "Radio",
+      "library": "antd",
+      "contractPath": "examples/antd/contracts/radio.contract.json",
+      "figmaScriptPath": "examples/antd/figma/radio.figma.js",
+      "bundlePath": "examples/antd/figma/antd.bundle.json",
+      "archetype": "checkbox / radio",
+      "variantAxes": 1,
+      "axes": [
+        {
+          "prop": "checked",
+          "figmaProperty": "Checked",
+          "values": [
+            "unchecked",
+            "checked"
+          ]
+        }
+      ],
+      "variantCount": 2,
+      "stateVariantCount": 0,
+      "compileRefusal": null,
+      "scriptVariantRows": 2
+    },
+    {
+      "id": "antd.switch",
+      "name": "Switch",
+      "library": "antd",
+      "contractPath": "examples/antd/contracts/switch.contract.json",
+      "figmaScriptPath": "examples/antd/figma/switch.figma.js",
+      "bundlePath": "examples/antd/figma/antd.bundle.json",
+      "archetype": "toggle / switch",
+      "variantAxes": 2,
+      "axes": [
+        {
+          "prop": "size",
+          "figmaProperty": "Size",
+          "values": [
+            "default",
+            "small"
+          ]
+        },
+        {
+          "prop": "checked",
+          "figmaProperty": "Checked",
+          "values": [
+            "unchecked",
+            "checked"
+          ]
+        }
+      ],
+      "variantCount": 4,
+      "stateVariantCount": 8,
+      "compileRefusal": null,
+      "scriptVariantRows": 12
+    },
+    {
+      "id": "antd.tag",
+      "name": "Tag",
+      "library": "antd",
+      "contractPath": "examples/antd/contracts/tag.contract.json",
+      "figmaScriptPath": "examples/antd/figma/tag.figma.js",
+      "bundlePath": "examples/antd/figma/antd.bundle.json",
+      "archetype": "badge / tag / chip",
+      "variantAxes": 2,
+      "axes": [
+        {
+          "prop": "color",
+          "figmaProperty": "Color",
+          "values": [
+            "blue",
+            "green",
+            "red",
+            "gold",
+            "success",
+            "processing",
+            "error"
+          ]
+        },
+        {
+          "prop": "bordered",
+          "figmaProperty": "Bordered",
+          "values": [
+            "bordered",
+            "borderless"
+          ]
+        }
+      ],
+      "variantCount": 14,
+      "stateVariantCount": 0,
+      "compileRefusal": null,
+      "scriptVariantRows": 14
+    },
+    {
+      "id": "antd.tooltip",
+      "name": "Tooltip",
+      "library": "antd",
+      "contractPath": "examples/antd/contracts/tooltip.contract.json",
+      "figmaScriptPath": "examples/antd/figma/tooltip.figma.js",
+      "bundlePath": "examples/antd/figma/antd.bundle.json",
+      "archetype": "tooltip / popover",
+      "variantAxes": 0,
+      "axes": [],
+      "variantCount": 1,
+      "stateVariantCount": 0,
+      "compileRefusal": null,
+      "scriptVariantRows": 1
     },
     {
       "id": "astryx.badge",

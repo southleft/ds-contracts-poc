@@ -402,7 +402,7 @@ name** rather than folded into an average.
 
 Source of truth: the `CaptureConfig` / `ComponentConfig` interfaces in
 [`extract/computed/capture.ts`](../extract/computed/capture.ts). Worked
-examples: the 9 committed capture configs in `extract/computed/configs/`
+examples: the 10 committed capture configs in `extract/computed/configs/`
 (`carbon`, `mui`, `tailwind`, `astryx`, `polaris`, `polaris-depth`, `altitude`,
 `shadcn`, `fluent`)
 — read the one whose styling method is closest to yours before writing a line

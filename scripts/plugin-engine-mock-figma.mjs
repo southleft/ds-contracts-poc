@@ -912,6 +912,17 @@ export function createFigmaMock(options = {}) {
       return this._shared.get(`${namespace}/${key}`) ?? '';
     }
 
+    // Unshared plugin data (PluginDataMixin) — the antd exam's meter post-pass
+    // stamps the fraction on the fill node and re-applies it once the tree
+    // has laid out; the real API has it, so the mock does too.
+    setPluginData(key, value) {
+      this._shared.set(`\u0000/${key}`, value);
+    }
+
+    getPluginData(key) {
+      return this._shared.get(`\u0000/${key}`) ?? '';
+    }
+
     setBoundVariable(field, variable) {
       if (variable == null) {
         delete this.boundVariables[field];

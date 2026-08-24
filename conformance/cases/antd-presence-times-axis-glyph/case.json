@@ -1,0 +1,18 @@
+{
+  "id": "antd-presence-times-axis-glyph",
+  "feature": "anatomy",
+  "construct": "a child part whose PRESENCE is one prop (showIcon) and whose paint is ANOTHER (type) \u2014 the base (default) combo mounts without it (antd Alert)",
+  "why": "Two props factor one part. If the presence set does not factor, the refusal must name it; a base-hidden part that never restores is FC-BASE-HIDDEN-RESTORE. With NO prop space in this fixture the part is simply absent at base and present in CSS only behind a class the fixture never mounts \u2014 the engine must either carry nothing and say nothing (no phantom) or name the absent part. The observable below is the VISIBLE sibling: it must carry, and no phantom glyph part may appear beside it (P2 exam S3).",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a.tokens.color",
+  "observable": {
+    "part": "a",
+    "channel": "color",
+    "capturedValue": "rgba(0, 0, 0, 0.88)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the message text is real ink; the never-mounted icon must not be drawn as a phantom 0-size part"
+  }
+}

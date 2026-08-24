@@ -1,0 +1,97 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "antd.alert",
+  "name": "Alert",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). MOLECULE, PRESENCE-HEAVY (the Polaris Banner precedent). The icon GLYPH is a function of `type` AND its presence a function of `showIcon` — `showIcon` is modelled as a 2-value ENUM AXIS (noIcon|icon; config maps to the boolean) rather than presence so the glyph stays a ONE-axis function of `type` (svg-content per-value glyph parts). `description` and `closable` are PRESENCE props (each adds a part; the close button has its own hover plane — descendant state). antd's runtime default type is `info`.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "type",
+      "type": {
+        "enum": [
+          "success",
+          "info",
+          "warning",
+          "error"
+        ]
+      },
+      "default": "info",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Type",
+          "values": {
+            "success": "Success",
+            "info": "Info",
+            "warning": "Warning",
+            "error": "Error"
+          }
+        },
+        "code": {
+          "prop": "type"
+        }
+      }
+    },
+    {
+      "name": "showIcon",
+      "type": {
+        "enum": [
+          "noIcon",
+          "icon"
+        ]
+      },
+      "default": "noIcon",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Show Icon",
+          "values": {
+            "noIcon": "NoIcon",
+            "icon": "Icon"
+          }
+        },
+        "code": {
+          "prop": "showIcon"
+        }
+      }
+    },
+    {
+      "name": "message",
+      "type": "text",
+      "default": "Alert message",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Message"
+        },
+        "code": {
+          "prop": "message"
+        }
+      }
+    }
+  ],
+  "states": [
+    "hover"
+  ],
+  "anatomy": {
+    "root": {}
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "antd",
+        "export": "Alert"
+      }
+    }
+  }
+}

@@ -1,0 +1,246 @@
+{
+  "id": "antd.switch",
+  "name": "Switch",
+  "library": "antd",
+  "contractPath": "examples/antd/contracts/switch.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/antd/figma/antd.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 12,
+      "sampled": 7,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "default"
+      },
+      {
+        "name": "checked",
+        "type": "enum",
+        "default": "unchecked"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "states": [
+      "disabled",
+      "focus-visible",
+      "active",
+      "hover"
+    ],
+    "parts": [
+      "root",
+      "switch-handle",
+      "switch-handle-before",
+      "switch-inner",
+      "switch-inner-checked",
+      "switch-inner-unchecked"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.shared.color-000000e0",
+      "imported.shared.size-0",
+      "imported.shared.size-100",
+      "imported.shared.size-14",
+      "imported.switch.root.background-color.checked",
+      "imported.switch.root.background-color.unchecked",
+      "imported.switch.root.height.default",
+      "imported.switch.root.height.small",
+      "imported.switch.root.line-height.default",
+      "imported.switch.root.line-height.small",
+      "imported.switch.root.min-width.default",
+      "imported.switch.root.min-width.small",
+      "imported.switch.root.opacity-state-disabled",
+      "imported.switch.root.outline-color-state-focus-visible",
+      "imported.switch.root.outline-offset-state-focus-visible",
+      "imported.switch.root.outline-width-state-focus-visible",
+      "imported.switch.root.width.default",
+      "imported.switch.root.width.small",
+      "imported.switch.switch-handle.bottom",
+      "imported.switch.switch-handle.height.default",
+      "imported.switch.switch-handle.height.small",
+      "imported.switch.switch-handle.line-height.default",
+      "imported.switch.switch-handle.line-height.small",
+      "imported.switch.switch-handle.top",
+      "imported.switch.switch-handle.width.default",
+      "imported.switch.switch-handle.width.small",
+      "imported.switch.switch-inner-checked.color",
+      "imported.switch.switch-inner-checked.font-size",
+      "imported.switch.switch-inner-checked.height.default",
+      "imported.switch.switch-inner-checked.height.small",
+      "imported.switch.switch-inner-checked.line-height.default",
+      "imported.switch.switch-inner-checked.line-height.small",
+      "imported.switch.switch-inner-checked.min-height.default",
+      "imported.switch.switch-inner-checked.min-height.small",
+      "imported.switch.switch-inner-checked.width.default",
+      "imported.switch.switch-inner-checked.width.small",
+      "imported.switch.switch-inner-unchecked.color",
+      "imported.switch.switch-inner-unchecked.font-size",
+      "imported.switch.switch-inner-unchecked.height.default",
+      "imported.switch.switch-inner-unchecked.height.small",
+      "imported.switch.switch-inner-unchecked.line-height.default",
+      "imported.switch.switch-inner-unchecked.line-height.small",
+      "imported.switch.switch-inner-unchecked.margin-top.default",
+      "imported.switch.switch-inner-unchecked.margin-top.small",
+      "imported.switch.switch-inner-unchecked.min-height.default",
+      "imported.switch.switch-inner-unchecked.min-height.small",
+      "imported.switch.switch-inner-unchecked.width.default",
+      "imported.switch.switch-inner-unchecked.width.small",
+      "imported.switch.switch-inner.height.default",
+      "imported.switch.switch-inner.height.small",
+      "imported.switch.switch-inner.line-height.default",
+      "imported.switch.switch-inner.line-height.small",
+      "imported.switch.switch-inner.width.default",
+      "imported.switch.switch-inner.width.small"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "size-default__checked-unchecked",
+      "variant": "Size=Default, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-default__checked-unchecked.png",
+      "contentBox": {
+        "width": 57,
+        "height": 22
+      }
+    },
+    {
+      "slug": "size-default__checked-checked",
+      "variant": "Size=Default, Checked=Checked",
+      "kind": "base",
+      "subst": {
+        "size": "default",
+        "checked": "checked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-default__checked-checked.png",
+      "contentBox": {
+        "width": 57,
+        "height": 22
+      }
+    },
+    {
+      "slug": "size-small__checked-unchecked",
+      "variant": "Size=Small, Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "size": "small",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-small__checked-unchecked.png",
+      "contentBox": {
+        "width": 34,
+        "height": 16
+      }
+    },
+    {
+      "slug": "size-default__checked-unchecked__state-disabled",
+      "variant": "Size=Default, Checked=Unchecked, State=Disabled",
+      "kind": "state",
+      "state": "disabled",
+      "subst": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "bools": {
+        "disabled": true
+      },
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-default__checked-unchecked__state-disabled.png",
+      "contentBox": {
+        "width": 57,
+        "height": 22
+      }
+    },
+    {
+      "slug": "size-default__checked-unchecked__state-focus-visible",
+      "variant": "Size=Default, Checked=Unchecked, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "subst": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "focus-visible",
+      "status": "rendered",
+      "png": "code-size-default__checked-unchecked__state-focus-visible.png",
+      "contentBox": {
+        "width": 57,
+        "height": 22
+      }
+    },
+    {
+      "slug": "size-default__checked-unchecked__state-active",
+      "variant": "Size=Default, Checked=Unchecked, State=Active",
+      "kind": "state",
+      "state": "active",
+      "subst": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "active",
+      "status": "rendered",
+      "png": "code-size-default__checked-unchecked__state-active.png",
+      "contentBox": {
+        "width": 57,
+        "height": 22
+      }
+    },
+    {
+      "slug": "size-default__checked-unchecked__state-hover",
+      "variant": "Size=Default, Checked=Unchecked, State=Hover",
+      "kind": "state",
+      "state": "hover",
+      "subst": {
+        "size": "default",
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "hover",
+      "status": "rendered",
+      "png": "code-size-default__checked-unchecked__state-hover.png",
+      "contentBox": {
+        "width": 57,
+        "height": 22
+      }
+    }
+  ],
+  "rendered": 7,
+  "refused": 0,
+  "unavailable": null
+}

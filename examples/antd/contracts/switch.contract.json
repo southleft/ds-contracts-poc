@@ -1,0 +1,509 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "antd.switch",
+  "name": "Switch",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). THE PSEUDO-THUMB CASE (FC-PSEUDO-THUMB / docs/23 §B.4): the visible knob is `.ant-switch-handle::before`, and the handle inset is a size×checked product. `checked` is a VARIANT AXIS (unchecked|checked, the MUI Switch state-plane reclassification), controlled with a no-op onChange. `size` is antd's own 2-value enum (default|small). NAMED OUT: `loading` (forces ant-switch-disabled — the enabled-loading rendering is unobservable, the TablePagination arrow precedent), checkedChildren/unCheckedChildren. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/antd/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Ant Design's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "default",
+          "small"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "default": "Default",
+            "small": "Small"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "checked",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked"
+          }
+        },
+        "code": {
+          "prop": "checked"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible",
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "border-bottom-style": "none",
+        "border-left-style": "none",
+        "border-right-style": "none",
+        "border-top-style": "none",
+        "cursor": "pointer",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
+        "position": "relative",
+        "transition-duration": "0.2s",
+        "user-select": "none"
+      },
+      "parts": {
+        "switch-handle": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|switch-handle — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "position": "absolute",
+            "aspect-ratio": "1 / 1",
+            "box-sizing": "border-box",
+            "cursor": "pointer",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "text-align": "center",
+            "transition-duration": "0.2s",
+            "transition-timing-function": "ease-in-out",
+            "user-select": "none"
+          },
+          "parts": {
+            "switch-handle-before": {
+              "shape": {
+                "kind": "ellipse",
+                "width": 18,
+                "height": 18
+              },
+              "declared": {
+                "position": "absolute"
+              },
+              "literals": {
+                "background-color": "rgba(255, 255, 255, 1)",
+                "border-top-width": "0px",
+                "border-right-width": "0px",
+                "border-bottom-width": "0px",
+                "border-left-width": "0px",
+                "top": "0px",
+                "left": "0px",
+                "width": "18px",
+                "height": "18px"
+              },
+              "literalsByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "default": {
+                      "width": "18px",
+                      "height": "18px"
+                    },
+                    "small": {
+                      "width": "12px",
+                      "height": "12px"
+                    }
+                  }
+                }
+              ],
+              "description": "Drawn ::before pseudo-element decor promoted from the computed floor (pseudo-decor v2, Carbon live-defect round + Wave B.2): an UNCONDITIONAL 18×18 ellipse at 0,0 inside switch-handle — position:absolute with literal offsets, per-value size overrides; rotation 0; background+border+box+radius only, no content text; translate folded into top/left (receipted)."
+            }
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed"
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.switch.switch-handle.bottom}",
+            "color": "{imported.shared.color-000000e0}",
+            "font-size": "{imported.shared.size-14}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "top": "{imported.switch.switch-handle.top}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "checked",
+              "map": {
+                "checked": {
+                  "left": "{imported.switch.switch-handle.left.{size}.checked}",
+                  "right": "{imported.switch.switch-handle.right.{size}.checked}"
+                },
+                "unchecked": {
+                  "left": "{imported.switch.switch-handle.left.{size}.unchecked}",
+                  "right": "{imported.switch.switch-handle.right.{size}.unchecked}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "default": {
+                  "height": "{imported.switch.switch-handle.height.default}",
+                  "line-height": "{imported.switch.switch-handle.line-height.default}",
+                  "width": "{imported.switch.switch-handle.width.default}"
+                },
+                "small": {
+                  "height": "{imported.switch.switch-handle.height.small}",
+                  "line-height": "{imported.switch.switch-handle.line-height.small}",
+                  "width": "{imported.switch.switch-handle.width.small}"
+                }
+              }
+            }
+          ]
+        },
+        "switch-inner": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|switch-inner — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "cursor": "pointer",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "text-align": "center",
+            "transition-delay": "0s, 0s",
+            "transition-duration": "0.2s, 0.2s",
+            "transition-property": "padding-inline-start, padding-inline-end",
+            "transition-timing-function": "ease-in-out, ease-in-out",
+            "user-select": "none"
+          },
+          "parts": {
+            "switch-inner-checked": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|switch-inner-checked — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "box-sizing": "border-box",
+                "cursor": "pointer",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                "pointer-events": "none",
+                "text-align": "center",
+                "transition-delay": "0s, 0s",
+                "transition-duration": "0.2s, 0.2s",
+                "transition-property": "margin-inline-start, margin-inline-end",
+                "transition-timing-function": "ease-in-out, ease-in-out",
+                "user-select": "none"
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "not-allowed"
+                }
+              },
+              "tokens": {
+                "color": "{imported.switch.switch-inner-checked.color}",
+                "font-size": "{imported.switch.switch-inner-checked.font-size}",
+                "min-width": "{imported.shared.size-0}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "checked",
+                  "map": {
+                    "checked": {
+                      "margin-left": "{imported.switch.switch-inner-checked.margin-left.{size}.checked}",
+                      "margin-right": "{imported.switch.switch-inner-checked.margin-right.{size}.checked}"
+                    },
+                    "unchecked": {
+                      "margin-left": "{imported.switch.switch-inner-checked.margin-left.{size}.unchecked}",
+                      "margin-right": "{imported.switch.switch-inner-checked.margin-right.{size}.unchecked}"
+                    }
+                  }
+                },
+                {
+                  "prop": "size",
+                  "map": {
+                    "default": {
+                      "height": "{imported.switch.switch-inner-checked.height.default}",
+                      "line-height": "{imported.switch.switch-inner-checked.line-height.default}",
+                      "min-height": "{imported.switch.switch-inner-checked.min-height.default}",
+                      "width": "{imported.switch.switch-inner-checked.width.default}"
+                    },
+                    "small": {
+                      "height": "{imported.switch.switch-inner-checked.height.small}",
+                      "line-height": "{imported.switch.switch-inner-checked.line-height.small}",
+                      "min-height": "{imported.switch.switch-inner-checked.min-height.small}",
+                      "width": "{imported.switch.switch-inner-checked.width.small}"
+                    }
+                  }
+                }
+              ],
+              "codeOnly": [
+                {
+                  "state": "active",
+                  "channel": "margin-left",
+                  "value": "{imported.switch.switch-inner-checked.margin-left-state-active.{size}.{checked}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "active",
+                  "channel": "margin-right",
+                  "value": "{imported.switch.switch-inner-checked.margin-right-state-active.{size}.{checked}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
+              ]
+            },
+            "switch-inner-unchecked": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|switch-inner-unchecked — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "box-sizing": "border-box",
+                "cursor": "pointer",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                "pointer-events": "none",
+                "text-align": "center",
+                "transition-delay": "0s, 0s",
+                "transition-duration": "0.2s, 0.2s",
+                "transition-property": "margin-inline-start, margin-inline-end",
+                "transition-timing-function": "ease-in-out, ease-in-out",
+                "user-select": "none"
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "not-allowed"
+                }
+              },
+              "tokens": {
+                "color": "{imported.switch.switch-inner-unchecked.color}",
+                "font-size": "{imported.switch.switch-inner-unchecked.font-size}",
+                "min-width": "{imported.shared.size-0}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "checked",
+                  "map": {
+                    "checked": {
+                      "margin-left": "{imported.switch.switch-inner-unchecked.margin-left.{size}.checked}",
+                      "margin-right": "{imported.switch.switch-inner-unchecked.margin-right.{size}.checked}"
+                    },
+                    "unchecked": {
+                      "margin-left": "{imported.switch.switch-inner-unchecked.margin-left.{size}.unchecked}",
+                      "margin-right": "{imported.switch.switch-inner-unchecked.margin-right.{size}.unchecked}"
+                    }
+                  }
+                },
+                {
+                  "prop": "size",
+                  "map": {
+                    "default": {
+                      "height": "{imported.switch.switch-inner-unchecked.height.default}",
+                      "line-height": "{imported.switch.switch-inner-unchecked.line-height.default}",
+                      "margin-top": "{imported.switch.switch-inner-unchecked.margin-top.default}",
+                      "min-height": "{imported.switch.switch-inner-unchecked.min-height.default}",
+                      "width": "{imported.switch.switch-inner-unchecked.width.default}"
+                    },
+                    "small": {
+                      "height": "{imported.switch.switch-inner-unchecked.height.small}",
+                      "line-height": "{imported.switch.switch-inner-unchecked.line-height.small}",
+                      "margin-top": "{imported.switch.switch-inner-unchecked.margin-top.small}",
+                      "min-height": "{imported.switch.switch-inner-unchecked.min-height.small}",
+                      "width": "{imported.switch.switch-inner-unchecked.width.small}"
+                    }
+                  }
+                }
+              ],
+              "codeOnly": [
+                {
+                  "state": "active",
+                  "channel": "margin-left",
+                  "value": "{imported.switch.switch-inner-unchecked.margin-left-state-active.{size}.{checked}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "active",
+                  "channel": "margin-right",
+                  "value": "{imported.switch.switch-inner-unchecked.margin-right-state-active.{size}.{checked}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
+              ]
+            }
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed"
+            }
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-100}",
+            "border-bottom-right-radius": "{imported.shared.size-100}",
+            "border-top-left-radius": "{imported.shared.size-100}",
+            "border-top-right-radius": "{imported.shared.size-100}",
+            "color": "{imported.shared.color-000000e0}",
+            "font-size": "{imported.shared.size-14}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "checked",
+              "map": {
+                "checked": {
+                  "padding-left": "{imported.switch.switch-inner.padding-left.{size}.checked}",
+                  "padding-right": "{imported.switch.switch-inner.padding-right.{size}.checked}"
+                },
+                "unchecked": {
+                  "padding-left": "{imported.switch.switch-inner.padding-left.{size}.unchecked}",
+                  "padding-right": "{imported.switch.switch-inner.padding-right.{size}.unchecked}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "default": {
+                  "height": "{imported.switch.switch-inner.height.default}",
+                  "line-height": "{imported.switch.switch-inner.line-height.default}",
+                  "width": "{imported.switch.switch-inner.width.default}"
+                },
+                "small": {
+                  "height": "{imported.switch.switch-inner.height.small}",
+                  "line-height": "{imported.switch.switch-inner.line-height.small}",
+                  "width": "{imported.switch.switch-inner.width.small}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declaredStates": {
+        "disabled": {
+          "cursor": "not-allowed"
+        },
+        "focus-visible": {
+          "outline-style": "solid",
+          "transition-delay": "0s, 0s",
+          "transition-duration": "0s, 0s",
+          "transition-property": "outline-offset, outline",
+          "transition-timing-function": "ease, ease"
+        }
+      },
+      "tokens": {
+        "border-bottom-left-radius": "{imported.shared.size-100}",
+        "border-bottom-right-radius": "{imported.shared.size-100}",
+        "border-bottom-width": "{imported.shared.size-0}",
+        "border-left-width": "{imported.shared.size-0}",
+        "border-right-width": "{imported.shared.size-0}",
+        "border-top-left-radius": "{imported.shared.size-100}",
+        "border-top-right-radius": "{imported.shared.size-100}",
+        "border-top-width": "{imported.shared.size-0}",
+        "bottom": "{imported.shared.size-0}",
+        "color": "{imported.shared.color-000000e0}",
+        "font-size": "{imported.shared.size-14}",
+        "left": "{imported.shared.size-0}",
+        "outline-color": "{imported.shared.color-000000e0}",
+        "padding-bottom": "{imported.shared.size-0}",
+        "padding-left": "{imported.shared.size-0}",
+        "padding-right": "{imported.shared.size-0}",
+        "padding-top": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      },
+      "states": {
+        "active": {
+          "background-color": "{imported.switch.root.background-color-state-active.{checked}}"
+        },
+        "disabled": {
+          "opacity": "{imported.switch.root.opacity-state-disabled}"
+        },
+        "focus-visible": {
+          "outline-color": "{imported.switch.root.outline-color-state-focus-visible}",
+          "outline-offset": "{imported.switch.root.outline-offset-state-focus-visible}",
+          "outline-width": "{imported.switch.root.outline-width-state-focus-visible}"
+        },
+        "hover": {
+          "background-color": "{imported.switch.root.background-color-state-hover.{checked}}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "checked",
+          "map": {
+            "checked": {
+              "background-color": "{imported.switch.root.background-color.checked}"
+            },
+            "unchecked": {
+              "background-color": "{imported.switch.root.background-color.unchecked}"
+            }
+          }
+        },
+        {
+          "prop": "size",
+          "map": {
+            "default": {
+              "height": "{imported.switch.root.height.default}",
+              "line-height": "{imported.switch.root.line-height.default}",
+              "min-width": "{imported.switch.root.min-width.default}",
+              "width": "{imported.switch.root.width.default}"
+            },
+            "small": {
+              "height": "{imported.switch.root.height.small}",
+              "line-height": "{imported.switch.root.line-height.small}",
+              "min-width": "{imported.switch.root.min-width.small}",
+              "width": "{imported.switch.root.width.small}"
+            }
+          }
+        }
+      ],
+      "codeOnly": [
+        {
+          "state": "focus-visible",
+          "channel": "transition-behavior",
+          "value": "normal, normal",
+          "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+        }
+      ]
+    }
+  },
+  "bindings": {
+    "figma": {
+      "statePreviews": true,
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "antd",
+        "export": "Switch"
+      }
+    }
+  }
+}

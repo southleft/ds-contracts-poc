@@ -1,0 +1,1458 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "antd@5.29.3",
+  "browser": "151.0.7922.34",
+  "mintedTokens": {
+    "imported": {
+      "alert": {
+        "root": {
+          "background-color": {
+            "success": {
+              "$value": "#f6ffed",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#e6f4ff",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#fffbe6",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#fff2f0",
+              "$type": "color"
+            }
+          },
+          "border-bottom-color": {
+            "success": {
+              "$value": "#b7eb8f",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#91caff",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ffe58f",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#ffccc7",
+              "$type": "color"
+            }
+          },
+          "border-left-color": {
+            "success": {
+              "$value": "#b7eb8f",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#91caff",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ffe58f",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#ffccc7",
+              "$type": "color"
+            }
+          },
+          "border-right-color": {
+            "success": {
+              "$value": "#b7eb8f",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#91caff",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ffe58f",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#ffccc7",
+              "$type": "color"
+            }
+          },
+          "border-top-color": {
+            "success": {
+              "$value": "#b7eb8f",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#91caff",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ffe58f",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#ffccc7",
+              "$type": "color"
+            }
+          },
+          "padding-bottom": {
+            "off": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "on": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
+          },
+          "padding-left": {
+            "off": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "on": {
+              "$value": "24px",
+              "$type": "dimension"
+            }
+          },
+          "padding-right": {
+            "off": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "on": {
+              "$value": "24px",
+              "$type": "dimension"
+            }
+          },
+          "padding-top": {
+            "off": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "on": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "$value": "288px",
+            "$type": "dimension"
+          }
+        },
+        "alert-icon": {
+          "color": {
+            "success": {
+              "$value": "#52c41a",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#1677ff",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#faad14",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#ff4d4f",
+              "$type": "color"
+            }
+          },
+          "font-size": {
+            "off": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "on": {
+              "$value": "24px",
+              "$type": "dimension"
+            }
+          },
+          "margin-right": {
+            "off": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "on": {
+              "$value": "12px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "alert-content": {
+          "flex-grow": {
+            "$value": "1",
+            "$type": "number"
+          }
+        },
+        "label": {
+          "font-size": {
+            "off": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "on": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "margin-bottom": {
+            "off": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "on": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "label-2": {
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          }
+        },
+        "alert-close-icon": {
+          "background-color": {
+            "$value": "#00000000",
+            "$type": "color"
+          }
+        },
+        "anticon": {
+          "color": {
+            "$value": "#00000073",
+            "$type": "color"
+          },
+          "vertical-align": {
+            "$value": "-1.5px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "shared": {
+        "size-8": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "size-1": {
+          "$value": "1px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "color-000000e0": {
+          "$value": "#000000e0",
+          "$type": "color"
+        },
+        "size-14": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "size-22": {
+          "$value": "22px",
+          "$type": "dimension"
+        },
+        "size-12": {
+          "$value": "12px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "alert-icon",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "alert-icon",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "alert-icon",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "alert-icon",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "alert-icon",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "alert-icon",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "alert-icon",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "alert-icon",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "alert-icon",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "alert-icon",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "alert-icon",
+      "channel": "vertical-align",
+      "foldedInto": "font-size",
+      "ratio": -0.125,
+      "class": "em-tracking"
+    },
+    {
+      "part": "icon",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "line-height",
+      "foldedInto": "font-size",
+      "ratio": 1,
+      "class": "em-tracking"
+    },
+    {
+      "part": "icon",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "line-height",
+      "foldedInto": "font-size",
+      "ratio": 1,
+      "class": "em-tracking"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "alert-content",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "alert-content",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "alert-content",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "alert-content",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "alert-content",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "alert-content",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "alert-content",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "alert-content",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "alert-content",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "alert-content",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "foldedInto": "font-size",
+      "ratio": 1.5714,
+      "class": "em-tracking"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "anticon",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "anticon",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "anticon",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "anticon",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "anticon",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "anticon",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "anticon",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "anticon",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "anticon",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "anticon",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "alert-icon",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "anticon",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "alert-content",
+        "field": "grow",
+        "value": true
+      }
+    ],
+    "contradictions": [],
+    "receipts": [
+      "layout-not-uniform: root.align-items varies across combos — stays code-only",
+      "layout-grow-carried: alert-content — flex-grow 1 in a flex row parent (root); carried as layout.grow (the canvas FILL / layoutGrow twin)"
+    ],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "alert-icon",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "alert-icon",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "alert-icon",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "alert-icon",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "alert-content",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "alert-content",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "alert-close-icon",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "alert-close-icon",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "alert-close-icon",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "alert-close-icon",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "alert-close-icon",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "alert-close-icon",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "alert-close-icon",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "anticon",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "anticon",
+        "channel": "font-family",
+        "value": "Arial"
+      },
+      {
+        "part": "anticon",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "anticon",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "anticon",
+        "channel": "transition-duration",
+        "value": "0.2s"
+      },
+      {
+        "part": "anticon",
+        "channel": "transition-property",
+        "value": "color"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "align-items",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "center",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "list-style-type",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "root",
+      "channel": "overflow-wrap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    },
+    {
+      "part": "alert-icon",
+      "channel": "list-style-type",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "alert-icon",
+      "channel": "overflow-wrap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    },
+    {
+      "part": "alert-content",
+      "channel": "flex-basis",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "0%",
+      "distinctValues": 1
+    },
+    {
+      "part": "alert-content",
+      "channel": "list-style-type",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "alert-content",
+      "channel": "overflow-wrap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "list-style-type",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "overflow-wrap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "list-style-type",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "overflow-wrap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "list-style-type",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "alert-close-icon",
+      "channel": "overflow-wrap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    },
+    {
+      "part": "anticon",
+      "channel": "list-style-type",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 1
+    },
+    {
+      "part": "anticon",
+      "channel": "overflow-wrap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [
+    {
+      "part": "root",
+      "channel": "padding-bottom",
+      "ref": "{imported.alert.root.padding-bottom.{description}}",
+      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (description present) is not"
+    },
+    {
+      "part": "root",
+      "channel": "padding-left",
+      "ref": "{imported.alert.root.padding-left.{description}}",
+      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (description present) is not"
+    },
+    {
+      "part": "root",
+      "channel": "padding-right",
+      "ref": "{imported.alert.root.padding-right.{description}}",
+      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (description present) is not"
+    },
+    {
+      "part": "root",
+      "channel": "padding-top",
+      "ref": "{imported.alert.root.padding-top.{description}}",
+      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (description present) is not"
+    },
+    {
+      "part": "alert-icon",
+      "channel": "font-size",
+      "ref": "{imported.alert.alert-icon.font-size.{description}}",
+      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (description present) is not"
+    },
+    {
+      "part": "alert-icon",
+      "channel": "margin-right",
+      "ref": "{imported.alert.alert-icon.margin-right.{description}}",
+      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (description present) is not"
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "ref": "{imported.alert.label.font-size.{description}}",
+      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (description present) is not"
+    },
+    {
+      "part": "label",
+      "channel": "margin-bottom",
+      "ref": "{imported.alert.label.margin-bottom.{description}}",
+      "refusal": "presence-prop-driven styling (description) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (description present) is not"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [
+    "alert-close-icon: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "alert-close-icon: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "alert-close-icon: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "alert-icon: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "alert-icon: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "alert-icon: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "anticon: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "anticon: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "anticon: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label-2: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label-2: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label-2: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only"
+  ],
+  "interactionOnlyPlaneDropCount": 12,
+  "structureReceipts": [
+    "union-part-added: success.noIcon.off.on__default @1 (button|alert-close-icon)",
+    "union-part-added: success.noIcon.off.on__default @1.0 (span|anticon)",
+    "union-part-added: success.noIcon.off.on__default @1.0.0 (svg|)",
+    "union-part-added: success.noIcon.off.on__default @1.0.0.0 (path|)",
+    "union-part-added: success.noIcon.on.off__default @0.1 (div|alert-description)",
+    "union-part-added: success.icon.off.off__default @0 (span|alert-icon.anticon)",
+    "union-part-added: success.icon.off.off__default @0.0 (svg|)",
+    "union-part-added: success.icon.off.off__default @0.0.0 (path|)"
+  ],
+  "styledChannelReceipts": [
+    "stage-fill-root-admitted: root — display:flex root measures exactly the stage content box (288px) in every enabled combo: it fills its container like a block root (antd Input `width: 100%`), so the captured stage width joins fusion under the block-root receipt below",
+    "block-root-width-admitted: root — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)",
+    "control-fallback: no control for <svg> — span control used (part icon)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-0)",
+    "text-part-typography-carried: label — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "text-part-typography-carried: label-2 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-fallback: no control for <svg> — span control used (part icon-2)",
+    "control-fallback: no control for <path> — span control used (part part-1-0-0-0)",
+    "geometry-excluded: alert-close-icon — block-size 12.5px, height 12.5px, inline-size 12px, perspective-origin 6px 6.25px, transform-origin 6px 6.25px, width 12px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: alert-content — block-size 22px, height 22px, inline-size 262px, perspective-origin 131px 11px, transform-origin 131px 11px, width 262px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: alert-icon — block-size 14px, height 14px, inline-size 14px, perspective-origin 7px 7px, transform-origin 7px 7px, width 14px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: anticon — block-size 12px, height 12px, inline-size 12px, perspective-origin 6px 6px, transform-origin 6px 6px, width 12px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: icon — block-size 14px, height 14px, inline-size 14px, perspective-origin 7px 7px, transform-origin 7px 7px, width 14px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: icon-2 — block-size 12px, height 12px, inline-size 12px, perspective-origin 6px 6px, transform-origin 6px 6px, width 12px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label — block-size 22px, height 22px, inline-size 262px, perspective-origin 131px 11px, transform-origin 131px 11px, width 262px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-2 — block-size 22px, height 22px, inline-size 238px, perspective-origin 119px 11px, transform-origin 119px 11px, width 238px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-0-0-0 — block-size auto, height auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px, width auto — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-1-0-0-0 — block-size auto, height auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px, width auto — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 40px, height 40px, inline-size 288px, perspective-origin 144px 20px, transform-origin 144px 20px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "webkit-prefixed-channels-refused: 3 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-font-smoothing (alert-icon, anticon, icon, icon-2, part-0-0-0, part-1-0-0-0); -webkit-text-fill-color (alert-content, alert-icon, anticon, icon, icon-2, label, label-2, part-0-0-0, part-1-0-0-0, root); -webkit-text-stroke-color (alert-content, alert-icon, anticon, icon, icon-2, label, label-2, part-0-0-0, part-1-0-0-0, root)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "inheritance-check-rejected: anticon.caret-color — values track ancestor \"alert-close-icon\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: anticon.color — values track ancestor \"alert-close-icon\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"alert-content\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"alert-content\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: alert-content.caret-color equals ancestor \"root\" on all 128 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: alert-content.color equals ancestor \"root\" on all 128 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: alert-content.font-size equals ancestor \"root\" on all 128 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: alert-content.line-height equals ancestor \"root\" on all 128 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: anticon.font-size equals ancestor \"alert-close-icon\" on all 64 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.caret-color equals ancestor \"alert-content\" on all 64 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.color equals ancestor \"alert-content\" on all 64 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.font-size equals ancestor \"alert-content\" on all 64 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.line-height equals ancestor \"alert-content\" on all 64 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: label.caret-color equals ancestor \"alert-content\" on all 128 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label.color equals ancestor \"alert-content\" on all 128 captured planes — the part carries no independent color fact (CSS inheritance, observed)"
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on no part. Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "alert-icon",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "alert-content",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "alert-close-icon",
+        "join": "computed-only"
+      },
+      {
+        "part": "anticon",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0-0-0",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "alert-icon",
+      "alert-content",
+      "label",
+      "label-2",
+      "alert-close-icon",
+      "anticon"
+    ],
+    "svgAssets": [
+      "alert-alert-icon-error",
+      "alert-alert-icon-info",
+      "alert-alert-icon-success",
+      "alert-alert-icon-warning",
+      "alert-anticon"
+    ],
+    "receipts": [
+      "presence-prop-added: description (boolean, default false; library prop description)",
+      "presence-prop-added: closable (boolean, default false; library prop closable)",
+      "svg-viewbox-bumped: Alert.alert-icon@success.icon.off.off — computed size 14 < path extent 960; viewBox reconstructed as 0 0 960 960 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.alert-icon@success.icon.off.on — computed size 14 < path extent 960; viewBox reconstructed as 0 0 960 960 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.alert-icon@success.icon.on.off — computed size 24 < path extent 960; viewBox reconstructed as 0 0 960 960 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.alert-icon@success.icon.on.on — computed size 24 < path extent 960; viewBox reconstructed as 0 0 960 960 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.alert-icon@info.icon.off.off — computed size 14 < path extent 960; viewBox reconstructed as 0 0 960 960 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.alert-icon@info.icon.off.on — computed size 14 < path extent 960; viewBox reconstructed as 0 0 960 960 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.alert-icon@info.icon.on.off — computed size 24 < path extent 960; viewBox reconstructed as 0 0 960 960 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.alert-icon@info.icon.on.on — computed size 24 < path extent 960; viewBox reconstructed as 0 0 960 960 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.alert-icon@warning.icon.off.off — computed size 14 < path extent 960; viewBox reconstructed as 0 0 960 960 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.alert-icon@warning.icon.off.on — computed size 14 < path extent 960; viewBox reconstructed as 0 0 960 960 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.alert-icon@warning.icon.on.off — computed size 24 < path extent 960; viewBox reconstructed as 0 0 960 960 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.alert-icon@warning.icon.on.on — computed size 24 < path extent 960; viewBox reconstructed as 0 0 960 960 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.alert-icon@error.icon.off.off — computed size 14 < path extent 960; viewBox reconstructed as 0 0 960 960 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.alert-icon@error.icon.off.on — computed size 14 < path extent 960; viewBox reconstructed as 0 0 960 960 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.alert-icon@error.icon.on.off — computed size 24 < path extent 960; viewBox reconstructed as 0 0 960 960 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.alert-icon@error.icon.on.on — computed size 24 < path extent 960; viewBox reconstructed as 0 0 960 960 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.anticon@success.noIcon.off.on — computed size 12 < path extent 857.69; viewBox reconstructed as 0 0 858 858 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.anticon@success.noIcon.on.on — computed size 12 < path extent 857.69; viewBox reconstructed as 0 0 858 858 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.anticon@success.icon.off.on — computed size 12 < path extent 857.69; viewBox reconstructed as 0 0 858 858 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.anticon@success.icon.on.on — computed size 12 < path extent 857.69; viewBox reconstructed as 0 0 858 858 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.anticon@info.noIcon.off.on — computed size 12 < path extent 857.69; viewBox reconstructed as 0 0 858 858 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.anticon@info.noIcon.on.on — computed size 12 < path extent 857.69; viewBox reconstructed as 0 0 858 858 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.anticon@info.icon.off.on — computed size 12 < path extent 857.69; viewBox reconstructed as 0 0 858 858 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.anticon@info.icon.on.on — computed size 12 < path extent 857.69; viewBox reconstructed as 0 0 858 858 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.anticon@warning.noIcon.off.on — computed size 12 < path extent 857.69; viewBox reconstructed as 0 0 858 858 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.anticon@warning.noIcon.on.on — computed size 12 < path extent 857.69; viewBox reconstructed as 0 0 858 858 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.anticon@warning.icon.off.on — computed size 12 < path extent 857.69; viewBox reconstructed as 0 0 858 858 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.anticon@warning.icon.on.on — computed size 12 < path extent 857.69; viewBox reconstructed as 0 0 858 858 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.anticon@error.noIcon.off.on — computed size 12 < path extent 857.69; viewBox reconstructed as 0 0 858 858 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.anticon@error.noIcon.on.on — computed size 12 < path extent 857.69; viewBox reconstructed as 0 0 858 858 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.anticon@error.icon.off.on — computed size 12 < path extent 857.69; viewBox reconstructed as 0 0 858 858 (named reconstruction)",
+      "svg-viewbox-bumped: Alert.anticon@error.icon.on.on — computed size 12 < path extent 857.69; viewBox reconstructed as 0 0 858 858 (named reconstruction)",
+      "root-display-carried: flex",
+      "aspect-carried: alert-icon computed width == height in every enabled combo (14/24px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
+      "presence-carried: alert-icon (16/32 combos) →  hidden-when showIcon=noIcon",
+      "literal-text-carried: label-2 = \"Alert description copy.\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "presence-carried: label-2 (16/32 combos) → visibleWhen description",
+      "presence-carried: alert-close-icon (16/32 combos) → visibleWhen closable",
+      "presence-carried: anticon (16/32 combos) → visibleWhen closable"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: alert-icon.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: anticon.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: alert-content.layout.grow = true (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: alert-icon.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: alert-icon.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: alert-icon.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: alert-icon.text-rendering = optimizelegibility (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: alert-content.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: alert-content.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: alert-close-icon.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: alert-close-icon.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: alert-close-icon.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: alert-close-icon.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: alert-close-icon.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: alert-close-icon.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: alert-close-icon.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: anticon.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: anticon.font-family = Arial (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: anticon.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: anticon.text-rendering = optimizelegibility (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: anticon.transition-duration = 0.2s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: anticon.transition-property = color (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "presence-off plane carried: root.padding-bottom = {imported.alert.root.padding-bottom.off} (the base rendering, presence \"description\" absent); the presence-ON plane is named residue below",
+    "presence-off plane carried: root.padding-left = {imported.alert.root.padding-left.off} (the base rendering, presence \"description\" absent); the presence-ON plane is named residue below",
+    "presence-off plane carried: root.padding-right = {imported.alert.root.padding-right.off} (the base rendering, presence \"description\" absent); the presence-ON plane is named residue below",
+    "presence-off plane carried: root.padding-top = {imported.alert.root.padding-top.off} (the base rendering, presence \"description\" absent); the presence-ON plane is named residue below",
+    "presence-off plane carried: alert-icon.font-size = {imported.alert.alert-icon.font-size.off} (the base rendering, presence \"description\" absent); the presence-ON plane is named residue below",
+    "presence-off plane carried: alert-icon.margin-right = {imported.alert.alert-icon.margin-right.off} (the base rendering, presence \"description\" absent); the presence-ON plane is named residue below",
+    "presence-off plane carried: label.font-size = {imported.alert.label.font-size.off} (the base rendering, presence \"description\" absent); the presence-ON plane is named residue below",
+    "presence-off plane carried: label.margin-bottom = {imported.alert.label.margin-bottom.off} (the base rendering, presence \"description\" absent); the presence-ON plane is named residue below"
+  ]
+}

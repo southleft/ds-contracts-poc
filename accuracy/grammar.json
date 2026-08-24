@@ -34,11 +34,11 @@
     {
       "id": "css-dom",
       "path": "conformance/MANIFEST.json",
-      "count": 82,
+      "count": 91,
       "expectations": {
-        "CARRIED": 42,
+        "CARRIED": 50,
         "LOWERED": 4,
-        "REFUSED": 18,
+        "REFUSED": 19,
         "UNSUPPORTED": 18
       }
     },
@@ -121,7 +121,7 @@
       "disposition": "NORMALIZATION",
       "appliesTo": ["diverged"],
       "channels": ["layout.mode"],
-      "valuePattern": "^NONE \u2192 (HORIZONTAL|VERTICAL)$"
+      "valuePattern": "^NONE → (HORIZONTAL|VERTICAL)$"
     },
     "cartesian-fill": {
       "disposition": "INTENTIONAL_PROJECTION",

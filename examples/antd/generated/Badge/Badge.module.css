@@ -1,0 +1,253 @@
+/* code-only facts — REFUSED BY NAME, not silently dropped:
+     translate-x: SYNTHETIC (decomposeTranslate) — folded into absolute x placement on canvas; CSS has no translate-x longhand.
+     translate-y: SYNTHETIC (decomposeTranslate) — folded into absolute y placement on canvas; CSS has no translate-y longhand.
+   CSS has no per-component translate longhand and this contract conditions
+   the components on different axes, so no single `translate:` declaration
+   can carry them. The canvas lowers them to absolute placement. */
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/badge.contract.json (antd.badge v0.2.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  bottom: var(--imported-shared-size-0);
+  color: var(--imported-badge-root-color);
+  font-size: var(--imported-shared-size-14);
+  height: var(--imported-shared-size-32);
+  left: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-32);
+  display: block;
+  box-sizing: border-box;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  position: relative;
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--imported-badge-avatar-background-color);
+  border-bottom-color: var(--imported-shared-color-00000000);
+  border-bottom-left-radius: var(--imported-shared-size-6);
+  border-bottom-right-radius: var(--imported-shared-size-6);
+  border-bottom-width: var(--imported-shared-size-1);
+  border-left-color: var(--imported-shared-color-00000000);
+  border-left-width: var(--imported-shared-size-1);
+  border-right-color: var(--imported-shared-color-00000000);
+  border-right-width: var(--imported-shared-size-1);
+  border-top-color: var(--imported-shared-color-00000000);
+  border-top-left-radius: var(--imported-shared-size-6);
+  border-top-right-radius: var(--imported-shared-size-6);
+  border-top-width: var(--imported-shared-size-1);
+  bottom: var(--imported-shared-size-0);
+  color: var(--imported-shared-color-ffffff);
+  font-size: var(--imported-shared-size-14);
+  height: var(--imported-shared-size-32);
+  left: var(--imported-shared-size-0);
+  line-height: var(--imported-badge-avatar-line-height);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-32);
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-top-style: solid;
+  box-sizing: border-box;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: relative;
+  text-align: center;
+  text-wrap-mode: nowrap;
+}
+
+.label {
+  color: var(--imported-shared-color-ffffff);
+  font-size: var(--imported-shared-size-14);
+  font-weight: var(--imported-badge-label-font-weight);
+  line-height: var(--imported-badge-label-line-height);
+  display: block;
+  box-sizing: border-box;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  text-align: center;
+  text-wrap-mode: nowrap;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+}
+
+.badge-dot {
+  background-color: var(--imported-badge-badge-dot-background-color-unset);
+  border-bottom-left-radius: var(--imported-shared-size-6);
+  border-bottom-right-radius: var(--imported-shared-size-6);
+  border-top-left-radius: var(--imported-shared-size-6);
+  border-top-right-radius: var(--imported-shared-size-6);
+  bottom: var(--imported-badge-badge-dot-bottom);
+  box-shadow: var(--imported-badge-badge-dot-box-shadow);
+  color: var(--imported-badge-badge-dot-color-unset);
+  font-size: var(--imported-badge-badge-dot-font-size);
+  height: var(--imported-shared-size-6);
+  left: var(--imported-badge-badge-dot-left);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-6);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-6);
+  display: block;
+  position: absolute;
+  box-sizing: border-box;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  transform: matrix(1, 0, 0, 1, 3, -3);
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(0.12, 0.4, 0.29, 1.46);
+}
+
+.color-blue .badge-dot {
+  background-color: var(--imported-badge-badge-dot-background-color-blue);
+}
+
+.color-blue .badge-dot {
+  color: var(--imported-badge-badge-dot-color-blue);
+}
+
+.color-green .badge-dot {
+  background-color: var(--imported-badge-badge-dot-background-color-green);
+}
+
+.color-green .badge-dot {
+  color: var(--imported-badge-badge-dot-color-green);
+}
+
+.color-purple .badge-dot {
+  background-color: var(--imported-badge-badge-dot-background-color-purple);
+}
+
+.color-purple .badge-dot {
+  color: var(--imported-badge-badge-dot-color-purple);
+}
+
+.mode-count .badge-dot {
+  display: none;
+}
+
+.badge-count {
+  display: flex;
+  justify-content: center;
+  background-color: var(--imported-badge-badge-count-background-color-unset);
+  border-bottom-left-radius: var(--imported-shared-size-10);
+  border-bottom-right-radius: var(--imported-shared-size-10);
+  border-top-left-radius: var(--imported-shared-size-10);
+  border-top-right-radius: var(--imported-shared-size-10);
+  bottom: var(--imported-shared-size-12);
+  box-shadow: var(--imported-badge-badge-count-box-shadow);
+  color: var(--imported-shared-color-ffffff);
+  font-size: var(--imported-shared-size-12);
+  height: var(--imported-shared-size-20);
+  left: var(--imported-shared-size-12);
+  line-height: var(--imported-shared-size-20);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-20);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-20);
+  position: absolute;
+  box-sizing: border-box;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  text-align: center;
+  text-wrap-mode: nowrap;
+  transform: matrix(1, 0, 0, 1, 10, -10);
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(0.12, 0.4, 0.29, 1.46);
+}
+
+.color-blue .badge-count {
+  background-color: var(--imported-badge-badge-count-background-color-blue);
+}
+
+.color-green .badge-count {
+  background-color: var(--imported-badge-badge-count-background-color-green);
+}
+
+.color-purple .badge-count {
+  background-color: var(--imported-badge-badge-count-background-color-purple);
+}
+
+.mode-dot .badge-count {
+  display: none;
+}
+
+.part-1-0 {
+  display: flex;
+  color: var(--imported-shared-color-ffffff);
+  font-size: var(--imported-shared-size-12);
+  height: var(--imported-shared-size-20);
+  line-height: var(--imported-shared-size-20);
+  width: var(--imported-badge-part-1-0-width);
+  display: block;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  text-align: center;
+  text-wrap-mode: nowrap;
+}
+
+.mode-dot .part-1-0 {
+  display: none;
+}
+
+.scroll-number-only {
+  display: flex;
+  bottom: var(--imported-shared-size-0);
+  color: var(--imported-shared-color-ffffff);
+  font-size: var(--imported-shared-size-12);
+  height: var(--imported-shared-size-20);
+  left: var(--imported-shared-size-0);
+  line-height: var(--imported-shared-size-20);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  width: var(--imported-badge-scroll-number-only-width);
+  display: inline-block;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  position: relative;
+  text-align: center;
+  text-wrap-mode: nowrap;
+  transition-property: none;
+}
+
+.mode-dot .scroll-number-only {
+  display: none;
+}
+
+.label-2 {
+  color: var(--imported-shared-color-ffffff);
+  font-size: var(--imported-shared-size-12);
+  font-weight: var(--imported-badge-label-2-font-weight);
+  line-height: var(--imported-shared-size-20);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  display: inline;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  text-align: center;
+  text-wrap-mode: nowrap;
+}
+
+.mode-dot .label-2 {
+  display: none;
+}

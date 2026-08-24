@@ -2238,7 +2238,22 @@ export function promoteAnatomy(
           Math.abs(col1 - 1) < 0.03 &&
           Math.abs(col2 - 1) < 0.03 &&
           Math.abs(m.a * m.c + m.b * m.d) < 0.03;
-        const transformOk = isTranslateOnly || isOrthonormalRotate;
+        // ANTD EXAM (heal loop, 2026-08-23 — W5, the scale half): antd's
+        // Radio reveals its dot with `transform: scale(0.375)` on a 16×16
+        // `::after` — a UNIFORM scale about the box's centre (transform-origin
+        // 50% 50%), which is exactly a smaller box at a centred offset. The
+        // fold below multiplies width/height by the scale and moves top/left
+        // by the half-difference, so the dot lands as a 6×6 white ellipse;
+        // non-uniform or skewed scales stay outside the grammar by name.
+        const isUniformScale =
+          m !== null &&
+          !isZeroScale &&
+          Math.abs(m.b) < 0.01 &&
+          Math.abs(m.c) < 0.01 &&
+          Math.abs(m.a - m.d) < 0.01 &&
+          m.a > 0.02 &&
+          m.a < 0.999;
+        const transformOk = isTranslateOnly || isOrthonormalRotate || isUniformScale;
         // PSEUDO-DECOR v2 (CARBON LIVE-DEFECT ROUND, D2) — DRAWN MEANS PAINTS
         // ANYTHING. v1 required an opaque-ish BACKGROUND, so a box made of a
         // RING was invisible to the grammar: an unchecked Carbon checkbox is
@@ -2335,15 +2350,24 @@ export function promoteAnatomy(
         const hostSt = hostIsShapeLeaf ? union.alignedByKey.get(`${row.combo.key}__default`)![i]!.node.style : null;
         const bT = hostSt ? (px(hostSt['border-top-width']) ?? 0) : 0;
         const bL = hostSt ? (px(hostSt['border-left-width']) ?? 0) : 0;
-        const w = px(row.st['width'])!;
-        const h = px(row.st['height'])!;
+        const w0 = px(row.st['width'])!;
+        const h0 = px(row.st['height'])!;
+        // uniform scale (W5): the box shrinks about its centre
+        const sc = mtx && Math.abs(Number(mtx[2])) < 0.01 && Math.abs(Number(mtx[3])) < 0.01 && Math.abs(Number(mtx[1]) - Number(mtx[4])) < 0.01 && Number(mtx[1]) > 0.02 && Number(mtx[1]) < 0.999 ? Number(mtx[1]) : 1;
+        const w = Math.round(w0 * sc * 1000) / 1000;
+        const h = Math.round(h0 * sc * 1000) / 1000;
+        const scaleDx = (w0 - w) / 2;
+        const scaleDy = (h0 - h) / 2;
         const borderW = Object.fromEntries(BORDER_SIDES.map((s) => [s, px(row.st[`border-${s}-width`]) ?? 0])) as Record<string, number>;
         const sideColors = BORDER_SIDES.map((s) => row.st[`border-${s}-color`] ?? '');
         return {
           w,
           h,
-          top: (px(row.st['top']) ?? 0) + ty + bT,
-          left: (px(row.st['left']) ?? 0) + tx + bL,
+          // An absolute box's offset is top + margin-top (antd's Radio dot:
+          // `top: 50%; margin-block-start: -8px` — the margin was never folded
+          // and the dot landed at 12,12 in a 16px box instead of centred).
+          top: (px(row.st['top']) ?? 0) + (px(row.st['margin-top']) ?? 0) + ty + bT + scaleDy,
+          left: (px(row.st['left']) ?? 0) + (px(row.st['margin-left']) ?? 0) + tx + bL + scaleDx,
           rot: Math.round(rot * 1000) / 1000,
           bg: row.st['background-color'],
           borderW,
@@ -2372,6 +2396,18 @@ export function promoteAnatomy(
       };
       type Folded = ReturnType<typeof fold>;
       const folded = drawnRows.map(fold);
+      // ANTD EXAM (heal loop, 2026-08-23): a decor that PAINTS (and is
+      // therefore carried) may also cast a shadow the grammar cannot read —
+      // antd's Switch knob rides `box-shadow: var(--ant-switch-handle-shadow)`
+      // on its `::before`. The box was carried and the shadow vanished with
+      // no receipt (the shadow refusal above fires only when nothing else
+      // paints). Named here, beside the carriage.
+      {
+        const shadowed = drawnRows.filter((r) => (r.st['box-shadow'] ?? 'none') !== 'none');
+        if (shadowed.length > 0) {
+          refusals.push(`pseudo-decor-shadow-uncarried: ${e.partName}${pe} paints box-shadow ${shadowed[0].st['box-shadow']} in ${shadowed.length}/${drawnRows.length} drawn combos — the bounded decor grammar carries background alpha + border rings only; the box is promoted, its shadow is not`);
+        }
+      }
       // PSEUDO-DECOR v2 (D2) — GEOMETRY and PAINT are factored SEPARATELY.
       //
       // v1 hashed the whole box (size + offsets + fill + radius) into one key
@@ -3450,6 +3486,15 @@ export function promoteAnatomy(
     if (prop.type.enum.includes(ax.unset) || prop.default !== undefined) continue;
     prop.type.enum = [ax.unset, ...prop.type.enum];
     (prop as { default?: unknown }).default = ax.unset;
+    // ANTD EXAM (2026-08-23): the enum grew and the figma VARIANT values map
+    // did not — validateContract then refused the WHOLE component ("figma
+    // values map is missing enum value unset") and antd's Progress was
+    // quarantined with its capture intact. The materialized value needs its
+    // display name in the same breath it joins the enum.
+    const fb = (prop as { bindings?: { figma?: { kind?: string; values?: Record<string, string> } } }).bindings?.figma;
+    if (fb?.kind === 'VARIANT' && fb.values && !(ax.unset in fb.values)) {
+      fb.values = { [ax.unset]: ax.unset.charAt(0).toUpperCase() + ax.unset.slice(1), ...fb.values };
+    }
     receipts.push(
       `optional-adornment-unset-materialized: ${axProp} — defaultless enum gates a present-only-when-set part; unset value "${ax.unset}" added to the enum as the DEFAULT so a PLAIN (adornment-absent) variant is enumerated and the base-hidden part renders nothing there (round 5f — S2 unset extended from styling to STRUCTURE)`,
     );

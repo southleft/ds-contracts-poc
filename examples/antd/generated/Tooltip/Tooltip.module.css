@@ -1,0 +1,116 @@
+/* code-only facts — REFUSED BY NAME, not silently dropped:
+     translate-x: SYNTHETIC (decomposeTranslate) — folded into absolute x placement on canvas; CSS has no translate-x longhand.
+     translate-y: SYNTHETIC (decomposeTranslate) — folded into absolute y placement on canvas; CSS has no translate-y longhand.
+   CSS has no per-component translate longhand and this contract conditions
+   the components on different axes, so no single `translate:` declaration
+   can carry them. The canvas lowers them to absolute placement. */
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/tooltip.contract.json (antd.tooltip v0.2.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  width: 100%;
+  min-width: fit-content;
+  color: var(--imported-shared-color-000000e0);
+  font-size: var(--imported-shared-size-14);
+  height: var(--imported-tooltip-root-height);
+  line-height: var(--imported-shared-size-22);
+  max-width: var(--imported-tooltip-root-max-width);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  width: var(--imported-tooltip-root-width);
+  z-index: var(--imported-tooltip-root-z-index);
+  display: block;
+  box-sizing: border-box;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  position: absolute;
+}
+
+.tooltip-arrow {
+  display: flex;
+  bottom: var(--imported-tooltip-tooltip-arrow-bottom);
+  color: var(--imported-shared-color-000000e0);
+  font-size: var(--imported-shared-size-14);
+  height: var(--imported-tooltip-tooltip-arrow-height);
+  left: var(--imported-tooltip-tooltip-arrow-left);
+  line-height: var(--imported-shared-size-22);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  right: var(--imported-tooltip-tooltip-arrow-right);
+  top: var(--imported-shared-size-0);
+  width: var(--imported-tooltip-tooltip-arrow-width);
+  z-index: var(--imported-tooltip-tooltip-arrow-z-index);
+  display: block;
+  position: absolute;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  pointer-events: none;
+  transform: matrix(1, 0, 0, 1, -8, -16);
+}
+
+.tooltip-arrow-before {
+  width: 16px;
+  height: 8px;
+  flex-shrink: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  border-top-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
+  top: 8px;
+  left: 0px;
+  position: absolute;
+}
+
+.tooltip-content {
+  display: flex;
+  bottom: var(--imported-shared-size-0);
+  color: var(--imported-shared-color-000000e0);
+  font-size: var(--imported-shared-size-14);
+  height: var(--imported-tooltip-tooltip-content-height);
+  left: var(--imported-shared-size-0);
+  line-height: var(--imported-shared-size-22);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  width: var(--imported-tooltip-tooltip-content-width);
+  display: block;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  position: relative;
+}
+
+.label {
+  background-color: var(--imported-tooltip-label-background-color);
+  border-bottom-left-radius: var(--imported-shared-size-6);
+  border-bottom-right-radius: var(--imported-shared-size-6);
+  border-top-left-radius: var(--imported-shared-size-6);
+  border-top-right-radius: var(--imported-shared-size-6);
+  box-shadow: var(--imported-tooltip-label-box-shadow);
+  color: var(--imported-tooltip-label-color);
+  font-size: var(--imported-shared-size-14);
+  font-weight: var(--imported-tooltip-label-font-weight);
+  line-height: var(--imported-shared-size-22);
+  min-height: var(--imported-tooltip-label-min-height);
+  min-width: var(--imported-tooltip-label-min-width);
+  padding-bottom: var(--imported-shared-size-6);
+  padding-left: var(--imported-tooltip-label-padding-left);
+  padding-right: var(--imported-tooltip-label-padding-right);
+  padding-top: var(--imported-shared-size-6);
+  display: block;
+  box-sizing: border-box;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}

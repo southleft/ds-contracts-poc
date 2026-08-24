@@ -1,0 +1,387 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "antd.badge",
+  "name": "Badge",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). MOLECULE WRAPPER (the MUI Badge precedent): the Avatar child is mounted by the config's childrenSpec. `mode` is a synthetic 2-value axis (count|dot) that the config expands through $props into antd's two APIs (`count: 5` vs `dot: true`) — ONE axis so the per-value overlay parts stay a one-axis function. `color` is DEFAULTLESS (unset = antd's red count badge); the 3 presets are a curated slice. NAMED OUT: status mode (a different root composition), overflowCount/showZero, counts other than 5. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "mode",
+      "type": {
+        "enum": [
+          "count",
+          "dot"
+        ]
+      },
+      "default": "count",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Mode",
+          "values": {
+            "count": "Count",
+            "dot": "Dot"
+          }
+        },
+        "code": {
+          "prop": "mode"
+        }
+      }
+    },
+    {
+      "name": "color",
+      "type": {
+        "enum": [
+          "blue",
+          "green",
+          "purple"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "blue": "Blue",
+            "green": "Green",
+            "purple": "Purple"
+          }
+        },
+        "code": {
+          "prop": "color"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
+        "position": "relative"
+      },
+      "parts": {
+        "avatar": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|avatar — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "inline-flex",
+            "align": "center",
+            "justify": "center"
+          },
+          "parts": {
+            "label": {
+              "text": "A",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|avatar-string — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "box-sizing": "border-box",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                "text-align": "center",
+                "text-wrap-mode": "nowrap",
+                "transform": "matrix(1, 0, 0, 1, 0, 0)"
+              },
+              "tokens": {
+                "color": "{imported.shared.color-ffffff}",
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.badge.label.font-weight}",
+                "line-height": "{imported.badge.label.line-height}"
+              }
+            }
+          },
+          "declared": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "position": "relative",
+            "text-align": "center",
+            "text-wrap-mode": "nowrap"
+          },
+          "tokens": {
+            "background-color": "{imported.badge.avatar.background-color}",
+            "border-bottom-color": "{imported.shared.color-00000000}",
+            "border-bottom-left-radius": "{imported.shared.size-6}",
+            "border-bottom-right-radius": "{imported.shared.size-6}",
+            "border-bottom-width": "{imported.shared.size-1}",
+            "border-left-color": "{imported.shared.color-00000000}",
+            "border-left-width": "{imported.shared.size-1}",
+            "border-right-color": "{imported.shared.color-00000000}",
+            "border-right-width": "{imported.shared.size-1}",
+            "border-top-color": "{imported.shared.color-00000000}",
+            "border-top-left-radius": "{imported.shared.size-6}",
+            "border-top-right-radius": "{imported.shared.size-6}",
+            "border-top-width": "{imported.shared.size-1}",
+            "bottom": "{imported.shared.size-0}",
+            "color": "{imported.shared.color-ffffff}",
+            "font-size": "{imported.shared.size-14}",
+            "height": "{imported.shared.size-32}",
+            "left": "{imported.shared.size-0}",
+            "line-height": "{imported.badge.avatar.line-height}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.shared.size-32}"
+          }
+        },
+        "badge-dot": {
+          "element": "sup",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy sup|badge-dot.scroll-number — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "position": "absolute",
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "transform": "matrix(1, 0, 0, 1, 3, -3)",
+            "transition-duration": "0.2s",
+            "transition-timing-function": "cubic-bezier(0.12, 0.4, 0.29, 1.46)"
+          },
+          "stylesWhen": [
+            {
+              "prop": "mode",
+              "equals": "count",
+              "styles": {
+                "display": "none"
+              }
+            }
+          ],
+          "tokens": {
+            "background-color": "{imported.badge.badge-dot.background-color.unset}",
+            "border-bottom-left-radius": "{imported.shared.size-6}",
+            "border-bottom-right-radius": "{imported.shared.size-6}",
+            "border-top-left-radius": "{imported.shared.size-6}",
+            "border-top-right-radius": "{imported.shared.size-6}",
+            "bottom": "{imported.badge.badge-dot.bottom}",
+            "box-shadow": "{imported.badge.badge-dot.box-shadow}",
+            "color": "{imported.badge.badge-dot.color.unset}",
+            "font-size": "{imported.badge.badge-dot.font-size}",
+            "height": "{imported.shared.size-6}",
+            "left": "{imported.badge.badge-dot.left}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-6}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "translate-x": "{imported.badge.badge-dot.translate-x}",
+            "translate-y": "{imported.badge.badge-dot.translate-y}",
+            "width": "{imported.shared.size-6}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "color",
+              "map": {
+                "blue": {
+                  "background-color": "{imported.badge.badge-dot.background-color.blue}",
+                  "color": "{imported.badge.badge-dot.color.blue}"
+                },
+                "green": {
+                  "background-color": "{imported.badge.badge-dot.background-color.green}",
+                  "color": "{imported.badge.badge-dot.color.green}"
+                },
+                "purple": {
+                  "background-color": "{imported.badge.badge-dot.background-color.purple}",
+                  "color": "{imported.badge.badge-dot.color.purple}"
+                }
+              }
+            }
+          ]
+        },
+        "badge-count": {
+          "element": "sup",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy sup|badge-count.scroll-number — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "position": "absolute",
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "text-align": "center",
+            "text-wrap-mode": "nowrap",
+            "transform": "matrix(1, 0, 0, 1, 10, -10)",
+            "transition-duration": "0.2s",
+            "transition-timing-function": "cubic-bezier(0.12, 0.4, 0.29, 1.46)"
+          },
+          "layout": {
+            "display": "flex",
+            "justify": "center"
+          },
+          "stylesWhen": [
+            {
+              "prop": "mode",
+              "equals": "dot",
+              "styles": {
+                "display": "none"
+              }
+            }
+          ],
+          "parts": {
+            "part-1-0": {
+              "element": "bdi",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy bdi| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                "text-align": "center",
+                "text-wrap-mode": "nowrap"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "mode",
+                  "equals": "dot",
+                  "styles": {
+                    "display": "none"
+                  }
+                }
+              ],
+              "parts": {
+                "scroll-number-only": {
+                  "element": "span",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|scroll-number-only — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "inline-block",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "position": "relative",
+                    "text-align": "center",
+                    "text-wrap-mode": "nowrap",
+                    "transition-property": "none"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "mode",
+                      "equals": "dot",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "parts": {
+                    "label-2": {
+                      "text": "5",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy span|scroll-number-only-unit — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "display": "inline",
+                        "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                        "text-align": "center",
+                        "text-wrap-mode": "nowrap"
+                      },
+                      "stylesWhen": [
+                        {
+                          "prop": "mode",
+                          "equals": "dot",
+                          "styles": {
+                            "display": "none"
+                          }
+                        }
+                      ],
+                      "tokens": {
+                        "color": "{imported.shared.color-ffffff}",
+                        "font-size": "{imported.shared.size-12}",
+                        "font-weight": "{imported.badge.label-2.font-weight}",
+                        "line-height": "{imported.shared.size-20}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}"
+                      }
+                    }
+                  },
+                  "tokens": {
+                    "bottom": "{imported.shared.size-0}",
+                    "color": "{imported.shared.color-ffffff}",
+                    "font-size": "{imported.shared.size-12}",
+                    "height": "{imported.shared.size-20}",
+                    "left": "{imported.shared.size-0}",
+                    "line-height": "{imported.shared.size-20}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "right": "{imported.shared.size-0}",
+                    "top": "{imported.shared.size-0}",
+                    "width": "{imported.badge.scroll-number-only.width}"
+                  }
+                }
+              },
+              "tokens": {
+                "color": "{imported.shared.color-ffffff}",
+                "font-size": "{imported.shared.size-12}",
+                "height": "{imported.shared.size-20}",
+                "line-height": "{imported.shared.size-20}",
+                "width": "{imported.badge.part-1-0.width}"
+              }
+            }
+          },
+          "tokens": {
+            "background-color": "{imported.badge.badge-count.background-color.unset}",
+            "border-bottom-left-radius": "{imported.shared.size-10}",
+            "border-bottom-right-radius": "{imported.shared.size-10}",
+            "border-top-left-radius": "{imported.shared.size-10}",
+            "border-top-right-radius": "{imported.shared.size-10}",
+            "bottom": "{imported.shared.size-12}",
+            "box-shadow": "{imported.badge.badge-count.box-shadow}",
+            "color": "{imported.shared.color-ffffff}",
+            "font-size": "{imported.shared.size-12}",
+            "height": "{imported.shared.size-20}",
+            "left": "{imported.shared.size-12}",
+            "line-height": "{imported.shared.size-20}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-20}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "translate-x": "{imported.shared.size-10}",
+            "translate-y": "{imported.badge.badge-count.translate-y}",
+            "width": "{imported.shared.size-20}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "color",
+              "map": {
+                "blue": {
+                  "background-color": "{imported.badge.badge-count.background-color.blue}"
+                },
+                "green": {
+                  "background-color": "{imported.badge.badge-count.background-color.green}"
+                },
+                "purple": {
+                  "background-color": "{imported.badge.badge-count.background-color.purple}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "tokens": {
+        "bottom": "{imported.shared.size-0}",
+        "color": "{imported.badge.root.color}",
+        "font-size": "{imported.shared.size-14}",
+        "height": "{imported.shared.size-32}",
+        "left": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.shared.size-32}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "antd",
+        "export": "Badge"
+      }
+    }
+  }
+}

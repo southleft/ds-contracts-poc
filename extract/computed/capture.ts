@@ -1493,7 +1493,14 @@ export const captureJs = (selector: string, classAllow?: string, varPrefix?: str
     //
     // Marked on the RAW node only; \`normalizeNode\` builds a fresh object and
     // never copies it, so no committed capture moves by one byte.
-    if (!el.shadowRoot && out.nodes.length === 0) {
+    // ANTD EXAM (2026-08-23): SVG content is not a closed-root signature. An
+    // svg <path>/<circle>/<rect> is a leaf with no child nodes and a painted
+    // box BY DESIGN — the glyph IS the element. The predicate below fired
+    // 720 times on antd's Button (every icon path, every combo × plane) and
+    // 64 times on Tag, all "unexplained-inline-box 7x7", which named a real
+    // reading with the wrong reason and buried the receipt it exists to give.
+    // Elements in the SVG namespace are skipped; HTML elements keep the test.
+    if (!el.shadowRoot && out.nodes.length === 0 && el.namespaceURI !== 'http://www.w3.org/2000/svg') {
       const r = el.getBoundingClientRect();
       const painted = r.width > 0 && r.height > 0;
       const box = out.tag + ' ' + Math.round(r.width) + 'x' + Math.round(r.height);
@@ -1636,7 +1643,7 @@ export interface SweepResult {
  * ::before/::after pair.
  */
 export const settleProbeJs = (stageSel: string): string =>
-  `(() => { ${SHADOW_HELPERS_JS} const stageEl = document.querySelector('${stageSel}'); const els = stageEl ? shWalkEls(stageEl, []) : []; const parts = []; const rd = (cs) => { parts.push(cs.backgroundColor, cs.color, cs.boxShadow, cs.transform, cs.borderTopColor, cs.borderRightColor, cs.borderBottomColor, cs.borderLeftColor, cs.opacity, cs.outlineColor, cs.fill); }; for (const el of els) { rd(getComputedStyle(el)); for (const pe of ${JSON.stringify(READ_PSEUDOS)}) { const pcs = getComputedStyle(el, pe); if (pcs) rd(pcs); } } return parts.join('|'); })()`;
+  `(() => { ${SHADOW_HELPERS_JS} const stageEl = document.querySelector('${stageSel}'); const els = stageEl ? shWalkEls(stageEl, []) : []; const parts = []; const rd = (cs) => { parts.push(cs.backgroundColor, cs.color, cs.boxShadow, cs.transform, cs.borderTopColor, cs.borderRightColor, cs.borderBottomColor, cs.borderLeftColor, cs.opacity, cs.outlineColor, cs.outlineWidth, cs.outlineStyle, cs.outlineOffset, cs.fill); }; for (const el of els) { rd(getComputedStyle(el)); for (const pe of ${JSON.stringify(READ_PSEUDOS)}) { const pcs = getComputedStyle(el, pe); if (pcs) rd(pcs); } } return parts.join('|'); })()`;
 
 export async function settleStage(page: Page, stageSel: string): Promise<void> {
   const probe = settleProbeJs(stageSel);

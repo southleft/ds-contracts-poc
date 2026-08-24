@@ -267,6 +267,7 @@ async function main() {
       promotion.contract, space, mintBase, prep.baseObs, mintStates, prep.stateObs, layout.enriched,
       declaredBase, declaredState, prep.setPlaneLiterals ?? [],
       { only: prep.inheritanceOnly ?? [], stateDeltas: prep.inheritanceStateDeltas ?? [] },
+      prep.stateCodeOnly ?? [],
     );
     const mergedTree = structuredClone(mintBase.tree) as Record<string, unknown>;
     const mergeInto = (dst: Record<string, unknown>, src: Record<string, unknown>) => {

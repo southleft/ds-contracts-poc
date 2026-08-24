@@ -1,0 +1,150 @@
+{
+  "id": "antd.progress",
+  "name": "Progress",
+  "library": "antd",
+  "contractPath": "examples/antd/contracts/progress.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/antd/figma/antd.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 4,
+      "sampled": 4,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "status",
+        "type": "enum",
+        "default": "unset"
+      },
+      {
+        "name": "percent",
+        "type": "number",
+        "default": 40
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "default": 100
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "progress-outer",
+      "progress-inner",
+      "progress-bg",
+      "label",
+      "anticon",
+      "anticon-exception",
+      "anticon-success"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.progress.anticon.vertical-align",
+      "imported.progress.label.color.active",
+      "imported.progress.label.color.exception",
+      "imported.progress.label.color.success",
+      "imported.progress.label.color.unset",
+      "imported.progress.label.font-weight",
+      "imported.progress.label.margin-left",
+      "imported.progress.progress-bg.background-color.active",
+      "imported.progress.progress-bg.background-color.exception",
+      "imported.progress.progress-bg.background-color.success",
+      "imported.progress.progress-bg.background-color.unset",
+      "imported.progress.progress-inner.background-color",
+      "imported.progress.progress-inner.flex-grow",
+      "imported.progress.root.width",
+      "imported.shared.color-000000e0",
+      "imported.shared.size-0",
+      "imported.shared.size-100",
+      "imported.shared.size-14",
+      "imported.shared.size-22"
+    ],
+    "icons": [
+      "progress-anticon-exception",
+      "progress-anticon-success"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "status-unset",
+      "variant": "Status=Unset",
+      "kind": "base",
+      "subst": {
+        "status": "unset"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-status-unset.png",
+      "contentBox": {
+        "width": 288,
+        "height": 22
+      }
+    },
+    {
+      "slug": "status-exception",
+      "variant": "Status=Exception",
+      "kind": "base",
+      "subst": {
+        "status": "exception"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-status-exception.png",
+      "contentBox": {
+        "width": 288,
+        "height": 22
+      }
+    },
+    {
+      "slug": "status-active",
+      "variant": "Status=Active",
+      "kind": "base",
+      "subst": {
+        "status": "active"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-status-active.png",
+      "contentBox": {
+        "width": 288,
+        "height": 22
+      }
+    },
+    {
+      "slug": "status-success",
+      "variant": "Status=Success",
+      "kind": "base",
+      "subst": {
+        "status": "success"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-status-success.png",
+      "contentBox": {
+        "width": 288,
+        "height": 22
+      }
+    }
+  ],
+  "rendered": 4,
+  "refused": 0,
+  "unavailable": null
+}

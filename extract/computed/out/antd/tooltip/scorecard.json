@@ -1,0 +1,183 @@
+{
+  "component": "Tooltip",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 1,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 100,
+    "cellsEqual": 95,
+    "pctEqual": 95,
+    "rowsFullyEqual": 0,
+    "rows": 4
+  },
+  "pixel": {
+    "pairs": 1,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 0,
+    "unscored": {
+      "sizeMismatch": 1,
+      "noOriginal": 3,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": null,
+    "meanAA": null,
+    "maxAA": null
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 27,
+    "mintedLeavesUnfolded": 27,
+    "baseBindings": 50,
+    "stateBindings": 0,
+    "codeOnlyChannels": 5,
+    "overflowBindings": 0,
+    "folds": 40
+  },
+  "worstRows": [
+    {
+      "key": "__default",
+      "pctAA": null,
+      "pctExact": null,
+      "channelsMismatched": 5,
+      "unscorable": "size-mismatch"
+    },
+    {
+      "key": "__hover",
+      "pctAA": null,
+      "pctExact": null,
+      "channelsMismatched": 0,
+      "unscorable": "no-original"
+    },
+    {
+      "key": "__focus-visible",
+      "pctAA": null,
+      "pctExact": null,
+      "channelsMismatched": 0,
+      "unscorable": "no-original"
+    },
+    {
+      "key": "__active",
+      "pctAA": null,
+      "pctExact": null,
+      "channelsMismatched": 0,
+      "unscorable": "no-original"
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.list-style-type",
+      1
+    ],
+    [
+      "tooltip-arrow.list-style-type",
+      1
+    ],
+    [
+      "tooltip-content.list-style-type",
+      1
+    ],
+    [
+      "label.list-style-type",
+      1
+    ],
+    [
+      "label.overflow-wrap",
+      1
+    ]
+  ],
+  "namedLosses": [
+    "promotion: pseudo-decor-outside-grammar: tooltip-arrow::after is painted by a mechanism the grammar cannot read (box-shadow: rgba(0, 0, 0, 0.05) 2px 2px 5px 0px) — the decor grammar reads background-color alpha and border rings only; the box is NOT promoted",
+    "code-only: root.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: tooltip-arrow.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: tooltip-content.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/antd/tokens/antd-minted.dtcg.json",
+    "leavesAdded": 1252,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "__default",
+      "channelsCompared": 100,
+      "channelsEqual": 95,
+      "pctExact": null,
+      "pctAA": null,
+      "unscorable": "size-mismatch",
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "tooltip-arrow",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "tooltip-content",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        }
+      ],
+      "note": "size mismatch ours 320x96 vs orig 86x34 — NOT SCORED (a wrong-sized box is a geometry failure, not a percentage)"
+    },
+    {
+      "key": "__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": null,
+      "pctAA": null,
+      "unscorable": "no-original",
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    },
+    {
+      "key": "__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": null,
+      "pctAA": null,
+      "unscorable": "no-original",
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    },
+    {
+      "key": "__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": null,
+      "pctAA": null,
+      "unscorable": "no-original",
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    }
+  ]
+}

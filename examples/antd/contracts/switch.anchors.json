@@ -1,0 +1,166 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "switch",
+  "anchors": [
+    {
+      "leaf": "imported.switch.root.height.default",
+      "token": "switch-track-height",
+      "part": "root",
+      "cssProperty": "height",
+      "varName": "--ant-switch-track-height",
+      "selector": ".ant-switch"
+    },
+    {
+      "leaf": "imported.switch.root.height.small",
+      "token": "switch-track-height-sm",
+      "part": "root",
+      "cssProperty": "height",
+      "varName": "--ant-switch-track-height-sm",
+      "selector": ".ant-switch.ant-switch-small"
+    },
+    {
+      "leaf": "imported.switch.root.line-height.default",
+      "token": "switch-track-height",
+      "part": "root",
+      "cssProperty": "line-height",
+      "varName": "--ant-switch-track-height",
+      "selector": ".ant-switch"
+    },
+    {
+      "leaf": "imported.switch.root.line-height.small",
+      "token": "switch-track-height-sm",
+      "part": "root",
+      "cssProperty": "line-height",
+      "varName": "--ant-switch-track-height-sm",
+      "selector": ".ant-switch.ant-switch-small"
+    },
+    {
+      "leaf": "imported.switch.root.min-width.default",
+      "token": "switch-track-min-width",
+      "part": "root",
+      "cssProperty": "min-width",
+      "varName": "--ant-switch-track-min-width",
+      "selector": ".ant-switch"
+    },
+    {
+      "leaf": "imported.switch.root.min-width.small",
+      "token": "switch-track-min-width-sm",
+      "part": "root",
+      "cssProperty": "min-width",
+      "varName": "--ant-switch-track-min-width-sm",
+      "selector": ".ant-switch.ant-switch-small"
+    },
+    {
+      "leaf": "imported.switch.root.opacity-state-disabled",
+      "token": "opacity-loading",
+      "part": "root",
+      "cssProperty": "opacity",
+      "varName": "--ant-opacity-loading",
+      "selector": ".ant-switch.ant-switch-loading, .ant-switch.ant-switch-disabled"
+    },
+    {
+      "leaf": "imported.switch.switch-handle.height.default",
+      "token": "switch-handle-size",
+      "part": "switch-handle",
+      "cssProperty": "height",
+      "varName": "--ant-switch-handle-size",
+      "selector": ".ant-switch .ant-switch-handle"
+    },
+    {
+      "leaf": "imported.switch.switch-handle.height.small",
+      "token": "switch-handle-size-sm",
+      "part": "switch-handle",
+      "cssProperty": "height",
+      "varName": "--ant-switch-handle-size-sm",
+      "selector": ".ant-switch.ant-switch-small .ant-switch-handle"
+    },
+    {
+      "leaf": "imported.switch.switch-handle.top",
+      "token": "switch-track-padding",
+      "part": "switch-handle",
+      "cssProperty": "top",
+      "varName": "--ant-switch-track-padding",
+      "selector": ".ant-switch .ant-switch-handle"
+    },
+    {
+      "leaf": "imported.switch.switch-handle.width.default",
+      "token": "switch-handle-size",
+      "part": "switch-handle",
+      "cssProperty": "width",
+      "varName": "--ant-switch-handle-size",
+      "selector": ".ant-switch .ant-switch-handle"
+    },
+    {
+      "leaf": "imported.switch.switch-handle.width.small",
+      "token": "switch-handle-size-sm",
+      "part": "switch-handle",
+      "cssProperty": "width",
+      "varName": "--ant-switch-handle-size-sm",
+      "selector": ".ant-switch.ant-switch-small .ant-switch-handle"
+    },
+    {
+      "leaf": "imported.switch.switch-inner-checked.color",
+      "token": "color-text-light-solid",
+      "part": "switch-inner-checked",
+      "cssProperty": "color",
+      "varName": "--ant-color-text-light-solid",
+      "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+    },
+    {
+      "leaf": "imported.switch.switch-inner-checked.font-size",
+      "token": "font-size-sm",
+      "part": "switch-inner-checked",
+      "cssProperty": "font-size",
+      "varName": "--ant-font-size-sm",
+      "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+    },
+    {
+      "leaf": "imported.switch.switch-inner-checked.min-height.default",
+      "token": "switch-track-height",
+      "part": "switch-inner-checked",
+      "cssProperty": "min-height",
+      "varName": "--ant-switch-track-height",
+      "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+    },
+    {
+      "leaf": "imported.switch.switch-inner-checked.min-height.small",
+      "token": "switch-track-height-sm",
+      "part": "switch-inner-checked",
+      "cssProperty": "min-height",
+      "varName": "--ant-switch-track-height-sm",
+      "selector": ".ant-switch.ant-switch-small .ant-switch-inner .ant-switch-inner-checked, .ant-switch.ant-switch-small .ant-switch-inner .ant-switch-inner-unchecked"
+    },
+    {
+      "leaf": "imported.switch.switch-inner-unchecked.color",
+      "token": "color-text-light-solid",
+      "part": "switch-inner-unchecked",
+      "cssProperty": "color",
+      "varName": "--ant-color-text-light-solid",
+      "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+    },
+    {
+      "leaf": "imported.switch.switch-inner-unchecked.font-size",
+      "token": "font-size-sm",
+      "part": "switch-inner-unchecked",
+      "cssProperty": "font-size",
+      "varName": "--ant-font-size-sm",
+      "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+    },
+    {
+      "leaf": "imported.switch.switch-inner-unchecked.min-height.default",
+      "token": "switch-track-height",
+      "part": "switch-inner-unchecked",
+      "cssProperty": "min-height",
+      "varName": "--ant-switch-track-height",
+      "selector": ".ant-switch .ant-switch-inner .ant-switch-inner-checked, .ant-switch .ant-switch-inner .ant-switch-inner-unchecked"
+    },
+    {
+      "leaf": "imported.switch.switch-inner-unchecked.min-height.small",
+      "token": "switch-track-height-sm",
+      "part": "switch-inner-unchecked",
+      "cssProperty": "min-height",
+      "varName": "--ant-switch-track-height-sm",
+      "selector": ".ant-switch.ant-switch-small .ant-switch-inner .ant-switch-inner-checked, .ant-switch.ant-switch-small .ant-switch-inner .ant-switch-inner-unchecked"
+    }
+  ]
+}

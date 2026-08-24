@@ -1,0 +1,246 @@
+{
+  "id": "antd.tag",
+  "name": "Tag",
+  "library": "antd",
+  "contractPath": "examples/antd/contracts/tag.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/antd/figma/antd.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 14,
+      "sampled": 8,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "color",
+        "type": "enum",
+        "default": null
+      },
+      {
+        "name": "bordered",
+        "type": "enum",
+        "default": "bordered"
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Tag"
+      },
+      {
+        "name": "closable",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "states": [
+      "hover"
+    ],
+    "parts": [
+      "root",
+      "anticon"
+    ],
+    "contentSlots": [
+      {
+        "part": "root",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.shared.size-0",
+      "imported.shared.size-1",
+      "imported.shared.size-4",
+      "imported.tag.anticon.color",
+      "imported.tag.anticon.font-size",
+      "imported.tag.anticon.margin-left",
+      "imported.tag.anticon.vertical-align",
+      "imported.tag.root.background-color.blue",
+      "imported.tag.root.background-color.error",
+      "imported.tag.root.background-color.gold",
+      "imported.tag.root.background-color.green",
+      "imported.tag.root.background-color.processing",
+      "imported.tag.root.background-color.red",
+      "imported.tag.root.background-color.success",
+      "imported.tag.root.background-color.unset",
+      "imported.tag.root.border-bottom-color.unset.bordered",
+      "imported.tag.root.border-bottom-color.unset.borderless",
+      "imported.tag.root.border-left-color.unset.bordered",
+      "imported.tag.root.border-left-color.unset.borderless",
+      "imported.tag.root.border-right-color.unset.bordered",
+      "imported.tag.root.border-right-color.unset.borderless",
+      "imported.tag.root.border-top-color.unset.bordered",
+      "imported.tag.root.border-top-color.unset.borderless",
+      "imported.tag.root.color.blue",
+      "imported.tag.root.color.error",
+      "imported.tag.root.color.gold",
+      "imported.tag.root.color.green",
+      "imported.tag.root.color.processing",
+      "imported.tag.root.color.red",
+      "imported.tag.root.color.success",
+      "imported.tag.root.color.unset",
+      "imported.tag.root.font-size",
+      "imported.tag.root.font-weight",
+      "imported.tag.root.line-height",
+      "imported.tag.root.margin-right",
+      "imported.tag.root.padding-left",
+      "imported.tag.root.padding-right",
+      "imported.tag.root.width.off"
+    ],
+    "icons": [
+      "tag-anticon"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "color-blue__bordered-bordered",
+      "variant": "Color=Blue, Bordered=Bordered",
+      "kind": "base",
+      "subst": {
+        "color": "blue",
+        "bordered": "bordered"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-blue__bordered-bordered.png",
+      "contentBox": {
+        "width": 43.75,
+        "height": 2
+      }
+    },
+    {
+      "slug": "color-blue__bordered-borderless",
+      "variant": "Color=Blue, Bordered=Borderless",
+      "kind": "base",
+      "subst": {
+        "color": "blue",
+        "bordered": "borderless"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-blue__bordered-borderless.png",
+      "contentBox": {
+        "width": 43.75,
+        "height": 2
+      }
+    },
+    {
+      "slug": "color-green__bordered-bordered",
+      "variant": "Color=Green, Bordered=Bordered",
+      "kind": "base",
+      "subst": {
+        "color": "green",
+        "bordered": "bordered"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-green__bordered-bordered.png",
+      "contentBox": {
+        "width": 43.75,
+        "height": 2
+      }
+    },
+    {
+      "slug": "color-red__bordered-bordered",
+      "variant": "Color=Red, Bordered=Bordered",
+      "kind": "base",
+      "subst": {
+        "color": "red",
+        "bordered": "bordered"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-red__bordered-bordered.png",
+      "contentBox": {
+        "width": 43.75,
+        "height": 2
+      }
+    },
+    {
+      "slug": "color-gold__bordered-bordered",
+      "variant": "Color=Gold, Bordered=Bordered",
+      "kind": "base",
+      "subst": {
+        "color": "gold",
+        "bordered": "bordered"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-gold__bordered-bordered.png",
+      "contentBox": {
+        "width": 43.75,
+        "height": 2
+      }
+    },
+    {
+      "slug": "color-success__bordered-bordered",
+      "variant": "Color=Success, Bordered=Bordered",
+      "kind": "base",
+      "subst": {
+        "color": "success",
+        "bordered": "bordered"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-success__bordered-bordered.png",
+      "contentBox": {
+        "width": 43.75,
+        "height": 2
+      }
+    },
+    {
+      "slug": "color-processing__bordered-bordered",
+      "variant": "Color=Processing, Bordered=Bordered",
+      "kind": "base",
+      "subst": {
+        "color": "processing",
+        "bordered": "bordered"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-processing__bordered-bordered.png",
+      "contentBox": {
+        "width": 43.75,
+        "height": 2
+      }
+    },
+    {
+      "slug": "color-error__bordered-bordered",
+      "variant": "Color=Error, Bordered=Bordered",
+      "kind": "base",
+      "subst": {
+        "color": "error",
+        "bordered": "bordered"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-error__bordered-bordered.png",
+      "contentBox": {
+        "width": 43.75,
+        "height": 2
+      }
+    }
+  ],
+  "rendered": 8,
+  "refused": 0,
+  "unavailable": null
+}

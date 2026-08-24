@@ -1,0 +1,1470 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Badge",
+  "varPrefix": "--ant-",
+  "facts": [
+    {
+      "part": "avatar",
+      "channel": "color",
+      "combo": "count.unset",
+      "axisValues": {
+        "mode": "count",
+        "color": "unset"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "color",
+      "combo": "count.blue",
+      "axisValues": {
+        "mode": "count",
+        "color": "blue"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "color",
+      "combo": "count.green",
+      "axisValues": {
+        "mode": "count",
+        "color": "green"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "color",
+      "combo": "count.purple",
+      "axisValues": {
+        "mode": "count",
+        "color": "purple"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "color",
+      "combo": "dot.unset",
+      "axisValues": {
+        "mode": "dot",
+        "color": "unset"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "color",
+      "combo": "dot.blue",
+      "axisValues": {
+        "mode": "dot",
+        "color": "blue"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "color",
+      "combo": "dot.green",
+      "axisValues": {
+        "mode": "dot",
+        "color": "green"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "color",
+      "combo": "dot.purple",
+      "axisValues": {
+        "mode": "dot",
+        "color": "purple"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "font-family",
+      "combo": "count.unset",
+      "axisValues": {
+        "mode": "count",
+        "color": "unset"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-avatar-css-var"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "font-family",
+      "combo": "count.blue",
+      "axisValues": {
+        "mode": "count",
+        "color": "blue"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-avatar-css-var"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "font-family",
+      "combo": "count.green",
+      "axisValues": {
+        "mode": "count",
+        "color": "green"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-avatar-css-var"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "font-family",
+      "combo": "count.purple",
+      "axisValues": {
+        "mode": "count",
+        "color": "purple"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-avatar-css-var"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "font-family",
+      "combo": "dot.unset",
+      "axisValues": {
+        "mode": "dot",
+        "color": "unset"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-avatar-css-var"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "font-family",
+      "combo": "dot.blue",
+      "axisValues": {
+        "mode": "dot",
+        "color": "blue"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-avatar-css-var"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "font-family",
+      "combo": "dot.green",
+      "axisValues": {
+        "mode": "dot",
+        "color": "green"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-avatar-css-var"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "font-family",
+      "combo": "dot.purple",
+      "axisValues": {
+        "mode": "dot",
+        "color": "purple"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-avatar-css-var"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "font-size",
+      "combo": "count.unset",
+      "axisValues": {
+        "mode": "count",
+        "color": "unset"
+      },
+      "token": "avatar-text-font-size",
+      "varName": "--ant-avatar-text-font-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "font-size",
+      "combo": "count.blue",
+      "axisValues": {
+        "mode": "count",
+        "color": "blue"
+      },
+      "token": "avatar-text-font-size",
+      "varName": "--ant-avatar-text-font-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "font-size",
+      "combo": "count.green",
+      "axisValues": {
+        "mode": "count",
+        "color": "green"
+      },
+      "token": "avatar-text-font-size",
+      "varName": "--ant-avatar-text-font-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "font-size",
+      "combo": "count.purple",
+      "axisValues": {
+        "mode": "count",
+        "color": "purple"
+      },
+      "token": "avatar-text-font-size",
+      "varName": "--ant-avatar-text-font-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "font-size",
+      "combo": "dot.unset",
+      "axisValues": {
+        "mode": "dot",
+        "color": "unset"
+      },
+      "token": "avatar-text-font-size",
+      "varName": "--ant-avatar-text-font-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "font-size",
+      "combo": "dot.blue",
+      "axisValues": {
+        "mode": "dot",
+        "color": "blue"
+      },
+      "token": "avatar-text-font-size",
+      "varName": "--ant-avatar-text-font-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "font-size",
+      "combo": "dot.green",
+      "axisValues": {
+        "mode": "dot",
+        "color": "green"
+      },
+      "token": "avatar-text-font-size",
+      "varName": "--ant-avatar-text-font-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "font-size",
+      "combo": "dot.purple",
+      "axisValues": {
+        "mode": "dot",
+        "color": "purple"
+      },
+      "token": "avatar-text-font-size",
+      "varName": "--ant-avatar-text-font-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "height",
+      "combo": "count.unset",
+      "axisValues": {
+        "mode": "count",
+        "color": "unset"
+      },
+      "token": "avatar-container-size",
+      "varName": "--ant-avatar-container-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "height",
+      "combo": "count.blue",
+      "axisValues": {
+        "mode": "count",
+        "color": "blue"
+      },
+      "token": "avatar-container-size",
+      "varName": "--ant-avatar-container-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "height",
+      "combo": "count.green",
+      "axisValues": {
+        "mode": "count",
+        "color": "green"
+      },
+      "token": "avatar-container-size",
+      "varName": "--ant-avatar-container-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "height",
+      "combo": "count.purple",
+      "axisValues": {
+        "mode": "count",
+        "color": "purple"
+      },
+      "token": "avatar-container-size",
+      "varName": "--ant-avatar-container-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "height",
+      "combo": "dot.unset",
+      "axisValues": {
+        "mode": "dot",
+        "color": "unset"
+      },
+      "token": "avatar-container-size",
+      "varName": "--ant-avatar-container-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "height",
+      "combo": "dot.blue",
+      "axisValues": {
+        "mode": "dot",
+        "color": "blue"
+      },
+      "token": "avatar-container-size",
+      "varName": "--ant-avatar-container-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "height",
+      "combo": "dot.green",
+      "axisValues": {
+        "mode": "dot",
+        "color": "green"
+      },
+      "token": "avatar-container-size",
+      "varName": "--ant-avatar-container-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "height",
+      "combo": "dot.purple",
+      "axisValues": {
+        "mode": "dot",
+        "color": "purple"
+      },
+      "token": "avatar-container-size",
+      "varName": "--ant-avatar-container-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "width",
+      "combo": "count.unset",
+      "axisValues": {
+        "mode": "count",
+        "color": "unset"
+      },
+      "token": "avatar-container-size",
+      "varName": "--ant-avatar-container-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "width",
+      "combo": "count.blue",
+      "axisValues": {
+        "mode": "count",
+        "color": "blue"
+      },
+      "token": "avatar-container-size",
+      "varName": "--ant-avatar-container-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "width",
+      "combo": "count.green",
+      "axisValues": {
+        "mode": "count",
+        "color": "green"
+      },
+      "token": "avatar-container-size",
+      "varName": "--ant-avatar-container-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "width",
+      "combo": "count.purple",
+      "axisValues": {
+        "mode": "count",
+        "color": "purple"
+      },
+      "token": "avatar-container-size",
+      "varName": "--ant-avatar-container-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "width",
+      "combo": "dot.unset",
+      "axisValues": {
+        "mode": "dot",
+        "color": "unset"
+      },
+      "token": "avatar-container-size",
+      "varName": "--ant-avatar-container-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "width",
+      "combo": "dot.blue",
+      "axisValues": {
+        "mode": "dot",
+        "color": "blue"
+      },
+      "token": "avatar-container-size",
+      "varName": "--ant-avatar-container-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "width",
+      "combo": "dot.green",
+      "axisValues": {
+        "mode": "dot",
+        "color": "green"
+      },
+      "token": "avatar-container-size",
+      "varName": "--ant-avatar-container-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "avatar",
+      "channel": "width",
+      "combo": "dot.purple",
+      "axisValues": {
+        "mode": "dot",
+        "color": "purple"
+      },
+      "token": "avatar-container-size",
+      "varName": "--ant-avatar-container-size",
+      "anchor": {
+        "selector": ".ant-avatar"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "color",
+      "combo": "count.unset",
+      "axisValues": {
+        "mode": "count",
+        "color": "unset"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "color",
+      "combo": "count.blue",
+      "axisValues": {
+        "mode": "count",
+        "color": "blue"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "color",
+      "combo": "count.green",
+      "axisValues": {
+        "mode": "count",
+        "color": "green"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "color",
+      "combo": "count.purple",
+      "axisValues": {
+        "mode": "count",
+        "color": "purple"
+      },
+      "token": "color-text-light-solid",
+      "varName": "--ant-color-text-light-solid",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "font-size",
+      "combo": "count.unset",
+      "axisValues": {
+        "mode": "count",
+        "color": "unset"
+      },
+      "token": "badge-text-font-size",
+      "varName": "--ant-badge-text-font-size",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "font-size",
+      "combo": "count.blue",
+      "axisValues": {
+        "mode": "count",
+        "color": "blue"
+      },
+      "token": "badge-text-font-size",
+      "varName": "--ant-badge-text-font-size",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "font-size",
+      "combo": "count.green",
+      "axisValues": {
+        "mode": "count",
+        "color": "green"
+      },
+      "token": "badge-text-font-size",
+      "varName": "--ant-badge-text-font-size",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "font-size",
+      "combo": "count.purple",
+      "axisValues": {
+        "mode": "count",
+        "color": "purple"
+      },
+      "token": "badge-text-font-size",
+      "varName": "--ant-badge-text-font-size",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "height",
+      "combo": "count.unset",
+      "axisValues": {
+        "mode": "count",
+        "color": "unset"
+      },
+      "token": "badge-indicator-height",
+      "varName": "--ant-badge-indicator-height",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "height",
+      "combo": "count.blue",
+      "axisValues": {
+        "mode": "count",
+        "color": "blue"
+      },
+      "token": "badge-indicator-height",
+      "varName": "--ant-badge-indicator-height",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "height",
+      "combo": "count.green",
+      "axisValues": {
+        "mode": "count",
+        "color": "green"
+      },
+      "token": "badge-indicator-height",
+      "varName": "--ant-badge-indicator-height",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "height",
+      "combo": "count.purple",
+      "axisValues": {
+        "mode": "count",
+        "color": "purple"
+      },
+      "token": "badge-indicator-height",
+      "varName": "--ant-badge-indicator-height",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "line-height",
+      "combo": "count.unset",
+      "axisValues": {
+        "mode": "count",
+        "color": "unset"
+      },
+      "token": "badge-indicator-height",
+      "varName": "--ant-badge-indicator-height",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "line-height",
+      "combo": "count.blue",
+      "axisValues": {
+        "mode": "count",
+        "color": "blue"
+      },
+      "token": "badge-indicator-height",
+      "varName": "--ant-badge-indicator-height",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "line-height",
+      "combo": "count.green",
+      "axisValues": {
+        "mode": "count",
+        "color": "green"
+      },
+      "token": "badge-indicator-height",
+      "varName": "--ant-badge-indicator-height",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "line-height",
+      "combo": "count.purple",
+      "axisValues": {
+        "mode": "count",
+        "color": "purple"
+      },
+      "token": "badge-indicator-height",
+      "varName": "--ant-badge-indicator-height",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "min-width",
+      "combo": "count.unset",
+      "axisValues": {
+        "mode": "count",
+        "color": "unset"
+      },
+      "token": "badge-indicator-height",
+      "varName": "--ant-badge-indicator-height",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "min-width",
+      "combo": "count.blue",
+      "axisValues": {
+        "mode": "count",
+        "color": "blue"
+      },
+      "token": "badge-indicator-height",
+      "varName": "--ant-badge-indicator-height",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "min-width",
+      "combo": "count.green",
+      "axisValues": {
+        "mode": "count",
+        "color": "green"
+      },
+      "token": "badge-indicator-height",
+      "varName": "--ant-badge-indicator-height",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "min-width",
+      "combo": "count.purple",
+      "axisValues": {
+        "mode": "count",
+        "color": "purple"
+      },
+      "token": "badge-indicator-height",
+      "varName": "--ant-badge-indicator-height",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "z-index",
+      "combo": "count.unset",
+      "axisValues": {
+        "mode": "count",
+        "color": "unset"
+      },
+      "token": "badge-indicator-z-index",
+      "varName": "--ant-badge-indicator-z-index",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "z-index",
+      "combo": "count.blue",
+      "axisValues": {
+        "mode": "count",
+        "color": "blue"
+      },
+      "token": "badge-indicator-z-index",
+      "varName": "--ant-badge-indicator-z-index",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "z-index",
+      "combo": "count.green",
+      "axisValues": {
+        "mode": "count",
+        "color": "green"
+      },
+      "token": "badge-indicator-z-index",
+      "varName": "--ant-badge-indicator-z-index",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-count",
+      "channel": "z-index",
+      "combo": "count.purple",
+      "axisValues": {
+        "mode": "count",
+        "color": "purple"
+      },
+      "token": "badge-indicator-z-index",
+      "varName": "--ant-badge-indicator-z-index",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-count"
+      }
+    },
+    {
+      "part": "badge-dot",
+      "channel": "color",
+      "combo": "dot.blue",
+      "axisValues": {
+        "mode": "dot",
+        "color": "blue"
+      },
+      "token": "blue-6",
+      "varName": "--ant-blue-6",
+      "anchor": {
+        "selector": ".ant-badge.ant-badge .ant-badge-color-blue:not(.ant-badge-count)"
+      }
+    },
+    {
+      "part": "badge-dot",
+      "channel": "color",
+      "combo": "dot.green",
+      "axisValues": {
+        "mode": "dot",
+        "color": "green"
+      },
+      "token": "green-6",
+      "varName": "--ant-green-6",
+      "anchor": {
+        "selector": ".ant-badge.ant-badge .ant-badge-color-green:not(.ant-badge-count)"
+      }
+    },
+    {
+      "part": "badge-dot",
+      "channel": "color",
+      "combo": "dot.purple",
+      "axisValues": {
+        "mode": "dot",
+        "color": "purple"
+      },
+      "token": "purple-6",
+      "varName": "--ant-purple-6",
+      "anchor": {
+        "selector": ".ant-badge.ant-badge .ant-badge-color-purple:not(.ant-badge-count)"
+      }
+    },
+    {
+      "part": "badge-dot",
+      "channel": "height",
+      "combo": "dot.unset",
+      "axisValues": {
+        "mode": "dot",
+        "color": "unset"
+      },
+      "token": "badge-dot-size",
+      "varName": "--ant-badge-dot-size",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-dot"
+      }
+    },
+    {
+      "part": "badge-dot",
+      "channel": "height",
+      "combo": "dot.blue",
+      "axisValues": {
+        "mode": "dot",
+        "color": "blue"
+      },
+      "token": "badge-dot-size",
+      "varName": "--ant-badge-dot-size",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-dot"
+      }
+    },
+    {
+      "part": "badge-dot",
+      "channel": "height",
+      "combo": "dot.green",
+      "axisValues": {
+        "mode": "dot",
+        "color": "green"
+      },
+      "token": "badge-dot-size",
+      "varName": "--ant-badge-dot-size",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-dot"
+      }
+    },
+    {
+      "part": "badge-dot",
+      "channel": "height",
+      "combo": "dot.purple",
+      "axisValues": {
+        "mode": "dot",
+        "color": "purple"
+      },
+      "token": "badge-dot-size",
+      "varName": "--ant-badge-dot-size",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-dot"
+      }
+    },
+    {
+      "part": "badge-dot",
+      "channel": "min-width",
+      "combo": "dot.unset",
+      "axisValues": {
+        "mode": "dot",
+        "color": "unset"
+      },
+      "token": "badge-dot-size",
+      "varName": "--ant-badge-dot-size",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-dot"
+      }
+    },
+    {
+      "part": "badge-dot",
+      "channel": "min-width",
+      "combo": "dot.blue",
+      "axisValues": {
+        "mode": "dot",
+        "color": "blue"
+      },
+      "token": "badge-dot-size",
+      "varName": "--ant-badge-dot-size",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-dot"
+      }
+    },
+    {
+      "part": "badge-dot",
+      "channel": "min-width",
+      "combo": "dot.green",
+      "axisValues": {
+        "mode": "dot",
+        "color": "green"
+      },
+      "token": "badge-dot-size",
+      "varName": "--ant-badge-dot-size",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-dot"
+      }
+    },
+    {
+      "part": "badge-dot",
+      "channel": "min-width",
+      "combo": "dot.purple",
+      "axisValues": {
+        "mode": "dot",
+        "color": "purple"
+      },
+      "token": "badge-dot-size",
+      "varName": "--ant-badge-dot-size",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-dot"
+      }
+    },
+    {
+      "part": "badge-dot",
+      "channel": "width",
+      "combo": "dot.unset",
+      "axisValues": {
+        "mode": "dot",
+        "color": "unset"
+      },
+      "token": "badge-dot-size",
+      "varName": "--ant-badge-dot-size",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-dot"
+      }
+    },
+    {
+      "part": "badge-dot",
+      "channel": "width",
+      "combo": "dot.blue",
+      "axisValues": {
+        "mode": "dot",
+        "color": "blue"
+      },
+      "token": "badge-dot-size",
+      "varName": "--ant-badge-dot-size",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-dot"
+      }
+    },
+    {
+      "part": "badge-dot",
+      "channel": "width",
+      "combo": "dot.green",
+      "axisValues": {
+        "mode": "dot",
+        "color": "green"
+      },
+      "token": "badge-dot-size",
+      "varName": "--ant-badge-dot-size",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-dot"
+      }
+    },
+    {
+      "part": "badge-dot",
+      "channel": "width",
+      "combo": "dot.purple",
+      "axisValues": {
+        "mode": "dot",
+        "color": "purple"
+      },
+      "token": "badge-dot-size",
+      "varName": "--ant-badge-dot-size",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-dot"
+      }
+    },
+    {
+      "part": "badge-dot",
+      "channel": "z-index",
+      "combo": "dot.unset",
+      "axisValues": {
+        "mode": "dot",
+        "color": "unset"
+      },
+      "token": "badge-indicator-z-index",
+      "varName": "--ant-badge-indicator-z-index",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-dot"
+      }
+    },
+    {
+      "part": "badge-dot",
+      "channel": "z-index",
+      "combo": "dot.blue",
+      "axisValues": {
+        "mode": "dot",
+        "color": "blue"
+      },
+      "token": "badge-indicator-z-index",
+      "varName": "--ant-badge-indicator-z-index",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-dot"
+      }
+    },
+    {
+      "part": "badge-dot",
+      "channel": "z-index",
+      "combo": "dot.green",
+      "axisValues": {
+        "mode": "dot",
+        "color": "green"
+      },
+      "token": "badge-indicator-z-index",
+      "varName": "--ant-badge-indicator-z-index",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-dot"
+      }
+    },
+    {
+      "part": "badge-dot",
+      "channel": "z-index",
+      "combo": "dot.purple",
+      "axisValues": {
+        "mode": "dot",
+        "color": "purple"
+      },
+      "token": "badge-indicator-z-index",
+      "varName": "--ant-badge-indicator-z-index",
+      "anchor": {
+        "selector": ".ant-badge .ant-badge-dot"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "count.unset",
+      "axisValues": {
+        "mode": "count",
+        "color": "unset"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "count.blue",
+      "axisValues": {
+        "mode": "count",
+        "color": "blue"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "count.green",
+      "axisValues": {
+        "mode": "count",
+        "color": "green"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "count.purple",
+      "axisValues": {
+        "mode": "count",
+        "color": "purple"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "dot.unset",
+      "axisValues": {
+        "mode": "dot",
+        "color": "unset"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "dot.blue",
+      "axisValues": {
+        "mode": "dot",
+        "color": "blue"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "dot.green",
+      "axisValues": {
+        "mode": "dot",
+        "color": "green"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "dot.purple",
+      "axisValues": {
+        "mode": "dot",
+        "color": "purple"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "count.unset",
+      "axisValues": {
+        "mode": "count",
+        "color": "unset"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "count.blue",
+      "axisValues": {
+        "mode": "count",
+        "color": "blue"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "count.green",
+      "axisValues": {
+        "mode": "count",
+        "color": "green"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "count.purple",
+      "axisValues": {
+        "mode": "count",
+        "color": "purple"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "dot.unset",
+      "axisValues": {
+        "mode": "dot",
+        "color": "unset"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "dot.blue",
+      "axisValues": {
+        "mode": "dot",
+        "color": "blue"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "dot.green",
+      "axisValues": {
+        "mode": "dot",
+        "color": "green"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "dot.purple",
+      "axisValues": {
+        "mode": "dot",
+        "color": "purple"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-badge"
+      }
+    },
+    {
+      "part": "scroll-number-only",
+      "channel": "height",
+      "combo": "count.unset",
+      "axisValues": {
+        "mode": "count",
+        "color": "unset"
+      },
+      "token": "badge-indicator-height",
+      "varName": "--ant-badge-indicator-height",
+      "anchor": {
+        "selector": ".ant-badge .ant-scroll-number .ant-scroll-number-only"
+      }
+    },
+    {
+      "part": "scroll-number-only",
+      "channel": "height",
+      "combo": "count.blue",
+      "axisValues": {
+        "mode": "count",
+        "color": "blue"
+      },
+      "token": "badge-indicator-height",
+      "varName": "--ant-badge-indicator-height",
+      "anchor": {
+        "selector": ".ant-badge .ant-scroll-number .ant-scroll-number-only"
+      }
+    },
+    {
+      "part": "scroll-number-only",
+      "channel": "height",
+      "combo": "count.green",
+      "axisValues": {
+        "mode": "count",
+        "color": "green"
+      },
+      "token": "badge-indicator-height",
+      "varName": "--ant-badge-indicator-height",
+      "anchor": {
+        "selector": ".ant-badge .ant-scroll-number .ant-scroll-number-only"
+      }
+    },
+    {
+      "part": "scroll-number-only",
+      "channel": "height",
+      "combo": "count.purple",
+      "axisValues": {
+        "mode": "count",
+        "color": "purple"
+      },
+      "token": "badge-indicator-height",
+      "varName": "--ant-badge-indicator-height",
+      "anchor": {
+        "selector": ".ant-badge .ant-scroll-number .ant-scroll-number-only"
+      }
+    }
+  ],
+  "skips": [
+    "avatar.line-height: candidate --ant-line-height → \"line-height\" = 1.5714285714285714 names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "badge-count.box-shadow: candidates --ant-color-border-bg → \"color-border-bg\" = #ffffff; --ant-line-width → \"line-width\" = 1px name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "badge-count.font-weight: candidate --ant-badge-text-font-weight → \"badge-text-font-weight\" = normal names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "badge-dot.box-shadow: candidates --ant-color-border-bg → \"color-border-bg\" = #ffffff; --ant-line-width → \"line-width\" = 1px name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.color: candidate --ant-color-text → \"color-text\" = rgba(0,0,0,0.88) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 7,
+  "shorthandSkips": [
+    "avatar.border-radius: SHORTHAND carrying var(--ant-border-radius) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "badge-count.background: SHORTHAND carrying var(--ant-blue-6) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "badge-count.background: SHORTHAND carrying var(--ant-green-6) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "badge-count.background: SHORTHAND carrying var(--ant-purple-6) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "badge-dot.background: SHORTHAND carrying var(--ant-blue-6) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "badge-dot.background: SHORTHAND carrying var(--ant-green-6) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "badge-dot.background: SHORTHAND carrying var(--ant-purple-6) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

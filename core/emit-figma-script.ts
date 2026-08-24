@@ -122,6 +122,9 @@ export interface NodeSpec {
    *  so the ring wraps the full root bounds; the preview renders a CSS
    *  outline. */
   strokeOutside?: boolean;
+  /** ANTD EXAM (heal loop): a stylesWhen `border-*-style: dashed|dotted` on
+   *  this combo lowers to a Figma dashPattern on the stroke (solid otherwise). */
+  dashPattern?: number[];
   fixedWidth?: { px: number; varName: string };
   fixedHeight?: { px: number; varName?: string };
   /** CSS grow → layoutSizingHorizontal FILL after append. */
@@ -481,7 +484,11 @@ export interface VariantSpec {
  *  its facts in the same order. */
 export interface CodeOnlyFact {
   part: string;
-  kind: 'channel' | 'declared' | 'gradient' | 'shadow' | 'event' | 'meter' | 'scrim' | 'preview';
+  /** `capture` (antd exam, W4): a state-plane fact the computed capture
+   *  observed and the contract grammar refused — carried on the part as
+   *  `Part.codeOnly` so the bundle, the plugin report and the set's plugin
+   *  data repeat it. The channel is spelled `outline-width [focus-visible]`. */
+  kind: 'channel' | 'declared' | 'gradient' | 'shadow' | 'event' | 'meter' | 'scrim' | 'preview' | 'capture';
   channel: string;
   value: string;
   reason: string;
@@ -3561,7 +3568,6 @@ function applyStylesWhenOpacity(
 ): void {
   for (const sw of part.stylesWhen ?? []) {
     const raw = sw.styles['opacity'];
-    if (raw === undefined) continue;
     const applies =
       sw.equals !== undefined
         ? subst[sw.prop] === sw.equals
@@ -3569,6 +3575,13 @@ function applyStylesWhenOpacity(
           ? subst[sw.prop] === 'true' // VARIANT-bound bool: a compiled axis
           : contract.props.find((p) => p.name === sw.prop)?.default === true;
     if (!applies) continue;
+    // ANTD EXAM (heal loop): a per-value border STYLE on this combo — antd's
+    // dashed Button type drew a SOLID stroke, a wrong fact rather than a
+    // named one. dashed → [3,3], dotted → [1,2] (Chromium's 1px rendering).
+    const styles = ['border-style', 'border-top-style', 'border-right-style', 'border-bottom-style', 'border-left-style'].map((k) => sw.styles[k]).filter(Boolean);
+    if (styles.includes('dashed')) spec.dashPattern = [3, 3];
+    else if (styles.includes('dotted')) spec.dashPattern = [1, 2];
+    if (raw === undefined) continue;
     const value = Number.parseFloat(raw);
     if (!Number.isNaN(value)) spec.opacity = value;
   }
@@ -4009,12 +4022,20 @@ function rootTextSpecs(
   ctx: TextCtx,
   subst: Record<string, string>,
 ): NodeSpec[] {
-  if (root.text === undefined) return [];
-  return partToSpecs(
-    'label',
-    { text: root.text, ...(root.textByProp ? { textByProp: root.textByProp } : {}) } as Part,
-    contract, byId, ctx, subst,
-  );
+  // ANTD EXAM (Tag, 2026-08-23): the root's text can also be PROP-BOUND —
+  // `content: { prop: 'children' }` on a root that ALSO has parts (antd's
+  // Tag: `<span class="ant-tag">Tag<span class="anticon">…</span></span>`).
+  // The literal branch above was the only one this function knew, so a
+  // prop-bound root label beside a part compiled to no text node at all —
+  // the compile receipt's "no TEXT node carrying Tag" pin was the only
+  // thing that noticed, and nothing named it. The bound label is hosted the
+  // same way a child `content` part is (a TEXT child named `label` linked to
+  // the text property). A root with NO parts keeps the `children` branch.
+  if (root.text === undefined && root.content === undefined) return [];
+  const hosted: Part = root.text !== undefined
+    ? ({ text: root.text, ...(root.textByProp ? { textByProp: root.textByProp } : {}) } as Part)
+    : ({ content: root.content } as Part);
+  return partToSpecs('label', hosted, contract, byId, ctx, subst);
 }
 
 function partToSpec(
@@ -4717,9 +4738,25 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // declaration order (see isVariantBool). An enum-only contract's axis list
   // is exactly the old enum filter — byte-identical substitution space.
   const axisProps = contract.props.filter((p) => isEnum(p) || isVariantBool(p));
-  const textProp = contract.props.find(
-    (p) => p.type === 'text' && p.bindings.code.prop === 'children',
-  );
+  // ANTD EXAM (heal loop): a root with no parts and no `children` prop can
+  // still carry its text through another TEXT prop — antd's Input draws
+  // its `placeholder`. The canvas label follows the first text prop when no
+  // `children` exists (an <input> has no children in any grammar) — but ONLY
+  // on a root the browser itself draws that text for: a text control
+  // (`semantics.element` input/textarea, whose placeholder/value is visible
+  // ink). Any other element's TEXT prop can be consumed invisibly — the
+  // catalog's StatusDot binds `label` to `aria-label` alone, and the CSS
+  // surface (emit-html textDefaultOf) renders NO text for it: "text props
+  // used solely by attrs remain attributes, not content". The first cut of
+  // this fallback keyed on "no parts" only and drew a 97×25 'Status' label
+  // over an 8×8 dot (catalog gate: text-overflows-root-canvas ×5) — the
+  // canvas must mirror the code surface's discipline, not out-draw it.
+  const rootIsTextControl = contract.semantics?.element === 'input' || contract.semantics?.element === 'textarea';
+  const textProp =
+    contract.props.find((p) => p.type === 'text' && p.bindings.code.prop === 'children') ??
+    (contract.anatomy.root?.parts || !rootIsTextControl
+      ? undefined
+      : contract.props.find((p) => p.type === 'text' && p.bindings.figma.kind === 'TEXT'));
   // VARIANT-bound booleans are axes, not BOOLEAN component properties.
   const boolPropsData = contract.props
     .filter((p) => p.type === 'boolean' && !isVariantBool(p))
@@ -4736,7 +4773,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // the `children` prop branch below is the one drawing it (no parts + a
   // bound text prop — the literal is that label's default, never a second
   // text node).
-  const hostsRootText = contract.anatomy.root?.text !== undefined && !(textProp && !contract.anatomy.root?.parts);
+  const hostsRootText = (contract.anatomy.root?.text !== undefined || contract.anatomy.root?.content !== undefined) && !(textProp && !contract.anatomy.root?.parts);
 
   const orderedValues = (p: Prop): string[] => {
     if (!isEnum(p)) return boolAxisValues(p); // bool axis: default first
@@ -4883,6 +4920,10 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       centerStrokeGlyphsInHosts(rootSpec.children);
       stampGridCells(rootSpec, root, subst); // A2 grid — see stampGridCells
     } else if (textProp) {
+      // ANTD EXAM (heal loop): a root whose label is a NON-children text prop
+      // is an <input> drawing its placeholder — text starts at the padding
+      // edge (antd `text-align: start`), it is never centred like a Button.
+      if (textProp.bindings.code.prop !== 'children' && rootSpec.layout && rootSpec.layout.primary === 'CENTER') rootSpec.layout = { ...rootSpec.layout, primary: 'MIN' };
       rootSpec.children = [
         {
           type: 'text',
@@ -5230,6 +5271,58 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // sees the final spec shape (after margin lowering / miss stripping).
   for (const v of variants) annotateFillW(v.spec);
   for (const v of stateVariants) annotateFillW(v.spec);
+  // ANTD EXAM (S6, 2026-08-23) — THE MARGIN BOX HAS A SILENT EXIT. The
+  // runtime's applyMarginBox returns without a word when the child is
+  // FILL-sized, grows, or is out of flow (overlay / inset / absolute): a
+  // wrapper around a FILL child would break the fill, so the residual margin
+  // is simply not drawn. Measured on the conformance case
+  // `antd-empty-margin-only-parts` (antd Switch's inner-checked/unchecked
+  // spans): `margin-left: 24px` on a display:block child of a vertical stack
+  // compiled to fillW, the margin box was skipped, and the canvas round trip
+  // reported SILENT — the contract carried the token, the dump carried no
+  // trace, and none of the three code-only facts was this one. FILL is
+  // decided just above (annotateFillW runs last), so this is the first point
+  // the compile can know the runtime will skip; name every residual side as
+  // a channel miss and strip the dead field, exactly as refuseRootMargins
+  // does for the root.
+  const refuseSkippedMargins = (spec: NodeSpec, variant: string) => {
+    for (const child of spec.children ?? []) {
+      const m = child.margins;
+      if (m) {
+        const sides = (['top', 'right', 'bottom', 'left'] as const).filter((s) => m[s]);
+        // The fourth exit is the one the exam found: an EMPTY in-flow frame
+        // takes the parent's height (layoutSizingVertical FILL — the #60
+        // runtime default, so a ProgressBar indicator never inherits Figma's
+        // 100×100 createFrame box), and applyMarginBox tests EITHER axis.
+        const emptyRuntimeSized =
+          child.type === 'frame' && (child.children?.length ?? 0) === 0 &&
+          !child.fixedHeight && child.lits?.height === undefined && !child.shape;
+        const why = child.overlay || child.insetOverlay || child.absolute
+          ? 'an out-of-flow child (overlay / inset / absolute) keeps its own placement lowering'
+          : child.grow
+            ? 'a growing child (flex-grow → layoutGrow) cannot be wrapped without breaking the grow'
+            : child.fillW
+              ? 'a FILL-sized child cannot be wrapped in a margin box without breaking the fill'
+              : emptyRuntimeSized
+                ? 'an EMPTY in-flow box takes the parent height (layoutSizingVertical FILL, the #60 runtime default) and a FILL-sized child cannot be wrapped'
+                : null;
+        if (sides.length > 0 && why) {
+          facts.push({
+            part: child.name,
+            variant,
+            kind: 'channel',
+            channel: sides.map((s) => `margin-${s}`).join('/'),
+            value: sides.map((s) => `${m[s]}px`).join('/'),
+            reason: `the margin-box wrapper is skipped — ${why}; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)`,
+          });
+          delete child.margins;
+        }
+      }
+      refuseSkippedMargins(child, variant);
+    }
+  };
+  for (const v of variants) refuseSkippedMargins(v.spec, v.name);
+  for (const v of stateVariants) refuseSkippedMargins(v.spec, v.name);
   // Meter parts are runtime-sized (the canvas shows the defaults' fraction;
   // height follows the track) — a code-only fact like the rest.
   for (const { name: partName, part } of walkAnatomy(contract)) {
@@ -5242,6 +5335,72 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       value: '',
       reason: "runtime-sized — the canvas shows the defaults' fraction and the height follows the track",
     });
+  }
+  // ANTD EXAM (W4): capture-side receipts the CONTRACT carries (Part.codeOnly)
+  // — state-plane facts the computed capture observed and the grammar refused
+  // (a nested part's focus-visible outline-width; a state delta outside every
+  // mintable kind). Repeated here verbatim so the bundle, the plugin report
+  // and the set's plugin data name them; nothing draws them.
+  for (const { name: partName, part } of walkAnatomy(contract)) {
+    for (const c of part.codeOnly ?? []) {
+      facts.push({
+        part: partName,
+        variant: '',
+        kind: 'capture',
+        channel: c.state ? `${c.channel} [${c.state}]` : c.channel,
+        value: c.value,
+        reason: `observed by the computed capture and refused by the contract grammar — ${c.reason}`,
+      });
+    }
+  }
+  // ANTD EXAM (S1 third half, 2026-08-23) — THE UNDRAWN STATE PLANE. A
+  // contract whose parts carry STATE token bindings (root.states.focus-visible
+  // .outline-width …) draws them on the canvas only as State preview cells,
+  // and those exist only when bindings.figma.statePreviews is on (promote's
+  // referee probe turns it on where it can; an explicit reviewed `false` or a
+  // refusal leaves it off). With previews off the whole state plane is
+  // simply not built — measured on the conformance fixture (which never
+  // promotes): the focus ring's three carried channels vanished from the
+  // dump and the round trip reported SILENT, because the only receipts on
+  // the set were about the REST plane. Name every state-bound channel the
+  // undrawn plane holds.
+  // ANTD EXAM (Badge / Tag, 2026-08-23) — THE UNSET PLANE. A DEFAULTLESS enum
+  // axis (antd's Tag `color`, Badge `color`, Input `status`; Carbon's `size`,
+  // Altitude's `variant`, Polaris's `tone`) renders the library's OWN default
+  // when the prop is absent — antd's red count badge, its neutral grey tag —
+  // and the capture measured that plane as the set's BASE (its tokens ride
+  // `tokens`; the enum values ride tokensByProp). The canvas enumerates
+  // VARIANT cells from the enum values only, so the unset rendering — usually
+  // the most recognisable one — has no cell, and the round trip proposes the
+  // first enum value as the default. Measured on the scratch-file dump:
+  // Badge came back `Color: Blue|Green|Purple, default Blue` with the red
+  // badge nowhere and nothing naming it. One fact per defaultless axis.
+  for (const p of contract.props) {
+    if (!isEnum(p) || p.default !== undefined || p.bindings.figma.kind !== 'VARIANT') continue;
+    facts.push({
+      part: 'root',
+      variant: '',
+      kind: 'channel',
+      channel: `${p.name} [unset]`,
+      value: p.type.enum.join('|'),
+      reason: `defaultless axis — the library's own rendering when "${p.name}" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the ${p.type.enum.length} declared values only, and a proposal read back from the canvas will call "${p.type.enum[0]}" the default (FC-UNSET-PLANE-UNDRAWN)`,
+    });
+  }
+  if (!contract.bindings?.figma?.statePreviews && contract.states.length > 0) {
+    for (const { name: partName, part } of walkAnatomy(contract)) {
+      for (const [state, m] of Object.entries(part.states ?? {})) {
+        for (const [ch, ref] of Object.entries(m)) {
+          facts.push({
+            part: partName,
+            variant: '',
+            kind: 'channel',
+            channel: `${ch} [${state}]`,
+            value: ref,
+            reason: `the ${state} plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)`,
+          });
+        }
+      }
+    }
   }
   // Round 5: compiled facts the SYNC RUNTIME cannot apply natively — the
   // image-placeholder wash (raster content is runtime data), the block-root
@@ -7085,6 +7244,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = ${strokeAlignJs(hasStrokeOutside)};
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -7282,6 +7443,11 @@ ${hasSlot ? `  // A native slot's LAYER NAME is its property's display name: ren
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -7309,6 +7475,14 @@ ${hasSlot ? `  // A native slot's LAYER NAME is its property's display name: ren
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }${insetOverlayCall(hasInsetOverlay, 'node, childNode, child')}${marginBoxCall(hasMargins, 'node, childNode, child, registry')}
   }${gridChildrenCall(hasGrid, 'node, spec, built')}${outOfFlowResizeCall(hasInsetOverlay || hasAbsolute, 'node, built')}${birthBoxCall(hasChildlessBox, 'node', 'spec')}
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
+    }
+  }
   return node;
 }
 

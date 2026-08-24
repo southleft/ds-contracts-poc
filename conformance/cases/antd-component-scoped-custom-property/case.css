@@ -1,0 +1,2 @@
+[data-cf="antd-component-scoped-custom-property"] { display: flex; --cf-scoped-pad: 15px; }
+[data-cf="antd-component-scoped-custom-property"] .cf-a { display: inline-block; padding-inline: var(--cf-scoped-pad); background: rgb(245, 245, 245); }

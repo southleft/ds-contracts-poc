@@ -1,0 +1,271 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "antd.tag",
+  "name": "Tag",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). DEFAULTLESS colour enum: antd Tag has no default `color`; the unset rendering is the neutral tag, so the capture prepends `unset` (enumeration.unsetLabel). The 7 presets are a CURATED slice of the 13 palette presets + 5 status presets (blue/green/red/gold = palette; success/processing/error = status) — the full 18 would be 18×2×2 = 72 renderings of one mechanism. `bordered` rides as a 2-value enum axis (bordered|borderless; config maps to the boolean). `closable` is a PRESENCE prop (mounts the close icon part). Root has NO hover plane; the close icon has (descendant state) — `hover` is declared so the delta can land. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "color",
+      "type": {
+        "enum": [
+          "blue",
+          "green",
+          "red",
+          "gold",
+          "success",
+          "processing",
+          "error"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "blue": "Blue",
+            "green": "Green",
+            "red": "Red",
+            "gold": "Gold",
+            "success": "Success",
+            "processing": "Processing",
+            "error": "Error"
+          }
+        },
+        "code": {
+          "prop": "color"
+        }
+      }
+    },
+    {
+      "name": "bordered",
+      "type": {
+        "enum": [
+          "bordered",
+          "borderless"
+        ]
+      },
+      "default": "bordered",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Bordered",
+          "values": {
+            "bordered": "Bordered",
+            "borderless": "Borderless"
+          }
+        },
+        "code": {
+          "prop": "bordered"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Tag",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    },
+    {
+      "name": "closable",
+      "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `closable` (true); the created subtree is carried as parts gated on this prop.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Show Closable"
+        },
+        "code": {
+          "prop": "closable"
+        }
+      }
+    }
+  ],
+  "states": [
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
+        "position": "relative",
+        "text-wrap-mode": "nowrap",
+        "transition-duration": "0.2s"
+      },
+      "parts": {
+        "anticon": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|anticon.tag-close-icon — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "inline-flex",
+            "align": "center"
+          },
+          "visibleWhen": {
+            "prop": "closable"
+          },
+          "icon": {
+            "asset": "tag-anticon",
+            "size": 10
+          },
+          "declared": {
+            "box-sizing": "border-box",
+            "cursor": "pointer",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "text-align": "center",
+            "text-rendering": "optimizelegibility",
+            "text-wrap-mode": "nowrap",
+            "transition-duration": "0.2s"
+          },
+          "tokens": {
+            "color": "{imported.tag.anticon.color}",
+            "font-size": "{imported.tag.anticon.font-size}",
+            "line-height": "{imported.shared.size-0}",
+            "margin-left": "{imported.tag.anticon.margin-left}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "vertical-align": "{imported.tag.anticon.vertical-align}"
+          }
+        }
+      },
+      "content": {
+        "prop": "children"
+      },
+      "tokens": {
+        "background-color": "{imported.tag.root.background-color.unset}",
+        "border-bottom-left-radius": "{imported.shared.size-4}",
+        "border-bottom-right-radius": "{imported.shared.size-4}",
+        "border-bottom-width": "{imported.shared.size-1}",
+        "border-left-width": "{imported.shared.size-1}",
+        "border-right-width": "{imported.shared.size-1}",
+        "border-top-left-radius": "{imported.shared.size-4}",
+        "border-top-right-radius": "{imported.shared.size-4}",
+        "border-top-width": "{imported.shared.size-1}",
+        "bottom": "{imported.shared.size-0}",
+        "color": "{imported.tag.root.color.unset}",
+        "font-size": "{imported.tag.root.font-size}",
+        "font-weight": "{imported.tag.root.font-weight}",
+        "left": "{imported.shared.size-0}",
+        "line-height": "{imported.tag.root.line-height}",
+        "margin-right": "{imported.tag.root.margin-right}",
+        "padding-left": "{imported.tag.root.padding-left}",
+        "padding-right": "{imported.tag.root.padding-right}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.tag.root.width.off}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "bordered",
+          "map": {
+            "bordered": {
+              "border-bottom-color": "{imported.tag.root.border-bottom-color.unset.bordered}",
+              "border-left-color": "{imported.tag.root.border-left-color.unset.bordered}",
+              "border-right-color": "{imported.tag.root.border-right-color.unset.bordered}",
+              "border-top-color": "{imported.tag.root.border-top-color.unset.bordered}"
+            },
+            "borderless": {
+              "border-bottom-color": "{imported.tag.root.border-bottom-color.unset.borderless}",
+              "border-left-color": "{imported.tag.root.border-left-color.unset.borderless}",
+              "border-right-color": "{imported.tag.root.border-right-color.unset.borderless}",
+              "border-top-color": "{imported.tag.root.border-top-color.unset.borderless}"
+            }
+          }
+        },
+        {
+          "prop": "color",
+          "map": {
+            "blue": {
+              "background-color": "{imported.tag.root.background-color.blue}",
+              "border-bottom-color": "{imported.tag.root.border-bottom-color.blue.{bordered}}",
+              "border-left-color": "{imported.tag.root.border-left-color.blue.{bordered}}",
+              "border-right-color": "{imported.tag.root.border-right-color.blue.{bordered}}",
+              "border-top-color": "{imported.tag.root.border-top-color.blue.{bordered}}",
+              "color": "{imported.tag.root.color.blue}"
+            },
+            "error": {
+              "background-color": "{imported.tag.root.background-color.error}",
+              "border-bottom-color": "{imported.tag.root.border-bottom-color.error.{bordered}}",
+              "border-left-color": "{imported.tag.root.border-left-color.error.{bordered}}",
+              "border-right-color": "{imported.tag.root.border-right-color.error.{bordered}}",
+              "border-top-color": "{imported.tag.root.border-top-color.error.{bordered}}",
+              "color": "{imported.tag.root.color.error}"
+            },
+            "gold": {
+              "background-color": "{imported.tag.root.background-color.gold}",
+              "border-bottom-color": "{imported.tag.root.border-bottom-color.gold.{bordered}}",
+              "border-left-color": "{imported.tag.root.border-left-color.gold.{bordered}}",
+              "border-right-color": "{imported.tag.root.border-right-color.gold.{bordered}}",
+              "border-top-color": "{imported.tag.root.border-top-color.gold.{bordered}}",
+              "color": "{imported.tag.root.color.gold}"
+            },
+            "green": {
+              "background-color": "{imported.tag.root.background-color.green}",
+              "border-bottom-color": "{imported.tag.root.border-bottom-color.green.{bordered}}",
+              "border-left-color": "{imported.tag.root.border-left-color.green.{bordered}}",
+              "border-right-color": "{imported.tag.root.border-right-color.green.{bordered}}",
+              "border-top-color": "{imported.tag.root.border-top-color.green.{bordered}}",
+              "color": "{imported.tag.root.color.green}"
+            },
+            "processing": {
+              "background-color": "{imported.tag.root.background-color.processing}",
+              "border-bottom-color": "{imported.tag.root.border-bottom-color.processing.{bordered}}",
+              "border-left-color": "{imported.tag.root.border-left-color.processing.{bordered}}",
+              "border-right-color": "{imported.tag.root.border-right-color.processing.{bordered}}",
+              "border-top-color": "{imported.tag.root.border-top-color.processing.{bordered}}",
+              "color": "{imported.tag.root.color.processing}"
+            },
+            "red": {
+              "background-color": "{imported.tag.root.background-color.red}",
+              "border-bottom-color": "{imported.tag.root.border-bottom-color.red.{bordered}}",
+              "border-left-color": "{imported.tag.root.border-left-color.red.{bordered}}",
+              "border-right-color": "{imported.tag.root.border-right-color.red.{bordered}}",
+              "border-top-color": "{imported.tag.root.border-top-color.red.{bordered}}",
+              "color": "{imported.tag.root.color.red}"
+            },
+            "success": {
+              "background-color": "{imported.tag.root.background-color.success}",
+              "border-bottom-color": "{imported.tag.root.border-bottom-color.success.{bordered}}",
+              "border-left-color": "{imported.tag.root.border-left-color.success.{bordered}}",
+              "border-right-color": "{imported.tag.root.border-right-color.success.{bordered}}",
+              "border-top-color": "{imported.tag.root.border-top-color.success.{bordered}}",
+              "color": "{imported.tag.root.color.success}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "antd",
+        "export": "Tag"
+      }
+    }
+  }
+}

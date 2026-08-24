@@ -83,7 +83,7 @@
  * minted token PATH is carriage bookkeeping, not a receipt (the CSS/DOM gate's
  * rule).
  */
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import {
@@ -420,6 +420,15 @@ export async function roundTrip(c: CaseEntry, verbose = false): Promise<CanvasMe
   base.proposedRaw = [...new Set(comparable.map((h) => h.raw))].sort();
   const agree = comparable.filter((h) => seedHits.some((s) => sameValue(h.value, s.value)));
   if (verbose) {
+    // `CONFORMANCE_CANVAS_DUMP_OUT=<dir>` (antd exam, S6 triage): the full
+    // dump set + proposal for a --case run, so a truncated console line is
+    // never the only view of what the canvas actually held.
+    if (process.env.CONFORMANCE_CANVAS_DUMP_OUT) {
+      const dir = process.env.CONFORMANCE_CANVAS_DUMP_OUT;
+      mkdirSync(dir, { recursive: true });
+      writeFileSync(path.join(dir, `${c.id}.dump.json`), JSON.stringify(set, null, 2) + '\n');
+      writeFileSync(path.join(dir, `${c.id}.proposal.json`), JSON.stringify(proposal, null, 2) + '\n');
+    }
     console.log(`  dump set: ${JSON.stringify(set).slice(0, 1500)}`);
     console.log(`  proposal anatomy: ${JSON.stringify((proposal.contract as { anatomy?: unknown }).anatomy)}`);
     console.log(`  proposal minted: ${JSON.stringify(proposal.mintedTokens?.tree ?? {})}`);

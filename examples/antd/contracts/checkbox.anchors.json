@@ -1,0 +1,62 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "checkbox",
+  "anchors": [
+    {
+      "leaf": "imported.checkbox.checkbox-inner.background-color-state-active.indeterminate",
+      "token": "color-bg-container",
+      "part": "checkbox-inner",
+      "cssProperty": "background-color",
+      "varName": "--ant-color-bg-container",
+      "selector": ".ant-checkbox .ant-checkbox-inner"
+    },
+    {
+      "leaf": "imported.checkbox.checkbox-inner.background-color-state-active.unchecked",
+      "token": "color-bg-container",
+      "part": "checkbox-inner",
+      "cssProperty": "background-color",
+      "varName": "--ant-color-bg-container",
+      "selector": ".ant-checkbox .ant-checkbox-inner"
+    },
+    {
+      "leaf": "imported.checkbox.checkbox-inner.background-color-state-hover.indeterminate",
+      "token": "color-bg-container",
+      "part": "checkbox-inner",
+      "cssProperty": "background-color",
+      "varName": "--ant-color-bg-container",
+      "selector": ".ant-checkbox .ant-checkbox-inner"
+    },
+    {
+      "leaf": "imported.checkbox.checkbox-inner.background-color-state-hover.unchecked",
+      "token": "color-bg-container",
+      "part": "checkbox-inner",
+      "cssProperty": "background-color",
+      "varName": "--ant-color-bg-container",
+      "selector": ".ant-checkbox .ant-checkbox-inner"
+    },
+    {
+      "leaf": "imported.checkbox.checkbox-inner.background-color.checked",
+      "token": "color-primary",
+      "part": "checkbox-inner",
+      "cssProperty": "background-color",
+      "varName": "--ant-color-primary",
+      "selector": ".ant-checkbox-checked .ant-checkbox-inner"
+    },
+    {
+      "leaf": "imported.checkbox.checkbox-inner.background-color.indeterminate",
+      "token": "color-bg-container",
+      "part": "checkbox-inner",
+      "cssProperty": "background-color",
+      "varName": "--ant-color-bg-container",
+      "selector": ".ant-checkbox .ant-checkbox-inner"
+    },
+    {
+      "leaf": "imported.checkbox.checkbox-inner.background-color.unchecked",
+      "token": "color-bg-container",
+      "part": "checkbox-inner",
+      "cssProperty": "background-color",
+      "varName": "--ant-color-bg-container",
+      "selector": ".ant-checkbox .ant-checkbox-inner"
+    }
+  ]
+}

@@ -11,12 +11,7 @@ const COMPONENTS = [
     "description": "StatusDot — generated from contract ds.status-dot v1.0.0",
     "isSet": true,
     "boolProps": [],
-    "textProps": [
-      {
-        "property": "Label",
-        "default": "Status"
-      }
-    ],
+    "textProps": [],
     "fontStyles": [
       "Medium"
     ],
@@ -30,7 +25,7 @@ const COMPONENTS = [
           "name": "Variant=Neutral",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "fill": "color/status/neutral",
@@ -47,7 +42,17 @@ const COMPONENTS = [
             "topRightRadius": "radius/pill",
             "bottomLeftRadius": "radius/pill",
             "bottomRightRadius": "radius/pill"
-          }
+          },
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Status",
+              "fontSize": 16,
+              "fontStyle": "Medium",
+              "contentProp": "Label"
+            }
+          ]
         }
       },
       {
@@ -59,7 +64,7 @@ const COMPONENTS = [
           "name": "Variant=Success",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "fill": "color/status/success",
@@ -76,7 +81,17 @@ const COMPONENTS = [
             "topRightRadius": "radius/pill",
             "bottomLeftRadius": "radius/pill",
             "bottomRightRadius": "radius/pill"
-          }
+          },
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Status",
+              "fontSize": 16,
+              "fontStyle": "Medium",
+              "contentProp": "Label"
+            }
+          ]
         }
       },
       {
@@ -88,7 +103,7 @@ const COMPONENTS = [
           "name": "Variant=Warning",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "fill": "color/status/warning",
@@ -105,7 +120,17 @@ const COMPONENTS = [
             "topRightRadius": "radius/pill",
             "bottomLeftRadius": "radius/pill",
             "bottomRightRadius": "radius/pill"
-          }
+          },
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Status",
+              "fontSize": 16,
+              "fontStyle": "Medium",
+              "contentProp": "Label"
+            }
+          ]
         }
       },
       {
@@ -117,7 +142,7 @@ const COMPONENTS = [
           "name": "Variant=Error",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "fill": "color/status/error",
@@ -134,7 +159,17 @@ const COMPONENTS = [
             "topRightRadius": "radius/pill",
             "bottomLeftRadius": "radius/pill",
             "bottomRightRadius": "radius/pill"
-          }
+          },
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Status",
+              "fontSize": 16,
+              "fontStyle": "Medium",
+              "contentProp": "Label"
+            }
+          ]
         }
       },
       {
@@ -146,7 +181,7 @@ const COMPONENTS = [
           "name": "Variant=Accent",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "CENTER",
+            "primary": "MIN",
             "counter": "CENTER"
           },
           "fill": "color/status/accent",
@@ -163,7 +198,17 @@ const COMPONENTS = [
             "topRightRadius": "radius/pill",
             "bottomLeftRadius": "radius/pill",
             "bottomRightRadius": "radius/pill"
-          }
+          },
+          "children": [
+            {
+              "type": "text",
+              "name": "label",
+              "characters": "Status",
+              "fontSize": 16,
+              "fontStyle": "Medium",
+              "contentProp": "Label"
+            }
+          ]
         }
       }
     ],
@@ -512,35 +557,6 @@ function ensureHostSection(page, target, displayName) {
 }
 
 
-function remeasureBirthBox(node, label, hasW, hasH) {
-  for (const axis of ['Vertical', 'Horizontal']) {
-    // A DECLARED SIZE IS NOT A BIRTH BOX. This repair dissolves Figma's
-    // 100x100 default by shrinking a HUG axis to 1 and letting it re-measure
-    // — which is right for a node whose size is supposed to come from its
-    // content, and destructive for one the CONTRACT sized. A childless frame
-    // has nothing to re-measure against, so the axis hugs to 1 and stays
-    // there: MUI's switch-track is declared 34x14 and shipped 1x1 exactly
-    // this way (the compile receipt's pin caught it, and the pin was right).
-    if (axis === 'Horizontal' && hasW) continue;
-    if (axis === 'Vertical' && hasH) continue;
-    const prop = 'layoutSizing' + axis;
-    let mode;
-    try { mode = node[prop]; } catch (e) { degrade('FC-RT-BIRTH-BOX-UNREADABLE', node, '"' + label + '": ' + prop + ' could not be read, so the HUG birth-box re-measure was skipped on this axis', e); continue; }
-    if (mode !== 'HUG') continue;
-    try {
-      node[prop] = 'FIXED';
-      node.resize(axis === 'Horizontal' ? 1 : node.width, axis === 'Vertical' ? 1 : node.height);
-      node[prop] = 'HUG';
-    } catch (e) {
-      throw new Error(
-        '"' + label + '": ' + axis.toLowerCase() + " axis reports HUG but kept Figma's 100px " +
-        'birth box, and the FIXED round-trip that forces the re-measure was refused (' +
-        e.message + ') — FC-SLOT-BIRTH-BOX',
-      );
-    }
-  }
-}
-
 // FC-OVERFLOW-CLIP-LOST: node ids whose clip the CONTRACT declared
 // (overflow-x/y hidden|clip). The unclip walks consult this so a declared clip
 // can never be reverted silently by an overhanging descendant.
@@ -629,6 +645,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -820,6 +838,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -847,29 +870,13 @@ async function buildNode(spec, registry) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
   }
-  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
-  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
-  // childless is affected — one with children has already relaid out — and GRID
-  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // A DECLARED layout is required, and that is not the timidity it looks like.
-  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
-  // root was a latent hole. It was speculation — the divider roots this fix
-  // exists for all declare layout — and the canvas refuted it: MUI Switch's
-  // switch-track is a childless FRAME with no declared layout that measures
-  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
-  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
-  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
-  // node whose sizing this repair understands.
-  //
-  // `children` IS the container test, and it stays explicit: a TEXT node
-  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
-  // birth box; a text or vector leaf measures itself.
-  if (spec.layout && spec.layout.mode !== 'GRID' &&
-      'layoutSizingVertical' in node && node.children &&
-      (spec.type === 'slot' || node.children.length === 0)) {
-    remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
-      Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
+    }
   }
   return node;
 }
@@ -1249,30 +1256,6 @@ async function amendSet(set, C) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
       }
-  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
-  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
-  // childless is affected — one with children has already relaid out — and GRID
-  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // A DECLARED layout is required, and that is not the timidity it looks like.
-  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
-  // root was a latent hole. It was speculation — the divider roots this fix
-  // exists for all declare layout — and the canvas refuted it: MUI Switch's
-  // switch-track is a childless FRAME with no declared layout that measures
-  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
-  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
-  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
-  // node whose sizing this repair understands.
-  //
-  // `children` IS the container test, and it stays explicit: a TEXT node
-  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
-  // birth box; a text or vector leaf measures itself.
-  if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
-      'layoutSizingVertical' in comp && comp.children &&
-      (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
-  }
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -1456,30 +1439,6 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
-  }
-  // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
-  // (including a slot's defaultContent) is in place. Only a node that ENDED UP
-  // childless is affected — one with children has already relaid out — and GRID
-  // is excluded because a resize there reverts HUG tracks to FLEX (G8/GP4b).
-  // A DECLARED layout is required, and that is not the timidity it looks like.
-  // I relaxed it to applyFrameSpec's default on the theory that a layout-less
-  // root was a latent hole. It was speculation — the divider roots this fix
-  // exists for all declare layout — and the canvas refuted it: MUI Switch's
-  // switch-track is a childless FRAME with no declared layout that measures
-  // 34x14 FIXED live (read from 21:612). Under the relaxed guard it entered
-  // the re-measure, hugged to nothing and shipped 1x1, breaking the mui
-  // compile receipt's 34x14 pin. A node the contract gave no layout is not a
-  // node whose sizing this repair understands.
-  //
-  // `children` IS the container test, and it stays explicit: a TEXT node
-  // answers 'layoutSizingVertical' in node just as truthfully as a frame does
-  // and has no children array at all. Only FRAME / COMPONENT / SLOT carry a
-  // birth box; a text or vector leaf measures itself.
-  if (v.spec.layout && v.spec.layout.mode !== 'GRID' &&
-      'layoutSizingVertical' in comp && comp.children &&
-      (v.spec.type === 'slot' || comp.children.length === 0)) {
-    remeasureBirthBox(comp, v.spec.type === 'slot' ? v.spec.slotProperty : v.spec.name,
-      Boolean(v.spec.fixedWidth), Boolean(v.spec.fixedHeight));
   }
   for (const t of registry.texts) {
     let k = defKey(t.prop);

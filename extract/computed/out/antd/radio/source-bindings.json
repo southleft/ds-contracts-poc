@@ -1,0 +1,362 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Radio",
+  "varPrefix": "--ant-",
+  "facts": [
+    {
+      "part": "label",
+      "channel": "padding-inline-end",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "padding-xs",
+      "varName": "--ant-padding-xs",
+      "anchor": {
+        "selector": ".ant-radio-wrapper span.ant-radio + *"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-inline-end",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "padding-xs",
+      "varName": "--ant-padding-xs",
+      "anchor": {
+        "selector": ".ant-radio-wrapper span.ant-radio + *"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-inline-end",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "padding-xs",
+      "varName": "--ant-padding-xs",
+      "anchor": {
+        "selector": ".ant-radio-wrapper span.ant-radio + *"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-inline-end",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "padding-xs",
+      "varName": "--ant-padding-xs",
+      "anchor": {
+        "selector": ".ant-radio-wrapper span.ant-radio + *"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-inline-start",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "padding-xs",
+      "varName": "--ant-padding-xs",
+      "anchor": {
+        "selector": ".ant-radio-wrapper span.ant-radio + *"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-inline-start",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "padding-xs",
+      "varName": "--ant-padding-xs",
+      "anchor": {
+        "selector": ".ant-radio-wrapper span.ant-radio + *"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-inline-start",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "padding-xs",
+      "varName": "--ant-padding-xs",
+      "anchor": {
+        "selector": ".ant-radio-wrapper span.ant-radio + *"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "padding-inline-start",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "padding-xs",
+      "varName": "--ant-padding-xs",
+      "anchor": {
+        "selector": ".ant-radio-wrapper span.ant-radio + *"
+      }
+    },
+    {
+      "part": "radio",
+      "channel": "font-family",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-radio-wrapper .ant-radio"
+      }
+    },
+    {
+      "part": "radio",
+      "channel": "font-family",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-radio-wrapper .ant-radio"
+      }
+    },
+    {
+      "part": "radio",
+      "channel": "font-family",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-radio-wrapper .ant-radio"
+      }
+    },
+    {
+      "part": "radio",
+      "channel": "font-family",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-radio-wrapper .ant-radio"
+      }
+    },
+    {
+      "part": "radio",
+      "channel": "font-size",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-radio-wrapper .ant-radio"
+      }
+    },
+    {
+      "part": "radio",
+      "channel": "font-size",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-radio-wrapper .ant-radio"
+      }
+    },
+    {
+      "part": "radio",
+      "channel": "font-size",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-radio-wrapper .ant-radio"
+      }
+    },
+    {
+      "part": "radio",
+      "channel": "font-size",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-radio-wrapper .ant-radio"
+      }
+    },
+    {
+      "part": "radio-inner",
+      "channel": "background-color",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "color-bg-container",
+      "varName": "--ant-color-bg-container",
+      "anchor": {
+        "selector": ".ant-radio-wrapper .ant-radio-inner"
+      }
+    },
+    {
+      "part": "radio-inner",
+      "channel": "background-color",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "radio-radio-bg-color",
+      "varName": "--ant-radio-radio-bg-color",
+      "anchor": {
+        "selector": ".ant-radio-wrapper .ant-radio-checked .ant-radio-inner"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-radio-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-radio-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-radio-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-radio-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-radio-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-radio-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-radio-css-var"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-radio-css-var"
+      }
+    }
+  ],
+  "skips": [
+    "radio.color: candidate --ant-color-text → \"color-text\" = rgba(0,0,0,0.88) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "radio.line-height: candidate --ant-line-height → \"line-height\" = 1.5714285714285714 names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "radio-inner.height: source declares `calc(1px * var(--ant-radio-radio-size))` — a calc() over var(--ant-radio-radio-size). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "radio-inner.width: source declares `calc(1px * var(--ant-radio-radio-size))` — a calc() over var(--ant-radio-radio-size). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.color: candidates --ant-color-text → \"color-text\" = rgba(0,0,0,0.88); --ant-color-text-disabled → \"color-text-disabled\" = rgba(0,0,0,0.25) name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.line-height: candidate --ant-line-height → \"line-height\" = 1.5714285714285714 names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.margin-inline-end: candidate --ant-radio-wrapper-margin-inline-end → \"radio-wrapper-margin-inline-end\" = 8px names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "radio-inner.border-color: SHORTHAND carrying var(--ant-color-primary) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 2,
+  "calcCeiling": 2,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

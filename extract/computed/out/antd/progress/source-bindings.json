@@ -1,0 +1,252 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Progress",
+  "varPrefix": "--ant-",
+  "facts": [
+    {
+      "part": "anticon",
+      "channel": "font-size",
+      "combo": "exception",
+      "axisValues": {
+        "status": "exception"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-progress .ant-progress-text .anticon"
+      }
+    },
+    {
+      "part": "anticon",
+      "channel": "font-size",
+      "combo": "success",
+      "axisValues": {
+        "status": "success"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-progress .ant-progress-text .anticon"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "exception",
+      "axisValues": {
+        "status": "exception"
+      },
+      "token": "color-error",
+      "varName": "--ant-color-error",
+      "anchor": {
+        "selector": ".ant-progress.ant-progress-status-exception .ant-progress-text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "success",
+      "axisValues": {
+        "status": "success"
+      },
+      "token": "color-success",
+      "varName": "--ant-color-success",
+      "anchor": {
+        "selector": ".ant-progress.ant-progress-status-success .ant-progress-text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "margin-inline-start",
+      "combo": "unset",
+      "axisValues": {
+        "status": "unset"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-progress .ant-progress-text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "margin-inline-start",
+      "combo": "exception",
+      "axisValues": {
+        "status": "exception"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-progress .ant-progress-text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "margin-inline-start",
+      "combo": "active",
+      "axisValues": {
+        "status": "active"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-progress .ant-progress-text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "margin-inline-start",
+      "combo": "success",
+      "axisValues": {
+        "status": "success"
+      },
+      "token": "margin-xs",
+      "varName": "--ant-margin-xs",
+      "anchor": {
+        "selector": ".ant-progress .ant-progress-text"
+      }
+    },
+    {
+      "part": "progress-bg",
+      "channel": "background-color",
+      "combo": "exception",
+      "axisValues": {
+        "status": "exception"
+      },
+      "token": "color-error",
+      "varName": "--ant-color-error",
+      "anchor": {
+        "selector": ".ant-progress.ant-progress-status-exception .ant-progress-bg"
+      }
+    },
+    {
+      "part": "progress-bg",
+      "channel": "background-color",
+      "combo": "success",
+      "axisValues": {
+        "status": "success"
+      },
+      "token": "color-success",
+      "varName": "--ant-color-success",
+      "anchor": {
+        "selector": ".ant-progress.ant-progress-status-success .ant-progress-bg"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "unset",
+      "axisValues": {
+        "status": "unset"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-progress"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "exception",
+      "axisValues": {
+        "status": "exception"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-progress"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "active",
+      "axisValues": {
+        "status": "active"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-progress"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "success",
+      "axisValues": {
+        "status": "success"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-progress"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "unset",
+      "axisValues": {
+        "status": "unset"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-progress"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "exception",
+      "axisValues": {
+        "status": "exception"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-progress"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "active",
+      "axisValues": {
+        "status": "active"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-progress"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "success",
+      "axisValues": {
+        "status": "success"
+      },
+      "token": "font-size",
+      "varName": "--ant-font-size",
+      "anchor": {
+        "selector": ".ant-progress"
+      }
+    }
+  ],
+  "skips": [
+    "progress-inner.background-color: candidate --ant-progress-remaining-color → \"progress-remaining-color\" = rgba(0,0,0,0.06) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.color: candidate --ant-color-text → \"color-text\" = rgba(0,0,0,0.88) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.line-height: candidate --ant-line-height → \"line-height\" = 1.5714285714285714 names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

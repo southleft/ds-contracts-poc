@@ -1,0 +1,418 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "antd.alert",
+  "name": "Alert",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). MOLECULE, PRESENCE-HEAVY (the Polaris Banner precedent). The icon GLYPH is a function of `type` AND its presence a function of `showIcon` — `showIcon` is modelled as a 2-value ENUM AXIS (noIcon|icon; config maps to the boolean) rather than presence so the glyph stays a ONE-axis function of `type` (svg-content per-value glyph parts). `description` and `closable` are PRESENCE props (each adds a part; the close button has its own hover plane — descendant state). antd's runtime default type is `info`. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/antd/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Ant Design's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "type",
+      "type": {
+        "enum": [
+          "success",
+          "info",
+          "warning",
+          "error"
+        ]
+      },
+      "default": "info",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Type",
+          "values": {
+            "success": "Success",
+            "info": "Info",
+            "warning": "Warning",
+            "error": "Error"
+          }
+        },
+        "code": {
+          "prop": "type"
+        }
+      }
+    },
+    {
+      "name": "showIcon",
+      "type": {
+        "enum": [
+          "noIcon",
+          "icon"
+        ]
+      },
+      "default": "noIcon",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Show Icon",
+          "values": {
+            "noIcon": "NoIcon",
+            "icon": "Icon"
+          }
+        },
+        "code": {
+          "prop": "showIcon"
+        }
+      }
+    },
+    {
+      "name": "message",
+      "type": "text",
+      "default": "Alert message",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Message"
+        },
+        "code": {
+          "prop": "message"
+        }
+      }
+    },
+    {
+      "name": "description",
+      "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `description` (\"Alert description copy.\"); the created subtree is carried as parts gated on this prop.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Show Description"
+        },
+        "code": {
+          "prop": "description"
+        }
+      }
+    },
+    {
+      "name": "closable",
+      "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `closable` (true); the created subtree is carried as parts gated on this prop.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Show Closable"
+        },
+        "code": {
+          "prop": "closable"
+        }
+      }
+    }
+  ],
+  "states": [
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex"
+      },
+      "parts": {
+        "alert-icon": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|alert-icon.anticon — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "align": "center"
+          },
+          "declared": {
+            "aspect-ratio": "1 / 1",
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "text-align": "center",
+            "text-rendering": "optimizelegibility"
+          },
+          "stylesWhen": [
+            {
+              "prop": "showIcon",
+              "equals": "noIcon",
+              "styles": {
+                "display": "none"
+              }
+            }
+          ],
+          "parts": {
+            "alert-icon-success": {
+              "icon": {
+                "asset": "alert-alert-icon-success",
+                "size": 14
+              },
+              "visibleWhen": {
+                "prop": "type",
+                "equals": "success"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when type=success."
+            },
+            "alert-icon-info": {
+              "icon": {
+                "asset": "alert-alert-icon-info",
+                "size": 14
+              },
+              "visibleWhen": {
+                "prop": "type",
+                "equals": "info"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when type=info."
+            },
+            "alert-icon-warning": {
+              "icon": {
+                "asset": "alert-alert-icon-warning",
+                "size": 14
+              },
+              "visibleWhen": {
+                "prop": "type",
+                "equals": "warning"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when type=warning."
+            },
+            "alert-icon-error": {
+              "icon": {
+                "asset": "alert-alert-icon-error",
+                "size": 14
+              },
+              "visibleWhen": {
+                "prop": "type",
+                "equals": "error"
+              },
+              "description": "Per-value svg content promoted from the computed floor: the glyph drawn when type=error."
+            }
+          },
+          "tokens": {
+            "font-size": "{imported.alert.alert-icon.font-size.off}",
+            "line-height": "{imported.shared.size-0}",
+            "margin-right": "{imported.alert.alert-icon.margin-right.off}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "type",
+              "map": {
+                "error": {
+                  "color": "{imported.alert.alert-icon.color.error}"
+                },
+                "info": {
+                  "color": "{imported.alert.alert-icon.color.info}"
+                },
+                "success": {
+                  "color": "{imported.alert.alert-icon.color.success}"
+                },
+                "warning": {
+                  "color": "{imported.alert.alert-icon.color.warning}"
+                }
+              }
+            }
+          ]
+        },
+        "alert-content": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|alert-content — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif"
+          },
+          "parts": {
+            "label": {
+              "content": {
+                "prop": "message"
+              },
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|alert-message — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "box-sizing": "border-box",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif"
+              },
+              "tokens": {
+                "color": "{imported.shared.color-000000e0}",
+                "font-size": "{imported.alert.label.font-size.off}",
+                "font-weight": "{imported.alert.label.font-weight}",
+                "margin-bottom": "{imported.alert.label.margin-bottom.off}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}"
+              }
+            },
+            "label-2": {
+              "text": "Alert description copy.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|alert-description — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "box-sizing": "border-box",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif"
+              },
+              "visibleWhen": {
+                "prop": "description"
+              },
+              "tokens": {
+                "color": "{imported.shared.color-000000e0}",
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.alert.label-2.font-weight}",
+                "line-height": "{imported.shared.size-22}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}"
+              }
+            }
+          },
+          "layout": {
+            "grow": true
+          },
+          "tokens": {
+            "color": "{imported.shared.color-000000e0}",
+            "flex-grow": "{imported.alert.alert-content.flex-grow}",
+            "font-size": "{imported.shared.size-14}",
+            "line-height": "{imported.shared.size-22}",
+            "min-width": "{imported.shared.size-0}"
+          }
+        },
+        "alert-close-icon": {
+          "element": "button",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy button|alert-close-icon — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "border-bottom-style": "none",
+            "border-left-style": "none",
+            "border-right-style": "none",
+            "border-top-style": "none",
+            "cursor": "pointer",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden"
+          },
+          "visibleWhen": {
+            "prop": "closable"
+          },
+          "parts": {
+            "anticon": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|anticon — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "inline-flex",
+                "align": "center"
+              },
+              "visibleWhen": {
+                "prop": "closable"
+              },
+              "icon": {
+                "asset": "alert-anticon",
+                "size": 12
+              },
+              "declared": {
+                "cursor": "pointer",
+                "font-family": "Arial",
+                "text-align": "center",
+                "text-rendering": "optimizelegibility",
+                "transition-duration": "0.2s",
+                "transition-property": "color"
+              },
+              "tokens": {
+                "color": "{imported.alert.anticon.color}",
+                "font-size": "{imported.shared.size-12}",
+                "line-height": "{imported.shared.size-0}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "vertical-align": "{imported.alert.anticon.vertical-align}"
+              }
+            }
+          },
+          "tokens": {
+            "background-color": "{imported.alert.alert-close-icon.background-color}",
+            "border-bottom-width": "{imported.shared.size-0}",
+            "border-left-width": "{imported.shared.size-0}",
+            "border-right-width": "{imported.shared.size-0}",
+            "border-top-width": "{imported.shared.size-0}",
+            "font-size": "{imported.shared.size-12}",
+            "line-height": "{imported.shared.size-12}",
+            "margin-left": "{imported.shared.size-8}",
+            "padding-bottom": "{imported.shared.size-0}",
+            "padding-left": "{imported.shared.size-0}",
+            "padding-right": "{imported.shared.size-0}",
+            "padding-top": "{imported.shared.size-0}"
+          }
+        }
+      },
+      "declared": {
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
+        "position": "relative"
+      },
+      "tokens": {
+        "border-bottom-left-radius": "{imported.shared.size-8}",
+        "border-bottom-right-radius": "{imported.shared.size-8}",
+        "border-bottom-width": "{imported.shared.size-1}",
+        "border-left-width": "{imported.shared.size-1}",
+        "border-right-width": "{imported.shared.size-1}",
+        "border-top-left-radius": "{imported.shared.size-8}",
+        "border-top-right-radius": "{imported.shared.size-8}",
+        "border-top-width": "{imported.shared.size-1}",
+        "bottom": "{imported.shared.size-0}",
+        "color": "{imported.shared.color-000000e0}",
+        "font-size": "{imported.shared.size-14}",
+        "left": "{imported.shared.size-0}",
+        "line-height": "{imported.shared.size-22}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "padding-bottom": "{imported.alert.root.padding-bottom.off}",
+        "padding-left": "{imported.alert.root.padding-left.off}",
+        "padding-right": "{imported.alert.root.padding-right.off}",
+        "padding-top": "{imported.alert.root.padding-top.off}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.alert.root.width}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "type",
+          "map": {
+            "error": {
+              "background-color": "{imported.alert.root.background-color.error}",
+              "border-bottom-color": "{imported.alert.root.border-bottom-color.error}",
+              "border-left-color": "{imported.alert.root.border-left-color.error}",
+              "border-right-color": "{imported.alert.root.border-right-color.error}",
+              "border-top-color": "{imported.alert.root.border-top-color.error}"
+            },
+            "info": {
+              "background-color": "{imported.alert.root.background-color.info}",
+              "border-bottom-color": "{imported.alert.root.border-bottom-color.info}",
+              "border-left-color": "{imported.alert.root.border-left-color.info}",
+              "border-right-color": "{imported.alert.root.border-right-color.info}",
+              "border-top-color": "{imported.alert.root.border-top-color.info}"
+            },
+            "success": {
+              "background-color": "{imported.alert.root.background-color.success}",
+              "border-bottom-color": "{imported.alert.root.border-bottom-color.success}",
+              "border-left-color": "{imported.alert.root.border-left-color.success}",
+              "border-right-color": "{imported.alert.root.border-right-color.success}",
+              "border-top-color": "{imported.alert.root.border-top-color.success}"
+            },
+            "warning": {
+              "background-color": "{imported.alert.root.background-color.warning}",
+              "border-bottom-color": "{imported.alert.root.border-bottom-color.warning}",
+              "border-left-color": "{imported.alert.root.border-left-color.warning}",
+              "border-right-color": "{imported.alert.root.border-right-color.warning}",
+              "border-top-color": "{imported.alert.root.border-top-color.warning}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "antd",
+        "export": "Alert"
+      }
+    }
+  }
+}

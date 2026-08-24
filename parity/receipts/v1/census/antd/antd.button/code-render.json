@@ -1,0 +1,289 @@
+{
+  "id": "antd.button",
+  "name": "Button",
+  "library": "antd",
+  "contractPath": "examples/antd/contracts/button.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/antd/figma/antd.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 30,
+      "sampled": 8,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "type",
+        "type": "enum",
+        "default": "default"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "middle"
+      },
+      {
+        "name": "danger",
+        "type": "enum",
+        "default": "safe"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Button"
+      },
+      {
+        "name": "icon",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "states": [
+      "disabled",
+      "active",
+      "focus-visible",
+      "hover"
+    ],
+    "parts": [
+      "root",
+      "btn-icon",
+      "anticon",
+      "btn-icon-2",
+      "anticon-2",
+      "label"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.button.anticon-2.font-size.large",
+      "imported.button.anticon-2.font-size.middle",
+      "imported.button.anticon-2.font-size.small",
+      "imported.button.anticon.font-size.large",
+      "imported.button.anticon.font-size.middle",
+      "imported.button.anticon.font-size.small",
+      "imported.button.btn-icon-2.font-size.large",
+      "imported.button.btn-icon-2.font-size.middle",
+      "imported.button.btn-icon-2.font-size.small",
+      "imported.button.btn-icon.font-size.large",
+      "imported.button.btn-icon.font-size.middle",
+      "imported.button.btn-icon.font-size.small",
+      "imported.button.label.font-size.large",
+      "imported.button.label.font-size.middle",
+      "imported.button.label.font-size.small",
+      "imported.button.label.font-weight",
+      "imported.button.root.border-bottom-left-radius.large",
+      "imported.button.root.border-bottom-left-radius.middle",
+      "imported.button.root.border-bottom-left-radius.small",
+      "imported.button.root.border-bottom-right-radius.large",
+      "imported.button.root.border-bottom-right-radius.middle",
+      "imported.button.root.border-bottom-right-radius.small",
+      "imported.button.root.border-top-left-radius.large",
+      "imported.button.root.border-top-left-radius.middle",
+      "imported.button.root.border-top-left-radius.small",
+      "imported.button.root.border-top-right-radius.large",
+      "imported.button.root.border-top-right-radius.middle",
+      "imported.button.root.border-top-right-radius.small",
+      "imported.button.root.box-shadow-state-disabled",
+      "imported.button.root.column-gap",
+      "imported.button.root.font-size.large",
+      "imported.button.root.font-size.middle",
+      "imported.button.root.font-size.small",
+      "imported.button.root.height.large",
+      "imported.button.root.height.middle",
+      "imported.button.root.height.small",
+      "imported.button.root.opacity.off",
+      "imported.button.root.outline-color-state-focus-visible",
+      "imported.button.root.outline-offset-state-focus-visible",
+      "imported.button.root.outline-width-state-focus-visible",
+      "imported.button.root.padding-left.large",
+      "imported.button.root.padding-left.middle",
+      "imported.button.root.padding-left.small",
+      "imported.button.root.padding-right.large",
+      "imported.button.root.padding-right.middle",
+      "imported.button.root.padding-right.small",
+      "imported.button.root.row-gap",
+      "imported.shared.color-00000040",
+      "imported.shared.size-0",
+      "imported.shared.size-1"
+    ],
+    "icons": [
+      "button-anticon",
+      "button-anticon-2"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "type-default__size-middle__danger-safe",
+      "variant": "Type=Default, Size=Middle, Danger=Safe",
+      "kind": "base",
+      "subst": {
+        "type": "default",
+        "size": "middle",
+        "danger": "safe"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-default__size-middle__danger-safe.png",
+      "contentBox": {
+        "width": 70.2,
+        "height": 32
+      }
+    },
+    {
+      "slug": "type-default__size-middle__danger-danger",
+      "variant": "Type=Default, Size=Middle, Danger=Danger",
+      "kind": "base",
+      "subst": {
+        "type": "default",
+        "size": "middle",
+        "danger": "danger"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-default__size-middle__danger-danger.png",
+      "contentBox": {
+        "width": 70.2,
+        "height": 32
+      }
+    },
+    {
+      "slug": "type-default__size-small__danger-safe",
+      "variant": "Type=Default, Size=Small, Danger=Safe",
+      "kind": "base",
+      "subst": {
+        "type": "default",
+        "size": "small",
+        "danger": "safe"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-default__size-small__danger-safe.png",
+      "contentBox": {
+        "width": 54.2,
+        "height": 24
+      }
+    },
+    {
+      "slug": "type-default__size-large__danger-safe",
+      "variant": "Type=Default, Size=Large, Danger=Safe",
+      "kind": "base",
+      "subst": {
+        "type": "default",
+        "size": "large",
+        "danger": "safe"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-default__size-large__danger-safe.png",
+      "contentBox": {
+        "width": 75.94,
+        "height": 40
+      }
+    },
+    {
+      "slug": "type-primary__size-middle__danger-safe",
+      "variant": "Type=Primary, Size=Middle, Danger=Safe",
+      "kind": "base",
+      "subst": {
+        "type": "primary",
+        "size": "middle",
+        "danger": "safe"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-primary__size-middle__danger-safe.png",
+      "contentBox": {
+        "width": 70.2,
+        "height": 32
+      }
+    },
+    {
+      "slug": "type-dashed__size-middle__danger-safe",
+      "variant": "Type=Dashed, Size=Middle, Danger=Safe",
+      "kind": "base",
+      "subst": {
+        "type": "dashed",
+        "size": "middle",
+        "danger": "safe"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-dashed__size-middle__danger-safe.png",
+      "contentBox": {
+        "width": 72.2,
+        "height": 32
+      }
+    },
+    {
+      "slug": "type-link__size-middle__danger-safe",
+      "variant": "Type=Link, Size=Middle, Danger=Safe",
+      "kind": "base",
+      "subst": {
+        "type": "link",
+        "size": "middle",
+        "danger": "safe"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-link__size-middle__danger-safe.png",
+      "contentBox": {
+        "width": 70.2,
+        "height": 32
+      }
+    },
+    {
+      "slug": "type-text__size-middle__danger-safe",
+      "variant": "Type=Text, Size=Middle, Danger=Safe",
+      "kind": "base",
+      "subst": {
+        "type": "text",
+        "size": "middle",
+        "danger": "safe"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-text__size-middle__danger-safe.png",
+      "contentBox": {
+        "width": 70.2,
+        "height": 32
+      }
+    }
+  ],
+  "rendered": 8,
+  "refused": 0,
+  "unavailable": null
+}

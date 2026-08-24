@@ -874,6 +874,7 @@ async function main() {
       promotion.contract, space, mintBase, prep.baseObs, mintStates, prep.stateObs, layout.enriched,
       prep.declared, prep.declaredStates, prep.setPlaneLiterals,
       { only: prep.inheritanceOnly, stateDeltas: prep.inheritanceStateDeltas },
+      prep.stateCodeOnly,
     );
 
     // task #37 — SIZING EVIDENCE for the max-width channel. A part that

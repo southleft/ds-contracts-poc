@@ -1,0 +1,138 @@
+{
+  "component": "CaseAntdForwardedRootAttrs",
+  "browser": "151.0.7922.34",
+  "captures": 4,
+  "combos": 1,
+  "interactions": 4,
+  "enumerationPolicy": "full-cartesian",
+  "channelsEnumerated": 479,
+  "elementsPerCapture": 5,
+  "determinism": "byte-identical across two full sweeps in one session",
+  "styledChannels": {
+    "root": 10,
+    "b": 11,
+    "c": 15,
+    "a": 30,
+    "label": 5
+  },
+  "folds": {
+    "count": 0,
+    "receipts": [],
+    "mintedLeavesUnfolded": 13,
+    "mintedLeavesFolded": 14
+  },
+  "bound": {
+    "cellsChecked": 0,
+    "confirmed": 0,
+    "contradictions": 0,
+    "untriaged": 0
+  },
+  "minted": {
+    "leaves": 14,
+    "baseBindings": 46,
+    "stateBindings": 3,
+    "byShape": {
+      "uniform": 49,
+      "perAxis": 0,
+      "perPair": 0,
+      "refused": 0
+    }
+  },
+  "declared": {
+    "base": 21,
+    "state": 1
+  },
+  "codeOnly": {
+    "base": 1,
+    "state": 0,
+    "overflowBindings": 3
+  },
+  "pseudoElementFindings": 0,
+  "anatomyPromotion": {
+    "partsCarried": 5,
+    "svgAssets": 0,
+    "refusals": 0
+  },
+  "enrichedContractSchemaValid": true,
+  "enrichedContractGeneratorValid": true,
+  "replayComputedEquality": {
+    "cellsCompared": 9540,
+    "cellsMatched": 9524,
+    "pct": 99.83228511530399,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration",
+      "translate-x",
+      "translate-y"
+    ],
+    "topMismatchedChannels": [
+      [
+        "overflow-block",
+        4
+      ],
+      [
+        "overflow-inline",
+        4
+      ],
+      [
+        "overflow-x",
+        4
+      ],
+      [
+        "overflow-y",
+        4
+      ]
+    ]
+  },
+  "pixel": {
+    "pairs": 4,
+    "measured": 4,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
+    "exact": {
+      "mean": 0,
+      "max": 0,
+      "perfect": 4
+    },
+    "aa": {
+      "mean": 0,
+      "max": 0,
+      "perfect": 4
+    },
+    "worst": [
+      {
+        "key": "__default",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "__hover",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "__focus-visible",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "__active",
+        "pctExact": 0,
+        "pctAA": 0
+      }
+    ]
+  },
+  "gate": {
+    "computedPctEqual": 100,
+    "rowsFullyEqual": 4,
+    "rows": 4,
+    "pixelPerfectExact": 4,
+    "pixelPerfectAA": 4,
+    "pairs": 4
+  },
+  "focusVisibleDriverMatched": 0,
+  "focusVisibleDriverTotal": 1
+}

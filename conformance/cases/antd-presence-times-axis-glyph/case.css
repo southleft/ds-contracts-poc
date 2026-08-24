@@ -1,0 +1,5 @@
+[data-cf="antd-presence-times-axis-glyph"] { display: flex; align-items: flex-start; gap: 8px; padding: 8px 12px; background: rgb(230, 244, 255); border: 1px solid rgb(145, 202, 255); border-radius: 8px; }
+[data-cf="antd-presence-times-axis-glyph"] .cf-b { flex: 1; min-width: 0; }
+[data-cf="antd-presence-times-axis-glyph"] .cf-a { color: rgba(0, 0, 0, 0.88); font-size: 14px; line-height: 22px; }
+[data-cf="antd-presence-times-axis-glyph"] .cf-icon { width: 16px; height: 16px; color: rgb(22, 119, 255); }
+[data-cf="antd-presence-times-axis-glyph"].cf-success .cf-icon { color: rgb(82, 196, 26); }

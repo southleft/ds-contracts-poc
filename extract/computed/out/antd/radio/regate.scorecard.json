@@ -1,0 +1,3554 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "Radio",
+  "config": "extract/computed/configs/antd.json",
+  "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "declared": {
+    "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "radio",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "radio",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "radio",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "radio",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "radio-input",
+        "channel": "appearance",
+        "value": "auto"
+      },
+      {
+        "part": "radio-input",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "radio-input",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "radio-input",
+        "channel": "font-family",
+        "value": "Arial"
+      },
+      {
+        "part": "radio-input",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "radio-inner",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "radio-inner",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "radio-inner",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "radio-inner",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "radio-inner",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "radio-inner",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "radio-inner",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "radio-inner",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "radio-inner",
+        "channel": "transition-duration",
+        "value": "0.2s"
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      }
+    ],
+    "state": [
+      {
+        "state": "disabled",
+        "part": "label",
+        "channel": "cursor",
+        "value": "not-allowed"
+      },
+      {
+        "state": "disabled",
+        "part": "radio-inner",
+        "channel": "cursor",
+        "value": "not-allowed"
+      },
+      {
+        "state": "disabled",
+        "part": "radio-input",
+        "channel": "cursor",
+        "value": "not-allowed"
+      },
+      {
+        "state": "disabled",
+        "part": "radio",
+        "channel": "cursor",
+        "value": "not-allowed"
+      },
+      {
+        "state": "disabled",
+        "part": "root",
+        "channel": "cursor",
+        "value": "not-allowed"
+      },
+      {
+        "state": "focus-visible",
+        "part": "radio-inner",
+        "channel": "outline-style",
+        "value": "solid"
+      },
+      {
+        "state": "focus-visible",
+        "part": "radio-inner",
+        "channel": "transition-delay",
+        "value": "0s, 0s"
+      },
+      {
+        "state": "focus-visible",
+        "part": "radio-inner",
+        "channel": "transition-duration",
+        "value": "0s, 0s"
+      },
+      {
+        "state": "focus-visible",
+        "part": "radio-inner",
+        "channel": "transition-property",
+        "value": "outline-offset, outline"
+      },
+      {
+        "state": "focus-visible",
+        "part": "radio-inner",
+        "channel": "transition-timing-function",
+        "value": "ease, ease"
+      },
+      {
+        "state": "focus-visible",
+        "part": "radio-input",
+        "channel": "outline-style",
+        "value": "auto"
+      }
+    ]
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "Radio",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 4,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 1952,
+      "cellsEqual": 1460,
+      "pctEqual": 74.79508196721312,
+      "rowsFullyEqual": 0,
+      "rows": 16
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 16,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 38,
+      "mintedLeavesUnfolded": 33,
+      "baseBindings": 63,
+      "stateBindings": 32,
+      "codeOnlyChannels": 8,
+      "overflowBindings": 28,
+      "folds": 35
+    },
+    "worstRows": [
+      {
+        "key": "checked.disabled__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 47,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "checked.disabled__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 47,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "checked.disabled__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 47,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "checked.disabled__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 47,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "unchecked.disabled__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 43,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "unchecked.disabled__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 43,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "unchecked.disabled__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 43,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "unchecked.disabled__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 43,
+        "unscorable": "no-original"
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "root.align-items",
+        16
+      ],
+      [
+        "root.list-style-type",
+        16
+      ],
+      [
+        "radio.align-self",
+        16
+      ],
+      [
+        "radio.border-bottom-left-radius",
+        16
+      ],
+      [
+        "radio.border-bottom-right-radius",
+        16
+      ],
+      [
+        "radio.border-top-left-radius",
+        16
+      ],
+      [
+        "radio.border-top-right-radius",
+        16
+      ],
+      [
+        "radio.list-style-type",
+        16
+      ],
+      [
+        "radio-input.list-style-type",
+        16
+      ],
+      [
+        "radio-inner.border-bottom-left-radius",
+        16
+      ],
+      [
+        "radio-inner.border-bottom-right-radius",
+        16
+      ],
+      [
+        "radio-inner.border-top-left-radius",
+        16
+      ],
+      [
+        "radio-inner.border-top-right-radius",
+        16
+      ],
+      [
+        "radio-inner.list-style-type",
+        16
+      ],
+      [
+        "label.list-style-type",
+        16
+      ]
+    ],
+    "namedLosses": [
+      "promotion: pseudo-decor-state-paint-uncarried: radio-inner::after at checked.disabled paints {\"bg\":\"rgba(0, 0, 0, 0.25)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":16} where the matching enabled combo paints {\"bg\":\"rgba(255, 255, 255, 1)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":16} — the decor carries the ENABLED plane; a per-enum-value × per-state paint product has no contract spelling (states take token refs, decor paint is literal); named residue",
+      "promotion: pseudo-decor-state-geometry-uncarried: radio-inner::after at checked.disabled sits at {\"w\":8,\"h\":8,\"top\":3,\"left\":3} vs the enabled {\"w\":6,\"h\":6,\"top\":4,\"left\":4}; named residue",
+      "promotion: pseudo-decor-hidden-in-combo: radio::after is not drawn in every combo (opacity 0, box 16x16) — the component's own hidden state, NOT a grammar limit",
+      "promotion: pseudo-content-not-canvas-ink: root::after carries content \" \" — the bounded decor grammar promotes EMPTY-content decor boxes only. A glyph drawn by an icon-font ligature (Bootstrap/FontAwesome/Material carets, chevrons, close ×s) is real ink that does NOT reach the canvas; named refusal",
+      "overflow: radio-inner.border-bottom-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-inner.border-left-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-inner.border-right-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-inner.border-top-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-inner.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-inner.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-inner.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-inner.border-top-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-input.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-input.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-input.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-input.border-top-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-input.caret-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-input.column-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-input.outline-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-input.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-input.text-decoration-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-input.text-emphasis-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-inner.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-inner.outline-offset [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-inner.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-input.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-input.outline-offset [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-input.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-inner.border-bottom-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-inner.border-left-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-inner.border-right-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: radio-inner.border-top-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "code-only: root.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: root.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: radio.align-self — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: radio.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: radio-input.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: radio-inner.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only[focus-visible]: radio-inner.transition-behavior — value shape outside mintable kinds and outside the declared vocabulary"
+    ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/antd/tokens/antd-minted.dtcg.json",
+      "leavesAdded": 1241,
+      "divergent": [
+        {
+          "token": "imported.radio.radio-inner.background-color.checked",
+          "fresh": "#1677ff",
+          "shipped": "{radio-radio-bg-color}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.radio.radio-inner.background-color.unchecked",
+          "fresh": "#ffffff",
+          "shipped": "{color-bg-container}",
+          "resolvedEqual": true
+        }
+      ]
+    },
+    "rows": [
+      {
+        "key": "unchecked.enabled__default",
+        "channelsCompared": 122,
+        "channelsEqual": 107,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "baseline"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio",
+            "channel": "align-self",
+            "ours": "auto",
+            "theirs": "center"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-input",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unchecked.enabled__hover",
+        "channelsCompared": 122,
+        "channelsEqual": 103,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "baseline"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio",
+            "channel": "align-self",
+            "ours": "auto",
+            "theirs": "center"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-input",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-color",
+            "ours": "rgba(217, 217, 217, 1)",
+            "theirs": "rgba(22, 119, 255, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-left-color",
+            "ours": "rgba(217, 217, 217, 1)",
+            "theirs": "rgba(22, 119, 255, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-right-color",
+            "ours": "rgba(217, 217, 217, 1)",
+            "theirs": "rgba(22, 119, 255, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-color",
+            "ours": "rgba(217, 217, 217, 1)",
+            "theirs": "rgba(22, 119, 255, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unchecked.enabled__focus-visible",
+        "channelsCompared": 122,
+        "channelsEqual": 105,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "baseline"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio",
+            "channel": "align-self",
+            "ours": "auto",
+            "theirs": "center"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-input",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(145, 202, 255, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "transition-duration",
+            "ours": "0.2s",
+            "theirs": "0s, 0s"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unchecked.enabled__active",
+        "channelsCompared": 122,
+        "channelsEqual": 103,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "baseline"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio",
+            "channel": "align-self",
+            "ours": "auto",
+            "theirs": "center"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-input",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-color",
+            "ours": "rgba(217, 217, 217, 1)",
+            "theirs": "rgba(22, 119, 255, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-left-color",
+            "ours": "rgba(217, 217, 217, 1)",
+            "theirs": "rgba(22, 119, 255, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-right-color",
+            "ours": "rgba(217, 217, 217, 1)",
+            "theirs": "rgba(22, 119, 255, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-color",
+            "ours": "rgba(217, 217, 217, 1)",
+            "theirs": "rgba(22, 119, 255, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unchecked.disabled__default",
+        "channelsCompared": 122,
+        "channelsEqual": 79,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "baseline"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "caret-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "column-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "row-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "radio",
+            "channel": "align-self",
+            "ours": "auto",
+            "theirs": "center"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-input",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio-input",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "background-color",
+            "ours": "rgba(255, 255, 255, 1)",
+            "theirs": "rgba(0, 0, 0, 0.04)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "caret-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "column-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "row-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "text-decoration-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unchecked.disabled__hover",
+        "channelsCompared": 122,
+        "channelsEqual": 79,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "baseline"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "caret-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "column-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "row-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "radio",
+            "channel": "align-self",
+            "ours": "auto",
+            "theirs": "center"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-input",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio-input",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "background-color",
+            "ours": "rgba(255, 255, 255, 1)",
+            "theirs": "rgba(0, 0, 0, 0.04)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "caret-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "column-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "row-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "text-decoration-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unchecked.disabled__focus-visible",
+        "channelsCompared": 122,
+        "channelsEqual": 79,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "baseline"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "caret-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "column-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "row-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "radio",
+            "channel": "align-self",
+            "ours": "auto",
+            "theirs": "center"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-input",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio-input",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "background-color",
+            "ours": "rgba(255, 255, 255, 1)",
+            "theirs": "rgba(0, 0, 0, 0.04)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "caret-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "column-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "row-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "text-decoration-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unchecked.disabled__active",
+        "channelsCompared": 122,
+        "channelsEqual": 79,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "baseline"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "caret-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "column-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "row-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "radio",
+            "channel": "align-self",
+            "ours": "auto",
+            "theirs": "center"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-input",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio-input",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "background-color",
+            "ours": "rgba(255, 255, 255, 1)",
+            "theirs": "rgba(0, 0, 0, 0.04)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "caret-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "column-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "row-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "text-decoration-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "checked.enabled__default",
+        "channelsCompared": 122,
+        "channelsEqual": 107,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "baseline"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio",
+            "channel": "align-self",
+            "ours": "auto",
+            "theirs": "center"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-input",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "checked.enabled__hover",
+        "channelsCompared": 122,
+        "channelsEqual": 107,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "baseline"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio",
+            "channel": "align-self",
+            "ours": "auto",
+            "theirs": "center"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-input",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "checked.enabled__focus-visible",
+        "channelsCompared": 122,
+        "channelsEqual": 105,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "baseline"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio",
+            "channel": "align-self",
+            "ours": "auto",
+            "theirs": "center"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-input",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(145, 202, 255, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "transition-duration",
+            "ours": "0.2s",
+            "theirs": "0s, 0s"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "checked.enabled__active",
+        "channelsCompared": 122,
+        "channelsEqual": 107,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "baseline"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio",
+            "channel": "align-self",
+            "ours": "auto",
+            "theirs": "center"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-input",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "checked.disabled__default",
+        "channelsCompared": 122,
+        "channelsEqual": 75,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "baseline"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "caret-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "column-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "row-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "radio",
+            "channel": "align-self",
+            "ours": "auto",
+            "theirs": "center"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-input",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio-input",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "background-color",
+            "ours": "rgba(22, 119, 255, 1)",
+            "theirs": "rgba(0, 0, 0, 0.04)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-color",
+            "ours": "rgba(22, 119, 255, 1)",
+            "theirs": "rgba(217, 217, 217, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 119, 255, 1)",
+            "theirs": "rgba(217, 217, 217, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 119, 255, 1)",
+            "theirs": "rgba(217, 217, 217, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 119, 255, 1)",
+            "theirs": "rgba(217, 217, 217, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "caret-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "column-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "row-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "text-decoration-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "checked.disabled__hover",
+        "channelsCompared": 122,
+        "channelsEqual": 75,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "baseline"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "caret-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "column-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "row-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "radio",
+            "channel": "align-self",
+            "ours": "auto",
+            "theirs": "center"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-input",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio-input",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "background-color",
+            "ours": "rgba(22, 119, 255, 1)",
+            "theirs": "rgba(0, 0, 0, 0.04)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-color",
+            "ours": "rgba(22, 119, 255, 1)",
+            "theirs": "rgba(217, 217, 217, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 119, 255, 1)",
+            "theirs": "rgba(217, 217, 217, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 119, 255, 1)",
+            "theirs": "rgba(217, 217, 217, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 119, 255, 1)",
+            "theirs": "rgba(217, 217, 217, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "caret-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "column-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "row-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "text-decoration-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "checked.disabled__focus-visible",
+        "channelsCompared": 122,
+        "channelsEqual": 75,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "baseline"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "caret-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "column-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "row-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "radio",
+            "channel": "align-self",
+            "ours": "auto",
+            "theirs": "center"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-input",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio-input",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "background-color",
+            "ours": "rgba(22, 119, 255, 1)",
+            "theirs": "rgba(0, 0, 0, 0.04)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-color",
+            "ours": "rgba(22, 119, 255, 1)",
+            "theirs": "rgba(217, 217, 217, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 119, 255, 1)",
+            "theirs": "rgba(217, 217, 217, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 119, 255, 1)",
+            "theirs": "rgba(217, 217, 217, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 119, 255, 1)",
+            "theirs": "rgba(217, 217, 217, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "caret-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "column-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "row-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "text-decoration-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "checked.disabled__active",
+        "channelsCompared": 122,
+        "channelsEqual": 75,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "baseline"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "caret-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "column-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "row-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "text-decoration-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "root",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "radio",
+            "channel": "align-self",
+            "ours": "auto",
+            "theirs": "center"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-input",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio-input",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "background-color",
+            "ours": "rgba(22, 119, 255, 1)",
+            "theirs": "rgba(0, 0, 0, 0.04)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-color",
+            "ours": "rgba(22, 119, 255, 1)",
+            "theirs": "rgba(217, 217, 217, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-bottom-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 119, 255, 1)",
+            "theirs": "rgba(217, 217, 217, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 119, 255, 1)",
+            "theirs": "rgba(217, 217, 217, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 119, 255, 1)",
+            "theirs": "rgba(217, 217, 217, 1)"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-left-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "border-top-right-radius",
+            "ours": "8px",
+            "theirs": "50%"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "radio-inner",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "caret-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "column-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "cursor",
+            "ours": "pointer",
+            "theirs": "not-allowed"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "outline-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "row-rule-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "text-decoration-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          },
+          {
+            "part": "label",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(0, 0, 0, 0.88)",
+            "theirs": "rgba(0, 0, 0, 0.25)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}

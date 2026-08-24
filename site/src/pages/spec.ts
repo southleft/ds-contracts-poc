@@ -378,6 +378,7 @@ function anatomyPage(): { route: string; html: string } {
           repeat: 'Item template over an arrayOf prop — see <a href="/spec/composition/#repeat">Composition</a>.',
           icon: 'Icon asset part — see below.',
           attrs: 'HTML/ARIA attributes — see below.',
+          codeOnly: 'Capture-side code-only receipts (v18) — see below.',
           visibleWhen: 'Conditional visibility — see <a href="/spec/conditionals/#visible-when">Conditionals</a>.',
           optional: 'Optional parts render conditionally (code: when the slot prop is provided; canvas: a “Show X” boolean controls visibility).',
           parts: 'Child parts — the tree.',
@@ -441,6 +442,12 @@ function anatomyPage(): { route: string; html: string } {
       ['generated', 'curated'],
       `<p><code>attrs</code> sets HTML/ARIA attributes on the part’s element — literal strings or <code>'{prop}'</code> references (refused when the prop doesn’t exist). Code-side surface; the canvas ignores it. A real <code>&lt;input type="checkbox|radio"&gt;</code> declared this way is recognized as a native checkable control: code surfaces render it as the focusable control (checked state is DOM state, never ARIA), and the canvas draws nothing for it — semantics don’t draw.</p>` +
         shippingExample('checkbox.contract.json', { paths: ['anatomy.root.parts.box.parts.input'] }),
+    ),
+    section(
+      'code-only',
+      'Code-only capture receipts',
+      ['generated'],
+      `<p><code>codeOnly</code> (schema v18) carries capture-side refusals on the part itself: state-plane facts the computed capture <em>observed</em> and the contract grammar could not hold — a nested part’s focus-visible <code>outline-width</code>, a state delta outside every mintable value kind. Each entry names the <code>channel</code>, the observed <code>value</code>, the <code>reason</code> for the refusal, and optionally the <code>state</code> plane it was observed on. Before this field existed those refusals lived only in the capture’s <code>enriched.extension.json</code> sidecar, which nothing canvas-side ever reads — <code>figma bundle</code> compiles its <code>codeOnlyFacts</code> from the contract alone, so a pasted set carried no trace of them.</p><p>MEASURED, never hand-authored: the capture’s fusion writes it and <code>promote</code> preserves it. The code emitters ignore it; the canvas emitter repeats every entry as a <code>capture</code>-kind code-only fact in the bundle JSON, the plugin run report and the set’s plugin data. A receipt, not a styling instruction — nothing reads it to draw.</p>`,
     ),
     section(
       'meter',

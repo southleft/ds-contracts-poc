@@ -1,0 +1,296 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/checkbox.contract.json (antd.checkbox v0.2.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  border: 0;
+  position: relative;
+  color: var(--imported-shared-color-000000e0);
+  font-size: var(--imported-shared-size-14);
+  height: var(--imported-shared-size-22);
+  line-height: var(--imported-shared-size-22);
+  width: var(--imported-checkbox-root-width);
+  box-sizing: border-box;
+  cursor: pointer;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+.root:focus-visible {
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
+.root:disabled {
+  cursor: not-allowed;
+}
+
+.checkbox {
+  display: flex;
+  border-bottom-left-radius: var(--imported-shared-size-4);
+  border-bottom-right-radius: var(--imported-shared-size-4);
+  border-top-left-radius: var(--imported-shared-size-4);
+  border-top-right-radius: var(--imported-shared-size-4);
+  bottom: var(--imported-shared-size-0);
+  color: var(--imported-shared-color-000000e0);
+  font-size: var(--imported-shared-size-14);
+  height: var(--imported-shared-size-16);
+  left: var(--imported-shared-size-0);
+  line-height: var(--imported-shared-size-14);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-16);
+  display: block;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  position: relative;
+  text-wrap-mode: nowrap;
+}
+
+.root:disabled .checkbox {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.checkbox-input {
+  appearance: none;
+  border: none;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  bottom: var(--imported-shared-size-0);
+  font-size: var(--imported-checkbox-checkbox-input-font-size);
+  height: var(--imported-shared-size-16);
+  left: var(--imported-shared-size-0);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  opacity: var(--imported-checkbox-checkbox-input-opacity);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-16);
+  z-index: var(--imported-checkbox-checkbox-input-z-index);
+  display: none;
+  appearance: auto;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-family: Arial;
+  position: absolute;
+  text-wrap-mode: nowrap;
+}
+
+.root:disabled .checkbox-input {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.root:focus-visible .checkbox-input {
+  outline-style: auto;
+}
+
+.root:disabled .checkbox-input {
+  color: var(--imported-shared-color-545454);
+}
+
+.checkbox-inner {
+  display: flex;
+  border-bottom-left-radius: var(--imported-shared-size-4);
+  border-bottom-right-radius: var(--imported-shared-size-4);
+  border-bottom-width: var(--imported-shared-size-1);
+  border-left-width: var(--imported-shared-size-1);
+  border-right-width: var(--imported-shared-size-1);
+  border-top-left-radius: var(--imported-shared-size-4);
+  border-top-right-radius: var(--imported-shared-size-4);
+  border-top-width: var(--imported-shared-size-1);
+  color: var(--imported-shared-color-000000e0);
+  font-size: var(--imported-shared-size-14);
+  height: var(--imported-shared-size-16);
+  line-height: var(--imported-shared-size-14);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  outline-color: var(--imported-shared-color-000000e0);
+  width: var(--imported-shared-size-16);
+  display: block;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-top-style: solid;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  text-wrap-mode: nowrap;
+  transition-duration: 0.3s;
+}
+
+.checked-checked .checkbox-inner {
+  background-color: var(--imported-checkbox-checkbox-inner-background-color-checked);
+}
+
+.checked-checked .checkbox-inner {
+  border-bottom-color: var(--imported-checkbox-checkbox-inner-border-bottom-color-checked);
+}
+
+.checked-checked .checkbox-inner {
+  border-left-color: var(--imported-checkbox-checkbox-inner-border-left-color-checked);
+}
+
+.checked-checked .checkbox-inner {
+  border-right-color: var(--imported-checkbox-checkbox-inner-border-right-color-checked);
+}
+
+.checked-checked .checkbox-inner {
+  border-top-color: var(--imported-checkbox-checkbox-inner-border-top-color-checked);
+}
+
+.checked-indeterminate .checkbox-inner {
+  background-color: var(--imported-checkbox-checkbox-inner-background-color-indeterminate);
+}
+
+.checked-indeterminate .checkbox-inner {
+  border-bottom-color: var(--imported-checkbox-checkbox-inner-border-bottom-color-indeterminate);
+}
+
+.checked-indeterminate .checkbox-inner {
+  border-left-color: var(--imported-checkbox-checkbox-inner-border-left-color-indeterminate);
+}
+
+.checked-indeterminate .checkbox-inner {
+  border-right-color: var(--imported-checkbox-checkbox-inner-border-right-color-indeterminate);
+}
+
+.checked-indeterminate .checkbox-inner {
+  border-top-color: var(--imported-checkbox-checkbox-inner-border-top-color-indeterminate);
+}
+
+.checked-unchecked .checkbox-inner {
+  background-color: var(--imported-checkbox-checkbox-inner-background-color-unchecked);
+}
+
+.checked-unchecked .checkbox-inner {
+  border-bottom-color: var(--imported-checkbox-checkbox-inner-border-bottom-color-unchecked);
+}
+
+.checked-unchecked .checkbox-inner {
+  border-left-color: var(--imported-checkbox-checkbox-inner-border-left-color-unchecked);
+}
+
+.checked-unchecked .checkbox-inner {
+  border-right-color: var(--imported-checkbox-checkbox-inner-border-right-color-unchecked);
+}
+
+.checked-unchecked .checkbox-inner {
+  border-top-color: var(--imported-checkbox-checkbox-inner-border-top-color-unchecked);
+}
+
+.root:disabled .checkbox-inner {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.root:focus-visible .checkbox-inner {
+  outline-style: solid;
+  transition-delay: 0s, 0s;
+  transition-duration: 0s, 0s;
+  transition-property: outline-offset, outline;
+  transition-timing-function: ease, ease;
+}
+
+.root:disabled .checkbox-inner {
+  background-color: var(--imported-checkbox-checkbox-inner-background-color-state-disabled);
+}
+
+.checkbox-inner-after {
+  width: 5.703px;
+  height: 9.141px;
+  flex-shrink: 0;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  background-color: transparent;
+  border-top-width: 0px;
+  border-right-width: 2px;
+  border-bottom-width: 2px;
+  border-left-width: 0px;
+  border-right-color: rgba(255, 255, 255, 1);
+  border-bottom-color: rgba(255, 255, 255, 1);
+  width: 5.703px;
+  height: 9.141px;
+}
+
+.checked-checked .checkbox-inner-after {
+  width: 5.703px;
+  height: 9.141px;
+  background-color: transparent;
+  border-top-width: 0px;
+  border-right-width: 2px;
+  border-bottom-width: 2px;
+  border-left-width: 0px;
+  border-right-color: rgba(255, 255, 255, 1);
+  border-bottom-color: rgba(255, 255, 255, 1);
+  top: 2.7517500000000004px;
+  left: 5.215400000000001px;
+  border-right-style: solid;
+  border-bottom-style: solid;
+}
+
+.checked-indeterminate .checkbox-inner-after {
+  width: 8px;
+  height: 8px;
+  background-color: rgba(22, 119, 255, 1);
+  border-top-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
+  top: 4px;
+  left: 4px;
+}
+
+.checked-unchecked .checkbox-inner-after {
+  display: none;
+}
+
+.checked-checked .checkbox-inner-after {
+  position: absolute;
+  top: 2.7517500000000004px;
+  left: 5.215400000000001px;
+  transform: rotate(45deg);
+}
+
+.checked-indeterminate .checkbox-inner-after {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  transform: rotate(0deg);
+}
+
+.label {
+  color: var(--imported-shared-color-000000e0);
+  font-size: var(--imported-shared-size-14);
+  font-weight: var(--imported-checkbox-label-font-weight);
+  line-height: var(--imported-shared-size-22);
+  padding-left: var(--imported-checkbox-label-padding-left);
+  padding-right: var(--imported-checkbox-label-padding-right);
+  display: block;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+.root:disabled .label {
+  cursor: not-allowed;
+}
+
+.root:disabled .label {
+  color: var(--imported-checkbox-label-color-state-disabled);
+}

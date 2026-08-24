@@ -1,0 +1,82 @@
+[
+  {
+    "key": "unchecked.enabled__default",
+    "pctExact": 0.810546875,
+    "pctAA": 0.29296875
+  },
+  {
+    "key": "unchecked.enabled__hover",
+    "pctExact": 0.810546875,
+    "pctAA": 0.29296875
+  },
+  {
+    "key": "unchecked.enabled__focus-visible",
+    "pctExact": 0.8170572916666666,
+    "pctAA": 0.29296875
+  },
+  {
+    "key": "unchecked.enabled__active",
+    "pctExact": 0.810546875,
+    "pctAA": 0.29296875
+  },
+  {
+    "key": "unchecked.disabled__default",
+    "pctExact": 0.7975260416666666,
+    "pctAA": 0.17578125
+  },
+  {
+    "key": "unchecked.disabled__hover",
+    "pctExact": 0.7975260416666666,
+    "pctAA": 0.17578125
+  },
+  {
+    "key": "unchecked.disabled__focus-visible",
+    "pctExact": 0.7975260416666666,
+    "pctAA": 0.17578125
+  },
+  {
+    "key": "unchecked.disabled__active",
+    "pctExact": 0.7975260416666666,
+    "pctAA": 0.17578125
+  },
+  {
+    "key": "checked.enabled__default",
+    "pctExact": 0.810546875,
+    "pctAA": 0.29296875
+  },
+  {
+    "key": "checked.enabled__hover",
+    "pctExact": 0.810546875,
+    "pctAA": 0.29296875
+  },
+  {
+    "key": "checked.enabled__focus-visible",
+    "pctExact": 0.8170572916666666,
+    "pctAA": 0.29296875
+  },
+  {
+    "key": "checked.enabled__active",
+    "pctExact": 0.810546875,
+    "pctAA": 0.29296875
+  },
+  {
+    "key": "checked.disabled__default",
+    "pctExact": 0.7975260416666666,
+    "pctAA": 0.17578125
+  },
+  {
+    "key": "checked.disabled__hover",
+    "pctExact": 0.7975260416666666,
+    "pctAA": 0.17578125
+  },
+  {
+    "key": "checked.disabled__focus-visible",
+    "pctExact": 0.7975260416666666,
+    "pctAA": 0.17578125
+  },
+  {
+    "key": "checked.disabled__active",
+    "pctExact": 0.7975260416666666,
+    "pctAA": 0.17578125
+  }
+]

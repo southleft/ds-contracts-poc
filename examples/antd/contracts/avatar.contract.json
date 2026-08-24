@@ -1,0 +1,175 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "antd.avatar",
+  "name": "Avatar",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). ATOM, SIZE×SHAPE (the MUI Avatar precedent plus antd's real size enum small|default|large → 24/32/40px). The text child is ONE glyph on purpose: antd's text-fit ResizeObserver writes an inline `transform: scale(n)` on span.ant-avatar-string (scale(1) for a single initial; a T3 dynamic channel if the initial overflowed). NAMED OUT: `icon` (child SWAP — replaces the string part), `src`, numeric `size`, `gap`. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/antd/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Ant Design's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "default",
+          "large"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "default": "Default",
+            "large": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "shape",
+      "type": {
+        "enum": [
+          "circle",
+          "square"
+        ]
+      },
+      "default": "circle",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Shape",
+          "values": {
+            "circle": "Circle",
+            "square": "Square"
+          }
+        },
+        "code": {
+          "prop": "shape"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "A",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Initial"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "parts": {
+        "label": {
+          "content": {
+            "prop": "children"
+          },
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|avatar-string — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "text-align": "center",
+            "text-wrap-mode": "nowrap",
+            "transform": "matrix(1, 0, 0, 1, 0, 0)"
+          },
+          "tokens": {
+            "color": "{imported.avatar.label.color}",
+            "font-size": "{imported.avatar.label.font-size}",
+            "font-weight": "{imported.avatar.label.font-weight}",
+            "line-height": "{imported.avatar.label.line-height}"
+          }
+        }
+      },
+      "declared": {
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "box-sizing": "border-box",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
+        "overflow-x": "hidden",
+        "overflow-y": "hidden",
+        "position": "relative",
+        "text-align": "center",
+        "text-wrap-mode": "nowrap"
+      },
+      "tokens": {
+        "background-color": "{imported.avatar.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-00000000}",
+        "border-bottom-left-radius": "{imported.avatar.root.border-bottom-left-radius.{size}.{shape}}",
+        "border-bottom-right-radius": "{imported.avatar.root.border-bottom-right-radius.{size}.{shape}}",
+        "border-bottom-width": "{imported.shared.size-1}",
+        "border-left-color": "{imported.shared.color-00000000}",
+        "border-left-width": "{imported.shared.size-1}",
+        "border-right-color": "{imported.shared.color-00000000}",
+        "border-right-width": "{imported.shared.size-1}",
+        "border-top-color": "{imported.shared.color-00000000}",
+        "border-top-left-radius": "{imported.avatar.root.border-top-left-radius.{size}.{shape}}",
+        "border-top-right-radius": "{imported.avatar.root.border-top-right-radius.{size}.{shape}}",
+        "border-top-width": "{imported.shared.size-1}",
+        "bottom": "{imported.shared.size-0}",
+        "color": "{imported.avatar.root.color}",
+        "font-size": "{imported.avatar.root.font-size}",
+        "left": "{imported.shared.size-0}",
+        "line-height": "{imported.avatar.root.line-height}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "default": {
+              "height": "{imported.avatar.root.height.default}",
+              "width": "{imported.avatar.root.width.default}"
+            },
+            "large": {
+              "height": "{imported.avatar.root.height.large}",
+              "width": "{imported.avatar.root.width.large}"
+            },
+            "small": {
+              "height": "{imported.avatar.root.height.small}",
+              "width": "{imported.avatar.root.width.small}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "antd",
+        "export": "Avatar"
+      }
+    }
+  }
+}
