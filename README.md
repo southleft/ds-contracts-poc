@@ -255,7 +255,7 @@ ds-contracts figma bundle examples/acme/contracts --out acme.bundle.json \
 
 #    The bundle's `codeOnlyFacts` lists, per contract, every fact the canvas
 #    cannot carry — part, kind, channel, value, reason. On the Flowbite eight
-#    (examples/tailwind/figma/tailwind.bundle.json) it is 54 facts, and
+#    (examples/tailwind/figma/tailwind.bundle.json) it is 56 facts, and
 #    `npm run code-only-facts:check` pins the per-contract counts. The same
 #    list prints on stdout, in the plugin run report, and is stamped on each
 #    set as `ds_contracts/codeOnlyFacts`. The ToggleSwitch thumb is the worked

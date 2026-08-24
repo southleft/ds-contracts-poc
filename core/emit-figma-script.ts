@@ -4741,10 +4741,22 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // ANTD EXAM (heal loop): a root with no parts and no `children` prop can
   // still carry its text through another TEXT prop — antd's Input draws
   // its `placeholder`. The canvas label follows the first text prop when no
-  // `children` exists (an <input> has no children in any grammar).
+  // `children` exists (an <input> has no children in any grammar) — but ONLY
+  // on a root the browser itself draws that text for: a text control
+  // (`semantics.element` input/textarea, whose placeholder/value is visible
+  // ink). Any other element's TEXT prop can be consumed invisibly — the
+  // catalog's StatusDot binds `label` to `aria-label` alone, and the CSS
+  // surface (emit-html textDefaultOf) renders NO text for it: "text props
+  // used solely by attrs remain attributes, not content". The first cut of
+  // this fallback keyed on "no parts" only and drew a 97×25 'Status' label
+  // over an 8×8 dot (catalog gate: text-overflows-root-canvas ×5) — the
+  // canvas must mirror the code surface's discipline, not out-draw it.
+  const rootIsTextControl = contract.semantics?.element === 'input' || contract.semantics?.element === 'textarea';
   const textProp =
     contract.props.find((p) => p.type === 'text' && p.bindings.code.prop === 'children') ??
-    (contract.anatomy.root?.parts ? undefined : contract.props.find((p) => p.type === 'text' && p.bindings.figma.kind === 'TEXT'));
+    (contract.anatomy.root?.parts || !rootIsTextControl
+      ? undefined
+      : contract.props.find((p) => p.type === 'text' && p.bindings.figma.kind === 'TEXT'));
   // VARIANT-bound booleans are axes, not BOOLEAN component properties.
   const boolPropsData = contract.props
     .filter((p) => p.type === 'boolean' && !isVariantBool(p))

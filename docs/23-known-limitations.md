@@ -1268,7 +1268,7 @@ companion figures — what the same measurements say went right — are in
 
 <a id="1-coverage--how-much-of-a-library-is-actually-captured"></a>
 
-## B.30 State previews are all-or-nothing per set — one override-less state hides every drawn plane
+## B.34 State previews are all-or-nothing per set — one override-less state hides every drawn plane
 
 **Found by the Ant Design exam** ([ANTD-EXAM.md](../parity/receipts/phase-2/ANTD-EXAM.md) §5).
 `bindings.figma.statePreviews` is probed per contract by the promote referee
@@ -1294,7 +1294,7 @@ plane holds is a `channel`-kind code-only fact on the set
 overrides and name the ones that do not. Referee + emitter
 (`stateVariants`) + prototype-wiring pairs; not started.
 
-## B.31 The pseudo-decor grammar drops a decor's `box-shadow`, and the placeholder plane's ink
+## B.35 The pseudo-decor grammar drops a decor's `box-shadow`, and the placeholder plane's ink
 
 Two named residues the exam's heal loop pinned with screenshot pairs
 (`parity/receipts/phase-2/antd/switch.triptych.png`, `input.triptych.png`):
@@ -3140,7 +3140,7 @@ case or screenshot pair:
   contracts gained receipts).
 - **The undrawn state plane** — with `statePreviews` off every state binding
   was unbuilt in silence; `FC-STATE-PLANE-UNDRAWN` (18 committed contracts
-  across 8 libraries gained receipts; the wall itself is §B.30).
+  across 8 libraries gained receipts; the wall itself is §B.34).
 - **The undrawn unset plane** — a defaultless axis's library-default
   rendering (antd's red Badge) had no cell and the proposal called the first
   enum value the default; `FC-UNSET-PLANE-UNDRAWN`.

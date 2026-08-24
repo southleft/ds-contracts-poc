@@ -173,7 +173,7 @@ check(
   JSON.stringify(topNavReceipt.textProps) === JSON.stringify([{ property: 'Href', default: '#' }]),
   JSON.stringify(topNavReceipt.textProps),
 );
-check('TopNavItem code-only facts = 0 (the attrs binding is NOT named — docs/23)', topNavReceipt.codeOnlyFacts.length === 0, String(topNavReceipt.codeOnlyFacts.length));
+check('TopNavItem code-only facts = 1 (schema v18 names the undrawn facts — docs/23 D.34)', topNavReceipt.codeOnlyFacts.length === 1, String(topNavReceipt.codeOnlyFacts.length));
 
 // ---------------------------------------------- 5. ToggleSwitch, hop 2
 console.log('Code → Figma — ToggleSwitch (tailwind.bundle.json)');
@@ -215,7 +215,7 @@ const bundleTree = {
 };
 const bundleIcons = new Map([...icons, ...Object.entries(bundle.icons ?? {})]);
 const toggleReceipt = compileReceipt(toggle, bundleContracts, bundleTree, bundleIcons);
-check('ToggleSwitch code-only facts = 12', toggleReceipt.codeOnlyFacts.length === 12, String(toggleReceipt.codeOnlyFacts.length));
+check('ToggleSwitch code-only facts = 14', toggleReceipt.codeOnlyFacts.length === 14, String(toggleReceipt.codeOnlyFacts.length));
 const toggleRow = bundle.codeOnlyFacts.find((r) => r.contractId === 'flowbite.toggleswitch');
 const agreement = factsAgreeWithBundle(toggleReceipt.codeOnlyFacts, toggleRow);
 check('ToggleSwitch live facts agree with the committed bundle row', agreement.agree, agreement.detail);
@@ -232,7 +232,7 @@ check(
   check('ToggleSwitch figma-script carries the MAX/right thumb placement', excerptOf(files, '"h": "MAX"') !== null);
 }
 const bundleTotal = bundle.codeOnlyFacts.reduce((n, r) => n + r.facts.length, 0);
-check('bundle codeOnlyFacts total = 54 (docs/BETA.md, README)', bundleTotal === 54, String(bundleTotal));
+check('bundle codeOnlyFacts total = 56 (docs/BETA.md, README)', bundleTotal === 56, String(bundleTotal));
 
 // ------------------------------------------ 6. ToggleSwitch, hop 4 (stamped)
 console.log('Figma → code — ToggleSwitch (flowbite-eight.dump.json)');
