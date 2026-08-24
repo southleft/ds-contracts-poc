@@ -185,13 +185,6 @@ reg('anatomy', 'text-by-prop', [
 ]);
 reg('anatomy', 'icon', ['part.icon', 'part.icon.asset', 'part.icon.size']);
 reg('anatomy', 'attrs', ['part.attrs']);
-reg('anatomy', 'code-only', [
-  'part.codeOnly',
-  'part.codeOnly.channel',
-  'part.codeOnly.reason',
-  'part.codeOnly.state',
-  'part.codeOnly.value',
-]);
 reg('anatomy', 'meter', ['part.meter', 'part.meter.valueProp', 'part.meter.maxProp']);
 
 // --- Layout ----------------------------------------------------------------
