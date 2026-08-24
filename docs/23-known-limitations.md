@@ -1314,6 +1314,34 @@ Two named residues the exam's heal loop pinned with screenshot pairs
 `box-shadow` on frames, not on decor shapes); a registry channel for the
 placeholder plane's colour. Neither started.
 
+## B.36 The held-out exam rendered five cells, not fifteen sets
+
+The Phase 2 exam ([FIGMA-DS-EXAM.md](../parity/receipts/phase-2/FIGMA-DS-EXAM.md))
+read 3,556 canvas facts off fifteen component sets, but the render comparison —
+Figma's own `/v1/images` export beside the generated React component in
+Chromium — was taken for five cells (Button, Badge ×2, Card, Toast), and those
+five pairs lived in a scratch directory the receipt described as "not in the
+patch". The recognisability verdicts for the other eleven sets (Button (Icon),
+Button (contract), Chip, Dek, Heading, Image, Kicker, Button Group, Section
+Header, Section Footer, Section) were never taken: the accounting counted
+their facts; nobody looked at them.
+
+**What is true now.** The five pairs are in the tree beside the receipt
+(`parity/receipts/phase-2/figma-ds/*.canvas.png` / `*.react.png`), and
+`npm run exam:screenshots:check` (fast lane) refuses any `*-EXAM.md` that
+lists a set without a screenshot pair — unless the row says, in one fixed
+sentence, that the pair was not captured and points here. Eleven rows of
+FIGMA-DS-EXAM.md say exactly that. A named absence is counted and printed on
+every run; it is not a pass.
+
+**What it would take.** A re-render pass on the kit: REST images for every
+set's default cell, the generated React for the same cells through the
+existing Playwright harness, and the recognisability read per set. The REST
+PAT the exam used lacks `file_variables:read` (§B.25), so the canvas side
+would render with the same resolved literals the exam measured. Not scheduled
+until the code→canvas half of the exam (the library TJ picks) is run, so both
+halves can be captured on one tree.
+
 ## C.1 Coverage — how much of a library is actually captured
 
 Seven distinct libraries across eight rounds, five styling architectures, one

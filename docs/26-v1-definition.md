@@ -26,7 +26,10 @@ An undocumented deferral is a blocker.
 below now also says which CI lane runs its command as a direct step today
 ("Lanes today"); `npm run ci:lanes` is the authority for that mapping and
 this prose is its transcription. A command with no lane is release evidence
-only when a human runs it on the release commit and attaches the output.
+only when a human runs it on the release commit and attaches the output;
+`npm run v1:readiness` runs every row below — the command chains, the
+evidence links and the P0/P1 audit ledger — on the current commit and writes
+`parity/receipts/v1/READINESS.md`, so the attachment is one receipt.
 The two acceptance commands that failed or misbehaved on the 2026-08-22
 commit (`npm run diagnose` exited non-zero on the committed first-party
 snapshot; `npm run extract:computed:drift` dirtied tracked files while it
