@@ -571,6 +571,9 @@ const trackedTests = execFileSync(
   {
     cwd: ROOT,
     encoding: "utf8",
+    // The canvas census added ~1,000 committed PNGs; `git ls-files` output now
+    // exceeds spawnSync's 1 MiB default maxBuffer (ENOBUFS).
+    maxBuffer: 64 * 1024 * 1024,
   },
 )
   .split("\0")
