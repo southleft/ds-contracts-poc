@@ -1,0 +1,24 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "message pill matches; canvas stretches to the stage width while the code render hugs",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:24217",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.toast.dump.json",
+  "matched": 10,
+  "diverged": [
+   "part root/body \u2014 missing from proposal",
+   "part root/endContent \u2014 missing from proposal",
+   "part root/Children \u2014 proposal has a part the contract does not",
+   "part root/EndContent \u2014 proposal has a part the contract does not"
+  ],
+  "lost": [
+   "`semantics` \u2014 element/role are not drawn on the canvas ({\"element\":\"div\",\"roleByProp\":{\"prop\":\"type\",\"map\":{\"info\":\"status\",\"error\":\"alert\"}}})",
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`part root color` \u2014 {color.toast.{type}.foreground} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root font-family` \u2014 {font.control.family} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root font-size` \u2014 {font.control.size.sm} \u2014 text-cascade token with no bound text node beneath it on the canvas"
+  ]
+ }
+}

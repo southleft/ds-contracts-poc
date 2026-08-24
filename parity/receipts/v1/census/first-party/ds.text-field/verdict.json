@@ -1,0 +1,46 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:24208",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.text-field.dump.json",
+  "matched": 30,
+  "diverged": [
+   "prop size type \u2014 {\"enum\":[\"sm\",\"md\",\"lg\"]} vs {\"enum\":[\"medium\",\"small\",\"large\"]}",
+   "prop size default \u2014 \"md\" vs \"medium\"",
+   "prop size bindings.figma.values \u2014 {\"sm\":\"Small\",\"md\":\"Medium\",\"lg\":\"Large\"} vs {\"medium\":\"Medium\",\"small\":\"Small\",\"large\":\"Large\"}",
+   "prop isRequired \u2014 missing from proposal",
+   "prop required \u2014 proposal has a prop the contract does not",
+   "part root/labelRow/requiredMark/Vector \u2014 proposal has a part the contract does not",
+   "part root/labelRow/requiredMark/vector2 \u2014 proposal has a part the contract does not",
+   "part root/labelRow/requiredMark/vector3 \u2014 proposal has a part the contract does not",
+   "part root/input/placeholder \u2014 proposal has a part the contract does not",
+   "part root/labelRow/requiredMark visibleWhen \u2014 {\"prop\":\"isRequired\"} vs {\"prop\":\"required\"}",
+   "part root/input layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"HORIZONTAL\",\"primary\":\"MIN\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false}",
+   "part root/input padding-block \u2014 {space.inset-y.{size}} vs {space.inset-y.md}"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`prop label required` \u2014 requiredness is not drawn on the canvas",
+   "`part root layout align:stretch` \u2014 stretch leaves no artifact here (children are instances/slots \u2014 excluded from the generator fill-width path)",
+   "`part root stylesWhen` \u2014 conditional literal styles are code-side (declared canvas limit)",
+   "`part root/labelRow/labelText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`part root/descriptionText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`part root/input element` \u2014 host element (\"input\") is not drawn on the canvas",
+   "`part root/input attrs` \u2014 HTML/ARIA attributes are code-side surface",
+   "`text root/labelRow/labelText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`text root/descriptionText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`part root/labelRow/requiredMark color` \u2014 {color.action.danger.background} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/input font-size` \u2014 {font.control.size.{size}} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/input font-family` \u2014 {font.control.family} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/input color` \u2014 {color.surface.foreground} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`TextField:root/labelRow/requiredMark/Vector` strokeWeight = `0.75` \u2014 nearest tokens: (none)",
+   "`TextField:root/labelRow/requiredMark/Vector 2` strokeWeight = `0.75` \u2014 nearest tokens: (none)",
+   "`TextField:root/labelRow/requiredMark/Vector 3` strokeWeight = `0.75` \u2014 nearest tokens: (none)",
+   "`TextField:root/input/placeholder` fontSize = `16` \u2014 nearest tokens: `{space.inset-x.md}`, `{space.gap.md}`, `{size.checkbox.sm}`, `{size.slider.thumb}`, `{size.switch.thumb}`",
+   "`TextField:root/input/placeholder` fontWeight = `500` \u2014 nearest tokens: `{font.control.weight}`, `{font.tab.default.weight}`, `{font.weight.medium}`"
+  ]
+ }
+}

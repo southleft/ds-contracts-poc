@@ -1,0 +1,23 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:24142",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.table.dump.json",
+  "matched": 16,
+  "diverged": [
+   "prop items \u2014 proposal has a prop the contract does not",
+   "part root/header/roleHeader \u2014 missing from proposal",
+   "part root/header/statusHeader \u2014 missing from proposal",
+   "part root/body \u2014 missing from proposal",
+   "part root/Rows \u2014 proposal has a part the contract does not"
+  ],
+  "lost": [
+   "`semantics` \u2014 element/role are not drawn on the canvas ({\"element\":\"div\",\"role\":\"table\"})",
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`part root/header/nameHeader component text` \u2014 instance text override not captured in dump v1"
+  ]
+ }
+}

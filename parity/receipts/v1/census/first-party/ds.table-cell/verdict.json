@@ -1,0 +1,17 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:24030",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.table-cell.dump.json",
+  "matched": 10,
+  "diverged": [],
+  "lost": [
+   "`semantics` \u2014 element/role are not drawn on the canvas ({\"element\":\"div\",\"role\":\"cell\"})",
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`text root font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)"
+  ]
+ }
+}

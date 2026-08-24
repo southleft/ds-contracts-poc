@@ -1,0 +1,16 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23650",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.code.dump.json",
+  "matched": 11,
+  "diverged": [],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`text root font-family (effective)` \u2014 {font.code.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)"
+  ]
+ }
+}

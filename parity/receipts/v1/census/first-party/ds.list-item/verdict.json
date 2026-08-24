@@ -1,0 +1,26 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23756",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.list-item.dump.json",
+  "matched": 21,
+  "diverged": [
+   "part root/startContent \u2014 missing from proposal",
+   "part root/endContent \u2014 missing from proposal",
+   "part root/StartContent \u2014 proposal has a part the contract does not",
+   "part root/EndContent \u2014 proposal has a part the contract does not",
+   "part root/textCol layout \u2014 {\"mode\":\"VERTICAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":true,\"stretch\":false} vs {\"mode\":\"VERTICAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":false}"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`prop label required` \u2014 requiredness is not drawn on the canvas",
+   "`part root/textCol/labelText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`part root/textCol/descriptionText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/textCol/labelText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`text root/textCol/descriptionText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)"
+  ]
+ }
+}

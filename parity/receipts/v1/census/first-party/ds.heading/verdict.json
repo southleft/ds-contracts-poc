@@ -1,0 +1,27 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23722",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.heading.dump.json",
+  "matched": 6,
+  "diverged": [
+   "prop level type \u2014 {\"enum\":[\"1\",\"2\",\"3\",\"4\",\"5\",\"6\"]} vs {\"enum\":[\"h2\",\"h1\",\"h3\",\"h4\",\"h5\",\"h6\"]}",
+   "prop level default \u2014 \"2\" vs \"h2\"",
+   "prop level bindings.figma.values \u2014 {\"1\":\"H1\",\"2\":\"H2\",\"3\":\"H3\",\"4\":\"H4\",\"5\":\"H5\",\"6\":\"H6\"} vs {\"h2\":\"H2\",\"h1\":\"H1\",\"h3\":\"H3\",\"h4\":\"H4\",\"h5\":\"H5\",\"h6\":\"H6\"}",
+   "prop size type \u2014 {\"enum\":[\"sm\",\"md\",\"lg\"]} vs {\"enum\":[\"large\",\"small\",\"medium\"]}",
+   "prop size default \u2014 \"lg\" vs \"large\"",
+   "prop size bindings.figma.values \u2014 {\"sm\":\"Small\",\"md\":\"Medium\",\"lg\":\"Large\"} vs {\"large\":\"Large\",\"small\":\"Small\",\"medium\":\"Medium\"}",
+   "text root font-size (effective) \u2014 {font.control.size.{size}} missing from proposal"
+  ],
+  "lost": [
+   "`semantics` \u2014 element/role are not drawn on the canvas ({\"element\":\"p\",\"elementByProp\":{\"prop\":\"level\",\"map\":{\"1\":\"h1\",\"2\":\"h2\",\"3\":\"h3\",\"4\":\"h4\",\"5\":\"h5\",\"6\":\"h6\"}}})",
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`prop children required` \u2014 requiredness is not drawn on the canvas",
+   "`text root font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`Heading:root/label` fontSize = `18` \u2014 nearest tokens: `{font.control.size.lg}`, `{font.size.400}`"
+  ]
+ }
+}

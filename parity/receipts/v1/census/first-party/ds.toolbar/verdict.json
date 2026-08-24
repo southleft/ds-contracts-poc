@@ -1,0 +1,29 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "slot-only toolbar renders as an empty rounded bar in both halves",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:24367",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.toolbar.dump.json",
+  "matched": 11,
+  "diverged": [
+   "prop size type \u2014 {\"enum\":[\"sm\",\"md\",\"lg\"]} vs {\"enum\":[\"medium\",\"small\",\"large\"]}",
+   "prop size default \u2014 \"md\" vs \"medium\"",
+   "prop size bindings.figma.values \u2014 {\"sm\":\"Small\",\"md\":\"Medium\",\"lg\":\"Large\"} vs {\"medium\":\"Medium\",\"small\":\"Small\",\"large\":\"Large\"}",
+   "prop label \u2014 missing from proposal",
+   "part root/startContent \u2014 missing from proposal",
+   "part root/centerContent \u2014 missing from proposal",
+   "part root/endContent \u2014 missing from proposal",
+   "part root/StartContent \u2014 proposal has a part the contract does not",
+   "part root/CenterContent \u2014 proposal has a part the contract does not",
+   "part root/EndContent \u2014 proposal has a part the contract does not",
+   "part root min-height \u2014 {size.toolbar.{size}} vs {size.toolbar.md}"
+  ],
+  "lost": [
+   "`semantics` \u2014 element/role are not drawn on the canvas ({\"element\":\"div\",\"role\":\"toolbar\"})",
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`part root attrs` \u2014 HTML/ARIA attributes are code-side surface"
+  ]
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23752",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.kbd.dump.json",
+  "matched": 16,
+  "diverged": [],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`prop keys required` \u2014 requiredness is not drawn on the canvas",
+   "`part root layout.display` \u2014 inline vs block flex has no canvas projection",
+   "`part root/keysText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/keysText font-family (effective)` \u2014 {font.code.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)"
+  ]
+ }
+}

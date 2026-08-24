@@ -1,0 +1,32 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "icon slot empty in both halves (gray square pair agrees)",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23749",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.icon-button.dump.json",
+  "matched": 7,
+  "diverged": [
+   "prop variant type \u2014 {\"enum\":[\"primary\",\"secondary\",\"ghost\",\"destructive\"]} vs {\"enum\":[\"secondary\",\"primary\",\"ghost\",\"destructive\"]}",
+   "prop variant bindings.figma.values \u2014 {\"primary\":\"Primary\",\"secondary\":\"Secondary\",\"ghost\":\"Ghost\",\"destructive\":\"Destructive\"} vs {\"secondary\":\"Secondary\",\"primary\":\"Primary\",\"ghost\":\"Ghost\",\"destructive\":\"Destructive\"}",
+   "prop size type \u2014 {\"enum\":[\"sm\",\"md\",\"lg\"]} vs {\"enum\":[\"medium\",\"small\",\"large\"]}",
+   "prop size default \u2014 \"md\" vs \"medium\"",
+   "prop size bindings.figma.values \u2014 {\"sm\":\"Small\",\"md\":\"Medium\",\"lg\":\"Large\"} vs {\"medium\":\"Medium\",\"small\":\"Small\",\"large\":\"Large\"}",
+   "prop label \u2014 missing from proposal",
+   "part root/iconSlot \u2014 missing from proposal",
+   "part root/Icon \u2014 proposal has a part the contract does not",
+   "part root width \u2014 {size.icon-button.{size}} missing from proposal",
+   "part root height \u2014 {size.icon-button.{size}} vs {size.icon-button.md}",
+   "part root max-width \u2014 proposal has {size.icon-button.md}, contract has nothing"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`part root layout.display` \u2014 inline vs block flex has no canvas projection",
+   "`part root attrs` \u2014 HTML/ARIA attributes are code-side surface",
+   "`part root states` \u2014 interaction-state token overrides are code-side (CSS)",
+   "`part root color` \u2014 {color.action.{variant}.foreground} \u2014 text-cascade token with no bound text node beneath it on the canvas"
+  ]
+ }
+}

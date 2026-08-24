@@ -1,0 +1,29 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:24352",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.token.dump.json",
+  "matched": 17,
+  "diverged": [
+   "prop size type \u2014 {\"enum\":[\"sm\",\"md\",\"lg\"]} vs {\"enum\":[\"medium\",\"small\",\"large\"]}",
+   "prop size default \u2014 \"md\" vs \"medium\"",
+   "prop size bindings.figma.values \u2014 {\"sm\":\"Small\",\"md\":\"Medium\",\"lg\":\"Large\"} vs {\"medium\":\"Medium\",\"small\":\"Small\",\"large\":\"Large\"}",
+   "part root/iconSlot \u2014 missing from proposal",
+   "part root/endContent \u2014 missing from proposal",
+   "part root/Icon \u2014 proposal has a part the contract does not",
+   "part root/EndContent \u2014 proposal has a part the contract does not",
+   "text root/labelText font-size (effective) \u2014 {font.badge.size} missing from proposal"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`prop label required` \u2014 requiredness is not drawn on the canvas",
+   "`part root layout.display` \u2014 inline vs block flex has no canvas projection",
+   "`part root/labelText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/labelText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`Token:root/labelText` fontSize = `12` \u2014 nearest tokens: `{space.inset-x.sm}`, `{space.inset-y.lg}`, `{space.table.cell-y.comfortable}`, `{space.list.spacious}`, `{size.spinner.sm}`"
+  ]
+ }
+}

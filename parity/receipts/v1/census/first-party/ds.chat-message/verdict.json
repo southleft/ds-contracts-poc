@@ -1,0 +1,31 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "author + skeleton body pair agrees",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23588",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.chat-message.dump.json",
+  "matched": 16,
+  "diverged": [
+   "prop sender type \u2014 {\"enum\":[\"user\",\"assistant\",\"system\"]} vs {\"enum\":[\"assistant\",\"user\",\"system\"]}",
+   "prop sender bindings.figma.values \u2014 {\"user\":\"User\",\"assistant\":\"Assistant\",\"system\":\"System\"} vs {\"assistant\":\"Assistant\",\"user\":\"User\",\"system\":\"System\"}",
+   "part root/avatarSlot \u2014 missing from proposal",
+   "part root/body/bubble \u2014 missing from proposal",
+   "part root/body/metadataSlot \u2014 missing from proposal",
+   "part root/Avatar \u2014 proposal has a part the contract does not",
+   "part root/body/Children \u2014 proposal has a part the contract does not",
+   "part root/body/Metadata \u2014 proposal has a part the contract does not"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`part root layoutByProp` \u2014 per-variant layout overrides not inverted in dump v1",
+   "`part root/body layoutByProp` \u2014 per-variant layout overrides not inverted in dump v1",
+   "`part root/body layout align:stretch` \u2014 stretch leaves no artifact here (children are instances/slots \u2014 excluded from the generator fill-width path)",
+   "`part root/body/nameText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/body/nameText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`part root/body/bubble color` \u2014 {color.chat.{sender}.foreground} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/body/bubble font-size` \u2014 {font.control.size.sm} \u2014 text-cascade token with no bound text node beneath it on the canvas"
+  ]
+ }
+}

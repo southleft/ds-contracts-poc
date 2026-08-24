@@ -1,0 +1,39 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23490",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.banner.dump.json",
+  "matched": 32,
+  "diverged": [
+   "prop isDismissable \u2014 missing from proposal",
+   "prop dismissable \u2014 proposal has a prop the contract does not",
+   "part root/endArea/endContent \u2014 missing from proposal",
+   "part root/statusIcon/Vector \u2014 proposal has a part the contract does not",
+   "part root/statusIcon/vector2 \u2014 proposal has a part the contract does not",
+   "part root/statusIcon/vector3 \u2014 proposal has a part the contract does not",
+   "part root/endArea/EndContent \u2014 proposal has a part the contract does not",
+   "part root/endArea/close/closeVector \u2014 proposal has a part the contract does not",
+   "part root/endArea/close/closeVector2 \u2014 proposal has a part the contract does not",
+   "part root/endArea/close visibleWhen \u2014 {\"prop\":\"isDismissable\"} vs {\"prop\":\"dismissable\"}"
+  ],
+  "lost": [
+   "`semantics` \u2014 element/role are not drawn on the canvas ({\"element\":\"div\",\"roleByProp\":{\"prop\":\"status\",\"map\":{\"info\":\"status\",\"success\":\"status\",\"warning\":\"alert\",\"error\":\"alert\"}}})",
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`prop title required` \u2014 requiredness is not drawn on the canvas",
+   "`part root/body/title element` \u2014 host element (\"div\") is not drawn on the canvas",
+   "`part root/body/descriptionText element` \u2014 host element (\"div\") is not drawn on the canvas",
+   "`part root/endArea/close element` \u2014 host element (\"button\") is not drawn on the canvas",
+   "`part root/endArea/close attrs` \u2014 HTML/ARIA attributes are code-side surface",
+   "`text root/body/title font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`text root/body/descriptionText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`Banner:root/statusIcon/Vector` strokeWeight = `1.5` \u2014 nearest tokens: (none)",
+   "`Banner:root/statusIcon/Vector 2` strokeWeight = `1.5` \u2014 nearest tokens: (none)",
+   "`Banner:root/statusIcon/Vector 3` strokeWeight = `1.5` \u2014 nearest tokens: (none)",
+   "`Banner:root/endArea/close/Vector` strokeWeight = `1.5` \u2014 nearest tokens: (none)",
+   "`Banner:root/endArea/close/Vector 2` strokeWeight = `1.5` \u2014 nearest tokens: (none)"
+  ]
+ }
+}

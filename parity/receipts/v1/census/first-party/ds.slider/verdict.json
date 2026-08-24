@@ -1,0 +1,23 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23955",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.slider.dump.json",
+  "matched": 31,
+  "diverged": [
+   "prop value \u2014 missing from proposal",
+   "prop max \u2014 missing from proposal"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`prop label required` \u2014 requiredness is not drawn on the canvas",
+   "`part root/labelText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`part root/trackRow/thumb text \"\"` \u2014 empty static text renders no glyphs \u2014 the styled wrapper alone is on the canvas",
+   "`part root/trackRow/thumb element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/labelText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)"
+  ]
+ }
+}

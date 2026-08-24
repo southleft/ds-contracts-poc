@@ -1,0 +1,25 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23647",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.citation.dump.json",
+  "matched": 23,
+  "diverged": [
+   "prop href \u2014 missing from proposal",
+   "part root child order \u2014 labelText,numberText vs numberText,labelText"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`prop sourceTitle required` \u2014 requiredness is not drawn on the canvas",
+   "`part root layout.display` \u2014 inline vs block flex has no canvas projection",
+   "`part root attrs` \u2014 HTML/ARIA attributes are code-side surface",
+   "`part root/labelText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`part root/numberText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/labelText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`text root/numberText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)"
+  ]
+ }
+}

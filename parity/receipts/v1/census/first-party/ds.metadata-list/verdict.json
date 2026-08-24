@@ -1,0 +1,21 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23834",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.metadata-list.dump.json",
+  "matched": 13,
+  "diverged": [
+   "part root/items \u2014 missing from proposal",
+   "part root/Children \u2014 proposal has a part the contract does not"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`part root layout align:stretch` \u2014 stretch leaves no artifact here (children are instances/slots \u2014 excluded from the generator fill-width path)",
+   "`part root/titleText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/titleText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)"
+  ]
+ }
+}

@@ -1,0 +1,17 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "slot-only gallery scaffold renders empty in both halves \u2014 the pair agrees",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23677",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.grid-gallery.dump.json",
+  "matched": 26,
+  "diverged": [
+   "part root/item1 slot name \u2014 item1 vs children"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable"
+  ]
+ }
+}

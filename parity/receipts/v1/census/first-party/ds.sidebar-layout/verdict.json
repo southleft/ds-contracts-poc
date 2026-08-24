@@ -1,0 +1,21 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "slot-only layout renders empty in both halves \u2014 the pair agrees",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23854",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.sidebar-layout.dump.json",
+  "matched": 7,
+  "diverged": [
+   "part root/sidebar \u2014 missing from proposal",
+   "part root/main \u2014 missing from proposal",
+   "part root/Sidebar \u2014 proposal has a part the contract does not",
+   "part root/Main \u2014 proposal has a part the contract does not",
+   "part root grid-area-map \u2014 undefined vs {\"Sidebar\":{\"row\":0,\"column\":0},\"Main\":{\"row\":0,\"column\":1}}"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable"
+  ]
+ }
+}

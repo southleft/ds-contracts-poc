@@ -1,0 +1,35 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23640",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.checkbox.dump.json",
+  "matched": 31,
+  "diverged": [
+   "prop size type \u2014 {\"enum\":[\"sm\",\"md\"]} vs {\"enum\":[\"medium\",\"small\"]}",
+   "prop size default \u2014 \"md\" vs \"medium\"",
+   "prop size bindings.figma.values \u2014 {\"sm\":\"Small\",\"md\":\"Medium\"} vs {\"medium\":\"Medium\",\"small\":\"Small\"}",
+   "part root/box/dashGlyph/Vector \u2014 proposal has a part the contract does not",
+   "part root/box/checkGlyph/checkGlyphVector \u2014 proposal has a part the contract does not",
+   "part root/box child order \u2014 checkGlyph,dashGlyph vs dashGlyph,checkGlyph",
+   "part root/box width \u2014 {size.checkbox.{size}} vs {size.checkbox.md}",
+   "part root/box height \u2014 {size.checkbox.{size}} vs {size.checkbox.md}"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`events` \u2014 the canvas cannot run behavior \u2014 toggle not recoverable",
+   "`prop label required` \u2014 requiredness is not drawn on the canvas",
+   "`part root/box/input` \u2014 native checkable control \u2014 code semantics; the canvas draws the presentational box, never the input",
+   "`part root/box element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`part root/textCol/labelText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`part root/textCol/descriptionText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/textCol/labelText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`text root/textCol/descriptionText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`part root/box color` \u2014 {color.checkbox.icon} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`Checkbox:root/box/dashGlyph/Vector` strokeWeight = `0.9000000357627869` \u2014 nearest tokens: (none)",
+   "`Checkbox:root/box/checkGlyph/Vector` strokeWeight = `0.9000000357627869` \u2014 nearest tokens: (none)"
+  ]
+ }
+}

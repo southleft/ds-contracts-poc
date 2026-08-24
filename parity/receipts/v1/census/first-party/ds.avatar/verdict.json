@@ -1,0 +1,27 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23254",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.avatar.dump.json",
+  "matched": 8,
+  "diverged": [
+   "prop size type \u2014 {\"enum\":[\"sm\",\"md\"]} vs {\"enum\":[\"small\",\"medium\"]}",
+   "prop size default \u2014 \"sm\" vs \"small\"",
+   "prop size bindings.figma.values \u2014 {\"sm\":\"Small\",\"md\":\"Medium\"} vs {\"small\":\"Small\",\"medium\":\"Medium\"}",
+   "part root width \u2014 {size.avatar.{size}} missing from proposal",
+   "part root height \u2014 {size.avatar.{size}} vs {size.avatar.sm}",
+   "part root max-width \u2014 proposal has {size.avatar.sm}, contract has nothing",
+   "text root font-size (effective) \u2014 {font.avatar.size.{size}} missing from proposal"
+  ],
+  "lost": [
+   "`semantics` \u2014 element/role are not drawn on the canvas ({\"element\":\"span\",\"role\":\"img\"})",
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`part root layout.display` \u2014 inline vs block flex has no canvas projection",
+   "`text root font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`Avatar:root/label` fontSize = `12` \u2014 nearest tokens: `{space.inset-x.sm}`, `{space.inset-y.lg}`, `{space.table.cell-y.comfortable}`, `{space.list.spacious}`, `{size.spinner.sm}`"
+  ]
+ }
+}
