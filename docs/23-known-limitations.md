@@ -1680,7 +1680,7 @@ on your canvas. The counts are the honest way to see both halves at once.
 |---|---|---|---|
 | CSS / DOM frontier | 82 | CARRIED 42 · LOWERED 4 · REFUSED 18 · UNSUPPORTED 18 (79 pass · 3 red) | `conformance/MANIFEST.json` (`npm run conformance`, 2026-08-23) |
 | canvas round trip of the CARRIED/LOWERED cases | 46 | ROUND-TRIPPED 26 · NAMED 5 · REFUSED-BY-NAME 15 · **SILENT 0** | `conformance/CANVAS-EXPECTATIONS.md` (`npm run conformance:roundtrip`) |
-| canvas constructs | 154 | CARRIED 107 · LEDGERED 38 · REFUSED 9 (154 PASS · 0 RED-EXPECTED — the last two exam silences closed 2026-08-23, §D.29; the slot's interior layout the same day, §D.31) | `extract/figma/conformance/MANIFEST.json` (`npm run conformance:canvas`) |
+| canvas constructs | 157 | CARRIED 110 · LEDGERED 38 · REFUSED 9 (157 PASS · 0 RED-EXPECTED — the last two exam silences closed 2026-08-23, §D.29; the slot's interior layout the same day, §D.31) | `extract/figma/conformance/MANIFEST.json` (`npm run conformance:canvas`) |
 | dropped-fact receipts (`†`) and the facts they name | 104 receipts · 2,321 named facts | pinned exactly, in both directions; since 2026-08-22 every `†` carries its facts by part, channel, value and reason (`codeOnlyFacts`) | `extract/figma/dagger-census.json` (`npm run dagger:census`, `code-only-facts:check`) |
 
 **REFUSED and UNSUPPORTED are different facts** and the fixture counts them
@@ -2784,7 +2784,7 @@ npm run conformance
 npm run conformance:roundtrip     # → 46 cases · 26 round-tripped · 5 named · 15 refused by name · 0 SILENT
 
 # the canvas-construct fixture, incl. the held-out kit's cases (§D.24, §D.29, §D.31)
-npm run conformance:canvas        # → 154 cases · 154 PASS · 0 RED-EXPECTED · 0 FAIL
+npm run conformance:canvas        # → 157 cases · 157 PASS · 0 RED-EXPECTED · 0 FAIL
 
 # every dropped-fact receipt and the facts it names (§C.3)
 npm run dagger:census             # → 104 receipts · 2,321 named facts, no drift
@@ -2897,12 +2897,14 @@ and the 152 prior cases did not move.
 **Gates:** conformance cases `slot-interior-auto-layout` +
 `rest-slot-interior-auto-layout` (authored RED-EXPECTED with the silence
 pinned in `observedCheck`, proven red, then re-recorded CARRIED); `npm run
-conformance:canvas` (154 cases · CARRIED 107 · LEDGERED 38 · REFUSED 9 ·
-154 PASS · 0 RED-EXPECTED); `npm run exact-proposal:check` §49 (now pins
+conformance:canvas` (157 cases · CARRIED 110 · LEDGERED 38 · REFUSED 9 ·
+157 PASS · 0 RED-EXPECTED — the census merge added the three REST identity
+rows `rest-set-description-carried`, `rest-documentation-links-carried`,
+`rest-stamped-identity-carried`, all CARRIED); `npm run exact-proposal:check` §49 (now pins
 the FULL layout object `{direction, justify, align, grow}` on every shape)
 and §50 (the interior facts on their own: the layout block, the three
 minted channels, the layoutByProp split); `npm run accuracy:check`
-(`accuracy/grammar.json` pins 154 = 107 / 38 / 9); `npm run
+(`accuracy/grammar.json` pins 157 = 110 / 38 / 9); `npm run
 emitters:check`; `npx tsx conformance/canvas.ts` (46 cases, 0 SILENT);
 `npm run flowbite-dump-propose:check` (8 stems). The Flowbite eight draw no
 native SLOT and the first-party `figma/*.figma.js` are emitted from
