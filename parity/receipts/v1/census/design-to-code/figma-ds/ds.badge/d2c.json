@@ -255,7 +255,7 @@
     "react/Badge/Badge.stories.tsx": "6821f7484c6842bdee77b0645f83d993e655cd2c858eb0149813bcc006dae8f6",
     "react/Badge/Badge.tsx": "7be9d0a396311a201725a1c22bdff5bcf49329febb2853e619e911b726ef3a3f",
     "react/Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
-    "wc/ds-badge.ts": "f220daa30bcc5f2859b80c8c099bc31f012d59837d71cf6d1dd61028c48abd66",
+    "wc/ds-badge.ts": "9ec9d31a4388794c50bcf7af1623d40a31b3dff8f8038bc25df47e6266b4b54d",
     "wc/ds-badge.css.ts": "5c974f19f57cb3117a3894fdaade9ec2d9e5fd1102ded8edb6c1773d4abeb024",
     "wc/ds-badge.demo.html": "36708d8c35ce5bbf764ed5bd5101fa44c6cbd96c5a503d4818bd1612cbbc1697",
     "wc/ds-badge.custom-elements.json": "512070c152381b5b6a09cefef49a90235b2264ee7dd1108a77da711665710703"
