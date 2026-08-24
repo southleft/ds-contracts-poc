@@ -98,6 +98,23 @@ const GATES = [
     name: "build-core",
     command: ["npm", "--prefix", "packages/core", "run", "build"],
   },
+  // build-cli and build-emitter run BEFORE typecheck-root: the root tsc
+  // resolves @ds-contracts/emitter-web-components (and the cli lib) by their
+  // built dist/*.d.ts — typechecking first on a fresh checkout is TS2307.
+  {
+    name: "build-cli",
+    command: ["npm", "--prefix", "packages/cli", "run", "build"],
+  },
+  {
+    name: "build-emitter",
+    command: [
+      "npm",
+      "--prefix",
+      "packages/emitter-web-components",
+      "run",
+      "build",
+    ],
+  },
   {
     name: "test-v1-definition",
     command: ["npm", "run", "test:v1-definition"],
@@ -186,20 +203,6 @@ const GATES = [
   {
     name: "audit-all-dependencies",
     command: ["npm", "run", "audit:dependencies"],
-  },
-  {
-    name: "build-cli",
-    command: ["npm", "--prefix", "packages/cli", "run", "build"],
-  },
-  {
-    name: "build-emitter",
-    command: [
-      "npm",
-      "--prefix",
-      "packages/emitter-web-components",
-      "run",
-      "build",
-    ],
   },
 ];
 
