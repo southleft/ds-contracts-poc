@@ -5,6 +5,7 @@ import { useChunkFailure } from './engine/chunk-guard';
 import { HelpDrawer } from './components/HelpDrawer';
 import { Landing } from './pages/Landing';
 import { Examples } from './pages/Examples';
+import { Flow } from './pages/Flow';
 import { Playground } from './pages/Playground';
 
 export const REPO_URL = 'https://github.com/southleft/ds-contracts-poc';
@@ -31,6 +32,9 @@ function TopBar() {
         <Link to="/examples" className={navClass('/examples')}>
           Examples
         </Link>
+        <Link to="/flow" className={navClass('/flow')}>
+          How it flows
+        </Link>
         <a href={REPO_URL} className="topbar__link" target="_blank" rel="noreferrer">
           GitHub
         </a>
@@ -55,6 +59,7 @@ function Routes() {
   const { pathname } = useRoute();
   if (pathname === '/playground') return <Playground />;
   if (pathname === '/examples') return <Examples />;
+  if (pathname === '/flow') return <Flow />;
   return <Landing />;
 }
 

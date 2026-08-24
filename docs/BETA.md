@@ -142,7 +142,7 @@ needs a `FIGMA_TOKEN` (env or `.env.local`); since 2026-08-22 it runs in
 the **catalog-visual** lane with the repository's secret — it is no longer
 excluded from CI.
 
-`maintain` today is fifteen steps: leftover string→boolean emit
+`maintain` today is seventeen steps: leftover string→boolean emit
 (`string-boolean-coercion:check`) + token-apply prune doors
 (`token-set-prune:check`) + exact proposal (`exact-proposal:check`) + hop-2
 bundle freshness (`flowbite-bundle-fresh:check` — the committed
@@ -163,7 +163,12 @@ canvas-dropped fact named where a person reads it (`code-only-facts:check`),
 a root that IS the text node draws (`root-text:check`), the first-party
 corpus bundles and compiles in the plugin as one plan
 (`first-party-bundle:check`), and a prop named like a DOM attribute is
-`Omit<>`-ed and named rather than colliding (`prop-collision:check`).
+`Omit<>`-ed and named rather than colliding (`prop-collision:check`), and
+the Playground walkthrough receipt added 2026-08-23
+(`playground:flow-check` — every number the two guided tours print is
+re-derived headless from the same engine calls over the same committed
+inputs, and the tour's named ToggleSwitch refusal is pinned so the copy must
+change when core carries `semantics.roleException`).
 
 `maintain:visual` is the catalog visual-parity gate on Button / Badge /
 Checkbox / Switch / Heading: every row's masked pixel score within ±0.1pp

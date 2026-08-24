@@ -52,6 +52,8 @@ export function getStartedPage(): { route: string; html: string } {
 
 <p>One rule spans all three: <strong>the surfaces never sync side-to-side.</strong> A designer's change and an engineer's change both travel <em>through the contract</em>, as a reviewable diff. Nothing writes to your repo without a pull request, and nothing writes to the canvas except an Apply a human clicked. That is <a href="/how-it-works/protocol/">the protocol</a>.</p>
 
+<p class="receipt-line"><strong>Beta note.</strong> Of the three situations below, exactly ONE is supported end-to-end for the beta by a documented, receipted, clean-machine command list: <strong>B on the Flowbite lane</strong>. Read <a href="${REPO_URL}/blob/main/docs/BETA.md">docs/BETA.md</a> before you start. The other two are real and they run, but they are not what the beta promises. How a fact travels either way — verb by verb, with what each step refuses — is on <a href="/how-it-works/flow/">How it flows</a>.</p>
+
 <h2 id="playground">First, the zero-install door</h2>
 <p><a href="${PLAYGROUND_URL}">${PLAYGROUND_URL.replace('https://', '')}</a> runs the repository's actual engine in your browser — no backend, no accounts, no analytics; credentials are session-only and never leave the browser. Ten minutes there teaches the model faster than any page here.</p>
 <p><strong>Try this first:</strong> open <em>Examples</em>, pick the Badge, and then break its contract on purpose — delete a required field, or point a token binding at a name that does not exist. The refusal appears on screen, named. That refusal is the product; everything else on this page is plumbing around it.</p>

@@ -42,11 +42,14 @@ interface ContractEditorProps {
   onChange(next: string): void;
   /** 0-based line numbers to highlight. Empty set → no refusal backgrounds. */
   highlights: ReadonlySet<number>;
+  /** 0-based lines a walkthrough step is pointing at — accent-tinted, not
+   *  the refusal red; a refusal on the same line wins. */
+  anchors?: ReadonlySet<number>;
   placeholder?: string;
 }
 
 export const ContractEditor = forwardRef<ContractEditorHandle, ContractEditorProps>(
-  function ContractEditor({ text, onChange, highlights, placeholder }, ref) {
+  function ContractEditor({ text, onChange, highlights, anchors, placeholder }, ref) {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const backdropRef = useRef<HTMLDivElement>(null);
 
@@ -111,7 +114,7 @@ export const ContractEditor = forwardRef<ContractEditorHandle, ContractEditorPro
       }
     }, [prism, text.length, lines]);
 
-    const showBackdrop = lineHtml !== null || highlights.size > 0;
+    const showBackdrop = lineHtml !== null || highlights.size > 0 || (anchors?.size ?? 0) > 0;
 
     return (
       <div className={`editor__wrap${lineHtml ? ' editor__wrap--hl' : ''}`}>
@@ -121,7 +124,9 @@ export const ContractEditor = forwardRef<ContractEditorHandle, ContractEditorPro
               {lines.map((line, i) => {
                 const cls = highlights.has(i)
                   ? 'editor__line editor__line--refused'
-                  : 'editor__line';
+                  : anchors?.has(i)
+                    ? 'editor__line editor__line--anchor'
+                    : 'editor__line';
                 return lineHtml ? (
                   <div key={i} className={cls} dangerouslySetInnerHTML={{ __html: lineHtml[i] }} />
                 ) : (

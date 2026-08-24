@@ -26,6 +26,8 @@ This PoC is a deliberate hybrid:
   canvas change ──extract──▶ contract diff ──PR + review──▶ contract ──generate──▶ code
 ```
 
+The five hops in that diagram — code → contract, contract → canvas, contract → code, canvas → proposal, proposal → contract — are walked verb by verb, with what each one reads, writes and refuses by name, in [docs/29 — How It Flows](29-how-it-flows.md).
+
 The contract wins not because it's sacred but because **it is the only place a change becomes canonical.** A developer adding a prop and a designer adding a variant go through the same door: a reviewable, versionable, diffable change to a JSON file in Git. That's what "keep both sides honest" looks like as a mechanism instead of a slogan.
 
 ### Why the style mapping lives in the contract
