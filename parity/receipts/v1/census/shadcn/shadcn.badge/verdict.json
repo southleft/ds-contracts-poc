@@ -1,0 +1,35 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "default/secondary/destructive/outline/ghost/link + state previews match",
+ "reviewedAt": "60793cc0",
+ "setNodeId": "39:9347",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-shadcn-shadcn.badge.dump.json",
+  "matched": 14,
+  "diverged": [
+   "part root border-bottom-left-radius \u2014 {imported.shared.size-26} missing from proposal",
+   "part root border-bottom-right-radius \u2014 {imported.shared.size-26} missing from proposal",
+   "part root border-bottom-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root border-left-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root border-right-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root border-top-left-radius \u2014 {imported.shared.size-26} missing from proposal",
+   "part root border-top-right-radius \u2014 {imported.shared.size-26} missing from proposal",
+   "part root border-top-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root column-gap \u2014 {imported.badge.root.column-gap} missing from proposal",
+   "part root flex-shrink \u2014 {imported.badge.root.flex-shrink} missing from proposal",
+   "part root row-gap \u2014 {imported.badge.root.row-gap} missing from proposal",
+   "part root background-color \u2014 proposal has {imported.badge.root.background-color.{variant}}, contract has nothing",
+   "part root border-color \u2014 proposal has {imported.badge.root.border-top-color.{variant}}, contract has nothing",
+   "part root border-radius \u2014 proposal has {imported.shared.size-26}, contract has nothing",
+   "part root border-width \u2014 proposal has {imported.shared.size-1}, contract has nothing",
+   "part root gap \u2014 proposal has {imported.badge.root.column-gap}, contract has nothing",
+   "part root content \u2014 {\"prop\":\"children\"} vs undefined",
+   "text root color (effective) \u2014 proposal has {imported.badge.root.color.{variant}}, contract has nothing"
+  ],
+  "lost": [
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`part root states` \u2014 interaction-state token overrides are code-side (CSS)"
+  ]
+ }
+}

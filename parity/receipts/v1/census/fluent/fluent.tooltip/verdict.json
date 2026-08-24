@@ -1,0 +1,56 @@
+{
+ "recognisable": true,
+ "walls": [
+  "CODE-RENDER-PARTIAL:tooltip.normal"
+ ],
+ "notes": "inverted dark bubble matches; normal appearance is a white bubble on white on canvas (text carried) while the code render shows a textless gray box",
+ "reviewedAt": "60793cc0",
+ "setNodeId": "39:13445",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-fluent-fluent.tooltip.dump.json",
+  "matched": 16,
+  "diverged": [
+   "prop withArrow \u2014 missing from proposal",
+   "prop showWitharrow \u2014 proposal has a prop the contract does not",
+   "part root/label \u2014 proposal has a part the contract does not",
+   "part root layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"CENTER\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"VERTICAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":false}",
+   "part root border-bottom-color \u2014 {imported.shared.color-00000000} missing from proposal",
+   "part root border-bottom-left-radius \u2014 {imported.shared.size-4} missing from proposal",
+   "part root border-bottom-right-radius \u2014 {imported.shared.size-4} missing from proposal",
+   "part root border-bottom-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root border-left-color \u2014 {imported.shared.color-00000000} missing from proposal",
+   "part root border-left-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root border-right-color \u2014 {imported.shared.color-00000000} missing from proposal",
+   "part root border-right-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root border-top-color \u2014 {imported.shared.color-00000000} missing from proposal",
+   "part root border-top-left-radius \u2014 {imported.shared.size-4} missing from proposal",
+   "part root border-top-right-radius \u2014 {imported.shared.size-4} missing from proposal",
+   "part root border-top-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root bottom \u2014 {imported.tooltip.root.bottom} missing from proposal",
+   "part root line-height \u2014 {imported.tooltip.root.line-height} missing from proposal",
+   "part root min-height \u2014 {imported.shared.size-0} missing from proposal",
+   "part root top \u2014 {imported.shared.size-0} missing from proposal",
+   "part root translate-y \u2014 {imported.tooltip.root.translate-y} missing from proposal",
+   "part root width \u2014 {imported.tooltip.root.width} missing from proposal",
+   "part root background-color \u2014 proposal has {imported.tooltip.root.background-color.{appearance}}, contract has nothing",
+   "part root border-color \u2014 proposal has {imported.shared.color-00000000}, contract has nothing",
+   "part root border-radius \u2014 proposal has {imported.shared.size-4}, contract has nothing",
+   "part root border-width \u2014 proposal has {imported.shared.size-1}, contract has nothing",
+   "part root text \u2014 \"Tooltip copy for the Fluent round.\" vs undefined",
+   "part root/part-0 border-bottom-left-radius \u2014 {imported.tooltip.part-0.border-bottom-left-radius} missing from proposal",
+   "part root/part-0 bottom \u2014 {imported.tooltip.part-0.bottom} missing from proposal",
+   "part root/part-0 left \u2014 {imported.tooltip.part-0.left} missing from proposal",
+   "part root/part-0 line-height \u2014 {imported.tooltip.part-0.line-height} missing from proposal",
+   "part root/part-0 min-height \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/part-0 right \u2014 {imported.tooltip.part-0.right} missing from proposal",
+   "part root/part-0 top \u2014 {imported.tooltip.part-0.top} missing from proposal",
+   "part root/part-0 background-color \u2014 proposal has {imported.tooltip.part-0.background-color.{appearance}}, contract has nothing",
+   "part root/part-0 visibleWhen \u2014 {\"prop\":\"withArrow\"} vs {\"prop\":\"showWitharrow\"}",
+   "text root font-size (effective) \u2014 {imported.tooltip.root.font-size} missing from proposal",
+   "text root font-weight (effective) \u2014 {imported.tooltip.root.font-weight} missing from proposal"
+  ],
+  "lost": [
+   "`part root/part-0 font-size` \u2014 {imported.tooltip.part-0.font-size} \u2014 text-cascade token with no bound text node beneath it on the canvas"
+  ]
+ }
+}

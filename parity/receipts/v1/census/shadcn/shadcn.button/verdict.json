@@ -1,0 +1,41 @@
+{
+ "recognisable": true,
+ "walls": [
+  "FC-EXPORT-RING-UNPAINTED"
+ ],
+ "notes": "variants, icon sizes and states match; focus-visible ring carried as effect data, unpainted in COMPONENT export",
+ "reviewedAt": "60793cc0",
+ "setNodeId": "39:9506",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-shadcn-shadcn.button.dump.json",
+  "matched": 8,
+  "diverged": [
+   "prop size type \u2014 {\"enum\":[\"default\",\"xs\",\"sm\",\"lg\",\"icon\",\"icon-xs\",\"icon-sm\",\"icon-lg\"]} vs {\"enum\":[\"default\",\"xs\",\"sm\",\"lg\",\"icon\",\"iconXs\",\"iconSm\",\"iconLg\"]}",
+   "prop size bindings.figma.values \u2014 {\"default\":\"Default\",\"xs\":\"Xs\",\"sm\":\"Sm\",\"lg\":\"Lg\",\"icon\":\"Icon\",\"icon-xs\":\"Icon Xs\",\"icon-sm\":\"Icon Sm\",\"icon-lg\":\"Icon Lg\"} vs {\"default\":\"Default\",\"xs\":\"Xs\",\"sm\":\"Sm\",\"lg\":\"Lg\",\"icon\"",
+   "part root border-bottom-left-radius \u2014 {imported.shared.size-8} missing from proposal",
+   "part root border-bottom-right-radius \u2014 {imported.shared.size-8} missing from proposal",
+   "part root border-bottom-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root border-left-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root border-right-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root border-top-left-radius \u2014 {imported.shared.size-8} missing from proposal",
+   "part root border-top-right-radius \u2014 {imported.shared.size-8} missing from proposal",
+   "part root border-top-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root flex-shrink \u2014 {imported.button.root.flex-shrink} missing from proposal",
+   "part root background-color \u2014 proposal has {imported.button.root.background-color.{variant}}, contract has nothing",
+   "part root border-color \u2014 proposal has {imported.button.root.border-top-color.{variant}}, contract has nothing",
+   "part root padding-left \u2014 proposal has {imported.button.root.padding-left.default}, contract has nothing",
+   "part root padding-right \u2014 proposal has {imported.button.root.padding-right.default}, contract has nothing",
+   "part root border-radius \u2014 proposal has {imported.shared.size-8}, contract has nothing",
+   "part root border-width \u2014 proposal has {imported.shared.size-1}, contract has nothing",
+   "part root content \u2014 {\"prop\":\"children\"} vs undefined",
+   "text root color (effective) \u2014 proposal has {imported.button.root.color.{variant}}, contract has nothing"
+  ],
+  "lost": [
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`part root states` \u2014 interaction-state token overrides are code-side (CSS)",
+   "`Button:root/label` fontSize = `14` \u2014 nearest tokens: `{font.control.size.sm}`, `{font.avatar.size.md}`, `{font.size.200}`",
+   "`Button:root/label` lineHeight = `20` \u2014 nearest tokens: `{size.checkbox.md}`, `{size.switch.height}`, `{space.250}`",
+   "`Button:root (state disabled)` opacity = `0.5` \u2014 nearest tokens: `{opacity.disabled}`"
+  ]
+ }
+}
