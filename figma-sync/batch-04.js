@@ -228,7 +228,12 @@ const COMPONENTS = [
     "description": "StatusDot — generated from contract ds.status-dot v1.0.0",
     "isSet": true,
     "boolProps": [],
-    "textProps": [],
+    "textProps": [
+      {
+        "property": "Label",
+        "default": "Status"
+      }
+    ],
     "fontStyles": [
       "Medium"
     ],
@@ -242,7 +247,7 @@ const COMPONENTS = [
           "name": "Variant=Neutral",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "MIN",
+            "primary": "CENTER",
             "counter": "CENTER"
           },
           "fill": "color/status/neutral",
@@ -259,17 +264,7 @@ const COMPONENTS = [
             "topRightRadius": "radius/pill",
             "bottomLeftRadius": "radius/pill",
             "bottomRightRadius": "radius/pill"
-          },
-          "children": [
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Status",
-              "fontSize": 16,
-              "fontStyle": "Medium",
-              "contentProp": "Label"
-            }
-          ]
+          }
         }
       },
       {
@@ -281,7 +276,7 @@ const COMPONENTS = [
           "name": "Variant=Success",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "MIN",
+            "primary": "CENTER",
             "counter": "CENTER"
           },
           "fill": "color/status/success",
@@ -298,17 +293,7 @@ const COMPONENTS = [
             "topRightRadius": "radius/pill",
             "bottomLeftRadius": "radius/pill",
             "bottomRightRadius": "radius/pill"
-          },
-          "children": [
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Status",
-              "fontSize": 16,
-              "fontStyle": "Medium",
-              "contentProp": "Label"
-            }
-          ]
+          }
         }
       },
       {
@@ -320,7 +305,7 @@ const COMPONENTS = [
           "name": "Variant=Warning",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "MIN",
+            "primary": "CENTER",
             "counter": "CENTER"
           },
           "fill": "color/status/warning",
@@ -337,17 +322,7 @@ const COMPONENTS = [
             "topRightRadius": "radius/pill",
             "bottomLeftRadius": "radius/pill",
             "bottomRightRadius": "radius/pill"
-          },
-          "children": [
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Status",
-              "fontSize": 16,
-              "fontStyle": "Medium",
-              "contentProp": "Label"
-            }
-          ]
+          }
         }
       },
       {
@@ -359,7 +334,7 @@ const COMPONENTS = [
           "name": "Variant=Error",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "MIN",
+            "primary": "CENTER",
             "counter": "CENTER"
           },
           "fill": "color/status/error",
@@ -376,17 +351,7 @@ const COMPONENTS = [
             "topRightRadius": "radius/pill",
             "bottomLeftRadius": "radius/pill",
             "bottomRightRadius": "radius/pill"
-          },
-          "children": [
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Status",
-              "fontSize": 16,
-              "fontStyle": "Medium",
-              "contentProp": "Label"
-            }
-          ]
+          }
         }
       },
       {
@@ -398,7 +363,7 @@ const COMPONENTS = [
           "name": "Variant=Accent",
           "layout": {
             "mode": "HORIZONTAL",
-            "primary": "MIN",
+            "primary": "CENTER",
             "counter": "CENTER"
           },
           "fill": "color/status/accent",
@@ -415,17 +380,7 @@ const COMPONENTS = [
             "topRightRadius": "radius/pill",
             "bottomLeftRadius": "radius/pill",
             "bottomRightRadius": "radius/pill"
-          },
-          "children": [
-            {
-              "type": "text",
-              "name": "label",
-              "characters": "Status",
-              "fontSize": 16,
-              "fontStyle": "Medium",
-              "contentProp": "Label"
-            }
-          ]
+          }
         }
       }
     ],

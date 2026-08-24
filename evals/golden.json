@@ -270,7 +270,7 @@
   "figma-sync/37-skeleton.js": "2f641f559ae81da098e4efa04ff9d75da65445978d41fcc329647e9924f9a368",
   "figma-sync/38-slider.js": "d3718a0b5ea9c16198a7e6d46295f0b1381b9994dc629d9e96f2efe5fcaacc0b",
   "figma-sync/39-spinner.js": "7a67a3c05a99c002741f6c2a2fde006339014a896710951d3c4dd407ac261da8",
-  "figma-sync/40-statusdot.js": "99de085cb6e266ebefdf09b84559bd68bcf551303176719b9a0a3e485e4cdd99",
+  "figma-sync/40-statusdot.js": "99b9903f0a717e067757acf615b7e9325102af013a11f8b0eca65f29f57246e3",
   "figma-sync/41-switch.js": "1010cd4b2915526b949baf3e1f1da5ad7d689eb25075546578d9c8a27c03d496",
   "figma-sync/42-tab.js": "e3af784d1b5a2d3f76ab8012def2de885fdb758a8c8b65d1f23b7005498ff8c4",
   "figma-sync/43-tablist.js": "c3099ea6c0cf5ce7c5664d2eedb0088df1b6465ac06887831a448f93f544713e",
@@ -289,6 +289,6 @@
   "figma-sync/batch-01.js": "f412af63cbfdc26ffecec3724e724c16afc5d3cf2d4f262bcff02769d9d4e64d",
   "figma-sync/batch-02.js": "009ee4dc2da8412b70733deae61aeadb01237b24c8e8ee15655d0f7c7692cddc",
   "figma-sync/batch-03.js": "423bf12090fb6b9ab5aa37226000d8413e4cbe2727dbc36fd1336e8087bb23cf",
-  "figma-sync/batch-04.js": "bd7ba3084df20bbcd34196d8e6279459fc1739414eea758baf028a951aee4649",
+  "figma-sync/batch-04.js": "ceb643f5daf3186bb993aefbcc051011b91a454cabfa302767a9cc09f2707736",
   "figma-sync/batch-05.js": "90736ca5a0a43638d6e4f9d241975fca1f2d04884fdd245c03569411a85904a0"
 }
