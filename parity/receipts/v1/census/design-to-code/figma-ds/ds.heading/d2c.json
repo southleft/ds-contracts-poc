@@ -1,0 +1,161 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.heading",
+  "setName": "Heading",
+  "nodeId": "53:4403",
+  "mode": "reviewable-inversion",
+  "variantCount": 42,
+  "contractSha256": "61439f9db0c5de112d6e6cea65a4c62c3f397c88ffe3a2caa7931312117b9bdf",
+  "carriage": {
+    "carried": 342,
+    "named": 294,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "variant axis": [
+      2,
+      0,
+      0
+    ],
+    "declared axis default": [
+      2,
+      0,
+      0
+    ],
+    "boundVariables.itemSpacing": [
+      0,
+      42,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      42,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      42,
+      0,
+      0
+    ],
+    "root layoutSizingVertical": [
+      42,
+      0,
+      0
+    ],
+    "boundVariables.fills": [
+      0,
+      42,
+      0
+    ],
+    "boundVariables.lineHeight": [
+      0,
+      42,
+      0
+    ],
+    "boundVariables.letterSpacing": [
+      0,
+      42,
+      0
+    ],
+    "boundVariables.fontWeight": [
+      0,
+      42,
+      0
+    ],
+    "boundVariables.fontFamily": [
+      0,
+      42,
+      0
+    ],
+    "boundVariables.fontSize": [
+      0,
+      42,
+      0
+    ],
+    "fills[0] SOLID": [
+      42,
+      0,
+      0
+    ],
+    "text.characters": [
+      42,
+      0,
+      0
+    ],
+    "text font size/weight": [
+      42,
+      0,
+      0
+    ],
+    "text fontFamily": [
+      42,
+      0,
+      0
+    ],
+    "text lineHeight": [
+      42,
+      0,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "e1f692b17aac050f4d5b9d67dad98d5f3e8bf333",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "53:4403",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "variant axis",
+      "value": "h1|h2|h3|h4|h5|h6",
+      "disposition": "CARRIED",
+      "landing": "props.tag (enum[6]) → React prop `tag` + story argTypes + CSS .tag-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "h1",
+      "disposition": "CARRIED",
+      "landing": "props.tag.default = \"h1\" → React default arg + story args"
+    },
+    {
+      "fact": "variant axis",
+      "value": "xxl|xl|lg|md|sm|xs|xxs",
+      "disposition": "CARRIED",
+      "landing": "props.variant (enum[7]) → React prop `variant` + story argTypes + CSS .variant-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "xxl",
+      "disposition": "CARRIED",
+      "landing": "props.variant.default = \"xxl\" → React default arg + story args"
+    }
+  ],
+  "generatedFiles": {
+    "react/Heading/Heading.module.css": "2d63bd31f666e8af92fdda60568d2e8a05257dcd7ae6f1402a70a2e309d9b82a",
+    "react/Heading/Heading.stories.tsx": "26590246a69940ccde0530555151ea29921a12b64534b2043337d5d0ae74a5eb",
+    "react/Heading/Heading.tsx": "d160049b34e76d2cc95b7ee7de9b45cb47616b492730284014c963a6e3e42581",
+    "react/Heading/index.ts": "a96aced14233168f26fa7b4ea2e644ea72828c4f56e12596f418c8b206f87fca",
+    "wc/ds-heading.ts": "80911bfbd74785ff5cacfb801436ef297f873b735755b684ba2fee53cdc03520",
+    "wc/ds-heading.css.ts": "95caf90ec9a0b7cd9a4b9d8dde0ba0092b934289990cf8d9dd66586f3b456249",
+    "wc/ds-heading.demo.html": "06c201985b003a9c634d6d63673e22bea9b6573c65cf3d31d431902f6eba6e49",
+    "wc/ds-heading.custom-elements.json": "f34b345dfaea87a78cdb956ed8fc58ad6b81a3044ed09d327124ed94975fa58b"
+  },
+  "notesCount": 108
+}

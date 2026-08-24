@@ -1,0 +1,277 @@
+{
+  "kit": "flowbite",
+  "id": "flowbite.card",
+  "setName": "Card (flowbite.card)",
+  "nodeId": "120:1999",
+  "mode": "exact",
+  "variantCount": 1,
+  "contractSha256": "349b5930ff0b9b3c3e1b737554c779f07e42c5097769d85c3c7ca04a09164ace",
+  "carriage": {
+    "carried": 23,
+    "named": 20,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "set description (designer's words)": [
+      0,
+      1,
+      0
+    ],
+    "stamp ds_contracts/semantics": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/propNames": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/specHash": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/contractId": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/version": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/canvasSnapshot": [
+      0,
+      1,
+      0
+    ],
+    "stamp ds_contracts/canvasSetSnapshot": [
+      0,
+      1,
+      0
+    ],
+    "stamp ds_contracts/canvasFingerprint": [
+      0,
+      1,
+      0
+    ],
+    "TEXT property": [
+      1,
+      0,
+      0
+    ],
+    "boundVariables.individualStrokeWeights": [
+      0,
+      4,
+      0
+    ],
+    "boundVariables.rectangleCornerRadii": [
+      0,
+      4,
+      0
+    ],
+    "boundVariables.fills": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.strokes": [
+      0,
+      1,
+      0
+    ],
+    "fills[0] SOLID": [
+      2,
+      0,
+      0
+    ],
+    "strokes[0] + strokeWeight": [
+      1,
+      0,
+      0
+    ],
+    "effects": [
+      1,
+      0,
+      0
+    ],
+    "cornerRadius": [
+      1,
+      0,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      2,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      1,
+      0,
+      0
+    ],
+    "root layoutSizingVertical": [
+      1,
+      0,
+      0
+    ],
+    "boundVariables.itemSpacing": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.paddingLeft": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.paddingTop": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.paddingRight": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.paddingBottom": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.fontSize": [
+      0,
+      1,
+      0
+    ],
+    "text.characters": [
+      1,
+      0,
+      0
+    ],
+    "text font size/weight": [
+      1,
+      0,
+      0
+    ],
+    "text fontFamily": [
+      1,
+      0,
+      0
+    ],
+    "text lineHeight": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/fontWeightVar": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/lineHeightVar": [
+      1,
+      0,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "7b5427afe8d5766e80457327b0b04a50544808ed",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "120:1999",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "set description (designer's words)",
+      "value": "Card — generated from contract flowbite.card v0.2.0 †",
+      "disposition": "NAMED",
+      "landing": "description: the set's Figma description is this pipeline's own emit caption (\"Card — g…"
+    },
+    {
+      "fact": "stamp ds_contracts/semantics",
+      "value": "{\"element\":\"div\"}",
+      "disposition": "CARRIED",
+      "landing": "contract.semantics (stamp outranks inference)"
+    },
+    {
+      "fact": "stamp ds_contracts/propNames",
+      "value": "{\"Content\":\"children\"}",
+      "disposition": "CARRIED",
+      "landing": "prop names (design spelling → contract prop names)"
+    },
+    {
+      "fact": "stamp ds_contracts/specHash",
+      "value": "696381721",
+      "disposition": "CARRIED",
+      "landing": "dump.specHash — exact-mode evidence (proves the set matches the emit)"
+    },
+    {
+      "fact": "stamp ds_contracts/contractId",
+      "value": "flowbite.card",
+      "disposition": "CARRIED",
+      "landing": "contract.id (dump v1.32 stamp read-back)"
+    },
+    {
+      "fact": "stamp ds_contracts/version",
+      "value": "0.2.0",
+      "disposition": "CARRIED",
+      "landing": "contract.version"
+    },
+    {
+      "fact": "stamp ds_contracts/canvasSnapshot",
+      "value": "2355 chars",
+      "disposition": "NAMED",
+      "landing": "sync-domain fingerprint stamp — read by sync/observe.ts (drift arithmetic), deliberately not a contract fact"
+    },
+    {
+      "fact": "stamp ds_contracts/canvasSetSnapshot",
+      "value": "176 chars",
+      "disposition": "NAMED",
+      "landing": "sync-domain fingerprint stamp — read by sync/observe.ts (drift arithmetic), deliberately not a contract fact"
+    },
+    {
+      "fact": "stamp ds_contracts/canvasFingerprint",
+      "value": "12 chars",
+      "disposition": "NAMED",
+      "landing": "sync-domain fingerprint stamp — read by sync/observe.ts (drift arithmetic), deliberately not a contract fact"
+    },
+    {
+      "fact": "TEXT property",
+      "value": "default=Card content",
+      "disposition": "CARRIED",
+      "landing": "props.children (text, default \"Card content\") → React prop / children + story args"
+    }
+  ],
+  "generatedFiles": {
+    "react/Card/Card.module.css": "6d91af4a7e7c7f54e3071b06092722ed578b29002f76f34df70600f719a1dcef",
+    "react/Card/Card.stories.tsx": "43e7643c324ad6b934ce320cffe3e6a52b625bbb684a0717c40474114e08a354",
+    "react/Card/Card.tsx": "ab3e2b4890e055ed2b3db9d473975509e3628376d31bc51c8d57209d643c3fe3",
+    "react/Card/index.ts": "6abf31a433c1ff35092ff51548df0a3e7e3a15c082141450a4a5f6c51b43630a",
+    "wc/flowbite-card.ts": "5d9cfbd52c2d4e5ea01893dbf63247a074241ddc88609ad3d37b36d880f2845c",
+    "wc/flowbite-card.css.ts": "38c9903767b081d8a7e46d9d967ccfabab0f3d2fa6b5e624a9e63a241c977292",
+    "wc/flowbite-card.demo.html": "d5bd662522f30e5493aba2774b0275f296465fe77400bea91209e1417600fa91",
+    "wc/flowbite-card.custom-elements.json": "640161ef1de2cc00da41e5d4cdd0ef439fdf4499c504b8fffeb6237af1449c58"
+  },
+  "notesCount": 37
+}

@@ -613,6 +613,14 @@ export interface DumpSet {
   /** Set-level anchors (dump v1.1, additive). */
   nodeId?: string;
   key?: string;
+  /** The set's own description (dump v1.32, additive) — the DESIGNER'S words
+   *  (REST: components/componentSets response metadata; Plugin:
+   *  node.description). Absent when empty or when the producer predates
+   *  v1.32 — absence means not captured, never "no description". */
+  description?: string;
+  /** Figma documentation links on the set (dump v1.32, additive) — the same
+   *  two sources. Absent when empty or pre-v1.32. */
+  documentationLinks?: Array<{ uri: string }>;
   /** Full, verbatim component-property definitions (dump v1.14, additive).
    *  New exact consumers prefer this field. Absence means the producer did
    *  not capture structured metadata, so exactness is unverified. */

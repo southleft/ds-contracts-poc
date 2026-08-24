@@ -1,0 +1,305 @@
+{
+  "kit": "flowbite",
+  "id": "flowbite.alert",
+  "setName": "Alert (flowbite.alert)",
+  "nodeId": "120:1979",
+  "mode": "exact",
+  "variantCount": 4,
+  "contractSha256": "22803300724dac105139aedaf49f0aa5cb170268cbbc56071ebadae6ba536847",
+  "carriage": {
+    "carried": 96,
+    "named": 111,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "set description (designer's words)": [
+      0,
+      1,
+      0
+    ],
+    "stamp ds_contracts/version": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/semantics": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/propNames": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/specHash": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/contractId": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/canvasSetSnapshot": [
+      0,
+      1,
+      0
+    ],
+    "stamp ds_contracts/canvasFingerprint": [
+      0,
+      1,
+      0
+    ],
+    "BOOLEAN property": [
+      2,
+      0,
+      0
+    ],
+    "TEXT property": [
+      1,
+      0,
+      0
+    ],
+    "variant axis": [
+      1,
+      0,
+      0
+    ],
+    "declared axis default": [
+      1,
+      0,
+      0
+    ],
+    "boundVariables.itemSpacing": [
+      0,
+      4,
+      0
+    ],
+    "boundVariables.paddingLeft": [
+      0,
+      4,
+      0
+    ],
+    "boundVariables.paddingTop": [
+      0,
+      4,
+      0
+    ],
+    "boundVariables.paddingRight": [
+      0,
+      4,
+      0
+    ],
+    "boundVariables.paddingBottom": [
+      0,
+      4,
+      0
+    ],
+    "boundVariables.rectangleCornerRadii": [
+      0,
+      32,
+      0
+    ],
+    "boundVariables.fills": [
+      0,
+      20,
+      0
+    ],
+    "fills[0] SOLID": [
+      20,
+      0,
+      0
+    ],
+    "cornerRadius": [
+      8,
+      0,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      16,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      4,
+      0,
+      0
+    ],
+    "root layoutSizingVertical": [
+      4,
+      0,
+      0
+    ],
+    "visible=false": [
+      8,
+      0,
+      0
+    ],
+    "layoutSizingHorizontal=FIXED (child)": [
+      0,
+      12,
+      0
+    ],
+    "layoutSizingVertical=FIXED (child)": [
+      0,
+      12,
+      0
+    ],
+    "vector geometry": [
+      0,
+      8,
+      0
+    ],
+    "boundVariables.fontSize": [
+      0,
+      4,
+      0
+    ],
+    "text.characters": [
+      4,
+      0,
+      0
+    ],
+    "text font size/weight": [
+      4,
+      0,
+      0
+    ],
+    "text fontFamily": [
+      4,
+      0,
+      0
+    ],
+    "text lineHeight": [
+      4,
+      0,
+      0
+    ],
+    "stamp ds_contracts/fontWeightVar": [
+      4,
+      0,
+      0
+    ],
+    "stamp ds_contracts/lineHeightVar": [
+      4,
+      0,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "27fce6232d10fdd74f9f87d46c91ab29ecc98c68",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "120:1979",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "set description (designer's words)",
+      "value": "Alert — generated from contract flowbite.alert v0.2.0 †",
+      "disposition": "NAMED",
+      "landing": "description: the set's Figma description is this pipeline's own emit caption (\"Alert — …"
+    },
+    {
+      "fact": "stamp ds_contracts/version",
+      "value": "0.2.0",
+      "disposition": "CARRIED",
+      "landing": "contract.version"
+    },
+    {
+      "fact": "stamp ds_contracts/semantics",
+      "value": "{\"element\":\"div\"}",
+      "disposition": "CARRIED",
+      "landing": "contract.semantics (stamp outranks inference)"
+    },
+    {
+      "fact": "stamp ds_contracts/propNames",
+      "value": "{\"Color\":\"color\",\"Icon\":\"icon\",\"Dismissable\":\"dismissable…",
+      "disposition": "CARRIED",
+      "landing": "prop names (design spelling → contract prop names)"
+    },
+    {
+      "fact": "stamp ds_contracts/specHash",
+      "value": "940701102",
+      "disposition": "CARRIED",
+      "landing": "dump.specHash — exact-mode evidence (proves the set matches the emit)"
+    },
+    {
+      "fact": "stamp ds_contracts/contractId",
+      "value": "flowbite.alert",
+      "disposition": "CARRIED",
+      "landing": "contract.id (dump v1.32 stamp read-back)"
+    },
+    {
+      "fact": "stamp ds_contracts/canvasSetSnapshot",
+      "value": "411 chars",
+      "disposition": "NAMED",
+      "landing": "sync-domain fingerprint stamp — read by sync/observe.ts (drift arithmetic), deliberately not a contract fact"
+    },
+    {
+      "fact": "stamp ds_contracts/canvasFingerprint",
+      "value": "13 chars",
+      "disposition": "NAMED",
+      "landing": "sync-domain fingerprint stamp — read by sync/observe.ts (drift arithmetic), deliberately not a contract fact"
+    },
+    {
+      "fact": "BOOLEAN property",
+      "value": "default=false",
+      "disposition": "CARRIED",
+      "landing": "props.icon (boolean, default false) → React prop + visibleWhen part visibility"
+    },
+    {
+      "fact": "BOOLEAN property",
+      "value": "default=false",
+      "disposition": "CARRIED",
+      "landing": "props.dismissable (boolean, default false) → React prop + visibleWhen part visibility"
+    },
+    {
+      "fact": "TEXT property",
+      "value": "default=Alert message",
+      "disposition": "CARRIED",
+      "landing": "props.children (text, default \"Alert message\") → React prop / children + story args"
+    },
+    {
+      "fact": "variant axis",
+      "value": "Info|Failure|Success|Warning",
+      "disposition": "CARRIED",
+      "landing": "props.color (enum[4]) → React prop `color` + story argTypes + CSS .color-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "Info",
+      "disposition": "CARRIED",
+      "landing": "props.color.default = \"info\" → React default arg + story args"
+    }
+  ],
+  "generatedFiles": {
+    "react/Alert/Alert.module.css": "69436b5647793ecdc63786d33bebf8bea6b0161b8dafaa105cdc283b3a2af882",
+    "react/Alert/Alert.stories.tsx": "56479224492103838384c32b84815f61f03eb8dfafececb8b095164681887b58",
+    "react/Alert/Alert.tsx": "1178dcb2d234c44de498be20aa377e756fda2f230552d07d1dfca60f30dc3219",
+    "react/Alert/index.ts": "9858da9966f6abecc7ff91176e2078e00a7b6d44346f8b21f9cb0ec6ef5d38d5",
+    "wc/flowbite-alert.ts": "188412c788736343132cda734e1ecea6d3090bffab7513928d1a41ce5110d7ca",
+    "wc/flowbite-alert.css.ts": "0d7c7ac06bea00b4115afab9b75d5f3e00960a2fac2a436185d039d8f019151b",
+    "wc/flowbite-alert.demo.html": "0ebc949a5514241484669857b7e6107ba0b3920f48a0c19648ee6f4adc01580a",
+    "wc/flowbite-alert.custom-elements.json": "315fd9b68421e68a6979bfb3390a25e11a6d97a06f2523f4dab62601656859e3"
+  },
+  "notesCount": 139
+}

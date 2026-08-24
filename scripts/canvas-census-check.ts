@@ -116,8 +116,18 @@ import {
   type ManifestRow,
 } from "../extract/figma/census/corpus.js";
 import type { CodeRenderReceipt } from "../extract/figma/census/render.js";
+import {
+  D2C_DIR,
+  D2C_KITS,
+  D2C_RECEIPT_PATH,
+  rowJson,
+  runKit,
+  stableRow,
+  type D2cKitRun,
+} from "../extract/figma/census/design-to-code.js";
+import type { D2cRenderReceipt } from "../extract/figma/census/d2c-render.js";
 
-type Phase = "code" | "full";
+type Phase = "code" | "full" | "design-to-code";
 
 interface Verdict {
   recognisable: true | false | "unscored";
@@ -593,17 +603,18 @@ function selfTest(): number {
   return 0;
 }
 
-function main(): number {
+async function main(): Promise<number> {
   const argv = process.argv.slice(2);
   const phaseArg = argv[argv.indexOf("--phase") + 1];
   const phase: Phase = argv.includes("--phase") ? (phaseArg as Phase) : "full";
-  if (phase !== "code" && phase !== "full") {
+  if (phase !== "code" && phase !== "full" && phase !== "design-to-code") {
     console.error(
-      `✘ --phase must be code or full (got ${JSON.stringify(phaseArg)})`,
+      `✘ --phase must be code, full or design-to-code (got ${JSON.stringify(phaseArg)})`,
     );
     return 2;
   }
   if (argv.includes("--self-test")) return selfTest();
+  if (phase === "design-to-code") return runDesignToCode();
   const manifestPath = path.join(REPO, MANIFEST_PATH);
   const { manifest } = enumerateCorpus();
   if (argv.includes("--write-manifest")) {
@@ -647,4 +658,281 @@ function main(): number {
   return 0;
 }
 
-process.exitCode = main();
+// ---------------------------------------------------------------------------
+// PHASE design-to-code — the reverse direction on the two designer kits.
+// The pipeline (map → propose → validate → generate React + WC + stories) is
+// RE-RUN in memory from the committed fixtures, twice, and the gate holds:
+//   · the manifest designToCode section (denominator — checkManifest above);
+//   · byte-idempotence (propose twice + generate twice, sha-identical);
+//   · SILENT = 0 (every canvas fact carried or named — d2c-facts.ts);
+//   · every committed d2c.json equals the recomputed row (engine drift is a
+//     named refusal, the remedy `npx tsx extract/figma/census/design-to-code.ts --write`);
+//   · every sampled render pair exists (canvas-<slug>.png beside
+//     code-<slug>.png per d2c-render.ts render.json) with a scored verdict;
+//   · the receipt parity/receipts/v1/DESIGN-TO-CODE-CENSUS.md is re-rendered
+//     byte-stable.
+// ---------------------------------------------------------------------------
+
+interface D2cVerdict {
+  recognisable: true | false | "unscored";
+  walls?: string[];
+  notes?: string;
+}
+
+async function runDesignToCode(): Promise<number> {
+  const failures: string[] = [];
+  const { manifest } = enumerateCorpus();
+  const manifestPath = path.join(REPO, MANIFEST_PATH);
+  failures.push(...checkManifest(manifest, manifestPath).failures);
+
+  const runs: D2cKitRun[] = [];
+  for (const def of D2C_KITS) {
+    // The manifest mirror must agree with the pipeline's kit table.
+    const mk = manifest.designToCode.kits.find((k) => k.kit === def.kit);
+    if (!mk || mk.fileKey !== def.fileKey || mk.mode !== def.mode) {
+      failures.push(
+        `design-to-code: manifest kit "${def.kit}" disagrees with design-to-code.ts (corpus.ts D2C_MANIFEST_KITS is a mirror — keep them equal)`,
+      );
+    }
+    let run: D2cKitRun;
+    try {
+      run = await runKit(def);
+    } catch (e) {
+      failures.push(
+        `design-to-code ${def.kit}: pipeline refused — ${(e as Error).message.split("\n")[0]}`,
+      );
+      continue;
+    }
+    runs.push(run);
+    if (!run.idempotent.propose)
+      failures.push(
+        `design-to-code ${def.kit}: propose is NOT byte-idempotent across two runs`,
+      );
+    if (!run.idempotent.generate)
+      failures.push(
+        `design-to-code ${def.kit}: generate is NOT byte-idempotent across two runs (${run.idempotent.detail})`,
+      );
+    for (const set of run.sets) {
+      const who = `${def.kit}/${set.id}`;
+      for (const r of set.account.rows) {
+        if (r.disposition === "SILENT")
+          failures.push(
+            `${who}: SILENT canvas fact — ${r.path} · ${r.channel} · ${r.value} (no landing, no receipt; fix at the cause in map/propose/generate)`,
+          );
+      }
+      const dir = path.join(REPO, D2C_DIR, def.kit, set.id);
+      const rowPath = path.join(dir, "d2c.json");
+      const fresh = stableRow(rowJson(run, set));
+      if (!existsSync(rowPath)) {
+        failures.push(
+          `${who}: no committed row (${path.relative(REPO, rowPath)}) — run \`npx tsx extract/figma/census/design-to-code.ts --write\``,
+        );
+      } else if (readFileSync(rowPath, "utf8") !== fresh) {
+        failures.push(
+          `${who}: committed d2c.json is STALE vs the engine's recomputed row — run \`npx tsx extract/figma/census/design-to-code.ts --write\` and review the diff`,
+        );
+      }
+      const renderPath = path.join(dir, "render.json");
+      if (!existsSync(renderPath)) {
+        failures.push(
+          `${who}: no render receipt (${path.relative(REPO, renderPath)}) — run \`npx tsx extract/figma/census/d2c-render.ts\` (REST image export + Playwright)`,
+        );
+      } else {
+        const render = readJson<D2cRenderReceipt>(renderPath);
+        if (render.cells.length === 0)
+          failures.push(
+            `${who}: render.json samples ZERO cells — nothing paired; re-run d2c-render.ts`,
+          );
+        for (const cell of render.cells) {
+          for (const side of ["canvas", "code"] as const) {
+            const png = path.join(dir, `${side}-${cell.slug}.png`);
+            if (!existsSync(png))
+              failures.push(
+                `${who}: missing ${side}-${cell.slug}.png for sampled cell "${cell.figmaVariant}"`,
+              );
+          }
+        }
+      }
+      const verdictPath = path.join(dir, "verdict.json");
+      if (!existsSync(verdictPath)) failures.push(`${who}: no verdict.json`);
+      else {
+        const v = readJson<D2cVerdict>(verdictPath);
+        if (v.recognisable !== true && v.recognisable !== false)
+          failures.push(`${who}: verdict is unscored`);
+        if (v.recognisable === false && (v.walls ?? []).length === 0)
+          failures.push(
+            `${who}: verdict says NOT recognisable but names no wall`,
+          );
+      }
+    }
+  }
+
+  const receipt = renderD2cReceipt(manifest, runs, failures);
+  writeFileSync(path.join(REPO, D2C_RECEIPT_PATH), receipt);
+  const sets = runs.reduce((n, r) => n + r.sets.length, 0);
+  const carried = runs.reduce(
+    (n, r) => n + r.sets.reduce((m, s) => m + s.account.carried, 0),
+    0,
+  );
+  const named = runs.reduce(
+    (n, r) => n + r.sets.reduce((m, s) => m + s.account.named, 0),
+    0,
+  );
+  const silent = runs.reduce(
+    (n, r) => n + r.sets.reduce((m, s) => m + s.account.silent, 0),
+    0,
+  );
+  console.log(
+    `census (design-to-code): ${sets} canvas sets — ${carried} facts carried · ${named} named · ${silent} SILENT; receipt ${D2C_RECEIPT_PATH}`,
+  );
+  if (failures.length > 0) {
+    console.error(
+      `✘ design-to-code census RED — ${failures.length} failure(s):\n${failures.map((f) => `  - ${f}`).join("\n")}`,
+    );
+    return 1;
+  }
+  console.log("✔ design-to-code census green");
+  return 0;
+}
+
+function renderD2cReceipt(
+  manifest: CensusManifest,
+  runs: D2cKitRun[],
+  failures: string[],
+): string {
+  const esc = (x: string) => x.replace(/\|/g, "\\|");
+  const L: string[] = [];
+  L.push(
+    "# Design→code census — canvas sets → contracts → React/WC, deterministic",
+  );
+  L.push("");
+  L.push(
+    "GENERATED by `npm run census:check -- --phase design-to-code` (scripts/canvas-census-check.ts) — do not edit. Byte-stable: no dates; rows in kit/manifest order.",
+  );
+  L.push("");
+  L.push("## The bar");
+  L.push("");
+  L.push(
+    'Owner, verbatim: *"seamlessly transition a designed component, along with all its properties and metadata, to a coded component without using AI. A deterministic way of creating something from design to code."* ' +
+      "Pass condition: every Figma-side fact on every set is CARRIED into the contract (and on into the generated code) or NAMED by a receipt — **SILENT = 0** — and the whole pipeline is byte-deterministic.",
+  );
+  L.push("");
+  L.push("## The designer's CLI sequence (what these numbers measure)");
+  L.push("");
+  L.push("```");
+  L.push("# 1. dump the canvas over REST (read-only; FIGMA_TOKEN)");
+  L.push(
+    "npm run extract:figma:rest -- https://www.figma.com/design/<fileKey> --out dump.json",
+  );
+  L.push("# 2. propose contracts from the dump (exact mode for a stamped kit;");
+  L.push("#    add --reviewable-inversion for a foreign kit, with ITS tokens)");
+  L.push(
+    "npm run extract:figma -- dump.json --out proposed --tokens <kit dtcg files>",
+  );
+  L.push("# 3. generate the code — React + stories, then Web Components");
+  L.push(
+    "npx ds-contracts generate proposed/*.contract.proposed.json --out src \\",
+  );
+  L.push("  --stories --tokens <kit dtcg files>,proposed/minted.dtcg.json");
+  L.push(
+    "npx ds-contracts generate proposed/*.contract.proposed.json --out wc \\",
+  );
+  L.push(
+    "  --target web-components --emitter @ds-contracts/emitter-web-components \\",
+  );
+  L.push("  --tokens <kit dtcg files>,proposed/minted.dtcg.json");
+  L.push("```");
+  L.push("");
+  L.push(
+    "The gate re-runs exactly this pipeline in memory from the committed fixtures (`extract/figma/fixtures/census-d2c/`, capture provenance in `<kit>.capture.json`) — no network, no hands.",
+  );
+  L.push("");
+  L.push("## Kits");
+  L.push("");
+  L.push("| kit | file | mode | sets | fixture |");
+  L.push("|---|---|---|---|---|");
+  for (const k of manifest.designToCode.kits)
+    L.push(
+      `| ${k.kit} | \`${k.fileKey}\` | ${k.mode} | ${k.sets} | \`${k.fixture}\` |`,
+    );
+  L.push("");
+  L.push("## Determinism — the idempotence proof");
+  L.push("");
+  for (const r of runs) {
+    L.push(
+      `- **${r.def.kit}**: propose twice → byte-identical: **${r.idempotent.propose}**; generate twice (React + stories + WC, every file sha256-compared) → identical: **${r.idempotent.generate}**. ` +
+        `React ${r.generatedCount.react} component(s) + WC ${r.generatedCount.wc}; per-file sha256 pinned in each row's d2c.json — engine drift flips this gate red by name.` +
+        (r.mintedPruned.length > 0
+          ? ` Minted-tree prune: ${r.mintedPruned.length} freshly-minted leaf/leaves already defined by the kit corpus were dropped (the corpus value wins; REST rounds geometry to 2dp): ${r.mintedPruned.slice(0, 4).join(", ")}${r.mintedPruned.length > 4 ? ", …" : ""}.`
+          : ""),
+    );
+  }
+  L.push("");
+  L.push("## Carriage — every Figma-side fact, accounted");
+  L.push("");
+  L.push(
+    "Denominator: the raw REST node documents (variant axes + values, component properties, descriptions, documentation links, variable bindings, layout/auto-layout, text, paints, effects, prototype wiring, instance internals as one fact, the ds_contracts stamps). " +
+      "Full per-row tables with landings ride each set's `d2c.json` (`channels`, `api`, `silentRows`).",
+  );
+  L.push("");
+  L.push(
+    "| kit | id | set | variants | carried | named | SILENT | verdict | walls |",
+  );
+  L.push("|---|---|---|---|---|---|---|---|---|");
+  for (const r of runs) {
+    for (const set of r.sets) {
+      const dir = path.join(REPO, D2C_DIR, r.def.kit, set.id);
+      const verdictPath = path.join(dir, "verdict.json");
+      let verdict = "PENDING";
+      let walls = "—";
+      if (existsSync(verdictPath)) {
+        const v = readJson<D2cVerdict>(verdictPath);
+        verdict =
+          v.recognisable === true
+            ? "recognisable"
+            : v.recognisable === false
+              ? "NOT recognisable"
+              : "unscored";
+        walls = (v.walls ?? []).length > 0 ? (v.walls ?? []).join("; ") : "—";
+      }
+      L.push(
+        `| ${r.def.kit} | \`${set.id}\` | ${esc(set.setName)} | ${set.variantCount} | ${set.account.carried} | ${set.account.named} | ${set.account.silent} | ${esc(verdict)} | ${esc(walls)} |`,
+      );
+    }
+  }
+  const carried = runs.reduce(
+    (n, r) => n + r.sets.reduce((m, s) => m + s.account.carried, 0),
+    0,
+  );
+  const named = runs.reduce(
+    (n, r) => n + r.sets.reduce((m, s) => m + s.account.named, 0),
+    0,
+  );
+  const silent = runs.reduce(
+    (n, r) => n + r.sets.reduce((m, s) => m + s.account.silent, 0),
+    0,
+  );
+  const sets = runs.reduce((n, r) => n + r.sets.length, 0);
+  L.push(
+    `| **all** | | ${sets} sets | | **${carried}** | **${named}** | **${silent}** | | |`,
+  );
+  L.push("");
+  L.push("## Renders");
+  L.push("");
+  L.push(
+    "Pairs under `parity/receipts/v1/census/design-to-code/<kit>/<id>/` — `canvas-<slug>.png` (Figma's own `/v1/images?scale=2` export, read-only) beside `code-<slug>.png` (the GENERATED React, esbuild-bundled and screenshotted at dpr 2 — extract/figma/census/d2c-render.ts). " +
+      "Sample: the all-defaults cell plus every non-default axis value with the others at default; interaction-state planes are CSS pseudo-classes in code and are not sampled as cells (named in each render.json).",
+  );
+  L.push("");
+  L.push(
+    `Gate: **${failures.length === 0 ? "GREEN" : `RED — ${failures.length} failure(s)`}**.`,
+  );
+  if (failures.length > 0) {
+    L.push("");
+    for (const f of failures) L.push(`- ${esc(f)}`);
+  }
+  L.push("");
+  return L.join("\n");
+}
+
+process.exitCode = await main();

@@ -18,8 +18,9 @@
       "decision": {
         "kind": "pending-restamp",
         "note": "the set carries no ds_contracts/canvasFingerprint stamp (content unchanged); restamping means re-running its sync script — a Figma write to GnQnjSNBXtgtd2Ht0Hs1C8",
-        "recordedAt": "2026-08-23T15:06:07.736Z",
+        "recordedAt": "2026-08-23T19:37:43.820Z",
         "evidence": [
+          "drift at decision time: code-ahead (canvas evidence none); contract hash sha256:1a68884844ea208e2967ff0f4e8437f226a97f4ca0cb653f7f8a1cfda7cfe64f; observed stamp none, dump dumpv1:1808055686 (grammar 1.32), file version 2390537264651373038",
           "drift at decision time: code-ahead (canvas evidence none); contract hash sha256:1a68884844ea208e2967ff0f4e8437f226a97f4ca0cb653f7f8a1cfda7cfe64f; observed stamp none, dump dumpv1:3160575606 (grammar 1.31), file version 2390537264651373038",
           "canvas (Figma versions API, read-only): set 1:10498 has NO canvasFingerprint at any of the 30 most recent versions (2026-08-06T14:01:14Z → now); the receipt's write (2026-08-06T05:49:25Z, v6:923243794) predates that window; the dump is identical across all 30 versions (dumpv1:3160575606) and the 08-08 mapper reproduces the baseline — content unchanged",
           "code: only the schema-17 codemod dbeb3575 touched the contract (bookkeeping)",
@@ -28,8 +29,8 @@
         "basedOn": {
           "contractHash": "sha256:1a68884844ea208e2967ff0f4e8437f226a97f4ca0cb653f7f8a1cfda7cfe64f",
           "canvasStamp": null,
-          "canvasDump": "dumpv1:3160575606",
-          "dumpVersion": "1.31"
+          "canvasDump": "dumpv1:1808055686",
+          "dumpVersion": "1.32"
         },
         "command": "Figma desktop → open file GnQnjSNBXtgtd2Ht0Hs1C8 → Sync Runner plugin → \"Paste a script\" tab → paste examples/altitude/figma/avatar.figma.js (amend-capable: reconciles set 1:10498 in place and restamps v6; byte-fresh per `npm run figma:fresh`) → Run script → then record: npm run sync:observe -- --adopt altitude.avatar --note \"restamped 2026-08-23\""
       }
@@ -45,10 +46,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2227710096",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2943434378",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/altitude/components/badge.json"
@@ -64,10 +65,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:948028923",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2684432106",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/altitude/components/button.json)",
@@ -99,10 +100,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1120798882",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:3589321158",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/altitude/components/chip.json"
@@ -118,10 +119,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3506643804",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:3711786515",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/altitude/components/divider.json"
@@ -137,10 +138,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:3332768636",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1680583320",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/altitude/components/heading.json)",
@@ -172,10 +173,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:319884819",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1354538408",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/altitude/components/icon-close.json"
@@ -191,10 +192,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2060152440",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2867448286",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/altitude/components/link.json"
@@ -210,10 +211,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:584095604",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:510676278",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/badge.json)",
@@ -245,10 +246,10 @@
       "lastSyncedAt": "2026-08-23T15:02:22.844Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:1723211790",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2543949392",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt (B3): canvas write 2026-08-11 is newer than the semantic contract commit 98cfa8f2 (2026-08-09) (prior: receipt parity/receipts/console-loop/astryx/components/banner.json)",
@@ -281,10 +282,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:3060258365",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:4112778106",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/button.json)",
@@ -316,10 +317,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:4294906959",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:309900904",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/card.json)",
@@ -351,10 +352,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:2550445534",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:3321965070",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/checkbox-input.json)",
@@ -386,10 +387,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:1550018815",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1388911689",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/dropdown-menu-item.json)",
@@ -421,10 +422,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:3138675180",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2359335627",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/dropdown-menu.json)",
@@ -456,10 +457,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:3435506286",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1623512142",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/progress-bar.json)",
@@ -491,10 +492,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:1991569256",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:3088653034",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/slider.json)",
@@ -526,10 +527,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:2427374214",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:740917004",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/switch.json)",
@@ -561,10 +562,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:381639615",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:456003832",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/text-input.json)",
@@ -596,10 +597,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:3323713016",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1398860608",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/toast.json)",
@@ -631,10 +632,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:819494676",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2691332452",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/astryx/components/token.json)",
@@ -666,10 +667,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:742076368",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2511000159",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/carbon/components/accordion.json)",
@@ -701,10 +702,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:496601980",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:3215219746",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/carbon/components/button.json"
@@ -720,10 +721,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:4108081308",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2911737979",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/carbon/components/checkbox.json)",
@@ -755,10 +756,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:3622083865",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2654244731",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/carbon/components/icon-button.json)",
@@ -790,10 +791,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:2153018007",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:223319190",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/carbon/components/inline-notification.json)",
@@ -825,10 +826,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:2893122542",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:3642891560",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/carbon/components/modal.json)",
@@ -860,10 +861,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:2628574167",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1707683881",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/carbon/components/tabs.json)",
@@ -895,10 +896,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:614325908",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:213489953",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/carbon/components/tag.json)",
@@ -930,10 +931,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:2581579881",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1735386665",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/carbon/components/text-input.json)",
@@ -965,10 +966,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:800162275",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:825950353",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/carbon/components/toggle.json)",
@@ -1000,10 +1001,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:4120265292",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:593386305",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/accordion-item.json"
@@ -1019,10 +1020,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3692949204",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1380778464",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/avatar-group.json"
@@ -1038,10 +1039,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:4064706845",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:230554058",
+        "dumpVersion": "1.32",
         "fileVersionId": "2388438498796415748",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/avatar.json"
@@ -1057,10 +1058,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:650431504",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1240874118",
+        "dumpVersion": "1.32",
         "fileVersionId": "2388438498796415748",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/badge.json"
@@ -1076,10 +1077,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:3973084246",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2411453557",
+        "dumpVersion": "1.32",
         "fileVersionId": "2388438498796415748",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/components/banner.json)",
@@ -1111,10 +1112,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3874849251",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1961946125",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/blockquote.json"
@@ -1130,10 +1131,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1134562763",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2634805476",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/breadcrumb-item.json"
@@ -1149,10 +1150,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3381771355",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:17395717",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/breadcrumbs.json"
@@ -1168,10 +1169,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1666010662",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1205130998",
+        "dumpVersion": "1.32",
         "fileVersionId": "2388438498796415748",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/button.json"
@@ -1187,10 +1188,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:22407837",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2752276410",
+        "dumpVersion": "1.32",
         "fileVersionId": "2388438498796415748",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/components/card.json)",
@@ -1222,10 +1223,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3223228161",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2354182991",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/chat-message-metadata.json"
@@ -1241,10 +1242,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:132659479",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1572400160",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/chat-message.json"
@@ -1260,10 +1261,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3382675890",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:261969335",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/chat-system-message.json"
@@ -1279,10 +1280,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2478388003",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1703584819",
+        "dumpVersion": "1.32",
         "fileVersionId": "2388438498796415748",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/checkbox.json"
@@ -1298,10 +1299,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:134570909",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:171068224",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/citation.json"
@@ -1317,10 +1318,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:4031099918",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:271198105",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/code.json"
@@ -1336,10 +1337,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1794851804",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2986517882",
+        "dumpVersion": "1.32",
         "fileVersionId": "2388438498796415748",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/divider.json"
@@ -1355,10 +1356,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1588402733",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2938784588",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/empty-state.json"
@@ -1374,10 +1375,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2676795796",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:441509406",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/field.json"
@@ -1393,10 +1394,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1238368155",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1029821000",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/heading.json"
@@ -1412,10 +1413,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:306589473",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:3131462650",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/icon-button.json"
@@ -1431,10 +1432,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3038354923",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:3531624626",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/kbd.json"
@@ -1450,10 +1451,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2580230446",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2690377436",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/list-item.json"
@@ -1469,10 +1470,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2161274955",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:805661140",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/list.json"
@@ -1488,10 +1489,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3474680320",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:3203756690",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/metadata-list-item.json"
@@ -1507,10 +1508,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1875458055",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1893992185",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/metadata-list.json"
@@ -1526,10 +1527,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2315734023",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:877110699",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/pagination.json"
@@ -1545,10 +1546,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3918428932",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:470389265",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/progress-bar.json"
@@ -1564,10 +1565,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2118560066",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:918180843",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/section.json"
@@ -1583,10 +1584,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1980335563",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1142514941",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/side-nav-item.json"
@@ -1602,10 +1603,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1518934740",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2994385526",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/skeleton.json"
@@ -1621,10 +1622,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2383121865",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2173927959",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/slider.json"
@@ -1640,10 +1641,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3269269541",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2583612476",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/spinner.json"
@@ -1659,10 +1660,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3888203497",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:916788904",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/status-dot.json"
@@ -1678,10 +1679,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:915203117",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:372277715",
+        "dumpVersion": "1.32",
         "fileVersionId": "2388438498796415748",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/switch.json"
@@ -1697,10 +1698,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3455218876",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1120144232",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/tab-list.json"
@@ -1716,10 +1717,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:380235727",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:3868628793",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/tab.json"
@@ -1735,10 +1736,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:433754616",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:3459076795",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/table-cell.json"
@@ -1754,10 +1755,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2664972485",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:3448882728",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/table-header-cell.json"
@@ -1773,10 +1774,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3561042021",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2410256817",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/table-row.json"
@@ -1792,10 +1793,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3073040933",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:3603733420",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/table.json"
@@ -1811,10 +1812,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2371069263",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2242728006",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/text-area.json"
@@ -1830,10 +1831,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1190214256",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1645934090",
+        "dumpVersion": "1.32",
         "fileVersionId": "2388438498796415748",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/text-field.json"
@@ -1849,10 +1850,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3003253434",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1928562906",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/toast.json"
@@ -1868,10 +1869,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:634577696",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:994537685",
+        "dumpVersion": "1.32",
         "fileVersionId": "2388438498796415748",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/components/token.json)",
@@ -1903,10 +1904,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:292303745",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:786643922",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/toolbar.json"
@@ -1922,10 +1923,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1314675734",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1322191478",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/top-nav-item.json"
@@ -1941,10 +1942,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3469212260",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:982165401",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/top-nav.json"
@@ -1960,10 +1961,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3858385212",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:290679306",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/components/typeahead-item.json"
@@ -1984,8 +1985,9 @@
       "decision": {
         "kind": "pending-reapply",
         "note": "code is ahead: the dismiss button became a declared event (968958cd, 2026-08-16) after the last canvas write (2026-08-08); re-applying is a Figma write to GnQnjSNBXtgtd2Ht0Hs1C8",
-        "recordedAt": "2026-08-23T15:04:52.249Z",
+        "recordedAt": "2026-08-23T19:37:48.016Z",
         "evidence": [
+          "drift at decision time: conflict (canvas evidence stamp); contract hash sha256:88359167eacb3fb3104b1394021c79466a1999fdd4d0d722425a5e9593181fbb; observed stamp v6:941557944, dump dumpv1:4223042895 (grammar 1.32), file version 2390537264651373038",
           "drift at decision time: conflict (canvas evidence stamp); contract hash sha256:88359167eacb3fb3104b1394021c79466a1999fdd4d0d722425a5e9593181fbb; observed stamp v6:941557944, dump dumpv1:4197814634 (grammar 1.31), file version 2390537264651373038",
           "canvas (Figma versions API, read-only): set 1:2098 stamp last moved 2026-08-08T07:35:42Z (v6:941557944 = observed now, version 2385245229284424737, TJ Pitre); unchanged through every later version",
           "code: the only semantic contract commit is 968958cd 2026-08-16T23:38:13Z (props, dismiss element/attrs/description, events: onDismiss); dbeb3575 + 763b0f86 are bookkeeping (codemod, anchors)",
@@ -1994,8 +1996,8 @@
         "basedOn": {
           "contractHash": "sha256:88359167eacb3fb3104b1394021c79466a1999fdd4d0d722425a5e9593181fbb",
           "canvasStamp": "v6:941557944",
-          "canvasDump": "dumpv1:4197814634",
-          "dumpVersion": "1.31"
+          "canvasDump": "dumpv1:4223042895",
+          "dumpVersion": "1.32"
         },
         "command": "Figma desktop → open file GnQnjSNBXtgtd2Ht0Hs1C8 → Sync Runner plugin → \"Paste a script\" tab → paste examples/tailwind/figma/alert.figma.js (amend-capable: reconciles set 1:2098 in place and restamps v6; byte-fresh per `npm run figma:fresh`) → Run script → then record: npm run sync:observe -- --adopt flowbite.alert --note \"re-applied from 968958cd\""
       }
@@ -2011,10 +2013,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:865067787",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2059535148",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/tailwind/components/badge.json"
@@ -2030,10 +2032,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:669508031",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1368858955",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/tailwind/components/button.json)",
@@ -2065,10 +2067,10 @@
       "lastSyncedAt": "2026-08-23T12:52:35.595Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:1126456408",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:985163880",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — restamped by an unrecorded write between 2026-08-09 and 2026-08-21 (Figma version history: TJ Pitre); the dump-v1 projection under the 2026-08-08 mapper (8ac96363) is byte-identical to the 2026-08-08 baseline — content unchanged, stamp adopted (scratchpad REPORT 2026-08-23) (prior: receipt parity/receipts/console-loop/tailwind/components/card.json)"
@@ -2089,8 +2091,9 @@
       "decision": {
         "kind": "pending-reapply",
         "note": "genuine code-ahead: role=switch + onToggle event + root align landed in the contract (968958cd, 2026-08-16) and the canvas still carries the 2026-08-06 stamp; re-applying is a Figma write to GnQnjSNBXtgtd2Ht0Hs1C8",
-        "recordedAt": "2026-08-23T15:05:42.059Z",
+        "recordedAt": "2026-08-23T19:37:52.304Z",
         "evidence": [
+          "drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:3e9089a96a5287cf7d87fb82b82276d71def69bae78ca7de8e545f98f62da5f4; observed stamp v6:3468428338, dump dumpv1:1227286360 (grammar 1.32), file version 2390537264651373038",
           "drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:3e9089a96a5287cf7d87fb82b82276d71def69bae78ca7de8e545f98f62da5f4; observed stamp v6:3468428338, dump dumpv1:327010899 (grammar 1.31), file version 2390537264651373038",
           "canvas (Figma versions API, read-only): set 1:2296 stamp v6:3468428338 == ledger since 2026-08-06T15:14:25Z; dump last moved 2026-08-07T04:32:19Z (before the 08-08 seed; the 08-08 mapper reproduces the baseline) — the canvas has not moved since the receipt",
           "code: the only semantic contract commit is 968958cd 2026-08-16T23:38:13Z (semantics.role, roleException, root layout align, events: onToggle); dbeb3575 + 763b0f86 are bookkeeping",
@@ -2099,8 +2102,8 @@
         "basedOn": {
           "contractHash": "sha256:3e9089a96a5287cf7d87fb82b82276d71def69bae78ca7de8e545f98f62da5f4",
           "canvasStamp": "v6:3468428338",
-          "canvasDump": "dumpv1:327010899",
-          "dumpVersion": "1.31"
+          "canvasDump": "dumpv1:1227286360",
+          "dumpVersion": "1.32"
         },
         "command": "Figma desktop → open file GnQnjSNBXtgtd2Ht0Hs1C8 → Sync Runner plugin → \"Paste a script\" tab → paste examples/tailwind/figma/toggle-switch.figma.js (amend-capable: reconciles set 1:2296 in place and restamps v6; byte-fresh per `npm run figma:fresh`) → Run script → then record: npm run sync:observe -- --adopt flowbite.toggleswitch --note \"re-applied from 968958cd\""
       }
@@ -2116,10 +2119,10 @@
       "lastSyncedAt": "2026-08-23T15:02:27.788Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:2962234838",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1630269913",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt (B3): canvas write 2026-08-17T12:30:29Z is newer than the semantic contract commit 16889547 (2026-08-17T12:30:08Z) — same session, 21 s apart (prior: receipt parity/receipts/console-loop/mui/components/accordion.json)",
@@ -2152,10 +2155,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:2956187053",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:4213998771",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/alert.json)",
@@ -2187,10 +2190,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:4187961574",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:729270879",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/autocomplete.json"
@@ -2206,10 +2209,10 @@
       "lastSyncedAt": "2026-08-23T15:02:31.715Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:2836052992",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1296131402",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt (B3): canvas write 2026-08-17T12:30:29Z is newer than the semantic contract commit 16889547 (2026-08-17T12:30:08Z) — same session, 21 s apart (prior: receipt parity/receipts/console-loop/mui/components/avatar.json)",
@@ -2242,10 +2245,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:547180498",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2114803214",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/badge.json)",
@@ -2277,10 +2280,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1936982772",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1382031037",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/breadcrumbs.json"
@@ -2296,10 +2299,10 @@
       "lastSyncedAt": "2026-08-23T12:52:39.983Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:2415220176",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2786185502",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — set carries a v5-era stamp (pre-v6 engine) while the receipt recorded a freshly computed v6 — two instruments, not a write; the dump-v1 projection under the 2026-08-08 mapper equals the 2026-08-08 baseline — content unchanged, re-baselined under grammar 1.31 (prior: receipt parity/receipts/console-loop/mui/components/button.json)"
@@ -2315,10 +2318,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:3693583755",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:287303605",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/card.json"
@@ -2334,10 +2337,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:1204135693",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:3130996314",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/checkbox.json)",
@@ -2369,10 +2372,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2168689507",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1144668343",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/chip.json"
@@ -2388,10 +2391,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2896218865",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2506261154",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/circular-progress.json"
@@ -2407,10 +2410,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2148376738",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1394551308",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/dialog.json"
@@ -2426,10 +2429,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:1060879172",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:3076369616",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/divider.json)",
@@ -2461,10 +2464,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:4128778073",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:3215899139",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/drawer.json)",
@@ -2501,8 +2504,9 @@
       "decision": {
         "kind": "pending-reconcile",
         "note": "both halves moved in the same minute on 2026-08-17 (canvas hand-edit without restamp 12:30:29Z; contract commit 16889547 12:30:08Z) — a human chooses whether the reviewed canvas or the authored contract is the truth",
-        "recordedAt": "2026-08-23T15:06:32.100Z",
+        "recordedAt": "2026-08-23T19:38:00.061Z",
         "evidence": [
+          "drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:0f83656df4db10b872279c3881c54afd8b5d923f2cee21d16d6e27f0df56f540; observed stamp v6:2082406472, dump dumpv1:1845489036 (grammar 1.32), file version 2389961688576685812",
           "drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:0f83656df4db10b872279c3881c54afd8b5d923f2cee21d16d6e27f0df56f540; observed stamp v6:2082406472, dump dumpv1:527766217 (grammar 1.31), file version 2389961688576685812",
           "canvas (Figma versions API, read-only): set 84:1743 stamp v6:2082406472 == ledger since 2026-08-06T05:07:02Z (never restamped); dump moved 2026-08-17T12:30:29Z (version 2388670813585618209, TJ Pitre) — VISUAL-REVIEW-2026-08-17.md: circles at 56/48/40, duplicate set 84:1954 deleted, grid reflowed; the 1.5-grammar baseline that first proved this move was dropped by the 08-23 re-baseline (sync/receipts/2026-08-23-spine-reconciliation.md, class D2, is the record)",
           "code: the only semantic contract commit is 16889547 2026-08-17T12:30:08Z (anatomy.root.tokensByProp: authored 40/48/56 boxes); dbeb3575 is bookkeeping",
@@ -2511,8 +2515,8 @@
         "basedOn": {
           "contractHash": "sha256:0f83656df4db10b872279c3881c54afd8b5d923f2cee21d16d6e27f0df56f540",
           "canvasStamp": "v6:2082406472",
-          "canvasDump": "dumpv1:527766217",
-          "dumpVersion": "1.31"
+          "canvasDump": "dumpv1:1845489036",
+          "dumpVersion": "1.32"
         },
         "command": "CHOOSE ONE — (a) the canvas is the truth (keep the 2026-08-17 hand-fix): npm run sync:observe -- --adopt mui.fab --note \"canvas wins: 08-17 review fix kept\"  |  (b) the contract is the truth: Figma desktop → open 59mLQlOMiD5w5za6SUcoO5 → Sync Runner plugin → \"Paste a script\" tab → paste examples/mui/figma/fab.figma.js (amends set 84:1743 in place, restamps v6) → Run script → npm run sync:observe -- --adopt mui.fab --note \"re-applied from 16889547\""
       }
@@ -2528,10 +2532,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:646966808",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:605011394",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/icon-button.json"
@@ -2547,10 +2551,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:4091473170",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:3396243091",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/input-adornment.json"
@@ -2566,10 +2570,10 @@
       "lastSyncedAt": "2026-08-23T12:52:35.595Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:3931827815",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2358686405",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — restamped by an unrecorded write between 2026-08-09 and 2026-08-21 (Figma version history: TJ Pitre); the dump-v1 projection under the 2026-08-08 mapper (8ac96363) is byte-identical to the 2026-08-08 baseline — content unchanged, stamp adopted (scratchpad REPORT 2026-08-23) (prior: receipt parity/receipts/console-loop/mui/components/linear-progress.json)"
@@ -2590,8 +2594,9 @@
       "decision": {
         "kind": "pending-reconcile",
         "note": "both halves moved in the same minute on 2026-08-17 (canvas hand-edit without restamp 12:30:29Z; contract commit 16889547 12:30:08Z) — a human chooses whether the reviewed canvas or the authored contract is the truth",
-        "recordedAt": "2026-08-23T15:06:57.807Z",
+        "recordedAt": "2026-08-23T19:38:20.774Z",
         "evidence": [
+          "drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:53d3814ea6390478f606061835ce8a5a4073c8732ff5d4d26dc375db8f3084d2; observed stamp v6:3316422374, dump dumpv1:483914927 (grammar 1.32), file version 2389961688576685812",
           "drift at decision time: code-ahead (canvas evidence stamp); contract hash sha256:53d3814ea6390478f606061835ce8a5a4073c8732ff5d4d26dc375db8f3084d2; observed stamp v6:3316422374, dump dumpv1:2837578434 (grammar 1.31), file version 2389961688576685812",
           "canvas (Figma versions API, read-only): set 84:1832 stamp v6:3316422374 == ledger since 2026-08-06T05:07:02Z (never restamped); dump moved 2026-08-17T12:30:29Z (version 2388670813585618209, TJ Pitre) — root layout HORIZONTAL/CENTER → VERTICAL/MIN (reconciliation receipt D2 row); VISUAL-REVIEW-2026-08-17.md: 'Link' on one line (31×19); the 1.5-grammar baseline that first proved this move was dropped by the 08-23 re-baseline",
           "code: the only semantic contract commit is 16889547 2026-08-17T12:30:08Z (anatomy.root.tokens.width dropped so the label hugs); dbeb3575 is bookkeeping",
@@ -2600,8 +2605,8 @@
         "basedOn": {
           "contractHash": "sha256:53d3814ea6390478f606061835ce8a5a4073c8732ff5d4d26dc375db8f3084d2",
           "canvasStamp": "v6:3316422374",
-          "canvasDump": "dumpv1:2837578434",
-          "dumpVersion": "1.31"
+          "canvasDump": "dumpv1:483914927",
+          "dumpVersion": "1.32"
         },
         "command": "CHOOSE ONE — (a) the canvas is the truth (keep the 2026-08-17 hand-fix): npm run sync:observe -- --adopt mui.link --note \"canvas wins: 08-17 review fix kept\"  |  (b) the contract is the truth: Figma desktop → open 59mLQlOMiD5w5za6SUcoO5 → Sync Runner plugin → \"Paste a script\" tab → paste examples/mui/figma/link.figma.js (amends set 84:1832 in place, restamps v6) → Run script → npm run sync:observe -- --adopt mui.link --note \"re-applied from 16889547\""
       }
@@ -2617,10 +2622,10 @@
       "lastSyncedAt": "2026-08-23T12:52:39.983Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:1827025945",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:717168861",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — set carries a v5-era stamp (pre-v6 engine) while the receipt recorded a freshly computed v6 — two instruments, not a write; the dump-v1 projection under the 2026-08-08 mapper equals the 2026-08-08 baseline — content unchanged, re-baselined under grammar 1.31 (prior: receipt parity/receipts/console-loop/mui/components/menu.json)"
@@ -2636,10 +2641,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:945670748",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:408359453",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/paper.json)",
@@ -2671,10 +2676,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:3708516313",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1209859369",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/radio.json)",
@@ -2706,10 +2711,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:3688301010",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:3307556792",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/select.json)",
@@ -2746,8 +2751,9 @@
       "decision": {
         "kind": "pending-reapply",
         "note": "code is ahead: the slider-thumb shadow-pseudo fold landed in the contract (01aa5243, 2026-08-11T17:28Z) 1 h 48 min after the last canvas write (2026-08-11T15:40Z); re-applying is a Figma write to 59mLQlOMiD5w5za6SUcoO5",
-        "recordedAt": "2026-08-23T15:05:16.870Z",
+        "recordedAt": "2026-08-23T19:38:39.795Z",
         "evidence": [
+          "drift at decision time: conflict (canvas evidence stamp); contract hash sha256:c91b6cf3cfe10ed0a1302557eebd4adbd2e913db56ac850d84bf6a51d6c5ee86; observed stamp v6:2972081627, dump dumpv1:4023717804 (grammar 1.32), file version 2389961688576685812",
           "drift at decision time: conflict (canvas evidence stamp); contract hash sha256:c91b6cf3cfe10ed0a1302557eebd4adbd2e913db56ac850d84bf6a51d6c5ee86; observed stamp v6:2972081627, dump dumpv1:1907087401 (grammar 1.31), file version 2389961688576685812",
           "canvas (Figma versions API, read-only): set 21:509 stamp moved 2026-08-10T18:45:18Z (v5→v6:1845442048) and 2026-08-11T15:40:41Z (v6:2972081627 = observed now, version 2386493120203841936, TJ Pitre); unchanged since",
           "code: the only semantic contract commit is 01aa5243 2026-08-11T17:28:31Z (slider-thumb literals/literalsByProp); dbeb3575 is bookkeeping",
@@ -2756,8 +2762,8 @@
         "basedOn": {
           "contractHash": "sha256:c91b6cf3cfe10ed0a1302557eebd4adbd2e913db56ac850d84bf6a51d6c5ee86",
           "canvasStamp": "v6:2972081627",
-          "canvasDump": "dumpv1:1907087401",
-          "dumpVersion": "1.31"
+          "canvasDump": "dumpv1:4023717804",
+          "dumpVersion": "1.32"
         },
         "command": "Figma desktop → open file 59mLQlOMiD5w5za6SUcoO5 → Sync Runner plugin → \"Paste a script\" tab → paste examples/mui/figma/slider.figma.js (amend-capable: reconciles set 21:509 in place and restamps v6; byte-fresh per `npm run figma:fresh`) → Run script → then record: npm run sync:observe -- --adopt mui.slider --note \"re-applied from 01aa5243\""
       }
@@ -2773,10 +2779,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2224078824",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2995303770",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/snackbar.json"
@@ -2792,10 +2798,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:3412250931",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:3993702140",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/switch.json)",
@@ -2827,10 +2833,10 @@
       "lastSyncedAt": "2026-08-23T12:52:35.595Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:2335928335",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1985243746",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — restamped by an unrecorded write between 2026-08-09 and 2026-08-21 (Figma version history: TJ Pitre); the dump-v1 projection under the 2026-08-08 mapper (8ac96363) is byte-identical to the 2026-08-08 baseline — content unchanged, stamp adopted (scratchpad REPORT 2026-08-23) (prior: receipt parity/receipts/console-loop/mui/components/table-pagination.json)"
@@ -2846,10 +2852,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:1853677951",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2619141122",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/table.json)",
@@ -2881,10 +2887,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:426521364",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2701404129",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/tabs.json)",
@@ -2916,10 +2922,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:889646355",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:4245767114",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/mui/components/text-field.json)",
@@ -2951,10 +2957,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:2057400026",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:268120992",
+        "dumpVersion": "1.32",
         "fileVersionId": "2389961688576685812",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/mui/components/tooltip.json"
@@ -2970,10 +2976,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:2976127600",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:812730886",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/avatar.json)",
@@ -3005,10 +3011,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:1037761570",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:3390654682",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/badge.json)",
@@ -3040,10 +3046,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:4159336422",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:3921008793",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/banner.json)",
@@ -3075,10 +3081,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:1097453579",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:800465959",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/button.json)",
@@ -3110,10 +3116,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:4004159349",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:790130326",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/checkbox.json)",
@@ -3145,10 +3151,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:3687579860",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:284413071",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/progress-bar.json)",
@@ -3180,10 +3186,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:4291162996",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2035503277",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/radio-button.json)",
@@ -3215,10 +3221,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:3849701374",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:4287320856",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/spinner.json)",
@@ -3250,10 +3256,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:4138318705",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1257563791",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/tag.json)",
@@ -3285,10 +3291,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:549257339",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:1800663276",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/text-field.json)",
@@ -3320,10 +3326,10 @@
       "lastSyncedAt": "2026-08-23T12:52:13.079Z",
       "direction": "code→canvas",
       "observed": {
-        "dumpFingerprint": "dumpv1:1115150788",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2213510546",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "receipt parity/receipts/console-loop/polaris/components/text.json"
@@ -3339,10 +3345,10 @@
       "lastSyncedAt": "2026-08-23T14:57:31.334Z",
       "direction": "canvas→code",
       "observed": {
-        "dumpFingerprint": "dumpv1:2403445535",
-        "dumpVersion": "1.31",
+        "dumpFingerprint": "dumpv1:2933162505",
+        "dumpVersion": "1.32",
         "fileVersionId": "2390537264651373038",
-        "observedAt": "2026-08-23T15:02:31.715Z"
+        "observedAt": "2026-08-23T19:36:02.708Z"
       },
       "provenance": "observe",
       "note": "adopted from live observation 2026-08-23 — 2026-08-23 adopt: canvas = session write (TJ/plugin 08-09..21); code moved only by schema-17 codemod/anchor re-point (prior: receipt parity/receipts/console-loop/polaris/components/thumbnail.json)",

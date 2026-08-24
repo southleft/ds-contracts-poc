@@ -1,0 +1,272 @@
+{
+  "kit": "flowbite",
+  "id": "flowbite.kbd",
+  "setName": "Kbd",
+  "nodeId": "120:1982",
+  "mode": "exact",
+  "variantCount": 1,
+  "contractSha256": "2cf255b624e7d908a750c02e28bf6e054f953c183a548b26b6c8d3fa101f3c26",
+  "carriage": {
+    "carried": 20,
+    "named": 22,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "set description (designer's words)": [
+      0,
+      1,
+      0
+    ],
+    "stamp ds_contracts/semantics": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/propNames": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/specHash": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/contractId": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/version": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/canvasSnapshot": [
+      0,
+      1,
+      0
+    ],
+    "stamp ds_contracts/canvasSetSnapshot": [
+      0,
+      1,
+      0
+    ],
+    "stamp ds_contracts/canvasFingerprint": [
+      0,
+      1,
+      0
+    ],
+    "TEXT property": [
+      1,
+      0,
+      0
+    ],
+    "boundVariables.paddingLeft": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.paddingTop": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.paddingRight": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.paddingBottom": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.size": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.individualStrokeWeights": [
+      0,
+      4,
+      0
+    ],
+    "boundVariables.rectangleCornerRadii": [
+      0,
+      4,
+      0
+    ],
+    "boundVariables.fills": [
+      0,
+      2,
+      0
+    ],
+    "boundVariables.strokes": [
+      0,
+      1,
+      0
+    ],
+    "fills[0] SOLID": [
+      1,
+      1,
+      0
+    ],
+    "strokes[0] + strokeWeight": [
+      1,
+      0,
+      0
+    ],
+    "cornerRadius": [
+      1,
+      0,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      1,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      1,
+      0,
+      0
+    ],
+    "root layoutSizingVertical": [
+      1,
+      0,
+      0
+    ],
+    "boundVariables.fontSize": [
+      0,
+      1,
+      0
+    ],
+    "text.characters": [
+      1,
+      0,
+      0
+    ],
+    "text font size/weight": [
+      1,
+      0,
+      0
+    ],
+    "text fontFamily": [
+      1,
+      0,
+      0
+    ],
+    "text lineHeight": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/fontWeightVar": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/lineHeightVar": [
+      1,
+      0,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "b2a08e2c5421c4d41e8920f1c4b85f9a85ab99c9",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "120:1982",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "set description (designer's words)",
+      "value": "Kbd — generated from contract flowbite.kbd v0.2.0 †",
+      "disposition": "NAMED",
+      "landing": "description: the set's Figma description is this pipeline's own emit caption (\"Kbd — ge…"
+    },
+    {
+      "fact": "stamp ds_contracts/semantics",
+      "value": "{\"element\":\"span\"}",
+      "disposition": "CARRIED",
+      "landing": "contract.semantics (stamp outranks inference)"
+    },
+    {
+      "fact": "stamp ds_contracts/propNames",
+      "value": "{\"Content\":\"children\"}",
+      "disposition": "CARRIED",
+      "landing": "prop names (design spelling → contract prop names)"
+    },
+    {
+      "fact": "stamp ds_contracts/specHash",
+      "value": "4144922046",
+      "disposition": "CARRIED",
+      "landing": "dump.specHash — exact-mode evidence (proves the set matches the emit)"
+    },
+    {
+      "fact": "stamp ds_contracts/contractId",
+      "value": "flowbite.kbd",
+      "disposition": "CARRIED",
+      "landing": "contract.id (dump v1.32 stamp read-back)"
+    },
+    {
+      "fact": "stamp ds_contracts/version",
+      "value": "0.2.0",
+      "disposition": "CARRIED",
+      "landing": "contract.version"
+    },
+    {
+      "fact": "stamp ds_contracts/canvasSnapshot",
+      "value": "2009 chars",
+      "disposition": "NAMED",
+      "landing": "sync-domain fingerprint stamp — read by sync/observe.ts (drift arithmetic), deliberately not a contract fact"
+    },
+    {
+      "fact": "stamp ds_contracts/canvasSetSnapshot",
+      "value": "132 chars",
+      "disposition": "NAMED",
+      "landing": "sync-domain fingerprint stamp — read by sync/observe.ts (drift arithmetic), deliberately not a contract fact"
+    },
+    {
+      "fact": "stamp ds_contracts/canvasFingerprint",
+      "value": "13 chars",
+      "disposition": "NAMED",
+      "landing": "sync-domain fingerprint stamp — read by sync/observe.ts (drift arithmetic), deliberately not a contract fact"
+    },
+    {
+      "fact": "TEXT property",
+      "value": "default=Ctrl",
+      "disposition": "CARRIED",
+      "landing": "props.children (text, default \"Ctrl\") → React prop / children + story args"
+    }
+  ],
+  "generatedFiles": {
+    "react/Kbd/Kbd.module.css": "144edabb4acf8027181a8005d8e6b72713cd5e9a88e6cb93e4a514fe8dcea7b2",
+    "react/Kbd/Kbd.stories.tsx": "05b60b113f46dd91f319d65a84b7e9588f1b312465c3281ee9a038db46eba2bc",
+    "react/Kbd/Kbd.tsx": "5baa1d1f0964e6ecaf884181459fa9a2880ec3675930ea07d8b264eb03ab22cf",
+    "react/Kbd/index.ts": "0e950fa619fef178131fcff760f73e79db08187916cb8b64ab8945dd305a9c86",
+    "wc/flowbite-kbd.ts": "fc13c25a12265345e44cd8ee7cbdd7559b0530c8456b043ababffad79b3457dd",
+    "wc/flowbite-kbd.css.ts": "79d3256eddf99dbdeb516646be53d8cb2d6a5c68a79a82ad8bb916633185bf97",
+    "wc/flowbite-kbd.demo.html": "d64b1a9450cd07db644d07906dd5d55149ffe01902c38c5de264abe0d42ca10f",
+    "wc/flowbite-kbd.custom-elements.json": "9991a5cded1add7a6606360603d366194a059c021dde793baa9975779ffc1626"
+  },
+  "notesCount": 36
+}

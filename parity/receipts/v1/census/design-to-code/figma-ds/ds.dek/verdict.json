@@ -1,0 +1,7 @@
+{
+  "recognisable": true,
+  "walls": [
+    "KIT-LINE-HEIGHT-AUTHORING"
+  ],
+  "notes": "Body text matches — both sides overlap lines identically because the kit binds line-height to a variable valued 1.5 PIXELS (faithful to the canvas, told to the kit author)."
+}

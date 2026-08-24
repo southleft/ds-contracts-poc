@@ -1,0 +1,238 @@
+{
+  "kit": "flowbite",
+  "id": "flowbite.label",
+  "setName": "Label",
+  "nodeId": "120:1996",
+  "mode": "exact",
+  "variantCount": 5,
+  "contractSha256": "0e57ede8e53ac2a80e2a3f94c0625c6281f0045faf231d3c829788160544b9fb",
+  "carriage": {
+    "carried": 55,
+    "named": 23,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "set description (designer's words)": [
+      0,
+      1,
+      0
+    ],
+    "stamp ds_contracts/version": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/semantics": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/propNames": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/specHash": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/contractId": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/canvasSetSnapshot": [
+      0,
+      1,
+      0
+    ],
+    "stamp ds_contracts/canvasFingerprint": [
+      0,
+      1,
+      0
+    ],
+    "TEXT property": [
+      1,
+      0,
+      0
+    ],
+    "variant axis": [
+      1,
+      0,
+      0
+    ],
+    "declared axis default": [
+      1,
+      0,
+      0
+    ],
+    "boundVariables.size": [
+      0,
+      5,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      5,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      5,
+      0,
+      0
+    ],
+    "root layoutSizingVertical": [
+      5,
+      0,
+      0
+    ],
+    "boundVariables.fills": [
+      0,
+      5,
+      0
+    ],
+    "boundVariables.fontSize": [
+      0,
+      5,
+      0
+    ],
+    "fills[0] SOLID": [
+      0,
+      5,
+      0
+    ],
+    "text.characters": [
+      5,
+      0,
+      0
+    ],
+    "text font size/weight": [
+      5,
+      0,
+      0
+    ],
+    "text fontFamily": [
+      5,
+      0,
+      0
+    ],
+    "text lineHeight": [
+      5,
+      0,
+      0
+    ],
+    "stamp ds_contracts/fontWeightVar": [
+      5,
+      0,
+      0
+    ],
+    "stamp ds_contracts/lineHeightVar": [
+      5,
+      0,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "76023d1204c57c7a0e07f86fb342f6c7a0536934",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "120:1996",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "set description (designer's words)",
+      "value": "Label — generated from contract flowbite.label v0.2.0 †",
+      "disposition": "NAMED",
+      "landing": "description: the set's Figma description is this pipeline's own emit caption (\"Label — …"
+    },
+    {
+      "fact": "stamp ds_contracts/version",
+      "value": "0.2.0",
+      "disposition": "CARRIED",
+      "landing": "contract.version"
+    },
+    {
+      "fact": "stamp ds_contracts/semantics",
+      "value": "{\"element\":\"label\"}",
+      "disposition": "CARRIED",
+      "landing": "contract.semantics (stamp outranks inference)"
+    },
+    {
+      "fact": "stamp ds_contracts/propNames",
+      "value": "{\"Color\":\"color\",\"Content\":\"children\"}",
+      "disposition": "CARRIED",
+      "landing": "prop names (design spelling → contract prop names)"
+    },
+    {
+      "fact": "stamp ds_contracts/specHash",
+      "value": "1583944605",
+      "disposition": "CARRIED",
+      "landing": "dump.specHash — exact-mode evidence (proves the set matches the emit)"
+    },
+    {
+      "fact": "stamp ds_contracts/contractId",
+      "value": "flowbite.label",
+      "disposition": "CARRIED",
+      "landing": "contract.id (dump v1.32 stamp read-back)"
+    },
+    {
+      "fact": "stamp ds_contracts/canvasSetSnapshot",
+      "value": "207 chars",
+      "disposition": "NAMED",
+      "landing": "sync-domain fingerprint stamp — read by sync/observe.ts (drift arithmetic), deliberately not a contract fact"
+    },
+    {
+      "fact": "stamp ds_contracts/canvasFingerprint",
+      "value": "13 chars",
+      "disposition": "NAMED",
+      "landing": "sync-domain fingerprint stamp — read by sync/observe.ts (drift arithmetic), deliberately not a contract fact"
+    },
+    {
+      "fact": "TEXT property",
+      "value": "default=Label text",
+      "disposition": "CARRIED",
+      "landing": "props.children (text, default \"Label text\") → React prop / children + story args"
+    },
+    {
+      "fact": "variant axis",
+      "value": "Default|Info|Failure|Success|Warning",
+      "disposition": "CARRIED",
+      "landing": "props.color (enum[5]) → React prop `color` + story argTypes + CSS .color-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "Default",
+      "disposition": "CARRIED",
+      "landing": "props.color.default = \"default\" → React default arg + story args"
+    }
+  ],
+  "generatedFiles": {
+    "react/Label/Label.module.css": "8f3597d6f3d4df84bad568b0ca2e8d20d3489862b5baa6d751d7c93b43fc416d",
+    "react/Label/Label.stories.tsx": "e52aaebdfa8ae54ce85fde1fe07ca94ee26c12a1aa2b8cd4f7588a74018fb722",
+    "react/Label/Label.tsx": "78795d103551c0019c2e9516df0ad4b19bbdee87b34eec100e027ce71c4f98c1",
+    "react/Label/index.ts": "498c66ade27de7f9d9a64360a336165960db825a5136aee5141c5fc57dc8b3d6",
+    "wc/flowbite-label.ts": "c93717e4340c2d5156e8292ca2cb0d41d80e7d52d3b893209320287e23639301",
+    "wc/flowbite-label.css.ts": "ac5c52771bcfa350a2f714e1cba60c8f89ce24b4ced01fdaf305d5d4e73560eb",
+    "wc/flowbite-label.demo.html": "4b7aabe6e5584fea5190fc33692a916c6d52624dd203bab9933d8eea2c6e179b",
+    "wc/flowbite-label.custom-elements.json": "1596f2d72ed5fc76c4e213c88170827a0f4801167076bdaeab26e44a53f1a880"
+  },
+  "notesCount": 28
+}

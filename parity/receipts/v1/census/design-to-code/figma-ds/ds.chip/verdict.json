@@ -1,0 +1,7 @@
+{
+  "recognisable": true,
+  "walls": [
+    "VECTOR-GLYPH-NAMED"
+  ],
+  "notes": "Chip outline, radius and label match; the leading icon and dismiss glyphs are named vectors and render as empty space."
+}

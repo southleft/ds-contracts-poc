@@ -110,6 +110,11 @@ reg('contract', 'a11y', [
   'contract.a11y.minHitArea',
   'contract.a11y.contrast',
 ]);
+// v18 (design-to-code census): documentation pointers carried both ways.
+reg('contract', 'documentation-links', [
+  'contract.documentationLinks',
+  'contract.documentationLinks.uri',
+]);
 // Pointers: sections that live on their own pages.
 reg('props', 'props', ['contract.props']);
 reg('anatomy', 'anatomy', ['contract.anatomy']);
@@ -269,6 +274,14 @@ reg('states', 'states-by-prop', [
   'part.statesByProp.prop',
   'part.statesByProp.state',
   'part.statesByProp.map',
+]);
+// v18 (antd exam, W4): capture-side code-only receipts riding the contract.
+reg('states', 'code-only', [
+  'part.codeOnly',
+  'part.codeOnly.state',
+  'part.codeOnly.channel',
+  'part.codeOnly.value',
+  'part.codeOnly.reason',
 ]);
 
 // --- Conditionals, overlays & motion --------------------------------------

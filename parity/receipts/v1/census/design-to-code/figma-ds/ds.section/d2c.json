@@ -1,0 +1,203 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.section",
+  "setName": "Section",
+  "nodeId": "53:1161",
+  "mode": "reviewable-inversion",
+  "variantCount": 1,
+  "contractSha256": "b0ba44352f0ec7cf099ecf4d76a8a1a86127843cbef9cae687ca7a2167c49ad9",
+  "carriage": {
+    "carried": 21,
+    "named": 20,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "SLOT property": [
+      3,
+      0,
+      0
+    ],
+    "swap/slot accepts": [
+      0,
+      3,
+      0
+    ],
+    "variant axis": [
+      1,
+      0,
+      0
+    ],
+    "declared axis default": [
+      1,
+      0,
+      0
+    ],
+    "boundVariables.itemSpacing": [
+      0,
+      3,
+      0
+    ],
+    "boundVariables.paddingLeft": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.paddingTop": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.paddingRight": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.paddingBottom": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.maxWidth": [
+      0,
+      2,
+      0
+    ],
+    "clipsContent": [
+      0,
+      1,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      5,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      1,
+      0,
+      0
+    ],
+    "root layoutSizingVertical": [
+      1,
+      0,
+      0
+    ],
+    "maxWidth": [
+      2,
+      0,
+      0
+    ],
+    "layoutSizingHorizontal=FILL": [
+      0,
+      4,
+      0
+    ],
+    "SLOT node (native insertion point)": [
+      3,
+      0,
+      0
+    ],
+    "SLOT child INSTANCE (design-time content)": [
+      2,
+      0,
+      0
+    ],
+    "SLOT child FRAME (design-time content)": [
+      0,
+      3,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "7963d81ead93026de1ac4f7f77d0b3a4a3d6cd43",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "53:1161",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "SLOT property",
+      "value": "default={\"guid\":{\"sessionID\":-1,\"localID\":-1}}",
+      "disposition": "CARRIED",
+      "landing": "anatomy slot part (property \"Section Header\") → React slot prop / children"
+    },
+    {
+      "fact": "swap/slot accepts",
+      "value": "[] (unconstrained)",
+      "disposition": "NAMED",
+      "landing": "Section:root/Container/Section Header: slot \"Section Header\" SLOT preferredValues is EM…"
+    },
+    {
+      "fact": "SLOT property",
+      "value": "default={\"guid\":{\"sessionID\":-1,\"localID\":-1}}",
+      "disposition": "CARRIED",
+      "landing": "anatomy slot part (property \"Section Content\") → React slot prop / children"
+    },
+    {
+      "fact": "swap/slot accepts",
+      "value": "[] (unconstrained)",
+      "disposition": "NAMED",
+      "landing": "Section:root/Container/Section Content: slot \"Section Content\" SLOT preferredValues is …"
+    },
+    {
+      "fact": "SLOT property",
+      "value": "default={\"guid\":{\"sessionID\":-1,\"localID\":-1}}",
+      "disposition": "CARRIED",
+      "landing": "anatomy slot part (property \"Section Footer\") → React slot prop / children"
+    },
+    {
+      "fact": "swap/slot accepts",
+      "value": "[] (unconstrained)",
+      "disposition": "NAMED",
+      "landing": "Section:root/Container/Section Footer: slot \"Section Footer\" SLOT preferredValues is EM…"
+    },
+    {
+      "fact": "variant axis",
+      "value": "Default",
+      "disposition": "CARRIED",
+      "landing": "props.layout (enum[1]) → React prop `layout` + story argTypes + CSS .layout-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "Default",
+      "disposition": "CARRIED",
+      "landing": "props.layout.default = \"default\" → React default arg + story args"
+    }
+  ],
+  "generatedFiles": {
+    "react/Section/Section.module.css": "5d29fcf9c4cce16e48da637a425da2b999d1ef13a572947c97098c6a935e13de",
+    "react/Section/Section.stories.tsx": "83c67b3a2c33e4bc8f3e7a9dfe9151bb323a51488774133c25f5e2bbdedda5c3",
+    "react/Section/Section.tsx": "75ca862b094e7071f5f66933bcbc1851f66bd4cab28de415cdd313fb6b41d951",
+    "react/Section/index.ts": "db0bfe93063e840f05b0bccfabfc617040f78e5f5f22136a280da81c2ed6e633",
+    "wc/ds-section-header.ts": "96b58ae939e95f43445ef6fb7c4673120a15cecb8c2558df47af31a85127311c",
+    "wc/ds-section-header.css.ts": "e08593e9148cc099ebd84726a7e8a2e15dd0896f60fcceca47b9c6e7eb8540d2",
+    "wc/ds-section-header.demo.html": "11030c8ddb85ab9fc1c3feaa570109e0fa8301fc476183fa613c2cdf16c335cd",
+    "wc/ds-section-header.custom-elements.json": "b4bc49eb0dc2438731288d4fd4db59c19e23d56d1e6a5db3d66cc3a9b7d3edc6",
+    "wc/ds-section-footer.ts": "2de6dc477ca664a543edde16cc402fe2adf91662ed78bab730d797916ac158cb",
+    "wc/ds-section-footer.css.ts": "297ac3cf4ec9de43e5196d615cec4a0798e99550ba0393a7040554258ab41d60",
+    "wc/ds-section-footer.demo.html": "b54d987c056e21e8af8ee7cbe68ac9fa242dab02b34d644e1f7209b2089f1f55",
+    "wc/ds-section-footer.custom-elements.json": "4ec0768f2412991016176cea2786865ad8e329c1cdaa1dae358dbc3b874abb55",
+    "wc/ds-section.ts": "0180bbb189fd84e7607d838b5ce4106cdddc70670025e15c252aa4a5989e5c06",
+    "wc/ds-section.css.ts": "6ed4e5fb0fa032c0555b68f275e8ef8031f03209666e7dfd6e0c54f5e2b5e438",
+    "wc/ds-section.demo.html": "9308b85578f42bd2d93cc6b3235387cc728e908b9f9cd0b1b7f0a1f0a07caa4a",
+    "wc/ds-section.custom-elements.json": "c655fc9239ecc0656ce5ba1a208b0632f577e2f22b2fda33976ca5af82abc1bc"
+  },
+  "notesCount": 55
+}

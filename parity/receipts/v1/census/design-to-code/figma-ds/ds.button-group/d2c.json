@@ -1,0 +1,131 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.button-group",
+  "setName": "Button Group",
+  "nodeId": "53:2558",
+  "mode": "reviewable-inversion",
+  "variantCount": 2,
+  "contractSha256": "de7418152ef39897d1d4cbb3b23bd961df1c9b0da61c724b504086702bfebf75",
+  "carriage": {
+    "carried": 15,
+    "named": 11,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "SLOT property": [
+      1,
+      0,
+      0
+    ],
+    "swap/slot accepts": [
+      0,
+      1,
+      0
+    ],
+    "variant axis": [
+      1,
+      0,
+      0
+    ],
+    "declared axis default": [
+      1,
+      0,
+      0
+    ],
+    "boundVariables.itemSpacing": [
+      0,
+      4,
+      0
+    ],
+    "clipsContent": [
+      0,
+      2,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      4,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      2,
+      0,
+      0
+    ],
+    "root layoutSizingVertical": [
+      2,
+      0,
+      0
+    ],
+    "SLOT node (native insertion point)": [
+      2,
+      0,
+      0
+    ],
+    "SLOT child INSTANCE (design-time content)": [
+      0,
+      4,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "fc5b06f9aa278a9cd8ae19516e9a41d1d8b37ffa",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "53:2558",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "SLOT property",
+      "value": "default={\"guid\":{\"sessionID\":-1,\"localID\":-1}}",
+      "disposition": "CARRIED",
+      "landing": "anatomy slot part (property \"Items\") → React slot prop / children"
+    },
+    {
+      "fact": "swap/slot accepts",
+      "value": "043d0d4c,bc558700,ced4b3c8",
+      "disposition": "NAMED",
+      "landing": "Button Group:root/Items: slot \"Items\" preferredValues name 3 component key(s) with no i…"
+    },
+    {
+      "fact": "variant axis",
+      "value": "Default|Center",
+      "disposition": "CARRIED",
+      "landing": "props.alignment (enum[2]) → React prop `alignment` + story argTypes + CSS .alignment-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "Default",
+      "disposition": "CARRIED",
+      "landing": "props.alignment.default = \"default\" → React default arg + story args"
+    }
+  ],
+  "generatedFiles": {
+    "react/ButtonGroup/ButtonGroup.module.css": "60c62b291a70a595c09247b5e78f3d0c943994d669ee6d59a2098ae9362f9b2a",
+    "react/ButtonGroup/ButtonGroup.stories.tsx": "4a53e323c111c7ef22ee23c890e755e52b2de277c9974f5f21c1ee68e873b4c2",
+    "react/ButtonGroup/ButtonGroup.tsx": "8ddc63ec19a72ef1d873c2e2bb0d1fdc65f1f89b6ca5c42110d6345f96199804",
+    "react/ButtonGroup/index.ts": "ed87204c5ce6d251e5518c6940a660e3cddbe815379b367a5088d5a64534e992",
+    "wc/ds-button-group.ts": "950538ef9991360eb18dcef3c5e39e25ed6b0483898f7307504e80f2d31d52fd",
+    "wc/ds-button-group.css.ts": "1684dd5a785e4f94fa19c9011106b82555d919b1c022690e0b162fd9fa611aa8",
+    "wc/ds-button-group.demo.html": "c04f236410f6b68daa8af9fa2cf0cdb72f4e49904169274e420e84b09c6f8868",
+    "wc/ds-button-group.custom-elements.json": "25da013efc1b1c97983eaeabd83fb555bdd9e28103cdf2ac08d1ec890ebe0556"
+  },
+  "notesCount": 66
+}

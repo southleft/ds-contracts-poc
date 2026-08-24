@@ -1,0 +1,51 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.button",
+  "setName": "Button",
+  "renderer": "code: generated React (design-to-code pipeline bytes) → esbuild bundle → playwright-core screenshot at deviceScaleFactor 2; canvas: GET /v1/images/:key?scale=2 (Figma's own renderer, read-only)",
+  "cells": [
+    {
+      "slug": "variant-primary__state-default",
+      "figmaVariant": "Variant=Primary, State=Default",
+      "nodeId": "53:2776",
+      "props": {
+        "variant": "primary"
+      }
+    },
+    {
+      "slug": "variant-danger__state-default",
+      "figmaVariant": "Variant=Danger, State=Default",
+      "nodeId": "89:2273",
+      "props": {
+        "variant": "danger"
+      }
+    },
+    {
+      "slug": "variant-secondary__state-default",
+      "figmaVariant": "Variant=Secondary, State=Default",
+      "nodeId": "53:2781",
+      "props": {
+        "variant": "secondary"
+      }
+    },
+    {
+      "slug": "variant-outlined__state-default",
+      "figmaVariant": "Variant=Outlined, State=Default",
+      "nodeId": "53:2828",
+      "props": {
+        "variant": "outlined"
+      }
+    },
+    {
+      "slug": "variant-ghost__state-default",
+      "figmaVariant": "Variant=Ghost, State=Default",
+      "nodeId": "53:2854",
+      "props": {
+        "variant": "ghost"
+      }
+    }
+  ],
+  "notSampled": [
+    "State axis sampled at \"Default\" only — hover/active/focus-visible/disabled are CSS pseudo-class planes on the code side, not cells"
+  ]
+}

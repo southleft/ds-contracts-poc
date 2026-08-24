@@ -1,0 +1,8 @@
+{
+  "recognisable": true,
+  "walls": [
+    "KIT-LINE-HEIGHT-AUTHORING",
+    "GRID-CELL-NAMED"
+  ],
+  "notes": "Default and Center variants both carry (Center right-aligns via layoutByProp); the Center variant's manual grid anchor is a named non-carry (per-variant placement has no vocabulary)."
+}

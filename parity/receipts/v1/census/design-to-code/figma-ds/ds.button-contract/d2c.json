@@ -1,0 +1,250 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.button-contract",
+  "setName": "Button (contract)",
+  "nodeId": "1565:4005",
+  "mode": "reviewable-inversion",
+  "variantCount": 20,
+  "contractSha256": "9a43a7cce12c37aa1b0ecaab36e45044e29a3e2b26cc97767fac9f7685d2dbfa",
+  "carriage": {
+    "carried": 219,
+    "named": 541,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "BOOLEAN property": [
+      2,
+      0,
+      0
+    ],
+    "variant axis": [
+      3,
+      0,
+      0
+    ],
+    "declared axis default": [
+      2,
+      1,
+      0
+    ],
+    "boundVariables.itemSpacing": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.paddingLeft": [
+      0,
+      20,
+      0
+    ],
+    "boundVariables.paddingRight": [
+      0,
+      20,
+      0
+    ],
+    "boundVariables.minHeight": [
+      0,
+      20,
+      0
+    ],
+    "boundVariables.individualStrokeWeights": [
+      0,
+      80,
+      0
+    ],
+    "boundVariables.rectangleCornerRadii": [
+      0,
+      80,
+      0
+    ],
+    "boundVariables.fills": [
+      0,
+      30,
+      0
+    ],
+    "boundVariables.strokes": [
+      0,
+      50,
+      0
+    ],
+    "fills[0] SOLID": [
+      30,
+      0,
+      0
+    ],
+    "strokes[0] + strokeWeight": [
+      20,
+      0,
+      0
+    ],
+    "cornerRadius": [
+      20,
+      0,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      50,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      10,
+      10,
+      0
+    ],
+    "root layoutSizingVertical": [
+      20,
+      0,
+      0
+    ],
+    "minHeight": [
+      20,
+      0,
+      0
+    ],
+    "clipsContent": [
+      0,
+      30,
+      0
+    ],
+    "layoutSizingHorizontal=FIXED (child)": [
+      0,
+      60,
+      0
+    ],
+    "layoutSizingVertical=FIXED (child)": [
+      0,
+      60,
+      0
+    ],
+    "vector geometry": [
+      0,
+      30,
+      0
+    ],
+    "boundVariables.fontWeight": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.fontFamily": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.fontSize": [
+      0,
+      10,
+      0
+    ],
+    "text.characters": [
+      10,
+      0,
+      0
+    ],
+    "text font size/weight": [
+      10,
+      0,
+      0
+    ],
+    "text fontFamily": [
+      10,
+      0,
+      0
+    ],
+    "text lineHeight": [
+      0,
+      10,
+      0
+    ],
+    "styles.text (TextStyle identity)": [
+      10,
+      0,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "3892737ca2c40cfb7e2aaa08c2593554282f8f3c",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "1565:4005",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "BOOLEAN property",
+      "value": "default=true",
+      "disposition": "CARRIED",
+      "landing": "props.slotBefore (boolean, default true) → React prop + visibleWhen part visibility"
+    },
+    {
+      "fact": "BOOLEAN property",
+      "value": "default=true",
+      "disposition": "CARRIED",
+      "landing": "props.slotAfter (boolean, default true) → React prop + visibleWhen part visibility"
+    },
+    {
+      "fact": "variant axis",
+      "value": "primary|secondary|outlined|ghost|danger",
+      "disposition": "CARRIED",
+      "landing": "props.variant (enum[5]) → React prop `variant` + story argTypes + CSS .variant-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "primary",
+      "disposition": "CARRIED",
+      "landing": "props.variant.default = \"primary\" → React default arg + story args"
+    },
+    {
+      "fact": "variant axis",
+      "value": "default|sm",
+      "disposition": "CARRIED",
+      "landing": "props.size (enum[2]) → React prop `size` + story argTypes + CSS .size-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "default",
+      "disposition": "CARRIED",
+      "landing": "props.size.default = \"default\" → React default arg + story args"
+    },
+    {
+      "fact": "variant axis",
+      "value": "false|true",
+      "disposition": "CARRIED",
+      "landing": "props.iconOnly (boolean — the axis's options are literally true/false) → React prop + story args + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "false",
+      "disposition": "NAMED",
+      "landing": "MINTED {imported.button-contract.root.width.default.false} = fit-content — a SIZING MOD…"
+    }
+  ],
+  "generatedFiles": {
+    "react/ButtonContract/ButtonContract.module.css": "e645992bb4e6aad11e2dc557e61f49d9bbf2d75221c11d22aff383cc599e275e",
+    "react/ButtonContract/ButtonContract.stories.tsx": "6662845bfb03a4ccd3eb862aa070d75f6f910fd29ad5a53f9aec511a4fce09a2",
+    "react/ButtonContract/ButtonContract.tsx": "cd9509d2fa2a4d1211e46ddcaf62be8a66525912c351e2de311979b31c7617f3",
+    "react/ButtonContract/index.ts": "325759cf96ce5e3b27a155e03e3725749102e5b3034830a9b17e1b9c2d4bb1ee",
+    "wc/ds-button-contract.ts": "dc3a4bb75c3f33ddb20cc8c231c9e88b323a124a3486a0aaa02bade3132c1c0b",
+    "wc/ds-button-contract.css.ts": "01a110143d8ddb21c97690dcf754a253f9ba262b66b561d86cd76ec44121bd5b",
+    "wc/ds-button-contract.demo.html": "0e1c1ac51b8d8f565c28698f565dfc84b08a5ed1e655f4a689e2a36c19968be3",
+    "wc/ds-button-contract.custom-elements.json": "3a0848f1c041b2606af468662b5455055879c2cc9e1012ebdf46590cf39c185c"
+  },
+  "notesCount": 375
+}

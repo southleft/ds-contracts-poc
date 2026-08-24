@@ -398,10 +398,10 @@ filter that decides carriage scores 100% on a channel it never opened.
 
 | manifest | cases | breakdown | source |
 |---|---|---|---|
-| canvas constructs | 154 | CARRIED 107 · LEDGERED 38 · REFUSED 9 | `extract/figma/conformance/MANIFEST.json` |
+| canvas constructs | 157 | CARRIED 110 · LEDGERED 38 · REFUSED 9 | `extract/figma/conformance/MANIFEST.json` |
 | CSS / DOM frontier | 91 | CARRIED 50 · REFUSED 19 · UNSUPPORTED 18 · LOWERED 4 | `conformance/MANIFEST.json` |
 
-Of the 154 canvas constructs, **154** are `green`.
+Of the 157 canvas constructs, **157** are `green`.
 A construct that is neither carried nor named-refused is a hard failure of that
 suite — "it silently did nothing" is not an allowed outcome.
 
@@ -552,12 +552,12 @@ npm run capability:fresh
 |---|---|---|---|
 | `conformance/MANIFEST.json` | `7121abd2ed06` | 87,156 | CSS/DOM frontier vocabulary |
 | `docs/22-generality.md` | `c8f3b60ba75d` | 73,271 | coverage denominators (docs/22 §8.3 table) |
-| `evals/golden.json` | `458632a3775e` | 32,256 | generated-source golden manifest |
+| `evals/golden.json` | `4ccc3a566f60` | 32,256 | generated-source golden manifest |
 | `evals/results.json` | `5081770dbb7e` | 6,982 | executable claim suite (registry ids + size; the pass column is the suite's own output) |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
 | `extract/computed/out/**/numbers.json` | `40515b87af13` | 1,225,534 | capture counts + determinism receipts — 205 files |
 | `extract/computed/out/**/scorecard.json` | `34cd563c9729` | 19,798,337 | computed-equality per component — 205 files |
-| `extract/figma/conformance/MANIFEST.json` | `b17a451f6eb3` | 117,548 | canvas construct vocabulary |
+| `extract/figma/conformance/MANIFEST.json` | `8e9caedb5f10` | 113,594 | canvas construct vocabulary |
 | `extract/figma/dagger-census.json` | `95dc26ea1aae` | 6,733 | dropped-fact receipt census |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | canvas→code→canvas round trip |
 

@@ -1540,6 +1540,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -1666,6 +1667,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -1832,6 +1834,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -3301,6 +3304,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -3427,6 +3431,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -3593,6 +3598,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -5880,6 +5886,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -6006,6 +6013,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -6172,6 +6180,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -11774,6 +11783,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -11900,6 +11910,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -12066,6 +12077,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -13599,6 +13611,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -13725,6 +13738,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -13891,6 +13905,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -16358,6 +16373,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -16508,6 +16524,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -16674,6 +16691,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -18567,6 +18585,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -18717,6 +18736,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -18883,6 +18903,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -20592,6 +20613,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -20718,6 +20740,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -20884,6 +20907,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -23462,6 +23486,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -23612,6 +23637,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -23778,6 +23804,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -25815,6 +25842,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -25941,6 +25969,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -26107,6 +26136,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -27737,6 +27767,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -27890,6 +27921,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -28056,6 +28088,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');

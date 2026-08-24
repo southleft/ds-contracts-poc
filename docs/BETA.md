@@ -167,8 +167,10 @@ corpus bundles and compiles in the plugin as one plan
 the Playground walkthrough receipt added 2026-08-23
 (`playground:flow-check` — every number the two guided tours print is
 re-derived headless from the same engine calls over the same committed
-inputs, and the tour's named ToggleSwitch refusal is pinned so the copy must
-change when core carries `semantics.roleException`).
+inputs, and the tour's ToggleSwitch acceptance is pinned — since dump v1.32 the
+`ds_contracts/semantics` stamp carries `semantics.roleException`, so the
+referee accepts the stamped proposal, and the pin fails loudly if that
+channel is ever dropped).
 
 `maintain:visual` is the catalog visual-parity gate on Button / Badge /
 Checkbox / Switch / Heading: every row's masked pixel score within ±0.1pp

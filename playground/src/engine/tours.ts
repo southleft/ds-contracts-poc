@@ -189,7 +189,7 @@ export const FIGMA_TO_CODE: Tour<FigmaToCodeStep> = {
       title: 'A set this pipeline drew — exact projection',
       hop: 'hop 4',
       lead:
-        'extract/figma/fixtures/flowbite-eight.dump.json carries propertyDefinitions and the ds_contracts/{contractId, specHash, version, semantics} stamps. Exact projection proves the proposed contract emits the identical variant tuple set; reviewable-inversion is the legacy name-based path. Pick either; the proposal loads in the editor with the bundle’s token set active — and the editor referee says what it thinks of it, which is part of the walkthrough.',
+        'extract/figma/fixtures/flowbite-eight.dump.json carries propertyDefinitions and the ds_contracts/{contractId, specHash, version, semantics} stamps — the current dump grammar’s semantics stamp carries element, role and roleException. Exact projection proves the proposed contract emits the identical variant tuple set; reviewable-inversion is the legacy name-based path. Pick either; the proposal loads in the editor with the bundle’s token set active — and the editor referee accepts it: the role="switch"-on-<button> exception rides the stamp, re-proposed with a review note because the authored exception sentence itself is not canvas-recoverable.',
     },
     {
       id: 'break',

@@ -576,6 +576,13 @@ jobs:
       - name: census self-test (the gate goes red on a deleted render, a contract outside the manifest, and a pending canvas half)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run census:check -- --self-test
+      # The reverse direction on the two designer kits: committed REST
+      # fixtures → propose → generate React+WC, twice, in memory. Holds
+      # SILENT = 0 (every canvas fact carried or named), byte-idempotence,
+      # the committed rows/hashes, the render pairs and the verdicts.
+      - name: census:check --phase design-to-code (canvas → contract → code; 0 silent, byte-deterministic)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run census:check -- --phase design-to-code
 
       # Not one of the 33 named gates, but CONTRIBUTING.md § "The gates" tells
       # contributors to run it and it costs under a second with no extra build.

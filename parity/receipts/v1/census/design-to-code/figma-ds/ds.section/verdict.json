@@ -1,0 +1,8 @@
+{
+  "recognisable": true,
+  "walls": [
+    "KIT-LINE-HEIGHT-AUTHORING",
+    "FC-FONT-SUBSTRATE"
+  ],
+  "notes": "The section composition (kicker, heading, dek, buttons) lands with the right structure; text overlap is the kit's own line-height on both sides."
+}

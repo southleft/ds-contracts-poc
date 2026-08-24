@@ -1,0 +1,219 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.button-icon",
+  "setName": "Button (Icon)",
+  "nodeId": "53:2906",
+  "mode": "reviewable-inversion",
+  "variantCount": 5,
+  "contractSha256": "4ef41dddd556e8126ad8f1c112b354e74e3129fa789ba33da5b61b08eb5e11dd",
+  "carriage": {
+    "carried": 31,
+    "named": 79,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "INSTANCE_SWAP property": [
+      1,
+      0,
+      0
+    ],
+    "swap/slot accepts": [
+      0,
+      1,
+      0
+    ],
+    "interaction-state axis": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.itemSpacing": [
+      0,
+      5,
+      0
+    ],
+    "boundVariables.paddingLeft": [
+      0,
+      5,
+      0
+    ],
+    "boundVariables.paddingTop": [
+      0,
+      5,
+      0
+    ],
+    "boundVariables.paddingRight": [
+      0,
+      5,
+      0
+    ],
+    "boundVariables.paddingBottom": [
+      0,
+      5,
+      0
+    ],
+    "boundVariables.rectangleCornerRadii": [
+      0,
+      24,
+      0
+    ],
+    "cornerRadius": [
+      5,
+      1,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      5,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      5,
+      0,
+      0
+    ],
+    "root layoutSizingVertical": [
+      5,
+      0,
+      0
+    ],
+    "boundVariables.size": [
+      0,
+      5,
+      0
+    ],
+    "instance main component": [
+      5,
+      0,
+      0
+    ],
+    "targetAspectRatio": [
+      0,
+      5,
+      0
+    ],
+    "boundVariables.fills": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.effects": [
+      0,
+      5,
+      0
+    ],
+    "fills[0] SOLID": [
+      1,
+      0,
+      0
+    ],
+    "effects": [
+      1,
+      0,
+      0
+    ],
+    "styles.effect (effect STYLE identity)": [
+      0,
+      1,
+      0
+    ],
+    "overrides[] (host overrides inside the instance)": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.individualStrokeWeights": [
+      0,
+      4,
+      0
+    ],
+    "boundVariables.strokes": [
+      0,
+      1,
+      0
+    ],
+    "strokes[0] + strokeWeight": [
+      0,
+      1,
+      0
+    ],
+    "layoutPositioning=ABSOLUTE": [
+      0,
+      1,
+      0
+    ],
+    "RECTANGLE decor": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.opacity": [
+      0,
+      1,
+      0
+    ],
+    "opacity": [
+      1,
+      0,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "ba1299a5344df9780f7735272ecd3cadef48c2a4",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "53:2906",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "INSTANCE_SWAP property",
+      "value": "default=53:3841",
+      "disposition": "CARRIED",
+      "landing": "anatomy slot part (property \"Icon\") → React slot prop / children"
+    },
+    {
+      "fact": "swap/slot accepts",
+      "value": "f062d698",
+      "disposition": "NAMED",
+      "landing": "Button (Icon):root/Icon: slot \"Icon\" preferredValues name 1 component key(s) with no in…"
+    },
+    {
+      "fact": "interaction-state axis",
+      "value": "Default|Hover|Active|Focus|Disabled",
+      "disposition": "NAMED",
+      "landing": "variant axis \"State\" (Default|Hover|Focus|Active|Disabled) IS the platform's interactio…"
+    }
+  ],
+  "generatedFiles": {
+    "react/ButtonIcon/ButtonIcon.module.css": "9e1e72f6d6b0aad6436948a8bc6b4429963db5b04a809d51ad5f82429f76c957",
+    "react/ButtonIcon/ButtonIcon.stories.tsx": "79dd2cccfbf629d27f1c9b21202d5459a4d3f9fc36ebaf2e8409a7778cedc66a",
+    "react/ButtonIcon/ButtonIcon.tsx": "d2e449eeff05013d5bd36636f1ca380cbbe2574b649a1c63f8ab986a8b150152",
+    "react/ButtonIcon/index.ts": "2d9a9ab14e16752ba765078087392f153f9d4cde5553469aa0c882f2c36b4619",
+    "wc/ds-button-icon.ts": "22e6b99caabc9523b9afff95d253ab6c6eda345a051de3c6b89e5de385c332ad",
+    "wc/ds-button-icon.css.ts": "851f80471444a7954a81141d8805d7f4f15999c3f8ec135629fef51d2a33652c",
+    "wc/ds-button-icon.demo.html": "71ca11e0a588a953352d30d35d12b54255b3dbffc208ddc7a745b3ac0df64262",
+    "wc/ds-button-icon.custom-elements.json": "607b3ff5fddf9931c0ab803bedbfacd66f13133e8dfee5883cd28d6d55e4847b",
+    "wc/ds-button-icon-default-sm.ts": "f701ebbd91c9ed405cb3461d2211a34b35e0160013a6d0e876b0761461db6edd",
+    "wc/ds-button-icon-default-sm.css.ts": "df4e02e61aa5c14ce51d8e219092ec5ca269a51fcae3db5f64b605b5a0688cd7",
+    "wc/ds-button-icon-default-sm.demo.html": "5aca1316a94aef4e11f440bf7bc1757838211551586db9d256897f34a0b59ffd",
+    "wc/ds-button-icon-default-sm.custom-elements.json": "46b1cc47f0b4ec7b98fdaadba767fa0ed2eeab3e48f5fb1b744379ee65d01201"
+  },
+  "notesCount": 91
+}

@@ -1,0 +1,27 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.chip",
+  "setName": "Chip",
+  "renderer": "code: generated React (design-to-code pipeline bytes) → esbuild bundle → playwright-core screenshot at deviceScaleFactor 2; canvas: GET /v1/images/:key?scale=2 (Figma's own renderer, read-only)",
+  "cells": [
+    {
+      "slug": "state-default__dismissible-true",
+      "figmaVariant": "State=Default, Dismissible=True",
+      "nodeId": "53:4191",
+      "props": {
+        "dismissible": true
+      }
+    },
+    {
+      "slug": "state-default__dismissible-false",
+      "figmaVariant": "State=Default, Dismissible=False",
+      "nodeId": "53:4187",
+      "props": {
+        "dismissible": false
+      }
+    }
+  ],
+  "notSampled": [
+    "State axis sampled at \"Default\" only — hover/active/focus-visible/disabled are CSS pseudo-class planes on the code side, not cells"
+  ]
+}

@@ -4868,5 +4868,255 @@
       "what": "contracts/stack.contract.json",
       "reason": "bindings.figma.representation is \"native\" — scripts/generate-figma.ts emits no set for it (maps to a native canvas capability)"
     }
-  ]
+  ],
+  "designToCode": {
+    "kits": [
+      {
+        "kit": "flowbite",
+        "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+        "fixture": "extract/figma/fixtures/census-d2c/flowbite.rest-nodes.json",
+        "mode": "exact",
+        "sets": 8
+      },
+      {
+        "kit": "figma-ds",
+        "fileKey": "aekVseUceg35tVn62knRrj",
+        "fixture": "extract/figma/fixtures/census-d2c/figma-ds.rest-nodes.json",
+        "mode": "reviewable-inversion",
+        "sets": 15
+      }
+    ],
+    "rows": [
+      {
+        "kit": "figma-ds",
+        "id": "ds.badge",
+        "setName": "Badge",
+        "nodeId": "91:4928",
+        "source": "canvas",
+        "mode": "reviewable-inversion",
+        "variantCount": 10,
+        "variantAxes": 2
+      },
+      {
+        "kit": "figma-ds",
+        "id": "ds.button",
+        "setName": "Button",
+        "nodeId": "53:2775",
+        "source": "canvas",
+        "mode": "reviewable-inversion",
+        "variantCount": 25,
+        "variantAxes": 2
+      },
+      {
+        "kit": "figma-ds",
+        "id": "ds.button-icon",
+        "setName": "Button (Icon)",
+        "nodeId": "53:2906",
+        "source": "canvas",
+        "mode": "reviewable-inversion",
+        "variantCount": 5,
+        "variantAxes": 1
+      },
+      {
+        "kit": "figma-ds",
+        "id": "ds.button-contract",
+        "setName": "Button (contract)",
+        "nodeId": "1565:4005",
+        "source": "canvas",
+        "mode": "reviewable-inversion",
+        "variantCount": 20,
+        "variantAxes": 3
+      },
+      {
+        "kit": "figma-ds",
+        "id": "ds.button-group",
+        "setName": "Button Group",
+        "nodeId": "53:2558",
+        "source": "canvas",
+        "mode": "reviewable-inversion",
+        "variantCount": 2,
+        "variantAxes": 1
+      },
+      {
+        "kit": "figma-ds",
+        "id": "ds.card",
+        "setName": "Card",
+        "nodeId": "53:1777",
+        "source": "canvas",
+        "mode": "reviewable-inversion",
+        "variantCount": 2,
+        "variantAxes": 1
+      },
+      {
+        "kit": "figma-ds",
+        "id": "ds.chip",
+        "setName": "Chip",
+        "nodeId": "53:4186",
+        "source": "canvas",
+        "mode": "reviewable-inversion",
+        "variantCount": 10,
+        "variantAxes": 2
+      },
+      {
+        "kit": "figma-ds",
+        "id": "ds.dek",
+        "setName": "Dek",
+        "nodeId": "53:4327",
+        "source": "canvas",
+        "mode": "reviewable-inversion",
+        "variantCount": 2,
+        "variantAxes": 1
+      },
+      {
+        "kit": "figma-ds",
+        "id": "ds.heading",
+        "setName": "Heading",
+        "nodeId": "53:4403",
+        "source": "canvas",
+        "mode": "reviewable-inversion",
+        "variantCount": 42,
+        "variantAxes": 2
+      },
+      {
+        "kit": "figma-ds",
+        "id": "ds.image",
+        "setName": "Image",
+        "nodeId": "53:4618",
+        "source": "canvas",
+        "mode": "reviewable-inversion",
+        "variantCount": 1,
+        "variantAxes": 2
+      },
+      {
+        "kit": "figma-ds",
+        "id": "ds.kicker",
+        "setName": "Kicker",
+        "nodeId": "53:4497",
+        "source": "canvas",
+        "mode": "reviewable-inversion",
+        "variantCount": 2,
+        "variantAxes": 1
+      },
+      {
+        "kit": "figma-ds",
+        "id": "ds.section",
+        "setName": "Section",
+        "nodeId": "53:1161",
+        "source": "canvas",
+        "mode": "reviewable-inversion",
+        "variantCount": 1,
+        "variantAxes": 1
+      },
+      {
+        "kit": "figma-ds",
+        "id": "ds.section-footer",
+        "setName": "Section Footer",
+        "nodeId": "53:4976",
+        "source": "canvas",
+        "mode": "reviewable-inversion",
+        "variantCount": 1,
+        "variantAxes": 1
+      },
+      {
+        "kit": "figma-ds",
+        "id": "ds.section-header",
+        "setName": "Section Header",
+        "nodeId": "53:4723",
+        "source": "canvas",
+        "mode": "reviewable-inversion",
+        "variantCount": 2,
+        "variantAxes": 1
+      },
+      {
+        "kit": "figma-ds",
+        "id": "ds.toast",
+        "setName": "Toast",
+        "nodeId": "86:2195",
+        "source": "canvas",
+        "mode": "reviewable-inversion",
+        "variantCount": 5,
+        "variantAxes": 1
+      },
+      {
+        "kit": "flowbite",
+        "id": "flowbite.alert",
+        "setName": "Alert (flowbite.alert)",
+        "nodeId": "120:1979",
+        "source": "canvas",
+        "mode": "exact",
+        "variantCount": 4,
+        "variantAxes": 1
+      },
+      {
+        "kit": "flowbite",
+        "id": "flowbite.badge",
+        "setName": "Badge (flowbite.badge)",
+        "nodeId": "120:2098",
+        "source": "canvas",
+        "mode": "exact",
+        "variantCount": 24,
+        "variantAxes": 3
+      },
+      {
+        "kit": "flowbite",
+        "id": "flowbite.button",
+        "setName": "Button (flowbite.button)",
+        "nodeId": "120:2203",
+        "source": "canvas",
+        "mode": "exact",
+        "variantCount": 45,
+        "variantAxes": 3
+      },
+      {
+        "kit": "flowbite",
+        "id": "flowbite.card",
+        "setName": "Card (flowbite.card)",
+        "nodeId": "120:1999",
+        "source": "canvas",
+        "mode": "exact",
+        "variantCount": 1,
+        "variantAxes": 0
+      },
+      {
+        "kit": "flowbite",
+        "id": "flowbite.helpertext",
+        "setName": "HelperText",
+        "nodeId": "120:2014",
+        "source": "canvas",
+        "mode": "exact",
+        "variantCount": 5,
+        "variantAxes": 1
+      },
+      {
+        "kit": "flowbite",
+        "id": "flowbite.kbd",
+        "setName": "Kbd",
+        "nodeId": "120:1982",
+        "source": "canvas",
+        "mode": "exact",
+        "variantCount": 1,
+        "variantAxes": 0
+      },
+      {
+        "kit": "flowbite",
+        "id": "flowbite.label",
+        "setName": "Label",
+        "nodeId": "120:1996",
+        "source": "canvas",
+        "mode": "exact",
+        "variantCount": 5,
+        "variantAxes": 1
+      },
+      {
+        "kit": "flowbite",
+        "id": "flowbite.toggleswitch",
+        "setName": "ToggleSwitch",
+        "nodeId": "120:2047",
+        "source": "canvas",
+        "mode": "exact",
+        "variantCount": 6,
+        "variantAxes": 2
+      }
+    ]
+  }
 }

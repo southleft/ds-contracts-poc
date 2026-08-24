@@ -2,7 +2,7 @@
  * Walkthrough receipt — `npx tsx playground/scripts/flow-check.ts`.
  *
  * The Playground's two guided tours (playground/src/engine/tours.ts, driven
- * by pages/Playground.tsx) print numbers: Badge 11/4/0, ToggleSwitch 12
+ * by pages/Playground.tsx) print numbers: Badge 11/4/0, ToggleSwitch 14
  * code-only facts, Button 0, top-nav-item's unbound TEXT property, a dump
  * grammar, fixture labels, refusal sentences quoted from source. Every one
  * of those is produced by an engine call over a committed input; this
@@ -27,7 +27,7 @@
  *      [{ property: "Href", default: "#" }] — the value-only carriage the
  *      worked example E3 describes.
  *   5. The Flowbite ToggleSwitch (from examples/tailwind/figma/
- *      tailwind.bundle.json) compiles to 12 code-only facts that agree
+ *      tailwind.bundle.json) compiles to 14 code-only facts that agree
  *      key-for-key with the bundle's committed row; the figma-script carries
  *      the MIN/left and MAX/right thumb placements.
  *   6. flowbite-eight.dump.json's ToggleSwitch proposes in exact mode with
@@ -35,7 +35,7 @@
  *      exact refuses by an EXACT_* code from accuracy/grammar.json.
  *   7. The printed producer grammar is REST_DUMP_VERSION (never a literal in
  *      the tour modules), and each fixture's label is its own
- *      _provenance.dumpVersion (main-file-dumps: absent; flowbite-eight: 1.30
+ *      _provenance.dumpVersion (main-file-dumps: absent; flowbite-eight: 1.32
  *      as committed — read from the file, not asserted here).
  *   8. Every QUOTED_REFUSALS fragment exists verbatim in its source file.
  *   9. The Badge proposal emits React whose CSS carries
@@ -173,7 +173,13 @@ check(
   JSON.stringify(topNavReceipt.textProps) === JSON.stringify([{ property: 'Href', default: '#' }]),
   JSON.stringify(topNavReceipt.textProps),
 );
-check('TopNavItem code-only facts = 1 (schema v18 names the undrawn facts — docs/23 D.34)', topNavReceipt.codeOnlyFacts.length === 1, String(topNavReceipt.codeOnlyFacts.length));
+check(
+  'TopNavItem code-only facts = 1 (the undrawn hover plane is NAMED — FC-STATE-PLANE-UNDRAWN; the attrs binding is not a canvas fact — docs/29 E3)',
+  topNavReceipt.codeOnlyFacts.length === 1 &&
+    topNavReceipt.codeOnlyFacts[0]?.channel === 'background-color [hover]' &&
+    /FC-STATE-PLANE-UNDRAWN/.test(topNavReceipt.codeOnlyFacts[0]?.reason ?? ''),
+  JSON.stringify(topNavReceipt.codeOnlyFacts),
+);
 
 // ---------------------------------------------- 5. ToggleSwitch, hop 2
 console.log('Code → Figma — ToggleSwitch (tailwind.bundle.json)');
@@ -220,8 +226,9 @@ const toggleRow = bundle.codeOnlyFacts.find((r) => r.contractId === 'flowbite.to
 const agreement = factsAgreeWithBundle(toggleReceipt.codeOnlyFacts, toggleRow);
 check('ToggleSwitch live facts agree with the committed bundle row', agreement.agree, agreement.detail);
 check(
-  'ToggleSwitch facts: 4 channel on part-0, 7 declared, 1 event toggle/onToggle',
+  'ToggleSwitch facts: 4 channel on part-0 + 2 [focus-visible] outline on root, 7 declared, 1 event toggle/onToggle',
   toggleReceipt.codeOnlyFacts.filter((f) => f.kind === 'channel' && f.part === 'part-0').length === 4 &&
+    toggleReceipt.codeOnlyFacts.filter((f) => f.kind === 'channel' && f.part === 'root' && /\[focus-visible\]/.test(f.channel)).length === 2 &&
     toggleReceipt.codeOnlyFacts.filter((f) => f.kind === 'declared').length === 7 &&
     toggleReceipt.codeOnlyFacts.some((f) => f.kind === 'event' && f.channel === 'toggle' && f.value === 'onToggle'),
 );
@@ -258,12 +265,13 @@ check(
   ((toggleResult.proposal?.contract as { events?: unknown[] }).events?.length ?? 0) === 0 && toggleRow?.facts.some((f) => f.kind === 'event') === true,
 );
 {
-  // The tour's "Stamped set" step shows the editor referee refusing the
-  // ToggleSwitch proposal: the ds_contracts/semantics stamp carries
-  // element/role only, so semantics.roleException is not re-proposed and
-  // the role="switch"-on-<button> rule fires. Pinned so the tour copy and
-  // the engine move together — when propose carries roleException, this
-  // check fails and the copy gets rewritten.
+  // The tour's "Stamped set" step shows the editor referee ACCEPTING the
+  // ToggleSwitch proposal: since dump v1.32 the ds_contracts/semantics stamp
+  // carries element/role/roleException, so the role="switch"-on-<button>
+  // exception is re-proposed with a review note (the authored exception
+  // sentence itself is not canvas-recoverable). Pinned so the tour copy and
+  // the engine move together — if propose ever stops carrying roleException,
+  // these checks fail and the copy gets rewritten.
   const proposed = ContractSchema.safeParse(toggleResult.proposal?.contract);
   check('ToggleSwitch proposal parses against the schema', proposed.success, proposed.success ? '' : proposed.error.message.slice(0, 200));
   if (proposed.success) {
@@ -273,12 +281,17 @@ check(
     validateContract(proposed.data, scope, errors, bundleIcons);
     generateCss(proposed.data, tokenInventoryFromJson([bundle.tokenSet.base, bundle.tokenSet.minted ?? {}]), errors);
     check(
-      'ToggleSwitch proposal is refused by the referee on semantics.role (roleException not stamped — the tour names it)',
-      errors.length === 1 && /semantics\.role claims role "switch"/.test(errors[0]),
-      errors.join(' | ').slice(0, 300) || 'no refusal',
+      'ToggleSwitch proposal is accepted by the referee (roleException rides the v1.32 semantics stamp — the tour names it)',
+      errors.length === 0,
+      errors.join(' | ').slice(0, 300),
     );
     check('shipping toggleswitch.contract.json declares semantics.roleException', typeof (toggle.semantics as { roleException?: unknown }).roleException === 'string');
-    check('proposed ToggleSwitch carries no semantics.roleException', (proposed.data.semantics as { roleException?: unknown }).roleException === undefined);
+    check(
+      'proposed ToggleSwitch carries a stamped semantics.roleException naming the review obligation',
+      typeof (proposed.data.semantics as { roleException?: unknown }).roleException === 'string' &&
+        /re-declare it in review/.test(String((proposed.data.semantics as { roleException?: unknown }).roleException)),
+      String((proposed.data.semantics as { roleException?: unknown }).roleException),
+    );
   }
 }
 const brokenFe = withoutPropertyDefinitions(fe, 'ToggleSwitch');

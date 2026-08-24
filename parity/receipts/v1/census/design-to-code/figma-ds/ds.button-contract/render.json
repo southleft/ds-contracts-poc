@@ -1,0 +1,79 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.button-contract",
+  "setName": "Button (contract)",
+  "renderer": "code: generated React (design-to-code pipeline bytes) → esbuild bundle → playwright-core screenshot at deviceScaleFactor 2; canvas: GET /v1/images/:key?scale=2 (Figma's own renderer, read-only)",
+  "cells": [
+    {
+      "slug": "variant-primary__size-default__icon-only-false",
+      "figmaVariant": "Variant=primary, Size=default, Icon only=false",
+      "nodeId": "1564:3915",
+      "props": {
+        "variant": "primary",
+        "size": "default",
+        "iconOnly": false
+      }
+    },
+    {
+      "slug": "variant-secondary__size-default__icon-only-false",
+      "figmaVariant": "Variant=secondary, Size=default, Icon only=false",
+      "nodeId": "1564:3924",
+      "props": {
+        "variant": "secondary",
+        "size": "default",
+        "iconOnly": false
+      }
+    },
+    {
+      "slug": "variant-outlined__size-default__icon-only-false",
+      "figmaVariant": "Variant=outlined, Size=default, Icon only=false",
+      "nodeId": "1564:3933",
+      "props": {
+        "variant": "outlined",
+        "size": "default",
+        "iconOnly": false
+      }
+    },
+    {
+      "slug": "variant-ghost__size-default__icon-only-false",
+      "figmaVariant": "Variant=ghost, Size=default, Icon only=false",
+      "nodeId": "1564:3942",
+      "props": {
+        "variant": "ghost",
+        "size": "default",
+        "iconOnly": false
+      }
+    },
+    {
+      "slug": "variant-danger__size-default__icon-only-false",
+      "figmaVariant": "Variant=danger, Size=default, Icon only=false",
+      "nodeId": "1564:3951",
+      "props": {
+        "variant": "danger",
+        "size": "default",
+        "iconOnly": false
+      }
+    },
+    {
+      "slug": "variant-primary__size-sm__icon-only-false",
+      "figmaVariant": "Variant=primary, Size=sm, Icon only=false",
+      "nodeId": "1565:3960",
+      "props": {
+        "variant": "primary",
+        "size": "sm",
+        "iconOnly": false
+      }
+    },
+    {
+      "slug": "variant-primary__size-default__icon-only-true",
+      "figmaVariant": "Variant=primary, Size=default, Icon only=true",
+      "nodeId": "1564:3921",
+      "props": {
+        "variant": "primary",
+        "size": "default",
+        "iconOnly": true
+      }
+    }
+  ],
+  "notSampled": []
+}
