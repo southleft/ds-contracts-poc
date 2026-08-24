@@ -1,0 +1,215 @@
+{
+  "id": "mui.alert",
+  "name": "Alert",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/alert.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 12,
+      "sampled": 6,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "severity",
+        "type": "enum",
+        "default": "info"
+      },
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "standard"
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "This is an alert — check it out!"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "alert-icon",
+      "alert-icon-error",
+      "alert-icon-warning",
+      "alert-icon-info",
+      "alert-icon-success",
+      "label"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.alert.alert-icon.font-size",
+      "imported.alert.alert-icon.font-weight.filled",
+      "imported.alert.alert-icon.font-weight.outlined",
+      "imported.alert.alert-icon.font-weight.standard",
+      "imported.alert.alert-icon.line-height",
+      "imported.alert.alert-icon.margin-right",
+      "imported.alert.alert-icon.opacity",
+      "imported.alert.alert-icon.padding-bottom",
+      "imported.alert.alert-icon.padding-top",
+      "imported.alert.label.font-size",
+      "imported.alert.label.font-weight.filled",
+      "imported.alert.label.font-weight.outlined",
+      "imported.alert.label.font-weight.standard",
+      "imported.alert.label.line-height",
+      "imported.alert.label.padding-bottom",
+      "imported.alert.label.padding-top",
+      "imported.alert.root.border-bottom-width.filled",
+      "imported.alert.root.border-bottom-width.outlined",
+      "imported.alert.root.border-bottom-width.standard",
+      "imported.alert.root.border-left-width.filled",
+      "imported.alert.root.border-left-width.outlined",
+      "imported.alert.root.border-left-width.standard",
+      "imported.alert.root.border-right-width.filled",
+      "imported.alert.root.border-right-width.outlined",
+      "imported.alert.root.border-right-width.standard",
+      "imported.alert.root.border-top-width.filled",
+      "imported.alert.root.border-top-width.outlined",
+      "imported.alert.root.border-top-width.standard",
+      "imported.alert.root.font-size",
+      "imported.alert.root.font-weight.filled",
+      "imported.alert.root.font-weight.outlined",
+      "imported.alert.root.font-weight.standard",
+      "imported.alert.root.line-height",
+      "imported.alert.root.padding-bottom",
+      "imported.alert.root.padding-left",
+      "imported.alert.root.padding-right",
+      "imported.alert.root.padding-top",
+      "imported.shared.size-0",
+      "imported.shared.size-0-14994",
+      "imported.shared.size-4"
+    ],
+    "icons": [
+      "alert-alert-icon-error",
+      "alert-alert-icon-info",
+      "alert-alert-icon-success",
+      "alert-alert-icon-warning"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "severity-info__variant-standard",
+      "variant": "Severity=Info, Variant=Standard",
+      "kind": "base",
+      "subst": {
+        "severity": "info",
+        "variant": "standard"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-severity-info__variant-standard.png",
+      "contentBox": {
+        "width": 247.86,
+        "height": 48.02
+      }
+    },
+    {
+      "slug": "severity-info__variant-filled",
+      "variant": "Severity=Info, Variant=Filled",
+      "kind": "base",
+      "subst": {
+        "severity": "info",
+        "variant": "filled"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-severity-info__variant-filled.png",
+      "contentBox": {
+        "width": 247.86,
+        "height": 48.02
+      }
+    },
+    {
+      "slug": "severity-info__variant-outlined",
+      "variant": "Severity=Info, Variant=Outlined",
+      "kind": "base",
+      "subst": {
+        "severity": "info",
+        "variant": "outlined"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-severity-info__variant-outlined.png",
+      "contentBox": {
+        "width": 247.86,
+        "height": 48.02
+      }
+    },
+    {
+      "slug": "severity-error__variant-standard",
+      "variant": "Severity=Error, Variant=Standard",
+      "kind": "base",
+      "subst": {
+        "severity": "error",
+        "variant": "standard"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-severity-error__variant-standard.png",
+      "contentBox": {
+        "width": 247.86,
+        "height": 48.02
+      }
+    },
+    {
+      "slug": "severity-warning__variant-standard",
+      "variant": "Severity=Warning, Variant=Standard",
+      "kind": "base",
+      "subst": {
+        "severity": "warning",
+        "variant": "standard"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-severity-warning__variant-standard.png",
+      "contentBox": {
+        "width": 247.86,
+        "height": 48.02
+      }
+    },
+    {
+      "slug": "severity-success__variant-standard",
+      "variant": "Severity=Success, Variant=Standard",
+      "kind": "base",
+      "subst": {
+        "severity": "success",
+        "variant": "standard"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-severity-success__variant-standard.png",
+      "contentBox": {
+        "width": 247.86,
+        "height": 48.02
+      }
+    }
+  ],
+  "rendered": 6,
+  "refused": 0,
+  "unavailable": null
+}

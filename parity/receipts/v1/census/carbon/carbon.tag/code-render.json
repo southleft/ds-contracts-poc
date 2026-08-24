@@ -1,0 +1,399 @@
+{
+  "id": "carbon.tag",
+  "name": "Tag",
+  "library": "carbon",
+  "contractPath": "examples/carbon/contracts/tag.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/carbon/figma/carbon.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 36,
+      "sampled": 14,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "type",
+        "type": "enum",
+        "default": null
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": null
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Tag"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "label"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.shared.size-16",
+      "imported.tag.label.color.blue",
+      "imported.tag.label.color.cool-gray",
+      "imported.tag.label.color.cyan",
+      "imported.tag.label.color.gray",
+      "imported.tag.label.color.green",
+      "imported.tag.label.color.high-contrast",
+      "imported.tag.label.color.magenta",
+      "imported.tag.label.color.outline",
+      "imported.tag.label.color.purple",
+      "imported.tag.label.color.red",
+      "imported.tag.label.color.teal",
+      "imported.tag.label.color.unset",
+      "imported.tag.label.color.warm-gray",
+      "imported.tag.label.font-size",
+      "imported.tag.label.font-weight",
+      "imported.tag.label.letter-spacing",
+      "imported.tag.root.background-color.blue",
+      "imported.tag.root.background-color.cool-gray",
+      "imported.tag.root.background-color.cyan",
+      "imported.tag.root.background-color.gray",
+      "imported.tag.root.background-color.green",
+      "imported.tag.root.background-color.high-contrast",
+      "imported.tag.root.background-color.magenta",
+      "imported.tag.root.background-color.outline",
+      "imported.tag.root.background-color.purple",
+      "imported.tag.root.background-color.red",
+      "imported.tag.root.background-color.teal",
+      "imported.tag.root.background-color.unset",
+      "imported.tag.root.background-color.warm-gray",
+      "imported.tag.root.color.blue",
+      "imported.tag.root.color.cool-gray",
+      "imported.tag.root.color.cyan",
+      "imported.tag.root.color.gray",
+      "imported.tag.root.color.green",
+      "imported.tag.root.color.high-contrast",
+      "imported.tag.root.color.magenta",
+      "imported.tag.root.color.outline",
+      "imported.tag.root.color.purple",
+      "imported.tag.root.color.red",
+      "imported.tag.root.color.teal",
+      "imported.tag.root.color.unset",
+      "imported.tag.root.color.warm-gray",
+      "imported.tag.root.font-size",
+      "imported.tag.root.letter-spacing",
+      "imported.tag.root.max-width",
+      "imported.tag.root.min-height.lg",
+      "imported.tag.root.min-height.md",
+      "imported.tag.root.min-height.sm",
+      "imported.tag.root.min-height.unset",
+      "imported.tag.root.min-width",
+      "imported.tag.root.outline-color.blue",
+      "imported.tag.root.outline-color.cool-gray",
+      "imported.tag.root.outline-color.cyan",
+      "imported.tag.root.outline-color.gray",
+      "imported.tag.root.outline-color.green",
+      "imported.tag.root.outline-color.high-contrast",
+      "imported.tag.root.outline-color.magenta",
+      "imported.tag.root.outline-color.outline",
+      "imported.tag.root.outline-color.purple",
+      "imported.tag.root.outline-color.red",
+      "imported.tag.root.outline-color.teal",
+      "imported.tag.root.outline-color.unset",
+      "imported.tag.root.outline-color.warm-gray",
+      "imported.tag.root.outline-offset.blue",
+      "imported.tag.root.outline-offset.cool-gray",
+      "imported.tag.root.outline-offset.cyan",
+      "imported.tag.root.outline-offset.gray",
+      "imported.tag.root.outline-offset.green",
+      "imported.tag.root.outline-offset.high-contrast",
+      "imported.tag.root.outline-offset.magenta",
+      "imported.tag.root.outline-offset.outline",
+      "imported.tag.root.outline-offset.purple",
+      "imported.tag.root.outline-offset.red",
+      "imported.tag.root.outline-offset.teal",
+      "imported.tag.root.outline-offset.unset",
+      "imported.tag.root.outline-offset.warm-gray",
+      "imported.tag.root.outline-width.blue",
+      "imported.tag.root.outline-width.cool-gray",
+      "imported.tag.root.outline-width.cyan",
+      "imported.tag.root.outline-width.gray",
+      "imported.tag.root.outline-width.green",
+      "imported.tag.root.outline-width.high-contrast",
+      "imported.tag.root.outline-width.magenta",
+      "imported.tag.root.outline-width.outline",
+      "imported.tag.root.outline-width.purple",
+      "imported.tag.root.outline-width.red",
+      "imported.tag.root.outline-width.teal",
+      "imported.tag.root.outline-width.unset",
+      "imported.tag.root.outline-width.warm-gray",
+      "imported.tag.root.padding-left.lg",
+      "imported.tag.root.padding-left.md",
+      "imported.tag.root.padding-left.sm",
+      "imported.tag.root.padding-left.unset",
+      "imported.tag.root.padding-right.lg",
+      "imported.tag.root.padding-right.md",
+      "imported.tag.root.padding-right.sm",
+      "imported.tag.root.padding-right.unset"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "type-red__size-sm",
+      "variant": "Type=Red, Size=Sm",
+      "kind": "base",
+      "subst": {
+        "type": "red",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-red__size-sm.png",
+      "contentBox": {
+        "width": 36.31,
+        "height": 18
+      }
+    },
+    {
+      "slug": "type-red__size-md",
+      "variant": "Type=Red, Size=Md",
+      "kind": "base",
+      "subst": {
+        "type": "red",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-red__size-md.png",
+      "contentBox": {
+        "width": 36.31,
+        "height": 24
+      }
+    },
+    {
+      "slug": "type-red__size-lg",
+      "variant": "Type=Red, Size=Lg",
+      "kind": "base",
+      "subst": {
+        "type": "red",
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-red__size-lg.png",
+      "contentBox": {
+        "width": 44.31,
+        "height": 32
+      }
+    },
+    {
+      "slug": "type-magenta__size-sm",
+      "variant": "Type=Magenta, Size=Sm",
+      "kind": "base",
+      "subst": {
+        "type": "magenta",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-magenta__size-sm.png",
+      "contentBox": {
+        "width": 36.31,
+        "height": 18
+      }
+    },
+    {
+      "slug": "type-purple__size-sm",
+      "variant": "Type=Purple, Size=Sm",
+      "kind": "base",
+      "subst": {
+        "type": "purple",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-purple__size-sm.png",
+      "contentBox": {
+        "width": 36.31,
+        "height": 18
+      }
+    },
+    {
+      "slug": "type-blue__size-sm",
+      "variant": "Type=Blue, Size=Sm",
+      "kind": "base",
+      "subst": {
+        "type": "blue",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-blue__size-sm.png",
+      "contentBox": {
+        "width": 36.31,
+        "height": 18
+      }
+    },
+    {
+      "slug": "type-cyan__size-sm",
+      "variant": "Type=Cyan, Size=Sm",
+      "kind": "base",
+      "subst": {
+        "type": "cyan",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-cyan__size-sm.png",
+      "contentBox": {
+        "width": 36.31,
+        "height": 18
+      }
+    },
+    {
+      "slug": "type-teal__size-sm",
+      "variant": "Type=Teal, Size=Sm",
+      "kind": "base",
+      "subst": {
+        "type": "teal",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-teal__size-sm.png",
+      "contentBox": {
+        "width": 36.31,
+        "height": 18
+      }
+    },
+    {
+      "slug": "type-green__size-sm",
+      "variant": "Type=Green, Size=Sm",
+      "kind": "base",
+      "subst": {
+        "type": "green",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-green__size-sm.png",
+      "contentBox": {
+        "width": 36.31,
+        "height": 18
+      }
+    },
+    {
+      "slug": "type-gray__size-sm",
+      "variant": "Type=Gray, Size=Sm",
+      "kind": "base",
+      "subst": {
+        "type": "gray",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-gray__size-sm.png",
+      "contentBox": {
+        "width": 36.31,
+        "height": 18
+      }
+    },
+    {
+      "slug": "type-cool-gray__size-sm",
+      "variant": "Type=Cool Gray, Size=Sm",
+      "kind": "base",
+      "subst": {
+        "type": "cool-gray",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-cool-gray__size-sm.png",
+      "contentBox": {
+        "width": 36.31,
+        "height": 18
+      }
+    },
+    {
+      "slug": "type-warm-gray__size-sm",
+      "variant": "Type=Warm Gray, Size=Sm",
+      "kind": "base",
+      "subst": {
+        "type": "warm-gray",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-warm-gray__size-sm.png",
+      "contentBox": {
+        "width": 36.31,
+        "height": 18
+      }
+    },
+    {
+      "slug": "type-high-contrast__size-sm",
+      "variant": "Type=High Contrast, Size=Sm",
+      "kind": "base",
+      "subst": {
+        "type": "high-contrast",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-high-contrast__size-sm.png",
+      "contentBox": {
+        "width": 36.31,
+        "height": 18
+      }
+    },
+    {
+      "slug": "type-outline__size-sm",
+      "variant": "Type=Outline, Size=Sm",
+      "kind": "base",
+      "subst": {
+        "type": "outline",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-outline__size-sm.png",
+      "contentBox": {
+        "width": 38.31,
+        "height": 18
+      }
+    }
+  ],
+  "rendered": 14,
+  "refused": 0,
+  "unavailable": null
+}

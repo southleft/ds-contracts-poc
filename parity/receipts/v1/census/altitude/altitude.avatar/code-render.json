@@ -1,0 +1,112 @@
+{
+  "id": "altitude.avatar",
+  "name": "Avatar",
+  "library": "altitude",
+  "contractPath": "examples/altitude/contracts/avatar.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/altitude/figma/altitude.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 1,
+      "sampled": 1,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": null
+      },
+      {
+        "name": "hasBadge",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "AB"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "avatar__badge",
+      "badge",
+      "badge-after"
+    ],
+    "contentSlots": [
+      {
+        "part": "root",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.avatar.avatar-badge.font-size.sm",
+      "imported.avatar.avatar-badge.font-size.unset",
+      "imported.avatar.avatar-badge.line-height.sm",
+      "imported.avatar.avatar-badge.line-height.unset",
+      "imported.avatar.badge.background-color",
+      "imported.avatar.badge.column-gap",
+      "imported.avatar.badge.font-size",
+      "imported.avatar.badge.left.sm",
+      "imported.avatar.badge.left.unset",
+      "imported.avatar.badge.line-height",
+      "imported.avatar.badge.row-gap",
+      "imported.avatar.badge.text-indent",
+      "imported.avatar.badge.top.sm",
+      "imported.avatar.badge.top.unset",
+      "imported.avatar.badge.z-index",
+      "imported.avatar.root.background-color",
+      "imported.avatar.root.border-bottom-left-radius.sm",
+      "imported.avatar.root.border-bottom-left-radius.unset",
+      "imported.avatar.root.border-bottom-right-radius.sm",
+      "imported.avatar.root.border-bottom-right-radius.unset",
+      "imported.avatar.root.border-top-left-radius.sm",
+      "imported.avatar.root.border-top-left-radius.unset",
+      "imported.avatar.root.border-top-right-radius.sm",
+      "imported.avatar.root.border-top-right-radius.unset",
+      "imported.avatar.root.font-size.sm",
+      "imported.avatar.root.font-size.unset",
+      "imported.avatar.root.line-height.sm",
+      "imported.avatar.root.line-height.unset",
+      "imported.shared.num-600",
+      "imported.shared.size-0",
+      "imported.shared.size-8"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-sm",
+      "variant": "Variant=Sm",
+      "kind": "base",
+      "subst": {
+        "variant": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-sm.png",
+      "contentBox": {
+        "width": 0,
+        "height": 0
+      }
+    }
+  ],
+  "rendered": 1,
+  "refused": 0,
+  "unavailable": null
+}

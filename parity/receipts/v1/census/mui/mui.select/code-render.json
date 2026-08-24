@@ -1,0 +1,133 @@
+{
+  "id": "mui.select",
+  "name": "Select",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/select.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 2,
+      "sampled": 2,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "medium"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "label",
+      "select-nativeinput",
+      "icon",
+      "outlinedinput-notchedoutline",
+      "part-3-0",
+      "label-2"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.select.icon.bottom.medium",
+      "imported.select.icon.bottom.small",
+      "imported.select.icon.color",
+      "imported.select.icon.fill",
+      "imported.select.icon.flex-shrink",
+      "imported.select.icon.left",
+      "imported.select.icon.right",
+      "imported.select.icon.top.medium",
+      "imported.select.icon.top.small",
+      "imported.select.label-2.font-size",
+      "imported.select.label-2.font-weight",
+      "imported.select.label.font-size",
+      "imported.select.label.font-weight",
+      "imported.select.label.padding-bottom.medium",
+      "imported.select.label.padding-bottom.small",
+      "imported.select.label.padding-left",
+      "imported.select.label.padding-right",
+      "imported.select.label.padding-top.medium",
+      "imported.select.label.padding-top.small",
+      "imported.select.outlinedinput-notchedoutline.height.medium",
+      "imported.select.outlinedinput-notchedoutline.height.small",
+      "imported.select.outlinedinput-notchedoutline.padding-left",
+      "imported.select.outlinedinput-notchedoutline.padding-right",
+      "imported.select.outlinedinput-notchedoutline.top",
+      "imported.select.outlinedinput-notchedoutline.width",
+      "imported.select.root.height.medium",
+      "imported.select.root.height.small",
+      "imported.select.root.width",
+      "imported.select.select-nativeinput.background-color",
+      "imported.select.select-nativeinput.font-size",
+      "imported.select.select-nativeinput.height",
+      "imported.select.select-nativeinput.opacity",
+      "imported.select.select-nativeinput.top.medium",
+      "imported.select.select-nativeinput.top.small",
+      "imported.select.select-nativeinput.width",
+      "imported.shared.color-0000003b",
+      "imported.shared.color-000000de",
+      "imported.shared.color-767676",
+      "imported.shared.size-0",
+      "imported.shared.size-0-15008",
+      "imported.shared.size-1",
+      "imported.shared.size-11",
+      "imported.shared.size-2",
+      "imported.shared.size-23",
+      "imported.shared.size-24",
+      "imported.shared.size-4"
+    ],
+    "icons": [
+      "select-icon"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "size-medium",
+      "variant": "Size=Medium",
+      "kind": "base",
+      "subst": {
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-medium.png",
+      "contentBox": {
+        "width": 73.94,
+        "height": 61
+      }
+    },
+    {
+      "slug": "size-small",
+      "variant": "Size=Small",
+      "kind": "base",
+      "subst": {
+        "size": "small"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-small.png",
+      "contentBox": {
+        "width": 73.94,
+        "height": 45
+      }
+    }
+  ],
+  "rendered": 2,
+  "refused": 0,
+  "unavailable": null
+}

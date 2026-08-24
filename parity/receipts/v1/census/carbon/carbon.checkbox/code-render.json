@@ -1,0 +1,125 @@
+{
+  "id": "carbon.checkbox",
+  "name": "Checkbox",
+  "library": "carbon",
+  "contractPath": "examples/carbon/contracts/checkbox.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/carbon/figma/carbon.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 3,
+      "sampled": 3,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "checked",
+        "type": "enum",
+        "default": "unchecked"
+      }
+    ],
+    "states": [
+      "disabled",
+      "focus-visible"
+    ],
+    "parts": [
+      "root",
+      "checkbox",
+      "checkbox-label",
+      "label",
+      "checkbox-label-before",
+      "checkbox-label-after",
+      "checkbox__validation-msg"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.checkbox.checkbox-label.width",
+      "imported.checkbox.checkbox-validation-msg.margin-top",
+      "imported.checkbox.checkbox.color",
+      "imported.checkbox.checkbox.color-state-disabled",
+      "imported.checkbox.checkbox.font-size",
+      "imported.checkbox.checkbox.left",
+      "imported.checkbox.checkbox.outline-color",
+      "imported.checkbox.checkbox.right",
+      "imported.checkbox.label.font-weight",
+      "imported.checkbox.label.padding-left",
+      "imported.checkbox.root.flex-grow",
+      "imported.checkbox.root.margin-bottom",
+      "imported.checkbox.root.width",
+      "imported.shared.color-16161640",
+      "imported.shared.size-0",
+      "imported.shared.size-0-16",
+      "imported.shared.size-1",
+      "imported.shared.size-14",
+      "imported.shared.size-18-0001",
+      "imported.shared.size-20",
+      "imported.shared.size-neg-1"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "checked-unchecked",
+      "variant": "Checked=Unchecked",
+      "kind": "base",
+      "subst": {
+        "checked": "unchecked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-checked-unchecked.png",
+      "contentBox": {
+        "width": 288,
+        "height": 23
+      }
+    },
+    {
+      "slug": "checked-checked",
+      "variant": "Checked=Checked",
+      "kind": "base",
+      "subst": {
+        "checked": "checked"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-checked-checked.png",
+      "contentBox": {
+        "width": 288,
+        "height": 23
+      }
+    },
+    {
+      "slug": "checked-indeterminate",
+      "variant": "Checked=Indeterminate",
+      "kind": "base",
+      "subst": {
+        "checked": "indeterminate"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-checked-indeterminate.png",
+      "contentBox": {
+        "width": 288,
+        "height": 23
+      }
+    }
+  ],
+  "rendered": 3,
+  "refused": 0,
+  "unavailable": null
+}

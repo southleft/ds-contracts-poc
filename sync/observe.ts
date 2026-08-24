@@ -99,13 +99,27 @@ export async function fetchNodesResponses(
 ): Promise<{ responses: RestNodesResponse[]; fileVersionId: string | null }> {
   const fetchImpl = opts.fetchImpl ?? (fetch as unknown as FetchLike);
   const base = opts.apiBase ?? FIGMA_API_BASE;
+  // 429 is a rate limit, not a refusal: wait what Figma asks (Retry-After,
+  // default 15 s) and retry, bounded. Measured 2026-08-23: ten back-to-back
+  // live observes (3 files × 4 chunks each) trip it; without this every
+  // later verb in the same minute crashes with exit 2.
+  const RETRIES = 5;
   const get = async (p: string): Promise<unknown> => {
-    const res = await fetchImpl(`${base}${p}`, { headers: { 'X-Figma-Token': token } });
-    if (!res.ok) {
-      const body = await res.text().catch(() => '');
-      throw new Error(`Figma API ${res.status} on ${p}${body ? ` — ${body.slice(0, 200)}` : ''}`);
+    for (let attempt = 0; ; attempt++) {
+      const res = await fetchImpl(`${base}${p}`, { headers: { 'X-Figma-Token': token } });
+      if (res.status === 429 && attempt < RETRIES) {
+        const headers = (res as { headers?: { get?: (k: string) => string | null } }).headers;
+        const after = Number(headers?.get?.('retry-after') ?? '') || 15;
+        await res.text().catch(() => '');
+        await new Promise((r) => setTimeout(r, after * 1000));
+        continue;
+      }
+      if (!res.ok) {
+        const body = await res.text().catch(() => '');
+        throw new Error(`Figma API ${res.status} on ${p}${body ? ` — ${body.slice(0, 200)}` : ''}`);
+      }
+      return res.json();
     }
-    return res.json();
   };
   const file = (await get(`/v1/files/${fileKey}?depth=1`)) as { version?: unknown };
   const fileVersionId = typeof file.version === 'string' ? file.version : null;

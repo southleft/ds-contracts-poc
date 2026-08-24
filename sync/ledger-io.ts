@@ -5,9 +5,23 @@
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { emptyLedger, parseLedger, serializeLedger, type SyncLedger } from './ledger.js';
+import { emptyLedger, parseLedger, renderPendingMd, serializeLedger, type SyncLedger } from './ledger.js';
 
 export const DEFAULT_LEDGER_PATH = path.join('sync', 'ledger.json');
+export const PENDING_MD_NAME = 'PENDING.md';
+
+/** sync/PENDING.md lives next to the ledger it is rendered from. */
+export const pendingPathFor = (ledgerPath: string): string =>
+  path.join(path.dirname(ledgerPath), PENDING_MD_NAME);
+
+/** Write the generated pending-decisions page for this ledger (byte-stable —
+ *  a pure render of the ledger; sync:ledger:check compares the two). */
+export function savePendingMd(ledgerPath: string, ledger: SyncLedger): string {
+  const p = pendingPathFor(ledgerPath);
+  mkdirSync(path.dirname(p), { recursive: true });
+  writeFileSync(p, renderPendingMd(ledger));
+  return p;
+}
 
 export function loadLedger(filePath: string): SyncLedger {
   return parseLedger(readFileSync(filePath, 'utf8'));

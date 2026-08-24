@@ -1,0 +1,146 @@
+{
+  "id": "flowbite.label",
+  "name": "Label",
+  "library": "tailwind",
+  "contractPath": "examples/tailwind/contracts/label.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/tailwind/figma/tailwind.bundle.json tokenSet (flat base + minted)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 5,
+      "sampled": 5,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "color",
+        "type": "enum",
+        "default": "default"
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Label text"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [
+      {
+        "part": "root",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.label.root.color.default",
+      "imported.label.root.color.failure",
+      "imported.label.root.color.info",
+      "imported.label.root.color.success",
+      "imported.label.root.color.warning",
+      "imported.label.root.font-size",
+      "imported.label.root.font-weight",
+      "imported.label.root.line-height",
+      "imported.label.root.width"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "color-default",
+      "variant": "Color=Default",
+      "kind": "base",
+      "subst": {
+        "color": "default"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-default.png",
+      "contentBox": {
+        "width": 64.94,
+        "height": 20
+      }
+    },
+    {
+      "slug": "color-info",
+      "variant": "Color=Info",
+      "kind": "base",
+      "subst": {
+        "color": "info"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-info.png",
+      "contentBox": {
+        "width": 64.94,
+        "height": 20
+      }
+    },
+    {
+      "slug": "color-failure",
+      "variant": "Color=Failure",
+      "kind": "base",
+      "subst": {
+        "color": "failure"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-failure.png",
+      "contentBox": {
+        "width": 64.94,
+        "height": 20
+      }
+    },
+    {
+      "slug": "color-success",
+      "variant": "Color=Success",
+      "kind": "base",
+      "subst": {
+        "color": "success"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-success.png",
+      "contentBox": {
+        "width": 64.94,
+        "height": 20
+      }
+    },
+    {
+      "slug": "color-warning",
+      "variant": "Color=Warning",
+      "kind": "base",
+      "subst": {
+        "color": "warning"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-warning.png",
+      "contentBox": {
+        "width": 64.94,
+        "height": 20
+      }
+    }
+  ],
+  "rendered": 5,
+  "refused": 0,
+  "unavailable": null
+}

@@ -40,7 +40,7 @@
  *
  *      A set whose screenshots do not exist in the tree is written as
  *
- *          | Badge | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
+ *          | Badge | — | — | not captured at exam time (2026-08-22), see docs/23 §B.34 |
  *
  *      both path cells `—` and the note matching exactly
  *      /^not captured at exam time \(\d{4}-\d{2}-\d{2}\), see docs\/23 §B\.\d+/

@@ -1,0 +1,94 @@
+{
+  "id": "ds.typeahead-item",
+  "name": "TypeaheadItem",
+  "library": "first-party",
+  "contractPath": "contracts/typeahead-item.contract.json",
+  "contractVersion": "1.0.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "tokens/ (layered primitives + brand + semantic + light/dark) via src/styles/tokens.css",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 1,
+      "sampled": 1,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "label",
+        "type": "text",
+        "default": "Search result"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "default": "Supporting detail about this result."
+      }
+    ],
+    "states": [
+      "hover"
+    ],
+    "parts": [
+      "root",
+      "iconSlot",
+      "textCol",
+      "labelText",
+      "descriptionText"
+    ],
+    "contentSlots": [
+      {
+        "part": "labelText",
+        "prop": "label"
+      },
+      {
+        "part": "descriptionText",
+        "prop": "description"
+      }
+    ],
+    "tokenRefs": [
+      "color.surface.foreground",
+      "color.surface.raised",
+      "color.surface.sunken",
+      "color.text.secondary",
+      "font.control.family",
+      "font.control.size.sm",
+      "font.control.weight",
+      "radius.100",
+      "size.card.width",
+      "space.gap.sm",
+      "space.inset-x.sm",
+      "space.inset-y.md",
+      "space.inset-y.xs"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "typeaheaditem",
+      "variant": "TypeaheadItem",
+      "kind": "base",
+      "subst": {},
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-typeaheaditem.png",
+      "contentBox": {
+        "width": 259.3,
+        "height": 52
+      }
+    }
+  ],
+  "rendered": 1,
+  "refused": 0,
+  "unavailable": null
+}

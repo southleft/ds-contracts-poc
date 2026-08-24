@@ -1,0 +1,292 @@
+{
+  "id": "mui.link",
+  "name": "Link",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/link.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 42,
+      "sampled": 12,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "color",
+        "type": "enum",
+        "default": "primary"
+      },
+      {
+        "name": "underline",
+        "type": "enum",
+        "default": "hover"
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Link"
+      }
+    ],
+    "states": [
+      "focus-visible",
+      "active",
+      "hover"
+    ],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [
+      {
+        "part": "root",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.link.root.color.error",
+      "imported.link.root.color.info",
+      "imported.link.root.color.inherit",
+      "imported.link.root.color.primary",
+      "imported.link.root.color.secondary",
+      "imported.link.root.color.success",
+      "imported.link.root.color.warning",
+      "imported.link.root.font-size",
+      "imported.link.root.font-weight",
+      "imported.link.root.outline-color-state-focus-visible",
+      "imported.link.root.outline-color.error",
+      "imported.link.root.outline-color.info",
+      "imported.link.root.outline-color.inherit",
+      "imported.link.root.outline-color.primary",
+      "imported.link.root.outline-color.secondary",
+      "imported.link.root.outline-color.success",
+      "imported.link.root.outline-color.warning",
+      "imported.link.root.outline-offset-state-focus-visible",
+      "imported.link.root.outline-width-state-focus-visible"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "color-primary__underline-hover",
+      "variant": "Color=Primary, Underline=Hover",
+      "kind": "base",
+      "subst": {
+        "color": "primary",
+        "underline": "hover"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-primary__underline-hover.png",
+      "contentBox": {
+        "width": 29.36,
+        "height": 18
+      }
+    },
+    {
+      "slug": "color-primary__underline-none",
+      "variant": "Color=Primary, Underline=None",
+      "kind": "base",
+      "subst": {
+        "color": "primary",
+        "underline": "none"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-primary__underline-none.png",
+      "contentBox": {
+        "width": 29.36,
+        "height": 18
+      }
+    },
+    {
+      "slug": "color-primary__underline-always",
+      "variant": "Color=Primary, Underline=Always",
+      "kind": "base",
+      "subst": {
+        "color": "primary",
+        "underline": "always"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-primary__underline-always.png",
+      "contentBox": {
+        "width": 29.36,
+        "height": 18
+      }
+    },
+    {
+      "slug": "color-secondary__underline-hover",
+      "variant": "Color=Secondary, Underline=Hover",
+      "kind": "base",
+      "subst": {
+        "color": "secondary",
+        "underline": "hover"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-secondary__underline-hover.png",
+      "contentBox": {
+        "width": 29.36,
+        "height": 18
+      }
+    },
+    {
+      "slug": "color-error__underline-hover",
+      "variant": "Color=Error, Underline=Hover",
+      "kind": "base",
+      "subst": {
+        "color": "error",
+        "underline": "hover"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-error__underline-hover.png",
+      "contentBox": {
+        "width": 29.36,
+        "height": 18
+      }
+    },
+    {
+      "slug": "color-info__underline-hover",
+      "variant": "Color=Info, Underline=Hover",
+      "kind": "base",
+      "subst": {
+        "color": "info",
+        "underline": "hover"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-info__underline-hover.png",
+      "contentBox": {
+        "width": 29.36,
+        "height": 18
+      }
+    },
+    {
+      "slug": "color-success__underline-hover",
+      "variant": "Color=Success, Underline=Hover",
+      "kind": "base",
+      "subst": {
+        "color": "success",
+        "underline": "hover"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-success__underline-hover.png",
+      "contentBox": {
+        "width": 29.36,
+        "height": 18
+      }
+    },
+    {
+      "slug": "color-warning__underline-hover",
+      "variant": "Color=Warning, Underline=Hover",
+      "kind": "base",
+      "subst": {
+        "color": "warning",
+        "underline": "hover"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-warning__underline-hover.png",
+      "contentBox": {
+        "width": 29.36,
+        "height": 18
+      }
+    },
+    {
+      "slug": "color-inherit__underline-hover",
+      "variant": "Color=Inherit, Underline=Hover",
+      "kind": "base",
+      "subst": {
+        "color": "inherit",
+        "underline": "hover"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-inherit__underline-hover.png",
+      "contentBox": {
+        "width": 29.36,
+        "height": 18
+      }
+    },
+    {
+      "slug": "color-primary__underline-hover__state-focus-visible",
+      "variant": "Color=Primary, Underline=Hover, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "subst": {
+        "color": "primary",
+        "underline": "hover"
+      },
+      "bools": {},
+      "interaction": "focus-visible",
+      "status": "rendered",
+      "png": "code-color-primary__underline-hover__state-focus-visible.png",
+      "contentBox": {
+        "width": 29.36,
+        "height": 18
+      }
+    },
+    {
+      "slug": "color-primary__underline-hover__state-active",
+      "variant": "Color=Primary, Underline=Hover, State=Active",
+      "kind": "state",
+      "state": "active",
+      "subst": {
+        "color": "primary",
+        "underline": "hover"
+      },
+      "bools": {},
+      "interaction": "active",
+      "status": "rendered",
+      "png": "code-color-primary__underline-hover__state-active.png",
+      "contentBox": {
+        "width": 29.36,
+        "height": 18
+      }
+    },
+    {
+      "slug": "color-primary__underline-hover__state-hover",
+      "variant": "Color=Primary, Underline=Hover, State=Hover",
+      "kind": "state",
+      "state": "hover",
+      "subst": {
+        "color": "primary",
+        "underline": "hover"
+      },
+      "bools": {},
+      "interaction": "hover",
+      "status": "rendered",
+      "png": "code-color-primary__underline-hover__state-hover.png",
+      "contentBox": {
+        "width": 29.36,
+        "height": 18
+      }
+    }
+  ],
+  "rendered": 12,
+  "refused": 0,
+  "unavailable": null
+}

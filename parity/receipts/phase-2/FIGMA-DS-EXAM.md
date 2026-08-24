@@ -330,7 +330,7 @@ one fact left named on that node (the slot's interior auto-layout).
 
 ## Screenshots
 
-Grammar: `scripts/exam-screenshots-check.ts` (`npm run exam:screenshots:check`, fast lane). One row per rendered cell; `canvas` is Figma's own `/v1/images?scale=2` render of the source set, `reference` is the generated React component rendered in Chromium (esbuild bundle + Playwright, deviceScaleFactor 2, white ground) — the pair the verdicts in §3 were read from. The five cells below are the 2026-08-23 re-measure renders (`…/scratchpad/f4-exam-out/{figma-png,react-png}/`) copied into the tree; the other eleven sets were never rendered at exam time and say so — [docs/23 §B.31](../../../docs/23-known-limitations.md#b31-the-held-out-exam-rendered-five-cells-not-fifteen-sets).
+Grammar: `scripts/exam-screenshots-check.ts` (`npm run exam:screenshots:check`, fast lane). One row per rendered cell; `canvas` is Figma's own `/v1/images?scale=2` render of the source set, `reference` is the generated React component rendered in Chromium (esbuild bundle + Playwright, deviceScaleFactor 2, white ground) — the pair the verdicts in §3 were read from. The five cells below are the 2026-08-23 re-measure renders (`…/scratchpad/f4-exam-out/{figma-png,react-png}/`) copied into the tree; the other eleven sets were never rendered at exam time and say so — [docs/23 §B.34](../../../docs/23-known-limitations.md#b34-the-held-out-exam-rendered-five-cells-not-fifteen-sets).
 
 | set | canvas | reference | note |
 |---|---|---|---|
@@ -339,17 +339,17 @@ Grammar: `scripts/exam-screenshots-check.ts` (`npm run exam:screenshots:check`, 
 | Badge | figma-ds/badge-default-success.canvas.png | figma-ds/badge-default-success.react.png | `badge-default-success` (91:4941) — pill fill carries; both sides collapse under the kit's 1.5 px line height |
 | Card | figma-ds/card-default.canvas.png | figma-ds/card-default.react.png | `card-default` (53:1778) — NOT recognisable; every loss named ([§B.26](../../../docs/23-known-limitations.md#b26-card-on-the-held-out-kit-is-not-recognisable--and-every-loss-is-named)) |
 | Toast | figma-ds/toast-default.canvas.png | figma-ds/toast-default.react.png | `toast-default` (86:2196) — recognisable; icon and close glyphs absent (vector geometry named) |
-| Button (Icon) | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
-| Button (contract) | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
-| Chip | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
-| Dek | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
-| Heading | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
-| Image | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
-| Kicker | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
-| Button Group | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
-| Section Header | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
-| Section Footer | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
-| Section | — | — | not captured at exam time (2026-08-22), see docs/23 §B.31 |
+| Button (Icon) | — | — | not captured at exam time (2026-08-22), see docs/23 §B.34 |
+| Button (contract) | — | — | not captured at exam time (2026-08-22), see docs/23 §B.34 |
+| Chip | — | — | not captured at exam time (2026-08-22), see docs/23 §B.34 |
+| Dek | — | — | not captured at exam time (2026-08-22), see docs/23 §B.34 |
+| Heading | — | — | not captured at exam time (2026-08-22), see docs/23 §B.34 |
+| Image | — | — | not captured at exam time (2026-08-22), see docs/23 §B.34 |
+| Kicker | — | — | not captured at exam time (2026-08-22), see docs/23 §B.34 |
+| Button Group | — | — | not captured at exam time (2026-08-22), see docs/23 §B.34 |
+| Section Header | — | — | not captured at exam time (2026-08-22), see docs/23 §B.34 |
+| Section Footer | — | — | not captured at exam time (2026-08-22), see docs/23 §B.34 |
+| Section | — | — | not captured at exam time (2026-08-22), see docs/23 §B.34 |
 
 ## Self-heal log
 

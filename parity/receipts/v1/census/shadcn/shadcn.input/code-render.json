@@ -1,0 +1,117 @@
+{
+  "id": "shadcn.input",
+  "name": "Input",
+  "library": "shadcn",
+  "contractPath": "examples/shadcn/contracts/input.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/shadcn/figma/shadcn.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 4,
+      "sampled": 4,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [],
+    "states": [
+      "disabled",
+      "active",
+      "focus-visible"
+    ],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.input.root.box-shadow",
+      "imported.input.root.box-shadow-state-active",
+      "imported.input.root.box-shadow-state-focus-visible",
+      "imported.input.root.font-size",
+      "imported.input.root.line-height",
+      "imported.input.root.min-width",
+      "imported.input.root.opacity-state-disabled",
+      "imported.input.root.outline-width-state-active",
+      "imported.input.root.outline-width-state-focus-visible",
+      "imported.input.root.padding-bottom",
+      "imported.input.root.padding-left",
+      "imported.input.root.padding-right",
+      "imported.input.root.padding-top",
+      "imported.input.root.width",
+      "imported.shared.color-a1a1a1",
+      "imported.shared.size-1",
+      "imported.shared.size-8"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "input",
+      "variant": "Input",
+      "kind": "base",
+      "subst": {},
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-input.png",
+      "contentBox": {
+        "width": 288,
+        "height": 30
+      }
+    },
+    {
+      "slug": "state-disabled",
+      "variant": "State=Disabled",
+      "kind": "state",
+      "state": "disabled",
+      "subst": {},
+      "bools": {},
+      "interaction": "default",
+      "status": "refused",
+      "error": "state \"disabled\" drives boolean prop \"disabled\", which shadcn.input does not declare"
+    },
+    {
+      "slug": "state-active",
+      "variant": "State=Active",
+      "kind": "state",
+      "state": "active",
+      "subst": {},
+      "bools": {},
+      "interaction": "active",
+      "status": "rendered",
+      "png": "code-state-active.png",
+      "contentBox": {
+        "width": 288,
+        "height": 30
+      }
+    },
+    {
+      "slug": "state-focus-visible",
+      "variant": "State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "subst": {},
+      "bools": {},
+      "interaction": "focus-visible",
+      "status": "rendered",
+      "png": "code-state-focus-visible.png",
+      "contentBox": {
+        "width": 288,
+        "height": 30
+      }
+    }
+  ],
+  "rendered": 3,
+  "refused": 1,
+  "unavailable": null
+}

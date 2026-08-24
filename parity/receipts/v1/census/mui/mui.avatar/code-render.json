@@ -1,0 +1,126 @@
+{
+  "id": "mui.avatar",
+  "name": "Avatar",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/avatar.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 3,
+      "sampled": 3,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "circular"
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "A"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [
+      {
+        "part": "root",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.avatar.root.background-color",
+      "imported.avatar.root.border-bottom-left-radius.circular",
+      "imported.avatar.root.border-bottom-left-radius.rounded",
+      "imported.avatar.root.border-bottom-left-radius.square",
+      "imported.avatar.root.border-bottom-right-radius.circular",
+      "imported.avatar.root.border-bottom-right-radius.rounded",
+      "imported.avatar.root.border-bottom-right-radius.square",
+      "imported.avatar.root.border-top-left-radius.circular",
+      "imported.avatar.root.border-top-left-radius.rounded",
+      "imported.avatar.root.border-top-left-radius.square",
+      "imported.avatar.root.border-top-right-radius.circular",
+      "imported.avatar.root.border-top-right-radius.rounded",
+      "imported.avatar.root.border-top-right-radius.square",
+      "imported.avatar.root.color",
+      "imported.avatar.root.flex-shrink",
+      "imported.avatar.root.font-size",
+      "imported.avatar.root.font-weight",
+      "imported.avatar.root.height",
+      "imported.avatar.root.line-height",
+      "imported.avatar.root.width",
+      "imported.shared.size-0"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-circular",
+      "variant": "Variant=Circular",
+      "kind": "base",
+      "subst": {
+        "variant": "circular"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-circular.png",
+      "contentBox": {
+        "width": 40,
+        "height": 40
+      }
+    },
+    {
+      "slug": "variant-rounded",
+      "variant": "Variant=Rounded",
+      "kind": "base",
+      "subst": {
+        "variant": "rounded"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-rounded.png",
+      "contentBox": {
+        "width": 40,
+        "height": 40
+      }
+    },
+    {
+      "slug": "variant-square",
+      "variant": "Variant=Square",
+      "kind": "base",
+      "subst": {
+        "variant": "square"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-square.png",
+      "contentBox": {
+        "width": 40,
+        "height": 40
+      }
+    }
+  ],
+  "rendered": 3,
+  "refused": 0,
+  "unavailable": null
+}

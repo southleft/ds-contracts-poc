@@ -1,0 +1,300 @@
+{
+  "id": "ds.token",
+  "name": "Token",
+  "library": "first-party",
+  "contractPath": "contracts/token.contract.json",
+  "contractVersion": "1.1.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "tokens/ (layered primitives + brand + semantic + light/dark) via src/styles/tokens.css",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 33,
+      "sampled": 13,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "color",
+        "type": "enum",
+        "default": "default"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "md"
+      },
+      {
+        "name": "isDisabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "label",
+        "type": "text",
+        "default": "Token"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "iconSlot",
+      "labelText",
+      "endContent"
+    ],
+    "contentSlots": [
+      {
+        "part": "labelText",
+        "prop": "label"
+      }
+    ],
+    "tokenRefs": [
+      "font.badge.size",
+      "font.control.family",
+      "font.control.size.sm",
+      "font.control.weight",
+      "radius.100",
+      "space.inset-x.sm",
+      "space.inset-x.xs",
+      "space.inset-y.sm",
+      "space.inset-y.xs"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "color-default__size-medium",
+      "variant": "Color=Default, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "color": "default",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-default__size-medium.png",
+      "contentBox": {
+        "width": 58.86,
+        "height": 23.5
+      }
+    },
+    {
+      "slug": "color-default__size-small",
+      "variant": "Color=Default, Size=Small",
+      "kind": "base",
+      "subst": {
+        "color": "default",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-default__size-small.png",
+      "contentBox": {
+        "width": 50.86,
+        "height": 23.5
+      }
+    },
+    {
+      "slug": "color-default__size-large",
+      "variant": "Color=Default, Size=Large",
+      "kind": "base",
+      "subst": {
+        "color": "default",
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-default__size-large.png",
+      "contentBox": {
+        "width": 72.67,
+        "height": 26.5
+      }
+    },
+    {
+      "slug": "color-red__size-medium",
+      "variant": "Color=Red, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "color": "red",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-red__size-medium.png",
+      "contentBox": {
+        "width": 58.86,
+        "height": 23.5
+      }
+    },
+    {
+      "slug": "color-orange__size-medium",
+      "variant": "Color=Orange, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "color": "orange",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-orange__size-medium.png",
+      "contentBox": {
+        "width": 58.86,
+        "height": 23.5
+      }
+    },
+    {
+      "slug": "color-yellow__size-medium",
+      "variant": "Color=Yellow, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "color": "yellow",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-yellow__size-medium.png",
+      "contentBox": {
+        "width": 58.86,
+        "height": 23.5
+      }
+    },
+    {
+      "slug": "color-green__size-medium",
+      "variant": "Color=Green, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "color": "green",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-green__size-medium.png",
+      "contentBox": {
+        "width": 58.86,
+        "height": 23.5
+      }
+    },
+    {
+      "slug": "color-teal__size-medium",
+      "variant": "Color=Teal, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "color": "teal",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-teal__size-medium.png",
+      "contentBox": {
+        "width": 58.86,
+        "height": 23.5
+      }
+    },
+    {
+      "slug": "color-cyan__size-medium",
+      "variant": "Color=Cyan, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "color": "cyan",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-cyan__size-medium.png",
+      "contentBox": {
+        "width": 58.86,
+        "height": 23.5
+      }
+    },
+    {
+      "slug": "color-blue__size-medium",
+      "variant": "Color=Blue, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "color": "blue",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-blue__size-medium.png",
+      "contentBox": {
+        "width": 58.86,
+        "height": 23.5
+      }
+    },
+    {
+      "slug": "color-purple__size-medium",
+      "variant": "Color=Purple, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "color": "purple",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-purple__size-medium.png",
+      "contentBox": {
+        "width": 58.86,
+        "height": 23.5
+      }
+    },
+    {
+      "slug": "color-pink__size-medium",
+      "variant": "Color=Pink, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "color": "pink",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-pink__size-medium.png",
+      "contentBox": {
+        "width": 58.86,
+        "height": 23.5
+      }
+    },
+    {
+      "slug": "color-gray__size-medium",
+      "variant": "Color=Gray, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "color": "gray",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-color-gray__size-medium.png",
+      "contentBox": {
+        "width": 58.86,
+        "height": 23.5
+      }
+    }
+  ],
+  "rendered": 13,
+  "refused": 0,
+  "unavailable": null
+}

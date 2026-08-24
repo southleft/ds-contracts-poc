@@ -33,7 +33,15 @@
  *      (`npm run sync:observe -- --update`, FIGMA_TOKEN), in the SAME change
  *      that moved the grammar. Measured 2026-08-23: the 1.5 → 1.31 move
  *      shipped without one and six scheduled runs reported 87 untouched sets
- *      as designer edits.
+ *      as designer edits. The same rule covers a PENDING decision's
+ *      `basedOn.dumpVersion`: a decision whose canvas facts were measured
+ *      under a grammar the mapper no longer speaks reads as STALE on the
+ *      cron (every pending row red again) — re-observe and re-decide in the
+ *      change that moves the grammar;
+ *   6. a committed sync/PENDING.md that is not the byte-exact render of the
+ *      committed ledger (`npm run sync -- pending`). PENDING.md is the ONE
+ *      place a human reads the pending Figma writes; a page that can drift
+ *      from the ledger it claims to summarize is worse than none.
  *
  * NOT checked on purpose: current contract hashes vs ledger hashes — a
  * contract editing ahead of its last sync is code-ahead DRIFT (observe's
@@ -42,7 +50,16 @@
  */
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
-import { contractHashOf, driftReport, parseLedger, recordKey, serializeLedger } from './ledger.js';
+import {
+  contractHashOf,
+  driftReport,
+  parseLedger,
+  PENDING_KINDS,
+  recordKey,
+  renderPendingMd,
+  serializeLedger,
+} from './ledger.js';
+import { pendingPathFor } from './ledger-io.js';
 import { observationsFromFixture, type ObservationFixture } from './observe.js';
 import { REST_DUMP_VERSION } from '../extract/figma/rest/map.js';
 
@@ -110,6 +127,32 @@ for (const r of ledger.records) {
         'Re-baseline in this change: `npm run sync:observe -- --update` (live, FIGMA_TOKEN)',
     );
 }
+let pendingDecisions = 0;
+let adoptDecisions = 0;
+for (const r of ledger.records) {
+  if (!r.decision) continue;
+  if (r.decision.kind === 'adopt') {
+    adoptDecisions++;
+    continue;
+  }
+  pendingDecisions++;
+  if (r.decision.basedOn.dumpVersion !== REST_DUMP_VERSION)
+    fail(
+      `${recordKey(r)}: decision ${r.decision.kind} was taken against dump grammar ${r.decision.basedOn.dumpVersion ?? '(none)'}; ` +
+        `the mapper speaks ${REST_DUMP_VERSION} — the decision would read STALE on the cron. Re-decide in this change: ` +
+        `\`npm run sync:observe -- --decide ${r.contractId} --kind ${r.decision.kind} --note … --command …\` (live, FIGMA_TOKEN)`,
+    );
+}
+
+// 3c. sync/PENDING.md is the byte-exact render of this ledger ----------------
+const pendingPath = pendingPathFor(ledgerPath);
+const wantPending = renderPendingMd(ledger);
+if (!existsSync(pendingPath)) fail(`${path.relative(ROOT, pendingPath)} is missing — generate it: \`npm run sync -- pending\``);
+else if (readFileSync(pendingPath, 'utf8') !== wantPending)
+  fail(
+    `${path.relative(ROOT, pendingPath)} is not the current render of sync/ledger.json (${pendingDecisions} pending, ${adoptDecisions} adopted) — ` +
+      'regenerate it: `npm run sync -- pending` (never hand-edit)',
+  );
 
 // 4. The offline drift table over the committed fixture ----------------------
 const fixture = JSON.parse(
@@ -146,6 +189,10 @@ if (report.untracked.length !== 1 || report.untracked[0].setName !== 'Epsilon')
     `fixture drift table: expected exactly one untracked set (Epsilon), got [${report.untracked.map((u) => u.setName).join(', ')}]`,
   );
 if (report.clean) fail('fixture drift table reported clean over a fixture built to drift');
+// The fixture carries no decisions: its three drifted rows + the untracked
+// set are exactly what must red a run.
+if (report.undecided !== 4)
+  fail(`fixture drift table must count 4 undecided (beta, gamma, delta + untracked Epsilon), got ${report.undecided}`);
 
 // ---------------------------------------------------------------------------
 if (failures.length > 0) {
@@ -155,6 +202,7 @@ if (failures.length > 0) {
 }
 console.log(
   `sync-ledger-check: ${ledger.records.length} record(s) ok (${cited} receipt-citing record(s) verified against the receipts they cite), ` +
-    `bytes deterministic, contract paths resolve, ${baselines} baseline(s) speak dump grammar ${REST_DUMP_VERSION}; ` +
-    'offline fixture drift table classifies in-sync / code-ahead / canvas-ahead / conflict / untracked exactly.',
+    `bytes deterministic, contract paths resolve, ${baselines} baseline(s) speak dump grammar ${REST_DUMP_VERSION}, ` +
+    `${adoptDecisions} adopt + ${pendingDecisions} pending decision(s) (${PENDING_KINDS.join('|')}) and sync/PENDING.md is their byte-exact render; ` +
+    'offline fixture drift table classifies in-sync / code-ahead / canvas-ahead / conflict / untracked exactly (4 undecided).',
 );

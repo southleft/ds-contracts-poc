@@ -548,7 +548,7 @@ re-verified against docs/18's own rows today:
 | **G5 — org-level GitHub App** | OPEN | designers still paste a fine-grained PAT into a plugin field. |
 | **G10 — PR-first CI defaults** | **PARTIAL** | `examples/ci/code-led.yml` is PR-first; confirm every published recipe |
 | **G11 — contract-diff English summarizer** | **PARTIAL** | `ds-contracts diff --summarize` + `contract-summarize:check` shipped |
-| **G13 — audit trail & loop closure** | OPEN (record shape exists) | no viewer tab, no "resolved by PR #N". |
+| **G13 — audit trail & loop closure** | **PARTIAL** | the sync ledger now records the human decision per drifted row (`decision`: adopt / pending-*, with evidence and the exact resolving command) and renders it to `sync/PENDING.md`; still no viewer tab, no "resolved by PR #N". |
 
 **G2 (drift-aware update warning), G8 (plain-words style diffs), G9 (sample-library
 cold start) and G14 (refusal triage + `init --detect`) are SHIPPED**; G1, G6 and
@@ -599,6 +599,23 @@ Two named holes remain:
     so the stamp is compared, not re-derived — and the first six live runs
     showed the baseline half is only as honest as its grammar tag
     (`sync/README.md`, "Two fingerprint domains").
+  - **What the lane's red means (policy, 2026-08-23).** A red scheduled
+    `sync-spine` run means exactly one thing: *a drifted row has no recorded
+    human decision* (or its decision is stale because the contract hash,
+    stamp or dump fingerprint moved after it was taken). Each ledger row can
+    carry a `decision` — `adopt` (the canvas is the truth; `observe --adopt`),
+    or `pending-reapply` / `pending-restamp` / `pending-reconcile` (`observe
+    --decide`), the three outcomes that need a **Figma write to a non-scratch
+    file** or a choice between two truths, which automation does not do.
+    Decided drift is green with a `::warning`; the pending writes are listed,
+    with the exact command and the file key they would write to, in
+    `sync/PENDING.md` (generated from the ledger, byte-checked by
+    `sync:ledger:check`); a spine crash is a distinct red. What remains a
+    limitation: the **write** half of every pending row is a human at a Figma
+    desktop (Sync Runner → *Paste a script*), and nothing records a plugin
+    apply or console-loop rebuild into the ledger automatically — every
+    unrecorded session write of 2026-08-09..21 became a row that needed this
+    decision (`sync/receipts/2026-08-23-spine-reconciliation.md`).
 
 **What it would take — an engine change** for the read half; the signing half
 is not buildable in-plugin.
@@ -1180,6 +1197,66 @@ the committed contract is post-promotion curated), and it owes a gate that
 runs the promote step, not just the emit step. The tree was restored from
 git after the measurement; nothing from that run is in this round's patch.
 
+## B.31 `anatomy.root.attrs` bindings are not named on the canvas
+
+Found 2026-08-23 while writing [docs/29 — How It Flows](29-how-it-flows.md)
+(worked example E3). A contract prop bound to a root attribute —
+`contracts/top-nav-item.contract.json` `href` with
+`anatomy.root.attrs = {href: "{href}"}` — reaches the canvas only as the
+**value** of an unbound TEXT component property (`Href`, default `#`, via
+`textOnlyProps` in `core/emit-figma-script.ts`). The **binding** — "this
+property is the root element's `href`" — is not a canvas field, and it is not
+a code-only fact either: `grep -an 'part.attrs' core/emit-figma-script.ts`
+(the file carries NUL bytes; grep needs `-a`) hits only the `placeholder`
+attribute (`:3386`, `:3400`). On hop 4 the binding is never re-proposed; the
+round-trip comparator files `element/attrs` under CANVAS-ABSENT
+(`extract/figma/roundtrip.ts`), so the shipping round trip sees it, but a set
+built by the plugin carries no receipt of it. **What you would observe:** a
+designer reading the set cannot tell that `Href` is an attribute rather than
+visible text. **What it would take:** one more `codeOnlyFacts` kind
+(`attr`) emitted per bound attribute, and the same row in the proposal
+notes when a TEXT definition with no text-node reference is met on hop 4 —
+the BOOLEAN twin already has that branch (`FC-DUMP-PROPOSE-UNBOUND-BOOLEAN`);
+the TEXT case is unverified by execution and is not claimed either way.
+
+## B.32 A native checkable part compiles to no node, and is not receipted per contract
+
+Same date, same source. `input[type=checkbox|radio]` parts are code
+semantics — the presentational box and glyphs are the visual — so the canvas
+emitter draws nothing for them (`isNativeCheckablePart`,
+`packages/schema/src/contract-schema.ts`; the filter in
+`core/emit-figma-script.ts`). That is the right lowering, and it is documented
+in the emitter, but it is not a `codeOnlyFacts` row: the bundle, the plugin run
+report and the set's `ds_contracts/codeOnlyFacts` stamp are all silent about
+the part. **What you would observe:** Checkbox's and Radio's receipts read as
+if every part crossed. **What it would take:** one `declared`-kind fact per
+native checkable part with the reason the emitter already states in its
+comment, and a pin in `core/code-only-facts-check.ts`.
+
+## B.33 `semantics.roleException` is not stamped on the canvas, so a hop-4 proposal of a role-excepted component is refused by the referee
+
+Found 2026-08-23 by the Playground walkthrough (`?tour=figma-to-code`,
+"Stamped set" step) and pinned by `npm run playground:flow-check`. The
+`ds_contracts/semantics` stamp a generated set carries holds `element` and
+`role` only (`extract/figma/dump.plugin.js`, the dump v1.24 comment block);
+`core/propose-figma.ts` does not carry a `roleException` (`grep -a
+roleException core/propose-figma.ts` is empty). The Flowbite ToggleSwitch
+contract declares `semantics.roleException` — a `<button role="switch">`
+with no native checkbox in the DOM
+(`examples/tailwind/contracts/toggleswitch.contract.json`). Proposed back
+from `extract/figma/fixtures/flowbite-eight.dump.json`, the contract carries
+`role: "switch"` on `element: "button"` and no exception, so the native-role
+rule in `packages/core/src/validate.ts` refuses it: `semantics.role claims
+role "switch" on element "button" — native <input type="checkbox"> (role="switch"
+on it is the modern switch pattern) exists; use it or declare the exception
+(semantics.roleException: "<one-sentence reason>")`. **What you would
+observe:** `ds-contracts generate` on that proposal refuses by name; the
+walkthrough shows the refusal under the editor rather than hiding it.
+**What it would take:** stamp `roleException` (root and per-part) beside
+`element`/`role` in the dump, and carry it through `proposeFromDump`; the
+flow-check pin then fails and the tour copy is rewritten. The count of
+affected contracts is not measured here.
+
 ---
 
 # §C — THE MEASURED PRICE OF WHAT WORKS
@@ -1191,7 +1268,7 @@ companion figures — what the same measurements say went right — are in
 
 <a id="1-coverage--how-much-of-a-library-is-actually-captured"></a>
 
-## B.31 The held-out exam rendered five cells, not fifteen sets
+## B.34 The held-out exam rendered five cells, not fifteen sets
 
 The Phase 2 exam ([FIGMA-DS-EXAM.md](../parity/receipts/phase-2/FIGMA-DS-EXAM.md))
 read 3,556 canvas facts off fifteen component sets, but the render comparison —
@@ -1339,6 +1416,8 @@ captured in **zero** libraries inflates Astryx's denominator by more than twice
 that library's entire numerator (13):
 
 ```bash
+# examples/astryx/out/ and .astryx-sandbox/ are gitignored (not tracked): recreate the
+# sandbox per examples/astryx/PROVENANCE.md, then `npm run extract:code -- examples/astryx/extract.config.json`
 node -e "const ext=require('./examples/astryx/out/code-extraction.json');
 const pkg=require('./examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/package.json');
 const subs=new Set(Object.keys(pkg.exports).filter(k=>/^\.\/[A-Z][^/]*\$/.test(k)).map(k=>k.slice(2)));
@@ -1379,7 +1458,7 @@ data.
 | Altitude (`altitude-web-components@1.0.2`) | 8 | 67 | FAMILY | yes | **11.9%** | **64** | **12.5%** | 3 |
 | Polaris (`@shopify/polaris@13.9.5`) | 12 | 180 | PART | **NO** — GitHub clone `Shopify/polaris@2b1ea88`, name list not in this repo | **6.7%** | **98** *(substitute set: the captured package's own `build/esm/components`, 121 dirs)* | **12.2%** | 23 |
 | Carbon (`@carbon/react@1.112.0`) | 10 | 243 | PART | **NO** — GitHub clone `carbon-design-system/carbon@bc66fc71`, name list not in this repo | **4.1%** | **110** *(substitute set: the captured package's own `es/components`, 122 dirs)* | **9.1%** | 12 |
-| Astryx (`@astryxdesign/core@0.1.6`) | 13 | 222 | PART | yes (`examples/astryx/out/code-extraction.json`) | **5.9%** | **96** *(the package's own capitalised subpath exports, 99)* | **13.5%** | 3 |
+| Astryx (`@astryxdesign/core@0.1.6`) | 13 | 222 | PART | yes (`examples/astryx/out/code-extraction.json` — a gitignored extraction output, not tracked; regenerate it with `npm run extract:code -- examples/astryx/extract.config.json` over the sandbox in `examples/astryx/PROVENANCE.md`) | **5.9%** | **96** *(the package's own capitalised subpath exports, 99)* | **13.5%** | 3 |
 | **total** | **62** | **893** | mixed | — | **6.9%** | **529** | **11.7%** |  |
 | *unweighted mean of the six rows* |  |  |  |  | *8.3%* |  | *11.8%* |  |
 
@@ -1443,6 +1522,7 @@ classes rule keeps `Collapse` and `ScopedCssBaseline`, drops `MenuList` and
 rules, same count:
 
 ```bash
+# examples/mui/.mui-sandbox is the gitignored install sandbox (not tracked): recreate it per examples/mui/PROVENANCE.md
 node -e "const fs=require('fs');const d='examples/mui/.mui-sandbox/node_modules/@mui/material';
 const dirs=fs.readdirSync(d,{withFileTypes:true}).filter(e=>e.isDirectory()&&/^[A-Z]/.test(e.name)).map(e=>e.name);
 const no=dirs.filter(n=>!fs.readdirSync(d+'/'+n).includes(n[0].toLowerCase()+n.slice(1)+'Classes.js'));
@@ -2189,9 +2269,9 @@ dup-key / `__proto__` forms.
 `childStubs` + `mintedTokens` in the export — *"this pin fails the build if
 either payload is ever dropped again."*
 
-**A named limit that came with it:** the playground's recommended REST import
-route is a v1.5 mapper against a v1.13 plugin dump — eight revisions of channels
-it cannot see (`strokeAlign`, wrap, constraints, imageFill, textOverrides,
+**A named limit that came with it (as of that date):** the playground's
+recommended REST import route was a v1.5 mapper against a v1.13 plugin dump —
+eight revisions of channels it could not see (`strokeAlign`, wrap, constraints, imageFill, textOverrides,
 fixedSize, multi-mode values, non-shape abs). Those were previously silent while
 the UI said "values still come through exactly". The mapper now stamps
 `_provenance.captureGaps` with 8 named entries and their consequences (*"an
@@ -2247,6 +2327,7 @@ A third, adjacent robustness hole closed with them: a **500-deep minted tree**
 blew the stack with a `RangeError` *after* deliver-once had burned the payload,
 so the delivery just vanished. An iterative depth guard (64 levels, far past any
 real DTCG) refuses by name at parse.
+
 
 ---
 
@@ -2595,14 +2676,16 @@ console.log('total'.padEnd(9),'contracts',C,'drift rows',R)"
 # → 62 contracts, 54 drift rows
 
 # the unit defect in the published denominator (§C.1.3): 98 dirs, 97 public,
-# and `Table` alone is 29 of Astryx's 222
+# and `Table` alone is 29 of Astryx's 222 (examples/astryx/out/ and .astryx-sandbox/ are
+# gitignored: sandbox per examples/astryx/PROVENANCE.md, then `npm run extract:code -- examples/astryx/extract.config.json`)
 node -e "const ext=require('./examples/astryx/out/code-extraction.json');
 const pkg=require('./examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/package.json');
 const subs=new Set(Object.keys(pkg.exports).filter(k=>/^\.\/[A-Z][^/]*\$/.test(k)).map(k=>k.slice(2)));
 const f=new Map();for(const e of ext){const d=e.source.match(/\/src\/([^/]+)\//)[1];f.set(d,(f.get(d)||0)+1)}
 console.log(f.size,[...f.keys()].filter(d=>subs.has(d)).length,f.get('Table'))"   # → 98 97 29
 
-# the filtered MUI denominator, by a library-native rule (§C.1.3)
+# the filtered MUI denominator, by a library-native rule (§C.1.3); examples/mui/.mui-sandbox is
+# the gitignored install sandbox (not tracked) — recreate it per examples/mui/PROVENANCE.md
 node -e "const fs=require('fs');const d='examples/mui/.mui-sandbox/node_modules/@mui/material';
 const dirs=fs.readdirSync(d,{withFileTypes:true}).filter(e=>e.isDirectory()&&/^[A-Z]/.test(e.name)).map(e=>e.name);
 const no=dirs.filter(n=>!fs.readdirSync(d+'/'+n).includes(n[0].toLowerCase()+n.slice(1)+'Classes.js'));
@@ -3008,3 +3091,27 @@ extract/computed/configs/polaris.json` is the re-record; `npx tsx
 examples/polaris/generate.ts --check`, `figma:fresh`, `generated:fresh`,
 `evals --only polaris,promote-generalization`, tsc, lint, format, docs all
 green on the patch. Round r12 (patch over `537022b0`).
+
+## D.34 The built Playground shipped an EMPTY emitter registry — CLOSED
+
+Found 2026-08-23 by the integrator walking the **built** Playground
+(`npm run build:playground` + `vite preview`, Playwright over both guided
+tours): the Code → Figma walkthrough's Script step refused `no emitter
+registered as "figma-script"`, and the output tab strip (React / HTML + CSS /
+React inline / Figma script) was empty. The dev server showed none of it.
+Cause: the root `package.json` declares `"sideEffects": ["**/*.css"]`, so the
+production bundler (Rolldown under Vite 8) treats `core/emitter.ts` as
+side-effect free and drops its load-time registration loop whenever no
+value export of that module is referenced — `playground/src/pages/Playground.tsx`
+imported only `emitters` (the bare array in `packages/core/src/emitter.ts`).
+Reproduced on `origin/main` at `e6225760` by building the playground from a
+worktree with no other change: the bundle carried no `registerEmitter` and
+no emitter label, so the limitation predates this round and was live in any
+deploy built from that state (the 2026-08-17 deploy's bundle still carried
+them). Closed by `playground/src/engine/emitters.ts`: the registry is the
+value of a call that registers any missing built-in and refuses at load if
+one is still absent; `playground:flow-check` (a `maintain` step) pins that
+`Playground.tsx` reads the registry through that module. Marking
+`core/emitter.ts` in `sideEffects` was tried and rejected: esbuild honours the
+same field, and the plugin engine bundle grew past its committed 811,089
+bytes (`figma-sync/plugin/engine.receipt.json` refused the grown bundle).

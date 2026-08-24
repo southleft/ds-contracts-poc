@@ -1,0 +1,77 @@
+{
+  "id": "shadcn.tooltip",
+  "name": "Tooltip",
+  "library": "shadcn",
+  "contractPath": "examples/shadcn/contracts/tooltip.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/shadcn/figma/shadcn.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 1,
+      "sampled": 1,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [],
+    "states": [],
+    "parts": [
+      "root",
+      "label",
+      "part-0-0",
+      "icon",
+      "part-0-0-0-0"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.shared.color-0a0a0a",
+      "imported.shared.color-ffffff",
+      "imported.shared.num-50",
+      "imported.shared.size-0",
+      "imported.shared.size-10",
+      "imported.shared.size-12",
+      "imported.shared.size-16",
+      "imported.shared.size-2",
+      "imported.shared.size-6",
+      "imported.shared.size-8",
+      "imported.tooltip.label.font-weight",
+      "imported.tooltip.label.max-width",
+      "imported.tooltip.part-0-0.bottom",
+      "imported.tooltip.part-0-0.left",
+      "imported.tooltip.part-0-0.right",
+      "imported.tooltip.root.height",
+      "imported.tooltip.root.translate-y",
+      "imported.tooltip.root.width"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "tooltip",
+      "variant": "Tooltip",
+      "kind": "base",
+      "subst": {},
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-tooltip.png",
+      "contentBox": {
+        "width": 219.02,
+        "height": 78
+      }
+    }
+  ],
+  "rendered": 1,
+  "refused": 0,
+  "unavailable": null
+}

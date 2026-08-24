@@ -1,0 +1,143 @@
+{
+  "id": "ds.pagination",
+  "name": "Pagination",
+  "library": "first-party",
+  "contractPath": "contracts/pagination.contract.json",
+  "contractVersion": "1.0.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "tokens/ (layered primitives + brand + semantic + light/dark) via src/styles/tokens.css",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 3,
+      "sampled": 3,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "pages"
+      },
+      {
+        "name": "pageLabel",
+        "type": "text",
+        "default": "Page 2 of 10"
+      },
+      {
+        "name": "label",
+        "type": "text",
+        "default": "Pagination"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "prevButton",
+      "pagesGroup",
+      "pageOne",
+      "pageCurrent",
+      "pageThree",
+      "ellipsis",
+      "pageLast",
+      "compactText",
+      "dotsGroup",
+      "dotActive",
+      "dotTwo",
+      "dotThree",
+      "nextButton"
+    ],
+    "contentSlots": [
+      {
+        "part": "compactText",
+        "prop": "pageLabel"
+      }
+    ],
+    "tokenRefs": [
+      "color.nav.selected.background",
+      "color.nav.selected.foreground",
+      "color.status.accent",
+      "color.status.neutral",
+      "color.surface.foreground",
+      "color.text.secondary",
+      "font.control.family",
+      "font.control.size.sm",
+      "font.title.weight",
+      "label",
+      "radius.100",
+      "radius.pill",
+      "size.dot",
+      "space.gap.sm",
+      "space.inset-y.md",
+      "space.inset-y.sm",
+      "space.inset-y.xs"
+    ],
+    "icons": [
+      "chevron-left",
+      "chevron-right"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-pages",
+      "variant": "Variant=Pages",
+      "kind": "base",
+      "subst": {
+        "variant": "pages"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-pages.png",
+      "contentBox": {
+        "width": 181.2,
+        "height": 27
+      }
+    },
+    {
+      "slug": "variant-compact",
+      "variant": "Variant=Compact",
+      "kind": "base",
+      "subst": {
+        "variant": "compact"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-compact.png",
+      "contentBox": {
+        "width": 126.02,
+        "height": 17
+      }
+    },
+    {
+      "slug": "variant-dots",
+      "variant": "Variant=Dots",
+      "kind": "base",
+      "subst": {
+        "variant": "dots"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-dots.png",
+      "contentBox": {
+        "width": 76,
+        "height": 14
+      }
+    }
+  ],
+  "rendered": 3,
+  "refused": 0,
+  "unavailable": null
+}

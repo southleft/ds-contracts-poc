@@ -1,0 +1,228 @@
+{
+  "id": "carbon.inlinenotification",
+  "name": "InlineNotification",
+  "library": "carbon",
+  "contractPath": "examples/carbon/contracts/inlinenotification.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/carbon/figma/carbon.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 12,
+      "sampled": 7,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "kind",
+        "type": "enum",
+        "default": "error"
+      },
+      {
+        "name": "contrast",
+        "type": "enum",
+        "default": "high"
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "inline-notification__details",
+      "icon",
+      "icon-error",
+      "icon-info",
+      "icon-info-square",
+      "icon-success",
+      "icon-warning",
+      "icon-warning-alt",
+      "inline-notification__text-wrapper",
+      "label",
+      "label-2",
+      "inline-notification__close-button"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.inline-notification.icon.color.high",
+      "imported.inline-notification.icon.color.low",
+      "imported.inline-notification.icon.flex-shrink",
+      "imported.inline-notification.icon.margin-right",
+      "imported.inline-notification.inline-notification-close-button.background-color",
+      "imported.inline-notification.inline-notification-close-button.outline-color",
+      "imported.inline-notification.inline-notification-close-button.outline-offset",
+      "imported.inline-notification.inline-notification-close-button.outline-width",
+      "imported.inline-notification.inline-notification-details.color.high",
+      "imported.inline-notification.inline-notification-details.color.low",
+      "imported.inline-notification.inline-notification-details.flex-grow",
+      "imported.inline-notification.inline-notification-details.margin-left",
+      "imported.inline-notification.inline-notification-details.margin-right",
+      "imported.inline-notification.inline-notification-text-wrapper.color.high",
+      "imported.inline-notification.inline-notification-text-wrapper.color.low",
+      "imported.inline-notification.inline-notification-text-wrapper.padding-bottom",
+      "imported.inline-notification.inline-notification-text-wrapper.padding-top",
+      "imported.inline-notification.label-2.color.high",
+      "imported.inline-notification.label-2.color.low",
+      "imported.inline-notification.label-2.font-weight",
+      "imported.inline-notification.label-2.letter-spacing",
+      "imported.inline-notification.label-2.line-height",
+      "imported.inline-notification.label.color.high",
+      "imported.inline-notification.label.color.low",
+      "imported.inline-notification.label.font-weight",
+      "imported.inline-notification.label.letter-spacing",
+      "imported.inline-notification.label.line-height",
+      "imported.inline-notification.label.margin-right",
+      "imported.inline-notification.root.border-left-width",
+      "imported.inline-notification.root.color.high",
+      "imported.inline-notification.root.color.low",
+      "imported.inline-notification.root.max-width",
+      "imported.inline-notification.root.min-width",
+      "imported.inline-notification.root.showcase-width",
+      "imported.shared.size-0",
+      "imported.shared.size-14",
+      "imported.shared.size-48"
+    ],
+    "icons": [
+      "inline-notification-icon-error",
+      "inline-notification-icon-info",
+      "inline-notification-icon-info-square",
+      "inline-notification-icon-success",
+      "inline-notification-icon-warning",
+      "inline-notification-icon-warning-alt",
+      "inline-notification-inline-notification-close-button"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "kind-error__contrast-high",
+      "variant": "Kind=Error, Contrast=High",
+      "kind": "base",
+      "subst": {
+        "kind": "error",
+        "contrast": "high"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-error__contrast-high.png",
+      "contentBox": {
+        "width": 428,
+        "height": 48
+      }
+    },
+    {
+      "slug": "kind-error__contrast-low",
+      "variant": "Kind=Error, Contrast=Low",
+      "kind": "base",
+      "subst": {
+        "kind": "error",
+        "contrast": "low"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-error__contrast-low.png",
+      "contentBox": {
+        "width": 428,
+        "height": 50
+      }
+    },
+    {
+      "slug": "kind-info__contrast-high",
+      "variant": "Kind=Info, Contrast=High",
+      "kind": "base",
+      "subst": {
+        "kind": "info",
+        "contrast": "high"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-info__contrast-high.png",
+      "contentBox": {
+        "width": 428,
+        "height": 48
+      }
+    },
+    {
+      "slug": "kind-info-square__contrast-high",
+      "variant": "Kind=Info Square, Contrast=High",
+      "kind": "base",
+      "subst": {
+        "kind": "info-square",
+        "contrast": "high"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-info-square__contrast-high.png",
+      "contentBox": {
+        "width": 428,
+        "height": 48
+      }
+    },
+    {
+      "slug": "kind-success__contrast-high",
+      "variant": "Kind=Success, Contrast=High",
+      "kind": "base",
+      "subst": {
+        "kind": "success",
+        "contrast": "high"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-success__contrast-high.png",
+      "contentBox": {
+        "width": 428,
+        "height": 48
+      }
+    },
+    {
+      "slug": "kind-warning__contrast-high",
+      "variant": "Kind=Warning, Contrast=High",
+      "kind": "base",
+      "subst": {
+        "kind": "warning",
+        "contrast": "high"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-warning__contrast-high.png",
+      "contentBox": {
+        "width": 428,
+        "height": 48
+      }
+    },
+    {
+      "slug": "kind-warning-alt__contrast-high",
+      "variant": "Kind=Warning Alt, Contrast=High",
+      "kind": "base",
+      "subst": {
+        "kind": "warning-alt",
+        "contrast": "high"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-kind-warning-alt__contrast-high.png",
+      "contentBox": {
+        "width": 428,
+        "height": 48
+      }
+    }
+  ],
+  "rendered": 7,
+  "refused": 0,
+  "unavailable": null
+}

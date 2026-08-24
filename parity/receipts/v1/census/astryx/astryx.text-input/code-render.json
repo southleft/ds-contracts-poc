@@ -1,0 +1,196 @@
+{
+  "id": "astryx.text-input",
+  "name": "TextInput",
+  "library": "astryx",
+  "contractPath": "examples/astryx/contracts/text-input.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/astryx/figma/astryx.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 9,
+      "sampled": 5,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "type",
+        "type": "enum",
+        "default": "text"
+      },
+      {
+        "name": "label",
+        "type": "text",
+        "default": "Email"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "md"
+      },
+      {
+        "name": "placeholder",
+        "type": "text",
+        "default": "you@example.com"
+      },
+      {
+        "name": "isRequired",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "isDisabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "hasClear",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "label",
+      "field",
+      "start-icon",
+      "icon-text",
+      "icon-email",
+      "icon-password",
+      "placeholder-text"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "label"
+      },
+      {
+        "part": "placeholder-text",
+        "prop": "placeholder"
+      }
+    ],
+    "tokenRefs": [
+      "border-width",
+      "color-background-surface",
+      "color-border-emphasized",
+      "color-icon-secondary",
+      "color-text-primary",
+      "color-text-secondary",
+      "font-family-body",
+      "font-size-sm",
+      "font-size-xs",
+      "radius-element",
+      "spacing-1",
+      "spacing-2",
+      "spacing-3",
+      "spacing-4"
+    ],
+    "icons": [
+      "text-input-lock",
+      "text-input-mail",
+      "text-input-user"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "type-text__size-md",
+      "variant": "Type=Text, Size=Md",
+      "kind": "base",
+      "subst": {
+        "type": "text",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-text__size-md.png",
+      "contentBox": {
+        "width": 320,
+        "height": 50
+      }
+    },
+    {
+      "slug": "type-text__size-sm",
+      "variant": "Type=Text, Size=Sm",
+      "kind": "base",
+      "subst": {
+        "type": "text",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-text__size-sm.png",
+      "contentBox": {
+        "width": 320,
+        "height": 42
+      }
+    },
+    {
+      "slug": "type-text__size-lg",
+      "variant": "Type=Text, Size=Lg",
+      "kind": "base",
+      "subst": {
+        "type": "text",
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-text__size-lg.png",
+      "contentBox": {
+        "width": 320,
+        "height": 58
+      }
+    },
+    {
+      "slug": "type-password__size-md",
+      "variant": "Type=Password, Size=Md",
+      "kind": "base",
+      "subst": {
+        "type": "password",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-password__size-md.png",
+      "contentBox": {
+        "width": 320,
+        "height": 50
+      }
+    },
+    {
+      "slug": "type-email__size-md",
+      "variant": "Type=Email, Size=Md",
+      "kind": "base",
+      "subst": {
+        "type": "email",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-email__size-md.png",
+      "contentBox": {
+        "width": 320,
+        "height": 50
+      }
+    }
+  ],
+  "rendered": 5,
+  "refused": 0,
+  "unavailable": null
+}

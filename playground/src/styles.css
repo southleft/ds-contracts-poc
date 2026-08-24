@@ -143,6 +143,27 @@ textarea,
 
   .topbar__link {
     padding: 0 8px;
+    /* Six links at 390px: wrapping inside a 48px bar stacked "How it
+       flows" on three lines (2026-08-23 review frame); keep each link on
+       one line and let the bar scroll sideways instead. */
+    white-space: nowrap;
+  }
+
+  .topbar {
+    overflow-x: auto;
+    /* The bar scrolls sideways by design (see .topbar__link above); keep a
+       thin scrollbar visible so the off-screen links read as reachable. */
+    scrollbar-width: thin;
+    scrollbar-color: var(--pg-border) transparent;
+  }
+
+  .topbar::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .topbar::-webkit-scrollbar-thumb {
+    background: var(--pg-border);
+    border-radius: 2px;
   }
 }
 
@@ -1084,6 +1105,11 @@ label {
 
 .editor__line--refused {
   background: color-mix(in srgb, var(--pg-danger) 14%, transparent);
+}
+
+.editor__line--anchor {
+  background: color-mix(in srgb, var(--pg-accent) 22%, transparent);
+  box-shadow: inset 3px 0 0 var(--pg-accent);
 }
 
 /* When Prism paints the backdrop, the backdrop IS the text layer: the
@@ -2387,4 +2413,449 @@ label {
 
 .checkline input {
   width: auto;
+}
+
+/* ------------------------------------------------ guided walkthroughs */
+
+/* The tour strip reuses the onboarding strip's chrome; the current step is
+ * the accent-bordered one, done steps go green like onboarding's. */
+.tourstrip__title b {
+  color: var(--pg-fg);
+}
+
+.onboard__step.is-current {
+  border-color: var(--pg-accent);
+  box-shadow: inset 0 0 0 1px var(--pg-accent);
+}
+
+.onboard__step.is-current .onboard__num {
+  background: var(--pg-accent);
+  color: var(--pg-accent-fg);
+  border-color: var(--pg-accent);
+}
+
+.tourstrip__nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.tourstrip__nav .onboard__dismiss {
+  margin-left: 0;
+}
+
+.tourstrip__other {
+  text-decoration: none;
+}
+
+/* Stacked layout (≤1100px): the strip pins to the top as a compact pager —
+ * only the current step pill and Prev / Next stay — and Playground.tsx
+ * scrolls the output pane into view under it on every step change; without
+ * both, Next changed nothing on screen and each step cost a full-page
+ * scroll (2026-08-23 review). */
+@media (max-width: 1100px) {
+  .tourstrip {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+
+  .tourstrip .onboard__step:not(.is-current) {
+    display: none;
+  }
+
+  .tourstrip__title {
+    display: none;
+  }
+
+  .pg__output {
+    /* The strip is two rows (~80px) at phone widths; clear it fully. */
+    scroll-margin-top: 88px;
+  }
+}
+
+.tabs__tab--flow {
+  font-weight: 600;
+}
+
+/* The Flow panel — one artifact per step. Scrolls inside the output body. */
+.flow {
+  padding: 16px 20px 28px;
+  font-size: 13px;
+  line-height: 1.5;
+  max-width: 960px;
+}
+
+.flow__head {
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--pg-border);
+}
+
+.flow__step {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--pg-faint);
+}
+
+.flow__title {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 4px 0 6px;
+  line-height: 1.25;
+}
+
+.flow__lead {
+  margin: 0;
+  color: var(--pg-muted);
+}
+
+.flow__h {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pg-faint);
+  margin: 18px 0 6px;
+  font-weight: 600;
+}
+
+.flow__label {
+  display: inline-block;
+  font-size: 11.5px;
+  padding: 2px 8px;
+  margin: 0 0 10px;
+  border: 1px solid var(--pg-warn);
+  color: var(--pg-warn);
+  background: var(--pg-surface);
+}
+
+.flow__mono {
+  font-family: var(--pg-mono);
+  font-size: 12px;
+  background: var(--pg-surface);
+  padding: 0 4px;
+  overflow-wrap: anywhere;
+}
+
+.flow__muted {
+  color: var(--pg-faint);
+}
+
+.flow__ok {
+  color: var(--pg-ok);
+}
+
+.flow__bad {
+  color: var(--pg-danger);
+  font-weight: 600;
+}
+
+.flow__source {
+  margin: 14px 0 0;
+  padding: 10px 12px;
+  border-left: 2px solid var(--pg-border-strong);
+  color: var(--pg-muted);
+  font-size: 12.5px;
+}
+
+.flow__kv {
+  margin: 0;
+  display: grid;
+  grid-template-columns: minmax(140px, 220px) 1fr;
+  border: 1px solid var(--pg-border);
+}
+
+.flow__kv-row {
+  display: contents;
+}
+
+.flow__kv dt,
+.flow__kv dd {
+  margin: 0;
+  padding: 6px 10px;
+  border-top: 1px solid var(--pg-border);
+  overflow-wrap: anywhere;
+}
+
+.flow__kv-row:first-child dt,
+.flow__kv-row:first-child dd {
+  border-top: none;
+}
+
+.flow__kv dt {
+  color: var(--pg-muted);
+  background: var(--pg-surface);
+  font-size: 12px;
+}
+
+.flow__hops {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.flow__hops li + li {
+  margin-top: 6px;
+}
+
+.flow__chip {
+  display: inline-block;
+  margin: 2px 6px 2px 0;
+  padding: 1px 8px;
+  border: 1px solid var(--pg-border);
+  font-size: 12px;
+}
+
+.flow__chip.is-focus {
+  border-color: var(--pg-accent);
+  font-weight: 600;
+}
+
+.flow__chips {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.flow__refusals {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.flow__refusals li {
+  color: var(--pg-danger);
+  margin: 4px 0;
+}
+
+.flow__refusals--soft li {
+  color: var(--pg-fg);
+}
+
+.flow__details summary {
+  cursor: pointer;
+  font-size: 12.5px;
+  color: var(--pg-muted);
+  margin-top: 8px;
+}
+
+.flow__quote {
+  margin: 8px 0;
+  padding: 10px 12px;
+  border-left: 3px solid var(--pg-danger);
+  background: var(--pg-surface);
+  font-family: var(--pg-mono);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.flow__quote--inline {
+  margin-top: 6px;
+}
+
+.flow__quote footer {
+  margin-top: 6px;
+  font-family: var(--pg-font);
+  font-size: 11.5px;
+  color: var(--pg-faint);
+}
+
+.flow__excerpt {
+  margin: 12px 0;
+  border: 1px solid var(--pg-border);
+}
+
+.flow__excerpt figcaption {
+  font-size: 12px;
+  padding: 6px 10px;
+  background: var(--pg-surface);
+  border-bottom: 1px solid var(--pg-border);
+  color: var(--pg-muted);
+}
+
+.flow__excerpt pre {
+  margin: 0;
+  padding: 6px 0;
+  font-family: var(--pg-mono);
+  font-size: 12px;
+  overflow-x: auto;
+}
+
+.flow__excerpt-row {
+  display: flex;
+  gap: 12px;
+  padding: 0 10px;
+  white-space: pre;
+}
+
+.flow__excerpt-row.is-hit {
+  background: color-mix(in srgb, var(--pg-accent) 16%, transparent);
+  font-weight: 600;
+}
+
+.flow__excerpt-n {
+  width: 3.5em;
+  text-align: right;
+  color: var(--pg-faint);
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.flow__table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--pg-border);
+  margin: 6px 0;
+}
+
+.flow__table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12.5px;
+}
+
+.flow__table th,
+.flow__table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 6px 10px;
+  border-top: 1px solid var(--pg-border);
+}
+
+/* The output pane is ~480px wide and the widest step table carries six
+ * columns; nowrap cells hid the REASON column (the point of the step)
+ * behind an in-pane sideways scroll (2026-08-23 review). Every cell wraps
+ * instead — mono values may break mid-token — so every column is visible.
+ * Headers stay on one line. */
+.flow__table th {
+  white-space: nowrap;
+}
+
+.flow__table td {
+  overflow-wrap: anywhere;
+}
+
+.flow__table td:last-child {
+  min-width: 140px;
+}
+
+/* Identifiers must not break mid-word ("poin ter", "flowbite.toggl
+   eswitch" — 2026-08-23 390px review frame): mono cells opt back out of the
+   td's overflow-wrap and the wrap scrolls instead, with a visible thin
+   scrollbar as the affordance. Prose cells (the REASON column) keep
+   wrapping. */
+.flow__table .flow__mono {
+  overflow-wrap: normal;
+}
+
+.flow__table-wrap {
+  scrollbar-width: thin;
+  scrollbar-color: var(--pg-border) transparent;
+}
+
+.flow__table-wrap::-webkit-scrollbar {
+  height: 6px;
+}
+
+.flow__table-wrap::-webkit-scrollbar-thumb {
+  background: var(--pg-border);
+  border-radius: 3px;
+}
+
+.flow__table th {
+  border-top: none;
+  background: var(--pg-surface);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pg-faint);
+  font-weight: 600;
+}
+
+.flow__table tr.is-jumpable {
+  cursor: pointer;
+}
+
+.flow__table tr.is-jumpable:hover td {
+  background: var(--pg-surface);
+}
+
+.flow__json {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--pg-border);
+  font-family: var(--pg-mono);
+  font-size: 12px;
+  max-height: 320px;
+  overflow: auto;
+  white-space: pre;
+}
+
+.flow__json--tall {
+  max-height: 420px;
+}
+
+.flow__json-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  padding: 6px 10px;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-border);
+  border-bottom: none;
+}
+
+.flow__body .btn-row {
+  margin-top: 10px;
+}
+
+/* /flow — the landing for both walkthroughs */
+.flowpage__hops {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 8px;
+  margin: 0 0 28px;
+}
+
+.flowpage__hop {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border: 1px solid var(--pg-border);
+  padding: 10px 12px;
+  font-size: 12.5px;
+}
+
+.flowpage__hop-n {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--pg-faint);
+}
+
+.flowpage__hop-path {
+  font-weight: 600;
+}
+
+.flowpage__hop-verb {
+  color: var(--pg-muted);
+  font-family: var(--pg-mono);
+  font-size: 11.5px;
+}
+
+.flowpage__ctas {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.cta__steps {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  font-size: 12.5px;
+  color: var(--pg-muted);
+  columns: 2;
+}
+
+.cta__steps li {
+  break-inside: avoid;
 }

@@ -1,0 +1,140 @@
+{
+  "id": "polaris.thumbnail",
+  "name": "Thumbnail",
+  "library": "polaris",
+  "contractPath": "examples/polaris/contracts/thumbnail.contract.json",
+  "contractVersion": "0.4.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/polaris/figma/polaris.bundle.json tokenSet (flat base + minted)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 4,
+      "sampled": 4,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "medium"
+      },
+      {
+        "name": "alt",
+        "type": "text",
+        "default": "Black choker necklace"
+      },
+      {
+        "name": "transparent",
+        "type": "boolean",
+        "default": null
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "part-0"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "alt",
+      "imported.shared.size-0",
+      "imported.thumbnail.part-0.color",
+      "imported.thumbnail.part-0.height.extraSmall",
+      "imported.thumbnail.part-0.height.large",
+      "imported.thumbnail.part-0.height.medium",
+      "imported.thumbnail.part-0.height.small",
+      "imported.thumbnail.part-0.width.extraSmall",
+      "imported.thumbnail.part-0.width.large",
+      "imported.thumbnail.part-0.width.medium",
+      "imported.thumbnail.part-0.width.small",
+      "imported.thumbnail.root.height.extraSmall",
+      "imported.thumbnail.root.height.large",
+      "imported.thumbnail.root.height.medium",
+      "imported.thumbnail.root.height.small",
+      "p.border-radius-150",
+      "p.border-radius-200",
+      "p.color-bg-surface"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "size-medium",
+      "variant": "Size=Medium",
+      "kind": "base",
+      "subst": {
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-medium.png",
+      "contentBox": {
+        "width": 60,
+        "height": 60
+      }
+    },
+    {
+      "slug": "size-extra-small",
+      "variant": "Size=Extra Small",
+      "kind": "base",
+      "subst": {
+        "size": "extraSmall"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-extra-small.png",
+      "contentBox": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "slug": "size-small",
+      "variant": "Size=Small",
+      "kind": "base",
+      "subst": {
+        "size": "small"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-small.png",
+      "contentBox": {
+        "width": 40,
+        "height": 40
+      }
+    },
+    {
+      "slug": "size-large",
+      "variant": "Size=Large",
+      "kind": "base",
+      "subst": {
+        "size": "large"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-large.png",
+      "contentBox": {
+        "width": 80,
+        "height": 80
+      }
+    }
+  ],
+  "rendered": 4,
+  "refused": 0,
+  "unavailable": null
+}

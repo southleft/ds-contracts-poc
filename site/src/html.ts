@@ -158,6 +158,7 @@ export function layout(opts: PageOpts, body: string): string {
         <p class="footer__label">Specification</p>
         <a href="/spec/">Reference</a>
         <a href="/how-it-works/">How it works</a>
+        <a href="/how-it-works/flow/">How it flows — Figma ↔ code</a>
         <a href="/how-it-works/protocol/">The protocol</a>
         <a href="/spec/versioning/">Versioning</a>
       </div>

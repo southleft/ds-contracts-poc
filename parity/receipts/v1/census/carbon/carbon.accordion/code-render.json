@@ -1,0 +1,181 @@
+{
+  "id": "carbon.accordion",
+  "name": "Accordion",
+  "library": "carbon",
+  "contractPath": "examples/carbon/contracts/accordion.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/carbon/figma/carbon.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 8,
+      "sampled": 5,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "align",
+        "type": "enum",
+        "default": "end"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": null
+      }
+    ],
+    "states": [
+      "disabled"
+    ],
+    "parts": [
+      "root",
+      "accordion__item",
+      "accordion__heading",
+      "icon",
+      "label",
+      "accordion__wrapper-2",
+      "accordion__wrapper",
+      "label-2"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.accordion.accordion-heading.background-color",
+      "imported.accordion.accordion-heading.color",
+      "imported.accordion.accordion-heading.min-height.lg",
+      "imported.accordion.accordion-heading.min-height.md",
+      "imported.accordion.accordion-heading.min-height.sm",
+      "imported.accordion.accordion-heading.min-height.unset",
+      "imported.accordion.accordion-item.border-bottom-color",
+      "imported.accordion.accordion-item.border-bottom-width",
+      "imported.accordion.accordion-item.border-top-color",
+      "imported.accordion.accordion-item.border-top-width",
+      "imported.accordion.accordion-wrapper.padding-bottom",
+      "imported.accordion.accordion-wrapper.padding-top",
+      "imported.accordion.icon.fill",
+      "imported.accordion.icon.flex-shrink",
+      "imported.accordion.icon.margin-left.end",
+      "imported.accordion.icon.margin-left.start",
+      "imported.accordion.icon.margin-top.end",
+      "imported.accordion.icon.margin-top.start",
+      "imported.accordion.icon.outline-color",
+      "imported.accordion.icon.outline-offset",
+      "imported.accordion.icon.outline-width",
+      "imported.accordion.label-2.font-weight",
+      "imported.accordion.label-2.margin-left.end",
+      "imported.accordion.label-2.margin-left.start",
+      "imported.accordion.label-2.padding-right",
+      "imported.accordion.label.font-size",
+      "imported.accordion.label.font-weight",
+      "imported.accordion.label.letter-spacing",
+      "imported.accordion.label.line-height",
+      "imported.accordion.label.margin-right.end",
+      "imported.accordion.label.margin-right.start",
+      "imported.accordion.label.z-index",
+      "imported.accordion.root.width",
+      "imported.shared.color-16161640",
+      "imported.shared.size-0",
+      "imported.shared.size-16"
+    ],
+    "icons": [
+      "accordion-icon"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "align-end__size-sm",
+      "variant": "Align=End, Size=Sm",
+      "kind": "base",
+      "subst": {
+        "align": "end",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-align-end__size-sm.png",
+      "contentBox": {
+        "width": 328,
+        "height": 98
+      }
+    },
+    {
+      "slug": "align-end__size-md",
+      "variant": "Align=End, Size=Md",
+      "kind": "base",
+      "subst": {
+        "align": "end",
+        "size": "md"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-align-end__size-md.png",
+      "contentBox": {
+        "width": 328,
+        "height": 106
+      }
+    },
+    {
+      "slug": "align-end__size-lg",
+      "variant": "Align=End, Size=Lg",
+      "kind": "base",
+      "subst": {
+        "align": "end",
+        "size": "lg"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-align-end__size-lg.png",
+      "contentBox": {
+        "width": 328,
+        "height": 114
+      }
+    },
+    {
+      "slug": "align-start__size-sm",
+      "variant": "Align=Start, Size=Sm",
+      "kind": "base",
+      "subst": {
+        "align": "start",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-align-start__size-sm.png",
+      "contentBox": {
+        "width": 328,
+        "height": 98
+      }
+    },
+    {
+      "slug": "align-end__size-sm__state-disabled",
+      "variant": "Align=End, Size=Sm, State=Disabled",
+      "kind": "state",
+      "state": "disabled",
+      "subst": {
+        "align": "end",
+        "size": "sm"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "refused",
+      "error": "state \"disabled\" drives boolean prop \"disabled\", which carbon.accordion does not declare"
+    }
+  ],
+  "rendered": 4,
+  "refused": 1,
+  "unavailable": null
+}

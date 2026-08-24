@@ -1,0 +1,377 @@
+{
+  "id": "mui.button",
+  "name": "Button",
+  "library": "mui",
+  "contractPath": "examples/mui/contracts/button.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/mui/figma/mui.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 75,
+      "sampled": 15,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "text"
+      },
+      {
+        "name": "color",
+        "type": "enum",
+        "default": "primary"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "medium"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Button"
+      }
+    ],
+    "states": [
+      "disabled",
+      "active",
+      "focus-visible",
+      "hover"
+    ],
+    "parts": [
+      "root"
+    ],
+    "contentSlots": [
+      {
+        "part": "root",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.button.root.border-bottom-width.contained",
+      "imported.button.root.border-bottom-width.outlined",
+      "imported.button.root.border-bottom-width.text",
+      "imported.button.root.border-left-width.contained",
+      "imported.button.root.border-left-width.outlined",
+      "imported.button.root.border-left-width.text",
+      "imported.button.root.border-right-width.contained",
+      "imported.button.root.border-right-width.outlined",
+      "imported.button.root.border-right-width.text",
+      "imported.button.root.border-top-width.contained",
+      "imported.button.root.border-top-width.outlined",
+      "imported.button.root.border-top-width.text",
+      "imported.button.root.box-shadow-state-disabled",
+      "imported.button.root.box-shadow.contained",
+      "imported.button.root.box-shadow.outlined",
+      "imported.button.root.box-shadow.text",
+      "imported.button.root.color-state-disabled",
+      "imported.button.root.font-size.large",
+      "imported.button.root.font-size.medium",
+      "imported.button.root.font-size.small",
+      "imported.button.root.font-weight",
+      "imported.button.root.min-width",
+      "imported.shared.size-0",
+      "imported.shared.size-4"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "variant-text__color-primary__size-medium",
+      "variant": "Variant=Text, Color=Primary, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "text",
+        "color": "primary",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-text__color-primary__size-medium.png",
+      "contentBox": {
+        "width": 69.66,
+        "height": 31
+      }
+    },
+    {
+      "slug": "variant-text__color-primary__size-small",
+      "variant": "Variant=Text, Color=Primary, Size=Small",
+      "kind": "base",
+      "subst": {
+        "variant": "text",
+        "color": "primary",
+        "size": "small"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-text__color-primary__size-small.png",
+      "contentBox": {
+        "width": 64,
+        "height": 26
+      }
+    },
+    {
+      "slug": "variant-text__color-primary__size-large",
+      "variant": "Variant=Text, Color=Primary, Size=Large",
+      "kind": "base",
+      "subst": {
+        "variant": "text",
+        "color": "primary",
+        "size": "large"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-text__color-primary__size-large.png",
+      "contentBox": {
+        "width": 79.5,
+        "height": 36
+      }
+    },
+    {
+      "slug": "variant-text__color-secondary__size-medium",
+      "variant": "Variant=Text, Color=Secondary, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "text",
+        "color": "secondary",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-text__color-secondary__size-medium.png",
+      "contentBox": {
+        "width": 69.66,
+        "height": 31
+      }
+    },
+    {
+      "slug": "variant-text__color-error__size-medium",
+      "variant": "Variant=Text, Color=Error, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "text",
+        "color": "error",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-text__color-error__size-medium.png",
+      "contentBox": {
+        "width": 69.66,
+        "height": 31
+      }
+    },
+    {
+      "slug": "variant-text__color-success__size-medium",
+      "variant": "Variant=Text, Color=Success, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "text",
+        "color": "success",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-text__color-success__size-medium.png",
+      "contentBox": {
+        "width": 69.66,
+        "height": 31
+      }
+    },
+    {
+      "slug": "variant-text__color-warning__size-medium",
+      "variant": "Variant=Text, Color=Warning, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "text",
+        "color": "warning",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-text__color-warning__size-medium.png",
+      "contentBox": {
+        "width": 69.66,
+        "height": 31
+      }
+    },
+    {
+      "slug": "variant-text__color-info__size-medium",
+      "variant": "Variant=Text, Color=Info, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "text",
+        "color": "info",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-text__color-info__size-medium.png",
+      "contentBox": {
+        "width": 69.66,
+        "height": 31
+      }
+    },
+    {
+      "slug": "variant-text__color-inherit__size-medium",
+      "variant": "Variant=Text, Color=Inherit, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "text",
+        "color": "inherit",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-text__color-inherit__size-medium.png",
+      "contentBox": {
+        "width": 69.66,
+        "height": 31
+      }
+    },
+    {
+      "slug": "variant-contained__color-primary__size-medium",
+      "variant": "Variant=Contained, Color=Primary, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "contained",
+        "color": "primary",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-contained__color-primary__size-medium.png",
+      "contentBox": {
+        "width": 85.66,
+        "height": 31
+      }
+    },
+    {
+      "slug": "variant-outlined__color-primary__size-medium",
+      "variant": "Variant=Outlined, Color=Primary, Size=Medium",
+      "kind": "base",
+      "subst": {
+        "variant": "outlined",
+        "color": "primary",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-outlined__color-primary__size-medium.png",
+      "contentBox": {
+        "width": 83.66,
+        "height": 29
+      }
+    },
+    {
+      "slug": "variant-text__color-primary__size-medium__state-disabled",
+      "variant": "Variant=Text, Color=Primary, Size=Medium, State=Disabled",
+      "kind": "state",
+      "state": "disabled",
+      "subst": {
+        "variant": "text",
+        "color": "primary",
+        "size": "medium"
+      },
+      "bools": {
+        "disabled": true
+      },
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-variant-text__color-primary__size-medium__state-disabled.png",
+      "contentBox": {
+        "width": 69.66,
+        "height": 31
+      }
+    },
+    {
+      "slug": "variant-text__color-primary__size-medium__state-active",
+      "variant": "Variant=Text, Color=Primary, Size=Medium, State=Active",
+      "kind": "state",
+      "state": "active",
+      "subst": {
+        "variant": "text",
+        "color": "primary",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "active",
+      "status": "rendered",
+      "png": "code-variant-text__color-primary__size-medium__state-active.png",
+      "contentBox": {
+        "width": 69.66,
+        "height": 31
+      }
+    },
+    {
+      "slug": "variant-text__color-primary__size-medium__state-focus-visible",
+      "variant": "Variant=Text, Color=Primary, Size=Medium, State=Focus Visible",
+      "kind": "state",
+      "state": "focus-visible",
+      "subst": {
+        "variant": "text",
+        "color": "primary",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "focus-visible",
+      "status": "rendered",
+      "png": "code-variant-text__color-primary__size-medium__state-focus-visible.png",
+      "contentBox": {
+        "width": 69.66,
+        "height": 31
+      }
+    },
+    {
+      "slug": "variant-text__color-primary__size-medium__state-hover",
+      "variant": "Variant=Text, Color=Primary, Size=Medium, State=Hover",
+      "kind": "state",
+      "state": "hover",
+      "subst": {
+        "variant": "text",
+        "color": "primary",
+        "size": "medium"
+      },
+      "bools": {},
+      "interaction": "hover",
+      "status": "rendered",
+      "png": "code-variant-text__color-primary__size-medium__state-hover.png",
+      "contentBox": {
+        "width": 69.66,
+        "height": 31
+      }
+    }
+  ],
+  "rendered": 15,
+  "refused": 0,
+  "unavailable": null
+}
