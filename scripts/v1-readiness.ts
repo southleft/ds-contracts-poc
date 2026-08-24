@@ -946,6 +946,13 @@ async function main(): Promise<number> {
     writeFileSync(path.join(RECEIPT_DIR, 'READINESS.json'), `${JSON.stringify({ meta: { commit, dirty, flags }, prep, rows: results, laneNotes: oracle.notes }, null, 2)}\n`);
     if (rel01?.ledger) writeFileSync(path.join(RECEIPT_DIR, 'AUDIT-LEDGER.md'), renderLedger(rel01.ledger, ledgerSource, commit, false));
     console.log(`\nwrote parity/receipts/v1/READINESS.md, READINESS.json${rel01?.ledger ? ', AUDIT-LEDGER.md' : ''}`);
+  } else if (rel01?.ledger && !opts.dryRun) {
+    // The ledger receipt derives from audit-ledger.json + this verification
+    // alone, so a partial run that DID verify V1-REL-01 may re-record it —
+    // the row-level READINESS receipt stays reserved for complete runs.
+    mkdirSync(RECEIPT_DIR, { recursive: true });
+    writeFileSync(path.join(RECEIPT_DIR, 'AUDIT-LEDGER.md'), renderLedger(rel01.ledger, ledgerSource, commit, false));
+    console.log('\nwrote parity/receipts/v1/AUDIT-LEDGER.md (partial run; READINESS.md untouched)');
   }
 
   console.log('\nROW                STATE               SECONDS  NOTES');
