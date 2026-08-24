@@ -1,0 +1,25 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "16fac1ee",
+ "setNodeId": "39:17103",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-mui-mui.circular-progress.dump.json",
+  "matched": 8,
+  "diverged": [
+   "prop variant type \u2014 {\"enum\":[\"determinate\",\"indeterminate\"]} vs {\"enum\":[\"indeterminate\",\"determinate\"]}",
+   "prop variant bindings.figma.values \u2014 {\"determinate\":\"Determinate\",\"indeterminate\":\"Indeterminate\"} vs {\"indeterminate\":\"Indeterminate\",\"determinate\":\"Determinate\"}",
+   "part root/root-determinate/Vector \u2014 proposal has a part the contract does not",
+   "part root/root-indeterminate/root-indeterminateVector \u2014 proposal has a part the contract does not",
+   "part root layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"CENTER\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"VERTICAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":true}",
+   "part root width \u2014 {imported.circular-progress.root.width} missing from proposal",
+   "part root max-width \u2014 proposal has {imported.circular-progress.root.width}, contract has nothing"
+  ],
+  "lost": [
+   "`part root color` \u2014 {imported.circular-progress.root.color} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`CircularProgress:root/root-determinate/Vector` strokeWeight = `3.5999999046325684` \u2014 nearest tokens: (none)",
+   "`CircularProgress:root/root-indeterminate/Vector` strokeWeight = `3.5999999046325684` \u2014 nearest tokens: (none)"
+  ]
+ }
+}

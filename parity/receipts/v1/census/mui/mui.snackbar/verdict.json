@@ -1,0 +1,38 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "16fac1ee",
+ "setNodeId": "39:17518",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-mui-mui.snackbar.dump.json",
+  "matched": 18,
+  "diverged": [
+   "prop position type \u2014 {\"enum\":[\"bottom-left\",\"bottom-center\",\"top-right\"]} vs {\"enum\":[\"bottomleft\",\"bottomcenter\",\"topright\"]}",
+   "prop position default \u2014 \"bottom-left\" vs \"bottomleft\"",
+   "prop position bindings.figma.values \u2014 {\"bottom-left\":\"BottomLeft\",\"bottom-center\":\"BottomCenter\",\"top-right\":\"TopRight\"} vs {\"bottomleft\":\"BottomLeft\",\"bottomcenter\":\"BottomCenter\",\"topright\":\"TopRight\"}",
+   "prop position bindings.code.prop \u2014 \"anchorOrigin\" vs \"position\"",
+   "part root/paper-root/label/label-text \u2014 proposal has a part the contract does not",
+   "part root z-index \u2014 {imported.snackbar.root.z-index} missing from proposal",
+   "part root/paper-root border-bottom-left-radius \u2014 {imported.shared.size-4} missing from proposal",
+   "part root/paper-root border-bottom-right-radius \u2014 {imported.shared.size-4} missing from proposal",
+   "part root/paper-root border-top-left-radius \u2014 {imported.shared.size-4} missing from proposal",
+   "part root/paper-root border-top-right-radius \u2014 {imported.shared.size-4} missing from proposal",
+   "part root/paper-root box-shadow \u2014 {imported.snackbar.paper-root.box-shadow} missing from proposal",
+   "part root/paper-root letter-spacing \u2014 {imported.snackbar.paper-root.letter-spacing} missing from proposal",
+   "part root/paper-root line-height \u2014 {imported.snackbar.paper-root.line-height} missing from proposal",
+   "part root/paper-root border-radius \u2014 proposal has {imported.shared.size-4}, contract has nothing",
+   "part root/paper-root/label letter-spacing \u2014 {imported.snackbar.label.letter-spacing} missing from proposal",
+   "part root/paper-root/label line-height \u2014 {imported.snackbar.label.line-height} missing from proposal",
+   "part root/paper-root/label text \u2014 \"Snackbar message\" vs undefined",
+   "text root/paper-root/label color (effective) \u2014 {imported.snackbar.label.color} missing from proposal",
+   "text root/paper-root/label font-size (effective) \u2014 {imported.snackbar.label.font-size} missing from proposal",
+   "text root/paper-root/label font-weight (effective) \u2014 {imported.snackbar.label.font-weight} missing from proposal"
+  ],
+  "lost": [
+   "`part root/paper-root color` \u2014 {imported.snackbar.paper-root.color} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/paper-root font-size` \u2014 {imported.snackbar.paper-root.font-size} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`Snackbar:root/paper-root` effects = `0px 3px 5px -1px #00000033, 0px 6px 10px #00000024, 0px 1px 18px #0000001f` \u2014 nearest tokens: `{radius.banner.section}`, `{radius.none}`"
+  ]
+ }
+}

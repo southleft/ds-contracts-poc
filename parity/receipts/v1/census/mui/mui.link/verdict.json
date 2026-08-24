@@ -1,0 +1,23 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "16fac1ee",
+ "setNodeId": "39:17301",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-mui-mui.link.dump.json",
+  "matched": 7,
+  "diverged": [
+   "prop underline type \u2014 {\"enum\":[\"none\",\"hover\",\"always\"]} vs {\"enum\":[\"hover\",\"none\",\"always\"]}",
+   "prop underline bindings.figma.values \u2014 {\"none\":\"None\",\"hover\":\"Hover\",\"always\":\"Always\"} vs {\"hover\":\"Hover\",\"none\":\"None\",\"always\":\"Always\"}",
+   "part root layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"CENTER\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"VERTICAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":false}",
+   "part root text-decoration-color \u2014 {imported.link.root.text-decoration-color.{color}.{underline}} missing from proposal",
+   "part root content \u2014 {\"prop\":\"children\"} vs undefined",
+   "text root color (effective) \u2014 proposal has {imported.link.root.color.{color}}, contract has nothing"
+  ],
+  "lost": [
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`part root states` \u2014 interaction-state token overrides are code-side (CSS)"
+  ]
+ }
+}

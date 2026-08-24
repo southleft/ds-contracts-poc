@@ -1,0 +1,27 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "16fac1ee",
+ "setNodeId": "39:17147",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-mui-mui.divider.dump.json",
+  "matched": 6,
+  "diverged": [
+   "prop variant type \u2014 {\"enum\":[\"fullWidth\",\"inset\",\"middle\"]} vs {\"enum\":[\"fullwidth\",\"inset\",\"middle\"]}",
+   "prop variant default \u2014 \"fullWidth\" vs \"fullwidth\"",
+   "prop variant bindings.figma.values \u2014 {\"fullWidth\":\"FullWidth\",\"inset\":\"Inset\",\"middle\":\"Middle\"} vs {\"fullwidth\":\"FullWidth\",\"inset\":\"Inset\",\"middle\":\"Middle\"}",
+   "part root layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"CENTER\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"VERTICAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":false}",
+   "part root border-bottom-color \u2014 {imported.shared.color-0000001f} missing from proposal",
+   "part root border-left-color \u2014 {imported.shared.color-0000001f} missing from proposal",
+   "part root border-right-color \u2014 {imported.shared.color-0000001f} missing from proposal",
+   "part root border-top-color \u2014 {imported.shared.color-0000001f} missing from proposal",
+   "part root flex-shrink \u2014 {imported.divider.root.flex-shrink} missing from proposal",
+   "part root border-color \u2014 proposal has {imported.shared.color-0000001f}, contract has nothing",
+   "part root max-width \u2014 proposal has {imported.divider.root.width.fullWidth}, contract has nothing"
+  ],
+  "lost": [
+   "`part root color` \u2014 {imported.divider.root.color} \u2014 text-cascade token with no bound text node beneath it on the canvas"
+  ]
+ }
+}

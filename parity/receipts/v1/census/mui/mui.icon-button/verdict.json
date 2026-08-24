@@ -1,0 +1,37 @@
+{
+ "recognisable": true,
+ "walls": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "16fac1ee",
+ "setNodeId": "39:17199",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-mui-mui.icon-button.dump.json",
+  "matched": 9,
+  "diverged": [
+   "prop size type \u2014 {\"enum\":[\"small\",\"medium\",\"large\"]} vs {\"enum\":[\"medium\",\"small\",\"large\"]}",
+   "prop size bindings.figma.values \u2014 {\"small\":\"Small\",\"medium\":\"Medium\",\"large\":\"Large\"} vs {\"medium\":\"Medium\",\"small\":\"Small\",\"large\":\"Large\"}",
+   "part root border-bottom-width \u2014 {imported.shared.size-0} missing from proposal",
+   "part root border-left-width \u2014 {imported.shared.size-0} missing from proposal",
+   "part root border-right-width \u2014 {imported.shared.size-0} missing from proposal",
+   "part root border-top-width \u2014 {imported.shared.size-0} missing from proposal",
+   "part root bottom \u2014 {imported.shared.size-0} missing from proposal",
+   "part root flex-shrink \u2014 {imported.icon-button.root.flex-shrink} missing from proposal",
+   "part root left \u2014 {imported.shared.size-0} missing from proposal",
+   "part root outline-width \u2014 {imported.shared.size-0} missing from proposal",
+   "part root right \u2014 {imported.shared.size-0} missing from proposal",
+   "part root top \u2014 {imported.shared.size-0} missing from proposal",
+   "part root padding-left \u2014 proposal has {imported.icon-button.root.padding-left.{size}}, contract has nothing",
+   "part root padding-right \u2014 proposal has {imported.icon-button.root.padding-right.{size}}, contract has nothing",
+   "part root padding-top \u2014 proposal has {imported.icon-button.root.padding-top.{size}}, contract has nothing",
+   "part root padding-bottom \u2014 proposal has {imported.icon-button.root.padding-bottom.{size}}, contract has nothing",
+   "part root border-width \u2014 proposal has {imported.shared.size-0}, contract has nothing",
+   "part root content \u2014 {\"prop\":\"children\"} vs undefined",
+   "text root color (effective) \u2014 proposal has {imported.icon-button.root.color.{color}}, contract has nothing",
+   "text root font-size (effective) \u2014 proposal has {imported.icon-button.root.font-size.{size}}, contract has nothing"
+  ],
+  "lost": [
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`part root states` \u2014 interaction-state token overrides are code-side (CSS)"
+  ]
+ }
+}
