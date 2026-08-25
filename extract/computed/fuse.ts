@@ -49,6 +49,7 @@ import {
   kindOf,
   pairwiseCertificate,
   PILL_RADIUS_SENTINEL,
+  planeChannelValue,
   SYNTHETIC_CHANNELS,
   type Capture,
   type Combo,
@@ -1727,7 +1728,13 @@ export const INHERITED_CHANNELS = new Set([
  *  rule is how the base door and the state door drifted apart in the first
  *  place (the regression this comment's round repairs). */
 export const nestedStateCarriable = (channel: string, placeholders: string[]): boolean =>
-  ['color', 'background-color', 'border-color'].includes(channel) && placeholders.length === 0;
+  // RC7: `placeholder-color` joins the list by the door's OWN stated rule —
+  // it is a PLAIN COLOR-KIND ref, the ink of the control's placeholder text
+  // plane, on exactly the same footing as `color` two entries left. Its
+  // absence was an omission, not a decision: without it a control whose
+  // placeholder repaints on :disabled (Fluent 112 → 189, Carbon alpha .4 →
+  // .25) carries the RESTING ink into every disabled cell.
+  ['color', 'background-color', 'border-color', 'placeholder-color'].includes(channel) && placeholders.length === 0;
 
 /** Round 5c — SET-PLANE LITERALS: a geometry channel the mint refuses (or
  *  cannot kind — min-height auto→24px) still has EXACT per-plane truth on a
@@ -2121,8 +2128,11 @@ export function prepareMint(
           // would bail to unmintable — exactly what kept MUI Switch's checked
           // thumb from moving. The identity is only ever applied to channels
           // the door already admitted (SYNTHETIC_CHANNELS).
-          if (v === undefined && SYNTHETIC_CHANNELS.has(channel)) v = '0px';
-          if (v === undefined) { unk ??= '<channel absent in this combo>'; continue; }
+          // RC7: and ABSENT ≡ the element's own `color` on a pseudo plane
+          // (planeChannelValue states both identities once).
+          const planeV = v === undefined ? planeChannelValue(el.node.style, channel) : v;
+          if (planeV === undefined) { unk ??= '<channel absent in this combo>'; continue; }
+          v = planeV;
           values.add(v);
           rows.push({ axisValues: combo.axisValues, value: v });
           const k = kindOf(channel, v);
@@ -2366,8 +2376,7 @@ export function prepareMint(
    *  A synthetic channel absent on a plane is AT REST; any OTHER channel
    *  absent on a plane is genuinely unobserved there and is skipped rather
    *  than crashed (that guard is a pre-existing latent hole, now closed). */
-  const planeValue = (st: StyleMap, p: string): string | undefined =>
-    st[p] !== undefined ? st[p] : SYNTHETIC_CHANNELS.has(p) ? '0px' : undefined;
+  const planeValue = planeChannelValue;
 
   const pushStateValue = (state: string, part: string, channel: string, combo: Combo, v: string) => {
     const key = `${state}|${part}|${channel}`;

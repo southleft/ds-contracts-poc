@@ -60,8 +60,35 @@
             "padding-bottom": "{imported.shared.size-1}",
             "padding-left": "{imported.case-pseudo-placeholder.a.padding-left}",
             "padding-right": "{imported.case-pseudo-placeholder.a.padding-right}",
-            "padding-top": "{imported.shared.size-1}"
-          }
+            "padding-top": "{imported.shared.size-1}",
+            "placeholder-color": "{imported.case-pseudo-placeholder.a.placeholder-color}"
+          },
+          "codeOnly": [
+            {
+              "state": "active",
+              "channel": "outline-color",
+              "value": "#005fcc",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "active",
+              "channel": "outline-width",
+              "value": "1px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-color",
+              "value": "#005fcc",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-width",
+              "value": "1px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
+          ]
         }
       },
       "declared": {

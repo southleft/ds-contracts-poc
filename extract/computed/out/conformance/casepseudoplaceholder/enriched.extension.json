@@ -29,6 +29,10 @@
             "$value": "2px",
             "$type": "dimension"
           },
+          "placeholder-color": {
+            "$value": "#969696",
+            "$type": "color"
+          },
           "outline-color-state-active": {
             "$value": "#005fcc",
             "$type": "color"
@@ -191,6 +195,9 @@
   "structureReceipts": [],
   "styledChannelReceipts": [
     "control-fallback: no control for <input> — span control used (part a)",
+    "placeholder-ink-admitted: a — the element's ::placeholder plane paints an ink DIFFERENT from its own color (rgba(150, 150, 150, 1) vs rgba(0, 0, 0, 1)); the synthetic placeholder-color channel joins fusion so an EMPTY field stops minting in VALUE ink (RC7). Where the two inks AGREE the fold does not fire and the existing color channel already paints the right pixel.",
+    "geometry-excluded: a — inline-size 154px, perspective-origin 77px 9px, transform-origin 77px 9px, width 154px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — inline-size 154px, perspective-origin 77px 9px, transform-origin 77px 9px, width 154px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "inheritance-only: a.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)"
   ],
   "frontierReceipts": [
@@ -237,8 +244,8 @@
     "declared fact carried: a.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: a.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: a.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: a.overflow-x = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: a.overflow-y = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: a.overflow-x = clip (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: a.overflow-y = clip (v15 declared vocabulary — canvas-drawable)",
     "declared state fact carried: [active] a.outline-style = auto (v15 declared vocabulary)",
     "declared state fact carried: [focus-visible] a.outline-style = auto (v15 declared vocabulary)"
   ]

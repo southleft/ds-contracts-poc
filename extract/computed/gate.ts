@@ -31,6 +31,7 @@ import type { Contract } from '../../scripts/contract-schema.js';
 import type { CaptureConfig, ComponentConfig, PropSpace, Interaction } from './capture.js';
 import { INTERACTIONS, fontFaceCss, settleStage, stageFor } from './capture.js';
 import { isFusable, kindOf, mergeShippedMinted, SYNTHETIC_CHANNELS, type Capture, type Combo, type FlatEl, type MintedMerge } from './lib.js';
+import { PSEUDO_ELEMENT_CHANNELS } from '../../packages/schema/src/contract-schema.js';
 import type { AlignedSweep } from './fuse.js';
 
 export interface GateRow {
@@ -450,8 +451,23 @@ ${stages.join('\n')}
         if (!truthEl) continue;
         const channels = [...(styled.get(part) ?? [])].filter((c) => isFusable(c) && !SYNTHETIC_CHANNELS.has(c)).sort();
         if (channels.length === 0) continue;
+        // RC7 — A PSEUDO-PLANE CHANNEL IS READ OFF ITS OWN PSEUDO-ELEMENT.
+        //
+        // `placeholder-color` is real ink and a real comparison, but it is
+        // NOT a property of the element: `getComputedStyle(el).placeholder-
+        // color` is the empty string on every UA. Reading it off the element
+        // would make the gate report a mismatch for a channel that is
+        // painted correctly — a fabricated red. Reading it off
+        // `getComputedStyle(el, '::placeholder').color` compares the ink the
+        // emitted `::placeholder` rule actually paints against the ink the
+        // library painted, which is a STRENGTHENING: before this channel
+        // existed the placeholder ink was never compared at all, so a mint
+        // that shipped the wrong one could not fail computed-equality.
+        const pseudoPlane = new Map(
+          PSEUDO_ELEMENT_CHANNELS.filter(([c]) => channels.includes(c)).map(([c, selector, property]) => [c, { selector, property }]),
+        );
         const ours = (await page.evaluate(
-          `(() => { const el = document.querySelector('${stageSel} ${sel}'); if (!el) return null; const cs = getComputedStyle(el); const o = {}; for (const p of ${JSON.stringify(channels)}) o[p] = cs.getPropertyValue(p); return o; })()`,
+          `(() => { const el = document.querySelector('${stageSel} ${sel}'); if (!el) return null; const cs = getComputedStyle(el); const o = {}; for (const p of ${JSON.stringify(channels)}) o[p] = cs.getPropertyValue(p); for (const [ch, pe] of ${JSON.stringify([...pseudoPlane].map(([c, v]) => [c, v]))}) { const pcs = getComputedStyle(el, pe.selector); o[ch] = pcs ? pcs.getPropertyValue(pe.property) : ''; } return o; })()`,
         )) as Record<string, string> | null;
         if (!ours) {
           row.mismatches.push({ part, channel: '(selector)', ours: `MISSING ${sel}`, theirs: '' });
@@ -461,7 +477,21 @@ ${stages.join('\n')}
         for (const ch of channels) {
           row.channelsCompared++;
           const ourV = ours[ch].replace(/\brgb\((\d+), (\d+), (\d+)\)/g, 'rgba($1, $2, $3, 1)');
-          const theirV = truthEl.node.style[ch];
+          // RC7 — ABSENT ≡ THE ELEMENT'S OWN INK, on the pseudo plane.
+          //
+          // foldPlaceholderInk writes `placeholder-color` ONLY when the
+          // placeholder plane's ink DIFFERS from the element's own `color`;
+          // where they agree it writes nothing, because `color` already
+          // paints exactly that pixel. So an ABSENT key is not "unobserved",
+          // it is the positive statement "the ink here IS the element's own"
+          // — and comparing against `undefined` would report a red for a
+          // cell that is painted correctly. Same identity the fusion door
+          // applies to the synthetic translate channels (ABSENT ≡ '0px',
+          // fuse.ts prepareMint).
+          const pe = pseudoPlane.get(ch);
+          const theirV = pe !== undefined
+            ? (truthEl.node.pseudo[pe.selector as keyof typeof truthEl.node.pseudo]?.[pe.property] ?? truthEl.node.style[ch] ?? truthEl.node.style[pe.property])
+            : truthEl.node.style[ch];
           if (ourV === theirV) row.channelsEqual++;
           else {
             row.mismatches.push({ part, channel: ch, ours: ourV, theirs: theirV });

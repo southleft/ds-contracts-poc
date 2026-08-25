@@ -6,10 +6,10 @@
   "combos": 1,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 112,
+    "cellsCompared": 116,
     "cellsEqual": 112,
-    "pctEqual": 100,
-    "rowsFullyEqual": 4,
+    "pctEqual": 96.55172413793103,
+    "rowsFullyEqual": 0,
     "rows": 4
   },
   "pixel": {
@@ -30,9 +30,9 @@
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 11,
-    "mintedLeavesUnfolded": 9,
-    "baseBindings": 15,
+    "mintedLeaves": 12,
+    "mintedLeavesUnfolded": 10,
+    "baseBindings": 16,
     "stateBindings": 4,
     "codeOnlyChannels": 0,
     "overflowBindings": 4,
@@ -43,28 +43,33 @@
       "key": "__focus-visible",
       "pctAA": 2.5520833333333335,
       "pctExact": 3.4505208333333335,
-      "channelsMismatched": 0
+      "channelsMismatched": 1
     },
     {
       "key": "__active",
       "pctAA": 2.5162760416666665,
       "pctExact": 3.4375,
-      "channelsMismatched": 0
+      "channelsMismatched": 1
     },
     {
       "key": "__default",
       "pctAA": 0.4329427083333333,
       "pctExact": 1.2239583333333333,
-      "channelsMismatched": 0
+      "channelsMismatched": 1
     },
     {
       "key": "__hover",
       "pctAA": 0.4329427083333333,
       "pctExact": 1.2239583333333333,
-      "channelsMismatched": 0
+      "channelsMismatched": 1
     }
   ],
-  "topMismatchedChannels": [],
+  "topMismatchedChannels": [
+    [
+      "a.placeholder-color",
+      4
+    ]
+  ],
   "namedLosses": [
     "overflow: a.outline-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: a.outline-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -83,35 +88,63 @@
   "rows": [
     {
       "key": "__default",
-      "channelsCompared": 28,
+      "channelsCompared": 29,
       "channelsEqual": 28,
       "pctExact": 1.2239583333333333,
       "pctAA": 0.4329427083333333,
-      "mismatches": []
+      "mismatches": [
+        {
+          "part": "a",
+          "channel": "placeholder-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(150, 150, 150, 1)"
+        }
+      ]
     },
     {
       "key": "__hover",
-      "channelsCompared": 28,
+      "channelsCompared": 29,
       "channelsEqual": 28,
       "pctExact": 1.2239583333333333,
       "pctAA": 0.4329427083333333,
-      "mismatches": []
+      "mismatches": [
+        {
+          "part": "a",
+          "channel": "placeholder-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(150, 150, 150, 1)"
+        }
+      ]
     },
     {
       "key": "__focus-visible",
-      "channelsCompared": 28,
+      "channelsCompared": 29,
       "channelsEqual": 28,
       "pctExact": 3.4505208333333335,
       "pctAA": 2.5520833333333335,
-      "mismatches": []
+      "mismatches": [
+        {
+          "part": "a",
+          "channel": "placeholder-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(150, 150, 150, 1)"
+        }
+      ]
     },
     {
       "key": "__active",
-      "channelsCompared": 28,
+      "channelsCompared": 29,
       "channelsEqual": 28,
       "pctExact": 3.4375,
       "pctAA": 2.5162760416666665,
-      "mismatches": []
+      "mismatches": [
+        {
+          "part": "a",
+          "channel": "placeholder-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(150, 150, 150, 1)"
+        }
+      ]
     }
   ]
 }

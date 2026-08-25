@@ -30,6 +30,9 @@
         "transition-property": "color, box-shadow",
         "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
       },
+      "attrs": {
+        "placeholder": "Value"
+      },
       "declaredStates": {
         "disabled": {
           "cursor": "not-allowed",
@@ -59,6 +62,7 @@
         "padding-left": "{imported.input.root.padding-left}",
         "padding-right": "{imported.input.root.padding-right}",
         "padding-top": "{imported.input.root.padding-top}",
+        "placeholder-color": "{imported.input.root.placeholder-color}",
         "width": "{imported.input.root.width}"
       },
       "states": {

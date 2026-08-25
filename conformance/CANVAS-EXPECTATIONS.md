@@ -15,8 +15,8 @@ never waivable.
 
 | | |
 |---|---|
-| cases (CARRIED + LOWERED) | **58** |
-| 🟢 round-tripped | **32** |
+| cases (CARRIED + LOWERED) | **59** |
+| 🟢 round-tripped | **33** |
 | 🟢 named (dropped, and a receipt says so) | **11** |
 | 🟡 refused by name (the canvas cannot host the seed, and says so) | **15** |
 | ⚪ seed-absent (nothing to round-trip) | **0** |
@@ -68,7 +68,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `grid-on-component-variant` | grid-composition | layoutMode GRID on a COMPONENT node (canvas variants are components) | `grid-template-rows` | CARRIED | — |  |  | plugin plan: conformance.grid-on-component-variant — anatomy.root.literals.width: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, "fit-content" (G8), or layout.grow (width, flex parent). Absence is refused… |
 | `grid-row-span` | grid-placement | grid-row: 2 / span 2 (child spans 2 rows) | `grid-row-end` | CARRIED | — |  |  | plugin plan: conformance.grid-row-span — anatomy.root.literals.height: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, "fit-content" (G8), or layout.grow (width, flex parent). Absence is refused because it… |
 
-## 🟢 ROUND-TRIPPED — 32
+## 🟢 ROUND-TRIPPED — 33
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
@@ -100,6 +100,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `oklch-color` | color | background-color: oklch(0.6 0.15 250) | `background-color` | CARRIED | #2784d5 | same |  |  |
 | `percentage-padding` | units | padding-left: 10% (resolved against the PARENT width) | `padding-left` | CARRIED | 28.7969px | same |  |  |
 | `position-absolute-insets` | position | position: absolute + top/left insets | `top` | CARRIED | 4px, 6px | same |  |  |
+| `pseudo-placeholder` | pseudo-elements | input::placeholder { color } | `placeholder-color` | CARRIED | #969696 | same |  |  |
 | `shadow-part` | shadow-dom | ::part(label) styling across an OPEN shadow boundary | `color` | CARRIED | #b4145a | same |  |  |
 | `var-fallback-chain` | custom-properties | color: var(--cf-missing, var(--cf-color-secondary, #333)) | `color` | CARRIED | #663399 | same |  |  |
 | `var-longhand` | custom-properties | background-color: var(--cf-color-primary) | `background-color` | CARRIED | #1976d2 | same |  |  |

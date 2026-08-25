@@ -107,6 +107,31 @@ export const normalizeValue = (v: string): string =>
  *  and the fidelity gate by name (SYNTHETIC_CHANNELS). */
 export const SYNTHETIC_CHANNELS = new Set(['translate-x', 'translate-y']);
 
+/** RC7 — ABSENT ≡ THE ELEMENT'S OWN INK, on a pseudo plane.
+ *
+ *  `foldPlaceholderInk` writes `placeholder-color` ONLY where the placeholder
+ *  plane's ink DIFFERS from the element's own `color`. So an ABSENT key on
+ *  some plane is not "unobserved" — it is the positive statement "here the
+ *  two agree", and the element's own `color` IS the placeholder ink there.
+ *
+ *  Without this identity the fact is unreadable exactly where it matters
+ *  most: Fluent's Input paints its placeholder rgba(112,112,112) at rest and
+ *  rgba(189,189,189) when DISABLED — and on the disabled plane that equals
+ *  the element's own colour, so the fold writes nothing and the mint would
+ *  read the base ink into every disabled cell (measured: 72 of 144 gate rows
+ *  wrong). Same shape as ABSENT ≡ '0px' for the synthetic translate pair,
+ *  and stated ONCE so the three readers cannot drift. */
+export const PSEUDO_PLANE_OWN_INK: Record<string, string> = { 'placeholder-color': 'color' };
+
+/** The value of channel `p` on one captured plane, with both ABSENT
+ *  identities applied. `undefined` means genuinely unobserved. */
+export const planeChannelValue = (st: StyleMap, p: string): string | undefined => {
+  if (st[p] !== undefined) return st[p];
+  if (SYNTHETIC_CHANNELS.has(p)) return '0px';
+  const own = PSEUDO_PLANE_OWN_INK[p];
+  return own !== undefined ? st[own] : undefined;
+};
+
 /** SILENT-LOSS ROUND (task #33, fix 1) — THE SHORTHAND CEILING (task #27).
  *
  *  The CSS-variables reader collects candidates from the rules that MATCH an

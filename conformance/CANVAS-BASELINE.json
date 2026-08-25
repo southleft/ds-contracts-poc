@@ -2,7 +2,7 @@
   "_marker": "THE MEASURED ROUND TRIP — contract → Figma (mock) → dump → propose ≡ contract, per conformance case, on the case's own channel. Every SILENT entry is an OPEN DEFECT the engine must name or carry; it is never waivable and leaves this file only by being fixed. The gate refuses drift in EITHER direction: a regression is red, and an improvement must be re-recorded here so a fix can never be absorbed silently.",
   "measuredAt": "extract/computed/out/conformance/<case>/enriched.contract.json through figma-sync/plugin/engine (mock figma) and core/propose-figma (npx tsx conformance/canvas.ts)",
   "counts": {
-    "ROUND-TRIPPED": 32,
+    "ROUND-TRIPPED": 33,
     "NAMED": 11,
     "DRIFTED": 0,
     "HARMFUL": 0,
@@ -573,6 +573,18 @@
         "{imported.case-presence-hidden-axis-geometry.a.top.{checked}}"
       ],
       "note": "value came back as {imported.case-presence-hidden-axis-geometry.a.left.{checked}}, {imported.case-presence-hidden-axis-geometry.a.top.{checked}} (seed 3px) — code-only channel root.top = {imported.shared.size-0} — bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back"
+    },
+    "pseudo-placeholder": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "placeholder-color",
+      "seed": [
+        "#969696"
+      ],
+      "proposed": [
+        "#969696"
+      ],
+      "refIdentical": true,
+      "note": ""
     },
     "shadow-part": {
       "classification": "ROUND-TRIPPED",

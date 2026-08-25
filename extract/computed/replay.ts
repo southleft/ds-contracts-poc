@@ -88,7 +88,16 @@ export function reconstructCaptures(truth: CapturedTruthFile): Capture[] {
     const i = key.lastIndexOf('__');
     return { combo: key.slice(0, i), interaction: key.slice(i + 2) };
   };
-  out.push({ ...split(truth.base.key), root: truth.base.root });
+  // DETERMINISM (RC7). The base capture was pushed BY REFERENCE, so the
+  // read-boundary folds below (decomposeTranslate / foldTextFillColor /
+  // foldPlaceholderInk) mutated the caller's truth file in place — and the
+  // NEXT reconstruction then started from a base whose derived keys were
+  // already present, in a DIFFERENT position, so the delta captures'
+  // `structuredClone(truth.base.root)` produced a different key ORDER.
+  // `assertReplaySufficient` compares two runs with JSON.stringify and
+  // correctly called that non-deterministic; the aliasing was the cause.
+  // A reconstruction must be a pure function of the file — it is now.
+  out.push({ ...split(truth.base.key), root: structuredClone(truth.base.root) });
   const pathByPart = new Map(truth.anatomy.map((a) => [a.part, a.path] as const));
   const entryByPart = new Map(truth.anatomy.map((a) => [a.part, a] as const));
   const baseByPath = new Map(flatten(truth.base.root).map((e) => [e.path, e.node] as const));

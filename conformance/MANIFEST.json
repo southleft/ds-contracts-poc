@@ -1918,18 +1918,18 @@
       "id": "pseudo-placeholder",
       "feature": "pseudo-elements",
       "construct": "input::placeholder { color }",
-      "why": "Placeholder colour is a REVIEWED design token in every input in every design system.",
-      "expect": "UNSUPPORTED",
-      "expectName": "::placeholder",
+      "why": "Placeholder colour is a REVIEWED design token in every input in every design system. MANIFEST EDIT (RC7 round), on the -webkit-text-fill-color precedent immediately below: the engine’s behaviour genuinely changed. `::placeholder { color }` is now FOLDED ONTO THE HOST as the synthetic channel `placeholder-color` at BOTH read boundaries (lib.ts foldPlaceholderInk, capture + replay), registered in TOKEN_CHANNELS with a `pseudo-element` CSS disposition that lowers it back to a real `::placeholder` rule on every stylesheet surface, and drawn on canvas as the placeholder text node’s own ink. Declaring it CARRIED on `placeholder-color` is strictly STRONGER than the old UNSUPPORTED: it asserts the contract holds the HINT ink, so reverting the fold turns the case red (the reader records nothing on that channel and the prediction fails) instead of passing on the mere presence of the string ‘::placeholder’ in some receipt.",
+      "expect": "CARRIED",
+      "expectName": "placeholder-color",
       "expectWhere": "LEDGER.md",
       "observable": {
-        "part": "a::placeholder",
-        "channel": "color",
+        "part": "a",
+        "channel": "placeholder-color",
         "capturedValue": "rgb(150, 150, 150)"
       },
       "canvas": {
         "expect": "PRESENT",
-        "note": "placeholder text is REAL INK on a canvas mock-up — the loss is visible"
+        "note": "placeholder text is REAL INK on a canvas mock-up — the loss is visible; the emitter now draws the placeholder TEXT node in THIS ink, never in the control’s VALUE ink (RC7: an empty field must not read as a filled one)"
       }
     },
     {
