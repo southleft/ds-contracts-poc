@@ -176,6 +176,40 @@ npm run first-pass:check                                      # the gate
 npm run first-pass:check -- --self-test                       # falsify the gate
 ```
 
+### Preflight, and what the exit code means
+
+**The committed packet is evidence, and a run that cannot produce a
+replacement never clears it.** Before an exam touches a single committed byte,
+`preflight()` checks every precondition it needs and refuses BY NAME, with the
+exact command that fixes it:
+
+- the declared capture harness — the **git-ignored** sandbox from the library's
+  `PROVENANCE.md` — exists, carries the library at the version the capture
+  config pins, and has `react`, `react-dom` and `esbuild`;
+- the capture config and `ds-library.json` exist and parse;
+- direction B: a Figma token is in the environment, the file key is not one of
+  the forbidden keys, every declared corpus file is on disk (an absent one used
+  to be dropped silently, which changes the exam's input), and the exam selects
+  at least one page;
+- the work directory and the packet directory are writable.
+
+| exit | meaning |
+|---|---|
+| `0` | the run **measured something** — a completed chain, or an honest `REFUSED`, which is the finding the exam exists to collect |
+| `1` | the run **measured nothing** — every set stopped at `ERROR`, a stage that died without a named refusal. There is no rate: the receipt renders `UNMEASURED`, the ratchet records nothing, and the gate refuses the exam by name |
+| `2` | **preflight refused** — the run never started and nothing was touched |
+
+`0/8` and `UNMEASURED` are different claims. `0/8` says the engine failed eight
+times; `UNMEASURED` says the harness never got to ask. Collapsing them is the
+same class as a killed suite reading as a pass.
+
+Images are cleared **per set, at the instant that set's replacement is
+written** — never up front. A set whose chain aborts first keeps every byte it
+had and records them in `attempt.json` as `images.retained`, with the reason in
+`images.absent`; the receipt names the sets whose pictures are older than their
+attempt. The gate refuses an orphan image, and refuses a packet whose `ref` or
+`code` surface vanished with no recorded reason.
+
 Exams are registered in `extract/figma/census/first-pass.ts`:
 
 - `EXAMS` — exams with a runner. The gate refuses a registered exam that has
