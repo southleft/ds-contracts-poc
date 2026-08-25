@@ -90,12 +90,15 @@
         "part": "part-0",
         "field": "justify",
         "value": "space-between"
+      },
+      {
+        "part": "part-0",
+        "field": "align",
+        "value": "baseline"
       }
     ],
     "contradictions": [],
-    "receipts": [
-      "layout-value-outside-vocabulary: part-0.align-items = \"baseline\" — stays code-only"
-    ],
+    "receipts": [],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
   },
   "declaredFacts": {
@@ -379,6 +382,7 @@
     "refusals": []
   },
   "enrichmentNotes": [
+    "layout enriched: part-0.layout.align = baseline (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: root.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: part-0.layout.justify = space-between (uniform computed keyword — the schema's own vocabulary)",
     "declared fact carried: progressbar-track.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",

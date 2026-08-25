@@ -602,7 +602,9 @@
       }
     ],
     "contradictions": [],
-    "receipts": [],
+    "receipts": [
+      "child-order-varies-membership: dialogbody's in-flow children differ in MEMBERSHIP across combos, not only in order — a per-variant child set is not a layout fact and has no contract spelling; the order stays code-only"
+    ],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
   },
   "declaredFacts": {

@@ -55,7 +55,8 @@
               "description": "Promoted from the computed floor (round 4): rendered anatomy div|Autocomplete-inputRoot.InputBase-adornedEnd.InputBase-adornedStart.InputBase-formControl.InputBase-fullWidth.InputBase-root.OutlinedInput-root — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
                 "display": "flex",
-                "align": "center"
+                "align": "center",
+                "wrap": true
               },
               "parts": {
                 "autocomplete-tag": {

@@ -83,8 +83,17 @@
               "description": "Promoted from the computed floor (round 4): rendered anatomy button|accordion__heading — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
                 "display": "flex",
+                "direction": "row-reverse",
                 "align": "center",
                 "justify": "start"
+              },
+              "layoutByProp": {
+                "prop": "align",
+                "map": {
+                  "start": {
+                    "direction": "row"
+                  }
+                }
               },
               "parts": {
                 "icon": {
