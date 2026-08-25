@@ -1,0 +1,38 @@
+{
+  "__note": "LIBRARY MANIFEST — the per-library half of the code→canvas pipeline (docs/21). `ds-contracts onboard examples/bootstrap5` adopts it; `ds-contracts onboard --continue` runs capture → promote → emit → bundle. BLINDNESS RULE (non-negotiable): this file was authored from the library's own documentation and shipped source ONLY. No capture/promote/emit stage of this repo was run against this library, no output of ours for it was read, and nothing here was tuned in response to our pipeline's behaviour. See parity/receipts/v1/HELD-OUT-MANIFEST.md.",
+  "library": "bootstrap5",
+  "exampleDir": "examples/bootstrap5",
+  "captureOut": "extract/computed/out/bootstrap5",
+  "dtcg": "examples/bootstrap5/tokens/bootstrap5.dtcg.json",
+  "mintedOut": "examples/bootstrap5/tokens/bootstrap5-minted.dtcg.json",
+  "mintedDoc": "examples/bootstrap5/tokens/MINTED.md",
+  "components": [
+    "button",
+    "alert",
+    "badge",
+    "formcontrol",
+    "formcheck",
+    "card",
+    "progress",
+    "spinner",
+    "navtabs",
+    "modal"
+  ],
+  "contractStem": {},
+  "contractVersion": "0.2.0",
+  "promoterPath": "ds-contracts promote --config examples/bootstrap5/ds-library.json",
+  "possessive": "Bootstrap's",
+  "mintedDocTitle": "Bootstrap 5 minted tokens",
+  "capture": {
+    "config": "extract/computed/configs/bootstrap5.json",
+    "harness": "examples/bootstrap5/.bootstrap5-sandbox"
+  },
+  "seeds": "examples/bootstrap5/contracts-seed",
+  "emit": {
+    "out": "examples/bootstrap5/figma"
+  },
+  "bundle": {
+    "out": "examples/bootstrap5/figma/bootstrap5.bundle.json",
+    "name": "Bootstrap 5"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "__note": "LIBRARY MANIFEST — the per-library half of the code→canvas pipeline (docs/21). `ds-contracts onboard examples/radix-themes` adopts it; `ds-contracts onboard --continue` runs capture → promote → emit → bundle. BLINDNESS RULE (non-negotiable): this file was authored from the library's own documentation and shipped source ONLY. No capture/promote/emit stage of this repo was run against this library, no output of ours for it was read, and nothing here was tuned in response to our pipeline's behaviour. See parity/receipts/v1/HELD-OUT-MANIFEST.md.",
+  "library": "radix-themes",
+  "exampleDir": "examples/radix-themes",
+  "captureOut": "extract/computed/out/radix-themes",
+  "dtcg": "examples/radix-themes/tokens/radix-themes.dtcg.json",
+  "mintedOut": "examples/radix-themes/tokens/radix-themes-minted.dtcg.json",
+  "mintedDoc": "examples/radix-themes/tokens/MINTED.md",
+  "components": [
+    "button",
+    "badge",
+    "checkbox",
+    "switch",
+    "textfield",
+    "callout",
+    "card",
+    "avatar",
+    "progress",
+    "tabs"
+  ],
+  "contractStem": {},
+  "contractVersion": "0.2.0",
+  "promoterPath": "ds-contracts promote --config examples/radix-themes/ds-library.json",
+  "possessive": "Radix Themes'",
+  "mintedDocTitle": "Radix Themes minted tokens",
+  "capture": {
+    "config": "extract/computed/configs/radix-themes.json",
+    "harness": "examples/radix-themes/.radix-themes-sandbox"
+  },
+  "seeds": "examples/radix-themes/contracts-seed",
+  "emit": {
+    "out": "examples/radix-themes/figma"
+  },
+  "bundle": {
+    "out": "examples/radix-themes/figma/radix-themes.bundle.json",
+    "name": "Radix Themes"
+  }
+}

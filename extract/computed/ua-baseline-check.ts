@@ -87,7 +87,16 @@ const wrongClaim: string[] = [];
   for (const cfgFile of readdirSync(CFG_DIR).sort()) {
     if (!cfgFile.endsWith('.json')) continue;
     const cfg: CaptureConfig = loadConfig(REPO, path.join(CFG_DIR, cfgFile));
-    const outRoot = path.join(REPO, OUT_FOR[cfgFile] ?? 'extract/computed/out');
+    // A config with no OUT_FOR entry gets its NAMESPACED dir, never the
+    // un-namespaced root. The old `?? 'extract/computed/out'` fallback was a
+    // silent misattribution: the root also holds the FIRST-PARTY component
+    // dirs (button/, badge/, avatar/, checkbox/, textfield/, spinner/), so a
+    // brand-new config whose component names collide with those re-fused
+    // another library's captured truth and failed with "base capture missing".
+    // Every committed config is mapped explicitly above, so their resolution
+    // is unchanged; an uncaptured config now simply has no truth file and is
+    // skipped by the existsSync below.
+    const outRoot = path.join(REPO, OUT_FOR[cfgFile] ?? `extract/computed/out/${cfgFile.replace(/\.json$/, '')}`);
     for (const comp of cfg.components as ComponentConfig[]) {
       const dir = path.join(outRoot, comp.name.toLowerCase());
       const truthPath = path.join(dir, 'captured-truth.json');

@@ -1,0 +1,29 @@
+{
+  "__note": "LIBRARY MANIFEST — the per-library half of the code→canvas pipeline (docs/21). `ds-contracts onboard examples/day-picker` adopts it; `ds-contracts onboard --continue` runs capture → promote → emit → bundle. BLINDNESS RULE (non-negotiable): this file was authored from the library's own documentation and shipped source ONLY. No capture/promote/emit stage of this repo was run against this library, no output of ours for it was read, and nothing here was tuned in response to our pipeline's behaviour. See parity/receipts/v1/HELD-OUT-MANIFEST.md.",
+  "library": "day-picker",
+  "exampleDir": "examples/day-picker",
+  "captureOut": "extract/computed/out/day-picker",
+  "dtcg": "examples/day-picker/tokens/day-picker.dtcg.json",
+  "mintedOut": "examples/day-picker/tokens/day-picker-minted.dtcg.json",
+  "mintedDoc": "examples/day-picker/tokens/MINTED.md",
+  "components": [
+    "calendar"
+  ],
+  "contractStem": {},
+  "contractVersion": "0.2.0",
+  "promoterPath": "ds-contracts promote --config examples/day-picker/ds-library.json",
+  "possessive": "the calendar's",
+  "mintedDocTitle": "Day Picker minted tokens",
+  "capture": {
+    "config": "extract/computed/configs/day-picker.json",
+    "harness": "examples/day-picker/.day-picker-sandbox"
+  },
+  "seeds": "examples/day-picker/contracts-seed",
+  "emit": {
+    "out": "examples/day-picker/figma"
+  },
+  "bundle": {
+    "out": "examples/day-picker/figma/day-picker.bundle.json",
+    "name": "Day Picker"
+  }
+}

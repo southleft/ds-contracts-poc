@@ -90,8 +90,21 @@ export function runCensus(): Census {
   for (const cfgFile of readdirSync(CFG_DIR).sort()) {
     if (!cfgFile.endsWith('.json')) continue;
     const cfg: CaptureConfig = loadConfig(REPO, path.join(CFG_DIR, cfgFile));
-    const outRoot = path.join(REPO, OUT_FOR[cfgFile] ?? 'extract/computed/out');
     const libName = cfgFile.replace(/\.json$/, '');
+    // A config with no entry in OUT_FOR has no committed captures of its own.
+    // The fallback used to be the un-namespaced root `out/`, which also holds the
+    // FIRST-PARTY component dirs (button/, badge/, avatar/, checkbox/, textfield/,
+    // spinner/) — so a never-captured config whose component names collide with
+    // those read ANOTHER library's captures and reported them as its own. The
+    // held-out exam material (bootstrap5, radix-themes, day-picker — captured by
+    // nothing, deliberately) walked straight into it. Only the two configs that
+    // legitimately live in the root are named; everything else is a named skip.
+    // Mirrors extract/computed/{drift,ua-baseline}-check.ts.
+    if (!(cfgFile in OUT_FOR)) {
+      skipped.push(`${cfgFile}: no committed captures (not in OUT_FOR) — never captured, nothing to census`);
+      continue;
+    }
+    const outRoot = path.join(REPO, OUT_FOR[cfgFile]);
     const row: LibraryCensus = {
       library: libName,
       components: 0,

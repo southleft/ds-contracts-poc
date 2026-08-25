@@ -8474,12 +8474,25 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (mintedLeafCount(JSON.parse('{}') as Record<string, unknown>) !== 0 || mintedLeafCount(JSON.parse(LEAF) as Record<string, unknown>) !== 1) {
         throw new Error('mintedLeafCount does not agree with the guard on what "exists" means');
       }
-      // …and no SHIPPING config leans on the allowance.
+      // …and no SHIPPING config leans on the allowance. "Shipping" is a fact
+      // about the TREE, not about the config's existence: a library ships once
+      // its minted tree carries leaves. Held-out exam material (bootstrap5,
+      // radix-themes, day-picker — captured by nothing, deliberately) sits in
+      // exactly the genuine FIRST-EVER state the allowance exists for, and
+      // asserting it away would mean the repo cannot hold a library it has not
+      // captured yet — which is the whole point of a held-out exam. The rot the
+      // guard actually fears (a flag OUTLIVING its empty tree) is refused one
+      // layer down by loadConfig, proven by `rotted` above; here we hold both
+      // halves of the invariant so neither state can drift into the other.
       for (const f of configs) {
         const c = JSON.parse(readFileSync(path.join(cfgDir, f), 'utf8')) as { tokens?: { minted?: string; mintedBootstrap?: boolean } };
-        if (c.tokens?.mintedBootstrap) throw new Error(`${f} still carries tokens.mintedBootstrap — a shipped library measures against its shipped tree`);
         const n = mintedLeafCount(JSON.parse(readFileSync(path.join(ROOT, c.tokens!.minted!), 'utf8')) as Record<string, unknown>);
-        if (n === 0) throw new Error(`${f}: shipped minted tree ${c.tokens!.minted} carries ZERO leaves`);
+        if (n > 0 && c.tokens?.mintedBootstrap) {
+          throw new Error(`${f} still carries tokens.mintedBootstrap over a tree with ${n} leaf/leaves — a shipped library measures against its shipped tree`);
+        }
+        if (n === 0 && !c.tokens?.mintedBootstrap) {
+          throw new Error(`${f}: minted tree ${c.tokens!.minted} carries ZERO leaves and the config does NOT declare tokens.mintedBootstrap — either it shipped and the tree is missing, or it is pre-capture and must say so by name`);
+        }
       }
 
       // 2. THE CLASS. astryx Slider's gated contract binds 44 refs that live
