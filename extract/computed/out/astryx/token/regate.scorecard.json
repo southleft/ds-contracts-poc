@@ -180,7 +180,7 @@
     },
     "shippedMinted": {
       "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
-      "leavesAdded": 320,
+      "leavesAdded": 517,
       "divergent": []
     },
     "rows": [
