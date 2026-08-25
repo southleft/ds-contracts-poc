@@ -230,11 +230,11 @@
     {
       "library": "astryx",
       "component": "ProgressBar",
-      "rerunPctEqual": 56.666666666666664,
+      "rerunPctEqual": 58.333333333333336,
       "cellsCompared": 1200,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 51.851851851851855,
-      "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 20 more cell(s) than the engine the harness scorecard was captured with (1080 -> 1100) and every added cell is EQUAL (560 -> 580 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. First pinned 2026-08-23 — this component had a harness scorecard and no baseline row, which the pre-2026-08-23 check skipped in silence."
+      "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 20 more cell(s) than the engine the harness scorecard was captured with (1080 -> 1100) and every added cell is EQUAL (560 -> 580 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. First pinned 2026-08-23 — this component had a harness scorecard and no baseline row, which the pre-2026-08-23 check skipped in silence. RC1 LAYOUT-AXIS DOOR (2026-08-25): a SECOND, separately measured contribution of 1.667 points on top of the lift above — 56.667 on the e884d672 engine, 58.333 on this one, cellsCompared UNCHANGED at 1200 both times. extract/computed/fuse.ts LAYOUT_CHANNEL_TO_FIELD had no entry for align-items: baseline, so the label row was scored against the counter-axis default; it is now carried as layout.align and 20 cells flip unequal -> equal. The harness number moves only on a re-capture."
     },
     {
       "library": "astryx",
