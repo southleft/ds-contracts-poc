@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "bubble matches; code render carries a stray anchor block",
  "reviewedAt": "16fac1ee",

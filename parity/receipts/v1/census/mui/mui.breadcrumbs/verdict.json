@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "canvas draws clean Home / Catalog crumbs; the code render leaks ordered-list numbering (code-half artifact)",
  "reviewedAt": "16fac1ee",

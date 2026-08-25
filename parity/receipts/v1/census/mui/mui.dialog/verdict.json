@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "canvas draws the gray scrim behind the paper; code render shows the paper alone",
  "reviewedAt": "16fac1ee",

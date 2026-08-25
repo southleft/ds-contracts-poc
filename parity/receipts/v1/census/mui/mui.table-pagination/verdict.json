@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "canvas carries both pager chevrons; code render clips the second",
  "reviewedAt": "16fac1ee",

@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "canvas menu complete; code render clips the second item (code-half artifact)",
  "reviewedAt": "16fac1ee",

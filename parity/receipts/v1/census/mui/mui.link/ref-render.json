@@ -1,0 +1,149 @@
+{
+  "id": "mui.link",
+  "library": "mui",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@mui/material",
+    "version": "9.2.0",
+    "recipe": "examples/mui sandbox (.mui-sandbox; examples/mui/README) mounted per extract/computed/configs/mui.json"
+  },
+  "configPath": "extract/computed/configs/mui.json",
+  "component": "Link",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "color-primary__underline-hover",
+      "status": "rendered",
+      "png": "ref-color-primary__underline-hover.png",
+      "props": {
+        "href": "#mui-link",
+        "color": "primary",
+        "underline": "hover"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-primary__underline-none",
+      "status": "rendered",
+      "png": "ref-color-primary__underline-none.png",
+      "props": {
+        "href": "#mui-link",
+        "color": "primary",
+        "underline": "none"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-primary__underline-always",
+      "status": "rendered",
+      "png": "ref-color-primary__underline-always.png",
+      "props": {
+        "href": "#mui-link",
+        "color": "primary",
+        "underline": "always"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-secondary__underline-hover",
+      "status": "rendered",
+      "png": "ref-color-secondary__underline-hover.png",
+      "props": {
+        "href": "#mui-link",
+        "color": "secondary",
+        "underline": "hover"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-error__underline-hover",
+      "status": "rendered",
+      "png": "ref-color-error__underline-hover.png",
+      "props": {
+        "href": "#mui-link",
+        "color": "error",
+        "underline": "hover"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-info__underline-hover",
+      "status": "rendered",
+      "png": "ref-color-info__underline-hover.png",
+      "props": {
+        "href": "#mui-link",
+        "color": "info",
+        "underline": "hover"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-success__underline-hover",
+      "status": "rendered",
+      "png": "ref-color-success__underline-hover.png",
+      "props": {
+        "href": "#mui-link",
+        "color": "success",
+        "underline": "hover"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-warning__underline-hover",
+      "status": "rendered",
+      "png": "ref-color-warning__underline-hover.png",
+      "props": {
+        "href": "#mui-link",
+        "color": "warning",
+        "underline": "hover"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-inherit__underline-hover",
+      "status": "rendered",
+      "png": "ref-color-inherit__underline-hover.png",
+      "props": {
+        "href": "#mui-link",
+        "color": "inherit",
+        "underline": "hover"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-primary__underline-hover__state-focus-visible",
+      "status": "rendered",
+      "png": "ref-color-primary__underline-hover__state-focus-visible.png",
+      "props": {
+        "href": "#mui-link",
+        "color": "primary",
+        "underline": "hover"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-primary__underline-hover__state-active",
+      "status": "rendered",
+      "png": "ref-color-primary__underline-hover__state-active.png",
+      "props": {
+        "href": "#mui-link",
+        "color": "primary",
+        "underline": "hover"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-primary__underline-hover__state-hover",
+      "status": "rendered",
+      "png": "ref-color-primary__underline-hover__state-hover.png",
+      "props": {
+        "href": "#mui-link",
+        "color": "primary",
+        "underline": "hover"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 12,
+  "unmappable": 0
+}

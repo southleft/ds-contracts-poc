@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "canvas carries the Actions kebab column the code render clips at its 600px stage",
  "reviewedAt": "16fac1ee",

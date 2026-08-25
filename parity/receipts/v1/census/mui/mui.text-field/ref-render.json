@@ -1,0 +1,145 @@
+{
+  "id": "mui.text-field",
+  "library": "mui",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@mui/material",
+    "version": "9.2.0",
+    "recipe": "examples/mui sandbox (.mui-sandbox; examples/mui/README) mounted per extract/computed/configs/mui.json"
+  },
+  "configPath": "extract/computed/configs/mui.json",
+  "component": "TextField",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "variant-outlined__size-medium",
+      "status": "rendered",
+      "png": "ref-variant-outlined__size-medium.png",
+      "props": {
+        "id": "mui-text-field-oracle",
+        "label": "Amount",
+        "helperText": "Enter a valid amount",
+        "error": true,
+        "slotProps": {
+          "input": {
+            "startAdornment": {
+              "$element": "@mui/material#InputAdornment",
+              "props": {
+                "position": "start"
+              },
+              "text": "$"
+            },
+            "endAdornment": {
+              "$element": "@mui/material#InputAdornment",
+              "props": {
+                "position": "end"
+              },
+              "text": "USD"
+            }
+          }
+        },
+        "variant": "outlined",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-outlined__size-small",
+      "status": "rendered",
+      "png": "ref-variant-outlined__size-small.png",
+      "props": {
+        "id": "mui-text-field-oracle",
+        "label": "Amount",
+        "helperText": "Enter a valid amount",
+        "error": true,
+        "slotProps": {
+          "input": {
+            "startAdornment": {
+              "$element": "@mui/material#InputAdornment",
+              "props": {
+                "position": "start"
+              },
+              "text": "$"
+            },
+            "endAdornment": {
+              "$element": "@mui/material#InputAdornment",
+              "props": {
+                "position": "end"
+              },
+              "text": "USD"
+            }
+          }
+        },
+        "variant": "outlined",
+        "size": "small"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-filled__size-medium",
+      "status": "rendered",
+      "png": "ref-variant-filled__size-medium.png",
+      "props": {
+        "id": "mui-text-field-oracle",
+        "label": "Amount",
+        "helperText": "Enter a valid amount",
+        "error": true,
+        "slotProps": {
+          "input": {
+            "startAdornment": {
+              "$element": "@mui/material#InputAdornment",
+              "props": {
+                "position": "start"
+              },
+              "text": "$"
+            },
+            "endAdornment": {
+              "$element": "@mui/material#InputAdornment",
+              "props": {
+                "position": "end"
+              },
+              "text": "USD"
+            }
+          }
+        },
+        "variant": "filled",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-standard__size-medium",
+      "status": "rendered",
+      "png": "ref-variant-standard__size-medium.png",
+      "props": {
+        "id": "mui-text-field-oracle",
+        "label": "Amount",
+        "helperText": "Enter a valid amount",
+        "error": true,
+        "slotProps": {
+          "input": {
+            "startAdornment": {
+              "$element": "@mui/material#InputAdornment",
+              "props": {
+                "position": "start"
+              },
+              "text": "$"
+            },
+            "endAdornment": {
+              "$element": "@mui/material#InputAdornment",
+              "props": {
+                "position": "end"
+              },
+              "text": "USD"
+            }
+          }
+        },
+        "variant": "standard",
+        "size": "medium"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 4,
+  "unmappable": 0
+}
