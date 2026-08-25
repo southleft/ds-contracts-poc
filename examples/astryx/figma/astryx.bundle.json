@@ -4024,7 +4024,7 @@
                   "color": "{imported.badge.root.color.cyan}"
                 },
                 "error": {
-                  "background-color": "{color-error}",
+                  "background-color": "{imported.badge.root.background-color.error}",
                   "color": "{color-on-accent}"
                 },
                 "green": {
@@ -4032,11 +4032,11 @@
                   "color": "{imported.badge.root.color.green}"
                 },
                 "info": {
-                  "background-color": "{color-accent}",
+                  "background-color": "{imported.badge.root.background-color.info}",
                   "color": "{color-on-accent}"
                 },
                 "neutral": {
-                  "background-color": "{color-neutral}",
+                  "background-color": "{imported.badge.root.background-color.neutral}",
                   "color": "{imported.badge.root.color.neutral}"
                 },
                 "orange": {
@@ -4056,7 +4056,7 @@
                   "color": "{imported.badge.root.color.red}"
                 },
                 "success": {
-                  "background-color": "{color-success}",
+                  "background-color": "{imported.badge.root.background-color.success}",
                   "color": "{color-on-accent}"
                 },
                 "teal": {
@@ -4064,7 +4064,7 @@
                   "color": "{imported.badge.root.color.teal}"
                 },
                 "warning": {
-                  "background-color": "{color-warning}",
+                  "background-color": "{imported.badge.root.background-color.warning}",
                   "color": "{color-on-warning}"
                 },
                 "yellow": {

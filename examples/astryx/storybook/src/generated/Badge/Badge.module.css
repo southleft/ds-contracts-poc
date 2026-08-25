@@ -41,7 +41,7 @@
 }
 
 .variant-error {
-  background-color: var(--color-error);
+  background-color: var(--imported-badge-root-background-color-error);
   color: var(--color-on-accent);
 }
 
@@ -51,12 +51,12 @@
 }
 
 .variant-info {
-  background-color: var(--color-accent);
+  background-color: var(--imported-badge-root-background-color-info);
   color: var(--color-on-accent);
 }
 
 .variant-neutral {
-  background-color: var(--color-neutral);
+  background-color: var(--imported-badge-root-background-color-neutral);
   color: var(--imported-badge-root-color-neutral);
 }
 
@@ -81,7 +81,7 @@
 }
 
 .variant-success {
-  background-color: var(--color-success);
+  background-color: var(--imported-badge-root-background-color-success);
   color: var(--color-on-accent);
 }
 
@@ -91,7 +91,7 @@
 }
 
 .variant-warning {
-  background-color: var(--color-warning);
+  background-color: var(--imported-badge-root-background-color-warning);
   color: var(--color-on-warning);
 }
 

@@ -39,7 +39,7 @@ const COMPONENTS = [
             "paddingTop": "spacing-0",
             "paddingBottom": "spacing-0"
           },
-          "fill": "color-neutral",
+          "fill": "imported/badge/root/background-color/neutral",
           "children": [
             {
               "type": "text",
@@ -83,7 +83,7 @@ const COMPONENTS = [
             "paddingTop": "spacing-0",
             "paddingBottom": "spacing-0"
           },
-          "fill": "color-accent",
+          "fill": "imported/badge/root/background-color/info",
           "children": [
             {
               "type": "text",
@@ -127,7 +127,7 @@ const COMPONENTS = [
             "paddingTop": "spacing-0",
             "paddingBottom": "spacing-0"
           },
-          "fill": "color-success",
+          "fill": "imported/badge/root/background-color/success",
           "children": [
             {
               "type": "text",
@@ -171,7 +171,7 @@ const COMPONENTS = [
             "paddingTop": "spacing-0",
             "paddingBottom": "spacing-0"
           },
-          "fill": "color-warning",
+          "fill": "imported/badge/root/background-color/warning",
           "children": [
             {
               "type": "text",
@@ -215,7 +215,7 @@ const COMPONENTS = [
             "paddingTop": "spacing-0",
             "paddingBottom": "spacing-0"
           },
-          "fill": "color-error",
+          "fill": "imported/badge/root/background-color/error",
           "children": [
             {
               "type": "text",
