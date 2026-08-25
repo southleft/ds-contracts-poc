@@ -610,6 +610,26 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run door-register:self-test
 
+      # THE GRAMMAR COVERAGE SPEC — spec/GRAMMAR-COVERAGE.md + grammar-coverage.json.
+      # The CAPTURE CONFIG GRAMMAR is the language a user mounts their library
+      # in, and three holes in it were found by AUTHORING three held-out exam
+      # subjects rather than by running anything: a compound export name was a
+      # syntax error, two class-token axes SILENTLY dropped one of the two, and
+      # a Date could not be spelled at all. A first-pass failure caused by a
+      # known grammar gap measures the grammar rather than the engine, so the
+      # remaining gaps are named here with the library that proves each one.
+      # The supported half is measured from the CONFIGS ON DISK, never from the
+      # TypeScript type that declares the surface — a coverage number computed
+      # from its own denominator is the self-attestation this tree keeps
+      # re-learning. Refuses when a config uses a construct the spec omits, and
+      # when a spec row claims support that nothing exercises.
+      - name: grammar-coverage:check (every config construct claimed; every supported claim exercised)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run grammar-coverage:check
+      - name: grammar-coverage self-test (ten planted reds - a dropped construct, an exerciser that does not exercise, a ghost file, an unimplemented marker, stale totals, an empty corpus)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run grammar-coverage:check -- --self-test
+
       # Not one of the 33 named gates, but CONTRIBUTING.md § "The gates" tells
       # contributors to run it and it costs under a second with no extra build.
       - name: test packages/cli (all node:test files)

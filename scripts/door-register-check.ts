@@ -222,6 +222,13 @@ export function auditCensus(c: Census): Finding[] {
   if (c.skipped.length > 0) {
     bad(`${c.skipped.length} component(s) failed to re-fuse — the census below is NOT a denominator:\n      ${c.skipped.slice(0, 5).join('\n      ')}`);
   } else ok(`all ${c.components} committed components re-fused offline, 0 skipped`);
+  // A config with NO capture output is an ABSENT SUBJECT, not a failure — the
+  // held-out exam subjects are committed before they are ever captured. Named
+  // rather than silent, so an absent subject can never be mistaken for a
+  // measured zero (HELD-OUT-MANIFEST finding 7).
+  if (c.neverCaptured.length > 0) {
+    ok(`${c.neverCaptured.length} config(s) have no captures yet and are named, not counted: ${c.neverCaptured.join(', ')}`);
+  }
   if (c.components < 50) {
     bad(`only ${c.components} components re-fused — a check that passes because it measured almost nothing is the defect this repo keeps finding`);
   }

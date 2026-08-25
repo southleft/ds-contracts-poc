@@ -51,76 +51,94 @@
       "contract": "examples/bootstrap5/contracts-seed/button.contract.json",
       "sampleText": "Button",
       "axes": [
-        "variant"
+        "variant",
+        "size"
       ],
       "axisValueMap": {
         "variant": {
           "primary": {
-            "$props": {
-              "className": "btn btn-primary"
-            }
+            "$classTokens": [
+              "btn-primary"
+            ]
           },
           "secondary": {
-            "$props": {
-              "className": "btn btn-secondary"
-            }
+            "$classTokens": [
+              "btn-secondary"
+            ]
           },
           "success": {
-            "$props": {
-              "className": "btn btn-success"
-            }
+            "$classTokens": [
+              "btn-success"
+            ]
           },
           "danger": {
-            "$props": {
-              "className": "btn btn-danger"
-            }
+            "$classTokens": [
+              "btn-danger"
+            ]
           },
           "warning": {
-            "$props": {
-              "className": "btn btn-warning"
-            }
+            "$classTokens": [
+              "btn-warning"
+            ]
           },
           "info": {
-            "$props": {
-              "className": "btn btn-info"
-            }
+            "$classTokens": [
+              "btn-info"
+            ]
           },
           "light": {
-            "$props": {
-              "className": "btn btn-light"
-            }
+            "$classTokens": [
+              "btn-light"
+            ]
           },
           "dark": {
-            "$props": {
-              "className": "btn btn-dark"
-            }
+            "$classTokens": [
+              "btn-dark"
+            ]
           },
           "link": {
-            "$props": {
-              "className": "btn btn-link"
-            }
+            "$classTokens": [
+              "btn-link"
+            ]
           },
           "outline-primary": {
-            "$props": {
-              "className": "btn btn-outline-primary"
-            }
+            "$classTokens": [
+              "btn-outline-primary"
+            ]
           },
           "outline-secondary": {
-            "$props": {
-              "className": "btn btn-outline-secondary"
-            }
+            "$classTokens": [
+              "btn-outline-secondary"
+            ]
+          }
+        },
+        "size": {
+          "sm": {
+            "$classTokens": [
+              "btn-sm"
+            ]
+          },
+          "default": {
+            "$classTokens": []
+          },
+          "lg": {
+            "$classTokens": [
+              "btn-lg"
+            ]
           }
         }
       },
       "fixedProps": {
-        "type": "button"
+        "type": "button",
+        "className": "btn"
       },
       "stateProps": [
         {
           "prop": "disabled",
           "state": "disabled"
         }
-      ]
+      ],
+      "__note": "ORDERED CLASS-TOKEN AXES. Bootstrap spells a button as a BASE token plus one modifier per axis (`class=\"btn btn-primary btn-lg\"`), which the flat $props form could not express: comboProps folds axes into one prop bag by assignment, so variant × size mounted `btn btn-lg` and SILENTLY DROPPED THE VARIANT. `$classTokens` appends in declared axis order on top of fixedProps.className, so all three tokens survive. `btn-sm`/`btn-lg` was deferred by name for exactly this reason and is un-deferred here; the variant VALUES are untouched. Sizes are Bootstrap's own documented .btn-sm/.btn-lg (the default size is the ABSENCE of a modifier, spelled [])."
     },
     {
       "name": "Alert",

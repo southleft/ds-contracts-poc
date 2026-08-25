@@ -234,6 +234,7 @@
     "parity:snapshot:rest": "tsx parity/snapshot-rest.ts",
     "census:check": "tsx scripts/canvas-census-check.ts",
     "door-register:check": "tsx scripts/door-register-check.ts",
+    "grammar-coverage:check": "tsx scripts/grammar-coverage-check.ts",
     "door-register:self-test": "tsx scripts/door-register-check.ts --self-test",
     "door-census": "tsx scripts/door-census.ts",
     "census:render": "tsx extract/figma/census/render.ts",

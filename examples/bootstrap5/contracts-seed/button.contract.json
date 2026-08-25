@@ -49,6 +49,31 @@
           "prop": "className"
         }
       }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "sm",
+          "default",
+          "lg"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Small",
+            "default": "Default",
+            "lg": "Large"
+          }
+        },
+        "code": {
+          "prop": "className"
+        }
+      }
     }
   ],
   "states": [

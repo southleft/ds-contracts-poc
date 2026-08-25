@@ -162,14 +162,15 @@ One TypeScript interface (`CaptureConfig`, `extract/computed/capture.ts`)
 declares everything a library may say about itself:
 
 ```
-library:     package, version, framework, classPrefix, classAllow?, varPrefix?
-mount:       imports[], wrapperOpen, wrapperClose
-tokens:      dtcg[], css, minted?
-icons?, browser, stage, enumeration{cartesianLimit, unsetLabel}
+library:     package, version, framework, classPrefix, classAllow?, varPrefix?,
+             tokenGroup?, customElements?
+mount:       imports[], wrapperOpen, wrapperClose, headStyles?, preScript?
+tokens:      dtcg[], css, minted?, mintedBootstrap?
+icons?, fonts?, browser, stage, enumeration{cartesianLimit, unsetLabel}
 components[]: name, importName, contract, sampleText, axes, axisValueMap,
               fixedProps, stateProps, presenceProps, callbackProps,
               childWrap | childrenSpec, openDriver, portalCapture,
-              blockStage, stage, triage, __note
+              blockStage, stage, baseCombo, triage, __note
 ```
 
 Three keys carry *grammar*, and they are where the per-library craft actually
@@ -609,7 +610,8 @@ captured at all*, and it is the largest qualifier in this document.
   path forward is synthesizing the pseudo-element into the sweep as a real
   aligned part — exactly how MUI Switch's thumb offset is now carried.
 - **The Accordion chevron is refused, not drawn.** `expandIcon` takes a React
-  element; the marker grammar resolves package *exports* only, and the pinned
+  element; the marker grammar resolves package *exports* and pinned literals
+  (`$date`, `$classTokens`) only, and the pinned
   sandbox has no `@mui/icons-material`. A hand-drawn chevron would be a
   fabricated canvas fact, so there is none.
 - **Fonts were not loaded in this harness run.** Carbon's `styles.css` carries

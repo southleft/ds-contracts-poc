@@ -115,6 +115,28 @@ list is there so failures are interpretable rather than surprising.
 These came out of authoring alone, with no capture run. They are findings, not
 blockers; each subject's README carries the detail.
 
+> **FINDINGS 1–3 ARE NOW CLOSED, BEFORE THE FIRST PASS RUNS.** They were the
+> cheap ones, and closing them first is what keeps the exam a measurement of the
+> ENGINE rather than of a known gap: a first-pass failure caused by a language
+> hole teaches nothing. `importName` now accepts a compound (dotted) export
+> name; `axisValueMap` gained `{"$classTokens": […]}`, an ordered append that
+> composes where the flat `$props` bag silently dropped an axis; and the marker
+> grammar gained `{"$date": "<ISO>"}`. Bootstrap's `btn-sm`/`btn-lg` is
+> un-deferred and the day-picker fixtures module is retired. **Nothing about
+> the subjects' component selections or axis VALUES was tuned** — the blindness
+> rule holds; the language changed, not the answers. The Radix barrel is
+> deliberately still in place, because retiring it would change a held-out
+> subject's mount. Findings 4–6, and the rest of what the grammar still cannot
+> say, are now a gated artifact: [`spec/GRAMMAR-COVERAGE.md`](../../../spec/GRAMMAR-COVERAGE.md)
+> (`npm run grammar-coverage:check`).
+>
+> Finding 7 turned out to have a **third** instance, found by merging this
+> branch forward: `scripts/door-census.ts` carried the same un-namespaced
+> `?? 'extract/computed/out'` fallback behind a hand-maintained ten-entry map,
+> and re-fused first-party `button/`, `badge/` and `spinner/` captures under
+> `bootstrap5` and `radix-themes` names. Fixed the same way, and a config with
+> no captures is now a named absent subject rather than a re-fuse failure.
+
 1. **`importName` cannot name a compound export.** The harness emits
    `importName` verbatim into `import { … } from '<library.package>'`, so
    `TextField.Root` / `Callout.Root` / `Tabs.Trigger` are unmountable. Three of
