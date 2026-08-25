@@ -40,7 +40,7 @@ import { flattenTokens } from '../../core/tokens.js';
 import { ContractSchema, type Contract } from '../../scripts/contract-schema.js';
 import { validateContract } from '../../core/emit-react.js';
 import { loadConfig, propSpaceFor, stageFor, INTERACTIONS, type SweepResult } from './capture.js';
-import { applyDecisions, type AckedDecision } from './decisions.js';
+import { applyDecisions, refereeCombos, type AckedDecision } from './decisions.js';
 import {
   alignSweep,
   applyMintToContract,
@@ -52,6 +52,7 @@ import {
   styledChannels,
 } from './fuse.js';
 import { reconstructCaptures, type CapturedTruthFile } from './replay.js';
+import { measuredTruth } from './measured.js';
 import { normalizeValue } from './lib.js';
 import { gateInventory, runGate } from './gate.js';
 import { promoteAnatomy } from './anatomy.js';
@@ -417,9 +418,22 @@ async function main() {
       // Apply-time value check: the SAME inventory the gate renders with —
       // literally the same function (gate.ts gateInventory), mirroring
       // run.ts exactly. See the note there.
-      const { inventory: decisionInventory } = gateInventory(REPO, cfg, mergedTree);
-      const { applied, skipped } = applyDecisions(resolved, decisions, decisionInventory);
-      decisionNotes.push(...applied.map((a) => `applied: ${a}`), ...skipped.map((sk) => `SKIPPED: ${sk}`));
+      // RC6 — and the APPLY-TIME VALUE CHECK rides the same one-function
+      // discipline: `resolveValue` is the gate's own resolver and the referee
+      // is THIS capture's measurement (measured.ts), so an alias whose token
+      // has drifted away from what the browser recorded is refused BY NAME
+      // instead of silently repainting the component.
+      const { inventory: decisionInventory, resolveValue } = gateInventory(REPO, cfg, mergedTree);
+      const { applied, skipped, unverified } = applyDecisions(resolved, decisions, decisionInventory, {
+        resolveValue,
+        measured: measuredTruth(truth),
+        combos: refereeCombos(space.enumeration.combos),
+      });
+      decisionNotes.push(
+        ...applied.map((a) => `applied: ${a}`),
+        ...skipped.map((sk) => `SKIPPED: ${sk}`),
+        ...unverified.map((u) => `UNVERIFIED: ${u}`),
+      );
       ContractSchema.parse(resolved);
       const resolvedErrs: string[] = [];
       validateContract(resolved, new Map([[resolved.id, resolved]]), resolvedErrs, iconAssetsMerged);

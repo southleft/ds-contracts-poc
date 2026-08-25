@@ -30,7 +30,7 @@ import { kebab } from '../types.js';
 import type { Contract } from '../../scripts/contract-schema.js';
 import type { CaptureConfig, ComponentConfig, PropSpace, Interaction } from './capture.js';
 import { INTERACTIONS, fontFaceCss, settleStage, stageFor } from './capture.js';
-import { isFusable, kindOf, mergeShippedMinted, SYNTHETIC_CHANNELS, type Capture, type Combo, type FlatEl, type MintedMerge } from './lib.js';
+import { canonColorValue, isFusable, kindOf, mergeShippedMinted, SYNTHETIC_CHANNELS, type Capture, type Combo, type FlatEl, type MintedMerge } from './lib.js';
 import type { AlignedSweep } from './fuse.js';
 
 export interface GateRow {
@@ -193,13 +193,37 @@ export function gateInventory(
   repoRoot: string,
   cfg: CaptureConfig,
   mintedTree: Record<string, unknown>,
-): { inventory: Set<string>; merged: MintedMerge; baseTrees: Array<Record<string, unknown>> } {
+): {
+  inventory: Set<string>;
+  merged: MintedMerge;
+  baseTrees: Array<Record<string, unknown>>;
+  resolveValue: (refOrLiteral: string) => string;
+} {
   const shipped = cfg.tokens.minted
     ? (JSON.parse(readFileSync(path.join(repoRoot, cfg.tokens.minted), 'utf8')) as Record<string, unknown>)
     : {};
   const merged = mergeShippedMinted(mintedTree, shipped);
   const baseTrees = cfg.tokens.dtcg.map((p) => JSON.parse(readFileSync(path.join(repoRoot, p), 'utf8')) as Record<string, unknown>);
-  return { inventory: tokenInventoryFromJson([...baseTrees, merged.tree]), merged, baseTrees };
+  const all = new Map<string, TokenEntry>();
+  for (const t of [...baseTrees, merged.tree]) for (const [p, e] of flattenTokens(t)) all.set(p, e);
+  const resolve = makeResolveLiteral(all);
+  /** `{path}` → the token's literal value through THESE trees; a bare literal
+   *  passes through. Colours canonicalize through the same `kindOf` the mint
+   *  uses (rgba/oklch → hex, alpha explicit) — see the divergence note in
+   *  runGate, which this function was lifted out of so that the gate's
+   *  render-time referee and the decision-ledger's apply-time referee cannot
+   *  drift apart: one function, one precedence, every caller. */
+  const resolveValue = (v: string): string => {
+    const ref = /^\{([^}]+)\}$/.exec(v);
+    let raw: string;
+    try {
+      raw = String(ref ? resolve(ref[1]) : v).trim();
+    } catch {
+      return `UNRESOLVABLE(${v})`;
+    }
+    return canonColorValue(raw) ?? raw.toLowerCase();
+  };
+  return { inventory: tokenInventoryFromJson([...baseTrees, merged.tree]), merged, baseTrees, resolveValue };
 }
 
 export async function runGate(opts: {
@@ -243,7 +267,7 @@ export async function runGate(opts: {
     );
   }
   const tokensCss = readFileSync(tokensCssPath, 'utf8');
-  const { inventory, merged, baseTrees } = gateInventory(repoRoot, cfg, mintedTree);
+  const { inventory, merged, baseTrees, resolveValue } = gateInventory(repoRoot, cfg, mintedTree);
 
   // A divergence between the fresh and shipped spellings of the same leaf is
   // only a REGRESSION CANDIDATE if the two RESOLVE differently: the
@@ -258,32 +282,7 @@ export async function runGate(opts: {
   // identical pixel. Colours are canonicalized through the SAME kindOf the
   // mint itself uses (rgba/oklch → hex, shorthand expanded, alpha explicit);
   // anything that is not a colour compares as a trimmed lowercase string.
-  const all = new Map<string, TokenEntry>();
-  for (const t of [...baseTrees, merged.tree]) for (const [p, e] of flattenTokens(t)) all.set(p, e);
-  const resolve = makeResolveLiteral(all);
-  const canonColor = (s: string): string | null => {
-    const hex = /^#([0-9a-f]{3,8})$/i.exec(s);
-    if (hex) {
-      let h = hex[1].toLowerCase();
-      if (h.length === 3 || h.length === 4) h = [...h].map((c) => c + c).join('');
-      if (h.length === 6) h += 'ff';
-      return h.length === 8 ? h : null;
-    }
-    const k = kindOf('color', s);
-    if (!k || k.kind !== 'color') return null;
-    const h = String(k.value).toLowerCase();
-    return h.length === 6 ? `${h}ff` : h;
-  };
-  const literal = (v: string): string => {
-    const ref = /^\{([^}]+)\}$/.exec(v);
-    let raw: string;
-    try {
-      raw = String(ref ? resolve(ref[1]) : v).trim();
-    } catch {
-      return `UNRESOLVABLE(${v})`;
-    }
-    return canonColor(raw) ?? raw.toLowerCase();
-  };
+  const literal = resolveValue;
   const divergent = merged.divergent.map((d) => ({ ...d, resolvedEqual: literal(d.fresh) === literal(d.shipped) }));
   const realDivergences = divergent.filter((d) => !d.resolvedEqual);
   if (realDivergences.length > 0) {

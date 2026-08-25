@@ -74,9 +74,10 @@ import {
   type TruthCaptureEntry,
 } from './replay.js';
 import { gateInventory, runGate } from './gate.js';
+import { measuredTruth } from './measured.js';
 import { promoteAnatomy } from './anatomy.js';
 import { labeledPair } from './label-png.js';
-import { applyDecisions, type AckedDecision } from './decisions.js';
+import { applyDecisions, refereeCombos, type AckedDecision } from './decisions.js';
 import { mountSanity, type MountRow } from './mount-sanity.js';
 import { kebab } from '../types.js';
 import { calcVarSkip, DECOR_PSEUDOS, flatten, normalizeValue, READ_PSEUDOS, REFUSED_PSEUDOS, shorthandVarSkip, type Capture, type CapturedNode, type FlatEl, type StyleMap, okColorToRgba,
@@ -955,11 +956,22 @@ async function main() {
       // libraries targets an `imported.*` ref (pinned by
       // decision-ledger-value-check), so the widened inventory admits
       // nothing new today — it removes a twin of the gate defect.
-      const { inventory: decisionInventory } = gateInventory(REPO, cfg, mergedTree);
-      const { applied, skipped } = applyDecisions(resolved, decisions, decisionInventory);
+      // RC6 — the APPLY-TIME VALUE CHECK. Existence is not agreement: the
+      // target must still hold what THIS capture measured at the sites the
+      // scope names (measured.ts, read from the captured truth this run just
+      // wrote). `{color-accent}` existed on every run while the astryx DS
+      // moved it from #0064e0 to #262626 and Badge's five semantic variants
+      // silently repainted. Refusals and unverifiable rows are both NAMED.
+      const { inventory: decisionInventory, resolveValue } = gateInventory(REPO, cfg, mergedTree);
+      const { applied, skipped, unverified } = applyDecisions(resolved, decisions, decisionInventory, {
+        resolveValue,
+        measured: measuredTruth(capturedTruth),
+        combos: refereeCombos(space.enumeration.combos),
+      });
       decisionNotes = [
         ...applied.map((a) => `decision re-applied: ${a}`),
         ...skipped.map((sk) => `decision SKIPPED: ${sk}`),
+        ...unverified.map((u) => `decision UNVERIFIED: ${u}`),
       ];
       ContractSchema.parse(resolved);
       const resolvedErrors: string[] = [];
@@ -972,7 +984,7 @@ async function main() {
       }
       writeFileSync(path.join(outDir, 'resolved.contract.json'), JSON.stringify(resolved, null, 2) + '\n');
       gated = resolved;
-      console.log(`    decisions: ${applied.length} re-applied${skipped.length ? `, ${skipped.length} SKIPPED (named)` : ''} → resolved.contract.json (the gated + promoted artifact)`);
+      console.log(`    decisions: ${applied.length} re-applied${skipped.length ? `, ${skipped.length} SKIPPED (named)` : ''}${unverified.length ? `, ${unverified.length} UNVERIFIED (named)` : ''} → resolved.contract.json (the gated + promoted artifact)`);
     }
 
     const pseudo = pseudoFindings(aligned, cfg.library.classPrefix);

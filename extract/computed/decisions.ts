@@ -42,8 +42,42 @@
  * only refuses to write a ref that provably cannot render. The inventory is
  * OPTIONAL so existing callers keep working, and its absence is not a
  * silent pass: the caller that gates a number passes it.
+ *
+ * APPLY-TIME **VALUE** CHECK (RC6 — the stale token alias). Existence is not
+ * agreement. `{color-accent}` existed on every run while the astryx DS moved
+ * it from `#0064e0` to `#262626`, and this ledger kept re-anchoring Badge's
+ * five SEMANTIC variants onto it: the contract, the CSS module, the Figma
+ * script and the census render all repainted charcoal-on-charcoal, with no
+ * receipt anywhere. The nine PALETTE variants, which bind measured
+ * `{imported.badge.…}` literals, stayed pixel-exact — which is exactly the
+ * shape the blind grader recorded.
+ *
+ * The referee is THIS RUN'S MEASUREMENT (`measured.ts`, read from the same
+ * committed `captured-truth.json` the enriched contract is fused from), never
+ * the ledger's own `observed` field: that string ages with the capture, and
+ * refereeing against it refuses three CORRECT rows (astryx Card/Slider/Switch
+ * `root.color` record `rgba(0, 0, 0, 1)` where today's capture measures
+ * `rgba(23, 23, 23, 1)` — which is precisely what `{color-on-light}` holds).
+ *
+ * The rule, and it only ever REFUSES:
+ *   · the decision's target resolves through the SAME trees the gate renders
+ *     with (`gate.ts gateInventory().resolveValue` — one function, every
+ *     caller), and is compared by CSS VALUE equality, never string equality
+ *     (`decisionValueEq`: colours through the mint's own `kindOf`, dimensions
+ *     normalized, unitless zero). No tolerance, no ΔE slack.
+ *   · sites are the (part, channel) measurements in the combos the scope
+ *     names, at the DEFAULT interaction.
+ *   · target disagrees with EVERY site → NAMED SKIP; the fused measured
+ *     binding stands and the message quotes both values.
+ *   · target agrees with at least one site → APPLIED (a channel may legally
+ *     vary inside an axis scope; refusing there would delete a real binding).
+ *   · NO site at all → APPLIED and reported as `unverified` BY NAME. The run
+ *     measured nothing there, so nothing can be concluded — and silence is
+ *     printed rather than passed.
  */
 import { tokensByPropEntries, walkAnatomy, type Contract, type Part } from '../../scripts/contract-schema.js';
+import { canonColorValue, normalizeValue, type Combo } from './lib.js';
+import type { MeasuredTruth } from './measured.js';
 
 export interface AckedDecision {
   ids: string[];
@@ -58,6 +92,80 @@ export interface AckedDecision {
   ack: string;
 }
 
+/** CSS VALUE equality — the referee's comparison, and the ONLY one it makes.
+ *  `#0074E2`, `rgba(0, 116, 226, 1)` and `oklch(…)` are one colour; `0` and
+ *  `0px` are one length. Everything else compares as a whitespace-collapsed
+ *  lowercase string. No tolerance is defined here on purpose: a near-miss
+ *  between a token and a measurement is a finding, not a rounding error. */
+export function decisionValueEq(a: string, b: string): boolean {
+  return canonDecisionValue(a) === canonDecisionValue(b);
+}
+
+const trimNum = (n: number): string => (Number.isInteger(n) ? String(n) : String(Number(n.toFixed(4))));
+
+/** ROOT FONT SIZE. A token tree writes `0.75rem`; a computed style is always
+ *  absolute (`12px`). `rem` is the ROOT element's font-size, and the capture
+ *  stage restyles no `:root` — so the CSS initial 16px applies. That is not
+ *  an assumption taken on faith: the committed corpus checks it four ways in
+ *  two libraries, independently — astryx `{font-size-base}` 0.875rem measures
+ *  14px, `{font-size-sm}` 0.75rem measures 12px, Polaris `{p.font-size-325}`
+ *  0.8125rem measures 13px and `{p.font-line-height-500}` 1.25rem measures
+ *  20px. `em` is deliberately NOT converted: it is relative to the element's
+ *  own font-size, which this referee does not know, and guessing would either
+ *  invent agreement or invent a refusal. An `em`-valued target therefore
+ *  compares as a string and, if it disagrees, is refused BY NAME with both
+ *  spellings quoted — the honest outcome for a value we cannot resolve. */
+const ROOT_FONT_PX = 16;
+
+function canonDecisionValue(v: string): string {
+  const t = normalizeValue(String(v).trim());
+  const colour = canonColorValue(t);
+  if (colour) return colour;
+  const low = t.toLowerCase();
+  const len = /^(-?\d*\.?\d+)(px|rem)$/.exec(low);
+  if (len) return `${trimNum(Number(len[1]) * (len[2] === 'rem' ? ROOT_FONT_PX : 1))}px`;
+  // Unitless zero is the same length as 0px (`{spacing-0}` is spelled `0` in
+  // some trees and `0px` in others). A unitless NON-zero is left alone —
+  // font-weight 500 and line-height 1.5 are not lengths.
+  if (/^-?\d*\.?\d+$/.test(low)) return Number(low) === 0 ? '0px' : trimNum(Number(low));
+  return low.replace(/\s+/g, ' ');
+}
+
+/** The apply-time value referee: this run's measurement plus the resolver the
+ *  gate itself renders with. Optional — a caller with no capture in hand (the
+ *  cross-library pin in evals) still gets the existence check. */
+export interface DecisionReferee {
+  /** `{path}` → literal, through the SAME trees the gate renders with
+   *  (gate.ts `gateInventory().resolveValue`). */
+  resolveValue: (refOrLiteral: string) => string;
+  /** THIS RUN's computed values, by (part, channel, combo). */
+  measured: MeasuredTruth;
+  /** The enumerated combos, with their axis values — the scope→sites map. */
+  combos: ReadonlyArray<{ key: string; axisValues: Record<string, string> }>;
+}
+
+/** Combo keys a decision scope names. `base` is every enumerated combo (the
+ *  scope is only reached when the channel resolves the same everywhere);
+ *  `axis:prop=v1|v2` is the combos whose `prop` sits at one of those values. */
+function combosInScope(referee: DecisionReferee, scope: string): string[] {
+  if (scope === 'base') return referee.combos.map((c) => c.key);
+  const m = /^axis:([\w-]+)=(.+)$/.exec(scope);
+  if (!m) return [];
+  const [, prop, valueList] = m;
+  const values = new Set(valueList.split('|'));
+  return referee.combos.filter((c) => values.has(c.axisValues[prop])).map((c) => c.key);
+}
+
+/** The combos a referee may score against: state-prop planes are STATES, not
+ *  bases (fuse.ts `isEnabled`), and a decision scope never names one. Shared
+ *  so the harness, the offline re-fuse and the corpus gate cannot disagree
+ *  about the denominator. */
+export function refereeCombos(combos: ReadonlyArray<Combo>): Array<{ key: string; axisValues: Record<string, string> }> {
+  return combos
+    .filter((c) => Object.values(c.stateFlags).every((f) => !f))
+    .map((c) => ({ key: c.key, axisValues: c.axisValues }));
+}
+
 export function applyDecisions(
   contract: Contract,
   decisions: AckedDecision[],
@@ -65,9 +173,13 @@ export function applyDecisions(
    *  cfg.tokens.dtcg + the minted tree). When given, a decision whose `to`
    *  ref is absent from it is refused BY NAME — see the header. */
   inventory?: Set<string>,
-): { applied: string[]; skipped: string[] } {
+  /** Value referee — see the header. Absent = existence check only, and the
+   *  caller is told so: every row lands in `unverified`. */
+  referee?: DecisionReferee,
+): { applied: string[]; skipped: string[]; unverified: string[] } {
   const applied: string[] = [];
   const skipped: string[] = [];
+  const unverified: string[] = [];
   const partByName = new Map(walkAnatomy(contract).map((w) => [w.name, w.part] as const));
   for (const d of decisions) {
     const target: Part | undefined = partByName.get(d.part);
@@ -85,6 +197,32 @@ export function applyDecisions(
         `${d.part}.${d.channel} [${d.scope}] → ${d.to}: target token is NOT in this library's inventory — NAMED skip (an acked resolution that cannot resolve would render as an EMPTY custom property; a ledger recorded against a different library is the known cause)`,
       );
       continue;
+    }
+    // APPLY-TIME VALUE CHECK (header). Existence is not agreement: the target
+    // must still hold what this run MEASURED at the sites the scope names.
+    if (isTokenRef && referee) {
+      const target = referee.resolveValue(d.to);
+      const combos = combosInScope(referee, d.scope);
+      const sites = referee.measured.at(d.part, d.channel, combos);
+      if (sites.length === 0) {
+        unverified.push(
+          `${d.part}.${d.channel} [${d.scope}] → ${d.to} (= ${target}): APPLIED UNVERIFIED — this run measured no computed value at that site (${combos.length} combo(s) in scope), so nothing can referee the target. Not a pass: re-review with \`extract/computed/resolve.ts --apply\` if the binding matters.`,
+        );
+      } else {
+        const agreeing = sites.filter((st) => decisionValueEq(target, st.value));
+        if (agreeing.length === 0) {
+          const seen = [...new Set(sites.map((st) => st.value))];
+          skipped.push(
+            `${d.part}.${d.channel} [${d.scope}] → ${d.to}: STALE ALIAS — the target resolves to ${target} but this run MEASURED ${seen.join(' / ')} at ${sites.length} site(s) (${[...new Set(sites.map((st) => st.combo))].join(', ')}) — NAMED skip; the fused measured binding stands. The acked resolution was recorded against an older value of ${d.to} (ledger observed: ${d.observed}); re-review with \`extract/computed/resolve.ts --apply\`.`,
+          );
+          continue;
+        }
+        if (agreeing.length < sites.length) {
+          unverified.push(
+            `${d.part}.${d.channel} [${d.scope}] → ${d.to} (= ${target}): APPLIED — agrees with ${agreeing.length} of ${sites.length} measured site(s); the channel varies inside the scope, so the disagreeing site(s) are NOT proof the alias is stale.`,
+          );
+        }
+      }
     }
     if (d.scope === 'base') {
       if (isTokenRef) {
@@ -146,5 +284,5 @@ export function applyDecisions(
     }
     applied.push(`${d.part}.${d.channel} [${d.scope}] → ${d.to}`);
   }
-  return { applied, skipped };
+  return { applied, skipped, unverified };
 }

@@ -385,6 +385,21 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:computed:drift
 
+      # RC6 — THE STALE TOKEN ALIAS. `out/<component>/resolved.contract.json`
+      # is the enriched contract with the human-acked decisions ledger
+      # re-applied, and it is what every promote-floor ships. Nothing checked
+      # that the committed artifact IS that computation, so a ledger row could
+      # rot in place: `{color-accent}` moved from #0064e0 to #262626, the
+      # astryx Badge ledger kept re-anchoring five semantic variants onto it,
+      # and the component shipped charcoal-on-charcoal through the contract,
+      # the CSS module, the Figma script and the census render. This gate
+      # re-derives all eleven committed resolved contracts from committed
+      # bytes only — no browser, no npm install, ~2s — refereeing every alias
+      # against the component's own captured truth, and byte-compares.
+      - name: extract:computed:decisions:check (every resolved contract IS its ledger re-applied)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:computed:decisions:check
+
       # V1-JOURNEY-03's acceptance chain minus docs:check (which runs above):
       # the brownfield referee over this repo's own adopted contracts, code and
       # committed canvas snapshot (docs/23 §D.32). ~2s, no browser, no token.

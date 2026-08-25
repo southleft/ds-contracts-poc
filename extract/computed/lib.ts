@@ -580,6 +580,30 @@ export function kindOf(prop: string, value: string): Kindled {
   return null;
 }
 
+/** COLOUR NOTATION IS NOT COLOUR. `#fff`, `#FFFFFF`, `rgba(255, 255, 255, 1)`
+ *  and `oklch(1 0 0)` paint the identical pixel and compare unequal as
+ *  strings — 34 such pairs were called "different" on the first cut of the
+ *  gate's fresh-vs-shipped divergence report. Canonical form is the 8-digit
+ *  hex `kindOf` already mints (alpha always explicit); null when the string
+ *  is not a colour at all, so the caller can fall through to its own rule.
+ *
+ *  Lifted out of `gate.ts runGate` (repair round) so the gate's render-time
+ *  referee, `gateInventory`'s `resolveValue` and the decision ledger's
+ *  apply-time value check are literally one implementation. */
+export function canonColorValue(s: string): string | null {
+  const hex = /^#([0-9a-f]{3,8})$/i.exec(s.trim());
+  if (hex) {
+    let h = hex[1].toLowerCase();
+    if (h.length === 3 || h.length === 4) h = [...h].map((c) => c + c).join('');
+    if (h.length === 6) h += 'ff';
+    return h.length === 8 ? h : null;
+  }
+  const k = kindOf('color', normalizeValue(s.trim()));
+  if (!k || k.kind !== 'color') return null;
+  const h = String(k.value).toLowerCase();
+  return h.length === 6 ? `${h}ff` : h;
+}
+
 /** Contract channel → computed longhand(s) to check — the verify.ts channel
  *  map, shared verbatim (examples/polaris/scripts/verify.ts COMPUTED). */
 export const CHANNEL_TO_COMPUTED: Record<string, string[]> = {
