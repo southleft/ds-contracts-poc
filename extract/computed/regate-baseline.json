@@ -761,11 +761,11 @@
     {
       "library": "polaris",
       "component": "Banner",
-      "rerunPctEqual": 97.19135802469135,
+      "rerunPctEqual": 97.43827160493827,
       "cellsCompared": 12960,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 97.01443569553805,
-      "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 160 more cell(s) than the engine the harness scorecard was captured with (12192 -> 12352) and every added cell is EQUAL (11828 -> 11988 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. The 2026-08-09 baseline pinned this row at 97.014/12192 cells, the pre-lift engine; the committed regate.scorecard.json beside it had already been overwritten by a later run and disagreed with that row until this re-record."
+      "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 160 more cell(s) than the engine the harness scorecard was captured with (12192 -> 12352) and every added cell is EQUAL (11828 -> 11988 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. The 2026-08-09 baseline pinned this row at 97.014/12192 cells, the pre-lift engine; the committed regate.scorecard.json beside it had already been overwritten by a later run and disagreed with that row until this re-record. RC1 LAYOUT-AXIS DOOR (2026-08-25): a separately measured 0.247 on top — 97.191 on the e884d672 engine, 97.438 on this one, cellsCompared UNCHANGED at 12960. flex-wrap had NO entry in LAYOUT_CHANNEL_TO_FIELD at all, so a captured library could never deliver layout.wrap; it is now carried. Cell flips only, no widened denominator; the harness number moves only on a re-capture."
     },
     {
       "library": "polaris",
@@ -833,11 +833,11 @@
     {
       "library": "polaris",
       "component": "TextField",
-      "rerunPctEqual": 80.69734004313443,
+      "rerunPctEqual": 81.84759166067577,
       "cellsCompared": 44512,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.96911196911196,
-      "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 512 more cell(s) than the engine the harness scorecard was captured with (41440 -> 41952) and every added cell is EQUAL (33968 -> 34480 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. The 2026-08-09 baseline pinned this row at 81.969/41440 cells, the pre-lift engine; the committed regate.scorecard.json beside it had already been overwritten by a later run and disagreed with that row until this re-record."
+      "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 512 more cell(s) than the engine the harness scorecard was captured with (41440 -> 41952) and every added cell is EQUAL (33968 -> 34480 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. The 2026-08-09 baseline pinned this row at 81.969/41440 cells, the pre-lift engine; the committed regate.scorecard.json beside it had already been overwritten by a later run and disagreed with that row until this re-record. RC1 LAYOUT-AXIS DOOR (2026-08-25): a separately measured 1.150 on top — 80.697 on the e884d672 engine, 81.848 on this one, cellsCompared UNCHANGED at 44512. flex-wrap (no map entry at all) plus align-items: baseline (no map entry for the keyword). Cell flips only."
     },
     {
       "library": "polaris",
