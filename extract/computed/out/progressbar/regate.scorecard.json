@@ -7,6 +7,21 @@
     "base": [
       {
         "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Inter, -apple-system, \"system-ui\", \"San Francisco\", \"Segoe UI\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "font-feature-settings",
+        "value": "\"calt\" 0"
+      },
+      {
+        "part": "root",
         "channel": "overflow-x",
         "value": "hidden"
       },
@@ -16,9 +31,29 @@
         "value": "hidden"
       },
       {
+        "part": "root",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
         "part": "progress",
         "channel": "appearance",
         "value": "auto"
+      },
+      {
+        "part": "progress",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "progress",
+        "channel": "font-family",
+        "value": "Inter, -apple-system, \"system-ui\", \"San Francisco\", \"Segoe UI\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "progress",
+        "channel": "font-feature-settings",
+        "value": "\"calt\" 0"
       },
       {
         "part": "progress",
@@ -37,8 +72,33 @@
       },
       {
         "part": "progress",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "progress",
         "channel": "text-wrap-mode",
         "value": "nowrap"
+      },
+      {
+        "part": "indicator",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "indicator",
+        "channel": "font-family",
+        "value": "Inter, -apple-system, \"system-ui\", \"San Francisco\", \"Segoe UI\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "indicator",
+        "channel": "font-feature-settings",
+        "value": "\"calt\" 0"
+      },
+      {
+        "part": "indicator",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
       },
       {
         "part": "indicator",
@@ -57,6 +117,21 @@
       },
       {
         "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Inter, -apple-system, \"system-ui\", \"San Francisco\", \"Segoe UI\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "label",
+        "channel": "font-feature-settings",
+        "value": "\"calt\" 0"
+      },
+      {
+        "part": "label",
         "channel": "overflow-x",
         "value": "hidden"
       },
@@ -69,6 +144,11 @@
         "part": "label",
         "channel": "position",
         "value": "absolute"
+      },
+      {
+        "part": "label",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
       },
       {
         "part": "label",
@@ -87,9 +167,9 @@
     "combos": 12,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 1632,
-      "cellsEqual": 1488,
-      "pctEqual": 91.17647058823529,
+      "cellsCompared": 5472,
+      "cellsEqual": 4944,
+      "pctEqual": 90.35087719298245,
       "rowsFullyEqual": 0,
       "rows": 48
     },
@@ -111,75 +191,99 @@
       "boundConfirmed": 72,
       "boundCells": 72,
       "contradictions": 0,
-      "mintedLeaves": 12,
-      "mintedLeavesUnfolded": 12,
-      "baseBindings": 18,
+      "mintedLeaves": 16,
+      "mintedLeavesUnfolded": 16,
+      "baseBindings": 34,
       "stateBindings": 0,
-      "codeOnlyChannels": 3,
+      "codeOnlyChannels": 11,
       "overflowBindings": 0,
-      "folds": 0
+      "folds": 40
     },
     "worstRows": [
       {
         "key": "small.highlight__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 3,
+        "channelsMismatched": 11,
         "unscorable": "no-original"
       },
       {
         "key": "small.highlight__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 3,
+        "channelsMismatched": 11,
         "unscorable": "no-original"
       },
       {
         "key": "small.highlight__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 3,
+        "channelsMismatched": 11,
         "unscorable": "no-original"
       },
       {
         "key": "small.highlight__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 3,
+        "channelsMismatched": 11,
         "unscorable": "no-original"
       },
       {
         "key": "small.primary__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 3,
+        "channelsMismatched": 11,
         "unscorable": "no-original"
       },
       {
         "key": "small.primary__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 3,
+        "channelsMismatched": 11,
         "unscorable": "no-original"
       },
       {
         "key": "small.primary__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 3,
+        "channelsMismatched": 11,
         "unscorable": "no-original"
       },
       {
         "key": "small.primary__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 3,
+        "channelsMismatched": 11,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
       [
+        "root.scrollbar-color",
+        48
+      ],
+      [
+        "root.text-size-adjust",
+        48
+      ],
+      [
         "progress.clip-path",
+        48
+      ],
+      [
+        "progress.scrollbar-color",
+        48
+      ],
+      [
+        "progress.text-size-adjust",
+        48
+      ],
+      [
+        "indicator.scrollbar-color",
+        48
+      ],
+      [
+        "indicator.text-size-adjust",
         48
       ],
       [
@@ -189,12 +293,28 @@
       [
         "label.clip-path",
         48
+      ],
+      [
+        "label.scrollbar-color",
+        48
+      ],
+      [
+        "label.text-size-adjust",
+        48
       ]
     ],
     "namedLosses": [
+      "code-only: root.scrollbar-color — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: progress.clip-path — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <progress>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <progress> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: progress.scrollbar-color — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <progress>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <progress> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: progress.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <progress>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <progress> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: indicator.scrollbar-color — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: indicator.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: indicator.transform — declared-channel value outside the bounded grammar — named residue (v15)",
-      "code-only: label.clip-path — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+      "code-only: label.clip-path — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.scrollbar-color — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -202,23 +322,59 @@
     },
     "shippedMinted": {
       "path": "examples/polaris/tokens/polaris-minted.dtcg.json",
-      "leavesAdded": 1287,
+      "leavesAdded": 1283,
       "divergent": []
     },
     "rows": [
       {
         "key": "small.highlight__default",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -231,23 +387,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.highlight__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -260,23 +464,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.highlight__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -289,23 +541,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.highlight__active",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -318,23 +618,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.primary__default",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -347,23 +695,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.primary__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -376,23 +772,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.primary__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -405,23 +849,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.primary__active",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -434,23 +926,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.success__default",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -463,23 +1003,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.success__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -492,23 +1080,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.success__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -521,23 +1157,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.success__active",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -550,23 +1234,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.critical__default",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -579,23 +1311,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.critical__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -608,23 +1388,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.critical__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -637,23 +1465,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "small.critical__active",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -666,23 +1542,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.highlight__default",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -695,23 +1619,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.highlight__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -724,23 +1696,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.highlight__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -753,23 +1773,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.highlight__active",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -782,23 +1850,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.primary__default",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -811,23 +1927,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.primary__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -840,23 +2004,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.primary__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -869,23 +2081,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.primary__active",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -898,23 +2158,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.success__default",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -927,23 +2235,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.success__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -956,23 +2312,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.success__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -985,23 +2389,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.success__active",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -1014,23 +2466,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.critical__default",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -1043,23 +2543,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.critical__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -1072,23 +2620,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.critical__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -1101,23 +2697,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "medium.critical__active",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -1130,23 +2774,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.highlight__default",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -1159,23 +2851,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.highlight__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -1188,23 +2928,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.highlight__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -1217,23 +3005,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.highlight__active",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -1246,23 +3082,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.primary__default",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -1275,23 +3159,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.primary__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -1304,23 +3236,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.primary__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -1333,23 +3313,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.primary__active",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -1362,23 +3390,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.success__default",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -1391,23 +3467,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.success__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -1420,23 +3544,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.success__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -1449,23 +3621,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.success__active",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -1478,23 +3698,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.critical__default",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -1507,23 +3775,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.critical__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -1536,23 +3852,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.critical__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -1565,23 +3929,71 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "large.critical__active",
-        "channelsCompared": 34,
-        "channelsEqual": 31,
+        "channelsCompared": 114,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
+            "part": "root",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
             "part": "progress",
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "progress",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "progress",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "indicator",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "indicator",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           },
           {
             "part": "indicator",
@@ -1594,6 +4006,18 @@
             "channel": "clip-path",
             "ours": "none",
             "theirs": "inset(50%)"
+          },
+          {
+            "part": "label",
+            "channel": "scrollbar-color",
+            "ours": "auto",
+            "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

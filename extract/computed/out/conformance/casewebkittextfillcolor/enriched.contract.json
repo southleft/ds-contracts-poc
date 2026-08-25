@@ -21,10 +21,10 @@
         "font-family": "monospace"
       },
       "tokens": {
-        "border-bottom-color": "{imported.shared.color-111111}",
-        "border-left-color": "{imported.shared.color-111111}",
-        "border-right-color": "{imported.shared.color-111111}",
-        "border-top-color": "{imported.shared.color-111111}",
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
         "caret-color": "{imported.shared.color-111111}",
         "color": "{imported.case-webkit-text-fill-color.root.color}",
         "column-rule-color": "{imported.shared.color-111111}",

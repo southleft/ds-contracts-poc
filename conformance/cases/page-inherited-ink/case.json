@@ -1,0 +1,18 @@
+{
+  "id": "page-inherited-ink",
+  "feature": "cascade",
+  "construct": "body { color: var(--cf-color-primary) } — the document's ink, inherited by a text-bearing part that declares no colour of its own",
+  "why": "The Polaris and Fluent text defect, verbatim. The provider sets `color` on an ancestor; the harness renders its control elements inside the same document, so the control inherits the same ink and the component's rendered ink compares EQUAL to the control and is dropped. The generated surfaces have no provider, so the text draws the user agent's black. Round 5c carried a text part's font-size/line-height/font-weight for this reason and left `color` — the channel the defect is actually about — behind, because the fixture had no page-inherited ink to measure.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.a.tokens.color",
+  "observable": {
+    "part": "a",
+    "channel": "color",
+    "capturedValue": "rgb(25, 118, 210)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the glyph fill is the inherited ink; without it the canvas draws black"
+  }
+}

@@ -91,24 +91,46 @@ const MARKER_RE = /^\s*\/\/ @door ([^\s]+)\s*$/;
 const ID_RE = /^[a-z0-9]+\.[a-z0-9-]+$/;
 const KINDS = new Set(['subtractive', 'admitting', 'both']);
 
-/** THE PINNED CENSUS — re-measured 2026-08-24 by re-fusing all 116 committed
+/** THE PINNED CENSUS — re-measured 2026-08-25 by re-fusing all 116 committed
  *  components through this tree's engine (`npx tsx scripts/door-census.ts`).
  *
  *  `authored` is the honest size of the "missing ink" surface: the control-equal
  *  drops the LIBRARY'S OWN STYLESHEET declares on the element, where the
  *  control-element delta door's premise is provably false. A count moving in
  *  either direction is a human's decision — "fewer" is not automatically
- *  progress (see extract/figma/dagger-census.ts for why). */
+ *  progress (see extract/figma/dagger-census.ts for why).
+ *
+ *  RE-MEASURED FOR THE UA BASELINE (fix/baseline-isolation). The register's
+ *  first census was taken while `fuse.control-element-delta` subtracted against
+ *  the IN-PAGE control — the probe that inherits every page-global rule the
+ *  library ships. That door now subtracts against `uaControls`, and the census
+ *  replay passes it (scripts/door-census.ts), so these numbers measure the
+ *  engine that actually runs rather than the fallback path. What moved, and why
+ *  each direction is real:
+ *    · control-equal drops 250,736 -> 246,318. The 4,418 fewer are facts the
+ *      library authored page-globally and the door was cancelling; they are now
+ *      CARRIED, which is the whole point of the fix.
+ *    · LIBRARY-AUTHORED drops 244 -> 133, and shadcn alone falls 103 -> 1: the
+ *      invisible-Input surface this census was built to size is essentially
+ *      closed. polaris 78 -> 69 is the inkless-text half.
+ *    · antd RISES 19 -> 23. This is not noise and not a regression in the fix:
+ *      a channel whose authored value happens to COINCIDE with the user agent's
+ *      default differs from the in-page control (which carried antd's global)
+ *      but equals the UA control, so it is dropped now and was carried before.
+ *      Four such channels exist in antd; they are a real, newly visible hole,
+ *      and they are counted rather than absorbed.
+ *  astryx and mui stay at 0 authored: neither corpus carries var() evidence on a
+ *  dropped channel, so neither can contribute to this split. */
 export const PINNED_CENSUS: Record<string, { components: number; drops: number; authored: number; fallback: number }> = {
-  altitude: { components: 8, drops: 4830, authored: 8, fallback: 5 },
-  antd: { components: 12, drops: 25048, authored: 19, fallback: 20 },
-  astryx: { components: 10, drops: 24272, authored: 0, fallback: 16 },
-  carbon: { components: 10, drops: 38009, authored: 13, fallback: 32 },
-  fluent: { components: 11, drops: 21282, authored: 14, fallback: 19 },
-  mui: { components: 31, drops: 70187, authored: 0, fallback: 93 },
-  polaris: { components: 12, drops: 46134, authored: 78, fallback: 43 },
-  shadcn: { components: 11, drops: 12700, authored: 103, fallback: 7 },
-  tailwind: { components: 11, drops: 8274, authored: 9, fallback: 7 },
+  altitude: { components: 8, drops: 4734, authored: 6, fallback: 5 },
+  antd: { components: 12, drops: 25048, authored: 23, fallback: 20 },
+  astryx: { components: 10, drops: 23321, authored: 0, fallback: 16 },
+  carbon: { components: 10, drops: 37271, authored: 12, fallback: 32 },
+  fluent: { components: 11, drops: 20892, authored: 13, fallback: 19 },
+  mui: { components: 31, drops: 70062, authored: 0, fallback: 93 },
+  polaris: { components: 12, drops: 44659, authored: 69, fallback: 43 },
+  shadcn: { components: 11, drops: 12244, authored: 1, fallback: 7 },
+  tailwind: { components: 11, drops: 8087, authored: 9, fallback: 7 },
 };
 
 export interface Finding {

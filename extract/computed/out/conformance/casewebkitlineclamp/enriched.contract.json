@@ -22,6 +22,11 @@
       "text": "A description long enough to wrap past two full lines of text",
       "tokens": {
         "background-color": "{imported.case-webkit-line-clamp.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
+        "color": "{imported.case-webkit-line-clamp.root.color}",
         "font-size": "{imported.case-webkit-line-clamp.root.font-size}",
         "font-weight": "{imported.case-webkit-line-clamp.root.font-weight}",
         "min-height": "{imported.case-webkit-line-clamp.root.min-height}",

@@ -12466,7 +12466,18 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         const f = path.join(outRoot, c, 'captured-truth.json');
         if (!existsSync(f)) continue;
         capturesRead++;
-        const txt = readFileSync(f, 'utf8');
+        // THE UA BASELINE IS NOT A DECLARATION. `uaControls` (fix/baseline-isolation)
+        // measures the four control tags on a page carrying nothing the library
+        // ships, and it reads the capture's OWN channel list — so every one of
+        // astryx's ~200 custom properties appears there with an EMPTY value.
+        // Scraped as text those empties join the real declarations and every
+        // name becomes two-valued, which this pin skips as "mode/scope-varying":
+        // the denominator collapsed from 177 to 0 and the pin asserted nothing.
+        // Strip the block; what a page declares is the substrate, and that page
+        // declares nothing.
+        const parsed = JSON.parse(readFileSync(f, 'utf8')) as Record<string, unknown>;
+        delete parsed.uaControls;
+        const txt = JSON.stringify(parsed);
         for (const m of txt.matchAll(/"--([a-z0-9-]+)":"((?:[^"\\]|\\.)*)"/gi)) {
           const val = norm(JSON.parse(`"${m[2]}"`));
           if (!declared.has(m[1])) declared.set(m[1], new Set());

@@ -16,13 +16,13 @@ repo it is simply absent from the denominator and scores 100%.
 
 | | |
 |---|---|
-| cases | **91** |
-| 🟢 pass | **88** |
+| cases | **93** |
+| 🟢 pass | **90** |
 | 🔴 red | **3** |
 | 🟡 yellow (UNSUPPORTED, never read) | **0** |
 | **UNSUPPORTED declared — THE RATCHET** | **18** · may only DECREASE without an explicit manifest edit |
 
-Declared dispositions: CARRIED 50 · LOWERED 4 · REFUSED 19 · UNSUPPORTED 18.
+Declared dispositions: CARRIED 52 · LOWERED 4 · REFUSED 19 · UNSUPPORTED 18.
 
 **A green gate here would mean the cases are too easy.** The point of the
 fixture is a measured frontier, and every red below is an open, named defect —
@@ -74,6 +74,8 @@ manifest.
 | 🟢 | `antd-presence-times-axis-glyph` | anatomy | `a child part whose PRESENCE is one prop (showIcon) and whose paint is ANOTHER (type) — the base (default) combo mounts without it (antd Alert)` | CARRIED | carried | PASS |
 | 🔴 | `container-query` | at-rules | `@container (min-inline-size: 100px) { … }` | UNSUPPORTED | carried | UNDECLARED-CARRY |
 | 🔴 | `media-non-matching` | at-rules | `@media (min-width: 2000px) branch that does NOT match the pinned viewport` | UNSUPPORTED | carried | UNDECLARED-CARRY |
+| 🟢 | `page-global-star-rule` | cascade | `* { border-color: var(--cf-color-secondary) } — a PAGE-GLOBAL authored declaration, with the element's border-width and border-style declared locally and its colour reaching it only through the universal rule` | CARRIED | carried | PASS |
+| 🟢 | `page-inherited-ink` | cascade | `body { color: var(--cf-color-primary) } — the document's ink, inherited by a text-bearing part that declares no colour of its own` | CARRIED | carried | PASS |
 | 🟢 | `color-hex` | color | `color: #1976d2 (authored as hex)` | CARRIED | carried | PASS |
 | 🟢 | `color-rgb-solid` | color | `background-color: rgb(25, 118, 210)` | CARRIED | carried | PASS |
 | 🟢 | `color-rgba-alpha` | color | `background-color: rgba(25, 118, 210, 0.5)` | CARRIED | carried | PASS |

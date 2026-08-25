@@ -20,6 +20,11 @@
       },
       "tokens": {
         "background-color": "{imported.case-aspect-ratio.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
+        "color": "{imported.case-aspect-ratio.root.color}",
         "font-size": "{imported.case-aspect-ratio.root.font-size}",
         "min-height": "{imported.case-aspect-ratio.root.min-height}",
         "min-width": "{imported.case-aspect-ratio.root.min-width}",

@@ -7,6 +7,21 @@
     "base": [
       {
         "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "root",
         "channel": "overflow-x",
         "value": "hidden"
       },
@@ -19,6 +34,11 @@
         "part": "root",
         "channel": "position",
         "value": "relative"
+      },
+      {
+        "part": "root",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
       },
       {
         "part": "part-0",
@@ -52,6 +72,11 @@
       },
       {
         "part": "part-0",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "part-0",
         "channel": "position",
         "value": "relative"
       },
@@ -62,6 +87,21 @@
       },
       {
         "part": "part-1",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-1",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "part-1",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "part-1",
         "channel": "overflow-x",
         "value": "auto"
       },
@@ -69,6 +109,11 @@
         "part": "part-1",
         "channel": "overflow-y",
         "value": "auto"
+      },
+      {
+        "part": "part-1",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
       },
       {
         "part": "tabs__nav-item",
@@ -99,6 +144,11 @@
         "part": "tabs__nav-item",
         "channel": "cursor",
         "value": "pointer"
+      },
+      {
+        "part": "tabs__nav-item",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
       },
       {
         "part": "tabs__nav-item",
@@ -152,8 +202,23 @@
       },
       {
         "part": "tabs__nav-item-label-wrapper",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "tabs__nav-item-label-wrapper",
         "channel": "cursor",
         "value": "pointer"
+      },
+      {
+        "part": "tabs__nav-item-label-wrapper",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "tabs__nav-item-label-wrapper",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
       },
       {
         "part": "tabs__nav-item-label-wrapper",
@@ -162,13 +227,13 @@
       },
       {
         "part": "tabs__nav-item-label-wrapper",
-        "channel": "text-rendering",
-        "value": "auto"
-      },
-      {
-        "part": "tabs__nav-item-label-wrapper",
         "channel": "text-wrap-mode",
         "value": "nowrap"
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "label",
@@ -182,13 +247,28 @@
       },
       {
         "part": "label",
-        "channel": "text-rendering",
-        "value": "auto"
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
       },
       {
         "part": "label",
         "channel": "text-wrap-mode",
         "value": "nowrap"
+      },
+      {
+        "part": "part-1-1",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-1-1",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "part-1-1",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
       },
       {
         "part": "part-1-1",
@@ -199,6 +279,11 @@
         "part": "part-1-1",
         "channel": "overflow-y",
         "value": "hidden"
+      },
+      {
+        "part": "part-1-1",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
       },
       {
         "part": "part-1-1",
@@ -234,6 +319,11 @@
         "part": "tabs__nav-item-2",
         "channel": "cursor",
         "value": "pointer"
+      },
+      {
+        "part": "tabs__nav-item-2",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
       },
       {
         "part": "tabs__nav-item-2",
@@ -292,8 +382,23 @@
       },
       {
         "part": "tabs__nav-item-label-wrapper-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "tabs__nav-item-label-wrapper-2",
         "channel": "cursor",
         "value": "pointer"
+      },
+      {
+        "part": "tabs__nav-item-label-wrapper-2",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "tabs__nav-item-label-wrapper-2",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
       },
       {
         "part": "tabs__nav-item-label-wrapper-2",
@@ -302,13 +407,13 @@
       },
       {
         "part": "tabs__nav-item-label-wrapper-2",
-        "channel": "text-rendering",
-        "value": "auto"
-      },
-      {
-        "part": "tabs__nav-item-label-wrapper-2",
         "channel": "text-wrap-mode",
         "value": "nowrap"
+      },
+      {
+        "part": "label-2",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "label-2",
@@ -322,13 +427,28 @@
       },
       {
         "part": "label-2",
-        "channel": "text-rendering",
-        "value": "auto"
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
       },
       {
         "part": "label-2",
         "channel": "text-wrap-mode",
         "value": "nowrap"
+      },
+      {
+        "part": "part-1-3",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-1-3",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "part-1-3",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
       },
       {
         "part": "part-1-3",
@@ -339,6 +459,11 @@
         "part": "part-1-3",
         "channel": "overflow-y",
         "value": "hidden"
+      },
+      {
+        "part": "part-1-3",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
       },
       {
         "part": "part-1-3",
@@ -374,6 +499,11 @@
         "part": "tabs__nav-item-3",
         "channel": "cursor",
         "value": "pointer"
+      },
+      {
+        "part": "tabs__nav-item-3",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
       },
       {
         "part": "tabs__nav-item-3",
@@ -432,8 +562,23 @@
       },
       {
         "part": "tabs__nav-item-label-wrapper-3",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "tabs__nav-item-label-wrapper-3",
         "channel": "cursor",
         "value": "pointer"
+      },
+      {
+        "part": "tabs__nav-item-label-wrapper-3",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "tabs__nav-item-label-wrapper-3",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
       },
       {
         "part": "tabs__nav-item-label-wrapper-3",
@@ -442,13 +587,13 @@
       },
       {
         "part": "tabs__nav-item-label-wrapper-3",
-        "channel": "text-rendering",
-        "value": "auto"
-      },
-      {
-        "part": "tabs__nav-item-label-wrapper-3",
         "channel": "text-wrap-mode",
         "value": "nowrap"
+      },
+      {
+        "part": "label-3",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "label-3",
@@ -462,13 +607,28 @@
       },
       {
         "part": "label-3",
-        "channel": "text-rendering",
-        "value": "auto"
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
       },
       {
         "part": "label-3",
         "channel": "text-wrap-mode",
         "value": "nowrap"
+      },
+      {
+        "part": "part-1-5",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-1-5",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "part-1-5",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
       },
       {
         "part": "part-1-5",
@@ -479,6 +639,11 @@
         "part": "part-1-5",
         "channel": "overflow-y",
         "value": "hidden"
+      },
+      {
+        "part": "part-1-5",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
       },
       {
         "part": "part-1-5",
@@ -514,6 +679,11 @@
         "part": "part-2",
         "channel": "cursor",
         "value": "pointer"
+      },
+      {
+        "part": "part-2",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
       },
       {
         "part": "part-2",
@@ -537,9 +707,9 @@
     "combos": 1,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 1252,
-      "cellsEqual": 1168,
-      "pctEqual": 93.29073482428115,
+      "cellsCompared": 1744,
+      "cellsEqual": 1604,
+      "pctEqual": 91.97247706422019,
       "rowsFullyEqual": 0,
       "rows": 4
     },
@@ -561,45 +731,53 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 43,
-      "mintedLeavesUnfolded": 38,
-      "baseBindings": 204,
+      "mintedLeaves": 42,
+      "mintedLeavesUnfolded": 37,
+      "baseBindings": 208,
       "stateBindings": 12,
-      "codeOnlyChannels": 17,
+      "codeOnlyChannels": 33,
       "overflowBindings": 6,
-      "folds": 164
+      "folds": 134
     },
     "worstRows": [
       {
         "key": "__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 22,
+        "channelsMismatched": 36,
         "unscorable": "no-original"
       },
       {
         "key": "__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 21,
+        "channelsMismatched": 35,
         "unscorable": "no-original"
       },
       {
         "key": "__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 21,
+        "channelsMismatched": 35,
         "unscorable": "no-original"
       },
       {
         "key": "__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 20,
+        "channelsMismatched": 34,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
+      [
+        "root.position-anchor",
+        4
+      ],
+      [
+        "part-1.position-anchor",
+        4
+      ],
       [
         "part-1.scroll-behavior",
         4
@@ -625,6 +803,18 @@
         4
       ],
       [
+        "tabs__nav-item.position-anchor",
+        4
+      ],
+      [
+        "tabs__nav-item-label-wrapper.position-anchor",
+        4
+      ],
+      [
+        "label.position-anchor",
+        4
+      ],
+      [
         "label.unicode-bidi",
         4
       ],
@@ -633,31 +823,11 @@
         4
       ],
       [
+        "part-1-1.position-anchor",
+        4
+      ],
+      [
         "tabs__nav-item-2.border-left-color",
-        4
-      ],
-      [
-        "tabs__nav-item-2.border-right-color",
-        4
-      ],
-      [
-        "tabs__nav-item-2.border-top-color",
-        4
-      ],
-      [
-        "tabs__nav-item-2.transition-behavior",
-        4
-      ],
-      [
-        "label-2.unicode-bidi",
-        4
-      ],
-      [
-        "part-1-3.clip",
-        4
-      ],
-      [
-        "tabs__nav-item-3.border-left-color",
         4
       ]
     ],
@@ -671,23 +841,39 @@
       "overflow: tabs__nav-item.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: tabs__nav-item.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: tabs__nav-item-2.border-bottom-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0.height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0.justify-content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-0.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-1.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-1.scroll-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-1.scrollbar-width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-1.will-change — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: tabs__nav-item.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: tabs__nav-item-label-wrapper.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-1-1.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-1-1.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: tabs__nav-item-2.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: tabs__nav-item-2.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: tabs__nav-item-label-wrapper-2.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-2.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-1-3.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-1-3.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: tabs__nav-item-3.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: tabs__nav-item-3.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: tabs__nav-item-label-wrapper-3.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-3.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-3.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-1-5.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-1-5.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-2.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-2.height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: part-2.justify-content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+      "code-only: part-2.justify-content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-2.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -695,7 +881,7 @@
     },
     "shippedMinted": {
       "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-      "leavesAdded": 841,
+      "leavesAdded": 843,
       "divergent": [
         {
           "token": "imported.tabs.part-0.background-color",
@@ -708,24 +894,30 @@
           "fresh": "#ffffff",
           "shipped": "{background}",
           "resolvedEqual": true
-        },
-        {
-          "token": "imported.tabs.tabs-nav-item.color",
-          "fresh": "#161616",
-          "shipped": "{text-primary}",
-          "resolvedEqual": true
         }
       ]
     },
     "rows": [
       {
         "key": "__default",
-        "channelsCompared": 313,
-        "channelsEqual": 293,
+        "channelsCompared": 436,
+        "channelsEqual": 402,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "part-1",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
           {
             "part": "part-1",
             "channel": "scroll-behavior",
@@ -763,6 +955,24 @@
             "theirs": "rgba(22, 22, 22, 1)"
           },
           {
+            "part": "tabs__nav-item",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "tabs__nav-item-label-wrapper",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
             "part": "label",
             "channel": "unicode-bidi",
             "ours": "normal",
@@ -773,6 +983,12 @@
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "tabs__nav-item-2",
@@ -794,9 +1010,27 @@
           },
           {
             "part": "tabs__nav-item-2",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "tabs__nav-item-2",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
+          },
+          {
+            "part": "tabs__nav-item-label-wrapper-2",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label-2",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -811,6 +1045,12 @@
             "theirs": "rect(0px, 0px, 0px, 0px)"
           },
           {
+            "part": "part-1-3",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
             "part": "tabs__nav-item-3",
             "channel": "border-left-color",
             "ours": "rgba(0, 0, 0, 1)",
@@ -830,9 +1070,27 @@
           },
           {
             "part": "tabs__nav-item-3",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "tabs__nav-item-3",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
+          },
+          {
+            "part": "tabs__nav-item-label-wrapper-3",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label-3",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "label-3",
@@ -845,18 +1103,36 @@
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
+          },
+          {
+            "part": "part-1-5",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "__hover",
-        "channelsCompared": 313,
-        "channelsEqual": 292,
+        "channelsCompared": 436,
+        "channelsEqual": 401,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "part-1",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
           {
             "part": "part-1",
             "channel": "scroll-behavior",
@@ -894,6 +1170,24 @@
             "theirs": "rgba(22, 22, 22, 1)"
           },
           {
+            "part": "tabs__nav-item",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "tabs__nav-item-label-wrapper",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
             "part": "label",
             "channel": "unicode-bidi",
             "ours": "normal",
@@ -904,6 +1198,12 @@
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "tabs__nav-item-2",
@@ -931,9 +1231,27 @@
           },
           {
             "part": "tabs__nav-item-2",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "tabs__nav-item-2",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
+          },
+          {
+            "part": "tabs__nav-item-label-wrapper-2",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label-2",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -946,6 +1264,12 @@
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
+          },
+          {
+            "part": "part-1-3",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "tabs__nav-item-3",
@@ -967,9 +1291,27 @@
           },
           {
             "part": "tabs__nav-item-3",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "tabs__nav-item-3",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
+          },
+          {
+            "part": "tabs__nav-item-label-wrapper-3",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label-3",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "label-3",
@@ -982,18 +1324,36 @@
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
+          },
+          {
+            "part": "part-1-5",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "__focus-visible",
-        "channelsCompared": 313,
-        "channelsEqual": 292,
+        "channelsCompared": 436,
+        "channelsEqual": 401,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "part-1",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
           {
             "part": "part-1",
             "channel": "scroll-behavior",
@@ -1037,6 +1397,24 @@
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
+            "part": "tabs__nav-item",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "tabs__nav-item-label-wrapper",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
             "part": "label",
             "channel": "unicode-bidi",
             "ours": "normal",
@@ -1047,6 +1425,12 @@
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "tabs__nav-item-2",
@@ -1068,9 +1452,27 @@
           },
           {
             "part": "tabs__nav-item-2",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "tabs__nav-item-2",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
+          },
+          {
+            "part": "tabs__nav-item-label-wrapper-2",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label-2",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -1085,6 +1487,12 @@
             "theirs": "rect(0px, 0px, 0px, 0px)"
           },
           {
+            "part": "part-1-3",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
             "part": "tabs__nav-item-3",
             "channel": "border-left-color",
             "ours": "rgba(0, 0, 0, 1)",
@@ -1104,9 +1512,27 @@
           },
           {
             "part": "tabs__nav-item-3",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "tabs__nav-item-3",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
+          },
+          {
+            "part": "tabs__nav-item-label-wrapper-3",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label-3",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "label-3",
@@ -1119,18 +1545,36 @@
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
+          },
+          {
+            "part": "part-1-5",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "__active",
-        "channelsCompared": 313,
-        "channelsEqual": 291,
+        "channelsCompared": 436,
+        "channelsEqual": 400,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "part-1",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
           {
             "part": "part-1",
             "channel": "scroll-behavior",
@@ -1168,6 +1612,24 @@
             "theirs": "rgba(22, 22, 22, 1)"
           },
           {
+            "part": "tabs__nav-item",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "tabs__nav-item-label-wrapper",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
             "part": "label",
             "channel": "unicode-bidi",
             "ours": "normal",
@@ -1178,6 +1640,12 @@
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
+          },
+          {
+            "part": "part-1-1",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "tabs__nav-item-2",
@@ -1211,9 +1679,27 @@
           },
           {
             "part": "tabs__nav-item-2",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "tabs__nav-item-2",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
+          },
+          {
+            "part": "tabs__nav-item-label-wrapper-2",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label-2",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -1226,6 +1712,12 @@
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
+          },
+          {
+            "part": "part-1-3",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "tabs__nav-item-3",
@@ -1247,9 +1739,27 @@
           },
           {
             "part": "tabs__nav-item-3",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "tabs__nav-item-3",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
+          },
+          {
+            "part": "tabs__nav-item-label-wrapper-3",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
+          },
+          {
+            "part": "label-3",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           },
           {
             "part": "label-3",
@@ -1262,6 +1772,12 @@
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
+          },
+          {
+            "part": "part-1-5",
+            "channel": "position-anchor",
+            "ours": "normal",
+            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

@@ -61,7 +61,33 @@
             "padding-left": "{imported.case-pseudo-placeholder.a.padding-left}",
             "padding-right": "{imported.case-pseudo-placeholder.a.padding-right}",
             "padding-top": "{imported.shared.size-1}"
-          }
+          },
+          "codeOnly": [
+            {
+              "state": "active",
+              "channel": "outline-color",
+              "value": "#005fcc",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "active",
+              "channel": "outline-width",
+              "value": "1px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-color",
+              "value": "#005fcc",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-width",
+              "value": "1px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
+          ]
         }
       },
       "declared": {
@@ -69,6 +95,11 @@
         "font-family": "monospace"
       },
       "tokens": {
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
+        "color": "{imported.case-pseudo-placeholder.root.color}",
         "font-size": "{imported.case-pseudo-placeholder.root.font-size}"
       }
     }

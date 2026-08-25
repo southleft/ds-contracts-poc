@@ -34,6 +34,10 @@
                 "font-family": "monospace"
               },
               "tokens": {
+                "border-bottom-color": "{imported.shared.color-663399}",
+                "border-left-color": "{imported.shared.color-663399}",
+                "border-right-color": "{imported.shared.color-663399}",
+                "border-top-color": "{imported.shared.color-663399}",
                 "color": "{imported.case-antd-presence-times-axis-glyph.label.color}",
                 "font-size": "{imported.case-antd-presence-times-axis-glyph.label.font-size}",
                 "font-weight": "{imported.case-antd-presence-times-axis-glyph.label.font-weight}",
@@ -43,7 +47,15 @@
               }
             }
           },
+          "layout": {
+            "grow": true
+          },
           "tokens": {
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.case-antd-presence-times-axis-glyph.b.color}",
             "flex-grow": "{imported.case-antd-presence-times-axis-glyph.b.flex-grow}",
             "font-size": "{imported.shared.size-12}",
             "min-width": "{imported.shared.size-0}"
@@ -72,6 +84,7 @@
         "border-top-left-radius": "{imported.shared.size-8}",
         "border-top-right-radius": "{imported.shared.size-8}",
         "border-top-width": "{imported.shared.size-1}",
+        "color": "{imported.case-antd-presence-times-axis-glyph.root.color}",
         "column-gap": "{imported.shared.size-8}",
         "font-size": "{imported.shared.size-12}",
         "padding-bottom": "{imported.shared.size-8}",

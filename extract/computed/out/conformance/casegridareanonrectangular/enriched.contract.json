@@ -28,6 +28,11 @@
           },
           "tokens": {
             "background-color": "{imported.case-grid-area-nonrectangular.label.background-color}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
             "font-size": "{imported.shared.size-12}",
             "font-weight": "{imported.case-grid-area-nonrectangular.label.font-weight}"
           }
@@ -46,6 +51,11 @@
           },
           "tokens": {
             "background-color": "{imported.case-grid-area-nonrectangular.label-2.background-color}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
             "font-size": "{imported.shared.size-12}",
             "font-weight": "{imported.case-grid-area-nonrectangular.label-2.font-weight}"
           }
@@ -70,12 +80,20 @@
           }
         ]
       },
+      "literals": {
+        "height": "fit-content"
+      },
       "declared": {
         "box-sizing": "border-box",
         "font-family": "monospace"
       },
       "tokens": {
         "background-color": "{imported.case-grid-area-nonrectangular.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
+        "color": "{imported.shared.color-1976d2}",
         "font-size": "{imported.shared.size-12}",
         "min-height": "{imported.case-grid-area-nonrectangular.root.min-height}",
         "min-width": "{imported.case-grid-area-nonrectangular.root.min-width}"

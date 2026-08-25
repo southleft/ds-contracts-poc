@@ -26,6 +26,11 @@
             "font-family": "monospace"
           },
           "tokens": {
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
             "font-size": "{imported.shared.size-12}",
             "font-weight": "{imported.case-display-flex.label.font-weight}"
           }
@@ -39,6 +44,11 @@
             "font-family": "monospace"
           },
           "tokens": {
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
             "font-size": "{imported.shared.size-12}",
             "font-weight": "{imported.case-display-flex.label-2.font-weight}"
           }
@@ -50,6 +60,11 @@
       },
       "tokens": {
         "background-color": "{imported.case-display-flex.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
+        "color": "{imported.shared.color-1976d2}",
         "column-gap": "{imported.case-display-flex.root.column-gap}",
         "font-size": "{imported.shared.size-12}",
         "row-gap": "{imported.case-display-flex.root.row-gap}"

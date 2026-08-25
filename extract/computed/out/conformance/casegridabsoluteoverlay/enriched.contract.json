@@ -23,6 +23,11 @@
           },
           "tokens": {
             "background-color": "{imported.case-grid-absolute-overlay.label.background-color}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
             "font-size": "{imported.shared.size-12}",
             "font-weight": "{imported.case-grid-absolute-overlay.label.font-weight}"
           }
@@ -38,7 +43,12 @@
           },
           "tokens": {
             "background-color": "{imported.case-grid-absolute-overlay.label-2.background-color}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
             "bottom": "{imported.case-grid-absolute-overlay.label-2.bottom}",
+            "color": "{imported.shared.color-1976d2}",
             "font-size": "{imported.shared.size-12}",
             "font-weight": "{imported.case-grid-absolute-overlay.label-2.font-weight}",
             "height": "{imported.case-grid-absolute-overlay.label-2.height}",
@@ -58,7 +68,12 @@
       },
       "tokens": {
         "background-color": "{imported.case-grid-absolute-overlay.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
         "bottom": "{imported.shared.size-0}",
+        "color": "{imported.shared.color-1976d2}",
         "font-size": "{imported.shared.size-12}",
         "height": "{imported.case-grid-absolute-overlay.root.height}",
         "left": "{imported.shared.size-0}",

@@ -9,13 +9,85 @@
   "elementsPerCapture": 3,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 5,
-    "a": 3,
+    "root": 16,
+    "a": 14,
     "label": 18
   },
   "folds": {
-    "count": 10,
+    "count": 22,
     "receipts": [
+      {
+        "part": "root",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "a",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "a",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "a",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "a",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "a",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "a",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
       {
         "part": "label",
         "channel": "border-bottom-color",
@@ -77,8 +149,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 6,
-    "mintedLeavesFolded": 6
+    "mintedLeavesUnfolded": 8,
+    "mintedLeavesFolded": 9
   },
   "bound": {
     "cellsChecked": 0,
@@ -87,11 +159,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 6,
-    "baseBindings": 8,
+    "leaves": 9,
+    "baseBindings": 18,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 8,
+      "uniform": 18,
       "perAxis": 0,
       "perPair": 0,
       "refused": 0

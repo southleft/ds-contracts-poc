@@ -23,6 +23,11 @@
           },
           "tokens": {
             "background-color": "{imported.case-grid-track-fit-content.a.background-color}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
             "font-size": "{imported.shared.size-12}"
           }
         },
@@ -36,6 +41,11 @@
           },
           "tokens": {
             "background-color": "{imported.case-grid-track-fit-content.label.background-color}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
             "font-size": "{imported.shared.size-12}",
             "font-weight": "{imported.case-grid-track-fit-content.label.font-weight}"
           }
@@ -59,6 +69,11 @@
       },
       "tokens": {
         "background-color": "{imported.case-grid-track-fit-content.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
+        "color": "{imported.shared.color-1976d2}",
         "font-size": "{imported.shared.size-12}",
         "min-height": "{imported.case-grid-track-fit-content.root.min-height}",
         "min-width": "{imported.case-grid-track-fit-content.root.min-width}"

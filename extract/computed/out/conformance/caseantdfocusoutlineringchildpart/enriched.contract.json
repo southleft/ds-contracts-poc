@@ -109,6 +109,7 @@
                 "border-top-right-radius": "{imported.shared.size-4}",
                 "border-top-width": "{imported.shared.size-1}",
                 "bottom": "{imported.shared.size-0}",
+                "color": "{imported.shared.color-1976d2}",
                 "font-size": "{imported.shared.size-12}",
                 "height": "{imported.shared.size-16}",
                 "left": "{imported.shared.size-0}",
@@ -143,7 +144,12 @@
             }
           },
           "tokens": {
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
             "bottom": "{imported.shared.size-0}",
+            "color": "{imported.shared.color-1976d2}",
             "font-size": "{imported.shared.size-12}",
             "height": "{imported.shared.size-16}",
             "left": "{imported.shared.size-0}",
@@ -161,6 +167,11 @@
             "font-family": "monospace"
           },
           "tokens": {
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
             "font-size": "{imported.shared.size-12}",
             "font-weight": "{imported.case-antd-focus-outline-ring-child-part.label.font-weight}"
           }
@@ -172,6 +183,11 @@
         "font-family": "monospace"
       },
       "tokens": {
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
+        "color": "{imported.shared.color-1976d2}",
         "column-gap": "{imported.case-antd-focus-outline-ring-child-part.root.column-gap}",
         "font-size": "{imported.shared.size-12}",
         "height": "{imported.shared.size-16}",

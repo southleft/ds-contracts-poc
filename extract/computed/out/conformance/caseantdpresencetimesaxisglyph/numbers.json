@@ -9,34 +9,82 @@
   "elementsPerCapture": 3,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 28,
-    "b": 6,
+    "root": 35,
+    "b": 17,
     "label": 18
   },
   "folds": {
-    "count": 10,
+    "count": 18,
     "receipts": [
       {
-        "part": "label",
-        "channel": "border-bottom-color",
+        "part": "root",
+        "channel": "caret-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "label",
-        "channel": "border-left-color",
+        "part": "root",
+        "channel": "column-rule-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "label",
-        "channel": "border-right-color",
+        "part": "root",
+        "channel": "outline-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "label",
-        "channel": "border-top-color",
+        "part": "root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "b",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "b",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "b",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "b",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "b",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "b",
+        "channel": "text-emphasis-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
@@ -77,8 +125,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 11,
-    "mintedLeavesFolded": 11
+    "mintedLeavesUnfolded": 13,
+    "mintedLeavesFolded": 14
   },
   "bound": {
     "cellsChecked": 0,
@@ -87,11 +135,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 11,
-    "baseBindings": 29,
+    "leaves": 14,
+    "baseBindings": 39,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 29,
+      "uniform": 39,
       "perAxis": 0,
       "perPair": 0,
       "refused": 0
@@ -140,9 +188,9 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0,
-      "max": 0,
-      "perfect": 4
+      "mean": 0.06510416666666667,
+      "max": 0.06510416666666667,
+      "perfect": 0
     },
     "aa": {
       "mean": 0,
@@ -152,31 +200,31 @@
     "worst": [
       {
         "key": "__default",
-        "pctExact": 0,
+        "pctExact": 0.06510416666666667,
         "pctAA": 0
       },
       {
         "key": "__hover",
-        "pctExact": 0,
+        "pctExact": 0.06510416666666667,
         "pctAA": 0
       },
       {
         "key": "__focus-visible",
-        "pctExact": 0,
+        "pctExact": 0.06510416666666667,
         "pctAA": 0
       },
       {
         "key": "__active",
-        "pctExact": 0,
+        "pctExact": 0.06510416666666667,
         "pctAA": 0
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 98.07692307692308,
+    "computedPctEqual": 98.57142857142857,
     "rowsFullyEqual": 0,
     "rows": 4,
-    "pixelPerfectExact": 4,
+    "pixelPerfectExact": 0,
     "pixelPerfectAA": 4,
     "pairs": 4
   },

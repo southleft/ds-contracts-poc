@@ -35,7 +35,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadConfig, propSpaceFor, stageFor, type CaptureConfig, type ComponentConfig, type SweepResult } from '../extract/computed/capture.js';
-import { alignSweep, styledChannels, detectFolds, enrichLayout, prepareMint } from '../extract/computed/fuse.js';
+import { alignSweep, styledChannels, detectFolds, enrichLayout, prepareMint, uaStyles } from '../extract/computed/fuse.js';
 import { promoteAnatomy } from '../extract/computed/anatomy.js';
 import { reconstructCaptures, type CapturedTruthFile } from '../extract/computed/replay.js';
 import { kebab } from '../extract/types.js';
@@ -142,11 +142,17 @@ export function runCensus(): Census {
           Object.entries(truth.controls).map(([t, n]) => [t, (n as { style: Record<string, string> }).style]),
         );
         const receipts: string[] = [];
+        // THE UA BASELINE, not the in-page probe. `fuse.control-element-delta`
+        // subtracts against the control measured on a page carrying NOTHING the
+        // library ships; passing only `truth.controls` here would re-measure the
+        // pre-fix fallback path and report a "missing ink" surface this engine no
+        // longer has. Every other offline replay (regate, ua-baseline-check,
+        // viewport-geometry-check, font-slant-check) passes the same argument.
         const styled = styledChannels(aligned, space, controlStyles, sweep.allProps, receipts, {
           viewport: cfg.browser.viewport,
           stage: stageFor(cfg, comp),
           portaled: comp.portalCapture === true,
-        });
+        }, uaStyles(truth));
         const folds = detectFolds(aligned, styled, receipts);
         const layout = enrichLayout(aligned, space, styled, promotion.contract);
         const prep = prepareMint(
