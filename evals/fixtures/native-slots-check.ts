@@ -37,6 +37,14 @@
  *      is reported BY NAME (never silently dropped).
  *   6. READBACK — the dump reads the emitted slot (type, property id,
  *      preferredValues, description) and propose inverts it to a slot part.
+ *   7. RC5 DESIGN-TIME CONTENT (§10/§11) — the two design-time surfaces agree.
+ *      A Figma main component's slot content and a generated Storybook meta's
+ *      canonical args are the same object, so an empty default `children` slot
+ *      draws the SAME sample the story shows, the inverse path drops ONLY the
+ *      emitter's own sample (three designer edits must come back NAMED), and a
+ *      NAMED empty slot is a receipt, not a silent sliver — with §11 measuring
+ *      the shells that stay empty against their own CSS render, so "just
+ *      enforce a minimum box" stays refuted by numbers rather than by prose.
  *
  * Exits non-zero with a named failure on any violated expectation.
  */
@@ -956,4 +964,106 @@ console.log("\n10. RC5 DESIGN-TIME SLOT SAMPLE — an empty default `children` s
   ok(`all three designer edits come back NAMED through the \`undrawn\` path — the drop rule cannot swallow a real canvas fact`);
 }
 
-console.log('\n✔ native-slots ok: native SLOT emission, ONE unified set-level property, amend survival (red-tested), migration reported by name, every API refusal named, the slot reads back, and an empty slot hugs — as does a childless COMPONENT root reached only by the amend path (FC-SLOT-BIRTH-BOX, both red-tested).');
+console.log('\n11. RC5 NAMED WALL — the empty region on the canvas IS the empty region the CSS draws');
+{
+  // THE OTHER HALF OF THE CLASS, and the half the first attempt at this fix
+  // was refuted for waving at. Five census rows are slot-only layout shells
+  // whose slots are all NAMED (no `children`, no declared defaultContent), so
+  // §10's policy gives them a receipt and nothing to draw — and they stay
+  // visually empty. The obvious-looking remedy is "enforce a minimum box".
+  //
+  // MEASURED, IT IS THE WRONG REMEDY: the canvas is already drawing the same
+  // nothing the CSS draws. This section re-derives that from committed bytes
+  // every run, so it is a gate and not a paragraph. If a layout shell ever
+  // does lose real height on the canvas, this goes red and the wall reopens.
+  //
+  // The census code half is captured by extract/figma/canvas-gate/shots.ts,
+  // which clips the painted union box plus CLIP_MARGIN on every side at
+  // device-pixel-ratio 2 — so the CSS CONTENT height is png.height/dpr minus
+  // two margins. Both numbers are read out of the tree, never spelled here.
+  const shots = readFileSync(path.join(process.cwd(), 'extract/figma/canvas-gate/shots.ts'), 'utf8');
+  const marginMatch = /const CLIP_MARGIN = (\d+);/.exec(shots);
+  if (!marginMatch) fail('extract/figma/canvas-gate/shots.ts no longer spells CLIP_MARGIN — §11 cannot re-derive the CSS content box');
+  const margin = Number(marginMatch[1]);
+
+  const pngHeight = (file: string): number => {
+    const buf = readFileSync(file);
+    if (buf.readUInt32BE(12) !== 0x49484452) fail(`${file} is not a PNG (no IHDR)`);
+    return buf.readUInt32BE(20);
+  };
+
+  // WIDTH IS NOT ASSERTED HERE, and the reason is a limit of the receipt, not
+  // a softened claim: the capture clip is clamped to the 600px viewport
+  // (shots.ts measureJs), and every one of these shells is 640px wide, so the
+  // committed PNG's width is the viewport's, not the component's. The height
+  // axis is unclamped and is the axis the class is named for.
+  // The REAL token set — these shells bind {space.gap.*}, and a stub map
+  // would refuse at emit rather than measure anything.
+  const readJson = (rel: string) => JSON.parse(readFileSync(path.join(process.cwd(), rel), 'utf8'));
+  const REAL_TOKENS = {
+    primitives: readJson('tokens/primitives.tokens.json'),
+    semantic: readJson('tokens/semantic.tokens.json'),
+    light: readJson('tokens/modes/semantic.light.tokens.json'),
+    dark: readJson('tokens/modes/semantic.dark.tokens.json'),
+    brands: { default: readJson('tokens/modes/brand.default.tokens.json') },
+  };
+  const rows: Array<[string, string, string]> = [
+    ['ds.two-column', 'contracts/two-column.contract.json', 'code-twocolumn.png'],
+    ['ds.sidebar-layout', 'contracts/sidebar-layout.contract.json', 'code-sidebarlayout.png'],
+    ['ds.grid-gallery', 'contracts/grid-gallery.contract.json', 'code-gridgallery.png'],
+  ];
+  const lines: string[] = [];
+  for (const [id, contractPath, png] of rows) {
+    const contract = ContractSchema.parse(JSON.parse(readFileSync(path.join(process.cwd(), contractPath), 'utf8'))) as Contract;
+    const receipt = path.join(process.cwd(), 'parity/receipts/v1/census/first-party', id, png);
+    const render = JSON.parse(readFileSync(path.join(process.cwd(), 'parity/receipts/v1/census/first-party', id, 'code-render.json'), 'utf8'));
+    const dprMatch = /dpr (\d+)/.exec(String(render.renderer));
+    if (!dprMatch) fail(`${id}: code-render.json does not record the capture dpr — §11 cannot re-derive the CSS content box`);
+    const cssHeight = pngHeight(receipt) / Number(dprMatch[1]) - 2 * margin;
+
+    const m = createFigmaMock();
+    await runIn(m, emitFigmaScript(contract, { tokens: REAL_TOKENS, icons: new Map(), contracts: new Map([[contract.id, contract]]) } as never));
+    const node = findAll(m, (n: any) => n.type === 'COMPONENT' && n.name === contract.name)[0];
+    if (!node) fail(`${id}: the fixture built no component`);
+    const slots = (node.children ?? []).filter((c: any) => c.type === 'SLOT');
+    if (slots.length === 0) fail(`${id} is not a slot-only shell any more — §11 is pinned to the wrong rows`);
+    for (const s of slots) {
+      if ((s.children ?? []).length !== 0) fail(`${id}: slot "${s.name}" drew content — §11's premise (every slot NAMED and empty) is stale`);
+      if (s.height !== 1) {
+        fail(
+          `${id}: empty slot "${s.name}" measures ${s.height} tall, not Figma's 1px floor — the delta accounting ` +
+            'below no longer describes what the canvas does',
+        );
+      }
+    }
+
+    // One 1px floor per GRID ROW: the row's height is its tallest occupant,
+    // and every occupant is a floored empty slot. The row count is a CONTRACT
+    // fact (root.layout.rows), so a re-authored shell moves this expectation
+    // with it instead of drifting away from a hard-coded number.
+    const trackRows = (contract.anatomy.root.layout as { rows?: unknown[] } | undefined)?.rows?.length;
+    if (!trackRows) fail(`${id}: root declares no grid rows — §11 cannot derive the floor count`);
+    const verdict = (h: number): string | null =>
+      h - cssHeight === trackRows
+        ? null
+        : `${id}: the canvas draws ${h}px where the CSS surface draws ${cssHeight}px — a ${h - cssHeight}px ` +
+          `difference against ${trackRows} flooring row(s). RC5's NAMED WALL says the canvas draws the same ` +
+          'nothing the code draws, off by exactly one Figma 1px floor per row; that is no longer true, so either ' +
+          'the shell gained real geometry (carry it) or the emitter lost some (fix it). A minimum box is not the ' +
+          'answer either way — it would be geometry no surface declares.';
+    const wrong = verdict(node.height);
+    if (wrong) fail(wrong);
+
+    // RED TEST — and it is the exact remedy this wall refuses. Give every
+    // empty slot a 24px MINIMUM BOX (the "just make it taller" fix) and the
+    // shell must fail its own agreement with the CSS surface. If it passed,
+    // §11 would be pinning nothing and a fabricated box could ship as a fix.
+    if (verdict(node.height + 24) === null) {
+      fail(`${id}: the §11 red test did not go red — the delta rule accepts a fabricated 24px minimum box, so it proves nothing`);
+    }
+    lines.push(`${id} CSS ${cssHeight} vs canvas ${node.height} (+${trackRows})`);
+  }
+  ok(`the empty layout shells draw the CSS surface's own emptiness, off by one 1px floor per row: ${lines.join('; ')}`);
+}
+
+console.log('\n✔ native-slots ok: native SLOT emission, ONE unified set-level property, amend survival (red-tested), migration reported by name, every API refusal named, the slot reads back, an empty slot hugs — as does a childless COMPONENT root reached only by the amend path (FC-SLOT-BIRTH-BOX, both red-tested) — and RC5\'s design-time slot content agrees across both emitters, inverts without swallowing a designer\'s text, and leaves the still-empty shells measured against their own CSS render (red-tested).');
