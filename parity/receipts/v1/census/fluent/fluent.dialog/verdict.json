@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "dialog surface with title, close, body and Close button matches across modal types",
  "reviewedAt": "60793cc0",

@@ -1,0 +1,147 @@
+{
+  "id": "fluent.card",
+  "library": "fluent",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@fluentui/react-components",
+    "version": "9.74.5",
+    "recipe": "examples/fluent sandbox (.fluent-sandbox; examples/fluent/README) mounted per extract/computed/configs/fluent.json"
+  },
+  "configPath": "extract/computed/configs/fluent.json",
+  "component": "Card",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "appearance-filled__size-medium__orientation-vertical",
+      "status": "rendered",
+      "png": "ref-appearance-filled__size-medium__orientation-vertical.png",
+      "props": {
+        "focusMode": "off",
+        "selected": false,
+        "appearance": "filled",
+        "size": "medium",
+        "orientation": "vertical"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled__size-medium__orientation-horizontal",
+      "status": "rendered",
+      "png": "ref-appearance-filled__size-medium__orientation-horizontal.png",
+      "props": {
+        "focusMode": "off",
+        "selected": false,
+        "appearance": "filled",
+        "size": "medium",
+        "orientation": "horizontal"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled__size-small__orientation-vertical",
+      "status": "rendered",
+      "png": "ref-appearance-filled__size-small__orientation-vertical.png",
+      "props": {
+        "focusMode": "off",
+        "selected": false,
+        "appearance": "filled",
+        "size": "small",
+        "orientation": "vertical"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled__size-large__orientation-vertical",
+      "status": "rendered",
+      "png": "ref-appearance-filled__size-large__orientation-vertical.png",
+      "props": {
+        "focusMode": "off",
+        "selected": false,
+        "appearance": "filled",
+        "size": "large",
+        "orientation": "vertical"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled-alternative__size-medium__orientation-vertical",
+      "status": "rendered",
+      "png": "ref-appearance-filled-alternative__size-medium__orientation-vertical.png",
+      "props": {
+        "focusMode": "off",
+        "selected": false,
+        "appearance": "filled-alternative",
+        "size": "medium",
+        "orientation": "vertical"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-outline__size-medium__orientation-vertical",
+      "status": "rendered",
+      "png": "ref-appearance-outline__size-medium__orientation-vertical.png",
+      "props": {
+        "focusMode": "off",
+        "selected": false,
+        "appearance": "outline",
+        "size": "medium",
+        "orientation": "vertical"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-subtle__size-medium__orientation-vertical",
+      "status": "rendered",
+      "png": "ref-appearance-subtle__size-medium__orientation-vertical.png",
+      "props": {
+        "focusMode": "off",
+        "selected": false,
+        "appearance": "subtle",
+        "size": "medium",
+        "orientation": "vertical"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled__size-medium__orientation-vertical__state-focus-visible",
+      "status": "rendered",
+      "png": "ref-appearance-filled__size-medium__orientation-vertical__state-focus-visible.png",
+      "props": {
+        "focusMode": "off",
+        "selected": false,
+        "appearance": "filled",
+        "size": "medium",
+        "orientation": "vertical"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled__size-medium__orientation-vertical__state-active",
+      "status": "rendered",
+      "png": "ref-appearance-filled__size-medium__orientation-vertical__state-active.png",
+      "props": {
+        "focusMode": "off",
+        "selected": false,
+        "appearance": "filled",
+        "size": "medium",
+        "orientation": "vertical"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled__size-medium__orientation-vertical__state-hover",
+      "status": "rendered",
+      "png": "ref-appearance-filled__size-medium__orientation-vertical__state-hover.png",
+      "props": {
+        "focusMode": "off",
+        "selected": false,
+        "appearance": "filled",
+        "size": "medium",
+        "orientation": "vertical"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 10,
+  "unmappable": 0
+}

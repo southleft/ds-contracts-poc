@@ -1,0 +1,153 @@
+{
+  "id": "fluent.checkbox",
+  "library": "fluent",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@fluentui/react-components",
+    "version": "9.74.5",
+    "recipe": "examples/fluent sandbox (.fluent-sandbox; examples/fluent/README) mounted per extract/computed/configs/fluent.json"
+  },
+  "configPath": "extract/computed/configs/fluent.json",
+  "component": "Checkbox",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "checked-unchecked__size-medium__shape-square",
+      "status": "rendered",
+      "png": "ref-checked-unchecked__size-medium__shape-square.png",
+      "props": {
+        "id": "fluent-checkbox",
+        "label": "Checkbox",
+        "labelPosition": "after",
+        "checked": false,
+        "size": "medium",
+        "shape": "square",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "checked-unchecked__size-medium__shape-circular",
+      "status": "rendered",
+      "png": "ref-checked-unchecked__size-medium__shape-circular.png",
+      "props": {
+        "id": "fluent-checkbox",
+        "label": "Checkbox",
+        "labelPosition": "after",
+        "checked": false,
+        "size": "medium",
+        "shape": "circular",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "checked-unchecked__size-large__shape-square",
+      "status": "rendered",
+      "png": "ref-checked-unchecked__size-large__shape-square.png",
+      "props": {
+        "id": "fluent-checkbox",
+        "label": "Checkbox",
+        "labelPosition": "after",
+        "checked": false,
+        "size": "large",
+        "shape": "square",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "checked-checked__size-medium__shape-square",
+      "status": "rendered",
+      "png": "ref-checked-checked__size-medium__shape-square.png",
+      "props": {
+        "id": "fluent-checkbox",
+        "label": "Checkbox",
+        "labelPosition": "after",
+        "checked": true,
+        "size": "medium",
+        "shape": "square",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "checked-mixed__size-medium__shape-square",
+      "status": "rendered",
+      "png": "ref-checked-mixed__size-medium__shape-square.png",
+      "props": {
+        "id": "fluent-checkbox",
+        "label": "Checkbox",
+        "labelPosition": "after",
+        "checked": "mixed",
+        "size": "medium",
+        "shape": "square",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "checked-unchecked__size-medium__shape-square__state-focus-visible",
+      "status": "rendered",
+      "png": "ref-checked-unchecked__size-medium__shape-square__state-focus-visible.png",
+      "props": {
+        "id": "fluent-checkbox",
+        "label": "Checkbox",
+        "labelPosition": "after",
+        "checked": false,
+        "size": "medium",
+        "shape": "square",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "checked-unchecked__size-medium__shape-square__state-active",
+      "status": "rendered",
+      "png": "ref-checked-unchecked__size-medium__shape-square__state-active.png",
+      "props": {
+        "id": "fluent-checkbox",
+        "label": "Checkbox",
+        "labelPosition": "after",
+        "checked": false,
+        "size": "medium",
+        "shape": "square",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "checked-unchecked__size-medium__shape-square__state-hover",
+      "status": "rendered",
+      "png": "ref-checked-unchecked__size-medium__shape-square__state-hover.png",
+      "props": {
+        "id": "fluent-checkbox",
+        "label": "Checkbox",
+        "labelPosition": "after",
+        "checked": false,
+        "size": "medium",
+        "shape": "square",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 8,
+  "unmappable": 0
+}

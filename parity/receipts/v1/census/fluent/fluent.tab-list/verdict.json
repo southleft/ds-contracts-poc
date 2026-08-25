@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "transparent/subtle/circular appearances, sizes, orientations match incl. selected pill",
  "reviewedAt": "60793cc0",

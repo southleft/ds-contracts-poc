@@ -1,5 +1,6 @@
 {
- "recognisable": false,
+ "recognisable": "ungraded",
+ "priorSelfGrade": false,
  "walls": [
   "CANVAS-OUTLINE-STROKE-ABSENT:input.outline/underline",
   "CODE-RENDER-PARTIAL:input.outline"

@@ -1,0 +1,92 @@
+{
+  "id": "fluent.switch",
+  "library": "fluent",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@fluentui/react-components",
+    "version": "9.74.5",
+    "recipe": "examples/fluent sandbox (.fluent-sandbox; examples/fluent/README) mounted per extract/computed/configs/fluent.json"
+  },
+  "configPath": "extract/computed/configs/fluent.json",
+  "component": "Switch",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "checked-unchecked__label-position-after",
+      "status": "rendered",
+      "png": "ref-checked-unchecked__label-position-after.png",
+      "props": {
+        "id": "fluent-switch",
+        "label": "Switch",
+        "checked": false,
+        "labelPosition": "after",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "checked-unchecked__label-position-above",
+      "status": "rendered",
+      "png": "ref-checked-unchecked__label-position-above.png",
+      "props": {
+        "id": "fluent-switch",
+        "label": "Switch",
+        "checked": false,
+        "labelPosition": "above",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "checked-unchecked__label-position-before",
+      "status": "rendered",
+      "png": "ref-checked-unchecked__label-position-before.png",
+      "props": {
+        "id": "fluent-switch",
+        "label": "Switch",
+        "checked": false,
+        "labelPosition": "before",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "checked-checked__label-position-after",
+      "status": "rendered",
+      "png": "ref-checked-checked__label-position-after.png",
+      "props": {
+        "id": "fluent-switch",
+        "label": "Switch",
+        "checked": true,
+        "labelPosition": "after",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "checked-unchecked__label-position-after__state-focus-visible",
+      "status": "rendered",
+      "png": "ref-checked-unchecked__label-position-after__state-focus-visible.png",
+      "props": {
+        "id": "fluent-switch",
+        "label": "Switch",
+        "checked": false,
+        "labelPosition": "after",
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 5,
+  "unmappable": 0
+}

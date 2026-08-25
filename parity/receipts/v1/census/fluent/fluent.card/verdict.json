@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "preview + header/description across appearances, sizes, orientations and states match",
  "reviewedAt": "60793cc0",

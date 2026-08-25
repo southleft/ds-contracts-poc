@@ -1,0 +1,225 @@
+{
+  "id": "fluent.badge",
+  "library": "fluent",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@fluentui/react-components",
+    "version": "9.74.5",
+    "recipe": "examples/fluent sandbox (.fluent-sandbox; examples/fluent/README) mounted per extract/computed/configs/fluent.json"
+  },
+  "configPath": "extract/computed/configs/fluent.json",
+  "component": "Badge",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "appearance-filled__color-brand__size-medium",
+      "status": "rendered",
+      "png": "ref-appearance-filled__color-brand__size-medium.png",
+      "props": {
+        "shape": "circular",
+        "iconPosition": "before",
+        "appearance": "filled",
+        "color": "brand",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled__color-brand__size-tiny",
+      "status": "rendered",
+      "png": "ref-appearance-filled__color-brand__size-tiny.png",
+      "props": {
+        "shape": "circular",
+        "iconPosition": "before",
+        "appearance": "filled",
+        "color": "brand",
+        "size": "tiny"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled__color-brand__size-extra-small",
+      "status": "rendered",
+      "png": "ref-appearance-filled__color-brand__size-extra-small.png",
+      "props": {
+        "shape": "circular",
+        "iconPosition": "before",
+        "appearance": "filled",
+        "color": "brand",
+        "size": "extra-small"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled__color-brand__size-small",
+      "status": "rendered",
+      "png": "ref-appearance-filled__color-brand__size-small.png",
+      "props": {
+        "shape": "circular",
+        "iconPosition": "before",
+        "appearance": "filled",
+        "color": "brand",
+        "size": "small"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled__color-brand__size-large",
+      "status": "rendered",
+      "png": "ref-appearance-filled__color-brand__size-large.png",
+      "props": {
+        "shape": "circular",
+        "iconPosition": "before",
+        "appearance": "filled",
+        "color": "brand",
+        "size": "large"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled__color-brand__size-extra-large",
+      "status": "rendered",
+      "png": "ref-appearance-filled__color-brand__size-extra-large.png",
+      "props": {
+        "shape": "circular",
+        "iconPosition": "before",
+        "appearance": "filled",
+        "color": "brand",
+        "size": "extra-large"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled__color-danger__size-medium",
+      "status": "rendered",
+      "png": "ref-appearance-filled__color-danger__size-medium.png",
+      "props": {
+        "shape": "circular",
+        "iconPosition": "before",
+        "appearance": "filled",
+        "color": "danger",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled__color-important__size-medium",
+      "status": "rendered",
+      "png": "ref-appearance-filled__color-important__size-medium.png",
+      "props": {
+        "shape": "circular",
+        "iconPosition": "before",
+        "appearance": "filled",
+        "color": "important",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled__color-informative__size-medium",
+      "status": "rendered",
+      "png": "ref-appearance-filled__color-informative__size-medium.png",
+      "props": {
+        "shape": "circular",
+        "iconPosition": "before",
+        "appearance": "filled",
+        "color": "informative",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled__color-severe__size-medium",
+      "status": "rendered",
+      "png": "ref-appearance-filled__color-severe__size-medium.png",
+      "props": {
+        "shape": "circular",
+        "iconPosition": "before",
+        "appearance": "filled",
+        "color": "severe",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled__color-subtle__size-medium",
+      "status": "rendered",
+      "png": "ref-appearance-filled__color-subtle__size-medium.png",
+      "props": {
+        "shape": "circular",
+        "iconPosition": "before",
+        "appearance": "filled",
+        "color": "subtle",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled__color-success__size-medium",
+      "status": "rendered",
+      "png": "ref-appearance-filled__color-success__size-medium.png",
+      "props": {
+        "shape": "circular",
+        "iconPosition": "before",
+        "appearance": "filled",
+        "color": "success",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled__color-warning__size-medium",
+      "status": "rendered",
+      "png": "ref-appearance-filled__color-warning__size-medium.png",
+      "props": {
+        "shape": "circular",
+        "iconPosition": "before",
+        "appearance": "filled",
+        "color": "warning",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-ghost__color-brand__size-medium",
+      "status": "rendered",
+      "png": "ref-appearance-ghost__color-brand__size-medium.png",
+      "props": {
+        "shape": "circular",
+        "iconPosition": "before",
+        "appearance": "ghost",
+        "color": "brand",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-outline__color-brand__size-medium",
+      "status": "rendered",
+      "png": "ref-appearance-outline__color-brand__size-medium.png",
+      "props": {
+        "shape": "circular",
+        "iconPosition": "before",
+        "appearance": "outline",
+        "color": "brand",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-tint__color-brand__size-medium",
+      "status": "rendered",
+      "png": "ref-appearance-tint__color-brand__size-medium.png",
+      "props": {
+        "shape": "circular",
+        "iconPosition": "before",
+        "appearance": "tint",
+        "color": "brand",
+        "size": "medium"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 16,
+  "unmappable": 0
+}
