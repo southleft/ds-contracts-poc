@@ -1568,6 +1568,14 @@ export function carriedChannels(part: Part | undefined): Set<string> {
   for (const m of Object.values(part.declaredStates ?? {})) {
     for (const ch of Object.keys(m)) for (const cp of CHANNEL_TO_COMPUTED[ch] ?? [ch]) out.add(cp);
   }
+  // v19 (RC2): a per-axis declared fact is a carried channel too — a
+  // declaredByProp entry the reviewed layer states must stop the mint from
+  // re-detecting the same channel, exactly like the uniform spelling.
+  for (const e of part.declaredByProp ?? []) {
+    for (const m of Object.values(e.map)) {
+      for (const ch of Object.keys(m)) for (const cp of CHANNEL_TO_COMPUTED[ch] ?? [ch]) out.add(cp);
+    }
+  }
   // A2 grid: a STRUCTURED grid part carries these computed longhands through
   // layout.rows/columns/gap/areas (the pinned G6 CSS spellings) and a placed
   // child carries its lines/aligns through Part.placement — the mint pass
@@ -1601,9 +1609,16 @@ export interface DeclaredEnrichment {
   channel: string;
   value: string;
   /** ANTD EXAM (heal loop): a declared-registry value that is a function of
-   *  exactly ONE enum axis carries as a per-value `stylesWhen` rule instead
-   *  of refusing (border-*-style only today — antd's dashed Button type). */
+   *  exactly ONE enum axis carries per-value instead of refusing.
+   *  · border-*-style keeps its `stylesWhen` landing (antd's dashed Button
+   *    type — the canvas lowers it to a dashPattern on that variant's stroke);
+   *  · RC2 burn-down: every OTHER registry channel lands in `declaredByProp`,
+   *    the declared vocabulary's own per-axis field, so the value stays inside
+   *    the channel's bounded grammar instead of being smuggled through the
+   *    literal `stylesWhen` whitelist. */
   when?: { prop: string; equals: string };
+  /** RC2: land in Part.declaredByProp rather than Part.stylesWhen. */
+  byPropField?: 'declaredByProp';
 }
 export interface DeclaredStateEnrichment extends DeclaredEnrichment {
   state: string;
@@ -2156,27 +2171,57 @@ export function prepareMint(
             }
           } else if (spec && uniform !== null) {
             codeOnly.push({ part: partName, channel, reason: 'declared-channel value outside the bounded grammar — named residue (v15)', sample: uniform, distinctValues: values.size });
-          } else if (spec && /^border-(top|right|bottom|left)-style$/.test(channel) && declarablePart(partName) && (() => {
-            // ANTD EXAM (heal loop): factor the varying border style by ONE enum axis
+          } else if (spec && declarablePart(partName) && (() => {
+            // ANTD EXAM (heal loop) + RC2 BURN-DOWN. Factor a varying declared
+            // value by ONE enum axis.
+            //
+            // The rescue used to be hard-scoped to /^border-(top|right|bottom|
+            // left)-style$/ — one channel, added for one exam — while the very
+            // next branch swept EVERY other registry channel into
+            // "declared facts carry uniform values only (v15)". So the whole
+            // MUI Link `underline` axis (text-decoration-line none/underline)
+            // and the MUI Radio `checked` axis (the inner dot's scale(0) →
+            // identity transform) died at a regex, the compiled variant plane
+            // minted byte-identical cells, and the blind re-grade called both
+            // rows NOT recognisable. Nothing about the border-style shape was
+            // special: the measurement (values factor on exactly one non-
+            // presence, non-state enum axis, every value inside the channel's
+            // OWN bounded grammar) is the general one. The scope was the
+            // accident; this is the rule.
+            //
+            // The landing differs by channel and only by channel:
+            //   · border-*-style keeps `stylesWhen` (its literal spelling, and
+            //     the canvas dashPattern lowering already reads it there);
+            //   · everything else lands in `declaredByProp`, the declared
+            //     vocabulary's own per-axis field, so the value is validated by
+            //     DECLARED_CHANNELS exactly as the uniform spelling is.
+            const isBorderStyle = /^border-(top|right|bottom|left)-style$/.test(channel);
             for (const ax of space.axes) {
               if (space.presence.has(ax.prop) || space.stateProps.some((sp) => sp.prop === ax.prop)) continue;
               const byVal = new Map<string, Set<string>>();
               for (const r of rows) { const av = r.axisValues[ax.prop]; if (av === undefined) { byVal.clear(); break; } (byVal.get(av) ?? byVal.set(av, new Set()).get(av)!).add(r.value); }
               if (byVal.size < 2 || [...byVal.values()].some((s) => s.size !== 1)) continue;
               if ([...byVal.values()].some((s) => !spec.value.test([...s][0]))) continue;
-              for (const [av, s] of byVal) {
-                const v = [...s][0];
-                if (v === 'solid' || v === 'none') continue; // the emitters' standing stroke style; the zero-width side already draws nothing
-                declared.push({ part: partName, channel, value: v, when: { prop: ax.prop, equals: av } });
+              if (isBorderStyle) {
+                for (const [av, s] of byVal) {
+                  const v = [...s][0];
+                  if (v === 'solid' || v === 'none') continue; // the emitters' standing stroke style; the zero-width side already draws nothing
+                  declared.push({ part: partName, channel, value: v, when: { prop: ax.prop, equals: av } });
+                }
+                remintReceipts.push(`border-style-by-axis-carried: ${partName}.${channel} varies by "${ax.prop}" (${[...byVal].map(([k, s]) => `${k}=${[...s][0]}`).join(', ')}) — carried as per-value stylesWhen rules (code: \`.${ax.prop}-<value> { ${channel}: … }\`; canvas: a dashPattern on that variant's stroke)`);
+                return true;
               }
-              remintReceipts.push(`border-style-by-axis-carried: ${partName}.${channel} varies by "${ax.prop}" (${[...byVal].map(([k, s]) => `${k}=${[...s][0]}`).join(', ')}) — carried as per-value stylesWhen rules (code: \`.${ax.prop}-<value> { ${channel}: … }\`; canvas: a dashPattern on that variant's stroke)`);
+              for (const [av, s] of byVal) {
+                declared.push({ part: partName, channel, value: [...s][0], when: { prop: ax.prop, equals: av }, byPropField: 'declaredByProp' });
+              }
+              remintReceipts.push(`declared-by-axis-carried: ${partName}.${channel} varies by "${ax.prop}" (${[...byVal].map(([k, s]) => `${k}=${[...s][0]}`).join(', ')}) — carried as per-value declaredByProp entries (code: \`.${ax.prop}-<value> { ${channel}: … }\`; canvas: ${DECLARED_CHANNELS[channel]?.canvas === 'draw' ? 'drawn per compiled variant' : 'declared-not-drawn, repeated as a code-only fact'})`);
               return true;
             }
             return false;
           })()) {
-            /* carried above as stylesWhen */
+            /* carried above as stylesWhen / declaredByProp */
           } else if (spec) {
-            codeOnly.push({ part: partName, channel, reason: 'declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue', sample: unk, distinctValues: values.size });
+            codeOnly.push({ part: partName, channel, reason: `declared-channel value varies across combos and does NOT factor on any single non-presence, non-state enum axis (or a per-axis value falls outside the channel's bounded grammar) — the by-axis declaredByProp carrier cannot hold it; named residue`, sample: unk, distinctValues: values.size });
           } else if (channel.startsWith('--')) {
             // A CSS CUSTOM PROPERTY IS NOT A STYLED CHANNEL, and the generic
             // receipt was factually wrong about these. Measured over the
@@ -2665,6 +2710,18 @@ export function applyMintToContract(
   for (const de of declaredEnrichments) {
     const target = partByName.get(de.part);
     if (!target || target.component || target.slot) continue; // guarded upstream; belt and braces
+    if (de.when && de.byPropField === 'declaredByProp') {
+      // RC2: the declared vocabulary's OWN per-axis field. Validated by
+      // DECLARED_CHANNELS exactly like the uniform spelling, and resolved per
+      // compiled variant by resolveDeclared on every surface.
+      const dbp = (target.declaredByProp ??= []);
+      let entry = dbp.find((e) => e.prop === de.when!.prop);
+      if (!entry) { entry = { prop: de.when.prop, map: {} }; dbp.push(entry); }
+      const cell = (entry.map[de.when.equals] ??= {});
+      if (!(de.channel in cell)) cell[de.channel] = de.value;
+      enrichmentNotes.push(`declared fact carried per axis value: ${de.part}.${de.channel} = ${de.value} when ${de.when.prop}=${de.when.equals} (declaredByProp)`);
+      continue;
+    }
     if (de.when) {
       target.stylesWhen ??= [];
       const existing = target.stylesWhen.find((sw) => sw.prop === de.when!.prop && sw.equals === de.when!.equals);

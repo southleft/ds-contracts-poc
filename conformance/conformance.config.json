@@ -813,6 +813,16 @@
       "axes": []
     },
     {
+      "__case": "typography: text-decoration-line that VARIES on one enum axis (none at the default value, underline on the other) — the mui.link `underline` shape — declared CARRIED",
+      "name": "CaseTextDecorationByAxis",
+      "importName": "CaseTextDecorationByAxis",
+      "contract": "conformance/seeds/text-decoration-by-axis.contract.json",
+      "sampleText": "",
+      "axes": [
+        "underline"
+      ]
+    },
+    {
       "__case": "text: text-overflow: ellipsis + overflow hidden + nowrap — declared CARRIED",
       "name": "CaseTextOverflowEllipsis",
       "importName": "CaseTextOverflowEllipsis",
@@ -828,6 +838,16 @@
       "contract": "conformance/seeds/transform-scale-rotate.contract.json",
       "sampleText": "",
       "axes": []
+    },
+    {
+      "__case": "transform: transform: scale(0) on a child part at the default axis value, scale(1) on the other — the mui.radio `checked` shape (scale(0) IS the library's hide mechanism for the selection dot) — declared CARRIED",
+      "name": "CaseTransformScaleZeroByAxis",
+      "importName": "CaseTransformScaleZeroByAxis",
+      "contract": "conformance/seeds/transform-scale-zero-by-axis.contract.json",
+      "sampleText": "",
+      "axes": [
+        "checked"
+      ]
     },
     {
       "__case": "motion: transition: background-color 200ms ease — declared CARRIED",

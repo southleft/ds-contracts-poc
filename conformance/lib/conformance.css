@@ -89,8 +89,10 @@
 @import '../cases/stage-box-equal/case.css';
 @import '../cases/svg-outside-grammar/case.css';
 @import '../cases/svg-stroke-glyph-fill-none/case.css';
+@import '../cases/text-decoration-by-axis/case.css';
 @import '../cases/text-overflow-ellipsis/case.css';
 @import '../cases/transform-scale-rotate/case.css';
+@import '../cases/transform-scale-zero-by-axis/case.css';
 @import '../cases/transition-channel/case.css';
 @import '../cases/var-fallback-chain/case.css';
 @import '../cases/var-longhand/case.css';

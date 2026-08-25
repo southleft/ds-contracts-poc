@@ -1,0 +1,3 @@
+[data-cf="transform-scale-zero-by-axis"] { display: flex; position: relative; width: 24px; height: 24px; background: rgb(230, 230, 245); }
+[data-cf="transform-scale-zero-by-axis"] .cf-a { display: block; width: 24px; height: 24px; background: rgb(25, 118, 210); transform: scale(0); }
+[data-cf="transform-scale-zero-by-axis"][data-checked="checked"] .cf-a { transform: scale(1); }

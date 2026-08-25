@@ -2,9 +2,9 @@
   "_marker": "THE DENOMINATOR. Hand-authored per case, generated into one index. Deliberately NOT derived from isFusable / styled / DECLARED_CHANNELS / CHANNEL_TO_COMPUTED / TOKEN_CHANNELS / carriedParts — every instrument in the pipeline derives its denominator from the same filter that decides carriage, which is why a channel the filter never opened scores 100%. This file is the independent one.",
   "generatedBy": "conformance/build.ts",
   "library": "@ds-contracts/conformance@0.1.0",
-  "count": 97,
+  "count": 99,
   "byExpectation": {
-    "CARRIED": 54,
+    "CARRIED": 56,
     "LOWERED": 4,
     "REFUSED": 21,
     "UNSUPPORTED": 18
@@ -2060,6 +2060,34 @@
       }
     },
     {
+      "id": "text-decoration-by-axis",
+      "feature": "typography",
+      "construct": "text-decoration-line that VARIES on one enum axis (none at the default value, underline on the other) — the mui.link `underline` shape",
+      "why": "The declared/keyword door carried UNIFORM values only: a DECLARED_CHANNELS channel whose value is a function of one enum axis was pushed to code-only residue ('declared facts carry uniform values only'), and the compiled variant plane then minted byte-identical cells. MUI Link's whole underline axis died this way — the blind re-grade measured canvas underline-always BYTE-IDENTICAL (md5 14067582) to underline-none while the real library underlines it. The by-axis rescue existed but was hard-scoped to border-*-style by a regex; text-decoration-line is a 'draw'-verdict registry channel and has to reach the canvas as textDecoration = UNDERLINE on that variant.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.declaredByProp[underline].map.always.text-decoration-line",
+      "observable": {
+        "part": "root",
+        "channel": "text-decoration-line",
+        "capturedValue": "none"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the underline-always variant compiles with textDecoration UNDERLINE (DECLARED_CHANNELS verdict 'draw'); the default variant keeps none"
+      },
+      "axes": [
+        {
+          "prop": "underline",
+          "values": [
+            "none",
+            "always"
+          ],
+          "default": "none"
+        }
+      ]
+    },
+    {
       "id": "text-overflow-ellipsis",
       "feature": "text",
       "construct": "text-overflow: ellipsis + overflow hidden + nowrap",
@@ -2095,6 +2123,34 @@
         "expect": "ABSENT",
         "note": "the bounded grammar carries translate only"
       }
+    },
+    {
+      "id": "transform-scale-zero-by-axis",
+      "feature": "transform",
+      "construct": "transform: scale(0) on a child part at the default axis value, scale(1) on the other — the mui.radio `checked` shape (scale(0) IS the library's hide mechanism for the selection dot)",
+      "why": "The zero-scale matrix was outside the transform channel's bounded grammar AND the by-axis rescue was hard-scoped to border-*-style, so the whole channel refused and the dot inherited the CHECKED identity transform. The blind re-grade measured all 7 unchecked mui.radio cells drawing a filled inner dot — every unchecked radio read as SELECTED. A collapsed matrix is not a decoration: it means the node paints nothing, which the canvas expresses by not drawing the node.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.a.declaredByProp[checked].map.unchecked.transform",
+      "observable": {
+        "part": "a",
+        "channel": "transform",
+        "capturedValue": "matrix(0, 0, 0, 0, 0, 0)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the checked=unchecked cell draws no node for the part at all (a collapsed matrix paints nothing); the checked cell draws it"
+      },
+      "axes": [
+        {
+          "prop": "checked",
+          "values": [
+            "unchecked",
+            "checked"
+          ],
+          "default": "unchecked"
+        }
+      ]
     },
     {
       "id": "transition-channel",

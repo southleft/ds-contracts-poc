@@ -1,0 +1,2 @@
+[data-cf="text-decoration-by-axis"] { display: inline-flex; color: rgb(25, 118, 210); text-decoration-line: none; }
+[data-cf="text-decoration-by-axis"][data-underline="always"] { text-decoration-line: underline; }

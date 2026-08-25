@@ -88,8 +88,10 @@ export { default as CaseShadowRootClosed } from '../cases/shadow-root-closed/Cas
 export { default as CaseStageBoxEqual } from '../cases/stage-box-equal/Case.tsx';
 export { default as CaseSvgOutsideGrammar } from '../cases/svg-outside-grammar/Case.tsx';
 export { default as CaseSvgStrokeGlyphFillNone } from '../cases/svg-stroke-glyph-fill-none/Case.tsx';
+export { default as CaseTextDecorationByAxis } from '../cases/text-decoration-by-axis/Case.tsx';
 export { default as CaseTextOverflowEllipsis } from '../cases/text-overflow-ellipsis/Case.tsx';
 export { default as CaseTransformScaleRotate } from '../cases/transform-scale-rotate/Case.tsx';
+export { default as CaseTransformScaleZeroByAxis } from '../cases/transform-scale-zero-by-axis/Case.tsx';
 export { default as CaseTransitionChannel } from '../cases/transition-channel/Case.tsx';
 export { default as CaseVarFallbackChain } from '../cases/var-fallback-chain/Case.tsx';
 export { default as CaseVarLonghand } from '../cases/var-longhand/Case.tsx';

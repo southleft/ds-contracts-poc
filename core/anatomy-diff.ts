@@ -15,6 +15,8 @@ export type AnatomyPartNode = {
   placement?: Record<string, unknown>;
   tokens?: Record<string, unknown>;
   declared?: Record<string, unknown>;
+  /** v19 (RC2): per-enum-value declared overrides. */
+  declaredByProp?: Array<{ prop: string; map: Record<string, Record<string, unknown>> }>;
   parts?: Record<string, AnatomyPartNode>;
   states?: Record<string, Record<string, unknown>>;
   element?: string;
@@ -90,6 +92,14 @@ function walkPart(partPath: string, node: AnatomyPartNode, out: string[]): void 
   }
   flattenBindings(partPath, node.tokens as Record<string, unknown> | undefined, 'tokens', out);
   flattenBindings(partPath, node.declared as Record<string, unknown> | undefined, 'declared', out);
+  // v19 (RC2): a per-axis declared fact is a binding the anatomy diff must
+  // see — a round trip that dropped it would otherwise report "matched".
+  for (const e of node.declaredByProp ?? []) {
+    for (const [value, bag] of Object.entries(e.map)) {
+      if (!isPlainObject(bag)) continue;
+      flattenBindings(partPath, bag, `declaredByProp.${e.prop}=${value}`, out);
+    }
+  }
   if (node.states) {
     for (const [state, bag] of Object.entries(node.states)) {
       if (!isPlainObject(bag)) continue;

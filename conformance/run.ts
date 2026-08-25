@@ -339,6 +339,25 @@ export function carriageOfContract(contract: Record<string, unknown>, trees: Rec
           }
         }
       }
+      // RC2 BURN-DOWN — declaredByProp carriage: the declared vocabulary's
+      // per-axis field. A declared channel whose value is a function of one
+      // enum axis is carried vocabulary exactly like a base declared fact;
+      // reading only `declared` here would score the new carrier as a loss.
+      // Also read for literalsByProp, whose per-axis literals were invisible
+      // to this walk for the same reason.
+      for (const [field, label] of [['declaredByProp', 'declaredByProp'], ['literalsByProp', 'literalsByProp']] as const) {
+        const arr = part[field] as unknown;
+        if (!Array.isArray(arr)) continue;
+        for (const e of arr as Array<{ prop?: string; map?: Record<string, Record<string, unknown>> }>) {
+          if (!e || typeof e !== 'object' || !e.map) continue;
+          for (const [axisValue, chans] of Object.entries(e.map)) {
+            if (!chans || typeof chans !== 'object') continue;
+            for (const [chk, chv] of Object.entries(chans)) {
+              if (typeof chv === 'string' || typeof chv === 'number') push(chk, name, `${label}.${String(e.prop)}=${axisValue}`, String(chv));
+            }
+          }
+        }
+      }
       const sw = part.stylesWhen as unknown;
       if (Array.isArray(sw)) {
         for (const w of sw as Array<{ prop?: string; equals?: unknown; styles?: Record<string, unknown> }>) {

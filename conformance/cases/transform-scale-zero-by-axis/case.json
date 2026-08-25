@@ -1,0 +1,21 @@
+{
+  "id": "transform-scale-zero-by-axis",
+  "feature": "transform",
+  "construct": "transform: scale(0) on a child part at the default axis value, scale(1) on the other — the mui.radio `checked` shape (scale(0) IS the library's hide mechanism for the selection dot)",
+  "why": "The zero-scale matrix was outside the transform channel's bounded grammar AND the by-axis rescue was hard-scoped to border-*-style, so the whole channel refused and the dot inherited the CHECKED identity transform. The blind re-grade measured all 7 unchecked mui.radio cells drawing a filled inner dot — every unchecked radio read as SELECTED. A collapsed matrix is not a decoration: it means the node paints nothing, which the canvas expresses by not drawing the node.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a.declaredByProp[checked].map.unchecked.transform",
+  "observable": {
+    "part": "a",
+    "channel": "transform",
+    "capturedValue": "matrix(0, 0, 0, 0, 0, 0)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the checked=unchecked cell draws no node for the part at all (a collapsed matrix paints nothing); the checked cell draws it"
+  },
+  "axes": [
+    { "prop": "checked", "values": ["unchecked", "checked"], "default": "unchecked" }
+  ]
+}

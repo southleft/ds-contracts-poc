@@ -1,0 +1,21 @@
+{
+  "id": "text-decoration-by-axis",
+  "feature": "typography",
+  "construct": "text-decoration-line that VARIES on one enum axis (none at the default value, underline on the other) — the mui.link `underline` shape",
+  "why": "The declared/keyword door carried UNIFORM values only: a DECLARED_CHANNELS channel whose value is a function of one enum axis was pushed to code-only residue ('declared facts carry uniform values only'), and the compiled variant plane then minted byte-identical cells. MUI Link's whole underline axis died this way — the blind re-grade measured canvas underline-always BYTE-IDENTICAL (md5 14067582) to underline-none while the real library underlines it. The by-axis rescue existed but was hard-scoped to border-*-style by a regex; text-decoration-line is a 'draw'-verdict registry channel and has to reach the canvas as textDecoration = UNDERLINE on that variant.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.declaredByProp[underline].map.always.text-decoration-line",
+  "observable": {
+    "part": "root",
+    "channel": "text-decoration-line",
+    "capturedValue": "none"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the underline-always variant compiles with textDecoration UNDERLINE (DECLARED_CHANNELS verdict 'draw'); the default variant keeps none"
+  },
+  "axes": [
+    { "prop": "underline", "values": ["none", "always"], "default": "none" }
+  ]
+}
