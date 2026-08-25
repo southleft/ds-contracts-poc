@@ -1,0 +1,183 @@
+{
+  "exam": "selftest-tailwind",
+  "direction": "code-to-canvas",
+  "set": "ToggleSwitch",
+  "id": null,
+  "source": {
+    "library": "tailwind",
+    "config": "extract/computed/configs/tailwind.json"
+  },
+  "stages": [
+    {
+      "stage": "capture",
+      "status": "ok",
+      "ms": 26464,
+      "command": "npx tsx extract/computed/run.ts --harness examples/tailwind/.tw-sandbox --config extract/computed/configs/tailwind.json --component ToggleSwitch --out extract/computed/out/tailwind --keep-originals",
+      "message": "3 artifact(s)",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-JMGOn8/root/extract/computed/out/tailwind/toggleswitch/enriched.contract.json",
+          "sha256": "d76575a1198a34ffd51aa3fdf4abdc6fa962311628b06bc06d1762c6bea3f7bc",
+          "bytes": 12560,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-JMGOn8/root/extract/computed/out/tailwind/toggleswitch/scorecard.json",
+          "sha256": "1eab8282bf16ac6108de9da74d8027bd297c7770d5e270d4e72078671c04ab0b",
+          "bytes": 25461,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-JMGOn8/root/extract/computed/out/tailwind/toggleswitch/captured-truth.json",
+          "sha256": "918dd47a86595d75870441bbcf7416a0a456f9d5c8ea757386d2d5c46c9a2d25",
+          "bytes": 560821,
+          "committed": false
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/ref-sm-unchecked.png",
+          "sha256": "2fd3aea50f7a7c030461832e0bc76ad906c57f3e6e0e7bec30d55748a0ec9202",
+          "bytes": 1891,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/ref-sm-checked.png",
+          "sha256": "61101078727f490acb8e37e3f9bc450530c9c9741ae8fd4a434fdefd8379b2bd",
+          "bytes": 1828,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/ref-md-unchecked.png",
+          "sha256": "392dd4da839bd4b6b219a566c0657b550079ec3a34bc332578494ca3321e4347",
+          "bytes": 1970,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/ref-md-checked.png",
+          "sha256": "192d2a68303af5700568fd7c63f6d7fee8fc33e27e93877f1d2f940ebfb7be4a",
+          "bytes": 1882,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/ref-lg-unchecked.png",
+          "sha256": "41902b18346924c63dd9f13df1f6e8973a18c77deb480853870c8738171be018",
+          "bytes": 2166,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/ref-lg-checked.png",
+          "sha256": "ae01206497dd9ca61a1b7dda1b53b090015d89841a2440ec024613c98fd69e69",
+          "bytes": 2101,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/code-sm-unchecked.png",
+          "sha256": "6ad7fa116b733ea461ccb271fa72337bf1004c89f58aca424c6698d91939196f",
+          "bytes": 2084,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/code-sm-checked.png",
+          "sha256": "121f854cb1af5bea49ae483ea80220a14046d5e2148efe3e8b6abeb28a592289",
+          "bytes": 1999,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/code-md-unchecked.png",
+          "sha256": "c867b5cf546364605513d1abe1d33fcf130581960b6fc5e4c3d7c58404480189",
+          "bytes": 2190,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/code-md-checked.png",
+          "sha256": "c5c3f6ca2dc9b2d15048f21291cc1addcca010e66d122b2a5387e4b916e70b30",
+          "bytes": 2133,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/code-lg-unchecked.png",
+          "sha256": "14d468a5f74e10da5647efbb008372b8887bfdb4992589ff5aa9b700a24e6514",
+          "bytes": 2362,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/code-lg-checked.png",
+          "sha256": "824ac9116db65dd825cc132650468de2102789237f69350722928dae70cf6fff",
+          "bytes": 2335,
+          "committed": true
+        }
+      ]
+    },
+    {
+      "stage": "promote",
+      "status": "REFUSED",
+      "ms": 1120,
+      "command": "npx tsx packages/cli/src/cli.ts promote --config examples/tailwind/ds-library.json",
+      "message": "✘ authored alert prop dismissable: prop \"dismissable\" is not exactly one entry of props[] — NAMED refusal\n· flowbite.button: bindings.figma.statePreviews ON (disabled, active, focus-visible, hover)\n  · flowbite.badge: bindings.figma.statePreviews ON (active, hover)",
+      "artifacts": []
+    },
+    {
+      "stage": "validate",
+      "status": "SKIPPED",
+      "ms": 0,
+      "command": null,
+      "message": "an earlier stage stopped this chain (promote)",
+      "artifacts": []
+    },
+    {
+      "stage": "generate",
+      "status": "SKIPPED",
+      "ms": 0,
+      "command": null,
+      "message": "an earlier stage stopped this chain (promote)",
+      "artifacts": []
+    },
+    {
+      "stage": "bundle",
+      "status": "SKIPPED",
+      "ms": 0,
+      "command": null,
+      "message": "an earlier stage stopped this chain (promote)",
+      "artifacts": []
+    },
+    {
+      "stage": "mint",
+      "status": "SKIPPED",
+      "ms": 0,
+      "command": null,
+      "message": "an earlier stage stopped this chain (promote)",
+      "artifacts": []
+    }
+  ],
+  "chainComplete": false,
+  "firstStop": {
+    "stage": "promote",
+    "status": "REFUSED",
+    "message": "✘ authored alert prop dismissable: prop \"dismissable\" is not exactly one entry of props[] — NAMED refusal\n· flowbite.button: bindings.figma.statePreviews ON (disabled, active, focus-visible, hover)\n  · flowbite.badge: bindings.figma.statePreviews ON (active, hover)"
+  },
+  "images": {
+    "ref": [
+      "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/ref-sm-unchecked.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/ref-sm-checked.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/ref-md-unchecked.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/ref-md-checked.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/ref-lg-unchecked.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/ref-lg-checked.png"
+    ],
+    "code": [
+      "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/code-sm-unchecked.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/code-sm-checked.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/code-md-unchecked.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/code-md-checked.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/code-lg-unchecked.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/toggleswitch/code-lg-checked.png"
+    ],
+    "canvas": [],
+    "absent": [
+      {
+        "kind": "canvas",
+        "reason": "mint SKIPPED — no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 (probed /health: 9225:404, 9226:404, 9228:200, 9230:404). The local bridge serves MCP over stdio to its own client and WebSocket to plugin clients; a Node process cannot issue a canvas write through either. Bundle produced, mint pending — the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact."
+      }
+    ]
+  },
+  "totalMs": 27584
+}
