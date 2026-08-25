@@ -69,9 +69,11 @@ import { figmaScriptEmitter } from "../../../../core/emitter.js";
 import { unsupportedTokenValues } from "../../../../core/token-set.js";
 import {
   assertContractProvenance,
+  checkRequiredFacts,
   contractFileNameForId,
   flatIdStem,
   markAwaitingCodeAdoption,
+  posture,
   proposalFileNameForId,
   revisionOf,
   type ProvenancedContract,
@@ -351,10 +353,21 @@ const readJsonObject = (filePath: string): Record<string, unknown> => {
 async function bundleCommand(argv: string[]): Promise<number> {
   const parsed = parseFlags(argv, {
     value: ["tokens", "modes", "name", "out", "icons"],
+    bool: ["strict"],
   });
   if (parsed.positionals.length === 0) {
     throw new CliUsageError("figma bundle needs contract files/directories");
   }
+  // REQUIRED-FACTS POSTURE. A bundle is the artifact a designer PASTES, so it
+  // is the last place a set missing a load-bearing fact can be stopped before
+  // it mints unrecognisable. WARN is the default while the measured wave
+  // (parity/receipts/v1/REQUIRED-FACTS.md) burns down; `--strict` (or
+  // DS_REQUIRED_FACTS=refuse) refuses instead, and records the posture IN the
+  // bundle so the plugin refuses the same paste.
+  const requiredFactsPosture = posture(
+    process.env,
+    parsed.flags.get("strict") === true,
+  );
   const out = flagString(parsed, "out");
   if (!out) throw new CliUsageError("figma bundle needs --out <file.json>");
   const tokenArgs = splitList(flagString(parsed, "tokens"));
@@ -636,9 +649,36 @@ async function bundleCommand(argv: string[]): Promise<number> {
     );
   }
 
+  // REQUIRED FACTS PER ARCHETYPE — the refuse-to-mint referee. Every contract
+  // is graded against the load-bearing facts its archetype owes: the pill card
+  // with no column axis, the glyph-less checkbox, the 30px select trigger.
+  const requiredFactLines: string[] = [];
+  const expectedFactLines: string[] = [];
+  for (const raw of contracts) {
+    const contract = loaded.get(String(raw.id))!;
+    const result = checkRequiredFacts(contract);
+    requiredFactLines.push(...result.missing.map((m) => m.line));
+    expectedFactLines.push(...result.warns.map((w) => w.line));
+    if (result.undeclared) expectedFactLines.push(result.undeclared);
+  }
+  if (requiredFactLines.length > 0 && requiredFactsPosture === "refuse") {
+    throw new CliUsageError(
+      `Refused — ${requiredFactLines.length} required fact(s) missing across ${contracts.length} contract(s); each of these sets would mint and would NOT be recognisable on the canvas, so nothing was written:\n` +
+        requiredFactLines.map((l) => `  - ${l}`).join("\n") +
+        "\n\n  An ugly mint is worse than an honest refusal. Fix the contract (re-capture the missing fact, or carry it by hand), " +
+        "or drop --strict / DS_REQUIRED_FACTS to bundle it anyway with the absences named above.",
+    );
+  }
+
   const bundle = {
     type: CONTRACTS_BUNDLE_TYPE,
     version: 1 as const,
+    // A STRICT bundle carries its posture, so the plugin refuses the same
+    // paste the CLI refused. Omitted under the default posture — a warn-mode
+    // bundle is byte-identical to one built before this field existed.
+    ...(requiredFactsPosture === "refuse"
+      ? { requiredFacts: "refuse" as const }
+      : {}),
     tokenSet,
     ...(icons ? { icons } : {}),
     contracts,
@@ -663,6 +703,19 @@ async function bundleCommand(argv: string[]): Promise<number> {
   console.log(
     `✔ Bundle written: ${out} — ${contracts.length} contract(s) + tokenSet "${name}" (${layerSummary}${icons ? `, ${Object.keys(icons).length} icon asset(s)` : ""}; ${text.length} bytes). Paste it into the plugin's Build tab — JSON is the only thing a user ever pastes.`,
   );
+  if (requiredFactLines.length > 0) {
+    console.log(
+      `⚠ ${requiredFactLines.length} REQUIRED fact(s) missing — each of these sets will mint, and will not be recognisable on the canvas. ` +
+        `Re-run with --strict (or DS_REQUIRED_FACTS=refuse) to refuse instead of bundling them:`,
+    );
+    for (const line of requiredFactLines) console.log(`    - ${line}`);
+  }
+  if (expectedFactLines.length > 0) {
+    console.log(
+      `⚠ ${expectedFactLines.length} EXPECTED fact(s) missing — named, never enforced (an archetype's second-tier facts, and any contract whose archetype is undeclared):`,
+    );
+    for (const line of expectedFactLines) console.log(`    - ${line}`);
+  }
   const scopeRefused = codeOnlyFacts.filter((row) => "refused" in row);
   if (scopeRefused.length > 0) {
     console.log(

@@ -37,8 +37,10 @@ import { emitTokensCss, referencedCssVars, tokensCssLayers, undefinedCssVars, ty
 // registry from the package alone would see them only if something else in
 // the graph had loaded the built-ins first.
 import { emitterByName, getEmitters, registerEmitter } from '../../../../core/emitter.js';
+import { checkRequiredFacts } from '../../../../core/required-facts.js';
 import {
   describeRefused,
+  describeRequiredFacts,
   describeTokensCss,
   generateComponents,
   orderActive,
@@ -125,7 +127,7 @@ export async function generateCommand(argv: string[]): Promise<number> {
     // runs (prettier formatting, per-component index, root barrel,
     // tokens.css). Slot prefixes travel WITH the entries: the generator
     // routes them through the same lib.ts rule as every other target.
-    const { generated, refused, tokensCss } = await generateComponents({
+    const { generated, refused, tokensCss, requiredFacts } = await generateComponents({
       contractFiles: files,
       tokenFiles: tokenEntries.length > 0 ? tokenEntries : undefined,
       iconsDir,
@@ -135,6 +137,7 @@ export async function generateCommand(argv: string[]): Promise<number> {
     });
     console.log(`✔ Generated ${generated.length} component(s) → ${outDir}: ${generated.sort().join(', ')}`);
     if (generated.length > 0) for (const line of describeTokensCss(tokensCss)) console.log(line);
+    for (const line of describeRequiredFacts(requiredFacts)) console.log(line);
     for (const line of describeRefused(refused)) console.error(line);
     return refused.length > 0 ? 1 : 0;
   }
@@ -223,6 +226,14 @@ export async function generateCommand(argv: string[]): Promise<number> {
     skippedComposite: sheet.skippedComposite,
   })) {
     if (ordered.length > 0) console.log(line);
+  }
+  // REQUIRED FACTS — the same warning the react shell prints, on every other
+  // target too. `generate` never refuses for a missing fact: code renders
+  // through CSS inheritance and survives an absence the canvas cannot.
+  for (const line of describeRequiredFacts(
+    ordered.flatMap((c) => checkRequiredFacts(c, { voice: 'generate' }).missing.map((m) => m.line)),
+  )) {
+    console.log(line);
   }
   for (const line of describeRefused(ledger.refused)) console.error(line);
   return ledger.refused.length > 0 ? 1 : 0;

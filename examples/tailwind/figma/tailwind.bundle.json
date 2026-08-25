@@ -1586,6 +1586,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/tailwind/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to the library's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "banner / alert / toast",
       "semantics": {
         "element": "div"
       },
@@ -1961,6 +1962,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/tailwind/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to the library's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "badge / tag / chip",
       "semantics": {
         "element": "span"
       },
@@ -2191,6 +2193,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/tailwind/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to the library's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "button",
       "semantics": {
         "element": "button"
       },
@@ -2480,6 +2483,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/tailwind/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to the library's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "card",
       "semantics": {
         "element": "div"
       },
@@ -2881,6 +2885,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "SEED contract for the Tailwind reader round — props/axes only; anatomy is promoted from captured DOM truth. STATE-PLANE PROJECTION round: `checked` is an ENUM VARIANT AXIS (unchecked|checked), not a boolean state. Subject: flowbite-react@0.12.17 on tailwindcss@4.3.3 (pinned, examples/tailwind/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of flowbite-react@0.12.17 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/tailwind/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to the library's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "toggle / switch",
       "semantics": {
         "element": "button",
         "role": "switch",
