@@ -537,9 +537,9 @@
     "combos": 1,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 1252,
-      "cellsEqual": 1168,
-      "pctEqual": 93.29073482428115,
+      "cellsCompared": 1280,
+      "cellsEqual": 1196,
+      "pctEqual": 93.4375,
       "rowsFullyEqual": 0,
       "rows": 4
     },
@@ -561,12 +561,12 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 41,
+      "mintedLeaves": 43,
       "mintedLeavesUnfolded": 38,
-      "baseBindings": 204,
-      "stateBindings": 10,
+      "baseBindings": 211,
+      "stateBindings": 12,
       "codeOnlyChannels": 17,
-      "overflowBindings": 4,
+      "overflowBindings": 6,
       "folds": 164
     },
     "worstRows": [
@@ -667,7 +667,9 @@
       "promotion: orphan-asset-dropped: icon asset \"tabs-visually-hidden-3\" was reconstructed from the svg subtree of part \"visually-hidden-3\", which this promotion then REFUSED (see the named refusal above) — the asset belongs to no part of the promoted contract and is not carried. Before this door it was committed to the library's assets/icons/ directory and referenced by nothing (measured: examples/mui/assets/icons/autocomplete-autocomplete-clearindicator.svg).",
       "overflow: tabs__nav-item-2.border-bottom-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: tabs__nav-item-2.outline-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: tabs__nav-item-2.outline-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: tabs__nav-item.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: tabs__nav-item.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: tabs__nav-item-2.border-bottom-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "code-only: part-0.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0.height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -693,7 +695,7 @@
     },
     "shippedMinted": {
       "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-      "leavesAdded": 841,
+      "leavesAdded": 842,
       "divergent": [
         {
           "token": "imported.tabs.part-0.background-color",
@@ -706,20 +708,14 @@
           "fresh": "#ffffff",
           "shipped": "{background}",
           "resolvedEqual": true
-        },
-        {
-          "token": "imported.tabs.tabs-nav-item.color",
-          "fresh": "#161616",
-          "shipped": "{text-primary}",
-          "resolvedEqual": true
         }
       ]
     },
     "rows": [
       {
         "key": "__default",
-        "channelsCompared": 313,
-        "channelsEqual": 293,
+        "channelsCompared": 320,
+        "channelsEqual": 300,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -849,8 +845,8 @@
       },
       {
         "key": "__hover",
-        "channelsCompared": 313,
-        "channelsEqual": 292,
+        "channelsCompared": 320,
+        "channelsEqual": 299,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -986,8 +982,8 @@
       },
       {
         "key": "__focus-visible",
-        "channelsCompared": 313,
-        "channelsEqual": 292,
+        "channelsCompared": 320,
+        "channelsEqual": 299,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1123,8 +1119,8 @@
       },
       {
         "key": "__active",
-        "channelsCompared": 313,
-        "channelsEqual": 291,
+        "channelsCompared": 320,
+        "channelsEqual": 298,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

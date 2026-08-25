@@ -275,8 +275,8 @@
     {
       "library": "carbon",
       "component": "Accordion",
-      "rerunPctEqual": 78.01724137931035,
-      "cellsCompared": 5568,
+      "rerunPctEqual": 78.55191256830601,
+      "cellsCompared": 5856,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 77.63157894736842,
       "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Accordion +1.170 (76.462 → 77.632), cellsCompared UNCHANGED: `display: list-item` is now carried in the declared registry (it is a BLOCK-LEVEL box in CSS block flow). It previously fell into the `display-outside-vocabulary` receipt, so Carbon's `<li class=\"cds--accordion__item\">` reached the emitter with no display fact at all and took the HORIZONTAL default — the 472px panel drew BESIDE the 174px heading inside a 328px item."
@@ -293,8 +293,8 @@
     {
       "library": "carbon",
       "component": "Checkbox",
-      "rerunPctEqual": 84.5,
-      "cellsCompared": 1800,
+      "rerunPctEqual": 84.01898734177215,
+      "cellsCompared": 1896,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 84.29054054054055,
       "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Unmoved by the round: offline pctEqual and cellsCompared are identical to the class-stem-prefix baseline. repaired: CLASS-STEM PREFIX round (task #25) — Carbon was RE-CAPTURED after `stems()` stopped reading its own `cds--` prefix as a BEM modifier (every Carbon class was previously discarded, so parts aligned and named POSITIONALLY). Part names moved from `part-<path>` to class-stem identity; the FLOOR DID NOT: cellsCompared, part counts and pctEqual are unchanged on all ten (Carbon's DOM shape is stable across every combo, so positional and class-identity alignment built the same tree). Kept so the re-capture is not invisible in the history. See examples/carbon/PROVENANCE.md."
@@ -303,7 +303,7 @@
       "library": "carbon",
       "component": "IconButton",
       "rerunPctEqual": 100,
-      "cellsCompared": 1120,
+      "cellsCompared": 1440,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 100,
       "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. IconButton +8.190 (91.810 → 100.000) and cellsCompared 9280 → 1120 — the largest VOCABULARY CHANGE of the round, and the reason the number is not a victory lap: in Carbon an icon button IS a tooltip trigger, so its captured anatomy carried `span.cds--popover` and its whole invisible subtree (label + caret, both display:none in every combo). Promoted, that was a 24x24 ABSOLUTE frame over the entire component that draws NOTHING — the census sibling of the portal round's stripInertPortalChildren. Refusing it takes 3 of 6 parts and 8160 of 9280 compared cells out of the denominator; the surviving three parts happen to be exact. A 100% on 1120 cells is a SMALLER claim than 91.810% on 9280, not a bigger one."
@@ -320,8 +320,8 @@
     {
       "library": "carbon",
       "component": "Modal",
-      "rerunPctEqual": 87.87878787878788,
-      "cellsCompared": 1320,
+      "rerunPctEqual": 88.36363636363636,
+      "cellsCompared": 1375,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 90.03831417624521,
       "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Modal +0.294 (89.744 → 90.038) and cellsCompared 1560 → 1305 — a VOCABULARY CHANGE, named: `display: grid` and `inline-grid` now lower to the flex vocabulary from the MEASURED grid-template track counts (modal-container is 1 column x 4 rows -> flex column). The dropped rows are the inert `popover` tooltip wrapper on the close button, refused by the new inert-overlay-wrapper rule (it draws no box in any combo and every one of its children is display:none)."
@@ -329,8 +329,8 @@
     {
       "library": "carbon",
       "component": "Tabs",
-      "rerunPctEqual": 93.29073482428115,
-      "cellsCompared": 1252,
+      "rerunPctEqual": 93.4375,
+      "cellsCompared": 1280,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 93.2258064516129,
       "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Unmoved by the round: offline pctEqual and cellsCompared are identical to the class-stem-prefix baseline. repaired: CLASS-STEM PREFIX round (task #25) — Carbon was RE-CAPTURED after `stems()` stopped reading its own `cds--` prefix as a BEM modifier (every Carbon class was previously discarded, so parts aligned and named POSITIONALLY). Part names moved from `part-<path>` to class-stem identity; the FLOOR DID NOT: cellsCompared, part counts and pctEqual are unchanged on all ten (Carbon's DOM shape is stable across every combo, so positional and class-identity alignment built the same tree). Kept so the re-capture is not invisible in the history. See examples/carbon/PROVENANCE.md."
@@ -347,8 +347,8 @@
     {
       "library": "carbon",
       "component": "TextInput",
-      "rerunPctEqual": 89.16666666666667,
-      "cellsCompared": 3600,
+      "rerunPctEqual": 89.32291666666667,
+      "cellsCompared": 3840,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 89.04494382022472,
       "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Unmoved by the round: offline pctEqual and cellsCompared are identical to the class-stem-prefix baseline. repaired: CLASS-STEM PREFIX round (task #25) — Carbon was RE-CAPTURED after `stems()` stopped reading its own `cds--` prefix as a BEM modifier (every Carbon class was previously discarded, so parts aligned and named POSITIONALLY). Part names moved from `part-<path>` to class-stem identity; the FLOOR DID NOT: cellsCompared, part counts and pctEqual are unchanged on all ten (Carbon's DOM shape is stable across every combo, so positional and class-identity alignment built the same tree). Kept so the re-capture is not invisible in the history. See examples/carbon/PROVENANCE.md."
@@ -356,8 +356,8 @@
     {
       "library": "carbon",
       "component": "Toggle",
-      "rerunPctEqual": 85.11904761904762,
-      "cellsCompared": 1344,
+      "rerunPctEqual": 85.3932584269663,
+      "cellsCompared": 1424,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 84.30232558139535,
       "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Toggle +1.162 (83.140 → 84.302), cellsCompared UNCHANGED: pseudo-decor v2 promotes the ::before KNOB (18x18 ellipse, per-`toggled` left 3px/27px) that the v1 grammar refused twice over ('unconditional placement' — it is drawn in every combo so it has no enum gate to hang a stylesWhen on; 'nonuniform' — its geometry is a function of one enum axis). Same vocabulary, one more drawn part."
