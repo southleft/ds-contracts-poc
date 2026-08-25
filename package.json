@@ -237,6 +237,7 @@
     "first-pass:check": "tsx scripts/first-pass-check.ts",
     "door-register:check": "tsx scripts/door-register-check.ts",
     "render-browser:check": "tsx scripts/render-browser-pin-check.ts",
+    "mixed-browser:check": "tsx scripts/mixed-browser-capture-check.ts",
     "door-register:self-test": "tsx scripts/door-register-check.ts --self-test",
     "door-census": "tsx scripts/door-census.ts",
     "census:render": "tsx extract/figma/census/render.ts",

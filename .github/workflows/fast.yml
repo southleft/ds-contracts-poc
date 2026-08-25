@@ -621,6 +621,9 @@ jobs:
       - name: render-browser:check (the render browser is the PINNED revision, and a receipt names what rendered it)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run render-browser:check
+      - name: mixed-browser:check (no capture staples two browsers into one evidence file — docs/23 D.36)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run mixed-browser:check
       - name: door-register:check (every subtractive heuristic named, premised, and its receipt path proved)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run door-register:check

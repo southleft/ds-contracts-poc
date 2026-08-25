@@ -3227,3 +3227,46 @@ one is still absent; `playground:flow-check` (a `maintain` step) pins that
 `core/emitter.ts` in `sideEffects` was tried and rejected: esbuild honours the
 same field, and the plugin engine bundle grew past its committed 811,089
 bytes (`figma-sync/plugin/engine.receipt.json` refused the grown bundle).
+
+## D.36 Thirty-seven captures with two browsers stapled into one evidence file — OPEN, counted, and gated
+
+`extract/computed/capture.ts` stamps two browser facts into every
+`captured-truth.json`, each asked of the live instance and each correct:
+`_provenance.browser` (the browser the component was captured on) and
+`_provenance.uaBaselineBrowser` (the browser the UA CONTROL was measured on).
+On `v1-integration-2` **37 files disagree**: `altitude` 8, `carbon` 10, `mui`
+14, `tailwind` 5 — captured on Chromium 149.0.7827.55, UA control measured on
+151.0.7922.34. `main` carries **zero**; the class arrives with #45's UA-baseline
+backfill, which ran later, on the stray browser.
+
+The capture receipts are not lying — that honesty is what made the defect
+findable. What is wrong is the COMBINATION. The styled-channel door
+(`fuse.control-element-delta`) subtracts a control measured on browser B from a
+component captured on browser A, so any channel whose computed value merely
+CHANGED between the two is carried as though the library authored it.
+`position-anchor` is the measured instance: `none` in 149, `normal` in 151, so
+base and control disagree and the channel is carried on exactly these 37
+components — which is why the pinned re-record moved exactly 37 rows and not one
+more (PR #49).
+
+**The numbers derived from them are correct.** #49 re-recorded the drift
+baseline under the pinned browser, and all 51 rows CI had an opinion about
+reproduce CI exactly. What remains suspect is the underlying EVIDENCE: those 37
+captures still mix two browsers, so the set of channels they carry is slightly
+wider than a single-browser capture would produce.
+
+**Why it is still open.** Repairing it means re-running
+`extract/computed/ua-baseline-backfill.ts` under the pinned resolver AND
+re-recording the drift baseline in the SAME round — the two must move together,
+because the backfill changes what the door subtracts and therefore every
+`cellsCompared` on those rows. Doing either alone leaves the tree
+self-contradictory. That round was deliberately not folded into the browser-pin
+fix.
+
+**It cannot grow silently while it waits.** `npm run mixed-browser:check`
+(`scripts/mixed-browser-capture-check.ts`, fast lane) scans every committed
+`captured-truth.json`, prints the per-library breakdown every run, and FAILS if
+the count exceeds a committed allowance of 37. It deliberately does not fail
+when the class shrinks — it prints that the allowance is stale, because the
+honest end state is 0 and tightening it is a reviewed act. Raising the allowance
+is not the fix and must never be the whole change.
