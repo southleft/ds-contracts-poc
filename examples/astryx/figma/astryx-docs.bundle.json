@@ -1632,6 +1632,10 @@
           "size-2": {
             "$value": "2px",
             "$type": "dimension"
+          },
+          "color-171717": {
+            "$value": "#171717",
+            "$type": "color"
           }
         },
         "badge": {
@@ -3679,6 +3683,12 @@
           }
         },
         "text-input": {
+          "root": {
+            "width": {
+              "$value": "320px",
+              "$type": "dimension"
+            }
+          },
           "label": {
             "color": {
               "$value": "#737373",
@@ -3731,6 +3741,10 @@
             "line-height": {
               "$value": "20.0004px",
               "$type": "dimension"
+            },
+            "placeholder-color": {
+              "$value": "#737373",
+              "$type": "color"
             }
           }
         },
@@ -7454,7 +7468,8 @@
                 "align": "center"
               },
               "declared": {
-                "cursor": "pointer"
+                "cursor": "pointer",
+                "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
               },
               "tokens": {
                 "color": "{imported.text-input.label.color}",
@@ -7493,11 +7508,16 @@
                         "overflow-x": "clip",
                         "overflow-y": "clip"
                       },
+                      "layout": {
+                        "grow": true
+                      },
                       "tokens": {
+                        "color": "{imported.shared.color-171717}",
                         "flex-grow": "{imported.text-input.part-1-0-0.flex-grow}",
                         "font-size": "{imported.text-input.part-1-0-0.font-size}",
                         "line-height": "{imported.text-input.part-1-0-0.line-height}",
-                        "min-width": "{imported.shared.size-0}"
+                        "min-width": "{imported.shared.size-0}",
+                        "placeholder-color": "{imported.text-input.part-1-0-0.placeholder-color}"
                       }
                     }
                   },
@@ -7526,6 +7546,7 @@
                     "border-top-right-radius": "{imported.shared.size-10}",
                     "border-top-width": "{imported.shared.size-1}",
                     "bottom": "{imported.shared.size-0}",
+                    "color": "{imported.shared.color-171717}",
                     "column-gap": "{imported.shared.size-8}",
                     "left": "{imported.shared.size-0}",
                     "padding-bottom": "{imported.shared.size-4}",
@@ -7536,19 +7557,68 @@
                     "row-gap": "{imported.shared.size-8}",
                     "top": "{imported.shared.size-0}",
                     "z-index": "{imported.text-input.text-input.z-index}"
-                  }
+                  },
+                  "codeOnly": [
+                    {
+                      "state": "active",
+                      "channel": "box-shadow",
+                      "value": "color(srgb 0.831373 0.831373 0.831373 / 0.3) 0px 0px 0px 2px inset",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "border-bottom-color",
+                      "value": "#262626",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "border-left-color",
+                      "value": "#262626",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "border-right-color",
+                      "value": "#262626",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "border-top-color",
+                      "value": "#262626",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "box-shadow",
+                      "value": "rgba(241, 241, 241, 1) 0px 0px 0px 2px inset",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "box-shadow",
+                      "value": "color(srgb 0.831373 0.831373 0.831373 / 0.3) 0px 0px 0px 2px inset",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    }
+                  ]
                 }
               },
               "declared": {
                 "isolation": "isolate"
+              },
+              "tokens": {
+                "color": "{imported.shared.color-171717}"
               }
             }
           },
           "tokens": {
+            "color": "{imported.shared.color-171717}",
             "column-gap": "{imported.shared.size-4}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
-            "row-gap": "{imported.shared.size-4}"
+            "row-gap": "{imported.shared.size-4}",
+            "width": "{imported.text-input.root.width}"
           }
         }
       },
@@ -10292,6 +10362,17 @@
         {
           "part": "part-1-0-0",
           "kind": "channel",
+          "channel": "color",
+          "value": "{imported.shared.color-171717}",
+          "reason": "this control paints its placeholder in `placeholder-color`, so its own `color` — the ink the field would draw a TYPED VALUE in — is on no node. An EMPTY field has no value text, and Figma has no second text plane to hold the ink of text that is not there. Carried by the CSS surfaces (`color` on the control), NAMED here rather than painted over the placeholder (which is the RC7 defect this class exists to close).",
+          "variants": {
+            "count": 9,
+            "of": 9
+          }
+        },
+        {
+          "part": "part-1-0-0",
+          "kind": "channel",
           "channel": "flex-grow",
           "value": "{imported.text-input.part-1-0-0.flex-grow}",
           "reason": "the canvas approximates growth with layoutGrow/FILL, which is a boolean, not a ratio.",
@@ -10383,6 +10464,83 @@
           "channel": "column-gap",
           "value": "{imported.shared.size-4}",
           "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
+          "variants": {
+            "count": 9,
+            "of": 9
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "capture",
+          "channel": "border-bottom-color [focus-visible]",
+          "value": "#262626",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 9,
+            "of": 9
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "capture",
+          "channel": "border-left-color [focus-visible]",
+          "value": "#262626",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 9,
+            "of": 9
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "capture",
+          "channel": "border-right-color [focus-visible]",
+          "value": "#262626",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 9,
+            "of": 9
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "capture",
+          "channel": "border-top-color [focus-visible]",
+          "value": "#262626",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 9,
+            "of": 9
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "capture",
+          "channel": "box-shadow [active]",
+          "value": "color(srgb 0.831373 0.831373 0.831373 / 0.3) 0px 0px 0px 2px inset",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 9,
+            "of": 9
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "capture",
+          "channel": "box-shadow [focus-visible]",
+          "value": "rgba(241, 241, 241, 1) 0px 0px 0px 2px inset",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 9,
+            "of": 9
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "capture",
+          "channel": "box-shadow [hover]",
+          "value": "color(srgb 0.831373 0.831373 0.831373 / 0.3) 0px 0px 0px 2px inset",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
           "variants": {
             "count": 9,
             "of": 9

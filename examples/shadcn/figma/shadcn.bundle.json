@@ -2506,6 +2506,10 @@
               "$value": "4px",
               "$type": "dimension"
             },
+            "placeholder-color": {
+              "$value": "#737373",
+              "$type": "color"
+            },
             "width": {
               "$value": "288px",
               "$type": "dimension"
@@ -4051,6 +4055,9 @@
             "transition-property": "color, box-shadow",
             "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
           },
+          "attrs": {
+            "placeholder": "Value"
+          },
           "declaredStates": {
             "disabled": {
               "cursor": "not-allowed",
@@ -4080,6 +4087,7 @@
             "padding-left": "{imported.input.root.padding-left}",
             "padding-right": "{imported.input.root.padding-right}",
             "padding-top": "{imported.input.root.padding-top}",
+            "placeholder-color": "{imported.input.root.placeholder-color}",
             "width": "{imported.input.root.width}"
           },
           "states": {
@@ -5967,6 +5975,17 @@
               "State=Active",
               "State=Focus Visible"
             ]
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "color",
+          "value": "{imported.input.root.color}",
+          "reason": "this control paints its placeholder in `placeholder-color`, so its own `color` — the ink the field would draw a TYPED VALUE in — is on no node. An EMPTY field has no value text, and Figma has no second text plane to hold the ink of text that is not there. Carried by the CSS surfaces (`color` on the control), NAMED here rather than painted over the placeholder (which is the RC7 defect this class exists to close).",
+          "variants": {
+            "count": 4,
+            "of": 4
           }
         },
         {

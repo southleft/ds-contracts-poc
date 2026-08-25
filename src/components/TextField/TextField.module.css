@@ -75,6 +75,10 @@
   border-style: solid;
 }
 
+.input::placeholder {
+  color: var(--color-input-placeholder);
+}
+
 .size-sm .input {
   padding-block: var(--space-inset-y-sm);
 }
