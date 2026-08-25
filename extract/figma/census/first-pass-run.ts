@@ -994,6 +994,16 @@ export async function runCanvasToCode(
     if (!entry) continue;
     setsUnder(entry.document, sets);
   }
+  // THE MANIFEST IS COMMITTED EVIDENCE TOO (2026-08-25). If the selection
+  // came back empty — a page that moved, a key that no longer resolves — the
+  // run below would write a MANIFEST naming ZERO sets over the committed one,
+  // and every existing packet directory would instantly read as SMUGGLED.
+  // Refuse before that write; the caller reports MEASURED NOTHING and exits
+  // non-zero with the committed record intact.
+  if (sets.length === 0)
+    throw new Error(
+      `first-pass: exam ${def.exam} selected NO component set under pages ${def.pages.join(", ")} of file ${def.fileKey} — refusing before the MANIFEST is overwritten, because a MANIFEST naming zero sets would make every committed packet read as smuggled. The committed record is untouched.`,
+    );
   const corpus = def.corpusFiles
     .map((f) => path.join(REPO, f))
     .filter(existsSync);

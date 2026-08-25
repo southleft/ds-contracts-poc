@@ -128,10 +128,22 @@ async function main(): Promise<void> {
   console.log(`  preflight: every precondition present.`);
 
   const t0 = Date.now();
-  const { manifest, attempts } =
-    def.direction === "code-to-canvas"
-      ? await runCodeToCanvas(def, { mint, work })
-      : await runCanvasToCode(def, { work });
+  let manifest, attempts;
+  try {
+    ({ manifest, attempts } =
+      def.direction === "code-to-canvas"
+        ? await runCodeToCanvas(def, { mint, work })
+        : await runCanvasToCode(def, { work }));
+  } catch (e) {
+    // A runner that REFUSES before it writes (an empty selection that would
+    // overwrite the MANIFEST with zero sets, a forbidden file key) reaches
+    // here. It measured nothing and it destroyed nothing — say both, and
+    // never exit 0.
+    console.error("");
+    console.error(`  ✖ THE RUN REFUSED: ${String((e as Error).message ?? e)}`);
+    process.exitCode = 1;
+    return;
+  }
   const ms = Date.now() - t0;
 
   const complete = attempts.filter((a: SetAttempt) => a.chainComplete).length;
