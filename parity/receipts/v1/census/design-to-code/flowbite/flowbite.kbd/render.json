@@ -1,0 +1,17 @@
+{
+  "kit": "flowbite",
+  "id": "flowbite.kbd",
+  "setName": "Kbd",
+  "renderer": "code: generated React (design-to-code pipeline bytes) → esbuild bundle → playwright-core screenshot at deviceScaleFactor 2; canvas: GET /v1/images/:key?scale=2 (Figma's own renderer, read-only)",
+  "cells": [
+    {
+      "slug": "kbd",
+      "figmaVariant": "Kbd",
+      "nodeId": "120:1982",
+      "props": {
+        "children": "Ctrl"
+      }
+    }
+  ],
+  "notSampled": []
+}

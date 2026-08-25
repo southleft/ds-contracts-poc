@@ -1,0 +1,179 @@
+{
+  "id": "antd.card",
+  "name": "Card",
+  "library": "antd",
+  "contractPath": "examples/antd/contracts/card.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/antd/figma/antd.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 4,
+      "sampled": 3,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "size",
+        "type": "enum",
+        "default": "default"
+      },
+      {
+        "name": "variant",
+        "type": "enum",
+        "default": "outlined"
+      },
+      {
+        "name": "title",
+        "type": "text",
+        "default": "Card title"
+      },
+      {
+        "name": "children",
+        "type": "text",
+        "default": "Card body copy for the exam."
+      }
+    ],
+    "states": [],
+    "parts": [
+      "root",
+      "card-head",
+      "card-head-wrapper",
+      "label",
+      "label-2"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "title"
+      },
+      {
+        "part": "label-2",
+        "prop": "children"
+      }
+    ],
+    "tokenRefs": [
+      "imported.card.card-head-wrapper.font-size.default",
+      "imported.card.card-head-wrapper.font-size.small",
+      "imported.card.card-head.border-bottom-color",
+      "imported.card.card-head.border-bottom-width",
+      "imported.card.card-head.font-size.default",
+      "imported.card.card-head.font-size.small",
+      "imported.card.card-head.margin-bottom",
+      "imported.card.card-head.min-height.default",
+      "imported.card.card-head.min-height.small",
+      "imported.card.card-head.padding-left.default",
+      "imported.card.card-head.padding-left.small",
+      "imported.card.card-head.padding-right.default",
+      "imported.card.card-head.padding-right.small",
+      "imported.card.label-2.font-size",
+      "imported.card.label-2.font-weight",
+      "imported.card.label-2.line-height",
+      "imported.card.label-2.padding-bottom.default",
+      "imported.card.label-2.padding-bottom.small",
+      "imported.card.label-2.padding-left.default",
+      "imported.card.label-2.padding-left.small",
+      "imported.card.label-2.padding-right.default",
+      "imported.card.label-2.padding-right.small",
+      "imported.card.label-2.padding-top.default",
+      "imported.card.label-2.padding-top.small",
+      "imported.card.label.flex-grow",
+      "imported.card.label.font-size.default",
+      "imported.card.label.font-size.small",
+      "imported.card.root.background-color",
+      "imported.card.root.border-bottom-color.borderless",
+      "imported.card.root.border-bottom-color.outlined",
+      "imported.card.root.border-bottom-width.borderless",
+      "imported.card.root.border-bottom-width.outlined",
+      "imported.card.root.border-left-color.borderless",
+      "imported.card.root.border-left-color.outlined",
+      "imported.card.root.border-left-width.borderless",
+      "imported.card.root.border-left-width.outlined",
+      "imported.card.root.border-right-color.borderless",
+      "imported.card.root.border-right-color.outlined",
+      "imported.card.root.border-right-width.borderless",
+      "imported.card.root.border-right-width.outlined",
+      "imported.card.root.border-top-color.borderless",
+      "imported.card.root.border-top-color.outlined",
+      "imported.card.root.border-top-width.borderless",
+      "imported.card.root.border-top-width.outlined",
+      "imported.card.root.box-shadow.borderless",
+      "imported.card.root.box-shadow.outlined",
+      "imported.card.root.font-size",
+      "imported.card.root.line-height",
+      "imported.card.root.width",
+      "imported.shared.color-000000e0",
+      "imported.shared.num-600",
+      "imported.shared.size-0",
+      "imported.shared.size-8"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "size-default__variant-outlined",
+      "variant": "Size=Default, Variant=Outlined",
+      "kind": "base",
+      "subst": {
+        "size": "default",
+        "variant": "outlined"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-default__variant-outlined.png",
+      "contentBox": {
+        "width": 288,
+        "height": 125
+      }
+    },
+    {
+      "slug": "size-default__variant-borderless",
+      "variant": "Size=Default, Variant=Borderless",
+      "kind": "base",
+      "subst": {
+        "size": "default",
+        "variant": "borderless"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-default__variant-borderless.png",
+      "contentBox": {
+        "width": 288,
+        "height": 125
+      }
+    },
+    {
+      "slug": "size-small__variant-outlined",
+      "variant": "Size=Small, Variant=Outlined",
+      "kind": "base",
+      "subst": {
+        "size": "small",
+        "variant": "outlined"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-size-small__variant-outlined.png",
+      "contentBox": {
+        "width": 288,
+        "height": 83
+      }
+    }
+  ],
+  "rendered": 3,
+  "refused": 0,
+  "unavailable": null
+}

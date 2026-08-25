@@ -1,0 +1,18 @@
+{
+  "id": "antd-focus-outline-ring-ua-width",
+  "feature": "interaction-states",
+  "construct": "button.root { outline-style: none } :focus-visible { outline: 3px solid rgb(145, 202, 255); outline-offset: 1px } \u2014 the ring's declared width EQUALS Chromium's own `outline-width: medium` (3px) at rest, so the width never differs between planes (antd Button/Switch: --ant-line-width-focus is 3px)",
+  "why": "Found on the real antd Button after the first S1 fixture passed: the rest plane computes outline-width 3px (Chromium's medium; style none, nothing painted) and the focus plane declares 3px, so the delta is style+color+offset and the width is 'not a fact' \u2014 carried nowhere. The canvas draws an outside stroke only from the outline-color + outline-width PAIR, so the focus ring vanished with both halves it did carry receipted. The width on a plane whose outline-style or outline-color changed IS the ring's width and must ride the state, UA-default or not (P2 exam S1, third half).",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.states.focus-visible.tokens.outline-width",
+  "observable": {
+    "part": "root",
+    "channel": "outline-width",
+    "capturedValue": "3px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the focus-visible state preview draws the 3px OUTSIDE-aligned stroke from the carried pair"
+  }
+}

@@ -661,7 +661,8 @@ denominator. Here it is.
 | Astryx (`@astryxdesign/core@0.1.6`) | 13 | **10** | 222 | **5.9%** (4.5% computed-captured) | **this repo's own extractor** over the whole library — `examples/astryx/extraction/CENSUS.md` (222 extracted, 15 named-skipped) |
 | shadcn/ui (`@shadcn-sandbox/ui@0.0.1`) | 11 | 11 | 50 | **22.0%** | **this repo's own extractor** over the VENDORED slice — `examples/shadcn/RECON.md` §3 (10 extracted, 40 seen-but-not-extractable, all named). The slice is 12 registry items of a ~50+ item live registry (RECON §7), so this row's denominator is the vendored exports, not the registry — the registry itself has no offline-measurable index |
 | Fluent 2 (`@fluentui/react-components`) | 11 | 11 | *unmeasured* | *unmeasured* | **NO DENOMINATOR IS RECORDED HERE, deliberately.** Fluent 2 publishes api-extractor `.d.ts` rollups only — 0 `.tsx` and 0 non-`.d.ts` `.ts` across 65 packages — so the component-directory count every other row uses does not exist for it, and `examples/fluent/PROVENANCE.md`'s "12 components" is the PROBED set, not the library. A coverage fraction would need a denominator nobody has measured |
-| **total** | **104** | **101** | **943 (7 libraries)** | **10.7%** | the size total covers the SEVEN libraries with a measured denominator; Fluent's 11 contracts and 11 pinned components are counted in the first two columns. The coverage fraction is 101/943 = 10.7% — the same headline [docs/24](24-what-works.md) prints. Fluent has no measured library size, so it cannot grow the denominator; leaving it out of the numerator as well would be a different claim |
+| Ant Design (`antd@5.29.3`) | 12 | 12 | 72 | **16.7%** | component directories under the pinned sandbox's `antd/lib/` (78 entries minus `_util`, `style`, `locale`, `theme`, `version`, `config-provider` — measured 2026-08-23). The twelve are the P2 code→canvas EXAM slice (`parity/receipts/phase-2/ANTD-EXAM.md`), chosen to stress the engine's named walls, not for tractability |
+| **total** | **116** | **113** | **1015 (8 libraries)** | **11.1%** | the size total covers the EIGHT libraries with a measured denominator; Fluent's 11 contracts and 11 pinned components are counted in the first two columns. The coverage fraction is 113/1015 = 11.1% — the same headline [docs/24](24-what-works.md) prints. Fluent has no measured library size, so it cannot grow the denominator; leaving it out of the numerator as well would be a different claim |
 
 **How to read it — both halves are true, and the second is the one usually
 left out:**
@@ -682,7 +683,7 @@ left out:**
   Chip, Card, Checkbox, Tag, Avatar, Divider. The hardest thing in the corpus is
   MUI's `Table`, and the hardest classes (data grid, tree, virtualized list,
   date picker, rich text, charts) are captured **nowhere**. Read every floor
-  percentage as "on the easy 10.7%".
+  percentage as "on the easy 11.1%".
 - **The denominators do not lean against us. They are INCOHERENT** — which is
   a different thing, and this document said the wrong one until 2026-08-03.
   MUI's 135 counts every capitalised directory including utilities (`NoSsr`,

@@ -108,7 +108,7 @@
       "mintedLeavesUnfolded": 552,
       "baseBindings": 27,
       "stateBindings": 20,
-      "codeOnlyChannels": 6,
+      "codeOnlyChannels": 2,
       "overflowBindings": 10,
       "folds": 8
     },
@@ -243,10 +243,6 @@
       "overflow: root.border-left-color [hover] — state pair ref — root states carry ≤1 placeholder (S3 residue)",
       "overflow: root.border-right-color [hover] — state pair ref — root states carry ≤1 placeholder (S3 residue)",
       "overflow: root.border-top-color [hover] — state pair ref — root states carry ≤1 placeholder (S3 residue)",
-      "code-only: root.border-bottom-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: root.border-left-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: root.border-right-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: root.border-top-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: root.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],

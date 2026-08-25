@@ -1,0 +1,238 @@
+{
+  "kit": "flowbite",
+  "id": "flowbite.helpertext",
+  "setName": "HelperText",
+  "nodeId": "120:2014",
+  "mode": "exact",
+  "variantCount": 5,
+  "contractSha256": "9ef4a81a548bfbb94427259202d76673b67673a84e9cc5758158589aef80022d",
+  "carriage": {
+    "carried": 55,
+    "named": 23,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "set description (designer's words)": [
+      0,
+      1,
+      0
+    ],
+    "stamp ds_contracts/version": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/semantics": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/propNames": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/specHash": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/contractId": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/canvasSetSnapshot": [
+      0,
+      1,
+      0
+    ],
+    "stamp ds_contracts/canvasFingerprint": [
+      0,
+      1,
+      0
+    ],
+    "TEXT property": [
+      1,
+      0,
+      0
+    ],
+    "variant axis": [
+      1,
+      0,
+      0
+    ],
+    "declared axis default": [
+      1,
+      0,
+      0
+    ],
+    "boundVariables.size": [
+      0,
+      5,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      5,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      5,
+      0,
+      0
+    ],
+    "root layoutSizingVertical": [
+      5,
+      0,
+      0
+    ],
+    "boundVariables.fills": [
+      0,
+      5,
+      0
+    ],
+    "boundVariables.fontSize": [
+      0,
+      5,
+      0
+    ],
+    "fills[0] SOLID": [
+      0,
+      5,
+      0
+    ],
+    "text.characters": [
+      5,
+      0,
+      0
+    ],
+    "text font size/weight": [
+      5,
+      0,
+      0
+    ],
+    "text fontFamily": [
+      5,
+      0,
+      0
+    ],
+    "text lineHeight": [
+      5,
+      0,
+      0
+    ],
+    "stamp ds_contracts/fontWeightVar": [
+      5,
+      0,
+      0
+    ],
+    "stamp ds_contracts/lineHeightVar": [
+      5,
+      0,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "9fda06f5ff7b04b37f7c325edc3d12c2ffdeb39c",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "120:2014",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "set description (designer's words)",
+      "value": "HelperText — generated from contract flowbite.helpertext v0.2.0 †",
+      "disposition": "NAMED",
+      "landing": "description: the set's Figma description is this pipeline's own emit caption (\"HelperTe…"
+    },
+    {
+      "fact": "stamp ds_contracts/version",
+      "value": "0.2.0",
+      "disposition": "CARRIED",
+      "landing": "contract.version"
+    },
+    {
+      "fact": "stamp ds_contracts/semantics",
+      "value": "{\"element\":\"div\"}",
+      "disposition": "CARRIED",
+      "landing": "contract.semantics (stamp outranks inference)"
+    },
+    {
+      "fact": "stamp ds_contracts/propNames",
+      "value": "{\"Color\":\"color\",\"Content\":\"children\"}",
+      "disposition": "CARRIED",
+      "landing": "prop names (design spelling → contract prop names)"
+    },
+    {
+      "fact": "stamp ds_contracts/specHash",
+      "value": "3497075252",
+      "disposition": "CARRIED",
+      "landing": "dump.specHash — exact-mode evidence (proves the set matches the emit)"
+    },
+    {
+      "fact": "stamp ds_contracts/contractId",
+      "value": "flowbite.helpertext",
+      "disposition": "CARRIED",
+      "landing": "contract.id (dump v1.32 stamp read-back)"
+    },
+    {
+      "fact": "stamp ds_contracts/canvasSetSnapshot",
+      "value": "230 chars",
+      "disposition": "NAMED",
+      "landing": "sync-domain fingerprint stamp — read by sync/observe.ts (drift arithmetic), deliberately not a contract fact"
+    },
+    {
+      "fact": "stamp ds_contracts/canvasFingerprint",
+      "value": "13 chars",
+      "disposition": "NAMED",
+      "landing": "sync-domain fingerprint stamp — read by sync/observe.ts (drift arithmetic), deliberately not a contract fact"
+    },
+    {
+      "fact": "TEXT property",
+      "value": "default=Helper text",
+      "disposition": "CARRIED",
+      "landing": "props.children (text, default \"Helper text\") → React prop / children + story args"
+    },
+    {
+      "fact": "variant axis",
+      "value": "Gray|Info|Failure|Success|Warning",
+      "disposition": "CARRIED",
+      "landing": "props.color (enum[5]) → React prop `color` + story argTypes + CSS .color-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "Gray",
+      "disposition": "CARRIED",
+      "landing": "props.color.default = \"gray\" → React default arg + story args"
+    }
+  ],
+  "generatedFiles": {
+    "react/HelperText/HelperText.module.css": "547c9fd84837c67a853b9f14582c078fe615581e89b9a5a7308f164e7af24f8e",
+    "react/HelperText/HelperText.stories.tsx": "6a7156345b63d6f913635e3e02f46a717e369d98f6b3b9831d274eea42f56269",
+    "react/HelperText/HelperText.tsx": "15e14662a1fb90c27dff0cc20870b3b873b240032667992d916680d97cd74a17",
+    "react/HelperText/index.ts": "c949cf590de9e714e934e0642092371897431d25cffa13392e21d50939602162",
+    "wc/flowbite-helpertext.ts": "9885beb3819b73deb247704ed490b14fffa98459bf9e276ca2649389e39c1acd",
+    "wc/flowbite-helpertext.css.ts": "7b5c484dada03cde62fe79dadb267f386a0621d0814d25abec301308e1a749f9",
+    "wc/flowbite-helpertext.demo.html": "ccb7099cdd13940485cb37c81e86e9129ffb23dd25cd43e3de7a83ef6d7bf949",
+    "wc/flowbite-helpertext.custom-elements.json": "9032cef6eaa83a11c21cbd08ce8d34f6c2c3e5e3f01fe12857101ef33b9650bf"
+  },
+  "notesCount": 28
+}

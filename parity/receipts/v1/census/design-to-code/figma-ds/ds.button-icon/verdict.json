@@ -1,0 +1,7 @@
+{
+  "recognisable": false,
+  "walls": [
+    "VECTOR-GLYPH-NAMED"
+  ],
+  "notes": "The set's entire content is one vector glyph (×); VECTOR path geometry is a named non-capture on this route, so the code side renders an empty box. Named, not silent."
+}

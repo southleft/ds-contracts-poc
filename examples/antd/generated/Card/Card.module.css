@@ -1,0 +1,196 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/card.contract.json (antd.card v0.2.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background-color: var(--imported-card-root-background-color);
+  border-bottom-left-radius: var(--imported-shared-size-8);
+  border-bottom-right-radius: var(--imported-shared-size-8);
+  border-top-left-radius: var(--imported-shared-size-8);
+  border-top-right-radius: var(--imported-shared-size-8);
+  bottom: var(--imported-shared-size-0);
+  color: var(--imported-shared-color-000000e0);
+  font-size: var(--imported-card-root-font-size);
+  left: var(--imported-shared-size-0);
+  line-height: var(--imported-card-root-line-height);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  width: var(--imported-card-root-width);
+  display: block;
+  box-sizing: border-box;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  position: relative;
+}
+
+.variant-borderless {
+  border-bottom-color: var(--imported-card-root-border-bottom-color-borderless);
+  border-bottom-width: var(--imported-card-root-border-bottom-width-borderless);
+  border-left-color: var(--imported-card-root-border-left-color-borderless);
+  border-left-width: var(--imported-card-root-border-left-width-borderless);
+  border-right-color: var(--imported-card-root-border-right-color-borderless);
+  border-right-width: var(--imported-card-root-border-right-width-borderless);
+  border-top-color: var(--imported-card-root-border-top-color-borderless);
+  border-top-width: var(--imported-card-root-border-top-width-borderless);
+  box-shadow: var(--imported-card-root-box-shadow-borderless);
+}
+
+.variant-outlined {
+  border-bottom-color: var(--imported-card-root-border-bottom-color-outlined);
+  border-bottom-width: var(--imported-card-root-border-bottom-width-outlined);
+  border-left-color: var(--imported-card-root-border-left-color-outlined);
+  border-left-width: var(--imported-card-root-border-left-width-outlined);
+  border-right-color: var(--imported-card-root-border-right-color-outlined);
+  border-right-width: var(--imported-card-root-border-right-width-outlined);
+  border-top-color: var(--imported-card-root-border-top-color-outlined);
+  border-top-width: var(--imported-card-root-border-top-width-outlined);
+  box-shadow: var(--imported-card-root-box-shadow-outlined);
+}
+
+.card-head {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom-color: var(--imported-card-card-head-border-bottom-color);
+  border-bottom-width: var(--imported-card-card-head-border-bottom-width);
+  border-top-left-radius: var(--imported-shared-size-8);
+  border-top-right-radius: var(--imported-shared-size-8);
+  color: var(--imported-shared-color-000000e0);
+  font-weight: var(--imported-shared-num-600);
+  margin-bottom: var(--imported-card-card-head-margin-bottom);
+  min-width: var(--imported-shared-size-0);
+  border-bottom-style: solid;
+  box-sizing: border-box;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+.size-default .card-head {
+  font-size: var(--imported-card-card-head-font-size-default);
+}
+
+.size-default .card-head {
+  min-height: var(--imported-card-card-head-min-height-default);
+}
+
+.size-default .card-head {
+  padding-left: var(--imported-card-card-head-padding-left-default);
+}
+
+.size-default .card-head {
+  padding-right: var(--imported-card-card-head-padding-right-default);
+}
+
+.size-small .card-head {
+  font-size: var(--imported-card-card-head-font-size-small);
+}
+
+.size-small .card-head {
+  min-height: var(--imported-card-card-head-min-height-small);
+}
+
+.size-small .card-head {
+  padding-left: var(--imported-card-card-head-padding-left-small);
+}
+
+.size-small .card-head {
+  padding-right: var(--imported-card-card-head-padding-right-small);
+}
+
+.card-head-wrapper {
+  display: flex;
+  align-items: center;
+  color: var(--imported-shared-color-000000e0);
+  font-weight: var(--imported-shared-num-600);
+  box-sizing: border-box;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+.size-default .card-head-wrapper {
+  font-size: var(--imported-card-card-head-wrapper-font-size-default);
+}
+
+.size-small .card-head-wrapper {
+  font-size: var(--imported-card-card-head-wrapper-font-size-small);
+}
+
+.label {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--imported-shared-color-000000e0);
+  flex-grow: var(--imported-card-label-flex-grow);
+  font-weight: var(--imported-shared-num-600);
+  display: block;
+  box-sizing: border-box;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+  text-wrap-mode: nowrap;
+}
+
+.size-default .label {
+  font-size: var(--imported-card-label-font-size-default);
+}
+
+.size-small .label {
+  font-size: var(--imported-card-label-font-size-small);
+}
+
+.label-2 {
+  border-bottom-left-radius: var(--imported-shared-size-8);
+  border-bottom-right-radius: var(--imported-shared-size-8);
+  color: var(--imported-shared-color-000000e0);
+  font-size: var(--imported-card-label-2-font-size);
+  font-weight: var(--imported-card-label-2-font-weight);
+  line-height: var(--imported-card-label-2-line-height);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  display: block;
+  box-sizing: border-box;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+.size-default .label-2 {
+  padding-bottom: var(--imported-card-label-2-padding-bottom-default);
+}
+
+.size-default .label-2 {
+  padding-left: var(--imported-card-label-2-padding-left-default);
+}
+
+.size-default .label-2 {
+  padding-right: var(--imported-card-label-2-padding-right-default);
+}
+
+.size-default .label-2 {
+  padding-top: var(--imported-card-label-2-padding-top-default);
+}
+
+.size-small .label-2 {
+  padding-bottom: var(--imported-card-label-2-padding-bottom-small);
+}
+
+.size-small .label-2 {
+  padding-left: var(--imported-card-label-2-padding-left-small);
+}
+
+.size-small .label-2 {
+  padding-right: var(--imported-card-label-2-padding-right-small);
+}
+
+.size-small .label-2 {
+  padding-top: var(--imported-card-label-2-padding-top-small);
+}

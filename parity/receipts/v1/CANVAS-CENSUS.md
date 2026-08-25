@@ -10,12 +10,13 @@ Owner, 2026-08-23: *"generate canvas Figma designs from contracts; the contract 
 
 ## The denominator
 
-`parity/receipts/v1/census-manifest.json` — 158 sets across 9 libraries. Rule: first-party: contracts/*.contract.json with a generated figma-sync/NN-<name>.js; examples/<lib>/contracts/*.contract.json for every <lib> carrying examples/<lib>/figma/*.figma.js or <lib>.bundle.json. Everything else is listed under `excluded` with its reason. The gate regenerates the manifest on every run and refuses when the committed file disagrees, so a contract cannot leave the census silently.
+`parity/receipts/v1/census-manifest.json` — 170 sets across 10 libraries. Rule: first-party: contracts/*.contract.json with a generated figma-sync/NN-<name>.js; examples/<lib>/contracts/*.contract.json for every <lib> carrying examples/<lib>/figma/*.figma.js or <lib>.bundle.json. Everything else is listed under `excluded` with its reason. The gate regenerates the manifest on every run and refuses when the committed file disagrees, so a contract cannot leave the census silently.
 
 | library | contracts dir | figma scripts | bundle | sets |
 |---|---|---|---|---|
 | first-party | contracts | figma-sync | — (built on demand: core/first-party-bundle-check.ts) | 54 |
 | altitude | examples/altitude/contracts | examples/altitude/figma | examples/altitude/figma/altitude.bundle.json | 8 |
+| antd | examples/antd/contracts | examples/antd/figma | examples/antd/figma/antd.bundle.json | 12 |
 | astryx | examples/astryx/contracts | examples/astryx/figma | examples/astryx/figma/astryx.bundle.json | 13 |
 | carbon | examples/carbon/contracts | examples/carbon/figma | examples/carbon/figma/carbon.bundle.json | 10 |
 | fluent | examples/fluent/contracts | examples/fluent/figma | examples/fluent/figma/fluent.bundle.json | 11 |
@@ -50,6 +51,7 @@ Scratch file `byMp6lt0Ij9b2QbkDGFwBh` (the only writable file). Page per library
 |---|---|---|---|---|---|---|---|
 | first-party | 54 | 54 | 0 | 0 | 0 | 0 | 54 |
 | altitude | 8 | 8 | 0 | 0 | 0 | 0 | 8 |
+| antd | 12 | 12 | 0 | 0 | 0 | 0 | 12 |
 | astryx | 13 | 13 | 0 | 0 | 0 | 0 | 13 |
 | carbon | 10 | 10 | 0 | 0 | 0 | 0 | 10 |
 | fluent | 11 | 11 | 0 | 0 | 0 | 0 | 11 |
@@ -57,7 +59,7 @@ Scratch file `byMp6lt0Ij9b2QbkDGFwBh` (the only writable file). Page per library
 | polaris | 12 | 12 | 0 | 0 | 0 | 0 | 12 |
 | shadcn | 11 | 11 | 0 | 0 | 0 | 0 | 11 |
 | tailwind | 8 | 8 | 0 | 0 | 0 | 0 | 8 |
-| **all** | 158 | 158 | 0 | 0 | 0 | 0 | 158 |
+| **all** | 170 | 170 | 0 | 0 | 0 | 0 | 170 |
 
 Gate: **GREEN** at phase `code`.
 
@@ -127,6 +129,18 @@ Gate: **GREEN** at phase `code`.
 | altitude | `altitude.heading` | unmapped | 2 × 12; 12 | 7/7 of 12 | rendered | PENDING | PENDING | — |
 | altitude | `altitude.iconclose` | unmapped | 1 × 7; 7 | 7/7 of 7 | rendered | PENDING | PENDING | — |
 | altitude | `altitude.link` | unmapped | 1 × 3 + 6 state; 9 | 5/5 of 9 | rendered | PENDING | PENDING | — |
+| antd | `antd.alert` | banner / alert / toast | 2 × 8; 8 | 5/5 of 8 | rendered | PENDING | PENDING | — |
+| antd | `antd.avatar` | avatar | 2 × 6; 6 | 4/4 of 6 | rendered | PENDING | PENDING | — |
+| antd | `antd.badge` | badge / tag / chip | 2 × 6; 6 | 4/4 of 6 | rendered | PENDING | PENDING | — |
+| antd | `antd.button` | button | 3 × 30; 30 | 8/8 of 30 | rendered | PENDING | PENDING | — |
+| antd | `antd.card` | card | 2 × 4; 4 | 3/3 of 4 | rendered | PENDING | PENDING | — |
+| antd | `antd.checkbox` | checkbox / radio | 1 × 3; 3 | 3/3 of 3 | rendered | PENDING | PENDING | — |
+| antd | `antd.input` | input / field | 3 × 24 + 16 state; 40 | 11/11 of 40 | rendered | PENDING | PENDING | — |
+| antd | `antd.progress` | progress / spinner | 1 × 4; 4 | 4/4 of 4 | rendered | PENDING | PENDING | — |
+| antd | `antd.radio` | checkbox / radio | 1 × 2; 2 | 2/2 of 2 | rendered | PENDING | PENDING | — |
+| antd | `antd.switch` | toggle / switch | 2 × 4 + 8 state; 12 | 7/7 of 12 | rendered | PENDING | PENDING | — |
+| antd | `antd.tag` | badge / tag / chip | 2 × 14; 14 | 8/8 of 14 | rendered | PENDING | PENDING | — |
+| antd | `antd.tooltip` | tooltip / popover | 0 × 1; 1 | 1/1 of 1 | rendered | PENDING | PENDING | — |
 | astryx | `astryx.badge` | badge / tag / chip | 1 × 14; 14 | 14/14 of 14 | rendered | PENDING | PENDING | — |
 | astryx | `astryx.banner` | banner / alert / toast | 2 × 8; 8 | 5/5 of 8 | rendered | PENDING | PENDING | — |
 | astryx | `astryx.button` | button | 2 × 12; 12 | 6/6 of 12 | rendered | PENDING | PENDING | — |

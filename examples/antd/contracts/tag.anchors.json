@@ -1,0 +1,70 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "tag",
+  "anchors": [
+    {
+      "leaf": "imported.tag.root.color.blue",
+      "token": "blue-7",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-blue-7",
+      "selector": ".ant-tag.ant-tag-blue"
+    },
+    {
+      "leaf": "imported.tag.root.color.error",
+      "token": "color-error",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-color-error",
+      "selector": ".ant-tag.ant-tag-error"
+    },
+    {
+      "leaf": "imported.tag.root.color.gold",
+      "token": "gold-7",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-gold-7",
+      "selector": ".ant-tag.ant-tag-gold"
+    },
+    {
+      "leaf": "imported.tag.root.color.green",
+      "token": "green-7",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-green-7",
+      "selector": ".ant-tag.ant-tag-green"
+    },
+    {
+      "leaf": "imported.tag.root.color.processing",
+      "token": "color-info",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-color-info",
+      "selector": ".ant-tag.ant-tag-processing"
+    },
+    {
+      "leaf": "imported.tag.root.color.red",
+      "token": "red-7",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-red-7",
+      "selector": ".ant-tag.ant-tag-red"
+    },
+    {
+      "leaf": "imported.tag.root.color.success",
+      "token": "color-success",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-color-success",
+      "selector": ".ant-tag.ant-tag-success"
+    },
+    {
+      "leaf": "imported.tag.root.font-size",
+      "token": "font-size-sm",
+      "part": "root",
+      "cssProperty": "font-size",
+      "varName": "--ant-font-size-sm",
+      "selector": ".ant-tag"
+    }
+  ]
+}

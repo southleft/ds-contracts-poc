@@ -1,0 +1,2 @@
+[data-cf="antd-part-transition-channel"] { display: flex; }
+[data-cf="antd-part-transition-channel"] .cf-a { display: inline-block; padding: 4px 8px; background: rgb(235, 240, 245); transition: background-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1); }

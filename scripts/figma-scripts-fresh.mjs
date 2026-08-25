@@ -65,6 +65,10 @@ const LIBRARIES = {
   // committed, so it must still be held still. A stopped script that nobody
   // re-derives is exactly the ungated surface this gate exists to refuse.
   fluent: ['--icons', 'examples/fluent/assets/icons', '--tokens', 'examples/fluent/tokens/fluent.dtcg.json,examples/fluent/tokens/fluent-minted.dtcg.json'],
+  // ANTD round (library #11, the P2 exam): the status glyphs (Alert, Progress),
+  // the Button icon/loading glyphs and the Tag close icon promote as real
+  // assets (examples/antd/assets/icons), so the emit command needs --icons.
+  antd: ['--icons', 'examples/antd/assets/icons', '--tokens', 'examples/antd/tokens/antd.dtcg.json,examples/antd/tokens/antd-minted.dtcg.json'],
 };
 
 /** Libraries whose scripts are rebuilt by a DIFFERENT recorded command than

@@ -1,0 +1,221 @@
+{
+  "id": "antd.alert",
+  "name": "Alert",
+  "library": "antd",
+  "contractPath": "examples/antd/contracts/alert.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/antd/figma/antd.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 8,
+      "sampled": 5,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [
+      {
+        "name": "type",
+        "type": "enum",
+        "default": "info"
+      },
+      {
+        "name": "showIcon",
+        "type": "enum",
+        "default": "noIcon"
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "default": "Alert message"
+      },
+      {
+        "name": "description",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "closable",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+    "states": [
+      "hover"
+    ],
+    "parts": [
+      "root",
+      "alert-icon",
+      "alert-icon-success",
+      "alert-icon-info",
+      "alert-icon-warning",
+      "alert-icon-error",
+      "alert-content",
+      "label",
+      "label-2",
+      "alert-close-icon",
+      "anticon"
+    ],
+    "contentSlots": [
+      {
+        "part": "label",
+        "prop": "message"
+      }
+    ],
+    "tokenRefs": [
+      "imported.alert.alert-close-icon.background-color",
+      "imported.alert.alert-content.flex-grow",
+      "imported.alert.alert-icon.color.error",
+      "imported.alert.alert-icon.color.info",
+      "imported.alert.alert-icon.color.success",
+      "imported.alert.alert-icon.color.warning",
+      "imported.alert.alert-icon.font-size.off",
+      "imported.alert.alert-icon.margin-right.off",
+      "imported.alert.anticon.color",
+      "imported.alert.anticon.vertical-align",
+      "imported.alert.label-2.font-weight",
+      "imported.alert.label.font-size.off",
+      "imported.alert.label.font-weight",
+      "imported.alert.label.margin-bottom.off",
+      "imported.alert.root.background-color.error",
+      "imported.alert.root.background-color.info",
+      "imported.alert.root.background-color.success",
+      "imported.alert.root.background-color.warning",
+      "imported.alert.root.border-bottom-color.error",
+      "imported.alert.root.border-bottom-color.info",
+      "imported.alert.root.border-bottom-color.success",
+      "imported.alert.root.border-bottom-color.warning",
+      "imported.alert.root.border-left-color.error",
+      "imported.alert.root.border-left-color.info",
+      "imported.alert.root.border-left-color.success",
+      "imported.alert.root.border-left-color.warning",
+      "imported.alert.root.border-right-color.error",
+      "imported.alert.root.border-right-color.info",
+      "imported.alert.root.border-right-color.success",
+      "imported.alert.root.border-right-color.warning",
+      "imported.alert.root.border-top-color.error",
+      "imported.alert.root.border-top-color.info",
+      "imported.alert.root.border-top-color.success",
+      "imported.alert.root.border-top-color.warning",
+      "imported.alert.root.padding-bottom.off",
+      "imported.alert.root.padding-left.off",
+      "imported.alert.root.padding-right.off",
+      "imported.alert.root.padding-top.off",
+      "imported.alert.root.width",
+      "imported.shared.color-000000e0",
+      "imported.shared.size-0",
+      "imported.shared.size-1",
+      "imported.shared.size-12",
+      "imported.shared.size-14",
+      "imported.shared.size-22",
+      "imported.shared.size-8"
+    ],
+    "icons": [
+      "alert-alert-icon-error",
+      "alert-alert-icon-info",
+      "alert-alert-icon-success",
+      "alert-alert-icon-warning",
+      "alert-anticon"
+    ],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "type-info__show-icon-noicon",
+      "variant": "Type=Info, Show Icon=NoIcon",
+      "kind": "base",
+      "subst": {
+        "type": "info",
+        "showIcon": "noIcon"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-info__show-icon-noicon.png",
+      "contentBox": {
+        "width": 288,
+        "height": 40
+      }
+    },
+    {
+      "slug": "type-info__show-icon-icon",
+      "variant": "Type=Info, Show Icon=Icon",
+      "kind": "base",
+      "subst": {
+        "type": "info",
+        "showIcon": "icon"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-info__show-icon-icon.png",
+      "contentBox": {
+        "width": 288,
+        "height": 40
+      }
+    },
+    {
+      "slug": "type-success__show-icon-noicon",
+      "variant": "Type=Success, Show Icon=NoIcon",
+      "kind": "base",
+      "subst": {
+        "type": "success",
+        "showIcon": "noIcon"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-success__show-icon-noicon.png",
+      "contentBox": {
+        "width": 288,
+        "height": 40
+      }
+    },
+    {
+      "slug": "type-warning__show-icon-noicon",
+      "variant": "Type=Warning, Show Icon=NoIcon",
+      "kind": "base",
+      "subst": {
+        "type": "warning",
+        "showIcon": "noIcon"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-warning__show-icon-noicon.png",
+      "contentBox": {
+        "width": 288,
+        "height": 40
+      }
+    },
+    {
+      "slug": "type-error__show-icon-noicon",
+      "variant": "Type=Error, Show Icon=NoIcon",
+      "kind": "base",
+      "subst": {
+        "type": "error",
+        "showIcon": "noIcon"
+      },
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-type-error__show-icon-noicon.png",
+      "contentBox": {
+        "width": 288,
+        "height": 40
+      }
+    }
+  ],
+  "rendered": 5,
+  "refused": 0,
+  "unavailable": null
+}

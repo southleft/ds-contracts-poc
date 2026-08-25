@@ -34,20 +34,20 @@
     {
       "id": "css-dom",
       "path": "conformance/MANIFEST.json",
-      "count": 82,
+      "count": 91,
       "expectations": {
-        "CARRIED": 42,
+        "CARRIED": 50,
         "LOWERED": 4,
-        "REFUSED": 18,
+        "REFUSED": 19,
         "UNSUPPORTED": 18
       }
     },
     {
       "id": "canvas",
       "path": "extract/figma/conformance/MANIFEST.json",
-      "count": 154,
+      "count": 157,
       "expectations": {
-        "CARRIED": 107,
+        "CARRIED": 110,
         "LEDGERED": 38,
         "REFUSED": 9
       }
@@ -278,7 +278,7 @@
   },
   "fidelity": {
     "source": "examples/untitled-ui/renders/fidelity.json",
-    "metric": "per-set mean of v2.1 canvas→code fidelity scores over scored variants",
+    "metric": "per-set mean of v2.1 canvas\u2192code fidelity scores over scored variants",
     "tolerance": 0.3,
     "policy": "decrease-only floors: each set's current mean must stay at or above its baseline meanScore minus tolerance, and its scored-variant count must not shrink; floors are re-seeded only upward, by committing a higher meanScore after a real fidelity gain"
   },

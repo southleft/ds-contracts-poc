@@ -234,6 +234,10 @@ export interface RestNode {
   name: string;
   type: string;
   visible?: boolean;
+  /** Present when the request carried `plugin_data=shared` (dump v1.32) —
+   *  namespace → key → string value. The ds_contracts namespace holds the
+   *  emit-time stamps dump.plugin.js has read since v1.22–v1.29. */
+  sharedPluginData?: Record<string, Record<string, string>>;
   /** NODE opacity 0–1 (omitted at 1) — dump v1.2 `opacity`. */
   opacity?: number;
   children?: RestNode[];
@@ -335,8 +339,20 @@ export interface RestNodesResponse {
     string,
     {
       document: RestNode;
-      components?: Record<string, { name: string; componentSetId?: string; key?: string }>;
-      componentSets?: Record<string, { name: string; key?: string }>;
+      components?: Record<
+        string,
+        {
+          name: string;
+          componentSetId?: string;
+          key?: string;
+          description?: string;
+          documentationLinks?: Array<{ uri?: string }>;
+        }
+      >;
+      componentSets?: Record<
+        string,
+        { name: string; key?: string; description?: string; documentationLinks?: Array<{ uri?: string }> }
+      >;
       styles?: Record<string, { name: string; key?: string; styleType?: string }>;
     } | null
   >;
@@ -412,6 +428,7 @@ export type MapDegradationCode =
   | 'variable-unresolved'
   | 'text-style-unresolved'
   | 'instance-main-unresolved'
+  | 'variant-tuple-unverified'
   // 'paint-alpha-dropped' retired in dump v1.1: solid-paint opacity is
   // CAPTURED ({ hex, alpha }) instead of degraded away.
   | 'paint-unsupported'
@@ -1020,6 +1037,14 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
     fontSize: s.fontSize ?? 0,
     fontStyle,
   };
+  // dump v1.32 (REST parity with dump.plugin.js v1.22/v1.23): the weight and
+  // line-height TOKEN names the emitter stamped — Figma has no bindable
+  // font-weight field and lineHeight takes a value, not a variable, so the
+  // stamp is the only carrier of the token identity on this route too.
+  const weightVar = node.sharedPluginData?.ds_contracts?.fontWeightVar;
+  if (typeof weightVar === 'string' && weightVar !== '') text.fontWeightVar = weightVar;
+  const lhVar = node.sharedPluginData?.ds_contracts?.lineHeightVar;
+  if (typeof lhVar === 'string' && lhVar !== '') text.lineHeightVar = lhVar;
   // dump v1.3: PIXEL line heights are CAPTURED (text.lineHeight); other
   // explicit units stay receipts below.
   if (s.lineHeightUnit === 'PIXELS' && typeof s.lineHeightPx === 'number') {
@@ -1702,7 +1727,12 @@ function mapNode(
  *  canvas. Bump it whenever the projection changes (2026-08-23 finding: the
  *  1.5 → 1.31 move re-fingerprinted 87 baselines and six scheduled spine runs
  *  reported them as designer edits). */
-export const REST_DUMP_VERSION = '1.31';
+export const REST_DUMP_VERSION = '1.32';
+// 1.32 (design→code census): set-level `description` + `documentationLinks`
+// (response components/componentSets metadata) and — with `plugin_data=shared`
+// now riding every fetch — the ds_contracts emit stamps (contractId/specHash/
+// version/propNames/semantics/statePreviewAxis; per-TEXT fontWeightVar/
+// lineHeightVar), the same fields dump.plugin.js has carried since v1.22–1.29.
 
 const REST_CAPTURE_GAPS: readonly string[] = [
   'absolute placement on non-shape nodes (dump v1.7): not captured on this route — an out-of-flow FRAME/TEXT (e.g. a corner-pinned badge) re-enters the flow and renders in-line',
@@ -1840,6 +1870,37 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     const key =
       (entry.componentSets?.[doc.id] as { key?: string } | undefined)?.key ??
       (entry.components?.[doc.id] as { key?: string } | undefined)?.key;
+    // dump v1.32: the set's own description + documentation links — response
+    // metadata (never on the node document), the designer's words.
+    const setMeta = entry.componentSets?.[doc.id] ?? entry.components?.[doc.id];
+    const setDescription =
+      typeof setMeta?.description === 'string' && setMeta.description.trim() !== ''
+        ? setMeta.description
+        : undefined;
+    const setDocumentationLinks = (setMeta?.documentationLinks ?? [])
+      .filter((l): l is { uri: string } => typeof l?.uri === 'string' && l.uri !== '')
+      .map((l) => ({ uri: l.uri }));
+    // dump v1.32: the ds_contracts emit stamps (plugin_data=shared) — read
+    // exactly the way dump.plugin.js reads them, so both producers agree.
+    const stampString = (k: string): string | undefined => {
+      const raw = doc.sharedPluginData?.ds_contracts?.[k];
+      return typeof raw === 'string' && raw !== '' ? raw : undefined;
+    };
+    const stampJson = <T,>(k: string): T | undefined => {
+      const raw = stampString(k);
+      if (!raw) return undefined;
+      try {
+        return JSON.parse(raw) as T;
+      } catch {
+        return undefined;
+      }
+    };
+    const stampedContractId = stampString('contractId');
+    const stampedSpecHash = stampString('specHash');
+    const stampedVersion = stampString('version');
+    const stampedPropNames = stampJson<Record<string, string>>('propNames');
+    const stampedSemantics = stampJson<{ element?: string; role?: string }>('semantics');
+    const stampedStatePreviewAxis = stampJson<NonNullable<DumpSet['statePreviewAxis']>>('statePreviewAxis');
     // dump v1.5: INSTANCE_SWAP preferredValues, keyed by suffix-stripped
     // property name — the component keys resolve downstream into slot
     // `accepts` (unresolvable keys stay named notes, never guessed ids).
@@ -1920,11 +1981,65 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
         boolDefaults[propName.split('#')[0]] = def.defaultValue;
       }
     }
+    // dump v1.32: the REST nodes API does NOT put componentProperties on a
+    // set's COMPONENT children (the tuple rides INSTANCE nodes only), so the
+    // v1.14 structured-tuple read in mapNode never fires on this route and
+    // exact mode failed closed on every REST dump of a variant set. The
+    // variant NAME of a set child is Figma's own render of the tuple; it is
+    // adopted ONLY when it cross-validates against the set's STRUCTURED
+    // propertyDefinitions — exactly the declared VARIANT axes, every value in
+    // that axis's variantOptions, no unknown keys. Anything less leaves the
+    // row tuple-less (a named receipt) and exact mode keeps failing closed.
+    if (doc.type === 'COMPONENT_SET') {
+      const axisOptions = new Map<string, Set<string>>();
+      for (const [propName, def] of Object.entries(propertyDefinitions)) {
+        if (def.type === 'VARIANT') axisOptions.set(propName, new Set(def.variantOptions));
+      }
+      if (axisOptions.size > 0) {
+        for (const variant of variants) {
+          if (variant.variantProperties) continue;
+          const parsed: Record<string, string> = {};
+          let wellFormed = true;
+          for (const seg of String(variant.name ?? '').split(',')) {
+            const eq = seg.indexOf('=');
+            if (eq < 0) {
+              wellFormed = false;
+              break;
+            }
+            parsed[seg.slice(0, eq).trim()] = seg.slice(eq + 1).trim();
+          }
+          const keys = Object.keys(parsed);
+          const verified =
+            wellFormed &&
+            keys.length === axisOptions.size &&
+            keys.every((k) => axisOptions.get(k)?.has(parsed[k]) === true);
+          if (!verified) {
+            report.degradations.push({
+              code: 'variant-tuple-unverified',
+              nodePath: `${doc.name}:${variant.name}`,
+              message: `variant name does not cross-validate against the set's structured VARIANT definitions (axes: ${[...axisOptions.keys()].join(', ')}) — no variantProperties tuple derived; exact mode fails closed on this set (legacy-unverified)`,
+            });
+            continue;
+          }
+          variant.variantProperties = Object.fromEntries(
+            keys.sort((a, b) => a.localeCompare(b)).map((k) => [k, parsed[k]]),
+          );
+        }
+      }
+    }
     const set: DumpSet = {
       setName: doc.name,
       type: doc.type,
       nodeId: doc.id,
       ...(key ? { key } : {}),
+      ...(setDescription ? { description: setDescription } : {}),
+      ...(setDocumentationLinks.length > 0 ? { documentationLinks: setDocumentationLinks } : {}),
+      ...(stampedContractId ? { contractId: stampedContractId } : {}),
+      ...(stampedSpecHash ? { specHash: stampedSpecHash } : {}),
+      ...(stampedVersion ? { version: stampedVersion } : {}),
+      ...(stampedPropNames ? { propNames: stampedPropNames } : {}),
+      ...(stampedSemantics ? { semantics: stampedSemantics } : {}),
+      ...(stampedStatePreviewAxis ? { statePreviewAxis: stampedStatePreviewAxis } : {}),
       ...(Object.keys(propertyDefinitions).length > 0 ? { propertyDefinitions } : {}),
       ...(Object.keys(swapPreferredValues).length > 0 ? { swapPreferredValues } : {}),
       ...(Object.keys(slotDescriptions).length > 0 ? { slotDescriptions } : {}),

@@ -1,0 +1,164 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.kicker",
+  "setName": "Kicker",
+  "nodeId": "53:4497",
+  "mode": "reviewable-inversion",
+  "variantCount": 2,
+  "contractSha256": "0f020ac1945c0f2a1b0d83dbdb2584881ca7233f3c6001d7b49a7384730d1b16",
+  "carriage": {
+    "carried": 24,
+    "named": 16,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "variant axis": [
+      1,
+      0,
+      0
+    ],
+    "declared axis default": [
+      1,
+      0,
+      0
+    ],
+    "boundVariables.itemSpacing": [
+      0,
+      2,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      2,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      2,
+      0,
+      0
+    ],
+    "root layoutSizingVertical": [
+      2,
+      0,
+      0
+    ],
+    "boundVariables.fills": [
+      0,
+      2,
+      0
+    ],
+    "boundVariables.lineHeight": [
+      0,
+      2,
+      0
+    ],
+    "boundVariables.letterSpacing": [
+      0,
+      2,
+      0
+    ],
+    "boundVariables.fontWeight": [
+      0,
+      2,
+      0
+    ],
+    "boundVariables.fontFamily": [
+      0,
+      2,
+      0
+    ],
+    "boundVariables.fontSize": [
+      0,
+      2,
+      0
+    ],
+    "fills[0] SOLID": [
+      2,
+      0,
+      0
+    ],
+    "text.characters": [
+      2,
+      0,
+      0
+    ],
+    "text font size/weight": [
+      2,
+      0,
+      0
+    ],
+    "text fontFamily": [
+      2,
+      0,
+      0
+    ],
+    "text lineHeight": [
+      2,
+      0,
+      0
+    ],
+    "text letterSpacing": [
+      0,
+      2,
+      0
+    ],
+    "text textCase": [
+      2,
+      0,
+      0
+    ],
+    "text textAlignHorizontal": [
+      2,
+      0,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "7692dea1b60045a81a20e18f7ccbf13ee571decd",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "53:4497",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "variant axis",
+      "value": "Default|sm",
+      "disposition": "CARRIED",
+      "landing": "props.size (enum[2]) → React prop `size` + story argTypes + CSS .size-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "Default",
+      "disposition": "CARRIED",
+      "landing": "props.size.default = \"default\" → React default arg + story args"
+    }
+  ],
+  "generatedFiles": {
+    "react/Kicker/Kicker.module.css": "ea8183dc4a614ba2961d0c8cafa89292526c938a80ed245efb8b57e62e21b235",
+    "react/Kicker/Kicker.stories.tsx": "9cfd466cae4713698bc5c4bdca3502b8b7509c83c48f076807d0206b597ee092",
+    "react/Kicker/Kicker.tsx": "a07419d79156cb7229b67ce1fb0809c665ed0d388fda1b648eedd3e4c2d1bea5",
+    "react/Kicker/index.ts": "117e14dd493d055f90de6b5502720c6dd185d3c571381ba71e662708a3a182e8",
+    "wc/ds-kicker.ts": "31e77b4c8bad1ebca96c35926542aac10700717e22dbbc8ad08dae31d547422b",
+    "wc/ds-kicker.css.ts": "c4fc775453742dd9050e3e9ab6936d2bae0cdf980bdb1caf36298c32a3b0a857",
+    "wc/ds-kicker.demo.html": "92be59fd05e3ba521d8a88a7d75c5df33823e1efe737447859e51478d580c9ab",
+    "wc/ds-kicker.custom-elements.json": "b30c235cc4018484879bdfe6859e6e1eda0b91a8e322fb45f7477cc52c9a8348"
+  },
+  "notesCount": 20
+}

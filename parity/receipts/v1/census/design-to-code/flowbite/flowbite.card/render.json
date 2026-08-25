@@ -1,0 +1,17 @@
+{
+  "kit": "flowbite",
+  "id": "flowbite.card",
+  "setName": "Card (flowbite.card)",
+  "renderer": "code: generated React (design-to-code pipeline bytes) → esbuild bundle → playwright-core screenshot at deviceScaleFactor 2; canvas: GET /v1/images/:key?scale=2 (Figma's own renderer, read-only)",
+  "cells": [
+    {
+      "slug": "card-flowbite-card",
+      "figmaVariant": "Card (flowbite.card)",
+      "nodeId": "120:1999",
+      "props": {
+        "children": "Card content"
+      }
+    }
+  ],
+  "notSampled": []
+}

@@ -1301,7 +1301,7 @@ const dumps = {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
     note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design→contract proposal.',
-    dumpVersion: '1.31',
+    dumpVersion: '1.32',
   },
 };
 dumps._degradations = degradations;
@@ -1335,6 +1335,18 @@ for (const page of figma.root.children) {
     const defs = dumpPropertyDefinitions(node);
     dumps[node.name] = {
       setName: node.name,
+      // dump v1.32: the set's own description + documentation links — the
+      // designer's words and pointers, carried so propose can keep them
+      // (REST reads the same two fields off the response metadata).
+      ...(function () {
+        const out = {};
+        if (typeof node.description === 'string' && node.description.trim() !== '') out.description = node.description;
+        const links = (node.documentationLinks || [])
+          .filter(function (l) { return l && typeof l.uri === 'string' && l.uri !== ''; })
+          .map(function (l) { return { uri: l.uri }; });
+        if (links.length > 0) out.documentationLinks = links;
+        return out;
+      })(),
       // dump v1.21: the emitter's DECLARED sparse State matrix. A previews set
       // draws Cartesian(axes)×{Default} PLUS one row per state per primary
       // value, so holding it to a full Cartesian refused sets this repo drew

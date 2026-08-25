@@ -1,0 +1,2082 @@
+{
+  "component": "Tag",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 32,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 5120,
+    "cellsEqual": 4992,
+    "pctEqual": 97.5,
+    "rowsFullyEqual": 0,
+    "rows": 128
+  },
+  "pixel": {
+    "pairs": 128,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 128,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 1.9675699869791652,
+    "meanAA": 0.37719726562500006,
+    "maxAA": 0.5305989583333334
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 95,
+    "mintedLeavesUnfolded": 143,
+    "baseBindings": 32,
+    "stateBindings": 0,
+    "codeOnlyChannels": 2,
+    "overflowBindings": 1,
+    "folds": 36
+  },
+  "worstRows": [
+    {
+      "key": "processing.bordered.on__default",
+      "pctAA": 0.5305989583333334,
+      "pctExact": 1.552734375,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "processing.bordered.on__hover",
+      "pctAA": 0.5305989583333334,
+      "pctExact": 1.552734375,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "processing.bordered.on__focus-visible",
+      "pctAA": 0.5305989583333334,
+      "pctExact": 1.552734375,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "processing.bordered.on__active",
+      "pctAA": 0.5305989583333334,
+      "pctExact": 1.552734375,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "blue.bordered.on__default",
+      "pctAA": 0.52734375,
+      "pctExact": 1.552734375,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "blue.bordered.on__hover",
+      "pctAA": 0.52734375,
+      "pctExact": 1.552734375,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "blue.bordered.on__focus-visible",
+      "pctAA": 0.52734375,
+      "pctExact": 1.552734375,
+      "channelsMismatched": 1
+    },
+    {
+      "key": "blue.bordered.on__active",
+      "pctAA": 0.52734375,
+      "pctExact": 1.552734375,
+      "channelsMismatched": 1
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.list-style-type",
+      128
+    ]
+  ],
+  "namedLosses": [
+    "overflow: root.width — presence-prop-driven styling (closable) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (closable present) is not",
+    "code-only: root.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: anticon.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/antd/tokens/antd-minted.dtcg.json",
+    "leavesAdded": 1184,
+    "divergent": [
+      {
+        "token": "imported.tag.root.color.blue",
+        "fresh": "#0958d9",
+        "shipped": "{blue-7}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.tag.root.color.error",
+        "fresh": "#ff4d4f",
+        "shipped": "{color-error}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.tag.root.color.gold",
+        "fresh": "#d48806",
+        "shipped": "{gold-7}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.tag.root.color.green",
+        "fresh": "#389e0d",
+        "shipped": "{green-7}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.tag.root.color.processing",
+        "fresh": "#1677ff",
+        "shipped": "{color-info}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.tag.root.color.red",
+        "fresh": "#cf1322",
+        "shipped": "{red-7}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.tag.root.color.success",
+        "fresh": "#52c41a",
+        "shipped": "{color-success}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.tag.root.font-size",
+        "fresh": "12px",
+        "shipped": "{font-size-sm}",
+        "resolvedEqual": true
+      }
+    ]
+  },
+  "rows": [
+    {
+      "key": "unset.bordered.off__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.4674479166666665,
+      "pctAA": 0.4850260416666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "unset.bordered.off__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.4674479166666665,
+      "pctAA": 0.4850260416666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "unset.bordered.off__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.4674479166666665,
+      "pctAA": 0.4850260416666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "unset.bordered.off__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.4674479166666665,
+      "pctAA": 0.4850260416666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "unset.bordered.on__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.5397135416666667,
+      "pctAA": 0.5045572916666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "unset.bordered.on__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.5397135416666667,
+      "pctAA": 0.5045572916666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "unset.bordered.on__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.5397135416666667,
+      "pctAA": 0.5045572916666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "unset.bordered.on__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.5397135416666667,
+      "pctAA": 0.5045572916666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "unset.borderless.off__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "unset.borderless.off__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "unset.borderless.off__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "unset.borderless.off__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "unset.borderless.on__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.3352864583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "unset.borderless.on__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.3352864583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "unset.borderless.on__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.3352864583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "unset.borderless.on__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.3352864583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "blue.bordered.off__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.4739583333333335,
+      "pctAA": 0.5078125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "blue.bordered.off__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.4739583333333335,
+      "pctAA": 0.5078125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "blue.bordered.off__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.4739583333333335,
+      "pctAA": 0.5078125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "blue.bordered.off__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.4739583333333335,
+      "pctAA": 0.5078125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "blue.bordered.on__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.552734375,
+      "pctAA": 0.52734375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "blue.bordered.on__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.552734375,
+      "pctAA": 0.52734375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "blue.bordered.on__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.552734375,
+      "pctAA": 0.52734375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "blue.bordered.on__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.552734375,
+      "pctAA": 0.52734375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "blue.borderless.off__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "blue.borderless.off__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "blue.borderless.off__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "blue.borderless.off__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "blue.borderless.on__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.3385416666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "blue.borderless.on__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.3385416666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "blue.borderless.on__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.3385416666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "blue.borderless.on__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.3385416666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "green.bordered.off__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.48046875,
+      "pctAA": 0.4622395833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "green.bordered.off__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.48046875,
+      "pctAA": 0.4622395833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "green.bordered.off__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.48046875,
+      "pctAA": 0.4622395833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "green.bordered.off__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.48046875,
+      "pctAA": 0.4622395833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "green.bordered.on__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.5592447916666667,
+      "pctAA": 0.4915364583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "green.bordered.on__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.5592447916666667,
+      "pctAA": 0.4915364583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "green.bordered.on__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.5592447916666667,
+      "pctAA": 0.4915364583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "green.bordered.on__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.5592447916666667,
+      "pctAA": 0.4915364583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "green.borderless.off__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "green.borderless.off__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "green.borderless.off__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "green.borderless.off__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "green.borderless.on__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.341796875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "green.borderless.on__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.341796875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "green.borderless.on__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.341796875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "green.borderless.on__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.341796875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "red.bordered.off__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.4674479166666665,
+      "pctAA": 0.4817708333333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "red.bordered.off__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.4674479166666665,
+      "pctAA": 0.4817708333333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "red.bordered.off__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.4674479166666665,
+      "pctAA": 0.4817708333333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "red.bordered.off__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.4674479166666665,
+      "pctAA": 0.4817708333333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "red.bordered.on__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.552734375,
+      "pctAA": 0.517578125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "red.bordered.on__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.552734375,
+      "pctAA": 0.517578125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "red.bordered.on__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.552734375,
+      "pctAA": 0.517578125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "red.bordered.on__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.552734375,
+      "pctAA": 0.517578125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "red.borderless.off__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "red.borderless.off__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "red.borderless.off__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "red.borderless.off__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "red.borderless.on__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.341796875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "red.borderless.on__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.341796875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "red.borderless.on__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.341796875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "red.borderless.on__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.341796875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "gold.bordered.off__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.48046875,
+      "pctAA": 0.4622395833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "gold.bordered.off__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.48046875,
+      "pctAA": 0.4622395833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "gold.bordered.off__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.48046875,
+      "pctAA": 0.4622395833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "gold.bordered.off__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.48046875,
+      "pctAA": 0.4622395833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "gold.bordered.on__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.5592447916666667,
+      "pctAA": 0.498046875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "gold.bordered.on__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.5592447916666667,
+      "pctAA": 0.498046875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "gold.bordered.on__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.5592447916666667,
+      "pctAA": 0.498046875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "gold.bordered.on__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.5592447916666667,
+      "pctAA": 0.498046875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "gold.borderless.off__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "gold.borderless.off__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "gold.borderless.off__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "gold.borderless.off__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "gold.borderless.on__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.341796875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "gold.borderless.on__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.341796875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "gold.borderless.on__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.341796875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "gold.borderless.on__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.341796875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "success.bordered.off__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.48046875,
+      "pctAA": 0.4622395833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "success.bordered.off__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.48046875,
+      "pctAA": 0.4622395833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "success.bordered.off__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.48046875,
+      "pctAA": 0.4622395833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "success.bordered.off__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.48046875,
+      "pctAA": 0.4622395833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "success.bordered.on__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.5592447916666667,
+      "pctAA": 0.4915364583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "success.bordered.on__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.5592447916666667,
+      "pctAA": 0.4915364583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "success.bordered.on__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.5592447916666667,
+      "pctAA": 0.4915364583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "success.bordered.on__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.5592447916666667,
+      "pctAA": 0.4915364583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "success.borderless.off__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "success.borderless.off__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "success.borderless.off__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "success.borderless.off__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "success.borderless.on__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.341796875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "success.borderless.on__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.341796875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "success.borderless.on__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.341796875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "success.borderless.on__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.341796875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "processing.bordered.off__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.4739583333333335,
+      "pctAA": 0.5078125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "processing.bordered.off__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.4739583333333335,
+      "pctAA": 0.5078125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "processing.bordered.off__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.4739583333333335,
+      "pctAA": 0.5078125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "processing.bordered.off__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.4739583333333335,
+      "pctAA": 0.5078125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "processing.bordered.on__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.552734375,
+      "pctAA": 0.5305989583333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "processing.bordered.on__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.552734375,
+      "pctAA": 0.5305989583333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "processing.bordered.on__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.552734375,
+      "pctAA": 0.5305989583333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "processing.bordered.on__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.552734375,
+      "pctAA": 0.5305989583333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "processing.borderless.off__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "processing.borderless.off__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "processing.borderless.off__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "processing.borderless.off__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "processing.borderless.on__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.341796875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "processing.borderless.on__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.341796875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "processing.borderless.on__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.341796875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "processing.borderless.on__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.341796875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "error.bordered.off__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.4674479166666665,
+      "pctAA": 0.4850260416666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "error.bordered.off__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.4674479166666665,
+      "pctAA": 0.4850260416666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "error.bordered.off__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.4674479166666665,
+      "pctAA": 0.4850260416666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "error.bordered.off__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.4674479166666665,
+      "pctAA": 0.4850260416666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "error.bordered.on__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.5397135416666667,
+      "pctAA": 0.5045572916666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "error.bordered.on__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.5397135416666667,
+      "pctAA": 0.5045572916666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "error.bordered.on__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.5397135416666667,
+      "pctAA": 0.5045572916666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "error.bordered.on__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.5397135416666667,
+      "pctAA": 0.5045572916666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "error.borderless.off__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "error.borderless.off__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "error.borderless.off__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "error.borderless.off__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 2.36328125,
+      "pctAA": 0.17903645833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "error.borderless.on__default",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.3352864583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "error.borderless.on__hover",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.3352864583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "error.borderless.on__focus-visible",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.3352864583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "error.borderless.on__active",
+      "channelsCompared": 40,
+      "channelsEqual": 39,
+      "pctExact": 1.4811197916666667,
+      "pctAA": 0.3352864583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    }
+  ]
+}

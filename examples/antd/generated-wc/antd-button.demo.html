@@ -1,0 +1,61 @@
+<!--
+  Button — Custom Element showcase emitted from contract antd.button v0.2.0
+  by @ds-contracts/emitter-web-components. The story-equivalent grid: the all-defaults rendering,
+  one rendering per enum value of every axis (other axes at their defaults), and one per boolean
+  prop set true — the exact enumeration core/emit-html.ts showcases, spelled with <antd-button>.
+  Token values arrive via CSS custom properties (they inherit through the shadow boundary) —
+  include the token stylesheet on the page or nothing resolves. Text content is the default-slot
+  fallback; pass light DOM children to replace it.
+  Serve next to the COMPILED element module (antd-button.ts → antd-button.js).
+-->
+<script type="module" src="./antd-button.js"></script>
+<style>
+  .showcase { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; font-family: sans-serif; }
+  .showcase__label { margin: 0 0 8px; font: 12px/1 monospace; opacity: 0.6; }
+</style>
+<section class="showcase showcase--antd-button">
+  <div class="showcase__item">
+    <p class="showcase__label">default</p>
+    <antd-button></antd-button>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">type=primary</p>
+    <antd-button type="primary"></antd-button>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">type=dashed</p>
+    <antd-button type="dashed"></antd-button>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">type=link</p>
+    <antd-button type="link"></antd-button>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">type=text</p>
+    <antd-button type="text"></antd-button>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">size=small</p>
+    <antd-button size="small"></antd-button>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">size=large</p>
+    <antd-button size="large"></antd-button>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">danger=danger</p>
+    <antd-button danger="danger"></antd-button>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">disabled=true</p>
+    <antd-button disabled=""></antd-button>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">icon=true</p>
+    <antd-button icon=""></antd-button>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">loading=true</p>
+    <antd-button loading=""></antd-button>
+  </div>
+</section>

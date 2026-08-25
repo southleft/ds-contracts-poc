@@ -1,0 +1,204 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.section-footer",
+  "setName": "Section Footer",
+  "nodeId": "53:4976",
+  "mode": "reviewable-inversion",
+  "variantCount": 1,
+  "contractSha256": "0a44a7a14c506fe8bb3f0ee22a9d29073524ddb0e1afdfd4997fa6df050b4975",
+  "carriage": {
+    "carried": 21,
+    "named": 15,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "variant axis": [
+      1,
+      0,
+      0
+    ],
+    "declared axis default": [
+      1,
+      0,
+      0
+    ],
+    "boundVariables.itemSpacing": [
+      0,
+      4,
+      0
+    ],
+    "boundVariables.maxWidth": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.gridRowGap": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.gridColumnGap": [
+      0,
+      1,
+      0
+    ],
+    "grid layout (tracks/gaps/flow)": [
+      1,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      1,
+      0,
+      0
+    ],
+    "root layoutSizingVertical": [
+      1,
+      0,
+      0
+    ],
+    "maxWidth": [
+      1,
+      0,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      2,
+      0,
+      0
+    ],
+    "grid cell (anchor/span/align)": [
+      1,
+      0,
+      0
+    ],
+    "layoutSizingHorizontal=FILL": [
+      3,
+      0,
+      0
+    ],
+    "boundVariables.fills": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.lineHeight": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.letterSpacing": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.fontWeight": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.fontFamily": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.fontSize": [
+      0,
+      1,
+      0
+    ],
+    "fills[0] SOLID": [
+      1,
+      0,
+      0
+    ],
+    "text.characters": [
+      0,
+      1,
+      0
+    ],
+    "text font size/weight": [
+      1,
+      0,
+      0
+    ],
+    "text fontFamily": [
+      1,
+      0,
+      0
+    ],
+    "text lineHeight": [
+      1,
+      0,
+      0
+    ],
+    "text textAlignHorizontal": [
+      1,
+      0,
+      0
+    ],
+    "instance main component": [
+      1,
+      0,
+      0
+    ],
+    "componentProperties.Items (SLOT value)": [
+      0,
+      1,
+      0
+    ],
+    "componentProperties.Alignment": [
+      1,
+      0,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "a8bbab8788db743bf271a9fd1cad2d6bafa52740",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "53:4976",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "variant axis",
+      "value": "Default",
+      "disposition": "CARRIED",
+      "landing": "props.variant (enum[1]) → React prop `variant` + story argTypes + CSS .variant-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "Default",
+      "disposition": "CARRIED",
+      "landing": "props.variant.default = \"default\" → React default arg + story args"
+    }
+  ],
+  "generatedFiles": {
+    "react/SectionFooter/SectionFooter.module.css": "d593e11296380c4ec074ff3381a29240d1b0e03924f004c4097a7704091b25be",
+    "react/SectionFooter/SectionFooter.stories.tsx": "33d9c486c656f12b54ac6446bf89eec51a988a3e594384a236f3e4cb0c2c12d3",
+    "react/SectionFooter/SectionFooter.tsx": "d34f75d908a7c6b59125a3b71dff6ad6483699e788a7c9c3d22e1a63d7c05824",
+    "react/SectionFooter/index.ts": "0aa9b444896f528ec363268d3e9946d8d7cf29d43ab9b1f180624e64592ab4bc",
+    "wc/ds-section-footer.ts": "2de6dc477ca664a543edde16cc402fe2adf91662ed78bab730d797916ac158cb",
+    "wc/ds-section-footer.css.ts": "297ac3cf4ec9de43e5196d615cec4a0798e99550ba0393a7040554258ab41d60",
+    "wc/ds-section-footer.demo.html": "b54d987c056e21e8af8ee7cbe68ac9fa242dab02b34d644e1f7209b2089f1f55",
+    "wc/ds-section-footer.custom-elements.json": "4ec0768f2412991016176cea2786865ad8e329c1cdaa1dae358dbc3b874abb55"
+  },
+  "notesCount": 26
+}

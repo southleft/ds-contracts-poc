@@ -1,0 +1,154 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.antd-forwarded-root-attrs",
+  "name": "CaseAntdForwardedRootAttrs",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"antd-forwarded-root-attrs\" (anatomy). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: label > [input.sr-only + span.box] + span.text — the component forwards className/data-* to the HIDDEN input, not the visible label root (antd Checkbox/Radio) COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center"
+      },
+      "parts": {
+        "b": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|b — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "cursor": "default",
+            "font-family": "monospace",
+            "position": "relative"
+          },
+          "parts": {
+            "c": {
+              "element": "input",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy input|c|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "none",
+                "appearance": "auto",
+                "box-sizing": "border-box",
+                "cursor": "pointer",
+                "font-family": "monospace",
+                "position": "absolute"
+              },
+              "declaredStates": {
+                "focus-visible": {
+                  "outline-style": "auto"
+                }
+              },
+              "tokens": {
+                "bottom": "{imported.shared.size-0}",
+                "font-size": "{imported.shared.size-12}",
+                "height": "{imported.shared.size-16}",
+                "left": "{imported.shared.size-0}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "opacity": "{imported.case-antd-forwarded-root-attrs.c.opacity}",
+                "right": "{imported.shared.size-0}",
+                "top": "{imported.shared.size-0}",
+                "width": "{imported.shared.size-16}"
+              }
+            },
+            "a": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "position": "absolute",
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid",
+                "box-sizing": "border-box",
+                "cursor": "default",
+                "font-family": "monospace"
+              },
+              "tokens": {
+                "background-color": "{imported.shared.color-1677ff}",
+                "border-bottom-color": "{imported.shared.color-1677ff}",
+                "border-bottom-left-radius": "{imported.shared.size-4}",
+                "border-bottom-right-radius": "{imported.shared.size-4}",
+                "border-bottom-width": "{imported.shared.size-1}",
+                "border-left-color": "{imported.shared.color-1677ff}",
+                "border-left-width": "{imported.shared.size-1}",
+                "border-right-color": "{imported.shared.color-1677ff}",
+                "border-right-width": "{imported.shared.size-1}",
+                "border-top-color": "{imported.shared.color-1677ff}",
+                "border-top-left-radius": "{imported.shared.size-4}",
+                "border-top-right-radius": "{imported.shared.size-4}",
+                "border-top-width": "{imported.shared.size-1}",
+                "bottom": "{imported.shared.size-0}",
+                "font-size": "{imported.shared.size-12}",
+                "height": "{imported.shared.size-16}",
+                "left": "{imported.shared.size-0}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "right": "{imported.shared.size-0}",
+                "top": "{imported.shared.size-0}",
+                "width": "{imported.shared.size-16}"
+              }
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.shared.size-0}",
+            "font-size": "{imported.shared.size-12}",
+            "height": "{imported.shared.size-16}",
+            "left": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.shared.size-16}"
+          }
+        },
+        "label": {
+          "text": "Sample",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "cursor": "default",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "font-size": "{imported.shared.size-12}",
+            "font-weight": "{imported.case-antd-forwarded-root-attrs.label.font-weight}"
+          }
+        }
+      },
+      "declared": {
+        "box-sizing": "border-box",
+        "cursor": "default",
+        "font-family": "monospace"
+      },
+      "tokens": {
+        "column-gap": "{imported.case-antd-forwarded-root-attrs.root.column-gap}",
+        "font-size": "{imported.shared.size-12}",
+        "height": "{imported.shared.size-16}",
+        "row-gap": "{imported.case-antd-forwarded-root-attrs.root.row-gap}",
+        "width": "{imported.case-antd-forwarded-root-attrs.root.width}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@ds-contracts/conformance",
+        "export": "CaseAntdForwardedRootAttrs"
+      }
+    }
+  }
+}

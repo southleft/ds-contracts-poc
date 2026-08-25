@@ -1,0 +1,7 @@
+{
+  "recognisable": true,
+  "walls": [
+    "VECTOR-GLYPH-NAMED"
+  ],
+  "notes": "Button surface, label and per-variant fills match; the arrow icons render as observed-box stubs instead of glyphs (vector geometry named)."
+}

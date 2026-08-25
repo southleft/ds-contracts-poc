@@ -212,6 +212,12 @@ function contractPage(): { route: string; html: string } {
           `<p><strong>Honesty note:</strong> the <code>a11y</code> block is declarative-only today — <code>minHitArea</code> and <code>contrast</code> are recorded but no generator or differ enforces them yet. The roadmap names the choice: enforce or remove. (This caveat is stated in <a href="${REPO_URL}/blob/main/docs/07-validation.md">docs/07 — Validation</a>, and this page repeats it rather than hiding it.)</p>`,
         ),
     ),
+    section(
+      'documentation-links',
+      'documentationLinks — pointers that survive every surface',
+      ['generated', 'curated'],
+      `<p>Schema 18, additive and optional: the component’s own documentation links, carried BOTH ways. The Figma emitter writes them as the set’s native <code>documentationLinks</code>; the design→contract proposal reads them back from the dump (v1.32). Code emitters surface each entry as a JSDoc <code>@see</code> line, a Storybook docs link, and the Web Component header comment — the designer’s pointer survives into every generated surface.</p><ul><li><code>uri</code> — the link itself. The only field; a non-empty string.</li></ul>`,
+    ),
   ].join('');
   return specPage(
     'contract',
@@ -378,6 +384,7 @@ function anatomyPage(): { route: string; html: string } {
           repeat: 'Item template over an arrayOf prop — see <a href="/spec/composition/#repeat">Composition</a>.',
           icon: 'Icon asset part — see below.',
           attrs: 'HTML/ARIA attributes — see below.',
+          codeOnly: 'Capture-side code-only receipts (v18) — see below.',
           visibleWhen: 'Conditional visibility — see <a href="/spec/conditionals/#visible-when">Conditionals</a>.',
           optional: 'Optional parts render conditionally (code: when the slot prop is provided; canvas: a “Show X” boolean controls visibility).',
           parts: 'Child parts — the tree.',
@@ -441,6 +448,12 @@ function anatomyPage(): { route: string; html: string } {
       ['generated', 'curated'],
       `<p><code>attrs</code> sets HTML/ARIA attributes on the part’s element — literal strings or <code>'{prop}'</code> references (refused when the prop doesn’t exist). Code-side surface; the canvas ignores it. A real <code>&lt;input type="checkbox|radio"&gt;</code> declared this way is recognized as a native checkable control: code surfaces render it as the focusable control (checked state is DOM state, never ARIA), and the canvas draws nothing for it — semantics don’t draw.</p>` +
         shippingExample('checkbox.contract.json', { paths: ['anatomy.root.parts.box.parts.input'] }),
+    ),
+    section(
+      'code-only',
+      'Code-only capture receipts',
+      ['generated'],
+      `<p><code>codeOnly</code> (schema v18) carries capture-side refusals on the part itself: state-plane facts the computed capture <em>observed</em> and the contract grammar could not hold — a nested part’s focus-visible <code>outline-width</code>, a state delta outside every mintable value kind. Each entry names the <code>channel</code>, the observed <code>value</code>, the <code>reason</code> for the refusal, and optionally the <code>state</code> plane it was observed on. Before this field existed those refusals lived only in the capture’s <code>enriched.extension.json</code> sidecar, which nothing canvas-side ever reads — <code>figma bundle</code> compiles its <code>codeOnlyFacts</code> from the contract alone, so a pasted set carried no trace of them.</p><p>MEASURED, never hand-authored: the capture’s fusion writes it and <code>promote</code> preserves it. The code emitters ignore it; the canvas emitter repeats every entry as a <code>capture</code>-kind code-only fact in the bundle JSON, the plugin run report and the set’s plugin data. A receipt, not a styling instruction — nothing reads it to draw.</p>`,
     ),
     section(
       'meter',
@@ -716,6 +729,12 @@ function statesPage(): { route: string; html: string } {
         ]) +
         `<p>The differ treats the axis as contract API in both directions: a missing axis on an opted-in contract is <code>figma BEHIND</code>; a hand-built <code>State</code> axis <em>without</em> the opt-in is <code>figma AHEAD</code> — the kit-rot detector — and the proposed patch is the honest one: <code>bindings.figma.statePreviews: true</code>, never a bogus <code>state</code> prop.</p>` +
         shippingExample('button.contract.json', { paths: ['bindings.figma.statePreviews', 'states'] }),
+    ),
+    section(
+      'code-only',
+      'part.codeOnly — capture-side receipts riding the contract',
+      ['generated'],
+      `<p>Schema 18 (the antd exam): a captured fact the canvas vocabulary refused — a nested part’s focus ring, a state-plane channel outside the grammar — used to live only in capture-side sidecars (<code>enriched.extension.json</code>, <code>LEDGER.md</code>), where <code>figma bundle</code> could never see it. <code>part.codeOnly</code> moves that receipt into the contract itself: MEASURED, never hand-authored (<code>fuse.ts</code> writes it, promotion preserves it). The code emitters ignore it entirely; the canvas emitter repeats every entry as a <code>capture</code>-kind code-only fact in the bundle JSON, the plugin run report, and the set’s plugin data. A receipt, not a styling instruction — nothing reads it to draw.</p><ul><li><code>state</code> — optional interaction state the fact belongs to (e.g. <code>focus-visible</code>).</li><li><code>channel</code> — the refused CSS channel, by name.</li><li><code>value</code> — the captured value.</li><li><code>reason</code> — why the canvas could not carry it, verbatim from the capture.</li></ul>`,
     ),
   ].join('');
   return specPage(

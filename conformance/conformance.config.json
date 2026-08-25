@@ -51,6 +51,78 @@
       "axes": []
     },
     {
+      "__case": "tokens: .cf-root { --cf-scoped-pad: 15px } .cf-root .cf-a { padding-inline: var(--cf-scoped-pad) } — a token DECLARED ON THE COMPONENT ROOT (not :root) and consumed by a descendant (antd cssVar component tokens on `.antd.ant-btn`) — declared CARRIED",
+      "name": "CaseAntdComponentScopedCustomProperty",
+      "importName": "CaseAntdComponentScopedCustomProperty",
+      "contract": "conformance/seeds/antd-component-scoped-custom-property.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "geometry: span.c > span.a(empty) + span.b(empty) — two EMPTY inline-block spans whose only facts are margin-inline-start/end (antd Switch inner-checked / inner-unchecked) — declared CARRIED",
+      "name": "CaseAntdEmptyMarginOnlyParts",
+      "importName": "CaseAntdEmptyMarginOnlyParts",
+      "contract": "conformance/seeds/antd-empty-margin-only-parts.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "interaction-states: button.root:focus-visible { outline: 3px solid rgb(145, 202, 255); outline-offset: 1px } — the focus ring as an OUTLINE state delta on the ROOT (antd Button, Switch) — declared CARRIED",
+      "name": "CaseAntdFocusOutlineRing",
+      "importName": "CaseAntdFocusOutlineRing",
+      "contract": "conformance/seeds/antd-focus-outline-ring.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "interaction-states: label > span > [input.sr-only:focus-visible + span.box { outline: 3px solid rgb(145, 202, 255) }] — the focus ring as an OUTLINE state delta on a NESTED PART (antd Checkbox-inner, Radio-inner) — declared REFUSED",
+      "name": "CaseAntdFocusOutlineRingChildPart",
+      "importName": "CaseAntdFocusOutlineRingChildPart",
+      "contract": "conformance/seeds/antd-focus-outline-ring-child-part.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "interaction-states: button.root { outline-style: none } :focus-visible { outline: 3px solid rgb(145, 202, 255); outline-offset: 1px } — the ring's declared width EQUALS Chromium's own `outline-width: medium` (3px) at rest, so the width never differs between planes (antd Button/Switch: --ant-line-width-focus is 3px) — declared CARRIED",
+      "name": "CaseAntdFocusOutlineRingUaWidth",
+      "importName": "CaseAntdFocusOutlineRingUaWidth",
+      "contract": "conformance/seeds/antd-focus-outline-ring-ua-width.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "anatomy: label > [input.sr-only + span.box] + span.text — the component forwards className/data-* to the HIDDEN input, not the visible label root (antd Checkbox/Radio) — declared CARRIED",
+      "name": "CaseAntdForwardedRootAttrs",
+      "importName": "CaseAntdForwardedRootAttrs",
+      "contract": "conformance/seeds/antd-forwarded-root-attrs.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "anatomy: sup(absolute, translate(50%,-50%)) > bdi > span > span — a count digit THREE levels deep in an absolutely positioned overlay, the deepest span carrying NO identity class (antd's rc-scroll-number `current` is transient and dropped by classAllow; the fixture spells the same absence with a bare span — the frontier eval refuses any non-neutral class in a case) — declared CARRIED",
+      "name": "CaseAntdOverlayDigitDepthThree",
+      "importName": "CaseAntdOverlayDigitDepthThree",
+      "contract": "conformance/seeds/antd-overlay-digit-depth-three.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "motion: .cf-a { transition: background-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) } — a transition declared on a CHILD PART, not the root (antd's `motionDurationMid` on every interactive part) — declared CARRIED",
+      "name": "CaseAntdPartTransitionChannel",
+      "importName": "CaseAntdPartTransitionChannel",
+      "contract": "conformance/seeds/antd-part-transition-channel.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "anatomy: a child part whose PRESENCE is one prop (showIcon) and whose paint is ANOTHER (type) — the base (default) combo mounts without it (antd Alert) — declared CARRIED",
+      "name": "CaseAntdPresenceTimesAxisGlyph",
+      "importName": "CaseAntdPresenceTimesAxisGlyph",
+      "contract": "conformance/seeds/antd-presence-times-axis-glyph.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
       "__case": "geometry: aspect-ratio: 2 / 1 — declared CARRIED",
       "name": "CaseAspectRatio",
       "importName": "CaseAspectRatio",

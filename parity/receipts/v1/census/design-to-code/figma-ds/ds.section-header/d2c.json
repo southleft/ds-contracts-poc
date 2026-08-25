@@ -1,0 +1,169 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.section-header",
+  "setName": "Section Header",
+  "nodeId": "53:4723",
+  "mode": "reviewable-inversion",
+  "variantCount": 2,
+  "contractSha256": "8ba3874838be9cf841d40b5525af1558b3ffcac9f5bbaf91b12375f53893259b",
+  "carriage": {
+    "carried": 38,
+    "named": 26,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "variant axis": [
+      1,
+      0,
+      0
+    ],
+    "declared axis default": [
+      1,
+      0,
+      0
+    ],
+    "boundVariables.itemSpacing": [
+      0,
+      14,
+      0
+    ],
+    "boundVariables.maxWidth": [
+      0,
+      2,
+      0
+    ],
+    "boundVariables.gridRowGap": [
+      0,
+      2,
+      0
+    ],
+    "boundVariables.gridColumnGap": [
+      0,
+      2,
+      0
+    ],
+    "grid layout (tracks/gaps/flow)": [
+      2,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      2,
+      0,
+      0
+    ],
+    "root layoutSizingVertical": [
+      2,
+      0,
+      0
+    ],
+    "maxWidth": [
+      2,
+      0,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      4,
+      0,
+      0
+    ],
+    "grid cell (anchor/span/align)": [
+      0,
+      2,
+      0
+    ],
+    "layoutSizingHorizontal=FILL": [
+      4,
+      0,
+      0
+    ],
+    "instance main component": [
+      8,
+      0,
+      0
+    ],
+    "componentProperties.Size": [
+      4,
+      0,
+      0
+    ],
+    "componentProperties.Tag": [
+      2,
+      0,
+      0
+    ],
+    "componentProperties.Variant": [
+      2,
+      0,
+      0
+    ],
+    "componentProperties.Items (SLOT value)": [
+      0,
+      2,
+      0
+    ],
+    "componentProperties.Alignment": [
+      2,
+      0,
+      0
+    ],
+    "itemReverseZIndex": [
+      0,
+      1,
+      0
+    ],
+    "overrides[] (host overrides inside the instance)": [
+      0,
+      1,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "bba897b52fe56d2e67519812d396de0c94e65fae",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "53:4723",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "variant axis",
+      "value": "Default|Center",
+      "disposition": "CARRIED",
+      "landing": "props.alignment (enum[2]) → React prop `alignment` + story argTypes + CSS .alignment-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "Default",
+      "disposition": "CARRIED",
+      "landing": "props.alignment.default = \"default\" → React default arg + story args"
+    }
+  ],
+  "generatedFiles": {
+    "react/SectionHeader/SectionHeader.module.css": "989527267463398012f8b20e958128ea29c1220dfff6e533fba12deaa4e10340",
+    "react/SectionHeader/SectionHeader.stories.tsx": "253a8aea4f74eaa20267a6b600b3ebb74edcd032bbbf7faaebdd9fa28f46d370",
+    "react/SectionHeader/SectionHeader.tsx": "88e730d983c5b9e1a9b04ae68d691be4eca3f8711a6700f2ed18e33c9ddb817f",
+    "react/SectionHeader/index.ts": "c0ecc5849eedd4a40da92b557dbe625f0e24e5bdc84a9445480a411b16ca3ee0",
+    "wc/ds-section-header.ts": "96b58ae939e95f43445ef6fb7c4673120a15cecb8c2558df47af31a85127311c",
+    "wc/ds-section-header.css.ts": "e08593e9148cc099ebd84726a7e8a2e15dd0896f60fcceca47b9c6e7eb8540d2",
+    "wc/ds-section-header.demo.html": "11030c8ddb85ab9fc1c3feaa570109e0fa8301fc476183fa613c2cdf16c335cd",
+    "wc/ds-section-header.custom-elements.json": "b4bc49eb0dc2438731288d4fd4db59c19e23d56d1e6a5db3d66cc3a9b7d3edc6"
+  },
+  "notesCount": 50
+}

@@ -1,0 +1,86 @@
+{
+  "id": "antd.tooltip",
+  "name": "Tooltip",
+  "library": "antd",
+  "contractPath": "examples/antd/contracts/tooltip.contract.json",
+  "contractVersion": "0.2.0",
+  "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "tokenSource": "examples/antd/figma/antd.bundle.json tokenSet (flat base + minted + light mode)",
+  "platform": "darwin/arm64",
+  "fontChecks": {
+    "Inter": true
+  },
+  "sample": {
+    "rule": "see census-manifest.json sampleRule",
+    "cap": {
+      "limit": 24,
+      "derived": 1,
+      "sampled": 1,
+      "dropped": 0
+    },
+    "axisCoverageComplete": true,
+    "derivation": "deriveCells"
+  },
+  "carriedFacts": {
+    "props": [],
+    "states": [],
+    "parts": [
+      "root",
+      "tooltip-arrow",
+      "tooltip-arrow-before",
+      "tooltip-content",
+      "label"
+    ],
+    "contentSlots": [],
+    "tokenRefs": [
+      "imported.shared.color-000000e0",
+      "imported.shared.size-0",
+      "imported.shared.size-14",
+      "imported.shared.size-22",
+      "imported.shared.size-6",
+      "imported.tooltip.label.background-color",
+      "imported.tooltip.label.box-shadow",
+      "imported.tooltip.label.color",
+      "imported.tooltip.label.font-weight",
+      "imported.tooltip.label.min-height",
+      "imported.tooltip.label.min-width",
+      "imported.tooltip.label.padding-left",
+      "imported.tooltip.label.padding-right",
+      "imported.tooltip.root.height",
+      "imported.tooltip.root.max-width",
+      "imported.tooltip.root.width",
+      "imported.tooltip.root.z-index",
+      "imported.tooltip.tooltip-arrow.bottom",
+      "imported.tooltip.tooltip-arrow.height",
+      "imported.tooltip.tooltip-arrow.left",
+      "imported.tooltip.tooltip-arrow.right",
+      "imported.tooltip.tooltip-arrow.translate-x",
+      "imported.tooltip.tooltip-arrow.translate-y",
+      "imported.tooltip.tooltip-arrow.width",
+      "imported.tooltip.tooltip-arrow.z-index",
+      "imported.tooltip.tooltip-content.height",
+      "imported.tooltip.tooltip-content.width"
+    ],
+    "icons": [],
+    "events": []
+  },
+  "variants": [
+    {
+      "slug": "tooltip",
+      "variant": "Tooltip",
+      "kind": "base",
+      "subst": {},
+      "bools": {},
+      "interaction": "default",
+      "status": "rendered",
+      "png": "code-tooltip.png",
+      "contentBox": {
+        "width": 85.89,
+        "height": 50
+      }
+    }
+  ],
+  "rendered": 1,
+  "refused": 0,
+  "unavailable": null
+}

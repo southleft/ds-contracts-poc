@@ -76,9 +76,9 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 31,
-      "mintedLeavesUnfolded": 31,
-      "baseBindings": 37,
+      "mintedLeaves": 35,
+      "mintedLeavesUnfolded": 35,
+      "baseBindings": 39,
       "stateBindings": 0,
       "codeOnlyChannels": 5,
       "overflowBindings": 0,
@@ -284,7 +284,7 @@
             "theirs": "50%"
           }
         ],
-        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "unset.off__focus-visible",
@@ -354,7 +354,7 @@
             "theirs": "50%"
           }
         ],
-        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "unset.on__default",
@@ -484,7 +484,7 @@
             "theirs": "0px"
           }
         ],
-        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "unset.on__focus-visible",
@@ -614,7 +614,7 @@
             "theirs": "0px"
           }
         ],
-        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "sm.off__default",
@@ -684,7 +684,7 @@
             "theirs": "50%"
           }
         ],
-        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "sm.off__focus-visible",
@@ -754,7 +754,7 @@
             "theirs": "50%"
           }
         ],
-        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "sm.on__default",
@@ -884,7 +884,7 @@
             "theirs": "0px"
           }
         ],
-        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "sm.on__focus-visible",
@@ -1014,7 +1014,7 @@
             "theirs": "0px"
           }
         ],
-        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+        "note": "original screenshot unavailable — pixel not scored"
       }
     ]
   }

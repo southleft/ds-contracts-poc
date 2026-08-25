@@ -1,0 +1,877 @@
+{
+  "source": "The release audit docs/26 V1-REL-01 refers to is the 2026-08-22 21-agent independent audit (workflows wf_162de4d5-f35 + wf_f183ba6f-9c5): 60 P0/P1 claims — 12 skeptic-verified (V01–V12, in the audit's verification order) and 48 unverified (U01–U48, in the audit's listing order) — whose closures are recorded in docs/23-known-limitations.md §D.12–§D.33 and §D.25. The audit's findings file lived outside the tree (session scratch, audit.json); every row below names the claim as the audit phrased it, the skeptic verdict where one exists, and the docs/23 section (or the file) that records the closure.",
+  "built": "Assembled by hand ONCE on 2026-08-23 from docs/23 §D, the phase-0/phase-1/phase-2 commit messages and the audit's own claim list; verified by `npm run v1:readiness` (V1-REL-01): every closing commit must be on this history, every acceptance command must exit 0, every cited anchor must resolve, and an open-human row must name the RELEASE_CHECKLIST row that owns it. Severities are the audit's; a skeptic re-grade is quoted in the note, never applied to the column.",
+  "rows": [
+    {
+      "id": "AUD-V01",
+      "severity": "P0",
+      "title": "WC emitter drops root attrs (aria-pressed / aria-label / data-testid) with no receipt",
+      "source": "audit.json verified #1 (skeptic: STANDS, wider — React too; href on citation/side-nav-item/top-nav-item)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "46029a88"
+        ],
+        "section": "docs/23-known-limitations.md#d12-anatomyrootattrs-dropped-by-the-react-and-wc-emitters--closed"
+      },
+      "acceptance": "npm run root-attrs:check"
+    },
+    {
+      "id": "AUD-V02",
+      "severity": "P0",
+      "title": "WC emitter emits a nested two-placeholder token ref unexpanded — invalid CSS, part colour lost",
+      "source": "audit.json verified #2 (skeptic: STANDS, nine hits in untitled-ui)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "46029a88",
+          "042abde5"
+        ],
+        "section": "docs/23-known-limitations.md#d13-wc-emitted-multi-placeholder-part-refs-with-the-braces-intact--closed"
+      },
+      "acceptance": "npm run emitters:check"
+    },
+    {
+      "id": "AUD-V03",
+      "severity": "P0",
+      "title": "Dagger census drifts: 31 MUI dropped-fact receipts vanish; MUI bundle REFUSED in the uncommitted tree",
+      "source": "audit.json verified #3 (skeptic: REFUTED as a silent loss — a stale gitignored packages/cli/dist from Aug 8; rebuilt, the census reproduces)",
+      "status": "refuted",
+      "closing": {
+        "commits": [
+          "7066eb86"
+        ],
+        "section": "docs/23-known-limitations.md#d25-one-truth-red-lanes-a-self-attested-eval-record-stale-receipts-a-clean-clone-that-could-not-build-the-plugin--closed"
+      },
+      "acceptance": "npm run dagger:census",
+      "note": "The real drift was three unpinned tailwind bare-† rows, re-recorded and reviewed in 7066eb86; the census runs in the full lane."
+    },
+    {
+      "id": "AUD-V04",
+      "severity": "P0",
+      "title": "figma:fresh fails: committed *.figma.js sync scripts stale at HEAD and in the working tree",
+      "source": "audit.json verified #4 (skeptic: reproduced, misclassified — staleness, not a silent loss)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "7066eb86"
+        ],
+        "section": "docs/23-known-limitations.md#d25-one-truth-red-lanes-a-self-attested-eval-record-stale-receipts-a-clean-clone-that-could-not-build-the-plugin--closed"
+      },
+      "acceptance": "npm run figma:fresh"
+    },
+    {
+      "id": "AUD-V05",
+      "severity": "P0",
+      "title": "Committed contracts/contract.schema.json stale since 2026-08-11 and no gate checks it",
+      "source": "audit.json verified #5 (skeptic: the staleness FACT reproduces; no pipeline path validates through the JSON projection — Zod is the authority — so not a silent loss)",
+      "status": "refuted",
+      "closing": {
+        "commits": [
+          "436abe7b"
+        ],
+        "section": "docs/23-known-limitations.md#d25-one-truth-red-lanes-a-self-attested-eval-record-stale-receipts-a-clean-clone-that-could-not-build-the-plugin--closed"
+      },
+      "acceptance": "npm run schema:fresh",
+      "note": "The fact itself is gated now: schema:fresh (fast lane) refuses a stale projection."
+    },
+    {
+      "id": "AUD-V06",
+      "severity": "P0",
+      "title": "npm run typecheck fails at HEAD (3 errors) and worse in the uncommitted tree (20)",
+      "source": "audit.json verified #6 (skeptic: reproduced on both halves, over-severitized — a named red, P1)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "9d65808e",
+          "5a270f89"
+        ],
+        "section": "docs/23-known-limitations.md#d25-one-truth-red-lanes-a-self-attested-eval-record-stale-receipts-a-clean-clone-that-could-not-build-the-plugin--closed"
+      },
+      "acceptance": "npm run typecheck"
+    },
+    {
+      "id": "AUD-V07",
+      "severity": "P0",
+      "title": "All three required CI lanes red on main tip; V1-CI-01 fails on the commit itself",
+      "source": "audit.json verified #7 (skeptic: STANDS, severity corrected to P1)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "848f64bc",
+          "fa88dbf1"
+        ],
+        "section": "docs/23-known-limitations.md#d25-one-truth-red-lanes-a-self-attested-eval-record-stale-receipts-a-clean-clone-that-could-not-build-the-plugin--closed"
+      },
+      "acceptance": "npm run ci:lanes",
+      "note": "fast / full / catalog-visual / security all SUCCESS on main at fa88dbf1 (full-lane budget 60 → 120 min); V1-CI-01's own row cites the lane runs for the commit under test."
+    },
+    {
+      "id": "AUD-V08",
+      "severity": "P0",
+      "title": "BETA.md step 1 (`npm run plugin:zip`) fails on a clean clone: committed engine receipt does not match HEAD's own build",
+      "source": "audit.json verified #8 (skeptic: stands, over-graded — a named refusal)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "7066eb86"
+        ],
+        "section": "docs/23-known-limitations.md#d25-one-truth-red-lanes-a-self-attested-eval-record-stale-receipts-a-clean-clone-that-could-not-build-the-plugin--closed"
+      },
+      "acceptance": "npm run plugin:check"
+    },
+    {
+      "id": "AUD-V09",
+      "severity": "P0",
+      "title": "The maintain gate exists only in the uncommitted working tree and is in no CI lane",
+      "source": "audit.json verified #9 (skeptic: core fact stands; mechanism and severity wrong)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "436abe7b"
+        ],
+        "section": "docs/23-known-limitations.md#d25-one-truth-red-lanes-a-self-attested-eval-record-stale-receipts-a-clean-clone-that-could-not-build-the-plugin--closed"
+      },
+      "acceptance": "npm run ci:lanes",
+      "note": "ci:lanes expands composites: every maintain leaf is a lane step or the gate is red."
+    },
+    {
+      "id": "AUD-V10",
+      "severity": "P0",
+      "title": "evals/results.json 225/225 is a stale self-attestation; CI's real run is 214/225",
+      "source": "audit.json verified #10 (skeptic: STANDS, reproduces exactly)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "436abe7b",
+          "01f1c986"
+        ],
+        "section": "docs/23-known-limitations.md#d25-one-truth-red-lanes-a-self-attested-eval-record-stale-receipts-a-clean-clone-that-could-not-build-the-plugin--closed"
+      },
+      "acceptance": "npm run eval:record:check"
+    },
+    {
+      "id": "AUD-V11",
+      "severity": "P0",
+      "title": "maintain's visual gate passes a 40%-wider Badge: geometry regressions on pale components are swallowed",
+      "source": "audit.json verified #11 (skeptic: STANDS, one narrowing)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "46029a88",
+          "848f64bc"
+        ],
+        "section": "docs/23-known-limitations.md#d17-the-visual-gate-could-not-see-geometry--closed"
+      },
+      "acceptance": "npm run maintain:visual",
+      "note": "Both content boxes gated at ±4 device px per axis on per-platform baselines; needs FIGMA_TOKEN (catalog-visual lane) — under --trust-lanes the lane run is the evidence."
+    },
+    {
+      "id": "AUD-V12",
+      "severity": "P0",
+      "title": "Child-part state-only DROP_SHADOW dropped with zero notes under verified-exact",
+      "source": "audit.json verified #12 (skeptic: STANDS)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "46029a88"
+        ],
+        "section": "docs/23-known-limitations.md#d14-child-part-state-only-channels-vanished-under-verified-exact--closed"
+      },
+      "acceptance": "npm run exact-proposal:check"
+    },
+    {
+      "id": "AUD-U01",
+      "severity": "P0",
+      "title": "Token prune deletes variables referenced only by local styles or by other files consuming the library",
+      "source": "audit.json unverified #1 (second skeptic pass: P0, already in the built plugin-dist)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "9d65808e"
+        ],
+        "section": "docs/23-known-limitations.md#b23-token-prune-does-not-see-style-bound-or-cross-file-consumers"
+      },
+      "acceptance": "npm run token-set-prune:check",
+      "note": "Pruning is OPT-IN (globalThis.DS_PRUNE_TOKENS === true); the default names `leftovers` and deletes nothing. The opt-in's blind spot stays disclosed as §B.23 (register item 4)."
+    },
+    {
+      "id": "AUD-U02",
+      "severity": "P0",
+      "title": "Recovered ToggleSwitch thumb renders outside its track: stylesWhen-absolute child never gets a position:relative parent",
+      "source": "audit.json unverified #2 (second skeptic pass: P0, rendered in Chromium)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "46029a88"
+        ],
+        "section": "docs/23-known-limitations.md#d15-the-recovered-toggleswitch-drew-its-thumb-outside-the-track--closed"
+      },
+      "acceptance": "npm run exact-proposal:check"
+    },
+    {
+      "id": "AUD-U03",
+      "severity": "P0",
+      "title": "Golden-path next step broken: propose drops semantics.roleException and generate refuses the entire 8-stem batch",
+      "source": "audit.json unverified #3 (second skeptic pass: P1 — a named refusal, ungated since 08-16)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "46029a88",
+          "0dc0811c"
+        ],
+        "section": "docs/23-known-limitations.md#d24-the-held-out-kit-295-silent-facts-a-wrong-enterprise-reason-a-batch-wide-refusal-a-non-compiling-card--closed-to-two"
+      },
+      "acceptance": "npm run flowbite-dump-propose:check",
+      "note": "Root role claims: attrs wins, a differing pair refuses by name (§D.12); generate refuses per contract and writes the rest (§D.24); the eight stems propose and generate on a fresh clone (parity/receipts/beta/GOLDEN-PATH-RECEIPT.md, 2026-08-22)."
+    },
+    {
+      "id": "AUD-U04",
+      "severity": "P0",
+      "title": "Every dropped canvas fact is computed, then discarded — only a trailing † survives",
+      "source": "audit.json unverified #4 (second skeptic pass: P1 cluster)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "46029a88"
+        ],
+        "section": "docs/23-known-limitations.md#d16-per-fact-canvas-receipts-collapsed-to-a-bare---closed"
+      },
+      "acceptance": "npm run code-only-facts:check"
+    },
+    {
+      "id": "AUD-U05",
+      "severity": "P1",
+      "title": "conformance exits 0 with three baselined red rows it labels HARMFUL",
+      "source": "audit.json unverified #5",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "d5b5b0b1"
+        ],
+        "section": "docs/23-known-limitations.md#b8-two-constructs-the-engine-carries-that-it-should-not"
+      },
+      "acceptance": "npm run conformance",
+      "note": "Not hidden: the gate prints the three UNDECLARED-CARRY rows as HARMFUL by name on every run, BASELINE.json is a decrease-only ratchet, and §B.8 (register item 4) names the constructs — @container, a non-matching @media branch, stage-box-equal. The carriage itself is a limitation, not a closed defect."
+    },
+    {
+      "id": "AUD-U06",
+      "severity": "P1",
+      "title": "dagger:census is RED in the working tree and measures a stale instrument; maintain excludes it",
+      "source": "audit.json unverified #6 (same cause as V03)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "7066eb86",
+          "436abe7b"
+        ],
+        "section": "docs/23-known-limitations.md#d25-one-truth-red-lanes-a-self-attested-eval-record-stale-receipts-a-clean-clone-that-could-not-build-the-plugin--closed"
+      },
+      "acceptance": "npm run dagger:census"
+    },
+    {
+      "id": "AUD-U07",
+      "severity": "P1",
+      "title": "generate references CSS custom properties no CLI command defines — dark mode never reaches code",
+      "source": "audit.json unverified #7",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "46029a88"
+        ],
+        "section": "docs/23-known-limitations.md#d19-generated-code-referenced-custom-properties-nothing-defined--closed"
+      },
+      "acceptance": "npm run css-vars:check"
+    },
+    {
+      "id": "AUD-U08",
+      "severity": "P1",
+      "title": "Every per-fact canvas receipt collapses to one bare '†' whose text is discarded",
+      "source": "audit.json unverified #8 (duplicate of U04 at P1)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "46029a88"
+        ],
+        "section": "docs/23-known-limitations.md#d16-per-fact-canvas-receipts-collapsed-to-a-bare---closed"
+      },
+      "acceptance": "npm run code-only-facts:check"
+    },
+    {
+      "id": "AUD-U09",
+      "severity": "P1",
+      "title": "DTCG object-form shadow token reaches Figma as the STRING \"[object Object]\" and draws nothing",
+      "source": "audit.json unverified #9",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "46029a88"
+        ],
+        "section": "docs/23-known-limitations.md#d18-the-token-runtime-wrote-object-object-an-unguarded-dark-mode-and-reverted-designer-values--closed"
+      },
+      "acceptance": "npm run token-set-prune:check"
+    },
+    {
+      "id": "AUD-U10",
+      "severity": "P1",
+      "title": "Dump reads clipsContent but propose never carries overflow hidden; closure:check counts it as READ",
+      "source": "audit.json unverified #10 (R2 propose residuals)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "042abde5"
+        ],
+        "section": "core/exact-proposal-check.ts"
+      },
+      "acceptance": "npm run exact-proposal:check",
+      "note": "clipsContent is carried as overflow on the proposed part and pinned in core/exact-proposal-check.ts (14 mentions)."
+    },
+    {
+      "id": "AUD-U11",
+      "severity": "P1",
+      "title": "Propose skips the italic receipt whenever font-weight is stamped — font-style: italic vanishes silently",
+      "source": "audit.json unverified #11 (R2 propose residuals)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "042abde5"
+        ],
+        "section": "core/exact-proposal-check.ts"
+      },
+      "acceptance": "npm run exact-proposal:check"
+    },
+    {
+      "id": "AUD-U12",
+      "severity": "P1",
+      "title": "Propose drops two-axis-correlated paint and mislabels it 'without correlating to any variant axis'",
+      "source": "audit.json unverified #12 (R2 propose residuals)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "042abde5"
+        ],
+        "section": "core/exact-proposal-check.ts"
+      },
+      "acceptance": "npm run exact-proposal:check"
+    },
+    {
+      "id": "AUD-U13",
+      "severity": "P1",
+      "title": "Propose drops an unbound BOOLEAN component property (Pressed) from the proposed contract with no note",
+      "source": "audit.json unverified #13 (R2 propose residuals)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "042abde5"
+        ],
+        "section": "core/exact-proposal-check.ts"
+      },
+      "acceptance": "npm run exact-proposal:check"
+    },
+    {
+      "id": "AUD-U14",
+      "severity": "P1",
+      "title": "WC emitter silently ignores statesByProp (per-axis state colour) — not emitted, not in named no-ops",
+      "source": "audit.json unverified #14",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "46029a88"
+        ],
+        "section": "docs/23-known-limitations.md#d12-anatomyrootattrs-dropped-by-the-react-and-wc-emitters--closed"
+      },
+      "acceptance": "npm run emitters:check"
+    },
+    {
+      "id": "AUD-U15",
+      "severity": "P1",
+      "title": "extract:computed:drift (V1-CLASS-01) does not finish in 4 min and mutates 11 tracked scorecard files during a 'check'",
+      "source": "audit.json unverified #15",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "7d9198d8"
+        ],
+        "section": "docs/23-known-limitations.md#d32-the-two-acceptance-rows-that-were-red-on-the-commit-itself--closed"
+      },
+      "acceptance": "npm run extract:computed:drift"
+    },
+    {
+      "id": "AUD-U16",
+      "severity": "P1",
+      "title": "V1-JOURNEY-03 acceptance fails: diagnose exits 1 with 24 'design BEHIND' findings on the first-party snapshot",
+      "source": "audit.json unverified #16",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "7d9198d8"
+        ],
+        "section": "docs/23-known-limitations.md#d32-the-two-acceptance-rows-that-were-red-on-the-commit-itself--closed"
+      },
+      "acceptance": "npm run reconcile && npm run diagnose"
+    },
+    {
+      "id": "AUD-U17",
+      "severity": "P1",
+      "title": "v1.0.0-rc.1 tag exists on origin (34d92c08, unsigned) while the checklist's 'Signed RC tag approved' row is empty",
+      "source": "audit.json unverified #17",
+      "status": "open-human",
+      "checklistRow": "Signed RC tag approved",
+      "note": "Tag operations are a recorded human approval (V1-REL-02). The owner either signs/retags on the release commit or deletes the premature tag and records the disposition; no automation row can close it."
+    },
+    {
+      "id": "AUD-U18",
+      "severity": "P1",
+      "title": "RELEASE_CHECKLIST and AUDIT-LEDGER evidence frozen 172 commits behind HEAD; every [x] automation row is stale",
+      "source": "audit.json unverified #18",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "24efd016",
+          "d5b5b0b1"
+        ],
+        "section": "RELEASE_CHECKLIST.md#immutable-inputs-frozen-at-5adfc8bc--stale-see-above"
+      },
+      "acceptance": "node -e \"const s=require('fs').readFileSync('RELEASE_CHECKLIST.md','utf8');process.exit(/STALE EVIDENCE/.test(s)&&/audit ledger/.test(s)?0:1)\"",
+      "note": "The overclaim is gone: every frozen section is labelled STALE with the reason, and the wave10 ledger row points at this generated ledger. The re-freeze itself is a release act (V1-REL-02)."
+    },
+    {
+      "id": "AUD-U19",
+      "severity": "P1",
+      "title": "ci:lanes fails: the maintain team gate and its checks run in no CI workflow",
+      "source": "audit.json unverified #19 (same cause as V09)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "436abe7b"
+        ],
+        "section": "docs/23-known-limitations.md#d25-one-truth-red-lanes-a-self-attested-eval-record-stale-receipts-a-clean-clone-that-could-not-build-the-plugin--closed"
+      },
+      "acceptance": "npm run ci:lanes"
+    },
+    {
+      "id": "AUD-U20",
+      "severity": "P1",
+      "title": "docs/24 What Works is STALE vs its sources; capability:fresh fails in five requirement rows",
+      "source": "audit.json unverified #20",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "c87a0f09",
+          "7066eb86"
+        ],
+        "section": "docs/23-known-limitations.md#d25-one-truth-red-lanes-a-self-attested-eval-record-stale-receipts-a-clean-clone-that-could-not-build-the-plugin--closed"
+      },
+      "acceptance": "npm run capability:fresh"
+    },
+    {
+      "id": "AUD-U21",
+      "severity": "P1",
+      "title": "Plugin engine bundle STALE vs core at HEAD — plugin:zip, plugin:check, build:playground, plugin:ui-check all fail on the commit",
+      "source": "audit.json unverified #21",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "7066eb86"
+        ],
+        "section": "docs/23-known-limitations.md#d25-one-truth-red-lanes-a-self-attested-eval-record-stale-receipts-a-clean-clone-that-could-not-build-the-plugin--closed"
+      },
+      "acceptance": "npm run plugin:check"
+    },
+    {
+      "id": "AUD-U22",
+      "severity": "P1",
+      "title": "Hosted no-clone plugin zip carries a third engine (3de67ce4 · 716832B) matching neither HEAD's receipt nor the working tree",
+      "source": "audit.json unverified #22",
+      "status": "open-human",
+      "checklistRow": "Cloudflare deployment approved",
+      "note": "The hosted zip is a deployment; a deployment is a recorded human approval (V1-REL-02) and `npm run deploy:check` is red by construction until it happens. docs/00 offers the hosted zip as the no-clone path without saying which engine it carries — the deploy (or a pinned engine stamp on that page) is the close."
+    },
+    {
+      "id": "AUD-U23",
+      "severity": "P1",
+      "title": "Journey A on the golden lane is not reproducible from main: the only Flowbite dump is gitignored",
+      "source": "audit.json unverified #23",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "9d65808e"
+        ],
+        "section": "docs/23-known-limitations.md#d25-one-truth-red-lanes-a-self-attested-eval-record-stale-receipts-a-clean-clone-that-could-not-build-the-plugin--closed"
+      },
+      "acceptance": "npm run flowbite-dump-propose:check",
+      "note": "extract/figma/fixtures/flowbite-eight.dump.json (+ stamps) is committed; the golden path was re-run on a fresh clone at eight stems (GOLDEN-PATH-RECEIPT.md)."
+    },
+    {
+      "id": "AUD-U24",
+      "severity": "P1",
+      "title": "docs/24 STALE on main by its own freshness guard; README's '266 generated files' contradicts docs/24 and evals/golden.json (291)",
+      "source": "audit.json unverified #24",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "c87a0f09"
+        ],
+        "section": "docs/23-known-limitations.md#d25-one-truth-red-lanes-a-self-attested-eval-record-stale-receipts-a-clean-clone-that-could-not-build-the-plugin--closed"
+      },
+      "acceptance": "npm run docs:check"
+    },
+    {
+      "id": "AUD-U25",
+      "severity": "P1",
+      "title": "npm run maintain exits 1 in a clean clone: needs FIGMA_TOKEN that BETA.md says you do not need",
+      "source": "audit.json unverified #25",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "436abe7b"
+        ],
+        "section": "docs/23-known-limitations.md#d25-one-truth-red-lanes-a-self-attested-eval-record-stale-receipts-a-clean-clone-that-could-not-build-the-plugin--closed"
+      },
+      "acceptance": "node -e \"const s=require('./package.json').scripts;process.exit(/maintain:visual|extract:figma:visual:catalog/.test(s.maintain)||!s['maintain:visual']?1:0)\"",
+      "note": "maintain is token-free; the Figma half is maintain:visual (catalog-visual lane, FIGMA_TOKEN secret). The one visual-named maintain step, extract:figma:visual:anchors, is file-only and needs no token. (First receipt run false-redded this row: the original one-liner grepped /visual/ and hit that step's name.)"
+    },
+    {
+      "id": "AUD-U26",
+      "severity": "P1",
+      "title": "BETA.md pins bundle sha af0a5dee…/108,557 B while every real build is d6da51d6…/109,839 B; golden-path receipt never re-run",
+      "source": "audit.json unverified #26",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "7066eb86"
+        ],
+        "section": "docs/23-known-limitations.md#d25-one-truth-red-lanes-a-self-attested-eval-record-stale-receipts-a-clean-clone-that-could-not-build-the-plugin--closed"
+      },
+      "acceptance": "npm run flowbite-bundle-fresh:check",
+      "note": "The committed bundle is byte-identical to two fresh builds; the golden path was re-run on a fresh clone (GOLDEN-PATH-RECEIPT.md, 2026-08-22)."
+    },
+    {
+      "id": "AUD-U27",
+      "severity": "P1",
+      "title": "verify:package tests the private root package, never the published packages",
+      "source": "audit.json unverified #27",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "78b96e56"
+        ],
+        "section": "docs/23-known-limitations.md#d26-no-published-engine-surface--closed"
+      },
+      "acceptance": "npm run verify:published"
+    },
+    {
+      "id": "AUD-U28",
+      "severity": "P1",
+      "title": "Committed Figma sync scripts stale vs the engine (10 at HEAD incl. golden-path tailwind/button.figma.js)",
+      "source": "audit.json unverified #28 (same fact as V04)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "7066eb86"
+        ],
+        "section": "docs/23-known-limitations.md#d25-one-truth-red-lanes-a-self-attested-eval-record-stale-receipts-a-clean-clone-that-could-not-build-the-plugin--closed"
+      },
+      "acceptance": "npm run figma:fresh"
+    },
+    {
+      "id": "AUD-U29",
+      "severity": "P1",
+      "title": "CI red on main on both lanes since 2026-08-08; maintain green is not CI green",
+      "source": "audit.json unverified #29 (same fact as V07)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "848f64bc",
+          "fa88dbf1"
+        ],
+        "section": "docs/23-known-limitations.md#d25-one-truth-red-lanes-a-self-attested-eval-record-stale-receipts-a-clean-clone-that-could-not-build-the-plugin--closed"
+      },
+      "acceptance": "npm run ci:lanes"
+    },
+    {
+      "id": "AUD-U30",
+      "severity": "P1",
+      "title": "No published engine surface: a Vue/Svelte/Angular emitter cannot be built outside the monorepo",
+      "source": "audit.json unverified #30",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "78b96e56",
+          "a3263f7c"
+        ],
+        "section": "docs/23-known-limitations.md#d26-no-published-engine-surface--closed"
+      },
+      "acceptance": "npm run verify:published"
+    },
+    {
+      "id": "AUD-U31",
+      "severity": "P1",
+      "title": "parity:flowbite pins 3 of 8 stems, never asserts its gap count, rewrites its own receipt each run, and misattributes ToggleSwitch's wall",
+      "source": "audit.json unverified #31",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "436abe7b",
+          "7066eb86"
+        ],
+        "section": "scripts/flowbite-contract-parity.ts"
+      },
+      "acceptance": "npm run parity:flowbite",
+      "note": "The receipt's 'Recorded <date>' line moves only when the body moves (the full lane runs it and fails on a dirtied tree); ToggleSwitch carries both FC-FONT-SUBSTRATE and FC-TOGGLE-THUMB (NORTH-STAR attribution retained, §D.15)."
+    },
+    {
+      "id": "AUD-U32",
+      "severity": "P1",
+      "title": "canvas-gate-standing-pin (C3-detection) renders nothing — it compares committed 2026-07-20 scorecards to hard-coded numbers",
+      "source": "audit.json unverified #32",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "436abe7b"
+        ],
+        "section": "docs/23-known-limitations.md#c64-headless-green-does-not-mean-live-correct"
+      },
+      "acceptance": "npm run eval -- --only canvas-gate-standing-pin",
+      "note": "The eval is a PIN of committed scorecards and says so in its own claim text ('pinned per component, round-5d final run'); the re-render lives in maintain:visual / catalog-visual, and §C.6.4–C.6.5 name that a headless pin is not a live render."
+    },
+    {
+      "id": "AUD-U33",
+      "severity": "P1",
+      "title": "All three CI workflows red on origin/main for the last three pushes; fast-lane gates red locally too",
+      "source": "audit.json unverified #33 (same fact as V07/U29)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "848f64bc",
+          "fa88dbf1"
+        ],
+        "section": "docs/23-known-limitations.md#d25-one-truth-red-lanes-a-self-attested-eval-record-stale-receipts-a-clean-clone-that-could-not-build-the-plugin--closed"
+      },
+      "acceptance": "npm run ci:lanes"
+    },
+    {
+      "id": "AUD-U34",
+      "severity": "P1",
+      "title": "Prune runtime ships in every generated token script with no opt-out; BETA.md flips 'never prunes' to 'prunes' on the strength of a mock",
+      "source": "audit.json unverified #34",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "9d65808e"
+        ],
+        "section": "docs/23-known-limitations.md#b23-token-prune-does-not-see-style-bound-or-cross-file-consumers"
+      },
+      "acceptance": "npm run token-set-prune:check",
+      "note": "Opt-in only (DS_PRUNE_TOKENS); default names leftovers."
+    },
+    {
+      "id": "AUD-U35",
+      "severity": "P1",
+      "title": "Hop-4 fixture is a hand-assembled 'compact' dump and the live-extras gate injects invented values that differ from the live file",
+      "source": "audit.json unverified #35",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "9d65808e"
+        ],
+        "section": "scripts/flowbite-dump-propose-check.ts"
+      },
+      "acceptance": "npm run flowbite-dump-propose:check",
+      "note": "The fixture is a dump of 59mLQlOMiD5w5za6SUcoO5 (extractedAt 2026-08-20, dump v1.30, provenance + degradations carried); the extras pass is pinned as FC-HOP4-LIVE-EXTRAS-SAME-AS-ABSENT — injecting the fields a live pass adds must not grow the mint set, and geometry is never injected (FC-GEOMETRY-EXCLUDED)."
+    },
+    {
+      "id": "AUD-U36",
+      "severity": "P1",
+      "title": "Exact-projection gate relaxed: verified-exact 45/45 reported while re-emit of the proposed contract draws 40 rows",
+      "source": "audit.json unverified #36",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "9d65808e"
+        ],
+        "section": "core/exact-proposal-check.ts"
+      },
+      "acceptance": "npm run exact-proposal:check",
+      "note": "The strict exact gate refuses unrecovered preview cells again (9d65808e); the one relaxation that survived is named FC-PROPOSE-SPARSE-STATE and pinned."
+    },
+    {
+      "id": "AUD-U37",
+      "severity": "P1",
+      "title": "npm run typecheck is red: 22 errors (HEAD: 3); 19 introduced by the session",
+      "source": "audit.json unverified #37 (same fact as V06)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "9d65808e",
+          "5a270f89"
+        ],
+        "section": "docs/23-known-limitations.md#d25-one-truth-red-lanes-a-self-attested-eval-record-stale-receipts-a-clean-clone-that-could-not-build-the-plugin--closed"
+      },
+      "acceptance": "npm run typecheck"
+    },
+    {
+      "id": "AUD-U38",
+      "severity": "P1",
+      "title": "CLI Journey A discards the dump's captured _variables (73 values + per-mode trees) with no receipt",
+      "source": "audit.json unverified #38",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "042abde5",
+          "0dc0811c"
+        ],
+        "section": "docs/23-known-limitations.md#d24-the-held-out-kit-295-silent-facts-a-wrong-enterprise-reason-a-batch-wide-refusal-a-non-compiling-card--closed-to-two"
+      },
+      "acceptance": "npm run exact-proposal:check",
+      "note": "FC-DUMP-PROPOSE-CAPTURED-VARIABLES-DROPPED: the dump's _variables land beside minted.dtcg.json as captured.dtcg.json on both the plugin and the REST path."
+    },
+    {
+      "id": "AUD-U39",
+      "severity": "P1",
+      "title": "Live canvas specHash matches the UNCOMMITTED tree on 8/8 stems and mismatches HEAD on 8/8 — committed main does not describe the demo canvas",
+      "source": "audit.json unverified #39",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "5a270f89",
+          "d5b5b0b1"
+        ],
+        "section": "docs/23-known-limitations.md#d30-the-flowbite-eight-carried-no-canvas-anchor-in-the-contract--closed"
+      },
+      "acceptance": "npm run figma:fresh",
+      "note": "The tree is committed (Phase 0) and the eight contracts carry bindings.figma.anchors to 59mLQ…; the sync-spine lane records every specHash move as a decided row."
+    },
+    {
+      "id": "AUD-U40",
+      "severity": "P1",
+      "title": "Default exact projection refuses every committed foreign dump (Untitled UI dumps-v2, Eventz MERGED); the flag that makes them work is undocumented",
+      "source": "audit.json unverified #40",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "9d65808e"
+        ],
+        "section": "core/exact-proposal-check.ts"
+      },
+      "acceptance": "npm run exact-proposal:check",
+      "note": "FC-PROPOSE-SPARSE-STATE names the relaxation the foreign dumps need; the exam's REST path runs under --reviewable-inversion by name (FIGMA-DS-EXAM.md §2)."
+    },
+    {
+      "id": "AUD-U41",
+      "severity": "P1",
+      "title": "Generated React references 176 CSS custom properties that exist in no shipped CSS file; no CLI verb builds one",
+      "source": "audit.json unverified #41 (duplicate of U07)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "46029a88"
+        ],
+        "section": "docs/23-known-limitations.md#d19-generated-code-referenced-custom-properties-nothing-defined--closed"
+      },
+      "acceptance": "npm run css-vars:check"
+    },
+    {
+      "id": "AUD-U42",
+      "severity": "P1",
+      "title": "Part-level host element, aria attrs and events are never stamped on the canvas and never named per part",
+      "source": "audit.json unverified #42",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "46029a88",
+          "042abde5"
+        ],
+        "section": "docs/23-known-limitations.md#d21-root-level-text-never-drew-literal-ink-and-the-emitters-last-silent-default-thirty-runtime-swallows--closed"
+      },
+      "acceptance": "npm run code-only-facts:check",
+      "note": "Every canvas-dropped fact is a codeOnlyFact {part, kind, channel, value, reason} in the script, the bundle, the plugin data and the plugin report (§D.16, §D.21)."
+    },
+    {
+      "id": "AUD-U43",
+      "severity": "P1",
+      "title": "Boolean variant axes are excluded from both correlation routines: Eventz isDisabled opacity and isChecked icon state dropped with a FALSE note",
+      "source": "audit.json unverified #43 (R2 propose residuals)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "042abde5"
+        ],
+        "section": "core/exact-proposal-check.ts"
+      },
+      "acceptance": "npm run exact-proposal:check"
+    },
+    {
+      "id": "AUD-U44",
+      "severity": "P1",
+      "title": "The mock that certifies the engine is permissive exactly where live Figma throws: paints/effects/text props unvalidated, fonts always load",
+      "source": "audit.json unverified #44",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "042abde5"
+        ],
+        "section": "docs/23-known-limitations.md#c64-headless-green-does-not-mean-live-correct"
+      },
+      "acceptance": "npm run plugin:check",
+      "note": "The mock carries the REAL-FIGMA VALIDATION sites live runs found (fontSize, grid tracks, CHANGE_TO destinations) and names what it does not validate in its header; the emitted runtime pushes FC-RT-* degradations into the per-set result instead of swallowing (§D.21); §C.6.4 states that headless green is not live correct and the live receipts (LIVE-APPLY-RECEIPT.md, GOLDEN-PATH-RECEIPT.md) are the real-Figma evidence."
+    },
+    {
+      "id": "AUD-U45",
+      "severity": "P1",
+      "title": "Every bundle tokenSet gets a cloned 'Dark' mode via an unguarded addMode — misleading on Pro files, throws on Starter-plan files",
+      "source": "audit.json unverified #45",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "46029a88"
+        ],
+        "section": "docs/23-known-limitations.md#d18-the-token-runtime-wrote-object-object-an-unguarded-dark-mode-and-reverted-designer-values--closed"
+      },
+      "acceptance": "npm run token-set-prune:check"
+    },
+    {
+      "id": "AUD-U46",
+      "severity": "P1",
+      "title": "dagger:census — the only pin on the dropped-fact channel — is RED and is not part of maintain",
+      "source": "audit.json unverified #46 (duplicate of U06)",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "7066eb86",
+          "436abe7b"
+        ],
+        "section": "docs/23-known-limitations.md#d25-one-truth-red-lanes-a-self-attested-eval-record-stale-receipts-a-clean-clone-that-could-not-build-the-plugin--closed"
+      },
+      "acceptance": "npm run dagger:census"
+    },
+    {
+      "id": "AUD-U47",
+      "severity": "P1",
+      "title": "First-party layered tokens cannot ride figma bundle: CLI prints ✔ but 34/51 contracts refuse inside the plugin",
+      "source": "audit.json unverified #47",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "a14d9ba7"
+        ],
+        "section": "docs/23-known-limitations.md#d20-the-first-party-corpus-could-not-ride-the-bundle--closed"
+      },
+      "acceptance": "npm run first-party-bundle:check"
+    },
+    {
+      "id": "AUD-U48",
+      "severity": "P1",
+      "title": "Re-paste silently reverts designer edits to token VARIABLE values — no variable-level drift exists",
+      "source": "audit.json unverified #48",
+      "status": "closed",
+      "closing": {
+        "commits": [
+          "46029a88"
+        ],
+        "section": "docs/23-known-limitations.md#d18-the-token-runtime-wrote-object-object-an-unguarded-dark-mode-and-reverted-designer-values--closed"
+      },
+      "acceptance": "npm run token-set-prune:check"
+    }
+  ]
+}

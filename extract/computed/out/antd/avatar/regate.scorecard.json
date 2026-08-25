@@ -1,0 +1,1270 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "Avatar",
+  "config": "extract/computed/configs/antd.json",
+  "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "declared": {
+    "base": [
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "root",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "root",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "label",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "label",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, 0, 0)"
+      }
+    ],
+    "state": []
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "Avatar",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 6,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 1488,
+      "cellsEqual": 1368,
+      "pctEqual": 91.93548387096774,
+      "rowsFullyEqual": 0,
+      "rows": 24
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 24,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 41,
+      "mintedLeavesUnfolded": 40,
+      "baseBindings": 26,
+      "stateBindings": 0,
+      "codeOnlyChannels": 3,
+      "overflowBindings": 0,
+      "folds": 16
+    },
+    "worstRows": [
+      {
+        "key": "small.circle__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 7,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "small.circle__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 7,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "small.circle__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 7,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "small.circle__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 7,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "default.circle__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 7,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "default.circle__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 7,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "default.circle__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 7,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "default.circle__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 7,
+        "unscorable": "no-original"
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "root.list-style-type",
+        24
+      ],
+      [
+        "root.vertical-align",
+        24
+      ],
+      [
+        "label.list-style-type",
+        24
+      ],
+      [
+        "root.border-bottom-left-radius",
+        12
+      ],
+      [
+        "root.border-bottom-right-radius",
+        12
+      ],
+      [
+        "root.border-top-left-radius",
+        12
+      ],
+      [
+        "root.border-top-right-radius",
+        12
+      ]
+    ],
+    "namedLosses": [
+      "code-only: root.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/antd/tokens/antd-minted.dtcg.json",
+      "leavesAdded": 1238,
+      "divergent": [
+        {
+          "token": "imported.avatar.root.color",
+          "fresh": "#ffffff",
+          "shipped": "{color-text-light-solid}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.avatar.root.font-size",
+          "fresh": "14px",
+          "shipped": "{avatar-text-font-size}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.avatar.root.height.default",
+          "fresh": "32px",
+          "shipped": "{avatar-container-size}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.avatar.root.height.large",
+          "fresh": "40px",
+          "shipped": "{avatar-container-size-lg}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.avatar.root.height.small",
+          "fresh": "24px",
+          "shipped": "{avatar-container-size-sm}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.avatar.root.width.default",
+          "fresh": "32px",
+          "shipped": "{avatar-container-size}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.avatar.root.width.large",
+          "fresh": "40px",
+          "shipped": "{avatar-container-size-lg}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.avatar.root.width.small",
+          "fresh": "24px",
+          "shipped": "{avatar-container-size-sm}",
+          "resolvedEqual": true
+        }
+      ]
+    },
+    "rows": [
+      {
+        "key": "small.circle__default",
+        "channelsCompared": 62,
+        "channelsEqual": 55,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "12px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "12px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-left-radius",
+            "ours": "12px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "12px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.circle__hover",
+        "channelsCompared": 62,
+        "channelsEqual": 55,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "12px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "12px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-left-radius",
+            "ours": "12px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "12px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.circle__focus-visible",
+        "channelsCompared": 62,
+        "channelsEqual": 55,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "12px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "12px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-left-radius",
+            "ours": "12px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "12px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.circle__active",
+        "channelsCompared": 62,
+        "channelsEqual": 55,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "12px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "12px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-left-radius",
+            "ours": "12px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "12px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.square__default",
+        "channelsCompared": 62,
+        "channelsEqual": 59,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.square__hover",
+        "channelsCompared": 62,
+        "channelsEqual": 59,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.square__focus-visible",
+        "channelsCompared": 62,
+        "channelsEqual": 59,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "small.square__active",
+        "channelsCompared": 62,
+        "channelsEqual": 59,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.circle__default",
+        "channelsCompared": 62,
+        "channelsEqual": 55,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "16px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "16px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-left-radius",
+            "ours": "16px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "16px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.circle__hover",
+        "channelsCompared": 62,
+        "channelsEqual": 55,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "16px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "16px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-left-radius",
+            "ours": "16px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "16px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.circle__focus-visible",
+        "channelsCompared": 62,
+        "channelsEqual": 55,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "16px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "16px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-left-radius",
+            "ours": "16px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "16px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.circle__active",
+        "channelsCompared": 62,
+        "channelsEqual": 55,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "16px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "16px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-left-radius",
+            "ours": "16px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "16px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.square__default",
+        "channelsCompared": 62,
+        "channelsEqual": 59,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.square__hover",
+        "channelsCompared": 62,
+        "channelsEqual": 59,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.square__focus-visible",
+        "channelsCompared": 62,
+        "channelsEqual": 59,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.square__active",
+        "channelsCompared": 62,
+        "channelsEqual": 59,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.circle__default",
+        "channelsCompared": 62,
+        "channelsEqual": 55,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "20px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "20px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-left-radius",
+            "ours": "20px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "20px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.circle__hover",
+        "channelsCompared": 62,
+        "channelsEqual": 55,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "20px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "20px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-left-radius",
+            "ours": "20px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "20px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.circle__focus-visible",
+        "channelsCompared": 62,
+        "channelsEqual": 55,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "20px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "20px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-left-radius",
+            "ours": "20px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "20px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.circle__active",
+        "channelsCompared": 62,
+        "channelsEqual": 55,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-left-radius",
+            "ours": "20px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-right-radius",
+            "ours": "20px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-left-radius",
+            "ours": "20px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-right-radius",
+            "ours": "20px",
+            "theirs": "50%"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.square__default",
+        "channelsCompared": 62,
+        "channelsEqual": 59,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.square__hover",
+        "channelsCompared": 62,
+        "channelsEqual": 59,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.square__focus-visible",
+        "channelsCompared": 62,
+        "channelsEqual": 59,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "large.square__active",
+        "channelsCompared": 62,
+        "channelsEqual": 59,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "middle"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}

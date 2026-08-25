@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "fluent.avatar",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Avatar — generated from contract fluent.avatar v0.2.0 † (14 code-only facts — see plugin report)",
+    "description": "Avatar — generated from contract fluent.avatar v0.2.0 † (15 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -1447,6 +1447,17 @@ const COMPONENTS = [
       {
         "part": "root",
         "kind": "channel",
+        "channel": "size [unset]",
+        "value": "24|48|96",
+        "reason": "defaultless axis — the library's own rendering when \"size\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 3 declared values only, and a proposal read back from the canvas will call \"24\" the default (FC-UNSET-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 18,
+          "of": 18
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
         "channel": "top",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -1903,6 +1914,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -2252,6 +2265,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -2280,6 +2298,14 @@ async function buildNode(spec, registry) {
     }
   }
   resizeOutOfFlow(node, built);
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
+    }
+  }
   return node;
 }
 
@@ -2761,6 +2787,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -2890,6 +2917,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -3056,6 +3084,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');

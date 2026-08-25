@@ -1,6 +1,6 @@
 {
   "_marker": "REGATE DRIFT BASELINE — what extract/computed/regate.ts (OFFLINE re-fuse of the committed captured truth through the CURRENT engine) produces, per component. NOT a copy of the harness scorecards: where the two differ, `gapCause` names why (docs/20-regate-drift.md). Re-record deliberately with `npm run extract:computed:drift -- --write` and say what moved. Every row is also the committed out/<lib>/<comp>/regate.scorecard.json — `npm run extract:computed:drift` (VERIFY, fast lane) holds the two together without a browser; `extract:computed:drift:remeasure` (full lane) re-fuses and compares.",
-  "recordedAt": "2026-08-23",
+  "recordedAt": "2026-08-24",
   "rows": [
     {
       "library": "altitude",
@@ -73,6 +73,114 @@
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 82.4074074074074,
       "gapCause": "ALTITUDE LINK ROUND (styled-channel door, 2 clauses) — re-recorded DELIBERATELY, and every altitude row moved UP or stayed EXACT. (1) a PAINTED text-decoration-line is no longer dropped for equalling the <a> control: that control is `<a href>` (:any-link, UA underline) while core/emit-html writes the root <a> with NO href, and Figma has no user agent at all — altitude Link 82.407 -> 83.621, cellsCompared 432 -> 464. `none` is still dropped by value, so nothing else in the corpus admits a decoration (MEASURED: altitude Link root is the ONLY part in every committed capture with a non-none text-decoration-line). (2) font-family joins the round-5c text-part typography clause (font-size/line-height/font-weight), which had left out the one channel FC-FONT-SUBSTRATE is about: a library that ships a global body family styles the CONTROL too, so control-equality reported \"free\" for a family the generated surfaces never inherit. That clause was previously applied BY HAND — ac5e6181 back-ported \"altitude Plex families\" into the enriched contracts — and the hand-edit is now derived instead (Avatar 81.690 -> 82.192, Badge 93.750 -> 93.939, Button 81.484 -> 81.769, Heading cellsCompared 392 -> 448). NAMED CONSEQUENCE FOR THE OTHER LANES: clause (2) is corpus-wide by nature and WILL move every other library offline row on the next run — measured text parts whose family equals their control: astryx 12, carbon 22, fluent 14, mui 9, shadcn 14, tailwind 5, polaris single-component dirs 6. Those rows were NOT re-recorded here because this round did not own, re-fuse or re-promote those lanes; re-record them with the lane that does. The committed-vs-offline gaps on the four altitude rows are the harness scorecards predating the door — a recapture closes them."
+    },
+    {
+      "library": "antd",
+      "component": "Alert",
+      "rerunPctEqual": 86.63793103448276,
+      "cellsCompared": 14848,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 86.63793103448276,
+      "gapCause": ""
+    },
+    {
+      "library": "antd",
+      "component": "Avatar",
+      "rerunPctEqual": 91.93548387096774,
+      "cellsCompared": 1488,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 91.93548387096774,
+      "gapCause": ""
+    },
+    {
+      "library": "antd",
+      "component": "Badge",
+      "rerunPctEqual": 93.40836012861736,
+      "cellsCompared": 4976,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 93.40836012861736,
+      "gapCause": ""
+    },
+    {
+      "library": "antd",
+      "component": "Button",
+      "rerunPctEqual": 83.89307228915662,
+      "cellsCompared": 79680,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 83.89307228915662,
+      "gapCause": ""
+    },
+    {
+      "library": "antd",
+      "component": "Card",
+      "rerunPctEqual": 91.35338345864662,
+      "cellsCompared": 2128,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 91.35338345864662,
+      "gapCause": ""
+    },
+    {
+      "library": "antd",
+      "component": "Checkbox",
+      "rerunPctEqual": 85.04273504273505,
+      "cellsCompared": 2808,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 85.04273504273505,
+      "gapCause": ""
+    },
+    {
+      "library": "antd",
+      "component": "Input",
+      "rerunPctEqual": 79.87588652482269,
+      "cellsCompared": 13536,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 79.87588652482269,
+      "gapCause": ""
+    },
+    {
+      "library": "antd",
+      "component": "Progress",
+      "rerunPctEqual": 93.14079422382672,
+      "cellsCompared": 2216,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 93.14079422382672,
+      "gapCause": ""
+    },
+    {
+      "library": "antd",
+      "component": "Radio",
+      "rerunPctEqual": 74.79508196721312,
+      "cellsCompared": 1952,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 74.79508196721312,
+      "gapCause": ""
+    },
+    {
+      "library": "antd",
+      "component": "Switch",
+      "rerunPctEqual": 94.32515337423312,
+      "cellsCompared": 5216,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 94.32515337423312,
+      "gapCause": ""
+    },
+    {
+      "library": "antd",
+      "component": "Tag",
+      "rerunPctEqual": 97.5,
+      "cellsCompared": 5120,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 97.5,
+      "gapCause": ""
+    },
+    {
+      "library": "antd",
+      "component": "Tooltip",
+      "rerunPctEqual": 95,
+      "cellsCompared": 100,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 95,
+      "gapCause": ""
     },
     {
       "library": "astryx",
@@ -216,7 +324,7 @@
       "cellsCompared": 1320,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 90.03831417624521,
-      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Modal +0.294 (89.744 → 90.038) and cellsCompared 1560 → 1305 — a VOCABULARY CHANGE, named: `display: grid` and `inline-grid` now lower to the flex vocabulary from the MEASURED grid-template track counts (modal-container is 1 column x 4 rows -> flex column). The dropped rows are the inert `popover` tooltip wrapper on the close button, refused by the new inert-overlay-wrapper rule (it draws no box in any combo and every one of its children is display:none)."
+      "gapCause": "INTEGRATED ENGINE ROUND (v1-integration 2026-08-24): offline 90.038 -> 87.879 (gap -2.16) and cellsCompared 1305 -> 1320 — the census grid grammar (0161ef9f, Part.placement) puts grid placement channels in the styled set, so per size combo (5 combos, default interaction) three placement cells are newly compared (all UNEQUAL) and three previously-equal placement cells flip UNEQUAL: grid-column-start / grid-row-start / grid-row-end on modal-header, label-5 and btn-set, where the emit renders auto and the live grid resolves 1/2. The parent modal-container declined structured grid promotion BY NAME (computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list), the emit lowers to the flex vocabulary, and every one of the 15 cells is already a named code-only loss in the scorecard — a vocabulary widening honestly scored, not a silent regression. Prior round kept: LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Modal +0.294 (89.744 → 90.038) and cellsCompared 1560 → 1305 — a VOCABULARY CHANGE, named: `display: grid` and `inline-grid` now lower to the flex vocabulary from the MEASURED grid-template track counts (modal-container is 1 column x 4 rows -> flex column). The dropped rows are the inert `popover` tooltip wrapper on the close button, refused by the new inert-overlay-wrapper rule (it draws no box in any combo and every one of its children is display:none)."
     },
     {
       "library": "carbon",
@@ -707,11 +815,11 @@
     {
       "library": "polaris",
       "component": "Tag",
-      "rerunPctEqual": 81.55133483862399,
+      "rerunPctEqual": 81.6177447204144,
       "cellsCompared": 7529,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.01607890825564,
-      "gapCause": "ENGINE MOVED SINCE CAPTURE (re-recorded 2026-08-23, r12 over 537022b0; docs/23 §D.33): cells compared 7401 -> 7529, cells equal 5996 -> 6140 — 128 added cell(s), 144 more equal, so 16 previously-compared cells changed verdict to EQUAL. repaired: this row was pinned REFUSED on 2026-08-23 (§B.29) — the offline re-fuse carried link.width as BOTH the G8 literal fit-content and a minted token because fuse.ts carriedChannels mapped width through CHANNEL_TO_COMPUTED with `?? []` and so never saw the stated literal; the literal is now the one carrier (the link hugs) and the not-minted px is receipted (carried-axis-not-reminted). Harness number untouched."
+      "gapCause": "INTEGRATED ENGINE ROUND (v1-integration 2026-08-24): offline 81.551 -> 81.618 with the 7529-cell denominator unchanged — five large.on remove-button background-color cells flip to EQUAL because the re-fused mint resolves the button's off-plane background token to the library's own rgba(227, 227, 227, 1) (--p-color-bg-fill-tertiary; the r12 engine resolved rgba(239, 239, 239, 1)); the fusion doors landed since 6ab3a5c6 (antd-exam heal loop + census merge) are the movers. Against the committed harness (81.016, 5996/7401) that is 128 added cells and 149 more equal, so 21 previously-compared cells changed verdict to EQUAL. Prior round kept: ENGINE MOVED SINCE CAPTURE (re-recorded 2026-08-23, r12 over 537022b0; docs/23 §D.33): cells compared 7401 -> 7529, cells equal 5996 -> 6140 — 128 added cell(s), 144 more equal, so 16 previously-compared cells changed verdict to EQUAL. repaired: this row was pinned REFUSED on 2026-08-23 (§B.29) — the offline re-fuse carried link.width as BOTH the G8 literal fit-content and a minted token because fuse.ts carriedChannels mapped width through CHANNEL_TO_COMPUTED with `?? []` and so never saw the stated literal; the literal is now the one carrier (the link hugs) and the not-minted px is receipted (carried-axis-not-reminted). Harness number untouched."
     },
     {
       "library": "polaris",

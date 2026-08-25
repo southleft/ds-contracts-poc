@@ -1,0 +1,62 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "alert",
+  "anchors": [
+    {
+      "leaf": "imported.alert.alert-icon.color.error",
+      "token": "color-error",
+      "part": "alert-icon",
+      "cssProperty": "color",
+      "varName": "--ant-color-error",
+      "selector": ".ant-alert-error .ant-alert-icon"
+    },
+    {
+      "leaf": "imported.alert.alert-icon.color.info",
+      "token": "color-info",
+      "part": "alert-icon",
+      "cssProperty": "color",
+      "varName": "--ant-color-info",
+      "selector": ".ant-alert-info .ant-alert-icon"
+    },
+    {
+      "leaf": "imported.alert.alert-icon.color.success",
+      "token": "color-success",
+      "part": "alert-icon",
+      "cssProperty": "color",
+      "varName": "--ant-color-success",
+      "selector": ".ant-alert-success .ant-alert-icon"
+    },
+    {
+      "leaf": "imported.alert.alert-icon.color.warning",
+      "token": "color-warning",
+      "part": "alert-icon",
+      "cssProperty": "color",
+      "varName": "--ant-color-warning",
+      "selector": ".ant-alert-warning .ant-alert-icon"
+    },
+    {
+      "leaf": "imported.alert.alert-icon.font-size.on",
+      "token": "alert-with-description-icon-size",
+      "part": "alert-icon",
+      "cssProperty": "font-size",
+      "varName": "--ant-alert-with-description-icon-size",
+      "selector": ".ant-alert-with-description .ant-alert-icon"
+    },
+    {
+      "leaf": "imported.alert.label.font-size.on",
+      "token": "font-size-lg",
+      "part": "label",
+      "cssProperty": "font-size",
+      "varName": "--ant-font-size-lg",
+      "selector": ".ant-alert-with-description .ant-alert-message"
+    },
+    {
+      "leaf": "imported.alert.label.margin-bottom.on",
+      "token": "margin-xs",
+      "part": "label",
+      "cssProperty": "margin-bottom",
+      "varName": "--ant-margin-xs",
+      "selector": ".ant-alert-with-description .ant-alert-message"
+    }
+  ]
+}

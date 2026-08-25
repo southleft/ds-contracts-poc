@@ -60,7 +60,7 @@ const COMPONENTS = [
     "contractId": "carbon.accordion",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Accordion — generated from contract carbon.accordion v0.2.0 † (41 code-only facts — see plugin report)",
+    "description": "Accordion — generated from contract carbon.accordion v0.2.0 † (43 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -719,9 +719,6 @@ const COMPONENTS = [
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/accordion/label-2/padding-right"
                       },
-                      "margins": {
-                        "left": 32
-                      },
                       "fillW": true
                     }
                   ],
@@ -885,9 +882,6 @@ const COMPONENTS = [
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/accordion/label-2/padding-right"
                       },
-                      "margins": {
-                        "left": 32
-                      },
                       "fillW": true
                     }
                   ],
@@ -1050,9 +1044,6 @@ const COMPONENTS = [
                         "minWidth": "imported/shared/size-0",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/accordion/label-2/padding-right"
-                      },
-                      "margins": {
-                        "left": 32
                       },
                       "fillW": true
                     }
@@ -1391,9 +1382,6 @@ const COMPONENTS = [
                         "minWidth": "imported/shared/size-0",
                         "paddingLeft": "imported/shared/size-16",
                         "paddingRight": "imported/accordion/label-2/padding-right"
-                      },
-                      "margins": {
-                        "left": 32
                       },
                       "fillW": true
                     }
@@ -1850,10 +1838,38 @@ const COMPONENTS = [
       },
       {
         "part": "label-2",
+        "kind": "channel",
+        "channel": "margin-left",
+        "value": "32px",
+        "reason": "the margin-box wrapper is skipped — a FILL-sized child cannot be wrapped in a margin box without breaking the fill; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+        "variants": {
+          "count": 4,
+          "of": 8,
+          "names": [
+            "Align=Start, Size=Sm",
+            "Align=Start, Size=Md",
+            "Align=Start, Size=Lg",
+            "Align=Start, Size=Sm, State=Disabled"
+          ]
+        }
+      },
+      {
+        "part": "label-2",
         "kind": "declared",
         "channel": "display",
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "size [unset]",
+        "value": "sm|md|lg",
+        "reason": "defaultless axis — the library's own rendering when \"size\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 3 declared values only, and a proposal read back from the canvas will call \"sm\" the default (FC-UNSET-PLANE-UNDRAWN)",
         "variants": {
           "count": 8,
           "of": 8
@@ -2296,6 +2312,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -2586,6 +2604,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -2613,6 +2636,14 @@ async function buildNode(spec, registry) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
     applyMarginBox(node, childNode, child, registry);
+  }
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
+    }
   }
   return node;
 }
@@ -3093,6 +3124,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -3219,6 +3251,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -3385,6 +3418,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -3435,7 +3469,7 @@ const COMPONENTS = [
     "contractId": "carbon.button",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Button — generated from contract carbon.button v0.2.0 † (28 code-only facts — see plugin report)",
+    "description": "Button — generated from contract carbon.button v0.2.0 † (29 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -8329,6 +8363,17 @@ const COMPONENTS = [
       {
         "part": "root",
         "kind": "channel",
+        "channel": "size [unset]",
+        "value": "xs|sm|md|lg|xl|2xl",
+        "reason": "defaultless axis — the library's own rendering when \"size\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 6 declared values only, and a proposal read back from the canvas will call \"xs\" the default (FC-UNSET-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 80,
+          "of": 80
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
         "channel": "top",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -8840,6 +8885,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.effectStack) {
     // v15: full box-shadow stack — multi-layer + inset as native effects.
@@ -9096,6 +9143,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -9121,6 +9173,14 @@ async function buildNode(spec, registry) {
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
+    }
+  }
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
     }
   }
   return node;
@@ -9601,6 +9661,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -9727,6 +9788,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -9893,6 +9955,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -9943,7 +10006,7 @@ const COMPONENTS = [
     "contractId": "carbon.checkbox",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Checkbox — generated from contract carbon.checkbox v0.2.0 † (29 code-only facts — see plugin report)",
+    "description": "Checkbox — generated from contract carbon.checkbox v0.2.0 † (32 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -10364,6 +10427,17 @@ const COMPONENTS = [
     "codeOnlyFacts": [
       {
         "part": "checkbox",
+        "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.checkbox.checkbox.color-state-disabled}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "checkbox",
         "kind": "declared",
         "channel": "appearance",
         "value": "auto",
@@ -10464,6 +10538,17 @@ const COMPONENTS = [
       {
         "part": "checkbox-label",
         "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.shared.color-16161640}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "checkbox-label",
+        "kind": "channel",
         "channel": "left",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -10555,6 +10640,17 @@ const COMPONENTS = [
         "channel": "display",
         "value": "none",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 3,
+          "of": 3
+        }
+      },
+      {
+        "part": "label",
+        "kind": "channel",
+        "channel": "color [disabled]",
+        "value": "{imported.shared.color-16161640}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
         "variants": {
           "count": 3,
           "of": 3
@@ -11107,6 +11203,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -11573,6 +11671,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -11601,6 +11704,14 @@ async function buildNode(spec, registry) {
     }
   }
   resizeOutOfFlow(node, built);
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
+    }
+  }
   return node;
 }
 
@@ -12082,6 +12193,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -12211,6 +12323,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -12377,6 +12490,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -12427,7 +12541,7 @@ const COMPONENTS = [
     "contractId": "carbon.iconbutton",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "IconButton — generated from contract carbon.iconbutton v0.2.0 † (27 code-only facts — see plugin report)",
+    "description": "IconButton — generated from contract carbon.iconbutton v0.2.0 † (28 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -14054,6 +14168,17 @@ const COMPONENTS = [
       {
         "part": "root",
         "kind": "channel",
+        "channel": "size [unset]",
+        "value": "xs|sm|md|lg",
+        "reason": "defaultless axis — the library's own rendering when \"size\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 4 declared values only, and a proposal read back from the canvas will call \"xs\" the default (FC-UNSET-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 16,
+          "of": 16
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
         "channel": "top",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -14543,6 +14668,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -14743,6 +14870,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -14768,6 +14900,14 @@ async function buildNode(spec, registry) {
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
+    }
+  }
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
     }
   }
   return node;
@@ -15248,6 +15388,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -15374,6 +15515,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -15540,6 +15682,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -15590,7 +15733,7 @@ const COMPONENTS = [
     "contractId": "carbon.inlinenotification",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "InlineNotification — generated from contract carbon.inlinenotification v0.2.0 † (33 code-only facts — see plugin report)",
+    "description": "InlineNotification — generated from contract carbon.inlinenotification v0.2.0 † (34 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -15634,9 +15777,6 @@ const COMPONENTS = [
                 "counter": "CENTER"
               },
               "grow": true,
-              "margins": {
-                "left": 13
-              },
               "children": [
                 {
                   "type": "frame",
@@ -15781,9 +15921,6 @@ const COMPONENTS = [
                 "counter": "CENTER"
               },
               "grow": true,
-              "margins": {
-                "left": 13
-              },
               "children": [
                 {
                   "type": "frame",
@@ -15928,9 +16065,6 @@ const COMPONENTS = [
                 "counter": "CENTER"
               },
               "grow": true,
-              "margins": {
-                "left": 13
-              },
               "children": [
                 {
                   "type": "frame",
@@ -16074,9 +16208,6 @@ const COMPONENTS = [
                 "counter": "CENTER"
               },
               "grow": true,
-              "margins": {
-                "left": 13
-              },
               "children": [
                 {
                   "type": "frame",
@@ -16220,9 +16351,6 @@ const COMPONENTS = [
                 "counter": "CENTER"
               },
               "grow": true,
-              "margins": {
-                "left": 13
-              },
               "children": [
                 {
                   "type": "frame",
@@ -16366,9 +16494,6 @@ const COMPONENTS = [
                 "counter": "CENTER"
               },
               "grow": true,
-              "margins": {
-                "left": 13
-              },
               "children": [
                 {
                   "type": "frame",
@@ -16512,9 +16637,6 @@ const COMPONENTS = [
                 "counter": "CENTER"
               },
               "grow": true,
-              "margins": {
-                "left": 13
-              },
               "children": [
                 {
                   "type": "frame",
@@ -16658,9 +16780,6 @@ const COMPONENTS = [
                 "counter": "CENTER"
               },
               "grow": true,
-              "margins": {
-                "left": 13
-              },
               "children": [
                 {
                   "type": "frame",
@@ -16804,9 +16923,6 @@ const COMPONENTS = [
                 "counter": "CENTER"
               },
               "grow": true,
-              "margins": {
-                "left": 13
-              },
               "children": [
                 {
                   "type": "frame",
@@ -16950,9 +17066,6 @@ const COMPONENTS = [
                 "counter": "CENTER"
               },
               "grow": true,
-              "margins": {
-                "left": 13
-              },
               "children": [
                 {
                   "type": "frame",
@@ -17096,9 +17209,6 @@ const COMPONENTS = [
                 "counter": "CENTER"
               },
               "grow": true,
-              "margins": {
-                "left": 13
-              },
               "children": [
                 {
                   "type": "frame",
@@ -17242,9 +17352,6 @@ const COMPONENTS = [
                 "counter": "CENTER"
               },
               "grow": true,
-              "margins": {
-                "left": 13
-              },
               "children": [
                 {
                   "type": "frame",
@@ -17556,6 +17663,17 @@ const COMPONENTS = [
         "channel": "flex-grow",
         "value": "{imported.inline-notification.inline-notification-details.flex-grow}",
         "reason": "the canvas approximates growth with layoutGrow/FILL, which is a boolean, not a ratio.",
+        "variants": {
+          "count": 12,
+          "of": 12
+        }
+      },
+      {
+        "part": "inline-notification__details",
+        "kind": "channel",
+        "channel": "margin-left",
+        "value": "13px",
+        "reason": "the margin-box wrapper is skipped — a growing child (flex-grow → layoutGrow) cannot be wrapped without breaking the grow; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
         "variants": {
           "count": 12,
           "of": 12
@@ -18152,6 +18270,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -18188,43 +18308,6 @@ function applyOverlay(parent, childNode, childSpec) {
     else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
     else { childNode.x = parent.width; childNode.y = 0; }
   } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
-}
-
-// Round 5d: auto-layout has no per-child margin — a child carrying residual
-// margins gets its CSS MARGIN BOX as a fixed wrapper frame (clipsContent
-// false), the child placed at (left, top). Negative margins shrink the flow
-// box and let the glyph overhang — the exact CSS geometry (the Badge pip's
-// -2/-2/-8 is what keeps the real pill 20px tall). Out-of-flow children
-// (overlay / inset / absolute) and FILL-sized children keep their own
-// lowering.
-function applyMarginBox(parent, childNode, childSpec, registry) {
-  const m = childSpec.margins;
-  if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
-  try {
-    if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;
-  } catch (e) { degrade('FC-RT-MARGIN-BOX-SIZING-UNREADABLE', childNode, 'layout sizing could not be read before the margin box was applied; applied as if the child were not FILL-sized', e); }
-  const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
-  if (!t && !r && !b && !l) return;
-  const w = Math.max(childNode.width + l + r, 0.01);
-  const h = Math.max(childNode.height + t + b, 0.01);
-  const box = figma.createFrame();
-  box.name = childSpec.name + ' (margin box)';
-  box.fills = [];
-  box.clipsContent = false;
-  parent.insertChild(parent.children.indexOf(childNode), box);
-  box.resize(w, h);
-  box.appendChild(childNode);
-  childNode.x = l;
-  childNode.y = t;
-  // Wave B.4 / Polaris Button: a Show-bound child wrapped in a margin box
-  // must transfer the visible binding to the WRAPPER — hiding only the
-  // inner icon leaves the ~20px margin box in auto-layout (blank left gap).
-  if (childSpec.visibleProp && registry && registry.visibles) {
-    for (const vis of registry.visibles) {
-      if (vis.node === childNode) vis.node = box;
-    }
-    childNode.visible = true;
-  }
 }
 
 async function buildNode(spec, registry) {
@@ -18442,6 +18525,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -18468,7 +18556,14 @@ async function buildNode(spec, registry) {
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
-    applyMarginBox(node, childNode, child, registry);
+  }
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
+    }
   }
   return node;
 }
@@ -18847,7 +18942,6 @@ async function amendSet(set, C) {
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
-    applyMarginBox(comp, childNode, childSpec, registry);
       }
       report.rebuiltVariants++;
     }
@@ -18949,6 +19043,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -19075,6 +19170,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -19241,6 +19337,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -19291,7 +19388,7 @@ const COMPONENTS = [
     "contractId": "carbon.modal",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Modal — generated from contract carbon.modal v0.2.0 † (112 code-only facts — see plugin report)",
+    "description": "Modal — generated from contract carbon.modal v0.2.0 † (113 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -22020,6 +22117,17 @@ const COMPONENTS = [
       {
         "part": "root",
         "kind": "channel",
+        "channel": "size [unset]",
+        "value": "xs|sm|md|lg",
+        "reason": "defaultless axis — the library's own rendering when \"size\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 4 declared values only, and a proposal read back from the canvas will call \"xs\" the default (FC-UNSET-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 4,
+          "of": 4
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
         "channel": "top",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: static) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -22531,6 +22639,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.effectStack) {
     // v15: full box-shadow stack — multi-layer + inset as native effects.
@@ -22938,6 +23048,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -22968,6 +23083,14 @@ async function buildNode(spec, registry) {
     applyMarginBox(node, childNode, child, registry);
   }
   resizeOutOfFlow(node, built);
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
+    }
+  }
   return node;
 }
 
@@ -23450,6 +23573,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -23579,6 +23703,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -23745,6 +23870,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -26468,6 +26594,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -26712,6 +26840,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -26737,6 +26870,14 @@ async function buildNode(spec, registry) {
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
+    }
+  }
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
     }
   }
   return node;
@@ -27217,6 +27358,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -27343,6 +27485,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -27509,6 +27652,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -27559,7 +27703,7 @@ const COMPONENTS = [
     "contractId": "carbon.tag",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Tag — generated from contract carbon.tag v0.2.0 † (40 code-only facts — see plugin report)",
+    "description": "Tag — generated from contract carbon.tag v0.2.0 † (42 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -29995,6 +30139,28 @@ const COMPONENTS = [
       },
       {
         "part": "root",
+        "kind": "channel",
+        "channel": "size [unset]",
+        "value": "sm|md|lg",
+        "reason": "defaultless axis — the library's own rendering when \"size\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 3 declared values only, and a proposal read back from the canvas will call \"sm\" the default (FC-UNSET-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 36,
+          "of": 36
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "type [unset]",
+        "value": "red|magenta|purple|blue|cyan|teal|green|gray|cool-gray|warm-gray|high-contrast|outline",
+        "reason": "defaultless axis — the library's own rendering when \"type\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 12 declared values only, and a proposal read back from the canvas will call \"red\" the default (FC-UNSET-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 36,
+          "of": 36
+        }
+      },
+      {
+        "part": "root",
         "kind": "declared",
         "channel": "cursor",
         "value": "default",
@@ -30430,6 +30596,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -30730,6 +30898,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -30755,6 +30928,14 @@ async function buildNode(spec, registry) {
     // width is established — the hug↔fill collapse class stays impossible.
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
+    }
+  }
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
     }
   }
   return node;
@@ -31235,6 +31416,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -31361,6 +31543,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -31527,6 +31710,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -31577,7 +31761,7 @@ const COMPONENTS = [
     "contractId": "carbon.textinput",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "TextInput — generated from contract carbon.textinput v0.2.0 † (26 code-only facts — see plugin report)",
+    "description": "TextInput — generated from contract carbon.textinput v0.2.0 † (27 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -32843,6 +33027,17 @@ const COMPONENTS = [
         }
       },
       {
+        "part": "root",
+        "kind": "channel",
+        "channel": "size [unset]",
+        "value": "xs|sm|md|lg",
+        "reason": "defaultless axis — the library's own rendering when \"size\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 4 declared values only, and a proposal read back from the canvas will call \"xs\" the default (FC-UNSET-PLANE-UNDRAWN)",
+        "variants": {
+          "count": 8,
+          "of": 8
+        }
+      },
+      {
         "part": "text-input",
         "kind": "channel",
         "channel": "outline-color",
@@ -33521,6 +33716,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -33802,6 +33999,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -33829,6 +34031,14 @@ async function buildNode(spec, registry) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
     applyMarginBox(node, childNode, child, registry);
+  }
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
+    }
   }
   return node;
 }
@@ -34309,6 +34519,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -34435,6 +34646,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -34601,6 +34813,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');
@@ -36114,6 +36327,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -36556,6 +36771,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -36584,6 +36804,14 @@ async function buildNode(spec, registry) {
     }
   }
   resizeOutOfFlow(node, built);
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
+    }
+  }
   return node;
 }
 
@@ -37065,6 +37293,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -37194,6 +37423,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -37360,6 +37590,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');

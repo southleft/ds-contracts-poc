@@ -460,7 +460,7 @@ async function flowReplay(): Promise<FlowReplay> {
       `how-flow: ds.button first variant is "${button.firstVariant}" with root fill ${button.rootFill}; docs/29 E1 states "Variant=Primary, Size=Medium" / color/action/primary/background`,
     );
   }
-  const topNavItem = compile("ds.top-nav-item", 0, 2);
+  const topNavItem = compile("ds.top-nav-item", 1, 2);
   if (JSON.stringify(topNavItem.textProps) !== JSON.stringify([{ property: "Href", default: "#" }])) {
     throw new Error(`how-flow: ds.top-nav-item textProps are ${JSON.stringify(topNavItem.textProps)}; docs/29 E3 states [{Href, #}]`);
   }
@@ -474,14 +474,14 @@ async function flowReplay(): Promise<FlowReplay> {
   if (!ts) throw new Error("how-flow: tailwind.bundle.json carries no flowbite.toggleswitch code-only facts");
   const byKind: Record<string, number> = {};
   for (const f of ts.facts) byKind[f.kind] = (byKind[f.kind] ?? 0) + 1;
-  if (ts.facts.length !== 12 || byKind.channel !== 4 || byKind.declared !== 7 || byKind.event !== 1) {
+  if (ts.facts.length !== 14 || byKind.channel !== 6 || byKind.declared !== 7 || byKind.event !== 1) {
     throw new Error(
-      `how-flow: flowbite.toggleswitch carries ${ts.facts.length} code-only facts (${JSON.stringify(byKind)}); docs/29 E2 states 12 = 4 channel / 7 declared / 1 event`,
+      `how-flow: flowbite.toggleswitch carries ${ts.facts.length} code-only facts (${JSON.stringify(byKind)}); docs/29 E2 states 14 = 6 channel / 7 declared / 1 event`,
     );
   }
   const bundleFactTotal = bundle.codeOnlyFacts.reduce((n, c) => n + c.facts.length, 0);
-  if (bundleFactTotal !== 54) {
-    throw new Error(`how-flow: the Flowbite bundle carries ${bundleFactTotal} code-only facts; docs/29 states 54`);
+  if (bundleFactTotal !== 56) {
+    throw new Error(`how-flow: the Flowbite bundle carries ${bundleFactTotal} code-only facts; docs/29 states 56`);
   }
 
   // 4 · The refusal sentences, verbatim from source.

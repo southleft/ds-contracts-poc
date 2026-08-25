@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "mui.accordion",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Accordion — generated from contract mui.accordion v0.2.0 † (44 code-only facts — see plugin report)",
+    "description": "Accordion — generated from contract mui.accordion v0.2.0 † (48 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -139,10 +139,6 @@ const COMPONENTS = [
                       "type": "text",
                       "name": "label",
                       "grow": true,
-                      "margins": {
-                        "bottom": 12,
-                        "top": 12
-                      },
                       "characters": "Accordion title",
                       "fontSize": 13.3333,
                       "fontStyle": "Regular",
@@ -396,10 +392,6 @@ const COMPONENTS = [
                       "type": "text",
                       "name": "label",
                       "grow": true,
-                      "margins": {
-                        "bottom": 20,
-                        "top": 20
-                      },
                       "characters": "Accordion title",
                       "fontSize": 13.3333,
                       "fontStyle": "Regular",
@@ -618,10 +610,6 @@ const COMPONENTS = [
                       "type": "text",
                       "name": "label",
                       "grow": true,
-                      "margins": {
-                        "bottom": 12,
-                        "top": 12
-                      },
                       "characters": "Accordion title",
                       "fontSize": 13.3333,
                       "fontStyle": "Regular",
@@ -840,10 +828,6 @@ const COMPONENTS = [
                       "type": "text",
                       "name": "label",
                       "grow": true,
-                      "margins": {
-                        "bottom": 20,
-                        "top": 20
-                      },
                       "characters": "Accordion title",
                       "fontSize": 13.3333,
                       "fontStyle": "Regular",
@@ -1007,6 +991,17 @@ const COMPONENTS = [
         "channel": "display",
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 4,
+          "of": 4
+        }
+      },
+      {
+        "part": "accordionsummary-gutters",
+        "kind": "channel",
+        "channel": "background-color [focus-visible]",
+        "value": "{imported.accordion.accordionsummary-gutters.background-color-state-focus-visible}",
+        "reason": "the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
         "variants": {
           "count": 4,
           "of": 4
@@ -1289,6 +1284,36 @@ const COMPONENTS = [
       },
       {
         "part": "label",
+        "kind": "channel",
+        "channel": "margin-top/margin-bottom",
+        "value": "12px/12px",
+        "reason": "the margin-box wrapper is skipped — a growing child (flex-grow → layoutGrow) cannot be wrapped without breaking the grow; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+        "variants": {
+          "count": 2,
+          "of": 4,
+          "names": [
+            "Variant=Elevation, Expanded=Collapsed",
+            "Variant=Outlined, Expanded=Collapsed"
+          ]
+        }
+      },
+      {
+        "part": "label",
+        "kind": "channel",
+        "channel": "margin-top/margin-bottom",
+        "value": "20px/20px",
+        "reason": "the margin-box wrapper is skipped — a growing child (flex-grow → layoutGrow) cannot be wrapped without breaking the grow; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+        "variants": {
+          "count": 2,
+          "of": 4,
+          "names": [
+            "Variant=Elevation, Expanded=Expanded",
+            "Variant=Outlined, Expanded=Expanded"
+          ]
+        }
+      },
+      {
+        "part": "label",
         "kind": "declared",
         "channel": "cursor",
         "value": "default",
@@ -1370,6 +1395,17 @@ const COMPONENTS = [
         "channel": "display",
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 4,
+          "of": 4
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "background-color [disabled]",
+        "value": "{imported.accordion.root.background-color-state-disabled}",
+        "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
         "variants": {
           "count": 4,
           "of": 4
@@ -1900,6 +1936,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.effectStack) {
     // v15: full box-shadow stack — multi-layer + inset as native effects.
@@ -1948,43 +1986,6 @@ function applyOverlay(parent, childNode, childSpec) {
     else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
     else { childNode.x = parent.width; childNode.y = 0; }
   } catch (e) { degrade('FC-RT-OUT-OF-FLOW-PLACEMENT-REFUSED', childNode, 'the out-of-flow placement was refused (parent not auto-layout); the child stayed in flow', e); }
-}
-
-// Round 5d: auto-layout has no per-child margin — a child carrying residual
-// margins gets its CSS MARGIN BOX as a fixed wrapper frame (clipsContent
-// false), the child placed at (left, top). Negative margins shrink the flow
-// box and let the glyph overhang — the exact CSS geometry (the Badge pip's
-// -2/-2/-8 is what keeps the real pill 20px tall). Out-of-flow children
-// (overlay / inset / absolute) and FILL-sized children keep their own
-// lowering.
-function applyMarginBox(parent, childNode, childSpec, registry) {
-  const m = childSpec.margins;
-  if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
-  try {
-    if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;
-  } catch (e) { degrade('FC-RT-MARGIN-BOX-SIZING-UNREADABLE', childNode, 'layout sizing could not be read before the margin box was applied; applied as if the child were not FILL-sized', e); }
-  const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
-  if (!t && !r && !b && !l) return;
-  const w = Math.max(childNode.width + l + r, 0.01);
-  const h = Math.max(childNode.height + t + b, 0.01);
-  const box = figma.createFrame();
-  box.name = childSpec.name + ' (margin box)';
-  box.fills = [];
-  box.clipsContent = false;
-  parent.insertChild(parent.children.indexOf(childNode), box);
-  box.resize(w, h);
-  box.appendChild(childNode);
-  childNode.x = l;
-  childNode.y = t;
-  // Wave B.4 / Polaris Button: a Show-bound child wrapped in a margin box
-  // must transfer the visible binding to the WRAPPER — hiding only the
-  // inner icon leaves the ~20px margin box in auto-layout (blank left gap).
-  if (childSpec.visibleProp && registry && registry.visibles) {
-    for (const vis of registry.visibles) {
-      if (vis.node === childNode) vis.node = box;
-    }
-    childNode.visible = true;
-  }
 }
 
 async function buildNode(spec, registry) {
@@ -2189,6 +2190,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -2215,7 +2221,14 @@ async function buildNode(spec, registry) {
     if (child.fillW && !(child.type === 'text' && !child.textTruncation && child.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
-    applyMarginBox(node, childNode, child, registry);
+  }
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
+    }
   }
   return node;
 }
@@ -2594,7 +2607,6 @@ async function amendSet(set, C) {
         if (childSpec.fillW && !(childSpec.type === 'text' && !childSpec.textTruncation && childSpec.fillText !== true) && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
-    applyMarginBox(comp, childNode, childSpec, registry);
       }
       report.rebuiltVariants++;
     }
@@ -2696,6 +2708,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -2822,6 +2835,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -2988,6 +3002,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');

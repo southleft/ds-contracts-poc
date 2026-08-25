@@ -1,0 +1,5 @@
+[data-cf="antd-overlay-digit-depth-three"] { position: relative; display: inline-block; line-height: 1; }
+[data-cf="antd-overlay-digit-depth-three"] .cf-a { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: rgb(204, 204, 204); color: rgb(255, 255, 255); border-radius: 4px; font-size: 18px; }
+[data-cf="antd-overlay-digit-depth-three"] .cf-b { position: absolute; top: 0; inset-inline-end: 0; transform: translate(50%, -50%); transform-origin: 100% 0%; z-index: 1; min-width: 20px; height: 20px; padding: 0 8px; color: rgb(255, 255, 255); font-weight: normal; font-size: 12px; line-height: 20px; white-space: nowrap; text-align: center; background: rgb(255, 77, 79); border-radius: 10px; box-shadow: 0 0 0 1px rgb(255, 255, 255); }
+[data-cf="antd-overlay-digit-depth-three"] .cf-c { display: inline-block; height: 20px; overflow: hidden; }
+[data-cf="antd-overlay-digit-depth-three"] .cf-c > span { display: inline-block; height: 20px; }

@@ -55,6 +55,7 @@ const OUT_FOR: Record<string, string> = {
   'altitude.json': 'extract/computed/out/altitude', 'astryx.json': 'extract/computed/out/astryx',
   'tailwind.json': 'extract/computed/out/tailwind',
   'fluent.json': 'extract/computed/out/fluent', 'shadcn.json': 'extract/computed/out/shadcn',
+  'antd.json': 'extract/computed/out/antd',
 };
 
 const failures: string[] = [];

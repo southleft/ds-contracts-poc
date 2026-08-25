@@ -1,0 +1,300 @@
+{
+  "kit": "flowbite",
+  "id": "flowbite.toggleswitch",
+  "setName": "ToggleSwitch",
+  "nodeId": "120:2047",
+  "mode": "exact",
+  "variantCount": 6,
+  "contractSha256": "f926d5a2e6bc8a03c0e0e172d6eb4c5aa09dfa27d843055b216c33f2b3d98356",
+  "carriage": {
+    "carried": 132,
+    "named": 123,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "set description (designer's words)": [
+      0,
+      1,
+      0
+    ],
+    "stamp ds_contracts/version": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/semantics": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/propNames": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/specHash": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/contractId": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/canvasSetSnapshot": [
+      0,
+      1,
+      0
+    ],
+    "stamp ds_contracts/canvasFingerprint": [
+      0,
+      1,
+      0
+    ],
+    "TEXT property": [
+      1,
+      0,
+      0
+    ],
+    "variant axis": [
+      2,
+      0,
+      0
+    ],
+    "declared axis default": [
+      2,
+      0,
+      0
+    ],
+    "boundVariables.itemSpacing": [
+      0,
+      6,
+      0
+    ],
+    "boundVariables.size": [
+      0,
+      24,
+      0
+    ],
+    "boundVariables.rectangleCornerRadii": [
+      0,
+      48,
+      0
+    ],
+    "cornerRadius": [
+      12,
+      0,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      12,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      6,
+      0,
+      0
+    ],
+    "root layoutSizingVertical": [
+      6,
+      0,
+      0
+    ],
+    "boundVariables.minWidth": [
+      0,
+      6,
+      0
+    ],
+    "boundVariables.fills": [
+      0,
+      12,
+      0
+    ],
+    "fills[0] SOLID": [
+      18,
+      0,
+      0
+    ],
+    "layoutSizingHorizontal=FIXED (child)": [
+      6,
+      6,
+      0
+    ],
+    "layoutSizingVertical=FIXED (child)": [
+      6,
+      6,
+      0
+    ],
+    "minWidth": [
+      6,
+      0,
+      0
+    ],
+    "strokes[0] + strokeWeight": [
+      6,
+      0,
+      0
+    ],
+    "layoutPositioning=ABSOLUTE": [
+      0,
+      6,
+      0
+    ],
+    "ELLIPSE decor": [
+      6,
+      0,
+      0
+    ],
+    "boundVariables.fontSize": [
+      0,
+      6,
+      0
+    ],
+    "text.characters": [
+      6,
+      0,
+      0
+    ],
+    "text font size/weight": [
+      6,
+      0,
+      0
+    ],
+    "text fontFamily": [
+      6,
+      0,
+      0
+    ],
+    "text lineHeight": [
+      6,
+      0,
+      0
+    ],
+    "stamp ds_contracts/fontWeightVar": [
+      6,
+      0,
+      0
+    ],
+    "stamp ds_contracts/lineHeightVar": [
+      6,
+      0,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "08442ebe555baa908cd7ab07097bfcd58dd5fccc",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "120:2047",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "set description (designer's words)",
+      "value": "ToggleSwitch — generated from contract flowbite.toggleswitch v0.2.0 †",
+      "disposition": "NAMED",
+      "landing": "description: the set's Figma description is this pipeline's own emit caption (\"ToggleSw…"
+    },
+    {
+      "fact": "stamp ds_contracts/version",
+      "value": "0.2.0",
+      "disposition": "CARRIED",
+      "landing": "contract.version"
+    },
+    {
+      "fact": "stamp ds_contracts/semantics",
+      "value": "{\"element\":\"button\",\"role\":\"switch\"}",
+      "disposition": "CARRIED",
+      "landing": "contract.semantics (stamp outranks inference)"
+    },
+    {
+      "fact": "stamp ds_contracts/propNames",
+      "value": "{\"Sizing\":\"sizing\",\"Checked\":\"checked\",\"Label\":\"label\"}",
+      "disposition": "CARRIED",
+      "landing": "prop names (design spelling → contract prop names)"
+    },
+    {
+      "fact": "stamp ds_contracts/specHash",
+      "value": "3428288900",
+      "disposition": "CARRIED",
+      "landing": "dump.specHash — exact-mode evidence (proves the set matches the emit)"
+    },
+    {
+      "fact": "stamp ds_contracts/contractId",
+      "value": "flowbite.toggleswitch",
+      "disposition": "CARRIED",
+      "landing": "contract.id (dump v1.32 stamp read-back)"
+    },
+    {
+      "fact": "stamp ds_contracts/canvasSetSnapshot",
+      "value": "296 chars",
+      "disposition": "NAMED",
+      "landing": "sync-domain fingerprint stamp — read by sync/observe.ts (drift arithmetic), deliberately not a contract fact"
+    },
+    {
+      "fact": "stamp ds_contracts/canvasFingerprint",
+      "value": "13 chars",
+      "disposition": "NAMED",
+      "landing": "sync-domain fingerprint stamp — read by sync/observe.ts (drift arithmetic), deliberately not a contract fact"
+    },
+    {
+      "fact": "TEXT property",
+      "value": "default=Toggle",
+      "disposition": "CARRIED",
+      "landing": "props.label (text, default \"Toggle\") → React prop / children + story args"
+    },
+    {
+      "fact": "variant axis",
+      "value": "Md|Sm|Lg",
+      "disposition": "CARRIED",
+      "landing": "props.sizing (enum[3]) → React prop `sizing` + story argTypes + CSS .sizing-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "Md",
+      "disposition": "CARRIED",
+      "landing": "props.sizing.default = \"md\" → React default arg + story args"
+    },
+    {
+      "fact": "variant axis",
+      "value": "Unchecked|Checked",
+      "disposition": "CARRIED",
+      "landing": "props.checked (enum[2]) → React prop `checked` + story argTypes + CSS .checked-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "Unchecked",
+      "disposition": "CARRIED",
+      "landing": "props.checked.default = \"unchecked\" → React default arg + story args"
+    }
+  ],
+  "generatedFiles": {
+    "react/ToggleSwitch/ToggleSwitch.module.css": "40af71e3b5706e6fde9e3ee2275b37446a24b27c1f29735aff0beea929c801b2",
+    "react/ToggleSwitch/ToggleSwitch.stories.tsx": "afc9eef96d1359d299eddfbeadac8e1d6fcc487c7eb24ac6276879305a613f17",
+    "react/ToggleSwitch/ToggleSwitch.tsx": "81769c03177e4398371cb62efb9df7a9fb3e91dc2cccdd34b69c6ddacca52479",
+    "react/ToggleSwitch/index.ts": "940e8045eef208ba44215094dbae139c3481631c48b04c20baf7e4b44f853bba",
+    "wc/flowbite-toggleswitch.ts": "4aa4980d8217c434f3e4b2cb0e07bb0012ee035c75129b04df1e2561ff39d13e",
+    "wc/flowbite-toggleswitch.css.ts": "9822eccde3d4f0693a062e6b81f4c37f0003597a5f17ab0f88d0ad95e39e51ce",
+    "wc/flowbite-toggleswitch.demo.html": "a9f2f2f85d0f599357f969a40e26cbbcfd20e6f3d2bc9d27cea7177146ca49f4",
+    "wc/flowbite-toggleswitch.custom-elements.json": "97e0cf155692825443c4015142d0d029ffa5d201a1af4e07d86f1f2546f6e185"
+  },
+  "notesCount": 134
+}

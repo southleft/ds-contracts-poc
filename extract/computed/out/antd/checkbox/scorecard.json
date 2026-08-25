@@ -1,0 +1,2986 @@
+{
+  "component": "Checkbox",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 6,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 2808,
+    "cellsEqual": 2388,
+    "pctEqual": 85.04273504273505,
+    "rowsFullyEqual": 0,
+    "rows": 24
+  },
+  "pixel": {
+    "pairs": 24,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 24,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 1.4851888020833333,
+    "meanAA": 0.6641981336805557,
+    "maxAA": 1.0188802083333333
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 69,
+    "mintedLeavesUnfolded": 67,
+    "baseBindings": 56,
+    "stateBindings": 33,
+    "codeOnlyChannels": 8,
+    "overflowBindings": 30,
+    "folds": 35
+  },
+  "worstRows": [
+    {
+      "key": "checked.disabled__default",
+      "pctAA": 1.0188802083333333,
+      "pctExact": 2.314453125,
+      "channelsMismatched": 28
+    },
+    {
+      "key": "checked.disabled__hover",
+      "pctAA": 1.0188802083333333,
+      "pctExact": 2.314453125,
+      "channelsMismatched": 28
+    },
+    {
+      "key": "checked.disabled__focus-visible",
+      "pctAA": 1.0188802083333333,
+      "pctExact": 2.314453125,
+      "channelsMismatched": 28
+    },
+    {
+      "key": "checked.disabled__active",
+      "pctAA": 1.0188802083333333,
+      "pctExact": 2.314453125,
+      "channelsMismatched": 28
+    },
+    {
+      "key": "indeterminate.disabled__default",
+      "pctAA": 0.9016927083333334,
+      "pctExact": 2.197265625,
+      "channelsMismatched": 24
+    },
+    {
+      "key": "indeterminate.disabled__hover",
+      "pctAA": 0.9016927083333334,
+      "pctExact": 2.197265625,
+      "channelsMismatched": 24
+    },
+    {
+      "key": "indeterminate.disabled__focus-visible",
+      "pctAA": 0.9016927083333334,
+      "pctExact": 2.197265625,
+      "channelsMismatched": 24
+    },
+    {
+      "key": "indeterminate.disabled__active",
+      "pctAA": 0.9016927083333334,
+      "pctExact": 2.197265625,
+      "channelsMismatched": 24
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.align-items",
+      24
+    ],
+    [
+      "root.list-style-type",
+      24
+    ],
+    [
+      "checkbox.align-self",
+      24
+    ],
+    [
+      "checkbox.list-style-type",
+      24
+    ],
+    [
+      "checkbox-input.list-style-type",
+      24
+    ],
+    [
+      "checkbox-inner.list-style-type",
+      24
+    ],
+    [
+      "label.list-style-type",
+      24
+    ],
+    [
+      "checkbox-inner.background-color",
+      14
+    ],
+    [
+      "root.cursor",
+      12
+    ],
+    [
+      "checkbox.cursor",
+      12
+    ],
+    [
+      "checkbox-input.cursor",
+      12
+    ],
+    [
+      "checkbox-inner.cursor",
+      12
+    ],
+    [
+      "label.border-bottom-color",
+      12
+    ],
+    [
+      "label.border-left-color",
+      12
+    ],
+    [
+      "label.border-right-color",
+      12
+    ]
+  ],
+  "namedLosses": [
+    "promotion: pseudo-decor-state-paint-uncarried: checkbox-inner::after at checked.disabled paints {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":0,\"right\":2,\"bottom\":2,\"left\":0},\"borderColor\":\"rgba(0, 0, 0, 0.25)\",\"radius\":0} where the matching enabled combo paints {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":0,\"right\":2,\"bottom\":2,\"left\":0},\"borderColor\":\"rgba(255, 255, 255, 1)\",\"radius\":0} — the decor carries the ENABLED plane; a per-enum-value × per-state paint product has no contract spelling (states take token refs, decor paint is literal); named residue",
+    "promotion: pseudo-decor-state-paint-uncarried: checkbox-inner::after at indeterminate.disabled paints {\"bg\":\"rgba(0, 0, 0, 0.25)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":0} where the matching enabled combo paints {\"bg\":\"rgba(22, 119, 255, 1)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":0} — the decor carries the ENABLED plane; a per-enum-value × per-state paint product has no contract spelling (states take token refs, decor paint is literal); named residue",
+    "promotion: pseudo-content-not-canvas-ink: root::after carries content \" \" — the bounded decor grammar promotes EMPTY-content decor boxes only. A glyph drawn by an icon-font ligature (Bootstrap/FontAwesome/Material carets, chevrons, close ×s) is real ink that does NOT reach the canvas; named refusal",
+    "overflow: checkbox-inner.background-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-inner.border-bottom-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-inner.border-left-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-inner.border-right-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-inner.border-top-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-inner.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-inner.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-inner.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-inner.border-top-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-input.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-input.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-input.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-input.border-top-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-input.caret-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-input.column-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-input.outline-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-input.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-input.text-decoration-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-input.text-emphasis-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-inner.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-inner.outline-offset [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-inner.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-input.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-input.outline-offset [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-input.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-inner.background-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-inner.border-bottom-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-inner.border-left-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-inner.border-right-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-inner.border-top-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "code-only: root.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: root.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: checkbox.align-self — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: checkbox.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: checkbox-input.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: checkbox-inner.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only[focus-visible]: checkbox-inner.transition-behavior — value shape outside mintable kinds and outside the declared vocabulary"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/antd/tokens/antd-minted.dtcg.json",
+    "leavesAdded": 1210,
+    "divergent": [
+      {
+        "token": "imported.checkbox.checkbox-inner.background-color-state-active.indeterminate",
+        "fresh": "#ffffff",
+        "shipped": "{color-bg-container}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.checkbox.checkbox-inner.background-color-state-active.unchecked",
+        "fresh": "#ffffff",
+        "shipped": "{color-bg-container}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.checkbox.checkbox-inner.background-color-state-hover.indeterminate",
+        "fresh": "#ffffff",
+        "shipped": "{color-bg-container}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.checkbox.checkbox-inner.background-color-state-hover.unchecked",
+        "fresh": "#ffffff",
+        "shipped": "{color-bg-container}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.checkbox.checkbox-inner.background-color.checked",
+        "fresh": "#1677ff",
+        "shipped": "{color-primary}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.checkbox.checkbox-inner.background-color.indeterminate",
+        "fresh": "#ffffff",
+        "shipped": "{color-bg-container}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.checkbox.checkbox-inner.background-color.unchecked",
+        "fresh": "#ffffff",
+        "shipped": "{color-bg-container}",
+        "resolvedEqual": true
+      }
+    ]
+  },
+  "rows": [
+    {
+      "key": "unchecked.enabled__default",
+      "channelsCompared": 117,
+      "channelsEqual": 110,
+      "pctExact": 0.3255208333333333,
+      "pctAA": 0.17578125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "unchecked.enabled__hover",
+      "channelsCompared": 117,
+      "channelsEqual": 106,
+      "pctExact": 0.390625,
+      "pctAA": 0.20833333333333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-bottom-color",
+          "ours": "rgba(217, 217, 217, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-left-color",
+          "ours": "rgba(217, 217, 217, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-right-color",
+          "ours": "rgba(217, 217, 217, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-top-color",
+          "ours": "rgba(217, 217, 217, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "unchecked.enabled__focus-visible",
+      "channelsCompared": 117,
+      "channelsEqual": 108,
+      "pctExact": 1.03515625,
+      "pctAA": 0.7421875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(145, 202, 255, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "transition-duration",
+          "ours": "0.3s",
+          "theirs": "0s, 0s"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "unchecked.enabled__active",
+      "channelsCompared": 117,
+      "channelsEqual": 106,
+      "pctExact": 0.390625,
+      "pctAA": 0.20833333333333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-bottom-color",
+          "ours": "rgba(217, 217, 217, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-left-color",
+          "ours": "rgba(217, 217, 217, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-right-color",
+          "ours": "rgba(217, 217, 217, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-top-color",
+          "ours": "rgba(217, 217, 217, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "unchecked.disabled__default",
+      "channelsCompared": 117,
+      "channelsEqual": 93,
+      "pctExact": 2.197265625,
+      "pctAA": 0.615234375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "background-color",
+          "ours": "rgba(255, 255, 255, 1)",
+          "theirs": "rgba(0, 0, 0, 0.04)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        }
+      ]
+    },
+    {
+      "key": "unchecked.disabled__hover",
+      "channelsCompared": 117,
+      "channelsEqual": 93,
+      "pctExact": 2.197265625,
+      "pctAA": 0.615234375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "background-color",
+          "ours": "rgba(255, 255, 255, 1)",
+          "theirs": "rgba(0, 0, 0, 0.04)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        }
+      ]
+    },
+    {
+      "key": "unchecked.disabled__focus-visible",
+      "channelsCompared": 117,
+      "channelsEqual": 93,
+      "pctExact": 2.197265625,
+      "pctAA": 0.615234375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "background-color",
+          "ours": "rgba(255, 255, 255, 1)",
+          "theirs": "rgba(0, 0, 0, 0.04)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        }
+      ]
+    },
+    {
+      "key": "unchecked.disabled__active",
+      "channelsCompared": 117,
+      "channelsEqual": 93,
+      "pctExact": 2.197265625,
+      "pctAA": 0.615234375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "background-color",
+          "ours": "rgba(255, 255, 255, 1)",
+          "theirs": "rgba(0, 0, 0, 0.04)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        }
+      ]
+    },
+    {
+      "key": "checked.enabled__default",
+      "channelsCompared": 117,
+      "channelsEqual": 110,
+      "pctExact": 0.6380208333333334,
+      "pctAA": 0.3190104166666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "checked.enabled__hover",
+      "channelsCompared": 117,
+      "channelsEqual": 105,
+      "pctExact": 0.9765625,
+      "pctAA": 0.6575520833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "background-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(64, 150, 255, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-bottom-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-left-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-right-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-top-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "checked.enabled__focus-visible",
+      "channelsCompared": 117,
+      "channelsEqual": 108,
+      "pctExact": 1.30859375,
+      "pctAA": 0.869140625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(145, 202, 255, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "transition-duration",
+          "ours": "0.3s",
+          "theirs": "0s, 0s"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "checked.enabled__active",
+      "channelsCompared": 117,
+      "channelsEqual": 105,
+      "pctExact": 0.9765625,
+      "pctAA": 0.6575520833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "background-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(64, 150, 255, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-bottom-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-left-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-right-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-top-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(0, 0, 0, 0)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "checked.disabled__default",
+      "channelsCompared": 117,
+      "channelsEqual": 89,
+      "pctExact": 2.314453125,
+      "pctAA": 1.0188802083333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "background-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(0, 0, 0, 0.04)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-bottom-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(217, 217, 217, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-left-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(217, 217, 217, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-right-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(217, 217, 217, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-top-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(217, 217, 217, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        }
+      ]
+    },
+    {
+      "key": "checked.disabled__hover",
+      "channelsCompared": 117,
+      "channelsEqual": 89,
+      "pctExact": 2.314453125,
+      "pctAA": 1.0188802083333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "background-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(0, 0, 0, 0.04)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-bottom-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(217, 217, 217, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-left-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(217, 217, 217, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-right-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(217, 217, 217, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-top-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(217, 217, 217, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        }
+      ]
+    },
+    {
+      "key": "checked.disabled__focus-visible",
+      "channelsCompared": 117,
+      "channelsEqual": 89,
+      "pctExact": 2.314453125,
+      "pctAA": 1.0188802083333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "background-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(0, 0, 0, 0.04)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-bottom-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(217, 217, 217, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-left-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(217, 217, 217, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-right-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(217, 217, 217, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-top-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(217, 217, 217, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        }
+      ]
+    },
+    {
+      "key": "checked.disabled__active",
+      "channelsCompared": 117,
+      "channelsEqual": 89,
+      "pctExact": 2.314453125,
+      "pctAA": 1.0188802083333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "background-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(0, 0, 0, 0.04)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-bottom-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(217, 217, 217, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-left-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(217, 217, 217, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-right-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(217, 217, 217, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-top-color",
+          "ours": "rgba(22, 119, 255, 1)",
+          "theirs": "rgba(217, 217, 217, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        }
+      ]
+    },
+    {
+      "key": "indeterminate.enabled__default",
+      "channelsCompared": 117,
+      "channelsEqual": 110,
+      "pctExact": 0.4817708333333333,
+      "pctAA": 0.33203125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "indeterminate.enabled__hover",
+      "channelsCompared": 117,
+      "channelsEqual": 106,
+      "pctExact": 0.546875,
+      "pctAA": 0.3645833333333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-bottom-color",
+          "ours": "rgba(217, 217, 217, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-left-color",
+          "ours": "rgba(217, 217, 217, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-right-color",
+          "ours": "rgba(217, 217, 217, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-top-color",
+          "ours": "rgba(217, 217, 217, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "indeterminate.enabled__focus-visible",
+      "channelsCompared": 117,
+      "channelsEqual": 108,
+      "pctExact": 1.19140625,
+      "pctAA": 0.8984375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(145, 202, 255, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "transition-duration",
+          "ours": "0.3s",
+          "theirs": "0s, 0s"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "indeterminate.enabled__active",
+      "channelsCompared": 117,
+      "channelsEqual": 106,
+      "pctExact": 0.546875,
+      "pctAA": 0.3645833333333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-bottom-color",
+          "ours": "rgba(217, 217, 217, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-left-color",
+          "ours": "rgba(217, 217, 217, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-right-color",
+          "ours": "rgba(217, 217, 217, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "border-top-color",
+          "ours": "rgba(217, 217, 217, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        }
+      ]
+    },
+    {
+      "key": "indeterminate.disabled__default",
+      "channelsCompared": 117,
+      "channelsEqual": 93,
+      "pctExact": 2.197265625,
+      "pctAA": 0.9016927083333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "background-color",
+          "ours": "rgba(255, 255, 255, 1)",
+          "theirs": "rgba(0, 0, 0, 0.04)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        }
+      ]
+    },
+    {
+      "key": "indeterminate.disabled__hover",
+      "channelsCompared": 117,
+      "channelsEqual": 93,
+      "pctExact": 2.197265625,
+      "pctAA": 0.9016927083333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "background-color",
+          "ours": "rgba(255, 255, 255, 1)",
+          "theirs": "rgba(0, 0, 0, 0.04)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        }
+      ]
+    },
+    {
+      "key": "indeterminate.disabled__focus-visible",
+      "channelsCompared": 117,
+      "channelsEqual": 93,
+      "pctExact": 2.197265625,
+      "pctAA": 0.9016927083333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "background-color",
+          "ours": "rgba(255, 255, 255, 1)",
+          "theirs": "rgba(0, 0, 0, 0.04)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        }
+      ]
+    },
+    {
+      "key": "indeterminate.disabled__active",
+      "channelsCompared": 117,
+      "channelsEqual": 93,
+      "pctExact": 2.197265625,
+      "pctAA": 0.9016927083333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "baseline"
+        },
+        {
+          "part": "root",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox",
+          "channel": "align-self",
+          "ours": "auto",
+          "theirs": "center"
+        },
+        {
+          "part": "checkbox",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-input",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "background-color",
+          "ours": "rgba(255, 255, 255, 1)",
+          "theirs": "rgba(0, 0, 0, 0.04)"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "checkbox-inner",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "label",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "label",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        },
+        {
+          "part": "label",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.88)",
+          "theirs": "rgba(0, 0, 0, 0.25)"
+        }
+      ]
+    }
+  ]
+}

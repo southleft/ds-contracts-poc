@@ -238,6 +238,23 @@ jobs:
       - name: v1:definition:check (requirements, evidence, exclusions, and claim drift)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run v1:definition:check
+      - name: v1:readiness self-test (a red row is RED, a dead anchor is EVIDENCE-MISSING, a ledger row without its commit is RED)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npx tsx scripts/v1-readiness.ts --self-test
+      # The definition parses, every evidence reference resolves, the audit
+      # ledger's commits and anchors exist — and nothing executes. The full lane
+      # runs the rows (with --trust-lanes so the 35-minute ones are cited, not
+      # repeated). --pre-release names the post-publish chain and the open human
+      # ledger rows instead of failing on them; the release owner's run omits it.
+      - name: v1:readiness dry run (every docs/26 row parses; every evidence anchor resolves)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run v1:readiness -- --dry-run --pre-release
+      - name: exam:screenshots:check self-test (a listed set without a screenshot pair is RED)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run exam:screenshots:check -- --self-test
+      - name: exam:screenshots:check (every phase-2 exam receipt carries a canvas + reference PNG per set, or names that it does not)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run exam:screenshots:check
 
       - name: test accuracy contract gate falsifications
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
@@ -559,6 +576,13 @@ jobs:
       - name: census self-test (the gate goes red on a deleted render, a contract outside the manifest, and a pending canvas half)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run census:check -- --self-test
+      # The reverse direction on the two designer kits: committed REST
+      # fixtures → propose → generate React+WC, twice, in memory. Holds
+      # SILENT = 0 (every canvas fact carried or named), byte-idempotence,
+      # the committed rows/hashes, the render pairs and the verdicts.
+      - name: census:check --phase design-to-code (canvas → contract → code; 0 silent, byte-deterministic)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run census:check -- --phase design-to-code
 
       # Not one of the 33 named gates, but CONTRIBUTING.md § "The gates" tells
       # contributors to run it and it costs under a second with no extra build.

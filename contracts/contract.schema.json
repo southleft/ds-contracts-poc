@@ -28,6 +28,22 @@
     "description": {
       "type": "string"
     },
+    "documentationLinks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "uri": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "uri"
+        ],
+        "additionalProperties": false
+      }
+    },
     "semantics": {
       "type": "object",
       "properties": {
@@ -1145,6 +1161,35 @@
               "type": "string",
               "pattern": "^[^;{}!]+$"
             }
+          }
+        },
+        "codeOnly": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "state": {
+                "type": "string"
+              },
+              "channel": {
+                "type": "string",
+                "minLength": 1
+              },
+              "value": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "channel",
+              "value",
+              "reason"
+            ],
+            "additionalProperties": false
           }
         },
         "hugsBelowMaxWidth": {

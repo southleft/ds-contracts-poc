@@ -1,0 +1,395 @@
+{
+  "library": {
+    "__note": "THE HARDEST FOREIGN LIBRARY BY DESIGN. antd v5 = runtime CSS-in-JS (@ant-design/cssinjs) injecting <style data-css-hash data-token-hash data-cache-path> tags (43 tags / 1,673 CSSOM rules on the 60-cell probe page, ALL readable via sheet.cssRules — dev-mode text injection, no insertRule ceiling). Default theme is HASHED: every rule is wrapped `:where(.css-dev-only-do-not-override-mncuj7).ant-btn` (1,660 of 1,673 selectors carry the :where hash) and the hash class rides on EVERY component root. The hash is a function of the token set (stable across reloads: measured identical twice) but it is a version/token artefact, not a part identity — classAllow drops it by construction (it has no `ant-` prefix). `hashed:false` removes the :where wrapper entirely (0 of 1,673). Tokens are LITERALS by default (654 literal colour declarations, 11 var() uses); `cssVar` mode inverts that (2,510 var() uses, 12 literals) and declares the 350 global custom properties on the cssVar KEY CLASS placed on every component root (`.antd` with key:'antd'; `.css-var-r0` without a key — r<N> is an instance counter and MUST be pinned with a key), plus per-component tokens on `.antd.ant-btn` (56), `.antd.ant-switch` (13) etc. Custom properties inherit, so descendants resolve them (probe: `--ant-switch-handle-bg` resolves on div.ant-switch-handle).",
+    "package": "antd",
+    "version": "5.29.3",
+    "framework": "react",
+    "classPrefix": "ant-",
+    "__note:classAllow": "MEASURED GRAMMAR, MUI-shaped (lookaheads), NOT Carbon-shaped: antd is not BEM — element classes (`ant-btn-icon`, `ant-switch-handle`, `ant-checkbox-inner`) and modifier classes (`ant-btn-primary`, `ant-btn-color-primary`, `ant-btn-variant-solid`, `ant-btn-sm`, `ant-tag-blue`, `ant-switch-checked`) share one spelling. Elements are kept by prefix; modifiers that vary per AXIS or STATE are dropped by name so part signatures never become axis-dependent (the MUI 42-branch Switch union lesson). The FIRST alternative keeps `ant-switch-inner-checked|unchecked` — they are ELEMENTS (the two inner labels) although they end in a word the modifier list drops. `anticon` (no ant- prefix) is the icon-host element and is kept literally; `anticon-<glyph>` is a glyph identity and is dropped. `ant-*-css-var` is a cssVar-mode artefact and is dropped. `antd` (the cssVar key) and `css-dev-only-do-not-override-*` fail the prefix test and are dropped without a rule. RE-MEASURE before deleting __draft: capture Button with classAllow absent and diff class lists across one axis (docs/21).",
+    "classAllow": "^(?:anticon|ant-switch-inner-(?:checked|unchecked)|ant-progress-text|ant-badge-status-(?:dot|text)|ant-(?!.*-css-var$)(?!.*-(?:color|variant|status)-[a-z-]+$)(?!.*-line-(?:align|position)-[a-z]+$)(?!.*-text-(?:start|end|inner|outer)$)(?!avatar-(?:icon|image)$)(?!.*-(?:primary|default|dashed|link|text|solid|outlined|filled|borderless|sm|lg|small|large|round|circle|square|dangerous|loading|icon-only|background-ghost|checked|unchecked|disabled|indeterminate|bordered|no-icon|with-description|success|info|warning|error|processing|blue|purple|cyan|green|magenta|pink|red|orange|yellow|volcano|geekblue|lime|gold|not-a-wrapper|multiple-words|line|show-info|rtl|hidden|block)$)[a-z0-9-]+)$",
+    "varPrefix": "--ant-"
+  },
+  "mount": {
+    "__note": "FOUR PINS, EACH MEASURED. (1) `cssVar:{key:'antd'}` — turns the existing MUI CSS-vars reader on unchanged: var() at point of use 11 → 2,510, literal colour decls 654 → 12, and `getComputedStyle(root)['--ant-color-primary']` = '#1677ff' on the root AND on descendants. The KEY is load-bearing: without it the class is `css-var-r<N>` where N counts ConfigProvider instances — a different harness page order would rename every root class (signature drift, run.ts double-run refusal). (2) `hashed:false` — removes the `:where(.css-dev-only-…)` wrapper from all 1,660 rules; pixels identical (primary bg/hover/active rgb(22,119,255)/rgb(64,150,255)/rgb(9,88,217) in every mode). (3) `wave={{disabled:true}}` — the MUI disableRipple precedent: on mouse.up antd appends `<div class='ant-wave wave-motion-appear …'>` INSIDE the clicked root with inline `--wave-color`, animated by a 0.4s box-shadow + 2s opacity transition, still present 1.3s later (measured 1 node). The active-state driver's mouse.up would leave that node in the subtree for the next combo's read — a signature witness in the double-run. With the pin: 0 .ant-wave nodes after click (measured). (4) `token.fontFamily` — FC-FONT-SUBSTRATE closure, see fonts.__note. NOT pinned: `token.motion` (library-true transitions stay; settleStage polls to two identical samples; the fallback knob if the double-run fails on a transition is `token:{motion:false}` which measured transition durations → 0s). Also NOT pinned: `theme.algorithm` (default light).",
+    "imports": [
+      "import { ConfigProvider } from 'antd';",
+      "const __antdTheme = { cssVar: { key: 'antd' }, hashed: false, token: { fontFamily: 'Roboto, Helvetica, Arial, sans-serif' } };"
+    ],
+    "wrapperOpen": "<ConfigProvider theme={__antdTheme} wave={{ disabled: true }}>",
+    "wrapperClose": "</ConfigProvider>"
+  },
+  "tokens": {
+    "__note": "Built by examples/antd/scripts/build-tokens.mjs (draft in scratchpad) from `theme.getDesignToken()` (light) and `theme.getDesignToken({algorithm: theme.darkAlgorithm})` (dark, 359 of 501 keys differ), named by @ant-design/cssinjs `token2CSSVar(key,'ant')` — VERIFIED against the live `.antd` rule: 371 generated, 350 live, 0 live-not-generated, 21 generated-not-live (the library's own cssVar ignore list: motion-unit, motion-base, motion, wireframe, screen-*) — the wrap must SKIP those 21 so every DTCG leaf is a real custom property, and every value string-equals the live declaration except the two pinned families (font-family, motion-duration-* when motion:false). Leaf name = var name minus `--ant-` (mui precedent `palette-primary-main`). Component tokens (`--ant-button-*` 56, `--ant-switch-*` 13, `--ant-input-*` 17, `--ant-card-*` 13, `--ant-badge-*` 8, `--ant-progress-*` 6, `--ant-tooltip-*` 6, `--ant-alert-*` 3, `--ant-tag-*` 2, `--ant-avatar-*` 12, `--ant-radio-*` 16) come from each component's `prepareComponentToken(token)` (antd/lib/<comp>/style/{token,index}.js) and are declared on `.antd.ant-<comp>` — the wrap emits them into the SAME flat DTCG map (they are what the reader's kebab lookup needs) and into antd.vars.css under :root.",
+    "dtcg": [
+      "examples/antd/tokens/antd.dtcg.json"
+    ],
+    "css": "examples/antd/tokens/antd.vars.css",
+    "minted": "examples/antd/tokens/antd-minted.dtcg.json",
+    "__note:mintedBootstrap": "BOOTSTRAP FLAG REMOVED same-round (task #28 ordering guard, the Fluent ordering): the first capture pass ran with a zero-leaf stub + mintedBootstrap:true (receipted \"measured without a shipped minted tree\"); promote-floor then filled the tree (82 source-aliased + 1199 literal leaves) and every component was RE-CAPTURED against the shipped tree — the committed scorecards are the re-measured ones.",
+    "__note:dark": "modes/antd.light.dtcg.json + modes/antd.dark.dtcg.json (mui precedent). Dark is NOT captured this round (browser.colorScheme light, algorithm default); it rides the token set so the Figma collection gets Light/Dark modes for the aliased leaves only."
+  },
+  "icons": "examples/antd/assets/icons",
+  "fonts": {
+    "__note": "FC-FONT-SUBSTRATE CLOSURE — A PIN, DECLARED, NOT A GUESS. antd's own declared stack is `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, …` (theme.getDesignToken().fontFamily, verbatim) and it ships ZERO @font-face (measured: 0 across 59 injected style tags). The first three entries are platform system fonts (SF Pro on macOS, Segoe on Windows) that no network-free harness can make identical across a mac recording and a linux CI; Roboto is the 4th entry of antd's OWN stack and the first one that exists as committed bytes (extract/computed/fonts/roboto/*, @fontsource/roboto@5.3.0 — the MUI files, reused, nothing new fetched). So the mount pins `token.fontFamily` to 'Roboto, Helvetica, Arial, sans-serif' (measured: every root's computed font-family becomes exactly that string) and the faces below inline the three weights antd uses (400 body, 500 fontWeightStrong=600 → NOTE antd's strong weight is 600 — Roboto 500/700 are committed; 600 is NOT; Card title / Table header / Alert message-with-description render fontWeightStrong=600 → Chromium synthesises from 500 or 700 → a NAMED substrate residue, ledger it per component). Alternative considered and rejected: leave the stack library-true (the tailwind/fluent 'unobtainable substrate' call) — rejected because antd puts Roboto in its own stack, so pinning it is choosing one of the library's own faces, not substituting a foreign one.",
+    "faces": [
+      {
+        "family": "Roboto",
+        "weight": 400,
+        "style": "normal",
+        "file": "extract/computed/fonts/roboto/roboto-latin-400-normal.woff2"
+      },
+      {
+        "family": "Roboto",
+        "weight": 500,
+        "style": "normal",
+        "file": "extract/computed/fonts/roboto/roboto-latin-500-normal.woff2"
+      },
+      {
+        "family": "Roboto",
+        "weight": 700,
+        "style": "normal",
+        "file": "extract/computed/fonts/roboto/roboto-latin-700-normal.woff2"
+      }
+    ]
+  },
+  "browser": {
+    "viewport": {
+      "width": 900,
+      "height": 1000
+    },
+    "deviceScaleFactor": 1,
+    "colorScheme": "light"
+  },
+  "stage": {
+    "width": 320,
+    "height": 96,
+    "padding": 16
+  },
+  "enumeration": {
+    "__note": "`unset`, never `__unset` — the contract token-ref regex excludes underscores (carbon precedent). antd has MANY defaultless enums (Tag color, Badge color, Input status, Progress status) — the unset value is the library's own default rendering.",
+    "cartesianLimit": 512,
+    "unsetLabel": "unset"
+  },
+  "components": [
+    {
+      "__note": "ATOM, THE DENSEST STATE MATRIX IN THE CORPUS. Root = button.ant-btn with a bare <span> label (no class — namePart falls back to `label`). Axis classes measured: type→ant-btn-{default|primary|dashed|link|text} PLUS the derived pair ant-btn-color-{default|primary|link|dangerous} × ant-btn-variant-{outlined|solid|dashed|link|text} (antd 5.21+ colour/variant decomposition — danger rewrites color to `dangerous`, ghost adds ant-btn-background-ghost); size→ant-btn-{sm|lg} (middle is unspelled); shape→ant-btn-round. All dropped by classAllow so the signature is `button|btn` for every combo. States: hover/active/focus-visible are top-level selectors (no @media gate — the one `(hover: none)` rule in the whole sheet is Select's clear icon); focus-visible = `outline: 3px solid rgb(145,202,255); outline-offset: 1px` — `outline` is NOT a carried channel (lib.ts CHANNEL_TO_COMPUTED) → expect the focus plane to land in the code-only extension block (NAMED), verify it is not SILENT. `icon` presence mounts span.ant-btn-icon > span.anticon > svg(viewBox 64 64 896 896, 1 path, fill=currentColor) — svg-content promotion + the FC-SVG-VIEWBOX check. `loading` presence mounts span.ant-btn-icon.ant-btn-loading-icon > span.anticon.anticon-spin > svg(viewBox 0 0 1024 1024) with the INFINITE `loadingCircle 1s` animation — pinned at currentTime 0 by the runner (mui CircularProgress precedent). NAMED OUT: shape=circle (icon-only, text child removed → root structure is a function of two props), ghost (only meaningful on primary/danger → non-factoring), htmlType/href/target (HTML passthrough — the static-seed trap; href swaps the root tag to <a>).",
+      "name": "Button",
+      "importName": "Button",
+      "contract": "examples/antd/contracts-seed/button.contract.json",
+      "sampleText": "Button",
+      "axes": [
+        "type",
+        "size",
+        "danger"
+      ],
+      "axisValueMap": {
+        "danger": {
+          "safe": false,
+          "danger": true
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "presenceProps": [
+        {
+          "prop": "icon",
+          "libraryProp": "icon",
+          "value": {
+            "$element": "@ant-design/icons#SearchOutlined"
+          }
+        },
+        {
+          "prop": "loading",
+          "libraryProp": "loading",
+          "value": true
+        }
+      ]
+    },
+    {
+      "__note": "ATOM, DEFAULTLESS COLOUR ENUM. Root span.ant-tag; color→ant-tag-<preset> (blue…gold and the status presets success|processing|error|warning|default) — unset renders the neutral tag. bordered:false→ant-tag-borderless. `closable` presence mounts span.anticon.anticon-close.ant-tag-close-icon > svg — the Polaris Tag onRemove precedent. Tag root is display:inline-block with 12px/20px text; antd Tag has NO hover plane on the root (closable icon hover only — a DESCENDANT state, the Polaris Tag child-part shadow class). Measured 32px-tall stage row; Tag itself is 22px.",
+      "name": "Tag",
+      "importName": "Tag",
+      "contract": "examples/antd/contracts-seed/tag.contract.json",
+      "sampleText": "Tag",
+      "axes": [
+        "color",
+        "bordered"
+      ],
+      "axisValueMap": {
+        "bordered": {
+          "bordered": true,
+          "borderless": false
+        }
+      },
+      "presenceProps": [
+        {
+          "prop": "closable",
+          "libraryProp": "closable",
+          "value": true
+        }
+      ]
+    },
+    {
+      "__note": "MOLECULE WRAPPER — the MUI Badge precedent (Avatar child via childrenSpec, never childWrap). Root span.ant-badge wrapping span.ant-avatar (+ its own `.antd` key class and ant-avatar-css-var) and the overlay sup.ant-scroll-number.ant-badge-count > bdi > span.ant-scroll-number-only > span.ant-scroll-number-only-unit(.current — a transient rc-scroll-number class, DROPPED by classAllow? NO: `current` has no ant- prefix so it is dropped by the prefix test) — the count digit is THREE levels deep in an absolutely-positioned overlay translated (50%,-50%): the absolute-overlay cluster door (fuse GEOM_ADMIT) is the whole test here. `mode` axis: count→sup.ant-badge-count with text '5'; dot→sup.ant-badge-dot (6×6, no text) — the structure is a function of ONE axis, so per-value parts are in-grammar. `color` preset axis recolours the sup. NAMED OUT: status mode (ant-badge-status, not-a-wrapper — a different root composition with the `antStatusProcessing` infinite ::after ring; separate subject if wanted), overflowCount/showZero, `count` text other than 5, the appear/zoom keyframes (antZoomBadgeIn — finite, settle handles it).",
+      "name": "Badge",
+      "importName": "Badge",
+      "contract": "examples/antd/contracts-seed/badge.contract.json",
+      "sampleText": "",
+      "axes": [
+        "mode",
+        "color"
+      ],
+      "axisValueMap": {
+        "mode": {
+          "count": {
+            "$props": {
+              "count": 5
+            }
+          },
+          "dot": {
+            "$props": {
+              "dot": true
+            }
+          }
+        }
+      },
+      "childrenSpec": [
+        {
+          "importName": "Avatar",
+          "props": {
+            "shape": "square"
+          },
+          "text": "A"
+        }
+      ]
+    },
+    {
+      "__note": "THE PSEUDO-THUMB CASE (FC-PSEUDO-THUMB / B.4). Root button.ant-switch (role=switch); parts div.ant-switch-handle (absolute, 18×18 default / 12×12 small, inset-inline-start 2px → 24px when checked — a `size × checked` GEOMETRY PRODUCT, the B.4 two-axis wall, expect pseudo-decor-geometry-multiaxis BY NAME) whose VISIBLE knob is `.ant-switch-handle::before` (position absolute, inset 0, bg var(--ant-switch-handle-bg) #fff, radius calc(var(--ant-switch-handle-size)/2), box-shadow var(--ant-switch-handle-shadow)); span.ant-switch-inner > span.ant-switch-inner-checked + span.ant-switch-inner-unchecked (both ELEMENTS, kept by the classAllow first alternative; empty text here — checkedChildren/unCheckedChildren NAMED OUT). :active elongates the ::before by `inset-inline: 0 -30%` (checked: `-30% 0`) — a STATE × checked geometry product on a pseudo, expect pseudo-decor-state-geometry-uncarried BY NAME. `checked` is a VARIANT AXIS (the MUI Switch state-plane reclassification), controlled with a no-op onChange via callbackProps. `loading` NAMED OUT: it forces ant-switch-disabled (measured class list) so the enabled-loading rendering is unobservable (the TablePagination arrow precedent).",
+      "name": "Switch",
+      "importName": "Switch",
+      "contract": "examples/antd/contracts-seed/switch.contract.json",
+      "sampleText": "",
+      "axes": [
+        "size",
+        "checked"
+      ],
+      "axisValueMap": {
+        "checked": {
+          "unchecked": false,
+          "checked": true
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "callbackProps": [
+        "onChange"
+      ]
+    },
+    {
+      "__note": "THE PSEUDO-GLYPH CASE (FC-PSEUDO-STROKE-GLYPH). Root label.ant-checkbox-wrapper > span.ant-checkbox(.ant-checkbox-checked|-indeterminate) > [input.ant-checkbox-input (sr-only, 0 size) + span.ant-checkbox-inner] + span (label text, no class). The tick is `.ant-checkbox-inner::after`: display:table, width calc(var(--ant-control-interactive-size)/14*5) height …/14*8, border-right+border-bottom 2px solid #fff, `transform: rotate(45deg) scale(1) translate(-50%,-50%)` when checked, scale(0) unchecked — a ROTATED L-stroke glyph (pseudo-decor-rotate-check exists; the 45° is orthonormal-adjacent but NOT orthonormal → expect pseudo-decor-outside-grammar or -rotation-* BY NAME; the hillclimb fix is the L→polyline SVG emit). Indeterminate swaps the ::after to a filled square (width calc(var(--ant-font-size-lg)/2), bg var(--ant-color-primary), no border, translate(-50%,-50%) scale(1)) — in-grammar size+paint on one axis. NOTE antd forwards unknown root props (data-*, className) to the INPUT, not the label — the harness stamps data-combo on the STAGE child so the captured root is still the label; but any `className`-based part probing would land on the input. `checked` tri-state on ONE axis via $props (the MUI Checkbox precedent); `onChange` no-op keeps it controlled.",
+      "name": "Checkbox",
+      "importName": "Checkbox",
+      "contract": "examples/antd/contracts-seed/checkbox.contract.json",
+      "sampleText": "Checkbox",
+      "axes": [
+        "checked"
+      ],
+      "axisValueMap": {
+        "checked": {
+          "unchecked": {
+            "$props": {
+              "checked": false
+            }
+          },
+          "checked": {
+            "$props": {
+              "checked": true
+            }
+          },
+          "indeterminate": {
+            "$props": {
+              "checked": false,
+              "indeterminate": true
+            }
+          }
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "callbackProps": [
+        "onChange"
+      ]
+    },
+    {
+      "__note": "THE PSEUDO-DOT CASE (in-grammar control for Checkbox). Root label.ant-radio-wrapper > span.ant-radio(.ant-radio-checked) > [input.ant-radio-input + span.ant-radio-inner] + span. Dot = `.ant-radio-inner::after` (absolute, centred, width/height calc(1px * var(--ant-radio-radio-size)), bg var(--ant-radio-dot-color), `transform: scale(calc(dot-size/radio-size))` when checked, scale(0) unchecked) — a SCALE on a pseudo, not a translate/rotate: the v1 grammar carries translate + orthonormal rotate only → expect pseudo-decor-outside-grammar BY NAME on the checked dot unless the engine reads the computed (post-transform) box. Also `.ant-radio-checked::after` draws a ring (100% box, 1px border, the antRadioEffect appear animation — finite). NAMED OUT: Radio.Button (dotted importName `Radio.Button` is not in the harness import grammar — a work item, RECON §7), Radio.Group.",
+      "name": "Radio",
+      "importName": "Radio",
+      "contract": "examples/antd/contracts-seed/radio.contract.json",
+      "sampleText": "Radio",
+      "axes": [
+        "checked"
+      ],
+      "axisValueMap": {
+        "checked": {
+          "unchecked": false,
+          "checked": true
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "callbackProps": [
+        "onChange"
+      ]
+    },
+    {
+      "__note": "ATOM WITH A ROOT-SWAP TRAP. Bare Input root = <input class='ant-input ant-input-outlined [ant-input-sm|lg] [ant-input-status-error|warning] [ant-input-disabled] antd ant-input-css-var'> — a single element, no parts; `::placeholder` is a READ plane (lib.ts READ_PSEUDOS) so the placeholder colour rgba(0,0,0,0.25) should land. Focus = border-color var(--ant-color-primary) + `box-shadow: 0 0 0 2px var(--ant-control-outline)` (NOT outline — carried channel). size×status×variant — `Variants` tuple is FOUR values (outlined|borderless|filled|underlined, Input.d.ts:169; seed-gen proposed variant(4)) → 3×3×4 = 36 + disabled; `bordered` is @deprecated (Input.d.ts:45) and NOT an axis. NAMED OUT BY DESIGN: `prefix`/`suffix`/`addonBefore`/`allowClear` — each REPLACES the root (span.ant-input-affix-wrapper > [span.ant-input-prefix + input.ant-input] — measured: with prefix the data-probe landed on an inner input of height 22px inside a 32px wrapper); a presence prop that swaps the ROOT signature cannot factor (the Altitude href precedent) → a second subject `InputAffix` with prefix PINNED ON is the honest spelling if wanted. blockStage so the input takes the stage width (an <input> in a flex stage shrink-to-fits its `size` attribute).",
+      "name": "Input",
+      "importName": "Input",
+      "contract": "examples/antd/contracts-seed/input.contract.json",
+      "sampleText": "",
+      "axes": [
+        "size",
+        "status",
+        "variant"
+      ],
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "placeholder": "Input"
+      },
+      "blockStage": true,
+      "stage": {
+        "width": 320,
+        "height": 96,
+        "padding": 16
+      }
+    },
+    {
+      "__note": "MOLECULE, PRESENCE-HEAVY (the Polaris Banner precedent). Root div.ant-alert.ant-alert-<type>[.ant-alert-no-icon][.ant-alert-with-description] > [span.anticon.anticon-<glyph>.ant-alert-icon > svg] + div.ant-alert-content > [div.ant-alert-message + div.ant-alert-description] + [button.ant-alert-close-icon > span.anticon.anticon-close > svg]. The icon GLYPH is a function of `type` (check-circle|info-circle|exclamation-circle|close-circle) AND its presence is a function of `showIcon` — glyph-per-value over one axis is in-grammar (svg-content per-value glyph parts); the presence × axis product is the thing to watch (expect either visibleWhen factoring or a named presence-uncorrelated refusal). showIcon is modelled as an AXIS (2 values) rather than presence so the glyph stays a one-axis function of `type`. `description` and `closable` are presence props (each adds a part; closable's close button has its OWN hover plane — descendant state). blockStage at 320.",
+      "name": "Alert",
+      "importName": "Alert",
+      "contract": "examples/antd/contracts-seed/alert.contract.json",
+      "sampleText": "",
+      "axes": [
+        "type",
+        "showIcon"
+      ],
+      "axisValueMap": {
+        "showIcon": {
+          "noIcon": false,
+          "icon": true
+        }
+      },
+      "fixedProps": {
+        "message": "Alert message"
+      },
+      "presenceProps": [
+        {
+          "prop": "description",
+          "libraryProp": "description",
+          "value": "Alert description copy."
+        },
+        {
+          "prop": "closable",
+          "libraryProp": "closable",
+          "value": true
+        }
+      ],
+      "blockStage": true,
+      "stage": {
+        "width": 320,
+        "height": 120,
+        "padding": 16
+      }
+    },
+    {
+      "__note": "ATOM, SIZE×SHAPE (the MUI Avatar precedent plus a size axis — antd's size is a real enum small|default|large → 24/32/40px). Root span.ant-avatar.ant-avatar-<shape>[.ant-avatar-lg|sm] > span.ant-avatar-string (inline `transform: scale(1)` — antd's text-fit ResizeObserver writes a scale; measured scale(1) for a single initial; a DYNAMIC (T3) channel if the initial overflowed — keep sampleText to ONE glyph). NAMED OUT: `icon` (replaces the string part with span.anticon > svg — a child SWAP, non-factoring presence), `src` image, numeric `size`, `gap`.",
+      "name": "Avatar",
+      "importName": "Avatar",
+      "contract": "examples/antd/contracts-seed/avatar.contract.json",
+      "sampleText": "A",
+      "axes": [
+        "size",
+        "shape"
+      ]
+    },
+    {
+      "__note": "THE METER (FC-METER / FC-GEOMETRY-EXCLUDED, T3 by docs/DIFFICULTY-TIERS). Root div.ant-progress.ant-progress-status-<s>.ant-progress-line… > div.ant-progress-outer (inline width:100%) > div.ant-progress-inner > div.ant-progress-bg.ant-progress-bg-outer (INLINE `width: 40%; height: 8px; --progress-percent: 0.4`) + span.ant-progress-text (text '40%' | a check-circle svg for success | close-circle for exception — glyph-per-value over `status` is in-grammar, but text→svg is a part SWAP). The fill WIDTH is inline geometry → FC-GEOMETRY-EXCLUDED drops it and must LEDGER it (the Option B obligation, docs/BETA.md). `.ant-progress-bg::after` carries `width: calc(1 / var(--progress-percent) * 100%)` — a calc on a NON-prefixed var (`--progress-percent` is not `--ant-`): lands in vcalcs (named ceiling). `active` status adds an INFINITE `antProgressLTRActive 2.4s` on ::before (opacity 0 at 0%) — pinned at 0 → invisible; captured as `pseudo-decor-hidden-in-combo` BY NAME. percent pinned 40 (the MUI LinearProgress value:40 precedent); type=circle NAMED OUT (SVG stroke-dasharray inline geometry — no spelling at all).",
+      "name": "Progress",
+      "importName": "Progress",
+      "contract": "examples/antd/contracts-seed/progress.contract.json",
+      "sampleText": "",
+      "axes": [
+        "status"
+      ],
+      "fixedProps": {
+        "percent": 40,
+        "type": "line"
+      },
+      "blockStage": true,
+      "stage": {
+        "width": 320,
+        "height": 64,
+        "padding": 16
+      }
+    },
+    {
+      "__note": "MOLECULE CONTAINER (the MUI Card precedent with a real head part). Root div.ant-card[.ant-card-bordered][.ant-card-small] > div.ant-card-head > div.ant-card-head-wrapper > div.ant-card-head-title + div.ant-card-body. `.ant-card-head::before/::after` are display:table clearfix pseudos with content '' and 0 height — expect `pseudo-decor-outside-grammar` BY NAME (position static) on every combo, harmless. Head title renders fontWeightStrong = 600 — the Roboto-600 substrate residue (fonts.__note). `title` fixed; `variant` outlined|borderless (antd 5.24+ — `bordered` is @deprecated in Card.d.ts:17, seed-gen proposed variant(2)); `size` default|small.",
+      "name": "Card",
+      "importName": "Card",
+      "contract": "examples/antd/contracts-seed/card.contract.json",
+      "sampleText": "Card body copy for the exam.",
+      "axes": [
+        "size",
+        "variant"
+      ],
+      "fixedProps": {
+        "title": "Card title"
+      },
+      "blockStage": true,
+      "stage": {
+        "width": 320,
+        "height": 160,
+        "padding": 16
+      }
+    },
+    {
+      "__note": "THE PORTAL LANE (docs/23 B.1 + B.2 — expected LEDGERED, the exam measures whether it is NAMED). antd Tooltip portals div.ant-tooltip(.ant-tooltip-placement-top) > [div.ant-tooltip-arrow (::before clip-path: var(--ant-tooltip-arrow-path) triangle, ::after a rotated(-135deg) shadow square) + div.ant-tooltip-content > div.ant-tooltip-inner] to document.body. portalSweep carries no varPrefix (B.1) → predict 0 source facts, every value minted; no state planes (B.2). The arrow is a clip-path'd pseudo → pseudo-decor-outside-grammar BY NAME. `open` pinned via openDriver; the rc-motion zoom-big-fast appear is finite (settle). `getPopupContainer` (which would keep the popup in-stage) takes a FUNCTION — the $callback marker resolves to `() => {}` returning undefined → antd falls back to body, so the in-stage route is NOT reachable from config (a work item if B.1 is to be dodged rather than measured). childWrap Button (the MUI Tooltip precedent).",
+      "name": "Tooltip",
+      "importName": "Tooltip",
+      "contract": "examples/antd/contracts-seed/tooltip.contract.json",
+      "sampleText": "Anchor",
+      "axes": [],
+      "portalCapture": true,
+      "openDriver": {
+        "open": true,
+        "title": "Tooltip text",
+        "placement": "top"
+      },
+      "childWrap": {
+        "importName": "Button"
+      }
+    }
+  ],
+  "__provenance": "P2 EXAM CAPTURE CONFIG — landed 2026-08-23 from the measured recon draft (examples/antd/RECON.md; the probe numbers every __note quotes). The three landing conditions the draft marker named are met: (a) the 12 curated seeds exist in examples/antd/contracts-seed/ (seed-gen W1 re-measured: Button now proposes 7 axes from the .d.ts, the curated seed keeps type×size×danger); (b) examples/antd/tokens/{antd.dtcg.json,antd.vars.css,modes/} are built with drift check 0; (c) classAllow was RE-MEASURED with the grammar ABSENT on a Button capture over the `type` axis (docs/21 §4.1 method): the root class list varied by exactly ant-btn-{default|primary|dashed|link|text} + ant-btn-color-{default|primary|link} + ant-btn-variant-{outlined|solid|dashed|link|text}, every one matched by the two lookaheads; the stable identity classes are `ant-btn` (kept) and `antd` (the cssVar key, dropped by the prefix test). Every `__note` below is a measured claim with its probe in RECON.md §2."
+}

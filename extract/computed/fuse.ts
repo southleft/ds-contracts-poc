@@ -41,6 +41,7 @@ import { PRESENCE_OFF } from './capture.js';
 import type { ComponentConfig, PropSpace, SweepResult, Interaction } from './capture.js';
 import {
   CHANNEL_TO_COMPUTED,
+  GEOMETRY_CHANNELS,
   DECOR_PSEUDOS,
   flatten,
   isFusable,
@@ -637,6 +638,28 @@ export function styledChannels(
       seen++;
       if (el.node.style['display'] !== 'block') { block = false; break; }
     }
+    // ANTD EXAM (heal loop): a root that is NOT display:block but measures
+    // EXACTLY the stage's content box in every enabled combo fills its
+    // container the same way a block root does — antd's Input is an
+    // inline-block `width: 100%` (blockStage), its Progress a `width: 100%`
+    // line. Without this the canvas hugged the Input to its (absent) text:
+    // a 24px-wide, 10px-tall box nobody could read as an input. Same
+    // stage-dependent receipt as the block root; the viewport door above
+    // still refuses a body-wide box.
+    if (seen > 0 && !block) {
+      const stageContent = env.stage.width - 2 * env.stage.padding;
+      let fills = true;
+      for (const combo of space.enumeration.combos) {
+        if (!isEnabled(combo)) continue;
+        const el = a.getAligned(`${combo.key}__default`)[rootPi];
+        if (!el) continue;
+        if (pxNum(el.node.style['width']) !== stageContent) { fills = false; break; }
+      }
+      if (fills && !vpDerived.refused.get(rootPi)?.has('width')) {
+        block = true;
+        receipts.push(`stage-fill-root-admitted: ${a.partNames[rootPi]} — display:${a.baseFlat[rootPi].node.style['display']} root measures exactly the stage content box (${stageContent}px) in every enabled combo: it fills its container like a block root (antd Input \`width: 100%\`), so the captured stage width joins fusion under the block-root receipt below`);
+      }
+    }
     if (seen > 0 && block) {
       const rootStyle = a.baseFlat[rootPi].node.style;
       const rootW = pxNum(rootStyle['width']);
@@ -686,6 +709,17 @@ export function styledChannels(
    *  so the next vendor-prefixed construct announces itself instead of
    *  evaporating. */
   const webkitStyled = new Map<string, Set<string>>(); // channel -> parts
+  // ANTD EXAM (2026-08-23) — THE GEOMETRY EXCLUSION STOPS BEING SILENT PER
+  // PART. Option B (docs/BETA.md) keeps width/height out of fusion as
+  // environment-dependent and carries the obligation to LEDGER each drop.
+  // Measured on the exam's accounting: Tag root.height 22px, Input root
+  // width 288px (the stage's content box), Avatar 32×32, Progress's four
+  // track boxes, Card's head/body heights — 46 (part, channel) facts that
+  // differ from the control, refused by `isFusable`, and named by NOTHING in
+  // LEDGER.md, the extension or stdout. Same shape as the -webkit census
+  // above: one line per part naming every excluded geometry channel and its
+  // base value, so the drop is greppable by part AND channel.
+  const geometryExcluded = new Map<string, Map<string, string>>(); // part -> channel -> base value
   for (let pi = 0; pi < a.baseFlat.length; pi++) {
     const set = new Set<string>();
     const inTableBox = table.lowered.has(pi);
@@ -700,12 +734,30 @@ export function styledChannels(
     // Polaris Badge's sr-only span minted `bottom: 799px` — 800px window
     // minus a 1px box — through the ordinary fusable path.
     const vpRefused = vpDerived.refused.get(pi);
+    // ANTD EXAM (heal loop, 2026-08-23) — TOKEN-NAMED GEOMETRY IS A DESIGN
+    // VALUE. antd's Button is `height: var(--ant-control-height)` (32px), its
+    // Input the same token, its Avatar `width/height: var(--ant-avatar-
+    // container-size)`; the CSS-vars reader VERIFIED those bindings (vrefs)
+    // and the geometry exclusion then threw the channel away as
+    // "environment-dependent" — the canvas drew 18px-tall buttons and 12px
+    // avatars. A dimension the library's own stylesheet names with a token
+    // is not a measurement of the harness; it joins fusion with its name.
+    // Percent/viewport-derived boxes keep the exclusion (vpRefused wins).
+    const tokenNamed = (p: string): boolean =>
+      (p === 'width' || p === 'height') && !inTableBox && (a.baseFlat[pi].node.vrefs?.[p]?.length ?? 0) > 0;
+    for (const p of ['width', 'height'] as const) {
+      if (tokenNamed(p) && !vpRefused?.has(p)) {
+        const [name, value, rule] = a.baseFlat[pi].node.vrefs![p]![0];
+        receipts.push(`token-named-geometry-admitted: ${a.partNames[pi]}.${p} — the library's own stylesheet binds it to ${name} (${value}) at \`${rule}\`; a dimension named by a token is a design value, not an environment measurement, so it joins fusion with its name (the absolute-cluster / table / block-root doors are unchanged)`);
+      }
+    }
     const admit = (p: string): boolean =>
       !vpRefused?.has(p) &&
       (isFusable(p) ||
         (GEOM_ADMIT.has(p) && !inTableBox && (absAdmit.has(pi) || parentAdmit.has(pi))) ||
         ((p === 'width' || p === 'height') && table.cellAdmit.has(pi)) ||
-        (p === 'width' && blockRootAdmit.has(pi)));
+        (p === 'width' && blockRootAdmit.has(pi)) ||
+        tokenNamed(p));
     const tag = a.baseFlat[pi].node.tag;
     const ctrl = controls[tag] ?? controls['span'];
     if (!controls[tag]) receipts.push(`control-fallback: no control for <${tag}> — span control used (part ${a.partNames[pi]})`);
@@ -714,6 +766,9 @@ export function styledChannels(
       // uses (differs from the control), on the channels the door refuses.
       if (p.startsWith('-webkit-') && a.baseFlat[pi].node.style[p] !== ctrl[p]) {
         (webkitStyled.get(p) ?? webkitStyled.set(p, new Set()).get(p)!).add(a.partNames[pi]);
+      }
+      if (GEOMETRY_CHANNELS.has(p) && !admit(p) && a.baseFlat[pi].node.style[p] !== ctrl[p]) {
+        (geometryExcluded.get(a.partNames[pi]) ?? geometryExcluded.set(a.partNames[pi], new Map()).get(a.partNames[pi])!).set(p, a.baseFlat[pi].node.style[p] ?? '');
       }
       if (!admit(p)) continue;
       if (a.baseFlat[pi].node.style[p] !== ctrl[p]) set.add(p);
@@ -902,6 +957,12 @@ export function styledChannels(
   // "the blanket refused nothing here" and "the blanket ate a construct" are
   // different, visible facts. `-webkit-line-clamp` gets the argued refusal it
   // has earned by measurement (see WEBKIT_NOTES).
+  for (const [part, chans] of [...geometryExcluded].sort(([x], [y]) => (x < y ? -1 : x > y ? 1 : 0))) {
+    const listed = [...chans].sort(([x], [y]) => (x < y ? -1 : x > y ? 1 : 0)).map(([c, v]) => `${c} ${v}`).join(', ');
+    receipts.push(
+      `geometry-excluded: ${part} — ${listed} — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.`,
+    );
+  }
   const wk = [...webkitStyled].sort(([x], [y]) => x.localeCompare(y));
   if (wk.length > 0) {
     receipts.push(
@@ -1167,7 +1228,7 @@ const LAYOUT_CHANNEL_TO_FIELD: Record<string, { field: 'display' | 'direction' |
 export interface LayoutEnrichment {
   /** per part: layout channels consumed here (excluded from minting). */
   handled: Map<string, Set<string>>;
-  enriched: Array<{ part: string; field: string; value: string }>;
+  enriched: Array<{ part: string; field: string; value: string | boolean }>;
   contradictions: Array<{ part: string; field: string; carried: string; observed: string }>;
   receipts: string[];
 }
@@ -1221,6 +1282,60 @@ export function enrichLayout(
       handledSet.add(channel);
       out.enriched.push({ part: partName, field: spec.field, value: canonical });
     }
+  }
+  // ANTD EXAM (heal loop, 2026-08-23) — GROW IS A LAYOUT FACT, NOT A TOKEN.
+  // A flex child with `flex-grow ≥ 1` minted a `flex-grow` token the canvas
+  // annotates and never draws (antd's Progress track: `flex: 1` inside the
+  // inline-flex outer drew a 0-wide track; the 40% fill had nothing to
+  // measure against). `layout.grow` is the schema's own spelling and the
+  // canvas lowers it to layoutGrow / FILL, so a uniform flex-grow ≥ 1 on a
+  // child of a flex container carries there. The second door is the root:
+  // a NON-block root (inline-block — antd's Progress line, Input) is lowered
+  // as a hugging row, so a child that MEASURES the root's content width in
+  // every combo (the outer track's `width: 100%`) would hug to nothing —
+  // it fills, and says so.
+  const parentOf = (pi: number): number => {
+    const path = a.baseFlat[pi].path;
+    if (path === '') return -1;
+    const pp = path.includes('.') ? path.slice(0, path.lastIndexOf('.')) : '';
+    return a.baseFlat.findIndex((e) => e.path === pp);
+  };
+  const num = (v: string | undefined): number => (v === undefined ? 0 : (parseFloat(v) || 0));
+  for (let pi = 0; pi < a.baseFlat.length; pi++) {
+    const partName = a.partNames[pi];
+    const target = staticParts.get(partName);
+    if (!target || target.layout?.grow !== undefined) continue;
+    const ppi = parentOf(pi);
+    if (ppi < 0) continue;
+    const parentDisplay = a.baseFlat[ppi].node.style['display'];
+    const childDisplay = a.baseFlat[pi].node.style['display'];
+    if (childDisplay === 'none' || a.baseFlat[pi].node.style['position'] === 'absolute') continue;
+    let reason: string | null = null;
+    if (parentDisplay === 'flex' || parentDisplay === 'inline-flex') {
+      const dir = a.baseFlat[ppi].node.style['flex-direction'] ?? 'row';
+      if (!dir.startsWith('row')) continue;
+      let grows = true;
+      for (const combo of enabled) {
+        const el = a.getAligned(`${combo.key}__default`)[pi];
+        if (!el) continue;
+        if (num(el.node.style['flex-grow']) < 1) { grows = false; break; }
+      }
+      if (grows) reason = `flex-grow ${a.baseFlat[pi].node.style['flex-grow']} in a flex row parent (${a.partNames[ppi]})`;
+    } else if (ppi === a.baseFlat.findIndex((e) => e.path === '') && parentDisplay !== 'block' && parentDisplay !== 'flex' && parentDisplay !== 'inline-flex' && parentDisplay !== 'grid') {
+      let fills = true;
+      for (const combo of enabled) {
+        const els = a.getAligned(`${combo.key}__default`);
+        const el = els[pi]; const par = els[ppi];
+        if (!el || !par) continue;
+        const ps = par.node.style;
+        const content = num(ps['width']) - num(ps['padding-left']) - num(ps['padding-right']) - num(ps['border-left-width']) - num(ps['border-right-width']);
+        if (Math.abs(content - num(el.node.style['width'])) > 0.6 || content <= 0) { fills = false; break; }
+      }
+      if (fills) reason = `measures the ${parentDisplay} root's content box in every enabled combo (width ${a.baseFlat[pi].node.style['width']}) — a hugging row would give it no width`;
+    }
+    if (!reason) continue;
+    out.enriched.push({ part: partName, field: 'grow', value: true });
+    out.receipts.push(`layout-grow-carried: ${partName} — ${reason}; carried as layout.grow (the canvas FILL / layoutGrow twin)`);
   }
   return out;
 }
@@ -1392,6 +1507,10 @@ export interface DeclaredEnrichment {
   part: string;
   channel: string;
   value: string;
+  /** ANTD EXAM (heal loop): a declared-registry value that is a function of
+   *  exactly ONE enum axis carries as a per-value `stylesWhen` rule instead
+   *  of refusing (border-*-style only today — antd's dashed Button type). */
+  when?: { prop: string; equals: string };
 }
 export interface DeclaredStateEnrichment extends DeclaredEnrichment {
   state: string;
@@ -1885,6 +2004,25 @@ export function prepareMint(
             }
           } else if (spec && uniform !== null) {
             codeOnly.push({ part: partName, channel, reason: 'declared-channel value outside the bounded grammar — named residue (v15)', sample: uniform, distinctValues: values.size });
+          } else if (spec && /^border-(top|right|bottom|left)-style$/.test(channel) && declarablePart(partName) && (() => {
+            // ANTD EXAM (heal loop): factor the varying border style by ONE enum axis
+            for (const ax of space.axes) {
+              if (space.presence.has(ax.prop) || space.stateProps.some((sp) => sp.prop === ax.prop)) continue;
+              const byVal = new Map<string, Set<string>>();
+              for (const r of rows) { const av = r.axisValues[ax.prop]; if (av === undefined) { byVal.clear(); break; } (byVal.get(av) ?? byVal.set(av, new Set()).get(av)!).add(r.value); }
+              if (byVal.size < 2 || [...byVal.values()].some((s) => s.size !== 1)) continue;
+              if ([...byVal.values()].some((s) => !spec.value.test([...s][0]))) continue;
+              for (const [av, s] of byVal) {
+                const v = [...s][0];
+                if (v === 'solid' || v === 'none') continue; // the emitters' standing stroke style; the zero-width side already draws nothing
+                declared.push({ part: partName, channel, value: v, when: { prop: ax.prop, equals: av } });
+              }
+              remintReceipts.push(`border-style-by-axis-carried: ${partName}.${channel} varies by "${ax.prop}" (${[...byVal].map(([k, s]) => `${k}=${[...s][0]}`).join(', ')}) — carried as per-value stylesWhen rules (code: \`.${ax.prop}-<value> { ${channel}: … }\`; canvas: a dashPattern on that variant's stroke)`);
+              return true;
+            }
+            return false;
+          })()) {
+            /* carried above as stylesWhen */
           } else if (spec) {
             codeOnly.push({ part: partName, channel, reason: 'declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue', sample: unk, distinctValues: values.size });
           } else if (channel.startsWith('--')) {
@@ -2117,6 +2255,35 @@ export function prepareMint(
           }
           pushStateValue(interaction, a.partNames[pi], p, combo, pv1);
         }
+        // ANTD EXAM (S1 on the real Button, 2026-08-23) — THE OUTLINE PAIR.
+        // antd's focus ring is `outline: var(--line-width-focus) solid …` and
+        // its width is 3px — Chromium's OWN `outline-width: medium`. The rest
+        // plane computes 3px too (style none, nothing painted), so the
+        // focus-visible delta is style none→solid + color + offset and the
+        // WIDTH never differs from the default: the loop above carried color
+        // and offset, declared the style, and dropped the width as "not a
+        // fact". The canvas draws an outside stroke only from the PAIR
+        // (outline-color + outline-width), so the focus ring vanished with
+        // every half of it receipted. When a plane changes outline-color or
+        // outline-style and the plane's outline-width is a non-zero length,
+        // that width IS the ring's width on this plane and rides the state
+        // as a value, UA-default or not. (A zero or absent width stays
+        // absent — nothing would be drawn.)
+        if (isEnabled(combo)) {
+          // Interaction planes are reconstructed from DELTAS against the
+          // default plane, so a channel that did not change reads undefined
+          // there — the unchanged width is the default plane's width.
+          const onPlane = (p: string): string | undefined => planeValue(d1.node.style, p) ?? planeValue(d0.node.style, p);
+          const w1 = onPlane('outline-width');
+          const styleOn = onPlane('outline-style');
+          const ringChanged = (['outline-color', 'outline-style'] as const).some(
+            (p) => planeValue(d1.node.style, p) !== undefined && planeValue(d0.node.style, p) !== planeValue(d1.node.style, p),
+          );
+          const widthUnchanged = planeValue(d1.node.style, 'outline-width') === undefined || planeValue(d0.node.style, 'outline-width') === w1;
+          if (ringChanged && widthUnchanged && w1 !== undefined && styleOn !== undefined && styleOn !== 'none' && /^[1-9][\d.]*px$/.test(w1)) {
+            pushStateValue(interaction, a.partNames[pi], 'outline-width', combo, w1);
+          }
+        }
       }
     }
   }
@@ -2299,6 +2466,13 @@ export function applyMintToContract(
    *  `stateDeltas` = keys on which some state delta was observed at all
    *  (see MintPrep.inheritanceOnly / .inheritanceStateDeltas). */
   inheritance: { only: string[]; stateDeltas: string[] } = { only: [], stateDeltas: [] },
+  /** ANTD EXAM (W4): prepareMint's STATE-plane code-only residue
+   *  (`stateCodeOnly`) — a state delta whose value shape no mintable kind
+   *  accepts, a partial-coverage declared delta, a custom property. Folded
+   *  into `Part.codeOnly` below together with the state-plane overflow
+   *  bindings this function refuses, so the contract itself names every
+   *  state fact the capture saw and the grammar dropped. */
+  captureCodeOnly: CodeOnlyEntry[] = [],
 ): ApplyResult {
   const enriched = structuredClone(contract) as Contract & Record<string, unknown>;
   const overflowBindings: OverflowBinding[] = [];
@@ -2308,7 +2482,7 @@ export function applyMintToContract(
     const target = partByName.get(le.part);
     if (!target) continue;
     target.layout ??= {};
-    (target.layout as Record<string, string>)[le.field] = le.value;
+    (target.layout as Record<string, string | boolean>)[le.field] = le.value;
     enrichmentNotes.push(`layout enriched: ${le.part}.layout.${le.field} = ${le.value} (uniform computed keyword — the schema's own vocabulary)`);
   }
   // v15 declared facts (S4): uniform registry-channel values → Part.declared;
@@ -2317,6 +2491,14 @@ export function applyMintToContract(
   for (const de of declaredEnrichments) {
     const target = partByName.get(de.part);
     if (!target || target.component || target.slot) continue; // guarded upstream; belt and braces
+    if (de.when) {
+      target.stylesWhen ??= [];
+      const existing = target.stylesWhen.find((sw) => sw.prop === de.when!.prop && sw.equals === de.when!.equals);
+      if (existing) { if (!(de.channel in existing.styles)) existing.styles[de.channel] = de.value; }
+      else target.stylesWhen.push({ prop: de.when.prop, equals: de.when.equals, styles: { [de.channel]: de.value } });
+      enrichmentNotes.push(`declared fact carried per axis value: ${de.part}.${de.channel} = ${de.value} when ${de.when.prop}=${de.when.equals} (stylesWhen)`);
+      continue;
+    }
     target.declared ??= {};
     if (!(de.channel in target.declared)) {
       target.declared[de.channel] = de.value;
@@ -2549,7 +2731,20 @@ export function applyMintToContract(
           // Round 4: presence axes are BOOLEAN contract props — tokensByProp
           // has no boolean spelling; presence-driven styling is named residue
           // (the created SUBTREE itself is carried via visibleWhen instead).
-          overflowBindings.push({ part: partName, channel, ref: b.ref, refusal: `presence-prop-driven styling (${axisProp}) — boolean tokensByProp has no spelling (round 4 residue)` });
+          //
+          // ANTD EXAM (heal loop, 2026-08-23): the refusal used to drop the
+          // WHOLE channel — antd's Alert root padding (8px 12px; 20px 24px
+          // with a description) vanished and the message text sat on the
+          // border. The presence-OFF plane is the set's BASE rendering and
+          // its leaf exists in the minted tree (`….off`); carry it as the
+          // channel's binding and name the ON plane as the residue it is.
+          const offRef = `{${inner.replace(`.{${axisProp}}`, `.${PRESENCE_OFF}`)}}`;
+          target.tokens ??= {};
+          if (!(channel in target.tokens)) {
+            target.tokens[channel] = offRef;
+            enrichmentNotes.push(`presence-off plane carried: ${partName}.${channel} = ${offRef} (the base rendering, presence "${axisProp}" absent); the presence-ON plane is named residue below`);
+          }
+          overflowBindings.push({ part: partName, channel, ref: b.ref, refusal: `presence-prop-driven styling (${axisProp}) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (${axisProp} present) is not` });
           return;
         }
         const groupBase = inner.replace(`.{${axisProp}}`, '');
@@ -2755,6 +2950,69 @@ export function applyMintToContract(
     if (existing.length > 0) target.tokensByProp = existing as never;
   }
 
+  // ANTD EXAM (W4) — THE STATE PLANE'S REFUSALS RIDE THE CONTRACT. Every
+  // state-plane binding refused above (overflowBindings with a `state`) and
+  // every state-plane code-only residue prepareMint named (captureCodeOnly)
+  // lands on its part as `Part.codeOnly`, value resolved to the minted
+  // literal where a leaf exists. Measured on the P2 exam's S1 case: the
+  // focus-visible `outline-width: 3px` on a nested part was refused by name
+  // ("v13 Part.states carries plain color-kind refs only on non-root parts")
+  // into enriched.extension.json and LEDGER.md — and `figma bundle`, which
+  // compiles codeOnlyFacts from the CONTRACT, never heard of it. The designer
+  // pasting the bundle saw a Checkbox with no focus ring and no receipt.
+  // Base-plane residue stays where it was (hundreds of per-part declared/
+  // custom-property lines a designer would not read); the state plane is the
+  // one whose silence costs a visible affordance.
+  {
+    const literalOf = (ref: string | undefined): string | undefined => {
+      if (!ref) return undefined;
+      const hit = mintStates.entries.find((e) => e.ref === ref) ?? mintBase.entries.find((e) => e.ref === ref);
+      return hit?.value;
+    };
+    const seen = new Set<string>();
+    const add = (partName: string, entry: { state?: string; channel: string; value: string; reason: string }) => {
+      const target = partByName.get(partName);
+      if (!target) return; // a computed-only part absent from the anatomy is already its own named refusal
+      const key = `${partName}|${entry.state ?? ''}|${entry.channel}|${entry.reason}`;
+      if (seen.has(key)) return;
+      seen.add(key);
+      (target.codeOnly ??= []).push(entry);
+    };
+    for (const o of overflowBindings) {
+      if (!o.state) continue;
+      add(o.part, { state: o.state, channel: o.channel, value: literalOf(o.ref) ?? o.ref ?? '', reason: o.refusal });
+    }
+    for (const c of captureCodeOnly) {
+      if (!c.state) continue;
+      add(c.part, { state: c.state, channel: c.channel, value: c.sample, reason: c.reason });
+    }
+    for (const target of partByName.values()) {
+      // plain string order, never localeCompare — the enriched contract is byte-pinned
+      if (target.codeOnly) target.codeOnly.sort((a, b) => { const ka = `${a.state}|${a.channel}|${a.reason}`; const kb = `${b.state}|${b.channel}|${b.reason}`; return ka < kb ? -1 : ka > kb ? 1 : 0; });
+    }
+  }
+  // ANTD EXAM (heal loop, 2026-08-23) — THE UNSET PLANE MUST LOSE THE CASCADE.
+  // The pair-with-unset carriage above spells a status×variant product as
+  // TWO tokensByProp entries: the base plane per OTHER axis (variant, with
+  // the unset status pinned) and the per-unset-value maps (status=error /
+  // warning, whose refs keep the variant placeholder). resolveTokens merges
+  // entries IN ORDER, later wins — and the entries were created in axis
+  // order (status before variant), so every Status=Error cell on the canvas
+  // took the UNSET border colour: antd's error input drew grey. The CSS
+  // surfaces never saw it (a compound `.status-error.variant-outlined` rule
+  // out-specifies `.variant-outlined`), the canvas did. Defaultless-axis
+  // entries now sort AFTER defaulted-axis entries — stable, so nothing else
+  // moves — and the named plane wins over its own fallback.
+  for (const target of partByName.values()) {
+    const tbp = target.tokensByProp;
+    if (!Array.isArray(tbp) || tbp.length < 2) continue;
+    const rank = (e: { prop: string }) => (unsetAxes.has(e.prop) ? 1 : 0);
+    const sorted = tbp.map((e, i) => ({ e, i })).sort((x, y) => rank(x.e) - rank(y.e) || x.i - y.i).map((x) => x.e);
+    if (sorted.some((e, i) => e !== tbp[i])) {
+      target.tokensByProp = sorted;
+      enrichmentNotes.push(`tokensByProp reordered: ${[...new Set(sorted.map((e) => e.prop))].join(' → ')} — defaultless-axis maps (named planes) follow the defaulted-axis maps (the unset plane) so the in-order merge lets the named plane win`);
+    }
+  }
   return { enriched, overflowBindings, enrichmentNotes };
 }
 

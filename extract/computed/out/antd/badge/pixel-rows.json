@@ -1,0 +1,162 @@
+[
+  {
+    "key": "count.unset__default",
+    "pctExact": 0.3548177083333333,
+    "pctAA": 0.07161458333333333
+  },
+  {
+    "key": "count.unset__hover",
+    "pctExact": 0.3548177083333333,
+    "pctAA": 0.07161458333333333
+  },
+  {
+    "key": "count.unset__focus-visible",
+    "pctExact": 0.37109375,
+    "pctAA": 0.07161458333333333
+  },
+  {
+    "key": "count.unset__active",
+    "pctExact": 0.37109375,
+    "pctAA": 0.07161458333333333
+  },
+  {
+    "key": "count.blue__default",
+    "pctExact": 0.37109375,
+    "pctAA": 0.07161458333333333
+  },
+  {
+    "key": "count.blue__hover",
+    "pctExact": 0.37109375,
+    "pctAA": 0.07161458333333333
+  },
+  {
+    "key": "count.blue__focus-visible",
+    "pctExact": 0.37109375,
+    "pctAA": 0.07161458333333333
+  },
+  {
+    "key": "count.blue__active",
+    "pctExact": 0.37109375,
+    "pctAA": 0.07161458333333333
+  },
+  {
+    "key": "count.green__default",
+    "pctExact": 0.3548177083333333,
+    "pctAA": 0.07161458333333333
+  },
+  {
+    "key": "count.green__hover",
+    "pctExact": 0.3548177083333333,
+    "pctAA": 0.07161458333333333
+  },
+  {
+    "key": "count.green__focus-visible",
+    "pctExact": 0.3548177083333333,
+    "pctAA": 0.07161458333333333
+  },
+  {
+    "key": "count.green__active",
+    "pctExact": 0.3548177083333333,
+    "pctAA": 0.07161458333333333
+  },
+  {
+    "key": "count.purple__default",
+    "pctExact": 0.3548177083333333,
+    "pctAA": 0.07161458333333333
+  },
+  {
+    "key": "count.purple__hover",
+    "pctExact": 0.3548177083333333,
+    "pctAA": 0.07161458333333333
+  },
+  {
+    "key": "count.purple__focus-visible",
+    "pctExact": 0.3548177083333333,
+    "pctAA": 0.07161458333333333
+  },
+  {
+    "key": "count.purple__active",
+    "pctExact": 0.3548177083333333,
+    "pctAA": 0.07161458333333333
+  },
+  {
+    "key": "dot.unset__default",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "dot.unset__hover",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "dot.unset__focus-visible",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "dot.unset__active",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "dot.blue__default",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "dot.blue__hover",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "dot.blue__focus-visible",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "dot.blue__active",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "dot.green__default",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "dot.green__hover",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "dot.green__focus-visible",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "dot.green__active",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "dot.purple__default",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "dot.purple__hover",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "dot.purple__focus-visible",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "dot.purple__active",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  }
+]

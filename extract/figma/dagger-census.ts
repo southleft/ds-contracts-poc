@@ -74,6 +74,9 @@ const CORPORA: Corpus[] = [
   // multi-root portal refusal, see examples/shadcn/PROVENANCE.md); icon assets
   // are the floor-reconstructed lucide glyphs (checkbox check, select chevron).
   { id: 'shadcn', contractsDir: 'examples/shadcn/contracts', tokens: ['examples/shadcn/tokens/shadcn.dtcg.json', 'examples/shadcn/tokens/shadcn-minted.dtcg.json'], icons: 'examples/shadcn/assets/icons' },
+  // ANTD round (library #11, the P2 code→canvas exam): twelve promoted
+  // contracts; the Light/Dark modes are antd's own getDesignToken()/darkAlgorithm.
+  { id: 'antd', contractsDir: 'examples/antd/contracts', tokens: ['examples/antd/tokens/antd.dtcg.json', 'examples/antd/tokens/antd-minted.dtcg.json'], modes: ['examples/antd/tokens/modes/antd.light.dtcg.json', 'examples/antd/tokens/modes/antd.dark.dtcg.json'], icons: 'examples/antd/assets/icons' },
   { id: 'polaris', contractsDir: 'examples/polaris/contracts', tokens: ['examples/polaris/tokens/polaris-light.dtcg.json', 'examples/polaris/tokens/polaris-minted.dtcg.json'], icons: 'examples/polaris/assets/icons' },
 ];
 

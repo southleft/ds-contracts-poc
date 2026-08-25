@@ -1,0 +1,5 @@
+[data-cf="antd-focus-outline-ring-child-part"] { display: inline-flex; align-items: center; gap: 8px; }
+[data-cf="antd-focus-outline-ring-child-part"] .cf-b { position: relative; display: inline-block; width: 16px; height: 16px; }
+[data-cf="antd-focus-outline-ring-child-part"] .cf-c { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; margin: 0; cursor: pointer; }
+[data-cf="antd-focus-outline-ring-child-part"] .cf-a { position: absolute; inset: 0; display: block; border: 1px solid rgb(217, 217, 217); border-radius: 4px; background-color: rgb(255, 255, 255); outline: 0 solid transparent; }
+[data-cf="antd-focus-outline-ring-child-part"] .cf-c:focus-visible + .cf-a { outline: 3px solid rgb(145, 202, 255); outline-offset: 1px; }

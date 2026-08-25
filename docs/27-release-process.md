@@ -70,6 +70,22 @@ npm run ci:lane catalog-visual
 npm run audit:production
 ```
 
+Then the whole definition in one command, on the frozen commit, with no
+shortcut flags:
+
+```bash
+npm run v1:readiness
+```
+
+It runs every row of [docs/26](26-v1-definition.md) — each acceptance chain,
+each evidence link, the V1-REL-01 audit ledger — and writes
+`parity/receipts/v1/READINESS.md` (row · state · command · seconds · evidence)
+plus `AUDIT-LEDGER.md`. Commit the receipt with the freeze. The CI full lane
+runs the same script with `--trust-lanes --pre-release`, which cites the lane
+runs instead of repeating them and names the post-publish chain and the open
+human ledger rows; a release run passes neither flag, so a row that is red
+only before publication (`deploy:check`) stays red until the deploy happens.
+
 Install the browser prerequisites printed by the lane runner. The
 catalog-visual lane also requires Inter. Record exact command, platform, commit,
 exit code, and artifact hashes; do not summarize a skipped prerequisite as

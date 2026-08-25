@@ -1,0 +1,46 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "card",
+  "anchors": [
+    {
+      "leaf": "imported.card.card-head.font-size.default",
+      "token": "card-header-font-size",
+      "part": "card-head",
+      "cssProperty": "font-size",
+      "varName": "--ant-card-header-font-size",
+      "selector": ".ant-card .ant-card-head"
+    },
+    {
+      "leaf": "imported.card.card-head.font-size.small",
+      "token": "card-header-font-size-sm",
+      "part": "card-head",
+      "cssProperty": "font-size",
+      "varName": "--ant-card-header-font-size-sm",
+      "selector": ".ant-card-small > .ant-card-head"
+    },
+    {
+      "leaf": "imported.card.card-head.min-height.default",
+      "token": "card-header-height",
+      "part": "card-head",
+      "cssProperty": "min-height",
+      "varName": "--ant-card-header-height",
+      "selector": ".ant-card .ant-card-head"
+    },
+    {
+      "leaf": "imported.card.card-head.min-height.small",
+      "token": "card-header-height-sm",
+      "part": "card-head",
+      "cssProperty": "min-height",
+      "varName": "--ant-card-header-height-sm",
+      "selector": ".ant-card-small > .ant-card-head"
+    },
+    {
+      "leaf": "imported.card.root.font-size",
+      "token": "font-size",
+      "part": "root",
+      "cssProperty": "font-size",
+      "varName": "--ant-font-size",
+      "selector": ".ant-card"
+    }
+  ]
+}

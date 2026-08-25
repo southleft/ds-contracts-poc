@@ -1,0 +1,45 @@
+{
+  "kit": "flowbite",
+  "id": "flowbite.toggleswitch",
+  "setName": "ToggleSwitch",
+  "renderer": "code: generated React (design-to-code pipeline bytes) → esbuild bundle → playwright-core screenshot at deviceScaleFactor 2; canvas: GET /v1/images/:key?scale=2 (Figma's own renderer, read-only)",
+  "cells": [
+    {
+      "slug": "sizing-md__checked-unchecked",
+      "figmaVariant": "Sizing=Md, Checked=Unchecked",
+      "nodeId": "120:2017",
+      "props": {
+        "sizing": "md",
+        "checked": "unchecked"
+      }
+    },
+    {
+      "slug": "sizing-sm__checked-unchecked",
+      "figmaVariant": "Sizing=Sm, Checked=Unchecked",
+      "nodeId": "120:2027",
+      "props": {
+        "sizing": "sm",
+        "checked": "unchecked"
+      }
+    },
+    {
+      "slug": "sizing-lg__checked-unchecked",
+      "figmaVariant": "Sizing=Lg, Checked=Unchecked",
+      "nodeId": "120:2037",
+      "props": {
+        "sizing": "lg",
+        "checked": "unchecked"
+      }
+    },
+    {
+      "slug": "sizing-md__checked-checked",
+      "figmaVariant": "Sizing=Md, Checked=Checked",
+      "nodeId": "120:2022",
+      "props": {
+        "sizing": "md",
+        "checked": "checked"
+      }
+    }
+  ],
+  "notSampled": []
+}

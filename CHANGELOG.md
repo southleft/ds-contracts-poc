@@ -4,6 +4,13 @@ All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) — with one clarification about what the version refers to. The version in this file (and in `package.json`) tracks the **reference implementation**: the generators, differ, extractors, catalog, and eval suite in this repository. Individual component contracts carry their **own** semver, governed by the contract change policy ([docs/02 § Versioning & change policy](docs/02-contract-spec.md#versioning--change-policy)) — a Button at v1.5.0 and a repo at v0.1.0 are statements about two different things. Pre-1.0 on the repo signals that the spec shape may still move.
 
+## Design→code census (canvas → contract → React/WC, deterministic)
+
+- **dump v1.32** (both producers): the set's own `description` + `documentationLinks` are captured; the REST route now sends `plugin_data=shared` and reads back the `ds_contracts` emit stamps (contractId / specHash / version / propNames / semantics+roleException / statePreviewAxis, per-TEXT fontWeightVar / lineHeightVar) — a REST dump of a stamped set no longer forgets its own identity, and EXACT-mode proposal works over the REST route (variant tuples cross-validated against the structured VARIANT definitions, never invented from names alone).
+- **schema 18 additive**: optional `documentationLinks: [{ uri }]` on the contract — carried Figma→contract by propose, contract→Figma by the emitter, and into code as JSDoc `@see` lines, Storybook docs links and the WC file header.
+- propose carries an UNSTAMPED set's description VERBATIM (the designer's words; provenance rides a note), names a stamped set's emit caption, names manual grid cells the carried grid cannot place, and names the aspect-ratio lock on elided slot content.
+- **`census:check -- --phase design-to-code`**: the committed fixtures (`extract/figma/fixtures/census-d2c/`) re-run map → propose → validate → generate (React + stories + Web Components) twice in memory; the gate holds SILENT = 0 (every canvas fact CARRIED or NAMED — extract/figma/census/d2c-facts.ts), byte-idempotence (sha256 per generated file), the committed per-set rows, the render pairs (`canvas-*.png` beside `code-*.png`) and the recognisability verdicts. Receipt: `parity/receipts/v1/DESIGN-TO-CODE-CENSUS.md`.
+
 ## [Unreleased]
 
 ### Phase 2 closed out — every exam construct carried or named (152/152)

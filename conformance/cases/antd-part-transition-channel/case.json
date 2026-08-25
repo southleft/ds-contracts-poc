@@ -1,0 +1,18 @@
+{
+  "id": "antd-part-transition-channel",
+  "feature": "motion",
+  "construct": ".cf-a { transition: background-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) } — a transition declared on a CHILD PART, not the root (antd's `motionDurationMid` on every interactive part)",
+  "why": "The root-level transition case is green; antd puts its transitions on parts (the Switch handle, the Checkbox inner, the close icon). Nothing in the canvas vocabulary spells motion, so the honest treatment is a DECLARED fact per part with its own canvas verdict — not silence on every part but the root (P2 exam S5).",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a.declared.transition-duration",
+  "observable": {
+    "part": "a",
+    "channel": "transition-duration",
+    "capturedValue": "0.2s"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "no canvas spelling — the channel is a DECLARED fact on the part with its own canvas verdict, which is the honest treatment, not a loss"
+  }
+}

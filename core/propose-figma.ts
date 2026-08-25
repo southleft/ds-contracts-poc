@@ -5255,7 +5255,24 @@ function attachGridPlacement(
   where: string,
 ): void {
   const g = parentModes?.grid;
-  if (!g || !g.carried || g.flow) return;
+  const drawnCells = m.occ.filter((o) => o.node.cell !== undefined);
+  if (!g || !g.carried || g.flow) {
+    // Design→code census (2026-08-23): a MANUALLY placed cell drawn in SOME
+    // variant of a grid whose carried projection auto-flows (or whose grid
+    // did not carry) used to drop with no receipt — Section Header's Center
+    // variant anchors its Container at column 2, span 8, MAX while the
+    // Default variant auto-flows, and the placement vanished in silence.
+    // There is still no per-variant placement vocabulary (P10), so the fact
+    // is NAMED, never carried and never silent.
+    if (drawnCells.length > 0) {
+      ctx.notes.push(
+        `${where}: grid cell placement ${drawnCells
+          .map((o) => `${JSON.stringify(o.node.cell)} [${o.variant}]`)
+          .join('; ')} drawn in ${drawnCells.length}/${m.occ.length} variant(s) — the parent's grid ${!g ? 'did not carry' : g.flow ? 'auto-flows (placement under flow is child order, P5)' : !g.carried ? 'did not carry' : 'projection is the DEFAULT variant'} and placement has no per-variant vocabulary (layoutByProp is refused on grid parts, P10), so the manual cell is NAMED, not carried (review)`,
+      );
+    }
+    return;
+  }
   const cells = m.occ.map((o) => o.node.cell).filter((cell) => cell !== undefined);
   const cell = cells[0];
   if (!cell) return; // carriage refused grids with un-celled children — unreachable, kept safe
@@ -6399,6 +6416,12 @@ function applySlotDefaultContent(
   // through buildPart's INSTANCE branch).
   nameHostOverrides(contentInstance, ctx, `${where}/${contentInstance.name}`);
   nameFixedSwaps(contentInstance, ctx, `${where}/${contentInstance.name}`);
+  // Design→code census (2026-08-23): the elided slot-content instance can
+  // ALSO carry an aspect-ratio lock (Toast's Icon slot content, 20:20). The
+  // other two host-facing facts were named here; the lock dropped in
+  // silence on the REST route. Same rule as everywhere: an instance owns no
+  // declared block, so the lock is NAMED, never carried and never silent.
+  carryAspectRatio(contentInstance, null, ctx, `${where}/${contentInstance.name}`);
   nameReactions(contentInstance, ctx, `${where}/${contentInstance.name}`);
   const keys = instanceKeysOf(contentInstance);
   const res = resolveChildContract(instanceOf, keys, ctx);
@@ -10665,8 +10688,20 @@ export function proposeFromDump(
     const r = raw as Record<string, unknown>;
     const element = typeof r.element === 'string' && r.element ? r.element : undefined;
     const role = typeof r.role === 'string' && r.role ? r.role : undefined;
+    // dump v1.32: the AUTHORED exception sentence rides the stamp when the
+    // emit carried it. A stamped role WITHOUT one still needs the contract to
+    // stay emittable (the WC emitter refuses a native-twin role with no
+    // declared exception — flowbite.toggleswitch's <button role="switch">),
+    // so the exception is the stamp's own provenance, stated as exactly that
+    // — never an invented author rationale.
+    const roleException =
+      typeof r.roleException === 'string' && r.roleException
+        ? r.roleException
+        : role
+          ? `Declared by the design-side ds_contracts/semantics stamp (role "${role}" on <${element ?? 'div'}>); the authored exception sentence is not canvas-recoverable — re-declare it in review.`
+          : undefined;
     if (!element && !role) return null;
-    return { element, role };
+    return { element, role, roleException };
   })();
   const stampNote = stampedSemantics
     ? `semantics: read from the set's own \`ds_contracts/semantics\` stamp (element "${stampedSemantics.element ?? 'div'}"${stampedSemantics.role ? `, role "${stampedSemantics.role}"` : ''}) — the contract's declared host element, not the name/axis inference`
@@ -10700,13 +10735,48 @@ export function proposeFromDump(
             `Proposed as container element "div" instead${inferredRaw.role ? `; the inferred role "${inferredRaw.role}" is NOT carried (it belongs on the native control, not the container)` : ''} — REVIEW: re-root before adoption by mounting the native <${inferredRaw.element}> control as a child part inside this container`,
         }
       : inferredRaw;
+  // dump v1.32 — the set's own description + documentation links. An
+  // UNSTAMPED set's description is the DESIGNER'S words and carries
+  // VERBATIM; a STAMPED set's description is this pipeline's own emit
+  // caption ("<Name> — generated from contract <id> v<v> †"), which is NOT
+  // the authored contract description (that is not canvas-recoverable), so
+  // the provenance boilerplate stands and the caption is named. Links carry
+  // either way — they are the designer's pointer, not an emit artifact.
+  const PROPOSED_BOILERPLATE = `PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.`;
+  const setDescriptionRaw = (set as { description?: unknown }).description;
+  const setDescription =
+    typeof setDescriptionRaw === 'string' && setDescriptionRaw.trim() !== '' ? setDescriptionRaw : null;
+  const setDocumentationLinks = (
+    Array.isArray((set as { documentationLinks?: unknown }).documentationLinks)
+      ? ((set as { documentationLinks: Array<{ uri?: unknown }> }).documentationLinks)
+      : []
+  ).filter((l): l is { uri: string } => typeof l?.uri === 'string' && l.uri !== '');
+  const setIsStamped = typeof (set as { contractId?: unknown }).contractId === 'string';
+  const proposedDescription = setDescription && !setIsStamped ? setDescription : PROPOSED_BOILERPLATE;
+  if (setDescription && !setIsStamped) {
+    ctx.notes.push(
+      `description: carried VERBATIM from the set's own Figma description (${setDescription.length} chars, dump v1.32) — the proposal-provenance sentence rides this note instead of overwriting the designer's words: "${PROPOSED_BOILERPLATE}"`,
+    );
+  } else if (setDescription && setIsStamped) {
+    ctx.notes.push(
+      `description: the set's Figma description is this pipeline's own emit caption ("${setDescription}") — not the authored contract description (which is not canvas-recoverable); the PROPOSED provenance text stands`,
+    );
+  }
+  if (setDocumentationLinks.length > 0) {
+    ctx.notes.push(
+      `documentationLinks: ${setDocumentationLinks.length} Figma documentation link(s) carried onto the contract (${setDocumentationLinks.map((l) => l.uri).join(', ')}) — code emitters surface them as JSDoc @see / Storybook docs links`,
+    );
+  }
   const contract: Record<string, unknown> = {
     $schema: './contract.schema.json',
     id: selfId,
     name: componentName,
     version: readStampedVersion(set) ?? '0.1.0',
     status: 'draft',
-    description: `PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.`,
+    description: proposedDescription,
+    ...(setDocumentationLinks.length > 0
+      ? { documentationLinks: setDocumentationLinks.map((l) => ({ uri: l.uri })) }
+      : {}),
     // THE STAMP OUTRANKS THE INFERENCE. Everything below it is a guess from a
     // name/axis table, and a guess about the host element is not a small
     // thing: it decides what the generated component IS. Unstamped, Label
@@ -10721,6 +10791,9 @@ export function proposeFromDump(
       ? {
           element: stampedSemantics.element ?? 'div',
           ...(stampedSemantics.role ? { role: stampedSemantics.role } : {}),
+          ...(stampedSemantics.role && stampedSemantics.roleException
+            ? { roleException: stampedSemantics.roleException }
+            : {}),
         }
       : inferred
         ? {

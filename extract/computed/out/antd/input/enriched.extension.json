@@ -1,0 +1,2424 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "antd@5.29.3",
+  "browser": "151.0.7922.34",
+  "mintedTokens": {
+    "imported": {
+      "input": {
+        "root": {
+          "background-color": {
+            "unset": {
+              "outlined": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#0000000a",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "outlined": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#fff2f0",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "outlined": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#fffbe6",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            }
+          },
+          "border-bottom-color": {
+            "unset": {
+              "outlined": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#000000e0",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "outlined": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "outlined": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#faad14",
+                "$type": "color"
+              }
+            }
+          },
+          "border-bottom-left-radius": {
+            "small": {
+              "outlined": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "borderless": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "filled": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "underlined": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "middle": {
+              "outlined": {
+                "$value": "6px",
+                "$type": "dimension"
+              },
+              "borderless": {
+                "$value": "6px",
+                "$type": "dimension"
+              },
+              "filled": {
+                "$value": "6px",
+                "$type": "dimension"
+              },
+              "underlined": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "large": {
+              "outlined": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "borderless": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "filled": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "underlined": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "border-bottom-right-radius": {
+            "small": {
+              "outlined": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "borderless": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "filled": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "underlined": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "middle": {
+              "outlined": {
+                "$value": "6px",
+                "$type": "dimension"
+              },
+              "borderless": {
+                "$value": "6px",
+                "$type": "dimension"
+              },
+              "filled": {
+                "$value": "6px",
+                "$type": "dimension"
+              },
+              "underlined": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "large": {
+              "outlined": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "borderless": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "filled": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "underlined": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "border-bottom-width": {
+            "outlined": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "borderless": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "filled": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "underlined": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "border-left-color": {
+            "unset": {
+              "outlined": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#000000e0",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "outlined": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "outlined": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-left-width": {
+            "outlined": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "borderless": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "filled": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "underlined": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "border-right-color": {
+            "unset": {
+              "outlined": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#000000e0",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "outlined": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "outlined": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-right-width": {
+            "outlined": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "borderless": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "filled": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "underlined": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-color": {
+            "unset": {
+              "outlined": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#000000e0",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "outlined": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "outlined": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-top-left-radius": {
+            "small": {
+              "outlined": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "borderless": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "filled": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "underlined": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "middle": {
+              "outlined": {
+                "$value": "6px",
+                "$type": "dimension"
+              },
+              "borderless": {
+                "$value": "6px",
+                "$type": "dimension"
+              },
+              "filled": {
+                "$value": "6px",
+                "$type": "dimension"
+              },
+              "underlined": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "large": {
+              "outlined": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "borderless": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "filled": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "underlined": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "border-top-right-radius": {
+            "small": {
+              "outlined": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "borderless": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "filled": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "underlined": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "middle": {
+              "outlined": {
+                "$value": "6px",
+                "$type": "dimension"
+              },
+              "borderless": {
+                "$value": "6px",
+                "$type": "dimension"
+              },
+              "filled": {
+                "$value": "6px",
+                "$type": "dimension"
+              },
+              "underlined": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "large": {
+              "outlined": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "borderless": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "filled": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "underlined": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "border-top-width": {
+            "outlined": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "borderless": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "filled": {
+              "$value": "1px",
+              "$type": "dimension"
+            },
+            "underlined": {
+              "$value": "1px",
+              "$type": "dimension"
+            }
+          },
+          "color": {
+            "unset": {
+              "outlined": {
+                "$value": "#000000e0",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#000000e0",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#000000e0",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "outlined": {
+                "$value": "#000000e0",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#000000e0",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "outlined": {
+                "$value": "#000000e0",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#000000e0",
+                "$type": "color"
+              }
+            }
+          },
+          "font-size": {
+            "small": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "middle": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "line-height": {
+            "small": {
+              "$value": "22px",
+              "$type": "dimension"
+            },
+            "middle": {
+              "$value": "22px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "24px",
+              "$type": "dimension"
+            }
+          },
+          "padding-bottom": {
+            "small": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "middle": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "7px",
+              "$type": "dimension"
+            }
+          },
+          "padding-left": {
+            "small": {
+              "$value": "7px",
+              "$type": "dimension"
+            },
+            "middle": {
+              "$value": "11px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "11px",
+              "$type": "dimension"
+            }
+          },
+          "padding-right": {
+            "small": {
+              "$value": "7px",
+              "$type": "dimension"
+            },
+            "middle": {
+              "$value": "11px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "11px",
+              "$type": "dimension"
+            }
+          },
+          "padding-top": {
+            "small": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "middle": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "7px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "$value": "288px",
+            "$type": "dimension"
+          },
+          "background-color-state-active": {
+            "filled": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "outlined": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "borderless": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "underlined": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "border-bottom-color-state-active": {
+            "unset": {
+              "outlined": {
+                "$value": "#1677ff",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#1677ff",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#1677ff",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#000000e0",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "filled": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "filled": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#faad14",
+                "$type": "color"
+              }
+            }
+          },
+          "border-left-color-state-active": {
+            "unset": {
+              "outlined": {
+                "$value": "#1677ff",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#1677ff",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#000000e0",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "filled": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "filled": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-right-color-state-active": {
+            "unset": {
+              "outlined": {
+                "$value": "#1677ff",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#1677ff",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#000000e0",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "filled": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "filled": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-top-color-state-active": {
+            "unset": {
+              "outlined": {
+                "$value": "#1677ff",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#1677ff",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#000000e0",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "filled": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "filled": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "box-shadow-state-active": {
+            "unset": {
+              "outlined": {
+                "$value": "rgba(5, 145, 255, 0.1) 0px 0px 0px 2px",
+                "$type": "shadow"
+              },
+              "borderless": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "filled": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "underlined": {
+                "$value": "none",
+                "$type": "shadow"
+              }
+            },
+            "error": {
+              "outlined": {
+                "$value": "rgba(255, 38, 5, 0.06) 0px 0px 0px 2px",
+                "$type": "shadow"
+              },
+              "borderless": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "filled": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "underlined": {
+                "$value": "none",
+                "$type": "shadow"
+              }
+            },
+            "warning": {
+              "outlined": {
+                "$value": "rgba(255, 215, 5, 0.1) 0px 0px 0px 2px",
+                "$type": "shadow"
+              },
+              "borderless": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "filled": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "underlined": {
+                "$value": "none",
+                "$type": "shadow"
+              }
+            }
+          },
+          "outline-width-state-active": {
+            "outlined": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "filled": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "underlined": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "borderless": {
+              "$value": "3px",
+              "$type": "dimension"
+            }
+          },
+          "background-color-state-disabled": {
+            "outlined": {
+              "$value": "#0000000a",
+              "$type": "color"
+            },
+            "filled": {
+              "$value": "#0000000a",
+              "$type": "color"
+            },
+            "borderless": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "underlined": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "border-bottom-color-state-disabled": {
+            "unset": {
+              "borderless": {
+                "$value": "#00000040",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "filled": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "filled": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#faad14",
+                "$type": "color"
+              }
+            }
+          },
+          "border-left-color-state-disabled": {
+            "unset": {
+              "borderless": {
+                "$value": "#00000040",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "filled": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "filled": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-right-color-state-disabled": {
+            "unset": {
+              "borderless": {
+                "$value": "#00000040",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "filled": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "filled": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-top-color-state-disabled": {
+            "unset": {
+              "borderless": {
+                "$value": "#00000040",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "filled": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "filled": {
+                "$value": "#d9d9d9",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "color-state-disabled": {
+            "unset": {
+              "outlined": {
+                "$value": "#00000040",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#00000040",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000040",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000040",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "outlined": {
+                "$value": "#00000040",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000040",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000040",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "outlined": {
+                "$value": "#00000040",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000040",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000040",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              }
+            }
+          },
+          "background-color-state-focus-visible": {
+            "filled": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "outlined": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "borderless": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "underlined": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "border-bottom-color-state-focus-visible": {
+            "unset": {
+              "outlined": {
+                "$value": "#1677ff",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#1677ff",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#1677ff",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#000000e0",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "filled": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "filled": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#faad14",
+                "$type": "color"
+              }
+            }
+          },
+          "border-left-color-state-focus-visible": {
+            "unset": {
+              "outlined": {
+                "$value": "#1677ff",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#1677ff",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#000000e0",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "filled": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "filled": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-right-color-state-focus-visible": {
+            "unset": {
+              "outlined": {
+                "$value": "#1677ff",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#1677ff",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#000000e0",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "filled": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "filled": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-top-color-state-focus-visible": {
+            "unset": {
+              "outlined": {
+                "$value": "#1677ff",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#1677ff",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#000000e0",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "filled": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "filled": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "box-shadow-state-focus-visible": {
+            "unset": {
+              "outlined": {
+                "$value": "rgba(5, 145, 255, 0.1) 0px 0px 0px 2px",
+                "$type": "shadow"
+              },
+              "borderless": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "filled": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "underlined": {
+                "$value": "none",
+                "$type": "shadow"
+              }
+            },
+            "error": {
+              "outlined": {
+                "$value": "rgba(255, 38, 5, 0.06) 0px 0px 0px 2px",
+                "$type": "shadow"
+              },
+              "borderless": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "filled": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "underlined": {
+                "$value": "none",
+                "$type": "shadow"
+              }
+            },
+            "warning": {
+              "outlined": {
+                "$value": "rgba(255, 215, 5, 0.1) 0px 0px 0px 2px",
+                "$type": "shadow"
+              },
+              "borderless": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "filled": {
+                "$value": "none",
+                "$type": "shadow"
+              },
+              "underlined": {
+                "$value": "none",
+                "$type": "shadow"
+              }
+            }
+          },
+          "outline-width-state-focus-visible": {
+            "outlined": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "filled": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "underlined": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "borderless": {
+              "$value": "3px",
+              "$type": "dimension"
+            }
+          },
+          "background-color-state-hover": {
+            "unset": {
+              "filled": {
+                "$value": "#0000000f",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "filled": {
+                "$value": "#fff1f0",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "filled": {
+                "$value": "#fff1b8",
+                "$type": "color"
+              },
+              "outlined": {
+                "$value": "#ffffff",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#ffffff",
+                "$type": "color"
+              }
+            }
+          },
+          "border-bottom-color-state-hover": {
+            "unset": {
+              "outlined": {
+                "$value": "#4096ff",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#4096ff",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#000000e0",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "outlined": {
+                "$value": "#ffa39e",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#ffa39e",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "outlined": {
+                "$value": "#ffd666",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#ffd666",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-left-color-state-hover": {
+            "unset": {
+              "outlined": {
+                "$value": "#4096ff",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#000000e0",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "outlined": {
+                "$value": "#ffa39e",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "outlined": {
+                "$value": "#ffd666",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-right-color-state-hover": {
+            "unset": {
+              "outlined": {
+                "$value": "#4096ff",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#000000e0",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "outlined": {
+                "$value": "#ffa39e",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "outlined": {
+                "$value": "#ffd666",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          },
+          "border-top-color-state-hover": {
+            "unset": {
+              "outlined": {
+                "$value": "#4096ff",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#000000e0",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "error": {
+              "outlined": {
+                "$value": "#ffa39e",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#ff4d4f",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            },
+            "warning": {
+              "outlined": {
+                "$value": "#ffd666",
+                "$type": "color"
+              },
+              "borderless": {
+                "$value": "#faad14",
+                "$type": "color"
+              },
+              "filled": {
+                "$value": "#00000000",
+                "$type": "color"
+              },
+              "underlined": {
+                "$value": "#00000000",
+                "$type": "color"
+              }
+            }
+          }
+        }
+      },
+      "shared": {
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [
+    "fold-carries-state-delta: [disabled] root.caret-color rides its source fact",
+    "fold-carries-state-delta: [disabled] root.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [disabled] root.outline-color rides its source fact",
+    "fold-carries-state-delta: [disabled] root.row-rule-color rides its source fact",
+    "fold-carries-state-delta: [disabled] root.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [disabled] root.text-emphasis-color rides its source fact"
+  ],
+  "layout": {
+    "enriched": [],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "appearance",
+        "value": "auto"
+      },
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-x",
+        "value": "clip"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-y",
+        "value": "clip"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "root",
+        "channel": "text-overflow",
+        "value": "ellipsis"
+      },
+      {
+        "part": "root",
+        "channel": "transition-duration",
+        "value": "0.2s"
+      }
+    ],
+    "state": [
+      {
+        "state": "disabled",
+        "part": "root",
+        "channel": "cursor",
+        "value": "not-allowed"
+      }
+    ]
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "list-style-type",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "none",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "state": "active",
+      "ref": "{imported.input.root.border-bottom-color-state-active.{status}.{variant}}",
+      "refusal": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "state": "active",
+      "ref": "{imported.input.root.border-left-color-state-active.{status}.{variant}}",
+      "refusal": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "state": "active",
+      "ref": "{imported.input.root.border-right-color-state-active.{status}.{variant}}",
+      "refusal": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "state": "active",
+      "ref": "{imported.input.root.border-top-color-state-active.{status}.{variant}}",
+      "refusal": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "box-shadow",
+      "state": "active",
+      "ref": "{imported.input.root.box-shadow-state-active.{status}.{variant}}",
+      "refusal": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "state": "disabled",
+      "ref": "{imported.input.root.border-bottom-color-state-disabled.{status}.{variant}}",
+      "refusal": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "state": "disabled",
+      "ref": "{imported.input.root.border-left-color-state-disabled.{status}.{variant}}",
+      "refusal": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "state": "disabled",
+      "ref": "{imported.input.root.border-right-color-state-disabled.{status}.{variant}}",
+      "refusal": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "state": "disabled",
+      "ref": "{imported.input.root.border-top-color-state-disabled.{status}.{variant}}",
+      "refusal": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "state": "disabled",
+      "ref": "{imported.input.root.color-state-disabled.{status}.{variant}}",
+      "refusal": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "state": "focus-visible",
+      "ref": "{imported.input.root.border-bottom-color-state-focus-visible.{status}.{variant}}",
+      "refusal": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "state": "focus-visible",
+      "ref": "{imported.input.root.border-left-color-state-focus-visible.{status}.{variant}}",
+      "refusal": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "state": "focus-visible",
+      "ref": "{imported.input.root.border-right-color-state-focus-visible.{status}.{variant}}",
+      "refusal": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "state": "focus-visible",
+      "ref": "{imported.input.root.border-top-color-state-focus-visible.{status}.{variant}}",
+      "refusal": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "box-shadow",
+      "state": "focus-visible",
+      "ref": "{imported.input.root.box-shadow-state-focus-visible.{status}.{variant}}",
+      "refusal": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "state": "hover",
+      "ref": "{imported.input.root.background-color-state-hover.{status}.{variant}}",
+      "refusal": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "state": "hover",
+      "ref": "{imported.input.root.border-bottom-color-state-hover.{status}.{variant}}",
+      "refusal": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "state": "hover",
+      "ref": "{imported.input.root.border-left-color-state-hover.{status}.{variant}}",
+      "refusal": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "state": "hover",
+      "ref": "{imported.input.root.border-right-color-state-hover.{status}.{variant}}",
+      "refusal": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "state": "hover",
+      "ref": "{imported.input.root.border-top-color-state-hover.{status}.{variant}}",
+      "refusal": "state×status set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
+  "structureReceipts": [
+    "root-signature-varies: small.unset.underlined.enabled__default: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.unset.underlined.enabled__hover: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.unset.underlined.enabled__focus-visible: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.unset.underlined.enabled__active: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.unset.underlined.disabled__default: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.unset.underlined.disabled__hover: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.unset.underlined.disabled__focus-visible: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.unset.underlined.disabled__active: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.error.underlined.enabled__default: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.error.underlined.enabled__hover: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.error.underlined.enabled__focus-visible: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.error.underlined.enabled__active: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.error.underlined.disabled__default: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.error.underlined.disabled__hover: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.error.underlined.disabled__focus-visible: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.error.underlined.disabled__active: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.warning.underlined.enabled__default: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.warning.underlined.enabled__hover: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.warning.underlined.enabled__focus-visible: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.warning.underlined.enabled__active: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.warning.underlined.disabled__default: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.warning.underlined.disabled__hover: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.warning.underlined.disabled__focus-visible: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: small.warning.underlined.disabled__active: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.unset.underlined.enabled__default: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.unset.underlined.enabled__hover: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.unset.underlined.enabled__focus-visible: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.unset.underlined.enabled__active: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.unset.underlined.disabled__default: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.unset.underlined.disabled__hover: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.unset.underlined.disabled__focus-visible: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.unset.underlined.disabled__active: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.error.underlined.enabled__default: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.error.underlined.enabled__hover: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.error.underlined.enabled__focus-visible: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.error.underlined.enabled__active: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.error.underlined.disabled__default: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.error.underlined.disabled__hover: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.error.underlined.disabled__focus-visible: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.error.underlined.disabled__active: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.warning.underlined.enabled__default: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.warning.underlined.enabled__hover: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.warning.underlined.enabled__focus-visible: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.warning.underlined.enabled__active: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.warning.underlined.disabled__default: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.warning.underlined.disabled__hover: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.warning.underlined.disabled__focus-visible: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: middle.warning.underlined.disabled__active: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.unset.underlined.enabled__default: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.unset.underlined.enabled__hover: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.unset.underlined.enabled__focus-visible: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.unset.underlined.enabled__active: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.unset.underlined.disabled__default: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.unset.underlined.disabled__hover: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.unset.underlined.disabled__focus-visible: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.unset.underlined.disabled__active: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.error.underlined.enabled__default: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.error.underlined.enabled__hover: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.error.underlined.enabled__focus-visible: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.error.underlined.enabled__active: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.error.underlined.disabled__default: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.error.underlined.disabled__hover: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.error.underlined.disabled__focus-visible: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.error.underlined.disabled__active: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.warning.underlined.enabled__default: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.warning.underlined.enabled__hover: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.warning.underlined.enabled__focus-visible: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.warning.underlined.enabled__active: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.warning.underlined.disabled__default: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.warning.underlined.disabled__hover: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.warning.underlined.disabled__focus-visible: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "root-signature-varies: large.warning.underlined.disabled__active: input|input → input|input.input-underlined (element-varies receipt; root always aligns)",
+    "signature-drift: small.unset.underlined.enabled__default root: input|input → input|input.input-underlined",
+    "signature-drift: small.unset.underlined.enabled__hover root: input|input → input|input.input-underlined",
+    "signature-drift: small.unset.underlined.enabled__focus-visible root: input|input → input|input.input-underlined",
+    "signature-drift: small.unset.underlined.enabled__active root: input|input → input|input.input-underlined",
+    "signature-drift: small.unset.underlined.disabled__default root: input|input → input|input.input-underlined",
+    "signature-drift: small.unset.underlined.disabled__hover root: input|input → input|input.input-underlined",
+    "signature-drift: small.unset.underlined.disabled__focus-visible root: input|input → input|input.input-underlined",
+    "signature-drift: small.unset.underlined.disabled__active root: input|input → input|input.input-underlined",
+    "signature-drift: small.error.underlined.enabled__default root: input|input → input|input.input-underlined",
+    "signature-drift: small.error.underlined.enabled__hover root: input|input → input|input.input-underlined",
+    "signature-drift: small.error.underlined.enabled__focus-visible root: input|input → input|input.input-underlined",
+    "signature-drift: small.error.underlined.enabled__active root: input|input → input|input.input-underlined",
+    "signature-drift: small.error.underlined.disabled__default root: input|input → input|input.input-underlined",
+    "signature-drift: small.error.underlined.disabled__hover root: input|input → input|input.input-underlined",
+    "signature-drift: small.error.underlined.disabled__focus-visible root: input|input → input|input.input-underlined",
+    "signature-drift: small.error.underlined.disabled__active root: input|input → input|input.input-underlined",
+    "signature-drift: small.warning.underlined.enabled__default root: input|input → input|input.input-underlined",
+    "signature-drift: small.warning.underlined.enabled__hover root: input|input → input|input.input-underlined",
+    "signature-drift: small.warning.underlined.enabled__focus-visible root: input|input → input|input.input-underlined",
+    "signature-drift: small.warning.underlined.enabled__active root: input|input → input|input.input-underlined",
+    "signature-drift: small.warning.underlined.disabled__default root: input|input → input|input.input-underlined",
+    "signature-drift: small.warning.underlined.disabled__hover root: input|input → input|input.input-underlined",
+    "signature-drift: small.warning.underlined.disabled__focus-visible root: input|input → input|input.input-underlined",
+    "signature-drift: small.warning.underlined.disabled__active root: input|input → input|input.input-underlined",
+    "signature-drift: middle.unset.underlined.enabled__default root: input|input → input|input.input-underlined",
+    "signature-drift: middle.unset.underlined.enabled__hover root: input|input → input|input.input-underlined",
+    "signature-drift: middle.unset.underlined.enabled__focus-visible root: input|input → input|input.input-underlined",
+    "signature-drift: middle.unset.underlined.enabled__active root: input|input → input|input.input-underlined",
+    "signature-drift: middle.unset.underlined.disabled__default root: input|input → input|input.input-underlined",
+    "signature-drift: middle.unset.underlined.disabled__hover root: input|input → input|input.input-underlined",
+    "signature-drift: middle.unset.underlined.disabled__focus-visible root: input|input → input|input.input-underlined",
+    "signature-drift: middle.unset.underlined.disabled__active root: input|input → input|input.input-underlined",
+    "signature-drift: middle.error.underlined.enabled__default root: input|input → input|input.input-underlined",
+    "signature-drift: middle.error.underlined.enabled__hover root: input|input → input|input.input-underlined",
+    "signature-drift: middle.error.underlined.enabled__focus-visible root: input|input → input|input.input-underlined",
+    "signature-drift: middle.error.underlined.enabled__active root: input|input → input|input.input-underlined",
+    "signature-drift: middle.error.underlined.disabled__default root: input|input → input|input.input-underlined",
+    "signature-drift: middle.error.underlined.disabled__hover root: input|input → input|input.input-underlined",
+    "signature-drift: middle.error.underlined.disabled__focus-visible root: input|input → input|input.input-underlined",
+    "signature-drift: middle.error.underlined.disabled__active root: input|input → input|input.input-underlined",
+    "signature-drift: middle.warning.underlined.enabled__default root: input|input → input|input.input-underlined",
+    "signature-drift: middle.warning.underlined.enabled__hover root: input|input → input|input.input-underlined",
+    "signature-drift: middle.warning.underlined.enabled__focus-visible root: input|input → input|input.input-underlined",
+    "signature-drift: middle.warning.underlined.enabled__active root: input|input → input|input.input-underlined",
+    "signature-drift: middle.warning.underlined.disabled__default root: input|input → input|input.input-underlined",
+    "signature-drift: middle.warning.underlined.disabled__hover root: input|input → input|input.input-underlined",
+    "signature-drift: middle.warning.underlined.disabled__focus-visible root: input|input → input|input.input-underlined",
+    "signature-drift: middle.warning.underlined.disabled__active root: input|input → input|input.input-underlined",
+    "signature-drift: large.unset.underlined.enabled__default root: input|input → input|input.input-underlined",
+    "signature-drift: large.unset.underlined.enabled__hover root: input|input → input|input.input-underlined",
+    "signature-drift: large.unset.underlined.enabled__focus-visible root: input|input → input|input.input-underlined",
+    "signature-drift: large.unset.underlined.enabled__active root: input|input → input|input.input-underlined",
+    "signature-drift: large.unset.underlined.disabled__default root: input|input → input|input.input-underlined",
+    "signature-drift: large.unset.underlined.disabled__hover root: input|input → input|input.input-underlined",
+    "signature-drift: large.unset.underlined.disabled__focus-visible root: input|input → input|input.input-underlined",
+    "signature-drift: large.unset.underlined.disabled__active root: input|input → input|input.input-underlined",
+    "signature-drift: large.error.underlined.enabled__default root: input|input → input|input.input-underlined",
+    "signature-drift: large.error.underlined.enabled__hover root: input|input → input|input.input-underlined",
+    "signature-drift: large.error.underlined.enabled__focus-visible root: input|input → input|input.input-underlined",
+    "signature-drift: large.error.underlined.enabled__active root: input|input → input|input.input-underlined",
+    "signature-drift: large.error.underlined.disabled__default root: input|input → input|input.input-underlined",
+    "signature-drift: large.error.underlined.disabled__hover root: input|input → input|input.input-underlined",
+    "signature-drift: large.error.underlined.disabled__focus-visible root: input|input → input|input.input-underlined",
+    "signature-drift: large.error.underlined.disabled__active root: input|input → input|input.input-underlined",
+    "signature-drift: large.warning.underlined.enabled__default root: input|input → input|input.input-underlined",
+    "signature-drift: large.warning.underlined.enabled__hover root: input|input → input|input.input-underlined",
+    "signature-drift: large.warning.underlined.enabled__focus-visible root: input|input → input|input.input-underlined",
+    "signature-drift: large.warning.underlined.enabled__active root: input|input → input|input.input-underlined",
+    "signature-drift: large.warning.underlined.disabled__default root: input|input → input|input.input-underlined",
+    "signature-drift: large.warning.underlined.disabled__hover root: input|input → input|input.input-underlined",
+    "signature-drift: large.warning.underlined.disabled__focus-visible root: input|input → input|input.input-underlined",
+    "signature-drift: large.warning.underlined.disabled__active root: input|input → input|input.input-underlined"
+  ],
+  "styledChannelReceipts": [
+    "stage-fill-root-admitted: root — display:inline-block root measures exactly the stage content box (288px) in every enabled combo: it fills its container like a block root (antd Input `width: 100%`), so the captured stage width joins fusion under the block-root receipt below",
+    "block-root-width-admitted: root — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)",
+    "control-fallback: no control for <input> — span control used (part root)",
+    "geometry-excluded: root — block-size 32px, height 32px, inline-size 288px, perspective-origin 144px 16px, transform-origin 144px 16px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (root); -webkit-text-stroke-color (root)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "border-style-by-axis-carried: root.border-bottom-style varies by \"variant\" (outlined=solid, borderless=none, filled=solid, underlined=solid) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-bottom-style: … }`; canvas: a dashPattern on that variant's stroke)",
+    "border-style-by-axis-carried: root.border-left-style varies by \"variant\" (outlined=solid, borderless=none, filled=solid, underlined=none) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-left-style: … }`; canvas: a dashPattern on that variant's stroke)",
+    "border-style-by-axis-carried: root.border-right-style varies by \"variant\" (outlined=solid, borderless=none, filled=solid, underlined=none) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-right-style: … }`; canvas: a dashPattern on that variant's stroke)",
+    "border-style-by-axis-carried: root.border-top-style varies by \"variant\" (outlined=solid, borderless=none, filled=solid, underlined=solid) — carried as per-value stylesWhen rules (code: `.variant-<value> { border-top-style: … }`; canvas: a dashPattern on that variant's stroke)"
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on ::placeholder (1 part(s)). Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root"
+    ],
+    "svgAssets": [],
+    "receipts": [],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "declared fact carried: root.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.overflow-x = clip (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.overflow-y = clip (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.transition-duration = 0.2s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared state fact carried: [disabled] root.cursor = not-allowed (v15 declared vocabulary)",
+    "pair-with-unset carried: root.background-color = base plane per variant + placeholder maps per status (emitter capability lift)",
+    "pair-with-unset carried: root.border-bottom-color = base plane per variant + placeholder maps per status (emitter capability lift)",
+    "pair-with-unset carried: root.border-left-color = base plane per variant + placeholder maps per status (emitter capability lift)",
+    "pair-with-unset carried: root.border-right-color = base plane per variant + placeholder maps per status (emitter capability lift)",
+    "pair-with-unset carried: root.border-top-color = base plane per variant + placeholder maps per status (emitter capability lift)",
+    "pair-with-unset carried: root.color = base plane per variant + placeholder maps per status (emitter capability lift)",
+    "tokensByProp reordered: size → variant → status — defaultless-axis maps (named planes) follow the defaulted-axis maps (the unset plane) so the in-order merge lets the named plane win"
+  ]
+}

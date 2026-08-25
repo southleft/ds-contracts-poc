@@ -112,6 +112,9 @@ on:
 
 permissions:
   contents: read
+  # v1:readiness --trust-lanes cites the fast / catalog-visual runs for the
+  # same commit through `gh run list` instead of re-running their steps.
+  actions: read
 
 concurrency:
   group: full-${{ github.ref }}
@@ -469,3 +472,17 @@ jobs:
       - name: "extract:figma:theme:check"
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:theme:check
+
+      # THE DEFINITION OF V1, END TO END. Every row of docs/26 runs its
+      # acceptance chain on this commit. --trust-lanes: a command this lane ran
+      # above is cited as this run; a command the fast / catalog-visual lanes
+      # run is cited from their completed run for the same commit (gh, bounded
+      # wait) and runs here only when no such run exists. --pre-release: the
+      # post-publish chain (deploy:check) is DEFERRED by name and the audit
+      # ledger's open human rows are NAMED rather than red. The release owner's
+      # run on the release commit passes neither flag.
+      - name: v1:readiness (every docs/26 row on this commit; lane steps cited, the rest run)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: npm run v1:readiness -- --trust-lanes --pre-release

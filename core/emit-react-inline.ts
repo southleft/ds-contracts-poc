@@ -1019,7 +1019,7 @@ export interface ${name}Props extends ${propsBase} {
 ${propLines.join('\n')}
 }
 
-/** ${contract.description} */
+/** ${contract.description}${(contract.documentationLinks ?? []).map((l) => `\n * @see ${l.uri}`).join('')} */
 export function ${name}({ ${destructured.join(', ')} }: ${name}Props) {
   return (
     <>
@@ -1055,7 +1055,7 @@ export interface ${name}Props extends ${propsBase} {
 ${propLines.join('\n')}
 }
 
-/** ${contract.description} */
+/** ${contract.description}${(contract.documentationLinks ?? []).map((l) => `\n * @see ${l.uri}`).join('')} */
 export const ${name} = forwardRef<${meta.el}, ${name}Props>(function ${name}(
   { ${destructured.join(', ')} },
   ref,

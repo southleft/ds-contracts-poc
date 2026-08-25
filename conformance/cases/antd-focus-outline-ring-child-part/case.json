@@ -1,0 +1,18 @@
+{
+  "id": "antd-focus-outline-ring-child-part",
+  "feature": "interaction-states",
+  "construct": "label > span > [input.sr-only:focus-visible + span.box { outline: 3px solid rgb(145, 202, 255) }] — the focus ring as an OUTLINE state delta on a NESTED PART (antd Checkbox-inner, Radio-inner)",
+  "why": "antd's Checkbox and Radio draw the keyboard focus ring on the inner box, a child part, not on the root label. v13 Part.states carries plain color-kind refs only below the root — `outline-width` is a dimension — so the doc model says CARRIED and the grammar is expected to refuse. The exam's bar is that the refusal is NAMED where the canvas reads it (Part.codeOnly → bundle codeOnlyFacts), never a silent ring-less checkbox (P2 exam S1, nested half; W4).",
+  "expect": "REFUSED",
+  "expectName": "v13 Part.states carries plain color-kind refs only on non-root parts",
+  "expectWhere": "anatomy.root.parts.<box>.codeOnly (W4) + enriched.extension.json overflowBindings + LEDGER.md",
+  "observable": {
+    "part": "a",
+    "channel": "outline-width",
+    "capturedValue": "3px"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "no state preview draws a nested part's focus ring today (a named wall); the bundle's codeOnlyFacts must name `outline-width [focus-visible]` on the part"
+  }
+}

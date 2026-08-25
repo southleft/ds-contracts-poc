@@ -31,12 +31,17 @@
  * to weaken a lane and keep this green.
  */
 import { execFileSync } from "node:child_process";
-import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { existsSync } from "node:fs";
 import path from "node:path";
-import { parse as parseYaml } from "yaml";
+import {
+  collectLaneMap,
+  RUN_RE,
+  type Job,
+  type ManifestEntry,
+  type Step,
+} from "./lane-map";
 
 const ROOT = process.cwd();
-const WF_DIR = path.join(ROOT, ".github", "workflows");
 
 /** Gate-shaped by suffix, plus the ones whose names do not carry one. */
 const NAMED_GATES = new Set([
@@ -48,6 +53,8 @@ const NAMED_GATES = new Set([
   // the team gate and its Figma-token half — composites, expanded below
   "maintain",
   "maintain:visual",
+  // the definition of v1, run end to end — every row of docs/26 on the commit
+  "v1:readiness",
 ]);
 // `check` unanchored to a separator on purpose: the 33 spell it three ways —
 // `mint:check`, `plugin:ui-check`, `core:browser-check`. An earlier cut of this
@@ -127,110 +134,18 @@ const EXCLUDED: Record<string, string> = {
 /** Tracked tests intentionally outside CI need a durable, file-specific reason. */
 const TEST_EXCLUDED: Record<string, string> = {};
 
-interface Manifest {
-  name?: string;
-  scripts?: Record<string, string>;
-  workspaces?: string[] | { packages?: string[] };
-}
-
-const manifestCache = new Map<string, Manifest>();
-const readManifest = (dir: string): Manifest => {
-  const manifestPath = path.join(dir, "package.json");
-  const cached = manifestCache.get(manifestPath);
-  if (cached) return cached;
-  const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as Manifest;
-  manifestCache.set(manifestPath, manifest);
-  return manifest;
-};
-
-const pkg = readManifest(ROOT) as {
-  scripts: Record<string, string>;
-  workspaces?: string[] | { packages?: string[] };
-};
-
-const workspacePatterns = Array.isArray(pkg.workspaces)
-  ? pkg.workspaces
-  : (pkg.workspaces?.packages ?? []);
-const packageManifestDirs: string[] = [];
-const collectPackageManifestDirs = (dir: string) => {
-  for (const entry of readdirSync(dir, { withFileTypes: true })) {
-    if (
-      !entry.isDirectory() ||
-      entry.name === "node_modules" ||
-      entry.name === ".git"
-    )
-      continue;
-    const child = path.join(dir, entry.name);
-    if (existsSync(path.join(child, "package.json")))
-      packageManifestDirs.push(child);
-    collectPackageManifestDirs(child);
-  }
-};
-collectPackageManifestDirs(ROOT);
-const globPattern = (pattern: string) =>
-  new RegExp(
-    `^${pattern
-      .replaceAll("\\", "/")
-      .replace(/[.+^${}()|[\]\\]/g, "\\$&")
-      .replaceAll("**", "\0")
-      .replaceAll("*", "[^/]*")
-      .replaceAll("\0", ".*")
-      .replace(/\/+$/, "")}$`,
-  );
-const workspaceDirs = new Set<string>();
-for (const pattern of workspacePatterns) {
-  const matcher = globPattern(pattern);
-  const matches = packageManifestDirs.filter((dir) =>
-    matcher.test(path.relative(ROOT, dir).split(path.sep).join("/")),
-  );
-  if (matches.length === 0)
-    throw new Error(
-      `root workspace pattern ${JSON.stringify(pattern)} matches no package manifest`,
-    );
-  for (const match of matches) workspaceDirs.add(match);
-}
-
-interface ManifestEntry {
-  dir: string;
-  qualifier: string;
-  scripts: Record<string, string>;
-}
-const manifestEntries: ManifestEntry[] = [
-  { dir: ROOT, qualifier: "root", scripts: pkg.scripts },
-  ...[...workspaceDirs].sort().map((dir) => {
-    const manifest = readManifest(dir);
-    if (!manifest.name)
-      throw new Error(
-        `${path.relative(ROOT, dir)}/package.json has no package name`,
-      );
-    return {
-      dir,
-      qualifier: manifest.name,
-      scripts: manifest.scripts ?? {},
-    };
-  }),
-];
-const manifestByDir = new Map(
-  manifestEntries.map((entry) => [path.resolve(entry.dir), entry]),
-);
-const scriptKey = (entry: ManifestEntry, name: string) =>
-  `${entry.qualifier}:${name}`;
-const allScripts = new Map<string, { entry: ManifestEntry; name: string }>();
-for (const entry of manifestEntries)
-  for (const name of Object.keys(entry.scripts))
-    allScripts.set(scriptKey(entry, name), { entry, name });
-
-interface Step {
-  name?: string;
-  id?: string;
-  uses?: string;
-  run?: string;
-  if?: string;
-}
-interface Job {
-  steps?: Step[];
-  uses?: string;
-}
+// Everything below reads the lane map lane-map.ts derives from the workflow
+// files; scripts/v1-readiness.ts reads the same map to cite lanes.
+const map = collectLaneMap(ROOT);
+const {
+  manifestEntries,
+  allScripts,
+  invocations,
+  ciInvocations,
+  problems,
+  readManifest,
+  scriptKey,
+} = map;
 
 const CHECKOUT_ACTION =
   "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1";
@@ -441,90 +356,8 @@ if (process.argv.includes("--self-test")) {
   process.exit(0);
 }
 
-const invocations = new Map<string, Set<string>>(); // qualified script → lanes
-const problems: string[] = [];
-const ciInvocations: Array<{ dir: string; name: string; lane: string }> = [];
-const RUN_RE =
-  /npm(?:\s+--prefix(?:=|\s+)(?:"([^"]+)"|'([^']+)'|([^\s]+)))?\s+run\s+([A-Za-z0-9:_-]+)/g;
-
-const resolveInvocation = (
-  file: string,
-  lane: string,
-  step: Step,
-  prefix: string | undefined,
-  name: string,
-  seen: Set<string> = new Set(),
-) => {
-  const dir = prefix ? path.resolve(ROOT, prefix) : ROOT;
-  const manifestPath = path.join(dir, "package.json");
-  if (!existsSync(manifestPath)) {
-    problems.push(
-      `${file} step "${step.name ?? step.run?.trim()}" runs an npm script with prefix ` +
-        `\`${prefix}\`, but ${path.relative(ROOT, manifestPath)} does not exist`,
-    );
-    return;
-  }
-  const manifestScripts = readManifest(dir).scripts ?? {};
-  if (!(name in manifestScripts)) {
-    problems.push(
-      `${file} step "${step.name ?? step.run?.trim()}" runs \`npm${prefix ? ` --prefix ${prefix}` : ""} run ${name}\` ` +
-        `— no such script in ${path.relative(ROOT, manifestPath)}`,
-    );
-    return;
-  }
-  const dedupeKey = `${dir}\0${name}`;
-  if (seen.has(dedupeKey)) return;
-  seen.add(dedupeKey);
-  ciInvocations.push({ dir, name, lane });
-  const configured = manifestByDir.get(path.resolve(dir));
-  if (configured) {
-    const key = scriptKey(configured, name);
-    invocations.set(key, (invocations.get(key) ?? new Set()).add(lane));
-  }
-  // Composite scripts (`npm run a && npm run b`) cover their nested gates —
-  // otherwise workflow-spine:check leaves anatomy-diff / suggested-diff / …
-  // looking unwatched while they actually run in the fast lane.
-  const body = manifestScripts[name] ?? "";
-  const nested = /npm(?:\s+run)\s+([A-Za-z0-9:_-]+)/g;
-  let nm: RegExpExecArray | null;
-  while ((nm = nested.exec(body)) !== null) {
-    resolveInvocation(file, lane, step, prefix, nm[1]!, seen);
-  }
-};
-
-const workflows = readdirSync(WF_DIR).filter(
-  (f) => f.endsWith(".yml") || f.endsWith(".yaml"),
-);
-if (workflows.length === 0)
-  problems.push(".github/workflows contains no workflow at all");
-
-for (const file of workflows) {
-  const lane = file.replace(/\.ya?ml$/, "");
-  const raw = readFileSync(path.join(WF_DIR, file), "utf8");
-  let doc: { jobs?: Record<string, Job> };
-  try {
-    doc = parseYaml(raw);
-  } catch (e) {
-    problems.push(`${file} does not parse as YAML: ${(e as Error).message}`);
-    continue;
-  }
-  const jobs = doc.jobs ?? {};
+for (const { file, lane, jobs } of map.workflows)
   validateReportingJobs(file, lane, jobs, problems);
-  for (const job of Object.values(jobs)) {
-    const stepsInJob = job.steps ?? [];
-    for (const step of stepsInJob) {
-      const run = step.run ?? "";
-
-      RUN_RE.lastIndex = 0;
-      let m: RegExpExecArray | null;
-      while ((m = RUN_RE.exec(run)) !== null) {
-        const prefix = m[1] ?? m[2] ?? m[3];
-        const name = m[4];
-        resolveInvocation(file, lane, step, prefix, name);
-      }
-    }
-  }
-}
 
 // (1) every gate-shaped script in the root and every configured workspace is
 // in a lane or named as excluded. Keys are package-qualified so identically
@@ -738,6 +571,9 @@ const trackedTests = execFileSync(
   {
     cwd: ROOT,
     encoding: "utf8",
+    // The canvas census added ~1,000 committed PNGs; `git ls-files` output now
+    // exceeds spawnSync's 1 MiB default maxBuffer (ENOBUFS).
+    maxBuffer: 64 * 1024 * 1024,
   },
 )
   .split("\0")

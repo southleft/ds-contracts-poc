@@ -1,0 +1,16 @@
+{
+  "_doc": "DESIGN→CODE CENSUS capture provenance — how the committed <kit>.rest-nodes.json fixture was taken. REST GET only (read-only): GET /v1/files/:key/nodes?ids=…&plugin_data=shared. The variables endpoint refused with HTTP 403 (the token lacks the file_variables:read scope — a token scope, not a plan limit); the refusal is replayed to the mapper on every census run so the dump carries the same named receipts the live CLI prints.",
+  "kit": "figma-ds",
+  "fileKey": "aekVseUceg35tVn62knRrj",
+  "endpoint": "/v1/files/aekVseUceg35tVn62knRrj/nodes?ids=<set ids>&plugin_data=shared",
+  "capturedAt": "2026-08-23",
+  "fileName": "Figma Design System",
+  "fileLastModified": "2026-08-23T15:20:00Z",
+  "fileVersion": "2390923997468380547",
+  "sets": 15,
+  "variablesRefusal": {
+    "kind": "scope",
+    "status": 403,
+    "note": "file_variables:read missing on the capture token; every bound fact degrades to its resolved literal (named per row in _degradations)"
+  }
+}

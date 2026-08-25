@@ -1,0 +1,81 @@
+{
+  "kit": "flowbite",
+  "id": "flowbite.badge",
+  "setName": "Badge (flowbite.badge)",
+  "renderer": "code: generated React (design-to-code pipeline bytes) → esbuild bundle → playwright-core screenshot at deviceScaleFactor 2; canvas: GET /v1/images/:key?scale=2 (Figma's own renderer, read-only)",
+  "cells": [
+    {
+      "slug": "color-info__size-xs__state-default",
+      "figmaVariant": "Color=Info, Size=Xs, State=Default",
+      "nodeId": "120:2050",
+      "props": {
+        "color": "info",
+        "size": "xs",
+        "children": "Badge"
+      }
+    },
+    {
+      "slug": "color-failure__size-xs__state-default",
+      "figmaVariant": "Color=Failure, Size=Xs, State=Default",
+      "nodeId": "120:2054",
+      "props": {
+        "color": "failure",
+        "size": "xs",
+        "children": "Badge"
+      }
+    },
+    {
+      "slug": "color-success__size-xs__state-default",
+      "figmaVariant": "Color=Success, Size=Xs, State=Default",
+      "nodeId": "120:2058",
+      "props": {
+        "color": "success",
+        "size": "xs",
+        "children": "Badge"
+      }
+    },
+    {
+      "slug": "color-warning__size-xs__state-default",
+      "figmaVariant": "Color=Warning, Size=Xs, State=Default",
+      "nodeId": "120:2062",
+      "props": {
+        "color": "warning",
+        "size": "xs",
+        "children": "Badge"
+      }
+    },
+    {
+      "slug": "color-indigo__size-xs__state-default",
+      "figmaVariant": "Color=Indigo, Size=Xs, State=Default",
+      "nodeId": "120:2066",
+      "props": {
+        "color": "indigo",
+        "size": "xs",
+        "children": "Badge"
+      }
+    },
+    {
+      "slug": "color-pink__size-xs__state-default",
+      "figmaVariant": "Color=Pink, Size=Xs, State=Default",
+      "nodeId": "120:2070",
+      "props": {
+        "color": "pink",
+        "size": "xs",
+        "children": "Badge"
+      }
+    },
+    {
+      "slug": "color-info__size-sm__state-default",
+      "figmaVariant": "Color=Info, Size=Sm, State=Default",
+      "nodeId": "120:2052",
+      "props": {
+        "color": "info",
+        "size": "sm",
+        "children": "Badge"
+      }
+    }
+  ],
+  "notSampled": [
+    "State axis sampled at \"Default\" only — hover/active/focus-visible/disabled are CSS pseudo-class planes on the code side, not cells"
+  ]
+}

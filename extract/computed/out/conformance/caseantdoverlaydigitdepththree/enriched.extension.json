@@ -1,0 +1,714 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@ds-contracts/conformance@0.1.0",
+  "browser": "151.0.7922.34",
+  "mintedTokens": {
+    "imported": {
+      "shared": {
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-12": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
+        "size-4": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "color-ffffff": {
+          "$value": "#ffffff",
+          "$type": "color"
+        },
+        "size-10": {
+          "$value": "10px",
+          "$type": "dimension"
+        },
+        "size-20": {
+          "$value": "20px",
+          "$type": "dimension"
+        }
+      },
+      "case-antd-overlay-digit-depth-three": {
+        "root": {
+          "height": {
+            "$value": "32px",
+            "$type": "dimension"
+          },
+          "width": {
+            "$value": "32px",
+            "$type": "dimension"
+          }
+        },
+        "label": {
+          "background-color": {
+            "$value": "#cccccc",
+            "$type": "color"
+          },
+          "font-size": {
+            "$value": "18px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "line-height": {
+            "$value": "18px",
+            "$type": "dimension"
+          }
+        },
+        "b": {
+          "background-color": {
+            "$value": "#ff4d4f",
+            "$type": "color"
+          },
+          "box-shadow": {
+            "$value": "rgba(255, 255, 255, 1) 0px 0px 0px 1px",
+            "$type": "shadow"
+          },
+          "left": {
+            "$value": "8.79688px",
+            "$type": "dimension"
+          },
+          "padding-left": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "padding-right": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "translate-x": {
+            "$value": "11.6016px",
+            "$type": "dimension"
+          },
+          "translate-y": {
+            "$value": "-10px",
+            "$type": "dimension"
+          },
+          "width": {
+            "$value": "23.2031px",
+            "$type": "dimension"
+          },
+          "z-index": {
+            "$value": "1",
+            "$type": "number"
+          }
+        },
+        "c": {
+          "width": {
+            "$value": "7.20312px",
+            "$type": "dimension"
+          }
+        },
+        "label-2": {
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          }
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "b",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "b",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "b",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "b",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "b",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "b",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "b",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "b",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "b",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "b",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "c",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "c",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "c",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "c",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "c",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "c",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "c",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "c",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "c",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "c",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "label",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "label",
+        "field": "justify",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "monospace"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "monospace"
+      },
+      {
+        "part": "b",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "b",
+        "channel": "font-family",
+        "value": "monospace"
+      },
+      {
+        "part": "b",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "b",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "b",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, 11.6016, -10)"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "font-family",
+        "value": "monospace"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "c",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "c",
+        "channel": "font-family",
+        "value": "monospace"
+      },
+      {
+        "part": "c",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "c",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "c",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "c",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-family",
+        "value": "monospace"
+      },
+      {
+        "part": "label-2",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "label-2",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "b",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <sup>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <sup> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "super",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-0",
+      "channel": "height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <bdi>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <bdi> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "auto",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-0",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <bdi>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <bdi> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-0",
+      "channel": "width",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <bdi>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <bdi> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "auto",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label-2 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: b — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: c — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "text-part-typography-carried: label — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-fallback: no control for <sup> — span control used (part b)",
+    "translate-door-generalized: b — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
+    "control-fallback: no control for <bdi> — span control used (part part-1-0)",
+    "text-part-typography-carried: label-2 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "geometry-excluded: b — block-size 20px, inline-size 23.2031px, perspective-origin 11.5938px 10px, transform-origin 23.2031px 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: c — block-size 20px, inline-size 7.20312px, perspective-origin 3.59375px 10px, transform-origin 3.60156px 10px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label — block-size 32px, height 32px, inline-size 32px, perspective-origin 16px 16px, transform-origin 16px 16px, width 32px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-2 — block-size 20px, height 20px, inline-size 7.20312px, perspective-origin 3.59375px 10px, transform-origin 3.60156px 10px, width 7.20312px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-1-0 — block-size auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 32px, inline-size 32px, perspective-origin 16px 16px, transform-origin 16px 16px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (b, c, label, label-2, part-1-0); -webkit-text-stroke-color (b, c, label, label-2, part-1-0)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "inheritance-check-rejected: b.caret-color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: b.color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"c\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.caret-color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: b.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: c.caret-color equals ancestor \"part-1-0\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: c.color equals ancestor \"part-1-0\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: c.font-size equals ancestor \"part-1-0\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: c.line-height equals ancestor \"part-1-0\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.caret-color equals ancestor \"c\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.color equals ancestor \"c\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.font-size equals ancestor \"c\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.line-height equals ancestor \"c\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0.caret-color equals ancestor \"b\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0.color equals ancestor \"b\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0.font-size equals ancestor \"b\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0.line-height equals ancestor \"b\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on no part. Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      },
+      {
+        "part": "b",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "c",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "label",
+      "b",
+      "part-1-0",
+      "c",
+      "label-2"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "literal-text-carried: label = \"A\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "literal-text-carried: label-2 = \"5\" (no text prop sample matches — the mounted value is carried verbatim)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: label.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: b.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: b.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: b.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: b.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: b.transform = matrix(1, 0, 0, 1, 11.6016, -10) (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1-0.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1-0.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1-0.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: c.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: c.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: c.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: c.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: c.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: c.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)"
+  ]
+}

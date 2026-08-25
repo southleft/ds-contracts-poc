@@ -1,0 +1,304 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.chip",
+  "setName": "Chip",
+  "nodeId": "53:4186",
+  "mode": "reviewable-inversion",
+  "variantCount": 10,
+  "contractSha256": "2d815eeb983c04b1f3582161f73a3e66243d13bae454327070d87f620efafbb5",
+  "carriage": {
+    "carried": 154,
+    "named": 318,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "BOOLEAN property": [
+      1,
+      0,
+      0
+    ],
+    "INSTANCE_SWAP property": [
+      0,
+      1,
+      0
+    ],
+    "swap/slot accepts": [
+      0,
+      1,
+      0
+    ],
+    "TEXT property": [
+      1,
+      0,
+      0
+    ],
+    "interaction-state axis": [
+      0,
+      1,
+      0
+    ],
+    "variant axis": [
+      1,
+      0,
+      0
+    ],
+    "declared axis default": [
+      0,
+      1,
+      0
+    ],
+    "boundVariables.itemSpacing": [
+      0,
+      20,
+      0
+    ],
+    "boundVariables.paddingLeft": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.paddingTop": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.paddingRight": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.paddingBottom": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.minHeight": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.individualStrokeWeights": [
+      0,
+      40,
+      0
+    ],
+    "boundVariables.rectangleCornerRadii": [
+      0,
+      80,
+      0
+    ],
+    "boundVariables.fills": [
+      0,
+      20,
+      0
+    ],
+    "boundVariables.strokes": [
+      0,
+      10,
+      0
+    ],
+    "fills[0] SOLID": [
+      20,
+      0,
+      0
+    ],
+    "strokes[0] + strokeWeight": [
+      10,
+      0,
+      0
+    ],
+    "cornerRadius": [
+      10,
+      0,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      10,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      10,
+      0,
+      0
+    ],
+    "root layoutSizingVertical": [
+      10,
+      0,
+      0
+    ],
+    "minHeight": [
+      10,
+      0,
+      0
+    ],
+    "instance main component": [
+      20,
+      0,
+      0
+    ],
+    "boundVariables.lineHeight": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.letterSpacing": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.fontWeight": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.fontFamily": [
+      0,
+      10,
+      0
+    ],
+    "boundVariables.fontSize": [
+      0,
+      10,
+      0
+    ],
+    "text.characters": [
+      10,
+      0,
+      0
+    ],
+    "text font size/weight": [
+      10,
+      0,
+      0
+    ],
+    "text fontFamily": [
+      10,
+      0,
+      0
+    ],
+    "text lineHeight": [
+      10,
+      0,
+      0
+    ],
+    "boundVariables.size": [
+      0,
+      20,
+      0
+    ],
+    "componentProperties.Icon (fixed swap)": [
+      0,
+      10,
+      0
+    ],
+    "visible=false": [
+      5,
+      0,
+      0
+    ],
+    "boundVariables.effects": [
+      0,
+      10,
+      0
+    ],
+    "effects": [
+      2,
+      0,
+      0
+    ],
+    "styles.effect (effect STYLE identity)": [
+      0,
+      2,
+      0
+    ],
+    "boundVariables.opacity": [
+      0,
+      2,
+      0
+    ],
+    "opacity": [
+      2,
+      0,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "37510c7adae0dc4b0a393a36f343d34d57e48fa2",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "53:4186",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "BOOLEAN property",
+      "value": "default=true",
+      "disposition": "CARRIED",
+      "landing": "props.slotBefore (boolean, default true) → React prop + visibleWhen part visibility"
+    },
+    {
+      "fact": "INSTANCE_SWAP property",
+      "value": "default=53:3934",
+      "disposition": "NAMED",
+      "landing": "dump variable-unresolved: Chip:State=Default, Dismissible=False/Button (Icon) — itemSpa…"
+    },
+    {
+      "fact": "swap/slot accepts",
+      "value": "[] (unconstrained)",
+      "disposition": "NAMED",
+      "landing": "Chip:root/message: slot \"Icon\" INSTANCE_SWAP preferredValues is EMPTY ([]) — an UNCONST…"
+    },
+    {
+      "fact": "TEXT property",
+      "value": "default=Label",
+      "disposition": "CARRIED",
+      "landing": "props.text (text, default \"Label\") → React prop / children + story args"
+    },
+    {
+      "fact": "interaction-state axis",
+      "value": "Default|Hover|Focus|Active|Disabled",
+      "disposition": "NAMED",
+      "landing": "variant axis \"State\" (Default|Hover|Focus|Active|Disabled) IS the platform's interactio…"
+    },
+    {
+      "fact": "variant axis",
+      "value": "False|True",
+      "disposition": "CARRIED",
+      "landing": "props.dismissible (boolean — the axis's options are literally true/false) → React prop + story args + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "True",
+      "disposition": "NAMED",
+      "landing": "prop `dismissible`: the set's DECLARED default for \"Dismissible\" is \"True\" (propertyDef…"
+    }
+  ],
+  "generatedFiles": {
+    "react/Chip/Chip.module.css": "a45981e0fcc573044a364cd9af72c0e98ec7b896809daafcbaaffa615d464f83",
+    "react/Chip/Chip.stories.tsx": "ca61fdee0da6fe61d3cad01750f571e0fbdc9e8be80b0d2f4ce40aa8c83be0ff",
+    "react/Chip/Chip.tsx": "3afa4346d98122783e1e9bfb65a22df5915b30365582062c85b219488288f6be",
+    "react/Chip/index.ts": "746419f2d2117cbcc865908573d71d3f7cd68faf21931422456e4200c760fa7b",
+    "wc/ds-chip.ts": "e9b0bce04af4a5c468c85579241d7c5a984f496fc556e777f75a01900e6f9a58",
+    "wc/ds-chip.css.ts": "bc70e6f7c6a5babebf0052c3a79e7a5202b8f71c3ded33dc9f83e2a099040d06",
+    "wc/ds-chip.demo.html": "7ec34bdb0c30107721a0eb3c9531c439b2a4c3ebcb481c46aed24bde35049d87",
+    "wc/ds-chip.custom-elements.json": "cb33a966adc13cb77baa56fd241b9c3930e81223da3a0ecc679e737ef0ef5f44"
+  },
+  "notesCount": 268
+}

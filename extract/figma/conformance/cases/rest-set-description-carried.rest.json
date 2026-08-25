@@ -1,0 +1,111 @@
+{
+  "name": "conformance case",
+  "nodes": {
+    "1:1": {
+      "document": {
+        "id": "1:1",
+        "name": "Demo",
+        "type": "COMPONENT_SET",
+        "componentPropertyDefinitions": {
+          "Variant": {
+            "type": "VARIANT",
+            "defaultValue": "A",
+            "variantOptions": [
+              "A",
+              "B"
+            ]
+          }
+        },
+        "children": [
+          {
+            "id": "1:2",
+            "name": "Variant=A",
+            "type": "COMPONENT",
+            "absoluteBoundingBox": {
+              "x": 0,
+              "y": 0,
+              "width": 120,
+              "height": 40
+            },
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "paddingLeft": 12,
+            "paddingRight": 12,
+            "paddingTop": 8,
+            "paddingBottom": 8,
+            "cornerRadius": 6,
+            "fills": [
+              {
+                "type": "SOLID",
+                "color": {
+                  "r": 0.2,
+                  "g": 0.4,
+                  "b": 0.8
+                },
+                "opacity": 1
+              }
+            ],
+            "strokes": [],
+            "effects": [],
+            "children": [],
+            "componentProperties": {
+              "Variant": {
+                "type": "VARIANT",
+                "value": "A"
+              }
+            }
+          },
+          {
+            "id": "1:3",
+            "name": "Variant=B",
+            "type": "COMPONENT",
+            "absoluteBoundingBox": {
+              "x": 0,
+              "y": 0,
+              "width": 120,
+              "height": 40
+            },
+            "layoutMode": "HORIZONTAL",
+            "primaryAxisAlignItems": "CENTER",
+            "counterAxisAlignItems": "CENTER",
+            "paddingLeft": 12,
+            "paddingRight": 12,
+            "paddingTop": 8,
+            "paddingBottom": 8,
+            "cornerRadius": 6,
+            "fills": [
+              {
+                "type": "SOLID",
+                "color": {
+                  "r": 0.2,
+                  "g": 0.4,
+                  "b": 0.8
+                },
+                "opacity": 1
+              }
+            ],
+            "strokes": [],
+            "effects": [],
+            "children": [],
+            "componentProperties": {
+              "Variant": {
+                "type": "VARIANT",
+                "value": "B"
+              }
+            }
+          }
+        ]
+      },
+      "components": {},
+      "componentSets": {
+        "1:1": {
+          "name": "Demo",
+          "key": "demokey123",
+          "description": "The designer's own words about Demo."
+        }
+      },
+      "styles": {}
+    }
+  }
+}

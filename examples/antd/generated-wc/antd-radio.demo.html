@@ -1,0 +1,29 @@
+<!--
+  Radio — Custom Element showcase emitted from contract antd.radio v0.2.0
+  by @ds-contracts/emitter-web-components. The story-equivalent grid: the all-defaults rendering,
+  one rendering per enum value of every axis (other axes at their defaults), and one per boolean
+  prop set true — the exact enumeration core/emit-html.ts showcases, spelled with <antd-radio>.
+  Token values arrive via CSS custom properties (they inherit through the shadow boundary) —
+  include the token stylesheet on the page or nothing resolves. Text content is the default-slot
+  fallback; pass light DOM children to replace it.
+  Serve next to the COMPILED element module (antd-radio.ts → antd-radio.js).
+-->
+<script type="module" src="./antd-radio.js"></script>
+<style>
+  .showcase { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; font-family: sans-serif; }
+  .showcase__label { margin: 0 0 8px; font: 12px/1 monospace; opacity: 0.6; }
+</style>
+<section class="showcase showcase--antd-radio">
+  <div class="showcase__item">
+    <p class="showcase__label">default</p>
+    <antd-radio></antd-radio>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">checked=checked</p>
+    <antd-radio checked="checked"></antd-radio>
+  </div>
+  <div class="showcase__item">
+    <p class="showcase__label">disabled=true</p>
+    <antd-radio disabled=""></antd-radio>
+  </div>
+</section>

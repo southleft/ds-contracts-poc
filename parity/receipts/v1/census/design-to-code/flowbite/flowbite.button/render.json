@@ -1,0 +1,101 @@
+{
+  "kit": "flowbite",
+  "id": "flowbite.button",
+  "setName": "Button (flowbite.button)",
+  "renderer": "code: generated React (design-to-code pipeline bytes) → esbuild bundle → playwright-core screenshot at deviceScaleFactor 2; canvas: GET /v1/images/:key?scale=2 (Figma's own renderer, read-only)",
+  "cells": [
+    {
+      "slug": "color-default__size-md__state-default",
+      "figmaVariant": "Color=Default, Size=Md, State=Default",
+      "nodeId": "120:2113",
+      "props": {
+        "color": "default",
+        "size": "md",
+        "children": "Button"
+      }
+    },
+    {
+      "slug": "color-alternative__size-md__state-default",
+      "figmaVariant": "Color=Alternative, Size=Md, State=Default",
+      "nodeId": "120:2123",
+      "props": {
+        "color": "alternative",
+        "size": "md",
+        "children": "Button"
+      }
+    },
+    {
+      "slug": "color-dark__size-md__state-default",
+      "figmaVariant": "Color=Dark, Size=Md, State=Default",
+      "nodeId": "120:2133",
+      "props": {
+        "color": "dark",
+        "size": "md",
+        "children": "Button"
+      }
+    },
+    {
+      "slug": "color-green__size-md__state-default",
+      "figmaVariant": "Color=Green, Size=Md, State=Default",
+      "nodeId": "120:2143",
+      "props": {
+        "color": "green",
+        "size": "md",
+        "children": "Button"
+      }
+    },
+    {
+      "slug": "color-red__size-md__state-default",
+      "figmaVariant": "Color=Red, Size=Md, State=Default",
+      "nodeId": "120:2153",
+      "props": {
+        "color": "red",
+        "size": "md",
+        "children": "Button"
+      }
+    },
+    {
+      "slug": "color-default__size-xs__state-default",
+      "figmaVariant": "Color=Default, Size=Xs, State=Default",
+      "nodeId": "120:2115",
+      "props": {
+        "color": "default",
+        "size": "xs",
+        "children": "Button"
+      }
+    },
+    {
+      "slug": "color-default__size-sm__state-default",
+      "figmaVariant": "Color=Default, Size=Sm, State=Default",
+      "nodeId": "120:2117",
+      "props": {
+        "color": "default",
+        "size": "sm",
+        "children": "Button"
+      }
+    },
+    {
+      "slug": "color-default__size-lg__state-default",
+      "figmaVariant": "Color=Default, Size=Lg, State=Default",
+      "nodeId": "120:2119",
+      "props": {
+        "color": "default",
+        "size": "lg",
+        "children": "Button"
+      }
+    },
+    {
+      "slug": "color-default__size-xl__state-default",
+      "figmaVariant": "Color=Default, Size=Xl, State=Default",
+      "nodeId": "120:2121",
+      "props": {
+        "color": "default",
+        "size": "xl",
+        "children": "Button"
+      }
+    }
+  ],
+  "notSampled": [
+    "State axis sampled at \"Default\" only — hover/active/focus-visible/disabled are CSS pseudo-class planes on the code side, not cells"
+  ]
+}

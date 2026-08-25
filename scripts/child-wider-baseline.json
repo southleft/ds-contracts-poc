@@ -12,6 +12,15 @@
       "detail": []
     },
     {
+      "library": "antd",
+      "scripts": 12,
+      "overflows": 0,
+      "textCaused": 0,
+      "marginBox": 0,
+      "cause": "",
+      "detail": []
+    },
+    {
       "library": "astryx",
       "scripts": 13,
       "overflows": 0,

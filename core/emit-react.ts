@@ -737,7 +737,7 @@ ${iconsConst}export interface ${name}Props extends ${propsBase} {
 ${propLines.join('\n')}
 }
 
-/** ${contract.description} */
+/** ${contract.description}${seeLines(contract)} */
 export function ${name}({ ${destructured.join(', ')} }: ${name}Props) {
   return (
     <>
@@ -785,7 +785,7 @@ ${iconsConst}${roleMapConst}${elementMapConst}export interface ${name}Props exte
 ${propLines.join('\n')}
 }
 
-/** ${contract.description} */
+/** ${contract.description}${seeLines(contract)} */
 export const ${name} = forwardRef<${meta.el}, ${name}Props>(function ${name}(
   { ${destructured.join(', ')} },
   ref,
@@ -1024,7 +1024,7 @@ const meta = {
   component: ${name},
   tags: ['autodocs'],
   parameters: {
-    docs: { description: { component: ${JSON.stringify(contract.description)} } },
+    docs: { description: { component: ${JSON.stringify([contract.description, ...(contract.documentationLinks ?? []).map((l) => `Documentation: ${l.uri}`)].join('\n\n'))} } },
   },${metaRender}
   argTypes: {
 ${argTypes.join('\n')}
@@ -1068,6 +1068,10 @@ export interface EmitReactResult {
  *  playground both run the same prettier/standalone pass — core/format.ts —
  *  so bytes match the shipped files). Throws with every named violation if
  *  the contract fails validation — invalid states are refused, not rendered. */
+/** Figma documentation links → JSDoc `@see` lines (schema 18 documentationLinks). */
+const seeLines = (contract: Contract): string =>
+  (contract.documentationLinks ?? []).map((l) => `\n * @see ${l.uri}`).join('');
+
 export function emitReact(contract: Contract, ctx: EmitCtx): EmitReactResult {
   const errors: string[] = [];
   validateContract(contract, ctx.contracts, errors, ctx.icons);

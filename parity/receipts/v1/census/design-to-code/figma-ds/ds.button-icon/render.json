@@ -1,0 +1,17 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.button-icon",
+  "setName": "Button (Icon)",
+  "renderer": "code: generated React (design-to-code pipeline bytes) → esbuild bundle → playwright-core screenshot at deviceScaleFactor 2; canvas: GET /v1/images/:key?scale=2 (Figma's own renderer, read-only)",
+  "cells": [
+    {
+      "slug": "state-default",
+      "figmaVariant": "State=Default",
+      "nodeId": "53:2907",
+      "props": {}
+    }
+  ],
+  "notSampled": [
+    "State axis sampled at \"Default\" only — hover/active/focus-visible/disabled are CSS pseudo-class planes on the code side, not cells"
+  ]
+}

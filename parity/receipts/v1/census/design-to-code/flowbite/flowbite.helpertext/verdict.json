@@ -1,0 +1,7 @@
+{
+  "recognisable": true,
+  "walls": [
+    "FC-GEOMETRY-EXCLUDED:root-width"
+  ],
+  "notes": "Ink and type match; the code side hugs and wraps to two lines where the canvas draws one — the root drawn px is Option-B excluded geometry (named in the proposal), so the box is content-sized."
+}

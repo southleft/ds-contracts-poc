@@ -1,0 +1,117 @@
+{
+  "kit": "figma-ds",
+  "id": "ds.heading",
+  "setName": "Heading",
+  "renderer": "code: generated React (design-to-code pipeline bytes) → esbuild bundle → playwright-core screenshot at deviceScaleFactor 2; canvas: GET /v1/images/:key?scale=2 (Figma's own renderer, read-only)",
+  "cells": [
+    {
+      "slug": "tag-h1__variant-xxl",
+      "figmaVariant": "Tag=h1, Variant=xxl",
+      "nodeId": "53:4476",
+      "props": {
+        "tag": "h1",
+        "variant": "xxl"
+      }
+    },
+    {
+      "slug": "tag-h6__variant-xxl",
+      "figmaVariant": "Tag=h6, Variant=xxl",
+      "nodeId": "53:4486",
+      "props": {
+        "tag": "h6",
+        "variant": "xxl"
+      }
+    },
+    {
+      "slug": "tag-h2__variant-xxl",
+      "figmaVariant": "Tag=h2, Variant=xxl",
+      "nodeId": "53:4478",
+      "props": {
+        "tag": "h2",
+        "variant": "xxl"
+      }
+    },
+    {
+      "slug": "tag-h3__variant-xxl",
+      "figmaVariant": "Tag=h3, Variant=xxl",
+      "nodeId": "53:4480",
+      "props": {
+        "tag": "h3",
+        "variant": "xxl"
+      }
+    },
+    {
+      "slug": "tag-h4__variant-xxl",
+      "figmaVariant": "Tag=h4, Variant=xxl",
+      "nodeId": "53:4482",
+      "props": {
+        "tag": "h4",
+        "variant": "xxl"
+      }
+    },
+    {
+      "slug": "tag-h5__variant-xxl",
+      "figmaVariant": "Tag=h5, Variant=xxl",
+      "nodeId": "53:4484",
+      "props": {
+        "tag": "h5",
+        "variant": "xxl"
+      }
+    },
+    {
+      "slug": "tag-h1__variant-xs",
+      "figmaVariant": "Tag=h1, Variant=xs",
+      "nodeId": "53:4408",
+      "props": {
+        "tag": "h1",
+        "variant": "xs"
+      }
+    },
+    {
+      "slug": "tag-h1__variant-xxs",
+      "figmaVariant": "Tag=h1, Variant=xxs",
+      "nodeId": "53:4410",
+      "props": {
+        "tag": "h1",
+        "variant": "xxs"
+      }
+    },
+    {
+      "slug": "tag-h1__variant-sm",
+      "figmaVariant": "Tag=h1, Variant=sm",
+      "nodeId": "53:4430",
+      "props": {
+        "tag": "h1",
+        "variant": "sm"
+      }
+    },
+    {
+      "slug": "tag-h1__variant-md",
+      "figmaVariant": "Tag=h1, Variant=md",
+      "nodeId": "53:4442",
+      "props": {
+        "tag": "h1",
+        "variant": "md"
+      }
+    },
+    {
+      "slug": "tag-h1__variant-lg",
+      "figmaVariant": "Tag=h1, Variant=lg",
+      "nodeId": "53:4454",
+      "props": {
+        "tag": "h1",
+        "variant": "lg"
+      }
+    },
+    {
+      "slug": "tag-h1__variant-xl",
+      "figmaVariant": "Tag=h1, Variant=xl",
+      "nodeId": "53:4474",
+      "props": {
+        "tag": "h1",
+        "variant": "xl"
+      }
+    }
+  ],
+  "notSampled": []
+}

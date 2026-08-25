@@ -1,0 +1,307 @@
+{
+  "kit": "flowbite",
+  "id": "flowbite.badge",
+  "setName": "Badge (flowbite.badge)",
+  "nodeId": "120:2098",
+  "mode": "exact",
+  "variantCount": 24,
+  "contractSha256": "eda5cc737c767c9a3bbba96009bcb4f66c17504bcde4971345663b46af08546d",
+  "carriage": {
+    "carried": 278,
+    "named": 321,
+    "silent": 0
+  },
+  "silentRows": [],
+  "channels": {
+    "set key (publish identity)": [
+      1,
+      0,
+      0
+    ],
+    "set nodeId": [
+      1,
+      0,
+      0
+    ],
+    "set description (designer's words)": [
+      0,
+      1,
+      0
+    ],
+    "stamp ds_contracts/version": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/statePreviewAxis": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/semantics": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/propNames": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/specHash": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/contractId": [
+      1,
+      0,
+      0
+    ],
+    "stamp ds_contracts/canvasSetSnapshot": [
+      0,
+      1,
+      0
+    ],
+    "stamp ds_contracts/canvasFingerprint": [
+      0,
+      1,
+      0
+    ],
+    "TEXT property": [
+      1,
+      0,
+      0
+    ],
+    "variant axis": [
+      2,
+      0,
+      0
+    ],
+    "declared axis default": [
+      2,
+      0,
+      0
+    ],
+    "interaction-state axis": [
+      1,
+      0,
+      0
+    ],
+    "boundVariables.itemSpacing": [
+      0,
+      24,
+      0
+    ],
+    "boundVariables.paddingLeft": [
+      0,
+      24,
+      0
+    ],
+    "boundVariables.paddingTop": [
+      0,
+      24,
+      0
+    ],
+    "boundVariables.paddingRight": [
+      0,
+      24,
+      0
+    ],
+    "boundVariables.paddingBottom": [
+      0,
+      24,
+      0
+    ],
+    "boundVariables.rectangleCornerRadii": [
+      0,
+      96,
+      0
+    ],
+    "boundVariables.fills": [
+      0,
+      48,
+      0
+    ],
+    "fills[0] SOLID": [
+      24,
+      24,
+      0
+    ],
+    "cornerRadius": [
+      24,
+      0,
+      0
+    ],
+    "auto-layout (mode/align/padding/gap)": [
+      24,
+      0,
+      0
+    ],
+    "root layoutSizingHorizontal": [
+      24,
+      0,
+      0
+    ],
+    "root layoutSizingVertical": [
+      24,
+      0,
+      0
+    ],
+    "interactions (prototype reactions)": [
+      0,
+      6,
+      0
+    ],
+    "boundVariables.fontSize": [
+      0,
+      24,
+      0
+    ],
+    "text.characters": [
+      24,
+      0,
+      0
+    ],
+    "text font size/weight": [
+      24,
+      0,
+      0
+    ],
+    "text fontFamily": [
+      24,
+      0,
+      0
+    ],
+    "text lineHeight": [
+      24,
+      0,
+      0
+    ],
+    "stamp ds_contracts/fontWeightVar": [
+      24,
+      0,
+      0
+    ],
+    "stamp ds_contracts/lineHeightVar": [
+      24,
+      0,
+      0
+    ]
+  },
+  "api": [
+    {
+      "fact": "set key (publish identity)",
+      "value": "8c36b6b475b56aa2920113b250ac5c7186320b2d",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.componentSetKey"
+    },
+    {
+      "fact": "set nodeId",
+      "value": "120:2098",
+      "disposition": "CARRIED",
+      "landing": "bindings.figma.anchors.nodeId"
+    },
+    {
+      "fact": "set description (designer's words)",
+      "value": "Badge — generated from contract flowbite.badge v0.2.0 †",
+      "disposition": "NAMED",
+      "landing": "description: the set's Figma description is this pipeline's own emit caption (\"Badge — …"
+    },
+    {
+      "fact": "stamp ds_contracts/version",
+      "value": "0.2.0",
+      "disposition": "CARRIED",
+      "landing": "contract.version"
+    },
+    {
+      "fact": "stamp ds_contracts/statePreviewAxis",
+      "value": "{\"axis\":\"State\",\"default\":\"Default\",\"states\":[\"Active\",\"H…",
+      "disposition": "CARRIED",
+      "landing": "contract.states (sparse State matrix accepted via the declared axis)"
+    },
+    {
+      "fact": "stamp ds_contracts/semantics",
+      "value": "{\"element\":\"span\"}",
+      "disposition": "CARRIED",
+      "landing": "contract.semantics (stamp outranks inference)"
+    },
+    {
+      "fact": "stamp ds_contracts/propNames",
+      "value": "{\"Color\":\"color\",\"Size\":\"size\",\"Content\":\"children\"}",
+      "disposition": "CARRIED",
+      "landing": "prop names (design spelling → contract prop names)"
+    },
+    {
+      "fact": "stamp ds_contracts/specHash",
+      "value": "3005685272",
+      "disposition": "CARRIED",
+      "landing": "dump.specHash — exact-mode evidence (proves the set matches the emit)"
+    },
+    {
+      "fact": "stamp ds_contracts/contractId",
+      "value": "flowbite.badge",
+      "disposition": "CARRIED",
+      "landing": "contract.id (dump v1.32 stamp read-back)"
+    },
+    {
+      "fact": "stamp ds_contracts/canvasSetSnapshot",
+      "value": "384 chars",
+      "disposition": "NAMED",
+      "landing": "sync-domain fingerprint stamp — read by sync/observe.ts (drift arithmetic), deliberately not a contract fact"
+    },
+    {
+      "fact": "stamp ds_contracts/canvasFingerprint",
+      "value": "13 chars",
+      "disposition": "NAMED",
+      "landing": "sync-domain fingerprint stamp — read by sync/observe.ts (drift arithmetic), deliberately not a contract fact"
+    },
+    {
+      "fact": "TEXT property",
+      "value": "default=Badge",
+      "disposition": "CARRIED",
+      "landing": "props.children (text, default \"Badge\") → React prop / children + story args"
+    },
+    {
+      "fact": "variant axis",
+      "value": "Info|Failure|Success|Warning|Indigo|Pink",
+      "disposition": "CARRIED",
+      "landing": "props.color (enum[6]) → React prop `color` + story argTypes + CSS .color-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "Info",
+      "disposition": "CARRIED",
+      "landing": "props.color.default = \"info\" → React default arg + story args"
+    },
+    {
+      "fact": "variant axis",
+      "value": "Xs|Sm",
+      "disposition": "CARRIED",
+      "landing": "props.size (enum[2]) → React prop `size` + story argTypes + CSS .size-<value> classes + WC attribute"
+    },
+    {
+      "fact": "declared axis default",
+      "value": "Xs",
+      "disposition": "CARRIED",
+      "landing": "props.size.default = \"xs\" → React default arg + story args"
+    },
+    {
+      "fact": "interaction-state axis",
+      "value": "Default|Active|Hover",
+      "disposition": "CARRIED",
+      "landing": "contract.states [hover, active] → CSS pseudo-class planes (:hover/:active/:focus-visible/[disabled]) + statePreviews"
+    }
+  ],
+  "generatedFiles": {
+    "react/Badge/Badge.module.css": "3b06cdb89eeda840a1703870e5ca0deb79627b8983e67e4f16c26bf5a691fdb1",
+    "react/Badge/Badge.stories.tsx": "a825a0c165d066351e9dc0d08917308f87f2b24cfde47df66d4a7e40fa3e79eb",
+    "react/Badge/Badge.tsx": "d9949f7b1664acbff29b03382438a5b232a6a24a675bb8e61ef4eb7e13ef1076",
+    "react/Badge/index.ts": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
+    "wc/flowbite-badge.ts": "e45fb5f9381ada2a0495fc98135b3efb75a81b83944fd426f827bae60fe92037",
+    "wc/flowbite-badge.css.ts": "5d5efa63610c70df5e6878d96428bf4a1091ad337b0f8a88ad80d73e74d5f5f6",
+    "wc/flowbite-badge.demo.html": "6802e42e1e723ef0b4af5de396bd79a6b2ca5b051e97d5de249a770fa93d78d7",
+    "wc/flowbite-badge.custom-elements.json": "8caccf740d222eb3420b357c8dc25b886d4c87fb2b92c0722ad7cc18e8689da1"
+  },
+  "notesCount": 315
+}

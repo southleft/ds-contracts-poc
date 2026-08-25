@@ -1,0 +1,150 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "button",
+  "anchors": [
+    {
+      "leaf": "imported.button.root.color-state-active.primary.danger",
+      "token": "button-danger-color",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-button-danger-color",
+      "selector": ".ant-btn-color-dangerous.ant-btn-variant-solid"
+    },
+    {
+      "leaf": "imported.button.root.color-state-active.primary.safe",
+      "token": "button-primary-color",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-button-primary-color",
+      "selector": ".ant-btn-variant-solid"
+    },
+    {
+      "leaf": "imported.button.root.color-state-hover.primary.danger",
+      "token": "button-danger-color",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-button-danger-color",
+      "selector": ".ant-btn-color-dangerous.ant-btn-variant-solid"
+    },
+    {
+      "leaf": "imported.button.root.color-state-hover.primary.safe",
+      "token": "button-primary-color",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-button-primary-color",
+      "selector": ".ant-btn-variant-solid"
+    },
+    {
+      "leaf": "imported.button.root.color.dashed.danger",
+      "token": "color-error",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-color-error",
+      "selector": ".ant-btn-color-dangerous"
+    },
+    {
+      "leaf": "imported.button.root.color.default.danger",
+      "token": "color-error",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-color-error",
+      "selector": ".ant-btn-color-dangerous"
+    },
+    {
+      "leaf": "imported.button.root.color.link.danger",
+      "token": "color-error",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-color-error",
+      "selector": ".ant-btn-color-dangerous"
+    },
+    {
+      "leaf": "imported.button.root.color.link.safe",
+      "token": "color-link",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-color-link",
+      "selector": ".ant-btn-color-link.ant-btn-variant-link"
+    },
+    {
+      "leaf": "imported.button.root.color.primary.danger",
+      "token": "button-danger-color",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-button-danger-color",
+      "selector": ".ant-btn-color-dangerous.ant-btn-variant-solid"
+    },
+    {
+      "leaf": "imported.button.root.color.primary.safe",
+      "token": "button-primary-color",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-button-primary-color",
+      "selector": ".ant-btn-variant-solid"
+    },
+    {
+      "leaf": "imported.button.root.color.text.danger",
+      "token": "color-error",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-color-error",
+      "selector": ".ant-btn-color-dangerous"
+    },
+    {
+      "leaf": "imported.button.root.font-size.large",
+      "token": "button-content-font-size-lg",
+      "part": "root",
+      "cssProperty": "font-size",
+      "varName": "--ant-button-content-font-size-lg",
+      "selector": ".ant-btn-lg"
+    },
+    {
+      "leaf": "imported.button.root.font-size.middle",
+      "token": "button-content-font-size",
+      "part": "root",
+      "cssProperty": "font-size",
+      "varName": "--ant-button-content-font-size",
+      "selector": ".ant-btn"
+    },
+    {
+      "leaf": "imported.button.root.font-size.small",
+      "token": "button-content-font-size",
+      "part": "root",
+      "cssProperty": "font-size",
+      "varName": "--ant-button-content-font-size",
+      "selector": ".ant-btn"
+    },
+    {
+      "leaf": "imported.button.root.height.large",
+      "token": "control-height-lg",
+      "part": "root",
+      "cssProperty": "height",
+      "varName": "--ant-control-height-lg",
+      "selector": ".ant-btn-lg"
+    },
+    {
+      "leaf": "imported.button.root.height.middle",
+      "token": "control-height",
+      "part": "root",
+      "cssProperty": "height",
+      "varName": "--ant-control-height",
+      "selector": ".ant-btn"
+    },
+    {
+      "leaf": "imported.button.root.height.small",
+      "token": "control-height-sm",
+      "part": "root",
+      "cssProperty": "height",
+      "varName": "--ant-control-height-sm",
+      "selector": ".ant-btn-sm"
+    },
+    {
+      "leaf": "imported.button.root.opacity.on",
+      "token": "opacity-loading",
+      "part": "root",
+      "cssProperty": "opacity",
+      "varName": "--ant-opacity-loading",
+      "selector": ".ant-btn.ant-btn-loading"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "_marker": "AUTHORED FACTS \u2014 reviewed hand-authored design facts the computed capture cannot carry, applied by packages/cli/src/promote.ts (the authored-facts door) AFTER the computed contract is read and BEFORE the resolution guard. Sidecar INPUT to promotion, never contract vocabulary: the committed contracts stay re-derivable from extract/computed/out/antd + this file. Every row names its cause; a row the capture has since learned to carry REFUSES the promotion by name and must be deleted. Origin: the P2 exam heal loop (parity/receipts/phase-2/ANTD-EXAM.md, Self-heal log), 2026-08-23.",
+  "rows": [
+    {
+      "component": "progress",
+      "part": "progress-bg",
+      "set": {
+        "fields": {
+          "meter": {
+            "valueProp": "percent",
+            "maxProp": "max"
+          }
+        },
+        "after": "description"
+      },
+      "cause": "FC-METER: antd writes the fill width as an INLINE `width: 40%` (plus `--progress-percent`), runtime geometry the Option B exclusion refuses by name (geometry-excluded receipt in the extension). The fill is percent/max of its track \u2014 the schema's `meter` fact (the astryx/polaris progress-bar spelling); the canvas draws the defaults' fraction (40/100) and names the runtime sizing as a code-only fact."
+    },
+    {
+      "component": "progress",
+      "part": "progress-bg",
+      "set": {
+        "fields": {
+          "literals": {
+            "height": "8px"
+          }
+        },
+        "after": "description"
+      },
+      "cause": "The fill's height is antd's INLINE `height: 8px` (the default strokeWidth), refused as runtime geometry; without it the fill has no box on the canvas. 8px is antd's documented default line stroke width."
+    },
+    {
+      "component": "progress",
+      "part": "progress-inner",
+      "set": {
+        "fields": {
+          "literals": {
+            "height": "8px"
+          }
+        },
+        "after": "description"
+      },
+      "cause": "The track (`.ant-progress-inner`) wraps the inline-sized fill and measures 8px tall from it \u2014 geometry the capture refuses; the track needs its height to draw as a bar (antd's remaining-colour track)."
+    }
+  ]
+}

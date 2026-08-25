@@ -1,0 +1,178 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/progress.contract.json (antd.progress v0.2.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  bottom: var(--imported-shared-size-0);
+  color: var(--imported-shared-color-000000e0);
+  font-size: var(--imported-shared-size-14);
+  left: var(--imported-shared-size-0);
+  line-height: var(--imported-shared-size-22);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  width: var(--imported-progress-root-width);
+  display: inline-block;
+  box-sizing: border-box;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  position: relative;
+}
+
+.progress-outer {
+  display: inline-flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--imported-shared-color-000000e0);
+  font-size: var(--imported-shared-size-14);
+  line-height: var(--imported-shared-size-22);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  box-sizing: border-box;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+.progress-inner {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  background-color: var(--imported-progress-progress-inner-background-color);
+  border-bottom-left-radius: var(--imported-shared-size-100);
+  border-bottom-right-radius: var(--imported-shared-size-100);
+  border-top-left-radius: var(--imported-shared-size-100);
+  border-top-right-radius: var(--imported-shared-size-100);
+  bottom: var(--imported-shared-size-0);
+  color: var(--imported-shared-color-000000e0);
+  flex-grow: var(--imported-progress-progress-inner-flex-grow);
+  font-size: var(--imported-shared-size-14);
+  left: var(--imported-shared-size-0);
+  line-height: var(--imported-shared-size-22);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  height: 8px;
+  display: block;
+  box-sizing: border-box;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: relative;
+}
+
+.progress-bg {
+  background-color: var(--imported-progress-progress-bg-background-color-unset);
+  border-bottom-left-radius: var(--imported-shared-size-100);
+  border-bottom-right-radius: var(--imported-shared-size-100);
+  border-top-left-radius: var(--imported-shared-size-100);
+  border-top-right-radius: var(--imported-shared-size-100);
+  bottom: var(--imported-shared-size-0);
+  color: var(--imported-shared-color-000000e0);
+  font-size: var(--imported-shared-size-14);
+  left: var(--imported-shared-size-0);
+  line-height: var(--imported-shared-size-22);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  height: 8px;
+  display: block;
+  box-sizing: border-box;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: relative;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.78, 0.14, 0.15, 0.86);
+}
+
+.status-active .progress-bg {
+  background-color: var(--imported-progress-progress-bg-background-color-active);
+}
+
+.status-exception .progress-bg {
+  background-color: var(--imported-progress-progress-bg-background-color-exception);
+}
+
+.status-success .progress-bg {
+  background-color: var(--imported-progress-progress-bg-background-color-success);
+}
+
+.label {
+  display: flex;
+  color: var(--imported-progress-label-color-unset);
+  font-size: var(--imported-shared-size-14);
+  font-weight: var(--imported-progress-label-font-weight);
+  line-height: var(--imported-shared-size-14);
+  margin-left: var(--imported-progress-label-margin-left);
+  display: block;
+  box-sizing: border-box;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  text-wrap-mode: nowrap;
+}
+
+.status-active .label {
+  color: var(--imported-progress-label-color-active);
+}
+
+.status-exception .label {
+  color: var(--imported-progress-label-color-exception);
+}
+
+.status-success .label {
+  color: var(--imported-progress-label-color-success);
+}
+
+.anticon {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--imported-shared-size-14);
+  line-height: var(--imported-shared-size-0);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  vertical-align: var(--imported-progress-anticon-vertical-align);
+  display: none;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  text-align: center;
+  text-rendering: optimizelegibility;
+  text-wrap-mode: nowrap;
+}
+
+.status-exception .anticon {
+  display: inline-flex;
+}
+
+.status-success .anticon {
+  display: inline-flex;
+}
+
+.anticon-exception svg {
+  width: 14px;
+  height: 14px;
+}
+
+.anticon-exception {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.anticon-success svg {
+  width: 14px;
+  height: 14px;
+}
+
+.anticon-success {
+  display: inline-flex;
+  flex-shrink: 0;
+}

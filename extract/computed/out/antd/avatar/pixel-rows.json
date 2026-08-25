@@ -1,0 +1,122 @@
+[
+  {
+    "key": "small.circle__default",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "small.circle__hover",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "small.circle__focus-visible",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "small.circle__active",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "small.square__default",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "small.square__hover",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "small.square__focus-visible",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "small.square__active",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "default.circle__default",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "default.circle__hover",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "default.circle__focus-visible",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "default.circle__active",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "default.square__default",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "default.square__hover",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "default.square__focus-visible",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "default.square__active",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "large.circle__default",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "large.circle__hover",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "large.circle__focus-visible",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "large.circle__active",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "large.square__default",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "large.square__hover",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "large.square__focus-visible",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  },
+  {
+    "key": "large.square__active",
+    "pctExact": 0.18880208333333334,
+    "pctAA": 0.01953125
+  }
+]

@@ -1,0 +1,70 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "avatar",
+  "anchors": [
+    {
+      "leaf": "imported.avatar.root.color",
+      "token": "color-text-light-solid",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--ant-color-text-light-solid",
+      "selector": ".ant-avatar"
+    },
+    {
+      "leaf": "imported.avatar.root.font-size",
+      "token": "avatar-text-font-size",
+      "part": "root",
+      "cssProperty": "font-size",
+      "varName": "--ant-avatar-text-font-size",
+      "selector": ".ant-avatar"
+    },
+    {
+      "leaf": "imported.avatar.root.height.default",
+      "token": "avatar-container-size",
+      "part": "root",
+      "cssProperty": "height",
+      "varName": "--ant-avatar-container-size",
+      "selector": ".ant-avatar"
+    },
+    {
+      "leaf": "imported.avatar.root.height.large",
+      "token": "avatar-container-size-lg",
+      "part": "root",
+      "cssProperty": "height",
+      "varName": "--ant-avatar-container-size-lg",
+      "selector": ".ant-avatar-lg"
+    },
+    {
+      "leaf": "imported.avatar.root.height.small",
+      "token": "avatar-container-size-sm",
+      "part": "root",
+      "cssProperty": "height",
+      "varName": "--ant-avatar-container-size-sm",
+      "selector": ".ant-avatar-sm"
+    },
+    {
+      "leaf": "imported.avatar.root.width.default",
+      "token": "avatar-container-size",
+      "part": "root",
+      "cssProperty": "width",
+      "varName": "--ant-avatar-container-size",
+      "selector": ".ant-avatar"
+    },
+    {
+      "leaf": "imported.avatar.root.width.large",
+      "token": "avatar-container-size-lg",
+      "part": "root",
+      "cssProperty": "width",
+      "varName": "--ant-avatar-container-size-lg",
+      "selector": ".ant-avatar-lg"
+    },
+    {
+      "leaf": "imported.avatar.root.width.small",
+      "token": "avatar-container-size-sm",
+      "part": "root",
+      "cssProperty": "width",
+      "varName": "--ant-avatar-container-size-sm",
+      "selector": ".ant-avatar-sm"
+    }
+  ]
+}

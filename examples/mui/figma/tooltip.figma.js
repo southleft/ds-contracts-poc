@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "mui.tooltip",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Tooltip — generated from contract mui.tooltip v0.2.0 † (10 code-only facts — see plugin report)",
+    "description": "Tooltip — generated from contract mui.tooltip v0.2.0 † (12 code-only facts — see plugin report)",
     "isSet": false,
     "boolProps": [
       {
@@ -82,9 +82,6 @@ const COMPONENTS = [
                     "px": 7.79688,
                     "varName": "imported/tooltip/tooltip-arrow/height"
                   },
-                  "margins": {
-                    "top": -7.81
-                  },
                   "bindings": {
                     "minWidth": "imported/shared/size-0"
                   },
@@ -112,11 +109,6 @@ const COMPONENTS = [
                 "paddingRight": "imported/tooltip/label/padding-right",
                 "paddingTop": "imported/shared/size-4"
               },
-              "margins": {
-                "left": 2,
-                "right": 2,
-                "top": 14
-              },
               "hugCeiling": true,
               "fillW": true
             }
@@ -131,6 +123,17 @@ const COMPONENTS = [
       "element": "div"
     },
     "codeOnlyFacts": [
+      {
+        "part": "label",
+        "kind": "channel",
+        "channel": "margin-top/margin-right/margin-left",
+        "value": "14px/2px/2px",
+        "reason": "the margin-box wrapper is skipped — a FILL-sized child cannot be wrapped in a margin box without breaking the fill; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+        "variants": {
+          "count": 1,
+          "of": 1
+        }
+      },
       {
         "part": "label",
         "kind": "declared",
@@ -214,6 +217,17 @@ const COMPONENTS = [
         "channel": "position",
         "value": "absolute",
         "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
+        "variants": {
+          "count": 1,
+          "of": 1
+        }
+      },
+      {
+        "part": "tooltip-arrow",
+        "kind": "channel",
+        "channel": "margin-top",
+        "value": "-7.81px",
+        "reason": "the margin-box wrapper is skipped — an out-of-flow child (overlay / inset / absolute) keeps its own placement lowering; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
         "variants": {
           "count": 1,
           "of": 1
@@ -696,6 +710,8 @@ function applyFrameSpec(node, spec) {
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
     node.strokeAlign = 'INSIDE';
+    // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
+    if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
   if (spec.fixedWidth || spec.fixedHeight) {
     const w = spec.fixedWidth ? spec.fixedWidth.px : node.width;
@@ -835,43 +851,6 @@ function propagateOverflowVisible(childNode, parent) {
     if (dsDeclaredClipStops(n)) break;
     n.clipsContent = false;
     dsOverhangUnclip.add(n.id);
-  }
-}
-
-// Round 5d: auto-layout has no per-child margin — a child carrying residual
-// margins gets its CSS MARGIN BOX as a fixed wrapper frame (clipsContent
-// false), the child placed at (left, top). Negative margins shrink the flow
-// box and let the glyph overhang — the exact CSS geometry (the Badge pip's
-// -2/-2/-8 is what keeps the real pill 20px tall). Out-of-flow children
-// (overlay / inset / absolute) and FILL-sized children keep their own
-// lowering.
-function applyMarginBox(parent, childNode, childSpec, registry) {
-  const m = childSpec.margins;
-  if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
-  try {
-    if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;
-  } catch (e) { degrade('FC-RT-MARGIN-BOX-SIZING-UNREADABLE', childNode, 'layout sizing could not be read before the margin box was applied; applied as if the child were not FILL-sized', e); }
-  const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
-  if (!t && !r && !b && !l) return;
-  const w = Math.max(childNode.width + l + r, 0.01);
-  const h = Math.max(childNode.height + t + b, 0.01);
-  const box = figma.createFrame();
-  box.name = childSpec.name + ' (margin box)';
-  box.fills = [];
-  box.clipsContent = false;
-  parent.insertChild(parent.children.indexOf(childNode), box);
-  box.resize(w, h);
-  box.appendChild(childNode);
-  childNode.x = l;
-  childNode.y = t;
-  // Wave B.4 / Polaris Button: a Show-bound child wrapped in a margin box
-  // must transfer the visible binding to the WRAPPER — hiding only the
-  // inner icon leaves the ~20px margin box in auto-layout (blank left gap).
-  if (childSpec.visibleProp && registry && registry.visibles) {
-    for (const vis of registry.visibles) {
-      if (vis.node === childNode) vis.node = box;
-    }
-    childNode.visible = true;
   }
 }
 
@@ -1078,6 +1057,11 @@ async function buildNode(spec, registry) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
         childNode.primaryAxisSizingMode = 'FIXED';
+        // ANTD EXAM (heal loop): the track may itself FILL a parent that is
+        // not sized yet (antd's Progress: inner FILLs outer FILLs the root),
+        // so the fraction above was taken of a hugging 2px track. Stamp the
+        // fraction; the ROOT re-applies it once the whole tree has laid out.
+        childNode.setPluginData('ds_meter', String(child.pct));
       } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', childNode, 'the meter fraction could not be applied (resize / FIXED refused); the track is not fixed-width', e); }
     }
     if (
@@ -1105,7 +1089,6 @@ async function buildNode(spec, registry) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
     applyInsetOverlay(node, childNode, child);
-    applyMarginBox(node, childNode, child, registry);
   }
   resizeOutOfFlow(node, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
@@ -1131,6 +1114,14 @@ async function buildNode(spec, registry) {
       (spec.type === 'slot' || node.children.length === 0)) {
     remeasureBirthBox(node, spec.type === 'slot' ? spec.slotProperty : spec.name,
       Boolean(spec.fixedWidth), Boolean(spec.fixedHeight));
+  }
+  if (spec.type === 'root') {
+    // meters: re-apply each stamped fraction against its track's LAID-OUT width
+    for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
+      const pct = Number(m.getPluginData('ds_meter'));
+      m.setPluginData('ds_meter', '');
+      try { if (m.parent && m.parent.width > 0) m.resize(Math.max(1, Math.round(m.parent.width * pct)), m.height); } catch (e) { degrade('FC-RT-METER-RESIZE-REFUSED', m, 'the meter fraction could not be re-applied after layout', e); }
+    }
   }
   return node;
 }
@@ -1511,7 +1502,6 @@ async function amendSet(set, C) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
         }
     applyInsetOverlay(comp, childNode, childSpec);
-    applyMarginBox(comp, childNode, childSpec, registry);
       }
   resizeOutOfFlow(comp, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
@@ -1638,6 +1628,7 @@ async function amendSet(set, C) {
     set.resizeWithoutConstraints(totalW, totalH);
   }
   set.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) set.documentationLinks = C.documentationLinks;
   set.setSharedPluginData('ds_contracts', 'specHash', hash);
   // PROTOTYPE WIRING — BEFORE the fingerprint stamp, so the v5 reaction facts
   // are part of what gets stamped (a stripped reaction is drift).
@@ -1791,6 +1782,7 @@ async function amendComponent(comp, C) {
     vis.node.visible = vis.default;
   }
   comp.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) comp.documentationLinks = C.documentationLinks;
   comp.setSharedPluginData('ds_contracts', 'specHash', hash);
   dsStampFingerprints(comp);
   // Re-fit (or adopt into) the host section — mirrors amendSet.
@@ -1957,6 +1949,7 @@ async function syncOne(C) {
   }
   target.name = displayName;
   target.description = C.description;
+  if (C.documentationLinks && C.documentationLinks.length > 0) target.documentationLinks = C.documentationLinks;
   target.setSharedPluginData('ds_contracts', 'specHash', specHash(C));
   target.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   target.setSharedPluginData('ds_contracts', 'version', C.version || '');

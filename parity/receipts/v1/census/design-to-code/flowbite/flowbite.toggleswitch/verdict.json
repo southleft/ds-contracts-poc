@@ -1,0 +1,8 @@
+{
+  "recognisable": false,
+  "walls": [
+    "FC-GEOMETRY-EXCLUDED:track-height",
+    "STATE-DRIVER:checked-styles"
+  ],
+  "notes": "The label renders; the TRACK collapses to zero height — the track frame is drawn FIXED with only an absolutely-positioned thumb inside, and a child's drawn px is Option-B excluded geometry (NAMED in the proposal: \"FC-GEOMETRY-EXCLUDED … the part sizes to its content\"). With no in-flow content the track paints nothing, so the switch is not recognisable. Named, not silent; carrying drawn child px was measured and refused (Option B receipt) — the carry-forward is binding the track size to a variable on the canvas."
+}

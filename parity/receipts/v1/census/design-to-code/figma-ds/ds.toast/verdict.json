@@ -1,0 +1,9 @@
+{
+  "recognisable": true,
+  "walls": [
+    "VECTOR-GLYPH-NAMED",
+    "SLOT-CONTENT-NAMED",
+    "KIT-LINE-HEIGHT-AUTHORING"
+  ],
+  "notes": "The toast bar (surface, border, shadow, 600px width) matches; icon and close glyphs are named vectors/slot content; title/body overlap identically on both sides (kit line-height)."
+}

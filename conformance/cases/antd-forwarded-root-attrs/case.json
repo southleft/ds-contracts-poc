@@ -1,0 +1,18 @@
+{
+  "id": "antd-forwarded-root-attrs",
+  "feature": "anatomy",
+  "construct": "label > [input.sr-only + span.box] + span.text — the component forwards className/data-* to the HIDDEN input, not the visible label root (antd Checkbox/Radio)",
+  "why": "Anything that identifies the root by class or attribute would measure a 0×0 screen-reader-only input and report a clean, empty part. The harness stamps the STAGE child, so the root must still be the label and its visible box must carry paint (P2 exam S2).",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a.tokens.background-color",
+  "observable": {
+    "part": "a",
+    "channel": "background-color",
+    "capturedValue": "rgb(22, 119, 255)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the 16×16 filled box is real ink; the sr-only input is a 0-size node the canvas must not draw"
+  }
+}

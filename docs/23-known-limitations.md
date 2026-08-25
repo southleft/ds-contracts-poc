@@ -1268,6 +1268,80 @@ companion figures — what the same measurements say went right — are in
 
 <a id="1-coverage--how-much-of-a-library-is-actually-captured"></a>
 
+## B.34 State previews are all-or-nothing per set — one override-less state hides every drawn plane
+
+**Found by the Ant Design exam** ([ANTD-EXAM.md](../parity/receipts/phase-2/ANTD-EXAM.md) §5).
+`bindings.figma.statePreviews` is probed per contract by the promote referee
+(`packages/cli/src/promote.ts` → `validateContract`), and a state that
+declares no token override on any part refuses the flag for the WHOLE set.
+antd's Button declares hover/active/focus-visible/disabled; its hover and
+active planes are a `type × danger` product (S3 residue, named), so the
+referee refuses previews — and the focus-visible ring and the disabled
+plane, which DO carry, get no preview cell either. Same on Tag and Alert
+(hover lives on the close icon) and on Checkbox/Radio (the focus ring lives
+on the inner part, v13). 5 of the 7 stateful antd sets ship with no State
+axis.
+
+**What you'd observe** — a Button set with thirty base cells and no
+focus/disabled row, while the contract carries both.
+
+**Status of the loss** — NAMED, not silent: every state binding the undrawn
+plane holds is a `channel`-kind code-only fact on the set
+(`FC-STATE-PLANE-UNDRAWN`, 19 on the antd sets; the same receipt surfaced on
+18 committed contracts across 8 libraries when it landed).
+
+**What it would take** — a per-state probe: draw the states that have
+overrides and name the ones that do not. Referee + emitter
+(`stateVariants`) + prototype-wiring pairs; not started.
+
+## B.35 The pseudo-decor grammar drops a decor's `box-shadow`, and the placeholder plane's ink
+
+Two named residues the exam's heal loop pinned with screenshot pairs
+(`parity/receipts/phase-2/antd/switch.triptych.png`, `input.triptych.png`):
+
+- antd's Switch knob is `.ant-switch-handle::before` with
+  `box-shadow: var(--ant-switch-handle-shadow)`. The decor grammar carries
+  background alpha + border rings; the box promotes, the shadow does not —
+  now receipted as `pseudo-decor-shadow-uncarried` beside the carriage
+  (before this round a painting decor's shadow vanished with no receipt at
+  all; the shadow refusal fired only when nothing else painted).
+- `::placeholder` is read and never carried (§B.5); antd's Input draws its
+  placeholder on the canvas in the root's text colour (`rgba(0,0,0,.88)`),
+  not antd's `.25`. The TEXT is carried (the first TEXT-kind prop hosts the
+  label when a root has no `children`); the colour is the named loss.
+
+**What it would take** — a shadow channel on shape parts (the schema has
+`box-shadow` on frames, not on decor shapes); a registry channel for the
+placeholder plane's colour. Neither started.
+
+## B.36 The held-out exam rendered five cells, not fifteen sets
+
+The Phase 2 exam ([FIGMA-DS-EXAM.md](../parity/receipts/phase-2/FIGMA-DS-EXAM.md))
+read 3,556 canvas facts off fifteen component sets, but the render comparison —
+Figma's own `/v1/images` export beside the generated React component in
+Chromium — was taken for five cells (Button, Badge ×2, Card, Toast), and those
+five pairs lived in a scratch directory the receipt described as "not in the
+patch". The recognisability verdicts for the other eleven sets (Button (Icon),
+Button (contract), Chip, Dek, Heading, Image, Kicker, Button Group, Section
+Header, Section Footer, Section) were never taken: the accounting counted
+their facts; nobody looked at them.
+
+**What is true now.** The five pairs are in the tree beside the receipt
+(`parity/receipts/phase-2/figma-ds/*.canvas.png` / `*.react.png`), and
+`npm run exam:screenshots:check` (fast lane) refuses any `*-EXAM.md` that
+lists a set without a screenshot pair — unless the row says, in one fixed
+sentence, that the pair was not captured and points here. Eleven rows of
+FIGMA-DS-EXAM.md say exactly that. A named absence is counted and printed on
+every run; it is not a pass.
+
+**What it would take.** A re-render pass on the kit: REST images for every
+set's default cell, the generated React for the same cells through the
+existing Playwright harness, and the recognisability read per set. The REST
+PAT the exam used lacks `file_variables:read` (§B.25), so the canvas side
+would render with the same resolved literals the exam measured. Not scheduled
+until the code→canvas half of the exam (the library TJ picks) is run, so both
+halves can be captured on one tree.
+
 ## C.1 Coverage — how much of a library is actually captured
 
 Seven distinct libraries across eight rounds, five styling architectures, one
@@ -1606,7 +1680,7 @@ on your canvas. The counts are the honest way to see both halves at once.
 |---|---|---|---|
 | CSS / DOM frontier | 82 | CARRIED 42 · LOWERED 4 · REFUSED 18 · UNSUPPORTED 18 (79 pass · 3 red) | `conformance/MANIFEST.json` (`npm run conformance`, 2026-08-23) |
 | canvas round trip of the CARRIED/LOWERED cases | 46 | ROUND-TRIPPED 26 · NAMED 5 · REFUSED-BY-NAME 15 · **SILENT 0** | `conformance/CANVAS-EXPECTATIONS.md` (`npm run conformance:roundtrip`) |
-| canvas constructs | 154 | CARRIED 107 · LEDGERED 38 · REFUSED 9 (154 PASS · 0 RED-EXPECTED — the last two exam silences closed 2026-08-23, §D.29; the slot's interior layout the same day, §D.31) | `extract/figma/conformance/MANIFEST.json` (`npm run conformance:canvas`) |
+| canvas constructs | 157 | CARRIED 110 · LEDGERED 38 · REFUSED 9 (157 PASS · 0 RED-EXPECTED — the last two exam silences closed 2026-08-23, §D.29; the slot's interior layout the same day, §D.31) | `extract/figma/conformance/MANIFEST.json` (`npm run conformance:canvas`) |
 | dropped-fact receipts (`†`) and the facts they name | 104 receipts · 2,321 named facts | pinned exactly, in both directions; since 2026-08-22 every `†` carries its facts by part, channel, value and reason (`codeOnlyFacts`) | `extract/figma/dagger-census.json` (`npm run dagger:census`, `code-only-facts:check`) |
 
 **REFUSED and UNSUPPORTED are different facts** and the fixture counts them
@@ -2710,7 +2784,7 @@ npm run conformance
 npm run conformance:roundtrip     # → 46 cases · 26 round-tripped · 5 named · 15 refused by name · 0 SILENT
 
 # the canvas-construct fixture, incl. the held-out kit's cases (§D.24, §D.29, §D.31)
-npm run conformance:canvas        # → 154 cases · 154 PASS · 0 RED-EXPECTED · 0 FAIL
+npm run conformance:canvas        # → 157 cases · 157 PASS · 0 RED-EXPECTED · 0 FAIL
 
 # every dropped-fact receipt and the facts it names (§C.3)
 npm run dagger:census             # → 104 receipts · 2,321 named facts, no drift
@@ -2823,12 +2897,14 @@ and the 152 prior cases did not move.
 **Gates:** conformance cases `slot-interior-auto-layout` +
 `rest-slot-interior-auto-layout` (authored RED-EXPECTED with the silence
 pinned in `observedCheck`, proven red, then re-recorded CARRIED); `npm run
-conformance:canvas` (154 cases · CARRIED 107 · LEDGERED 38 · REFUSED 9 ·
-154 PASS · 0 RED-EXPECTED); `npm run exact-proposal:check` §49 (now pins
+conformance:canvas` (157 cases · CARRIED 110 · LEDGERED 38 · REFUSED 9 ·
+157 PASS · 0 RED-EXPECTED — the census merge added the three REST identity
+rows `rest-set-description-carried`, `rest-documentation-links-carried`,
+`rest-stamped-identity-carried`, all CARRIED); `npm run exact-proposal:check` §49 (now pins
 the FULL layout object `{direction, justify, align, grow}` on every shape)
 and §50 (the interior facts on their own: the layout block, the three
 minted channels, the layoutByProp split); `npm run accuracy:check`
-(`accuracy/grammar.json` pins 154 = 107 / 38 / 9); `npm run
+(`accuracy/grammar.json` pins 157 = 110 / 38 / 9); `npm run
 emitters:check`; `npx tsx conformance/canvas.ts` (46 cases, 0 SILENT);
 `npm run flowbite-dump-propose:check` (8 stems). The Flowbite eight draw no
 native SLOT and the first-party `figma/*.figma.js` are emitted from
@@ -3039,10 +3115,14 @@ defaultless axis, the existing `carried-channel-reminted` door still re-mints
 the set planes; variation along a defaulted axis stays with the literal, the
 same as every other reviewed carriage — named, not hidden.
 
-**Numbers.** polaris Tag re-fuses: offline 81.551 % (6140/7529 cells, 0
+**Numbers.** polaris Tag re-fuses: offline 81.618 % (6145/7529 cells, 0
 unresolved refs) against the committed harness 81.016 % (5996/7401); 128
-cells added and 144 more equal, so 16 previously-compared cells changed
-verdict to EQUAL — the hugging link. The baseline row drops `refused` and
+cells added and 149 more equal, so 21 previously-compared cells changed
+verdict to EQUAL — the hugging link, plus five `large.on` remove-button
+`background-color` cells the integrated engine resolves to the library's own
+fill, `rgba(227, 227, 227, 1)` (this section's 2026-08-23 re-record measured
+81.551 %, 6140 equal; the INTEGRATED ENGINE ROUND re-record of 2026-08-24 on
+v1-integration is the current pin). The baseline row drops `refused` and
 names the gap; the tracked `out/tag/regate.scorecard.json` is the re-record.
 The committed capture artifacts and the promoted Tag contract are
 UNTOUCHED: the hugging link reaches the canvas at Tag's next recapture (or
@@ -3063,8 +3143,68 @@ extract/computed/configs/polaris.json` is the re-record; `npx tsx
 examples/polaris/generate.ts --check`, `figma:fresh`, `generated:fresh`,
 `evals --only polaris,promote-generalization`, tsc, lint, format, docs all
 green on the patch. Round r12 (patch over `537022b0`).
+## D.34 The Ant Design exam — 44 silent geometry drops, a silent outline width, a silent margin box, a silent state plane, a silent unset plane, a Tag with no label, an error input drawn grey — CLOSED
 
-## D.34 The built Playground shipped an EMPTY emitter registry — CLOSED
+The held-out code→canvas exam on the hardest library by design
+([ANTD-EXAM.md](../parity/receipts/phase-2/ANTD-EXAM.md)). Twelve subjects,
+6,007 captured facts, **SILENT 44 → 0** on the capture side, and five heal
+iterations on the scratch canvas until every set passed "I can tell what
+this is" beside the library's own render. What it closed, each with its
+case or screenshot pair:
+
+- **FC-GEOMETRY-EXCLUDED never ledgered per part** — 46 width/height facts
+  on Tag/Input/Avatar/Progress/Card refused by nothing anyone could grep.
+  `styledChannels` writes one `geometry-excluded:` line per part (the
+  Option B obligation, met).
+- **Token-named geometry is a design value** — `height: var(--ant-control-height)`
+  was refused as environment-dependent; buttons drew 18px tall. A dimension
+  the library's stylesheet binds to a token now joins fusion with its name
+  (`token-named-geometry-admitted`).
+- **The outline PAIR** (case `antd-focus-outline-ring-ua-width`) — antd's
+  3px focus width equals Chromium's `medium`, never differed between planes,
+  and the canvas ring had no width. The plane's width rides the state
+  whenever its style/colour changed.
+- **The state plane's refusals ride the contract** (schema v18
+  `Part.codeOnly`, W4) — a nested part's focus ring refused by v13 landed
+  only in capture-side sidecars; `figma bundle` compiles its facts from the
+  contract. 122 `capture`-kind facts on the antd sets.
+- **The margin box's four silent exits** (case `antd-empty-margin-only-parts`)
+  — FILL / grow / out-of-flow / the empty-frame #60 default returned without
+  a word; `FC-EMIT-MARGIN-BOX-SKIPPED` names each side (5 committed
+  contracts gained receipts).
+- **The undrawn state plane** — with `statePreviews` off every state binding
+  was unbuilt in silence; `FC-STATE-PLANE-UNDRAWN` (18 committed contracts
+  across 8 libraries gained receipts; the wall itself is §B.34).
+- **The undrawn unset plane** — a defaultless axis's library-default
+  rendering (antd's red Badge) had no cell and the proposal called the first
+  enum value the default; `FC-UNSET-PLANE-UNDRAWN`.
+- **A root's prop-bound text beside parts** (Tag) drew no text node; the
+  compile receipt's text pin was the only witness. `rootTextSpecs` hosts it.
+- **Presence-driven channels dropped whole** — Alert's padding and icon gap
+  vanished because `description` changes them; the presence-OFF plane is
+  carried, the ON plane named.
+- **`flex-grow` minted as an annotated token, never `layout.grow`** —
+  Progress's track drew 0 wide; uniform `flex-grow ≥ 1` (and a child that
+  measures a non-block root's content box) carries `layout.grow`, and the
+  meter fraction is re-applied after layout.
+- **A wrong fact on the canvas** — Input's `status × variant` border: the
+  pair-with-unset carriage wrote the unset-plane map after the named-plane
+  map and `resolveTokens` merges in order. Defaultless-axis maps sort last.
+- **`border-style` that varies by an axis** drew SOLID (Button `dashed`);
+  it carries as `stylesWhen` per value and lowers to a `dashPattern`.
+- **Pseudo-decor `scale()` and margins** (W5, the scale half) — Radio's dot
+  revealed by `scale(.375)` folds into a centred 6×6 ellipse; the pseudo's
+  own margins fold into its offset.
+- Instrument defects: `seed-gen`'s case-sensitive lookup (W1 — the recon
+  blamed the tuple grammar; re-measurement blamed the lookup), the
+  closed-shadow suspect on every svg `<path>`, the settle probe blind to
+  `outline-width`, the unset materialization missing the VARIANT values map.
+
+Gates: `npm run conformance` (91 cases), `npm run conformance:roundtrip`
+(54, 0 SILENT), `code-only-facts:check`, `dagger:census`, `figma:fresh`,
+`docs:check`, the drift baseline (12 antd rows).
+
+## D.35 The built Playground shipped an EMPTY emitter registry — CLOSED
 
 Found 2026-08-23 by the integrator walking the **built** Playground
 (`npm run build:playground` + `vite preview`, Playwright over both guided
