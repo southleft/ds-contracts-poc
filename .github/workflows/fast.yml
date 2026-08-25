@@ -498,6 +498,17 @@ jobs:
       - name: exact-proposal:check (strict proposal refuses legacy and semantic ambiguity)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run exact-proposal:check
+      # THE CHANNEL TABLE (docs/30). Every CSS computed property the capture
+      # can observe is classified exactly once (spec/channel-table.json); this
+      # refuses on an unclassified observed property, a ghost CARRIED anchor,
+      # a missing schema/conformance row, or drifted totals — then proves it
+      # can go red at all.
+      - name: channel-table:check (no unclassified channel; every CARRIED anchor exists)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run channel-table:check
+      - name: channel-table self-test (a dropped row, a ghost anchor and a stray byte each go red)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run channel-table:check -- --self-test
       - name: string-boolean-coercion:check (maintain — a string "true" never becomes a boolean property)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run string-boolean-coercion:check
