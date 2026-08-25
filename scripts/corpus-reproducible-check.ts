@@ -393,7 +393,14 @@ export function compareCaptureTree(
   const missing = expected.filter((c) => !byComponent.has(c));
   const refusalFor = (c: string): string | null => {
     const f = path.join(from, def.library, `${c}.REFUSED.txt`);
-    return existsSync(f) ? readFileSync(f, "utf8").trim() : null;
+    if (!existsSync(f)) return null;
+    // A REFUSAL WITH NO MESSAGE IS NOT A REFUSAL. An empty marker would render
+    // as "the documented capture REFUSED and produced no record: " — a blank
+    // where the engine's own words belong, which is exactly the blank cell
+    // this repo refuses everywhere else. Treat it as unmeasured instead, so
+    // the library goes PENDING and someone re-runs the sweep.
+    const text = readFileSync(f, "utf8").trim();
+    return text.length > 0 ? text : null;
   };
   const unmeasured = missing.filter((c) => refusalFor(c) === null);
   if (unmeasured.length > 0) {
