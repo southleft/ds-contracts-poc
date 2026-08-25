@@ -1,0 +1,18 @@
+{
+  "id": "align-items-baseline",
+  "feature": "layout",
+  "construct": "uniform align-items: baseline on a flex row of two differing font sizes",
+  "why": "`baseline` is a documented CARRY-BOTH value of LayoutSchema.align — packages/core/src/anatomy.ts lowers it to CSS and emit-figma-script lowers it to counterAxisAlignItems BASELINE (with the VERTICAL -> MIN projection). Only the DETECTION map lacked the entry, so the keyword left as `layout-value-outside-vocabulary` and antd.checkbox, antd.radio, astryx.progress-bar and carbon.modal all minted with the counter-axis default instead.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.align = baseline",
+  "observable": {
+    "part": "root",
+    "channel": "align-items",
+    "capturedValue": "baseline"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "counterAxisAlignItems BASELINE is native on a HORIZONTAL auto-layout frame"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.child-order-permuted-by-axis",
+  "name": "CaseChildOrderPermutedByAxis",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"child-order-permuted-by-axis\" (layout). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: CHILD ORDER that varies on one enum axis by a ROTATION (A,B,C -> B,C,A) — a permutation that is neither the identity nor a reversal",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "rotation",
+      "type": {
+        "enum": [
+          "none",
+          "once"
+        ]
+      },
+      "default": "none",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Rotation",
+          "values": {
+            "none": "None",
+            "once": "Once"
+          }
+        },
+        "code": {
+          "prop": "rotation"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@ds-contracts/conformance",
+        "export": "CaseChildOrderPermutedByAxis"
+      }
+    }
+  }
+}

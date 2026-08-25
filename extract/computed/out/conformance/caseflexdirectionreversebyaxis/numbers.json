@@ -1,0 +1,152 @@
+{
+  "component": "CaseFlexDirectionReverseByAxis",
+  "browser": "151.0.7922.34",
+  "captures": 8,
+  "combos": 2,
+  "interactions": 4,
+  "enumerationPolicy": "full-cartesian",
+  "channelsEnumerated": 479,
+  "elementsPerCapture": 3,
+  "determinism": "byte-identical across two full sweeps in one session",
+  "styledChannels": {
+    "root": 8,
+    "label": 10,
+    "label-2": 10
+  },
+  "folds": {
+    "count": 0,
+    "receipts": [],
+    "mintedLeavesUnfolded": 9,
+    "mintedLeavesFolded": 9
+  },
+  "bound": {
+    "cellsChecked": 0,
+    "confirmed": 0,
+    "contradictions": 0,
+    "untriaged": 0
+  },
+  "minted": {
+    "leaves": 9,
+    "baseBindings": 17,
+    "stateBindings": 0,
+    "byShape": {
+      "uniform": 17,
+      "perAxis": 0,
+      "perPair": 0,
+      "refused": 0
+    }
+  },
+  "declared": {
+    "base": 6,
+    "state": 0
+  },
+  "codeOnly": {
+    "base": 3,
+    "state": 0,
+    "overflowBindings": 0
+  },
+  "pseudoElementFindings": 0,
+  "anatomyPromotion": {
+    "partsCarried": 3,
+    "svgAssets": 0,
+    "refusals": 0
+  },
+  "enrichedContractSchemaValid": true,
+  "enrichedContractGeneratorValid": true,
+  "replayComputedEquality": {
+    "cellsCompared": 11448,
+    "cellsMatched": 11392,
+    "pct": 99.51083158630328,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration",
+      "translate-x",
+      "translate-y"
+    ],
+    "topMismatchedChannels": [
+      [
+        "inline-size",
+        24
+      ],
+      [
+        "width",
+        24
+      ],
+      [
+        "perspective-origin",
+        8
+      ]
+    ]
+  },
+  "pixel": {
+    "pairs": 8,
+    "measured": 8,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
+    "exact": {
+      "mean": 0,
+      "max": 0,
+      "perfect": 8
+    },
+    "aa": {
+      "mean": 0,
+      "max": 0,
+      "perfect": 8
+    },
+    "worst": [
+      {
+        "key": "end__default",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "end__hover",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "end__focus-visible",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "end__active",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "start__default",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "start__hover",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "start__focus-visible",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "start__active",
+        "pctExact": 0,
+        "pctAA": 0
+      }
+    ]
+  },
+  "gate": {
+    "computedPctEqual": 98.21428571428571,
+    "rowsFullyEqual": 4,
+    "rows": 8,
+    "pixelPerfectExact": 4,
+    "pixelPerfectAA": 4,
+    "pairs": 8
+  },
+  "focusVisibleDriverMatched": 0,
+  "focusVisibleDriverTotal": 2
+}

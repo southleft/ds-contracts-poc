@@ -2,11 +2,11 @@
   "_marker": "THE DENOMINATOR. Hand-authored per case, generated into one index. Deliberately NOT derived from isFusable / styled / DECLARED_CHANNELS / CHANNEL_TO_COMPUTED / TOKEN_CHANNELS / carriedParts — every instrument in the pipeline derives its denominator from the same filter that decides carriage, which is why a channel the filter never opened scores 100%. This file is the independent one.",
   "generatedBy": "conformance/build.ts",
   "library": "@ds-contracts/conformance@0.1.0",
-  "count": 97,
+  "count": 102,
   "byExpectation": {
-    "CARRIED": 54,
+    "CARRIED": 58,
     "LOWERED": 4,
-    "REFUSED": 21,
+    "REFUSED": 22,
     "UNSUPPORTED": 18
   },
   "cases": [
@@ -26,6 +26,24 @@
       "canvas": {
         "expect": "PRESENT",
         "note": "the checked box fill is real ink"
+      }
+    },
+    {
+      "id": "align-items-baseline",
+      "feature": "layout",
+      "construct": "uniform align-items: baseline on a flex row of two differing font sizes",
+      "why": "`baseline` is a documented CARRY-BOTH value of LayoutSchema.align — packages/core/src/anatomy.ts lowers it to CSS and emit-figma-script lowers it to counterAxisAlignItems BASELINE (with the VERTICAL -> MIN projection). Only the DETECTION map lacked the entry, so the keyword left as `layout-value-outside-vocabulary` and antd.checkbox, antd.radio, astryx.progress-bar and carbon.modal all minted with the counter-axis default instead.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.layout.align = baseline",
+      "observable": {
+        "part": "root",
+        "channel": "align-items",
+        "capturedValue": "baseline"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "counterAxisAlignItems BASELINE is native on a HORIZONTAL auto-layout frame"
       }
     },
     {
@@ -318,6 +336,62 @@
       }
     },
     {
+      "id": "child-order-permuted-by-axis",
+      "feature": "layout",
+      "construct": "CHILD ORDER that varies on one enum axis by a ROTATION (A,B,C -> B,C,A) — a permutation that is neither the identity nor a reversal",
+      "why": "The only per-variant child-order spelling either target system has is a reversed main axis (CSS row-reverse / Figma children.reverse()); an arbitrary permutation has no contract spelling and no canvas lowering. It must be REFUSED BY NAME rather than flattened onto the base order — the honest refusal this class exists to protect, and the guard that keeps the reversal door from being widened into a guess.",
+      "expect": "REFUSED",
+      "expectName": "child-order-varies-unreversible",
+      "expectWhere": "enriched.extension.json receipts",
+      "observable": {
+        "part": "root",
+        "channel": "__child-order",
+        "capturedValue": "span|b>span|c>span|a"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "no canvas spelling for an arbitrary per-variant child permutation"
+      },
+      "axes": [
+        {
+          "prop": "rotation",
+          "values": [
+            "none",
+            "once"
+          ],
+          "default": "none"
+        }
+      ]
+    },
+    {
+      "id": "child-order-reversed-by-axis",
+      "feature": "layout",
+      "construct": "CHILD ORDER that varies on one enum axis — the container's flex-direction keyword is `row` for BOTH values and the DOM order of the two children is reversed instead (the fluent.switch / fluent.spinner labelPosition shape)",
+      "why": "The union anatomy collapses every combo's children into ONE part order and emits `union-order-drift` about it, and enrichLayout reads only `el.node.style[channel]` — no reader anywhere between capture and contract consumes child order. Both enum values therefore mint the base order, so two distinct variants render byte-identically. The schema already owns the spelling: VariantLayoutSchema's REVERSED directions are documented as \"the canvas (which has no reverse) reverses the compiled child order per variant instead\".",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.layoutByProp.map.before.direction = row-reverse",
+      "observable": {
+        "part": "root",
+        "channel": "__child-order",
+        "capturedValue": "span|b>span|a"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the `before` variant compiles with the two children in the opposite order (isReversed -> spec.children.reverse())"
+      },
+      "axes": [
+        {
+          "prop": "labelPosition",
+          "values": [
+            "after",
+            "before"
+          ],
+          "default": "after"
+        }
+      ]
+    },
+    {
       "id": "clip-path-polygon",
       "feature": "effects",
       "construct": "clip-path: polygon(...)",
@@ -602,6 +676,34 @@
       ]
     },
     {
+      "id": "flex-direction-reverse-by-axis",
+      "feature": "layout",
+      "construct": "flex-direction: row-reverse at the DEFAULT axis value and row at the other (the carbon.accordion `align` shape, whose default IS the reversed one)",
+      "why": "LAYOUT_CHANNEL_TO_FIELD — the only reader that turns a captured flex keyword into a Part.layout fact — mapped `row` and `column` only, while VariantLayoutSchema already accepted the reversed spellings and BOTH emitters already lower them (css.ts writes flex-direction verbatim, emit-figma-script's isReversed reverses the compiled children). The base combo's measured keyword had no slot, so the whole channel left as `layout-not-uniform` and Carbon's Accordion drew its chevron on the wrong side in every align=end variant.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.layout.direction = row-reverse + anatomy.root.layoutByProp.map.start.direction = row",
+      "observable": {
+        "part": "root",
+        "channel": "flex-direction",
+        "capturedValue": "row-reverse"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the base variant compiles with reversed children; the start variant rides layoutByProp back to plain row"
+      },
+      "axes": [
+        {
+          "prop": "align",
+          "values": [
+            "end",
+            "start"
+          ],
+          "default": "end"
+        }
+      ]
+    },
+    {
       "id": "flex-gap",
       "feature": "layout",
       "construct": "column-gap / row-gap in px",
@@ -617,6 +719,24 @@
       "canvas": {
         "expect": "PRESENT",
         "note": "itemSpacing"
+      }
+    },
+    {
+      "id": "flex-wrap-wrap",
+      "feature": "layout",
+      "construct": "uniform flex-wrap: wrap on a flex row narrow enough to wrap",
+      "why": "LayoutSchema.wrap is a first-class v15/S4 fact with a real lowering on both halves (css.ts writes flex-wrap: wrap; emit-figma-script writes native layoutWrap 'WRAP'), and LAYOUT_CHANNEL_TO_FIELD had NO entry for the channel at all — so the fact could only ever arrive from a hand-authored static contract and never from a captured library (carbon.inlinenotification's text wrapper, mui.autocomplete / badge / breadcrumbs / snackbar).",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.layout.wrap = true",
+      "observable": {
+        "part": "root",
+        "channel": "flex-wrap",
+        "capturedValue": "wrap"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "native layoutWrap 'WRAP' on the auto-layout frame"
       }
     },
     {

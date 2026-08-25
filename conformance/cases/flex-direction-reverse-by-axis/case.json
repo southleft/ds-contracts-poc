@@ -1,0 +1,21 @@
+{
+  "id": "flex-direction-reverse-by-axis",
+  "feature": "layout",
+  "construct": "flex-direction: row-reverse at the DEFAULT axis value and row at the other (the carbon.accordion `align` shape, whose default IS the reversed one)",
+  "why": "LAYOUT_CHANNEL_TO_FIELD — the only reader that turns a captured flex keyword into a Part.layout fact — mapped `row` and `column` only, while VariantLayoutSchema already accepted the reversed spellings and BOTH emitters already lower them (css.ts writes flex-direction verbatim, emit-figma-script's isReversed reverses the compiled children). The base combo's measured keyword had no slot, so the whole channel left as `layout-not-uniform` and Carbon's Accordion drew its chevron on the wrong side in every align=end variant.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.direction = row-reverse + anatomy.root.layoutByProp.map.start.direction = row",
+  "observable": {
+    "part": "root",
+    "channel": "flex-direction",
+    "capturedValue": "row-reverse"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the base variant compiles with reversed children; the start variant rides layoutByProp back to plain row"
+  },
+  "axes": [
+    { "prop": "align", "values": ["end", "start"], "default": "end" }
+  ]
+}
