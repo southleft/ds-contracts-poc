@@ -1885,7 +1885,52 @@ function applyTokens(
   const sideValues = new Set(sidePaths.map((p) => String(resolveLiteral(p))));
   const hasWidthSource = ['border-width', 'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width']
     .some((chn) => tokens[chn] !== undefined);
-  const uniformSideStroke = sidePaths.length > 0 && sideValues.size === 1 && hasWidthSource ? figmaName(sidePaths[0]) : null;
+  let uniformSideStroke = sidePaths.length > 0 && sideValues.size === 1 && hasWidthSource ? figmaName(sidePaths[0]) : null;
+  // CENSUS (fluent.input) — the one-paint rule, refined twice, both honest:
+  //   1. A side whose carried WIDTH resolves to 0 draws nothing in CSS, so
+  //      its colour cannot constrain the paint (fluent underline carries
+  //      four side colours but only the bottom has a non-zero width — the
+  //      old uniformity test read the three invisible sides and refused the
+  //      one that draws, so the underline minted ZERO ink).
+  //   2. When the DRAWN sides genuinely disagree, the value the MAJORITY of
+  //      them share lowers to the paint and each outvoted side is a NAMED
+  //      code-only fact (fluent outline: top/left/right #d1d1d1, the
+  //      accessible bottom darker — three sides of true ink beat four sides
+  //      of nothing). A tie refuses exactly as before.
+  // Components whose carried sides all agree keep their old bytes: the
+  // refinement only runs where the old rule refused.
+  const outvotedSides = new Set<string>();
+  if (uniformSideStroke === null && sidePaths.length > 0 && hasWidthSource) {
+    const sideInfo = SIDE_COLOR_CHANNELS.filter((chn) => tokens[chn] !== undefined).map((chn) => {
+      const side = chn.split('-')[1];
+      let cp = tokens[chn].slice(1, -1);
+      for (const [propName, value] of Object.entries(subst)) cp = cp.replaceAll(`{${propName}}`, value);
+      const wRef = tokens[`border-${side}-width`] ?? tokens['border-width'];
+      let drawn = true;
+      if (wRef !== undefined) {
+        let wp = wRef.slice(1, -1);
+        for (const [propName, value] of Object.entries(subst)) wp = wp.replaceAll(`{${propName}}`, value);
+        const w = px(resolveLiteral(wp));
+        if (Number.isFinite(w) && w === 0) drawn = false;
+      }
+      return { chn, path: cp, value: String(resolveLiteral(cp)), drawn };
+    });
+    const drawn = sideInfo.filter((s) => s.drawn);
+    const tally = new Map<string, number>();
+    for (const s of drawn) tally.set(s.value, (tally.get(s.value) ?? 0) + 1);
+    let majority: string | null = null;
+    let best = 0;
+    let tied = false;
+    for (const [v, n] of tally) {
+      if (n > best) { best = n; majority = v; tied = false; }
+      else if (n === best) tied = true;
+    }
+    if (drawn.length > 0 && majority !== null && !tied) {
+      const winner = drawn.find((s) => s.value === majority)!;
+      uniformSideStroke = figmaName(winner.path);
+      for (const s of drawn) if (s.value !== majority) outvotedSides.add(s.chn);
+    }
+  }
   // Decided BEFORE the loop so it cannot depend on which channel the switch
   // happens to reach first: a Figma node has ONE strokes paint, so a drawn
   // outline and a drawn border compete for it, and the winner must not be
@@ -1940,6 +1985,12 @@ function applyTokens(
       case 'border-right-color':
       case 'border-bottom-color':
       case 'border-left-color':
+        // The outvoted side of a majority-lowered paint stays code-only BY
+        // NAME (the one-paint limit — see the majority rule above).
+        if (outvotedSides.has(cssProp)) {
+          miss(spec, cssProp, 'a Figma node carries ONE strokes paint and the majority of the DRAWN sides claims it — this side\'s colour disagrees and stays code-only (the one-paint limit, named per side).', ref);
+          break;
+        }
         if (uniformSideStroke !== null && spec.stroke === undefined) spec.stroke = uniformSideStroke;
         // fix 3: ONE strokes paint list serves all four sides (matrix §2), so
         // per-side colours only lower when every carried side agrees AND a
@@ -4944,6 +4995,31 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           contentProp: textProp.bindings.figma.property,
         },
       ];
+    } else if (rootIsTextControl) {
+      // CENSUS (shadcn.input): a LEAF text control with NO text prop and no
+      // parts still reserves its LINE BOX in CSS — an empty <input> is
+      // line-height tall before any character exists. The canvas equivalent
+      // is an EMPTY placeholder text node carrying the root's own type
+      // context (formControlSpec's part-level spelling, hoisted to the
+      // root): characters '' invents no ink the pixels would then judge,
+      // and the box keeps the height the code surface renders instead of
+      // hugging to its padding (the 288×8 sliver the census named
+      // CANVAS-LEAF-INPUT-COLLAPSED). The root's carried font-size /
+      // line-height tokens finally have the text node they bind to.
+      if (rootSpec.layout && rootSpec.layout.primary === 'CENTER') rootSpec.layout = { ...rootSpec.layout, primary: 'MIN' };
+      rootSpec.children = [
+        {
+          type: 'text',
+          name: 'placeholder',
+          characters: '',
+          fontSize: ctx.fontSize ?? 16,
+          fontStyle: figmaFaceStyle(ctx),
+          ...textIdentity(ctx),
+          textFill: ctx.textFill,
+          ...(ctx.lineHeight !== undefined ? { lineHeight: ctx.lineHeight } : {}),
+          ...textExtras(ctx),
+        },
+      ];
     }
     const collectStyles = (s: NodeSpec) => {
       if (s.fontStyle) fontStyles.add(s.fontStyle);
@@ -5068,6 +5144,24 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
               ...(ctx.lineHeight !== undefined ? { lineHeight: ctx.lineHeight } : {}),
               ...textExtras(ctx),
               contentProp: textProp.bindings.figma.property,
+            },
+          ];
+        } else if (rootIsTextControl) {
+          // The leaf-text-control line box, in the preview loop too — the
+          // census's state cells (State=Active / Focus Visible) are drawn
+          // here, and they collapsed to the same 288×8 sliver.
+          if (rootSpec.layout && rootSpec.layout.primary === 'CENTER') rootSpec.layout = { ...rootSpec.layout, primary: 'MIN' };
+          rootSpec.children = [
+            {
+              type: 'text',
+              name: 'placeholder',
+              characters: '',
+              fontSize: ctx.fontSize ?? 16,
+              fontStyle: figmaFaceStyle(ctx),
+              ...textIdentity(ctx),
+              textFill: ctx.textFill,
+              ...(ctx.lineHeight !== undefined ? { lineHeight: ctx.lineHeight } : {}),
+              ...textExtras(ctx),
             },
           ];
         }

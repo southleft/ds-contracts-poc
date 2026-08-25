@@ -187,6 +187,42 @@
       },
       {
         "part": "backdrop",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "when": {
+          "prop": "variant",
+          "equals": "inherit"
+        }
+      },
+      {
+        "part": "backdrop",
+        "channel": "border-left-style",
+        "value": "solid",
+        "when": {
+          "prop": "variant",
+          "equals": "inherit"
+        }
+      },
+      {
+        "part": "backdrop",
+        "channel": "border-right-style",
+        "value": "solid",
+        "when": {
+          "prop": "variant",
+          "equals": "inherit"
+        }
+      },
+      {
+        "part": "backdrop",
+        "channel": "border-top-style",
+        "value": "solid",
+        "when": {
+          "prop": "variant",
+          "equals": "inherit"
+        }
+      },
+      {
+        "part": "backdrop",
         "channel": "cursor",
         "value": "text"
       },
@@ -268,7 +304,7 @@
       "mintedLeavesUnfolded": 86,
       "baseBindings": 113,
       "stateBindings": 104,
-      "codeOnlyChannels": 27,
+      "codeOnlyChannels": 23,
       "overflowBindings": 101,
       "folds": 120
     },
@@ -510,10 +546,6 @@
       "code-only: input.flex-basis — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: clearbutton-2.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: clearbutton-2.visibility — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: backdrop.border-bottom-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: backdrop.border-left-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: backdrop.border-right-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: backdrop.border-top-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only[disabled]: backdrop.border-bottom-style — declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue",
       "code-only[disabled]: backdrop.border-left-style — declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue",
       "code-only[disabled]: backdrop.border-right-style — declared-channel state delta on 16/32 combos — partial coverage cannot carry as a state selector (v15); named residue",

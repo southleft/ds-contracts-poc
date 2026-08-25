@@ -104,9 +104,9 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 122,
-      "mintedLeavesUnfolded": 151,
-      "baseBindings": 21,
+      "mintedLeaves": 130,
+      "mintedLeavesUnfolded": 159,
+      "baseBindings": 22,
       "stateBindings": 9,
       "codeOnlyChannels": 11,
       "overflowBindings": 0,
@@ -251,7 +251,7 @@
     },
     "shippedMinted": {
       "path": "examples/shadcn/tokens/shadcn-minted.dtcg.json",
-      "leavesAdded": 243,
+      "leavesAdded": 245,
       "divergent": [
         {
           "token": "imported.button.root.background-color.default",

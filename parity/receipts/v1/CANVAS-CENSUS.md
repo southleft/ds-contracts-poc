@@ -56,12 +56,12 @@ Scratch file `byMp6lt0Ij9b2QbkDGFwBh` (the only writable file). Page per library
 | antd | 12 | 12 | 0 | 12 | 12 | 0 | 0 | 12 | 0 |
 | astryx | 13 | 13 | 0 | 13 | 13 | 0 | 0 | 13 | 0 |
 | carbon | 10 | 10 | 0 | 10 | 10 | 0 | 0 | 10 | 0 |
-| fluent | 11 | 11 | 0 | 11 | 11 | 0 | 0 | 11 | 0 |
+| fluent | 11 | 11 | 0 | 11 | 11 | 1 | 0 | 10 | 0 |
 | mui | 31 | 31 | 0 | 31 | 31 | 0 | 0 | 31 | 0 |
 | polaris | 12 | 12 | 0 | 12 | 12 | 0 | 0 | 12 | 0 |
-| shadcn | 11 | 11 | 0 | 11 | 11 | 0 | 0 | 11 | 0 |
+| shadcn | 11 | 11 | 0 | 11 | 11 | 1 | 0 | 10 | 0 |
 | tailwind | 8 | 8 | 0 | 8 | 8 | 0 | 0 | 8 | 0 |
-| **all** | 170 | 170 | 0 | 170 | 170 | 0 | 0 | 170 | 0 |
+| **all** | 170 | 170 | 0 | 170 | 170 | 2 | 0 | 168 | 0 |
 
 Gate: **GREEN** at phase `full`.
 
@@ -172,7 +172,7 @@ Gate: **GREEN** at phase `full`.
 | fluent | `fluent.card` | card | 3 × 24 + 16 state; 40 | 10/11 of 40 | rendered, 1 refused | 10/10 | 10/10 | ungraded | — |
 | fluent | `fluent.checkbox` | checkbox / radio | 3 × 12 + 12 state; 24 | 8/9 of 24 | rendered, 1 refused | 8/8 | 8/8 | ungraded | — |
 | fluent | `fluent.dialog` | modal / dialog | 1 × 3; 3 | 3/3 of 3 | rendered | 3/3 | 3/3 | ungraded | — |
-| fluent | `fluent.input` | input / field | 2 × 18 + 24 state; 42 | 11/12 of 42 | rendered, 1 refused | 11/11 | 11/11 | ungraded | CANVAS-OUTLINE-STROKE-ABSENT:input.outline/underline; CODE-RENDER-PARTIAL:input.outline |
+| fluent | `fluent.input` | input / field | 2 × 18 + 24 state; 42 | 11/12 of 42 | rendered, 1 refused | 11/11 | 11/11 | recognisable | CODE-ONLY-FACT:root/border-bottom-color (outline/underline) — Fluent’s accessible bottom stroke ({color-neutral-stroke-accessible}) is darker than the other three sides; a Figma node carries ONE strokes paint, so the majority ({imported.input.root.border-top-color.<appearance>} #d1d1d1) draws and the bottom’s own colour stays code-only by name (underline, whose only drawn side IS the bottom, now paints it exactly); CODE-ONLY-FACT:root/border-color (state previews) — State=Active/Focus Visible recolor the bottom to the brand stroke in code; on the preview cells the drawn sides’ majority is the transparent state colour, so those two cells render no stroke ink |
 | fluent | `fluent.spinner` | progress / spinner | 3 × 64; 64 | 12/12 of 64 | rendered | 12/12 | 12/12 | ungraded | CODE-CANVAS-CONSISTENT-GLYPH-SUBSTITUTE:spinner-arc |
 | fluent | `fluent.switch` | toggle / switch | 2 × 6 + 4 state; 10 | 5/6 of 10 | rendered, 1 refused | 5/5 | 5/5 | ungraded | — |
 | fluent | `fluent.tab-list` | tabs | 3 × 24; 24 | 7/7 of 24 | rendered | 7/7 | 7/7 | ungraded | — |
@@ -226,7 +226,7 @@ Gate: **GREEN** at phase `full`.
 | shadcn | `shadcn.button` | button | 2 × 48 + 24 state; 72 | 16/17 of 72 | rendered, 1 refused | 16/16 | 16/16 | ungraded | FC-EXPORT-RING-UNPAINTED |
 | shadcn | `shadcn.card` | card | 1 × 2; 2 | 2/2 of 2 | rendered | 2/2 | 2/2 | ungraded | CODE-CANVAS-DISAGREE:root.border-color-unspecified |
 | shadcn | `shadcn.checkbox` | checkbox / radio | 1 × 3 + 6 state; 9 | 4/5 of 9 | rendered, 1 refused | 4/4 | 4/4 | ungraded | — |
-| shadcn | `shadcn.input` | input / field | 0 × 1 + 3 state; 4 | 3/4 of 4 | rendered, 1 refused | 3/3 | 3/3 | ungraded | CANVAS-LEAF-INPUT-COLLAPSED; CODE-CANVAS-DISAGREE:root.border-color-unspecified |
+| shadcn | `shadcn.input` | input / field | 0 × 1 + 3 state; 4 | 3/4 of 4 | rendered, 1 refused | 3/3 | 3/3 | recognisable | CODE-ONLY-FACT:root/border-color (state previews) — State=Active/Focus Visible recolor all four sides to {imported.shared.color-a1a1a1} in code; the preview cells keep the base {imported.shared.color-e5e5e5} stroke (the state pass carries no width source, so the one-paint recolor is refused by name); CODE-ONLY-FACT:root/box-shadow (state previews) — the active/focus ring stack (5 layers incl. the 3px ring) parses to no Figma effect stack; preview cells draw the base 0/1px/2px shadow only |
 | shadcn | `shadcn.select` | select / combobox | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | CODE-CANVAS-DISAGREE:root.border-color-unspecified |
 | shadcn | `shadcn.switch` | toggle / switch | 2 × 4 + 4 state; 8 | 4/5 of 8 | rendered, 1 refused | 4/4 | 4/4 | ungraded | — |
 | shadcn | `shadcn.tabs` | tabs | 0 × 1; 1 | 1/1 of 1 | rendered | 1/1 | 1/1 | ungraded | — |

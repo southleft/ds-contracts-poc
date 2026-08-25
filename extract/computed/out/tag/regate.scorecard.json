@@ -217,8 +217,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 7529,
-      "cellsEqual": 6140,
-      "pctEqual": 81.55133483862399,
+      "cellsEqual": 6145,
+      "pctEqual": 81.6177447204144,
       "rowsFullyEqual": 0,
       "rows": 128
     },
@@ -373,13 +373,13 @@
       "promotion: pseudo-decor-outside-grammar: button-2::after is painted by a mechanism the grammar cannot read (box-shadow: rgba(0, 91, 211, 1) 0px 0px 0px -1px) — the decor grammar reads background-color alpha and border rings only; the box is NOT promoted",
       "promotion: pseudo-decor-outside-grammar: root::after is painted by a mechanism the grammar cannot read (box-shadow: rgba(0, 91, 211, 1) 0px 0px 0px -1px) — the decor grammar reads background-color alpha and border rings only; the box is NOT promoted",
       "promotion: orphan-asset-dropped: icon asset \"tag-icon\" was reconstructed from the svg subtree of part \"icon\", which this promotion then REFUSED (see the named refusal above) — the asset belongs to no part of the promoted contract and is not carried. Before this door it was committed to the library's assets/icons/ directory and referenced by nothing (measured: examples/mui/assets/icons/autocomplete-autocomplete-clearindicator.svg).",
-      "overflow: root.font-weight — presence-prop-driven styling (clickable) — boolean tokensByProp has no spelling (round 4 residue)",
-      "overflow: root.outline-color — presence-prop-driven styling (clickable) — boolean tokensByProp has no spelling (round 4 residue)",
-      "overflow: root.outline-width — presence-prop-driven styling (clickable) — boolean tokensByProp has no spelling (round 4 residue)",
+      "overflow: root.font-weight — presence-prop-driven styling (clickable) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (clickable present) is not",
+      "overflow: root.outline-color — presence-prop-driven styling (clickable) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (clickable present) is not",
+      "overflow: root.outline-width — presence-prop-driven styling (clickable) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (clickable present) is not",
       "overflow: root.padding-left — resolved values differ across variants without correlating to any variant axis (or axis pair/triple) — nothing minted; bind manually",
       "overflow: root.padding-right — resolved values differ across variants without correlating to any variant axis (or axis pair/triple) — nothing minted; bind manually",
       "overflow: root.width — resolved values differ across variants without correlating to any variant axis (or axis pair/triple) — nothing minted; bind manually",
-      "overflow: button.background-color — presence-prop-driven styling (linked) — boolean tokensByProp has no spelling (round 4 residue)",
+      "overflow: button.background-color — presence-prop-driven styling (linked) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (linked present) is not",
       "overflow: icon-3.color — inheritance-only channel with uncarried nested state deltas — the captured value equals this part's ancestor on EVERY plane, and its per-state deltas exceed the nested Part.states vocabulary (plain color-kind refs only); binding the base value would pin all state planes to the resting colour, so the channel stays UNCARRIED and CSS inheritance from the ancestor renders it (leaves exist in the minted tree)",
       "overflow: root.background-color [active] — presence-prop state ref — boolean substitution has no spelling (round 4 residue)",
       "overflow: root.outline-color [disabled] — presence-prop state ref — boolean substitution has no spelling (round 4 residue)",
@@ -7258,7 +7258,7 @@
       {
         "key": "large.on.off.off.enabled__default",
         "channelsCompared": 87,
-        "channelsEqual": 76,
+        "channelsEqual": 77,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7298,12 +7298,6 @@
             "channel": "text-rendering",
             "ours": "auto",
             "theirs": "optimizelegibility"
-          },
-          {
-            "part": "button",
-            "channel": "background-color",
-            "ours": "rgba(239, 239, 239, 1)",
-            "theirs": "rgba(227, 227, 227, 1)"
           },
           {
             "part": "button",
@@ -7770,7 +7764,7 @@
       {
         "key": "large.on.off.off.disabled__default",
         "channelsCompared": 87,
-        "channelsEqual": 73,
+        "channelsEqual": 74,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7822,12 +7816,6 @@
             "channel": "text-rendering",
             "ours": "auto",
             "theirs": "optimizelegibility"
-          },
-          {
-            "part": "button",
-            "channel": "background-color",
-            "ours": "rgba(239, 239, 239, 1)",
-            "theirs": "rgba(227, 227, 227, 1)"
           },
           {
             "part": "button",
@@ -8014,7 +8002,7 @@
       {
         "key": "large.on.off.off.disabled__focus-visible",
         "channelsCompared": 87,
-        "channelsEqual": 73,
+        "channelsEqual": 74,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8066,12 +8054,6 @@
             "channel": "text-rendering",
             "ours": "auto",
             "theirs": "optimizelegibility"
-          },
-          {
-            "part": "button",
-            "channel": "background-color",
-            "ours": "rgba(239, 239, 239, 1)",
-            "theirs": "rgba(227, 227, 227, 1)"
           },
           {
             "part": "button",
@@ -8278,7 +8260,7 @@
           {
             "part": "button",
             "channel": "background-color",
-            "ours": "rgba(239, 239, 239, 1)",
+            "ours": "rgba(227, 227, 227, 1)",
             "theirs": "rgba(212, 212, 212, 1)"
           },
           {
@@ -8468,7 +8450,7 @@
           {
             "part": "button",
             "channel": "background-color",
-            "ours": "rgba(239, 239, 239, 1)",
+            "ours": "rgba(227, 227, 227, 1)",
             "theirs": "rgba(212, 212, 212, 1)"
           },
           {
@@ -8626,7 +8608,7 @@
       {
         "key": "large.on.off.on.disabled__default",
         "channelsCompared": 87,
-        "channelsEqual": 72,
+        "channelsEqual": 73,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8684,12 +8666,6 @@
             "channel": "text-rendering",
             "ours": "auto",
             "theirs": "optimizelegibility"
-          },
-          {
-            "part": "button",
-            "channel": "background-color",
-            "ours": "rgba(239, 239, 239, 1)",
-            "theirs": "rgba(227, 227, 227, 1)"
           },
           {
             "part": "button",
@@ -8882,7 +8858,7 @@
       {
         "key": "large.on.off.on.disabled__focus-visible",
         "channelsCompared": 87,
-        "channelsEqual": 72,
+        "channelsEqual": 73,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8940,12 +8916,6 @@
             "channel": "text-rendering",
             "ours": "auto",
             "theirs": "optimizelegibility"
-          },
-          {
-            "part": "button",
-            "channel": "background-color",
-            "ours": "rgba(239, 239, 239, 1)",
-            "theirs": "rgba(227, 227, 227, 1)"
           },
           {
             "part": "button",

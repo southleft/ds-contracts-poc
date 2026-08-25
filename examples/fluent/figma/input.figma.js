@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "fluent.input",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Input — generated from contract fluent.input v0.2.0 † (45 code-only facts — see plugin report)",
+    "description": "Input — generated from contract fluent.input v0.2.0 † (52 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -44,6 +44,7 @@ const COMPONENTS = [
             "varName": "imported/input/root/width/outline/medium"
           },
           "fill": "imported/input/root/background-color/outline",
+          "stroke": "imported/input/root/border-top-color/outline",
           "effectStack": [],
           "fixedHeight": {
             "px": 32,
@@ -58,6 +59,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -120,6 +122,7 @@ const COMPONENTS = [
             "varName": "imported/input/root/width/outline/small"
           },
           "fill": "imported/input/root/background-color/outline",
+          "stroke": "imported/input/root/border-top-color/outline",
           "effectStack": [],
           "fixedHeight": {
             "px": 24,
@@ -134,6 +137,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/small",
@@ -196,6 +200,7 @@ const COMPONENTS = [
             "varName": "imported/input/root/width/outline/large"
           },
           "fill": "imported/input/root/background-color/outline",
+          "stroke": "imported/input/root/border-top-color/outline",
           "effectStack": [],
           "fixedHeight": {
             "px": 40,
@@ -210,6 +215,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/large",
@@ -272,6 +278,7 @@ const COMPONENTS = [
             "varName": "imported/input/root/width/underline/medium"
           },
           "fill": "imported/input/root/background-color/underline",
+          "stroke": "imported/input/root/border-bottom-color/underline",
           "effectStack": [],
           "fixedHeight": {
             "px": 32,
@@ -286,6 +293,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -348,6 +356,7 @@ const COMPONENTS = [
             "varName": "imported/input/root/width/underline/small"
           },
           "fill": "imported/input/root/background-color/underline",
+          "stroke": "imported/input/root/border-bottom-color/underline",
           "effectStack": [],
           "fixedHeight": {
             "px": 24,
@@ -362,6 +371,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/small",
@@ -424,6 +434,7 @@ const COMPONENTS = [
             "varName": "imported/input/root/width/underline/large"
           },
           "fill": "imported/input/root/background-color/underline",
+          "stroke": "imported/input/root/border-bottom-color/underline",
           "effectStack": [],
           "fixedHeight": {
             "px": 40,
@@ -438,6 +449,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/large",
@@ -515,6 +527,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -592,6 +605,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/small",
@@ -669,6 +683,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/large",
@@ -746,6 +761,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -823,6 +839,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/small",
@@ -900,6 +917,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/large",
@@ -1000,6 +1018,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -1100,6 +1119,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/small",
@@ -1200,6 +1220,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/large",
@@ -1300,6 +1321,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -1400,6 +1422,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/small",
@@ -1500,6 +1523,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/large",
@@ -1572,12 +1596,12 @@ const COMPONENTS = [
             "varName": "imported/input/root/width/outline/medium"
           },
           "fill": "imported/input/root/background-color/outline",
+          "stroke": "imported/shared/color-00000000",
           "effectStack": [],
           "fixedHeight": {
             "px": 32,
             "varName": "imported/input/root/height/medium"
           },
-          "stroke": "imported/shared/color-00000000",
           "strokeOutside": true,
           "children": [
             {
@@ -1588,6 +1612,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -1651,12 +1676,12 @@ const COMPONENTS = [
             "varName": "imported/input/root/width/underline/medium"
           },
           "fill": "imported/input/root/background-color/underline",
+          "stroke": "imported/shared/color-00000000",
           "effectStack": [],
           "fixedHeight": {
             "px": 32,
             "varName": "imported/input/root/height/medium"
           },
-          "stroke": "imported/shared/color-00000000",
           "strokeOutside": true,
           "children": [
             {
@@ -1667,6 +1692,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -1746,6 +1772,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -1825,6 +1852,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -1927,6 +1955,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2029,6 +2058,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2091,6 +2121,7 @@ const COMPONENTS = [
             "varName": "imported/input/root/width/outline/medium"
           },
           "fill": "imported/shared/color-00000000",
+          "stroke": "imported/input/root/border-top-color/outline",
           "effectStack": [],
           "fixedHeight": {
             "px": 32,
@@ -2105,6 +2136,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2168,6 +2200,7 @@ const COMPONENTS = [
             "varName": "imported/input/root/width/underline/medium"
           },
           "fill": "imported/shared/color-00000000",
+          "stroke": "imported/input/root/border-bottom-color/underline",
           "effectStack": [],
           "fixedHeight": {
             "px": 32,
@@ -2182,6 +2215,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2260,6 +2294,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2338,6 +2373,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2439,6 +2475,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2540,6 +2577,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2604,12 +2642,12 @@ const COMPONENTS = [
             "varName": "imported/input/root/width/outline/medium"
           },
           "fill": "imported/input/root/background-color/outline",
+          "stroke": "imported/shared/color-00000000",
           "effectStack": [],
           "fixedHeight": {
             "px": 32,
             "varName": "imported/input/root/height/medium"
           },
-          "stroke": "imported/shared/color-00000000",
           "strokeOutside": true,
           "children": [
             {
@@ -2620,6 +2658,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2683,12 +2722,12 @@ const COMPONENTS = [
             "varName": "imported/input/root/width/underline/medium"
           },
           "fill": "imported/input/root/background-color/underline",
+          "stroke": "imported/shared/color-00000000",
           "effectStack": [],
           "fixedHeight": {
             "px": 32,
             "varName": "imported/input/root/height/medium"
           },
-          "stroke": "imported/shared/color-00000000",
           "strokeOutside": true,
           "children": [
             {
@@ -2699,6 +2738,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2778,6 +2818,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2857,6 +2898,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -2959,6 +3001,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -3061,6 +3104,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -3123,6 +3167,7 @@ const COMPONENTS = [
             "varName": "imported/input/root/width/outline/medium"
           },
           "fill": "imported/input/root/background-color/outline",
+          "stroke": "imported/input/root/border-top-color/outline",
           "effectStack": [],
           "fixedHeight": {
             "px": 32,
@@ -3137,6 +3182,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -3199,6 +3245,7 @@ const COMPONENTS = [
             "varName": "imported/input/root/width/underline/medium"
           },
           "fill": "imported/input/root/background-color/underline",
+          "stroke": "imported/input/root/border-bottom-color/underline",
           "effectStack": [],
           "fixedHeight": {
             "px": 32,
@@ -3213,6 +3260,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -3290,6 +3338,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -3367,6 +3416,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -3467,6 +3517,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -3567,6 +3618,7 @@ const COMPONENTS = [
                 "primary": "MIN",
                 "counter": "CENTER"
               },
+              "grow": true,
               "bindings": {
                 "minWidth": "imported/shared/size-0",
                 "paddingLeft": "imported/input/input/padding-left/medium",
@@ -3679,6 +3731,160 @@ const COMPONENTS = [
       }
     ],
     "codeOnlyFacts": [
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "border-bottom-color [disabled]",
+        "value": "#7676764d",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "border-left-color [disabled]",
+        "value": "#7676764d",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "border-right-color [disabled]",
+        "value": "#7676764d",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "border-top-color [disabled]",
+        "value": "#7676764d",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "caret-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "column-rule-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "outline-color [active]",
+        "value": "#005fcc",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "outline-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "outline-color [focus-visible]",
+        "value": "#005fcc",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "outline-width [active]",
+        "value": "1px",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "outline-width [focus-visible]",
+        "value": "1px",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "row-rule-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "text-decoration-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
+      {
+        "part": "input",
+        "kind": "capture",
+        "channel": "text-emphasis-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 42,
+          "of": 42
+        }
+      },
       {
         "part": "input",
         "kind": "channel",
@@ -3840,7 +4046,7 @@ const COMPONENTS = [
         "kind": "channel",
         "channel": "border-bottom-color",
         "value": "{imported.input.root.border-bottom-color.outline}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "reason": "a Figma node carries ONE strokes paint and the majority of the DRAWN sides claims it — this side's colour disagrees and stays code-only (the one-paint limit, named per side).",
         "variants": {
           "count": 7,
           "of": 42,
@@ -3852,26 +4058,6 @@ const COMPONENTS = [
             "Appearance=Outline, Size=Medium, State=Disabled",
             "Appearance=Outline, Size=Medium, State=Focus Visible",
             "Appearance=Outline, Size=Medium, State=Hover"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-bottom-color",
-        "value": "{imported.input.root.border-bottom-color.underline}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 7,
-          "of": 42,
-          "names": [
-            "Appearance=Underline, Size=Medium",
-            "Appearance=Underline, Size=Small",
-            "Appearance=Underline, Size=Large",
-            "Appearance=Underline, Size=Medium, State=Active",
-            "Appearance=Underline, Size=Medium, State=Disabled",
-            "Appearance=Underline, Size=Medium, State=Focus Visible",
-            "Appearance=Underline, Size=Medium, State=Hover"
           ]
         }
       },
@@ -3955,46 +4141,6 @@ const COMPONENTS = [
         "part": "root",
         "kind": "channel",
         "channel": "border-left-color",
-        "value": "{imported.input.root.border-left-color.outline}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 7,
-          "of": 42,
-          "names": [
-            "Appearance=Outline, Size=Medium",
-            "Appearance=Outline, Size=Small",
-            "Appearance=Outline, Size=Large",
-            "Appearance=Outline, Size=Medium, State=Active",
-            "Appearance=Outline, Size=Medium, State=Disabled",
-            "Appearance=Outline, Size=Medium, State=Focus Visible",
-            "Appearance=Outline, Size=Medium, State=Hover"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-left-color",
-        "value": "{imported.input.root.border-left-color.underline}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 7,
-          "of": 42,
-          "names": [
-            "Appearance=Underline, Size=Medium",
-            "Appearance=Underline, Size=Small",
-            "Appearance=Underline, Size=Large",
-            "Appearance=Underline, Size=Medium, State=Active",
-            "Appearance=Underline, Size=Medium, State=Disabled",
-            "Appearance=Underline, Size=Medium, State=Focus Visible",
-            "Appearance=Underline, Size=Medium, State=Hover"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-left-color",
         "value": "{imported.shared.color-e0e0e0}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
@@ -4071,46 +4217,6 @@ const COMPONENTS = [
         "part": "root",
         "kind": "channel",
         "channel": "border-right-color",
-        "value": "{imported.input.root.border-right-color.outline}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 7,
-          "of": 42,
-          "names": [
-            "Appearance=Outline, Size=Medium",
-            "Appearance=Outline, Size=Small",
-            "Appearance=Outline, Size=Large",
-            "Appearance=Outline, Size=Medium, State=Active",
-            "Appearance=Outline, Size=Medium, State=Disabled",
-            "Appearance=Outline, Size=Medium, State=Focus Visible",
-            "Appearance=Outline, Size=Medium, State=Hover"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-right-color",
-        "value": "{imported.input.root.border-right-color.underline}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 7,
-          "of": 42,
-          "names": [
-            "Appearance=Underline, Size=Medium",
-            "Appearance=Underline, Size=Small",
-            "Appearance=Underline, Size=Large",
-            "Appearance=Underline, Size=Medium, State=Active",
-            "Appearance=Underline, Size=Medium, State=Disabled",
-            "Appearance=Underline, Size=Medium, State=Focus Visible",
-            "Appearance=Underline, Size=Medium, State=Hover"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-right-color",
         "value": "{imported.shared.color-e0e0e0}",
         "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
         "variants": {
@@ -4180,46 +4286,6 @@ const COMPONENTS = [
             "Appearance=Filled Lighter, Size=Medium, State=Hover",
             "Appearance=Filled Darker Shadow, Size=Medium, State=Hover",
             "Appearance=Filled Lighter Shadow, Size=Medium, State=Hover"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-top-color",
-        "value": "{imported.input.root.border-top-color.outline}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 7,
-          "of": 42,
-          "names": [
-            "Appearance=Outline, Size=Medium",
-            "Appearance=Outline, Size=Small",
-            "Appearance=Outline, Size=Large",
-            "Appearance=Outline, Size=Medium, State=Active",
-            "Appearance=Outline, Size=Medium, State=Disabled",
-            "Appearance=Outline, Size=Medium, State=Focus Visible",
-            "Appearance=Outline, Size=Medium, State=Hover"
-          ]
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-top-color",
-        "value": "{imported.input.root.border-top-color.underline}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 7,
-          "of": 42,
-          "names": [
-            "Appearance=Underline, Size=Medium",
-            "Appearance=Underline, Size=Small",
-            "Appearance=Underline, Size=Large",
-            "Appearance=Underline, Size=Medium, State=Active",
-            "Appearance=Underline, Size=Medium, State=Disabled",
-            "Appearance=Underline, Size=Medium, State=Focus Visible",
-            "Appearance=Underline, Size=Medium, State=Hover"
           ]
         }
       },

@@ -22,11 +22,12 @@ declared on that wrapper div, never on `:root` (RECON §2.3).
 | spinner.figma.js | fluent.spinner | size(8)×appearance(2)×labelPosition(4) | 64 | tokens 2123 (261 aliased) · 1 set(s) built | 32 |
 | switch.figma.js | fluent.switch | checked(2)×labelPosition(3) | 6 | tokens 2123 (261 aliased) · 1 set(s) built | 0 |
 | tab-list.figma.js | fluent.tab-list | appearance(4)×size(3)×orientation(2) | 24 | tokens 2123 (261 aliased) · 1 set(s) built | 0 |
-| tooltip.figma.js | fluent.tooltip | appearance(2) | 2 | tokens 2123 (261 aliased) · 1 set(s) built | 0 |
 
-**11 scripts · 408 variants total · 32 text-caused
+**11 scripts · 406 variants total · 32 text-caused
 overflow(s) (the corpus-wide text-wrapping gap, counted not hidden).** Each script ran to
 completion against the mocked Figma (00-tokens.figma.js first — 2123 variables
 including the Figma-native ALIAS pass for source-aliased minted leaves).
 
-**0 failures.**
+## FAILURES (1)
+
+- tooltip.figma.js: headless execute FAILED — tooltip root-text pin: the bubble copy NOW reaches the canvas — the anatomy.root.text emitter gap is closed; delete this pin and record the fix

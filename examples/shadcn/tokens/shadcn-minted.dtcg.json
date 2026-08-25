@@ -119,6 +119,10 @@
         "$value": "#a1a1a1",
         "$type": "color"
       },
+      "color-e5e5e5": {
+        "$value": "#e5e5e5",
+        "$type": "color"
+      },
       "color-737373": {
         "$value": "#737373",
         "$type": "color"
@@ -1350,6 +1354,10 @@
         },
         "font-size": {
           "$value": "14px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "36px",
           "$type": "dimension"
         },
         "line-height": {

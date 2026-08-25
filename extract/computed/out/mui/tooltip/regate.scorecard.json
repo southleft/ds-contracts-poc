@@ -114,14 +114,14 @@
         "key": "on__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 8,
+        "channelsMismatched": 9,
         "unscorable": "no-original"
       },
       {
         "key": "off__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 3,
+        "channelsMismatched": 2,
         "unscorable": "no-original"
       },
       {
@@ -177,15 +177,15 @@
         2
       ],
       [
-        "label.margin-bottom",
-        1
-      ],
-      [
         "label.bottom",
         1
       ],
       [
         "label.left",
+        1
+      ],
+      [
+        "label.margin-bottom",
         1
       ],
       [
@@ -207,8 +207,8 @@
     ],
     "namedLosses": [
       "promotion: pseudo-decor-outside-grammar: tooltip-arrow::before paints at position:static (11x7.79688, opacity 1) — the bounded decor grammar reads position:absolute boxes only; an in-flow decor box is NOT promoted and NOT on the canvas",
-      "overflow: root.height — presence-prop-driven styling (arrow) — boolean tokensByProp has no spelling (round 4 residue)",
-      "overflow: label.margin-bottom — presence-prop-driven styling (arrow) — boolean tokensByProp has no spelling (round 4 residue)",
+      "overflow: root.height — presence-prop-driven styling (arrow) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (arrow present) is not",
+      "overflow: label.margin-bottom — presence-prop-driven styling (arrow) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (arrow present) is not",
       "code-only: label.bottom — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.left — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -232,17 +232,11 @@
       {
         "key": "off__default",
         "channelsCompared": 47,
-        "channelsEqual": 44,
+        "channelsEqual": 45,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "label",
-            "channel": "margin-bottom",
-            "ours": "0px",
-            "theirs": "2px"
-          },
           {
             "part": "label",
             "channel": "overflow-wrap",
@@ -291,7 +285,7 @@
       {
         "key": "on__default",
         "channelsCompared": 74,
-        "channelsEqual": 66,
+        "channelsEqual": 65,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -306,6 +300,12 @@
             "part": "label",
             "channel": "left",
             "ours": "auto",
+            "theirs": "0px"
+          },
+          {
+            "part": "label",
+            "channel": "margin-bottom",
+            "ours": "2px",
             "theirs": "0px"
           },
           {

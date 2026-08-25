@@ -6,6 +6,42 @@
   "declared": {
     "base": [
       {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "when": {
+          "prop": "modalType",
+          "equals": "non-modal"
+        }
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid",
+        "when": {
+          "prop": "modalType",
+          "equals": "non-modal"
+        }
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid",
+        "when": {
+          "prop": "modalType",
+          "equals": "non-modal"
+        }
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid",
+        "when": {
+          "prop": "modalType",
+          "equals": "non-modal"
+        }
+      },
+      {
         "part": "dialogbody-2",
         "channel": "box-sizing",
         "value": "border-box"
@@ -258,8 +294,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 448,
-      "cellsEqual": 370,
-      "pctEqual": 82.58928571428571,
+      "cellsEqual": 378,
+      "pctEqual": 84.375,
       "rowsFullyEqual": 0,
       "rows": 12
     },
@@ -285,7 +321,7 @@
       "mintedLeavesUnfolded": 98,
       "baseBindings": 160,
       "stateBindings": 0,
-      "codeOnlyChannels": 54,
+      "codeOnlyChannels": 50,
       "overflowBindings": 0,
       "folds": 18
     },
@@ -294,7 +330,7 @@
         "key": "non-modal__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 34,
+        "channelsMismatched": 26,
         "unscorable": "no-original"
       },
       {
@@ -414,10 +450,6 @@
       "promotion: non-painting-part: part-1-0 <i> renders NO INK in any combo it appears in (content-visibility: hidden) and no descendant paints — NOT promoted. A part that paints nowhere must carry the fact that hides it (declared display:none / an opacity token) or be refused by name; neither `visibility` nor `content-visibility` has a carried spelling, so promoting this box would put a VISIBLE frame on the canvas that the browser draws nowhere (the general form of the SVG <title> defect)",
       "promotion: grid-two-dimensional: grid resolves 3 columns × 3 rows — a two-dimensional grid has no auto-layout spelling (one axis would have to be invented); no layout carried (named refusal) (part dialogbody)",
       "promotion: non-painting-part: part-1-2 <i> renders NO INK in any combo it appears in (content-visibility: hidden) and no descendant paints — NOT promoted. A part that paints nowhere must carry the fact that hides it (declared display:none / an opacity token) or be refused by name; neither `visibility` nor `content-visibility` has a carried spelling, so promoting this box would put a VISIBLE frame on the canvas that the browser draws nowhere (the general form of the SVG <title> defect)",
-      "code-only: root.border-bottom-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: root.border-left-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: root.border-right-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: root.border-top-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: root.box-sizing — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: root.max-height — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: root.max-width — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
@@ -655,59 +687,11 @@
       {
         "key": "non-modal__default",
         "channelsCompared": 128,
-        "channelsEqual": 94,
+        "channelsEqual": 102,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
           {
             "part": "root",
             "channel": "max-height",

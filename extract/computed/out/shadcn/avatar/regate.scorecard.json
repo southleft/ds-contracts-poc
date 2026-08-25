@@ -198,7 +198,7 @@
     },
     "shippedMinted": {
       "path": "examples/shadcn/tokens/shadcn-minted.dtcg.json",
-      "leavesAdded": 347,
+      "leavesAdded": 349,
       "divergent": [
         {
           "token": "imported.avatar.label.background-color",

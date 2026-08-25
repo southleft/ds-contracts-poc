@@ -91,6 +91,9 @@
             "overflow-y": "clip",
             "text-align": "start"
           },
+          "layout": {
+            "grow": true
+          },
           "declaredStates": {
             "disabled": {
               "cursor": "not-allowed"
@@ -139,6 +142,92 @@
                 }
               }
             }
+          ],
+          "codeOnly": [
+            {
+              "state": "active",
+              "channel": "outline-color",
+              "value": "#005fcc",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "active",
+              "channel": "outline-width",
+              "value": "1px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-bottom-color",
+              "value": "#7676764d",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-left-color",
+              "value": "#7676764d",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-right-color",
+              "value": "#7676764d",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-top-color",
+              "value": "#7676764d",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "caret-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "column-rule-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "outline-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "row-rule-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "text-decoration-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "text-emphasis-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-color",
+              "value": "#005fcc",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-width",
+              "value": "1px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
           ]
         }
       },
@@ -147,6 +236,53 @@
         "box-sizing": "border-box",
         "position": "relative"
       },
+      "stylesWhen": [
+        {
+          "prop": "appearance",
+          "equals": "outline",
+          "styles": {
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "prop": "appearance",
+          "equals": "filled-darker",
+          "styles": {
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "prop": "appearance",
+          "equals": "filled-lighter",
+          "styles": {
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "prop": "appearance",
+          "equals": "filled-darker-shadow",
+          "styles": {
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid"
+          }
+        },
+        {
+          "prop": "appearance",
+          "equals": "filled-lighter-shadow",
+          "styles": {
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid"
+          }
+        }
+      ],
       "declaredStates": {
         "active": {
           "outline-style": "solid"

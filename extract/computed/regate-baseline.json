@@ -1,6 +1,6 @@
 {
   "_marker": "REGATE DRIFT BASELINE — what extract/computed/regate.ts (OFFLINE re-fuse of the committed captured truth through the CURRENT engine) produces, per component. NOT a copy of the harness scorecards: where the two differ, `gapCause` names why (docs/20-regate-drift.md). Re-record deliberately with `npm run extract:computed:drift -- --write` and say what moved. Every row is also the committed out/<lib>/<comp>/regate.scorecard.json — `npm run extract:computed:drift` (VERIFY, fast lane) holds the two together without a browser; `extract:computed:drift:remeasure` (full lane) re-fuses and compares.",
-  "recordedAt": "2026-08-23",
+  "recordedAt": "2026-08-24",
   "rows": [
     {
       "library": "altitude",
@@ -104,20 +104,20 @@
     {
       "library": "antd",
       "component": "Button",
-      "rerunPctEqual": 83.89307228915662,
+      "rerunPctEqual": 91.6039156626506,
       "cellsCompared": 79680,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 83.89307228915662,
-      "gapCause": ""
+      "gapCause": "INPUT CENSUS ROUND (2026-08-24, three doors, all named) — re-recorded DELIBERATELY. (1) border-style-by-axis carriage: the heal now CARRIES observed `solid` as per-value stylesWhen rules instead of skipping it as \"the emitters' standing stroke style\" — true of the canvas, FALSE of CSS for TOKEN widths (borderStyleDecls refuses to synthesise from a width whose value it cannot see — the altitude scar), so fluent's outline Input carried border-top-width.outline=1px and painted no top border. Every row this moves goes UP: the emit-html gate page now draws the borders the captured component really has. (2) resetSuppliedBorderColor: a border colour EQUAL to the in-page control is admitted when the side draws (non-zero width, non-none style) and the control's own border colour differs from its `color` — the UA's border colour is currentcolor, so a control reading anything else was coloured by the library's global reset (shadcn `* { border-color: var(--border) }`, Tailwind preflight's gray-200); the census wall CODE-CANVAS-DISAGREE:root.border-color-unspecified was exactly this subtraction. Rows this touches gain compared cells; the shadcn rows move DOWN only because the NEW border-colour cells join the already-priced oklch-comparator class (captured `oklch(0.922 0 0)` vs rendered `rgba(229,229,229,1)` — same colour, different serialisation; the same class the committed shadcn Button scorecard carries on background-color/color at 104-384 cells). (3) width-aware majority stroke (canvas only; no gate-page effect) rides the same round. Offline-vs-harness gaps quoted by VERIFY are these three doors applied to committed captured truth the harness scorecards predate; a recapture would move the harness numbers the same direction."
     },
     {
       "library": "antd",
       "component": "Card",
-      "rerunPctEqual": 91.35338345864662,
+      "rerunPctEqual": 94.3609022556391,
       "cellsCompared": 2128,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 91.35338345864662,
-      "gapCause": ""
+      "gapCause": "INPUT CENSUS ROUND (2026-08-24, three doors, all named) — re-recorded DELIBERATELY. (1) border-style-by-axis carriage: the heal now CARRIES observed `solid` as per-value stylesWhen rules instead of skipping it as \"the emitters' standing stroke style\" — true of the canvas, FALSE of CSS for TOKEN widths (borderStyleDecls refuses to synthesise from a width whose value it cannot see — the altitude scar), so fluent's outline Input carried border-top-width.outline=1px and painted no top border. Every row this moves goes UP: the emit-html gate page now draws the borders the captured component really has. (2) resetSuppliedBorderColor: a border colour EQUAL to the in-page control is admitted when the side draws (non-zero width, non-none style) and the control's own border colour differs from its `color` — the UA's border colour is currentcolor, so a control reading anything else was coloured by the library's global reset (shadcn `* { border-color: var(--border) }`, Tailwind preflight's gray-200); the census wall CODE-CANVAS-DISAGREE:root.border-color-unspecified was exactly this subtraction. Rows this touches gain compared cells; the shadcn rows move DOWN only because the NEW border-colour cells join the already-priced oklch-comparator class (captured `oklch(0.922 0 0)` vs rendered `rgba(229,229,229,1)` — same colour, different serialisation; the same class the committed shadcn Button scorecard carries on background-color/color at 104-384 cells). (3) width-aware majority stroke (canvas only; no gate-page effect) rides the same round. Offline-vs-harness gaps quoted by VERIFY are these three doors applied to committed captured truth the harness scorecards predate; a recapture would move the harness numbers the same direction."
     },
     {
       "library": "antd",
@@ -131,11 +131,11 @@
     {
       "library": "antd",
       "component": "Input",
-      "rerunPctEqual": 79.87588652482269,
+      "rerunPctEqual": 90.51418439716312,
       "cellsCompared": 13536,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 79.87588652482269,
-      "gapCause": ""
+      "gapCause": "INPUT CENSUS ROUND (2026-08-24, three doors, all named) — re-recorded DELIBERATELY. (1) border-style-by-axis carriage: the heal now CARRIES observed `solid` as per-value stylesWhen rules instead of skipping it as \"the emitters' standing stroke style\" — true of the canvas, FALSE of CSS for TOKEN widths (borderStyleDecls refuses to synthesise from a width whose value it cannot see — the altitude scar), so fluent's outline Input carried border-top-width.outline=1px and painted no top border. Every row this moves goes UP: the emit-html gate page now draws the borders the captured component really has. (2) resetSuppliedBorderColor: a border colour EQUAL to the in-page control is admitted when the side draws (non-zero width, non-none style) and the control's own border colour differs from its `color` — the UA's border colour is currentcolor, so a control reading anything else was coloured by the library's global reset (shadcn `* { border-color: var(--border) }`, Tailwind preflight's gray-200); the census wall CODE-CANVAS-DISAGREE:root.border-color-unspecified was exactly this subtraction. Rows this touches gain compared cells; the shadcn rows move DOWN only because the NEW border-colour cells join the already-priced oklch-comparator class (captured `oklch(0.922 0 0)` vs rendered `rgba(229,229,229,1)` — same colour, different serialisation; the same class the committed shadcn Button scorecard carries on background-color/color at 104-384 cells). (3) width-aware majority stroke (canvas only; no gate-page effect) rides the same round. Offline-vs-harness gaps quoted by VERIFY are these three doors applied to committed captured truth the harness scorecards predate; a recapture would move the harness numbers the same direction."
     },
     {
       "library": "antd",
@@ -284,7 +284,7 @@
     {
       "library": "carbon",
       "component": "Button",
-      "rerunPctEqual": 79.42154255319149,
+      "rerunPctEqual": 94.31515957446808,
       "cellsCompared": 21056,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 78.9741847826087,
@@ -410,7 +410,7 @@
     {
       "library": "fluent",
       "component": "Dialog",
-      "rerunPctEqual": 82.58928571428571,
+      "rerunPctEqual": 84.375,
       "cellsCompared": 448,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 82.3529411764706,
@@ -419,11 +419,11 @@
     {
       "library": "fluent",
       "component": "Input",
-      "rerunPctEqual": 75.25510204081633,
+      "rerunPctEqual": 85.45918367346938,
       "cellsCompared": 7056,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 75.25510204081633,
-      "gapCause": ""
+      "gapCause": "INPUT CENSUS ROUND (2026-08-24, three doors, all named) — re-recorded DELIBERATELY. (1) border-style-by-axis carriage: the heal now CARRIES observed `solid` as per-value stylesWhen rules instead of skipping it as \"the emitters' standing stroke style\" — true of the canvas, FALSE of CSS for TOKEN widths (borderStyleDecls refuses to synthesise from a width whose value it cannot see — the altitude scar), so fluent's outline Input carried border-top-width.outline=1px and painted no top border. Every row this moves goes UP: the emit-html gate page now draws the borders the captured component really has. (2) resetSuppliedBorderColor: a border colour EQUAL to the in-page control is admitted when the side draws (non-zero width, non-none style) and the control's own border colour differs from its `color` — the UA's border colour is currentcolor, so a control reading anything else was coloured by the library's global reset (shadcn `* { border-color: var(--border) }`, Tailwind preflight's gray-200); the census wall CODE-CANVAS-DISAGREE:root.border-color-unspecified was exactly this subtraction. Rows this touches gain compared cells; the shadcn rows move DOWN only because the NEW border-colour cells join the already-priced oklch-comparator class (captured `oklch(0.922 0 0)` vs rendered `rgba(229,229,229,1)` — same colour, different serialisation; the same class the committed shadcn Button scorecard carries on background-color/color at 104-384 cells). (3) width-aware majority stroke (canvas only; no gate-page effect) rides the same round. Offline-vs-harness gaps quoted by VERIFY are these three doors applied to committed captured truth the harness scorecards predate; a recapture would move the harness numbers the same direction."
     },
     {
       "library": "fluent",
@@ -446,7 +446,7 @@
     {
       "library": "fluent",
       "component": "TabList",
-      "rerunPctEqual": 65.45493197278911,
+      "rerunPctEqual": 68.17602040816327,
       "cellsCompared": 28224,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 64.97844827586206,
@@ -464,7 +464,7 @@
     {
       "library": "mui",
       "component": "Accordion",
-      "rerunPctEqual": 91.85323383084577,
+      "rerunPctEqual": 93.84328358208955,
       "cellsCompared": 6432,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 91.8125,
@@ -473,11 +473,11 @@
     {
       "library": "mui",
       "component": "Alert",
-      "rerunPctEqual": 96.70781893004116,
+      "rerunPctEqual": 100,
       "cellsCompared": 3888,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 96.70781893004116,
-      "gapCause": ""
+      "gapCause": "INPUT CENSUS ROUND (2026-08-24, three doors, all named) — re-recorded DELIBERATELY. (1) border-style-by-axis carriage: the heal now CARRIES observed `solid` as per-value stylesWhen rules instead of skipping it as \"the emitters' standing stroke style\" — true of the canvas, FALSE of CSS for TOKEN widths (borderStyleDecls refuses to synthesise from a width whose value it cannot see — the altitude scar), so fluent's outline Input carried border-top-width.outline=1px and painted no top border. Every row this moves goes UP: the emit-html gate page now draws the borders the captured component really has. (2) resetSuppliedBorderColor: a border colour EQUAL to the in-page control is admitted when the side draws (non-zero width, non-none style) and the control's own border colour differs from its `color` — the UA's border colour is currentcolor, so a control reading anything else was coloured by the library's global reset (shadcn `* { border-color: var(--border) }`, Tailwind preflight's gray-200); the census wall CODE-CANVAS-DISAGREE:root.border-color-unspecified was exactly this subtraction. Rows this touches gain compared cells; the shadcn rows move DOWN only because the NEW border-colour cells join the already-priced oklch-comparator class (captured `oklch(0.922 0 0)` vs rendered `rgba(229,229,229,1)` — same colour, different serialisation; the same class the committed shadcn Button scorecard carries on background-color/color at 104-384 cells). (3) width-aware majority stroke (canvas only; no gate-page effect) rides the same round. Offline-vs-harness gaps quoted by VERIFY are these three doors applied to committed captured truth the harness scorecards predate; a recapture would move the harness numbers the same direction."
     },
     {
       "library": "mui",
@@ -518,11 +518,11 @@
     {
       "library": "mui",
       "component": "Button",
-      "rerunPctEqual": 86.35361552028219,
+      "rerunPctEqual": 91.29188712522046,
       "cellsCompared": 27216,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 86.35361552028219,
-      "gapCause": ""
+      "gapCause": "INPUT CENSUS ROUND (2026-08-24, three doors, all named) — re-recorded DELIBERATELY. (1) border-style-by-axis carriage: the heal now CARRIES observed `solid` as per-value stylesWhen rules instead of skipping it as \"the emitters' standing stroke style\" — true of the canvas, FALSE of CSS for TOKEN widths (borderStyleDecls refuses to synthesise from a width whose value it cannot see — the altitude scar), so fluent's outline Input carried border-top-width.outline=1px and painted no top border. Every row this moves goes UP: the emit-html gate page now draws the borders the captured component really has. (2) resetSuppliedBorderColor: a border colour EQUAL to the in-page control is admitted when the side draws (non-zero width, non-none style) and the control's own border colour differs from its `color` — the UA's border colour is currentcolor, so a control reading anything else was coloured by the library's global reset (shadcn `* { border-color: var(--border) }`, Tailwind preflight's gray-200); the census wall CODE-CANVAS-DISAGREE:root.border-color-unspecified was exactly this subtraction. Rows this touches gain compared cells; the shadcn rows move DOWN only because the NEW border-colour cells join the already-priced oklch-comparator class (captured `oklch(0.922 0 0)` vs rendered `rgba(229,229,229,1)` — same colour, different serialisation; the same class the committed shadcn Button scorecard carries on background-color/color at 104-384 cells). (3) width-aware majority stroke (canvas only; no gate-page effect) rides the same round. Offline-vs-harness gaps quoted by VERIFY are these three doors applied to committed captured truth the harness scorecards predate; a recapture would move the harness numbers the same direction."
     },
     {
       "library": "mui",
@@ -545,7 +545,7 @@
     {
       "library": "mui",
       "component": "Chip",
-      "rerunPctEqual": 90.1639344262295,
+      "rerunPctEqual": 96.72131147540983,
       "cellsCompared": 6832,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 90.1639344262295,
@@ -581,7 +581,7 @@
     {
       "library": "mui",
       "component": "Drawer",
-      "rerunPctEqual": 80.85106382978724,
+      "rerunPctEqual": 82.97872340425532,
       "cellsCompared": 94,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 80.43478260869566,
@@ -653,7 +653,7 @@
     {
       "library": "mui",
       "component": "Paper",
-      "rerunPctEqual": 88.23529411764706,
+      "rerunPctEqual": 100,
       "cellsCompared": 1088,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 87.87878787878788,
@@ -680,11 +680,11 @@
     {
       "library": "mui",
       "component": "Slider",
-      "rerunPctEqual": 89.44805194805195,
+      "rerunPctEqual": 92.04545454545455,
       "cellsCompared": 7392,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 89.44805194805195,
-      "gapCause": ""
+      "gapCause": "INPUT CENSUS ROUND (2026-08-24, three doors, all named) — re-recorded DELIBERATELY. (1) border-style-by-axis carriage: the heal now CARRIES observed `solid` as per-value stylesWhen rules instead of skipping it as \"the emitters' standing stroke style\" — true of the canvas, FALSE of CSS for TOKEN widths (borderStyleDecls refuses to synthesise from a width whose value it cannot see — the altitude scar), so fluent's outline Input carried border-top-width.outline=1px and painted no top border. Every row this moves goes UP: the emit-html gate page now draws the borders the captured component really has. (2) resetSuppliedBorderColor: a border colour EQUAL to the in-page control is admitted when the side draws (non-zero width, non-none style) and the control's own border colour differs from its `color` — the UA's border colour is currentcolor, so a control reading anything else was coloured by the library's global reset (shadcn `* { border-color: var(--border) }`, Tailwind preflight's gray-200); the census wall CODE-CANVAS-DISAGREE:root.border-color-unspecified was exactly this subtraction. Rows this touches gain compared cells; the shadcn rows move DOWN only because the NEW border-colour cells join the already-priced oklch-comparator class (captured `oklch(0.922 0 0)` vs rendered `rgba(229,229,229,1)` — same colour, different serialisation; the same class the committed shadcn Button scorecard carries on background-color/color at 104-384 cells). (3) width-aware majority stroke (canvas only; no gate-page effect) rides the same round. Offline-vs-harness gaps quoted by VERIFY are these three doors applied to committed captured truth the harness scorecards predate; a recapture would move the harness numbers the same direction."
     },
     {
       "library": "mui",
@@ -815,7 +815,7 @@
     {
       "library": "polaris",
       "component": "Tag",
-      "rerunPctEqual": 81.55133483862399,
+      "rerunPctEqual": 81.6177447204144,
       "cellsCompared": 7529,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.01607890825564,
@@ -851,8 +851,8 @@
     {
       "library": "shadcn",
       "component": "Alert",
-      "rerunPctEqual": 66.10169491525424,
-      "cellsCompared": 472,
+      "rerunPctEqual": 61.904761904761905,
+      "cellsCompared": 504,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 61.40350877192982,
       "gapCause": "ENGINE MOVED SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): cells compared 456 -> 472, cells equal 280 -> 312 — 16 added cell(s) of which 32 equal. The harness number is the capture-time engine and is NOT re-captured; the lift(s) responsible are not bisected. The 2026-08-09 baseline pinned this row at 61.404/456 cells, the pre-lift engine; the committed regate.scorecard.json beside it had already been overwritten by a later run and disagreed with that row until this re-record."
@@ -905,17 +905,17 @@
     {
       "library": "shadcn",
       "component": "Input",
-      "rerunPctEqual": 93.10344827586206,
-      "cellsCompared": 232,
+      "rerunPctEqual": 81.81818181818181,
+      "cellsCompared": 264,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 93.10344827586206,
-      "gapCause": ""
+      "gapCause": "INPUT CENSUS ROUND (2026-08-24, three doors, all named) — re-recorded DELIBERATELY. (1) border-style-by-axis carriage: the heal now CARRIES observed `solid` as per-value stylesWhen rules instead of skipping it as \"the emitters' standing stroke style\" — true of the canvas, FALSE of CSS for TOKEN widths (borderStyleDecls refuses to synthesise from a width whose value it cannot see — the altitude scar), so fluent's outline Input carried border-top-width.outline=1px and painted no top border. Every row this moves goes UP: the emit-html gate page now draws the borders the captured component really has. (2) resetSuppliedBorderColor: a border colour EQUAL to the in-page control is admitted when the side draws (non-zero width, non-none style) and the control's own border colour differs from its `color` — the UA's border colour is currentcolor, so a control reading anything else was coloured by the library's global reset (shadcn `* { border-color: var(--border) }`, Tailwind preflight's gray-200); the census wall CODE-CANVAS-DISAGREE:root.border-color-unspecified was exactly this subtraction. Rows this touches gain compared cells; the shadcn rows move DOWN only because the NEW border-colour cells join the already-priced oklch-comparator class (captured `oklch(0.922 0 0)` vs rendered `rgba(229,229,229,1)` — same colour, different serialisation; the same class the committed shadcn Button scorecard carries on background-color/color at 104-384 cells). (3) width-aware majority stroke (canvas only; no gate-page effect) rides the same round. Offline-vs-harness gaps quoted by VERIFY are these three doors applied to committed captured truth the harness scorecards predate; a recapture would move the harness numbers the same direction."
     },
     {
       "library": "shadcn",
       "component": "Select",
-      "rerunPctEqual": 74.34210526315789,
-      "cellsCompared": 456,
+      "rerunPctEqual": 69.4672131147541,
+      "cellsCompared": 488,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 73.88392857142857,
       "gapCause": "VOCABULARY LIFT SINCE CAPTURE (measured 2026-08-23, re-record at d5b5b0b1): the current engine compares 8 more cell(s) than the engine the harness scorecard was captured with (448 -> 456) and every added cell is EQUAL (331 -> 339 equal), so the percentage rises by exactly the added cells; no previously-compared cell changed verdict. The harness number is the capture-time engine and is NOT re-captured. Which lift added the channel is not bisected. The 2026-08-09 baseline pinned this row at 73.884/448 cells, the pre-lift engine; the committed regate.scorecard.json beside it had already been overwritten by a later run and disagreed with that row until this re-record."

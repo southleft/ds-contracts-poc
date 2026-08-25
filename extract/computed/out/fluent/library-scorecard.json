@@ -118,9 +118,9 @@
       "combos": 36,
       "pixelPerfect": "0/144",
       "sourceFacts": 261,
-      "namedRefusals": 5,
+      "namedRefusals": 2,
       "refusalBreakdown": {
-        "codeOnlyChannels": 5,
+        "codeOnlyChannels": 2,
         "pairwiseRefusals": 0,
         "stateOverflow": 0,
         "bindingContradictions": 0
@@ -206,7 +206,7 @@
     "measured": 11,
     "weightedFloorPct": 80.75755516288342,
     "cellsCompared": 132426,
-    "namedRefusals": 146,
+    "namedRefusals": 143,
     "openQueue": 0,
     "quarantined": 0
   }

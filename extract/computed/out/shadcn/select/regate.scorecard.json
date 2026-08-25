@@ -153,9 +153,9 @@
     "combos": 2,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 456,
+      "cellsCompared": 488,
       "cellsEqual": 339,
-      "pctEqual": 74.34210526315789,
+      "pctEqual": 69.4672131147541,
       "rowsFullyEqual": 0,
       "rows": 8
     },
@@ -177,9 +177,9 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 15,
-      "mintedLeavesUnfolded": 14,
-      "baseBindings": 30,
+      "mintedLeaves": 19,
+      "mintedLeavesUnfolded": 18,
+      "baseBindings": 37,
       "stateBindings": 7,
       "codeOnlyChannels": 9,
       "overflowBindings": 0,
@@ -190,56 +190,56 @@
         "key": "enabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 15,
+        "channelsMismatched": 19,
         "unscorable": "no-original"
       },
       {
         "key": "disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 15,
+        "channelsMismatched": 19,
         "unscorable": "no-original"
       },
       {
         "key": "disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 15,
+        "channelsMismatched": 19,
         "unscorable": "no-original"
       },
       {
         "key": "disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 15,
+        "channelsMismatched": 19,
         "unscorable": "no-original"
       },
       {
         "key": "disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 15,
+        "channelsMismatched": 19,
         "unscorable": "no-original"
       },
       {
         "key": "enabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 14,
+        "channelsMismatched": 18,
         "unscorable": "no-original"
       },
       {
         "key": "enabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 14,
+        "channelsMismatched": 18,
         "unscorable": "no-original"
       },
       {
         "key": "enabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 14,
+        "channelsMismatched": 18,
         "unscorable": "no-original"
       }
     ],
@@ -250,6 +250,22 @@
       ],
       [
         "root.--tw-shadow",
+        8
+      ],
+      [
+        "root.border-bottom-color",
+        8
+      ],
+      [
+        "root.border-left-color",
+        8
+      ],
+      [
+        "root.border-right-color",
+        8
+      ],
+      [
+        "root.border-top-color",
         8
       ],
       [
@@ -287,22 +303,6 @@
       [
         "label.column-rule-color",
         8
-      ],
-      [
-        "label.row-rule-color",
-        8
-      ],
-      [
-        "label.text-decoration-color",
-        8
-      ],
-      [
-        "label.text-emphasis-color",
-        8
-      ],
-      [
-        "label.cursor",
-        4
       ]
     ],
     "namedLosses": [
@@ -322,13 +322,13 @@
     },
     "shippedMinted": {
       "path": "examples/shadcn/tokens/shadcn-minted.dtcg.json",
-      "leavesAdded": 350,
+      "leavesAdded": 351,
       "divergent": []
     },
     "rows": [
       {
         "key": "enabled__default",
-        "channelsCompared": 57,
+        "channelsCompared": 61,
         "channelsEqual": 43,
         "pctExact": null,
         "pctAA": null,
@@ -345,6 +345,30 @@
             "channel": "--tw-shadow",
             "ours": "",
             "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "root",
@@ -423,7 +447,7 @@
       },
       {
         "key": "enabled__hover",
-        "channelsCompared": 57,
+        "channelsCompared": 61,
         "channelsEqual": 43,
         "pctExact": null,
         "pctAA": null,
@@ -440,6 +464,30 @@
             "channel": "--tw-shadow",
             "ours": "",
             "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "root",
@@ -518,7 +566,7 @@
       },
       {
         "key": "enabled__focus-visible",
-        "channelsCompared": 57,
+        "channelsCompared": 61,
         "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
@@ -535,6 +583,30 @@
             "channel": "--tw-shadow",
             "ours": "",
             "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.708 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.708 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.708 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.708 0 0)"
           },
           {
             "part": "root",
@@ -619,7 +691,7 @@
       },
       {
         "key": "enabled__active",
-        "channelsCompared": 57,
+        "channelsCompared": 61,
         "channelsEqual": 43,
         "pctExact": null,
         "pctAA": null,
@@ -636,6 +708,30 @@
             "channel": "--tw-shadow",
             "ours": "",
             "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "root",
@@ -714,7 +810,7 @@
       },
       {
         "key": "disabled__default",
-        "channelsCompared": 57,
+        "channelsCompared": 61,
         "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
@@ -731,6 +827,30 @@
             "channel": "--tw-shadow",
             "ours": "",
             "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "root",
@@ -815,7 +935,7 @@
       },
       {
         "key": "disabled__hover",
-        "channelsCompared": 57,
+        "channelsCompared": 61,
         "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
@@ -832,6 +952,30 @@
             "channel": "--tw-shadow",
             "ours": "",
             "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "root",
@@ -916,7 +1060,7 @@
       },
       {
         "key": "disabled__focus-visible",
-        "channelsCompared": 57,
+        "channelsCompared": 61,
         "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
@@ -933,6 +1077,30 @@
             "channel": "--tw-shadow",
             "ours": "",
             "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "root",
@@ -1017,7 +1185,7 @@
       },
       {
         "key": "disabled__active",
-        "channelsCompared": 57,
+        "channelsCompared": 61,
         "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
@@ -1034,6 +1202,30 @@
             "channel": "--tw-shadow",
             "ours": "",
             "theirs": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+          },
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(229, 229, 229, 1)",
+            "theirs": "oklch(0.922 0 0)"
           },
           {
             "part": "root",
