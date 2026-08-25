@@ -776,6 +776,14 @@
       "axes": []
     },
     {
+      "__case": "text: text-indent: 9999px on a box pinned to 8px (the status-pip idiom: the label is pushed out of the box and only the dot shows) — declared LOWERED",
+      "name": "CaseTextIndentOffBox",
+      "importName": "CaseTextIndentOffBox",
+      "contract": "conformance/seeds/text-indent-off-box.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
       "__case": "text: text-overflow: ellipsis + overflow hidden + nowrap — declared CARRIED",
       "name": "CaseTextOverflowEllipsis",
       "importName": "CaseTextOverflowEllipsis",

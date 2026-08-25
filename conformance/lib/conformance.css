@@ -85,6 +85,7 @@
 @import '../cases/shadow-root-closed/case.css';
 @import '../cases/stage-box-equal/case.css';
 @import '../cases/svg-outside-grammar/case.css';
+@import '../cases/text-indent-off-box/case.css';
 @import '../cases/text-overflow-ellipsis/case.css';
 @import '../cases/transform-scale-rotate/case.css';
 @import '../cases/transition-channel/case.css';

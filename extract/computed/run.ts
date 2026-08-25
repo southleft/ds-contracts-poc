@@ -59,6 +59,7 @@ import {
   detectFolds,
   enrichLayout,
   hugEvidence,
+  textOutOfBoxEvidence,
   prepareMint,
   pseudoFindings,
   styledChannels,
@@ -923,6 +924,43 @@ async function main() {
           `sizing evidence measured, NOT carried: ${name} sits AT its max-width in every combo — the value may be a genuine design width, so the fixed-width lowering stands.`,
         );
       }
+    }
+
+    // MINT ROUND (2026-08-25) — TEXT EVIDENCE for the text-indent channel.
+    // An element whose carried `text-indent` was MEASURED laying its first
+    // line entirely outside its own content box paints NO text there; the
+    // canvas emitter reads this to draw no text child on exactly those
+    // combos instead of drawing the label at indent 0 (which is ink the
+    // library never shows). No measurement ⇒ no field ⇒ unchanged lowering.
+    const offBox = textOutOfBoxEvidence(aligned, space);
+    enrichmentNotes.push(...offBox.receipts);
+    for (const { name, part } of walkAnatomy(enriched as Contract)) {
+      const carries =
+        (part.tokens && 'text-indent' in part.tokens) ||
+        (Array.isArray(part.tokensByProp)
+          ? part.tokensByProp
+          : part.tokensByProp
+            ? [part.tokensByProp]
+            : []
+        ).some((t) => Object.values(t.map).some((m) => 'text-indent' in m)) ||
+        (part.declared && 'text-indent' in part.declared) ||
+        (part.literals && 'text-indent' in part.literals);
+      if (!carries) continue;
+      const verdict = offBox.outOfBox.get(name);
+      if (verdict === undefined) continue;
+      // The flag qualifies TEXT. A part that carries no text of its own has
+      // no label for the canvas to withhold (validateContract refuses the
+      // field there), so the measurement is receipted and not carried.
+      if (part.text === undefined && part.content === undefined) {
+        enrichmentNotes.push(
+          `text-indent-off-box measured, NOT carried: ${name}'s first line lands outside its box, but the part carries no text of its own — nothing for the canvas to withhold.`,
+        );
+        continue;
+      }
+      part.textOutOfBox = verdict;
+      enrichmentNotes.push(
+        `text evidence carried: ${name}.textOutOfBox = ${JSON.stringify(verdict)} (MEASURED — text-indent lays the first line at or past the content-box end edge${verdict.prop ? ` on ${verdict.prop} = ${(verdict.values ?? []).join(', ')}` : ' in every enumerated combo'}, so the browser paints no text in the box and the canvas draws none either)`,
+      );
     }
 
     const mergedTree = structuredClone(mintBase.tree) as Record<string, unknown>;

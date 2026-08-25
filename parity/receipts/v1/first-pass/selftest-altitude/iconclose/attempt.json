@@ -227,27 +227,66 @@
     },
     {
       "stage": "mint",
-      "status": "PENDING",
-      "ms": 730,
+      "status": "ok",
+      "ms": 439,
       "driver": "mcp",
       "command": "npx ds-contracts figma … --file-key byMp6lt0Ij9b2QbkDGFwBh  →  an MCP-holding agent runs it through the figma-console bridge",
-      "message": "runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-altitude/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact.",
+      "message": "AMENDED IN PLACE, not created: amended=true, nodeId 39:6802, rebuiltVariants=7, addedVariants=[], extraVariants=[], 2 code-only facts. newPages=[] — the exam page was current and was ignored. [MCP-driven mint, one attempt, evidence parity/receipts/v1/first-pass/selftest-altitude/mint-evidence.json; operator agent holding the figma-console MCP tools (figma_execute / exportAsync), Figma Desktop Bridge plugin 1.39.0 on ws port 9225; file byMp6lt0Ij9b2QbkDGFwBh, page \"Census / altitude\"]",
       "artifacts": [
         {
           "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/mint/icon-close.figma.js",
           "sha256": "52e011298c7b9bf6f2eaf34d26c035fa9e04f18e74b3d7ded6bfae210bc85889",
           "bytes": 87162,
           "committed": false
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/iconclose/canvas-xs.png",
+          "sha256": "b55011effb7073c55644bd70b468dbceeb4d580a6637960585ae36f5ca9318cc",
+          "bytes": 221,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/iconclose/canvas-sm.png",
+          "sha256": "ee32ff3ad369213a65ca6fad25733f998ed94fe8592c3f2566e86b85722b36d0",
+          "bytes": 265,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/iconclose/canvas-md.png",
+          "sha256": "a95cb8e8dc7ca27ba509df7c79a481a629da8edfbbc05ab955632926c6a9e082",
+          "bytes": 419,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/iconclose/canvas-lg.png",
+          "sha256": "03afe3db1b44ea0e57330b46269c52d19006941e4a48366bf26d7eff6feff784",
+          "bytes": 433,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/iconclose/canvas-xl.png",
+          "sha256": "5ae6c0541727ba49ddfe4aae5ae70d8f6304d244b996b401963697eebab570ad",
+          "bytes": 462,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/iconclose/canvas-xxl.png",
+          "sha256": "d7b2dae1e6fe1ba24396bac3473d02d6bbd8f71c64e74417873642bdda9c4d31",
+          "bytes": 469,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-altitude/iconclose/canvas-xxxl.png",
+          "sha256": "d794f8db8d16ea9254228f9e37cd969dc0e6f245c92709f6bdd8b69519b2ccfd",
+          "bytes": 477,
+          "committed": true
         }
-      ]
+      ],
+      "bytesWritten": true
     }
   ],
-  "chainComplete": false,
-  "firstStop": {
-    "stage": "mint",
-    "status": "PENDING",
-    "message": "runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-altitude/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact."
-  },
+  "chainComplete": true,
+  "firstStop": null,
   "images": {
     "ref": [
       "parity/receipts/v1/first-pass/selftest-altitude/iconclose/ref-unset.png",
@@ -269,13 +308,21 @@
       "parity/receipts/v1/first-pass/selftest-altitude/iconclose/code-xxl.png",
       "parity/receipts/v1/first-pass/selftest-altitude/iconclose/code-xxxl.png"
     ],
-    "canvas": [],
+    "canvas": [
+      "parity/receipts/v1/first-pass/selftest-altitude/iconclose/canvas-xs.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/iconclose/canvas-sm.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/iconclose/canvas-md.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/iconclose/canvas-lg.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/iconclose/canvas-xl.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/iconclose/canvas-xxl.png",
+      "parity/receipts/v1/first-pass/selftest-altitude/iconclose/canvas-xxxl.png"
+    ],
     "absent": [
       {
         "kind": "canvas",
-        "reason": "mint PENDING — no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-altitude/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact."
+        "reason": "unset: the minted set enumerates the 7 declared Size values (Xs..Xxxl) and has no cell for the capture's unset Size plane (FC-UNSET-PLANE-UNDRAWN)"
       }
     ]
   },
-  "totalMs": 33885
+  "totalMs": 33594
 }

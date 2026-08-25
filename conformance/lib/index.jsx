@@ -84,6 +84,7 @@ export { default as CaseShadowPart } from '../cases/shadow-part/Case.tsx';
 export { default as CaseShadowRootClosed } from '../cases/shadow-root-closed/Case.tsx';
 export { default as CaseStageBoxEqual } from '../cases/stage-box-equal/Case.tsx';
 export { default as CaseSvgOutsideGrammar } from '../cases/svg-outside-grammar/Case.tsx';
+export { default as CaseTextIndentOffBox } from '../cases/text-indent-off-box/Case.tsx';
 export { default as CaseTextOverflowEllipsis } from '../cases/text-overflow-ellipsis/Case.tsx';
 export { default as CaseTransformScaleRotate } from '../cases/transform-scale-rotate/Case.tsx';
 export { default as CaseTransitionChannel } from '../cases/transition-channel/Case.tsx';

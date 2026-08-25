@@ -155,11 +155,11 @@
     },
     {
       "stage": "mint",
-      "status": "PENDING",
-      "ms": 730,
+      "status": "REFUSED",
+      "ms": 443,
       "driver": "mcp",
       "command": "npx ds-contracts figma … --file-key byMp6lt0Ij9b2QbkDGFwBh  →  an MCP-holding agent runs it through the figma-console bridge",
-      "message": "runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-altitude/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact.",
+      "message": "REFUSED BY NAME: \"set/standalone shape mismatch (COMPONENT_SET vs isSet=false) — a human retires the old node\". The contract emits altitude.divider as a STANDALONE COMPONENT (isSet=false); the node already carrying ds_contracts/contractId=altitude.divider in this file is a COMPONENT_SET. The engine declined to reconcile across that shape change and wrote nothing but the identity re-stamp. This is the honest outcome the exam exists to collect. [MCP-driven mint, one attempt, evidence parity/receipts/v1/first-pass/selftest-altitude/mint-evidence.json; operator agent holding the figma-console MCP tools (figma_execute / exportAsync), Figma Desktop Bridge plugin 1.39.0 on ws port 9225; file byMp6lt0Ij9b2QbkDGFwBh]",
       "artifacts": [
         {
           "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/mint/divider.figma.js",
@@ -167,14 +167,15 @@
           "bytes": 84679,
           "committed": false
         }
-      ]
+      ],
+      "bytesWritten": false
     }
   ],
   "chainComplete": false,
   "firstStop": {
     "stage": "mint",
-    "status": "PENDING",
-    "message": "runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-altitude/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact."
+    "status": "REFUSED",
+    "message": "REFUSED BY NAME: \"set/standalone shape mismatch (COMPONENT_SET vs isSet=false) — a human retires the old node\". The contract emits altitude.divider as a STANDALONE COMPONENT (isSet=false); the node already carrying ds_contracts/contractId=altitude.divider in this file is a COMPONENT_SET. The engine declined to reconcile across that shape change and wrote nothing but the identity re-stamp. This is the honest outcome the exam exists to collect. [MCP-driven mint, one attempt, evidence parity/receipts/v1/first-pass/selftest-altitude/mint-evidence.json; operator agent holding the figma-console MCP tools (figma_execute / exportAsync), Figma Desktop Bridge plugin 1.39.0 on ws port 9225; file byMp6lt0Ij9b2QbkDGFwBh]"
   },
   "images": {
     "ref": [
@@ -189,9 +190,13 @@
     "absent": [
       {
         "kind": "canvas",
-        "reason": "mint PENDING — no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-altitude/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact."
+        "reason": "unset: mint REFUSED — set/standalone shape mismatch (COMPONENT_SET vs isSet=false); this run wrote no canvas node, and the COMPONENT_SET standing at 39:6751 is an EARLIER mint's output, so exporting it would be passing another run's pixels off as this attempt's"
+      },
+      {
+        "kind": "canvas",
+        "reason": "vertical: mint REFUSED — set/standalone shape mismatch (COMPONENT_SET vs isSet=false); this run wrote no canvas node, and the COMPONENT_SET standing at 39:6751 is an EARLIER mint's output, so exporting it would be passing another run's pixels off as this attempt's"
       }
     ]
   },
-  "totalMs": 14493
+  "totalMs": 14206
 }
