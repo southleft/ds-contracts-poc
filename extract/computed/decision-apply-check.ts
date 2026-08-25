@@ -34,7 +34,7 @@ import { ContractSchema, type Contract } from '../../scripts/contract-schema.js'
 import { loadConfig, propSpaceFor } from './capture.js';
 import { applyDecisions, refereeCombos, type AckedDecision } from './decisions.js';
 import { gateInventory } from './gate.js';
-import { measuredTruth } from './measured.js';
+import { measuredTruth, refereeReaderDisagreements } from './measured.js';
 import type { CapturedTruthFile } from './replay.js';
 
 const HERE = path.resolve(new URL('.', import.meta.url).pathname);
@@ -87,6 +87,17 @@ for (const file of readdirSync(CONFIGS).filter((f) => f.endsWith('.json')).sort(
     const enriched = JSON.parse(readFileSync(enrichedPath, 'utf8')) as Contract;
     const truth = JSON.parse(readFileSync(truthPath, 'utf8')) as CapturedTruthFile;
     const ext = JSON.parse(readFileSync(extPath, 'utf8')) as { mintedTokens?: Record<string, unknown> };
+    // THE REFEREE'S READER IS ITSELF REFEREED. measured.ts addresses the truth
+    // file BY PART (a decision names a part, and an off-base capture renumbers
+    // paths); replay.ts addresses it by path. Where both can speak they must
+    // say the same thing, or the value check is deciding on a misread.
+    const readerDrift = refereeReaderDisagreements(truth);
+    if (readerDrift.length > 0) {
+      failures.push(
+        `${label}: the decision referee's reader DISAGREES with replay.ts on ${readerDrift.length} value(s) — the value check would be refereeing a misread:\n      - ${readerDrift.slice(0, 5).join('\n      - ')}`,
+      );
+      continue;
+    }
     const space = propSpaceFor(REPO, cfg, comp);
     // The SAME inventory and the SAME resolver the gate renders with
     // (gate.ts gateInventory) — one function, every caller.

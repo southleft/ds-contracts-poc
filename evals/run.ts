@@ -76,7 +76,7 @@ import {
 import { reconstructCaptures as fuseReconstruct } from '../extract/computed/replay.js';
 import { mintTokens as coreMintTokens } from '../core/mint-tokens.js';
 import { applyDecisions as computedApplyDecisions, decisionValueEq, refereeCombos, type AckedDecision } from '../extract/computed/decisions.js';
-import { measuredTruth } from '../extract/computed/measured.js';
+import { measuredTruth, refereeReaderDisagreements } from '../extract/computed/measured.js';
 import { gateInventory } from '../extract/computed/gate.js';
 // SYNC LAYER STEP 1 pins (pure — the ledger lockfile arithmetic; no I/O at import):
 import {
@@ -8863,7 +8863,32 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         throw new Error(`a row with NO measured site must apply and be NAMED unverified: applied=${JSON.stringify(silent.applied)} unverified=${JSON.stringify(silent.unverified)} skipped=${JSON.stringify(silent.skipped)}`);
       }
 
-      console.log(`decision-ledger-value-check: unresolvable decision targets refused by name (and applied without the guard — the corruption is real); ${ledgers} committed ledgers across 4 libraries target only tokens their own library ships; RC6 — ${stale.length} drifted alias(es) refused by name against the committed astryx Badge capture (the measured imported.* leaves stand), the same ledger repaints the component without the referee, astryx Card's stale \`observed\` still applies, and an unmeasurable row is named unverified`);
+      // (6) THE REFEREE'S OWN READER IS REFEREED. `measured.ts` is a SECOND
+      //     reader of `captured-truth.json` — it addresses the file BY PART
+      //     because a decision names a part and an off-base capture renumbers
+      //     tree paths, where `replay.ts reconstructCaptures` addresses it BY
+      //     PATH. A second reader is a second thing that can be wrong, and a
+      //     referee nobody checks is exactly how RC6 happened. On every
+      //     shape-safe combo the two must say the same thing.
+      const sliderTruth = JSON.parse(readFileSync(path.join(ROOT, 'extract/computed/out/astryx/slider/captured-truth.json'), 'utf8'));
+      for (const [name, t] of [['Badge', badgeTruth], ['Slider', sliderTruth]] as const) {
+        const drift = refereeReaderDisagreements(t);
+        if (drift.length > 0) {
+          throw new Error(`astryx ${name}: the decision referee's reader DISAGREES with replay.ts on ${drift.length} value(s) — the value check would be refereeing a misread:\n  - ${drift.slice(0, 5).join('\n  - ')}`);
+        }
+      }
+      // NOT VACUOUS — a reader that really does report a different value is
+      // caught by name. (astryx Slider is in the pin above for the same
+      // reason: its vertical tooltip carries a `translate`, so the read-
+      // boundary folds are load-bearing there, not decorative.)
+      const bentTruth = JSON.parse(JSON.stringify(badgeTruth));
+      bentTruth.base.root.style['background-color'] = 'rgba(1, 2, 3, 1)';
+      const caught = refereeReaderDisagreements(badgeTruth, () => measuredTruth(bentTruth));
+      if (!caught.some((d) => d.includes('root.background-color') && d.includes('rgba(1, 2, 3, 1)'))) {
+        throw new Error(`the reader pin did not catch a reader that reports a value the canonical reconstruction does not hold — it asserts nothing: ${JSON.stringify(caught.slice(0, 5))}`);
+      }
+
+      console.log(`decision-ledger-value-check: unresolvable decision targets refused by name (and applied without the guard — the corruption is real); ${ledgers} committed ledgers across 4 libraries target only tokens their own library ships; RC6 — ${stale.length} drifted alias(es) refused by name against the committed astryx Badge capture (the measured imported.* leaves stand), the same ledger repaints the component without the referee, astryx Card's stale \`observed\` still applies, an unmeasurable row is named unverified, and the referee's own reader agrees with replay.ts on every shape-safe combo of astryx Badge and Slider (and is caught when it does not)`);
     },
   },
   {

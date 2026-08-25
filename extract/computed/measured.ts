@@ -36,7 +36,7 @@ import {
   type CapturedNode,
   type StyleMap,
 } from './lib.js';
-import type { CapturedTruthFile } from './replay.js';
+import { reconstructCaptures, type CapturedTruthFile } from './replay.js';
 
 /** One measured value: the computed longhand `computedProp` of `part` in
  *  `combo`, at the DEFAULT interaction. */
@@ -149,4 +149,64 @@ export function measuredTruth(truth: CapturedTruthFile): MeasuredTruth {
       return out;
     },
   };
+}
+
+/**
+ * THE READER IS PINNED AGAINST THE CANONICAL ONE.
+ *
+ * `measuredTruth` re-reads the truth file BY PART NAME because a decision names
+ * a part and an off-base capture renumbers tree paths. That is a SECOND reader
+ * of the same bytes, and a second reader is a second thing that can be wrong —
+ * a referee nobody checks is how RC6 happened in the first place.
+ *
+ * So: for every capture the canonical `reconstructCaptures` can address by
+ * path without ambiguity (rides the base tree; no off-base rebuild, no
+ * `fullRoot`), every computed longhand this module reports must equal what the
+ * canonical reconstruction holds at the same part. Returns the disagreements;
+ * the caller refuses on a non-empty list.
+ *
+ * NAMED BLIND SPOT: a part with `inBase === false`, an `offBase` capture and a
+ * `fullRoot` capture are all SKIPPED, because there the canonical reader is not
+ * an independent second opinion — it rebuilds the very tree this module reads
+ * by part name, so agreeing would prove nothing and disagreeing would only
+ * measure the rebuild. Those sites are refereed by the value check alone.
+ *
+ * `reader` is injectable for one reason only: so a pin can prove this check is
+ * not vacuous by handing it a reader that really does disagree. Production
+ * callers pass nothing.
+ */
+export function refereeReaderDisagreements(
+  truth: CapturedTruthFile,
+  reader: (t: CapturedTruthFile) => MeasuredTruth = measuredTruth,
+): string[] {
+  const out: string[] = [];
+  const byPath = new Map(truth.anatomy.map((a) => [a.part, a.path] as const));
+  const canonical = new Map<string, CapturedNode>();
+  const shapeSafe = new Set<string>();
+  for (const cap of reconstructCaptures(truth)) {
+    if (cap.interaction !== DEFAULT_INTERACTION) continue;
+    const rec = truth.captures.find((c) => c.key === `${cap.combo}__${cap.interaction}`);
+    // The base capture is always shape-safe; a recorded capture is safe only
+    // when it rides the base tree unchanged.
+    if (rec && (rec.offBase || rec.fullRoot)) continue;
+    shapeSafe.add(cap.combo);
+    for (const el of flatten(cap.root)) canonical.set(`${cap.combo} ${el.path}`, el.node);
+  }
+  const mine = reader(truth);
+  for (const combo of shapeSafe) {
+    for (const a of truth.anatomy) {
+      if (a.inBase === false) continue;
+      const node = canonical.get(`${combo} ${byPath.get(a.part)}`);
+      if (!node) continue;
+      for (const [prop, value] of Object.entries(node.style)) {
+        const sites = mine.at(a.part, prop, [combo]).filter((st) => st.computedProp === prop);
+        if (sites.length === 0) {
+          out.push(`${combo}/${a.part}.${prop}: the canonical reconstruction holds "${value}" and this reader reports NOTHING`);
+        } else if (sites[0].value !== normalizeValue(value)) {
+          out.push(`${combo}/${a.part}.${prop}: canonical "${value}" vs this reader "${sites[0].value}"`);
+        }
+      }
+    }
+  }
+  return out;
 }
