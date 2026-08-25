@@ -10847,7 +10847,26 @@ export function proposeFromDump(
     const minted = mintTokens(componentIdSlug(set.setName), observations, ctx.mint.axes, {
       nestedPairs: true,
       realizedCombos,
+      // THE DUMP-ROUNDING RECONCILIATION (docs/23 §D.33). Both dump producers
+      // round canvas geometry to two decimals, so a width the code→canvas
+      // mint spelled 39.9219px from computed style comes back 39.92px — one
+      // measurement, two spellings, and `generate` rightly refused the slot
+      // that then held both. The minter asks the corpus what it already
+      // spells at each claimed path and carries THAT when the observation is
+      // it re-rounded; a real disagreement is untouched and still surfaces.
+      corpusValueAt: (tokenPath) => {
+        if (tokenPath.includes('{') || !ctx.corpus.has(tokenPath)) return undefined;
+        try {
+          const resolved = ctx.corpus.resolveLiteral(tokenPath);
+          return typeof resolved === 'string' ? resolved : undefined;
+        } catch {
+          return undefined;
+        }
+      },
     });
+    for (const row of minted.reconciled) {
+      ctx.notes.push(`${set.setName}: minted ${row}`);
+    }
     const bySource = new Map<string, { total: number; bound: number }>();
     minted.bindings.forEach((binding, i) => {
       const obs = observations[i];

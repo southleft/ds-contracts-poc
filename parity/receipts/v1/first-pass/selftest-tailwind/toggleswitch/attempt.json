@@ -2,7 +2,7 @@
   "exam": "selftest-tailwind",
   "direction": "code-to-canvas",
   "set": "ToggleSwitch",
-  "id": null,
+  "id": "flowbite.toggleswitch",
   "source": {
     "library": "tailwind",
     "config": "extract/computed/configs/tailwind.json"
@@ -11,24 +11,25 @@
     {
       "stage": "capture",
       "status": "ok",
-      "ms": 26464,
+      "ms": 37187,
+      "driver": "harness",
       "command": "npx tsx extract/computed/run.ts --harness examples/tailwind/.tw-sandbox --config extract/computed/configs/tailwind.json --component ToggleSwitch --out extract/computed/out/tailwind --keep-originals",
       "message": "3 artifact(s)",
       "artifacts": [
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-JMGOn8/root/extract/computed/out/tailwind/toggleswitch/enriched.contract.json",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/root/extract/computed/out/tailwind/toggleswitch/enriched.contract.json",
           "sha256": "d76575a1198a34ffd51aa3fdf4abdc6fa962311628b06bc06d1762c6bea3f7bc",
           "bytes": 12560,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-JMGOn8/root/extract/computed/out/tailwind/toggleswitch/scorecard.json",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/root/extract/computed/out/tailwind/toggleswitch/scorecard.json",
           "sha256": "1eab8282bf16ac6108de9da74d8027bd297c7770d5e270d4e72078671c04ab0b",
           "bytes": 25461,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-JMGOn8/root/extract/computed/out/tailwind/toggleswitch/captured-truth.json",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/root/extract/computed/out/tailwind/toggleswitch/captured-truth.json",
           "sha256": "918dd47a86595d75870441bbcf7416a0a456f9d5c8ea757386d2d5c46c9a2d25",
           "bytes": 560821,
           "committed": false
@@ -109,50 +110,119 @@
     },
     {
       "stage": "promote",
-      "status": "REFUSED",
-      "ms": 1120,
+      "status": "ok",
+      "ms": 2924,
+      "driver": "harness",
       "command": "npx tsx packages/cli/src/cli.ts promote --config examples/tailwind/ds-library.json",
-      "message": "✘ authored alert prop dismissable: prop \"dismissable\" is not exactly one entry of props[] — NAMED refusal\n· flowbite.button: bindings.figma.statePreviews ON (disabled, active, focus-visible, hover)\n  · flowbite.badge: bindings.figma.statePreviews ON (active, hover)",
-      "artifacts": []
+      "message": "examples/tailwind/contracts/toggleswitch.contract.json",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/root/examples/tailwind/contracts/toggleswitch.contract.json",
+          "sha256": "340286af932bb891530e2e56cbe2e50766540520812699204c9051817419f768",
+          "bytes": 13593,
+          "committed": false
+        }
+      ]
     },
     {
       "stage": "validate",
-      "status": "SKIPPED",
-      "ms": 0,
-      "command": null,
-      "message": "an earlier stage stopped this chain (promote)",
+      "status": "ok",
+      "ms": 13,
+      "driver": "harness",
+      "command": "core/emit-react.ts validateContract (the referee — no CLI verb; docs/07)",
+      "message": "no violations",
       "artifacts": []
     },
     {
       "stage": "generate",
-      "status": "SKIPPED",
-      "ms": 0,
-      "command": null,
-      "message": "an earlier stage stopped this chain (promote)",
-      "artifacts": []
+      "status": "ok",
+      "ms": 4052,
+      "driver": "harness",
+      "command": "npx ds-contracts generate examples/tailwind/contracts/toggleswitch.contract.json --out <out> --tokens <dtcg>,<minted> --icons examples/tailwind/assets/icons --stories",
+      "message": "6 file(s)",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/generated/toggleswitch/index.ts",
+          "sha256": "0e01242350c21520dae219836c45523b0be75bde2b3ef0ad0123219019d9a7c1",
+          "bytes": 55,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/generated/toggleswitch/tokens.css",
+          "sha256": "a97700e6a399dc529572e713c6282992c0b37517268cde0b34b28a558f8da47e",
+          "bytes": 20439,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/generated/toggleswitch/ToggleSwitch/ToggleSwitch.module.css",
+          "sha256": "66cfa4938a2be16ca59c54581ab1ae0eef4a3c1beaa7e075f23c0f6f0f834c97",
+          "bytes": 5126,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/generated/toggleswitch/ToggleSwitch/ToggleSwitch.stories.tsx",
+          "sha256": "12b6c3803edb248d8d4effb56d1db73fba463f432cfc2ad487c7c8a650ea1776",
+          "bytes": 2782,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/generated/toggleswitch/ToggleSwitch/ToggleSwitch.tsx",
+          "sha256": "75f2dc59aed5b51e105d11000472378bd0de8d676e94b4f2e2363b0ffc87a7ae",
+          "bytes": 2740,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/generated/toggleswitch/ToggleSwitch/index.ts",
+          "sha256": "940e8045eef208ba44215094dbae139c3481631c48b04c20baf7e4b44f853bba",
+          "bytes": 104,
+          "committed": false
+        }
+      ]
     },
     {
       "stage": "bundle",
-      "status": "SKIPPED",
-      "ms": 0,
-      "command": null,
-      "message": "an earlier stage stopped this chain (promote)",
-      "artifacts": []
+      "status": "ok",
+      "ms": 6798,
+      "driver": "harness",
+      "command": "npx ds-contracts figma examples/tailwind/contracts --out examples/tailwind/figma --tokens <dtcg>,<minted> && npx ds-contracts figma bundle examples/tailwind/contracts --name Tailwind --out examples/tailwind/figma/tailwind.bundle.json",
+      "message": "toggle-switch.figma.js + tailwind.bundle.json",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/root/examples/tailwind/figma/toggle-switch.figma.js",
+          "sha256": "48230c97bb9f8c6b540e6802adeadbfe07764a06ce90ab55429b559fa07bb2e0",
+          "bytes": 124769,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/root/examples/tailwind/figma/tailwind.bundle.json",
+          "sha256": "384cd1f8aabab16683b482070d2d6ff0b46d5b992532e3c8c920189a5ee74d19",
+          "bytes": 152750,
+          "committed": false
+        }
+      ]
     },
     {
       "stage": "mint",
-      "status": "SKIPPED",
-      "ms": 0,
-      "command": null,
-      "message": "an earlier stage stopped this chain (promote)",
-      "artifacts": []
+      "status": "PENDING",
+      "ms": 5658,
+      "driver": "mcp",
+      "command": "npx ds-contracts figma … --file-key byMp6lt0Ij9b2QbkDGFwBh  →  an MCP-holding agent runs it through the figma-console bridge",
+      "message": "runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-tailwind/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact.",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-Kg69oO/mint/toggle-switch.figma.js",
+          "sha256": "ede4dcf591bc1b642841bb0e5a603f5d90777e679df0c88604f20f93f32832f3",
+          "bytes": 124769,
+          "committed": false
+        }
+      ]
     }
   ],
   "chainComplete": false,
   "firstStop": {
-    "stage": "promote",
-    "status": "REFUSED",
-    "message": "✘ authored alert prop dismissable: prop \"dismissable\" is not exactly one entry of props[] — NAMED refusal\n· flowbite.button: bindings.figma.statePreviews ON (disabled, active, focus-visible, hover)\n  · flowbite.badge: bindings.figma.statePreviews ON (active, hover)"
+    "stage": "mint",
+    "status": "PENDING",
+    "message": "runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-tailwind/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact."
   },
   "images": {
     "ref": [
@@ -175,9 +245,9 @@
     "absent": [
       {
         "kind": "canvas",
-        "reason": "mint SKIPPED — no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 (probed /health: 9225:404, 9226:404, 9228:200, 9230:404). The local bridge serves MCP over stdio to its own client and WebSocket to plugin clients; a Node process cannot issue a canvas write through either. Bundle produced, mint pending — the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact."
+        "reason": "mint PENDING — no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-tailwind/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact."
       }
     ]
   },
-  "totalMs": 27584
+  "totalMs": 56632
 }

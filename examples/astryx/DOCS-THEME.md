@@ -133,7 +133,7 @@ npx tsx packages/cli/src/cli.ts figma bundle examples/astryx/contracts \
   entries
 - `figma/astryx-docs.bundle.json` — 13 contracts (byte-identical to the
   `contracts` section of `astryx.bundle.json`) + tokenSet
-  "Astryx (docs theme)": 186 base, light/dark modes, minted tree. **170,062
+  "Astryx (docs theme)": 186 base, light/dark modes, minted tree. **266,824
   bytes on disk.**
 
   > The CLI's own log line for this file says `169952 bytes` — that is the
@@ -143,14 +143,17 @@ npx tsx packages/cli/src/cli.ts figma bundle examples/astryx/contracts \
   > Both numbers are real; only one is the file. Fixed to the file size, and
   > the ambiguity named so the next reader does not chase a phantom drift.
 
-**Determinism gates (re-run 2026-07-26, after the REVIEWED re-anchoring round):** emit
+**Determinism gates (re-run 2026-08-24, when `npm run bundles:fresh` first rebuilt every committed
+example bundle and found BOTH of these stale — the code-only-fact receipts the engine had learned to
+write since 2026-07-26 were missing, ~4.2 KB per bundle, and nothing noticed because executing a
+stale bundle succeeds):** emit
 run twice → all three dtcg files byte-identical; **both** bundles built twice
 → byte-identical:
 
 | bundle | sha256 | rows |
 |---|---|---|
-| `astryx.bundle.json` | `9aca6d30…a4d3b56a` | 423 (COLOR 137 / FLOAT 178 / STRING 54 / **ALIAS 54**) |
-| `astryx-docs.bundle.json` | `0b6ab817…152be79b` | 423 (COLOR 137 / FLOAT 181 / STRING 51 / **ALIAS 54**) |
+| `astryx.bundle.json` | `da6571f4…ea05e32b` | 423 (COLOR 137 / FLOAT 178 / STRING 54 / **ALIAS 54**) |
+| `astryx-docs.bundle.json` | `3f6bee30…abe5dfd0` | 423 (COLOR 137 / FLOAT 181 / STRING 51 / **ALIAS 54**) |
 
 Both pass `parseTokenSet`. The deltas against the previous pin (neutral was
 COLOR 182 / ALIAS 9, sha `4f309a04…41d3aed5`; docs COLOR 182 / ALIAS 9, sha

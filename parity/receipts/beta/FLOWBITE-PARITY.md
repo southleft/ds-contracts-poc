@@ -1,6 +1,6 @@
 # Flowbite contract parity — authored vs code-capture
 
-Recorded 2026-08-22. Authored contracts in
+Recorded 2026-08-25. Authored contracts in
 `examples/tailwind/contracts` vs `extract/computed/out/tailwind/<stem>/enriched.contract.json`.
 
 This is hop 5 of [NORTH-STAR.md](./NORTH-STAR.md): align the contracts we have
@@ -9,10 +9,10 @@ This is hop 5 of [NORTH-STAR.md](./NORTH-STAR.md): align the contracts we have
 ## Alert
 
 - host: authored `div` · captured `div`
-- props: authored [color, icon, dismissable, children] · captured [color, icon, dismissable, children]
-- props: **aligned**
-- parts: authored 9 · captured 9
-- parts: **aligned**
+- props: authored [color, icon, dismissable, children] · captured [color, children]
+- **prop gap** authored-only: icon, dismissable · captured-only: ∅
+- parts: authored 9 · captured 3
+- **part gap** authored-only: alert-icon, alert-icon-info, alert-icon-failure, alert-icon-success, alert-icon-warning, dismiss · captured-only: ∅
 - **event gap (standing)** authored declares onDismiss@dismiss; captured-from-code has none — the static/type seed never saw handlers
 - canvas (120:1979): **props aligned** · 4 variant(s) · 76 variable binds
 
@@ -97,4 +97,4 @@ Authored events with no captured counterpart:
 - Alert: onDismiss
 - ToggleSwitch: onToggle
 
-**2 named gap(s) in this report.** Gaps are the product. Closing them silently would be a lie.
+**4 named gap(s) in this report.** Gaps are the product. Closing them silently would be a lie.

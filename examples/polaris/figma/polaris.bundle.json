@@ -14229,6 +14229,17 @@
             "count": 56,
             "of": 56
           }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "tone [unset]",
+          "value": "info|success|warning|critical|attention|new|magic|info-strong|success-strong|warning-strong|critical-strong|attention-strong|read-only|enabled",
+          "reason": "defaultless axis — the library's own rendering when \"tone\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 14 declared values only, and a proposal read back from the canvas will call \"info\" the default (FC-UNSET-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 56,
+            "of": 56
+          }
         }
       ]
     },
@@ -15600,6 +15611,28 @@
         {
           "part": "backdrop",
           "kind": "channel",
+          "channel": "background-color [disabled]",
+          "value": "{imported.checkbox.backdrop.background-color-state-disabled}",
+          "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 3,
+            "of": 3
+          }
+        },
+        {
+          "part": "backdrop",
+          "kind": "channel",
+          "channel": "border-color [hover]",
+          "value": "{p.color-input-border-hover}",
+          "reason": "the hover plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 3,
+            "of": 3
+          }
+        },
+        {
+          "part": "backdrop",
+          "kind": "channel",
           "channel": "bottom",
           "value": "{imported.shared.size-0}",
           "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -15907,6 +15940,17 @@
         },
         {
           "part": "choice__label",
+          "kind": "channel",
+          "channel": "color [disabled]",
+          "value": "{imported.shared.color-b5b5b5}",
+          "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 3,
+            "of": 3
+          }
+        },
+        {
+          "part": "choice__label",
           "kind": "declared",
           "channel": "cursor",
           "value": "default",
@@ -16153,6 +16197,17 @@
         },
         {
           "part": "input",
+          "kind": "channel",
+          "channel": "color [disabled]",
+          "value": "{imported.checkbox.input.color-state-disabled}",
+          "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 3,
+            "of": 3
+          }
+        },
+        {
+          "part": "input",
           "kind": "declared",
           "channel": "appearance",
           "value": "auto",
@@ -16223,6 +16278,17 @@
           "channel": "text-rendering",
           "value": "auto",
           "reason": "Text rasterization hints (text-rendering) apply only in code.",
+          "variants": {
+            "count": 3,
+            "of": 3
+          }
+        },
+        {
+          "part": "label",
+          "kind": "channel",
+          "channel": "color [disabled]",
+          "value": "{imported.shared.color-b5b5b5}",
+          "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
           "variants": {
             "count": 3,
             "of": 3
@@ -16438,6 +16504,17 @@
       "contractId": "polaris.radio-button",
       "name": "RadioButton",
       "facts": [
+        {
+          "part": "backdrop",
+          "kind": "channel",
+          "channel": "background-color [disabled]",
+          "value": "{imported.radio-button.backdrop.background-color-state-disabled}",
+          "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 2,
+            "of": 2
+          }
+        },
         {
           "part": "backdrop",
           "kind": "channel",
@@ -16693,6 +16770,17 @@
         },
         {
           "part": "choice__label",
+          "kind": "channel",
+          "channel": "color [disabled]",
+          "value": "{imported.shared.color-b5b5b5}",
+          "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 2,
+            "of": 2
+          }
+        },
+        {
+          "part": "choice__label",
           "kind": "declared",
           "channel": "cursor",
           "value": "default",
@@ -16719,6 +16807,17 @@
           "channel": "display",
           "value": "block",
           "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+          "variants": {
+            "count": 2,
+            "of": 2
+          }
+        },
+        {
+          "part": "input",
+          "kind": "channel",
+          "channel": "color [disabled]",
+          "value": "{imported.radio-button.input.color-state-disabled}",
+          "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
           "variants": {
             "count": 2,
             "of": 2
@@ -16807,6 +16906,17 @@
           "channel": "text-wrap-mode",
           "value": "nowrap",
           "reason": "Line-breaking rules differ: Figma wraps by box width only.",
+          "variants": {
+            "count": 2,
+            "of": 2
+          }
+        },
+        {
+          "part": "label",
+          "kind": "channel",
+          "channel": "color [disabled]",
+          "value": "{imported.shared.color-b5b5b5}",
+          "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
           "variants": {
             "count": 2,
             "of": 2
@@ -18493,6 +18603,28 @@
         },
         {
           "part": "root",
+          "kind": "channel",
+          "channel": "align [unset]",
+          "value": "left|center|right",
+          "reason": "defaultless axis — the library's own rendering when \"align\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 3 declared values only, and a proposal read back from the canvas will call \"left\" the default (FC-UNSET-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 1400,
+            "of": 1400
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "inputMode [unset]",
+          "value": "none|text|decimal|numeric|tel|search|email|url",
+          "reason": "defaultless axis — the library's own rendering when \"inputMode\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 8 declared values only, and a proposal read back from the canvas will call \"none\" the default (FC-UNSET-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 1400,
+            "of": 1400
+          }
+        },
+        {
+          "part": "root",
           "kind": "declared",
           "channel": "display",
           "value": "block",
@@ -18706,6 +18838,61 @@
       "contractId": "polaris.text",
       "name": "Text",
       "facts": [
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "alignment [unset]",
+          "value": "start|center|end|justify",
+          "reason": "defaultless axis — the library's own rendering when \"alignment\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 4 declared values only, and a proposal read back from the canvas will call \"start\" the default (FC-UNSET-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 23232,
+            "of": 23232
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "as [unset]",
+          "value": "dt|dd|h1|h2|h3|h4|h5|h6|p|span|strong|legend",
+          "reason": "defaultless axis — the library's own rendering when \"as\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 12 declared values only, and a proposal read back from the canvas will call \"dt\" the default (FC-UNSET-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 23232,
+            "of": 23232
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "fontWeight [unset]",
+          "value": "regular|medium|semibold|bold",
+          "reason": "defaultless axis — the library's own rendering when \"fontWeight\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 4 declared values only, and a proposal read back from the canvas will call \"regular\" the default (FC-UNSET-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 23232,
+            "of": 23232
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "tone [unset]",
+          "value": "base|disabled|inherit|success|critical|caution|subdued|text-inverse|text-inverse-secondary|magic|magic-subdued",
+          "reason": "defaultless axis — the library's own rendering when \"tone\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 11 declared values only, and a proposal read back from the canvas will call \"base\" the default (FC-UNSET-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 23232,
+            "of": 23232
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "variant [unset]",
+          "value": "headingXs|headingSm|headingMd|headingLg|headingXl|heading2xl|heading3xl|bodyXs|bodySm|bodyMd|bodyLg",
+          "reason": "defaultless axis — the library's own rendering when \"variant\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 11 declared values only, and a proposal read back from the canvas will call \"headingXs\" the default (FC-UNSET-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 23232,
+            "of": 23232
+          }
+        },
         {
           "part": "root",
           "kind": "declared",

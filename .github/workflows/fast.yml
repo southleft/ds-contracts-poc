@@ -600,6 +600,23 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run first-pass:check -- --self-test
 
+      # CORPUS REPRODUCIBILITY — the twin of the gate above, and the reason the
+      # first-pass exam went 0/8 the day it first ran: the committed contracts
+      # claim to be the output of the documented chain, and nothing checked it.
+      # The PROMOTE half runs here — pure, no browser, ~2s: every library's
+      # committed capture record plus its authored facts must re-promote to the
+      # committed contracts byte for byte. The CAPTURE half needs Chromium and
+      # the git-ignored sandboxes, so it runs OUT OF BAND
+      # (`-- --capture`) and RECORDS what it measured; this step judges that
+      # committed measurement against the committed ledger, which is why its
+      # verdict is the same on every machine.
+      - name: corpus:reproducible:check (the documented chain re-derives its own corpus; every divergence named)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run corpus:reproducible:check
+      - name: corpus:reproducible self-test (the gate goes red on an unnamed divergence, a stale ledger row, and an unnamed capture divergence)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run corpus:reproducible:check -- --self-test
+
       # Not one of the 33 named gates, but CONTRIBUTING.md § "The gates" tells
       # contributors to run it and it costs under a second with no extra build.
       - name: test packages/cli (all node:test files)

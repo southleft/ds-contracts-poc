@@ -12,11 +12,11 @@ See [docs/31 — First-pass](../../../docs/31-first-pass.md) for the metric and 
 
 | date | exam | direction | subject | held out | engine SHA | sets | chain complete #1 | stopped: REFUSED | stopped: ERROR | stopped: PENDING | minted | recognisable #1 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 2026-08-24 | selftest-tailwind | code-to-canvas | tailwind | no (self-test) | `0ef93340` | 8 | 0 | promote (8) | — | — | 0 | ungraded |
-| 2026-08-24 | selftest-altitude | code-to-canvas | altitude | no (self-test) | `0ef93340` | 8 | 0 | — | — | mint (8) | 0 | ungraded |
-| 2026-08-24 | selftest-flowbite-live | canvas-to-code | flowbite | no (self-test) | `0ef93340` | 8 | 4 | generate-react (4) | — | — | 0 | ungraded |
+| 2026-08-25 | selftest-tailwind | code-to-canvas | tailwind | no (self-test) | `4c43433f` | 8 | 0 | — | — | mint (8) | 0 | ungraded |
+| 2026-08-25 | selftest-altitude | code-to-canvas | altitude | no (self-test) | `4c43433f` | 8 | 0 | — | — | mint (8) | 0 | ungraded |
+| 2026-08-25 | selftest-flowbite-live | canvas-to-code | flowbite | no (self-test) | `4c43433f` | 8 | 8 | — | — | — | 0 | ungraded |
 
-`chain complete #1` = EVERY stage of the direction returned ok on the single attempt. `stopped: REFUSED` is the engine declining BY NAME — the honest outcome. `stopped: ERROR` is a stage that died without one. `stopped: PENDING` is a precondition OUTSIDE the engine (a canvas write needs the figma-console bridge, which a Node process cannot reach), kept in its own column because a chain that ran clean to its last stage and stopped on a missing bridge is a different fact from one the engine refused. `minted` = sets whose bytes actually reached the canvas. `recognisable #1` = graded blind against the owner's bar; `ungraded` means no `verdict.json` has been written yet, and is never rendered as a number.
+`chain complete #1` = EVERY stage of the direction returned ok on the single attempt. `stopped: REFUSED` is the engine declining BY NAME — the honest outcome. `stopped: ERROR` is a stage that died without one. `stopped: PENDING` is a stage this harness does not execute at all: `mint` is MCP-DRIVEN (docs/31 §6 — the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and a Node process is neither, so an agent holding the MCP tools performs the write and records its own evidence). It keeps its own column because a chain that ran clean to its last stage and stopped there is a different fact from one the engine refused. `minted` = sets whose bytes actually reached the canvas, evidenced. `recognisable #1` = graded blind against the owner's bar; `ungraded` means no `verdict.json` has been written yet, and is never rendered as a number.
 
 ## selftest-tailwind
 
@@ -24,22 +24,22 @@ SELF-TEST FIXTURE — flowbite-react@0.12.17 through the documented code→canva
 
 Input: `captureConfig` = extract/computed/configs/tailwind.json; `harness` = examples/tailwind/.tw-sandbox; `library` = tailwind; `manifest` = examples/tailwind/ds-library.json; `tokens` = examples/tailwind/tokens/tailwind.dtcg.json, examples/tailwind/tokens/tailwind-minted.dtcg.json. Cell cap 8 per set.
 
-Mint: **PENDING** — no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 (probed /health: 9225:404, 9226:404, 9228:200, 9230:404). The local bridge serves MCP over stdio to its own client and WebSocket to plugin clients; a Node process cannot issue a canvas write through either. Bundle produced, mint pending — the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact.
+Mint: **PENDING** — no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-tailwind/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact.
 
 | set | contract id | chain | first stop | stage | message | wall-clock | ref | code | canvas | verdict |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Button | — | stopped | REFUSED | promote | ✘ authored alert prop dismissable: prop "dismissable" is not exactly one entry of props[] — NAMED refusal | 148.7s | 8 | 8 | 0 | ungraded |
-| Badge | — | stopped | REFUSED | promote | ✘ authored alert prop dismissable: prop "dismissable" is not exactly one entry of props[] — NAMED refusal | 44.2s | 8 | 8 | 0 | ungraded |
-| Card | — | stopped | REFUSED | promote | ✘ authored alert prop dismissable: prop "dismissable" is not exactly one entry of props[] — NAMED refusal | 9.1s | 1 | 1 | 0 | ungraded |
-| Alert | — | stopped | REFUSED | promote | ✘ authored alert prop dismissable: prop "dismissable" is not exactly one entry of props[] — NAMED refusal | 18.0s | 4 | 4 | 0 | ungraded |
-| ToggleSwitch | — | stopped | REFUSED | promote | ✘ authored alert prop dismissable: prop "dismissable" is not exactly one entry of props[] — NAMED refusal | 27.6s | 6 | 6 | 0 | ungraded |
-| HelperText | — | stopped | REFUSED | promote | ✘ authored alert prop dismissable: prop "dismissable" is not exactly one entry of props[] — NAMED refusal | 20.8s | 5 | 5 | 0 | ungraded |
-| Label | — | stopped | REFUSED | promote | ✘ authored alert prop dismissable: prop "dismissable" is not exactly one entry of props[] — NAMED refusal | 20.4s | 5 | 5 | 0 | ungraded |
-| Kbd | — | stopped | REFUSED | promote | ✘ authored alert prop dismissable: prop "dismissable" is not exactly one entry of props[] — NAMED refusal | 8.5s | 1 | 1 | 0 | ungraded |
+| Button | flowbite.button | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over | 212.0s | 8 | 8 | 0 | ungraded |
+| Badge | flowbite.badge | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over | 82.9s | 8 | 8 | 0 | ungraded |
+| Card | flowbite.card | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over | 32.5s | 1 | 1 | 0 | ungraded |
+| Alert | flowbite.alert | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over | 39.0s | 4 | 4 | 0 | ungraded |
+| ToggleSwitch | flowbite.toggleswitch | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over | 56.6s | 6 | 6 | 0 | ungraded |
+| HelperText | flowbite.helpertext | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over | 43.7s | 5 | 5 | 0 | ungraded |
+| Label | flowbite.label | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over | 42.6s | 5 | 5 | 0 | ungraded |
+| Kbd | flowbite.kbd | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over | 32.2s | 1 | 1 | 0 | ungraded |
 
 Images absent, by named reason (a blank cell is never allowed):
 
-- 8× canvas: mint SKIPPED — no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 (probed /health: 9225:404, 9226:404, 9228:200, 9230:404). The local bridge serves MCP over stdio to its own client and WebSocket to plugin clients; a Node process cannot issue a canvas write through either. Bundle produced, mint pending — the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact.
+- 8× canvas: mint PENDING — no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-tailwind/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact.
 
 ## selftest-altitude
 
@@ -47,22 +47,22 @@ SELF-TEST FIXTURE — altitude-web-components@1.0.2 through the documented code�
 
 Input: `captureConfig` = extract/computed/configs/altitude.json; `harness` = examples/altitude/.altitude-sandbox; `library` = altitude; `manifest` = examples/altitude/ds-library.json; `tokens` = examples/altitude/tokens/altitude.dtcg.json, examples/altitude/tokens/altitude-minted.dtcg.json. Cell cap 8 per set.
 
-Mint: **PENDING** — no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 (probed /health: 9225:404, 9226:404, 9228:200, 9230:404). The local bridge serves MCP over stdio to its own client and WebSocket to plugin clients; a Node process cannot issue a canvas write through either. Bundle produced, mint pending — the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact.
+Mint: **PENDING** — no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-altitude/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact.
 
 | set | contract id | chain | first stop | stage | message | wall-clock | ref | code | canvas | verdict |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Button | altitude.button | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; bridge: no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 (probed /health: 9225:404, 9226:404, 9228:200, 92 | 37.1s | 5 | 5 | 0 | ungraded |
-| Badge | altitude.badge | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; bridge: no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 (probed /health: 9225:404, 9226:404, 9228:200, 92 | 39.3s | 8 | 8 | 0 | ungraded |
-| Chip | altitude.chip | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; bridge: no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 (probed /health: 9225:404, 9226:404, 9228:200, 92 | 42.3s | 8 | 8 | 0 | ungraded |
-| Link | altitude.link | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; bridge: no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 (probed /health: 9225:404, 9226:404, 9228:200, 92 | 23.3s | 4 | 4 | 0 | ungraded |
-| Avatar | altitude.avatar | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; bridge: no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 (probed /health: 9225:404, 9226:404, 9228:200, 92 | 22.1s | 4 | 4 | 0 | ungraded |
-| Heading | altitude.heading | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; bridge: no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 (probed /health: 9225:404, 9226:404, 9228:200, 92 | 48.5s | 8 | 8 | 0 | ungraded |
-| Divider | altitude.divider | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; bridge: no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 (probed /health: 9225:404, 9226:404, 9228:200, 92 | 15.0s | 2 | 2 | 0 | ungraded |
-| IconClose | altitude.iconclose | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; bridge: no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 (probed /health: 9225:404, 9226:404, 9228:200, 92 | 33.1s | 8 | 8 | 0 | ungraded |
+| Button | altitude.button | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over | 35.4s | 5 | 5 | 0 | ungraded |
+| Badge | altitude.badge | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over | 46.0s | 8 | 8 | 0 | ungraded |
+| Chip | altitude.chip | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over | 50.7s | 8 | 8 | 0 | ungraded |
+| Link | altitude.link | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over | 28.3s | 4 | 4 | 0 | ungraded |
+| Avatar | altitude.avatar | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over | 25.8s | 4 | 4 | 0 | ungraded |
+| Heading | altitude.heading | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over | 50.4s | 8 | 8 | 0 | ungraded |
+| Divider | altitude.divider | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over | 14.5s | 2 | 2 | 0 | ungraded |
+| IconClose | altitude.iconclose | stopped | PENDING | mint | runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over | 33.9s | 8 | 8 | 0 | ungraded |
 
 Images absent, by named reason (a blank cell is never allowed):
 
-- 8× canvas: mint PENDING — no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 (probed /health: 9225:404, 9226:404, 9228:200, 9230:404). The local bridge serves MCP over stdio to its own client and WebSocket to plugin clients; a Node process cannot issue a canvas write through either. Bundle produced, mint pending — the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact.
+- 8× canvas: mint PENDING — no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-altitude/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact.
 
 ## selftest-flowbite-live
 
@@ -74,14 +74,14 @@ Mint: **SKIPPED** — canvas→code is READ-ONLY; no exam in this direction writ
 
 | set | contract id | chain | first stop | stage | message | wall-clock | ref | code | canvas | verdict |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Alert (flowbite.alert) | flowbite.alert | complete | — | — | — | 4.2s | 4 | 4 | 0 | ungraded |
-| Kbd | flowbite.kbd | stopped | REFUSED | generate-react | ✘ Refused — 1 token(s) defined twice with different values inside ONE slot; the merge would silently drop one layer: | 2.1s | 0 | 0 | 0 | ungraded |
-| Label | flowbite.label | stopped | REFUSED | generate-react | ✘ Refused — 1 token(s) defined twice with different values inside ONE slot; the merge would silently drop one layer: | 2.1s | 0 | 0 | 0 | ungraded |
-| Card (flowbite.card) | flowbite.card | complete | — | — | — | 4.5s | 1 | 1 | 0 | ungraded |
-| HelperText | flowbite.helpertext | stopped | REFUSED | generate-react | ✘ Refused — 1 token(s) defined twice with different values inside ONE slot; the merge would silently drop one layer: | 3.4s | 0 | 0 | 0 | ungraded |
-| ToggleSwitch | flowbite.toggleswitch | stopped | REFUSED | generate-react | ✘ Refused — 3 token(s) defined twice with different values inside ONE slot; the merge would silently drop one layer: | 1.9s | 0 | 0 | 0 | ungraded |
-| Badge (flowbite.badge) | flowbite.badge | complete | — | — | — | 4.9s | 8 | 8 | 0 | ungraded |
-| Button (flowbite.button) | flowbite.button | complete | — | — | — | 6.6s | 8 | 8 | 0 | ungraded |
+| Alert (flowbite.alert) | flowbite.alert | complete | — | — | — | 4.4s | 4 | 4 | 0 | ungraded |
+| Kbd | flowbite.kbd | complete | — | — | — | 4.3s | 1 | 1 | 0 | ungraded |
+| Label | flowbite.label | complete | — | — | — | 4.1s | 5 | 5 | 0 | ungraded |
+| Card (flowbite.card) | flowbite.card | complete | — | — | — | 3.6s | 1 | 1 | 0 | ungraded |
+| HelperText | flowbite.helpertext | complete | — | — | — | 4.2s | 5 | 5 | 0 | ungraded |
+| ToggleSwitch | flowbite.toggleswitch | complete | — | — | — | 4.5s | 6 | 6 | 0 | ungraded |
+| Badge (flowbite.badge) | flowbite.badge | complete | — | — | — | 4.1s | 8 | 8 | 0 | ungraded |
+| Button (flowbite.button) | flowbite.button | complete | — | — | — | 4.3s | 8 | 8 | 0 | ungraded |
 
 Images absent, by named reason (a blank cell is never allowed):
 
@@ -107,7 +107,12 @@ These are registered in `extract/figma/census/first-pass.ts` (`EXAM_QUEUE`) and 
 | selftest-tailwind | recognisable | 0/0 | 0/0 |
 | selftest-altitude | chain | 0/8 | 0/8 |
 | selftest-altitude | recognisable | 0/0 | 0/0 |
-| selftest-flowbite-live | chain | 4/8 | 4/8 |
+| selftest-flowbite-live | chain | 8/8 | 8/8 |
 | selftest-flowbite-live | recognisable | 0/0 | 0/0 |
 
-No named decrease has been recorded.
+Named movements:
+
+| date | exam | metric | from | to | reason |
+|---|---|---|---|---|---|
+| 2026-08-25 | selftest-flowbite-live | chain | 4/8 | 8/8 | ROSE. The four sets that stopped at generate-react did so because the fresh mint re-derived geometry from DUMP-ROUNDED boxes — imported.kbd.root.width came back "39.92px" where the corpus spells the same measurement "39.9219px" — and generate rightly refuses a slot holding two values. The census healed it with a token prune the documented CLI has no flag for; the exam, which performs no repair, took the refusal. Fixed at the cause instead: core/mint-tokens.ts now asks the corpus what it already spells at each claimed path and carries THAT when the observation is it re-rounded (MintOptions.corpusValueAt / sameUnderDumpRounding), naming every reconciled row in the proposal report. Six leaves reconciled across helper-text/kbd/label/toggle-switch; zero conflicts remain; the census prune is now a CHECKED de-dup that REFUSES a value disagreement instead of resolving it. No exam input, packet or rule changed. |
+| 2026-08-25 | selftest-tailwind | chain | 0/8 — stopped: promote (8 REFUSED) | 0/8 — stopped: mint (8 PENDING) | FLAT, SHAPE MOVED, and this is the finding the exam existed to produce. Every set used to die at promote on “authored alert prop dismissable: prop “dismissable” is not exactly one entry of props[]” — the committed capture record carried an `icon` prop, a `dismissable` prop and six anatomy parts that NO committed input produces (hand-written into the record by ac5e6181, back-porting c924c9c2). Those four facts now ride the authored-facts door as explicit, refusable INPUTS (the door’s new `add` operation), and the record carries only what the capture produces. All eight sets now run capture → promote → validate → generate → bundle clean and stop at mint, which is MCP-DRIVEN and not a capability this harness has (docs/31 §6). The rate is still 0/8 because a PENDING mint is not a completed chain, and it will not move until an agent drives the write and records its evidence. |

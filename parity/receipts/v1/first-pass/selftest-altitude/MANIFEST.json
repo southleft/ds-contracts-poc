@@ -3,8 +3,8 @@
   "direction": "code-to-canvas",
   "describe": "SELF-TEST FIXTURE — altitude-web-components@1.0.2 through the documented code→canvas chain (docs/21 §2). NOT held out. It exists beside selftest-tailwind for one reason: tailwind's chain stops at `promote`, so tailwind alone can never exercise generate → bundle → mint. A library with no authored-facts ledger is the cheapest way to put those stages under the metric too.",
   "heldOut": false,
-  "date": "2026-08-24",
-  "engineSha": "0ef93340ea915c7c12c6dd0a7ce6f08635721894",
+  "date": "2026-08-25",
+  "engineSha": "4c43433f80493d205c11638b450a1a3bb7d18eaa",
   "input": {
     "library": "altitude",
     "manifest": "examples/altitude/ds-library.json",
@@ -29,7 +29,9 @@
     "requested": true,
     "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
     "status": "PENDING",
-    "message": "no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 (probed /health: 9225:404, 9226:404, 9228:200, 9230:404). The local bridge serves MCP over stdio to its own client and WebSocket to plugin clients; a Node process cannot issue a canvas write through either. Bundle produced, mint pending — the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact."
+    "message": "no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-altitude/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact.",
+    "driver": "mcp",
+    "evidence": null
   },
   "noRetry": true,
   "cellCap": 8

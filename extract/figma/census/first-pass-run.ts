@@ -37,6 +37,7 @@ import { validateContract } from "../../../core/emit-react.js";
 import { REPO } from "./corpus.js";
 import {
   CELL_CAP,
+  FIRST_PASS_DIR,
   FORBIDDEN_FILE_KEYS,
   SCRATCH_FILE_KEY,
   artifactOf,
@@ -90,8 +91,9 @@ function record(
   command: string | null,
   message: string,
   artifacts: StageRecord["artifacts"] = [],
+  driver: NonNullable<StageRecord["driver"]> = "harness",
 ): boolean {
-  c.stages.push({ stage, status, ms, command, message, artifacts });
+  c.stages.push({ stage, status, ms, driver, command, message, artifacts });
   if (status !== "ok") c.stopped = true;
   return status === "ok";
 }
@@ -103,6 +105,7 @@ function skipRest(c: Chain, stages: string[]): void {
       stage: s,
       status: "SKIPPED",
       ms: 0,
+      driver: s === "mint" ? "mcp" : "harness",
       command: null,
       message: `an earlier stage stopped this chain (${c.stages.find((x) => x.status !== "ok" && x.status !== "SKIPPED")?.stage ?? "?"})`,
       artifacts: [],
@@ -159,46 +162,66 @@ function copyImage(
 // ---------------------------------------------------------------------------
 
 /**
- * `--mint` drives the figma-console bridge. A Node process reaches that bridge
- * only if a COMMAND endpoint answers: the local server speaks MCP over stdio to
- * its client and WebSocket to plugin clients, and neither of those accepts a
- * command from here. This probe looks for one on the documented port range and
- * reports what it found. It never guesses, and it never opens a socket to a
- * file key it has not asserted first.
+ * MINT IS AN MCP-DRIVEN STAGE (2026-08-24, FINDING 3) — and this harness is
+ * not an MCP client.
+ *
+ * The earlier version of this function scanned 127.0.0.1:9223-9232 for a
+ * "COMMAND endpoint" and printed what answered. That was an honest refusal
+ * wrapped around a dishonest premise: there is no such endpoint to find. The
+ * figma-console bridge speaks **MCP over stdio to its own client** and
+ * **WebSocket to plugin clients**; a Node process is neither, so no port scan
+ * can ever change the answer, and printing `9228:200` invited the reader to
+ * believe a write was one configuration away. It is not one configuration
+ * away — it is a different actor.
+ *
+ * So the mint stage is modelled for what it is: the harness runs the documented
+ * re-emit, asserts the WRONG-FILE guard is in the bytes, and stops with a
+ * runnable artifact. The canvas write is performed by an AGENT holding the
+ * figma-console MCP tools, and that agent records its own evidence beside the
+ * packet as `mint-evidence.json`. No evidence, no mint: the stage is PENDING
+ * and the receipt says by whom it would have to be driven.
+ *
+ * This does NOT weaken the no-retry rule. The MCP-driven mint gets exactly one
+ * attempt too, and its evidence records that attempt, not a best-of.
  */
-export function probeBridge(): { available: boolean; message: string } {
-  const ports: number[] = [];
-  for (let p = 9223; p <= 9232; p++) ports.push(p);
-  const seen: string[] = [];
-  for (const p of ports) {
-    try {
-      const out = execFileSync(
-        "curl",
-        [
-          "-s",
-          "-m",
-          "2",
-          "-o",
-          "/dev/null",
-          "-w",
-          "%{http_code}",
-          `http://127.0.0.1:${p}/health`,
-        ],
-        { encoding: "utf8" },
-      ).trim();
-      if (out !== "000") seen.push(`${p}:${out}`);
-    } catch {
-      /* a closed port is not an error */
-    }
+export interface MintDriver {
+  driver: "mcp";
+  /** Evidence path relative to the repo, or null when nobody has driven it. */
+  evidence: string | null;
+  message: string;
+}
+
+export function mintEvidencePath(exam: string): string {
+  return path.join(FIRST_PASS_DIR, exam, "mint-evidence.json");
+}
+
+export function mintDriver(exam: string, requested: boolean): MintDriver {
+  const rel = mintEvidencePath(exam);
+  const abs = path.join(REPO, rel);
+  const architecture =
+    `the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and ` +
+    `WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process ` +
+    `issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at ${rel}`;
+  if (!requested) {
+    return {
+      driver: "mcp",
+      evidence: null,
+      message: `--mint was not requested; the exam stops at the runnable script by design. When it is requested, ${architecture}.`,
+    };
+  }
+  if (!existsSync(abs)) {
+    return {
+      driver: "mcp",
+      evidence: null,
+      message:
+        `no MCP-driven mint evidence is recorded — ${architecture}. Bundle produced, mint pending: ` +
+        `the emitted script carries the WRONG-FILE guard on ${SCRATCH_FILE_KEY} and is the runnable artifact.`,
+    };
   }
   return {
-    available: false,
-    message:
-      `no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 ` +
-      `(probed /health: ${seen.length > 0 ? seen.join(", ") : "nothing answered"}). ` +
-      `The local bridge serves MCP over stdio to its own client and WebSocket to plugin clients; ` +
-      `a Node process cannot issue a canvas write through either. Bundle produced, mint pending — ` +
-      `the emitted script carries the WRONG-FILE guard on ${SCRATCH_FILE_KEY} and is the runnable artifact.`,
+    driver: "mcp",
+    evidence: rel,
+    message: `MCP-driven mint evidence recorded at ${rel} — ${architecture}.`,
   };
 }
 
@@ -591,13 +614,9 @@ export async function runCodeToCanvas(
     ],
     { cwd: root },
   );
-  const bridge = opts.mint
-    ? probeBridge()
-    : {
-        available: false,
-        message:
-          "--mint was not requested; the exam stops at the runnable script by design",
-      };
+  const bridge = mintDriver(def.exam, opts.mint);
+  // Direction A's `mint` is the ONE stage this harness does not execute (see
+  // mintDriver): it emits the guard-carrying script and stops.
   const mintScriptFor = (id: string): string | null => {
     if (!existsSync(mintDir)) return null;
     for (const f of readdirSync(mintDir).sort()) {
@@ -628,12 +647,13 @@ export async function runCodeToCanvas(
     record(
       c,
       "mint",
-      guardFail ? "ERROR" : "PENDING",
+      guardFail ? "ERROR" : bridge.evidence ? "ok" : "PENDING",
       mr.ms,
-      `npx ds-contracts figma … --file-key ${SCRATCH_FILE_KEY}  →  run through the figma-console bridge`,
+      `npx ds-contracts figma … --file-key ${SCRATCH_FILE_KEY}  →  an MCP-holding agent runs it through the figma-console bridge`,
       guardFail ??
-        `runnable script emitted with the WRONG-FILE guard on ${SCRATCH_FILE_KEY}; bridge: ${bridge.message}`,
+        `runnable script emitted with the WRONG-FILE guard on ${SCRATCH_FILE_KEY}; ${bridge.message}`,
       [artifactOf(script, false)],
+      "mcp",
     );
   }
 
@@ -728,6 +748,8 @@ export async function runCodeToCanvas(
         ? "ok"
         : "PENDING",
       message: bridge.message,
+      driver: bridge.driver,
+      evidence: bridge.evidence,
     },
     noRetry: true,
     cellCap: CELL_CAP,
@@ -1200,6 +1222,7 @@ export async function runCanvasToCode(
       status: "SKIPPED",
       message:
         "canvas→code is READ-ONLY; no exam in this direction writes to any Figma file",
+      evidence: null,
     },
     noRetry: true,
     cellCap: CELL_CAP,
