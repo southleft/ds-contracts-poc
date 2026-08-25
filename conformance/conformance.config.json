@@ -731,7 +731,7 @@
       "axes": []
     },
     {
-      "__case": "pseudo-elements: a DRAWN ::after decor box whose entire SHAPE is a clip-path (the antd tooltip arrow: a 16x8 solid box cut to a triangle) — declared UNSUPPORTED",
+      "__case": "pseudo-elements: a DRAWN ::after decor box whose entire SHAPE is a clip-path (the antd tooltip arrow: a 16x8 solid box cut to a triangle) — declared REFUSED",
       "name": "CasePseudoDecorClipPath",
       "importName": "CasePseudoDecorClipPath",
       "contract": "conformance/seeds/pseudo-decor-clip-path.contract.json",

@@ -1522,9 +1522,41 @@ function svgStrokeAttrs(
         );
       }
     } else {
-      receipts.push(
-        `svg-circle-dash-unreadable: ${label} — stroke-dasharray ${dash} not px; dashes dropped`,
-      );
+      // RC4 - A DASHARRAY LIST IS ABSOLUTE PX TOO, and it is the ONE dash
+      // spelling Figma's SVG importer honours verbatim.
+      //
+      // The old message claimed MUI's indeterminate `1px, 200px` was "not px",
+      // which was false: it is two absolute px lengths, just not one. Dropping
+      // it drew a CLOSED 360 degree ring where the library draws a 1-unit tick,
+      // and that is why the census graded the indeterminate variant identical
+      // to the determinate one. MUI's own keyframe (CircularProgress.js,
+      // circularDashKeyframe 0%) is `stroke-dasharray: 1px, 200px;
+      // stroke-dashoffset: 0` - the pinned resting state IS the captured pair.
+      //
+      // The PHASE cannot ride a list: the importer honours dasharray and
+      // silently ignores dashoffset, and the single-value "visible gap" fold
+      // above has no meaning for a list (there is no one number to subtract
+      // from). A nonzero offset on a list is therefore a NAMED wall, not a
+      // silent drop.
+      const parts = dash.split(',').map((v) => v.trim());
+      const nums = parts.map((v) => /^(-?\d+(?:\.\d+)?)px$/.exec(v));
+      if (parts.length > 1 && nums.every((n) => n !== null)) {
+        const lens = nums.map((n) => n![1]);
+        strokeAttrs.push(` stroke-dasharray="${lens.join(' ')}"`);
+        receipts.push(
+          `svg-circle-dash-list-carried: ${label} - stroke-dasharray ${dash} carried VERBATIM as "${lens.join(' ')}" (a list of absolute px lengths is the one dash spelling Figma's SVG importer honours; dropping it drew a closed ring where the library draws ${lens[0]} user unit(s) of stroke)`,
+        );
+        const off = /^(-?\d+(?:\.\d+)?)px$/.exec((dashOffset ?? '0px').trim());
+        if (!off || Number(off[1]) !== 0) {
+          receipts.push(
+            `svg-circle-dashoffset-uncarried: ${label} - stroke-dashoffset ${dashOffset} rides a MULTI-value dasharray and is DROPPED: Figma's SVG importer honours dasharray and silently ignores dashoffset, and the single-value visible-gap fold cannot apply to a list. The dash PATTERN is carried; its PHASE is not (named wall)`,
+          );
+        }
+      } else {
+        receipts.push(
+          `svg-circle-dash-unreadable: ${label} - stroke-dasharray ${dash} is not a list of absolute px lengths (percent / em / pathLength-relative are not readable as user units); dashes dropped`,
+        );
+      }
     }
   }
   return strokeAttrs.join('');
@@ -1924,6 +1956,18 @@ export function promoteAnatomy(
     hostIdx: number;
     /** value-keyed markup: axis prop + per-value assets, or single asset. */
     perValue: Array<{ value?: string; prop?: string; asset: string; size: number }>;
+    /** RC4 — per-CONJUNCTION glyph parts: the markup is a rectangular product
+     *  of per-axis value sets (fluent.checkbox: checked x size x shape), which
+     *  the contract spells as visibleWhen on one axis + stylesWhen
+     *  display:none on the excluded values of the rest. */
+    perConjunction?: Array<{
+      label: string;
+      asset: string;
+      size: number;
+      conditions: string;
+      visibleWhen: { prop: string; equals: string | string[] };
+      stylesWhen: Array<{ prop: string; equals: string; styles: { display: 'none' } }>;
+    }>;
   }
   const svgPlans = new Map<number, SvgPlan>(); // host idx → plan
   const svgHostOf = new Map<number, number>(); // svg idx → host idx
@@ -2006,7 +2050,154 @@ export function promoteAnatomy(
         return [...byValue.values()].every((s) => s.size === 1);
       });
       if (!axis) {
-        refusals.push(`svg-content-multi-axis: ${comp.name}.${t.host.partName} — markup varies over more than one axis; asset refused (part still promoted as a box)`);
+        // RC4 - MULTI-AXIS GLYPH CONJUNCTION.
+        //
+        // Until this door the plan searched for exactly ONE axis whose values
+        // partition the markup and, failing, threw the ENTIRE glyph away and
+        // promoted the host as an empty box. Fluent's checkbox indicator
+        // varies over `checked` (check vs dash), `size` (Fluent authors
+        // DIFFERENT 12px and 16px paths) and `shape` (mixed square vs mixed
+        // circular) at once - so the minted set was a blue box with no
+        // checkmark in it, which is the screenshot the owner rejected.
+        //
+        // A CONJUNCTION of per-axis value sets is already spellable: the
+        // contract's `visibleWhen` (one axis, a value or a value SUBSET) plus
+        // one `stylesWhen display:none` per excluded value of every OTHER
+        // constrained axis. `variantParts` (core/emit-figma-script) and the
+        // React/WC emitters resolve that exact pair today.
+        //
+        // TWO THINGS MAKE THE CARRIAGE SAFE, and both are conformance-guarded:
+        //  - groups are keyed on markup AND RENDER SIZE together, so one
+        //    authored glyph reused at two sizes is ONE asset in TWO boxes
+        //    (grouping on markup alone pinned Fluent's large mixed-circular
+        //    cell to the small cell's 12px box);
+        //  - the rectangle is asserted over the part's OWN PRESENCE DOMAIN -
+        //    every enabled combo where the HOST renders, not only the combos
+        //    where the glyph is present. A rectangle that reaches a cell the
+        //    library leaves EMPTY would mint ink that does not exist, and the
+        //    conformance fixture cannot measure over-draw at all (it walks
+        //    captured-channel -> contract, never contract -> more-than-captured).
+        //    Guarded by conformance/cases/svg-glyph-absent-cells, whose glyph
+        //    is drawn in 2 of the 4 cells its value sets span.
+        //
+        // Everything that is NOT a rectangle over that domain - raggedness by
+        // a different markup, raggedness by absence, a constrained axis that
+        // is not a contract prop, a constrained axis pinned on the `unset`
+        // pseudo-value - keeps refusing under the ORIGINAL name, with the
+        // fabricated cells MEASURED into the refusal so a reader can see which
+        // cells the rectangle would have invented.
+        const hostDomain = presentBy.get(hostIdx) ?? [];
+        /** Value universe per axis over the host's own presence domain. */
+        const domainValues = new Map<string, Set<string>>();
+        let why: string | null = hostDomain.length === 0 ? 'the host renders in no enabled combo' : null;
+        for (const ax of space.axes) {
+          const vs = new Set<string>();
+          for (const c of hostDomain) {
+            const v = c.axisValues[ax.prop];
+            if (v === undefined) { why ??= `axis "${ax.prop}" has no value in combo ${c.key}`; break; }
+            vs.add(v);
+          }
+          domainValues.set(ax.prop, vs);
+        }
+        /** markup + RENDER SIZE groups (one authored glyph at two sizes stays
+         *  two parts over one asset). */
+        const groups = new Map<string, { markup: string; size: number; keys: string[] }>();
+        const groupOfCombo = new Map<string, string>();
+        for (const [k, m] of markups) {
+          const gk = `${m.markup} @${m.size}`;
+          (groups.get(gk) ?? groups.set(gk, { markup: m.markup, size: m.size, keys: [] }).get(gk)!).keys.push(k);
+          groupOfCombo.set(k, gk);
+        }
+        interface GlyphConjunction {
+          markup: string;
+          size: number;
+          label: string;
+          conditions: string;
+          constrained: typeof space.axes;
+          sets: Map<string, Set<string>>;
+        }
+        const conjs: GlyphConjunction[] = [];
+        for (const [gk, g] of groups) {
+          if (why !== null) break;
+          const sets = new Map<string, Set<string>>();
+          for (const ax of space.axes) sets.set(ax.prop, new Set(g.keys.map((k) => comboByKey.get(k)!.axisValues[ax.prop])));
+          const constrained = space.axes.filter((ax) => sets.get(ax.prop)!.size < domainValues.get(ax.prop)!.size);
+          const label = constrained.map((ax) => [...sets.get(ax.prop)!].map(kebabValue).join('-')).join('-');
+          if (constrained.length === 0) {
+            why = 'two glyph groups both span the whole presence domain - there is no axis value to condition either on';
+            break;
+          }
+          for (const ax of constrained) {
+            if (!contract.props.some((p) => p.name === ax.prop)) {
+              why = `the conjunction is constrained on axis "${ax.prop}", which is not a contract prop - visibleWhen/stylesWhen can only name a declared prop`;
+              break;
+            }
+            if (ax.unset !== undefined && sets.get(ax.prop)!.has(ax.unset)) {
+              why = `the conjunction is constrained on the UNSET pseudo-value "${ax.unset}" of axis "${ax.prop}", which has no contract enum spelling`;
+              break;
+            }
+          }
+          if (why !== null) break;
+          // RECTANGULARITY over the host's OWN presence domain - the absent
+          // cells included. This is the assertion the previous round made only
+          // over the PRESENT combos, which is why a rectangle could reach a
+          // cell the library leaves empty and mint ink that does not exist.
+          const fabricated = hostDomain.filter(
+            (c) => space.axes.every((ax) => sets.get(ax.prop)!.has(c.axisValues[ax.prop])) && groupOfCombo.get(c.key) !== gk,
+          );
+          if (fabricated.length > 0) {
+            const empty = fabricated.filter((c) => !markups.has(c.key));
+            const shown = empty.slice(0, 4).map((c) => c.key).join(', ');
+            why =
+              `the conjunction "${label}" is not a rectangle over the part's own presence domain: it would draw this glyph in ${fabricated.length} of the ${hostDomain.length} combo(s) where "${t.host.partName}" renders but the library does not` +
+              ` (${empty.length} draw NO glyph at all${empty.length > 0 ? `: ${shown}${empty.length > 4 ? ', and more' : ''}` : ''}; ${fabricated.length - empty.length} draw a DIFFERENT glyph)`;
+            break;
+          }
+          conjs.push({
+            markup: g.markup,
+            size: g.size,
+            label,
+            conditions: constrained.map((ax) => `${ax.prop}=${[...sets.get(ax.prop)!].join('|')}`).join(', '),
+            constrained,
+            sets,
+          });
+        }
+        if (why !== null || conjs.length === 0) {
+          refusals.push(
+            `svg-content-multi-axis: ${comp.name}.${t.host.partName} - markup varies over more than one axis; asset refused (part still promoted as a box)${why === null ? '' : ` - ${why}`}`,
+          );
+          continue;
+        }
+        const perConjunction: NonNullable<SvgPlan['perConjunction']> = [];
+        /** One authored glyph reused at several render sizes is ONE asset. */
+        const assetByMarkup = new Map<string, string>();
+        for (const cj of conjs) {
+          let asset = assetByMarkup.get(cj.markup);
+          if (asset === undefined) {
+            asset = `${componentKebab}-${kebabValue(t.host.partName)}-${cj.label}`;
+            assetByMarkup.set(cj.markup, asset);
+            assets.set(asset, cj.markup);
+            assetOwner.set(asset, t.host.partName);
+          }
+          const [vwAxis, ...rest] = cj.constrained;
+          const vwValues = [...cj.sets.get(vwAxis.prop)!];
+          perConjunction.push({
+            label: cj.label,
+            asset,
+            size: cj.size,
+            conditions: cj.conditions,
+            visibleWhen: { prop: vwAxis.prop, equals: vwValues.length === 1 ? vwValues[0] : vwValues },
+            stylesWhen: rest.flatMap((ax) =>
+              [...domainValues.get(ax.prop)!]
+                .filter((v) => !cj.sets.get(ax.prop)!.has(v))
+                .map((v) => ({ prop: ax.prop, equals: v, styles: { display: 'none' as const } })),
+            ),
+          });
+        }
+        svgPlans.set(hostIdx, { hostIdx, perValue: [], perConjunction });
+        receipts.push(
+          `svg-glyph-conjunction-carried: ${comp.name}.${t.host.partName} - ${conjs.length} glyph/size group(s) over ${assetByMarkup.size} distinct asset(s), keyed by ${[...new Set(conjs.flatMap((c) => c.constrained.map((a) => a.prop)))].join(' x ')}, carried as per-conjunction icon parts (visibleWhen on one axis + stylesWhen display:none on the excluded values of the rest); RECTANGULARITY asserted over all ${hostDomain.length} enabled combo(s) where "${t.host.partName}" renders - absent cells included, so no cell the library leaves empty can be minted`,
+        );
         continue;
       }
       const perValue: SvgPlan['perValue'] = [];
@@ -2060,6 +2251,22 @@ export function promoteAnatomy(
    *  — buildPart never runs on the root, and the plan silently dropped). */
   const applySvgPlan = (part: Part, e: UnionNode, plan: SvgPlan): void => {
     if (e.rep.tag === 'svg') delete part.element; // icon parts render their own <svg> from the asset
+    // RC4: per-CONJUNCTION glyph parts. The rectangle over the host's own
+    // presence domain was asserted in the plan; here it is only spelled -
+    // visibleWhen on the first constrained axis (a value or a value SUBSET),
+    // stylesWhen display:none on every excluded value of the rest.
+    if (plan.perConjunction) {
+      part.parts = { ...part.parts };
+      for (const pc of plan.perConjunction) {
+        part.parts[`${e.partName}-${pc.label}`] = {
+          icon: { asset: pc.asset, size: pc.size },
+          visibleWhen: pc.visibleWhen,
+          ...(pc.stylesWhen.length > 0 ? { stylesWhen: pc.stylesWhen } : {}),
+          description: `Per-conjunction svg content promoted from the computed floor: the glyph drawn when ${pc.conditions}.`,
+        };
+      }
+      return;
+    }
     if (plan.perValue.length === 1 && plan.perValue[0].value === undefined) {
       part.icon = { asset: plan.perValue[0].asset, size: plan.perValue[0].size };
       // the host element wraps the glyph; its own element stays
@@ -2489,6 +2696,33 @@ export function promoteAnatomy(
       // on its `::before`. The box was carried and the shadow vanished with
       // no receipt (the shadow refusal above fires only when nothing else
       // paints). Named here, beside the carriage.
+      // RC4 - A DRAWN DECOR PSEUDO'S CLIP REGION HAS NO CONTRACT SPELLING,
+      // and until this line the loss was SILENT TWICE: the pseudo reader
+      // CONSUMES the channel, so `clip-path` never reached codeOnlyChannels,
+      // and no artifact in the conformance naming union mentioned it either.
+      //
+      // antd's tooltip arrow is a 16x8 solid box whose ENTIRE shape is
+      // `clip-path: path("M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107
+      // A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z")` -
+      // a rounded up-pointing triangle. The box is promoted UNCLIPPED, i.e.
+      // with MORE ink than the library draws, and the wall now says so with
+      // the measured value in it.
+      //
+      // NOT approximated on purpose: ShapeSchema is rect / ellipse / REGULAR
+      // n-gon. A rounded triangle inscribed in a 16x8 box is none of those,
+      // every library spells its arrow differently (antd clips a path, MUI
+      // rotates a square, Bootstrap draws borders), and `polygonClipPath(3)`
+      // inscribes on the ellipse (base at 75%), so the code half and Figma's
+      // REGULAR_POLYGON would not even agree with each other. Carrying it
+      // needs a real vector-shape vocabulary - a schema round, not a guess.
+      {
+        const clipped = drawnRows.filter((r) => (r.st['clip-path'] ?? 'none') !== 'none');
+        if (clipped.length > 0) {
+          refusals.push(
+            `pseudo-decor-clip-path-uncarried: ${e.partName}${pe} is cut by clip-path ${clipped[0].st['clip-path']} in ${clipped.length}/${drawnRows.length} drawn combos - the contract's ShapeSchema is rect / ellipse / REGULAR n-gon and has no spelling for an arbitrary clip region; the box is promoted UNCLIPPED (more ink than the library draws) and the clip is NOT carried`,
+          );
+        }
+      }
       {
         const shadowed = drawnRows.filter((r) => (r.st['box-shadow'] ?? 'none') !== 'none');
         if (shadowed.length > 0) {
@@ -3505,7 +3739,7 @@ export function promoteAnatomy(
       newRoot.parts = rootChildren; // per-value children merge into the same map
       applySvgPlan(newRoot, rootEntry, rootPlan);
       receipts.push(
-        `root-svg-plan-carried: ${comp.name} root hosts ${rootPlan.perValue.length === 1 && rootPlan.perValue[0].value === undefined ? `icon asset ${rootPlan.perValue[0].asset}` : `${rootPlan.perValue.length} per-value glyph part(s) (${rootPlan.perValue.map((pv) => pv.asset).join(', ')})`} — round 5c root-hosted svg plan (the round-5a named promotion drop)`,
+        `root-svg-plan-carried: ${comp.name} root hosts ${rootPlan.perConjunction ? `${rootPlan.perConjunction.length} per-conjunction glyph part(s) (${rootPlan.perConjunction.map((pc) => pc.label).join(', ')})` : rootPlan.perValue.length === 1 && rootPlan.perValue[0].value === undefined ? `icon asset ${rootPlan.perValue[0].asset}` : `${rootPlan.perValue.length} per-value glyph part(s) (${rootPlan.perValue.map((pv) => pv.asset).join(', ')})`} — round 5c root-hosted svg plan (the round-5a named promotion drop)`,
       );
     }
   }

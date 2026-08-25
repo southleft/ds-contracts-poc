@@ -200,7 +200,40 @@ export function readCarriage(outDir: string): Map<string, Array<{ part: string; 
   const ext = readJson<{ mintedTokens?: Record<string, unknown> }>(path.join(outDir, 'enriched.extension.json'));
   const dtcg = readJson<Record<string, unknown>>(path.join(REPO, 'conformance', 'tokens', 'conformance.dtcg.json')) ?? {};
   if (!contract) return new Map();
-  return carriageOfContract(contract, [ext?.mintedTokens ?? {}, dtcg]);
+  const out = carriageOfContract(contract, [ext?.mintedTokens ?? {}, dtcg]);
+
+  // GLYPH SHAPE (RC4). A part's `d` has no channel spelling: the svg subtree is
+  // CONSUMED into a reconstructed asset and the part points at it by name. The
+  // gate was therefore BLIND to the one thing that decides whether a glyph
+  // survived - it could not tell a carried check-mark from a thrown-away one,
+  // and both measured as "not carried". So the asset a part references is read
+  // here and its path data is offered as carriage of `d`, in the browser's own
+  // `path("...")` spelling.
+  //
+  // DELIBERATELY NARROW: only `d`, and only from an asset a `Part.icon.asset`
+  // names. Exposing every asset attribute would flip svg-stroke-glyph-fill-none
+  // (whose asset carries fill="none") from its declared REFUSED to
+  // UNDECLARED-CARRY - a reclassification of a baselined case, which is not
+  // this door's business. Nothing here is engine code: it reads the committed
+  // artifacts exactly like every other reader in this file.
+  const assetHits: CarriageHit[] = [];
+  const walkIcons = (part: string, node: unknown): void => {
+    if (!node || typeof node !== 'object') return;
+    const o = node as Record<string, unknown>;
+    const icon = o.icon as { asset?: unknown } | undefined;
+    if (icon && typeof icon === 'object' && typeof icon.asset === 'string') {
+      const svgPath = path.join(outDir, 'assets', `${icon.asset}.svg`);
+      if (existsSync(svgPath)) {
+        for (const m of readFileSync(svgPath, 'utf8').matchAll(/\sd="([^"]*)"/g)) {
+          assetHits.push({ part, where: `icon.asset ${icon.asset}`, value: `path("${m[1]}")`, raw: m[1] });
+        }
+      }
+    }
+    for (const [k, v] of Object.entries((o.parts ?? {}) as Record<string, unknown>)) walkIcons(k, v);
+  };
+  for (const [k, v] of Object.entries((contract.anatomy ?? {}) as Record<string, unknown>)) walkIcons(k, v);
+  if (assetHits.length > 0) out.set('d', [...(out.get('d') ?? []), ...assetHits]);
+  return out;
 }
 
 export interface CarriageHit {

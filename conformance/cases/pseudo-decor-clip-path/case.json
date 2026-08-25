@@ -2,8 +2,8 @@
   "id": "pseudo-decor-clip-path",
   "feature": "pseudo-elements",
   "construct": "a DRAWN ::after decor box whose entire SHAPE is a clip-path (the antd tooltip arrow: a 16x8 solid box cut to a triangle)",
-  "why": "The decor grammar promotes the box on background-color + border ring and never reads clip-path, so antd's tooltip arrow minted as its UNCLIPPED 16x8 rectangle — a flat-topped tab where the library draws a point. The loss was SILENT TWICE: the pseudo reader consumes the channel so it never reaches codeOnlyChannels, and no artifact in the naming union mentioned it. ShapeSchema is rect / ellipse / REGULAR n-gon, so the region has no contract spelling today; the honest outcome is a NAMED wall carrying the measured clip value, not a guessed polygon.",
-  "expect": "UNSUPPORTED",
+  "why": "The decor grammar promotes the box on background-color + border ring and never reads clip-path, so antd's tooltip arrow minted as its UNCLIPPED 16x8 rectangle — a flat-topped tab where the library draws a point. The loss was SILENT TWICE: the pseudo reader consumes the channel so it never reaches codeOnlyChannels, and no artifact in the naming union mentioned it. ShapeSchema is rect / ellipse / REGULAR n-gon, so the region has no contract spelling today; the honest outcome is a NAMED wall carrying the measured clip value, not a guessed polygon. Declared REFUSED, not UNSUPPORTED: the channel IS read (the decor reader consumes the pseudo's whole style map) and is now refused BY NAME beside the carriage - 'never modelled' would be the wrong fact about it.",
+  "expect": "REFUSED",
   "expectName": "pseudo-decor-clip-path-uncarried",
   "expectWhere": "LEDGER.md",
   "observable": {
