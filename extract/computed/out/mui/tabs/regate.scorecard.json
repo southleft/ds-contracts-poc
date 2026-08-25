@@ -248,8 +248,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 4488,
-      "cellsEqual": 4050,
-      "pctEqual": 90.24064171122994,
+      "cellsEqual": 4218,
+      "pctEqual": 93.98395721925134,
       "rowsFullyEqual": 0,
       "rows": 24
     },
@@ -284,82 +284,62 @@
         "key": "primary.primary__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 23,
+        "channelsMismatched": 16,
         "unscorable": "no-original"
       },
       {
         "key": "primary.secondary__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 23,
+        "channelsMismatched": 16,
         "unscorable": "no-original"
       },
       {
         "key": "secondary.primary__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 23,
+        "channelsMismatched": 16,
         "unscorable": "no-original"
       },
       {
         "key": "secondary.secondary__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 23,
+        "channelsMismatched": 16,
         "unscorable": "no-original"
       },
       {
         "key": "primary.primary__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 22,
+        "channelsMismatched": 15,
         "unscorable": "no-original"
       },
       {
         "key": "primary.primary__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 22,
+        "channelsMismatched": 15,
         "unscorable": "no-original"
       },
       {
         "key": "primary.primary__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 22,
+        "channelsMismatched": 15,
         "unscorable": "no-original"
       },
       {
         "key": "primary.secondary__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 22,
+        "channelsMismatched": 15,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
       [
-        "root.position-anchor",
-        24
-      ],
-      [
-        "tabs-fixed.position-anchor",
-        24
-      ],
-      [
-        "tabs-list.position-anchor",
-        24
-      ],
-      [
-        "label.position-anchor",
-        24
-      ],
-      [
         "label.vertical-align",
-        24
-      ],
-      [
-        "label-2.position-anchor",
         24
       ],
       [
@@ -367,15 +347,7 @@
         24
       ],
       [
-        "label-3.position-anchor",
-        24
-      ],
-      [
         "label-3.vertical-align",
-        24
-      ],
-      [
-        "tabs-indicator.position-anchor",
         24
       ],
       [
@@ -396,6 +368,34 @@
       ],
       [
         "label-2.border-bottom-color",
+        16
+      ],
+      [
+        "label-2.border-left-color",
+        16
+      ],
+      [
+        "label-2.border-right-color",
+        16
+      ],
+      [
+        "label-2.border-top-color",
+        16
+      ],
+      [
+        "label-3.border-bottom-color",
+        16
+      ],
+      [
+        "label-3.border-left-color",
+        16
+      ],
+      [
+        "label-3.border-right-color",
+        16
+      ],
+      [
+        "label-3.border-top-color",
         16
       ]
     ],
@@ -473,30 +473,12 @@
       {
         "key": "primary.primary__default",
         "channelsCompared": 187,
-        "channelsEqual": 165,
+        "channelsEqual": 172,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "border-bottom-color",
             "ours": "rgba(0, 0, 0, 1)",
@@ -519,12 +501,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(25, 118, 210, 1)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -558,12 +534,6 @@
           },
           {
             "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
@@ -594,21 +564,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -616,30 +574,12 @@
       {
         "key": "primary.primary__hover",
         "channelsCompared": 187,
-        "channelsEqual": 165,
+        "channelsEqual": 172,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "border-bottom-color",
             "ours": "rgba(0, 0, 0, 1)",
@@ -662,12 +602,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(25, 118, 210, 1)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -701,12 +635,6 @@
           },
           {
             "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
@@ -737,21 +665,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -759,29 +675,11 @@
       {
         "key": "primary.primary__focus-visible",
         "channelsCompared": 187,
-        "channelsEqual": 164,
+        "channelsEqual": 171,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "label",
             "channel": "border-bottom-color",
@@ -814,12 +712,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
@@ -847,12 +739,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(0, 0, 0, 0.6)"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -886,21 +772,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -908,30 +782,12 @@
       {
         "key": "primary.primary__active",
         "channelsCompared": 187,
-        "channelsEqual": 165,
+        "channelsEqual": 172,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "border-bottom-color",
             "ours": "rgba(0, 0, 0, 1)",
@@ -954,12 +810,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(25, 118, 210, 1)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -993,12 +843,6 @@
           },
           {
             "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
@@ -1029,21 +873,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1051,30 +883,12 @@
       {
         "key": "primary.secondary__default",
         "channelsCompared": 187,
-        "channelsEqual": 165,
+        "channelsEqual": 172,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "border-bottom-color",
             "ours": "rgba(0, 0, 0, 1)",
@@ -1097,12 +911,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(25, 118, 210, 1)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1136,12 +944,6 @@
           },
           {
             "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
@@ -1172,21 +974,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1194,30 +984,12 @@
       {
         "key": "primary.secondary__hover",
         "channelsCompared": 187,
-        "channelsEqual": 165,
+        "channelsEqual": 172,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "border-bottom-color",
             "ours": "rgba(0, 0, 0, 1)",
@@ -1240,12 +1012,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(25, 118, 210, 1)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1279,12 +1045,6 @@
           },
           {
             "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
@@ -1315,21 +1075,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1337,29 +1085,11 @@
       {
         "key": "primary.secondary__focus-visible",
         "channelsCompared": 187,
-        "channelsEqual": 164,
+        "channelsEqual": 171,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "label",
             "channel": "border-bottom-color",
@@ -1392,12 +1122,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
@@ -1425,12 +1149,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(0, 0, 0, 0.6)"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -1464,21 +1182,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1486,30 +1192,12 @@
       {
         "key": "primary.secondary__active",
         "channelsCompared": 187,
-        "channelsEqual": 165,
+        "channelsEqual": 172,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "border-bottom-color",
             "ours": "rgba(0, 0, 0, 1)",
@@ -1532,12 +1220,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(25, 118, 210, 1)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1571,12 +1253,6 @@
           },
           {
             "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
@@ -1607,21 +1283,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1629,30 +1293,12 @@
       {
         "key": "secondary.primary__default",
         "channelsCompared": 187,
-        "channelsEqual": 165,
+        "channelsEqual": 172,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "border-bottom-color",
             "ours": "rgba(0, 0, 0, 1)",
@@ -1675,12 +1321,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(156, 39, 176, 1)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1714,12 +1354,6 @@
           },
           {
             "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
@@ -1750,21 +1384,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1772,30 +1394,12 @@
       {
         "key": "secondary.primary__hover",
         "channelsCompared": 187,
-        "channelsEqual": 165,
+        "channelsEqual": 172,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "border-bottom-color",
             "ours": "rgba(0, 0, 0, 1)",
@@ -1818,12 +1422,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(156, 39, 176, 1)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1857,12 +1455,6 @@
           },
           {
             "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
@@ -1893,21 +1485,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1915,29 +1495,11 @@
       {
         "key": "secondary.primary__focus-visible",
         "channelsCompared": 187,
-        "channelsEqual": 164,
+        "channelsEqual": 171,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "label",
             "channel": "border-bottom-color",
@@ -1970,12 +1532,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
@@ -2003,12 +1559,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(0, 0, 0, 0.6)"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -2042,21 +1592,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2064,30 +1602,12 @@
       {
         "key": "secondary.primary__active",
         "channelsCompared": 187,
-        "channelsEqual": 165,
+        "channelsEqual": 172,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "border-bottom-color",
             "ours": "rgba(0, 0, 0, 1)",
@@ -2110,12 +1630,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(156, 39, 176, 1)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -2149,12 +1663,6 @@
           },
           {
             "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
@@ -2185,21 +1693,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2207,30 +1703,12 @@
       {
         "key": "secondary.secondary__default",
         "channelsCompared": 187,
-        "channelsEqual": 165,
+        "channelsEqual": 172,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "border-bottom-color",
             "ours": "rgba(0, 0, 0, 1)",
@@ -2253,12 +1731,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(156, 39, 176, 1)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -2292,12 +1764,6 @@
           },
           {
             "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
@@ -2328,21 +1794,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2350,30 +1804,12 @@
       {
         "key": "secondary.secondary__hover",
         "channelsCompared": 187,
-        "channelsEqual": 165,
+        "channelsEqual": 172,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "border-bottom-color",
             "ours": "rgba(0, 0, 0, 1)",
@@ -2396,12 +1832,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(156, 39, 176, 1)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -2435,12 +1865,6 @@
           },
           {
             "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
@@ -2471,21 +1895,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2493,29 +1905,11 @@
       {
         "key": "secondary.secondary__focus-visible",
         "channelsCompared": 187,
-        "channelsEqual": 164,
+        "channelsEqual": 171,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "label",
             "channel": "border-bottom-color",
@@ -2548,12 +1942,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
@@ -2581,12 +1969,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(0, 0, 0, 0.6)"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -2620,21 +2002,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2642,30 +2012,12 @@
       {
         "key": "secondary.secondary__active",
         "channelsCompared": 187,
-        "channelsEqual": 165,
+        "channelsEqual": 172,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "border-bottom-color",
             "ours": "rgba(0, 0, 0, 1)",
@@ -2688,12 +2040,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(156, 39, 176, 1)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -2727,12 +2073,6 @@
           },
           {
             "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
@@ -2763,21 +2103,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2785,46 +2113,16 @@
       {
         "key": "inherit.primary__default",
         "channelsCompared": 187,
-        "channelsEqual": 177,
+        "channelsEqual": 184,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -2834,21 +2132,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2856,46 +2142,16 @@
       {
         "key": "inherit.primary__hover",
         "channelsCompared": 187,
-        "channelsEqual": 177,
+        "channelsEqual": 184,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -2905,21 +2161,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2927,29 +2171,11 @@
       {
         "key": "inherit.primary__focus-visible",
         "channelsCompared": 187,
-        "channelsEqual": 176,
+        "channelsEqual": 183,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "label",
             "channel": "outline-color",
@@ -2958,21 +2184,9 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -2982,21 +2196,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -3004,46 +2206,16 @@
       {
         "key": "inherit.primary__active",
         "channelsCompared": 187,
-        "channelsEqual": 177,
+        "channelsEqual": 184,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -3053,21 +2225,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -3075,46 +2235,16 @@
       {
         "key": "inherit.secondary__default",
         "channelsCompared": 187,
-        "channelsEqual": 177,
+        "channelsEqual": 184,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -3124,21 +2254,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -3146,46 +2264,16 @@
       {
         "key": "inherit.secondary__hover",
         "channelsCompared": 187,
-        "channelsEqual": 177,
+        "channelsEqual": 184,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -3195,21 +2283,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -3217,29 +2293,11 @@
       {
         "key": "inherit.secondary__focus-visible",
         "channelsCompared": 187,
-        "channelsEqual": 176,
+        "channelsEqual": 183,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "label",
             "channel": "outline-color",
@@ -3248,21 +2306,9 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -3272,21 +2318,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -3294,46 +2328,16 @@
       {
         "key": "inherit.secondary__active",
         "channelsCompared": 187,
-        "channelsEqual": 177,
+        "channelsEqual": 184,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-fixed",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tabs-list",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -3343,21 +2347,9 @@
           },
           {
             "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "tabs-indicator",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

@@ -135,8 +135,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 7632,
-      "cellsEqual": 6612,
-      "pctEqual": 86.63522012578616,
+      "cellsEqual": 6852,
+      "pctEqual": 89.77987421383648,
       "rowsFullyEqual": 0,
       "rows": 48
     },
@@ -171,74 +171,62 @@
         "key": "primary.medium__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 21,
         "unscorable": "no-original"
       },
       {
         "key": "secondary.medium__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 21,
         "unscorable": "no-original"
       },
       {
         "key": "error.medium__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 21,
         "unscorable": "no-original"
       },
       {
         "key": "warning.medium__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 21,
         "unscorable": "no-original"
       },
       {
         "key": "info.medium__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 21,
         "unscorable": "no-original"
       },
       {
         "key": "success.medium__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 21,
         "unscorable": "no-original"
       },
       {
         "key": "primary.medium__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 25,
+        "channelsMismatched": 20,
         "unscorable": "no-original"
       },
       {
         "key": "primary.medium__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 25,
+        "channelsMismatched": 20,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
       [
-        "root.position-anchor",
-        48
-      ],
-      [
-        "slider-rail.position-anchor",
-        48
-      ],
-      [
         "slider-rail.transform",
-        48
-      ],
-      [
-        "slider-track.position-anchor",
         48
       ],
       [
@@ -266,10 +254,6 @@
         48
       ],
       [
-        "slider-thumb.position-anchor",
-        48
-      ],
-      [
         "slider-thumb.transform",
         48
       ],
@@ -284,6 +268,22 @@
       [
         "part-2-0.overflow-x",
         48
+      ],
+      [
+        "part-2-0.overflow-y",
+        48
+      ],
+      [
+        "slider-track.border-bottom-style",
+        24
+      ],
+      [
+        "slider-track.border-bottom-width",
+        24
+      ],
+      [
+        "slider-track.border-left-style",
+        24
       ]
     ],
     "namedLosses": [
@@ -356,34 +356,16 @@
       {
         "key": "primary.small__default",
         "channelsCompared": 159,
-        "channelsEqual": 142,
+        "channelsEqual": 147,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -423,12 +405,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -456,12 +432,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -469,34 +439,16 @@
       {
         "key": "primary.small__hover",
         "channelsCompared": 159,
-        "channelsEqual": 142,
+        "channelsEqual": 147,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -536,12 +488,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -569,12 +515,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -582,34 +522,16 @@
       {
         "key": "primary.small__focus-visible",
         "channelsCompared": 159,
-        "channelsEqual": 141,
+        "channelsEqual": 146,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -649,12 +571,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -688,12 +604,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -701,34 +611,16 @@
       {
         "key": "primary.small__active",
         "channelsCompared": 159,
-        "channelsEqual": 142,
+        "channelsEqual": 147,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -768,12 +660,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -801,12 +687,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -814,23 +694,11 @@
       {
         "key": "primary.medium__default",
         "channelsCompared": 159,
-        "channelsEqual": 134,
+        "channelsEqual": 139,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -887,12 +755,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -929,12 +791,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -962,12 +818,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -975,23 +825,11 @@
       {
         "key": "primary.medium__hover",
         "channelsCompared": 159,
-        "channelsEqual": 134,
+        "channelsEqual": 139,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -1048,12 +886,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -1090,12 +922,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -1123,12 +949,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1136,23 +956,11 @@
       {
         "key": "primary.medium__focus-visible",
         "channelsCompared": 159,
-        "channelsEqual": 133,
+        "channelsEqual": 138,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -1209,12 +1017,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -1251,12 +1053,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -1290,12 +1086,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1303,23 +1093,11 @@
       {
         "key": "primary.medium__active",
         "channelsCompared": 159,
-        "channelsEqual": 134,
+        "channelsEqual": 139,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -1376,12 +1154,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -1418,12 +1190,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -1451,12 +1217,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1464,34 +1224,16 @@
       {
         "key": "secondary.small__default",
         "channelsCompared": 159,
-        "channelsEqual": 142,
+        "channelsEqual": 147,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -1531,12 +1273,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -1564,12 +1300,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1577,34 +1307,16 @@
       {
         "key": "secondary.small__hover",
         "channelsCompared": 159,
-        "channelsEqual": 142,
+        "channelsEqual": 147,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -1644,12 +1356,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -1677,12 +1383,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1690,34 +1390,16 @@
       {
         "key": "secondary.small__focus-visible",
         "channelsCompared": 159,
-        "channelsEqual": 141,
+        "channelsEqual": 146,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -1757,12 +1439,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -1796,12 +1472,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1809,34 +1479,16 @@
       {
         "key": "secondary.small__active",
         "channelsCompared": 159,
-        "channelsEqual": 142,
+        "channelsEqual": 147,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -1876,12 +1528,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -1909,12 +1555,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1922,23 +1562,11 @@
       {
         "key": "secondary.medium__default",
         "channelsCompared": 159,
-        "channelsEqual": 134,
+        "channelsEqual": 139,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -1995,12 +1623,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -2037,12 +1659,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -2070,12 +1686,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2083,23 +1693,11 @@
       {
         "key": "secondary.medium__hover",
         "channelsCompared": 159,
-        "channelsEqual": 134,
+        "channelsEqual": 139,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -2156,12 +1754,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -2198,12 +1790,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -2231,12 +1817,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2244,23 +1824,11 @@
       {
         "key": "secondary.medium__focus-visible",
         "channelsCompared": 159,
-        "channelsEqual": 133,
+        "channelsEqual": 138,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -2317,12 +1885,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -2359,12 +1921,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -2398,12 +1954,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2411,23 +1961,11 @@
       {
         "key": "secondary.medium__active",
         "channelsCompared": 159,
-        "channelsEqual": 134,
+        "channelsEqual": 139,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -2484,12 +2022,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -2526,12 +2058,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -2559,12 +2085,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2572,34 +2092,16 @@
       {
         "key": "error.small__default",
         "channelsCompared": 159,
-        "channelsEqual": 142,
+        "channelsEqual": 147,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -2639,12 +2141,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -2672,12 +2168,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2685,34 +2175,16 @@
       {
         "key": "error.small__hover",
         "channelsCompared": 159,
-        "channelsEqual": 142,
+        "channelsEqual": 147,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -2752,12 +2224,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -2785,12 +2251,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2798,34 +2258,16 @@
       {
         "key": "error.small__focus-visible",
         "channelsCompared": 159,
-        "channelsEqual": 141,
+        "channelsEqual": 146,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -2865,12 +2307,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -2904,12 +2340,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2917,34 +2347,16 @@
       {
         "key": "error.small__active",
         "channelsCompared": 159,
-        "channelsEqual": 142,
+        "channelsEqual": 147,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -2984,12 +2396,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -3017,12 +2423,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -3030,23 +2430,11 @@
       {
         "key": "error.medium__default",
         "channelsCompared": 159,
-        "channelsEqual": 134,
+        "channelsEqual": 139,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -3103,12 +2491,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -3145,12 +2527,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -3178,12 +2554,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -3191,23 +2561,11 @@
       {
         "key": "error.medium__hover",
         "channelsCompared": 159,
-        "channelsEqual": 134,
+        "channelsEqual": 139,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -3264,12 +2622,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -3306,12 +2658,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -3339,12 +2685,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -3352,23 +2692,11 @@
       {
         "key": "error.medium__focus-visible",
         "channelsCompared": 159,
-        "channelsEqual": 133,
+        "channelsEqual": 138,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -3425,12 +2753,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -3467,12 +2789,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -3506,12 +2822,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -3519,23 +2829,11 @@
       {
         "key": "error.medium__active",
         "channelsCompared": 159,
-        "channelsEqual": 134,
+        "channelsEqual": 139,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -3592,12 +2890,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -3634,12 +2926,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -3667,12 +2953,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -3680,34 +2960,16 @@
       {
         "key": "warning.small__default",
         "channelsCompared": 159,
-        "channelsEqual": 142,
+        "channelsEqual": 147,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -3747,12 +3009,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -3780,12 +3036,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -3793,34 +3043,16 @@
       {
         "key": "warning.small__hover",
         "channelsCompared": 159,
-        "channelsEqual": 142,
+        "channelsEqual": 147,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -3860,12 +3092,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -3893,12 +3119,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -3906,34 +3126,16 @@
       {
         "key": "warning.small__focus-visible",
         "channelsCompared": 159,
-        "channelsEqual": 141,
+        "channelsEqual": 146,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -3973,12 +3175,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -4012,12 +3208,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -4025,34 +3215,16 @@
       {
         "key": "warning.small__active",
         "channelsCompared": 159,
-        "channelsEqual": 142,
+        "channelsEqual": 147,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -4092,12 +3264,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -4125,12 +3291,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -4138,23 +3298,11 @@
       {
         "key": "warning.medium__default",
         "channelsCompared": 159,
-        "channelsEqual": 134,
+        "channelsEqual": 139,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -4211,12 +3359,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -4253,12 +3395,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -4286,12 +3422,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -4299,23 +3429,11 @@
       {
         "key": "warning.medium__hover",
         "channelsCompared": 159,
-        "channelsEqual": 134,
+        "channelsEqual": 139,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -4372,12 +3490,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -4414,12 +3526,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -4447,12 +3553,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -4460,23 +3560,11 @@
       {
         "key": "warning.medium__focus-visible",
         "channelsCompared": 159,
-        "channelsEqual": 133,
+        "channelsEqual": 138,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -4533,12 +3621,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -4575,12 +3657,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -4614,12 +3690,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -4627,23 +3697,11 @@
       {
         "key": "warning.medium__active",
         "channelsCompared": 159,
-        "channelsEqual": 134,
+        "channelsEqual": 139,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -4700,12 +3758,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -4742,12 +3794,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -4775,12 +3821,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -4788,34 +3828,16 @@
       {
         "key": "info.small__default",
         "channelsCompared": 159,
-        "channelsEqual": 142,
+        "channelsEqual": 147,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -4855,12 +3877,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -4888,12 +3904,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -4901,34 +3911,16 @@
       {
         "key": "info.small__hover",
         "channelsCompared": 159,
-        "channelsEqual": 142,
+        "channelsEqual": 147,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -4968,12 +3960,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -5001,12 +3987,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -5014,34 +3994,16 @@
       {
         "key": "info.small__focus-visible",
         "channelsCompared": 159,
-        "channelsEqual": 141,
+        "channelsEqual": 146,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -5081,12 +4043,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -5120,12 +4076,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -5133,34 +4083,16 @@
       {
         "key": "info.small__active",
         "channelsCompared": 159,
-        "channelsEqual": 142,
+        "channelsEqual": 147,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -5200,12 +4132,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -5233,12 +4159,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -5246,23 +4166,11 @@
       {
         "key": "info.medium__default",
         "channelsCompared": 159,
-        "channelsEqual": 134,
+        "channelsEqual": 139,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -5319,12 +4227,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -5361,12 +4263,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -5394,12 +4290,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -5407,23 +4297,11 @@
       {
         "key": "info.medium__hover",
         "channelsCompared": 159,
-        "channelsEqual": 134,
+        "channelsEqual": 139,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -5480,12 +4358,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -5522,12 +4394,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -5555,12 +4421,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -5568,23 +4428,11 @@
       {
         "key": "info.medium__focus-visible",
         "channelsCompared": 159,
-        "channelsEqual": 133,
+        "channelsEqual": 138,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -5641,12 +4489,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -5683,12 +4525,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -5722,12 +4558,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -5735,23 +4565,11 @@
       {
         "key": "info.medium__active",
         "channelsCompared": 159,
-        "channelsEqual": 134,
+        "channelsEqual": 139,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -5808,12 +4626,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -5850,12 +4662,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -5883,12 +4689,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -5896,34 +4696,16 @@
       {
         "key": "success.small__default",
         "channelsCompared": 159,
-        "channelsEqual": 142,
+        "channelsEqual": 147,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -5963,12 +4745,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -5996,12 +4772,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -6009,34 +4779,16 @@
       {
         "key": "success.small__hover",
         "channelsCompared": 159,
-        "channelsEqual": 142,
+        "channelsEqual": 147,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -6076,12 +4828,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -6109,12 +4855,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -6122,34 +4862,16 @@
       {
         "key": "success.small__focus-visible",
         "channelsCompared": 159,
-        "channelsEqual": 141,
+        "channelsEqual": 146,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -6189,12 +4911,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -6, -6)"
@@ -6228,12 +4944,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -6241,34 +4951,16 @@
       {
         "key": "success.small__active",
         "channelsCompared": 159,
-        "channelsEqual": 142,
+        "channelsEqual": 147,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "slider-rail",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -1)"
-          },
-          {
-            "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-track",
@@ -6305,12 +4997,6 @@
             "channel": "border-top-right-radius",
             "ours": "6px",
             "theirs": "50%"
-          },
-          {
-            "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-thumb",
@@ -6341,12 +5027,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -6354,23 +5034,11 @@
       {
         "key": "success.medium__default",
         "channelsCompared": 159,
-        "channelsEqual": 134,
+        "channelsEqual": 139,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -6427,12 +5095,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -6469,12 +5131,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -6502,12 +5158,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -6515,23 +5165,11 @@
       {
         "key": "success.medium__hover",
         "channelsCompared": 159,
-        "channelsEqual": 134,
+        "channelsEqual": 139,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -6588,12 +5226,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -6627,12 +5259,6 @@
             "channel": "border-top-right-radius",
             "ours": "10px",
             "theirs": "50%"
-          },
-          {
-            "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-thumb",
@@ -6663,12 +5289,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -6676,23 +5296,11 @@
       {
         "key": "success.medium__focus-visible",
         "channelsCompared": 159,
-        "channelsEqual": 133,
+        "channelsEqual": 138,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -6749,12 +5357,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -6788,12 +5390,6 @@
             "channel": "border-top-right-radius",
             "ours": "10px",
             "theirs": "50%"
-          },
-          {
-            "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "slider-thumb",
@@ -6830,12 +5426,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -6843,23 +5433,11 @@
       {
         "key": "success.medium__active",
         "channelsCompared": 159,
-        "channelsEqual": 134,
+        "channelsEqual": 139,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-rail",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "slider-rail",
             "channel": "transform",
@@ -6916,12 +5494,6 @@
           },
           {
             "part": "slider-track",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-track",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, 0, -3)"
@@ -6958,12 +5530,6 @@
           },
           {
             "part": "slider-thumb",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "slider-thumb",
             "channel": "transform",
             "ours": "none",
             "theirs": "matrix(1, 0, 0, 1, -10, -10)"
@@ -6991,12 +5557,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "part-2-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

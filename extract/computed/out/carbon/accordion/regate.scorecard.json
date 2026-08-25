@@ -277,8 +277,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 10144,
-      "cellsEqual": 8216,
-      "pctEqual": 80.99369085173501,
+      "cellsEqual": 8568,
+      "pctEqual": 84.46372239747635,
       "rowsFullyEqual": 0,
       "rows": 64
     },
@@ -313,56 +313,56 @@
         "key": "end.unset.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 44,
+        "channelsMismatched": 39,
         "unscorable": "no-original"
       },
       {
         "key": "end.unset.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 44,
+        "channelsMismatched": 39,
         "unscorable": "no-original"
       },
       {
         "key": "end.sm.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 44,
+        "channelsMismatched": 39,
         "unscorable": "no-original"
       },
       {
         "key": "end.sm.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 44,
+        "channelsMismatched": 39,
         "unscorable": "no-original"
       },
       {
         "key": "end.md.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 44,
+        "channelsMismatched": 39,
         "unscorable": "no-original"
       },
       {
         "key": "end.md.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 44,
+        "channelsMismatched": 39,
         "unscorable": "no-original"
       },
       {
         "key": "end.lg.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 44,
+        "channelsMismatched": 39,
         "unscorable": "no-original"
       },
       {
         "key": "end.lg.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 44,
+        "channelsMismatched": 39,
         "unscorable": "no-original"
       }
     ],
@@ -372,15 +372,7 @@
         64
       ],
       [
-        "root.position-anchor",
-        64
-      ],
-      [
         "accordion__item.list-style-type",
-        64
-      ],
-      [
-        "accordion__item.position-anchor",
         64
       ],
       [
@@ -404,15 +396,7 @@
         64
       ],
       [
-        "accordion__heading.position-anchor",
-        64
-      ],
-      [
         "label.list-style-type",
-        64
-      ],
-      [
-        "label.position-anchor",
         64
       ],
       [
@@ -424,7 +408,23 @@
         32
       ],
       [
-        "accordion__wrapper.position-anchor",
+        "accordion__wrapper.transition-behavior",
+        32
+      ],
+      [
+        "label-2.list-style-type",
+        32
+      ],
+      [
+        "accordion__heading.caret-color",
+        32
+      ],
+      [
+        "accordion__heading.color",
+        32
+      ],
+      [
+        "accordion__heading.column-rule-color",
         32
       ]
     ],
@@ -484,7 +484,7 @@
       {
         "key": "start.unset.enabled__default",
         "channelsCompared": 170,
-        "channelsEqual": 153,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -496,21 +496,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -544,33 +532,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -583,12 +553,6 @@
             "part": "label-2",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           }
         ],
@@ -597,7 +561,7 @@
       {
         "key": "start.unset.enabled__hover",
         "channelsCompared": 170,
-        "channelsEqual": 153,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -609,21 +573,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -657,33 +609,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -697,12 +631,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -710,7 +638,7 @@
       {
         "key": "start.unset.enabled__focus-visible",
         "channelsCompared": 170,
-        "channelsEqual": 152,
+        "channelsEqual": 158,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -722,21 +650,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -776,33 +692,15 @@
             "theirs": "rgba(22, 22, 22, 1)"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -816,12 +714,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -829,7 +721,7 @@
       {
         "key": "start.unset.enabled__active",
         "channelsCompared": 170,
-        "channelsEqual": 153,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -841,21 +733,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -889,33 +769,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -929,12 +791,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -942,7 +798,7 @@
       {
         "key": "start.unset.disabled__default",
         "channelsCompared": 147,
-        "channelsEqual": 106,
+        "channelsEqual": 111,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -954,21 +810,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -1030,12 +874,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__heading",
@@ -1114,12 +952,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1168,12 +1000,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -1199,7 +1025,7 @@
       {
         "key": "start.unset.disabled__hover",
         "channelsCompared": 147,
-        "channelsEqual": 104,
+        "channelsEqual": 109,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1208,12 +1034,6 @@
             "part": "root",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -1232,12 +1052,6 @@
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -1299,12 +1113,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__heading",
@@ -1383,12 +1191,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1437,12 +1239,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -1468,7 +1264,7 @@
       {
         "key": "start.unset.disabled__focus-visible",
         "channelsCompared": 147,
-        "channelsEqual": 106,
+        "channelsEqual": 111,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1480,21 +1276,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -1559,12 +1343,6 @@
           },
           {
             "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__heading",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -1643,12 +1421,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -1694,12 +1466,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -1725,7 +1491,7 @@
       {
         "key": "start.unset.disabled__active",
         "channelsCompared": 147,
-        "channelsEqual": 104,
+        "channelsEqual": 109,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1734,12 +1500,6 @@
             "part": "root",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -1758,12 +1518,6 @@
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -1825,12 +1579,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__heading",
@@ -1909,12 +1657,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1963,12 +1705,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -1994,7 +1730,7 @@
       {
         "key": "start.sm.enabled__default",
         "channelsCompared": 170,
-        "channelsEqual": 153,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2006,21 +1742,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -2054,33 +1778,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -2093,12 +1799,6 @@
             "part": "label-2",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           }
         ],
@@ -2107,7 +1807,7 @@
       {
         "key": "start.sm.enabled__hover",
         "channelsCompared": 170,
-        "channelsEqual": 153,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2119,21 +1819,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -2167,33 +1855,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -2207,12 +1877,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2220,7 +1884,7 @@
       {
         "key": "start.sm.enabled__focus-visible",
         "channelsCompared": 170,
-        "channelsEqual": 152,
+        "channelsEqual": 158,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2232,21 +1896,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -2286,33 +1938,15 @@
             "theirs": "rgba(22, 22, 22, 1)"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -2326,12 +1960,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2339,7 +1967,7 @@
       {
         "key": "start.sm.enabled__active",
         "channelsCompared": 170,
-        "channelsEqual": 153,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2351,21 +1979,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -2399,33 +2015,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -2439,12 +2037,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2452,7 +2044,7 @@
       {
         "key": "start.sm.disabled__default",
         "channelsCompared": 147,
-        "channelsEqual": 106,
+        "channelsEqual": 111,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2464,21 +2056,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -2540,12 +2120,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__heading",
@@ -2624,12 +2198,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -2678,12 +2246,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -2709,7 +2271,7 @@
       {
         "key": "start.sm.disabled__hover",
         "channelsCompared": 147,
-        "channelsEqual": 104,
+        "channelsEqual": 109,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2718,12 +2280,6 @@
             "part": "root",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -2742,12 +2298,6 @@
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -2809,12 +2359,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__heading",
@@ -2893,12 +2437,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -2947,12 +2485,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -2978,7 +2510,7 @@
       {
         "key": "start.sm.disabled__focus-visible",
         "channelsCompared": 147,
-        "channelsEqual": 106,
+        "channelsEqual": 111,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2990,21 +2522,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -3069,12 +2589,6 @@
           },
           {
             "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__heading",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -3153,12 +2667,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -3204,12 +2712,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -3235,7 +2737,7 @@
       {
         "key": "start.sm.disabled__active",
         "channelsCompared": 147,
-        "channelsEqual": 104,
+        "channelsEqual": 109,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3244,12 +2746,6 @@
             "part": "root",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -3268,12 +2764,6 @@
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -3335,12 +2825,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__heading",
@@ -3419,12 +2903,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -3473,12 +2951,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -3504,7 +2976,7 @@
       {
         "key": "start.md.enabled__default",
         "channelsCompared": 170,
-        "channelsEqual": 153,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3516,21 +2988,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -3564,33 +3024,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -3603,12 +3045,6 @@
             "part": "label-2",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           }
         ],
@@ -3617,7 +3053,7 @@
       {
         "key": "start.md.enabled__hover",
         "channelsCompared": 170,
-        "channelsEqual": 153,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3629,21 +3065,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -3677,33 +3101,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -3717,12 +3123,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -3730,7 +3130,7 @@
       {
         "key": "start.md.enabled__focus-visible",
         "channelsCompared": 170,
-        "channelsEqual": 152,
+        "channelsEqual": 158,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3742,21 +3142,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -3796,33 +3184,15 @@
             "theirs": "rgba(22, 22, 22, 1)"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -3836,12 +3206,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -3849,7 +3213,7 @@
       {
         "key": "start.md.enabled__active",
         "channelsCompared": 170,
-        "channelsEqual": 153,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3861,21 +3225,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -3909,33 +3261,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -3949,12 +3283,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -3962,7 +3290,7 @@
       {
         "key": "start.md.disabled__default",
         "channelsCompared": 147,
-        "channelsEqual": 106,
+        "channelsEqual": 111,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3974,21 +3302,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -4050,12 +3366,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__heading",
@@ -4134,12 +3444,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -4188,12 +3492,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -4219,7 +3517,7 @@
       {
         "key": "start.md.disabled__hover",
         "channelsCompared": 147,
-        "channelsEqual": 104,
+        "channelsEqual": 109,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4228,12 +3526,6 @@
             "part": "root",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -4252,12 +3544,6 @@
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -4319,12 +3605,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__heading",
@@ -4403,12 +3683,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -4457,12 +3731,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -4488,7 +3756,7 @@
       {
         "key": "start.md.disabled__focus-visible",
         "channelsCompared": 147,
-        "channelsEqual": 106,
+        "channelsEqual": 111,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4500,21 +3768,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -4579,12 +3835,6 @@
           },
           {
             "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__heading",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -4663,12 +3913,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -4714,12 +3958,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -4745,7 +3983,7 @@
       {
         "key": "start.md.disabled__active",
         "channelsCompared": 147,
-        "channelsEqual": 104,
+        "channelsEqual": 109,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4754,12 +3992,6 @@
             "part": "root",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -4778,12 +4010,6 @@
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -4845,12 +4071,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__heading",
@@ -4929,12 +4149,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -4983,12 +4197,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -5014,7 +4222,7 @@
       {
         "key": "start.lg.enabled__default",
         "channelsCompared": 170,
-        "channelsEqual": 153,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5026,21 +4234,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -5074,33 +4270,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -5113,12 +4291,6 @@
             "part": "label-2",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           }
         ],
@@ -5127,7 +4299,7 @@
       {
         "key": "start.lg.enabled__hover",
         "channelsCompared": 170,
-        "channelsEqual": 153,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5139,21 +4311,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -5187,33 +4347,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -5227,12 +4369,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -5240,7 +4376,7 @@
       {
         "key": "start.lg.enabled__focus-visible",
         "channelsCompared": 170,
-        "channelsEqual": 152,
+        "channelsEqual": 158,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5252,21 +4388,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -5306,33 +4430,15 @@
             "theirs": "rgba(22, 22, 22, 1)"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -5346,12 +4452,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -5359,7 +4459,7 @@
       {
         "key": "start.lg.enabled__active",
         "channelsCompared": 170,
-        "channelsEqual": 153,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5371,21 +4471,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -5419,33 +4507,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -5459,12 +4529,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -5472,7 +4536,7 @@
       {
         "key": "start.lg.disabled__default",
         "channelsCompared": 147,
-        "channelsEqual": 106,
+        "channelsEqual": 111,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5484,21 +4548,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -5560,12 +4612,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__heading",
@@ -5644,12 +4690,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -5698,12 +4738,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -5729,7 +4763,7 @@
       {
         "key": "start.lg.disabled__hover",
         "channelsCompared": 147,
-        "channelsEqual": 104,
+        "channelsEqual": 109,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5738,12 +4772,6 @@
             "part": "root",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -5762,12 +4790,6 @@
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -5829,12 +4851,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__heading",
@@ -5913,12 +4929,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -5967,12 +4977,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -5998,7 +5002,7 @@
       {
         "key": "start.lg.disabled__focus-visible",
         "channelsCompared": 147,
-        "channelsEqual": 106,
+        "channelsEqual": 111,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6010,21 +5014,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -6089,12 +5081,6 @@
           },
           {
             "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__heading",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -6173,12 +5159,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -6224,12 +5204,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -6255,7 +5229,7 @@
       {
         "key": "start.lg.disabled__active",
         "channelsCompared": 147,
-        "channelsEqual": 104,
+        "channelsEqual": 109,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6264,12 +5238,6 @@
             "part": "root",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -6288,12 +5256,6 @@
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -6355,12 +5317,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__heading",
@@ -6439,12 +5395,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -6493,12 +5443,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -6524,7 +5468,7 @@
       {
         "key": "end.unset.enabled__default",
         "channelsCompared": 170,
-        "channelsEqual": 152,
+        "channelsEqual": 158,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6536,21 +5480,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -6590,33 +5522,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -6629,12 +5543,6 @@
             "part": "label-2",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           }
         ],
@@ -6643,7 +5551,7 @@
       {
         "key": "end.unset.enabled__hover",
         "channelsCompared": 170,
-        "channelsEqual": 152,
+        "channelsEqual": 158,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6655,21 +5563,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -6709,33 +5605,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -6749,12 +5627,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -6762,7 +5634,7 @@
       {
         "key": "end.unset.enabled__focus-visible",
         "channelsCompared": 170,
-        "channelsEqual": 151,
+        "channelsEqual": 157,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6774,21 +5646,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -6834,33 +5694,15 @@
             "theirs": "rgba(22, 22, 22, 1)"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -6874,12 +5716,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -6887,7 +5723,7 @@
       {
         "key": "end.unset.enabled__active",
         "channelsCompared": 170,
-        "channelsEqual": 152,
+        "channelsEqual": 158,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6899,21 +5735,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -6953,33 +5777,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -6993,12 +5799,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -7006,7 +5806,7 @@
       {
         "key": "end.unset.disabled__default",
         "channelsCompared": 147,
-        "channelsEqual": 105,
+        "channelsEqual": 110,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7018,21 +5818,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -7100,12 +5888,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__heading",
@@ -7184,12 +5966,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -7238,12 +6014,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -7269,7 +6039,7 @@
       {
         "key": "end.unset.disabled__hover",
         "channelsCompared": 147,
-        "channelsEqual": 103,
+        "channelsEqual": 108,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7278,12 +6048,6 @@
             "part": "root",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -7302,12 +6066,6 @@
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -7378,12 +6136,6 @@
           },
           {
             "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__heading",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -7462,12 +6214,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -7513,12 +6259,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -7544,7 +6284,7 @@
       {
         "key": "end.unset.disabled__focus-visible",
         "channelsCompared": 147,
-        "channelsEqual": 105,
+        "channelsEqual": 110,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7556,21 +6296,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -7641,12 +6369,6 @@
           },
           {
             "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__heading",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -7725,12 +6447,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -7776,12 +6492,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -7807,7 +6517,7 @@
       {
         "key": "end.unset.disabled__active",
         "channelsCompared": 147,
-        "channelsEqual": 103,
+        "channelsEqual": 108,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7816,12 +6526,6 @@
             "part": "root",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -7840,12 +6544,6 @@
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -7916,12 +6614,6 @@
           },
           {
             "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__heading",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -8000,12 +6692,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -8051,12 +6737,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -8082,7 +6762,7 @@
       {
         "key": "end.sm.enabled__default",
         "channelsCompared": 170,
-        "channelsEqual": 152,
+        "channelsEqual": 158,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8094,21 +6774,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -8148,33 +6816,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -8187,12 +6837,6 @@
             "part": "label-2",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           }
         ],
@@ -8201,7 +6845,7 @@
       {
         "key": "end.sm.enabled__hover",
         "channelsCompared": 170,
-        "channelsEqual": 152,
+        "channelsEqual": 158,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8213,21 +6857,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -8267,33 +6899,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -8307,12 +6921,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -8320,7 +6928,7 @@
       {
         "key": "end.sm.enabled__focus-visible",
         "channelsCompared": 170,
-        "channelsEqual": 151,
+        "channelsEqual": 157,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8332,21 +6940,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -8392,33 +6988,15 @@
             "theirs": "rgba(22, 22, 22, 1)"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -8432,12 +7010,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -8445,7 +7017,7 @@
       {
         "key": "end.sm.enabled__active",
         "channelsCompared": 170,
-        "channelsEqual": 152,
+        "channelsEqual": 158,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8457,21 +7029,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -8511,33 +7071,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -8551,12 +7093,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -8564,7 +7100,7 @@
       {
         "key": "end.sm.disabled__default",
         "channelsCompared": 147,
-        "channelsEqual": 105,
+        "channelsEqual": 110,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8576,21 +7112,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -8658,12 +7182,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__heading",
@@ -8742,12 +7260,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -8796,12 +7308,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -8827,7 +7333,7 @@
       {
         "key": "end.sm.disabled__hover",
         "channelsCompared": 147,
-        "channelsEqual": 103,
+        "channelsEqual": 108,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8836,12 +7342,6 @@
             "part": "root",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -8860,12 +7360,6 @@
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -8936,12 +7430,6 @@
           },
           {
             "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__heading",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -9020,12 +7508,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -9071,12 +7553,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -9102,7 +7578,7 @@
       {
         "key": "end.sm.disabled__focus-visible",
         "channelsCompared": 147,
-        "channelsEqual": 105,
+        "channelsEqual": 110,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -9114,21 +7590,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -9199,12 +7663,6 @@
           },
           {
             "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__heading",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -9283,12 +7741,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -9334,12 +7786,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -9365,7 +7811,7 @@
       {
         "key": "end.sm.disabled__active",
         "channelsCompared": 147,
-        "channelsEqual": 103,
+        "channelsEqual": 108,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -9374,12 +7820,6 @@
             "part": "root",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -9398,12 +7838,6 @@
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -9474,12 +7908,6 @@
           },
           {
             "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__heading",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -9558,12 +7986,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -9609,12 +8031,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -9640,7 +8056,7 @@
       {
         "key": "end.md.enabled__default",
         "channelsCompared": 170,
-        "channelsEqual": 152,
+        "channelsEqual": 158,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -9652,21 +8068,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -9706,33 +8110,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -9745,12 +8131,6 @@
             "part": "label-2",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           }
         ],
@@ -9759,7 +8139,7 @@
       {
         "key": "end.md.enabled__hover",
         "channelsCompared": 170,
-        "channelsEqual": 152,
+        "channelsEqual": 158,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -9771,21 +8151,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -9825,33 +8193,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -9865,12 +8215,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -9878,7 +8222,7 @@
       {
         "key": "end.md.enabled__focus-visible",
         "channelsCompared": 170,
-        "channelsEqual": 151,
+        "channelsEqual": 157,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -9890,21 +8234,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -9950,33 +8282,15 @@
             "theirs": "rgba(22, 22, 22, 1)"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -9990,12 +8304,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -10003,7 +8311,7 @@
       {
         "key": "end.md.enabled__active",
         "channelsCompared": 170,
-        "channelsEqual": 152,
+        "channelsEqual": 158,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -10015,21 +8323,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -10069,33 +8365,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -10109,12 +8387,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -10122,7 +8394,7 @@
       {
         "key": "end.md.disabled__default",
         "channelsCompared": 147,
-        "channelsEqual": 105,
+        "channelsEqual": 110,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -10134,21 +8406,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -10216,12 +8476,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__heading",
@@ -10300,12 +8554,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -10354,12 +8602,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -10385,7 +8627,7 @@
       {
         "key": "end.md.disabled__hover",
         "channelsCompared": 147,
-        "channelsEqual": 103,
+        "channelsEqual": 108,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -10394,12 +8636,6 @@
             "part": "root",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -10418,12 +8654,6 @@
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -10494,12 +8724,6 @@
           },
           {
             "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__heading",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -10578,12 +8802,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -10629,12 +8847,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -10660,7 +8872,7 @@
       {
         "key": "end.md.disabled__focus-visible",
         "channelsCompared": 147,
-        "channelsEqual": 105,
+        "channelsEqual": 110,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -10672,21 +8884,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -10757,12 +8957,6 @@
           },
           {
             "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__heading",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -10841,12 +9035,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -10892,12 +9080,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -10923,7 +9105,7 @@
       {
         "key": "end.md.disabled__active",
         "channelsCompared": 147,
-        "channelsEqual": 103,
+        "channelsEqual": 108,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -10932,12 +9114,6 @@
             "part": "root",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -10956,12 +9132,6 @@
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -11032,12 +9202,6 @@
           },
           {
             "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__heading",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -11116,12 +9280,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -11167,12 +9325,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -11198,7 +9350,7 @@
       {
         "key": "end.lg.enabled__default",
         "channelsCompared": 170,
-        "channelsEqual": 152,
+        "channelsEqual": 158,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -11210,21 +9362,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -11264,33 +9404,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -11303,12 +9425,6 @@
             "part": "label-2",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           }
         ],
@@ -11317,7 +9433,7 @@
       {
         "key": "end.lg.enabled__hover",
         "channelsCompared": 170,
-        "channelsEqual": 152,
+        "channelsEqual": 158,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -11329,21 +9445,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -11383,33 +9487,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -11423,12 +9509,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -11436,7 +9516,7 @@
       {
         "key": "end.lg.enabled__focus-visible",
         "channelsCompared": 170,
-        "channelsEqual": 151,
+        "channelsEqual": 157,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -11448,21 +9528,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -11508,33 +9576,15 @@
             "theirs": "rgba(22, 22, 22, 1)"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -11548,12 +9598,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -11561,7 +9605,7 @@
       {
         "key": "end.lg.enabled__active",
         "channelsCompared": 170,
-        "channelsEqual": 152,
+        "channelsEqual": 158,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -11573,21 +9617,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -11627,33 +9659,15 @@
             "theirs": "none"
           },
           {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__wrapper",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -11667,12 +9681,6 @@
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -11680,7 +9688,7 @@
       {
         "key": "end.lg.disabled__default",
         "channelsCompared": 147,
-        "channelsEqual": 105,
+        "channelsEqual": 110,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -11692,21 +9700,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -11774,12 +9770,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__heading",
@@ -11858,12 +9848,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -11912,12 +9896,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",
@@ -11943,7 +9921,7 @@
       {
         "key": "end.lg.disabled__hover",
         "channelsCompared": 147,
-        "channelsEqual": 103,
+        "channelsEqual": 108,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -11952,12 +9930,6 @@
             "part": "root",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -11976,12 +9948,6 @@
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -12052,12 +10018,6 @@
           },
           {
             "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__heading",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -12136,12 +10096,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -12190,12 +10144,6 @@
           },
           {
             "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper-2",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "allow-discrete"
@@ -12218,7 +10166,7 @@
       {
         "key": "end.lg.disabled__focus-visible",
         "channelsCompared": 147,
-        "channelsEqual": 105,
+        "channelsEqual": 110,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -12230,21 +10178,9 @@
             "theirs": "none"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -12315,12 +10251,6 @@
           },
           {
             "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__heading",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -12399,12 +10329,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -12453,12 +10377,6 @@
           },
           {
             "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper-2",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "allow-discrete"
@@ -12481,7 +10399,7 @@
       {
         "key": "end.lg.disabled__active",
         "channelsCompared": 147,
-        "channelsEqual": 103,
+        "channelsEqual": 108,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -12490,12 +10408,6 @@
             "part": "root",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -12514,12 +10426,6 @@
             "part": "accordion__item",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -12590,12 +10496,6 @@
           },
           {
             "part": "accordion__heading",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__heading",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -12674,12 +10574,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
@@ -12725,12 +10619,6 @@
             "channel": "overflow-y",
             "ours": "visible",
             "theirs": "hidden"
-          },
-          {
-            "part": "accordion__wrapper-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "accordion__wrapper-2",

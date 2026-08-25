@@ -70,8 +70,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 1340,
-      "cellsEqual": 1063,
-      "pctEqual": 79.32835820895522,
+      "cellsEqual": 1103,
+      "pctEqual": 82.31343283582089,
       "rowsFullyEqual": 0,
       "rows": 20
     },
@@ -106,70 +106,62 @@
         "key": "tertiary__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 34,
+        "channelsMismatched": 32,
         "unscorable": "no-original"
       },
       {
         "key": "tertiary__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 34,
+        "channelsMismatched": 32,
         "unscorable": "no-original"
       },
       {
         "key": "secondary__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 24,
         "unscorable": "no-original"
       },
       {
         "key": "secondary__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 24,
         "unscorable": "no-original"
       },
       {
         "key": "bare__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 24,
         "unscorable": "no-original"
       },
       {
         "key": "bare__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 24,
         "unscorable": "no-original"
       },
       {
         "key": "danger__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 24,
         "unscorable": "no-original"
       },
       {
         "key": "danger__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 24,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
       [
         "root.display",
-        20
-      ],
-      [
-        "root.position-anchor",
-        20
-      ],
-      [
-        "label.position-anchor",
         20
       ],
       [
@@ -218,6 +210,14 @@
       ],
       [
         "root.text-emphasis-color",
+        8
+      ],
+      [
+        "label.border-bottom-color",
+        8
+      ],
+      [
+        "label.border-left-color",
         8
       ]
     ],
@@ -344,7 +344,7 @@
       {
         "key": "unset__default",
         "channelsCompared": 67,
-        "channelsEqual": 64,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -354,18 +354,6 @@
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -373,7 +361,7 @@
       {
         "key": "unset__hover",
         "channelsCompared": 67,
-        "channelsEqual": 64,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -383,18 +371,6 @@
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -402,7 +378,7 @@
       {
         "key": "unset__focus-visible",
         "channelsCompared": 67,
-        "channelsEqual": 64,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -412,18 +388,6 @@
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -431,7 +395,7 @@
       {
         "key": "unset__active",
         "channelsCompared": 67,
-        "channelsEqual": 63,
+        "channelsEqual": 65,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -447,18 +411,6 @@
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -466,7 +418,7 @@
       {
         "key": "secondary__default",
         "channelsCompared": 67,
-        "channelsEqual": 64,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -476,18 +428,6 @@
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -495,7 +435,7 @@
       {
         "key": "secondary__hover",
         "channelsCompared": 67,
-        "channelsEqual": 41,
+        "channelsEqual": 43,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -562,12 +502,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(0, 11, 41, 1)",
             "theirs": "rgba(25, 19, 6, 1)"
@@ -634,12 +568,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(0, 11, 41, 1)",
             "theirs": "rgba(25, 19, 6, 1)"
@@ -662,7 +590,7 @@
       {
         "key": "secondary__focus-visible",
         "channelsCompared": 67,
-        "channelsEqual": 64,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -672,18 +600,6 @@
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -691,7 +607,7 @@
       {
         "key": "secondary__active",
         "channelsCompared": 67,
-        "channelsEqual": 41,
+        "channelsEqual": 43,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -758,12 +674,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(0, 11, 41, 1)",
             "theirs": "rgba(25, 19, 6, 1)"
@@ -827,12 +737,6 @@
             "channel": "outline-color",
             "ours": "rgba(0, 11, 41, 1)",
             "theirs": "rgba(25, 19, 6, 1)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -858,7 +762,7 @@
       {
         "key": "tertiary__default",
         "channelsCompared": 67,
-        "channelsEqual": 56,
+        "channelsEqual": 58,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -916,18 +820,6 @@
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -935,7 +827,7 @@
       {
         "key": "tertiary__hover",
         "channelsCompared": 67,
-        "channelsEqual": 33,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1050,12 +942,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(0, 11, 41, 1)",
             "theirs": "rgba(58, 58, 58, 1)"
@@ -1119,12 +1005,6 @@
             "channel": "outline-color",
             "ours": "rgba(0, 11, 41, 1)",
             "theirs": "rgba(58, 58, 58, 1)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1150,7 +1030,7 @@
       {
         "key": "tertiary__focus-visible",
         "channelsCompared": 67,
-        "channelsEqual": 56,
+        "channelsEqual": 58,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1208,18 +1088,6 @@
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1227,7 +1095,7 @@
       {
         "key": "tertiary__active",
         "channelsCompared": 67,
-        "channelsEqual": 33,
+        "channelsEqual": 35,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1342,12 +1210,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(0, 11, 41, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
@@ -1411,12 +1273,6 @@
             "channel": "outline-color",
             "ours": "rgba(0, 11, 41, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1442,7 +1298,7 @@
       {
         "key": "bare__default",
         "channelsCompared": 67,
-        "channelsEqual": 64,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1452,18 +1308,6 @@
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1471,7 +1315,7 @@
       {
         "key": "bare__hover",
         "channelsCompared": 67,
-        "channelsEqual": 41,
+        "channelsEqual": 43,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1538,12 +1382,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(0, 11, 41, 1)",
             "theirs": "rgba(58, 58, 58, 1)"
@@ -1607,12 +1445,6 @@
             "channel": "outline-color",
             "ours": "rgba(0, 11, 41, 1)",
             "theirs": "rgba(58, 58, 58, 1)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1638,7 +1470,7 @@
       {
         "key": "bare__focus-visible",
         "channelsCompared": 67,
-        "channelsEqual": 64,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1648,18 +1480,6 @@
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1667,7 +1487,7 @@
       {
         "key": "bare__active",
         "channelsCompared": 67,
-        "channelsEqual": 41,
+        "channelsEqual": 43,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1734,12 +1554,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(0, 11, 41, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
@@ -1806,12 +1620,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(0, 11, 41, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
@@ -1834,7 +1642,7 @@
       {
         "key": "danger__default",
         "channelsCompared": 67,
-        "channelsEqual": 64,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1844,18 +1652,6 @@
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1863,7 +1659,7 @@
       {
         "key": "danger__hover",
         "channelsCompared": 67,
-        "channelsEqual": 41,
+        "channelsEqual": 43,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1930,12 +1726,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(0, 11, 41, 1)",
             "theirs": "rgba(31, 6, 0, 1)"
@@ -2002,12 +1792,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "row-rule-color",
             "ours": "rgba(0, 11, 41, 1)",
             "theirs": "rgba(31, 6, 0, 1)"
@@ -2030,7 +1814,7 @@
       {
         "key": "danger__focus-visible",
         "channelsCompared": 67,
-        "channelsEqual": 64,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2040,18 +1824,6 @@
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2059,7 +1831,7 @@
       {
         "key": "danger__active",
         "channelsCompared": 67,
-        "channelsEqual": 41,
+        "channelsEqual": 43,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2126,12 +1898,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(0, 11, 41, 1)",
             "theirs": "rgba(31, 6, 0, 1)"
@@ -2195,12 +1961,6 @@
             "channel": "outline-color",
             "ours": "rgba(0, 11, 41, 1)",
             "theirs": "rgba(31, 6, 0, 1)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",

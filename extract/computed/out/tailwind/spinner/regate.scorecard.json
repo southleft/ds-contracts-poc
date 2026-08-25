@@ -139,7 +139,8 @@
     ],
     "topMismatchedChannels": [],
     "namedLosses": [
-      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "gate.empty-comparison-is-100: computed pctEqual reports 100 because cellsCompared === 0 — NOTHING was compared. Every part was excluded by an upstream door (carried-parts-only, icon-part-exclusion, unaligned-truth-el-skip, zero-channel-part-skip) or the enriched contract carries no part at all. This 100 is a fabrication, not a measurement; the pixel side refuses to fabricate its own zero for the same reason (see gate.null-not-zero-means)."
     ],
     "unresolvedTokenRefs": {
       "count": 0,

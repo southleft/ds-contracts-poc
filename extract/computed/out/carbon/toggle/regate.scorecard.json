@@ -282,8 +282,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 2768,
-      "cellsEqual": 2368,
-      "pctEqual": 85.54913294797687,
+      "cellsEqual": 2480,
+      "pctEqual": 89.59537572254335,
       "rowsFullyEqual": 0,
       "rows": 16
     },
@@ -318,78 +318,62 @@
         "key": "untoggled.disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 38,
+        "channelsMismatched": 31,
         "unscorable": "no-original"
       },
       {
         "key": "untoggled.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 38,
+        "channelsMismatched": 31,
         "unscorable": "no-original"
       },
       {
         "key": "untoggled.disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 38,
+        "channelsMismatched": 31,
         "unscorable": "no-original"
       },
       {
         "key": "untoggled.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 38,
+        "channelsMismatched": 31,
         "unscorable": "no-original"
       },
       {
         "key": "toggled.disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 38,
+        "channelsMismatched": 31,
         "unscorable": "no-original"
       },
       {
         "key": "toggled.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 38,
+        "channelsMismatched": 31,
         "unscorable": "no-original"
       },
       {
         "key": "toggled.disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 38,
+        "channelsMismatched": 31,
         "unscorable": "no-original"
       },
       {
         "key": "toggled.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 38,
+        "channelsMismatched": 31,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
       [
-        "root.position-anchor",
-        16
-      ],
-      [
         "toggle__button.clip",
-        16
-      ],
-      [
-        "toggle__button.position-anchor",
-        16
-      ],
-      [
-        "toggle__label.position-anchor",
-        16
-      ],
-      [
-        "label.position-anchor",
         16
       ],
       [
@@ -402,18 +386,6 @@
       ],
       [
         "toggle__appearance.grid-template-columns",
-        16
-      ],
-      [
-        "toggle__appearance.position-anchor",
-        16
-      ],
-      [
-        "toggle__switch.position-anchor",
-        16
-      ],
-      [
-        "label-2.position-anchor",
         16
       ],
       [
@@ -430,6 +402,34 @@
       ],
       [
         "label.border-right-color",
+        8
+      ],
+      [
+        "label.border-top-color",
+        8
+      ],
+      [
+        "label.caret-color",
+        8
+      ],
+      [
+        "label.color",
+        8
+      ],
+      [
+        "label.column-rule-color",
+        8
+      ],
+      [
+        "label.outline-color",
+        8
+      ],
+      [
+        "label.row-rule-color",
+        8
+      ],
+      [
+        "label.text-decoration-color",
         8
       ]
     ],
@@ -502,40 +502,16 @@
       {
         "key": "untoggled.enabled__default",
         "channelsCompared": 173,
-        "channelsEqual": 161,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__button",
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
-          },
-          {
-            "part": "toggle__button",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -554,24 +530,6 @@
             "channel": "grid-template-columns",
             "ours": "none",
             "theirs": "48px 19.4688px"
-          },
-          {
-            "part": "toggle__appearance",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__switch",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -585,40 +543,16 @@
       {
         "key": "untoggled.enabled__hover",
         "channelsCompared": 173,
-        "channelsEqual": 161,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__button",
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
-          },
-          {
-            "part": "toggle__button",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -637,24 +571,6 @@
             "channel": "grid-template-columns",
             "ours": "none",
             "theirs": "48px 19.4688px"
-          },
-          {
-            "part": "toggle__appearance",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__switch",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -668,40 +584,16 @@
       {
         "key": "untoggled.enabled__focus-visible",
         "channelsCompared": 173,
-        "channelsEqual": 161,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__button",
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
-          },
-          {
-            "part": "toggle__button",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -720,24 +612,6 @@
             "channel": "grid-template-columns",
             "ours": "none",
             "theirs": "48px 19.4688px"
-          },
-          {
-            "part": "toggle__appearance",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__switch",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -751,40 +625,16 @@
       {
         "key": "untoggled.enabled__active",
         "channelsCompared": 173,
-        "channelsEqual": 161,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__button",
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
-          },
-          {
-            "part": "toggle__button",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -805,24 +655,6 @@
             "theirs": "48px 19.4688px"
           },
           {
-            "part": "toggle__appearance",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__switch",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label-2",
             "channel": "unicode-bidi",
             "ours": "normal",
@@ -834,34 +666,16 @@
       {
         "key": "untoggled.disabled__default",
         "channelsCompared": 173,
-        "channelsEqual": 135,
+        "channelsEqual": 142,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__button",
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
-          },
-          {
-            "part": "toggle__button",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -910,12 +724,6 @@
             "channel": "outline-color",
             "ours": "rgba(82, 82, 82, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -960,12 +768,6 @@
             "theirs": "48px 19.4688px"
           },
           {
-            "part": "toggle__appearance",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__switch",
             "channel": "background-color",
             "ours": "rgba(141, 141, 141, 1)",
@@ -976,12 +778,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "toggle__switch",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -1036,12 +832,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -1073,34 +863,16 @@
       {
         "key": "untoggled.disabled__hover",
         "channelsCompared": 173,
-        "channelsEqual": 135,
+        "channelsEqual": 142,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__button",
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
-          },
-          {
-            "part": "toggle__button",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1149,12 +921,6 @@
             "channel": "outline-color",
             "ours": "rgba(82, 82, 82, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1199,12 +965,6 @@
             "theirs": "48px 19.4688px"
           },
           {
-            "part": "toggle__appearance",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__switch",
             "channel": "background-color",
             "ours": "rgba(141, 141, 141, 1)",
@@ -1215,12 +975,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "toggle__switch",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -1275,12 +1029,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -1312,34 +1060,16 @@
       {
         "key": "untoggled.disabled__focus-visible",
         "channelsCompared": 173,
-        "channelsEqual": 135,
+        "channelsEqual": 142,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__button",
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
-          },
-          {
-            "part": "toggle__button",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1388,12 +1118,6 @@
             "channel": "outline-color",
             "ours": "rgba(82, 82, 82, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1438,12 +1162,6 @@
             "theirs": "48px 19.4688px"
           },
           {
-            "part": "toggle__appearance",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__switch",
             "channel": "background-color",
             "ours": "rgba(141, 141, 141, 1)",
@@ -1454,12 +1172,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "toggle__switch",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -1514,12 +1226,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -1551,34 +1257,16 @@
       {
         "key": "untoggled.disabled__active",
         "channelsCompared": 173,
-        "channelsEqual": 135,
+        "channelsEqual": 142,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__button",
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
-          },
-          {
-            "part": "toggle__button",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1627,12 +1315,6 @@
             "channel": "outline-color",
             "ours": "rgba(82, 82, 82, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1677,12 +1359,6 @@
             "theirs": "48px 19.4688px"
           },
           {
-            "part": "toggle__appearance",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__switch",
             "channel": "background-color",
             "ours": "rgba(141, 141, 141, 1)",
@@ -1693,12 +1369,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "toggle__switch",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -1753,12 +1423,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -1790,40 +1454,16 @@
       {
         "key": "toggled.enabled__default",
         "channelsCompared": 173,
-        "channelsEqual": 161,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__button",
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
-          },
-          {
-            "part": "toggle__button",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1842,24 +1482,6 @@
             "channel": "grid-template-columns",
             "ours": "none",
             "theirs": "48px 18.1875px"
-          },
-          {
-            "part": "toggle__appearance",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__switch",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -1873,40 +1495,16 @@
       {
         "key": "toggled.enabled__hover",
         "channelsCompared": 173,
-        "channelsEqual": 161,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__button",
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
-          },
-          {
-            "part": "toggle__button",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1925,24 +1523,6 @@
             "channel": "grid-template-columns",
             "ours": "none",
             "theirs": "48px 18.1875px"
-          },
-          {
-            "part": "toggle__appearance",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__switch",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -1956,40 +1536,16 @@
       {
         "key": "toggled.enabled__focus-visible",
         "channelsCompared": 173,
-        "channelsEqual": 161,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__button",
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
-          },
-          {
-            "part": "toggle__button",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -2008,24 +1564,6 @@
             "channel": "grid-template-columns",
             "ours": "none",
             "theirs": "48px 18.1875px"
-          },
-          {
-            "part": "toggle__appearance",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__switch",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -2039,40 +1577,16 @@
       {
         "key": "toggled.enabled__active",
         "channelsCompared": 173,
-        "channelsEqual": 161,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__button",
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
-          },
-          {
-            "part": "toggle__button",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -2093,24 +1607,6 @@
             "theirs": "48px 18.1875px"
           },
           {
-            "part": "toggle__appearance",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__switch",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label-2",
             "channel": "unicode-bidi",
             "ours": "normal",
@@ -2122,34 +1618,16 @@
       {
         "key": "toggled.disabled__default",
         "channelsCompared": 173,
-        "channelsEqual": 135,
+        "channelsEqual": 142,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__button",
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
-          },
-          {
-            "part": "toggle__button",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -2198,12 +1676,6 @@
             "channel": "outline-color",
             "ours": "rgba(82, 82, 82, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -2248,12 +1720,6 @@
             "theirs": "48px 18.1875px"
           },
           {
-            "part": "toggle__appearance",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__switch",
             "channel": "background-color",
             "ours": "rgba(36, 161, 72, 1)",
@@ -2264,12 +1730,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "toggle__switch",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -2324,12 +1784,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -2361,34 +1815,16 @@
       {
         "key": "toggled.disabled__hover",
         "channelsCompared": 173,
-        "channelsEqual": 135,
+        "channelsEqual": 142,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__button",
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
-          },
-          {
-            "part": "toggle__button",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -2437,12 +1873,6 @@
             "channel": "outline-color",
             "ours": "rgba(82, 82, 82, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -2487,12 +1917,6 @@
             "theirs": "48px 18.1875px"
           },
           {
-            "part": "toggle__appearance",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__switch",
             "channel": "background-color",
             "ours": "rgba(36, 161, 72, 1)",
@@ -2503,12 +1927,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "toggle__switch",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -2563,12 +1981,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -2600,34 +2012,16 @@
       {
         "key": "toggled.disabled__focus-visible",
         "channelsCompared": 173,
-        "channelsEqual": 135,
+        "channelsEqual": 142,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__button",
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
-          },
-          {
-            "part": "toggle__button",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -2676,12 +2070,6 @@
             "channel": "outline-color",
             "ours": "rgba(82, 82, 82, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -2726,12 +2114,6 @@
             "theirs": "48px 18.1875px"
           },
           {
-            "part": "toggle__appearance",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__switch",
             "channel": "background-color",
             "ours": "rgba(36, 161, 72, 1)",
@@ -2742,12 +2124,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "toggle__switch",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -2802,12 +2178,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -2839,34 +2209,16 @@
       {
         "key": "toggled.disabled__active",
         "channelsCompared": 173,
-        "channelsEqual": 135,
+        "channelsEqual": 142,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__button",
             "channel": "clip",
             "ours": "auto",
             "theirs": "rect(0px, 0px, 0px, 0px)"
-          },
-          {
-            "part": "toggle__button",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "toggle__label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -2915,12 +2267,6 @@
             "channel": "outline-color",
             "ours": "rgba(82, 82, 82, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -2965,12 +2311,6 @@
             "theirs": "48px 18.1875px"
           },
           {
-            "part": "toggle__appearance",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "toggle__switch",
             "channel": "background-color",
             "ours": "rgba(36, 161, 72, 1)",
@@ -2981,12 +2321,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "toggle__switch",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -3041,12 +2375,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",

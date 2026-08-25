@@ -298,8 +298,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 832,
-      "cellsEqual": 748,
-      "pctEqual": 89.90384615384616,
+      "cellsEqual": 784,
+      "pctEqual": 94.23076923076923,
       "rowsFullyEqual": 0,
       "rows": 4
     },
@@ -334,54 +334,34 @@
         "key": "__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 21,
+        "channelsMismatched": 12,
         "unscorable": "no-original"
       },
       {
         "key": "__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 21,
+        "channelsMismatched": 12,
         "unscorable": "no-original"
       },
       {
         "key": "__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 21,
+        "channelsMismatched": 12,
         "unscorable": "no-original"
       },
       {
         "key": "__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 21,
+        "channelsMismatched": 12,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
       [
-        "root.position-anchor",
-        4
-      ],
-      [
-        "tablepagination-toolbar.position-anchor",
-        4
-      ],
-      [
         "tablepagination-spacer.flex-basis",
-        4
-      ],
-      [
-        "tablepagination-spacer.position-anchor",
-        4
-      ],
-      [
-        "label.position-anchor",
-        4
-      ],
-      [
-        "inputbase-root.position-anchor",
         4
       ],
       [
@@ -390,10 +370,6 @@
       ],
       [
         "label-2.animation-name",
-        4
-      ],
-      [
-        "label-2.position-anchor",
         4
       ],
       [
@@ -418,6 +394,18 @@
       ],
       [
         "select-nativeinput.border-right-style",
+        4
+      ],
+      [
+        "select-nativeinput.border-right-width",
+        4
+      ],
+      [
+        "select-nativeinput.border-top-style",
+        4
+      ],
+      [
+        "select-nativeinput.border-top-width",
         4
       ]
     ],
@@ -463,46 +451,16 @@
       {
         "key": "__default",
         "channelsCompared": 208,
-        "channelsEqual": 187,
+        "channelsEqual": 196,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tablepagination-toolbar",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "tablepagination-spacer",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "tablepagination-spacer",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "inputbase-root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -515,12 +473,6 @@
             "channel": "animation-name",
             "ours": "none",
             "theirs": "mui-auto-fill-cancel"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -575,24 +527,6 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "2px"
-          },
-          {
-            "part": "select-nativeinput",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tablepagination-actions",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -600,46 +534,16 @@
       {
         "key": "__hover",
         "channelsCompared": 208,
-        "channelsEqual": 187,
+        "channelsEqual": 196,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tablepagination-toolbar",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "tablepagination-spacer",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "tablepagination-spacer",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "inputbase-root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -652,12 +556,6 @@
             "channel": "animation-name",
             "ours": "none",
             "theirs": "mui-auto-fill-cancel"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -712,24 +610,6 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "2px"
-          },
-          {
-            "part": "select-nativeinput",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tablepagination-actions",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -737,46 +617,16 @@
       {
         "key": "__focus-visible",
         "channelsCompared": 208,
-        "channelsEqual": 187,
+        "channelsEqual": 196,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tablepagination-toolbar",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "tablepagination-spacer",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "tablepagination-spacer",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "inputbase-root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -789,12 +639,6 @@
             "channel": "animation-name",
             "ours": "none",
             "theirs": "mui-auto-fill-cancel"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -849,24 +693,6 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "2px"
-          },
-          {
-            "part": "select-nativeinput",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tablepagination-actions",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -874,46 +700,16 @@
       {
         "key": "__active",
         "channelsCompared": 208,
-        "channelsEqual": 187,
+        "channelsEqual": 196,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tablepagination-toolbar",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "tablepagination-spacer",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "tablepagination-spacer",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "inputbase-root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -926,12 +722,6 @@
             "channel": "animation-name",
             "ours": "none",
             "theirs": "mui-auto-fill-cancel"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label-2",
@@ -986,24 +776,6 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "2px"
-          },
-          {
-            "part": "select-nativeinput",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "tablepagination-actions",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

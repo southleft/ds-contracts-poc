@@ -937,7 +937,7 @@
           {
             "part": "tooltip",
             "channel": "position-anchor",
-            "ours": "normal",
+            "ours": "none",
             "theirs": "--astryx-layer-_r_5_"
           },
           {
@@ -1164,7 +1164,7 @@
           {
             "part": "tooltip",
             "channel": "position-anchor",
-            "ours": "normal",
+            "ours": "none",
             "theirs": "--astryx-layer-_r_5_"
           },
           {
@@ -1403,7 +1403,7 @@
           {
             "part": "tooltip",
             "channel": "position-anchor",
-            "ours": "normal",
+            "ours": "none",
             "theirs": "--astryx-layer-_r_5_"
           },
           {
@@ -1630,7 +1630,7 @@
           {
             "part": "tooltip",
             "channel": "position-anchor",
-            "ours": "normal",
+            "ours": "none",
             "theirs": "--astryx-layer-_r_5_"
           },
           {
@@ -3073,7 +3073,7 @@
           {
             "part": "tooltip",
             "channel": "position-anchor",
-            "ours": "normal",
+            "ours": "none",
             "theirs": "--astryx-layer-_r_i_"
           },
           {
@@ -3312,7 +3312,7 @@
           {
             "part": "tooltip",
             "channel": "position-anchor",
-            "ours": "normal",
+            "ours": "none",
             "theirs": "--astryx-layer-_r_i_"
           },
           {
@@ -3563,7 +3563,7 @@
           {
             "part": "tooltip",
             "channel": "position-anchor",
-            "ours": "normal",
+            "ours": "none",
             "theirs": "--astryx-layer-_r_i_"
           },
           {
@@ -3814,7 +3814,7 @@
           {
             "part": "tooltip",
             "channel": "position-anchor",
-            "ours": "normal",
+            "ours": "none",
             "theirs": "--astryx-layer-_r_i_"
           },
           {

@@ -63,8 +63,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 984,
-      "cellsEqual": 848,
-      "pctEqual": 86.17886178861788,
+      "cellsEqual": 880,
+      "pctEqual": 89.4308943089431,
       "rowsFullyEqual": 0,
       "rows": 16
     },
@@ -99,56 +99,56 @@
         "key": "unset.on__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 9,
         "unscorable": "no-original"
       },
       {
         "key": "unset.on__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 9,
         "unscorable": "no-original"
       },
       {
         "key": "unset.on__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 9,
         "unscorable": "no-original"
       },
       {
         "key": "unset.on__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 9,
         "unscorable": "no-original"
       },
       {
         "key": "sm.on__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 9,
         "unscorable": "no-original"
       },
       {
         "key": "sm.on__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 9,
         "unscorable": "no-original"
       },
       {
         "key": "sm.on__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 9,
         "unscorable": "no-original"
       },
       {
         "key": "sm.on__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 9,
         "unscorable": "no-original"
       }
     ],
@@ -170,10 +170,6 @@
         16
       ],
       [
-        "root.position-anchor",
-        16
-      ],
-      [
         "root.bottom",
         8
       ],
@@ -191,14 +187,6 @@
       ],
       [
         "root.top",
-        8
-      ],
-      [
-        "avatar__badge.position-anchor",
-        8
-      ],
-      [
-        "badge.position-anchor",
         8
       ]
     ],
@@ -244,7 +232,7 @@
       {
         "key": "unset.off__default",
         "channelsCompared": 33,
-        "channelsEqual": 28,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -272,12 +260,6 @@
             "channel": "border-top-right-radius",
             "ours": "20px",
             "theirs": "50%"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -285,7 +267,7 @@
       {
         "key": "unset.off__hover",
         "channelsCompared": 33,
-        "channelsEqual": 28,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -313,12 +295,6 @@
             "channel": "border-top-right-radius",
             "ours": "20px",
             "theirs": "50%"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -326,7 +302,7 @@
       {
         "key": "unset.off__focus-visible",
         "channelsCompared": 33,
-        "channelsEqual": 28,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -354,12 +330,6 @@
             "channel": "border-top-right-radius",
             "ours": "20px",
             "theirs": "50%"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -367,7 +337,7 @@
       {
         "key": "unset.off__active",
         "channelsCompared": 33,
-        "channelsEqual": 28,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -395,12 +365,6 @@
             "channel": "border-top-right-radius",
             "ours": "20px",
             "theirs": "50%"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -408,7 +372,7 @@
       {
         "key": "unset.on__default",
         "channelsCompared": 90,
-        "channelsEqual": 78,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -457,12 +421,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "right",
             "ours": "auto",
             "theirs": "0px"
@@ -472,18 +430,6 @@
             "channel": "top",
             "ours": "auto",
             "theirs": "0px"
-          },
-          {
-            "part": "avatar__badge",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "badge",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -491,7 +437,7 @@
       {
         "key": "unset.on__hover",
         "channelsCompared": 90,
-        "channelsEqual": 78,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -540,12 +486,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "right",
             "ours": "auto",
             "theirs": "0px"
@@ -555,18 +495,6 @@
             "channel": "top",
             "ours": "auto",
             "theirs": "0px"
-          },
-          {
-            "part": "avatar__badge",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "badge",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -574,7 +502,7 @@
       {
         "key": "unset.on__focus-visible",
         "channelsCompared": 90,
-        "channelsEqual": 78,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -623,12 +551,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "right",
             "ours": "auto",
             "theirs": "0px"
@@ -638,18 +560,6 @@
             "channel": "top",
             "ours": "auto",
             "theirs": "0px"
-          },
-          {
-            "part": "avatar__badge",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "badge",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -657,7 +567,7 @@
       {
         "key": "unset.on__active",
         "channelsCompared": 90,
-        "channelsEqual": 78,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -706,12 +616,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "right",
             "ours": "auto",
             "theirs": "0px"
@@ -721,18 +625,6 @@
             "channel": "top",
             "ours": "auto",
             "theirs": "0px"
-          },
-          {
-            "part": "avatar__badge",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "badge",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -740,7 +632,7 @@
       {
         "key": "sm.off__default",
         "channelsCompared": 33,
-        "channelsEqual": 28,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -768,12 +660,6 @@
             "channel": "border-top-right-radius",
             "ours": "16px",
             "theirs": "50%"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -781,7 +667,7 @@
       {
         "key": "sm.off__hover",
         "channelsCompared": 33,
-        "channelsEqual": 28,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -809,12 +695,6 @@
             "channel": "border-top-right-radius",
             "ours": "16px",
             "theirs": "50%"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -822,7 +702,7 @@
       {
         "key": "sm.off__focus-visible",
         "channelsCompared": 33,
-        "channelsEqual": 28,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -850,12 +730,6 @@
             "channel": "border-top-right-radius",
             "ours": "16px",
             "theirs": "50%"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -863,7 +737,7 @@
       {
         "key": "sm.off__active",
         "channelsCompared": 33,
-        "channelsEqual": 28,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -891,12 +765,6 @@
             "channel": "border-top-right-radius",
             "ours": "16px",
             "theirs": "50%"
-          },
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -904,7 +772,7 @@
       {
         "key": "sm.on__default",
         "channelsCompared": 90,
-        "channelsEqual": 78,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -953,12 +821,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "right",
             "ours": "auto",
             "theirs": "0px"
@@ -968,18 +830,6 @@
             "channel": "top",
             "ours": "auto",
             "theirs": "0px"
-          },
-          {
-            "part": "avatar__badge",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "badge",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -987,7 +837,7 @@
       {
         "key": "sm.on__hover",
         "channelsCompared": 90,
-        "channelsEqual": 78,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1036,12 +886,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "right",
             "ours": "auto",
             "theirs": "0px"
@@ -1051,18 +895,6 @@
             "channel": "top",
             "ours": "auto",
             "theirs": "0px"
-          },
-          {
-            "part": "avatar__badge",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "badge",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1070,7 +902,7 @@
       {
         "key": "sm.on__focus-visible",
         "channelsCompared": 90,
-        "channelsEqual": 78,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1119,12 +951,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "right",
             "ours": "auto",
             "theirs": "0px"
@@ -1134,18 +960,6 @@
             "channel": "top",
             "ours": "auto",
             "theirs": "0px"
-          },
-          {
-            "part": "avatar__badge",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "badge",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1153,7 +967,7 @@
       {
         "key": "sm.on__active",
         "channelsCompared": 90,
-        "channelsEqual": 78,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1202,12 +1016,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "right",
             "ours": "auto",
             "theirs": "0px"
@@ -1217,18 +1025,6 @@
             "channel": "top",
             "ours": "auto",
             "theirs": "0px"
-          },
-          {
-            "part": "avatar__badge",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "badge",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

@@ -78,8 +78,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 126,
-      "cellsEqual": 110,
-      "pctEqual": 87.3015873015873,
+      "cellsEqual": 115,
+      "pctEqual": 91.26984126984127,
       "rowsFullyEqual": 0,
       "rows": 8
     },
@@ -114,14 +114,14 @@
         "key": "on__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 9,
         "unscorable": "no-original"
       },
       {
         "key": "off__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 4,
+        "channelsMismatched": 2,
         "unscorable": "no-original"
       },
       {
@@ -169,15 +169,7 @@
     ],
     "topMismatchedChannels": [
       [
-        "root.position-anchor",
-        2
-      ],
-      [
         "label.overflow-wrap",
-        2
-      ],
-      [
-        "label.position-anchor",
         2
       ],
       [
@@ -211,10 +203,6 @@
       [
         "tooltip-arrow.overflow-wrap",
         1
-      ],
-      [
-        "tooltip-arrow.position-anchor",
-        1
       ]
     ],
     "namedLosses": [
@@ -247,28 +235,16 @@
       {
         "key": "off__default",
         "channelsCompared": 49,
-        "channelsEqual": 45,
+        "channelsEqual": 47,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "overflow-wrap",
             "ours": "normal",
             "theirs": "break-word"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -312,17 +288,11 @@
       {
         "key": "on__default",
         "channelsCompared": 77,
-        "channelsEqual": 65,
+        "channelsEqual": 68,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "label",
             "channel": "bottom",
@@ -355,12 +325,6 @@
           },
           {
             "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
             "channel": "right",
             "ours": "auto",
             "theirs": "0px"
@@ -382,12 +346,6 @@
             "channel": "overflow-wrap",
             "ours": "normal",
             "theirs": "break-word"
-          },
-          {
-            "part": "tooltip-arrow",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

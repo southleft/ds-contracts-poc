@@ -187,8 +187,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 3048,
-      "cellsEqual": 2544,
-      "pctEqual": 83.46456692913385,
+      "cellsEqual": 2664,
+      "pctEqual": 87.4015748031496,
       "rowsFullyEqual": 0,
       "rows": 24
     },
@@ -223,64 +223,60 @@
         "key": "unchecked.disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 33,
+        "channelsMismatched": 28,
         "unscorable": "no-original"
       },
       {
         "key": "unchecked.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 33,
+        "channelsMismatched": 28,
         "unscorable": "no-original"
       },
       {
         "key": "unchecked.disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 33,
+        "channelsMismatched": 28,
         "unscorable": "no-original"
       },
       {
         "key": "unchecked.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 33,
+        "channelsMismatched": 28,
         "unscorable": "no-original"
       },
       {
         "key": "checked.disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 33,
+        "channelsMismatched": 28,
         "unscorable": "no-original"
       },
       {
         "key": "checked.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 33,
+        "channelsMismatched": 28,
         "unscorable": "no-original"
       },
       {
         "key": "checked.disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 33,
+        "channelsMismatched": 28,
         "unscorable": "no-original"
       },
       {
         "key": "checked.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 33,
+        "channelsMismatched": 28,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
-      [
-        "root.position-anchor",
-        24
-      ],
       [
         "checkbox.clip",
         24
@@ -294,23 +290,7 @@
         24
       ],
       [
-        "checkbox.position-anchor",
-        24
-      ],
-      [
-        "checkbox-label.position-anchor",
-        24
-      ],
-      [
-        "label.position-anchor",
-        24
-      ],
-      [
         "checkbox__validation-msg.align-items",
-        24
-      ],
-      [
-        "checkbox__validation-msg.position-anchor",
         24
       ],
       [
@@ -335,6 +315,26 @@
       ],
       [
         "checkbox-label.color",
+        12
+      ],
+      [
+        "checkbox-label.column-rule-color",
+        12
+      ],
+      [
+        "checkbox-label.cursor",
+        12
+      ],
+      [
+        "checkbox-label.outline-color",
+        12
+      ],
+      [
+        "checkbox-label.row-rule-color",
+        12
+      ],
+      [
+        "checkbox-label.text-decoration-color",
         12
       ]
     ],
@@ -378,17 +378,11 @@
       {
         "key": "unchecked.enabled__default",
         "channelsCompared": 127,
-        "channelsEqual": 118,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -408,34 +402,10 @@
             "theirs": "hidden"
           },
           {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "checkbox__validation-msg",
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -443,17 +413,11 @@
       {
         "key": "unchecked.enabled__hover",
         "channelsCompared": 127,
-        "channelsEqual": 118,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -473,34 +437,10 @@
             "theirs": "hidden"
           },
           {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "checkbox__validation-msg",
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -508,17 +448,11 @@
       {
         "key": "unchecked.enabled__focus-visible",
         "channelsCompared": 127,
-        "channelsEqual": 118,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -538,34 +472,10 @@
             "theirs": "hidden"
           },
           {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "checkbox__validation-msg",
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -573,17 +483,11 @@
       {
         "key": "unchecked.enabled__active",
         "channelsCompared": 127,
-        "channelsEqual": 118,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -603,34 +507,10 @@
             "theirs": "hidden"
           },
           {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "checkbox__validation-msg",
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -638,17 +518,11 @@
       {
         "key": "unchecked.disabled__default",
         "channelsCompared": 127,
-        "channelsEqual": 94,
+        "channelsEqual": 99,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -666,12 +540,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -726,12 +594,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -804,12 +666,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -834,12 +690,6 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -847,17 +697,11 @@
       {
         "key": "unchecked.disabled__hover",
         "channelsCompared": 127,
-        "channelsEqual": 94,
+        "channelsEqual": 99,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -875,12 +719,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -935,12 +773,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -1013,12 +845,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1043,12 +869,6 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1056,17 +876,11 @@
       {
         "key": "unchecked.disabled__focus-visible",
         "channelsCompared": 127,
-        "channelsEqual": 94,
+        "channelsEqual": 99,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -1084,12 +898,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -1144,12 +952,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -1222,12 +1024,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1252,12 +1048,6 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1265,17 +1055,11 @@
       {
         "key": "unchecked.disabled__active",
         "channelsCompared": 127,
-        "channelsEqual": 94,
+        "channelsEqual": 99,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -1293,12 +1077,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -1353,12 +1131,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -1431,12 +1203,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1461,12 +1227,6 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1474,17 +1234,11 @@
       {
         "key": "checked.enabled__default",
         "channelsCompared": 127,
-        "channelsEqual": 118,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -1504,34 +1258,10 @@
             "theirs": "hidden"
           },
           {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "checkbox__validation-msg",
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1539,17 +1269,11 @@
       {
         "key": "checked.enabled__hover",
         "channelsCompared": 127,
-        "channelsEqual": 118,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -1569,34 +1293,10 @@
             "theirs": "hidden"
           },
           {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "checkbox__validation-msg",
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1604,17 +1304,11 @@
       {
         "key": "checked.enabled__focus-visible",
         "channelsCompared": 127,
-        "channelsEqual": 118,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -1634,34 +1328,10 @@
             "theirs": "hidden"
           },
           {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "checkbox__validation-msg",
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1669,17 +1339,11 @@
       {
         "key": "checked.enabled__active",
         "channelsCompared": 127,
-        "channelsEqual": 118,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -1699,34 +1363,10 @@
             "theirs": "hidden"
           },
           {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "checkbox__validation-msg",
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1734,17 +1374,11 @@
       {
         "key": "checked.disabled__default",
         "channelsCompared": 127,
-        "channelsEqual": 94,
+        "channelsEqual": 99,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -1762,12 +1396,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -1822,12 +1450,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -1900,12 +1522,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -1930,12 +1546,6 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1943,17 +1553,11 @@
       {
         "key": "checked.disabled__hover",
         "channelsCompared": 127,
-        "channelsEqual": 94,
+        "channelsEqual": 99,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -1971,12 +1575,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -2031,12 +1629,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -2109,12 +1701,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -2139,12 +1725,6 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2152,17 +1732,11 @@
       {
         "key": "checked.disabled__focus-visible",
         "channelsCompared": 127,
-        "channelsEqual": 94,
+        "channelsEqual": 99,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -2180,12 +1754,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -2240,12 +1808,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -2318,12 +1880,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -2348,12 +1904,6 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2361,17 +1911,11 @@
       {
         "key": "checked.disabled__active",
         "channelsCompared": 127,
-        "channelsEqual": 94,
+        "channelsEqual": 99,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -2389,12 +1933,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -2449,12 +1987,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -2527,12 +2059,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -2557,12 +2083,6 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2570,17 +2090,11 @@
       {
         "key": "indeterminate.enabled__default",
         "channelsCompared": 127,
-        "channelsEqual": 118,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -2600,34 +2114,10 @@
             "theirs": "hidden"
           },
           {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "checkbox__validation-msg",
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2635,17 +2125,11 @@
       {
         "key": "indeterminate.enabled__hover",
         "channelsCompared": 127,
-        "channelsEqual": 118,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -2665,34 +2149,10 @@
             "theirs": "hidden"
           },
           {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "checkbox__validation-msg",
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2700,17 +2160,11 @@
       {
         "key": "indeterminate.enabled__focus-visible",
         "channelsCompared": 127,
-        "channelsEqual": 118,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -2730,34 +2184,10 @@
             "theirs": "hidden"
           },
           {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "checkbox__validation-msg",
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2765,17 +2195,11 @@
       {
         "key": "indeterminate.enabled__active",
         "channelsCompared": 127,
-        "channelsEqual": 118,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -2795,34 +2219,10 @@
             "theirs": "hidden"
           },
           {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "checkbox__validation-msg",
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2830,17 +2230,11 @@
       {
         "key": "indeterminate.disabled__default",
         "channelsCompared": 127,
-        "channelsEqual": 94,
+        "channelsEqual": 99,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -2858,12 +2252,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -2918,12 +2306,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -2996,12 +2378,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -3026,12 +2402,6 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -3039,17 +2409,11 @@
       {
         "key": "indeterminate.disabled__hover",
         "channelsCompared": 127,
-        "channelsEqual": 94,
+        "channelsEqual": 99,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -3067,12 +2431,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -3127,12 +2485,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -3205,12 +2557,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -3235,12 +2581,6 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -3248,17 +2588,11 @@
       {
         "key": "indeterminate.disabled__focus-visible",
         "channelsCompared": 127,
-        "channelsEqual": 94,
+        "channelsEqual": 99,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -3276,12 +2610,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -3336,12 +2664,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -3414,12 +2736,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -3444,12 +2760,6 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -3457,17 +2767,11 @@
       {
         "key": "indeterminate.disabled__active",
         "channelsCompared": 127,
-        "channelsEqual": 94,
+        "channelsEqual": 99,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "checkbox",
             "channel": "clip",
@@ -3485,12 +2789,6 @@
             "channel": "overflow-y",
             "ours": "clip",
             "theirs": "hidden"
-          },
-          {
-            "part": "checkbox",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -3545,12 +2843,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "checkbox-label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "checkbox-label",
@@ -3623,12 +2915,6 @@
             "channel": "outline-color",
             "ours": "rgba(22, 22, 22, 1)",
             "theirs": "rgba(22, 22, 22, 0.25)"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "label",
@@ -3653,12 +2939,6 @@
             "channel": "align-items",
             "ours": "normal",
             "theirs": "flex-start"
-          },
-          {
-            "part": "checkbox__validation-msg",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

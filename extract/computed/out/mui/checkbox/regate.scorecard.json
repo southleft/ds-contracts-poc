@@ -146,8 +146,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 1728,
-      "cellsEqual": 1200,
-      "pctEqual": 69.44444444444444,
+      "cellsEqual": 1272,
+      "pctEqual": 73.61111111111111,
       "rowsFullyEqual": 0,
       "rows": 24
     },
@@ -182,56 +182,56 @@
         "key": "unchecked.disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 35,
+        "channelsMismatched": 32,
         "unscorable": "no-original"
       },
       {
         "key": "unchecked.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 35,
+        "channelsMismatched": 32,
         "unscorable": "no-original"
       },
       {
         "key": "unchecked.disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 35,
+        "channelsMismatched": 32,
         "unscorable": "no-original"
       },
       {
         "key": "unchecked.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 35,
+        "channelsMismatched": 32,
         "unscorable": "no-original"
       },
       {
         "key": "checked.disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 35,
+        "channelsMismatched": 32,
         "unscorable": "no-original"
       },
       {
         "key": "checked.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 35,
+        "channelsMismatched": 32,
         "unscorable": "no-original"
       },
       {
         "key": "checked.disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 35,
+        "channelsMismatched": 32,
         "unscorable": "no-original"
       },
       {
         "key": "checked.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 35,
+        "channelsMismatched": 32,
         "unscorable": "no-original"
       }
     ],
@@ -253,23 +253,11 @@
         24
       ],
       [
-        "root.position-anchor",
-        24
-      ],
-      [
         "root.vertical-align",
         24
       ],
       [
-        "part-0.position-anchor",
-        24
-      ],
-      [
         "icon.overflow-clip-margin",
-        24
-      ],
-      [
-        "icon.position-anchor",
         24
       ],
       [
@@ -294,6 +282,18 @@
       ],
       [
         "root.color",
+        12
+      ],
+      [
+        "root.column-rule-color",
+        12
+      ],
+      [
+        "root.cursor",
+        12
+      ],
+      [
+        "root.outline-color",
         12
       ]
     ],
@@ -350,7 +350,7 @@
       {
         "key": "unchecked.enabled__default",
         "channelsCompared": 72,
-        "channelsEqual": 63,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -381,33 +381,15 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -415,7 +397,7 @@
       {
         "key": "unchecked.enabled__hover",
         "channelsCompared": 72,
-        "channelsEqual": 63,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -446,33 +428,15 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -480,7 +444,7 @@
       {
         "key": "unchecked.enabled__focus-visible",
         "channelsCompared": 72,
-        "channelsEqual": 63,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -511,33 +475,15 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -545,7 +491,7 @@
       {
         "key": "unchecked.enabled__active",
         "channelsCompared": 72,
-        "channelsEqual": 63,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -576,33 +522,15 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -610,7 +538,7 @@
       {
         "key": "unchecked.disabled__default",
         "channelsCompared": 72,
-        "channelsEqual": 37,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -695,12 +623,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(0, 0, 0, 0.6)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -728,12 +650,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -800,12 +716,6 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -831,7 +741,7 @@
       {
         "key": "unchecked.disabled__hover",
         "channelsCompared": 72,
-        "channelsEqual": 37,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -916,12 +826,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(0, 0, 0, 0.6)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -949,12 +853,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -1021,12 +919,6 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -1052,7 +944,7 @@
       {
         "key": "unchecked.disabled__focus-visible",
         "channelsCompared": 72,
-        "channelsEqual": 37,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1137,12 +1029,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(0, 0, 0, 0.6)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -1170,12 +1056,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -1242,12 +1122,6 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -1273,7 +1147,7 @@
       {
         "key": "unchecked.disabled__active",
         "channelsCompared": 72,
-        "channelsEqual": 37,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1358,12 +1232,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(0, 0, 0, 0.6)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -1391,12 +1259,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -1463,12 +1325,6 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -1494,7 +1350,7 @@
       {
         "key": "checked.enabled__default",
         "channelsCompared": 72,
-        "channelsEqual": 63,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1525,33 +1381,15 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1559,7 +1397,7 @@
       {
         "key": "checked.enabled__hover",
         "channelsCompared": 72,
-        "channelsEqual": 63,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1590,33 +1428,15 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1624,7 +1444,7 @@
       {
         "key": "checked.enabled__focus-visible",
         "channelsCompared": 72,
-        "channelsEqual": 63,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1655,33 +1475,15 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1689,7 +1491,7 @@
       {
         "key": "checked.enabled__active",
         "channelsCompared": 72,
-        "channelsEqual": 63,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1720,33 +1522,15 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1754,7 +1538,7 @@
       {
         "key": "checked.disabled__default",
         "channelsCompared": 72,
-        "channelsEqual": 37,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1839,12 +1623,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -1872,12 +1650,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -1944,12 +1716,6 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -1975,7 +1741,7 @@
       {
         "key": "checked.disabled__hover",
         "channelsCompared": 72,
-        "channelsEqual": 37,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2060,12 +1826,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -2093,12 +1853,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -2165,12 +1919,6 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -2196,7 +1944,7 @@
       {
         "key": "checked.disabled__focus-visible",
         "channelsCompared": 72,
-        "channelsEqual": 37,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2281,12 +2029,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -2314,12 +2056,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -2386,12 +2122,6 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -2417,7 +2147,7 @@
       {
         "key": "checked.disabled__active",
         "channelsCompared": 72,
-        "channelsEqual": 37,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2502,12 +2232,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -2535,12 +2259,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -2607,12 +2325,6 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -2638,7 +2350,7 @@
       {
         "key": "indeterminate.enabled__default",
         "channelsCompared": 72,
-        "channelsEqual": 63,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2669,33 +2381,15 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2703,7 +2397,7 @@
       {
         "key": "indeterminate.enabled__hover",
         "channelsCompared": 72,
-        "channelsEqual": 63,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2734,33 +2428,15 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2768,7 +2444,7 @@
       {
         "key": "indeterminate.enabled__focus-visible",
         "channelsCompared": 72,
-        "channelsEqual": 63,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2799,33 +2475,15 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2833,7 +2491,7 @@
       {
         "key": "indeterminate.enabled__active",
         "channelsCompared": 72,
-        "channelsEqual": 63,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2864,33 +2522,15 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -2898,7 +2538,7 @@
       {
         "key": "indeterminate.disabled__default",
         "channelsCompared": 72,
-        "channelsEqual": 37,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2983,12 +2623,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -3016,12 +2650,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -3088,12 +2716,6 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -3119,7 +2741,7 @@
       {
         "key": "indeterminate.disabled__hover",
         "channelsCompared": 72,
-        "channelsEqual": 37,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3204,12 +2826,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -3237,12 +2853,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -3309,12 +2919,6 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -3340,7 +2944,7 @@
       {
         "key": "indeterminate.disabled__focus-visible",
         "channelsCompared": 72,
-        "channelsEqual": 37,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3425,12 +3029,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -3458,12 +3056,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -3530,12 +3122,6 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -3561,7 +3147,7 @@
       {
         "key": "indeterminate.disabled__active",
         "channelsCompared": 72,
-        "channelsEqual": 37,
+        "channelsEqual": 40,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3646,12 +3232,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "row-rule-color",
             "ours": "rgba(25, 118, 210, 1)",
             "theirs": "rgba(0, 0, 0, 0.26)"
@@ -3679,12 +3259,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "part-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",
@@ -3751,12 +3325,6 @@
             "channel": "overflow-clip-margin",
             "ours": "0px",
             "theirs": "content-box"
-          },
-          {
-            "part": "icon",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "icon",

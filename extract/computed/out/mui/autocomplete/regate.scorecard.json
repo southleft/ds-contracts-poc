@@ -518,8 +518,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 2632,
-      "cellsEqual": 2412,
-      "pctEqual": 91.64133738601824,
+      "cellsEqual": 2508,
+      "pctEqual": 95.2887537993921,
       "rowsFullyEqual": 0,
       "rows": 8
     },
@@ -554,68 +554,60 @@
         "key": "small__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 31,
+        "channelsMismatched": 19,
         "unscorable": "no-original"
       },
       {
         "key": "small__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 31,
+        "channelsMismatched": 19,
         "unscorable": "no-original"
       },
       {
         "key": "medium__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 31,
+        "channelsMismatched": 19,
         "unscorable": "no-original"
       },
       {
         "key": "small__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 27,
+        "channelsMismatched": 15,
         "unscorable": "no-original"
       },
       {
         "key": "medium__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 27,
+        "channelsMismatched": 15,
         "unscorable": "no-original"
       },
       {
         "key": "medium__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 27,
+        "channelsMismatched": 15,
         "unscorable": "no-original"
       },
       {
         "key": "small__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 23,
+        "channelsMismatched": 11,
         "unscorable": "no-original"
       },
       {
         "key": "medium__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 23,
+        "channelsMismatched": 11,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
-      [
-        "root.position-anchor",
-        8
-      ],
-      [
-        "formcontrol-fullwidth.position-anchor",
-        8
-      ],
       [
         "formcontrol-fullwidth.vertical-align",
         8
@@ -625,15 +617,7 @@
         8
       ],
       [
-        "autocomplete-inputroot.position-anchor",
-        8
-      ],
-      [
         "autocomplete-tag.max-width",
-        8
-      ],
-      [
-        "autocomplete-tag.position-anchor",
         8
       ],
       [
@@ -645,15 +629,7 @@
         8
       ],
       [
-        "label.position-anchor",
-        8
-      ],
-      [
         "autocomplete-tag-2.max-width",
-        8
-      ],
-      [
-        "autocomplete-tag-2.position-anchor",
         8
       ],
       [
@@ -665,8 +641,32 @@
         8
       ],
       [
-        "label-2.position-anchor",
+        "autocomplete-input.animation-duration",
         8
+      ],
+      [
+        "autocomplete-input.animation-name",
+        8
+      ],
+      [
+        "outlinedinput-notchedoutline.min-width",
+        8
+      ],
+      [
+        "outlinedinput-notchedoutline.border-bottom-color",
+        6
+      ],
+      [
+        "outlinedinput-notchedoutline.border-left-color",
+        6
+      ],
+      [
+        "outlinedinput-notchedoutline.border-right-color",
+        6
+      ],
+      [
+        "outlinedinput-notchedoutline.border-top-color",
+        6
       ]
     ],
     "namedLosses": [
@@ -743,23 +743,11 @@
       {
         "key": "small__default",
         "channelsCompared": 329,
-        "channelsEqual": 306,
+        "channelsEqual": 318,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "formcontrol-fullwidth",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "formcontrol-fullwidth",
             "channel": "vertical-align",
@@ -773,22 +761,10 @@
             "theirs": "wrap"
           },
           {
-            "part": "autocomplete-inputroot",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "autocomplete-tag",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 4px)"
-          },
-          {
-            "part": "autocomplete-tag",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-tag",
@@ -803,22 +779,10 @@
             "theirs": "middle"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "autocomplete-tag-2",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 4px)"
-          },
-          {
-            "part": "autocomplete-tag-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-tag-2",
@@ -831,12 +795,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-input",
@@ -851,40 +809,10 @@
             "theirs": "mui-auto-fill-cancel"
           },
           {
-            "part": "autocomplete-input",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "autocomplete-endadornment",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "outlinedinput-notchedoutline",
             "channel": "min-width",
             "ours": "min-content",
             "theirs": "0%"
-          },
-          {
-            "part": "outlinedinput-notchedoutline",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-4-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -892,23 +820,11 @@
       {
         "key": "small__hover",
         "channelsCompared": 329,
-        "channelsEqual": 302,
+        "channelsEqual": 314,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "formcontrol-fullwidth",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "formcontrol-fullwidth",
             "channel": "vertical-align",
@@ -922,22 +838,10 @@
             "theirs": "wrap"
           },
           {
-            "part": "autocomplete-inputroot",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "autocomplete-tag",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 4px)"
-          },
-          {
-            "part": "autocomplete-tag",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-tag",
@@ -952,22 +856,10 @@
             "theirs": "middle"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "autocomplete-tag-2",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 4px)"
-          },
-          {
-            "part": "autocomplete-tag-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-tag-2",
@@ -980,12 +872,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-input",
@@ -998,18 +884,6 @@
             "channel": "animation-name",
             "ours": "none",
             "theirs": "mui-auto-fill-cancel"
-          },
-          {
-            "part": "autocomplete-input",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "autocomplete-endadornment",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "outlinedinput-notchedoutline",
@@ -1040,24 +914,6 @@
             "channel": "min-width",
             "ours": "min-content",
             "theirs": "0%"
-          },
-          {
-            "part": "outlinedinput-notchedoutline",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-4-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1065,23 +921,11 @@
       {
         "key": "small__focus-visible",
         "channelsCompared": 329,
-        "channelsEqual": 298,
+        "channelsEqual": 310,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "formcontrol-fullwidth",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "formcontrol-fullwidth",
             "channel": "vertical-align",
@@ -1095,22 +939,10 @@
             "theirs": "wrap"
           },
           {
-            "part": "autocomplete-inputroot",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "autocomplete-tag",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 4px)"
-          },
-          {
-            "part": "autocomplete-tag",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-tag",
@@ -1125,22 +957,10 @@
             "theirs": "middle"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "autocomplete-tag-2",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 4px)"
-          },
-          {
-            "part": "autocomplete-tag-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-tag-2",
@@ -1153,12 +973,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-input",
@@ -1171,18 +985,6 @@
             "channel": "animation-name",
             "ours": "none",
             "theirs": "mui-auto-fill-cancel"
-          },
-          {
-            "part": "autocomplete-input",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "autocomplete-endadornment",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "outlinedinput-notchedoutline",
@@ -1237,24 +1039,6 @@
             "channel": "min-width",
             "ours": "min-content",
             "theirs": "0%"
-          },
-          {
-            "part": "outlinedinput-notchedoutline",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-4-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1262,23 +1046,11 @@
       {
         "key": "small__active",
         "channelsCompared": 329,
-        "channelsEqual": 298,
+        "channelsEqual": 310,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "formcontrol-fullwidth",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "formcontrol-fullwidth",
             "channel": "vertical-align",
@@ -1292,22 +1064,10 @@
             "theirs": "wrap"
           },
           {
-            "part": "autocomplete-inputroot",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "autocomplete-tag",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 4px)"
-          },
-          {
-            "part": "autocomplete-tag",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-tag",
@@ -1322,22 +1082,10 @@
             "theirs": "middle"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "autocomplete-tag-2",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 4px)"
-          },
-          {
-            "part": "autocomplete-tag-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-tag-2",
@@ -1350,12 +1098,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-input",
@@ -1368,18 +1110,6 @@
             "channel": "animation-name",
             "ours": "none",
             "theirs": "mui-auto-fill-cancel"
-          },
-          {
-            "part": "autocomplete-input",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "autocomplete-endadornment",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "outlinedinput-notchedoutline",
@@ -1434,24 +1164,6 @@
             "channel": "min-width",
             "ours": "min-content",
             "theirs": "0%"
-          },
-          {
-            "part": "outlinedinput-notchedoutline",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-4-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1459,23 +1171,11 @@
       {
         "key": "medium__default",
         "channelsCompared": 329,
-        "channelsEqual": 306,
+        "channelsEqual": 318,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "formcontrol-fullwidth",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "formcontrol-fullwidth",
             "channel": "vertical-align",
@@ -1489,22 +1189,10 @@
             "theirs": "wrap"
           },
           {
-            "part": "autocomplete-inputroot",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "autocomplete-tag",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 6px)"
-          },
-          {
-            "part": "autocomplete-tag",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-tag",
@@ -1519,22 +1207,10 @@
             "theirs": "middle"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "autocomplete-tag-2",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 6px)"
-          },
-          {
-            "part": "autocomplete-tag-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-tag-2",
@@ -1547,12 +1223,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-input",
@@ -1567,40 +1237,10 @@
             "theirs": "mui-auto-fill-cancel"
           },
           {
-            "part": "autocomplete-input",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "autocomplete-endadornment",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "outlinedinput-notchedoutline",
             "channel": "min-width",
             "ours": "min-content",
             "theirs": "0%"
-          },
-          {
-            "part": "outlinedinput-notchedoutline",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-4-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1608,23 +1248,11 @@
       {
         "key": "medium__hover",
         "channelsCompared": 329,
-        "channelsEqual": 302,
+        "channelsEqual": 314,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "formcontrol-fullwidth",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "formcontrol-fullwidth",
             "channel": "vertical-align",
@@ -1638,22 +1266,10 @@
             "theirs": "wrap"
           },
           {
-            "part": "autocomplete-inputroot",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "autocomplete-tag",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 6px)"
-          },
-          {
-            "part": "autocomplete-tag",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-tag",
@@ -1668,22 +1284,10 @@
             "theirs": "middle"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "autocomplete-tag-2",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 6px)"
-          },
-          {
-            "part": "autocomplete-tag-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-tag-2",
@@ -1696,12 +1300,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-input",
@@ -1714,18 +1312,6 @@
             "channel": "animation-name",
             "ours": "none",
             "theirs": "mui-auto-fill-cancel"
-          },
-          {
-            "part": "autocomplete-input",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "autocomplete-endadornment",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "outlinedinput-notchedoutline",
@@ -1756,24 +1342,6 @@
             "channel": "min-width",
             "ours": "min-content",
             "theirs": "0%"
-          },
-          {
-            "part": "outlinedinput-notchedoutline",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-4-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1781,23 +1349,11 @@
       {
         "key": "medium__focus-visible",
         "channelsCompared": 329,
-        "channelsEqual": 298,
+        "channelsEqual": 310,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "formcontrol-fullwidth",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "formcontrol-fullwidth",
             "channel": "vertical-align",
@@ -1811,22 +1367,10 @@
             "theirs": "wrap"
           },
           {
-            "part": "autocomplete-inputroot",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "autocomplete-tag",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 6px)"
-          },
-          {
-            "part": "autocomplete-tag",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-tag",
@@ -1841,22 +1385,10 @@
             "theirs": "middle"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "autocomplete-tag-2",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 6px)"
-          },
-          {
-            "part": "autocomplete-tag-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-tag-2",
@@ -1869,12 +1401,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-input",
@@ -1887,18 +1413,6 @@
             "channel": "animation-name",
             "ours": "none",
             "theirs": "mui-auto-fill-cancel"
-          },
-          {
-            "part": "autocomplete-input",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "autocomplete-endadornment",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "outlinedinput-notchedoutline",
@@ -1953,24 +1467,6 @@
             "channel": "min-width",
             "ours": "min-content",
             "theirs": "0%"
-          },
-          {
-            "part": "outlinedinput-notchedoutline",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-4-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -1978,23 +1474,11 @@
       {
         "key": "medium__active",
         "channelsCompared": 329,
-        "channelsEqual": 302,
+        "channelsEqual": 314,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "formcontrol-fullwidth",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
           {
             "part": "formcontrol-fullwidth",
             "channel": "vertical-align",
@@ -2008,22 +1492,10 @@
             "theirs": "wrap"
           },
           {
-            "part": "autocomplete-inputroot",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "autocomplete-tag",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 6px)"
-          },
-          {
-            "part": "autocomplete-tag",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-tag",
@@ -2038,22 +1510,10 @@
             "theirs": "middle"
           },
           {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "autocomplete-tag-2",
             "channel": "max-width",
             "ours": "none",
             "theirs": "calc(100% - 6px)"
-          },
-          {
-            "part": "autocomplete-tag-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-tag-2",
@@ -2066,12 +1526,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
-          },
-          {
-            "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "autocomplete-input",
@@ -2084,18 +1538,6 @@
             "channel": "animation-name",
             "ours": "none",
             "theirs": "mui-auto-fill-cancel"
-          },
-          {
-            "part": "autocomplete-input",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "autocomplete-endadornment",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "outlinedinput-notchedoutline",
@@ -2126,24 +1568,6 @@
             "channel": "min-width",
             "ours": "min-content",
             "theirs": "0%"
-          },
-          {
-            "part": "outlinedinput-notchedoutline",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-4-0",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"

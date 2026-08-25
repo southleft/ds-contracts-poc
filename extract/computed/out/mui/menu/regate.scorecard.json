@@ -148,8 +148,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 172,
-      "cellsEqual": 157,
-      "pctEqual": 91.27906976744185,
+      "cellsEqual": 162,
+      "pctEqual": 94.18604651162791,
       "rowsFullyEqual": 0,
       "rows": 4
     },
@@ -184,7 +184,7 @@
         "key": "__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 15,
+        "channelsMismatched": 10,
         "unscorable": "no-original"
       },
       {
@@ -219,10 +219,6 @@
         1
       ],
       [
-        "root.position-anchor",
-        1
-      ],
-      [
         "root.transition-behavior",
         1
       ],
@@ -231,15 +227,7 @@
         1
       ],
       [
-        "list-padding.position-anchor",
-        1
-      ],
-      [
         "label.list-style-type",
-        1
-      ],
-      [
-        "label.position-anchor",
         1
       ],
       [
@@ -251,19 +239,11 @@
         1
       ],
       [
-        "label-2.position-anchor",
-        1
-      ],
-      [
         "label-2.vertical-align",
         1
       ],
       [
         "label-3.list-style-type",
-        1
-      ],
-      [
-        "label-3.position-anchor",
         1
       ],
       [
@@ -305,7 +285,7 @@
       {
         "key": "__default",
         "channelsCompared": 172,
-        "channelsEqual": 157,
+        "channelsEqual": 162,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -324,12 +304,6 @@
           },
           {
             "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "root",
             "channel": "transition-behavior",
             "ours": "normal",
             "theirs": "normal, normal"
@@ -341,21 +315,9 @@
             "theirs": "none"
           },
           {
-            "part": "list-padding",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "label",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {
@@ -372,12 +334,6 @@
           },
           {
             "part": "label-2",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label-2",
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "middle"
@@ -386,12 +342,6 @@
             "part": "label-3",
             "channel": "list-style-type",
             "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "label-3",
-            "channel": "position-anchor",
-            "ours": "normal",
             "theirs": "none"
           },
           {

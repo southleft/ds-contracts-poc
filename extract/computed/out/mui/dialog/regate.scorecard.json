@@ -83,8 +83,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 425,
-      "cellsEqual": 380,
-      "pctEqual": 89.41176470588235,
+      "cellsEqual": 405,
+      "pctEqual": 95.29411764705883,
       "rowsFullyEqual": 0,
       "rows": 20
     },
@@ -119,35 +119,35 @@
         "key": "xs__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 9,
+        "channelsMismatched": 4,
         "unscorable": "no-original"
       },
       {
         "key": "sm__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 9,
+        "channelsMismatched": 4,
         "unscorable": "no-original"
       },
       {
         "key": "md__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 9,
+        "channelsMismatched": 4,
         "unscorable": "no-original"
       },
       {
         "key": "lg__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 9,
+        "channelsMismatched": 4,
         "unscorable": "no-original"
       },
       {
         "key": "xl__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 9,
+        "channelsMismatched": 4,
         "unscorable": "no-original"
       },
       {
@@ -178,15 +178,7 @@
         5
       ],
       [
-        "root.position-anchor",
-        5
-      ],
-      [
         "backdrop-root.position",
-        5
-      ],
-      [
-        "backdrop-root.position-anchor",
         5
       ],
       [
@@ -194,19 +186,7 @@
         5
       ],
       [
-        "dialog-container.position-anchor",
-        5
-      ],
-      [
         "dialog-paper.max-height",
-        5
-      ],
-      [
-        "dialog-paper.position-anchor",
-        5
-      ],
-      [
-        "label.position-anchor",
         5
       ]
     ],
@@ -235,7 +215,7 @@
       {
         "key": "xs__default",
         "channelsCompared": 85,
-        "channelsEqual": 76,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -247,22 +227,10 @@
             "theirs": "fixed"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "backdrop-root",
             "channel": "position",
             "ours": "static",
             "theirs": "fixed"
-          },
-          {
-            "part": "backdrop-root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "backdrop-root",
@@ -271,28 +239,10 @@
             "theirs": "-1"
           },
           {
-            "part": "dialog-container",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "dialog-paper",
             "channel": "max-height",
             "ours": "none",
             "theirs": "calc(100% - 64px)"
-          },
-          {
-            "part": "dialog-paper",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -330,7 +280,7 @@
       {
         "key": "sm__default",
         "channelsCompared": 85,
-        "channelsEqual": 76,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -342,22 +292,10 @@
             "theirs": "fixed"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "backdrop-root",
             "channel": "position",
             "ours": "static",
             "theirs": "fixed"
-          },
-          {
-            "part": "backdrop-root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "backdrop-root",
@@ -366,28 +304,10 @@
             "theirs": "-1"
           },
           {
-            "part": "dialog-container",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "dialog-paper",
             "channel": "max-height",
             "ours": "none",
             "theirs": "calc(100% - 64px)"
-          },
-          {
-            "part": "dialog-paper",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -425,7 +345,7 @@
       {
         "key": "md__default",
         "channelsCompared": 85,
-        "channelsEqual": 76,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -437,22 +357,10 @@
             "theirs": "fixed"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "backdrop-root",
             "channel": "position",
             "ours": "static",
             "theirs": "fixed"
-          },
-          {
-            "part": "backdrop-root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "backdrop-root",
@@ -461,28 +369,10 @@
             "theirs": "-1"
           },
           {
-            "part": "dialog-container",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "dialog-paper",
             "channel": "max-height",
             "ours": "none",
             "theirs": "calc(100% - 64px)"
-          },
-          {
-            "part": "dialog-paper",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -520,7 +410,7 @@
       {
         "key": "lg__default",
         "channelsCompared": 85,
-        "channelsEqual": 76,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -532,22 +422,10 @@
             "theirs": "fixed"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "backdrop-root",
             "channel": "position",
             "ours": "static",
             "theirs": "fixed"
-          },
-          {
-            "part": "backdrop-root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "backdrop-root",
@@ -556,28 +434,10 @@
             "theirs": "-1"
           },
           {
-            "part": "dialog-container",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "dialog-paper",
             "channel": "max-height",
             "ours": "none",
             "theirs": "calc(100% - 64px)"
-          },
-          {
-            "part": "dialog-paper",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -615,7 +475,7 @@
       {
         "key": "xl__default",
         "channelsCompared": 85,
-        "channelsEqual": 76,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -627,22 +487,10 @@
             "theirs": "fixed"
           },
           {
-            "part": "root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "backdrop-root",
             "channel": "position",
             "ours": "static",
             "theirs": "fixed"
-          },
-          {
-            "part": "backdrop-root",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           },
           {
             "part": "backdrop-root",
@@ -651,28 +499,10 @@
             "theirs": "-1"
           },
           {
-            "part": "dialog-container",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
             "part": "dialog-paper",
             "channel": "max-height",
             "ours": "none",
             "theirs": "calc(100% - 64px)"
-          },
-          {
-            "part": "dialog-paper",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "position-anchor",
-            "ours": "normal",
-            "theirs": "none"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
