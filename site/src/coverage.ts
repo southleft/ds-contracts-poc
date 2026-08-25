@@ -77,6 +77,7 @@ reg('contract', 'fields', [
   'contract.version',
   'contract.status',
   'contract.description',
+  'contract.archetype',
   'contract.bindings.figma.representation',
   'contract.modes',
 ]);
