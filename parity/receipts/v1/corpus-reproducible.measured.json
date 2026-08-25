@@ -1,7 +1,7 @@
 {
   "_marker": "THE CAPTURE HALF'S MEASUREMENT — written by `npm run corpus:reproducible:check -- --capture` (or --capture-from). Half B needs Chromium and the git-ignored sandboxes, so it cannot run in every lane; the referee reads THIS record instead, which makes the verdict the same on every machine. Re-measure to move it. A library with no sandbox on the measuring machine is PENDING by name and is never counted as reproducing.",
   "measuredAt": "2026-08-25",
-  "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
   "libraries": {
     "altitude": {
       "pending": null,
@@ -104,8 +104,21 @@
       }
     },
     "polaris": {
-      "pending": "11 of the 12 component(s) the corpus carries were not swept (tag, badge, banner, checkbox, radiobutton, avatar, spinner, progressbar, thumbnail, text, textfield) — a PARTIAL sweep is not a measurement; NOT measured, never counted as reproducing",
-      "components": {}
+      "pending": null,
+      "components": {
+        "avatar": [],
+        "badge": [],
+        "banner": [],
+        "button": [],
+        "checkbox": [],
+        "progressbar": [],
+        "radiobutton": [],
+        "spinner": [],
+        "tag": [],
+        "text": [],
+        "textfield": [],
+        "thumbnail": []
+      }
     },
     "shadcn": {
       "pending": null,

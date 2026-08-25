@@ -283,6 +283,16 @@ Every divergence any of them finds must be NAMED in
 unnamed one refuses, and so does a named one that has since been fixed. The
 receipt is [CORPUS-REPRODUCIBLE.md](../parity/receipts/v1/CORPUS-REPRODUCIBLE.md).
 
+What the first full sweep found, and the reason the two halves are separate
+gates: **the two derivations fail in different places.** Seven of eight
+libraries re-promote byte-identically and the eighth (polaris) re-derives its
+capture records **12/12** — its break is entirely between the record and the
+contract, in eight hand-edited contracts with no authored ledger. Meanwhile
+carbon and mui re-promote perfectly and diverge on the CAPTURE side, where
+their committed records sit behind engine fixes that landed after they were
+last recorded. A single "is the corpus reproducible?" number would have hidden
+both.
+
 The cure for a fact the capture genuinely cannot carry is the **authored-facts
 door** (`examples/<lib>/authored-facts.json`, applied by
 `packages/cli/src/promote.ts`), not an edit to the record. Alert's four
