@@ -74,6 +74,7 @@
       }
     ],
     "tokenRefs": [
+      "imported.shared.color-171717",
       "imported.shared.color-d4d4d4",
       "imported.shared.size-0",
       "imported.shared.size-1",
@@ -87,6 +88,8 @@
       "imported.text-input.part-1-0-0.flex-grow",
       "imported.text-input.part-1-0-0.font-size",
       "imported.text-input.part-1-0-0.line-height",
+      "imported.text-input.part-1-0-0.placeholder-color",
+      "imported.text-input.root.width",
       "imported.text-input.text-input.background-color",
       "imported.text-input.text-input.z-index"
     ],
@@ -107,7 +110,7 @@
       "status": "rendered",
       "png": "code-type-text__size-md.png",
       "contentBox": {
-        "width": 164,
+        "width": 320,
         "height": 54
       }
     },
@@ -124,7 +127,7 @@
       "status": "rendered",
       "png": "code-type-text__size-sm.png",
       "contentBox": {
-        "width": 164,
+        "width": 320,
         "height": 54
       }
     },
@@ -141,7 +144,7 @@
       "status": "rendered",
       "png": "code-type-text__size-lg.png",
       "contentBox": {
-        "width": 164,
+        "width": 320,
         "height": 54
       }
     },
@@ -158,7 +161,7 @@
       "status": "rendered",
       "png": "code-type-password__size-md.png",
       "contentBox": {
-        "width": 164,
+        "width": 320,
         "height": 54
       }
     },
@@ -175,7 +178,7 @@
       "status": "rendered",
       "png": "code-type-email__size-md.png",
       "contentBox": {
-        "width": 164,
+        "width": 320,
         "height": 54
       }
     }
