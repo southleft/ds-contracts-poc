@@ -1,8 +1,8 @@
 {
-  "passed": 225,
-  "total": 225,
-  "commit": "7ed9e2da3436723c23ef06e53eb3f9284b4c8548",
-  "dirty": false,
+  "passed": 227,
+  "total": 228,
+  "commit": "c48f1991841455cac28bc7d46027072e406452d9",
+  "dirty": true,
   "recordedAt": "2026-08-25",
   "results": [
     {
@@ -628,7 +628,8 @@
     {
       "id": "capability-report-is-fresh",
       "claim": "C3-detection",
-      "pass": true
+      "pass": false,
+      "error": "Error: docs/24-what-works.md is STALE vs a rebuild from its committed sources:\nSTALE: docs/24-what-works.md does not match a rebuild from its committed sources.\nEvery number in it is READ from an artifact; one of those artifacts moved.\nRebuild it and commit:  npm run capability:report\n"
     },
     {
       "id": "generated-storybook-trees-are-fresh",
@@ -913,6 +914,21 @@
     {
       "id": "checked-axis-projection",
       "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "grammar-compound-import",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "grammar-ordered-class-tokens",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "grammar-date-literal",
+      "claim": "C1-determinism",
       "pass": true
     },
     {

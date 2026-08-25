@@ -13,20 +13,20 @@
  * The receipt (counts + any misses) prints at build time and is written to
  * site/dist/spec-coverage.json.
  */
-import { enumerateBranches } from './introspect.js';
+import { enumerateBranches } from "./introspect.js";
 
 export type PageId =
-  | 'contract'
-  | 'semantics'
-  | 'props'
-  | 'anatomy'
-  | 'layout'
-  | 'tokens'
-  | 'states'
-  | 'conditionals'
-  | 'shape'
-  | 'composition'
-  | 'events';
+  | "contract"
+  | "semantics"
+  | "props"
+  | "anatomy"
+  | "layout"
+  | "tokens"
+  | "states"
+  | "conditionals"
+  | "shape"
+  | "composition"
+  | "events";
 
 export interface PageMeta {
   id: PageId;
@@ -36,17 +36,67 @@ export interface PageMeta {
 }
 
 export const SPEC_PAGES: PageMeta[] = [
-  { id: 'contract', route: '/spec/contract/', title: 'The contract document', nav: 'The contract document' },
-  { id: 'semantics', route: '/spec/semantics/', title: 'Semantics & accessibility', nav: 'Semantics' },
-  { id: 'props', route: '/spec/props/', title: 'Props & bindings', nav: 'Props & bindings' },
-  { id: 'anatomy', route: '/spec/anatomy/', title: 'Anatomy & parts', nav: 'Anatomy & parts' },
-  { id: 'layout', route: '/spec/layout/', title: 'Layout', nav: 'Layout' },
-  { id: 'tokens', route: '/spec/tokens/', title: 'Token bindings', nav: 'Token bindings' },
-  { id: 'states', route: '/spec/states/', title: 'States & state previews', nav: 'States' },
-  { id: 'conditionals', route: '/spec/conditionals/', title: 'Conditionals, overlays & motion', nav: 'Conditionals & overlays' },
-  { id: 'shape', route: '/spec/shape/', title: 'Shape parts', nav: 'Shape parts' },
-  { id: 'composition', route: '/spec/composition/', title: 'Composition — slots, refs, repeat', nav: 'Composition' },
-  { id: 'events', route: '/spec/events/', title: 'Events & toggles', nav: 'Events & toggles' },
+  {
+    id: "contract",
+    route: "/spec/contract/",
+    title: "The contract document",
+    nav: "The contract document",
+  },
+  {
+    id: "semantics",
+    route: "/spec/semantics/",
+    title: "Semantics & accessibility",
+    nav: "Semantics",
+  },
+  {
+    id: "props",
+    route: "/spec/props/",
+    title: "Props & bindings",
+    nav: "Props & bindings",
+  },
+  {
+    id: "anatomy",
+    route: "/spec/anatomy/",
+    title: "Anatomy & parts",
+    nav: "Anatomy & parts",
+  },
+  { id: "layout", route: "/spec/layout/", title: "Layout", nav: "Layout" },
+  {
+    id: "tokens",
+    route: "/spec/tokens/",
+    title: "Token bindings",
+    nav: "Token bindings",
+  },
+  {
+    id: "states",
+    route: "/spec/states/",
+    title: "States & state previews",
+    nav: "States",
+  },
+  {
+    id: "conditionals",
+    route: "/spec/conditionals/",
+    title: "Conditionals, overlays & motion",
+    nav: "Conditionals & overlays",
+  },
+  {
+    id: "shape",
+    route: "/spec/shape/",
+    title: "Shape parts",
+    nav: "Shape parts",
+  },
+  {
+    id: "composition",
+    route: "/spec/composition/",
+    title: "Composition — slots, refs, repeat",
+    nav: "Composition",
+  },
+  {
+    id: "events",
+    route: "/spec/events/",
+    title: "Events & toggles",
+    nav: "Events & toggles",
+  },
 ];
 
 export const pageMeta = (id: PageId): PageMeta => {
@@ -64,299 +114,306 @@ const REGISTRY = new Map<string, Entry>();
 
 function reg(page: PageId, anchor: string, keys: string[]): void {
   for (const k of keys) {
-    if (REGISTRY.has(k)) throw new Error(`coverage registry: duplicate key "${k}"`);
+    if (REGISTRY.has(k))
+      throw new Error(`coverage registry: duplicate key "${k}"`);
     REGISTRY.set(k, { page, anchor });
   }
 }
 
 // --- The contract document (identity, lifecycle, anchors, a11y) ------------
-reg('contract', 'fields', [
-  'contract.$schema',
-  'contract.id',
-  'contract.name',
-  'contract.version',
-  'contract.status',
-  'contract.description',
-  'contract.archetype',
-  'contract.bindings.figma.representation',
-  'contract.modes',
+reg("contract", "fields", [
+  "contract.$schema",
+  "contract.id",
+  "contract.name",
+  "contract.version",
+  "contract.status",
+  "contract.description",
+  "contract.archetype",
+  "contract.bindings.figma.representation",
+  "contract.modes",
 ]);
-reg('contract', 'anchors', [
-  'contract.bindings',
-  'contract.bindings.figma',
-  'contract.bindings.code',
-  'contract.bindings.figma.anchors',
-  'contract.bindings.figma.anchors.fileKey',
-  'contract.bindings.figma.anchors.componentSetKey',
-  'contract.bindings.figma.anchors.nodeId',
-  'contract.bindings.code.anchors',
-  'contract.bindings.code.anchors.importPath',
-  'contract.bindings.code.anchors.export',
+reg("contract", "anchors", [
+  "contract.bindings",
+  "contract.bindings.figma",
+  "contract.bindings.code",
+  "contract.bindings.figma.anchors",
+  "contract.bindings.figma.anchors.fileKey",
+  "contract.bindings.figma.anchors.componentSetKey",
+  "contract.bindings.figma.anchors.nodeId",
+  "contract.bindings.code.anchors",
+  "contract.bindings.code.anchors.importPath",
+  "contract.bindings.code.anchors.export",
 ]);
-reg('contract', 'provenance', [
-  'contract.provenance',
-  'contract.provenance.version',
-  'contract.provenance.canonicalRevision',
-  'contract.provenance.source',
-  'contract.provenance.source.kind',
-  'contract.provenance.source.adapter',
-  'contract.provenance.source.revision',
-  'contract.provenance.awaitingCodeAdoption',
-  'contract.provenance.awaitingCodeAdoption.designRevision',
-  'contract.provenance.awaitingCodeAdoption.sourceRevision',
+reg("contract", "provenance", [
+  "contract.provenance",
+  "contract.provenance.version",
+  "contract.provenance.canonicalRevision",
+  "contract.provenance.source",
+  "contract.provenance.source.kind",
+  "contract.provenance.source.adapter",
+  "contract.provenance.source.revision",
+  "contract.provenance.awaitingCodeAdoption",
+  "contract.provenance.awaitingCodeAdoption.designRevision",
+  "contract.provenance.awaitingCodeAdoption.sourceRevision",
 ]);
-reg('contract', 'a11y', [
-  'contract.a11y',
-  'contract.a11y.focusVisible',
-  'contract.a11y.minHitArea',
-  'contract.a11y.contrast',
+reg("contract", "a11y", [
+  "contract.a11y",
+  "contract.a11y.focusVisible",
+  "contract.a11y.minHitArea",
+  "contract.a11y.contrast",
 ]);
 // v18 (design-to-code census): documentation pointers carried both ways.
-reg('contract', 'documentation-links', [
-  'contract.documentationLinks',
-  'contract.documentationLinks.uri',
+reg("contract", "documentation-links", [
+  "contract.documentationLinks",
+  "contract.documentationLinks.uri",
 ]);
 // Pointers: sections that live on their own pages.
-reg('props', 'props', ['contract.props']);
-reg('anatomy', 'anatomy', ['contract.anatomy']);
-reg('states', 'declared-states', ['contract.states']);
-reg('states', 'state-previews', ['contract.bindings.figma.statePreviews']);
-reg('events', 'events', ['contract.events']);
+reg("props", "props", ["contract.props"]);
+reg("anatomy", "anatomy", ["contract.anatomy"]);
+reg("states", "declared-states", ["contract.states"]);
+reg("states", "state-previews", ["contract.bindings.figma.statePreviews"]);
+reg("events", "events", ["contract.events"]);
 
 // --- Semantics -------------------------------------------------------------
-reg('semantics', 'semantics', [
-  'contract.semantics',
-  'contract.semantics.element',
-  'contract.semantics.role',
+reg("semantics", "semantics", [
+  "contract.semantics",
+  "contract.semantics.element",
+  "contract.semantics.role",
 ]);
-reg('semantics', 'role-by-prop', [
-  'contract.semantics.roleByProp',
-  'contract.semantics.roleByProp.prop',
-  'contract.semantics.roleByProp.map',
+reg("semantics", "role-by-prop", [
+  "contract.semantics.roleByProp",
+  "contract.semantics.roleByProp.prop",
+  "contract.semantics.roleByProp.map",
 ]);
-reg('semantics', 'element-by-prop', [
-  'contract.semantics.elementByProp',
-  'contract.semantics.elementByProp.prop',
-  'contract.semantics.elementByProp.map',
+reg("semantics", "element-by-prop", [
+  "contract.semantics.elementByProp",
+  "contract.semantics.elementByProp.prop",
+  "contract.semantics.elementByProp.map",
 ]);
-reg('semantics', 'role-exception', ['contract.semantics.roleException', 'part.roleException']);
+reg("semantics", "role-exception", [
+  "contract.semantics.roleException",
+  "part.roleException",
+]);
 
 // --- Props & bindings ------------------------------------------------------
-reg('props', 'prop-fields', [
-  'prop.name',
-  'prop.description',
-  'prop.default',
-  'prop.required',
+reg("props", "prop-fields", [
+  "prop.name",
+  "prop.description",
+  "prop.default",
+  "prop.required",
 ]);
-reg('props', 'prop-types', [
-  'prop.type',
-  'prop.type.boolean',
-  'prop.type.text',
-  'prop.type.number',
-  'prop.type.enum',
-  'prop.type.arrayOf',
+reg("props", "prop-types", [
+  "prop.type",
+  "prop.type.boolean",
+  "prop.type.text",
+  "prop.type.number",
+  "prop.type.enum",
+  "prop.type.arrayOf",
 ]);
-reg('props', 'bindings', [
-  'prop.bindings',
-  'prop.bindings.figma',
-  'prop.bindings.figma.kind',
-  'prop.bindings.figma.property',
-  'prop.bindings.figma.values',
-  'prop.bindings.code',
-  'prop.bindings.code.prop',
+reg("props", "bindings", [
+  "prop.bindings",
+  "prop.bindings.figma",
+  "prop.bindings.figma.kind",
+  "prop.bindings.figma.property",
+  "prop.bindings.figma.values",
+  "prop.bindings.code",
+  "prop.bindings.code.prop",
 ]);
 
 // --- Anatomy & parts -------------------------------------------------------
-reg('anatomy', 'part-fields', [
-  'part.description',
-  'part.element',
-  'part.parts',
-  'part.optional',
+reg("anatomy", "part-fields", [
+  "part.description",
+  "part.element",
+  "part.parts",
+  "part.optional",
 ]);
-reg('anatomy', 'content', [
-  'part.content',
-  'part.content.prop',
-  'part.text',
-]);
+reg("anatomy", "content", ["part.content", "part.content.prop", "part.text"]);
 // Per-enum-value text overrides merged over `text` (first-variant-freeze fix).
-reg('anatomy', 'text-by-prop', [
-  'part.textByProp',
-  'part.textByProp.prop',
-  'part.textByProp.map',
+reg("anatomy", "text-by-prop", [
+  "part.textByProp",
+  "part.textByProp.prop",
+  "part.textByProp.map",
 ]);
-reg('anatomy', 'icon', ['part.icon', 'part.icon.asset', 'part.icon.size']);
-reg('anatomy', 'attrs', ['part.attrs']);
-reg('anatomy', 'meter', ['part.meter', 'part.meter.valueProp', 'part.meter.maxProp']);
+reg("anatomy", "icon", ["part.icon", "part.icon.asset", "part.icon.size"]);
+reg("anatomy", "attrs", ["part.attrs"]);
+reg("anatomy", "meter", [
+  "part.meter",
+  "part.meter.valueProp",
+  "part.meter.maxProp",
+]);
 
 // --- Layout ----------------------------------------------------------------
-reg('layout', 'layout', [
-  'part.layout',
-  'layout.display',
-  'layout.direction',
-  'layout.align',
-  'layout.justify',
-  'layout.grow',
-  'layout.overlap',
+reg("layout", "layout", [
+  "part.layout",
+  "layout.display",
+  "layout.direction",
+  "layout.align",
+  "layout.justify",
+  "layout.grow",
+  "layout.overlap",
   // v15 (S4): flex-wrap — native on both surfaces.
-  'layout.wrap',
+  "layout.wrap",
 ]);
 // A2 grid (G1–G5): declared tracks, independent gap pair, named areas, row flow.
-reg('layout', 'grid', [
-  'layout.rows',
-  'layout.rows.px',
-  'layout.rows.fr',
-  'layout.rows.fit',
-  'layout.columns',
-  'layout.columns.px',
-  'layout.columns.fr',
-  'layout.columns.fit',
-  'layout.gap',
-  'layout.gap.row',
-  'layout.gap.column',
-  'layout.areas',
-  'layout.flow',
+reg("layout", "grid", [
+  "layout.rows",
+  "layout.rows.px",
+  "layout.rows.fr",
+  "layout.rows.fit",
+  "layout.columns",
+  "layout.columns.px",
+  "layout.columns.fr",
+  "layout.columns.fit",
+  "layout.gap",
+  "layout.gap.row",
+  "layout.gap.column",
+  "layout.areas",
+  "layout.flow",
 ]);
 // G2: explicit cell on a child whose parent is display:grid.
-reg('layout', 'placement', [
-  'part.placement',
-  'part.placement.row',
-  'part.placement.column',
-  'part.placement.rowSpan',
-  'part.placement.columnSpan',
-  'part.placement.alignX',
-  'part.placement.alignY',
+reg("layout", "placement", [
+  "part.placement",
+  "part.placement.row",
+  "part.placement.column",
+  "part.placement.rowSpan",
+  "part.placement.columnSpan",
+  "part.placement.alignX",
+  "part.placement.alignY",
 ]);
 // v16: MEASURED sizing evidence — qualifies a part's `max-width` channel.
-reg('layout', 'hugs-below-max-width', ['part.hugsBelowMaxWidth']);
-reg('layout', 'layout-by-prop', [
-  'part.layoutByProp',
-  'layoutByProp.prop',
-  'layoutByProp.map',
-  'variantLayout.display',
-  'variantLayout.direction',
-  'variantLayout.align',
-  'variantLayout.justify',
+reg("layout", "hugs-below-max-width", ["part.hugsBelowMaxWidth"]);
+reg("layout", "layout-by-prop", [
+  "part.layoutByProp",
+  "layoutByProp.prop",
+  "layoutByProp.map",
+  "variantLayout.display",
+  "variantLayout.direction",
+  "variantLayout.align",
+  "variantLayout.justify",
 ]);
 
 // --- Token bindings --------------------------------------------------------
-reg('tokens', 'tokens', ['part.tokens']);
-reg('tokens', 'tokens-by-prop', [
-  'part.tokensByProp',
+reg("tokens", "tokens", ["part.tokens"]);
+reg("tokens", "tokens-by-prop", [
+  "part.tokensByProp",
   // v14: single-entry and ordered-array spellings of the field.
-  'part.tokensByProp.prop',
-  'part.tokensByProp.array',
-  'tokensByProp.prop',
-  'tokensByProp.map',
+  "part.tokensByProp.prop",
+  "part.tokensByProp.array",
+  "tokensByProp.prop",
+  "tokensByProp.map",
 ]);
-reg('tokens', 'literals', [
-  'part.literals',
-  'part.literalsByProp',
-  'literalsByProp.prop',
-  'literalsByProp.map',
+reg("tokens", "literals", [
+  "part.literals",
+  "part.literalsByProp",
+  "literalsByProp.prop",
+  "literalsByProp.map",
 ]);
 // v15 (S4 channel lifts): declared facts — keyword/literal channels with no
 // token vocabulary, carried first-class (code renders; canvas draws or
 // annotates per the capability-matrix verdict).
-reg('tokens', 'declared-facts', ['part.declared', 'part.declaredStates']);
+reg("tokens", "declared-facts", ["part.declared", "part.declaredStates"]);
 
 // --- States ----------------------------------------------------------------
-reg('states', 'root-states', ['part.states']);
+reg("states", "root-states", ["part.states"]);
 // v17 (the hover-plane round): per-state bindings that are ALSO a function of
 // an enum axis — unrelated per-value token names a placeholder cannot reach.
-reg('states', 'states-by-prop', [
-  'part.statesByProp',
-  'part.statesByProp.prop',
-  'part.statesByProp.state',
-  'part.statesByProp.map',
+reg("states", "states-by-prop", [
+  "part.statesByProp",
+  "part.statesByProp.prop",
+  "part.statesByProp.state",
+  "part.statesByProp.map",
 ]);
 // v18 (antd exam, W4): capture-side code-only receipts riding the contract.
-reg('states', 'code-only', [
-  'part.codeOnly',
-  'part.codeOnly.state',
-  'part.codeOnly.channel',
-  'part.codeOnly.value',
-  'part.codeOnly.reason',
+reg("states", "code-only", [
+  "part.codeOnly",
+  "part.codeOnly.state",
+  "part.codeOnly.channel",
+  "part.codeOnly.value",
+  "part.codeOnly.reason",
 ]);
 
 // --- Conditionals, overlays & motion --------------------------------------
-reg('conditionals', 'visible-when', [
-  'part.visibleWhen',
-  'visibleWhen.prop',
-  'visibleWhen.equals',
+reg("conditionals", "visible-when", [
+  "part.visibleWhen",
+  "visibleWhen.prop",
+  "visibleWhen.equals",
 ]);
-reg('conditionals', 'styles-when', [
-  'part.stylesWhen',
-  'stylesWhen.prop',
-  'stylesWhen.equals',
-  'stylesWhen.styles',
+reg("conditionals", "styles-when", [
+  "part.stylesWhen",
+  "stylesWhen.prop",
+  "stylesWhen.equals",
+  "stylesWhen.styles",
 ]);
-reg('conditionals', 'overlay', ['part.overlay', 'overlay.placement']);
-reg('conditionals', 'animation', ['part.animation']);
+reg("conditionals", "overlay", ["part.overlay", "overlay.placement"]);
+reg("conditionals", "animation", ["part.animation"]);
 
 // --- Shape parts -----------------------------------------------------------
-reg('shape', 'shape', [
-  'part.shape',
-  'shape.kind',
-  'shape.sides',
-  'shape.width',
-  'shape.height',
-  'shape.rotation',
+reg("shape", "shape", [
+  "part.shape",
+  "shape.kind",
+  "shape.sides",
+  "shape.width",
+  "shape.height",
+  "shape.rotation",
 ]);
 // Round 2 iteration 4: ellipse arc sweep — Figma ArcData radians, verbatim.
-reg('shape', 'arc', [
-  'shape.arc',
-  'shape.arc.start',
-  'shape.arc.end',
-  'shape.arc.innerRadius',
+reg("shape", "arc", [
+  "shape.arc",
+  "shape.arc.start",
+  "shape.arc.end",
+  "shape.arc.innerRadius",
 ]);
 
 // --- Composition -----------------------------------------------------------
-reg('composition', 'slots', [
-  'part.slot',
-  'slot.name',
-  'slot.accepts',
-  'slot.acceptsMode',
-  'slot.min',
-  'slot.max',
-  'slot.required',
-  'slot.bindings',
-  'slot.bindings.figma',
-  'slot.bindings.figma.property',
+reg("composition", "slots", [
+  "part.slot",
+  "slot.name",
+  "slot.accepts",
+  "slot.acceptsMode",
+  "slot.min",
+  "slot.max",
+  "slot.required",
+  "slot.bindings",
+  "slot.bindings.figma",
+  "slot.bindings.figma.property",
 ]);
-reg('composition', 'default-content', [
-  'slot.defaultContent',
-  'slotContent.id',
-  'slotContent.props',
-  'slotContent.text',
+reg("composition", "default-content", [
+  "slot.defaultContent",
+  "slotContent.id",
+  "slotContent.props",
+  "slotContent.text",
 ]);
-reg('composition', 'component-refs', [
-  'part.component',
-  'componentRef.id',
-  'componentRef.props',
-  'componentRef.text',
+reg("composition", "component-refs", [
+  "part.component",
+  "componentRef.id",
+  "componentRef.props",
+  "componentRef.text",
 ]);
 // Round 2 iteration 9: per-instance overrides + the root-only consumption list.
-reg('composition', 'ref-overrides', ['componentRef.overrides', 'part.overridable']);
-reg('composition', 'repeat', [
-  'part.repeat',
-  'repeat.itemsProp',
-  'repeat.sample',
+reg("composition", "ref-overrides", [
+  "componentRef.overrides",
+  "part.overridable",
+]);
+reg("composition", "repeat", [
+  "part.repeat",
+  "repeat.itemsProp",
+  "repeat.sample",
 ]);
 
 // --- Events ----------------------------------------------------------------
-reg('events', 'event-fields', [
-  'event.name',
-  'event.description',
-  'event.trigger',
-  'event.bindings',
-  'event.bindings.code',
-  'event.bindings.code.prop',
+reg("events", "event-fields", [
+  "event.name",
+  "event.description",
+  "event.trigger",
+  "event.bindings",
+  "event.bindings.code",
+  "event.bindings.code.prop",
 ]);
-reg('events', 'toggles', [
-  'event.toggles',
-  'event.toggles.prop',
-  'event.toggles.between',
-  'event.toggles.aria',
+reg("events", "toggles", [
+  "event.toggles",
+  "event.toggles.prop",
+  "event.toggles.between",
+  "event.toggles.aria",
 ]);
 
 export interface CoverageReceipt {
