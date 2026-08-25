@@ -1,0 +1,18 @@
+{
+  "id": "hard-pseudo-tick-rotated",
+  "feature": "glyph",
+  "construct": "::after tick built from border-right + border-bottom + transform: rotate(45deg)",
+  "why": "RC4. The other half of glyph geometry: a check mark that is not SVG at all but a rotated two-border box. pseudo-decor v2 promotes a drawn pseudo into a part; spec/channel-table.json classes border-right-width CARRIED (strokeRightWeight) and transform CARRIED for the bounded rotate() grammar.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "the promoted pseudo-decor part, tokens.border-right-width",
+  "observable": {
+    "part": "root::after",
+    "channel": "border-right-width",
+    "capturedValue": "2px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "a decor part with two strokes and a bounded rotation"
+  }
+}

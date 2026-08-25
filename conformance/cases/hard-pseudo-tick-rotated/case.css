@@ -1,0 +1,2 @@
+[data-cf="hard-pseudo-tick-rotated"] { display: flex; position: relative; width: 16px; height: 16px; border-radius: 3px; background: rgb(37, 99, 235); }
+[data-cf="hard-pseudo-tick-rotated"]::after { content: ""; position: absolute; left: 5px; top: 2px; width: 4px; height: 8px; border-right: 2px solid rgb(255, 255, 255); border-bottom: 2px solid rgb(255, 255, 255); transform: rotate(45deg); }

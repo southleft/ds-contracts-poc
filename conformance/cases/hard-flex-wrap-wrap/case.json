@@ -1,0 +1,18 @@
+{
+  "id": "hard-flex-wrap-wrap",
+  "feature": "layout",
+  "construct": "flex-wrap: wrap on the container",
+  "why": "RC1. LayoutSchema.wrap is a first-class contract fact with a lowering on both surfaces, but spec/channel-table.json classes flex-wrap REFUSED (code-only:no-schema-channel): wrapping flex containers are outside the single-line auto-layout lowering. The case measures whether the refusal is NAMED rather than silent.",
+  "expect": "REFUSED",
+  "expectName": "flex-wrap",
+  "expectWhere": "LEDGER.md / code-only facts",
+  "observable": {
+    "part": "root",
+    "channel": "flex-wrap",
+    "capturedValue": "wrap"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "no wrap projection in the single-line auto-layout lowering"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "hard-outline-ring-rest-plane",
+  "feature": "non-stroke-ink",
+  "construct": "outline: 2px solid + outline-offset on the REST plane (not a focus state)",
+  "why": "RC3. Ink the CSS paints by a non-fill/non-stroke mechanism has no canvas lowering unless the outline PAIR (width + colour) both survive; the existing antd cases only exercise the focus-visible plane. spec/channel-table.json classes outline-width and outline-color CARRIED as an OUTSIDE-aligned stroke pair, outline-offset LEDGERED (annotate).",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.tokens.outline-width",
+  "observable": {
+    "part": "root",
+    "channel": "outline-width",
+    "capturedValue": "2px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "strokeWeight of an OUTSIDE-aligned stroke; outline-offset is annotated only"
+  }
+}

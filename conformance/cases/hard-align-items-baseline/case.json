@@ -1,0 +1,18 @@
+{
+  "id": "hard-align-items-baseline",
+  "feature": "layout",
+  "construct": "align-items: baseline on the container",
+  "why": "RC1. baseline is already in LayoutSchema.align and already lowered by both emitters; only the DETECTION map lacked it, so the fact could never arrive from a captured library. spec/channel-table.json classes align-items CARRIED (counterAxisAlignItems).",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.align",
+  "observable": {
+    "part": "root",
+    "channel": "align-items",
+    "capturedValue": "baseline"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "counterAxisAlignItems; BASELINE projects to MIN on the vertical axis (ALIGN_FIGMA)"
+  }
+}

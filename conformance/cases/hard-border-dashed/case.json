@@ -1,0 +1,18 @@
+{
+  "id": "hard-border-dashed",
+  "feature": "non-stroke-ink",
+  "construct": "border: 2px dashed",
+  "why": "RC3, ledger half. A dashed border is real ink with no Figma stroke-style spelling. spec/channel-table.json classes border-top-style LEDGERED: it rides Part.declared and surfaces as a code-only fact, so it must reach the CONTRACT and must NOT be drawn.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.declared.border-top-style",
+  "observable": {
+    "part": "root",
+    "channel": "border-top-style",
+    "capturedValue": "dashed"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "LEDGERED — carried as data, surfaced as a code-only fact; a Figma stroke has no dash-style channel"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "hard-box-shadow-layered",
+  "feature": "non-stroke-ink",
+  "construct": "box-shadow with three layers, one of them inset",
+  "why": "RC3. The single-shadow case is covered; the ELEVATION shape real design systems ship is a stack, and the emitter carried a narrower literal-colour parser than the token set does. spec/channel-table.json classes box-shadow CARRIED (DROP_SHADOW single, or the full multi-layer/inset effect stack, v17).",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.tokens.box-shadow",
+  "observable": {
+    "part": "root",
+    "channel": "box-shadow",
+    "capturedValue": "rgba(0, 0, 0, 0.06) 0px 1px 2px 0px, rgba(0, 0, 0, 0.1) 0px 4px 8px 0px, rgba(0, 0, 0, 0.04) 0px 0px 0px 1px inset"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the multi-layer effect stack, the inset layer as INNER_SHADOW"
+  }
+}

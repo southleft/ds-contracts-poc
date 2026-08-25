@@ -1,0 +1,18 @@
+{
+  "id": "hard-flex-direction-column-reverse",
+  "feature": "layout",
+  "construct": "flex-direction: column-reverse on the container",
+  "why": "RC1. LAYOUT_CHANNEL_TO_FIELD is the only reader that turns a captured flex keyword into a Part.layout fact, and the reversed spellings were absent from it: no map entry means the channel leaves through layout-value-outside-vocabulary and the composite mints as one row. spec/channel-table.json classes flex-direction CARRIED (auto-layout layoutMode).",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.direction",
+  "observable": {
+    "part": "root",
+    "channel": "flex-direction",
+    "capturedValue": "column-reverse"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "auto-layout VERTICAL with the child order reversed (core/emit-figma-script.ts isReversed)"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "hard-gradient-element-fill",
+  "feature": "non-stroke-ink",
+  "construct": "background-image: linear-gradient on the ELEMENT (not a pseudo)",
+  "why": "RC3, third mechanism. The pseudo-gradient case is REFUSED; a gradient on the element itself is the surface every hero card and every gradient button paints with. spec/channel-table.json classes background-image CARRIED (gradient stacks mint as a whole-value gradient kind).",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.tokens.background-image",
+  "observable": {
+    "part": "root",
+    "channel": "background-image",
+    "capturedValue": "linear-gradient(to right, rgb(255, 255, 255) 0%, rgb(203, 213, 225) 100%)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "GRADIENT_LINEAR fill"
+  }
+}

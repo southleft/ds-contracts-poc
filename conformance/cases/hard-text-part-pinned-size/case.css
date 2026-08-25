@@ -1,0 +1,2 @@
+[data-cf="hard-text-part-pinned-size"] { display: flex; position: relative; width: 32px; height: 32px; border-radius: 999px; background: rgb(226, 232, 240); }
+[data-cf="hard-text-part-pinned-size"] .cf-a { display: flex; position: absolute; left: 0; top: 0; width: 32px; height: 32px; align-items: center; justify-content: center; color: rgb(30, 41, 59); font-size: 12px; }

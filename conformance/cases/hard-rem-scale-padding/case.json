@@ -1,0 +1,18 @@
+{
+  "id": "hard-rem-scale-padding",
+  "feature": "units",
+  "construct": "padding-left: 1.5rem / padding-right: 0.75rem — the ROOT-relative scale",
+  "why": "The em case is covered and rem is not: em resolves against the element, rem against the document root, and a capture harness owns the document root. spec/channel-table.json classes padding-left CARRIED (paddingLeft); the case measures that the resolved px reaches the contract rather than the authored rem.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.tokens.padding-left",
+  "observable": {
+    "part": "root",
+    "channel": "padding-left",
+    "capturedValue": "24px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "paddingLeft — the resolved px, since a canvas frame has no rem base"
+  }
+}
