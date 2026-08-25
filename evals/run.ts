@@ -75,7 +75,9 @@ import {
 } from '../extract/computed/fuse.js';
 import { reconstructCaptures as fuseReconstruct } from '../extract/computed/replay.js';
 import { mintTokens as coreMintTokens } from '../core/mint-tokens.js';
-import { applyDecisions as computedApplyDecisions, type AckedDecision } from '../extract/computed/decisions.js';
+import { applyDecisions as computedApplyDecisions, decisionValueEq, refereeCombos, type AckedDecision } from '../extract/computed/decisions.js';
+import { measuredTruth } from '../extract/computed/measured.js';
+import { gateInventory } from '../extract/computed/gate.js';
 // SYNC LAYER STEP 1 pins (pure — the ledger lockfile arithmetic; no I/O at import):
 import {
   classifyRecord as syncClassifyRecord,
@@ -8663,6 +8665,21 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     //
     // Two pins: the guard refuses an unresolvable target by name, and NO
     // committed ledger carries a target outside its own library's inventory.
+    // RC6 ARMS (repair round). Existence is NOT agreement. `{color-accent}`
+    // was in the astryx inventory on every single run while the DS moved it
+    // from #0064e0 to #262626, so this same ledger kept re-anchoring Badge's
+    // five SEMANTIC variants onto it and the component shipped charcoal-on-
+    // charcoal through the contract, the CSS module, the Figma script and
+    // the census render. The referee for a target is THIS RUN'S MEASUREMENT
+    // (extract/computed/measured.ts over the committed captured truth), never
+    // the ledger's own `observed` — that string ages with the token.
+    //
+    // Deliberately NOT registered as a new eval id: `eval:registry:check`
+    // (fast lane) refuses a registered case with no row in evals/results.json,
+    // and the committed record is 18 commits old. These arms belong to the
+    // same guard as the existence check above, so they ride the same id and
+    // the fast lane stays green. The corpus-wide pin lives in its own gate,
+    // `npm run extract:computed:decisions:check`.
     id: 'decision-ledger-value-check',
     claim: 'C2-refusal',
     run: () => {
@@ -8728,7 +8745,125 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (bad.length > 0) {
         throw new Error(`${bad.length} committed decision row(s) target a token absent from their own library's trees (the cross-library ledger class):\n  - ${bad.join('\n  - ')}`);
       }
-      console.log(`decision-ledger-value-check: unresolvable decision targets refused by name (and applied without the guard — the corruption is real); ${ledgers} committed ledgers across 4 libraries target only tokens their own library ships`);
+
+      // ---- RC6: THE STALE ALIAS -------------------------------------------
+      // Fixture: astryx Badge's own committed capture + ledger + trees.
+      const badgeOut = path.join(ROOT, 'extract/computed/out/astryx/badge');
+      const astryxCfg = loadCaptureConfig(ROOT, path.join(ROOT, 'extract/computed/configs/astryx.json'));
+      const badgeComp = astryxCfg.components.find((c) => c.name === 'Badge')!;
+      const badgeEnriched = () => JSON.parse(readFileSync(path.join(badgeOut, 'enriched.contract.json'), 'utf8'));
+      const badgeLedger = JSON.parse(readFileSync(path.join(badgeOut, 'decisions.json'), 'utf8')) as AckedDecision[];
+      const badgeExt = JSON.parse(readFileSync(path.join(badgeOut, 'enriched.extension.json'), 'utf8')) as { mintedTokens?: Record<string, unknown> };
+      const badgeTruth = JSON.parse(readFileSync(path.join(badgeOut, 'captured-truth.json'), 'utf8'));
+      const gi = gateInventory(ROOT, astryxCfg, badgeExt.mintedTokens ?? {});
+      const badgeReferee = {
+        resolveValue: gi.resolveValue,
+        measured: measuredTruth(badgeTruth),
+        combos: refereeCombos(propSpaceFor(ROOT, astryxCfg, badgeComp).enumeration.combos),
+      };
+      const infoRow = badgeLedger.find((d) => d.scope === 'axis:variant=info' && d.channel === 'background-color')!;
+      const variantMap = (c: { anatomy: { root: { tokensByProp?: Array<{ prop: string; map: Record<string, Record<string, string>> }> } } }, v: string) =>
+        (c.anatomy.root.tokensByProp ?? []).find((e) => e.prop === 'variant')?.map[v] ?? {};
+
+      // (0) THE PREMISE IS MEASURED, NOT ASSUMED. If {color-accent} ever
+      //     agrees with the capture again this arm fails loudly rather than
+      //     passing on a stale story.
+      const measuredInfo = badgeReferee.measured.at('root', 'background-color', ['info']);
+      if (measuredInfo.length === 0) {
+        throw new Error('the committed astryx Badge capture measures NO background-color at root/info — the referee has no site and this pin would assert nothing');
+      }
+      if (decisionValueEq(gi.resolveValue(infoRow.to), measuredInfo[0].value)) {
+        throw new Error(`${infoRow.to} now RESOLVES to the measured ${measuredInfo[0].value} — the drift this case pins is gone; re-point the case at a live drift instead of letting it pass vacuously`);
+      }
+
+      // (1) REFUSED BY NAME, and refused BEFORE writing: all five semantic
+      //     variants keep their measured imported.* leaf.
+      const guardedBadge = badgeEnriched();
+      const beforeInfo = variantMap(guardedBadge, 'info')['background-color'];
+      const rc6 = computedApplyDecisions(guardedBadge, badgeLedger, gi.inventory, badgeReferee);
+      const stale = rc6.skipped.filter((sk) => sk.includes('STALE ALIAS'));
+      if (stale.length !== 5) {
+        throw new Error(`the drifted aliases were NOT refused by name: ${stale.length} of 5 — skipped=${JSON.stringify(rc6.skipped)}`);
+      }
+      for (const v of ['neutral', 'info', 'success', 'warning', 'error']) {
+        const got = variantMap(guardedBadge, v)['background-color'];
+        if (got !== `{imported.badge.root.background-color.${v}}`) {
+          throw new Error(`astryx Badge variant ${v} kept ${got} — the refusal must leave the MEASURED leaf standing, not write the drifted alias`);
+        }
+      }
+      if (variantMap(guardedBadge, 'info')['background-color'] !== beforeInfo) {
+        throw new Error('the refused decision still mutated the contract — the value guard must refuse BEFORE writing');
+      }
+      // (2) FALSIFIABLE THE OTHER WAY — without the referee the same committed
+      //     ledger repaints the component. The defect is real, not narrated.
+      const unrefereed = badgeEnriched();
+      computedApplyDecisions(unrefereed, badgeLedger, gi.inventory);
+      if (variantMap(unrefereed, 'info')['background-color'] !== '{color-accent}') {
+        throw new Error('without the referee the drifted alias did NOT apply — the pin cannot show what the guard prevents');
+      }
+      // (3) NOT OVER-BROAD ON UNIT SPELLING. `{font-size-sm}` is 0.75rem and
+      //     the capture measures 12px; that row must still APPLY.
+      if (rc6.skipped.some((sk) => sk.includes('font-size'))) {
+        throw new Error(`a rem-spelled target was refused against a px measurement — decisionValueEq is over-broad: ${rc6.skipped.filter((sk) => sk.includes('font-size')).join(' | ')}`);
+      }
+      if (!decisionValueEq('0.75rem', '12px') || !decisionValueEq('#0074E2', 'rgba(0, 116, 226, 1)') || !decisionValueEq('0', '0px')) {
+        throw new Error('decisionValueEq no longer equates rem/px, hex/rgba or unitless zero — legitimate rows would be refused');
+      }
+      // (4) NOT OVER-BROAD ON A STALE `observed`. astryx Card's ledger records
+      //     rgba(0,0,0,1) where the capture measures rgba(23,23,23,1) — which
+      //     is exactly what {color-on-light} holds. Refereeing against the
+      //     ledger (the obvious wrong referee) would refuse this CORRECT row.
+      const cardOut = path.join(ROOT, 'extract/computed/out/astryx/card');
+      const cardComp = astryxCfg.components.find((c) => c.name === 'Card')!;
+      const cardExt = JSON.parse(readFileSync(path.join(cardOut, 'enriched.extension.json'), 'utf8')) as { mintedTokens?: Record<string, unknown> };
+      const cardGi = gateInventory(ROOT, astryxCfg, cardExt.mintedTokens ?? {});
+      const cardRes = computedApplyDecisions(
+        JSON.parse(readFileSync(path.join(cardOut, 'enriched.contract.json'), 'utf8')),
+        JSON.parse(readFileSync(path.join(cardOut, 'decisions.json'), 'utf8')) as AckedDecision[],
+        cardGi.inventory,
+        {
+          resolveValue: cardGi.resolveValue,
+          measured: measuredTruth(JSON.parse(readFileSync(path.join(cardOut, 'captured-truth.json'), 'utf8'))),
+          combos: refereeCombos(propSpaceFor(ROOT, astryxCfg, cardComp).enumeration.combos),
+        },
+      );
+      if (cardRes.skipped.length !== 0) {
+        throw new Error(`astryx Card's ledger records a STALE observed and its rows are still correct — refusing them means the referee is the recorded measurement, not this run's: ${cardRes.skipped.join(' | ')}`);
+      }
+      // (5) SILENCE IS PRINTED, NEVER PASSED. Polaris Avatar's promoted
+      //     anatomy carries per-size `initials-<size>` parts that the capture's
+      //     own anatomy never named, so a decision on one of them has NO
+      //     measured site. It must APPLY (refusing would delete a binding the
+      //     run cannot contradict) and be listed BY NAME as unverified.
+      const avOut = path.join(ROOT, 'extract/computed/out/avatar');
+      const polarisCfg = loadCaptureConfig(ROOT, path.join(ROOT, 'extract/computed/configs/polaris.json'));
+      const avComp = polarisCfg.components.find((c) => c.name === 'Avatar')!;
+      const avExt = JSON.parse(readFileSync(path.join(avOut, 'enriched.extension.json'), 'utf8')) as { mintedTokens?: Record<string, unknown> };
+      const avGi = gateInventory(ROOT, polarisCfg, avExt.mintedTokens ?? {});
+      const avReferee = {
+        resolveValue: avGi.resolveValue,
+        measured: measuredTruth(JSON.parse(readFileSync(path.join(avOut, 'captured-truth.json'), 'utf8'))),
+        combos: refereeCombos(propSpaceFor(ROOT, polarisCfg, avComp).enumeration.combos),
+      };
+      const unmeasured: AckedDecision[] = [{
+        ids: ['planted'], part: 'initials-xs', channel: 'font-size', scope: 'base',
+        from: '{p.font-size-400}', to: '{p.font-size-325}', observed: '13px', expected: '16px',
+        cause: 'a part the capture anatomy never named', ack: 'planted',
+      }];
+      if (avReferee.measured.at('initials-xs', 'font-size', avReferee.combos.map((c) => c.key)).length !== 0) {
+        throw new Error('polaris Avatar initials-xs IS measured now — re-point arm (5) at a part the capture really does not carry, or it asserts nothing');
+      }
+      const silent = computedApplyDecisions(
+        JSON.parse(readFileSync(path.join(avOut, 'enriched.contract.json'), 'utf8')),
+        unmeasured,
+        avGi.inventory,
+        avReferee,
+      );
+      if (silent.applied.length !== 1 || silent.unverified.length !== 1 || !silent.unverified[0].includes('APPLIED UNVERIFIED')) {
+        throw new Error(`a row with NO measured site must apply and be NAMED unverified: applied=${JSON.stringify(silent.applied)} unverified=${JSON.stringify(silent.unverified)} skipped=${JSON.stringify(silent.skipped)}`);
+      }
+
+      console.log(`decision-ledger-value-check: unresolvable decision targets refused by name (and applied without the guard — the corruption is real); ${ledgers} committed ledgers across 4 libraries target only tokens their own library ships; RC6 — ${stale.length} drifted alias(es) refused by name against the committed astryx Badge capture (the measured imported.* leaves stand), the same ledger repaints the component without the referee, astryx Card's stale \`observed\` still applies, and an unmeasurable row is named unverified`);
     },
   },
   {
