@@ -1,0 +1,170 @@
+{
+  "component": "CaseOverlayTextFillStageDerived",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 2,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 336,
+    "cellsEqual": 336,
+    "pctEqual": 100,
+    "rowsFullyEqual": 8,
+    "rows": 8
+  },
+  "pixel": {
+    "pairs": 8,
+    "perfectExact": 8,
+    "perfectAA": 8,
+    "measured": 8,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 0,
+    "meanAA": 0,
+    "maxAA": 0
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 17,
+    "mintedLeavesUnfolded": 17,
+    "baseBindings": 28,
+    "stateBindings": 0,
+    "codeOnlyChannels": 1,
+    "overflowBindings": 0,
+    "folds": 10
+  },
+  "worstRows": [
+    {
+      "key": "none__default",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "none__hover",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "none__focus-visible",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "none__active",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "wide__default",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "wide__hover",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "wide__focus-visible",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "wide__active",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    }
+  ],
+  "topMismatchedChannels": [],
+  "namedLosses": [
+    "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "(none declared)",
+    "leavesAdded": 0,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "none__default",
+      "channelsCompared": 42,
+      "channelsEqual": 42,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "none__hover",
+      "channelsCompared": 42,
+      "channelsEqual": 42,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "none__focus-visible",
+      "channelsCompared": 42,
+      "channelsEqual": 42,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "none__active",
+      "channelsCompared": 42,
+      "channelsEqual": 42,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "wide__default",
+      "channelsCompared": 42,
+      "channelsEqual": 42,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "wide__hover",
+      "channelsCompared": 42,
+      "channelsEqual": 42,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "wide__focus-visible",
+      "channelsCompared": 42,
+      "channelsEqual": 42,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "wide__active",
+      "channelsCompared": 42,
+      "channelsEqual": 42,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    }
+  ]
+}
