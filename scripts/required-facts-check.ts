@@ -33,17 +33,11 @@
  */
 import { existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { ContractSchema, archetypeOf, type Contract } from "./contract-schema.js";
 import {
-  ContractSchema,
-  archetypeOf,
-  type Archetype,
-  type Contract,
-} from "./contract-schema.js";
-import {
-  checkRequiredFacts,
-  refusalLine,
   ARCHETYPE_REQUIRED_FACTS,
   UNDECLARED_ARCHETYPE_WARNING,
+  checkRequiredFacts,
 } from "../packages/core/src/required-facts.js";
 import { REPO, enumerateLibraries } from "../extract/figma/census/corpus.js";
 
@@ -258,7 +252,6 @@ function selfTest(): number {
   //     the property that decides whether the referee grades the contract or
   //     only its `tokens` bag; a predicate that reads one channel would red
   //     every foreign capture whose padding rides `literals`.
-  const perChannel = greenCard();
   const carriers: Array<[string, Record<string, unknown>]> = [
     ["literals", { literals: { "padding-top": "8px" } }],
     ["declared", { declared: { cursor: "pointer" }, literals: { "padding-top": "8px" } }],
@@ -281,10 +274,6 @@ function selfTest(): number {
     if (checkRequiredFacts(only).missing.some((m) => m.factId === "card/padding"))
       problems.push(`(e) padding carried only in \`${label}\` was not seen — the channel sweep must read all eight styling channels`);
   }
-  if (!checkRequiredFacts(perChannel).missing.length === false) {
-    // (kept explicit so the control above cannot silently become vacuous)
-  }
-
   // (f) THE BASELINE COMPARISON ITSELF GOES RED — plant a new missing fact
   //     against a pinned row and require the NEW RED class to fire.
   const pinned: BaselineRow[] = [
