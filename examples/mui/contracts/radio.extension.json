@@ -1063,6 +1063,46 @@
         "part": "icon-2",
         "channel": "user-select",
         "value": "none"
+      },
+      {
+        "part": "icon-2",
+        "channel": "transform",
+        "value": "matrix(0, 0, 0, 0, 0, 0)",
+        "when": {
+          "prop": "checked",
+          "equals": "unchecked"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "icon-2",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, 0, 0)",
+        "when": {
+          "prop": "checked",
+          "equals": "checked"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "icon-2",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 1, 1)",
+        "when": {
+          "prop": "checked",
+          "equals": "unchecked"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "icon-2",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0, 0, 0.2, 1)",
+        "when": {
+          "prop": "checked",
+          "equals": "checked"
+        },
+        "byPropField": "declaredByProp"
       }
     ],
     "state": [
@@ -1155,20 +1195,6 @@
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "content-box",
       "distinctValues": 1
-    },
-    {
-      "part": "icon-2",
-      "channel": "transform",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "matrix(0, 0, 0, 0, 0, 0)",
-      "distinctValues": 2
-    },
-    {
-      "part": "icon-2",
-      "channel": "transition-timing-function",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "cubic-bezier(0.4, 0, 1, 1)",
-      "distinctValues": 2
     }
   ],
   "stateOverflow": [],
@@ -1316,7 +1342,9 @@
     "inheritance-only: icon.caret-color equals ancestor \"part-1\" on all 112 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: icon.color equals ancestor \"part-1\" on all 112 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
     "inheritance-only: part-1.caret-color equals ancestor \"root\" on all 112 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
-    "inheritance-only: part-1.color equals ancestor \"root\" on all 112 captured planes — the part carries no independent color fact (CSS inheritance, observed)"
+    "inheritance-only: part-1.color equals ancestor \"root\" on all 112 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "declared-by-axis-carried: icon-2.transform varies by \"checked\" (unchecked=matrix(0, 0, 0, 0, 0, 0), checked=matrix(1, 0, 0, 1, 0, 0)) — carried as per-value declaredByProp entries (code: `.checked-<value> { transform: … }`; canvas: drawn per compiled variant)",
+    "declared-by-axis-carried: icon-2.transition-timing-function varies by \"checked\" (unchecked=cubic-bezier(0.4, 0, 1, 1), checked=cubic-bezier(0, 0, 0.2, 1)) — carried as per-value declaredByProp entries (code: `.checked-<value> { transition-timing-function: … }`; canvas: declared-not-drawn, repeated as a code-only fact)"
   ],
   "frontierReceipts": [
     "closed-shadow-root-suspected: Radio:default.checked.disabled__active>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 10x10 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
@@ -1621,6 +1649,10 @@
     "nested pair carried: icon.color = per-checked map whose refs substitute color (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
     "nested pair carried: icon.fill = per-checked map whose refs substitute color (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
     "nested pair carried: icon-2.color = per-checked map whose refs substitute color (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
-    "nested pair carried: icon-2.fill = per-checked map whose refs substitute color (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)"
+    "nested pair carried: icon-2.fill = per-checked map whose refs substitute color (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "declared fact carried per axis value: icon-2.transform = matrix(0, 0, 0, 0, 0, 0) when checked=unchecked (declaredByProp)",
+    "declared fact carried per axis value: icon-2.transform = matrix(1, 0, 0, 1, 0, 0) when checked=checked (declaredByProp)",
+    "declared fact carried per axis value: icon-2.transition-timing-function = cubic-bezier(0.4, 0, 1, 1) when checked=unchecked (declaredByProp)",
+    "declared fact carried per axis value: icon-2.transition-timing-function = cubic-bezier(0, 0, 0.2, 1) when checked=checked (declaredByProp)"
   ]
 }

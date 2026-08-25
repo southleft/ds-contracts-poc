@@ -153,6 +153,22 @@
             }
           }
         }
+      ],
+      "declaredByProp": [
+        {
+          "prop": "underline",
+          "map": {
+            "none": {
+              "text-decoration-line": "none"
+            },
+            "hover": {
+              "text-decoration-line": "none"
+            },
+            "always": {
+              "text-decoration-line": "underline"
+            }
+          }
+        }
       ]
     }
   },

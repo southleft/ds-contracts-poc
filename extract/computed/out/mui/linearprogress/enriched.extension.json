@@ -139,6 +139,26 @@
         "part": "linearprogress-bar-2",
         "channel": "transition-timing-function",
         "value": "linear"
+      },
+      {
+        "part": "linearprogress-bar",
+        "channel": "transition-duration",
+        "value": "0.4s",
+        "when": {
+          "prop": "variant",
+          "equals": "determinate"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "linearprogress-bar",
+        "channel": "transition-duration",
+        "value": "0.2s",
+        "when": {
+          "prop": "variant",
+          "equals": "indeterminate"
+        },
+        "byPropField": "declaredByProp"
       }
     ],
     "state": []
@@ -170,20 +190,6 @@
       "channel": "animation-timing-function",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "ease",
-      "distinctValues": 2
-    },
-    {
-      "part": "linearprogress-bar",
-      "channel": "transform",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "matrix(1, 0, 0, 1, -172.8, 0)",
-      "distinctValues": 2
-    },
-    {
-      "part": "linearprogress-bar",
-      "channel": "transition-duration",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "0.4s",
       "distinctValues": 2
     },
     {
@@ -220,6 +226,13 @@
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "cubic-bezier(0.165, 0.84, 0.44, 1)",
       "distinctValues": 1
+    },
+    {
+      "part": "linearprogress-bar",
+      "channel": "transform",
+      "reason": "declared-channel value varies across combos and does NOT factor on any single non-presence, non-state enum axis (or a per-axis value falls outside the channel's bounded grammar) — the by-axis declaredByProp carrier cannot hold it; named residue",
+      "sample": "matrix(1, 0, 0, 1, -172.8, 0)",
+      "distinctValues": 2
     }
   ],
   "stateOverflow": [],
@@ -256,7 +269,8 @@
     "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: linearprogress-bar — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: linearprogress-bar-2 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "translate-door-generalized: linearprogress-bar — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round"
+    "translate-door-generalized: linearprogress-bar — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
+    "declared-by-axis-carried: linearprogress-bar.transition-duration varies by \"variant\" (determinate=0.4s, indeterminate=0.2s) — carried as per-value declaredByProp entries (code: `.variant-<value> { transition-duration: … }`; canvas: declared-not-drawn, repeated as a code-only fact)"
   ],
   "frontierReceipts": [
     "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
@@ -303,6 +317,8 @@
     "declared fact carried: linearprogress-bar.transition-timing-function = linear (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: linearprogress-bar-2.transition-duration = 0.2s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: linearprogress-bar-2.transition-property = transform (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: linearprogress-bar-2.transition-timing-function = linear (v15 declared vocabulary — declared-not-drawn on canvas)"
+    "declared fact carried: linearprogress-bar-2.transition-timing-function = linear (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried per axis value: linearprogress-bar.transition-duration = 0.4s when variant=determinate (declaredByProp)",
+    "declared fact carried per axis value: linearprogress-bar.transition-duration = 0.2s when variant=indeterminate (declaredByProp)"
   ]
 }

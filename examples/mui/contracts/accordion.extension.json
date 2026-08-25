@@ -966,6 +966,46 @@
         "part": "collapse-root",
         "channel": "transition-timing-function",
         "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "collapse-root",
+        "channel": "overflow-x",
+        "value": "hidden",
+        "when": {
+          "prop": "expanded",
+          "equals": "collapsed"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "collapse-root",
+        "channel": "overflow-x",
+        "value": "visible",
+        "when": {
+          "prop": "expanded",
+          "equals": "expanded"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "collapse-root",
+        "channel": "overflow-y",
+        "value": "hidden",
+        "when": {
+          "prop": "expanded",
+          "equals": "collapsed"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "collapse-root",
+        "channel": "overflow-y",
+        "value": "visible",
+        "when": {
+          "prop": "expanded",
+          "equals": "expanded"
+        },
+        "byPropField": "declaredByProp"
       }
     ],
     "state": [
@@ -1072,20 +1112,6 @@
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "normal",
       "distinctValues": 1
-    },
-    {
-      "part": "collapse-root",
-      "channel": "overflow-x",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "hidden",
-      "distinctValues": 2
-    },
-    {
-      "part": "collapse-root",
-      "channel": "overflow-y",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "hidden",
-      "distinctValues": 2
     },
     {
       "part": "collapse-root",
@@ -1258,7 +1284,9 @@
     "inheritance-only: label-2.caret-color equals ancestor \"accordion-region\" on all 32 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: label-2.color equals ancestor \"accordion-region\" on all 32 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
     "inheritance-only: label.caret-color equals ancestor \"accordionsummary-gutters\" on all 32 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
-    "inheritance-only: label.color equals ancestor \"accordionsummary-gutters\" on all 32 captured planes — the part carries no independent color fact (CSS inheritance, observed)"
+    "inheritance-only: label.color equals ancestor \"accordionsummary-gutters\" on all 32 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "declared-by-axis-carried: collapse-root.overflow-x varies by \"expanded\" (collapsed=hidden, expanded=visible) — carried as per-value declaredByProp entries (code: `.expanded-<value> { overflow-x: … }`; canvas: drawn per compiled variant)",
+    "declared-by-axis-carried: collapse-root.overflow-y varies by \"expanded\" (collapsed=hidden, expanded=visible) — carried as per-value declaredByProp entries (code: `.expanded-<value> { overflow-y: … }`; canvas: drawn per compiled variant)"
   ],
   "frontierReceipts": [
     "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
@@ -1363,6 +1391,10 @@
     "declared state fact carried: [disabled] accordionsummary-gutters.cursor = default (v15 declared vocabulary)",
     "declared state fact carried: [disabled] accordionsummary-gutters.pointer-events = none (v15 declared vocabulary)",
     "declared state fact carried: [disabled] label.cursor = default (v15 declared vocabulary)",
-    "declared state fact carried: [disabled] label.pointer-events = none (v15 declared vocabulary)"
+    "declared state fact carried: [disabled] label.pointer-events = none (v15 declared vocabulary)",
+    "declared fact carried per axis value: collapse-root.overflow-x = hidden when expanded=collapsed (declaredByProp)",
+    "declared fact carried per axis value: collapse-root.overflow-x = visible when expanded=expanded (declaredByProp)",
+    "declared fact carried per axis value: collapse-root.overflow-y = hidden when expanded=collapsed (declaredByProp)",
+    "declared fact carried per axis value: collapse-root.overflow-y = visible when expanded=expanded (declaredByProp)"
   ]
 }

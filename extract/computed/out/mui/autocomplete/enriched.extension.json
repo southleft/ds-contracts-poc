@@ -2497,13 +2497,6 @@
     },
     {
       "part": "autocomplete-tag",
-      "channel": "max-width",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "calc(100% - 4px)",
-      "distinctValues": 2
-    },
-    {
-      "part": "autocomplete-tag",
       "channel": "transition-behavior",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "normal, normal",
@@ -2522,13 +2515,6 @@
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "content-box",
       "distinctValues": 1
-    },
-    {
-      "part": "autocomplete-tag-2",
-      "channel": "max-width",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "calc(100% - 4px)",
-      "distinctValues": 2
     },
     {
       "part": "autocomplete-tag-2",
@@ -2585,6 +2571,20 @@
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "isolate",
       "distinctValues": 1
+    },
+    {
+      "part": "autocomplete-tag",
+      "channel": "max-width",
+      "reason": "declared-channel value varies across combos and does NOT factor on any single non-presence, non-state enum axis (or a per-axis value falls outside the channel's bounded grammar) — the by-axis declaredByProp carrier cannot hold it; named residue",
+      "sample": "calc(100% - 4px)",
+      "distinctValues": 2
+    },
+    {
+      "part": "autocomplete-tag-2",
+      "channel": "max-width",
+      "reason": "declared-channel value varies across combos and does NOT factor on any single non-presence, non-state enum axis (or a per-axis value falls outside the channel's bounded grammar) — the by-axis declaredByProp carrier cannot hold it; named residue",
+      "sample": "calc(100% - 4px)",
+      "distinctValues": 2
     }
   ],
   "stateOverflow": [

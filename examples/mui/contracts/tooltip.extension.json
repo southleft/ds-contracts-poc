@@ -369,13 +369,6 @@
     },
     {
       "part": "label",
-      "channel": "position",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "static",
-      "distinctValues": 2
-    },
-    {
-      "part": "label",
       "channel": "right",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "auto",
@@ -401,6 +394,13 @@
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "break-word",
       "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "position",
+      "reason": "declared-channel value varies across combos and does NOT factor on any single non-presence, non-state enum axis (or a per-axis value falls outside the channel's bounded grammar) — the by-axis declaredByProp carrier cannot hold it; named residue",
+      "sample": "static",
+      "distinctValues": 2
     }
   ],
   "stateOverflow": [],

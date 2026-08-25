@@ -235,6 +235,21 @@
                     }
                   }
                 }
+              ],
+              "declaredByProp": [
+                {
+                  "prop": "checked",
+                  "map": {
+                    "unchecked": {
+                      "transform": "matrix(0, 0, 0, 0, 0, 0)",
+                      "transition-timing-function": "cubic-bezier(0.4, 0, 1, 1)"
+                    },
+                    "checked": {
+                      "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                      "transition-timing-function": "cubic-bezier(0, 0, 0.2, 1)"
+                    }
+                  }
+                }
               ]
             }
           },

@@ -361,6 +361,21 @@
                 }
               }
             }
+          ],
+          "declaredByProp": [
+            {
+              "prop": "expanded",
+              "map": {
+                "collapsed": {
+                  "overflow-x": "hidden",
+                  "overflow-y": "hidden"
+                },
+                "expanded": {
+                  "overflow-x": "visible",
+                  "overflow-y": "visible"
+                }
+              }
+            }
           ]
         }
       },

@@ -158,6 +158,19 @@
                 }
               }
             }
+          ],
+          "declaredByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "small": {
+                  "transform": "matrix(1, 0, 0, 1, 0, -1)"
+                },
+                "medium": {
+                  "transform": "matrix(1, 0, 0, 1, 0, -2)"
+                }
+              }
+            }
           ]
         },
         "slider-track": {
@@ -238,6 +251,19 @@
                   "top": "{imported.slider.slider-track.top.small}",
                   "translate-y": "{imported.slider.slider-track.translate-y.small}",
                   "width": "{imported.slider.slider-track.width.small}"
+                }
+              }
+            }
+          ],
+          "declaredByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "small": {
+                  "transform": "matrix(1, 0, 0, 1, 0, -1)"
+                },
+                "medium": {
+                  "transform": "matrix(1, 0, 0, 1, 0, -3)"
                 }
               }
             }
@@ -393,6 +419,19 @@
                   "translate-x": "{imported.slider.slider-thumb.translate-x.small}",
                   "translate-y": "{imported.slider.slider-thumb.translate-y.small}",
                   "width": "{imported.slider.slider-thumb.width.small}"
+                }
+              }
+            }
+          ],
+          "declaredByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "small": {
+                  "transform": "matrix(1, 0, 0, 1, -6, -6)"
+                },
+                "medium": {
+                  "transform": "matrix(1, 0, 0, 1, -10, -10)"
                 }
               }
             }

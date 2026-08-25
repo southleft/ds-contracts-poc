@@ -210,7 +210,68 @@
   },
   "declaredFacts": {
     "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
-    "base": [],
+    "base": [
+      {
+        "part": "root",
+        "channel": "transition-duration",
+        "value": "0.3s",
+        "when": {
+          "prop": "variant",
+          "equals": "determinate"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "transition-duration",
+        "value": "0s",
+        "when": {
+          "prop": "variant",
+          "equals": "indeterminate"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "transition-property",
+        "value": "transform",
+        "when": {
+          "prop": "variant",
+          "equals": "determinate"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "transition-property",
+        "value": "all",
+        "when": {
+          "prop": "variant",
+          "equals": "indeterminate"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "when": {
+          "prop": "variant",
+          "equals": "determinate"
+        },
+        "byPropField": "declaredByProp"
+      },
+      {
+        "part": "root",
+        "channel": "transition-timing-function",
+        "value": "ease",
+        "when": {
+          "prop": "variant",
+          "equals": "indeterminate"
+        },
+        "byPropField": "declaredByProp"
+      }
+    ],
     "state": []
   },
   "codeOnlyChannels": [
@@ -245,29 +306,8 @@
     {
       "part": "root",
       "channel": "transform",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "reason": "declared-channel value varies across combos and does NOT factor on any single non-presence, non-state enum axis (or a per-axis value falls outside the channel's bounded grammar) — the by-axis declaredByProp carrier cannot hold it; named residue",
       "sample": "matrix(0, -1, 1, 0, 0, 0)",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
-      "channel": "transition-duration",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "0.3s",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
-      "channel": "transition-property",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "transform",
-      "distinctValues": 2
-    },
-    {
-      "part": "root",
-      "channel": "transition-timing-function",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "cubic-bezier(0.4, 0, 0.2, 1)",
       "distinctValues": 2
     }
   ],
@@ -299,7 +339,10 @@
     "control-fallback: no control for <svg> — span control used (part icon)",
     "control-fallback: no control for <circle> — span control used (part circularprogress-circle)",
     "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (circularprogress-circle, icon, root); -webkit-text-stroke-color (circularprogress-circle, icon, root)",
-    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold."
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "declared-by-axis-carried: root.transition-duration varies by \"variant\" (determinate=0.3s, indeterminate=0s) — carried as per-value declaredByProp entries (code: `.variant-<value> { transition-duration: … }`; canvas: declared-not-drawn, repeated as a code-only fact)",
+    "declared-by-axis-carried: root.transition-property varies by \"variant\" (determinate=transform, indeterminate=all) — carried as per-value declaredByProp entries (code: `.variant-<value> { transition-property: … }`; canvas: declared-not-drawn, repeated as a code-only fact)",
+    "declared-by-axis-carried: root.transition-timing-function varies by \"variant\" (determinate=cubic-bezier(0.4, 0, 0.2, 1), indeterminate=ease) — carried as per-value declaredByProp entries (code: `.variant-<value> { transition-timing-function: … }`; canvas: declared-not-drawn, repeated as a code-only fact)"
   ],
   "frontierReceipts": [
     "closed-shadow-root-suspected: CircularProgress:determinate__active>svg>circle <circle> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 37x37 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
@@ -351,5 +394,12 @@
     ],
     "refusals": []
   },
-  "enrichmentNotes": []
+  "enrichmentNotes": [
+    "declared fact carried per axis value: root.transition-duration = 0.3s when variant=determinate (declaredByProp)",
+    "declared fact carried per axis value: root.transition-duration = 0s when variant=indeterminate (declaredByProp)",
+    "declared fact carried per axis value: root.transition-property = transform when variant=determinate (declaredByProp)",
+    "declared fact carried per axis value: root.transition-property = all when variant=indeterminate (declaredByProp)",
+    "declared fact carried per axis value: root.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) when variant=determinate (declaredByProp)",
+    "declared fact carried per axis value: root.transition-timing-function = ease when variant=indeterminate (declaredByProp)"
+  ]
 }

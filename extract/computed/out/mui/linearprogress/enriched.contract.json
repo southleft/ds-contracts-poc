@@ -79,6 +79,19 @@
                 }
               }
             }
+          ],
+          "declaredByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "determinate": {
+                  "transition-duration": "0.4s"
+                },
+                "indeterminate": {
+                  "transition-duration": "0.2s"
+                }
+              }
+            }
           ]
         },
         "linearprogress-bar-2": {
