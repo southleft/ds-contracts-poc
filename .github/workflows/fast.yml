@@ -94,6 +94,29 @@ jobs:
         id: setup
         run: echo "Every step below runs even if an earlier one fails; the job fails at the end."
 
+      # BROWSER. `css-vars:check` drives a real Chromium through
+      # chromiumExecutable() (extract/figma/visual-parity/render.ts). It used to
+      # resolve the runner's preinstalled system Chrome by silent fallback — a
+      # DIFFERENT browser from the one the full lane and every committed capture
+      # use, which is the whole defect fix/pin-render-browser exists to remove.
+      # The resolver now refuses rather than substitute, so this lane installs
+      # the revision playwright-core pins, exactly as full.yml does.
+      # Cache first, install second: the install is a no-op on a cache hit, and
+      # `restore-keys` can restore a cache that predates a lockfile bump and
+      # therefore lacks the pinned revision — the install repairs that instead of
+      # the resolver quietly using whatever else the cache happens to hold.
+      - name: cache playwright browsers
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
+          restore-keys: ${{ runner.os }}-ms-playwright-
+      - name: install chromium (playwright-core ships no browser)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npx playwright-core install --with-deps chromium
+
       # Root consumers import @ds-contracts/schema through its package exports,
       # which point at gitignored dist/. A clean checkout therefore must build
       # the workspace before any root typecheck/test can resolve it. The local

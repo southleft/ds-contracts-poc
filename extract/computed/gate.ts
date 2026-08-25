@@ -610,7 +610,6 @@ ${stages.join('\n')}
       cellsCompared,
       cellsEqual,
       // @door gate.empty-comparison-is-100
-      // @door gate.empty-comparison-is-100
       // NULL, not 100. 0/0 is not a perfect score; it is the ABSENCE of a
       // measurement, and the pixel side twenty lines below has always refused to
       // fabricate its own zero for exactly this reason
