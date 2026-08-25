@@ -12,12 +12,13 @@
     {
       "stage": "dump",
       "status": "ok",
-      "ms": 841,
+      "ms": 1273,
+      "driver": "harness",
       "command": "npm run extract:figma:rest -- \"<url>?node-id=120:2047\" --out <dump>",
       "message": "toggleswitch.json",
       "artifacts": [
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/dumps/toggleswitch.json",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/dumps/toggleswitch.json",
           "sha256": "189c3815af0ca3c75a7d2b7fbb6769c0f7c50020e8972b6f5718533d3d831158",
           "bytes": 58555,
           "committed": false
@@ -27,12 +28,13 @@
     {
       "stage": "propose",
       "status": "ok",
-      "ms": 348,
+      "ms": 502,
+      "driver": "harness",
       "command": "npm run extract:figma -- <dump> --out <proposed> --tokens <kit dtcg>",
       "message": "1 proposal file(s)",
       "artifacts": [
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/proposed/toggleswitch/toggle-switch.contract.proposed.json",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/proposed/toggleswitch/toggle-switch.contract.proposed.json",
           "sha256": "0d173cfa6ae3d574f233d0f66ebaa1c62070f0a5070375f0f1d4fa6259a1b622",
           "bytes": 5513,
           "committed": false
@@ -43,52 +45,203 @@
       "stage": "validate",
       "status": "ok",
       "ms": 2,
+      "driver": "harness",
       "command": "core/emit-react.ts validateContract (the referee — no CLI verb; docs/07)",
       "message": "no violations",
       "artifacts": []
     },
     {
       "stage": "generate-react",
-      "status": "REFUSED",
-      "ms": 712,
+      "status": "ok",
+      "ms": 808,
+      "driver": "harness",
       "command": "npx ds-contracts generate <proposed>/*.contract.proposed.json --out <react> --tokens <kit>,<minted>",
-      "message": "✘ Refused — 3 token(s) defined twice with different values inside ONE slot; the merge would silently drop one layer:\n  - imported.toggle-switch.root.width.md: tailwind-minted.dtcg.json says \"100.438px\", minted.dtcg.json says \"100.44px\"\n  - imported.toggle-switch.root.width.sm: tailwind-minted.dtcg.json says \"92.4375px\", minted.dtcg.json says \"92.44px\"\n  - imported.toggle-switch.root.width.lg: tailwind-minted.dtcg.json says \"108.438px\", minted.dtcg.json says \"108.44px\"\nIf these are separate layers (light/dark, brand modes), name the slot: --tokens light=<file>,dark=<file>. Slots: primitives, semantic, light, dark, brand, brand.<name>",
-      "artifacts": []
+      "message": "5 file(s)",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/react/toggleswitch/index.ts",
+          "sha256": "0e01242350c21520dae219836c45523b0be75bde2b3ef0ad0123219019d9a7c1",
+          "bytes": 55,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/react/toggleswitch/tokens.css",
+          "sha256": "dc9986cd004d250bda8131d940052b815094a47c122f0e5f8ba312bffd1c22fd",
+          "bytes": 20496,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/react/toggleswitch/ToggleSwitch/ToggleSwitch.module.css",
+          "sha256": "40af71e3b5706e6fde9e3ee2275b37446a24b27c1f29735aff0beea929c801b2",
+          "bytes": 2456,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/react/toggleswitch/ToggleSwitch/ToggleSwitch.tsx",
+          "sha256": "81769c03177e4398371cb62efb9df7a9fb3e91dc2cccdd34b69c6ddacca52479",
+          "bytes": 1427,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/react/toggleswitch/ToggleSwitch/index.ts",
+          "sha256": "940e8045eef208ba44215094dbae139c3481631c48b04c20baf7e4b44f853bba",
+          "bytes": 104,
+          "committed": false
+        }
+      ]
     },
     {
       "stage": "generate-wc",
-      "status": "SKIPPED",
-      "ms": 0,
-      "command": null,
-      "message": "an earlier stage stopped this chain (generate-react)",
-      "artifacts": []
+      "status": "ok",
+      "ms": 845,
+      "driver": "harness",
+      "command": "npx ds-contracts generate <proposed>/*.contract.proposed.json --out <wc> --target web-components --emitter @ds-contracts/emitter-web-components",
+      "message": "5 file(s)",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/wc/toggleswitch/flowbite-toggleswitch.css.ts",
+          "sha256": "9822eccde3d4f0693a062e6b81f4c37f0003597a5f17ab0f88d0ad95e39e51ce",
+          "bytes": 3448,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/wc/toggleswitch/flowbite-toggleswitch.custom-elements.json",
+          "sha256": "97e0cf155692825443c4015142d0d029ffa5d201a1af4e07d86f1f2546f6e185",
+          "bytes": 2373,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/wc/toggleswitch/flowbite-toggleswitch.demo.html",
+          "sha256": "a9f2f2f85d0f599357f969a40e26cbbcfd20e6f3d2bc9d27cea7177146ca49f4",
+          "bytes": 1691,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/wc/toggleswitch/flowbite-toggleswitch.ts",
+          "sha256": "4aa4980d8217c434f3e4b2cb0e07bb0012ee035c75129b04df1e2561ff39d13e",
+          "bytes": 2947,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/wc/toggleswitch/tokens.css",
+          "sha256": "587dd93821892d342ac32150c4a18fdce5ed1fda8bafdacf666f20c53d178baa",
+          "bytes": 20505,
+          "committed": false
+        }
+      ]
     },
     {
       "stage": "render",
-      "status": "SKIPPED",
-      "ms": 0,
-      "command": null,
-      "message": "an earlier stage stopped this chain (generate-react)",
-      "artifacts": []
+      "status": "ok",
+      "ms": 16,
+      "driver": "harness",
+      "command": "esbuild bundle of the generated React → playwright-core screenshot at deviceScaleFactor 2",
+      "message": "6 cell(s)",
+      "artifacts": [
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/code-sizing-md-checked-unchecked.png",
+          "sha256": "60c2cad1ab6721fd5ad94f1d10059523a31a3ed6bfebdddeec15d4806e302815",
+          "bytes": 3500,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/code-sizing-md-checked-checked.png",
+          "sha256": "685a53a0ec984319c41a2245ba0a1de0d8cb041ac85d63893d91b7351014751c",
+          "bytes": 2573,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/code-sizing-sm-checked-unchecked.png",
+          "sha256": "d3dd196a3ddaddbbcbca4f794b805efd836da36b548b6898e5a663f9e921fb76",
+          "bytes": 3239,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/code-sizing-sm-checked-checked.png",
+          "sha256": "970f9f1f8dee81dc566a07515fde1e72b9005e29b9d2ed597d600e1c20716b06",
+          "bytes": 2546,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/code-sizing-lg-checked-unchecked.png",
+          "sha256": "e4fb1b8bc2cfafcefd2059a424440e730e20c3405db1fe9d063bcf3a2659c0e8",
+          "bytes": 3778,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/code-sizing-lg-checked-checked.png",
+          "sha256": "1ebc2b87f27df579fceea28f6017d5e0f29bed267c9c823ce45eca9689559b4e",
+          "bytes": 2627,
+          "committed": true
+        }
+      ]
     },
     {
       "stage": "ref",
-      "status": "SKIPPED",
-      "ms": 0,
-      "command": null,
-      "message": "an earlier stage stopped this chain (generate-react)",
-      "artifacts": []
+      "status": "ok",
+      "ms": 1018,
+      "driver": "harness",
+      "command": "GET /v1/images/59mLQlOMiD5w5za6SUcoO5?ids=<variant>&scale=2 (READ-ONLY)",
+      "message": "6 reference PNG(s) at scale 2",
+      "artifacts": [
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/ref-sizing-md-checked-unchecked.png",
+          "sha256": "131b0954c22b74444f9f128963db3855ac557731e7d63ed4e81d71962e813e83",
+          "bytes": 3687,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/ref-sizing-md-checked-checked.png",
+          "sha256": "c718b65b5a6750a74aa248e8e02d390e49fe823c7782c58bfef489876e867018",
+          "bytes": 3325,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/ref-sizing-sm-checked-unchecked.png",
+          "sha256": "1c79f54cb28903368c118e816b9f0612bcba1a3ef6d1366b37faa49fe6c3ef72",
+          "bytes": 3373,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/ref-sizing-sm-checked-checked.png",
+          "sha256": "15f5df40bb4cfe97e1f5b2ce686cfff94868dff3b56f3d89253a1aed957ec5ab",
+          "bytes": 3096,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/ref-sizing-lg-checked-unchecked.png",
+          "sha256": "f74b575f2609898f13b3a43014070eefb61b4bd0a393a2395b770e568b6c14c4",
+          "bytes": 3996,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/ref-sizing-lg-checked-checked.png",
+          "sha256": "48f21dd068f99d6969ffe9d72e731c8f831228b5d91fbe0710823d558dd31cee",
+          "bytes": 3607,
+          "committed": true
+        }
+      ]
     }
   ],
-  "chainComplete": false,
-  "firstStop": {
-    "stage": "generate-react",
-    "status": "REFUSED",
-    "message": "✘ Refused — 3 token(s) defined twice with different values inside ONE slot; the merge would silently drop one layer:\n  - imported.toggle-switch.root.width.md: tailwind-minted.dtcg.json says \"100.438px\", minted.dtcg.json says \"100.44px\"\n  - imported.toggle-switch.root.width.sm: tailwind-minted.dtcg.json says \"92.4375px\", minted.dtcg.json says \"92.44px\"\n  - imported.toggle-switch.root.width.lg: tailwind-minted.dtcg.json says \"108.438px\", minted.dtcg.json says \"108.44px\"\nIf these are separate layers (light/dark, brand modes), name the slot: --tokens light=<file>,dark=<file>. Slots: primitives, semantic, light, dark, brand, brand.<name>"
-  },
+  "chainComplete": true,
+  "firstStop": null,
   "images": {
-    "ref": [],
-    "code": [],
+    "ref": [
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/ref-sizing-md-checked-unchecked.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/ref-sizing-md-checked-checked.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/ref-sizing-sm-checked-unchecked.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/ref-sizing-sm-checked-checked.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/ref-sizing-lg-checked-unchecked.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/ref-sizing-lg-checked-checked.png"
+    ],
+    "code": [
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/code-sizing-md-checked-unchecked.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/code-sizing-md-checked-checked.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/code-sizing-sm-checked-unchecked.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/code-sizing-sm-checked-checked.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/code-sizing-lg-checked-unchecked.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/toggleswitch/code-sizing-lg-checked-checked.png"
+    ],
     "canvas": [],
     "absent": [
       {
@@ -97,5 +250,5 @@
       }
     ]
   },
-  "totalMs": 1903
+  "totalMs": 4464
 }

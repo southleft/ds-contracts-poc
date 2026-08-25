@@ -22,13 +22,17 @@
  * direction A additionally runs inside a SHADOW ROOT of symlinks so promote
  * and emit cannot move a committed byte.
  *
- * MINT. `--mint` asks the harness to drive the figma-console bridge against
- * the scratch file byMp6lt0Ij9b2QbkDGFwBh and NOTHING else. Every emitted
- * script carries the engine's WRONG-FILE guard on that key, and the harness
- * refuses to call a script mintable unless the guard is in its bytes. When no
- * bridge command endpoint answers, the exam stops at "bundle produced, mint
- * pending" and says so in the packet and in the receipt — a pending mint is
- * recorded, never quietly dropped and never counted as minted.
+ * MINT IS MCP-DRIVEN (docs/31 §6). `--mint` does NOT make this process write to
+ * a canvas — it cannot. The figma-console bridge speaks MCP over stdio to its
+ * own client and WebSocket to plugin clients, and a Node process is neither.
+ * `--mint` says the exam WANTS the write: the harness re-emits every script
+ * with `--file-key byMp6lt0Ij9b2QbkDGFwBh`, refuses to call a script mintable
+ * unless the engine's WRONG-FILE guard on that key is in its bytes, and then
+ * looks for the evidence an MCP-holding agent leaves at
+ * `parity/receipts/v1/first-pass/<exam>/mint-evidence.json`. No evidence, and
+ * the stage is PENDING with the architecture named — recorded, never quietly
+ * dropped, and never counted as minted. The no-retry rule binds the agent too:
+ * one attempt, and its evidence records that attempt.
  */
 import { mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";

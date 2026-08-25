@@ -311,6 +311,17 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run closure:check
 
+      # BUNDLES:FRESH — the same discipline as figma:fresh, one artifact class
+      # over. `examples/<lib>/figma/*.bundle.json` is the ONE JSON a designer
+      # pastes, and until 2026-08-24 only four of the eleven were rebuilt and
+      # byte-compared anywhere. Two were provably stale — polaris and
+      # astryx-docs were missing ~4.2 KB of codeOnlyFacts receipts the engine
+      # had learned to write — and nothing noticed, because EXECUTING a stale
+      # bundle succeeds. ~27s.
+      - name: bundles:fresh (every committed example bundle byte-identical to a rebuild)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run bundles:fresh
+
       - name: figma:fresh (committed *.figma.js byte-identical to a re-emission)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run figma:fresh

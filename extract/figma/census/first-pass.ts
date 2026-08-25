@@ -126,6 +126,22 @@ export interface StageRecord {
   stage: string;
   status: StageStatus;
   ms: number;
+  /** WHO EXECUTES THIS STAGE (2026-08-24, FINDING 3).
+   *
+   *  `harness` — the exam runner shells the documented command out itself.
+   *  This is every stage but one.
+   *
+   *  `mcp` — the stage CANNOT be driven from Node and the harness never
+   *  pretends otherwise. The figma-console bridge speaks MCP to its own
+   *  client and WebSocket to plugin clients; a Node process is neither, so
+   *  the canvas write is performed by an AGENT holding MCP tools and its
+   *  evidence is recorded separately (see ExamManifest.mint.evidence). The
+   *  harness's job for an `mcp` stage stops at producing the runnable,
+   *  guard-carrying artifact and saying so.
+   *
+   *  Absent on packets recorded before the field existed — read it as
+   *  "harness". */
+  driver?: "harness" | "mcp";
   /** The documented command, verbatim — or null for an in-process stage. */
   command: string | null;
   /** For REFUSED/ERROR: the engine's exact message. Never paraphrased. */
@@ -180,6 +196,14 @@ export interface ExamManifest {
     fileKey: string;
     status: StageStatus;
     message: string;
+    /** ALWAYS "mcp" for code→canvas (FINDING 3): the canvas write is not a
+     *  capability this harness has. Absent on pre-2026-08-24 packets. */
+    driver?: "mcp";
+    /** The MCP-driven mint's own recorded evidence, relative to the repo —
+     *  `<packet dir>/mint-evidence.json`, written by the agent that drove the
+     *  bridge. null when no agent has driven it, which is the honest state and
+     *  is rendered as PENDING, never as a capability. */
+    evidence?: string | null;
   };
   noRetry: true;
   cellCap: number;
@@ -815,7 +839,7 @@ export interface Ratchet {
 }
 
 export const RATCHET_HEADER =
-  "FIRST-PASS RATCHET — the BEST first-pass rate each exam has ever recorded. `npm run first-pass:check` recomputes the current rate from the committed packets and REFUSES when it is lower, unless a `reasons` row names the decrease with matching from/to. Raised automatically by `--write-receipt`; lowered ONLY through a reasons row. A metric that can quietly fall is not a metric.";
+  "FIRST-PASS RATCHET — the BEST first-pass rate each exam has ever recorded. `npm run first-pass:check` recomputes the current rate from the committed packets and REFUSES when it is lower, unless a `reasons` row names the decrease with matching from/to. Raised automatically by `--write-receipt`; lowered ONLY through a reasons row. A metric that can quietly fall is not a metric — and one that quietly RISES is not evidence, so `reasons` also carries rows naming a rise, and rows naming a rate that stayed flat while the stage it stops at moved.";
 
 export const emptyRatchet = (): Ratchet => ({
   _header: RATCHET_HEADER,
@@ -963,7 +987,7 @@ export function renderReceipt(
   }
   out.push("");
   out.push(
-    "`chain complete #1` = EVERY stage of the direction returned ok on the single attempt. `stopped: REFUSED` is the engine declining BY NAME — the honest outcome. `stopped: ERROR` is a stage that died without one. `stopped: PENDING` is a precondition OUTSIDE the engine (a canvas write needs the figma-console bridge, which a Node process cannot reach), kept in its own column because a chain that ran clean to its last stage and stopped on a missing bridge is a different fact from one the engine refused. `minted` = sets whose bytes actually reached the canvas. `recognisable #1` = graded blind against the owner's bar; `ungraded` means no `verdict.json` has been written yet, and is never rendered as a number.",
+    "`chain complete #1` = EVERY stage of the direction returned ok on the single attempt. `stopped: REFUSED` is the engine declining BY NAME — the honest outcome. `stopped: ERROR` is a stage that died without one. `stopped: PENDING` is a stage this harness does not execute at all: `mint` is MCP-DRIVEN (docs/31 §6 — the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and a Node process is neither, so an agent holding the MCP tools performs the write and records its own evidence). It keeps its own column because a chain that ran clean to its last stage and stopped there is a different fact from one the engine refused. `minted` = sets whose bytes actually reached the canvas, evidenced. `recognisable #1` = graded blind against the owner's bar; `ungraded` means no `verdict.json` has been written yet, and is never rendered as a number.",
   );
   out.push("");
 
@@ -1053,7 +1077,14 @@ export function renderReceipt(
   }
   out.push("");
   if (ratchet.reasons.length > 0) {
-    out.push("Named decreases:");
+    // NAMED MOVEMENTS, not just decreases. The gate only REQUIRES a row for a
+    // fall — a number that drops without a reason is the thing a ratchet
+    // exists to catch. But a rise with no reason is a different kind of
+    // silence: it tells a reader the tool got better without saying what
+    // changed, which is how a receipt stops being evidence. Rows may name
+    // either, and a rate that stayed FLAT while its SHAPE moved (the same 0/8
+    // stopping at a later stage, for a better reason) is worth a row too.
+    out.push("Named movements:");
     out.push("");
     out.push("| date | exam | metric | from | to | reason |");
     out.push("|---|---|---|---|---|---|");
@@ -1063,7 +1094,7 @@ export function renderReceipt(
       );
     out.push("");
   } else {
-    out.push("No named decrease has been recorded.");
+    out.push("No named movement has been recorded.");
     out.push("");
   }
 

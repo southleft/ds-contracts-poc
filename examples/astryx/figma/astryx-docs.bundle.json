@@ -6528,6 +6528,28 @@
         {
           "part": "root",
           "kind": "channel",
+          "channel": "background-image [active]",
+          "value": "{imported.button.root.background-image-state-active}",
+          "reason": "the active plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "background-image [hover]",
+          "value": "{imported.button.root.background-image-state-hover}",
+          "reason": "the hover plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
           "channel": "bottom",
           "value": "{imported.shared.size-0}",
           "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -6542,6 +6564,28 @@
           "channel": "left",
           "value": "{imported.shared.size-0}",
           "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "opacity [disabled]",
+          "value": "{imported.button.root.opacity-state-disabled}",
+          "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "outline-color [focus-visible]",
+          "value": "{imported.button.root.outline-color-state-focus-visible.{variant}}",
+          "reason": "the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
           "variants": {
             "count": 12,
             "of": 12
@@ -6609,6 +6653,28 @@
               "Variant=Secondary, Size=Sm",
               "Variant=Secondary, Size=Lg"
             ]
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "outline-offset [focus-visible]",
+          "value": "{imported.button.root.outline-offset-state-focus-visible}",
+          "reason": "the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "outline-width [focus-visible]",
+          "value": "{imported.button.root.outline-width-state-focus-visible}",
+          "reason": "the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 12,
+            "of": 12
           }
         },
         {
@@ -7219,6 +7285,34 @@
           "variants": {
             "count": 6,
             "of": 6
+          }
+        },
+        {
+          "part": "tooltip",
+          "kind": "channel",
+          "channel": "margin-right/margin-left",
+          "value": "4px/4px",
+          "reason": "the margin-box wrapper is skipped — an out-of-flow child (overlay / inset / absolute) keeps its own placement lowering; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+          "variants": {
+            "count": 1,
+            "of": 6,
+            "names": [
+              "Orientation=Vertical, Value Display=Tooltip"
+            ]
+          }
+        },
+        {
+          "part": "tooltip",
+          "kind": "channel",
+          "channel": "margin-top/margin-bottom",
+          "value": "4px/4px",
+          "reason": "the margin-box wrapper is skipped — an out-of-flow child (overlay / inset / absolute) keeps its own placement lowering; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+          "variants": {
+            "count": 1,
+            "of": 6,
+            "names": [
+              "Orientation=Horizontal, Value Display=Tooltip"
+            ]
           }
         },
         {
