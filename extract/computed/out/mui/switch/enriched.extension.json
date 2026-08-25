@@ -1379,6 +1379,13 @@
     },
     {
       "part": "buttonbase-root",
+      "channel": "transform",
+      "reason": "declared-channel value varies across combos and does NOT factor on any single non-presence, non-state enum axis (or a per-axis value falls outside the channel's bounded grammar) — the by-axis declaredByProp carrier cannot hold it; named residue",
+      "sample": "none",
+      "distinctValues": 3
+    },
+    {
+      "part": "buttonbase-root",
       "channel": "transition-behavior",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "normal, normal",
@@ -1404,13 +1411,6 @@
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "-1",
       "distinctValues": 1
-    },
-    {
-      "part": "buttonbase-root",
-      "channel": "transform",
-      "reason": "declared-channel value varies across combos and does NOT factor on any single non-presence, non-state enum axis (or a per-axis value falls outside the channel's bounded grammar) — the by-axis declaredByProp carrier cannot hold it; named residue",
-      "sample": "none",
-      "distinctValues": 3
     }
   ],
   "stateOverflow": [],
