@@ -182,7 +182,7 @@ export function sampleJSX(
       const attrs = depAttrString(dep, item.props ?? {});
       const childrenText = textProps(dep).find((p) => p.bindings.code.prop === 'children');
       const nestedDefault = slotsOf(dep).find(
-        (s) => s.slot.name === 'children' && (s.slot.defaultContent?.length ?? 0) > 0,
+        (s) => s.slot.name === DEFAULT_CONTENT_SLOT && (s.slot.defaultContent?.length ?? 0) > 0,
       );
       if (item.text !== undefined) return `<${dep.name}${attrs}>${item.text}</${dep.name}>`;
       if (nestedDefault) {
@@ -208,7 +208,7 @@ function sampleDeps(
     const dep = byId.get(item.id)!;
     out.add(dep.name);
     const nested = slotsOf(dep).find(
-      (s) => s.slot.name === 'children' && (s.slot.defaultContent?.length ?? 0) > 0,
+      (s) => s.slot.name === DEFAULT_CONTENT_SLOT && (s.slot.defaultContent?.length ?? 0) > 0,
     );
     if (nested) sampleDeps(nested.slot.defaultContent!, byId, out, depth + 1);
   }
@@ -659,7 +659,7 @@ export function generateTsx(
     }
     if (part.slot) {
       const el = part.element ?? 'div';
-      const expr = part.slot.name === 'children' ? 'children' : part.slot.name;
+      const expr = part.slot.name === DEFAULT_CONTENT_SLOT ? 'children' : part.slot.name;
       const node = `<${el} className={${stylesRef(partName)}}${partAttrString(part)}>{${expr}}</${el}>`;
       return part.optional ? `{${expr} != null ? ${node} : null}` : wrapVisibleWhen(part, node);
     }
@@ -811,7 +811,7 @@ export function generateStories(contract: Contract, byId: Map<string, Contract>)
   const enums = enumProps(contract);
   const bools = boolProps(contract);
   const slots = namedSlots(contract);
-  const hasDefaultSlot = slotsOf(contract).some((s) => s.slot.name === 'children');
+  const hasDefaultSlot = slotsOf(contract).some((s) => s.slot.name === DEFAULT_CONTENT_SLOT);
   const label = textDefault(contract);
 
   const storyEvents = contract.events ?? [];
