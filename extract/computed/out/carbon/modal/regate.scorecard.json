@@ -358,8 +358,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 1375,
-      "cellsEqual": 1215,
-      "pctEqual": 88.36363636363636,
+      "cellsEqual": 1225,
+      "pctEqual": 89.0909090909091,
       "rowsFullyEqual": 0,
       "rows": 20
     },
@@ -385,7 +385,7 @@
       "mintedLeavesUnfolded": 75,
       "baseBindings": 189,
       "stateBindings": 0,
-      "codeOnlyChannels": 35,
+      "codeOnlyChannels": 33,
       "overflowBindings": 0,
       "folds": 58
     },
@@ -394,35 +394,35 @@
         "key": "unset__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 32,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "xs__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 32,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "sm__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 32,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "md__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 32,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "lg__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 32,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
@@ -539,11 +539,9 @@
       "code-only: btn-set.grid-column-start — grid placement not carried: parent modal-container declined structured grid promotion — child \"modal-header\" grid-column \"1 / -1\": grid-negative-line: negative line indexes are refused — the anchor API has no negative-index concept (gridRow/ColumnAnchorIndex are 0-based cells, P3); proposers lower RESOLVABLE negatives to absolute indexes (LOWERED) and refuse unresolvable ones; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
       "code-only: btn-set.grid-row-end — grid placement not carried: parent modal-container declined structured grid promotion — child \"modal-header\" grid-column \"1 / -1\": grid-negative-line: negative line indexes are refused — the anchor API has no negative-index concept (gridRow/ColumnAnchorIndex are 0-based cells, P3); proposers lower RESOLVABLE negatives to absolute indexes (LOWERED) and refuse unresolvable ones; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
       "code-only: btn-set.grid-row-start — grid placement not carried: parent modal-container declined structured grid promotion — child \"modal-header\" grid-column \"1 / -1\": grid-negative-line: negative line indexes are refused — the anchor API has no negative-index concept (gridRow/ColumnAnchorIndex are 0-based cells, P3); proposers lower RESOLVABLE negatives to absolute indexes (LOWERED) and refuse unresolvable ones; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: label-6.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-6.flex-basis — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-6.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-6.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: label-7.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-7.flex-basis — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-7.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-7.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -562,7 +560,7 @@
       {
         "key": "unset__default",
         "channelsCompared": 275,
-        "channelsEqual": 243,
+        "channelsEqual": 245,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -707,12 +705,6 @@
           },
           {
             "part": "label-6",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
-          {
-            "part": "label-6",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "50%"
@@ -728,12 +720,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "top"
-          },
-          {
-            "part": "label-7",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "label-7",
@@ -795,7 +781,7 @@
       {
         "key": "xs__default",
         "channelsCompared": 275,
-        "channelsEqual": 243,
+        "channelsEqual": 245,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -940,12 +926,6 @@
           },
           {
             "part": "label-6",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
-          {
-            "part": "label-6",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "50%"
@@ -961,12 +941,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "top"
-          },
-          {
-            "part": "label-7",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "label-7",
@@ -1028,7 +1002,7 @@
       {
         "key": "sm__default",
         "channelsCompared": 275,
-        "channelsEqual": 243,
+        "channelsEqual": 245,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1173,12 +1147,6 @@
           },
           {
             "part": "label-6",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
-          {
-            "part": "label-6",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "50%"
@@ -1194,12 +1162,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "top"
-          },
-          {
-            "part": "label-7",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "label-7",
@@ -1261,7 +1223,7 @@
       {
         "key": "md__default",
         "channelsCompared": 275,
-        "channelsEqual": 243,
+        "channelsEqual": 245,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1406,12 +1368,6 @@
           },
           {
             "part": "label-6",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
-          {
-            "part": "label-6",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "50%"
@@ -1427,12 +1383,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "top"
-          },
-          {
-            "part": "label-7",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "label-7",
@@ -1494,7 +1444,7 @@
       {
         "key": "lg__default",
         "channelsCompared": 275,
-        "channelsEqual": 243,
+        "channelsEqual": 245,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1639,12 +1589,6 @@
           },
           {
             "part": "label-6",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
-          {
-            "part": "label-6",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "50%"
@@ -1660,12 +1604,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "top"
-          },
-          {
-            "part": "label-7",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "label-7",

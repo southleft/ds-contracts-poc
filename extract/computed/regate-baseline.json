@@ -275,11 +275,11 @@
     {
       "library": "carbon",
       "component": "Accordion",
-      "rerunPctEqual": 78.55191256830601,
+      "rerunPctEqual": 79.09836065573771,
       "cellsCompared": 5856,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 77.63157894736842,
-      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Accordion +1.170 (76.462 → 77.632), cellsCompared UNCHANGED: `display: list-item` is now carried in the declared registry (it is a BLOCK-LEVEL box in CSS block flow). It previously fell into the `display-outside-vocabulary` receipt, so Carbon's `<li class=\"cds--accordion__item\">` reached the emitter with no display fact at all and took the HORIZONTAL default — the 472px panel drew BESIDE the 174px heading inside a 328px item."
+      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Accordion +1.170 (76.462 → 77.632), cellsCompared UNCHANGED: `display: list-item` is now carried in the declared registry (it is a BLOCK-LEVEL box in CSS block flow). It previously fell into the `display-outside-vocabulary` receipt, so Carbon's `<li class=\"cds--accordion__item\">` reached the emitter with no display fact at all and took the HORIZONTAL default — the 472px panel drew BESIDE the 174px heading inside a 328px item. RC1 LAYOUT-AXIS DOOR (2026-08-25): a separately measured 0.546 on top — 78.552 on the e884d672 engine, 79.098 on this one, cellsCompared UNCHANGED at 5856. accordion__heading base flex-direction is row-reverse (Carbon's align prop DEFAULTS to end) and LayoutSchema.direction had no slot for the reversed spellings, so the keyword left through layout-not-uniform; it is now carried with layoutByProp {align:{start:{direction:row}}}. Every point is a cell flipping unequal -> equal against an unmoved denominator; the harness number moves only on a re-capture."
     },
     {
       "library": "carbon",
@@ -311,20 +311,20 @@
     {
       "library": "carbon",
       "component": "InlineNotification",
-      "rerunPctEqual": 97.14285714285714,
+      "rerunPctEqual": 98.0952380952381,
       "cellsCompared": 5040,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 97.0873786407767,
-      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. InlineNotification +0.506 (96.581 → 97.087) and cellsCompared 7488 → 4944 — a VOCABULARY CHANGE, named: Carbon's notification icons ship `<title>error icon</title>` inside the svg, and `<title>` is NON-PAINTING metadata (SVG 1.1 §5.4). It was captured as a real element with real text, so (a) the words 'error icon' reached the canvas as visible ink and (b) the svg failed the path/g asset grammar, exploding one glyph into five per-path parts. The capture now drops SVG title/desc/metadata at the source; the six per-kind glyphs promote as REAL icon assets, so 5 path parts + 1 title part per icon leave the compared tree."
+      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. InlineNotification +0.506 (96.581 → 97.087) and cellsCompared 7488 → 4944 — a VOCABULARY CHANGE, named: Carbon's notification icons ship `<title>error icon</title>` inside the svg, and `<title>` is NON-PAINTING metadata (SVG 1.1 §5.4). It was captured as a real element with real text, so (a) the words 'error icon' reached the canvas as visible ink and (b) the svg failed the path/g asset grammar, exploding one glyph into five per-path parts. The capture now drops SVG title/desc/metadata at the source; the six per-kind glyphs promote as REAL icon assets, so 5 path parts + 1 title part per icon leave the compared tree. RC1 LAYOUT-AXIS DOOR (2026-08-25): a separately measured 0.952 on top — 97.143 on the e884d672 engine, 98.095 on this one, cellsCompared UNCHANGED at 5040. flex-wrap had NO entry in LAYOUT_CHANNEL_TO_FIELD at all, so the text-wrapper's wrap:true could never arrive from a captured library; it is now carried as layout.wrap. Cell flips only, no widened denominator."
     },
     {
       "library": "carbon",
       "component": "Modal",
-      "rerunPctEqual": 88.36363636363636,
+      "rerunPctEqual": 89.0909090909091,
       "cellsCompared": 1375,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 90.03831417624521,
-      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Modal +0.294 (89.744 → 90.038) and cellsCompared 1560 → 1305 — a VOCABULARY CHANGE, named: `display: grid` and `inline-grid` now lower to the flex vocabulary from the MEASURED grid-template track counts (modal-container is 1 column x 4 rows -> flex column). The dropped rows are the inert `popover` tooltip wrapper on the close button, refused by the new inert-overlay-wrapper rule (it draws no box in any combo and every one of its children is display:none)."
+      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Modal +0.294 (89.744 → 90.038) and cellsCompared 1560 → 1305 — a VOCABULARY CHANGE, named: `display: grid` and `inline-grid` now lower to the flex vocabulary from the MEASURED grid-template track counts (modal-container is 1 column x 4 rows -> flex column). The dropped rows are the inert `popover` tooltip wrapper on the close button, refused by the new inert-overlay-wrapper rule (it draws no box in any combo and every one of its children is display:none). RC1 LAYOUT-AXIS DOOR (2026-08-25): a separately measured 0.727 on top — 88.364 on the e884d672 engine, 89.091 on this one, cellsCompared UNCHANGED at 1375. align-items: baseline on the two footer buttons, a keyword LAYOUT_CHANNEL_TO_FIELD had no entry for. Cell flips only."
     },
     {
       "library": "carbon",
