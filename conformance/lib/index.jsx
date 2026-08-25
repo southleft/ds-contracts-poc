@@ -67,6 +67,8 @@ export { default as CaseMixBlendMode } from '../cases/mix-blend-mode/Case.tsx';
 export { default as CaseNonpaintingTextDisplayNone } from '../cases/nonpainting-text-display-none/Case.tsx';
 export { default as CaseNonpaintingTextVisibilityHidden } from '../cases/nonpainting-text-visibility-hidden/Case.tsx';
 export { default as CaseOklchColor } from '../cases/oklch-color/Case.tsx';
+export { default as CasePageGlobalStarRule } from '../cases/page-global-star-rule/Case.tsx';
+export { default as CasePageInheritedInk } from '../cases/page-inherited-ink/Case.tsx';
 export { default as CasePercentagePadding } from '../cases/percentage-padding/Case.tsx';
 export { default as CasePositionAbsoluteInsets } from '../cases/position-absolute-insets/Case.tsx';
 export { default as CasePositionFixed } from '../cases/position-fixed/Case.tsx';

@@ -126,6 +126,22 @@ export interface StageRecord {
   stage: string;
   status: StageStatus;
   ms: number;
+  /** WHO EXECUTES THIS STAGE (2026-08-24, FINDING 3).
+   *
+   *  `harness` — the exam runner shells the documented command out itself.
+   *  This is every stage but one.
+   *
+   *  `mcp` — the stage CANNOT be driven from Node and the harness never
+   *  pretends otherwise. The figma-console bridge speaks MCP to its own
+   *  client and WebSocket to plugin clients; a Node process is neither, so
+   *  the canvas write is performed by an AGENT holding MCP tools and its
+   *  evidence is recorded separately (see ExamManifest.mint.evidence). The
+   *  harness's job for an `mcp` stage stops at producing the runnable,
+   *  guard-carrying artifact and saying so.
+   *
+   *  Absent on packets recorded before the field existed — read it as
+   *  "harness". */
+  driver?: "harness" | "mcp";
   /** The documented command, verbatim — or null for an in-process stage. */
   command: string | null;
   /** For REFUSED/ERROR: the engine's exact message. Never paraphrased. */
@@ -156,6 +172,16 @@ export interface SetAttempt {
     code: string[];
     canvas: string[];
     absent: AbsentImage[];
+    /** IMAGES THIS RUN DID NOT PRODUCE AND DID NOT DESTROY (2026-08-25).
+     *
+     *  The packet is EVIDENCE. A run may only clear a set's images at the
+     *  moment it is about to write their replacement; a set whose chain
+     *  aborted before that point leaves the earlier run's images exactly
+     *  where they are and names them here, with the reason in `absent`. The
+     *  gate re-reads them so a retained image is never an orphan and never
+     *  counted as this run's output. Absent on packets recorded before the
+     *  field existed — read it as "nothing was retained". */
+    retained?: string[];
   };
   totalMs: number;
 }
@@ -180,6 +206,14 @@ export interface ExamManifest {
     fileKey: string;
     status: StageStatus;
     message: string;
+    /** ALWAYS "mcp" for code→canvas (FINDING 3): the canvas write is not a
+     *  capability this harness has. Absent on pre-2026-08-24 packets. */
+    driver?: "mcp";
+    /** The MCP-driven mint's own recorded evidence, relative to the repo —
+     *  `<packet dir>/mint-evidence.json`, written by the agent that drove the
+     *  bridge. null when no agent has driven it, which is the honest state and
+     *  is rendered as PENDING, never as a capability. */
+    evidence?: string | null;
   };
   noRetry: true;
   cellCap: number;
@@ -327,6 +361,251 @@ export const EXAM_QUEUE: Array<{
       "HELD OUT — DEMO Eventz Design System (E7oXr98i91HYQGZxA2USOQ) atoms/molecules, never proposed from in a first-pass exam. READ-ONLY.",
   },
 ];
+
+// ---------------------------------------------------------------------------
+// PREFLIGHT — every precondition, checked BEFORE a committed byte is touched
+// ---------------------------------------------------------------------------
+
+/**
+ * THE DEFECT THIS EXISTS FOR (2026-08-25). The runner used to clear a set's
+ * committed images and overwrite its `attempt.json` on the way past, whether
+ * or not the chain could produce a replacement. In a fresh worktree the
+ * git-ignored library sandbox does not exist, so every set died at `capture`
+ * — and by then the committed packet had already been wiped: 8/8 ref/code
+ * pairs gone, every attempt rewritten as an ERROR-at-capture packet, and the
+ * process exited 0. A run that could not possibly measure anything destroyed
+ * the evidence of the run that could, and reported success to the shell.
+ *
+ * So: every precondition the run needs is checked here, the failures are
+ * named WITH THE EXACT COMMAND that fixes them, and the runner refuses before
+ * a single committed byte moves. The packet is evidence; it may only be
+ * cleared once the run is certain it can produce a replacement.
+ */
+export interface PreflightFailure {
+  /** What was required, in the run's own vocabulary. */
+  requirement: string;
+  /** What was found instead — the fact, never a paraphrase. */
+  detail: string;
+  /** The exact command a user runs to satisfy it, or "" when there is none. */
+  remedy: string;
+}
+
+const readJson = (p: string): Record<string, unknown> =>
+  JSON.parse(readFileSync(p, "utf8")) as Record<string, unknown>;
+
+/** The documented sandbox recipe, rebuilt from the capture config's own pins
+ *  (examples/<lib>/PROVENANCE.md "Recreate (git-ignored)"). */
+export function sandboxRecipe(
+  harness: string,
+  pkg: string,
+  version: string,
+): string {
+  const name = `${path.basename(harness).replace(/^\./, "")}`;
+  return (
+    `mkdir -p ${harness} && cd ${harness} \\\n` +
+    `  && printf '{"name":"${name}","private":true}\\n' > package.json \\\n` +
+    `  && npm i ${pkg}@${version} react@18 react-dom@18 esbuild`
+  );
+}
+
+function writable(dir: string): string | null {
+  try {
+    mkdirSync(dir, { recursive: true });
+    const probe = path.join(dir, `.first-pass-write-probe-${process.pid}`);
+    writeFileSync(probe, "");
+    rmSync(probe, { force: true });
+    return null;
+  } catch (e) {
+    return String((e as Error).message ?? e);
+  }
+}
+
+/**
+ * Every precondition of one exam. Pure apart from a write probe; returns the
+ * failures rather than throwing, so the caller can print all of them at once
+ * — a user who is missing two things should learn both in one run.
+ */
+export function preflight(
+  def: ExamDef,
+  opts: { work: string; mint: boolean; env?: NodeJS.ProcessEnv },
+): PreflightFailure[] {
+  const env = opts.env ?? process.env;
+  const out: PreflightFailure[] = [];
+  const needFile = (rel: string, requirement: string, remedy = ""): boolean => {
+    const p = path.isAbsolute(rel) ? rel : path.join(REPO, rel);
+    if (!existsSync(p)) {
+      out.push({ requirement, detail: `${rel} does not exist`, remedy });
+      return false;
+    }
+    return true;
+  };
+
+  // The work directory and the packet tree must both be writable BEFORE the
+  // chain starts — a run that cannot write its replacement may not clear.
+  const w = writable(opts.work);
+  if (w !== null)
+    out.push({
+      requirement: `the work directory ${opts.work} is writable`,
+      detail: w,
+      remedy: "",
+    });
+  // The PACKET TREE, not the exam's own directory: probing `<dir>/<exam>`
+  // would CREATE it, and a preflight that refuses must leave nothing behind —
+  // an empty exam directory is a packet with no MANIFEST, which the gate
+  // rightly refuses. Preflight may not manufacture the red it is preventing.
+  const pw = writable(abs(PATHS.dir));
+  if (pw !== null)
+    out.push({
+      requirement: `the packet tree ${FIRST_PASS_DIR} is writable`,
+      detail: pw,
+      remedy: "",
+    });
+
+  if (def.direction === "code-to-canvas") {
+    const haveManifest = needFile(
+      def.manifest,
+      `the library manifest ${def.manifest} exists`,
+    );
+    const haveConfig = needFile(
+      def.captureConfig,
+      `the capture config ${def.captureConfig} exists`,
+    );
+    let pkg = "";
+    let version = "";
+    if (haveConfig) {
+      try {
+        const cfg = readJson(path.join(REPO, def.captureConfig));
+        const lib = (cfg.library ?? {}) as Record<string, unknown>;
+        pkg = String(lib.package ?? "");
+        version = String(lib.version ?? "");
+        if (!pkg || !version)
+          out.push({
+            requirement: `${def.captureConfig} pins library.package and library.version`,
+            detail: `library.package=${JSON.stringify(lib.package)} library.version=${JSON.stringify(lib.version)}`,
+            remedy: "",
+          });
+      } catch (e) {
+        out.push({
+          requirement: `the capture config ${def.captureConfig} parses`,
+          detail: String((e as Error).message ?? e),
+          remedy: "",
+        });
+      }
+    }
+    if (haveManifest) {
+      try {
+        readJson(path.join(REPO, def.manifest));
+      } catch (e) {
+        out.push({
+          requirement: `the library manifest ${def.manifest} parses`,
+          detail: String((e as Error).message ?? e),
+          remedy: "",
+        });
+      }
+    }
+    // THE ONE THAT BIT US: the git-ignored sandbox. `extract/computed/run.ts`
+    // refuses with "need --harness <dir> with <pkg>@<ver>, react@18,
+    // react-dom@18, esbuild installed" — so check exactly what it checks,
+    // and say how to build it.
+    const recipe =
+      pkg && version ? sandboxRecipe(def.harness, pkg, version) : "";
+    const harnessAbs = path.isAbsolute(def.harness)
+      ? def.harness
+      : path.join(REPO, def.harness);
+    if (!existsSync(harnessAbs)) {
+      out.push({
+        requirement: `the capture harness (sandbox) ${def.harness} exists`,
+        detail: `${def.harness} does not exist — it is git-ignored, so a fresh clone or worktree never has it`,
+        remedy: recipe,
+      });
+    } else if (pkg) {
+      const libDir = path.join(harnessAbs, "node_modules", ...pkg.split("/"));
+      if (!existsSync(libDir)) {
+        out.push({
+          requirement: `${def.harness} has ${pkg}@${version} installed`,
+          detail: `${path.relative(REPO, libDir)} does not exist`,
+          remedy: recipe,
+        });
+      } else {
+        try {
+          const have = String(
+            (readJson(path.join(libDir, "package.json")).version ??
+              "") as string,
+          );
+          if (have !== version)
+            out.push({
+              requirement: `${def.harness} has ${pkg}@${version} (the config's pin)`,
+              detail: `the sandbox has ${pkg}@${have} — version drift would silently change every number`,
+              remedy: recipe,
+            });
+        } catch (e) {
+          out.push({
+            requirement: `${def.harness}'s ${pkg} declares a version`,
+            detail: String((e as Error).message ?? e),
+            remedy: recipe,
+          });
+        }
+      }
+      for (const dep of ["react", "react-dom", "esbuild"])
+        if (!existsSync(path.join(harnessAbs, "node_modules", dep)))
+          out.push({
+            requirement: `${def.harness} has ${dep} installed`,
+            detail: `${def.harness}/node_modules/${dep} does not exist`,
+            remedy: recipe,
+          });
+    }
+  } else {
+    if (FORBIDDEN_FILE_KEYS.includes(def.fileKey))
+      out.push({
+        requirement: `exam ${def.exam} may not name a forbidden file key`,
+        detail: `it names ${def.fileKey}, which is in FORBIDDEN_FILE_KEYS`,
+        remedy: "",
+      });
+    // Direction B is LIVE READ-ONLY REST: no token, no exam.
+    if (!env.FIGMA_TOKEN && !env.FIGMA_PAT && !env.FIGMA_ACCESS_TOKEN)
+      out.push({
+        requirement: "a Figma personal access token is in the environment",
+        detail:
+          "FIGMA_TOKEN is unset — every stage of canvas→code reads the REST API and would die without one",
+        remedy:
+          "put FIGMA_TOKEN=<pat> in .env.local (git-ignored) or export it in the shell",
+      });
+    // A declared corpus file that is not on disk is a SUBSTITUTED INPUT: the
+    // runner silently drops it, and the exam then measures a different chain
+    // from the one it declares.
+    for (const f of def.corpusFiles)
+      needFile(
+        f,
+        `the declared corpus file ${f} exists (an absent one would be silently dropped, changing the exam's input)`,
+      );
+    if (def.pages.length === 0)
+      out.push({
+        requirement: `exam ${def.exam} selects at least one page`,
+        detail: "pages: [] — the exam would select no set and measure nothing",
+        remedy: "",
+      });
+  }
+  return out;
+}
+
+export function renderPreflight(
+  def: ExamDef,
+  failures: PreflightFailure[],
+): string {
+  const out = [
+    `✖ PREFLIGHT REFUSED — exam "${def.exam}" cannot run, and NOTHING was touched.`,
+    `  The committed packet under ${FIRST_PASS_DIR}/${def.exam}/ is evidence of the last run that COULD measure. A run that cannot produce a replacement never clears it.`,
+    "",
+  ];
+  for (const f of failures) {
+    out.push(`  ✖ ${f.requirement}`);
+    out.push(`      found: ${f.detail}`);
+    if (f.remedy)
+      for (const [i, line] of f.remedy.split("\n").entries())
+        out.push(`      ${i === 0 ? "fix:  " : "      "}${line}`);
+  }
+  return out.join("\n");
+}
 
 // ---------------------------------------------------------------------------
 // Small helpers
@@ -573,13 +852,39 @@ export function writeAttempt(a: SetAttempt): void {
   writeFileSync(path.join(dir, "attempt.json"), stableJson(a));
 }
 
-/** Drop images from an earlier sample rule so a shrinking sample can never
- *  leave an orphan PNG the gate would count. */
-export function clearPacketImages(exam: string, set: string): void {
+export const PACKET_IMAGE_RE = /^(ref|code|canvas)-.*\.png$/;
+
+/** Every image currently in a set's packet, repo-relative, sorted. */
+export function packetImages(exam: string, set: string): string[] {
   const dir = packetDir(exam, set);
-  if (!existsSync(dir)) return;
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir)
+    .filter((f) => PACKET_IMAGE_RE.test(f))
+    .sort()
+    .map((f) => path.relative(REPO, path.join(dir, f)));
+}
+
+/**
+ * Drop images from an earlier sample rule so a shrinking sample can never
+ * leave an orphan PNG the gate would count.
+ *
+ * CALL THIS ONLY AT THE MOMENT THE REPLACEMENT IS ABOUT TO BE WRITTEN
+ * (2026-08-25). It used to be called on the way past — up front for the whole
+ * exam in direction B, and unconditionally per set in direction A — so a run
+ * that could not produce a single image still destroyed every committed one.
+ * The packet is evidence: a set whose chain aborted keeps its images and names
+ * them in `attempt.json.images.retained`. Returns what it removed.
+ */
+export function clearPacketImages(exam: string, set: string): string[] {
+  const dir = packetDir(exam, set);
+  if (!existsSync(dir)) return [];
+  const removed: string[] = [];
   for (const f of readdirSync(dir))
-    if (/^(ref|code|canvas)-.*\.png$/.test(f)) rmSync(path.join(dir, f));
+    if (PACKET_IMAGE_RE.test(f)) {
+      rmSync(path.join(dir, f));
+      removed.push(f);
+    }
+  return removed.sort();
 }
 
 export interface ExamState {
@@ -658,6 +963,7 @@ export function readExamState(exam: string): ExamState {
           );
       }
     }
+    const retained = a.images.retained ?? [];
     for (const kind of ["ref", "code", "canvas"] as const) {
       for (const f of a.images[kind]) {
         if (!existsSync(path.join(REPO, f)))
@@ -666,11 +972,51 @@ export function readExamState(exam: string): ExamState {
           );
       }
     }
+    for (const f of retained)
+      if (!existsSync(resolveArtifact(f)))
+        failures.push(
+          `${exam}/${set}: attempt.json RETAINS ${f} — the run said it left this earlier image in place — but it is not on disk`,
+        );
+    // AN ORPHAN IMAGE — a PNG in the packet that the attempt names neither as
+    // its own output nor as retained evidence. Either the attempt or the
+    // directory is lying about what this run produced. Compared by BASENAME:
+    // an attempt records repo-relative paths, but `--self-test` re-roots the
+    // packet tree at a copy, and the two must still line up.
+    {
+      const named = new Set(
+        [
+          ...a.images.ref,
+          ...a.images.code,
+          ...a.images.canvas,
+          ...retained,
+        ].map((f) => path.basename(f)),
+      );
+      for (const f of packetImages(exam, set))
+        if (!named.has(path.basename(f)))
+          failures.push(
+            `${exam}/${set}: ${path.basename(f)} is in the packet but attempt.json names it as neither output nor retained evidence — an orphan image is never allowed`,
+          );
+    }
+    // A CLEARED PACKET WITH NO REPLACEMENT AND NO REASON. "There is no
+    // picture" must always come with a reason, PER SURFACE — the whole-packet
+    // rule below could be satisfied by one `canvas` absence while ref and
+    // code were silently wiped, which is exactly how the 2026-08-25 defect
+    // destroyed 8/8 pairs and still rendered a packet the gate accepted.
+    for (const kind of ["ref", "code", "canvas"] as const) {
+      if (a.images[kind].length > 0) continue;
+      if (a.images.absent.some((x) => x.kind === kind)) continue;
+      if (retained.some((f) => path.basename(f).startsWith(`${kind}-`)))
+        continue;
+      failures.push(
+        `${exam}/${set}: the packet has no ${kind} image, names no ${kind} absence and retains none — an image that vanished with no recorded reason is never allowed`,
+      );
+    }
     if (
       a.images.ref.length === 0 &&
       a.images.code.length === 0 &&
       a.images.canvas.length === 0 &&
-      a.images.absent.length === 0
+      a.images.absent.length === 0 &&
+      retained.length === 0
     )
       failures.push(
         `${exam}/${set}: the packet has no images AND names no absence — a blank cell is never allowed`,
@@ -710,6 +1056,10 @@ export interface ExamTally {
   date: string;
   engineSha: string;
   attempted: number;
+  /** Sets whose outcome THE PIPELINE produced — a completed chain, an engine
+   *  refusal by name, or a stage this harness does not execute. See
+   *  {@link isMeasured}. */
+  measured: number;
   chainComplete: number;
   /** stage name → how many sets stopped there with REFUSED */
   refusedByStage: Map<string, number>;
@@ -728,13 +1078,44 @@ export interface ExamTally {
   notRecognisable: number;
 }
 
+/**
+ * MEASURED NOTHING vs MEASURED ZERO (2026-08-25) — the same class of defect as
+ * the killed suite that read as a pass.
+ *
+ * A set is MEASURED when the pipeline itself produced its outcome:
+ *   · the chain completed, or
+ *   · the engine REFUSED by name — the honest outcome this exam exists to
+ *     collect, and a first-pass finding in its own right, or
+ *   · the chain ran clean to a stage this harness does not execute at all
+ *     (`mint` is MCP-driven; PENDING is a recorded architectural fact).
+ *
+ * A set is UNMEASURED when it stopped at ERROR — a stage that died WITHOUT a
+ * named refusal. One such set is a finding. EVERY set dying that way means the
+ * run learned nothing about the engine, and a rate computed from it ("0/8")
+ * would be a fabrication: it reads as "the engine failed eight times" when the
+ * truth is "the harness never got to ask".
+ */
+export function isMeasured(a: SetAttempt): boolean {
+  if (a.chainComplete) return true;
+  const stop = a.firstStop;
+  if (!stop) return true;
+  return stop.status === "REFUSED" || stop.status === "PENDING";
+}
+
+/** An exam that attempted sets and measured none of them. Its rate is not a
+ *  number and is never recorded as one. */
+export const isUnmeasured = (t: ExamTally): boolean =>
+  t.attempted > 0 && t.measured === 0;
+
 export function tally(state: ExamState): ExamTally {
   const refusedByStage = new Map<string, number>();
   const erroredByStage = new Map<string, number>();
   const pendingByStage = new Map<string, number>();
   let chainComplete = 0;
   let minted = 0;
+  let measured = 0;
   for (const a of state.attempts) {
+    if (isMeasured(a)) measured++;
     if (a.chainComplete) chainComplete++;
     const stop = a.firstStop;
     if (stop?.status === "REFUSED")
@@ -771,6 +1152,7 @@ export function tally(state: ExamState): ExamTally {
     date: m.date,
     engineSha: m.engineSha,
     attempted: state.attempts.length,
+    measured,
     chainComplete,
     refusedByStage,
     erroredByStage,
@@ -815,7 +1197,7 @@ export interface Ratchet {
 }
 
 export const RATCHET_HEADER =
-  "FIRST-PASS RATCHET — the BEST first-pass rate each exam has ever recorded. `npm run first-pass:check` recomputes the current rate from the committed packets and REFUSES when it is lower, unless a `reasons` row names the decrease with matching from/to. Raised automatically by `--write-receipt`; lowered ONLY through a reasons row. A metric that can quietly fall is not a metric.";
+  "FIRST-PASS RATCHET — the BEST first-pass rate each exam has ever recorded. `npm run first-pass:check` recomputes the current rate from the committed packets and REFUSES when it is lower, unless a `reasons` row names the decrease with matching from/to. Raised automatically by `--write-receipt`; lowered ONLY through a reasons row. A metric that can quietly fall is not a metric — and one that quietly RISES is not evidence, so `reasons` also carries rows naming a rise, and rows naming a rate that stayed flat while the stage it stops at moved.";
 
 export const emptyRatchet = (): Ratchet => ({
   _header: RATCHET_HEADER,
@@ -859,6 +1241,17 @@ export function ratchetFailures(t: ExamTally, r: Ratchet): string[] {
   const failures: string[] = [];
   const best = r.exams[t.exam];
   const cur = currentRates(t);
+  // MEASURED NOTHING IS NOT MEASURED ZERO. An exam whose every set died at
+  // ERROR — no completed chain, no named refusal, not even a PENDING stage —
+  // learned nothing about the engine. Its packets are the wreckage of a run
+  // that could not run, and its "0/N" is not a rate. Refuse loudly; never
+  // compare it to the recorded best and never record it.
+  if (isUnmeasured(t)) {
+    failures.push(
+      `UNMEASURED: exam "${t.exam}" attempted ${t.attempted} set(s) and MEASURED NONE — every one stopped at ERROR, a stage that died without a named refusal. ${rateText(cur.chain)} is not a rate, it is the absence of one, and the ratchet records nothing for it. Fix the infrastructure the run needs (\`npm run exam:first-pass -- --exam ${t.exam}\` preflights it and names the remedy) and re-run; if the packets were overwritten by such a run, restore them with \`git checkout -- ${FIRST_PASS_DIR}/${t.exam}\``,
+    );
+    return failures;
+  }
   if (!best) {
     failures.push(
       `RATCHET: exam "${t.exam}" has packets but no row in ${FIRST_PASS_RATCHET} — run \`npm run first-pass:check -- --write-receipt\` and commit it`,
@@ -893,6 +1286,11 @@ export function ratchetFailures(t: ExamTally, r: Ratchet): string[] {
 
 /** Raise (or, with a named reason, lower) the recorded best. */
 export function applyRatchet(t: ExamTally, r: Ratchet): Ratchet {
+  // An UNMEASURED exam has no rate to record — not a new row, not a raise, not
+  // a lowering. `--write-receipt` leaves the recorded best exactly as it was
+  // and the gate's UNMEASURED refusal (which `--write-receipt` also embeds in
+  // the rendering) is what the reader sees.
+  if (isUnmeasured(t)) return r;
   const cur = currentRates(t);
   const best = r.exams[t.exam];
   if (!best) {
@@ -958,12 +1356,12 @@ export function renderReceipt(
     const t = tally(s);
     tallies.push(t);
     out.push(
-      `| ${t.date} | ${t.exam} | ${t.direction} | ${cell(t.subject)} | ${t.heldOut ? "yes" : "no (self-test)"} | \`${t.engineSha.slice(0, 8)}\` | ${t.attempted} | ${t.chainComplete} | ${cell(stageList(t.refusedByStage))} | ${cell(stageList(t.erroredByStage))} | ${cell(stageList(t.pendingByStage))} | ${t.minted} | ${t.graded === 0 ? "ungraded" : `${t.recognisable}/${t.graded}`} |`,
+      `| ${t.date} | ${t.exam} | ${t.direction} | ${cell(t.subject)} | ${t.heldOut ? "yes" : "no (self-test)"} | \`${t.engineSha.slice(0, 8)}\` | ${t.attempted} | ${isUnmeasured(t) ? "UNMEASURED" : String(t.chainComplete)} | ${cell(stageList(t.refusedByStage))} | ${cell(stageList(t.erroredByStage))} | ${cell(stageList(t.pendingByStage))} | ${t.minted} | ${t.graded === 0 ? "ungraded" : `${t.recognisable}/${t.graded}`} |`,
     );
   }
   out.push("");
   out.push(
-    "`chain complete #1` = EVERY stage of the direction returned ok on the single attempt. `stopped: REFUSED` is the engine declining BY NAME — the honest outcome. `stopped: ERROR` is a stage that died without one. `stopped: PENDING` is a precondition OUTSIDE the engine (a canvas write needs the figma-console bridge, which a Node process cannot reach), kept in its own column because a chain that ran clean to its last stage and stopped on a missing bridge is a different fact from one the engine refused. `minted` = sets whose bytes actually reached the canvas. `recognisable #1` = graded blind against the owner's bar; `ungraded` means no `verdict.json` has been written yet, and is never rendered as a number.",
+    '`chain complete #1` = **UNMEASURED** when every set of that exam stopped at ERROR — a stage that died without a named refusal. Such a run learned nothing about the engine, so it has no rate at all: `0/N` would read as "the engine failed N times" when the truth is "the harness never got to ask". The ratchet records nothing for an UNMEASURED exam and the gate refuses it by name. Otherwise `chain complete #1` = EVERY stage of the direction returned ok on the single attempt. `stopped: REFUSED` is the engine declining BY NAME — the honest outcome. `stopped: ERROR` is a stage that died without one. `stopped: PENDING` is a stage this harness does not execute at all: `mint` is MCP-DRIVEN (docs/31 §6 — the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and a Node process is neither, so an agent holding the MCP tools performs the write and records its own evidence). It keeps its own column because a chain that ran clean to its last stage and stopped there is a different fact from one the engine refused. `minted` = sets whose bytes actually reached the canvas, evidenced. `recognisable #1` = graded blind against the owner\'s bar; `ungraded` means no `verdict.json` has been written yet, and is never rendered as a number.',
   );
   out.push("");
 
@@ -1021,6 +1419,24 @@ export function renderReceipt(
         out.push(`- ${n}× ${cell(reason)}`);
       out.push("");
     }
+    // EVIDENCE THIS RUN DID NOT DESTROY. A set whose chain aborted before it
+    // could produce a replacement keeps the earlier run's images, and that
+    // fact belongs on the record: the pictures beside this attempt are OLDER
+    // than it, and nobody should read them as its output.
+    const retaining = s.attempts.filter(
+      (a) => (a.images.retained ?? []).length > 0,
+    );
+    if (retaining.length > 0) {
+      out.push(
+        "Prior evidence RETAINED (this run aborted before it could produce a replacement, so it destroyed nothing — the images beside these sets are from an EARLIER run and are not this attempt's output):",
+      );
+      out.push("");
+      for (const a of retaining)
+        out.push(
+          `- ${cell(a.set)}: ${(a.images.retained ?? []).length} image(s) kept`,
+        );
+      out.push("");
+    }
   }
 
   out.push("## The wave-3 queue — exams the metric has NOT been pointed at");
@@ -1053,7 +1469,14 @@ export function renderReceipt(
   }
   out.push("");
   if (ratchet.reasons.length > 0) {
-    out.push("Named decreases:");
+    // NAMED MOVEMENTS, not just decreases. The gate only REQUIRES a row for a
+    // fall — a number that drops without a reason is the thing a ratchet
+    // exists to catch. But a rise with no reason is a different kind of
+    // silence: it tells a reader the tool got better without saying what
+    // changed, which is how a receipt stops being evidence. Rows may name
+    // either, and a rate that stayed FLAT while its SHAPE moved (the same 0/8
+    // stopping at a later stage, for a better reason) is worth a row too.
+    out.push("Named movements:");
     out.push("");
     out.push("| date | exam | metric | from | to | reason |");
     out.push("|---|---|---|---|---|---|");
@@ -1063,7 +1486,7 @@ export function renderReceipt(
       );
     out.push("");
   } else {
-    out.push("No named decrease has been recorded.");
+    out.push("No named movement has been recorded.");
     out.push("");
   }
 

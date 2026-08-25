@@ -3,6 +3,192 @@
   "rows": [
     {
       "component": "alert",
+      "add": {
+        "after": "color",
+        "props": [
+          {
+            "name": "icon",
+            "description": "Flowbite Alert renders the status icon only when the icon prop is passed; the developed default (gate-shots *__default) shows none.",
+            "type": "boolean",
+            "default": false,
+            "bindings": {
+              "figma": {
+                "kind": "BOOLEAN",
+                "property": "Icon"
+              },
+              "code": {
+                "prop": "icon"
+              }
+            }
+          },
+          {
+            "name": "dismissable",
+            "description": "Flowbite Alert renders the dismiss button only when onDismiss is provided; the developed default shows none.",
+            "type": "boolean",
+            "default": false,
+            "bindings": {
+              "figma": {
+                "kind": "BOOLEAN",
+                "property": "Dismissable"
+              },
+              "code": {
+                "prop": "onDismiss"
+              }
+            }
+          }
+        ]
+      },
+      "cause": "CANVAS-DEVELOPED props. Flowbite renders the status icon only when `icon` is passed and the dismiss button only when `onDismiss` is, so neither prop is enumerable from the captured mount (captured-truth.json holds root → part-0 → label and nothing else). Until 2026-08-24 this fact was HAND-WRITTEN INTO THE CAPTURE RECORD (ac5e6181 back-porting c924c9c2's hand-edited contracts), so the record claimed a provenance no run reproduced and a fresh capture refused promotion by name — parity/receipts/v1/FIRST-PASS.md, selftest-tailwind 0/8."
+    },
+    {
+      "component": "alert",
+      "part": "part-0",
+      "add": {
+        "before": "label",
+        "parts": {
+          "alert-icon": {
+            "description": "Flowbite alert status icon (icon prop) — canvas-developed anatomy; per-color glyph from Heroicons via react-icons/hi.",
+            "layout": {
+              "display": "flex",
+              "align": "center",
+              "justify": "center"
+            },
+            "parts": {
+              "alert-icon-info": {
+                "icon": {
+                  "asset": "alert-alert-icon-info",
+                  "size": 20
+                },
+                "visibleWhen": {
+                  "prop": "color",
+                  "equals": "info"
+                }
+              },
+              "alert-icon-failure": {
+                "icon": {
+                  "asset": "alert-alert-icon-failure",
+                  "size": 20
+                },
+                "visibleWhen": {
+                  "prop": "color",
+                  "equals": "failure"
+                }
+              },
+              "alert-icon-success": {
+                "icon": {
+                  "asset": "alert-alert-icon-success",
+                  "size": 20
+                },
+                "visibleWhen": {
+                  "prop": "color",
+                  "equals": "success"
+                }
+              },
+              "alert-icon-warning": {
+                "icon": {
+                  "asset": "alert-alert-icon-warning",
+                  "size": 20
+                },
+                "visibleWhen": {
+                  "prop": "color",
+                  "equals": "warning"
+                }
+              }
+            },
+            "literals": {
+              "padding-right": "12px"
+            },
+            "tokensByProp": [
+              {
+                "prop": "color",
+                "map": {
+                  "failure": {
+                    "color": "{imported.alert.label.color.failure}"
+                  },
+                  "info": {
+                    "color": "{imported.alert.label.color.info}"
+                  },
+                  "success": {
+                    "color": "{imported.alert.label.color.success}"
+                  },
+                  "warning": {
+                    "color": "{imported.alert.label.color.warning}"
+                  }
+                }
+              }
+            ],
+            "visibleWhen": {
+              "prop": "icon"
+            }
+          }
+        }
+      },
+      "cause": "CANVAS-DEVELOPED anatomy. The status icon has no captured plane at all — Flowbite mounts it only when `icon` is passed — so the per-colour glyph parts and their padding/ink were developed on the canvas. Until 2026-08-24 this fact was HAND-WRITTEN INTO THE CAPTURE RECORD (ac5e6181 back-porting c924c9c2's hand-edited contracts), so the record claimed a provenance no run reproduced and a fresh capture refused promotion by name — parity/receipts/v1/FIRST-PASS.md, selftest-tailwind 0/8."
+    },
+    {
+      "component": "alert",
+      "part": "part-0",
+      "add": {
+        "after": "label",
+        "parts": {
+          "dismiss": {
+            "description": "Flowbite dismiss control (onDismiss) — canvas-developed anatomy; close button with themed background per color.",
+            "layout": {
+              "display": "flex",
+              "align": "center",
+              "justify": "center"
+            },
+            "icon": {
+              "asset": "alert-dismiss-icon",
+              "size": 20
+            },
+            "tokens": {
+              "border-bottom-left-radius": "{imported.shared.size-8}",
+              "border-bottom-right-radius": "{imported.shared.size-8}",
+              "border-top-left-radius": "{imported.shared.size-8}",
+              "border-top-right-radius": "{imported.shared.size-8}"
+            },
+            "literals": {
+              "height": "32px",
+              "width": "32px",
+              "padding-top": "6px",
+              "padding-bottom": "6px",
+              "padding-left": "6px",
+              "padding-right": "6px"
+            },
+            "tokensByProp": [
+              {
+                "prop": "color",
+                "map": {
+                  "failure": {
+                    "background-color": "{imported.alert.root.background-color.failure}",
+                    "color": "{imported.alert.label.color.failure}"
+                  },
+                  "info": {
+                    "background-color": "{imported.alert.root.background-color.info}",
+                    "color": "{imported.alert.label.color.info}"
+                  },
+                  "success": {
+                    "background-color": "{imported.alert.root.background-color.success}",
+                    "color": "{imported.alert.label.color.success}"
+                  },
+                  "warning": {
+                    "background-color": "{imported.alert.root.background-color.warning}",
+                    "color": "{imported.alert.label.color.warning}"
+                  }
+                }
+              }
+            ],
+            "visibleWhen": {
+              "prop": "dismissable"
+            }
+          }
+        }
+      },
+      "cause": "CANVAS-DEVELOPED anatomy. The dismiss control mounts only when `onDismiss` is passed, so no captured plane carries the button, its themed background, or its radius. Until 2026-08-24 this fact was HAND-WRITTEN INTO THE CAPTURE RECORD (ac5e6181 back-porting c924c9c2's hand-edited contracts), so the record claimed a provenance no run reproduced and a fresh capture refused promotion by name — parity/receipts/v1/FIRST-PASS.md, selftest-tailwind 0/8."
+    },
+    {
+      "component": "alert",
       "prop": "dismissable",
       "edit": {
         "description": {

@@ -21,9 +21,19 @@ const PACKAGES = [
   {
     directory: "packages/schema",
     // Reviewed 2026-08-23 for schema 17: dist/migrate.* (the v16 → v17 codemod) ships.
+    // Reviewed 2026-08-25 for schema 19 (REQUIRED FACTS): dist/archetype.* ships.
+    // It is the archetype vocabulary itself — the 20 classes plus `none`, the
+    // name-map `ds-contracts migrate` seeds from, and `resolveArchetype`, which
+    // is the declared/name-mapped/unmapped rule. contract-schema.ts re-exports
+    // it so `archetype` can be spelled by every existing import path, and the
+    // required-facts referee in @ds-contracts/core reads it. A consumer that
+    // validates a v19 contract needs the enum, so this is public surface by
+    // intent, not a build artifact that leaked.
     expected: [
       "README.md",
       "contract.schema.json",
+      "dist/archetype.d.ts",
+      "dist/archetype.js",
       "dist/contract-schema.d.ts",
       "dist/contract-schema.js",
       "dist/index.d.ts",
@@ -39,6 +49,10 @@ const PACKAGES = [
     directory: "packages/core",
     // Reviewed 2026-08-23 for slice 3 (the cheap pure siblings: figma-names,
     // canvas-code-plan, emit-tokens-css, grid-css joined the package).
+    // Reviewed 2026-08-25 for schema 19 (REQUIRED FACTS): dist/required-facts.*
+    // ships — it IS the referee (`checkRequiredFacts`), and the plugin engine
+    // and `figma bundle` both refuse through it, so a consumer minting outside
+    // this repo needs it to get the same refusals rather than a silent mint.
     // Reviewed 2026-08-23 for fix round 1: prop-collision + its @types/react table ship.
     // Reviewed 2026-08-22 for slice 2 (anatomy / elements / grid / validate / css
     // joined the package — the analysis half of emit-react).
@@ -72,6 +86,8 @@ const PACKAGES = [
       "dist/prop-collision.js",
       "dist/prop-collision.table.d.ts",
       "dist/prop-collision.table.js",
+      "dist/required-facts.d.ts",
+      "dist/required-facts.js",
       "dist/tokens.d.ts",
       "dist/tokens.js",
       "dist/validate.d.ts",

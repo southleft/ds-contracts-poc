@@ -72,7 +72,12 @@ sandbox recipe from its `PROVENANCE.md`.
 | `validate` | `validateContract` — the referee (`core/emit-react.ts`). It has no CLI verb; see [07 — Validation](07-validation.md) |
 | `generate` | `npx ds-contracts generate <contract> --out <dir> --tokens <dtcg>,<minted> --stories` |
 | `bundle` | `npx ds-contracts figma <contracts> --out <dir>` then `npx ds-contracts figma bundle … --out <lib>.bundle.json` |
-| `mint` | re-emit with `--file-key byMp6lt0Ij9b2QbkDGFwBh`, then drive the figma-console bridge |
+| `mint` | **MCP-driven, not harness-driven** (§6) — the harness re-emits with `--file-key byMp6lt0Ij9b2QbkDGFwBh` and stops at the guard-carrying script; an agent holding the figma-console MCP tools performs the write and records its own evidence |
+
+Every stage but `mint` carries `driver: "harness"` in `attempt.json` — the exam
+runner shells the documented command out itself. `mint` carries
+`driver: "mcp"`, because the write is not a thing this process can do at all;
+see §6.
 
 The whole chain runs inside a **shadow root** — a directory of symlinks to the
 checkout in which only the paths the pipeline writes are real, private copies,
@@ -171,6 +176,40 @@ npm run first-pass:check                                      # the gate
 npm run first-pass:check -- --self-test                       # falsify the gate
 ```
 
+### Preflight, and what the exit code means
+
+**The committed packet is evidence, and a run that cannot produce a
+replacement never clears it.** Before an exam touches a single committed byte,
+`preflight()` checks every precondition it needs and refuses BY NAME, with the
+exact command that fixes it:
+
+- the declared capture harness — the **git-ignored** sandbox from the library's
+  `PROVENANCE.md` — exists, carries the library at the version the capture
+  config pins, and has `react`, `react-dom` and `esbuild`;
+- the capture config and `ds-library.json` exist and parse;
+- direction B: a Figma token is in the environment, the file key is not one of
+  the forbidden keys, every declared corpus file is on disk (an absent one used
+  to be dropped silently, which changes the exam's input), and the exam selects
+  at least one page;
+- the work directory and the packet directory are writable.
+
+| exit | meaning |
+|---|---|
+| `0` | the run **measured something** — a completed chain, or an honest `REFUSED`, which is the finding the exam exists to collect |
+| `1` | the run **measured nothing** — every set stopped at `ERROR`, a stage that died without a named refusal. There is no rate: the receipt renders `UNMEASURED`, the ratchet records nothing, and the gate refuses the exam by name |
+| `2` | **preflight refused** — the run never started and nothing was touched |
+
+`0/8` and `UNMEASURED` are different claims. `0/8` says the engine failed eight
+times; `UNMEASURED` says the harness never got to ask. Collapsing them is the
+same class as a killed suite reading as a pass.
+
+Images are cleared **per set, at the instant that set's replacement is
+written** — never up front. A set whose chain aborts first keeps every byte it
+had and records them in `attempt.json` as `images.retained`, with the reason in
+`images.absent`; the receipt names the sets whose pictures are older than their
+attempt. The gate refuses an orphan image, and refuses a packet whose `ref` or
+`code` surface vanished with no recorded reason.
+
 Exams are registered in `extract/figma/census/first-pass.ts`:
 
 - `EXAMS` — exams with a runner. The gate refuses a registered exam that has
@@ -196,7 +235,7 @@ library nobody has captured.
 
 ---
 
-## 6 · Mint, and the file-key assertion
+## 6 · Mint is an MCP-driven stage, and the file-key assertion
 
 Only one Figma file is writable: the Scratch Project
 `byMp6lt0Ij9b2QbkDGFwBh`. The mint stage re-emits every component script with
@@ -215,13 +254,87 @@ bytes, and refuses any script naming a forbidden key. The bridge keeps several
 files connected at once and has been observed routing to the wrong one, so
 "we did not touch it" is a checked fact here, not an intention.
 
-When no bridge command endpoint answers, the exam stops at **"bundle produced,
-mint pending"** and says so in the packet, in the manifest and in the receipt.
-A pending mint is recorded — never quietly dropped, and never counted as minted.
+### Who runs it — and who cannot
 
----
+**The harness cannot perform the canvas write, and no configuration changes
+that.** The figma-console bridge speaks **MCP over stdio to its own client**
+and **WebSocket to plugin clients**. A Node process shelling commands is
+neither. There is no command endpoint to find.
 
-## 7 · Where this sits
+Until 2026-08-24 this was modelled as a *probe*: the runner scanned
+`127.0.0.1:9223-9232` for a "COMMAND endpoint" and printed what answered
+(`9228:200`, and so on). The refusal was honest; the premise was not. Printing
+a port that responded invited the reader to believe the write was one
+configuration away. It is not one configuration away — **it is a different
+actor**.
+
+So `mint` is modelled for what it is:
+
+| | who | what they do | what is recorded |
+|---|---|---|---|
+| harness | the exam runner (Node) | runs the documented `--file-key` re-emit, asserts the WRONG-FILE guard is in the bytes, stops | the stage record, `driver: "mcp"`, the script's sha256 |
+| driver | an **agent holding the figma-console MCP tools** | pastes/executes the guard-carrying script against the scratch file | `parity/receipts/v1/first-pass/<exam>/mint-evidence.json` |
+
+With no `mint-evidence.json` the stage is **PENDING** with the architecture
+named, never "unavailable" and never a number. With one, the stage is `ok` and
+`minted` counts it. The manifest carries `mint.driver: "mcp"` and
+`mint.evidence` (the path or `null`) so the receipt can never imply a
+capability this harness does not have.
+
+**This does not weaken the no-retry rule.** The MCP-driven mint gets exactly
+one attempt too, and its evidence records that attempt — never a best-of. An
+agent that runs the script twice has run a heal loop, and the exam is void.
+
+## 7 · What the first exam found, and the gates that keep it found
+
+The first run of `selftest-tailwind` scored **0/8**, and all eight sets died at
+the same stage with the same sentence:
+
+```
+✘ authored alert prop dismissable: prop "dismissable" is not exactly one entry of props[]
+```
+
+The cause was not a bug in `promote`. A fresh capture of Alert produces the
+props `[color, children]`; the committed capture record
+(`extract/computed/out/tailwind/alert/enriched.contract.json`) carried
+`[color, icon, dismissable, children]` **and six anatomy parts**, none of which
+any committed input produces. They were written into the record by hand —
+`ac5e6181`'s own commit message says so: *"the hill-climb hand-edited committed
+contracts … without back-porting promote inputs"*. The corpus was not
+re-derivable from its own inputs, and no gate could see it, because every gate
+started from the record rather than from the seed.
+
+Three gates now hold the line, and each answers a different derivation:
+
+| gate | question | lane |
+|---|---|---|
+| `npm run corpus:reproducible:check` | do the committed capture record + authored facts re-promote to the committed contracts, byte for byte? | fast |
+| `npm run corpus:reproducible:check -- --capture` | does the committed seed + config + sandbox re-derive the committed capture record's STRUCTURE? | out of band; the run RECORDS its measurement, and the fast lane judges that record |
+| `npm run bundles:fresh` | does every committed `examples/*/figma/*.bundle.json` — the JSON a designer pastes — rebuild byte-identically from its committed contracts and token layers? | full |
+
+Every divergence any of them finds must be NAMED in
+`parity/receipts/v1/corpus-reproducible.json` with its reviewed cause; an
+unnamed one refuses, and so does a named one that has since been fixed. The
+receipt is [CORPUS-REPRODUCIBLE.md](../parity/receipts/v1/CORPUS-REPRODUCIBLE.md).
+
+What the first full sweep found, and the reason the two halves are separate
+gates: **the two derivations fail in different places.** Seven of eight
+libraries re-promote byte-identically and the eighth (polaris) re-derives its
+capture records **12/12** — its break is entirely between the record and the
+contract, in eight hand-edited contracts with no authored ledger. Meanwhile
+carbon and mui re-promote perfectly and diverge on the CAPTURE side, where
+their committed records sit behind engine fixes that landed after they were
+last recorded. A single "is the corpus reproducible?" number would have hidden
+both.
+
+The cure for a fact the capture genuinely cannot carry is the **authored-facts
+door** (`examples/<lib>/authored-facts.json`, applied by
+`packages/cli/src/promote.ts`), not an edit to the record. Alert's four
+canvas-developed facts ride it now, through the door's `add` operation — a
+named, refusable INPUT that dies by name the day the capture learns to produce
+it.
+
+## 8 · Where this sits
 
 - [21 — Bring your own design system](21-bring-your-own-design-system.md) — the
   code→canvas chain this exam runs, with the real commands.
@@ -229,3 +342,5 @@ A pending mint is recorded — never quietly dropped, and never counted as minte
 - [07 — Validation](07-validation.md) — the referee the `validate` stage calls.
 - [23 — Known limitations](23-known-limitations.md) — the named walls a grader
   may cite.
+- [CORPUS-REPRODUCIBLE.md](../parity/receipts/v1/CORPUS-REPRODUCIBLE.md) — the
+  receipt for §7's gates: which libraries re-derive, and every named divergence.

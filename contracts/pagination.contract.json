@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "status": "draft",
   "description": "Steps through pages of content, below a table or list. API mirrors industry convention (Astryx Pagination) with three display variants; page math and click behavior are declared boundaries — the pages variant shows a representative trail.",
+  "archetype": "pagination",
   "semantics": {
     "element": "nav"
   },

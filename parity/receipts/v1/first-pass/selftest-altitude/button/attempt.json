@@ -11,24 +11,25 @@
     {
       "stage": "capture",
       "status": "ok",
-      "ms": 31744,
+      "ms": 31392,
+      "driver": "harness",
       "command": "npx tsx extract/computed/run.ts --harness examples/altitude/.altitude-sandbox --config extract/computed/configs/altitude.json --component Button --out extract/computed/out/altitude --keep-originals",
       "message": "3 artifact(s)",
       "artifacts": [
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-Mc59HL/root/extract/computed/out/altitude/button/enriched.contract.json",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/root/extract/computed/out/altitude/button/enriched.contract.json",
           "sha256": "540731664fb65fb6ba69a8db471c4ff153ca3cb6afce1a54f983433c3c77000f",
           "bytes": 13311,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-Mc59HL/root/extract/computed/out/altitude/button/scorecard.json",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/root/extract/computed/out/altitude/button/scorecard.json",
           "sha256": "a341667667a9a5deee9d5fd8ec226f2a4894363fd84d05342d3d54e1b202b264",
           "bytes": 48017,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-Mc59HL/root/extract/computed/out/altitude/button/captured-truth.json",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/root/extract/computed/out/altitude/button/captured-truth.json",
           "sha256": "25bf00b2245fdf5bb9364bef6a43846b7b644df4049a79a229f786a0741418af",
           "bytes": 224392,
           "committed": false
@@ -98,12 +99,13 @@
     {
       "stage": "promote",
       "status": "ok",
-      "ms": 1083,
+      "ms": 1160,
+      "driver": "harness",
       "command": "npx tsx packages/cli/src/cli.ts promote --config examples/altitude/ds-library.json",
       "message": "examples/altitude/contracts/button.contract.json",
       "artifacts": [
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-Mc59HL/root/examples/altitude/contracts/button.contract.json",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/root/examples/altitude/contracts/button.contract.json",
           "sha256": "e7c6eb833f8aef0bf931d1503834a5629eb1b6c202e7153e02b4c6c0502cbc9b",
           "bytes": 13609,
           "committed": false
@@ -114,6 +116,7 @@
       "stage": "validate",
       "status": "ok",
       "ms": 7,
+      "driver": "harness",
       "command": "core/emit-react.ts validateContract (the referee — no CLI verb; docs/07)",
       "message": "no violations",
       "artifacts": []
@@ -121,42 +124,43 @@
     {
       "stage": "generate",
       "status": "ok",
-      "ms": 1431,
+      "ms": 706,
+      "driver": "harness",
       "command": "npx ds-contracts generate examples/altitude/contracts/button.contract.json --out <out> --tokens <dtcg>,<minted> --icons examples/altitude/assets/icons --stories",
       "message": "6 file(s)",
       "artifacts": [
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-Mc59HL/generated/button/index.ts",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/generated/button/index.ts",
           "sha256": "a67b614da63da7c7f7be962820afcd132f16fc65f5b3f15b662626ae908cdf07",
           "bytes": 49,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-Mc59HL/generated/button/tokens.css",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/generated/button/tokens.css",
           "sha256": "51b55b29fdf343effa3f11152668dcb8aeb90014badd50bdd00fba00f2c01ed9",
           "bytes": 34635,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-Mc59HL/generated/button/Button/Button.module.css",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/generated/button/Button/Button.module.css",
           "sha256": "e3908446c0a9b45239f9ebbcc1302b36f01ac6d5c9fdd4094b812b2f14e3f14f",
           "bytes": 7068,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-Mc59HL/generated/button/Button/Button.stories.tsx",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/generated/button/Button/Button.stories.tsx",
           "sha256": "a04273baf553b3d443f622699ef67d9c66e1ab6f32ebae0f4526d5851ec0fbe5",
           "bytes": 3337,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-Mc59HL/generated/button/Button/Button.tsx",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/generated/button/Button/Button.tsx",
           "sha256": "819896b42608c639309121efc4518f78059be15f99d7a5bd8714e7220a9299b3",
           "bytes": 2410,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-Mc59HL/generated/button/Button/index.ts",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/generated/button/Button/index.ts",
           "sha256": "73b563fcd1c682da3aea99406157d50b4197a966444b6c08c9e17db0d5b629b8",
           "bytes": 80,
           "committed": false
@@ -166,18 +170,19 @@
     {
       "stage": "bundle",
       "status": "ok",
-      "ms": 1943,
+      "ms": 1403,
+      "driver": "harness",
       "command": "npx ds-contracts figma examples/altitude/contracts --out examples/altitude/figma --tokens <dtcg>,<minted> && npx ds-contracts figma bundle examples/altitude/contracts --name Altitude --out examples/altitude/figma/altitude.bundle.json",
       "message": "button.figma.js + altitude.bundle.json",
       "artifacts": [
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-Mc59HL/root/examples/altitude/figma/button.figma.js",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/root/examples/altitude/figma/button.figma.js",
           "sha256": "1ef613480c47ec02d50551b5b65518ad82f2cc9c0e88ff12f2664cf24295bd70",
           "bytes": 122305,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-Mc59HL/root/examples/altitude/figma/altitude.bundle.json",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/root/examples/altitude/figma/altitude.bundle.json",
           "sha256": "38785f75bec2a15e36c13b3823c7643f55e320380fe0911c453b15ac4b87e430",
           "bytes": 282363,
           "committed": false
@@ -187,12 +192,13 @@
     {
       "stage": "mint",
       "status": "PENDING",
-      "ms": 901,
-      "command": "npx ds-contracts figma … --file-key byMp6lt0Ij9b2QbkDGFwBh  →  run through the figma-console bridge",
-      "message": "runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; bridge: no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 (probed /health: 9225:404, 9226:404, 9228:200, 9230:404). The local bridge serves MCP over stdio to its own client and WebSocket to plugin clients; a Node process cannot issue a canvas write through either. Bundle produced, mint pending — the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact.",
+      "ms": 730,
+      "driver": "mcp",
+      "command": "npx ds-contracts figma … --file-key byMp6lt0Ij9b2QbkDGFwBh  →  an MCP-holding agent runs it through the figma-console bridge",
+      "message": "runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-altitude/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact.",
       "artifacts": [
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-Mc59HL/mint/button.figma.js",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-altitude-VX09uf/mint/button.figma.js",
           "sha256": "cf6659c95b68a78fb6e0fedf4636ad3750153d95647c8b118d3c8ac430c6c4de",
           "bytes": 122325,
           "committed": false
@@ -204,7 +210,7 @@
   "firstStop": {
     "stage": "mint",
     "status": "PENDING",
-    "message": "runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; bridge: no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 (probed /health: 9225:404, 9226:404, 9228:200, 9230:404). The local bridge serves MCP over stdio to its own client and WebSocket to plugin clients; a Node process cannot issue a canvas write through either. Bundle produced, mint pending — the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact."
+    "message": "runnable script emitted with the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh; no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-altitude/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact."
   },
   "images": {
     "ref": [
@@ -225,9 +231,9 @@
     "absent": [
       {
         "kind": "canvas",
-        "reason": "mint PENDING — no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 (probed /health: 9225:404, 9226:404, 9228:200, 9230:404). The local bridge serves MCP over stdio to its own client and WebSocket to plugin clients; a Node process cannot issue a canvas write through either. Bundle produced, mint pending — the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact."
+        "reason": "mint PENDING — no MCP-driven mint evidence is recorded — the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at parity/receipts/v1/first-pass/selftest-altitude/mint-evidence.json. Bundle produced, mint pending: the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact."
       }
     ]
   },
-  "totalMs": 37109
+  "totalMs": 35398
 }

@@ -177,11 +177,12 @@ async function main() {
 
   console.log('phase 1 — capture sweep…');
   const fontProbes = ['-apple-system', 'Segoe UI', 'Inter'];
-  const run1 = await sweep(page, standardMounts, { screenshots: scratchShots, fontProbes, classAllow: cfg.library.classAllow, varPrefix: cfg.library.varPrefix });
+  const uaBaseline = { stage: cfg.stage, colorScheme: cfg.browser.colorScheme };
+  const run1 = await sweep(page, standardMounts, { screenshots: scratchShots, fontProbes, classAllow: cfg.library.classAllow, varPrefix: cfg.library.varPrefix, uaBaseline });
   console.log(`  ${run1.captures.length} captures, ${run1.allProps.length} channels enumerated, browser ${run1.browserVersion}`);
 
   console.log('phase 1 — determinism: second full sweep (no screenshots)…');
-  const run2 = await sweep(page, standardMounts, { fontProbes, classAllow: cfg.library.classAllow, varPrefix: cfg.library.varPrefix });
+  const run2 = await sweep(page, standardMounts, { fontProbes, classAllow: cfg.library.classAllow, varPrefix: cfg.library.varPrefix, uaBaseline });
 
   // ---- portal sweeps (MOLECULE round): one two-phase page per component,
   // every combo mounted/reset in isolation, double-swept for determinism,
@@ -208,7 +209,7 @@ async function main() {
     await pPage.close();
     console.log(`  ${p1.captures.length} portal captures (${p1.receipts.length} receipt(s))`);
   }
-  const canon = (r: SweepResult) => JSON.stringify({ captures: r.captures, controls: r.controls });
+  const canon = (r: SweepResult) => JSON.stringify({ captures: r.captures, controls: r.controls, uaControls: r.uaControls });
   const deterministic = canon(run1) === canon(run2);
   let determinismDetail = 'byte-identical across two full sweeps in one session';
   if (!deterministic) {
@@ -298,6 +299,11 @@ async function main() {
         unstable.add('(serialized-capture)');
         witnesses.push(
           `${run1.captures[idx].combo}__${run1.captures[idx].interaction}: capture #${idx} serializes differently in a field no field-level witness reads (pseudo-element planes and controls are both inside canon()). First divergence at char ${k}: …${s1.slice(Math.max(0, k - 120), k + 120)}… VS …${s2.slice(Math.max(0, k - 120), k + 120)}…`,
+        );
+      } else if (JSON.stringify(run1.uaControls) !== JSON.stringify(run2.uaControls)) {
+        unstable.add('(uaControls)');
+        witnesses.push(
+          `UA CONTROLS: every capture is byte-identical; the divergence is in the sweep's UA BASELINE probes (a library-free page) — sweep 1 ${JSON.stringify(run1.uaControls)} vs sweep 2 ${JSON.stringify(run2.uaControls)}`,
         );
       } else if (JSON.stringify(run1.controls) !== JSON.stringify(run2.controls)) {
         unstable.add('(controls)');
@@ -545,6 +551,10 @@ async function main() {
         contract: comp.contract,
         library: `${cfg.library.package}@${cfg.library.version}`,
         browser: `Chromium ${run1.browserVersion} (playwright-core, headless)`,
+        // The browser that measured `uaControls`. Same browser on a live
+        // sweep; a BACKFILLED baseline (ua-baseline-backfill.ts) can name a
+        // different one, and that has to be readable rather than assumed.
+        uaBaselineBrowser: `Chromium ${run1.uaBaselineBrowser} (playwright-core, headless)`,
         viewport: cfg.browser.viewport,
         deviceScaleFactor: cfg.browser.deviceScaleFactor,
         colorScheme: cfg.browser.colorScheme,
@@ -591,6 +601,11 @@ async function main() {
       anatomy: truthAnatomy as never,
       base: { key: `${space.baseComboKey}__default`, root: aligned.base.root },
       controls: run1.controls,
+      // THE UA BASELINE — the four control tags measured with none of the
+      // library's CSS (capture.captureUaControls). `controls` above stays,
+      // because the DIFFERENCE between the two is the evidence that a channel
+      // came from the library's page-global CSS rather than from the browser.
+      uaControls: run1.uaControls,
       captures: truthCaptures,
     };
 
@@ -834,11 +849,12 @@ async function main() {
     // task #20: fusion is told what the capture WINDOW and the stage were, so
     // a measurement of the harness cannot pass for a measurement of the
     // library (viewport-derived geometry is refused by name in styledChannels).
+    const uaControlStyles = Object.fromEntries(Object.entries(run1.uaControls).map(([t, n]) => [t, n.style]));
     const styled = styledChannels(aligned, space, controlStyles, run1.allProps, styledReceipts, {
       viewport: cfg.browser.viewport,
       stage: stageFor(cfg, comp),
       portaled: comp.portalCapture === true,
-    });
+    }, uaControlStyles);
 
     // ---- fusion (against the PROMOTED contract) ----
     console.log('  phase 2 — fusion…');

@@ -41,7 +41,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { loadConfig, propSpaceFor, stageFor, type CaptureConfig, type ComponentConfig, type SweepResult } from './capture.js';
-import { alignSweep, styledChannels, type FusionEnv } from './fuse.js';
+import { alignSweep, styledChannels, uaStyles, type FusionEnv } from './fuse.js';
 import { reconstructCaptures, type CapturedTruthFile } from './replay.js';
 import type { CapturedNode } from './lib.js';
 
@@ -92,7 +92,7 @@ function fuse(
     stage: stageFor(cfg, comp),
     portaled: comp.portalCapture === true,
   };
-  const styled = styledChannels(aligned, space, controlStyles, truth._provenance.channels, receipts, env);
+  const styled = styledChannels(aligned, space, controlStyles, truth._provenance.channels, receipts, env, uaStyles(truth));
   const value = (part: string, channel: string): string | undefined => {
     const pi = aligned.partNames.indexOf(part);
     return pi < 0 ? undefined : aligned.baseFlat[pi].node.style[channel];

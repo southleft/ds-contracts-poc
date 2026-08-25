@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "status": "draft",
   "description": "Form field wrapper providing a label, description, and required indicator around any control. API mirrors industry convention (Astryx Field): the label targets the control via inputID; validation status needs structured-object props — a documented gap.",
+  "archetype": "input / field",
   "semantics": {
     "element": "div"
   },

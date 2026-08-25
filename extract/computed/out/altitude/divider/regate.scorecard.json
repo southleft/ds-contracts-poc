@@ -12,6 +12,11 @@
       },
       {
         "part": "root",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", sans-serif"
+      },
+      {
+        "part": "root",
         "channel": "overflow-x",
         "value": "hidden"
       },
@@ -32,8 +37,8 @@
     "combos": 2,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 144,
-      "cellsEqual": 144,
+      "cellsCompared": 168,
+      "cellsEqual": 168,
       "pctEqual": 100,
       "rowsFullyEqual": 8,
       "rows": 8
@@ -56,11 +61,11 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 8,
-      "mintedLeavesUnfolded": 8,
-      "baseBindings": 6,
+      "mintedLeaves": 9,
+      "mintedLeavesUnfolded": 9,
+      "baseBindings": 7,
       "stateBindings": 0,
-      "codeOnlyChannels": 1,
+      "codeOnlyChannels": 2,
       "overflowBindings": 0,
       "folds": 10
     },
@@ -124,6 +129,7 @@
     ],
     "topMismatchedChannels": [],
     "namedLosses": [
+      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <hr>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <hr> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: root.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <hr>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <hr> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it."
     ],
     "unresolvedTokenRefs": {
@@ -151,8 +157,8 @@
     "rows": [
       {
         "key": "unset__default",
-        "channelsCompared": 18,
-        "channelsEqual": 18,
+        "channelsCompared": 21,
+        "channelsEqual": 21,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -161,8 +167,8 @@
       },
       {
         "key": "unset__hover",
-        "channelsCompared": 18,
-        "channelsEqual": 18,
+        "channelsCompared": 21,
+        "channelsEqual": 21,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -171,8 +177,8 @@
       },
       {
         "key": "unset__focus-visible",
-        "channelsCompared": 18,
-        "channelsEqual": 18,
+        "channelsCompared": 21,
+        "channelsEqual": 21,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -181,8 +187,8 @@
       },
       {
         "key": "unset__active",
-        "channelsCompared": 18,
-        "channelsEqual": 18,
+        "channelsCompared": 21,
+        "channelsEqual": 21,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -191,8 +197,8 @@
       },
       {
         "key": "vertical__default",
-        "channelsCompared": 18,
-        "channelsEqual": 18,
+        "channelsCompared": 21,
+        "channelsEqual": 21,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -201,8 +207,8 @@
       },
       {
         "key": "vertical__hover",
-        "channelsCompared": 18,
-        "channelsEqual": 18,
+        "channelsCompared": 21,
+        "channelsEqual": 21,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -211,8 +217,8 @@
       },
       {
         "key": "vertical__focus-visible",
-        "channelsCompared": 18,
-        "channelsEqual": 18,
+        "channelsCompared": 21,
+        "channelsEqual": 21,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -221,8 +227,8 @@
       },
       {
         "key": "vertical__active",
-        "channelsCompared": 18,
-        "channelsEqual": 18,
+        "channelsCompared": 21,
+        "channelsEqual": 21,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

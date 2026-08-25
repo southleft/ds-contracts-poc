@@ -48,7 +48,7 @@ import { emitHtml as coreEmitHtml } from '../core/emit-html.js';
 import { tokenInventoryFromJson } from '../core/tokens.js';
 // DEPTH BUILD Stage A+B pins (pure — production capture/anatomy over committed
 // receipts; the evals NEVER launch a browser).
-import { loadConfig as loadCaptureConfig, propSpaceFor, stageFor } from '../extract/computed/capture.js';
+import { loadConfig as loadCaptureConfig, propSpaceFor, stageFor, comboProps as captureComboProps, importRoot as captureImportRoot, componentsMapLiteral as captureComponentsMap } from '../extract/computed/capture.js';
 import {
   buildUnion as depthBuildUnion,
   buildMultiRootUnion,
@@ -7885,6 +7885,231 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     },
   },
   {
+    /*  HELD-OUT ROUND, GRAMMAR CLOSURE 1 — `importName` may name a compound
+     *  (dotted) export. Modern React libraries are overwhelmingly compound
+     *  (`TextField.Root`, `Callout.Root`, `Tabs.Trigger`); the harness used to
+     *  emit `importName` VERBATIM into `import { … }`, so a dotted name was a
+     *  syntax error and the only mount was a sandbox barrel — which makes
+     *  `library.package`/`version` describe the barrel, not the subject. */
+    id: 'grammar-compound-import',
+    claim: 'C2-refusal',
+    run: () => {
+      // ---- 1. the split: root binding imported, member path referenced ----
+      if (captureImportRoot('TextField.Root') !== 'TextField') throw new Error('importRoot lost the namespace root');
+      if (captureImportRoot('Button') !== 'Button') throw new Error('importRoot changed an undotted name');
+      const dotted = ['Button', 'TextField.Root', 'TextField.Slot', 'Tabs.Trigger'];
+      const roots = [...new Set(dotted.map(captureImportRoot))].sort();
+      if (roots.join(',') !== 'Button,Tabs,TextField') {
+        throw new Error(`two members of one namespace must import ONE binding, got: ${roots.join(',')}`);
+      }
+      // ---- 2. COMPONENTS is keyed by the FULL dotted name, or two members of
+      //         one namespace would collapse onto the same key ----
+      const mapDotted = captureComponentsMap(dotted);
+      for (const n of dotted) {
+        if (!mapDotted.includes(`${JSON.stringify(n)}: ${n}`)) {
+          throw new Error(`COMPONENTS does not key "${n}" to the member expression: ${mapDotted}`);
+        }
+      }
+      // ---- 3. THE REGRESSION BAR: with no dotted name among them the ES6
+      //         shorthand is emitted exactly as before, so every committed
+      //         library's harness entry — and its captured truth — is
+      //         byte-unchanged. ----
+      if (captureComponentsMap(['Alert', 'Badge']) !== '{ Alert, Badge }') {
+        throw new Error(`an undotted mount must emit the pre-round shorthand, got: ${captureComponentsMap(['Alert', 'Badge'])}`);
+      }
+      // ---- 4. the malformed spellings refuse BY NAME ----
+      mkdirSync(SCRATCH, { recursive: true });
+      const cfgPath = path.join(SCRATCH, 'compound-import-config.json');
+      const write = (mutate: (c: Record<string, unknown>) => void, from: string): string => {
+        const c = JSON.parse(readFileSync(path.join(ROOT, 'extract/computed/configs', from), 'utf8')) as Record<string, unknown>;
+        mutate(c);
+        writeFileSync(cfgPath, JSON.stringify(c, null, 2));
+        try { loadCaptureConfig(ROOT, cfgPath); } catch (e) { return (e as Error).message; }
+        return '';
+      };
+      // a dot on a custom-element library is a TAG NAME typo, not a namespace
+      const ce = write((c) => {
+        (c.components as Array<{ name: string; importName: string }>).find((x) => x.name === 'Button')!.importName = 'Text.Field';
+      }, 'bootstrap5.json');
+      if (!ce.includes('library.customElements is true')) {
+        throw new Error(`a dotted importName on a customElements library was not refused by name: ${ce || '(accepted)'}`);
+      }
+      const bad = write((c) => {
+        (c.components as Array<{ importName: string }>)[0].importName = 'DayPicker.2Root';
+      }, 'day-picker.json');
+      if (!bad.includes('not a JavaScript identifier')) {
+        throw new Error(`a non-identifier member segment was not refused by name: ${bad || '(accepted)'}`);
+      }
+      // ---- 5. the SILENT half: the seed generator resolves declarations by
+      //         name, and a dotted name matched no file — `propsOf` returns []
+      //         on a miss, so a compound component would have proposed ZERO
+      //         axes and the receipt would have blamed judgment. ----
+      const seedGen = readFileSync(path.join(ROOT, 'extract/computed/seed-gen.ts'), 'utf8');
+      if (!seedGen.includes('name.includes(\'.\')')) {
+        throw new Error('seed-gen declFor is no longer compound-aware — a dotted importName silently proposes zero axes');
+      }
+      // ---- 6. and the committed configs still load ----
+      for (const f of ['radix-themes.json', 'mui.json', 'bootstrap5.json']) {
+        loadCaptureConfig(ROOT, path.join(ROOT, 'extract/computed/configs', f));
+      }
+    },
+  },
+  {
+    /*  HELD-OUT ROUND, GRAMMAR CLOSURE 2 — ordered class-token axes.
+     *  `comboProps` folds every axis into ONE FLAT BAG by assignment, so two
+     *  class-token axes were last-writer-wins: Bootstrap's `variant × size`
+     *  mounted `className: "btn btn-lg"` and SILENTLY DROPPED THE VARIANT.
+     *  `btn-sm`/`btn-lg` was deferred by name rather than ship that. */
+    id: 'grammar-ordered-class-tokens',
+    claim: 'C2-refusal',
+    run: () => {
+      const cfg = loadCaptureConfig(ROOT, path.join(ROOT, 'extract/computed/configs/bootstrap5.json'));
+      const btn = cfg.components.find((c) => c.name === 'Button');
+      if (!btn) throw new Error('bootstrap5 lost its Button');
+      if (btn.axes.join(',') !== 'variant,size') {
+        throw new Error(`bootstrap5 Button must enumerate variant × size (btn-sm/btn-lg un-deferred), got: ${btn.axes.join(',')}`);
+      }
+      const space = propSpaceFor(ROOT, cfg, btn);
+      const variants = space.axes.find((a) => a.prop === 'variant')!.values;
+      const sizes = space.axes.find((a) => a.prop === 'size')!.values;
+      const classes = space.enumeration.combos.map((combo) => String((captureComboProps(btn, space, combo) as Record<string, unknown>).className));
+
+      // ---- 1. every combo carries its BASE and its VARIANT token ----
+      for (const c of classes) {
+        if (!c.startsWith('btn ')) throw new Error(`a mounted className lost the base token: ${JSON.stringify(c)}`);
+        const tokens = c.split(' ');
+        if (!tokens.some((t) => t !== 'btn' && !t.endsWith('-sm') && !t.endsWith('-lg'))) {
+          throw new Error(`THE SILENT DROP IS BACK: ${JSON.stringify(c)} carries a size but no variant token`);
+        }
+      }
+      // ---- 2. the product is COMPLETE: one distinct class string per
+      //         (variant, size) pair, in declared axis order ----
+      const distinct = new Set(classes);
+      if (distinct.size !== variants.length * sizes.length) {
+        throw new Error(`variant × size should mount ${variants.length * sizes.length} distinct class strings, got ${distinct.size}`);
+      }
+      for (const spelling of ['btn btn-primary btn-lg', 'btn btn-outline-secondary btn-sm', 'btn btn-link']) {
+        if (!distinct.has(spelling)) throw new Error(`ordered class tokens did not compose ${JSON.stringify(spelling)}`);
+      }
+      // order is DECLARED order, never sorted or hashed
+      if (distinct.has('btn btn-lg btn-primary')) throw new Error('class tokens are not in declared axis order');
+
+      // ---- 3. the unexpressible collisions refuse BY NAME ----
+      mkdirSync(SCRATCH, { recursive: true });
+      const cfgPath = path.join(SCRATCH, 'class-token-config.json');
+      const refuseWith = (mutate: (b: Record<string, unknown>) => void): string => {
+        const c = JSON.parse(readFileSync(path.join(ROOT, 'extract/computed/configs/bootstrap5.json'), 'utf8')) as {
+          components: Array<Record<string, unknown>>;
+        };
+        mutate(c.components.find((x) => x.name === 'Button')!);
+        writeFileSync(cfgPath, JSON.stringify(c, null, 2));
+        try { loadCaptureConfig(ROOT, cfgPath); } catch (e) { return (e as Error).message; }
+        return '';
+      };
+      // (a) the ORIGINAL defect: two axes both assigning className
+      const twoAssign = refuseWith((b) => {
+        b.axes = ['variant', 'size'];
+        b.axisValueMap = {
+          variant: { primary: { $props: { className: 'btn btn-primary' } } },
+          size: { lg: { $props: { className: 'btn btn-lg' } } },
+        };
+      });
+      for (const frag of ['both ASSIGN the library prop "className"', 'silently overwrite', '$classTokens']) {
+        if (!twoAssign.includes(frag)) {
+          throw new Error(`the last-writer-wins collision is not refused by name (missing "${frag}"): ${twoAssign || '(accepted — the silent drop is back)'}`);
+        }
+      }
+      // (b) mixing append and assign on the same prop is the same ambiguity
+      const mixed = refuseWith((b) => {
+        b.axes = ['variant', 'size'];
+        b.axisValueMap = {
+          variant: { primary: { $classTokens: ['btn-primary'] } },
+          size: { lg: { $props: { className: 'btn-lg' } } },
+        };
+      });
+      if (!mixed.includes('APPENDS class tokens')) {
+        throw new Error(`mixing $classTokens and $props on one prop was not refused by name: ${mixed || '(accepted)'}`);
+      }
+      // (c) a token carrying whitespace is two tokens wearing one name
+      const spacey = refuseWith((b) => {
+        (b.axisValueMap as Record<string, Record<string, unknown>>).variant.primary = { $classTokens: ['btn btn-primary'] };
+      });
+      if (!spacey.includes('whitespace-free class tokens')) {
+        throw new Error(`a whitespace-bearing class token was not refused by name: ${spacey || '(accepted)'}`);
+      }
+      // ---- 4. no OTHER committed config gained an appending axis by accident ----
+      for (const f of readdirSync(path.join(ROOT, 'extract/computed/configs')).sort()) {
+        loadCaptureConfig(ROOT, path.join(ROOT, 'extract/computed/configs', f));
+      }
+    },
+  },
+  {
+    /*  HELD-OUT ROUND, GRAMMAR CLOSURE 3 — a date literal. The marker grammar
+     *  could spell a callback, an import, a render prop and an element, but not
+     *  a `Date` — and a calendar's ENTIRE rendering is a function of Dates. The
+     *  only mount available was a sandbox fixtures module holding three
+     *  `new Date(...)` literals reached through `$import`. */
+    id: 'grammar-date-literal',
+    claim: 'C1-determinism',
+    run: () => {
+      const cfg = loadCaptureConfig(ROOT, path.join(ROOT, 'extract/computed/configs/day-picker.json'));
+      const cal = cfg.components[0];
+      // ---- 1. the three pinned instants ride the CONFIG, not a hand-written
+      //         JS module the config points at ----
+      const expected: Record<string, number> = {
+        month: Date.UTC(2026, 0, 1), today: Date.UTC(2026, 0, 15), selected: Date.UTC(2026, 0, 20),
+      };
+      for (const [prop, want] of Object.entries(expected)) {
+        const marker = (cal.fixedProps ?? {})[prop] as { $date?: string } | undefined;
+        if (!marker || typeof marker.$date !== 'string') {
+          throw new Error(`day-picker ${prop} is not a {"$date": …} literal: ${JSON.stringify(marker)}`);
+        }
+        if (new Date(marker.$date).getTime() !== want) {
+          throw new Error(`day-picker ${prop} moved off its pinned instant (${marker.$date})`);
+        }
+      }
+      if (JSON.stringify(cfg).includes('sandbox/fixtures')) {
+        throw new Error('the day-picker config still reaches a sandbox fixtures module — the $date closure did not retire it');
+      }
+      // ---- 2. DETERMINISM IS THE WHOLE POINT: resolution reads no clock, so
+      //         the same literal resolves to the same instant every time ----
+      const twice = [new Date('2026-01-01T00:00:00.000Z').getTime(), new Date('2026-01-01T00:00:00.000Z').getTime()];
+      if (twice[0] !== twice[1] || twice[0] !== Date.UTC(2026, 0, 1)) {
+        throw new Error('a $date literal did not resolve to a stable pinned instant');
+      }
+      // ---- 3. every spelling that would read a clock, drift with the
+      //         capturing machine, or silently roll over refuses BY NAME ----
+      mkdirSync(SCRATCH, { recursive: true });
+      const cfgPath = path.join(SCRATCH, 'date-literal-config.json');
+      const refuse = (spelling: unknown): string => {
+        const c = JSON.parse(readFileSync(path.join(ROOT, 'extract/computed/configs/day-picker.json'), 'utf8')) as {
+          components: Array<{ fixedProps: Record<string, unknown> }>;
+        };
+        c.components[0].fixedProps.month = spelling;
+        writeFileSync(cfgPath, JSON.stringify(c, null, 2));
+        try { loadCaptureConfig(ROOT, cfgPath); } catch (e) { return (e as Error).message; }
+        return '';
+      };
+      const planted: Array<[unknown, string]> = [
+        [{ $date: 'now' }, 'is not a pinned ISO instant'],
+        [{ $date: '2026-01-15T00:00:00' }, 'no local-time spelling'],
+        [{ $date: '2026-01-15T00:00:00+02:00' }, 'is not a pinned ISO instant'],
+        // V8 does NOT throw on Feb 31 — it returns March. A silently shifted
+        // month is exactly the drift a pinned literal exists to prevent.
+        [{ $date: '2026-02-31' }, 'rolled it over'],
+        [{ $date: 42 }, '$date must be a string ISO literal'],
+      ];
+      for (const [spelling, frag] of planted) {
+        const msg = refuse(spelling);
+        if (!msg.includes(frag)) {
+          throw new Error(`$date ${JSON.stringify(spelling)} was not refused by name (missing "${frag}"): ${msg || '(accepted)'}`);
+        }
+      }
+      // ---- 4. …and the honest literal still loads ----
+      loadCaptureConfig(ROOT, path.join(ROOT, 'extract/computed/configs/day-picker.json'));
+    },
+  },
+  {
     id: 'mui-figma-genesis',
     claim: 'C8-journey',
     run: () => {
@@ -8474,12 +8699,25 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (mintedLeafCount(JSON.parse('{}') as Record<string, unknown>) !== 0 || mintedLeafCount(JSON.parse(LEAF) as Record<string, unknown>) !== 1) {
         throw new Error('mintedLeafCount does not agree with the guard on what "exists" means');
       }
-      // …and no SHIPPING config leans on the allowance.
+      // …and no SHIPPING config leans on the allowance. "Shipping" is a fact
+      // about the TREE, not about the config's existence: a library ships once
+      // its minted tree carries leaves. Held-out exam material (bootstrap5,
+      // radix-themes, day-picker — captured by nothing, deliberately) sits in
+      // exactly the genuine FIRST-EVER state the allowance exists for, and
+      // asserting it away would mean the repo cannot hold a library it has not
+      // captured yet — which is the whole point of a held-out exam. The rot the
+      // guard actually fears (a flag OUTLIVING its empty tree) is refused one
+      // layer down by loadConfig, proven by `rotted` above; here we hold both
+      // halves of the invariant so neither state can drift into the other.
       for (const f of configs) {
         const c = JSON.parse(readFileSync(path.join(cfgDir, f), 'utf8')) as { tokens?: { minted?: string; mintedBootstrap?: boolean } };
-        if (c.tokens?.mintedBootstrap) throw new Error(`${f} still carries tokens.mintedBootstrap — a shipped library measures against its shipped tree`);
         const n = mintedLeafCount(JSON.parse(readFileSync(path.join(ROOT, c.tokens!.minted!), 'utf8')) as Record<string, unknown>);
-        if (n === 0) throw new Error(`${f}: shipped minted tree ${c.tokens!.minted} carries ZERO leaves`);
+        if (n > 0 && c.tokens?.mintedBootstrap) {
+          throw new Error(`${f} still carries tokens.mintedBootstrap over a tree with ${n} leaf/leaves — a shipped library measures against its shipped tree`);
+        }
+        if (n === 0 && !c.tokens?.mintedBootstrap) {
+          throw new Error(`${f}: minted tree ${c.tokens!.minted} carries ZERO leaves and the config does NOT declare tokens.mintedBootstrap — either it shipped and the tree is missing, or it is pre-capture and must say so by name`);
+        }
       }
 
       // 2. THE CLASS. astryx Slider's gated contract binds 44 refs that live
@@ -12228,7 +12466,18 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         const f = path.join(outRoot, c, 'captured-truth.json');
         if (!existsSync(f)) continue;
         capturesRead++;
-        const txt = readFileSync(f, 'utf8');
+        // THE UA BASELINE IS NOT A DECLARATION. `uaControls` (fix/baseline-isolation)
+        // measures the four control tags on a page carrying nothing the library
+        // ships, and it reads the capture's OWN channel list — so every one of
+        // astryx's ~200 custom properties appears there with an EMPTY value.
+        // Scraped as text those empties join the real declarations and every
+        // name becomes two-valued, which this pin skips as "mode/scope-varying":
+        // the denominator collapsed from 177 to 0 and the pin asserted nothing.
+        // Strip the block; what a page declares is the substrate, and that page
+        // declares nothing.
+        const parsed = JSON.parse(readFileSync(f, 'utf8')) as Record<string, unknown>;
+        delete parsed.uaControls;
+        const txt = JSON.stringify(parsed);
         for (const m of txt.matchAll(/"--([a-z0-9-]+)":"((?:[^"\\]|\\.)*)"/gi)) {
           const val = norm(JSON.parse(`"${m[2]}"`));
           if (!declared.has(m[1])) declared.set(m[1], new Set());

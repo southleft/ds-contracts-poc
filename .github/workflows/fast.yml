@@ -255,6 +255,12 @@ jobs:
       - name: exam:screenshots:check (every phase-2 exam receipt carries a canvas + reference PNG per set, or names that it does not)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run exam:screenshots:check
+      - name: required-facts:check self-test (a card with no column axis must refuse BY NAME, and every required fact must be able to go red)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run required-facts:check -- --self-test
+      - name: required-facts:check (every committed contract carries the load-bearing facts its archetype owes, or is pinned by name in the frozen baseline)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run required-facts:check
 
       - name: test accuracy contract gate falsifications
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
@@ -624,6 +630,42 @@ jobs:
       - name: door-register self-test (the gate goes red on an unregistered door, an unmarked entry, and a claimed receipt with no path)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run door-register:self-test
+
+      # THE GRAMMAR COVERAGE SPEC — spec/GRAMMAR-COVERAGE.md + grammar-coverage.json.
+      # The CAPTURE CONFIG GRAMMAR is the language a user mounts their library
+      # in, and three holes in it were found by AUTHORING three held-out exam
+      # subjects rather than by running anything: a compound export name was a
+      # syntax error, two class-token axes SILENTLY dropped one of the two, and
+      # a Date could not be spelled at all. A first-pass failure caused by a
+      # known grammar gap measures the grammar rather than the engine, so the
+      # remaining gaps are named here with the library that proves each one.
+      # The supported half is measured from the CONFIGS ON DISK, never from the
+      # TypeScript type that declares the surface — a coverage number computed
+      # from its own denominator is the self-attestation this tree keeps
+      # re-learning. Refuses when a config uses a construct the spec omits, and
+      # when a spec row claims support that nothing exercises.
+      - name: grammar-coverage:check (every config construct claimed; every supported claim exercised)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run grammar-coverage:check
+      - name: grammar-coverage self-test (ten planted reds - a dropped construct, an exerciser that does not exercise, a ghost file, an unimplemented marker, stale totals, an empty corpus)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run grammar-coverage:check -- --self-test
+      # CORPUS REPRODUCIBILITY — the twin of the gate above, and the reason the
+      # first-pass exam went 0/8 the day it first ran: the committed contracts
+      # claim to be the output of the documented chain, and nothing checked it.
+      # The PROMOTE half runs here — pure, no browser, ~2s: every library's
+      # committed capture record plus its authored facts must re-promote to the
+      # committed contracts byte for byte. The CAPTURE half needs Chromium and
+      # the git-ignored sandboxes, so it runs OUT OF BAND
+      # (`-- --capture`) and RECORDS what it measured; this step judges that
+      # committed measurement against the committed ledger, which is why its
+      # verdict is the same on every machine.
+      - name: corpus:reproducible:check (the documented chain re-derives its own corpus; every divergence named)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run corpus:reproducible:check
+      - name: corpus:reproducible self-test (the gate goes red on an unnamed divergence, a stale ledger row, and an unnamed capture divergence)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run corpus:reproducible:check -- --self-test
 
       # Not one of the 33 named gates, but CONTRIBUTING.md § "The gates" tells
       # contributors to run it and it costs under a second with no extra build.

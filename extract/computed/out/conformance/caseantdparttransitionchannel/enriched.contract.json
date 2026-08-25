@@ -32,6 +32,11 @@
           },
           "tokens": {
             "background-color": "{imported.case-antd-part-transition-channel.label.background-color}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.case-antd-part-transition-channel.label.color}",
             "font-size": "{imported.case-antd-part-transition-channel.label.font-size}",
             "font-weight": "{imported.case-antd-part-transition-channel.label.font-weight}",
             "padding-bottom": "{imported.case-antd-part-transition-channel.label.padding-bottom}",
@@ -46,6 +51,11 @@
         "font-family": "monospace"
       },
       "tokens": {
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
+        "color": "{imported.case-antd-part-transition-channel.root.color}",
         "font-size": "{imported.case-antd-part-transition-channel.root.font-size}"
       }
     }

@@ -61,6 +61,7 @@ export interface PresenceProp {
   libraryProp: string;
   /** Value mounted when ON. Marker grammar (resolved in the harness entry):
    *    {"$callback": true}          → () => {}
+   *    {"$date": "<ISO>"}           → new Date("<ISO>") (pinned literal)
    *    {"$import": "pkg#Export"}    → the named import (icon sources)
    *    anything else                → the JSON value verbatim */
   value: unknown;
@@ -71,7 +72,7 @@ export interface PresenceProp {
  *  MOLECULE round shipped a STRICTLY ONE-LEVEL list (`<Tabs><Tab/><Tab/></Tabs>`);
  *  a composed organism is a TREE (`<Table><TableHead><TableRow><TableCell>
  *  <Checkbox/></TableCell>…`). `children` recurses; the marker grammar
- *  ($callback/$import/$render/$element) is resolved at EVERY depth, and every
+ *  ($callback/$date/$import/$render/$element) is resolved at EVERY depth, and every
  *  referenced export is imported at every depth.
  *
  *  `children` and `text` are MUTUALLY EXCLUSIVE on one node (refused at load
@@ -96,10 +97,151 @@ export const walkChildSpecs = (specs: ChildSpec[] | undefined): ChildSpec[] => {
   return out;
 };
 
+// ---------------------------------------------------------------------------
+// COMPOUND EXPORT NAMES (held-out finding 1) — `importName: "TextField.Root"`
+// ---------------------------------------------------------------------------
+/*  Modern React libraries are overwhelmingly COMPOUND: the package exports one
+ *  namespace object per component and the mountable pieces hang off it
+ *  (`TextField.Root`, `Callout.Root`, `Tabs.Trigger`). `importName` used to be
+ *  emitted VERBATIM into `import { … } from '<library.package>'`, so a dotted
+ *  name was a syntax error and the only way to mount such a library was a
+ *  sandbox barrel re-exporting flattened aliases — which makes
+ *  `library.package`/`version` describe the barrel rather than the subject.
+ *
+ *  A dotted `importName` now splits into a ROOT BINDING (imported) and a
+ *  MEMBER PATH (referenced): `TextField.Root` emits `import { TextField }` and
+ *  mounts `TextField.Root`. The undotted spelling is unchanged in every
+ *  respect — root === the whole name — so every committed config keeps its
+ *  exact previous meaning.
+ *
+ *  The full dotted string stays the component's KEY everywhere (COMPONENTS
+ *  map, childrenSpec references, receipts): two members of one namespace must
+ *  not collapse onto the same key. */
+
+/** JS identifier, conservatively (ASCII — every real export name in scope). */
+const JS_IDENT = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
+
+/** The BINDING that must be imported for a (possibly dotted) `importName`:
+ *  "TextField.Root" → "TextField"; "Button" → "Button". */
+export const importRoot = (importName: string): string => importName.split('.')[0];
+
+/** The `COMPONENTS` object literal for a harness entry, keyed by the FULL
+ *  (possibly dotted) importName. A dotted name forces EXPLICIT keys
+ *  (`{"TextField.Root": TextField.Root}`); with no dotted name among them the
+ *  ES6 shorthand is emitted exactly as before, so every committed library's
+ *  harness entry — and therefore its captured truth — stays byte-identical. */
+export const componentsMapLiteral = (names: string[]): string =>
+  names.some((n) => n.includes('.'))
+    ? `{ ${names.map((n) => `${JSON.stringify(n)}: ${n}`).join(', ')} }`
+    : `{ ${names.join(', ')} }`;
+
+/** Refuse a malformed `importName` BY NAME rather than emitting broken JS into
+ *  the harness entry (where it surfaces as an esbuild error about a file the
+ *  config author never wrote). `customElements` libraries mount `importName`
+ *  as a TAG NAME, and a tag name with a dot is not a compound export — it is a
+ *  typo, so dots are refused there instead of silently mounting `<a.b>`. */
+export function validateImportName(compName: string, importName: string, customElements: boolean): void {
+  if (importName === '') throw new Error(`${compName}: importName is empty`);
+  if (!importName.includes('.')) return;
+  if (customElements) {
+    throw new Error(
+      `${compName}: importName "${importName}" is dotted, but library.customElements is true — a custom-element mount uses importName as a TAG NAME and "${importName}" is not a valid tag. Compound export names are for React packages that export namespace objects (TextField.Root).`,
+    );
+  }
+  for (const seg of importName.split('.')) {
+    if (!JS_IDENT.test(seg)) {
+      throw new Error(
+        `${compName}: importName "${importName}" is not a valid compound export — segment "${seg}" is not a JavaScript identifier. The spelling is Namespace.Member (TextField.Root, Tabs.Trigger).`,
+      );
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// ORDERED CLASS-TOKEN AXES (held-out finding 2) — `{"$classTokens": [...]}`
+// ---------------------------------------------------------------------------
+/*  THE SILENT LOSS THIS CLOSES. `axisValueMap`'s `$props` form mounts library
+ *  props for one contract axis value, and `comboProps` folds every axis into
+ *  ONE FLAT BAG by assignment. For a class-based library (Bootstrap: a
+ *  "Button" IS the string `class="btn btn-primary"`) two axes must both
+ *  contribute to `className`, and assignment is LAST-WRITER-WINS: `variant ×
+ *  size` mounted `className: "btn btn-lg"` and DROPPED THE VARIANT with no
+ *  error, no receipt, and a captured truth that looked perfectly plausible.
+ *  Bootstrap's `btn-sm`/`btn-lg` was deferred by name rather than ship that.
+ *
+ *  `{"$classTokens": ["btn-primary"]}` is an APPEND: each axis contributes its
+ *  tokens to `className` in DECLARED AXIS ORDER (`components[].axes`, the
+ *  config's own order), after the base tokens in `fixedProps.className`. So
+ *  `className: "btn"` + variant `["btn-primary"]` + size `["btn-lg"]` mounts
+ *  `"btn btn-primary btn-lg"` — deterministic, order-stable, nothing dropped.
+ *  `[]` is the honest spelling of a value that adds no class (Bootstrap's
+ *  default size is the absence of a modifier).
+ *
+ *  Mixing the two forms on one prop is REFUSED at load (see
+ *  `checkAxisPropCollisions`): an appending axis and an assigning axis on the
+ *  same `className` is precisely the ambiguity that produced the silent loss. */
+export const CLASS_TOKEN_PROP = 'className';
+
+/** The marker's payload, validated. Returns undefined when `v` is not one. */
+export function asClassTokens(v: unknown): string[] | undefined {
+  if (!v || typeof v !== 'object' || Array.isArray(v)) return undefined;
+  if (!('$classTokens' in (v as Record<string, unknown>))) return undefined;
+  return (v as { $classTokens: string[] }).$classTokens;
+}
+
+// ---------------------------------------------------------------------------
+// DATE LITERALS (held-out finding 3) — `{"$date": "<ISO>"}`
+// ---------------------------------------------------------------------------
+/*  The marker grammar could spell a callback, an import, a render prop and an
+ *  element — but not a `Date`, and a calendar's ENTIRE rendering is a function
+ *  of Dates. The only mount available was a sandbox fixtures module holding
+ *  `new Date(...)` literals reached through `$import`, which puts a hand-written
+ *  JS file between the config and the subject for three constants.
+ *
+ *  `{"$date": "2026-01-15T00:00:00.000Z"}` resolves to `new Date("<iso>")`.
+ *  IT IS A LITERAL, AND THAT IS THE POINT: no `now`, no offsets, no clock
+ *  read. A calendar whose month is "today" re-renders at midnight and no two
+ *  captures can be byte-compared — determinism is the whole reason this
+ *  construct exists, so the one spelling that would break it is not in it. */
+const ISO_DATE_LITERAL = /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z)?$/;
+
+/** Refuse a `$date` payload that is not an unambiguous, absolute ISO instant.
+ *  A bare `YYYY-MM-DD` is parsed as UTC midnight by every engine (ES2015+);
+ *  local-time spellings (`2026-01-15T00:00:00`, no `Z`) are refused because
+ *  they resolve against the CAPTURING MACHINE's zone. */
+export function validateDateLiteral(where: string, raw: unknown): void {
+  if (typeof raw !== 'string') {
+    throw new Error(`${where}: $date must be a string ISO literal, got ${typeof raw}`);
+  }
+  if (!ISO_DATE_LITERAL.test(raw)) {
+    throw new Error(
+      `${where}: $date "${raw}" is not a pinned ISO instant — the grammar accepts "YYYY-MM-DD" or "YYYY-MM-DDTHH:MM:SS(.mmm)Z" ONLY. A date is a LITERAL here by design: no "now", no offset, no local-time spelling (which would resolve against the capturing machine's timezone). A calendar whose month is the clock re-renders at midnight and no two captures can be byte-compared.`,
+    );
+  }
+  const d = new Date(raw);
+  if (Number.isNaN(d.getTime())) {
+    throw new Error(`${where}: $date "${raw}" is well-formed but not a real date`);
+  }
+  // V8 SILENTLY ROLLS OVER. `new Date("2026-02-31")` is not an error — it is
+  // MARCH 2, and `new Date("2026-02-29")` in a non-leap year is MARCH 1. A
+  // config author who mistypes a month length would capture a calendar showing
+  // a different month than the one the config names, with nothing anywhere
+  // saying so. Round-trip the parse and refuse the drift by name.
+  const back = d.toISOString().slice(0, 10);
+  if (back !== raw.slice(0, 10)) {
+    throw new Error(
+      `${where}: $date "${raw}" is not the date it parses to — JavaScript rolled it over to ${back} (there is no such day in that month). A silently shifted month is exactly the drift a pinned literal exists to prevent.`,
+    );
+  }
+}
+
 export interface ComponentConfig {
   /** Display name; also the CSS-module stem prefix stripped in part naming. */
   name: string;
-  /** Named export mounted from `library.package`. */
+  /** Named export mounted from `library.package`. May be a COMPOUND (dotted)
+   *  export name — `TextField.Root`, `Callout.Root`, `Tabs.Trigger` — in which
+   *  case the ROOT binding is imported and the member path is referenced (see
+   *  `importRoot`). The dotted string remains the component's key everywhere. */
   importName: string;
   /** Repo-relative path to the static extraction's contract/proposal — the
    *  prop-space source. */
@@ -122,7 +264,13 @@ export interface ComponentConfig {
    *  cosmetic preference — the svg-content promotion carries per-value icon
    *  assets only when the markup is a function of exactly ONE axis
    *  (`svg-content-multi-axis` refusal otherwise), so a two-axis spelling
-   *  would silently lose all three checkbox glyphs. Still pure JSON. */
+   *  would silently lose all three checkbox glyphs. Still pure JSON.
+   *
+   *  HELD-OUT ROUND — ORDERED CLASS TOKENS: a mapped value of the shape
+   *  `{"$classTokens": ["btn-primary"]}` APPENDS those tokens to `className`
+   *  in declared axis order instead of assigning a prop, so two class-token
+   *  axes compose (`"btn btn-primary btn-lg"`) rather than the second
+   *  silently overwriting the first. See CLASS_TOKEN_PROP above. */
   axisValueMap?: Record<string, Record<string, unknown>>;
   /** Round 4: structure-creating optional props (see PresenceProp). */
   presenceProps?: PresenceProp[];
@@ -189,6 +337,7 @@ export interface ComponentConfig {
    *  at mount: Modal `open`, Popover `active`, plus the JSON content props that
    *  populate the overlay (title, primaryAction, secondaryActions). Values use
    *  the same marker grammar as presence props (`{"$callback":true}` → () => {},
+   *  `{"$date":"<ISO>"}` → a pinned Date,
    *  `{"$import":"pkg#Export"}` → the named import); driven on every mount of a
    *  portalCapture component. This is NOT a slot / render-prop channel (that is
    *  Stage C `renderChildren`) — only JSON-expressible open/content props. */
@@ -370,6 +519,80 @@ export interface CaptureConfig {
   components: ComponentConfig[];
 }
 
+/** Every marker-bearing value reachable in a component config, with a
+ *  human-readable path for refusal messages. Mirrors exactly what the two
+ *  harness pages hand to `resolveMarkers`, so a marker the runtime WOULD
+ *  resolve is a marker this walk WILL see. */
+function* markerValues(comp: ComponentConfig): Generator<[string, unknown]> {
+  const rec = function* (where: string, v: unknown): Generator<[string, unknown]> {
+    if (!v || typeof v !== 'object') return;
+    yield [where, v];
+    if (Array.isArray(v)) {
+      for (const [i, x] of v.entries()) yield* rec(`${where}[${i}]`, x);
+      return;
+    }
+    for (const [k, x] of Object.entries(v)) yield* rec(`${where}.${k}`, x);
+  };
+  yield* rec(`${comp.name}.fixedProps`, comp.fixedProps ?? {});
+  for (const [axis, vals] of Object.entries(comp.axisValueMap ?? {})) {
+    for (const [val, mv] of Object.entries(vals)) yield* rec(`${comp.name}.axisValueMap.${axis}."${val}"`, mv);
+  }
+  for (const pp of comp.presenceProps ?? []) yield* rec(`${comp.name}.presenceProps.${pp.prop}.value`, pp.value);
+  for (const cs of walkChildSpecs(comp.childrenSpec)) yield* rec(`${comp.name}.childrenSpec[${cs.importName}].props`, cs.props ?? {});
+}
+
+/** ORDERED CLASS-TOKEN AXES — refuse the collisions that used to be silent.
+ *
+ *  `comboProps` folds every axis into one flat prop bag by ASSIGNMENT. Two
+ *  axes assigning the same library prop is therefore last-writer-wins, and the
+ *  loser vanishes with no error and no receipt (the Bootstrap `variant × size`
+ *  finding: `className: "btn btn-lg"`, the variant gone). Class tokens now have
+ *  an APPEND form that composes; everything the append form cannot express is
+ *  named here instead of being mounted wrong. */
+function checkAxisPropCollisions(comp: ComponentConfig): void {
+  const assigns = new Map<string, string[]>(); // library prop → axes that ASSIGN it
+  const appends: string[] = []; // axes that APPEND class tokens
+  const note = (prop: string, axis: string): void => {
+    const list = assigns.get(prop) ?? [];
+    if (!list.includes(axis)) list.push(axis);
+    assigns.set(prop, list);
+  };
+  for (const axis of comp.axes) {
+    const vals = comp.axisValueMap?.[axis];
+    // An axis with no map (or values that fall through it) assigns its OWN name.
+    if (!vals || Object.keys(vals).length === 0) { note(axis, axis); continue; }
+    let mapped = false;
+    for (const mv of Object.values(vals)) {
+      const ct = asClassTokens(mv);
+      if (ct !== undefined) {
+        if (!appends.includes(axis)) appends.push(axis);
+        mapped = true;
+        continue;
+      }
+      if (mv && typeof mv === 'object' && !Array.isArray(mv) && '$props' in (mv as Record<string, unknown>)) {
+        for (const lp of Object.keys((mv as { $props: Record<string, unknown> }).$props ?? {})) note(lp, axis);
+        mapped = true;
+        continue;
+      }
+      note(axis, axis);
+      mapped = true;
+    }
+    if (!mapped) note(axis, axis);
+  }
+  for (const [prop, axesFor] of assigns) {
+    if (axesFor.length > 1) {
+      throw new Error(
+        `${comp.name}: axes ${axesFor.map((a) => `"${a}"`).join(' and ')} both ASSIGN the library prop "${prop}" — comboProps folds axes into one prop bag, so the later axis would silently overwrite the earlier one and the capture would look plausible with an axis missing.${prop === CLASS_TOKEN_PROP ? ` For class tokens use the ordered append form instead: {"$classTokens": ["btn-primary"]} / {"$classTokens": ["btn-lg"]}, which compose in declared axis order.` : ' Model the two renderings as ONE axis, or give each axis its own library prop.'}`,
+      );
+    }
+  }
+  if (appends.length > 0 && (assigns.get(CLASS_TOKEN_PROP)?.length ?? 0) > 0) {
+    throw new Error(
+      `${comp.name}: axis "${appends[0]}" APPENDS class tokens ($classTokens) while axis "${assigns.get(CLASS_TOKEN_PROP)![0]}" ASSIGNS "${CLASS_TOKEN_PROP}" ($props) — mixing the two forms on one prop is exactly the ambiguity that produced the silent drop. Use $classTokens for every class-token axis on this component.`,
+    );
+  }
+}
+
 export function loadConfig(repoRoot: string, configPath: string): CaptureConfig {
   const cfg = JSON.parse(readFileSync(configPath, 'utf8')) as CaptureConfig;
   // DRAFT ≠ APPROVED (G6 ack discipline): a machine-drafted config carries a
@@ -412,9 +635,36 @@ export function loadConfig(repoRoot: string, configPath: string): CaptureConfig 
       );
     }
   }
+  const ce = cfg.library.customElements === true;
   for (const c of cfg.components) {
     const contractPath = path.join(repoRoot, c.contract);
     if (!existsSync(contractPath)) throw new Error(`${c.name}: contract not found: ${c.contract}`);
+    // COMPOUND EXPORT NAMES: refuse a malformed dotted name at LOAD, where the
+    // config author can read it, rather than as an esbuild parse error in a
+    // generated harness entry they never wrote. Every mounted name is checked
+    // — the root, the childWrap, and every childrenSpec node at every depth.
+    validateImportName(c.name, c.importName, ce);
+    if (c.childWrap) validateImportName(`${c.name}.childWrap`, c.childWrap.importName, ce);
+    for (const cs of walkChildSpecs(c.childrenSpec)) {
+      validateImportName(`${c.name}.childrenSpec`, cs.importName, ce);
+    }
+    // ORDERED CLASS TOKENS: name the axis collisions that used to be a silent
+    // last-writer-wins drop in the mounting layer.
+    checkAxisPropCollisions(c);
+    // DATE LITERALS + CLASS-TOKEN PAYLOADS: validate every marker the harness
+    // pages would resolve, at the depth they would resolve it.
+    for (const [where, v] of markerValues(c)) {
+      const rec = v as Record<string, unknown>;
+      if ('$date' in rec) validateDateLiteral(where, rec['$date']);
+      if ('$classTokens' in rec) {
+        const ct = rec['$classTokens'];
+        if (!Array.isArray(ct) || ct.some((t) => typeof t !== 'string' || t === '' || /\s/.test(t))) {
+          throw new Error(
+            `${where}: $classTokens must be an array of whitespace-free class tokens (["btn-primary"]); [] is the honest spelling of a value that adds no class`,
+          );
+        }
+      }
+    }
     if (c.childWrap && c.childrenSpec) {
       throw new Error(`${c.name}: childWrap and childrenSpec are mutually exclusive — one canonical composition per component`);
     }
@@ -529,6 +779,14 @@ export function propSpaceFor(repoRoot: string, cfg: CaptureConfig, comp: Compone
  *  own semantics), state flags set only when true, fixed props always. */
 export function comboProps(comp: ComponentConfig, space: PropSpace, combo: Combo): Record<string, unknown> {
   const props: Record<string, unknown> = { ...(comp.fixedProps ?? {}) };
+  // HELD-OUT ROUND — ordered class-token axes. Tokens accumulate in DECLARED
+  // AXIS ORDER (space.axes preserves components[].axes order) on top of the
+  // base tokens in fixedProps.className, and are joined once at the end. When
+  // no axis contributes, className is left exactly as fixedProps set it — the
+  // pre-existing behaviour of every committed config, byte for byte.
+  const baseClass = typeof props[CLASS_TOKEN_PROP] === 'string' ? (props[CLASS_TOKEN_PROP] as string) : '';
+  const classTokens: string[] = [];
+  let anyClassTokens = false;
   for (const a of space.axes) {
     const v = combo.axisValues[a.prop];
     const pp = space.presence.get(a.prop);
@@ -543,6 +801,13 @@ export function comboProps(comp: ComponentConfig, space: PropSpace, combo: Combo
     // checked enum → boolean|'indeterminate').
     const mapped = comp.axisValueMap?.[a.prop];
     const mv = mapped && v in mapped ? mapped[v] : undefined;
+    // HELD-OUT ROUND: {"$classTokens": [...]} APPENDS rather than assigns.
+    const ct = asClassTokens(mv);
+    if (ct !== undefined) {
+      anyClassTokens = true;
+      classTokens.push(...ct);
+      continue;
+    }
     // ORGANISM round: {"$props": {…}} mounts SEVERAL library props for one
     // contract axis value (MUI Checkbox's tri-state = checked+indeterminate).
     if (mv && typeof mv === 'object' && !Array.isArray(mv) && '$props' in (mv as Record<string, unknown>)) {
@@ -555,6 +820,9 @@ export function comboProps(comp: ComponentConfig, space: PropSpace, combo: Combo
     }
     props[a.prop] = mv !== undefined ? mv : v;
   }
+  if (anyClassTokens) {
+    props[CLASS_TOKEN_PROP] = [...(baseClass ? [baseClass] : []), ...classTokens].join(' ');
+  }
   for (const s of space.stateProps) if (combo.stateFlags[s.prop]) props[s.prop] = true;
   return props;
 }
@@ -566,6 +834,102 @@ export function comboProps(comp: ComponentConfig, space: PropSpace, combo: Combo
  *  baseline (§ "styled channels"): a captured tag without a control falls
  *  back to the span control, receipted by the fuser. */
 export const CONTROL_TAGS = ['button', 'span', 'a', 'div'] as const;
+
+/** THE CONTROL STAGE, one spelling. The harness page renders each control
+ *  inside this exact box (`stageStyle` with the config's default stage), and
+ *  the UA baseline page below renders it inside the SAME box — so the only
+ *  difference between the two baselines is the CSS the library shipped, which
+ *  is the whole point of having two. */
+/** The harness page's stage-style function, VERBATIM — spliced into the mount
+ *  page's bundle. Hoisted out of the template so the one other place that has
+ *  to agree with it (`controlStageCss`, the UA baseline page's CSS twin) can be
+ *  held to it without a browser: `ua-baseline:check` parses both and refuses a
+ *  divergence by name. Two spellings of one box is exactly the shape of defect
+ *  the portal page's LOCKSTEP comment is about. */
+export const HARNESS_STAGE_STYLE_JS =
+  "const stageStyle = (st, block) => ({ display: block ? 'block' : 'flex', ...(block ? {} : { alignItems: 'flex-start' }), width: st.width, height: st.height, padding: st.padding, boxSizing: 'border-box', background: '#fff', overflow: 'hidden' });";
+
+export const controlStageCss = (st: { width: number; height: number; padding: number }): string =>
+  `display:flex;align-items:flex-start;width:${st.width}px;height:${st.height}px;padding:${st.padding}px;box-sizing:border-box;background:#fff;overflow:hidden`;
+
+/** The four control boxes as plain HTML — the same elements the harness page
+ *  mounts inside `mount.wrapperOpen`, with the same sample text. */
+export const controlBoxesHtml = (st: { width: number; height: number; padding: number }, prefix: string): string =>
+  CONTROL_TAGS.map((t) => {
+    const inner = t === 'a' ? '<a href="#c">SAMPLE</a>' : `<${t}>SAMPLE</${t}>`;
+    return `<div data-combo="${prefix}${t}" style="${controlStageCss(st)}">${inner}</div>`;
+  }).join('\n');
+
+/** THE UA BASELINE PAGE — the control elements, and NOTHING the library ships.
+ *
+ *  WHY THIS EXISTS (docs/23 §D.36; door `capture.control-baseline-mint`).
+ *  The harness mounts its controls INSIDE `mount.wrapperOpen`, in the same
+ *  document as the component under capture. Every page-global rule the library
+ *  ships therefore lands on the CONTROL as well: shadcn's
+ *  `* { border-color: var(--border) }` gives the bare `<span>` a real
+ *  `border-top-color`, Polaris's provider gives it the body ink, Tailwind
+ *  preflight gives it `border-style: solid`, and every library's `body`
+ *  `font-family` gives it the library face. `fuse.control-element-delta` then
+ *  computed "component minus control" and CANCELLED those facts — the shadcn
+ *  Input shipped `border-top-width: 1px` with no colour (a border that paints
+ *  nothing) and Polaris text shipped with no ink.
+ *
+ *  The control delta is supposed to subtract USER-AGENT defaults, because the
+ *  user agent is the only thing the GENERATED surface inherits: emit-html /
+ *  emit-react / the Figma mint carry the component's own CSS and no page
+ *  chrome at all. So the baseline has to be the user agent, and only the user
+ *  agent. This page carries:
+ *    · the same `color-scheme` (UA defaults are colour-scheme dependent),
+ *    · the same `body { margin: 0 }` and the same stage box (harness facts
+ *      that DO apply to the component and must keep cancelling),
+ *    · no library stylesheet, no `@font-face`, no provider, no preScript.
+ *
+ *  A useful consequence, and the reason this is cheap: the result is a
+ *  function of (browser, colour-scheme, stage) ONLY — it is LIBRARY-INDEPENDENT
+ *  by construction, so it can be measured without the library's harness ever
+ *  being installed. */
+export const uaBaselinePageHtml = (opts: { stage: { width: number; height: number; padding: number }; colorScheme: string }): string =>
+  `<!doctype html><html><head><meta charset="utf-8">
+<style>html { color-scheme: ${opts.colorScheme}; } body { margin: 0; background: #ddd; }</style>
+</head><body>
+${controlBoxesHtml(opts.stage, UA_CONTROL_PREFIX)}
+</body></html>`;
+
+/** data-combo prefix for the UA baseline page's control boxes. Deliberately
+ *  different from the in-page `__control-` prefix so a selector can never read
+ *  one baseline while claiming the other. */
+export const UA_CONTROL_PREFIX = '__ua-control-';
+
+/** The measured UA baseline. `channels` is the capture's OWN channel list
+ *  (`allProps`) rather than a fresh enumeration of this page: a library's
+ *  `:root` custom properties appear in `getComputedStyle(documentElement)` and
+ *  would otherwise be missing here, which would make the two baselines
+ *  incomparable channel-for-channel. Custom properties read empty on this page
+ *  — see the `--` guard in `fuse.styledChannels`.
+ *
+ *  Runs in a page of its own inside the SAME browser context (same Chromium,
+ *  same viewport, same device scale, same font substrate); an iframe would be
+ *  equivalent, a page is simpler and lets the backfill/measurement instruments
+ *  reuse this exact function with no harness at all. */
+export async function captureUaControls(
+  context: { newPage: () => Promise<Page> },
+  opts: { stage: { width: number; height: number; padding: number }; colorScheme: string; channels: string[]; classAllow?: string },
+): Promise<Record<string, CapturedNode>> {
+  const page = await context.newPage();
+  try {
+    await page.setContent(uaBaselinePageHtml({ stage: opts.stage, colorScheme: opts.colorScheme }), { waitUntil: 'load' });
+    await page.evaluate(`(() => { window.__ALL_PROPS = ${JSON.stringify(opts.channels)}; })()`);
+    const out: Record<string, CapturedNode> = {};
+    for (const t of CONTROL_TAGS) {
+      const raw = (await page.evaluate(captureJs(`[data-combo="${UA_CONTROL_PREFIX}${t}"]`, opts.classAllow))) as CapturedNode | null;
+      if (!raw) throw new Error(`UA baseline capture failed: ${t}`);
+      out[t] = normalizeNode(raw);
+    }
+    return out;
+  } finally {
+    await page.close();
+  }
+}
 
 export const stageFor = (cfg: CaptureConfig, comp: ComponentConfig): { width: number; height: number; padding: number } =>
   comp.stage ?? cfg.stage;
@@ -708,6 +1072,11 @@ export function buildHarnessPage(
     // at every depth must land in the mount page's import list.
     ...mounts.flatMap((m) => walkChildSpecs(m.comp.childrenSpec).map((c) => c.importName)),
   ])].sort();
+  // COMPOUND EXPORT NAMES: the IMPORT list carries the distinct ROOT bindings
+  // (`TextField.Root` + `TextField.Slot` → one `TextField`), while the
+  // COMPONENTS map is keyed by the FULL dotted name and its value is the member
+  // expression. Undotted names are unchanged: root === key === expression.
+  const importRoots = [...new Set(importNames.map(importRoot))].sort();
   const specs = mounts.flatMap(({ comp, space }) =>
     space.enumeration.combos.map((combo) => ({
       key: `${comp.name}:${combo.key}`,
@@ -766,11 +1135,11 @@ export function buildHarnessPage(
   // @door capture.stage-geometry
   const entry = `import React from 'react';
 import { createRoot } from 'react-dom/client';
-${ce ? '' : `import { ${importNames.join(', ')} } from '${cfg.library.package}';\n`}${extraImportLines.join('\n')}
+${ce ? '' : `import { ${importRoots.join(', ')} } from '${cfg.library.package}';\n`}${extraImportLines.join('\n')}
 ${cfg.mount.imports.join('\n')}
 
 const CE = ${ce};
-const COMPONENTS = ${ce ? JSON.stringify(Object.fromEntries(importNames.map((n) => [n, n]))) : `{ ${importNames.join(', ')} }`};
+const COMPONENTS = ${ce ? JSON.stringify(Object.fromEntries(importNames.map((n) => [n, n]))) : componentsMapLiteral(importNames)};
 const EXTRA = { ${extraNames.join(', ')} };
 // CUSTOM-ELEMENT PROP SEMANTICS (React 18 sets unknown props as ATTRIBUTES):
 //   · \`false\` must be OMITTED — Lit's \`type: Boolean\` converter reads
@@ -791,10 +1160,11 @@ const ceProps = (p) => {
   return o;
 };
 const SPECS = ${JSON.stringify(specs)};
-const stageStyle = (st, block) => ({ display: block ? 'block' : 'flex', ...(block ? {} : { alignItems: 'flex-start' }), width: st.width, height: st.height, padding: st.padding, boxSizing: 'border-box', background: '#fff', overflow: 'hidden' });
+${HARNESS_STAGE_STYLE_JS}
 const stage = stageStyle({ width: ${cfg.stage.width}, height: ${cfg.stage.height}, padding: ${cfg.stage.padding} });
 
 // presence-value marker grammar: {"$callback":true} → () => {};
+// {"$date":"<iso>"} → new Date("<iso>") — a PINNED literal, never a clock read;
 // {"$import":"pkg#Name"} → the imported binding (resolved recursively);
 // {"$render":"pkg#Name"} → (params) => <Name {...params} /> — the identity
 // render-prop; {"$element":"pkg#Name","props":{},"text":"..."} → a bounded
@@ -802,6 +1172,7 @@ const stage = stageStyle({ width: ${cfg.stage.width}, height: ${cfg.stage.height
 function resolveMarkers(v) {
   if (v && typeof v === 'object') {
     if (v.$callback === true) return () => {};
+    if (typeof v.$date === 'string') return new Date(v.$date);
     if (typeof v.$import === 'string') return EXTRA[v.$import.split('#')[1]];
     if (typeof v.$render === 'string') { const K = EXTRA[v.$render.split('#')[1]]; return (params) => React.createElement(K, params); }
     if (typeof v.$element === 'string') {
@@ -1569,6 +1940,19 @@ export interface SweepResult {
   /** keyed `${component}:${combo}` per capture. */
   captures: Capture[];
   controls: Record<string, CapturedNode>;
+  /** THE UA BASELINE (door `capture.control-baseline-mint`). The same four
+   *  control tags, measured on a page that carries the browser and the stage
+   *  box and NOTHING the library ships — see `captureUaControls`. This is the
+   *  baseline `fuse.control-element-delta` subtracts; `controls` (the in-page
+   *  probe) stays recorded because it is what makes a page-global authored
+   *  rule VISIBLE: a channel where the two baselines disagree is, by
+   *  construction, a channel the library declared on the page. */
+  uaControls: Record<string, CapturedNode>;
+  /** The browser that measured `uaControls`. Equal to `browserVersion` on a
+   *  live sweep; on a backfilled capture it names the browser that measured
+   *  the baseline, so a UA default measured by a different Chromium than the
+   *  component is a VISIBLE fact rather than a silent one. */
+  uaBaselineBrowser: string;
   allProps: string[];
   /** SILENT-LOSS ROUND — the READ BOUNDARY of the CSS-vars reader. Every
    *  stylesheet (or nested grouping rule) whose `cssRules` THREW, quoted
@@ -1727,7 +2111,7 @@ export function readBoundaryReceipts(
 export async function sweep(
   page: Page,
   mounts: Array<{ comp: ComponentConfig; space: PropSpace }>,
-  opts: { screenshots?: string; fontProbes: string[]; classAllow?: string; varPrefix?: string },
+  opts: { screenshots?: string; fontProbes: string[]; classAllow?: string; varPrefix?: string; uaBaseline: { stage: { width: number; height: number; padding: number }; colorScheme: string } },
 ): Promise<SweepResult> {
   const allProps = (await page.evaluate(
     `(() => { const l = [...getComputedStyle(document.documentElement)].sort(); window.__ALL_PROPS = l; return l; })()`,
@@ -1875,6 +2259,16 @@ export async function sweep(
     controls[t] = normalizeNode(raw);
   }
 
+  // THE UA BASELINE — measured in a page of its own, with none of the
+  // library's CSS. See `captureUaControls` for why the in-page probe above
+  // cannot be the baseline the fusion door subtracts.
+  const uaControls = await captureUaControls(page.context(), {
+    stage: opts.uaBaseline.stage,
+    colorScheme: opts.uaBaseline.colorScheme,
+    channels: allProps,
+    classAllow: opts.classAllow,
+  });
+
   // SILENT-LOSS ROUND: the reader's two `catch`es used to swallow an entire
   // unreadable stylesheet (a cross-origin <link> exposes no cssRules) while
   // source-bindings.json printed `skips: []`. The count is read back here so
@@ -1886,6 +2280,8 @@ export async function sweep(
   return {
     captures,
     controls,
+    uaControls,
+    uaBaselineBrowser: page.context().browser()!.version(),
     allProps,
     stylesheetSkips: [...new Set(stylesheetSkips)].sort(),
     browserVersion: page.context().browser()!.version(),
@@ -1978,7 +2374,7 @@ const PORTAL_STAGE_ID = 'depth-stage';
  *  via comboProps — presence/state axes included), and the canonical-children
  *  vocabulary (childWrap / childrenSpec / $render) matches buildHarnessPage.
  *  Mirrors buildHarnessPage's marker grammar
- *  ($callback/$import/$render/$element) and
+ *  ($callback/$date/$import/$render/$element) and
  *  provider wrapping. */
 export function buildPortalHarnessPage(
   harness: string,
@@ -1995,6 +2391,7 @@ export function buildPortalHarnessPage(
 
   // $import/$render/$element markers anywhere in the props become real import
   // statements (resolved at mount by resolveMarkers), as buildHarnessPage.
+  // ($callback/$date carry no import — they resolve to a literal at mount.)
   const extraImports = new Map<string, Set<string>>();
   const collectImports = (v: unknown): void => {
     if (v && typeof v === 'object') {
@@ -2025,6 +2422,9 @@ export function buildPortalHarnessPage(
     ...(comp.childWrap ? [comp.childWrap.importName] : []),
     ...walkChildSpecs(comp.childrenSpec).map((c) => c.importName),
   ])].sort();
+  // COMPOUND EXPORT NAMES — kept in LOCKSTEP with buildHarnessPage: import the
+  // distinct ROOT bindings, key COMPONENTS by the full dotted name.
+  const kidImportRoots = [...new Set(kidImports.map(importRoot))].sort();
 
   const stageJs = `{ display:'flex', alignItems:'flex-start', width:${st.width}, height:${st.height}, padding:${st.padding}, boxSizing:'border-box', background:'#fff', overflow:'hidden' }`;
   // Kept in LOCKSTEP with buildHarnessPage (the Carbon renderKids lesson: a
@@ -2036,12 +2436,12 @@ export function buildPortalHarnessPage(
   const ce = cfg.library.customElements === true;
   const entry = `import React from 'react';
 import { createRoot } from 'react-dom/client';
-${ce ? '' : `import { ${kidImports.join(', ')} } from '${cfg.library.package}';\n`}${extraImportLines.join('\n')}
+${ce ? '' : `import { ${kidImportRoots.join(', ')} } from '${cfg.library.package}';\n`}${extraImportLines.join('\n')}
 ${cfg.mount.imports.join('\n')}
 
 const CE = ${ce};
 const C = ${ce ? JSON.stringify(comp.importName) : comp.importName};
-const COMPONENTS = ${ce ? JSON.stringify(Object.fromEntries(kidImports.map((n) => [n, n]))) : `{ ${kidImports.join(', ')} }`};
+const COMPONENTS = ${ce ? JSON.stringify(Object.fromEntries(kidImports.map((n) => [n, n]))) : componentsMapLiteral(kidImports)};
 const EXTRA = { ${extraNames.join(', ')} };
 const ceProps = (p) => {
   if (!CE) return p;
@@ -2061,6 +2461,7 @@ const CHILDREN_SPEC = ${JSON.stringify(comp.childrenSpec ?? null)};
 function resolveMarkers(v) {
   if (v && typeof v === 'object') {
     if (v.$callback === true) return () => {};
+    if (typeof v.$date === 'string') return new Date(v.$date);
     if (typeof v.$import === 'string') return EXTRA[v.$import.split('#')[1]];
     if (typeof v.$render === 'string') { const K = EXTRA[v.$render.split('#')[1]]; return (params) => React.createElement(K, params); }
     if (typeof v.$element === 'string') {

@@ -24,6 +24,11 @@
       "text": "A very long label that will not fit",
       "tokens": {
         "background-color": "{imported.case-text-overflow-ellipsis.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
+        "color": "{imported.case-text-overflow-ellipsis.root.color}",
         "font-size": "{imported.case-text-overflow-ellipsis.root.font-size}",
         "font-weight": "{imported.case-text-overflow-ellipsis.root.font-weight}",
         "min-height": "{imported.case-text-overflow-ellipsis.root.min-height}",

@@ -1550,6 +1550,10 @@
       tokenSet: parsed.tokenSet || null,
       // Bundle-carried icon assets ride the same paste (figma bundle --icons).
       icons: parsed.icons || null,
+      // The bundle's own REQUIRED-FACTS posture (figma bundle --strict writes
+      // "refuse"): a set missing a load-bearing fact for its archetype is
+      // named and refused here rather than minted unrecognisable.
+      requiredFacts: parsed.requiredFacts || null,
     });
     if (!plan.ok) {
       addIssues(resultBox('gen-result', false, 'Refused — the contract did not pass the referee.'), plan.issues);

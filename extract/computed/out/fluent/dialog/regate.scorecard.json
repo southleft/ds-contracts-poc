@@ -6,14 +6,49 @@
   "declared": {
     "base": [
       {
+        "part": "root",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
         "part": "dialogbody-2",
         "channel": "box-sizing",
         "value": "border-box"
       },
       {
+        "part": "dialogbody-2",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "dialogbody-2",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
         "part": "label-4",
         "channel": "font-family",
         "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "label-4",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
+        "part": "dialogtitle__action",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "dialogtitle__action",
+        "channel": "text-align",
+        "value": "left"
       },
       {
         "part": "part-0-1-0",
@@ -81,9 +116,24 @@
         "value": "auto"
       },
       {
+        "part": "label-5",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
         "part": "dialogactions-2",
         "channel": "box-sizing",
         "value": "border-box"
+      },
+      {
+        "part": "dialogactions-2",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "dialogactions-2",
+        "channel": "text-align",
+        "value": "left"
       },
       {
         "part": "label-6",
@@ -136,6 +186,16 @@
         "value": "cubic-bezier(0.33, 0, 0.67, 1)"
       },
       {
+        "part": "dialogsurface__backdrop",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "dialogsurface__backdrop",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
         "part": "dialogsurface",
         "channel": "border-bottom-style",
         "value": "solid"
@@ -161,14 +221,39 @@
         "value": "border-box"
       },
       {
+        "part": "dialogsurface",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "dialogsurface",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
         "part": "dialogbody",
         "channel": "box-sizing",
         "value": "border-box"
       },
       {
+        "part": "dialogbody",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "dialogbody",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
         "part": "label",
         "channel": "font-family",
         "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "label",
+        "channel": "text-align",
+        "value": "left"
       },
       {
         "part": "label-2",
@@ -191,9 +276,24 @@
         "value": "auto"
       },
       {
+        "part": "label-2",
+        "channel": "text-align",
+        "value": "left"
+      },
+      {
         "part": "dialogactions",
         "channel": "box-sizing",
         "value": "border-box"
+      },
+      {
+        "part": "dialogactions",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
+      },
+      {
+        "part": "dialogactions",
+        "channel": "text-align",
+        "value": "left"
       },
       {
         "part": "label-3",
@@ -257,9 +357,9 @@
     "combos": 3,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 448,
-      "cellsEqual": 370,
-      "pctEqual": 82.58928571428571,
+      "cellsCompared": 710,
+      "cellsEqual": 632,
+      "pctEqual": 89.01408450704226,
       "rowsFullyEqual": 0,
       "rows": 12
     },
@@ -283,11 +383,11 @@
       "contradictions": 0,
       "mintedLeaves": 98,
       "mintedLeavesUnfolded": 98,
-      "baseBindings": 160,
+      "baseBindings": 188,
       "stateBindings": 0,
       "codeOnlyChannels": 50,
       "overflowBindings": 0,
-      "folds": 18
+      "folds": 170
     },
     "worstRows": [
       {
@@ -477,8 +577,8 @@
     "rows": [
       {
         "key": "modal__default",
-        "channelsCompared": 160,
-        "channelsEqual": 138,
+        "channelsCompared": 251,
+        "channelsEqual": 229,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -650,8 +750,8 @@
       },
       {
         "key": "non-modal__default",
-        "channelsCompared": 128,
-        "channelsEqual": 94,
+        "channelsCompared": 208,
+        "channelsEqual": 174,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -895,8 +995,8 @@
       },
       {
         "key": "alert__default",
-        "channelsCompared": 160,
-        "channelsEqual": 138,
+        "channelsCompared": 251,
+        "channelsEqual": 229,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

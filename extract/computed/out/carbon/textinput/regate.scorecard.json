@@ -6,6 +6,51 @@
   "declared": {
     "base": [
       {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "root",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "text-input__label-wrapper",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "text-input__label-wrapper",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "text-input__label-wrapper",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "text-input__label-wrapper",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
         "part": "label",
         "channel": "cursor",
         "value": "default"
@@ -16,9 +61,59 @@
         "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
       },
       {
+        "part": "label",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "label",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "text-input__field-outer-wrapper",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "text-input__field-outer-wrapper",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "text-input__field-outer-wrapper",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "text-input__field-outer-wrapper",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "text-input__field-wrapper",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "text-input__field-wrapper",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "text-input__field-wrapper",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
         "part": "text-input__field-wrapper",
         "channel": "position",
         "value": "relative"
+      },
+      {
+        "part": "text-input__field-wrapper",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
       },
       {
         "part": "text-input",
@@ -32,13 +127,18 @@
       },
       {
         "part": "text-input",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "text-input",
         "channel": "cursor",
         "value": "text"
       },
       {
         "part": "text-input",
-        "channel": "font-feature-settings",
-        "value": "normal"
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
       },
       {
         "part": "text-input",
@@ -54,11 +154,6 @@
         "part": "text-input",
         "channel": "overflow-y",
         "value": "clip"
-      },
-      {
-        "part": "text-input",
-        "channel": "text-rendering",
-        "value": "auto"
       },
       {
         "part": "text-input",
@@ -82,6 +177,21 @@
       },
       {
         "part": "text-input__counter-alert",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "text-input__counter-alert",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "text-input__counter-alert",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "text-input__counter-alert",
         "channel": "overflow-x",
         "value": "hidden"
       },
@@ -94,6 +204,11 @@
         "part": "text-input__counter-alert",
         "channel": "position",
         "value": "absolute"
+      },
+      {
+        "part": "text-input__counter-alert",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
       }
     ],
     "state": [
@@ -114,9 +229,9 @@
     "combos": 10,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 3600,
-      "cellsEqual": 3210,
-      "pctEqual": 89.16666666666667,
+      "cellsCompared": 7360,
+      "cellsEqual": 6790,
+      "pctEqual": 92.2554347826087,
       "rowsFullyEqual": 0,
       "rows": 40
     },
@@ -138,69 +253,69 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 53,
-      "mintedLeavesUnfolded": 51,
-      "baseBindings": 62,
-      "stateBindings": 15,
-      "codeOnlyChannels": 3,
-      "overflowBindings": 13,
-      "folds": 10
+      "mintedLeaves": 55,
+      "mintedLeavesUnfolded": 52,
+      "baseBindings": 68,
+      "stateBindings": 7,
+      "codeOnlyChannels": 10,
+      "overflowBindings": 5,
+      "folds": 68
     },
     "worstRows": [
       {
         "key": "unset.disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 16,
+        "channelsMismatched": 25,
         "unscorable": "no-original"
       },
       {
         "key": "unset.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 16,
+        "channelsMismatched": 25,
         "unscorable": "no-original"
       },
       {
         "key": "unset.disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 16,
+        "channelsMismatched": 25,
         "unscorable": "no-original"
       },
       {
         "key": "unset.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 16,
+        "channelsMismatched": 25,
         "unscorable": "no-original"
       },
       {
         "key": "xs.disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 16,
+        "channelsMismatched": 25,
         "unscorable": "no-original"
       },
       {
         "key": "xs.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 16,
+        "channelsMismatched": 25,
         "unscorable": "no-original"
       },
       {
         "key": "xs.disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 16,
+        "channelsMismatched": 25,
         "unscorable": "no-original"
       },
       {
         "key": "xs.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 16,
+        "channelsMismatched": 25,
         "unscorable": "no-original"
       }
     ],
@@ -270,19 +385,18 @@
       "overflow: text-input.outline-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: text-input.outline-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: text-input.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "overflow: text-input.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "overflow: text-input.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "overflow: text-input.border-top-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "overflow: text-input.caret-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "overflow: text-input.column-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "overflow: text-input.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "overflow: text-input.text-decoration-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "overflow: text-input.text-emphasis-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: text-input.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: text-input.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: text-input__label-wrapper.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: label.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: text-input__field-outer-wrapper.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: text-input__field-wrapper.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: text-input.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: text-input.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
-      "code-only: text-input__counter-alert.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+      "code-only: text-input__counter-alert.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: text-input__counter-alert.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -309,8 +423,8 @@
     "rows": [
       {
         "key": "unset.enabled__default",
-        "channelsCompared": 90,
-        "channelsEqual": 87,
+        "channelsCompared": 184,
+        "channelsEqual": 181,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -338,8 +452,8 @@
       },
       {
         "key": "unset.enabled__hover",
-        "channelsCompared": 90,
-        "channelsEqual": 87,
+        "channelsCompared": 184,
+        "channelsEqual": 181,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -367,8 +481,8 @@
       },
       {
         "key": "unset.enabled__focus-visible",
-        "channelsCompared": 90,
-        "channelsEqual": 86,
+        "channelsCompared": 184,
+        "channelsEqual": 180,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -402,8 +516,8 @@
       },
       {
         "key": "unset.enabled__active",
-        "channelsCompared": 90,
-        "channelsEqual": 86,
+        "channelsCompared": 184,
+        "channelsEqual": 180,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -437,8 +551,8 @@
       },
       {
         "key": "unset.disabled__default",
-        "channelsCompared": 90,
-        "channelsEqual": 74,
+        "channelsCompared": 184,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -523,9 +637,63 @@
           },
           {
             "part": "text-input",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
             "channel": "cursor",
             "ours": "text",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "text-input",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "text-input",
@@ -544,8 +712,8 @@
       },
       {
         "key": "unset.disabled__hover",
-        "channelsCompared": 90,
-        "channelsEqual": 74,
+        "channelsCompared": 184,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -630,9 +798,63 @@
           },
           {
             "part": "text-input",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
             "channel": "cursor",
             "ours": "text",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "text-input",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "text-input",
@@ -651,8 +873,8 @@
       },
       {
         "key": "unset.disabled__focus-visible",
-        "channelsCompared": 90,
-        "channelsEqual": 74,
+        "channelsCompared": 184,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -737,9 +959,63 @@
           },
           {
             "part": "text-input",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
             "channel": "cursor",
             "ours": "text",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "text-input",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "text-input",
@@ -758,8 +1034,8 @@
       },
       {
         "key": "unset.disabled__active",
-        "channelsCompared": 90,
-        "channelsEqual": 74,
+        "channelsCompared": 184,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -844,9 +1120,63 @@
           },
           {
             "part": "text-input",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
             "channel": "cursor",
             "ours": "text",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "text-input",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "text-input",
@@ -865,8 +1195,8 @@
       },
       {
         "key": "xs.enabled__default",
-        "channelsCompared": 90,
-        "channelsEqual": 87,
+        "channelsCompared": 184,
+        "channelsEqual": 181,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -894,8 +1224,8 @@
       },
       {
         "key": "xs.enabled__hover",
-        "channelsCompared": 90,
-        "channelsEqual": 87,
+        "channelsCompared": 184,
+        "channelsEqual": 181,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -923,8 +1253,8 @@
       },
       {
         "key": "xs.enabled__focus-visible",
-        "channelsCompared": 90,
-        "channelsEqual": 86,
+        "channelsCompared": 184,
+        "channelsEqual": 180,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -958,8 +1288,8 @@
       },
       {
         "key": "xs.enabled__active",
-        "channelsCompared": 90,
-        "channelsEqual": 86,
+        "channelsCompared": 184,
+        "channelsEqual": 180,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -993,8 +1323,8 @@
       },
       {
         "key": "xs.disabled__default",
-        "channelsCompared": 90,
-        "channelsEqual": 74,
+        "channelsCompared": 184,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1079,9 +1409,63 @@
           },
           {
             "part": "text-input",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
             "channel": "cursor",
             "ours": "text",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "text-input",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "text-input",
@@ -1100,8 +1484,8 @@
       },
       {
         "key": "xs.disabled__hover",
-        "channelsCompared": 90,
-        "channelsEqual": 74,
+        "channelsCompared": 184,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1186,9 +1570,63 @@
           },
           {
             "part": "text-input",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
             "channel": "cursor",
             "ours": "text",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "text-input",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "text-input",
@@ -1207,8 +1645,8 @@
       },
       {
         "key": "xs.disabled__focus-visible",
-        "channelsCompared": 90,
-        "channelsEqual": 74,
+        "channelsCompared": 184,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1293,9 +1731,63 @@
           },
           {
             "part": "text-input",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
             "channel": "cursor",
             "ours": "text",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "text-input",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "text-input",
@@ -1314,8 +1806,8 @@
       },
       {
         "key": "xs.disabled__active",
-        "channelsCompared": 90,
-        "channelsEqual": 74,
+        "channelsCompared": 184,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1400,9 +1892,63 @@
           },
           {
             "part": "text-input",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
             "channel": "cursor",
             "ours": "text",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "text-input",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "text-input",
@@ -1421,8 +1967,8 @@
       },
       {
         "key": "sm.enabled__default",
-        "channelsCompared": 90,
-        "channelsEqual": 87,
+        "channelsCompared": 184,
+        "channelsEqual": 181,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1450,8 +1996,8 @@
       },
       {
         "key": "sm.enabled__hover",
-        "channelsCompared": 90,
-        "channelsEqual": 87,
+        "channelsCompared": 184,
+        "channelsEqual": 181,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1479,8 +2025,8 @@
       },
       {
         "key": "sm.enabled__focus-visible",
-        "channelsCompared": 90,
-        "channelsEqual": 86,
+        "channelsCompared": 184,
+        "channelsEqual": 180,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1514,8 +2060,8 @@
       },
       {
         "key": "sm.enabled__active",
-        "channelsCompared": 90,
-        "channelsEqual": 86,
+        "channelsCompared": 184,
+        "channelsEqual": 180,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1549,8 +2095,8 @@
       },
       {
         "key": "sm.disabled__default",
-        "channelsCompared": 90,
-        "channelsEqual": 74,
+        "channelsCompared": 184,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1635,9 +2181,63 @@
           },
           {
             "part": "text-input",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
             "channel": "cursor",
             "ours": "text",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "text-input",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "text-input",
@@ -1656,8 +2256,8 @@
       },
       {
         "key": "sm.disabled__hover",
-        "channelsCompared": 90,
-        "channelsEqual": 74,
+        "channelsCompared": 184,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1742,9 +2342,63 @@
           },
           {
             "part": "text-input",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
             "channel": "cursor",
             "ours": "text",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "text-input",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "text-input",
@@ -1763,8 +2417,8 @@
       },
       {
         "key": "sm.disabled__focus-visible",
-        "channelsCompared": 90,
-        "channelsEqual": 74,
+        "channelsCompared": 184,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1849,9 +2503,63 @@
           },
           {
             "part": "text-input",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
             "channel": "cursor",
             "ours": "text",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "text-input",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "text-input",
@@ -1870,8 +2578,8 @@
       },
       {
         "key": "sm.disabled__active",
-        "channelsCompared": 90,
-        "channelsEqual": 74,
+        "channelsCompared": 184,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1956,9 +2664,63 @@
           },
           {
             "part": "text-input",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
             "channel": "cursor",
             "ours": "text",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "text-input",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "text-input",
@@ -1977,8 +2739,8 @@
       },
       {
         "key": "md.enabled__default",
-        "channelsCompared": 90,
-        "channelsEqual": 87,
+        "channelsCompared": 184,
+        "channelsEqual": 181,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2006,8 +2768,8 @@
       },
       {
         "key": "md.enabled__hover",
-        "channelsCompared": 90,
-        "channelsEqual": 87,
+        "channelsCompared": 184,
+        "channelsEqual": 181,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2035,8 +2797,8 @@
       },
       {
         "key": "md.enabled__focus-visible",
-        "channelsCompared": 90,
-        "channelsEqual": 86,
+        "channelsCompared": 184,
+        "channelsEqual": 180,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2070,8 +2832,8 @@
       },
       {
         "key": "md.enabled__active",
-        "channelsCompared": 90,
-        "channelsEqual": 86,
+        "channelsCompared": 184,
+        "channelsEqual": 180,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2105,8 +2867,8 @@
       },
       {
         "key": "md.disabled__default",
-        "channelsCompared": 90,
-        "channelsEqual": 74,
+        "channelsCompared": 184,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2191,9 +2953,63 @@
           },
           {
             "part": "text-input",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
             "channel": "cursor",
             "ours": "text",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "text-input",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "text-input",
@@ -2212,8 +3028,8 @@
       },
       {
         "key": "md.disabled__hover",
-        "channelsCompared": 90,
-        "channelsEqual": 74,
+        "channelsCompared": 184,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2298,9 +3114,63 @@
           },
           {
             "part": "text-input",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
             "channel": "cursor",
             "ours": "text",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "text-input",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "text-input",
@@ -2319,8 +3189,8 @@
       },
       {
         "key": "md.disabled__focus-visible",
-        "channelsCompared": 90,
-        "channelsEqual": 74,
+        "channelsCompared": 184,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2405,9 +3275,63 @@
           },
           {
             "part": "text-input",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
             "channel": "cursor",
             "ours": "text",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "text-input",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "text-input",
@@ -2426,8 +3350,8 @@
       },
       {
         "key": "md.disabled__active",
-        "channelsCompared": 90,
-        "channelsEqual": 74,
+        "channelsCompared": 184,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2512,9 +3436,63 @@
           },
           {
             "part": "text-input",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
             "channel": "cursor",
             "ours": "text",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "text-input",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "text-input",
@@ -2533,8 +3511,8 @@
       },
       {
         "key": "lg.enabled__default",
-        "channelsCompared": 90,
-        "channelsEqual": 87,
+        "channelsCompared": 184,
+        "channelsEqual": 181,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2562,8 +3540,8 @@
       },
       {
         "key": "lg.enabled__hover",
-        "channelsCompared": 90,
-        "channelsEqual": 87,
+        "channelsCompared": 184,
+        "channelsEqual": 181,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2591,8 +3569,8 @@
       },
       {
         "key": "lg.enabled__focus-visible",
-        "channelsCompared": 90,
-        "channelsEqual": 86,
+        "channelsCompared": 184,
+        "channelsEqual": 180,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2626,8 +3604,8 @@
       },
       {
         "key": "lg.enabled__active",
-        "channelsCompared": 90,
-        "channelsEqual": 86,
+        "channelsCompared": 184,
+        "channelsEqual": 180,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2661,8 +3639,8 @@
       },
       {
         "key": "lg.disabled__default",
-        "channelsCompared": 90,
-        "channelsEqual": 74,
+        "channelsCompared": 184,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2747,9 +3725,63 @@
           },
           {
             "part": "text-input",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
             "channel": "cursor",
             "ours": "text",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "text-input",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "text-input",
@@ -2768,8 +3800,8 @@
       },
       {
         "key": "lg.disabled__hover",
-        "channelsCompared": 90,
-        "channelsEqual": 74,
+        "channelsCompared": 184,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2854,9 +3886,63 @@
           },
           {
             "part": "text-input",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
             "channel": "cursor",
             "ours": "text",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "text-input",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "text-input",
@@ -2875,8 +3961,8 @@
       },
       {
         "key": "lg.disabled__focus-visible",
-        "channelsCompared": 90,
-        "channelsEqual": 74,
+        "channelsCompared": 184,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2961,9 +4047,63 @@
           },
           {
             "part": "text-input",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
             "channel": "cursor",
             "ours": "text",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "text-input",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "text-input",
@@ -2982,8 +4122,8 @@
       },
       {
         "key": "lg.disabled__active",
-        "channelsCompared": 90,
-        "channelsEqual": 74,
+        "channelsCompared": 184,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3068,9 +4208,63 @@
           },
           {
             "part": "text-input",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
             "channel": "cursor",
             "ours": "text",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "text-input",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "text-input",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "text-input",

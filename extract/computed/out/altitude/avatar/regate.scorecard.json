@@ -27,6 +27,11 @@
       },
       {
         "part": "avatar__badge",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", sans-serif"
+      },
+      {
+        "part": "avatar__badge",
         "channel": "text-align",
         "value": "center"
       },
@@ -34,6 +39,11 @@
         "part": "badge",
         "channel": "box-sizing",
         "value": "border-box"
+      },
+      {
+        "part": "badge",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", sans-serif"
       },
       {
         "part": "badge",
@@ -52,9 +62,9 @@
     "combos": 4,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 584,
-      "cellsEqual": 480,
-      "pctEqual": 82.1917808219178,
+      "cellsCompared": 984,
+      "cellsEqual": 880,
+      "pctEqual": 89.4308943089431,
       "rowsFullyEqual": 0,
       "rows": 16
     },
@@ -76,13 +86,13 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 35,
-      "mintedLeavesUnfolded": 35,
-      "baseBindings": 39,
+      "mintedLeaves": 36,
+      "mintedLeavesUnfolded": 36,
+      "baseBindings": 42,
       "stateBindings": 0,
-      "codeOnlyChannels": 5,
+      "codeOnlyChannels": 8,
       "overflowBindings": 0,
-      "folds": 0
+      "folds": 30
     },
     "worstRows": [
       {
@@ -184,8 +194,11 @@
       "code-only: root.bottom — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.left — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.position — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.right — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: root.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+      "code-only: root.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: avatar__badge.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <al-badge>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <al-badge> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: badge.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -218,8 +231,8 @@
     "rows": [
       {
         "key": "unset.off__default",
-        "channelsCompared": 21,
-        "channelsEqual": 17,
+        "channelsCompared": 33,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -253,8 +266,8 @@
       },
       {
         "key": "unset.off__hover",
-        "channelsCompared": 21,
-        "channelsEqual": 17,
+        "channelsCompared": 33,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -288,8 +301,8 @@
       },
       {
         "key": "unset.off__focus-visible",
-        "channelsCompared": 21,
-        "channelsEqual": 17,
+        "channelsCompared": 33,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -323,8 +336,8 @@
       },
       {
         "key": "unset.off__active",
-        "channelsCompared": 21,
-        "channelsEqual": 17,
+        "channelsCompared": 33,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -358,8 +371,8 @@
       },
       {
         "key": "unset.on__default",
-        "channelsCompared": 52,
-        "channelsEqual": 43,
+        "channelsCompared": 90,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -423,8 +436,8 @@
       },
       {
         "key": "unset.on__hover",
-        "channelsCompared": 52,
-        "channelsEqual": 43,
+        "channelsCompared": 90,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -488,8 +501,8 @@
       },
       {
         "key": "unset.on__focus-visible",
-        "channelsCompared": 52,
-        "channelsEqual": 43,
+        "channelsCompared": 90,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -553,8 +566,8 @@
       },
       {
         "key": "unset.on__active",
-        "channelsCompared": 52,
-        "channelsEqual": 43,
+        "channelsCompared": 90,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -618,8 +631,8 @@
       },
       {
         "key": "sm.off__default",
-        "channelsCompared": 21,
-        "channelsEqual": 17,
+        "channelsCompared": 33,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -653,8 +666,8 @@
       },
       {
         "key": "sm.off__hover",
-        "channelsCompared": 21,
-        "channelsEqual": 17,
+        "channelsCompared": 33,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -688,8 +701,8 @@
       },
       {
         "key": "sm.off__focus-visible",
-        "channelsCompared": 21,
-        "channelsEqual": 17,
+        "channelsCompared": 33,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -723,8 +736,8 @@
       },
       {
         "key": "sm.off__active",
-        "channelsCompared": 21,
-        "channelsEqual": 17,
+        "channelsCompared": 33,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -758,8 +771,8 @@
       },
       {
         "key": "sm.on__default",
-        "channelsCompared": 52,
-        "channelsEqual": 43,
+        "channelsCompared": 90,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -823,8 +836,8 @@
       },
       {
         "key": "sm.on__hover",
-        "channelsCompared": 52,
-        "channelsEqual": 43,
+        "channelsCompared": 90,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -888,8 +901,8 @@
       },
       {
         "key": "sm.on__focus-visible",
-        "channelsCompared": 52,
-        "channelsEqual": 43,
+        "channelsCompared": 90,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -953,8 +966,8 @@
       },
       {
         "key": "sm.on__active",
-        "channelsCompared": 52,
-        "channelsEqual": 43,
+        "channelsCompared": 90,
+        "channelsEqual": 81,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

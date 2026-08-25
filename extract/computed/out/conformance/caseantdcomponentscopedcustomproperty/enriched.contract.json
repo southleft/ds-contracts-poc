@@ -29,6 +29,11 @@
           },
           "tokens": {
             "background-color": "{imported.case-antd-component-scoped-custom-property.label.background-color}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.case-antd-component-scoped-custom-property.label.color}",
             "font-size": "{imported.case-antd-component-scoped-custom-property.label.font-size}",
             "font-weight": "{imported.case-antd-component-scoped-custom-property.label.font-weight}",
             "padding-left": "{imported.case-antd-component-scoped-custom-property.label.padding-left}",
@@ -41,6 +46,11 @@
         "font-family": "monospace"
       },
       "tokens": {
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
+        "color": "{imported.case-antd-component-scoped-custom-property.root.color}",
         "font-size": "{imported.case-antd-component-scoped-custom-property.root.font-size}"
       }
     }

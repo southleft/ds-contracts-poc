@@ -20,6 +20,11 @@
       "text": "Sample",
       "tokens": {
         "background-color": "{imported.case-content-visibility-auto.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
+        "color": "{imported.case-content-visibility-auto.root.color}",
         "font-size": "{imported.case-content-visibility-auto.root.font-size}",
         "font-weight": "{imported.case-content-visibility-auto.root.font-weight}",
         "min-height": "{imported.case-content-visibility-auto.root.min-height}",

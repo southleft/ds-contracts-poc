@@ -12,12 +12,13 @@
     {
       "stage": "dump",
       "status": "ok",
-      "ms": 898,
+      "ms": 862,
+      "driver": "harness",
       "command": "npm run extract:figma:rest -- \"<url>?node-id=120:1999\" --out <dump>",
       "message": "card-flowbite-card.json",
       "artifacts": [
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/dumps/card-flowbite-card.json",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/dumps/card-flowbite-card.json",
           "sha256": "3f7d1ecd78e33a3020763af524b44cc5c67b72ef61da37612811f3648454eecc",
           "bytes": 11257,
           "committed": false
@@ -27,12 +28,13 @@
     {
       "stage": "propose",
       "status": "ok",
-      "ms": 445,
+      "ms": 295,
+      "driver": "harness",
       "command": "npm run extract:figma -- <dump> --out <proposed> --tokens <kit dtcg>",
       "message": "1 proposal file(s)",
       "artifacts": [
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/proposed/card-flowbite-card/card-flowbite-card.contract.proposed.json",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/proposed/card-flowbite-card/card-flowbite-card.contract.proposed.json",
           "sha256": "b12f0fe496522c26452070adeca9225350006e7b457b83c7c63d811b27fa5786",
           "bytes": 2573,
           "committed": false
@@ -42,7 +44,8 @@
     {
       "stage": "validate",
       "status": "ok",
-      "ms": 0,
+      "ms": 1,
+      "driver": "harness",
       "command": "core/emit-react.ts validateContract (the referee — no CLI verb; docs/07)",
       "message": "no violations",
       "artifacts": []
@@ -50,36 +53,37 @@
     {
       "stage": "generate-react",
       "status": "ok",
-      "ms": 995,
+      "ms": 682,
+      "driver": "harness",
       "command": "npx ds-contracts generate <proposed>/*.contract.proposed.json --out <react> --tokens <kit>,<minted>",
       "message": "5 file(s)",
       "artifacts": [
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/react/card-flowbite-card/index.ts",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/react/card-flowbite-card/index.ts",
           "sha256": "81111aa002bf2ed1fd8ec1c2aa5b49584ad02f8b0e3392a8abef61f2ca02ae1e",
           "bytes": 47,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/react/card-flowbite-card/tokens.css",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/react/card-flowbite-card/tokens.css",
           "sha256": "b5822a4df1012172748109ce6b4c55b88909d08559c9926fdd5210d373760cd6",
           "bytes": 20896,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/react/card-flowbite-card/Card/Card.module.css",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/react/card-flowbite-card/Card/Card.module.css",
           "sha256": "6d91af4a7e7c7f54e3071b06092722ed578b29002f76f34df70600f719a1dcef",
           "bytes": 1148,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/react/card-flowbite-card/Card/Card.tsx",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/react/card-flowbite-card/Card/Card.tsx",
           "sha256": "ab3e2b4890e055ed2b3db9d473975509e3628376d31bc51c8d57209d643c3fe3",
           "bytes": 1015,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/react/card-flowbite-card/Card/index.ts",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/react/card-flowbite-card/Card/index.ts",
           "sha256": "6abf31a433c1ff35092ff51548df0a3e7e3a15c082141450a4a5f6c51b43630a",
           "bytes": 72,
           "committed": false
@@ -89,36 +93,37 @@
     {
       "stage": "generate-wc",
       "status": "ok",
-      "ms": 1166,
+      "ms": 726,
+      "driver": "harness",
       "command": "npx ds-contracts generate <proposed>/*.contract.proposed.json --out <wc> --target web-components --emitter @ds-contracts/emitter-web-components",
       "message": "5 file(s)",
       "artifacts": [
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/wc/card-flowbite-card/flowbite-card.css.ts",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/wc/card-flowbite-card/flowbite-card.css.ts",
           "sha256": "38c9903767b081d8a7e46d9d967ccfabab0f3d2fa6b5e624a9e63a241c977292",
           "bytes": 1537,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/wc/card-flowbite-card/flowbite-card.custom-elements.json",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/wc/card-flowbite-card/flowbite-card.custom-elements.json",
           "sha256": "640161ef1de2cc00da41e5d4cdd0ef439fdf4499c504b8fffeb6237af1449c58",
           "bytes": 1616,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/wc/card-flowbite-card/flowbite-card.demo.html",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/wc/card-flowbite-card/flowbite-card.demo.html",
           "sha256": "d5bd662522f30e5493aba2774b0275f296465fe77400bea91209e1417600fa91",
           "bytes": 1160,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/wc/card-flowbite-card/flowbite-card.ts",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/wc/card-flowbite-card/flowbite-card.ts",
           "sha256": "5d9cfbd52c2d4e5ea01893dbf63247a074241ddc88609ad3d37b36d880f2845c",
           "bytes": 2075,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/wc/card-flowbite-card/tokens.css",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/wc/card-flowbite-card/tokens.css",
           "sha256": "e2e65aa771a51029546e4446e1a2ff58534400419fb98cff7749c4001599ac26",
           "bytes": 20905,
           "committed": false
@@ -128,7 +133,8 @@
     {
       "stage": "render",
       "status": "ok",
-      "ms": 25,
+      "ms": 16,
+      "driver": "harness",
       "command": "esbuild bundle of the generated React → playwright-core screenshot at deviceScaleFactor 2",
       "message": "1 cell(s)",
       "artifacts": [
@@ -143,7 +149,8 @@
     {
       "stage": "ref",
       "status": "ok",
-      "ms": 979,
+      "ms": 1018,
+      "driver": "harness",
       "command": "GET /v1/images/59mLQlOMiD5w5za6SUcoO5?ids=<variant>&scale=2 (READ-ONLY)",
       "message": "1 reference PNG(s) at scale 2",
       "artifacts": [
@@ -173,5 +180,5 @@
       }
     ]
   },
-  "totalMs": 4508
+  "totalMs": 3600
 }

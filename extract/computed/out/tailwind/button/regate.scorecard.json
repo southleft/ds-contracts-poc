@@ -7,6 +7,26 @@
     "base": [
       {
         "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
         "channel": "font-family",
         "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", \"Noto Sans\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
       },
@@ -34,10 +54,10 @@
     "combos": 50,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 6800,
-      "cellsEqual": 6640,
-      "pctEqual": 97.6470588235294,
-      "rowsFullyEqual": 160,
+      "cellsCompared": 8800,
+      "cellsEqual": 8400,
+      "pctEqual": 95.45454545454545,
+      "rowsFullyEqual": 0,
       "rows": 200
     },
     "pixel": {
@@ -58,91 +78,86 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 126,
-      "mintedLeavesUnfolded": 201,
-      "baseBindings": 25,
+      "mintedLeaves": 127,
+      "mintedLeavesUnfolded": 202,
+      "baseBindings": 28,
       "stateBindings": 11,
-      "codeOnlyChannels": 4,
+      "codeOnlyChannels": 7,
       "overflowBindings": 0,
       "folds": 5
     },
     "worstRows": [
       {
-        "key": "alternative.xs.enabled__default",
+        "key": "default.xs.enabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 4,
+        "channelsMismatched": 2,
         "unscorable": "no-original"
       },
       {
-        "key": "alternative.xs.enabled__hover",
+        "key": "default.xs.enabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 4,
+        "channelsMismatched": 2,
         "unscorable": "no-original"
       },
       {
-        "key": "alternative.xs.enabled__focus-visible",
+        "key": "default.xs.enabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 4,
+        "channelsMismatched": 2,
         "unscorable": "no-original"
       },
       {
-        "key": "alternative.xs.enabled__active",
+        "key": "default.xs.enabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 4,
+        "channelsMismatched": 2,
         "unscorable": "no-original"
       },
       {
-        "key": "alternative.xs.disabled__default",
+        "key": "default.xs.disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 4,
+        "channelsMismatched": 2,
         "unscorable": "no-original"
       },
       {
-        "key": "alternative.xs.disabled__hover",
+        "key": "default.xs.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 4,
+        "channelsMismatched": 2,
         "unscorable": "no-original"
       },
       {
-        "key": "alternative.xs.disabled__focus-visible",
+        "key": "default.xs.disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 4,
+        "channelsMismatched": 2,
         "unscorable": "no-original"
       },
       {
-        "key": "alternative.xs.disabled__active",
+        "key": "default.xs.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 4,
+        "channelsMismatched": 2,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
       [
-        "root.border-bottom-width",
-        40
+        "root.appearance",
+        200
       ],
       [
-        "root.border-left-width",
-        40
-      ],
-      [
-        "root.border-right-width",
-        40
-      ],
-      [
-        "root.border-top-width",
-        40
+        "root.text-size-adjust",
+        200
       ]
     ],
     "namedLosses": [
+      "code-only: root.appearance — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only[active]: root.--tw-outline-style — CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel",
       "code-only[active]: root.--tw-ring-shadow — CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel",
       "code-only[focus-visible]: root.--tw-outline-style — CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel",
@@ -245,3002 +260,4602 @@
     "rows": [
       {
         "key": "default.xs.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.xs.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.xs.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.xs.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.xs.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.xs.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.xs.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.xs.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.sm.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.sm.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.sm.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.sm.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.sm.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.sm.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.sm.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.sm.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.md.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.md.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.md.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.md.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.md.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.md.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.md.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.md.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.lg.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.lg.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.lg.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.lg.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.lg.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.lg.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.lg.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.lg.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.xl.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.xl.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.xl.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.xl.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.xl.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.xl.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.xl.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "default.xl.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "alternative.xs.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xs.enabled__hover",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xs.enabled__focus-visible",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xs.enabled__active",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xs.disabled__default",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xs.disabled__hover",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xs.disabled__focus-visible",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xs.disabled__active",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.sm.enabled__default",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.sm.enabled__hover",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.sm.enabled__focus-visible",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.sm.enabled__active",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.sm.disabled__default",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.sm.disabled__hover",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.sm.disabled__focus-visible",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.sm.disabled__active",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.md.enabled__default",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.md.enabled__hover",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.md.enabled__focus-visible",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.md.enabled__active",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.md.disabled__default",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.md.disabled__hover",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.md.disabled__focus-visible",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.md.disabled__active",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.lg.enabled__default",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.lg.enabled__hover",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.lg.enabled__focus-visible",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.lg.enabled__active",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.lg.disabled__default",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.lg.disabled__hover",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.lg.disabled__focus-visible",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.lg.disabled__active",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xl.enabled__default",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xl.enabled__hover",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xl.enabled__focus-visible",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xl.enabled__active",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xl.disabled__default",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xl.disabled__hover",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xl.disabled__focus-visible",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default.xl.disabled__active",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "alternative.xs.enabled__default",
+        "channelsCompared": 44,
+        "channelsEqual": 42,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.xs.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.xs.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.xs.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.xs.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.xs.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.xs.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.xs.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.sm.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.sm.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.sm.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.sm.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.sm.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.sm.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.sm.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.sm.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.md.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.md.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.md.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.md.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.md.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.md.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.md.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.md.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.lg.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.lg.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.lg.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.lg.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.lg.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.lg.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.lg.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.lg.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.xl.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.xl.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.xl.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.xl.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.xl.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.xl.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.xl.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "alternative.xl.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 30,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
           },
           {
             "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.xs.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.xs.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.xs.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.xs.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.xs.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.xs.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.xs.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.xs.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.sm.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.sm.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.sm.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.sm.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.sm.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.sm.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.sm.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.sm.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.md.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.md.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.md.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.md.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.md.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.md.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.md.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.md.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.lg.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.lg.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.lg.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.lg.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.lg.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.lg.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.lg.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.lg.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.xl.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.xl.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.xl.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.xl.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.xl.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.xl.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.xl.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "dark.xl.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.xs.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.xs.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.xs.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.xs.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.xs.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.xs.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.xs.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.xs.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.sm.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.sm.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.sm.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.sm.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.sm.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.sm.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.sm.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.sm.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.md.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.md.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.md.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.md.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.md.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.md.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.md.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.md.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.lg.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.lg.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.lg.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.lg.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.lg.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.lg.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.lg.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.lg.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.xl.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.xl.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.xl.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.xl.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.xl.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.xl.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.xl.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "green.xl.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.xs.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.xs.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.xs.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.xs.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.xs.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.xs.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.xs.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.xs.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.sm.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.sm.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.sm.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.sm.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.sm.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.sm.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.sm.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.sm.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.md.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.md.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.md.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.md.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.md.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.md.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.md.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.md.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.lg.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.lg.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.lg.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.lg.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.lg.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.lg.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.lg.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.lg.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.xl.enabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.xl.enabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.xl.enabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.xl.enabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.xl.disabled__default",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.xl.disabled__hover",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.xl.disabled__focus-visible",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "red.xl.disabled__active",
-        "channelsCompared": 34,
-        "channelsEqual": 34,
+        "channelsCompared": 44,
+        "channelsEqual": 42,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [],
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "appearance",
+            "ours": "auto",
+            "theirs": "button"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
         "note": "original screenshot unavailable — pixel not scored"
       }
     ]

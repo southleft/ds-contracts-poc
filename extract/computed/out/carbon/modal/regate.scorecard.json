@@ -7,6 +7,26 @@
     "base": [
       {
         "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "root",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "root",
         "channel": "transition-delay",
         "value": "0s, 0s"
       },
@@ -27,8 +47,18 @@
       },
       {
         "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
         "channel": "font-family",
         "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "label",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
       },
       {
         "part": "label",
@@ -44,6 +74,11 @@
         "part": "label",
         "channel": "position",
         "value": "absolute"
+      },
+      {
+        "part": "label",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
       },
       {
         "part": "label",
@@ -72,6 +107,21 @@
       },
       {
         "part": "modal-container",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "modal-container",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "modal-container",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "modal-container",
         "channel": "max-height",
         "value": "90%"
       },
@@ -84,6 +134,11 @@
         "part": "modal-container",
         "channel": "position",
         "value": "relative"
+      },
+      {
+        "part": "modal-container",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
       },
       {
         "part": "modal-container",
@@ -107,6 +162,21 @@
       },
       {
         "part": "modal-header",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "modal-header",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "modal-header",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "modal-header",
         "channel": "overflow-x",
         "value": "auto"
       },
@@ -116,9 +186,34 @@
         "value": "auto"
       },
       {
+        "part": "modal-header",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "label-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
         "part": "label-2",
         "channel": "font-family",
         "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "label-2",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "label-3",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "label-3",
@@ -126,9 +221,79 @@
         "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
       },
       {
+        "part": "label-3",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "label-3",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "modal-close-button",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "modal-close-button",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "modal-close-button",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "modal-close-button",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "icon-tooltip",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "icon-tooltip",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "icon-tooltip",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
         "part": "icon-tooltip",
         "channel": "position",
         "value": "relative"
+      },
+      {
+        "part": "icon-tooltip",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "tooltip-trigger__wrapper",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "tooltip-trigger__wrapper",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "tooltip-trigger__wrapper",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "tooltip-trigger__wrapper",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
       },
       {
         "part": "btn",
@@ -154,6 +319,11 @@
         "part": "btn",
         "channel": "cursor",
         "value": "pointer"
+      },
+      {
+        "part": "btn",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
       },
       {
         "part": "btn",
@@ -182,8 +352,18 @@
       },
       {
         "part": "label-5",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-5",
         "channel": "font-family",
         "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "label-5",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
       },
       {
         "part": "label-5",
@@ -199,6 +379,31 @@
         "part": "label-5",
         "channel": "position",
         "value": "relative"
+      },
+      {
+        "part": "label-5",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "btn-set",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "btn-set",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "btn-set",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "btn-set",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
       },
       {
         "part": "label-6",
@@ -322,8 +527,18 @@
       },
       {
         "part": "label-8",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-8",
         "channel": "font-family",
         "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "label-8",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
       },
       {
         "part": "label-8",
@@ -342,6 +557,11 @@
       },
       {
         "part": "label-8",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "label-8",
         "channel": "text-wrap-mode",
         "value": "nowrap"
       }
@@ -357,9 +577,9 @@
     "combos": 5,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 1320,
-      "cellsEqual": 1160,
-      "pctEqual": 87.87878787878788,
+      "cellsCompared": 2220,
+      "cellsEqual": 2060,
+      "pctEqual": 92.7927927927928,
       "rowsFullyEqual": 0,
       "rows": 20
     },
@@ -381,13 +601,13 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 74,
-      "mintedLeavesUnfolded": 74,
-      "baseBindings": 178,
+      "mintedLeaves": 75,
+      "mintedLeavesUnfolded": 75,
+      "baseBindings": 196,
       "stateBindings": 0,
-      "codeOnlyChannels": 35,
+      "codeOnlyChannels": 50,
       "overflowBindings": 0,
-      "folds": 58
+      "folds": 183
     },
     "worstRows": [
       {
@@ -515,16 +735,26 @@
       "promotion: inert-overlay-wrapper: popover draws no box in any captured combo, carries no text/icon/shape of its own, and every one of its 2 child part(s) is declared display:none — a carried part that draws NOTHING; refused by name (Carbon's tooltip `popover` wrapper; census sibling of the portal round's stripInertPortalChildren)",
       "code-only: root.content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.position — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: modal-container.display — declared-channel value outside the bounded grammar — named residue (v15)",
       "code-only: modal-container.grid-template-rows — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: modal-container.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: modal-header.grid-column-end — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
       "code-only: modal-header.grid-column-start — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
       "code-only: modal-header.grid-row-end — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
       "code-only: modal-header.grid-row-start — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: modal-header.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-2.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h2>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h2> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: label-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h2>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h2> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: label-3.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h2>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h2> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: label-3.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h2>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h2> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: modal-close-button.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: icon-tooltip.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: tooltip-trigger__wrapper.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: btn.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: btn.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-5.--cds-border-subtle — CSS custom property, not a styled channel — `--cds-border-subtle` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `#c6c6c6`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: label-5.--cds-border-tile — CSS custom property, not a styled channel — `--cds-border-tile` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `#a8a8a8`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
@@ -535,19 +765,24 @@
       "code-only: label-5.grid-column-start — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
       "code-only: label-5.grid-row-end — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
       "code-only: label-5.grid-row-start — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: label-5.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: btn-set.grid-column-end — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
       "code-only: btn-set.grid-column-start — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
       "code-only: btn-set.grid-row-end — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
       "code-only: btn-set.grid-row-start — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: btn-set.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-6.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-6.flex-basis — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-6.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-6.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-6.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-7.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-7.flex-basis — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-7.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-7.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-7.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: label-8.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+      "code-only: label-8.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-8.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -555,14 +790,14 @@
     },
     "shippedMinted": {
       "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-      "leavesAdded": 802,
+      "leavesAdded": 801,
       "divergent": []
     },
     "rows": [
       {
         "key": "unset__default",
-        "channelsCompared": 264,
-        "channelsEqual": 232,
+        "channelsCompared": 444,
+        "channelsEqual": 412,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -794,8 +1029,8 @@
       },
       {
         "key": "xs__default",
-        "channelsCompared": 264,
-        "channelsEqual": 232,
+        "channelsCompared": 444,
+        "channelsEqual": 412,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1027,8 +1262,8 @@
       },
       {
         "key": "sm__default",
-        "channelsCompared": 264,
-        "channelsEqual": 232,
+        "channelsCompared": 444,
+        "channelsEqual": 412,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1260,8 +1495,8 @@
       },
       {
         "key": "md__default",
-        "channelsCompared": 264,
-        "channelsEqual": 232,
+        "channelsCompared": 444,
+        "channelsEqual": 412,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1493,8 +1728,8 @@
       },
       {
         "key": "lg__default",
-        "channelsCompared": 264,
-        "channelsEqual": 232,
+        "channelsCompared": 444,
+        "channelsEqual": 412,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

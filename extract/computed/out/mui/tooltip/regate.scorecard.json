@@ -77,9 +77,9 @@
     "combos": 2,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 121,
-      "cellsEqual": 110,
-      "pctEqual": 90.9090909090909,
+      "cellsCompared": 126,
+      "cellsEqual": 115,
+      "pctEqual": 91.26984126984127,
       "rowsFullyEqual": 0,
       "rows": 8
     },
@@ -105,7 +105,7 @@
       "mintedLeavesUnfolded": 26,
       "baseBindings": 40,
       "stateBindings": 0,
-      "codeOnlyChannels": 9,
+      "codeOnlyChannels": 12,
       "overflowBindings": 2,
       "folds": 20
     },
@@ -209,15 +209,18 @@
       "promotion: pseudo-decor-outside-grammar: tooltip-arrow::before paints at position:static (11x7.79688, opacity 1) — the bounded decor grammar reads position:absolute boxes only; an in-flow decor box is NOT promoted and NOT on the canvas",
       "overflow: root.height — presence-prop-driven styling (arrow) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (arrow present) is not",
       "overflow: label.margin-bottom — presence-prop-driven styling (arrow) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (arrow present) is not",
+      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.bottom — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.left — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.position — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: label.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.right — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: tooltip-arrow.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+      "code-only: tooltip-arrow.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: tooltip-arrow.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -231,8 +234,8 @@
     "rows": [
       {
         "key": "off__default",
-        "channelsCompared": 47,
-        "channelsEqual": 45,
+        "channelsCompared": 49,
+        "channelsEqual": 47,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -284,8 +287,8 @@
       },
       {
         "key": "on__default",
-        "channelsCompared": 74,
-        "channelsEqual": 65,
+        "channelsCompared": 77,
+        "channelsEqual": 68,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

@@ -184,6 +184,12 @@ export interface MintResult {
   entries: MintedEntry[];
   /** Aligned by index with the observations passed in. */
   bindings: MintedBinding[];
+  /** THE DUMP-ROUNDING RECONCILIATION (docs/23 §D.33). Leaves whose path the
+   *  caller's corpus already defines and whose observed value is that corpus
+   *  value re-spelled at the dump's 2-decimal geometry rounding: the same
+   *  measurement, two spellings. The corpus spelling is carried and the row
+   *  is named here — never a silent second value on one path. */
+  reconciled: string[];
 }
 
 // ---------------------------------------------------------------------------
@@ -225,6 +231,34 @@ const formatValue = (kind: MintKind, value: string | number): string =>
         kind === 'size' && typeof value === 'number'
         ? `${value}px`
         : String(value);
+
+/** THE DUMP'S GEOMETRY ROUNDING. Both dump producers spell canvas geometry
+ *  through `round2` — `Math.round(n * 100) / 100` (extract/figma/dump.plugin.js
+ *  and extract/figma/rest/map.ts). Kept here as the ONE definition the
+ *  reconciliation below compares against, so the two never drift apart. */
+const DUMP_GEOMETRY_DECIMALS = 2;
+const roundToDump = (n: number): number => {
+  const f = 10 ** DUMP_GEOMETRY_DECIMALS;
+  return Math.round(n * f) / f;
+};
+
+/** SAME MEASUREMENT, TWO SPELLINGS? True only when `corpus` is a px dimension
+ *  that the dump's rounding turns into exactly `observed`. Pure, total, and
+ *  deliberately narrow: 39.9219px vs 39.92px is one value; 39.92px vs
+ *  39.95px is two, and stays two. */
+export const sameUnderDumpRounding = (corpus: string, observed: string): boolean => {
+  const px = /^(-?\d+(?:\.\d+)?)px$/;
+  const c = px.exec(corpus.trim());
+  const o = px.exec(observed.trim());
+  if (!c || !o) return false;
+  const cn = Number(c[1]);
+  const on = Number(o[1]);
+  if (!Number.isFinite(cn) || !Number.isFinite(on)) return false;
+  // The observation must ALREADY be at the dump's precision — otherwise the
+  // two spellings did not come from the rounding this reconciles.
+  if (roundToDump(on) !== on) return false;
+  return roundToDump(cn) === on;
+};
 
 // @door mint.dtcg-type-omission
 /** DTCG $type for a claimed leaf — a FUNCTION of the value, not only the
@@ -598,6 +632,25 @@ export interface MintOptions {
    *  observation and are named on the binding. Omit it and full cartesian
    *  coverage is required, exactly as before. */
   realizedCombos?: Array<Record<string, string>>;
+  /** THE DUMP-ROUNDING RECONCILIATION (docs/23 §D.33). Resolves a minted
+   *  dot-path against the caller's token corpus (`ctx.corpus`) — undefined
+   *  when the corpus does not define it.
+   *
+   *  WHY. Both dump producers round canvas geometry to two decimals
+   *  (`round2` in extract/figma/dump.plugin.js and extract/figma/rest/map.ts),
+   *  so a box the code→canvas mint spelled `39.9219px` from the browser's
+   *  computed style comes back from the canvas as `39.92px`. That is ONE
+   *  measurement in two spellings, and minting the rounded spelling onto the
+   *  path the corpus already holds makes `generate` refuse a two-valued slot
+   *  — the wall that stopped four of the eight Flowbite sets on the
+   *  documented canvas→code path (parity/receipts/v1/FIRST-PASS.md).
+   *
+   *  With this lookup, a claim whose corpus twin ROUNDS TO the observed value
+   *  adopts the corpus's (more precise) spelling and is named in
+   *  {@link MintResult.reconciled}. A corpus value that does NOT round to the
+   *  observation is a real disagreement and is left alone — the collision
+   *  still surfaces, by name, downstream. */
+  corpusValueAt?: (path: string) => string | undefined;
 }
 
 export function mintTokens(
@@ -629,6 +682,9 @@ export function mintTokens(
    *  leaf on a group's prefix, would corrupt the DTCG tree). */
   // @door mint.leaf-under-leaf-fence
   const hasDescendants = (path: string) => [...leaves.keys()].some((k) => k.startsWith(`${path}.`));
+  /** Paths whose value was taken from the corpus because the observation was
+   *  that same value at the dump's rounding (see MintOptions.corpusValueAt). */
+  const reconciled: string[] = [];
   // @door mint.path-claim-value-never-overwritten
   const claim = (
     wantedPath: string,
@@ -637,9 +693,21 @@ export function mintTokens(
     usageSite: string,
     textStyle?: { name: string; key?: string },
   ): string => {
-    const formatted = formatValue(kind, value);
+    const observed = formatValue(kind, value);
     for (let n = 1; ; n++) {
       const path = n === 1 ? wantedPath : `${wantedPath}-${n}`;
+      // THE DUMP-ROUNDING RECONCILIATION. Ask the corpus what it already
+      // spells at THIS path; when the observation is that value re-rounded by
+      // the dump, carry the corpus's spelling so one measurement never lands
+      // on one path under two names.
+      const corpusValue = opts?.corpusValueAt?.(path);
+      const formatted =
+        corpusValue !== undefined && sameUnderDumpRounding(corpusValue, observed)
+          ? corpusValue
+          : observed;
+      if (formatted !== observed && !reconciled.includes(path)) {
+        reconciled.push(`${path}: observed ${observed} is ${corpusValue} at the dump's ${DUMP_GEOMETRY_DECIMALS}-decimal geometry rounding — the corpus spelling is carried`);
+      }
       const existing = leaves.get(path);
       if (!existing) {
         if (hasDescendants(path)) continue;
@@ -841,6 +909,7 @@ export function mintTokens(
       }),
     ),
     bindings,
+    reconciled: reconciled.sort(),
   };
 }
 

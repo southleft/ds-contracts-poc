@@ -5,6 +5,7 @@
   "version": "0.2.0",
   "status": "draft",
   "description": "SEED contract for the MUI ORGANISM round — props/axes only; anatomy is promoted from captured DOM truth. Mounted as component='div' (the composition every real table ships; the default renders a <td> that only makes sense inside a table footer). count/rowsPerPage/page pinned so the rendered strings are deterministic. NAMED RESIDUE: at count=3 / rowsPerPage=10 / page=0 the component forces BOTH arrow IconButtons Mui-disabled — the ENABLED arrow colors are unobservable at this combo and are absent from the captured truth. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "archetype": "pagination",
   "semantics": {
     "element": "div"
   },

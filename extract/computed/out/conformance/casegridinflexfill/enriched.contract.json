@@ -33,7 +33,8 @@
               {
                 "fr": 1
               }
-            ]
+            ],
+            "grow": true
           },
           "parts": {
             "b": {
@@ -42,7 +43,8 @@
               "declared": {
                 "display": "block",
                 "box-sizing": "border-box",
-                "font-family": "monospace"
+                "font-family": "monospace",
+                "font-style": "italic"
               },
               "placement": {
                 "row": 0,
@@ -50,6 +52,11 @@
               },
               "tokens": {
                 "background-color": "{imported.case-grid-in-flex-fill.b.background-color}",
+                "border-bottom-color": "{imported.shared.color-663399}",
+                "border-left-color": "{imported.shared.color-663399}",
+                "border-right-color": "{imported.shared.color-663399}",
+                "border-top-color": "{imported.shared.color-663399}",
+                "color": "{imported.shared.color-1976d2}",
                 "font-size": "{imported.shared.size-12}"
               }
             },
@@ -59,7 +66,8 @@
               "declared": {
                 "display": "block",
                 "box-sizing": "border-box",
-                "font-family": "monospace"
+                "font-family": "monospace",
+                "font-style": "italic"
               },
               "placement": {
                 "row": 0,
@@ -67,9 +75,17 @@
               },
               "tokens": {
                 "background-color": "{imported.case-grid-in-flex-fill.c.background-color}",
+                "border-bottom-color": "{imported.shared.color-663399}",
+                "border-left-color": "{imported.shared.color-663399}",
+                "border-right-color": "{imported.shared.color-663399}",
+                "border-top-color": "{imported.shared.color-663399}",
+                "color": "{imported.shared.color-1976d2}",
                 "font-size": "{imported.shared.size-12}"
               }
             }
+          },
+          "literals": {
+            "height": "fit-content"
           },
           "declared": {
             "box-sizing": "border-box",
@@ -77,6 +93,11 @@
           },
           "tokens": {
             "background-color": "{imported.case-grid-in-flex-fill.a.background-color}",
+            "border-bottom-color": "{imported.shared.color-663399}",
+            "border-left-color": "{imported.shared.color-663399}",
+            "border-right-color": "{imported.shared.color-663399}",
+            "border-top-color": "{imported.shared.color-663399}",
+            "color": "{imported.shared.color-1976d2}",
             "flex-grow": "{imported.case-grid-in-flex-fill.a.flex-grow}",
             "font-size": "{imported.shared.size-12}"
           }
@@ -88,6 +109,11 @@
       },
       "tokens": {
         "background-color": "{imported.case-grid-in-flex-fill.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-663399}",
+        "border-left-color": "{imported.shared.color-663399}",
+        "border-right-color": "{imported.shared.color-663399}",
+        "border-top-color": "{imported.shared.color-663399}",
+        "color": "{imported.shared.color-1976d2}",
         "font-size": "{imported.shared.size-12}",
         "min-height": "{imported.case-grid-in-flex-fill.root.min-height}",
         "min-width": "{imported.case-grid-in-flex-fill.root.min-width}"

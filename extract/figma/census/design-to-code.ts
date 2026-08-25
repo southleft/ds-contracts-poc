@@ -162,27 +162,50 @@ export function proposeKit(kit: D2cKitDef, dump: DumpFile) {
   });
 }
 
-/** Prune fresh-minted leaves whose dotted path an existing corpus file
- *  already defines — the corpus value wins; returns the pruned refs. */
+/** Drop fresh-minted leaves whose dotted path an existing corpus file already
+ *  defines WITH THE SAME VALUE — a de-dup, not a repair; returns the dropped
+ *  refs.
+ *
+ *  THE DOCUMENTED PATH HAS NO EXTRA STEP (2026-08-24). This used to prune on
+ *  PATH alone, so it silently healed a genuinely two-valued slot that the
+ *  documented `generate` — which is handed corpus + minted and merges them —
+ *  rightly refuses. The first-pass exam measured the gap: four of the eight
+ *  Flowbite sets stopped at `generate-react` on a wall the census never saw
+ *  (parity/receipts/v1/FIRST-PASS.md). The cause is now fixed IN THE MINTER
+ *  (core/mint-tokens.ts `corpusValueAt` — a value that differs only by the
+ *  dump's 2-decimal geometry rounding is the SAME value and takes the corpus
+ *  spelling), so every remaining path collision must agree by value. One that
+ *  does not is a real disagreement and REFUSES here BY NAME rather than being
+ *  quietly resolved in the census's favour. */
 function pruneMinted(
   minted: Record<string, unknown>,
   corpusTrees: Array<Record<string, unknown>>,
 ): string[] {
   const pruned: string[] = [];
-  const has = (tree: Record<string, unknown>, segs: string[]): boolean => {
+  const disagree: string[] = [];
+  const leafAt = (tree: Record<string, unknown>, segs: string[]): Record<string, unknown> | null => {
     let cur: unknown = tree;
     for (const s of segs) {
-      if (!cur || typeof cur !== "object") return false;
+      if (!cur || typeof cur !== "object") return null;
       cur = (cur as Record<string, unknown>)[s];
     }
-    return !!cur && typeof cur === "object" && "$value" in (cur as object);
+    return !!cur && typeof cur === "object" && "$value" in (cur as object)
+      ? (cur as Record<string, unknown>)
+      : null;
   };
   const walk = (node: Record<string, unknown>, segs: string[]): void => {
     for (const [k, v] of Object.entries(node)) {
       if (k.startsWith("$") || !v || typeof v !== "object") continue;
       const next = [...segs, k];
       if ("$value" in (v as object)) {
-        if (corpusTrees.some((t) => has(t, next))) {
+        const twin = corpusTrees.map((t) => leafAt(t, next)).find((x) => x !== null);
+        if (twin) {
+          const mine = JSON.stringify((v as Record<string, unknown>).$value);
+          const theirs = JSON.stringify(twin.$value);
+          if (mine !== theirs) {
+            disagree.push(`${next.join(".")}: corpus says ${theirs}, the fresh mint says ${mine}`);
+            continue;
+          }
           delete node[k];
           pruned.push(next.join("."));
         }
@@ -193,6 +216,13 @@ function pruneMinted(
     }
   };
   walk(minted, []);
+  if (disagree.length > 0) {
+    throw new Error(
+      `REFUSED — ${disagree.length} minted leaf/leaves land on a corpus path with a DIFFERENT value. ` +
+        `Dropping them would be a repair the documented CLI does not perform, and keeping both makes ` +
+        `\`generate\` refuse a two-valued slot:\n  - ${disagree.sort().join("\n  - ")}`,
+    );
+  }
   return pruned.sort();
 }
 

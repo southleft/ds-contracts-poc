@@ -650,6 +650,12 @@ async function main(): Promise<number> {
       manifestPath,
       censusDir: path.join(REPO, CENSUS_DIR),
       receiptPath: path.join(REPO, RECEIPT_PATH),
+      // `--write-receipt` was wired for --phase design-to-code only, so on
+      // --phase code the flag did nothing and the gate's own remedy message
+      // ("run `npm run census:check -- --phase code --write-receipt` and
+      // commit the diff") could never be followed. Check mode still never
+      // writes: writeReceipt is false unless the flag is present.
+      writeReceipt: argv.includes("--write-receipt"),
     },
     manifest,
   );

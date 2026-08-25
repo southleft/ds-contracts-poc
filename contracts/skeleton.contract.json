@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "status": "draft",
   "description": "Pulsing placeholder previewing the shape of loading content. API mirrors industry convention (Astryx Skeleton) with the free-form width/height flattened to a shape variant; the pulse is CSS-only — the canvas shows the static shape.",
+  "archetype": "progress / spinner",
   "semantics": {
     "element": "span"
   },

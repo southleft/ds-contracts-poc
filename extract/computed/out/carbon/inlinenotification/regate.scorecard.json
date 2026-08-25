@@ -12,8 +12,63 @@
       },
       {
         "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "root",
         "channel": "position",
         "value": "relative"
+      },
+      {
+        "part": "root",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "inline-notification__details",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "inline-notification__details",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "inline-notification__details",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "inline-notification__details",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "icon",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "icon",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "icon",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
       },
       {
         "part": "icon",
@@ -26,14 +81,69 @@
         "value": "hidden"
       },
       {
+        "part": "icon",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "inline-notification__text-wrapper",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "inline-notification__text-wrapper",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "inline-notification__text-wrapper",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "inline-notification__text-wrapper",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
         "part": "label",
         "channel": "font-family",
         "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
       },
       {
+        "part": "label",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "label",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "label-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
         "part": "label-2",
         "channel": "font-family",
         "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "label-2",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
       },
       {
         "part": "inline-notification__close-button",
@@ -59,6 +169,11 @@
         "part": "inline-notification__close-button",
         "channel": "cursor",
         "value": "pointer"
+      },
+      {
+        "part": "inline-notification__close-button",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
       },
       {
         "part": "inline-notification__close-button",
@@ -97,9 +212,9 @@
     "combos": 12,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 5040,
-      "cellsEqual": 4896,
-      "pctEqual": 97.14285714285714,
+      "cellsCompared": 6576,
+      "cellsEqual": 6432,
+      "pctEqual": 97.81021897810218,
       "rowsFullyEqual": 0,
       "rows": 48
     },
@@ -123,11 +238,11 @@
       "contradictions": 0,
       "mintedLeaves": 77,
       "mintedLeavesUnfolded": 195,
-      "baseBindings": 52,
+      "baseBindings": 56,
       "stateBindings": 2,
-      "codeOnlyChannels": 4,
+      "codeOnlyChannels": 11,
       "overflowBindings": 2,
-      "folds": 119
+      "folds": 99
     },
     "worstRows": [
       {
@@ -204,9 +319,16 @@
     "namedLosses": [
       "overflow: inline-notification__close-button.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: inline-notification__close-button.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: inline-notification__details.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: icon.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: icon.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: inline-notification__text-wrapper.flex-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: inline-notification__text-wrapper.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-2.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-2.word-break — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: inline-notification__close-button.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: inline-notification__close-button.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
@@ -312,8 +434,8 @@
     "rows": [
       {
         "key": "error.high__default",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -341,8 +463,8 @@
       },
       {
         "key": "error.high__hover",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -370,8 +492,8 @@
       },
       {
         "key": "error.high__focus-visible",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -399,8 +521,8 @@
       },
       {
         "key": "error.high__active",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -428,8 +550,8 @@
       },
       {
         "key": "error.low__default",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -457,8 +579,8 @@
       },
       {
         "key": "error.low__hover",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -486,8 +608,8 @@
       },
       {
         "key": "error.low__focus-visible",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -515,8 +637,8 @@
       },
       {
         "key": "error.low__active",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -544,8 +666,8 @@
       },
       {
         "key": "info.high__default",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -573,8 +695,8 @@
       },
       {
         "key": "info.high__hover",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -602,8 +724,8 @@
       },
       {
         "key": "info.high__focus-visible",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -631,8 +753,8 @@
       },
       {
         "key": "info.high__active",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -660,8 +782,8 @@
       },
       {
         "key": "info.low__default",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -689,8 +811,8 @@
       },
       {
         "key": "info.low__hover",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -718,8 +840,8 @@
       },
       {
         "key": "info.low__focus-visible",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -747,8 +869,8 @@
       },
       {
         "key": "info.low__active",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -776,8 +898,8 @@
       },
       {
         "key": "info-square.high__default",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -805,8 +927,8 @@
       },
       {
         "key": "info-square.high__hover",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -834,8 +956,8 @@
       },
       {
         "key": "info-square.high__focus-visible",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -863,8 +985,8 @@
       },
       {
         "key": "info-square.high__active",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -892,8 +1014,8 @@
       },
       {
         "key": "info-square.low__default",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -921,8 +1043,8 @@
       },
       {
         "key": "info-square.low__hover",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -950,8 +1072,8 @@
       },
       {
         "key": "info-square.low__focus-visible",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -979,8 +1101,8 @@
       },
       {
         "key": "info-square.low__active",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1008,8 +1130,8 @@
       },
       {
         "key": "success.high__default",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1037,8 +1159,8 @@
       },
       {
         "key": "success.high__hover",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1066,8 +1188,8 @@
       },
       {
         "key": "success.high__focus-visible",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1095,8 +1217,8 @@
       },
       {
         "key": "success.high__active",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1124,8 +1246,8 @@
       },
       {
         "key": "success.low__default",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1153,8 +1275,8 @@
       },
       {
         "key": "success.low__hover",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1182,8 +1304,8 @@
       },
       {
         "key": "success.low__focus-visible",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1211,8 +1333,8 @@
       },
       {
         "key": "success.low__active",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1240,8 +1362,8 @@
       },
       {
         "key": "warning.high__default",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1269,8 +1391,8 @@
       },
       {
         "key": "warning.high__hover",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1298,8 +1420,8 @@
       },
       {
         "key": "warning.high__focus-visible",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1327,8 +1449,8 @@
       },
       {
         "key": "warning.high__active",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1356,8 +1478,8 @@
       },
       {
         "key": "warning.low__default",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1385,8 +1507,8 @@
       },
       {
         "key": "warning.low__hover",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1414,8 +1536,8 @@
       },
       {
         "key": "warning.low__focus-visible",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1443,8 +1565,8 @@
       },
       {
         "key": "warning.low__active",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1472,8 +1594,8 @@
       },
       {
         "key": "warning-alt.high__default",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1501,8 +1623,8 @@
       },
       {
         "key": "warning-alt.high__hover",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1530,8 +1652,8 @@
       },
       {
         "key": "warning-alt.high__focus-visible",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1559,8 +1681,8 @@
       },
       {
         "key": "warning-alt.high__active",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1588,8 +1710,8 @@
       },
       {
         "key": "warning-alt.low__default",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1617,8 +1739,8 @@
       },
       {
         "key": "warning-alt.low__hover",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1646,8 +1768,8 @@
       },
       {
         "key": "warning-alt.low__focus-visible",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1675,8 +1797,8 @@
       },
       {
         "key": "warning-alt.low__active",
-        "channelsCompared": 105,
-        "channelsEqual": 102,
+        "channelsCompared": 137,
+        "channelsEqual": 134,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

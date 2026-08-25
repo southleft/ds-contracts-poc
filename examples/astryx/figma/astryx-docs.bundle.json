@@ -2774,6 +2774,7 @@
       "version": "0.3.1",
       "status": "draft",
       "description": "Astryx Badge — a small status/category label. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Badge/Badge.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). API surface (variant) is verbatim; the label is materialized as a text content part (Astryx types it as a ReactNode child slot, dropped as a `node` prop in extraction — see DEV-JOURNEY.md). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/badge/decisions.md); extension sidecar carries the named overflow.",
+      "archetype": "badge / tag / chip",
       "semantics": {
         "element": "span"
       },
@@ -2954,6 +2955,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "Astryx Banner — promoted from @astryxdesign/core@0.1.6 (src/Banner/Banner.tsx). Two-part structure: a status header (muted background, status icon, semibold title, supporting description) and an optional collapsible content area (out of scope for the default exhibit). Status backgrounds use accent/warning/error/success *-muted tokens; icons use the vendor defaultIconNames mapping at md (20px).",
+      "archetype": "banner / alert / toast",
       "semantics": {
         "element": "div"
       },
@@ -3267,6 +3269,7 @@
       "version": "0.3.0",
       "status": "draft",
       "description": "Astryx Button — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Button/Button.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). Visual/structural API is verbatim; HTML passthrough (type, name, form, target, rel), href link-mode, isInterruptible and tooltip are dropped (documented in DEV-JOURNEY.md). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/button/decisions.md); extension sidecar carries the named overflow.",
+      "archetype": "button",
       "semantics": {
         "element": "button"
       },
@@ -3689,6 +3692,7 @@
       "version": "0.3.0",
       "status": "draft",
       "description": "Astryx Card — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Card/Card.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). The single extracted structural axis (variant, 13 values) is verbatim; children is a materialized content slot (Astryx types Card body as ReactNode, dropped as a node prop). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/card/decisions.md); extension sidecar carries the named overflow.",
+      "archetype": "card",
       "semantics": {
         "element": "div"
       },
@@ -4016,6 +4020,7 @@
       "version": "0.1.0",
       "status": "draft",
       "description": "Astryx CheckboxInput — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/CheckboxInput/CheckboxInput.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label + size + the disabled/readonly/optional/required flags are verbatim; description, disabledMessage, htmlName and isLoading are dropped. STRUCTURAL: the control renders as a styled box (div), not a native <input> — a11y semantics are a Phase A-2 concern. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+      "archetype": "checkbox / radio",
       "semantics": {
         "element": "div"
       },
@@ -4163,6 +4168,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "PROMOTED from the Phase B composition-tier extraction (round 2, StyleX anatomy). One menu row — the repeated item of astryx.dropdown-menu. Curation receipts: the extracted anatomy leaned on the internal <Item> layout component (astryx.item); promotion FLATTENS it to the element row Item renders (a deep-internal contract is not part of the exhibit set), keeping the extracted StyleX token bindings verbatim. The extracted `description`/`endContent`/icon channels are deferred to a later round — this exhibit carries the label row, the composition proof's moving part.",
+      "archetype": "menu / dropdown",
       "semantics": {
         "element": "button",
         "role": "menuitem"
@@ -4247,6 +4253,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "PROMOTED from the Phase B composition-tier extraction (round 2) — the flagship composition exhibit: a MULTI-ROOT component (trigger + menu overlay) whose menu holds a REPEATED astryx.dropdown-menu-item collection over the `items` prop. The extraction recovered exactly this shape from Meta's source (fragment root → trigger Button ref + popover.render overlay carrying the items repeat AND the children slot). Curation receipts: (1) the DUAL MODE — items-array XOR compound children — is mutually exclusive in code; the contract carries the DATA mode (repeat), the canvas-projectable one; (2) the DropdownMenuContext provider ref was dropped (context is a code mechanism, not anatomy); (3) the popover overlay projects as a sibling root below the trigger — live placement/anchoring is a design-tool behavior outside the contract (same convention as the composite Modal's roots); (4) the repeat sample is authored (design-time values are not decidable from code — the extractor said so by name).",
+      "archetype": "menu / dropdown",
       "semantics": {
         "element": "div"
       },
@@ -4361,6 +4368,7 @@
       "version": "0.1.0",
       "status": "draft",
       "description": "Astryx ProgressBar — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/ProgressBar/ProgressBar.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). value/max/label/variant and the value-label/indeterminate/disabled flags are verbatim (89% facts-carried, the richest census extraction). STRUCTURAL: the track/fill render as styled boxes, not a native <progress>. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+      "archetype": "progress / spinner",
       "semantics": {
         "element": "div"
       },
@@ -4565,6 +4573,7 @@
       "version": "0.4.0",
       "status": "draft",
       "description": "Astryx Slider — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Slider/Slider.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label/min/max/step/orientation/valueDisplay and the optional/required/disabled flags are verbatim (82%; recovered from a union-of-refs named-skip via the keyof+union adapter fix). value, description, disabledMessage, labelTooltip, htmlName and minStepsBetweenThumbs are dropped. STRUCTURAL: track/thumb render as styled boxes, not a native range input. Wave B.3: showcase width (240px) and thumb/track geometry from Slider.tsx source constants (TRACK_SIZE=4, THUMB_SIZE=20, value≈40%) — not the harness-captured ~49px hug floor. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+      "archetype": "slider",
       "semantics": {
         "element": "div"
       },
@@ -5098,6 +5107,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "Astryx Switch — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Switch/Switch.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label + labelPosition + labelSpacing and the disabled/optional/required flags are verbatim; description, htmlName, labelTooltip, disabledMessage and isLoading are dropped. Wave B.3: `value` is a VARIANT AXIS (off/on) — FC-MISSING-AXIS. On thumb geometry from Switch.tsx source constants (20×20, travel 14px) — not harness-captured. STRUCTURAL: the track renders as a styled box, not a native role=switch input.",
+      "archetype": "toggle / switch",
       "semantics": {
         "element": "div"
       },
@@ -5655,6 +5665,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "Astryx TextInput — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/TextInput/TextInput.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). type/label/size/placeholder and the optional/required/disabled/clear/autofocus flags are verbatim (83% facts-carried); description, disabledMessage, labelTooltip, htmlName and isLoading are dropped. value is materialized as a placeholder-backed text field. Wave B.3: showcase width (320px), inputWrapper border (color-border-emphasized), startIcon row (type-mapped 16px glyphs, color-icon-secondary), and placeholder hierarchy (body-size secondary text) from TextInput.tsx + inputStyles.stylex source — not harness-captured.",
+      "archetype": "input / field",
       "semantics": {
         "element": "div"
       },
@@ -5933,6 +5944,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "PROMOTED from the Phase B composition-tier extraction (round 2, wrapper-ref descent) — the vendor-refereed exhibit: Astryx's own Toast.doc.mjs declares anatomy Body / End content / Dismiss button, and the extraction recovered exactly those three (body slot, endContent slot, ghost dismiss astryx.button with its real props) once the MediaTheme wrapper descended. Curation receipts: (1) the MediaTheme theme-provider ref was dropped and its interior lifted to the root (a theme boundary is a code mechanism, not anatomy); (2) the extracted behavioral props (isAutoHide/autoHideDuration/isExiting) are timing mechanics with no visual projection — dropped from the exhibit, receipted here; (3) root keeps the extracted StyleX token bindings verbatim (padding, radius, shadow, body typography).",
+      "archetype": "banner / alert / toast",
       "semantics": {
         "element": "div",
         "role": "status"
@@ -6516,6 +6528,28 @@
         {
           "part": "root",
           "kind": "channel",
+          "channel": "background-image [active]",
+          "value": "{imported.button.root.background-image-state-active}",
+          "reason": "the active plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "background-image [hover]",
+          "value": "{imported.button.root.background-image-state-hover}",
+          "reason": "the hover plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
           "channel": "bottom",
           "value": "{imported.shared.size-0}",
           "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -6530,6 +6564,28 @@
           "channel": "left",
           "value": "{imported.shared.size-0}",
           "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "opacity [disabled]",
+          "value": "{imported.button.root.opacity-state-disabled}",
+          "reason": "the disabled plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "outline-color [focus-visible]",
+          "value": "{imported.button.root.outline-color-state-focus-visible.{variant}}",
+          "reason": "the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
           "variants": {
             "count": 12,
             "of": 12
@@ -6597,6 +6653,28 @@
               "Variant=Secondary, Size=Sm",
               "Variant=Secondary, Size=Lg"
             ]
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "outline-offset [focus-visible]",
+          "value": "{imported.button.root.outline-offset-state-focus-visible}",
+          "reason": "the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 12,
+            "of": 12
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "outline-width [focus-visible]",
+          "value": "{imported.button.root.outline-width-state-focus-visible}",
+          "reason": "the focus-visible plane is not drawn — bindings.figma.statePreviews is off (a reviewed decision or the referee's refusal), so no State preview cell exists to carry this state binding (FC-STATE-PLANE-UNDRAWN)",
+          "variants": {
+            "count": 12,
+            "of": 12
           }
         },
         {
@@ -7207,6 +7285,34 @@
           "variants": {
             "count": 6,
             "of": 6
+          }
+        },
+        {
+          "part": "tooltip",
+          "kind": "channel",
+          "channel": "margin-right/margin-left",
+          "value": "4px/4px",
+          "reason": "the margin-box wrapper is skipped — an out-of-flow child (overlay / inset / absolute) keeps its own placement lowering; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+          "variants": {
+            "count": 1,
+            "of": 6,
+            "names": [
+              "Orientation=Vertical, Value Display=Tooltip"
+            ]
+          }
+        },
+        {
+          "part": "tooltip",
+          "kind": "channel",
+          "channel": "margin-top/margin-bottom",
+          "value": "4px/4px",
+          "reason": "the margin-box wrapper is skipped — an out-of-flow child (overlay / inset / absolute) keeps its own placement lowering; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
+          "variants": {
+            "count": 1,
+            "of": 6,
+            "names": [
+              "Orientation=Horizontal, Value Display=Tooltip"
+            ]
           }
         },
         {

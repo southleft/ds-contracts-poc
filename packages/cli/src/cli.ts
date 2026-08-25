@@ -195,7 +195,7 @@ Contract → code. See top-level --help for --tokens slot routing.
 
   figma <contracts..> --out <dir> [--tokens f,f] [--icons dir] [--file-key KEY]
   figma bundle <contracts..> --out <file> --tokens <base[,minted]> | <dir> | <slot>=<file>,…
-       [--modes <light[,dark]>] [--name <collection>] [--icons dir]
+       [--modes <light[,dark]>] [--name <collection>] [--icons dir] [--strict]
   figma push <file> --code <CODE> [--bridge <url>]
   figma claim-channel [--bridge <url>]
   figma publish <file> [--channel-key K] [--bridge <url>] [--dry-run]
@@ -203,6 +203,11 @@ Contract → code. See top-level --help for --tokens slot routing.
   figma receive --out <contracts-dir> [--bridge <url>] [--apply]
 
 Bundle is the one-paste CONTRACTS-BUNDLE. receive writes nothing without --apply.
+--strict (or DS_REQUIRED_FACTS=refuse) REFUSES to write a bundle carrying a set
+that is missing a load-bearing fact for its archetype — a card with no column
+axis mints as a pill, a dialog without one mints as a single row. Without it
+every missing fact is still NAMED, and the bundle is written anyway. A strict
+bundle records its posture, so the plugin refuses the same paste.
 `,
   diff: `ds-contracts diff — parity referee / English summarizer
 

@@ -102,6 +102,23 @@ interface Library {
   out: string;
 }
 
+/** The ONLY configs whose captures live in the un-namespaced root `out/`.
+ *
+ *  The fallback used to be unconditional — any config without an
+ *  `out/<library>/` dir was read against `out/` itself. That is a SILENT
+ *  MISATTRIBUTION waiting to happen, and the held-out exam material walked
+ *  straight into it: `out/` also holds the FIRST-PARTY component dirs
+ *  (`button/`, `badge/`, `avatar/`, `checkbox/`, `textfield/`, `spinner/`), so
+ *  a brand-new config whose component names collide with those names picked up
+ *  first-party scorecards and reported them as its own —
+ *  `bootstrap5/Button: UNPINNED`, `radix-themes/Avatar: UNPINNED`, for six
+ *  components that have never been captured at all.
+ *
+ *  Naming the two legitimate users of the root keeps every committed library's
+ *  resolution byte-identical (the other eight all have a namespaced dir) and
+ *  turns the collision into an ordinary named skip. */
+const ROOT_OUT_CONFIGS = new Set(['polaris.json', 'polaris-depth.json']);
+
 function discoverLibraries(): { libraries: Library[]; skipped: string[] } {
   const libraries: Library[] = [];
   const skipped: string[] = [];
@@ -114,7 +131,7 @@ function discoverLibraries(): { libraries: Library[]; skipped: string[] } {
     const namespaced = path.join(OUT_ROOT, name);
     const out = existsSync(namespaced) && holdsComponents(namespaced)
       ? namespaced
-      : holdsComponents(OUT_ROOT)
+      : ROOT_OUT_CONFIGS.has(file) && holdsComponents(OUT_ROOT)
         ? OUT_ROOT
         : null;
     if (out === null) {

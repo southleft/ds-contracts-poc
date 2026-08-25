@@ -12,12 +12,13 @@
     {
       "stage": "dump",
       "status": "ok",
-      "ms": 994,
+      "ms": 952,
+      "driver": "harness",
       "command": "npm run extract:figma:rest -- \"<url>?node-id=120:1996\" --out <dump>",
       "message": "label.json",
       "artifacts": [
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/dumps/label.json",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/dumps/label.json",
           "sha256": "34fbef6a6550640baa8e41707a16cc8ba49615e8dcb84a56856cad55146f4640",
           "bytes": 13029,
           "committed": false
@@ -27,12 +28,13 @@
     {
       "stage": "propose",
       "status": "ok",
-      "ms": 298,
+      "ms": 407,
+      "driver": "harness",
       "command": "npm run extract:figma -- <dump> --out <proposed> --tokens <kit dtcg>",
       "message": "1 proposal file(s)",
       "artifacts": [
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/proposed/label/label.contract.proposed.json",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/proposed/label/label.contract.proposed.json",
           "sha256": "5671857e620ddff2027debabc4cbf98b0ccf3c150bcd83eee9ec817bd82802d2",
           "bytes": 2184,
           "committed": false
@@ -42,53 +44,190 @@
     {
       "stage": "validate",
       "status": "ok",
-      "ms": 0,
+      "ms": 1,
+      "driver": "harness",
       "command": "core/emit-react.ts validateContract (the referee — no CLI verb; docs/07)",
       "message": "no violations",
       "artifacts": []
     },
     {
       "stage": "generate-react",
-      "status": "REFUSED",
-      "ms": 834,
+      "status": "ok",
+      "ms": 957,
+      "driver": "harness",
       "command": "npx ds-contracts generate <proposed>/*.contract.proposed.json --out <react> --tokens <kit>,<minted>",
-      "message": "✘ Refused — 1 token(s) defined twice with different values inside ONE slot; the merge would silently drop one layer:\n  - imported.label.root.width: tailwind-minted.dtcg.json says \"64.9531px\", minted.dtcg.json says \"64.95px\"\nIf these are separate layers (light/dark, brand modes), name the slot: --tokens light=<file>,dark=<file>. Slots: primitives, semantic, light, dark, brand, brand.<name>",
-      "artifacts": []
+      "message": "5 file(s)",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/react/label/index.ts",
+          "sha256": "25a500b486dc0758659d62a8323dcef6cab4eb53382f70fd5295d1896857d36e",
+          "bytes": 48,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/react/label/tokens.css",
+          "sha256": "05eaf1e1deda3742cf12332b6a820eb7120c7888b9272be0e67e6e3612776fed",
+          "bytes": 20561,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/react/label/Label/Label.module.css",
+          "sha256": "8f3597d6f3d4df84bad568b0ca2e8d20d3489862b5baa6d751d7c93b43fc416d",
+          "bytes": 878,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/react/label/Label/Label.tsx",
+          "sha256": "78795d103551c0019c2e9516df0ad4b19bbdee87b34eec100e027ce71c4f98c1",
+          "bytes": 1271,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/react/label/Label/index.ts",
+          "sha256": "498c66ade27de7f9d9a64360a336165960db825a5136aee5141c5fc57dc8b3d6",
+          "bytes": 76,
+          "committed": false
+        }
+      ]
     },
     {
       "stage": "generate-wc",
-      "status": "SKIPPED",
-      "ms": 0,
-      "command": null,
-      "message": "an earlier stage stopped this chain (generate-react)",
-      "artifacts": []
+      "status": "ok",
+      "ms": 776,
+      "driver": "harness",
+      "command": "npx ds-contracts generate <proposed>/*.contract.proposed.json --out <wc> --target web-components --emitter @ds-contracts/emitter-web-components",
+      "message": "5 file(s)",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/wc/label/flowbite-label.css.ts",
+          "sha256": "ac5c52771bcfa350a2f714e1cba60c8f89ce24b4ced01fdaf305d5d4e73560eb",
+          "bytes": 1401,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/wc/label/flowbite-label.custom-elements.json",
+          "sha256": "1596f2d72ed5fc76c4e213c88170827a0f4801167076bdaeab26e44a53f1a880",
+          "bytes": 1769,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/wc/label/flowbite-label.demo.html",
+          "sha256": "4b7aabe6e5584fea5190fc33692a916c6d52624dd203bab9933d8eea2c6e179b",
+          "bytes": 1735,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/wc/label/flowbite-label.ts",
+          "sha256": "c93717e4340c2d5156e8292ca2cb0d41d80e7d52d3b893209320287e23639301",
+          "bytes": 2488,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/wc/label/tokens.css",
+          "sha256": "0d08ded6b980b54932a43c064744e3edc16c3461817d278fcee94bf0e42fe238",
+          "bytes": 20570,
+          "committed": false
+        }
+      ]
     },
     {
       "stage": "render",
-      "status": "SKIPPED",
-      "ms": 0,
-      "command": null,
-      "message": "an earlier stage stopped this chain (generate-react)",
-      "artifacts": []
+      "status": "ok",
+      "ms": 16,
+      "driver": "harness",
+      "command": "esbuild bundle of the generated React → playwright-core screenshot at deviceScaleFactor 2",
+      "message": "5 cell(s)",
+      "artifacts": [
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/label/code-color-default.png",
+          "sha256": "3b016f98dbd563deb34f4473e548f69a02536793672353937a3737dc8c069691",
+          "bytes": 3161,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/label/code-color-info.png",
+          "sha256": "1906c9d6c2c02b3b1621aa3318b066a602fa29138f02e902a63125b904ec7448",
+          "bytes": 3061,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/label/code-color-failure.png",
+          "sha256": "7085daded63c9e02bdcbb68e67045bb20c208c535f315d606d455925e3af65ce",
+          "bytes": 3038,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/label/code-color-success.png",
+          "sha256": "f94e61d81017eb825735364b2540204067a21a9c3d7720668a9a10b48c87b5ba",
+          "bytes": 3179,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/label/code-color-warning.png",
+          "sha256": "0693f6ad6a4f6951ef6cfbfdf626dafad7410da78e0a7a82469be2e530391390",
+          "bytes": 3127,
+          "committed": true
+        }
+      ]
     },
     {
       "stage": "ref",
-      "status": "SKIPPED",
-      "ms": 0,
-      "command": null,
-      "message": "an earlier stage stopped this chain (generate-react)",
-      "artifacts": []
+      "status": "ok",
+      "ms": 1018,
+      "driver": "harness",
+      "command": "GET /v1/images/59mLQlOMiD5w5za6SUcoO5?ids=<variant>&scale=2 (READ-ONLY)",
+      "message": "5 reference PNG(s) at scale 2",
+      "artifacts": [
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/label/ref-color-default.png",
+          "sha256": "4943b5dc300fdbe74dda6884348a86439446edf4f4344097b0dc4081f4768a86",
+          "bytes": 2157,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/label/ref-color-info.png",
+          "sha256": "aa983149d5aca70746ea8182df0ae3ca6132b1335f902219e57a01208f109c6d",
+          "bytes": 2120,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/label/ref-color-failure.png",
+          "sha256": "09704ee4640519e758beecc2db6f00b3833a911e4cb59f8b1b20bc739e28edff",
+          "bytes": 2205,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/label/ref-color-success.png",
+          "sha256": "4ba456a326a201dec451fcfea80b1bf6a067c944213e6aea1b862e8e0b2f90a7",
+          "bytes": 2246,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/label/ref-color-warning.png",
+          "sha256": "6a9b203bc47587b4e068956063ebae6a29b4621321078b8b33d9410a598ee53a",
+          "bytes": 2221,
+          "committed": true
+        }
+      ]
     }
   ],
-  "chainComplete": false,
-  "firstStop": {
-    "stage": "generate-react",
-    "status": "REFUSED",
-    "message": "✘ Refused — 1 token(s) defined twice with different values inside ONE slot; the merge would silently drop one layer:\n  - imported.label.root.width: tailwind-minted.dtcg.json says \"64.9531px\", minted.dtcg.json says \"64.95px\"\nIf these are separate layers (light/dark, brand modes), name the slot: --tokens light=<file>,dark=<file>. Slots: primitives, semantic, light, dark, brand, brand.<name>"
-  },
+  "chainComplete": true,
+  "firstStop": null,
   "images": {
-    "ref": [],
-    "code": [],
+    "ref": [
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/label/ref-color-default.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/label/ref-color-info.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/label/ref-color-failure.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/label/ref-color-success.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/label/ref-color-warning.png"
+    ],
+    "code": [
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/label/code-color-default.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/label/code-color-info.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/label/code-color-failure.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/label/code-color-success.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/label/code-color-warning.png"
+    ],
     "canvas": [],
     "absent": [
       {
@@ -97,5 +236,5 @@
       }
     ]
   },
-  "totalMs": 2126
+  "totalMs": 4127
 }

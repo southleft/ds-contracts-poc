@@ -7,6 +7,26 @@
     "base": [
       {
         "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "root",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "root",
         "channel": "user-select",
         "value": "none"
       },
@@ -29,6 +49,11 @@
         "part": "toggle__button",
         "channel": "border-top-style",
         "value": "none"
+      },
+      {
+        "part": "toggle__button",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
       },
       {
         "part": "toggle__button",
@@ -57,13 +82,38 @@
       },
       {
         "part": "toggle__label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "toggle__label",
         "channel": "cursor",
         "value": "default"
       },
       {
         "part": "toggle__label",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "toggle__label",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "toggle__label",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "toggle__label",
         "channel": "user-select",
         "value": "none"
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
       },
       {
         "part": "label",
@@ -77,13 +127,43 @@
       },
       {
         "part": "label",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "label",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "label",
         "channel": "user-select",
         "value": "none"
       },
       {
         "part": "toggle__appearance",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "toggle__appearance",
         "channel": "cursor",
         "value": "pointer"
+      },
+      {
+        "part": "toggle__appearance",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "toggle__appearance",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "toggle__appearance",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
       },
       {
         "part": "toggle__appearance",
@@ -92,13 +172,33 @@
       },
       {
         "part": "toggle__switch",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "toggle__switch",
         "channel": "cursor",
         "value": "pointer"
+      },
+      {
+        "part": "toggle__switch",
+        "channel": "font-family",
+        "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "toggle__switch",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
       },
       {
         "part": "toggle__switch",
         "channel": "position",
         "value": "relative"
+      },
+      {
+        "part": "toggle__switch",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
       },
       {
         "part": "toggle__switch",
@@ -122,6 +222,11 @@
       },
       {
         "part": "label-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-2",
         "channel": "cursor",
         "value": "pointer"
       },
@@ -129,6 +234,16 @@
         "part": "label-2",
         "channel": "font-family",
         "value": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-feature-settings",
+        "value": "\"liga\""
+      },
+      {
+        "part": "label-2",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
       },
       {
         "part": "label-2",
@@ -166,9 +281,9 @@
     "combos": 4,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 1344,
-      "cellsEqual": 1144,
-      "pctEqual": 85.11904761904762,
+      "cellsCompared": 2768,
+      "cellsEqual": 2480,
+      "pctEqual": 89.59537572254335,
       "rowsFullyEqual": 0,
       "rows": 16
     },
@@ -190,69 +305,69 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 32,
+      "mintedLeaves": 33,
       "mintedLeavesUnfolded": 32,
-      "baseBindings": 49,
-      "stateBindings": 27,
-      "codeOnlyChannels": 8,
-      "overflowBindings": 22,
-      "folds": 10
+      "baseBindings": 58,
+      "stateBindings": 17,
+      "codeOnlyChannels": 15,
+      "overflowBindings": 12,
+      "folds": 60
     },
     "worstRows": [
       {
         "key": "untoggled.disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 20,
+        "channelsMismatched": 31,
         "unscorable": "no-original"
       },
       {
         "key": "untoggled.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 20,
+        "channelsMismatched": 31,
         "unscorable": "no-original"
       },
       {
         "key": "untoggled.disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 20,
+        "channelsMismatched": 31,
         "unscorable": "no-original"
       },
       {
         "key": "untoggled.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 20,
+        "channelsMismatched": 31,
         "unscorable": "no-original"
       },
       {
         "key": "toggled.disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 20,
+        "channelsMismatched": 31,
         "unscorable": "no-original"
       },
       {
         "key": "toggled.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 20,
+        "channelsMismatched": 31,
         "unscorable": "no-original"
       },
       {
         "key": "toggled.disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 20,
+        "channelsMismatched": 31,
         "unscorable": "no-original"
       },
       {
         "key": "toggled.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 20,
+        "channelsMismatched": 31,
         "unscorable": "no-original"
       }
     ],
@@ -321,16 +436,6 @@
     "namedLosses": [
       "promotion: pseudo-decor-state-paint-uncarried: toggle__switch::before at untoggled.disabled paints {\"bg\":\"rgba(141, 141, 141, 1)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":9} where the matching enabled combo paints {\"bg\":\"rgba(255, 255, 255, 1)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":9} — the decor carries the ENABLED plane; a per-enum-value × per-state paint product has no contract spelling (states take token refs, decor paint is literal); named residue",
       "promotion: pseudo-decor-state-paint-uncarried: toggle__switch::before at toggled.disabled paints {\"bg\":\"rgba(141, 141, 141, 1)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":9} where the matching enabled combo paints {\"bg\":\"rgba(255, 255, 255, 1)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":9} — the decor carries the ENABLED plane; a per-enum-value × per-state paint product has no contract spelling (states take token refs, decor paint is literal); named residue",
-      "overflow: label-2.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "overflow: label-2.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "overflow: label-2.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "overflow: label-2.border-top-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "overflow: label-2.caret-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "overflow: label-2.column-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "overflow: label-2.outline-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "overflow: label-2.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "overflow: label-2.text-decoration-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "overflow: label-2.text-emphasis-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: toggle__button.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: toggle__button.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: toggle__button.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -343,13 +448,20 @@
       "overflow: toggle__button.text-decoration-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: toggle__button.text-emphasis-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: toggle__button.top [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: toggle__button.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: toggle__button.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: toggle__label.height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: toggle__label.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: toggle__label.width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: label.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: toggle__appearance.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: toggle__appearance.display — declared-channel value outside the bounded grammar — named residue (v15)",
       "code-only: toggle__appearance.grid-template-columns — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: toggle__appearance.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: toggle__switch.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-2.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
@@ -358,7 +470,7 @@
     },
     "shippedMinted": {
       "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-      "leavesAdded": 846,
+      "leavesAdded": 845,
       "divergent": [
         {
           "token": "imported.toggle.label.color",
@@ -389,8 +501,8 @@
     "rows": [
       {
         "key": "untoggled.enabled__default",
-        "channelsCompared": 84,
-        "channelsEqual": 79,
+        "channelsCompared": 173,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -430,8 +542,8 @@
       },
       {
         "key": "untoggled.enabled__hover",
-        "channelsCompared": 84,
-        "channelsEqual": 79,
+        "channelsCompared": 173,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -471,8 +583,8 @@
       },
       {
         "key": "untoggled.enabled__focus-visible",
-        "channelsCompared": 84,
-        "channelsEqual": 79,
+        "channelsCompared": 173,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -512,8 +624,8 @@
       },
       {
         "key": "untoggled.enabled__active",
-        "channelsCompared": 84,
-        "channelsEqual": 79,
+        "channelsCompared": 173,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -553,8 +665,8 @@
       },
       {
         "key": "untoggled.disabled__default",
-        "channelsCompared": 84,
-        "channelsEqual": 64,
+        "channelsCompared": 173,
+        "channelsEqual": 142,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -669,9 +781,75 @@
           },
           {
             "part": "label-2",
+            "channel": "border-bottom-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "label-2",
+            "channel": "outline-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "label-2",
@@ -684,8 +862,8 @@
       },
       {
         "key": "untoggled.disabled__hover",
-        "channelsCompared": 84,
-        "channelsEqual": 64,
+        "channelsCompared": 173,
+        "channelsEqual": 142,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -800,9 +978,75 @@
           },
           {
             "part": "label-2",
+            "channel": "border-bottom-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "label-2",
+            "channel": "outline-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "label-2",
@@ -815,8 +1059,8 @@
       },
       {
         "key": "untoggled.disabled__focus-visible",
-        "channelsCompared": 84,
-        "channelsEqual": 64,
+        "channelsCompared": 173,
+        "channelsEqual": 142,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -931,9 +1175,75 @@
           },
           {
             "part": "label-2",
+            "channel": "border-bottom-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "label-2",
+            "channel": "outline-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "label-2",
@@ -946,8 +1256,8 @@
       },
       {
         "key": "untoggled.disabled__active",
-        "channelsCompared": 84,
-        "channelsEqual": 64,
+        "channelsCompared": 173,
+        "channelsEqual": 142,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1062,9 +1372,75 @@
           },
           {
             "part": "label-2",
+            "channel": "border-bottom-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "label-2",
+            "channel": "outline-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "label-2",
@@ -1077,8 +1453,8 @@
       },
       {
         "key": "toggled.enabled__default",
-        "channelsCompared": 84,
-        "channelsEqual": 79,
+        "channelsCompared": 173,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1118,8 +1494,8 @@
       },
       {
         "key": "toggled.enabled__hover",
-        "channelsCompared": 84,
-        "channelsEqual": 79,
+        "channelsCompared": 173,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1159,8 +1535,8 @@
       },
       {
         "key": "toggled.enabled__focus-visible",
-        "channelsCompared": 84,
-        "channelsEqual": 79,
+        "channelsCompared": 173,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1200,8 +1576,8 @@
       },
       {
         "key": "toggled.enabled__active",
-        "channelsCompared": 84,
-        "channelsEqual": 79,
+        "channelsCompared": 173,
+        "channelsEqual": 168,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1241,8 +1617,8 @@
       },
       {
         "key": "toggled.disabled__default",
-        "channelsCompared": 84,
-        "channelsEqual": 64,
+        "channelsCompared": 173,
+        "channelsEqual": 142,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1357,9 +1733,75 @@
           },
           {
             "part": "label-2",
+            "channel": "border-bottom-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "label-2",
+            "channel": "outline-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "label-2",
@@ -1372,8 +1814,8 @@
       },
       {
         "key": "toggled.disabled__hover",
-        "channelsCompared": 84,
-        "channelsEqual": 64,
+        "channelsCompared": 173,
+        "channelsEqual": 142,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1488,9 +1930,75 @@
           },
           {
             "part": "label-2",
+            "channel": "border-bottom-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "label-2",
+            "channel": "outline-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "label-2",
@@ -1503,8 +2011,8 @@
       },
       {
         "key": "toggled.disabled__focus-visible",
-        "channelsCompared": 84,
-        "channelsEqual": 64,
+        "channelsCompared": 173,
+        "channelsEqual": 142,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1619,9 +2127,75 @@
           },
           {
             "part": "label-2",
+            "channel": "border-bottom-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "label-2",
+            "channel": "outline-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "label-2",
@@ -1634,8 +2208,8 @@
       },
       {
         "key": "toggled.disabled__active",
-        "channelsCompared": 84,
-        "channelsEqual": 64,
+        "channelsCompared": 173,
+        "channelsEqual": 142,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1750,9 +2324,75 @@
           },
           {
             "part": "label-2",
+            "channel": "border-bottom-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-left-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-right-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "border-top-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "caret-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "column-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
+          },
+          {
+            "part": "label-2",
+            "channel": "outline-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "row-rule-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-decoration-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-emphasis-color",
+            "ours": "rgba(22, 22, 22, 1)",
+            "theirs": "rgba(22, 22, 22, 0.25)"
           },
           {
             "part": "label-2",

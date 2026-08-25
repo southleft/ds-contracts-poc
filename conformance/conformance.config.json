@@ -633,6 +633,22 @@
       "axes": []
     },
     {
+      "__case": "cascade: * { border-color: var(--cf-color-secondary) } — a PAGE-GLOBAL authored declaration, with the element's border-width and border-style declared locally and its colour reaching it only through the universal rule — declared CARRIED",
+      "name": "CasePageGlobalStarRule",
+      "importName": "CasePageGlobalStarRule",
+      "contract": "conformance/seeds/page-global-star-rule.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "cascade: body { color: var(--cf-color-primary) } — the document's ink, inherited by a text-bearing part that declares no colour of its own — declared CARRIED",
+      "name": "CasePageInheritedInk",
+      "importName": "CasePageInheritedInk",
+      "contract": "conformance/seeds/page-inherited-ink.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
       "__case": "units: padding-left: 10% (resolved against the PARENT width) — declared CARRIED",
       "name": "CasePercentagePadding",
       "importName": "CasePercentagePadding",

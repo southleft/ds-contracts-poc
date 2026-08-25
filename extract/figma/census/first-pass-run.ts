@@ -37,6 +37,7 @@ import { validateContract } from "../../../core/emit-react.js";
 import { REPO } from "./corpus.js";
 import {
   CELL_CAP,
+  FIRST_PASS_DIR,
   FORBIDDEN_FILE_KEYS,
   SCRATCH_FILE_KEY,
   artifactOf,
@@ -45,6 +46,7 @@ import {
   headSha,
   makeShadowRoot,
   packetDir,
+  packetImages,
   refusalMessage,
   runOnce,
   slugify,
@@ -90,8 +92,9 @@ function record(
   command: string | null,
   message: string,
   artifacts: StageRecord["artifacts"] = [],
+  driver: NonNullable<StageRecord["driver"]> = "harness",
 ): boolean {
-  c.stages.push({ stage, status, ms, command, message, artifacts });
+  c.stages.push({ stage, status, ms, driver, command, message, artifacts });
   if (status !== "ok") c.stopped = true;
   return status === "ok";
 }
@@ -103,6 +106,7 @@ function skipRest(c: Chain, stages: string[]): void {
       stage: s,
       status: "SKIPPED",
       ms: 0,
+      driver: s === "mint" ? "mcp" : "harness",
       command: null,
       message: `an earlier stage stopped this chain (${c.stages.find((x) => x.status !== "ok" && x.status !== "SKIPPED")?.stage ?? "?"})`,
       artifacts: [],
@@ -141,6 +145,37 @@ const emptyImages = (): SetAttempt["images"] => ({
   absent: [],
 });
 
+/**
+ * THIS RUN PRODUCED NO REPLACEMENT FOR THIS SET, so it destroys nothing.
+ *
+ * The committed images stay exactly where they are and are named in
+ * `images.retained`, with the reason — this set's first stop, in the engine's
+ * own words — in `images.absent`. The gate re-reads them, so a retained image
+ * is never an orphan and is never counted as this attempt's output, and the
+ * receipt says out loud that the pictures beside this attempt are older than
+ * it. Before 2026-08-25 this branch cleared them anyway and the evidence of
+ * the last run that COULD measure was gone.
+ */
+function retain(
+  exam: string,
+  set: string,
+  images: SetAttempt["images"],
+  c: Chain,
+): void {
+  const kept = packetImages(exam, set);
+  if (kept.length === 0) return;
+  images.retained = kept;
+  const stop = c.stages.find(
+    (s) => s.status !== "ok" && s.status !== "SKIPPED",
+  );
+  images.absent.push({
+    kind: "ref",
+    reason:
+      `this run produced no image for ${set} (${stop ? `${stop.status} at ${stop.stage}` : "no stage produced a cell"}), ` +
+      `so it CLEARED NOTHING: the ${kept.length} committed image(s) are from an EARLIER run and are retained, not this attempt's output`,
+  });
+}
+
 function copyImage(
   from: string,
   exam: string,
@@ -159,46 +194,66 @@ function copyImage(
 // ---------------------------------------------------------------------------
 
 /**
- * `--mint` drives the figma-console bridge. A Node process reaches that bridge
- * only if a COMMAND endpoint answers: the local server speaks MCP over stdio to
- * its client and WebSocket to plugin clients, and neither of those accepts a
- * command from here. This probe looks for one on the documented port range and
- * reports what it found. It never guesses, and it never opens a socket to a
- * file key it has not asserted first.
+ * MINT IS AN MCP-DRIVEN STAGE (2026-08-24, FINDING 3) — and this harness is
+ * not an MCP client.
+ *
+ * The earlier version of this function scanned 127.0.0.1:9223-9232 for a
+ * "COMMAND endpoint" and printed what answered. That was an honest refusal
+ * wrapped around a dishonest premise: there is no such endpoint to find. The
+ * figma-console bridge speaks **MCP over stdio to its own client** and
+ * **WebSocket to plugin clients**; a Node process is neither, so no port scan
+ * can ever change the answer, and printing `9228:200` invited the reader to
+ * believe a write was one configuration away. It is not one configuration
+ * away — it is a different actor.
+ *
+ * So the mint stage is modelled for what it is: the harness runs the documented
+ * re-emit, asserts the WRONG-FILE guard is in the bytes, and stops with a
+ * runnable artifact. The canvas write is performed by an AGENT holding the
+ * figma-console MCP tools, and that agent records its own evidence beside the
+ * packet as `mint-evidence.json`. No evidence, no mint: the stage is PENDING
+ * and the receipt says by whom it would have to be driven.
+ *
+ * This does NOT weaken the no-retry rule. The MCP-driven mint gets exactly one
+ * attempt too, and its evidence records that attempt, not a best-of.
  */
-export function probeBridge(): { available: boolean; message: string } {
-  const ports: number[] = [];
-  for (let p = 9223; p <= 9232; p++) ports.push(p);
-  const seen: string[] = [];
-  for (const p of ports) {
-    try {
-      const out = execFileSync(
-        "curl",
-        [
-          "-s",
-          "-m",
-          "2",
-          "-o",
-          "/dev/null",
-          "-w",
-          "%{http_code}",
-          `http://127.0.0.1:${p}/health`,
-        ],
-        { encoding: "utf8" },
-      ).trim();
-      if (out !== "000") seen.push(`${p}:${out}`);
-    } catch {
-      /* a closed port is not an error */
-    }
+export interface MintDriver {
+  driver: "mcp";
+  /** Evidence path relative to the repo, or null when nobody has driven it. */
+  evidence: string | null;
+  message: string;
+}
+
+export function mintEvidencePath(exam: string): string {
+  return path.join(FIRST_PASS_DIR, exam, "mint-evidence.json");
+}
+
+export function mintDriver(exam: string, requested: boolean): MintDriver {
+  const rel = mintEvidencePath(exam);
+  const abs = path.join(REPO, rel);
+  const architecture =
+    `the canvas write is an MCP-DRIVEN stage: the figma-console bridge speaks MCP over stdio to its own client and ` +
+    `WebSocket to plugin clients, and this harness is neither — no port, flag or configuration lets a Node process ` +
+    `issue the write, so it is performed by an agent holding the figma-console MCP tools and records its own evidence at ${rel}`;
+  if (!requested) {
+    return {
+      driver: "mcp",
+      evidence: null,
+      message: `--mint was not requested; the exam stops at the runnable script by design. When it is requested, ${architecture}.`,
+    };
+  }
+  if (!existsSync(abs)) {
+    return {
+      driver: "mcp",
+      evidence: null,
+      message:
+        `no MCP-driven mint evidence is recorded — ${architecture}. Bundle produced, mint pending: ` +
+        `the emitted script carries the WRONG-FILE guard on ${SCRATCH_FILE_KEY} and is the runnable artifact.`,
+    };
   }
   return {
-    available: false,
-    message:
-      `no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 ` +
-      `(probed /health: ${seen.length > 0 ? seen.join(", ") : "nothing answered"}). ` +
-      `The local bridge serves MCP over stdio to its own client and WebSocket to plugin clients; ` +
-      `a Node process cannot issue a canvas write through either. Bundle produced, mint pending — ` +
-      `the emitted script carries the WRONG-FILE guard on ${SCRATCH_FILE_KEY} and is the runnable artifact.`,
+    driver: "mcp",
+    evidence: rel,
+    message: `MCP-driven mint evidence recorded at ${rel} — ${architecture}.`,
   };
 }
 
@@ -591,13 +646,9 @@ export async function runCodeToCanvas(
     ],
     { cwd: root },
   );
-  const bridge = opts.mint
-    ? probeBridge()
-    : {
-        available: false,
-        message:
-          "--mint was not requested; the exam stops at the runnable script by design",
-      };
+  const bridge = mintDriver(def.exam, opts.mint);
+  // Direction A's `mint` is the ONE stage this harness does not execute (see
+  // mintDriver): it emits the guard-carrying script and stops.
   const mintScriptFor = (id: string): string | null => {
     if (!existsSync(mintDir)) return null;
     for (const f of readdirSync(mintDir).sort()) {
@@ -628,12 +679,13 @@ export async function runCodeToCanvas(
     record(
       c,
       "mint",
-      guardFail ? "ERROR" : "PENDING",
+      guardFail ? "ERROR" : bridge.evidence ? "ok" : "PENDING",
       mr.ms,
-      `npx ds-contracts figma … --file-key ${SCRATCH_FILE_KEY}  →  run through the figma-console bridge`,
+      `npx ds-contracts figma … --file-key ${SCRATCH_FILE_KEY}  →  an MCP-holding agent runs it through the figma-console bridge`,
       guardFail ??
-        `runnable script emitted with the WRONG-FILE guard on ${SCRATCH_FILE_KEY}; bridge: ${bridge.message}`,
+        `runnable script emitted with the WRONG-FILE guard on ${SCRATCH_FILE_KEY}; ${bridge.message}`,
       [artifactOf(script, false)],
+      "mcp",
     );
   }
 
@@ -641,10 +693,15 @@ export async function runCodeToCanvas(
   const attempts: SetAttempt[] = [];
   for (const [set, c] of chains) {
     skipRest(c, A_STAGES);
-    clearPacketImages(def.exam, set);
     const images = emptyImages();
     const compDir = path.join(outDir, set.toLowerCase());
     const rowsPath = path.join(compDir, "pixel-rows.json");
+    // THE REPLACEMENT IS DECIDED BEFORE ANYTHING IS DESTROYED (2026-08-25).
+    // Build the whole copy plan from the shadow work directory first; only
+    // then, and only if there is something to write, clear the committed
+    // images. A set whose capture produced nothing keeps its evidence.
+    const plan: Array<{ from: string; name: string; kind: "ref" | "code" }> =
+      [];
     if (!existsSync(rowsPath)) {
       images.absent.push({
         kind: "ref",
@@ -667,14 +724,14 @@ export async function runCodeToCanvas(
         const orig = path.join(compDir, "orig-shots", `${key}.png`);
         const gate = path.join(compDir, "gate-shots", `${key}.png`);
         if (existsSync(orig))
-          images.ref.push(copyImage(orig, def.exam, set, `ref-${slug}.png`));
+          plan.push({ from: orig, name: `ref-${slug}.png`, kind: "ref" });
         else
           images.absent.push({
             kind: "ref",
             reason: `orig-shots/${key}.png absent (the real-library render was not kept)`,
           });
         if (existsSync(gate))
-          images.code.push(copyImage(gate, def.exam, set, `code-${slug}.png`));
+          plan.push({ from: gate, name: `code-${slug}.png`, kind: "code" });
         else
           images.absent.push({
             kind: "code",
@@ -686,6 +743,13 @@ export async function runCodeToCanvas(
           kind: "ref",
           reason: "the capture sampled no __default cell",
         });
+    }
+    if (plan.length > 0) {
+      clearPacketImages(def.exam, set);
+      for (const p of plan)
+        images[p.kind].push(copyImage(p.from, def.exam, set, p.name));
+    } else {
+      retain(def.exam, set, images, c);
     }
     images.absent.push({
       kind: "canvas",
@@ -728,6 +792,8 @@ export async function runCodeToCanvas(
         ? "ok"
         : "PENDING",
       message: bridge.message,
+      driver: bridge.driver,
+      evidence: bridge.evidence,
     },
     noRetry: true,
     cellCap: CELL_CAP,
@@ -928,6 +994,16 @@ export async function runCanvasToCode(
     if (!entry) continue;
     setsUnder(entry.document, sets);
   }
+  // THE MANIFEST IS COMMITTED EVIDENCE TOO (2026-08-25). If the selection
+  // came back empty — a page that moved, a key that no longer resolves — the
+  // run below would write a MANIFEST naming ZERO sets over the committed one,
+  // and every existing packet directory would instantly read as SMUGGLED.
+  // Refuse before that write; the caller reports MEASURED NOTHING and exits
+  // non-zero with the committed record intact.
+  if (sets.length === 0)
+    throw new Error(
+      `first-pass: exam ${def.exam} selected NO component set under pages ${def.pages.join(", ")} of file ${def.fileKey} — refusing before the MANIFEST is overwritten, because a MANIFEST naming zero sets would make every committed packet read as smuggled. The committed record is untouched.`,
+    );
   const corpus = def.corpusFiles
     .map((f) => path.join(REPO, f))
     .filter(existsSync);
@@ -1141,7 +1217,12 @@ export async function runCanvasToCode(
   // ---- render the generated React, then export Figma's own render -------
   const imagesBySet = new Map<string, SetAttempt["images"]>();
   for (const doc of sets) imagesBySet.set(doc.name, emptyImages());
-  for (const doc of sets) clearPacketImages(def.exam, doc.name);
+  // NO BULK CLEAR HERE (2026-08-25). This loop used to wipe every set's
+  // committed images before the browser had even launched, so a run that died
+  // at `dump` — no token, no network — destroyed the whole exam's evidence and
+  // still exited 0. Each set is now cleared inside renderGenerated, at the
+  // moment its replacement is about to be written, and a set that never
+  // reaches that point keeps what it has (see `retain` below).
   const renderMs = await renderGenerated(
     def,
     sets,
@@ -1159,6 +1240,10 @@ export async function runCanvasToCode(
     const c = chains.get(doc.name)!;
     skipRest(c, B_STAGES);
     const images = imagesBySet.get(doc.name)!;
+    // A set that produced no image of its own cleared nothing — say so, and
+    // name the committed images it left standing.
+    if (images.ref.length === 0 && images.code.length === 0)
+      retain(def.exam, doc.name, images, c);
     images.absent.push({
       kind: "canvas",
       reason:
@@ -1200,6 +1285,7 @@ export async function runCanvasToCode(
       status: "SKIPPED",
       message:
         "canvas→code is READ-ONLY; no exam in this direction writes to any Figma file",
+      evidence: null,
     },
     noRetry: true,
     cellCap: CELL_CAP,
@@ -1324,6 +1410,7 @@ async function renderGenerated(
     const c = chains.get(doc.name)!;
     const images = imagesBySet.get(doc.name)!;
     const missed: string[] = [];
+    let cleared = false;
     for (const cell of cellsBySet.get(doc.name)!) {
       const h = await page.$(
         `[data-cell="${slugify(doc.name)}__${cell.slug}"]`,
@@ -1341,6 +1428,14 @@ async function renderGenerated(
         `code-${cell.slug}.png`,
       );
       mkdirSync(path.dirname(target), { recursive: true });
+      // THE POINT OF REPLACEMENT for this set: the cell is mounted and the
+      // next statement writes this set's first new PNG. Only now may the
+      // earlier run's images go — and only this set's. A set that never
+      // reaches this line keeps every byte it had.
+      if (!cleared) {
+        clearPacketImages(def.exam, doc.name);
+        cleared = true;
+      }
       await h.screenshot({ path: target });
       images.code.push(path.relative(REPO, target));
     }
@@ -1381,9 +1476,14 @@ async function exportRefs(
     for (const cell of cellsBySet.get(doc.name) ?? []) {
       const dir = packetDir(def.exam, doc.name);
       mkdirSync(dir, { recursive: true });
+      const outPath = path.join(dir, `ref-${cell.slug}.png`);
+      // `existsSync(outPath)` below is this stage's ONLY evidence that Figma
+      // rendered the cell, so the target must not already exist: a leftover
+      // PNG from an earlier run would be counted as this run's reference.
+      rmSync(outPath, { force: true });
       wanted.push({
         nodeId: cell.nodeId,
-        outPath: path.join(dir, `ref-${cell.slug}.png`),
+        outPath,
         set: doc.name,
         slug: cell.slug,
       });

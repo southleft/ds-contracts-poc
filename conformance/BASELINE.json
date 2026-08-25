@@ -2,7 +2,7 @@
   "_marker": "THE MEASURED FRONTIER — the committed result of the CSS/DOM conformance fixture. Every non-PASS entry is an OPEN DEFECT that has been measured and named, not an accepted one. The gate refuses any drift in EITHER direction: a new red is a regression, and a red that becomes PASS must be re-recorded here, so a fix can never be absorbed silently.",
   "measuredAt": "extract/computed/out/conformance (npm run conformance:capture)",
   "counts": {
-    "PASS": 88,
+    "PASS": 90,
     "SILENT-LOSS": 0,
     "UNDECLARED-CARRY": 3,
     "WRONG-NAME": 0,
@@ -80,6 +80,8 @@
     "nonpainting-text-display-none": "PASS",
     "nonpainting-text-visibility-hidden": "PASS",
     "oklch-color": "PASS",
+    "page-global-star-rule": "PASS",
+    "page-inherited-ink": "PASS",
     "percentage-padding": "PASS",
     "position-absolute-insets": "PASS",
     "position-fixed": "PASS",

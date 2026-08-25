@@ -28,6 +28,21 @@
  *      child's definition.
  */
 import * as z from "zod";
+import { DECLARABLE_ARCHETYPES } from "./archetype.js";
+
+/** The archetype vocabulary is part of the live document (v19 `archetype`),
+ *  so it re-exports from here and the repo's scripts/contract-schema.ts shim
+ *  carries it too — one map, reachable by every existing import path. */
+export {
+  ARCHETYPES,
+  DECLARABLE_ARCHETYPES,
+  archetypeOf,
+  kebabName,
+  resolveArchetype,
+  type Archetype,
+  type DeclaredArchetype,
+  type ResolvedArchetype,
+} from "./archetype.js";
 
 /** SCHEMA 17 — the v16 → v17 renames, as the refusal messages the schema
  *  prints. One table: the tombstone fields (`figmaRepresentation`,
@@ -1349,6 +1364,18 @@ export const TOKEN_CHANNELS: Record<string, TokenChannelSpec> = {
     "Figma has no maxHeight field (maxWidth exists; its height twin does not).",
   ),
   "text-indent": annotated("Figma text nodes have no first-line indent."),
+  // BASELINE ISOLATION ROUND (docs/23 D.36) — `html { tab-size: 4 }` is the
+  // first line of every Tailwind-preflight-shaped reset (shadcn, tailwind,
+  // astryx). It is PAGE-GLOBAL and inherited, so before the control baseline
+  // was isolated it landed on the harness's own control elements too and was
+  // cancelled as a user-agent default (the UA default is `8`). It reaches the
+  // mint as a plain number, which is a mintable kind — so with the baseline
+  // fixed, 32 components' contracts carried a channel the registry did not
+  // know and `validateContract` refused the whole component by name. It is a
+  // real CSS property the library authored; the canvas has no field for it.
+  "tab-size": annotated(
+    "Figma text nodes have no tab stop size; a tab character renders as the font's own advance.",
+  ),
   "vertical-align": annotated(
     "Figma has no inline baseline alignment; auto-layout counterAxisAlignItems is the nearest, coarser, fact.",
   ),
@@ -2393,6 +2420,25 @@ export const ContractSchema = z.strictObject({
     .regex(/^\d+\.\d+\.\d+$/, "version must be semver (MAJOR.MINOR.PATCH)"),
   status: z.enum(["draft", "stable", "deprecated"]).default("draft"),
   description: z.string(),
+  /** v19 (REQUIRED FACTS) — the docs/23 §C.1.1 component class this contract
+   *  belongs to, DECLARED. It is what the required-facts referee reads: per
+   *  archetype, the load-bearing facts a set must carry before `figma bundle`
+   *  or the plugin engine will mint it (`@ds-contracts/core` required-facts.ts
+   *  — a card with no part carrying `direction: "column"` minted as a pill, a
+   *  dialog with no column axis minted as ONE ROW; both refuse now, by name).
+   *
+   *  Optional, and three-way by design:
+   *    · declared here  — wins, always. `"none"` is the honest opt-out for a
+   *      contract that is not a component archetype (divider, heading, code).
+   *    · absent, name recognised — the seeding name-map (archetypeOf) applies,
+   *      and `ds-contracts migrate` writes the field so the guess becomes a
+   *      reviewed declaration exactly once.
+   *    · absent, name unrecognised — NOTHING is enforced and the tool warns
+   *      "declare archetype". It never guesses: a wrong archetype would refuse
+   *      facts the component does not owe, or mint one that lies.
+   *
+   *  Carried, never derived at read time; no emitter reads it to draw. */
+  archetype: z.enum(DECLARABLE_ARCHETYPES).optional(),
   /** Figma-parity documentation pointers (schema 18, additive/optional):
    *  the component's own documentation links, carried BOTH ways — the
    *  Figma emitter writes them as the set's documentationLinks, and the

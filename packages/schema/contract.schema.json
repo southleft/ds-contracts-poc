@@ -28,6 +28,32 @@
     "description": {
       "type": "string"
     },
+    "archetype": {
+      "type": "string",
+      "enum": [
+        "button",
+        "badge / tag / chip",
+        "checkbox / radio",
+        "toggle / switch",
+        "banner / alert / toast",
+        "input / field",
+        "card",
+        "avatar",
+        "tabs",
+        "accordion",
+        "progress / spinner",
+        "slider",
+        "select / combobox",
+        "modal / dialog",
+        "tooltip / popover",
+        "menu / dropdown",
+        "pagination",
+        "table / data-grid",
+        "breadcrumb",
+        "nav (top / side)",
+        "none"
+      ]
+    },
     "documentationLinks": {
       "type": "array",
       "items": {

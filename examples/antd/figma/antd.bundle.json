@@ -10034,6 +10034,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). MOLECULE, PRESENCE-HEAVY (the Polaris Banner precedent). The icon GLYPH is a function of `type` AND its presence a function of `showIcon` — `showIcon` is modelled as a 2-value ENUM AXIS (noIcon|icon; config maps to the boolean) rather than presence so the glyph stays a ONE-axis function of `type` (svg-content per-value glyph parts). `description` and `closable` are PRESENCE props (each adds a part; the close button has its own hover plane — descendant state). antd's runtime default type is `info`. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/antd/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Ant Design's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "banner / alert / toast",
       "semantics": {
         "element": "div"
       },
@@ -10452,6 +10453,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). ATOM, SIZE×SHAPE (the MUI Avatar precedent plus antd's real size enum small|default|large → 24/32/40px). The text child is ONE glyph on purpose: antd's text-fit ResizeObserver writes an inline `transform: scale(n)` on span.ant-avatar-string (scale(1) for a single initial; a T3 dynamic channel if the initial overflowed). NAMED OUT: `icon` (child SWAP — replaces the string part), `src`, numeric `size`, `gap`. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/antd/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Ant Design's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "avatar",
       "semantics": {
         "element": "span"
       },
@@ -10627,6 +10629,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). MOLECULE WRAPPER (the MUI Badge precedent): the Avatar child is mounted by the config's childrenSpec. `mode` is a synthetic 2-value axis (count|dot) that the config expands through $props into antd's two APIs (`count: 5` vs `dot: true`) — ONE axis so the per-value overlay parts stay a one-axis function. `color` is DEFAULTLESS (unset = antd's red count badge); the 3 presets are a curated slice. NAMED OUT: status mode (a different root composition), overflowCount/showZero, counts other than 5. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/antd/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Ant Design's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "badge / tag / chip",
       "semantics": {
         "element": "span"
       },
@@ -11014,6 +11017,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). type×size×danger = 30 renderings (RECON §3 #1). `danger` is antd's boolean but rides as a 2-value ENUM AXIS (safe|danger) because a rendering a prop selects is an axis, never a state (the MUI Switch `checked` reclassification); the capture config maps safe→false, danger→true. NAMED OUT (RECON §4 static-seed trap): htmlType/href/target/block/ghost/iconPosition/autoInsertSpace and the 5.21+ color(16)×variant(6) decomposition — type+danger select the five documented renderings; href swaps the root to <a>. `icon` and `loading` are PRESENCE props in the config (structure-creating), not axes. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/antd/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Ant Design's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "button",
       "semantics": {
         "element": "button"
       },
@@ -11798,6 +11802,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). MOLECULE CONTAINER (the MUI Card precedent with a real head part). `variant` is antd 5.24+'s outlined|borderless (`bordered` is @deprecated, Card.d.ts:17 — seed-gen proposed variant(2)); `size` default|small. title is pinned by the config; the head title renders fontWeightStrong=600, the Roboto-600 substrate residue (examples/antd/README.md). NAMED OUT: cover/actions/extra/tabList/loading. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/antd/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Ant Design's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "card",
       "semantics": {
         "element": "div"
       },
@@ -12108,6 +12113,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). THE PSEUDO-GLYPH CASE (FC-PSEUDO-STROKE-GLYPH): the tick is `.ant-checkbox-inner::after`, a rotate(45deg)+scale+translate L-stroke. The tri-state rides ONE enum axis (unchecked|checked|indeterminate) expanded by the config through $props into antd's two booleans (`checked` + `indeterminate`) — one axis so per-value glyph carriage stays a single-axis function (the MUI Checkbox precedent). ROOT = label.ant-checkbox-wrapper: antd forwards className/data-* to the hidden INPUT, not the label (RECON S2) — the harness stamps the stage child, so the captured root is the label. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/antd/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Ant Design's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "checkbox / radio",
       "semantics": {
         "element": "label"
       },
@@ -12676,6 +12682,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). ATOM WITH A ROOT-SWAP TRAP. Bare Input is ONE element (input.ant-input); prefix/suffix/addon/allowClear each REPLACE the root with span.ant-input-affix-wrapper > [prefix + input] (measured, RECON §2.6) — a presence prop that swaps the ROOT signature cannot factor (the Altitude href precedent), so they are NAMED OUT; an `InputAffix` subject with prefix pinned on is the honest spelling if wanted. `variant` is antd's FOUR-value tuple (underlined since 5.24, seed-gen read it); `bordered` is @deprecated (Input.d.ts:45) and not an axis. `status` is DEFAULTLESS (unset = no status). Focus is a box-shadow ring (carried channel), not an outline. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/antd/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Ant Design's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "input / field",
       "semantics": {
         "element": "input"
       },
@@ -13108,6 +13115,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). THE METER (FC-METER / FC-GEOMETRY-EXCLUDED, T3). `status` is DEFAULTLESS — antd's ProgressStatuses tuple is normal|exception|active|success and `normal` IS the unset rendering, so the enum carries the other three and `unset` stands for normal (one value per rendering, no duplicate). percent is pinned at 40 and type at line by the config (the MUI LinearProgress value:40 precedent); the fill WIDTH is inline geometry the Option B exclusion must LEDGER. NAMED OUT: circle/dashboard (SVG stroke-dasharray geometry), steps, strokeColor gradients, format. HEAL LOOP (2026-08-23): `percent` (40) and `max` (100) are NUMBER props so the fill part can carry a `meter` fact (examples/antd/authored-facts.json — the astryx/polaris progress-bar precedent); the capture pins percent at 40 and never enumerates numbers. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/antd/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Ant Design's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "progress / spinner",
       "semantics": {
         "element": "div"
       },
@@ -13419,6 +13427,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). THE PSEUDO-DOT CASE: the dot is `.ant-radio-inner::after` revealed by `transform: scale()` — the pseudo-decor v1 grammar carries translate + orthonormal rotate only, so the checked dot is expected to land REFUSED BY NAME (pseudo-decor-outside-grammar), never silent. `checked` is a variant axis (unchecked|checked), controlled with a no-op onChange. NAMED OUT: Radio.Button (dotted importName is not in the harness import grammar — W8), Radio.Group. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/antd/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Ant Design's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "checkbox / radio",
       "semantics": {
         "element": "label"
       },
@@ -13927,6 +13936,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). THE PSEUDO-THUMB CASE (FC-PSEUDO-THUMB / docs/23 §B.4): the visible knob is `.ant-switch-handle::before`, and the handle inset is a size×checked product. `checked` is a VARIANT AXIS (unchecked|checked, the MUI Switch state-plane reclassification), controlled with a no-op onChange. `size` is antd's own 2-value enum (default|small). NAMED OUT: `loading` (forces ant-switch-disabled — the enabled-loading rendering is unobservable, the TablePagination arrow precedent), checkedChildren/unCheckedChildren. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/antd/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Ant Design's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "toggle / switch",
       "semantics": {
         "element": "button"
       },
@@ -14436,6 +14446,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). DEFAULTLESS colour enum: antd Tag has no default `color`; the unset rendering is the neutral tag, so the capture prepends `unset` (enumeration.unsetLabel). The 7 presets are a CURATED slice of the 13 palette presets + 5 status presets (blue/green/red/gold = palette; success/processing/error = status) — the full 18 would be 18×2×2 = 72 renderings of one mechanism. `bordered` rides as a 2-value enum axis (bordered|borderless; config maps to the boolean). `closable` is a PRESENCE prop (mounts the close icon part). Root has NO hover plane; the close icon has (descendant state) — `hover` is declared so the delta can land. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/antd/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Ant Design's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "badge / tag / chip",
       "semantics": {
         "element": "span"
       },
@@ -14707,6 +14718,7 @@
       "version": "0.2.0",
       "status": "draft",
       "description": "Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). CURATED seed for the antd P2 exam (code→canvas, held out) — props/axes only; anatomy is promoted from captured DOM truth. Every axis value is the library's own declared enum (antd spells them as `readonly [...]` tuples; seed-gen reads them once its declaration lookup ignores directory case — W1, examples/antd/RECON.md §4). THE PORTAL LANE (docs/23 §B.1 + §B.2 — expected LEDGERED; the exam measures whether it is NAMED). Portal-aware capture: the popper subtree (div.ant-tooltip) is the component's rendered contribution; the Button anchor (config childWrap) is receipted, never carried. `open`, `title` and `placement: top` are pinned by the config's openDriver; placement is NOT an axis (anchored positioning is not modelled — the MUI Tooltip precedent). `getPopupContainer` takes a function the marker grammar cannot express, so the in-stage route is unreachable from config (W9) and B.1 is MEASURED, not dodged. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/antd/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Ant Design's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+      "archetype": "tooltip / popover",
       "semantics": {
         "element": "div"
       },

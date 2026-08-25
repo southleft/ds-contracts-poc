@@ -1,0 +1,156 @@
+{
+  "_marker": "THE CAPTURE HALF'S MEASUREMENT — written by `npm run corpus:reproducible:check -- --capture` (or --capture-from). Half B needs Chromium and the git-ignored sandboxes, so it cannot run in every lane; the referee reads THIS record instead, which makes the verdict the same on every machine. Re-measure to move it. A library with no sandbox on the measuring machine is PENDING by name and is never counted as reproducing.",
+  "measuredAt": "2026-08-25",
+  "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "libraries": {
+    "altitude": {
+      "pending": null,
+      "components": {
+        "avatar": [],
+        "badge": [
+          "parts — only in the committed record: root/label"
+        ],
+        "button": [],
+        "chip": [
+          "props — only in the committed record: type={\"enum\":[\"default\",\"squared\"]}/null | only in the fresh capture: type={\"enum\":[\"squared\"]}/null"
+        ],
+        "divider": [
+          "props — only in the committed record: variant={\"enum\":[\"default\",\"vertical\"]}/\"default\" | only in the fresh capture: variant={\"enum\":[\"vertical\"]}/null"
+        ],
+        "heading": [],
+        "iconclose": [],
+        "link": []
+      }
+    },
+    "antd": {
+      "pending": "the measuring run captured nothing for antd — examples/antd/.antd-sandbox is git-ignored and this machine does not carry it (examples/antd/PROVENANCE.md has the recreate block). NOT measured, never counted as reproducing.",
+      "components": {}
+    },
+    "carbon": {
+      "pending": null,
+      "components": {
+        "accordion": [],
+        "button": [],
+        "checkbox": [],
+        "iconbutton": [],
+        "inlinenotification": [
+          "parts — only in the fresh capture: root/root-before"
+        ],
+        "modal": [
+          "parts — only in the committed record: root/label ; root/modal-container ; root/modal-container/modal-header ; root/modal-container/modal-header/label-2 ; root/modal-container/modal-header/label-3 ; root/modal-container/modal-header/modal-close-button ; root/modal-container/modal-header/modal-close-button/icon-tooltip ; root/modal-container/modal-header/modal-close-button/icon-tooltip/tooltip-trigger__wrapper ; root/modal-container/modal-header/modal-close-button/icon-tooltip/tooltip-trigger__wrapper/btn ; root/modal-container/label-5 ; root/modal-container/btn-set ; root/modal-container/btn-set/label-6 ; root/modal-container/btn-set/label-7 ; root/label-8 | only in the fresh capture: root/modal-header ; root/modal-header/label ; root/modal-header/label-2 ; root/modal-header/modal-close-button ; root/modal-header/modal-close-button/icon-tooltip ; root/modal-header/modal-close-button/icon-tooltip/tooltip-trigger__wrapper ; root/modal-header/modal-close-button/icon-tooltip/tooltip-trigger__wrapper/btn ; root/label-4 ; root/btn-set ; root/btn-set/label-5 ; root/btn-set/label-6"
+        ],
+        "tabs": [],
+        "tag": [],
+        "textinput": [],
+        "toggle": []
+      }
+    },
+    "fluent": {
+      "pending": null,
+      "components": {
+        "avatar": [],
+        "badge": [],
+        "button": [],
+        "card": [],
+        "checkbox": [],
+        "dialog": [],
+        "input": [],
+        "spinner": [],
+        "switch": [],
+        "tablist": [],
+        "tooltip": []
+      }
+    },
+    "mui": {
+      "pending": null,
+      "components": {
+        "accordion": [],
+        "alert": [],
+        "autocomplete": [],
+        "avatar": [],
+        "badge": [],
+        "breadcrumbs": [],
+        "button": [],
+        "card": [],
+        "checkbox": [],
+        "chip": [],
+        "circularprogress": [],
+        "dialog": [],
+        "divider": [],
+        "drawer": [],
+        "fab": [],
+        "iconbutton": [],
+        "inputadornment": [],
+        "linearprogress": [],
+        "link": [],
+        "menu": [],
+        "pagination": [],
+        "paper": [],
+        "radio": [],
+        "select": [],
+        "slider": [],
+        "snackbar": [
+          "props — only in the committed record: position={\"enum\":[\"bottom-left\",\"bottom-center\",\"top-right\"]}/\"bottom-left\""
+        ],
+        "switch": [],
+        "table": [],
+        "tabs": [],
+        "textfield": [
+          "parts — only in the fresh capture: root/inputbase-adornedend/inputadornment-positionstart/label-2 ; root/inputbase-adornedend/inputadornment-positionend/label-3"
+        ],
+        "tooltip": [
+          "the documented capture REFUSED and produced no record: Error: determinism self-check FAILED — UNSTABLE channels across double-run: transform, translate-x — witnesses: Tooltip:off__default @root (div|MuiPopper-root.MuiTooltip-popper.MuiTooltip-popperInteractive) transform: \"matrix(1, 0, 0, 1, 19, 53)\" vs \"matrix(1, 0, 0, 1, 16, 53)\" | Tooltip:off__default @root (div|MuiPopper-root.MuiTooltip-popper.MuiTooltip-popperInteractive) translate-x: \"19px\" vs \"16px\""
+        ]
+      }
+    },
+    "polaris": {
+      "pending": null,
+      "components": {
+        "avatar": [],
+        "badge": [],
+        "banner": [],
+        "button": [],
+        "checkbox": [],
+        "progressbar": [],
+        "radiobutton": [],
+        "spinner": [],
+        "tag": [],
+        "text": [],
+        "textfield": [],
+        "thumbnail": []
+      }
+    },
+    "shadcn": {
+      "pending": null,
+      "components": {
+        "alert": [],
+        "avatar": [],
+        "badge": [],
+        "button": [],
+        "card": [],
+        "checkbox": [],
+        "input": [],
+        "select": [],
+        "switch": [],
+        "tabs": [],
+        "tooltip": []
+      }
+    },
+    "tailwind": {
+      "pending": null,
+      "components": {
+        "alert": [],
+        "badge": [],
+        "blockquote": [],
+        "button": [],
+        "card": [],
+        "helpertext": [],
+        "kbd": [],
+        "label": [],
+        "spinner": [],
+        "textinput": [],
+        "toggleswitch": []
+      }
+    }
+  }
+}

@@ -59,9 +59,9 @@
     "combos": 4,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 464,
-      "cellsEqual": 388,
-      "pctEqual": 83.62068965517241,
+      "cellsCompared": 480,
+      "cellsEqual": 404,
+      "pctEqual": 84.16666666666667,
       "rowsFullyEqual": 0,
       "rows": 16
     },
@@ -87,7 +87,7 @@
       "mintedLeavesUnfolded": 17,
       "baseBindings": 8,
       "stateBindings": 3,
-      "codeOnlyChannels": 1,
+      "codeOnlyChannels": 2,
       "overflowBindings": 0,
       "folds": 10
     },
@@ -204,6 +204,7 @@
       ]
     ],
     "namedLosses": [
+      "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
@@ -225,8 +226,8 @@
     "rows": [
       {
         "key": "unset__default",
-        "channelsCompared": 29,
-        "channelsEqual": 27,
+        "channelsCompared": 30,
+        "channelsEqual": 28,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -248,8 +249,8 @@
       },
       {
         "key": "unset__hover",
-        "channelsCompared": 29,
-        "channelsEqual": 27,
+        "channelsCompared": 30,
+        "channelsEqual": 28,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -271,8 +272,8 @@
       },
       {
         "key": "unset__focus-visible",
-        "channelsCompared": 29,
-        "channelsEqual": 27,
+        "channelsCompared": 30,
+        "channelsEqual": 28,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -294,8 +295,8 @@
       },
       {
         "key": "unset__active",
-        "channelsCompared": 29,
-        "channelsEqual": 16,
+        "channelsCompared": 30,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -383,8 +384,8 @@
       },
       {
         "key": "xs__default",
-        "channelsCompared": 29,
-        "channelsEqual": 27,
+        "channelsCompared": 30,
+        "channelsEqual": 28,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -406,8 +407,8 @@
       },
       {
         "key": "xs__hover",
-        "channelsCompared": 29,
-        "channelsEqual": 27,
+        "channelsCompared": 30,
+        "channelsEqual": 28,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -429,8 +430,8 @@
       },
       {
         "key": "xs__focus-visible",
-        "channelsCompared": 29,
-        "channelsEqual": 27,
+        "channelsCompared": 30,
+        "channelsEqual": 28,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -452,8 +453,8 @@
       },
       {
         "key": "xs__active",
-        "channelsCompared": 29,
-        "channelsEqual": 16,
+        "channelsCompared": 30,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -541,8 +542,8 @@
       },
       {
         "key": "sm__default",
-        "channelsCompared": 29,
-        "channelsEqual": 27,
+        "channelsCompared": 30,
+        "channelsEqual": 28,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -564,8 +565,8 @@
       },
       {
         "key": "sm__hover",
-        "channelsCompared": 29,
-        "channelsEqual": 27,
+        "channelsCompared": 30,
+        "channelsEqual": 28,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -587,8 +588,8 @@
       },
       {
         "key": "sm__focus-visible",
-        "channelsCompared": 29,
-        "channelsEqual": 27,
+        "channelsCompared": 30,
+        "channelsEqual": 28,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -610,8 +611,8 @@
       },
       {
         "key": "sm__active",
-        "channelsCompared": 29,
-        "channelsEqual": 16,
+        "channelsCompared": 30,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -699,8 +700,8 @@
       },
       {
         "key": "lg__default",
-        "channelsCompared": 29,
-        "channelsEqual": 27,
+        "channelsCompared": 30,
+        "channelsEqual": 28,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -722,8 +723,8 @@
       },
       {
         "key": "lg__hover",
-        "channelsCompared": 29,
-        "channelsEqual": 27,
+        "channelsCompared": 30,
+        "channelsEqual": 28,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -745,8 +746,8 @@
       },
       {
         "key": "lg__focus-visible",
-        "channelsCompared": 29,
-        "channelsEqual": 27,
+        "channelsCompared": 30,
+        "channelsEqual": 28,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -768,8 +769,8 @@
       },
       {
         "key": "lg__active",
-        "channelsCompared": 29,
-        "channelsEqual": 16,
+        "channelsCompared": 30,
+        "channelsEqual": 17,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

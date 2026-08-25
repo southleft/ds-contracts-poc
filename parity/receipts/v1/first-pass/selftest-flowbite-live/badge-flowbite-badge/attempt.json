@@ -12,12 +12,13 @@
     {
       "stage": "dump",
       "status": "ok",
-      "ms": 1072,
+      "ms": 1104,
+      "driver": "harness",
       "command": "npm run extract:figma:rest -- \"<url>?node-id=120:2098\" --out <dump>",
       "message": "badge-flowbite-badge.json",
       "artifacts": [
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/dumps/badge-flowbite-badge.json",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/dumps/badge-flowbite-badge.json",
           "sha256": "229793fcf8fb96af51fc14ea88d83d6d829bede987c7c0b02daa4d5c3d184752",
           "bytes": 146578,
           "committed": false
@@ -27,12 +28,13 @@
     {
       "stage": "propose",
       "status": "ok",
-      "ms": 322,
+      "ms": 304,
+      "driver": "harness",
       "command": "npm run extract:figma -- <dump> --out <proposed> --tokens <kit dtcg>",
       "message": "1 proposal file(s)",
       "artifacts": [
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/proposed/badge-flowbite-badge/badge-flowbite-badge.contract.proposed.json",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/proposed/badge-flowbite-badge/badge-flowbite-badge.contract.proposed.json",
           "sha256": "69f3781d2eaf49e0418d3f18f462c8abc9bd6363a503bc9ff7bffaddfb2484f7",
           "bytes": 3345,
           "committed": false
@@ -43,6 +45,7 @@
       "stage": "validate",
       "status": "ok",
       "ms": 1,
+      "driver": "harness",
       "command": "core/emit-react.ts validateContract (the referee — no CLI verb; docs/07)",
       "message": "no violations",
       "artifacts": []
@@ -50,36 +53,37 @@
     {
       "stage": "generate-react",
       "status": "ok",
-      "ms": 1401,
+      "ms": 715,
+      "driver": "harness",
       "command": "npx ds-contracts generate <proposed>/*.contract.proposed.json --out <react> --tokens <kit>,<minted>",
       "message": "5 file(s)",
       "artifacts": [
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/react/badge-flowbite-badge/index.ts",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/react/badge-flowbite-badge/index.ts",
           "sha256": "b01f47bf7a8583f321098febb66dcb805e93139435b9cb8aeaf418a16b82a1e9",
           "bytes": 48,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/react/badge-flowbite-badge/tokens.css",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/react/badge-flowbite-badge/tokens.css",
           "sha256": "c608476bde62c6e244df6da34ff7f3174c5a2b7d694b9103db619669c502f651",
           "bytes": 22353,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/react/badge-flowbite-badge/Badge/Badge.module.css",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/react/badge-flowbite-badge/Badge/Badge.module.css",
           "sha256": "3b06cdb89eeda840a1703870e5ca0deb79627b8983e67e4f16c26bf5a691fdb1",
           "bytes": 3572,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/react/badge-flowbite-badge/Badge/Badge.tsx",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/react/badge-flowbite-badge/Badge/Badge.tsx",
           "sha256": "d9949f7b1664acbff29b03382438a5b232a6a24a675bb8e61ef4eb7e13ef1076",
           "bytes": 1325,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/react/badge-flowbite-badge/Badge/index.ts",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/react/badge-flowbite-badge/Badge/index.ts",
           "sha256": "e98921962f39988115d115bcaf8d49128ee05c30178a676e3055b7697a2296ec",
           "bytes": 76,
           "committed": false
@@ -89,36 +93,37 @@
     {
       "stage": "generate-wc",
       "status": "ok",
-      "ms": 1069,
+      "ms": 984,
+      "driver": "harness",
       "command": "npx ds-contracts generate <proposed>/*.contract.proposed.json --out <wc> --target web-components --emitter @ds-contracts/emitter-web-components",
       "message": "5 file(s)",
       "artifacts": [
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/wc/badge-flowbite-badge/flowbite-badge.css.ts",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/wc/badge-flowbite-badge/flowbite-badge.css.ts",
           "sha256": "5d5efa63610c70df5e6878d96428bf4a1091ad337b0f8a88ad80d73e74d5f5f6",
           "bytes": 4600,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/wc/badge-flowbite-badge/flowbite-badge.custom-elements.json",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/wc/badge-flowbite-badge/flowbite-badge.custom-elements.json",
           "sha256": "8caccf740d222eb3420b357c8dc25b886d4c87fb2b92c0722ad7cc18e8689da1",
           "bytes": 1979,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/wc/badge-flowbite-badge/flowbite-badge.demo.html",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/wc/badge-flowbite-badge/flowbite-badge.demo.html",
           "sha256": "6802e42e1e723ef0b4af5de396bd79a6b2ca5b051e97d5de249a770fa93d78d7",
           "bytes": 2007,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/wc/badge-flowbite-badge/flowbite-badge.ts",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/wc/badge-flowbite-badge/flowbite-badge.ts",
           "sha256": "e45fb5f9381ada2a0495fc98135b3efb75a81b83944fd426f827bae60fe92037",
           "bytes": 2944,
           "committed": false
         },
         {
-          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/wc/badge-flowbite-badge/tokens.css",
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-X3R4D0/wc/badge-flowbite-badge/tokens.css",
           "sha256": "05fbda98df2087ecd8c0189ce8013311d0d4a34505212ed57334a5186c5277f6",
           "bytes": 22362,
           "committed": false
@@ -128,7 +133,8 @@
     {
       "stage": "render",
       "status": "ok",
-      "ms": 25,
+      "ms": 16,
+      "driver": "harness",
       "command": "esbuild bundle of the generated React → playwright-core screenshot at deviceScaleFactor 2",
       "message": "8 cell(s)",
       "artifacts": [
@@ -185,7 +191,8 @@
     {
       "stage": "ref",
       "status": "ok",
-      "ms": 979,
+      "ms": 1018,
+      "driver": "harness",
       "command": "GET /v1/images/59mLQlOMiD5w5za6SUcoO5?ids=<variant>&scale=2 (READ-ONLY)",
       "message": "8 reference PNG(s) at scale 2",
       "artifacts": [
@@ -271,5 +278,5 @@
       }
     ]
   },
-  "totalMs": 4869
+  "totalMs": 4142
 }
