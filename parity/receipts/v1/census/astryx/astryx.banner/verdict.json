@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "all 5 samples (info-card, info-section, success-card, warning-card, error-card): canvas status icon is a solid filled glyph (filled disc with i, filled check disc, filled triangle, filled x disc) while ref renders outlined stroke icons (circled i, stroked check circle, outlined triangle, circled x) \u2014 systematic icon style mismatch not in walls; fills, text colors, title/body, and card-rounded vs section-square corner behavior all match"
+ ],
+ "defectClasses": [
+  "glyph geometry"
+ ],
  "notes": "status colors, glyphs, title+body in card/section containers match",
  "reviewedAt": "796581f0",
  "setNodeId": "39:14051",

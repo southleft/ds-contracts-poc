@@ -1,7 +1,11 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [],
+ "defectClasses": [],
  "notes": "count dot on square host matches",
  "reviewedAt": "ef10d9b1",
  "setNodeId": "33:4823",

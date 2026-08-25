@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "canvas collapsed to a 1280x2 sliver \u2014 nothing renders; ref shows a 1200x96 empty band. Zero visible body on canvas."
+ ],
+ "defectClasses": [
+  "min-size collapse"
+ ],
  "notes": "slot-only layout renders empty in both halves \u2014 the pair agrees",
  "reviewedAt": "66580a14",
  "setNodeId": "39:23859",

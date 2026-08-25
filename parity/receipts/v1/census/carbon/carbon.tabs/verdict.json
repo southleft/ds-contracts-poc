@@ -1,7 +1,19 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "ALL 3 previews (tabs, state-hover, state-active): ref renders the tab panel content 'Overview panel' below the tablist; canvas omits the panel entirely",
+  "ALL 3 previews: ref draws segmented gray underlines per tab with a gap between Activity and Settings; canvas draws one continuous gray line from the end of the blue indicator to full width",
+  "state-hover and state-active canvases are pixel-identical to the default preview (no hover/active treatment) \u2014 but the ref previews are also identical to ref default, so this is a vacuous state preview, not a canvas-vs-ref divergence"
+ ],
+ "defectClasses": [
+  "missing ink",
+  "interior layout",
+  "other"
+ ],
  "notes": "tab row with active underline matches; default/active/hover previews",
  "reviewedAt": "3f3b23b4",
  "setNodeId": "39:8688",

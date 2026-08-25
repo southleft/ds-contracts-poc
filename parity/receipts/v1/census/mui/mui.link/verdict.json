@@ -1,7 +1,23 @@
 {
- "recognisable": "ungraded",
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "underline-always: canvas has NO underline and is byte-identical (md5 14067582) to underline-none and underline-hover \u2014 the underline axis has zero canvas effect; ref underline-always is underlined",
+  "state-hover (underline-hover): canvas identical to default, no underline; ref shows the underline appearing on hover",
+  "state-active: canvas identical to default, no underline; ref is underlined",
+  "state-focus-visible: canvas draws a square-cornered blue border and still no underline; ref shows a rounded focus ring around an underlined link",
+  "all colors: canvas sans-serif vs ref serif fallback (font substrate; walls[] empty so unnamed)"
+ ],
+ "defectClasses": [
+  "layout axis",
+  "missing ink",
+  "missing ink",
+  "missing ink",
+  "other"
+ ],
  "notes": "default cell and sampled variants match",
  "reviewedAt": "16fac1ee",
  "setNodeId": "39:17301",

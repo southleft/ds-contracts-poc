@@ -54,6 +54,18 @@
  *     `--phase full` it does not RED the gate (the refs are the gate's
  *     floor; the re-grade is a person/adversary's pass) — `"unscored"` and a
  *     missing verdict still do.
+ *   · THE BLIND RE-GRADE (2026-08-24). The adversarial pass landed:
+ *     verdicts re-scored by graders who saw ONLY canvas-<slug>.png beside
+ *     ref-<slug>.png, prompted to fail. Grammar: `gradedBy`
+ *     ("blind-adversarial-2026-08-24"), `confidence`, `defects[]` (every
+ *     visible difference, named), `defectClasses[]` (parallel; see
+ *     BLIND_DEFECT_CLASSES). A NOT-recognisable verdict is a NAMED red:
+ *     `--phase full` exits non-zero on it unless `--allow-red-verdicts`
+ *     (lane-only escape while the burn-down proceeds — TODO drop it at 0).
+ *     A false verdict naming neither wall nor defect is a hard failure in
+ *     every mode; the receipt's "Blind re-grade" section carries the
+ *     per-library tally, the defect-class tally, the owner-rejected sets'
+ *     outcomes, and the burn-down list.
  *   · THE RECEIPT. parity/receipts/v1/CANVAS-CENSUS.md — byte-stable (no
  *     dates; rows in manifest order), one row per set: library, id,
  *     archetype, variants rendered, code-render state, canvas state, verdict,
@@ -157,6 +169,14 @@ interface Verdict {
   recognisable: true | false | "unscored" | "ungraded";
   /** The voided self-grade (see header: verdict state "ungraded"). */
   priorSelfGrade?: true | false | "unscored";
+  /** Who scored `recognisable` — the blind re-grade writes "blind-adversarial-2026-08-24". */
+  gradedBy?: string;
+  /** The blind grader's confidence: "certain" | "borderline". */
+  confidence?: string;
+  /** Named canvas-vs-ref differences left to fix (the blind re-grade grammar). */
+  defects?: string[];
+  /** Per-defect class, parallel to `defects` (see BLIND_DEFECT_CLASSES). */
+  defectClasses?: string[];
   walls?: string[];
   notes?: string;
   reviewedAt?: string;
@@ -184,6 +204,10 @@ interface RowState {
   walls: string;
   rendered: string;
   failures: string[];
+  /** The row's verdict.json as read (null when absent). */
+  verdict: Verdict | null;
+  /** NOT-recognisable verdicts that NAME their differences (walls/defects) — named reds, not hard failures. */
+  redVerdicts: string[];
 }
 
 interface RunOptions {
@@ -198,6 +222,8 @@ interface RunOptions {
 interface RunResult {
   ok: boolean;
   failures: string[];
+  /** Named NOT-recognisable verdicts (phase full only) — red for the exit code unless --allow-red-verdicts, never silent. */
+  redVerdicts: string[];
   rows: RowState[];
   receipt: string;
 }
@@ -276,6 +302,8 @@ function rowState(row: ManifestRow, phase: Phase, censusDir: string): RowState {
     walls: "—",
     rendered: "—",
     failures,
+    verdict: null,
+    redVerdicts: [],
   };
 
   const receiptPath = path.join(dir, "code-render.json");
@@ -328,6 +356,7 @@ function rowState(row: ManifestRow, phase: Phase, censusDir: string): RowState {
   const verdict = existsSync(verdictPath)
     ? readJson<Verdict>(verdictPath)
     : null;
+  state.verdict = verdict;
   const projected = new Set(
     (verdict?.walls ?? [])
       .filter((w) => w.startsWith("CANVAS-PROJECTION:"))
@@ -379,9 +408,18 @@ function rowState(row: ManifestRow, phase: Phase, censusDir: string): RowState {
     else if (verdict.recognisable === "ungraded")
       state.verdictState = "ungraded";
     else state.verdictState = "unscored";
-    if (verdict.recognisable === false && walls.length === 0) {
+    const defects = verdict.defects ?? [];
+    if (
+      verdict.recognisable === false &&
+      walls.length === 0 &&
+      defects.length === 0
+    ) {
       failures.push(
-        `${who}: verdict says NOT recognisable but names no wall — every difference must be a named wall or a fixed defect`,
+        `${who}: verdict says NOT recognisable but names no wall and no defect — every difference must be a named wall or a named defect`,
+      );
+    } else if (verdict.recognisable === false) {
+      state.redVerdicts.push(
+        `${who}: NOT recognisable (blind re-grade${verdict.confidence ? `, ${verdict.confidence}` : ""}) — ${defects.length} named defect(s)${walls.length > 0 ? `, ${walls.length} named wall(s)` : ""}`,
       );
     }
   }
@@ -416,6 +454,36 @@ function rowState(row: ManifestRow, phase: Phase, censusDir: string): RowState {
 // The receipt
 // ---------------------------------------------------------------------------
 
+/** Who the blind re-grade writes into verdict.json `gradedBy`. */
+const BLIND_GRADER = "blind-adversarial-2026-08-24";
+
+/** The defect-class vocabulary of the blind re-grade (verdict.json `defectClasses`);
+ * "match-note" marks a grader parenthetical recording agreement — kept in
+ * `defects[]` for the record, excluded from the defect tally. */
+const BLIND_DEFECT_CLASSES = [
+  "missing ink",
+  "layout axis",
+  "interior layout",
+  "glyph geometry",
+  "min-size collapse",
+  "type scale",
+  "other",
+];
+
+/** The sets TJ rejected with screenshots on 2026-08-24 (the release halt) —
+ * the blind re-grade must show where each stands now. */
+const OWNER_REJECTED: Array<{ id: string; complaint: string }> = [
+  {
+    id: "fluent.card",
+    complaint: "header/description text run together, no layout",
+  },
+  { id: "fluent.dialog", complaint: "dialog content on one horizontal row" },
+  { id: "astryx.card", complaint: "hug-sized pills instead of a card" },
+  { id: "shadcn.checkbox", complaint: "malformed check glyph" },
+  { id: "shadcn.select", complaint: "select trigger unstyled (~30px)" },
+  { id: "polaris.checkbox", complaint: "wrong scale" },
+];
+
 function renderReceipt(
   manifest: CensusManifest,
   rows: RowState[],
@@ -440,6 +508,82 @@ function renderReceipt(
     `**Phase: \`${phase}\`.** ${phase === "code" ? "Canvas columns may read PENDING; the denominator and the code half are held." : "Every column is held."}`,
   );
   lines.push("");
+  const blind = rows.filter((r) => r.verdict?.gradedBy === BLIND_GRADER);
+  if (blind.length > 0) {
+    const pass = (rs: RowState[]) =>
+      rs.filter((r) => r.verdict?.recognisable === true).length;
+    const fail = (rs: RowState[]) =>
+      rs.filter((r) => r.verdict?.recognisable === false).length;
+    lines.push("## Blind re-grade 2026-08-24");
+    lines.push("");
+    lines.push(
+      'The voided self-grades were re-graded BLIND by adversarial graders (`gradedBy: "' +
+        BLIND_GRADER +
+        "\"`): a grader saw only each row's `canvas-<slug>.png` beside `ref-<slug>.png` — the REAL library's render — and was prompted to FAIL (the agent that builds a surface never grades it). " +
+        "The blind grade replaces the self-grade (`priorSelfGrade` kept); every visible difference is recorded in `defects[]` with a class in `defectClasses[]` and a grader `confidence`. " +
+        "A NOT-recognisable verdict is a NAMED red: `--phase full` exits non-zero on it unless the lane passes `--allow-red-verdicts` (this branch's lane does — TODO: burn the list below down to 0 and drop the flag; a false verdict naming neither wall nor defect is a hard failure in every mode).",
+    );
+    lines.push("");
+    lines.push("| library | graded | recognisable | NOT recognisable |");
+    lines.push("|---|---|---|---|");
+    for (const [lib, rs] of byLib) {
+      const g = rs.filter((r) => r.verdict?.gradedBy === BLIND_GRADER);
+      lines.push(`| ${lib} | ${g.length} | ${pass(g)} | ${fail(g)} |`);
+    }
+    lines.push(
+      `| **all** | ${blind.length} | ${pass(blind)} | ${fail(blind)} |`,
+    );
+    lines.push("");
+    const classCount = new Map<string, number>();
+    let matchNotes = 0;
+    for (const r of blind)
+      for (const c of r.verdict?.defectClasses ?? []) {
+        if (c === "match-note") matchNotes += 1;
+        else classCount.set(c, (classCount.get(c) ?? 0) + 1);
+      }
+    lines.push(
+      `Defect classes (every \`defects[]\` entry across all graded rows; ${matchNotes} grader match-note(s) excluded):`,
+    );
+    lines.push("");
+    lines.push("| class | defects |");
+    lines.push("|---|---|");
+    for (const c of [...BLIND_DEFECT_CLASSES].sort(
+      (a, b) => (classCount.get(b) ?? 0) - (classCount.get(a) ?? 0),
+    ))
+      if ((classCount.get(c) ?? 0) > 0)
+        lines.push(`| ${c} | ${classCount.get(c)} |`);
+    lines.push("");
+    lines.push(
+      "Owner-rejected sets (TJ, 2026-08-24 — the screenshots that halted the release) under the blind re-grade:",
+    );
+    lines.push("");
+    lines.push("| set | owner's rejection | blind re-grade |");
+    lines.push("|---|---|---|");
+    for (const o of OWNER_REJECTED) {
+      const r = blind.find((s) => s.row.id === o.id);
+      const v = r?.verdict;
+      const outcome = v
+        ? `${v.recognisable === true ? "recognisable" : "NOT recognisable"} (${v.confidence ?? "unstated"}) — ${(v.defects ?? []).length} named defect(s)`
+        : "not blind-graded";
+      lines.push(`| \`${o.id}\` | ${o.complaint} | ${outcome} |`);
+    }
+    lines.push("");
+    const reds = blind.filter((r) => r.verdict?.recognisable === false);
+    lines.push(
+      `NOT-recognisable rows (the burn-down list — ${reds.length} of ${blind.length}):`,
+    );
+    lines.push("");
+    for (const r of reds) {
+      const v = r.verdict!;
+      const classes = [
+        ...new Set((v.defectClasses ?? []).filter((c) => c !== "match-note")),
+      ].join(", ");
+      lines.push(
+        `- \`${r.row.library}/${r.row.id}\` (${v.confidence ?? "unstated"}) — ${(v.defects ?? []).length} defect(s): ${classes || "walled only"}`,
+      );
+    }
+    lines.push("");
+  }
   lines.push("## The bar");
   lines.push("");
   lines.push(
@@ -563,9 +707,11 @@ export function runCensus(opts: RunOptions, fresh?: CensusManifest): RunResult {
     rowState(r, opts.phase, opts.censusDir),
   );
   for (const r of rows) failures.push(...r.failures);
+  const redVerdicts =
+    opts.phase === "full" ? rows.flatMap((r) => r.redVerdicts) : [];
   const receipt = renderReceipt(rowsSource, rows, opts.phase, failures);
   if (opts.receiptPath) writeFileSync(opts.receiptPath, receipt);
-  return { ok: failures.length === 0, failures, rows, receipt };
+  return { ok: failures.length === 0, failures, redVerdicts, rows, receipt };
 }
 
 function selfTest(): number {
@@ -789,6 +935,18 @@ async function main(): Promise<number> {
       `✘ census gate RED — ${result.failures.length} failure(s):\n${result.failures.map((f) => `  - ${f}`).join("\n")}`,
     );
     return 1;
+  }
+  if (result.redVerdicts.length > 0) {
+    const list = result.redVerdicts.map((f) => `  - ${f}`).join("\n");
+    if (!argv.includes("--allow-red-verdicts")) {
+      console.error(
+        `✘ census gate RED — ${result.redVerdicts.length} NOT-recognisable verdict(s) from the blind re-grade (burn them down, or carry them NAMED with --allow-red-verdicts in the lane while the burn-down proceeds):\n${list}`,
+      );
+      return 1;
+    }
+    console.log(
+      `⚠ ${result.redVerdicts.length} NOT-recognisable verdict(s) carried by --allow-red-verdicts — named in the receipt's blind re-grade section; TODO burn down to 0 and drop the flag:\n${list}`,
+    );
   }
   console.log("✔ census gate green");
   return 0;

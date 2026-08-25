@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "link text 'Page' has no underline on canvas; ref renders it underlined (link affordance dropped)."
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
  "notes": "default cell and sampled variants match",
  "reviewedAt": "66580a14",
  "setNodeId": "39:23506",

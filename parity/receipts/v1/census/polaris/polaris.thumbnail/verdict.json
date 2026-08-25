@@ -1,7 +1,17 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "all 4 sizes: canvas placeholder box has NO border stroke \u2014 pixel-verified: canvas edge pixels are uniformly the fill gray (217,217,217) edge-to-edge, while ref shows a distinct darker 1px border ring around the (216,216,216) fill; walls are empty so the missing border is unwalled",
+  "canvas corner radius reads proportionally smaller than ref's at the small sizes (slight rounding on canvas-extra-small vs clearly rounded ref)"
+ ],
+ "defectClasses": [
+  "missing ink",
+  "other"
+ ],
  "notes": "gray placeholder box on canvas beside the code render's broken-image alt text \u2014 the canvas draws the placeholder the contract describes",
  "reviewedAt": "ef10d9b1",
  "setNodeId": "39:22944",

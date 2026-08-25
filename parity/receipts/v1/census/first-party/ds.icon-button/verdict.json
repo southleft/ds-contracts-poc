@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "(pair agrees) neither canvas nor ref renders any icon glyph in any of the 6 cells \u2014 both sides are bare colored rounded squares (red/blue/gray/ghost). No canvas-vs-ref difference, but component identity is carried only by shape and color; the sample cannot demonstrate the icon slot works."
+ ],
+ "defectClasses": [
+  "other"
+ ],
  "notes": "icon slot empty in both halves (gray square pair agrees)",
  "reviewedAt": "66580a14",
  "setNodeId": "39:23749",

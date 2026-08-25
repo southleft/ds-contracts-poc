@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "active tab label ink: canvas renders 'Overview' in the same mid-gray as the inactive 'Activity'/'Settings' labels; ref renders the active label near-black (foreground token) \u2014 active-state text color not applied on canvas (white pill itself is present and correct)"
+ ],
+ "defectClasses": [
+  "other"
+ ],
  "notes": "pill tab list + panel copy match",
  "reviewedAt": "60793cc0",
  "setNodeId": "39:9594",

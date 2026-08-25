@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "(pair agrees) both canvas (1280x960) and ref (1200x1008) are featureless solid-white rectangles \u2014 no grid tracks, gaps, or cell placeholders; nothing on either side identifies a bento grid. Parity holds but the sample cannot pass the 'a designer can tell what this is' bar."
+ ],
+ "defectClasses": [
+  "other"
+ ],
  "notes": "slot-only grid scaffold renders empty in both halves \u2014 the pair agrees",
  "reviewedAt": "66580a14",
  "setNodeId": "39:23493",

@@ -1,7 +1,17 @@
 {
- "recognisable": "ungraded",
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "variant-determinate: canvas draws a full closed 360-degree blue ring; ref draws a partial arc open at the lower-left (~75% fill) \u2014 determinate progress reads as 100% complete",
+  "variant-indeterminate: canvas file is byte-identical (md5 8abcc51f) to determinate \u2014 the variant axis has zero canvas effect; ref indeterminate is a short animated-arc snapshot"
+ ],
+ "defectClasses": [
+  "glyph geometry",
+  "layout axis"
+ ],
  "notes": "default cell and sampled variants match",
  "reviewedAt": "16fac1ee",
  "setNodeId": "39:17103",

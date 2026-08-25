@@ -1,7 +1,19 @@
 {
- "recognisable": "ungraded",
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "appearance=outline: canvas is byte-identical to appearance=ghost (ImageChops diff bbox None) \u2014 the blue circular outline stroke ref shows is entirely missing, so outline reads as ghost (bare blue 9, no ring)",
+  "appearance=tint: canvas edge pixels equal the pale-blue fill (235,243,252) with no stroke, while ref tint shows a visible slightly-darker tint border ring",
+  "all filled colors (brand/danger/important/informative/severe/subtle/success/warning), all 6 sizes, and ghost match ref; tiny-size squarish look is AA at 6px and not counted"
+ ],
+ "defectClasses": [
+  "missing ink",
+  "missing ink",
+  "match-note"
+ ],
  "notes": "filled colors across 6 sizes + ghost/outline/tint match",
  "reviewedAt": "60793cc0",
  "setNodeId": "39:12179",

@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "all 4 color variants: canvas text stroke weight renders visibly lighter than ref (Inter substrate rendering); walls array is empty so this is not an excused wall \u2014 hue, box tint, radius, and padding otherwise match exactly; non-material to what the component reads as"
+ ],
+ "defectClasses": [
+  "other"
+ ],
  "notes": "colors, radius, padding match; text weight renders lighter on canvas (Inter substrate)",
  "reviewedAt": "ad1e0fbb",
  "setNodeId": "39:5876",

@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "placeholder 'Enter a value...' rendered in full text ink rgb(17,24,39) on canvas; ref renders it in muted placeholder gray ~#757575 (pixel-sampled). Canvas placeholder reads as entered value, not placeholder \u2014 all three sizes."
+ ],
+ "defectClasses": [
+  "other"
+ ],
  "notes": "default cell and sampled variants match",
  "reviewedAt": "66580a14",
  "setNodeId": "39:24208",

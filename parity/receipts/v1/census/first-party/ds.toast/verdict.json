@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "both types: message text missing \u2014 canvas is a bare solid pill (error: red 640x34; info: dark navy 640x34) with no content; ref shows 'The quick brown fox jumps over the lazy dog.' in white inside the pill. An empty colored bar does not read as a toast."
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
  "notes": "message pill matches; canvas stretches to the stage width while the code render hugs",
  "reviewedAt": "66580a14",
  "setNodeId": "39:24217",

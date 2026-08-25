@@ -1,5 +1,7 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
  "priorSelfGrade": true,
  "walls": [
   "CANVAS-PROJECTION:Type=Text, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium",
@@ -25,6 +27,16 @@
   "CANVAS-PROJECTION:Type=Month, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium",
   "CANVAS-PROJECTION:Type=Time, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium",
   "CANVAS-PROJECTION:Type=Week, Input Mode=None, Align=Left, Variant=Inherit, Size=Medium"
+ ],
+ "defects": [
+  "the single graded pair (type-text/input-mode-text): canvas input value reads 'Example' where ref reads 'Jaded Pixel' \u2014 unwalled copy mismatch",
+  "same pair: canvas label 'Store name' renders noticeably bolder/blacker than the ref's regular-weight dark-gray label",
+  "coverage caveat: 23 of 24 sampled cells have no canvas render at all (walled as CANVAS-PROJECTION), so recognisability rests on one cell; the one pair does read clearly as a Polaris TextField (label + rounded bordered input)"
+ ],
+ "defectClasses": [
+  "other",
+  "type scale",
+  "other"
  ],
  "notes": "the canvas is a curated projection (8 drawn cells: Input Mode=Text planes incl. borderless/disabled/focus, verified by set export); the 23 sampled cells outside it are named CANVAS-PROJECTION walls; the one overlapping cell (Type=Text, Input Mode=Text) matches the code render",
  "reviewedAt": "ef10d9b1",

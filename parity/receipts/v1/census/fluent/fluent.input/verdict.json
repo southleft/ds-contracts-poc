@@ -1,10 +1,21 @@
 {
- "recognisable": true,
- "gradedBy": "builder-fix",
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": false,
  "walls": [
   "CODE-ONLY-FACT:root/border-bottom-color (outline/underline) \u2014 Fluent\u2019s accessible bottom stroke ({color-neutral-stroke-accessible}) is darker than the other three sides; a Figma node carries ONE strokes paint, so the majority ({imported.input.root.border-top-color.<appearance>} #d1d1d1) draws and the bottom\u2019s own colour stays code-only by name (underline, whose only drawn side IS the bottom, now paints it exactly)",
   "CODE-ONLY-FACT:root/border-color (state previews) \u2014 State=Active/Focus Visible recolor the bottom to the brand stroke in code; on the preview cells the drawn sides\u2019 majority is the transparent state colour, so those two cells render no stroke ink"
+ ],
+ "defects": [
+  "'Value' placeholder text is missing from EVERY canvas variant \u2014 measured 0 dark ink pixels in filled-darker, filled-lighter, and outline canvases; ref shows 'Value' in all 11 cells. The named wall covers only the outline/underline stroke, not text loss in filled/filled-shadow variants, which render as empty gray/white rounded rects",
+  "outline sizes small/medium/large, underline, and states hover/active/focus-visible render as fully blank white rectangles (stroke absence is walled, but with the placeholder also gone these cells contain zero ink and the three state previews are indistinguishable blanks; ref active/focus show the blue bottom-border)",
+  "filled-darker/lighter and both shadow variants do carry the correct fill and shadow shape, but with no text they read as gray blocks, not inputs"
+ ],
+ "defectClasses": [
+  "missing ink",
+  "missing ink",
+  "missing ink"
  ],
  "notes": "outline now draws its full 1px neutral ring and underline its 1px bottom stroke on every size (the border-*-style facts the declared-uniform door refused now ride per-appearance stylesWhen rules, and the one-paint stroke rule is width-aware with a named majority), matching the code half\u2019s render; filled/shadow appearances match as before; the darker accessible bottom and the active/focus preview recolor are the two named walls",
  "reviewedAt": "07e437c8",

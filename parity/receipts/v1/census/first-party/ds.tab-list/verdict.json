@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "canvas tab list has no enclosing container border \u2014 the three tab pills float directly; ref wraps them in a thin gray outlined track. Container chrome lost."
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
  "notes": "default cell and sampled variants match",
  "reviewedAt": "66580a14",
  "setNodeId": "39:24007",

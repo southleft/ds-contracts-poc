@@ -1,8 +1,16 @@
 {
- "recognisable": "ungraded",
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [
   "CODE-RENDER-BLANK:avatar"
+ ],
+ "defects": [
+  "variant-sm: canvas mints a vertically stretched ellipse (34x64 px, ~2:1 tall) with the 'AB' initials pinned to the TOP of the shape; ref renders a circular 1:1 avatar with the initials centered. Wrong root aspect ratio and wrong label alignment \u2014 a designer would not read the canvas cell as this library's Avatar. The row's only named wall (CODE-RENDER-BLANK:avatar) waives the blank code render, not canvas-vs-ref geometry."
+ ],
+ "defectClasses": [
+  "interior layout"
  ],
  "notes": "canvas draws the neutral oval with AB initials; the committed code render PNG carries ZERO ink pixels (blank 96x96) \u2014 a code-half rendering gap, canvas judged against the contract",
  "reviewedAt": "6804cb8f",

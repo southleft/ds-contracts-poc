@@ -1,7 +1,19 @@
 {
- "recognisable": "ungraded",
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "orientation-horizontal value-display-tooltip: canvas renders a persistent dark '40' tooltip pill; ref render shows no tooltip at all (likely hover-only in the library) \u2014 visible element the ref lacks, and the pill sits offset toward the label rather than centered over the thumb",
+  "orientation-vertical value-display-tooltip: same \u2014 canvas shows the dark '40' tooltip pill left of the thumb; ref shows none",
+  "(value-display-none and value-display-text horizontal variants match: label, filled/unfilled track, thumb position, right-aligned '40' text)"
+ ],
+ "defectClasses": [
+  "other",
+  "other",
+  "match-note"
+ ],
  "notes": "track, thumb, value tooltip/text across orientations match",
  "reviewedAt": "796581f0",
  "setNodeId": "39:14227",

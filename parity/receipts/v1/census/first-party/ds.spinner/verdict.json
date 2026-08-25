@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "arc rotation phase differs (canvas arc sits top-right, ref arc bottom-left) \u2014 same arc length and color; animation-frame difference only."
+ ],
+ "defectClasses": [
+  "glyph geometry"
+ ],
  "notes": "default cell and sampled variants match",
  "reviewedAt": "66580a14",
  "setNodeId": "39:23964",

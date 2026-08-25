@@ -1,7 +1,21 @@
 {
- "recognisable": "ungraded",
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "ALL 3 align-end variants (sm/md/lg): canvas draws the chevron on the LEFT of the title, identical to align-start; ref draws title left with chevron on the RIGHT \u2014 the align axis has no visible effect on canvas, align-end reads as align-start",
+  "ALL 4 variants: canvas chevron points RIGHT (closed glyph) while the body copy is expanded below it; ref draws an UP chevron for the open item \u2014 the open state reads as closed from the glyph",
+  "ALL 4 variants: canvas body copy starts LEFT of the title text (x\u224840 vs title x\u224874, hanging outside the title column); ref indents the body flush with the title text",
+  "align-start__size-sm: ref wraps the body copy to two lines at the component measure; canvas runs it as one long unwrapped line"
+ ],
+ "defectClasses": [
+  "layout axis",
+  "glyph geometry",
+  "interior layout",
+  "interior layout"
+ ],
  "notes": "chevron + title + body rows with dividers match across align/size; the code render carries a stray leading list dot the canvas does not draw",
  "reviewedAt": "3f3b23b4",
  "setNodeId": "39:8133",

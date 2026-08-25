@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "both variants: child content missing \u2014 canvas renders empty 640x70 rounded boxes (muted: gray tint; section: white); ref shows the same boxes containing 'The quick brown fox jumps over the lazy dog.' An empty rounded rectangle is not identifiable as a Section."
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
  "notes": "slot-only section renders as an empty rounded box in both halves",
  "reviewedAt": "66580a14",
  "setNodeId": "39:23929",

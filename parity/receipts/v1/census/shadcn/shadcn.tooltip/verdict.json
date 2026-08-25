@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "caret/arrow missing: ref tooltip bubble carries the small dark triangular caret on its bottom edge (pointing at the 'Hover' trigger); canvas renders only the rounded bubble with no caret. Bubble fill, radius, and copy otherwise match ('Hover' trigger text in the ref is harness context, not counted)"
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
  "notes": "dark bubble with copy matches",
  "reviewedAt": "60793cc0",
  "setNodeId": "39:9605",

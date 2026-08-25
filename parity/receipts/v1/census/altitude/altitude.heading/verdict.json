@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "all regular-weight cells (display-lg/md/sm, lg, md, sm): canvas glyphs render marginally lighter with slightly different letterforms than ref (font substrate) \u2014 visible only on close side-by-side inspection and does not change what any cell reads as, but the walls array is EMPTY; the substrate wall is only mentioned in prose notes ('Inter substrate') and should be promoted into walls to be a legitimate waiver."
+ ],
+ "defectClasses": [
+  "other"
+ ],
  "notes": "display/lg/md/sm levels and bold weight match; regular weight renders slightly lighter (Inter substrate)",
  "reviewedAt": "6804cb8f",
  "setNodeId": "39:6778",

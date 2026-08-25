@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "all variants: canvas 'Paper content' sans-serif vs ref serif fallback (font substrate; walls[] empty so unnamed)"
+ ],
+ "defectClasses": [
+  "other"
+ ],
  "notes": "default cell and sampled variants match",
  "reviewedAt": "16fac1ee",
  "setNodeId": "39:17344",

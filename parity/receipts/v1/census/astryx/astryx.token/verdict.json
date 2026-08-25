@@ -1,7 +1,11 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [],
+ "defectClasses": [],
  "notes": "all 11 colors and 3 sizes match",
  "reviewedAt": "796581f0",
  "setNodeId": "39:14408",

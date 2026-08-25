@@ -1,7 +1,11 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [],
+ "defectClasses": [],
  "notes": "close glyph across 7 sizes matches",
  "reviewedAt": "6804cb8f",
  "setNodeId": "39:6802",

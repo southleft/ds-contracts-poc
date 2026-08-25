@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "all 5 sizes (xs/sm/md/lg/xl): canvas renders the initials 'TP' inside the magenta rounded square; ref (real Polaris Avatar with only size prop, per ref-render.json) renders the default customer icon glyph (head+shoulders outline). Walls are empty, so the initials-vs-icon content swap is an unwalled visible difference on every sampled cell. Shape, magenta fill, and relative sizing otherwise match."
+ ],
+ "defectClasses": [
+  "other"
+ ],
  "notes": "TP magenta avatar across sizes matches; the code render carries a stray glyph overlay the canvas does not",
  "reviewedAt": "ef10d9b1",
  "setNodeId": "39:19610",

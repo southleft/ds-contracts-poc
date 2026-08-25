@@ -1,8 +1,22 @@
 {
- "recognisable": "ungraded",
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [
   "CANVAS-SURFACE-WHITE-ON-WHITE:toast"
+ ],
+ "defects": [
+  "beyond the named wall: ref toast surface is a DARK near-black rounded card with WHITE text \u2014 canvas minted a white surface, so even if the surface were visible it would be the wrong color; the wall only excuses invisibility, not the inverted palette",
+  "canvas message ink is dark #171717 vs ref white text",
+  "dismiss affordance: canvas renders the word 'Dismiss' as gray text at right; ref renders an X close-icon glyph \u2014 different element",
+  "net effect: canvas reads as two loose strings of black text on nothing, not a toast"
+ ],
+ "defectClasses": [
+  "other",
+  "other",
+  "other",
+  "other"
  ],
  "notes": "message + Dismiss match; the toast card surface is white with only a shadow and reads as unboxed in the export",
  "reviewedAt": "796581f0",

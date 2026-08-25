@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "state-open: canvas renders the trigger row plus a thin EMPTY region \u2014 the content area carries no body text; ref shows 'The quick brown fox jumps over the lazy dog.' inside the open bordered card. The open state is only distinguishable from closed by the chevron rotation and ~30px of blank space."
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
  "notes": "default cell and sampled variants match",
  "reviewedAt": "66580a14",
  "setNodeId": "39:23247",

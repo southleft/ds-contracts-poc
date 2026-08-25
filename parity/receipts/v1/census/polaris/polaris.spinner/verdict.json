@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "size-large (and to a lesser degree size-small): arc gap position and sweep differ \u2014 canvas draws a ~300\u00b0 arc with the gap at lower-right; ref shows a ~260\u00b0 arc with the gap at upper-right. Likely an animation-phase capture artifact, but rotation/sweep is not a named wall (walls empty), so it stands as an unwalled visible difference"
+ ],
+ "defectClasses": [
+  "glyph geometry"
+ ],
  "notes": "arc spinner matches both sizes",
  "reviewedAt": "ef10d9b1",
  "setNodeId": "39:22566",

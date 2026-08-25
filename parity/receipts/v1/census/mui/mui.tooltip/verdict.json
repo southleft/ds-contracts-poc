@@ -1,7 +1,11 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [],
+ "defectClasses": [],
  "notes": "bubble matches; code render carries a stray anchor block",
  "reviewedAt": "16fac1ee",
  "setNodeId": "39:17906",

@@ -1,7 +1,21 @@
 {
- "recognisable": "ungraded",
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "checked=checked: canvas draws a solid blue rounded square with NO white checkmark glyph; ref shows blue box with white check \u2014 reads as a blue square, not a checked checkbox",
+  "checked=mixed: canvas draws a blue-outlined EMPTY box; ref shows blue-outlined box with the solid blue inner square indicator \u2014 mixed indicator missing, reads as unchecked with blue border",
+  "state previews hover/active/focus-visible are all byte-identical to the base unchecked cell (diff bbox None for each); ref focus-visible shows a black rounded focus ring around box+label \u2014 all three state previews uncarried",
+  "unchecked, circular shape, and large size match ref"
+ ],
+ "defectClasses": [
+  "missing ink",
+  "missing ink",
+  "missing ink",
+  "match-note"
+ ],
  "notes": "square/circular shapes, checked/mixed and state previews match",
  "reviewedAt": "60793cc0",
  "setNodeId": "39:12746",

@@ -1,7 +1,17 @@
 {
- "recognisable": "ungraded",
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "all 5 samples: canvas mints a leading icon inside the field (person glyph for type-text sm/md/lg, envelope for type-email, padlock for type-password) that the ref never renders \u2014 ref fields contain only the placeholder; fabricated anatomy element, not a named wall",
+  "(label, placeholder text, border radius, and sm/md/lg field heights otherwise match)"
+ ],
+ "defectClasses": [
+  "other",
+  "match-note"
+ ],
  "notes": "label + bordered field with leading glyph and placeholder across types/sizes match",
  "reviewedAt": "796581f0",
  "setNodeId": "39:14328",

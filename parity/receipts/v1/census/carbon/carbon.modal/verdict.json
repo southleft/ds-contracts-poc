@@ -1,7 +1,19 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "ALL 4 sizes: canvas close-X glyph is drawn white/light-gray on the light header \u2014 effectively invisible (pixel-verified: no dark ink in canvas top-right region; ref X is black #161616)",
+  "ALL 4 sizes: ref draws the auto-focus ring on the primary Save button (white inner ring + blue border); canvas Save is a plain blue fill \u2014 ring absence is not a named wall on this row (walls list is empty)",
+  "ALL 4 sizes: ref render includes the gray backdrop region below the modal; canvas export crops at the modal edge \u2014 likely capture framing, noting for completeness"
+ ],
+ "defectClasses": [
+  "missing ink",
+  "missing ink",
+  "other"
+ ],
  "notes": "backdrop, label, heading, body, Cancel/Save footer match across 4 sizes",
  "reviewedAt": "3f3b23b4",
  "setNodeId": "39:8652",

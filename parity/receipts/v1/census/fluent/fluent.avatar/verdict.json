@@ -1,7 +1,19 @@
 {
- "recognisable": "ungraded",
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "active=active: canvas is pixel-identical to active=none (0 blue pixels measured) while ref shows the blue activity ring around the avatar (804 blue px) \u2014 the active state carries zero visual change on canvas",
+  "active=inactive: ref shrinks/dims the avatar; canvas is identical to active=none \u2014 inactive state also uncarried, so all three active-axis variants render the same",
+  "shape=square size-24: canvas corners are near-sharp (~1px AA rounding measured at corner pixels) vs ref's clearly rounded ~6px corner radius"
+ ],
+ "defectClasses": [
+  "layout axis",
+  "layout axis",
+  "other"
+ ],
  "notes": "FT circle/square across sizes + active ring states match",
  "reviewedAt": "60793cc0",
  "setNodeId": "39:11792",

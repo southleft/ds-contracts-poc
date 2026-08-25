@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "state-focus-visible: canvas draws a heavy dark border ring around the pill; ref focus-visible shows NO ring at all \u2014 pixel-verified: ref focus PNG has exactly the same dark-pixel count as ref default (618 px), while canvas focus has 3204 dark px vs 822 for canvas default. The canvas invents focus ink the real library render never shows (or the ref harness failed to capture focus \u2014 either way the pair visibly differs and no wall is named)"
+ ],
+ "defectClasses": [
+  "other"
+ ],
  "notes": "gray pill matches across sizes",
  "reviewedAt": "ef10d9b1",
  "setNodeId": "39:22653",

@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "variant-indeterminate: canvas pins a short dark-blue segment at the far left edge of the light track; ref shows a uniform light track with no dark segment (animation frame 0)"
+ ],
+ "defectClasses": [
+  "other"
+ ],
  "notes": "default cell and sampled variants match",
  "reviewedAt": "16fac1ee",
  "setNodeId": "39:17214",

@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "size-medium and size-small: canvas Name-column sort arrow points DOWN (descending); ref arrow points UP (ascending). Canvas also shows an Actions column with kebab icons that falls outside the ref's 1200px crop, so it could not be verified either way"
+ ],
+ "defectClasses": [
+  "glyph geometry"
+ ],
  "notes": "canvas carries the Actions kebab column the code render clips at its 600px stage",
  "reviewedAt": "16fac1ee",
  "setNodeId": "39:17753",

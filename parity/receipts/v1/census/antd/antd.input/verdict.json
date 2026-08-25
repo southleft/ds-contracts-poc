@@ -1,8 +1,24 @@
 {
- "recognisable": "ungraded",
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [
   "CODE-RENDER-BLANK:input"
+ ],
+ "defects": [
+  "ALL sampled cells: canvas renders the text 'Input' as a filled value in near-black #1f1f1f (and in red #ff4d4f on the filled and borderless variant cells) \u2014 ref shows a gray #bfbfbf placeholder in every cell; text color/role is wrong across the whole set",
+  "size-middle__status-error__variant-underlined: canvas contains ZERO underline ink (pixel scan finds 0 red pixels in the entire 576x60 PNG \u2014 only floating text); ref shows a red bottom border line; this cell does not read as an input at all",
+  "state-active and state-focus-visible: canvas draws a pale-BLUE outer focus ring (rgb 230,244,255, with a saturated blue stroke) around the red border \u2014 ref shows antd's error focus treatment: red border with a pale-RED glow (rgb 255,242,240); focus ring hue is wrong for status=error",
+  "state-active, state-hover, state-focus-visible, state-disabled: canvas centers the text horizontally (dark-text bbox center within 1px of image center) while the base cells and every ref cell are left-aligned (base text starts at x=26); state previews change the text alignment",
+  "state-hover: canvas border stays full red #ff4d4f (mean 255,79,81) \u2014 ref hover border lightens to ~#ffa39e (mean 255,163,158); hover state color not applied"
+ ],
+ "defectClasses": [
+  "other",
+  "missing ink",
+  "other",
+  "interior layout",
+  "other"
  ],
  "notes": "canvas draws the sampled default (error-status outlined field with red border, per the contract's defaultless status axis); the committed code render PNG is blank for this cell",
  "reviewedAt": "ef10d9b1",

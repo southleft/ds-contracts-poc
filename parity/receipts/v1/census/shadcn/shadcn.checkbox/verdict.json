@@ -1,7 +1,19 @@
 {
- "recognisable": "ungraded",
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "checked: canvas check glyph is a malformed oversized FILLED wedge/swoosh spanning the entire dark box corner-to-corner (reads like a flag icon); ref shows a thin ~2px white polyline checkmark centered with padding",
+  "indeterminate: canvas shows the same oversized filled dark wedge filling the light box edge-to-edge; ref shows a small thin dark glyph centered inside the bordered box",
+  "unchecked focus-visible: canvas PNG is byte-identical to canvas unchecked \u2014 no focus ring painted; ref shows a gray ring surrounding the box"
+ ],
+ "defectClasses": [
+  "glyph geometry",
+  "glyph geometry",
+  "missing ink"
+ ],
  "notes": "unchecked/checked/indeterminate + focus preview match; canvas check glyph geometry slightly rotated vs code",
  "reviewedAt": "60793cc0",
  "setNodeId": "39:9557",

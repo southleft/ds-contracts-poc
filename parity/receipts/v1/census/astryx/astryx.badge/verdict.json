@@ -1,7 +1,25 @@
 {
- "recognisable": "ungraded",
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "variant-info: canvas pill fill is dark charcoal #262626 with white text; ref is solid blue #0074E2 with white text \u2014 variant reads as a neutral/dark badge, not info",
+  "variant-neutral: canvas is a solid dark slate-blue #0A3B58 pill with white text; ref is a light gray #E5E5E5 pill with dark #262626 text \u2014 fill inverted and wrong hue",
+  "variant-error: canvas fill #A50C25 (dark crimson) vs ref #E33F4A (bright red) \u2014 clearly darker, different red",
+  "variant-warning: canvas fill #745B00 (dark olive) with near-black text vs ref #FFCE2F (bright yellow) with near-black text \u2014 reads as brown, not warning yellow",
+  "variant-success: canvas fill #007004 vs ref #198100 \u2014 smaller shade shift, canvas darker/purer green",
+  "(the 9 palette variants blue/cyan/green/orange/pink/purple/red/teal/yellow are pixel-exact matches on fill and text ink)"
+ ],
+ "defectClasses": [
+  "other",
+  "other",
+  "other",
+  "other",
+  "other",
+  "match-note"
+ ],
  "notes": "all 15 variant colors match",
  "reviewedAt": "796581f0",
  "setNodeId": "39:13984",

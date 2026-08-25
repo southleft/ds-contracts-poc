@@ -1,7 +1,17 @@
 {
- "recognisable": "ungraded",
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "tooltip: canvas arrow is a flat-topped RECTANGULAR tab (square corners, no taper \u2014 confirmed at 4x zoom) protruding from the TOP edge of the bubble; ref shows a small pointed arrow notch on the BOTTOM edge (antd default top placement, tooltip above its anchor) \u2014 arrow shape is malformed and on the wrong side",
+  "tooltip: canvas carries a large diffuse drop shadow spreading ~60px around the bubble; ref shows only antd's subtle tight shadow"
+ ],
+ "defectClasses": [
+  "glyph geometry",
+  "other"
+ ],
  "notes": "dark bubble with arrow matches",
  "reviewedAt": "ef10d9b1",
  "setNodeId": "33:5419",

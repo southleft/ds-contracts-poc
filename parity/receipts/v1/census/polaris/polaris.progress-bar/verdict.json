@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "all 6 cells: fill length is 39.9% of track on canvas vs 25.0% on ref (PIL-measured: canvas fill 0-229 of 576 track; ref fill 48-207 of 640 track; the code render also measures 39.9%, so canvas matches the contract's code render but not the real library ref). 'Fill length' is exactly the kind of wall the format supports, but this row's walls array is EMPTY, so the difference is unwalled"
+ ],
+ "defectClasses": [
+  "interior layout"
+ ],
  "notes": "track + fill matches across tones/sizes",
  "reviewedAt": "ef10d9b1",
  "setNodeId": "39:22537",

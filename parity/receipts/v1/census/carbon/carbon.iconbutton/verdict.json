@@ -1,8 +1,16 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
  "priorSelfGrade": true,
  "walls": [
   "CODE-RENDER-UNSTYLED:iconbutton"
+ ],
+ "defects": [
+  "kind-ghost__size-xs: canvas draws the plus glyph in blue #0f62fe; ref draws it near-black #161616 (Carbon icon-only ghost uses icon-primary) \u2014 pixel-verified, and NOT covered by the named wall, which is about the code render only"
+ ],
+ "defectClasses": [
+  "other"
  ],
  "notes": "canvas draws colored kinds (primary blue, secondary dark, tertiary outlined, ghost); the code render shows an unstyled bordered square with a stray tooltip block above \u2014 a code-half artifact, canvas judged against the contract",
  "reviewedAt": "3f3b23b4",

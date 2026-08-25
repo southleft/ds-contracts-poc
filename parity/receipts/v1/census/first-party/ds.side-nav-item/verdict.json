@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "state-default: 'Navigation item' not underlined on canvas; ref underlines it. state-selected: same underline loss inside the blue pill. Link underline styling dropped in both states."
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
  "notes": "label matches; code render underlines the label, canvas does not",
  "reviewedAt": "66580a14",
  "setNodeId": "39:23940",

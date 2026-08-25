@@ -1,7 +1,15 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [],
+ "defects": [
+  "all 3 cells: canvas label reads 'Save this information' where ref reads 'Save this product' \u2014 unwalled copy mismatch; box geometry, checked/indeterminate glyphs and dark fill otherwise match"
+ ],
+ "defectClasses": [
+  "other"
+ ],
  "notes": "box + label matches",
  "reviewedAt": "ef10d9b1",
  "setNodeId": "39:22510",

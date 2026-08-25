@@ -1,8 +1,20 @@
 {
- "recognisable": "ungraded",
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
  "priorSelfGrade": true,
  "walls": [
   "CODE-CANVAS-DISAGREE:text-field.label/order"
+ ],
+ "defects": [
+  "ALL FOUR canvas cells are byte-identical (md5 5ab6859a, 507x202): variant-filled and variant-standard render the outlined red-border layout \u2014 ref filled shows a gray filled box with bottom underline and inset label, ref standard shows underline-only with label above; the variant axis has zero canvas effect",
+  "size-small: canvas identical to size-medium (same byte-identical file); ref small is visibly shorter \u2014 size axis has zero canvas effect",
+  "beyond the named label/order wall: canvas label 'Amount' renders at roughly heading scale (~2x) in red below the helper; ref label is a small 12px notch label cut into the outline \u2014 the outline notch is absent on canvas"
+ ],
+ "defectClasses": [
+  "layout axis",
+  "layout axis",
+  "type scale"
  ],
  "notes": "field, adornments and error state match; the label renders below the helper on canvas while the code render stacks label above the field",
  "reviewedAt": "16fac1ee",

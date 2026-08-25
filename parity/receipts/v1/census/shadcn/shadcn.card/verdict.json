@@ -1,9 +1,13 @@
 {
- "recognisable": "ungraded",
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
  "priorSelfGrade": true,
  "walls": [
   "CODE-CANVAS-DISAGREE:root.border-color-unspecified"
  ],
+ "defects": [],
+ "defectClasses": [],
  "notes": "title/description/content stack matches; same border-color gap as alert \u2014 canvas draws no box stroke",
  "reviewedAt": "60793cc0",
  "setNodeId": "39:9533",
