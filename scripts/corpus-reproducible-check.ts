@@ -171,6 +171,15 @@ export interface PromoteResultRow {
   identical: number;
   diverging: string[];
   threw: string | null;
+  /** A library that ships a ds-library.json but NO committed `contracts/`
+   *  directory has never been promoted, so there is nothing to re-derive.
+   *  Held-out exam material (examples/{bootstrap5,radix-themes,day-picker},
+   *  prepared blind and deliberately never captured) is the live case. It is
+   *  a NAMED skip excluded from the denominator, never a failure — the same
+   *  rule extract/computed/{drift,ua-baseline}-check.ts and
+   *  scripts/door-census.ts apply, and the same words the canvas census
+   *  manifest already uses ("not a contract library"). */
+  skipped: string | null;
 }
 
 /** Re-promote ONE library from its committed capture record into a throwaway
@@ -182,6 +191,19 @@ export function repromote(
   root = REPO,
 ): PromoteResultRow {
   const committedDir = path.join(root, "examples", def.library);
+  // NEVER PROMOTED — nothing to reproduce. Named and excluded before any work
+  // happens; without this the re-promote throws "no computed artifact" on the
+  // held-out subjects and the gate reports a defect that is really a fact
+  // about the corpus. (See PromoteResultRow.skipped.)
+  if (!existsSync(path.join(committedDir, "contracts"))) {
+    return {
+      library: def.library,
+      identical: 0,
+      diverging: [],
+      threw: null,
+      skipped: `no examples/${def.library}/contracts/ directory — never promoted, nothing to re-derive`,
+    };
+  }
   const workDir = path.join(work, def.library);
   mkdirSync(path.join(workDir, "contracts"), { recursive: true });
   mkdirSync(path.join(workDir, "tokens"), { recursive: true });
@@ -217,6 +239,7 @@ export function repromote(
       identical: 0,
       diverging: [],
       threw: String((e as Error).message ?? e),
+      skipped: null,
     };
   }
   let identical = 0;
@@ -251,6 +274,7 @@ export function repromote(
     identical,
     diverging: diverging.sort(),
     threw: null,
+    skipped: null,
   };
 }
 
@@ -559,6 +583,8 @@ export function judge(
   const failures: string[] = [];
   const seenPromote = new Set<string>();
   for (const row of promoteRows) {
+    // A named skip is not a verdict — it carries no artifacts either way.
+    if (row.skipped !== null) continue;
     if (row.threw !== null) {
       failures.push(
         `${row.library}: promote THREW — ${row.threw.slice(0, 400)}`,
@@ -850,6 +876,7 @@ function selfTest(): void {
             identical: 3,
             diverging: ["contracts/a.json"],
             threw: null,
+            skipped: null,
           },
         ],
         [],
@@ -859,10 +886,24 @@ function selfTest(): void {
     ],
     [
       "a stale promote row",
-      judge([{ library: "x", identical: 3, diverging: [], threw: null }], [], {
-        ...base,
-        promote: { x: { diverging: ["contracts/a.json"], cause: "reviewed" } },
-      }),
+      judge(
+        [
+          {
+            library: "x",
+            identical: 3,
+            diverging: [],
+            threw: null,
+            skipped: null,
+          },
+        ],
+        [],
+        {
+          ...base,
+          promote: {
+            x: { diverging: ["contracts/a.json"], cause: "reviewed" },
+          },
+        },
+      ),
       "no longer happen",
     ],
     [
@@ -889,10 +930,66 @@ function selfTest(): void {
       process.exit(1);
     }
   }
+  // A NAMED SKIP IS NOT A PASS AND NOT A RED. A never-promoted library
+  // (held-out exam material) must judge to zero failures, and must NOT
+  // satisfy a ledger row — otherwise "skipped" would become a place to hide
+  // a real divergence, which is the whole failure mode this file exists to
+  // prevent.
+  if (
+    judge(
+      [
+        {
+          library: "x",
+          identical: 0,
+          diverging: [],
+          threw: null,
+          skipped: "no examples/x/contracts/ directory",
+        },
+      ],
+      [],
+      base,
+    ).length !== 0
+  ) {
+    console.error("  ✘ a named skip produced a failure");
+    process.exit(1);
+  }
+  if (
+    judge(
+      [
+        {
+          library: "x",
+          identical: 0,
+          diverging: [],
+          threw: null,
+          skipped: "no examples/x/contracts/ directory",
+        },
+      ],
+      [],
+      {
+        ...base,
+        promote: { x: { diverging: ["contracts/a.json"], cause: "reviewed" } },
+      },
+    ).length !== 0
+  ) {
+    console.error("  ✘ a named skip was judged against a ledger row");
+    process.exit(1);
+  }
+  console.log(
+    "  ✔ a never-promoted library is a NAMED SKIP, not a pass and not a red",
+  );
+
   // …and green stays green.
   if (
     judge(
-      [{ library: "x", identical: 3, diverging: [], threw: null }],
+      [
+        {
+          library: "x",
+          identical: 3,
+          diverging: [],
+          threw: null,
+          skipped: null,
+        },
+      ],
       [],
       base,
     ).length !== 0
@@ -922,9 +1019,11 @@ function main(): void {
 
   for (const row of verdict.promote) {
     console.log(
-      row.threw
-        ? `  ✘ ${row.library}: promote THREW — ${row.threw.slice(0, 200)}`
-        : `  ${row.diverging.length === 0 ? "✔" : "•"} ${row.library}: ${row.identical} artifact(s) byte-identical${row.diverging.length ? `, ${row.diverging.length} named divergence(s)` : ""}`,
+      row.skipped
+        ? `  · ${row.library}: SKIPPED — ${row.skipped}`
+        : row.threw
+          ? `  ✘ ${row.library}: promote THREW — ${row.threw.slice(0, 200)}`
+          : `  ${row.diverging.length === 0 ? "✔" : "•"} ${row.library}: ${row.identical} artifact(s) byte-identical${row.diverging.length ? `, ${row.diverging.length} named divergence(s)` : ""}`,
     );
   }
   if (verdict.capture.length > 0) {
