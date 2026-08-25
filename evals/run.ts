@@ -8888,7 +8888,62 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         throw new Error(`the reader pin did not catch a reader that reports a value the canonical reconstruction does not hold — it asserts nothing: ${JSON.stringify(caught.slice(0, 5))}`);
       }
 
-      console.log(`decision-ledger-value-check: unresolvable decision targets refused by name (and applied without the guard — the corruption is real); ${ledgers} committed ledgers across 4 libraries target only tokens their own library ships; RC6 — ${stale.length} drifted alias(es) refused by name against the committed astryx Badge capture (the measured imported.* leaves stand), the same ledger repaints the component without the referee, astryx Card's stale \`observed\` still applies, an unmeasurable row is named unverified, and the referee's own reader agrees with replay.ts on every shape-safe combo of astryx Badge and Slider (and is caught when it does not)`);
+      // (7) THE REFEREE MUST READ ITS OWN SPELLING BACK, or it refuses a
+      //     CORRECT row. `gateInventory().resolveValue` canonicalizes the
+      //     target through `canonColorValue`, whose output is bare 8-digit
+      //     hex; `canonColorValue` does not accept that form back, so a fully
+      //     transparent colour (`00000000`) fell through to the unitless-
+      //     number branch and canonicalized as the LENGTH `0px` while the
+      //     measured `rgba(0, 0, 0, 0)` canonicalized as the COLOUR. A false
+      //     STALE-ALIAS refusal inside the very guard this class added —
+      //     which deletes a binding that is right. Live fixture, not synthetic.
+      const btnOut = path.join(ROOT, 'extract/computed/out/button');
+      const btnComp = polarisCfg.components.find((c) => c.name === 'Button')!;
+      const btnExt = JSON.parse(readFileSync(path.join(btnOut, 'enriched.extension.json'), 'utf8')) as { mintedTokens?: Record<string, unknown> };
+      const btnGi = gateInventory(ROOT, polarisCfg, btnExt.mintedTokens ?? {});
+      const btnReferee = {
+        resolveValue: btnGi.resolveValue,
+        measured: measuredTruth(JSON.parse(readFileSync(path.join(btnOut, 'captured-truth.json'), 'utf8'))),
+        combos: refereeCombos(propSpaceFor(ROOT, polarisCfg, btnComp).enumeration.combos),
+      };
+      // THE PREMISE IS MEASURED. Both halves have to still be true or the arm
+      // asserts nothing: the token really resolves to the bare-hex spelling,
+      // and the capture really measures that colour at this site.
+      const transparentRef = '{p.color-bg-surface-transparent}';
+      if (btnGi.resolveValue(transparentRef) !== '00000000') {
+        throw new Error(`${transparentRef} no longer resolves to the bare 8-hex spelling this arm pins (${btnGi.resolveValue(transparentRef)}) — re-point the arm`);
+      }
+      const btnSites = btnReferee.measured.at('root', 'background-color', btnReferee.combos.map((c) => c.key));
+      if (!btnSites.some((st) => st.value === 'rgba(0, 0, 0, 0)')) {
+        throw new Error('polaris Button root no longer measures a transparent background anywhere — re-point the arm at a live transparent site');
+      }
+      const transparentRow: AckedDecision[] = [{
+        ids: ['planted'], part: 'root', channel: 'background-color', scope: 'base',
+        from: '{p.color-bg-fill}', to: transparentRef, observed: 'rgba(0, 0, 0, 0)', expected: 'rgba(0, 0, 0, 0)',
+        cause: 'a target holding EXACTLY the colour this run measured', ack: 'planted',
+      }];
+      const transparentRes = computedApplyDecisions(
+        JSON.parse(readFileSync(path.join(btnOut, 'enriched.contract.json'), 'utf8')),
+        transparentRow,
+        btnGi.inventory,
+        btnReferee,
+      );
+      if (transparentRes.skipped.length !== 0 || transparentRes.applied.length !== 1) {
+        throw new Error(`a decision pointing at EXACTLY the colour this run measured was refused — the referee cannot read its own canonical spelling back: skipped=${JSON.stringify(transparentRes.skipped)} applied=${JSON.stringify(transparentRes.applied)}`);
+      }
+      // And the equality itself, both spellings, in both directions.
+      if (!decisionValueEq('00000000', 'rgba(0, 0, 0, 0)') || !decisionValueEq('rgba(0, 0, 0, 0)', '00000000')) {
+        throw new Error('decisionValueEq no longer equates the bare canonical hex `resolveValue` emits with the colour it was canonicalized FROM');
+      }
+      // NOT OVER-BROAD. An 8-digit spelling that is a real NUMBER still
+      // canonicalizes as that number (`10000000` still equals `10000000.0`),
+      // unitless zero is still a length, and the bare colour spelling is NOT
+      // one — which is the whole point: before the fix `00000000` WAS `0px`.
+      if (!decisionValueEq('10000000', '10000000.0') || !decisionValueEq('0', '0px') || decisionValueEq('00000000', '0px')) {
+        throw new Error('the bare-hex admission changed how a real number or a unitless zero canonicalizes');
+      }
+
+      console.log(`decision-ledger-value-check: unresolvable decision targets refused by name (and applied without the guard — the corruption is real); ${ledgers} committed ledgers across 4 libraries target only tokens their own library ships; RC6 — ${stale.length} drifted alias(es) refused by name against the committed astryx Badge capture (the measured imported.* leaves stand), the same ledger repaints the component without the referee, astryx Card's stale \`observed\` still applies, an unmeasurable row is named unverified, the referee's own reader agrees with replay.ts on every shape-safe combo of astryx Badge and Slider (and is caught when it does not), and the referee reads its own canonical colour spelling back so a target holding EXACTLY the measured transparent colour APPLIES instead of being falsely refused`);
     },
   },
   {

@@ -122,6 +122,27 @@ function canonDecisionValue(v: string): string {
   const colour = canonColorValue(t);
   if (colour) return colour;
   const low = t.toLowerCase();
+  // THE REFEREE MUST BE ABLE TO READ ITS OWN SPELLING BACK.
+  // `gateInventory().resolveValue` hands the target over ALREADY canonicalized
+  // by `canonColorValue`, whose output is exactly eight lowercase hex digits —
+  // RGB plus an explicit alpha byte (lib.ts:593-605). `canonColorValue` itself
+  // only accepts `#`-prefixed hex or a CSS colour function, so that bare form
+  // fell through to the unitless-number branch below: a fully transparent
+  // colour resolves to `00000000`, `Number('00000000') === 0`, and the target
+  // canonicalized as the LENGTH `0px` while the measured `rgba(0, 0, 0, 0)`
+  // canonicalized as the COLOUR `00000000`. They never matched, so a decision
+  // pointing at exactly the colour this run measured was refused BY NAME as a
+  // STALE ALIAS — a false refusal that deletes a CORRECT binding, in the very
+  // guard this class added. Measured live before the fix on polaris Button
+  // (`{p.color-bg-surface-transparent}` vs 72 transparent `root.background-
+  // color` sites).
+  // It is recognised HERE and not inside `canonColorValue` because only this
+  // side knows the provenance: widening the general colour predicate would let
+  // a bare 8-digit NUMBER be read as a colour everywhere it is asked. The form
+  // is unambiguous for integers either way — `trimNum(10000000)` is the same
+  // eight characters — so the only behaviour that moves is the leading-zero
+  // colour spelling no token ever carries as a number.
+  if (/^[0-9a-f]{8}$/.test(low)) return low;
   const len = /^(-?\d*\.?\d+)(px|rem)$/.exec(low);
   if (len) return `${trimNum(Number(len[1]) * (len[2] === 'rem' ? ROOT_FONT_PX : 1))}px`;
   // Unitless zero is the same length as 0px (`{spacing-0}` is spelled `0` in
