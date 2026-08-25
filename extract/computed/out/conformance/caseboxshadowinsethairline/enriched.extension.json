@@ -5,14 +5,14 @@
   "browser": "151.0.7922.34",
   "mintedTokens": {
     "imported": {
-      "case-box-shadow-ok-stack-inset": {
+      "case-box-shadow-inset-hairline": {
         "root": {
           "background-color": {
             "$value": "#ffffff",
             "$type": "color"
           },
           "box-shadow": {
-            "$value": "oklch(0 0 0 / 0.05) 0px 2px 4px 0px, oklch(0 0 0 / 0.1) 0px 4px 12px 0px, oklch(1 0 0 / 0.12) 0px 0px 0px 1px inset",
+            "$value": "rgba(0, 0, 0, 0.05) 0px 2px 4px 0px, rgba(255, 255, 255, 0.12) 0px 0px 0px 1px inset",
             "$type": "shadow"
           },
           "font-size": {

@@ -209,6 +209,11 @@ const SHORTHAND_OF: Record<string, string> = {
   'border-top-left-radius': 'border-radius', 'border-top-right-radius': 'border-radius',
   'border-bottom-right-radius': 'border-radius', 'border-bottom-left-radius': 'border-radius',
   'padding-top': 'padding', 'padding-right': 'padding', 'padding-bottom': 'padding', 'padding-left': 'padding',
+  // RC3 — the four side WIDTHS are one Figma strokeWeight when they agree,
+  // and the proposer spells the uniform case `border-width`. Same value type
+  // on every longhand, same rule as the radius corners above.
+  'border-top-width': 'border-width', 'border-right-width': 'border-width',
+  'border-bottom-width': 'border-width', 'border-left-width': 'border-width',
   'row-gap': 'gap', 'column-gap': 'gap',
   top: 'inset', right: 'inset', bottom: 'inset', left: 'inset',
   'grid-row-start': 'grid-row', 'grid-row-end': 'grid-row',

@@ -15,12 +15,12 @@ never waivable.
 
 | | |
 |---|---|
-| cases (CARRIED + LOWERED) | **58** |
-| 🟢 round-tripped | **32** |
-| 🟢 named (dropped, and a receipt says so) | **11** |
+| cases (CARRIED + LOWERED) | **62** |
+| 🟢 round-tripped | **33** |
+| 🟢 named (dropped, and a receipt says so) | **14** |
 | 🟡 refused by name (the canvas cannot host the seed, and says so) | **15** |
 | ⚪ seed-absent (nothing to round-trip) | **0** |
-| 🔴 red | **0** — SILENT 0 · DRIFTED 0 · HARMFUL 0 |
+| 🔴 red | **0** — SILENT 0 · DRIFTED 0 · HARMFUL 0 · MUTE 0 |
 
 Verdicts: **ROUND-TRIPPED** the channel came back with the seed's value (refs
 resolved; "ref" says whether the token spelling survived, "as" names a
@@ -30,9 +30,10 @@ step results, dump `_degradations`, proposal notes/unbound, batch notes/skips ·
 **REFUSED-BY-NAME** the plan, the mock, or the runtime refused the whole seed by
 name · **DRIFTED** a different value came back and nothing named the lowering ·
 **HARMFUL** the manifest says no canvas spelling exists and it came back anyway ·
+**MUTE** the manifest says the construct MUST be drawn (`canvas.mustDraw`) and nothing came back — a receipt is not ink ·
 **SILENT** vanished, named by nothing — never waivable.
 
-## 🟢 NAMED — 11
+## 🟢 NAMED — 14
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
@@ -42,6 +43,9 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `antd-overlay-digit-depth-three` | anatomy | sup(absolute, translate(50%,-50%)) > bdi > span > span — a count digit THREE levels deep in an absolutely positioned overlay, the deepest span carrying NO identity class (antd's rc-scroll-number `current` is transient and dropped by classAllow; the fixture spells the same absence with a bare span — the frontier eval refuses any non-neutral class in a case) | `__text` | CARRIED | — |  |  | code-only declared label-2.display = inline-block — CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical s… |
 | `antd-part-transition-channel` | motion | .cf-a { transition: background-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) } — a transition declared on a CHILD PART, not the root (antd's `motionDurationMid` on every interactive part) | `transition-duration` | CARRIED | — |  |  | code-only declared label.transition-duration = 0.2s — Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame. |
 | `aspect-ratio` | geometry | aspect-ratio: 2 / 1 | `aspect-ratio` | CARRIED | — |  |  | code-only channel root.aspect-ratio = 2 / 1 — the canvas has no aspect-ratio field — LOWERED to a fixed height of 40px (bound width 80px ÷ 2); the ratio does not reach the canvas, a width change there will not follow it, and the dump reads… |
+| `box-shadow-inset-hairline` | effects | a stack that MIXES a drop layer with an `inset` hairline — astryx `shadow-med`'s third layer, the 1px inner ring every menu card and toast carries | `box-shadow` | CARRIED | — |  |  | «self»:root: visible effect(s) [DROP_SHADOW, INNER_SHADOW] — only DROP_SHADOW layers present in every variant map to box-shadow (dump v1.2; a multi-layer stack carries comma-separated); channel NAMED, not proposed |
+| `box-shadow-ok-color-ring` | effects | a two-layer box-shadow whose RING layer is spelled in an OKLab colour space — `0 0 0 3px oklch(0.708 0 0 / 0.5), 0 1px 2px rgba(0,0,0,.05)` (Tailwind v4 / shadcn's focus ring, verbatim from examples/shadcn/tokens/shadcn-minted.dtcg.json) | `box-shadow` | CARRIED | 0px 0px 0px 3px #a1a1a180, 0px 1px 2px #0000000d |  |  | value came back as 0px 0px 0px 3px #a1a1a180, 0px 1px 2px #0000000d (seed oklch(0.708 0 0 / 0.5) 0px 0px 0px 3px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px) — «self»:root: a DROP_SHADOW stack (up to 2 layers) proposed as a comma-separated box-sh… |
+| `box-shadow-ok-stack` | effects | a TWO-layer elevation whose every layer colour is an OKLab spelling — the drop half of astryx's `shadow-med` (examples/astryx/tokens/astryx.dtcg.json) | `box-shadow` | CARRIED | 0px 2px 4px #0000000d, 0px 4px 12px #0000001a |  |  | value came back as 0px 2px 4px #0000000d, 0px 4px 12px #0000001a (seed oklch(0 0 0 / 0.05) 0px 2px 4px 0px, oklch(0 0 0 / 0.1) 0px 4px 12px 0px) — «self»:root: a DROP_SHADOW stack (up to 2 layers) proposed as a comma-separated box-shadow v… |
 | `display-block` | display | display: block | `display` | CARRIED | flex |  |  | value came back as flex (seed block) — code-only declared root.display = block — CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-lev… |
 | `nonpainting-text-display-none` | invariant | a NON-PAINTING element carrying text (display: none) | `__text` | CARRIED | — |  |  | code-only declared label-2.display = none — CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack). |
 | `presence-hidden-axis-geometry` | tokens | an absolute part's inset that is a clean function of ONE enum axis, with the part NOT RENDERED at one axis value (polaris.checkbox icon: top/left 0px when checked, -2px when indeterminate, absent when unchecked) | `top` | CARRIED | {imported.case-presence-hidden-axis-geometry.a.left.{checked}}, {imported.case-presence-hidden-axis-geometry.a.top.{checked}} |  |  | value came back as {imported.case-presence-hidden-axis-geometry.a.left.{checked}}, {imported.case-presence-hidden-axis-geometry.a.top.{checked}} (seed 3px) — code-only channel root.top = {imported.shared.size-0} — bound on an in-flow box (… |
@@ -68,7 +72,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `grid-on-component-variant` | grid-composition | layoutMode GRID on a COMPONENT node (canvas variants are components) | `grid-template-rows` | CARRIED | — |  |  | plugin plan: conformance.grid-on-component-variant — anatomy.root.literals.width: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, "fit-content" (G8), or layout.grow (width, flex parent). Absence is refused… |
 | `grid-row-span` | grid-placement | grid-row: 2 / span 2 (child spans 2 rows) | `grid-row-end` | CARRIED | — |  |  | plugin plan: conformance.grid-row-span — anatomy.root.literals.height: grid-axis-indefinite: a grid part must make each axis DEFINITE — a px/token size, "fit-content" (G8), or layout.grow (width, flex parent). Absence is refused because it… |
 
-## 🟢 ROUND-TRIPPED — 32
+## 🟢 ROUND-TRIPPED — 33
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
@@ -100,6 +104,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `oklch-color` | color | background-color: oklch(0.6 0.15 250) | `background-color` | CARRIED | #2784d5 | same |  |  |
 | `percentage-padding` | units | padding-left: 10% (resolved against the PARENT width) | `padding-left` | CARRIED | 28.7969px | same |  |  |
 | `position-absolute-insets` | position | position: absolute + top/left insets | `top` | CARRIED | 4px, 6px | same |  |  |
+| `pseudo-inset-ring-two-axis` | pseudo-elements | a COINCIDENT INSET RING pseudo — ::after at inset 0, transparent fill, uniform 1px border, host radius — whose ring COLOUR is a product of TWO enum axes while its four side WIDTHS are uniform across every combo (fluent Badge's `root::after`) | `border-top-width` | CARRIED | 1px | respelled | `border-width` | ref respelled: 1px → {imported.case-pseudo-inset-ring-two-axis.root.border-width}; channel respelled: border-top-width → border-width |
 | `shadow-part` | shadow-dom | ::part(label) styling across an OPEN shadow boundary | `color` | CARRIED | #b4145a | same |  |  |
 | `var-fallback-chain` | custom-properties | color: var(--cf-missing, var(--cf-color-secondary, #333)) | `color` | CARRIED | #663399 | same |  |  |
 | `var-longhand` | custom-properties | background-color: var(--cf-color-primary) | `background-color` | CARRIED | #1976d2 | same |  |  |

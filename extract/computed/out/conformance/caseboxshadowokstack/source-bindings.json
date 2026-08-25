@@ -1,6 +1,6 @@
 {
   "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
-  "component": "CaseBoxShadowOkStackInset",
+  "component": "CaseBoxShadowOkStack",
   "varPrefix": "--cf-",
   "facts": [],
   "skips": [],

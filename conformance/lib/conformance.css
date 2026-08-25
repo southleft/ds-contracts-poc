@@ -15,8 +15,9 @@
 @import '../cases/block-root-shrink-to-fit/case.css';
 @import '../cases/border-color-control-equal/case.css';
 @import '../cases/border-radius-px/case.css';
+@import '../cases/box-shadow-inset-hairline/case.css';
 @import '../cases/box-shadow-ok-color-ring/case.css';
-@import '../cases/box-shadow-ok-stack-inset/case.css';
+@import '../cases/box-shadow-ok-stack/case.css';
 @import '../cases/box-shadow-single/case.css';
 @import '../cases/calc-var/case.css';
 @import '../cases/clip-path-polygon/case.css';

@@ -2,10 +2,11 @@
   "_marker": "THE MEASURED ROUND TRIP — contract → Figma (mock) → dump → propose ≡ contract, per conformance case, on the case's own channel. Every SILENT entry is an OPEN DEFECT the engine must name or carry; it is never waivable and leaves this file only by being fixed. The gate refuses drift in EITHER direction: a regression is red, and an improvement must be re-recorded here so a fix can never be absorbed silently.",
   "measuredAt": "extract/computed/out/conformance/<case>/enriched.contract.json through figma-sync/plugin/engine (mock figma) and core/propose-figma (npx tsx conformance/canvas.ts)",
   "counts": {
-    "ROUND-TRIPPED": 32,
-    "NAMED": 11,
+    "ROUND-TRIPPED": 33,
+    "NAMED": 14,
     "DRIFTED": 0,
     "HARMFUL": 0,
+    "MUTE": 0,
     "SILENT": 0,
     "REFUSED-BY-NAME": 15,
     "SEED-ABSENT": 0
@@ -125,6 +126,37 @@
       "refIdentical": true,
       "channelAs": "border-radius",
       "note": "channel respelled: border-top-left-radius → border-radius"
+    },
+    "box-shadow-inset-hairline": {
+      "classification": "NAMED",
+      "channel": "box-shadow",
+      "seed": [
+        "rgba(0, 0, 0, 0.05) 0px 2px 4px 0px, rgba(255, 255, 255, 0.12) 0px 0px 0px 1px inset"
+      ],
+      "proposed": [],
+      "note": "«self»:root: visible effect(s) [DROP_SHADOW, INNER_SHADOW] — only DROP_SHADOW layers present in every variant map to box-shadow (dump v1.2; a multi-layer stack carries comma-separated); channel NAMED, not proposed"
+    },
+    "box-shadow-ok-color-ring": {
+      "classification": "NAMED",
+      "channel": "box-shadow",
+      "seed": [
+        "oklch(0.708 0 0 / 0.5) 0px 0px 0px 3px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+      ],
+      "proposed": [
+        "0px 0px 0px 3px #a1a1a180, 0px 1px 2px #0000000d"
+      ],
+      "note": "value came back as 0px 0px 0px 3px #a1a1a180, 0px 1px 2px #0000000d (seed oklch(0.708 0 0 / 0.5) 0px 0px 0px 3px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px) — «self»:root: a DROP_SHADOW stack (up to 2 layers) proposed as a comma-separated box-shadow value (dump v1.2) — CSS surfaces render it; the canvas preview and the Figma sync script project it as a native DROP_SHADOW effect (dump v1.3)"
+    },
+    "box-shadow-ok-stack": {
+      "classification": "NAMED",
+      "channel": "box-shadow",
+      "seed": [
+        "oklch(0 0 0 / 0.05) 0px 2px 4px 0px, oklch(0 0 0 / 0.1) 0px 4px 12px 0px"
+      ],
+      "proposed": [
+        "0px 2px 4px #0000000d, 0px 4px 12px #0000001a"
+      ],
+      "note": "value came back as 0px 2px 4px #0000000d, 0px 4px 12px #0000001a (seed oklch(0 0 0 / 0.05) 0px 2px 4px 0px, oklch(0 0 0 / 0.1) 0px 4px 12px 0px) — «self»:root: a DROP_SHADOW stack (up to 2 layers) proposed as a comma-separated box-shadow value (dump v1.2) — CSS surfaces render it; the canvas preview and the Figma sync script project it as a native DROP_SHADOW effect (dump v1.3)"
     },
     "box-shadow-single": {
       "classification": "ROUND-TRIPPED",
@@ -573,6 +605,19 @@
         "{imported.case-presence-hidden-axis-geometry.a.top.{checked}}"
       ],
       "note": "value came back as {imported.case-presence-hidden-axis-geometry.a.left.{checked}}, {imported.case-presence-hidden-axis-geometry.a.top.{checked}} (seed 3px) — code-only channel root.top = {imported.shared.size-0} — bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back"
+    },
+    "pseudo-inset-ring-two-axis": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "border-top-width",
+      "seed": [
+        "1px"
+      ],
+      "proposed": [
+        "1px"
+      ],
+      "refIdentical": false,
+      "channelAs": "border-width",
+      "note": "ref respelled: 1px → {imported.case-pseudo-inset-ring-two-axis.root.border-width}; channel respelled: border-top-width → border-width"
     },
     "shadow-part": {
       "classification": "ROUND-TRIPPED",

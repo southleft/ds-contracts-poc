@@ -164,6 +164,14 @@
       "axes": []
     },
     {
+      "__case": "effects: a stack that MIXES a drop layer with an `inset` hairline — astryx `shadow-med`'s third layer, the 1px inner ring every menu card and toast carries — declared CARRIED",
+      "name": "CaseBoxShadowInsetHairline",
+      "importName": "CaseBoxShadowInsetHairline",
+      "contract": "conformance/seeds/box-shadow-inset-hairline.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
       "__case": "effects: a two-layer box-shadow whose RING layer is spelled in an OKLab colour space — `0 0 0 3px oklch(0.708 0 0 / 0.5), 0 1px 2px rgba(0,0,0,.05)` (Tailwind v4 / shadcn's focus ring, verbatim from examples/shadcn/tokens/shadcn-minted.dtcg.json) — declared CARRIED",
       "name": "CaseBoxShadowOkColorRing",
       "importName": "CaseBoxShadowOkColorRing",
@@ -172,10 +180,10 @@
       "axes": []
     },
     {
-      "__case": "effects: a THREE-layer elevation whose every layer colour is an OKLab spelling and whose last layer is an INSET hairline — the astryx `shadow-med` shape (examples/astryx/tokens/astryx.dtcg.json), minus the light-dark() mode fork the browser resolves at capture — declared CARRIED",
-      "name": "CaseBoxShadowOkStackInset",
-      "importName": "CaseBoxShadowOkStackInset",
-      "contract": "conformance/seeds/box-shadow-ok-stack-inset.contract.json",
+      "__case": "effects: a TWO-layer elevation whose every layer colour is an OKLab spelling — the drop half of astryx's `shadow-med` (examples/astryx/tokens/astryx.dtcg.json) — declared CARRIED",
+      "name": "CaseBoxShadowOkStack",
+      "importName": "CaseBoxShadowOkStack",
+      "contract": "conformance/seeds/box-shadow-ok-stack.contract.json",
       "sampleText": "",
       "axes": []
     },

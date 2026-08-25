@@ -344,8 +344,23 @@ export function okColorToRgba(v: string): { r: number; g: number; b: number; a: 
 
 interface Rgba01 { r: number; g: number; b: number; a: number }
 
-/** hex (#rgb/#rgba/#rrggbb/#rrggbbaa) / rgb() / rgba() / oklch() / oklab() →
- *  0–1 RGBA, or null when the value is not a parseable color (→ STRING). */
+/** hex (#rgb/#rgba/#rrggbb/#rrggbbaa) / rgb() / rgba() / oklch() / oklab() /
+ *  hsl() / hsla() → 0–1 RGBA, or null when the value is not a parseable color
+ *  (→ STRING).
+ *
+ *  RC3 (burn-down round 2): EXPORTED as `cssColorToRgba01`, because
+ *  core/emit-figma-script.ts carried a SECOND, NARROWER reader of the same
+ *  thing (`parseLitColor`: hex + rgb() only) and `parseShadowStack`'s layer
+ *  matcher was narrower still. An unreadable LAYER refuses the WHOLE stack by
+ *  design, so `oklab(0.708 0 0 / 0.5) 0 0 0 3px` — shadcn's focus ring, and
+ *  the spelling every Tailwind v4 adopter computes to — deleted the elevation
+ *  layers beside it and the focus preview minted byte-identical to the resting
+ *  cell. One entry point, so a new colour spelling is accepted everywhere at
+ *  once instead of in whichever module happened to be edited. */
+export function cssColorToRgba01(v: unknown): Rgba01 | null {
+  return colorOf(v);
+}
+
 function colorOf(v: unknown): Rgba01 | null {
   let s = String(v).trim();
   const ok = okColorToRgba(s);

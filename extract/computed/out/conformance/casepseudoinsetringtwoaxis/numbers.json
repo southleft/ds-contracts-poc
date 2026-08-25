@@ -5,7 +5,7 @@
   "combos": 6,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 480,
+  "channelsEnumerated": 479,
   "elementsPerCapture": 2,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
@@ -53,9 +53,9 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 22944,
-    "cellsMatched": 22848,
-    "pct": 99.581589958159,
+    "cellsCompared": 22896,
+    "cellsMatched": 22800,
+    "pct": 99.58071278825996,
     "namedExclusions": [
       "app-region",
       "text-decoration",
@@ -138,8 +138,8 @@
     "computedPctEqual": 100,
     "rowsFullyEqual": 24,
     "rows": 24,
-    "pixelPerfectExact": 8,
-    "pixelPerfectAA": 8,
+    "pixelPerfectExact": 0,
+    "pixelPerfectAA": 0,
     "pairs": 24
   },
   "focusVisibleDriverMatched": 0,

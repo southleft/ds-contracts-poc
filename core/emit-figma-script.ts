@@ -58,7 +58,8 @@ import {
   type Prop,
 } from '../scripts/contract-schema.js';
 import { flattenTokens, aliasTarget, px, pxOrNull, type TokenEntry, type TokenTreeInput } from './tokens.js';
-import { guardedValueUpsertRuntime, ownedCollectionPruneRuntime } from './token-set.js';
+import { cssColorToRgba01, guardedValueUpsertRuntime, ownedCollectionPruneRuntime } from './token-set.js';
+import { splitLightDark } from './stylex-tokens.js';
 import { FINGERPRINT_SRC, FINGERPRINT_VERSION } from './canvas-fingerprint.js';
 import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
 
@@ -240,6 +241,12 @@ export interface NodeSpec {
    *  compileComponentData into the code-only-fact footnote (†) and STRIPPED
    *  before the spec JSON is emitted — never a silent drop. */
   shadowMiss?: string;
+  /** RC3 (burn-down round 2) — the shadow layers whose colour was spelled
+   *  `light-dark(<light>, <dark>)`. The stack DRAWS, using the light branch;
+   *  a Figma effect carries no mode binding, so the dark branch is a real
+   *  one-way loss for a dark-mode canvas and is named on the node's code-only
+   *  facts rather than dropped. Stripped before the spec JSON is emitted. */
+  shadowLightDark?: string[];
   /** SILENT-LOSS ROUND (task #33, fix 3) — CHANNEL MISSES.
    *
    *  `applyTokens`/`applyLiterals` both ended in `default: break;`. Three
@@ -1487,9 +1494,56 @@ function splitTopLevel(value: string): string[] {
   return out;
 }
 
-/** A CSS color literal (hex / rgb() / rgba()) → RGBA floats. */
+/** A CSS colour literal → RGBA floats, through THE SHARED READER.
+ *
+ *  RC3 (burn-down round 2). This used to delegate to `parseLitColor`, an
+ *  emitter-local reader that knew hex and rgb() and nothing else, while
+ *  core/token-set.ts already read oklch / oklab / hsl for the token set. Two
+ *  readers of one thing is how `oklab(0.708 0 0 / 0.5)` — shadcn's focus ring,
+ *  and what every Tailwind v4 `color-mix(in oklab, …)` computes to — became a
+ *  named-but-undrawn shadow. `transparent` is a colour here (astryx spells the
+ *  light branch of its inset hairline with the bare keyword), and it is NOT
+ *  a parse failure: alpha 0 is a layer that draws nothing, which is a
+ *  different fact from a layer nobody could read.
+ *
+ *  `light-dark(<light>, <dark>)` resolves to its LIGHT branch. A Figma effect
+ *  carries no mode binding, so the dark branch is a real one-way loss — the
+ *  caller names it (LIGHT_DARK_LIMIT) rather than dropping it silently, the
+ *  same choice core/stylex-tokens.ts already records for the token layer. */
 function parseCssColor(v: string): { r: number; g: number; b: number; a?: number } | undefined {
-  return parseLitColor(v);
+  const t = v.trim();
+  if (t.toLowerCase() === 'transparent') return { r: 0, g: 0, b: 0, a: 0 };
+  const c = cssColorToRgba01(t);
+  if (!c) return undefined;
+  return c.a === 1 ? { r: c.r, g: c.g, b: c.b } : { r: c.r, g: c.g, b: c.b, a: c.a };
+}
+
+/** Split one shadow LAYER into top-level tokens (paren-aware), so a colour
+ *  function with nested parens — `light-dark(oklch(…), oklch(…))` — is ONE
+ *  token instead of the three pieces a `[^)]*` character class saw. */
+function splitLayerTokens(layer: string): string[] {
+  const out: string[] = [];
+  let depth = 0;
+  let cur = '';
+  for (const ch of layer) {
+    if (ch === '(') depth++;
+    if (ch === ')') depth--;
+    if (/\s/.test(ch) && depth === 0) {
+      if (cur) { out.push(cur); cur = ''; }
+    } else cur += ch;
+  }
+  if (cur) out.push(cur);
+  return out;
+}
+
+/** A shadow layer's LENGTH token → px, or NaN. */
+function shadowLen(l: string): number {
+  const m = l.match(/^(-?[\d.]+)(px|rem|em)?$/);
+  if (!m) return NaN;
+  const n = parseFloat(m[1]);
+  if (m[2] === 'rem' || m[2] === 'em') return n * 16;
+  // A bare number is only valid CSS as 0 — anything else is foreign.
+  return m[2] === 'px' || n === 0 ? n : NaN;
 }
 
 /** v15 (S4/matrix a.1): the FULL box-shadow stack grammar — multi-layer,
@@ -1502,32 +1556,38 @@ function parseCssColor(v: string): { r: number; g: number; b: number; a?: number
  *  the px-only grammar refused the whole stack, silently dropping the
  *  secondary/tertiary Button border ring. Unparseable layers refuse the
  *  WHOLE stack (undefined) — a partial shadow would lie. */
-function parseShadowStack(value: string): NodeSpec['effectStack'] | undefined {
+function parseShadowStack(value: string, lightDark?: string[]): NodeSpec['effectStack'] | undefined {
   if (value.trim() === 'none') return [];
   const layers = splitTopLevel(value.trim());
   const out: NonNullable<NodeSpec['effectStack']> = [];
+  const lightDarkLayers: string[] = lightDark ?? [];
   for (const layer of layers) {
-    let rest = layer.trim();
+    // RC3 — TOKENIZE, do not regex-hunt for a colour. The old reader matched
+    // `#hex|rgba?(...)` anywhere in the layer with a character class that
+    // cannot cross a nested paren, so it saw no colour at all in
+    // `light-dark(oklch(…), oklch(…))` and none it could read in
+    // `oklab(0.708 0 0 / 0.5)` — and one unreadable layer refuses the WHOLE
+    // stack by design (below), which is how a single ok-space ring layer
+    // deleted the two elevation layers beside it. Splitting on TOP-LEVEL
+    // whitespace makes the classification structural: a token is a length, or
+    // the `inset` keyword, or the colour. Exactly one colour per layer.
+    const toks = splitLayerTokens(layer.trim());
     let inner = false;
-    if (/(^| )inset( |$)/.test(rest)) {
-      inner = true;
-      rest = rest.replace(/(^| )inset( |$)/, ' ').trim();
+    const lengths: string[] = [];
+    const colors: string[] = [];
+    for (const t of toks) {
+      if (t.toLowerCase() === 'inset') { inner = true; continue; }
+      if (!Number.isNaN(shadowLen(t))) lengths.push(t);
+      else colors.push(t);
     }
-    const colorMatch = rest.match(/(#[0-9a-fA-F]{3,8}|rgba?\([^)]*\))/);
-    if (!colorMatch) return undefined;
-    const color = parseCssColor(colorMatch[1]);
+    if (colors.length !== 1) return undefined;
+    const raw = colors[0];
+    const ld = splitLightDark(raw);
+    if (ld) lightDarkLayers.push(raw);
+    const color = parseCssColor(ld ? ld.light : raw);
     if (!color) return undefined;
-    rest = rest.replace(colorMatch[1], '').trim();
-    const lengths = rest.split(/\s+/).filter(Boolean);
     if (lengths.length < 2 || lengths.length > 4) return undefined;
-    const px4 = lengths.map((l) => {
-      const m = l.match(/^(-?[\d.]+)(px|rem|em)?$/);
-      if (!m) return NaN;
-      const n = parseFloat(m[1]);
-      if (m[2] === 'rem' || m[2] === 'em') return n * 16;
-      // A bare number is only valid CSS as 0 — anything else is foreign.
-      return m[2] === 'px' || n === 0 ? n : NaN;
-    });
+    const px4 = lengths.map(shadowLen);
     if (px4.some(Number.isNaN)) return undefined;
     const e: NonNullable<NodeSpec['effectStack']>[number] = {
       ...(inner ? { inner: true } : {}),
@@ -1848,6 +1908,17 @@ function applyTokens(
    *  lowered offsets named as an in-flow drop — a false receipt. Callers
    *  that do not pass it keep the declared-only test byte-identically. */
   absoluteThisCombo?: boolean,
+  /** RC3 — the part's resolved LITERAL channels for this combo. Read for ONE
+   *  question: does a border WIDTH exist? `hasWidthSource` below used to ask
+   *  the token map only, so a width the contract carries as a LITERAL could
+   *  not complete the width+colour pair and a bound border colour was named
+   *  ("per-side border COLOURS disagree (or no border width is carried)")
+   *  instead of drawn. That is exactly the shape the coincident-ring fold
+   *  produces — literal widths on the host, bound colours already there — and
+   *  it is also how any hand-authored contract spells a fixed hairline under a
+   *  themed colour. Callers that do not pass it keep the token-only test
+   *  byte-identically. */
+  lits?: Record<string, string>,
 ): TextCtx {
   const next: TextCtx = { ...ctx };
   const inFlowInsets = absoluteThisCombo === undefined ? (declared?.position ?? 'static') !== 'absolute' : !absoluteThisCombo;
@@ -1883,8 +1954,19 @@ function applyTokens(
   // renderer's 1px default manufacture a ring the real component never
   // draws (the Tag disabled state carries recolored 0-width borders).
   const sideValues = new Set(sidePaths.map((p) => String(resolveLiteral(p))));
-  const hasWidthSource = ['border-width', 'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width']
-    .some((chn) => tokens[chn] !== undefined);
+  const BORDER_WIDTH_CHANNELS = ['border-width', 'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width'];
+  // A LITERAL width counts too — but only a width that actually inks. The
+  // token arm cannot check its value here (the ref may resolve per combo);
+  // the literal arm can, and `border-width: 0px` is precisely the
+  // focus-ring-reservation shape this guard exists to refuse, so it is tested.
+  const hasWidthSource =
+    BORDER_WIDTH_CHANNELS.some((chn) => tokens[chn] !== undefined) ||
+    BORDER_WIDTH_CHANNELS.some((chn) => {
+      const v = lits?.[chn];
+      if (v === undefined) return false;
+      const n = parseLitPx(v);
+      return n !== undefined && n > 0;
+    });
   const uniformSideStroke = sidePaths.length > 0 && sideValues.size === 1 && hasWidthSource ? figmaName(sidePaths[0]) : null;
   // Decided BEFORE the loop so it cannot depend on which channel the switch
   // happens to reach first: a Figma node has ONE strokes paint, so a drawn
@@ -2292,8 +2374,12 @@ function applyTokens(
         const shadow = parseBoxShadow(value);
         if (shadow) spec.dropShadow = shadow;
         else {
-          const stack = parseShadowStack(value);
-          if (stack) spec.effectStack = stack;
+          const ld: string[] = [];
+          const stack = parseShadowStack(value, ld);
+          if (stack) {
+            spec.effectStack = stack;
+            if (ld.length > 0) spec.shadowLightDark = [...(spec.shadowLightDark ?? []), ...ld];
+          }
           // B-3 finding 6: a token-referenced shadow the stack grammar still
           // cannot express is a NAMED code-only fact (the † footnote), never
           // a silent drop.
@@ -2652,8 +2738,12 @@ function applyLiterals(
         const shadow = parseBoxShadow(value);
         if (shadow) spec.dropShadow = shadow;
         else {
-          const stack = parseShadowStack(value);
-          if (stack) spec.effectStack = stack;
+          const ld: string[] = [];
+          const stack = parseShadowStack(value, ld);
+          if (stack) {
+            spec.effectStack = stack;
+            if (ld.length > 0) spec.shadowLightDark = [...(spec.shadowLightDark ?? []), ...ld];
+          }
           else spec.shadowMiss = value.slice(0, 60);
         }
         break;
@@ -3054,10 +3144,11 @@ function applyStyling(
   // (isAbsoluteThisCombo — declared OR this combo's stylesWhen), so an inset
   // that absolutePartPlacement lowers is never named as an in-flow drop.
   const absolute = isAbsoluteThisCombo(part, subst);
-  const t = applyTokens(spec, tokens, subst, ctx, part.hugsBelowMaxWidth, part.declared, absolute);
+  const lits = resolveLiterals(part, subst);
+  const t = applyTokens(spec, tokens, subst, ctx, part.hugsBelowMaxWidth, part.declared, absolute, lits);
   // The literal pass also sees the part's own token map (a token on the
   // same channel wins, by name).
-  const l = applyLiterals(spec, resolveLiterals(part, subst), t, { absolute, position: part.declared?.['position'] ?? 'static' }, tokens);
+  const l = applyLiterals(spec, lits, t, { absolute, position: part.declared?.['position'] ?? 'static' }, tokens);
   // absolute-position round: content-box geometry means captured width/
   // height EXCLUDE padding — a canvas frame resize is border-box, so the
   // carried paddings are added back (MUI's Slider root declares
@@ -5267,6 +5358,19 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
         reason: 'parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar',
       });
       delete spec.shadowMiss;
+    }
+    if (spec.shadowLightDark !== undefined) {
+      for (const v of spec.shadowLightDark) {
+        facts.push({
+          part,
+          variant,
+          kind: 'shadow',
+          channel: 'box-shadow',
+          value: v.slice(0, 60),
+          reason: 'LIGHT_DARK_LIMIT — the value spells its colour as light-dark(<light>, <dark>); the effect DRAWS the light branch and a Figma effect carries no mode binding, so the DARK branch is NOT carried onto the node (it stays in the token set)',
+        });
+      }
+      delete spec.shadowLightDark;
     }
     if (spec.channelMiss !== undefined) {
       for (const seed of spec.channelMiss) facts.push({ part, variant, kind: 'channel', ...seed });

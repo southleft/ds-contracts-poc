@@ -2571,9 +2571,237 @@ export function promoteAnatomy(
       }
       const paintFact = factorByAxis(rowsForFactoring, paintOf);
       if (!paintFact) {
+        // ============================================================
+        // COINCIDENT INSET RING FOLD (RC3 burn-down, round 2)
+        // ============================================================
+        //
+        // THE MEASURED SHAPE. Fluent's Badge draws its outline/tint ring on a
+        // COINCIDENT INSET PSEUDO: the element itself carries
+        // `border-*-width: 0px; border-*-style: none` in all 767 captures, and
+        // `root::after` is `content:""; position:absolute; inset:0;
+        // border: 1px solid <colour>; border-radius: <the host's>`, whose
+        // colour tracks {appearance}x{colour} exactly. That is a PRODUCT of
+        // two enum axes, so the paint factoring above — uniform-or-ONE-axis —
+        // refuses, and in refusing it throws away FOUR FACTS THAT ARE UNIFORM
+        // ACROSS EVERY COMBO (1px on all four sides) to avoid guessing the one
+        // that varies. Fusion meanwhile carries the varying half on the HOST,
+        // because `border-{side}-color` is an element channel. The contract
+        // therefore ships a border COLOUR with no width anywhere, and
+        // core/emit-figma-script.ts's `hasWidthSource` correctly refuses to
+        // invent one:
+        //   "per-side border COLOURS disagree (or no border width is carried)"
+        // — outline and tint badges mint identical to filled.
+        //
+        // THE FOLD. When the pseudo IS that ring, its uniform side widths go
+        // onto the HOST as literals. Nothing is guessed: the varying half is
+        // the channel the host already carries, and the fold is legitimate
+        // precisely because the box is coincident — same border box, same
+        // radius, at 0,0, painting nothing else. This is the same move the
+        // COINCIDENT-SHADOW FOLD above makes for a shadow-only pseudo.
+        //
+        // IT IS THE FALLBACK, BY DESIGN. It is reached only where the decor
+        // promotion has ALREADY refused, so every ring the grammar can promote
+        // as its own part still is.
+        //
+        // THE GUARDS, AND WHY EACH ONE EXISTS. The first cut of this fold (the
+        // round before this one) was blocked by an adversarial verifier for
+        // having no PRESENCE guard: it iterated the drawn rows only, never
+        // compared against the domain, and wrote the widths onto the host
+        // UNCONDITIONALLY. A ring spelled `[data-size="small"]::after` over a
+        // host with an opaque per-combo border colour then completed the pair
+        // at size=large too, and the canvas drew a 1px stroke where CSS paints
+        // nothing — the HARMFUL class, and exactly the failure hasWidthSource's
+        // own comment exists to prevent, reintroduced through the other door.
+        //
+        // So the guard here is PRESENCE OF THE RING BOX OVER THE WHOLE DOMAIN,
+        // not presence of drawn INK — and the difference is the point. Fluent's
+        // `filled` badge has a ring box with a TRANSPARENT colour: the box is
+        // there in every combo, the host's own border-colour is transparent in
+        // exactly those combos, and the folded width therefore paints nothing
+        // there, correctly. A combo with NO ring box at all has no colour to
+        // compare and no fact to fold, and is refused BY NAME with the count
+        // disclosed (`present in N/M`), because the sibling refusal beside it
+        // says "in all drawn combos" and never admits how many combos have no
+        // ring. Both halves are pinned by conformance/cases/
+        // pseudo-inset-ring-{two-axis,partial-presence}.
+        const ringFold = ():
+          | { ok: true; receipt: string; width: number }
+          | { ok: false; why: string }
+          | null => {
+          if (!hostPart || hostIsShapeLeaf) return null;
+          const rows: Array<{ combo: Combo; st: Record<string, string>; hs: Record<string, string> }> = [];
+          for (const combo of domain) {
+            const el = union.alignedByKey.get(`${combo.key}__default`)![i];
+            const st = el?.node.pseudo[pe];
+            if (!st || !el) continue;
+            rows.push({ combo, st, hs: el.node.style });
+          }
+          if (rows.length === 0) return null;
+          const sideWidths = (st: Record<string, string>): number[] =>
+            BORDER_SIDES.map((sd) => px(st[`border-${sd}-width`]) ?? 0);
+          const num = (v: string | undefined): number => px(v) ?? 0;
+          /** A ring's OUTER (border) box and a host's PADDING box, in the same
+           *  units — the two that must coincide, because an inset-0 absolute
+           *  pseudo's border box fills its containing block, the host's
+           *  padding box.
+           *
+           *  BOX-SIZING IS NOT COSMETIC HERE. Chromium's resolved `width`
+           *  is the BORDER-box width under `box-sizing: border-box` and the
+           *  CONTENT-box width under `content-box` — MEASURED, both in the
+           *  fixture (host 48.0156 border-box with 6px side padding; ring
+           *  46.0156 content-box with 1px borders) and in the live Fluent
+           *  capture (host 20.0156, ring 18.0156). Reading one rule for both
+           *  makes the ring miss its host by exactly the padding. */
+          const outerW = (st: Record<string, string>): number =>
+            st['box-sizing'] === 'border-box'
+              ? num(st['width'])
+              : num(st['width']) + num(st['padding-left']) + num(st['padding-right']) + num(st['border-left-width']) + num(st['border-right-width']);
+          const outerH = (st: Record<string, string>): number =>
+            st['box-sizing'] === 'border-box'
+              ? num(st['height'])
+              : num(st['height']) + num(st['padding-top']) + num(st['padding-bottom']) + num(st['border-top-width']) + num(st['border-bottom-width']);
+          const padBoxW = (hs: Record<string, string>): number =>
+            hs['box-sizing'] === 'border-box'
+              ? num(hs['width']) - num(hs['border-left-width']) - num(hs['border-right-width'])
+              : num(hs['width']) + num(hs['padding-left']) + num(hs['padding-right']);
+          const padBoxH = (hs: Record<string, string>): number =>
+            hs['box-sizing'] === 'border-box'
+              ? num(hs['height']) - num(hs['border-top-width']) - num(hs['border-bottom-width'])
+              : num(hs['height']) + num(hs['padding-top']) + num(hs['padding-bottom']);
+          // IS THIS OUR SHAPE AT ALL? A uniform, non-zero, unpainted ring in
+          // every row we can see. If not, this is somebody else's refusal and
+          // the fold says nothing (null) rather than adding noise.
+          const w0 = sideWidths(rows[0].st);
+          const ringWidth = w0[0];
+          const isRingRow = (r: { st: Record<string, string> }): boolean => {
+            const w = sideWidths(r.st);
+            return (
+              new Set(w).size === 1 && w[0] > 0 &&
+              r.st['content'] === '""' &&
+              r.st['position'] === 'absolute' &&
+              alphaOf(r.st['background-color']) === 0 &&
+              (r.st['background-image'] ?? 'none') === 'none'
+            );
+          };
+          if (!rows.every(isRingRow) || ringWidth <= 0) return null;
+          // ---- G1 PRESENCE OVER THE WHOLE DOMAIN (the blocker) -------------
+          if (rows.length !== domain.length) {
+            const missing = domain.filter((c) => !rows.some((r) => r.combo.key === c.key));
+            return {
+              ok: false,
+              why:
+                `pseudo-decor-ring-fold-partial-presence: ${e.partName}${pe} is a coincident inset ring (border-top-width / border-right-width / border-bottom-width / border-left-width = ${ringWidth}px, uniform) but the ring box is PRESENT IN ONLY ${rows.length}/${domain.length} default-interaction combos — ` +
+                `e.g. ${missing.slice(0, 3).map((c) => c.key).join(', ')}${missing.length > 3 ? `, +${missing.length - 3} more` : ''}. ` +
+                `Folding its widths onto ${e.partName} would complete the width+colour pair in the ${missing.length} combos that have NO RING AT ALL, and the canvas would paint a ${ringWidth}px stroke where CSS paints nothing — a manufactured ring, not a lost one. The widths stay code-only; named refusal`,
+            };
+          }
+          // ---- G2 GEOMETRY: coincident, unrotated, at 0,0 -------------------
+          for (const r of rows) {
+            const t = r.st['transform'] ?? 'none';
+            const identity = t === 'none' || /^matrix\(1, 0, 0, 1, 0, 0\)$/.test(t);
+            if (
+              !identity ||
+              num(r.st['top']) !== 0 || num(r.st['left']) !== 0 ||
+              Math.abs(outerW(r.st) - padBoxW(r.hs)) > 0.6 ||
+              Math.abs(outerH(r.st) - padBoxH(r.hs)) > 0.6
+            ) {
+              return {
+                ok: false,
+                why: `pseudo-decor-ring-fold-not-coincident: ${e.partName}${pe} at ${r.combo.key} is a ring box (${ringWidth}px) but not COINCIDENT with ${e.partName} (outer ${outerW(r.st)}x${outerH(r.st)} at ${num(r.st['top'])},${num(r.st['left'])} vs the host's padding box ${padBoxW(r.hs)}x${padBoxH(r.hs)}${identity ? '' : `, transform ${t}`}) — a ring that is not the host's own outline cannot become the host's stroke; named refusal`,
+              };
+            }
+          }
+          // ---- G3 the ring must be the SAME ring in every combo -------------
+          for (const r of rows) {
+            const w = sideWidths(r.st);
+            if (new Set([...w, ringWidth]).size !== 1) {
+              return {
+                ok: false,
+                why: `pseudo-decor-ring-fold-width-varies: ${e.partName}${pe} draws ${w.join('/')}px at ${r.combo.key} and ${ringWidth}px elsewhere — a Figma node carries ONE stroke weight per side and the varying half of this fold is the HOST's colour, never its width; named refusal`,
+              };
+            }
+          }
+          // ---- G4 the HOST must not already have a border of its own --------
+          for (const r of rows) {
+            if (sideWidths(r.hs).some((w) => w !== 0)) {
+              return {
+                ok: false,
+                why: `pseudo-decor-ring-fold-host-has-border: ${e.partName} already draws its own border (${sideWidths(r.hs).join('/')}px at ${r.combo.key}) — folding the pseudo's ring onto it would REPLACE a real fact with a coincident one; named refusal`,
+              };
+            }
+          }
+          if (
+            BORDER_SIDES.some((sd) => hostPart.literals?.[`border-${sd}-width`] !== undefined || hostPart.tokens?.[`border-${sd}-width`] !== undefined) ||
+            hostPart.literals?.['border-width'] !== undefined || hostPart.tokens?.['border-width'] !== undefined
+          ) {
+            return {
+              ok: false,
+              why: `pseudo-decor-ring-fold-host-width-carried: ${e.partName} already carries a border width in the contract — the fold refuses rather than overwrite a carried fact; named refusal`,
+            };
+          }
+          // ---- G5 THE LOAD-BEARING TEST: the ring's colour IS the host's ----
+          // This is what keeps the fold honest. The varying half is never
+          // guessed: it is the channel the host already carries. Any combo
+          // where the two disagree — including one where the ring is
+          // transparent and the host is not, i.e. a combo CSS leaves bare —
+          // refuses the whole fold.
+          for (const r of rows) {
+            for (const sd of BORDER_SIDES) {
+              const ring = r.st[`border-${sd}-color`] ?? '';
+              const host = r.hs[`border-${sd}-color`] ?? '';
+              if (ring !== host) {
+                return {
+                  ok: false,
+                  why: `pseudo-decor-ring-fold-colour-differs: ${e.partName}${pe} paints border-${sd}-color ${ring || '(unset)'} at ${r.combo.key} where ${e.partName} carries ${host || '(unset)'} — the fold lends the host's OWN colour to the ring's width and never invents a hue, so a ring the host does not already spell is refused; named refusal`,
+                };
+              }
+            }
+          }
+          // ---- G6 radius agreement -----------------------------------------
+          for (const r of rows) {
+            if ((r.st['border-top-left-radius'] ?? '') !== (r.hs['border-top-left-radius'] ?? '')) {
+              return {
+                ok: false,
+                why: `pseudo-decor-ring-fold-radius-differs: ${e.partName}${pe} is radius ${r.st['border-top-left-radius'] ?? '(unset)'} at ${r.combo.key} where ${e.partName} is ${r.hs['border-top-left-radius'] ?? '(unset)'} — a ring with its own corner is a different shape from the host's outline; named refusal`,
+              };
+            }
+          }
+          // ---- G7 nothing else paints, and nothing hides it ------------------
+          for (const r of rows) {
+            const opacity = Number(r.st['opacity'] ?? '1');
+            const shadow = (r.st['box-shadow'] ?? 'none') !== 'none';
+            const outlineW = px(r.st['outline-width']) ?? 0;
+            const outline = outlineW > 0 && (r.st['outline-style'] ?? 'none') !== 'none';
+            if (opacity <= 0.05 || shadow || outline) {
+              return {
+                ok: false,
+                why: `pseudo-decor-ring-fold-second-paint: ${e.partName}${pe} at ${r.combo.key} is ${opacity <= 0.05 ? `hidden (opacity ${opacity}) — a host stroke has no per-combo hide` : shadow ? `also casting box-shadow ${r.st['box-shadow']}` : `also drawing an outline (${outlineW}px ${r.st['outline-style']})`}; the fold carries a ring and nothing else, so it refuses rather than drop the rest; named refusal`,
+              };
+            }
+          }
+          return {
+            ok: true,
+            width: ringWidth,
+            receipt:
+              `pseudo-decor-ring-folded: ${e.partName}${pe} is a COINCIDENT INSET RING — border-top-width / border-right-width / border-bottom-width / border-left-width = ${ringWidth}px, uniform on all four sides and identical in ${rows.length}/${domain.length} default-interaction combos (PRESENT in every one, not merely in the drawn ones), transparent fill, the host's own radius, at 0,0 over the host's padding box. ` +
+              `Its paint does not factor on ONE enum axis, so the decor grammar cannot promote it as its own part; the four UNIFORM widths are folded onto ${e.partName} as literals instead, where the border-{side}-color the contract ALREADY carries completes the pair. ` +
+              `MEASURED-SAFE: the ring's border colour equals ${e.partName}'s own on all four sides in ${rows.length}/${rows.length} combos, so no colour is guessed and a combo the host paints transparent stays bare`,
+          };
+        };
+        const folded = ringFold();
+        if (folded?.ok && hostPart) {
+          const host = hostPart;
+          host.literals = {
+            ...(host.literals ?? {}),
+            ...Object.fromEntries(BORDER_SIDES.map((sd) => [`border-${sd}-width`, `${folded.width}px`])),
+          };
+          refusals.push(folded.receipt);
+          continue;
+        }
         refusals.push(
           `pseudo-decor-paint-multiaxis: ${e.partName}${pe} drawn paint varies across the enabled combos and does not factor as a function of ONE enum axis (${[...new Set(rowsForFactoring.map((r) => JSON.stringify(paintOf(r.f))))].join(' vs ')}); named refusal`,
         );
+        if (folded && !folded.ok) refusals.push(folded.why);
         continue;
       }
       // Wave B.2 — rotation factors like paint (Carbon check ≈ −45°, minus = 0°).

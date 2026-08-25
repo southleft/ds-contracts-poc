@@ -1,0 +1,18 @@
+{
+  "id": "box-shadow-inset-hairline",
+  "feature": "effects",
+  "construct": "a stack that MIXES a drop layer with an `inset` hairline \u2014 astryx `shadow-med`'s third layer, the 1px inner ring every menu card and toast carries",
+  "why": "THE PINNED WALL for the mixed stack. The emitter DOES lower it: the node holds [DROP_SHADOW, INNER_SHADOW] (verifiable in the round trip's own naming quote). The INVERSION is what stops \u2014 core/propose-figma.ts:2814 proposes a box-shadow only when every layer is a DROP_SHADOW, because core/propose-figma.ts's shadowCss has no `inset` spelling and serializing an inner shadow as a drop one would be a wrong answer, not a lost one. This case pins that refusal by name so the canvas\u2192code half cannot quietly start guessing, and so the RC3 ink fix is never confused with closing it. Deliberately NOT declared mustDraw: the ink reaches the canvas, the read-back does not, and those are different rounds.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.tokens.box-shadow",
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the node carries DROP_SHADOW + INNER_SHADOW; the inversion NAMES the mixed stack rather than proposing a box-shadow it would have to spell wrong (core/propose-figma.ts:2840)"
+  },
+  "observable": {
+    "part": "root",
+    "channel": "box-shadow",
+    "capturedValue": "rgba(0, 0, 0, 0.05) 0px 2px 4px 0px, rgba(255, 255, 255, 0.12) 0px 0px 0px 1px inset"
+  }
+}

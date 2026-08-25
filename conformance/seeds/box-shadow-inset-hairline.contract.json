@@ -1,0 +1,30 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.box-shadow-inset-hairline",
+  "name": "CaseBoxShadowInsetHairline",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"box-shadow-inset-hairline\" (effects). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: a stack that MIXES a drop layer with an `inset` hairline — astryx `shadow-med`'s third layer, the 1px inner ring every menu card and toast carries",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@ds-contracts/conformance",
+        "export": "CaseBoxShadowInsetHairline"
+      }
+    }
+  }
+}

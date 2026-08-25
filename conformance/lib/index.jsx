@@ -14,8 +14,9 @@ export { default as CaseBackdropFilter } from '../cases/backdrop-filter/Case.tsx
 export { default as CaseBlockRootShrinkToFit } from '../cases/block-root-shrink-to-fit/Case.tsx';
 export { default as CaseBorderColorControlEqual } from '../cases/border-color-control-equal/Case.tsx';
 export { default as CaseBorderRadiusPx } from '../cases/border-radius-px/Case.tsx';
+export { default as CaseBoxShadowInsetHairline } from '../cases/box-shadow-inset-hairline/Case.tsx';
 export { default as CaseBoxShadowOkColorRing } from '../cases/box-shadow-ok-color-ring/Case.tsx';
-export { default as CaseBoxShadowOkStackInset } from '../cases/box-shadow-ok-stack-inset/Case.tsx';
+export { default as CaseBoxShadowOkStack } from '../cases/box-shadow-ok-stack/Case.tsx';
 export { default as CaseBoxShadowSingle } from '../cases/box-shadow-single/Case.tsx';
 export { default as CaseCalcVar } from '../cases/calc-var/Case.tsx';
 export { default as CaseClipPathPolygon } from '../cases/clip-path-polygon/Case.tsx';

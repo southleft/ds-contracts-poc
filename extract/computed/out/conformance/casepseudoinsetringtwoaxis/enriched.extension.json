@@ -348,7 +348,7 @@
       "full-width-carried: label spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)"
     ],
     "refusals": [
-      "pseudo-decor-paint-multiaxis: root::after drawn paint varies across the enabled combos and does not factor as a function of ONE enum axis ({\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(15, 108, 189, 1)\",\"radius\":10000} vs {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(196, 49, 75, 1)\",\"radius\":10000} vs {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(180, 214, 250, 1)\",\"radius\":10000} vs {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(238, 172, 178, 1)\",\"radius\":10000}); named refusal"
+      "pseudo-decor-ring-folded: root::after is a COINCIDENT INSET RING — border-top-width / border-right-width / border-bottom-width / border-left-width = 1px, uniform on all four sides and identical in 6/6 default-interaction combos (PRESENT in every one, not merely in the drawn ones), transparent fill, the host's own radius, at 0,0 over the host's padding box. Its paint does not factor on ONE enum axis, so the decor grammar cannot promote it as its own part; the four UNIFORM widths are folded onto root as literals instead, where the border-{side}-color the contract ALREADY carries completes the pair. MEASURED-SAFE: the ring's border colour equals root's own on all four sides in 6/6 combos, so no colour is guessed and a combo the host paints transparent stays bare"
     ]
   },
   "enrichmentNotes": [

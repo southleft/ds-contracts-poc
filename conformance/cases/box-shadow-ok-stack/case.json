@@ -1,0 +1,19 @@
+{
+  "id": "box-shadow-ok-stack",
+  "feature": "effects",
+  "construct": "a TWO-layer elevation whose every layer colour is an OKLab spelling \u2014 the drop half of astryx's `shadow-med` (examples/astryx/tokens/astryx.dtcg.json)",
+  "why": "An unparseable LAYER refuses the WHOLE stack by design (core/emit-figma-script.ts:1490-1491) \u2014 that is the right rule, and it is why one unreadable ok-space layer deleted every elevation layer beside it. astryx's dropdown-menu and toast shipped `parsed neither as a single drop shadow nor as an effect stack \u2014 inexpressible / foreign shadow grammar` and floated white-on-white with no elevation at all, while core/token-set.ts had read oklch/oklab for the token set the whole time. Two readers of one thing.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.tokens.box-shadow",
+  "canvas": {
+    "expect": "PRESENT",
+    "mustDraw": true,
+    "note": "both layers reach the node as a DROP_SHADOW effect stack; a receipt naming the refusal is not a substitute for the ink"
+  },
+  "observable": {
+    "part": "root",
+    "channel": "box-shadow",
+    "capturedValue": "oklch(0 0 0 / 0.05) 0px 2px 4px 0px, oklch(0 0 0 / 0.1) 0px 4px 12px 0px"
+  }
+}
