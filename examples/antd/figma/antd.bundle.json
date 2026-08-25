@@ -19731,17 +19731,6 @@
         {
           "part": "root",
           "kind": "declared",
-          "channel": "outline-style",
-          "value": "solid",
-          "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
-          "variants": {
-            "count": 12,
-            "of": 12
-          }
-        },
-        {
-          "part": "root",
-          "kind": "declared",
           "channel": "position",
           "value": "relative",
           "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",

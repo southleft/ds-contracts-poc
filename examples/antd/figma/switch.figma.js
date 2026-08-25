@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "antd.switch",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Switch — generated from contract antd.switch v0.2.0 † (61 code-only facts — see plugin report)",
+    "description": "Switch — generated from contract antd.switch v0.2.0 † (60 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -2414,17 +2414,6 @@ const COMPONENTS = [
         "channel": "display",
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
-        "variants": {
-          "count": 12,
-          "of": 12
-        }
-      },
-      {
-        "part": "root",
-        "kind": "declared",
-        "channel": "outline-style",
-        "value": "solid",
-        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
         "variants": {
           "count": 12,
           "of": 12

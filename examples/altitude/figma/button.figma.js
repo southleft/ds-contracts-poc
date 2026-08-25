@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "altitude.button",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Button — generated from contract altitude.button v0.2.0 † (22 code-only facts — see plugin report)",
+    "description": "Button — generated from contract altitude.button v0.2.0 † (21 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -947,17 +947,6 @@ const COMPONENTS = [
         "channel": "cursor",
         "value": "pointer",
         "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
-        "variants": {
-          "count": 12,
-          "of": 12
-        }
-      },
-      {
-        "part": "root",
-        "kind": "declared",
-        "channel": "outline-style",
-        "value": "solid",
-        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
         "variants": {
           "count": 12,
           "of": 12

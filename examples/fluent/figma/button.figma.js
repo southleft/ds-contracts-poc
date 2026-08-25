@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "fluent.button",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Button — generated from contract fluent.button v0.2.0 † (33 code-only facts — see plugin report)",
+    "description": "Button — generated from contract fluent.button v0.2.0 † (32 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -4041,17 +4041,6 @@ const COMPONENTS = [
         "channel": "cursor",
         "value": "pointer",
         "reason": "declared for the hover state — state previews do not draw declared facts (a named limit)",
-        "variants": {
-          "count": 65,
-          "of": 65
-        }
-      },
-      {
-        "part": "root",
-        "kind": "declared",
-        "channel": "outline-style",
-        "value": "solid",
-        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
         "variants": {
           "count": 65,
           "of": 65

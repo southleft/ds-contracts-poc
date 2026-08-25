@@ -20994,17 +20994,6 @@
         {
           "part": "root",
           "kind": "declared",
-          "channel": "outline-style",
-          "value": "solid",
-          "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
-          "variants": {
-            "count": 65,
-            "of": 65
-          }
-        },
-        {
-          "part": "root",
-          "kind": "declared",
           "channel": "transition-duration",
           "value": "0.1s",
           "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
@@ -24902,28 +24891,6 @@
           "channel": "cursor",
           "value": "not-allowed",
           "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
-          "variants": {
-            "count": 42,
-            "of": 42
-          }
-        },
-        {
-          "part": "root",
-          "kind": "declared",
-          "channel": "outline-style",
-          "value": "solid",
-          "reason": "declared for the active state — state previews do not draw declared facts (a named limit)",
-          "variants": {
-            "count": 42,
-            "of": 42
-          }
-        },
-        {
-          "part": "root",
-          "kind": "declared",
-          "channel": "outline-style",
-          "value": "solid",
-          "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
           "variants": {
             "count": 42,
             "of": 42

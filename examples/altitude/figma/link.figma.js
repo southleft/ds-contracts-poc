@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "altitude.link",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Link — generated from contract altitude.link v0.2.0 † (8 code-only facts — see plugin report)",
+    "description": "Link — generated from contract altitude.link v0.2.0 † (7 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -158,8 +158,11 @@ const COMPONENTS = [
           "bindings": {
             "itemSpacing": "imported/link/root/column-gap",
             "minHeight": "imported/link/root/min-height",
-            "minWidth": "imported/link/root/min-width"
+            "minWidth": "imported/link/root/min-width",
+            "strokeWeight": "imported/link/root/outline-width-state-focus-visible"
           },
+          "stroke": "imported/link/root/color",
+          "strokeOutside": true,
           "children": [
             {
               "type": "text",
@@ -197,8 +200,11 @@ const COMPONENTS = [
           "bindings": {
             "itemSpacing": "imported/link/root/column-gap",
             "minHeight": "imported/link/root/min-height",
-            "minWidth": "imported/link/root/min-width"
+            "minWidth": "imported/link/root/min-width",
+            "strokeWeight": "imported/link/root/outline-width-state-focus-visible"
           },
+          "stroke": "imported/link/root/color",
+          "strokeOutside": true,
           "children": [
             {
               "type": "text",
@@ -236,8 +242,11 @@ const COMPONENTS = [
           "bindings": {
             "itemSpacing": "imported/link/root/column-gap",
             "minHeight": "imported/link/root/min-height",
-            "minWidth": "imported/link/root/min-width"
+            "minWidth": "imported/link/root/min-width",
+            "strokeWeight": "imported/link/root/outline-width-state-focus-visible"
           },
+          "stroke": "imported/link/root/color",
+          "strokeOutside": true,
           "children": [
             {
               "type": "text",
@@ -439,17 +448,6 @@ const COMPONENTS = [
         "channel": "variant [unset]",
         "value": "xs|sm|lg",
         "reason": "defaultless axis — the library's own rendering when \"variant\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 3 declared values only, and a proposal read back from the canvas will call \"xs\" the default (FC-UNSET-PLANE-UNDRAWN)",
-        "variants": {
-          "count": 9,
-          "of": 9
-        }
-      },
-      {
-        "part": "root",
-        "kind": "declared",
-        "channel": "outline-style",
-        "value": "solid",
-        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
         "variants": {
           "count": 9,
           "of": 9
@@ -933,7 +931,7 @@ function applyFrameSpec(node, spec) {
   if (spec.fill) node.fills = [boundPaint(spec.fill, node)];
   if (spec.stroke) {
     node.strokes = [boundPaint(spec.stroke, node)];
-    node.strokeAlign = 'INSIDE';
+    node.strokeAlign = spec.strokeOutside ? 'OUTSIDE' : 'INSIDE';
     // ANTD EXAM (heal loop): a per-value border style (stylesWhen dashed/dotted) → dashPattern
     if (spec.dashPattern) { try { node.dashPattern = spec.dashPattern; } catch (e) { degrade('FC-RT-DASH-PATTERN-REFUSED', node, 'dashPattern refused on this node; the stroke stays solid', e); } }
   }
@@ -1110,7 +1108,7 @@ async function buildNode(spec, registry) {
         wrap.setBoundVariable(field, need(varName));
       }
       if (spec.fill) wrap.fills = [boundPaint(spec.fill, wrap)];
-      if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke, wrap)]; wrap.strokeAlign = 'INSIDE'; }
+      if (spec.stroke) { wrap.strokes = [boundPaint(spec.stroke, wrap)]; wrap.strokeAlign = spec.strokeOutside ? 'OUTSIDE' : 'INSIDE'; }
       if (spec.characters) wrap.appendChild(node); else node.remove();
       if (spec.fixedWidth || spec.fixedHeight) {
         wrap.resize(spec.fixedWidth ? spec.fixedWidth.px : wrap.width, spec.fixedHeight ? spec.fixedHeight.px : wrap.height);

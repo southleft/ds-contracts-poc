@@ -9989,18 +9989,21 @@
         },
         {
           "name": "tone",
-          "description": "Sets the color treatment of the Button.",
+          "description": "Sets the color treatment of the Button. Wave B.4 FC-ENUM-HOLE: `default` is the developed unset tone (Polaris tone?: critical|success) — minted as `{variant}.none` paint paths.",
           "type": {
             "enum": [
+              "default",
               "critical",
               "success"
             ]
           },
+          "default": "default",
           "bindings": {
             "figma": {
               "kind": "VARIANT",
               "property": "Tone",
               "values": {
+                "default": "Default",
                 "critical": "Critical",
                 "success": "Success"
               }
@@ -10167,6 +10170,13 @@
             {
               "prop": "tone",
               "map": {
+                "default": {
+                  "background-color": "{imported.button.root.background-color.{variant}.none}",
+                  "background-image": "{imported.button.root.background-image.{variant}.none}",
+                  "box-shadow": "{imported.button.root.box-shadow.{variant}.none}",
+                  "color": "{imported.button.root.color.{variant}.none}",
+                  "outline-color": "{imported.button.root.outline-color.{variant}.none}"
+                },
                 "critical": {
                   "background-color": "{imported.button.root.background-color.{variant}.critical}",
                   "background-image": "{imported.button.root.background-image.{variant}.critical}",
@@ -16691,17 +16701,6 @@
         {
           "part": "root",
           "kind": "declared",
-          "channel": "outline-style",
-          "value": "solid",
-          "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
-          "variants": {
-            "count": 8,
-            "of": 8
-          }
-        },
-        {
-          "part": "root",
-          "kind": "declared",
           "channel": "position",
           "value": "relative",
           "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
@@ -16734,8 +16733,8 @@
           "value": "rgba(0, 46, 106, 1)",
           "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16745,8 +16744,8 @@
           "value": "rgba(181, 181, 181, 1)",
           "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16756,8 +16755,8 @@
           "value": "rgba(0, 66, 153, 1)",
           "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16767,8 +16766,8 @@
           "value": "rgba(0, 66, 153, 1)",
           "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16778,8 +16777,8 @@
           "value": "rgba(0, 46, 106, 1)",
           "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16789,8 +16788,8 @@
           "value": "none",
           "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 60/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16800,8 +16799,8 @@
           "value": "matrix(1, 0, 0, 1, 0, 1)",
           "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16811,8 +16810,8 @@
           "value": "pointer",
           "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16822,8 +16821,8 @@
           "value": "block",
           "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16833,8 +16832,8 @@
           "value": "none",
           "reason": "Text-selection behavior (user-select) exists only in the coded component.",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16844,8 +16843,8 @@
           "value": "rgba(0, 46, 106, 1)",
           "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16855,8 +16854,8 @@
           "value": "rgba(181, 181, 181, 1)",
           "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16866,8 +16865,8 @@
           "value": "rgba(0, 66, 153, 1)",
           "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16877,8 +16876,8 @@
           "value": "rgba(0, 66, 153, 1)",
           "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16888,8 +16887,8 @@
           "value": "rgba(0, 46, 106, 1)",
           "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16899,8 +16898,8 @@
           "value": "none",
           "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 60/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16910,8 +16909,8 @@
           "value": "pointer",
           "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16921,8 +16920,8 @@
           "value": "block",
           "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16932,8 +16931,8 @@
           "value": "100%",
           "reason": "Fluid max-height constraints live in code; the canvas draws the component at its real size (standing choice).",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16943,8 +16942,8 @@
           "value": "100%",
           "reason": "Fluid max-width constraints live in code; the canvas draws the component at its real size (standing choice).",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16954,8 +16953,8 @@
           "value": "none",
           "reason": "Text-selection behavior (user-select) exists only in the coded component.",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16965,8 +16964,8 @@
           "value": "{imported.button.label.color-state-active.{variant}.{tone}}",
           "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16976,8 +16975,8 @@
           "value": "{imported.button.label.color-state-disabled.{variant}}",
           "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16987,8 +16986,8 @@
           "value": "{imported.button.label.color-state-focus-visible.{variant}.{tone}}",
           "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -16998,8 +16997,8 @@
           "value": "{imported.button.label.color-state-hover.{variant}.{tone}}",
           "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17009,8 +17008,8 @@
           "value": "{imported.button.label.fill-state-active.{variant}.{tone}}",
           "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17020,8 +17019,8 @@
           "value": "matrix(1, 0, 0, 1, 0, 1)",
           "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 48/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17031,8 +17030,8 @@
           "value": "pointer",
           "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17042,8 +17041,8 @@
           "value": "block",
           "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17053,8 +17052,8 @@
           "value": "none",
           "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17064,8 +17063,8 @@
           "value": "none",
           "reason": "Text-selection behavior (user-select) exists only in the coded component.",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17075,8 +17074,8 @@
           "value": "scroll",
           "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17086,8 +17085,8 @@
           "value": "normal",
           "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17097,8 +17096,8 @@
           "value": "border-box",
           "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17108,8 +17107,8 @@
           "value": "{imported.button.root.background-color-state-active.{variant}.{tone}}",
           "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17119,8 +17118,8 @@
           "value": "{imported.button.root.background-color-state-focus-visible.{variant}.{tone}}",
           "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17130,8 +17129,8 @@
           "value": "{imported.button.root.background-color-state-hover.{variant}.{tone}}",
           "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17141,8 +17140,8 @@
           "value": "padding-box",
           "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17152,8 +17151,8 @@
           "value": "0% 0%",
           "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17163,8 +17162,8 @@
           "value": "repeat",
           "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17174,8 +17173,8 @@
           "value": "auto",
           "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17185,8 +17184,8 @@
           "value": "{imported.button.root.box-shadow-state-active.{variant}.{tone}}",
           "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17196,8 +17195,8 @@
           "value": "{imported.button.root.color-state-active.{variant}.{tone}}",
           "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17207,8 +17206,8 @@
           "value": "{imported.button.root.color-state-focus-visible.{variant}.{tone}}",
           "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17218,8 +17217,8 @@
           "value": "{imported.button.root.color-state-hover.{variant}.{tone}}",
           "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17229,8 +17228,8 @@
           "value": "{imported.button.root.fill-state-active.{variant}.{tone}}",
           "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17240,8 +17239,8 @@
           "value": "{imported.button.root.outline-color-state-active.{variant}.{tone}}",
           "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17251,8 +17250,8 @@
           "value": "{imported.button.root.outline-color-state-hover.{variant}.{tone}}",
           "reason": "observed by the computed capture and refused by the contract grammar — state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17262,8 +17261,8 @@
           "value": "{imported.button.root.outline-offset-state-focus-visible.{variant}.{size}}",
           "reason": "observed by the computed capture and refused by the contract grammar — state pair ref — root states carry ≤1 placeholder (S3 residue)",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17273,8 +17272,8 @@
           "value": "underline",
           "reason": "observed by the computed capture and refused by the contract grammar — value shape outside mintable kinds and outside the declared vocabulary",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17284,8 +17283,8 @@
           "value": "underline",
           "reason": "observed by the computed capture and refused by the contract grammar — value shape outside mintable kinds and outside the declared vocabulary",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17295,8 +17294,8 @@
           "value": "underline",
           "reason": "observed by the computed capture and refused by the contract grammar — value shape outside mintable kinds and outside the declared vocabulary",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17306,8 +17305,8 @@
           "value": "underline",
           "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17317,8 +17316,8 @@
           "value": "underline",
           "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17328,8 +17327,8 @@
           "value": "underline",
           "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17339,8 +17338,8 @@
           "value": "{imported.shared.size-0}",
           "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17350,8 +17349,8 @@
           "value": "{imported.shared.size-0}",
           "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17361,30 +17360,35 @@
           "value": "-4px/-8px/-4px/-8px",
           "reason": "root margins have no parent auto-layout to wrap — a COMPONENT_SET child is the component itself, so residual root margin is not canvas-drawable (FC-EMIT-ROOT-MARGIN-SILENT)",
           "variants": {
-            "count": 20,
-            "of": 220,
+            "count": 30,
+            "of": 320,
             "names": [
+              "Size=Micro, Text Align=Center, Tone=Default, Variant=Plain",
+              "Size=Micro, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
               "Size=Micro, Text Align=Center, Tone=Critical, Variant=Plain",
               "Size=Micro, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
               "Size=Micro, Text Align=Center, Tone=Success, Variant=Plain",
               "Size=Micro, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
+              "Size=Micro, Text Align=Left, Tone=Default, Variant=Plain",
+              "Size=Micro, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
               "Size=Micro, Text Align=Left, Tone=Critical, Variant=Plain",
               "Size=Micro, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
               "Size=Micro, Text Align=Left, Tone=Success, Variant=Plain",
               "Size=Micro, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
+              "Size=Micro, Text Align=Right, Tone=Default, Variant=Plain",
+              "Size=Micro, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
               "Size=Micro, Text Align=Right, Tone=Critical, Variant=Plain",
               "Size=Micro, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
               "Size=Micro, Text Align=Right, Tone=Success, Variant=Plain",
               "Size=Micro, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
+              "Size=Micro, Text Align=Start, Tone=Default, Variant=Plain",
+              "Size=Micro, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
               "Size=Micro, Text Align=Start, Tone=Critical, Variant=Plain",
               "Size=Micro, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
               "Size=Micro, Text Align=Start, Tone=Success, Variant=Plain",
-              "Size=Micro, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
-              "Size=Micro, Text Align=End, Tone=Critical, Variant=Plain",
-              "Size=Micro, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
-              "Size=Micro, Text Align=End, Tone=Success, Variant=Plain",
-              "Size=Micro, Text Align=End, Tone=Success, Variant=Monochrome Plain"
-            ]
+              "Size=Micro, Text Align=Start, Tone=Success, Variant=Monochrome Plain"
+            ],
+            "more": 6
           }
         },
         {
@@ -17394,35 +17398,35 @@
           "value": "-6px/-12px/-6px/-12px",
           "reason": "root margins have no parent auto-layout to wrap — a COMPONENT_SET child is the component itself, so residual root margin is not canvas-drawable (FC-EMIT-ROOT-MARGIN-SILENT)",
           "variants": {
-            "count": 68,
-            "of": 220,
+            "count": 98,
+            "of": 320,
             "names": [
+              "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain",
+              "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
               "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain",
               "Size=Medium, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
               "Size=Medium, Text Align=Center, Tone=Success, Variant=Plain",
               "Size=Medium, Text Align=Center, Tone=Success, Variant=Monochrome Plain",
+              "Size=Medium, Text Align=Left, Tone=Default, Variant=Plain",
+              "Size=Medium, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
               "Size=Medium, Text Align=Left, Tone=Critical, Variant=Plain",
               "Size=Medium, Text Align=Left, Tone=Critical, Variant=Monochrome Plain",
               "Size=Medium, Text Align=Left, Tone=Success, Variant=Plain",
               "Size=Medium, Text Align=Left, Tone=Success, Variant=Monochrome Plain",
+              "Size=Medium, Text Align=Right, Tone=Default, Variant=Plain",
+              "Size=Medium, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
               "Size=Medium, Text Align=Right, Tone=Critical, Variant=Plain",
               "Size=Medium, Text Align=Right, Tone=Critical, Variant=Monochrome Plain",
               "Size=Medium, Text Align=Right, Tone=Success, Variant=Plain",
               "Size=Medium, Text Align=Right, Tone=Success, Variant=Monochrome Plain",
+              "Size=Medium, Text Align=Start, Tone=Default, Variant=Plain",
+              "Size=Medium, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
               "Size=Medium, Text Align=Start, Tone=Critical, Variant=Plain",
               "Size=Medium, Text Align=Start, Tone=Critical, Variant=Monochrome Plain",
               "Size=Medium, Text Align=Start, Tone=Success, Variant=Plain",
-              "Size=Medium, Text Align=Start, Tone=Success, Variant=Monochrome Plain",
-              "Size=Medium, Text Align=End, Tone=Critical, Variant=Plain",
-              "Size=Medium, Text Align=End, Tone=Critical, Variant=Monochrome Plain",
-              "Size=Medium, Text Align=End, Tone=Success, Variant=Plain",
-              "Size=Medium, Text Align=End, Tone=Success, Variant=Monochrome Plain",
-              "Size=Slim, Text Align=Center, Tone=Critical, Variant=Plain",
-              "Size=Slim, Text Align=Center, Tone=Critical, Variant=Monochrome Plain",
-              "Size=Slim, Text Align=Center, Tone=Success, Variant=Plain",
-              "Size=Slim, Text Align=Center, Tone=Success, Variant=Monochrome Plain"
+              "Size=Medium, Text Align=Start, Tone=Success, Variant=Monochrome Plain"
             ],
-            "more": 44
+            "more": 74
           }
         },
         {
@@ -17432,8 +17436,8 @@
           "value": "{imported.button.root.outline-color.{variant}.critical}",
           "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
           "variants": {
-            "count": 120,
-            "of": 220,
+            "count": 100,
+            "of": 320,
             "names": [
               "Size=Medium, Text Align=Center, Tone=Critical, Variant=Secondary",
               "Size=Medium, Text Align=Center, Tone=Critical, Variant=Plain",
@@ -17460,6 +17464,44 @@
               "Size=Medium, Text Align=End, Tone=Critical, Variant=Primary",
               "Size=Medium, Text Align=End, Tone=Critical, Variant=Tertiary"
             ],
+            "more": 76
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "outline-color",
+          "value": "{imported.button.root.outline-color.{variant}.none}",
+          "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
+          "variants": {
+            "count": 120,
+            "of": 320,
+            "names": [
+              "Size=Medium, Text Align=Center, Tone=Default, Variant=Secondary",
+              "Size=Medium, Text Align=Center, Tone=Default, Variant=Plain",
+              "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary",
+              "Size=Medium, Text Align=Center, Tone=Default, Variant=Tertiary",
+              "Size=Medium, Text Align=Center, Tone=Default, Variant=Monochrome Plain",
+              "Size=Medium, Text Align=Left, Tone=Default, Variant=Secondary",
+              "Size=Medium, Text Align=Left, Tone=Default, Variant=Plain",
+              "Size=Medium, Text Align=Left, Tone=Default, Variant=Primary",
+              "Size=Medium, Text Align=Left, Tone=Default, Variant=Tertiary",
+              "Size=Medium, Text Align=Left, Tone=Default, Variant=Monochrome Plain",
+              "Size=Medium, Text Align=Right, Tone=Default, Variant=Secondary",
+              "Size=Medium, Text Align=Right, Tone=Default, Variant=Plain",
+              "Size=Medium, Text Align=Right, Tone=Default, Variant=Primary",
+              "Size=Medium, Text Align=Right, Tone=Default, Variant=Tertiary",
+              "Size=Medium, Text Align=Right, Tone=Default, Variant=Monochrome Plain",
+              "Size=Medium, Text Align=Start, Tone=Default, Variant=Secondary",
+              "Size=Medium, Text Align=Start, Tone=Default, Variant=Plain",
+              "Size=Medium, Text Align=Start, Tone=Default, Variant=Primary",
+              "Size=Medium, Text Align=Start, Tone=Default, Variant=Tertiary",
+              "Size=Medium, Text Align=Start, Tone=Default, Variant=Monochrome Plain",
+              "Size=Medium, Text Align=End, Tone=Default, Variant=Secondary",
+              "Size=Medium, Text Align=End, Tone=Default, Variant=Plain",
+              "Size=Medium, Text Align=End, Tone=Default, Variant=Primary",
+              "Size=Medium, Text Align=End, Tone=Default, Variant=Tertiary"
+            ],
             "more": 96
           }
         },
@@ -17471,7 +17513,7 @@
           "reason": "a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.",
           "variants": {
             "count": 100,
-            "of": 220,
+            "of": 320,
             "names": [
               "Size=Medium, Text Align=Center, Tone=Success, Variant=Secondary",
               "Size=Medium, Text Align=Center, Tone=Success, Variant=Plain",
@@ -17508,19 +17550,8 @@
           "value": "{imported.shared.size-0}",
           "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
           "variants": {
-            "count": 220,
-            "of": 220
-          }
-        },
-        {
-          "part": "root",
-          "kind": "channel",
-          "channel": "tone [unset]",
-          "value": "critical|success",
-          "reason": "defaultless axis — the library's own rendering when \"tone\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 2 declared values only, and a proposal read back from the canvas will call \"critical\" the default (FC-UNSET-PLANE-UNDRAWN)",
-          "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17530,8 +17561,8 @@
           "value": "{imported.shared.size-0}",
           "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17541,8 +17572,8 @@
           "value": "none",
           "reason": "Native form-control appearance is reset only in the coded component.",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17552,8 +17583,8 @@
           "value": "none",
           "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17563,8 +17594,8 @@
           "value": "none",
           "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17574,8 +17605,8 @@
           "value": "none",
           "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17585,8 +17616,8 @@
           "value": "none",
           "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17596,8 +17627,8 @@
           "value": "pointer",
           "reason": "Cursor changes (pointer on hover) exist only in the coded component.",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17607,19 +17638,8 @@
           "value": "\"calt\" 0",
           "reason": "Tabular figures / ligature settings apply only in code — Figma's plugin API cannot set OpenType features.",
           "variants": {
-            "count": 220,
-            "of": 220
-          }
-        },
-        {
-          "part": "root",
-          "kind": "declared",
-          "channel": "outline-style",
-          "value": "solid",
-          "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
-          "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17629,8 +17649,8 @@
           "value": "none",
           "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17640,8 +17660,8 @@
           "value": "relative",
           "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17651,8 +17671,8 @@
           "value": "optimizelegibility",
           "reason": "Text rasterization hints (text-rendering) apply only in code.",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17662,8 +17682,8 @@
           "value": "manipulation",
           "reason": "Touch gesture handling (touch-action) exists only in the coded component.",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
           }
         },
         {
@@ -17673,8 +17693,45 @@
           "value": "none",
           "reason": "Text-selection behavior (user-select) exists only in the coded component.",
           "variants": {
-            "count": 220,
-            "of": 220
+            "count": 320,
+            "of": 320
+          }
+        },
+        {
+          "part": "root",
+          "kind": "gradient",
+          "channel": "background-image",
+          "value": "linear-gradient(rgba(48, 48, 48, 0) 63.53%, rgba(255, 255, 2",
+          "reason": "did not parse as a linear gradient (radial / conic / foreign grammar) — Figma lowers linear-gradient stacks only",
+          "variants": {
+            "count": 24,
+            "of": 320,
+            "names": [
+              "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary",
+              "Size=Medium, Text Align=Left, Tone=Default, Variant=Primary",
+              "Size=Medium, Text Align=Right, Tone=Default, Variant=Primary",
+              "Size=Medium, Text Align=Start, Tone=Default, Variant=Primary",
+              "Size=Medium, Text Align=End, Tone=Default, Variant=Primary",
+              "Size=Micro, Text Align=Center, Tone=Default, Variant=Primary",
+              "Size=Micro, Text Align=Left, Tone=Default, Variant=Primary",
+              "Size=Micro, Text Align=Right, Tone=Default, Variant=Primary",
+              "Size=Micro, Text Align=Start, Tone=Default, Variant=Primary",
+              "Size=Micro, Text Align=End, Tone=Default, Variant=Primary",
+              "Size=Slim, Text Align=Center, Tone=Default, Variant=Primary",
+              "Size=Slim, Text Align=Left, Tone=Default, Variant=Primary",
+              "Size=Slim, Text Align=Right, Tone=Default, Variant=Primary",
+              "Size=Slim, Text Align=Start, Tone=Default, Variant=Primary",
+              "Size=Slim, Text Align=End, Tone=Default, Variant=Primary",
+              "Size=Large, Text Align=Center, Tone=Default, Variant=Primary",
+              "Size=Large, Text Align=Left, Tone=Default, Variant=Primary",
+              "Size=Large, Text Align=Right, Tone=Default, Variant=Primary",
+              "Size=Large, Text Align=Start, Tone=Default, Variant=Primary",
+              "Size=Large, Text Align=End, Tone=Default, Variant=Primary",
+              "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Disabled",
+              "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Focus Visible",
+              "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Active",
+              "Size=Medium, Text Align=Center, Tone=Default, Variant=Primary, State=Hover"
+            ]
           }
         }
       ]

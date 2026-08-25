@@ -24064,17 +24064,6 @@
         },
         {
           "part": "root",
-          "kind": "declared",
-          "channel": "outline-style",
-          "value": "auto",
-          "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
-          "variants": {
-            "count": 42,
-            "of": 42
-          }
-        },
-        {
-          "part": "root",
           "kind": "preview",
           "channel": "display",
           "value": "block",

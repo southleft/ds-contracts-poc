@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "fluent.input",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Input — generated from contract fluent.input v0.2.0 † (45 code-only facts — see plugin report)",
+    "description": "Input — generated from contract fluent.input v0.2.0 † (43 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -4379,28 +4379,6 @@ const COMPONENTS = [
         "channel": "cursor",
         "value": "not-allowed",
         "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
-        "variants": {
-          "count": 42,
-          "of": 42
-        }
-      },
-      {
-        "part": "root",
-        "kind": "declared",
-        "channel": "outline-style",
-        "value": "solid",
-        "reason": "declared for the active state — state previews do not draw declared facts (a named limit)",
-        "variants": {
-          "count": 42,
-          "of": 42
-        }
-      },
-      {
-        "part": "root",
-        "kind": "declared",
-        "channel": "outline-style",
-        "value": "solid",
-        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
         "variants": {
           "count": 42,
           "of": 42

@@ -8029,17 +8029,6 @@
         {
           "part": "root",
           "kind": "declared",
-          "channel": "outline-style",
-          "value": "solid",
-          "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
-          "variants": {
-            "count": 12,
-            "of": 12
-          }
-        },
-        {
-          "part": "root",
-          "kind": "declared",
           "channel": "position",
           "value": "relative",
           "reason": "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
@@ -8362,17 +8351,6 @@
           "channel": "variant [unset]",
           "value": "xs|sm|lg",
           "reason": "defaultless axis — the library's own rendering when \"variant\" is absent (the capture's base plane, whose tokens ride the parts' base bindings) has no VARIANT cell: the set enumerates the 3 declared values only, and a proposal read back from the canvas will call \"xs\" the default (FC-UNSET-PLANE-UNDRAWN)",
-          "variants": {
-            "count": 9,
-            "of": 9
-          }
-        },
-        {
-          "part": "root",
-          "kind": "declared",
-          "channel": "outline-style",
-          "value": "solid",
-          "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
           "variants": {
             "count": 9,
             "of": 9

@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "mui.link",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Link — generated from contract mui.link v0.2.0 † (14 code-only facts — see plugin report)",
+    "description": "Link — generated from contract mui.link v0.2.0 † (13 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -1577,17 +1577,6 @@ const COMPONENTS = [
         "channel": "display",
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
-        "variants": {
-          "count": 42,
-          "of": 42
-        }
-      },
-      {
-        "part": "root",
-        "kind": "declared",
-        "channel": "outline-style",
-        "value": "auto",
-        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
         "variants": {
           "count": 42,
           "of": 42

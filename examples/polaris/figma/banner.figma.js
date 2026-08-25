@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "polaris.banner",
     "version": "0.4.0",
     "anchorKey": null,
-    "description": "Banner — generated from contract polaris.banner v0.4.0 † (66 code-only facts — see plugin report)",
+    "description": "Banner — generated from contract polaris.banner v0.4.0 † (65 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -4871,17 +4871,6 @@ const COMPONENTS = [
         "channel": "top",
         "value": "{imported.shared.size-0}",
         "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
-        "variants": {
-          "count": 8,
-          "of": 8
-        }
-      },
-      {
-        "part": "root",
-        "kind": "declared",
-        "channel": "outline-style",
-        "value": "solid",
-        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
         "variants": {
           "count": 8,
           "of": 8

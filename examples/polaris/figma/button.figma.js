@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "polaris.button",
     "version": "0.4.0",
     "anchorKey": null,
-    "description": "Button — generated from contract polaris.button v0.4.0 † (78 code-only facts — see plugin report)",
+    "description": "Button — generated from contract polaris.button v0.4.0 † (77 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [
       {
@@ -32424,17 +32424,6 @@ const COMPONENTS = [
         "channel": "font-feature-settings",
         "value": "\"calt\" 0",
         "reason": "Tabular figures / ligature settings apply only in code — Figma's plugin API cannot set OpenType features.",
-        "variants": {
-          "count": 320,
-          "of": 320
-        }
-      },
-      {
-        "part": "root",
-        "kind": "declared",
-        "channel": "outline-style",
-        "value": "solid",
-        "reason": "declared for the focus-visible state — state previews do not draw declared facts (a named limit)",
         "variants": {
           "count": 320,
           "of": 320
