@@ -204,6 +204,7 @@ export function gridDefiniteAxisLiterals(
       sum += v;
     }
     if (sum !== null) sum += gapPx * Math.max(0, (tracks ?? []).length - 1) + pad;
+    // @door anatomy.grid-definite-axis-hug
     if (used !== null && sum !== null && Math.abs(used - sum) <= 0.5) {
       literals[axis] = 'fit-content';
       out.push(
@@ -243,6 +244,7 @@ export function lowerGridDisplay(
   //     minmax()/percent/auto-fit tracks resolve to USED px in computed
   //     style (P6/P2b constructs invisible after resolution), so their
   //     refusal reads the authored declaration.
+  // @door anatomy.grid-g7-refusal-fence
   const flow = parseGridAutoFlow(style['grid-auto-flow'] || 'row');
   if (flow.refusal) return { refusal: flow.refusal }; // grid-flow-column (P5b) / grid-flow-dense (P5)
   if (/^subgrid\b/.test((style['grid-template-columns'] ?? '').trim()) || /^subgrid\b/.test((style['grid-template-rows'] ?? '').trim())) {
@@ -388,6 +390,7 @@ export function promoteGridLayout(
         computedPx !== null &&
         parsed.tracks.length === computedPx.length &&
         parsed.tracks.every((t, i) => !('px' in t) || Math.abs(t.px - computedPx[i]) <= 0.5);
+      // @door anatomy.grid-declared-track-verify
       if (agrees) {
         receipts.push(
           `grid-tracks-declared: ${label}.${ch} carries the DECLARED list "${dv}" — verified against computed "${computedRaw}" (${parsed.tracks.length} tracks; every px track agrees ≤0.5px; fr/fit spellings resolve to used px in computed style and are carried from source)`,
@@ -403,6 +406,7 @@ export function promoteGridLayout(
         `grid-tracks-declared-unverified: ${label}.${ch} declared "${dv}" does not agree with computed "${computedRaw}" — declared candidate dropped; computed truth decides`,
       );
     }
+    // @door anatomy.grid-implicit-tracks-abandon
     if (implicitEvidence !== null) {
       return abandon(
         `${GRID_REFUSALS['grid-implicit-tracks']} — measured on ${label}.${ch}: the declaration "${implicitEvidence.declared}" lists ${implicitEvidence.declaredCount} track(s) while the resolved grid reads "${computedRaw}" (${computedPx?.length ?? '?'} tracks, implicit tracks included in Chromium's resolved value) — the occupancy grew the grid beyond the declared list, and carrying the resolved list would rewrite the declaration inside the contract (P9/N-DISP-02)`,
@@ -795,6 +799,7 @@ export function tableRoleFor(display: string, tag: string): string | null {
  *  1px clip box. Part of the UNION signature — a toned Badge renders an
  *  sr-only announcement span with the same tag+stems as the visible label,
  *  and occurrence matching would otherwise swap their identities. */
+// @door anatomy.sr-only-signature
 export const isSrOnlyStyle = (st: Record<string, string>): boolean =>
   (st['clip-path'] ?? '').startsWith('inset(50%') ||
   (st['overflow'] === 'hidden' && st['width'] === '1px' && st['height'] === '1px') ||
@@ -833,6 +838,7 @@ const childEls = (n: CapturedNode): CapturedNode[] =>
 /** A node draws NO box of its own: transparent background, no border, no
  *  shadow. (Geometry/padding are ignored — a box-less positioning div still
  *  reserves space but carries no anatomy.) */
+// @door anatomy.boxless-wrapper-unwrap
 export function isBoxlessNode(n: CapturedNode): boolean {
   const s = n.style;
   const bg = s['background-color'];
@@ -960,6 +966,7 @@ export function buildUnion(
   for (const cap of captures) {
     const key = `${cap.combo}__${cap.interaction}`;
     const out = new Map<number, FlatEl>();
+    // @door anatomy.union-signature-alignment
     const align = (u: UnionNode, node: CapturedNode, path: string) => {
       const sig = sigOf(node);
       if (sig !== u.sig && u.parent === null) {
@@ -1080,6 +1087,7 @@ export function rejoinStaticParts(
     if (captured.has(name)) continue;
     const el = part.element ?? (part.content || part.text !== undefined ? 'span' : 'div');
     const wantText = part.content ? sampleFor(part.content.prop) : part.text;
+    // @door anatomy.static-rejoin-evidence-floor
     const candidates = entries.filter((e) => {
       if (e.parent === null || staticByName.has(e.partName)) return false;
       if (e.rep.tag !== el) return false;
@@ -1146,6 +1154,7 @@ export function factorPresence(
   for (const ax of axisNames) sets.set(ax, new Set(presentCombos.map((c) => valueOf(c, ax))));
   // product check: every combo whose per-axis values are all in the sets
   // must be present, and vice versa (vice versa holds by construction).
+  // @door anatomy.presence-product-test
   for (const c of allCombos) {
     const inProduct = axisNames.every((ax) => sets.get(ax)!.has(valueOf(c, ax)));
     if (inProduct !== presentKeys.has(c.key)) {
@@ -1169,6 +1178,7 @@ export function factorPresence(
       continue;
     }
     if (presenceProps.has(ax)) {
+      // @door anatomy.presence-second-boolean-factor
       if (va.size === 1 && va.has(PRESENCE_ON)) {
         if (fact.visibleWhen) {
           // two boolean-true factors — visibleWhen carries one; the second
@@ -1181,6 +1191,7 @@ export function factorPresence(
         // present only when the boolean is OFF → hidden when ON (truthy)
         fact.hiddenWhen.push({ prop: ax });
       }
+    // @door anatomy.state-axis-presence-drop
     } else if (stateProps.includes(ax)) {
       if (va.size === 1 && va.has('false')) {
         if (contractProps && !contractProps.has(ax)) {
@@ -1384,6 +1395,7 @@ function svgStrokeAttrs(
   }
   const dash = el.style['stroke-dasharray'];
   const dashOffset = el.style['stroke-dashoffset'];
+  // @door anatomy.svg-dash-drop
   if (dashMode === 'drop-pathlength') {
     // Round 5d (owner finding: the check glyph drew as SEGMENTED
     // CAPSULES, not a continuous check): dash channels are
@@ -1539,6 +1551,7 @@ export function reconstructSvg(
   const inheritedFill = svgEl.style['fill'];
   const w = pxNum(svgEl.style['width']);
   const h = pxNum(svgEl.style['height']);
+  // @door anatomy.svg-grammar-fence
   if (w === null || h === null || w <= 0 || h <= 0) {
     receipts.push(`svg-size-unreadable: ${label} — computed width/height not px; asset refused`);
     return null;
@@ -1550,14 +1563,33 @@ export function reconstructSvg(
    *  `0 0 vb vb` — otherwise cx=SIZE lands off-center in the display box. */
   let circleCenter: number | null = null;
   let circleOnly = true;
-  const resolveFill = (fillRaw: string): string =>
-    preferCurrentColor && fillRaw && inheritedColor && fillRaw === inheritedColor
-      ? 'currentColor'
-      : fillRaw && inheritedFill && fillRaw === inheritedFill
-        ? ''
-        : fillRaw && inheritedColor && fillRaw === inheritedColor
-          ? 'currentColor'
-          : fillRaw;
+  // THE DOOR REGISTER — THE INHERITED-INK REWRITE STOPS BEING SILENT.
+  //
+  // This door rewrites a concrete literal colour to `currentColor`, so the
+  // colour never lands in the asset and the glyph paints whatever the CONSUMING
+  // surface's colour chain says. That is right when the chain is the
+  // component's own — and it is exactly the Polaris inherited-ink shape when
+  // the chain arrives from the PAGE: a provider sets `color` on an ancestor,
+  // the svg inherits it, the fill matches, the literal is folded away, and the
+  // generated surface (which has no provider) draws the glyph BLACK.
+  //
+  // The rewrite is unchanged. What changes is that each folded colour is now
+  // named once per asset, with the value it discarded, so the loss is greppable
+  // instead of invisible.
+  const foldedInk = new Map<string, string>();
+  // @door anatomy.svg-currentcolor-fold
+  const resolveFill = (fillRaw: string): string => {
+    const out =
+      preferCurrentColor && fillRaw && inheritedColor && fillRaw === inheritedColor
+        ? 'currentColor'
+        : fillRaw && inheritedFill && fillRaw === inheritedFill
+          ? ''
+          : fillRaw && inheritedColor && fillRaw === inheritedColor
+            ? 'currentColor'
+            : fillRaw;
+    if (out !== fillRaw && fillRaw) foldedInk.set(fillRaw, out === '' ? 'the svg host fill' : 'currentColor');
+    return out;
+  };
   const walkPaths = (n: CapturedNode): boolean => {
     for (const c of n.nodes) {
       if (c.t !== 'el') continue;
@@ -1616,6 +1648,7 @@ export function reconstructSvg(
         );
       } else if (el.tag === 'g') {
         if (!walkPaths(el)) return false;
+      // @door anatomy.svg-metadata-skip-recon
       } else if (SVG_NONPAINTING.has(el.tag)) {
         // CARBON LIVE-DEFECT ROUND (D1): <title>/<desc>/<metadata> are SVG
         // a11y METADATA — non-painting by spec. Refusing the asset over one
@@ -1640,8 +1673,16 @@ export function reconstructSvg(
   // viewBox reconstruction (NAMED): the viewBox attribute is not a computed
   // style — reconstructed as 0 0 W H from the svg's computed size, sanity-
   // checked against the path data's coordinate extent (a glyph drawn in a
+  // The receipt for `anatomy.svg-currentcolor-fold` — one line per discarded
+  // literal, emitted on every return path this function has.
+  for (const [was, now] of [...foldedInk].sort()) {
+    receipts.push(
+      `svg-currentcolor-folded: ${label} — the glyph's authored fill ${was} EQUALS the svg's inherited \`color\`${inheritedColor ? ` (${inheritedColor})` : ''} and is rewritten to ${now}, so the literal colour is NOT carried in the asset and the glyph paints whatever the consuming surface's colour chain says. When that chain arrives from the PAGE rather than the component (a theme provider setting \`color\` on an ancestor), the generated surface has nothing to inherit and the glyph draws black — the Polaris inherited-ink shape.`,
+    );
+  }
   // larger user space than its box would silently crop). Circle-only MUI
   // progress rings use the authored offset form `SIZE/2 SIZE/2 SIZE SIZE`.
+  // @door anatomy.svg-viewbox-reconstruct
   if (circleOnly && circleCenter !== null && circleCenter > 0) {
     const size = Math.round(circleCenter);
     const origin = size / 2;
@@ -1737,6 +1778,7 @@ export function promoteAnatomy(
    *  (grid-child-grow): on the real DOM a grid item ignores flex-grow, and on
    *  the canvas layoutGrow is silently accepted with no effect (P4) — minted,
    *  it would be a dead fact riding as an imported.* token (N-DISP-02). */
+  // @door anatomy.grid-child-grow-mint-refusal
   const refuseGridChildGrow = (parent: UnionNode): void => {
     for (const c of parent.children) {
       gridMintRefusals.set(
@@ -1750,6 +1792,7 @@ export function promoteAnatomy(
    *  grid the contract does not carry — refused from minting BY NAME with the
    *  abandoning reason (for placement beyond the declared track list that
    *  reason is the grid-implicit-tracks refusal, P9/N-DISP-02). */
+  // @door anatomy.grid-placement-mint-refusal
   const refuseGridPlacementMint = (parent: UnionNode, reason: string): void => {
     for (const c of parent.children) {
       for (const ch of GRID_PLACEMENT_CHANNELS) {
@@ -1845,6 +1888,7 @@ export function promoteAnatomy(
     if (!t) continue;
     const hostIdx = idxOf.get(t.host.id)!;
     const svgIdx = idxOf.get(t.svg.id)!;
+    // @door anatomy.svg-host-plan-first-wins
     if (svgPlans.has(hostIdx)) continue;
     svgHostOf.set(svgIdx, hostIdx);
     // per-combo markup over combos where the svg is present
@@ -1910,6 +1954,7 @@ export function promoteAnatomy(
     } else {
       // single-axis explanation: find an axis whose value partitions markup
       const comboByKey = new Map(enabled.map((c) => [c.key, c] as const));
+      // @door anatomy.svg-content-multi-axis
       const axis = space.axes.find((ax) => {
         const byValue = new Map<string, Set<string>>();
         for (const [k, m] of markups) {
@@ -1938,6 +1983,7 @@ export function promoteAnatomy(
     // consume the svg subtree. When the svg IS the host (no dedicated
     // wrapper), its OWN channels stay mintable — the per-tone fill cascades
     // to attribute-less paths in CSS; only descendants are consumed.
+    // @door anatomy.svg-subtree-consume
     const consume = (u: UnionNode) => {
       consumed.add(idxOf.get(u.id)!);
       for (const c of u.children) consume(c);
@@ -2077,6 +2123,7 @@ export function promoteAnatomy(
       // paint/size/geometry factoring already uses: uniform, or a function of
       // exactly ONE enum axis (then `literalsByProp`). At least one value must
       // actually draw, or there is nothing to carry.
+      // @door anatomy.pseudo-shadow-fold
       if (hostPart) {
         const drawsShadow = (v: string): boolean =>
           splitTopLevelCommas(v).some((layer) => {
@@ -2195,6 +2242,7 @@ export function promoteAnatomy(
         const el = union.alignedByKey.get(`${combo.key}__default`)![i];
         const st = el?.node.pseudo[pe];
         if (!st) continue;
+        // @door anatomy.pseudo-content-empty-only
         if (st['content'] !== '""') {
           notDrawn.set('content', `pseudo-content-not-canvas-ink: ${e.partName}${pe} carries content ${st['content']} — the bounded decor grammar promotes EMPTY-content decor boxes only. A glyph drawn by an icon-font ligature (Bootstrap/FontAwesome/Material carets, chevrons, close ×s) is real ink that does NOT reach the canvas; named refusal`);
           continue;
@@ -2253,6 +2301,7 @@ export function promoteAnatomy(
           Math.abs(m.a - m.d) < 0.01 &&
           m.a > 0.02 &&
           m.a < 0.999;
+        // @door anatomy.pseudo-transform-grammar
         const transformOk = isTranslateOnly || isOrthonormalRotate || isUniformScale;
         // PSEUDO-DECOR v2 (CARBON LIVE-DEFECT ROUND, D2) — DRAWN MEANS PAINTS
         // ANYTHING. v1 required an opaque-ish BACKGROUND, so a box made of a
@@ -2261,6 +2310,7 @@ export function promoteAnatomy(
         // it is why the live canvas showed a checkbox with no box at all.
         const maxBorder = Math.max(...BORDER_SIDES.map((s) => px(st[`border-${s}-width`]) ?? 0));
         const borderAlpha = alphaOf(st['border-top-color']);
+        // @door anatomy.pseudo-not-drawn-split
         const paints = alpha > 0 || (maxBorder > 0 && borderAlpha > 0);
         const drawn = paints && opacity > 0.05 && w !== null && h !== null && w > 0 && h > 0 && st['position'] === 'absolute';
         if (!drawn || isZeroScale) {
@@ -2311,6 +2361,7 @@ export function promoteAnatomy(
       // Bubbled decor: offsets are parent-relative — fold the HOST's border
       // widths in (absolute children position against the PADDING box) and
       // assert the parent's content box equals the host's border box.
+      // @door anatomy.pseudo-bubble-geometry
       if (hostIsShapeLeaf) {
         let geometryOk = e.parent !== null;
         for (const { combo } of drawnRows) {
@@ -2375,6 +2426,7 @@ export function promoteAnatomy(
           // (width > 0): Carbon's checkbox ::after check is white on
           // left+bottom and dark on zero-width top+right — requiring all
           // four colors to agree dropped the stroke entirely (Wave B.2).
+          // @door anatomy.pseudo-border-ink-color
           borderColor: (() => {
             const ink = BORDER_SIDES.filter((s) => borderW[s] > 0).map((s) => row.st[`border-${s}-color`] ?? '');
             if (ink.length > 0 && new Set(ink).size === 1) return ink[0];
@@ -2402,6 +2454,7 @@ export function promoteAnatomy(
       // on its `::before`. The box was carried and the shadow vanished with
       // no receipt (the shadow refusal above fires only when nothing else
       // paints). Named here, beside the carriage.
+      // @door anatomy.pseudo-shadow-uncarried
       {
         const shadowed = drawnRows.filter((r) => (r.st['box-shadow'] ?? 'none') !== 'none');
         if (shadowed.length > 0) {
@@ -2424,6 +2477,7 @@ export function promoteAnatomy(
       const enumAxes = space.axes.filter(
         (a) => !presenceProps.has(a.prop) && !stateProps.includes(a.prop) && contract.props.some((p) => p.name === a.prop),
       );
+      // @door anatomy.pseudo-enabled-plane-wins
       const isEnabledCombo = (c: Combo) => Object.values(c.stateFlags).every((v) => v !== true);
       const enabledDrawn = drawnRows.map((r, k) => ({ ...r, f: folded[k] })).filter((r) => isEnabledCombo(r.combo));
       const rowsForFactoring = enabledDrawn.length > 0 ? enabledDrawn : drawnRows.map((r, k) => ({ ...r, f: folded[k] }));
@@ -2468,6 +2522,7 @@ export function promoteAnatomy(
       const sizeOf = (f: Folded) => ({ w: f.w, h: f.h });
       const paintOf = (f: Folded) => ({ bg: f.bg, borderW: f.borderW, borderColor: f.borderColor, radius: f.radius });
       const rotOf = (f: Folded) => f.rot;
+      // @door anatomy.pseudo-uniform-or-one-axis
       const geomFact = factorByAxis(rowsForFactoring, offsetOf);
       if (!geomFact) {
         refusals.push(
@@ -2542,6 +2597,7 @@ export function promoteAnatomy(
         `${e.partName}${pe}`,
         new Set(contract.props.map((p) => p.name)),
       );
+      // @door anatomy.pseudo-presence-fences
       if (!fact) {
         refusals.push(`pseudo-decor-presence-uncorrelated: ${e.partName}${pe} drawn in ${drawnRows.length}/${domain.length} default-interaction combos and the drawn set does not factor per-axis — decor NOT promoted (named refusal)`);
         continue;
@@ -2746,6 +2802,7 @@ export function promoteAnatomy(
     // never a part. The capture drops these now; this is the promotion-side
     // backstop so a stale committed capture can never put an accessible
     // title on the canvas as visible ink.
+    // @door anatomy.svg-metadata-not-a-part
     if (SVG_NONPAINTING.has(e.rep.tag)) {
       refusals.push(`svg-metadata-not-a-part: ${e.partName} <${e.rep.tag}> is non-painting SVG metadata (SVG 1.1 §5.4) — never promoted; its accessible text is not canvas ink`);
       return null;
@@ -2760,6 +2817,7 @@ export function promoteAnatomy(
     // across every enabled combo is measured truth the curation got wrong
     // (Checkbox/Radio backdrop: curated 20×20 vs the package's 18×18). The
     // curated KIND (rect/ellipse) stays the reviewed call.
+    // @door anatomy.shape-geometry-recarry
     if (part.shape && (part.shape.kind === 'rect' || part.shape.kind === 'ellipse')) {
       const px = (v: string | undefined): number | null => {
         const m = /^(-?\d+(?:\.\d+)?)px$/.exec(v ?? '');
@@ -2791,6 +2849,7 @@ export function promoteAnatomy(
     if (!existing) {
       // element: captured tag (span/div default conventions preserved)
       const hasText = e.rep.nodes.some((n) => n.t === 'text' && n.v.trim().length > 0);
+      // @door anatomy.element-tag-omission
       if (e.rep.tag !== 'div' && !(hasText && e.rep.tag === 'span')) part.element = e.rep.tag;
       // text/content binding
       if (hasText) {
@@ -2861,6 +2920,7 @@ export function promoteAnatomy(
     //  descendant of a hidden ancestor DOES paint — refusing the ancestor
     //  would delete real ink). A part hidden in SOME combos is a state fact
     //  and rides the existing presence machinery untouched.
+    // @door anatomy.non-painting-part
     {
       const paintsNowhere = (el: FlatEl | null | undefined): string | null => {
         if (!el) return null;
@@ -2905,6 +2965,7 @@ export function promoteAnatomy(
     // part carries declared display:none — visually identical; the a11y
     // surface of the GENERATED component is contract-owned (semantics/role),
     // NAMED as a downgrade receipt.
+    // @door anatomy.sr-only-as-display-none
     const srOnly = isSrOnlyStyle(e.rep.style);
     if (srOnly) {
       part.declared = { ...part.declared, display: 'none' };
@@ -2916,6 +2977,7 @@ export function promoteAnatomy(
     // uniformly absolute is an overlay (Thumbnail's img fills its card) —
     // carried via the declared registry (round 4 grammar); its inset
     // channels mint like any other px channel.
+    // @door anatomy.absolute-position-uniform
     {
       const positions = new Set<string>();
       for (const combo of presentBy.get(i) ?? []) {
@@ -2954,6 +3016,7 @@ export function promoteAnatomy(
     // block and let a block Box render as a flex row). flex/inline-flex ride
     // Part.layout (the schema's own vocabulary; enrichLayout adds
     // direction/align/justify); other uniform keywords ride Part.declared.
+    // @door anatomy.display-vocabulary-gate
     {
       const displays = new Set<string>();
       for (const combo of presentBy.get(i) ?? []) {
@@ -3024,6 +3087,7 @@ export function promoteAnatomy(
     // enabled combo (>0, ≥2 distinct sizes or a sized axis) — the real
     // component keeps the square via pseudo-element padding hacks (Avatar's
     // ::after) that anatomy cannot carry; the RATIO is the carried fact.
+    // @door anatomy.aspect-square-mint
     {
       const px = (v: string | undefined): number | null => {
         const m = /^(-?\d+(?:\.\d+)?)px$/.exec(v ?? '');
@@ -3054,6 +3118,7 @@ export function promoteAnatomy(
     // the schema's own spelling. Without it, promoted containers hug and
     // justify: space-between has no room to justify (the Banner dismiss ×
     // rendered next to the title instead of at the ribbon's right edge).
+    // @door anatomy.full-width-grow-mint
     if (e.parent) {
       const pi = idxOf.get(e.parent.id)!;
       const px = (v: string | undefined): number | null => {
@@ -3089,6 +3154,7 @@ export function promoteAnatomy(
     if (present.length < enabled.length) {
       const contractPropNames = new Set(contract.props.map((p) => p.name));
       const fact = factorPresence(present, enabled, space.axes, presenceProps, stateProps, e.partName, contractPropNames);
+      // @door anatomy.presence-complement-cascade
       if (!fact) {
         // Round 5c: complement-of-product fallback — a default subtree an
         // alternative replaces (Tag's label under `linked`) is spellable as
@@ -3225,6 +3291,7 @@ export function promoteAnatomy(
     // one child with EVERY child declared `display:none`. A childless
     // paintless frame is LEFT ALONE — it can be a real spacer, and this
     // round has no measurement that says otherwise.
+    // @door anatomy.inert-overlay-wrapper
     {
       const kids = Object.values(childParts);
       const inkless = !part.text && !part.icon && !part.shape && !part.component && !part.slot;
@@ -3266,6 +3333,7 @@ export function promoteAnatomy(
   // extraction's layout.display is a source-reading guess; TextField's root
   // is a block in the browser, and a flex guess put the label beside the
   // field) — override is RECEIPTED, never silent.
+  // @door anatomy.root-display-override
   {
     const displays = new Set<string>();
     for (const combo of enabled) {
@@ -3358,6 +3426,7 @@ export function promoteAnatomy(
         if (Object.keys(newRoot.literals).length === 0) delete newRoot.literals;
       }
     } else {
+      // @door anatomy.root-grid-overrides-reviewed-layout
       if (newRoot.layout && Object.keys(newRoot.layout).length > 0) {
         receipts.push(
           `root-grid-overrides-reviewed-layout: computed truth promotes a structured grid; the reviewed layout (${Object.keys(newRoot.layout).join(', ')}) is replaced — flex-only fields are schema-invalid with display: "grid" (G1), receipted, never silent`,
@@ -3433,6 +3502,7 @@ export function promoteAnatomy(
     for (const [n, c] of Object.entries(p.parts ?? {})) collectNames(c, n);
   };
   collectNames(newRoot, 'root');
+  // @door anatomy.static-part-unrendered
   for (const [name] of staticByName) {
     if (!promotedNames.has(name)) {
       refusals.push(`static-part-unrendered: reviewed static part "${name}" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)`);
@@ -3449,6 +3519,7 @@ export function promoteAnatomy(
   // examples/<lib>/assets/icons/ by promote-floor and referenced by no
   // contract — a committed SVG file for a part that does not exist. Dropped
   // here, by NAME, at the same door that decides the part.
+  // @door anatomy.orphan-asset-drop
   for (const [name, owner] of [...assetOwner].sort()) {
     if (promotedNames.has(owner) || !assets.has(name)) continue;
     assets.delete(name);
@@ -3477,6 +3548,7 @@ export function promoteAnatomy(
     for (const c of Object.values(p.parts ?? {})) collectGates(c);
   };
   collectGates(newRoot);
+  // @door anatomy.optional-adornment-unset-materialize
   for (const axProp of structureGatingUnsetAxes) {
     if (!survivingGateProps.has(axProp)) continue;
     const ax = space.axes.find((a) => a.prop === axProp);
@@ -3563,6 +3635,7 @@ export function buildMultiRootUnion(
     roots.push({ name: rootPartName(base.real[r], classPrefix, r, rootCount), union, baseRoot: base.real[r] });
     receipts.push(...union.receipts);
   }
+  // @door anatomy.multi-root-count-varies
   for (const c of perCombo) {
     if (c.real.length !== rootCount) {
       receipts.push(

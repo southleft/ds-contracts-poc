@@ -588,6 +588,7 @@ export const stageFor = (cfg: CaptureConfig, comp: ComponentConfig): { width: nu
  *  and only then runs to the terminating `;`.
  *
  *  Returns the stripped text plus the count, so the caller can receipt it. */
+// @door capture.at-import-strip
 export function stripAtImports(css: string): { css: string; stripped: number } {
   const re = /@import\s*(?:url\(\s*)?(["'])(?:(?!\1)[\s\S])*\1\s*\)?[^;]*;/g;
   let stripped = 0;
@@ -612,6 +613,9 @@ export function stripAtImports(css: string): { css: string; stripped: number } {
 // `page.evaluate(<string>)` — the tsx `__name` serialization trap (see
 // visual-parity/render.ts).
 // ---------------------------------------------------------------------------
+// @door capture.shadow-host-descend
+// @door capture.slot-splice
+// @door capture.stage-root-first-box
 export const SHADOW_HELPERS_JS = `
   // POLICY DECISION 1 — CAPTURED ROOT OF A SHADOW HOST: DESCEND.
   // A custom-element host in Altitude carries NO :host rule at all (measured:
@@ -757,6 +761,9 @@ export function buildHarnessPage(
   // tag string. The package itself is imported once, for its registration side
   // effect, through `mount.imports`.
   const ce = cfg.library.customElements === true;
+  // @door capture.control-baseline-mint
+  // @door capture.custom-element-prop-omission
+  // @door capture.stage-geometry
   const entry = `import React from 'react';
 import { createRoot } from 'react-dom/client';
 ${ce ? '' : `import { ${importNames.join(', ')} } from '${cfg.library.package}';\n`}${extraImportLines.join('\n')}
@@ -992,6 +999,19 @@ export function preScriptTag(cfg: CaptureConfig): string {
  *  reader is precisely the failure this round keeps finding (a fixture written
  *  to contain what the real path cannot produce), so the gate evaluates the
  *  reader itself. */
+// @door capture.calc-var-candidate
+// @door capture.class-allow-filter
+// @door capture.closed-shadow-suspect
+// @door capture.empty-custom-prop-drop
+// @door capture.gdecl-grid-only
+// @door capture.pseudo-content-gate
+// @door capture.pseudo-existence-gate
+// @door capture.selector-match-gate
+// @door capture.shorthand-var-ceiling
+// @door capture.svg-metadata-source-drop
+// @door capture.text-node-admission
+// @door capture.unreadable-sheet-skip
+// @door capture.varprefix-off-switch
 export const captureJs = (selector: string, classAllow?: string, varPrefix?: string) => `(() => {
   ${SHADOW_HELPERS_JS}
   const stage = document.querySelector(${JSON.stringify(selector)});
@@ -1531,6 +1551,7 @@ export type Interaction = (typeof INTERACTIONS)[number];
  *  transition would capture its start value instead of its target — the
  *  steady-state poll handles those). Idempotent; re-applied before every
  *  capture so late-starting animations are caught. */
+// @door capture.infinite-animation-pin
 const pinInfiniteAnimationsJs = `(() => {
   const names = [];
   for (const a of document.getAnimations()) {
@@ -1649,6 +1670,7 @@ export async function settleStage(page: Page, stageSel: string): Promise<void> {
   const probe = settleProbeJs(stageSel);
   let prev = await page.evaluate(probe);
   let stableRuns = 0;
+  // @door capture.settle-bound
   for (let i = 0; i < 25; i++) {
     await page.waitForTimeout(60);
     const cur = await page.evaluate(probe);
@@ -1674,6 +1696,7 @@ export function readBoundaryReceipts(
   const walk = (n: CapturedNode, path: string): void => {
     const fill = n.style?.['-webkit-text-fill-color'];
     const color = n.style?.['color'];
+    // @door capture.text-fill-is-the-ink
     if (fill !== undefined && color !== undefined && fill !== color && !/^currentcolor$/i.test(fill.trim())) {
       folds.add(
         `text-fill-is-the-ink: ${where}${path} — the painted text colour is \`-webkit-text-fill-color: ${fill}\`, NOT \`color: ${color}\`; the \`color\` channel is folded to the fill at the read boundary so the contract mints the ink that is actually on screen (verified in the subject browser: the rasterised glyph is the fill)`,
@@ -1832,6 +1855,7 @@ export async function sweep(
         // capture — the RadioButton double-run instability. Reset to the
         // mount defaults; controlled inputs are unaffected (React re-asserts
         // their props). Named in provenance (formStateReset).
+        // @door capture.form-state-reset
         await page.evaluate(
           // SHADOW-DOM ROUND (W7): the inputs to reset can live INSIDE a
           // shadow root (al-toggle's checkbox does), and `querySelectorAll`
@@ -2167,6 +2191,7 @@ const markBaselineJs = `(() => {
  *  re-focuses the CONTAINER on focusout — never a ButtonBase — so the
  *  :focus-visible plane genuinely leaves the item. STRING evaluate (the tsx
  *  __name serialization trap). */
+// @door capture.portal-autofocus-blur
 const blurActiveJs = `(() => {
   const el = document.activeElement;
   if (!el || el === document.body || typeof el.blur !== 'function') return '';
@@ -2179,6 +2204,10 @@ const blurActiveJs = `(() => {
  *  serialization trap). Reads every new root as a full CapturedNode using the
  *  SAME longhand set (window.__ALL_PROPS) and ::before/::after rule as the
  *  census captureJs, plus role/aria-modal for root descent. */
+// @door capture.inert-sentinel-in-page
+// @door capture.portal-body-scope
+// @door capture.portal-wrapper-unwrap
+// @door capture.wrapper-zero-area-paints-nothing
 const capturePortalJs = (classAllow?: string, classPrefix?: string) => `(() => {
   const baseline = window.__depthBaseline;
   const stage = document.getElementById(${JSON.stringify(PORTAL_STAGE_ID)});
@@ -2431,6 +2460,7 @@ export async function capturePortalRoots(
   // A CRASHED RENDER IS NOT A MEASUREMENT — refuse BY NAME, with the library's
   // own message, instead of letting the root-count logic publish a zero. See
   // the window 'error' listener in buildPortalHarnessPage for the argument.
+  // @door capture.render-threw-refusal
   if (raw.renderErrors && raw.renderErrors.length > 0) {
     throw new Error(
       `RENDER-THREW refusal — the component's render raised ${raw.renderErrors.length} uncaught error(s) in the page, so the DOM this combo produced is not the component's truth and every root count read from it is meaningless: ${raw.renderErrors
@@ -2561,6 +2591,7 @@ function firstBoxDescendant(n: CapturedNode): CapturedNode | null {
  *  stays and the multi-part overlay (scrim behind, paper centered on top)
  *  lowers as designed. Tooltip's popper is `position: absolute` — never a
  *  candidate. Returns null when the rule does not fire. */
+// @door capture.scrim-demotion
 export function demoteFullBleedScrim(
   n: CapturedNode,
 ): { root: CapturedNode; dropped: string[] } | null {
@@ -2623,9 +2654,11 @@ export function demoteFullBleedScrim(
  *  sentinels as siblings appended to `document.body`), and the rule docs/22 §6
  *  already states — *a focus-trap sentinel is DOM plumbing, not anatomy* —
  *  never depended on WHERE the sentinel was attached. */
+// @door capture.inert-plumbing-root-drop
 export const isInertPlumbing = (k: CapturedNode): boolean =>
   k.classes.length === 0 && !capturedDrawsBox(k) && k.nodes.length === 0;
 
+// @door capture.inert-portal-children-strip
 export function stripInertPortalChildren(n: CapturedNode): { root: CapturedNode; dropped: number } {
   const inert = isInertPlumbing;
   const kept = n.nodes.filter((c) => c.t !== 'el' || !inert((c as { el: CapturedNode }).el));
@@ -2705,6 +2738,7 @@ export async function portalSweep(
     const portaled = live.filter((r) => r.location === 'portaled');
     const inStage = live.filter((r) => r.location === 'in-stage');
     let picked: CapturedRoot;
+    // @door capture.single-root-policy
     if (portaled.length === 1) {
       picked = portaled[0];
       if (inStage.length > 0) {

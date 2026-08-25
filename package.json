@@ -219,6 +219,7 @@
     "paste:check": "tsx extract/figma/paste-door-check.ts",
     "gauntlet:intake": "tsx extract/figma/gauntlet/intake.ts",
     "closure:check": "tsx extract/figma/channel-closure-check.ts",
+    "channel-table:check": "tsx scripts/channel-table-check.ts",
     "dagger:census": "tsx extract/figma/dagger-census.ts",
     "seed:gen": "tsx extract/computed/seed-gen.ts",
     "seed:verify": "for L in carbon mui tailwind; do echo \"== $L ==\"; tsx extract/computed/seed-gen.ts extract/computed/configs/$L.json --verify || FAIL=1; done; exit ${FAIL:-0}",
@@ -232,6 +233,9 @@
     "prop-collision:check": "tsx core/prop-collision-check.ts",
     "parity:snapshot:rest": "tsx parity/snapshot-rest.ts",
     "census:check": "tsx scripts/canvas-census-check.ts",
+    "door-register:check": "tsx scripts/door-register-check.ts",
+    "door-register:self-test": "tsx scripts/door-register-check.ts --self-test",
+    "door-census": "tsx scripts/door-census.ts",
     "census:render": "tsx extract/figma/census/render.ts",
     "census:d2c:record": "tsx extract/figma/census/design-to-code.ts --write",
     "census:d2c:render": "tsx extract/figma/census/d2c-render.ts"
