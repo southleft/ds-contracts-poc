@@ -148,6 +148,15 @@ async function main() {
   }
 
   const browser: Browser = await chromium.launch({ executablePath: chromiumExecutable(), headless: true });
+  /**
+   * THE BROWSER THAT ACTUALLY RENDERS THIS RE-FUSE — asked of the live instance,
+   * never copied from the capture. `sweep.browserVersion` below stays the
+   * CAPTURE's browser on purpose: it feeds `bareBrowser` into the enriched
+   * contract's description, which must stay byte-identical to the committed
+   * contract on an offline re-fuse. The two facts are different and are now
+   * both recorded.
+   */
+  const renderBrowserVersion = browser.version();
   const context = await browser.newContext({
     viewport: cfg.browser.viewport,
     deviceScaleFactor: cfg.browser.deviceScaleFactor,
@@ -455,6 +464,7 @@ async function main() {
       origShotsDir: path.join(outDir, '.no-orig-shots'), // absent by design — pixel not re-scored offline
       outDir: artifactDir,
       browserVersion: sweep.browserVersion,
+      renderBrowserVersion,
       fusionCounts: {
         boundConfirmed,
         boundCells: boundRows.length,
@@ -481,6 +491,7 @@ async function main() {
       component: comp.name,
       config: path.relative(REPO, CONFIG_PATH),
       capturedBrowser: sweep.browserVersion,
+      renderedBrowser: `Chromium ${renderBrowserVersion} (playwright-core, headless)`,
       declared: { base: declaredBase, state: declaredState },
       decisionsReapplied: decisionNotes,
       scorecard: { ...scorecard, rows: scorecard.rows },
@@ -491,10 +502,11 @@ async function main() {
       computed: { pctEqual: number; cellsEqual: number; cellsCompared: number; rowsFullyEqual: number; rows: number };
       fusion: { contradictions: number };
     };
-    const fmt = (n: number) => n.toFixed(3);
+    /** NULL is "nothing was compared", never a number — say so rather than print one. */
+    const fmt = (n: number | null) => (n === null ? 'UNMEASURED (0 cells compared)' : `${n.toFixed(3)}%`);
     console.log(`\n== ${comp.name} (offline regate)`);
-    console.log(`  committed gate (harness run): ${fmt(committed.computed.pctEqual)}% computed-equal (${committed.computed.cellsEqual}/${committed.computed.cellsCompared}; ${committed.computed.rowsFullyEqual}/${committed.computed.rows} rows fully equal)`);
-    console.log(`  re-run gate (current code):   ${fmt(scorecard.computed.pctEqual)}% computed-equal (${scorecard.computed.cellsEqual}/${scorecard.computed.cellsCompared}; ${scorecard.computed.rowsFullyEqual}/${scorecard.computed.rows} rows fully equal)`);
+    console.log(`  committed gate (harness run): ${fmt(committed.computed.pctEqual)} computed-equal (${committed.computed.cellsEqual}/${committed.computed.cellsCompared}; ${committed.computed.rowsFullyEqual}/${committed.computed.rows} rows fully equal)`);
+    console.log(`  re-run gate (current code):   ${fmt(scorecard.computed.pctEqual)} computed-equal (${scorecard.computed.cellsEqual}/${scorecard.computed.cellsCompared}; ${scorecard.computed.rowsFullyEqual}/${scorecard.computed.rows} rows fully equal)`);
     console.log(`  declared facts carried: ${declaredBase.length} base + ${declaredState.length} state · code-only remaining: ${prep.codeOnly.length} base + ${prep.stateCodeOnly.length} state`);
     console.log(`  human-acked decisions re-applied: ${decisionNotes.filter((d) => d.startsWith('applied')).length}${decisionNotes.some((d) => d.startsWith('SKIPPED')) ? ` (${decisionNotes.filter((d) => d.startsWith('SKIPPED')).length} SKIPPED — named in regate.scorecard.json)` : ''} — the harness gates this same resolved contract (run.ts:440)`);
     console.log(`  bound contradictions: committed ${committed.fusion.contradictions} vs re-probe ${contradictions.length}${committed.fusion.contradictions === contradictions.length ? ' (probe context equivalent)' : '  ← PROBE-CONTEXT DRIFT — investigate before quoting'}`);

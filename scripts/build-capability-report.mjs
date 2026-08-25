@@ -201,9 +201,17 @@ const realCards = scorecards.filter((s) => LIB_DIRS.has(s.corpus)).sort((a, b) =
 const confCards = scorecards.filter((s) => s.corpus === 'conformance').sort((a, b) => a.rel.localeCompare(b.rel));
 const strayCards = scorecards.filter((s) => !LIB_DIRS.has(s.corpus) && s.corpus !== 'conformance');
 
+// A scorecard with cellsCompared === 0 compared NOTHING. gate.ts returns NULL
+// for its pctEqual (@door gate.empty-comparison-is-100) — it used to return 100,
+// which sat in this mean and was counted at ">= 90%" as if it were perfect.
+// Excluded from the MEAN and the thresholds by name; still counted as a
+// component, because it exists and was run. An unmeasured component is not
+// ">= 90%", so the thresholds narrow rather than the denominator.
 const pctOf = (s) => s.v.computed.pctEqual;
-const realPcts = realCards.map(pctOf);
+const realUnmeasured = realCards.filter((s) => s.v.computed.cellsCompared === 0);
+const realPcts = realCards.filter((s) => s.v.computed.cellsCompared > 0).map(pctOf);
 const REAL_N = realCards.length;
+const REAL_MEASURED = realPcts.length;
 const REAL_MEAN = mean(realPcts);
 const REAL_MEDIAN = median(realPcts);
 const REAL_GE90 = realPcts.filter((x) => x >= 90).length;
