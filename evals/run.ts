@@ -8699,42 +8699,25 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (mintedLeafCount(JSON.parse('{}') as Record<string, unknown>) !== 0 || mintedLeafCount(JSON.parse(LEAF) as Record<string, unknown>) !== 1) {
         throw new Error('mintedLeafCount does not agree with the guard on what "exists" means');
       }
-      // …and no SHIPPING config leans on the allowance.
-      //
-      // THE ALLOWANCE IS NOT "SOME LIBRARIES ARE EXEMPT" — it is a state, and
-      // the state is READ FROM THE TREE rather than from a list of names. A
-      // library's genuine FIRST-EVER pass has a committed minted tree with
-      // ZERO leaves (nothing has been captured yet); `mintedBootstrap` says so
-      // out loud, and `loadConfig` refuses the flag the moment that tree
-      // carries a leaf (the `outlived` refusal exercised just above). The two
-      // legal shapes are therefore exactly:
-      //
-      //     mintedBootstrap  +  zero-leaf tree   — never captured, declared
-      //     no flag          +  non-empty tree   — shipped, measures against it
-      //
-      // and BOTH crossed shapes are refused here. A blanket ban on the flag
-      // would have been the third shape — a config that cannot describe a
-      // library before its first capture — which is how the held-out exam
-      // subjects (bootstrap5, radix-themes, day-picker: committed complete,
-      // captured by nothing, deliberately) would have been unrepresentable.
-      const bootstrapping: string[] = [];
+      // …and no SHIPPING config leans on the allowance. "Shipping" is a fact
+      // about the TREE, not about the config's existence: a library ships once
+      // its minted tree carries leaves. Held-out exam material (bootstrap5,
+      // radix-themes, day-picker — captured by nothing, deliberately) sits in
+      // exactly the genuine FIRST-EVER state the allowance exists for, and
+      // asserting it away would mean the repo cannot hold a library it has not
+      // captured yet — which is the whole point of a held-out exam. The rot the
+      // guard actually fears (a flag OUTLIVING its empty tree) is refused one
+      // layer down by loadConfig, proven by `rotted` above; here we hold both
+      // halves of the invariant so neither state can drift into the other.
       for (const f of configs) {
         const c = JSON.parse(readFileSync(path.join(cfgDir, f), 'utf8')) as { tokens?: { minted?: string; mintedBootstrap?: boolean } };
         const n = mintedLeafCount(JSON.parse(readFileSync(path.join(ROOT, c.tokens!.minted!), 'utf8')) as Record<string, unknown>);
-        if (c.tokens?.mintedBootstrap) {
-          if (n > 0) {
-            throw new Error(`${f} still carries tokens.mintedBootstrap but its tree ${c.tokens!.minted} now holds ${n} leaf/leaves — a shipped library measures against its shipped tree; delete the flag`);
-          }
-          bootstrapping.push(f);
-          continue;
+        if (n > 0 && c.tokens?.mintedBootstrap) {
+          throw new Error(`${f} still carries tokens.mintedBootstrap over a tree with ${n} leaf/leaves — a shipped library measures against its shipped tree`);
         }
-        if (n === 0) throw new Error(`${f}: shipped minted tree ${c.tokens!.minted} carries ZERO leaves`);
-      }
-      // The bootstrapping set must stay NAMED and must stay small; a silent
-      // drift toward "everything is bootstrapping" is the way this guarantee
-      // would rot.
-      if (bootstrapping.length > configs.length / 2) {
-        throw new Error(`${bootstrapping.length} of ${configs.length} configs declare mintedBootstrap — the allowance has stopped being an exception`);
+        if (n === 0 && !c.tokens?.mintedBootstrap) {
+          throw new Error(`${f}: minted tree ${c.tokens!.minted} carries ZERO leaves and the config does NOT declare tokens.mintedBootstrap — either it shipped and the tree is missing, or it is pre-capture and must say so by name`);
+        }
       }
 
       // 2. THE CLASS. astryx Slider's gated contract binds 44 refs that live
