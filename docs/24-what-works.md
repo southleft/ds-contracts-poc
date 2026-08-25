@@ -2,7 +2,7 @@
 
 *The success-side counterpart to [23 — Known Limitations](23-known-limitations.md). Written for a design engineer deciding whether to adopt this: what is **proven**, and **how it was measured**.*
 
-> **This file is generated. Do not edit it.** `npm run capability:report` rebuilds it; `npm run capability:fresh` refuses if the committed bytes differ from a rebuild, and one of the 225 evals runs that refusal.
+> **This file is generated. Do not edit it.** `npm run capability:report` rebuilds it; `npm run capability:fresh` refuses if the committed bytes differ from a rebuild, and one of the 228 evals runs that refusal.
 
 This is the most dangerous document in the repository, because its output is
 flattering numbers, and it is built to be read with that in mind. Every number
@@ -28,7 +28,7 @@ In the other direction, a 599-variant Figma kit converted to code scores
 canvas→code→canvas executes through the fact diff on **15 of 15** components with every
 one of 36,287 facts classified as matched, diverged, lost or invented rather than dropped in silence.
 Exact structured projection is separately evidenced: **0 verified exact, 15 legacy unverified, 0 refused**.
-The whole thing is pinned by 225 executable claim gates and a 292-file byte-identical
+The whole thing is pinned by 228 executable claim gates and a 292-file byte-identical
 generation manifest. **What that does not say:** those 116 components are
 11.1% of the 9 libraries they came from, and they were picked because they were the tractable ones.
 
@@ -329,14 +329,14 @@ asserted in prose.
 | generated source, byte-identical | 292 files hashed | a contract change altering generated code without review | `evals/golden.json` |
 | capture double-sweep identity | 205/205 runs | a capture whose second sweep disagrees with its first | `extract/computed/out/**/numbers.json`, `determinism` |
 | browser captures behind the corpus | 11,849 | a floor quoted from a sample smaller than it claims | same files, `captures` |
-| executable claims | 225 gates | a documented behaviour with no test | `evals/results.json` |
+| executable claims | 228 gates | a documented behaviour with no test | `evals/results.json` |
 | dropped-fact receipt count | 116 pinned exactly | honesty being switched off unnoticed — see §6 | `extract/figma/dagger-census.json` |
 | doc numbers vs the repo | gated | a doc quoting a number the repo no longer produces | `scripts/docs-numbers-check.mjs` |
 | this document vs its sources | `--check` | this page going stale while still reading as current | `scripts/build-capability-report.mjs` |
 
 ### 5.1 The claim suite by class
 
-The 225 evals are not all "does it work". They are classified by what they
+The 228 evals are not all "does it work". They are classified by what they
 claim, and the largest classes after extraction are **detection** and
 **refusal** — gates that fail if the engine *stops* saying no. That balance is
 the point: an engine that carries everything is not a better engine, it is one
@@ -344,8 +344,8 @@ that has stopped telling you what it could not do.
 
 | claim class | gates | what the class asserts | source |
 |---|---|---|---|
-| `C1-determinism` | 35 | same input, same bytes out | `evals/results.json` |
-| `C2-refusal` | 36 | the engine refuses BY NAME rather than guessing | `evals/results.json` |
+| `C1-determinism` | 36 | same input, same bytes out | `evals/results.json` |
+| `C2-refusal` | 38 | the engine refuses BY NAME rather than guessing | `evals/results.json` |
 | `C3-detection` | 67 | a defect or drift is caught, not silently absorbed | `evals/results.json` |
 | `C4-convergence` | 4 | a round trip settles instead of oscillating | `evals/results.json` |
 | `C5-extraction` | 64 | a fact is carried out of a real library correctly | `evals/results.json` |
@@ -510,7 +510,7 @@ earlier for a different purpose.
 |---|---|---|---|
 | components measured AND backed by a committed contract = components pinned by the drift instrument | 113 — `extract/computed/out/**/scorecard.json ∩ examples/*/contracts/*.contract.json` | 113 — `docs/22-generality.md §8.3, "pinned" total` | ✔ |
 | contracts committed under `examples/<lib>/contracts` = the coverage table's committed column | 116 — `examples/*/contracts/*.contract.json` | 116 — `docs/22-generality.md §8.3, "contracts committed" total` | ✔ |
-| the eval suite has as many result rows as it claims | 225 — `evals/results.json → results.length` | 225 — `same file → total` | ✔ |
+| the eval suite has as many result rows as it claims | 228 — `evals/results.json → results.length` | 228 — `same file → total` | ✔ |
 | every capture run carries the two-sweep determinism receipt | 205 — `extract/computed/out/**/numbers.json` | 205 — `count of numbers.json files` | ✔ |
 | every scorecard falls in a known corpus | 0 — `extract/computed/out/**/scorecard.json` | 0 — `the library registry in this script` | ✔ |
 | every round-trip execution reached the fact diff | 15 — `extract/figma/roundtrip-uui/report.json → totals.roundTripClosed` | 15 — `same file → totals.components` | ✔ |
@@ -551,9 +551,9 @@ npm run capability:fresh
 | artifact | sha256 (12) | bytes | what it supplied |
 |---|---|---|---|
 | `conformance/MANIFEST.json` | `7121abd2ed06` | 87,156 | CSS/DOM frontier vocabulary |
-| `docs/22-generality.md` | `c8f3b60ba75d` | 73,271 | coverage denominators (docs/22 §8.3 table) |
+| `docs/22-generality.md` | `0ac8c380ce9e` | 73,424 | coverage denominators (docs/22 §8.3 table) |
 | `evals/golden.json` | `c3d39dc59798` | 32,256 | generated-source golden manifest |
-| `evals/results.json` | `5081770dbb7e` | 6,982 | executable claim suite (registry ids + size; the pass column is the suite's own output) |
+| `evals/results.json` | `83d84e69c87d` | 7,062 | executable claim suite (registry ids + size; the pass column is the suite's own output) |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
 | `extract/computed/out/**/numbers.json` | `40515b87af13` | 1,225,534 | capture counts + determinism receipts — 205 files |
 | `extract/computed/out/**/scorecard.json` | `34cd563c9729` | 19,798,337 | computed-equality per component — 205 files |

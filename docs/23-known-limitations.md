@@ -411,7 +411,8 @@ PROVENANCE-sourced and no commit since has touched those paths. Flagged as
 such rather than presented as freshly verified.*
 
 - **MUI's Accordion has no expand chevron** — `expandIcon` takes a React
-  element, the marker grammar resolves package *exports* only, and the pinned
+  element, the marker grammar resolves package *exports* and pinned literals
+  (`$date`, `$classTokens`) only, and the pinned
   sandbox has no `@mui/icons-material`. A hand-drawn chevron would be a
   fabricated canvas fact, so there is none.
 - **Polaris RadioButton's selected dot** (`::before` decor) — not carried.
