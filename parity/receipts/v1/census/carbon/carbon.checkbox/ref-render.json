@@ -1,0 +1,60 @@
+{
+  "id": "carbon.checkbox",
+  "library": "carbon",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@carbon/react",
+    "version": "1.112.0",
+    "recipe": "examples/carbon sandbox (.carbon-sandbox; examples/carbon/README) mounted per extract/computed/configs/carbon.json"
+  },
+  "configPath": "extract/computed/configs/carbon.json",
+  "component": "Checkbox",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "checked-unchecked",
+      "status": "rendered",
+      "png": "ref-checked-unchecked.png",
+      "props": {
+        "id": "carbon-checkbox",
+        "labelText": "Checkbox",
+        "checked": false,
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "checked-checked",
+      "status": "rendered",
+      "png": "ref-checked-checked.png",
+      "props": {
+        "id": "carbon-checkbox",
+        "labelText": "Checkbox",
+        "checked": true,
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "checked-indeterminate",
+      "status": "rendered",
+      "png": "ref-checked-indeterminate.png",
+      "props": {
+        "id": "carbon-checkbox",
+        "labelText": "Checkbox",
+        "checked": false,
+        "indeterminate": true,
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 3,
+  "unmappable": 0
+}

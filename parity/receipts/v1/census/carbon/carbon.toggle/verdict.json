@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "gray/green track + knob position match both states",
  "reviewedAt": "3f3b23b4",

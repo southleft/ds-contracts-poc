@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "chevron + title + body rows with dividers match across align/size; the code render carries a stray leading list dot the canvas does not draw",
  "reviewedAt": "3f3b23b4",

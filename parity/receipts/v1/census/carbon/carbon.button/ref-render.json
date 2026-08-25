@@ -1,0 +1,177 @@
+{
+  "id": "carbon.button",
+  "library": "carbon",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@carbon/react",
+    "version": "1.112.0",
+    "recipe": "examples/carbon sandbox (.carbon-sandbox; examples/carbon/README) mounted per extract/computed/configs/carbon.json"
+  },
+  "configPath": "extract/computed/configs/carbon.json",
+  "component": "Button",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "kind-primary__size-xs",
+      "status": "rendered",
+      "png": "ref-kind-primary__size-xs.png",
+      "props": {
+        "kind": "primary",
+        "size": "xs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-primary__size-sm",
+      "status": "rendered",
+      "png": "ref-kind-primary__size-sm.png",
+      "props": {
+        "kind": "primary",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-primary__size-md",
+      "status": "rendered",
+      "png": "ref-kind-primary__size-md.png",
+      "props": {
+        "kind": "primary",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-primary__size-lg",
+      "status": "rendered",
+      "png": "ref-kind-primary__size-lg.png",
+      "props": {
+        "kind": "primary",
+        "size": "lg"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-primary__size-xl",
+      "status": "rendered",
+      "png": "ref-kind-primary__size-xl.png",
+      "props": {
+        "kind": "primary",
+        "size": "xl"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-primary__size-2xl",
+      "status": "rendered",
+      "png": "ref-kind-primary__size-2xl.png",
+      "props": {
+        "kind": "primary",
+        "size": "2xl"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-secondary__size-xs",
+      "status": "rendered",
+      "png": "ref-kind-secondary__size-xs.png",
+      "props": {
+        "kind": "secondary",
+        "size": "xs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-tertiary__size-xs",
+      "status": "rendered",
+      "png": "ref-kind-tertiary__size-xs.png",
+      "props": {
+        "kind": "tertiary",
+        "size": "xs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-ghost__size-xs",
+      "status": "rendered",
+      "png": "ref-kind-ghost__size-xs.png",
+      "props": {
+        "kind": "ghost",
+        "size": "xs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-danger__size-xs",
+      "status": "rendered",
+      "png": "ref-kind-danger__size-xs.png",
+      "props": {
+        "kind": "danger",
+        "size": "xs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-danger-primary__size-xs",
+      "status": "rendered",
+      "png": "ref-kind-danger-primary__size-xs.png",
+      "props": {
+        "kind": "danger--primary",
+        "size": "xs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-danger-ghost__size-xs",
+      "status": "rendered",
+      "png": "ref-kind-danger-ghost__size-xs.png",
+      "props": {
+        "kind": "danger--ghost",
+        "size": "xs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-danger-tertiary__size-xs",
+      "status": "rendered",
+      "png": "ref-kind-danger-tertiary__size-xs.png",
+      "props": {
+        "kind": "danger--tertiary",
+        "size": "xs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-primary__size-xs__state-active",
+      "status": "rendered",
+      "png": "ref-kind-primary__size-xs__state-active.png",
+      "props": {
+        "kind": "primary",
+        "size": "xs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-primary__size-xs__state-focus-visible",
+      "status": "rendered",
+      "png": "ref-kind-primary__size-xs__state-focus-visible.png",
+      "props": {
+        "kind": "primary",
+        "size": "xs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-primary__size-xs__state-hover",
+      "status": "rendered",
+      "png": "ref-kind-primary__size-xs__state-hover.png",
+      "props": {
+        "kind": "primary",
+        "size": "xs"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 16,
+  "unmappable": 0
+}

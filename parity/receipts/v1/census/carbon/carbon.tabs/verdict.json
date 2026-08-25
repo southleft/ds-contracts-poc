@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "tab row with active underline matches; default/active/hover previews",
  "reviewedAt": "3f3b23b4",

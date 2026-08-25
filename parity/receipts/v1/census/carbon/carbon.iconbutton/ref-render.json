@@ -1,0 +1,115 @@
+{
+  "id": "carbon.iconbutton",
+  "library": "carbon",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@carbon/react",
+    "version": "1.112.0",
+    "recipe": "examples/carbon sandbox (.carbon-sandbox; examples/carbon/README) mounted per extract/computed/configs/carbon.json"
+  },
+  "configPath": "extract/computed/configs/carbon.json",
+  "component": "IconButton",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "kind-primary__size-xs",
+      "status": "rendered",
+      "png": "ref-kind-primary__size-xs.png",
+      "props": {
+        "label": "Add",
+        "renderIcon": {
+          "$import": "@carbon/icons-react#Add"
+        },
+        "kind": "primary",
+        "size": "xs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-primary__size-sm",
+      "status": "rendered",
+      "png": "ref-kind-primary__size-sm.png",
+      "props": {
+        "label": "Add",
+        "renderIcon": {
+          "$import": "@carbon/icons-react#Add"
+        },
+        "kind": "primary",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-primary__size-md",
+      "status": "rendered",
+      "png": "ref-kind-primary__size-md.png",
+      "props": {
+        "label": "Add",
+        "renderIcon": {
+          "$import": "@carbon/icons-react#Add"
+        },
+        "kind": "primary",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-primary__size-lg",
+      "status": "rendered",
+      "png": "ref-kind-primary__size-lg.png",
+      "props": {
+        "label": "Add",
+        "renderIcon": {
+          "$import": "@carbon/icons-react#Add"
+        },
+        "kind": "primary",
+        "size": "lg"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-secondary__size-xs",
+      "status": "rendered",
+      "png": "ref-kind-secondary__size-xs.png",
+      "props": {
+        "label": "Add",
+        "renderIcon": {
+          "$import": "@carbon/icons-react#Add"
+        },
+        "kind": "secondary",
+        "size": "xs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-tertiary__size-xs",
+      "status": "rendered",
+      "png": "ref-kind-tertiary__size-xs.png",
+      "props": {
+        "label": "Add",
+        "renderIcon": {
+          "$import": "@carbon/icons-react#Add"
+        },
+        "kind": "tertiary",
+        "size": "xs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-ghost__size-xs",
+      "status": "rendered",
+      "png": "ref-kind-ghost__size-xs.png",
+      "props": {
+        "label": "Add",
+        "renderIcon": {
+          "$import": "@carbon/icons-react#Add"
+        },
+        "kind": "ghost",
+        "size": "xs"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 7,
+  "unmappable": 0
+}

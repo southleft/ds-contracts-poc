@@ -1,0 +1,157 @@
+{
+  "id": "carbon.tag",
+  "library": "carbon",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@carbon/react",
+    "version": "1.112.0",
+    "recipe": "examples/carbon sandbox (.carbon-sandbox; examples/carbon/README) mounted per extract/computed/configs/carbon.json"
+  },
+  "configPath": "extract/computed/configs/carbon.json",
+  "component": "Tag",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "type-red__size-sm",
+      "status": "rendered",
+      "png": "ref-type-red__size-sm.png",
+      "props": {
+        "type": "red",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-red__size-md",
+      "status": "rendered",
+      "png": "ref-type-red__size-md.png",
+      "props": {
+        "type": "red",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-red__size-lg",
+      "status": "rendered",
+      "png": "ref-type-red__size-lg.png",
+      "props": {
+        "type": "red",
+        "size": "lg"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-magenta__size-sm",
+      "status": "rendered",
+      "png": "ref-type-magenta__size-sm.png",
+      "props": {
+        "type": "magenta",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-purple__size-sm",
+      "status": "rendered",
+      "png": "ref-type-purple__size-sm.png",
+      "props": {
+        "type": "purple",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-blue__size-sm",
+      "status": "rendered",
+      "png": "ref-type-blue__size-sm.png",
+      "props": {
+        "type": "blue",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-cyan__size-sm",
+      "status": "rendered",
+      "png": "ref-type-cyan__size-sm.png",
+      "props": {
+        "type": "cyan",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-teal__size-sm",
+      "status": "rendered",
+      "png": "ref-type-teal__size-sm.png",
+      "props": {
+        "type": "teal",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-green__size-sm",
+      "status": "rendered",
+      "png": "ref-type-green__size-sm.png",
+      "props": {
+        "type": "green",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-gray__size-sm",
+      "status": "rendered",
+      "png": "ref-type-gray__size-sm.png",
+      "props": {
+        "type": "gray",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-cool-gray__size-sm",
+      "status": "rendered",
+      "png": "ref-type-cool-gray__size-sm.png",
+      "props": {
+        "type": "cool-gray",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-warm-gray__size-sm",
+      "status": "rendered",
+      "png": "ref-type-warm-gray__size-sm.png",
+      "props": {
+        "type": "warm-gray",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-high-contrast__size-sm",
+      "status": "rendered",
+      "png": "ref-type-high-contrast__size-sm.png",
+      "props": {
+        "type": "high-contrast",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-outline__size-sm",
+      "status": "rendered",
+      "png": "ref-type-outline__size-sm.png",
+      "props": {
+        "type": "outline",
+        "size": "sm"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 14,
+  "unmappable": 0
+}
