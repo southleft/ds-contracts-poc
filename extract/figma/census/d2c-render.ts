@@ -358,10 +358,20 @@ async function renderKit(def: D2cKitDef, token: string): Promise<void> {
   for (const [id, { receipt }] of cellsBySet) {
     const dir = path.join(REPO, D2C_DIR, def.kit, id);
     mkdirSync(dir, { recursive: true });
-    for (const f of readdirSync(dir)) if (/^(code|canvas)-.*\.png$/.test(f)) rmSync(path.join(dir, f));
+    // CLEARED ONLY AT THE POINT OF REPLACEMENT (2026-08-25, same class as the
+    // first-pass packet defect). This clear used to run HERE, before the loop
+    // — and the very next statement can `throw` on a cell that did not mount,
+    // which left the committed pair directory wiped and nothing written back.
+    // A set that produces no raster now destroys nothing.
+    let cleared = false;
     for (const cell of receipt.cells) {
       const h = await page.$(`[data-cell="${id}__${cell.slug}"]`);
       if (!h) throw new Error(`${def.kit}/${id}: cell ${cell.slug} not on the page`);
+      if (!cleared) {
+        cleared = true;
+        for (const f of readdirSync(dir))
+          if (/^(code|canvas)-.*\.png$/.test(f)) rmSync(path.join(dir, f));
+      }
       await h.screenshot({ path: path.join(dir, `code-${cell.slug}.png`) });
       shot++;
       canvasWanted.push({ nodeId: cell.nodeId, outPath: path.join(dir, `canvas-${cell.slug}.png`) });
