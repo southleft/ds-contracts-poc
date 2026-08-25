@@ -2054,6 +2054,47 @@ export function promoteAnatomy(
     }
   }
 
+  /** RC7 — THE PLACEHOLDER STRING THE CAPTURE MOUNTED.
+   *
+   *  A computed-style capture reads STYLES, never attributes — `img-attrs-
+   *  wired` below says so in its own words ("the capture reads no
+   *  attributes"). So the placeholder ATTRIBUTE, which is what the browser
+   *  renders through `::placeholder`, has exactly ONE honest source: the
+   *  string the harness MOUNTED, i.e. `fixedProps.placeholder` in this
+   *  component's capture config. That is the same provenance the text-prop
+   *  samples above (`samplesByProp`) already use, and it is the string that
+   *  was on screen when `placeholder-color` was measured.
+   *
+   *  This REPRODUCES a hand-edit rather than inventing a rule: Carbon's
+   *  committed TextInput contract already carries
+   *  `attrs.placeholder: "Placeholder"` — the exact `fixedProps.placeholder`
+   *  of extract/computed/configs/carbon.json — added by hand and therefore
+   *  erasable by the next re-fuse. Fluent and shadcn mount one too ("Value")
+   *  and carry nothing, which is why their canvas cells drew an empty node
+   *  and a blank sliver.
+   *
+   *  NARROW BY CONSTRUCTION: only <input>/<textarea>, only when the config
+   *  mounted a non-empty string, and never over a placeholder the contract
+   *  already spells (an existing attr, or a TEXT prop the code surface
+   *  renders AS the `placeholder` attribute — antd's Input, whose prop
+   *  already carries its own default). A checkbox mounts no placeholder and
+   *  gains nothing. */
+  const mountedPlaceholder = ((): string | null => {
+    const v = comp.fixedProps?.['placeholder'];
+    if (typeof v !== 'string' || v.length === 0) return null;
+    if (contract.props.some((pr) => pr.type === 'text' && pr.bindings.code.prop === 'placeholder')) return null;
+    return v;
+  })();
+  const wirePlaceholderAttr = (part: Part, tag: string, partName: string): void => {
+    if (mountedPlaceholder === null) return;
+    if (tag !== 'input' && tag !== 'textarea') return;
+    if (typeof part.attrs?.placeholder === 'string') return;
+    part.attrs = { ...part.attrs, placeholder: mountedPlaceholder };
+    receipts.push(
+      `placeholder-attr-mounted: ${partName} — the capture MOUNTED placeholder="${mountedPlaceholder}" (fixedProps) and a computed-style capture reads no attributes, so the mounted string is carried as the contract's literal \`attrs.placeholder\`. It is the string that was on screen when this element's ::placeholder ink was measured; without it the canvas draws an EMPTY text node and the field reads as nothing at all.`,
+    );
+  };
+
   /** Apply a compiled svg plan onto a HOST part: single asset → Part.icon;
    *  per-value assets → per-value icon child parts. Round 5c: extracted so
    *  the ROOT can host a plan too (Spinner's glyph is the root's only child
@@ -3030,6 +3071,9 @@ export function promoteAnatomy(
       }
     }
 
+    // RC7: the placeholder string the capture mounted (see wirePlaceholderAttr).
+    wirePlaceholderAttr(part, e.rep.tag, e.partName);
+
     // A2: set when the uniform computed display is `grid` — resolved AFTER
     // the children are built (placements are child facts), either into the
     // structured grid promotion or the named fallback lowering.
@@ -3495,6 +3539,12 @@ export function promoteAnatomy(
       }
     }
   }
+  // RC7: the ROOT can BE the control (shadcn's Input is one <input> and
+  // nothing else; antd's is too). buildPart never runs on the root, so the
+  // wiring above would miss exactly the two rows whose canvas cells were
+  // blank.
+  wirePlaceholderAttr(newRoot, rootEntry.rep.tag, 'root');
+
   // Round 5c — ROOT-HOSTED svg plan: buildPart never runs on the root, so a
   // plan whose host IS the root (Spinner: the glyph is the root's only
   // child) was silently dropped — the assets existed, the contract carried
