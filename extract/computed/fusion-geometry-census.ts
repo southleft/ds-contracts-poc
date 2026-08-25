@@ -36,6 +36,30 @@
  *      sorted order. A receipt is the drop ledger: if its wording changes,
  *      the committed `enriched.extension.json` and `LEDGER.md` no longer say
  *      what the engine says, which is the same staleness one level down.
+ *   3. `extensionFresh` — whether that component's COMMITTED
+ *      `enriched.extension.json` still agrees with the engine TODAY. This is
+ *      a different axis from (1) and (2): those compare the engine against
+ *      THIS FILE, so they move when a door changes; this one compares the
+ *      engine against the SHIPPED ARTIFACT, so it also sees a component
+ *      whose capture simply predates a door nobody re-ran.
+ *
+ *      MEASURED, and it is the reason this is pinned as DATA and not asserted
+ *      as a bar: on the engine as it stands 83 of 104 components are already
+ *      stale on this axis, and 83 of those 83 are stale on the PREVIOUS
+ *      engine too (`git show <base>:extract/computed/fuse.ts` swapped in,
+ *      `--write`, diffed) — i.e. the rot predates every door on this branch
+ *      and belongs to captures taken months before the doors that now read
+ *      them. Demanding a hand-written excuse for each would be 83 essays
+ *      about other people's work, and demanding they be re-derived would be
+ *      a capture wave, not an engine patch.
+ *
+ *      So the flag is RECORDED per row and compared like every other field.
+ *      A component that is fresh today and stale tomorrow moves
+ *      `true → false` and the gate names it; a component repaired by a
+ *      re-derivation moves `false → true` and the gate names that too, so
+ *      neither direction can happen silently. The pre-existing 83 sit in the
+ *      committed file as 83 visible `"extensionFresh": false` lines instead
+ *      of being invisible.
  *
  * The census is NOT a quality bar and makes no claim about whether a door is
  * right. It is a visibility instrument: it turns "the engine moved 18
@@ -81,6 +105,13 @@ interface Row {
   receipts: string;
   /** how many receipt lines that hash covers (a human-readable sanity number). */
   receiptCount: number;
+  /** Whether the COMMITTED enriched.extension.json's geometry receipts agree
+   *  with what the engine says today. `false` means that component's shipped
+   *  drop ledger is stale. Pinned as data, not asserted as a bar — see the
+   *  header: the majority of the corpus is already stale on this axis on the
+   *  PREVIOUS engine too, so what this catches is a CHANGE in either
+   *  direction, which is the thing that can be silent. */
+  extensionFresh: boolean;
 }
 
 function measureOne(cfg: CaptureConfig, comp: ComponentConfig, outRoot: string): Row | null {
@@ -120,10 +151,22 @@ function measureOne(cfg: CaptureConfig, comp: ComponentConfig, outRoot: string):
     if (g.length > 0) carried[part] = g;
   }
   const geomReceipts = receipts.filter((r) => GEOMETRY_RECEIPT.test(r)).sort();
+  // THE COMMITTED DROP LEDGER, compared against what the engine says now. This
+  // is the half the adversarial review named: an engine edit leaves the shipped
+  // enriched.extension.json saying something the engine no longer says, and no
+  // downstream gate can see it because they all read the committed artifacts.
+  const extPath = path.join(outRoot, comp.name.toLowerCase(), 'enriched.extension.json');
+  let extensionFresh = true;
+  if (existsSync(extPath)) {
+    const ext = JSON.parse(readFileSync(extPath, 'utf8')) as { styledChannelReceipts?: string[] };
+    const committed = (ext.styledChannelReceipts ?? []).filter((r) => GEOMETRY_RECEIPT.test(r)).sort();
+    extensionFresh = committed.join('\n') === geomReceipts.join('\n');
+  }
   return {
     carried,
     receipts: createHash('sha256').update(geomReceipts.join('\n')).digest('hex').slice(0, 16),
     receiptCount: geomReceipts.length,
+    extensionFresh,
   };
 }
 
@@ -164,6 +207,9 @@ function main(): void {
             'THE FUSION-SURFACE FRESHNESS RECORD. Re-derived offline from every committed captured-truth.json by extract/computed/fusion-geometry-census.ts. A row that moves means that component has been re-fused by a changed door and its committed enriched.*/LEDGER.md/contract are stale — see the header of that file for the per-library remedy.',
           generatedBy: 'extract/computed/fusion-geometry-census.ts --write',
           components: keys.length,
+          __extensionFresh:
+            "Per row: whether that component's COMMITTED enriched.extension.json geometry receipts still match the engine. A `false` here is a component whose shipped drop ledger is stale — mostly captures that predate a door nobody re-ran, measured as 83 of 104 on the previous engine as well. It is pinned so that a CHANGE in either direction is red and has to be re-recorded deliberately.",
+          extensionsStale: keys.filter((k) => !rows[k].extensionFresh).length,
           rows: Object.fromEntries(keys.map((k) => [k, rows[k]])),
         },
         null,
@@ -197,6 +243,13 @@ function main(): void {
     }
     if (a.receipts !== b.receipts) {
       drift.push(`RECEIPTS ${key}: ${a.receiptCount} line(s) hash ${a.receipts} → ${b.receiptCount} line(s) hash ${b.receipts} — the committed enriched.extension.json / LEDGER.md no longer say what the engine says`);
+    }
+    if ((a.extensionFresh ?? true) !== b.extensionFresh) {
+      drift.push(
+        b.extensionFresh
+          ? `EXTENSION-REPAIRED ${key} — its committed enriched.extension.json now AGREES with the engine again (it did not before). A repair is as reviewable as a rot: re-record the census deliberately.`
+          : `EXTENSION-STALE ${key} — its committed enriched.extension.json's geometry receipts NO LONGER match the engine. Re-derive the component (remedy below), or re-record the census deliberately and own the staleness in the diff.`,
+      );
     }
   }
   for (const f of failures) drift.push(`THREW ${f}`);

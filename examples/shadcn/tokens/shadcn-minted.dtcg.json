@@ -166,6 +166,10 @@
     },
     "avatar": {
       "root": {
+        "color": {
+          "$value": "#0a0a0a",
+          "$type": "color"
+        },
         "flex-shrink": {
           "$value": "0",
           "$type": "number"
@@ -226,6 +230,20 @@
           "$value": "400",
           "$type": "number"
         },
+        "height": {
+          "default": {
+            "$value": "32px",
+            "$type": "dimension"
+          },
+          "sm": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "lg": {
+            "$value": "40px",
+            "$type": "dimension"
+          }
+        },
         "line-height": {
           "default": {
             "$value": "20px",
@@ -237,6 +255,20 @@
           },
           "lg": {
             "$value": "20px",
+            "$type": "dimension"
+          }
+        },
+        "width": {
+          "default": {
+            "$value": "32px",
+            "$type": "dimension"
+          },
+          "sm": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "lg": {
+            "$value": "40px",
             "$type": "dimension"
           }
         }
