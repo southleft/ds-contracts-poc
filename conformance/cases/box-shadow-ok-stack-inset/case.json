@@ -1,0 +1,19 @@
+{
+  "id": "box-shadow-ok-stack-inset",
+  "feature": "effects",
+  "construct": "a THREE-layer elevation whose every layer colour is an OKLab spelling and whose last layer is an INSET hairline \u2014 the astryx `shadow-med` shape (examples/astryx/tokens/astryx.dtcg.json), minus the light-dark() mode fork the browser resolves at capture",
+  "why": "An unparseable LAYER refuses the WHOLE stack by design (core/emit-figma-script.ts:1490-1491) \u2014 that is the right rule, and it is why one unreadable ok-space layer deleted the two elevation layers beside it. astryx's dropdown-menu and toast shipped `parsed neither as a single drop shadow nor as an effect stack \u2014 inexpressible / foreign shadow grammar` and floated white-on-white with no elevation at all. The inset layer is load-bearing too: Figma's INNER_SHADOW is a different effect type, so a stack that mixes them must survive as a stack.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.tokens.box-shadow",
+  "observable": {
+    "part": "root",
+    "channel": "box-shadow",
+    "capturedValue": "oklch(0 0 0 / 0.05) 0px 2px 4px 0px, oklch(0 0 0 / 0.1) 0px 4px 12px 0px, oklch(1 0 0 / 0.12) 0px 0px 0px 1px inset"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "mustDraw": true,
+    "note": "two DROP_SHADOW layers plus one INNER_SHADOW hairline reach the node as an effect stack; a receipt naming the refusal is not a substitute for the ink"
+  }
+}

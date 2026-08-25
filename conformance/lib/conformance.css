@@ -15,6 +15,8 @@
 @import '../cases/block-root-shrink-to-fit/case.css';
 @import '../cases/border-color-control-equal/case.css';
 @import '../cases/border-radius-px/case.css';
+@import '../cases/box-shadow-ok-color-ring/case.css';
+@import '../cases/box-shadow-ok-stack-inset/case.css';
 @import '../cases/box-shadow-single/case.css';
 @import '../cases/calc-var/case.css';
 @import '../cases/clip-path-polygon/case.css';
@@ -80,6 +82,8 @@
 @import '../cases/pseudo-backdrop/case.css';
 @import '../cases/pseudo-content-glyph/case.css';
 @import '../cases/pseudo-gradient-only/case.css';
+@import '../cases/pseudo-inset-ring-partial-presence/case.css';
+@import '../cases/pseudo-inset-ring-two-axis/case.css';
 @import '../cases/pseudo-marker/case.css';
 @import '../cases/pseudo-placeholder/case.css';
 @import '../cases/pseudo-selection/case.css';

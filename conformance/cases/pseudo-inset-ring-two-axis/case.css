@@ -1,0 +1,6 @@
+[data-cf="pseudo-inset-ring-two-axis"] { position: relative; display: flex; align-items: center; height: 20px; padding: 0px 6px; border-radius: 10000px; border-style: none; border-width: 0px; border-color: rgba(0, 0, 0, 0); background: rgb(255, 255, 255); }
+[data-cf="pseudo-inset-ring-two-axis"][data-appearance="outline"][data-tone="brand"] { border-color: rgb(15, 108, 189); }
+[data-cf="pseudo-inset-ring-two-axis"][data-appearance="outline"][data-tone="danger"] { border-color: rgb(196, 49, 75); }
+[data-cf="pseudo-inset-ring-two-axis"][data-appearance="tint"][data-tone="brand"] { border-color: rgb(180, 214, 250); }
+[data-cf="pseudo-inset-ring-two-axis"][data-appearance="tint"][data-tone="danger"] { border-color: rgb(238, 172, 178); }
+[data-cf="pseudo-inset-ring-two-axis"]::after { content: ""; position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; border-style: solid; border-width: 1px; border-radius: 10000px; border-color: inherit; }

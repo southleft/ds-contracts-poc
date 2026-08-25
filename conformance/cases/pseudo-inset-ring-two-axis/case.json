@@ -1,0 +1,38 @@
+{
+  "id": "pseudo-inset-ring-two-axis",
+  "feature": "pseudo-elements",
+  "construct": "a COINCIDENT INSET RING pseudo \u2014 ::after at inset 0, transparent fill, uniform 1px border, host radius \u2014 whose ring COLOUR is a product of TWO enum axes while its four side WIDTHS are uniform across every combo (fluent Badge's `root::after`)",
+  "why": "This is how a whole library spells its outline/tint ring: the host element carries border-width 0 and the ring lives on a coincident pseudo. The decor grammar factors a pseudo's paint uniform-or-ONE-enum-axis, so a two-axis ring colour refuses the WHOLE box (pseudo-decor-paint-multiaxis) and throws away FOUR UNIFORM FACTS (1px on all four sides, every combo) to avoid guessing the one varying one. Fusion already carries the varying half on the HOST (border-{side}-color per axis product), so the contract ships a border COLOUR with no width anywhere and core/emit-figma-script.ts's hasWidthSource correctly refuses to invent one \u2014 outline and tint mint identical to filled. fluent.badge is the measured row.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.literals.border-top-width (the ring's uniform side widths folded onto the coincident host, whose border-{side}-color the contract already carries)",
+  "observable": {
+    "part": "root::after",
+    "channel": "border-top-width",
+    "capturedValue": "1px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "mustDraw": true,
+    "note": "the host node draws a 1px Figma stroke painted by its own border-{side}-color binding \u2014 the ring is the host's stroke, not a second node"
+  },
+  "axes": [
+    {
+      "prop": "appearance",
+      "values": [
+        "filled",
+        "outline",
+        "tint"
+      ],
+      "default": "filled"
+    },
+    {
+      "prop": "tone",
+      "values": [
+        "brand",
+        "danger"
+      ],
+      "default": "brand"
+    }
+  ]
+}

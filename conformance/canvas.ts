@@ -58,6 +58,18 @@
  *   HARMFUL           the manifest says the construct has NO canvas spelling
  *                     (`canvas.expect: ABSENT`) and the proposal carries it
  *                     anyway — the canvas drew what it must not. RED.
+ *   MUTE              THE MIRROR OF HARMFUL, and the hole this gate had until
+ *                     the RC3 burn-down. The manifest says the construct MUST
+ *                     reach the canvas (`canvas.mustDraw: true`) and the
+ *                     proposal carries NOTHING on the channel. Without this
+ *                     verdict such a case lands on NAMED — green — because
+ *                     some artifact mentions the channel, and a receipt is
+ *                     exactly what a ring/border/elevation that never lowered
+ *                     produces: `parsed neither as a single drop shadow nor
+ *                     as an effect stack` is a true sentence about a canvas
+ *                     with no shadow on it. RED, and opt-in per case so it
+ *                     can only ever ADD reds: a case that does not declare
+ *                     mustDraw is graded exactly as before.
  *   SILENT            neither — the construct vanished and nothing says so.
  *                     RED, NEVER WAIVABLE: there is no receipt that turns a
  *                     SILENT green; it leaves the baseline only by being
@@ -111,18 +123,19 @@ export type Classification =
   | 'NAMED'
   | 'DRIFTED'
   | 'HARMFUL'
+  | 'MUTE'
   | 'SILENT'
   | 'REFUSED-BY-NAME'
   | 'SEED-ABSENT';
 
 export const CLASSIFICATIONS: readonly Classification[] = [
-  'ROUND-TRIPPED', 'NAMED', 'DRIFTED', 'HARMFUL', 'SILENT', 'REFUSED-BY-NAME', 'SEED-ABSENT',
+  'ROUND-TRIPPED', 'NAMED', 'DRIFTED', 'HARMFUL', 'MUTE', 'SILENT', 'REFUSED-BY-NAME', 'SEED-ABSENT',
 ];
-export const RED_CLASSIFICATIONS: readonly Classification[] = ['SILENT', 'DRIFTED', 'HARMFUL'];
+export const RED_CLASSIFICATIONS: readonly Classification[] = ['SILENT', 'DRIFTED', 'HARMFUL', 'MUTE'];
 
 /** Better → worse. A move to a higher rank is a regression. */
 const RANK: Record<Classification, number> = {
-  'ROUND-TRIPPED': 0, 'SEED-ABSENT': 1, 'REFUSED-BY-NAME': 2, NAMED: 3, DRIFTED: 4, HARMFUL: 5, SILENT: 6,
+  'ROUND-TRIPPED': 0, 'SEED-ABSENT': 1, 'REFUSED-BY-NAME': 2, NAMED: 3, MUTE: 4, DRIFTED: 5, HARMFUL: 6, SILENT: 7,
 };
 
 export interface CanvasMeasured {
@@ -400,8 +413,14 @@ export async function roundTrip(c: CaseEntry, verbose = false): Promise<CanvasMe
     for (const l of union) console.log(`  · ${l.length > 300 ? l.slice(0, 300) + '…' : l}`);
   }
 
+  /** RC3 — the mirror of HARMFUL. A case that declares `canvas.mustDraw` is
+   *  not satisfied by a receipt: the channel has to come back. Everything
+   *  else about the grading is unchanged, so this can only ADD reds. */
+  const muteNote = (why: string): string =>
+    `the manifest says "${ch}" MUST reach the canvas (${c.canvas.note}) — the proposal carries nothing on it${why ? `; ${why}` : ''}`;
   if (!proposal) {
     const reached = 'propose';
+    if (c.canvas.mustDraw) return { ...base, classification: 'MUTE', reached, note: muteNote(named ? namingQuote : (batch.skipped.map((s) => s.reason).join('; ') || 'nothing named why')) };
     if (named) return { ...base, classification: 'NAMED', reached, note: namingQuote };
     return { ...base, classification: 'SILENT', reached, note: batch.skipped.map((s) => s.reason).join('; ') || 'no proposal and nothing named why' };
   }
@@ -449,6 +468,9 @@ export async function roundTrip(c: CaseEntry, verbose = false): Promise<CanvasMe
     return { ...base, classification: 'ROUND-TRIPPED', reached: 'diff', refIdentical, ...(channelAs ? { channelAs } : {}), note: notes.join('; ') };
   }
   const differs = comparable.length > 0 ? `value came back as ${base.proposed.join(', ')} (seed ${base.seed.join(', ')})` : '';
+  if (c.canvas.mustDraw && comparable.length === 0) {
+    return { ...base, classification: 'MUTE', reached: 'diff', note: muteNote(named ? namingQuote : 'and nothing names it either') };
+  }
   if (named) return { ...base, classification: 'NAMED', reached: 'diff', note: `${differs ? differs + ' — ' : ''}${namingQuote}` };
   if (comparable.length > 0) {
     return { ...base, classification: 'DRIFTED', reached: 'diff', note: `the proposal carries "${ch}" as ${base.proposed.join(', ')} — the seed says ${base.seed.join(', ')}; nothing names the lowering` };
@@ -526,7 +548,7 @@ export function baselineFileOf(rows: CanvasMeasured[]): CanvasBaselineFile {
 const esc = (s: string): string => s.replace(/\|/g, '\\|').replace(/\n/g, ' ');
 const clip = (s: string, n: number): string => (s.length > n ? `${s.slice(0, n - 1).trimEnd()}…` : s);
 const MARK: Record<Classification, string> = {
-  'ROUND-TRIPPED': '🟢', NAMED: '🟢', 'REFUSED-BY-NAME': '🟡', 'SEED-ABSENT': '⚪', DRIFTED: '🔴', HARMFUL: '🔴', SILENT: '🔴',
+  'ROUND-TRIPPED': '🟢', NAMED: '🟢', 'REFUSED-BY-NAME': '🟡', 'SEED-ABSENT': '⚪', DRIFTED: '🔴', HARMFUL: '🔴', MUTE: '🔴', SILENT: '🔴',
 };
 
 export function renderCanvasReport(rows: CanvasMeasured[]): string {
@@ -555,7 +577,7 @@ export function renderCanvasReport(rows: CanvasMeasured[]): string {
   L.push(`| 🟢 named (dropped, and a receipt says so) | **${counts.NAMED}** |`);
   L.push(`| 🟡 refused by name (the canvas cannot host the seed, and says so) | **${counts['REFUSED-BY-NAME']}** |`);
   L.push(`| ⚪ seed-absent (nothing to round-trip) | **${counts['SEED-ABSENT']}** |`);
-  L.push(`| 🔴 red | **${red}** — SILENT ${counts.SILENT} · DRIFTED ${counts.DRIFTED} · HARMFUL ${counts.HARMFUL} |`);
+  L.push(`| 🔴 red | **${red}** — SILENT ${counts.SILENT} · DRIFTED ${counts.DRIFTED} · HARMFUL ${counts.HARMFUL} · MUTE ${counts.MUTE} |`);
   L.push('');
   L.push('Verdicts: **ROUND-TRIPPED** the channel came back with the seed\'s value (refs');
   L.push('resolved; "ref" says whether the token spelling survived, "as" names a');
@@ -565,9 +587,10 @@ export function renderCanvasReport(rows: CanvasMeasured[]): string {
   L.push('**REFUSED-BY-NAME** the plan, the mock, or the runtime refused the whole seed by');
   L.push('name · **DRIFTED** a different value came back and nothing named the lowering ·');
   L.push('**HARMFUL** the manifest says no canvas spelling exists and it came back anyway ·');
+  L.push('**MUTE** the manifest says the construct MUST be drawn (`canvas.mustDraw`) and nothing came back — a receipt is not ink ·');
   L.push('**SILENT** vanished, named by nothing — never waivable.');
   L.push('');
-  const order: Classification[] = ['SILENT', 'DRIFTED', 'HARMFUL', 'NAMED', 'REFUSED-BY-NAME', 'SEED-ABSENT', 'ROUND-TRIPPED'];
+  const order: Classification[] = ['SILENT', 'DRIFTED', 'HARMFUL', 'MUTE', 'NAMED', 'REFUSED-BY-NAME', 'SEED-ABSENT', 'ROUND-TRIPPED'];
   for (const k of order) {
     const group = rows.filter((r) => r.classification === k);
     if (group.length === 0) continue;
@@ -603,14 +626,15 @@ async function main(): Promise<void> {
   const rows = await measureAllCanvas(only, only !== undefined);
   const counts = summarizeCanvas(rows);
 
-  const order: Classification[] = ['SILENT', 'DRIFTED', 'HARMFUL', 'NAMED', 'REFUSED-BY-NAME', 'SEED-ABSENT', 'ROUND-TRIPPED'];
+  const order: Classification[] = ['SILENT', 'DRIFTED', 'HARMFUL', 'MUTE', 'NAMED', 'REFUSED-BY-NAME', 'SEED-ABSENT', 'ROUND-TRIPPED'];
   for (const k of order) {
     const group = rows.filter((r) => r.classification === k);
     if (group.length === 0) continue;
     const tag = k === 'SILENT'
       ? ' (RED — never waivable: the construct vanished and nothing says so)'
       : k === 'DRIFTED' ? ' (RED — a wrong answer came back and nothing named the lowering)'
-        : k === 'HARMFUL' ? ' (RED — the canvas drew what the manifest says it cannot)' : '';
+        : k === 'HARMFUL' ? ' (RED — the canvas drew what the manifest says it cannot)'
+        : k === 'MUTE' ? ' (RED — the manifest says it must be drawn and nothing came back; a receipt is not ink)' : '';
     console.log(`\n${k}${tag} — ${group.length}`);
     for (const r of group) {
       const detail = k === 'ROUND-TRIPPED'
@@ -621,7 +645,7 @@ async function main(): Promise<void> {
   }
   const red = RED_CLASSIFICATIONS.reduce((n, k) => n + counts[k], 0);
   console.log(
-    `\nconformance:canvas: ${rows.length} cases · ${counts['ROUND-TRIPPED']} round-tripped · ${counts.NAMED} named · ${counts['REFUSED-BY-NAME']} refused by name · ${counts['SEED-ABSENT']} seed-absent · ${red} red (${counts.SILENT} SILENT, ${counts.DRIFTED} DRIFTED, ${counts.HARMFUL} HARMFUL)`,
+    `\nconformance:canvas: ${rows.length} cases · ${counts['ROUND-TRIPPED']} round-tripped · ${counts.NAMED} named · ${counts['REFUSED-BY-NAME']} refused by name · ${counts['SEED-ABSENT']} seed-absent · ${red} red (${counts.SILENT} SILENT, ${counts.DRIFTED} DRIFTED, ${counts.HARMFUL} HARMFUL, ${counts.MUTE} MUTE)`,
   );
 
   if (only) process.exit(0);

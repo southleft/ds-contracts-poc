@@ -1,0 +1,299 @@
+{
+  "component": "CasePseudoInsetRingTwoAxis",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 6,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 624,
+    "cellsEqual": 624,
+    "pctEqual": 100,
+    "rowsFullyEqual": 24,
+    "rows": 24
+  },
+  "pixel": {
+    "pairs": 24,
+    "perfectExact": 8,
+    "perfectAA": 8,
+    "measured": 24,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 0.3385416666666667,
+    "meanAA": 0.15625,
+    "maxAA": 0.234375
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 34,
+    "mintedLeavesUnfolded": 34,
+    "baseBindings": 20,
+    "stateBindings": 0,
+    "codeOnlyChannels": 1,
+    "overflowBindings": 0,
+    "folds": 0
+  },
+  "worstRows": [
+    {
+      "key": "outline.brand__default",
+      "pctAA": 0.234375,
+      "pctExact": 0.5078125,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "outline.brand__hover",
+      "pctAA": 0.234375,
+      "pctExact": 0.5078125,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "outline.brand__focus-visible",
+      "pctAA": 0.234375,
+      "pctExact": 0.5078125,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "outline.brand__active",
+      "pctAA": 0.234375,
+      "pctExact": 0.5078125,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "outline.danger__default",
+      "pctAA": 0.234375,
+      "pctExact": 0.5078125,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "outline.danger__hover",
+      "pctAA": 0.234375,
+      "pctExact": 0.5078125,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "outline.danger__focus-visible",
+      "pctAA": 0.234375,
+      "pctExact": 0.5078125,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "outline.danger__active",
+      "pctAA": 0.234375,
+      "pctExact": 0.5078125,
+      "channelsMismatched": 0
+    }
+  ],
+  "topMismatchedChannels": [],
+  "namedLosses": [
+    "promotion: pseudo-decor-paint-multiaxis: root::after drawn paint varies across the enabled combos and does not factor as a function of ONE enum axis ({\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(15, 108, 189, 1)\",\"radius\":10000} vs {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(196, 49, 75, 1)\",\"radius\":10000} vs {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(180, 214, 250, 1)\",\"radius\":10000} vs {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(238, 172, 178, 1)\",\"radius\":10000}); named refusal",
+    "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "(none declared)",
+    "leavesAdded": 0,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "filled.brand__default",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "filled.brand__hover",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "filled.brand__focus-visible",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "filled.brand__active",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "filled.danger__default",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "filled.danger__hover",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "filled.danger__focus-visible",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "filled.danger__active",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "outline.brand__default",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.5078125,
+      "pctAA": 0.234375,
+      "mismatches": []
+    },
+    {
+      "key": "outline.brand__hover",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.5078125,
+      "pctAA": 0.234375,
+      "mismatches": []
+    },
+    {
+      "key": "outline.brand__focus-visible",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.5078125,
+      "pctAA": 0.234375,
+      "mismatches": []
+    },
+    {
+      "key": "outline.brand__active",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.5078125,
+      "pctAA": 0.234375,
+      "mismatches": []
+    },
+    {
+      "key": "outline.danger__default",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.5078125,
+      "pctAA": 0.234375,
+      "mismatches": []
+    },
+    {
+      "key": "outline.danger__hover",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.5078125,
+      "pctAA": 0.234375,
+      "mismatches": []
+    },
+    {
+      "key": "outline.danger__focus-visible",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.5078125,
+      "pctAA": 0.234375,
+      "mismatches": []
+    },
+    {
+      "key": "outline.danger__active",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.5078125,
+      "pctAA": 0.234375,
+      "mismatches": []
+    },
+    {
+      "key": "tint.brand__default",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.5078125,
+      "pctAA": 0.234375,
+      "mismatches": []
+    },
+    {
+      "key": "tint.brand__hover",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.5078125,
+      "pctAA": 0.234375,
+      "mismatches": []
+    },
+    {
+      "key": "tint.brand__focus-visible",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.5078125,
+      "pctAA": 0.234375,
+      "mismatches": []
+    },
+    {
+      "key": "tint.brand__active",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.5078125,
+      "pctAA": 0.234375,
+      "mismatches": []
+    },
+    {
+      "key": "tint.danger__default",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.5078125,
+      "pctAA": 0.234375,
+      "mismatches": []
+    },
+    {
+      "key": "tint.danger__hover",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.5078125,
+      "pctAA": 0.234375,
+      "mismatches": []
+    },
+    {
+      "key": "tint.danger__focus-visible",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.5078125,
+      "pctAA": 0.234375,
+      "mismatches": []
+    },
+    {
+      "key": "tint.danger__active",
+      "channelsCompared": 26,
+      "channelsEqual": 26,
+      "pctExact": 0.5078125,
+      "pctAA": 0.234375,
+      "mismatches": []
+    }
+  ]
+}

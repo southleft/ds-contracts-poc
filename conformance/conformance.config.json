@@ -164,6 +164,22 @@
       "axes": []
     },
     {
+      "__case": "effects: a two-layer box-shadow whose RING layer is spelled in an OKLab colour space — `0 0 0 3px oklch(0.708 0 0 / 0.5), 0 1px 2px rgba(0,0,0,.05)` (Tailwind v4 / shadcn's focus ring, verbatim from examples/shadcn/tokens/shadcn-minted.dtcg.json) — declared CARRIED",
+      "name": "CaseBoxShadowOkColorRing",
+      "importName": "CaseBoxShadowOkColorRing",
+      "contract": "conformance/seeds/box-shadow-ok-color-ring.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "effects: a THREE-layer elevation whose every layer colour is an OKLab spelling and whose last layer is an INSET hairline — the astryx `shadow-med` shape (examples/astryx/tokens/astryx.dtcg.json), minus the light-dark() mode fork the browser resolves at capture — declared CARRIED",
+      "name": "CaseBoxShadowOkStackInset",
+      "importName": "CaseBoxShadowOkStackInset",
+      "contract": "conformance/seeds/box-shadow-ok-stack-inset.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
       "__case": "effects: box-shadow: 0 1px 3px rgba(0,0,0,0.2) — declared CARRIED",
       "name": "CaseBoxShadowSingle",
       "importName": "CaseBoxShadowSingle",
@@ -737,6 +753,29 @@
       "contract": "conformance/seeds/pseudo-gradient-only.contract.json",
       "sampleText": "",
       "axes": []
+    },
+    {
+      "__case": "pseudo-elements: the SAME coincident inset ring as pseudo-inset-ring-two-axis, but the ring pseudo EXISTS IN ONLY HALF THE DOMAIN (`[data-size=\"small\"]::after`) while the host carries an opaque per-combo border-colour and zero border width of its own in ALL eight combos — declared REFUSED",
+      "name": "CasePseudoInsetRingPartialPresence",
+      "importName": "CasePseudoInsetRingPartialPresence",
+      "contract": "conformance/seeds/pseudo-inset-ring-partial-presence.contract.json",
+      "sampleText": "",
+      "axes": [
+        "appearance",
+        "tone",
+        "size"
+      ]
+    },
+    {
+      "__case": "pseudo-elements: a COINCIDENT INSET RING pseudo — ::after at inset 0, transparent fill, uniform 1px border, host radius — whose ring COLOUR is a product of TWO enum axes while its four side WIDTHS are uniform across every combo (fluent Badge's `root::after`) — declared CARRIED",
+      "name": "CasePseudoInsetRingTwoAxis",
+      "importName": "CasePseudoInsetRingTwoAxis",
+      "contract": "conformance/seeds/pseudo-inset-ring-two-axis.contract.json",
+      "sampleText": "",
+      "axes": [
+        "appearance",
+        "tone"
+      ]
     },
     {
       "__case": "pseudo-elements: li::marker { color; font-size } — declared UNSUPPORTED",

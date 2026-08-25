@@ -1,0 +1,44 @@
+{
+  "id": "pseudo-inset-ring-partial-presence",
+  "feature": "pseudo-elements",
+  "construct": "the SAME coincident inset ring as pseudo-inset-ring-two-axis, but the ring pseudo EXISTS IN ONLY HALF THE DOMAIN (`[data-size=\"small\"]::after`) while the host carries an opaque per-combo border-colour and zero border width of its own in ALL eight combos",
+  "why": "THE ANTI-HARM GUARD for the coincident-ring fold. Folding the ring's uniform 1px onto the host is only honest when the ring is a ring in EVERY combo: if the box is absent at size=large, the host's already-carried opaque border-{side}-colour would complete the pair there too and the canvas would manufacture a 1px stroke where CSS paints nothing \u2014 the HARMFUL class, not a silent loss, and exactly the failure hasWidthSource's own guard exists to prevent. The fold must refuse by a name that DISCLOSES the partial presence (drawn/present N of M), because the paint-multiaxis refusal beside it says 'in all drawn combos' and never admits how many combos have no ring at all.",
+  "expect": "REFUSED",
+  "expectName": "pseudo-decor-ring-fold-partial-presence",
+  "expectWhere": "enriched.extension.json anatomyPromotion.refusals",
+  "observable": {
+    "part": "root::after",
+    "channel": "border-top-width",
+    "capturedValue": "1px"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "nothing may carry the ring's width: a fold here would paint a stroke on the four size=large cells the library leaves bare"
+  },
+  "axes": [
+    {
+      "prop": "appearance",
+      "values": [
+        "outline",
+        "tint"
+      ],
+      "default": "outline"
+    },
+    {
+      "prop": "tone",
+      "values": [
+        "brand",
+        "danger"
+      ],
+      "default": "brand"
+    },
+    {
+      "prop": "size",
+      "values": [
+        "small",
+        "large"
+      ],
+      "default": "small"
+    }
+  ]
+}

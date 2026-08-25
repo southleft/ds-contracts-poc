@@ -1,0 +1,19 @@
+{
+  "id": "box-shadow-ok-color-ring",
+  "feature": "effects",
+  "construct": "a two-layer box-shadow whose RING layer is spelled in an OKLab colour space \u2014 `0 0 0 3px oklch(0.708 0 0 / 0.5), 0 1px 2px rgba(0,0,0,.05)` (Tailwind v4 / shadcn's focus ring, verbatim from examples/shadcn/tokens/shadcn-minted.dtcg.json)",
+  "why": "core/emit-figma-script.ts carried a SECOND, NARROWER literal-colour reader than the one core/token-set.ts already uses for the token set: parseShadowStack matched `#hex|rgba?()` only. An unparseable LAYER refuses the WHOLE stack by design, so one ok-space ring layer deleted the elevation layers beside it and the focus-visible preview minted byte-identical to the resting cell (shadcn.switch, shadcn.checkbox). Colour spaces are not exotic \u2014 the whole Tailwind v4 generation computes to oklch/oklab.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.tokens.box-shadow",
+  "observable": {
+    "part": "root",
+    "channel": "box-shadow",
+    "capturedValue": "oklch(0.708 0 0 / 0.5) 0px 0px 0px 3px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "mustDraw": true,
+    "note": "both layers lower to Figma DROP_SHADOW effects (the ring is spread 3 at rgba(161,161,161,0.5)); a receipt naming the refusal is not a substitute for the ink"
+  }
+}

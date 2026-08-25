@@ -52,7 +52,24 @@ export interface CaseEntry {
      *  today). Absent = the contract must carry the captured value itself. */
     carriedValue?: string;
   };
-  canvas: { expect: 'PRESENT' | 'ABSENT'; note: string };
+  canvas: {
+    expect: 'PRESENT' | 'ABSENT';
+    /** RC3 (burn-down round 2) — `PRESENT` alone is satisfied by a RECEIPT:
+     *  conformance/canvas.ts grades a construct that comes back with nothing
+     *  proposed as NAMED (green) as long as some artifact mentions the
+     *  channel, and NAMED is exactly what a non-lowered ring, border or
+     *  elevation produces. `mustDraw` says the manifest is not satisfied by
+     *  a name: the proposal must actually carry the channel. The verdict is
+     *  MUTE, the mirror of HARMFUL (declared ABSENT, carried anyway).
+     *
+     *  IT IS A STRICT ADDITION AND NEVER A WAIVER — a case without it is
+     *  graded exactly as before. 23 of the fixture's PRESENT cases do NOT
+     *  declare it today (21 of them the grid family, whose canvas refusal is
+     *  a real named wall); adopting them is a separate round, named in
+     *  conformance/README.md, not a hole this flag opens. */
+    mustDraw?: boolean;
+    note: string;
+  };
   blockStage?: boolean;
   stage?: { width: number; height: number; padding: number };
   sampleText?: string;

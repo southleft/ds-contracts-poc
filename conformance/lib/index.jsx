@@ -14,6 +14,8 @@ export { default as CaseBackdropFilter } from '../cases/backdrop-filter/Case.tsx
 export { default as CaseBlockRootShrinkToFit } from '../cases/block-root-shrink-to-fit/Case.tsx';
 export { default as CaseBorderColorControlEqual } from '../cases/border-color-control-equal/Case.tsx';
 export { default as CaseBorderRadiusPx } from '../cases/border-radius-px/Case.tsx';
+export { default as CaseBoxShadowOkColorRing } from '../cases/box-shadow-ok-color-ring/Case.tsx';
+export { default as CaseBoxShadowOkStackInset } from '../cases/box-shadow-ok-stack-inset/Case.tsx';
 export { default as CaseBoxShadowSingle } from '../cases/box-shadow-single/Case.tsx';
 export { default as CaseCalcVar } from '../cases/calc-var/Case.tsx';
 export { default as CaseClipPathPolygon } from '../cases/clip-path-polygon/Case.tsx';
@@ -79,6 +81,8 @@ export { default as CasePresenceHiddenAxisGeometry } from '../cases/presence-hid
 export { default as CasePseudoBackdrop } from '../cases/pseudo-backdrop/Case.tsx';
 export { default as CasePseudoContentGlyph } from '../cases/pseudo-content-glyph/Case.tsx';
 export { default as CasePseudoGradientOnly } from '../cases/pseudo-gradient-only/Case.tsx';
+export { default as CasePseudoInsetRingPartialPresence } from '../cases/pseudo-inset-ring-partial-presence/Case.tsx';
+export { default as CasePseudoInsetRingTwoAxis } from '../cases/pseudo-inset-ring-two-axis/Case.tsx';
 export { default as CasePseudoMarker } from '../cases/pseudo-marker/Case.tsx';
 export { default as CasePseudoPlaceholder } from '../cases/pseudo-placeholder/Case.tsx';
 export { default as CasePseudoSelection } from '../cases/pseudo-selection/Case.tsx';

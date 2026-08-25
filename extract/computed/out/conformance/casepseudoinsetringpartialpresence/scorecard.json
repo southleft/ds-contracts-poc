@@ -1,0 +1,363 @@
+{
+  "component": "CasePseudoInsetRingPartialPresence",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 8,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 800,
+    "cellsEqual": 800,
+    "pctEqual": 100,
+    "rowsFullyEqual": 32,
+    "rows": 32
+  },
+  "pixel": {
+    "pairs": 32,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 32,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 1.26953125,
+    "meanAA": 0.6901041666666669,
+    "maxAA": 0.8072916666666666
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 23,
+    "mintedLeavesUnfolded": 23,
+    "baseBindings": 17,
+    "stateBindings": 0,
+    "codeOnlyChannels": 1,
+    "overflowBindings": 0,
+    "folds": 0
+  },
+  "worstRows": [
+    {
+      "key": "outline.brand.small__default",
+      "pctAA": 0.8072916666666666,
+      "pctExact": 1.5234375,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "outline.brand.small__hover",
+      "pctAA": 0.8072916666666666,
+      "pctExact": 1.5234375,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "outline.brand.small__focus-visible",
+      "pctAA": 0.8072916666666666,
+      "pctExact": 1.5234375,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "outline.brand.small__active",
+      "pctAA": 0.8072916666666666,
+      "pctExact": 1.5234375,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "outline.danger.small__default",
+      "pctAA": 0.8072916666666666,
+      "pctExact": 1.5234375,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "outline.danger.small__hover",
+      "pctAA": 0.8072916666666666,
+      "pctExact": 1.5234375,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "outline.danger.small__focus-visible",
+      "pctAA": 0.8072916666666666,
+      "pctExact": 1.5234375,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "outline.danger.small__active",
+      "pctAA": 0.8072916666666666,
+      "pctExact": 1.5234375,
+      "channelsMismatched": 0
+    }
+  ],
+  "topMismatchedChannels": [],
+  "namedLosses": [
+    "promotion: pseudo-decor-paint-multiaxis: root::after drawn paint varies across the enabled combos and does not factor as a function of ONE enum axis ({\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(15, 108, 189, 1)\",\"radius\":10000} vs {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(196, 49, 75, 1)\",\"radius\":10000} vs {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(180, 214, 250, 1)\",\"radius\":10000} vs {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(238, 172, 178, 1)\",\"radius\":10000}); named refusal",
+    "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "(none declared)",
+    "leavesAdded": 0,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "outline.brand.small__default",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.5234375,
+      "pctAA": 0.8072916666666666,
+      "mismatches": []
+    },
+    {
+      "key": "outline.brand.small__hover",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.5234375,
+      "pctAA": 0.8072916666666666,
+      "mismatches": []
+    },
+    {
+      "key": "outline.brand.small__focus-visible",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.5234375,
+      "pctAA": 0.8072916666666666,
+      "mismatches": []
+    },
+    {
+      "key": "outline.brand.small__active",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.5234375,
+      "pctAA": 0.8072916666666666,
+      "mismatches": []
+    },
+    {
+      "key": "outline.brand.large__default",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.015625,
+      "pctAA": 0.5729166666666666,
+      "mismatches": []
+    },
+    {
+      "key": "outline.brand.large__hover",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.015625,
+      "pctAA": 0.5729166666666666,
+      "mismatches": []
+    },
+    {
+      "key": "outline.brand.large__focus-visible",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.015625,
+      "pctAA": 0.5729166666666666,
+      "mismatches": []
+    },
+    {
+      "key": "outline.brand.large__active",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.015625,
+      "pctAA": 0.5729166666666666,
+      "mismatches": []
+    },
+    {
+      "key": "outline.danger.small__default",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.5234375,
+      "pctAA": 0.8072916666666666,
+      "mismatches": []
+    },
+    {
+      "key": "outline.danger.small__hover",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.5234375,
+      "pctAA": 0.8072916666666666,
+      "mismatches": []
+    },
+    {
+      "key": "outline.danger.small__focus-visible",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.5234375,
+      "pctAA": 0.8072916666666666,
+      "mismatches": []
+    },
+    {
+      "key": "outline.danger.small__active",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.5234375,
+      "pctAA": 0.8072916666666666,
+      "mismatches": []
+    },
+    {
+      "key": "outline.danger.large__default",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.015625,
+      "pctAA": 0.5729166666666666,
+      "mismatches": []
+    },
+    {
+      "key": "outline.danger.large__hover",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.015625,
+      "pctAA": 0.5729166666666666,
+      "mismatches": []
+    },
+    {
+      "key": "outline.danger.large__focus-visible",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.015625,
+      "pctAA": 0.5729166666666666,
+      "mismatches": []
+    },
+    {
+      "key": "outline.danger.large__active",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.015625,
+      "pctAA": 0.5729166666666666,
+      "mismatches": []
+    },
+    {
+      "key": "tint.brand.small__default",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.5234375,
+      "pctAA": 0.8072916666666666,
+      "mismatches": []
+    },
+    {
+      "key": "tint.brand.small__hover",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.5234375,
+      "pctAA": 0.8072916666666666,
+      "mismatches": []
+    },
+    {
+      "key": "tint.brand.small__focus-visible",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.5234375,
+      "pctAA": 0.8072916666666666,
+      "mismatches": []
+    },
+    {
+      "key": "tint.brand.small__active",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.5234375,
+      "pctAA": 0.8072916666666666,
+      "mismatches": []
+    },
+    {
+      "key": "tint.brand.large__default",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.015625,
+      "pctAA": 0.5729166666666666,
+      "mismatches": []
+    },
+    {
+      "key": "tint.brand.large__hover",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.015625,
+      "pctAA": 0.5729166666666666,
+      "mismatches": []
+    },
+    {
+      "key": "tint.brand.large__focus-visible",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.015625,
+      "pctAA": 0.5729166666666666,
+      "mismatches": []
+    },
+    {
+      "key": "tint.brand.large__active",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.015625,
+      "pctAA": 0.5729166666666666,
+      "mismatches": []
+    },
+    {
+      "key": "tint.danger.small__default",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.5234375,
+      "pctAA": 0.8072916666666666,
+      "mismatches": []
+    },
+    {
+      "key": "tint.danger.small__hover",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.5234375,
+      "pctAA": 0.8072916666666666,
+      "mismatches": []
+    },
+    {
+      "key": "tint.danger.small__focus-visible",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.5234375,
+      "pctAA": 0.8072916666666666,
+      "mismatches": []
+    },
+    {
+      "key": "tint.danger.small__active",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.5234375,
+      "pctAA": 0.8072916666666666,
+      "mismatches": []
+    },
+    {
+      "key": "tint.danger.large__default",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.015625,
+      "pctAA": 0.5729166666666666,
+      "mismatches": []
+    },
+    {
+      "key": "tint.danger.large__hover",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.015625,
+      "pctAA": 0.5729166666666666,
+      "mismatches": []
+    },
+    {
+      "key": "tint.danger.large__focus-visible",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.015625,
+      "pctAA": 0.5729166666666666,
+      "mismatches": []
+    },
+    {
+      "key": "tint.danger.large__active",
+      "channelsCompared": 25,
+      "channelsEqual": 25,
+      "pctExact": 1.015625,
+      "pctAA": 0.5729166666666666,
+      "mismatches": []
+    }
+  ]
+}

@@ -13,6 +13,7 @@
   },
   "canvas": {
     "expect": "PRESENT",
-    "note": "DROP_SHADOW effect"
+    "note": "DROP_SHADOW effect \u2014 mustDraw: the one effect shape Figma maps 1:1 must actually reach the node, not merely be named",
+    "mustDraw": true
   }
 }

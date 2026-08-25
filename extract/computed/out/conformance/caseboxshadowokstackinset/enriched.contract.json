@@ -1,0 +1,49 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.box-shadow-ok-stack-inset",
+  "name": "CaseBoxShadowOkStackInset",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"box-shadow-ok-stack-inset\" (effects). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: a THREE-layer elevation whose every layer colour is an OKLab spelling and whose last layer is an INSET hairline — the astryx `shadow-med` shape (examples/astryx/tokens/astryx.dtcg.json), minus the light-dark() mode fork the browser resolves at capture COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex"
+      },
+      "text": "Sample",
+      "declared": {
+        "box-sizing": "border-box",
+        "font-family": "monospace"
+      },
+      "tokens": {
+        "background-color": "{imported.case-box-shadow-ok-stack-inset.root.background-color}",
+        "border-bottom-left-radius": "{imported.shared.size-6}",
+        "border-bottom-right-radius": "{imported.shared.size-6}",
+        "border-top-left-radius": "{imported.shared.size-6}",
+        "border-top-right-radius": "{imported.shared.size-6}",
+        "box-shadow": "{imported.case-box-shadow-ok-stack-inset.root.box-shadow}",
+        "font-size": "{imported.case-box-shadow-ok-stack-inset.root.font-size}",
+        "font-weight": "{imported.case-box-shadow-ok-stack-inset.root.font-weight}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@ds-contracts/conformance",
+        "export": "CaseBoxShadowOkStackInset"
+      }
+    }
+  }
+}

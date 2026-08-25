@@ -1,0 +1,145 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.pseudo-inset-ring-partial-presence",
+  "name": "CasePseudoInsetRingPartialPresence",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"pseudo-inset-ring-partial-presence\" (pseudo-elements). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: the SAME coincident inset ring as pseudo-inset-ring-two-axis, but the ring pseudo EXISTS IN ONLY HALF THE DOMAIN (`[data-size=\"small\"]::after`) while the host carries an opaque per-combo border-colour and zero border width of its own in ALL eight combos COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "appearance",
+      "type": {
+        "enum": [
+          "outline",
+          "tint"
+        ]
+      },
+      "default": "outline",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Appearance",
+          "values": {
+            "outline": "Outline",
+            "tint": "Tint"
+          }
+        },
+        "code": {
+          "prop": "appearance"
+        }
+      }
+    },
+    {
+      "name": "tone",
+      "type": {
+        "enum": [
+          "brand",
+          "danger"
+        ]
+      },
+      "default": "brand",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Tone",
+          "values": {
+            "brand": "Brand",
+            "danger": "Danger"
+          }
+        },
+        "code": {
+          "prop": "tone"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "large"
+        ]
+      },
+      "default": "small",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "large": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center"
+      },
+      "parts": {
+        "label": {
+          "text": "Badge",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "layout": {
+            "grow": true
+          },
+          "tokens": {
+            "font-size": "{imported.case-pseudo-inset-ring-partial-presence.label.font-size}",
+            "font-weight": "{imported.case-pseudo-inset-ring-partial-presence.label.font-weight}"
+          }
+        }
+      },
+      "declared": {
+        "box-sizing": "border-box",
+        "font-family": "monospace",
+        "position": "relative"
+      },
+      "tokens": {
+        "border-bottom-color": "{imported.case-pseudo-inset-ring-partial-presence.root.border-bottom-color.{appearance}.{tone}}",
+        "border-bottom-left-radius": "{imported.shared.size-10000}",
+        "border-bottom-right-radius": "{imported.shared.size-10000}",
+        "border-left-color": "{imported.case-pseudo-inset-ring-partial-presence.root.border-left-color.{appearance}.{tone}}",
+        "border-right-color": "{imported.case-pseudo-inset-ring-partial-presence.root.border-right-color.{appearance}.{tone}}",
+        "border-top-color": "{imported.case-pseudo-inset-ring-partial-presence.root.border-top-color.{appearance}.{tone}}",
+        "border-top-left-radius": "{imported.shared.size-10000}",
+        "border-top-right-radius": "{imported.shared.size-10000}",
+        "bottom": "{imported.shared.size-0}",
+        "font-size": "{imported.case-pseudo-inset-ring-partial-presence.root.font-size}",
+        "left": "{imported.shared.size-0}",
+        "padding-left": "{imported.case-pseudo-inset-ring-partial-presence.root.padding-left}",
+        "padding-right": "{imported.case-pseudo-inset-ring-partial-presence.root.padding-right}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@ds-contracts/conformance",
+        "export": "CasePseudoInsetRingPartialPresence"
+      }
+    }
+  }
+}

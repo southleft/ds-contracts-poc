@@ -1,0 +1,122 @@
+[
+  {
+    "key": "filled.brand__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "filled.brand__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "filled.brand__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "filled.brand__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "filled.danger__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "filled.danger__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "filled.danger__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "filled.danger__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "outline.brand__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "outline.brand__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "outline.brand__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "outline.brand__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "outline.danger__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "outline.danger__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "outline.danger__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "outline.danger__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "tint.brand__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "tint.brand__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "tint.brand__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "tint.brand__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "tint.danger__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "tint.danger__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "tint.danger__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "tint.danger__active",
+    "pctExact": 0,
+    "pctAA": 0
+  }
+]

@@ -2,11 +2,11 @@
   "_marker": "THE DENOMINATOR. Hand-authored per case, generated into one index. Deliberately NOT derived from isFusable / styled / DECLARED_CHANNELS / CHANNEL_TO_COMPUTED / TOKEN_CHANNELS / carriedParts — every instrument in the pipeline derives its denominator from the same filter that decides carriage, which is why a channel the filter never opened scores 100%. This file is the independent one.",
   "generatedBy": "conformance/build.ts",
   "library": "@ds-contracts/conformance@0.1.0",
-  "count": 97,
+  "count": 101,
   "byExpectation": {
-    "CARRIED": 54,
+    "CARRIED": 57,
     "LOWERED": 4,
-    "REFUSED": 21,
+    "REFUSED": 22,
     "UNSUPPORTED": 18
   },
   "cases": [
@@ -282,6 +282,44 @@
       }
     },
     {
+      "id": "box-shadow-ok-color-ring",
+      "feature": "effects",
+      "construct": "a two-layer box-shadow whose RING layer is spelled in an OKLab colour space — `0 0 0 3px oklch(0.708 0 0 / 0.5), 0 1px 2px rgba(0,0,0,.05)` (Tailwind v4 / shadcn's focus ring, verbatim from examples/shadcn/tokens/shadcn-minted.dtcg.json)",
+      "why": "core/emit-figma-script.ts carried a SECOND, NARROWER literal-colour reader than the one core/token-set.ts already uses for the token set: parseShadowStack matched `#hex|rgba?()` only. An unparseable LAYER refuses the WHOLE stack by design, so one ok-space ring layer deleted the elevation layers beside it and the focus-visible preview minted byte-identical to the resting cell (shadcn.switch, shadcn.checkbox). Colour spaces are not exotic — the whole Tailwind v4 generation computes to oklch/oklab.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.tokens.box-shadow",
+      "observable": {
+        "part": "root",
+        "channel": "box-shadow",
+        "capturedValue": "oklch(0.708 0 0 / 0.5) 0px 0px 0px 3px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "mustDraw": true,
+        "note": "both layers lower to Figma DROP_SHADOW effects (the ring is spread 3 at rgba(161,161,161,0.5)); a receipt naming the refusal is not a substitute for the ink"
+      }
+    },
+    {
+      "id": "box-shadow-ok-stack-inset",
+      "feature": "effects",
+      "construct": "a THREE-layer elevation whose every layer colour is an OKLab spelling and whose last layer is an INSET hairline — the astryx `shadow-med` shape (examples/astryx/tokens/astryx.dtcg.json), minus the light-dark() mode fork the browser resolves at capture",
+      "why": "An unparseable LAYER refuses the WHOLE stack by design (core/emit-figma-script.ts:1490-1491) — that is the right rule, and it is why one unreadable ok-space layer deleted the two elevation layers beside it. astryx's dropdown-menu and toast shipped `parsed neither as a single drop shadow nor as an effect stack — inexpressible / foreign shadow grammar` and floated white-on-white with no elevation at all. The inset layer is load-bearing too: Figma's INNER_SHADOW is a different effect type, so a stack that mixes them must survive as a stack.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.tokens.box-shadow",
+      "observable": {
+        "part": "root",
+        "channel": "box-shadow",
+        "capturedValue": "oklch(0 0 0 / 0.05) 0px 2px 4px 0px, oklch(0 0 0 / 0.1) 0px 4px 12px 0px, oklch(1 0 0 / 0.12) 0px 0px 0px 1px inset"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "mustDraw": true,
+        "note": "two DROP_SHADOW layers plus one INNER_SHADOW hairline reach the node as an effect stack; a receipt naming the refusal is not a substitute for the ink"
+      }
+    },
+    {
       "id": "box-shadow-single",
       "feature": "effects",
       "construct": "box-shadow: 0 1px 3px rgba(0,0,0,0.2)",
@@ -296,7 +334,8 @@
       },
       "canvas": {
         "expect": "PRESENT",
-        "note": "DROP_SHADOW effect"
+        "note": "DROP_SHADOW effect — mustDraw: the one effect shape Figma maps 1:1 must actually reach the node, not merely be named",
+        "mustDraw": true
       }
     },
     {
@@ -1894,6 +1933,88 @@
         "expect": "ABSENT",
         "note": "the v1/v2 decor grammar carries solid paint, not gradient stacks"
       }
+    },
+    {
+      "id": "pseudo-inset-ring-partial-presence",
+      "feature": "pseudo-elements",
+      "construct": "the SAME coincident inset ring as pseudo-inset-ring-two-axis, but the ring pseudo EXISTS IN ONLY HALF THE DOMAIN (`[data-size=\"small\"]::after`) while the host carries an opaque per-combo border-colour and zero border width of its own in ALL eight combos",
+      "why": "THE ANTI-HARM GUARD for the coincident-ring fold. Folding the ring's uniform 1px onto the host is only honest when the ring is a ring in EVERY combo: if the box is absent at size=large, the host's already-carried opaque border-{side}-colour would complete the pair there too and the canvas would manufacture a 1px stroke where CSS paints nothing — the HARMFUL class, not a silent loss, and exactly the failure hasWidthSource's own guard exists to prevent. The fold must refuse by a name that DISCLOSES the partial presence (drawn/present N of M), because the paint-multiaxis refusal beside it says 'in all drawn combos' and never admits how many combos have no ring at all.",
+      "expect": "REFUSED",
+      "expectName": "pseudo-decor-ring-fold-partial-presence",
+      "expectWhere": "enriched.extension.json anatomyPromotion.refusals",
+      "observable": {
+        "part": "root::after",
+        "channel": "border-top-width",
+        "capturedValue": "1px"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "nothing may carry the ring's width: a fold here would paint a stroke on the four size=large cells the library leaves bare"
+      },
+      "axes": [
+        {
+          "prop": "appearance",
+          "values": [
+            "outline",
+            "tint"
+          ],
+          "default": "outline"
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "brand",
+            "danger"
+          ],
+          "default": "brand"
+        },
+        {
+          "prop": "size",
+          "values": [
+            "small",
+            "large"
+          ],
+          "default": "small"
+        }
+      ]
+    },
+    {
+      "id": "pseudo-inset-ring-two-axis",
+      "feature": "pseudo-elements",
+      "construct": "a COINCIDENT INSET RING pseudo — ::after at inset 0, transparent fill, uniform 1px border, host radius — whose ring COLOUR is a product of TWO enum axes while its four side WIDTHS are uniform across every combo (fluent Badge's `root::after`)",
+      "why": "This is how a whole library spells its outline/tint ring: the host element carries border-width 0 and the ring lives on a coincident pseudo. The decor grammar factors a pseudo's paint uniform-or-ONE-enum-axis, so a two-axis ring colour refuses the WHOLE box (pseudo-decor-paint-multiaxis) and throws away FOUR UNIFORM FACTS (1px on all four sides, every combo) to avoid guessing the one varying one. Fusion already carries the varying half on the HOST (border-{side}-color per axis product), so the contract ships a border COLOUR with no width anywhere and core/emit-figma-script.ts's hasWidthSource correctly refuses to invent one — outline and tint mint identical to filled. fluent.badge is the measured row.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.literals.border-top-width (the ring's uniform side widths folded onto the coincident host, whose border-{side}-color the contract already carries)",
+      "observable": {
+        "part": "root::after",
+        "channel": "border-top-width",
+        "capturedValue": "1px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "mustDraw": true,
+        "note": "the host node draws a 1px Figma stroke painted by its own border-{side}-color binding — the ring is the host's stroke, not a second node"
+      },
+      "axes": [
+        {
+          "prop": "appearance",
+          "values": [
+            "filled",
+            "outline",
+            "tint"
+          ],
+          "default": "filled"
+        },
+        {
+          "prop": "tone",
+          "values": [
+            "brand",
+            "danger"
+          ],
+          "default": "brand"
+        }
+      ]
     },
     {
       "id": "pseudo-marker",
