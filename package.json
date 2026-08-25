@@ -233,6 +233,7 @@
     "parity:snapshot:rest": "tsx parity/snapshot-rest.ts",
     "census:check": "tsx scripts/canvas-census-check.ts",
     "census:render": "tsx extract/figma/census/render.ts",
+    "census:ref": "tsx extract/figma/census/ref-render.ts",
     "census:d2c:record": "tsx extract/figma/census/design-to-code.ts --write",
     "census:d2c:render": "tsx extract/figma/census/d2c-render.ts"
   },

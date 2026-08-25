@@ -27,11 +27,33 @@
  *     both phases — "no code render" is a failure, never a blank cell.
  *   · THE CANVAS HALF (phase full). Every sampled variant has its
  *     canvas-<slug>.png and the row has a verdict.json whose `recognisable`
- *     is true or false — `unscored` (or no verdict) is RED. A `false` verdict
+ *     is scored — `unscored` (or no verdict) is RED. A `false` verdict
  *     must name at least one wall; an unexplained difference is RED too.
  *     `--phase code` lets these columns read PENDING, so the fast lane holds
  *     the denominator and the code half now and flips to `--phase full` when
  *     the canvas half lands.
+ *   · THE REFERENCE HALF (phase full). THE PERMANENT RULE (owner,
+ *     2026-08-24): **a visual reference is ONLY the real library's render.**
+ *     The code half is emit-html of the CONTRACT — self-referential (both
+ *     sides share the contract's defects and agree while wrong) — so every
+ *     row also carries `ref-<slug>.png` per sampled variant: THE REAL
+ *     LIBRARY's own render (extract/figma/census/ref-render.ts — the
+ *     library's pinned npm package in its documented sandbox; first-party =
+ *     the generated src/components catalog, which IS the implementation),
+ *     with a per-row `ref-render.json` receipt. A variant the real library
+ *     cannot produce is `ref: UNMAPPABLE (<reason>)` BY NAME in that receipt
+ *     — never faked, never silently absent. At `--phase full` a rendered
+ *     variant with neither `ref-<slug>.png` nor a named UNMAPPABLE row is
+ *     RED; a row with no ref-render.json at all is RED.
+ *   · THE VERDICT STATE `"ungraded"`. The original `recognisable` verdicts
+ *     were SELF-GRADES by the same builders (and compared code-vs-canvas
+ *     with no real-library reference), so they were voided to
+ *     `"ungraded"` (the old value preserved as `priorSelfGrade`) pending a
+ *     separate ADVERSARIAL grading pass against the ref-<slug>.png layer.
+ *     `"ungraded"` is reported honestly in the receipt and tally; at
+ *     `--phase full` it does not RED the gate (the refs are the gate's
+ *     floor; the re-grade is a person/adversary's pass) — `"unscored"` and a
+ *     missing verdict still do.
  *   · THE RECEIPT. parity/receipts/v1/CANVAS-CENSUS.md — byte-stable (no
  *     dates; rows in manifest order), one row per set: library, id,
  *     archetype, variants rendered, code-render state, canvas state, verdict,
@@ -40,8 +62,9 @@
  * FALSIFICATION (`--self-test`, run in CI right after the gate): the gate is
  * run against a temp copy of the census with (a) one row's code-render.json
  * deleted, (b) one manifest row deleted while its contract still exists,
- * (c) the real census in `--phase full` with the canvas half pending. All
- * three must go red naming the row; a gate that cannot go red is not a gate.
+ * (c) the real census in `--phase full` with the canvas half pending,
+ * (d) one row's real-library ref-<slug>.png deleted at `--phase full`. All
+ * four must go red naming the row; a gate that cannot go red is not a gate.
  *
  * ===========================================================================
  * THE CANVAS-HALF RECIPE — for the agent that owns the console bridge
@@ -100,6 +123,7 @@ import {
   cpSync,
   existsSync,
   mkdtempSync,
+  readdirSync,
   readFileSync,
   rmSync,
   writeFileSync,
@@ -130,7 +154,9 @@ import type { D2cRenderReceipt } from "../extract/figma/census/d2c-render.js";
 type Phase = "code" | "full" | "design-to-code";
 
 interface Verdict {
-  recognisable: true | false | "unscored";
+  recognisable: true | false | "unscored" | "ungraded";
+  /** The voided self-grade (see header: verdict state "ungraded"). */
+  priorSelfGrade?: true | false | "unscored";
   walls?: string[];
   notes?: string;
   reviewedAt?: string;
@@ -138,10 +164,22 @@ interface Verdict {
   roundTrip?: Record<string, unknown>;
 }
 
+/** The reference half's per-row receipt (extract/figma/census/ref-render.ts). */
+interface RefReceipt {
+  id: string;
+  refs: Array<{
+    slug: string;
+    status: "rendered" | "unmappable";
+    reason?: string;
+    png?: string;
+  }>;
+}
+
 interface RowState {
   row: ManifestRow;
   codeState: string;
   canvasState: string;
+  refState: string;
   verdictState: string;
   walls: string;
   rendered: string;
@@ -233,6 +271,7 @@ function rowState(row: ManifestRow, phase: Phase, censusDir: string): RowState {
     row,
     codeState: "",
     canvasState: "PENDING",
+    refState: "PENDING",
     verdictState: "PENDING",
     walls: "—",
     rendered: "—",
@@ -306,12 +345,39 @@ function rowState(row: ManifestRow, phase: Phase, censusDir: string): RowState {
   else
     state.canvasState = `${canvasPresent.length}/${renderedVariants.length} — ${canvasMissing.length} missing`;
 
+  // Reference half — THE REAL LIBRARY's render (see header: the permanent
+  // rule). A rendered variant needs ref-<slug>.png on disk or a named
+  // UNMAPPABLE row in ref-render.json; nothing else counts.
+  const refReceiptPath = path.join(dir, "ref-render.json");
+  const refReceipt = existsSync(refReceiptPath)
+    ? readJson<RefReceipt>(refReceiptPath)
+    : null;
+  const refUnmappable = new Map<string, string>();
+  for (const r of refReceipt?.refs ?? [])
+    if (r.status === "unmappable")
+      refUnmappable.set(r.slug, r.reason ?? "UNMAPPABLE (unreasoned)");
+  const refPresent = renderedVariants.filter((v) =>
+    existsSync(path.join(dir, `ref-${v.slug}.png`)),
+  );
+  const refMissing = renderedVariants.filter(
+    (v) =>
+      !existsSync(path.join(dir, `ref-${v.slug}.png`)) &&
+      !refUnmappable.has(v.slug),
+  );
+  if (!refReceipt && refPresent.length === 0) state.refState = "PENDING";
+  else if (refMissing.length === 0)
+    state.refState = `${refPresent.length}/${renderedVariants.length}${refUnmappable.size > 0 ? ` (+${refUnmappable.size} UNMAPPABLE)` : ""}`;
+  else
+    state.refState = `${refPresent.length}/${renderedVariants.length} — ${refMissing.length} missing`;
+
   if (verdict) {
     const walls = verdict.walls ?? [];
     state.walls = walls.length > 0 ? walls.join("; ") : "—";
     if (verdict.recognisable === true) state.verdictState = "recognisable";
     else if (verdict.recognisable === false)
       state.verdictState = "NOT recognisable";
+    else if (verdict.recognisable === "ungraded")
+      state.verdictState = "ungraded";
     else state.verdictState = "unscored";
     if (verdict.recognisable === false && walls.length === 0) {
       failures.push(
@@ -326,8 +392,21 @@ function rowState(row: ManifestRow, phase: Phase, censusDir: string): RowState {
         `${who}: no canvas PNG for ${canvasMissing.length} sampled variant(s): ${canvasMissing.map((v) => `canvas-${v.slug}.png`).join(", ")}`,
       );
     }
+    if (!refReceipt) {
+      failures.push(
+        `${who}: no real-library reference receipt (${path.relative(REPO, refReceiptPath)}) — run \`npx tsx extract/figma/census/ref-render.ts --library ${row.library} --id ${row.id}\``,
+      );
+    } else if (refMissing.length > 0) {
+      failures.push(
+        `${who}: no real-library reference for ${refMissing.length} sampled variant(s) (a visual reference is ONLY the real library's render — ref-<slug>.png or a named UNMAPPABLE row): ${refMissing.map((v) => `ref-${v.slug}.png`).join(", ")}`,
+      );
+    }
     if (!verdict) failures.push(`${who}: no verdict.json`);
-    else if (verdict.recognisable !== true && verdict.recognisable !== false)
+    else if (
+      verdict.recognisable !== true &&
+      verdict.recognisable !== false &&
+      verdict.recognisable !== "ungraded"
+    )
       failures.push(`${who}: verdict is unscored`);
   }
   return state;
@@ -397,6 +476,14 @@ function renderReceipt(
       "buildCssCellDoc, captured by the canvas gate's captureCell at dpr 2; first-party over tokens/, example libraries over the committed `<lib>.bundle.json` tokenSet — the layer the plugin compiles a paste from).",
   );
   lines.push("");
+  lines.push(
+    "Reference half: `ref-<slug>.png` + `ref-render.json` (extract/figma/census/ref-render.ts) — **THE REAL LIBRARY's own render** (the permanent rule: a visual reference is ONLY " +
+      "the real library's render; the code half is emit-html of the contract and is self-referential). Example libraries render their pinned npm package in the documented sandbox, " +
+      "mounted per the capture config's measured mapping; first-party renders the generated src/components catalog (the implementation itself) through its own Storybook meta. " +
+      "A variant the real library cannot produce is `ref: UNMAPPABLE (<reason>)` by name in ref-render.json — never faked. Verdicts: the original self-grades were voided to " +
+      '`"ungraded"` (kept as `priorSelfGrade`) pending a separate adversarial grading pass against this reference layer.',
+  );
+  lines.push("");
   lines.push("## The canvas-half recipe");
   lines.push("");
   lines.push(
@@ -411,21 +498,23 @@ function renderReceipt(
   lines.push("## Tally");
   lines.push("");
   const tally = (pred: (r: RowState) => boolean) => rows.filter(pred).length;
+  const refComplete = (r: RowState) =>
+    r.refState !== "PENDING" && !r.refState.includes("missing");
   lines.push(
-    "| library | sets | code rendered | code UNAVAILABLE / MISSING | canvas complete | verdict recognisable | verdict NOT recognisable | verdict pending/unscored |",
+    "| library | sets | code rendered | code UNAVAILABLE / MISSING | canvas complete | ref complete | verdict recognisable | verdict NOT recognisable | verdict ungraded | verdict pending/unscored |",
   );
-  lines.push("|---|---|---|---|---|---|---|---|");
+  lines.push("|---|---|---|---|---|---|---|---|---|---|");
   for (const [lib, rs] of byLib) {
     lines.push(
       `| ${lib} | ${rs.length} | ${rs.filter((r) => r.codeState.startsWith("rendered")).length} | ${rs.filter((r) => !r.codeState.startsWith("rendered")).length} | ` +
-        `${rs.filter((r) => r.canvasState !== "PENDING" && !r.canvasState.includes("missing")).length} | ${rs.filter((r) => r.verdictState === "recognisable").length} | ` +
-        `${rs.filter((r) => r.verdictState === "NOT recognisable").length} | ${rs.filter((r) => r.verdictState === "PENDING" || r.verdictState === "unscored").length} |`,
+        `${rs.filter((r) => r.canvasState !== "PENDING" && !r.canvasState.includes("missing")).length} | ${rs.filter(refComplete).length} | ${rs.filter((r) => r.verdictState === "recognisable").length} | ` +
+        `${rs.filter((r) => r.verdictState === "NOT recognisable").length} | ${rs.filter((r) => r.verdictState === "ungraded").length} | ${rs.filter((r) => r.verdictState === "PENDING" || r.verdictState === "unscored").length} |`,
     );
   }
   lines.push(
     `| **all** | ${rows.length} | ${tally((r) => r.codeState.startsWith("rendered"))} | ${tally((r) => !r.codeState.startsWith("rendered"))} | ` +
-      `${tally((r) => r.canvasState !== "PENDING" && !r.canvasState.includes("missing"))} | ${tally((r) => r.verdictState === "recognisable")} | ` +
-      `${tally((r) => r.verdictState === "NOT recognisable")} | ${tally((r) => r.verdictState === "PENDING" || r.verdictState === "unscored")} |`,
+      `${tally((r) => r.canvasState !== "PENDING" && !r.canvasState.includes("missing"))} | ${tally(refComplete)} | ${tally((r) => r.verdictState === "recognisable")} | ` +
+      `${tally((r) => r.verdictState === "NOT recognisable")} | ${tally((r) => r.verdictState === "ungraded")} | ${tally((r) => r.verdictState === "PENDING" || r.verdictState === "unscored")} |`,
   );
   lines.push("");
   lines.push(
@@ -439,9 +528,9 @@ function renderReceipt(
   lines.push("## Rows");
   lines.push("");
   lines.push(
-    "| library | id | archetype | axes × variants (compiled; script rows) | variants rendered | code-render | canvas | verdict | walls |",
+    "| library | id | archetype | axes × variants (compiled; script rows) | variants rendered | code-render | canvas | ref | verdict | walls |",
   );
-  lines.push("|---|---|---|---|---|---|---|---|---|");
+  lines.push("|---|---|---|---|---|---|---|---|---|---|");
   for (const r of rows) {
     const m = r.row;
     const compiled =
@@ -449,7 +538,7 @@ function renderReceipt(
         ? `compile refused`
         : `${m.variantAxes} × ${m.variantCount}${m.stateVariantCount ? ` + ${m.stateVariantCount} state` : ""}; ${m.scriptVariantRows}`;
     lines.push(
-      `| ${m.library} | \`${m.id}\` | ${m.archetype} | ${compiled} | ${r.rendered} | ${esc(r.codeState)} | ${esc(r.canvasState)} | ${esc(r.verdictState)} | ${esc(r.walls)} |`,
+      `| ${m.library} | \`${m.id}\` | ${m.archetype} | ${compiled} | ${r.rendered} | ${esc(r.codeState)} | ${esc(r.canvasState)} | ${esc(r.refState)} | ${esc(r.verdictState)} | ${esc(r.walls)} |`,
     );
   }
   lines.push("");
@@ -556,6 +645,53 @@ function selfTest(): number {
       );
     }
 
+    // (d) one row's real-library reference deleted → red at --phase full,
+    // naming the row (a visual reference is ONLY the real library's render;
+    // a gate that cannot go red on a missing ref is not a gate).
+    const refVictim = manifest.rows.find((r) => {
+      const dir = path.join(base, r.library, r.id);
+      return (
+        existsSync(path.join(dir, "ref-render.json")) &&
+        existsSync(dir) &&
+        readdirSync(dir).some((f) => /^ref-.*\.png$/.test(f))
+      );
+    });
+    if (refVictim) {
+      const censusD = path.join(tmp, "census-d");
+      cpSync(base, censusD, { recursive: true });
+      const victimDir = path.join(censusD, refVictim.library, refVictim.id);
+      const refPng = readdirSync(victimDir).find((f) =>
+        /^ref-.*\.png$/.test(f),
+      )!;
+      rmSync(path.join(victimDir, refPng));
+      const d = runCensus(
+        {
+          phase: "full",
+          manifestPath,
+          censusDir: censusD,
+          receiptPath: null,
+          quiet: true,
+        },
+        manifest,
+      );
+      if (
+        d.ok ||
+        !d.failures.some(
+          (f) =>
+            f.startsWith(`${refVictim.library}/${refVictim.id}:`) &&
+            f.includes("real-library reference"),
+        )
+      ) {
+        problems.push(
+          `(d) deleting ${refVictim.library}/${refVictim.id}/${refPng} did not turn --phase full red by name`,
+        );
+      }
+    } else {
+      problems.push(
+        `(d) no census row carries a real-library reference (ref-render.json + ref-*.png) — the reference half is absent, so its red case cannot be proven`,
+      );
+    }
+
     // (c) --phase full with the canvas half pending → red on the first pending row.
     const c = runCensus(
       {
@@ -598,7 +734,7 @@ function selfTest(): number {
     return 1;
   }
   console.log(
-    "✔ census self-test: (a) deleted code render → red by name; (b) contract outside the manifest → denominator refusal; (c) --phase full with canvas pending → red by name",
+    "✔ census self-test: (a) deleted code render → red by name; (b) contract outside the manifest → denominator refusal; (c) --phase full with canvas pending → red by name; (d) deleted real-library ref → red by name",
   );
   return 0;
 }
