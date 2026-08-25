@@ -4,7 +4,7 @@
   "name": "CaseOverlayTextFillStageDerived",
   "version": "0.1.0",
   "status": "draft",
-  "description": "SEED contract for the CSS/DOM conformance fixture case \"overlay-text-fill-stage-derived\" (geometry). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: a TEXT-bearing part that genuinely FILLS its pinned ancestor — where the ancestor's own box is the CAPTURE STAGE's content box (288px = stage 320 − 2×16), and moves only because the ancestor's gutters do COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"overlay-text-fill-stage-derived\" (geometry). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: a TEXT-bearing part that genuinely FILLS its pinned ancestor — where the ancestor's own box is the CAPTURE STAGE's content box (288px = stage 320 − 2×16), and its content box moves 32px only because the ancestor's own gutters do COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "div"
   },
@@ -13,18 +13,18 @@
       "name": "gutters",
       "type": {
         "enum": [
-          "none",
-          "wide"
+          "wide",
+          "none"
         ]
       },
-      "default": "none",
+      "default": "wide",
       "bindings": {
         "figma": {
           "kind": "VARIANT",
           "property": "Gutters",
           "values": {
-            "none": "None",
-            "wide": "Wide"
+            "wide": "Wide",
+            "none": "None"
           }
         },
         "code": {
@@ -53,7 +53,7 @@
           },
           "tokens": {
             "background-color": "{imported.case-overlay-text-fill-stage-derived.a.background-color}",
-            "bottom": "{imported.case-overlay-text-fill-stage-derived.a.bottom}",
+            "bottom": "{imported.shared.size-12}",
             "font-size": "{imported.shared.size-12}",
             "height": "{imported.case-overlay-text-fill-stage-derived.a.height}",
             "left": "{imported.case-overlay-text-fill-stage-derived.a.left}",
@@ -77,6 +77,7 @@
             "color": "{imported.case-overlay-text-fill-stage-derived.label.color}",
             "font-size": "{imported.shared.size-12}",
             "font-weight": "{imported.case-overlay-text-fill-stage-derived.label.font-weight}",
+            "line-height": "{imported.case-overlay-text-fill-stage-derived.label.line-height}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}"
           }

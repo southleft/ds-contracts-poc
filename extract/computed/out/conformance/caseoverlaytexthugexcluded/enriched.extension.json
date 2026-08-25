@@ -16,8 +16,14 @@
             "$type": "dimension"
           },
           "width": {
-            "$value": "160px",
-            "$type": "dimension"
+            "default": {
+              "$value": "160px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "200px",
+              "$type": "dimension"
+            }
           }
         },
         "a": {
@@ -34,8 +40,14 @@
             "$type": "dimension"
           },
           "left": {
-            "$value": "152px",
-            "$type": "dimension"
+            "default": {
+              "$value": "152px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "192px",
+              "$type": "dimension"
+            }
           },
           "width": {
             "$value": "8px",
@@ -54,6 +66,10 @@
           "font-weight": {
             "$value": "400",
             "$type": "number"
+          },
+          "line-height": {
+            "$value": "20px",
+            "$type": "dimension"
           }
         }
       },
@@ -183,15 +199,7 @@
     ],
     "state": []
   },
-  "codeOnlyChannels": [
-    {
-      "part": "label",
-      "channel": "line-height",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "normal",
-      "distinctValues": 1
-    }
-  ],
+  "codeOnlyChannels": [],
   "stateOverflow": [],
   "overflowBindings": [],
   "pairwiseRefusals": [],
@@ -209,7 +217,7 @@
     "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
     "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: a — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "text-part-typography-carried: label — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "text-part-typography-carried: label — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
     "geometry-excluded: a — block-size 8px, inline-size 8px, perspective-origin 4px 4px, transform-origin 4px 4px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "geometry-excluded: label — block-size 24px, height 24px, inline-size 43.2188px, perspective-origin 21.6094px 12px, transform-origin 21.6094px 12px, width 43.2188px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "geometry-excluded: root — block-size 32px, inline-size 160px, perspective-origin 80px 16px, transform-origin 80px 16px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
@@ -219,8 +227,8 @@
     "inheritance-check-rejected: label.color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-only: a.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: label.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)"
+    "inheritance-only: a.font-size equals ancestor \"root\" on all 8 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label.font-size equals ancestor \"root\" on all 8 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)"
   ],
   "frontierReceipts": [
     "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",

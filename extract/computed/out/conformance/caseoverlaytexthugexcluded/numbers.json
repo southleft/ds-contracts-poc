@@ -1,8 +1,8 @@
 {
   "component": "CaseOverlayTextHugExcluded",
   "browser": "151.0.7922.34",
-  "captures": 4,
-  "combos": 1,
+  "captures": 8,
+  "combos": 2,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
   "channelsEnumerated": 479,
@@ -77,8 +77,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 14,
-    "mintedLeavesFolded": 14
+    "mintedLeavesUnfolded": 17,
+    "mintedLeavesFolded": 17
   },
   "bound": {
     "cellsChecked": 0,
@@ -87,12 +87,12 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 14,
-    "baseBindings": 26,
+    "leaves": 17,
+    "baseBindings": 27,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 26,
-      "perAxis": 0,
+      "uniform": 25,
+      "perAxis": 2,
       "perPair": 0,
       "refused": 0
     }
@@ -102,7 +102,7 @@
     "state": 0
   },
   "codeOnly": {
-    "base": 1,
+    "base": 0,
     "state": 0,
     "overflowBindings": 0
   },
@@ -115,8 +115,8 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 5724,
-    "cellsMatched": 5724,
+    "cellsCompared": 11448,
+    "cellsMatched": 11448,
     "pct": 100,
     "namedExclusions": [
       "app-region",
@@ -127,8 +127,8 @@
     "topMismatchedChannels": []
   },
   "pixel": {
-    "pairs": 4,
-    "measured": 4,
+    "pairs": 8,
+    "measured": 8,
     "unscored": {
       "sizeMismatch": 0,
       "noOriginal": 0,
@@ -137,31 +137,51 @@
     "exact": {
       "mean": 0,
       "max": 0,
-      "perfect": 4
+      "perfect": 8
     },
     "aa": {
       "mean": 0,
       "max": 0,
-      "perfect": 4
+      "perfect": 8
     },
     "worst": [
       {
-        "key": "__default",
+        "key": "default__default",
         "pctExact": 0,
         "pctAA": 0
       },
       {
-        "key": "__hover",
+        "key": "default__hover",
         "pctExact": 0,
         "pctAA": 0
       },
       {
-        "key": "__focus-visible",
+        "key": "default__focus-visible",
         "pctExact": 0,
         "pctAA": 0
       },
       {
-        "key": "__active",
+        "key": "default__active",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "lg__default",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "lg__hover",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "lg__focus-visible",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "lg__active",
         "pctExact": 0,
         "pctAA": 0
       }
@@ -169,12 +189,12 @@
   },
   "gate": {
     "computedPctEqual": 100,
-    "rowsFullyEqual": 4,
-    "rows": 4,
-    "pixelPerfectExact": 4,
-    "pixelPerfectAA": 4,
-    "pairs": 4
+    "rowsFullyEqual": 8,
+    "rows": 8,
+    "pixelPerfectExact": 8,
+    "pixelPerfectAA": 8,
+    "pairs": 8
   },
   "focusVisibleDriverMatched": 0,
-  "focusVisibleDriverTotal": 1
+  "focusVisibleDriverTotal": 2
 }

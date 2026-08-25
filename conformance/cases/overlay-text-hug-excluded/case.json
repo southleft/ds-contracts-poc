@@ -1,18 +1,21 @@
 {
   "id": "overlay-text-hug-excluded",
   "feature": "geometry",
-  "construct": "a TEXT-bearing part in an overlay anatomy whose box IS its own shrink-to-fit measurement of the mounted sample string",
-  "why": "THE WALL PIN for the fill door above. This case must stay REFUSED forever: its width is a function of the harness's sample text and its font (the astryx.card 114.203px / 119.016px measurement of the SAME library version across a font swap). If a future widening of the text-fill door ever turns this case CARRIED, the gate goes red — the door can never become a blanket.",
+  "construct": "a TEXT-bearing part in an overlay anatomy whose box IS its own shrink-to-fit measurement — an inline-block beside a PINNED ancestor that moves (160px → 200px) without it",
+  "why": "THE WALL PIN for the fill door. Its width is a function of the harness's sample text and font (the astryx.card 114.203px / 119.016px measurement of the SAME library version across a font swap), and its 20px height is its own line box, not the root's 24px content box. The ancestor MOVES here, so the case cannot pass by accident of a single observation: the fill test itself must fail. If a future widening of the text-fill door ever turns this case CARRIED, the gate goes red — the door can never become a blanket.",
   "expect": "REFUSED",
   "expectName": "absolute-geometry-excluded",
   "expectWhere": "enriched.extension.json receipts",
   "observable": {
     "part": "b",
-    "channel": "width",
-    "capturedValue": ""
+    "channel": "height",
+    "capturedValue": "20px"
   },
   "canvas": {
     "expect": "ABSENT",
     "note": "the canvas hugs, which is the honest outcome of an honest refusal"
-  }
+  },
+  "axes": [
+    { "prop": "size", "values": ["default", "lg"], "default": "default" }
+  ]
 }

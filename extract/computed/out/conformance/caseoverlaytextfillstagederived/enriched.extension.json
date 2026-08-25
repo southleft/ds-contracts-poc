@@ -12,26 +12,26 @@
             "$type": "color"
           },
           "height": {
-            "$value": "14px",
+            "$value": "20px",
             "$type": "dimension"
           },
           "padding-left": {
-            "none": {
-              "$value": "0px",
-              "$type": "dimension"
-            },
             "wide": {
               "$value": "16px",
+              "$type": "dimension"
+            },
+            "none": {
+              "$value": "0px",
               "$type": "dimension"
             }
           },
           "padding-right": {
-            "none": {
-              "$value": "0px",
-              "$type": "dimension"
-            },
             "wide": {
               "$value": "16px",
+              "$type": "dimension"
+            },
+            "none": {
+              "$value": "0px",
               "$type": "dimension"
             }
           },
@@ -44,10 +44,6 @@
           "background-color": {
             "$value": "#1ea05a",
             "$type": "color"
-          },
-          "bottom": {
-            "$value": "6px",
-            "$type": "dimension"
           },
           "height": {
             "$value": "8px",
@@ -74,6 +70,10 @@
           "font-weight": {
             "$value": "400",
             "$type": "number"
+          },
+          "line-height": {
+            "$value": "20px",
+            "$type": "dimension"
           }
         }
       },
@@ -194,15 +194,7 @@
     ],
     "state": []
   },
-  "codeOnlyChannels": [
-    {
-      "part": "label",
-      "channel": "line-height",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "normal",
-      "distinctValues": 1
-    }
-  ],
+  "codeOnlyChannels": [],
   "stateOverflow": [],
   "overflowBindings": [],
   "pairwiseRefusals": [],
@@ -221,10 +213,10 @@
     "text-fill-pinned-geometry-refused: label.width — the part's box IS its pinned ancestor's content box in every enabled combo, and the fill is refused anyway: a box on its ancestor chain is a measurement of the harness, not of the library — label.width = 288px = the capture stage's content box (stage 320px − 2×16px) in combo none; admitting the fill would mint that same number one generation down",
     "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: a — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "text-part-typography-carried: label — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "text-part-typography-carried: label — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
     "geometry-excluded: a — block-size 8px, inline-size 8px, perspective-origin 4px 4px, transform-origin 4px 4px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
-    "geometry-excluded: label — block-size 14px, height 14px, inline-size 288px, perspective-origin 144px 7px, transform-origin 144px 7px, width 288px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
-    "geometry-excluded: root — block-size 14px, inline-size 288px, perspective-origin 144px 7px, transform-origin 144px 7px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label — block-size 20px, height 20px, inline-size 256px, perspective-origin 128px 10px, transform-origin 128px 10px, width 256px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 20px, inline-size 256px, perspective-origin 144px 10px, transform-origin 144px 10px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (label); -webkit-text-stroke-color (label)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
     "inheritance-check-rejected: label.caret-color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",

@@ -1,7 +1,7 @@
 {
   "id": "overlay-text-fill-stage-derived",
   "feature": "geometry",
-  "construct": "a TEXT-bearing part that genuinely FILLS its pinned ancestor — where the ancestor's own box is the CAPTURE STAGE's content box (288px = stage 320 − 2×16), and moves only because the ancestor's gutters do",
+  "construct": "a TEXT-bearing part that genuinely FILLS its pinned ancestor — where the ancestor's own box is the CAPTURE STAGE's content box (288px = stage 320 − 2×16), and its content box moves 32px only because the ancestor's own gutters do",
   "why": "THE HARNESS PIN. This is the fluent.Card / mui.Accordion / carbon.Modal shape reduced to a fixture, and it is the exact defect the previous attempt at the fill door shipped: it admitted label widths of 412/404/396px (fluent, root 428 = stage 460 − 2×16), 256px (mui, root 288 = stage 320 − 2×16) and 366/474/690/798px (carbon, 48%/60%/84%/96% of a root width ALREADY refused as browser.viewport.width) and asserted in the receipt that the number was evidence-backed. Every counter-evidence test the fill door has passes here — the box IS the ancestor's content box in every combo, and the ancestor moves 32px — and the fill must be refused anyway, because the box a fill copies is the harness's mount stage. A canvas frame has no stage.",
   "expect": "REFUSED",
   "expectName": "text-fill-pinned-geometry-refused",
@@ -9,7 +9,7 @@
   "observable": {
     "part": "b",
     "channel": "width",
-    "capturedValue": ""
+    "capturedValue": "256px"
   },
   "canvas": {
     "expect": "ABSENT",
@@ -20,10 +20,10 @@
     {
       "prop": "gutters",
       "values": [
-        "none",
-        "wide"
+        "wide",
+        "none"
       ],
-      "default": "none"
+      "default": "wide"
     }
   ]
 }

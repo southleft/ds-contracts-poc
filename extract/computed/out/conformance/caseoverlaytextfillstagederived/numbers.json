@@ -88,10 +88,10 @@
   },
   "minted": {
     "leaves": 17,
-    "baseBindings": 28,
+    "baseBindings": 29,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 26,
+      "uniform": 27,
       "perAxis": 2,
       "perPair": 0,
       "refused": 0
@@ -102,7 +102,7 @@
     "state": 0
   },
   "codeOnly": {
-    "base": 1,
+    "base": 0,
     "state": 0,
     "overflowBindings": 0
   },
@@ -146,26 +146,6 @@
     },
     "worst": [
       {
-        "key": "none__default",
-        "pctExact": 0,
-        "pctAA": 0
-      },
-      {
-        "key": "none__hover",
-        "pctExact": 0,
-        "pctAA": 0
-      },
-      {
-        "key": "none__focus-visible",
-        "pctExact": 0,
-        "pctAA": 0
-      },
-      {
-        "key": "none__active",
-        "pctExact": 0,
-        "pctAA": 0
-      },
-      {
         "key": "wide__default",
         "pctExact": 0,
         "pctAA": 0
@@ -182,6 +162,26 @@
       },
       {
         "key": "wide__active",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "none__default",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "none__hover",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "none__focus-visible",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "none__active",
         "pctExact": 0,
         "pctAA": 0
       }

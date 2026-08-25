@@ -1,3 +1,4 @@
 [data-cf="overlay-text-hug-excluded"] { position: relative; display: flex; box-sizing: border-box; width: 160px; height: 32px; padding: 4px; background: rgb(235, 235, 235); }
+[data-cf="overlay-text-hug-excluded"][data-size="lg"] { width: 200px; }
 [data-cf="overlay-text-hug-excluded"] .cf-a { position: absolute; right: 0px; top: 0px; width: 8px; height: 8px; background: rgb(30, 160, 90); }
-[data-cf="overlay-text-hug-excluded"] .cf-b { display: inline-block; font-size: 12px; color: rgb(20, 30, 60); background: rgb(190, 205, 230); }
+[data-cf="overlay-text-hug-excluded"] .cf-b { display: inline-block; font-size: 12px; line-height: 20px; color: rgb(20, 30, 60); background: rgb(190, 205, 230); }

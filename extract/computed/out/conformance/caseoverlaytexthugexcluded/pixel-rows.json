@@ -1,21 +1,41 @@
 [
   {
-    "key": "__default",
+    "key": "default__default",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "__hover",
+    "key": "default__hover",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "__focus-visible",
+    "key": "default__focus-visible",
     "pctExact": 0,
     "pctAA": 0
   },
   {
-    "key": "__active",
+    "key": "default__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg__active",
     "pctExact": 0,
     "pctAA": 0
   }

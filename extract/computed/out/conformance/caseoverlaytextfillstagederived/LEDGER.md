@@ -45,8 +45,8 @@ Zero contradictions.
 
 ## Minted (no name recoverable — core/mint-tokens.ts, unchanged)
 
-- leaves: **17** · bindings: 28 base + 0 state
-- shape: 26 uniform · 2 per-axis · 0 per-axis-pair · 0 refused (uncorrelated — nothing minted, named)
+- leaves: **17** · bindings: 29 base + 0 state
+- shape: 27 uniform · 2 per-axis · 0 per-axis-pair · 0 refused (uncorrelated — nothing minted, named)
 
 ## Declared facts (v15 — carried, first-class)
 
@@ -61,8 +61,7 @@ Zero contradictions.
 
 ## Code-only / overflow (named, in the extension file)
 
-- base channels outside mintable kinds: **1**
-  - label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today (sample: `normal`, 1 distinct value(s))
+- base channels outside mintable kinds: **0**
 - state channels outside mintable kinds: **0**
 - refused/overflow bindings: **0**
 

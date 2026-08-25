@@ -3,20 +3,20 @@
   "generatedBy": "extract/computed/gate.ts",
   "browser": "151.0.7922.34",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
-  "combos": 1,
+  "combos": 2,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 168,
-    "cellsEqual": 168,
+    "cellsCompared": 336,
+    "cellsEqual": 336,
     "pctEqual": 100,
-    "rowsFullyEqual": 4,
-    "rows": 4
+    "rowsFullyEqual": 8,
+    "rows": 8
   },
   "pixel": {
-    "pairs": 4,
-    "perfectExact": 4,
-    "perfectAA": 4,
-    "measured": 4,
+    "pairs": 8,
+    "perfectExact": 8,
+    "perfectAA": 8,
+    "measured": 8,
     "unscored": {
       "sizeMismatch": 0,
       "noOriginal": 0,
@@ -30,44 +30,66 @@
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 14,
-    "mintedLeavesUnfolded": 14,
-    "baseBindings": 26,
+    "mintedLeaves": 17,
+    "mintedLeavesUnfolded": 17,
+    "baseBindings": 27,
     "stateBindings": 0,
-    "codeOnlyChannels": 1,
+    "codeOnlyChannels": 0,
     "overflowBindings": 0,
     "folds": 10
   },
   "worstRows": [
     {
-      "key": "__default",
+      "key": "default__default",
       "pctAA": 0,
       "pctExact": 0,
       "channelsMismatched": 0
     },
     {
-      "key": "__hover",
+      "key": "default__hover",
       "pctAA": 0,
       "pctExact": 0,
       "channelsMismatched": 0
     },
     {
-      "key": "__focus-visible",
+      "key": "default__focus-visible",
       "pctAA": 0,
       "pctExact": 0,
       "channelsMismatched": 0
     },
     {
-      "key": "__active",
+      "key": "default__active",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "lg__default",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "lg__hover",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "lg__focus-visible",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "lg__active",
       "pctAA": 0,
       "pctExact": 0,
       "channelsMismatched": 0
     }
   ],
   "topMismatchedChannels": [],
-  "namedLosses": [
-    "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
-  ],
+  "namedLosses": [],
   "unresolvedTokenRefs": {
     "count": 0,
     "refs": []
@@ -79,7 +101,7 @@
   },
   "rows": [
     {
-      "key": "__default",
+      "key": "default__default",
       "channelsCompared": 42,
       "channelsEqual": 42,
       "pctExact": 0,
@@ -87,7 +109,7 @@
       "mismatches": []
     },
     {
-      "key": "__hover",
+      "key": "default__hover",
       "channelsCompared": 42,
       "channelsEqual": 42,
       "pctExact": 0,
@@ -95,7 +117,7 @@
       "mismatches": []
     },
     {
-      "key": "__focus-visible",
+      "key": "default__focus-visible",
       "channelsCompared": 42,
       "channelsEqual": 42,
       "pctExact": 0,
@@ -103,7 +125,39 @@
       "mismatches": []
     },
     {
-      "key": "__active",
+      "key": "default__active",
+      "channelsCompared": 42,
+      "channelsEqual": 42,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "lg__default",
+      "channelsCompared": 42,
+      "channelsEqual": 42,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "lg__hover",
+      "channelsCompared": 42,
+      "channelsEqual": 42,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "lg__focus-visible",
+      "channelsCompared": 42,
+      "channelsEqual": 42,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "lg__active",
       "channelsCompared": 42,
       "channelsEqual": 42,
       "pctExact": 0,
