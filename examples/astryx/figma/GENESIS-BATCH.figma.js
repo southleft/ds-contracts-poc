@@ -12234,8 +12234,7 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
-                "counter": "MIN",
-                "stretchChildren": true
+                "counter": "BASELINE"
               },
               "children": [
                 {
@@ -12321,8 +12320,7 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
-                "counter": "MIN",
-                "stretchChildren": true
+                "counter": "BASELINE"
               },
               "children": [
                 {
@@ -12408,8 +12406,7 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
-                "counter": "MIN",
-                "stretchChildren": true
+                "counter": "BASELINE"
               },
               "children": [
                 {
@@ -12495,8 +12492,7 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
-                "counter": "MIN",
-                "stretchChildren": true
+                "counter": "BASELINE"
               },
               "children": [
                 {
@@ -12582,8 +12578,7 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
-                "counter": "MIN",
-                "stretchChildren": true
+                "counter": "BASELINE"
               },
               "children": [
                 {
