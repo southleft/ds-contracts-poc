@@ -1,0 +1,61 @@
+{
+  "id": "antd.progress",
+  "library": "antd",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "antd",
+    "version": "5.29.3",
+    "recipe": "examples/antd sandbox (.antd-sandbox; examples/antd/README) mounted per extract/computed/configs/antd.json"
+  },
+  "configPath": "extract/computed/configs/antd.json",
+  "component": "Progress",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "status-unset",
+      "status": "rendered",
+      "png": "ref-status-unset.png",
+      "props": {
+        "percent": 40,
+        "type": "line",
+        "status": "unset"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "status-exception",
+      "status": "rendered",
+      "png": "ref-status-exception.png",
+      "props": {
+        "percent": 40,
+        "type": "line",
+        "status": "exception"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "status-active",
+      "status": "rendered",
+      "png": "ref-status-active.png",
+      "props": {
+        "percent": 40,
+        "type": "line",
+        "status": "active"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "status-success",
+      "status": "rendered",
+      "png": "ref-status-success.png",
+      "props": {
+        "percent": 40,
+        "type": "line",
+        "status": "success"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 4,
+  "unmappable": 0
+}

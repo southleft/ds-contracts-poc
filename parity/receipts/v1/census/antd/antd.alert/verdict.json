@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "info alert box matches (exam sets reused \u2014 engine re-run reported all-SKIP, specHash unchanged)",
  "reviewedAt": "ef10d9b1",

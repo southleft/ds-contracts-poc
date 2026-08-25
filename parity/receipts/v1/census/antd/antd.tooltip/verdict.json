@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "dark bubble with arrow matches",
  "reviewedAt": "ef10d9b1",

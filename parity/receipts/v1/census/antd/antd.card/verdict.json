@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "head divider + body matches; canvas carries the full card border",
  "reviewedAt": "ef10d9b1",

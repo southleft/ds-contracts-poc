@@ -1,5 +1,6 @@
 {
- "recognisable": true,
+ "recognisable": "ungraded",
+ "priorSelfGrade": true,
  "walls": [],
  "notes": "default bordered button matches across sampled cells",
  "reviewedAt": "ef10d9b1",
