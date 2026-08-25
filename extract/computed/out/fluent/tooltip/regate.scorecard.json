@@ -190,7 +190,7 @@
     ],
     "namedLosses": [
       "promotion: pseudo-decor-outside-grammar: part-0::before paints at position:static (8.46875x8.46875, opacity 1) — the bounded decor grammar reads position:absolute boxes only; an in-flow decor box is NOT promoted and NOT on the canvas",
-      "overflow: root.translate-x — presence-prop-driven styling (withArrow) — boolean tokensByProp has no spelling (round 4 residue)",
+      "overflow: root.translate-x — presence-prop-driven styling (withArrow) — boolean tokensByProp has no spelling (round 4 residue); the presence-OFF plane is carried as the base binding, the ON plane (withArrow present) is not",
       "code-only: root.filter — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.transform — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",

@@ -121,12 +121,12 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 75,
-      "mintedLeavesUnfolded": 193,
-      "baseBindings": 51,
-      "stateBindings": 1,
+      "mintedLeaves": 77,
+      "mintedLeavesUnfolded": 195,
+      "baseBindings": 52,
+      "stateBindings": 2,
       "codeOnlyChannels": 4,
-      "overflowBindings": 1,
+      "overflowBindings": 2,
       "folds": 119
     },
     "worstRows": [
@@ -203,6 +203,7 @@
     ],
     "namedLosses": [
       "overflow: inline-notification__close-button.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: inline-notification__close-button.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "code-only: icon.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: inline-notification__text-wrapper.flex-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-2.word-break — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",

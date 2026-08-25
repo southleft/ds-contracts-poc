@@ -3115,10 +3115,14 @@ defaultless axis, the existing `carried-channel-reminted` door still re-mints
 the set planes; variation along a defaulted axis stays with the literal, the
 same as every other reviewed carriage — named, not hidden.
 
-**Numbers.** polaris Tag re-fuses: offline 81.551 % (6140/7529 cells, 0
+**Numbers.** polaris Tag re-fuses: offline 81.618 % (6145/7529 cells, 0
 unresolved refs) against the committed harness 81.016 % (5996/7401); 128
-cells added and 144 more equal, so 16 previously-compared cells changed
-verdict to EQUAL — the hugging link. The baseline row drops `refused` and
+cells added and 149 more equal, so 21 previously-compared cells changed
+verdict to EQUAL — the hugging link, plus five `large.on` remove-button
+`background-color` cells the integrated engine resolves to the library's own
+fill, `rgba(227, 227, 227, 1)` (this section's 2026-08-23 re-record measured
+81.551 %, 6140 equal; the INTEGRATED ENGINE ROUND re-record of 2026-08-24 on
+v1-integration is the current pin). The baseline row drops `refused` and
 names the gap; the tracked `out/tag/regate.scorecard.json` is the re-record.
 The committed capture artifacts and the promoted Tag contract are
 UNTOUCHED: the hugging link reaches the canvas at Tag's next recapture (or

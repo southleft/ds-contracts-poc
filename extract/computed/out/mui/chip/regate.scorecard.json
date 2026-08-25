@@ -110,7 +110,7 @@
       "mintedLeavesUnfolded": 345,
       "baseBindings": 23,
       "stateBindings": 0,
-      "codeOnlyChannels": 6,
+      "codeOnlyChannels": 2,
       "overflowBindings": 0,
       "folds": 16
     },
@@ -215,10 +215,6 @@
       ]
     ],
     "namedLosses": [
-      "code-only: root.border-bottom-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: root.border-left-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: root.border-right-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "code-only: root.border-top-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: root.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
