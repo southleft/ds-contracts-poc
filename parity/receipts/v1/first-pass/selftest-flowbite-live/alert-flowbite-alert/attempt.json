@@ -1,0 +1,219 @@
+{
+  "exam": "selftest-flowbite-live",
+  "direction": "canvas-to-code",
+  "set": "Alert (flowbite.alert)",
+  "id": "flowbite.alert",
+  "source": {
+    "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+    "nodeId": "120:1979",
+    "type": "COMPONENT_SET"
+  },
+  "stages": [
+    {
+      "stage": "dump",
+      "status": "ok",
+      "ms": 1127,
+      "command": "npm run extract:figma:rest -- \"<url>?node-id=120:1979\" --out <dump>",
+      "message": "alert-flowbite-alert.json",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/dumps/alert-flowbite-alert.json",
+          "sha256": "ea010186a8dfb3af7d07fa9de272c053250134cb304400a4ab644bdc561a7f3d",
+          "bytes": 52069,
+          "committed": false
+        }
+      ]
+    },
+    {
+      "stage": "propose",
+      "status": "ok",
+      "ms": 277,
+      "command": "npm run extract:figma -- <dump> --out <proposed> --tokens <kit dtcg>",
+      "message": "1 proposal file(s)",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/proposed/alert-flowbite-alert/alert-flowbite-alert.contract.proposed.json",
+          "sha256": "d44d96da89ac1661fea60e18c089a66466eef77c2f70ddf8516ebff3017bd178",
+          "bytes": 7565,
+          "committed": false
+        }
+      ]
+    },
+    {
+      "stage": "validate",
+      "status": "ok",
+      "ms": 7,
+      "command": "core/emit-react.ts validateContract (the referee — no CLI verb; docs/07)",
+      "message": "no violations",
+      "artifacts": []
+    },
+    {
+      "stage": "generate-react",
+      "status": "ok",
+      "ms": 889,
+      "command": "npx ds-contracts generate <proposed>/*.contract.proposed.json --out <react> --tokens <kit>,<minted>",
+      "message": "5 file(s)",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/react/alert-flowbite-alert/index.ts",
+          "sha256": "9d9ac46c25ba6d77956a39dfd17375cb96270236e682474b8a5fa9d96a104ac0",
+          "bytes": 48,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/react/alert-flowbite-alert/tokens.css",
+          "sha256": "edf374648afb921d2ef0a549eb757bcdbf79b6ba9bdc9139a1b056f1895aeb52",
+          "bytes": 22539,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/react/alert-flowbite-alert/Alert/Alert.module.css",
+          "sha256": "69436b5647793ecdc63786d33bebf8bea6b0161b8dafaa105cdc283b3a2af882",
+          "bytes": 4175,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/react/alert-flowbite-alert/Alert/Alert.tsx",
+          "sha256": "1178dcb2d234c44de498be20aa377e756fda2f230552d07d1dfca60f30dc3219",
+          "bytes": 2887,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/react/alert-flowbite-alert/Alert/index.ts",
+          "sha256": "9858da9966f6abecc7ff91176e2078e00a7b6d44346f8b21f9cb0ec6ef5d38d5",
+          "bytes": 76,
+          "committed": false
+        }
+      ]
+    },
+    {
+      "stage": "generate-wc",
+      "status": "ok",
+      "ms": 931,
+      "command": "npx ds-contracts generate <proposed>/*.contract.proposed.json --out <wc> --target web-components --emitter @ds-contracts/emitter-web-components",
+      "message": "5 file(s)",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/wc/alert-flowbite-alert/flowbite-alert.css.ts",
+          "sha256": "0d7c7ac06bea00b4115afab9b75d5f3e00960a2fac2a436185d039d8f019151b",
+          "bytes": 5263,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/wc/alert-flowbite-alert/flowbite-alert.custom-elements.json",
+          "sha256": "315fd9b68421e68a6979bfb3390a25e11a6d97a06f2523f4dab62601656859e3",
+          "bytes": 3130,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/wc/alert-flowbite-alert/flowbite-alert.demo.html",
+          "sha256": "0ebc949a5514241484669857b7e6107ba0b3920f48a0c19648ee6f4adc01580a",
+          "bytes": 1874,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/wc/alert-flowbite-alert/flowbite-alert.ts",
+          "sha256": "188412c788736343132cda734e1ecea6d3090bffab7513928d1a41ce5110d7ca",
+          "bytes": 3829,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/wc/alert-flowbite-alert/tokens.css",
+          "sha256": "c0cb025a18ee3db4d95695de3bea9d7e86373b1788bee4122ecf1acc5304b990",
+          "bytes": 22548,
+          "committed": false
+        }
+      ]
+    },
+    {
+      "stage": "render",
+      "status": "ok",
+      "ms": 25,
+      "command": "esbuild bundle of the generated React → playwright-core screenshot at deviceScaleFactor 2",
+      "message": "4 cell(s)",
+      "artifacts": [
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/alert-flowbite-alert/code-color-info.png",
+          "sha256": "f8eb6ca5c6d13a0bb5a90d444db5e1b8a5a02e0fee909f0ce4e2702ea28bf815",
+          "bytes": 4935,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/alert-flowbite-alert/code-color-failure.png",
+          "sha256": "c4628e90b4f6738ba03b995617002e60c458b50310084db60ce3276f2c15dc0e",
+          "bytes": 4874,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/alert-flowbite-alert/code-color-success.png",
+          "sha256": "4b58fe26b8cdc6d0b3e7c9bb21b206f7c09f710c1d76492e90854ccf777d71ff",
+          "bytes": 5027,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/alert-flowbite-alert/code-color-warning.png",
+          "sha256": "a4aad4d91a8b728a178db1d24a7e64a3df6d4729895350d51f36ca179206686f",
+          "bytes": 4975,
+          "committed": true
+        }
+      ]
+    },
+    {
+      "stage": "ref",
+      "status": "ok",
+      "ms": 979,
+      "command": "GET /v1/images/59mLQlOMiD5w5za6SUcoO5?ids=<variant>&scale=2 (READ-ONLY)",
+      "message": "4 reference PNG(s) at scale 2",
+      "artifacts": [
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/alert-flowbite-alert/ref-color-info.png",
+          "sha256": "7821349808e95ab1b846c301f90582a3f6d5430c4857f6d15a64838baf3598f7",
+          "bytes": 4108,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/alert-flowbite-alert/ref-color-failure.png",
+          "sha256": "54a4ec62f5a0d063fd39d7e60750a3d1dd16977f6f52c4567d47a64859c859c7",
+          "bytes": 3871,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/alert-flowbite-alert/ref-color-success.png",
+          "sha256": "f13585af594a613376ac3f5b6b89e5bea9341fed07be3b9a80c734443283ccf0",
+          "bytes": 4214,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-flowbite-live/alert-flowbite-alert/ref-color-warning.png",
+          "sha256": "2d7ffcf436649a2bcd21653e81c06b9c010ec199a7c9a1c88fb67fe1ee38cc96",
+          "bytes": 4255,
+          "committed": true
+        }
+      ]
+    }
+  ],
+  "chainComplete": true,
+  "firstStop": null,
+  "images": {
+    "ref": [
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/alert-flowbite-alert/ref-color-info.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/alert-flowbite-alert/ref-color-failure.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/alert-flowbite-alert/ref-color-success.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/alert-flowbite-alert/ref-color-warning.png"
+    ],
+    "code": [
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/alert-flowbite-alert/code-color-info.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/alert-flowbite-alert/code-color-failure.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/alert-flowbite-alert/code-color-success.png",
+      "parity/receipts/v1/first-pass/selftest-flowbite-live/alert-flowbite-alert/code-color-warning.png"
+    ],
+    "canvas": [],
+    "absent": [
+      {
+        "kind": "canvas",
+        "reason": "canvas→code writes nothing to any canvas — the canvas IS the source here, and Figma's own render of it is ref-*.png"
+      }
+    ]
+  },
+  "totalMs": 4235
+}

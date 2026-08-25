@@ -531,6 +531,7 @@ That is a claim about the future, so it's held to the same standard as everythin
 27. [Release Process](docs/27-release-process.md) · coordinated RC build, pack, verify, publish, deploy, and rollback mechanics
 28. [Beta Tester Runbook](docs/28-beta-runbook.md) · the three journeys packaged for someone who has never seen this repo — prerequisites, exact commands, what success looks like, the named limitations each track WILL hit, honest time budgets, and the structured issue forms for reporting
 29. [How It Flows](docs/29-how-it-flows.md) · what crosses each of the five hops between Figma and code, carried / named / refused, the six adjudication instruments, and three facts traced both ways
+31. [First-pass](docs/31-first-pass.md) · does the documented chain work on the FIRST try, untouched — the no-retry exam, the graded-pair packet, and why first-pass quality is not the same claim as end-state quality
 
 ## Honesty as a design principle
 
