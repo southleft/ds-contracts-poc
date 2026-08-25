@@ -1,0 +1,36 @@
+{
+  "_header": "FIRST-PASS RATCHET — the BEST first-pass rate each exam has ever recorded. `npm run first-pass:check` recomputes the current rate from the committed packets and REFUSES when it is lower, unless a `reasons` row names the decrease with matching from/to. Raised automatically by `--write-receipt`; lowered ONLY through a reasons row. A metric that can quietly fall is not a metric.",
+  "exams": {
+    "selftest-tailwind": {
+      "chain": {
+        "numerator": 0,
+        "denominator": 8
+      },
+      "recognisable": {
+        "numerator": 0,
+        "denominator": 0
+      }
+    },
+    "selftest-altitude": {
+      "chain": {
+        "numerator": 0,
+        "denominator": 8
+      },
+      "recognisable": {
+        "numerator": 0,
+        "denominator": 0
+      }
+    },
+    "selftest-flowbite-live": {
+      "chain": {
+        "numerator": 4,
+        "denominator": 8
+      },
+      "recognisable": {
+        "numerator": 0,
+        "denominator": 0
+      }
+    }
+  },
+  "reasons": []
+}

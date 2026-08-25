@@ -1,0 +1,101 @@
+{
+  "exam": "selftest-flowbite-live",
+  "direction": "canvas-to-code",
+  "set": "ToggleSwitch",
+  "id": "flowbite.toggleswitch",
+  "source": {
+    "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+    "nodeId": "120:2047",
+    "type": "COMPONENT_SET"
+  },
+  "stages": [
+    {
+      "stage": "dump",
+      "status": "ok",
+      "ms": 841,
+      "command": "npm run extract:figma:rest -- \"<url>?node-id=120:2047\" --out <dump>",
+      "message": "toggleswitch.json",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/dumps/toggleswitch.json",
+          "sha256": "189c3815af0ca3c75a7d2b7fbb6769c0f7c50020e8972b6f5718533d3d831158",
+          "bytes": 58555,
+          "committed": false
+        }
+      ]
+    },
+    {
+      "stage": "propose",
+      "status": "ok",
+      "ms": 348,
+      "command": "npm run extract:figma -- <dump> --out <proposed> --tokens <kit dtcg>",
+      "message": "1 proposal file(s)",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-flowbite-live-7tfng5/proposed/toggleswitch/toggle-switch.contract.proposed.json",
+          "sha256": "0d173cfa6ae3d574f233d0f66ebaa1c62070f0a5070375f0f1d4fa6259a1b622",
+          "bytes": 5513,
+          "committed": false
+        }
+      ]
+    },
+    {
+      "stage": "validate",
+      "status": "ok",
+      "ms": 2,
+      "command": "core/emit-react.ts validateContract (the referee — no CLI verb; docs/07)",
+      "message": "no violations",
+      "artifacts": []
+    },
+    {
+      "stage": "generate-react",
+      "status": "REFUSED",
+      "ms": 712,
+      "command": "npx ds-contracts generate <proposed>/*.contract.proposed.json --out <react> --tokens <kit>,<minted>",
+      "message": "✘ Refused — 3 token(s) defined twice with different values inside ONE slot; the merge would silently drop one layer:\n  - imported.toggle-switch.root.width.md: tailwind-minted.dtcg.json says \"100.438px\", minted.dtcg.json says \"100.44px\"\n  - imported.toggle-switch.root.width.sm: tailwind-minted.dtcg.json says \"92.4375px\", minted.dtcg.json says \"92.44px\"\n  - imported.toggle-switch.root.width.lg: tailwind-minted.dtcg.json says \"108.438px\", minted.dtcg.json says \"108.44px\"\nIf these are separate layers (light/dark, brand modes), name the slot: --tokens light=<file>,dark=<file>. Slots: primitives, semantic, light, dark, brand, brand.<name>",
+      "artifacts": []
+    },
+    {
+      "stage": "generate-wc",
+      "status": "SKIPPED",
+      "ms": 0,
+      "command": null,
+      "message": "an earlier stage stopped this chain (generate-react)",
+      "artifacts": []
+    },
+    {
+      "stage": "render",
+      "status": "SKIPPED",
+      "ms": 0,
+      "command": null,
+      "message": "an earlier stage stopped this chain (generate-react)",
+      "artifacts": []
+    },
+    {
+      "stage": "ref",
+      "status": "SKIPPED",
+      "ms": 0,
+      "command": null,
+      "message": "an earlier stage stopped this chain (generate-react)",
+      "artifacts": []
+    }
+  ],
+  "chainComplete": false,
+  "firstStop": {
+    "stage": "generate-react",
+    "status": "REFUSED",
+    "message": "✘ Refused — 3 token(s) defined twice with different values inside ONE slot; the merge would silently drop one layer:\n  - imported.toggle-switch.root.width.md: tailwind-minted.dtcg.json says \"100.438px\", minted.dtcg.json says \"100.44px\"\n  - imported.toggle-switch.root.width.sm: tailwind-minted.dtcg.json says \"92.4375px\", minted.dtcg.json says \"92.44px\"\n  - imported.toggle-switch.root.width.lg: tailwind-minted.dtcg.json says \"108.438px\", minted.dtcg.json says \"108.44px\"\nIf these are separate layers (light/dark, brand modes), name the slot: --tokens light=<file>,dark=<file>. Slots: primitives, semantic, light, dark, brand, brand.<name>"
+  },
+  "images": {
+    "ref": [],
+    "code": [],
+    "canvas": [],
+    "absent": [
+      {
+        "kind": "canvas",
+        "reason": "canvas→code writes nothing to any canvas — the canvas IS the source here, and Figma's own render of it is ref-*.png"
+      }
+    ]
+  },
+  "totalMs": 1903
+}

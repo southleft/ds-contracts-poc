@@ -1,0 +1,169 @@
+{
+  "exam": "selftest-tailwind",
+  "direction": "code-to-canvas",
+  "set": "Label",
+  "id": null,
+  "source": {
+    "library": "tailwind",
+    "config": "extract/computed/configs/tailwind.json"
+  },
+  "stages": [
+    {
+      "stage": "capture",
+      "status": "ok",
+      "ms": 19309,
+      "command": "npx tsx extract/computed/run.ts --harness examples/tailwind/.tw-sandbox --config extract/computed/configs/tailwind.json --component Label --out extract/computed/out/tailwind --keep-originals",
+      "message": "3 artifact(s)",
+      "artifacts": [
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-JMGOn8/root/extract/computed/out/tailwind/label/enriched.contract.json",
+          "sha256": "2fc3b0cea090986c008f8e67a0f1c2998c83f5f61448399a73395a10b2b8b5f9",
+          "bytes": 3643,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-JMGOn8/root/extract/computed/out/tailwind/label/scorecard.json",
+          "sha256": "0003fa62dbb622a48c52a9a6c2c806d47c07a931b4d325c2c10c0c635fc3df92",
+          "bytes": 14839,
+          "committed": false
+        },
+        {
+          "path": "../../../../../../../var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/first-pass-selftest-tailwind-JMGOn8/root/extract/computed/out/tailwind/label/captured-truth.json",
+          "sha256": "24006f528d7b9c42e125bbe8a49a166bb08a400c9deceb53b46a00ea3f432722",
+          "bytes": 112343,
+          "committed": false
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/label/ref-info.png",
+          "sha256": "3cc3fb497924b72c438f0a006cf9252897fc12801b682988dfbef374aac11263",
+          "bytes": 1655,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/label/ref-failure.png",
+          "sha256": "2e700826caef2f55d990d5f51041d3e23223e682ddb77964b3b81d1d576a83e0",
+          "bytes": 1643,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/label/ref-success.png",
+          "sha256": "4d7195135f070cf6a1dc97cb6ea4bcc0314cb044e35125795d7e3e049b4b36ff",
+          "bytes": 1724,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/label/ref-warning.png",
+          "sha256": "51a233a0c72cabaee129f8bc739fc1650f5159f3e74cef048926c2db91f2a7f0",
+          "bytes": 1668,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/label/ref-default.png",
+          "sha256": "d158ce8092a32d9a2039633f3e4a421f5485043a9cf0480cd4c60cd54441122d",
+          "bytes": 1719,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/label/code-info.png",
+          "sha256": "db154428c35d346dd3419323a66e03ab63895e4e913a438729cd76448994c237",
+          "bytes": 1640,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/label/code-failure.png",
+          "sha256": "2e700826caef2f55d990d5f51041d3e23223e682ddb77964b3b81d1d576a83e0",
+          "bytes": 1643,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/label/code-success.png",
+          "sha256": "4d7195135f070cf6a1dc97cb6ea4bcc0314cb044e35125795d7e3e049b4b36ff",
+          "bytes": 1724,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/label/code-warning.png",
+          "sha256": "51a233a0c72cabaee129f8bc739fc1650f5159f3e74cef048926c2db91f2a7f0",
+          "bytes": 1668,
+          "committed": true
+        },
+        {
+          "path": "parity/receipts/v1/first-pass/selftest-tailwind/label/code-default.png",
+          "sha256": "d158ce8092a32d9a2039633f3e4a421f5485043a9cf0480cd4c60cd54441122d",
+          "bytes": 1719,
+          "committed": true
+        }
+      ]
+    },
+    {
+      "stage": "promote",
+      "status": "REFUSED",
+      "ms": 1120,
+      "command": "npx tsx packages/cli/src/cli.ts promote --config examples/tailwind/ds-library.json",
+      "message": "✘ authored alert prop dismissable: prop \"dismissable\" is not exactly one entry of props[] — NAMED refusal\n· flowbite.button: bindings.figma.statePreviews ON (disabled, active, focus-visible, hover)\n  · flowbite.badge: bindings.figma.statePreviews ON (active, hover)",
+      "artifacts": []
+    },
+    {
+      "stage": "validate",
+      "status": "SKIPPED",
+      "ms": 0,
+      "command": null,
+      "message": "an earlier stage stopped this chain (promote)",
+      "artifacts": []
+    },
+    {
+      "stage": "generate",
+      "status": "SKIPPED",
+      "ms": 0,
+      "command": null,
+      "message": "an earlier stage stopped this chain (promote)",
+      "artifacts": []
+    },
+    {
+      "stage": "bundle",
+      "status": "SKIPPED",
+      "ms": 0,
+      "command": null,
+      "message": "an earlier stage stopped this chain (promote)",
+      "artifacts": []
+    },
+    {
+      "stage": "mint",
+      "status": "SKIPPED",
+      "ms": 0,
+      "command": null,
+      "message": "an earlier stage stopped this chain (promote)",
+      "artifacts": []
+    }
+  ],
+  "chainComplete": false,
+  "firstStop": {
+    "stage": "promote",
+    "status": "REFUSED",
+    "message": "✘ authored alert prop dismissable: prop \"dismissable\" is not exactly one entry of props[] — NAMED refusal\n· flowbite.button: bindings.figma.statePreviews ON (disabled, active, focus-visible, hover)\n  · flowbite.badge: bindings.figma.statePreviews ON (active, hover)"
+  },
+  "images": {
+    "ref": [
+      "parity/receipts/v1/first-pass/selftest-tailwind/label/ref-info.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/label/ref-failure.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/label/ref-success.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/label/ref-warning.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/label/ref-default.png"
+    ],
+    "code": [
+      "parity/receipts/v1/first-pass/selftest-tailwind/label/code-info.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/label/code-failure.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/label/code-success.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/label/code-warning.png",
+      "parity/receipts/v1/first-pass/selftest-tailwind/label/code-default.png"
+    ],
+    "canvas": [],
+    "absent": [
+      {
+        "kind": "canvas",
+        "reason": "mint SKIPPED — no figma-console COMMAND endpoint answered on 127.0.0.1:9223-9232 (probed /health: 9225:404, 9226:404, 9228:200, 9230:404). The local bridge serves MCP over stdio to its own client and WebSocket to plugin clients; a Node process cannot issue a canvas write through either. Bundle produced, mint pending — the emitted script carries the WRONG-FILE guard on byMp6lt0Ij9b2QbkDGFwBh and is the runnable artifact."
+      }
+    ]
+  },
+  "totalMs": 20429
+}

@@ -211,13 +211,16 @@ function compoundPieces(compound: string): string[] {
 export function matchSelector(selector: string, q: MatchQuery): MatchResult {
   const no = (refused: string): MatchResult => ({ matches: false, missingClasses: [], refused, specificity: 0 });
   const sel = selector.trim();
+  // @door libcss.combinator-refusal
   if (/[>+~]/.test(sel)) return no(`combinator in "${sel}" — only descendant part selectors are promoted`);
   const compounds = sel.split(/\s+/).filter(Boolean);
+  // @door libcss.depth-two-max
   if (compounds.length > 2) return no(`selector "${sel}" nests deeper than root + one part`);
 
   // CSS modules scope classes per file, so part rules are usually TOP-LEVEL
   // (`.Input { … }`) with no root compound. A part query therefore accepts
   // either `<root> <part>` or a bare `<part>` compound.
+  // @door libcss.bare-part-selector-admission
   const bareParts =
     q.partSelector !== undefined &&
     compounds.length === 1 &&
@@ -233,16 +236,19 @@ export function matchSelector(selector: string, q: MatchQuery): MatchResult {
     if (partCompound === undefined) return { matches: false, missingClasses: [], specificity: 0 };
     // The part compound must START with the part's simple selector; trailing
     // pieces may be state pseudos (`.Backdrop:hover`) — anything else refuses.
+    // @door libcss.part-piece-fence
     const pieces = compoundPieces(partCompound!);
     if (pieces[0] !== q.partSelector) return { matches: false, missingClasses: [], specificity: 0 };
     specificity += q.partSelector.startsWith('.') ? 10 : 1;
     for (const piece of pieces.slice(1)) {
       if (STATE_PSEUDOS[piece]) {
         specificity += 10;
+        // @door libcss.two-states-refusal
         if (stateSeen && stateSeen !== STATE_PSEUDOS[piece]) return no(`two states in "${sel}"`);
         stateSeen = STATE_PSEUDOS[piece];
         continue;
       }
+      // @door libcss.not-disabled-fence
       if (piece === ':not(:disabled)' || piece === ':not([disabled])') {
         specificity += 10;
         if (q.state === 'disabled') return { matches: false, missingClasses: [], specificity: 0 };
@@ -261,6 +267,7 @@ export function matchSelector(selector: string, q: MatchQuery): MatchResult {
       if (!q.rootClasses.has(cls)) missing.push(cls);
       continue;
     }
+    // @door libcss.is-where-class-allowlist
     if (piece.startsWith(':is(') || piece.startsWith(':where(')) {
       const inner = piece.slice(piece.indexOf('(') + 1, -1);
       const options = splitTopLevel(inner, ',').map((s) => s.trim());
@@ -279,6 +286,7 @@ export function matchSelector(selector: string, q: MatchQuery): MatchResult {
         if (q.state === 'disabled') return { matches: false, missingClasses: [], specificity: 0 };
         continue;
       }
+      // @door libcss.not-class-context
       if (/^\.[A-Za-z0-9_-]+$/.test(inner)) {
         if (q.rootClasses.has(inner.slice(1))) return { matches: false, missingClasses: [], specificity: 0 };
         continue;
@@ -296,15 +304,20 @@ export function matchSelector(selector: string, q: MatchQuery): MatchResult {
       stateSeen = 'disabled';
       continue;
     }
+    // @door libcss.pseudo-element-refusal
     if (piece.startsWith('::')) return no(`pseudo-element "${piece}" in "${sel}" — not a contract channel`);
+    // @door libcss.pseudo-attribute-refusal
     if (piece.startsWith(':') || piece.startsWith('[')) {
       return no(`pseudo/attribute "${piece}" in "${sel}" — not promotable`);
     }
     // bare element selector at root position (rare) — refuse
+    // @door libcss.root-element-selector-refusal
     return no(`element selector "${piece}" at root position in "${sel}"`);
   }
 
+  // @door libcss.state-must-equal-query
   if ((stateSeen ?? undefined) !== q.state) return { matches: false, missingClasses: [], specificity: 0 };
+  // @door libcss.missing-class-nonmatch
   if (missing.length > 0) return { matches: false, missingClasses: missing, specificity: 0 };
   return { matches: true, missingClasses: [], specificity };
 }
@@ -326,6 +339,7 @@ export interface PropDef {
 
 export type Resolution =
   | { kind: 'ref'; ref: string; via: string[] }
+  // @door libcss.chain-resolved-literal-admission
   /** COVERAGE ROUND: a var() chain that lands on a same-package LITERAL
    *  definition (Polaris `--pc-*` pixel geometry, `transparent` bases) —
    *  the resolved value is deterministic and carried WITH provenance:
@@ -338,6 +352,7 @@ export type Resolution =
   | { kind: 'refused'; reason: string };
 
 /** Depth cap for var() chains — beyond this, refuse by name. */
+// @door libcss.chain-depth-cap
 const CHAIN_DEPTH_CAP = 12;
 
 /** Evaluate a bounded calc() expression AFTER every inner var() resolved to
@@ -345,6 +360,7 @@ const CHAIN_DEPTH_CAP = 12;
  *  factors (ProgressBar: `calc(var(--pc-progress-bar-height-base) * 0.5)`
  *  → 8px). Anything else returns undefined (the caller refuses by name).
  *  Deterministic arithmetic — never a guess. */
+// @door libcss.calc-bounded-grammar
 export function evalCalcExpr(expr: string): string | undefined {
   type Val = { n: number; px: boolean };
   const tokens = expr.match(/-?\d*\.?\d+(px)?|[()+\-*/]/g);
@@ -368,6 +384,7 @@ export function evalCalcExpr(expr: string): string | undefined {
       const op = next();
       const right = parsePrimary();
       if (!right) return undefined;
+      // @door libcss.calc-unit-fences
       if (left.px && right.px) return undefined; // px·px has no CSS meaning
       left = {
         n: op === '*' ? left.n * right.n : left.n / right.n,
@@ -389,6 +406,7 @@ export function evalCalcExpr(expr: string): string | undefined {
   };
   const v = parseAdd();
   if (!v || i !== tokens.length) return undefined;
+  // @door libcss.calc-rounding
   const n = Math.round(v.n * 10000) / 10000;
   return `${n}${v.px ? 'px' : ''}`;
 }
@@ -440,19 +458,23 @@ export function resolveToRef(
       return { kind: 'refused', reason: `calc() expression "${v}" is outside the bounded arithmetic grammar` };
     }
     // Multi-layer value (comma at paren depth 0) — surfaced so the caller
+    // @door libcss.multi-layer-handoff
     // can apply CSS's own shorthand semantics (background: image, color).
     const layers = splitTopLevel(v, ',').map((l) => l.trim());
     if (layers.length > 1) return { kind: 'layers', layers, via };
+    // @door libcss.single-binding-only
     if (v.includes('var(')) return { kind: 'refused', reason: `value "${v}" mixes var() with other content — not a single binding` };
     if (via.length > 0) {
       // The chain landed on a literal DEFINED in this package's CSS —
       // deterministic; carried by the caller with this provenance.
       return { kind: 'literal', value: v, via, defSelector };
     }
+    // @door libcss.raw-literal-refusal
     return { kind: 'refused', reason: `literal value "${v}" — a raw value is reported, never turned into an invented token` };
   }
   const varName = m[1].slice(2);
   const fallback = m[2];
+  // @door libcss.var-cycle-refusal
   if (via.includes(`--${varName}`)) {
     return { kind: 'refused', reason: `var() cycle: ${[...via, `--${varName}`].join(' → ')} — refused by name` };
   }
@@ -463,11 +485,14 @@ export function resolveToRef(
   if (def !== undefined) {
     return resolveToRef(def.value, defs, tokens, [...via, `--${varName}`], def.selector);
   }
+  // @door libcss.token-tree-allowlist
   const path = tokens.pathOfVar(varName);
   if (path) return { kind: 'ref', ref: `{${path}}`, via };
+  // @door libcss.fallback-hop
   if (fallback !== undefined) {
     return resolveToRef(fallback, defs, tokens, [...via, `--${varName} (undefined → fallback)`], defSelector);
   }
+  // @door libcss.no-token-no-def-refusal
   return { kind: 'refused', reason: `var(--${varName}) resolves to NO token and has no reachable definition in this class context` };
 }
 
@@ -493,10 +518,12 @@ export interface QueryOutcome {
 /** All custom-property definitions visible to a class context (base state),
  *  cascade-ordered so later/more specific definitions win. Each definition
  *  records its defining selector (literal-carry provenance). */
+// @door libcss.customprop-cascade-base-state-only
 export function customPropDefs(rules: FlatRule[], rootClasses: Set<string>): Map<string, PropDef> {
   const defs = new Map<string, PropDef>();
   const applicable: { rule: FlatRule; spec: number }[] = [];
   for (const rule of rules) {
+    // @door libcss.at-rule-never-promotes
     if (rule.atRules.length > 0) continue; // @media-scoped defs never promote
     for (const sel of splitTopLevel(rule.selector, ',')) {
       const m = matchSelector(sel, { rootClasses });
@@ -535,6 +562,7 @@ export function varDefinitionContexts(
   return { media: [...media].sort(), selectors: [...selectors].sort() };
 }
 
+// @door libcss.padding-shorthand-split
 /** Mechanical shorthand split: `padding: A` / `padding: A B` where every
  *  term is a single var() becomes padding-block / padding-inline (the CSS
  *  shorthand's own semantics). 3- and 4-term shorthands are NOT split (their
@@ -548,6 +576,7 @@ export function splitPaddingShorthand(value: string): { block: string; inline: s
 
 export function effectiveDecls(rules: FlatRule[], q: MatchQuery, usedOrders?: Set<number>): QueryOutcome {
   const winners = new Map<string, EffectiveDecl>();
+  // @door libcss.refusal-dedupe
   const refusals = new Set<string>();
   const applicable: { rule: FlatRule; spec: number }[] = [];
   for (const rule of rules) {
@@ -565,6 +594,7 @@ export function effectiveDecls(rules: FlatRule[], q: MatchQuery, usedOrders?: Se
   }
   applicable.sort((a, b) => a.spec - b.spec || a.rule.order - b.rule.order);
   for (const { rule, spec } of applicable) {
+    // @door libcss.customprop-is-not-a-channel
     for (const d of rule.decls) {
       if (d.prop.startsWith('--')) continue;
       winners.set(d.prop, { prop: d.prop, value: d.value, selector: rule.selector, specificity: spec, order: rule.order });
